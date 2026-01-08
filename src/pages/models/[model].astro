@@ -159,13 +159,14 @@ function formatPercent(value: number): string {
               </section>
             </div>
 
+            {simpleData?.grakel?.values?.length > 0 && (
+              <section class="section" style="margin-bottom: 1rem;">
+                <h2>Grakel Similarity</h2>
+                <HeatmapMatrix labels={simpleData.grakel.labels} values={simpleData.grakel.values} />
+              </section>
+            )}
+
             <div class="content-grid">
-              {simpleData?.grakel?.values?.length > 0 && (
-                <section class="section">
-                  <h2>Grakel Similarity</h2>
-                  <HeatmapMatrix labels={simpleData.grakel.labels} values={simpleData.grakel.values} />
-                </section>
-              )}
               {simpleData?.shannon?.length > 0 && (
                 <section class="section">
                   <h2>Shannon Entropy</h2>
@@ -295,13 +296,14 @@ function formatPercent(value: number): string {
               </section>
             </div>
 
+            {cotData?.grakel?.values?.length > 0 && (
+              <section class="section" style="margin-bottom: 1rem;">
+                <h2>Grakel Similarity</h2>
+                <HeatmapMatrix labels={cotData.grakel.labels} values={cotData.grakel.values} />
+              </section>
+            )}
+
             <div class="content-grid">
-              {cotData?.grakel?.values?.length > 0 && (
-                <section class="section">
-                  <h2>Grakel Similarity</h2>
-                  <HeatmapMatrix labels={cotData.grakel.labels} values={cotData.grakel.values} />
-                </section>
-              )}
               {cotData?.shannon?.length > 0 && (
                 <section class="section">
                   <h2>Shannon Entropy</h2>
@@ -408,6 +410,7 @@ function formatPercent(value: number): string {
 
   .section {
     border: 1px solid #e0e0e0;
+    width: 100%;
   }
 
   h2 {
