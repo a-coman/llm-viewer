@@ -16,14 +16,13 @@ const {
 
 {
   available ? (
-    <div class="pdf-container">
+    <div class="pdf-component">
       {title && <div class="pdf-header">{title}</div>}
-      <iframe
-        src={src}
-        title={title}
-        style={`height: ${height};`}
-        class="pdf-frame"
-      />
+      <div class="pdf-container" style={`height: ${height};`} data-src={src}>
+        <div class="pdf-world">
+          <canvas class="pdf-canvas" />
+        </div>
+      </div>
     </div>
   ) : (
     <div class="unavailable">
@@ -34,8 +33,153 @@ const {
   )
 }
 
+<script>
+  import * as pdfjsLib from "pdfjs-dist";
+
+  // Set worker from CDN for easier static hosting compatibility
+  // Note: pdfjs-dist v4+ uses .mjs extension for the worker
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
+  class PdfViewer {
+    constructor(container) {
+      this.container = container;
+      this.world = container.querySelector(".pdf-world");
+      this.canvas = container.querySelector(".pdf-canvas");
+      this.ctx = this.canvas.getContext("2d");
+      this.url = container.dataset.src || "";
+
+      this.scale = 1;
+      this.contentScale = 2.0; // Render at higher resolution
+      this.posX = 0;
+      this.posY = 0;
+      this.isDragging = false;
+      this.startX = 0;
+      this.startY = 0;
+
+      this.init();
+    }
+
+    async init() {
+      try {
+        const loadingTask = pdfjsLib.getDocument(this.url);
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+
+        const viewport = page.getViewport({ scale: this.contentScale });
+
+        this.canvas.height = viewport.height;
+        this.canvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: this.ctx,
+          viewport: viewport,
+        };
+        await page.render(renderContext).promise;
+
+        // Center initially
+        const containerRect = this.container.getBoundingClientRect();
+
+        // Initial fit logic
+        const effectiveWidth = viewport.width;
+        const effectiveHeight = viewport.height;
+
+        const scaleX = containerRect.width / effectiveWidth;
+        const scaleY = containerRect.height / effectiveHeight;
+        const fitScale = Math.min(scaleX, scaleY) * 0.95; // 95% fit
+
+        this.scale = fitScale;
+
+        const scaledWidth = effectiveWidth * this.scale;
+        const scaledHeight = effectiveHeight * this.scale;
+
+        this.posX = (containerRect.width - scaledWidth) / 2;
+        this.posY = (containerRect.height - scaledHeight) / 2;
+
+        this.updateTransform();
+        this.addEventListeners();
+      } catch (error) {
+        console.error("Error loading PDF:", error);
+        this.container.innerHTML = `<div class="error">Failed to load PDF: ${error.message}</div>`;
+      }
+    }
+
+    addEventListeners() {
+      const getEventPos = (e) => {
+        const rect = this.container.getBoundingClientRect();
+        return {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        };
+      };
+
+      this.container.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return; // Only left click
+        this.isDragging = true;
+        const { x, y } = getEventPos(e);
+        this.startX = x - this.posX;
+        this.startY = y - this.posY;
+        this.container.style.cursor = "grabbing";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!this.isDragging) return;
+        e.preventDefault();
+        const rect = this.container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        this.posX = x - this.startX;
+        this.posY = y - this.startY;
+        this.updateTransform();
+      });
+
+      window.addEventListener("mouseup", () => {
+        this.isDragging = false;
+        this.container.style.cursor = "grab";
+      });
+
+      this.container.addEventListener(
+        "wheel",
+        (e) => {
+          e.preventDefault();
+          const { x: mouseX, y: mouseY } = getEventPos(e);
+
+          const zoomIntensity = 0.1;
+          const delta =
+            e.deltaY < 0 ? 1 + zoomIntensity : 1 / (1 + zoomIntensity);
+
+          const oldScale = this.scale;
+          let newScale = oldScale * delta;
+          newScale = Math.min(Math.max(0.1, newScale), 5); // Limits
+
+          const worldX = (mouseX - this.posX) / oldScale;
+          const worldY = (mouseY - this.posY) / oldScale;
+
+          this.posX = mouseX - worldX * newScale;
+          this.posY = mouseY - worldY * newScale;
+          this.scale = newScale;
+
+          this.updateTransform();
+        },
+        { passive: false }
+      );
+    }
+
+    updateTransform() {
+      this.world.style.transform = `translate(${this.posX}px, ${this.posY}px) scale(${this.scale})`;
+    }
+  }
+
+  // Initialize
+  document.querySelectorAll(".pdf-container").forEach((el) => {
+    // Check if already initialized to prevent duplicates if multiple runs
+    if (el._pdfViewer) return;
+    el._pdfViewer = new PdfViewer(el);
+  });
+</script>
+
 <style>
-  .pdf-container {
+  .pdf-component {
     border: 1px solid #e2e8f0;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -51,11 +195,43 @@ const {
     border-bottom: 1px solid #e2e8f0;
   }
 
-  .pdf-frame {
+  .pdf-container {
+    position: relative;
+    overflow: hidden;
+    background: #f1f5f9;
+    cursor: grab;
     width: 100%;
-    border: none;
+    /* height is set inline */
   }
 
+  .pdf-world {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+    /* Prevent selection during drag */
+    user-select: none;
+  }
+
+  .pdf-canvas {
+    display: block;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background: white;
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #ef4444;
+    font-size: 0.875rem;
+  }
+
+  /* Unchanged Styles */
   .unavailable {
     display: flex;
     flex-direction: column;
