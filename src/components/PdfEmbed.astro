@@ -16,12 +16,9 @@ const {
 
 {
   available ? (
-    <div class="pdf-component">
-      {title && <div class="pdf-header">{title}</div>}
-      <div class="pdf-container" style={`height: ${height};`} data-src={src}>
-        <div class="pdf-world">
-          <canvas class="pdf-canvas" />
-        </div>
+    <div class="pdf-container" style={`height: ${height};`} data-src={src}>
+      <div class="pdf-world">
+        <canvas class="pdf-canvas" />
       </div>
     </div>
   ) : (
@@ -179,28 +176,13 @@ const {
 </script>
 
 <style>
-  .pdf-component {
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    background: white;
-  }
-
-  .pdf-header {
-    background: #f8fafc;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #475569;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
   .pdf-container {
     position: relative;
     overflow: hidden;
-    background: #f1f5f9;
+    background: white;
     cursor: grab;
     width: 100%;
+    height: 100%;
     /* height is set inline */
   }
 
@@ -216,9 +198,6 @@ const {
 
   .pdf-canvas {
     display: block;
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
     background: white;
   }
 
