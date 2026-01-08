@@ -36,9 +36,6 @@ const highlightedCode = highlightSoil(code || "");
 ---
 
 <div class="soil-viewer" style={`max-height: ${maxHeight};`}>
-  <div class="header">
-    <span class="file-type">.soil</span>
-  </div>
   <pre class="code-block"><code set:html={highlightedCode} /></pre>
 </div>
 
@@ -46,7 +43,8 @@ const highlightedCode = highlightSoil(code || "");
   .soil-viewer {
     border: 1px solid #e2e8f0;
     border-radius: 0.5rem;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background: #1e1e2e;
   }
 
@@ -65,11 +63,13 @@ const highlightedCode = highlightSoil(code || "");
   .code-block {
     margin: 0;
     padding: 1rem;
-    overflow: auto;
     font-family: "Fira Code", "Consolas", monospace;
     font-size: 0.8rem;
     line-height: 1.5;
     color: #cdd6f4;
+    flex: 1 1 auto;
+    max-height: 100%;
+    overflow: auto;
   }
 
   .code-block :global(.keyword) {
