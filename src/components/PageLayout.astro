@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ModelSidebar from "./ModelSidebar.astro";
+import ContentHeader from "./ContentHeader.astro";
+import { MODELS } from "../lib/constants";
+import "../styles/shared.css";
+
+interface Props {
+  title: string;
+  currentModel?: string;
+  currentGen?: string;
+  currentPage?: "dashboard" | "model" | "generation";
+  showTabs?: boolean;
+  activeTab?: "simple" | "cot";
+}
+
+const {
+  title,
+  currentModel,
+  currentGen,
+  currentPage = "dashboard",
+  showTabs = true,
+  activeTab = "simple",
+} = Astro.props;
+---
+
+<Layout>
+  <div class="page-layout">
+    <ModelSidebar
+      models={MODELS}
+      currentModel={currentModel}
+      currentGen={currentGen}
+      currentPage={currentPage}
+      showTabs={showTabs}
+      activeTab={activeTab}
+    />
+    <main class="main-content">
+      <ContentHeader title={title}>
+        <slot name="header-right" />
+      </ContentHeader>
+      <slot />
+    </main>
+  </div>
+</Layout>

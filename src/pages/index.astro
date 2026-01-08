@@ -1,20 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ModelSidebar from "../components/ModelSidebar.astro";
-import ContentHeader from "../components/ContentHeader.astro";
-
-const MODELS = [
-  "Bank",
-  "Restaurant",
-  "AddressBook",
-  "PickupNet",
-  "HotelManagement",
-  "Football",
-  "MyExpenses",
-  "VideoClub",
-  "VehicleRental",
-  "Statemachine",
-];
+import PageLayout from "../components/PageLayout.astro";
+import {
+  MODELS,
+  getColor,
+  formatPercent,
+  formatCurrency,
+} from "../lib/constants";
 
 let dashboardData: any = null;
 let totals: any = null;
@@ -29,25 +20,6 @@ try {
   console.error("Failed to load dashboard data:", e);
 }
 
-function getColor(value: number, invert = false): string {
-  if (isNaN(value) || value === undefined || value === null) return "";
-  let score = invert ? 1 - value : value;
-  score = Math.max(0, Math.min(1, score));
-  const hue = score <= 0.5 ? 0 : (score - 0.5) * 2 * 120;
-  return `background-color: hsl(${hue}, 70%, 92%);`;
-}
-
-function formatPercent(value: number | undefined | null): string {
-  if (value === undefined || value === null || isNaN(value)) return "—";
-  return `${(value * 100).toFixed(1)}%`;
-}
-
-function formatCurrency(value: number | undefined | null): string {
-  if (value === undefined || value === null || isNaN(value)) return "—";
-  return `$${value.toFixed(2)}`;
-}
-
-// Prepare summary metrics for the comparison table
 const summaryMetrics = [
   {
     category: "Cost & Validation",
@@ -137,232 +109,151 @@ const summaryMetrics = [
     ],
   },
 ];
+
+function getAvgCoverage(cov: any): number | null {
+  return cov ? (cov.classes + cov.attributes + cov.relationships) / 3 : null;
+}
 ---
 
-<Layout>
-  <div class="page-layout">
-    <ModelSidebar
-      models={MODELS}
-      currentPage="dashboard"
-      showTabs={true}
-      activeTab="simple"
-    />
-
-    <main class="main-content">
-      <ContentHeader title="Dashboard" />
-
-      {
-        !dashboardData ? (
-          <div class="error-state">
-            <p>No data available. Run preprocessing first:</p>
-            <code>npm run preprocess</code>
-          </div>
-        ) : (
-          <>
-            <section class="section">
-              <h2>Summary</h2>
-              <div class="table-wrapper">
-                <table class="summary-table">
-                  <thead>
-                    <tr>
-                      <th class="metric-header">Metric</th>
-                      <th class="type-header">Simple</th>
-                      <th class="type-header">CoT</th>
+<PageLayout title="Dashboard" currentPage="dashboard" activeTab="simple">
+  {
+    !dashboardData ? (
+      <div class="error-state">
+        <p>No data available. Run preprocessing first:</p>
+        <code>npm run preprocess</code>
+      </div>
+    ) : (
+      <>
+        <section class="section">
+          <h2>Summary</h2>
+          <div class="table-wrapper">
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th class="metric-header">Metric</th>
+                  <th class="type-header">Simple</th>
+                  <th class="type-header">CoT</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summaryMetrics.map((group) => (
+                  <>
+                    <tr class="category-row">
+                      <td colspan="3">{group.category}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {summaryMetrics.map((group) => (
-                      <>
-                        <tr class="category-row">
-                          <td colspan="3" class="category-cell">
-                            {group.category}
-                          </td>
-                        </tr>
-                        {group.metrics.map((m) => (
-                          <tr class="metric-row">
-                            <td class="metric-label">{m.label}</td>
-                            <td
-                              class="metric-value"
-                              style={getColor(
-                                m.type === "currency"
-                                  ? (m.simple || 0) / 10
-                                  : m.simple || 0,
-                                m.invert
-                              )}
-                            >
-                              {m.type === "currency"
-                                ? formatCurrency(m.simple)
-                                : formatPercent(m.simple)}
-                            </td>
-                            <td
-                              class="metric-value"
-                              style={getColor(
-                                m.type === "currency"
-                                  ? (m.cot || 0) / 20
-                                  : m.cot || 0,
-                                m.invert
-                              )}
-                            >
-                              {m.type === "currency"
-                                ? formatCurrency(m.cot)
-                                : formatPercent(m.cot)}
-                            </td>
-                          </tr>
-                        ))}
-                      </>
+                    {group.metrics.map((m) => (
+                      <tr>
+                        <td class="metric-label">{m.label}</td>
+                        <td
+                          class="metric-value"
+                          style={getColor(
+                            m.type === "currency"
+                              ? (m.simple || 0) / 10
+                              : m.simple || 0,
+                            m.invert
+                          )}
+                        >
+                          {m.type === "currency"
+                            ? formatCurrency(m.simple)
+                            : formatPercent(m.simple)}
+                        </td>
+                        <td
+                          class="metric-value"
+                          style={getColor(
+                            m.type === "currency"
+                              ? (m.cot || 0) / 20
+                              : m.cot || 0,
+                            m.invert
+                          )}
+                        >
+                          {m.type === "currency"
+                            ? formatCurrency(m.cot)
+                            : formatPercent(m.cot)}
+                        </td>
+                      </tr>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-            <section class="section">
-              <h2>Model Comparison</h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th rowspan="2" class="sticky-col">
-                        Model
-                      </th>
-                      <th colspan="4" class="group-header simple">
-                        Simple
-                      </th>
-                      <th colspan="4" class="group-header cot">
-                        CoT
-                      </th>
-                    </tr>
-                    <tr>
-                      <th class="simple">Cost</th>
-                      <th class="simple">Syntax</th>
-                      <th class="simple">Coverage</th>
-                      <th class="simple">Realism</th>
-                      <th class="cot">Cost</th>
-                      <th class="cot">Syntax</th>
-                      <th class="cot">Coverage</th>
-                      <th class="cot">Realism</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {models.map((model: any) => {
-                      const simpleCov = model.simple?.coverage;
-                      const cotCov = model.cot?.coverage;
-                      const simpleAvgCov = simpleCov
-                        ? (simpleCov.classes +
-                            simpleCov.attributes +
-                            simpleCov.relationships) /
-                          3
-                        : null;
-                      const cotAvgCov = cotCov
-                        ? (cotCov.classes +
-                            cotCov.attributes +
-                            cotCov.relationships) /
-                          3
-                        : null;
-                      return (
-                        <tr>
-                          <td class="model-name sticky-col">
-                            <a href={`/models/${model.name.toLowerCase()}`}>
-                              {model.name}
-                            </a>
-                          </td>
-                          <td
-                            style={getColor(
-                              1 - (model.simple?.price || 0) / 10
-                            )}
-                          >
-                            {formatCurrency(model.simple?.price)}
-                          </td>
-                          <td style={getColor(model.simple?.syntax || 0)}>
-                            {formatPercent(model.simple?.syntax)}
-                          </td>
-                          <td style={getColor(simpleAvgCov || 0)}>
-                            {formatPercent(simpleAvgCov)}
-                          </td>
-                          <td style={getColor(model.simple?.realism || 0)}>
-                            {formatPercent(model.simple?.realism)}
-                          </td>
-                          <td
-                            style={getColor(1 - (model.cot?.price || 0) / 20)}
-                          >
-                            {formatCurrency(model.cot?.price)}
-                          </td>
-                          <td style={getColor(model.cot?.syntax || 0)}>
-                            {formatPercent(model.cot?.syntax)}
-                          </td>
-                          <td style={getColor(cotAvgCov || 0)}>
-                            {formatPercent(cotAvgCov)}
-                          </td>
-                          <td style={getColor(model.cot?.realism || 0)}>
-                            {formatPercent(model.cot?.realism)}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </>
-        )
-      }
-    </main>
-  </div>
-</Layout>
+        <section class="section">
+          <h2>Model Comparison</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th rowspan="2" class="sticky-col">
+                    Model
+                  </th>
+                  <th colspan="4" class="group-header simple">
+                    Simple
+                  </th>
+                  <th colspan="4" class="group-header cot">
+                    CoT
+                  </th>
+                </tr>
+                <tr>
+                  <>
+                    <th class="simple">Cost</th>
+                    <th class="simple">Syntax</th>
+                    <th class="simple">Coverage</th>
+                    <th class="simple">Realism</th>
+                  </>
+                  <>
+                    <th class="cot">Cost</th>
+                    <th class="cot">Syntax</th>
+                    <th class="cot">Coverage</th>
+                    <th class="cot">Realism</th>
+                  </>
+                </tr>
+              </thead>
+              <tbody>
+                {models.map((m: any) => (
+                  <tr>
+                    <td class="model-name sticky-col">
+                      <a href={`/models/${m.name.toLowerCase()}`}>{m.name}</a>
+                    </td>
+                    <td style={getColor(1 - (m.simple?.price || 0) / 10)}>
+                      {formatCurrency(m.simple?.price)}
+                    </td>
+                    <td style={getColor(m.simple?.syntax || 0)}>
+                      {formatPercent(m.simple?.syntax)}
+                    </td>
+                    <td
+                      style={getColor(getAvgCoverage(m.simple?.coverage) || 0)}
+                    >
+                      {formatPercent(getAvgCoverage(m.simple?.coverage))}
+                    </td>
+                    <td style={getColor(m.simple?.realism || 0)}>
+                      {formatPercent(m.simple?.realism)}
+                    </td>
+                    <td style={getColor(1 - (m.cot?.price || 0) / 20)}>
+                      {formatCurrency(m.cot?.price)}
+                    </td>
+                    <td style={getColor(m.cot?.syntax || 0)}>
+                      {formatPercent(m.cot?.syntax)}
+                    </td>
+                    <td style={getColor(getAvgCoverage(m.cot?.coverage) || 0)}>
+                      {formatPercent(getAvgCoverage(m.cot?.coverage))}
+                    </td>
+                    <td style={getColor(m.cot?.realism || 0)}>
+                      {formatPercent(m.cot?.realism)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </>
+    )
+  }
+</PageLayout>
 
 <style>
-  .page-layout {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  .main-content {
-    flex: 1;
-    padding: 1.5rem;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-  .section {
-    border: 1px solid #e0e0e0;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-    padding: 0.75rem 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: #fafafa;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  .error-state {
-    padding: 2rem;
-    background: #fafafa;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-
-  .error-state p {
-    color: #666;
-    margin: 0 0 1rem 0;
-  }
-
-  .error-state code {
-    background: #f0f0f0;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    display: inline-block;
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-  }
-
   .summary-table,
   table {
     width: 100%;
@@ -408,7 +299,6 @@ const summaryMetrics = [
     color: #333;
     padding-left: 1.25rem;
   }
-
   .metric-value {
     text-align: center;
     font-weight: 500;
@@ -428,21 +318,17 @@ const summaryMetrics = [
   .group-header {
     font-size: 0.7rem;
   }
-
   .group-header.simple {
     background: #f0f4ff;
     color: #333;
   }
-
   .group-header.cot {
     background: #f5f0ff;
     color: #333;
   }
-
   th.simple {
     background: #f8faff;
   }
-
   th.cot {
     background: #faf8ff;
   }
@@ -451,12 +337,10 @@ const summaryMetrics = [
     text-align: left;
     font-weight: 500;
   }
-
   .model-name a {
     color: #0066cc;
     text-decoration: none;
   }
-
   .model-name a:hover {
     text-decoration: underline;
   }
@@ -464,7 +348,6 @@ const summaryMetrics = [
   td {
     text-align: center;
   }
-
   tbody tr:hover {
     background: #fafafa;
   }
@@ -475,18 +358,7 @@ const summaryMetrics = [
     background: white;
     z-index: 1;
   }
-
   tbody tr:hover .sticky-col {
     background: #fafafa;
-  }
-
-  @media (max-width: 768px) {
-    .page-layout {
-      flex-direction: column;
-    }
-
-    .main-content {
-      padding: 1rem;
-    }
   }
 </style>

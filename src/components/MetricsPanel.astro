@@ -1,0 +1,140 @@
+---
+interface Metrics {
+  syntaxErrors?: number;
+  multiplicitiesErrors?: number;
+  invariantsErrors?: number;
+  coverage?: {
+    classes: number;
+    attributes: number;
+    relationships: number;
+  };
+  instantiation?: {
+    classes: number;
+    attributes: number;
+    relationships: number;
+  };
+  diversity?: {
+    numeric: number;
+    stringEquals: number;
+    stringLv: number;
+  };
+}
+
+interface Props {
+  metrics: Metrics | null;
+  showInstantiation?: boolean;
+  showDiversity?: boolean;
+}
+
+const { metrics, showInstantiation = true, showDiversity = true } = Astro.props;
+
+function formatPercent(value: number): string {
+  return `${(value * 100).toFixed(1)}%`;
+}
+---
+
+{
+  metrics ? (
+    <>
+      <h3>Validation</h3>
+      <table class="validation-table">
+        <tbody>
+          <tr class={(metrics.syntaxErrors || 0) === 0 ? "ok" : "error"}>
+            <td>Syntax</td>
+            <td>
+              {(metrics.syntaxErrors || 0) === 0
+                ? "OK"
+                : `${metrics.syntaxErrors} errors`}
+            </td>
+          </tr>
+          <tr
+            class={(metrics.multiplicitiesErrors || 0) === 0 ? "ok" : "error"}
+          >
+            <td>Multiplicities</td>
+            <td>
+              {(metrics.multiplicitiesErrors || 0) === 0
+                ? "OK"
+                : `${metrics.multiplicitiesErrors} errors`}
+            </td>
+          </tr>
+          <tr class={(metrics.invariantsErrors || 0) === 0 ? "ok" : "error"}>
+            <td>Invariants</td>
+            <td>
+              {(metrics.invariantsErrors || 0) === 0
+                ? "OK"
+                : `${metrics.invariantsErrors} errors`}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {metrics.coverage && (
+        <>
+          <h3>Coverage</h3>
+          <table class="metrics-table">
+            <tbody>
+              <tr>
+                <td>Classes</td>
+                <td>{formatPercent(metrics.coverage.classes)}</td>
+              </tr>
+              <tr>
+                <td>Attributes</td>
+                <td>{formatPercent(metrics.coverage.attributes)}</td>
+              </tr>
+              <tr>
+                <td>Relationships</td>
+                <td>{formatPercent(metrics.coverage.relationships)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
+
+      {showInstantiation && metrics.instantiation && (
+        <>
+          <h3>Instantiation</h3>
+          <table class="metrics-table">
+            <tbody>
+              <tr>
+                <td>Classes</td>
+                <td>{metrics.instantiation.classes}</td>
+              </tr>
+              <tr>
+                <td>Attributes</td>
+                <td>{metrics.instantiation.attributes}</td>
+              </tr>
+              <tr>
+                <td>Relationships</td>
+                <td>{metrics.instantiation.relationships}</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
+
+      {showDiversity && metrics.diversity && (
+        <>
+          <h3>Diversity</h3>
+          <table class="metrics-table">
+            <tbody>
+              <tr>
+                <td>Numeric</td>
+                <td>{formatPercent(metrics.diversity.numeric)}</td>
+              </tr>
+              <tr>
+                <td>String Equals</td>
+                <td>{formatPercent(metrics.diversity.stringEquals)}</td>
+              </tr>
+              <tr>
+                <td>String LV</td>
+                <td>{formatPercent(metrics.diversity.stringLv)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
+    </>
+  ) : (
+    <p class="no-data">No metrics available</p>
+  )
+}

@@ -1,6 +1,6 @@
 ---
 interface Props {
-  models: string[];
+  models: readonly string[];
   currentModel?: string;
   currentGen?: string;
   currentPage?: "dashboard" | "model" | "generation";
@@ -15,19 +15,17 @@ const {
   currentModel,
   currentGen,
   currentPage = "model",
-  showTabs = false,
+  showTabs = true,
   activeTab = "simple",
   simpleGenCount = 30,
   cotGenCount = 6,
 } = Astro.props;
 
-// Generate arrays for generation links
 const simpleGens = Array.from(
   { length: simpleGenCount },
   (_, i) => `gen${i + 1}`
 );
 const cotGens = Array.from({ length: cotGenCount }, (_, i) => `gen${i + 1}`);
-
 const showGens = currentModel || currentPage === "dashboard";
 ---
 
@@ -36,7 +34,6 @@ const showGens = currentModel || currentPage === "dashboard";
     <a
       href="/"
       class:list={["nav-link", { active: currentPage === "dashboard" }]}
-      class="border text-center"
     >
       Dashboard
     </a>
@@ -47,20 +44,14 @@ const showGens = currentModel || currentPage === "dashboard";
       <div class="mode-selector">
         <button
           type="button"
-          class:list={[
-            "mode-btn",
-            { active: currentPage !== "dashboard" && activeTab === "simple" },
-          ]}
+          class:list={["mode-btn", { active: activeTab === "simple" }]}
           data-mode="simple"
         >
           Simple
         </button>
         <button
           type="button"
-          class:list={[
-            "mode-btn",
-            { active: currentPage !== "dashboard" && activeTab === "cot" },
-          ]}
+          class:list={["mode-btn", { active: activeTab === "cot" }]}
           data-mode="cot"
         >
           CoT
@@ -71,113 +62,111 @@ const showGens = currentModel || currentPage === "dashboard";
 
   {
     showGens && (
-      <div
-        class="gens-section"
-        data-gens="simple"
-        class:list={{ hidden: activeTab !== "simple" }}
-      >
-        <div class="section-header">
-          <span class="section-title">Generations</span>
-        </div>
-        <ul class="gen-list">
-          <li>
-            <a
-              href={
-                currentPage === "dashboard"
-                  ? "#"
-                  : `/models/${currentModel?.toLowerCase()}`
-              }
-              class:list={[
-                "gen-link",
-                "all-btn",
-                {
-                  active:
-                    currentPage !== "dashboard" &&
-                    !currentGen &&
-                    activeTab === "simple",
-                },
-              ]}
-              data-gen="all"
-            >
-              All
-            </a>
-          </li>
-          {simpleGens.map((g) => (
+      <>
+        <div
+          class="gens-section"
+          data-gens="simple"
+          class:list={{ hidden: activeTab !== "simple" }}
+        >
+          <div class="section-header">
+            <span class="section-title">Generations</span>
+          </div>
+          <ul class="gen-list">
             <li>
               <a
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}/${g}`
+                    : `/models/${currentModel?.toLowerCase()}`
                 }
                 class:list={[
                   "gen-link",
-                  { active: currentGen === g && activeTab === "simple" },
+                  "all-btn",
+                  {
+                    active:
+                      currentPage !== "dashboard" &&
+                      !currentGen &&
+                      activeTab === "simple",
+                  },
                 ]}
-                data-gen={g}
+                data-gen="all"
               >
-                {g.replace("gen", "")}
+                All
               </a>
             </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
+            {simpleGens.map((g) => (
+              <li>
+                <a
+                  href={
+                    currentPage === "dashboard"
+                      ? "#"
+                      : `/models/${currentModel?.toLowerCase()}/${g}`
+                  }
+                  class:list={[
+                    "gen-link",
+                    { active: currentGen === g && activeTab === "simple" },
+                  ]}
+                  data-gen={g}
+                >
+                  {g.replace("gen", "")}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-  {
-    showGens && (
-      <div
-        class="gens-section"
-        data-gens="cot"
-        class:list={{ hidden: activeTab !== "cot" }}
-      >
-        <div class="section-header">
-          <span class="section-title">CoT Generations</span>
-        </div>
-        <ul class="gen-list">
-          <li>
-            <a
-              href={
-                currentPage === "dashboard"
-                  ? "#"
-                  : `/models/${currentModel?.toLowerCase()}?type=cot`
-              }
-              class:list={[
-                "gen-link",
-                "all-btn",
-                {
-                  active:
-                    currentPage !== "dashboard" &&
-                    !currentGen &&
-                    activeTab === "cot",
-                },
-              ]}
-              data-gen="all"
-            >
-              All
-            </a>
-          </li>
-          {cotGens.map((g) => (
+        <div
+          class="gens-section"
+          data-gens="cot"
+          class:list={{ hidden: activeTab !== "cot" }}
+        >
+          <div class="section-header">
+            <span class="section-title">CoT Generations</span>
+          </div>
+          <ul class="gen-list">
             <li>
               <a
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}/${g}?type=cot`
+                    : `/models/${currentModel?.toLowerCase()}?type=cot`
                 }
                 class:list={[
                   "gen-link",
-                  { active: currentGen === g && activeTab === "cot" },
+                  "all-btn",
+                  {
+                    active:
+                      currentPage !== "dashboard" &&
+                      !currentGen &&
+                      activeTab === "cot",
+                  },
                 ]}
-                data-gen={g}
+                data-gen="all"
               >
-                {g.replace("gen", "")}
+                All
               </a>
             </li>
-          ))}
-        </ul>
-      </div>
+            {cotGens.map((g) => (
+              <li>
+                <a
+                  href={
+                    currentPage === "dashboard"
+                      ? "#"
+                      : `/models/${currentModel?.toLowerCase()}/${g}?type=cot`
+                  }
+                  class:list={[
+                    "gen-link",
+                    { active: currentGen === g && activeTab === "cot" },
+                  ]}
+                  data-gen={g}
+                >
+                  {g.replace("gen", "")}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
     )
   }
 
@@ -193,9 +182,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 class:list={[
                   "model-link",
                   {
-                    active:
-                      currentPage !== "dashboard" &&
-                      currentModel?.toLowerCase() === model.toLowerCase(),
+                    active: currentModel?.toLowerCase() === model.toLowerCase(),
                   },
                 ]}
                 data-model={model.toLowerCase()}
@@ -237,11 +224,9 @@ const showGens = currentModel || currentPage === "dashboard";
     font-size: 0.8rem;
     font-weight: 500;
   }
-
   .nav-link:hover {
     background: #eee;
   }
-
   .nav-link.active {
     background: #111;
     color: #fff;
@@ -263,11 +248,9 @@ const showGens = currentModel || currentPage === "dashboard";
     cursor: pointer;
     color: #555;
   }
-
   .mode-btn:hover {
     background: #e5e5e5;
   }
-
   .mode-btn.active {
     background: #333;
     color: #fff;
@@ -277,7 +260,6 @@ const showGens = currentModel || currentPage === "dashboard";
     padding: 0.5rem;
     border-bottom: 1px solid #e0e0e0;
   }
-
   .gens-section.hidden {
     display: none;
   }
@@ -288,12 +270,10 @@ const showGens = currentModel || currentPage === "dashboard";
     align-items: center;
     margin-bottom: 0.5rem;
   }
-
   .all-btn {
     font-weight: 500;
   }
 
-  /* Make generation buttons expand to fill row width evenly */
   .gen-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(26px, 1fr));
@@ -301,11 +281,6 @@ const showGens = currentModel || currentPage === "dashboard";
     list-style: none;
     margin: 0;
     padding: 0;
-    align-items: center;
-  }
-
-  .gen-list li {
-    display: block;
   }
 
   .gen-link {
@@ -318,14 +293,11 @@ const showGens = currentModel || currentPage === "dashboard";
     text-decoration: none;
     background: #f0f0f0;
     border-radius: 4px;
-    box-sizing: border-box;
   }
-
   .gen-link:hover {
     background: #e0e0e0;
     color: #111;
   }
-
   .gen-link.active {
     background: #333;
     color: #fff;
@@ -351,10 +323,6 @@ const showGens = currentModel || currentPage === "dashboard";
     padding: 0;
   }
 
-  li {
-    margin: 0;
-  }
-
   .model-link {
     display: block;
     padding: 0.35rem 0.5rem;
@@ -362,12 +330,10 @@ const showGens = currentModel || currentPage === "dashboard";
     text-decoration: none;
     font-size: 0.8rem;
   }
-
   .model-link:hover {
     background: #eee;
     color: #111;
   }
-
   .model-link.active {
     background: #333;
     color: white;
@@ -382,18 +348,15 @@ const showGens = currentModel || currentPage === "dashboard";
       flex-direction: row;
       flex-wrap: wrap;
     }
-
     .nav-header {
       border-bottom: none;
       border-right: 1px solid #e0e0e0;
     }
-
     .models-section {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-
     .models-section ul {
       display: flex;
       flex-wrap: wrap;
@@ -403,229 +366,164 @@ const showGens = currentModel || currentPage === "dashboard";
 </style>
 
 <script>
-  // Handle mode switching in sidebar
   document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.querySelector(".sidebar");
+    const currentPage = sidebar?.getAttribute("data-current-page");
+    const isDashboard = currentPage === "dashboard";
     const modeBtns = document.querySelectorAll(".mode-btn");
     const gensSections = document.querySelectorAll(".gens-section");
-    const tabContents = document.querySelectorAll(".tab-content");
-    const tabs = document.querySelectorAll(".tab");
-    const modelLinks = document.querySelectorAll(".model-link");
     const genLinks = document.querySelectorAll(".gen-link");
+    const modelLinks = document.querySelectorAll(".model-link");
+    const tabContents = document.querySelectorAll(".tab-content");
 
-    const sidebar = document.querySelector(".sidebar");
-    const isDashboard =
-      sidebar?.getAttribute("data-current-page") === "dashboard";
+    // Get current mode from URL or active button
+    const getCurrentMode = () =>
+      document.querySelector(".mode-btn.active")?.getAttribute("data-mode") ||
+      "simple";
 
-    // Get current gen from URL path
-    const pathParts = window.location.pathname.split("/");
-    const currentGen = pathParts.find((p) => p.startsWith("gen"));
-    const currentType =
-      new URLSearchParams(window.location.search).get("type") || "simple";
-
-    // Update gen link highlighting based on current mode
-    function updateGenHighlighting(mode: string) {
-      if (isDashboard) {
-        // In dashboard, we don't clear selections based on URL, we respect manual selection
-        const activeSection = document.querySelector(
-          `.gens-section[data-gens="${mode}"]`
-        );
-
-        // Ensure visual state matches manual selection, but do NOT force default active if none selected
-        return;
-      }
-
-      genLinks.forEach((link) => {
-        const linkGen = link.getAttribute("data-gen");
-        const isInCurrentSection =
-          link.closest(".gens-section")?.getAttribute("data-gens") === mode;
-
-        const isMatch =
-          (currentGen && linkGen === currentGen) ||
-          (!currentGen && linkGen === "all");
-
-        if (isInCurrentSection && isMatch) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      });
-    }
-
-    // Dashboard-specific interactivity
+    // Dashboard-specific behavior
     if (isDashboard) {
-      // 1. Intercept Gen Clicks
       genLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
           e.preventDefault();
-
-          // Clear active from all gen links visible
           const section = link.closest(".gens-section");
-          if (section) {
-            section
-              .querySelectorAll(".gen-link")
-              .forEach((l) => l.classList.remove("active"));
-          }
-
+          section
+            ?.querySelectorAll(".gen-link")
+            .forEach((l) => l.classList.remove("active"));
           link.classList.add("active");
         });
       });
+    }
 
-      // 2. Intercept Model Clicks to navigate
-      modelLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const modelName = link.getAttribute("data-model");
+    // Model links - preserve current gen and mode when navigating
+    modelLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const modelName = link.getAttribute("data-model");
+        const mode = getCurrentMode();
 
-          // Determine current mode
-          const activeModeBtn = document.querySelector(".mode-btn.active");
-          const mode = activeModeBtn
-            ? activeModeBtn.getAttribute("data-mode")
-            : "simple";
+        let url = `/models/${modelName}`;
 
-          // Determine selected gen in current mode
+        // Get current gen from URL path or from selected gen link (dashboard)
+        let gen = "all";
+        if (isDashboard) {
           const activeSection = document.querySelector(
             `.gens-section[data-gens="${mode}"]`
           );
-          const activeGenLink = activeSection
-            ? activeSection.querySelector(".gen-link.active")
-            : null;
-          const gen = activeGenLink
-            ? activeGenLink.getAttribute("data-gen")
-            : "all";
+          gen =
+            activeSection
+              ?.querySelector(".gen-link.active")
+              ?.getAttribute("data-gen") || "all";
+        } else {
+          // On model/generation pages, get gen from current URL
+          const genMatch = window.location.pathname.match(/gen(\d+)/);
+          if (genMatch) gen = `gen${genMatch[1]}`;
+        }
 
-          let url = `/models/${modelName}`;
-          if (gen && gen !== "all") {
-            url += `/${gen}`;
-          }
-          if (mode === "cot") {
-            url += `?type=cot`; // Append type param if CoT
-          }
+        // Append gen to URL if not "all"
+        if (gen !== "all") url += `/${gen}`;
 
-          window.location.href = url;
-        });
+        if (mode === "cot")
+          url += url.includes("?") ? "&type=cot" : "?type=cot";
+        window.location.href = url;
       });
-    }
+    });
 
-    // Update model links to preserve current gen
-    function updateModelLinks(mode: string) {
+    // Helper to update gen link highlighting
+    function updateGenHighlighting(mode: string) {
       if (isDashboard) return;
 
-      modelLinks.forEach((link) => {
-        const modelName = link.getAttribute("data-model");
-        if (modelName && currentGen) {
-          const typeParam = mode === "cot" ? "?type=cot" : "";
-          link.setAttribute(
-            "href",
-            `/models/${modelName}/${currentGen}${typeParam}`
-          );
+      // Get current gen from URL path
+      const genMatch = window.location.pathname.match(/gen(\d+)/);
+      const currentGen = genMatch ? `gen${genMatch[1]}` : null;
+
+      // Clear all active states first
+      genLinks.forEach((link) => link.classList.remove("active"));
+
+      // Find the correct section and highlight the right link
+      const targetSection = document.querySelector(
+        `.gens-section[data-gens="${mode}"]`
+      );
+      if (targetSection) {
+        if (currentGen) {
+          targetSection
+            .querySelector(`.gen-link[data-gen="${currentGen}"]`)
+            ?.classList.add("active");
+        } else {
+          // On model page (no gen in URL), activate "All"
+          targetSection
+            .querySelector('.gen-link[data-gen="all"]')
+            ?.classList.add("active");
         }
-      });
+      }
     }
 
+    // Mode switching
     modeBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const mode = btn.getAttribute("data-mode") || "simple";
+        modeBtns.forEach((b) => b.classList.toggle("active", b === btn));
+        gensSections.forEach((s) =>
+          s.classList.toggle("hidden", s.getAttribute("data-gens") !== mode)
+        );
+        tabContents.forEach((c) =>
+          c.classList.toggle("active", c.getAttribute("data-content") === mode)
+        );
 
-        // Update mode buttons
-        modeBtns.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // Update gens sections
-        gensSections.forEach((section) => {
-          if (section.getAttribute("data-gens") === mode) {
-            section.classList.remove("hidden");
-          } else {
-            section.classList.add("hidden");
-          }
-        });
-
-        // Update gen highlighting for the new mode
+        // Update gen link highlighting for the new mode
         updateGenHighlighting(mode);
 
-        // Update model links to preserve gen
-        updateModelLinks(mode);
-
-        // Update main content tabs if they exist
-        tabContents.forEach((content) => {
-          if (content.getAttribute("data-content") === mode) {
-            content.classList.add("active");
-          } else {
-            content.classList.remove("active");
-          }
-        });
-
-        // Sync with header tabs if present
-        tabs.forEach((tab) => {
-          if (tab.getAttribute("data-tab") === mode) {
-            tab.classList.add("active");
-          } else {
-            tab.classList.remove("active");
-          }
-        });
+        // Update URL param without reload (for non-dashboard pages)
+        if (!isDashboard) {
+          const url = new URL(window.location.href);
+          mode === "cot"
+            ? url.searchParams.set("type", "cot")
+            : url.searchParams.delete("type");
+          window.history.replaceState({}, "", url.toString());
+        }
       });
     });
-
-    // Also sync header tabs with sidebar mode buttons
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const mode = tab.getAttribute("data-tab");
-        modeBtns.forEach((btn) => {
-          if (btn.getAttribute("data-mode") === mode) {
-            (btn as HTMLElement).click();
-          }
-        });
-      });
-    });
-
-    // Initialize based on URL params
-    if (currentType === "cot") {
-      const cotBtn = document.querySelector(
-        '.mode-btn[data-mode="cot"]'
-      ) as HTMLElement;
-      if (cotBtn) cotBtn.click();
-    } else {
-      updateGenHighlighting("simple");
-      updateModelLinks("simple");
-    }
   });
 </script>
 
 <script is:inline>
-  // Immediate state update to prevent flicker
   (function () {
     try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("type") === "cot") {
-        // Toggle Sidebar Buttons
-        const simpleBtn = document.querySelector(
-          '.mode-btn[data-mode="simple"]'
-        );
-        const cotBtn = document.querySelector('.mode-btn[data-mode="cot"]');
-        if (simpleBtn) simpleBtn.classList.remove("active");
-        if (cotBtn) cotBtn.classList.add("active");
-
-        // Toggle Gen Sections
-        const simpleGens = document.querySelector(
-          '.gens-section[data-gens="simple"]'
-        );
-        const cotGens = document.querySelector(
+      const isCot =
+        new URLSearchParams(window.location.search).get("type") === "cot";
+      if (isCot) {
+        // Switch mode buttons
+        document
+          .querySelector('.mode-btn[data-mode="simple"]')
+          ?.classList.remove("active");
+        document
+          .querySelector('.mode-btn[data-mode="cot"]')
+          ?.classList.add("active");
+        // Switch generation sections
+        document
+          .querySelector('.gens-section[data-gens="simple"]')
+          ?.classList.add("hidden");
+        document
+          .querySelector('.gens-section[data-gens="cot"]')
+          ?.classList.remove("hidden");
+        // Fix gen link highlighting - remove from simple, add to cot
+        document
+          .querySelectorAll('.gens-section[data-gens="simple"] .gen-link')
+          .forEach((l) => l.classList.remove("active"));
+        // Find current gen from URL path
+        const genMatch = window.location.pathname.match(/gen(\d+)/);
+        const cotSection = document.querySelector(
           '.gens-section[data-gens="cot"]'
         );
-        if (simpleGens) simpleGens.classList.add("hidden");
-        if (cotGens) cotGens.classList.remove("hidden");
-
-        // Apply active class to the correct generation link in CoT section
-        const path = window.location.pathname;
-        const genMatch = path.match(/gen\d+/);
-        if (genMatch && cotGens) {
-          const gen = genMatch[0];
-          const activeLink = cotGens.querySelector(
-            `.gen-link[data-gen="${gen}"]`
-          );
-          if (activeLink) activeLink.classList.add("active");
-        } else if (cotGens) {
-          const allLink = cotGens.querySelector('.gen-link[data-gen="all"]');
-          if (allLink) allLink.classList.add("active");
+        if (genMatch) {
+          cotSection
+            ?.querySelector(`.gen-link[data-gen="gen${genMatch[1]}"]`)
+            ?.classList.add("active");
+        } else if (cotSection && !window.location.pathname.match(/gen\d+/)) {
+          // On model page (no gen in URL), activate "All"
+          cotSection
+            .querySelector('.gen-link[data-gen="all"]')
+            ?.classList.add("active");
         }
       }
     } catch (e) {}

@@ -1,0 +1,62 @@
+---
+import PdfEmbed from "./PdfEmbed.astro";
+import SoilViewer from "./SoilViewer.astro";
+import MetricsPanel from "./MetricsPanel.astro";
+import JudgeCard from "./JudgeCard.astro";
+
+interface Props {
+  data: any;
+  label?: string;
+  showJudge?: boolean;
+}
+
+const { data, label = "", showJudge = true } = Astro.props;
+---
+
+<div class="content-grid wide-left">
+  <div class="left-column">
+    <section class="section">
+      <h2>Instance Diagram</h2>
+      <PdfEmbed
+        src={data?.pdfUrl || ""}
+        title="Instance Diagram"
+        height="350px"
+        available={data?.pdfAvailable ?? false}
+      />
+    </section>
+    <section class="section">
+      <h2>Generated Instance {label && `(${label})`}</h2>
+      {
+        data?.code ? (
+          <SoilViewer code={data.code} maxHeight="500px" />
+        ) : (
+          <div class="no-code">No code available {label && `for ${label}`}</div>
+        )
+      }
+    </section>
+  </div>
+
+  <div class="right-column">
+    <section class="section">
+      <h2>Metrics</h2>
+      <MetricsPanel metrics={data?.metrics} />
+    </section>
+
+    {
+      showJudge && data?.judge && (
+        <section class="section">
+          <JudgeCard response={data.judge.response} why={data.judge.why} />
+        </section>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .left-column,
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

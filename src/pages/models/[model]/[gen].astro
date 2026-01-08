@@ -1,62 +1,31 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import SoilViewer from "../../../components/SoilViewer.astro";
-import JudgeCard from "../../../components/JudgeCard.astro";
-import PdfEmbed from "../../../components/PdfEmbed.astro";
-import ModelSidebar from "../../../components/ModelSidebar.astro";
-import ContentHeader from "../../../components/ContentHeader.astro";
-
-const MODELS = [
-  "Bank",
-  "Restaurant",
-  "AddressBook",
-  "PickupNet",
-  "HotelManagement",
-  "Football",
-  "MyExpenses",
-  "VideoClub",
-  "VehicleRental",
-  "Statemachine",
-];
-
-const COT_CATEGORIES = ["baseline", "boundary", "complex", "edge", "invalid"];
+import PageLayout from "../../../components/PageLayout.astro";
+import GenerationView from "../../../components/GenerationView.astro";
+import {
+  MODELS_LOWER,
+  COT_CATEGORIES,
+  getModelName,
+} from "../../../lib/constants";
 
 export function getStaticPaths() {
-  const models = [
-    "bank",
-    "restaurant",
-    "addressbook",
-    "pickupnet",
-    "hotelmanagement",
-    "football",
-    "myexpenses",
-    "videoclub",
-    "vehiclerental",
-    "statemachine",
-  ];
-
   const paths: { params: { model: string; gen: string } }[] = [];
-
-  for (const model of models) {
-    // Simple: 30 generations
+  for (const model of MODELS_LOWER) {
     for (let i = 1; i <= 30; i++) {
       paths.push({ params: { model, gen: `gen${i}` } });
     }
   }
-
   return paths;
 }
 
 const { model, gen } = Astro.params;
-const modelName = MODELS.find((m) => m.toLowerCase() === model) || model;
+const modelName = getModelName(model);
 const genNum = parseInt(gen.replace("gen", ""));
 
-// Load BOTH simple and cot generation data at build time
+// Load generation data
 let simpleData: any = null;
 let cotData: any = null;
 
 try {
-  // Import all generation files
   const simpleFiles = import.meta.glob(
     "../../../data/processed/generations/*/simple-*.json",
     { eager: true }
@@ -66,20 +35,19 @@ try {
     { eager: true }
   );
 
-  // Find simple data
   const simpleKey = Object.keys(simpleFiles).find((key) =>
     key.endsWith(`/${model}/simple-${gen}.json`)
   );
-  if (simpleKey && simpleFiles[simpleKey]) {
-    simpleData = (simpleFiles[simpleKey] as any).default || simpleFiles[simpleKey];
+  if (simpleKey) {
+    simpleData =
+      (simpleFiles[simpleKey] as any).default || simpleFiles[simpleKey];
   }
 
-  // Find cot data (only gen1-gen6 for CoT)
   if (genNum <= 6) {
     const cotKey = Object.keys(cotFiles).find((key) =>
       key.endsWith(`/${model}/cot-${gen}.json`)
     );
-    if (cotKey && cotFiles[cotKey]) {
+    if (cotKey) {
       cotData = (cotFiles[cotKey] as any).default || cotFiles[cotKey];
     }
   }
@@ -87,525 +55,154 @@ try {
   console.error("Error loading generation data:", e);
 }
 
-// Check if this gen has CoT data
 const hasCotData = genNum <= 6 && cotData !== null;
 ---
 
-<Layout>
-  <div class="page-layout">
-    <ModelSidebar 
-      models={MODELS} 
-      currentModel={modelName} 
-      currentGen={gen} 
-      currentPage="generation"
-      showTabs={true}
-      activeTab="simple"
-    />
-
-    <main class="main-content">
-      {!simpleData && !cotData ? (
-        <div class="error-state">
-          <p>No data available for: <strong>{modelName} / {gen}</strong></p>
-          <p>Run: <code>npm run preprocess</code></p>
+<PageLayout
+  title={`${modelName} / ${gen}`}
+  currentModel={modelName}
+  currentGen={gen}
+  currentPage="generation"
+  activeTab="simple"
+>
+  <Fragment slot="header-right">
+    {
+      hasCotData && (
+        <div class="category-tabs hidden" data-nav="cot">
+          {COT_CATEGORIES.map((cat, i) => (
+            <button
+              type="button"
+              class:list={["cat-tab", { active: i === 0 }]}
+              data-cat={cat}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
-      ) : (
-        <>
-          <ContentHeader title={`${modelName} / ${gen}`}>
-            {hasCotData && (
-              <div class="category-tabs hidden" data-nav="cot">
-                {COT_CATEGORIES.map((cat, i) => (
-                  <button type="button" class:list={["cat-tab", { active: i === 0 }]} data-cat={cat}>
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
-          </ContentHeader>
+      )
+    }
+  </Fragment>
 
-          <!-- SIMPLE CONTENT -->
-          <div class="tab-content active" data-content="simple">
-            <div class="content-grid">
-              <div class="left-column">
-                <section class="section">
-                  <h2>Instance Diagram</h2>
-                  <PdfEmbed
-                    src={simpleData?.pdfUrl || ""}
-                    title="Instance Diagram"
-                    height="350px"
-                    available={simpleData?.pdfAvailable ?? false}
+  {
+    !simpleData && !cotData ? (
+      <div class="error-state">
+        <p>
+          No data available for:{" "}
+          <strong>
+            {modelName} / {gen}
+          </strong>
+        </p>
+        <p>
+          Run: <code>npm run preprocess</code>
+        </p>
+      </div>
+    ) : (
+      <>
+        {/* Simple Content */}
+        <div class="tab-content active" data-content="simple">
+          <GenerationView data={simpleData} />
+        </div>
+
+        {/* CoT Content */}
+        {hasCotData && (
+          <div class="tab-content" data-content="cot">
+            {COT_CATEGORIES.map((cat, i) => {
+              const catData = cotData?.categories?.find(
+                (c: any) => c.category === cat
+              );
+              return (
+                <div
+                  class:list={["cat-content", { active: i === 0 }]}
+                  data-cat-content={cat}
+                >
+                  <GenerationView
+                    data={catData}
+                    label={cat}
+                    showJudge={false}
                   />
-                </section>
-                <section class="section">
-                  <h2>Generated Instance</h2>
-                  {simpleData?.code ? (
-                    <SoilViewer code={simpleData.code} maxHeight="500px" />
-                  ) : (
-                    <div class="no-code">No code available</div>
-                  )}
-                </section>
-              </div>
-
-              <div class="right-column">
-                <section class="section">
-                  <h2>Metrics</h2>
-
-                  <h3>Validation</h3>
-                  <table class="validation-table">
-                    <tbody>
-                      <tr class={(simpleData?.metrics?.syntaxErrors || 0) === 0 ? "ok" : "error"}>
-                        <td>Syntax</td>
-                        <td>{(simpleData?.metrics?.syntaxErrors || 0) === 0 ? "OK" : `${simpleData?.metrics?.syntaxErrors} errors`}</td>
-                      </tr>
-                      <tr class={(simpleData?.metrics?.multiplicitiesErrors || 0) === 0 ? "ok" : "error"}>
-                        <td>Multiplicities</td>
-                        <td>{(simpleData?.metrics?.multiplicitiesErrors || 0) === 0 ? "OK" : `${simpleData?.metrics?.multiplicitiesErrors} errors`}</td>
-                      </tr>
-                      <tr class={(simpleData?.metrics?.invariantsErrors || 0) === 0 ? "ok" : "error"}>
-                        <td>Invariants</td>
-                        <td>{(simpleData?.metrics?.invariantsErrors || 0) === 0 ? "OK" : `${simpleData?.metrics?.invariantsErrors} errors`}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  {simpleData?.metrics?.coverage && (
-                    <>
-                      <h3>Coverage</h3>
-                      <table class="metrics-table">
-                        <tbody>
-                          <tr>
-                            <td>Classes</td>
-                            <td>{(simpleData.metrics.coverage.classes * 100).toFixed(1)}%</td>
-                          </tr>
-                          <tr>
-                            <td>Attributes</td>
-                            <td>{(simpleData.metrics.coverage.attributes * 100).toFixed(1)}%</td>
-                          </tr>
-                          <tr>
-                            <td>Relationships</td>
-                            <td>{(simpleData.metrics.coverage.relationships * 100).toFixed(1)}%</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </>
-                  )}
-
-                  {simpleData?.metrics?.instantiation && (
-                    <>
-                      <h3>Instantiation</h3>
-                      <table class="metrics-table">
-                        <tbody>
-                          <tr>
-                            <td>Classes</td>
-                            <td>{simpleData.metrics.instantiation.classes}</td>
-                          </tr>
-                          <tr>
-                            <td>Attributes</td>
-                            <td>{simpleData.metrics.instantiation.attributes}</td>
-                          </tr>
-                          <tr>
-                            <td>Relationships</td>
-                            <td>{simpleData.metrics.instantiation.relationships}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </>
-                  )}
-
-                  {simpleData?.metrics?.diversity && (
-                    <>
-                      <h3>Diversity</h3>
-                      <table class="metrics-table">
-                        <tbody>
-                          <tr>
-                            <td>Numeric</td>
-                            <td>{(simpleData.metrics.diversity.numeric * 100).toFixed(1)}%</td>
-                          </tr>
-                          <tr>
-                            <td>String Equals</td>
-                            <td>{(simpleData.metrics.diversity.stringEquals * 100).toFixed(1)}%</td>
-                          </tr>
-                          <tr>
-                            <td>String LV</td>
-                            <td>{(simpleData.metrics.diversity.stringLv * 100).toFixed(1)}%</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </>
-                  )}
-                </section>
-
-                {simpleData?.judge && (
-                  <section class="section">
-                    <JudgeCard response={simpleData.judge.response} why={simpleData.judge.why} />
-                  </section>
-                )}
-              </div>
-            </div>
+                </div>
+              );
+            })}
           </div>
-
-          <!-- COT CONTENT -->
-          {hasCotData && (
-            <div class="tab-content" data-content="cot">
-              {COT_CATEGORIES.map((cat, i) => {
-                const catData = cotData?.categories?.find((c: any) => c.category === cat);
-                return (
-                  <div class:list={["cat-content", { active: i === 0 }]} data-cat-content={cat}>
-                    <div class="content-grid">
-                      <div class="left-column">
-                        <section class="section">
-                          <h2>Instance Diagram</h2>
-                          <PdfEmbed
-                            src={catData?.pdfUrl || ""}
-                            title="Instance Diagram"
-                            available={catData?.pdfAvailable ?? false}
-                          />
-                        </section>
-                        <section class="section">
-                          <h2>Generated Instance ({cat})</h2>
-                          {catData?.code ? (
-                            <SoilViewer code={catData.code} maxHeight="500px" />
-                          ) : (
-                            <div class="no-code">No code available for {cat}</div>
-                          )}
-                        </section>
-                      </div>
-
-                      <div class="right-column">
-                        <section class="section">
-                          <h2>Metrics</h2>
-
-                          <h3>Validation</h3>
-                          <table class="validation-table">
-                            <tbody>
-                              <tr class={(catData?.metrics?.syntaxErrors || 0) === 0 ? "ok" : "error"}>
-                                <td>Syntax</td>
-                                <td>{(catData?.metrics?.syntaxErrors || 0) === 0 ? "OK" : `${catData?.metrics?.syntaxErrors} errors`}</td>
-                              </tr>
-                              <tr class={(catData?.metrics?.multiplicitiesErrors || 0) === 0 ? "ok" : "error"}>
-                                <td>Multiplicities</td>
-                                <td>{(catData?.metrics?.multiplicitiesErrors || 0) === 0 ? "OK" : `${catData?.metrics?.multiplicitiesErrors} errors`}</td>
-                              </tr>
-                              <tr class={(catData?.metrics?.invariantsErrors || 0) === 0 ? "ok" : "error"}>
-                                <td>Invariants</td>
-                                <td>{(catData?.metrics?.invariantsErrors || 0) === 0 ? "OK" : `${catData?.metrics?.invariantsErrors} errors`}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          {catData?.metrics?.coverage && (
-                            <>
-                              <h3>Coverage</h3>
-                              <table class="metrics-table">
-                                <tbody>
-                                  <tr>
-                                    <td>Classes</td>
-                                    <td>{(catData.metrics.coverage.classes * 100).toFixed(1)}%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Attributes</td>
-                                    <td>{(catData.metrics.coverage.attributes * 100).toFixed(1)}%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Relationships</td>
-                                    <td>{(catData.metrics.coverage.relationships * 100).toFixed(1)}%</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </>
-                          )}
-
-                          {catData?.metrics?.instantiation && (
-                            <>
-                              <h3>Instantiation</h3>
-                              <table class="metrics-table">
-                                <tbody>
-                                  <tr>
-                                    <td>Classes</td>
-                                    <td>{catData.metrics.instantiation.classes}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Attributes</td>
-                                    <td>{catData.metrics.instantiation.attributes}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Relationships</td>
-                                    <td>{catData.metrics.instantiation.relationships}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </>
-                          )}
-                        </section>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </>
-      )}
-    </main>
-  </div>
-</Layout>
-
-<style>
-  .error-state {
-    padding: 2rem;
-    background: #fafafa;
-    border: 1px solid #ddd;
-    text-align: center;
+        )}
+      </>
+    )
   }
-
-  .error-state p {
-    color: #666;
-    margin: 0.5rem 0;
-  }
-
-  .error-state code {
-    background: #f0f0f0;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-  }
-
-  .page-layout {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  .main-content {
-    flex: 1;
-    padding: 1.5rem;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-
-
-  .hidden {
-    display: none !important;
-  }
-
-  .tab-content {
-    display: none;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-
-  .category-tabs {
-    display: flex;
-    gap: 0.25rem;
-    background: #f5f5f5;
-    padding: 0.25rem;
-  }
-
-  .cat-tab {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #666;
-    background: transparent;
-    cursor: pointer;
-    text-transform: capitalize;
-    border: none;
-  }
-
-  .cat-tab:hover {
-    background: #e5e5e5;
-    color: #111;
-  }
-
-  .cat-tab.active {
-    background: #333;
-    color: white;
-  }
-
-  .cat-content {
-    display: none;
-  }
-
-  .cat-content.active {
-    display: block;
-  }
-
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 1rem;
-  }
-
-  .section {
-    border: 1px solid #e0e0e0;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-    padding: 0.75rem 1rem;
-    background: #fafafa;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  h3 {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background: #f5f5f5;
-    border-top: 1px solid #e0e0e0;
-  }
-
-  h3:first-of-type {
-    border-top: none;
-  }
-
-  .no-code {
-    padding: 2rem;
-    text-align: center;
-    color: #999;
-    background: #fafafa;
-  }
-
-  .validation-table,
-  .metrics-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .validation-table td,
-  .metrics-table td {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 0.8rem;
-  }
-
-  .validation-table td:first-child,
-  .metrics-table td:first-child {
-    color: #555;
-  }
-
-  .validation-table td:last-child,
-  .metrics-table td:last-child {
-    text-align: right;
-    font-weight: 500;
-    color: #111;
-  }
-
-  .validation-table tr.ok td:last-child {
-    color: #16a34a;
-  }
-
-  .validation-table tr.error td:last-child {
-    color: #dc2626;
-  }
-
-  @media (max-width: 900px) {
-    .content-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .page-layout {
-      flex-direction: column;
-    }
-
-    .category-tabs {
-      flex-wrap: wrap;
-    }
-  }
-</style>
+</PageLayout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Tab switching via sidebar mode buttons
-    const modeBtns = document.querySelectorAll('.mode-btn');
-    const contents = document.querySelectorAll('.tab-content[data-content]');
-    const navs = document.querySelectorAll('.category-tabs[data-nav]');
-    const badges = document.querySelectorAll('.type-badge[data-badge]');
-    const gensSections = document.querySelectorAll('.gens-section');
+  document.addEventListener("DOMContentLoaded", () => {
+    const modeBtns = document.querySelectorAll(".mode-btn");
+    const contents = document.querySelectorAll(".tab-content[data-content]");
+    const navs = document.querySelectorAll(".category-tabs[data-nav]");
+    const gensSections = document.querySelectorAll(".gens-section");
+    const catTabs = document.querySelectorAll(".cat-tab[data-cat]");
+    const catContents = document.querySelectorAll(
+      ".cat-content[data-cat-content]"
+    );
 
-    // Check URL for initial tab
     const params = new URLSearchParams(window.location.search);
-    const initialTab = params.get('type') || 'simple';
+    const initialTab = params.get("type") || "simple";
 
-    // Set initial state
     function setTab(tabName: string) {
-      modeBtns.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-mode') === tabName));
-      contents.forEach(c => c.classList.toggle('active', c.getAttribute('data-content') === tabName));
-      
-      // Handle the category tabs visibility based on CoT mode
-      navs.forEach(n => {
-        if (tabName === 'cot') {
-          n.classList.remove('hidden');
-        } else {
-          n.classList.add('hidden');
-        }
-      });
-      
-      badges.forEach(b => b.classList.toggle('hidden', b.getAttribute('data-badge') !== tabName));
-      gensSections.forEach(section => {
-        section.classList.toggle('hidden', section.getAttribute('data-gens') !== tabName);
-      });
-      
-      // Update URL
+      modeBtns.forEach((btn) =>
+        btn.classList.toggle(
+          "active",
+          btn.getAttribute("data-mode") === tabName
+        )
+      );
+      contents.forEach((c) =>
+        c.classList.toggle("active", c.getAttribute("data-content") === tabName)
+      );
+      navs.forEach((n) => n.classList.toggle("hidden", tabName !== "cot"));
+      gensSections.forEach((s) =>
+        s.classList.toggle("hidden", s.getAttribute("data-gens") !== tabName)
+      );
+
       const url = new URL(window.location.href);
-      if (tabName === 'simple') {
-        url.searchParams.delete('type');
-      } else {
-        url.searchParams.set('type', tabName);
-      }
-      window.history.replaceState({}, '', url.toString());
+      tabName === "simple"
+        ? url.searchParams.delete("type")
+        : url.searchParams.set("type", tabName);
+      window.history.replaceState({}, "", url.toString());
     }
 
     setTab(initialTab);
+    modeBtns.forEach((btn) =>
+      btn.addEventListener("click", () =>
+        setTab(btn.getAttribute("data-mode") || "simple")
+      )
+    );
 
-    modeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetTab = btn.getAttribute('data-mode') || 'simple';
-        setTab(targetTab);
-      });
-    });
-
-    // Category switching (for CoT)
-    const catTabs = document.querySelectorAll('.cat-tab[data-cat]');
-    const catContents = document.querySelectorAll('.cat-content[data-cat-content]');
-
-    catTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const cat = tab.getAttribute('data-cat');
-        catTabs.forEach(t => t.classList.toggle('active', t === tab));
-        catContents.forEach(c => c.classList.toggle('active', c.getAttribute('data-cat-content') === cat));
+    // Category switching
+    catTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const cat = tab.getAttribute("data-cat");
+        catTabs.forEach((t) => t.classList.toggle("active", t === tab));
+        catContents.forEach((c) =>
+          c.classList.toggle(
+            "active",
+            c.getAttribute("data-cat-content") === cat
+          )
+        );
       });
     });
   });
 </script>
 
 <script is:inline>
-  // Immediate state update to prevent flicker
-  (function() {
+  (function () {
     try {
-      if (new URLSearchParams(window.location.search).get('type') === 'cot') {
-        // Toggle Main Content
-        const simpleContent = document.querySelector('.tab-content[data-content="simple"]');
-        const cotContent = document.querySelector('.tab-content[data-content="cot"]');
-        if (simpleContent) simpleContent.classList.remove('active');
-        if (cotContent) cotContent.classList.add('active');
-
-        // Show Category Tabs
-        const catTabs = document.querySelector('.category-tabs[data-nav="cot"]');
-        if (catTabs) catTabs.classList.remove('hidden');
+      if (new URLSearchParams(window.location.search).get("type") === "cot") {
+        document
+          .querySelector('.tab-content[data-content="simple"]')
+          ?.classList.remove("active");
+        document
+          .querySelector('.tab-content[data-content="cot"]')
+          ?.classList.add("active");
+        document
+          .querySelector('.category-tabs[data-nav="cot"]')
+          ?.classList.remove("hidden");
       }
-    } catch(e) {}
+    } catch (e) {}
   })();
 </script>
