@@ -65,6 +65,7 @@ export interface GenerationMetrics extends ModelMetrics {
 
 export interface CategoryMetrics extends GenerationMetrics {
   category: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  pdfUrl?: string;
 }
 
 export interface SimpleGeneration {
@@ -72,6 +73,7 @@ export interface SimpleGeneration {
   metrics: GenerationMetrics;
   judge?: JudgeResponse;
   pdfAvailable: boolean;
+  pdfUrl?: string;
 }
 
 export interface CoTGeneration {
@@ -79,6 +81,7 @@ export interface CoTGeneration {
   categories: CategoryMetrics[];
   judge?: JudgeResponse;
   pdfAvailable: boolean;
+  pdfUrl?: string;
 }
 
 export interface ModelData {

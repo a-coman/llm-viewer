@@ -53,7 +53,54 @@ const {
       this.startX = 0;
       this.startY = 0;
 
+      this._hasFit = false;
+      this._fitRetryTimer = null;
+      this._resizeObserver = null;
+
       this.init();
+    }
+
+    scheduleFit() {
+      if (this._fitRetryTimer) return;
+      this._fitRetryTimer = window.setTimeout(() => {
+        this._fitRetryTimer = null;
+        this.fitToContainer();
+      }, 50);
+    }
+
+    fitToContainer() {
+      const containerRect = this.container.getBoundingClientRect();
+
+      // If hidden (display:none), width/height will be 0. Retry later.
+      if (containerRect.width === 0 || containerRect.height === 0) {
+        this.scheduleFit();
+        return;
+      }
+
+      const effectiveWidth = this.canvas.width;
+      const effectiveHeight = this.canvas.height;
+      if (!effectiveWidth || !effectiveHeight) {
+        this.scheduleFit();
+        return;
+      }
+
+      const scaleX = containerRect.width / effectiveWidth;
+      const scaleY = containerRect.height / effectiveHeight;
+      const fitScale = Math.min(scaleX, scaleY) * 0.95;
+
+      // If user already interacted, do not override their transform.
+      if (this._hasFit && (this.isDragging || this.scale !== fitScale)) {
+        return;
+      }
+
+      this.scale = fitScale;
+      const scaledWidth = effectiveWidth * this.scale;
+      const scaledHeight = effectiveHeight * this.scale;
+      this.posX = (containerRect.width - scaledWidth) / 2;
+      this.posY = (containerRect.height - scaledHeight) / 2;
+
+      this._hasFit = true;
+      this.updateTransform();
     }
 
     async init() {
@@ -73,26 +120,13 @@ const {
         };
         await page.render(renderContext).promise;
 
-        // Center initially
-        const containerRect = this.container.getBoundingClientRect();
+        // Fit now (or retry if hidden)
+        this.fitToContainer();
 
-        // Initial fit logic
-        const effectiveWidth = viewport.width;
-        const effectiveHeight = viewport.height;
+        // Refit when the element becomes visible / resizes (tab switching toggles display)
+        this._resizeObserver = new ResizeObserver(() => this.fitToContainer());
+        this._resizeObserver.observe(this.container);
 
-        const scaleX = containerRect.width / effectiveWidth;
-        const scaleY = containerRect.height / effectiveHeight;
-        const fitScale = Math.min(scaleX, scaleY) * 0.95; // 95% fit
-
-        this.scale = fitScale;
-
-        const scaledWidth = effectiveWidth * this.scale;
-        const scaledHeight = effectiveHeight * this.scale;
-
-        this.posX = (containerRect.width - scaledWidth) / 2;
-        this.posY = (containerRect.height - scaledHeight) / 2;
-
-        this.updateTransform();
         this.addEventListeners();
       } catch (error) {
         console.error("Error loading PDF:", error);

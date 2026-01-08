@@ -9,6 +9,10 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const DATA_DIR = path.join(__dirname, "../src/data/dataset/GPT4O-exp1");
 const OUTPUT_DIR = path.join(__dirname, "../src/data/processed");
+const PUBLIC_DATASET_DIR = path.join(
+  __dirname,
+  "../public/data/dataset/GPT4O-exp1"
+);
 
 const MODELS = [
   "Bank",
@@ -30,6 +34,17 @@ function ensureDir(dir: string) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
+}
+
+function copyFileIfExists(
+  sourcePath: string,
+  destinationPath: string
+): boolean {
+  if (!sourcePath || !destinationPath) return false;
+  if (!fs.existsSync(sourcePath)) return false;
+  ensureDir(path.dirname(destinationPath));
+  fs.copyFileSync(sourcePath, destinationPath);
+  return true;
 }
 
 // Parse price.md - extracts price/token info per model and type
@@ -1019,9 +1034,14 @@ async function preprocess() {
       };
 
       // Check if output files exist
-      const pdfExists = simpleDir
-        ? fileExists(path.join(simpleDir, genId, "output.pdf"))
-        : false;
+      const pdfPath = simpleDir
+        ? path.join(simpleDir, genId, "output.pdf")
+        : null;
+      const pdfExists = pdfPath ? fileExists(pdfPath) : false;
+      const pdfUrl =
+        simpleTimestamp && pdfExists
+          ? `/data/dataset/GPT4O-exp1/Simple/${modelName}/${simpleTimestamp}/${genId}/output.pdf`
+          : null;
       const soilPath = simpleDir
         ? path.join(simpleDir, genId, "output.soil")
         : null;
@@ -1051,8 +1071,23 @@ async function preprocess() {
         },
         judge: judgeResp || null,
         pdfAvailable: pdfExists,
+        pdfUrl,
         code: soilContent,
       });
+
+      if (pdfPath && pdfUrl) {
+        copyFileIfExists(
+          pdfPath,
+          path.join(
+            PUBLIC_DATASET_DIR,
+            "Simple",
+            modelName,
+            simpleTimestamp as string,
+            genId,
+            "output.pdf"
+          )
+        );
+      }
     }
 
     // Build CoT generations data
@@ -1066,9 +1101,28 @@ async function preprocess() {
         const catCov = genCov[cat] || {};
         const catMetrics = genMetricsCot[cat] || {};
         const pdfPath = cotDir ? path.join(cotDir, genId, `${cat}.pdf`) : null;
+        const pdfExists = pdfPath ? fileExists(pdfPath) : false;
+        const pdfUrl =
+          cotTimestamp && pdfExists
+            ? `/data/dataset/GPT4O-exp1/CoT/${modelName}/${cotTimestamp}/${genId}/${cat}.pdf`
+            : null;
         const soilPath = cotDir
           ? path.join(cotDir, genId, `${cat}.soil`)
           : null;
+
+        if (pdfPath && pdfUrl) {
+          copyFileIfExists(
+            pdfPath,
+            path.join(
+              PUBLIC_DATASET_DIR,
+              "CoT",
+              modelName,
+              cotTimestamp as string,
+              genId,
+              `${cat}.pdf`
+            )
+          );
+        }
 
         return {
           category: cat,
@@ -1087,7 +1141,8 @@ async function preprocess() {
               relationships: catCov.instRelationships || 0,
             },
           },
-          pdfAvailable: pdfPath ? fileExists(pdfPath) : false,
+          pdfAvailable: pdfExists,
+          pdfUrl,
           code: soilPath ? readFileSafe(soilPath) : null,
         };
       });
