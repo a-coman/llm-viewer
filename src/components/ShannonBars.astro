@@ -1,0 +1,172 @@
+---
+interface ShannonEntry {
+  attribute: string;
+  values: Record<string, number>;
+  evennessAll: number;
+}
+
+interface Props {
+  data: ShannonEntry[];
+  title?: string;
+}
+
+const { data, title } = Astro.props;
+
+function getBarColor(evenness: number): string {
+  const hue = evenness * 120; // 0 = red (low diversity), 120 = green (high diversity)
+  return `hsl(${hue}, 65%, 55%)`;
+}
+---
+
+<div class="shannon-container">
+  {title && <h3 class="title">{title}</h3>}
+
+  {
+    data.length === 0 ? (
+      <p class="no-data">No enum attributes in this model</p>
+    ) : (
+      <div class="charts">
+        {data.map((entry) => (
+          <div class="attribute-chart">
+            <div class="attribute-header">
+              <span class="attribute-name">{entry.attribute}</span>
+              <span
+                class="evenness-badge"
+                style={`background-color: ${getBarColor(entry.evennessAll)};`}
+              >
+                {(entry.evennessAll * 100).toFixed(0)}% even
+              </span>
+            </div>
+            <div class="bars">
+              {Object.entries(entry.values).map(([value, count]) => {
+                const total = Object.values(entry.values).reduce(
+                  (a, b) => a + b,
+                  0
+                );
+                const percentage = total > 0 ? (count / total) * 100 : 0;
+                return (
+                  <div class="bar-row">
+                    <span class="bar-label" title={value}>
+                      {value}
+                    </span>
+                    <div class="bar-track">
+                      <div
+                        class="bar-fill"
+                        style={`width: ${percentage}%; background-color: ${getBarColor(entry.evennessAll)};`}
+                      />
+                    </div>
+                    <span class="bar-value">{count}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .shannon-container {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    margin: 0 0 1rem 0;
+  }
+
+  .no-data {
+    color: #64748b;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .attribute-chart {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+  }
+
+  .attribute-chart:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .attribute-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .attribute-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #1e293b;
+    font-family: monospace;
+  }
+
+  .evenness-badge {
+    font-size: 0.7rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    color: white;
+    font-weight: 500;
+  }
+
+  .bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .bar-label {
+    flex: 0 0 100px;
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 16px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .bar-value {
+    flex: 0 0 30px;
+    font-size: 0.75rem;
+    color: #475569;
+    font-weight: 500;
+  }
+</style>

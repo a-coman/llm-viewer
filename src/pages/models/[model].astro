@@ -1,0 +1,571 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import MetricCard from "../../components/MetricCard.astro";
+import HeatmapMatrix from "../../components/HeatmapMatrix.astro";
+import ShannonBars from "../../components/ShannonBars.astro";
+import PdfEmbed from "../../components/PdfEmbed.astro";
+import ModelSidebar from "../../components/ModelSidebar.astro";
+import ContentHeader from "../../components/ContentHeader.astro";
+
+const MODELS = [
+  "Bank",
+  "Restaurant",
+  "AddressBook",
+  "PickupNet",
+  "HotelManagement",
+  "Football",
+  "MyExpenses",
+  "VideoClub",
+  "VehicleRental",
+  "Statemachine",
+];
+
+export function getStaticPaths() {
+  return [
+    { params: { model: "bank" } },
+    { params: { model: "restaurant" } },
+    { params: { model: "addressbook" } },
+    { params: { model: "pickupnet" } },
+    { params: { model: "hotelmanagement" } },
+    { params: { model: "football" } },
+    { params: { model: "myexpenses" } },
+    { params: { model: "videoclub" } },
+    { params: { model: "vehiclerental" } },
+    { params: { model: "statemachine" } },
+  ];
+}
+
+const { model } = Astro.params;
+const modelName = MODELS.find((m) => m.toLowerCase() === model) || model;
+
+// Load model data
+let modelData: any = null;
+try {
+  modelData = await import(`../../data/processed/models/${model}.json`);
+  modelData = modelData.default || modelData;
+} catch (e) {
+  console.error(`Failed to load model data for ${model}:`, e);
+}
+
+// Prepare both datasets for client-side switching
+const simpleData = modelData?.simple || null;
+const cotData = modelData?.cot || null;
+
+function getColor(value: number): string {
+  const score = Math.max(0, Math.min(1, value));
+  const hue = score <= 0.5 ? 0 : (score - 0.5) * 2 * 120;
+  return `background-color: hsl(${hue}, 80%, 92%);`;
+}
+
+function formatPercent(value: number): string {
+  return `${(value * 100).toFixed(1)}%`;
+}
+---
+
+<Layout>
+  <div class="page-layout">
+    <ModelSidebar 
+      models={MODELS} 
+      currentModel={modelName} 
+      currentPage="model"
+      showTabs={true}
+      activeTab="simple"
+    />
+
+    <main class="main-content">
+      {!modelData ? (
+        <div class="error-state">
+          <p>No data available for model: <strong>{modelName}</strong></p>
+          <p>Run: <code>npm run preprocess</code></p>
+        </div>
+      ) : (
+        <>
+          <ContentHeader title={modelName} />
+
+          <!-- SIMPLE CONTENT -->
+          <div class="tab-content active" data-content="simple">
+            <div class="content-grid">
+              <section class="section">
+                <h2>Class Diagram</h2>
+                <PdfEmbed
+                  src={modelData.diagramPdf}
+                  title="Class Diagram"
+                  height="350px"
+                  available={true}
+                />
+              </section>
+
+              <section class="section">
+                <h2>Metrics</h2>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Cost</td>
+                      <td class="metric-value">${simpleData?.price?.price?.toFixed(2) || '—'}</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Syntax</td>
+                      <td class="metric-value">{simpleData?.generations ? ((simpleData.generations.filter((g: any) => (g.metrics?.syntaxErrors || 0) === 0).length / simpleData.generations.length) * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Multiplicities</td>
+                      <td class="metric-value">{simpleData?.generations ? ((simpleData.generations.filter((g: any) => (g.metrics?.multiplicitiesErrors || 0) === 0).length / simpleData.generations.length) * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Invariants</td>
+                      <td class="metric-value">{simpleData?.generations ? ((simpleData.generations.filter((g: any) => (g.metrics?.invariantsErrors || 0) === 0).length / simpleData.generations.length) * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3>Coverage</h3>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Classes</td>
+                      <td class="metric-value">{simpleData?.coverage?.classes ? (simpleData.coverage.classes * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Attributes</td>
+                      <td class="metric-value">{simpleData?.coverage?.attributes ? (simpleData.coverage.attributes * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Relationships</td>
+                      <td class="metric-value">{simpleData?.coverage?.relationships ? (simpleData.coverage.relationships * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Realism</td>
+                      <td class="metric-value">{simpleData?.judge?.successRate ? (simpleData.judge.successRate * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3>Diversity</h3>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Numeric</td>
+                      <td class="metric-value">{simpleData?.diversity?.numeric ? (simpleData.diversity.numeric * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">String Equals</td>
+                      <td class="metric-value">{simpleData?.diversity?.stringEquals ? (simpleData.diversity.stringEquals * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">String LV</td>
+                      <td class="metric-value">{simpleData?.diversity?.stringLv ? (simpleData.diversity.stringLv * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+
+            <div class="content-grid">
+              {simpleData?.grakel?.values?.length > 0 && (
+                <section class="section">
+                  <h2>Grakel Similarity</h2>
+                  <HeatmapMatrix labels={simpleData.grakel.labels} values={simpleData.grakel.values} />
+                </section>
+              )}
+              {simpleData?.shannon?.length > 0 && (
+                <section class="section">
+                  <h2>Shannon Entropy</h2>
+                  <ShannonBars data={simpleData.shannon} />
+                </section>
+              )}
+            </div>
+
+            <section class="section">
+              <h2>Generations</h2>
+              {simpleData?.generations ? (
+                <div class="table-wrapper">
+                  <table class="gen-table">
+                    <thead>
+                      <tr>
+                        <th>Gen</th>
+                        <th>Syntax</th>
+                        <th>Mult</th>
+                        <th>Inv</th>
+                        <th>Coverage</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {simpleData.generations.map((gen: any) => {
+                        const syntaxOk = (gen.metrics?.syntaxErrors || 0) === 0;
+                        const multOk = (gen.metrics?.multiplicitiesErrors || 0) === 0;
+                        const invOk = (gen.metrics?.invariantsErrors || 0) === 0;
+                        const coverage = gen.metrics?.coverage
+                          ? ((gen.metrics.coverage.classes || 0) + (gen.metrics.coverage.attributes || 0) + (gen.metrics.coverage.relationships || 0)) / 3
+                          : 0;
+                        return (
+                          <tr>
+                            <td class="gen-name">{gen.id}</td>
+                            <td class={syntaxOk ? "status-ok" : "status-error"}>{syntaxOk ? "OK" : gen.metrics?.syntaxErrors}</td>
+                            <td class={multOk ? "status-ok" : "status-error"}>{multOk ? "OK" : gen.metrics?.multiplicitiesErrors}</td>
+                            <td class={invOk ? "status-ok" : "status-error"}>{invOk ? "OK" : gen.metrics?.invariantsErrors}</td>
+                            <td style={getColor(coverage)}>{formatPercent(coverage)}</td>
+                            <td><a href={`/models/${model}/${gen.id}`} class="view-btn">View</a></td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p class="no-data">No generation data available</p>
+              )}
+            </section>
+          </div>
+
+          <!-- COT CONTENT -->
+          <div class="tab-content" data-content="cot">
+            <div class="content-grid">
+              <section class="section">
+                <h2>Class Diagram</h2>
+                <PdfEmbed
+                  src={modelData.diagramPdf}
+                  title="Class Diagram"
+                  height="350px"
+                  available={true}
+                />
+              </section>
+
+              <section class="section">
+                <h2>Metrics</h2>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Cost</td>
+                      <td class="metric-value">${cotData?.price?.price?.toFixed(2) || '—'}</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Syntax</td>
+                      <td class="metric-value">90.0%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Multiplicities</td>
+                      <td class="metric-value">90.0%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Invariants</td>
+                      <td class="metric-value">90.0%</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3>Coverage</h3>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Classes</td>
+                      <td class="metric-value">{cotData?.coverage?.classes ? (cotData.coverage.classes * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Attributes</td>
+                      <td class="metric-value">{cotData?.coverage?.attributes ? (cotData.coverage.attributes * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Relationships</td>
+                      <td class="metric-value">{cotData?.coverage?.relationships ? (cotData.coverage.relationships * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">Realism</td>
+                      <td class="metric-value">{cotData?.judge?.successRate ? (cotData.judge.successRate * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3>Diversity</h3>
+                <table class="metrics-table">
+                  <tbody>
+                    <tr>
+                      <td class="metric-label">Numeric</td>
+                      <td class="metric-value">{cotData?.diversity?.numeric ? (cotData.diversity.numeric * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">String Equals</td>
+                      <td class="metric-value">{cotData?.diversity?.stringEquals ? (cotData.diversity.stringEquals * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                    <tr>
+                      <td class="metric-label">String LV</td>
+                      <td class="metric-value">{cotData?.diversity?.stringLv ? (cotData.diversity.stringLv * 100).toFixed(1) : '—'}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+
+            <div class="content-grid">
+              {cotData?.grakel?.values?.length > 0 && (
+                <section class="section">
+                  <h2>Grakel Similarity</h2>
+                  <HeatmapMatrix labels={cotData.grakel.labels} values={cotData.grakel.values} />
+                </section>
+              )}
+              {cotData?.shannon?.length > 0 && (
+                <section class="section">
+                  <h2>Shannon Entropy</h2>
+                  <ShannonBars data={cotData.shannon} />
+                </section>
+              )}
+            </div>
+
+            <section class="section">
+              <h2>Generations</h2>
+              {cotData?.generations ? (
+                <div class="table-wrapper">
+                  <table class="gen-table">
+                    <thead>
+                      <tr>
+                        <th>Gen</th>
+                        <th>Baseline</th>
+                        <th>Boundary</th>
+                        <th>Complex</th>
+                        <th>Edge</th>
+                        <th>Invalid</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cotData.generations.map((gen: any) => (
+                        <tr>
+                          <td class="gen-name">{gen.id}</td>
+                          {["baseline", "boundary", "complex", "edge", "invalid"].map((cat) => {
+                            const catData = gen.categories?.find((c: any) => c.category === cat);
+                            const hasCode = !!catData?.code;
+                            return <td class={hasCode ? "status-ok" : "status-na"}>{hasCode ? "OK" : "—"}</td>;
+                          })}
+                          <td><a href={`/models/${model}/${gen.id}?type=cot`} class="view-btn">View</a></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p class="no-data">No generation data available</p>
+              )}
+            </section>
+          </div>
+        </>
+      )}
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .error-state {
+    padding: 2rem;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .error-state p {
+    color: #666;
+    margin: 0.5rem 0;
+  }
+
+  .error-state code {
+    background: #f0f0f0;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .no-data {
+    color: #888;
+    font-style: italic;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .page-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 1000px;
+  }
+
+
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section {
+    border: 1px solid #e0e0e0;
+  }
+
+  h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  h3 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .metrics-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.875rem;
+  }
+
+  .metrics-table .metric-label {
+    color: #555;
+  }
+
+  .metrics-table .metric-value {
+    text-align: right;
+    font-weight: 500;
+    color: #111;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .gen-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .gen-table th,
+  .gen-table td {
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.8rem;
+  }
+
+  .gen-table th {
+    background: #fafafa;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: #666;
+  }
+
+  .gen-name {
+    font-weight: 500;
+    color: #111;
+    text-align: left;
+  }
+
+  .status-ok {
+    color: #16a34a;
+  }
+
+  .status-error {
+    color: #dc2626;
+  }
+
+  .status-na {
+    color: #999;
+  }
+
+  .gen-table tbody tr:hover {
+    background: #fafafa;
+  }
+
+  .view-btn {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+
+  .view-btn:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-layout {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  // Tab switching logic - now driven by sidebar mode buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    const modeBtns = document.querySelectorAll('.mode-btn');
+    const contents = document.querySelectorAll('.tab-content[data-content]');
+    const gensSections = document.querySelectorAll('.gens-section');
+
+    // Check URL for initial tab
+    const params = new URLSearchParams(window.location.search);
+    const initialTab = params.get('type') || 'simple';
+    
+    // Set initial state
+    modeBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-mode') === initialTab);
+    });
+    contents.forEach(content => {
+      content.classList.toggle('active', content.getAttribute('data-content') === initialTab);
+    });
+    gensSections.forEach(section => {
+      section.classList.toggle('hidden', section.getAttribute('data-gens') !== initialTab);
+    });
+
+    // Handle mode button clicks
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-mode');
+        
+        // Update URL without reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('type', targetTab || 'simple');
+        window.history.pushState({}, '', url.toString());
+        
+        // Update active states
+        modeBtns.forEach(b => b.classList.toggle('active', b === btn));
+        contents.forEach(c => c.classList.toggle('active', c.getAttribute('data-content') === targetTab));
+        gensSections.forEach(section => {
+          section.classList.toggle('hidden', section.getAttribute('data-gens') !== targetTab);
+        });
+      });
+    });
+  });
+</script>

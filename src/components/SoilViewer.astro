@@ -1,0 +1,100 @@
+---
+interface Props {
+  code: string;
+  maxHeight?: string;
+}
+
+const { code, maxHeight = "400px" } = Astro.props;
+
+// Simple syntax highlighting for .soil files
+function highlightSoil(code: string): string {
+  return (
+    code
+      // Keywords
+      .replace(
+        /\b(new|insert|delete|set|destroy|create|between|and|for|in|do|end|if|then|else|endif)\b/g,
+        '<span class="keyword">$1</span>'
+      )
+      // Class names (after 'new' or ':')
+      .replace(/(:)\s*([A-Z][a-zA-Z0-9]*)/g, '$1 <span class="class">$2</span>')
+      .replace(
+        /(new)\s+([A-Z][a-zA-Z0-9]*)/g,
+        '<span class="keyword">$1</span> <span class="class">$2</span>'
+      )
+      // Strings
+      .replace(/'([^']*)'/g, "<span class=\"string\">'$1'</span>")
+      // Numbers
+      .replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>')
+      // Comments
+      .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
+      // Booleans
+      .replace(/\b(true|false)\b/g, '<span class="boolean">$1</span>')
+  );
+}
+
+const highlightedCode = highlightSoil(code || "");
+---
+
+<div class="soil-viewer" style={`max-height: ${maxHeight};`}>
+  <div class="header">
+    <span class="file-type">.soil</span>
+  </div>
+  <pre class="code-block"><code set:html={highlightedCode} /></pre>
+</div>
+
+<style>
+  .soil-viewer {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #1e1e2e;
+  }
+
+  .header {
+    background: #313244;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #45475a;
+  }
+
+  .file-type {
+    font-size: 0.75rem;
+    color: #a6adc8;
+    font-family: monospace;
+  }
+
+  .code-block {
+    margin: 0;
+    padding: 1rem;
+    overflow: auto;
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #cdd6f4;
+  }
+
+  .code-block :global(.keyword) {
+    color: #cba6f7;
+    font-weight: 500;
+  }
+
+  .code-block :global(.class) {
+    color: #89b4fa;
+  }
+
+  .code-block :global(.string) {
+    color: #a6e3a1;
+  }
+
+  .code-block :global(.number) {
+    color: #fab387;
+  }
+
+  .code-block :global(.comment) {
+    color: #6c7086;
+    font-style: italic;
+  }
+
+  .code-block :global(.boolean) {
+    color: #f9e2af;
+  }
+</style>
