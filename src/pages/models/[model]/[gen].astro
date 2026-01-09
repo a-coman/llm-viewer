@@ -55,6 +55,18 @@ try {
   console.error("Error loading generation data:", e);
 }
 
+// Load model data to get class diagram PDF
+let classDiagramPdf = "";
+try {
+  const modelData = await import(
+    `../../../data/processed/models/${model}.json`
+  );
+  const data = modelData.default || modelData;
+  classDiagramPdf = data?.diagramPdf || "";
+} catch (e) {
+  console.error("Error loading model data for class diagram:", e);
+}
+
 const hasCotData = genNum <= 6 && cotData !== null;
 ---
 
@@ -100,7 +112,7 @@ const hasCotData = genNum <= 6 && cotData !== null;
       <>
         {/* Simple Content */}
         <div class="tab-content active" data-content="simple">
-          <GenerationView data={simpleData} />
+          <GenerationView data={simpleData} classDiagramPdf={classDiagramPdf} />
         </div>
 
         {/* CoT Content */}
@@ -119,6 +131,7 @@ const hasCotData = genNum <= 6 && cotData !== null;
                     data={catData}
                     label={cat}
                     showJudge={false}
+                    classDiagramPdf={classDiagramPdf}
                   />
                 </div>
               );

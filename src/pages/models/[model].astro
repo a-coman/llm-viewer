@@ -32,13 +32,12 @@ try {
 const simpleData = modelData?.simple || null;
 const cotData = modelData?.cot || null;
 
-// Helper to calculate validation rates
-function getValidationRate(generations: any[], errorKey: string): string {
-  if (!generations?.length) return "—";
-  const successCount = generations.filter(
-    (g: any) => (g.metrics?.[errorKey] || 0) === 0
-  ).length;
-  return `${((successCount / generations.length) * 100).toFixed(1)}%`;
+// Helper to get validation rate directly from summary (for consistency with dashboard)
+// The summary already contains the aggregated rate as a decimal (e.g., 0.99 = 99%)
+function getValidationRateFromSummary(summary: any, key: string): string {
+  const value = summary?.[key];
+  if (value === null || value === undefined) return "—";
+  return formatPercent(value);
 }
 
 // Helper to calculate average coverage
@@ -68,12 +67,13 @@ function getAvgCoverage(gen: any): number {
       <>
         {/* Simple Content */}
         <div class="tab-content active" data-content="simple">
-          <div class="content-grid">
+          <div class="content-grid wide-left">
             <section class="section">
-              <h2>Class Diagram</h2>
+              <h2>Model Diagram</h2>
               <PdfEmbed
                 src={modelData.diagramPdf}
-                title="Class Diagram"
+                title="Model Diagram"
+                height="500px"
                 available={true}
               />
             </section>
@@ -85,16 +85,18 @@ function getAvgCoverage(gen: any): number {
                   <tr>
                     <>
                       <td>Cost</td>
-                      <td>${simpleData?.price?.price?.toFixed(2) || "—"}</td>
+                      <td>
+                        ${simpleData?.summary?.price?.price?.toFixed(2) || "—"}
+                      </td>
                     </>
                   </tr>
                   <tr>
                     <>
                       <td>Syntax</td>
                       <td>
-                        {getValidationRate(
-                          simpleData?.generations,
-                          "syntaxErrors"
+                        {getValidationRateFromSummary(
+                          simpleData?.summary,
+                          "syntax"
                         )}
                       </td>
                     </>
@@ -103,9 +105,9 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Multiplicities</td>
                       <td>
-                        {getValidationRate(
-                          simpleData?.generations,
-                          "multiplicitiesErrors"
+                        {getValidationRateFromSummary(
+                          simpleData?.summary,
+                          "multiplicities"
                         )}
                       </td>
                     </>
@@ -114,9 +116,9 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Invariants</td>
                       <td>
-                        {getValidationRate(
-                          simpleData?.generations,
-                          "invariantsErrors"
+                        {getValidationRateFromSummary(
+                          simpleData?.summary,
+                          "invariants"
                         )}
                       </td>
                     </>
@@ -131,8 +133,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Classes</td>
                       <td>
-                        {simpleData?.coverage?.classes
-                          ? formatPercent(simpleData.coverage.classes)
+                        {simpleData?.summary?.coverage?.classes != null
+                          ? formatPercent(simpleData.summary.coverage.classes)
                           : "—"}
                       </td>
                     </>
@@ -141,8 +143,10 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Attributes</td>
                       <td>
-                        {simpleData?.coverage?.attributes
-                          ? formatPercent(simpleData.coverage.attributes)
+                        {simpleData?.summary?.coverage?.attributes != null
+                          ? formatPercent(
+                              simpleData.summary.coverage.attributes
+                            )
                           : "—"}
                       </td>
                     </>
@@ -151,8 +155,10 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Relationships</td>
                       <td>
-                        {simpleData?.coverage?.relationships
-                          ? formatPercent(simpleData.coverage.relationships)
+                        {simpleData?.summary?.coverage?.relationships != null
+                          ? formatPercent(
+                              simpleData.summary.coverage.relationships
+                            )
                           : "—"}
                       </td>
                     </>
@@ -161,7 +167,7 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Realism</td>
                       <td>
-                        {simpleData?.judge?.successRate
+                        {simpleData?.judge?.successRate != null
                           ? formatPercent(simpleData.judge.successRate)
                           : "—"}
                       </td>
@@ -177,8 +183,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Numeric</td>
                       <td>
-                        {simpleData?.diversity?.numeric
-                          ? formatPercent(simpleData.diversity.numeric)
+                        {simpleData?.summary?.diversity?.numeric != null
+                          ? formatPercent(simpleData.summary.diversity.numeric)
                           : "—"}
                       </td>
                     </>
@@ -187,8 +193,10 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>String Equals</td>
                       <td>
-                        {simpleData?.diversity?.stringEquals
-                          ? formatPercent(simpleData.diversity.stringEquals)
+                        {simpleData?.summary?.diversity?.stringEquals != null
+                          ? formatPercent(
+                              simpleData.summary.diversity.stringEquals
+                            )
                           : "—"}
                       </td>
                     </>
@@ -197,8 +205,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>String LV</td>
                       <td>
-                        {simpleData?.diversity?.stringLv
-                          ? formatPercent(simpleData.diversity.stringLv)
+                        {simpleData?.summary?.diversity?.stringLv != null
+                          ? formatPercent(simpleData.summary.diversity.stringLv)
                           : "—"}
                       </td>
                     </>
@@ -208,20 +216,13 @@ function getAvgCoverage(gen: any): number {
             </section>
           </div>
 
-          {simpleData?.grakel?.values?.length > 0 && (
+          {simpleData?.grakel?.kernel?.values?.length > 0 && (
             <section class="section">
               <h2>Grakel Similarity</h2>
               <HeatmapMatrix
-                labels={simpleData.grakel.labels}
-                values={simpleData.grakel.values}
+                labels={simpleData.grakel.kernel.labels}
+                values={simpleData.grakel.kernel.values}
               />
-            </section>
-          )}
-
-          {simpleData?.shannon?.length > 0 && (
-            <section class="section">
-              <h2>Shannon Entropy</h2>
-              <ShannonBars data={simpleData.shannon} />
             </section>
           )}
 
@@ -241,13 +242,13 @@ function getAvgCoverage(gen: any): number {
 
         {/* CoT Content */}
         <div class="tab-content" data-content="cot">
-          <div class="content-grid">
+          <div class="content-grid wide-left">
             <section class="section">
-              <h2>Class Diagram</h2>
+              <h2>Model Diagram</h2>
               <PdfEmbed
                 src={modelData.diagramPdf}
-                title="Class Diagram"
-                height="350px"
+                title="Model Diagram"
+                height="500px"
                 available={true}
               />
             </section>
@@ -259,16 +260,18 @@ function getAvgCoverage(gen: any): number {
                   <tr>
                     <>
                       <td>Cost</td>
-                      <td>${cotData?.price?.price?.toFixed(2) || "—"}</td>
+                      <td>
+                        ${cotData?.summary?.price?.price?.toFixed(2) || "—"}
+                      </td>
                     </>
                   </tr>
                   <tr>
                     <>
                       <td>Syntax</td>
                       <td>
-                        {getValidationRate(
-                          cotData?.generations,
-                          "syntaxErrors"
+                        {getValidationRateFromSummary(
+                          cotData?.summary,
+                          "syntax"
                         )}
                       </td>
                     </>
@@ -277,9 +280,9 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Multiplicities</td>
                       <td>
-                        {getValidationRate(
-                          cotData?.generations,
-                          "multiplicitiesErrors"
+                        {getValidationRateFromSummary(
+                          cotData?.summary,
+                          "multiplicities"
                         )}
                       </td>
                     </>
@@ -288,9 +291,9 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Invariants</td>
                       <td>
-                        {getValidationRate(
-                          cotData?.generations,
-                          "invariantsErrors"
+                        {getValidationRateFromSummary(
+                          cotData?.summary,
+                          "invariants"
                         )}
                       </td>
                     </>
@@ -305,8 +308,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Classes</td>
                       <td>
-                        {cotData?.coverage?.classes
-                          ? formatPercent(cotData.coverage.classes)
+                        {cotData?.summary?.coverage?.classes != null
+                          ? formatPercent(cotData.summary.coverage.classes)
                           : "—"}
                       </td>
                     </>
@@ -315,8 +318,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Attributes</td>
                       <td>
-                        {cotData?.coverage?.attributes
-                          ? formatPercent(cotData.coverage.attributes)
+                        {cotData?.summary?.coverage?.attributes != null
+                          ? formatPercent(cotData.summary.coverage.attributes)
                           : "—"}
                       </td>
                     </>
@@ -325,8 +328,10 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Relationships</td>
                       <td>
-                        {cotData?.coverage?.relationships
-                          ? formatPercent(cotData.coverage.relationships)
+                        {cotData?.summary?.coverage?.relationships != null
+                          ? formatPercent(
+                              cotData.summary.coverage.relationships
+                            )
                           : "—"}
                       </td>
                     </>
@@ -335,7 +340,7 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Realism</td>
                       <td>
-                        {cotData?.judge?.successRate
+                        {cotData?.judge?.successRate != null
                           ? formatPercent(cotData.judge.successRate)
                           : "—"}
                       </td>
@@ -351,8 +356,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>Numeric</td>
                       <td>
-                        {cotData?.diversity?.numeric
-                          ? formatPercent(cotData.diversity.numeric)
+                        {cotData?.summary?.diversity?.numeric != null
+                          ? formatPercent(cotData.summary.diversity.numeric)
                           : "—"}
                       </td>
                     </>
@@ -361,8 +366,10 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>String Equals</td>
                       <td>
-                        {cotData?.diversity?.stringEquals
-                          ? formatPercent(cotData.diversity.stringEquals)
+                        {cotData?.summary?.diversity?.stringEquals != null
+                          ? formatPercent(
+                              cotData.summary.diversity.stringEquals
+                            )
                           : "—"}
                       </td>
                     </>
@@ -371,8 +378,8 @@ function getAvgCoverage(gen: any): number {
                     <>
                       <td>String LV</td>
                       <td>
-                        {cotData?.diversity?.stringLv
-                          ? formatPercent(cotData.diversity.stringLv)
+                        {cotData?.summary?.diversity?.stringLv != null
+                          ? formatPercent(cotData.summary.diversity.stringLv)
                           : "—"}
                       </td>
                     </>
@@ -382,20 +389,13 @@ function getAvgCoverage(gen: any): number {
             </section>
           </div>
 
-          {cotData?.grakel?.values?.length > 0 && (
+          {cotData?.grakel?.kernel?.values?.length > 0 && (
             <section class="section">
               <h2>Grakel Similarity</h2>
               <HeatmapMatrix
-                labels={cotData.grakel.labels}
-                values={cotData.grakel.values}
+                labels={cotData.grakel.kernel.labels}
+                values={cotData.grakel.kernel.values}
               />
-            </section>
-          )}
-
-          {cotData?.shannon?.length > 0 && (
-            <section class="section">
-              <h2>Shannon Entropy</h2>
-              <ShannonBars data={cotData.shannon} />
             </section>
           )}
 
@@ -406,6 +406,7 @@ function getAvgCoverage(gen: any): number {
                 data={cotData.generations}
                 type="generations"
                 modelSlug={model}
+                genType="cot"
               />
             ) : (
               <p class="no-data">No generation data available</p>

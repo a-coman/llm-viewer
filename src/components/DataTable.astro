@@ -6,9 +6,10 @@ interface Props {
   type: "models" | "generations";
   mode?: "simple" | "cot"; // For extracting data from simple/cot sub-objects (model comparison)
   modelSlug?: string; // For generation links
+  genType?: "simple" | "cot"; // Type of generation data
 }
 
-const { data, type, mode, modelSlug } = Astro.props;
+const { data, type, mode, modelSlug, genType = "simple" } = Astro.props;
 
 // Column definitions - all columns for both tables
 const columns = [
@@ -21,7 +22,7 @@ const columns = [
   { key: "instantiation.classes", label: "Inst.Cls", isCount: true },
   { key: "instantiation.attributes", label: "Inst.Attr", isCount: true },
   { key: "instantiation.relationships", label: "Inst.Rel", isCount: true },
-  { key: "realism", label: "Realism" },
+  { key: "realism", label: "Realism", isRealism: true },
   { key: "diversity.numeric", label: "Num.Eq" },
   { key: "diversity.stringEquals", label: "Str.Eq" },
   { key: "diversity.stringLv", label: "Str.LV" },
@@ -34,21 +35,48 @@ function getValue(obj: any, path: string): any {
 }
 
 // Get the data source for an item (handles both model comparison and generations)
-function getDataSource(item: any): any {
+function getDataSource(item: any, isGeneration: boolean, isCot: boolean): any {
   // For model comparison with mode, get the simple/cot sub-object
   if (mode && item[mode]) {
     return item[mode];
   }
 
-  // For generations, data is in metrics sub-object
-  if (item.metrics) {
+  // For CoT generations, aggregate from categories
+  if (isGeneration && isCot && item.categories) {
+    // Aggregate metrics across all categories (use baseline as primary, or first category)
+    const baseline =
+      item.categories.find((c: any) => c.category === "baseline") ||
+      item.categories[0];
+    if (!baseline) return null;
+
+    const errors = baseline.metrics?.errors || baseline.metrics || {};
     return {
-      syntax: item.metrics.syntaxErrors,
-      multiplicities: item.metrics.multiplicitiesErrors,
-      invariants: item.metrics.invariantsErrors,
+      syntax: errors.syntaxErrors,
+      syntaxTotal: errors.syntaxTotal,
+      multiplicities: errors.multiplicitiesErrors,
+      multiplicitiesTotal: errors.multiplicitiesTotal,
+      invariants: errors.invariantsErrors,
+      invariantsTotal: errors.invariantsTotal,
+      coverage: baseline.metrics?.coverage,
+      instantiation: baseline.metrics?.instantiation,
+      realism: item.judge?.response ?? null, // Text response for generations
+      diversity: item.allCategoriesDiversity || null,
+    };
+  }
+
+  // For simple generations, data is in metrics sub-object
+  if (isGeneration && item.metrics) {
+    const errors = item.metrics.errors || item.metrics;
+    return {
+      syntax: errors.syntaxErrors,
+      syntaxTotal: errors.syntaxTotal,
+      multiplicities: errors.multiplicitiesErrors,
+      multiplicitiesTotal: errors.multiplicitiesTotal,
+      invariants: errors.invariantsErrors,
+      invariantsTotal: errors.invariantsTotal,
       coverage: item.metrics.coverage,
       instantiation: item.metrics.instantiation,
-      realism: item.judge?.successRate ?? null,
+      realism: item.judge?.response ?? null, // Text response for generations
       diversity: item.metrics.diversity,
     };
   }
@@ -57,12 +85,36 @@ function getDataSource(item: any): any {
 }
 
 // Format value based on column type
-function formatValue(value: any, col: any, isGeneration: boolean): string {
+function formatValue(
+  value: any,
+  col: any,
+  isGeneration: boolean,
+  source: any
+): string {
   if (value === null || value === undefined) return "—";
 
-  // For generations, validation columns are error counts (0 = OK)
+  // For realism in generations, show text (Realistic/Unrealistic/Unknown)
+  if (isGeneration && col.isRealism) {
+    if (typeof value === "string") {
+      return value; // Already a string like "Realistic", "Unrealistic", "Unknown"
+    }
+    return "—";
+  }
+
+  // For realism in models, show percentage
+  if (!isGeneration && col.isRealism) {
+    return formatPercent(value);
+  }
+
+  // For generations, validation columns show percentages (validation rate = 1 - errors/total)
   if (isGeneration && col.isValidation) {
-    return value === 0 ? "OK" : String(value);
+    const totalKey = col.key + "Total";
+    const total = source?.[totalKey];
+    if (total !== null && total !== undefined && total > 0) {
+      const rate = 1 - value / total;
+      return formatPercent(rate);
+    }
+    return value === 0 ? "100.00%" : "—";
   }
 
   // For models, validation columns are rates (percentages)
@@ -81,6 +133,11 @@ function formatValue(value: any, col: any, isGeneration: boolean): string {
 
 // Get CSS class for validation cells
 function getStatusClass(value: any, col: any, isGeneration: boolean): string {
+  if (isGeneration && col.isRealism) {
+    if (value === "Realistic") return "status-ok";
+    if (value === "Unrealistic") return "status-error";
+    return "";
+  }
   if (!isGeneration || !col.isValidation) return "";
   if (value === null || value === undefined) return "";
   return value === 0 ? "status-ok" : "status-error";
@@ -93,6 +150,9 @@ function getCellStyle(value: any, col: any, isGeneration: boolean): string {
   // Validation columns in generations use status classes, not colors
   if (isGeneration && col.isValidation) return "";
 
+  // Realism in generations uses status classes
+  if (isGeneration && col.isRealism) return "";
+
   // Count columns don't get colored
   if (col.isCount) return "";
 
@@ -101,6 +161,7 @@ function getCellStyle(value: any, col: any, isGeneration: boolean): string {
 }
 
 const isGeneration = type === "generations";
+const isCot = genType === "cot";
 ---
 
 <div class="table-wrapper">
@@ -115,12 +176,15 @@ const isGeneration = type === "generations";
       {
         data.map((item: any) => {
           const name = item.name || item.id;
-          const href =
+          const baseHref =
             type === "models"
               ? `/models/${name.toLowerCase()}`
               : `/models/${modelSlug}/${item.id}`;
+          // Add ?type=cot query param for CoT data (either from genType or mode)
+          const isCotLink = isCot || mode === "cot";
+          const href = isCotLink ? `${baseHref}?type=cot` : baseHref;
 
-          const source = getDataSource(item);
+          const source = getDataSource(item, isGeneration, isCot);
 
           return (
             <tr>
@@ -131,7 +195,12 @@ const isGeneration = type === "generations";
                 const value = getValue(source, col.key);
                 const statusClass = getStatusClass(value, col, isGeneration);
                 const style = getCellStyle(value, col, isGeneration);
-                const displayValue = formatValue(value, col, isGeneration);
+                const displayValue = formatValue(
+                  value,
+                  col,
+                  isGeneration,
+                  source
+                );
 
                 return (
                   <td
