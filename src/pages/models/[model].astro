@@ -3,6 +3,7 @@ import PageLayout from "../../components/PageLayout.astro";
 import HeatmapMatrix from "../../components/HeatmapMatrix.astro";
 import ShannonBars from "../../components/ShannonBars.astro";
 import PdfEmbed from "../../components/PdfEmbed.astro";
+import DataTable from "../../components/DataTable.astro";
 import {
   MODELS_LOWER,
   COT_CATEGORIES,
@@ -227,54 +228,11 @@ function getAvgCoverage(gen: any): number {
           <section class="section">
             <h2>Generations</h2>
             {simpleData?.generations ? (
-              <div class="table-wrapper">
-                <table class="gen-table">
-                  <thead>
-                    <tr>
-                      <th>Gen</th>
-                      <th>Syntax</th>
-                      <th>Mult</th>
-                      <th>Inv</th>
-                      <th>Coverage</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {simpleData.generations.map((gen: any) => {
-                      const syntaxOk = (gen.metrics?.syntaxErrors || 0) === 0;
-                      const multOk =
-                        (gen.metrics?.multiplicitiesErrors || 0) === 0;
-                      const invOk = (gen.metrics?.invariantsErrors || 0) === 0;
-                      const coverage = getAvgCoverage(gen);
-                      return (
-                        <tr>
-                          <td class="gen-name">{gen.id}</td>
-                          <td class={syntaxOk ? "status-ok" : "status-error"}>
-                            {syntaxOk ? "OK" : gen.metrics?.syntaxErrors}
-                          </td>
-                          <td class={multOk ? "status-ok" : "status-error"}>
-                            {multOk ? "OK" : gen.metrics?.multiplicitiesErrors}
-                          </td>
-                          <td class={invOk ? "status-ok" : "status-error"}>
-                            {invOk ? "OK" : gen.metrics?.invariantsErrors}
-                          </td>
-                          <td style={getColor(coverage)}>
-                            {formatPercent(coverage)}
-                          </td>
-                          <td>
-                            <a
-                              href={`/models/${model}/${gen.id}`}
-                              class="view-btn"
-                            >
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+              <DataTable
+                data={simpleData.generations}
+                type="generations"
+                modelSlug={model}
+              />
             ) : (
               <p class="no-data">No generation data available</p>
             )}
@@ -444,45 +402,11 @@ function getAvgCoverage(gen: any): number {
           <section class="section">
             <h2>Generations</h2>
             {cotData?.generations ? (
-              <div class="table-wrapper">
-                <table class="gen-table">
-                  <thead>
-                    <tr>
-                      <th>Gen</th>
-                      {COT_CATEGORIES.map((cat) => (
-                        <th>{cat}</th>
-                      ))}
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cotData.generations.map((gen: any) => (
-                      <tr>
-                        <td class="gen-name">{gen.id}</td>
-                        {COT_CATEGORIES.map((cat) => {
-                          const catData = gen.categories?.find(
-                            (c: any) => c.category === cat
-                          );
-                          const hasCode = !!catData?.code;
-                          return (
-                            <td class={hasCode ? "status-ok" : "status-na"}>
-                              {hasCode ? "OK" : "—"}
-                            </td>
-                          );
-                        })}
-                        <td>
-                          <a
-                            href={`/models/${model}/${gen.id}?type=cot`}
-                            class="view-btn"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <DataTable
+                data={cotData.generations}
+                type="generations"
+                modelSlug={model}
+              />
             ) : (
               <p class="no-data">No generation data available</p>
             )}

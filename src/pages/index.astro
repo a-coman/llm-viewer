@@ -1,5 +1,6 @@
 ---
 import PageLayout from "../components/PageLayout.astro";
+import DataTable from "../components/DataTable.astro";
 import {
   MODELS,
   getColor,
@@ -180,73 +181,13 @@ function getAvgCoverage(cov: any): number | null {
         </section>
 
         <section class="section">
-          <h2>Model Comparison</h2>
-          <div class="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th rowspan="2" class="sticky-col">
-                    Model
-                  </th>
-                  <th colspan="4" class="group-header simple">
-                    Simple
-                  </th>
-                  <th colspan="4" class="group-header cot">
-                    CoT
-                  </th>
-                </tr>
-                <tr>
-                  <>
-                    <th class="simple">Cost</th>
-                    <th class="simple">Syntax</th>
-                    <th class="simple">Coverage</th>
-                    <th class="simple">Realism</th>
-                  </>
-                  <>
-                    <th class="cot">Cost</th>
-                    <th class="cot">Syntax</th>
-                    <th class="cot">Coverage</th>
-                    <th class="cot">Realism</th>
-                  </>
-                </tr>
-              </thead>
-              <tbody>
-                {models.map((m: any) => (
-                  <tr>
-                    <td class="model-name sticky-col">
-                      <a href={`/models/${m.name.toLowerCase()}`}>{m.name}</a>
-                    </td>
-                    <td style={getColor(1 - (m.simple?.price || 0) / 10)}>
-                      {formatCurrency(m.simple?.price)}
-                    </td>
-                    <td style={getColor(m.simple?.syntax || 0)}>
-                      {formatPercent(m.simple?.syntax)}
-                    </td>
-                    <td
-                      style={getColor(getAvgCoverage(m.simple?.coverage) || 0)}
-                    >
-                      {formatPercent(getAvgCoverage(m.simple?.coverage))}
-                    </td>
-                    <td style={getColor(m.simple?.realism || 0)}>
-                      {formatPercent(m.simple?.realism)}
-                    </td>
-                    <td style={getColor(1 - (m.cot?.price || 0) / 20)}>
-                      {formatCurrency(m.cot?.price)}
-                    </td>
-                    <td style={getColor(m.cot?.syntax || 0)}>
-                      {formatPercent(m.cot?.syntax)}
-                    </td>
-                    <td style={getColor(getAvgCoverage(m.cot?.coverage) || 0)}>
-                      {formatPercent(getAvgCoverage(m.cot?.coverage))}
-                    </td>
-                    <td style={getColor(m.cot?.realism || 0)}>
-                      {formatPercent(m.cot?.realism)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <h2>Simple - Model Comparison</h2>
+          <DataTable data={models} type="models" mode="simple" />
+        </section>
+
+        <section class="section">
+          <h2>CoT - Model Comparison</h2>
+          <DataTable data={models} type="models" mode="cot" />
         </section>
       </>
     )
@@ -254,16 +195,13 @@ function getAvgCoverage(cov: any): number | null {
 </PageLayout>
 
 <style>
-  .summary-table,
-  table {
+  .summary-table {
     width: 100%;
     border-collapse: collapse;
   }
 
   .summary-table th,
-  .summary-table td,
-  th,
-  td {
+  .summary-table td {
     padding: 0.5rem 1rem;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
@@ -299,66 +237,10 @@ function getAvgCoverage(cov: any): number | null {
     color: #333;
     padding-left: 1.25rem;
   }
+
   .metric-value {
     text-align: center;
     font-weight: 500;
     color: #111;
-  }
-
-  th {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-    color: #666;
-    background: #fafafa;
-    text-align: center;
-  }
-
-  .group-header {
-    font-size: 0.7rem;
-  }
-  .group-header.simple {
-    background: #f0f4ff;
-    color: #333;
-  }
-  .group-header.cot {
-    background: #f5f0ff;
-    color: #333;
-  }
-  th.simple {
-    background: #f8faff;
-  }
-  th.cot {
-    background: #faf8ff;
-  }
-
-  .model-name {
-    text-align: left;
-    font-weight: 500;
-  }
-  .model-name a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  .model-name a:hover {
-    text-decoration: underline;
-  }
-
-  td {
-    text-align: center;
-  }
-  tbody tr:hover {
-    background: #fafafa;
-  }
-
-  .sticky-col {
-    position: sticky;
-    left: 0;
-    background: white;
-    z-index: 1;
-  }
-  tbody tr:hover .sticky-col {
-    background: #fafafa;
   }
 </style>

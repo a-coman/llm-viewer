@@ -1,0 +1,223 @@
+---
+import { getColor, formatPercent } from "../lib/constants";
+
+interface Props {
+  data: any[];
+  type: "models" | "generations";
+  mode?: "simple" | "cot"; // For extracting data from simple/cot sub-objects (model comparison)
+  modelSlug?: string; // For generation links
+}
+
+const { data, type, mode, modelSlug } = Astro.props;
+
+// Column definitions - all columns for both tables
+const columns = [
+  { key: "syntax", label: "Syntax", isValidation: true },
+  { key: "multiplicities", label: "Mult", isValidation: true },
+  { key: "invariants", label: "Inv", isValidation: true },
+  { key: "coverage.classes", label: "Cov.Cls" },
+  { key: "coverage.attributes", label: "Cov.Attr" },
+  { key: "coverage.relationships", label: "Cov.Rel" },
+  { key: "instantiation.classes", label: "Inst.Cls", isCount: true },
+  { key: "instantiation.attributes", label: "Inst.Attr", isCount: true },
+  { key: "instantiation.relationships", label: "Inst.Rel", isCount: true },
+  { key: "realism", label: "Realism" },
+  { key: "diversity.numeric", label: "Num.Eq" },
+  { key: "diversity.stringEquals", label: "Str.Eq" },
+  { key: "diversity.stringLv", label: "Str.LV" },
+];
+
+// Get nested value from object using dot notation
+function getValue(obj: any, path: string): any {
+  if (!obj) return null;
+  return path.split(".").reduce((acc, part) => acc?.[part], obj);
+}
+
+// Get the data source for an item (handles both model comparison and generations)
+function getDataSource(item: any): any {
+  // For model comparison with mode, get the simple/cot sub-object
+  if (mode && item[mode]) {
+    return item[mode];
+  }
+
+  // For generations, data is in metrics sub-object
+  if (item.metrics) {
+    return {
+      syntax: item.metrics.syntaxErrors,
+      multiplicities: item.metrics.multiplicitiesErrors,
+      invariants: item.metrics.invariantsErrors,
+      coverage: item.metrics.coverage,
+      instantiation: item.metrics.instantiation,
+      realism: item.judge?.successRate ?? null,
+      diversity: item.metrics.diversity,
+    };
+  }
+
+  return item;
+}
+
+// Format value based on column type
+function formatValue(value: any, col: any, isGeneration: boolean): string {
+  if (value === null || value === undefined) return "—";
+
+  // For generations, validation columns are error counts (0 = OK)
+  if (isGeneration && col.isValidation) {
+    return value === 0 ? "OK" : String(value);
+  }
+
+  // For models, validation columns are rates (percentages)
+  if (!isGeneration && col.isValidation) {
+    return formatPercent(value);
+  }
+
+  // Instantiation columns show raw counts (rounded for model averages)
+  if (col.isCount) {
+    return isGeneration ? String(value) : value.toFixed(1);
+  }
+
+  // Everything else is a percentage
+  return formatPercent(value);
+}
+
+// Get CSS class for validation cells
+function getStatusClass(value: any, col: any, isGeneration: boolean): string {
+  if (!isGeneration || !col.isValidation) return "";
+  if (value === null || value === undefined) return "";
+  return value === 0 ? "status-ok" : "status-error";
+}
+
+// Get background color style
+function getCellStyle(value: any, col: any, isGeneration: boolean): string {
+  if (value === null || value === undefined) return "";
+
+  // Validation columns in generations use status classes, not colors
+  if (isGeneration && col.isValidation) return "";
+
+  // Count columns don't get colored
+  if (col.isCount) return "";
+
+  // Apply color for percentage values
+  return getColor(value);
+}
+
+const isGeneration = type === "generations";
+---
+
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="sticky-col name-header">Name</th>
+        {columns.map((col) => <th title={col.label}>{col.label}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        data.map((item: any) => {
+          const name = item.name || item.id;
+          const href =
+            type === "models"
+              ? `/models/${name.toLowerCase()}`
+              : `/models/${modelSlug}/${item.id}`;
+
+          const source = getDataSource(item);
+
+          return (
+            <tr>
+              <td class="name-cell sticky-col">
+                <a href={href}>{name}</a>
+              </td>
+              {columns.map((col) => {
+                const value = getValue(source, col.key);
+                const statusClass = getStatusClass(value, col, isGeneration);
+                const style = getCellStyle(value, col, isGeneration);
+                const displayValue = formatValue(value, col, isGeneration);
+
+                return (
+                  <td
+                    class={statusClass || undefined}
+                    style={style || undefined}
+                  >
+                    {displayValue}
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.4rem 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+  }
+
+  .data-table th {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: #666;
+    background: #fafafa;
+  }
+
+  .data-table .name-header,
+  .data-table .name-cell {
+    text-align: left !important;
+  }
+
+  .data-table .name-cell {
+    font-weight: 500;
+  }
+
+  .name-cell a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .name-cell a:hover {
+    text-decoration: underline;
+  }
+
+  .sticky-col {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 1;
+  }
+
+  tbody tr:hover {
+    background: #fafafa;
+  }
+
+  tbody tr:hover .sticky-col {
+    background: #fafafa;
+  }
+
+  .status-ok {
+    color: #22863a;
+    font-weight: 500;
+  }
+
+  .status-error {
+    color: #cb2431;
+    font-weight: 500;
+  }
+</style>

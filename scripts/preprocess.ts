@@ -1255,6 +1255,23 @@ async function preprocess() {
           attributes: simpleAvgCoverage.attributes || 0,
           relationships: simpleAvgCoverage.relationships || 0,
         },
+        instantiation: {
+          classes:
+            simpleGenerations.reduce(
+              (acc, g) => acc + (g.metrics.instantiation?.classes || 0),
+              0
+            ) / simpleGenerations.length,
+          attributes:
+            simpleGenerations.reduce(
+              (acc, g) => acc + (g.metrics.instantiation?.attributes || 0),
+              0
+            ) / simpleGenerations.length,
+          relationships:
+            simpleGenerations.reduce(
+              (acc, g) => acc + (g.metrics.instantiation?.relationships || 0),
+              0
+            ) / simpleGenerations.length,
+        },
         realism: judgeResult.successRate || 0,
         diversity: {
           numeric: simpleDiv.numeric || 0,
@@ -1271,6 +1288,44 @@ async function preprocess() {
           classes: cotAvgCoverage.classes || 0,
           attributes: cotAvgCoverage.attributes || 0,
           relationships: cotAvgCoverage.relationships || 0,
+        },
+        instantiation: {
+          classes:
+            cotGenerations.reduce(
+              (acc, g) =>
+                acc +
+                g.categories.reduce(
+                  (catAcc: number, c: any) =>
+                    catAcc + (c.metrics?.instantiation?.classes || 0),
+                  0
+                ) /
+                  g.categories.length,
+              0
+            ) / cotGenerations.length,
+          attributes:
+            cotGenerations.reduce(
+              (acc, g) =>
+                acc +
+                g.categories.reduce(
+                  (catAcc: number, c: any) =>
+                    catAcc + (c.metrics?.instantiation?.attributes || 0),
+                  0
+                ) /
+                  g.categories.length,
+              0
+            ) / cotGenerations.length,
+          relationships:
+            cotGenerations.reduce(
+              (acc, g) =>
+                acc +
+                g.categories.reduce(
+                  (catAcc: number, c: any) =>
+                    catAcc + (c.metrics?.instantiation?.relationships || 0),
+                  0
+                ) /
+                  g.categories.length,
+              0
+            ) / cotGenerations.length,
         },
         realism: 0, // No judge for CoT
         diversity: {
@@ -1309,6 +1364,23 @@ async function preprocess() {
           relationships:
             dashboardModels.reduce(
               (acc, m) => acc + m.simple.coverage.relationships,
+              0
+            ) / n,
+        },
+        instantiation: {
+          classes:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.simple.instantiation.classes,
+              0
+            ) / n,
+          attributes:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.simple.instantiation.attributes,
+              0
+            ) / n,
+          relationships:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.simple.instantiation.relationships,
               0
             ) / n,
         },
@@ -1353,6 +1425,23 @@ async function preprocess() {
           relationships:
             dashboardModels.reduce(
               (acc, m) => acc + m.cot.coverage.relationships,
+              0
+            ) / n,
+        },
+        instantiation: {
+          classes:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.cot.instantiation.classes,
+              0
+            ) / n,
+          attributes:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.cot.instantiation.attributes,
+              0
+            ) / n,
+          relationships:
+            dashboardModels.reduce(
+              (acc, m) => acc + m.cot.instantiation.relationships,
               0
             ) / n,
         },
