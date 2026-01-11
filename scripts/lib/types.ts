@@ -202,6 +202,7 @@ export interface CotGeneration {
   diversity: CotCategoryDiversity[] | null; // Per-category diversity
   allCategoriesDiversity: DiversityMetrics | null; // "ALL Categories" summary
   tokenCounts: TokenCounts | null;
+  judge: JudgeResponse | null;
 }
 
 // ============================================================================
@@ -234,6 +235,7 @@ export interface ModelData {
   cot: {
     summary: ModelSummary;
     grakel: GrakelData | null;
+    judge: JudgeResult | null;
     generations: CotGeneration[];
   };
 }

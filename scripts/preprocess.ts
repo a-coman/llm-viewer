@@ -83,6 +83,7 @@ import {
   parseGrakel,
   parseJudgeResults,
   parseJudgeResponses,
+  calculateJudgeResultFromResponses,
   parseGlobalJudgeResults,
   parseGlobalJudgeResponses,
   parseSimpleLogs,
@@ -293,8 +294,18 @@ async function preprocess(): Promise<void> {
   const globalJudgeResults = globalJudgeResultsContent
     ? parseGlobalJudgeResults(globalJudgeResultsContent)
     : {};
+
+  const globalJudgeResultsContentCot = readFileSafe(
+    path.join(cotDir, "judge-results.md")
+  );
+  const globalJudgeResultsCot = globalJudgeResultsContentCot
+    ? parseGlobalJudgeResults(globalJudgeResultsContentCot)
+    : {};
   console.log(
-    `  Global judge results: ${Object.keys(globalJudgeResults).length} models`
+    `  Global judge results (Simple): ${
+      Object.keys(globalJudgeResults).length
+    } models` +
+      ` (CoT), ${Object.keys(globalJudgeResultsCot).length} models (CoT)`
   );
 
   const globalJudgeResponsesContent = readFileSafe(
@@ -303,10 +314,16 @@ async function preprocess(): Promise<void> {
   const globalJudgeResponses = globalJudgeResponsesContent
     ? parseGlobalJudgeResponses(globalJudgeResponsesContent)
     : {};
+  const globalJudgeResponsesContentCot = readFileSafe(
+    path.join(cotDir, "judge-responses.md")
+  );
+  const globalJudgeResponsesCot = globalJudgeResponsesContentCot
+    ? parseGlobalJudgeResponses(globalJudgeResponsesContentCot)
+    : {};
   console.log(
-    `  Global judge responses: ${
+    `  Global judge responses (Simple): ${
       Object.keys(globalJudgeResponses).length
-    } models`
+    } models, (CoT): ${Object.keys(globalJudgeResponsesCot).length} models`
   );
 
   // ========================================================================
@@ -355,9 +372,29 @@ async function preprocess(): Promise<void> {
       : null;
 
     // Get judge data from global files (already parsed above)
-    const simpleJudgeResult: JudgeResult =
+    let simpleJudgeResult: JudgeResult =
       globalJudgeResults[modelName] ?? createNullJudgeResult();
     const simpleJudgeResponses = globalJudgeResponses[modelName] ?? {};
+    let cotJudgeResult: JudgeResult =
+      globalJudgeResultsCot[modelName] ?? createNullJudgeResult();
+    const cotJudgeResponses = globalJudgeResponsesCot[modelName] ?? {};
+
+    // Fallback: if a results table is missing a successRate, compute from responses
+    if (
+      (simpleJudgeResult.successRate === null ||
+        simpleJudgeResult.successRate === undefined) &&
+      Object.keys(simpleJudgeResponses).length > 0
+    ) {
+      simpleJudgeResult =
+        calculateJudgeResultFromResponses(simpleJudgeResponses);
+    }
+    if (
+      (cotJudgeResult.successRate === null ||
+        cotJudgeResult.successRate === undefined) &&
+      Object.keys(cotJudgeResponses).length > 0
+    ) {
+      cotJudgeResult = calculateJudgeResultFromResponses(cotJudgeResponses);
+    }
 
     // Parse logs.md for token counts
     const simpleLogsContent = simpleModelDir
@@ -571,12 +608,14 @@ async function preprocess(): Promise<void> {
           )
         : null;
 
+      const judge = cotJudgeResponses[genId] ?? null;
       cotGenerations.push({
         id: genId,
         categories,
         diversity: categoryDiversity,
         allCategoriesDiversity,
         tokenCounts: genTokenCounts,
+        judge: judge,
       });
     }
 
@@ -590,7 +629,7 @@ async function preprocess(): Promise<void> {
       coverage: averageCoverageMetrics(cotAllCoverage),
       instantiation: averageCoverageMetrics(cotAllInstantiation),
       diversity: cotDiversitySummary[modelName] ?? createNullDiversityMetrics(),
-      realism: null, // CoT doesn't have judge evaluation
+      realism: cotJudgeResult.successRate,
       avgEvennessAll: calculateAvgEvennessAll(cotAllShannon),
     };
 
@@ -620,6 +659,7 @@ async function preprocess(): Promise<void> {
       cot: {
         summary: cotSummary,
         grakel: cotGrakel,
+        judge: cotJudgeResult,
         generations: cotGenerations,
       },
     };
@@ -690,6 +730,7 @@ async function preprocess(): Promise<void> {
             instantiation: cat.metrics.instantiation,
             overconstraints: cat.metrics.overconstraints,
           },
+          judge: gen.judge,
           pdfAvailable: cat.pdfAvailable,
           pdfUrl: cat.pdfUrl,
           code: cat.code,
