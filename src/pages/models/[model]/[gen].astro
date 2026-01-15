@@ -3,7 +3,7 @@ import PageLayout from "../../../layouts/PageLayout.astro";
 import GenerationView from "../../../components/GenerationView.astro";
 import { MODELS_LOWER, COT_CATEGORIES } from "../../../lib/constants";
 import { getModelName } from "../../../lib/utils";
-import { getModelData } from "../../../lib/data";
+import { getModelData, getExperimentIds } from "../../../lib/data";
 
 export function getStaticPaths() {
   const paths: { params: { model: string; gen: string } }[] = [];
@@ -18,9 +18,13 @@ export function getStaticPaths() {
 const { model, gen } = Astro.params;
 const modelName = getModelName(model || "");
 const genNum = parseInt(gen?.replace("gen", "") || "0");
+const experimentId = Astro.url.searchParams.get("experimentId") || "";
+
+const experimentIds = getExperimentIds();
+const currentExperimentId = experimentId || experimentIds[0];
 
 // Load centralized data
-const modelData = getModelData(model || "");
+const modelData = getModelData(model || "", currentExperimentId);
 const simpleData = modelData?.simple.generations.find((g) => g.id === gen);
 const cotData = modelData?.cot.generations.find((g) => g.id === gen);
 const classDiagramPdf = modelData?.diagramPdf || "";
@@ -34,6 +38,8 @@ const hasCotData = genNum <= 30 && !!cotData;
   currentGen={gen}
   currentPage="generation"
   activeTab="simple"
+  experimentId={currentExperimentId}
+  experimentIds={experimentIds}
 >
   <Fragment slot="header-right">
     {

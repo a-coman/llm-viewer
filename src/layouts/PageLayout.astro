@@ -12,6 +12,8 @@ interface Props {
   currentPage?: "dashboard" | "model" | "generation";
   showTabs?: boolean;
   activeTab?: "simple" | "cot";
+  experimentId?: string;
+  experimentIds?: string[];
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   currentPage = "dashboard",
   showTabs = true,
   activeTab = "simple",
+  experimentId,
+  experimentIds,
 } = Astro.props;
 ---
 
@@ -33,6 +37,8 @@ const {
       currentPage={currentPage}
       showTabs={showTabs}
       activeTab={activeTab}
+      experimentId={experimentId}
+      experimentIds={experimentIds}
     />
     <main class="main-content">
       <ContentHeader title={title}>

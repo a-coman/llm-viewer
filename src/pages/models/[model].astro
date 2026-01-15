@@ -6,7 +6,7 @@ import DataTable from "../../components/DataTable.astro";
 import MetricsPanel from "../../components/MetricsPanel.astro";
 import { MODELS_LOWER, COLOR_RANGES } from "../../lib/constants";
 import { getModelName } from "../../lib/utils";
-import { getModelData } from "../../lib/data";
+import { getModelData, getExperimentIds } from "../../lib/data";
 
 export async function getStaticPaths() {
   return MODELS_LOWER.map((model) => ({ params: { model } }));
@@ -14,7 +14,12 @@ export async function getStaticPaths() {
 
 const { model } = Astro.params;
 const modelName = getModelName(model || "");
-const modelData = getModelData(model || "");
+const experimentId = Astro.url.searchParams.get("experimentId") || "";
+
+const experimentIds = getExperimentIds();
+const currentExperimentId = experimentId || experimentIds[0];
+
+const modelData = getModelData(model || "", currentExperimentId);
 
 const simpleData = modelData?.simple || null;
 const cotData = modelData?.cot || null;
@@ -34,6 +39,8 @@ const modelPanelSections = {
   currentModel={modelName}
   currentPage="model"
   activeTab="simple"
+  experimentId={currentExperimentId}
+  experimentIds={experimentIds}
 >
   {
     !modelData ? (

@@ -14,15 +14,19 @@ import type {
   CategoryMetrics,
   DashboardData,
   Attempt,
+  LogsFileRoot,
+  MetricsFileRoot,
+  ExperimentLogEntry,
+  ExperimentMetricsEntry,
 } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "public");
 const METRICS_FILE = path.join(DATA_DIR, "metrics.json");
 const LOGS_FILE = path.join(DATA_DIR, "logs.json");
 
-// Cache data in memory
-let cachedMetrics: MetricsDataRoot | null = null;
-let cachedLogs: LogDataRoot | null = null;
+// Cache data in memory - now stores the full file with all experiments
+let cachedMetricsFile: MetricsFileRoot | null = null;
+let cachedLogsFile: LogsFileRoot | null = null;
 
 const EMPTY_METRIC_STAT = { errors: 0, total: 0, str: [] };
 const EMPTY_METRICS_CONTENT = {
@@ -31,41 +35,71 @@ const EMPTY_METRICS_CONTENT = {
   invariants: { ...EMPTY_METRIC_STAT },
 };
 
+const EMPTY_MODE_LOGS = {
+  input_tokens: 0,
+  output_tokens: 0,
+  total_tokens: 0,
+  time_seconds: 0,
+  number_experiments: 0,
+  experiments: [],
+};
+
+const EMPTY_MODE_METRICS = {
+  number_experiments: 0,
+  metrics: { ...EMPTY_METRICS_CONTENT },
+  experiments: [],
+};
+
 function loadData() {
-  if (!cachedMetrics) {
+  if (!cachedMetricsFile) {
     try {
       const metricsContent = fs.readFileSync(METRICS_FILE, "utf-8");
-      cachedMetrics = JSON.parse(metricsContent);
+      cachedMetricsFile = JSON.parse(metricsContent);
     } catch (error) {
       console.error("Error loading metrics.json:", error);
-      const emptyMode = {
-        number_experiments: 0,
-        metrics: { ...EMPTY_METRICS_CONTENT },
-        experiments: [],
-      };
-      cachedMetrics = { simple: { ...emptyMode }, cot: { ...emptyMode } };
+      cachedMetricsFile = { experiments: [] };
     }
   }
-  if (!cachedLogs) {
+  if (!cachedLogsFile) {
     try {
       const logsContent = fs.readFileSync(LOGS_FILE, "utf-8");
-      cachedLogs = JSON.parse(logsContent);
+      cachedLogsFile = JSON.parse(logsContent);
     } catch (error) {
       console.error("Error loading logs.json:", error);
-      const emptyMode = {
-        input_tokens: 0,
-        output_tokens: 0,
-        total_tokens: 0,
-        time_seconds: 0,
-        number_experiments: 0,
-        experiments: [],
-      };
-      cachedLogs = {
-        simple: { ...emptyMode },
-        cot: { ...emptyMode },
-      };
+      cachedLogsFile = { experiments: [] };
     }
   }
+}
+
+// Get list of all experiment IDs
+export function getExperimentIds(): string[] {
+  loadData();
+  return cachedLogsFile?.experiments.map((exp) => exp.id) || [];
+}
+
+// Get experiment data by ID (or first if not specified)
+function getExperimentData(experimentId?: string): {
+  logs: LogDataRoot;
+  metrics: MetricsDataRoot;
+} {
+  loadData();
+
+  const logExp = experimentId
+    ? cachedLogsFile?.experiments.find((e) => e.id === experimentId)
+    : cachedLogsFile?.experiments[0];
+
+  const metricExp = experimentId
+    ? cachedMetricsFile?.experiments.find((e) => e.id === experimentId)
+    : cachedMetricsFile?.experiments[0];
+
+  return {
+    logs: logExp
+      ? { simple: logExp.simple, cot: logExp.cot }
+      : { simple: { ...EMPTY_MODE_LOGS }, cot: { ...EMPTY_MODE_LOGS } },
+    metrics: metricExp
+      ? { simple: metricExp.simple, cot: metricExp.cot }
+      : { simple: { ...EMPTY_MODE_METRICS }, cot: { ...EMPTY_MODE_METRICS } },
+  };
 }
 
 const EMPTY_COVERAGE: CoverageItem = {
@@ -88,8 +122,12 @@ function sumTokens(attempts: Attempt[] = []) {
   );
 }
 
-export function getModelData(modelSlug: string): ModelData | null {
-  loadData();
+export function getModelData(
+  modelSlug: string,
+  experimentId?: string
+): ModelData | null {
+  const { logs: cachedLogs, metrics: cachedMetrics } =
+    getExperimentData(experimentId);
   const modelName = getModelName(modelSlug);
   const domainLower = modelName.toLowerCase();
 
@@ -301,10 +339,11 @@ export function getModelData(modelSlug: string): ModelData | null {
   };
 }
 
-export function getDashboardData(): DashboardData {
-  loadData();
+export function getDashboardData(experimentId?: string): DashboardData {
+  const { logs: cachedLogs, metrics: cachedMetrics } =
+    getExperimentData(experimentId);
   const modelsList: DashboardData["models"] = MODELS.map((modelName) => {
-    const data = getModelData(modelName);
+    const data = getModelData(modelName, experimentId);
     if (!data) return null;
 
     return {

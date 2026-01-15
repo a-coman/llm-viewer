@@ -2,10 +2,14 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import DataTable from "../components/DataTable.astro";
 import MetricsPanel from "../components/MetricsPanel.astro";
-import { getDashboardData } from "../lib/data";
+import { getDashboardData, getExperimentIds } from "../lib/data";
 
-const dashboardData = getDashboardData();
+const experimentId = Astro.url.searchParams.get("experimentId") || "";
+const dashboardData = getDashboardData(experimentId);
 const { totals, models } = dashboardData || {};
+
+const experimentIds = getExperimentIds();
+const currentExperimentId = experimentId || experimentIds[0]; // Default to first matches data logic
 
 const summarySections = {
   cost: true,
@@ -17,7 +21,13 @@ const summarySections = {
 };
 ---
 
-<PageLayout title="Dashboard" currentPage="dashboard" activeTab="simple">
+<PageLayout
+  title="Dashboard"
+  currentPage="dashboard"
+  activeTab="simple"
+  experimentId={currentExperimentId}
+  experimentIds={experimentIds}
+>
   {
     !dashboardData ? (
       <div class="error-state">

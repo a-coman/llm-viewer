@@ -164,6 +164,29 @@ export interface MetricsDataRoot {
   };
 }
 
+// --- Multi-Experiment File Root Types ---
+// These wrap the original structures in an experiments array with IDs
+
+export interface ExperimentLogEntry {
+  id: string;
+  simple: LogDataRoot["simple"];
+  cot: LogDataRoot["cot"];
+}
+
+export interface ExperimentMetricsEntry {
+  id: string;
+  simple: MetricsDataRoot["simple"];
+  cot: MetricsDataRoot["cot"];
+}
+
+export interface LogsFileRoot {
+  experiments: ExperimentLogEntry[];
+}
+
+export interface MetricsFileRoot {
+  experiments: ExperimentMetricsEntry[];
+}
+
 // --- Application Domain Types (Derived/Processed) ---
 // These are used by the UI components (e.g. pages/models/[model].astro).
 // We transform Raw types into these.
