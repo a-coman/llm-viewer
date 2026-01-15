@@ -35,3 +35,16 @@ export const prices = {
     output: 14,
   },
 } as const;
+
+// Color ranges for getColor(value, green, red)
+// Lower green value = greener at lower cost, higher red = redder at higher cost
+export const COLOR_RANGES = {
+  price: {
+    summary: { green: 10, red: 25 }, // Dashboard summary totals
+    model: { green: 2, red: 8 }, // Per-model cost
+    generation: { green: 1, red: 3 }, // Per-generation cost
+  },
+  validation: {
+    percent: { green: 1, red: 0 }, // 100% = green, 0% = red
+  },
+} as const;

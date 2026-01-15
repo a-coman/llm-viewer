@@ -3,6 +3,7 @@ import PdfEmbed from "./PdfEmbed.astro";
 import SoilViewer from "./SoilViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
+import { COLOR_RANGES } from "../lib/constants";
 
 interface Props {
   data: any;
@@ -83,12 +84,19 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 
   <div class="metrics-column-wrapper">
     {
+      (
         <section class="section judge-section">
           <JudgeCard response={data.judge?.response} why={data.judge?.why} />
         </section>
+      )
     }
     <div class="metrics-column">
-      <MetricsPanel metrics={metrics} title="Metrics" />
+      <MetricsPanel
+        metrics={metrics}
+        title="Metrics"
+        isInvalidCategory={label === "invalid"}
+        priceRange={COLOR_RANGES.price.generation}
+      />
     </div>
   </div>
 </div>

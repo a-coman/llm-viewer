@@ -1,5 +1,11 @@
 ---
-import { getColor, formatPercent, formatCurrency } from "../lib/utils";
+import {
+  getColor,
+  getBinaryColor,
+  formatPercent,
+  formatCurrency,
+} from "../lib/utils";
+import { COLOR_RANGES } from "../lib/constants";
 
 interface MetricStat {
   errors: number;
@@ -40,6 +46,8 @@ interface Props {
     diversity?: boolean;
     quality?: boolean;
   };
+  isInvalidCategory?: boolean;
+  priceRange?: { green: number; red: number };
 }
 
 const {
@@ -53,31 +61,52 @@ const {
     diversity: true,
     quality: true,
   },
+  isInvalidCategory = false,
+  priceRange = COLOR_RANGES.price.summary,
 } = Astro.props;
 
 function getDisplayValue(
   val: any,
-  type: "percent" | "count" | "currency" = "percent"
+  type: "percent" | "count" | "currency" = "percent",
+  metricKey: string = ""
 ): { text: string; style: string } {
   if (val === undefined || val === null) return { text: "—", style: "" };
 
   if (type === "currency") {
     const price = typeof val === "object" ? val.price : val;
-    return { text: formatCurrency(price), style: getColor(price, 10, 25) };
+    return {
+      text: formatCurrency(price),
+      style: getColor(price, priceRange.green, priceRange.red),
+    };
   }
 
   if (typeof val === "object" && "errors" in val) {
-    const rate = val.total > 0 ? 1 - val.errors / val.total : 1;
+    const hasErrors = val.errors > 0;
+    // For "invalid" category: only multiplicities and invariants are inverted
+    // (errors expected = green), syntax stays normal (no errors = green)
+    const shouldInvert = isInvalidCategory && metricKey !== "syntax";
+    const isGood = shouldInvert ? hasErrors : !hasErrors;
     return {
       text: `${val.errors}/${val.total}`,
-      style: getColor(rate, 0.95, 0.8),
+      style: getBinaryColor(isGood),
     };
   }
 
   if (typeof val === "number") {
     if (type === "count")
       return { text: Math.round(val).toString(), style: "" };
-    return { text: formatPercent(val), style: getColor(val, 0.95, 0.8) };
+    // For percentages: use gradient (green = 100%, red = 0%)
+    // For invalid category multiplicities/invariants: inverted
+    const shouldInvert = isInvalidCategory && metricKey !== "syntax";
+    const colorVal = shouldInvert ? 1 - val : val;
+    return {
+      text: formatPercent(val),
+      style: getColor(
+        colorVal,
+        COLOR_RANGES.validation.percent.green,
+        COLOR_RANGES.validation.percent.red
+      ),
+    };
   }
 
   return { text: "—", style: "" };
@@ -127,7 +156,7 @@ const price = metrics?.price;
             {["syntax", "multiplicities", "invariants"].map((key) => {
               // Check both root level and nested metrics.metrics level
               const val = metrics?.[key] ?? metrics?.metrics?.[key];
-              const { text, style } = getDisplayValue(val);
+              const { text, style } = getDisplayValue(val, "percent", key);
               const label = key.charAt(0).toUpperCase() + key.slice(1);
               return (
                 <tr>

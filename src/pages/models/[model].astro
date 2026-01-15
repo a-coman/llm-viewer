@@ -4,7 +4,7 @@ import HeatmapMatrix from "../../components/HeatmapMatrix.astro";
 import PdfEmbed from "../../components/PdfEmbed.astro";
 import DataTable from "../../components/DataTable.astro";
 import MetricsPanel from "../../components/MetricsPanel.astro";
-import { MODELS_LOWER } from "../../lib/constants";
+import { MODELS_LOWER, COLOR_RANGES } from "../../lib/constants";
 import { getModelName } from "../../lib/utils";
 import { getModelData } from "../../lib/data";
 
@@ -65,6 +65,7 @@ const modelPanelSections = {
                 title={`${modelName} - Simple Metrics`}
                 metrics={simpleData}
                 showSections={modelPanelSections}
+                priceRange={COLOR_RANGES.price.model}
               />
             </div>
           </div>
@@ -111,6 +112,7 @@ const modelPanelSections = {
                 title={`${modelName} - CoT Metrics`}
                 metrics={cotData}
                 showSections={modelPanelSections}
+                priceRange={COLOR_RANGES.price.model}
               />
             </div>
           </div>

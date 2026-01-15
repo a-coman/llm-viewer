@@ -20,6 +20,13 @@ export function getColor(
   return `background-color: hsl(${hue}, 80%, 92%);`;
 }
 
+// Binary color: green if good, red if bad (no gradient)
+export function getBinaryColor(isGood: boolean): string {
+  return isGood
+    ? "background-color: var(--color-success-bg);" // Green
+    : "background-color: var(--color-error-bg);"; // Red
+}
+
 export function formatPercent(value: number | undefined | null): string {
   if (value === undefined || value === null || isNaN(value)) return "—";
   return `${(value * 100).toFixed(1)}%`;
