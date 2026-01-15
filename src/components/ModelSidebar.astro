@@ -355,12 +355,14 @@ const showGens = currentModel || currentPage === "dashboard";
       });
     }
 
-    // Model links - preserve current gen and mode when navigating
+    // Model links - preserve current gen, mode, and view when navigating
     modelLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const modelName = link.getAttribute("data-model");
         const mode = getCurrentMode();
+        const currentParams = new URLSearchParams(window.location.search);
+        const currentView = currentParams.get("view");
 
         let url = `/models/${modelName}`;
 
@@ -383,11 +385,44 @@ const showGens = currentModel || currentPage === "dashboard";
         // Append gen to URL if not "all"
         if (gen !== "all") url += `/${gen}`;
 
-        if (mode === "cot")
-          url += url.includes("?") ? "&type=cot" : "?type=cot";
+        // Build query params
+        const params = new URLSearchParams();
+        if (mode === "cot") params.set("type", "cot");
+        if (currentView && currentView !== "instance-diagram")
+          params.set("view", currentView);
+
+        if (params.toString()) url += `?${params.toString()}`;
         window.location.href = url;
       });
     });
+
+    // Generation links - preserve view param when switching generations (non-dashboard)
+    if (!isDashboard) {
+      genLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = link.getAttribute("href");
+          if (!href || href === "#") return;
+
+          const currentParams = new URLSearchParams(window.location.search);
+          const currentView = currentParams.get("view");
+
+          // Parse the existing href to get base path and any existing params
+          const [basePath, existingQuery] = href.split("?");
+          const params = new URLSearchParams(existingQuery || "");
+
+          // Add view param if set
+          if (currentView && currentView !== "instance-diagram") {
+            params.set("view", currentView);
+          }
+
+          const url = params.toString()
+            ? `${basePath}?${params.toString()}`
+            : basePath;
+          window.location.href = url;
+        });
+      });
+    }
 
     // Helper to update gen link highlighting
     function updateGenHighlighting(mode: string) {

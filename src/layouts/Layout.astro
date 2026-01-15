@@ -12,13 +12,17 @@ import "../styles/global.css";
     <title>LLM Viewer</title>
   </head>
   <body>
-    <div id="error-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; background:red; color:white; padding:10px; z-index:9999;"></div>
+    <div
+      id="error-overlay"
+      style="display:none; position:fixed; top:0; left:0; width:100%; background:red; color:white; padding:10px; z-index:9999;"
+    >
+    </div>
     <script is:inline>
-      window.onerror = function(msg, url, line, col, error) {
-        const overlay = document.getElementById('error-overlay');
+      window.onerror = function (msg, url, line, col, error) {
+        const overlay = document.getElementById("error-overlay");
         if (overlay) {
-          overlay.style.display = 'block';
-          overlay.innerText = 'Error: ' + msg + '\nAt: ' + url + ':' + line;
+          overlay.style.display = "block";
+          overlay.innerText = "Error: " + msg + "\nAt: " + url + ":" + line;
         }
         return false;
       };

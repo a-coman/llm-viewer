@@ -97,7 +97,10 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    function setAllDiagramTabs(viewName: string) {
+    const params = new URLSearchParams(window.location.search);
+    const initialView = params.get("view") || "instance-diagram";
+
+    function setAllDiagramTabs(viewName: string, updateUrl = true) {
       document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
         const tabsId = tabsContainer.getAttribute("data-tabs-id");
         const viewsContainer = document.querySelector(
@@ -118,7 +121,19 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
           )
         );
       });
+
+      // Update URL with view parameter
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        viewName === "instance-diagram"
+          ? url.searchParams.delete("view")
+          : url.searchParams.set("view", viewName);
+        window.history.replaceState({}, "", url.toString());
+      }
     }
+
+    // Set initial view from URL
+    setAllDiagramTabs(initialView, false);
 
     document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
       const tabs = tabsContainer.querySelectorAll(".diagram-tab");
@@ -132,6 +147,25 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
       });
     });
   });
+</script>
+
+<script is:inline>
+  (function () {
+    try {
+      const view = new URLSearchParams(window.location.search).get("view");
+      if (view && view !== "instance-diagram") {
+        document.querySelectorAll(".diagram-tab").forEach((t) => {
+          t.classList.toggle("active", t.getAttribute("data-view") === view);
+        });
+        document.querySelectorAll("[data-view-content]").forEach((v) => {
+          v.classList.toggle(
+            "active",
+            v.getAttribute("data-view-content") === view
+          );
+        });
+      }
+    } catch (e) {}
+  })();
 </script>
 
 <style>
