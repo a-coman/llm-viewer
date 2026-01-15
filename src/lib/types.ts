@@ -306,12 +306,16 @@ export interface DashboardData {
     simple: {
       price: number;
       syntax: number;
+      multiplicities: number;
+      invariants: number;
       coverage: number;
       realism: number;
     };
     cot: {
       price: number;
       syntax: number;
+      multiplicities: number;
+      invariants: number;
       coverage: number;
       realism: number;
     };

@@ -77,6 +77,12 @@ function formatValue(
       : String(value);
   }
 
+  // Handle MetricStat objects {errors, total} for validation columns
+  if (typeof value === "object" && "errors" in value && "total" in value) {
+    const rate = value.total > 0 ? 1 - value.errors / value.total : 1;
+    return formatPercent(rate);
+  }
+
   return formatPercent(value);
 }
 
@@ -84,13 +90,19 @@ function getCellStyle(value: any, col: any, isGeneration: boolean): string {
   if (value === null || value === undefined || col.isCount || col.isRealism)
     return "";
 
+  // Convert MetricStat to rate for coloring
+  let rate = value;
+  if (typeof value === "object" && "errors" in value && "total" in value) {
+    rate = value.total > 0 ? 1 - value.errors / value.total : 1;
+  }
+
   if (isGeneration && col.isValidation) {
     // For validation success rate in generations: Green 1.0, Red 0.0
-    return getColor(value, 1, 0);
+    return getColor(rate, 1, 0);
   }
 
   // Apply heatmap color (Green 0.9, Red 0.5)
-  return getColor(value, 0.9, 0.5);
+  return getColor(rate, 0.9, 0.5);
 }
 
 const isGeneration = type === "generations";

@@ -312,12 +312,16 @@ export function getDashboardData(): DashboardData {
       simple: {
         price: data.simple.price.price,
         syntax: data.simple.metrics.syntax as number,
+        multiplicities: data.simple.metrics.multiplicities as number,
+        invariants: data.simple.metrics.invariants as number,
         coverage: data.simple.coverage.coverage.classes,
         realism: data.simple.judge.successRate,
       },
       cot: {
         price: data.cot.price.price,
         syntax: data.cot.metrics.syntax as number,
+        multiplicities: data.cot.metrics.multiplicities as number,
+        invariants: data.cot.metrics.invariants as number,
         coverage: data.cot.coverage.coverage.classes,
         realism: data.cot.judge.successRate,
       },

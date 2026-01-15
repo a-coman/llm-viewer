@@ -125,7 +125,9 @@ const price = metrics?.price;
         <table class="metrics-table">
           <tbody>
             {["syntax", "multiplicities", "invariants"].map((key) => {
-              const { text, style } = getDisplayValue(metrics?.[key]);
+              // Check both root level and nested metrics.metrics level
+              const val = metrics?.[key] ?? metrics?.metrics?.[key];
+              const { text, style } = getDisplayValue(val);
               const label = key.charAt(0).toUpperCase() + key.slice(1);
               return (
                 <tr>

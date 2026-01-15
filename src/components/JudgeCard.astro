@@ -1,10 +1,10 @@
 ---
 interface Props {
-  response: "Realistic" | "Unrealistic" | "Unknown" | string;
+  response?: "Realistic" | "Unrealistic" | "Unknown" | string;
   why?: string;
 }
 
-const { response, why } = Astro.props;
+const { response="Unknown", why="Placeholder" } = Astro.props;
 
 const badgeClass =
   response === "Realistic"
