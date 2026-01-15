@@ -1,196 +1,260 @@
 ---
+import { getColor, formatPercent, formatCurrency } from "../lib/utils";
+
+interface MetricStat {
+  errors: number;
+  total: number;
+}
+
 interface Metrics {
-  syntaxErrors?: number;
-  syntaxTotal?: number;
-  multiplicitiesErrors?: number;
-  multiplicitiesTotal?: number;
-  invariantsErrors?: number;
-  invariantsTotal?: number;
-  errors?: {
-    syntaxErrors?: number;
-    syntaxTotal?: number;
-    multiplicitiesErrors?: number;
-    multiplicitiesTotal?: number;
-    invariantsErrors?: number;
-    invariantsTotal?: number;
-  };
+  syntax?: number | MetricStat;
+  multiplicities?: number | MetricStat;
+  invariants?: number | MetricStat;
   coverage?: {
-    classes: number;
-    attributes: number;
-    relationships: number;
-  };
-  instantiation?: {
-    classes: number;
-    attributes: number;
-    relationships: number;
+    coverage: { classes: number; attributes: number; relationships: number };
+    instantiation: {
+      classes: number;
+      attributes: number;
+      relationships: number;
+    };
   };
   diversity?: {
     numeric: number;
     stringEquals: number;
     stringLv: number;
   };
+  judge?: { successRate: number };
+  price?: { price: number };
+  instantiation?: any;
+  realism?: number;
 }
 
 interface Props {
-  metrics: Metrics | null;
-  showInstantiation?: boolean;
-  showDiversity?: boolean;
+  title?: string;
+  metrics: Metrics | any;
+  showSections?: {
+    cost?: boolean;
+    validation?: boolean;
+    coverage?: boolean;
+    instantiation?: boolean;
+    diversity?: boolean;
+    quality?: boolean;
+  };
 }
 
-const { metrics, showInstantiation = true, showDiversity = true } = Astro.props;
+const {
+  metrics,
+  title,
+  showSections = {
+    cost: true,
+    validation: true,
+    coverage: true,
+    instantiation: true,
+    diversity: true,
+    quality: true,
+  },
+} = Astro.props;
 
-function formatPercent(value: number): string {
-  return `${(value * 100).toFixed(1)}%`;
-}
+function getDisplayValue(
+  val: any,
+  type: "percent" | "count" | "currency" = "percent"
+): { text: string; style: string } {
+  if (val === undefined || val === null) return { text: "—", style: "" };
 
-// Get validation values - handle both flat and nested (errors) structures
-function getValidationValue(
-  metrics: Metrics,
-  key: "syntax" | "multiplicities" | "invariants"
-): { errors: number; total: number | null } {
-  const errorsKey = `${key}Errors` as keyof Metrics;
-  const totalKey = `${key}Total` as keyof Metrics;
-
-  // Try flat structure first (from generation files)
-  let errors = metrics[errorsKey] as number | undefined;
-  let total = metrics[totalKey] as number | undefined;
-
-  // Fall back to nested errors structure (from model files)
-  if (errors === undefined && metrics.errors) {
-    errors = metrics.errors[errorsKey as keyof typeof metrics.errors] as
-      | number
-      | undefined;
-    total = metrics.errors[totalKey as keyof typeof metrics.errors] as
-      | number
-      | undefined;
+  if (type === "currency") {
+    const price = typeof val === "object" ? val.price : val;
+    return { text: formatCurrency(price), style: getColor(price, 10, 25) };
   }
 
-  return { errors: errors ?? 0, total: total ?? null };
+  if (typeof val === "object" && "errors" in val) {
+    const rate = val.total > 0 ? 1 - val.errors / val.total : 1;
+    return {
+      text: `${val.errors}/${val.total}`,
+      style: getColor(rate, 0.95, 0.8),
+    };
+  }
+
+  if (typeof val === "number") {
+    if (type === "count")
+      return { text: Math.round(val).toString(), style: "" };
+    return { text: formatPercent(val), style: getColor(val, 0.95, 0.8) };
+  }
+
+  return { text: "—", style: "" };
 }
+
+const cov = metrics?.coverage?.coverage || metrics?.coverage;
+const inst = metrics?.coverage?.instantiation || metrics?.instantiation;
+const div = metrics?.diversity;
+const judge = metrics?.judge || { successRate: metrics?.realism };
+const price = metrics?.price;
 ---
 
-{
-  metrics ? (
-    <>
-      <h3>Validation</h3>
-      <table class="validation-table">
-        <tbody>
-          {(() => {
-            const syntax = getValidationValue(metrics, "syntax");
-            const mult = getValidationValue(metrics, "multiplicities");
-            const inv = getValidationValue(metrics, "invariants");
+<div class="metrics-panel">
+  {title && <h2 class="sober-header">{title}</h2>}
 
-            return (
-              <>
-                <tr class={syntax.errors === 0 ? "ok" : "error"}>
-                  <td>Syntax</td>
-                  <td>
-                    {syntax.errors === 0
-                      ? syntax.total !== null
-                        ? `0/${syntax.total}`
-                        : "0"
-                      : syntax.total !== null
-                        ? `${syntax.errors}/${syntax.total}`
-                        : `${syntax.errors} errors`}
-                  </td>
-                </tr>
-                <tr class={mult.errors === 0 ? "ok" : "error"}>
-                  <td>Multiplicities</td>
-                  <td>
-                    {mult.errors === 0
-                      ? mult.total !== null
-                        ? `0/${mult.total}`
-                        : "0"
-                      : mult.total !== null
-                        ? `${mult.errors}/${mult.total}`
-                        : `${mult.errors} errors`}
-                  </td>
-                </tr>
-                <tr class={inv.errors === 0 ? "ok" : "error"}>
-                  <td>Invariants</td>
-                  <td>
-                    {inv.errors === 0
-                      ? inv.total !== null
-                        ? `0/${inv.total}`
-                        : "0"
-                      : inv.total !== null
-                        ? `${inv.errors}/${inv.total}`
-                        : `${inv.errors} errors`}
-                  </td>
-                </tr>
-              </>
-            );
-          })()}
-        </tbody>
-      </table>
+  {
+    showSections.cost &&
+      (price !== undefined || metrics?.cost !== undefined) && (
+        <div class="metric-section">
+          <h3 class="sober-label">Cost</h3>
 
-      {metrics.coverage && (
-        <>
-          <h3>Coverage</h3>
           <table class="metrics-table">
             <tbody>
               <tr>
-                <td>Classes</td>
-                <td>{formatPercent(metrics.coverage.classes)}</td>
-              </tr>
-              <tr>
-                <td>Attributes</td>
-                <td>{formatPercent(metrics.coverage.attributes)}</td>
-              </tr>
-              <tr>
-                <td>Relationships</td>
-                <td>{formatPercent(metrics.coverage.relationships)}</td>
+                <td>Total Cost</td>
+                <td
+                  style={
+                    getDisplayValue(price ?? metrics?.cost, "currency").style
+                  }
+                >
+                  {getDisplayValue(price ?? metrics?.cost, "currency").text}
+                </td>
               </tr>
             </tbody>
           </table>
-        </>
-      )}
+        </div>
+      )
+  }
 
-      {showInstantiation && metrics.instantiation && (
-        <>
-          <h3>Instantiation</h3>
-          <table class="metrics-table">
-            <tbody>
-              <tr>
-                <td>Classes</td>
-                <td>{metrics.instantiation.classes}</td>
-              </tr>
-              <tr>
-                <td>Attributes</td>
-                <td>{metrics.instantiation.attributes}</td>
-              </tr>
-              <tr>
-                <td>Relationships</td>
-                <td>{metrics.instantiation.relationships}</td>
-              </tr>
-            </tbody>
-          </table>
-        </>
-      )}
+  {
+    showSections.validation && (
+      <div class="metric-section">
+        <h3 class="sober-label">Validation</h3>
 
-      {showDiversity && metrics.diversity && (
-        <>
-          <h3>Diversity</h3>
-          <table class="metrics-table">
-            <tbody>
-              <tr>
-                <td>Numeric</td>
-                <td>{formatPercent(metrics.diversity.numeric)}</td>
-              </tr>
-              <tr>
-                <td>String Equals</td>
-                <td>{formatPercent(metrics.diversity.stringEquals)}</td>
-              </tr>
-              <tr>
-                <td>String LV</td>
-                <td>{formatPercent(metrics.diversity.stringLv)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </>
-      )}
-    </>
-  ) : (
-    <p class="no-data">No metrics available</p>
-  )
-}
+        <table class="metrics-table">
+          <tbody>
+            {["syntax", "multiplicities", "invariants"].map((key) => {
+              const { text, style } = getDisplayValue(metrics?.[key]);
+              const label = key.charAt(0).toUpperCase() + key.slice(1);
+              return (
+                <tr>
+                  <td>{label}</td>
+                  <td style={style}>{text}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
+    showSections.coverage && cov && (
+      <div class="metric-section">
+        <h3 class="sober-label">Coverage</h3>
+
+        <table class="metrics-table">
+          <tbody>
+            {Object.entries(cov).map(([key, val]) => {
+              const { text, style } = getDisplayValue(val);
+              const label = key.charAt(0).toUpperCase() + key.slice(1);
+              return (
+                <tr>
+                  <td>{label}</td>
+                  <td style={style}>{text}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
+    showSections.instantiation && inst && (
+      <div class="metric-section">
+        <h3 class="sober-label">Instantiation</h3>
+
+        <table class="metrics-table">
+          <tbody>
+            {Object.entries(inst).map(([key, val]) => {
+              const { text } = getDisplayValue(val, "count");
+              const label = key.charAt(0).toUpperCase() + key.slice(1);
+              return (
+                <tr>
+                  <td>{label}</td>
+                  <td>{text}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
+    showSections.diversity && div && (
+      <div class="metric-section">
+        <h3 class="sober-label">Diversity</h3>
+
+        <table class="metrics-table">
+          <tbody>
+            <tr>
+              <td>Numeric</td>
+              <td style={getDisplayValue(div.numeric).style}>
+                {getDisplayValue(div.numeric).text}
+              </td>
+            </tr>
+            <tr>
+              <td>String Equals</td>
+              <td style={getDisplayValue(div.stringEquals).style}>
+                {getDisplayValue(div.stringEquals).text}
+              </td>
+            </tr>
+            <tr>
+              <td>String LV</td>
+              <td style={getDisplayValue(div.stringLv).style}>
+                {getDisplayValue(div.stringLv).text}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
+    showSections.quality && judge && (
+      <div class="metric-section">
+        <h3 class="sober-label">Quality</h3>
+
+        <table class="metrics-table">
+          <tbody>
+            <tr>
+              <td>Realism</td>
+              <td style={getDisplayValue(judge.successRate).style}>
+                {getDisplayValue(judge.successRate).text}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .metrics-panel {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metric-section {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .metric-section:last-child {
+    border-bottom: none;
+  }
+
+  .metrics-table {
+    margin: 0;
+  }
+</style>

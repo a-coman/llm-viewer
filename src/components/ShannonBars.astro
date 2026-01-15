@@ -19,7 +19,7 @@ function getBarColor(evenness: number): string {
 ---
 
 <div class="shannon-container">
-  {title && <h3 class="title">{title}</h3>}
+  {title && <h3 class="sober-label">{title}</h3>}
 
   {
     data.length === 0 ? (
@@ -69,23 +69,17 @@ function getBarColor(evenness: number): string {
 
 <style>
   .shannon-container {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
     padding: 1rem;
   }
 
-  .title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #334155;
-    margin: 0 0 1rem 0;
+  .sober-label {
+    margin-bottom: 1rem;
+    border-top: none; /* Already has container border */
   }
 
   .no-data {
-    color: #64748b;
-    font-style: italic;
-    text-align: center;
     padding: 2rem;
   }
 
@@ -96,7 +90,7 @@ function getBarColor(evenness: number): string {
   }
 
   .attribute-chart {
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--color-border-light);
     padding-bottom: 1rem;
   }
 
@@ -114,17 +108,19 @@ function getBarColor(evenness: number): string {
 
   .attribute-name {
     font-weight: 600;
-    font-size: 0.875rem;
-    color: #1e293b;
-    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
   .evenness-badge {
     font-size: 0.7rem;
     padding: 0.125rem 0.5rem;
-    border-radius: 9999px;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .bars {
@@ -140,9 +136,9 @@ function getBarColor(evenness: number): string {
   }
 
   .bar-label {
-    flex: 0 0 100px;
+    flex: 0 0 120px;
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--color-secondary);
     text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -151,22 +147,21 @@ function getBarColor(evenness: number): string {
 
   .bar-track {
     flex: 1;
-    height: 16px;
-    background: #f1f5f9;
-    border-radius: 4px;
+    height: 12px;
+    background: var(--color-muted);
     overflow: hidden;
   }
 
   .bar-fill {
     height: 100%;
-    border-radius: 4px;
     transition: width 0.3s ease;
   }
 
   .bar-value {
-    flex: 0 0 30px;
+    flex: 0 0 40px;
     font-size: 0.75rem;
-    color: #475569;
+    color: var(--color-primary);
     font-weight: 500;
+    text-align: left;
   }
 </style>

@@ -1,119 +1,20 @@
 ---
-import PageLayout from "../components/PageLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import DataTable from "../components/DataTable.astro";
-import {
-  MODELS,
-  getColor,
-  formatPercent,
-  formatCurrency,
-} from "../lib/constants";
+import MetricsPanel from "../components/MetricsPanel.astro";
+import { getDashboardData } from "../lib/data";
 
-let dashboardData: any = null;
-let totals: any = null;
-let models: any[] = [];
+const dashboardData = getDashboardData();
+const { totals, models } = dashboardData || {};
 
-try {
-  const data = await import("../data/processed/dashboard.json");
-  dashboardData = data.default || data;
-  totals = dashboardData.totals;
-  models = dashboardData.models || [];
-} catch (e) {
-  console.error("Failed to load dashboard data:", e);
-}
-
-const summaryMetrics = [
-  {
-    category: "Cost & Validation",
-    metrics: [
-      {
-        label: "Total Cost",
-        simple: totals?.simple?.price?.price,
-        cot: totals?.cot?.price?.price,
-        type: "currency",
-        invert: true,
-      },
-      {
-        label: "Syntax Success",
-        simple: totals?.simple?.syntax,
-        cot: totals?.cot?.syntax,
-        type: "percent",
-      },
-      {
-        label: "Multiplicities",
-        simple: totals?.simple?.multiplicities,
-        cot: totals?.cot?.multiplicities,
-        type: "percent",
-      },
-      {
-        label: "Invariants",
-        simple: totals?.simple?.invariants,
-        cot: totals?.cot?.invariants,
-        type: "percent",
-      },
-    ],
-  },
-  {
-    category: "Coverage",
-    metrics: [
-      {
-        label: "Classes",
-        simple: totals?.simple?.coverage?.classes,
-        cot: totals?.cot?.coverage?.classes,
-        type: "percent",
-      },
-      {
-        label: "Attributes",
-        simple: totals?.simple?.coverage?.attributes,
-        cot: totals?.cot?.coverage?.attributes,
-        type: "percent",
-      },
-      {
-        label: "Relationships",
-        simple: totals?.simple?.coverage?.relationships,
-        cot: totals?.cot?.coverage?.relationships,
-        type: "percent",
-      },
-    ],
-  },
-  {
-    category: "Diversity",
-    metrics: [
-      {
-        label: "Numeric",
-        simple: totals?.simple?.diversity?.numeric,
-        cot: totals?.cot?.diversity?.numeric,
-        type: "percent",
-      },
-      {
-        label: "String Equals",
-        simple: totals?.simple?.diversity?.stringEquals,
-        cot: totals?.cot?.diversity?.stringEquals,
-        type: "percent",
-      },
-      {
-        label: "String LV",
-        simple: totals?.simple?.diversity?.stringLv,
-        cot: totals?.cot?.diversity?.stringLv,
-        type: "percent",
-      },
-    ],
-  },
-  {
-    category: "Quality",
-    metrics: [
-      {
-        label: "Realism",
-        simple: totals?.simple?.realism,
-        cot: totals?.cot?.realism,
-        type: "percent",
-      },
-    ],
-  },
-];
-
-function getAvgCoverage(cov: any): number | null {
-  return cov ? (cov.classes + cov.attributes + cov.relationships) / 3 : null;
-}
+const summarySections = {
+  cost: true,
+  validation: true,
+  coverage: true,
+  instantiation: false,
+  diversity: true,
+  quality: true,
+};
 ---
 
 <PageLayout title="Dashboard" currentPage="dashboard" activeTab="simple">
@@ -126,66 +27,27 @@ function getAvgCoverage(cov: any): number | null {
     ) : (
       <>
         <section class="section">
-          <h2>Summary</h2>
-          <div class="table-wrapper">
-            <table class="summary-table">
-              <thead>
-                <tr>
-                  <th class="metric-header">Metric</th>
-                  <th class="type-header">Simple</th>
-                  <th class="type-header">CoT</th>
-                </tr>
-              </thead>
-              <tbody>
-                {summaryMetrics.map((group) => (
-                  <>
-                    <tr class="category-row">
-                      <td colspan="3">{group.category}</td>
-                    </tr>
-                    {group.metrics.map((m) => (
-                      <tr>
-                        <td class="metric-label">{m.label}</td>
-                        <td
-                          class="metric-value"
-                          style={getColor(
-                            m.type === "currency"
-                              ? (m.simple || 0) / 10
-                              : m.simple || 0,
-                            m.invert
-                          )}
-                        >
-                          {m.type === "currency"
-                            ? formatCurrency(m.simple)
-                            : formatPercent(m.simple)}
-                        </td>
-                        <td
-                          class="metric-value"
-                          style={getColor(
-                            m.type === "currency"
-                              ? (m.cot || 0) / 20
-                              : m.cot || 0,
-                            m.invert
-                          )}
-                        >
-                          {m.type === "currency"
-                            ? formatCurrency(m.cot)
-                            : formatPercent(m.cot)}
-                        </td>
-                      </tr>
-                    ))}
-                  </>
-                ))}
-              </tbody>
-            </table>
+          <h2>Global Summary</h2>
+          <div class="summary-grid">
+            <MetricsPanel
+              title="Simple Mode Totals"
+              metrics={totals.simple}
+              showSections={summarySections}
+            />
+            <MetricsPanel
+              title="CoT Mode Totals"
+              metrics={totals.cot}
+              showSections={summarySections}
+            />
           </div>
         </section>
 
-        <section class="section">
+        <section class="section comparison-section" data-mode="simple">
           <h2>Simple - Model Comparison</h2>
           <DataTable data={models} type="models" mode="simple" />
         </section>
 
-        <section class="section">
+        <section class="section comparison-section hidden" data-mode="cot">
           <h2>CoT - Model Comparison</h2>
           <DataTable data={models} type="models" mode="cot" />
         </section>
@@ -194,53 +56,49 @@ function getAvgCoverage(cov: any): number | null {
   }
 </PageLayout>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll(".comparison-section");
+    const sidebarModeBtns = document.querySelectorAll(".mode-btn");
+
+    function setMode(mode: string) {
+      tabBtns.forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-mode") === mode);
+      });
+      sections.forEach((section) => {
+        section.classList.toggle(
+          "hidden",
+          section.getAttribute("data-mode") !== mode
+        );
+      });
+      sidebarModeBtns.forEach((btn) => {
+        if (btn.getAttribute("data-mode") === mode) {
+          (btn as HTMLElement).click();
+        }
+      });
+    }
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setMode(btn.getAttribute("data-mode") || "simple");
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("type") === "cot") setMode("cot");
+  });
+</script>
+
 <style>
-  .summary-table {
-    width: 100%;
-    border-collapse: collapse;
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
-  .summary-table th,
-  .summary-table td {
-    padding: 0.5rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 0.8rem;
-  }
-
-  .metric-header,
-  .type-header {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-    color: #666;
-    background: #fafafa;
-  }
-
-  .type-header {
-    text-align: center;
-    width: 25%;
-  }
-
-  .category-row td {
-    background: #f5f5f5;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #888;
-    padding: 0.375rem 1rem;
-  }
-
-  .metric-label {
-    color: #333;
-    padding-left: 1.25rem;
-  }
-
-  .metric-value {
-    text-align: center;
-    font-weight: 500;
-    color: #111;
+  .hidden {
+    display: none;
   }
 </style>

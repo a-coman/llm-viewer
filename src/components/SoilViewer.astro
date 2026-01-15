@@ -6,13 +6,17 @@ interface Props {
 
 const { code, height = "400px" } = Astro.props;
 
-// Simple syntax highlighting for .soil files
+// Sober syntax highlighting for .soil files (neutral gray tones)
 function highlightSoil(code: string): string {
+  if (!code) return "";
   return (
     code
-      // Comments first (to avoid highlighting inside comments)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      // Comments first
       .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
-      // Strings (handle escaped quotes)
+      // Strings
       .replace(
         /'(?:[^'\\]|\\.)*'/g,
         (match) => `<span class="string">${match}</span>`
@@ -24,7 +28,7 @@ function highlightSoil(code: string): string {
       )
       // Booleans
       .replace(/\b(true|false)\b/g, '<span class="boolean">$1</span>')
-      // Numbers (but not inside already-highlighted spans)
+      // Numbers
       .replace(
         /(?<![">])\b(\d+\.?\d*)\b(?![^<]*<\/span>)/g,
         '<span class="number">$1</span>'
@@ -43,46 +47,67 @@ const highlightedCode = highlightSoil(code || "");
   .soil-viewer {
     display: flex;
     flex-direction: column;
-    background: #1e1e2e;
+    background: var(--color-code-bg);
     overflow: hidden;
     width: 100%;
+    border: 1px solid var(--color-code-border);
   }
 
   .code-block {
     margin: 0;
-    padding: 1rem;
-    font-family: "Fira Code", "Consolas", monospace;
+    padding: 1.25rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
     font-size: 0.8rem;
-    line-height: 1.5;
-    color: #cdd6f4;
+    line-height: 1.6;
+    color: var(--color-code-text);
     flex: 1 1 auto;
     overflow: auto;
     width: 100%;
+    /* Simplified scrollbars */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-code-bg);
+  }
+
+  .code-block::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .code-block::-webkit-scrollbar-track {
+    background: var(--color-code-bg);
+  }
+
+  .code-block::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 3px;
+    border: 1px solid var(--color-code-bg);
+  }
+
+  .code-block::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-secondary);
   }
 
   .code-block :global(.keyword) {
-    color: #cba6f7;
-    font-weight: 500;
-  }
-
-  .code-block :global(.class) {
-    color: #89b4fa;
+    color: var(--color-code-keyword);
+    font-weight: 600;
   }
 
   .code-block :global(.string) {
-    color: #a6e3a1;
+    color: var(--color-code-string);
   }
 
   .code-block :global(.number) {
-    color: #fab387;
+    color: var(--color-code-number);
   }
 
   .code-block :global(.comment) {
-    color: #6c7086;
+    color: var(--color-code-comment);
     font-style: italic;
   }
 
   .code-block :global(.boolean) {
-    color: #f9e2af;
+    color: var(--color-code-boolean);
   }
 </style>

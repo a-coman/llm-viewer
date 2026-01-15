@@ -1,9 +1,50 @@
-/* Shared styles for all pages */
+/* Global Settings */
+:root {
+  --color-primary: #111111;
+  --color-secondary: #555555;
+  --color-accent: #333333;
+  --color-background: #ffffff;
+  --color-surface: #fafafa;
+  --color-muted: #f5f5f5;
+  --color-border: #e0e0e0;
+  --color-border-light: #f0f0f0;
+  --color-text-muted: #999999;
 
-/* Page Layout */
+  --color-success: #16a34a;
+  --color-success-bg: #e6ffed;
+  --color-success-border: #bef5cb;
+
+  --color-error: #dc2626;
+  --color-error-bg: #ffeef0;
+  --color-error-border: #fdaeb7;
+
+  --color-warning-bg: #fff5b1;
+  --color-warning-text: #735c0f;
+  --color-warning-border: #ffe913;
+
+  /* Code Theme (Dark Context) */
+  --color-code-bg: #333333;
+  --color-code-border: #333333;
+  --color-code-text: #d1d5db;
+  --color-code-comment: #6b7280;
+  --color-code-keyword: #a3bcdf;
+  --color-code-string: #86efac;
+  --color-code-number: #fdba74;
+  --color-code-boolean: #fca5a5;
+
+  /* Links */
+  --color-link: #0066cc;
+}
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
 .page-layout {
   display: flex;
   min-height: 100vh;
+  background: var(--color-background);
 }
 
 .main-content {
@@ -15,32 +56,41 @@
 
 /* Sections */
 .section {
-  border: 1px solid #e0e0e0;
-  margin-bottom: 1rem;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+  background: var(--color-background);
 }
 
+/* Standard Headers and Labels */
+.sober-header,
 .section h2 {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
-  padding: 0.75rem 1rem;
-  background: #fafafa;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  height: 43px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 
+.sober-label,
 .section h3 {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #888;
+  color: var(--color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
   padding: 0.5rem 1rem;
-  background: #f5f5f5;
-  border-top: 1px solid #e0e0e0;
+  background: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  box-sizing: border-box;
 }
 
 .section h3:first-of-type {
@@ -50,18 +100,18 @@
 /* Error State */
 .error-state {
   padding: 2rem;
-  background: #fafafa;
-  border: 1px solid #ddd;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   text-align: center;
 }
 
 .error-state p {
-  color: #666;
+  color: var(--color-secondary);
   margin: 0.5rem 0;
 }
 
 .error-state code {
-  background: #f0f0f0;
+  background: var(--color-hover);
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
 }
@@ -69,16 +119,13 @@
 /* Content Grid */
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: start;
+  width: 100%;
 }
 
-.content-grid.wide-left {
-  grid-template-columns: 1.2fr 0.8fr;
-}
-
-/* Prevent grid children from expanding beyond their allocated space */
 .content-grid > * {
   min-width: 0;
 }
@@ -95,18 +142,21 @@
 
 .metrics-table td {
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border-light);
   font-size: 0.8rem;
+  color: var(--color-secondary);
 }
 
-.metrics-table td:first-child {
-  color: #555;
+.metrics-table tr:last-child td {
+  border-bottom: none;
 }
 
 .metrics-table td:last-child {
   text-align: right;
   font-weight: 500;
-  color: #111;
+  color: var(--color-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  width: 40%;
 }
 
 .validation-table {
@@ -116,26 +166,16 @@
 
 .validation-table td {
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border-light);
   font-size: 0.8rem;
 }
 
-.validation-table td:first-child {
-  color: #555;
-}
-
-.validation-table td:last-child {
-  text-align: right;
-  font-weight: 500;
-  color: #111;
-}
-
 .validation-table tr.ok td:last-child {
-  color: #16a34a;
+  color: var(--color-success);
 }
 
 .validation-table tr.error td:last-child {
-  color: #dc2626;
+  color: var(--color-error);
 }
 
 /* Generation Table */
@@ -148,45 +188,45 @@
 .gen-table td {
   padding: 0.5rem 0.75rem;
   text-align: center;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-border);
   font-size: 0.8rem;
 }
 
 .gen-table th {
-  background: #fafafa;
+  background: var(--color-surface);
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: #666;
+  color: var(--color-secondary);
 }
 
 .gen-table tbody tr:hover {
-  background: #fafafa;
+  background: var(--color-surface);
 }
 
 .gen-name {
   font-weight: 500;
-  color: #111;
+  color: var(--color-primary);
   text-align: left;
 }
 
 /* Status Classes */
 .status-ok {
-  color: #16a34a;
+  color: var(--color-success);
 }
 
 .status-error {
-  color: #dc2626;
+  color: var(--color-error);
 }
 
 .status-na {
-  color: #999;
+  color: var(--color-text-muted);
 }
 
 /* Buttons and Links */
 .view-btn {
-  color: #0066cc;
+  color: var(--color-link);
   text-decoration: none;
   font-size: 0.8rem;
 }
@@ -197,7 +237,7 @@
 
 /* Utility Classes */
 .no-data {
-  color: #888;
+  color: var(--color-text-muted);
   font-style: italic;
   padding: 1rem;
   text-align: center;
@@ -206,8 +246,8 @@
 .no-code {
   padding: 2rem;
   text-align: center;
-  color: #999;
-  background: #fafafa;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
 }
 
 .hidden {
@@ -223,11 +263,59 @@
   display: block;
 }
 
+/* Sober Interaction Pattern (Buttons/Tabs/Links) */
+.cat-tab,
+.mode-btn,
+.gen-link,
+.diagram-tab,
+.model-link,
+.nav-link {
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  color: var(--color-secondary);
+}
+
+/* Specific Defaults */
+.nav-link,
+.model-link,
+.diagram-tab,
+.cat-tab {
+  background: transparent;
+}
+
+.mode-btn,
+.gen-link {
+  background: var(--color-muted);
+}
+
+/* Shared Hover/Active Pattern */
+.cat-tab:hover,
+.mode-btn:hover,
+.gen-link:hover,
+.diagram-tab:hover,
+.model-link:hover,
+.nav-link:hover {
+  background: var(--color-hover);
+  border: 1px solid var(--color-accent);
+  color: var(--color-primary);
+}
+
+.cat-tab.active,
+.mode-btn.active,
+.gen-link.active,
+.diagram-tab.active,
+.model-link.active,
+.nav-link.active {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
 /* Category Tabs (for CoT) */
 .category-tabs {
   display: flex;
   gap: 0.25rem;
-  background: #f5f5f5;
+  background: var(--color-muted);
   padding: 0.25rem;
 }
 
@@ -235,21 +323,7 @@
   padding: 0.375rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #666;
-  background: transparent;
-  cursor: pointer;
   text-transform: capitalize;
-  border: none;
-}
-
-.cat-tab:hover {
-  background: #e5e5e5;
-  color: #111;
-}
-
-.cat-tab.active {
-  background: #333;
-  color: white;
 }
 
 .cat-content {

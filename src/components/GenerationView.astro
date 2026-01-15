@@ -18,81 +18,84 @@ const {
   classDiagramPdf = "",
 } = Astro.props;
 const uniqueId = Math.random().toString(36).substring(2, 9);
+
+const code = data?.code || data?.metrics?.code;
+const metrics = data?.metrics || data;
+const pdfUrl = data?.pdfUrl || "";
+const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 ---
 
-<div class="content-grid wide-left">
-  <div class="left-column">
-    <section class="section diagram-section">
-      <div class="diagram-header">
-        <div class="diagram-tabs" data-tabs-id={uniqueId}>
-          <button
-            type="button"
-            class="diagram-tab active"
-            data-view="instance-diagram"
-          >
-            Instance Diagram
-          </button>
-          <button type="button" class="diagram-tab" data-view="instance-code">
-            Instance Code
-          </button>
-          <button type="button" class="diagram-tab" data-view="class-diagram">
-            Model Diagram
-          </button>
-        </div>
+<div class="content-grid">
+  <section class="section diagram-section">
+    <div class="diagram-header tabbed-header sober-header">
+      <div class="header-label">View:</div>
+
+      <div class="diagram-tabs" data-tabs-id={uniqueId}>
+        <button
+          type="button"
+          class="diagram-tab active"
+          data-view="instance-diagram"
+        >
+          Instance Diagram
+        </button>
+        <button type="button" class="diagram-tab" data-view="instance-code">
+          Instance Code
+        </button>
+        <button type="button" class="diagram-tab" data-view="class-diagram">
+          Model Diagram
+        </button>
+      </div>
+    </div>
+
+    <div class="diagram-views" data-views-id={uniqueId}>
+      <div class="diagram-view active" data-view-content="instance-diagram">
+        <PdfEmbed
+          src={pdfUrl}
+          title="Instance Diagram"
+          height="500px"
+          available={pdfAvailable}
+        />
       </div>
 
-      <div class="diagram-views" data-views-id={uniqueId}>
-        <div class="diagram-view active" data-view-content="instance-diagram">
-          <PdfEmbed
-            src={data?.pdfUrl || ""}
-            title="Instance Diagram"
-            height="500px"
-            available={data?.pdfAvailable ?? false}
-          />
-        </div>
-
-        <div class="diagram-view" data-view-content="instance-code">
-          {
-            data?.code ? (
-              <SoilViewer code={data.code} height="500px" />
-            ) : (
-              <div class="no-code">
-                No code available {label && `for ${label}`}
-              </div>
-            )
-          }
-        </div>
-
-        <div class="diagram-view" data-view-content="class-diagram">
-          <PdfEmbed
-            src={classDiagramPdf}
-            title="Model Diagram"
-            height="500px"
-            available={!!classDiagramPdf}
-          />
-        </div>
+      <div class="diagram-view" data-view-content="instance-code">
+        {
+          code ? (
+            <SoilViewer code={code} height="500px" />
+          ) : (
+            <div class="no-code">
+              No code available {label && `for ${label}`}
+            </div>
+          )
+        }
       </div>
-    </section>
-  </div>
 
-  <div class="right-column">
+      <div class="diagram-view" data-view-content="class-diagram">
+        <PdfEmbed
+          src={classDiagramPdf || ""}
+          title="Model Diagram"
+          height="500px"
+          available={!!classDiagramPdf}
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="metrics-column-wrapper">
     {
       showJudge && data?.judge && (
-        <section class="section">
+        <section class="section judge-section">
           <JudgeCard response={data.judge.response} why={data.judge.why} />
         </section>
       )
     }
-    <section class="section">
-      <h2>Metrics</h2>
-      <MetricsPanel metrics={data?.metrics} />
-    </section>
+    <div class="metrics-column">
+      <MetricsPanel metrics={metrics} title="Metrics" />
+    </div>
   </div>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Sync diagram tabs across all GenerationView instances
     function setAllDiagramTabs(viewName: string) {
       document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
         const tabsId = tabsContainer.getAttribute("data-tabs-id");
@@ -102,7 +105,7 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
         if (!viewsContainer) return;
 
         const tabs = tabsContainer.querySelectorAll(".diagram-tab");
-        const views = viewsContainer.querySelectorAll(".diagram-view");
+        const views = viewsContainer.querySelectorAll("[data-view-content]");
 
         tabs.forEach((t) =>
           t.classList.toggle("active", t.getAttribute("data-view") === viewName)
@@ -118,7 +121,6 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
 
     document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
       const tabs = tabsContainer.querySelectorAll(".diagram-tab");
-
       tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
           const viewName = tab.getAttribute("data-view");
@@ -132,99 +134,79 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
 </script>
 
 <style>
-  .left-column,
-  .right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 0; /* Prevent flex children from overflowing grid */
-    width: 100%;
+  .content-grid {
+    align-items: start;
   }
 
   .diagram-section {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    --diagram-height: 500px;
-    width: 100%;
+    overflow: hidden;
   }
 
-  .diagram-header {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #e0e0e0;
-    background: #f5f5f5;
+  .metrics-column-wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .judge-section {
+    margin-bottom: 0;
+  }
+
+  /* Alignment Fix: Make tabbed header match standard h2 padding/font */
+  .diagram-header.tabbed-header {
+    gap: 0.75rem;
+  }
+
+  .header-label {
+    font-size: 0.75rem;
   }
 
   .diagram-tabs {
     display: flex;
     gap: 0.25rem;
-    background: transparent;
-    padding: 0.25rem;
+    height: 1.75rem;
+    align-items: center;
   }
 
   .diagram-tab {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #666;
-    background: transparent;
-    cursor: pointer;
-    border: none;
-    border-radius: 0;
-    transition:
-      background 0.15s ease,
-      color 0.15s ease;
-  }
-
-  .diagram-tab:hover {
-    background: #e5e5e5;
-    color: #111;
-  }
-
-  .diagram-tab.active {
-    background: #333;
-    color: white;
+    padding: 0 0.75rem;
+    height: 100%;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    display: flex;
+    align-items: center;
   }
 
   .diagram-views {
     flex: 1;
-    min-height: var(--diagram-height);
-    width: 100%;
+    height: 500px;
   }
 
-  .diagram-view {
+  [data-view-content] {
     display: none;
-    height: var(--diagram-height);
+    height: 100%;
     width: 100%;
   }
 
-  .diagram-view.active {
+  [data-view-content].active {
     display: block;
-  }
-
-  /* Unified styles for all diagram view content */
-  .diagram-view :global(.soil-viewer),
-  .diagram-view :global(.pdf-container),
-  .diagram-view :global(.unavailable) {
-    border: none;
-    border-radius: 0;
-    height: var(--diagram-height);
-    max-height: var(--diagram-height);
-    min-height: var(--diagram-height);
-    width: 100%;
   }
 
   .no-code {
     padding: 2rem;
     text-align: center;
-    color: #888;
+    color: var(--color-text-muted);
     font-style: italic;
-    height: var(--diagram-height);
-    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8fafc;
+    background: var(--color-surface);
   }
 </style>

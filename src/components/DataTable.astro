@@ -1,90 +1,61 @@
 ---
-import { getColor, formatPercent } from "../lib/constants";
+import { getColor, formatPercent } from "../lib/utils";
 
 interface Props {
   data: any[];
   type: "models" | "generations";
-  mode?: "simple" | "cot"; // For extracting data from simple/cot sub-objects (model comparison)
+  mode?: "simple" | "cot"; // For model comparison dashboard
   modelSlug?: string; // For generation links
   genType?: "simple" | "cot"; // Type of generation data
 }
 
 const { data, type, mode, modelSlug, genType = "simple" } = Astro.props;
 
-// Column definitions - all columns for both tables
+// Column definitions
 const columns = [
   { key: "syntax", label: "Syntax", isValidation: true },
   { key: "multiplicities", label: "Mult", isValidation: true },
   { key: "invariants", label: "Inv", isValidation: true },
-  { key: "coverage.classes", label: "Cov.Cls" },
-  { key: "coverage.attributes", label: "Cov.Attr" },
-  { key: "coverage.relationships", label: "Cov.Rel" },
-  { key: "instantiation.classes", label: "Inst.Cls", isCount: true },
-  { key: "instantiation.attributes", label: "Inst.Attr", isCount: true },
-  { key: "instantiation.relationships", label: "Inst.Rel", isCount: true },
+  { key: "coverage.coverage.classes", label: "Cov.Cls" },
+  { key: "coverage.coverage.attributes", label: "Cov.Attr" },
+  { key: "coverage.coverage.relationships", label: "Cov.Rel" },
+  { key: "coverage.instantiation.classes", label: "Inst.Cls", isCount: true },
+  {
+    key: "coverage.instantiation.attributes",
+    label: "Inst.Attr",
+    isCount: true,
+  },
+  {
+    key: "coverage.instantiation.relationships",
+    label: "Inst.Rel",
+    isCount: true,
+  },
   { key: "realism", label: "Realism", isRealism: true },
   { key: "diversity.numeric", label: "Num.Eq" },
   { key: "diversity.stringEquals", label: "Str.Eq" },
   { key: "diversity.stringLv", label: "Str.LV" },
 ];
 
-// Get nested value from object using dot notation
 function getValue(obj: any, path: string): any {
   if (!obj) return null;
   return path.split(".").reduce((acc, part) => acc?.[part], obj);
 }
 
-// Get the data source for an item (handles both model comparison and generations)
-function getDataSource(item: any, isGeneration: boolean, isCot: boolean): any {
-  // For model comparison with mode, get the simple/cot sub-object
-  if (mode && item[mode]) {
-    return item[mode];
+function getDataSource(item: any): any {
+  if (mode && item[mode]) return item[mode];
+  if (type === "generations") {
+    if (genType === "cot" && item.categories) {
+      // For CoT, show the baseline category as representative, or first category
+      return (
+        item.categories.find((c: any) => c.category === "baseline") ||
+        item.categories[0]
+      );
+    }
+    return item.metrics || item;
   }
-
-  // For CoT generations, aggregate from categories
-  if (isGeneration && isCot && item.categories) {
-    // Aggregate metrics across all categories (use baseline as primary, or first category)
-    const baseline =
-      item.categories.find((c: any) => c.category === "baseline") ||
-      item.categories[0];
-    if (!baseline) return null;
-
-    const errors = baseline.metrics?.errors || baseline.metrics || {};
-    return {
-      syntax: errors.syntaxErrors,
-      syntaxTotal: errors.syntaxTotal,
-      multiplicities: errors.multiplicitiesErrors,
-      multiplicitiesTotal: errors.multiplicitiesTotal,
-      invariants: errors.invariantsErrors,
-      invariantsTotal: errors.invariantsTotal,
-      coverage: baseline.metrics?.coverage,
-      instantiation: baseline.metrics?.instantiation,
-      realism: item.judge?.response ?? null, // Text response for generations
-      diversity: item.allCategoriesDiversity || null,
-    };
-  }
-
-  // For simple generations, data is in metrics sub-object
-  if (isGeneration && item.metrics) {
-    const errors = item.metrics.errors || item.metrics;
-    return {
-      syntax: errors.syntaxErrors,
-      syntaxTotal: errors.syntaxTotal,
-      multiplicities: errors.multiplicitiesErrors,
-      multiplicitiesTotal: errors.multiplicitiesTotal,
-      invariants: errors.invariantsErrors,
-      invariantsTotal: errors.invariantsTotal,
-      coverage: item.metrics.coverage,
-      instantiation: item.metrics.instantiation,
-      realism: item.judge?.response ?? null, // Text response for generations
-      diversity: item.metrics.diversity,
-    };
-  }
-
   return item;
 }
 
-// Format value based on column type
 function formatValue(
   value: any,
   col: any,
@@ -93,75 +64,36 @@ function formatValue(
 ): string {
   if (value === null || value === undefined) return "—";
 
-  // For realism in generations, show text (Realistic/Unrealistic/Unknown)
-  if (isGeneration && col.isRealism) {
-    if (typeof value === "string") {
-      return value; // Already a string like "Realistic", "Unrealistic", "Unknown"
-    }
-    return "—";
-  }
-
-  // For realism in models, show percentage
-  if (!isGeneration && col.isRealism) {
+  if (col.isRealism) {
+    if (isGeneration) return source?.judge?.response || "—";
     return formatPercent(value);
   }
 
-  // For generations, validation columns show percentages (validation rate = 1 - errors/total)
-  if (isGeneration && col.isValidation) {
-    const totalKey = col.key + "Total";
-    const total = source?.[totalKey];
-    if (total !== null && total !== undefined && total > 0) {
-      const rate = 1 - value / total;
-      return formatPercent(rate);
-    }
-    return value === 0 ? "100.00%" : "—";
-  }
-
-  // For models, validation columns are rates (percentages)
-  if (!isGeneration && col.isValidation) {
-    return formatPercent(value);
-  }
-
-  // Instantiation columns show raw counts (rounded for model averages)
   if (col.isCount) {
-    return isGeneration ? String(value) : value.toFixed(1);
+    return typeof value === "number"
+      ? isGeneration
+        ? Math.round(value).toString()
+        : value.toFixed(1)
+      : String(value);
   }
 
-  // Everything else is a percentage
   return formatPercent(value);
 }
 
-// Get CSS class for validation cells
-function getStatusClass(value: any, col: any, isGeneration: boolean): string {
-  if (isGeneration && col.isRealism) {
-    if (value === "Realistic") return "status-ok";
-    if (value === "Unrealistic") return "status-error";
-    return "";
-  }
-  if (!isGeneration || !col.isValidation) return "";
-  if (value === null || value === undefined) return "";
-  return "";
-}
-
-// Get background color style
 function getCellStyle(value: any, col: any, isGeneration: boolean): string {
-  if (value === null || value === undefined) return "";
+  if (value === null || value === undefined || col.isCount || col.isRealism)
+    return "";
 
-  // Validation columns in generations use status classes, not colors
-  if (isGeneration && col.isValidation) return getColor(value, true);
+  if (isGeneration && col.isValidation) {
+    // For validation success rate in generations: Green 1.0, Red 0.0
+    return getColor(value, 1, 0);
+  }
 
-  // Realism in generations uses status classes
-  if (isGeneration && col.isRealism) return "";
-
-  // Count columns don't get colored
-  if (col.isCount) return "";
-
-  // Apply color for percentage values
-  return getColor(value);
+  // Apply heatmap color (Green 0.9, Red 0.5)
+  return getColor(value, 0.9, 0.5);
 }
 
 const isGeneration = type === "generations";
-const isCot = genType === "cot";
 ---
 
 <div class="table-wrapper">
@@ -180,11 +112,9 @@ const isCot = genType === "cot";
             type === "models"
               ? `/models/${name.toLowerCase()}`
               : `/models/${modelSlug}/${item.id}`;
-          // Add ?type=cot query param for CoT data (either from genType or mode)
-          const isCotLink = isCot || mode === "cot";
+          const isCotLink = genType === "cot" || mode === "cot";
           const href = isCotLink ? `${baseHref}?type=cot` : baseHref;
-
-          const source = getDataSource(item, isGeneration, isCot);
+          const source = getDataSource(item);
 
           return (
             <tr>
@@ -193,7 +123,6 @@ const isCot = genType === "cot";
               </td>
               {columns.map((col) => {
                 const value = getValue(source, col.key);
-                const statusClass = getStatusClass(value, col, isGeneration);
                 const style = getCellStyle(value, col, isGeneration);
                 const displayValue = formatValue(
                   value,
@@ -202,14 +131,7 @@ const isCot = genType === "cot";
                   source
                 );
 
-                return (
-                  <td
-                    class={statusClass || undefined}
-                    style={style || undefined}
-                  >
-                    {displayValue}
-                  </td>
-                );
+                return <td style={style || undefined}>{displayValue}</td>;
               })}
             </tr>
           );
@@ -223,70 +145,51 @@ const isCot = genType === "cot";
   .table-wrapper {
     overflow-x: auto;
   }
-
   .data-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.75rem;
   }
-
   .data-table th,
   .data-table td {
     padding: 0.4rem 0.5rem;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--color-border);
     white-space: nowrap;
   }
-
   .data-table th {
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    color: #666;
-    background: #fafafa;
+    color: var(--color-secondary);
+    background: var(--color-surface);
   }
-
   .data-table .name-header,
   .data-table .name-cell {
     text-align: left !important;
   }
-
   .data-table .name-cell {
     font-weight: 500;
   }
-
   .name-cell a {
-    color: #0066cc;
+    color: var(--color-link);
+
     text-decoration: none;
   }
-
   .name-cell a:hover {
     text-decoration: underline;
   }
-
   .sticky-col {
     position: sticky;
     left: 0;
-    background: white;
+    background: var(--color-background);
     z-index: 1;
   }
-
   tbody tr:hover {
-    background: #fafafa;
+    background: var(--color-surface);
   }
-
   tbody tr:hover .sticky-col {
-    background: #fafafa;
-  }
-
-  .status-ok {
-    color: #22863a;
-    font-weight: 500;
-  }
-
-  .status-error {
-    color: #cb2431;
-    font-weight: 500;
+    background: var(--color-surface);
   }
 </style>

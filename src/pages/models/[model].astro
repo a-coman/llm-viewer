@@ -1,50 +1,32 @@
 ---
-import PageLayout from "../../components/PageLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 import HeatmapMatrix from "../../components/HeatmapMatrix.astro";
-import ShannonBars from "../../components/ShannonBars.astro";
 import PdfEmbed from "../../components/PdfEmbed.astro";
 import DataTable from "../../components/DataTable.astro";
-import {
-  MODELS_LOWER,
-  COT_CATEGORIES,
-  getModelName,
-  getColor,
-  formatPercent,
-  formatCurrency,
-} from "../../lib/constants";
+import MetricsPanel from "../../components/MetricsPanel.astro";
+import { MODELS_LOWER } from "../../lib/constants";
+import { getModelName } from "../../lib/utils";
+import { getModelData } from "../../lib/data";
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   return MODELS_LOWER.map((model) => ({ params: { model } }));
 }
 
 const { model } = Astro.params;
-const modelName = getModelName(model);
-
-// Load model data
-let modelData: any = null;
-try {
-  modelData = await import(`../../data/processed/models/${model}.json`);
-  modelData = modelData.default || modelData;
-} catch (e) {
-  console.error(`Failed to load model data for ${model}:`, e);
-}
+const modelName = getModelName(model || "");
+const modelData = getModelData(model || "");
 
 const simpleData = modelData?.simple || null;
 const cotData = modelData?.cot || null;
 
-// Helper to get validation rate directly from summary (for consistency with dashboard)
-// The summary already contains the aggregated rate as a decimal (e.g., 0.99 = 99%)
-function getValidationRateFromSummary(summary: any, key: string): string {
-  const value = summary?.[key];
-  if (value === null || value === undefined) return "—";
-  return formatPercent(value);
-}
-
-// Helper to calculate average coverage
-function getAvgCoverage(gen: any): number {
-  const c = gen.metrics?.coverage;
-  return c ? (c.classes + c.attributes + c.relationships) / 3 : 0;
-}
+const modelPanelSections = {
+  cost: true,
+  validation: true,
+  coverage: true,
+  instantiation: false,
+  diversity: true,
+  quality: true,
+};
 ---
 
 <PageLayout
@@ -67,7 +49,7 @@ function getAvgCoverage(gen: any): number {
       <>
         {/* Simple Content */}
         <div class="tab-content active" data-content="simple">
-          <div class="content-grid wide-left">
+          <div class="content-grid">
             <section class="section">
               <h2>Model Diagram</h2>
               <PdfEmbed
@@ -78,150 +60,21 @@ function getAvgCoverage(gen: any): number {
               />
             </section>
 
-            <section class="section">
-              <h2>Metrics</h2>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Cost</td>
-                      <td>
-                        ${simpleData?.summary?.price?.price?.toFixed(2) || "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Syntax</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          simpleData?.summary,
-                          "syntax"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Multiplicities</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          simpleData?.summary,
-                          "multiplicities"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Invariants</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          simpleData?.summary,
-                          "invariants"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h3>Coverage</h3>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Classes</td>
-                      <td>
-                        {simpleData?.summary?.coverage?.classes != null
-                          ? formatPercent(simpleData.summary.coverage.classes)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Attributes</td>
-                      <td>
-                        {simpleData?.summary?.coverage?.attributes != null
-                          ? formatPercent(
-                              simpleData.summary.coverage.attributes
-                            )
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Relationships</td>
-                      <td>
-                        {simpleData?.summary?.coverage?.relationships != null
-                          ? formatPercent(
-                              simpleData.summary.coverage.relationships
-                            )
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Realism</td>
-                      <td>
-                        {simpleData?.judge?.successRate != null
-                          ? formatPercent(simpleData.judge.successRate)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h3>Diversity</h3>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Numeric</td>
-                      <td>
-                        {simpleData?.summary?.diversity?.numeric != null
-                          ? formatPercent(simpleData.summary.diversity.numeric)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>String Equals</td>
-                      <td>
-                        {simpleData?.summary?.diversity?.stringEquals != null
-                          ? formatPercent(
-                              simpleData.summary.diversity.stringEquals
-                            )
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>String LV</td>
-                      <td>
-                        {simpleData?.summary?.diversity?.stringLv != null
-                          ? formatPercent(simpleData.summary.diversity.stringLv)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
+            <div class="metrics-column">
+              <MetricsPanel
+                title={`${modelName} - Simple Metrics`}
+                metrics={simpleData}
+                showSections={modelPanelSections}
+              />
+            </div>
           </div>
 
-          {simpleData?.grakel?.kernel?.values?.length > 0 && (
+          {simpleData?.grakel && simpleData.grakel.values?.length > 0 && (
             <section class="section">
               <h2>Grakel Similarity</h2>
               <HeatmapMatrix
-                labels={simpleData.grakel.kernel.labels}
-                values={simpleData.grakel.kernel.values}
+                labels={simpleData.grakel.labels}
+                values={simpleData.grakel.values}
               />
             </section>
           )}
@@ -242,7 +95,7 @@ function getAvgCoverage(gen: any): number {
 
         {/* CoT Content */}
         <div class="tab-content" data-content="cot">
-          <div class="content-grid wide-left">
+          <div class="content-grid">
             <section class="section">
               <h2>Model Diagram</h2>
               <PdfEmbed
@@ -253,148 +106,21 @@ function getAvgCoverage(gen: any): number {
               />
             </section>
 
-            <section class="section">
-              <h2>Metrics</h2>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Cost</td>
-                      <td>
-                        ${cotData?.summary?.price?.price?.toFixed(2) || "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Syntax</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          cotData?.summary,
-                          "syntax"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Multiplicities</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          cotData?.summary,
-                          "multiplicities"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Invariants</td>
-                      <td>
-                        {getValidationRateFromSummary(
-                          cotData?.summary,
-                          "invariants"
-                        )}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h3>Coverage</h3>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Classes</td>
-                      <td>
-                        {cotData?.summary?.coverage?.classes != null
-                          ? formatPercent(cotData.summary.coverage.classes)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Attributes</td>
-                      <td>
-                        {cotData?.summary?.coverage?.attributes != null
-                          ? formatPercent(cotData.summary.coverage.attributes)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Relationships</td>
-                      <td>
-                        {cotData?.summary?.coverage?.relationships != null
-                          ? formatPercent(
-                              cotData.summary.coverage.relationships
-                            )
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>Realism</td>
-                      <td>
-                        {cotData?.judge?.successRate != null
-                          ? formatPercent(cotData.judge.successRate)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h3>Diversity</h3>
-              <table class="metrics-table">
-                <tbody>
-                  <tr>
-                    <>
-                      <td>Numeric</td>
-                      <td>
-                        {cotData?.summary?.diversity?.numeric != null
-                          ? formatPercent(cotData.summary.diversity.numeric)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>String Equals</td>
-                      <td>
-                        {cotData?.summary?.diversity?.stringEquals != null
-                          ? formatPercent(
-                              cotData.summary.diversity.stringEquals
-                            )
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                  <tr>
-                    <>
-                      <td>String LV</td>
-                      <td>
-                        {cotData?.summary?.diversity?.stringLv != null
-                          ? formatPercent(cotData.summary.diversity.stringLv)
-                          : "—"}
-                      </td>
-                    </>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
+            <div class="metrics-column">
+              <MetricsPanel
+                title={`${modelName} - CoT Metrics`}
+                metrics={cotData}
+                showSections={modelPanelSections}
+              />
+            </div>
           </div>
 
-          {cotData?.grakel?.kernel?.values?.length > 0 && (
+          {cotData?.grakel && cotData.grakel.values?.length > 0 && (
             <section class="section">
               <h2>Grakel Similarity</h2>
               <HeatmapMatrix
-                labels={cotData.grakel.kernel.labels}
-                values={cotData.grakel.kernel.values}
+                labels={cotData.grakel.labels}
+                values={cotData.grakel.values}
               />
             </section>
           )}
@@ -422,8 +148,6 @@ function getAvgCoverage(gen: any): number {
   document.addEventListener("DOMContentLoaded", () => {
     const modeBtns = document.querySelectorAll(".mode-btn");
     const contents = document.querySelectorAll(".tab-content[data-content]");
-    const gensSections = document.querySelectorAll(".gens-section");
-
     const params = new URLSearchParams(window.location.search);
     const initialTab = params.get("type") || "simple";
 
@@ -437,10 +161,6 @@ function getAvgCoverage(gen: any): number {
       contents.forEach((c) =>
         c.classList.toggle("active", c.getAttribute("data-content") === tabName)
       );
-      gensSections.forEach((s) =>
-        s.classList.toggle("hidden", s.getAttribute("data-gens") !== tabName)
-      );
-
       const url = new URL(window.location.href);
       tabName === "simple"
         ? url.searchParams.delete("type")
@@ -456,3 +176,11 @@ function getAvgCoverage(gen: any): number {
     );
   });
 </script>
+
+<style>
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

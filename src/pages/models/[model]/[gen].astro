@@ -1,11 +1,9 @@
 ---
-import PageLayout from "../../../components/PageLayout.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
 import GenerationView from "../../../components/GenerationView.astro";
-import {
-  MODELS_LOWER,
-  COT_CATEGORIES,
-  getModelName,
-} from "../../../lib/constants";
+import { MODELS_LOWER, COT_CATEGORIES } from "../../../lib/constants";
+import { getModelName } from "../../../lib/utils";
+import { getModelData } from "../../../lib/data";
 
 export function getStaticPaths() {
   const paths: { params: { model: string; gen: string } }[] = [];
@@ -18,56 +16,16 @@ export function getStaticPaths() {
 }
 
 const { model, gen } = Astro.params;
-const modelName = getModelName(model);
-const genNum = parseInt(gen.replace("gen", ""));
+const modelName = getModelName(model || "");
+const genNum = parseInt(gen?.replace("gen", "") || "0");
 
-// Load generation data
-let simpleData: any = null;
-let cotData: any = null;
+// Load centralized data
+const modelData = getModelData(model || "");
+const simpleData = modelData?.simple.generations.find((g) => g.id === gen);
+const cotData = modelData?.cot.generations.find((g) => g.id === gen);
+const classDiagramPdf = modelData?.diagramPdf || "";
 
-try {
-  const simpleFiles = import.meta.glob(
-    "../../../data/processed/generations/*/simple-*.json",
-    { eager: true }
-  );
-  const cotFiles = import.meta.glob(
-    "../../../data/processed/generations/*/cot-*.json",
-    { eager: true }
-  );
-
-  const simpleKey = Object.keys(simpleFiles).find((key) =>
-    key.endsWith(`/${model}/simple-${gen}.json`)
-  );
-  if (simpleKey) {
-    simpleData =
-      (simpleFiles[simpleKey] as any).default || simpleFiles[simpleKey];
-  }
-
-  if (genNum <= 6) {
-    const cotKey = Object.keys(cotFiles).find((key) =>
-      key.endsWith(`/${model}/cot-${gen}.json`)
-    );
-    if (cotKey) {
-      cotData = (cotFiles[cotKey] as any).default || cotFiles[cotKey];
-    }
-  }
-} catch (e) {
-  console.error("Error loading generation data:", e);
-}
-
-// Load model data to get class diagram PDF
-let classDiagramPdf = "";
-try {
-  const modelData = await import(
-    `../../../data/processed/models/${model}.json`
-  );
-  const data = modelData.default || modelData;
-  classDiagramPdf = data?.diagramPdf || "";
-} catch (e) {
-  console.error("Error loading model data for class diagram:", e);
-}
-
-const hasCotData = genNum <= 6 && cotData !== null;
+const hasCotData = genNum <= 30 && !!cotData;
 ---
 
 <PageLayout
