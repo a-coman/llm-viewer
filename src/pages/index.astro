@@ -42,12 +42,12 @@ const summarySections = {
           </div>
         </section>
 
-        <section class="section comparison-section" data-mode="simple">
+        <section class="section">
           <h2>Simple - Model Comparison</h2>
           <DataTable data={models} type="models" mode="simple" />
         </section>
 
-        <section class="section comparison-section hidden" data-mode="cot">
+        <section class="section">
           <h2>CoT - Model Comparison</h2>
           <DataTable data={models} type="models" mode="cot" />
         </section>
@@ -55,40 +55,6 @@ const summarySections = {
     )
   }
 </PageLayout>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabBtns = document.querySelectorAll(".tab-btn");
-    const sections = document.querySelectorAll(".comparison-section");
-    const sidebarModeBtns = document.querySelectorAll(".mode-btn");
-
-    function setMode(mode: string) {
-      tabBtns.forEach((btn) => {
-        btn.classList.toggle("active", btn.getAttribute("data-mode") === mode);
-      });
-      sections.forEach((section) => {
-        section.classList.toggle(
-          "hidden",
-          section.getAttribute("data-mode") !== mode
-        );
-      });
-      sidebarModeBtns.forEach((btn) => {
-        if (btn.getAttribute("data-mode") === mode) {
-          (btn as HTMLElement).click();
-        }
-      });
-    }
-
-    tabBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setMode(btn.getAttribute("data-mode") || "simple");
-      });
-    });
-
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("type") === "cot") setMode("cot");
-  });
-</script>
 
 <style>
   .summary-grid {
