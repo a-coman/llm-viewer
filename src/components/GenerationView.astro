@@ -62,8 +62,9 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
           code ? (
             <SoilViewer code={code} height="500px" />
           ) : (
-            <div class="no-code">
-              No code available {label && `for ${label}`}
+            <div class="sober-empty-state">
+              <div class="sober-empty-text">No code available</div>
+              <div class="sober-empty-hint">{label && `for ${label}`}</div>
             </div>
           )
         }
@@ -196,17 +197,5 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 
   [data-view-content].active {
     display: block;
-  }
-
-  .no-code {
-    padding: 2rem;
-    text-align: center;
-    color: var(--color-text-muted);
-    font-style: italic;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-surface);
   }
 </style>

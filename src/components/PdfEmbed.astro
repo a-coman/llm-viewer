@@ -22,10 +22,9 @@ const {
       </div>
     </div>
   ) : (
-    <div class="unavailable" style={`height: ${height};`}>
-      <div class="unavailable-icon">📄</div>
-      <span class="unavailable-text">PDF Unavailable</span>
-      <span class="unavailable-hint">{title}</span>
+    <div class="sober-empty-state" style={`height: ${height};`}>
+      <div class="sober-empty-text">PDF Unavailable</div>
+      <div class="sober-empty-hint">{title}</div>
     </div>
   )
 }
@@ -142,7 +141,12 @@ const {
         this.addEventListeners();
       } catch (error: any) {
         console.error("Error loading PDF:", error);
-        this.container.innerHTML = `<div class="error">Failed to load PDF: ${error.message}</div>`;
+        this.container.innerHTML = `
+          <div class="sober-empty-state error">
+            <div class="sober-empty-text">Load Failed</div>
+            <div class="sober-empty-hint">${error.message}</div>
+          </div>
+        `;
       }
     }
 
@@ -223,7 +227,7 @@ const {
   .pdf-container {
     position: relative;
     overflow: hidden;
-    background: var(--color-muted);
+    background: white;
     cursor: grab;
     width: 100%;
   }
@@ -240,42 +244,5 @@ const {
   .pdf-canvas {
     display: block;
     background: white;
-  }
-
-  .error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--color-error);
-    font-size: 0.875rem;
-  }
-
-  .unavailable {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-muted);
-    text-align: center;
-    width: 100%;
-  }
-
-  .unavailable-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-  }
-
-  .unavailable-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-secondary);
-  }
-
-  .unavailable-hint {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    margin-top: 0.5rem;
   }
 </style>
