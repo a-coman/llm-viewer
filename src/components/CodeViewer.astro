@@ -2,7 +2,7 @@
 interface Props {
   code: string;
   height?: string;
-  language?: "soil" | "use";
+  language?: "soil" | "use" | "markdown" | "text";
 }
 
 const { code, height = "400px", language = "soil" } = Astro.props;
@@ -76,8 +76,28 @@ function highlightUse(code: string): string {
   );
 }
 
-const highlightedCode =
-  language === "use" ? highlightUse(code || "") : highlightSoil(code || "");
+// Simple text renderer (just escape HTML)
+function highlightText(code: string): string {
+  if (!code) return "";
+  return code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function getHighlightedCode(code: string, lang: string): string {
+  switch (lang) {
+    case "use":
+      return highlightUse(code || "");
+    case "markdown":
+    case "text":
+      return highlightText(code || "");
+    default:
+      return highlightSoil(code || "");
+  }
+}
+
+const highlightedCode = getHighlightedCode(code?.trim() || "", language);
 ---
 
 <div class="code-viewer" style={`height: ${height};`}>
@@ -108,6 +128,8 @@ const highlightedCode =
     width: 100%;
     scrollbar-width: thin;
     scrollbar-color: var(--color-secondary) transparent;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .code-block::-webkit-scrollbar {

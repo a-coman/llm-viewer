@@ -4,6 +4,7 @@ import CodeViewer from "./CodeViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
 import { COLOR_RANGES } from "../lib/constants";
+import type { CotPromptsData } from "../lib/types";
 
 interface Props {
   data: any;
@@ -11,6 +12,9 @@ interface Props {
   showJudge?: boolean;
   classDiagramPdf?: string;
   classDiagramUseCode?: string;
+  systemPrompt?: string;
+  userPrompt?: string;
+  cotPrompts?: CotPromptsData;
 }
 
 const {
@@ -19,6 +23,9 @@ const {
   showJudge = true,
   classDiagramPdf = "",
   classDiagramUseCode = "",
+  systemPrompt = "",
+  userPrompt = "",
+  cotPrompts,
 } = Astro.props;
 const uniqueId = Math.random().toString(36).substring(2, 9);
 
@@ -26,34 +33,63 @@ const code = data?.code || data?.metrics?.code;
 const metrics = data?.metrics || data;
 const pdfUrl = data?.pdfUrl || "";
 const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
+
+// Determine if we're in CoT mode
+const isCoT = !!label && !!cotPrompts;
 ---
 
 <div class="content-grid">
   <section class="section diagram-section">
-    <div class="diagram-header tabbed-header sober-header">
-      <div class="header-label">View:</div>
+    <div class="diagram-header sober-header">
+      <div class="view-selectors" data-selectors-id={uniqueId}>
+        {/* Instance group */}
+        <div class="selector-group active" data-group="instance">
+          <button
+            type="button"
+            class="group-btn active"
+            data-group-btn="instance">Instance</button
+          >
+          <select class="group-select" data-select="instance">
+            <option value="instance-diagram">Diagram</option>
+            <option value="instance-code">Code</option>
+          </select>
+        </div>
 
-      <div class="diagram-tabs" data-tabs-id={uniqueId}>
-        <button
-          type="button"
-          class="diagram-tab active"
-          data-view="instance-diagram"
-        >
-          Instance Diagram
-        </button>
-        <button type="button" class="diagram-tab" data-view="instance-code">
-          Instance Code
-        </button>
-        <button type="button" class="diagram-tab" data-view="model-diagram">
-          Model Diagram
-        </button>
-        <button type="button" class="diagram-tab" data-view="model-code">
-          Model Code
-        </button>
+        {/* Model group */}
+        <div class="selector-group" data-group="model">
+          <button type="button" class="group-btn" data-group-btn="model"
+            >Model</button
+          >
+          <select class="group-select" data-select="model">
+            <option value="model-diagram">Diagram</option>
+            <option value="model-code">Code</option>
+          </select>
+        </div>
+
+        {/* Prompt group (includes Agent for CoT) */}
+        <div class="selector-group" data-group="prompt">
+          <button type="button" class="group-btn" data-group-btn="prompt"
+            >Prompt</button
+          >
+          <select class="group-select" data-select="prompt">
+            <option value="system-prompt">System</option>
+            <option value="user-prompt">User</option>
+          </select>
+          {
+            isCoT && (
+              <select class="group-select" data-select="agent">
+                <option value="IModelAnalyzer">IModelAnalyzer</option>
+                <option value="IListCreator">IListCreator</option>
+                <option value="IListInstantiator">IListInstantiator</option>
+              </select>
+            )
+          }
+        </div>
       </div>
     </div>
 
     <div class="diagram-views" data-views-id={uniqueId}>
+      {/* Instance views */}
       <div class="diagram-view active" data-view-content="instance-diagram">
         <PdfEmbed
           src={pdfUrl}
@@ -76,6 +112,7 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
         }
       </div>
 
+      {/* Model views */}
       <div class="diagram-view" data-view-content="model-diagram">
         <PdfEmbed
           src={classDiagramPdf || ""}
@@ -96,6 +133,95 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No model code available</div>
+            </div>
+          )
+        }
+      </div>
+
+      {/* Prompt views */}
+      <div class="diagram-view" data-view-content="system-prompt">
+        {
+          isCoT ? (
+            <div
+              class="prompt-container"
+              data-prompt-type="system"
+              data-unique-id={uniqueId}
+            >
+              {(
+                ["IModelAnalyzer", "IListCreator", "IListInstantiator"] as const
+              ).map((agent) => (
+                <div
+                  class={`prompt-content ${agent === "IModelAnalyzer" ? "active" : ""}`}
+                  data-agent-content={agent}
+                >
+                  {cotPrompts?.[agent]?.systemPrompt ? (
+                    <CodeViewer
+                      code={cotPrompts[agent].systemPrompt}
+                      height="500px"
+                      language="markdown"
+                    />
+                  ) : (
+                    <div class="sober-empty-state">
+                      <div class="sober-empty-text">
+                        No system prompt available
+                      </div>
+                      <div class="sober-empty-hint">for {agent}</div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : systemPrompt ? (
+            <CodeViewer
+              code={systemPrompt}
+              height="500px"
+              language="markdown"
+            />
+          ) : (
+            <div class="sober-empty-state">
+              <div class="sober-empty-text">No system prompt available</div>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="diagram-view" data-view-content="user-prompt">
+        {
+          isCoT ? (
+            <div
+              class="prompt-container"
+              data-prompt-type="user"
+              data-unique-id={uniqueId}
+            >
+              {(
+                ["IModelAnalyzer", "IListCreator", "IListInstantiator"] as const
+              ).map((agent) => (
+                <div
+                  class={`prompt-content ${agent === "IModelAnalyzer" ? "active" : ""}`}
+                  data-agent-content={agent}
+                >
+                  {cotPrompts?.[agent]?.userPrompt ? (
+                    <CodeViewer
+                      code={cotPrompts[agent].userPrompt}
+                      height="500px"
+                      language="markdown"
+                    />
+                  ) : (
+                    <div class="sober-empty-state">
+                      <div class="sober-empty-text">
+                        No user prompt available
+                      </div>
+                      <div class="sober-empty-hint">for {agent}</div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : userPrompt ? (
+            <CodeViewer code={userPrompt} height="500px" language="markdown" />
+          ) : (
+            <div class="sober-empty-state">
+              <div class="sober-empty-text">No user prompt available</div>
             </div>
           )
         }
@@ -126,33 +252,44 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
   document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const initialView = params.get("view") || "instance-diagram";
+    const initialAgent = params.get("agent") || "IModelAnalyzer";
 
-    function setAllDiagramTabs(viewName: string, updateUrl = true) {
-      document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
-        const tabsId = tabsContainer.getAttribute("data-tabs-id");
-        const viewsContainer = document.querySelector(
-          `.diagram-views[data-views-id="${tabsId}"]`,
-        );
-        if (!viewsContainer) return;
+    function getViewGroup(view: string): string {
+      if (view.startsWith("instance-")) return "instance";
+      if (view.startsWith("model-")) return "model";
+      if (view.endsWith("-prompt")) return "prompt";
+      return "instance";
+    }
 
-        const tabs = tabsContainer.querySelectorAll(".diagram-tab");
-        const views = viewsContainer.querySelectorAll("[data-view-content]");
-
-        tabs.forEach((t) =>
-          t.classList.toggle(
-            "active",
-            t.getAttribute("data-view") === viewName,
-          ),
-        );
-        views.forEach((v) =>
+    function setView(viewName: string, updateUrl = true) {
+      // Update view content
+      document
+        .querySelectorAll("[data-view-content]")
+        .forEach((v) =>
           v.classList.toggle(
             "active",
             v.getAttribute("data-view-content") === viewName,
           ),
         );
+
+      // Update group buttons
+      const group = getViewGroup(viewName);
+      document.querySelectorAll(".selector-group").forEach((g) => {
+        g.classList.toggle("active", g.getAttribute("data-group") === group);
+      });
+      document.querySelectorAll(".group-btn").forEach((btn) => {
+        btn.classList.toggle(
+          "active",
+          btn.getAttribute("data-group-btn") === group,
+        );
       });
 
-      // Update URL with view parameter
+      // Update the relevant select
+      const select = document.querySelector(
+        `[data-select="${group}"]`,
+      ) as HTMLSelectElement;
+      if (select) select.value = viewName;
+
       if (updateUrl) {
         const url = new URL(window.location.href);
         viewName === "instance-diagram"
@@ -162,18 +299,57 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
       }
     }
 
-    // Set initial view from URL
-    setAllDiagramTabs(initialView, false);
+    function setAgent(agentName: string, updateUrl = true) {
+      document.querySelectorAll("[data-select='agent']").forEach((select) => {
+        (select as HTMLSelectElement).value = agentName;
+      });
 
-    document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
-      const tabs = tabsContainer.querySelectorAll(".diagram-tab");
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const viewName = tab.getAttribute("data-view");
-          if (viewName) {
-            setAllDiagramTabs(viewName);
-          }
-        });
+      document.querySelectorAll(".prompt-content").forEach((content) => {
+        content.classList.toggle(
+          "active",
+          content.getAttribute("data-agent-content") === agentName,
+        );
+      });
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        agentName === "IModelAnalyzer"
+          ? url.searchParams.delete("agent")
+          : url.searchParams.set("agent", agentName);
+        window.history.replaceState({}, "", url.toString());
+      }
+    }
+
+    // Initialize
+    setView(initialView, false);
+    setAgent(initialAgent, false);
+
+    // Group button clicks - activate group and show first option
+    document.querySelectorAll(".group-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const group = btn.getAttribute("data-group-btn");
+        if (!group) return;
+
+        const select = document.querySelector(
+          `[data-select="${group}"]`,
+        ) as HTMLSelectElement;
+        if (select) {
+          setView(select.value);
+        }
+      });
+    });
+
+    // Select changes
+    document.querySelectorAll(".group-select").forEach((select) => {
+      select.addEventListener("change", (e) => {
+        const target = e.target as HTMLSelectElement;
+        const selectorType = target.getAttribute("data-select");
+
+        if (selectorType === "agent") {
+          setAgent(target.value);
+        } else {
+          setView(target.value);
+        }
       });
     });
   });
@@ -181,20 +357,62 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 
 <script is:inline>
   (function () {
-    try {
-      const view = new URLSearchParams(window.location.search).get("view");
-      if (view && view !== "instance-diagram") {
-        document.querySelectorAll(".diagram-tab").forEach((t) => {
-          t.classList.toggle("active", t.getAttribute("data-view") === view);
-        });
+    function syncAll() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const view = params.get("view") || "instance-diagram";
+        const agent = params.get("agent") || "IModelAnalyzer";
+
+        // Set active view
         document.querySelectorAll("[data-view-content]").forEach((v) => {
           v.classList.toggle(
             "active",
             v.getAttribute("data-view-content") === view,
           );
         });
-      }
-    } catch (e) {}
+
+        // Determine group
+        const group = view.startsWith("instance-")
+          ? "instance"
+          : view.startsWith("model-")
+            ? "model"
+            : view.endsWith("-prompt")
+              ? "prompt"
+              : "instance";
+
+        // Set group active states
+        document.querySelectorAll(".selector-group").forEach((g) => {
+          g.classList.toggle("active", g.getAttribute("data-group") === group);
+        });
+        document.querySelectorAll(".group-btn").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-group-btn") === group,
+          );
+        });
+
+        // Set select values
+        document.querySelectorAll(".group-select").forEach((select) => {
+          const type = select.getAttribute("data-select");
+          if (type === group) select.value = view;
+          if (type === "agent") select.value = agent;
+        });
+
+        // Set agent content
+        document.querySelectorAll(".prompt-content").forEach((content) => {
+          content.classList.toggle(
+            "active",
+            content.getAttribute("data-agent-content") === agent,
+          );
+        });
+      } catch (e) {}
+    }
+
+    // Initialize on load
+    syncAll();
+
+    // Listen for custom sync events from other components
+    window.addEventListener("sync-gen-view", syncAll);
   })();
 </script>
 
@@ -221,33 +439,97 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
     margin-bottom: 0;
   }
 
-  /* Alignment Fix: Make tabbed header match standard h2 padding/font */
-  .diagram-header.tabbed-header {
-    gap: 0.75rem;
-  }
-
-  .header-label {
-    font-size: 0.75rem;
-  }
-
-  .diagram-tabs {
+  /* View Selectors */
+  .view-selectors {
     display: flex;
-    gap: 0.25rem;
-    height: 1.75rem;
-    align-items: center;
+    gap: 0.5rem;
+    align-items: stretch;
+    flex-wrap: wrap;
   }
 
-  .diagram-tab {
-    padding: 0 0.75rem;
-    height: 100%;
-    font-size: 0.7rem;
+  .selector-group {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--color-background);
+    height: 26px;
+  }
+
+  /* Group button - follows .mode-btn / .cat-tab pattern */
+  .group-btn {
+    padding: 0 0.625rem;
+    font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    color: var(--color-secondary);
+    background: var(--color-muted);
+    border-right: 1px solid var(--color-border);
     display: flex;
     align-items: center;
   }
 
+  .group-btn:hover {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+
+  .group-btn.active {
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+
+  /* Group select - clean minimal style */
+  .group-select {
+    padding: 0 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: none;
+    background: var(--color-background);
+    color: var(--color-secondary);
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.1s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    padding-right: 1.25rem;
+  }
+
+  .group-select:hover {
+    color: var(--color-primary);
+    background-color: var(--color-surface);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  .group-select:focus {
+    outline: none;
+    background-color: var(--color-surface);
+  }
+
+  .selector-group.active .group-select {
+    color: var(--color-primary);
+  }
+
+  /* When group is active, show slight highlight on the whole group */
+  .selector-group.active {
+    border-color: var(--color-accent);
+  }
+
+  /* Agent select in prompt group - add left border */
+  .selector-group [data-select="agent"] {
+    border-left: 1px solid var(--color-border);
+  }
+
+  /* Views */
   .diagram-views {
     flex: 1;
     height: 500px;
@@ -261,5 +543,26 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 
   [data-view-content].active {
     display: block;
+  }
+
+  /* Prompt content switching */
+  .prompt-container {
+    height: 100%;
+  }
+
+  .prompt-content {
+    display: none;
+    height: 100%;
+  }
+
+  .prompt-content.active {
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .view-selectors {
+      gap: 0.5rem;
+    }
   }
 </style>

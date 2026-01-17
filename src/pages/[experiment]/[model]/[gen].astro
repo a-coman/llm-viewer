@@ -79,6 +79,8 @@ const hasCotData = genNum <= 30 && !!cotData;
             data={simpleData}
             classDiagramPdf={classDiagramPdf}
             classDiagramUseCode={classDiagramUseCode}
+            systemPrompt={simpleData?.systemPrompt}
+            userPrompt={simpleData?.userPrompt}
           />
         </div>
 
@@ -97,6 +99,7 @@ const hasCotData = genNum <= 30 && !!cotData;
                     showJudge={false}
                     classDiagramPdf={classDiagramPdf}
                     classDiagramUseCode={classDiagramUseCode}
+                    cotPrompts={catData?.prompts}
                   />
                 </div>
               );
@@ -145,10 +148,12 @@ const hasCotData = genNum <= 30 && !!cotData;
       if (tabName === "simple") {
         url.searchParams.delete("type");
         url.searchParams.delete("category"); // Remove category when switching to simple
+        url.searchParams.delete("agent"); // Remove agent when switching to simple
       } else {
         url.searchParams.set("type", tabName);
       }
       window.history.replaceState({}, "", url.toString());
+      window.dispatchEvent(new CustomEvent("sync-gen-view"));
     }
 
     function setCategory(catName: string) {
@@ -170,6 +175,7 @@ const hasCotData = genNum <= 30 && !!cotData;
         url.searchParams.set("category", catName);
       }
       window.history.replaceState({}, "", url.toString());
+      window.dispatchEvent(new CustomEvent("sync-gen-view"));
     }
 
     setTab(initialTab);

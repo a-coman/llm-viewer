@@ -267,9 +267,22 @@ export interface GenerationMetrics {
   code?: string;
 }
 
+// Prompt data for each CoT agent
+export interface AgentPrompts {
+  systemPrompt: string;
+  userPrompt: string;
+}
+
+export interface CotPromptsData {
+  IModelAnalyzer: AgentPrompts;
+  IListCreator: AgentPrompts;
+  IListInstantiator: AgentPrompts;
+}
+
 export interface CategoryMetrics extends GenerationMetrics {
   category: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   pdfUrl?: string;
+  prompts?: CotPromptsData;
 }
 
 export interface SimpleGeneration {
@@ -278,6 +291,8 @@ export interface SimpleGeneration {
   judge?: JudgeResponse;
   pdfAvailable: boolean;
   pdfUrl?: string;
+  systemPrompt?: string;
+  userPrompt?: string;
 }
 
 export interface CoTGeneration {

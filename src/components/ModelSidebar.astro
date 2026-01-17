@@ -408,6 +408,7 @@ const showGens = currentModel || currentPage === "dashboard";
         const currentParams = new URLSearchParams(window.location.search);
         const currentView = currentParams.get("view");
         const currentCategory = currentParams.get("category");
+        const currentAgent = currentParams.get("agent");
 
         // Get experiment from current path (first segment)
         const pathParts = window.location.pathname.split("/").filter(Boolean);
@@ -445,6 +446,8 @@ const showGens = currentModel || currentPage === "dashboard";
         }
         if (currentView && currentView !== "instance-diagram")
           params.set("view", currentView);
+        if (currentAgent && currentAgent !== "IModelAnalyzer")
+          params.set("agent", currentAgent);
 
         if (params.toString()) url += `?${params.toString()}`;
         window.location.href = url;
@@ -462,6 +465,7 @@ const showGens = currentModel || currentPage === "dashboard";
           const currentParams = new URLSearchParams(window.location.search);
           const currentView = currentParams.get("view");
           const currentCategory = currentParams.get("category");
+          const currentAgent = currentParams.get("agent");
 
           // Parse the existing href to get base path and any existing params
           const [basePath, existingQuery] = href.split("?");
@@ -478,6 +482,14 @@ const showGens = currentModel || currentPage === "dashboard";
             currentCategory !== "baseline"
           ) {
             params.set("category", currentCategory);
+          }
+          // Add agent param if set and in CoT mode (only if not default)
+          if (
+            params.get("type") === "cot" &&
+            currentAgent &&
+            currentAgent !== "IModelAnalyzer"
+          ) {
+            params.set("agent", currentAgent);
           }
 
           const url = params.toString()
@@ -535,11 +547,16 @@ const showGens = currentModel || currentPage === "dashboard";
         // Update URL param without reload (for non-dashboard pages)
         if (!isDashboard) {
           const url = new URL(window.location.href);
-          mode === "cot"
-            ? url.searchParams.set("type", "cot")
-            : url.searchParams.delete("type");
+          if (mode === "cot") {
+            url.searchParams.set("type", "cot");
+          } else {
+            url.searchParams.delete("type");
+            url.searchParams.delete("category");
+            url.searchParams.delete("agent");
+          }
 
           window.history.replaceState({}, "", url.toString());
+          window.dispatchEvent(new CustomEvent("sync-gen-view"));
         }
       });
     });

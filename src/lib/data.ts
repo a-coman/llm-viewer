@@ -183,6 +183,8 @@ export function getModelData(
             pdfUrl,
             metrics: genMetrics,
             judge: gen.judge as SimpleGeneration["judge"],
+            systemPrompt: logExp.system_prompt,
+            userPrompt: attempt.prompt,
           });
         }
       });
@@ -259,6 +261,27 @@ export function getModelData(
           const totalIn = creatorTokens.input + instantiatorTokens.input;
           const totalOut = creatorTokens.output + instantiatorTokens.output;
 
+          // Extract prompts from all 3 agents
+          const creatorAttempts = catLog.IListCreator?.attempts || [];
+          const creatorLastAttempt =
+            creatorAttempts[creatorAttempts.length - 1];
+          const instantiatorLastAttempt = attempt;
+
+          const prompts = {
+            IModelAnalyzer: {
+              systemPrompt: logExp.IModelAnalyzer?.system_prompt || "",
+              userPrompt: logExp.IModelAnalyzer?.prompt || "",
+            },
+            IListCreator: {
+              systemPrompt: catLog.IListCreator?.system_prompt || "",
+              userPrompt: creatorLastAttempt?.prompt || "",
+            },
+            IListInstantiator: {
+              systemPrompt: catLog.IListInstantiator?.system_prompt || "",
+              userPrompt: instantiatorLastAttempt?.prompt || "",
+            },
+          };
+
           return {
             category: catLog.name,
             syntax: catMetric?.metrics?.syntax || { ...EMPTY_METRIC_STAT },
@@ -276,6 +299,7 @@ export function getModelData(
               tokenInput: totalIn,
               tokenOutput: totalOut,
             },
+            prompts,
           };
         });
 
