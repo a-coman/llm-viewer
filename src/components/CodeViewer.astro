@@ -2,11 +2,12 @@
 interface Props {
   code: string;
   height?: string;
+  language?: "soil" | "use";
 }
 
-const { code, height = "400px" } = Astro.props;
+const { code, height = "400px", language = "soil" } = Astro.props;
 
-// Sober syntax highlighting for .soil files (neutral gray tones)
+// Syntax highlighting for .soil files (SOIL language)
 function highlightSoil(code: string): string {
   if (!code) return "";
   return (
@@ -19,32 +20,72 @@ function highlightSoil(code: string): string {
       // Strings
       .replace(
         /'(?:[^'\\]|\\.)*'/g,
-        (match) => `<span class="string">${match}</span>`
+        (match) => `<span class="string">${match}</span>`,
       )
       // Keywords
       .replace(
         /\b(new|insert|delete|set|destroy|create|between|and|for|in|do|end|if|then|else|endif|into)\b/g,
-        '<span class="keyword">$1</span>'
+        '<span class="keyword">$1</span>',
       )
       // Booleans
       .replace(/\b(true|false)\b/g, '<span class="boolean">$1</span>')
       // Numbers
       .replace(
         /(?<![">])\b(\d+\.?\d*)\b(?![^<]*<\/span>)/g,
-        '<span class="number">$1</span>'
+        '<span class="number">$1</span>',
       )
   );
 }
 
-const highlightedCode = highlightSoil(code || "");
+// Syntax highlighting for .use files (USE/OCL language)
+function highlightUse(code: string): string {
+  if (!code) return "";
+  return (
+    code
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      // Comments first (-- style and /* */ style)
+      .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>')
+      // Strings
+      .replace(
+        /'(?:[^'\\]|\\.)*'/g,
+        (match) => `<span class="string">${match}</span>`,
+      )
+      // USE/OCL Keywords
+      .replace(
+        /\b(model|class|abstract|attributes|operations|end|association|aggregation|composition|between|role|ordered|constraints|context|inv|pre|post|derive|init|enum|Set|Bag|Sequence|OrderedSet|Tuple|OclAny|OclVoid|Boolean|Integer|Real|String|UnlimitedNatural|self|result|if|then|else|endif|let|in|and|or|xor|not|implies|forAll|exists|collect|select|reject|iterate|any|one|isUnique|sortedBy|includes|excludes|includesAll|excludesAll|isEmpty|notEmpty|size|sum|count|oclIsTypeOf|oclIsKindOf|oclAsType|allInstances)\b/g,
+        '<span class="keyword">$1</span>',
+      )
+      // Booleans
+      .replace(
+        /\b(true|false|null|undefined)\b/g,
+        '<span class="boolean">$1</span>',
+      )
+      // Numbers
+      .replace(
+        /(?<![\w">])\b(\d+\.?\d*)\b(?![^<]*<\/span>)/g,
+        '<span class="number">$1</span>',
+      )
+      // Types (capitalized words that aren't keywords, likely class names)
+      .replace(
+        /(?<![<\w])([A-Z][a-zA-Z0-9_]*)(?![^<]*<\/span>)/g,
+        '<span class="type">$1</span>',
+      )
+  );
+}
+
+const highlightedCode =
+  language === "use" ? highlightUse(code || "") : highlightSoil(code || "");
 ---
 
-<div class="soil-viewer" style={`height: ${height};`}>
+<div class="code-viewer" style={`height: ${height};`}>
   <pre class="code-block"><code set:html={highlightedCode} /></pre>
 </div>
 
 <style>
-  .soil-viewer {
+  .code-viewer {
     display: flex;
     flex-direction: column;
     background: var(--color-code-bg);
@@ -107,5 +148,9 @@ const highlightedCode = highlightSoil(code || "");
 
   .code-block :global(.boolean) {
     color: var(--color-code-boolean);
+  }
+
+  .code-block :global(.type) {
+    color: var(--color-code-string);
   }
 </style>

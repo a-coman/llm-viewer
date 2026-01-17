@@ -1,6 +1,6 @@
 ---
 import PdfEmbed from "./PdfEmbed.astro";
-import SoilViewer from "./SoilViewer.astro";
+import CodeViewer from "./CodeViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
 import { COLOR_RANGES } from "../lib/constants";
@@ -10,6 +10,7 @@ interface Props {
   label?: string;
   showJudge?: boolean;
   classDiagramPdf?: string;
+  classDiagramUseCode?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   label = "",
   showJudge = true,
   classDiagramPdf = "",
+  classDiagramUseCode = "",
 } = Astro.props;
 const uniqueId = Math.random().toString(36).substring(2, 9);
 
@@ -42,8 +44,11 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
         <button type="button" class="diagram-tab" data-view="instance-code">
           Instance Code
         </button>
-        <button type="button" class="diagram-tab" data-view="class-diagram">
+        <button type="button" class="diagram-tab" data-view="model-diagram">
           Model Diagram
+        </button>
+        <button type="button" class="diagram-tab" data-view="model-code">
+          Model Code
         </button>
       </div>
     </div>
@@ -61,7 +66,7 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
       <div class="diagram-view" data-view-content="instance-code">
         {
           code ? (
-            <SoilViewer code={code} height="500px" />
+            <CodeViewer code={code} height="500px" language="soil" />
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No code available</div>
@@ -71,13 +76,29 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
         }
       </div>
 
-      <div class="diagram-view" data-view-content="class-diagram">
+      <div class="diagram-view" data-view-content="model-diagram">
         <PdfEmbed
           src={classDiagramPdf || ""}
           title="Model Diagram"
           height="500px"
           available={!!classDiagramPdf}
         />
+      </div>
+
+      <div class="diagram-view" data-view-content="model-code">
+        {
+          classDiagramUseCode ? (
+            <CodeViewer
+              code={classDiagramUseCode}
+              height="500px"
+              language="use"
+            />
+          ) : (
+            <div class="sober-empty-state">
+              <div class="sober-empty-text">No model code available</div>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>
@@ -110,7 +131,7 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
       document.querySelectorAll(".diagram-tabs").forEach((tabsContainer) => {
         const tabsId = tabsContainer.getAttribute("data-tabs-id");
         const viewsContainer = document.querySelector(
-          `.diagram-views[data-views-id="${tabsId}"]`
+          `.diagram-views[data-views-id="${tabsId}"]`,
         );
         if (!viewsContainer) return;
 
@@ -118,13 +139,16 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
         const views = viewsContainer.querySelectorAll("[data-view-content]");
 
         tabs.forEach((t) =>
-          t.classList.toggle("active", t.getAttribute("data-view") === viewName)
+          t.classList.toggle(
+            "active",
+            t.getAttribute("data-view") === viewName,
+          ),
         );
         views.forEach((v) =>
           v.classList.toggle(
             "active",
-            v.getAttribute("data-view-content") === viewName
-          )
+            v.getAttribute("data-view-content") === viewName,
+          ),
         );
       });
 
@@ -166,7 +190,7 @@ const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
         document.querySelectorAll("[data-view-content]").forEach((v) => {
           v.classList.toggle(
             "active",
-            v.getAttribute("data-view-content") === view
+            v.getAttribute("data-view-content") === view,
           );
         });
       }

@@ -30,6 +30,7 @@ const modelData = getModelData(model || "", experiment);
 const simpleData = modelData?.simple.generations.find((g) => g.id === gen);
 const cotData = modelData?.cot.generations.find((g) => g.id === gen);
 const classDiagramPdf = modelData?.diagramPdf || "";
+const classDiagramUseCode = modelData?.diagramUseCode || "";
 
 const hasCotData = genNum <= 30 && !!cotData;
 ---
@@ -74,7 +75,11 @@ const hasCotData = genNum <= 30 && !!cotData;
       <>
         {/* Simple Content */}
         <div class="tab-content active" data-content="simple">
-          <GenerationView data={simpleData} classDiagramPdf={classDiagramPdf} />
+          <GenerationView
+            data={simpleData}
+            classDiagramPdf={classDiagramPdf}
+            classDiagramUseCode={classDiagramUseCode}
+          />
         </div>
 
         {/* CoT Content */}
@@ -91,6 +96,7 @@ const hasCotData = genNum <= 30 && !!cotData;
                     label={cat}
                     showJudge={false}
                     classDiagramPdf={classDiagramPdf}
+                    classDiagramUseCode={classDiagramUseCode}
                   />
                 </div>
               );

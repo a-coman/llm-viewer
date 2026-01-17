@@ -297,6 +297,8 @@ export interface CoTGeneration {
 export interface ModelData {
   name: string;
   diagramPdf: string;
+  diagramUse: string;
+  diagramUseCode: string;
   simple: {
     price: PriceInfo;
     metrics: ModelMetrics;

@@ -337,9 +337,26 @@ export function getModelData(
     return null;
   }
 
+  // Read the .use file content at build time
+  let diagramUseCode = "";
+  try {
+    const useFilePath = path.join(
+      DATA_DIR,
+      "data",
+      "prompts",
+      domainLower,
+      "diagram.use",
+    );
+    diagramUseCode = fs.readFileSync(useFilePath, "utf-8");
+  } catch (e) {
+    // File may not exist for some models
+  }
+
   return {
     name: modelName,
     diagramPdf: `/data/prompts/${domainLower}/diagram.pdf`,
+    diagramUse: `/data/prompts/${domainLower}/diagram.use`,
+    diagramUseCode,
     simple: simpleData,
     cot: cotData,
   };
