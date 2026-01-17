@@ -123,16 +123,16 @@ const isGeneration = type === "generations";
       {
         data.map((item: any) => {
           const name = item.name || item.id;
+          // Build path-based URL: /:experiment/:model or /:experiment/:model/:gen
           const baseHref =
             type === "models"
-              ? `/models/${name.toLowerCase()}`
-              : `/models/${modelSlug}/${item.id}`;
+              ? `/${experimentId}/${name.toLowerCase()}`
+              : `/${experimentId}/${modelSlug}/${item.id}`;
           const isCotLink = genType === "cot" || mode === "cot";
 
-          // Build query parameters
+          // Build query parameters (no longer need experimentId - it's in path)
           const params = new URLSearchParams();
           if (isCotLink) params.set("type", "cot");
-          if (experimentId) params.set("experimentId", experimentId);
 
           const href = params.toString()
             ? `${baseHref}?${params.toString()}`

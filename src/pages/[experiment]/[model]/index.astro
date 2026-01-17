@@ -1,25 +1,29 @@
 ---
-import PageLayout from "../../layouts/PageLayout.astro";
-import HeatmapMatrix from "../../components/HeatmapMatrix.astro";
-import PdfEmbed from "../../components/PdfEmbed.astro";
-import DataTable from "../../components/DataTable.astro";
-import MetricsPanel from "../../components/MetricsPanel.astro";
-import { MODELS_LOWER, COLOR_RANGES } from "../../lib/constants";
-import { getModelName } from "../../lib/utils";
-import { getModelData, getExperimentIds } from "../../lib/data";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import HeatmapMatrix from "../../../components/HeatmapMatrix.astro";
+import PdfEmbed from "../../../components/PdfEmbed.astro";
+import DataTable from "../../../components/DataTable.astro";
+import MetricsPanel from "../../../components/MetricsPanel.astro";
+import { MODELS_LOWER, COLOR_RANGES } from "../../../lib/constants";
+import { getModelName } from "../../../lib/utils";
+import { getModelData, getExperimentIds } from "../../../lib/data";
 
 export async function getStaticPaths() {
-  return MODELS_LOWER.map((model) => ({ params: { model } }));
+  const experimentIds = getExperimentIds();
+  const paths: { params: { experiment: string; model: string } }[] = [];
+  for (const experiment of experimentIds) {
+    for (const model of MODELS_LOWER) {
+      paths.push({ params: { experiment, model } });
+    }
+  }
+  return paths;
 }
 
-const { model } = Astro.params;
+const { experiment, model } = Astro.params;
 const modelName = getModelName(model || "");
-const experimentId = Astro.url.searchParams.get("experimentId") || "";
-
 const experimentIds = getExperimentIds();
-const currentExperimentId = experimentId || experimentIds[0];
 
-const modelData = getModelData(model || "", currentExperimentId);
+const modelData = getModelData(model || "", experiment);
 
 const simpleData = modelData?.simple || null;
 const cotData = modelData?.cot || null;
@@ -39,7 +43,7 @@ const modelPanelSections = {
   currentModel={modelName}
   currentPage="model"
   activeTab="simple"
-  experimentId={currentExperimentId}
+  experimentId={experiment}
   experimentIds={experimentIds}
 >
   {
@@ -94,7 +98,7 @@ const modelPanelSections = {
                 data={simpleData.generations}
                 type="generations"
                 modelSlug={model}
-                experimentId={currentExperimentId}
+                experimentId={experiment}
               />
             ) : (
               <p class="no-data">No generation data available</p>
@@ -143,7 +147,7 @@ const modelPanelSections = {
                 type="generations"
                 modelSlug={model}
                 genType="cot"
-                experimentId={currentExperimentId}
+                experimentId={experiment}
               />
             ) : (
               <p class="no-data">No generation data available</p>

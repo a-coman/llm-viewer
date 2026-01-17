@@ -6,25 +6,27 @@ import { getModelName } from "../../../lib/utils";
 import { getModelData, getExperimentIds } from "../../../lib/data";
 
 export function getStaticPaths() {
-  const paths: { params: { model: string; gen: string } }[] = [];
-  for (const model of MODELS_LOWER) {
-    for (let i = 1; i <= 30; i++) {
-      paths.push({ params: { model, gen: `gen${i}` } });
+  const experimentIds = getExperimentIds();
+  const paths: {
+    params: { experiment: string; model: string; gen: string };
+  }[] = [];
+  for (const experiment of experimentIds) {
+    for (const model of MODELS_LOWER) {
+      for (let i = 1; i <= 30; i++) {
+        paths.push({ params: { experiment, model, gen: `gen${i}` } });
+      }
     }
   }
   return paths;
 }
 
-const { model, gen } = Astro.params;
+const { experiment, model, gen } = Astro.params;
 const modelName = getModelName(model || "");
 const genNum = parseInt(gen?.replace("gen", "") || "0");
-const experimentId = Astro.url.searchParams.get("experimentId") || "";
-
 const experimentIds = getExperimentIds();
-const currentExperimentId = experimentId || experimentIds[0];
 
 // Load centralized data
-const modelData = getModelData(model || "", currentExperimentId);
+const modelData = getModelData(model || "", experiment);
 const simpleData = modelData?.simple.generations.find((g) => g.id === gen);
 const cotData = modelData?.cot.generations.find((g) => g.id === gen);
 const classDiagramPdf = modelData?.diagramPdf || "";
@@ -38,7 +40,7 @@ const hasCotData = genNum <= 30 && !!cotData;
   currentGen={gen}
   currentPage="generation"
   activeTab="simple"
-  experimentId={currentExperimentId}
+  experimentId={experiment}
   experimentIds={experimentIds}
 >
   <Fragment slot="header-right">
@@ -84,7 +86,7 @@ const hasCotData = genNum <= 30 && !!cotData;
           <div class="tab-content" data-content="cot">
             {COT_CATEGORIES.map((cat, i) => {
               const catData = cotData?.categories?.find(
-                (c: any) => c.category === cat
+                (c: any) => c.category === cat,
               );
               return (
                 <div
@@ -115,7 +117,7 @@ const hasCotData = genNum <= 30 && !!cotData;
     const gensSections = document.querySelectorAll(".gens-section");
     const catTabs = document.querySelectorAll(".cat-tab[data-cat]");
     const catContents = document.querySelectorAll(
-      ".cat-content[data-cat-content]"
+      ".cat-content[data-cat-content]",
     );
 
     const params = new URLSearchParams(window.location.search);
@@ -125,15 +127,18 @@ const hasCotData = genNum <= 30 && !!cotData;
       modeBtns.forEach((btn) =>
         btn.classList.toggle(
           "active",
-          btn.getAttribute("data-mode") === tabName
-        )
+          btn.getAttribute("data-mode") === tabName,
+        ),
       );
       contents.forEach((c) =>
-        c.classList.toggle("active", c.getAttribute("data-content") === tabName)
+        c.classList.toggle(
+          "active",
+          c.getAttribute("data-content") === tabName,
+        ),
       );
       navs.forEach((n) => n.classList.toggle("hidden", tabName !== "cot"));
       gensSections.forEach((s) =>
-        s.classList.toggle("hidden", s.getAttribute("data-gens") !== tabName)
+        s.classList.toggle("hidden", s.getAttribute("data-gens") !== tabName),
       );
 
       const url = new URL(window.location.href);
@@ -146,8 +151,8 @@ const hasCotData = genNum <= 30 && !!cotData;
     setTab(initialTab);
     modeBtns.forEach((btn) =>
       btn.addEventListener("click", () =>
-        setTab(btn.getAttribute("data-mode") || "simple")
-      )
+        setTab(btn.getAttribute("data-mode") || "simple"),
+      ),
     );
 
     // Category switching
@@ -158,8 +163,8 @@ const hasCotData = genNum <= 30 && !!cotData;
         catContents.forEach((c) =>
           c.classList.toggle(
             "active",
-            c.getAttribute("data-cat-content") === cat
-          )
+            c.getAttribute("data-cat-content") === cat,
+          ),
         );
       });
     });

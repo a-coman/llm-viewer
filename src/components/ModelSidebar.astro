@@ -47,7 +47,7 @@ const showGens = currentModel || currentPage === "dashboard";
       </select>
     </div>
     <a
-      href={`/${experimentId ? `?experimentId=${experimentId}` : ""}`}
+      href={`/${experimentId}`}
       class:list={["nav-link", { active: currentPage === "dashboard" }]}
     >
       Dashboard
@@ -92,7 +92,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}${experimentId ? `?experimentId=${experimentId}` : ""}`
+                    : `/${experimentId}/${currentModel?.toLowerCase()}`
                 }
                 class:list={[
                   "gen-link",
@@ -115,7 +115,7 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/models/${currentModel?.toLowerCase()}/${g}${experimentId ? `?experimentId=${experimentId}` : ""}`
+                      : `/${experimentId}/${currentModel?.toLowerCase()}/${g}`
                   }
                   class:list={[
                     "gen-link",
@@ -144,7 +144,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}?type=cot${experimentId ? `&experimentId=${experimentId}` : ""}`
+                    : `/${experimentId}/${currentModel?.toLowerCase()}?type=cot`
                 }
                 class:list={[
                   "gen-link",
@@ -167,7 +167,7 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/models/${currentModel?.toLowerCase()}/${g}?type=cot${experimentId ? `&experimentId=${experimentId}` : ""}`
+                      : `/${experimentId}/${currentModel?.toLowerCase()}/${g}?type=cot`
                   }
                   class:list={[
                     "gen-link",
@@ -193,7 +193,7 @@ const showGens = currentModel || currentPage === "dashboard";
           models.map((model) => (
             <li>
               <a
-                href={`/models/${model.toLowerCase()}${experimentId ? `?experimentId=${experimentId}` : ""}`}
+                href={`/${experimentId}/${model.toLowerCase()}`}
                 class:list={[
                   "model-link",
                   {
@@ -370,14 +370,18 @@ const showGens = currentModel || currentPage === "dashboard";
       document.querySelector(".mode-btn.active")?.getAttribute("data-mode") ||
       "simple";
 
-    // Experiment selector
+    // Experiment selector - navigate to new experiment path
     const experimentSelect = document.getElementById("experiment-select");
     if (experimentSelect) {
       experimentSelect.addEventListener("change", (e) => {
-        const id = (e.target as HTMLSelectElement).value;
-        const url = new URL(window.location.href);
-        url.searchParams.set("experimentId", id);
-        window.location.href = url.toString();
+        const newExperimentId = (e.target as HTMLSelectElement).value;
+        // Extract current path segments after experiment
+        const pathParts = window.location.pathname.split("/").filter(Boolean);
+        // Replace first segment (experiment) with new one, keep rest
+        pathParts[0] = newExperimentId;
+        const newPath = "/" + pathParts.join("/");
+        // Preserve query params
+        window.location.href = newPath + window.location.search;
       });
     }
 
@@ -403,9 +407,12 @@ const showGens = currentModel || currentPage === "dashboard";
         const mode = getCurrentMode();
         const currentParams = new URLSearchParams(window.location.search);
         const currentView = currentParams.get("view");
-        const experimentId = currentParams.get("experimentId");
 
-        let url = `/models/${modelName}`;
+        // Get experiment from current path (first segment)
+        const pathParts = window.location.pathname.split("/").filter(Boolean);
+        const experimentId = pathParts[0] || "";
+
+        let url = `/${experimentId}/${modelName}`;
 
         // Get current gen from URL path or from selected gen link (dashboard)
         let gen = "all";
@@ -426,12 +433,11 @@ const showGens = currentModel || currentPage === "dashboard";
         // Append gen to URL if not "all"
         if (gen !== "all") url += `/${gen}`;
 
-        // Build query params
+        // Build query params (no longer need experimentId)
         const params = new URLSearchParams();
         if (mode === "cot") params.set("type", "cot");
         if (currentView && currentView !== "instance-diagram")
           params.set("view", currentView);
-        if (experimentId) params.set("experimentId", experimentId);
 
         if (params.toString()) url += `?${params.toString()}`;
         window.location.href = url;
@@ -448,7 +454,6 @@ const showGens = currentModel || currentPage === "dashboard";
 
           const currentParams = new URLSearchParams(window.location.search);
           const currentView = currentParams.get("view");
-          const experimentId = currentParams.get("experimentId");
 
           // Parse the existing href to get base path and any existing params
           const [basePath, existingQuery] = href.split("?");
@@ -458,10 +463,7 @@ const showGens = currentModel || currentPage === "dashboard";
           if (currentView && currentView !== "instance-diagram") {
             params.set("view", currentView);
           }
-          // Add experiment param
-          if (experimentId) {
-            params.set("experimentId", experimentId);
-          }
+          // No longer need to add experimentId - it's in the path
 
           const url = params.toString()
             ? `${basePath}?${params.toString()}`
@@ -521,14 +523,6 @@ const showGens = currentModel || currentPage === "dashboard";
           mode === "cot"
             ? url.searchParams.set("type", "cot")
             : url.searchParams.delete("type");
-
-          // Ensure experimentId is preserved (it should be, but just to be safe)
-          const currentExpId = new URLSearchParams(window.location.search).get(
-            "experimentId",
-          );
-          if (currentExpId && !url.searchParams.has("experimentId")) {
-            // It works on existing URL so it should persist, but explicit check implies intention
-          }
 
           window.history.replaceState({}, "", url.toString());
         }
