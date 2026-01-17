@@ -195,19 +195,101 @@ export interface MetricsFileRoot {
   experiments: ExperimentMetricsEntry[];
 }
 
+// --- Coverage.json Types ---
+
+export interface RawCoverageSubItem {
+  instantiated: number;
+  defined: number;
+  uncovered: string[];
+}
+
+export interface RawCoverageData {
+  classes: RawCoverageSubItem;
+  attributes: RawCoverageSubItem;
+  relationships: RawCoverageSubItem;
+}
+
+export interface RawInstantiationSubItem {
+  total_instantiated: number;
+  total_defined: number; // 0 means infinity
+}
+
+export interface RawInstantiationData {
+  classes: RawInstantiationSubItem;
+  attributes: RawInstantiationSubItem;
+  relationships: RawInstantiationSubItem;
+}
+
+export interface CoverageGenerationEntry {
+  generation_id: string;
+  attempt_id?: string;
+  coverage: RawCoverageData;
+  instantiation: RawInstantiationData;
+}
+
+export interface CoverageCategoryEntry {
+  name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  coverage: RawCoverageData;
+  instantiation: RawInstantiationData;
+  attempt_id?: string;
+}
+
+export interface CoverageCoTGenerationEntry {
+  generation_id: string;
+  categories: CoverageCategoryEntry[];
+  coverage: RawCoverageData;
+  instantiation: RawInstantiationData;
+}
+
+export interface CoverageModelExperiment {
+  experiment_id: string;
+  coverage: RawCoverageData;
+  instantiation: RawInstantiationData;
+  generations: (CoverageGenerationEntry | CoverageCoTGenerationEntry)[];
+}
+
+export interface CoverageModeData {
+  coverage: RawCoverageData;
+  instantiation: RawInstantiationData;
+  experiments: CoverageModelExperiment[];
+}
+
+export interface CoverageExperimentEntry {
+  id: string;
+  simple: CoverageModeData;
+  cot: CoverageModeData;
+}
+
+export interface CoverageFileRoot {
+  experiments: CoverageExperimentEntry[];
+}
+
 // --- Application Domain Types (Derived/Processed) ---
 // These are used by the UI components (e.g. pages/models/[model].astro).
 // We transform Raw types into these.
 
+// Coverage display: percentage 0-1
 export interface CoverageItem {
   classes: number;
   attributes: number;
   relationships: number;
 }
 
+// Instantiation display: value/total where null total means infinity
+export interface InstantiationValueItem {
+  value: number;
+  total: number | null; // null = infinity
+}
+
+export interface InstantiationItem {
+  classes: InstantiationValueItem;
+  attributes: InstantiationValueItem;
+  relationships: InstantiationValueItem;
+}
+
 export interface CoverageMetrics {
   coverage: CoverageItem;
-  instantiation: CoverageItem;
+  instantiation: InstantiationItem;
 }
 
 export interface ModelMetrics {
@@ -362,7 +444,7 @@ export interface DashboardData {
       syntax: number;
       multiplicities: number;
       invariants: number;
-      coverage: number;
+      coverage: CoverageMetrics;
       realism: number;
     };
     cot: {
@@ -370,7 +452,7 @@ export interface DashboardData {
       syntax: number;
       multiplicities: number;
       invariants: number;
-      coverage: number;
+      coverage: CoverageMetrics;
       realism: number;
     };
   }[];

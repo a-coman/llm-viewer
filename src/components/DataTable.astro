@@ -1,5 +1,6 @@
 ---
-import { getColor, formatPercent } from "../lib/utils";
+import { getColor, formatPercent, getBinaryColor } from "../lib/utils";
+import { INFINITY_SYMBOL, COLOR_RANGES } from "../lib/constants";
 
 interface Props {
   data: any[];
@@ -24,24 +25,31 @@ const columns = [
   { key: "syntax", label: "Syntax", isValidation: true },
   { key: "multiplicities", label: "Mult", isValidation: true },
   { key: "invariants", label: "Inv", isValidation: true },
+  { key: "diversity.numeric", label: "Num.Eq" },
+  { key: "diversity.stringEquals", label: "Str.Eq" },
+  { key: "diversity.stringLv", label: "Str.LV" },
   { key: "coverage.coverage.classes", label: "Cov.Cls" },
   { key: "coverage.coverage.attributes", label: "Cov.Attr" },
   { key: "coverage.coverage.relationships", label: "Cov.Rel" },
-  { key: "coverage.instantiation.classes", label: "Inst.Cls", isCount: true },
+  {
+    key: "coverage.instantiation.classes",
+    label: "Inst.Cls",
+    isInstantiation: true,
+    isInfinityDenom: true,
+  },
   {
     key: "coverage.instantiation.attributes",
     label: "Inst.Attr",
-    isCount: true,
+    isInstantiation: true,
+    isInfinityDenom: false,
   },
   {
     key: "coverage.instantiation.relationships",
     label: "Inst.Rel",
-    isCount: true,
+    isInstantiation: true,
+    isInfinityDenom: true,
   },
   { key: "realism", label: "Realism", isRealism: true },
-  { key: "diversity.numeric", label: "Num.Eq" },
-  { key: "diversity.stringEquals", label: "Str.Eq" },
-  { key: "diversity.stringLv", label: "Str.LV" },
 ];
 
 function getValue(obj: any, path: string): any {
@@ -72,7 +80,17 @@ function formatValue(
     return formatPercent(value);
   }
 
-  if (col.isCount) {
+  // Handle InstantiationValueItem format { value, total }
+  if (col.isInstantiation) {
+    if (typeof value === "object" && "value" in value) {
+      const v = Math.round(value.value);
+      if (value.total === null) {
+        return `${v}/${INFINITY_SYMBOL}`;
+      }
+      const t = Math.round(value.total);
+      return `${v}/${t}`;
+    }
+    // Fallback for old format (plain number)
     return typeof value === "number"
       ? isGeneration
         ? Math.round(value).toString()
@@ -90,8 +108,26 @@ function formatValue(
 }
 
 function getCellStyle(value: any, col: any, isGeneration: boolean): string {
-  if (value === null || value === undefined || col.isCount || col.isRealism)
+  if (value === null || value === undefined || col.isRealism) return "";
+
+  // Handle InstantiationValueItem format { value, total }
+  if (col.isInstantiation) {
+    if (typeof value === "object" && "value" in value) {
+      if (value.total === null) {
+        // Infinity denominator - always green
+        return getBinaryColor(true);
+      }
+      // Has finite total - use percentage coloring
+      const ratio = value.total > 0 ? value.value / value.total : 1;
+      return getColor(
+        ratio,
+        COLOR_RANGES.validation.percent.green,
+        COLOR_RANGES.validation.percent.red,
+      );
+    }
+    // Old format - no color
     return "";
+  }
 
   // Convert MetricStat to rate for coloring
   let rate = value;

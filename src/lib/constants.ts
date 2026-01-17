@@ -48,3 +48,6 @@ export const COLOR_RANGES = {
     percent: { green: 1, red: 0 }, // 100% = green, 0% = red
   },
 } as const;
+
+// Display constants
+export const INFINITY_SYMBOL = "∞";

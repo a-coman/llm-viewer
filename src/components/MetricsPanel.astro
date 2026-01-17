@@ -5,11 +5,22 @@ import {
   formatPercent,
   formatCurrency,
 } from "../lib/utils";
-import { COLOR_RANGES } from "../lib/constants";
+import { COLOR_RANGES, INFINITY_SYMBOL } from "../lib/constants";
 
 interface MetricStat {
   errors: number;
   total: number;
+}
+
+interface InstantiationValueItem {
+  value: number;
+  total: number | null; // null = infinity
+}
+
+interface InstantiationItem {
+  classes: InstantiationValueItem;
+  attributes: InstantiationValueItem;
+  relationships: InstantiationValueItem;
 }
 
 interface Metrics {
@@ -18,11 +29,7 @@ interface Metrics {
   invariants?: number | MetricStat;
   coverage?: {
     coverage: { classes: number; attributes: number; relationships: number };
-    instantiation: {
-      classes: number;
-      attributes: number;
-      relationships: number;
-    };
+    instantiation: InstantiationItem;
   };
   diversity?: {
     numeric: number;
@@ -31,7 +38,7 @@ interface Metrics {
   };
   judge?: { successRate: number };
   price?: { price: number };
-  instantiation?: any;
+  instantiation?: InstantiationItem;
   realism?: number;
 }
 
@@ -68,7 +75,7 @@ const {
 function getDisplayValue(
   val: any,
   type: "percent" | "count" | "currency" = "percent",
-  metricKey: string = ""
+  metricKey: string = "",
 ): { text: string; style: string } {
   if (val === undefined || val === null) return { text: "—", style: "" };
 
@@ -104,12 +111,43 @@ function getDisplayValue(
       style: getColor(
         colorVal,
         COLOR_RANGES.validation.percent.green,
-        COLOR_RANGES.validation.percent.red
+        COLOR_RANGES.validation.percent.red,
       ),
     };
   }
 
   return { text: "—", style: "" };
+}
+
+// Helper for instantiation display: value/total or value/∞
+function getInstantiationDisplay(
+  item: InstantiationValueItem | undefined,
+  key: string,
+): { text: string; style: string } {
+  if (!item || item.value === undefined) return { text: "—", style: "" };
+
+  const value = Math.round(item.value);
+  const total = item.total;
+
+  if (total === null) {
+    // Infinity case (classes/relationships) - always green
+    return {
+      text: `${value}/${INFINITY_SYMBOL}`,
+      style: getBinaryColor(true),
+    };
+  }
+
+  // Has a finite total (attributes) - use percentage coloring
+  const totalRound = Math.round(total);
+  const ratio = totalRound > 0 ? value / totalRound : 1;
+  return {
+    text: `${value}/${totalRound}`,
+    style: getColor(
+      ratio,
+      COLOR_RANGES.validation.percent.green,
+      COLOR_RANGES.validation.percent.red,
+    ),
+  };
 }
 
 const cov = metrics?.coverage?.coverage || metrics?.coverage;
@@ -172,6 +210,37 @@ const price = metrics?.price;
   }
 
   {
+    showSections.diversity && div && (
+      <div class="metric-section">
+        <h3 class="sober-label">Diversity</h3>
+
+        <table class="metrics-table">
+          <tbody>
+            <tr>
+              <td>Numeric</td>
+              <td style={getDisplayValue(div.numeric).style}>
+                {getDisplayValue(div.numeric).text}
+              </td>
+            </tr>
+            <tr>
+              <td>String Equals</td>
+              <td style={getDisplayValue(div.stringEquals).style}>
+                {getDisplayValue(div.stringEquals).text}
+              </td>
+            </tr>
+            <tr>
+              <td>String LV</td>
+              <td style={getDisplayValue(div.stringLv).style}>
+                {getDisplayValue(div.stringLv).text}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
     showSections.coverage && cov && (
       <div class="metric-section">
         <h3 class="sober-label">Coverage</h3>
@@ -202,46 +271,18 @@ const price = metrics?.price;
         <table class="metrics-table">
           <tbody>
             {Object.entries(inst).map(([key, val]) => {
-              const { text } = getDisplayValue(val, "count");
+              const { text, style } = getInstantiationDisplay(
+                val as InstantiationValueItem,
+                key,
+              );
               const label = key.charAt(0).toUpperCase() + key.slice(1);
               return (
                 <tr>
                   <td>{label}</td>
-                  <td>{text}</td>
+                  <td style={style}>{text}</td>
                 </tr>
               );
             })}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-
-  {
-    showSections.diversity && div && (
-      <div class="metric-section">
-        <h3 class="sober-label">Diversity</h3>
-
-        <table class="metrics-table">
-          <tbody>
-            <tr>
-              <td>Numeric</td>
-              <td style={getDisplayValue(div.numeric).style}>
-                {getDisplayValue(div.numeric).text}
-              </td>
-            </tr>
-            <tr>
-              <td>String Equals</td>
-              <td style={getDisplayValue(div.stringEquals).style}>
-                {getDisplayValue(div.stringEquals).text}
-              </td>
-            </tr>
-            <tr>
-              <td>String LV</td>
-              <td style={getDisplayValue(div.stringLv).style}>
-                {getDisplayValue(div.stringLv).text}
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
