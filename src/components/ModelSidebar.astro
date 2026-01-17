@@ -188,7 +188,7 @@ const showGens = currentModel || currentPage === "dashboard";
   <div class="models-section">
     <div class="section-title">Models</div>
     <nav>
-      <ul>
+      <ul class="models-list">
         {
           models.map((model) => (
             <li>
@@ -227,29 +227,36 @@ const showGens = currentModel || currentPage === "dashboard";
   }
 
   .nav-header {
-    padding: 0.75rem;
+    padding: 0.5rem;
     border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .nav-link {
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 0.4rem 0.5rem;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    text-align: center;
+    font-weight: 500;
   }
 
   .experiment-selector {
-    padding: 0 0.75rem 0.5rem;
+    padding: 0;
   }
 
   .experiment-select {
     width: 100%;
+    text-align: center;
     padding: 0.4rem;
     font-size: 0.75rem;
-    background: var(--color-surface-hover);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
-    color: var(--color-text);
+    border-radius: 3px;
+    color: var(--color-primary);
+    cursor: pointer;
   }
 
   .mode-selector {
@@ -304,10 +311,11 @@ const showGens = currentModel || currentPage === "dashboard";
 
   .models-section {
     flex: 1;
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 
   .section-title {
+    padding: 0 0.25rem;
     font-size: 0.65rem;
     font-weight: 600;
     color: var(--color-text-muted);
@@ -316,10 +324,10 @@ const showGens = currentModel || currentPage === "dashboard";
     margin-bottom: 0.5rem;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .models-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
   .model-link {
