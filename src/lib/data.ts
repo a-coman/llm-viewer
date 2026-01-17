@@ -118,13 +118,13 @@ function sumTokens(attempts: Attempt[] = []) {
       input: acc.input + (att.input_tokens || 0),
       output: acc.output + (att.output_tokens || 0),
     }),
-    { input: 0, output: 0 }
+    { input: 0, output: 0 },
   );
 }
 
 export function getModelData(
   modelSlug: string,
-  experimentId?: string
+  experimentId?: string,
 ): ModelData | null {
   const { logs: cachedLogs, metrics: cachedMetrics } =
     getExperimentData(experimentId);
@@ -134,7 +134,7 @@ export function getModelData(
   const getSimples = () => {
     const logExps =
       cachedLogs?.simple?.experiments.filter(
-        (e) => e.domain_name.toLowerCase() === domainLower
+        (e) => e.domain_name.toLowerCase() === domainLower,
       ) || [];
     const metricExps = cachedMetrics?.simple?.experiments || [];
     const generations: SimpleGeneration[] = [];
@@ -167,7 +167,7 @@ export function getModelData(
               price: calculatePrice(
                 logExp.model.name,
                 tokens.input,
-                tokens.output
+                tokens.output,
               ),
               tokenInput: tokens.input,
               tokenOutput: tokens.output,
@@ -199,7 +199,7 @@ export function getModelData(
           price: calculatePrice(
             logExp.model.name,
             logExp.input_tokens,
-            logExp.output_tokens
+            logExp.output_tokens,
           ),
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,
@@ -226,7 +226,7 @@ export function getModelData(
   const getCoTs = () => {
     const logExps =
       cachedLogs?.cot?.experiments.filter(
-        (e) => e.domain_name.toLowerCase() === domainLower
+        (e) => e.domain_name.toLowerCase() === domainLower,
       ) || [];
     const metricExps = cachedMetrics?.cot?.experiments || [];
     const generations: CoTGeneration[] = [];
@@ -284,6 +284,12 @@ export function getModelData(
           pdfAvailable: true,
           pdfUrl: catMetricsList[0]?.pdfUrl,
           categories: catMetricsList,
+          metrics: {
+            syntax: mGen.metrics.syntax,
+            multiplicities: mGen.metrics.multiplicities,
+            invariants: mGen.metrics.invariants,
+            coverage: { ...EMPTY_COVERAGE_METRICS },
+          },
           judge: gen.judge as CoTGeneration["judge"],
         });
       });
@@ -300,7 +306,7 @@ export function getModelData(
           price: calculatePrice(
             logExp.model.name,
             logExp.input_tokens,
-            logExp.output_tokens
+            logExp.output_tokens,
           ),
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,

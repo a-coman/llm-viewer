@@ -94,6 +94,7 @@ const modelPanelSections = {
                 data={simpleData.generations}
                 type="generations"
                 modelSlug={model}
+                experimentId={currentExperimentId}
               />
             ) : (
               <p class="no-data">No generation data available</p>
@@ -142,6 +143,7 @@ const modelPanelSections = {
                 type="generations"
                 modelSlug={model}
                 genType="cot"
+                experimentId={currentExperimentId}
               />
             ) : (
               <p class="no-data">No generation data available</p>
@@ -164,11 +166,14 @@ const modelPanelSections = {
       modeBtns.forEach((btn) =>
         btn.classList.toggle(
           "active",
-          btn.getAttribute("data-mode") === tabName
-        )
+          btn.getAttribute("data-mode") === tabName,
+        ),
       );
       contents.forEach((c) =>
-        c.classList.toggle("active", c.getAttribute("data-content") === tabName)
+        c.classList.toggle(
+          "active",
+          c.getAttribute("data-content") === tabName,
+        ),
       );
       const url = new URL(window.location.href);
       tabName === "simple"
@@ -180,8 +185,8 @@ const modelPanelSections = {
     setTab(initialTab);
     modeBtns.forEach((btn) =>
       btn.addEventListener("click", () =>
-        setTab(btn.getAttribute("data-mode") || "simple")
-      )
+        setTab(btn.getAttribute("data-mode") || "simple"),
+      ),
     );
   });
 </script>

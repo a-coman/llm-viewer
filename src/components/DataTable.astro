@@ -7,9 +7,17 @@ interface Props {
   mode?: "simple" | "cot"; // For model comparison dashboard
   modelSlug?: string; // For generation links
   genType?: "simple" | "cot"; // Type of generation data
+  experimentId?: string; // Current experiment ID
 }
 
-const { data, type, mode, modelSlug, genType = "simple" } = Astro.props;
+const {
+  data,
+  type,
+  mode,
+  modelSlug,
+  genType = "simple",
+  experimentId,
+} = Astro.props;
 
 // Column definitions
 const columns = [
@@ -44,13 +52,8 @@ function getValue(obj: any, path: string): any {
 function getDataSource(item: any): any {
   if (mode && item[mode]) return item[mode];
   if (type === "generations") {
-    if (genType === "cot" && item.categories) {
-      // For CoT, show the baseline category as representative, or first category
-      return (
-        item.categories.find((c: any) => c.category === "baseline") ||
-        item.categories[0]
-      );
-    }
+    // For both Simple and CoT, use the generation-level aggregated metrics if available
+    // Fall back to item itself if no metrics field exists (backward compatibility)
     return item.metrics || item;
   }
   return item;
@@ -60,7 +63,7 @@ function formatValue(
   value: any,
   col: any,
   isGeneration: boolean,
-  source: any
+  source: any,
 ): string {
   if (value === null || value === undefined) return "—";
 
@@ -125,7 +128,15 @@ const isGeneration = type === "generations";
               ? `/models/${name.toLowerCase()}`
               : `/models/${modelSlug}/${item.id}`;
           const isCotLink = genType === "cot" || mode === "cot";
-          const href = isCotLink ? `${baseHref}?type=cot` : baseHref;
+
+          // Build query parameters
+          const params = new URLSearchParams();
+          if (isCotLink) params.set("type", "cot");
+          if (experimentId) params.set("experimentId", experimentId);
+
+          const href = params.toString()
+            ? `${baseHref}?${params.toString()}`
+            : baseHref;
           const source = getDataSource(item);
 
           return (
@@ -140,7 +151,7 @@ const isGeneration = type === "generations";
                   value,
                   col,
                   isGeneration,
-                  source
+                  source,
                 );
 
                 return <td style={style || undefined}>{displayValue}</td>;

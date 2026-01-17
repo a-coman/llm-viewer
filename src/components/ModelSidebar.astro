@@ -27,7 +27,7 @@ const {
 
 const simpleGens = Array.from(
   { length: simpleGenCount },
-  (_, i) => `gen${i + 1}`
+  (_, i) => `gen${i + 1}`,
 );
 const cotGens = Array.from({ length: cotGenCount }, (_, i) => `gen${i + 1}`);
 const showGens = currentModel || currentPage === "dashboard";
@@ -92,7 +92,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}`
+                    : `/models/${currentModel?.toLowerCase()}${experimentId ? `?experimentId=${experimentId}` : ""}`
                 }
                 class:list={[
                   "gen-link",
@@ -115,7 +115,7 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/models/${currentModel?.toLowerCase()}/${g}`
+                      : `/models/${currentModel?.toLowerCase()}/${g}${experimentId ? `?experimentId=${experimentId}` : ""}`
                   }
                   class:list={[
                     "gen-link",
@@ -144,7 +144,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/models/${currentModel?.toLowerCase()}?type=cot`
+                    : `/models/${currentModel?.toLowerCase()}?type=cot${experimentId ? `&experimentId=${experimentId}` : ""}`
                 }
                 class:list={[
                   "gen-link",
@@ -167,7 +167,7 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/models/${currentModel?.toLowerCase()}/${g}?type=cot`
+                      : `/models/${currentModel?.toLowerCase()}/${g}?type=cot${experimentId ? `&experimentId=${experimentId}` : ""}`
                   }
                   class:list={[
                     "gen-link",
@@ -193,7 +193,7 @@ const showGens = currentModel || currentPage === "dashboard";
           models.map((model) => (
             <li>
               <a
-                href={`/models/${model.toLowerCase()}`}
+                href={`/models/${model.toLowerCase()}${experimentId ? `?experimentId=${experimentId}` : ""}`}
                 class:list={[
                   "model-link",
                   {
@@ -411,7 +411,7 @@ const showGens = currentModel || currentPage === "dashboard";
         let gen = "all";
         if (isDashboard) {
           const activeSection = document.querySelector(
-            `.gens-section[data-gens="${mode}"]`
+            `.gens-section[data-gens="${mode}"]`,
           );
           gen =
             activeSection
@@ -484,7 +484,7 @@ const showGens = currentModel || currentPage === "dashboard";
 
       // Find the correct section and highlight the right link
       const targetSection = document.querySelector(
-        `.gens-section[data-gens="${mode}"]`
+        `.gens-section[data-gens="${mode}"]`,
       );
       if (targetSection) {
         if (currentGen) {
@@ -506,10 +506,10 @@ const showGens = currentModel || currentPage === "dashboard";
         const mode = btn.getAttribute("data-mode") || "simple";
         modeBtns.forEach((b) => b.classList.toggle("active", b === btn));
         gensSections.forEach((s) =>
-          s.classList.toggle("hidden", s.getAttribute("data-gens") !== mode)
+          s.classList.toggle("hidden", s.getAttribute("data-gens") !== mode),
         );
         tabContents.forEach((c) =>
-          c.classList.toggle("active", c.getAttribute("data-content") === mode)
+          c.classList.toggle("active", c.getAttribute("data-content") === mode),
         );
 
         // Update gen link highlighting for the new mode
@@ -524,7 +524,7 @@ const showGens = currentModel || currentPage === "dashboard";
 
           // Ensure experimentId is preserved (it should be, but just to be safe)
           const currentExpId = new URLSearchParams(window.location.search).get(
-            "experimentId"
+            "experimentId",
           );
           if (currentExpId && !url.searchParams.has("experimentId")) {
             // It works on existing URL so it should persist, but explicit check implies intention
@@ -564,7 +564,7 @@ const showGens = currentModel || currentPage === "dashboard";
         // Find current gen from URL path
         const genMatch = window.location.pathname.match(/gen(\d+)/);
         const cotSection = document.querySelector(
-          '.gens-section[data-gens="cot"]'
+          '.gens-section[data-gens="cot"]',
         );
         if (genMatch) {
           cotSection

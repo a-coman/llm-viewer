@@ -137,6 +137,14 @@ export interface CoTCategoryMetric {
 export interface CoTGenerationMetric {
   generation_id: string;
   categories: CoTCategoryMetric[];
+  metrics: {
+    syntax: MetricStat;
+    multiplicities: MetricStat;
+    invariants: MetricStat;
+    specific?: Record<string, MetricStat>;
+    multiplicities_category_invalid?: MetricStat;
+    invariants_category_invalid?: MetricStat;
+  };
 }
 
 export interface SimpleExperimentMetric {
@@ -275,6 +283,12 @@ export interface SimpleGeneration {
 export interface CoTGeneration {
   id: string;
   categories: CategoryMetrics[];
+  metrics?: {
+    syntax: MetricStat;
+    multiplicities: MetricStat;
+    invariants: MetricStat;
+    coverage?: CoverageMetrics;
+  };
   judge?: JudgeResponse;
   pdfAvailable: boolean;
   pdfUrl?: string;
