@@ -47,12 +47,8 @@ const hasCotData = genNum <= 30 && !!cotData;
     {
       hasCotData && (
         <div class="category-tabs hidden" data-nav="cot">
-          {COT_CATEGORIES.map((cat, i) => (
-            <button
-              type="button"
-              class:list={["cat-tab", { active: i === 0 }]}
-              data-cat={cat}
-            >
+          {COT_CATEGORIES.map((cat) => (
+            <button type="button" class="cat-tab" data-cat={cat}>
               {cat}
             </button>
           ))}
@@ -84,15 +80,12 @@ const hasCotData = genNum <= 30 && !!cotData;
         {/* CoT Content */}
         {hasCotData && (
           <div class="tab-content" data-content="cot">
-            {COT_CATEGORIES.map((cat, i) => {
+            {COT_CATEGORIES.map((cat) => {
               const catData = cotData?.categories?.find(
                 (c: any) => c.category === cat,
               );
               return (
-                <div
-                  class:list={["cat-content", { active: i === 0 }]}
-                  data-cat-content={cat}
-                >
+                <div class="cat-content" data-cat-content={cat}>
                   <GenerationView
                     data={catData}
                     label={cat}
@@ -122,6 +115,7 @@ const hasCotData = genNum <= 30 && !!cotData;
 
     const params = new URLSearchParams(window.location.search);
     const initialTab = params.get("type") || "simple";
+    const initialCategory = params.get("category") || "baseline";
 
     function setTab(tabName: string) {
       modeBtns.forEach((btn) =>
@@ -142,30 +136,60 @@ const hasCotData = genNum <= 30 && !!cotData;
       );
 
       const url = new URL(window.location.href);
-      tabName === "simple"
-        ? url.searchParams.delete("type")
-        : url.searchParams.set("type", tabName);
+      if (tabName === "simple") {
+        url.searchParams.delete("type");
+        url.searchParams.delete("category"); // Remove category when switching to simple
+      } else {
+        url.searchParams.set("type", tabName);
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    function setCategory(catName: string) {
+      catTabs.forEach((t) =>
+        t.classList.toggle("active", t.getAttribute("data-cat") === catName),
+      );
+      catContents.forEach((c) =>
+        c.classList.toggle(
+          "active",
+          c.getAttribute("data-cat-content") === catName,
+        ),
+      );
+
+      // Update URL with category param
+      const url = new URL(window.location.href);
+      if (catName === "baseline") {
+        url.searchParams.delete("category"); // baseline is default, no need to show in URL
+      } else {
+        url.searchParams.set("category", catName);
+      }
       window.history.replaceState({}, "", url.toString());
     }
 
     setTab(initialTab);
+    if (initialTab === "cot") {
+      setCategory(initialCategory);
+    }
+
     modeBtns.forEach((btn) =>
-      btn.addEventListener("click", () =>
-        setTab(btn.getAttribute("data-mode") || "simple"),
-      ),
+      btn.addEventListener("click", () => {
+        const mode = btn.getAttribute("data-mode") || "simple";
+        setTab(mode);
+        // When switching to CoT, apply current category from URL or default
+        if (mode === "cot") {
+          const currentCategory =
+            new URLSearchParams(window.location.search).get("category") ||
+            "baseline";
+          setCategory(currentCategory);
+        }
+      }),
     );
 
     // Category switching
     catTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const cat = tab.getAttribute("data-cat");
-        catTabs.forEach((t) => t.classList.toggle("active", t === tab));
-        catContents.forEach((c) =>
-          c.classList.toggle(
-            "active",
-            c.getAttribute("data-cat-content") === cat,
-          ),
-        );
+        if (cat) setCategory(cat);
       });
     });
   });
@@ -174,7 +198,11 @@ const hasCotData = genNum <= 30 && !!cotData;
 <script is:inline>
   (function () {
     try {
-      if (new URLSearchParams(window.location.search).get("type") === "cot") {
+      const params = new URLSearchParams(window.location.search);
+      const isCot = params.get("type") === "cot";
+      const category = params.get("category") || "baseline";
+
+      if (isCot) {
         document
           .querySelector('.tab-content[data-content="simple"]')
           ?.classList.remove("active");
@@ -184,6 +212,28 @@ const hasCotData = genNum <= 30 && !!cotData;
         document
           .querySelector('.category-tabs[data-nav="cot"]')
           ?.classList.remove("hidden");
+
+        // Set active category
+        document.querySelectorAll(".cat-tab").forEach((tab) => {
+          tab.classList.toggle(
+            "active",
+            tab.getAttribute("data-cat") === category,
+          );
+        });
+        document.querySelectorAll(".cat-content").forEach((content) => {
+          content.classList.toggle(
+            "active",
+            content.getAttribute("data-cat-content") === category,
+          );
+        });
+      } else {
+        // Simple mode: set default category for when switching to CoT
+        document
+          .querySelector('.cat-tab[data-cat="baseline"]')
+          ?.classList.add("active");
+        document
+          .querySelector('.cat-content[data-cat-content="baseline"]')
+          ?.classList.add("active");
       }
     } catch (e) {}
   })();
