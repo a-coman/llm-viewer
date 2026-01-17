@@ -94,7 +94,6 @@ const isCoT = !!label && !!cotPrompts;
         <PdfEmbed
           src={pdfUrl}
           title="Instance Diagram"
-          height="500px"
           available={pdfAvailable}
         />
       </div>
@@ -102,7 +101,7 @@ const isCoT = !!label && !!cotPrompts;
       <div class="diagram-view" data-view-content="instance-code">
         {
           code ? (
-            <CodeViewer code={code} height="500px" language="soil" />
+            <CodeViewer code={code} language="soil" />
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No code available</div>
@@ -117,7 +116,6 @@ const isCoT = !!label && !!cotPrompts;
         <PdfEmbed
           src={classDiagramPdf || ""}
           title="Model Diagram"
-          height="500px"
           available={!!classDiagramPdf}
         />
       </div>
@@ -125,11 +123,7 @@ const isCoT = !!label && !!cotPrompts;
       <div class="diagram-view" data-view-content="model-code">
         {
           classDiagramUseCode ? (
-            <CodeViewer
-              code={classDiagramUseCode}
-              height="500px"
-              language="use"
-            />
+            <CodeViewer code={classDiagramUseCode} language="use" />
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No model code available</div>
@@ -157,7 +151,6 @@ const isCoT = !!label && !!cotPrompts;
                   {cotPrompts?.[agent]?.systemPrompt ? (
                     <CodeViewer
                       code={cotPrompts[agent].systemPrompt}
-                      height="500px"
                       language="markdown"
                     />
                   ) : (
@@ -172,11 +165,7 @@ const isCoT = !!label && !!cotPrompts;
               ))}
             </div>
           ) : systemPrompt ? (
-            <CodeViewer
-              code={systemPrompt}
-              height="500px"
-              language="markdown"
-            />
+            <CodeViewer code={systemPrompt} language="markdown" />
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No system prompt available</div>
@@ -203,7 +192,6 @@ const isCoT = !!label && !!cotPrompts;
                   {cotPrompts?.[agent]?.userPrompt ? (
                     <CodeViewer
                       code={cotPrompts[agent].userPrompt}
-                      height="500px"
                       language="markdown"
                     />
                   ) : (
@@ -218,7 +206,7 @@ const isCoT = !!label && !!cotPrompts;
               ))}
             </div>
           ) : userPrompt ? (
-            <CodeViewer code={userPrompt} height="500px" language="markdown" />
+            <CodeViewer code={userPrompt} language="markdown" />
           ) : (
             <div class="sober-empty-state">
               <div class="sober-empty-text">No user prompt available</div>
@@ -418,20 +406,22 @@ const isCoT = !!label && !!cotPrompts;
 
 <style>
   .content-grid {
-    align-items: start;
+    flex: 1;
   }
 
   .diagram-section {
     margin: 0;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 631px;
   }
 
   .metrics-column-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     min-width: 0;
   }
 
@@ -542,7 +532,7 @@ const isCoT = !!label && !!cotPrompts;
   /* Views */
   .diagram-views {
     flex: 1;
-    height: 500px;
+    min-height: 500px;
   }
 
   [data-view-content] {
