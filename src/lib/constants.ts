@@ -51,3 +51,63 @@ export const COLOR_RANGES = {
 
 // Display constants
 export const INFINITY_SYMBOL = "∞";
+
+// Metric Explanations
+export const METRIC_EXPLANATIONS = {
+  cost: {
+    title: "Cost",
+    description:
+      "Measures the cost of the instantiation. It does not account for cached tokens.",
+    examples: [
+      "Total Cost = (input tokens * input price) + (output tokens * output price)",
+    ],
+  },
+  validation: {
+    title: "Validation",
+    description:
+      "Measures the correctness of the instantiation using the USE check function.",
+    examples: [
+      "Syntax = 1 - (Total Number of syntax errors [use check] / Total Number of lines [instance])",
+      "Multiplicities = 1 - (Total Number of multiplicities errors [use check] / Total Number of relationships ([instance] !insert))",
+      "Invariants = 1 - (Total Number of invariants errors [use check] / Total Number of invariants ([model] constraints))",
+    ],
+  },
+  diversity: {
+    title: "Diversity",
+    description:
+      "Measures the variability of the generated attribute values. It identifies how much the LLM repeats specific values versus generating unique data points across instances (100%: Diverse, 0%: Repetitive). We group all generated attributes into bags (numeric and string) and then perform pairwise comparisons between every element to obtain:",
+    examples: [
+      "NumericEquals = Total number of numeric attribute pairs with different values / Total number of possible pairs (n * (n - 1) / 2)",
+      "StringEquals = Total number of string attribute pairs that are NOT exactly identical / Total number of possible pairs (n * (n - 1) / 2)",
+      "StringLv = Sum of (Levenshtein Distance(a, b) / max(length(a), length(b))) for all string pairs / Total number of possible pairs (n * (n - 1) / 2)",
+    ],
+  },
+  coverage: {
+    title: "Model Coverage",
+    description:
+      'Measures the breadth of the instantiation. It answers: "How much of the structural blueprint (the model) was used?"',
+    examples: [
+      "Classes = Total Unique Classes instantiated (!new) in the .soil / Total Number of classes (class) in the model .use",
+      "Attributes = Total Unique Attributes instantiated (!Class.Attribute or !set) in the .soil / Total Number of attributes (attributes) in the model .use",
+      "Relationships = Total Unique Relationships instantiated (!insert) in the .soil / Total Number of relationships (association, composition, aggregation) in the model .use",
+    ],
+  },
+  instantiation: {
+    title: "Instance Instantiation",
+    description:
+      "Measures the depth or density of the data. It answers: \"Of the objects the LLM decided to create, how many of their available 'slots' did it fill?\"",
+    examples: [
+      "Classes = Total Number of classes (!new) in the instance / Total possible that could have been instantiated (infinity)",
+      "Attributes = Total Number of attributes (!Class.Attribute or !set) in the instance / Total possible that could have been instantiated (sum(number of classes instantiated of that type * Class.Attributes))",
+      "Relationships = Total Number of relationships (!insert) in the instance / Total possible that could have been instantiated (infinity)",
+    ],
+  },
+  realism: {
+    title: "Quality",
+    description:
+      "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtfull) the realism of each instance and explain its decision.",
+    examples: [
+      "Realism = Total Number of \"realistic\" instances / Total Number of instances",
+    ],
+  },
+} as const;

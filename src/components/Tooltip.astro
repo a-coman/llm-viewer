@@ -1,0 +1,21 @@
+---
+interface Props {
+  metricType: "cost" | "coverage" | "instantiation" | "validation" | "diversity" | "realism";
+}
+
+const { metricType } = Astro.props;
+import { METRIC_EXPLANATIONS } from "../lib/constants";
+
+const explanation = METRIC_EXPLANATIONS[metricType];
+---
+
+<span class="tooltip-container">
+  <span class="tooltip-icon">i</span>
+  <div class="tooltip-content">
+    <div class="tooltip-title">{explanation.title}</div>
+    <div class="tooltip-description">{explanation.description}</div>
+    <ul class="tooltip-examples">
+      {explanation.examples.map((example) => <li>{example}</li>)}
+    </ul>
+  </div>
+</span>

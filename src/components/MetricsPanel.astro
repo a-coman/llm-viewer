@@ -6,6 +6,7 @@ import {
   formatCurrency,
 } from "../lib/utils";
 import { COLOR_RANGES, INFINITY_SYMBOL } from "../lib/constants";
+import Tooltip from "./Tooltip.astro";
 
 interface MetricStat {
   errors: number;
@@ -164,7 +165,10 @@ const price = metrics?.price;
     showSections.cost &&
       (price !== undefined || metrics?.cost !== undefined) && (
         <div class="metric-section">
-          <h3 class="sober-label">Cost</h3>
+          <h3 class="sober-label">
+            Cost
+            <Tooltip metricType="cost" />
+          </h3>
 
           <table class="metrics-table">
             <tbody>
@@ -187,7 +191,10 @@ const price = metrics?.price;
   {
     showSections.validation && (
       <div class="metric-section">
-        <h3 class="sober-label">Validation</h3>
+        <h3 class="sober-label">
+          Validation
+          <Tooltip metricType="validation" />
+        </h3>
 
         <table class="metrics-table">
           <tbody>
@@ -212,7 +219,10 @@ const price = metrics?.price;
   {
     showSections.diversity && div && (
       <div class="metric-section">
-        <h3 class="sober-label">Diversity</h3>
+        <h3 class="sober-label">
+          Diversity
+          <Tooltip metricType="diversity" />
+        </h3>
 
         <table class="metrics-table">
           <tbody>
@@ -243,7 +253,10 @@ const price = metrics?.price;
   {
     showSections.coverage && cov && (
       <div class="metric-section">
-        <h3 class="sober-label">Coverage</h3>
+        <h3 class="sober-label">
+          Coverage
+          <Tooltip metricType="coverage" />
+        </h3>
 
         <table class="metrics-table">
           <tbody>
@@ -266,7 +279,10 @@ const price = metrics?.price;
   {
     showSections.instantiation && inst && (
       <div class="metric-section">
-        <h3 class="sober-label">Instantiation</h3>
+        <h3 class="sober-label">
+          Instantiation
+          <Tooltip metricType="instantiation" />
+        </h3>
 
         <table class="metrics-table">
           <tbody>
@@ -292,7 +308,10 @@ const price = metrics?.price;
   {
     showSections.quality && judge && (
       <div class="metric-section">
-        <h3 class="sober-label">Quality</h3>
+        <h3 class="sober-label">
+          Quality
+          <Tooltip metricType="realism" />
+        </h3>
 
         <table class="metrics-table">
           <tbody>
