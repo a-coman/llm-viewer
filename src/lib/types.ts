@@ -264,6 +264,60 @@ export interface CoverageFileRoot {
   experiments: CoverageExperimentEntry[];
 }
 
+// --- Difference.json Types (Diversity Metrics) ---
+
+export interface RawDifferenceData {
+  numeric: number;
+  string_equals: number;
+  string_lv: number;
+}
+
+export interface SimpleDifferenceGeneration {
+  generation_id: string;
+  attempt_id: string;
+  difference: RawDifferenceData;
+}
+
+export interface CoTDifferenceCategory {
+  name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  attempt_id: string;
+  difference: RawDifferenceData;
+}
+
+export interface CoTDifferenceGeneration {
+  generation_id: string;
+  categories: CoTDifferenceCategory[];
+  difference: RawDifferenceData;
+}
+
+export interface SimpleDifferenceExperiment {
+  experiment_id: string;
+  generations: SimpleDifferenceGeneration[];
+  difference: RawDifferenceData;
+}
+
+export interface CoTDifferenceExperiment {
+  experiment_id: string;
+  generations: CoTDifferenceGeneration[];
+  difference: RawDifferenceData;
+}
+
+export interface DifferenceModeData {
+  difference: RawDifferenceData;
+  number_experiments: number;
+  experiments: (SimpleDifferenceExperiment | CoTDifferenceExperiment)[];
+}
+
+export interface DifferenceExperimentEntry {
+  id: string;
+  simple: DifferenceModeData;
+  cot: DifferenceModeData;
+}
+
+export interface DifferenceFileRoot {
+  experiments: DifferenceExperimentEntry[];
+}
+
 // --- Application Domain Types (Derived/Processed) ---
 // These are used by the UI components (e.g. pages/models/[model].astro).
 // We transform Raw types into these.
@@ -342,6 +396,7 @@ export interface GenerationMetrics {
   multiplicities: number | MetricStat;
   invariants: number | MetricStat;
   coverage: CoverageMetrics;
+  diversity?: DiversityMetrics;
   domainErrors?: Record<
     string,
     { invalid: number; total: number; failureRate: number }
@@ -385,6 +440,7 @@ export interface CoTGeneration {
     multiplicities: MetricStat;
     invariants: MetricStat;
     coverage?: CoverageMetrics;
+    diversity?: DiversityMetrics;
   };
   judge?: JudgeResponse;
   pdfAvailable: boolean;
@@ -445,6 +501,7 @@ export interface DashboardData {
       multiplicities: number;
       invariants: number;
       coverage: CoverageMetrics;
+      diversity?: DiversityMetrics;
       realism: number;
     };
     cot: {
@@ -453,6 +510,7 @@ export interface DashboardData {
       multiplicities: number;
       invariants: number;
       coverage: CoverageMetrics;
+      diversity?: DiversityMetrics;
       realism: number;
     };
   }[];
