@@ -1,0 +1,198 @@
+---
+import { getColor } from "../lib/utils";
+import type { GedExperimentMatrix } from "../lib/types";
+
+interface Props {
+  data: GedExperimentMatrix;
+  title?: string;
+}
+
+const { data, title } = Astro.props;
+
+// GED is symmetric, so we use labelsx for both axes
+const labels = data.labelsx;
+const values = data.valuesx;
+
+// Build the 2D matrix
+const n = labels.length;
+const matrix: number[][] = [];
+
+for (let i = 0; i < n; i++) {
+  const row: number[] = [];
+  for (let j = 0; j < n; j++) {
+    const idx = i < j ? i * n + j : j * n + i;
+    row.push(values[idx] ?? values[i] ?? 0);
+  }
+  matrix.push(row);
+}
+
+function getCellColor(val: number, i: number, j: number): string {
+  // Lower triangle (i > j) + Diagonal (i === j) -> White (Clean skip)
+  if (i >= j) {
+    return "background-color: #ffffff;";
+  }
+  // Upper triangle -> Color scale
+  // Green at 0.5 or lower, Red at 1.0
+  // getColor(val, greenPos, redPos)
+  return getColor(val, 0.5, 0.9);
+}
+---
+
+<div class="heatmap-container">
+  {title && <h3 class="sober-label">{title}</h3>}
+
+  <div class="matrix-wrapper">
+    <table class="matrix">
+      <colgroup>
+        <col class="row-label-col" />
+        {labels.map(() => <col />)}
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="corner-header"></th>
+          {
+            labels.map((label) => (
+              <th class="col-header">
+                <span class="col-header-text">{label}</span>
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          matrix.map((row, i) => (
+            <tr>
+              <th class="row-header">{labels[i]}</th>
+              {row.map((val, j) => (
+                <td
+                  class="cell"
+                  style={getCellColor(val, i, j)}
+                  data-value={val.toFixed(3)}
+                >
+                  <span class="tooltip">
+                    {labels[i]} ↔ {labels[j]}: {val.toFixed(3)}
+                  </span>
+                </td>
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .heatmap-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: visible; /* Allow tooltips to float outside */
+  }
+
+  .matrix-wrapper {
+    width: 100%;
+    flex: 1;
+    overflow: visible; /* Prevent clipping tooltips */
+    background: var(--color-background);
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .matrix {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border-style: hidden;
+  }
+
+  .row-label-col {
+    width: 65px;
+  }
+
+  .corner-header {
+    border: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+  }
+
+  .col-header {
+    height: 65px;
+    vertical-align: bottom;
+    padding: 0.2rem 0;
+    border: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+  }
+
+  .col-header-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: block;
+    margin: 0 auto;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .row-header {
+    text-align: right;
+    padding: 0 0.4rem 0 0.2rem;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+    white-space: nowrap;
+    border: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+  }
+
+  .cell {
+    border: 1px solid var(--color-border-light);
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 125%; /* Raised a bit more to clear rotated headers better */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent);
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 10000; /* Extremely high to stay on top of other sections */
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .cell:hover .tooltip {
+    display: block;
+  }
+
+  .cell:hover {
+    filter: brightness(0.95);
+    z-index: 5;
+  }
+
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--color-accent);
+  }
+</style>

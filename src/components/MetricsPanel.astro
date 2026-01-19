@@ -36,6 +36,7 @@ interface Metrics {
     numeric: number;
     stringEquals: number;
     stringLv: number;
+    ged?: { mean: number; std: number };
   };
   judge?: { successRate: number };
   price?: { price: number };
@@ -244,6 +245,14 @@ const price = metrics?.price;
                 {getDisplayValue(div.stringLv).text}
               </td>
             </tr>
+            {div.ged && (
+              <tr>
+                <td>GED</td>
+                <td style={getColor(div.ged.mean, 0.5, 0.9)}>
+                  {div.ged.mean.toFixed(3)} ± {div.ged.std.toFixed(3)}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

@@ -356,6 +356,68 @@ export interface DiversityMetrics {
   numeric: number;
   stringEquals: number;
   stringLv: number;
+  ged?: GedSummary; // GED mean and std at model level
+}
+
+// --- GED (Graph Edit Distance) Types ---
+
+export interface GedSummary {
+  mean: number;
+  std: number;
+}
+
+export interface GedExperimentMatrix {
+  labelsx: string[];
+  labelsy: string[];
+  valuesx: number[];
+  valuesy: number[];
+}
+
+export interface GedGenerationData {
+  generation_id: string;
+  attempt_id?: string;
+  ged: {
+    adjacency: string;
+    labels: string;
+    edges: string;
+  };
+}
+
+export interface GedCategoryData {
+  name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  attempt_id: string;
+  ged: {
+    adjacency: string;
+    labels: string;
+    edges: string;
+  };
+}
+
+export interface GedCoTGenerationData {
+  generation_id: string;
+  categories: GedCategoryData[];
+}
+
+export interface GedExperimentEntry {
+  experiment_id: string;
+  generations: (GedGenerationData | GedCoTGenerationData)[];
+  ged: GedExperimentMatrix;
+}
+
+export interface GedModeData {
+  ged: GedSummary;
+  number_experiments: number;
+  experiments: GedExperimentEntry[];
+}
+
+export interface GedModelEntry {
+  id: string;
+  simple: GedModeData;
+  cot: GedModeData;
+}
+
+export interface GedFileRoot {
+  experiments: GedModelEntry[];
 }
 
 export interface JudgeResult {
@@ -461,6 +523,7 @@ export interface ModelData {
     grakel?: GrakelMatrix;
     shannon: ShannonEntry[];
     generations: SimpleGeneration[];
+    gedHeatmap?: GedExperimentMatrix;
   };
 
   cot: {
@@ -472,6 +535,7 @@ export interface ModelData {
     grakel?: GrakelMatrix;
     shannon: ShannonEntry[];
     generations: CoTGeneration[];
+    gedHeatmap?: GedExperimentMatrix;
   };
 }
 

@@ -28,6 +28,10 @@ import type {
   DifferenceModeData,
   RawDifferenceData,
   DiversityMetrics,
+  GedFileRoot,
+  GedModeData,
+  GedSummary,
+  GedExperimentMatrix,
 } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "public");
@@ -35,12 +39,14 @@ const METRICS_FILE = path.join(DATA_DIR, "metrics.json");
 const LOGS_FILE = path.join(DATA_DIR, "logs.json");
 const COVERAGE_FILE = path.join(DATA_DIR, "coverage.json");
 const DIFFERENCE_FILE = path.join(DATA_DIR, "difference.json");
+const GED_FILE = path.join(DATA_DIR, "ged.json");
 
 // Cache data in memory - now stores the full file with all experiments
 let cachedMetricsFile: MetricsFileRoot | null = null;
 let cachedLogsFile: LogsFileRoot | null = null;
 let cachedCoverageFile: CoverageFileRoot | null = null;
 let cachedDifferenceFile: DifferenceFileRoot | null = null;
+let cachedGedFile: GedFileRoot | null = null;
 
 const EMPTY_METRIC_STAT = { errors: 0, total: 0, str: [] };
 const EMPTY_METRICS_CONTENT = {
@@ -101,6 +107,15 @@ function loadData() {
       cachedDifferenceFile = { experiments: [] };
     }
   }
+  if (!cachedGedFile) {
+    try {
+      const gedContent = fs.readFileSync(GED_FILE, "utf-8");
+      cachedGedFile = JSON.parse(gedContent);
+    } catch (error) {
+      console.error("Error loading ged.json:", error);
+      cachedGedFile = { experiments: [] };
+    }
+  }
 }
 
 // Get list of all experiment IDs
@@ -115,6 +130,7 @@ function getExperimentData(experimentId?: string): {
   metrics: MetricsDataRoot;
   coverage: { simple: CoverageModeData; cot: CoverageModeData } | null;
   difference: { simple: DifferenceModeData; cot: DifferenceModeData } | null;
+  ged: { simple: GedModeData; cot: GedModeData } | null;
 } {
   loadData();
 
@@ -134,6 +150,10 @@ function getExperimentData(experimentId?: string): {
     ? cachedDifferenceFile?.experiments.find((e) => e.id === experimentId)
     : cachedDifferenceFile?.experiments[0];
 
+  const gedExp = experimentId
+    ? cachedGedFile?.experiments.find((e) => e.id === experimentId)
+    : cachedGedFile?.experiments[0];
+
   return {
     logs: logExp
       ? { simple: logExp.simple, cot: logExp.cot }
@@ -147,6 +167,7 @@ function getExperimentData(experimentId?: string): {
     difference: differenceExp
       ? { simple: differenceExp.simple, cot: differenceExp.cot }
       : null,
+    ged: gedExp ? { simple: gedExp.simple, cot: gedExp.cot } : null,
   };
 }
 
@@ -265,6 +286,7 @@ export function getModelData(
     metrics: cachedMetrics,
     coverage: cachedCoverage,
     difference: cachedDifference,
+    ged: cachedGed,
   } = getExperimentData(experimentId);
   const modelName = getModelName(modelSlug);
   const domainLower = modelName.toLowerCase();
@@ -277,6 +299,7 @@ export function getModelData(
     const metricExps = cachedMetrics?.simple?.experiments || [];
     const coverageExps = cachedCoverage?.simple?.experiments || [];
     const differenceExps = cachedDifference?.simple?.experiments || [];
+    const gedExps = cachedGed?.simple?.experiments || [];
     const generations: SimpleGeneration[] = [];
 
     const logExp = logExps[0];
@@ -288,6 +311,9 @@ export function getModelData(
       : null;
     const diffExp = logExp
       ? differenceExps.find((d) => d.experiment_id === logExp.id)
+      : null;
+    const gedExp = logExp
+      ? gedExps.find((g) => g.experiment_id === logExp.id)
       : null;
 
     if (logExp && mExp) {
@@ -359,10 +385,14 @@ export function getModelData(
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,
         },
-        diversity: rawDifferenceToDisplay(diffExp?.difference),
+        diversity: {
+          ...rawDifferenceToDisplay(diffExp?.difference),
+          ged: cachedGed?.simple?.ged,
+        },
         judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
         shannon: [],
         grakel: undefined,
+        gedHeatmap: gedExp?.ged,
       };
     }
 
@@ -375,6 +405,7 @@ export function getModelData(
       judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
       shannon: [],
       grakel: undefined,
+      gedHeatmap: undefined,
     };
   };
 
@@ -386,6 +417,7 @@ export function getModelData(
     const metricExps = cachedMetrics?.cot?.experiments || [];
     const coverageExps = cachedCoverage?.cot?.experiments || [];
     const differenceExps = cachedDifference?.cot?.experiments || [];
+    const gedExps = cachedGed?.cot?.experiments || [];
     const generations: CoTGeneration[] = [];
 
     const logExp = logExps[0];
@@ -397,6 +429,9 @@ export function getModelData(
       : null;
     const diffExp = logExp
       ? differenceExps.find((d) => d.experiment_id === logExp.id)
+      : null;
+    const gedExp = logExp
+      ? gedExps.find((g) => g.experiment_id === logExp.id)
       : null;
 
     if (logExp && mExp) {
@@ -533,10 +568,14 @@ export function getModelData(
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,
         },
-        diversity: rawDifferenceToDisplay(diffExp?.difference),
+        diversity: {
+          ...rawDifferenceToDisplay(diffExp?.difference),
+          ged: cachedGed?.cot?.ged,
+        },
         judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
         shannon: [],
         grakel: undefined,
+        gedHeatmap: gedExp?.ged,
       };
     }
 
@@ -549,6 +588,7 @@ export function getModelData(
       judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
       shannon: [],
       grakel: undefined,
+      gedHeatmap: undefined,
     };
   };
 
@@ -590,6 +630,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     metrics: cachedMetrics,
     coverage: cachedCoverage,
     difference: cachedDifference,
+    ged: cachedGed,
   } = getExperimentData(experimentId);
   const modelsList: DashboardData["models"] = MODELS.map((modelName) => {
     const data = getModelData(modelName, experimentId);
@@ -623,6 +664,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     const metrics = cachedMetrics?.[mode]?.metrics;
     const coverageData = cachedCoverage?.[mode];
     const differenceData = cachedDifference?.[mode];
+    const gedData = cachedGed?.[mode]?.ged;
 
     const experiments = logs?.experiments || [];
     const totalPrice = experiments.reduce((sum, exp) => {
@@ -644,7 +686,10 @@ export function getDashboardData(experimentId?: string): DashboardData {
         invariants: calculateRate(metrics?.invariants),
       },
       coverage: getCoverageMetrics(coverageData),
-      diversity: rawDifferenceToDisplay(differenceData?.difference),
+      diversity: {
+        ...rawDifferenceToDisplay(differenceData?.difference),
+        ged: gedData,
+      },
       judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
     };
   };

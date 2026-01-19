@@ -1,7 +1,6 @@
 ---
 import PageLayout from "../../../layouts/PageLayout.astro";
-import HeatmapMatrix from "../../../components/HeatmapMatrix.astro";
-import PdfEmbed from "../../../components/PdfEmbed.astro";
+import GedHeatmap from "../../../components/GedHeatmap.astro";
 import DataTable from "../../../components/DataTable.astro";
 import MetricsPanel from "../../../components/MetricsPanel.astro";
 import { MODELS_LOWER, COLOR_RANGES } from "../../../lib/constants";
@@ -62,12 +61,14 @@ const modelPanelSections = {
         <div class="tab-content active" data-content="simple">
           <div class="content-grid">
             <section class="section">
-              <h2>Model Diagram</h2>
-              <PdfEmbed
-                src={modelData.diagramPdf}
-                title="Model Diagram"
-                available={true}
-              />
+              <h2>GED Similarity</h2>
+              {simpleData?.gedHeatmap ? (
+                <GedHeatmap data={simpleData.gedHeatmap} />
+              ) : (
+                <div class="sober-empty-state">
+                  <span class="sober-empty-text">No GED Data</span>
+                </div>
+              )}
             </section>
 
             <div class="metrics-column">
@@ -79,16 +80,6 @@ const modelPanelSections = {
               />
             </div>
           </div>
-
-          {simpleData?.grakel && simpleData.grakel.values?.length > 0 && (
-            <section class="section">
-              <h2>Grakel Similarity</h2>
-              <HeatmapMatrix
-                labels={simpleData.grakel.labels}
-                values={simpleData.grakel.values}
-              />
-            </section>
-          )}
 
           <section class="section">
             <h2>Generations</h2>
@@ -109,12 +100,14 @@ const modelPanelSections = {
         <div class="tab-content" data-content="cot">
           <div class="content-grid">
             <section class="section">
-              <h2>Model Diagram</h2>
-              <PdfEmbed
-                src={modelData.diagramPdf}
-                title="Model Diagram"
-                available={true}
-              />
+              <h2>GED Similarity</h2>
+              {cotData?.gedHeatmap ? (
+                <GedHeatmap data={cotData.gedHeatmap} />
+              ) : (
+                <div class="sober-empty-state">
+                  <span class="sober-empty-text">No GED Data</span>
+                </div>
+              )}
             </section>
 
             <div class="metrics-column">
@@ -126,16 +119,6 @@ const modelPanelSections = {
               />
             </div>
           </div>
-
-          {cotData?.grakel && cotData.grakel.values?.length > 0 && (
-            <section class="section">
-              <h2>Grakel Similarity</h2>
-              <HeatmapMatrix
-                labels={cotData.grakel.labels}
-                values={cotData.grakel.values}
-              />
-            </section>
-          )}
 
           <section class="section">
             <h2>Generations</h2>
@@ -205,5 +188,12 @@ const modelPanelSections = {
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
+    min-height: 0; /* Allow inner content to shrink if needed */
+  }
+
+  /* Ensure the heatmap adapts to the flex container */
+  .content-grid > .section > :global(.heatmap-container) {
+    flex: 1;
+    min-height: 0;
   }
 </style>
