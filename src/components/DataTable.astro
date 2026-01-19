@@ -72,13 +72,22 @@ function formatValue(
   col: any,
   isGeneration: boolean,
   source: any,
+  item?: any,
 ): string {
-  if (value === null || value === undefined) return "—";
-
   if (col.isRealism) {
-    if (isGeneration) return source?.judge?.response || "—";
+    if (isGeneration) {
+      if (item?.realism) {
+        const { realistic, unrealistic, doubtful } = item.realism;
+        const total = realistic + unrealistic + doubtful;
+        if (total > 0) return formatPercent(realistic / total);
+      }
+      return item?.judge?.response || "—";
+    }
+    if (value === null || value === undefined) return "—";
     return formatPercent(value);
   }
+
+  if (value === null || value === undefined) return "—";
 
   // Handle InstantiationValueItem format { value, total }
   if (col.isInstantiation) {
@@ -107,8 +116,47 @@ function formatValue(
   return formatPercent(value);
 }
 
-function getCellStyle(value: any, col: any, isGeneration: boolean): string {
-  if (value === null || value === undefined || col.isRealism) return "";
+function getCellStyle(
+  value: any,
+  col: any,
+  isGeneration: boolean,
+  source?: any,
+  item?: any,
+): string {
+  if (col.isRealism) {
+    if (isGeneration) {
+      if (item?.realism) {
+        const { realistic, unrealistic, doubtful } = item.realism;
+        const total = realistic + unrealistic + doubtful;
+        if (total > 0) {
+          return getColor(
+            realistic / total,
+            COLOR_RANGES.validation.percent.green,
+            COLOR_RANGES.validation.percent.red,
+          );
+        }
+      }
+
+      // For generations, color based on response text
+      const response = item?.judge?.response?.toLowerCase() || "";
+      if (response === "realistic") return getBinaryColor(true);
+      if (response === "unrealistic") return getBinaryColor(false);
+      // For doubtful/unknown, use warning color (no coloring)
+      return "";
+    }
+    if (value === null || value === undefined) return "";
+    // For models, color based on percentage value
+    if (typeof value === "number") {
+      return getColor(
+        value,
+        COLOR_RANGES.validation.percent.green,
+        COLOR_RANGES.validation.percent.red,
+      );
+    }
+    return "";
+  }
+
+  if (value === null || value === undefined) return "";
 
   // Handle InstantiationValueItem format { value, total }
   if (col.isInstantiation) {
@@ -182,12 +230,19 @@ const isGeneration = type === "generations";
               </td>
               {columns.map((col) => {
                 const value = getValue(source, col.key);
-                const style = getCellStyle(value, col, isGeneration);
+                const style = getCellStyle(
+                  value,
+                  col,
+                  isGeneration,
+                  source,
+                  item,
+                );
                 const displayValue = formatValue(
                   value,
                   col,
                   isGeneration,
                   source,
+                  item,
                 );
 
                 return <td style={style || undefined}>{displayValue}</td>;

@@ -32,6 +32,9 @@ import type {
   GedModeData,
   GedSummary,
   GedExperimentMatrix,
+  JudgeFileRoot,
+  JudgeModeData,
+  RealismCounts,
 } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "public");
@@ -40,6 +43,7 @@ const LOGS_FILE = path.join(DATA_DIR, "logs.json");
 const COVERAGE_FILE = path.join(DATA_DIR, "coverage.json");
 const DIFFERENCE_FILE = path.join(DATA_DIR, "difference.json");
 const GED_FILE = path.join(DATA_DIR, "ged.json");
+const JUDGE_FILE = path.join(DATA_DIR, "judge.json");
 
 // Cache data in memory - now stores the full file with all experiments
 let cachedMetricsFile: MetricsFileRoot | null = null;
@@ -47,6 +51,7 @@ let cachedLogsFile: LogsFileRoot | null = null;
 let cachedCoverageFile: CoverageFileRoot | null = null;
 let cachedDifferenceFile: DifferenceFileRoot | null = null;
 let cachedGedFile: GedFileRoot | null = null;
+let cachedJudgeFile: JudgeFileRoot | null = null;
 
 const EMPTY_METRIC_STAT = { errors: 0, total: 0, str: [] };
 const EMPTY_METRICS_CONTENT = {
@@ -116,6 +121,15 @@ function loadData() {
       cachedGedFile = { experiments: [] };
     }
   }
+  if (!cachedJudgeFile) {
+    try {
+      const judgeContent = fs.readFileSync(JUDGE_FILE, "utf-8");
+      cachedJudgeFile = JSON.parse(judgeContent);
+    } catch (error) {
+      console.error("Error loading judge.json:", error);
+      cachedJudgeFile = { experiments: [] };
+    }
+  }
 }
 
 // Get list of all experiment IDs
@@ -131,6 +145,7 @@ function getExperimentData(experimentId?: string): {
   coverage: { simple: CoverageModeData; cot: CoverageModeData } | null;
   difference: { simple: DifferenceModeData; cot: DifferenceModeData } | null;
   ged: { simple: GedModeData; cot: GedModeData } | null;
+  judge: { simple: JudgeModeData; cot: JudgeModeData } | null;
 } {
   loadData();
 
@@ -154,6 +169,10 @@ function getExperimentData(experimentId?: string): {
     ? cachedGedFile?.experiments.find((e) => e.id === experimentId)
     : cachedGedFile?.experiments[0];
 
+  const judgeExp = experimentId
+    ? cachedJudgeFile?.experiments.find((e) => e.id === experimentId)
+    : cachedJudgeFile?.experiments[0];
+
   return {
     logs: logExp
       ? { simple: logExp.simple, cot: logExp.cot }
@@ -168,6 +187,7 @@ function getExperimentData(experimentId?: string): {
       ? { simple: differenceExp.simple, cot: differenceExp.cot }
       : null,
     ged: gedExp ? { simple: gedExp.simple, cot: gedExp.cot } : null,
+    judge: judgeExp ? { simple: judgeExp.simple, cot: judgeExp.cot } : null,
   };
 }
 
@@ -255,6 +275,33 @@ const EMPTY_DIVERSITY: DiversityMetrics = {
   stringLv: 0,
 };
 
+// Helper function to calculate realism success rate from counts
+function calculateRealismSuccessRate(
+  counts: RealismCounts | null | undefined,
+): number {
+  if (!counts) return 0;
+  const total = counts.realistic + counts.unrealistic + counts.doubtful;
+  if (total === 0) return 0;
+  return counts.realistic / total;
+}
+
+// Helper function to get JudgeResult from RealismCounts
+function getJudgeResult(counts: RealismCounts | null | undefined): {
+  realistic: number;
+  unrealistic: number;
+  unknown: number;
+  successRate: number;
+} {
+  if (!counts)
+    return { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 };
+  return {
+    realistic: counts.realistic,
+    unrealistic: counts.unrealistic,
+    unknown: counts.doubtful,
+    successRate: calculateRealismSuccessRate(counts),
+  };
+}
+
 // Helper function to transform raw difference data to display format
 function rawDifferenceToDisplay(
   raw: RawDifferenceData | null | undefined,
@@ -287,6 +334,7 @@ export function getModelData(
     coverage: cachedCoverage,
     difference: cachedDifference,
     ged: cachedGed,
+    judge: cachedJudge,
   } = getExperimentData(experimentId);
   const modelName = getModelName(modelSlug);
   const domainLower = modelName.toLowerCase();
@@ -300,6 +348,7 @@ export function getModelData(
     const coverageExps = cachedCoverage?.simple?.experiments || [];
     const differenceExps = cachedDifference?.simple?.experiments || [];
     const gedExps = cachedGed?.simple?.experiments || [];
+    const judgeExps = cachedJudge?.simple?.experiments || [];
     const generations: SimpleGeneration[] = [];
 
     const logExp = logExps[0];
@@ -314,6 +363,9 @@ export function getModelData(
       : null;
     const gedExp = logExp
       ? gedExps.find((g) => g.experiment_id === logExp.id)
+      : null;
+    const judgeExp = logExp
+      ? judgeExps.find((j) => j.experiment_id === logExp.id)
       : null;
 
     if (logExp && mExp) {
@@ -331,6 +383,15 @@ export function getModelData(
         const diffGen = diffExp?.generations?.find(
           (g) => g.generation_id === gen.id,
         );
+        // Find judge generation data - cast to SimpleJudgeGeneration type
+        const judgeGen = judgeExp?.generations?.find(
+          (g) => g.generation_id === gen.id,
+        ) as
+          | {
+              generation_id: string;
+              realism?: { response_type: string; reasoning: string };
+            }
+          | undefined;
         const attempt = gen.attempts?.[gen.attempts.length - 1];
         const tokens = sumTokens(gen.attempts);
 
@@ -356,12 +417,25 @@ export function getModelData(
           const instanceName = attempt.instance_name || "output";
           const pdfUrl = `data/dataset/${experimentId}/Simple/${domainFolder}/${dateTime}/gen${gen.id}/${instanceName}.pdf`;
 
+          // Build judge response from judge data or fallback to logs
+          const judgeResponse = judgeGen?.realism
+            ? {
+                response: (judgeGen.realism.response_type
+                  .charAt(0)
+                  .toUpperCase() + judgeGen.realism.response_type.slice(1)) as
+                  | "Realistic"
+                  | "Unrealistic"
+                  | "Unknown",
+                why: judgeGen.realism.reasoning,
+              }
+            : (gen.judge as SimpleGeneration["judge"]);
+
           generations.push({
             id: `gen${gen.id}`,
             pdfAvailable: true,
             pdfUrl,
             metrics: genMetrics,
-            judge: gen.judge as SimpleGeneration["judge"],
+            judge: judgeResponse,
             systemPrompt: logExp.system_prompt,
             userPrompt: attempt.prompt,
           });
@@ -389,7 +463,9 @@ export function getModelData(
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.simple?.ged,
         },
-        judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
+        judge: getJudgeResult(
+          judgeExp?.realism || cachedJudge?.simple?.realism,
+        ),
         shannon: [],
         grakel: undefined,
         gedHeatmap: gedExp?.ged,
@@ -418,6 +494,7 @@ export function getModelData(
     const coverageExps = cachedCoverage?.cot?.experiments || [];
     const differenceExps = cachedDifference?.cot?.experiments || [];
     const gedExps = cachedGed?.cot?.experiments || [];
+    const judgeExps = cachedJudge?.cot?.experiments || [];
     const generations: CoTGeneration[] = [];
 
     const logExp = logExps[0];
@@ -432,6 +509,9 @@ export function getModelData(
       : null;
     const gedExp = logExp
       ? gedExps.find((g) => g.experiment_id === logExp.id)
+      : null;
+    const judgeExp = logExp
+      ? judgeExps.find((j) => j.experiment_id === logExp.id)
       : null;
 
     if (logExp && mExp) {
@@ -474,8 +554,33 @@ export function getModelData(
 
         if (!mGen) return;
 
+        // Find judge generation data for CoT
+        const judgeGen = judgeExp?.generations?.find(
+          (g) => g.generation_id === gen.id,
+        ) as
+          | {
+              generation_id: string;
+              realism?: {
+                realistic: number;
+                unrealistic: number;
+                doubtful: number;
+              };
+              categories?: {
+                name: string;
+                realism?: {
+                  response_type: string;
+                  reasoning: string;
+                };
+              }[];
+            }
+          | undefined;
+
         const catMetricsList: any[] = gen.categories.map((catLog) => {
           const catMetric = mGen.categories.find((c) => c.name === catLog.name);
+          const judgeCat = judgeGen?.categories?.find(
+            (c) => c.name === catLog.name,
+          );
+
           const covCat = covGen?.categories?.find(
             (c) => c.name === catLog.name,
           );
@@ -532,8 +637,39 @@ export function getModelData(
               tokenOutput: totalOut,
             },
             prompts,
+            judge: judgeCat
+              ? {
+                  response: judgeCat.realism?.response_type || "Unknown",
+                  why: judgeCat.realism?.reasoning || "",
+                }
+              : undefined,
+            realism: judgeCat?.realism,
           };
         });
+
+        // Build judge response - for CoT we calculate based on realism counts
+        let judgeResponse: CoTGeneration["judge"] =
+          gen.judge as CoTGeneration["judge"];
+        if (judgeGen?.realism) {
+          const counts = judgeGen.realism;
+          const total = counts.realistic + counts.unrealistic + counts.doubtful;
+          let responseType: "Realistic" | "Unrealistic" | "Unknown" = "Unknown";
+          if (
+            counts.realistic > counts.unrealistic &&
+            counts.realistic > counts.doubtful
+          ) {
+            responseType = "Realistic";
+          } else if (
+            counts.unrealistic > counts.realistic &&
+            counts.unrealistic > counts.doubtful
+          ) {
+            responseType = "Unrealistic";
+          }
+          judgeResponse = {
+            response: responseType,
+            why: `${counts.realistic} realistic, ${counts.unrealistic} unrealistic, ${counts.doubtful} doubtful`,
+          };
+        }
 
         generations.push({
           id: `gen${gen.id}`,
@@ -547,7 +683,8 @@ export function getModelData(
             coverage: getCoverageMetrics(covGen),
             diversity: rawDifferenceToDisplay(diffGen?.difference),
           },
-          judge: gen.judge as CoTGeneration["judge"],
+          judge: judgeResponse,
+          realism: judgeGen?.realism,
         });
       });
 
@@ -572,7 +709,7 @@ export function getModelData(
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.cot?.ged,
         },
-        judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
+        judge: getJudgeResult(judgeExp?.realism || cachedJudge?.cot?.realism),
         shannon: [],
         grakel: undefined,
         gedHeatmap: gedExp?.ged,
@@ -631,6 +768,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     coverage: cachedCoverage,
     difference: cachedDifference,
     ged: cachedGed,
+    judge: cachedJudge,
   } = getExperimentData(experimentId);
   const modelsList: DashboardData["models"] = MODELS.map((modelName) => {
     const data = getModelData(modelName, experimentId);
@@ -665,6 +803,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     const coverageData = cachedCoverage?.[mode];
     const differenceData = cachedDifference?.[mode];
     const gedData = cachedGed?.[mode]?.ged;
+    const judgeData = cachedJudge?.[mode];
 
     const experiments = logs?.experiments || [];
     const totalPrice = experiments.reduce((sum, exp) => {
@@ -690,7 +829,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
         ...rawDifferenceToDisplay(differenceData?.difference),
         ged: gedData,
       },
-      judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
+      judge: getJudgeResult(judgeData?.realism),
     };
   };
 

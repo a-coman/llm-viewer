@@ -420,6 +420,91 @@ export interface GedFileRoot {
   experiments: GedModelEntry[];
 }
 
+// --- Judge.json Types ---
+
+export interface RealismCounts {
+  realistic: number;
+  unrealistic: number;
+  doubtful: number;
+}
+
+export interface JudgeGenerationRealism {
+  response_type: "realistic" | "unrealistic" | "doubtful";
+  reasoning: string;
+}
+
+export interface SimpleJudgeGeneration {
+  generation_id: string;
+  attempt_id: string;
+  judge_prompt?: string;
+  judge_response?: string;
+  realism: JudgeGenerationRealism;
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
+}
+
+export interface CoTJudgeCategory {
+  name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  attempt_id: string;
+  realism: RealismCounts;
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
+}
+
+export interface CoTJudgeGeneration {
+  generation_id: string;
+  realism: RealismCounts;
+  categories: CoTJudgeCategory[];
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
+}
+
+export interface JudgeExperimentEntry {
+  experiment_id: string;
+  realism: RealismCounts;
+  generations: (SimpleJudgeGeneration | CoTJudgeGeneration)[];
+}
+
+export interface JudgeModeData {
+  model?: {
+    name: string;
+    version: string;
+    provider: string;
+  };
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
+  realism: RealismCounts;
+  judge_system_prompt?: string;
+  number_experiments: number;
+  experiments: JudgeExperimentEntry[];
+}
+
+export interface JudgeModelEntry {
+  id: string;
+  simple: JudgeModeData;
+  cot: JudgeModeData;
+}
+
+export interface JudgeFileRoot {
+  experiments: JudgeModelEntry[];
+}
+
 export interface JudgeResult {
   realistic: number;
   unrealistic: number;
@@ -482,6 +567,11 @@ export interface CategoryMetrics extends GenerationMetrics {
   category: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   pdfUrl?: string;
   prompts?: CotPromptsData;
+  judge?: JudgeResponse;
+  realism?: {
+    response_type: string;
+    reasoning: string;
+  };
 }
 
 export interface SimpleGeneration {
@@ -505,6 +595,7 @@ export interface CoTGeneration {
     diversity?: DiversityMetrics;
   };
   judge?: JudgeResponse;
+  realism?: RealismCounts;
   pdfAvailable: boolean;
   pdfUrl?: string;
 }

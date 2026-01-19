@@ -1,23 +1,31 @@
 ---
 interface Props {
-  response?: "Realistic" | "Unrealistic" | "Unknown" | string;
+  response?: "Realistic" | "Unrealistic" | "Unknown" | "Doubtful" | string;
   why?: string;
 }
 
-const { response = "Unknown", why = "Placeholder" } = Astro.props;
+const { response = "Unknown", why } = Astro.props;
+
+// Normalize response casing for comparison (handles lowercase from JSON)
+const normalizedResponse = response?.toLowerCase() || "unknown";
 
 const badgeClass =
-  response === "Realistic"
+  normalizedResponse === "realistic"
     ? "badge-success"
-    : response === "Unrealistic"
+    : normalizedResponse === "unrealistic"
       ? "badge-error"
       : "badge-unknown";
+
+// Capitalize first letter for display
+const displayResponse = response
+  ? response.charAt(0).toUpperCase() + response.slice(1).toLowerCase()
+  : "Unknown";
 ---
 
 <div class="judge-card">
   <div class="sober-header">
     <span class="title">LLM as a Judge</span>
-    <span class={`badge ${badgeClass}`}>{response}</span>
+    <span class={`badge ${badgeClass}`}>{displayResponse}</span>
   </div>
 
   {
