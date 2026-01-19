@@ -354,7 +354,7 @@ export function getModelData(
           };
 
           const instanceName = attempt.instance_name || "output";
-          const pdfUrl = `/data/dataset/${experimentId}/Simple/${domainFolder}/${dateTime}/gen${gen.id}/${instanceName}.pdf`;
+          const pdfUrl = `data/dataset/${experimentId}/Simple/${domainFolder}/${dateTime}/gen${gen.id}/${instanceName}.pdf`;
 
           generations.push({
             id: `gen${gen.id}`,
@@ -525,7 +525,7 @@ export function getModelData(
             coverage: getCoverageMetrics(covCat),
             diversity: rawDifferenceToDisplay(diffCat?.difference),
             code: attempt?.response || "",
-            pdfUrl: `/data/dataset/${experimentId}/CoT/${domainFolder}/${dateTime}/gen${gen.id}/${catLog.name}.pdf`,
+            pdfUrl: `data/dataset/${experimentId}/CoT/${domainFolder}/${dateTime}/gen${gen.id}/${catLog.name}.pdf`,
             price: {
               price: calculatePrice(logExp.model.name, totalIn, totalOut),
               tokenInput: totalIn,
@@ -616,8 +616,8 @@ export function getModelData(
 
   return {
     name: modelName,
-    diagramPdf: `/data/prompts/${domainLower}/diagram.pdf`,
-    diagramUse: `/data/prompts/${domainLower}/diagram.use`,
+    diagramPdf: `data/prompts/${domainLower}/diagram.pdf`,
+    diagramUse: `data/prompts/${domainLower}/diagram.use`,
     diagramUseCode,
     simple: simpleData,
     cot: cotData,
