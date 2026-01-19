@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { getUrl } from "../lib/utils";
 ---
 
 <!doctype html>
@@ -7,9 +8,22 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={getUrl("/favicon.svg")} />
     <meta name="generator" content={Astro.generator} />
     <title>LLM Viewer</title>
+    <script is:inline>
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var type = params.get("type");
+          if (type === "cot") {
+            document.documentElement.setAttribute("data-mode", "cot");
+          } else {
+            document.documentElement.setAttribute("data-mode", "simple");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div

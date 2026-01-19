@@ -1,5 +1,5 @@
 ---
-import { getColor, formatPercent, getBinaryColor } from "../lib/utils";
+import { getColor, formatPercent, getBinaryColor, getUrl } from "../lib/utils";
 import { INFINITY_SYMBOL, COLOR_RANGES } from "../lib/constants";
 
 interface Props {
@@ -162,8 +162,8 @@ const isGeneration = type === "generations";
           // Build path-based URL: /:experiment/:model or /:experiment/:model/:gen
           const baseHref =
             type === "models"
-              ? `/${experimentId}/${name.toLowerCase()}`
-              : `/${experimentId}/${modelSlug}/${item.id}`;
+              ? getUrl(`${experimentId}/${name.toLowerCase()}`)
+              : getUrl(`${experimentId}/${modelSlug}/${item.id}`);
           const isCotLink = genType === "cot" || mode === "cot";
 
           // Build query parameters (no longer need experimentId - it's in path)

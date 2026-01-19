@@ -148,6 +148,7 @@ const modelPanelSections = {
     const initialTab = params.get("type") || "simple";
 
     function setTab(tabName: string) {
+      document.documentElement.setAttribute("data-mode", tabName);
       modeBtns.forEach((btn) =>
         btn.classList.toggle(
           "active",

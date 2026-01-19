@@ -25,6 +25,8 @@ const {
   experimentIds = [],
 } = Astro.props;
 
+import { getUrl } from "../lib/utils";
+
 const simpleGens = Array.from(
   { length: simpleGenCount },
   (_, i) => `gen${i + 1}`,
@@ -33,7 +35,12 @@ const cotGens = Array.from({ length: cotGenCount }, (_, i) => `gen${i + 1}`);
 const showGens = currentModel || currentPage === "dashboard";
 ---
 
-<aside class="sidebar" data-current-page={currentPage}>
+<aside
+  class="sidebar"
+  data-current-page={currentPage}
+  data-experiment-id={experimentId}
+  data-base-url={import.meta.env.BASE_URL}
+>
   <div class="nav-header">
     <div class="experiment-selector">
       <select id="experiment-select" class="experiment-select">
@@ -47,7 +54,7 @@ const showGens = currentModel || currentPage === "dashboard";
       </select>
     </div>
     <a
-      href={`/${experimentId}`}
+      href={getUrl(experimentId)}
       class:list={["nav-link", { active: currentPage === "dashboard" }]}
     >
       Dashboard
@@ -92,7 +99,7 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/${experimentId}/${currentModel?.toLowerCase()}`
+                    : getUrl(`${experimentId}/${currentModel?.toLowerCase()}`)
                 }
                 class:list={[
                   "gen-link",
@@ -115,7 +122,9 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/${experimentId}/${currentModel?.toLowerCase()}/${g}`
+                      : getUrl(
+                          `${experimentId}/${currentModel?.toLowerCase()}/${g}`,
+                        )
                   }
                   class:list={[
                     "gen-link",
@@ -144,7 +153,9 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : `/${experimentId}/${currentModel?.toLowerCase()}?type=cot`
+                    : getUrl(
+                        `${experimentId}/${currentModel?.toLowerCase()}?type=cot`,
+                      )
                 }
                 class:list={[
                   "gen-link",
@@ -167,7 +178,9 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : `/${experimentId}/${currentModel?.toLowerCase()}/${g}?type=cot`
+                      : getUrl(
+                          `${experimentId}/${currentModel?.toLowerCase()}/${g}?type=cot`,
+                        )
                   }
                   class:list={[
                     "gen-link",
@@ -193,7 +206,7 @@ const showGens = currentModel || currentPage === "dashboard";
           models.map((model) => (
             <li>
               <a
-                href={`/${experimentId}/${model.toLowerCase()}`}
+                href={getUrl(`${experimentId}/${model.toLowerCase()}`)}
                 class:list={[
                   "model-link",
                   {
@@ -364,8 +377,10 @@ const showGens = currentModel || currentPage === "dashboard";
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const sidebar = document.querySelector(".sidebar");
+    const sidebar = document.querySelector(".sidebar") as HTMLElement;
     const currentPage = sidebar?.getAttribute("data-current-page");
+    const currentExperimentId = sidebar?.getAttribute("data-experiment-id");
+    const baseUrl = sidebar?.getAttribute("data-base-url") || "/";
     const isDashboard = currentPage === "dashboard";
     const modeBtns = document.querySelectorAll(".mode-btn");
     const gensSections = document.querySelectorAll(".gens-section");
@@ -383,13 +398,26 @@ const showGens = currentModel || currentPage === "dashboard";
     if (experimentSelect) {
       experimentSelect.addEventListener("change", (e) => {
         const newExperimentId = (e.target as HTMLSelectElement).value;
-        // Extract current path segments after experiment
-        const pathParts = window.location.pathname.split("/").filter(Boolean);
-        // Replace first segment (experiment) with new one, keep rest
-        pathParts[0] = newExperimentId;
-        const newPath = "/" + pathParts.join("/");
-        // Preserve query params
-        window.location.href = newPath + window.location.search;
+        const pathParts = window.location.pathname.split("/");
+
+        // Find where the current experiment ID is in the path
+        const expIndex = currentExperimentId
+          ? pathParts.indexOf(currentExperimentId)
+          : -1;
+
+        if (expIndex !== -1) {
+          // Replace specific segment
+          pathParts[expIndex] = newExperimentId;
+          const newPath = pathParts.join("/");
+          window.location.href = newPath + window.location.search;
+        } else {
+          // Fallback: at root or weird path
+          // If we are at base, go to base + newExperimentId
+          // Ensure baseUrl ends with slash for concatenation
+          const cleanBase = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+          window.location.href =
+            cleanBase + newExperimentId + window.location.search;
+        }
       });
     }
 
@@ -418,11 +446,23 @@ const showGens = currentModel || currentPage === "dashboard";
         const currentCategory = currentParams.get("category");
         const currentAgent = currentParams.get("agent");
 
-        // Get experiment from current path (first segment)
-        const pathParts = window.location.pathname.split("/").filter(Boolean);
-        const experimentId = pathParts[0] || "";
+        const pathParts = window.location.pathname.split("/");
+        const expIndex = currentExperimentId
+          ? pathParts.indexOf(currentExperimentId)
+          : -1;
 
-        let url = `/${experimentId}/${modelName}`;
+        // Construct base URL robustly
+        let url = "";
+
+        if (expIndex !== -1) {
+          // Base path includes everything up to experiment
+          const basePath = pathParts.slice(0, expIndex + 1).join("/");
+          url = `${basePath}/${modelName}`;
+        } else {
+          // Fallback construction
+          const cleanBase = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+          url = `${cleanBase}${currentExperimentId}/${modelName}`;
+        }
 
         // Get current gen from URL path or from selected gen link (dashboard)
         let gen = "all";
@@ -541,6 +581,7 @@ const showGens = currentModel || currentPage === "dashboard";
     modeBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const mode = btn.getAttribute("data-mode") || "simple";
+        document.documentElement.setAttribute("data-mode", mode);
         modeBtns.forEach((b) => b.classList.toggle("active", b === btn));
         gensSections.forEach((s) =>
           s.classList.toggle("hidden", s.getAttribute("data-gens") !== mode),

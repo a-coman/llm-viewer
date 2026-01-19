@@ -70,7 +70,23 @@ const {
       this._fitRetryTimer = null;
       this._resizeObserver = null;
 
-      this.init();
+      this._resizeObserver = null;
+
+      this.setupObserver();
+    }
+
+    setupObserver() {
+      // Lazy load: Only init PDF when the container becomes visible
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            this.init();
+            observer.disconnect();
+            break;
+          }
+        }
+      });
+      observer.observe(this.container);
     }
 
     scheduleFit() {

@@ -473,3 +473,75 @@ html {
     flex-wrap: wrap;
   }
 }
+
+/* 
+  Mode overrides to prevent FOUC (Flash of Unstyled Content).
+  These rules use !important to override the default display states 
+  that might be set by SSR (server-side rendering) before client JS runs.
+*/
+
+/* CoT Mode Overrides */
+html[data-mode="cot"] .tab-content[data-content="simple"] {
+  display: none !important;
+}
+
+html[data-mode="cot"] .tab-content[data-content="cot"] {
+  display: block !important;
+}
+
+html[data-mode="cot"] .gens-section[data-gens="simple"] {
+  display: none !important;
+}
+
+html[data-mode="cot"] .gens-section[data-gens="cot"] {
+  display: block !important;
+}
+
+html[data-mode="cot"] .category-tabs[data-nav="cot"] {
+  display: flex !important;
+}
+
+html[data-mode="cot"] .mode-btn[data-mode="simple"] {
+  background: var(--color-muted) !important;
+  color: var(--color-secondary) !important;
+  border-color: transparent !important;
+}
+
+html[data-mode="cot"] .mode-btn[data-mode="cot"] {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+}
+
+/* Simple Mode Overrides */
+html[data-mode="simple"] .tab-content[data-content="cot"] {
+  display: none !important;
+}
+
+html[data-mode="simple"] .tab-content[data-content="simple"] {
+  display: block !important;
+}
+
+html[data-mode="simple"] .gens-section[data-gens="cot"] {
+  display: none !important;
+}
+
+html[data-mode="simple"] .gens-section[data-gens="simple"] {
+  display: block !important;
+}
+
+html[data-mode="simple"] .category-tabs[data-nav="cot"] {
+  display: none !important;
+}
+
+html[data-mode="simple"] .mode-btn[data-mode="cot"] {
+  background: var(--color-muted) !important;
+  color: var(--color-secondary) !important;
+  border-color: transparent !important;
+}
+
+html[data-mode="simple"] .mode-btn[data-mode="simple"] {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+}

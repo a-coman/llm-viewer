@@ -4,7 +4,7 @@ import { MODELS, MODELS_LOWER } from "./constants";
 export function getColor(
   value: number | undefined | null,
   greenPos: number,
-  redPos: number
+  redPos: number,
 ): string {
   if (value === undefined || value === null || isNaN(value)) return "";
 
@@ -43,7 +43,7 @@ export function getModelName(modelSlug: string): string {
 }
 
 export function calculateRate(
-  stat: { errors: number; total: number } | undefined
+  stat: { errors: number; total: number } | undefined,
 ): number {
   if (!stat || !stat.total) return 0;
   return Math.max(0, 1 - stat.errors / stat.total);
@@ -53,7 +53,7 @@ import { prices } from "./constants";
 export function calculatePrice(
   modelName: string,
   inputTokens: number,
-  outputTokens: number
+  outputTokens: number,
 ): number {
   const priceConfig = (prices as any)[modelName];
   if (!priceConfig) return 0;
@@ -61,4 +61,11 @@ export function calculatePrice(
     (inputTokens / 1_000_000) * priceConfig.input +
     (outputTokens / 1_000_000) * priceConfig.output
   );
+}
+
+export function getUrl(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  const cleanBase = base.endsWith("/") ? base : base + "/";
+  return `${cleanBase}${cleanPath}`;
 }

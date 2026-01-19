@@ -127,6 +127,7 @@ const hasCotData = genNum <= 30 && !!cotData;
     const initialCategory = params.get("category") || "baseline";
 
     function setTab(tabName: string) {
+      document.documentElement.setAttribute("data-mode", tabName);
       modeBtns.forEach((btn) =>
         btn.classList.toggle(
           "active",

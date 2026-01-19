@@ -4,6 +4,7 @@ import CodeViewer from "./CodeViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
 import { COLOR_RANGES } from "../lib/constants";
+import { getUrl } from "../lib/utils";
 import type { CotPromptsData } from "../lib/types";
 
 interface Props {
@@ -92,7 +93,7 @@ const isCoT = !!label && !!cotPrompts;
       {/* Instance views */}
       <div class="diagram-view active" data-view-content="instance-diagram">
         <PdfEmbed
-          src={pdfUrl}
+          src={getUrl(pdfUrl)}
           title="Instance Diagram"
           available={pdfAvailable}
         />
@@ -114,7 +115,7 @@ const isCoT = !!label && !!cotPrompts;
       {/* Model views */}
       <div class="diagram-view" data-view-content="model-diagram">
         <PdfEmbed
-          src={classDiagramPdf || ""}
+          src={getUrl(classDiagramPdf || "")}
           title="Model Diagram"
           available={!!classDiagramPdf}
         />
