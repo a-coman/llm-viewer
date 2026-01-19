@@ -1,9 +1,10 @@
 ---
 import { getExperimentIds } from "../lib/data";
+import { getUrl } from "../lib/utils";
 
 const experimentIds = getExperimentIds();
 const firstExperiment = experimentIds[0] || "";
 
 // Redirect to first experiment
-return Astro.redirect(`/${firstExperiment}`);
+return Astro.redirect(getUrl(`/${firstExperiment}`));
 ---
