@@ -9,22 +9,9 @@ interface Props {
 
 const { data, title } = Astro.props;
 
-// GED is symmetric, so we use labelsx for both axes
-const labels = data.labelsx;
-const values = data.valuesx;
-
-// Build the 2D matrix
-const n = labels.length;
-const matrix: number[][] = [];
-
-for (let i = 0; i < n; i++) {
-  const row: number[] = [];
-  for (let j = 0; j < n; j++) {
-    const idx = i < j ? i * n + j : j * n + i;
-    row.push(values[idx] ?? values[i] ?? 0);
-  }
-  matrix.push(row);
-}
+// GED is symmetric, so we use rowLabels for axes
+const labels = data.rowLabels;
+const matrix = data.values;
 
 function getCellColor(val: number, i: number, j: number): string {
   // Lower triangle (i > j) + Diagonal (i === j) -> White (Clean skip)

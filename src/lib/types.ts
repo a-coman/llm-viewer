@@ -367,10 +367,9 @@ export interface GedSummary {
 }
 
 export interface GedExperimentMatrix {
-  labelsx: string[];
-  labelsy: string[];
-  valuesx: number[];
-  valuesy: number[];
+  rowLabels: string[];
+  columnLabels: string[];
+  values: number[][];
 }
 
 export interface GedGenerationData {
