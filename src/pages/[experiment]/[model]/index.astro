@@ -6,6 +6,7 @@ import MetricsPanel from "../../../components/MetricsPanel.astro";
 import { MODELS_LOWER, COLOR_RANGES } from "../../../lib/constants";
 import { getModelName } from "../../../lib/utils";
 import { getModelData, getExperimentIds } from "../../../lib/data";
+import Tooltip from "../../../components/Tooltip.astro";
 
 export async function getStaticPaths() {
   const experimentIds = getExperimentIds();
@@ -61,7 +62,9 @@ const modelPanelSections = {
         <div class="tab-content active" data-content="simple">
           <div class="content-grid">
             <section class="section">
-              <h2>GED Similarity</h2>
+              <h2>GED Similarity
+                <Tooltip metricType="ged" />
+              </h2>
               {simpleData?.gedHeatmap ? (
                 <GedHeatmap data={simpleData.gedHeatmap} />
               ) : (
@@ -100,7 +103,9 @@ const modelPanelSections = {
         <div class="tab-content" data-content="cot">
           <div class="content-grid">
             <section class="section">
-              <h2>GED Similarity</h2>
+              <h2>GED Similarity
+                <Tooltip metricType="ged" />
+              </h2>
               {cotData?.gedHeatmap ? (
                 <GedHeatmap data={cotData.gedHeatmap} />
               ) : (

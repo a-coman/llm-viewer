@@ -1,6 +1,13 @@
 ---
 interface Props {
-  metricType: "cost" | "coverage" | "instantiation" | "validation" | "diversity" | "realism";
+  metricType:
+    | "cost"
+    | "coverage"
+    | "instantiation"
+    | "validation"
+    | "diversity"
+    | "realism"
+    | "ged";
 }
 
 const { metricType } = Astro.props;
@@ -19,3 +26,64 @@ const explanation = METRIC_EXPLANATIONS[metricType];
     </ul>
   </div>
 </span>
+
+<script>
+  function initTooltipHandler() {
+    // Single listener using delegation for efficiency and dynamic content support
+    document.addEventListener("mouseover", (e) => {
+      const target = e.target as HTMLElement;
+      const container = target.closest(".tooltip-container");
+      if (!container) return;
+
+      const content = container.querySelector(
+        ".tooltip-content",
+      ) as HTMLElement;
+      if (!content) return;
+
+      // Only run positioning logic once per hover
+      if ((container as any)._isPositioning) return;
+      (container as any)._isPositioning = true;
+
+      // Reset state to measure naturally
+      content.classList.remove("is-flipped");
+      content.style.left = "";
+      content.style.right = "";
+      content.style.transform = "";
+
+      // Measure
+      const rect = content.getBoundingClientRect();
+      const margin = 6;
+      const viewportWidth = window.innerWidth;
+
+      // Vertical flip if too close to top
+      if (rect.top < margin) {
+        content.classList.add("is-flipped");
+      }
+
+      // Horizontal shift if overflowing sides
+      if (rect.left < margin) {
+        content.style.left = "0";
+        content.style.transform = "translateX(0)";
+      } else if (rect.right > viewportWidth - margin) {
+        content.style.left = "auto";
+        content.style.right = "0";
+        content.style.transform = "translateX(0)";
+      }
+    });
+
+    // Reset positioning flag when mouse leaves
+    document.addEventListener("mouseout", (e) => {
+      const target = e.target as HTMLElement;
+      const container = target.closest(".tooltip-container");
+      if (container) {
+        (container as any)._isPositioning = false;
+      }
+    });
+  }
+
+  // Initialize once
+  if (!(window as any)._tooltipHandlerInitialized) {
+    initTooltipHandler();
+    (window as any)._tooltipHandlerInitialized = true;
+  }
+</script>

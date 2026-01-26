@@ -110,4 +110,16 @@ export const METRIC_EXPLANATIONS = {
       "Realism = Total Number of \"realistic\" instances / Total Number of instances",
     ],
   },
+
+  ged: {
+    title: "GED Similarity",
+    description:
+      "Measures the Graph Edit Distance (GED) similarity between instances",
+    examples: [
+      "Similarity = 1 - (GED / (0.5 * (GED_to_empty_A + GED_to_empty_B)))",
+      "1 = red = identical graphs",
+      "<=0.5 = green = different graphs",
+      "We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]"
+    ],
+  },
 } as const;
