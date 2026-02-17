@@ -44,6 +44,7 @@ const COVERAGE_FILE = path.join(DATA_DIR, "coverage.json");
 const DIFFERENCE_FILE = path.join(DATA_DIR, "difference.json");
 const GED_FILE = path.join(DATA_DIR, "ged.json");
 const JUDGE_FILE = path.join(DATA_DIR, "judge.json");
+const DATASET_DIR = path.join(DATA_DIR, "data", "dataset");
 
 // Cache data in memory - now stores the full file with all experiments
 let cachedMetricsFile: MetricsFileRoot | null = null;
@@ -74,6 +75,73 @@ const EMPTY_MODE_METRICS = {
   metrics: { ...EMPTY_METRICS_CONTENT },
   experiments: [],
 };
+
+function normalizeKey(value?: string): string {
+  return (value || "").trim().toLowerCase();
+}
+
+function sameKey(left?: string, right?: string): boolean {
+  return normalizeKey(left) === normalizeKey(right);
+}
+
+function findById<T extends { id: string }>(
+  items: T[] | undefined,
+  id: string,
+): T | undefined {
+  return items?.find((item) => sameKey(item.id, id));
+}
+
+function findByExperimentId<T extends { experiment_id: string }>(
+  items: T[] | undefined,
+  experimentId: string,
+): T | undefined {
+  return items?.find((item) => sameKey(item.experiment_id, experimentId));
+}
+
+function findByGenerationId<T extends { generation_id: string }>(
+  items: T[] | undefined,
+  generationId: string,
+): T | undefined {
+  return items?.find((item) => sameKey(item.generation_id, generationId));
+}
+
+function findByName<T extends { name: string }>(
+  items: T[] | undefined,
+  name: string,
+): T | undefined {
+  return items?.find((item) => sameKey(item.name, name));
+}
+
+function getDatasetExperimentDirName(experimentId?: string): string {
+  const fallback = experimentId || "";
+  if (!experimentId) return fallback;
+  try {
+    const datasetEntries = fs.readdirSync(DATASET_DIR, { withFileTypes: true });
+    const matched = datasetEntries.find(
+      (entry) => entry.isDirectory() && sameKey(entry.name, experimentId),
+    );
+    return matched?.name || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function getChildDirNameIgnoreCase(
+  parentDir: string,
+  childDir: string,
+): string {
+  const fallback = childDir;
+  if (!childDir) return fallback;
+  try {
+    const entries = fs.readdirSync(parentDir, { withFileTypes: true });
+    const matched = entries.find(
+      (entry) => entry.isDirectory() && sameKey(entry.name, childDir),
+    );
+    return matched?.name || fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 function loadData() {
   if (!cachedMetricsFile) {
@@ -150,27 +218,27 @@ function getExperimentData(experimentId?: string): {
   loadData();
 
   const logExp = experimentId
-    ? cachedLogsFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedLogsFile?.experiments, experimentId)
     : cachedLogsFile?.experiments[0];
 
   const metricExp = experimentId
-    ? cachedMetricsFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedMetricsFile?.experiments, experimentId)
     : cachedMetricsFile?.experiments[0];
 
   const coverageExp = experimentId
-    ? cachedCoverageFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedCoverageFile?.experiments, experimentId)
     : cachedCoverageFile?.experiments[0];
 
   const differenceExp = experimentId
-    ? cachedDifferenceFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedDifferenceFile?.experiments, experimentId)
     : cachedDifferenceFile?.experiments[0];
 
   const gedExp = experimentId
-    ? cachedGedFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedGedFile?.experiments, experimentId)
     : cachedGedFile?.experiments[0];
 
   const judgeExp = experimentId
-    ? cachedJudgeFile?.experiments.find((e) => e.id === experimentId)
+    ? findById(cachedJudgeFile?.experiments, experimentId)
     : cachedJudgeFile?.experiments[0];
 
   return {
@@ -214,55 +282,66 @@ const EMPTY_COVERAGE_METRICS: CoverageMetrics = {
 };
 
 // Helper functions to transform raw coverage data to display format
-function rawCoverageToDisplay(raw: RawCoverageData): CoverageItem {
+function rawCoverageToDisplay(
+  raw?: Partial<RawCoverageData> | null,
+): CoverageItem {
+  const classesDefined = raw?.classes?.defined ?? 0;
+  const classesInstantiated = raw?.classes?.instantiated ?? 0;
+  const attributesDefined = raw?.attributes?.defined ?? 0;
+  const attributesInstantiated = raw?.attributes?.instantiated ?? 0;
+  const relationshipsDefined = raw?.relationships?.defined ?? 0;
+  const relationshipsInstantiated = raw?.relationships?.instantiated ?? 0;
+
   return {
-    classes:
-      raw.classes.defined > 0
-        ? raw.classes.instantiated / raw.classes.defined
-        : 1,
+    classes: classesDefined > 0 ? classesInstantiated / classesDefined : 1,
     attributes:
-      raw.attributes.defined > 0
-        ? raw.attributes.instantiated / raw.attributes.defined
-        : 1,
+      attributesDefined > 0 ? attributesInstantiated / attributesDefined : 1,
     relationships:
-      raw.relationships.defined > 0
-        ? raw.relationships.instantiated / raw.relationships.defined
+      relationshipsDefined > 0
+        ? relationshipsInstantiated / relationshipsDefined
         : 1,
   };
 }
 
 function rawInstantiationToDisplay(
-  raw: RawInstantiationData,
+  raw?: Partial<RawInstantiationData> | null,
 ): InstantiationItem {
+  const classesTotalInstantiated = raw?.classes?.total_instantiated ?? 0;
+  const classesTotalDefined = raw?.classes?.total_defined ?? 0;
+  const attributesTotalInstantiated = raw?.attributes?.total_instantiated ?? 0;
+  const attributesTotalDefined = raw?.attributes?.total_defined ?? 0;
+  const relationshipsTotalInstantiated =
+    raw?.relationships?.total_instantiated ?? 0;
+  const relationshipsTotalDefined = raw?.relationships?.total_defined ?? 0;
+
   return {
     classes: {
-      value: raw.classes.total_instantiated,
-      total: raw.classes.total_defined === 0 ? null : raw.classes.total_defined,
+      value: classesTotalInstantiated,
+      total: classesTotalDefined === 0 ? null : classesTotalDefined,
     },
     attributes: {
-      value: raw.attributes.total_instantiated,
-      total:
-        raw.attributes.total_defined === 0
-          ? null
-          : raw.attributes.total_defined,
+      value: attributesTotalInstantiated,
+      total: attributesTotalDefined === 0 ? null : attributesTotalDefined,
     },
     relationships: {
-      value: raw.relationships.total_instantiated,
-      total:
-        raw.relationships.total_defined === 0
-          ? null
-          : raw.relationships.total_defined,
+      value: relationshipsTotalInstantiated,
+      total: relationshipsTotalDefined === 0 ? null : relationshipsTotalDefined,
     },
   };
 }
 
 function getCoverageMetrics(
   raw:
-    | { coverage: RawCoverageData; instantiation: RawInstantiationData }
+    | {
+        coverage?: Partial<RawCoverageData>;
+        instantiation?: Partial<RawInstantiationData>;
+      }
     | null
     | undefined,
 ): CoverageMetrics {
-  if (!raw) return { ...EMPTY_COVERAGE_METRICS };
+  if (!raw || (!raw.coverage && !raw.instantiation)) {
+    return { ...EMPTY_COVERAGE_METRICS };
+  }
   return {
     coverage: rawCoverageToDisplay(raw.coverage),
     instantiation: rawInstantiationToDisplay(raw.instantiation),
@@ -336,6 +415,7 @@ export function getModelData(
     ged: cachedGed,
     judge: cachedJudge,
   } = getExperimentData(experimentId);
+  const datasetExperimentDir = getDatasetExperimentDirName(experimentId);
   const modelName = getModelName(modelSlug);
   const domainLower = modelName.toLowerCase();
 
@@ -352,41 +432,48 @@ export function getModelData(
     const generations: SimpleGeneration[] = [];
 
     const logExp = logExps[0];
-    const mExp = logExp
-      ? metricExps.find((m) => m.experiment_id === logExp.id)
-      : null;
-    const covExp = logExp
-      ? coverageExps.find((c) => c.experiment_id === logExp.id)
-      : null;
+    const mExp = logExp ? findByExperimentId(metricExps, logExp.id) : null;
+    const covExp = logExp ? findByExperimentId(coverageExps, logExp.id) : null;
     const diffExp = logExp
-      ? differenceExps.find((d) => d.experiment_id === logExp.id)
+      ? findByExperimentId(differenceExps, logExp.id)
       : null;
-    const gedExp = logExp
-      ? gedExps.find((g) => g.experiment_id === logExp.id)
-      : null;
-    const judgeExp = logExp
-      ? judgeExps.find((j) => j.experiment_id === logExp.id)
-      : null;
+    const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
+    const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
 
     if (logExp && mExp) {
       const dateTime = `${logExp.date
         .split("-")
         .reverse()
         .join("-")}--${logExp.time.replace(/:/g, "-")}`;
-      const domainFolder = getModelName(logExp.domain_name);
+      const simpleModeDir = getChildDirNameIgnoreCase(
+        path.join(DATASET_DIR, datasetExperimentDir),
+        "Simple",
+      );
+      const domainFolder = getChildDirNameIgnoreCase(
+        path.join(DATASET_DIR, datasetExperimentDir, simpleModeDir),
+        getModelName(logExp.domain_name),
+      );
+      const timestampDir = getChildDirNameIgnoreCase(
+        path.join(
+          DATASET_DIR,
+          datasetExperimentDir,
+          simpleModeDir,
+          domainFolder,
+        ),
+        dateTime,
+      );
 
       logExp.generations.forEach((gen) => {
-        const mGen = mExp.generations.find((g) => g.generation_id === gen.id);
-        const covGen = covExp?.generations.find(
-          (g) => g.generation_id === gen.id,
-        );
-        const diffGen = diffExp?.generations?.find(
-          (g) => g.generation_id === gen.id,
+        const mGen = findByGenerationId(mExp.generations, gen.id);
+        const covGen = findByGenerationId(covExp?.generations, gen.id);
+        const diffGen = findByGenerationId(
+          diffExp?.generations as
+            | Array<{ generation_id: string; difference: RawDifferenceData }>
+            | undefined,
+          gen.id,
         );
         // Find judge generation data - cast to SimpleJudgeGeneration type
-        const judgeGen = judgeExp?.generations?.find(
-          (g) => g.generation_id === gen.id,
-        ) as
+        const judgeGen = findByGenerationId(judgeExp?.generations, gen.id) as
           | {
               generation_id: string;
               realism?: { response_type: string; reasoning: string };
@@ -415,7 +502,7 @@ export function getModelData(
           };
 
           const instanceName = attempt.instance_name || "output";
-          const pdfUrl = `data/dataset/${experimentId}/Simple/${domainFolder}/${dateTime}/gen${gen.id}/${instanceName}.pdf`;
+          const pdfUrl = `data/dataset/${datasetExperimentDir}/${simpleModeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${instanceName}.pdf`;
 
           // Build judge response from judge data or fallback to logs
           const judgeResponse = judgeGen?.realism
@@ -498,35 +585,36 @@ export function getModelData(
     const generations: CoTGeneration[] = [];
 
     const logExp = logExps[0];
-    const mExp = logExp
-      ? metricExps.find((m) => m.experiment_id === logExp.id)
-      : null;
-    const covExp = logExp
-      ? coverageExps.find((c) => c.experiment_id === logExp.id)
-      : null;
+    const mExp = logExp ? findByExperimentId(metricExps, logExp.id) : null;
+    const covExp = logExp ? findByExperimentId(coverageExps, logExp.id) : null;
     const diffExp = logExp
-      ? differenceExps.find((d) => d.experiment_id === logExp.id)
+      ? findByExperimentId(differenceExps, logExp.id)
       : null;
-    const gedExp = logExp
-      ? gedExps.find((g) => g.experiment_id === logExp.id)
-      : null;
-    const judgeExp = logExp
-      ? judgeExps.find((j) => j.experiment_id === logExp.id)
-      : null;
+    const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
+    const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
 
     if (logExp && mExp) {
       const dateTime = `${logExp.date
         .split("-")
         .reverse()
         .join("-")}--${logExp.time.replace(/:/g, "-")}`;
-      const domainFolder = getModelName(logExp.domain_name);
+      const cotModeDir = getChildDirNameIgnoreCase(
+        path.join(DATASET_DIR, datasetExperimentDir),
+        "CoT",
+      );
+      const domainFolder = getChildDirNameIgnoreCase(
+        path.join(DATASET_DIR, datasetExperimentDir, cotModeDir),
+        getModelName(logExp.domain_name),
+      );
+      const timestampDir = getChildDirNameIgnoreCase(
+        path.join(DATASET_DIR, datasetExperimentDir, cotModeDir, domainFolder),
+        dateTime,
+      );
 
       logExp.generations.forEach((gen) => {
-        const mGen = mExp.generations.find((g) => g.generation_id === gen.id);
+        const mGen = findByGenerationId(mExp.generations, gen.id);
         // Find coverage generation - it may have categories
-        const covGen = covExp?.generations.find(
-          (g) => g.generation_id === gen.id,
-        ) as
+        const covGen = findByGenerationId(covExp?.generations, gen.id) as
           | {
               generation_id: string;
               categories?: Array<{
@@ -539,8 +627,18 @@ export function getModelData(
             }
           | undefined;
         // Find difference generation - it may have categories
-        const diffGen = diffExp?.generations?.find(
-          (g) => g.generation_id === gen.id,
+        const diffGen = findByGenerationId(
+          diffExp?.generations as
+            | Array<{
+                generation_id: string;
+                categories?: Array<{
+                  name: string;
+                  difference: RawDifferenceData;
+                }>;
+                difference: RawDifferenceData;
+              }>
+            | undefined,
+          gen.id,
         ) as
           | {
               generation_id: string;
@@ -555,9 +653,7 @@ export function getModelData(
         if (!mGen) return;
 
         // Find judge generation data for CoT
-        const judgeGen = judgeExp?.generations?.find(
-          (g) => g.generation_id === gen.id,
-        ) as
+        const judgeGen = findByGenerationId(judgeExp?.generations, gen.id) as
           | {
               generation_id: string;
               realism?: {
@@ -576,17 +672,11 @@ export function getModelData(
           | undefined;
 
         const catMetricsList: any[] = gen.categories.map((catLog) => {
-          const catMetric = mGen.categories.find((c) => c.name === catLog.name);
-          const judgeCat = judgeGen?.categories?.find(
-            (c) => c.name === catLog.name,
-          );
+          const catMetric = findByName(mGen.categories, catLog.name);
+          const judgeCat = findByName(judgeGen?.categories, catLog.name);
 
-          const covCat = covGen?.categories?.find(
-            (c) => c.name === catLog.name,
-          );
-          const diffCat = diffGen?.categories?.find(
-            (c) => c.name === catLog.name,
-          );
+          const covCat = findByName(covGen?.categories, catLog.name);
+          const diffCat = findByName(diffGen?.categories, catLog.name);
           const attempts =
             catLog.IListInstantiator?.attempts || catLog.attempts || [];
           const attempt = attempts?.[attempts.length - 1];
@@ -630,7 +720,7 @@ export function getModelData(
             coverage: getCoverageMetrics(covCat),
             diversity: rawDifferenceToDisplay(diffCat?.difference),
             code: attempt?.response || "",
-            pdfUrl: `data/dataset/${experimentId}/CoT/${domainFolder}/${dateTime}/gen${gen.id}/${catLog.name}.pdf`,
+            pdfUrl: `data/dataset/${datasetExperimentDir}/${cotModeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${catLog.name}.pdf`,
             price: {
               price: calculatePrice(logExp.model.name, totalIn, totalOut),
               tokenInput: totalIn,

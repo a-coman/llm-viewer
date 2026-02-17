@@ -55,7 +55,10 @@ export function calculatePrice(
   inputTokens: number,
   outputTokens: number,
 ): number {
-  const priceConfig = (prices as any)[modelName];
+  const normalizedModelName = modelName.trim().replace(/-/g, "_").toLowerCase();
+  const priceConfig = Object.entries(prices).find(
+    ([key]) => key.toLowerCase() === normalizedModelName,
+  )?.[1];
   if (!priceConfig) return 0;
   return (
     (inputTokens / 1_000_000) * priceConfig.input +

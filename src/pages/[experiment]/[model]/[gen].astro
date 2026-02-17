@@ -24,11 +24,16 @@ const { experiment, model, gen } = Astro.params;
 const modelName = getModelName(model || "");
 const genNum = parseInt(gen?.replace("gen", "") || "0");
 const experimentIds = getExperimentIds();
+const normalizedGen = (gen || "").toLowerCase();
 
 // Load centralized data
 const modelData = getModelData(model || "", experiment);
-const simpleData = modelData?.simple.generations.find((g) => g.id === gen);
-const cotData = modelData?.cot.generations.find((g) => g.id === gen);
+const simpleData = modelData?.simple.generations.find(
+  (g) => g.id.toLowerCase() === normalizedGen,
+);
+const cotData = modelData?.cot.generations.find(
+  (g) => g.id.toLowerCase() === normalizedGen,
+);
 const classDiagramPdf = modelData?.diagramPdf || "";
 const classDiagramUseCode = modelData?.diagramUseCode || "";
 
