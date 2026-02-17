@@ -1,0 +1,113 @@
+!new Station('st_chemnitz')
+!new Station('st_zwickau')
+
+!new Customer('cust_33000')
+!cust_33000.id := 'C-33000'
+!cust_33000.name := 'Romy Schneider'
+!cust_33000.twitterUserName := 'romy_s'
+!insert (st_chemnitz, cust_33000) into StationContainsCustomer
+
+!new Customer('cust_33001')
+!cust_33001.id := 'C-33001'
+!cust_33001.name := 'Nils Berg'
+!cust_33001.twitterUserName := 'nils_berg'
+!insert (st_chemnitz, cust_33001) into StationContainsCustomer
+
+!new Driver('drv_33000')
+!drv_33000.id := 'D-33000'
+!drv_33000.name := 'Kerstin Jansen'
+!insert (st_zwickau, drv_33000) into StationContainsDriver
+
+!new Driver('drv_33001')
+!drv_33001.id := 'D-33001'
+!drv_33001.name := 'Adrian Popa'
+!insert (st_zwickau, drv_33001) into StationContainsDriver
+
+!new Driver('drv_33002')
+!drv_33002.id := 'D-33002'
+!drv_33002.name := 'Mehmet Kaya'
+!insert (st_zwickau, drv_33002) into StationContainsDriver
+
+!new Shipment('shp_530001')
+!shp_530001.id := 'S-530001'
+!shp_530001.status := #ASSIGNED
+
+!new Shipment('shp_530002')
+!shp_530002.id := 'S-530002'
+!shp_530002.status := #UNDERWAY
+
+!new Shipment('shp_530003')
+!shp_530003.id := 'S-530003'
+!shp_530003.status := #NEW
+
+!new Shipment('shp_530004')
+!shp_530004.id := 'S-530004'
+!shp_530004.status := #DELIVERED
+
+!insert (cust_33000, shp_530001) into CustomerConsistsOfShipment
+!insert (cust_33000, shp_530003) into CustomerConsistsOfShipment
+!insert (cust_33001, shp_530002) into CustomerConsistsOfShipment
+!insert (cust_33001, shp_530004) into CustomerConsistsOfShipment
+
+!insert (st_chemnitz, shp_530001) into StationShipment
+!insert (st_chemnitz, shp_530002) into StationShipment
+!insert (st_chemnitz, shp_530003) into StationShipment
+!insert (st_chemnitz, shp_530004) into StationShipment
+
+!insert (drv_33000, shp_530001) into DriverShipment
+!insert (drv_33000, shp_530002) into DriverShipment
+!insert (drv_33001, shp_530004) into DriverShipment
+
+!new Address('addr_pu_cx_microhub')
+!addr_pu_cx_microhub.text := 'Neefestrasse 82 (Microhub), 09119 Chemnitz, Germany'
+!new GeoLocation('geo_addr_pu_cx_microhub')
+!geo_addr_pu_cx_microhub.latitude := 50.8236
+!geo_addr_pu_cx_microhub.longitude := 12.8953
+!insert (addr_pu_cx_microhub, geo_addr_pu_cx_microhub) into AddressContainsGeoLocation
+
+!new Address('addr_dl_cx_home_romy')
+!addr_dl_cx_home_romy.text := 'Brueckenstrasse 10, 09111 Chemnitz, Germany'
+!new GeoLocation('geo_addr_dl_cx_home_romy')
+!geo_addr_dl_cx_home_romy.latitude := 50.8326
+!geo_addr_dl_cx_home_romy.longitude := 12.9197
+!insert (addr_dl_cx_home_romy, geo_addr_dl_cx_home_romy) into AddressContainsGeoLocation
+
+!new Address('addr_dl_cx_locker_center')
+!addr_dl_cx_locker_center.text := 'Paketstation 61, Zentralhaltestelle 1, 09111 Chemnitz, Germany'
+!new GeoLocation('geo_addr_dl_cx_locker_center')
+!geo_addr_dl_cx_locker_center.latitude := 50.8320
+!geo_addr_dl_cx_locker_center.longitude := 12.9232
+!insert (addr_dl_cx_locker_center, geo_addr_dl_cx_locker_center) into AddressContainsGeoLocation
+
+!new Address('addr_pu_cx_home_nils')
+!addr_pu_cx_home_nils.text := 'Zschopauer Strasse 70, 09111 Chemnitz, Germany'
+!new GeoLocation('geo_addr_pu_cx_home_nils')
+!geo_addr_pu_cx_home_nils.latitude := 50.8259
+!geo_addr_pu_cx_home_nils.longitude := 12.9358
+!insert (addr_pu_cx_home_nils, geo_addr_pu_cx_home_nils) into AddressContainsGeoLocation
+
+!new Address('addr_dl_plauen_office')
+!addr_dl_plauen_office.text := 'Postplatz 1 (Office Reception), 08523 Plauen, Germany'
+!new GeoLocation('geo_addr_dl_plauen_office')
+!geo_addr_dl_plauen_office.latitude := 50.4987
+!geo_addr_dl_plauen_office.longitude := 12.1366
+!insert (addr_dl_plauen_office, geo_addr_dl_plauen_office) into AddressContainsGeoLocation
+
+!new Address('addr_dl_cx_repair_desk')
+!addr_dl_cx_repair_desk.text := 'Reichenhainer Strasse 29 (Repair Desk), 09126 Chemnitz, Germany'
+!new GeoLocation('geo_addr_dl_cx_repair_desk')
+!geo_addr_dl_cx_repair_desk.latitude := 50.8138
+!geo_addr_dl_cx_repair_desk.longitude := 12.9294
+!insert (addr_dl_cx_repair_desk, geo_addr_dl_cx_repair_desk) into AddressContainsGeoLocation
+
+!insert (shp_530001, addr_pu_cx_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_530001, addr_dl_cx_home_romy) into ShipmentContainsDeliveryAddress
+
+!insert (shp_530002, addr_pu_cx_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_530002, addr_dl_plauen_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_530003, addr_pu_cx_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_530003, addr_dl_cx_locker_center) into ShipmentContainsDeliveryAddress
+
+!insert (shp_530004, addr_pu_cx_home_nils) into ShipmentContainsPickUpAddress
+!insert (shp_530004, addr_dl_cx_repair_desk) into ShipmentContainsDeliveryAddress

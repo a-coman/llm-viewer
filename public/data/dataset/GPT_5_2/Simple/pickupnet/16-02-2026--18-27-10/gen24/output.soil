@@ -1,0 +1,112 @@
+!new Station('st_bielefeld')
+!new Station('st_muenster')
+
+!new Customer('cust_2000')
+!cust_2000.id := 'C-2000'
+!cust_2000.name := 'Johanna Feld'
+!cust_2000.twitterUserName := 'johanna_feld'
+!insert (st_bielefeld, cust_2000) into StationContainsCustomer
+
+!new Customer('cust_2001')
+!cust_2001.id := 'C-2001'
+!cust_2001.name := 'Lars Ebert'
+!cust_2001.twitterUserName := 'lars_ebert'
+!insert (st_bielefeld, cust_2001) into StationContainsCustomer
+
+!new Customer('cust_2002')
+!cust_2002.id := 'C-2002'
+!cust_2002.name := 'Maya Nouri'
+!cust_2002.twitterUserName := 'maya_nouri'
+!insert (st_bielefeld, cust_2002) into StationContainsCustomer
+
+!new Driver('drv_20000')
+!drv_20000.id := 'D-20000'
+!drv_20000.name := 'Ralf Koenig'
+!insert (st_muenster, drv_20000) into StationContainsDriver
+
+!new Driver('drv_20001')
+!drv_20001.id := 'D-20001'
+!drv_20001.name := 'Simone Brandis'
+!insert (st_muenster, drv_20001) into StationContainsDriver
+
+!new Driver('drv_20002')
+!drv_20002.id := 'D-20002'
+!drv_20002.name := 'Yara Amini'
+!insert (st_muenster, drv_20002) into StationContainsDriver
+
+!new Address('addr_pu_bi_store')
+!addr_pu_bi_store.text := 'Bahnhofstrasse 28 (Pickup Desk), 33602 Bielefeld, Germany'
+!new GeoLocation('geo_addr_pu_bi_store')
+!geo_addr_pu_bi_store.latitude := 52.0266
+!geo_addr_pu_bi_store.longitude := 8.5351
+!insert (addr_pu_bi_store, geo_addr_pu_bi_store) into AddressContainsGeoLocation
+
+!new Address('addr_pu_ms_depot')
+!addr_pu_ms_depot.text := 'Albersloher Weg 10 (Depot), 48155 Muenster, Germany'
+!new GeoLocation('geo_addr_pu_ms_depot')
+!geo_addr_pu_ms_depot.latitude := 51.9474
+!geo_addr_pu_ms_depot.longitude := 7.6548
+!insert (addr_pu_ms_depot, geo_addr_pu_ms_depot) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bi_cityhall')
+!addr_dl_bi_cityhall.text := 'Niederwall 25 (City Hall), 33602 Bielefeld, Germany'
+!new GeoLocation('geo_addr_dl_bi_cityhall')
+!geo_addr_dl_bi_cityhall.latitude := 52.0218
+!geo_addr_dl_bi_cityhall.longitude := 8.5332
+!insert (addr_dl_bi_cityhall, geo_addr_dl_bi_cityhall) into AddressContainsGeoLocation
+
+!new Address('addr_dl_ms_station')
+!addr_dl_ms_station.text := 'Berliner Platz 22 (Main Station), 48143 Muenster, Germany'
+!new GeoLocation('geo_addr_dl_ms_station')
+!geo_addr_dl_ms_station.latitude := 51.9565
+!geo_addr_dl_ms_station.longitude := 7.6346
+!insert (addr_dl_ms_station, geo_addr_dl_ms_station) into AddressContainsGeoLocation
+
+!new Address('addr_dl_osnabrueck_office')
+!addr_dl_osnabrueck_office.text := 'Neumarkt 4, 49074 Osnabrueck, Germany'
+!new GeoLocation('geo_addr_dl_osnabrueck_office')
+!geo_addr_dl_osnabrueck_office.latitude := 52.2729
+!geo_addr_dl_osnabrueck_office.longitude := 8.0472
+!insert (addr_dl_osnabrueck_office, geo_addr_dl_osnabrueck_office) into AddressContainsGeoLocation
+
+!new Shipment('shp_250001')
+!shp_250001.id := 'S-250001'
+!shp_250001.status := #NEW
+
+!new Shipment('shp_250002')
+!shp_250002.id := 'S-250002'
+!shp_250002.status := #ASSIGNED
+
+!new Shipment('shp_250003')
+!shp_250003.id := 'S-250003'
+!shp_250003.status := #UNDERWAY
+
+!new Shipment('shp_250004')
+!shp_250004.id := 'S-250004'
+!shp_250004.status := #DELIVERED
+
+!insert (cust_2000, shp_250001) into CustomerConsistsOfShipment
+!insert (cust_2000, shp_250002) into CustomerConsistsOfShipment
+!insert (cust_2002, shp_250003) into CustomerConsistsOfShipment
+!insert (cust_2002, shp_250004) into CustomerConsistsOfShipment
+
+!insert (st_muenster, shp_250001) into StationShipment
+!insert (st_muenster, shp_250002) into StationShipment
+!insert (st_muenster, shp_250003) into StationShipment
+!insert (st_muenster, shp_250004) into StationShipment
+
+!insert (drv_20000, shp_250002) into DriverShipment
+!insert (drv_20000, shp_250003) into DriverShipment
+!insert (drv_20000, shp_250004) into DriverShipment
+
+!insert (shp_250001, addr_pu_bi_store) into ShipmentContainsPickUpAddress
+!insert (shp_250001, addr_dl_ms_station) into ShipmentContainsDeliveryAddress
+
+!insert (shp_250002, addr_pu_ms_depot) into ShipmentContainsPickUpAddress
+!insert (shp_250002, addr_dl_bi_cityhall) into ShipmentContainsDeliveryAddress
+
+!insert (shp_250003, addr_pu_ms_depot) into ShipmentContainsPickUpAddress
+!insert (shp_250003, addr_dl_osnabrueck_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_250004, addr_pu_bi_store) into ShipmentContainsPickUpAddress
+!insert (shp_250004, addr_dl_bi_cityhall) into ShipmentContainsDeliveryAddress

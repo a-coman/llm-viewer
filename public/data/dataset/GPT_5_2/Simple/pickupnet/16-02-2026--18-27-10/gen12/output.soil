@@ -1,0 +1,121 @@
+!new Station('st_rostock')
+!new Station('st_magdeburg')
+
+!new Customer('cust_200')
+!cust_200.id := 'C-200'
+!cust_200.name := 'Helmut Kranz'
+!cust_200.twitterUserName := 'helmut_kranz'
+
+!new Customer('cust_201')
+!cust_201.id := 'C-201'
+!cust_201.name := 'Irina Volkov'
+!cust_201.twitterUserName := 'irinav'
+
+!new Customer('cust_202')
+!cust_202.id := 'C-202'
+!cust_202.name := 'Jonas Seifert'
+!cust_202.twitterUserName := 'jonas_seifert'
+
+!insert (st_rostock, cust_200) into StationContainsCustomer
+!insert (st_rostock, cust_201) into StationContainsCustomer
+!insert (st_magdeburg, cust_202) into StationContainsCustomer
+
+!new Driver('drv_2000')
+!drv_2000.id := 'D-2000'
+!drv_2000.name := 'Mara Lenz'
+
+!new Driver('drv_2001')
+!drv_2001.id := 'D-2001'
+!drv_2001.name := 'Nils Thomsen'
+
+!new Driver('drv_2002')
+!drv_2002.id := 'D-2002'
+!drv_2002.name := 'Oana Popescu'
+
+!insert (st_magdeburg, drv_2000) into StationContainsDriver
+!insert (st_magdeburg, drv_2001) into StationContainsDriver
+!insert (st_rostock, drv_2002) into StationContainsDriver
+
+!new Shipment('shp_20001')
+!shp_20001.id := 'S-20001'
+!shp_20001.status := #NEW
+
+!new Shipment('shp_20002')
+!shp_20002.id := 'S-20002'
+!shp_20002.status := #ASSIGNED
+
+!new Shipment('shp_20003')
+!shp_20003.id := 'S-20003'
+!shp_20003.status := #UNDERWAY
+
+!new Shipment('shp_20004')
+!shp_20004.id := 'S-20004'
+!shp_20004.status := #DELIVERED
+
+!insert (cust_200, shp_20001) into CustomerConsistsOfShipment
+!insert (cust_200, shp_20002) into CustomerConsistsOfShipment
+!insert (cust_200, shp_20003) into CustomerConsistsOfShipment
+!insert (cust_202, shp_20004) into CustomerConsistsOfShipment
+
+!insert (st_magdeburg, shp_20001) into StationShipment
+!insert (st_magdeburg, shp_20002) into StationShipment
+!insert (st_magdeburg, shp_20003) into StationShipment
+!insert (st_rostock, shp_20004) into StationShipment
+
+!insert (drv_2000, shp_20002) into DriverShipment
+!insert (drv_2000, shp_20003) into DriverShipment
+!insert (drv_2000, shp_20004) into DriverShipment
+
+!new Address('addr_pu_mdg_warehouse')
+!addr_pu_mdg_warehouse.text := 'Walter-Rathenau-Strasse 1 (Warehouse), 39106 Magdeburg, Germany'
+!new GeoLocation('geo_addr_pu_mdg_warehouse')
+!geo_addr_pu_mdg_warehouse.latitude := 52.1425
+!geo_addr_pu_mdg_warehouse.longitude := 11.6466
+!insert (addr_pu_mdg_warehouse, geo_addr_pu_mdg_warehouse) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hro_oldtown')
+!addr_dl_hro_oldtown.text := 'Kroepeliner Strasse 12, 18055 Rostock, Germany'
+!new GeoLocation('geo_addr_dl_hro_oldtown')
+!geo_addr_dl_hro_oldtown.latitude := 54.0887
+!geo_addr_dl_hro_oldtown.longitude := 12.1402
+!insert (addr_dl_hro_oldtown, geo_addr_dl_hro_oldtown) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hro_locker')
+!addr_dl_hro_locker.text := 'Paketstation 308, Doberaner Strasse 110, 18057 Rostock, Germany'
+!new GeoLocation('geo_addr_dl_hro_locker')
+!geo_addr_dl_hro_locker.latitude := 54.0812
+!geo_addr_dl_hro_locker.longitude := 12.1120
+!insert (addr_dl_hro_locker, geo_addr_dl_hro_locker) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hro_university')
+!addr_dl_hro_university.text := 'Universitaetsplatz 1, 18055 Rostock, Germany'
+!new GeoLocation('geo_addr_dl_hro_university')
+!geo_addr_dl_hro_university.latitude := 54.0880
+!geo_addr_dl_hro_university.longitude := 12.1321
+!insert (addr_dl_hro_university, geo_addr_dl_hro_university) into AddressContainsGeoLocation
+
+!new Address('addr_pu_hro_port')
+!addr_pu_hro_port.text := 'Am Seehafen 1, 18147 Rostock, Germany'
+!new GeoLocation('geo_addr_pu_hro_port')
+!geo_addr_pu_hro_port.latitude := 54.1373
+!geo_addr_pu_hro_port.longitude := 12.1071
+!insert (addr_pu_hro_port, geo_addr_pu_hro_port) into AddressContainsGeoLocation
+
+!new Address('addr_dl_mdg_sciencepark')
+!addr_dl_mdg_sciencepark.text := 'Universitaetsplatz 2, 39106 Magdeburg, Germany'
+!new GeoLocation('geo_addr_dl_mdg_sciencepark')
+!geo_addr_dl_mdg_sciencepark.latitude := 52.1396
+!geo_addr_dl_mdg_sciencepark.longitude := 11.6406
+!insert (addr_dl_mdg_sciencepark, geo_addr_dl_mdg_sciencepark) into AddressContainsGeoLocation
+
+!insert (shp_20001, addr_pu_mdg_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_20001, addr_dl_hro_oldtown) into ShipmentContainsDeliveryAddress
+
+!insert (shp_20002, addr_pu_mdg_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_20002, addr_dl_hro_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_20003, addr_pu_mdg_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_20003, addr_dl_hro_university) into ShipmentContainsDeliveryAddress
+
+!insert (shp_20004, addr_pu_hro_port) into ShipmentContainsPickUpAddress
+!insert (shp_20004, addr_dl_mdg_sciencepark) into ShipmentContainsDeliveryAddress

@@ -1,0 +1,108 @@
+!new Station('st_berlin')
+
+!new Customer('cust_010')
+!cust_010.id := 'C-010'
+!cust_010.name := 'Daria Schulz'
+!cust_010.twitterUserName := 'daria_schulz'
+
+!new Customer('cust_011')
+!cust_011.id := 'C-011'
+!cust_011.name := 'Emre Yilmaz'
+!cust_011.twitterUserName := 'emrey'
+
+!new Customer('cust_012')
+!cust_012.id := 'C-012'
+!cust_012.name := 'Fatima Hassan'
+!cust_012.twitterUserName := 'fatima_h'
+
+!insert (st_berlin, cust_010) into StationContainsCustomer
+!insert (st_berlin, cust_011) into StationContainsCustomer
+!insert (st_berlin, cust_012) into StationContainsCustomer
+
+!new Driver('drv_310')
+!drv_310.id := 'D-310'
+!drv_310.name := 'Jonas Krueger'
+
+!new Driver('drv_311')
+!drv_311.id := 'D-311'
+!drv_311.name := 'Nadia Ivanova'
+
+!insert (st_berlin, drv_310) into StationContainsDriver
+!insert (st_berlin, drv_311) into StationContainsDriver
+
+!new Shipment('shp_7001')
+!shp_7001.id := 'S-7001'
+!shp_7001.status := #NEW
+
+!new Shipment('shp_7002')
+!shp_7002.id := 'S-7002'
+!shp_7002.status := #ASSIGNED
+
+!new Shipment('shp_7003')
+!shp_7003.id := 'S-7003'
+!shp_7003.status := #DELIVERED
+
+!new Shipment('shp_7004')
+!shp_7004.id := 'S-7004'
+!shp_7004.status := #UNDERWAY
+
+!insert (cust_010, shp_7001) into CustomerConsistsOfShipment
+!insert (cust_010, shp_7002) into CustomerConsistsOfShipment
+!insert (cust_011, shp_7003) into CustomerConsistsOfShipment
+!insert (cust_011, shp_7004) into CustomerConsistsOfShipment
+
+!insert (st_berlin, shp_7001) into StationShipment
+!insert (st_berlin, shp_7002) into StationShipment
+!insert (st_berlin, shp_7003) into StationShipment
+!insert (st_berlin, shp_7004) into StationShipment
+
+!insert (drv_310, shp_7002) into DriverShipment
+!insert (drv_310, shp_7003) into DriverShipment
+!insert (drv_310, shp_7004) into DriverShipment
+
+!new Address('addr_wh_berlin')
+!addr_wh_berlin.text := 'Gradestrasse 36, 12347 Berlin, Germany'
+!new GeoLocation('geo_addr_wh_berlin')
+!geo_addr_wh_berlin.latitude := 52.4469
+!geo_addr_wh_berlin.longitude := 13.4381
+!insert (addr_wh_berlin, geo_addr_wh_berlin) into AddressContainsGeoLocation
+
+!new Address('addr_pu_7004')
+!addr_pu_7004.text := 'Warschauer Strasse 33, 10243 Berlin, Germany'
+!new GeoLocation('geo_addr_pu_7004')
+!geo_addr_pu_7004.latitude := 52.5052
+!geo_addr_pu_7004.longitude := 13.4498
+!insert (addr_pu_7004, geo_addr_pu_7004) into AddressContainsGeoLocation
+
+!new Address('addr_dlv_7001')
+!addr_dlv_7001.text := 'Kaiserdamm 12, 14057 Berlin, Germany'
+!new GeoLocation('geo_addr_dlv_7001')
+!geo_addr_dlv_7001.latitude := 52.5097
+!geo_addr_dlv_7001.longitude := 13.2736
+!insert (addr_dlv_7001, geo_addr_dlv_7001) into AddressContainsGeoLocation
+
+!new Address('addr_dlv_shared_berlin')
+!addr_dlv_shared_berlin.text := 'Prenzlauer Allee 217, 10405 Berlin, Germany'
+!new GeoLocation('geo_addr_dlv_shared_berlin')
+!geo_addr_dlv_shared_berlin.latitude := 52.5386
+!geo_addr_dlv_shared_berlin.longitude := 13.4249
+!insert (addr_dlv_shared_berlin, geo_addr_dlv_shared_berlin) into AddressContainsGeoLocation
+
+!new Address('addr_dlv_7004')
+!addr_dlv_7004.text := 'Schlossstrasse 34, 12163 Berlin, Germany'
+!new GeoLocation('geo_addr_dlv_7004')
+!geo_addr_dlv_7004.latitude := 52.4565
+!geo_addr_dlv_7004.longitude := 13.3226
+!insert (addr_dlv_7004, geo_addr_dlv_7004) into AddressContainsGeoLocation
+
+!insert (shp_7001, addr_wh_berlin) into ShipmentContainsPickUpAddress
+!insert (shp_7001, addr_dlv_7001) into ShipmentContainsDeliveryAddress
+
+!insert (shp_7002, addr_wh_berlin) into ShipmentContainsPickUpAddress
+!insert (shp_7002, addr_dlv_shared_berlin) into ShipmentContainsDeliveryAddress
+
+!insert (shp_7003, addr_wh_berlin) into ShipmentContainsPickUpAddress
+!insert (shp_7003, addr_dlv_shared_berlin) into ShipmentContainsDeliveryAddress
+
+!insert (shp_7004, addr_pu_7004) into ShipmentContainsPickUpAddress
+!insert (shp_7004, addr_dlv_7004) into ShipmentContainsDeliveryAddress

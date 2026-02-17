@@ -1,0 +1,93 @@
+!new Station('st_remote_support')
+!new Station('st_local_ops')
+
+!new Customer('cust_20000')
+!cust_20000.id := 'C-20000'
+!cust_20000.name := 'Emanuel Pohl'
+!cust_20000.twitterUserName := 'emanuel_pohl'
+!insert (st_remote_support, cust_20000) into StationContainsCustomer
+
+!new Customer('cust_20001')
+!cust_20001.id := 'C-20001'
+!cust_20001.name := 'Sanae Idrissi'
+!cust_20001.twitterUserName := 'sanae_idrissi'
+!insert (st_remote_support, cust_20001) into StationContainsCustomer
+
+!new Driver('drv_21000')
+!drv_21000.id := 'D-21000'
+!drv_21000.name := 'Uwe Schaefer'
+!insert (st_local_ops, drv_21000) into StationContainsDriver
+
+!new Driver('drv_21001')
+!drv_21001.id := 'D-21001'
+!drv_21001.name := 'Marta Kaczmarek'
+!insert (st_local_ops, drv_21001) into StationContainsDriver
+
+!new Address('addr_pu_local_microhub')
+!addr_pu_local_microhub.text := 'Microhub West, Hafenweg 16, 48155 Muenster, Germany'
+!new GeoLocation('geo_addr_pu_local_microhub')
+!geo_addr_pu_local_microhub.latitude := 51.9512
+!geo_addr_pu_local_microhub.longitude := 7.6708
+!insert (addr_pu_local_microhub, geo_addr_pu_local_microhub) into AddressContainsGeoLocation
+
+!new Address('addr_dl_handtoff_counter')
+!addr_dl_handtoff_counter.text := 'Hand-off Counter, Prinzipalmarkt 10, 48143 Muenster, Germany'
+!new GeoLocation('geo_addr_dl_handtoff_counter')
+!geo_addr_dl_handtoff_counter.latitude := 51.9622
+!geo_addr_dl_handtoff_counter.longitude := 7.6287
+!insert (addr_dl_handtoff_counter, geo_addr_dl_handtoff_counter) into AddressContainsGeoLocation
+
+!new Address('addr_dl_outside_city_gate')
+!addr_dl_outside_city_gate.text := 'Gatehouse Entrance, Steinfurter Strasse 100, 48149 Muenster, Germany'
+!new GeoLocation('geo_addr_dl_outside_city_gate')
+!geo_addr_dl_outside_city_gate.latitude := 51.9740
+!geo_addr_dl_outside_city_gate.longitude := 7.6025
+!insert (addr_dl_outside_city_gate, geo_addr_dl_outside_city_gate) into AddressContainsGeoLocation
+
+!new Address('addr_dl_service_workshop')
+!addr_dl_service_workshop.text := 'Service Workshop, Am Mittelhafen 30, 48155 Muenster, Germany'
+!new GeoLocation('geo_addr_dl_service_workshop')
+!geo_addr_dl_service_workshop.latitude := 51.9497
+!geo_addr_dl_service_workshop.longitude := 7.6469
+!insert (addr_dl_service_workshop, geo_addr_dl_service_workshop) into AddressContainsGeoLocation
+
+!new Shipment('shp_310001')
+!shp_310001.id := 'S-310001'
+!shp_310001.status := #NEW
+
+!new Shipment('shp_310002')
+!shp_310002.id := 'S-310002'
+!shp_310002.status := #UNDERWAY
+
+!new Shipment('shp_310003')
+!shp_310003.id := 'S-310003'
+!shp_310003.status := #DELIVERED
+
+!new Shipment('shp_310004')
+!shp_310004.id := 'S-310004'
+!shp_310004.status := #ASSIGNED
+
+!insert (cust_20000, shp_310001) into CustomerConsistsOfShipment
+!insert (cust_20000, shp_310002) into CustomerConsistsOfShipment
+!insert (cust_20001, shp_310003) into CustomerConsistsOfShipment
+!insert (cust_20001, shp_310004) into CustomerConsistsOfShipment
+
+!insert (st_local_ops, shp_310001) into StationShipment
+!insert (st_local_ops, shp_310002) into StationShipment
+!insert (st_local_ops, shp_310003) into StationShipment
+!insert (st_local_ops, shp_310004) into StationShipment
+
+!insert (drv_21000, shp_310002) into DriverShipment
+!insert (drv_21001, shp_310003) into DriverShipment
+
+!insert (shp_310001, addr_pu_local_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_310001, addr_dl_handtoff_counter) into ShipmentContainsDeliveryAddress
+
+!insert (shp_310002, addr_pu_local_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_310002, addr_dl_outside_city_gate) into ShipmentContainsDeliveryAddress
+
+!insert (shp_310003, addr_pu_local_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_310003, addr_dl_service_workshop) into ShipmentContainsDeliveryAddress
+
+!insert (shp_310004, addr_pu_local_microhub) into ShipmentContainsPickUpAddress
+!insert (shp_310004, addr_dl_handtoff_counter) into ShipmentContainsDeliveryAddress

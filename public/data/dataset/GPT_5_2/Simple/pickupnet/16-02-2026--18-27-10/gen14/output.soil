@@ -1,0 +1,91 @@
+!new Station('st_aachen_hub')
+!new Station('st_koblenz_point')
+
+!new Customer('cust_400')
+!cust_400.id := 'C-400'
+!cust_400.name := 'Mila Reuter'
+!cust_400.twitterUserName := 'mila_reuter'
+!insert (st_koblenz_point, cust_400) into StationContainsCustomer
+
+!new Customer('cust_401')
+!cust_401.id := 'C-401'
+!cust_401.name := 'Naveen Iyer'
+!cust_401.twitterUserName := 'naveen_iyer'
+!insert (st_koblenz_point, cust_401) into StationContainsCustomer
+
+!new Driver('drv_4000')
+!drv_4000.id := 'D-4000'
+!drv_4000.name := 'Greta Albrecht'
+!insert (st_aachen_hub, drv_4000) into StationContainsDriver
+
+!new Driver('drv_4001')
+!drv_4001.id := 'D-4001'
+!drv_4001.name := 'Hector Silva'
+!insert (st_aachen_hub, drv_4001) into StationContainsDriver
+
+!new Shipment('shp_40001')
+!shp_40001.id := 'S-40001'
+!shp_40001.status := #NEW
+
+!new Shipment('shp_40002')
+!shp_40002.id := 'S-40002'
+!shp_40002.status := #ASSIGNED
+
+!new Shipment('shp_40003')
+!shp_40003.id := 'S-40003'
+!shp_40003.status := #UNDERWAY
+
+!insert (cust_400, shp_40001) into CustomerConsistsOfShipment
+!insert (cust_401, shp_40002) into CustomerConsistsOfShipment
+!insert (cust_401, shp_40003) into CustomerConsistsOfShipment
+
+!insert (st_aachen_hub, shp_40001) into StationShipment
+!insert (st_aachen_hub, shp_40002) into StationShipment
+!insert (st_aachen_hub, shp_40003) into StationShipment
+
+!insert (drv_4000, shp_40002) into DriverShipment
+!insert (drv_4000, shp_40003) into DriverShipment
+
+!new Address('addr_pu_aachen_hub')
+!addr_pu_aachen_hub.text := 'Adenauerallee 20 (Main Hub), 52066 Aachen, Germany'
+!new GeoLocation('geo_addr_pu_aachen_hub')
+!geo_addr_pu_aachen_hub.latitude := 50.7708
+!geo_addr_pu_aachen_hub.longitude := 6.1065
+!insert (addr_pu_aachen_hub, geo_addr_pu_aachen_hub) into AddressContainsGeoLocation
+
+!new Address('addr_dl_koblenz_locker')
+!addr_dl_koblenz_locker.text := 'Paketstation 55, Lohrstrasse 87, 56068 Koblenz, Germany'
+!new GeoLocation('geo_addr_dl_koblenz_locker')
+!geo_addr_dl_koblenz_locker.latitude := 50.3566
+!geo_addr_dl_koblenz_locker.longitude := 7.5971
+!insert (addr_dl_koblenz_locker, geo_addr_dl_koblenz_locker) into AddressContainsGeoLocation
+
+!new Address('addr_pu_koblenz_home_naveen')
+!addr_pu_koblenz_home_naveen.text := 'Hohenzollernstrasse 34, 56068 Koblenz, Germany'
+!new GeoLocation('geo_addr_pu_koblenz_home_naveen')
+!geo_addr_pu_koblenz_home_naveen.latitude := 50.3507
+!geo_addr_pu_koblenz_home_naveen.longitude := 7.5940
+!insert (addr_pu_koblenz_home_naveen, geo_addr_pu_koblenz_home_naveen) into AddressContainsGeoLocation
+
+!new Address('addr_dl_aachen_repair')
+!addr_dl_aachen_repair.text := 'Juelicher Strasse 72 (Repair Desk), 52070 Aachen, Germany'
+!new GeoLocation('geo_addr_dl_aachen_repair')
+!geo_addr_dl_aachen_repair.latitude := 50.7862
+!geo_addr_dl_aachen_repair.longitude := 6.1049
+!insert (addr_dl_aachen_repair, geo_addr_dl_aachen_repair) into AddressContainsGeoLocation
+
+!new Address('addr_dl_koblenz_office_mila')
+!addr_dl_koblenz_office_mila.text := 'Rizzastrasse 11, 56068 Koblenz, Germany'
+!new GeoLocation('geo_addr_dl_koblenz_office_mila')
+!geo_addr_dl_koblenz_office_mila.latitude := 50.3550
+!geo_addr_dl_koblenz_office_mila.longitude := 7.5960
+!insert (addr_dl_koblenz_office_mila, geo_addr_dl_koblenz_office_mila) into AddressContainsGeoLocation
+
+!insert (shp_40001, addr_pu_aachen_hub) into ShipmentContainsPickUpAddress
+!insert (shp_40001, addr_dl_koblenz_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_40002, addr_pu_koblenz_home_naveen) into ShipmentContainsPickUpAddress
+!insert (shp_40002, addr_dl_aachen_repair) into ShipmentContainsDeliveryAddress
+
+!insert (shp_40003, addr_pu_aachen_hub) into ShipmentContainsPickUpAddress
+!insert (shp_40003, addr_dl_koblenz_office_mila) into ShipmentContainsDeliveryAddress

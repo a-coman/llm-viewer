@@ -1,0 +1,122 @@
+!new Station('st_jena')
+!new Station('st_erfurt')
+
+!new Customer('cust_800')
+!cust_800.id := 'C-800'
+!cust_800.name := 'Clara Weiss'
+!cust_800.twitterUserName := 'clara_weiss'
+!insert (st_jena, cust_800) into StationContainsCustomer
+
+!new Customer('cust_801')
+!cust_801.id := 'C-801'
+!cust_801.name := 'Dmitri Petrenko'
+!cust_801.twitterUserName := 'dpetrenko'
+!insert (st_jena, cust_801) into StationContainsCustomer
+
+!new Driver('drv_8000')
+!drv_8000.id := 'D-8000'
+!drv_8000.name := 'Anja Becker'
+!insert (st_erfurt, drv_8000) into StationContainsDriver
+
+!new Driver('drv_8001')
+!drv_8001.id := 'D-8001'
+!drv_8001.name := 'Bilal Rahmani'
+!insert (st_erfurt, drv_8001) into StationContainsDriver
+
+!new Driver('drv_8002')
+!drv_8002.id := 'D-8002'
+!drv_8002.name := 'Carsten Wolf'
+!insert (st_erfurt, drv_8002) into StationContainsDriver
+
+!new Address('addr_pu_erf_warehouse')
+!addr_pu_erf_warehouse.text := 'Hugo-John-Strasse 8 (Central Warehouse), 99086 Erfurt, Germany'
+!new GeoLocation('geo_addr_pu_erf_warehouse')
+!geo_addr_pu_erf_warehouse.latitude := 50.9959
+!geo_addr_pu_erf_warehouse.longitude := 11.0416
+!insert (addr_pu_erf_warehouse, geo_addr_pu_erf_warehouse) into AddressContainsGeoLocation
+
+!new Address('addr_pu_jena_home_dmitri')
+!addr_pu_jena_home_dmitri.text := 'Lutherstrasse 12, 07743 Jena, Germany'
+!new GeoLocation('geo_addr_pu_jena_home_dmitri')
+!geo_addr_pu_jena_home_dmitri.latitude := 50.9271
+!geo_addr_pu_jena_home_dmitri.longitude := 11.5899
+!insert (addr_pu_jena_home_dmitri, geo_addr_pu_jena_home_dmitri) into AddressContainsGeoLocation
+
+!new Address('addr_dl_jena_uni')
+!addr_dl_jena_uni.text := 'Fürstengraben 1, 07743 Jena, Germany'
+!new GeoLocation('geo_addr_dl_jena_uni')
+!geo_addr_dl_jena_uni.latitude := 50.9289
+!geo_addr_dl_jena_uni.longitude := 11.5872
+!insert (addr_dl_jena_uni, geo_addr_dl_jena_uni) into AddressContainsGeoLocation
+
+!new Address('addr_dl_weimar_museum')
+!addr_dl_weimar_museum.text := 'Theaterplatz 1, 99423 Weimar, Germany'
+!new GeoLocation('geo_addr_dl_weimar_museum')
+!geo_addr_dl_weimar_museum.latitude := 50.9795
+!geo_addr_dl_weimar_museum.longitude := 11.3291
+!insert (addr_dl_weimar_museum, geo_addr_dl_weimar_museum) into AddressContainsGeoLocation
+
+!new Address('addr_dl_erf_locker')
+!addr_dl_erf_locker.text := 'Paketstation 144, Anger 1, 99084 Erfurt, Germany'
+!new GeoLocation('geo_addr_dl_erf_locker')
+!geo_addr_dl_erf_locker.latitude := 50.9763
+!geo_addr_dl_erf_locker.longitude := 11.0376
+!insert (addr_dl_erf_locker, geo_addr_dl_erf_locker) into AddressContainsGeoLocation
+
+!new Address('addr_dl_gera_office')
+!addr_dl_gera_office.text := 'Heinrichstrasse 30, 07545 Gera, Germany'
+!new GeoLocation('geo_addr_dl_gera_office')
+!geo_addr_dl_gera_office.latitude := 50.8807
+!geo_addr_dl_gera_office.longitude := 12.0812
+!insert (addr_dl_gera_office, geo_addr_dl_gera_office) into AddressContainsGeoLocation
+
+!new Shipment('shp_80001')
+!shp_80001.id := 'S-80001'
+!shp_80001.status := #ASSIGNED
+
+!new Shipment('shp_80002')
+!shp_80002.id := 'S-80002'
+!shp_80002.status := #NEW
+
+!new Shipment('shp_80003')
+!shp_80003.id := 'S-80003'
+!shp_80003.status := #UNDERWAY
+
+!new Shipment('shp_80004')
+!shp_80004.id := 'S-80004'
+!shp_80004.status := #DELIVERED
+
+!new Shipment('shp_80005')
+!shp_80005.id := 'S-80005'
+!shp_80005.status := #ASSIGNED
+
+!insert (cust_800, shp_80001) into CustomerConsistsOfShipment
+!insert (cust_800, shp_80002) into CustomerConsistsOfShipment
+!insert (cust_801, shp_80003) into CustomerConsistsOfShipment
+!insert (cust_801, shp_80004) into CustomerConsistsOfShipment
+!insert (cust_801, shp_80005) into CustomerConsistsOfShipment
+
+!insert (st_erfurt, shp_80001) into StationShipment
+!insert (st_erfurt, shp_80002) into StationShipment
+!insert (st_erfurt, shp_80003) into StationShipment
+!insert (st_erfurt, shp_80004) into StationShipment
+!insert (st_erfurt, shp_80005) into StationShipment
+
+!insert (drv_8000, shp_80001) into DriverShipment
+!insert (drv_8000, shp_80003) into DriverShipment
+!insert (drv_8001, shp_80004) into DriverShipment
+
+!insert (shp_80001, addr_pu_erf_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_80001, addr_dl_jena_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_80002, addr_pu_erf_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_80002, addr_dl_jena_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_80003, addr_pu_erf_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_80003, addr_dl_weimar_museum) into ShipmentContainsDeliveryAddress
+
+!insert (shp_80004, addr_pu_jena_home_dmitri) into ShipmentContainsPickUpAddress
+!insert (shp_80004, addr_dl_erf_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_80005, addr_pu_erf_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_80005, addr_dl_gera_office) into ShipmentContainsDeliveryAddress

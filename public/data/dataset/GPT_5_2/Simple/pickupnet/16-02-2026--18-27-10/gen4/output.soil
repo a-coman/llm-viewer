@@ -1,0 +1,138 @@
+!new Station('st_frankfurt')
+!new Station('st_stuttgart')
+
+!new Customer('cust_030')
+!cust_030.id := 'C-030'
+!cust_030.name := 'Julia Brandt'
+!cust_030.twitterUserName := 'juliabrandt'
+
+!new Customer('cust_031')
+!cust_031.id := 'C-031'
+!cust_031.name := 'Karim El-Sayed'
+!cust_031.twitterUserName := 'karimelsayed'
+
+!new Customer('cust_032')
+!cust_032.id := 'C-032'
+!cust_032.name := 'Leonie Graf'
+!cust_032.twitterUserName := 'leonie_graf'
+
+!new Customer('cust_033')
+!cust_033.id := 'C-033'
+!cust_033.name := 'Marco Bianchi'
+!cust_033.twitterUserName := 'marco_b'
+
+!insert (st_frankfurt, cust_030) into StationContainsCustomer
+!insert (st_frankfurt, cust_031) into StationContainsCustomer
+!insert (st_stuttgart, cust_032) into StationContainsCustomer
+!insert (st_stuttgart, cust_033) into StationContainsCustomer
+
+!new Driver('drv_500')
+!drv_500.id := 'D-500'
+!drv_500.name := 'Helena Vogt'
+
+!new Driver('drv_501')
+!drv_501.id := 'D-501'
+!drv_501.name := 'Rashid Alami'
+
+!insert (st_stuttgart, drv_500) into StationContainsDriver
+!insert (st_stuttgart, drv_501) into StationContainsDriver
+
+!new Shipment('shp_8501')
+!shp_8501.id := 'S-8501'
+!shp_8501.status := #NEW
+
+!new Shipment('shp_8502')
+!shp_8502.id := 'S-8502'
+!shp_8502.status := #ASSIGNED
+
+!new Shipment('shp_8503')
+!shp_8503.id := 'S-8503'
+!shp_8503.status := #UNDERWAY
+
+!new Shipment('shp_8504')
+!shp_8504.id := 'S-8504'
+!shp_8504.status := #DELIVERED
+
+!new Shipment('shp_8505')
+!shp_8505.id := 'S-8505'
+!shp_8505.status := #NEW
+
+!insert (cust_030, shp_8501) into CustomerConsistsOfShipment
+!insert (cust_030, shp_8502) into CustomerConsistsOfShipment
+!insert (cust_031, shp_8503) into CustomerConsistsOfShipment
+!insert (cust_033, shp_8504) into CustomerConsistsOfShipment
+!insert (cust_031, shp_8505) into CustomerConsistsOfShipment
+
+!insert (st_frankfurt, shp_8501) into StationShipment
+!insert (st_frankfurt, shp_8502) into StationShipment
+!insert (st_frankfurt, shp_8503) into StationShipment
+!insert (st_stuttgart, shp_8504) into StationShipment
+!insert (st_frankfurt, shp_8505) into StationShipment
+
+!insert (drv_500, shp_8502) into DriverShipment
+!insert (drv_500, shp_8503) into DriverShipment
+!insert (drv_501, shp_8504) into DriverShipment
+
+!new Address('addr_pu_fra_warehouse')
+!addr_pu_fra_warehouse.text := 'Cargo City Sued 1, 60549 Frankfurt am Main, Germany'
+!new GeoLocation('geo_addr_pu_fra_warehouse')
+!geo_addr_pu_fra_warehouse.latitude := 50.0382
+!geo_addr_pu_fra_warehouse.longitude := 8.5622
+!insert (addr_pu_fra_warehouse, geo_addr_pu_fra_warehouse) into AddressContainsGeoLocation
+
+!new Address('addr_pu_fra_pharmacy')
+!addr_pu_fra_pharmacy.text := 'Zeil 106, 60313 Frankfurt am Main, Germany'
+!new GeoLocation('geo_addr_pu_fra_pharmacy')
+!geo_addr_pu_fra_pharmacy.latitude := 50.1152
+!geo_addr_pu_fra_pharmacy.longitude := 8.6843
+!insert (addr_pu_fra_pharmacy, geo_addr_pu_fra_pharmacy) into AddressContainsGeoLocation
+
+!new Address('addr_dl_fra_bank')
+!addr_dl_fra_bank.text := 'Taunusanlage 12, 60325 Frankfurt am Main, Germany'
+!new GeoLocation('geo_addr_dl_fra_bank')
+!geo_addr_dl_fra_bank.latitude := 50.1117
+!geo_addr_dl_fra_bank.longitude := 8.6716
+!insert (addr_dl_fra_bank, geo_addr_dl_fra_bank) into AddressContainsGeoLocation
+
+!new Address('addr_dl_fra_airport_t1')
+!addr_dl_fra_airport_t1.text := 'Terminal 1, 60549 Frankfurt am Main, Germany'
+!new GeoLocation('geo_addr_dl_fra_airport_t1')
+!geo_addr_dl_fra_airport_t1.latitude := 50.0500
+!geo_addr_dl_fra_airport_t1.longitude := 8.5716
+!insert (addr_dl_fra_airport_t1, geo_addr_dl_fra_airport_t1) into AddressContainsGeoLocation
+
+!new Address('addr_dl_fra_hotel')
+!addr_dl_fra_hotel.text := 'Konrad-Adenauer-Strasse 7, 60313 Frankfurt am Main, Germany'
+!new GeoLocation('geo_addr_dl_fra_hotel')
+!geo_addr_dl_fra_hotel.latitude := 50.1138
+!geo_addr_dl_fra_hotel.longitude := 8.6920
+!insert (addr_dl_fra_hotel, geo_addr_dl_fra_hotel) into AddressContainsGeoLocation
+
+!new Address('addr_pu_str_market')
+!addr_pu_str_market.text := 'Marktplatz 1, 70173 Stuttgart, Germany'
+!new GeoLocation('geo_addr_pu_str_market')
+!geo_addr_pu_str_market.latitude := 48.7774
+!geo_addr_pu_str_market.longitude := 9.1799
+!insert (addr_pu_str_market, geo_addr_pu_str_market) into AddressContainsGeoLocation
+
+!new Address('addr_dl_str_residence')
+!addr_dl_str_residence.text := 'Königstrasse 28, 70173 Stuttgart, Germany'
+!new GeoLocation('geo_addr_dl_str_residence')
+!geo_addr_dl_str_residence.latitude := 48.7768
+!geo_addr_dl_str_residence.longitude := 9.1770
+!insert (addr_dl_str_residence, geo_addr_dl_str_residence) into AddressContainsGeoLocation
+
+!insert (shp_8501, addr_pu_fra_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_8501, addr_dl_fra_bank) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8502, addr_pu_fra_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_8502, addr_dl_fra_bank) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8503, addr_pu_fra_pharmacy) into ShipmentContainsPickUpAddress
+!insert (shp_8503, addr_dl_fra_airport_t1) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8504, addr_pu_str_market) into ShipmentContainsPickUpAddress
+!insert (shp_8504, addr_dl_str_residence) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8505, addr_pu_fra_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_8505, addr_dl_fra_hotel) into ShipmentContainsDeliveryAddress

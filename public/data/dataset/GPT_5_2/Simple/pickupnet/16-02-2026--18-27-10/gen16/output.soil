@@ -1,0 +1,107 @@
+!new Station('st_heidelberg')
+!new Station('st_potsdam')
+
+!new Customer('cust_600')
+!cust_600.id := 'C-600'
+!cust_600.name := 'Hannah Voigt'
+!cust_600.twitterUserName := 'hannah_voigt'
+!insert (st_heidelberg, cust_600) into StationContainsCustomer
+
+!new Customer('cust_601')
+!cust_601.id := 'C-601'
+!cust_601.name := 'Mateo Alvarez'
+!cust_601.twitterUserName := 'mateo_alvarez'
+!insert (st_potsdam, cust_601) into StationContainsCustomer
+
+!new Driver('drv_6000')
+!drv_6000.id := 'D-6000'
+!drv_6000.name := 'Stefan Klose'
+!insert (st_heidelberg, drv_6000) into StationContainsDriver
+
+!new Driver('drv_6001')
+!drv_6001.id := 'D-6001'
+!drv_6001.name := 'Lara Wendt'
+!insert (st_potsdam, drv_6001) into StationContainsDriver
+
+!new Shipment('shp_60001')
+!shp_60001.id := 'S-60001'
+!shp_60001.status := #NEW
+
+!new Shipment('shp_60002')
+!shp_60002.id := 'S-60002'
+!shp_60002.status := #ASSIGNED
+
+!new Shipment('shp_60003')
+!shp_60003.id := 'S-60003'
+!shp_60003.status := #UNDERWAY
+
+!new Shipment('shp_60004')
+!shp_60004.id := 'S-60004'
+!shp_60004.status := #DELIVERED
+
+!insert (cust_600, shp_60001) into CustomerConsistsOfShipment
+!insert (cust_601, shp_60002) into CustomerConsistsOfShipment
+!insert (cust_601, shp_60003) into CustomerConsistsOfShipment
+!insert (cust_600, shp_60004) into CustomerConsistsOfShipment
+
+!insert (st_heidelberg, shp_60001) into StationShipment
+!insert (st_heidelberg, shp_60002) into StationShipment
+!insert (st_heidelberg, shp_60003) into StationShipment
+!insert (st_heidelberg, shp_60004) into StationShipment
+
+!insert (drv_6000, shp_60002) into DriverShipment
+!insert (drv_6000, shp_60003) into DriverShipment
+
+!new Address('addr_pu_hd_packshop')
+!addr_pu_hd_packshop.text := 'Hauptstrasse 45 (Packshop), 69117 Heidelberg, Germany'
+!new GeoLocation('geo_addr_pu_hd_packshop')
+!geo_addr_pu_hd_packshop.latitude := 49.4099
+!geo_addr_pu_hd_packshop.longitude := 8.6936
+!insert (addr_pu_hd_packshop, geo_addr_pu_hd_packshop) into AddressContainsGeoLocation
+
+!new Address('addr_pu_hd_hospital')
+!addr_pu_hd_hospital.text := 'Im Neuenheimer Feld 672, 69120 Heidelberg, Germany'
+!new GeoLocation('geo_addr_pu_hd_hospital')
+!geo_addr_pu_hd_hospital.latitude := 49.4177
+!geo_addr_pu_hd_hospital.longitude := 8.6725
+!insert (addr_pu_hd_hospital, geo_addr_pu_hd_hospital) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hd_university')
+!addr_dl_hd_university.text := 'Grabengasse 1, 69117 Heidelberg, Germany'
+!new GeoLocation('geo_addr_dl_hd_university')
+!geo_addr_dl_hd_university.latitude := 49.4115
+!geo_addr_dl_hd_university.longitude := 8.7084
+!insert (addr_dl_hd_university, geo_addr_dl_hd_university) into AddressContainsGeoLocation
+
+!new Address('addr_dl_potsdam_filmpark')
+!addr_dl_potsdam_filmpark.text := 'Großbeerenstrasse 200, 14482 Potsdam, Germany'
+!new GeoLocation('geo_addr_dl_potsdam_filmpark')
+!geo_addr_dl_potsdam_filmpark.latitude := 52.3929
+!geo_addr_dl_potsdam_filmpark.longitude := 13.1277
+!insert (addr_dl_potsdam_filmpark, geo_addr_dl_potsdam_filmpark) into AddressContainsGeoLocation
+
+!new Address('addr_dl_berlin_hbf')
+!addr_dl_berlin_hbf.text := 'Europaplatz 1, 10557 Berlin, Germany'
+!new GeoLocation('geo_addr_dl_berlin_hbf')
+!geo_addr_dl_berlin_hbf.latitude := 52.5251
+!geo_addr_dl_berlin_hbf.longitude := 13.3694
+!insert (addr_dl_berlin_hbf, geo_addr_dl_berlin_hbf) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hd_residential')
+!addr_dl_hd_residential.text := 'Rohrbacher Strasse 110, 69115 Heidelberg, Germany'
+!new GeoLocation('geo_addr_dl_hd_residential')
+!geo_addr_dl_hd_residential.latitude := 49.3989
+!geo_addr_dl_hd_residential.longitude := 8.6898
+!insert (addr_dl_hd_residential, geo_addr_dl_hd_residential) into AddressContainsGeoLocation
+
+!insert (shp_60001, addr_pu_hd_packshop) into ShipmentContainsPickUpAddress
+!insert (shp_60001, addr_dl_hd_university) into ShipmentContainsDeliveryAddress
+
+!insert (shp_60002, addr_pu_hd_packshop) into ShipmentContainsPickUpAddress
+!insert (shp_60002, addr_dl_potsdam_filmpark) into ShipmentContainsDeliveryAddress
+
+!insert (shp_60003, addr_pu_hd_hospital) into ShipmentContainsPickUpAddress
+!insert (shp_60003, addr_dl_berlin_hbf) into ShipmentContainsDeliveryAddress
+
+!insert (shp_60004, addr_pu_hd_packshop) into ShipmentContainsPickUpAddress
+!insert (shp_60004, addr_dl_hd_residential) into ShipmentContainsDeliveryAddress

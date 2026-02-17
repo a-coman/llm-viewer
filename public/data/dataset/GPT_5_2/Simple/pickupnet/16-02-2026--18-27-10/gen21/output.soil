@@ -1,0 +1,137 @@
+!new Station('st_crossdock_hub')
+!new Station('st_driver_pool')
+!new Station('st_pickup_point')
+
+!new Customer('cust_1100')
+!cust_1100.id := 'C-1100'
+!cust_1100.name := 'Nicoleta Ionescu'
+!cust_1100.twitterUserName := 'nicoleta_io'
+!insert (st_pickup_point, cust_1100) into StationContainsCustomer
+
+!new Customer('cust_1101')
+!cust_1101.id := 'C-1101'
+!cust_1101.name := 'Julian Mertens'
+!cust_1101.twitterUserName := 'julian_mertens'
+!insert (st_pickup_point, cust_1101) into StationContainsCustomer
+
+!new Customer('cust_1102')
+!cust_1102.id := 'C-1102'
+!cust_1102.name := 'Farah Saleh'
+!cust_1102.twitterUserName := 'farah_saleh'
+!insert (st_crossdock_hub, cust_1102) into StationContainsCustomer
+
+!new Driver('drv_12000')
+!drv_12000.id := 'D-12000'
+!drv_12000.name := 'Erik Bender'
+!insert (st_driver_pool, drv_12000) into StationContainsDriver
+
+!new Driver('drv_12001')
+!drv_12001.id := 'D-12001'
+!drv_12001.name := 'Linh Tran'
+!insert (st_driver_pool, drv_12001) into StationContainsDriver
+
+!new Driver('drv_12002')
+!drv_12002.id := 'D-12002'
+!drv_12002.name := 'Sara Nyman'
+!insert (st_driver_pool, drv_12002) into StationContainsDriver
+
+!new Address('addr_pu_shared_crossdock')
+!addr_pu_shared_crossdock.text := 'Crossdock Gate 7, Nordring 18, 30163 Hanover, Germany'
+!new GeoLocation('geo_addr_pu_shared_crossdock')
+!geo_addr_pu_shared_crossdock.latitude := 52.4058
+!geo_addr_pu_shared_crossdock.longitude := 9.7324
+!insert (addr_pu_shared_crossdock, geo_addr_pu_shared_crossdock) into AddressContainsGeoLocation
+
+!new Address('addr_dl_shared_dropoff')
+!addr_dl_shared_dropoff.text := 'Parcel Locker Wall, Ernst-August-Platz 2, 30159 Hanover, Germany'
+!new GeoLocation('geo_addr_dl_shared_dropoff')
+!geo_addr_dl_shared_dropoff.latitude := 52.3768
+!geo_addr_dl_shared_dropoff.longitude := 9.7423
+!insert (addr_dl_shared_dropoff, geo_addr_dl_shared_dropoff) into AddressContainsGeoLocation
+
+!new Address('addr_pu_customer1100_home')
+!addr_pu_customer1100_home.text := 'Lister Meile 22, 30161 Hanover, Germany'
+!new GeoLocation('geo_addr_pu_customer1100_home')
+!geo_addr_pu_customer1100_home.latitude := 52.3802
+!geo_addr_pu_customer1100_home.longitude := 9.7489
+!insert (addr_pu_customer1100_home, geo_addr_pu_customer1100_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_city_hospital')
+!addr_dl_city_hospital.text := 'Carl-Neuberg-Strasse 1, 30625 Hanover, Germany'
+!new GeoLocation('geo_addr_dl_city_hospital')
+!geo_addr_dl_city_hospital.latitude := 52.3867
+!geo_addr_dl_city_hospital.longitude := 9.8169
+!insert (addr_dl_city_hospital, geo_addr_dl_city_hospital) into AddressContainsGeoLocation
+
+!new Address('addr_dl_airfield_gate')
+!addr_dl_airfield_gate.text := 'Airport Cargo Gate, Flughafenstrasse 4, 30855 Langenhagen, Germany'
+!new GeoLocation('geo_addr_dl_airfield_gate')
+!geo_addr_dl_airfield_gate.latitude := 52.4611
+!geo_addr_dl_airfield_gate.longitude := 9.6906
+!insert (addr_dl_airfield_gate, geo_addr_dl_airfield_gate) into AddressContainsGeoLocation
+
+!new Address('addr_dl_student_residence')
+!addr_dl_student_residence.text := 'Welfengarten 1, 30167 Hanover, Germany'
+!new GeoLocation('geo_addr_dl_student_residence')
+!geo_addr_dl_student_residence.latitude := 52.3906
+!geo_addr_dl_student_residence.longitude := 9.7136
+!insert (addr_dl_student_residence, geo_addr_dl_student_residence) into AddressContainsGeoLocation
+
+!new Address('addr_pu_retail_return_box')
+!addr_pu_retail_return_box.text := 'Return Box, Georgstrasse 35, 30159 Hanover, Germany'
+!new GeoLocation('geo_addr_pu_retail_return_box')
+!geo_addr_pu_retail_return_box.latitude := 52.3728
+!geo_addr_pu_retail_return_box.longitude := 9.7380
+!insert (addr_pu_retail_return_box, geo_addr_pu_retail_return_box) into AddressContainsGeoLocation
+
+!new Shipment('shp_210001')
+!shp_210001.id := 'S-210001'
+!shp_210001.status := #NEW
+
+!new Shipment('shp_210002')
+!shp_210002.id := 'S-210002'
+!shp_210002.status := #ASSIGNED
+
+!new Shipment('shp_210003')
+!shp_210003.id := 'S-210003'
+!shp_210003.status := #UNDERWAY
+
+!new Shipment('shp_210004')
+!shp_210004.id := 'S-210004'
+!shp_210004.status := #DELIVERED
+
+!new Shipment('shp_210005')
+!shp_210005.id := 'S-210005'
+!shp_210005.status := #ASSIGNED
+
+!insert (cust_1100, shp_210001) into CustomerConsistsOfShipment
+!insert (cust_1101, shp_210002) into CustomerConsistsOfShipment
+!insert (cust_1101, shp_210003) into CustomerConsistsOfShipment
+!insert (cust_1102, shp_210004) into CustomerConsistsOfShipment
+!insert (cust_1102, shp_210005) into CustomerConsistsOfShipment
+
+!insert (st_crossdock_hub, shp_210001) into StationShipment
+!insert (st_crossdock_hub, shp_210002) into StationShipment
+!insert (st_crossdock_hub, shp_210003) into StationShipment
+!insert (st_crossdock_hub, shp_210004) into StationShipment
+!insert (st_crossdock_hub, shp_210005) into StationShipment
+
+!insert (drv_12001, shp_210002) into DriverShipment
+!insert (drv_12001, shp_210003) into DriverShipment
+!insert (drv_12000, shp_210004) into DriverShipment
+!insert (drv_12002, shp_210005) into DriverShipment
+
+!insert (shp_210001, addr_pu_shared_crossdock) into ShipmentContainsPickUpAddress
+!insert (shp_210001, addr_dl_shared_dropoff) into ShipmentContainsDeliveryAddress
+
+!insert (shp_210002, addr_pu_shared_crossdock) into ShipmentContainsPickUpAddress
+!insert (shp_210002, addr_dl_airfield_gate) into ShipmentContainsDeliveryAddress
+
+!insert (shp_210003, addr_pu_shared_crossdock) into ShipmentContainsPickUpAddress
+!insert (shp_210003, addr_dl_student_residence) into ShipmentContainsDeliveryAddress
+
+!insert (shp_210004, addr_pu_customer1100_home) into ShipmentContainsPickUpAddress
+!insert (shp_210004, addr_dl_shared_dropoff) into ShipmentContainsDeliveryAddress
+
+!insert (shp_210005, addr_pu_retail_return_box) into ShipmentContainsPickUpAddress
+!insert (shp_210005, addr_dl_city_hospital) into ShipmentContainsDeliveryAddress

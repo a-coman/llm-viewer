@@ -1,0 +1,114 @@
+!new Station('st_karlsruhe')
+!new Station('st_backup_fleet')
+
+!new Customer('cust_1000')
+!cust_1000.id := 'C-1000'
+!cust_1000.name := 'Tobias Kern'
+!cust_1000.twitterUserName := 'tobias_kern'
+
+!new Customer('cust_1001')
+!cust_1001.id := 'C-1001'
+!cust_1001.name := 'Amina Bouzid'
+!cust_1001.twitterUserName := 'amina_bouzid'
+
+!new Customer('cust_1002')
+!cust_1002.id := 'C-1002'
+!cust_1002.name := 'Luca Ferraro'
+!cust_1002.twitterUserName := 'luca_ferraro'
+
+!insert (st_karlsruhe, cust_1000) into StationContainsCustomer
+!insert (st_karlsruhe, cust_1001) into StationContainsCustomer
+!insert (st_backup_fleet, cust_1002) into StationContainsCustomer
+
+!new Driver('drv_10000')
+!drv_10000.id := 'D-10000'
+!drv_10000.name := 'Melanie Schenk'
+
+!new Driver('drv_10001')
+!drv_10001.id := 'D-10001'
+!drv_10001.name := 'Yasin Celik'
+
+!new Driver('drv_10002')
+!drv_10002.id := 'D-10002'
+!drv_10002.name := 'Beate Lorbeer'
+
+!insert (st_karlsruhe, drv_10000) into StationContainsDriver
+!insert (st_karlsruhe, drv_10001) into StationContainsDriver
+!insert (st_backup_fleet, drv_10002) into StationContainsDriver
+
+!new Shipment('shp_100001')
+!shp_100001.id := 'S-100001'
+!shp_100001.status := #NEW
+
+!new Shipment('shp_100002')
+!shp_100002.id := 'S-100002'
+!shp_100002.status := #UNDERWAY
+
+!new Shipment('shp_100003')
+!shp_100003.id := 'S-100003'
+!shp_100003.status := #DELIVERED
+
+!new Shipment('shp_100004')
+!shp_100004.id := 'S-100004'
+!shp_100004.status := #ASSIGNED
+
+!insert (cust_1000, shp_100001) into CustomerConsistsOfShipment
+!insert (cust_1000, shp_100002) into CustomerConsistsOfShipment
+!insert (cust_1000, shp_100003) into CustomerConsistsOfShipment
+!insert (cust_1001, shp_100004) into CustomerConsistsOfShipment
+
+!insert (st_karlsruhe, shp_100001) into StationShipment
+!insert (st_karlsruhe, shp_100002) into StationShipment
+!insert (st_karlsruhe, shp_100003) into StationShipment
+!insert (st_karlsruhe, shp_100004) into StationShipment
+
+!insert (drv_10000, shp_100002) into DriverShipment
+!insert (drv_10000, shp_100003) into DriverShipment
+!insert (drv_10001, shp_100004) into DriverShipment
+
+!new Address('addr_pu_karlsruhe_shared')
+!addr_pu_karlsruhe_shared.text := 'Durlacher Allee 111 (Central Pickup Counter), 76137 Karlsruhe, Germany'
+!new GeoLocation('geo_addr_pu_karlsruhe_shared')
+!geo_addr_pu_karlsruhe_shared.latitude := 49.0069
+!geo_addr_pu_karlsruhe_shared.longitude := 8.4319
+!insert (addr_pu_karlsruhe_shared, geo_addr_pu_karlsruhe_shared) into AddressContainsGeoLocation
+
+!new Address('addr_dl_karlsruhe_home')
+!addr_dl_karlsruhe_home.text := 'Kaiserstrasse 140, 76133 Karlsruhe, Germany'
+!new GeoLocation('geo_addr_dl_karlsruhe_home')
+!geo_addr_dl_karlsruhe_home.latitude := 49.0094
+!geo_addr_dl_karlsruhe_home.longitude := 8.4043
+!insert (addr_dl_karlsruhe_home, geo_addr_dl_karlsruhe_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_karlsruhe_office')
+!addr_dl_karlsruhe_office.text := 'Rintheimer Strasse 2, 76131 Karlsruhe, Germany'
+!new GeoLocation('geo_addr_dl_karlsruhe_office')
+!geo_addr_dl_karlsruhe_office.latitude := 49.0149
+!geo_addr_dl_karlsruhe_office.longitude := 8.4311
+!insert (addr_dl_karlsruhe_office, geo_addr_dl_karlsruhe_office) into AddressContainsGeoLocation
+
+!new Address('addr_dl_karlsruhe_locker')
+!addr_dl_karlsruhe_locker.text := 'Paketstation 311, Ettlinger-Tor-Platz 1, 76133 Karlsruhe, Germany'
+!new GeoLocation('geo_addr_dl_karlsruhe_locker')
+!geo_addr_dl_karlsruhe_locker.latitude := 48.9997
+!geo_addr_dl_karlsruhe_locker.longitude := 8.4049
+!insert (addr_dl_karlsruhe_locker, geo_addr_dl_karlsruhe_locker) into AddressContainsGeoLocation
+
+!new Address('addr_pu_karlsruhe_customer_aminas_home')
+!addr_pu_karlsruhe_customer_aminas_home.text := 'Sophienstrasse 65, 76133 Karlsruhe, Germany'
+!new GeoLocation('geo_addr_pu_karlsruhe_customer_aminas_home')
+!geo_addr_pu_karlsruhe_customer_aminas_home.latitude := 49.0083
+!geo_addr_pu_karlsruhe_customer_aminas_home.longitude := 8.3908
+!insert (addr_pu_karlsruhe_customer_aminas_home, geo_addr_pu_karlsruhe_customer_aminas_home) into AddressContainsGeoLocation
+
+!insert (shp_100001, addr_pu_karlsruhe_shared) into ShipmentContainsPickUpAddress
+!insert (shp_100001, addr_dl_karlsruhe_home) into ShipmentContainsDeliveryAddress
+
+!insert (shp_100002, addr_pu_karlsruhe_shared) into ShipmentContainsPickUpAddress
+!insert (shp_100002, addr_dl_karlsruhe_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_100003, addr_pu_karlsruhe_shared) into ShipmentContainsPickUpAddress
+!insert (shp_100003, addr_dl_karlsruhe_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_100004, addr_pu_karlsruhe_customer_aminas_home) into ShipmentContainsPickUpAddress
+!insert (shp_100004, addr_dl_karlsruhe_home) into ShipmentContainsDeliveryAddress

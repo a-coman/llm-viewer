@@ -1,0 +1,89 @@
+!new Station('st_dortmund')
+!new Station('st_essen')
+
+!new Customer('cust_070')
+!cust_070.id := 'C-070'
+!cust_070.name := 'Tanja Moeller'
+!cust_070.twitterUserName := 'tanja_moeller'
+
+!new Customer('cust_071')
+!cust_071.id := 'C-071'
+!cust_071.name := 'Ugur Koc'
+!cust_071.twitterUserName := 'ugur_koc'
+
+!new Customer('cust_072')
+!cust_072.id := 'C-072'
+!cust_072.name := 'Valeria Conte'
+!cust_072.twitterUserName := 'valeria_conte'
+
+!insert (st_dortmund, cust_070) into StationContainsCustomer
+!insert (st_dortmund, cust_071) into StationContainsCustomer
+!insert (st_dortmund, cust_072) into StationContainsCustomer
+
+!new Driver('drv_900')
+!drv_900.id := 'D-900'
+!drv_900.name := 'Kai Hartmann'
+
+!new Driver('drv_901')
+!drv_901.id := 'D-901'
+!drv_901.name := 'Zehra Demir'
+
+!insert (st_essen, drv_900) into StationContainsDriver
+!insert (st_essen, drv_901) into StationContainsDriver
+
+!new Shipment('shp_11001')
+!shp_11001.id := 'S-11001'
+!shp_11001.status := #NEW
+
+!new Shipment('shp_11002')
+!shp_11002.id := 'S-11002'
+!shp_11002.status := #ASSIGNED
+
+!new Shipment('shp_11003')
+!shp_11003.id := 'S-11003'
+!shp_11003.status := #DELIVERED
+
+!insert (cust_070, shp_11001) into CustomerConsistsOfShipment
+!insert (cust_070, shp_11002) into CustomerConsistsOfShipment
+!insert (cust_071, shp_11003) into CustomerConsistsOfShipment
+
+!insert (st_dortmund, shp_11001) into StationShipment
+!insert (st_dortmund, shp_11002) into StationShipment
+!insert (st_dortmund, shp_11003) into StationShipment
+
+!new Address('addr_pu_shared_dtm')
+!addr_pu_shared_dtm.text := 'Borsigplatz 1, 44145 Dortmund, Germany'
+!new GeoLocation('geo_addr_pu_shared_dtm')
+!geo_addr_pu_shared_dtm.latitude := 51.5283
+!geo_addr_pu_shared_dtm.longitude := 7.4660
+!insert (addr_pu_shared_dtm, geo_addr_pu_shared_dtm) into AddressContainsGeoLocation
+
+!new Address('addr_pu_11003')
+!addr_pu_11003.text := 'Friedensplatz 1, 44135 Dortmund, Germany'
+!new GeoLocation('geo_addr_pu_11003')
+!geo_addr_pu_11003.latitude := 51.5136
+!geo_addr_pu_11003.longitude := 7.4653
+!insert (addr_pu_11003, geo_addr_pu_11003) into AddressContainsGeoLocation
+
+!new Address('addr_dl_shared_dtm')
+!addr_dl_shared_dtm.text := 'Westenhellweg 102, 44137 Dortmund, Germany'
+!new GeoLocation('geo_addr_dl_shared_dtm')
+!geo_addr_dl_shared_dtm.latitude := 51.5149
+!geo_addr_dl_shared_dtm.longitude := 7.4667
+!insert (addr_dl_shared_dtm, geo_addr_dl_shared_dtm) into AddressContainsGeoLocation
+
+!new Address('addr_dl_11002')
+!addr_dl_11002.text := 'Phoenixseestrasse 10, 44263 Dortmund, Germany'
+!new GeoLocation('geo_addr_dl_11002')
+!geo_addr_dl_11002.latitude := 51.4862
+!geo_addr_dl_11002.longitude := 7.5045
+!insert (addr_dl_11002, geo_addr_dl_11002) into AddressContainsGeoLocation
+
+!insert (shp_11001, addr_pu_shared_dtm) into ShipmentContainsPickUpAddress
+!insert (shp_11001, addr_dl_shared_dtm) into ShipmentContainsDeliveryAddress
+
+!insert (shp_11002, addr_pu_shared_dtm) into ShipmentContainsPickUpAddress
+!insert (shp_11002, addr_dl_11002) into ShipmentContainsDeliveryAddress
+
+!insert (shp_11003, addr_pu_11003) into ShipmentContainsPickUpAddress
+!insert (shp_11003, addr_dl_shared_dtm) into ShipmentContainsDeliveryAddress

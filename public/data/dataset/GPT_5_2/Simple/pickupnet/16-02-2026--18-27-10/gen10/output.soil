@@ -1,0 +1,141 @@
+!new Station('st_bonn')
+!new Station('st_mannheim')
+!new Station('st_trier')
+
+!new Customer('cust_090')
+!cust_090.id := 'C-090'
+!cust_090.name := 'Yara Stein'
+!cust_090.twitterUserName := 'yara_stein'
+!insert (st_mannheim, cust_090) into StationContainsCustomer
+
+!new Customer('cust_091')
+!cust_091.id := 'C-091'
+!cust_091.name := 'Zaid Nasser'
+!cust_091.twitterUserName := 'zaid_nasser'
+!insert (st_mannheim, cust_091) into StationContainsCustomer
+
+!new Customer('cust_092')
+!cust_092.id := 'C-092'
+!cust_092.name := 'Alicia Becker'
+!cust_092.twitterUserName := 'alicia_becker'
+!insert (st_trier, cust_092) into StationContainsCustomer
+
+!new Driver('drv_1000')
+!drv_1000.id := 'D-1000'
+!drv_1000.name := 'Matthias Fuchs'
+!insert (st_bonn, drv_1000) into StationContainsDriver
+
+!new Driver('drv_1001')
+!drv_1001.id := 'D-1001'
+!drv_1001.name := 'Noor Elahi'
+!insert (st_bonn, drv_1001) into StationContainsDriver
+
+!new Shipment('shp_13001')
+!shp_13001.id := 'S-13001'
+!shp_13001.status := #NEW
+
+!new Shipment('shp_13002')
+!shp_13002.id := 'S-13002'
+!shp_13002.status := #ASSIGNED
+
+!new Shipment('shp_13003')
+!shp_13003.id := 'S-13003'
+!shp_13003.status := #UNDERWAY
+
+!new Shipment('shp_13004')
+!shp_13004.id := 'S-13004'
+!shp_13004.status := #DELIVERED
+
+!new Shipment('shp_13005')
+!shp_13005.id := 'S-13005'
+!shp_13005.status := #NEW
+
+!new Shipment('shp_13006')
+!shp_13006.id := 'S-13006'
+!shp_13006.status := #ASSIGNED
+
+!insert (cust_090, shp_13001) into CustomerConsistsOfShipment
+!insert (cust_090, shp_13002) into CustomerConsistsOfShipment
+!insert (cust_091, shp_13003) into CustomerConsistsOfShipment
+!insert (cust_091, shp_13004) into CustomerConsistsOfShipment
+!insert (cust_092, shp_13005) into CustomerConsistsOfShipment
+!insert (cust_092, shp_13006) into CustomerConsistsOfShipment
+
+!insert (st_bonn, shp_13001) into StationShipment
+!insert (st_bonn, shp_13002) into StationShipment
+!insert (st_bonn, shp_13003) into StationShipment
+!insert (st_bonn, shp_13004) into StationShipment
+!insert (st_bonn, shp_13005) into StationShipment
+!insert (st_bonn, shp_13006) into StationShipment
+
+!insert (drv_1000, shp_13002) into DriverShipment
+!insert (drv_1000, shp_13003) into DriverShipment
+!insert (drv_1000, shp_13004) into DriverShipment
+!insert (drv_1000, shp_13006) into DriverShipment
+
+!new Address('addr_pu_bonn_depot')
+!addr_pu_bonn_depot.text := 'Auguststrasse 45 (Depot), 53229 Bonn, Germany'
+!new GeoLocation('geo_addr_pu_bonn_depot')
+!geo_addr_pu_bonn_depot.latitude := 50.7352
+!geo_addr_pu_bonn_depot.longitude := 7.1399
+!insert (addr_pu_bonn_depot, geo_addr_pu_bonn_depot) into AddressContainsGeoLocation
+
+!new Address('addr_dl_mh_center')
+!addr_dl_mh_center.text := 'Planken 10, 68159 Mannheim, Germany'
+!new GeoLocation('geo_addr_dl_mh_center')
+!geo_addr_dl_mh_center.latitude := 49.4891
+!geo_addr_dl_mh_center.longitude := 8.4669
+!insert (addr_dl_mh_center, geo_addr_dl_mh_center) into AddressContainsGeoLocation
+
+!new Address('addr_dl_mh_locker')
+!addr_dl_mh_locker.text := 'Paketstation 22, Willy-Brandt-Platz 1, 68161 Mannheim, Germany'
+!new GeoLocation('geo_addr_dl_mh_locker')
+!geo_addr_dl_mh_locker.latitude := 49.4796
+!geo_addr_dl_mh_locker.longitude := 8.4695
+!insert (addr_dl_mh_locker, geo_addr_dl_mh_locker) into AddressContainsGeoLocation
+
+!new Address('addr_dl_trier_station')
+!addr_dl_trier_station.text := 'Bahnhofsplatz 1, 54292 Trier, Germany'
+!new GeoLocation('geo_addr_dl_trier_station')
+!geo_addr_dl_trier_station.latitude := 49.7566
+!geo_addr_dl_trier_station.longitude := 6.6432
+!insert (addr_dl_trier_station, geo_addr_dl_trier_station) into AddressContainsGeoLocation
+
+!new Address('addr_dl_trier_uni')
+!addr_dl_trier_uni.text := 'Universitaetsring 15, 54296 Trier, Germany'
+!new GeoLocation('geo_addr_dl_trier_uni')
+!geo_addr_dl_trier_uni.latitude := 49.7474
+!geo_addr_dl_trier_uni.longitude := 6.6866
+!insert (addr_dl_trier_uni, geo_addr_dl_trier_uni) into AddressContainsGeoLocation
+
+!new Address('addr_pu_mh_return')
+!addr_pu_mh_return.text := 'Seckenheimer Strasse 10, 68165 Mannheim, Germany'
+!new GeoLocation('geo_addr_pu_mh_return')
+!geo_addr_pu_mh_return.latitude := 49.4771
+!geo_addr_pu_mh_return.longitude := 8.4973
+!insert (addr_pu_mh_return, geo_addr_pu_mh_return) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bonn_repair')
+!addr_dl_bonn_repair.text := 'Bornheimer Strasse 135 (Repair Center), 53119 Bonn, Germany'
+!new GeoLocation('geo_addr_dl_bonn_repair')
+!geo_addr_dl_bonn_repair.latitude := 50.7444
+!geo_addr_dl_bonn_repair.longitude := 7.0865
+!insert (addr_dl_bonn_repair, geo_addr_dl_bonn_repair) into AddressContainsGeoLocation
+
+!insert (shp_13001, addr_pu_bonn_depot) into ShipmentContainsPickUpAddress
+!insert (shp_13001, addr_dl_mh_center) into ShipmentContainsDeliveryAddress
+
+!insert (shp_13002, addr_pu_bonn_depot) into ShipmentContainsPickUpAddress
+!insert (shp_13002, addr_dl_mh_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_13003, addr_pu_bonn_depot) into ShipmentContainsPickUpAddress
+!insert (shp_13003, addr_dl_mh_center) into ShipmentContainsDeliveryAddress
+
+!insert (shp_13004, addr_pu_bonn_depot) into ShipmentContainsPickUpAddress
+!insert (shp_13004, addr_dl_trier_station) into ShipmentContainsDeliveryAddress
+
+!insert (shp_13005, addr_pu_bonn_depot) into ShipmentContainsPickUpAddress
+!insert (shp_13005, addr_dl_trier_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_13006, addr_pu_mh_return) into ShipmentContainsPickUpAddress
+!insert (shp_13006, addr_dl_bonn_repair) into ShipmentContainsDeliveryAddress

@@ -1,0 +1,66 @@
+!new Station('st_freiburg')
+
+!new Customer('cust_080')
+!cust_080.id := 'C-080'
+!cust_080.name := 'Wiebke Schuster'
+!cust_080.twitterUserName := 'wiebke_s'
+!insert (st_freiburg, cust_080) into StationContainsCustomer
+
+!new Customer('cust_081')
+!cust_081.id := 'C-081'
+!cust_081.name := 'Xavier Dupont'
+!cust_081.twitterUserName := 'xdupont'
+!insert (st_freiburg, cust_081) into StationContainsCustomer
+
+!new Driver('drv_950')
+!drv_950.id := 'D-950'
+!drv_950.name := 'Elif Yavuz'
+!insert (st_freiburg, drv_950) into StationContainsDriver
+
+!new Shipment('shp_12001')
+!shp_12001.id := 'S-12001'
+!shp_12001.status := #NEW
+
+!new Shipment('shp_12002')
+!shp_12002.id := 'S-12002'
+!shp_12002.status := #NEW
+
+!insert (cust_080, shp_12001) into CustomerConsistsOfShipment
+!insert (cust_080, shp_12002) into CustomerConsistsOfShipment
+
+!insert (st_freiburg, shp_12001) into StationShipment
+!insert (st_freiburg, shp_12002) into StationShipment
+
+!new Address('addr_pu_12001_home')
+!addr_pu_12001_home.text := 'Habsburgerstrasse 30, 79104 Freiburg im Breisgau, Germany'
+!new GeoLocation('geo_addr_pu_12001_home')
+!geo_addr_pu_12001_home.latitude := 47.9996
+!geo_addr_pu_12001_home.longitude := 7.8616
+!insert (addr_pu_12001_home, geo_addr_pu_12001_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_12001_locker')
+!addr_dl_12001_locker.text := 'Paketstation 125, Bertoldstrasse 45, 79098 Freiburg im Breisgau, Germany'
+!new GeoLocation('geo_addr_dl_12001_locker')
+!geo_addr_dl_12001_locker.latitude := 47.9957
+!geo_addr_dl_12001_locker.longitude := 7.8522
+!insert (addr_dl_12001_locker, geo_addr_dl_12001_locker) into AddressContainsGeoLocation
+
+!insert (shp_12001, addr_pu_12001_home) into ShipmentContainsPickUpAddress
+!insert (shp_12001, addr_dl_12001_locker) into ShipmentContainsDeliveryAddress
+
+!new Address('addr_pu_12002_shop')
+!addr_pu_12002_shop.text := 'Kaiser-Joseph-Strasse 248, 79098 Freiburg im Breisgau, Germany'
+!new GeoLocation('geo_addr_pu_12002_shop')
+!geo_addr_pu_12002_shop.latitude := 47.9952
+!geo_addr_pu_12002_shop.longitude := 7.8506
+!insert (addr_pu_12002_shop, geo_addr_pu_12002_shop) into AddressContainsGeoLocation
+
+!new Address('addr_dl_12002_home')
+!addr_dl_12002_home.text := 'Zähringer Strasse 12, 79108 Freiburg im Breisgau, Germany'
+!new GeoLocation('geo_addr_dl_12002_home')
+!geo_addr_dl_12002_home.latitude := 48.0225
+!geo_addr_dl_12002_home.longitude := 7.8498
+!insert (addr_dl_12002_home, geo_addr_dl_12002_home) into AddressContainsGeoLocation
+
+!insert (shp_12002, addr_pu_12002_shop) into ShipmentContainsPickUpAddress
+!insert (shp_12002, addr_dl_12002_home) into ShipmentContainsDeliveryAddress

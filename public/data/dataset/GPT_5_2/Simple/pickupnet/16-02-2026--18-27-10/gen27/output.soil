@@ -1,0 +1,114 @@
+!new Station('st_event_hub')
+!new Station('st_night_ops')
+!new Station('st_regional_sort')
+
+!new Customer('cust_22000')
+!cust_22000.id := 'C-22000'
+!cust_22000.name := 'Silke Baum'
+!cust_22000.twitterUserName := 'silke_baum'
+!insert (st_event_hub, cust_22000) into StationContainsCustomer
+
+!new Customer('cust_22001')
+!cust_22001.id := 'C-22001'
+!cust_22001.name := 'Owen Gallagher'
+!cust_22001.twitterUserName := 'owen_g'
+!insert (st_event_hub, cust_22001) into StationContainsCustomer
+
+!new Driver('drv_22000')
+!drv_22000.id := 'D-22000'
+!drv_22000.name := 'Heike Lorenzen'
+!insert (st_night_ops, drv_22000) into StationContainsDriver
+
+!new Driver('drv_22001')
+!drv_22001.id := 'D-22001'
+!drv_22001.name := 'Rachid Benomar'
+!insert (st_night_ops, drv_22001) into StationContainsDriver
+
+!new Driver('drv_22002')
+!drv_22002.id := 'D-22002'
+!drv_22002.name := 'Tomasz Wilk'
+!insert (st_night_ops, drv_22002) into StationContainsDriver
+
+!new Address('addr_pu_concert_gate')
+!addr_pu_concert_gate.text := 'Event Gate 3 (Pickup Tent), Arenastrasse 1, 40474 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_pu_concert_gate')
+!geo_addr_pu_concert_gate.latitude := 51.2612
+!geo_addr_pu_concert_gate.longitude := 6.7339
+!insert (addr_pu_concert_gate, geo_addr_pu_concert_gate) into AddressContainsGeoLocation
+
+!new Address('addr_pu_regional_sort')
+!addr_pu_regional_sort.text := 'Regional Sort Center, Am Hafentor 9, 40221 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_pu_regional_sort')
+!geo_addr_pu_regional_sort.latitude := 51.2077
+!geo_addr_pu_regional_sort.longitude := 6.7569
+!insert (addr_pu_regional_sort, geo_addr_pu_regional_sort) into AddressContainsGeoLocation
+
+!new Address('addr_dl_hotel_reception')
+!addr_dl_hotel_reception.text := 'Hotel Reception, Immermannstrasse 41, 40210 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_dl_hotel_reception')
+!geo_addr_dl_hotel_reception.latitude := 51.2220
+!geo_addr_dl_hotel_reception.longitude := 6.7862
+!insert (addr_dl_hotel_reception, geo_addr_dl_hotel_reception) into AddressContainsGeoLocation
+
+!new Address('addr_dl_media_office')
+!addr_dl_media_office.text := 'Media Office, Speditionstrasse 15, 40221 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_dl_media_office')
+!geo_addr_dl_media_office.latitude := 51.2162
+!geo_addr_dl_media_office.longitude := 6.7614
+!insert (addr_dl_media_office, geo_addr_dl_media_office) into AddressContainsGeoLocation
+
+!new Address('addr_dl_locker_airport')
+!addr_dl_locker_airport.text := 'Parcel Locker (Airport), Flughafenstrasse 105, 40474 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_dl_locker_airport')
+!geo_addr_dl_locker_airport.latitude := 51.2793
+!geo_addr_dl_locker_airport.longitude := 6.7656
+!insert (addr_dl_locker_airport, geo_addr_dl_locker_airport) into AddressContainsGeoLocation
+
+!new Address('addr_dl_repair_bench')
+!addr_dl_repair_bench.text := 'Repair Bench Intake, Kettwiger Strasse 12, 45127 Essen, Germany'
+!new GeoLocation('geo_addr_dl_repair_bench')
+!geo_addr_dl_repair_bench.latitude := 51.4566
+!geo_addr_dl_repair_bench.longitude := 7.0128
+!insert (addr_dl_repair_bench, geo_addr_dl_repair_bench) into AddressContainsGeoLocation
+
+!new Shipment('shp_420001')
+!shp_420001.id := 'S-420001'
+!shp_420001.status := #NEW
+
+!new Shipment('shp_420002')
+!shp_420002.id := 'S-420002'
+!shp_420002.status := #ASSIGNED
+
+!new Shipment('shp_420003')
+!shp_420003.id := 'S-420003'
+!shp_420003.status := #UNDERWAY
+
+!new Shipment('shp_420004')
+!shp_420004.id := 'S-420004'
+!shp_420004.status := #DELIVERED
+
+!insert (cust_22000, shp_420001) into CustomerConsistsOfShipment
+!insert (cust_22000, shp_420002) into CustomerConsistsOfShipment
+!insert (cust_22001, shp_420003) into CustomerConsistsOfShipment
+!insert (cust_22001, shp_420004) into CustomerConsistsOfShipment
+
+!insert (st_regional_sort, shp_420001) into StationShipment
+!insert (st_regional_sort, shp_420002) into StationShipment
+!insert (st_regional_sort, shp_420003) into StationShipment
+!insert (st_regional_sort, shp_420004) into StationShipment
+
+!insert (drv_22000, shp_420002) into DriverShipment
+!insert (drv_22001, shp_420003) into DriverShipment
+!insert (drv_22000, shp_420004) into DriverShipment
+
+!insert (shp_420001, addr_pu_concert_gate) into ShipmentContainsPickUpAddress
+!insert (shp_420001, addr_dl_hotel_reception) into ShipmentContainsDeliveryAddress
+
+!insert (shp_420002, addr_pu_concert_gate) into ShipmentContainsPickUpAddress
+!insert (shp_420002, addr_dl_locker_airport) into ShipmentContainsDeliveryAddress
+
+!insert (shp_420003, addr_pu_regional_sort) into ShipmentContainsPickUpAddress
+!insert (shp_420003, addr_dl_media_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_420004, addr_pu_concert_gate) into ShipmentContainsPickUpAddress
+!insert (shp_420004, addr_dl_repair_bench) into ShipmentContainsDeliveryAddress

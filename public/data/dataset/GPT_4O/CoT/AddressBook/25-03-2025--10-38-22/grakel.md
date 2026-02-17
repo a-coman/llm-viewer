@@ -180,7 +180,6 @@ Labels6-baseline.soil: {0: 'AddressBook', 1: 'Person', 2: 'Address', 3: 'Note', 
 
 Edges6-baseline.soil: [(1, 2), (1, 3), (4, 5), (4, 6), (7, 8), (7, 9), (7, 10), (10, 1), (7, 11), (11, 4), (0, 1), (0, 4), (0, 7)]
 
-
 ```
 # Kernel: 
 ```

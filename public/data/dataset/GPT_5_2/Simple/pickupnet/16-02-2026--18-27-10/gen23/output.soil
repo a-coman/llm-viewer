@@ -1,0 +1,113 @@
+!new Station('st_customer_portal')
+!new Station('st_logistics_depot')
+
+!new Customer('cust_1600')
+!cust_1600.id := 'C-1600'
+!cust_1600.name := 'Tarek Osman'
+!cust_1600.twitterUserName := 'tarek_osman'
+!insert (st_customer_portal, cust_1600) into StationContainsCustomer
+
+!new Customer('cust_1601')
+!cust_1601.id := 'C-1601'
+!cust_1601.name := 'Bianca Huber'
+!cust_1601.twitterUserName := 'bianca_huber'
+!insert (st_customer_portal, cust_1601) into StationContainsCustomer
+
+!new Customer('cust_1602')
+!cust_1602.id := 'C-1602'
+!cust_1602.name := 'Noah Madsen'
+!cust_1602.twitterUserName := 'noah_madsen'
+!insert (st_customer_portal, cust_1602) into StationContainsCustomer
+
+!new Driver('drv_16000')
+!drv_16000.id := 'D-16000'
+!drv_16000.name := 'Kira Baumann'
+!insert (st_logistics_depot, drv_16000) into StationContainsDriver
+
+!new Driver('drv_16001')
+!drv_16001.id := 'D-16001'
+!drv_16001.name := 'Ivo Jankovic'
+!insert (st_logistics_depot, drv_16001) into StationContainsDriver
+
+!new Address('addr_pu_shared_depot_gate')
+!addr_pu_shared_depot_gate.text := 'Depot Gate A, Industrieweg 4, 28199 Bremen, Germany'
+!new GeoLocation('geo_addr_pu_shared_depot_gate')
+!geo_addr_pu_shared_depot_gate.latitude := 53.0496
+!geo_addr_pu_shared_depot_gate.longitude := 8.7857
+!insert (addr_pu_shared_depot_gate, geo_addr_pu_shared_depot_gate) into AddressContainsGeoLocation
+
+!new Address('addr_pu_cust1602_home')
+!addr_pu_cust1602_home.text := 'Buntentorsteinweg 92, 28201 Bremen, Germany'
+!new GeoLocation('geo_addr_pu_cust1602_home')
+!geo_addr_pu_cust1602_home.latitude := 53.0613
+!geo_addr_pu_cust1602_home.longitude := 8.7979
+!insert (addr_pu_cust1602_home, geo_addr_pu_cust1602_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_library')
+!addr_dl_bre_library.text := 'Am Wall 201, 28195 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_library')
+!geo_addr_dl_bre_library.latitude := 53.0809
+!geo_addr_dl_bre_library.longitude := 8.8044
+!insert (addr_dl_bre_library, geo_addr_dl_bre_library) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_locker_station')
+!addr_dl_bre_locker_station.text := 'Paketstation 418, Bahnhofsplatz 15, 28195 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_locker_station')
+!geo_addr_dl_bre_locker_station.latitude := 53.0833
+!geo_addr_dl_bre_locker_station.longitude := 8.8137
+!insert (addr_dl_bre_locker_station, geo_addr_dl_bre_locker_station) into AddressContainsGeoLocation
+
+!new Address('addr_dl_oldenburg_office')
+!addr_dl_oldenburg_office.text := 'Schlossplatz 1, 26122 Oldenburg, Germany'
+!new GeoLocation('geo_addr_dl_oldenburg_office')
+!geo_addr_dl_oldenburg_office.latitude := 53.1403
+!geo_addr_dl_oldenburg_office.longitude := 8.2146
+!insert (addr_dl_oldenburg_office, geo_addr_dl_oldenburg_office) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_recycling_center')
+!addr_dl_bre_recycling_center.text := 'Recyclinghof Findorff, Hemmstrasse 351, 28215 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_recycling_center')
+!geo_addr_dl_bre_recycling_center.latitude := 53.0960
+!geo_addr_dl_bre_recycling_center.longitude := 8.7873
+!insert (addr_dl_bre_recycling_center, geo_addr_dl_bre_recycling_center) into AddressContainsGeoLocation
+
+!new Shipment('shp_160001')
+!shp_160001.id := 'S-160001'
+!shp_160001.status := #ASSIGNED
+
+!new Shipment('shp_160002')
+!shp_160002.id := 'S-160002'
+!shp_160002.status := #NEW
+
+!new Shipment('shp_160003')
+!shp_160003.id := 'S-160003'
+!shp_160003.status := #DELIVERED
+
+!new Shipment('shp_160004')
+!shp_160004.id := 'S-160004'
+!shp_160004.status := #UNDERWAY
+
+!insert (cust_1600, shp_160001) into CustomerConsistsOfShipment
+!insert (cust_1601, shp_160002) into CustomerConsistsOfShipment
+!insert (cust_1601, shp_160003) into CustomerConsistsOfShipment
+!insert (cust_1602, shp_160004) into CustomerConsistsOfShipment
+
+!insert (st_logistics_depot, shp_160001) into StationShipment
+!insert (st_logistics_depot, shp_160002) into StationShipment
+!insert (st_logistics_depot, shp_160003) into StationShipment
+!insert (st_logistics_depot, shp_160004) into StationShipment
+
+!insert (drv_16000, shp_160001) into DriverShipment
+!insert (drv_16001, shp_160004) into DriverShipment
+
+!insert (shp_160001, addr_pu_shared_depot_gate) into ShipmentContainsPickUpAddress
+!insert (shp_160001, addr_dl_oldenburg_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_160002, addr_pu_shared_depot_gate) into ShipmentContainsPickUpAddress
+!insert (shp_160002, addr_dl_bre_locker_station) into ShipmentContainsDeliveryAddress
+
+!insert (shp_160003, addr_pu_shared_depot_gate) into ShipmentContainsPickUpAddress
+!insert (shp_160003, addr_dl_bre_library) into ShipmentContainsDeliveryAddress
+
+!insert (shp_160004, addr_pu_cust1602_home) into ShipmentContainsPickUpAddress
+!insert (shp_160004, addr_dl_bre_recycling_center) into ShipmentContainsDeliveryAddress

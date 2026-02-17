@@ -1,0 +1,91 @@
+!new Station('st_cologne')
+
+!new Customer('cust_020')
+!cust_020.id := 'C-020'
+!cust_020.name := 'Gregor Weiss'
+!cust_020.twitterUserName := 'gregorweiss'
+
+!new Customer('cust_021')
+!cust_021.id := 'C-021'
+!cust_021.name := 'Hana Ito'
+!cust_021.twitterUserName := 'hana_ito'
+
+!new Customer('cust_022')
+!cust_022.id := 'C-022'
+!cust_022.name := 'Ibrahim Demir'
+!cust_022.twitterUserName := 'ibrahimdemir'
+
+!insert (st_cologne, cust_020) into StationContainsCustomer
+!insert (st_cologne, cust_021) into StationContainsCustomer
+!insert (st_cologne, cust_022) into StationContainsCustomer
+
+!new Driver('drv_400')
+!drv_400.id := 'D-400'
+!drv_400.name := 'Svenja Lorenz'
+
+!new Driver('drv_401')
+!drv_401.id := 'D-401'
+!drv_401.name := 'Omar Haddad'
+
+!insert (st_cologne, drv_400) into StationContainsDriver
+!insert (st_cologne, drv_401) into StationContainsDriver
+
+!new Shipment('shp_8001')
+!shp_8001.id := 'S-8001'
+!shp_8001.status := #NEW
+
+!new Shipment('shp_8002')
+!shp_8002.id := 'S-8002'
+!shp_8002.status := #ASSIGNED
+
+!new Shipment('shp_8003')
+!shp_8003.id := 'S-8003'
+!shp_8003.status := #DELIVERED
+
+!insert (cust_020, shp_8001) into CustomerConsistsOfShipment
+!insert (cust_020, shp_8002) into CustomerConsistsOfShipment
+!insert (cust_021, shp_8003) into CustomerConsistsOfShipment
+
+!insert (st_cologne, shp_8001) into StationShipment
+!insert (st_cologne, shp_8002) into StationShipment
+!insert (st_cologne, shp_8003) into StationShipment
+
+!insert (drv_400, shp_8002) into DriverShipment
+!insert (drv_400, shp_8003) into DriverShipment
+
+!new Address('addr_hub_cgn')
+!addr_hub_cgn.text := 'Eifeltor 1, 50997 Cologne, Germany'
+!new GeoLocation('geo_addr_hub_cgn')
+!geo_addr_hub_cgn.latitude := 50.8856
+!geo_addr_hub_cgn.longitude := 6.9564
+!insert (addr_hub_cgn, geo_addr_hub_cgn) into AddressContainsGeoLocation
+
+!new Address('addr_home_cgn')
+!addr_home_cgn.text := 'Aachener Strasse 1200, 50858 Cologne, Germany'
+!new GeoLocation('geo_addr_home_cgn')
+!geo_addr_home_cgn.latitude := 50.9389
+!geo_addr_home_cgn.longitude := 6.8356
+!insert (addr_home_cgn, geo_addr_home_cgn) into AddressContainsGeoLocation
+
+!new Address('addr_shop_cgn')
+!addr_shop_cgn.text := 'Schildergasse 65, 50667 Cologne, Germany'
+!new GeoLocation('geo_addr_shop_cgn')
+!geo_addr_shop_cgn.latitude := 50.9372
+!geo_addr_shop_cgn.longitude := 6.9531
+!insert (addr_shop_cgn, geo_addr_shop_cgn) into AddressContainsGeoLocation
+
+!new Address('addr_office_cgn')
+!addr_office_cgn.text := 'Im Mediapark 8, 50670 Cologne, Germany'
+!new GeoLocation('geo_addr_office_cgn')
+!geo_addr_office_cgn.latitude := 50.9487
+!geo_addr_office_cgn.longitude := 6.9444
+!insert (addr_office_cgn, geo_addr_office_cgn) into AddressContainsGeoLocation
+
+!insert (shp_8001, addr_hub_cgn) into ShipmentContainsPickUpAddress
+!insert (shp_8001, addr_home_cgn) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8002, addr_hub_cgn) into ShipmentContainsPickUpAddress
+!insert (shp_8002, addr_shop_cgn) into ShipmentContainsDeliveryAddress
+
+!insert (shp_8003, addr_office_cgn) into ShipmentContainsPickUpAddress
+!insert (shp_8003, addr_hub_cgn) into ShipmentContainsDeliveryAddress

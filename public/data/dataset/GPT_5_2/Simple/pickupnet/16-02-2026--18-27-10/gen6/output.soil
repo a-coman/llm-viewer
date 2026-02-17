@@ -1,0 +1,109 @@
+!new Station('st_nuremberg')
+!new Station('st_augsburg')
+!new Station('st_wuerzburg')
+
+!new Customer('cust_050')
+!cust_050.id := 'C-050'
+!cust_050.name := 'Olivia Meier'
+!cust_050.twitterUserName := 'olivia_meier'
+!insert (st_nuremberg, cust_050) into StationContainsCustomer
+
+!new Customer('cust_051')
+!cust_051.id := 'C-051'
+!cust_051.name := 'Pascal Laurent'
+!cust_051.twitterUserName := 'p_laurent'
+!insert (st_wuerzburg, cust_051) into StationContainsCustomer
+
+!new Driver('drv_700')
+!drv_700.id := 'D-700'
+!drv_700.name := 'Katrin Seidel'
+!insert (st_augsburg, drv_700) into StationContainsDriver
+
+!new Driver('drv_701')
+!drv_701.id := 'D-701'
+!drv_701.name := 'Youssef Benali'
+!insert (st_augsburg, drv_701) into StationContainsDriver
+
+!new Shipment('shp_9601')
+!shp_9601.id := 'S-9601'
+!shp_9601.status := #NEW
+
+!new Shipment('shp_9602')
+!shp_9602.id := 'S-9602'
+!shp_9602.status := #UNDERWAY
+
+!new Shipment('shp_9603')
+!shp_9603.id := 'S-9603'
+!shp_9603.status := #ASSIGNED
+
+!new Shipment('shp_9604')
+!shp_9604.id := 'S-9604'
+!shp_9604.status := #DELIVERED
+
+!insert (cust_050, shp_9601) into CustomerConsistsOfShipment
+!insert (cust_050, shp_9602) into CustomerConsistsOfShipment
+!insert (cust_051, shp_9603) into CustomerConsistsOfShipment
+!insert (cust_051, shp_9604) into CustomerConsistsOfShipment
+
+!insert (st_augsburg, shp_9601) into StationShipment
+!insert (st_augsburg, shp_9602) into StationShipment
+!insert (st_wuerzburg, shp_9603) into StationShipment
+!insert (st_nuremberg, shp_9604) into StationShipment
+
+!insert (drv_700, shp_9602) into DriverShipment
+!insert (drv_701, shp_9603) into DriverShipment
+!insert (drv_700, shp_9604) into DriverShipment
+
+!new Address('addr_pu_return_center')
+!addr_pu_return_center.text := 'Gutenbergstrasse 12 (Returns), 86150 Augsburg, Germany'
+!new GeoLocation('geo_addr_pu_return_center')
+!geo_addr_pu_return_center.latitude := 48.3685
+!geo_addr_pu_return_center.longitude := 10.8978
+!insert (addr_pu_return_center, geo_addr_pu_return_center) into AddressContainsGeoLocation
+
+!new Address('addr_dl_packstation_aux')
+!addr_dl_packstation_aux.text := 'Paketstation 178, Bahnhofstrasse 2, 86150 Augsburg, Germany'
+!new GeoLocation('geo_addr_dl_packstation_aux')
+!geo_addr_dl_packstation_aux.latitude := 48.3658
+!geo_addr_dl_packstation_aux.longitude := 10.8867
+!insert (addr_dl_packstation_aux, geo_addr_dl_packstation_aux) into AddressContainsGeoLocation
+
+!new Address('addr_pu_cust051_home')
+!addr_pu_cust051_home.text := 'Sanderstrasse 19, 97070 Wuerzburg, Germany'
+!new GeoLocation('geo_addr_pu_cust051_home')
+!geo_addr_pu_cust051_home.latitude := 49.7949
+!geo_addr_pu_cust051_home.longitude := 9.9312
+!insert (addr_pu_cust051_home, geo_addr_pu_cust051_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_wue_university')
+!addr_dl_wue_university.text := 'Sanderring 2, 97070 Wuerzburg, Germany'
+!new GeoLocation('geo_addr_dl_wue_university')
+!geo_addr_dl_wue_university.latitude := 49.7893
+!geo_addr_dl_wue_university.longitude := 9.9346
+!insert (addr_dl_wue_university, geo_addr_dl_wue_university) into AddressContainsGeoLocation
+
+!new Address('addr_pu_nue_service_desk')
+!addr_pu_nue_service_desk.text := 'Bahnhofsplatz 9 (Service Desk), 90402 Nuremberg, Germany'
+!new GeoLocation('geo_addr_pu_nue_service_desk')
+!geo_addr_pu_nue_service_desk.latitude := 49.4456
+!geo_addr_pu_nue_service_desk.longitude := 11.0822
+!insert (addr_pu_nue_service_desk, geo_addr_pu_nue_service_desk) into AddressContainsGeoLocation
+
+!new Address('addr_dl_nue_old_town')
+!addr_dl_nue_old_town.text := 'Hauptmarkt 18, 90403 Nuremberg, Germany'
+!new GeoLocation('geo_addr_dl_nue_old_town')
+!geo_addr_dl_nue_old_town.latitude := 49.4542
+!geo_addr_dl_nue_old_town.longitude := 11.0775
+!insert (addr_dl_nue_old_town, geo_addr_dl_nue_old_town) into AddressContainsGeoLocation
+
+!insert (shp_9601, addr_pu_return_center) into ShipmentContainsPickUpAddress
+!insert (shp_9601, addr_dl_packstation_aux) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9602, addr_pu_return_center) into ShipmentContainsPickUpAddress
+!insert (shp_9602, addr_pu_cust051_home) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9603, addr_pu_cust051_home) into ShipmentContainsPickUpAddress
+!insert (shp_9603, addr_dl_wue_university) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9604, addr_pu_nue_service_desk) into ShipmentContainsPickUpAddress
+!insert (shp_9604, addr_dl_nue_old_town) into ShipmentContainsDeliveryAddress

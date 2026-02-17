@@ -1,0 +1,103 @@
+!new Station('st_popuplab')
+!new Station('st_training_yard')
+
+!new Customer('cust_50000')
+!cust_50000.id := 'C-50000'
+!cust_50000.name := 'Alina Petrovic'
+!cust_50000.twitterUserName := 'alina_petrovic'
+!insert (st_popuplab, cust_50000) into StationContainsCustomer
+
+!new Customer('cust_50001')
+!cust_50001.id := 'C-50001'
+!cust_50001.name := 'Bruno Almeida'
+!cust_50001.twitterUserName := 'bruno_almeida'
+!insert (st_popuplab, cust_50001) into StationContainsCustomer
+
+!new Customer('cust_50002')
+!cust_50002.id := 'C-50002'
+!cust_50002.name := 'Celine Fischer'
+!cust_50002.twitterUserName := 'celine_fischer'
+!insert (st_popuplab, cust_50002) into StationContainsCustomer
+
+!new Driver('drv_50000')
+!drv_50000.id := 'D-50000'
+!drv_50000.name := 'Jan Holzer'
+!insert (st_training_yard, drv_50000) into StationContainsDriver
+
+!new Driver('drv_50001')
+!drv_50001.id := 'D-50001'
+!drv_50001.name := 'Mouna Kassem'
+!insert (st_training_yard, drv_50001) into StationContainsDriver
+
+!new Address('addr_pu_popuplab_center')
+!addr_pu_popuplab_center.text := 'Pop-up Lab Counter, Marktplatz 5, 86150 Augsburg, Germany'
+!new GeoLocation('geo_addr_pu_popuplab_center')
+!geo_addr_pu_popuplab_center.latitude := 48.3696
+!geo_addr_pu_popuplab_center.longitude := 10.8973
+!insert (addr_pu_popuplab_center, geo_addr_pu_popuplab_center) into AddressContainsGeoLocation
+
+!new Address('addr_dl_quality_check')
+!addr_dl_quality_check.text := 'Quality Check Desk, Provinostrasse 52, 86153 Augsburg, Germany'
+!new GeoLocation('geo_addr_dl_quality_check')
+!geo_addr_dl_quality_check.latitude := 48.3762
+!geo_addr_dl_quality_check.longitude := 10.9151
+!insert (addr_dl_quality_check, geo_addr_dl_quality_check) into AddressContainsGeoLocation
+
+!new Address('addr_pu_customer50001_home')
+!addr_pu_customer50001_home.text := 'Jakoberstrasse 30, 86152 Augsburg, Germany'
+!new GeoLocation('geo_addr_pu_customer50001_home')
+!geo_addr_pu_customer50001_home.latitude := 48.3738
+!geo_addr_pu_customer50001_home.longitude := 10.9055
+!insert (addr_pu_customer50001_home, geo_addr_pu_customer50001_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_locker_tramstop')
+!addr_dl_locker_tramstop.text := 'Parcel Locker (Tram Stop), Königsplatz 1, 86150 Augsburg, Germany'
+!new GeoLocation('geo_addr_dl_locker_tramstop')
+!geo_addr_dl_locker_tramstop.latitude := 48.3654
+!geo_addr_dl_locker_tramstop.longitude := 10.8987
+!insert (addr_dl_locker_tramstop, geo_addr_dl_locker_tramstop) into AddressContainsGeoLocation
+
+!new Address('addr_dl_cust50002_office')
+!addr_dl_cust50002_office.text := 'Office Reception, Hermanstrasse 12, 86150 Augsburg, Germany'
+!new GeoLocation('geo_addr_dl_cust50002_office')
+!geo_addr_dl_cust50002_office.latitude := 48.3642
+!geo_addr_dl_cust50002_office.longitude := 10.8934
+!insert (addr_dl_cust50002_office, geo_addr_dl_cust50002_office) into AddressContainsGeoLocation
+
+!new Shipment('shp_700000')
+!shp_700000.id := 'S-700000'
+!shp_700000.status := #NEW
+
+!new Shipment('shp_700001')
+!shp_700001.id := 'S-700001'
+!shp_700001.status := #NEW
+
+!new Shipment('shp_700002')
+!shp_700002.id := 'S-700002'
+!shp_700002.status := #NEW
+
+!new Shipment('shp_700003')
+!shp_700003.id := 'S-700003'
+!shp_700003.status := #NEW
+
+!insert (cust_50000, shp_700000) into CustomerConsistsOfShipment
+!insert (cust_50001, shp_700001) into CustomerConsistsOfShipment
+!insert (cust_50001, shp_700002) into CustomerConsistsOfShipment
+!insert (cust_50002, shp_700003) into CustomerConsistsOfShipment
+
+!insert (st_popuplab, shp_700000) into StationShipment
+!insert (st_popuplab, shp_700001) into StationShipment
+!insert (st_popuplab, shp_700002) into StationShipment
+!insert (st_popuplab, shp_700003) into StationShipment
+
+!insert (shp_700000, addr_pu_popuplab_center) into ShipmentContainsPickUpAddress
+!insert (shp_700000, addr_dl_quality_check) into ShipmentContainsDeliveryAddress
+
+!insert (shp_700001, addr_pu_customer50001_home) into ShipmentContainsPickUpAddress
+!insert (shp_700001, addr_dl_locker_tramstop) into ShipmentContainsDeliveryAddress
+
+!insert (shp_700002, addr_pu_popuplab_center) into ShipmentContainsPickUpAddress
+!insert (shp_700002, addr_dl_locker_tramstop) into ShipmentContainsDeliveryAddress
+
+!insert (shp_700003, addr_pu_popuplab_center) into ShipmentContainsPickUpAddress
+!insert (shp_700003, addr_dl_cust50002_office) into ShipmentContainsDeliveryAddress

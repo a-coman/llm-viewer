@@ -1,0 +1,132 @@
+!new Station('st_goettingen')
+!new Station('st_kassel_hub2')
+
+!new Customer('cust_3000')
+!cust_3000.id := 'C-3000'
+!cust_3000.name := 'Felix Brandner'
+!cust_3000.twitterUserName := 'felix_brandner'
+
+!new Customer('cust_3001')
+!cust_3001.id := 'C-3001'
+!cust_3001.name := 'Giulia Romano'
+!cust_3001.twitterUserName := 'giulia_romano'
+
+!new Customer('cust_3002')
+!cust_3002.id := 'C-3002'
+!cust_3002.name := 'Hassan Ali'
+!cust_3002.twitterUserName := 'hassan_ali'
+
+!insert (st_goettingen, cust_3000) into StationContainsCustomer
+!insert (st_goettingen, cust_3001) into StationContainsCustomer
+!insert (st_goettingen, cust_3002) into StationContainsCustomer
+
+!new Driver('drv_30000')
+!drv_30000.id := 'D-30000'
+!drv_30000.name := 'Jule Steinmann'
+
+!new Driver('drv_30001')
+!drv_30001.id := 'D-30001'
+!drv_30001.name := 'Konrad Zielinski'
+
+!insert (st_kassel_hub2, drv_30000) into StationContainsDriver
+!insert (st_kassel_hub2, drv_30001) into StationContainsDriver
+
+!new Address('addr_pu_goe_bookstore')
+!addr_pu_goe_bookstore.text := 'Prinzenstrasse 13 (Bookstore Pickup), 37073 Goettingen, Germany'
+!new GeoLocation('geo_addr_pu_goe_bookstore')
+!geo_addr_pu_goe_bookstore.latitude := 51.5412
+!geo_addr_pu_goe_bookstore.longitude := 9.9356
+!insert (addr_pu_goe_bookstore, geo_addr_pu_goe_bookstore) into AddressContainsGeoLocation
+
+!new Address('addr_dl_goe_home_felix')
+!addr_dl_goe_home_felix.text := 'Goetheallee 8, 37073 Goettingen, Germany'
+!new GeoLocation('geo_addr_dl_goe_home_felix')
+!geo_addr_dl_goe_home_felix.latitude := 51.5348
+!geo_addr_dl_goe_home_felix.longitude := 9.9273
+!insert (addr_dl_goe_home_felix, geo_addr_dl_goe_home_felix) into AddressContainsGeoLocation
+
+!new Address('addr_dl_goe_locker_station')
+!addr_dl_goe_locker_station.text := 'Paketstation 207, Bahnhofsplatz 1, 37073 Goettingen, Germany'
+!new GeoLocation('geo_addr_dl_goe_locker_station')
+!geo_addr_dl_goe_locker_station.latitude := 51.5352
+!geo_addr_dl_goe_locker_station.longitude := 9.9351
+!insert (addr_dl_goe_locker_station, geo_addr_dl_goe_locker_station) into AddressContainsGeoLocation
+
+!new Address('addr_pu_goe_farmstand')
+!addr_pu_goe_farmstand.text := 'Weender Landstrasse 90 (Farm Stand), 37075 Goettingen, Germany'
+!new GeoLocation('geo_addr_pu_goe_farmstand')
+!geo_addr_pu_goe_farmstand.latitude := 51.5564
+!geo_addr_pu_goe_farmstand.longitude := 9.9539
+!insert (addr_pu_goe_farmstand, geo_addr_pu_goe_farmstand) into AddressContainsGeoLocation
+
+!new Address('addr_pu_goe_clinic')
+!addr_pu_goe_clinic.text := 'Robert-Koch-Strasse 40 (Clinic Dispatch), 37075 Goettingen, Germany'
+!new GeoLocation('geo_addr_pu_goe_clinic')
+!geo_addr_pu_goe_clinic.latitude := 51.5540
+!geo_addr_pu_goe_clinic.longitude := 9.9506
+!insert (addr_pu_goe_clinic, geo_addr_pu_goe_clinic) into AddressContainsGeoLocation
+
+!new Address('addr_pu_kassel_hub_gate')
+!addr_pu_kassel_hub_gate.text := 'Hub Gate 2, Leipziger Strasse 200, 34123 Kassel, Germany'
+!new GeoLocation('geo_addr_pu_kassel_hub_gate')
+!geo_addr_pu_kassel_hub_gate.latitude := 51.3104
+!geo_addr_pu_kassel_hub_gate.longitude := 9.5426
+!insert (addr_pu_kassel_hub_gate, geo_addr_pu_kassel_hub_gate) into AddressContainsGeoLocation
+
+!new Address('addr_dl_goe_office_complex')
+!addr_dl_goe_office_complex.text := 'Grisebachstrasse 6 (Office Reception), 37077 Goettingen, Germany'
+!new GeoLocation('geo_addr_dl_goe_office_complex')
+!geo_addr_dl_goe_office_complex.latitude := 51.5501
+!geo_addr_dl_goe_office_complex.longitude := 9.9482
+!insert (addr_dl_goe_office_complex, geo_addr_dl_goe_office_complex) into AddressContainsGeoLocation
+
+!new Shipment('shp_300001')
+!shp_300001.id := 'S-300001'
+!shp_300001.status := #NEW
+
+!new Shipment('shp_300002')
+!shp_300002.id := 'S-300002'
+!shp_300002.status := #ASSIGNED
+
+!new Shipment('shp_300003')
+!shp_300003.id := 'S-300003'
+!shp_300003.status := #UNDERWAY
+
+!new Shipment('shp_300004')
+!shp_300004.id := 'S-300004'
+!shp_300004.status := #DELIVERED
+
+!new Shipment('shp_300005')
+!shp_300005.id := 'S-300005'
+!shp_300005.status := #ASSIGNED
+
+!insert (cust_3000, shp_300001) into CustomerConsistsOfShipment
+!insert (cust_3000, shp_300002) into CustomerConsistsOfShipment
+!insert (cust_3001, shp_300003) into CustomerConsistsOfShipment
+!insert (cust_3002, shp_300004) into CustomerConsistsOfShipment
+!insert (cust_3001, shp_300005) into CustomerConsistsOfShipment
+
+!insert (st_goettingen, shp_300001) into StationShipment
+!insert (st_goettingen, shp_300002) into StationShipment
+!insert (st_goettingen, shp_300003) into StationShipment
+!insert (st_goettingen, shp_300004) into StationShipment
+!insert (st_kassel_hub2, shp_300005) into StationShipment
+
+!insert (drv_30000, shp_300002) into DriverShipment
+!insert (drv_30000, shp_300003) into DriverShipment
+!insert (drv_30001, shp_300005) into DriverShipment
+
+!insert (shp_300001, addr_pu_goe_bookstore) into ShipmentContainsPickUpAddress
+!insert (shp_300001, addr_dl_goe_home_felix) into ShipmentContainsDeliveryAddress
+
+!insert (shp_300002, addr_pu_goe_bookstore) into ShipmentContainsPickUpAddress
+!insert (shp_300002, addr_dl_goe_locker_station) into ShipmentContainsDeliveryAddress
+
+!insert (shp_300003, addr_pu_goe_farmstand) into ShipmentContainsPickUpAddress
+!insert (shp_300003, addr_pu_goe_bookstore) into ShipmentContainsDeliveryAddress
+
+!insert (shp_300004, addr_pu_goe_clinic) into ShipmentContainsPickUpAddress
+!insert (shp_300004, addr_dl_goe_home_felix) into ShipmentContainsDeliveryAddress
+
+!insert (shp_300005, addr_pu_kassel_hub_gate) into ShipmentContainsPickUpAddress
+!insert (shp_300005, addr_dl_goe_office_complex) into ShipmentContainsDeliveryAddress

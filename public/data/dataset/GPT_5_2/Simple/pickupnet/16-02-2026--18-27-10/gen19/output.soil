@@ -1,0 +1,60 @@
+!new Station('st_remote_depot')
+!new Station('st_city_service')
+
+!new Driver('drv_9000')
+!drv_9000.id := 'D-9000'
+!drv_9000.name := 'Edda Fischer'
+!insert (st_remote_depot, drv_9000) into StationContainsDriver
+
+!new Customer('cust_900')
+!cust_900.id := 'C-900'
+!cust_900.name := 'Rui Matsumoto'
+!cust_900.twitterUserName := 'rui_matsumoto'
+!insert (st_city_service, cust_900) into StationContainsCustomer
+
+!new Customer('cust_901')
+!cust_901.id := 'C-901'
+!cust_901.name := 'Sabine Krueger'
+!cust_901.twitterUserName := 'sabine_krueger'
+!insert (st_city_service, cust_901) into StationContainsCustomer
+
+!new Shipment('shp_90001')
+!shp_90001.id := 'S-90001'
+!shp_90001.status := #NEW
+
+!new Shipment('shp_90002')
+!shp_90002.id := 'S-90002'
+!shp_90002.status := #ASSIGNED
+
+!insert (cust_900, shp_90001) into CustomerConsistsOfShipment
+!insert (cust_900, shp_90002) into CustomerConsistsOfShipment
+
+!insert (st_city_service, shp_90001) into StationShipment
+!insert (st_city_service, shp_90002) into StationShipment
+
+!new Address('addr_pu_city_kiosk')
+!addr_pu_city_kiosk.text := 'Neumarkt 1 (Kiosk Pickup), 50667 Cologne, Germany'
+!new GeoLocation('geo_addr_pu_city_kiosk')
+!geo_addr_pu_city_kiosk.latitude := 50.9370
+!geo_addr_pu_city_kiosk.longitude := 6.9566
+!insert (addr_pu_city_kiosk, geo_addr_pu_city_kiosk) into AddressContainsGeoLocation
+
+!new Address('addr_dl_city_hotel')
+!addr_dl_city_hotel.text := 'Komodienstrasse 3 (Hotel Reception), 50667 Cologne, Germany'
+!new GeoLocation('geo_addr_dl_city_hotel')
+!geo_addr_dl_city_hotel.latitude := 50.9413
+!geo_addr_dl_city_hotel.longitude := 6.9583
+!insert (addr_dl_city_hotel, geo_addr_dl_city_hotel) into AddressContainsGeoLocation
+
+!new Address('addr_dl_city_lab')
+!addr_dl_city_lab.text := 'Sachsenring 79 (Lab Entrance), 50677 Cologne, Germany'
+!new GeoLocation('geo_addr_dl_city_lab')
+!geo_addr_dl_city_lab.latitude := 50.9228
+!geo_addr_dl_city_lab.longitude := 6.9531
+!insert (addr_dl_city_lab, geo_addr_dl_city_lab) into AddressContainsGeoLocation
+
+!insert (shp_90001, addr_pu_city_kiosk) into ShipmentContainsPickUpAddress
+!insert (shp_90001, addr_dl_city_hotel) into ShipmentContainsDeliveryAddress
+
+!insert (shp_90002, addr_pu_city_kiosk) into ShipmentContainsPickUpAddress
+!insert (shp_90002, addr_dl_city_lab) into ShipmentContainsDeliveryAddress

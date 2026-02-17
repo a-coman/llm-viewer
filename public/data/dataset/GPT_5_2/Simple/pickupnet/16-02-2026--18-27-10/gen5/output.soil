@@ -1,0 +1,84 @@
+!new Station('st_leipzig')
+!new Station('st_dresden')
+
+!new Customer('cust_040')
+!cust_040.id := 'C-040'
+!cust_040.name := 'Nora Heinrich'
+!cust_040.twitterUserName := 'nora_heinrich'
+!insert (st_leipzig, cust_040) into StationContainsCustomer
+
+!new Driver('drv_600')
+!drv_600.id := 'D-600'
+!drv_600.name := 'Paul Neumann'
+
+!new Driver('drv_601')
+!drv_601.id := 'D-601'
+!drv_601.name := 'Selin Arslan'
+
+!new Driver('drv_610')
+!drv_610.id := 'D-610'
+!drv_610.name := 'Victor Lange'
+
+!insert (st_leipzig, drv_600) into StationContainsDriver
+!insert (st_leipzig, drv_601) into StationContainsDriver
+!insert (st_dresden, drv_610) into StationContainsDriver
+
+!new Shipment('shp_9101')
+!shp_9101.id := 'S-9101'
+!shp_9101.status := #NEW
+
+!new Shipment('shp_9102')
+!shp_9102.id := 'S-9102'
+!shp_9102.status := #ASSIGNED
+
+!new Shipment('shp_9103')
+!shp_9103.id := 'S-9103'
+!shp_9103.status := #DELIVERED
+
+!insert (cust_040, shp_9101) into CustomerConsistsOfShipment
+!insert (cust_040, shp_9102) into CustomerConsistsOfShipment
+!insert (cust_040, shp_9103) into CustomerConsistsOfShipment
+
+!insert (st_leipzig, shp_9101) into StationShipment
+!insert (st_leipzig, shp_9102) into StationShipment
+!insert (st_dresden, shp_9103) into StationShipment
+
+!insert (drv_600, shp_9102) into DriverShipment
+!insert (drv_610, shp_9103) into DriverShipment
+
+!new Address('addr_pu_lpz_locker')
+!addr_pu_lpz_locker.text := 'Petersstrasse 12 (Locker), 04109 Leipzig, Germany'
+!new GeoLocation('geo_addr_pu_lpz_locker')
+!geo_addr_pu_lpz_locker.latitude := 51.3404
+!geo_addr_pu_lpz_locker.longitude := 12.3731
+!insert (addr_pu_lpz_locker, geo_addr_pu_lpz_locker) into AddressContainsGeoLocation
+
+!new Address('addr_dl_lpz_shared')
+!addr_dl_lpz_shared.text := 'Karl-Liebknecht-Strasse 40, 04107 Leipzig, Germany'
+!new GeoLocation('geo_addr_dl_lpz_shared')
+!geo_addr_dl_lpz_shared.latitude := 51.3289
+!geo_addr_dl_lpz_shared.longitude := 12.3719
+!insert (addr_dl_lpz_shared, geo_addr_dl_lpz_shared) into AddressContainsGeoLocation
+
+!new Address('addr_dl_lpz_office')
+!addr_dl_lpz_office.text := 'Dittrichring 16, 04109 Leipzig, Germany'
+!new GeoLocation('geo_addr_dl_lpz_office')
+!geo_addr_dl_lpz_office.latitude := 51.3398
+!geo_addr_dl_lpz_office.longitude := 12.3660
+!insert (addr_dl_lpz_office, geo_addr_dl_lpz_office) into AddressContainsGeoLocation
+
+!new Address('addr_pu_drs_depot')
+!addr_pu_drs_depot.text := 'Ferdinandplatz 2 (Depot), 01069 Dresden, Germany'
+!new GeoLocation('geo_addr_pu_drs_depot')
+!geo_addr_pu_drs_depot.latitude := 51.0459
+!geo_addr_pu_drs_depot.longitude := 13.7392
+!insert (addr_pu_drs_depot, geo_addr_pu_drs_depot) into AddressContainsGeoLocation
+
+!insert (shp_9101, addr_pu_lpz_locker) into ShipmentContainsPickUpAddress
+!insert (shp_9101, addr_dl_lpz_shared) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9102, addr_pu_lpz_locker) into ShipmentContainsPickUpAddress
+!insert (shp_9102, addr_dl_lpz_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9103, addr_pu_drs_depot) into ShipmentContainsPickUpAddress
+!insert (shp_9103, addr_dl_lpz_shared) into ShipmentContainsDeliveryAddress

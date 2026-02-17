@@ -1,0 +1,139 @@
+!new Station('st_halle')
+
+!new Customer('cust_700')
+!cust_700.id := 'C-700'
+!cust_700.name := 'Miriam Scholz'
+!cust_700.twitterUserName := 'miriam_scholz'
+!insert (st_halle, cust_700) into StationContainsCustomer
+
+!new Customer('cust_701')
+!cust_701.id := 'C-701'
+!cust_701.name := 'Oskar Lindner'
+!cust_701.twitterUserName := 'oskar_lindner'
+!insert (st_halle, cust_701) into StationContainsCustomer
+
+!new Customer('cust_702')
+!cust_702.id := 'C-702'
+!cust_702.name := 'Priyanka Das'
+!cust_702.twitterUserName := 'priyanka_das'
+!insert (st_halle, cust_702) into StationContainsCustomer
+
+!new Customer('cust_703')
+!cust_703.id := 'C-703'
+!cust_703.name := 'Rafael Costa'
+!cust_703.twitterUserName := 'rafa_costa'
+!insert (st_halle, cust_703) into StationContainsCustomer
+
+!new Driver('drv_7000')
+!drv_7000.id := 'D-7000'
+!drv_7000.name := 'Nico Werner'
+!insert (st_halle, drv_7000) into StationContainsDriver
+
+!new Driver('drv_7001')
+!drv_7001.id := 'D-7001'
+!drv_7001.name := 'Selma Kurt'
+!insert (st_halle, drv_7001) into StationContainsDriver
+
+!new Driver('drv_7002')
+!drv_7002.id := 'D-7002'
+!drv_7002.name := 'Tarek Jamil'
+!insert (st_halle, drv_7002) into StationContainsDriver
+
+!new Address('addr_pu_halle_depot')
+!addr_pu_halle_depot.text := 'Delitzscher Strasse 70 (Depot), 06112 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_pu_halle_depot')
+!geo_addr_pu_halle_depot.latitude := 51.4879
+!geo_addr_pu_halle_depot.longitude := 11.9996
+!insert (addr_pu_halle_depot, geo_addr_pu_halle_depot) into AddressContainsGeoLocation
+
+!new Address('addr_dl_halle_locker')
+!addr_dl_halle_locker.text := 'Paketstation 87, Marktplatz 10, 06108 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_dl_halle_locker')
+!geo_addr_dl_halle_locker.latitude := 51.4824
+!geo_addr_dl_halle_locker.longitude := 11.9692
+!insert (addr_dl_halle_locker, geo_addr_dl_halle_locker) into AddressContainsGeoLocation
+
+!new Address('addr_dl_halle_uni')
+!addr_dl_halle_uni.text := 'Universitaetsring 4, 06108 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_dl_halle_uni')
+!geo_addr_dl_halle_uni.latitude := 51.4837
+!geo_addr_dl_halle_uni.longitude := 11.9685
+!insert (addr_dl_halle_uni, geo_addr_dl_halle_uni) into AddressContainsGeoLocation
+
+!new Address('addr_pu_halle_home_miriam')
+!addr_pu_halle_home_miriam.text := 'Ludwig-Wucherer-Strasse 10, 06108 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_pu_halle_home_miriam')
+!geo_addr_pu_halle_home_miriam.latitude := 51.4909
+!geo_addr_pu_halle_home_miriam.longitude := 11.9636
+!insert (addr_pu_halle_home_miriam, geo_addr_pu_halle_home_miriam) into AddressContainsGeoLocation
+
+!new Address('addr_dl_leipzig_tradefair')
+!addr_dl_leipzig_tradefair.text := 'Messe-Allee 1, 04356 Leipzig, Germany'
+!new GeoLocation('geo_addr_dl_leipzig_tradefair')
+!geo_addr_dl_leipzig_tradefair.latitude := 51.3967
+!geo_addr_dl_leipzig_tradefair.longitude := 12.3976
+!insert (addr_dl_leipzig_tradefair, geo_addr_dl_leipzig_tradefair) into AddressContainsGeoLocation
+
+!new Address('addr_pu_halle_pharmacy')
+!addr_pu_halle_pharmacy.text := 'Leipziger Strasse 2, 06108 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_pu_halle_pharmacy')
+!geo_addr_pu_halle_pharmacy.latitude := 51.4818
+!geo_addr_pu_halle_pharmacy.longitude := 11.9727
+!insert (addr_pu_halle_pharmacy, geo_addr_pu_halle_pharmacy) into AddressContainsGeoLocation
+
+!new Address('addr_dl_halle_cityhall')
+!addr_dl_halle_cityhall.text := 'Marktplatz 1 (Rathaus), 06108 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_dl_halle_cityhall')
+!geo_addr_dl_halle_cityhall.latitude := 51.4827
+!geo_addr_dl_halle_cityhall.longitude := 11.9690
+!insert (addr_dl_halle_cityhall, geo_addr_dl_halle_cityhall) into AddressContainsGeoLocation
+
+!new Shipment('shp_70001')
+!shp_70001.id := 'S-70001'
+!shp_70001.status := #NEW
+
+!new Shipment('shp_70002')
+!shp_70002.id := 'S-70002'
+!shp_70002.status := #ASSIGNED
+
+!new Shipment('shp_70003')
+!shp_70003.id := 'S-70003'
+!shp_70003.status := #DELIVERED
+
+!new Shipment('shp_70004')
+!shp_70004.id := 'S-70004'
+!shp_70004.status := #UNDERWAY
+
+!new Shipment('shp_70005')
+!shp_70005.id := 'S-70005'
+!shp_70005.status := #NEW
+
+!insert (cust_700, shp_70001) into CustomerConsistsOfShipment
+!insert (cust_700, shp_70002) into CustomerConsistsOfShipment
+!insert (cust_701, shp_70003) into CustomerConsistsOfShipment
+!insert (cust_702, shp_70004) into CustomerConsistsOfShipment
+!insert (cust_702, shp_70005) into CustomerConsistsOfShipment
+
+!insert (st_halle, shp_70001) into StationShipment
+!insert (st_halle, shp_70002) into StationShipment
+!insert (st_halle, shp_70003) into StationShipment
+!insert (st_halle, shp_70004) into StationShipment
+!insert (st_halle, shp_70005) into StationShipment
+
+!insert (drv_7001, shp_70002) into DriverShipment
+!insert (drv_7001, shp_70004) into DriverShipment
+
+!insert (shp_70001, addr_pu_halle_depot) into ShipmentContainsPickUpAddress
+!insert (shp_70001, addr_dl_halle_locker) into ShipmentContainsDeliveryAddress
+
+!insert (shp_70002, addr_pu_halle_depot) into ShipmentContainsPickUpAddress
+!insert (shp_70002, addr_dl_halle_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_70003, addr_pu_halle_home_miriam) into ShipmentContainsPickUpAddress
+!insert (shp_70003, addr_pu_halle_depot) into ShipmentContainsDeliveryAddress
+
+!insert (shp_70004, addr_pu_halle_depot) into ShipmentContainsPickUpAddress
+!insert (shp_70004, addr_dl_leipzig_tradefair) into ShipmentContainsDeliveryAddress
+
+!insert (shp_70005, addr_pu_halle_pharmacy) into ShipmentContainsPickUpAddress
+!insert (shp_70005, addr_dl_halle_cityhall) into ShipmentContainsDeliveryAddress

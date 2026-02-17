@@ -378,11 +378,78 @@ The `BankAccount` model describes a system where individuals, represented by `Pe
 - **AdultOwners**: All owners of an account must be 18 years or older.
 - **positiveBalance**: The balance of an account must always be non-negative.
 
+# Category: Boundary Instances
 Create a boundary case instance. This is an instance that focuses on the extreme upper or lower limits of valid input ranges. For example:
 - Upper or lower limits of multiplicities.
-- For numbers in a range, the minimum and maximum valid value.
+- For numbers in a range, the minimum and maximum valid values.
 - Empty collections when possible, i.e., when they do not violate the semantics of the model or its constraints.
 
+
+" }] }
+```
+
+|Request|
+|---|
+Model: gpt-4o
+Max-Tokens: null
+Temperature: 1.0
+Top-P: 1.0
+
+# Input IListCreator : baseline1
+|Messages|
+|---|
+```
+SystemMessage { text = "Your task is to generate a complete and diverse instance, in plain English, for a given category and based on a provided conceptual model description. The instance must adhere to these requirements:
+- Be self-contained: Include all required attributes, relationships, and related entities in full detail.
+- Conform to the model: Fulfil the constraints, multiplicities, relatinoships and attributes defined in the class diagram model.
+- Understand the context: Ensure that its attributes and relationships are relevant.
+- Avoid duplication of instances: Take into consideration those instances previously built to avoid redundancy.
+- Semantic diversity: From a semantic point of view, incorporate varied scenarios, including regional, linguistic, or cultural differences.
+- Structural diversity: Include instances with different number of elements, different number of relationships and complexity, and create varied examples by changing entity attributes.
+" }
+```
+```
+UserMessage { name = null contents = [TextContent { text = "# Conceptual model description:
+## Description
+The `BankAccount` model describes a system where individuals, represented by `Person` instances, own and use `Account` instances that are linked to a `Bank`. The model is designed to represent the relationships and constraints involved with bank accounts, including the ownership and usage of these accounts and their association with banks.
+
+### Components
+- **Bank**
+  - Attributes:
+    - `country: String`: Represents the country where the bank is located.
+    - `name: String`: The name of the bank.
+    - `bic: String`: The bank's international code for identifying financial institutions.
+
+- **Account**
+  - Attributes:
+    - `iban: String`: The international bank account number of the account.
+    - `balance: Integer`: The current balance of the account.
+
+- **Person**
+  - Attributes:
+    - `firstName: String`: The first name of the person.
+    - `lastName: String`: The last name of the person.
+    - `age: Integer`: The age of the person.
+
+## Relationships
+- **Ownership Association**
+  - **Person** (`owner` role) [1..2]: Each account must have at least one and at most two owners.
+  - **Account** (`accounts` role) [*]: A person can own multiple accounts.
+
+- **Use Association**
+  - **Person** (`user` role) [*]: A person can use multiple accounts.
+  - **Account** (`usedAccounts` role) [*]: An account can be used by multiple people.
+
+- **AccountOfBanks Composition**
+  - **Bank** (`bank` role) [1]: Each account is associated with exactly one bank.
+  - **Account** (`accounts` role) [*]: A bank can have multiple accounts.
+
+## Invariants
+- **AdultOwners**: All owners of an account must be 18 years or older.
+- **positiveBalance**: The balance of an account must always be non-negative.
+
+# Category: Baseline Instances
+Create a baseline instance. This is an instance that represents a typical/standard scenario. Ensure every class and relationship is present in the instance at least once.
 
 " }] }
 ```

@@ -1,0 +1,91 @@
+!new Station('st_temporary_relief')
+!new Station('st_longhaul_base')
+
+!new Customer('cust_60000')
+!cust_60000.id := 'C-60000'
+!cust_60000.name := 'Klara Beckmann'
+!cust_60000.twitterUserName := 'klara_beckmann'
+!insert (st_temporary_relief, cust_60000) into StationContainsCustomer
+
+!new Customer('cust_60001')
+!cust_60001.id := 'C-60001'
+!cust_60001.name := 'Hiro Watanabe'
+!cust_60001.twitterUserName := 'hiro_w'
+!insert (st_temporary_relief, cust_60001) into StationContainsCustomer
+
+!new Driver('drv_60000')
+!drv_60000.id := 'D-60000'
+!drv_60000.name := 'Petar Jovic'
+!insert (st_longhaul_base, drv_60000) into StationContainsDriver
+
+!new Driver('drv_60001')
+!drv_60001.id := 'D-60001'
+!drv_60001.name := 'Nora Iqbal'
+!insert (st_longhaul_base, drv_60001) into StationContainsDriver
+
+!new Shipment('shp_800000')
+!shp_800000.id := 'S-800000'
+!shp_800000.status := #ASSIGNED
+
+!new Shipment('shp_800001')
+!shp_800001.id := 'S-800001'
+!shp_800001.status := #UNDERWAY
+
+!new Shipment('shp_800002')
+!shp_800002.id := 'S-800002'
+!shp_800002.status := #NEW
+
+!insert (cust_60000, shp_800000) into CustomerConsistsOfShipment
+!insert (cust_60000, shp_800001) into CustomerConsistsOfShipment
+!insert (cust_60000, shp_800002) into CustomerConsistsOfShipment
+
+!insert (st_temporary_relief, shp_800000) into StationShipment
+!insert (st_temporary_relief, shp_800001) into StationShipment
+!insert (st_temporary_relief, shp_800002) into StationShipment
+
+!insert (drv_60000, shp_800000) into DriverShipment
+!insert (drv_60001, shp_800001) into DriverShipment
+
+!new Address('addr_pu_relief_warehouse')
+!addr_pu_relief_warehouse.text := 'Relief Warehouse, Gewerbepark 3, 06712 Zeitz, Germany'
+!new GeoLocation('geo_addr_pu_relief_warehouse')
+!geo_addr_pu_relief_warehouse.latitude := 51.0469
+!geo_addr_pu_relief_warehouse.longitude := 12.1409
+!insert (addr_pu_relief_warehouse, geo_addr_pu_relief_warehouse) into AddressContainsGeoLocation
+
+!new Address('addr_dl_shelter_halle')
+!addr_dl_shelter_halle.text := 'Emergency Shelter, Richard-Wagner-Strasse 16, 06114 Halle (Saale), Germany'
+!new GeoLocation('geo_addr_dl_shelter_halle')
+!geo_addr_dl_shelter_halle.latitude := 51.4960
+!geo_addr_dl_shelter_halle.longitude := 11.9698
+!insert (addr_dl_shelter_halle, geo_addr_dl_shelter_halle) into AddressContainsGeoLocation
+
+!new Address('addr_dl_clinic_merseburg')
+!addr_dl_clinic_merseburg.text := 'Clinic Receiving, Rudolf-Breitscheid-Strasse 6, 06217 Merseburg, Germany'
+!new GeoLocation('geo_addr_dl_clinic_merseburg')
+!geo_addr_dl_clinic_merseburg.latitude := 51.3528
+!geo_addr_dl_clinic_merseburg.longitude := 11.9891
+!insert (addr_dl_clinic_merseburg, geo_addr_dl_clinic_merseburg) into AddressContainsGeoLocation
+
+!new Address('addr_pu_klara_home')
+!addr_pu_klara_home.text := 'Gartenweg 9, 06618 Naumburg (Saale), Germany'
+!new GeoLocation('geo_addr_pu_klara_home')
+!geo_addr_pu_klara_home.latitude := 51.1527
+!geo_addr_pu_klara_home.longitude := 11.8134
+!insert (addr_pu_klara_home, geo_addr_pu_klara_home) into AddressContainsGeoLocation
+
+!new Address('addr_dl_relief_intake')
+!addr_dl_relief_intake.text := 'Relief Intake Desk, Bahnhofstrasse 2, 06712 Zeitz, Germany'
+!new GeoLocation('geo_addr_dl_relief_intake')
+!geo_addr_dl_relief_intake.latitude := 51.0496
+!geo_addr_dl_relief_intake.longitude := 12.1369
+!insert (addr_dl_relief_intake, geo_addr_dl_relief_intake) into AddressContainsGeoLocation
+
+!insert (shp_800000, addr_pu_relief_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_800000, addr_dl_shelter_halle) into ShipmentContainsDeliveryAddress
+
+!insert (shp_800001, addr_pu_relief_warehouse) into ShipmentContainsPickUpAddress
+!insert (shp_800001, addr_dl_clinic_merseburg) into ShipmentContainsDeliveryAddress
+
+!insert (shp_800002, addr_pu_klara_home) into ShipmentContainsPickUpAddress
+!insert (shp_800002, addr_dl_relief_intake) into ShipmentContainsDeliveryAddress

@@ -1,0 +1,104 @@
+!new Station('st_remote_island')
+!new Station('st_central_dispatch')
+
+!new Customer('cust_1500')
+!cust_1500.id := 'C-1500'
+!cust_1500.name := 'Ines Borgmann'
+!cust_1500.twitterUserName := 'ines_borgmann'
+!insert (st_remote_island, cust_1500) into StationContainsCustomer
+
+!new Customer('cust_1501')
+!cust_1501.id := 'C-1501'
+!cust_1501.name := 'Kamil Nowicki'
+!cust_1501.twitterUserName := 'kamil_nowicki'
+!insert (st_remote_island, cust_1501) into StationContainsCustomer
+
+!new Customer('cust_1502')
+!cust_1502.id := 'C-1502'
+!cust_1502.name := 'Lena Schwarz'
+!cust_1502.twitterUserName := 'lena_schwarz'
+!insert (st_central_dispatch, cust_1502) into StationContainsCustomer
+
+!new Driver('drv_15000')
+!drv_15000.id := 'D-15000'
+!drv_15000.name := 'Sven Rohde'
+!insert (st_central_dispatch, drv_15000) into StationContainsDriver
+
+!new Driver('drv_15001')
+!drv_15001.id := 'D-15001'
+!drv_15001.name := 'Aisha Qureshi'
+!insert (st_central_dispatch, drv_15001) into StationContainsDriver
+
+!new Shipment('shp_150001')
+!shp_150001.id := 'S-150001'
+!shp_150001.status := #ASSIGNED
+
+!new Shipment('shp_150002')
+!shp_150002.id := 'S-150002'
+!shp_150002.status := #NEW
+
+!new Shipment('shp_150003')
+!shp_150003.id := 'S-150003'
+!shp_150003.status := #DELIVERED
+
+!insert (cust_1500, shp_150001) into CustomerConsistsOfShipment
+!insert (cust_1500, shp_150002) into CustomerConsistsOfShipment
+!insert (cust_1501, shp_150003) into CustomerConsistsOfShipment
+
+!insert (st_central_dispatch, shp_150001) into StationShipment
+!insert (st_central_dispatch, shp_150002) into StationShipment
+!insert (st_central_dispatch, shp_150003) into StationShipment
+
+!insert (drv_15000, shp_150001) into DriverShipment
+!insert (drv_15000, shp_150003) into DriverShipment
+
+!new Address('addr_pu_central_supplier_1')
+!addr_pu_central_supplier_1.text := 'Vendor Dock 3, Spaldingstrasse 110, 20097 Hamburg, Germany'
+!new GeoLocation('geo_addr_pu_central_supplier_1')
+!geo_addr_pu_central_supplier_1.latitude := 53.5483
+!geo_addr_pu_central_supplier_1.longitude := 10.0187
+!insert (addr_pu_central_supplier_1, geo_addr_pu_central_supplier_1) into AddressContainsGeoLocation
+
+!new Address('addr_pu_central_supplier_2')
+!addr_pu_central_supplier_2.text := 'Warehouse West, Ruhrstrasse 11, 22761 Hamburg, Germany'
+!new GeoLocation('geo_addr_pu_central_supplier_2')
+!geo_addr_pu_central_supplier_2.latitude := 53.5607
+!geo_addr_pu_central_supplier_2.longitude := 9.9145
+!insert (addr_pu_central_supplier_2, geo_addr_pu_central_supplier_2) into AddressContainsGeoLocation
+
+!new Address('addr_pu_island_port')
+!addr_pu_island_port.text := 'Island Ferry Terminal (Drop-off), Hafenstrasse 1, 25938 Wyk auf Foehr, Germany'
+!new GeoLocation('geo_addr_pu_island_port')
+!geo_addr_pu_island_port.latitude := 54.6912
+!geo_addr_pu_island_port.longitude := 8.5674
+!insert (addr_pu_island_port, geo_addr_pu_island_port) into AddressContainsGeoLocation
+
+!new Address('addr_dl_island_home_ines')
+!addr_dl_island_home_ines.text := 'Mittelweg 7, 25938 Wyk auf Foehr, Germany'
+!new GeoLocation('geo_addr_dl_island_home_ines')
+!geo_addr_dl_island_home_ines.latitude := 54.6821
+!geo_addr_dl_island_home_ines.longitude := 8.5660
+!insert (addr_dl_island_home_ines, geo_addr_dl_island_home_ines) into AddressContainsGeoLocation
+
+!new Address('addr_dl_central_inspection')
+!addr_dl_central_inspection.text := 'Inspection Center, Billbrookdeich 15, 22113 Hamburg, Germany'
+!new GeoLocation('geo_addr_dl_central_inspection')
+!geo_addr_dl_central_inspection.latitude := 53.5226
+!geo_addr_dl_central_inspection.longitude := 10.0716
+!insert (addr_dl_central_inspection, geo_addr_dl_central_inspection) into AddressContainsGeoLocation
+
+!new Address('addr_dl_island_locker')
+!addr_dl_island_locker.text := 'Parcel Locker 12, Sandwall 2, 25938 Wyk auf Foehr, Germany'
+!new GeoLocation('geo_addr_dl_island_locker')
+!geo_addr_dl_island_locker.latitude := 54.6897
+!geo_addr_dl_island_locker.longitude := 8.5651
+!insert (addr_dl_island_locker, geo_addr_dl_island_locker) into AddressContainsGeoLocation
+
+!insert (shp_150001, addr_pu_central_supplier_1) into ShipmentContainsPickUpAddress
+!insert (shp_150001, addr_dl_island_home_ines) into ShipmentContainsDeliveryAddress
+
+!insert (shp_150002, addr_pu_island_port) into ShipmentContainsPickUpAddress
+!insert (shp_150002, addr_dl_central_inspection) into ShipmentContainsDeliveryAddress
+
+!insert (shp_150003, addr_pu_central_supplier_2) into ShipmentContainsPickUpAddress
+!insert (shp_150003, addr_dl_island_locker) into ShipmentContainsDeliveryAddress

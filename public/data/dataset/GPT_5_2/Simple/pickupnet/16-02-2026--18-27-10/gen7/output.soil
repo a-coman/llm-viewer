@@ -1,0 +1,104 @@
+!new Station('st_bremen')
+!new Station('st_hanover')
+!new Station('st_kiel')
+
+!new Customer('cust_060')
+!cust_060.id := 'C-060'
+!cust_060.name := 'Quirin Adler'
+!cust_060.twitterUserName := 'quirin_adler'
+
+!new Customer('cust_061')
+!cust_061.id := 'C-061'
+!cust_061.name := 'Rina Okafor'
+!cust_061.twitterUserName := 'rina_okafor'
+
+!new Customer('cust_062')
+!cust_062.id := 'C-062'
+!cust_062.name := 'Santiago Ruiz'
+!cust_062.twitterUserName := 'santi_ruiz'
+
+!insert (st_bremen, cust_060) into StationContainsCustomer
+!insert (st_bremen, cust_061) into StationContainsCustomer
+!insert (st_bremen, cust_062) into StationContainsCustomer
+
+!new Driver('drv_800')
+!drv_800.id := 'D-800'
+!drv_800.name := 'Franziska Holm'
+
+!new Driver('drv_801')
+!drv_801.id := 'D-801'
+!drv_801.name := 'Nikolai Petrov'
+
+!new Driver('drv_802')
+!drv_802.id := 'D-802'
+!drv_802.name := 'Merve Aydin'
+
+!insert (st_hanover, drv_800) into StationContainsDriver
+!insert (st_hanover, drv_801) into StationContainsDriver
+!insert (st_bremen, drv_802) into StationContainsDriver
+
+!new Shipment('shp_9901')
+!shp_9901.id := 'S-9901'
+!shp_9901.status := #NEW
+
+!new Shipment('shp_9902')
+!shp_9902.id := 'S-9902'
+!shp_9902.status := #ASSIGNED
+
+!new Shipment('shp_9903')
+!shp_9903.id := 'S-9903'
+!shp_9903.status := #DELIVERED
+
+!insert (st_bremen, shp_9901) into StationShipment
+!insert (st_bremen, shp_9902) into StationShipment
+!insert (st_bremen, shp_9903) into StationShipment
+
+!insert (cust_060, shp_9901) into CustomerConsistsOfShipment
+!insert (cust_060, shp_9902) into CustomerConsistsOfShipment
+!insert (cust_062, shp_9903) into CustomerConsistsOfShipment
+
+!insert (drv_802, shp_9902) into DriverShipment
+
+!new Address('addr_pu_bre_hub')
+!addr_pu_bre_hub.text := 'Überseering 2 (Hub), 28217 Bremen, Germany'
+!new GeoLocation('geo_addr_pu_bre_hub')
+!geo_addr_pu_bre_hub.latitude := 53.1118
+!geo_addr_pu_bre_hub.longitude := 8.7669
+!insert (addr_pu_bre_hub, geo_addr_pu_bre_hub) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_home_quirin')
+!addr_dl_bre_home_quirin.text := 'Böttcherstrasse 3, 28195 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_home_quirin')
+!geo_addr_dl_bre_home_quirin.latitude := 53.0759
+!geo_addr_dl_bre_home_quirin.longitude := 8.8073
+!insert (addr_dl_bre_home_quirin, geo_addr_dl_bre_home_quirin) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_office_quirin')
+!addr_dl_bre_office_quirin.text := 'Herdentorsteinweg 25, 28195 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_office_quirin')
+!geo_addr_dl_bre_office_quirin.latitude := 53.0807
+!geo_addr_dl_bre_office_quirin.longitude := 8.8050
+!insert (addr_dl_bre_office_quirin, geo_addr_dl_bre_office_quirin) into AddressContainsGeoLocation
+
+!new Address('addr_pu_bre_home_santiago')
+!addr_pu_bre_home_santiago.text := 'Vor dem Steintor 120, 28203 Bremen, Germany'
+!new GeoLocation('geo_addr_pu_bre_home_santiago')
+!geo_addr_pu_bre_home_santiago.latitude := 53.0744
+!geo_addr_pu_bre_home_santiago.longitude := 8.8315
+!insert (addr_pu_bre_home_santiago, geo_addr_pu_bre_home_santiago) into AddressContainsGeoLocation
+
+!new Address('addr_dl_bre_hub_returns')
+!addr_dl_bre_hub_returns.text := 'Hansator 5 (Returns Desk), 28217 Bremen, Germany'
+!new GeoLocation('geo_addr_dl_bre_hub_returns')
+!geo_addr_dl_bre_hub_returns.latitude := 53.1092
+!geo_addr_dl_bre_hub_returns.longitude := 8.7584
+!insert (addr_dl_bre_hub_returns, geo_addr_dl_bre_hub_returns) into AddressContainsGeoLocation
+
+!insert (shp_9901, addr_pu_bre_hub) into ShipmentContainsPickUpAddress
+!insert (shp_9901, addr_dl_bre_home_quirin) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9902, addr_pu_bre_hub) into ShipmentContainsPickUpAddress
+!insert (shp_9902, addr_dl_bre_office_quirin) into ShipmentContainsDeliveryAddress
+
+!insert (shp_9903, addr_pu_bre_home_santiago) into ShipmentContainsPickUpAddress
+!insert (shp_9903, addr_dl_bre_hub_returns) into ShipmentContainsDeliveryAddress

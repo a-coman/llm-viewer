@@ -1,0 +1,146 @@
+!new Station('st_ulm')
+!new Station('st_kassel')
+!new Station('st_regensburg')
+
+!new Customer('cust_100')
+!cust_100.id := 'C-100'
+!cust_100.name := 'Benno Hartl'
+!cust_100.twitterUserName := 'benno_hartl'
+!insert (st_ulm, cust_100) into StationContainsCustomer
+
+!new Customer('cust_101')
+!cust_101.id := 'C-101'
+!cust_101.name := 'Lina Aydogan'
+!cust_101.twitterUserName := 'lina_ayd'
+!insert (st_kassel, cust_101) into StationContainsCustomer
+
+!new Customer('cust_102')
+!cust_102.id := 'C-102'
+!cust_102.name := 'Marek Nowak'
+!cust_102.twitterUserName := 'marek_nowak'
+!insert (st_regensburg, cust_102) into StationContainsCustomer
+
+!new Customer('cust_103')
+!cust_103.id := 'C-103'
+!cust_103.name := 'Sophie Nguyen'
+!cust_103.twitterUserName := 'sophie_ng'
+!insert (st_regensburg, cust_103) into StationContainsCustomer
+
+!new Driver('drv_1100')
+!drv_1100.id := 'D-1100'
+!drv_1100.name := 'Hanna Brunner'
+!insert (st_ulm, drv_1100) into StationContainsDriver
+
+!new Driver('drv_1101')
+!drv_1101.id := 'D-1101'
+!drv_1101.name := 'Ismail Cetin'
+!insert (st_ulm, drv_1101) into StationContainsDriver
+
+!new Driver('drv_1102')
+!drv_1102.id := 'D-1102'
+!drv_1102.name := 'Jens Kolb'
+!insert (st_ulm, drv_1102) into StationContainsDriver
+
+!new Driver('drv_1300')
+!drv_1300.id := 'D-1300'
+!drv_1300.name := 'Katarina Vukovic'
+!insert (st_regensburg, drv_1300) into StationContainsDriver
+
+!new Shipment('shp_14001')
+!shp_14001.id := 'S-14001'
+!shp_14001.status := #NEW
+
+!new Shipment('shp_14002')
+!shp_14002.id := 'S-14002'
+!shp_14002.status := #ASSIGNED
+
+!new Shipment('shp_14003')
+!shp_14003.id := 'S-14003'
+!shp_14003.status := #ASSIGNED
+
+!new Shipment('shp_14004')
+!shp_14004.id := 'S-14004'
+!shp_14004.status := #DELIVERED
+
+!new Shipment('shp_14005')
+!shp_14005.id := 'S-14005'
+!shp_14005.status := #NEW
+
+!insert (cust_100, shp_14001) into CustomerConsistsOfShipment
+!insert (cust_100, shp_14002) into CustomerConsistsOfShipment
+!insert (cust_101, shp_14003) into CustomerConsistsOfShipment
+!insert (cust_101, shp_14004) into CustomerConsistsOfShipment
+!insert (cust_101, shp_14005) into CustomerConsistsOfShipment
+
+!insert (st_ulm, shp_14001) into StationShipment
+!insert (st_ulm, shp_14002) into StationShipment
+!insert (st_kassel, shp_14003) into StationShipment
+!insert (st_kassel, shp_14004) into StationShipment
+!insert (st_ulm, shp_14005) into StationShipment
+
+!insert (drv_1100, shp_14002) into DriverShipment
+!insert (drv_1101, shp_14004) into DriverShipment
+
+!new Address('addr_pu_ulm_store')
+!addr_pu_ulm_store.text := 'Bahnhofstrasse 1, 89073 Ulm, Germany'
+!new GeoLocation('geo_addr_pu_ulm_store')
+!geo_addr_pu_ulm_store.latitude := 48.3984
+!geo_addr_pu_ulm_store.longitude := 9.9916
+!insert (addr_pu_ulm_store, geo_addr_pu_ulm_store) into AddressContainsGeoLocation
+
+!new Address('addr_dl_ulm_home1')
+!addr_dl_ulm_home1.text := 'Fischergasse 12, 89073 Ulm, Germany'
+!new GeoLocation('geo_addr_dl_ulm_home1')
+!geo_addr_dl_ulm_home1.latitude := 48.3971
+!geo_addr_dl_ulm_home1.longitude := 9.9939
+!insert (addr_dl_ulm_home1, geo_addr_dl_ulm_home1) into AddressContainsGeoLocation
+
+!new Address('addr_dl_str_lab')
+!addr_dl_str_lab.text := 'Rotebuehlplatz 20, 70173 Stuttgart, Germany'
+!new GeoLocation('geo_addr_dl_str_lab')
+!geo_addr_dl_str_lab.latitude := 48.7760
+!geo_addr_dl_str_lab.longitude := 9.1761
+!insert (addr_dl_str_lab, geo_addr_dl_str_lab) into AddressContainsGeoLocation
+
+!new Address('addr_pu_ks_hub')
+!addr_pu_ks_hub.text := 'Rudolf-Schwander-Strasse 1 (Hub), 34117 Kassel, Germany'
+!new GeoLocation('geo_addr_pu_ks_hub')
+!geo_addr_pu_ks_hub.latitude := 51.3127
+!geo_addr_pu_ks_hub.longitude := 9.4797
+!insert (addr_pu_ks_hub, geo_addr_pu_ks_hub) into AddressContainsGeoLocation
+
+!new Address('addr_dl_ks_uni')
+!addr_dl_ks_uni.text := 'Moenchebergstrasse 19, 34125 Kassel, Germany'
+!new GeoLocation('geo_addr_dl_ks_uni')
+!geo_addr_dl_ks_uni.latitude := 51.3255
+!geo_addr_dl_ks_uni.longitude := 9.5134
+!insert (addr_dl_ks_uni, geo_addr_dl_ks_uni) into AddressContainsGeoLocation
+
+!new Address('addr_pu_ks_market')
+!addr_pu_ks_market.text := 'Koenigsplatz 61, 34117 Kassel, Germany'
+!new GeoLocation('geo_addr_pu_ks_market')
+!geo_addr_pu_ks_market.latitude := 51.3165
+!geo_addr_pu_ks_market.longitude := 9.4950
+!insert (addr_pu_ks_market, geo_addr_pu_ks_market) into AddressContainsGeoLocation
+
+!new Address('addr_dl_fulda_clinic')
+!addr_dl_fulda_clinic.text := 'Pacelliallee 4, 36043 Fulda, Germany'
+!new GeoLocation('geo_addr_dl_fulda_clinic')
+!geo_addr_dl_fulda_clinic.latitude := 50.5520
+!geo_addr_dl_fulda_clinic.longitude := 9.6730
+!insert (addr_dl_fulda_clinic, geo_addr_dl_fulda_clinic) into AddressContainsGeoLocation
+
+!insert (shp_14001, addr_pu_ulm_store) into ShipmentContainsPickUpAddress
+!insert (shp_14001, addr_dl_ulm_home1) into ShipmentContainsDeliveryAddress
+
+!insert (shp_14002, addr_pu_ulm_store) into ShipmentContainsPickUpAddress
+!insert (shp_14002, addr_dl_str_lab) into ShipmentContainsDeliveryAddress
+
+!insert (shp_14003, addr_pu_ks_hub) into ShipmentContainsPickUpAddress
+!insert (shp_14003, addr_dl_ks_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_14004, addr_pu_ks_market) into ShipmentContainsPickUpAddress
+!insert (shp_14004, addr_dl_fulda_clinic) into ShipmentContainsDeliveryAddress
+
+!insert (shp_14005, addr_pu_ulm_store) into ShipmentContainsPickUpAddress
+!insert (shp_14005, addr_dl_ks_uni) into ShipmentContainsDeliveryAddress

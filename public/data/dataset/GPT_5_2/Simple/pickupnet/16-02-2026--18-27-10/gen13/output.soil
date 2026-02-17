@@ -1,0 +1,158 @@
+!new Station('st_saarbruecken')
+!new Station('st_mainz')
+!new Station('st_luebeck')
+
+!new Customer('cust_300')
+!cust_300.id := 'C-300'
+!cust_300.name := 'Nele Winkler'
+!cust_300.twitterUserName := 'nele_winkler'
+!insert (st_saarbruecken, cust_300) into StationContainsCustomer
+
+!new Customer('cust_301')
+!cust_301.id := 'C-301'
+!cust_301.name := 'Oleg Smirnov'
+!cust_301.twitterUserName := 'oleg_smirnov'
+!insert (st_saarbruecken, cust_301) into StationContainsCustomer
+
+!new Customer('cust_302')
+!cust_302.id := 'C-302'
+!cust_302.name := 'Petra Jahn'
+!cust_302.twitterUserName := 'petra_jahn'
+!insert (st_luebeck, cust_302) into StationContainsCustomer
+
+!new Driver('drv_3000')
+!drv_3000.id := 'D-3000'
+!drv_3000.name := 'Robin Schaefer'
+!insert (st_mainz, drv_3000) into StationContainsDriver
+
+!new Driver('drv_3001')
+!drv_3001.id := 'D-3001'
+!drv_3001.name := 'Salma Darwish'
+!insert (st_mainz, drv_3001) into StationContainsDriver
+
+!new Driver('drv_3002')
+!drv_3002.id := 'D-3002'
+!drv_3002.name := 'Tommy Hansen'
+!insert (st_luebeck, drv_3002) into StationContainsDriver
+
+!new Shipment('shp_30001')
+!shp_30001.id := 'S-30001'
+!shp_30001.status := #NEW
+
+!new Shipment('shp_30002')
+!shp_30002.id := 'S-30002'
+!shp_30002.status := #ASSIGNED
+
+!new Shipment('shp_30003')
+!shp_30003.id := 'S-30003'
+!shp_30003.status := #DELIVERED
+
+!new Shipment('shp_30004')
+!shp_30004.id := 'S-30004'
+!shp_30004.status := #UNDERWAY
+
+!new Shipment('shp_30005')
+!shp_30005.id := 'S-30005'
+!shp_30005.status := #UNDERWAY
+
+!new Shipment('shp_30006')
+!shp_30006.id := 'S-30006'
+!shp_30006.status := #DELIVERED
+
+!insert (cust_300, shp_30001) into CustomerConsistsOfShipment
+!insert (cust_300, shp_30002) into CustomerConsistsOfShipment
+!insert (cust_301, shp_30003) into CustomerConsistsOfShipment
+!insert (cust_301, shp_30004) into CustomerConsistsOfShipment
+!insert (cust_302, shp_30005) into CustomerConsistsOfShipment
+!insert (cust_302, shp_30006) into CustomerConsistsOfShipment
+
+!insert (st_saarbruecken, shp_30001) into StationShipment
+!insert (st_saarbruecken, shp_30002) into StationShipment
+!insert (st_saarbruecken, shp_30003) into StationShipment
+!insert (st_saarbruecken, shp_30004) into StationShipment
+!insert (st_luebeck, shp_30005) into StationShipment
+!insert (st_luebeck, shp_30006) into StationShipment
+
+!insert (drv_3002, shp_30005) into DriverShipment
+!insert (drv_3002, shp_30006) into DriverShipment
+
+!new Address('addr_pu_sbr_depot')
+!addr_pu_sbr_depot.text := 'Mainzer Strasse 120 (Depot), 66121 Saarbruecken, Germany'
+!new GeoLocation('geo_addr_pu_sbr_depot')
+!geo_addr_pu_sbr_depot.latitude := 49.2392
+!geo_addr_pu_sbr_depot.longitude := 6.9996
+!insert (addr_pu_sbr_depot, geo_addr_pu_sbr_depot) into AddressContainsGeoLocation
+
+!new Address('addr_pu_sbr_home_oleg')
+!addr_pu_sbr_home_oleg.text := 'Bismarckstrasse 5, 66121 Saarbruecken, Germany'
+!new GeoLocation('geo_addr_pu_sbr_home_oleg')
+!geo_addr_pu_sbr_home_oleg.latitude := 49.2410
+!geo_addr_pu_sbr_home_oleg.longitude := 7.0041
+!insert (addr_pu_sbr_home_oleg, geo_addr_pu_sbr_home_oleg) into AddressContainsGeoLocation
+
+!new Address('addr_dl_mainz_office')
+!addr_dl_mainz_office.text := 'Rheinallee 1, 55118 Mainz, Germany'
+!new GeoLocation('geo_addr_dl_mainz_office')
+!geo_addr_dl_mainz_office.latitude := 50.0080
+!geo_addr_dl_mainz_office.longitude := 8.2685
+!insert (addr_dl_mainz_office, geo_addr_dl_mainz_office) into AddressContainsGeoLocation
+
+!new Address('addr_dl_trier_museum')
+!addr_dl_trier_museum.text := 'Weberbach 25, 54290 Trier, Germany'
+!new GeoLocation('geo_addr_dl_trier_museum')
+!geo_addr_dl_trier_museum.latitude := 49.7517
+!geo_addr_dl_trier_museum.longitude := 6.6439
+!insert (addr_dl_trier_museum, geo_addr_dl_trier_museum) into AddressContainsGeoLocation
+
+!new Address('addr_dl_sbr_uni')
+!addr_dl_sbr_uni.text := 'Campus Saarbruecken, 66123 Saarbruecken, Germany'
+!new GeoLocation('geo_addr_dl_sbr_uni')
+!geo_addr_dl_sbr_uni.latitude := 49.2545
+!geo_addr_dl_sbr_uni.longitude := 7.0413
+!insert (addr_dl_sbr_uni, geo_addr_dl_sbr_uni) into AddressContainsGeoLocation
+
+!new Address('addr_dl_sbr_oldtown')
+!addr_dl_sbr_oldtown.text := 'St Johanner Markt 20, 66111 Saarbruecken, Germany'
+!new GeoLocation('geo_addr_dl_sbr_oldtown')
+!geo_addr_dl_sbr_oldtown.latitude := 49.2359
+!geo_addr_dl_sbr_oldtown.longitude := 6.9963
+!insert (addr_dl_sbr_oldtown, geo_addr_dl_sbr_oldtown) into AddressContainsGeoLocation
+
+!new Address('addr_pu_lue_shop')
+!addr_pu_lue_shop.text := 'Breite Strasse 80, 23552 Luebeck, Germany'
+!new GeoLocation('geo_addr_pu_lue_shop')
+!geo_addr_pu_lue_shop.latitude := 53.8663
+!geo_addr_pu_lue_shop.longitude := 10.6865
+!insert (addr_pu_lue_shop, geo_addr_pu_lue_shop) into AddressContainsGeoLocation
+
+!new Address('addr_dl_lue_oldtown')
+!addr_dl_lue_oldtown.text := 'An der Obertrave 15, 23552 Luebeck, Germany'
+!new GeoLocation('geo_addr_dl_lue_oldtown')
+!geo_addr_dl_lue_oldtown.latitude := 53.8618
+!geo_addr_dl_lue_oldtown.longitude := 10.6806
+!insert (addr_dl_lue_oldtown, geo_addr_dl_lue_oldtown) into AddressContainsGeoLocation
+
+!new Address('addr_dl_ham_airport')
+!addr_dl_ham_airport.text := 'Flughafenstrasse 1, 22335 Hamburg, Germany'
+!new GeoLocation('geo_addr_dl_ham_airport')
+!geo_addr_dl_ham_airport.latitude := 53.6325
+!geo_addr_dl_ham_airport.longitude := 9.9882
+!insert (addr_dl_ham_airport, geo_addr_dl_ham_airport) into AddressContainsGeoLocation
+
+!insert (shp_30001, addr_pu_sbr_depot) into ShipmentContainsPickUpAddress
+!insert (shp_30001, addr_dl_mainz_office) into ShipmentContainsDeliveryAddress
+
+!insert (shp_30002, addr_pu_sbr_depot) into ShipmentContainsPickUpAddress
+!insert (shp_30002, addr_dl_trier_museum) into ShipmentContainsDeliveryAddress
+
+!insert (shp_30003, addr_pu_sbr_home_oleg) into ShipmentContainsPickUpAddress
+!insert (shp_30003, addr_dl_sbr_oldtown) into ShipmentContainsDeliveryAddress
+
+!insert (shp_30004, addr_pu_sbr_depot) into ShipmentContainsPickUpAddress
+!insert (shp_30004, addr_dl_sbr_uni) into ShipmentContainsDeliveryAddress
+
+!insert (shp_30005, addr_pu_lue_shop) into ShipmentContainsPickUpAddress
+!insert (shp_30005, addr_dl_lue_oldtown) into ShipmentContainsDeliveryAddress
+
+!insert (shp_30006, addr_pu_lue_shop) into ShipmentContainsPickUpAddress
+!insert (shp_30006, addr_dl_ham_airport) into ShipmentContainsDeliveryAddress

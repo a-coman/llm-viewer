@@ -1,0 +1,159 @@
+!new Station('st_hamburg')
+!new Station('st_munich')
+
+!new Customer('cust_001')
+!cust_001.id := 'C-001'
+!cust_001.name := 'Anna Keller'
+!cust_001.twitterUserName := 'anna_keller'
+
+!new Customer('cust_002')
+!cust_002.id := 'C-002'
+!cust_002.name := 'Boris Novak'
+!cust_002.twitterUserName := 'borisn'
+
+!new Customer('cust_003')
+!cust_003.id := 'C-003'
+!cust_003.name := 'Chloe Martin'
+!cust_003.twitterUserName := 'chloemartin'
+
+!insert (st_hamburg, cust_001) into StationContainsCustomer
+!insert (st_hamburg, cust_002) into StationContainsCustomer
+!insert (st_munich, cust_003) into StationContainsCustomer
+
+!new Driver('drv_100')
+!drv_100.id := 'D-100'
+!drv_100.name := 'Lars Petersen'
+
+!new Driver('drv_101')
+!drv_101.id := 'D-101'
+!drv_101.name := 'Mina Sato'
+
+!new Driver('drv_200')
+!drv_200.id := 'D-200'
+!drv_200.name := 'Tobias Reiter'
+
+!insert (st_hamburg, drv_100) into StationContainsDriver
+!insert (st_hamburg, drv_101) into StationContainsDriver
+!insert (st_munich, drv_200) into StationContainsDriver
+
+!new Shipment('shp_9001')
+!shp_9001.id := 'S-9001'
+!shp_9001.status := #NEW
+
+!new Shipment('shp_9002')
+!shp_9002.id := 'S-9002'
+!shp_9002.status := #ASSIGNED
+
+!new Shipment('shp_9003')
+!shp_9003.id := 'S-9003'
+!shp_9003.status := #UNDERWAY
+
+!new Shipment('shp_9004')
+!shp_9004.id := 'S-9004'
+!shp_9004.status := #DELIVERED
+
+!new Shipment('shp_9005')
+!shp_9005.id := 'S-9005'
+!shp_9005.status := #ASSIGNED
+
+!insert (cust_001, shp_9001) into CustomerConsistsOfShipment
+!insert (cust_001, shp_9002) into CustomerConsistsOfShipment
+!insert (cust_002, shp_9003) into CustomerConsistsOfShipment
+!insert (cust_003, shp_9004) into CustomerConsistsOfShipment
+!insert (cust_003, shp_9005) into CustomerConsistsOfShipment
+
+!insert (st_hamburg, shp_9001) into StationShipment
+!insert (st_hamburg, shp_9002) into StationShipment
+!insert (st_hamburg, shp_9003) into StationShipment
+!insert (st_munich, shp_9004) into StationShipment
+!insert (st_munich, shp_9005) into StationShipment
+
+!insert (drv_100, shp_9002) into DriverShipment
+!insert (drv_101, shp_9003) into DriverShipment
+!insert (drv_200, shp_9004) into DriverShipment
+!insert (drv_200, shp_9005) into DriverShipment
+
+!new Address('addr_pu_9001')
+!addr_pu_9001.text := 'Spitalerstrasse 10, 20095 Hamburg, Germany'
+!new GeoLocation('geo_addr_pu_9001')
+!geo_addr_pu_9001.latitude := 53.5515
+!geo_addr_pu_9001.longitude := 9.9963
+!insert (addr_pu_9001, geo_addr_pu_9001) into AddressContainsGeoLocation
+
+!new Address('addr_dl_9001')
+!addr_dl_9001.text := 'Altonaer Strasse 22, 20357 Hamburg, Germany'
+!new GeoLocation('geo_addr_dl_9001')
+!geo_addr_dl_9001.latitude := 53.5619
+!geo_addr_dl_9001.longitude := 9.9581
+!insert (addr_dl_9001, geo_addr_dl_9001) into AddressContainsGeoLocation
+
+!insert (shp_9001, addr_pu_9001) into ShipmentContainsPickUpAddress
+!insert (shp_9001, addr_dl_9001) into ShipmentContainsDeliveryAddress
+
+!new Address('addr_pu_9002')
+!addr_pu_9002.text := 'Glockengiesserwall 1, 20095 Hamburg, Germany'
+!new GeoLocation('geo_addr_pu_9002')
+!geo_addr_pu_9002.latitude := 53.5532
+!geo_addr_pu_9002.longitude := 10.0066
+!insert (addr_pu_9002, geo_addr_pu_9002) into AddressContainsGeoLocation
+
+!new Address('addr_dl_9002')
+!addr_dl_9002.text := 'Eppendorfer Landstrasse 55, 20249 Hamburg, Germany'
+!new GeoLocation('geo_addr_dl_9002')
+!geo_addr_dl_9002.latitude := 53.5853
+!geo_addr_dl_9002.longitude := 9.9857
+!insert (addr_dl_9002, geo_addr_dl_9002) into AddressContainsGeoLocation
+
+!insert (shp_9002, addr_pu_9002) into ShipmentContainsPickUpAddress
+!insert (shp_9002, addr_dl_9002) into ShipmentContainsDeliveryAddress
+
+!new Address('addr_pu_9003')
+!addr_pu_9003.text := 'Willy-Brandt-Strasse 45, 20457 Hamburg, Germany'
+!new GeoLocation('geo_addr_pu_9003')
+!geo_addr_pu_9003.latitude := 53.5467
+!geo_addr_pu_9003.longitude := 9.9840
+!insert (addr_pu_9003, geo_addr_pu_9003) into AddressContainsGeoLocation
+
+!new Address('addr_dl_9003')
+!addr_dl_9003.text := 'Fuhlsbuettler Strasse 180, 22305 Hamburg, Germany'
+!new GeoLocation('geo_addr_dl_9003')
+!geo_addr_dl_9003.latitude := 53.5974
+!geo_addr_dl_9003.longitude := 10.0392
+!insert (addr_dl_9003, geo_addr_dl_9003) into AddressContainsGeoLocation
+
+!insert (shp_9003, addr_pu_9003) into ShipmentContainsPickUpAddress
+!insert (shp_9003, addr_dl_9003) into ShipmentContainsDeliveryAddress
+
+!new Address('addr_pu_9004')
+!addr_pu_9004.text := 'Arnulfstrasse 195, 80634 Munich, Germany'
+!new GeoLocation('geo_addr_pu_9004')
+!geo_addr_pu_9004.latitude := 48.1450
+!geo_addr_pu_9004.longitude := 11.5356
+!insert (addr_pu_9004, geo_addr_pu_9004) into AddressContainsGeoLocation
+
+!new Address('addr_dl_9004')
+!addr_dl_9004.text := 'Sendlinger Strasse 31, 80331 Munich, Germany'
+!new GeoLocation('geo_addr_dl_9004')
+!geo_addr_dl_9004.latitude := 48.1344
+!geo_addr_dl_9004.longitude := 11.5717
+!insert (addr_dl_9004, geo_addr_dl_9004) into AddressContainsGeoLocation
+
+!insert (shp_9004, addr_pu_9004) into ShipmentContainsPickUpAddress
+!insert (shp_9004, addr_dl_9004) into ShipmentContainsDeliveryAddress
+
+!new Address('addr_pu_9005')
+!addr_pu_9005.text := 'Leopoldstrasse 50, 80802 Munich, Germany'
+!new GeoLocation('geo_addr_pu_9005')
+!geo_addr_pu_9005.latitude := 48.1582
+!geo_addr_pu_9005.longitude := 11.5862
+!insert (addr_pu_9005, geo_addr_pu_9005) into AddressContainsGeoLocation
+
+!new Address('addr_dl_9005')
+!addr_dl_9005.text := 'Rosenheimer Strasse 145, 81671 Munich, Germany'
+!new GeoLocation('geo_addr_dl_9005')
+!geo_addr_dl_9005.latitude := 48.1214
+!geo_addr_dl_9005.longitude := 11.6121
+!insert (addr_dl_9005, geo_addr_dl_9005) into AddressContainsGeoLocation
+
+!insert (shp_9005, addr_pu_9005) into ShipmentContainsPickUpAddress
+!insert (shp_9005, addr_dl_9005) into ShipmentContainsDeliveryAddress

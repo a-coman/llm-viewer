@@ -1,0 +1,91 @@
+!new Station('st_duesseldorf')
+!new Station('st_wiesbaden')
+
+!new Customer('cust_500')
+!cust_500.id := 'C-500'
+!cust_500.name := 'Isabel Roth'
+!cust_500.twitterUserName := 'isabel_roth'
+!insert (st_duesseldorf, cust_500) into StationContainsCustomer
+
+!new Customer('cust_501')
+!cust_501.id := 'C-501'
+!cust_501.name := 'Kenji Tanaka'
+!cust_501.twitterUserName := 'kenji_tanaka'
+!insert (st_duesseldorf, cust_501) into StationContainsCustomer
+
+!new Driver('drv_5000')
+!drv_5000.id := 'D-5000'
+!drv_5000.name := 'Marcel Engel'
+!insert (st_wiesbaden, drv_5000) into StationContainsDriver
+
+!new Driver('drv_5001')
+!drv_5001.id := 'D-5001'
+!drv_5001.name := 'Priya Nair'
+!insert (st_wiesbaden, drv_5001) into StationContainsDriver
+
+!new Shipment('shp_50001')
+!shp_50001.id := 'S-50001'
+!shp_50001.status := #NEW
+
+!new Shipment('shp_50002')
+!shp_50002.id := 'S-50002'
+!shp_50002.status := #ASSIGNED
+
+!new Shipment('shp_50003')
+!shp_50003.id := 'S-50003'
+!shp_50003.status := #UNDERWAY
+
+!insert (cust_500, shp_50001) into CustomerConsistsOfShipment
+!insert (cust_500, shp_50002) into CustomerConsistsOfShipment
+!insert (cust_501, shp_50003) into CustomerConsistsOfShipment
+
+!insert (st_duesseldorf, shp_50001) into StationShipment
+!insert (st_duesseldorf, shp_50002) into StationShipment
+!insert (st_duesseldorf, shp_50003) into StationShipment
+
+!insert (drv_5000, shp_50002) into DriverShipment
+!insert (drv_5000, shp_50003) into DriverShipment
+
+!new Address('addr_pu_dd_supplier')
+!addr_pu_dd_supplier.text := 'Schadowstrasse 50 (Supplier Pickup), 40212 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_pu_dd_supplier')
+!geo_addr_pu_dd_supplier.latitude := 51.2252
+!geo_addr_pu_dd_supplier.longitude := 6.7783
+!insert (addr_pu_dd_supplier, geo_addr_pu_dd_supplier) into AddressContainsGeoLocation
+
+!new Address('addr_pu_dd_home_kenji')
+!addr_pu_dd_home_kenji.text := 'Lorettostrasse 12, 40219 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_pu_dd_home_kenji')
+!geo_addr_pu_dd_home_kenji.latitude := 51.2136
+!geo_addr_pu_dd_home_kenji.longitude := 6.7711
+!insert (addr_pu_dd_home_kenji, geo_addr_pu_dd_home_kenji) into AddressContainsGeoLocation
+
+!new Address('addr_dl_dd_kiosk')
+!addr_dl_dd_kiosk.text := 'Worringer Platz 6 (Kiosk), 40210 Duesseldorf, Germany'
+!new GeoLocation('geo_addr_dl_dd_kiosk')
+!geo_addr_dl_dd_kiosk.latitude := 51.2278
+!geo_addr_dl_dd_kiosk.longitude := 6.7950
+!insert (addr_dl_dd_kiosk, geo_addr_dl_dd_kiosk) into AddressContainsGeoLocation
+
+!new Address('addr_dl_duisburg_dock')
+!addr_dl_duisburg_dock.text := 'Philosophenweg 31 (Dock Gate), 47051 Duisburg, Germany'
+!new GeoLocation('geo_addr_dl_duisburg_dock')
+!geo_addr_dl_duisburg_dock.latitude := 51.4330
+!geo_addr_dl_duisburg_dock.longitude := 6.7623
+!insert (addr_dl_duisburg_dock, geo_addr_dl_duisburg_dock) into AddressContainsGeoLocation
+
+!new Address('addr_dl_cologne_agency')
+!addr_dl_cologne_agency.text := 'Hohenzollernring 62, 50672 Cologne, Germany'
+!new GeoLocation('geo_addr_dl_cologne_agency')
+!geo_addr_dl_cologne_agency.latitude := 50.9419
+!geo_addr_dl_cologne_agency.longitude := 6.9366
+!insert (addr_dl_cologne_agency, geo_addr_dl_cologne_agency) into AddressContainsGeoLocation
+
+!insert (shp_50001, addr_pu_dd_supplier) into ShipmentContainsPickUpAddress
+!insert (shp_50001, addr_dl_dd_kiosk) into ShipmentContainsDeliveryAddress
+
+!insert (shp_50002, addr_pu_dd_supplier) into ShipmentContainsPickUpAddress
+!insert (shp_50002, addr_dl_duisburg_dock) into ShipmentContainsDeliveryAddress
+
+!insert (shp_50003, addr_pu_dd_home_kenji) into ShipmentContainsPickUpAddress
+!insert (shp_50003, addr_dl_cologne_agency) into ShipmentContainsDeliveryAddress
