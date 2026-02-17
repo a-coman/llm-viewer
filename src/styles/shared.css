@@ -112,7 +112,7 @@ html {
 }
 
 .error-state code {
-  background: var(--color-hover);
+  background: var(--color-error);
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
 }
@@ -319,28 +319,6 @@ html {
   background: var(--color-muted);
 }
 
-/* Shared Hover/Active Pattern */
-.cat-tab:hover,
-.mode-btn:hover,
-.gen-link:hover,
-.diagram-tab:hover,
-.model-link:hover,
-.nav-link:hover {
-  background: var(--color-hover);
-  border: 1px solid var(--color-accent);
-  color: var(--color-primary);
-}
-
-.cat-tab.active,
-.mode-btn.active,
-.gen-link.active,
-.diagram-tab.active,
-.model-link.active,
-.nav-link.active {
-  background: var(--color-accent);
-  color: #ffffff;
-}
-
 /* Category Tabs (for CoT) */
 .category-tabs {
   display: flex;
@@ -507,15 +485,15 @@ html[data-mode="cot"] .category-tabs[data-nav="cot"] {
 }
 
 html[data-mode="cot"] .mode-btn[data-mode="simple"] {
-  background: var(--color-muted) !important;
-  color: var(--color-secondary) !important;
-  border-color: transparent !important;
+  background: var(--color-muted);
+  color: var(--color-secondary);
+  border-color: transparent;
 }
 
 html[data-mode="cot"] .mode-btn[data-mode="cot"] {
-  background: var(--color-accent) !important;
-  color: #ffffff !important;
-  border: 1px solid transparent !important;
+  background: var(--color-accent);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 
 /* Simple Mode Overrides */
@@ -540,13 +518,34 @@ html[data-mode="simple"] .category-tabs[data-nav="cot"] {
 }
 
 html[data-mode="simple"] .mode-btn[data-mode="cot"] {
-  background: var(--color-muted) !important;
-  color: var(--color-secondary) !important;
-  border-color: transparent !important;
+  background: var(--color-muted);
+  color: var(--color-secondary);
+  border-color: transparent;
 }
 
 html[data-mode="simple"] .mode-btn[data-mode="simple"] {
+  background: var(--color-accent);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+/* Interactions Triumph - Shared Hover/Active Pattern */
+html[data-mode] .cat-tab:hover,
+html[data-mode] .mode-btn:hover,
+html[data-mode] .gen-link:hover,
+html[data-mode] .diagram-tab:hover,
+html[data-mode] .model-link:hover,
+html[data-mode] .nav-link:hover {
+  border: 1px solid var(--color-accent) !important;
+  color: var(--color-primary) !important;
+}
+
+html[data-mode] .cat-tab.active,
+html[data-mode] .mode-btn.active,
+html[data-mode] .gen-link.active,
+html[data-mode] .diagram-tab.active,
+html[data-mode] .model-link.active,
+html[data-mode] .nav-link.active {
   background: var(--color-accent) !important;
   color: #ffffff !important;
-  border: 1px solid transparent !important;
 }
