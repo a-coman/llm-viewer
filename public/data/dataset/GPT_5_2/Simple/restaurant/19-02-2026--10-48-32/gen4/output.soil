@@ -1,0 +1,179 @@
+!new Restaurant('rest5')
+!rest5.name := 'Riverstone Diner'
+
+!new Owner('own11')
+!own11.name := 'Jordan Kim'
+!own11.percentageShares := 55
+
+!new Owner('own12')
+!own12.name := 'Megan Taylor'
+!own12.percentageShares := 45
+
+!insert (rest5, own11) into RestaurantOwner
+!insert (rest5, own12) into RestaurantOwner
+
+!new Manager('mgr2')
+!mgr2.name := 'Victor Alvarez'
+!mgr2.dateOfBirth := Date('1982-09-13')
+!mgr2.phoneNumber := '555-8008'
+
+!new HeadWaiter('hw5')
+!hw5.name := 'Rita Coleman'
+!hw5.dateOfBirth := Date('1986-01-25')
+!hw5.phoneNumber := '555-8000'
+
+!new Waiter('w10')
+!w10.name := 'Noah Stein'
+!w10.dateOfBirth := Date('1997-08-04')
+!w10.phoneNumber := '555-8001'
+!w10.spokenLanguage := #English
+
+!new Waiter('w11')
+!w11.name := 'Lucia Moreno'
+!w11.dateOfBirth := Date('1994-12-18')
+!w11.phoneNumber := '555-8002'
+!w11.spokenLanguage := #Spanish
+
+!insert (hw5, w10) into HeadWaiterWaiter
+!insert (hw5, w11) into HeadWaiterWaiter
+
+!new Chef('chef6')
+!chef6.name := 'Ethan Park'
+!chef6.dateOfBirth := Date('1977-04-06')
+!chef6.phoneNumber := '555-8100'
+
+!new Cook('cook9')
+!cook9.name := 'Paula Green'
+!cook9.dateOfBirth := Date('1991-06-22')
+!cook9.phoneNumber := '555-8101'
+!cook9.yearsOfExperience := 2
+
+!new Cook('cook10')
+!cook10.name := 'Sergey Ivanov'
+!cook10.dateOfBirth := Date('1989-03-11')
+!cook10.phoneNumber := '555-8102'
+!cook10.yearsOfExperience := 15
+
+!insert (chef6, cook9) into ChefCook
+!insert (chef6, cook10) into ChefCook
+
+!new Allergen('alg5Gluten')
+!alg5Gluten.type := #Gluten
+
+!new FoodItem('fiFlour2')
+!fiFlour2.number := 401
+!fiFlour2.description := 'Bread flour'
+!fiFlour2.purchaseFlag := true
+!fiFlour2.unit := #Pound
+
+!new FoodItem('fiMapleSyrup')
+!fiMapleSyrup.number := 402
+!fiMapleSyrup.description := 'Maple syrup'
+!fiMapleSyrup.purchaseFlag := true
+!fiMapleSyrup.unit := #Ounce
+
+!new FoodItem('fiCoffeeBeans2')
+!fiCoffeeBeans2.number := 403
+!fiCoffeeBeans2.description := 'Espresso roast beans'
+!fiCoffeeBeans2.purchaseFlag := true
+!fiCoffeeBeans2.unit := #Pound
+
+!insert (fiFlour2, alg5Gluten) into FoodItemAllergen
+
+!new MenuItem('miPancakes')
+!miPancakes.description := 'Buttermilk pancakes'
+!miPancakes.prepTime := 9.0
+!miPancakes.classification := #Main
+
+!new MenuItem('miEspresso')
+!miEspresso.description := 'Single espresso'
+!miEspresso.prepTime := 1.5
+!miEspresso.classification := #Beverage
+
+!insert (miPancakes, chef6) into MenuItemChef
+!insert (miEspresso, chef6) into MenuItemChef
+
+!insert (miPancakes, fiFlour2) into MenuItemFoodItem
+!insert (miPancakes, fiMapleSyrup) into MenuItemFoodItem
+!insert (miEspresso, fiCoffeeBeans2) into MenuItemFoodItem
+
+!new Individual('res5')
+!res5.time := Time('07:30')
+!res5.date := Date('2026-06-02')
+!res5.numberPeople := 5
+!res5.name := 'Jordan Blake'
+!res5.phoneNumber := '555-8200'
+!res5.number := 8001
+!res5.seating := #Inside
+!res5.smoking := #NonSmoking
+
+!insert (rest5, res5) into RestaurantReservation
+!insert (res5, w10) into ReservationWaiter
+
+!new Table('tRes5A')
+!tRes5A.number := 31
+!tRes5A.description := 'Corner booth'
+!tRes5A.capacity := 4
+!insert (res5, tRes5A) into ReservationTable
+
+!new Table('tRes5B')
+!tRes5B.number := 32
+!tRes5B.description := 'Pull-up side table'
+!tRes5B.capacity := 2
+!insert (res5, tRes5B) into ReservationTable
+
+!new ItemOrder('ioRes5_1')
+!ioRes5_1.time := Time('07:45')
+!insert (res5, ioRes5_1) into ReservationItemOrdered
+!insert (ioRes5_1, miPancakes) into ItemOrderMenuItem
+
+!new RegularCustomer('cust5')
+!cust5.name := 'Fatima El-Sayed'
+!cust5.prefferedLanguage := #Italian
+
+!new BusDriver('bd4')
+!bd4.name := 'Garry Owens'
+!bd4.dateOfBirth := Date('1969-11-30')
+!bd4.phoneNumber := '555-8300'
+!bd4.driverLicenseNr := 'D-9912073'
+
+!new Banquet('banq4')
+!banq4.time := Time('18:00')
+!banq4.date := Date('2026-06-15')
+!banq4.numberPeople := 80
+!banq4.name := 'Fatima El-Sayed'
+!banq4.phoneNumber := '555-8201'
+!banq4.number := 8002
+!banq4.groupName := 'Community Charity Night'
+!banq4.paymentMethod := #Cash
+!banq4.busService := true
+
+!insert (rest5, banq4) into RestaurantReservation
+!insert (banq4, cust5) into ReservationCustomer
+!insert (banq4, w10) into ReservationWaiter
+!insert (banq4, w11) into ReservationWaiter
+!insert (banq4, bd4) into BanquetBusDriver
+
+!new Table('tBanq4A')
+!tBanq4A.number := 90
+!tBanq4A.description := 'Hall table A'
+!tBanq4A.capacity := 30
+!insert (banq4, tBanq4A) into ReservationTable
+
+!new Table('tBanq4B')
+!tBanq4B.number := 91
+!tBanq4B.description := 'Hall table B'
+!tBanq4B.capacity := 30
+!insert (banq4, tBanq4B) into ReservationTable
+
+!new Table('tBanq4C')
+!tBanq4C.number := 92
+!tBanq4C.description := 'Hall table C'
+!tBanq4C.capacity := 20
+!insert (banq4, tBanq4C) into ReservationTable
+
+!new ReportedAllergy('repAlg4')
+!repAlg4.allergen := #Gluten
+
+!new DietaryRequirement('dietReq4')
+!dietReq4.diet := #Halal

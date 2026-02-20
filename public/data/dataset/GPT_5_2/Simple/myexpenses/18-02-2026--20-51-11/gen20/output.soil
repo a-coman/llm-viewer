@@ -1,0 +1,91 @@
+!new Currency('curKES')
+!curKES.name := 'Kenyan Shilling'
+!curKES.abbreviation := 'KES'
+
+!new Currency('curMAD')
+!curMAD.name := 'Moroccan Dirham'
+!curMAD.abbreviation := 'MAD'
+
+!new Currency('curISK')
+!curISK.name := 'Icelandic Krona'
+!curISK.abbreviation := 'ISK'
+
+
+!new Expense('expMayVolunteerTripLogistics')
+!expMayVolunteerTripLogistics.amount := 260.00
+!expMayVolunteerTripLogistics.startDate := Date('2026-05-10')
+!expMayVolunteerTripLogistics.endDate := Date('2026-05-17')
+
+!new Bill('billHostelDeposit_2026_05_10')
+!billHostelDeposit_2026_05_10.amount := 125.00
+!billHostelDeposit_2026_05_10.category := 'Travel - Hostel deposit'
+!billHostelDeposit_2026_05_10.date := Date('2026-05-10')
+!billHostelDeposit_2026_05_10.paymentMethod := #CREDIT_CARD
+!billHostelDeposit_2026_05_10.status := #PENDING
+
+!new Bill('billCoachTickets_2026_05_10')
+!billCoachTickets_2026_05_10.amount := 68.40
+!billCoachTickets_2026_05_10.category := 'Travel - Coach tickets'
+!billCoachTickets_2026_05_10.date := Date('2026-05-10')
+!billCoachTickets_2026_05_10.paymentMethod := #CASH
+!billCoachTickets_2026_05_10.status := #VERIFIED
+
+!new Bill('billSIMCard_2026_05_11')
+!billSIMCard_2026_05_11.amount := 13.00
+!billSIMCard_2026_05_11.category := 'Communication - SIM card'
+!billSIMCard_2026_05_11.date := Date('2026-05-11')
+!billSIMCard_2026_05_11.paymentMethod := #CASH
+!billSIMCard_2026_05_11.status := #VALIDATED
+
+!new Bill('billVaccination_2026_05_12')
+!billVaccination_2026_05_12.amount := 44.10
+!billVaccination_2026_05_12.category := 'Health - Vaccination'
+!billVaccination_2026_05_12.date := Date('2026-05-12')
+!billVaccination_2026_05_12.paymentMethod := #CREDIT_CARD
+!billVaccination_2026_05_12.status := #VALIDATED
+
+!new Bill('billVisaPhoto_2026_05_12')
+!billVisaPhoto_2026_05_12.amount := 9.50
+!billVisaPhoto_2026_05_12.category := 'Administration - Visa photo'
+!billVisaPhoto_2026_05_12.date := Date('2026-05-12')
+!billVisaPhoto_2026_05_12.paymentMethod := #CASH
+!billVisaPhoto_2026_05_12.status := #DRAFT
+
+!insert (expMayVolunteerTripLogistics, billHostelDeposit_2026_05_10) into ExpenseContainsBills
+!insert (expMayVolunteerTripLogistics, billCoachTickets_2026_05_10) into ExpenseContainsBills
+!insert (expMayVolunteerTripLogistics, billSIMCard_2026_05_11) into ExpenseContainsBills
+!insert (expMayVolunteerTripLogistics, billVaccination_2026_05_12) into ExpenseContainsBills
+!insert (expMayVolunteerTripLogistics, billVisaPhoto_2026_05_12) into ExpenseContainsBills
+
+!insert (billHostelDeposit_2026_05_10, curKES) into BillCurrency
+!insert (billCoachTickets_2026_05_10, curKES) into BillCurrency
+!insert (billSIMCard_2026_05_11, curMAD) into BillCurrency
+!insert (billVaccination_2026_05_12, curMAD) into BillCurrency
+!insert (billVisaPhoto_2026_05_12, curMAD) into BillCurrency
+
+
+!new Expense('expMayEquipmentLeaseDeposit')
+!expMayEquipmentLeaseDeposit.amount := 500.00
+!expMayEquipmentLeaseDeposit.startDate := Date('2026-05-15')
+!expMayEquipmentLeaseDeposit.endDate := Date('2026-05-15')
+
+!new Bill('bill3DPrinterLeaseDeposit_2026_05_15')
+!bill3DPrinterLeaseDeposit_2026_05_15.amount := 500.00
+!bill3DPrinterLeaseDeposit_2026_05_15.category := 'Business - Equipment lease deposit'
+!bill3DPrinterLeaseDeposit_2026_05_15.date := Date('2026-05-15')
+!bill3DPrinterLeaseDeposit_2026_05_15.paymentMethod := #CHECK
+!bill3DPrinterLeaseDeposit_2026_05_15.status := #PENDING
+
+!insert (expMayEquipmentLeaseDeposit, bill3DPrinterLeaseDeposit_2026_05_15) into ExpenseContainsBills
+!insert (bill3DPrinterLeaseDeposit_2026_05_15, curISK) into BillCurrency
+
+!new Comment('cmtLease1')
+!cmtLease1.text := 'Deposit for short-term lease of a 3D printer for a prototype run.'
+!new Comment('cmtLease2')
+!cmtLease2.text := 'Payment sent by check; awaiting confirmation from the supplier.'
+!new Comment('cmtLease3')
+!cmtLease3.text := 'Lease contract stored with procurement documents for audit.'
+
+!insert (expMayEquipmentLeaseDeposit, cmtLease1) into ExpenseComment
+!insert (expMayEquipmentLeaseDeposit, cmtLease2) into ExpenseComment
+!insert (expMayEquipmentLeaseDeposit, cmtLease3) into ExpenseComment

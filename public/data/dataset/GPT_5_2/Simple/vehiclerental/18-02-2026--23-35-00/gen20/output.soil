@@ -1,0 +1,130 @@
+!new RentalOffice('office_de_regional7')
+!office_de_regional7.name := 'Brandywine Regional Rental Office'
+!office_de_regional7.number := 7001
+!office_de_regional7.address := '45 Lukens Dr, New Castle, DE 19720'
+
+!new RentalOffice('office_ct_service7')
+!office_ct_service7.name := 'Connecticut Service & Returns - New Britain'
+!office_ct_service7.number := 7002
+!office_ct_service7.address := '320 Ellis St, New Britain, CT 06051'
+
+!new RentalOffice('office_ca_return7')
+!office_ca_return7.name := 'Southern California Return Yard - Ontario'
+!office_ca_return7.number := 7003
+!office_ca_return7.address := '2200 E Airport Dr, Ontario, CA 91761'
+
+!new Truck('truck_de_24ft_701')
+!truck_de_24ft_701.id := 70101
+!truck_de_24ft_701.registrationState := #DE
+!truck_de_24ft_701.licensePlateNumber := 'DE-TRK-70101'
+!truck_de_24ft_701.vehicleTypeCode := #TRUCK24
+!truck_de_24ft_701.registrationLastMaintenanceDate := Date('2026-06-02')
+!truck_de_24ft_701.expirationDate := Date('2027-06-30')
+!truck_de_24ft_701.odometerReading := 100220
+!truck_de_24ft_701.gasTankCapacity := 64.0
+!truck_de_24ft_701.workingRadio := true
+!truck_de_24ft_701.mileage := 9
+
+!new Truck('truck_ct_10ft_702')
+!truck_ct_10ft_702.id := 70102
+!truck_ct_10ft_702.registrationState := #CT
+!truck_ct_10ft_702.licensePlateNumber := 'CT-TRK-70102'
+!truck_ct_10ft_702.vehicleTypeCode := #TRUCK10
+!truck_ct_10ft_702.registrationLastMaintenanceDate := Date('2026-05-10')
+!truck_ct_10ft_702.expirationDate := Date('2027-05-31')
+!truck_ct_10ft_702.odometerReading := 22140
+!truck_ct_10ft_702.gasTankCapacity := 34.0
+!truck_ct_10ft_702.workingRadio := false
+!truck_ct_10ft_702.mileage := 16
+
+!new Vehicle('trailer_ca_covered_703')
+!trailer_ca_covered_703.id := 70903
+!trailer_ca_covered_703.registrationState := #CA
+!trailer_ca_covered_703.licensePlateNumber := 'CA-TRL-70903'
+!trailer_ca_covered_703.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_703.registrationLastMaintenanceDate := Date('2026-04-01')
+!trailer_ca_covered_703.expirationDate := Date('2027-04-30')
+
+!insert (office_de_regional7, truck_de_24ft_701) into RentalOfficeVehicle
+!insert (office_ct_service7, truck_ct_10ft_702) into RentalOfficeVehicle
+!insert (office_ca_return7, trailer_ca_covered_703) into RentalOfficeVehicle
+
+!new Company('cust_co_harborstone7')
+!cust_co_harborstone7.name := 'HarborStone Records Management'
+!cust_co_harborstone7.address := '800 River Rd, New Castle, DE 19720'
+!cust_co_harborstone7.poorRisk := false
+!cust_co_harborstone7.idNumber := 77230015
+
+!new Individual('cust_ind_nadine7')
+!cust_ind_nadine7.name := 'Nadine Kessler'
+!cust_ind_nadine7.address := '55 Myrtle St, New Britain, CT 06051'
+!cust_ind_nadine7.poorRisk := true
+!cust_ind_nadine7.homePhone := '860-555-0129'
+!cust_ind_nadine7.driverLicenseState := #CT
+!cust_ind_nadine7.driverLicenseNumber := 44981207
+!cust_ind_nadine7.driverLicenseExpirationDate := Date('2026-10-31')
+
+!new RentalAgreement('ra_700001')
+!ra_700001.number := 700001
+!ra_700001.rentalDate := Date('2026-03-01')
+!ra_700001.anticipatedDuration := 60
+!ra_700001.depositPaid := 0.00
+!ra_700001.quotedDailyRate := 74.00
+!ra_700001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_700002')
+!ra_700002.number := 700002
+!ra_700002.rentalDate := Date('2026-03-05')
+!ra_700002.anticipatedDuration := 2
+!ra_700002.depositPaid := 1200.00
+!ra_700002.quotedDailyRate := 209.00
+!ra_700002.quotedRatePerMile := 0.99
+
+!new RentalAgreement('ra_700003')
+!ra_700003.number := 700003
+!ra_700003.rentalDate := Date('2026-03-10')
+!ra_700003.anticipatedDuration := 1
+!ra_700003.depositPaid := 100.00
+!ra_700003.quotedDailyRate := 49.00
+!ra_700003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_700004')
+!ra_700004.number := 700004
+!ra_700004.rentalDate := Date('2026-03-12')
+!ra_700004.anticipatedDuration := 7
+!ra_700004.depositPaid := 300.00
+!ra_700004.quotedDailyRate := 139.00
+!ra_700004.quotedRatePerMile := 0.82
+
+!new RentalAgreement('ra_700005')
+!ra_700005.number := 700005
+!ra_700005.rentalDate := Date('2026-03-20')
+!ra_700005.anticipatedDuration := 3
+!ra_700005.depositPaid := 0.00
+!ra_700005.quotedDailyRate := 35.00
+!ra_700005.quotedRatePerMile := 0.00
+
+!insert (office_de_regional7, ra_700001) into RentalOfficeRentalAgreementOrigin
+!insert (office_ct_service7, ra_700001) into RentalOfficeRentalAgreementDrop
+!insert (ra_700001, truck_de_24ft_701) into RentalAgreementVehicle
+!insert (ra_700001, cust_co_harborstone7) into RentalAgreementCustomer
+
+!insert (office_de_regional7, ra_700002) into RentalOfficeRentalAgreementOrigin
+!insert (office_ca_return7, ra_700002) into RentalOfficeRentalAgreementDrop
+!insert (ra_700002, truck_de_24ft_701) into RentalAgreementVehicle
+!insert (ra_700002, cust_co_harborstone7) into RentalAgreementCustomer
+
+!insert (office_ct_service7, ra_700003) into RentalOfficeRentalAgreementOrigin
+!insert (office_ct_service7, ra_700003) into RentalOfficeRentalAgreementDrop
+!insert (ra_700003, truck_ct_10ft_702) into RentalAgreementVehicle
+!insert (ra_700003, cust_ind_nadine7) into RentalAgreementCustomer
+
+!insert (office_ca_return7, ra_700004) into RentalOfficeRentalAgreementOrigin
+!insert (office_de_regional7, ra_700004) into RentalOfficeRentalAgreementDrop
+!insert (ra_700004, trailer_ca_covered_703) into RentalAgreementVehicle
+!insert (ra_700004, cust_ind_nadine7) into RentalAgreementCustomer
+
+!insert (office_ct_service7, ra_700005) into RentalOfficeRentalAgreementOrigin
+!insert (office_de_regional7, ra_700005) into RentalOfficeRentalAgreementDrop
+!insert (ra_700005, truck_ct_10ft_702) into RentalAgreementVehicle
+!insert (ra_700005, cust_co_harborstone7) into RentalAgreementCustomer

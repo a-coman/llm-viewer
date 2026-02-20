@@ -1,0 +1,501 @@
+!new Club('clubWP')
+!clubWP.name := 'Westport FC'
+!clubWP.homeGround := 'Dockside Field'
+!clubWP.chairman := 'Helen Rourke'
+
+!new Club('clubHF')
+!clubHF.name := 'Highfield Rangers'
+!clubHF.homeGround := 'Highfield Lane'
+!clubHF.chairman := 'Gareth Webb'
+
+!new Club('clubSK')
+!clubSK.name := 'Southkirk United'
+!clubSK.homeGround := 'Kirk Meadow'
+!clubSK.chairman := 'Aisha Farrow'
+
+!new Club('clubBR')
+!clubBR.name := 'Briarwood Town'
+!clubBR.homeGround := 'Briarwood Stadium'
+!clubBR.chairman := 'Stephen Ivers'
+
+!new Team('teamWP1')
+!teamWP1.name := 'Westport First XI'
+!new Team('teamHF1')
+!teamHF1.name := 'Highfield First XI'
+!new Team('teamSK1')
+!teamSK1.name := 'Southkirk Seniors'
+!new Team('teamBR1')
+!teamBR1.name := 'Briarwood Seniors'
+
+!insert (clubWP, teamWP1) into ClubTeam
+!insert (clubHF, teamHF1) into ClubTeam
+!insert (clubSK, teamSK1) into ClubTeam
+!insert (clubBR, teamBR1) into ClubTeam
+
+!new Competition('compPlayoff')
+!compPlayoff.name := 'County Playoff'
+!compPlayoff.type := 'Playoff'
+
+!new Competition('compShield')
+!compShield.name := 'Charity Shield'
+!compShield.type := 'Exhibition'
+
+!new TrainingSession('tsWP_A')
+!tsWP_A.date := '2026-02-06'
+!tsWP_A.location := 'Dockside Field - Floodlit Pitch'
+!tsWP_A.purpose := 'Late-game scenarios and game management'
+
+!new TrainingSession('tsHF_A')
+!tsHF_A.date := '2026-02-06'
+!tsHF_A.location := 'Highfield Lane - Pitch 1'
+!tsHF_A.purpose := 'Defending crosses and second balls'
+
+!new TrainingSession('tsSK_A')
+!tsSK_A.date := '2026-02-07'
+!tsSK_A.location := 'Kirk Meadow - Training Area'
+!tsSK_A.purpose := 'Midfield rotations and counter-press'
+
+!new TrainingSession('tsBR_A')
+!tsBR_A.date := '2026-02-07'
+!tsBR_A.location := 'Briarwood Stadium - Indoor Dome'
+!tsBR_A.purpose := 'Finishing under fatigue'
+
+!insert (teamWP1, tsWP_A) into TeamTraining
+!insert (teamHF1, tsHF_A) into TeamTraining
+!insert (teamSK1, tsSK_A) into TeamTraining
+!insert (teamBR1, tsBR_A) into TeamTraining
+
+!new TrainingNotes('tnWP_A1')
+!tnWP_A1.note := 'Worked on protecting a one-goal lead; clear decision-making improved.'
+!tnWP_A1.date := '2026-02-06'
+!insert (tsWP_A, tnWP_A1) into TrainingTrainingNotes
+
+!new TrainingNotes('tnHF_A1')
+!tnHF_A1.note := 'Defensive unit struggled at far post; extra work assigned to fullbacks.'
+!tnHF_A1.date := '2026-02-06'
+!insert (tsHF_A, tnHF_A1) into TrainingTrainingNotes
+
+!new TrainingNotes('tnSK_A1')
+!tnSK_A1.note := 'Counter-press triggers good; must reduce fouls after losing possession.'
+!tnSK_A1.date := '2026-02-07'
+!insert (tsSK_A, tnSK_A1) into TrainingTrainingNotes
+
+!new TrainingNotes('tnBR_A1')
+!tnBR_A1.note := 'Finishing accuracy dipped late; conditioning block planned.'
+!tnBR_A1.date := '2026-02-07'
+!insert (tsBR_A, tnBR_A1) into TrainingTrainingNotes
+
+!new Player('pWP_1')
+!pWP_1.name := 'Mason Clarke'
+!pWP_1.age := 30
+!pWP_1.bestFoot := #RIGHT
+!pWP_1.phoneNumber := '+44 7700 410001'
+
+!new Player('pWP_2')
+!pWP_2.name := 'Aron Petrescu'
+!pWP_2.age := 20
+!pWP_2.bestFoot := #LEFT
+!pWP_2.phoneNumber := '+44 7700 410002'
+
+!new Player('pWP_3')
+!pWP_3.name := 'Jonah Ellis'
+!pWP_3.age := 25
+!pWP_3.bestFoot := #BOTH
+!pWP_3.phoneNumber := '+44 7700 410003'
+
+!new Player('pHF_1')
+!pHF_1.name := 'Rory Bennett'
+!pHF_1.age := 27
+!pHF_1.bestFoot := #RIGHT
+!pHF_1.phoneNumber := '+44 7700 420001'
+
+!new Player('pHF_2')
+!pHF_2.name := 'Luka Marin'
+!pHF_2.age := 23
+!pHF_2.bestFoot := #BOTH
+!pHF_2.phoneNumber := '+44 7700 420002'
+
+!new Player('pHF_3')
+!pHF_3.name := 'Theo Walsh'
+!pHF_3.age := 21
+!pHF_3.bestFoot := #LEFT
+!pHF_3.phoneNumber := '+44 7700 420003'
+
+!new Player('pSK_1')
+!pSK_1.name := 'Nikolai Jansen'
+!pSK_1.age := 29
+!pSK_1.bestFoot := #RIGHT
+!pSK_1.phoneNumber := '+44 7700 430001'
+
+!new Player('pSK_2')
+!pSK_2.name := 'Harvey Okoro'
+!pSK_2.age := 22
+!pSK_2.bestFoot := #RIGHT
+!pSK_2.phoneNumber := '+44 7700 430002'
+
+!new Player('pBR_1')
+!pBR_1.name := 'Santiago Ruiz'
+!pBR_1.age := 26
+!pBR_1.bestFoot := #LEFT
+!pBR_1.phoneNumber := '+44 7700 440001'
+
+!new Player('pBR_2')
+!pBR_2.name := 'Miles Turner'
+!pBR_2.age := 24
+!pBR_2.bestFoot := #BOTH
+!pBR_2.phoneNumber := '+44 7700 440002'
+
+!insert (teamWP1, pWP_1) into TeamPlayer
+!insert (teamWP1, pWP_2) into TeamPlayer
+!insert (teamWP1, pWP_3) into TeamPlayer
+!insert (teamHF1, pHF_1) into TeamPlayer
+!insert (teamHF1, pHF_2) into TeamPlayer
+!insert (teamHF1, pHF_3) into TeamPlayer
+!insert (teamSK1, pSK_1) into TeamPlayer
+!insert (teamSK1, pSK_2) into TeamPlayer
+!insert (teamBR1, pBR_1) into TeamPlayer
+!insert (teamBR1, pBR_2) into TeamPlayer
+
+!new Position('pos_pWP_1_gk')
+!pos_pWP_1_gk.positionName := #GOALKEEPER
+!insert (pWP_1, pos_pWP_1_gk) into PlayerPositions
+
+!new Position('pos_pWP_2_fw')
+!pos_pWP_2_fw.positionName := #FORWARD
+!insert (pWP_2, pos_pWP_2_fw) into PlayerPositions
+
+!new Position('pos_pWP_2_mid')
+!pos_pWP_2_mid.positionName := #MIDFIELDER
+!insert (pWP_2, pos_pWP_2_mid) into PlayerPositions
+
+!new Position('pos_pWP_3_def')
+!pos_pWP_3_def.positionName := #DEFENDER
+!insert (pWP_3, pos_pWP_3_def) into PlayerPositions
+
+!new Position('pos_pWP_3_mid')
+!pos_pWP_3_mid.positionName := #MIDFIELDER
+!insert (pWP_3, pos_pWP_3_mid) into PlayerPositions
+
+!new Position('pos_pHF_1_gk')
+!pos_pHF_1_gk.positionName := #GOALKEEPER
+!insert (pHF_1, pos_pHF_1_gk) into PlayerPositions
+
+!new Position('pos_pHF_2_def')
+!pos_pHF_2_def.positionName := #DEFENDER
+!insert (pHF_2, pos_pHF_2_def) into PlayerPositions
+
+!new Position('pos_pHF_2_mid')
+!pos_pHF_2_mid.positionName := #MIDFIELDER
+!insert (pHF_2, pos_pHF_2_mid) into PlayerPositions
+
+!new Position('pos_pHF_3_fw')
+!pos_pHF_3_fw.positionName := #FORWARD
+!insert (pHF_3, pos_pHF_3_fw) into PlayerPositions
+
+!new Position('pos_pSK_1_mid')
+!pos_pSK_1_mid.positionName := #MIDFIELDER
+!insert (pSK_1, pos_pSK_1_mid) into PlayerPositions
+
+!new Position('pos_pSK_1_def')
+!pos_pSK_1_def.positionName := #DEFENDER
+!insert (pSK_1, pos_pSK_1_def) into PlayerPositions
+
+!new Position('pos_pSK_2_fw')
+!pos_pSK_2_fw.positionName := #FORWARD
+!insert (pSK_2, pos_pSK_2_fw) into PlayerPositions
+
+!new Position('pos_pBR_1_fw')
+!pos_pBR_1_fw.positionName := #FORWARD
+!insert (pBR_1, pos_pBR_1_fw) into PlayerPositions
+
+!new Position('pos_pBR_2_gk')
+!pos_pBR_2_gk.positionName := #GOALKEEPER
+!insert (pBR_2, pos_pBR_2_gk) into PlayerPositions
+
+!new Position('pos_pBR_2_def')
+!pos_pBR_2_def.positionName := #DEFENDER
+!insert (pBR_2, pos_pBR_2_def) into PlayerPositions
+
+!new TrainingObjective('obj_pWP_1')
+!obj_pWP_1.areaToImprove := 'Commanding the penalty area'
+!obj_pWP_1.startDate := '2026-02-01'
+!obj_pWP_1.endDate := '2026-03-01'
+!obj_pWP_1.success := false
+!insert (obj_pWP_1, pWP_1) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pWP_2')
+!obj_pWP_2.areaToImprove := 'First-time finishing'
+!obj_pWP_2.startDate := '2026-02-01'
+!obj_pWP_2.endDate := '2026-03-01'
+!obj_pWP_2.success := true
+!insert (obj_pWP_2, pWP_2) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pWP_3')
+!obj_pWP_3.areaToImprove := 'Switching play under pressure'
+!obj_pWP_3.startDate := '2026-02-01'
+!obj_pWP_3.endDate := '2026-03-01'
+!obj_pWP_3.success := false
+!insert (obj_pWP_3, pWP_3) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pHF_1')
+!obj_pHF_1.areaToImprove := 'Distribution accuracy to fullbacks'
+!obj_pHF_1.startDate := '2026-02-01'
+!obj_pHF_1.endDate := '2026-03-01'
+!obj_pHF_1.success := true
+!insert (obj_pHF_1, pHF_1) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pHF_2')
+!obj_pHF_2.areaToImprove := 'Marking at far post on crosses'
+!obj_pHF_2.startDate := '2026-02-01'
+!obj_pHF_2.endDate := '2026-03-01'
+!obj_pHF_2.success := false
+!insert (obj_pHF_2, pHF_2) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pHF_3')
+!obj_pHF_3.areaToImprove := 'Hold-up play with back to goal'
+!obj_pHF_3.startDate := '2026-02-01'
+!obj_pHF_3.endDate := '2026-03-01'
+!obj_pHF_3.success := false
+!insert (obj_pHF_3, pHF_3) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pSK_1')
+!obj_pSK_1.areaToImprove := 'Tempo control in midfield'
+!obj_pSK_1.startDate := '2026-02-01'
+!obj_pSK_1.endDate := '2026-03-01'
+!obj_pSK_1.success := true
+!insert (obj_pSK_1, pSK_1) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pSK_2')
+!obj_pSK_2.areaToImprove := 'Curved runs to stay onside'
+!obj_pSK_2.startDate := '2026-02-01'
+!obj_pSK_2.endDate := '2026-03-01'
+!obj_pSK_2.success := false
+!insert (obj_pSK_2, pSK_2) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pBR_1')
+!obj_pBR_1.areaToImprove := 'Finishing across the goalkeeper'
+!obj_pBR_1.startDate := '2026-02-01'
+!obj_pBR_1.endDate := '2026-03-01'
+!obj_pBR_1.success := true
+!insert (obj_pBR_1, pBR_1) into TrainingObjectivePlayer
+
+!new TrainingObjective('obj_pBR_2')
+!obj_pBR_2.areaToImprove := 'Positioning on defensive set pieces'
+!obj_pBR_2.startDate := '2026-02-01'
+!obj_pBR_2.endDate := '2026-03-01'
+!obj_pBR_2.success := false
+!insert (obj_pBR_2, pBR_2) into TrainingObjectivePlayer
+
+!new PlayerNotes('pln_wp2')
+!pln_wp2.note := 'Very sharp in small-sided games; can improve tracking back after turnovers.'
+!pln_wp2.date := '2026-02-06'
+!insert (pWP_2, pln_wp2) into PlayerPlayerNotes
+
+!new PlayerNotes('pln_hf2')
+!pln_hf2.note := 'Strong in duels but loses runner at far post when ball is wide.'
+!pln_hf2.date := '2026-02-06'
+!insert (pHF_2, pln_hf2) into PlayerPlayerNotes
+
+!new TrainingFailedToAttend('tfa_wpA1')
+!tfa_wpA1.reason := 'Minor ankle knock'
+!insert (tsWP_A, tfa_wpA1) into TrainingFailded
+!insert (tfa_wpA1, pWP_3) into FailedPlayer
+
+!new TrainingFailedToAttend('tfa_hfA1')
+!tfa_hfA1.reason := 'Work commitment'
+!insert (tsHF_A, tfa_hfA1) into TrainingFailded
+!insert (tfa_hfA1, pHF_3) into FailedPlayer
+
+!new TrainingFailedToAttend('tfa_brA1')
+!tfa_brA1.reason := 'Late arrival (traffic)'
+!insert (tsBR_A, tfa_brA1) into TrainingFailded
+!insert (tfa_brA1, pBR_1) into FailedPlayer
+
+!new Match('matchPO1')
+!matchPO1.date := '2026-02-10'
+!matchPO1.homeAway := true
+
+!new Match('matchSH1')
+!matchSH1.date := '2026-02-11'
+!matchSH1.homeAway := false
+
+!insert (compPlayoff, matchPO1) into CompetitionMatch
+!insert (compShield, matchSH1) into CompetitionMatch
+
+!insert (teamWP1, matchPO1) into LocalMatch
+!insert (teamHF1, matchPO1) into VisitorMatch
+
+!insert (teamSK1, matchSH1) into LocalMatch
+!insert (teamBR1, matchSH1) into VisitorMatch
+
+!new MatchReport('mr_matchPO1')
+!mr_matchPO1.duration := 90
+!mr_matchPO1.scoreVisitor := 0
+!mr_matchPO1.scoreLocal := 1
+!insert (matchPO1, mr_matchPO1) into MatchMatchReport
+
+!new MatchReport('mr_matchSH1')
+!mr_matchSH1.duration := 90
+!mr_matchSH1.scoreVisitor := 2
+!mr_matchSH1.scoreLocal := 2
+!insert (matchSH1, mr_matchSH1) into MatchMatchReport
+
+!new MatchEvent('evPO1_off1')
+!evPO1_off1.eventType := #OFFSIDE
+!evPO1_off1.time := 22
+!insert (matchPO1, evPO1_off1) into MatchMatchEvent
+
+!new MatchEvent('evPO1_pen1')
+!evPO1_pen1.eventType := #PENALTY
+!evPO1_pen1.time := 57
+!insert (matchPO1, evPO1_pen1) into MatchMatchEvent
+
+!new MatchEvent('evPO1_foul1')
+!evPO1_foul1.eventType := #FOUL
+!evPO1_foul1.time := 74
+!insert (matchPO1, evPO1_foul1) into MatchMatchEvent
+
+!new MatchEvent('evPO1_goal1')
+!evPO1_goal1.eventType := #GOAL
+!evPO1_goal1.time := 88
+!insert (matchPO1, evPO1_goal1) into MatchMatchEvent
+
+!new MatchNote('mnPO1_1')
+!mnPO1_1.note := 'Tactical, low-scoring playoff; winning goal came from a late break.'
+!mnPO1_1.date := '2026-02-10'
+!insert (matchPO1, mnPO1_1) into MatchMatchNote
+
+!new MatchEvent('evSH1_goal1')
+!evSH1_goal1.eventType := #GOAL
+!evSH1_goal1.time := 9
+!insert (matchSH1, evSH1_goal1) into MatchMatchEvent
+
+!new MatchEvent('evSH1_goal2')
+!evSH1_goal2.eventType := #GOAL
+!evSH1_goal2.time := 35
+!insert (matchSH1, evSH1_goal2) into MatchMatchEvent
+
+!new MatchEvent('evSH1_goal3')
+!evSH1_goal3.eventType := #GOAL
+!evSH1_goal3.time := 63
+!insert (matchSH1, evSH1_goal3) into MatchMatchEvent
+
+!new MatchEvent('evSH1_goal4')
+!evSH1_goal4.eventType := #GOAL
+!evSH1_goal4.time := 79
+!insert (matchSH1, evSH1_goal4) into MatchMatchEvent
+
+!new MatchEvent('evSH1_corner1')
+!evSH1_corner1.eventType := #CORNER
+!evSH1_corner1.time := 16
+!insert (matchSH1, evSH1_corner1) into MatchMatchEvent
+
+!new MatchEvent('evSH1_foul1')
+!evSH1_foul1.eventType := #FOUL
+!evSH1_foul1.time := 52
+!insert (matchSH1, evSH1_foul1) into MatchMatchEvent
+
+!new MatchNote('mnSH1_1')
+!mnSH1_1.note := 'Entertaining exhibition with momentum swings; both teams scored from open play.'
+!mnSH1_1.date := '2026-02-11'
+!insert (matchSH1, mnSH1_1) into MatchMatchNote
+
+!new MatchPlayer('mpPO1_WP_gk')
+!mpPO1_WP_gk.booked := false
+!mpPO1_WP_gk.goals := 0
+!mpPO1_WP_gk.rating := 7
+
+!new MatchPlayer('mpPO1_WP_fw')
+!mpPO1_WP_fw.booked := false
+!mpPO1_WP_fw.goals := 1
+!mpPO1_WP_fw.rating := 8
+
+!new MatchPlayer('mpPO1_HF_gk')
+!mpPO1_HF_gk.booked := false
+!mpPO1_HF_gk.goals := 0
+!mpPO1_HF_gk.rating := 7
+
+!new MatchPlayer('mpPO1_HF_fw')
+!mpPO1_HF_fw.booked := true
+!mpPO1_HF_fw.goals := 0
+!mpPO1_HF_fw.rating := 6
+
+!insert (matchPO1, mpPO1_WP_gk) into MatchMatchPlayer
+!insert (matchPO1, mpPO1_WP_fw) into MatchMatchPlayer
+!insert (matchPO1, mpPO1_HF_gk) into MatchMatchPlayer
+!insert (matchPO1, mpPO1_HF_fw) into MatchMatchPlayer
+
+!insert (pWP_1, mpPO1_WP_gk) into PlayerMatch
+!insert (pWP_2, mpPO1_WP_fw) into PlayerMatch
+!insert (pHF_1, mpPO1_HF_gk) into PlayerMatch
+!insert (pHF_3, mpPO1_HF_fw) into PlayerMatch
+
+!new MatchPlayerPosition('mppPO1_WP_gk')
+!mppPO1_WP_gk.positionName := #GOALKEEPER
+!mppPO1_WP_gk.number := 1
+!insert (mpPO1_WP_gk, mppPO1_WP_gk) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppPO1_WP_fw')
+!mppPO1_WP_fw.positionName := #FORWARD
+!mppPO1_WP_fw.number := 11
+!insert (mpPO1_WP_fw, mppPO1_WP_fw) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppPO1_HF_gk')
+!mppPO1_HF_gk.positionName := #GOALKEEPER
+!mppPO1_HF_gk.number := 1
+!insert (mpPO1_HF_gk, mppPO1_HF_gk) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppPO1_HF_fw')
+!mppPO1_HF_fw.positionName := #FORWARD
+!mppPO1_HF_fw.number := 9
+!insert (mpPO1_HF_fw, mppPO1_HF_fw) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('mpSH1_SK_mid')
+!mpSH1_SK_mid.booked := false
+!mpSH1_SK_mid.goals := 1
+!mpSH1_SK_mid.rating := 7
+
+!new MatchPlayer('mpSH1_SK_fw')
+!mpSH1_SK_fw.booked := false
+!mpSH1_SK_fw.goals := 1
+!mpSH1_SK_fw.rating := 7
+
+!new MatchPlayer('mpSH1_BR_fw')
+!mpSH1_BR_fw.booked := false
+!mpSH1_BR_fw.goals := 2
+!mpSH1_BR_fw.rating := 8
+
+!new MatchPlayer('mpSH1_BR_gk')
+!mpSH1_BR_gk.booked := false
+!mpSH1_BR_gk.goals := 0
+!mpSH1_BR_gk.rating := 6
+
+!insert (matchSH1, mpSH1_SK_mid) into MatchMatchPlayer
+!insert (matchSH1, mpSH1_SK_fw) into MatchMatchPlayer
+!insert (matchSH1, mpSH1_BR_fw) into MatchMatchPlayer
+!insert (matchSH1, mpSH1_BR_gk) into MatchMatchPlayer
+
+!insert (pSK_1, mpSH1_SK_mid) into PlayerMatch
+!insert (pSK_2, mpSH1_SK_fw) into PlayerMatch
+!insert (pBR_1, mpSH1_BR_fw) into PlayerMatch
+!insert (pBR_2, mpSH1_BR_gk) into PlayerMatch
+
+!new MatchPlayerPosition('mppSH1_SK_mid')
+!mppSH1_SK_mid.positionName := #MIDFIELDER
+!mppSH1_SK_mid.number := 8
+!insert (mpSH1_SK_mid, mppSH1_SK_mid) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppSH1_SK_fw')
+!mppSH1_SK_fw.positionName := #FORWARD
+!mppSH1_SK_fw.number := 10
+!insert (mpSH1_SK_fw, mppSH1_SK_fw) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppSH1_BR_fw')
+!mppSH1_BR_fw.positionName := #FORWARD
+!mppSH1_BR_fw.number := 9
+!insert (mpSH1_BR_fw, mppSH1_BR_fw) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppSH1_BR_gk')
+!mppSH1_BR_gk.positionName := #GOALKEEPER
+!mppSH1_BR_gk.number := 1
+!insert (mpSH1_BR_gk, mppSH1_BR_gk) into MatchPlayerMatchPlayerPosition

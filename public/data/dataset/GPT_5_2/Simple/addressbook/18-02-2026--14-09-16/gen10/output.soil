@@ -1,0 +1,154 @@
+!new AddressBook('ab11')
+
+!new Company('skylineTransit')
+!skylineTransit.name := 'Skyline Transit Authority'
+!skylineTransit.phone := '+1-801-555-1300'
+!skylineTransit.website := 'https://skyline-transit.example'
+!skylineTransit.email := 'contact@skyline-transit.example'
+!skylineTransit.industry := 'Public Transportation'
+
+!new Company('skylineMaintenance')
+!skylineMaintenance.name := 'Skyline Maintenance Division'
+!skylineMaintenance.phone := '+1-801-555-1308'
+!skylineMaintenance.website := ''
+!skylineMaintenance.email := 'maintenance@skyline-transit.example'
+!skylineMaintenance.industry := 'Fleet Maintenance'
+
+!new Company('canyonAnalytics')
+!canyonAnalytics.name := 'Canyon Analytics'
+!canyonAnalytics.phone := '+1-720-555-1310'
+!canyonAnalytics.website := 'https://canyon-analytics.example'
+!canyonAnalytics.email := 'sales@canyon-analytics.example'
+!canyonAnalytics.industry := 'Data Analytics'
+
+!new Person('owenPrice')
+!owenPrice.name := 'Owen Price'
+!owenPrice.phone := '+1-801-555-1320'
+!owenPrice.website := ''
+!owenPrice.email := 'owen.price@skyline-transit.example'
+!owenPrice.title := 'Transit Director'
+
+!new Person('rinaSato')
+!rinaSato.name := 'Rina Sato'
+!rinaSato.phone := '+1-801-555-1321'
+!rinaSato.website := ''
+!rinaSato.email := 'rina.sato@skyline-transit.example'
+!rinaSato.title := 'Dispatch Supervisor'
+
+!new Person('noahBennett')
+!noahBennett.name := 'Noah Bennett'
+!noahBennett.phone := '+1-801-555-1322'
+!noahBennett.website := 'https://noahbennett.example'
+!noahBennett.email := 'noah.bennett@skyline-transit.example'
+!noahBennett.title := 'Maintenance Planner'
+
+!insert (ab11, skylineTransit) into AddressBookMadeOfContact
+!insert (ab11, skylineMaintenance) into AddressBookMadeOfContact
+!insert (ab11, canyonAnalytics) into AddressBookMadeOfContact
+!insert (ab11, owenPrice) into AddressBookMadeOfContact
+!insert (ab11, rinaSato) into AddressBookMadeOfContact
+!insert (ab11, noahBennett) into AddressBookMadeOfContact
+
+!new Address('addrTransitHQ')
+!addrTransitHQ.city := 'Salt Lake City'
+!addrTransitHQ.street := 'Main St'
+!addrTransitHQ.houseNr := '400'
+
+!new Address('addrMaintenanceDepot')
+!addrMaintenanceDepot.city := 'South Salt Lake'
+!addrMaintenanceDepot.street := 'Industrial Blvd'
+!addrMaintenanceDepot.houseNr := '75'
+
+!new Address('addrCanyonOffice')
+!addrCanyonOffice.city := 'Denver'
+!addrCanyonOffice.street := 'Speer Blvd'
+!addrCanyonOffice.houseNr := '1550'
+
+!new Address('addrRinaHome')
+!addrRinaHome.city := 'Murray'
+!addrRinaHome.street := 'State St'
+!addrRinaHome.houseNr := '6120'
+
+!insert (skylineTransit, addrTransitHQ) into ContactContainsAddress
+!insert (skylineMaintenance, addrMaintenanceDepot) into ContactContainsAddress
+!insert (canyonAnalytics, addrCanyonOffice) into ContactContainsAddress
+!insert (rinaSato, addrRinaHome) into ContactContainsAddress
+
+!new Note('nTransitEmailUpgrade')
+!nTransitEmailUpgrade.author := 'Fleet Systems'
+!nTransitEmailUpgrade.time := Date('2026-02-03 07:40')
+!nTransitEmailUpgrade.type := #EMAIL
+!nTransitEmailUpgrade.comment := 'Confirmed schedule for onboard router firmware upgrade across all routes.'
+
+!new Note('nRinaCallIncident')
+!nRinaCallIncident.author := 'Rina Sato'
+!nRinaCallIncident.time := Date('2026-02-04 18:12')
+!nRinaCallIncident.type := #CALL
+!nRinaCallIncident.comment := 'Called road supervisor regarding service disruption; rerouted two buses and notified riders.'
+
+!new Note('nOwenMeetingBudget')
+!nOwenMeetingBudget.author := 'Owen Price'
+!nOwenMeetingBudget.time := Date('2026-02-06 10:00')
+!nOwenMeetingBudget.type := #MEETING
+!nOwenMeetingBudget.comment := 'Reviewed quarterly operating budget and approved overtime cap for snow response.'
+
+!new Note('nRinaEmailRoster')
+!nRinaEmailRoster.author := 'Dispatch Desk'
+!nRinaEmailRoster.time := Date('2026-02-07 06:15')
+!nRinaEmailRoster.type := #EMAIL
+!nRinaEmailRoster.comment := 'Shared updated driver roster and radio call-sign assignments for the weekend.'
+
+!insert (skylineTransit, nTransitEmailUpgrade) into ContactContainsNote
+!insert (rinaSato, nRinaCallIncident) into ContactContainsNote
+!insert (owenPrice, nOwenMeetingBudget) into ContactContainsNote
+!insert (rinaSato, nRinaEmailRoster) into ContactContainsNote
+
+!new Relationship('relTransitSubdivisionMaintenance')
+!relTransitSubdivisionMaintenance.type := #SUBDIVISION
+!insert (skylineTransit, relTransitSubdivisionMaintenance) into ContactToRelationship
+!insert (relTransitSubdivisionMaintenance, skylineMaintenance) into RelationshipToContact
+
+!new Relationship('relTransitCoworkerCanyon')
+!relTransitCoworkerCanyon.type := #COWORKER
+!insert (skylineTransit, relTransitCoworkerCanyon) into ContactToRelationship
+!insert (relTransitCoworkerCanyon, canyonAnalytics) into RelationshipToContact
+
+!new Relationship('relCanyonCoworkerTransit')
+!relCanyonCoworkerTransit.type := #COWORKER
+!insert (canyonAnalytics, relCanyonCoworkerTransit) into ContactToRelationship
+!insert (relCanyonCoworkerTransit, skylineTransit) into RelationshipToContact
+
+!new Relationship('relOwenEmployeeTransit')
+!relOwenEmployeeTransit.type := #EMPLOYEE
+!insert (owenPrice, relOwenEmployeeTransit) into ContactToRelationship
+!insert (relOwenEmployeeTransit, skylineTransit) into RelationshipToContact
+
+!new Relationship('relRinaEmployeeTransit')
+!relRinaEmployeeTransit.type := #EMPLOYEE
+!insert (rinaSato, relRinaEmployeeTransit) into ContactToRelationship
+!insert (relRinaEmployeeTransit, skylineTransit) into RelationshipToContact
+
+!new Relationship('relNoahEmployeeMaintenance')
+!relNoahEmployeeMaintenance.type := #EMPLOYEE
+!insert (noahBennett, relNoahEmployeeMaintenance) into ContactToRelationship
+!insert (relNoahEmployeeMaintenance, skylineMaintenance) into RelationshipToContact
+
+!new Relationship('relRinaBossIsOwen')
+!relRinaBossIsOwen.type := #BOSS
+!insert (rinaSato, relRinaBossIsOwen) into ContactToRelationship
+!insert (relRinaBossIsOwen, owenPrice) into RelationshipToContact
+
+!new Relationship('relNoahBossIsOwen')
+!relNoahBossIsOwen.type := #BOSS
+!insert (noahBennett, relNoahBossIsOwen) into ContactToRelationship
+!insert (relNoahBossIsOwen, owenPrice) into RelationshipToContact
+
+!new Relationship('relRinaCoworkerNoah')
+!relRinaCoworkerNoah.type := #COWORKER
+!insert (rinaSato, relRinaCoworkerNoah) into ContactToRelationship
+!insert (relRinaCoworkerNoah, noahBennett) into RelationshipToContact
+
+!new Relationship('relNoahCoworkerRina')
+!relNoahCoworkerRina.type := #COWORKER
+!insert (noahBennett, relNoahCoworkerRina) into ContactToRelationship
+!insert (relNoahCoworkerRina, rinaSato) into RelationshipToContact

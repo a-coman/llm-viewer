@@ -1,0 +1,169 @@
+!new StateMachine('smCoffee')
+!smCoffee.name := 'coffeeMachine'
+
+!new State('stOff')
+!stOff.name := 'off'
+!new State('stHeating')
+!stHeating.name := 'heating'
+!new State('stReady')
+!stReady.name := 'ready'
+!new State('stBrewing')
+!stBrewing.name := 'brewing'
+!new State('stCleaning')
+!stCleaning.name := 'cleaning'
+
+!insert (smCoffee, stOff) into StateMachineContainsStates
+!insert (smCoffee, stHeating) into StateMachineContainsStates
+!insert (smCoffee, stReady) into StateMachineContainsStates
+!insert (smCoffee, stBrewing) into StateMachineContainsStates
+!insert (smCoffee, stCleaning) into StateMachineContainsStates
+
+!insert (smCoffee, stOff) into StateMachineStartsStates
+
+
+!new Transition('trPowerOn')
+!trPowerOn.name := 'powerOn'
+!new TimeEvent('evPowerOn')
+!evPowerOn.time := 1
+!insert (smCoffee, trPowerOn) into StateMachineContainsTransitions
+!insert (trPowerOn, evPowerOn) into TransitionContainsEvents
+!insert (stOff, trPowerOn) into StateTransition
+!insert (trPowerOn, stHeating) into TransitionState
+
+!new Transition('trWarmUpDone')
+!trWarmUpDone.name := 'warmUpDone'
+!new TimeEvent('evWarmUpDone')
+!evWarmUpDone.time := 40
+!insert (smCoffee, trWarmUpDone) into StateMachineContainsTransitions
+!insert (trWarmUpDone, evWarmUpDone) into TransitionContainsEvents
+!insert (stHeating, trWarmUpDone) into StateTransition
+!insert (trWarmUpDone, stReady) into TransitionState
+
+!new Transition('trStartBrew')
+!trStartBrew.name := 'startBrew'
+!new TimeEvent('evStartBrew')
+!evStartBrew.time := 1
+!insert (smCoffee, trStartBrew) into StateMachineContainsTransitions
+!insert (trStartBrew, evStartBrew) into TransitionContainsEvents
+!insert (stReady, trStartBrew) into StateTransition
+!insert (trStartBrew, stBrewing) into TransitionState
+
+!new Transition('trBrewComplete')
+!trBrewComplete.name := 'brewComplete'
+!new TimeEvent('evBrewComplete')
+!evBrewComplete.time := 25
+!insert (smCoffee, trBrewComplete) into StateMachineContainsTransitions
+!insert (trBrewComplete, evBrewComplete) into TransitionContainsEvents
+!insert (stBrewing, trBrewComplete) into StateTransition
+!insert (trBrewComplete, stReady) into TransitionState
+
+!new Transition('trRunCleaning')
+!trRunCleaning.name := 'runCleaning'
+!new TimeEvent('evRunCleaning')
+!evRunCleaning.time := 2
+!insert (smCoffee, trRunCleaning) into StateMachineContainsTransitions
+!insert (trRunCleaning, evRunCleaning) into TransitionContainsEvents
+!insert (stReady, trRunCleaning) into StateTransition
+!insert (trRunCleaning, stCleaning) into TransitionState
+
+!new Transition('trCleaningDone')
+!trCleaningDone.name := 'cleaningDone'
+!new TimeEvent('evCleaningDone')
+!evCleaningDone.time := 90
+!insert (smCoffee, trCleaningDone) into StateMachineContainsTransitions
+!insert (trCleaningDone, evCleaningDone) into TransitionContainsEvents
+!insert (stCleaning, trCleaningDone) into StateTransition
+!insert (trCleaningDone, stReady) into TransitionState
+
+!new Transition('trPowerOff')
+!trPowerOff.name := 'powerOff'
+!new TimeEvent('evPowerOff')
+!evPowerOff.time := 1
+!insert (smCoffee, trPowerOff) into StateMachineContainsTransitions
+!insert (trPowerOff, evPowerOff) into TransitionContainsEvents
+!insert (stReady, trPowerOff) into StateTransition
+!insert (trPowerOff, stOff) into TransitionState
+
+!new Transition('trEmergencyStop')
+!trEmergencyStop.name := 'emergencyStop'
+!new TimeEvent('evEmergencyStop')
+!evEmergencyStop.time := 1
+!insert (smCoffee, trEmergencyStop) into StateMachineContainsTransitions
+!insert (trEmergencyStop, evEmergencyStop) into TransitionContainsEvents
+!insert (stBrewing, trEmergencyStop) into StateTransition
+!insert (trEmergencyStop, stOff) into TransitionState
+
+
+!new StateMachine('smNetwork')
+!smNetwork.name := 'networkConnection'
+
+!new State('stDisconnected')
+!stDisconnected.name := 'disconnected'
+!new State('stConnecting')
+!stConnecting.name := 'connecting'
+!new State('stConnected')
+!stConnected.name := 'connected'
+!new State('stError')
+!stError.name := 'error'
+
+!insert (smNetwork, stDisconnected) into StateMachineContainsStates
+!insert (smNetwork, stConnecting) into StateMachineContainsStates
+!insert (smNetwork, stConnected) into StateMachineContainsStates
+!insert (smNetwork, stError) into StateMachineContainsStates
+
+!insert (smNetwork, stDisconnected) into StateMachineStartsStates
+
+
+!new Transition('trBeginConnect')
+!trBeginConnect.name := 'beginConnect'
+!new TimeEvent('evBeginConnect')
+!evBeginConnect.time := 1
+!insert (smNetwork, trBeginConnect) into StateMachineContainsTransitions
+!insert (trBeginConnect, evBeginConnect) into TransitionContainsEvents
+!insert (stDisconnected, trBeginConnect) into StateTransition
+!insert (trBeginConnect, stConnecting) into TransitionState
+
+!new Transition('trConnectOk')
+!trConnectOk.name := 'connectOk'
+!new TimeEvent('evConnectOk')
+!evConnectOk.time := 4
+!insert (smNetwork, trConnectOk) into StateMachineContainsTransitions
+!insert (trConnectOk, evConnectOk) into TransitionContainsEvents
+!insert (stConnecting, trConnectOk) into StateTransition
+!insert (trConnectOk, stConnected) into TransitionState
+
+!new Transition('trConnectFail')
+!trConnectFail.name := 'connectFail'
+!new TimeEvent('evConnectFail')
+!evConnectFail.time := 6
+!insert (smNetwork, trConnectFail) into StateMachineContainsTransitions
+!insert (trConnectFail, evConnectFail) into TransitionContainsEvents
+!insert (stConnecting, trConnectFail) into StateTransition
+!insert (trConnectFail, stError) into TransitionState
+
+!new Transition('trRetryConnect')
+!trRetryConnect.name := 'retryConnect'
+!new TimeEvent('evRetryConnect')
+!evRetryConnect.time := 10
+!insert (smNetwork, trRetryConnect) into StateMachineContainsTransitions
+!insert (trRetryConnect, evRetryConnect) into TransitionContainsEvents
+!insert (stError, trRetryConnect) into StateTransition
+!insert (trRetryConnect, stConnecting) into TransitionState
+
+!new Transition('trDropLink')
+!trDropLink.name := 'dropLink'
+!new TimeEvent('evDropLink')
+!evDropLink.time := 1
+!insert (smNetwork, trDropLink) into StateMachineContainsTransitions
+!insert (trDropLink, evDropLink) into TransitionContainsEvents
+!insert (stConnected, trDropLink) into StateTransition
+!insert (trDropLink, stDisconnected) into TransitionState
+
+!new Transition('trHeartbeat')
+!trHeartbeat.name := 'heartbeat'
+!new TimeEvent('evHeartbeat')
+!evHeartbeat.time := 15
+!insert (smNetwork, trHeartbeat) into StateMachineContainsTransitions
+!insert (trHeartbeat, evHeartbeat) into TransitionContainsEvents
+!insert (stConnected, trHeartbeat) into StateTransition
+!insert (trHeartbeat, stConnected) into TransitionState

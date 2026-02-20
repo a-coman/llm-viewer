@@ -1,0 +1,95 @@
+!new RentalOffice('office_birmingham')
+!office_birmingham.name := 'Heartland Truck & Trailer Rental - Birmingham'
+!office_birmingham.number := 404
+!office_birmingham.address := '2900 5th Ave S, Birmingham, AL 35233'
+
+!new RentalOffice('office_hartford')
+!office_hartford.name := 'Northeast Vehicle Rental - Hartford'
+!office_hartford.number := 405
+!office_hartford.address := '85 Weston St, Hartford, CT 06120'
+
+!new Truck('truck_al_16ft_01')
+!truck_al_16ft_01.id := 6101
+!truck_al_16ft_01.registrationState := #AL
+!truck_al_16ft_01.licensePlateNumber := 'AL-TRK-6093'
+!truck_al_16ft_01.vehicleTypeCode := #TRUCK
+!truck_al_16ft_01.registrationLastMaintenanceDate := Date('2026-02-02')
+!truck_al_16ft_01.expirationDate := Date('2027-02-28')
+!truck_al_16ft_01.odometerReading := 15420
+!truck_al_16ft_01.gasTankCapacity := 0.0
+!truck_al_16ft_01.workingRadio := true
+!truck_al_16ft_01.mileage := 0
+
+!new Vehicle('trailer_al_open_01')
+!trailer_al_open_01.id := 8101
+!trailer_al_open_01.registrationState := #AL
+!trailer_al_open_01.licensePlateNumber := 'AL-TRL-2217'
+!trailer_al_open_01.vehicleTypeCode := #OPEN_TRAILER
+!trailer_al_open_01.registrationLastMaintenanceDate := Date('2025-08-18')
+!trailer_al_open_01.expirationDate := Date('2026-08-31')
+
+!new Vehicle('trailer_ct_covered_01')
+!trailer_ct_covered_01.id := 8201
+!trailer_ct_covered_01.registrationState := #CT
+!trailer_ct_covered_01.licensePlateNumber := 'CT-TRL-9031'
+!trailer_ct_covered_01.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ct_covered_01.registrationLastMaintenanceDate := Date('2026-01-06')
+!trailer_ct_covered_01.expirationDate := Date('2027-01-31')
+
+!insert (office_birmingham, truck_al_16ft_01) into RentalOfficeVehicle
+!insert (office_birmingham, trailer_al_open_01) into RentalOfficeVehicle
+!insert (office_hartford, trailer_ct_covered_01) into RentalOfficeVehicle
+
+!new Company('cust_co_starlite')
+!cust_co_starlite.name := 'Starlite Event Services, LLC'
+!cust_co_starlite.address := '1775 2nd Ave N, Birmingham, AL 35203'
+!cust_co_starlite.poorRisk := true
+!cust_co_starlite.idNumber := 77100984
+
+!new Individual('cust_ind_eli')
+!cust_ind_eli.name := 'Eli Patterson'
+!cust_ind_eli.address := '14 Oak Meadow Ln, West Hartford, CT 06107'
+!cust_ind_eli.poorRisk := false
+!cust_ind_eli.homePhone := '860-555-0137'
+!cust_ind_eli.driverLicenseState := #CT
+!cust_ind_eli.driverLicenseNumber := 59381207
+!cust_ind_eli.driverLicenseExpirationDate := Date('2027-11-30')
+
+!new RentalAgreement('ra_20001')
+!ra_20001.number := 20001
+!ra_20001.rentalDate := Date('2026-03-01')
+!ra_20001.anticipatedDuration := 14
+!ra_20001.depositPaid := 1200.00
+!ra_20001.quotedDailyRate := 159.00
+!ra_20001.quotedRatePerMile := 0.85
+
+!new RentalAgreement('ra_20002')
+!ra_20002.number := 20002
+!ra_20002.rentalDate := Date('2026-03-03')
+!ra_20002.anticipatedDuration := 7
+!ra_20002.depositPaid := 200.00
+!ra_20002.quotedDailyRate := 55.00
+!ra_20002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_20003')
+!ra_20003.number := 20003
+!ra_20003.rentalDate := Date('2026-03-05')
+!ra_20003.anticipatedDuration := 2
+!ra_20003.depositPaid := 75.00
+!ra_20003.quotedDailyRate := 29.95
+!ra_20003.quotedRatePerMile := 0.00
+
+!insert (office_birmingham, ra_20001) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford, ra_20001) into RentalOfficeRentalAgreementDrop
+!insert (ra_20001, truck_al_16ft_01) into RentalAgreementVehicle
+!insert (ra_20001, cust_co_starlite) into RentalAgreementCustomer
+
+!insert (office_hartford, ra_20002) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford, ra_20002) into RentalOfficeRentalAgreementDrop
+!insert (ra_20002, trailer_ct_covered_01) into RentalAgreementVehicle
+!insert (ra_20002, cust_ind_eli) into RentalAgreementCustomer
+
+!insert (office_birmingham, ra_20003) into RentalOfficeRentalAgreementOrigin
+!insert (office_birmingham, ra_20003) into RentalOfficeRentalAgreementDrop
+!insert (ra_20003, trailer_al_open_01) into RentalAgreementVehicle
+!insert (ra_20003, cust_ind_eli) into RentalAgreementCustomer

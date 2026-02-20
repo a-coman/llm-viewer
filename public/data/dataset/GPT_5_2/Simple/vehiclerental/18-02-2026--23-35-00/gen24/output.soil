@@ -1,0 +1,145 @@
+!new RentalOffice('office_keywest11')
+!office_keywest11.name := 'Keys Vehicle Rental - Key West'
+!office_keywest11.number := 11001
+!office_keywest11.address := '2801 N Roosevelt Blvd, Key West, FL 33040'
+
+!new RentalOffice('office_wilmington11')
+!office_wilmington11.name := 'Delaware Fleet Desk - Wilmington'
+!office_wilmington11.number := 11002
+!office_wilmington11.address := '600 S Madison St, Wilmington, DE 19801'
+
+!new RentalOffice('office_fortcollins11')
+!office_fortcollins11.name := 'Front Range Returns - Fort Collins'
+!office_fortcollins11.number := 11003
+!office_fortcollins11.address := '4200 S College Ave, Fort Collins, CO 80525'
+
+!new Truck('truck_fl_24ft_1101')
+!truck_fl_24ft_1101.id := 110101
+!truck_fl_24ft_1101.registrationState := #FL
+!truck_fl_24ft_1101.licensePlateNumber := 'FL-TRK-110101'
+!truck_fl_24ft_1101.vehicleTypeCode := #TRUCK24
+!truck_fl_24ft_1101.registrationLastMaintenanceDate := Date('2026-06-30')
+!truck_fl_24ft_1101.expirationDate := Date('2027-06-30')
+!truck_fl_24ft_1101.odometerReading := 189005
+!truck_fl_24ft_1101.gasTankCapacity := 64.0
+!truck_fl_24ft_1101.workingRadio := false
+!truck_fl_24ft_1101.mileage := 8
+
+!new Vehicle('trailer_de_covered_1102')
+!trailer_de_covered_1102.id := 110102
+!trailer_de_covered_1102.registrationState := #DE
+!trailer_de_covered_1102.licensePlateNumber := 'DE-TRL-110102'
+!trailer_de_covered_1102.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_1102.registrationLastMaintenanceDate := Date('2026-05-18')
+!trailer_de_covered_1102.expirationDate := Date('2027-05-31')
+
+!new Vehicle('trailer_fl_open_1103')
+!trailer_fl_open_1103.id := 110103
+!trailer_fl_open_1103.registrationState := #FL
+!trailer_fl_open_1103.licensePlateNumber := 'FL-TRL-110103'
+!trailer_fl_open_1103.vehicleTypeCode := #OPEN_TRAILER
+!trailer_fl_open_1103.registrationLastMaintenanceDate := Date('2026-04-02')
+!trailer_fl_open_1103.expirationDate := Date('2027-04-30')
+
+!insert (office_keywest11, truck_fl_24ft_1101) into RentalOfficeVehicle
+!insert (office_wilmington11, trailer_de_covered_1102) into RentalOfficeVehicle
+!insert (office_keywest11, trailer_fl_open_1103) into RentalOfficeVehicle
+
+!new Individual('cust_ind_mei11')
+!cust_ind_mei11.name := 'Mei Larson'
+!cust_ind_mei11.address := '1010 Whitehead St, Key West, FL 33040'
+!cust_ind_mei11.poorRisk := false
+!cust_ind_mei11.homePhone := '305-555-0133'
+!cust_ind_mei11.driverLicenseState := #FL
+!cust_ind_mei11.driverLicenseNumber := 70031122
+!cust_ind_mei11.driverLicenseExpirationDate := Date('2029-07-31')
+
+!new Company('cust_co_seabreeze11')
+!cust_co_seabreeze11.name := 'SeaBreeze Marine Supply Co.'
+!cust_co_seabreeze11.address := '801 N Market St, Wilmington, DE 19801'
+!cust_co_seabreeze11.poorRisk := true
+!cust_co_seabreeze11.idNumber := 11088001
+
+!new Company('cust_co_mountainlab11')
+!cust_co_mountainlab11.name := 'MountainLab Instruments'
+!cust_co_mountainlab11.address := '300 Pine St, Fort Collins, CO 80524'
+!cust_co_mountainlab11.poorRisk := false
+!cust_co_mountainlab11.idNumber := 11088002
+
+!new RentalAgreement('ra_110001')
+!ra_110001.number := 110001
+!ra_110001.rentalDate := Date('2026-01-04')
+!ra_110001.anticipatedDuration := 1
+!ra_110001.depositPaid := 0.00
+!ra_110001.quotedDailyRate := 0.00
+!ra_110001.quotedRatePerMile := 1.35
+
+!new RentalAgreement('ra_110002')
+!ra_110002.number := 110002
+!ra_110002.rentalDate := Date('2026-01-06')
+!ra_110002.anticipatedDuration := 10
+!ra_110002.depositPaid := 350.00
+!ra_110002.quotedDailyRate := 29.00
+!ra_110002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_110003')
+!ra_110003.number := 110003
+!ra_110003.rentalDate := Date('2026-01-10')
+!ra_110003.anticipatedDuration := 5
+!ra_110003.depositPaid := 1200.00
+!ra_110003.quotedDailyRate := 210.00
+!ra_110003.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_110004')
+!ra_110004.number := 110004
+!ra_110004.rentalDate := Date('2026-01-18')
+!ra_110004.anticipatedDuration := 30
+!ra_110004.depositPaid := 0.00
+!ra_110004.quotedDailyRate := 49.50
+!ra_110004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_110005')
+!ra_110005.number := 110005
+!ra_110005.rentalDate := Date('2026-02-01')
+!ra_110005.anticipatedDuration := 2
+!ra_110005.depositPaid := 200.00
+!ra_110005.quotedDailyRate := 0.00
+!ra_110005.quotedRatePerMile := 0.90
+
+!new RentalAgreement('ra_110006')
+!ra_110006.number := 110006
+!ra_110006.rentalDate := Date('2026-02-12')
+!ra_110006.anticipatedDuration := 3
+!ra_110006.depositPaid := 900.00
+!ra_110006.quotedDailyRate := 189.00
+!ra_110006.quotedRatePerMile := 0.98
+
+!insert (office_wilmington11, ra_110001) into RentalOfficeRentalAgreementOrigin
+!insert (office_keywest11, ra_110001) into RentalOfficeRentalAgreementDrop
+!insert (ra_110001, truck_fl_24ft_1101) into RentalAgreementVehicle
+!insert (ra_110001, cust_co_mountainlab11) into RentalAgreementCustomer
+
+!insert (office_keywest11, ra_110002) into RentalOfficeRentalAgreementOrigin
+!insert (office_keywest11, ra_110002) into RentalOfficeRentalAgreementDrop
+!insert (ra_110002, trailer_fl_open_1103) into RentalAgreementVehicle
+!insert (ra_110002, cust_ind_mei11) into RentalAgreementCustomer
+
+!insert (office_fortcollins11, ra_110003) into RentalOfficeRentalAgreementOrigin
+!insert (office_fortcollins11, ra_110003) into RentalOfficeRentalAgreementDrop
+!insert (ra_110003, truck_fl_24ft_1101) into RentalAgreementVehicle
+!insert (ra_110003, cust_co_seabreeze11) into RentalAgreementCustomer
+
+!insert (office_wilmington11, ra_110004) into RentalOfficeRentalAgreementOrigin
+!insert (office_fortcollins11, ra_110004) into RentalOfficeRentalAgreementDrop
+!insert (ra_110004, trailer_de_covered_1102) into RentalAgreementVehicle
+!insert (ra_110004, cust_co_seabreeze11) into RentalAgreementCustomer
+
+!insert (office_keywest11, ra_110005) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington11, ra_110005) into RentalOfficeRentalAgreementDrop
+!insert (ra_110005, trailer_fl_open_1103) into RentalAgreementVehicle
+!insert (ra_110005, cust_co_mountainlab11) into RentalAgreementCustomer
+
+!insert (office_wilmington11, ra_110006) into RentalOfficeRentalAgreementOrigin
+!insert (office_keywest11, ra_110006) into RentalOfficeRentalAgreementDrop
+!insert (ra_110006, truck_fl_24ft_1101) into RentalAgreementVehicle
+!insert (ra_110006, cust_ind_mei11) into RentalAgreementCustomer

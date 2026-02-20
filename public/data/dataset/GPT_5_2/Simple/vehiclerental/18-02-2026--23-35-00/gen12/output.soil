@@ -1,0 +1,166 @@
+!new RentalOffice('office_colorado_springs')
+!office_colorado_springs.name := 'Pikes Peak Truck & Trailer Rental - Colorado Springs'
+!office_colorado_springs.number := 1401
+!office_colorado_springs.address := '3650 S Academy Blvd, Colorado Springs, CO 80916'
+
+!new RentalOffice('office_tampa')
+!office_tampa.name := 'Bay Area Vehicle Rental - Tampa'
+!office_tampa.number := 1402
+!office_tampa.address := '5402 W Cypress St, Tampa, FL 33607'
+
+!new RentalOffice('office_newlondon')
+!office_newlondon.name := 'Thames River Rentals - New London'
+!office_newlondon.number := 1403
+!office_newlondon.address := '165 State St, New London, CT 06320'
+
+!new RentalOffice('office_dover')
+!office_dover.name := 'Delmarva Fleet Rental - Dover'
+!office_dover.number := 1404
+!office_dover.address := '125 S State St, Dover, DE 19901'
+
+!new Truck('truck_co_24ft_77')
+!truck_co_24ft_77.id := 77077
+!truck_co_24ft_77.registrationState := #CO
+!truck_co_24ft_77.licensePlateNumber := 'CO-TRK-7707'
+!truck_co_24ft_77.vehicleTypeCode := #TRUCK24
+!truck_co_24ft_77.registrationLastMaintenanceDate := Date('2026-05-12')
+!truck_co_24ft_77.expirationDate := Date('2027-05-31')
+!truck_co_24ft_77.odometerReading := 73440
+!truck_co_24ft_77.gasTankCapacity := 62.0
+!truck_co_24ft_77.workingRadio := true
+!truck_co_24ft_77.mileage := 9
+
+!new Truck('truck_co_10ft_78')
+!truck_co_10ft_78.id := 77078
+!truck_co_10ft_78.registrationState := #CO
+!truck_co_10ft_78.licensePlateNumber := 'CO-TRK-7708'
+!truck_co_10ft_78.vehicleTypeCode := #TRUCK10
+!truck_co_10ft_78.registrationLastMaintenanceDate := Date('2026-06-01')
+!truck_co_10ft_78.expirationDate := Date('2027-06-30')
+!truck_co_10ft_78.odometerReading := 19860
+!truck_co_10ft_78.gasTankCapacity := 34.0
+!truck_co_10ft_78.workingRadio := false
+!truck_co_10ft_78.mileage := 16
+
+!new Vehicle('trailer_de_covered_77')
+!trailer_de_covered_77.id := 88077
+!trailer_de_covered_77.registrationState := #DE
+!trailer_de_covered_77.licensePlateNumber := 'DE-TRL-7771'
+!trailer_de_covered_77.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_77.registrationLastMaintenanceDate := Date('2026-04-18')
+!trailer_de_covered_77.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_de_open_78')
+!trailer_de_open_78.id := 88078
+!trailer_de_open_78.registrationState := #DE
+!trailer_de_open_78.licensePlateNumber := 'DE-TRL-7772'
+!trailer_de_open_78.vehicleTypeCode := #OPEN_TRAILER
+!trailer_de_open_78.registrationLastMaintenanceDate := Date('2025-12-21')
+!trailer_de_open_78.expirationDate := Date('2026-12-31')
+
+!insert (office_colorado_springs, truck_co_24ft_77) into RentalOfficeVehicle
+!insert (office_colorado_springs, truck_co_10ft_78) into RentalOfficeVehicle
+!insert (office_dover, trailer_de_covered_77) into RentalOfficeVehicle
+!insert (office_dover, trailer_de_open_78) into RentalOfficeVehicle
+
+!new Company('cust_co_peaklogistics')
+!cust_co_peaklogistics.name := 'Peak Logistics Partners'
+!cust_co_peaklogistics.address := '2400 Waynoka Rd, Colorado Springs, CO 80915'
+!cust_co_peaklogistics.poorRisk := false
+!cust_co_peaklogistics.idNumber := 84012055
+
+!new Individual('cust_ind_brooke')
+!cust_ind_brooke.name := 'Brooke Ellison'
+!cust_ind_brooke.address := '401 S Howard Ave, Tampa, FL 33606'
+!cust_ind_brooke.poorRisk := false
+!cust_ind_brooke.homePhone := '813-555-0151'
+!cust_ind_brooke.driverLicenseState := #FL
+!cust_ind_brooke.driverLicenseNumber := 31077429
+!cust_ind_brooke.driverLicenseExpirationDate := Date('2028-03-18')
+
+!new Individual('cust_ind_hassan')
+!cust_ind_hassan.name := 'Hassan Khalid'
+!cust_ind_hassan.address := '22 Broad St, New London, CT 06320'
+!cust_ind_hassan.poorRisk := true
+!cust_ind_hassan.homePhone := '860-555-0199'
+!cust_ind_hassan.driverLicenseState := #CT
+!cust_ind_hassan.driverLicenseNumber := 44098211
+!cust_ind_hassan.driverLicenseExpirationDate := Date('2026-09-30')
+
+!new RentalAgreement('ra_130001')
+!ra_130001.number := 130001
+!ra_130001.rentalDate := Date('2026-11-02')
+!ra_130001.anticipatedDuration := 3
+!ra_130001.depositPaid := 500.00
+!ra_130001.quotedDailyRate := 169.00
+!ra_130001.quotedRatePerMile := 0.89
+
+!new RentalAgreement('ra_130002')
+!ra_130002.number := 130002
+!ra_130002.rentalDate := Date('2026-11-06')
+!ra_130002.anticipatedDuration := 1
+!ra_130002.depositPaid := 0.00
+!ra_130002.quotedDailyRate := 42.00
+!ra_130002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_130003')
+!ra_130003.number := 130003
+!ra_130003.rentalDate := Date('2026-11-08')
+!ra_130003.anticipatedDuration := 10
+!ra_130003.depositPaid := 1200.00
+!ra_130003.quotedDailyRate := 155.00
+!ra_130003.quotedRatePerMile := 0.80
+
+!new RentalAgreement('ra_130004')
+!ra_130004.number := 130004
+!ra_130004.rentalDate := Date('2026-11-20')
+!ra_130004.anticipatedDuration := 4
+!ra_130004.depositPaid := 250.00
+!ra_130004.quotedDailyRate := 35.00
+!ra_130004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_130005')
+!ra_130005.number := 130005
+!ra_130005.rentalDate := Date('2026-12-01')
+!ra_130005.anticipatedDuration := 2
+!ra_130005.depositPaid := 150.00
+!ra_130005.quotedDailyRate := 29.95
+!ra_130005.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_130006')
+!ra_130006.number := 130006
+!ra_130006.rentalDate := Date('2026-12-03')
+!ra_130006.anticipatedDuration := 6
+!ra_130006.depositPaid := 0.00
+!ra_130006.quotedDailyRate := 59.00
+!ra_130006.quotedRatePerMile := 0.00
+
+!insert (office_tampa, ra_130001) into RentalOfficeRentalAgreementOrigin
+!insert (office_colorado_springs, ra_130001) into RentalOfficeRentalAgreementDrop
+!insert (ra_130001, truck_co_24ft_77) into RentalAgreementVehicle
+!insert (ra_130001, cust_ind_brooke) into RentalAgreementCustomer
+
+!insert (office_colorado_springs, ra_130002) into RentalOfficeRentalAgreementOrigin
+!insert (office_colorado_springs, ra_130002) into RentalOfficeRentalAgreementDrop
+!insert (ra_130002, truck_co_24ft_77) into RentalAgreementVehicle
+!insert (ra_130002, cust_co_peaklogistics) into RentalAgreementCustomer
+
+!insert (office_colorado_springs, ra_130003) into RentalOfficeRentalAgreementOrigin
+!insert (office_tampa, ra_130003) into RentalOfficeRentalAgreementDrop
+!insert (ra_130003, truck_co_24ft_77) into RentalAgreementVehicle
+!insert (ra_130003, cust_co_peaklogistics) into RentalAgreementCustomer
+
+!insert (office_newlondon, ra_130004) into RentalOfficeRentalAgreementOrigin
+!insert (office_dover, ra_130004) into RentalOfficeRentalAgreementDrop
+!insert (ra_130004, trailer_de_covered_77) into RentalAgreementVehicle
+!insert (ra_130004, cust_ind_hassan) into RentalAgreementCustomer
+
+!insert (office_dover, ra_130005) into RentalOfficeRentalAgreementOrigin
+!insert (office_newlondon, ra_130005) into RentalOfficeRentalAgreementDrop
+!insert (ra_130005, trailer_de_open_78) into RentalAgreementVehicle
+!insert (ra_130005, cust_ind_hassan) into RentalAgreementCustomer
+
+!insert (office_tampa, ra_130006) into RentalOfficeRentalAgreementOrigin
+!insert (office_tampa, ra_130006) into RentalOfficeRentalAgreementDrop
+!insert (ra_130006, truck_co_10ft_78) into RentalAgreementVehicle
+!insert (ra_130006, cust_ind_brooke) into RentalAgreementCustomer

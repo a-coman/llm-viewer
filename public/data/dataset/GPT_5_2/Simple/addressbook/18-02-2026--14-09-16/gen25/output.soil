@@ -1,0 +1,227 @@
+!new AddressBook('ab26')
+
+!new Company('museum')
+!museum.name := 'Lakeview Art Museum'
+!museum.phone := '+1-312-555-2600'
+!museum.website := 'https://lakeviewmuseum.example'
+!museum.email := 'info@lakeviewmuseum.example'
+!museum.industry := 'Museum'
+
+!new Company('museumEducation')
+!museumEducation.name := 'Lakeview Art Museum Education Department'
+!museumEducation.phone := '+1-312-555-2601'
+!museumEducation.website := ''
+!museumEducation.email := 'education@lakeviewmuseum.example'
+!museumEducation.industry := 'Education'
+
+!new Company('museumArchive')
+!museumArchive.name := 'Lakeview Museum Archive Unit'
+!museumArchive.phone := '+1-312-555-2602'
+!museumArchive.website := ''
+!museumArchive.email := 'archive@lakeviewmuseum.example'
+!museumArchive.industry := 'Collections'
+
+!new Company('harborCafe')
+!harborCafe.name := 'Harbor Cafe Concessions'
+!harborCafe.phone := '+1-312-555-2610'
+!harborCafe.website := 'https://harborcafe.example'
+!harborCafe.email := 'events@harborcafe.example'
+!harborCafe.industry := 'Food Services'
+
+!new Company('museumInsurance')
+!museumInsurance.name := 'Northgate Fine Arts Insurance'
+!museumInsurance.phone := '+1-312-555-2620'
+!museumInsurance.website := 'https://northgate-insurance.example'
+!museumInsurance.email := 'claims@northgate-insurance.example'
+!museumInsurance.industry := 'Insurance'
+
+!new Person('curatorElise')
+!curatorElise.name := 'Elise Morgan'
+!curatorElise.phone := '+1-312-555-2631'
+!curatorElise.website := 'https://elisemorgan.example'
+!curatorElise.email := 'elise.morgan@lakeviewmuseum.example'
+!curatorElise.title := 'Chief Curator'
+
+!new Person('educatorSam')
+!educatorSam.name := 'Samir Patel'
+!educatorSam.phone := '+1-312-555-2632'
+!educatorSam.website := ''
+!educatorSam.email := 'samir.patel@lakeviewmuseum.example'
+!educatorSam.title := 'Museum Educator'
+
+!new Person('archivistNora')
+!archivistNora.name := 'Nora Kim'
+!archivistNora.phone := '+1-312-555-2633'
+!archivistNora.website := ''
+!archivistNora.email := 'nora.kim@lakeviewmuseum.example'
+!archivistNora.title := 'Archivist'
+
+!new Person('donorLiam')
+!donorLiam.name := 'Liam Carter'
+!donorLiam.phone := '+1-773-555-2640'
+!donorLiam.website := 'https://liamcarter.example'
+!donorLiam.email := 'liam.carter@example.com'
+!donorLiam.title := 'Patron'
+
+!new Person('volunteerRita')
+!volunteerRita.name := 'Rita Alvarez'
+!volunteerRita.phone := '+1-312-555-2642'
+!volunteerRita.website := ''
+!volunteerRita.email := 'rita.alvarez@example.com'
+!volunteerRita.title := 'Volunteer'
+
+!insert (ab26, museum) into AddressBookMadeOfContact
+!insert (ab26, museumEducation) into AddressBookMadeOfContact
+!insert (ab26, museumArchive) into AddressBookMadeOfContact
+!insert (ab26, harborCafe) into AddressBookMadeOfContact
+!insert (ab26, museumInsurance) into AddressBookMadeOfContact
+!insert (ab26, curatorElise) into AddressBookMadeOfContact
+!insert (ab26, educatorSam) into AddressBookMadeOfContact
+!insert (ab26, archivistNora) into AddressBookMadeOfContact
+!insert (ab26, donorLiam) into AddressBookMadeOfContact
+!insert (ab26, volunteerRita) into AddressBookMadeOfContact
+
+!new Address('addrMuseumMain')
+!addrMuseumMain.city := 'Chicago'
+!addrMuseumMain.street := 'N Lakeshore Dr'
+!addrMuseumMain.houseNr := '900'
+
+!new Address('addrMuseumLoading')
+!addrMuseumLoading.city := 'Chicago'
+!addrMuseumLoading.street := 'E Grand Ave'
+!addrMuseumLoading.houseNr := '35'
+
+!new Address('addrEducationWing')
+!addrEducationWing.city := 'Chicago'
+!addrEducationWing.street := 'N Lakeshore Dr'
+!addrEducationWing.houseNr := '900-Wing E'
+
+!new Address('addrArchiveOffsite')
+!addrArchiveOffsite.city := 'Evanston'
+!addrArchiveOffsite.street := 'Davis St'
+!addrArchiveOffsite.houseNr := '240'
+
+!new Address('addrCafeKitchen')
+!addrCafeKitchen.city := 'Chicago'
+!addrCafeKitchen.street := 'W Randolph St'
+!addrCafeKitchen.houseNr := '120'
+
+!new Address('addrDonorMailing')
+!addrDonorMailing.city := 'Oak Park'
+!addrDonorMailing.street := 'Lake St'
+!addrDonorMailing.houseNr := '18'
+
+!insert (museum, addrMuseumMain) into ContactContainsAddress
+!insert (museum, addrMuseumLoading) into ContactContainsAddress
+!insert (museumEducation, addrEducationWing) into ContactContainsAddress
+!insert (museumArchive, addrArchiveOffsite) into ContactContainsAddress
+!insert (harborCafe, addrCafeKitchen) into ContactContainsAddress
+!insert (donorLiam, addrDonorMailing) into ContactContainsAddress
+
+!new Note('nMuseumEmailLoan')
+!nMuseumEmailLoan.author := 'Registrar'
+!nMuseumEmailLoan.time := Date('2026-02-01 10:25')
+!nMuseumEmailLoan.type := #EMAIL
+!nMuseumEmailLoan.comment := 'Sent loan request package for the spring exhibition and asked for courier requirements.'
+
+!new Note('nCuratorMeetingInstall')
+!nCuratorMeetingInstall.author := 'Elise Morgan'
+!nCuratorMeetingInstall.time := Date('2026-02-03 14:00')
+!nCuratorMeetingInstall.type := #MEETING
+!nCuratorMeetingInstall.comment := 'Installation planning: confirmed wall labels, lighting checks, and security coverage.'
+
+!new Note('nEducationCallSchools')
+!nEducationCallSchools.author := 'Samir Patel'
+!nEducationCallSchools.time := Date('2026-02-04 09:10')
+!nEducationCallSchools.type := #CALL
+!nEducationCallSchools.comment := 'Called district coordinator to confirm field trip schedule and accessibility needs.'
+
+!new Note('nDonorEmailPledge')
+!nDonorEmailPledge.author := 'Liam Carter'
+!nDonorEmailPledge.time := Date('2026-02-05 18:40')
+!nDonorEmailPledge.type := #EMAIL
+!nDonorEmailPledge.comment := 'Confirmed pledge amount and requested recognition wording for the donor wall.'
+
+!new Note('nInsuranceEmailCertificate')
+!nInsuranceEmailCertificate.author := 'Northgate Team'
+!nInsuranceEmailCertificate.time := Date('2026-02-06 08:35')
+!nInsuranceEmailCertificate.type := #EMAIL
+!nInsuranceEmailCertificate.comment := 'Issued updated certificate of insurance for outgoing loan and transit coverage.'
+
+!new Note('nArchiveMeetingCataloging')
+!nArchiveMeetingCataloging.author := 'Nora Kim'
+!nArchiveMeetingCataloging.time := Date('2026-02-07 11:00')
+!nArchiveMeetingCataloging.type := #MEETING
+!nArchiveMeetingCataloging.comment := 'Cataloging review: agreed on metadata fields and digitization priority list.'
+
+!insert (museum, nMuseumEmailLoan) into ContactContainsNote
+!insert (curatorElise, nCuratorMeetingInstall) into ContactContainsNote
+!insert (museumEducation, nEducationCallSchools) into ContactContainsNote
+!insert (donorLiam, nDonorEmailPledge) into ContactContainsNote
+!insert (museumInsurance, nInsuranceEmailCertificate) into ContactContainsNote
+!insert (museumArchive, nArchiveMeetingCataloging) into ContactContainsNote
+
+!new Relationship('relMuseumSubdivisionEducation')
+!relMuseumSubdivisionEducation.type := #SUBDIVISION
+!insert (museum, relMuseumSubdivisionEducation) into ContactToRelationship
+!insert (relMuseumSubdivisionEducation, museumEducation) into RelationshipToContact
+
+!new Relationship('relMuseumSubdivisionArchive')
+!relMuseumSubdivisionArchive.type := #SUBDIVISION
+!insert (museum, relMuseumSubdivisionArchive) into ContactToRelationship
+!insert (relMuseumSubdivisionArchive, museumArchive) into RelationshipToContact
+
+!new Relationship('relCafeCoworkerMuseum')
+!relCafeCoworkerMuseum.type := #COWORKER
+!insert (harborCafe, relCafeCoworkerMuseum) into ContactToRelationship
+!insert (relCafeCoworkerMuseum, museum) into RelationshipToContact
+
+!new Relationship('relMuseumCoworkerInsurance')
+!relMuseumCoworkerInsurance.type := #COWORKER
+!insert (museum, relMuseumCoworkerInsurance) into ContactToRelationship
+!insert (relMuseumCoworkerInsurance, museumInsurance) into RelationshipToContact
+
+!new Relationship('relEliseEmployeeMuseum')
+!relEliseEmployeeMuseum.type := #EMPLOYEE
+!insert (curatorElise, relEliseEmployeeMuseum) into ContactToRelationship
+!insert (relEliseEmployeeMuseum, museum) into RelationshipToContact
+
+!new Relationship('relSamEmployeeEducation')
+!relSamEmployeeEducation.type := #EMPLOYEE
+!insert (educatorSam, relSamEmployeeEducation) into ContactToRelationship
+!insert (relSamEmployeeEducation, museumEducation) into RelationshipToContact
+
+!new Relationship('relNoraEmployeeArchive')
+!relNoraEmployeeArchive.type := #EMPLOYEE
+!insert (archivistNora, relNoraEmployeeArchive) into ContactToRelationship
+!insert (relNoraEmployeeArchive, museumArchive) into RelationshipToContact
+
+!new Relationship('relVolunteerEmployeeMuseum')
+!relVolunteerEmployeeMuseum.type := #EMPLOYEE
+!insert (volunteerRita, relVolunteerEmployeeMuseum) into ContactToRelationship
+!insert (relVolunteerEmployeeMuseum, museum) into RelationshipToContact
+
+!new Relationship('relSamBossIsElise')
+!relSamBossIsElise.type := #BOSS
+!insert (educatorSam, relSamBossIsElise) into ContactToRelationship
+!insert (relSamBossIsElise, curatorElise) into RelationshipToContact
+
+!new Relationship('relNoraBossIsElise')
+!relNoraBossIsElise.type := #BOSS
+!insert (archivistNora, relNoraBossIsElise) into ContactToRelationship
+!insert (relNoraBossIsElise, curatorElise) into RelationshipToContact
+
+!new Relationship('relRitaBossIsSam')
+!relRitaBossIsSam.type := #BOSS
+!insert (volunteerRita, relRitaBossIsSam) into ContactToRelationship
+!insert (relRitaBossIsSam, educatorSam) into RelationshipToContact
+
+!new Relationship('relDonorCoworkerMuseum')
+!relDonorCoworkerMuseum.type := #COWORKER
+!insert (donorLiam, relDonorCoworkerMuseum) into ContactToRelationship
+!insert (relDonorCoworkerMuseum, museum) into RelationshipToContact
+
+!new Relationship('relEliseCoworkerNora')
+!relEliseCoworkerNora.type := #COWORKER
+!insert (curatorElise, relEliseCoworkerNora) into ContactToRelationship
+!insert (relEliseCoworkerNora, archivistNora) into RelationshipToContact

@@ -1,0 +1,167 @@
+!new AddressBook('ab13')
+
+!new Company('mountainRescue')
+!mountainRescue.name := 'Cascade Mountain Rescue'
+!mountainRescue.phone := '+1-509-555-3010'
+!mountainRescue.website := 'https://cascade-rescue.example'
+!mountainRescue.email := 'dispatch@cascade-rescue.example'
+!mountainRescue.industry := 'Emergency Services'
+
+!new Company('rescueTrainingUnit')
+!rescueTrainingUnit.name := 'Cascade Rescue Training Unit'
+!rescueTrainingUnit.phone := '+1-509-555-3015'
+!rescueTrainingUnit.website := ''
+!rescueTrainingUnit.email := 'training@cascade-rescue.example'
+!rescueTrainingUnit.industry := 'Training'
+
+!new Company('summitGear')
+!summitGear.name := 'Summit Gear Supply'
+!summitGear.phone := '+1-425-555-3050'
+!summitGear.website := 'https://summitgear.example'
+!summitGear.email := 'orders@summitgear.example'
+!summitGear.industry := 'Outdoor Equipment'
+
+!new Person('rowanCole')
+!rowanCole.name := 'Rowan Cole'
+!rowanCole.phone := '+1-509-555-3021'
+!rowanCole.website := ''
+!rowanCole.email := 'rowan.cole@cascade-rescue.example'
+!rowanCole.title := 'Operations Coordinator'
+
+!new Person('eliTurner')
+!eliTurner.name := 'Eli Turner'
+!eliTurner.phone := '+1-509-555-3022'
+!eliTurner.website := 'https://eliturner.example'
+!eliTurner.email := 'eli.turner@cascade-rescue.example'
+!eliTurner.title := 'Field Medic'
+
+!new Person('miaWong')
+!miaWong.name := 'Mia Wong'
+!miaWong.phone := '+1-509-555-3023'
+!miaWong.website := ''
+!miaWong.email := 'mia.wong@cascade-rescue.example'
+!miaWong.title := 'Volunteer Rescuer'
+
+!insert (ab13, mountainRescue) into AddressBookMadeOfContact
+!insert (ab13, rescueTrainingUnit) into AddressBookMadeOfContact
+!insert (ab13, summitGear) into AddressBookMadeOfContact
+!insert (ab13, rowanCole) into AddressBookMadeOfContact
+!insert (ab13, eliTurner) into AddressBookMadeOfContact
+!insert (ab13, miaWong) into AddressBookMadeOfContact
+
+!new Address('addrRescueHQ')
+!addrRescueHQ.city := 'Spokane'
+!addrRescueHQ.street := 'Riverside Ave'
+!addrRescueHQ.houseNr := '120'
+
+!new Address('addrRescueStaging')
+!addrRescueStaging.city := 'Spokane'
+!addrRescueStaging.street := 'Sprague Ave'
+!addrRescueStaging.houseNr := '4450'
+
+!new Address('addrEliHome')
+!addrEliHome.city := 'Spokane Valley'
+!addrEliHome.street := 'E Mission Ave'
+!addrEliHome.houseNr := '930'
+
+!new Address('addrSupplierWarehouse')
+!addrSupplierWarehouse.city := 'Bellevue'
+!addrSupplierWarehouse.street := 'NE 20th St'
+!addrSupplierWarehouse.houseNr := '1110'
+
+!new Address('addrRowanMailing')
+!addrRowanMailing.city := 'Spokane'
+!addrRowanMailing.street := 'W Boone Ave'
+!addrRowanMailing.houseNr := '515'
+
+!insert (mountainRescue, addrRescueHQ) into ContactContainsAddress
+!insert (mountainRescue, addrRescueStaging) into ContactContainsAddress
+!insert (eliTurner, addrEliHome) into ContactContainsAddress
+!insert (summitGear, addrSupplierWarehouse) into ContactContainsAddress
+!insert (rowanCole, addrRowanMailing) into ContactContainsAddress
+
+!new Note('nDispatchCall')
+!nDispatchCall.author := 'Dispatch'
+!nDispatchCall.time := Date('2026-02-09 05:45')
+!nDispatchCall.type := #CALL
+!nDispatchCall.comment := 'Early morning callout; team assembled at staging location and checked radio channels.'
+
+!new Note('nRescueEmailGear')
+!nRescueEmailGear.author := 'Rowan Cole'
+!nRescueEmailGear.time := Date('2026-02-10 14:10')
+!nRescueEmailGear.type := #EMAIL
+!nRescueEmailGear.comment := 'Requested replacement harnesses and headlamps; asked for delivery before weekend training.'
+
+!new Note('nTrainingMeeting')
+!nTrainingMeeting.author := 'Training Coordinator'
+!nTrainingMeeting.time := Date('2026-02-11 18:30')
+!nTrainingMeeting.type := #MEETING
+!nTrainingMeeting.comment := 'Reviewed winter navigation module and updated attendance list; confirmed practical assessment plan.'
+
+!new Note('nMiaEmailAvailability')
+!nMiaEmailAvailability.author := 'Mia Wong'
+!nMiaEmailAvailability.time := Date('2026-02-12 09:05')
+!nMiaEmailAvailability.type := #EMAIL
+!nMiaEmailAvailability.comment := 'Shared availability for the next two standby rotations and requested one shift swap.'
+
+!new Note('nEliCallSupplies')
+!nEliCallSupplies.author := 'Eli Turner'
+!nEliCallSupplies.time := Date('2026-02-12 12:40')
+!nEliCallSupplies.type := #CALL
+!nEliCallSupplies.comment := 'Called about medical kit restock; confirmed expiration dates and replaced missing items.'
+
+!insert (mountainRescue, nDispatchCall) into ContactContainsNote
+!insert (mountainRescue, nRescueEmailGear) into ContactContainsNote
+!insert (rescueTrainingUnit, nTrainingMeeting) into ContactContainsNote
+!insert (miaWong, nMiaEmailAvailability) into ContactContainsNote
+!insert (eliTurner, nEliCallSupplies) into ContactContainsNote
+
+!new Relationship('relRescueSubdivisionTraining')
+!relRescueSubdivisionTraining.type := #SUBDIVISION
+!insert (mountainRescue, relRescueSubdivisionTraining) into ContactToRelationship
+!insert (relRescueSubdivisionTraining, rescueTrainingUnit) into RelationshipToContact
+
+!new Relationship('relRescueCoworkerSupplier')
+!relRescueCoworkerSupplier.type := #COWORKER
+!insert (mountainRescue, relRescueCoworkerSupplier) into ContactToRelationship
+!insert (relRescueCoworkerSupplier, summitGear) into RelationshipToContact
+
+!new Relationship('relSupplierCoworkerRescue')
+!relSupplierCoworkerRescue.type := #COWORKER
+!insert (summitGear, relSupplierCoworkerRescue) into ContactToRelationship
+!insert (relSupplierCoworkerRescue, mountainRescue) into RelationshipToContact
+
+!new Relationship('relRowanEmployeeRescue')
+!relRowanEmployeeRescue.type := #EMPLOYEE
+!insert (rowanCole, relRowanEmployeeRescue) into ContactToRelationship
+!insert (relRowanEmployeeRescue, mountainRescue) into RelationshipToContact
+
+!new Relationship('relEliEmployeeRescue')
+!relEliEmployeeRescue.type := #EMPLOYEE
+!insert (eliTurner, relEliEmployeeRescue) into ContactToRelationship
+!insert (relEliEmployeeRescue, mountainRescue) into RelationshipToContact
+
+!new Relationship('relEliEmployeeTraining')
+!relEliEmployeeTraining.type := #EMPLOYEE
+!insert (eliTurner, relEliEmployeeTraining) into ContactToRelationship
+!insert (relEliEmployeeTraining, rescueTrainingUnit) into RelationshipToContact
+
+!new Relationship('relMiaEmployeeRescue')
+!relMiaEmployeeRescue.type := #EMPLOYEE
+!insert (miaWong, relMiaEmployeeRescue) into ContactToRelationship
+!insert (relMiaEmployeeRescue, mountainRescue) into RelationshipToContact
+
+!new Relationship('relMiaBossIsRowan')
+!relMiaBossIsRowan.type := #BOSS
+!insert (miaWong, relMiaBossIsRowan) into ContactToRelationship
+!insert (relMiaBossIsRowan, rowanCole) into RelationshipToContact
+
+!new Relationship('relEliBossIsRowan')
+!relEliBossIsRowan.type := #BOSS
+!insert (eliTurner, relEliBossIsRowan) into ContactToRelationship
+!insert (relEliBossIsRowan, rowanCole) into RelationshipToContact
+
+!new Relationship('relEliCoworkerMia')
+!relEliCoworkerMia.type := #COWORKER
+!insert (eliTurner, relEliCoworkerMia) into ContactToRelationship
+!insert (relEliCoworkerMia, miaWong) into RelationshipToContact

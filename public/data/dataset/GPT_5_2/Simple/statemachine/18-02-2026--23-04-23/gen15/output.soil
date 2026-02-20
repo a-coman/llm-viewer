@@ -1,0 +1,218 @@
+!new StateMachine('smLibrary')
+!smLibrary.name := 'libraryLoanLifecycle'
+
+!new State('lbAvailable')
+!lbAvailable.name := 'available'
+!new State('lbReserved')
+!lbReserved.name := 'reserved'
+!new State('lbCheckedOut')
+!lbCheckedOut.name := 'checkedOut'
+!new State('lbOverdue')
+!lbOverdue.name := 'overdue'
+!new State('lbLost')
+!lbLost.name := 'lost'
+
+!insert (smLibrary, lbAvailable) into StateMachineContainsStates
+!insert (smLibrary, lbReserved) into StateMachineContainsStates
+!insert (smLibrary, lbCheckedOut) into StateMachineContainsStates
+!insert (smLibrary, lbOverdue) into StateMachineContainsStates
+!insert (smLibrary, lbLost) into StateMachineContainsStates
+
+!insert (smLibrary, lbAvailable) into StateMachineStartsStates
+
+
+!new Transition('lbReserve')
+!lbReserve.name := 'reserveItem'
+!new TimeEvent('evLbReserve')
+!evLbReserve.time := 2
+
+!new Transition('lbCancelReservation')
+!lbCancelReservation.name := 'cancelReservation'
+!new TimeEvent('evLbCancelReservation')
+!evLbCancelReservation.time := 5
+
+!new Transition('lbCheckoutFromAvailable')
+!lbCheckoutFromAvailable.name := 'checkoutDirect'
+!new TimeEvent('evLbCheckoutFromAvailable')
+!evLbCheckoutFromAvailable.time := 3
+
+!new Transition('lbCheckoutFromReserved')
+!lbCheckoutFromReserved.name := 'checkoutReserved'
+!new TimeEvent('evLbCheckoutFromReserved')
+!evLbCheckoutFromReserved.time := 3
+
+!new Transition('lbReturnOnTime')
+!lbReturnOnTime.name := 'returnOnTime'
+!new TimeEvent('evLbReturnOnTime')
+!evLbReturnOnTime.time := 20160
+
+!new Transition('lbBecomeOverdue')
+!lbBecomeOverdue.name := 'becomeOverdue'
+!new TimeEvent('evLbBecomeOverdue')
+!evLbBecomeOverdue.time := 20160
+
+!new Transition('lbReturnLate')
+!lbReturnLate.name := 'returnLate'
+!new TimeEvent('evLbReturnLate')
+!evLbReturnLate.time := 4320
+
+!new Transition('lbReportLost')
+!lbReportLost.name := 'reportLost'
+!new TimeEvent('evLbReportLost')
+!evLbReportLost.time := 1
+
+!new Transition('lbFoundAfterLost')
+!lbFoundAfterLost.name := 'foundAfterLost'
+!new TimeEvent('evLbFoundAfterLost')
+!evLbFoundAfterLost.time := 1440
+
+
+!insert (smLibrary, lbReserve) into StateMachineContainsTransitions
+!insert (smLibrary, lbCancelReservation) into StateMachineContainsTransitions
+!insert (smLibrary, lbCheckoutFromAvailable) into StateMachineContainsTransitions
+!insert (smLibrary, lbCheckoutFromReserved) into StateMachineContainsTransitions
+!insert (smLibrary, lbReturnOnTime) into StateMachineContainsTransitions
+!insert (smLibrary, lbBecomeOverdue) into StateMachineContainsTransitions
+!insert (smLibrary, lbReturnLate) into StateMachineContainsTransitions
+!insert (smLibrary, lbReportLost) into StateMachineContainsTransitions
+!insert (smLibrary, lbFoundAfterLost) into StateMachineContainsTransitions
+
+!insert (lbReserve, evLbReserve) into TransitionContainsEvents
+!insert (lbCancelReservation, evLbCancelReservation) into TransitionContainsEvents
+!insert (lbCheckoutFromAvailable, evLbCheckoutFromAvailable) into TransitionContainsEvents
+!insert (lbCheckoutFromReserved, evLbCheckoutFromReserved) into TransitionContainsEvents
+!insert (lbReturnOnTime, evLbReturnOnTime) into TransitionContainsEvents
+!insert (lbBecomeOverdue, evLbBecomeOverdue) into TransitionContainsEvents
+!insert (lbReturnLate, evLbReturnLate) into TransitionContainsEvents
+!insert (lbReportLost, evLbReportLost) into TransitionContainsEvents
+!insert (lbFoundAfterLost, evLbFoundAfterLost) into TransitionContainsEvents
+
+
+!insert (lbAvailable, lbReserve) into StateTransition
+!insert (lbReserve, lbReserved) into TransitionState
+
+!insert (lbReserved, lbCancelReservation) into StateTransition
+!insert (lbCancelReservation, lbAvailable) into TransitionState
+
+!insert (lbAvailable, lbCheckoutFromAvailable) into StateTransition
+!insert (lbCheckoutFromAvailable, lbCheckedOut) into TransitionState
+
+!insert (lbReserved, lbCheckoutFromReserved) into StateTransition
+!insert (lbCheckoutFromReserved, lbCheckedOut) into TransitionState
+
+!insert (lbCheckedOut, lbReturnOnTime) into StateTransition
+!insert (lbReturnOnTime, lbAvailable) into TransitionState
+
+!insert (lbCheckedOut, lbBecomeOverdue) into StateTransition
+!insert (lbBecomeOverdue, lbOverdue) into TransitionState
+
+!insert (lbOverdue, lbReturnLate) into StateTransition
+!insert (lbReturnLate, lbAvailable) into TransitionState
+
+!insert (lbCheckedOut, lbReportLost) into StateTransition
+!insert (lbReportLost, lbLost) into TransitionState
+
+!insert (lbLost, lbFoundAfterLost) into StateTransition
+!insert (lbFoundAfterLost, lbAvailable) into TransitionState
+
+
+
+!new StateMachine('smRestaurant')
+!smRestaurant.name := 'restaurantTableTurnover'
+
+!new State('rtEmpty')
+!rtEmpty.name := 'empty'
+!new State('rtSeated')
+!rtSeated.name := 'seated'
+!new State('rtOrdering')
+!rtOrdering.name := 'ordering'
+!new State('rtEating')
+!rtEating.name := 'eating'
+!new State('rtPaying')
+!rtPaying.name := 'paying'
+!new State('rtCleaning')
+!rtCleaning.name := 'cleaning'
+
+!insert (smRestaurant, rtEmpty) into StateMachineContainsStates
+!insert (smRestaurant, rtSeated) into StateMachineContainsStates
+!insert (smRestaurant, rtOrdering) into StateMachineContainsStates
+!insert (smRestaurant, rtEating) into StateMachineContainsStates
+!insert (smRestaurant, rtPaying) into StateMachineContainsStates
+!insert (smRestaurant, rtCleaning) into StateMachineContainsStates
+
+!insert (smRestaurant, rtEmpty) into StateMachineStartsStates
+
+
+!new Transition('rtSeatGuests')
+!rtSeatGuests.name := 'seatGuests'
+!new TimeEvent('evRtSeatGuests')
+!evRtSeatGuests.time := 1
+
+!new Transition('rtTakeOrder')
+!rtTakeOrder.name := 'takeOrder'
+!new TimeEvent('evRtTakeOrder')
+!evRtTakeOrder.time := 6
+
+!new Transition('rtServeFood')
+!rtServeFood.name := 'serveFood'
+!new TimeEvent('evRtServeFood')
+!evRtServeFood.time := 18
+
+!new Transition('rtRequestBill')
+!rtRequestBill.name := 'requestBill'
+!new TimeEvent('evRtRequestBill')
+!evRtRequestBill.time := 30
+
+!new Transition('rtPaymentDone')
+!rtPaymentDone.name := 'paymentDone'
+!new TimeEvent('evRtPaymentDone')
+!evRtPaymentDone.time := 4
+
+!new Transition('rtCleanTable')
+!rtCleanTable.name := 'cleanTable'
+!new TimeEvent('evRtCleanTable')
+!evRtCleanTable.time := 7
+
+!new Transition('rtQuickReset')
+!rtQuickReset.name := 'quickReset'
+!new TimeEvent('evRtQuickReset')
+!evRtQuickReset.time := 1
+
+
+!insert (smRestaurant, rtSeatGuests) into StateMachineContainsTransitions
+!insert (smRestaurant, rtTakeOrder) into StateMachineContainsTransitions
+!insert (smRestaurant, rtServeFood) into StateMachineContainsTransitions
+!insert (smRestaurant, rtRequestBill) into StateMachineContainsTransitions
+!insert (smRestaurant, rtPaymentDone) into StateMachineContainsTransitions
+!insert (smRestaurant, rtCleanTable) into StateMachineContainsTransitions
+!insert (smRestaurant, rtQuickReset) into StateMachineContainsTransitions
+
+!insert (rtSeatGuests, evRtSeatGuests) into TransitionContainsEvents
+!insert (rtTakeOrder, evRtTakeOrder) into TransitionContainsEvents
+!insert (rtServeFood, evRtServeFood) into TransitionContainsEvents
+!insert (rtRequestBill, evRtRequestBill) into TransitionContainsEvents
+!insert (rtPaymentDone, evRtPaymentDone) into TransitionContainsEvents
+!insert (rtCleanTable, evRtCleanTable) into TransitionContainsEvents
+!insert (rtQuickReset, evRtQuickReset) into TransitionContainsEvents
+
+
+!insert (rtEmpty, rtSeatGuests) into StateTransition
+!insert (rtSeatGuests, rtSeated) into TransitionState
+
+!insert (rtSeated, rtTakeOrder) into StateTransition
+!insert (rtTakeOrder, rtOrdering) into TransitionState
+
+!insert (rtOrdering, rtServeFood) into StateTransition
+!insert (rtServeFood, rtEating) into TransitionState
+
+!insert (rtEating, rtRequestBill) into StateTransition
+!insert (rtRequestBill, rtPaying) into TransitionState
+
+!insert (rtPaying, rtPaymentDone) into StateTransition
+!insert (rtPaymentDone, rtCleaning) into TransitionState
+
+!insert (rtCleaning, rtCleanTable) into StateTransition
+!insert (rtCleanTable, rtEmpty) into TransitionState
+
+!insert (rtSeated, rtQuickReset) into StateTransition
+!insert (rtQuickReset, rtEmpty) into TransitionState

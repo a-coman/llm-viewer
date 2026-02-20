@@ -1,0 +1,89 @@
+!new Booking('booking4')
+!booking4.startDate := '2026-06-14'
+!booking4.endDate := '2026-06-21'
+!booking4.canceled := false
+!booking4.bookingId := 2001
+!booking4.confirmed := true
+
+!new Customer('customer4')
+!customer4.firstName := 'Hiro'
+!customer4.lastName := 'Tanaka'
+
+!new RoomReservation('rr4')
+!rr4.checkInDate := '2026-06-14'
+!rr4.checkOutDate := '2026-06-18'
+
+!new RoomReservation('rr5')
+!rr5.checkInDate := '2026-06-18'
+!rr5.checkOutDate := '2026-06-21'
+
+!new Room('room410')
+!room410.roomNumber := 410
+!room410.numBeds := 3
+!room410.pricePerNight := 240.0
+!room410.occupied := false
+!room410.blocked := true
+
+!new Room('room411')
+!room411.roomNumber := 411
+!room411.numBeds := 3
+!room411.pricePerNight := 240.0
+!room411.occupied := false
+!room411.blocked := true
+
+!new Room('room120')
+!room120.roomNumber := 120
+!room120.numBeds := 1
+!room120.pricePerNight := 105.0
+!room120.occupied := false
+!room120.blocked := true
+
+!new RoomExtra('extraAirportPickup')
+!extraAirportPickup.price := 80.0
+!extraAirportPickup.description := 'Airport pickup (one-way)'
+
+!new RoomExtra('extraLateCheckout')
+!extraLateCheckout.price := 40.0
+!extraLateCheckout.description := 'Late checkout'
+
+!new RoomExtra('extraLaundry')
+!extraLaundry.price := 0.0
+!extraLaundry.description := 'Laundry voucher (promo)'
+
+!new Bill('bill4')
+!bill4.billId := 6001
+!bill4.price := 1200.0
+
+!new Bill('bill5')
+!bill5.billId := 6002
+!bill5.price := 395.0
+
+!insert (booking4, customer4) into BookingCustomer
+!insert (booking4, rr4) into BookingRoomReservation
+!insert (booking4, rr5) into BookingRoomReservation
+
+!insert (rr4, room410) into RoomReservationRoom
+!insert (rr4, room411) into RoomReservationRoom
+!insert (rr5, room120) into RoomReservationRoom
+
+!insert (rr4, extraAirportPickup) into RoomReservationExtras
+!insert (rr4, extraLaundry) into RoomReservationExtras
+!insert (rr5, extraLateCheckout) into RoomReservationExtras
+
+!insert (bill4, rr4) into BillRoomReservation
+!insert (bill5, rr5) into BillRoomReservation
+
+!insert (booking4, bill4) into BookingBill
+!insert (booking4, bill5) into BookingBill
+
+!new FreeRoomTypesDTO('dtoFamily')
+!dtoFamily.roomTypeDescription := 'Family room (3 beds)'
+!dtoFamily.numBeds := 3
+!dtoFamily.pricePerNight := 240.0
+!dtoFamily.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('dtoEconomySingle')
+!dtoEconomySingle.roomTypeDescription := 'Economy single (courtyard)'
+!dtoEconomySingle.numBeds := 1
+!dtoEconomySingle.pricePerNight := 105.0
+!dtoEconomySingle.numFreeRooms := 9

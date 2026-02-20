@@ -1,0 +1,132 @@
+!new AddressBook('ab4')
+
+!new Company('heliosHoldings')
+!heliosHoldings.name := 'Helios Holdings'
+!heliosHoldings.phone := '+1-713-555-0400'
+!heliosHoldings.website := 'https://helios-holdings.example'
+!heliosHoldings.email := 'corporate@helios-holdings.example'
+!heliosHoldings.industry := 'Energy'
+
+!new Company('heliosSolar')
+!heliosSolar.name := 'Helios Solar Division'
+!heliosSolar.phone := '+1-602-555-0412'
+!heliosSolar.website := 'https://solar.helios-holdings.example'
+!heliosSolar.email := 'solar@helios-holdings.example'
+!heliosSolar.industry := 'Renewable Energy'
+
+!new Company('heliosWind')
+!heliosWind.name := 'Helios Wind Division'
+!heliosWind.phone := '+1-503-555-0418'
+!heliosWind.website := 'https://wind.helios-holdings.example'
+!heliosWind.email := 'wind@helios-holdings.example'
+!heliosWind.industry := 'Renewable Energy'
+
+!new Company('orionConsulting')
+!orionConsulting.name := 'Orion Consulting Group'
+!orionConsulting.phone := '+1-415-555-0430'
+!orionConsulting.website := 'https://orion-consulting.example'
+!orionConsulting.email := 'office@orion-consulting.example'
+!orionConsulting.industry := 'Consulting'
+
+!new Person('juliaKim')
+!juliaKim.name := 'Julia Kim'
+!juliaKim.phone := '+1-713-555-0444'
+!juliaKim.website := ''
+!juliaKim.email := 'julia.kim@example.com'
+!juliaKim.title := 'Chief of Staff'
+
+!new Person('marioRossi')
+!marioRossi.name := 'Mario Rossi'
+!marioRossi.phone := '+1-602-555-0451'
+!marioRossi.website := 'https://mario-rossi.example'
+!marioRossi.email := 'm.rossi@example.com'
+!marioRossi.title := 'Accountant'
+
+!insert (ab4, heliosHoldings) into AddressBookMadeOfContact
+!insert (ab4, heliosSolar) into AddressBookMadeOfContact
+!insert (ab4, heliosWind) into AddressBookMadeOfContact
+!insert (ab4, orionConsulting) into AddressBookMadeOfContact
+!insert (ab4, juliaKim) into AddressBookMadeOfContact
+!insert (ab4, marioRossi) into AddressBookMadeOfContact
+
+!new Address('addrHeliosHQ')
+!addrHeliosHQ.city := 'Houston'
+!addrHeliosHQ.street := 'Louisiana St'
+!addrHeliosHQ.houseNr := '1111'
+
+!new Address('addrJuliaOffice')
+!addrJuliaOffice.city := 'Houston'
+!addrJuliaOffice.street := 'Travis St'
+!addrJuliaOffice.houseNr := '600'
+
+!new Address('addrJuliaHome')
+!addrJuliaHome.city := 'Sugar Land'
+!addrJuliaHome.street := 'Austin Pkwy'
+!addrJuliaHome.houseNr := '742'
+
+!new Address('addrSolarPlant')
+!addrSolarPlant.city := 'Phoenix'
+!addrSolarPlant.street := 'E Buckeye Rd'
+!addrSolarPlant.houseNr := '2600'
+
+!insert (heliosHoldings, addrHeliosHQ) into ContactContainsAddress
+!insert (juliaKim, addrJuliaOffice) into ContactContainsAddress
+!insert (juliaKim, addrJuliaHome) into ContactContainsAddress
+!insert (heliosSolar, addrSolarPlant) into ContactContainsAddress
+
+!new Note('nMarioCallPayroll')
+!nMarioCallPayroll.author := 'Mario Rossi'
+!nMarioCallPayroll.time := Date('2026-02-08 13:20')
+!nMarioCallPayroll.type := #CALL
+!nMarioCallPayroll.comment := 'Called payroll provider to correct tax withholding for the new fiscal year.'
+
+!new Note('nWindEmailPermit')
+!nWindEmailPermit.author := 'Regulatory Affairs'
+!nWindEmailPermit.time := Date('2026-02-09 07:55')
+!nWindEmailPermit.type := #EMAIL
+!nWindEmailPermit.comment := 'Permit application filed; awaiting county review and expected response in 3 weeks.'
+
+!new Note('nOrionMeetingDiscovery')
+!nOrionMeetingDiscovery.author := 'Orion PMO'
+!nOrionMeetingDiscovery.time := Date('2026-02-11 15:00')
+!nOrionMeetingDiscovery.type := #MEETING
+!nOrionMeetingDiscovery.comment := 'Discovery workshop completed; documented current-state finance workflows and integration points.'
+
+!insert (marioRossi, nMarioCallPayroll) into ContactContainsNote
+!insert (heliosWind, nWindEmailPermit) into ContactContainsNote
+!insert (orionConsulting, nOrionMeetingDiscovery) into ContactContainsNote
+
+!new Relationship('relHoldingsToSolar')
+!relHoldingsToSolar.type := #SUBDIVISION
+!insert (heliosHoldings, relHoldingsToSolar) into ContactToRelationship
+!insert (relHoldingsToSolar, heliosSolar) into RelationshipToContact
+
+!new Relationship('relHoldingsToWind')
+!relHoldingsToWind.type := #SUBDIVISION
+!insert (heliosHoldings, relHoldingsToWind) into ContactToRelationship
+!insert (relHoldingsToWind, heliosWind) into RelationshipToContact
+
+!new Relationship('relJuliaEmployeeOfHoldings')
+!relJuliaEmployeeOfHoldings.type := #EMPLOYEE
+!insert (juliaKim, relJuliaEmployeeOfHoldings) into ContactToRelationship
+!insert (relJuliaEmployeeOfHoldings, heliosHoldings) into RelationshipToContact
+
+!new Relationship('relMarioEmployeeOfSolar')
+!relMarioEmployeeOfSolar.type := #EMPLOYEE
+!insert (marioRossi, relMarioEmployeeOfSolar) into ContactToRelationship
+!insert (relMarioEmployeeOfSolar, heliosSolar) into RelationshipToContact
+
+!new Relationship('relJuliaBossOfMario')
+!relJuliaBossOfMario.type := #BOSS
+!insert (juliaKim, relJuliaBossOfMario) into ContactToRelationship
+!insert (relJuliaBossOfMario, marioRossi) into RelationshipToContact
+
+!new Relationship('relMarioCoworkerJulia')
+!relMarioCoworkerJulia.type := #COWORKER
+!insert (marioRossi, relMarioCoworkerJulia) into ContactToRelationship
+!insert (relMarioCoworkerJulia, juliaKim) into RelationshipToContact
+
+!new Relationship('relOrionCoworkerSolar')
+!relOrionCoworkerSolar.type := #COWORKER
+!insert (orionConsulting, relOrionCoworkerSolar) into ContactToRelationship
+!insert (relOrionCoworkerSolar, heliosSolar) into RelationshipToContact

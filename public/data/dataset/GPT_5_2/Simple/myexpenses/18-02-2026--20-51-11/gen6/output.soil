@@ -1,0 +1,61 @@
+!new Currency('curJPY')
+!curJPY.name := 'Japanese Yen'
+!curJPY.abbreviation := 'JPY'
+
+!new Currency('curEUR')
+!curEUR.name := 'Euro'
+!curEUR.abbreviation := 'EUR'
+
+!new Expense('expSepStudyAbroadPrep')
+!expSepStudyAbroadPrep.amount := 12274.99
+!expSepStudyAbroadPrep.startDate := Date('2026-09-01')
+!expSepStudyAbroadPrep.endDate := Date('2026-09-30')
+
+!new Bill('billLanguageSchoolDeposit_2026_09_02')
+!billLanguageSchoolDeposit_2026_09_02.amount := 9800.00
+!billLanguageSchoolDeposit_2026_09_02.category := 'Education - Language school deposit'
+!billLanguageSchoolDeposit_2026_09_02.date := Date('2026-09-02')
+!billLanguageSchoolDeposit_2026_09_02.paymentMethod := #CREDIT_CARD
+!billLanguageSchoolDeposit_2026_09_02.status := #PENDING
+
+!new Bill('billTransitCard_2026_09_06')
+!billTransitCard_2026_09_06.amount := 2400.00
+!billTransitCard_2026_09_06.category := 'Travel - Transit card'
+!billTransitCard_2026_09_06.date := Date('2026-09-06')
+!billTransitCard_2026_09_06.paymentMethod := #CASH
+!billTransitCard_2026_09_06.status := #VALIDATED
+
+!new Bill('billTextbook_2026_09_10')
+!billTextbook_2026_09_10.amount := 59.99
+!billTextbook_2026_09_10.category := 'Education - Textbook'
+!billTextbook_2026_09_10.date := Date('2026-09-10')
+!billTextbook_2026_09_10.paymentMethod := #CHECK
+!billTextbook_2026_09_10.status := #VERIFIED
+
+!new Bill('billPhotoCopies_2026_09_18')
+!billPhotoCopies_2026_09_18.amount := 15.00
+!billPhotoCopies_2026_09_18.category := 'Education - Copies and printing'
+!billPhotoCopies_2026_09_18.date := Date('2026-09-18')
+!billPhotoCopies_2026_09_18.paymentMethod := #CASH
+!billPhotoCopies_2026_09_18.status := #DRAFT
+
+!insert (expSepStudyAbroadPrep, billLanguageSchoolDeposit_2026_09_02) into ExpenseContainsBills
+!insert (expSepStudyAbroadPrep, billTransitCard_2026_09_06) into ExpenseContainsBills
+!insert (expSepStudyAbroadPrep, billTextbook_2026_09_10) into ExpenseContainsBills
+!insert (expSepStudyAbroadPrep, billPhotoCopies_2026_09_18) into ExpenseContainsBills
+
+!insert (billLanguageSchoolDeposit_2026_09_02, curJPY) into BillCurrency
+!insert (billTransitCard_2026_09_06, curJPY) into BillCurrency
+!insert (billTextbook_2026_09_10, curEUR) into BillCurrency
+!insert (billPhotoCopies_2026_09_18, curEUR) into BillCurrency
+
+!new Comment('cmtStudy1')
+!cmtStudy1.text := 'Preparation costs for September; includes a deposit and local transit.'
+!new Comment('cmtStudy2')
+!cmtStudy2.text := 'Textbook purchased from an EU online retailer; receipt verified.'
+!new Comment('cmtStudy3')
+!cmtStudy3.text := 'Printing expenses still in draft until the campus invoice is issued.'
+
+!insert (expSepStudyAbroadPrep, cmtStudy1) into ExpenseComment
+!insert (expSepStudyAbroadPrep, cmtStudy2) into ExpenseComment
+!insert (expSepStudyAbroadPrep, cmtStudy3) into ExpenseComment

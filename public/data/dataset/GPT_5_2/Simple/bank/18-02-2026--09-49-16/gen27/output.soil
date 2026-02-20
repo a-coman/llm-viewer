@@ -1,0 +1,74 @@
+!new Bank('bankCH2')
+!bankCH2.country := 'Switzerland'
+!bankCH2.name := 'Helvetia Cantonal Bank'
+!bankCH2.bic := 'HELVCHZZXXX'
+
+!new Bank('bankCO1')
+!bankCO1.country := 'Colombia'
+!bankCO1.name := 'Banco Bogota Norte'
+!bankCO1.bic := 'BBNORCOBXXXX'
+
+!new Person('p101')
+!p101.firstName := 'Simone'
+!p101.lastName := 'Keller'
+!p101.age := 57
+
+!new Person('p102')
+!p102.firstName := 'Matteo'
+!p102.lastName := 'Ricci'
+!p102.age := 44
+
+!new Person('p103')
+!p103.firstName := 'Helena'
+!p103.lastName := 'Fischer'
+!p103.age := 21
+
+!new Person('p104')
+!p104.firstName := 'Jon'
+!p104.lastName := 'Santos'
+!p104.age := 33
+
+!new Person('p105')
+!p105.firstName := 'Laura'
+!p105.lastName := 'Gomez'
+!p105.age := 18
+
+!new Account('accCH10')
+!accCH10.iban := 'CH3600212000030152957'
+!accCH10.balance := 450
+
+!new Account('accCH11')
+!accCH11.iban := 'CH9300762011623852958'
+!accCH11.balance := 25000
+
+!new Account('accCH12')
+!accCH12.iban := 'CH5604835012345678010'
+!accCH12.balance := 3
+
+!new Account('accCH13')
+!accCH13.iban := 'CH2509000000123456790'
+!accCH13.balance := 1200000
+
+!insert (bankCH2, accCH10) into AccountOfBanks
+!insert (bankCH2, accCH11) into AccountOfBanks
+!insert (bankCH2, accCH12) into AccountOfBanks
+!insert (bankCH2, accCH13) into AccountOfBanks
+
+!insert (p101, accCH10) into Ownership
+
+!insert (p101, accCH11) into Ownership
+!insert (p102, accCH11) into Ownership
+
+!insert (p103, accCH12) into Ownership
+
+!insert (p102, accCH13) into Ownership
+!insert (p104, accCH13) into Ownership
+
+!insert (p105, accCH10) into Use
+!insert (p105, accCH11) into Use
+!insert (p105, accCH12) into Use
+!insert (p105, accCH13) into Use
+
+!insert (p104, accCH10) into Use
+!insert (p103, accCH11) into Use
+!insert (p101, accCH12) into Use

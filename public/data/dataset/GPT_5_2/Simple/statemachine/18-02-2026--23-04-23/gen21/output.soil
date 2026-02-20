@@ -1,0 +1,264 @@
+!new StateMachine('smSmartGrid')
+!smSmartGrid.name := 'smartGridTrading'
+
+!new State('sgStandby')
+!sgStandby.name := 'standby'
+!new State('sgForecasting')
+!sgForecasting.name := 'forecasting'
+!new State('sgBidding')
+!sgBidding.name := 'bidding'
+!new State('sgDispatching')
+!sgDispatching.name := 'dispatching'
+!new State('sgSettling')
+!sgSettling.name := 'settling'
+!new State('sgSuspended')
+!sgSuspended.name := 'suspended'
+
+!insert (smSmartGrid, sgStandby) into StateMachineContainsStates
+!insert (smSmartGrid, sgForecasting) into StateMachineContainsStates
+!insert (smSmartGrid, sgBidding) into StateMachineContainsStates
+!insert (smSmartGrid, sgDispatching) into StateMachineContainsStates
+!insert (smSmartGrid, sgSettling) into StateMachineContainsStates
+!insert (smSmartGrid, sgSuspended) into StateMachineContainsStates
+
+!insert (smSmartGrid, sgStandby) into StateMachineStartsStates
+
+
+!new Transition('trSgStartForecast')
+!trSgStartForecast.name := 'startForecast'
+!new TimeEvent('evSgStartForecast')
+!evSgStartForecast.time := 5
+
+!new Transition('trSgForecastComplete')
+!trSgForecastComplete.name := 'forecastComplete'
+!new TimeEvent('evSgForecastComplete')
+!evSgForecastComplete.time := 60
+
+!new Transition('trSgPlaceBids')
+!trSgPlaceBids.name := 'placeBids'
+!new TimeEvent('evSgPlaceBids')
+!evSgPlaceBids.time := 15
+
+!new Transition('trSgBidWindowClose')
+!trSgBidWindowClose.name := 'bidWindowClose'
+!new TimeEvent('evSgBidWindowClose')
+!evSgBidWindowClose.time := 30
+
+!new Transition('trSgDispatchStart')
+!trSgDispatchStart.name := 'dispatchStart'
+!new TimeEvent('evSgDispatchStart')
+!evSgDispatchStart.time := 10
+
+!new Transition('trSgDispatchTick')
+!trSgDispatchTick.name := 'dispatchTick'
+!new TimeEvent('evSgDispatchTick')
+!evSgDispatchTick.time := 1
+
+!new Transition('trSgSettleCycle')
+!trSgSettleCycle.name := 'settleCycle'
+!new TimeEvent('evSgSettleCycle')
+!evSgSettleCycle.time := 120
+
+!new Transition('trSgSettleDone')
+!trSgSettleDone.name := 'settleDone'
+!new TimeEvent('evSgSettleDone')
+!evSgSettleDone.time := 20
+
+!new Transition('trSgRegulationSuspend')
+!trSgRegulationSuspend.name := 'regulationSuspend'
+!new TimeEvent('evSgRegulationSuspend')
+!evSgRegulationSuspend.time := 2
+
+!new Transition('trSgResumeAfterReview')
+!trSgResumeAfterReview.name := 'resumeAfterReview'
+!new TimeEvent('evSgResumeAfterReview')
+!evSgResumeAfterReview.time := 300
+
+!new Transition('trSgStandbyHealthPing')
+!trSgStandbyHealthPing.name := 'healthPing'
+!new TimeEvent('evSgStandbyHealthPing')
+!evSgStandbyHealthPing.time := 900
+
+
+!insert (smSmartGrid, trSgStartForecast) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgForecastComplete) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgPlaceBids) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgBidWindowClose) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgDispatchStart) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgDispatchTick) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgSettleCycle) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgSettleDone) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgRegulationSuspend) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgResumeAfterReview) into StateMachineContainsTransitions
+!insert (smSmartGrid, trSgStandbyHealthPing) into StateMachineContainsTransitions
+
+!insert (trSgStartForecast, evSgStartForecast) into TransitionContainsEvents
+!insert (trSgForecastComplete, evSgForecastComplete) into TransitionContainsEvents
+!insert (trSgPlaceBids, evSgPlaceBids) into TransitionContainsEvents
+!insert (trSgBidWindowClose, evSgBidWindowClose) into TransitionContainsEvents
+!insert (trSgDispatchStart, evSgDispatchStart) into TransitionContainsEvents
+!insert (trSgDispatchTick, evSgDispatchTick) into TransitionContainsEvents
+!insert (trSgSettleCycle, evSgSettleCycle) into TransitionContainsEvents
+!insert (trSgSettleDone, evSgSettleDone) into TransitionContainsEvents
+!insert (trSgRegulationSuspend, evSgRegulationSuspend) into TransitionContainsEvents
+!insert (trSgResumeAfterReview, evSgResumeAfterReview) into TransitionContainsEvents
+!insert (trSgStandbyHealthPing, evSgStandbyHealthPing) into TransitionContainsEvents
+
+
+!insert (sgStandby, trSgStartForecast) into StateTransition
+!insert (trSgStartForecast, sgForecasting) into TransitionState
+
+!insert (sgForecasting, trSgForecastComplete) into StateTransition
+!insert (trSgForecastComplete, sgBidding) into TransitionState
+
+!insert (sgBidding, trSgPlaceBids) into StateTransition
+!insert (trSgPlaceBids, sgBidding) into TransitionState
+
+!insert (sgBidding, trSgBidWindowClose) into StateTransition
+!insert (trSgBidWindowClose, sgDispatching) into TransitionState
+
+!insert (sgDispatching, trSgDispatchStart) into StateTransition
+!insert (trSgDispatchStart, sgDispatching) into TransitionState
+
+!insert (sgDispatching, trSgDispatchTick) into StateTransition
+!insert (trSgDispatchTick, sgSettling) into TransitionState
+
+!insert (sgSettling, trSgSettleCycle) into StateTransition
+!insert (trSgSettleCycle, sgSettling) into TransitionState
+
+!insert (sgSettling, trSgSettleDone) into StateTransition
+!insert (trSgSettleDone, sgStandby) into TransitionState
+
+!insert (sgDispatching, trSgRegulationSuspend) into StateTransition
+!insert (trSgRegulationSuspend, sgSuspended) into TransitionState
+
+!insert (sgSuspended, trSgResumeAfterReview) into StateTransition
+!insert (trSgResumeAfterReview, sgStandby) into TransitionState
+
+!insert (sgStandby, trSgStandbyHealthPing) into StateTransition
+!insert (trSgStandbyHealthPing, sgStandby) into TransitionState
+
+
+
+!new StateMachine('smChatOps')
+!smChatOps.name := 'customerChatOperations'
+
+!new State('chNew')
+!chNew.name := 'new'
+!new State('chQueued')
+!chQueued.name := 'queued'
+!new State('chAssigned')
+!chAssigned.name := 'assigned'
+!new State('chActive')
+!chActive.name := 'active'
+!new State('chWaitingCustomer')
+!chWaitingCustomer.name := 'waitingCustomer'
+!new State('chResolved')
+!chResolved.name := 'resolved'
+!new State('chEscalated')
+!chEscalated.name := 'escalated'
+
+!insert (smChatOps, chNew) into StateMachineContainsStates
+!insert (smChatOps, chQueued) into StateMachineContainsStates
+!insert (smChatOps, chAssigned) into StateMachineContainsStates
+!insert (smChatOps, chActive) into StateMachineContainsStates
+!insert (smChatOps, chWaitingCustomer) into StateMachineContainsStates
+!insert (smChatOps, chResolved) into StateMachineContainsStates
+!insert (smChatOps, chEscalated) into StateMachineContainsStates
+
+!insert (smChatOps, chNew) into StateMachineStartsStates
+
+
+!new Transition('trChAutoQueue')
+!trChAutoQueue.name := 'autoQueue'
+!new TimeEvent('evChAutoQueue')
+!evChAutoQueue.time := 1
+
+!new Transition('trChAssignAgent')
+!trChAssignAgent.name := 'assignAgent'
+!new TimeEvent('evChAssignAgent')
+!evChAssignAgent.time := 2
+
+!new Transition('trChAcceptChat')
+!trChAcceptChat.name := 'acceptChat'
+!new TimeEvent('evChAcceptChat')
+!evChAcceptChat.time := 1
+
+!new Transition('trChCustomerSilent')
+!trChCustomerSilent.name := 'customerSilent'
+!new TimeEvent('evChCustomerSilent')
+!evChCustomerSilent.time := 180
+
+!new Transition('trChCustomerReplies')
+!trChCustomerReplies.name := 'customerReplies'
+!new TimeEvent('evChCustomerReplies')
+!evChCustomerReplies.time := 15
+
+!new Transition('trChResolve')
+!trChResolve.name := 'resolve'
+!new TimeEvent('evChResolve')
+!evChResolve.time := 5
+
+!new Transition('trChEscalate')
+!trChEscalate.name := 'escalate'
+!new TimeEvent('evChEscalate')
+!evChEscalate.time := 10
+
+!new Transition('trChReopenFromResolved')
+!trChReopenFromResolved.name := 'reopen'
+!new TimeEvent('evChReopenFromResolved')
+!evChReopenFromResolved.time := 30
+
+!new Transition('trChEscalationComplete')
+!trChEscalationComplete.name := 'escalationComplete'
+!new TimeEvent('evChEscalationComplete')
+!evChEscalationComplete.time := 240
+
+
+!insert (smChatOps, trChAutoQueue) into StateMachineContainsTransitions
+!insert (smChatOps, trChAssignAgent) into StateMachineContainsTransitions
+!insert (smChatOps, trChAcceptChat) into StateMachineContainsTransitions
+!insert (smChatOps, trChCustomerSilent) into StateMachineContainsTransitions
+!insert (smChatOps, trChCustomerReplies) into StateMachineContainsTransitions
+!insert (smChatOps, trChResolve) into StateMachineContainsTransitions
+!insert (smChatOps, trChEscalate) into StateMachineContainsTransitions
+!insert (smChatOps, trChReopenFromResolved) into StateMachineContainsTransitions
+!insert (smChatOps, trChEscalationComplete) into StateMachineContainsTransitions
+
+!insert (trChAutoQueue, evChAutoQueue) into TransitionContainsEvents
+!insert (trChAssignAgent, evChAssignAgent) into TransitionContainsEvents
+!insert (trChAcceptChat, evChAcceptChat) into TransitionContainsEvents
+!insert (trChCustomerSilent, evChCustomerSilent) into TransitionContainsEvents
+!insert (trChCustomerReplies, evChCustomerReplies) into TransitionContainsEvents
+!insert (trChResolve, evChResolve) into TransitionContainsEvents
+!insert (trChEscalate, evChEscalate) into TransitionContainsEvents
+!insert (trChReopenFromResolved, evChReopenFromResolved) into TransitionContainsEvents
+!insert (trChEscalationComplete, evChEscalationComplete) into TransitionContainsEvents
+
+
+!insert (chNew, trChAutoQueue) into StateTransition
+!insert (trChAutoQueue, chQueued) into TransitionState
+
+!insert (chQueued, trChAssignAgent) into StateTransition
+!insert (trChAssignAgent, chAssigned) into TransitionState
+
+!insert (chAssigned, trChAcceptChat) into StateTransition
+!insert (trChAcceptChat, chActive) into TransitionState
+
+!insert (chActive, trChCustomerSilent) into StateTransition
+!insert (trChCustomerSilent, chWaitingCustomer) into TransitionState
+
+!insert (chWaitingCustomer, trChCustomerReplies) into StateTransition
+!insert (trChCustomerReplies, chActive) into TransitionState
+
+!insert (chActive, trChResolve) into StateTransition
+!insert (trChResolve, chResolved) into TransitionState
+
+!insert (chActive, trChEscalate) into StateTransition
+!insert (trChEscalate, chEscalated) into TransitionState
+
+!insert (chResolved, trChReopenFromResolved) into StateTransition
+!insert (trChReopenFromResolved, chQueued) into TransitionState
+
+!insert (chEscalated, trChEscalationComplete) into StateTransition
+!insert (trChEscalationComplete, chResolved) into TransitionState

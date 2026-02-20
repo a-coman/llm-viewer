@@ -1,0 +1,89 @@
+!new Client('pC1')
+!pC1.clientId := 1901
+!pC1.isSuspended := false
+
+!new Client('pC2')
+!pC2.clientId := 1902
+!pC2.isSuspended := true
+
+!new Client('pC3')
+!pC3.clientId := 1903
+!pC3.isSuspended := false
+
+!new Client('pC4')
+!pC4.clientId := 1904
+!pC4.isSuspended := false
+
+!new Client('pC5')
+!pC5.clientId := 1905
+!pC5.isSuspended := true
+
+!new Actor('pA1')
+!pA1.name := 'Helena Ward'
+
+!new Actor('pA2')
+!pA2.name := 'Tomas Ibarra'
+
+!new Actor('pA3')
+!pA3.name := 'Maya Ritchie'
+
+!new Actor('pA4')
+!pA4.name := 'Oleg Sokolov'
+
+!new Actor('pA5')
+!pA5.name := 'Linnea Strand'
+
+!new Cassette('pT1')
+!pT1.title := 'Chess Tactics: Intermediate'
+!pT1.availableCopies := 9
+
+!new Cassette('pT2')
+!pT2.title := 'Meditation Guide: Evening Wind-Down'
+!pT2.availableCopies := 0
+
+!new Cassette('pT3')
+!pT3.title := 'Home Studio: Recording Basics'
+!pT3.availableCopies := 2
+
+!new Movie('pM1')
+!pM1.title := 'Redline Junction'
+!pM1.availableCopies := 1
+!pM1.genre := #Action
+
+!new Series('pS1')
+!pS1.title := 'Courtroom Sketches'
+!pS1.availableCopies := 4
+!pS1.episode := 20
+
+!new Series('pS2')
+!pS2.title := 'Courtroom Sketches'
+!pS2.availableCopies := 4
+!pS2.episode := 21
+
+!insert (pT1, pA5) into CassetteActor
+
+!insert (pT2, pA1) into CassetteActor
+!insert (pT2, pA3) into CassetteActor
+
+!insert (pT3, pA2) into CassetteActor
+
+!insert (pM1, pA2) into CassetteActor
+!insert (pM1, pA4) into CassetteActor
+
+!insert (pS1, pA1) into CassetteActor
+!insert (pS1, pA4) into CassetteActor
+
+!insert (pS2, pA1) into CassetteActor
+
+!new Rental('pR1')
+!pR1.date := Date('1998-11-07')
+!insert (pC2, pR1) into ClientRental
+!insert (pR1, pT2) into RentalCassette
+
+!new Rental('pR2')
+!pR2.date := Date('1998-11-21')
+!insert (pC1, pR2) into ClientRental
+!insert (pR2, pT1) into RentalCassette
+!insert (pR2, pT3) into RentalCassette
+!insert (pR2, pM1) into RentalCassette
+!insert (pR2, pS2) into RentalCassette

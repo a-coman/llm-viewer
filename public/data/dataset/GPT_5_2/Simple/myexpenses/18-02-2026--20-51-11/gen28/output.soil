@@ -1,0 +1,107 @@
+!new Currency('curUGX')
+!curUGX.name := 'Ugandan Shilling'
+!curUGX.abbreviation := 'UGX'
+
+!new Currency('curLKR')
+!curLKR.name := 'Sri Lankan Rupee'
+!curLKR.abbreviation := 'LKR'
+
+!new Expense('expSepFilmProduction')
+!expSepFilmProduction.amount := 1049.50
+!expSepFilmProduction.startDate := Date('2026-09-03')
+!expSepFilmProduction.endDate := Date('2026-09-06')
+
+!new Bill('billCameraRigRental_2026_09_03')
+!billCameraRigRental_2026_09_03.amount := 450.00
+!billCameraRigRental_2026_09_03.category := 'Media - Camera rig rental'
+!billCameraRigRental_2026_09_03.date := Date('2026-09-03')
+!billCameraRigRental_2026_09_03.paymentMethod := #CREDIT_CARD
+!billCameraRigRental_2026_09_03.status := #VALIDATED
+
+!new Bill('billLocationFee_2026_09_03')
+!billLocationFee_2026_09_03.amount := 300.00
+!billLocationFee_2026_09_03.category := 'Media - Location fee'
+!billLocationFee_2026_09_03.date := Date('2026-09-03')
+!billLocationFee_2026_09_03.paymentMethod := #CASH
+!billLocationFee_2026_09_03.status := #VERIFIED
+
+!new Bill('billCrewCatering_2026_09_04')
+!billCrewCatering_2026_09_04.amount := 95.75
+!billCrewCatering_2026_09_04.category := 'Media - Crew catering'
+!billCrewCatering_2026_09_04.date := Date('2026-09-04')
+!billCrewCatering_2026_09_04.paymentMethod := #CREDIT_CARD
+!billCrewCatering_2026_09_04.status := #PENDING
+
+!new Bill('billFilmingPermit_2026_09_04')
+!billFilmingPermit_2026_09_04.amount := 40.00
+!billFilmingPermit_2026_09_04.category := 'Media - Filming permit'
+!billFilmingPermit_2026_09_04.date := Date('2026-09-04')
+!billFilmingPermit_2026_09_04.paymentMethod := #CHECK
+!billFilmingPermit_2026_09_04.status := #VALIDATED
+
+!new Bill('billMusicLicense_2026_09_05')
+!billMusicLicense_2026_09_05.amount := 60.00
+!billMusicLicense_2026_09_05.category := 'Media - Music license'
+!billMusicLicense_2026_09_05.date := Date('2026-09-05')
+!billMusicLicense_2026_09_05.paymentMethod := #CREDIT_CARD
+!billMusicLicense_2026_09_05.status := #VERIFIED
+
+!new Bill('billCostumeAccessories_2026_09_05')
+!billCostumeAccessories_2026_09_05.amount := 28.25
+!billCostumeAccessories_2026_09_05.category := 'Media - Costume accessories'
+!billCostumeAccessories_2026_09_05.date := Date('2026-09-05')
+!billCostumeAccessories_2026_09_05.paymentMethod := #CASH
+!billCostumeAccessories_2026_09_05.status := #DRAFT
+
+!new Bill('billVanFuel_2026_09_06')
+!billVanFuel_2026_09_06.amount := 75.50
+!billVanFuel_2026_09_06.category := 'Media - Transport fuel'
+!billVanFuel_2026_09_06.date := Date('2026-09-06')
+!billVanFuel_2026_09_06.paymentMethod := #CASH
+!billVanFuel_2026_09_06.status := #VERIFIED
+
+!insert (expSepFilmProduction, billCameraRigRental_2026_09_03) into ExpenseContainsBills
+!insert (expSepFilmProduction, billLocationFee_2026_09_03) into ExpenseContainsBills
+!insert (expSepFilmProduction, billCrewCatering_2026_09_04) into ExpenseContainsBills
+!insert (expSepFilmProduction, billFilmingPermit_2026_09_04) into ExpenseContainsBills
+!insert (expSepFilmProduction, billMusicLicense_2026_09_05) into ExpenseContainsBills
+!insert (expSepFilmProduction, billCostumeAccessories_2026_09_05) into ExpenseContainsBills
+!insert (expSepFilmProduction, billVanFuel_2026_09_06) into ExpenseContainsBills
+
+!insert (billCameraRigRental_2026_09_03, curUGX) into BillCurrency
+!insert (billLocationFee_2026_09_03, curUGX) into BillCurrency
+!insert (billCrewCatering_2026_09_04, curUGX) into BillCurrency
+!insert (billFilmingPermit_2026_09_04, curUGX) into BillCurrency
+!insert (billVanFuel_2026_09_06, curUGX) into BillCurrency
+!insert (billMusicLicense_2026_09_05, curLKR) into BillCurrency
+!insert (billCostumeAccessories_2026_09_05, curLKR) into BillCurrency
+
+!new Comment('cmtFilm1')
+!cmtFilm1.text := 'Short production shoot: rental, permit, and logistics tracked as one expense.'
+!insert (expSepFilmProduction, cmtFilm1) into ExpenseComment
+
+
+!new Expense('expSepLibraryMemberships')
+!expSepLibraryMemberships.amount := 40.00
+!expSepLibraryMemberships.startDate := Date('2026-09-20')
+!expSepLibraryMemberships.endDate := Date('2026-09-20')
+
+!new Bill('billCityLibraryAnnual_2026_09_20')
+!billCityLibraryAnnual_2026_09_20.amount := 35.00
+!billCityLibraryAnnual_2026_09_20.category := 'Education - Library annual membership'
+!billCityLibraryAnnual_2026_09_20.date := Date('2026-09-20')
+!billCityLibraryAnnual_2026_09_20.paymentMethod := #CASH
+!billCityLibraryAnnual_2026_09_20.status := #VALIDATED
+
+!new Bill('billOverdueFineSettlement_2026_09_20')
+!billOverdueFineSettlement_2026_09_20.amount := 5.00
+!billOverdueFineSettlement_2026_09_20.category := 'Education - Overdue fine settlement'
+!billOverdueFineSettlement_2026_09_20.date := Date('2026-09-20')
+!billOverdueFineSettlement_2026_09_20.paymentMethod := #CASH
+!billOverdueFineSettlement_2026_09_20.status := #VERIFIED
+
+!insert (expSepLibraryMemberships, billCityLibraryAnnual_2026_09_20) into ExpenseContainsBills
+!insert (expSepLibraryMemberships, billOverdueFineSettlement_2026_09_20) into ExpenseContainsBills
+
+!insert (billCityLibraryAnnual_2026_09_20, curLKR) into BillCurrency
+!insert (billOverdueFineSettlement_2026_09_20, curLKR) into BillCurrency

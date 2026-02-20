@@ -1,0 +1,90 @@
+!new Bank('bankNG1')
+!bankNG1.country := 'Nigeria'
+!bankNG1.name := 'Lagos Union Bank'
+!bankNG1.bic := 'LUNBNGLAXXX'
+
+!new Bank('bankPT2')
+!bankPT2.country := 'Portugal'
+!bankPT2.name := 'Banco do Porto'
+!bankPT2.bic := 'BDPOPTPLXXX'
+
+!new Person('g1')
+!g1.firstName := 'Adewale'
+!g1.lastName := 'Okafor'
+!g1.age := 48
+
+!new Person('g2')
+!g2.firstName := 'Beatriz'
+!g2.lastName := 'Sousa'
+!g2.age := 37
+
+!new Person('g3')
+!g3.firstName := 'Carlos'
+!g3.lastName := 'Mendes'
+!g3.age := 19
+
+!new Person('g4')
+!g4.firstName := 'Zainab'
+!g4.lastName := 'Bello'
+!g4.age := 28
+
+!new Person('g5')
+!g5.firstName := 'Tiago'
+!g5.lastName := 'Sousa'
+!g5.age := 15
+
+!new Person('g6')
+!g6.firstName := 'Aisha'
+!g6.lastName := 'Okafor'
+!g6.age := 10
+
+!new Account('ngAcc1')
+!ngAcc1.iban := 'NG00LUNB000000000001'
+!ngAcc1.balance := 500
+
+!new Account('ngAcc2')
+!ngAcc2.iban := 'NG00LUNB000000000002'
+!ngAcc2.balance := 0
+
+!new Account('ngAcc3')
+!ngAcc3.iban := 'NG00LUNB000000000003'
+!ngAcc3.balance := 250000
+
+!new Account('ptAcc1')
+!ptAcc1.iban := 'PT50000201231234567890155'
+!ptAcc1.balance := 760
+
+!new Account('ptAcc2')
+!ptAcc2.iban := 'PT50000300001234567890444'
+!ptAcc2.balance := 12000
+
+!insert (bankNG1, ngAcc1) into AccountOfBanks
+!insert (bankNG1, ngAcc2) into AccountOfBanks
+!insert (bankNG1, ngAcc3) into AccountOfBanks
+!insert (bankPT2, ptAcc1) into AccountOfBanks
+!insert (bankPT2, ptAcc2) into AccountOfBanks
+
+!insert (g1, ngAcc1) into Ownership
+!insert (g4, ngAcc2) into Ownership
+!insert (g1, ngAcc3) into Ownership
+!insert (g4, ngAcc3) into Ownership
+!insert (g2, ptAcc1) into Ownership
+!insert (g3, ptAcc1) into Ownership
+!insert (g2, ptAcc2) into Ownership
+
+!insert (g1, ngAcc1) into Use
+!insert (g6, ngAcc1) into Use
+!insert (g6, ngAcc2) into Use
+!insert (g4, ngAcc2) into Use
+
+!insert (g1, ngAcc3) into Use
+!insert (g4, ngAcc3) into Use
+!insert (g2, ngAcc3) into Use
+
+!insert (g2, ptAcc1) into Use
+!insert (g3, ptAcc1) into Use
+!insert (g5, ptAcc1) into Use
+
+!insert (g2, ptAcc2) into Use
+!insert (g3, ptAcc2) into Use
+!insert (g5, ptAcc2) into Use

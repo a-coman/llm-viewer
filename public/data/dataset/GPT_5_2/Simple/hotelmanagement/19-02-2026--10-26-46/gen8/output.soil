@@ -1,0 +1,85 @@
+!new Booking('booking10')
+!booking10.startDate := '2027-03-11'
+!booking10.endDate := '2027-03-16'
+!booking10.canceled := false
+!booking10.bookingId := 8001
+!booking10.confirmed := false
+
+!new Customer('customer10')
+!customer10.firstName := 'Omar'
+!customer10.lastName := 'Hassan'
+
+!insert (booking10, customer10) into BookingCustomer
+
+!new RoomReservation('rr13')
+!rr13.checkInDate := '2027-03-11'
+!rr13.checkOutDate := '2027-03-13'
+
+!new RoomReservation('rr14')
+!rr14.checkInDate := '2027-03-13'
+!rr14.checkOutDate := '2027-03-16'
+
+!insert (booking10, rr13) into BookingRoomReservation
+!insert (booking10, rr14) into BookingRoomReservation
+
+!new Bill('bill14')
+!bill14.billId := 11001
+!bill14.price := 0.0
+
+!new Bill('bill15')
+!bill15.billId := 11002
+!bill15.price := 585.0
+
+!insert (bill14, rr13) into BillRoomReservation
+!insert (bill15, rr14) into BillRoomReservation
+
+!insert (booking10, bill14) into BookingBill
+!insert (booking10, bill15) into BookingBill
+
+!new Room('room1003')
+!room1003.roomNumber := 1003
+!room1003.numBeds := 1
+!room1003.pricePerNight := 135.0
+!room1003.occupied := false
+!room1003.blocked := false
+
+!new Room('room1004')
+!room1004.roomNumber := 1004
+!room1004.numBeds := 1
+!room1004.pricePerNight := 135.0
+!room1004.occupied := false
+!room1004.blocked := false
+
+!new Room('room1201')
+!room1201.roomNumber := 1201
+!room1201.numBeds := 2
+!room1201.pricePerNight := 195.0
+!room1201.occupied := false
+!room1201.blocked := true
+
+!insert (rr13, room1003) into RoomReservationRoom
+!insert (rr13, room1004) into RoomReservationRoom
+!insert (rr14, room1201) into RoomReservationRoom
+
+!new RoomExtra('extraBabyCot')
+!extraBabyCot.price := 12.0
+!extraBabyCot.description := 'Baby cot (per night)'
+
+!new RoomExtra('extraHighSpeedWifi')
+!extraHighSpeedWifi.price := 9.0
+!extraHighSpeedWifi.description := 'High-speed Wi-Fi upgrade'
+
+!insert (rr14, extraBabyCot) into RoomReservationExtras
+!insert (rr14, extraHighSpeedWifi) into RoomReservationExtras
+
+!new FreeRoomTypesDTO('dtoPendingAssignment')
+!dtoPendingAssignment.roomTypeDescription := 'Standard double (assignment pending)'
+!dtoPendingAssignment.numBeds := 2
+!dtoPendingAssignment.pricePerNight := 195.0
+!dtoPendingAssignment.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('dtoSingleMarch')
+!dtoSingleMarch.roomTypeDescription := 'Single room (spring offer)'
+!dtoSingleMarch.numBeds := 1
+!dtoSingleMarch.pricePerNight := 135.0
+!dtoSingleMarch.numFreeRooms := 11

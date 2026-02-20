@@ -1,0 +1,55 @@
+!new Currency('curCAD')
+!curCAD.name := 'Canadian Dollar'
+!curCAD.abbreviation := 'CAD'
+
+!new Expense('expAugSubscriptions')
+!expAugSubscriptions.amount := 50.00
+!expAugSubscriptions.startDate := Date('2026-08-01')
+!expAugSubscriptions.endDate := Date('2026-08-31')
+
+!new Bill('billMusicSub_2026_08_02')
+!billMusicSub_2026_08_02.amount := 9.99
+!billMusicSub_2026_08_02.category := 'Subscription - Music'
+!billMusicSub_2026_08_02.date := Date('2026-08-02')
+!billMusicSub_2026_08_02.paymentMethod := #CREDIT_CARD
+!billMusicSub_2026_08_02.status := #VALIDATED
+
+!new Bill('billCloudStorage_2026_08_05')
+!billCloudStorage_2026_08_05.amount := 12.99
+!billCloudStorage_2026_08_05.category := 'Subscription - Cloud storage'
+!billCloudStorage_2026_08_05.date := Date('2026-08-05')
+!billCloudStorage_2026_08_05.paymentMethod := #CREDIT_CARD
+!billCloudStorage_2026_08_05.status := #VERIFIED
+
+!new Bill('billAppRenewal_2026_08_11')
+!billAppRenewal_2026_08_11.amount := 4.50
+!billAppRenewal_2026_08_11.category := 'Subscription - Mobile app'
+!billAppRenewal_2026_08_11.date := Date('2026-08-11')
+!billAppRenewal_2026_08_11.paymentMethod := #CASH
+!billAppRenewal_2026_08_11.status := #PENDING
+
+!new Bill('billStreaming_2026_08_18')
+!billStreaming_2026_08_18.amount := 19.00
+!billStreaming_2026_08_18.category := 'Subscription - Video streaming'
+!billStreaming_2026_08_18.date := Date('2026-08-18')
+!billStreaming_2026_08_18.paymentMethod := #CREDIT_CARD
+!billStreaming_2026_08_18.status := #REFUNDED
+
+!new Bill('billPaymentFee_2026_08_25')
+!billPaymentFee_2026_08_25.amount := 3.52
+!billPaymentFee_2026_08_25.category := 'Banking - Payment fee'
+!billPaymentFee_2026_08_25.date := Date('2026-08-25')
+!billPaymentFee_2026_08_25.paymentMethod := #CHECK
+!billPaymentFee_2026_08_25.status := #REFUSED
+
+!insert (expAugSubscriptions, billMusicSub_2026_08_02) into ExpenseContainsBills
+!insert (expAugSubscriptions, billCloudStorage_2026_08_05) into ExpenseContainsBills
+!insert (expAugSubscriptions, billAppRenewal_2026_08_11) into ExpenseContainsBills
+!insert (expAugSubscriptions, billStreaming_2026_08_18) into ExpenseContainsBills
+!insert (expAugSubscriptions, billPaymentFee_2026_08_25) into ExpenseContainsBills
+
+!insert (billMusicSub_2026_08_02, curCAD) into BillCurrency
+!insert (billCloudStorage_2026_08_05, curCAD) into BillCurrency
+!insert (billAppRenewal_2026_08_11, curCAD) into BillCurrency
+!insert (billStreaming_2026_08_18, curCAD) into BillCurrency
+!insert (billPaymentFee_2026_08_25, curCAD) into BillCurrency

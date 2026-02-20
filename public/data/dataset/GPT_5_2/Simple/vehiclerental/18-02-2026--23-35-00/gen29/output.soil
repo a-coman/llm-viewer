@@ -1,0 +1,148 @@
+!new RentalOffice('office_norwich16')
+!office_norwich16.name := 'Southeast Connecticut Rentals - Norwich'
+!office_norwich16.number := 1601
+!office_norwich16.address := '55 Salem Tpke, Norwich, CT 06360'
+
+!new RentalOffice('office_yuma16')
+!office_yuma16.name := 'Desert Crossing Rentals - Yuma'
+!office_yuma16.number := 1602
+!office_yuma16.address := '3990 S 4th Ave, Yuma, AZ 85365'
+
+!new RentalOffice('office_bocaraton16')
+!office_bocaraton16.name := 'Palm Coast Vehicle Rental - Boca Raton'
+!office_bocaraton16.number := 1603
+!office_bocaraton16.address := '2100 NW 2nd Ave, Boca Raton, FL 33431'
+
+!new Truck('truck_ct_standard_16')
+!truck_ct_standard_16.id := 160001
+!truck_ct_standard_16.registrationState := #CT
+!truck_ct_standard_16.licensePlateNumber := 'CT-TRK-160001'
+!truck_ct_standard_16.vehicleTypeCode := #TRUCK
+!truck_ct_standard_16.registrationLastMaintenanceDate := Date('2026-06-20')
+!truck_ct_standard_16.expirationDate := Date('2027-06-30')
+!truck_ct_standard_16.odometerReading := 47650
+!truck_ct_standard_16.gasTankCapacity := 49.0
+!truck_ct_standard_16.workingRadio := true
+!truck_ct_standard_16.mileage := 12
+
+!new Vehicle('trailer_ct_open_16')
+!trailer_ct_open_16.id := 160101
+!trailer_ct_open_16.registrationState := #CT
+!trailer_ct_open_16.licensePlateNumber := 'CT-TRL-160101'
+!trailer_ct_open_16.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ct_open_16.registrationLastMaintenanceDate := Date('2026-05-02')
+!trailer_ct_open_16.expirationDate := Date('2027-05-31')
+
+!new Vehicle('trailer_az_covered_16')
+!trailer_az_covered_16.id := 160201
+!trailer_az_covered_16.registrationState := #AZ
+!trailer_az_covered_16.licensePlateNumber := 'AZ-TRL-160201'
+!trailer_az_covered_16.vehicleTypeCode := #COVERED_TRAILER
+!trailer_az_covered_16.registrationLastMaintenanceDate := Date('2026-04-14')
+!trailer_az_covered_16.expirationDate := Date('2027-04-30')
+
+!new Truck('truck_fl_24ft_16')
+!truck_fl_24ft_16.id := 160301
+!truck_fl_24ft_16.registrationState := #FL
+!truck_fl_24ft_16.licensePlateNumber := 'FL-TRK-160301'
+!truck_fl_24ft_16.vehicleTypeCode := #TRUCK24
+!truck_fl_24ft_16.registrationLastMaintenanceDate := Date('2026-06-01')
+!truck_fl_24ft_16.expirationDate := Date('2027-05-31')
+!truck_fl_24ft_16.odometerReading := 118905
+!truck_fl_24ft_16.gasTankCapacity := 64.0
+!truck_fl_24ft_16.workingRadio := false
+!truck_fl_24ft_16.mileage := 9
+
+!insert (office_norwich16, truck_ct_standard_16) into RentalOfficeVehicle
+!insert (office_norwich16, trailer_ct_open_16) into RentalOfficeVehicle
+!insert (office_yuma16, trailer_az_covered_16) into RentalOfficeVehicle
+!insert (office_bocaraton16, truck_fl_24ft_16) into RentalOfficeVehicle
+
+!new Individual('cust_ind_hugo16')
+!cust_ind_hugo16.name := 'Hugo Santoro'
+!cust_ind_hugo16.address := '9 Washington St, Norwich, CT 06360'
+!cust_ind_hugo16.poorRisk := false
+!cust_ind_hugo16.homePhone := '860-555-0187'
+!cust_ind_hugo16.driverLicenseState := #CT
+!cust_ind_hugo16.driverLicenseNumber := 50977124
+!cust_ind_hugo16.driverLicenseExpirationDate := Date('2028-05-31')
+
+!new Individual('cust_ind_maya16')
+!cust_ind_maya16.name := 'Maya Feldman'
+!cust_ind_maya16.address := '1400 E Palmetto Park Rd, Boca Raton, FL 33432'
+!cust_ind_maya16.poorRisk := true
+!cust_ind_maya16.homePhone := '561-555-0123'
+!cust_ind_maya16.driverLicenseState := #FL
+!cust_ind_maya16.driverLicenseNumber := 66144029
+!cust_ind_maya16.driverLicenseExpirationDate := Date('2026-09-30')
+
+!new Company('cust_co_saguaro16')
+!cust_co_saguaro16.name := 'Saguaro Field Services'
+!cust_co_saguaro16.address := '2850 S Avenue 3E, Yuma, AZ 85365'
+!cust_co_saguaro16.poorRisk := false
+!cust_co_saguaro16.idNumber := 16088055
+
+!new RentalAgreement('ra_160001')
+!ra_160001.number := 160001
+!ra_160001.rentalDate := Date('2026-03-03')
+!ra_160001.anticipatedDuration := 1
+!ra_160001.depositPaid := 0.00
+!ra_160001.quotedDailyRate := 0.00
+!ra_160001.quotedRatePerMile := 1.05
+
+!new RentalAgreement('ra_160002')
+!ra_160002.number := 160002
+!ra_160002.rentalDate := Date('2026-03-04')
+!ra_160002.anticipatedDuration := 10
+!ra_160002.depositPaid := 600.00
+!ra_160002.quotedDailyRate := 155.00
+!ra_160002.quotedRatePerMile := 0.80
+
+!new RentalAgreement('ra_160003')
+!ra_160003.number := 160003
+!ra_160003.rentalDate := Date('2026-03-10')
+!ra_160003.anticipatedDuration := 45
+!ra_160003.depositPaid := 0.00
+!ra_160003.quotedDailyRate := 42.00
+!ra_160003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_160004')
+!ra_160004.number := 160004
+!ra_160004.rentalDate := Date('2026-03-15')
+!ra_160004.anticipatedDuration := 3
+!ra_160004.depositPaid := 250.00
+!ra_160004.quotedDailyRate := 0.00
+!ra_160004.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_160005')
+!ra_160005.number := 160005
+!ra_160005.rentalDate := Date('2026-04-01')
+!ra_160005.anticipatedDuration := 2
+!ra_160005.depositPaid := 900.00
+!ra_160005.quotedDailyRate := 199.00
+!ra_160005.quotedRatePerMile := 0.92
+
+!insert (office_norwich16, ra_160001) into RentalOfficeRentalAgreementOrigin
+!insert (office_norwich16, ra_160001) into RentalOfficeRentalAgreementDrop
+!insert (ra_160001, trailer_ct_open_16) into RentalAgreementVehicle
+!insert (ra_160001, cust_ind_hugo16) into RentalAgreementCustomer
+
+!insert (office_bocaraton16, ra_160002) into RentalOfficeRentalAgreementOrigin
+!insert (office_norwich16, ra_160002) into RentalOfficeRentalAgreementDrop
+!insert (ra_160002, truck_fl_24ft_16) into RentalAgreementVehicle
+!insert (ra_160002, cust_co_saguaro16) into RentalAgreementCustomer
+
+!insert (office_yuma16, ra_160003) into RentalOfficeRentalAgreementOrigin
+!insert (office_yuma16, ra_160003) into RentalOfficeRentalAgreementDrop
+!insert (ra_160003, trailer_az_covered_16) into RentalAgreementVehicle
+!insert (ra_160003, cust_co_saguaro16) into RentalAgreementCustomer
+
+!insert (office_bocaraton16, ra_160004) into RentalOfficeRentalAgreementOrigin
+!insert (office_bocaraton16, ra_160004) into RentalOfficeRentalAgreementDrop
+!insert (ra_160004, truck_fl_24ft_16) into RentalAgreementVehicle
+!insert (ra_160004, cust_ind_maya16) into RentalAgreementCustomer
+
+!insert (office_norwich16, ra_160005) into RentalOfficeRentalAgreementOrigin
+!insert (office_yuma16, ra_160005) into RentalOfficeRentalAgreementDrop
+!insert (ra_160005, truck_ct_standard_16) into RentalAgreementVehicle
+!insert (ra_160005, cust_ind_hugo16) into RentalAgreementCustomer

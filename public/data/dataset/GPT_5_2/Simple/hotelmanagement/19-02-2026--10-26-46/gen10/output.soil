@@ -1,0 +1,71 @@
+!new Booking('booking12')
+!booking12.startDate := '2027-06-01'
+!booking12.endDate := '2027-06-08'
+!booking12.canceled := false
+!booking12.bookingId := 9002
+!booking12.confirmed := true
+
+!new Customer('customer12')
+!customer12.firstName := 'Liam'
+!customer12.lastName := 'ONeil'
+
+!insert (booking12, customer12) into BookingCustomer
+
+!new RoomReservation('rr18')
+!rr18.checkInDate := '2027-06-01'
+!rr18.checkOutDate := '2027-06-04'
+
+!new RoomReservation('rr19')
+!rr19.checkInDate := '2027-06-04'
+!rr19.checkOutDate := '2027-06-08'
+
+!insert (booking12, rr18) into BookingRoomReservation
+!insert (booking12, rr19) into BookingRoomReservation
+
+!new Room('room620')
+!room620.roomNumber := 620
+!room620.numBeds := 2
+!room620.pricePerNight := 190.0
+!room620.occupied := false
+!room620.blocked := true
+
+!new Room('room621')
+!room621.roomNumber := 621
+!room621.numBeds := 2
+!room621.pricePerNight := 190.0
+!room621.occupied := false
+!room621.blocked := true
+
+!insert (rr18, room620) into RoomReservationRoom
+!insert (rr18, room621) into RoomReservationRoom
+
+!new RoomExtra('extraGymPass')
+!extraGymPass.price := 20.0
+!extraGymPass.description := 'Gym pass (3 days)'
+
+!new RoomExtra('extraDeposit')
+!extraDeposit.price := 50.0
+!extraDeposit.description := 'Deposit for room assignment'
+
+!insert (rr18, extraGymPass) into RoomReservationExtras
+!insert (rr19, extraDeposit) into RoomReservationExtras
+
+!new Bill('bill19')
+!bill19.billId := 13001
+!bill19.price := 590.0
+
+!new Bill('bill20')
+!bill20.billId := 13002
+!bill20.price := 50.0
+
+!insert (bill19, rr18) into BillRoomReservation
+!insert (bill20, rr19) into BillRoomReservation
+
+!insert (booking12, bill19) into BookingBill
+!insert (booking12, bill20) into BookingBill
+
+!new FreeRoomTypesDTO('dtoUnassignedJune')
+!dtoUnassignedJune.roomTypeDescription := 'Standard room (pending assignment for June)'
+!dtoUnassignedJune.numBeds := 2
+!dtoUnassignedJune.pricePerNight := 190.0
+!dtoUnassignedJune.numFreeRooms := 0

@@ -1,0 +1,337 @@
+!new Restaurant('rest13')
+!rest13.name := 'Orchard Terrace'
+
+!new Owner('own28')
+!own28.name := 'Mason Rivera'
+!own28.percentageShares := 40
+
+!new Owner('own29')
+!own29.name := 'Claire Bennett'
+!own29.percentageShares := 35
+
+!new Owner('own30')
+!own30.name := 'Hyejin Park'
+!own30.percentageShares := 15
+
+!new Owner('own31')
+!own31.name := 'Omar Hassan'
+!own31.percentageShares := 10
+
+!insert (rest13, own28) into RestaurantOwner
+!insert (rest13, own29) into RestaurantOwner
+!insert (rest13, own30) into RestaurantOwner
+!insert (rest13, own31) into RestaurantOwner
+
+!new HeadWaiter('hw13')
+!hw13.name := 'Valerie Scott'
+!hw13.dateOfBirth := Date('1984-10-18')
+!hw13.phoneNumber := '555-4100'
+
+!new Waiter('w27')
+!w27.name := 'Nicolas Armand'
+!w27.dateOfBirth := Date('1996-09-07')
+!w27.phoneNumber := '555-4101'
+!w27.spokenLanguage := #English
+
+!new Waiter('w28')
+!w28.name := 'Ines Morales'
+!w28.dateOfBirth := Date('1999-02-21')
+!w28.phoneNumber := '555-4102'
+!w28.spokenLanguage := #Spanish
+
+!insert (hw13, w27) into HeadWaiterWaiter
+!insert (hw13, w28) into HeadWaiterWaiter
+
+!new Chef('chef17')
+!chef17.name := 'Gabriel Novak'
+!chef17.dateOfBirth := Date('1976-06-11')
+!chef17.phoneNumber := '555-4200'
+
+!new Cook('cook25')
+!cook25.name := 'Lena Fischer'
+!cook25.dateOfBirth := Date('1990-03-29')
+!cook25.phoneNumber := '555-4201'
+!cook25.yearsOfExperience := 8
+
+!new Cook('cook26')
+!cook26.name := 'Adam Price'
+!cook26.dateOfBirth := Date('1994-12-02')
+!cook26.phoneNumber := '555-4202'
+!cook26.yearsOfExperience := 4
+
+!new Cook('cook27')
+!cook27.name := 'Sana Iqbal'
+!cook27.dateOfBirth := Date('2000-07-15')
+!cook27.phoneNumber := '555-4203'
+!cook27.yearsOfExperience := 1
+
+!insert (chef17, cook25) into ChefCook
+!insert (chef17, cook26) into ChefCook
+!insert (chef17, cook27) into ChefCook
+
+!new Chef('chef18')
+!chef18.name := 'Elise Caron'
+!chef18.dateOfBirth := Date('1982-01-05')
+!chef18.phoneNumber := '555-4210'
+
+!new Cook('cook28')
+!cook28.name := 'Bruno Almeida'
+!cook28.dateOfBirth := Date('1988-08-23')
+!cook28.phoneNumber := '555-4211'
+!cook28.yearsOfExperience := 12
+
+!insert (chef18, cook28) into ChefCook
+
+!new Allergen('alg13Lactose')
+!alg13Lactose.type := #Lactose
+
+!new Allergen('alg13Gluten')
+!alg13Gluten.type := #Gluten
+
+!new Allergen('alg13Seafood')
+!alg13Seafood.type := #Seafood
+
+!new FoodItem('fiButter13')
+!fiButter13.number := 1001
+!fiButter13.description := 'Butter'
+!fiButter13.purchaseFlag := true
+!fiButter13.unit := #Ounce
+
+!new FoodItem('fiFlour13')
+!fiFlour13.number := 1002
+!fiFlour13.description := 'Wheat flour'
+!fiFlour13.purchaseFlag := true
+!fiFlour13.unit := #Pound
+
+!new FoodItem('fiCod13')
+!fiCod13.number := 1003
+!fiCod13.description := 'Fresh cod'
+!fiCod13.purchaseFlag := true
+!fiCod13.unit := #Pound
+
+!new FoodItem('fiLettuce13')
+!fiLettuce13.number := 1004
+!fiLettuce13.description := 'Romaine lettuce'
+!fiLettuce13.purchaseFlag := true
+!fiLettuce13.unit := #Pound
+
+!new FoodItem('fiCoffeeBeans13')
+!fiCoffeeBeans13.number := 1005
+!fiCoffeeBeans13.description := 'Coffee beans'
+!fiCoffeeBeans13.purchaseFlag := true
+!fiCoffeeBeans13.unit := #Pound
+
+!new FoodItem('fiCream13')
+!fiCream13.number := 1006
+!fiCream13.description := 'Heavy cream'
+!fiCream13.purchaseFlag := true
+!fiCream13.unit := #Ounce
+
+!insert (fiButter13, alg13Lactose) into FoodItemAllergen
+!insert (fiCream13, alg13Lactose) into FoodItemAllergen
+!insert (fiFlour13, alg13Gluten) into FoodItemAllergen
+!insert (fiCod13, alg13Seafood) into FoodItemAllergen
+
+!new MenuItem('miCodTacos13')
+!miCodTacos13.description := 'Crispy cod tacos'
+!miCodTacos13.prepTime := 17.0
+!miCodTacos13.classification := #Main
+
+!new MenuItem('miGardenSalad13')
+!miGardenSalad13.description := 'Garden salad with lemon dressing'
+!miGardenSalad13.prepTime := 6.0
+!miGardenSalad13.classification := #Apetizer
+
+!new MenuItem('miLatte13')
+!miLatte13.description := 'Cafe latte'
+!miLatte13.prepTime := 3.0
+!miLatte13.classification := #Beverage
+
+!new MenuItem('miCheesecake13')
+!miCheesecake13.description := 'House cheesecake slice'
+!miCheesecake13.prepTime := 8.0
+!miCheesecake13.classification := #Dessert
+
+!insert (miCodTacos13, chef17) into MenuItemChef
+!insert (miGardenSalad13, chef18) into MenuItemChef
+!insert (miLatte13, chef18) into MenuItemChef
+!insert (miCheesecake13, chef17) into MenuItemChef
+
+!insert (miCodTacos13, fiCod13) into MenuItemFoodItem
+!insert (miCodTacos13, fiFlour13) into MenuItemFoodItem
+
+!insert (miGardenSalad13, fiLettuce13) into MenuItemFoodItem
+
+!insert (miLatte13, fiCoffeeBeans13) into MenuItemFoodItem
+!insert (miLatte13, fiCream13) into MenuItemFoodItem
+
+!insert (miCheesecake13, fiButter13) into MenuItemFoodItem
+!insert (miCheesecake13, fiFlour13) into MenuItemFoodItem
+!insert (miCheesecake13, fiCream13) into MenuItemFoodItem
+
+!new RegularCustomer('cust14')
+!cust14.name := 'Mei Lin'
+!cust14.prefferedLanguage := #English
+
+!new RegularCustomer('cust15')
+!cust15.name := 'Carlos Vega'
+!cust15.prefferedLanguage := #Spanish
+
+!new Individual('res15')
+!res15.time := Time('18:00')
+!res15.date := Date('2026-12-01')
+!res15.numberPeople := 6
+!res15.name := 'Mei Lin'
+!res15.phoneNumber := '555-5001'
+!res15.number := 17001
+!res15.seating := #Patio
+!res15.smoking := #NonSmoking
+
+!insert (rest13, res15) into RestaurantReservation
+!insert (res15, cust14) into ReservationCustomer
+!insert (res15, w27) into ReservationWaiter
+!insert (res15, w28) into ReservationWaiter
+
+!new Table('tRes15A')
+!tRes15A.number := 101
+!tRes15A.description := 'Patio table (4 seats)'
+!tRes15A.capacity := 4
+!insert (res15, tRes15A) into ReservationTable
+
+!new Table('tRes15B')
+!tRes15B.number := 102
+!tRes15B.description := 'Patio table (4 seats)'
+!tRes15B.capacity := 4
+!insert (res15, tRes15B) into ReservationTable
+
+!new ItemOrder('ioRes15_1')
+!ioRes15_1.time := Time('18:15')
+!insert (res15, ioRes15_1) into ReservationItemOrdered
+!insert (ioRes15_1, miGardenSalad13) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes15_2')
+!ioRes15_2.time := Time('18:35')
+!insert (res15, ioRes15_2) into ReservationItemOrdered
+!insert (ioRes15_2, miCodTacos13) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes15_3')
+!ioRes15_3.time := Time('19:05')
+!insert (res15, ioRes15_3) into ReservationItemOrdered
+!insert (ioRes15_3, miLatte13) into ItemOrderMenuItem
+
+!new Individual('res16')
+!res16.time := Time('20:40')
+!res16.date := Date('2026-12-01')
+!res16.numberPeople := 2
+!res16.name := 'Walk-in Pair'
+!res16.phoneNumber := '555-5002'
+!res16.number := 17002
+!res16.seating := #Inside
+!res16.smoking := #Smoking
+
+!insert (rest13, res16) into RestaurantReservation
+!insert (res16, w27) into ReservationWaiter
+
+!new Table('tRes16A')
+!tRes16A.number := 8
+!tRes16A.description := 'Small inside two-top'
+!tRes16A.capacity := 2
+!insert (res16, tRes16A) into ReservationTable
+
+!new BusDriver('bd12')
+!bd12.name := 'Sharon Wells'
+!bd12.dateOfBirth := Date('1970-01-24')
+!bd12.phoneNumber := '555-5100'
+!bd12.driverLicenseNr := 'D-2100457'
+
+!new BusDriver('bd13')
+!bd13.name := 'Mohammed Idris'
+!bd13.dateOfBirth := Date('1968-09-10')
+!bd13.phoneNumber := '555-5101'
+!bd13.driverLicenseNr := 'D-3301988'
+
+!new BusDriver('bd14')
+!bd14.name := 'Elena Karpova'
+!bd14.dateOfBirth := Date('1976-04-03')
+!bd14.phoneNumber := '555-5102'
+!bd14.driverLicenseNr := 'D-7754021'
+
+!new Banquet('banq10')
+!banq10.time := Time('12:30')
+!banq10.date := Date('2026-12-03')
+!banq10.numberPeople := 50
+!banq10.name := 'Harbor District Council'
+!banq10.phoneNumber := '555-5200'
+!banq10.number := 18001
+!banq10.groupName := 'Year-End Luncheon'
+!banq10.paymentMethod := #Cash
+!banq10.busService := true
+
+!insert (rest13, banq10) into RestaurantReservation
+!insert (banq10, w28) into ReservationWaiter
+!insert (banq10, bd12) into BanquetBusDriver
+!insert (banq10, bd13) into BanquetBusDriver
+!insert (banq10, bd14) into BanquetBusDriver
+
+!new Table('tBanq10A')
+!tBanq10A.number := 201
+!tBanq10A.description := 'Banquet table A'
+!tBanq10A.capacity := 10
+!insert (banq10, tBanq10A) into ReservationTable
+
+!new Table('tBanq10B')
+!tBanq10B.number := 202
+!tBanq10B.description := 'Banquet table B'
+!tBanq10B.capacity := 10
+!insert (banq10, tBanq10B) into ReservationTable
+
+!new Table('tBanq10C')
+!tBanq10C.number := 203
+!tBanq10C.description := 'Banquet table C'
+!tBanq10C.capacity := 10
+!insert (banq10, tBanq10C) into ReservationTable
+
+!new Table('tBanq10D')
+!tBanq10D.number := 204
+!tBanq10D.description := 'Banquet table D'
+!tBanq10D.capacity := 10
+!insert (banq10, tBanq10D) into ReservationTable
+
+!new Table('tBanq10E')
+!tBanq10E.number := 205
+!tBanq10E.description := 'Banquet table E'
+!tBanq10E.capacity := 5
+!insert (banq10, tBanq10E) into ReservationTable
+
+!new Table('tBanq10F')
+!tBanq10F.number := 206
+!tBanq10F.description := 'Banquet table F'
+!tBanq10F.capacity := 5
+!insert (banq10, tBanq10F) into ReservationTable
+
+!new ItemOrder('ioBanq10_1')
+!ioBanq10_1.time := Time('12:50')
+!insert (banq10, ioBanq10_1) into ReservationItemOrdered
+!insert (ioBanq10_1, miGardenSalad13) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq10_2')
+!ioBanq10_2.time := Time('13:15')
+!insert (banq10, ioBanq10_2) into ReservationItemOrdered
+!insert (ioBanq10_2, miCodTacos13) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq10_3')
+!ioBanq10_3.time := Time('13:45')
+!insert (banq10, ioBanq10_3) into ReservationItemOrdered
+!insert (ioBanq10_3, miCheesecake13) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq10')
+!dietReq10.diet := #Vegan
+
+!new DietaryRequirement('dietReq11')
+!dietReq11.diet := #Halal
+
+!new ReportedAllergy('repAlg10')
+!repAlg10.allergen := #Seafood
+
+!new ReportedAllergy('repAlg11')
+!repAlg11.allergen := #Lactose

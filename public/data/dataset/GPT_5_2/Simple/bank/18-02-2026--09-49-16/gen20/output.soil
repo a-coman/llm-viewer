@@ -1,0 +1,94 @@
+!new Bank('bankMA1')
+!bankMA1.country := 'Morocco'
+!bankMA1.name := 'Casablanca Retail Bank'
+!bankMA1.bic := 'CRBKMAAAXXX'
+
+!new Bank('bankCL1')
+!bankCL1.country := 'Chile'
+!bankCL1.name := 'Banco Andino'
+!bankCL1.bic := 'BANDCLRMXXX'
+
+!new Bank('bankMA2')
+!bankMA2.country := 'Morocco'
+!bankMA2.name := 'Atlas Private Bank'
+!bankMA2.bic := 'ATPBMAAAXXX'
+
+!new Person('n1')
+!n1.firstName := 'Youssef'
+!n1.lastName := 'ElAmrani'
+!n1.age := 43
+
+!new Person('n2')
+!n2.firstName := 'Nadia'
+!n2.lastName := 'Bennani'
+!n2.age := 29
+
+!new Person('n3')
+!n3.firstName := 'Samir'
+!n3.lastName := 'Haddou'
+!n3.age := 61
+
+!new Person('n4')
+!n4.firstName := 'Valentina'
+!n4.lastName := 'Rojas'
+!n4.age := 34
+
+!new Person('n5')
+!n5.firstName := 'Tomas'
+!n5.lastName := 'Silva'
+!n5.age := 36
+
+!new Person('n6')
+!n6.firstName := 'Ines'
+!n6.lastName := 'ElAmrani'
+!n6.age := 12
+
+!new Person('n7')
+!n7.firstName := 'Aitor'
+!n7.lastName := 'Garcia'
+!n7.age := 23
+
+!new Account('maAcc1')
+!maAcc1.iban := 'MA6401151900000123456789012'
+!maAcc1.balance := 0
+
+!new Account('maAcc2')
+!maAcc2.iban := 'MA0301151900000000004567893'
+!maAcc2.balance := 150
+
+!new Account('maAcc3')
+!maAcc3.iban := 'MA8801151900000000001234001'
+!maAcc3.balance := 9800
+
+!new Account('clAcc1')
+!clAcc1.iban := 'CL2500151900000012345678901'
+!clAcc1.balance := 45000
+
+!new Account('clAcc2')
+!clAcc2.iban := 'CL9100151900000099990000123'
+!clAcc2.balance := 20
+
+!insert (bankMA1, maAcc1) into AccountOfBanks
+!insert (bankMA1, maAcc2) into AccountOfBanks
+!insert (bankMA1, maAcc3) into AccountOfBanks
+!insert (bankCL1, clAcc1) into AccountOfBanks
+!insert (bankCL1, clAcc2) into AccountOfBanks
+
+!insert (n1, maAcc1) into Ownership
+!insert (n2, maAcc1) into Ownership
+
+!insert (n3, maAcc2) into Ownership
+
+!insert (n2, maAcc3) into Ownership
+
+!insert (n4, clAcc1) into Ownership
+!insert (n5, clAcc1) into Ownership
+
+!insert (n5, clAcc2) into Ownership
+
+!insert (n6, maAcc1) into Use
+!insert (n6, clAcc1) into Use
+
+!insert (n7, maAcc2) into Use
+
+!insert (n2, clAcc2) into Use

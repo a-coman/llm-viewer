@@ -1,0 +1,122 @@
+!new RentalOffice('office_callcenter_ct6')
+!office_callcenter_ct6.name := 'Northeast Reservations Call Center'
+!office_callcenter_ct6.number := 6001
+!office_callcenter_ct6.address := '200 Asylum St, Hartford, CT 06103'
+
+!new RentalOffice('office_tampa_west6')
+!office_tampa_west6.name := 'Tampa West Service Yard'
+!office_tampa_west6.number := 6002
+!office_tampa_west6.address := '5201 W Cypress St, Tampa, FL 33607'
+
+!new RentalOffice('office_denver_airport6')
+!office_denver_airport6.name := 'Denver Airport Commercial Rentals'
+!office_denver_airport6.number := 6003
+!office_denver_airport6.address := '8500 Peña Blvd, Denver, CO 80249'
+
+!new Truck('truck_ct_24ft_601')
+!truck_ct_24ft_601.id := 60601
+!truck_ct_24ft_601.registrationState := #CT
+!truck_ct_24ft_601.licensePlateNumber := 'CT-TRK-60601'
+!truck_ct_24ft_601.vehicleTypeCode := #TRUCK24
+!truck_ct_24ft_601.registrationLastMaintenanceDate := Date('2026-06-28')
+!truck_ct_24ft_601.expirationDate := Date('2027-06-30')
+!truck_ct_24ft_601.odometerReading := 38005
+!truck_ct_24ft_601.gasTankCapacity := 62.0
+!truck_ct_24ft_601.workingRadio := true
+!truck_ct_24ft_601.mileage := 9
+
+!new Vehicle('trailer_fl_open_602')
+!trailer_fl_open_602.id := 60602
+!trailer_fl_open_602.registrationState := #FL
+!trailer_fl_open_602.licensePlateNumber := 'FL-TRL-60602'
+!trailer_fl_open_602.vehicleTypeCode := #OPEN_TRAILER
+!trailer_fl_open_602.registrationLastMaintenanceDate := Date('2026-05-16')
+!trailer_fl_open_602.expirationDate := Date('2027-05-31')
+
+!new Vehicle('trailer_co_covered_603')
+!trailer_co_covered_603.id := 60603
+!trailer_co_covered_603.registrationState := #CO
+!trailer_co_covered_603.licensePlateNumber := 'CO-TRL-60603'
+!trailer_co_covered_603.vehicleTypeCode := #COVERED_TRAILER
+!trailer_co_covered_603.registrationLastMaintenanceDate := Date('2026-04-07')
+!trailer_co_covered_603.expirationDate := Date('2027-04-30')
+
+!insert (office_tampa_west6, truck_ct_24ft_601) into RentalOfficeVehicle
+!insert (office_tampa_west6, trailer_fl_open_602) into RentalOfficeVehicle
+!insert (office_denver_airport6, trailer_co_covered_603) into RentalOfficeVehicle
+
+!new Individual('cust_ind_stephanie6')
+!cust_ind_stephanie6.name := 'Stephanie Ruiz'
+!cust_ind_stephanie6.address := '18 W 6th St, Wilmington, DE 19801'
+!cust_ind_stephanie6.poorRisk := false
+!cust_ind_stephanie6.homePhone := '302-555-0168'
+!cust_ind_stephanie6.driverLicenseState := #DE
+!cust_ind_stephanie6.driverLicenseNumber := 31980455
+!cust_ind_stephanie6.driverLicenseExpirationDate := Date('2028-11-30')
+
+!new Individual('cust_ind_caleb6')
+!cust_ind_caleb6.name := 'Caleb Monroe'
+!cust_ind_caleb6.address := '940 S Colorado Blvd, Denver, CO 80246'
+!cust_ind_caleb6.poorRisk := true
+!cust_ind_caleb6.homePhone := '720-555-0181'
+!cust_ind_caleb6.driverLicenseState := #CO
+!cust_ind_caleb6.driverLicenseNumber := 77130062
+!cust_ind_caleb6.driverLicenseExpirationDate := Date('2026-12-31')
+
+!new Company('cust_co_seaboard6')
+!cust_co_seaboard6.name := 'Seaboard Exhibit Services'
+!cust_co_seaboard6.address := '5600 E Adamo Dr, Tampa, FL 33619'
+!cust_co_seaboard6.poorRisk := false
+!cust_co_seaboard6.idNumber := 60688011
+
+!new RentalAgreement('ra_600001')
+!ra_600001.number := 600001
+!ra_600001.rentalDate := Date('2026-02-03')
+!ra_600001.anticipatedDuration := 10
+!ra_600001.depositPaid := 0.00
+!ra_600001.quotedDailyRate := 149.00
+!ra_600001.quotedRatePerMile := 0.82
+
+!new RentalAgreement('ra_600002')
+!ra_600002.number := 600002
+!ra_600002.rentalDate := Date('2026-02-05')
+!ra_600002.anticipatedDuration := 1
+!ra_600002.depositPaid := 50.00
+!ra_600002.quotedDailyRate := 29.00
+!ra_600002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_600003')
+!ra_600003.number := 600003
+!ra_600003.rentalDate := Date('2026-02-14')
+!ra_600003.anticipatedDuration := 45
+!ra_600003.depositPaid := 500.00
+!ra_600003.quotedDailyRate := 39.95
+!ra_600003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_600004')
+!ra_600004.number := 600004
+!ra_600004.rentalDate := Date('2026-03-10')
+!ra_600004.anticipatedDuration := 3
+!ra_600004.depositPaid := 900.00
+!ra_600004.quotedDailyRate := 199.00
+!ra_600004.quotedRatePerMile := 0.95
+
+!insert (office_callcenter_ct6, ra_600001) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver_airport6, ra_600001) into RentalOfficeRentalAgreementDrop
+!insert (ra_600001, trailer_co_covered_603) into RentalAgreementVehicle
+!insert (ra_600001, cust_co_seaboard6) into RentalAgreementCustomer
+
+!insert (office_denver_airport6, ra_600002) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver_airport6, ra_600002) into RentalOfficeRentalAgreementDrop
+!insert (ra_600002, trailer_co_covered_603) into RentalAgreementVehicle
+!insert (ra_600002, cust_ind_caleb6) into RentalAgreementCustomer
+
+!insert (office_callcenter_ct6, ra_600003) into RentalOfficeRentalAgreementOrigin
+!insert (office_tampa_west6, ra_600003) into RentalOfficeRentalAgreementDrop
+!insert (ra_600003, trailer_fl_open_602) into RentalAgreementVehicle
+!insert (ra_600003, cust_ind_stephanie6) into RentalAgreementCustomer
+
+!insert (office_callcenter_ct6, ra_600004) into RentalOfficeRentalAgreementOrigin
+!insert (office_tampa_west6, ra_600004) into RentalOfficeRentalAgreementDrop
+!insert (ra_600004, truck_ct_24ft_601) into RentalAgreementVehicle
+!insert (ra_600004, cust_co_seaboard6) into RentalAgreementCustomer

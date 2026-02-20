@@ -1,0 +1,193 @@
+!new Restaurant('rest28')
+!rest28.name := 'Nomad Kitchen'
+
+!new Owner('own68')
+!own68.name := 'Helene Fischer'
+!own68.percentageShares := 70
+
+!new Owner('own69')
+!own69.name := 'Omar Javed'
+!own69.percentageShares := 30
+
+!insert (rest28, own68) into RestaurantOwner
+!insert (rest28, own69) into RestaurantOwner
+
+!new HeadWaiter('hw33')
+!hw33.name := 'Caroline Watts'
+!hw33.dateOfBirth := Date('1988-06-15')
+!hw33.phoneNumber := '555-7001'
+
+!new Waiter('w68')
+!w68.name := 'Diego Luna'
+!w68.dateOfBirth := Date('1997-03-22')
+!w68.phoneNumber := '555-7002'
+!w68.spokenLanguage := #Spanish
+
+!new Waiter('w69')
+!w69.name := 'Greta Neumann'
+!w69.dateOfBirth := Date('1993-09-09')
+!w69.phoneNumber := '555-7003'
+!w69.spokenLanguage := #German
+
+!insert (hw33, w68) into HeadWaiterWaiter
+!insert (hw33, w69) into HeadWaiterWaiter
+
+!new Chef('chef46')
+!chef46.name := 'Jun Park'
+!chef46.dateOfBirth := Date('1979-02-04')
+!chef46.phoneNumber := '555-7010'
+
+!new Cook('cook68')
+!cook68.name := 'Sofia Petrenko'
+!cook68.dateOfBirth := Date('1991-12-28')
+!cook68.phoneNumber := '555-7011'
+!cook68.yearsOfExperience := 8
+
+!new Cook('cook69')
+!cook69.name := 'Martin Alvarez'
+!cook69.dateOfBirth := Date('1999-05-19')
+!cook69.phoneNumber := '555-7012'
+!cook69.yearsOfExperience := 1
+
+!insert (chef46, cook68) into ChefCook
+!insert (chef46, cook69) into ChefCook
+
+!new Allergen('alg28Gluten')
+!alg28Gluten.type := #Gluten
+!new Allergen('alg28Seafood')
+!alg28Seafood.type := #Seafood
+
+!new FoodItem('fiNoodles28')
+!fiNoodles28.number := 2101
+!fiNoodles28.description := 'Wheat noodles'
+!fiNoodles28.purchaseFlag := true
+!fiNoodles28.unit := #Pound
+
+!new FoodItem('fiBroth28')
+!fiBroth28.number := 2102
+!fiBroth28.description := 'Vegetable broth base'
+!fiBroth28.purchaseFlag := true
+!fiBroth28.unit := #Ounce
+
+!new FoodItem('fiSeaweed28')
+!fiSeaweed28.number := 2103
+!fiSeaweed28.description := 'Dried seaweed'
+!fiSeaweed28.purchaseFlag := true
+!fiSeaweed28.unit := #Gram
+
+!new FoodItem('fiShrimp28')
+!fiShrimp28.number := 2104
+!fiShrimp28.description := 'Shrimp'
+!fiShrimp28.purchaseFlag := true
+!fiShrimp28.unit := #Pound
+
+!insert (fiNoodles28, alg28Gluten) into FoodItemAllergen
+!insert (fiShrimp28, alg28Seafood) into FoodItemAllergen
+
+!new MenuItem('miSeaweedSoup28')
+!miSeaweedSoup28.description := 'Seaweed soup'
+!miSeaweedSoup28.prepTime := 6.0
+!miSeaweedSoup28.classification := #Apetizer
+
+!new MenuItem('miShrimpNoodleBowl28')
+!miShrimpNoodleBowl28.description := 'Shrimp noodle bowl'
+!miShrimpNoodleBowl28.prepTime := 14.0
+!miShrimpNoodleBowl28.classification := #Main
+
+!new MenuItem('miHerbalTea28')
+!miHerbalTea28.description := 'Herbal tea'
+!miHerbalTea28.prepTime := 2.0
+!miHerbalTea28.classification := #Beverage
+
+!insert (miSeaweedSoup28, chef46) into MenuItemChef
+!insert (miShrimpNoodleBowl28, chef46) into MenuItemChef
+!insert (miHerbalTea28, chef46) into MenuItemChef
+
+!insert (miSeaweedSoup28, fiSeaweed28) into MenuItemFoodItem
+!insert (miSeaweedSoup28, fiBroth28) into MenuItemFoodItem
+
+!insert (miShrimpNoodleBowl28, fiNoodles28) into MenuItemFoodItem
+!insert (miShrimpNoodleBowl28, fiShrimp28) into MenuItemFoodItem
+!insert (miShrimpNoodleBowl28, fiBroth28) into MenuItemFoodItem
+
+!new RegularCustomer('cust35')
+!cust35.name := 'Nina Kovacs'
+!cust35.prefferedLanguage := #German
+
+!new Individual('res36')
+!res36.time := Time('21:10')
+!res36.date := Date('2027-11-10')
+!res36.numberPeople := 3
+!res36.name := 'Nina Kovacs'
+!res36.phoneNumber := '555-7025'
+!res36.number := 41001
+!res36.seating := #Inside
+!res36.smoking := #NonSmoking
+
+!insert (res36, cust35) into ReservationCustomer
+!insert (res36, w68) into ReservationWaiter
+
+!new Table('tRes36A')
+!tRes36A.number := 12
+!tRes36A.description := 'Small booth near window'
+!tRes36A.capacity := 4
+!insert (res36, tRes36A) into ReservationTable
+
+!new ItemOrder('ioRes36_1')
+!ioRes36_1.time := Time('21:20')
+!insert (res36, ioRes36_1) into ReservationItemOrdered
+!insert (ioRes36_1, miSeaweedSoup28) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes36_2')
+!ioRes36_2.time := Time('21:35')
+!insert (res36, ioRes36_2) into ReservationItemOrdered
+!insert (ioRes36_2, miShrimpNoodleBowl28) into ItemOrderMenuItem
+
+!new BusDriver('bd40')
+!bd40.name := 'Elias Novak'
+!bd40.dateOfBirth := Date('1970-05-02')
+!bd40.phoneNumber := '555-7030'
+!bd40.driverLicenseNr := 'D-4005519'
+
+!new Banquet('banq33')
+!banq33.time := Time('11:30')
+!banq33.date := Date('2027-11-11')
+!banq33.numberPeople := 20
+!banq33.name := 'Regional Language Exchange'
+!banq33.phoneNumber := '555-7035'
+!banq33.number := 42001
+!banq33.groupName := 'Monthly Meetup Lunch'
+!banq33.paymentMethod := #Cash
+!banq33.busService := true
+
+!insert (banq33, bd40) into BanquetBusDriver
+!insert (banq33, w68) into ReservationWaiter
+!insert (banq33, w69) into ReservationWaiter
+
+!new Table('tBanq33A')
+!tBanq33A.number := 60
+!tBanq33A.description := 'Long table A'
+!tBanq33A.capacity := 12
+!insert (banq33, tBanq33A) into ReservationTable
+
+!new Table('tBanq33B')
+!tBanq33B.number := 61
+!tBanq33B.description := 'Long table B'
+!tBanq33B.capacity := 8
+!insert (banq33, tBanq33B) into ReservationTable
+
+!new ItemOrder('ioBanq33_1')
+!ioBanq33_1.time := Time('11:45')
+!insert (banq33, ioBanq33_1) into ReservationItemOrdered
+!insert (ioBanq33_1, miHerbalTea28) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq33_2')
+!ioBanq33_2.time := Time('12:05')
+!insert (banq33, ioBanq33_2) into ReservationItemOrdered
+!insert (ioBanq33_2, miShrimpNoodleBowl28) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq20')
+!dietReq20.diet := #Halal
+
+!new ReportedAllergy('repAlg20')
+!repAlg20.allergen := #Seafood

@@ -1,0 +1,56 @@
+!new Booking('booking9')
+!booking9.startDate := '2027-02-03'
+!booking9.endDate := '2027-02-06'
+!booking9.canceled := false
+!booking9.bookingId := 7001
+!booking9.confirmed := false
+
+!new Customer('customer9')
+!customer9.firstName := 'Mila'
+!customer9.lastName := 'Hernandez'
+
+!insert (booking9, customer9) into BookingCustomer
+
+!new RoomReservation('rr12')
+!rr12.checkInDate := '2027-02-03'
+!rr12.checkOutDate := '2027-02-06'
+
+!insert (booking9, rr12) into BookingRoomReservation
+
+!new Room('room910')
+!room910.roomNumber := 910
+!room910.numBeds := 2
+!room910.pricePerNight := 175.0
+!room910.occupied := false
+!room910.blocked := true
+
+!new Room('room911')
+!room911.roomNumber := 911
+!room911.numBeds := 2
+!room911.pricePerNight := 175.0
+!room911.occupied := false
+!room911.blocked := true
+
+!new Room('room912')
+!room912.roomNumber := 912
+!room912.numBeds := 1
+!room912.pricePerNight := 120.0
+!room912.occupied := false
+!room912.blocked := true
+
+!insert (rr12, room910) into RoomReservationRoom
+!insert (rr12, room911) into RoomReservationRoom
+!insert (rr12, room912) into RoomReservationRoom
+
+!new Bill('bill13')
+!bill13.billId := 10001
+!bill13.price := 1410.0
+
+!insert (bill13, rr12) into BillRoomReservation
+!insert (booking9, bill13) into BookingBill
+
+!new FreeRoomTypesDTO('dtoGroupRate')
+!dtoGroupRate.roomTypeDescription := 'Group rate (standard floors)'
+!dtoGroupRate.numBeds := 2
+!dtoGroupRate.pricePerNight := 175.0
+!dtoGroupRate.numFreeRooms := 15

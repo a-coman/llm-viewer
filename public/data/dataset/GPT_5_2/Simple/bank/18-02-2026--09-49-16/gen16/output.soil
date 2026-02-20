@@ -1,0 +1,81 @@
+!new Bank('bankKR1')
+!bankKR1.country := 'South Korea'
+!bankKR1.name := 'Han River Bank'
+!bankKR1.bic := 'HRBKKRSEXXX'
+
+!new Bank('bankAR1')
+!bankAR1.country := 'Argentina'
+!bankAR1.name := 'Banco Rio Plata'
+!bankAR1.bic := 'BRPLARBAXXX'
+
+!new Person('aa1')
+!aa1.firstName := 'Minjun'
+!aa1.lastName := 'Park'
+!aa1.age := 26
+
+!new Person('aa2')
+!aa2.firstName := 'Sunhee'
+!aa2.lastName := 'Kim'
+!aa2.age := 62
+
+!new Person('aa3')
+!aa3.firstName := 'Jiwon'
+!aa3.lastName := 'Lee'
+!aa3.age := 18
+
+!new Person('aa4')
+!aa4.firstName := 'Santiago'
+!aa4.lastName := 'Gomez'
+!aa4.age := 45
+
+!new Person('aa5')
+!aa5.firstName := 'Valentina'
+!aa5.lastName := 'Gomez'
+!aa5.age := 16
+
+!new Person('aa6')
+!aa6.firstName := 'Mateo'
+!aa6.lastName := 'Rossi'
+!aa6.age := 14
+
+!new Account('krAcc1')
+!krAcc1.iban := 'KR00HRBK000000000001'
+!krAcc1.balance := 200
+
+!new Account('krAcc2')
+!krAcc2.iban := 'KR00HRBK000000000002'
+!krAcc2.balance := 0
+
+!new Account('arAcc1')
+!arAcc1.iban := 'AR00BRPL000000010001'
+!arAcc1.balance := 35000
+
+!new Account('arAcc2')
+!arAcc2.iban := 'AR00BRPL000000010002'
+!arAcc2.balance := 740
+
+!new Account('arAcc3')
+!arAcc3.iban := 'AR00BRPL000000010003'
+!arAcc3.balance := 12
+
+!insert (bankKR1, krAcc1) into AccountOfBanks
+!insert (bankKR1, krAcc2) into AccountOfBanks
+!insert (bankAR1, arAcc1) into AccountOfBanks
+!insert (bankAR1, arAcc2) into AccountOfBanks
+!insert (bankAR1, arAcc3) into AccountOfBanks
+
+!insert (aa1, krAcc1) into Ownership
+!insert (aa2, krAcc2) into Ownership
+!insert (aa4, arAcc1) into Ownership
+!insert (aa2, arAcc2) into Ownership
+!insert (aa3, arAcc2) into Ownership
+!insert (aa3, arAcc3) into Ownership
+
+!insert (aa5, krAcc1) into Use
+!insert (aa6, krAcc1) into Use
+
+!insert (aa1, arAcc1) into Use
+!insert (aa5, arAcc1) into Use
+
+!insert (aa4, arAcc2) into Use
+!insert (aa6, arAcc2) into Use

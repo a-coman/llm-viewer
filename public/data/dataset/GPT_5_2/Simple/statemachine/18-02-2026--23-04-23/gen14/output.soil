@@ -1,0 +1,126 @@
+!new StateMachine('smConference')
+!smConference.name := 'conferenceSubmission'
+
+!new State('cfProposed')
+!cfProposed.name := 'proposed'
+!new State('cfScheduled')
+!cfScheduled.name := 'scheduled'
+!new State('cfOngoing')
+!cfOngoing.name := 'ongoing'
+!new State('cfPaused')
+!cfPaused.name := 'paused'
+!new State('cfFinished')
+!cfFinished.name := 'finished'
+!new State('cfCancelled')
+!cfCancelled.name := 'cancelled'
+
+!insert (smConference, cfProposed) into StateMachineContainsStates
+!insert (smConference, cfScheduled) into StateMachineContainsStates
+!insert (smConference, cfOngoing) into StateMachineContainsStates
+!insert (smConference, cfPaused) into StateMachineContainsStates
+!insert (smConference, cfFinished) into StateMachineContainsStates
+!insert (smConference, cfCancelled) into StateMachineContainsStates
+
+!insert (smConference, cfProposed) into StateMachineStartsStates
+
+
+!new Transition('trApprove')
+!trApprove.name := 'approveProposal'
+!new TimeEvent('evApprove')
+!evApprove.time := 1440
+!insert (smConference, trApprove) into StateMachineContainsTransitions
+!insert (trApprove, evApprove) into TransitionContainsEvents
+!insert (cfProposed, trApprove) into StateTransition
+!insert (trApprove, cfScheduled) into TransitionState
+
+!new Transition('trCancelBeforeSchedule')
+!trCancelBeforeSchedule.name := 'cancelBeforeSchedule'
+!new TimeEvent('evCancelBeforeSchedule')
+!evCancelBeforeSchedule.time := 60
+!insert (smConference, trCancelBeforeSchedule) into StateMachineContainsTransitions
+!insert (trCancelBeforeSchedule, evCancelBeforeSchedule) into TransitionContainsEvents
+!insert (cfProposed, trCancelBeforeSchedule) into StateTransition
+!insert (trCancelBeforeSchedule, cfCancelled) into TransitionState
+
+!new Transition('trCancelScheduled')
+!trCancelScheduled.name := 'cancelScheduled'
+!new TimeEvent('evCancelScheduled')
+!evCancelScheduled.time := 30
+!insert (smConference, trCancelScheduled) into StateMachineContainsTransitions
+!insert (trCancelScheduled, evCancelScheduled) into TransitionContainsEvents
+!insert (cfScheduled, trCancelScheduled) into StateTransition
+!insert (trCancelScheduled, cfCancelled) into TransitionState
+
+!new Transition('trStartSession')
+!trStartSession.name := 'startSession'
+!new TimeEvent('evStartSession')
+!evStartSession.time := 1
+!insert (smConference, trStartSession) into StateMachineContainsTransitions
+!insert (trStartSession, evStartSession) into TransitionContainsEvents
+!insert (cfScheduled, trStartSession) into StateTransition
+!insert (trStartSession, cfOngoing) into TransitionState
+
+!new Transition('trPauseSession')
+!trPauseSession.name := 'pauseSession'
+!new TimeEvent('evPauseSession')
+!evPauseSession.time := 90
+!insert (smConference, trPauseSession) into StateMachineContainsTransitions
+!insert (trPauseSession, evPauseSession) into TransitionContainsEvents
+!insert (cfOngoing, trPauseSession) into StateTransition
+!insert (trPauseSession, cfPaused) into TransitionState
+
+!new Transition('trResumeSession')
+!trResumeSession.name := 'resumeSession'
+!new TimeEvent('evResumeSession')
+!evResumeSession.time := 10
+!insert (smConference, trResumeSession) into StateMachineContainsTransitions
+!insert (trResumeSession, evResumeSession) into TransitionContainsEvents
+!insert (cfPaused, trResumeSession) into StateTransition
+!insert (trResumeSession, cfOngoing) into TransitionState
+
+!new Transition('trEndSession')
+!trEndSession.name := 'endSession'
+!new TimeEvent('evEndSession')
+!evEndSession.time := 5400
+!insert (smConference, trEndSession) into StateMachineContainsTransitions
+!insert (trEndSession, evEndSession) into TransitionContainsEvents
+!insert (cfOngoing, trEndSession) into StateTransition
+!insert (trEndSession, cfFinished) into TransitionState
+
+!new Transition('trAbortOngoing')
+!trAbortOngoing.name := 'abortOngoing'
+!new TimeEvent('evAbortOngoing')
+!evAbortOngoing.time := 1
+!insert (smConference, trAbortOngoing) into StateMachineContainsTransitions
+!insert (trAbortOngoing, evAbortOngoing) into TransitionContainsEvents
+!insert (cfOngoing, trAbortOngoing) into StateTransition
+!insert (trAbortOngoing, cfCancelled) into TransitionState
+
+!new Transition('trStatusPing')
+!trStatusPing.name := 'statusPing'
+!new TimeEvent('evStatusPing')
+!evStatusPing.time := 300
+!insert (smConference, trStatusPing) into StateMachineContainsTransitions
+!insert (trStatusPing, evStatusPing) into TransitionContainsEvents
+!insert (cfOngoing, trStatusPing) into StateTransition
+!insert (trStatusPing, cfOngoing) into TransitionState
+
+!new Transition('trPauseTimeoutCancel')
+!trPauseTimeoutCancel.name := 'pauseTimeoutCancel'
+!new TimeEvent('evPauseTimeoutCancel')
+!evPauseTimeoutCancel.time := 1800
+!insert (smConference, trPauseTimeoutCancel) into StateMachineContainsTransitions
+!insert (trPauseTimeoutCancel, evPauseTimeoutCancel) into TransitionContainsEvents
+!insert (cfPaused, trPauseTimeoutCancel) into StateTransition
+!insert (trPauseTimeoutCancel, cfCancelled) into TransitionState
+
+
+
+!new StateMachine('smDocArchive')
+!smDocArchive.name := 'documentArchive'
+
+!new State('daArchived')
+!daArchived.name := 'archived'
+
+!insert (smDocArchive, daArchived) into StateMachineContainsStates
+!insert (smDocArchive, daArchived) into StateMachineStartsStates

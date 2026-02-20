@@ -1,0 +1,90 @@
+!new Bank('bankNZ2')
+!bankNZ2.country := 'New Zealand'
+!bankNZ2.name := 'Harbour Plains Bank'
+!bankNZ2.bic := 'HPBNNZ2AXXX'
+
+!new Person('nzP1')
+!nzP1.firstName := 'Holly'
+!nzP1.lastName := 'Bennett'
+!nzP1.age := 41
+
+!new Person('nzP2')
+!nzP2.firstName := 'Wiremu'
+!nzP2.lastName := 'Rangi'
+!nzP2.age := 36
+
+!new Person('nzP3')
+!nzP3.firstName := 'Sienna'
+!nzP3.lastName := 'Patel'
+!nzP3.age := 23
+
+!new Person('nzP4')
+!nzP4.firstName := 'Ava'
+!nzP4.lastName := 'Bennett'
+!nzP4.age := 13
+
+!new Person('nzP5')
+!nzP5.firstName := 'Tama'
+!nzP5.lastName := 'Rangi'
+!nzP5.age := 17
+
+!new Person('nzP6')
+!nzP6.firstName := 'Leo'
+!nzP6.lastName := 'Patel'
+!nzP6.age := 6
+
+!new Account('nzAcc01')
+!nzAcc01.iban := 'NZ00HPBN000000000001'
+!nzAcc01.balance := 0
+
+!new Account('nzAcc02')
+!nzAcc02.iban := 'NZ00HPBN000000000145'
+!nzAcc02.balance := 2850
+
+!new Account('nzAcc03')
+!nzAcc03.iban := 'NZ00HPBN000000003333'
+!nzAcc03.balance := 120
+
+!new Account('nzAcc04')
+!nzAcc04.iban := 'NZ00HPBN000000004444'
+!nzAcc04.balance := 76000
+
+!new Account('nzAcc05')
+!nzAcc05.iban := 'NZ00HPBN000000005555'
+!nzAcc05.balance := 15
+
+!new Account('nzAcc06')
+!nzAcc06.iban := 'NZ00HPBN000000009999'
+!nzAcc06.balance := 940
+
+!insert (bankNZ2, nzAcc01) into AccountOfBanks
+!insert (bankNZ2, nzAcc02) into AccountOfBanks
+!insert (bankNZ2, nzAcc03) into AccountOfBanks
+!insert (bankNZ2, nzAcc04) into AccountOfBanks
+!insert (bankNZ2, nzAcc05) into AccountOfBanks
+!insert (bankNZ2, nzAcc06) into AccountOfBanks
+
+!insert (nzP1, nzAcc01) into Ownership
+
+!insert (nzP1, nzAcc02) into Ownership
+!insert (nzP2, nzAcc02) into Ownership
+
+!insert (nzP2, nzAcc03) into Ownership
+
+!insert (nzP3, nzAcc04) into Ownership
+
+!insert (nzP1, nzAcc05) into Ownership
+!insert (nzP3, nzAcc05) into Ownership
+
+!insert (nzP2, nzAcc06) into Ownership
+!insert (nzP3, nzAcc06) into Ownership
+
+!insert (nzP4, nzAcc01) into Use
+!insert (nzP5, nzAcc02) into Use
+!insert (nzP6, nzAcc03) into Use
+
+!insert (nzP2, nzAcc04) into Use
+!insert (nzP5, nzAcc04) into Use
+
+!insert (nzP1, nzAcc06) into Use
+!insert (nzP4, nzAcc06) into Use

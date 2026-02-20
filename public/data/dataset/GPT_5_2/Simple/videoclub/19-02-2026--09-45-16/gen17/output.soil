@@ -1,0 +1,84 @@
+!new Client('xClient1')
+!xClient1.clientId := 1401
+!xClient1.isSuspended := false
+
+!new Client('xClient2')
+!xClient2.clientId := 1402
+!xClient2.isSuspended := true
+
+!new Client('xClient3')
+!xClient3.clientId := 1403
+!xClient3.isSuspended := false
+
+!new Client('xClient4')
+!xClient4.clientId := 1404
+!xClient4.isSuspended := false
+
+!new Cassette('xTape1')
+!xTape1.title := 'Nature Documentary: Rainforests'
+!xTape1.availableCopies := 2
+
+!new Cassette('xTape2')
+!xTape2.title := 'Concert Recording: Live at Orion Hall'
+!xTape2.availableCopies := 0
+
+!new Movie('xMovie1')
+!xMovie1.title := 'Checkpoint Zero'
+!xMovie1.availableCopies := 1
+!xMovie1.genre := #Action
+
+!new Series('xSeries1')
+!xSeries1.title := 'Weekend Bakers'
+!xSeries1.availableCopies := 3
+!xSeries1.episode := 4
+
+!new Series('xSeries2')
+!xSeries2.title := 'Weekend Bakers'
+!xSeries2.availableCopies := 3
+!xSeries2.episode := 5
+
+!new Actor('xActor1')
+!xActor1.name := 'Tessa Morgan'
+
+!new Actor('xActor2')
+!xActor2.name := 'Hiro Tan'
+
+!new Actor('xActor3')
+!xActor3.name := 'Gabriel Stone'
+
+!new Actor('xActor4')
+!xActor4.name := 'Nina Kovacs'
+
+!new Actor('xActor5')
+!xActor5.name := 'Ethan Lowell'
+
+!new Actor('xActor6')
+!xActor6.name := 'Salma Idris'
+
+!new Actor('xActor7')
+!xActor7.name := 'Jonah Pierce'
+
+!new Actor('xActorUnused')
+!xActorUnused.name := 'Marceline Dupont'
+
+!insert (xTape1, xActor6) into CassetteActor
+!insert (xTape2, xActor7) into CassetteActor
+
+!insert (xMovie1, xActor1) into CassetteActor
+!insert (xMovie1, xActor2) into CassetteActor
+!insert (xMovie1, xActor3) into CassetteActor
+
+!insert (xSeries1, xActor4) into CassetteActor
+!insert (xSeries1, xActor5) into CassetteActor
+
+!insert (xSeries2, xActor4) into CassetteActor
+
+!new Rental('xRental1')
+!xRental1.date := Date('2011-08-09')
+!insert (xClient2, xRental1) into ClientRental
+!insert (xRental1, xTape2) into RentalCassette
+
+!new Rental('xRental2')
+!xRental2.date := Date('2011-08-11')
+!insert (xClient2, xRental2) into ClientRental
+!insert (xRental2, xMovie1) into RentalCassette

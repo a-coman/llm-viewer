@@ -1,0 +1,227 @@
+!new StateMachine('smOven')
+!smOven.name := 'ovenController'
+
+!new State('ovStandby')
+!ovStandby.name := 'standby'
+!new State('ovPreheating')
+!ovPreheating.name := 'preheating'
+!new State('ovBaking')
+!ovBaking.name := 'baking'
+!new State('ovBroiling')
+!ovBroiling.name := 'broiling'
+!new State('ovCooling')
+!ovCooling.name := 'cooling'
+!new State('ovAlarm')
+!ovAlarm.name := 'alarm'
+
+!insert (smOven, ovStandby) into StateMachineContainsStates
+!insert (smOven, ovPreheating) into StateMachineContainsStates
+!insert (smOven, ovBaking) into StateMachineContainsStates
+!insert (smOven, ovBroiling) into StateMachineContainsStates
+!insert (smOven, ovCooling) into StateMachineContainsStates
+!insert (smOven, ovAlarm) into StateMachineContainsStates
+
+!insert (smOven, ovStandby) into StateMachineStartsStates
+
+
+!new Transition('trOvStartPreheat')
+!trOvStartPreheat.name := 'startPreheat'
+!new TimeEvent('evOvStartPreheat')
+!evOvStartPreheat.time := 1
+!insert (smOven, trOvStartPreheat) into StateMachineContainsTransitions
+!insert (trOvStartPreheat, evOvStartPreheat) into TransitionContainsEvents
+!insert (ovStandby, trOvStartPreheat) into StateTransition
+!insert (trOvStartPreheat, ovPreheating) into TransitionState
+
+!new Transition('trOvReachTemp')
+!trOvReachTemp.name := 'reachTargetTemp'
+!new TimeEvent('evOvReachTemp')
+!evOvReachTemp.time := 600
+!insert (smOven, trOvReachTemp) into StateMachineContainsTransitions
+!insert (trOvReachTemp, evOvReachTemp) into TransitionContainsEvents
+!insert (ovPreheating, trOvReachTemp) into StateTransition
+!insert (trOvReachTemp, ovBaking) into TransitionState
+
+!new Transition('trOvSwitchToBroil')
+!trOvSwitchToBroil.name := 'switchToBroil'
+!new TimeEvent('evOvSwitchToBroil')
+!evOvSwitchToBroil.time := 2
+!insert (smOven, trOvSwitchToBroil) into StateMachineContainsTransitions
+!insert (trOvSwitchToBroil, evOvSwitchToBroil) into TransitionContainsEvents
+!insert (ovBaking, trOvSwitchToBroil) into StateTransition
+!insert (trOvSwitchToBroil, ovBroiling) into TransitionState
+
+!new Transition('trOvSwitchToBake')
+!trOvSwitchToBake.name := 'switchToBake'
+!new TimeEvent('evOvSwitchToBake')
+!evOvSwitchToBake.time := 2
+!insert (smOven, trOvSwitchToBake) into StateMachineContainsTransitions
+!insert (trOvSwitchToBake, evOvSwitchToBake) into TransitionContainsEvents
+!insert (ovBroiling, trOvSwitchToBake) into StateTransition
+!insert (trOvSwitchToBake, ovBaking) into TransitionState
+
+!new Transition('trOvTimerExpired')
+!trOvTimerExpired.name := 'timerExpired'
+!new TimeEvent('evOvTimerExpired')
+!evOvTimerExpired.time := 2700
+!insert (smOven, trOvTimerExpired) into StateMachineContainsTransitions
+!insert (trOvTimerExpired, evOvTimerExpired) into TransitionContainsEvents
+!insert (ovBaking, trOvTimerExpired) into StateTransition
+!insert (trOvTimerExpired, ovCooling) into TransitionState
+
+!new Transition('trOvBroilTimeout')
+!trOvBroilTimeout.name := 'broilTimeout'
+!new TimeEvent('evOvBroilTimeout')
+!evOvBroilTimeout.time := 900
+!insert (smOven, trOvBroilTimeout) into StateMachineContainsTransitions
+!insert (trOvBroilTimeout, evOvBroilTimeout) into TransitionContainsEvents
+!insert (ovBroiling, trOvBroilTimeout) into StateTransition
+!insert (trOvBroilTimeout, ovCooling) into TransitionState
+
+!new Transition('trOvCoolDone')
+!trOvCoolDone.name := 'coolDone'
+!new TimeEvent('evOvCoolDone')
+!evOvCoolDone.time := 300
+!insert (smOven, trOvCoolDone) into StateMachineContainsTransitions
+!insert (trOvCoolDone, evOvCoolDone) into TransitionContainsEvents
+!insert (ovCooling, trOvCoolDone) into StateTransition
+!insert (trOvCoolDone, ovStandby) into TransitionState
+
+!new Transition('trOvOverheatAlarm')
+!trOvOverheatAlarm.name := 'overheatAlarm'
+!new TimeEvent('evOvOverheatAlarm')
+!evOvOverheatAlarm.time := 1
+!insert (smOven, trOvOverheatAlarm) into StateMachineContainsTransitions
+!insert (trOvOverheatAlarm, evOvOverheatAlarm) into TransitionContainsEvents
+!insert (ovPreheating, trOvOverheatAlarm) into StateTransition
+!insert (trOvOverheatAlarm, ovAlarm) into TransitionState
+
+!new Transition('trOvAlarmReset')
+!trOvAlarmReset.name := 'alarmReset'
+!new TimeEvent('evOvAlarmReset')
+!evOvAlarmReset.time := 30
+!insert (smOven, trOvAlarmReset) into StateMachineContainsTransitions
+!insert (trOvAlarmReset, evOvAlarmReset) into TransitionContainsEvents
+!insert (ovAlarm, trOvAlarmReset) into StateTransition
+!insert (trOvAlarmReset, ovStandby) into TransitionState
+
+
+
+!new StateMachine('smPodcast')
+!smPodcast.name := 'podcastDownloader'
+
+!new State('pdIdle')
+!pdIdle.name := 'idle'
+!new State('pdResolving')
+!pdResolving.name := 'resolving'
+!new State('pdDownloading')
+!pdDownloading.name := 'downloading'
+!new State('pdVerifying')
+!pdVerifying.name := 'verifying'
+!new State('pdCompleted')
+!pdCompleted.name := 'completed'
+!new State('pdPaused')
+!pdPaused.name := 'paused'
+!new State('pdFailed')
+!pdFailed.name := 'failed'
+
+!insert (smPodcast, pdIdle) into StateMachineContainsStates
+!insert (smPodcast, pdResolving) into StateMachineContainsStates
+!insert (smPodcast, pdDownloading) into StateMachineContainsStates
+!insert (smPodcast, pdVerifying) into StateMachineContainsStates
+!insert (smPodcast, pdCompleted) into StateMachineContainsStates
+!insert (smPodcast, pdPaused) into StateMachineContainsStates
+!insert (smPodcast, pdFailed) into StateMachineContainsStates
+
+!insert (smPodcast, pdIdle) into StateMachineStartsStates
+
+
+!new Transition('trPdQueue')
+!trPdQueue.name := 'queueEpisode'
+!new TimeEvent('evPdQueue')
+!evPdQueue.time := 1
+!insert (smPodcast, trPdQueue) into StateMachineContainsTransitions
+!insert (trPdQueue, evPdQueue) into TransitionContainsEvents
+!insert (pdIdle, trPdQueue) into StateTransition
+!insert (trPdQueue, pdResolving) into TransitionState
+
+!new Transition('trPdResolveOk')
+!trPdResolveOk.name := 'resolveOk'
+!new TimeEvent('evPdResolveOk')
+!evPdResolveOk.time := 2
+!insert (smPodcast, trPdResolveOk) into StateMachineContainsTransitions
+!insert (trPdResolveOk, evPdResolveOk) into TransitionContainsEvents
+!insert (pdResolving, trPdResolveOk) into StateTransition
+!insert (trPdResolveOk, pdDownloading) into TransitionState
+
+!new Transition('trPdResolveFail')
+!trPdResolveFail.name := 'resolveFail'
+!new TimeEvent('evPdResolveFail')
+!evPdResolveFail.time := 5
+!insert (smPodcast, trPdResolveFail) into StateMachineContainsTransitions
+!insert (trPdResolveFail, evPdResolveFail) into TransitionContainsEvents
+!insert (pdResolving, trPdResolveFail) into StateTransition
+!insert (trPdResolveFail, pdFailed) into TransitionState
+
+!new Transition('trPdPause')
+!trPdPause.name := 'pauseDownload'
+!new TimeEvent('evPdPause')
+!evPdPause.time := 1
+!insert (smPodcast, trPdPause) into StateMachineContainsTransitions
+!insert (trPdPause, evPdPause) into TransitionContainsEvents
+!insert (pdDownloading, trPdPause) into StateTransition
+!insert (trPdPause, pdPaused) into TransitionState
+
+!new Transition('trPdResume')
+!trPdResume.name := 'resumeDownload'
+!new TimeEvent('evPdResume')
+!evPdResume.time := 1
+!insert (smPodcast, trPdResume) into StateMachineContainsTransitions
+!insert (trPdResume, evPdResume) into TransitionContainsEvents
+!insert (pdPaused, trPdResume) into StateTransition
+!insert (trPdResume, pdDownloading) into TransitionState
+
+!new Transition('trPdDownloadComplete')
+!trPdDownloadComplete.name := 'downloadComplete'
+!new TimeEvent('evPdDownloadComplete')
+!evPdDownloadComplete.time := 420
+!insert (smPodcast, trPdDownloadComplete) into StateMachineContainsTransitions
+!insert (trPdDownloadComplete, evPdDownloadComplete) into TransitionContainsEvents
+!insert (pdDownloading, trPdDownloadComplete) into StateTransition
+!insert (trPdDownloadComplete, pdVerifying) into TransitionState
+
+!new Transition('trPdVerifyOk')
+!trPdVerifyOk.name := 'verifyOk'
+!new TimeEvent('evPdVerifyOk')
+!evPdVerifyOk.time := 8
+!insert (smPodcast, trPdVerifyOk) into StateMachineContainsTransitions
+!insert (trPdVerifyOk, evPdVerifyOk) into TransitionContainsEvents
+!insert (pdVerifying, trPdVerifyOk) into StateTransition
+!insert (trPdVerifyOk, pdCompleted) into TransitionState
+
+!new Transition('trPdVerifyFail')
+!trPdVerifyFail.name := 'verifyFail'
+!new TimeEvent('evPdVerifyFail')
+!evPdVerifyFail.time := 8
+!insert (smPodcast, trPdVerifyFail) into StateMachineContainsTransitions
+!insert (trPdVerifyFail, evPdVerifyFail) into TransitionContainsEvents
+!insert (pdVerifying, trPdVerifyFail) into StateTransition
+!insert (trPdVerifyFail, pdFailed) into TransitionState
+
+!new Transition('trPdRetryLater')
+!trPdRetryLater.name := 'retryLater'
+!new TimeEvent('evPdRetryLater')
+!evPdRetryLater.time := 120
+!insert (smPodcast, trPdRetryLater) into StateMachineContainsTransitions
+!insert (trPdRetryLater, evPdRetryLater) into TransitionContainsEvents
+!insert (pdFailed, trPdRetryLater) into StateTransition
+!insert (trPdRetryLater, pdResolving) into TransitionState
+
+!new Transition('trPdCleanup')
+!trPdCleanup.name := 'cleanup'
+!new TimeEvent('evPdCleanup')
+!evPdCleanup.time := 3
+!insert (smPodcast, trPdCleanup) into StateMachineContainsTransitions
+!insert (trPdCleanup, evPdCleanup) into TransitionContainsEvents
+!insert (pdCompleted, trPdCleanup) into StateTransition
+!insert (trPdCleanup, pdIdle) into TransitionState

@@ -1,0 +1,77 @@
+!new Client('cy1')
+!cy1.clientId := 100
+!cy1.isSuspended := false
+
+!new Client('cy2')
+!cy2.clientId := 101
+!cy2.isSuspended := true
+
+!new Movie('myA')
+!myA.title := 'Rapid Pursuit'
+!myA.availableCopies := 10
+!myA.genre := #Action
+
+!new Movie('myB')
+!myB.title := 'Weekend Mix-Up'
+!myB.availableCopies := 0
+!myB.genre := #Comedy
+
+!new Series('syA')
+!syA.title := 'Signal Lost'
+!syA.availableCopies := 3
+!syA.episode := 1
+
+!new Series('syB')
+!syB.title := 'Signal Lost'
+!syB.availableCopies := 3
+!syB.episode := 2
+
+!new Series('syC')
+!syC.title := 'Chronicles of Orion'
+!syC.availableCopies := 1
+!syC.episode := 10
+
+!new Actor('ay1')
+!ay1.name := 'Nora King'
+
+!new Actor('ay2')
+!ay2.name := 'Victor Hale'
+
+!new Actor('ay3')
+!ay3.name := 'Priya Shah'
+
+!new Actor('ay4')
+!ay4.name := 'Gareth Miles'
+
+!insert (myA, ay1) into CassetteActor
+!insert (myA, ay2) into CassetteActor
+!insert (myA, ay3) into CassetteActor
+
+!insert (myB, ay2) into CassetteActor
+
+!insert (syA, ay1) into CassetteActor
+
+!insert (syB, ay1) into CassetteActor
+!insert (syB, ay3) into CassetteActor
+
+!insert (syC, ay2) into CassetteActor
+!insert (syC, ay3) into CassetteActor
+
+!new Rental('ry1')
+!ry1.date := Date('2024-07-14')
+!insert (cy1, ry1) into ClientRental
+!insert (ry1, myA) into RentalCassette
+
+!new Rental('ry2')
+!ry2.date := Date('2024-07-15')
+!insert (cy1, ry2) into ClientRental
+!insert (ry2, syA) into RentalCassette
+!insert (ry2, syB) into RentalCassette
+!insert (ry2, syC) into RentalCassette
+
+!new Rental('ry3')
+!ry3.date := Date('2024-08-01')
+!insert (cy1, ry3) into ClientRental
+!insert (ry3, myA) into RentalCassette
+!insert (ry3, myB) into RentalCassette
+!insert (ry3, syC) into RentalCassette

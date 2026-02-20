@@ -1,0 +1,291 @@
+!new Restaurant('rest26')
+!rest26.name := 'Starlight Ramen & Sweets'
+
+!new Owner('own63')
+!own63.name := 'Tariq Mahmoud'
+!own63.percentageShares := 55
+
+!new Owner('own64')
+!own64.name := 'Elena Varga'
+!own64.percentageShares := 45
+
+!insert (rest26, own63) into RestaurantOwner
+!insert (rest26, own64) into RestaurantOwner
+
+!new HeadWaiter('hw31')
+!hw31.name := 'Morgan Pierce'
+!hw31.dateOfBirth := Date('1988-03-12')
+!hw31.phoneNumber := '555-4105'
+
+!new Waiter('w63')
+!w63.name := 'Luca Ferri'
+!w63.dateOfBirth := Date('1997-09-09')
+!w63.phoneNumber := '555-4106'
+!w63.spokenLanguage := #Italian
+
+!new Waiter('w64')
+!w64.name := 'Hannah Weiss'
+!w64.dateOfBirth := Date('1995-01-28')
+!w64.phoneNumber := '555-4107'
+!w64.spokenLanguage := #German
+
+!insert (hw31, w63) into HeadWaiterWaiter
+!insert (hw31, w64) into HeadWaiterWaiter
+
+!new Chef('chef42')
+!chef42.name := 'Satoshi Mori'
+!chef42.dateOfBirth := Date('1979-06-30')
+!chef42.phoneNumber := '555-4110'
+
+!new Cook('cook63')
+!cook63.name := 'Nia Campbell'
+!cook63.dateOfBirth := Date('2000-10-02')
+!cook63.phoneNumber := '555-4111'
+!cook63.yearsOfExperience := 0
+
+!new Cook('cook64')
+!cook64.name := 'Pavel Dvorak'
+!cook64.dateOfBirth := Date('1982-12-14')
+!cook64.phoneNumber := '555-4112'
+!cook64.yearsOfExperience := 20
+
+!insert (chef42, cook63) into ChefCook
+!insert (chef42, cook64) into ChefCook
+
+!new Allergen('alg26Gluten')
+!alg26Gluten.type := #Gluten
+!new Allergen('alg26Seafood')
+!alg26Seafood.type := #Seafood
+!new Allergen('alg26Lactose')
+!alg26Lactose.type := #Lactose
+!new Allergen('alg26Nuts')
+!alg26Nuts.type := #Nuts
+
+!new FoodItem('fiMiso26')
+!fiMiso26.number := 1901
+!fiMiso26.description := 'Red miso paste'
+!fiMiso26.purchaseFlag := true
+!fiMiso26.unit := #Gram
+
+!new FoodItem('fiWheatNoodles26')
+!fiWheatNoodles26.number := 1902
+!fiWheatNoodles26.description := 'Fresh wheat ramen noodles'
+!fiWheatNoodles26.purchaseFlag := true
+!fiWheatNoodles26.unit := #Pound
+
+!new FoodItem('fiPork26')
+!fiPork26.number := 1903
+!fiPork26.description := 'Braised pork belly'
+!fiPork26.purchaseFlag := true
+!fiPork26.unit := #Pound
+
+!new FoodItem('fiShrimp26')
+!fiShrimp26.number := 1904
+!fiShrimp26.description := 'Shrimp'
+!fiShrimp26.purchaseFlag := true
+!fiShrimp26.unit := #Pound
+
+!new FoodItem('fiEdamame26')
+!fiEdamame26.number := 1905
+!fiEdamame26.description := 'Edamame beans'
+!fiEdamame26.purchaseFlag := true
+!fiEdamame26.unit := #Pound
+
+!new FoodItem('fiMatcha26')
+!fiMatcha26.number := 1906
+!fiMatcha26.description := 'Matcha powder'
+!fiMatcha26.purchaseFlag := true
+!fiMatcha26.unit := #Gram
+
+!new FoodItem('fiSparklingWater26')
+!fiSparklingWater26.number := 1907
+!fiSparklingWater26.description := 'Sparkling water'
+!fiSparklingWater26.purchaseFlag := true
+!fiSparklingWater26.unit := #Ounce
+
+!new FoodItem('fiMochiDough26')
+!fiMochiDough26.number := 1908
+!fiMochiDough26.description := 'Mochi dough'
+!fiMochiDough26.purchaseFlag := false
+!fiMochiDough26.unit := #Gram
+
+!new FoodItem('fiIceCream26')
+!fiIceCream26.number := 1909
+!fiIceCream26.description := 'Ice cream base'
+!fiIceCream26.purchaseFlag := true
+!fiIceCream26.unit := #Ounce
+
+!new FoodItem('fiPeanuts26')
+!fiPeanuts26.number := 1910
+!fiPeanuts26.description := 'Crushed peanuts'
+!fiPeanuts26.purchaseFlag := true
+!fiPeanuts26.unit := #Ounce
+
+!insert (fiMiso26, alg26Gluten) into FoodItemAllergen
+!insert (fiWheatNoodles26, alg26Gluten) into FoodItemAllergen
+!insert (fiMochiDough26, alg26Gluten) into FoodItemAllergen
+!insert (fiShrimp26, alg26Seafood) into FoodItemAllergen
+!insert (fiIceCream26, alg26Lactose) into FoodItemAllergen
+!insert (fiPeanuts26, alg26Nuts) into FoodItemAllergen
+
+!new MenuItem('miEdamame26')
+!miEdamame26.description := 'Salted edamame'
+!miEdamame26.prepTime := 4.0
+!miEdamame26.classification := #Apetizer
+
+!new MenuItem('miSpicyMisoRamen26')
+!miSpicyMisoRamen26.description := 'Spicy miso ramen with pork and shrimp'
+!miSpicyMisoRamen26.prepTime := 17.0
+!miSpicyMisoRamen26.classification := #Main
+
+!new MenuItem('miMatchaSoda26')
+!miMatchaSoda26.description := 'Matcha soda'
+!miMatchaSoda26.prepTime := 2.0
+!miMatchaSoda26.classification := #Beverage
+
+!new MenuItem('miMochiTrio26')
+!miMochiTrio26.description := 'Mochi trio with peanut topping'
+!miMochiTrio26.prepTime := 6.0
+!miMochiTrio26.classification := #Dessert
+
+!insert (miEdamame26, chef42) into MenuItemChef
+!insert (miSpicyMisoRamen26, chef42) into MenuItemChef
+!insert (miMatchaSoda26, chef42) into MenuItemChef
+!insert (miMochiTrio26, chef42) into MenuItemChef
+
+!insert (miEdamame26, fiEdamame26) into MenuItemFoodItem
+
+!insert (miSpicyMisoRamen26, fiMiso26) into MenuItemFoodItem
+!insert (miSpicyMisoRamen26, fiWheatNoodles26) into MenuItemFoodItem
+!insert (miSpicyMisoRamen26, fiPork26) into MenuItemFoodItem
+!insert (miSpicyMisoRamen26, fiShrimp26) into MenuItemFoodItem
+
+!insert (miMatchaSoda26, fiMatcha26) into MenuItemFoodItem
+!insert (miMatchaSoda26, fiSparklingWater26) into MenuItemFoodItem
+
+!insert (miMochiTrio26, fiMochiDough26) into MenuItemFoodItem
+!insert (miMochiTrio26, fiIceCream26) into MenuItemFoodItem
+!insert (miMochiTrio26, fiPeanuts26) into MenuItemFoodItem
+
+!new Individual('res32')
+!res32.time := Time('10:05')
+!res32.date := Date('2027-09-02')
+!res32.numberPeople := 2
+!res32.name := 'City Visitor'
+!res32.phoneNumber := '555-4120'
+!res32.number := 33001
+!res32.seating := #Inside
+!res32.smoking := #NonSmoking
+
+!insert (res32, w63) into ReservationWaiter
+
+!new Table('tRes32A')
+!tRes32A.number := 5
+!tRes32A.description := 'Two-top by pastry case'
+!tRes32A.capacity := 2
+!insert (res32, tRes32A) into ReservationTable
+
+!new ItemOrder('ioRes32_1')
+!ioRes32_1.time := Time('10:12')
+!insert (res32, ioRes32_1) into ReservationItemOrdered
+!insert (ioRes32_1, miMatchaSoda26) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes32_2')
+!ioRes32_2.time := Time('10:20')
+!insert (res32, ioRes32_2) into ReservationItemOrdered
+!insert (ioRes32_2, miMochiTrio26) into ItemOrderMenuItem
+
+!new RegularCustomer('cust32')
+!cust32.name := 'Marco Greco'
+!cust32.prefferedLanguage := #Italian
+
+!new Individual('res33')
+!res33.time := Time('18:40')
+!res33.date := Date('2027-09-02')
+!res33.numberPeople := 7
+!res33.name := 'Marco Greco'
+!res33.phoneNumber := '555-4121'
+!res33.number := 33002
+!res33.seating := #Patio
+!res33.smoking := #NonSmoking
+
+!insert (rest26, res33) into RestaurantReservation
+!insert (res33, cust32) into ReservationCustomer
+!insert (res33, w63) into ReservationWaiter
+!insert (res33, w64) into ReservationWaiter
+
+!new Table('tRes33A')
+!tRes33A.number := 20
+!tRes33A.description := 'Patio four-top A'
+!tRes33A.capacity := 4
+!insert (res33, tRes33A) into ReservationTable
+
+!new Table('tRes33B')
+!tRes33B.number := 21
+!tRes33B.description := 'Patio four-top B'
+!tRes33B.capacity := 4
+!insert (res33, tRes33B) into ReservationTable
+
+!new ItemOrder('ioRes33_1')
+!ioRes33_1.time := Time('18:55')
+!insert (res33, ioRes33_1) into ReservationItemOrdered
+!insert (ioRes33_1, miEdamame26) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes33_2')
+!ioRes33_2.time := Time('19:15')
+!insert (res33, ioRes33_2) into ReservationItemOrdered
+!insert (ioRes33_2, miSpicyMisoRamen26) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes33_3')
+!ioRes33_3.time := Time('19:40')
+!insert (res33, ioRes33_3) into ReservationItemOrdered
+!insert (ioRes33_3, miMochiTrio26) into ItemOrderMenuItem
+
+!new BusDriver('bd32')
+!bd32.name := 'Evelyn Hart'
+!bd32.dateOfBirth := Date('1971-04-04')
+!bd32.phoneNumber := '555-4130'
+!bd32.driverLicenseNr := 'D-9077002'
+
+!new Banquet('banq31')
+!banq31.time := Time('13:10')
+!banq31.date := Date('2027-09-03')
+!banq31.numberPeople := 14
+!banq31.name := 'Culinary School Tour'
+!banq31.phoneNumber := '555-4125'
+!banq31.number := 34001
+!banq31.groupName := 'Student Field Trip'
+!banq31.paymentMethod := #Cash
+!banq31.busService := true
+
+!insert (rest26, banq31) into RestaurantReservation
+!insert (banq31, w63) into ReservationWaiter
+!insert (banq31, w64) into ReservationWaiter
+!insert (banq31, bd32) into BanquetBusDriver
+
+!new Table('tBanq31A')
+!tBanq31A.number := 50
+!tBanq31A.description := 'Long table A'
+!tBanq31A.capacity := 8
+!insert (banq31, tBanq31A) into ReservationTable
+
+!new Table('tBanq31B')
+!tBanq31B.number := 51
+!tBanq31B.description := 'Long table B'
+!tBanq31B.capacity := 6
+!insert (banq31, tBanq31B) into ReservationTable
+
+!new ItemOrder('ioBanq31_1')
+!ioBanq31_1.time := Time('13:20')
+!insert (banq31, ioBanq31_1) into ReservationItemOrdered
+!insert (ioBanq31_1, miEdamame26) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq31_2')
+!ioBanq31_2.time := Time('13:45')
+!insert (banq31, ioBanq31_2) into ReservationItemOrdered
+!insert (ioBanq31_2, miSpicyMisoRamen26) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq31_3')
+!ioBanq31_3.time := Time('14:10')
+!insert (banq31, ioBanq31_3) into ReservationItemOrdered
+!insert (ioBanq31_3, miMatchaSoda26) into ItemOrderMenuItem

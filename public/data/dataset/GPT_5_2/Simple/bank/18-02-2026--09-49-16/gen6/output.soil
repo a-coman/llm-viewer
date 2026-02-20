@@ -1,0 +1,85 @@
+!new Bank('bankAT1')
+!bankAT1.country := 'Austria'
+!bankAT1.name := 'Donau Kreditbank'
+!bankAT1.bic := 'DONAATWWXXX'
+
+!new Bank('bankPT1')
+!bankPT1.country := 'Portugal'
+!bankPT1.name := 'Banco Atlantico'
+!bankPT1.bic := 'ATLNPTPLXXX'
+
+!new Person('t1')
+!t1.firstName := 'Stefan'
+!t1.lastName := 'Mayer'
+!t1.age := 40
+
+!new Person('t2')
+!t2.firstName := 'Klara'
+!t2.lastName := 'Mayer'
+!t2.age := 39
+
+!new Person('t3')
+!t3.firstName := 'Nina'
+!t3.lastName := 'Hofmann'
+!t3.age := 26
+
+!new Person('t4')
+!t4.firstName := 'Tiago'
+!t4.lastName := 'Silva'
+!t4.age := 33
+
+!new Person('t5')
+!t5.firstName := 'Ines'
+!t5.lastName := 'Costa'
+!t5.age := 31
+
+!new Person('t6')
+!t6.firstName := 'Leon'
+!t6.lastName := 'Mayer'
+!t6.age := 13
+
+!new Person('t7')
+!t7.firstName := 'Matilde'
+!t7.lastName := 'Silva'
+!t7.age := 16
+
+!new Account('atAcc1')
+!atAcc1.iban := 'AT611904300234573201'
+!atAcc1.balance := 7600
+
+!new Account('atAcc2')
+!atAcc2.iban := 'AT483200000012345864'
+!atAcc2.balance := 15
+
+!new Account('ptAcc1')
+!ptAcc1.iban := 'PT50000201231234567890154'
+!ptAcc1.balance := 420
+
+!new Account('ptAcc2')
+!ptAcc2.iban := 'PT50000300001234567890123'
+!ptAcc2.balance := 31000
+
+!insert (bankAT1, atAcc1) into AccountOfBanks
+!insert (bankAT1, atAcc2) into AccountOfBanks
+!insert (bankPT1, ptAcc1) into AccountOfBanks
+!insert (bankPT1, ptAcc2) into AccountOfBanks
+
+!insert (t1, atAcc1) into Ownership
+!insert (t2, atAcc1) into Ownership
+
+!insert (t3, atAcc2) into Ownership
+
+!insert (t4, ptAcc1) into Ownership
+!insert (t5, ptAcc1) into Ownership
+
+!insert (t5, ptAcc2) into Ownership
+
+!insert (t6, atAcc1) into Use
+!insert (t3, atAcc1) into Use
+
+!insert (t4, ptAcc1) into Use
+!insert (t5, ptAcc1) into Use
+!insert (t7, ptAcc1) into Use
+
+!insert (t1, ptAcc2) into Use
+!insert (t4, ptAcc2) into Use

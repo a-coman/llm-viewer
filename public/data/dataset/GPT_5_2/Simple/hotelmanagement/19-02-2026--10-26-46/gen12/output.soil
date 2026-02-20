@@ -1,0 +1,64 @@
+!new Booking('booking14')
+!booking14.startDate := '2027-10-02'
+!booking14.endDate := '2027-10-06'
+!booking14.canceled := false
+!booking14.bookingId := 9200
+!booking14.confirmed := true
+
+!new Customer('customer14')
+!customer14.firstName := 'Noah'
+!customer14.lastName := 'Whitaker'
+
+!insert (booking14, customer14) into BookingCustomer
+
+!new RoomReservation('rr20')
+!rr20.checkInDate := '2027-10-02'
+!rr20.checkOutDate := '2027-10-06'
+
+!insert (booking14, rr20) into BookingRoomReservation
+
+!new Room('room330')
+!room330.roomNumber := 330
+!room330.numBeds := 2
+!room330.pricePerNight := 155.0
+!room330.occupied := false
+!room330.blocked := true
+
+!new Room('room331')
+!room331.roomNumber := 331
+!room331.numBeds := 2
+!room331.pricePerNight := 155.0
+!room331.occupied := false
+!room331.blocked := true
+
+!new Room('room332')
+!room332.roomNumber := 332
+!room332.numBeds := 2
+!room332.pricePerNight := 155.0
+!room332.occupied := false
+!room332.blocked := true
+
+!new Room('room333')
+!room333.roomNumber := 333
+!room333.numBeds := 2
+!room333.pricePerNight := 155.0
+!room333.occupied := false
+!room333.blocked := true
+
+!insert (rr20, room330) into RoomReservationRoom
+!insert (rr20, room331) into RoomReservationRoom
+!insert (rr20, room332) into RoomReservationRoom
+!insert (rr20, room333) into RoomReservationRoom
+
+!new Bill('bill21')
+!bill21.billId := 14001
+!bill21.price := 2480.0
+
+!insert (bill21, rr20) into BillRoomReservation
+!insert (booking14, bill21) into BookingBill
+
+!new FreeRoomTypesDTO('dtoGroupBlockOctober')
+!dtoGroupBlockOctober.roomTypeDescription := 'Blocked group doubles (October)'
+!dtoGroupBlockOctober.numBeds := 2
+!dtoGroupBlockOctober.pricePerNight := 155.0
+!dtoGroupBlockOctober.numFreeRooms := 0

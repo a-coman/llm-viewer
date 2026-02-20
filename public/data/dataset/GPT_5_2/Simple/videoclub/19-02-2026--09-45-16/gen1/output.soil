@@ -1,0 +1,97 @@
+!new Client('c1')
+!c1.clientId := 1
+!c1.isSuspended := false
+
+!new Client('c2')
+!c2.clientId := 2
+!c2.isSuspended := true
+
+!new Client('c3')
+!c3.clientId := 3
+!c3.isSuspended := false
+
+!new Movie('m1')
+!m1.title := 'Edge of Tomorrow'
+!m1.availableCopies := 3
+!m1.genre := #Action
+
+!new Movie('m2')
+!m2.title := 'City Laughs'
+!m2.availableCopies := 1
+!m2.genre := #Comedy
+
+!new Movie('m3')
+!m3.title := 'Last Stand'
+!m3.availableCopies := 0
+!m3.genre := #Action
+
+!new Series('s1')
+!s1.title := 'Detective Files'
+!s1.availableCopies := 2
+!s1.episode := 1
+
+!new Series('s2')
+!s2.title := 'Detective Files'
+!s2.availableCopies := 2
+!s2.episode := 2
+
+!new Actor('a1')
+!a1.name := 'Tom Hardy'
+
+!new Actor('a2')
+!a2.name := 'Emily Blunt'
+
+!new Actor('a3')
+!a3.name := 'Kevin Hart'
+
+!new Actor('a4')
+!a4.name := 'Emma Stone'
+
+!new Actor('a5')
+!a5.name := 'Idris Elba'
+
+!new Actor('a6')
+!a6.name := 'Sandra Oh'
+
+!insert (m1, a2) into CassetteActor
+!insert (m1, a5) into CassetteActor
+
+!insert (m2, a3) into CassetteActor
+!insert (m2, a4) into CassetteActor
+
+!insert (m3, a1) into CassetteActor
+!insert (m3, a5) into CassetteActor
+
+!insert (s1, a6) into CassetteActor
+!insert (s1, a4) into CassetteActor
+
+!insert (s2, a6) into CassetteActor
+!insert (s2, a4) into CassetteActor
+
+!new Rental('r1')
+!r1.date := Date('2026-01-05')
+!insert (c1, r1) into ClientRental
+!insert (r1, m1) into RentalCassette
+
+!new Rental('r2')
+!r2.date := Date('2026-01-08')
+!insert (c1, r2) into ClientRental
+!insert (r2, s1) into RentalCassette
+!insert (r2, s2) into RentalCassette
+
+!new Rental('r3')
+!r3.date := Date('2026-01-10')
+!insert (c2, r3) into ClientRental
+!insert (r3, m2) into RentalCassette
+
+!new Rental('r4')
+!r4.date := Date('2026-02-02')
+!insert (c3, r4) into ClientRental
+!insert (r4, m3) into RentalCassette
+!insert (r4, s2) into RentalCassette
+
+!new Rental('r5')
+!r5.date := Date('2026-02-15')
+!insert (c3, r5) into ClientRental
+!insert (r5, m1) into RentalCassette
+!insert (r5, m2) into RentalCassette

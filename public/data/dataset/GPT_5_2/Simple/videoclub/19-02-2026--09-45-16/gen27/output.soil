@@ -1,0 +1,86 @@
+!new Client('gC1')
+!gC1.clientId := 2401
+!gC1.isSuspended := false
+
+!new Client('gC2')
+!gC2.clientId := 2402
+!gC2.isSuspended := true
+
+!new Client('gC3')
+!gC3.clientId := 2403
+!gC3.isSuspended := false
+
+!new Actor('gA1')
+!gA1.name := 'Inez Caldwell'
+
+!new Actor('gA2')
+!gA2.name := 'Boris Tanic'
+
+!new Actor('gA3')
+!gA3.name := 'Salim Kader'
+
+!new Actor('gA4')
+!gA4.name := 'Norah Beck'
+
+!new Actor('gA5')
+!gA5.name := 'Tobin Reyes'
+
+!new Actor('gAUnused')
+!gAUnused.name := 'Helmut Varga'
+
+!new Cassette('gT1')
+!gT1.title := 'Stand-Up Showcase: Volume 2'
+!gT1.availableCopies := 0
+
+!new Cassette('gT2')
+!gT2.title := 'History Lecture: Ancient Cities'
+!gT2.availableCopies := 6
+
+!new Movie('gM1')
+!gM1.title := 'Firewall Pursuit'
+!gM1.availableCopies := 2
+!gM1.genre := #Action
+
+!new Series('gS1')
+!gS1.title := 'Pocket Chefs'
+!gS1.availableCopies := 1
+!gS1.episode := 9
+
+!new Series('gS2')
+!gS2.title := 'Pocket Chefs'
+!gS2.availableCopies := 1
+!gS2.episode := 10
+
+!insert (gT1, gA4) into CassetteActor
+!insert (gT1, gA5) into CassetteActor
+
+!insert (gT2, gA1) into CassetteActor
+
+!insert (gM1, gA2) into CassetteActor
+!insert (gM1, gA3) into CassetteActor
+!insert (gM1, gA5) into CassetteActor
+
+!insert (gS1, gA1) into CassetteActor
+!insert (gS1, gA4) into CassetteActor
+
+!insert (gS2, gA1) into CassetteActor
+
+!new Rental('gR1')
+!gR1.date := Date('1992-02-20')
+!insert (gC1, gR1) into ClientRental
+!insert (gR1, gT2) into RentalCassette
+
+!new Rental('gR2')
+!gR2.date := Date('1992-02-27')
+!insert (gC1, gR2) into ClientRental
+!insert (gR2, gM1) into RentalCassette
+!insert (gR2, gS1) into RentalCassette
+
+!new Rental('gR3')
+!gR3.date := Date('1992-03-05')
+!insert (gC1, gR3) into ClientRental
+!insert (gR3, gT1) into RentalCassette
+!insert (gR3, gT2) into RentalCassette
+!insert (gR3, gM1) into RentalCassette
+!insert (gR3, gS1) into RentalCassette
+!insert (gR3, gS2) into RentalCassette

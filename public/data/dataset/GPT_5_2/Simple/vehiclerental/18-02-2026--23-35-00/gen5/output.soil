@@ -1,0 +1,122 @@
+!new RentalOffice('office_wilmington_hub2')
+!office_wilmington_hub2.name := 'Delaware River Vehicle Rental - Wilmington Hub'
+!office_wilmington_hub2.number := 701
+!office_wilmington_hub2.address := '901 N Market St, Wilmington, DE 19801'
+
+!new RentalOffice('office_newark_drop2')
+!office_newark_drop2.name := 'Newark Return-Only Lot'
+!office_newark_drop2.number := 702
+!office_newark_drop2.address := '10 Mopar Dr, Newark, DE 19713'
+
+!new RentalOffice('office_juneau')
+!office_juneau.name := 'Capital City Rentals - Juneau'
+!office_juneau.number := 703
+!office_juneau.address := '545 Glacier Hwy, Juneau, AK 99801'
+
+!new RentalOffice('office_fairbanks_drop')
+!office_fairbanks_drop.name := 'Interior Alaska Drop-Off Yard - Fairbanks'
+!office_fairbanks_drop.number := 704
+!office_fairbanks_drop.address := '6450 Airport Way, Fairbanks, AK 99709'
+
+!new Truck('truck_de_24ft_07')
+!truck_de_24ft_07.id := 12007
+!truck_de_24ft_07.registrationState := #DE
+!truck_de_24ft_07.licensePlateNumber := 'DE-TRK-6304'
+!truck_de_24ft_07.vehicleTypeCode := #TRUCK24
+!truck_de_24ft_07.registrationLastMaintenanceDate := Date('2026-02-25')
+!truck_de_24ft_07.expirationDate := Date('2027-02-28')
+!truck_de_24ft_07.odometerReading := 56340
+!truck_de_24ft_07.gasTankCapacity := 62.0
+!truck_de_24ft_07.workingRadio := true
+!truck_de_24ft_07.mileage := 9
+
+!new Vehicle('trailer_de_open_07')
+!trailer_de_open_07.id := 13007
+!trailer_de_open_07.registrationState := #DE
+!trailer_de_open_07.licensePlateNumber := 'DE-TRL-1440'
+!trailer_de_open_07.vehicleTypeCode := #OPEN_TRAILER
+!trailer_de_open_07.registrationLastMaintenanceDate := Date('2026-01-12')
+!trailer_de_open_07.expirationDate := Date('2027-01-31')
+
+!new Truck('truck_ak_10ft_08')
+!truck_ak_10ft_08.id := 14008
+!truck_ak_10ft_08.registrationState := #AK
+!truck_ak_10ft_08.licensePlateNumber := 'AK-TRK-7116'
+!truck_ak_10ft_08.vehicleTypeCode := #TRUCK10
+!truck_ak_10ft_08.registrationLastMaintenanceDate := Date('2025-12-18')
+!truck_ak_10ft_08.expirationDate := Date('2026-12-31')
+!truck_ak_10ft_08.odometerReading := 11890
+!truck_ak_10ft_08.gasTankCapacity := 33.0
+!truck_ak_10ft_08.workingRadio := false
+!truck_ak_10ft_08.mileage := 16
+
+!insert (office_wilmington_hub2, truck_de_24ft_07) into RentalOfficeVehicle
+!insert (office_wilmington_hub2, trailer_de_open_07) into RentalOfficeVehicle
+!insert (office_juneau, truck_ak_10ft_08) into RentalOfficeVehicle
+
+!new Individual('cust_ind_helen')
+!cust_ind_helen.name := 'Helen Carter'
+!cust_ind_helen.address := '27 Kentmere Pkwy, Wilmington, DE 19806'
+!cust_ind_helen.poorRisk := true
+!cust_ind_helen.homePhone := '302-555-0121'
+!cust_ind_helen.driverLicenseState := #DE
+!cust_ind_helen.driverLicenseNumber := 61590322
+!cust_ind_helen.driverLicenseExpirationDate := Date('2026-10-15')
+
+!new Company('cust_co_arcticbuild')
+!cust_co_arcticbuild.name := 'ArcticBuild Services'
+!cust_co_arcticbuild.address := '100 Franklin St, Juneau, AK 99801'
+!cust_co_arcticbuild.poorRisk := false
+!cust_co_arcticbuild.idNumber := 77550019
+
+!new RentalAgreement('ra_52001')
+!ra_52001.number := 52001
+!ra_52001.rentalDate := Date('2026-04-22')
+!ra_52001.anticipatedDuration := 2
+!ra_52001.depositPaid := 0.00
+!ra_52001.quotedDailyRate := 28.00
+!ra_52001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_52002')
+!ra_52002.number := 52002
+!ra_52002.rentalDate := Date('2026-04-25')
+!ra_52002.anticipatedDuration := 8
+!ra_52002.depositPaid := 650.00
+!ra_52002.quotedDailyRate := 155.00
+!ra_52002.quotedRatePerMile := 0.83
+
+!new RentalAgreement('ra_52003')
+!ra_52003.number := 52003
+!ra_52003.rentalDate := Date('2026-05-03')
+!ra_52003.anticipatedDuration := 5
+!ra_52003.depositPaid := 500.00
+!ra_52003.quotedDailyRate := 112.00
+!ra_52003.quotedRatePerMile := 0.70
+
+!new RentalAgreement('ra_52004')
+!ra_52004.number := 52004
+!ra_52004.rentalDate := Date('2026-05-15')
+!ra_52004.anticipatedDuration := 1
+!ra_52004.depositPaid := 300.00
+!ra_52004.quotedDailyRate := 169.00
+!ra_52004.quotedRatePerMile := 0.89
+
+!insert (office_wilmington_hub2, ra_52001) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_drop2, ra_52001) into RentalOfficeRentalAgreementDrop
+!insert (ra_52001, trailer_de_open_07) into RentalAgreementVehicle
+!insert (ra_52001, cust_ind_helen) into RentalAgreementCustomer
+
+!insert (office_wilmington_hub2, ra_52002) into RentalOfficeRentalAgreementOrigin
+!insert (office_juneau, ra_52002) into RentalOfficeRentalAgreementDrop
+!insert (ra_52002, truck_de_24ft_07) into RentalAgreementVehicle
+!insert (ra_52002, cust_co_arcticbuild) into RentalAgreementCustomer
+
+!insert (office_juneau, ra_52003) into RentalOfficeRentalAgreementOrigin
+!insert (office_fairbanks_drop, ra_52003) into RentalOfficeRentalAgreementDrop
+!insert (ra_52003, truck_ak_10ft_08) into RentalAgreementVehicle
+!insert (ra_52003, cust_co_arcticbuild) into RentalAgreementCustomer
+
+!insert (office_wilmington_hub2, ra_52004) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington_hub2, ra_52004) into RentalOfficeRentalAgreementDrop
+!insert (ra_52004, truck_de_24ft_07) into RentalAgreementVehicle
+!insert (ra_52004, cust_ind_helen) into RentalAgreementCustomer

@@ -1,0 +1,40 @@
+!new Booking('booking22')
+!booking22.startDate := '2029-03-01'
+!booking22.endDate := '2029-03-04'
+!booking22.canceled := false
+!booking22.bookingId := 10010
+!booking22.confirmed := true
+
+!new Customer('customer22')
+!customer22.firstName := 'Ana'
+!customer22.lastName := 'Sousa'
+
+!insert (booking22, customer22) into BookingCustomer
+
+!new RoomReservation('rr31')
+!rr31.checkInDate := '2029-03-01'
+!rr31.checkOutDate := '2029-03-04'
+
+!insert (booking22, rr31) into BookingRoomReservation
+
+!new Room('room077')
+!room077.roomNumber := 77
+!room077.numBeds := 1
+!room077.pricePerNight := 88.0
+!room077.occupied := false
+!room077.blocked := true
+
+!insert (rr31, room077) into RoomReservationRoom
+
+!new Bill('bill32')
+!bill32.billId := 21001
+!bill32.price := 0.0
+
+!insert (bill32, rr31) into BillRoomReservation
+!insert (booking22, bill32) into BookingBill
+
+!new FreeRoomTypesDTO('dtoMarchSingleTrial')
+!dtoMarchSingleTrial.roomTypeDescription := 'Single room (first-stay trial)'
+!dtoMarchSingleTrial.numBeds := 1
+!dtoMarchSingleTrial.pricePerNight := 88.0
+!dtoMarchSingleTrial.numFreeRooms := 1

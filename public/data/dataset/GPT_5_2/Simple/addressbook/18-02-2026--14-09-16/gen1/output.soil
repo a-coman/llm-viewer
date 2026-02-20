@@ -1,0 +1,178 @@
+!new AddressBook('ab1')
+!new AddressBook('ab2')
+
+!new Company('acmeCo')
+!acmeCo.name := 'ACME Corporation'
+!acmeCo.phone := '+1-212-555-0100'
+!acmeCo.website := 'https://www.acme.example'
+!acmeCo.email := 'info@acme.example'
+!acmeCo.industry := 'Software'
+
+!new Company('acmeResearch')
+!acmeResearch.name := 'ACME Research Lab'
+!acmeResearch.phone := '+1-212-555-0199'
+!acmeResearch.website := 'https://research.acme.example'
+!acmeResearch.email := 'lab@acme.example'
+!acmeResearch.industry := 'R&D'
+
+!new Company('globexCo')
+!globexCo.name := 'Globex Industries'
+!globexCo.phone := '+1-312-555-0200'
+!globexCo.website := 'https://www.globex.example'
+!globexCo.email := 'contact@globex.example'
+!globexCo.industry := 'Manufacturing'
+
+!new Person('alice')
+!alice.name := 'Alice Nguyen'
+!alice.phone := '+1-917-555-0111'
+!alice.website := 'https://alice.example'
+!alice.email := 'alice.nguyen@example.com'
+!alice.title := 'Senior Engineer'
+
+!new Person('bob')
+!bob.name := 'Bob Schneider'
+!bob.phone := '+1-646-555-0112'
+!bob.website := 'https://bob.example'
+!bob.email := 'bob.schneider@example.com'
+!bob.title := 'Product Manager'
+
+!new Person('dmitri')
+!dmitri.name := 'Dmitri Volkov'
+!dmitri.phone := '+1-212-555-0113'
+!dmitri.website := 'https://dmitri.example'
+!dmitri.email := 'd.volkov@example.com'
+!dmitri.title := 'CTO'
+
+!new Person('clara')
+!clara.name := 'Clara Jensen'
+!clara.phone := '+1-773-555-0144'
+!clara.website := 'https://clara.example'
+!clara.email := 'clara.jensen@example.com'
+!clara.title := 'HR Specialist'
+
+!insert (ab1, acmeCo) into AddressBookMadeOfContact
+!insert (ab1, acmeResearch) into AddressBookMadeOfContact
+!insert (ab1, alice) into AddressBookMadeOfContact
+!insert (ab1, bob) into AddressBookMadeOfContact
+!insert (ab1, dmitri) into AddressBookMadeOfContact
+
+!insert (ab2, globexCo) into AddressBookMadeOfContact
+!insert (ab2, clara) into AddressBookMadeOfContact
+
+!new Address('addrAcmeHQ')
+!addrAcmeHQ.city := 'New York'
+!addrAcmeHQ.street := 'Madison Ave'
+!addrAcmeHQ.houseNr := '350'
+
+!new Address('addrAcmeBranch')
+!addrAcmeBranch.city := 'Boston'
+!addrAcmeBranch.street := 'Summer St'
+!addrAcmeBranch.houseNr := '22A'
+
+!new Address('addrAcmeResearch')
+!addrAcmeResearch.city := 'New York'
+!addrAcmeResearch.street := 'Lexington Ave'
+!addrAcmeResearch.houseNr := '815'
+
+!new Address('addrAliceHome')
+!addrAliceHome.city := 'Jersey City'
+!addrAliceHome.street := 'Grove St'
+!addrAliceHome.houseNr := '98'
+
+!new Address('addrBobHome')
+!addrBobHome.city := 'Brooklyn'
+!addrBobHome.street := 'Bedford Ave'
+!addrBobHome.houseNr := '410'
+
+!new Address('addrDmitriHome')
+!addrDmitriHome.city := 'New York'
+!addrDmitriHome.street := 'W 57th St'
+!addrDmitriHome.houseNr := '120'
+
+!new Address('addrGlobexHQ')
+!addrGlobexHQ.city := 'Chicago'
+!addrGlobexHQ.street := 'Wacker Dr'
+!addrGlobexHQ.houseNr := '200'
+
+!new Address('addrClaraHome')
+!addrClaraHome.city := 'Evanston'
+!addrClaraHome.street := 'Sherman Ave'
+!addrClaraHome.houseNr := '55'
+
+!insert (acmeCo, addrAcmeHQ) into ContactContainsAddress
+!insert (acmeCo, addrAcmeBranch) into ContactContainsAddress
+!insert (acmeResearch, addrAcmeResearch) into ContactContainsAddress
+!insert (alice, addrAliceHome) into ContactContainsAddress
+!insert (bob, addrBobHome) into ContactContainsAddress
+!insert (dmitri, addrDmitriHome) into ContactContainsAddress
+!insert (globexCo, addrGlobexHQ) into ContactContainsAddress
+!insert (clara, addrClaraHome) into ContactContainsAddress
+
+!new Note('nAliceMeet1')
+!nAliceMeet1.author := 'Alice Nguyen'
+!nAliceMeet1.time := Date('2026-02-03 09:30')
+!nAliceMeet1.type := #MEETING
+!nAliceMeet1.comment := 'Kickoff meeting for Q1 release; agreed on milestones and owners.'
+
+!new Note('nAliceCall1')
+!nAliceCall1.author := 'Bob Schneider'
+!nAliceCall1.time := Date('2026-02-05 16:10')
+!nAliceCall1.type := #CALL
+!nAliceCall1.comment := 'Follow-up on performance regression; action item to profile caching layer.'
+
+!new Note('nAcmeEmail1')
+!nAcmeEmail1.author := 'Procurement'
+!nAcmeEmail1.time := Date('2026-01-28 11:45')
+!nAcmeEmail1.type := #EMAIL
+!nAcmeEmail1.comment := 'Sent updated vendor onboarding documents and W-9 request.'
+
+!new Note('nGlobexMeet1')
+!nGlobexMeet1.author := 'Clara Jensen'
+!nGlobexMeet1.time := Date('2026-02-01 14:00')
+!nGlobexMeet1.type := #MEETING
+!nGlobexMeet1.comment := 'Interview panel scheduled; confirmed candidates and time slots.'
+
+!insert (alice, nAliceMeet1) into ContactContainsNote
+!insert (alice, nAliceCall1) into ContactContainsNote
+!insert (acmeCo, nAcmeEmail1) into ContactContainsNote
+!insert (globexCo, nGlobexMeet1) into ContactContainsNote
+
+!new Relationship('rAliceBoss')
+!rAliceBoss.type := #BOSS
+!insert (alice, rAliceBoss) into ContactToRelationship
+!insert (rAliceBoss, dmitri) into RelationshipToContact
+
+!new Relationship('rAliceCoworker')
+!rAliceCoworker.type := #COWORKER
+!insert (alice, rAliceCoworker) into ContactToRelationship
+!insert (rAliceCoworker, bob) into RelationshipToContact
+
+!new Relationship('rBobCoworker')
+!rBobCoworker.type := #COWORKER
+!insert (bob, rBobCoworker) into ContactToRelationship
+!insert (rBobCoworker, alice) into RelationshipToContact
+
+!new Relationship('rBobEmployee')
+!rBobEmployee.type := #EMPLOYEE
+!insert (bob, rBobEmployee) into ContactToRelationship
+!insert (rBobEmployee, acmeCo) into RelationshipToContact
+
+!new Relationship('rDmitriEmployee')
+!rDmitriEmployee.type := #EMPLOYEE
+!insert (dmitri, rDmitriEmployee) into ContactToRelationship
+!insert (rDmitriEmployee, acmeCo) into RelationshipToContact
+
+!new Relationship('rAcmeSubdivision')
+!rAcmeSubdivision.type := #SUBDIVISION
+!insert (acmeCo, rAcmeSubdivision) into ContactToRelationship
+!insert (rAcmeSubdivision, acmeResearch) into RelationshipToContact
+
+!new Relationship('rClaraEmployee')
+!rClaraEmployee.type := #EMPLOYEE
+!insert (clara, rClaraEmployee) into ContactToRelationship
+!insert (rClaraEmployee, globexCo) into RelationshipToContact
+
+!new Relationship('rGlobexCoworker')
+!rGlobexCoworker.type := #COWORKER
+!insert (globexCo, rGlobexCoworker) into ContactToRelationship
+!insert (rGlobexCoworker, acmeCo) into RelationshipToContact

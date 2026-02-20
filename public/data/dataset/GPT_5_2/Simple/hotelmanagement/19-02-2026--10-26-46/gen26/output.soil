@@ -1,0 +1,66 @@
+!new Booking('booking28')
+!booking28.startDate := '2030-05-11'
+!booking28.endDate := '2030-05-15'
+!booking28.canceled := false
+!booking28.bookingId := 10500
+!booking28.confirmed := true
+
+!new Customer('customer28')
+!customer28.firstName := 'Johanna'
+!customer28.lastName := 'Schultz'
+
+!insert (booking28, customer28) into BookingCustomer
+
+!new RoomReservation('rr38')
+!rr38.checkInDate := '2030-05-11'
+!rr38.checkOutDate := '2030-05-13'
+
+!new RoomReservation('rr39')
+!rr39.checkInDate := '2030-05-13'
+!rr39.checkOutDate := '2030-05-15'
+
+!insert (booking28, rr38) into BookingRoomReservation
+!insert (booking28, rr39) into BookingRoomReservation
+
+!new Room('room402')
+!room402.roomNumber := 402
+!room402.numBeds := 1
+!room402.pricePerNight := 128.0
+!room402.occupied := false
+!room402.blocked := true
+
+!new Room('room918')
+!room918.roomNumber := 918
+!room918.numBeds := 2
+!room918.pricePerNight := 185.0
+!room918.occupied := false
+!room918.blocked := true
+
+!insert (rr38, room402) into RoomReservationRoom
+!insert (rr39, room918) into RoomReservationRoom
+
+!new Bill('bill39')
+!bill39.billId := 25001
+!bill39.price := 256.0
+
+!new Bill('bill40')
+!bill40.billId := 25002
+!bill40.price := 370.0
+
+!insert (bill39, rr38) into BillRoomReservation
+!insert (bill40, rr39) into BillRoomReservation
+
+!insert (booking28, bill39) into BookingBill
+!insert (booking28, bill40) into BookingBill
+
+!new FreeRoomTypesDTO('dtoMayStandardSingle')
+!dtoMayStandardSingle.roomTypeDescription := 'Standard single (May)'
+!dtoMayStandardSingle.numBeds := 1
+!dtoMayStandardSingle.pricePerNight := 128.0
+!dtoMayStandardSingle.numFreeRooms := 10
+
+!new FreeRoomTypesDTO('dtoMayDouble')
+!dtoMayDouble.roomTypeDescription := 'Double room (May)'
+!dtoMayDouble.numBeds := 2
+!dtoMayDouble.pricePerNight := 185.0
+!dtoMayDouble.numFreeRooms := 4

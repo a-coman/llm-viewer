@@ -1,0 +1,215 @@
+!new StateMachine('smRail')
+!smRail.name := 'railCrossingController'
+
+!new State('rcIdle')
+!rcIdle.name := 'idle'
+!new State('rcWarning')
+!rcWarning.name := 'warning'
+!new State('rcLowering')
+!rcLowering.name := 'barrierLowering'
+!new State('rcDown')
+!rcDown.name := 'barrierDown'
+!new State('rcRaising')
+!rcRaising.name := 'barrierRaising'
+!new State('rcFault')
+!rcFault.name := 'fault'
+
+!insert (smRail, rcIdle) into StateMachineContainsStates
+!insert (smRail, rcWarning) into StateMachineContainsStates
+!insert (smRail, rcLowering) into StateMachineContainsStates
+!insert (smRail, rcDown) into StateMachineContainsStates
+!insert (smRail, rcRaising) into StateMachineContainsStates
+!insert (smRail, rcFault) into StateMachineContainsStates
+
+!insert (smRail, rcIdle) into StateMachineStartsStates
+
+
+!new Transition('trTrainApproach')
+!trTrainApproach.name := 'trainApproach'
+!new TimeEvent('evTrainApproach')
+!evTrainApproach.time := 1
+!insert (smRail, trTrainApproach) into StateMachineContainsTransitions
+!insert (trTrainApproach, evTrainApproach) into TransitionContainsEvents
+!insert (rcIdle, trTrainApproach) into StateTransition
+!insert (trTrainApproach, rcWarning) into TransitionState
+
+!new Transition('trStartLowering')
+!trStartLowering.name := 'startLowering'
+!new TimeEvent('evStartLowering')
+!evStartLowering.time := 3
+!insert (smRail, trStartLowering) into StateMachineContainsTransitions
+!insert (trStartLowering, evStartLowering) into TransitionContainsEvents
+!insert (rcWarning, trStartLowering) into StateTransition
+!insert (trStartLowering, rcLowering) into TransitionState
+
+!new Transition('trLowered')
+!trLowered.name := 'barrierLowered'
+!new TimeEvent('evLowered')
+!evLowered.time := 8
+!insert (smRail, trLowered) into StateMachineContainsTransitions
+!insert (trLowered, evLowered) into TransitionContainsEvents
+!insert (rcLowering, trLowered) into StateTransition
+!insert (trLowered, rcDown) into TransitionState
+
+!new Transition('trTrainClear')
+!trTrainClear.name := 'trainClear'
+!new TimeEvent('evTrainClear')
+!evTrainClear.time := 45
+!insert (smRail, trTrainClear) into StateMachineContainsTransitions
+!insert (trTrainClear, evTrainClear) into TransitionContainsEvents
+!insert (rcDown, trTrainClear) into StateTransition
+!insert (trTrainClear, rcRaising) into TransitionState
+
+!new Transition('trRaised')
+!trRaised.name := 'barrierRaised'
+!new TimeEvent('evRaised')
+!evRaised.time := 7
+!insert (smRail, trRaised) into StateMachineContainsTransitions
+!insert (trRaised, evRaised) into TransitionContainsEvents
+!insert (rcRaising, trRaised) into StateTransition
+!insert (trRaised, rcIdle) into TransitionState
+
+!new Transition('trSelfTestTick')
+!trSelfTestTick.name := 'selfTestTick'
+!new TimeEvent('evSelfTestTick')
+!evSelfTestTick.time := 300
+!insert (smRail, trSelfTestTick) into StateMachineContainsTransitions
+!insert (trSelfTestTick, evSelfTestTick) into TransitionContainsEvents
+!insert (rcIdle, trSelfTestTick) into StateTransition
+!insert (trSelfTestTick, rcIdle) into TransitionState
+
+!new Transition('trFaultDetected')
+!trFaultDetected.name := 'faultDetected'
+!new TimeEvent('evFaultDetected')
+!evFaultDetected.time := 1
+!insert (smRail, trFaultDetected) into StateMachineContainsTransitions
+!insert (trFaultDetected, evFaultDetected) into TransitionContainsEvents
+!insert (rcWarning, trFaultDetected) into StateTransition
+!insert (trFaultDetected, rcFault) into TransitionState
+
+!new Transition('trFaultDuringLowering')
+!trFaultDuringLowering.name := 'faultDuringLowering'
+!new TimeEvent('evFaultDuringLowering')
+!evFaultDuringLowering.time := 1
+!insert (smRail, trFaultDuringLowering) into StateMachineContainsTransitions
+!insert (trFaultDuringLowering, evFaultDuringLowering) into TransitionContainsEvents
+!insert (rcLowering, trFaultDuringLowering) into StateTransition
+!insert (trFaultDuringLowering, rcFault) into TransitionState
+
+!new Transition('trResetAfterRepair')
+!trResetAfterRepair.name := 'resetAfterRepair'
+!new TimeEvent('evResetAfterRepair')
+!evResetAfterRepair.time := 120
+!insert (smRail, trResetAfterRepair) into StateMachineContainsTransitions
+!insert (trResetAfterRepair, evResetAfterRepair) into TransitionContainsEvents
+!insert (rcFault, trResetAfterRepair) into StateTransition
+!insert (trResetAfterRepair, rcIdle) into TransitionState
+
+
+
+!new StateMachine('smSync')
+!smSync.name := 'recipeSyncService'
+
+!new State('syStopped')
+!syStopped.name := 'stopped'
+!new State('syStarting')
+!syStarting.name := 'starting'
+!new State('sySyncing')
+!sySyncing.name := 'syncing'
+!new State('syOnline')
+!syOnline.name := 'online'
+!new State('syBackoff')
+!syBackoff.name := 'backoff'
+!new State('syDisabled')
+!syDisabled.name := 'disabled'
+
+!insert (smSync, syStopped) into StateMachineContainsStates
+!insert (smSync, syStarting) into StateMachineContainsStates
+!insert (smSync, sySyncing) into StateMachineContainsStates
+!insert (smSync, syOnline) into StateMachineContainsStates
+!insert (smSync, syBackoff) into StateMachineContainsStates
+!insert (smSync, syDisabled) into StateMachineContainsStates
+
+!insert (smSync, syStopped) into StateMachineStartsStates
+
+
+!new Transition('trStartService')
+!trStartService.name := 'startService'
+!new TimeEvent('evStartService')
+!evStartService.time := 1
+!insert (smSync, trStartService) into StateMachineContainsTransitions
+!insert (trStartService, evStartService) into TransitionContainsEvents
+!insert (syStopped, trStartService) into StateTransition
+!insert (trStartService, syStarting) into TransitionState
+
+!new Transition('trInitComplete')
+!trInitComplete.name := 'initComplete'
+!new TimeEvent('evInitComplete')
+!evInitComplete.time := 4
+!insert (smSync, trInitComplete) into StateMachineContainsTransitions
+!insert (trInitComplete, evInitComplete) into TransitionContainsEvents
+!insert (syStarting, trInitComplete) into StateTransition
+!insert (trInitComplete, syOnline) into TransitionState
+
+!new Transition('trBeginSync')
+!trBeginSync.name := 'beginSync'
+!new TimeEvent('evBeginSync')
+!evBeginSync.time := 10
+!insert (smSync, trBeginSync) into StateMachineContainsTransitions
+!insert (trBeginSync, evBeginSync) into TransitionContainsEvents
+!insert (syOnline, trBeginSync) into StateTransition
+!insert (trBeginSync, sySyncing) into TransitionState
+
+!new Transition('trSyncOk')
+!trSyncOk.name := 'syncOk'
+!new TimeEvent('evSyncOk')
+!evSyncOk.time := 12
+!insert (smSync, trSyncOk) into StateMachineContainsTransitions
+!insert (trSyncOk, evSyncOk) into TransitionContainsEvents
+!insert (sySyncing, trSyncOk) into StateTransition
+!insert (trSyncOk, syOnline) into TransitionState
+
+!new Transition('trSyncFail')
+!trSyncFail.name := 'syncFail'
+!new TimeEvent('evSyncFail')
+!evSyncFail.time := 15
+!insert (smSync, trSyncFail) into StateMachineContainsTransitions
+!insert (trSyncFail, evSyncFail) into TransitionContainsEvents
+!insert (sySyncing, trSyncFail) into StateTransition
+!insert (trSyncFail, syBackoff) into TransitionState
+
+!new Transition('trRetryAfterBackoff')
+!trRetryAfterBackoff.name := 'retryAfterBackoff'
+!new TimeEvent('evRetryAfterBackoff')
+!evRetryAfterBackoff.time := 60
+!insert (smSync, trRetryAfterBackoff) into StateMachineContainsTransitions
+!insert (trRetryAfterBackoff, evRetryAfterBackoff) into TransitionContainsEvents
+!insert (syBackoff, trRetryAfterBackoff) into StateTransition
+!insert (trRetryAfterBackoff, syOnline) into TransitionState
+
+!new Transition('trDisableService')
+!trDisableService.name := 'disableService'
+!new TimeEvent('evDisableService')
+!evDisableService.time := 2
+!insert (smSync, trDisableService) into StateMachineContainsTransitions
+!insert (trDisableService, evDisableService) into TransitionContainsEvents
+!insert (syOnline, trDisableService) into StateTransition
+!insert (trDisableService, syDisabled) into TransitionState
+
+!new Transition('trEnableService')
+!trEnableService.name := 'enableService'
+!new TimeEvent('evEnableService')
+!evEnableService.time := 2
+!insert (smSync, trEnableService) into StateMachineContainsTransitions
+!insert (trEnableService, evEnableService) into TransitionContainsEvents
+!insert (syDisabled, trEnableService) into StateTransition
+!insert (trEnableService, syStopped) into TransitionState
+
+!new Transition('trAutoSyncTick')
+!trAutoSyncTick.name := 'autoSyncTick'
+!new TimeEvent('evAutoSyncTick')
+!evAutoSyncTick.time := 1800
+!insert (smSync, trAutoSyncTick) into StateMachineContainsTransitions
+!insert (trAutoSyncTick, evAutoSyncTick) into TransitionContainsEvents
+!insert (syOnline, trAutoSyncTick) into StateTransition
+!insert (trAutoSyncTick, syOnline) into TransitionState

@@ -1,0 +1,152 @@
+!new AddressBook('ab16')
+
+!new Person('emmaHart')
+!emmaHart.name := 'Emma Hart'
+!emmaHart.phone := '+1-617-555-1601'
+!emmaHart.website := 'https://emmahart.example'
+!emmaHart.email := 'emma.hart@example.com'
+!emmaHart.title := 'Project Lead'
+
+!new Person('benIto')
+!benIto.name := 'Ben Ito'
+!benIto.phone := '+1-617-555-1602'
+!benIto.website := ''
+!benIto.email := 'ben.ito@example.com'
+!benIto.title := 'Analyst'
+
+!new Person('carlosMendez')
+!carlosMendez.name := 'Carlos Mendez'
+!carlosMendez.phone := '+1-857-555-1603'
+!carlosMendez.website := ''
+!carlosMendez.email := 'carlos.mendez@example.com'
+!carlosMendez.title := 'Research Assistant'
+
+!new Person('priyaShah')
+!priyaShah.name := 'Priya Shah'
+!priyaShah.phone := '+1-508-555-1604'
+!priyaShah.website := 'https://priyashah.example'
+!priyaShah.email := 'priya.shah@example.com'
+!priyaShah.title := 'Mentor'
+
+!new Person('zoeFischer')
+!zoeFischer.name := 'Zoe Fischer'
+!zoeFischer.phone := '+1-781-555-1605'
+!zoeFischer.website := ''
+!zoeFischer.email := 'zoe.fischer@example.com'
+!zoeFischer.title := 'Designer'
+
+!insert (ab16, emmaHart) into AddressBookMadeOfContact
+!insert (ab16, benIto) into AddressBookMadeOfContact
+!insert (ab16, carlosMendez) into AddressBookMadeOfContact
+!insert (ab16, priyaShah) into AddressBookMadeOfContact
+!insert (ab16, zoeFischer) into AddressBookMadeOfContact
+
+!new Address('addrEmmaHome')
+!addrEmmaHome.city := 'Cambridge'
+!addrEmmaHome.street := 'Massachusetts Ave'
+!addrEmmaHome.houseNr := '875'
+
+!new Address('addrEmmaWork')
+!addrEmmaWork.city := 'Boston'
+!addrEmmaWork.street := 'Seaport Blvd'
+!addrEmmaWork.houseNr := '200'
+
+!new Address('addrBenHome')
+!addrBenHome.city := 'Somerville'
+!addrBenHome.street := 'Elm St'
+!addrBenHome.houseNr := '44'
+
+!new Address('addrCarlosHome')
+!addrCarlosHome.city := 'Medford'
+!addrCarlosHome.street := 'High St'
+!addrCarlosHome.houseNr := '19'
+
+!new Address('addrZoeHome')
+!addrZoeHome.city := 'Arlington'
+!addrZoeHome.street := 'Broadway'
+!addrZoeHome.houseNr := '310'
+
+!new Address('addrZoeStudio')
+!addrZoeStudio.city := 'Cambridge'
+!addrZoeStudio.street := 'Main St'
+!addrZoeStudio.houseNr := '650'
+
+!insert (emmaHart, addrEmmaHome) into ContactContainsAddress
+!insert (emmaHart, addrEmmaWork) into ContactContainsAddress
+!insert (benIto, addrBenHome) into ContactContainsAddress
+!insert (carlosMendez, addrCarlosHome) into ContactContainsAddress
+!insert (zoeFischer, addrZoeHome) into ContactContainsAddress
+!insert (zoeFischer, addrZoeStudio) into ContactContainsAddress
+
+!new Note('nEmmaMeeting1')
+!nEmmaMeeting1.author := 'Emma Hart'
+!nEmmaMeeting1.time := Date('2026-02-02 09:15')
+!nEmmaMeeting1.type := #MEETING
+!nEmmaMeeting1.comment := 'Planning session for the community exhibit; drafted task list and deadlines.'
+
+!new Note('nEmmaEmail1')
+!nEmmaEmail1.author := 'Emma Hart'
+!nEmmaEmail1.time := Date('2026-02-03 18:05')
+!nEmmaEmail1.type := #EMAIL
+!nEmmaEmail1.comment := 'Sent summary notes and shared document links to the group.'
+
+!new Note('nEmmaCall1')
+!nEmmaCall1.author := 'Ben Ito'
+!nEmmaCall1.time := Date('2026-02-04 12:30')
+!nEmmaCall1.type := #CALL
+!nEmmaCall1.comment := 'Quick call about data cleanup approach; agreed on validation rules.'
+
+!new Note('nBenEmail1')
+!nBenEmail1.author := 'Ben Ito'
+!nBenEmail1.time := Date('2026-02-06 08:55')
+!nBenEmail1.type := #EMAIL
+!nBenEmail1.comment := 'Shared first draft of metrics table; requested review before publishing.'
+
+!new Note('nZoeMeeting1')
+!nZoeMeeting1.author := 'Zoe Fischer'
+!nZoeMeeting1.time := Date('2026-02-07 16:00')
+!nZoeMeeting1.type := #MEETING
+!nZoeMeeting1.comment := 'Reviewed poster layouts and accessibility checks; selected final color palette.'
+
+!new Note('nZoeCall1')
+!nZoeCall1.author := 'Zoe Fischer'
+!nZoeCall1.time := Date('2026-02-08 10:20')
+!nZoeCall1.type := #CALL
+!nZoeCall1.comment := 'Called printer to confirm paper stock and turnaround time; reserved a slot for Tuesday.'
+
+!insert (emmaHart, nEmmaMeeting1) into ContactContainsNote
+!insert (emmaHart, nEmmaEmail1) into ContactContainsNote
+!insert (emmaHart, nEmmaCall1) into ContactContainsNote
+!insert (benIto, nBenEmail1) into ContactContainsNote
+!insert (zoeFischer, nZoeMeeting1) into ContactContainsNote
+!insert (zoeFischer, nZoeCall1) into ContactContainsNote
+
+!new Relationship('relBenBossIsEmma')
+!relBenBossIsEmma.type := #BOSS
+!insert (benIto, relBenBossIsEmma) into ContactToRelationship
+!insert (relBenBossIsEmma, emmaHart) into RelationshipToContact
+
+!new Relationship('relEmmaBossIsPriya')
+!relEmmaBossIsPriya.type := #BOSS
+!insert (emmaHart, relEmmaBossIsPriya) into ContactToRelationship
+!insert (relEmmaBossIsPriya, priyaShah) into RelationshipToContact
+
+!new Relationship('relCarlosCoworkerBen')
+!relCarlosCoworkerBen.type := #COWORKER
+!insert (carlosMendez, relCarlosCoworkerBen) into ContactToRelationship
+!insert (relCarlosCoworkerBen, benIto) into RelationshipToContact
+
+!new Relationship('relBenCoworkerCarlos')
+!relBenCoworkerCarlos.type := #COWORKER
+!insert (benIto, relBenCoworkerCarlos) into ContactToRelationship
+!insert (relBenCoworkerCarlos, carlosMendez) into RelationshipToContact
+
+!new Relationship('relEmmaCoworkerZoe')
+!relEmmaCoworkerZoe.type := #COWORKER
+!insert (emmaHart, relEmmaCoworkerZoe) into ContactToRelationship
+!insert (relEmmaCoworkerZoe, zoeFischer) into RelationshipToContact
+
+!new Relationship('relZoeCoworkerEmma')
+!relZoeCoworkerEmma.type := #COWORKER
+!insert (zoeFischer, relZoeCoworkerEmma) into ContactToRelationship
+!insert (relZoeCoworkerEmma, emmaHart) into RelationshipToContact

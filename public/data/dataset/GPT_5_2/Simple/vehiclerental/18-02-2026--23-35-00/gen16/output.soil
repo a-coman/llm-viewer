@@ -1,0 +1,131 @@
+!new RentalOffice('office_callcenter_national3')
+!office_callcenter_national3.name := 'National Reservations Call Center - 24/7'
+!office_callcenter_national3.number := 3001
+!office_callcenter_national3.address := '200 E Capitol St, Washington, DC 20003'
+
+!new RentalOffice('office_santaana')
+!office_santaana.name := 'Orange County Fleet Rentals - Santa Ana'
+!office_santaana.number := 3002
+!office_santaana.address := '1700 E Edinger Ave, Santa Ana, CA 92705'
+
+!new RentalOffice('office_flagstaff_main2')
+!office_flagstaff_main2.name := 'High Country Vehicle Rental - Flagstaff'
+!office_flagstaff_main2.number := 3003
+!office_flagstaff_main2.address := '3000 S Country Club Dr, Flagstaff, AZ 86004'
+
+!new RentalOffice('office_newhaven_ct2')
+!office_newhaven_ct2.name := 'Elm City Vehicle Rental - New Haven'
+!office_newhaven_ct2.number := 3004
+!office_newhaven_ct2.address := '100 Sargent Dr, New Haven, CT 06511'
+
+!new Truck('truck_ca_24ft_301')
+!truck_ca_24ft_301.id := 93001
+!truck_ca_24ft_301.registrationState := #CA
+!truck_ca_24ft_301.licensePlateNumber := 'CA-TRK-93001'
+!truck_ca_24ft_301.vehicleTypeCode := #TRUCK24
+!truck_ca_24ft_301.registrationLastMaintenanceDate := Date('2026-05-03')
+!truck_ca_24ft_301.expirationDate := Date('2027-05-31')
+!truck_ca_24ft_301.odometerReading := 28440
+!truck_ca_24ft_301.gasTankCapacity := 64.0
+!truck_ca_24ft_301.workingRadio := true
+!truck_ca_24ft_301.mileage := 9
+
+!new Truck('truck_ct_standard_302')
+!truck_ct_standard_302.id := 93002
+!truck_ct_standard_302.registrationState := #CT
+!truck_ct_standard_302.licensePlateNumber := 'CT-TRK-93002'
+!truck_ct_standard_302.vehicleTypeCode := #TRUCK
+!truck_ct_standard_302.registrationLastMaintenanceDate := Date('2026-04-22')
+!truck_ct_standard_302.expirationDate := Date('2027-04-30')
+!truck_ct_standard_302.odometerReading := 61205
+!truck_ct_standard_302.gasTankCapacity := 49.0
+!truck_ct_standard_302.workingRadio := false
+!truck_ct_standard_302.mileage := 12
+
+!new Vehicle('trailer_az_covered_301')
+!trailer_az_covered_301.id := 94001
+!trailer_az_covered_301.registrationState := #AZ
+!trailer_az_covered_301.licensePlateNumber := 'AZ-TRL-94001'
+!trailer_az_covered_301.vehicleTypeCode := #COVERED_TRAILER
+!trailer_az_covered_301.registrationLastMaintenanceDate := Date('2026-02-12')
+!trailer_az_covered_301.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ca_open_302')
+!trailer_ca_open_302.id := 94002
+!trailer_ca_open_302.registrationState := #CA
+!trailer_ca_open_302.licensePlateNumber := 'CA-TRL-94002'
+!trailer_ca_open_302.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ca_open_302.registrationLastMaintenanceDate := Date('2026-03-19')
+!trailer_ca_open_302.expirationDate := Date('2027-03-31')
+
+!insert (office_santaana, truck_ca_24ft_301) into RentalOfficeVehicle
+!insert (office_newhaven_ct2, truck_ct_standard_302) into RentalOfficeVehicle
+!insert (office_flagstaff_main2, trailer_az_covered_301) into RentalOfficeVehicle
+!insert (office_santaana, trailer_ca_open_302) into RentalOfficeVehicle
+
+!new Company('cust_co_gallerymove')
+!cust_co_gallerymove.name := 'GalleryMove Fine Art Transport'
+!cust_co_gallerymove.address := '520 S Grand Ave, Los Angeles, CA 90071'
+!cust_co_gallerymove.poorRisk := false
+!cust_co_gallerymove.idNumber := 70033012
+
+!new Individual('cust_ind_chloe')
+!cust_ind_chloe.name := 'Chloe Martin'
+!cust_ind_chloe.address := '89 N Main St, Flagstaff, AZ 86001'
+!cust_ind_chloe.poorRisk := false
+!cust_ind_chloe.homePhone := '928-555-0108'
+!cust_ind_chloe.driverLicenseState := #AZ
+!cust_ind_chloe.driverLicenseNumber := 50571933
+!cust_ind_chloe.driverLicenseExpirationDate := Date('2028-09-14')
+
+!new RentalAgreement('ra_300001')
+!ra_300001.number := 300001
+!ra_300001.rentalDate := Date('2026-02-21')
+!ra_300001.anticipatedDuration := 6
+!ra_300001.depositPaid := 1500.00
+!ra_300001.quotedDailyRate := 199.00
+!ra_300001.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_300002')
+!ra_300002.number := 300002
+!ra_300002.rentalDate := Date('2026-02-22')
+!ra_300002.anticipatedDuration := 2
+!ra_300002.depositPaid := 100.00
+!ra_300002.quotedDailyRate := 35.00
+!ra_300002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_300003')
+!ra_300003.number := 300003
+!ra_300003.rentalDate := Date('2026-03-01')
+!ra_300003.anticipatedDuration := 45
+!ra_300003.depositPaid := 0.00
+!ra_300003.quotedDailyRate := 55.00
+!ra_300003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_300004')
+!ra_300004.number := 300004
+!ra_300004.rentalDate := Date('2026-03-05')
+!ra_300004.anticipatedDuration := 1
+!ra_300004.depositPaid := 250.00
+!ra_300004.quotedDailyRate := 99.00
+!ra_300004.quotedRatePerMile := 0.70
+
+!insert (office_callcenter_national3, ra_300001) into RentalOfficeRentalAgreementOrigin
+!insert (office_newhaven_ct2, ra_300001) into RentalOfficeRentalAgreementDrop
+!insert (ra_300001, truck_ca_24ft_301) into RentalAgreementVehicle
+!insert (ra_300001, cust_co_gallerymove) into RentalAgreementCustomer
+
+!insert (office_santaana, ra_300002) into RentalOfficeRentalAgreementOrigin
+!insert (office_flagstaff_main2, ra_300002) into RentalOfficeRentalAgreementDrop
+!insert (ra_300002, trailer_ca_open_302) into RentalAgreementVehicle
+!insert (ra_300002, cust_ind_chloe) into RentalAgreementCustomer
+
+!insert (office_flagstaff_main2, ra_300003) into RentalOfficeRentalAgreementOrigin
+!insert (office_santaana, ra_300003) into RentalOfficeRentalAgreementDrop
+!insert (ra_300003, trailer_az_covered_301) into RentalAgreementVehicle
+!insert (ra_300003, cust_co_gallerymove) into RentalAgreementCustomer
+
+!insert (office_newhaven_ct2, ra_300004) into RentalOfficeRentalAgreementOrigin
+!insert (office_newhaven_ct2, ra_300004) into RentalOfficeRentalAgreementDrop
+!insert (ra_300004, truck_ct_standard_302) into RentalAgreementVehicle
+!insert (ra_300004, cust_ind_chloe) into RentalAgreementCustomer

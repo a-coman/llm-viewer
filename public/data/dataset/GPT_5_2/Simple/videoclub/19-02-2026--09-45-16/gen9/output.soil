@@ -1,0 +1,83 @@
+!new Client('k1')
+!k1.clientId := 601
+!k1.isSuspended := false
+
+!new Client('k2')
+!k2.clientId := 602
+!k2.isSuspended := true
+
+!new Client('k3')
+!k3.clientId := 603
+!k3.isSuspended := false
+
+!new Actor('g1')
+!g1.name := 'Samira Vaughn'
+
+!new Actor('g2')
+!g2.name := 'Elliot Crane'
+
+!new Actor('g3')
+!g3.name := 'Marcos Ibanez'
+
+!new Actor('g4')
+!g4.name := 'Hana Petrov'
+
+!new Actor('g5')
+!g5.name := 'Leila Norris'
+
+!new Movie('km1')
+!km1.title := 'Blueprint Escape'
+!km1.availableCopies := 1
+!km1.genre := #Action
+
+!new Movie('km2')
+!km2.title := 'The Neighborly Mistake'
+!km2.availableCopies := 9
+!km2.genre := #Comedy
+
+!new Series('ks1')
+!ks1.title := 'Paper Kingdom'
+!ks1.availableCopies := 2
+!ks1.episode := 14
+
+!new Series('ks2')
+!ks2.title := 'Paper Kingdom'
+!ks2.availableCopies := 2
+!ks2.episode := 15
+
+!new Series('ks3')
+!ks3.title := 'After the Storm'
+!ks3.availableCopies := 0
+!ks3.episode := 2
+
+!insert (km1, g1) into CassetteActor
+!insert (km1, g2) into CassetteActor
+!insert (km1, g3) into CassetteActor
+
+!insert (km2, g1) into CassetteActor
+!insert (km2, g4) into CassetteActor
+
+!insert (ks1, g1) into CassetteActor
+!insert (ks1, g5) into CassetteActor
+
+!insert (ks2, g1) into CassetteActor
+!insert (ks2, g5) into CassetteActor
+!insert (ks2, g2) into CassetteActor
+
+!insert (ks3, g1) into CassetteActor
+!insert (ks3, g3) into CassetteActor
+!insert (ks3, g4) into CassetteActor
+
+!new Rental('kr1')
+!kr1.date := Date('2026-01-22')
+!insert (k1, kr1) into ClientRental
+!insert (kr1, km1) into RentalCassette
+!insert (kr1, km2) into RentalCassette
+!insert (kr1, ks1) into RentalCassette
+!insert (kr1, ks2) into RentalCassette
+!insert (kr1, ks3) into RentalCassette
+
+!new Rental('kr2')
+!kr2.date := Date('2026-01-23')
+!insert (k2, kr2) into ClientRental
+!insert (kr2, km1) into RentalCassette

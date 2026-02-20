@@ -1,0 +1,293 @@
+!new Restaurant('rest25')
+!rest25.name := 'Museum Courtyard Cafe'
+
+!new Owner('own60')
+!own60.name := 'Leonie Kruger'
+!own60.percentageShares := 50
+!new Owner('own61')
+!own61.name := 'Abdul Rahman'
+!own61.percentageShares := 25
+!new Owner('own62')
+!own62.name := 'Carmen Velasquez'
+!own62.percentageShares := 25
+
+!insert (rest25, own60) into RestaurantOwner
+!insert (rest25, own61) into RestaurantOwner
+!insert (rest25, own62) into RestaurantOwner
+
+!new HeadWaiter('hw30')
+!hw30.name := 'Bridget Nolan'
+!hw30.dateOfBirth := Date('1987-11-23')
+!hw30.phoneNumber := '555-3105'
+
+!new Waiter('w60')
+!w60.name := 'Teo Marin'
+!w60.dateOfBirth := Date('1999-03-08')
+!w60.phoneNumber := '555-3106'
+!w60.spokenLanguage := #Italian
+
+!new Waiter('w61')
+!w61.name := 'Claudia Reyes'
+!w61.dateOfBirth := Date('1995-09-27')
+!w61.phoneNumber := '555-3107'
+!w61.spokenLanguage := #Spanish
+
+!new Waiter('w62')
+!w62.name := 'Felix Braun'
+!w62.dateOfBirth := Date('1992-01-19')
+!w62.phoneNumber := '555-3108'
+!w62.spokenLanguage := #German
+
+!insert (hw30, w60) into HeadWaiterWaiter
+!insert (hw30, w61) into HeadWaiterWaiter
+!insert (hw30, w62) into HeadWaiterWaiter
+
+!new Chef('chef40')
+!chef40.name := 'Hana Suzuki'
+!chef40.dateOfBirth := Date('1978-09-01')
+!chef40.phoneNumber := '555-3115'
+
+!new Chef('chef41')
+!chef41.name := 'Mateusz Kowal'
+!chef41.dateOfBirth := Date('1983-06-13')
+!chef41.phoneNumber := '555-3116'
+
+!new Cook('cook60')
+!cook60.name := 'Ravi Desai'
+!cook60.dateOfBirth := Date('1991-04-09')
+!cook60.phoneNumber := '555-3120'
+!cook60.yearsOfExperience := 7
+
+!new Cook('cook61')
+!cook61.name := 'Anna Popov'
+!cook61.dateOfBirth := Date('1998-12-30')
+!cook61.phoneNumber := '555-3121'
+!cook61.yearsOfExperience := 1
+
+!new Cook('cook62')
+!cook62.name := 'Luis Pereira'
+!cook62.dateOfBirth := Date('1989-02-11')
+!cook62.phoneNumber := '555-3122'
+!cook62.yearsOfExperience := 12
+
+!insert (chef40, cook60) into ChefCook
+!insert (chef40, cook61) into ChefCook
+!insert (chef41, cook62) into ChefCook
+
+!new Allergen('alg25Gluten')
+!alg25Gluten.type := #Gluten
+!new Allergen('alg25Lactose')
+!alg25Lactose.type := #Lactose
+!new Allergen('alg25Nuts')
+!alg25Nuts.type := #Nuts
+
+!new FoodItem('fiPhylloSheets25')
+!fiPhylloSheets25.number := 1801
+!fiPhylloSheets25.description := 'Phyllo pastry sheets'
+!fiPhylloSheets25.purchaseFlag := true
+!fiPhylloSheets25.unit := #Sheet
+
+!new FoodItem('fiFeta25')
+!fiFeta25.number := 1802
+!fiFeta25.description := 'Feta cheese'
+!fiFeta25.purchaseFlag := true
+!fiFeta25.unit := #Ounce
+
+!new FoodItem('fiSpinach25')
+!fiSpinach25.number := 1803
+!fiSpinach25.description := 'Baby spinach'
+!fiSpinach25.purchaseFlag := true
+!fiSpinach25.unit := #Gram
+
+!new FoodItem('fiWalnuts25')
+!fiWalnuts25.number := 1804
+!fiWalnuts25.description := 'Walnuts'
+!fiWalnuts25.purchaseFlag := true
+!fiWalnuts25.unit := #Ounce
+
+!new FoodItem('fiHoney25')
+!fiHoney25.number := 1805
+!fiHoney25.description := 'Honey'
+!fiHoney25.purchaseFlag := true
+!fiHoney25.unit := #Ounce
+
+!new FoodItem('fiCoffeeBeans25')
+!fiCoffeeBeans25.number := 1806
+!fiCoffeeBeans25.description := 'Coffee beans'
+!fiCoffeeBeans25.purchaseFlag := true
+!fiCoffeeBeans25.unit := #Pound
+
+!new FoodItem('fiLemon25')
+!fiLemon25.number := 1807
+!fiLemon25.description := 'Lemons'
+!fiLemon25.purchaseFlag := true
+!fiLemon25.unit := #Dozen
+
+!insert (fiPhylloSheets25, alg25Gluten) into FoodItemAllergen
+!insert (fiFeta25, alg25Lactose) into FoodItemAllergen
+!insert (fiWalnuts25, alg25Nuts) into FoodItemAllergen
+
+!new MenuItem('miSpanakopita25')
+!miSpanakopita25.description := 'Spanakopita triangle'
+!miSpanakopita25.prepTime := 14.0
+!miSpanakopita25.classification := #Apetizer
+
+!new MenuItem('miBaklava25')
+!miBaklava25.description := 'Baklava square'
+!miBaklava25.prepTime := 10.0
+!miBaklava25.classification := #Dessert
+
+!new MenuItem('miEspresso25')
+!miEspresso25.description := 'Espresso'
+!miEspresso25.prepTime := 2.0
+!miEspresso25.classification := #Beverage
+
+!new MenuItem('miLemonTea25')
+!miLemonTea25.description := 'Hot lemon tea'
+!miLemonTea25.prepTime := 3.0
+!miLemonTea25.classification := #Beverage
+
+!new MenuItem('miCourtyardPlatter25')
+!miCourtyardPlatter25.description := 'Courtyard lunch platter (spinach pie + salad)'
+!miCourtyardPlatter25.prepTime := 18.0
+!miCourtyardPlatter25.classification := #Main
+
+!insert (miSpanakopita25, chef40) into MenuItemChef
+!insert (miCourtyardPlatter25, chef40) into MenuItemChef
+!insert (miBaklava25, chef41) into MenuItemChef
+!insert (miEspresso25, chef41) into MenuItemChef
+!insert (miLemonTea25, chef41) into MenuItemChef
+
+!insert (miSpanakopita25, fiPhylloSheets25) into MenuItemFoodItem
+!insert (miSpanakopita25, fiSpinach25) into MenuItemFoodItem
+!insert (miSpanakopita25, fiFeta25) into MenuItemFoodItem
+
+!insert (miCourtyardPlatter25, fiPhylloSheets25) into MenuItemFoodItem
+!insert (miCourtyardPlatter25, fiSpinach25) into MenuItemFoodItem
+!insert (miCourtyardPlatter25, fiFeta25) into MenuItemFoodItem
+
+!insert (miBaklava25, fiPhylloSheets25) into MenuItemFoodItem
+!insert (miBaklava25, fiWalnuts25) into MenuItemFoodItem
+!insert (miBaklava25, fiHoney25) into MenuItemFoodItem
+
+!insert (miEspresso25, fiCoffeeBeans25) into MenuItemFoodItem
+!insert (miLemonTea25, fiLemon25) into MenuItemFoodItem
+!insert (miLemonTea25, fiHoney25) into MenuItemFoodItem
+
+!new RegularCustomer('cust30')
+!cust30.name := 'Greta Ivanova'
+!cust30.prefferedLanguage := #German
+
+!new Individual('res30')
+!res30.time := Time('12:20')
+!res30.date := Date('2027-08-18')
+!res30.numberPeople := 3
+!res30.name := 'Greta Ivanova'
+!res30.phoneNumber := '555-3130'
+!res30.number := 31001
+!res30.seating := #Patio
+!res30.smoking := #NonSmoking
+
+!insert (rest25, res30) into RestaurantReservation
+!insert (res30, cust30) into ReservationCustomer
+!insert (res30, w62) into ReservationWaiter
+
+!new Table('tRes30A')
+!tRes30A.number := 14
+!tRes30A.description := 'Courtyard three-top'
+!tRes30A.capacity := 4
+!insert (res30, tRes30A) into ReservationTable
+
+!new ItemOrder('ioRes30_1')
+!ioRes30_1.time := Time('12:30')
+!insert (res30, ioRes30_1) into ReservationItemOrdered
+!insert (ioRes30_1, miSpanakopita25) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes30_2')
+!ioRes30_2.time := Time('12:45')
+!insert (res30, ioRes30_2) into ReservationItemOrdered
+!insert (ioRes30_2, miCourtyardPlatter25) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes30_3')
+!ioRes30_3.time := Time('13:05')
+!insert (res30, ioRes30_3) into ReservationItemOrdered
+!insert (ioRes30_3, miEspresso25) into ItemOrderMenuItem
+
+!new BusDriver('bd30')
+!bd30.name := 'Ivan Petrenko'
+!bd30.dateOfBirth := Date('1970-12-15')
+!bd30.phoneNumber := '555-3140'
+!bd30.driverLicenseNr := 'D-6001442'
+
+!new Banquet('banq30')
+!banq30.time := Time('16:00')
+!banq30.date := Date('2027-08-18')
+!banq30.numberPeople := 10
+!banq30.name := 'Docent Training Group'
+!banq30.phoneNumber := '555-3131'
+!banq30.number := 32001
+!banq30.groupName := 'New Docents Session'
+!banq30.paymentMethod := #CreditCard
+!banq30.busService := true
+
+!insert (rest25, banq30) into RestaurantReservation
+!insert (banq30, w60) into ReservationWaiter
+!insert (banq30, w61) into ReservationWaiter
+!insert (banq30, bd30) into BanquetBusDriver
+
+!new Table('tBanq30A')
+!tBanq30A.number := 40
+!tBanq30A.description := 'Indoor training room table A'
+!tBanq30A.capacity := 6
+!insert (banq30, tBanq30A) into ReservationTable
+
+!new Table('tBanq30B')
+!tBanq30B.number := 41
+!tBanq30B.description := 'Indoor training room table B'
+!tBanq30B.capacity := 4
+!insert (banq30, tBanq30B) into ReservationTable
+
+!new ItemOrder('ioBanq30_1')
+!ioBanq30_1.time := Time('16:10')
+!insert (banq30, ioBanq30_1) into ReservationItemOrdered
+!insert (ioBanq30_1, miLemonTea25) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq30_2')
+!ioBanq30_2.time := Time('16:25')
+!insert (banq30, ioBanq30_2) into ReservationItemOrdered
+!insert (ioBanq30_2, miCourtyardPlatter25) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq30_3')
+!ioBanq30_3.time := Time('16:40')
+!insert (banq30, ioBanq30_3) into ReservationItemOrdered
+!insert (ioBanq30_3, miBaklava25) into ItemOrderMenuItem
+
+!new Individual('res31')
+!res31.time := Time('09:10')
+!res31.date := Date('2027-08-19')
+!res31.numberPeople := 2
+!res31.name := 'Standby Guests'
+!res31.phoneNumber := '555-3132'
+!res31.number := 31002
+!res31.seating := #Inside
+!res31.smoking := #NonSmoking
+
+!insert (rest25, res31) into RestaurantReservation
+!insert (res31, w61) into ReservationWaiter
+
+!new Table('tRes31A')
+!tRes31A.number := 2
+!tRes31A.description := 'Small indoor two-top'
+!tRes31A.capacity := 2
+!insert (res31, tRes31A) into ReservationTable
+
+!new ItemOrder('ioRes31_1')
+!ioRes31_1.time := Time('09:20')
+!insert (res31, ioRes31_1) into ReservationItemOrdered
+!insert (ioRes31_1, miEspresso25) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq30')
+!dietReq30.diet := #Vegan
+
+!new ReportedAllergy('repAlg30')
+!repAlg30.allergen := #Nuts

@@ -1,0 +1,264 @@
+!new StateMachine('smSatelliteComm')
+!smSatelliteComm.name := 'satelliteLinkController'
+
+!new State('scOff')
+!scOff.name := 'off'
+!new State('scInitializing')
+!scInitializing.name := 'initializing'
+!new State('scAcquiring')
+!scAcquiring.name := 'acquiringSignal'
+!new State('scConnected')
+!scConnected.name := 'connected'
+!new State('scTransferring')
+!scTransferring.name := 'transferring'
+!new State('scStandby')
+!scStandby.name := 'standby'
+!new State('scFault')
+!scFault.name := 'fault'
+
+!insert (smSatelliteComm, scOff) into StateMachineContainsStates
+!insert (smSatelliteComm, scInitializing) into StateMachineContainsStates
+!insert (smSatelliteComm, scAcquiring) into StateMachineContainsStates
+!insert (smSatelliteComm, scConnected) into StateMachineContainsStates
+!insert (smSatelliteComm, scTransferring) into StateMachineContainsStates
+!insert (smSatelliteComm, scStandby) into StateMachineContainsStates
+!insert (smSatelliteComm, scFault) into StateMachineContainsStates
+
+!insert (smSatelliteComm, scOff) into StateMachineStartsStates
+
+
+!new Transition('trScPowerOn')
+!trScPowerOn.name := 'powerOn'
+!new TimeEvent('evScPowerOn')
+!evScPowerOn.time := 1
+
+!new Transition('trScInitDone')
+!trScInitDone.name := 'initDone'
+!new TimeEvent('evScInitDone')
+!evScInitDone.time := 8
+
+!new Transition('trScAcquireOk')
+!trScAcquireOk.name := 'acquireOk'
+!new TimeEvent('evScAcquireOk')
+!evScAcquireOk.time := 25
+
+!new Transition('trScAcquireFail')
+!trScAcquireFail.name := 'acquireFail'
+!new TimeEvent('evScAcquireFail')
+!evScAcquireFail.time := 40
+
+!new Transition('trScStartTransfer')
+!trScStartTransfer.name := 'startTransfer'
+!new TimeEvent('evScStartTransfer')
+!evScStartTransfer.time := 2
+
+!new Transition('trScTransferDone')
+!trScTransferDone.name := 'transferDone'
+!new TimeEvent('evScTransferDone')
+!evScTransferDone.time := 90
+
+!new Transition('trScIdleTimeout')
+!trScIdleTimeout.name := 'idleTimeout'
+!new TimeEvent('evScIdleTimeout')
+!evScIdleTimeout.time := 300
+
+!new Transition('trScWakeForTelemetry')
+!trScWakeForTelemetry.name := 'wakeForTelemetry'
+!new TimeEvent('evScWakeForTelemetry')
+!evScWakeForTelemetry.time := 60
+
+!new Transition('trScSignalLost')
+!trScSignalLost.name := 'signalLost'
+!new TimeEvent('evScSignalLost')
+!evScSignalLost.time := 1
+
+!new Transition('trScResetFromFault')
+!trScResetFromFault.name := 'resetFromFault'
+!new TimeEvent('evScResetFromFault')
+!evScResetFromFault.time := 120
+
+
+!insert (smSatelliteComm, trScPowerOn) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScInitDone) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScAcquireOk) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScAcquireFail) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScStartTransfer) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScTransferDone) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScIdleTimeout) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScWakeForTelemetry) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScSignalLost) into StateMachineContainsTransitions
+!insert (smSatelliteComm, trScResetFromFault) into StateMachineContainsTransitions
+
+!insert (trScPowerOn, evScPowerOn) into TransitionContainsEvents
+!insert (trScInitDone, evScInitDone) into TransitionContainsEvents
+!insert (trScAcquireOk, evScAcquireOk) into TransitionContainsEvents
+!insert (trScAcquireFail, evScAcquireFail) into TransitionContainsEvents
+!insert (trScStartTransfer, evScStartTransfer) into TransitionContainsEvents
+!insert (trScTransferDone, evScTransferDone) into TransitionContainsEvents
+!insert (trScIdleTimeout, evScIdleTimeout) into TransitionContainsEvents
+!insert (trScWakeForTelemetry, evScWakeForTelemetry) into TransitionContainsEvents
+!insert (trScSignalLost, evScSignalLost) into TransitionContainsEvents
+!insert (trScResetFromFault, evScResetFromFault) into TransitionContainsEvents
+
+
+!insert (scOff, trScPowerOn) into StateTransition
+!insert (trScPowerOn, scInitializing) into TransitionState
+
+!insert (scInitializing, trScInitDone) into StateTransition
+!insert (trScInitDone, scAcquiring) into TransitionState
+
+!insert (scAcquiring, trScAcquireOk) into StateTransition
+!insert (trScAcquireOk, scConnected) into TransitionState
+
+!insert (scAcquiring, trScAcquireFail) into StateTransition
+!insert (trScAcquireFail, scFault) into TransitionState
+
+!insert (scConnected, trScStartTransfer) into StateTransition
+!insert (trScStartTransfer, scTransferring) into TransitionState
+
+!insert (scTransferring, trScTransferDone) into StateTransition
+!insert (trScTransferDone, scConnected) into TransitionState
+
+!insert (scConnected, trScIdleTimeout) into StateTransition
+!insert (trScIdleTimeout, scStandby) into TransitionState
+
+!insert (scStandby, trScWakeForTelemetry) into StateTransition
+!insert (trScWakeForTelemetry, scConnected) into TransitionState
+
+!insert (scTransferring, trScSignalLost) into StateTransition
+!insert (trScSignalLost, scAcquiring) into TransitionState
+
+!insert (scFault, trScResetFromFault) into StateTransition
+!insert (trScResetFromFault, scOff) into TransitionState
+
+
+
+!new StateMachine('smOrchardIrrigation')
+!smOrchardIrrigation.name := 'orchardIrrigation'
+
+!new State('irIdle')
+!irIdle.name := 'idle'
+!new State('irCheckingWeather')
+!irCheckingWeather.name := 'checkingWeather'
+!new State('irWatering')
+!irWatering.name := 'watering'
+!new State('irSoaking')
+!irSoaking.name := 'soaking'
+!new State('irPaused')
+!irPaused.name := 'paused'
+!new State('irError')
+!irError.name := 'error'
+
+!insert (smOrchardIrrigation, irIdle) into StateMachineContainsStates
+!insert (smOrchardIrrigation, irCheckingWeather) into StateMachineContainsStates
+!insert (smOrchardIrrigation, irWatering) into StateMachineContainsStates
+!insert (smOrchardIrrigation, irSoaking) into StateMachineContainsStates
+!insert (smOrchardIrrigation, irPaused) into StateMachineContainsStates
+!insert (smOrchardIrrigation, irError) into StateMachineContainsStates
+
+!insert (smOrchardIrrigation, irIdle) into StateMachineStartsStates
+
+
+!new Transition('trIrScheduleTick')
+!trIrScheduleTick.name := 'scheduleTick'
+!new TimeEvent('evIrScheduleTick')
+!evIrScheduleTick.time := 360
+
+!new Transition('trIrWeatherOk')
+!trIrWeatherOk.name := 'weatherOk'
+!new TimeEvent('evIrWeatherOk')
+!evIrWeatherOk.time := 6
+
+!new Transition('trIrWeatherRain')
+!trIrWeatherRain.name := 'weatherRain'
+!new TimeEvent('evIrWeatherRain')
+!evIrWeatherRain.time := 6
+
+!new Transition('trIrWateringComplete')
+!trIrWateringComplete.name := 'wateringComplete'
+!new TimeEvent('evIrWateringComplete')
+!evIrWateringComplete.time := 45
+
+!new Transition('trIrSoakComplete')
+!trIrSoakComplete.name := 'soakComplete'
+!new TimeEvent('evIrSoakComplete')
+!evIrSoakComplete.time := 30
+
+!new Transition('trIrUserPause')
+!trIrUserPause.name := 'userPause'
+!new TimeEvent('evIrUserPause')
+!evIrUserPause.time := 1
+
+!new Transition('trIrResume')
+!trIrResume.name := 'resume'
+!new TimeEvent('evIrResume')
+!evIrResume.time := 1
+
+!new Transition('trIrLeakDetected')
+!trIrLeakDetected.name := 'leakDetected'
+!new TimeEvent('evIrLeakDetected')
+!evIrLeakDetected.time := 1
+
+!new Transition('trIrResetSystem')
+!trIrResetSystem.name := 'resetSystem'
+!new TimeEvent('evIrResetSystem')
+!evIrResetSystem.time := 20
+
+!new Transition('trIrHealthPing')
+!trIrHealthPing.name := 'healthPing'
+!new TimeEvent('evIrHealthPing')
+!evIrHealthPing.time := 600
+
+
+!insert (smOrchardIrrigation, trIrScheduleTick) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrWeatherOk) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrWeatherRain) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrWateringComplete) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrSoakComplete) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrUserPause) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrResume) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrLeakDetected) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrResetSystem) into StateMachineContainsTransitions
+!insert (smOrchardIrrigation, trIrHealthPing) into StateMachineContainsTransitions
+
+!insert (trIrScheduleTick, evIrScheduleTick) into TransitionContainsEvents
+!insert (trIrWeatherOk, evIrWeatherOk) into TransitionContainsEvents
+!insert (trIrWeatherRain, evIrWeatherRain) into TransitionContainsEvents
+!insert (trIrWateringComplete, evIrWateringComplete) into TransitionContainsEvents
+!insert (trIrSoakComplete, evIrSoakComplete) into TransitionContainsEvents
+!insert (trIrUserPause, evIrUserPause) into TransitionContainsEvents
+!insert (trIrResume, evIrResume) into TransitionContainsEvents
+!insert (trIrLeakDetected, evIrLeakDetected) into TransitionContainsEvents
+!insert (trIrResetSystem, evIrResetSystem) into TransitionContainsEvents
+!insert (trIrHealthPing, evIrHealthPing) into TransitionContainsEvents
+
+
+!insert (irIdle, trIrScheduleTick) into StateTransition
+!insert (trIrScheduleTick, irCheckingWeather) into TransitionState
+
+!insert (irCheckingWeather, trIrWeatherOk) into StateTransition
+!insert (trIrWeatherOk, irWatering) into TransitionState
+
+!insert (irCheckingWeather, trIrWeatherRain) into StateTransition
+!insert (trIrWeatherRain, irIdle) into TransitionState
+
+!insert (irWatering, trIrWateringComplete) into StateTransition
+!insert (trIrWateringComplete, irSoaking) into TransitionState
+
+!insert (irSoaking, trIrSoakComplete) into StateTransition
+!insert (trIrSoakComplete, irIdle) into TransitionState
+
+!insert (irWatering, trIrUserPause) into StateTransition
+!insert (trIrUserPause, irPaused) into TransitionState
+
+!insert (irPaused, trIrResume) into StateTransition
+!insert (trIrResume, irWatering) into TransitionState
+
+!insert (irWatering, trIrLeakDetected) into StateTransition
+!insert (trIrLeakDetected, irError) into TransitionState
+
+!insert (irError, trIrResetSystem) into StateTransition
+!insert (trIrResetSystem, irIdle) into TransitionState
+
+!insert (irIdle, trIrHealthPing) into StateTransition
+!insert (trIrHealthPing, irIdle) into TransitionState

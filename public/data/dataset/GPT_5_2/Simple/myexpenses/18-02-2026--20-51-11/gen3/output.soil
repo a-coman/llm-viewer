@@ -1,0 +1,35 @@
+!new Currency('curUSD')
+!curUSD.name := 'US Dollar'
+!curUSD.abbreviation := 'USD'
+
+!new Expense('expAprLaptopPurchase')
+!expAprLaptopPurchase.amount := 1299.00
+!expAprLaptopPurchase.startDate := Date('2026-04-22')
+!expAprLaptopPurchase.endDate := Date('2026-04-22')
+
+!new Bill('billLaptop_2026_04_22')
+!billLaptop_2026_04_22.amount := 1299.00
+!billLaptop_2026_04_22.category := 'Equipment - Laptop'
+!billLaptop_2026_04_22.date := Date('2026-04-22')
+!billLaptop_2026_04_22.paymentMethod := #CREDIT_CARD
+!billLaptop_2026_04_22.status := #DRAFT
+
+!insert (expAprLaptopPurchase, billLaptop_2026_04_22) into ExpenseContainsBills
+!insert (billLaptop_2026_04_22, curUSD) into BillCurrency
+
+!new Comment('cmtLaptop1')
+!cmtLaptop1.text := 'New development laptop intended for work projects.'
+!new Comment('cmtLaptop2')
+!cmtLaptop2.text := 'Draft bill: waiting for the invoice PDF from the vendor.'
+!new Comment('cmtLaptop3')
+!cmtLaptop3.text := 'Serial number recorded in asset register.'
+!new Comment('cmtLaptop4')
+!cmtLaptop4.text := 'Extended warranty included in the purchase price.'
+!new Comment('cmtLaptop5')
+!cmtLaptop5.text := 'Needs manager approval before reimbursement submission.'
+
+!insert (expAprLaptopPurchase, cmtLaptop1) into ExpenseComment
+!insert (expAprLaptopPurchase, cmtLaptop2) into ExpenseComment
+!insert (expAprLaptopPurchase, cmtLaptop3) into ExpenseComment
+!insert (expAprLaptopPurchase, cmtLaptop4) into ExpenseComment
+!insert (expAprLaptopPurchase, cmtLaptop5) into ExpenseComment

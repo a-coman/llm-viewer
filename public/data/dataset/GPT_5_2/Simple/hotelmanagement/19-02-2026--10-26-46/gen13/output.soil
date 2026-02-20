@@ -1,0 +1,51 @@
+!new Booking('booking15')
+!booking15.startDate := '2027-11-28'
+!booking15.endDate := '2027-11-29'
+!booking15.canceled := false
+!booking15.bookingId := 9300
+!booking15.confirmed := true
+
+!new Customer('customer15')
+!customer15.firstName := 'Yuki'
+!customer15.lastName := 'Sato'
+
+!insert (booking15, customer15) into BookingCustomer
+
+!new RoomReservation('rr21')
+!rr21.checkInDate := '2027-11-28'
+!rr21.checkOutDate := '2027-11-29'
+
+!insert (booking15, rr21) into BookingRoomReservation
+
+!new Room('room055')
+!room055.roomNumber := 55
+!room055.numBeds := 1
+!room055.pricePerNight := 75.5
+!room055.occupied := false
+!room055.blocked := true
+
+!insert (rr21, room055) into RoomReservationRoom
+
+!new RoomExtra('extraLoyaltyRedemption')
+!extraLoyaltyRedemption.price := 0.0
+!extraLoyaltyRedemption.description := 'Loyalty points redemption'
+
+!new RoomExtra('extraTourismFee')
+!extraTourismFee.price := 7.5
+!extraTourismFee.description := 'Local tourism fee'
+
+!insert (rr21, extraLoyaltyRedemption) into RoomReservationExtras
+!insert (rr21, extraTourismFee) into RoomReservationExtras
+
+!new Bill('bill22')
+!bill22.billId := 15001
+!bill22.price := 7.5
+
+!insert (bill22, rr21) into BillRoomReservation
+!insert (booking15, bill22) into BookingBill
+
+!new FreeRoomTypesDTO('dtoLastMinuteSingle')
+!dtoLastMinuteSingle.roomTypeDescription := 'Last-minute single (compact)'
+!dtoLastMinuteSingle.numBeds := 1
+!dtoLastMinuteSingle.pricePerNight := 75.5
+!dtoLastMinuteSingle.numFreeRooms := 1

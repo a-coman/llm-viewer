@@ -1,0 +1,341 @@
+!new Restaurant('rest29')
+!rest29.name := 'Canyon Steakhouse'
+
+!new Owner('own70')
+!own70.name := 'Derek Lawson'
+!own70.percentageShares := 50
+
+!new Owner('own71')
+!own71.name := 'Inez Castillo'
+!own71.percentageShares := 30
+
+!new Owner('own72')
+!own72.name := 'Marek Nowicki'
+!own72.percentageShares := 20
+
+!insert (rest29, own70) into RestaurantOwner
+!insert (rest29, own71) into RestaurantOwner
+!insert (rest29, own72) into RestaurantOwner
+
+!new HeadWaiter('hw40')
+!hw40.name := 'Kylie Morgan'
+!hw40.dateOfBirth := Date('1987-07-02')
+!hw40.phoneNumber := '555-6100'
+
+!new HeadWaiter('hw41')
+!hw41.name := 'Bruno Silva'
+!hw41.dateOfBirth := Date('1983-09-14')
+!hw41.phoneNumber := '555-6101'
+
+!new Waiter('w70')
+!w70.name := 'Paula Reyes'
+!w70.dateOfBirth := Date('1999-02-12')
+!w70.phoneNumber := '555-6110'
+!w70.spokenLanguage := #Spanish
+
+!new Waiter('w71')
+!w71.name := 'Jonas Hartmann'
+!w71.dateOfBirth := Date('1994-10-03')
+!w71.phoneNumber := '555-6111'
+!w71.spokenLanguage := #German
+
+!new Waiter('w72')
+!w72.name := 'Luca Baresi'
+!w72.dateOfBirth := Date('1996-05-21')
+!w72.phoneNumber := '555-6112'
+!w72.spokenLanguage := #Italian
+
+!insert (hw40, w70) into HeadWaiterWaiter
+!insert (hw40, w71) into HeadWaiterWaiter
+!insert (hw41, w72) into HeadWaiterWaiter
+
+!new Manager('mgr9')
+!mgr9.name := 'Janet Price'
+!mgr9.dateOfBirth := Date('1979-01-27')
+!mgr9.phoneNumber := '555-6120'
+
+!new Chef('chef47')
+!chef47.name := 'Antonio Ferrer'
+!chef47.dateOfBirth := Date('1976-03-15')
+!chef47.phoneNumber := '555-6200'
+
+!new Chef('chef48')
+!chef48.name := 'Hannah Vogel'
+!chef48.dateOfBirth := Date('1981-11-06')
+!chef48.phoneNumber := '555-6201'
+
+!new Cook('cook70')
+!cook70.name := 'Mina Cho'
+!cook70.dateOfBirth := Date('1992-08-19')
+!cook70.phoneNumber := '555-6210'
+!cook70.yearsOfExperience := 9
+
+!new Cook('cook71')
+!cook71.name := 'Victor Santos'
+!cook71.dateOfBirth := Date('1998-04-04')
+!cook71.phoneNumber := '555-6211'
+!cook71.yearsOfExperience := 2
+
+!new Cook('cook72')
+!cook72.name := 'Elif Kaya'
+!cook72.dateOfBirth := Date('1990-12-02')
+!cook72.phoneNumber := '555-6212'
+!cook72.yearsOfExperience := 11
+
+!insert (chef47, cook70) into ChefCook
+!insert (chef47, cook71) into ChefCook
+!insert (chef48, cook72) into ChefCook
+
+!new Allergen('alg29Gluten')
+!alg29Gluten.type := #Gluten
+!new Allergen('alg29Lactose')
+!alg29Lactose.type := #Lactose
+!new Allergen('alg29Nuts')
+!alg29Nuts.type := #Nuts
+
+!new FoodItem('fiRibeye29')
+!fiRibeye29.number := 2201
+!fiRibeye29.description := 'Ribeye steak'
+!fiRibeye29.purchaseFlag := true
+!fiRibeye29.unit := #Pound
+
+!new FoodItem('fiPotatoes29')
+!fiPotatoes29.number := 2202
+!fiPotatoes29.description := 'Yukon gold potatoes'
+!fiPotatoes29.purchaseFlag := true
+!fiPotatoes29.unit := #Pound
+
+!new FoodItem('fiFlour29')
+!fiFlour29.number := 2203
+!fiFlour29.description := 'Wheat flour'
+!fiFlour29.purchaseFlag := true
+!fiFlour29.unit := #Pound
+
+!new FoodItem('fiButter29')
+!fiButter29.number := 2204
+!fiButter29.description := 'Butter'
+!fiButter29.purchaseFlag := true
+!fiButter29.unit := #Ounce
+
+!new FoodItem('fiLettuce29')
+!fiLettuce29.number := 2205
+!fiLettuce29.description := 'Romaine lettuce'
+!fiLettuce29.purchaseFlag := true
+!fiLettuce29.unit := #Gram
+
+!new FoodItem('fiParmesan29')
+!fiParmesan29.number := 2206
+!fiParmesan29.description := 'Parmesan'
+!fiParmesan29.purchaseFlag := true
+!fiParmesan29.unit := #Ounce
+
+!new FoodItem('fiWalnuts29')
+!fiWalnuts29.number := 2207
+!fiWalnuts29.description := 'Walnuts'
+!fiWalnuts29.purchaseFlag := true
+!fiWalnuts29.unit := #Ounce
+
+!new FoodItem('fiCoffee29')
+!fiCoffee29.number := 2208
+!fiCoffee29.description := 'Espresso beans'
+!fiCoffee29.purchaseFlag := true
+!fiCoffee29.unit := #Pound
+
+!insert (fiFlour29, alg29Gluten) into FoodItemAllergen
+!insert (fiButter29, alg29Lactose) into FoodItemAllergen
+!insert (fiParmesan29, alg29Lactose) into FoodItemAllergen
+!insert (fiWalnuts29, alg29Nuts) into FoodItemAllergen
+
+!new MenuItem('miRibeyePlate29')
+!miRibeyePlate29.description := 'Ribeye with mashed potatoes'
+!miRibeyePlate29.prepTime := 24.0
+!miRibeyePlate29.classification := #Main
+
+!new MenuItem('miCaesarSalad29')
+!miCaesarSalad29.description := 'Caesar salad with parmesan'
+!miCaesarSalad29.prepTime := 6.0
+!miCaesarSalad29.classification := #Apetizer
+
+!new MenuItem('miWalnutCheesecake29')
+!miWalnutCheesecake29.description := 'Walnut cheesecake slice'
+!miWalnutCheesecake29.prepTime := 9.0
+!miWalnutCheesecake29.classification := #Dessert
+
+!new MenuItem('miEspresso29')
+!miEspresso29.description := 'Espresso'
+!miEspresso29.prepTime := 1.5
+!miEspresso29.classification := #Beverage
+
+!insert (miRibeyePlate29, chef47) into MenuItemChef
+!insert (miCaesarSalad29, chef47) into MenuItemChef
+!insert (miWalnutCheesecake29, chef48) into MenuItemChef
+!insert (miEspresso29, chef48) into MenuItemChef
+
+!insert (miRibeyePlate29, fiRibeye29) into MenuItemFoodItem
+!insert (miRibeyePlate29, fiPotatoes29) into MenuItemFoodItem
+!insert (miRibeyePlate29, fiButter29) into MenuItemFoodItem
+
+!insert (miCaesarSalad29, fiLettuce29) into MenuItemFoodItem
+!insert (miCaesarSalad29, fiParmesan29) into MenuItemFoodItem
+
+!insert (miWalnutCheesecake29, fiFlour29) into MenuItemFoodItem
+!insert (miWalnutCheesecake29, fiButter29) into MenuItemFoodItem
+!insert (miWalnutCheesecake29, fiWalnuts29) into MenuItemFoodItem
+
+!insert (miEspresso29, fiCoffee29) into MenuItemFoodItem
+
+!new RegularCustomer('cust40')
+!cust40.name := 'Elsa Richter'
+!cust40.prefferedLanguage := #German
+
+!new RegularCustomer('cust41')
+!cust41.name := 'Diego Navarro'
+!cust41.prefferedLanguage := #Spanish
+
+!new Individual('res40')
+!res40.time := Time('18:15')
+!res40.date := Date('2027-12-06')
+!res40.numberPeople := 5
+!res40.name := 'Diego Navarro'
+!res40.phoneNumber := '555-6300'
+!res40.number := 50001
+!res40.seating := #Inside
+!res40.smoking := #NonSmoking
+
+!insert (rest29, res40) into RestaurantReservation
+!insert (res40, cust41) into ReservationCustomer
+!insert (res40, w70) into ReservationWaiter
+!insert (res40, w71) into ReservationWaiter
+
+!new Table('tRes40A')
+!tRes40A.number := 12
+!tRes40A.description := 'Inside four-top'
+!tRes40A.capacity := 4
+
+!new Table('tRes40B')
+!tRes40B.number := 13
+!tRes40B.description := 'Add-on side chair table'
+!tRes40B.capacity := 2
+
+!insert (res40, tRes40A) into ReservationTable
+!insert (res40, tRes40B) into ReservationTable
+
+!new ItemOrder('ioRes40_1')
+!ioRes40_1.time := Time('18:25')
+!insert (res40, ioRes40_1) into ReservationItemOrdered
+!insert (ioRes40_1, miCaesarSalad29) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes40_2')
+!ioRes40_2.time := Time('18:50')
+!insert (res40, ioRes40_2) into ReservationItemOrdered
+!insert (ioRes40_2, miRibeyePlate29) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes40_3')
+!ioRes40_3.time := Time('19:20')
+!insert (res40, ioRes40_3) into ReservationItemOrdered
+!insert (ioRes40_3, miEspresso29) into ItemOrderMenuItem
+
+!new Individual('res41')
+!res41.time := Time('22:05')
+!res41.date := Date('2027-12-06')
+!res41.numberPeople := 2
+!res41.name := 'Late Night Guests'
+!res41.phoneNumber := '555-6301'
+!res41.number := 50002
+!res41.seating := #Patio
+!res41.smoking := #Smoking
+
+!insert (rest29, res41) into RestaurantReservation
+!insert (res41, w72) into ReservationWaiter
+
+!new Table('tRes41A')
+!tRes41A.number := 30
+!tRes41A.description := 'Heated patio two-top'
+!tRes41A.capacity := 2
+!insert (res41, tRes41A) into ReservationTable
+
+!new ItemOrder('ioRes41_1')
+!ioRes41_1.time := Time('22:15')
+!insert (res41, ioRes41_1) into ReservationItemOrdered
+!insert (ioRes41_1, miWalnutCheesecake29) into ItemOrderMenuItem
+
+!new BusDriver('bd41')
+!bd41.name := 'Karen Blake'
+!bd41.dateOfBirth := Date('1972-02-20')
+!bd41.phoneNumber := '555-6400'
+!bd41.driverLicenseNr := 'D-2018459'
+
+!new BusDriver('bd42')
+!bd42.name := 'Said Farouk'
+!bd42.dateOfBirth := Date('1968-09-09')
+!bd42.phoneNumber := '555-6401'
+!bd42.driverLicenseNr := 'D-7702441'
+
+!new Banquet('banq40')
+!banq40.time := Time('12:00')
+!banq40.date := Date('2027-12-07')
+!banq40.numberPeople := 60
+!banq40.name := 'Elsa Richter'
+!banq40.phoneNumber := '555-6500'
+!banq40.number := 60001
+!banq40.groupName := 'Winter Charity Luncheon'
+!banq40.paymentMethod := #CreditCard
+!banq40.busService := true
+
+!insert (rest29, banq40) into RestaurantReservation
+!insert (banq40, cust40) into ReservationCustomer
+!insert (banq40, w70) into ReservationWaiter
+!insert (banq40, w71) into ReservationWaiter
+!insert (banq40, w72) into ReservationWaiter
+!insert (banq40, bd41) into BanquetBusDriver
+!insert (banq40, bd42) into BanquetBusDriver
+
+!new Table('tBanq40A')
+!tBanq40A.number := 201
+!tBanq40A.description := 'Banquet table A'
+!tBanq40A.capacity := 20
+!insert (banq40, tBanq40A) into ReservationTable
+
+!new Table('tBanq40B')
+!tBanq40B.number := 202
+!tBanq40B.description := 'Banquet table B'
+!tBanq40B.capacity := 20
+!insert (banq40, tBanq40B) into ReservationTable
+
+!new Table('tBanq40C')
+!tBanq40C.number := 203
+!tBanq40C.description := 'Banquet table C'
+!tBanq40C.capacity := 10
+!insert (banq40, tBanq40C) into ReservationTable
+
+!new Table('tBanq40D')
+!tBanq40D.number := 204
+!tBanq40D.description := 'Banquet table D'
+!tBanq40D.capacity := 10
+!insert (banq40, tBanq40D) into ReservationTable
+
+!new ItemOrder('ioBanq40_1')
+!ioBanq40_1.time := Time('12:10')
+!insert (banq40, ioBanq40_1) into ReservationItemOrdered
+!insert (ioBanq40_1, miCaesarSalad29) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq40_2')
+!ioBanq40_2.time := Time('12:35')
+!insert (banq40, ioBanq40_2) into ReservationItemOrdered
+!insert (ioBanq40_2, miRibeyePlate29) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq40_3')
+!ioBanq40_3.time := Time('13:05')
+!insert (banq40, ioBanq40_3) into ReservationItemOrdered
+!insert (ioBanq40_3, miWalnutCheesecake29) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq40_4')
+!ioBanq40_4.time := Time('13:15')
+!insert (banq40, ioBanq40_4) into ReservationItemOrdered
+!insert (ioBanq40_4, miEspresso29) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq40')
+!dietReq40.diet := #Halal
+
+!new ReportedAllergy('repAlg40')
+!repAlg40.allergen := #Nuts

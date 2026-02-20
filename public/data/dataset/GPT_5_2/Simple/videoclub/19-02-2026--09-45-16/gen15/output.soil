@@ -1,0 +1,71 @@
+!new Client('cA')
+!cA.clientId := 1201
+!cA.isSuspended := false
+
+!new Client('cB')
+!cB.clientId := 1202
+!cB.isSuspended := false
+
+!new Client('cC')
+!cC.clientId := 1203
+!cC.isSuspended := true
+
+!new Client('cD')
+!cD.clientId := 1204
+!cD.isSuspended := false
+
+!new Client('cE')
+!cE.clientId := 1205
+!cE.isSuspended := true
+
+!new Client('cF')
+!cF.clientId := 1206
+!cF.isSuspended := false
+
+!new Actor('actCore')
+!actCore.name := 'Morgan Ellis'
+
+!new Actor('actGuest1')
+!actGuest1.name := 'Sora Nishimura'
+
+!new Actor('actGuest2')
+!actGuest2.name := 'Amir Haddad'
+
+!new Actor('actGuest3')
+!actGuest3.name := 'Valentina Rojas'
+
+!new Movie('mvX')
+!mvX.title := 'Neon Resolve'
+!mvX.availableCopies := 0
+!mvX.genre := #Action
+
+!new Movie('mvY')
+!mvY.title := 'The Spare Key'
+!mvY.availableCopies := 6
+!mvY.genre := #Comedy
+
+!new Series('srX')
+!srX.title := 'Clockwork Harbor'
+!srX.availableCopies := 2
+!srX.episode := 16
+
+!new Series('srY')
+!srY.title := 'Clockwork Harbor'
+!srY.availableCopies := 2
+!srY.episode := 17
+
+!insert (mvX, actCore) into CassetteActor
+!insert (mvX, actGuest1) into CassetteActor
+
+!insert (mvY, actCore) into CassetteActor
+
+!insert (srX, actCore) into CassetteActor
+!insert (srX, actGuest2) into CassetteActor
+
+!insert (srY, actCore) into CassetteActor
+!insert (srY, actGuest3) into CassetteActor
+
+!new Rental('rOnly1')
+!rOnly1.date := Date('2014-02-28')
+!insert (cD, rOnly1) into ClientRental
+!insert (rOnly1, mvX) into RentalCassette

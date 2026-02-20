@@ -1,0 +1,101 @@
+!new Booking('booking20')
+!booking20.startDate := '2028-10-09'
+!booking20.endDate := '2028-10-13'
+!booking20.canceled := false
+!booking20.bookingId := 9800
+!booking20.confirmed := true
+
+!new Customer('customer20')
+!customer20.firstName := 'Gabriel'
+!customer20.lastName := 'Moreau'
+
+!insert (booking20, customer20) into BookingCustomer
+
+!new RoomReservation('rr30')
+!rr30.checkInDate := '2028-10-09'
+!rr30.checkOutDate := '2028-10-13'
+
+!insert (booking20, rr30) into BookingRoomReservation
+
+!new Room('room2001')
+!room2001.roomNumber := 2001
+!room2001.numBeds := 1
+!room2001.pricePerNight := 165.0
+!room2001.occupied := false
+!room2001.blocked := true
+
+!new Room('room2002')
+!room2002.roomNumber := 2002
+!room2002.numBeds := 1
+!room2002.pricePerNight := 165.0
+!room2002.occupied := false
+!room2002.blocked := true
+
+!new Room('room2003')
+!room2003.roomNumber := 2003
+!room2003.numBeds := 2
+!room2003.pricePerNight := 215.0
+!room2003.occupied := false
+!room2003.blocked := true
+
+!new Room('room2004')
+!room2004.roomNumber := 2004
+!room2004.numBeds := 2
+!room2004.pricePerNight := 215.0
+!room2004.occupied := false
+!room2004.blocked := true
+
+!new Room('room2005')
+!room2005.roomNumber := 2005
+!room2005.numBeds := 2
+!room2005.pricePerNight := 215.0
+!room2005.occupied := false
+!room2005.blocked := true
+
+!new Room('room2006')
+!room2006.roomNumber := 2006
+!room2006.numBeds := 3
+!room2006.pricePerNight := 275.0
+!room2006.occupied := false
+!room2006.blocked := true
+
+!insert (rr30, room2001) into RoomReservationRoom
+!insert (rr30, room2002) into RoomReservationRoom
+!insert (rr30, room2003) into RoomReservationRoom
+!insert (rr30, room2004) into RoomReservationRoom
+!insert (rr30, room2005) into RoomReservationRoom
+!insert (rr30, room2006) into RoomReservationRoom
+
+!new RoomExtra('extraAVPackage')
+!extraAVPackage.price := 180.0
+!extraAVPackage.description := 'AV package for meeting'
+
+!new RoomExtra('extraCoffeeBreak')
+!extraCoffeeBreak.price := 95.0
+!extraCoffeeBreak.description := 'Coffee break service'
+
+!new RoomExtra('extraWelcomeSignage')
+!extraWelcomeSignage.price := 0.0
+!extraWelcomeSignage.description := 'Welcome signage (included)'
+
+!new RoomExtra('extraServiceFee')
+!extraServiceFee.price := 45.0
+!extraServiceFee.description := 'Service handling fee'
+
+!insert (rr30, extraAVPackage) into RoomReservationExtras
+!insert (rr30, extraCoffeeBreak) into RoomReservationExtras
+!insert (rr30, extraWelcomeSignage) into RoomReservationExtras
+!insert (rr30, extraServiceFee) into RoomReservationExtras
+
+!new Bill('bill31')
+!bill31.billId := 20001
+!bill31.price := 5180.0
+
+!insert (bill31, rr30) into BillRoomReservation
+!insert (booking20, bill31) into BookingBill
+
+!new FreeRoomTypesDTO('dtoEventBlock')
+!dtoEventBlock.roomTypeDescription := 'Event block (multiple rooms reserved)'
+!dtoEventBlock.numBeds := 2
+!dtoEventBlock.pricePerNight := 215.0
+!dtoEventBlock.numFreeRooms := 0

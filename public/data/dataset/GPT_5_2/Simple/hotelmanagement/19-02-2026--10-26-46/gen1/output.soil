@@ -1,0 +1,136 @@
+!new Booking('booking1')
+!booking1.startDate := '2026-03-10'
+!booking1.endDate := '2026-03-13'
+!booking1.canceled := false
+!booking1.bookingId := 1001
+!booking1.confirmed := true
+
+!new Customer('customer1')
+!customer1.firstName := 'Alice'
+!customer1.lastName := 'Nguyen'
+
+!new RoomReservation('rr1')
+!rr1.checkInDate := '2026-03-10'
+!rr1.checkOutDate := '2026-03-12'
+
+!new RoomReservation('rr2')
+!rr2.checkInDate := '2026-03-10'
+!rr2.checkOutDate := '2026-03-13'
+
+!new Room('room101')
+!room101.roomNumber := 101
+!room101.numBeds := 1
+!room101.pricePerNight := 95.0
+!room101.occupied := false
+!room101.blocked := true
+
+!new Room('room201')
+!room201.roomNumber := 201
+!room201.numBeds := 2
+!room201.pricePerNight := 160.0
+!room201.occupied := false
+!room201.blocked := true
+
+!new Room('room202')
+!room202.roomNumber := 202
+!room202.numBeds := 2
+!room202.pricePerNight := 160.0
+!room202.occupied := false
+!room202.blocked := true
+
+!new RoomExtra('extraBreakfast')
+!extraBreakfast.price := 24.0
+!extraBreakfast.description := 'Breakfast package'
+
+!new RoomExtra('extraParking')
+!extraParking.price := 15.0
+!extraParking.description := 'Parking (1 vehicle)'
+
+!new RoomExtra('extraSpa')
+!extraSpa.price := 60.0
+!extraSpa.description := 'Spa access (day pass)'
+
+!new Bill('bill1')
+!bill1.billId := 5001
+!bill1.price := 229.0
+
+!new Bill('bill2')
+!bill2.billId := 5002
+!bill2.price := 1020.0
+
+!insert (booking1, customer1) into BookingCustomer
+!insert (booking1, rr1) into BookingRoomReservation
+!insert (booking1, rr2) into BookingRoomReservation
+!insert (rr1, room101) into RoomReservationRoom
+!insert (rr2, room201) into RoomReservationRoom
+!insert (rr2, room202) into RoomReservationRoom
+!insert (rr1, extraBreakfast) into RoomReservationExtras
+!insert (rr1, extraParking) into RoomReservationExtras
+!insert (rr2, extraSpa) into RoomReservationExtras
+!insert (bill1, rr1) into BillRoomReservation
+!insert (bill2, rr2) into BillRoomReservation
+!insert (booking1, bill1) into BookingBill
+!insert (booking1, bill2) into BookingBill
+
+!new Booking('booking2')
+!booking2.startDate := '2026-04-01'
+!booking2.endDate := '2026-04-05'
+!booking2.canceled := true
+!booking2.bookingId := 1002
+!booking2.confirmed := false
+
+!new Customer('customer2')
+!customer2.firstName := 'Marco'
+!customer2.lastName := 'Silva'
+
+!insert (booking2, customer2) into BookingCustomer
+
+!new Booking('booking3')
+!booking3.startDate := '2026-05-20'
+!booking3.endDate := '2026-05-22'
+!booking3.canceled := false
+!booking3.bookingId := 1003
+!booking3.confirmed := true
+
+!new Customer('customer3')
+!customer3.firstName := 'Priya'
+!customer3.lastName := 'Kumar'
+
+!new RoomReservation('rr3')
+!rr3.checkInDate := '2026-05-20'
+!rr3.checkOutDate := '2026-05-22'
+
+!new Room('room305')
+!room305.roomNumber := 305
+!room305.numBeds := 1
+!room305.pricePerNight := 110.0
+!room305.occupied := false
+!room305.blocked := true
+
+!new Bill('bill3')
+!bill3.billId := 5003
+!bill3.price := 220.0
+
+!insert (booking3, customer3) into BookingCustomer
+!insert (booking3, rr3) into BookingRoomReservation
+!insert (rr3, room305) into RoomReservationRoom
+!insert (bill3, rr3) into BillRoomReservation
+!insert (booking3, bill3) into BookingBill
+
+!new FreeRoomTypesDTO('dtoSingle')
+!dtoSingle.roomTypeDescription := 'Single room (city view)'
+!dtoSingle.numBeds := 1
+!dtoSingle.pricePerNight := 95.0
+!dtoSingle.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('dtoDouble')
+!dtoDouble.roomTypeDescription := 'Double room (standard)'
+!dtoDouble.numBeds := 2
+!dtoDouble.pricePerNight := 160.0
+!dtoDouble.numFreeRooms := 3
+
+!new FreeRoomTypesDTO('dtoSuite')
+!dtoSuite.roomTypeDescription := 'Junior suite (balcony)'
+!dtoSuite.numBeds := 2
+!dtoSuite.pricePerNight := 245.0
+!dtoSuite.numFreeRooms := 1

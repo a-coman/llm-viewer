@@ -1,0 +1,100 @@
+!new Client('nc1')
+!nc1.clientId := 701
+!nc1.isSuspended := false
+
+!new Client('nc2')
+!nc2.clientId := 702
+!nc2.isSuspended := true
+
+!new Client('nc3')
+!nc3.clientId := 703
+!nc3.isSuspended := false
+
+!new Actor('na1')
+!na1.name := 'Marina Schultz'
+
+!new Actor('na2')
+!na2.name := 'Kenji Arai'
+
+!new Actor('na3')
+!na3.name := 'Olivia Mensah'
+
+!new Actor('na4')
+!na4.name := 'Paul Richter'
+
+!new Actor('na5')
+!na5.name := 'Santiago Cruz'
+
+!new Movie('nm1')
+!nm1.title := 'Vault Protocol'
+!nm1.availableCopies := 12
+!nm1.genre := #Action
+
+!new Series('ns1')
+!ns1.title := 'Campus Days'
+!ns1.availableCopies := 5
+!ns1.episode := 1
+
+!new Series('ns2')
+!ns2.title := 'Campus Days'
+!ns2.availableCopies := 5
+!ns2.episode := 2
+
+!new Series('ns3')
+!ns3.title := 'Campus Days'
+!ns3.availableCopies := 5
+!ns3.episode := 3
+
+!new Series('ns4')
+!ns4.title := 'The Long Winter'
+!ns4.availableCopies := 0
+!ns4.episode := 1
+
+!new Series('ns5')
+!ns5.title := 'The Long Winter'
+!ns5.availableCopies := 0
+!ns5.episode := 2
+
+!insert (nm1, na2) into CassetteActor
+!insert (nm1, na4) into CassetteActor
+!insert (nm1, na5) into CassetteActor
+
+!insert (ns1, na1) into CassetteActor
+!insert (ns1, na3) into CassetteActor
+
+!insert (ns2, na1) into CassetteActor
+
+!insert (ns3, na1) into CassetteActor
+!insert (ns3, na2) into CassetteActor
+!insert (ns3, na3) into CassetteActor
+
+!insert (ns4, na4) into CassetteActor
+
+!insert (ns5, na4) into CassetteActor
+!insert (ns5, na5) into CassetteActor
+
+!new Rental('nr1')
+!nr1.date := Date('2019-01-11')
+!insert (nc2, nr1) into ClientRental
+!insert (nr1, ns1) into RentalCassette
+
+!new Rental('nr2')
+!nr2.date := Date('2019-01-12')
+!insert (nc2, nr2) into ClientRental
+!insert (nr2, ns2) into RentalCassette
+!insert (nr2, ns3) into RentalCassette
+
+!new Rental('nr3')
+!nr3.date := Date('2019-02-02')
+!insert (nc2, nr3) into ClientRental
+!insert (nr3, nm1) into RentalCassette
+!insert (nr3, ns1) into RentalCassette
+!insert (nr3, ns2) into RentalCassette
+!insert (nr3, ns3) into RentalCassette
+!insert (nr3, ns4) into RentalCassette
+!insert (nr3, ns5) into RentalCassette
+
+!new Rental('nr4')
+!nr4.date := Date('2019-03-15')
+!insert (nc2, nr4) into ClientRental
+!insert (nr4, nm1) into RentalCassette

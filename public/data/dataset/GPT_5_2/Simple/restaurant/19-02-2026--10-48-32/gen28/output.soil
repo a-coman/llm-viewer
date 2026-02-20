@@ -1,0 +1,294 @@
+!new Restaurant('rest36')
+!rest36.name := 'Desert Caravan Kitchen'
+
+!new Owner('own103')
+!own103.name := 'Farah El-Masri'
+!own103.percentageShares := 50
+
+!new Owner('own104')
+!own104.name := 'Jonas Lind'
+!own104.percentageShares := 30
+
+!new Owner('own105')
+!own105.name := 'Priya Kapoor'
+!own105.percentageShares := 20
+
+!insert (rest36, own103) into RestaurantOwner
+!insert (rest36, own104) into RestaurantOwner
+!insert (rest36, own105) into RestaurantOwner
+
+!new Manager('mgr11')
+!mgr11.name := 'Hugo Bernard'
+!mgr11.dateOfBirth := Date('1980-05-06')
+!mgr11.phoneNumber := '555-4400'
+
+!new HeadWaiter('hw80')
+!hw80.name := 'Nadia Osman'
+!hw80.dateOfBirth := Date('1987-09-29')
+!hw80.phoneNumber := '555-4401'
+
+!new Waiter('w110')
+!w110.name := 'Elena Petrova'
+!w110.dateOfBirth := Date('1999-02-15')
+!w110.phoneNumber := '555-4402'
+!w110.spokenLanguage := #German
+
+!new Waiter('w111')
+!w111.name := 'Mateo Gutierrez'
+!w111.dateOfBirth := Date('1996-08-08')
+!w111.phoneNumber := '555-4403'
+!w111.spokenLanguage := #Spanish
+
+!insert (hw80, w110) into HeadWaiterWaiter
+!insert (hw80, w111) into HeadWaiterWaiter
+
+!new Chef('chef90')
+!chef90.name := 'Samira Haddad'
+!chef90.dateOfBirth := Date('1976-11-04')
+!chef90.phoneNumber := '555-4410'
+
+!new Chef('chef91')
+!chef91.name := 'Luca Ferretti'
+!chef91.dateOfBirth := Date('1983-03-12')
+!chef91.phoneNumber := '555-4411'
+
+!new Cook('cook110')
+!cook110.name := 'Owen Clarke'
+!cook110.dateOfBirth := Date('1991-06-19')
+!cook110.phoneNumber := '555-4412'
+!cook110.yearsOfExperience := 7
+
+!new Cook('cook111')
+!cook111.name := 'Mina Yildiz'
+!cook111.dateOfBirth := Date('1998-01-23')
+!cook111.phoneNumber := '555-4413'
+!cook111.yearsOfExperience := 2
+
+!new Cook('cook112')
+!cook112.name := 'Tomas Novak'
+!cook112.dateOfBirth := Date('1988-12-30')
+!cook112.phoneNumber := '555-4414'
+!cook112.yearsOfExperience := 12
+
+!insert (chef90, cook110) into ChefCook
+!insert (chef90, cook111) into ChefCook
+!insert (chef91, cook112) into ChefCook
+
+!new Allergen('alg36Gluten')
+!alg36Gluten.type := #Gluten
+!new Allergen('alg36Nuts')
+!alg36Nuts.type := #Nuts
+!new Allergen('alg36Seafood')
+!alg36Seafood.type := #Seafood
+!new Allergen('alg36Lactose')
+!alg36Lactose.type := #Lactose
+
+!new FoodItem('fiChickpeas36')
+!fiChickpeas36.number := 3601
+!fiChickpeas36.description := 'Cooked chickpeas'
+!fiChickpeas36.purchaseFlag := true
+!fiChickpeas36.unit := #Pound
+
+!new FoodItem('fiPita36')
+!fiPita36.number := 3602
+!fiPita36.description := 'Pita bread'
+!fiPita36.purchaseFlag := true
+!fiPita36.unit := #Dozen
+
+!new FoodItem('fiLamb36')
+!fiLamb36.number := 3603
+!fiLamb36.description := 'Lamb shoulder'
+!fiLamb36.purchaseFlag := true
+!fiLamb36.unit := #Pound
+
+!new FoodItem('fiPistachios36')
+!fiPistachios36.number := 3604
+!fiPistachios36.description := 'Pistachios'
+!fiPistachios36.purchaseFlag := true
+!fiPistachios36.unit := #Ounce
+
+!new FoodItem('fiPhyllo36')
+!fiPhyllo36.number := 3605
+!fiPhyllo36.description := 'Phyllo sheets'
+!fiPhyllo36.purchaseFlag := true
+!fiPhyllo36.unit := #Sheet
+
+!new FoodItem('fiYogurt36')
+!fiYogurt36.number := 3606
+!fiYogurt36.description := 'Yogurt'
+!fiYogurt36.purchaseFlag := true
+!fiYogurt36.unit := #Ounce
+
+!new FoodItem('fiMint36')
+!fiMint36.number := 3607
+!fiMint36.description := 'Fresh mint'
+!fiMint36.purchaseFlag := true
+!fiMint36.unit := #Gram
+
+!new FoodItem('fiShrimp36')
+!fiShrimp36.number := 3608
+!fiShrimp36.description := 'Shrimp'
+!fiShrimp36.purchaseFlag := true
+!fiShrimp36.unit := #Pound
+
+!insert (fiPita36, alg36Gluten) into FoodItemAllergen
+!insert (fiPhyllo36, alg36Gluten) into FoodItemAllergen
+!insert (fiPistachios36, alg36Nuts) into FoodItemAllergen
+!insert (fiYogurt36, alg36Lactose) into FoodItemAllergen
+!insert (fiShrimp36, alg36Seafood) into FoodItemAllergen
+
+!new MenuItem('miHummus36')
+!miHummus36.description := 'Hummus with warm pita'
+!miHummus36.prepTime := 7.0
+!miHummus36.classification := #Apetizer
+
+!new MenuItem('miLambTagine36')
+!miLambTagine36.description := 'Slow-cooked lamb tagine'
+!miLambTagine36.prepTime := 28.0
+!miLambTagine36.classification := #Main
+
+!new MenuItem('miShrimpSkewers36')
+!miShrimpSkewers36.description := 'Harissa shrimp skewers'
+!miShrimpSkewers36.prepTime := 12.0
+!miShrimpSkewers36.classification := #Apetizer
+
+!new MenuItem('miPistachioBaklava36')
+!miPistachioBaklava36.description := 'Pistachio baklava'
+!miPistachioBaklava36.prepTime := 11.0
+!miPistachioBaklava36.classification := #Dessert
+
+!new MenuItem('miMintLassi36')
+!miMintLassi36.description := 'Mint lassi'
+!miMintLassi36.prepTime := 2.0
+!miMintLassi36.classification := #Beverage
+
+!insert (miHummus36, chef90) into MenuItemChef
+!insert (miLambTagine36, chef90) into MenuItemChef
+!insert (miShrimpSkewers36, chef91) into MenuItemChef
+!insert (miPistachioBaklava36, chef91) into MenuItemChef
+!insert (miMintLassi36, chef90) into MenuItemChef
+
+!insert (miHummus36, fiChickpeas36) into MenuItemFoodItem
+!insert (miHummus36, fiPita36) into MenuItemFoodItem
+
+!insert (miLambTagine36, fiLamb36) into MenuItemFoodItem
+
+!insert (miShrimpSkewers36, fiShrimp36) into MenuItemFoodItem
+
+!insert (miPistachioBaklava36, fiPhyllo36) into MenuItemFoodItem
+!insert (miPistachioBaklava36, fiPistachios36) into MenuItemFoodItem
+
+!insert (miMintLassi36, fiYogurt36) into MenuItemFoodItem
+!insert (miMintLassi36, fiMint36) into MenuItemFoodItem
+
+!new RegularCustomer('cust70')
+!cust70.name := 'Anya Vogel'
+!cust70.prefferedLanguage := #German
+
+!new Banquet('banq70')
+!banq70.time := Time('18:00')
+!banq70.date := Date('2028-05-12')
+!banq70.numberPeople := 26
+!banq70.name := 'Desert Film Festival'
+!banq70.phoneNumber := '555-4450'
+!banq70.number := 95001
+!banq70.groupName := 'Volunteer Appreciation Dinner'
+!banq70.paymentMethod := #Cash
+!banq70.busService := true
+
+!insert (rest36, banq70) into RestaurantReservation
+!insert (banq70, w110) into ReservationWaiter
+!insert (banq70, w111) into ReservationWaiter
+
+!new BusDriver('bd70')
+!bd70.name := 'Colin Bates'
+!bd70.dateOfBirth := Date('1971-02-02')
+!bd70.phoneNumber := '555-4460'
+!bd70.driverLicenseNr := 'D-7022199'
+!insert (banq70, bd70) into BanquetBusDriver
+
+!new Table('t701')
+!t701.number := 701
+!t701.description := 'Banquet table A'
+!t701.capacity := 10
+!new Table('t702')
+!t702.number := 702
+!t702.description := 'Banquet table B'
+!t702.capacity := 8
+!new Table('t703')
+!t703.number := 703
+!t703.description := 'Banquet table C'
+!t703.capacity := 10
+
+!insert (banq70, t701) into ReservationTable
+!insert (banq70, t702) into ReservationTable
+!insert (banq70, t703) into ReservationTable
+
+!new ItemOrder('ioBanq70_1')
+!ioBanq70_1.time := Time('18:20')
+!insert (banq70, ioBanq70_1) into ReservationItemOrdered
+!insert (ioBanq70_1, miHummus36) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq70_2')
+!ioBanq70_2.time := Time('18:45')
+!insert (banq70, ioBanq70_2) into ReservationItemOrdered
+!insert (ioBanq70_2, miLambTagine36) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq70_3')
+!ioBanq70_3.time := Time('19:05')
+!insert (banq70, ioBanq70_3) into ReservationItemOrdered
+!insert (ioBanq70_3, miPistachioBaklava36) into ItemOrderMenuItem
+
+!new Individual('res72')
+!res72.time := Time('20:15')
+!res72.date := Date('2028-05-12')
+!res72.numberPeople := 4
+!res72.name := 'Anya Vogel'
+!res72.phoneNumber := '555-4451'
+!res72.number := 95002
+!res72.seating := #Inside
+!res72.smoking := #NonSmoking
+
+!insert (rest36, res72) into RestaurantReservation
+!insert (res72, cust70) into ReservationCustomer
+!insert (res72, w110) into ReservationWaiter
+
+!new Table('t110')
+!t110.number := 110
+!t110.description := 'Inside four-top near lantern wall'
+!t110.capacity := 4
+!insert (res72, t110) into ReservationTable
+
+!new ItemOrder('ioRes72_1')
+!ioRes72_1.time := Time('20:30')
+!insert (res72, ioRes72_1) into ReservationItemOrdered
+!insert (ioRes72_1, miShrimpSkewers36) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes72_2')
+!ioRes72_2.time := Time('20:55')
+!insert (res72, ioRes72_2) into ReservationItemOrdered
+!insert (ioRes72_2, miMintLassi36) into ItemOrderMenuItem
+
+!new Individual('res73')
+!res73.time := Time('21:00')
+!res73.date := Date('2028-05-13')
+!res73.numberPeople := 2
+!res73.name := 'Unlisted Reservation'
+!res73.phoneNumber := '555-4452'
+!res73.number := 95003
+!res73.seating := #Patio
+!res73.smoking := #Smoking
+
+!insert (res73, w111) into ReservationWaiter
+
+!new Table('t111')
+!t111.number := 111
+!t111.description := 'Patio two-top by fountain'
+!t111.capacity := 2
+!insert (res73, t111) into ReservationTable
+
+!new DietaryRequirement('dietReq36')
+!dietReq36.diet := #Halal
+
+!new ReportedAllergy('repAlg36')
+!repAlg36.allergen := #Nuts

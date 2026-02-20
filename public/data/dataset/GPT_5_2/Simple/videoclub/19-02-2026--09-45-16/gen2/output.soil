@@ -1,0 +1,54 @@
+!new Client('clA')
+!clA.clientId := 10
+!clA.isSuspended := true
+
+!new Client('clB')
+!clB.clientId := 11
+!clB.isSuspended := false
+
+!new Movie('movA')
+!movA.title := 'Midnight Run'
+!movA.availableCopies := 5
+!movA.genre := #Comedy
+
+!new Series('serA')
+!serA.title := 'Frontier Worlds'
+!serA.availableCopies := 1
+!serA.episode := 7
+
+!new Series('serB')
+!serB.title := 'Frontier Worlds'
+!serB.availableCopies := 1
+!serB.episode := 8
+
+!new Actor('actA')
+!actA.name := 'Alicia Monroe'
+
+!new Actor('actB')
+!actB.name := 'Brandon Lee'
+
+!new Actor('actC')
+!actC.name := 'Carmen Diaz'
+
+!new Actor('actD')
+!actD.name := 'Daniel Wu'
+
+!insert (movA, actA) into CassetteActor
+!insert (movA, actD) into CassetteActor
+
+!insert (serA, actB) into CassetteActor
+!insert (serA, actC) into CassetteActor
+
+!insert (serB, actB) into CassetteActor
+
+!new Rental('rentA1')
+!rentA1.date := Date('2025-12-20')
+!insert (clA, rentA1) into ClientRental
+!insert (rentA1, movA) into RentalCassette
+!insert (rentA1, serA) into RentalCassette
+!insert (rentA1, serB) into RentalCassette
+
+!new Rental('rentA2')
+!rentA2.date := Date('2026-01-03')
+!insert (clA, rentA2) into ClientRental
+!insert (rentA2, serB) into RentalCassette

@@ -1,0 +1,163 @@
+!new AddressBook('ab31')
+
+!new Company('civicWorks')
+!civicWorks.name := 'CivicWorks Agency'
+!civicWorks.phone := '+1-202-555-3100'
+!civicWorks.website := 'https://civicworks.example'
+!civicWorks.email := 'info@civicworks.example'
+!civicWorks.industry := 'Public Sector Consulting'
+
+!new Company('pulseNetSecurity')
+!pulseNetSecurity.name := 'PulseNet Security'
+!pulseNetSecurity.phone := '+1-703-555-3110'
+!pulseNetSecurity.website := 'https://pulsenet.example'
+!pulseNetSecurity.email := 'contact@pulsenet.example'
+!pulseNetSecurity.industry := 'Cybersecurity'
+
+!new Company('pulseNetLabs')
+!pulseNetLabs.name := 'PulseNet Labs'
+!pulseNetLabs.phone := '+1-703-555-3112'
+!pulseNetLabs.website := ''
+!pulseNetLabs.email := 'labs@pulsenet.example'
+!pulseNetLabs.industry := 'Applied Research'
+
+!new Person('tessMorgan')
+!tessMorgan.name := 'Tess Morgan'
+!tessMorgan.phone := '+1-202-555-3121'
+!tessMorgan.website := 'https://tessmorgan.example'
+!tessMorgan.email := 'tess.morgan@civicworks.example'
+!tessMorgan.title := 'Engagement Manager'
+
+!new Person('rahulJain')
+!rahulJain.name := 'Rahul Jain'
+!rahulJain.phone := '+1-703-555-3122'
+!rahulJain.website := ''
+!rahulJain.email := 'rahul.jain@pulsenet.example'
+!rahulJain.title := 'Security Engineer'
+
+!new Person('elifKaya')
+!elifKaya.name := 'Elif Kaya'
+!elifKaya.phone := '+1-703-555-3123'
+!elifKaya.website := ''
+!elifKaya.email := 'elif.kaya@pulsenet.example'
+!elifKaya.title := 'Engineering Manager'
+
+!new Person('jonPark')
+!jonPark.name := 'Jon Park'
+!jonPark.phone := '+1-202-555-3124'
+!jonPark.website := 'https://jonpark.example'
+!jonPark.email := 'jon.park@example.com'
+!jonPark.title := 'Independent Auditor'
+
+!insert (ab31, civicWorks) into AddressBookMadeOfContact
+!insert (ab31, pulseNetSecurity) into AddressBookMadeOfContact
+!insert (ab31, pulseNetLabs) into AddressBookMadeOfContact
+!insert (ab31, tessMorgan) into AddressBookMadeOfContact
+!insert (ab31, rahulJain) into AddressBookMadeOfContact
+!insert (ab31, elifKaya) into AddressBookMadeOfContact
+!insert (ab31, jonPark) into AddressBookMadeOfContact
+
+!new Address('addrCivicWorksHQ')
+!addrCivicWorksHQ.city := 'Washington'
+!addrCivicWorksHQ.street := 'G St NW'
+!addrCivicWorksHQ.houseNr := '725'
+
+!new Address('addrPulseNetHQ')
+!addrPulseNetHQ.city := 'Arlington'
+!addrPulseNetHQ.street := 'N Glebe Rd'
+!addrPulseNetHQ.houseNr := '2100'
+
+!new Address('addrLabsSuite')
+!addrLabsSuite.city := 'Arlington'
+!addrLabsSuite.street := 'N Glebe Rd'
+!addrLabsSuite.houseNr := '2100-Suite 410'
+
+!new Address('addrTessHome')
+!addrTessHome.city := 'Washington'
+!addrTessHome.street := '14th St NW'
+!addrTessHome.houseNr := '920'
+
+!new Address('addrJonMailing')
+!addrJonMailing.city := 'Alexandria'
+!addrJonMailing.street := 'Duke St'
+!addrJonMailing.houseNr := '1600'
+
+!insert (civicWorks, addrCivicWorksHQ) into ContactContainsAddress
+!insert (pulseNetSecurity, addrPulseNetHQ) into ContactContainsAddress
+!insert (pulseNetLabs, addrLabsSuite) into ContactContainsAddress
+!insert (tessMorgan, addrTessHome) into ContactContainsAddress
+!insert (jonPark, addrJonMailing) into ContactContainsAddress
+
+!new Note('nCivicWorksEmailRfp')
+!nCivicWorksEmailRfp.author := 'Procurement Desk'
+!nCivicWorksEmailRfp.time := Date('2026-02-02 08:40')
+!nCivicWorksEmailRfp.type := #EMAIL
+!nCivicWorksEmailRfp.comment := 'Received RFP clarification questions; response due by Thursday at noon.'
+
+!new Note('nPulseMeetingThreatModel')
+!nPulseMeetingThreatModel.author := 'Elif Kaya'
+!nPulseMeetingThreatModel.time := Date('2026-02-03 13:00')
+!nPulseMeetingThreatModel.type := #MEETING
+!nPulseMeetingThreatModel.comment := 'Threat modeling workshop completed; documented key risks and required controls.'
+
+!new Note('nRahulCallKeyRotation')
+!nRahulCallKeyRotation.author := 'Rahul Jain'
+!nRahulCallKeyRotation.time := Date('2026-02-04 09:15')
+!nRahulCallKeyRotation.type := #CALL
+!nRahulCallKeyRotation.comment := 'Coordinated key rotation window with operations; confirmed monitoring and rollback plan.'
+
+!new Note('nJonEmailAuditPlan')
+!nJonEmailAuditPlan.author := 'Jon Park'
+!nJonEmailAuditPlan.time := Date('2026-02-05 18:05')
+!nJonEmailAuditPlan.type := #EMAIL
+!nJonEmailAuditPlan.comment := 'Shared audit plan outline and requested system diagrams before the site visit.'
+
+!insert (civicWorks, nCivicWorksEmailRfp) into ContactContainsNote
+!insert (pulseNetSecurity, nPulseMeetingThreatModel) into ContactContainsNote
+!insert (rahulJain, nRahulCallKeyRotation) into ContactContainsNote
+!insert (jonPark, nJonEmailAuditPlan) into ContactContainsNote
+
+!new Relationship('relPulseSubdivisionLabs')
+!relPulseSubdivisionLabs.type := #SUBDIVISION
+!insert (pulseNetSecurity, relPulseSubdivisionLabs) into ContactToRelationship
+!insert (relPulseSubdivisionLabs, pulseNetLabs) into RelationshipToContact
+
+!new Relationship('relTessEmployeeCivicWorks')
+!relTessEmployeeCivicWorks.type := #EMPLOYEE
+!insert (tessMorgan, relTessEmployeeCivicWorks) into ContactToRelationship
+!insert (relTessEmployeeCivicWorks, civicWorks) into RelationshipToContact
+
+!new Relationship('relRahulEmployeePulse')
+!relRahulEmployeePulse.type := #EMPLOYEE
+!insert (rahulJain, relRahulEmployeePulse) into ContactToRelationship
+!insert (relRahulEmployeePulse, pulseNetSecurity) into RelationshipToContact
+
+!new Relationship('relElifEmployeePulse')
+!relElifEmployeePulse.type := #EMPLOYEE
+!insert (elifKaya, relElifEmployeePulse) into ContactToRelationship
+!insert (relElifEmployeePulse, pulseNetSecurity) into RelationshipToContact
+
+!new Relationship('relRahulBossIsElif')
+!relRahulBossIsElif.type := #BOSS
+!insert (rahulJain, relRahulBossIsElif) into ContactToRelationship
+!insert (relRahulBossIsElif, elifKaya) into RelationshipToContact
+
+!new Relationship('relTessCoworkerJon')
+!relTessCoworkerJon.type := #COWORKER
+!insert (tessMorgan, relTessCoworkerJon) into ContactToRelationship
+!insert (relTessCoworkerJon, jonPark) into RelationshipToContact
+
+!new Relationship('relJonCoworkerRahul')
+!relJonCoworkerRahul.type := #COWORKER
+!insert (jonPark, relJonCoworkerRahul) into ContactToRelationship
+!insert (relJonCoworkerRahul, rahulJain) into RelationshipToContact
+
+!new Relationship('relPulseCoworkerCivic')
+!relPulseCoworkerCivic.type := #COWORKER
+!insert (pulseNetSecurity, relPulseCoworkerCivic) into ContactToRelationship
+!insert (relPulseCoworkerCivic, civicWorks) into RelationshipToContact
+
+!new Relationship('relCivicCoworkerPulse')
+!relCivicCoworkerPulse.type := #COWORKER
+!insert (civicWorks, relCivicCoworkerPulse) into ContactToRelationship
+!insert (relCivicCoworkerPulse, pulseNetSecurity) into RelationshipToContact

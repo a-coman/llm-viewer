@@ -1,0 +1,41 @@
+!new Currency('curQAR_2026_05')
+!curQAR_2026_05.name := 'Qatari Riyal'
+!curQAR_2026_05.abbreviation := 'QAR'
+
+!new Currency('curRSD_2026_05')
+!curRSD_2026_05.name := 'Serbian Dinar'
+!curRSD_2026_05.abbreviation := 'RSD'
+
+!new Expense('expMayElectronicsRepairCase')
+!expMayElectronicsRepairCase.amount := 199.99
+!expMayElectronicsRepairCase.startDate := Date('2026-05-03')
+!expMayElectronicsRepairCase.endDate := Date('2026-05-07')
+
+!new Bill('billRepairDiagnostic_2026_05_03')
+!billRepairDiagnostic_2026_05_03.amount := 49.99
+!billRepairDiagnostic_2026_05_03.category := 'Services - Device diagnostic'
+!billRepairDiagnostic_2026_05_03.date := Date('2026-05-03')
+!billRepairDiagnostic_2026_05_03.paymentMethod := #CASH
+!billRepairDiagnostic_2026_05_03.status := #VERIFIED
+
+!new Bill('billReplacementPart_2026_05_06')
+!billReplacementPart_2026_05_06.amount := 150.00
+!billReplacementPart_2026_05_06.category := 'Repairs - Replacement part'
+!billReplacementPart_2026_05_06.date := Date('2026-05-06')
+!billReplacementPart_2026_05_06.paymentMethod := #CREDIT_CARD
+!billReplacementPart_2026_05_06.status := #PENDING
+
+!new Bill('billWarrantyCoverage_2026_05_07')
+!billWarrantyCoverage_2026_05_07.amount := 0.00
+!billWarrantyCoverage_2026_05_07.category := 'Repairs - Warranty coverage'
+!billWarrantyCoverage_2026_05_07.date := Date('2026-05-07')
+!billWarrantyCoverage_2026_05_07.paymentMethod := #CHECK
+!billWarrantyCoverage_2026_05_07.status := #VALIDATED
+
+!insert (expMayElectronicsRepairCase, billRepairDiagnostic_2026_05_03) into ExpenseContainsBills
+!insert (expMayElectronicsRepairCase, billReplacementPart_2026_05_06) into ExpenseContainsBills
+!insert (expMayElectronicsRepairCase, billWarrantyCoverage_2026_05_07) into ExpenseContainsBills
+
+!insert (billRepairDiagnostic_2026_05_03, curQAR_2026_05) into BillCurrency
+!insert (billReplacementPart_2026_05_06, curRSD_2026_05) into BillCurrency
+!insert (billWarrantyCoverage_2026_05_07, curQAR_2026_05) into BillCurrency

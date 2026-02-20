@@ -1,0 +1,92 @@
+!new Currency('curSAR')
+!curSAR.name := 'Saudi Riyal'
+!curSAR.abbreviation := 'SAR'
+
+!new Currency('curBGN')
+!curBGN.name := 'Bulgarian Lev'
+!curBGN.abbreviation := 'BGN'
+
+!new Expense('expAprGroupTripSharedCosts')
+!expAprGroupTripSharedCosts.amount := 984.00
+!expAprGroupTripSharedCosts.startDate := Date('2026-04-03')
+!expAprGroupTripSharedCosts.endDate := Date('2026-04-06')
+
+!new Bill('billCabinLodging_2026_04_03')
+!billCabinLodging_2026_04_03.amount := 680.00
+!billCabinLodging_2026_04_03.category := 'Travel - Cabin lodging'
+!billCabinLodging_2026_04_03.date := Date('2026-04-03')
+!billCabinLodging_2026_04_03.paymentMethod := #CREDIT_CARD
+!billCabinLodging_2026_04_03.status := #VALIDATED
+
+!new Bill('billSharedGroceries_2026_04_03')
+!billSharedGroceries_2026_04_03.amount := 142.35
+!billSharedGroceries_2026_04_03.category := 'Travel - Shared groceries'
+!billSharedGroceries_2026_04_03.date := Date('2026-04-03')
+!billSharedGroceries_2026_04_03.paymentMethod := #CASH
+!billSharedGroceries_2026_04_03.status := #VERIFIED
+
+!new Bill('billFuel_2026_04_04')
+!billFuel_2026_04_04.amount := 95.40
+!billFuel_2026_04_04.category := 'Travel - Fuel'
+!billFuel_2026_04_04.date := Date('2026-04-04')
+!billFuel_2026_04_04.paymentMethod := #CREDIT_CARD
+!billFuel_2026_04_04.status := #VERIFIED
+
+!new Bill('billRoadTolls_2026_04_04')
+!billRoadTolls_2026_04_04.amount := 12.25
+!billRoadTolls_2026_04_04.category := 'Travel - Road tolls'
+!billRoadTolls_2026_04_04.date := Date('2026-04-04')
+!billRoadTolls_2026_04_04.paymentMethod := #CASH
+!billRoadTolls_2026_04_04.status := #PENDING
+
+!new Bill('billMuseumTickets_2026_04_05')
+!billMuseumTickets_2026_04_05.amount := 48.00
+!billMuseumTickets_2026_04_05.category := 'Travel - Museum tickets'
+!billMuseumTickets_2026_04_05.date := Date('2026-04-05')
+!billMuseumTickets_2026_04_05.paymentMethod := #CHECK
+!billMuseumTickets_2026_04_05.status := #DRAFT
+
+!new Bill('billParkingRefundProcessed_2026_04_06')
+!billParkingRefundProcessed_2026_04_06.amount := 6.00
+!billParkingRefundProcessed_2026_04_06.category := 'Travel - Parking refund processed'
+!billParkingRefundProcessed_2026_04_06.date := Date('2026-04-06')
+!billParkingRefundProcessed_2026_04_06.paymentMethod := #CREDIT_CARD
+!billParkingRefundProcessed_2026_04_06.status := #REFUNDED
+
+!insert (expAprGroupTripSharedCosts, billCabinLodging_2026_04_03) into ExpenseContainsBills
+!insert (expAprGroupTripSharedCosts, billSharedGroceries_2026_04_03) into ExpenseContainsBills
+!insert (expAprGroupTripSharedCosts, billFuel_2026_04_04) into ExpenseContainsBills
+!insert (expAprGroupTripSharedCosts, billRoadTolls_2026_04_04) into ExpenseContainsBills
+!insert (expAprGroupTripSharedCosts, billMuseumTickets_2026_04_05) into ExpenseContainsBills
+!insert (expAprGroupTripSharedCosts, billParkingRefundProcessed_2026_04_06) into ExpenseContainsBills
+
+!insert (billCabinLodging_2026_04_03, curSAR) into BillCurrency
+!insert (billSharedGroceries_2026_04_03, curSAR) into BillCurrency
+!insert (billFuel_2026_04_04, curSAR) into BillCurrency
+!insert (billRoadTolls_2026_04_04, curSAR) into BillCurrency
+!insert (billMuseumTickets_2026_04_05, curSAR) into BillCurrency
+!insert (billParkingRefundProcessed_2026_04_06, curSAR) into BillCurrency
+
+!new Comment('cmtTrip1')
+!cmtTrip1.text := 'Shared costs for a small group trip; some items paid in cash and reconciled later.'
+!new Comment('cmtTrip2')
+!cmtTrip2.text := 'Parking charge was initially taken but later refunded to the card.'
+
+!insert (expAprGroupTripSharedCosts, cmtTrip1) into ExpenseComment
+!insert (expAprGroupTripSharedCosts, cmtTrip2) into ExpenseComment
+
+
+!new Expense('expAprMusicLessonPackage')
+!expAprMusicLessonPackage.amount := 275.50
+!expAprMusicLessonPackage.startDate := Date('2026-04-18')
+!expAprMusicLessonPackage.endDate := Date('2026-04-18')
+
+!new Bill('billPianoLessonsPackage_2026_04_18')
+!billPianoLessonsPackage_2026_04_18.amount := 275.50
+!billPianoLessonsPackage_2026_04_18.category := 'Education - Piano lesson package'
+!billPianoLessonsPackage_2026_04_18.date := Date('2026-04-18')
+!billPianoLessonsPackage_2026_04_18.paymentMethod := #CHECK
+!billPianoLessonsPackage_2026_04_18.status := #VERIFIED
+
+!insert (expAprMusicLessonPackage, billPianoLessonsPackage_2026_04_18) into ExpenseContainsBills
+!insert (billPianoLessonsPackage_2026_04_18, curBGN) into BillCurrency

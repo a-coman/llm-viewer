@@ -1,0 +1,194 @@
+!new RentalOffice('office_reservations9')
+!office_reservations9.name := 'Southwest Reservations Desk'
+!office_reservations9.number := 9000
+!office_reservations9.address := '1100 N Market St, Wilmington, DE 19801'
+
+!new RentalOffice('office_tempe9')
+!office_tempe9.name := 'Tempe Truck & Trailer Rental'
+!office_tempe9.number := 9001
+!office_tempe9.address := '1420 W Broadway Rd, Tempe, AZ 85282'
+
+!new RentalOffice('office_santa_monica9')
+!office_santa_monica9.name := 'Westside Fleet Rentals - Santa Monica'
+!office_santa_monica9.number := 9002
+!office_santa_monica9.address := '1640 14th St, Santa Monica, CA 90404'
+
+!new RentalOffice('office_jacksonville9')
+!office_jacksonville9.name := 'Jacksonville Commercial Rentals'
+!office_jacksonville9.number := 9003
+!office_jacksonville9.address := '10200 Atlantic Blvd, Jacksonville, FL 32225'
+
+!new Truck('truck_az_24ft_901')
+!truck_az_24ft_901.id := 99001
+!truck_az_24ft_901.registrationState := #AZ
+!truck_az_24ft_901.licensePlateNumber := 'AZ-TRK-99001'
+!truck_az_24ft_901.vehicleTypeCode := #TRUCK24
+!truck_az_24ft_901.registrationLastMaintenanceDate := Date('2026-06-15')
+!truck_az_24ft_901.expirationDate := Date('2027-06-30')
+!truck_az_24ft_901.odometerReading := 58740
+!truck_az_24ft_901.gasTankCapacity := 63.0
+!truck_az_24ft_901.workingRadio := true
+!truck_az_24ft_901.mileage := 9
+
+!new Truck('truck_az_standard_902')
+!truck_az_standard_902.id := 99002
+!truck_az_standard_902.registrationState := #AZ
+!truck_az_standard_902.licensePlateNumber := 'AZ-TRK-99002'
+!truck_az_standard_902.vehicleTypeCode := #TRUCK
+!truck_az_standard_902.registrationLastMaintenanceDate := Date('2026-05-09')
+!truck_az_standard_902.expirationDate := Date('2027-05-31')
+!truck_az_standard_902.odometerReading := 33305
+!truck_az_standard_902.gasTankCapacity := 52.5
+!truck_az_standard_902.workingRadio := false
+!truck_az_standard_902.mileage := 12
+
+!new Truck('truck_ca_10ft_903')
+!truck_ca_10ft_903.id := 99003
+!truck_ca_10ft_903.registrationState := #CA
+!truck_ca_10ft_903.licensePlateNumber := 'CA-TRK-99003'
+!truck_ca_10ft_903.vehicleTypeCode := #TRUCK10
+!truck_ca_10ft_903.registrationLastMaintenanceDate := Date('2026-04-18')
+!truck_ca_10ft_903.expirationDate := Date('2027-04-30')
+!truck_ca_10ft_903.odometerReading := 14080
+!truck_ca_10ft_903.gasTankCapacity := 32.0
+!truck_ca_10ft_903.workingRadio := true
+!truck_ca_10ft_903.mileage := 17
+
+!new Vehicle('trailer_az_open_904')
+!trailer_az_open_904.id := 99104
+!trailer_az_open_904.registrationState := #AZ
+!trailer_az_open_904.licensePlateNumber := 'AZ-TRL-99104'
+!trailer_az_open_904.vehicleTypeCode := #OPEN_TRAILER
+!trailer_az_open_904.registrationLastMaintenanceDate := Date('2026-02-12')
+!trailer_az_open_904.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ca_covered_905')
+!trailer_ca_covered_905.id := 99105
+!trailer_ca_covered_905.registrationState := #CA
+!trailer_ca_covered_905.licensePlateNumber := 'CA-TRL-99105'
+!trailer_ca_covered_905.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_905.registrationLastMaintenanceDate := Date('2026-03-28')
+!trailer_ca_covered_905.expirationDate := Date('2027-03-31')
+
+!new Vehicle('trailer_de_open_906')
+!trailer_de_open_906.id := 99106
+!trailer_de_open_906.registrationState := #DE
+!trailer_de_open_906.licensePlateNumber := 'DE-TRL-99106'
+!trailer_de_open_906.vehicleTypeCode := #OPEN_TRAILER
+!trailer_de_open_906.registrationLastMaintenanceDate := Date('2026-01-20')
+!trailer_de_open_906.expirationDate := Date('2026-12-31')
+
+!insert (office_tempe9, truck_az_24ft_901) into RentalOfficeVehicle
+!insert (office_tempe9, truck_az_standard_902) into RentalOfficeVehicle
+!insert (office_santa_monica9, truck_ca_10ft_903) into RentalOfficeVehicle
+!insert (office_tempe9, trailer_az_open_904) into RentalOfficeVehicle
+!insert (office_santa_monica9, trailer_ca_covered_905) into RentalOfficeVehicle
+!insert (office_jacksonville9, trailer_de_open_906) into RentalOfficeVehicle
+
+!new Individual('cust_ind_riley9')
+!cust_ind_riley9.name := 'Riley Thompson'
+!cust_ind_riley9.address := '525 S Mill Ave, Tempe, AZ 85281'
+!cust_ind_riley9.poorRisk := false
+!cust_ind_riley9.homePhone := '480-555-0120'
+!cust_ind_riley9.driverLicenseState := #AZ
+!cust_ind_riley9.driverLicenseNumber := 77155021
+!cust_ind_riley9.driverLicenseExpirationDate := Date('2028-05-31')
+
+!new Individual('cust_ind_faith9')
+!cust_ind_faith9.name := 'Faith Delgado'
+!cust_ind_faith9.address := '231 Ocean Park Blvd, Santa Monica, CA 90405'
+!cust_ind_faith9.poorRisk := true
+!cust_ind_faith9.homePhone := '310-555-0193'
+!cust_ind_faith9.driverLicenseState := #CA
+!cust_ind_faith9.driverLicenseNumber := 40592118
+!cust_ind_faith9.driverLicenseExpirationDate := Date('2026-09-30')
+
+!new Company('cust_co_mesa9')
+!cust_co_mesa9.name := 'MesaLab Scientific Services'
+!cust_co_mesa9.address := '1830 S Country Club Dr, Mesa, AZ 85210'
+!cust_co_mesa9.poorRisk := false
+!cust_co_mesa9.idNumber := 90077110
+
+!new Company('cust_co_citrus9')
+!cust_co_citrus9.name := 'Citrus Coast Imports LLC'
+!cust_co_citrus9.address := '4100 Sunbeam Rd, Jacksonville, FL 32257'
+!cust_co_citrus9.poorRisk := false
+!cust_co_citrus9.idNumber := 90088231
+
+!new RentalAgreement('ra_900901')
+!ra_900901.number := 900901
+!ra_900901.rentalDate := Date('2026-01-19')
+!ra_900901.anticipatedDuration := 6
+!ra_900901.depositPaid := 750.00
+!ra_900901.quotedDailyRate := 165.00
+!ra_900901.quotedRatePerMile := 0.85
+
+!new RentalAgreement('ra_900902')
+!ra_900902.number := 900902
+!ra_900902.rentalDate := Date('2026-01-22')
+!ra_900902.anticipatedDuration := 4
+!ra_900902.depositPaid := 0.00
+!ra_900902.quotedDailyRate := 39.95
+!ra_900902.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_900903')
+!ra_900903.number := 900903
+!ra_900903.rentalDate := Date('2026-01-25')
+!ra_900903.anticipatedDuration := 8
+!ra_900903.depositPaid := 1200.00
+!ra_900903.quotedDailyRate := 189.00
+!ra_900903.quotedRatePerMile := 0.92
+
+!new RentalAgreement('ra_900904')
+!ra_900904.number := 900904
+!ra_900904.rentalDate := Date('2026-01-26')
+!ra_900904.anticipatedDuration := 14
+!ra_900904.depositPaid := 300.00
+!ra_900904.quotedDailyRate := 27.00
+!ra_900904.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_900905')
+!ra_900905.number := 900905
+!ra_900905.rentalDate := Date('2026-02-02')
+!ra_900905.anticipatedDuration := 1
+!ra_900905.depositPaid := 150.00
+!ra_900905.quotedDailyRate := 49.00
+!ra_900905.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_900906')
+!ra_900906.number := 900906
+!ra_900906.rentalDate := Date('2026-02-10')
+!ra_900906.anticipatedDuration := 2
+!ra_900906.depositPaid := 100.00
+!ra_900906.quotedDailyRate := 0.00
+!ra_900906.quotedRatePerMile := 1.10
+
+!insert (office_reservations9, ra_900901) into RentalOfficeRentalAgreementOrigin
+!insert (office_tempe9, ra_900901) into RentalOfficeRentalAgreementDrop
+!insert (ra_900901, truck_az_24ft_901) into RentalAgreementVehicle
+!insert (ra_900901, cust_co_mesa9) into RentalAgreementCustomer
+
+!insert (office_tempe9, ra_900902) into RentalOfficeRentalAgreementOrigin
+!insert (office_santa_monica9, ra_900902) into RentalOfficeRentalAgreementDrop
+!insert (ra_900902, trailer_az_open_904) into RentalAgreementVehicle
+!insert (ra_900902, cust_ind_riley9) into RentalAgreementCustomer
+
+!insert (office_santa_monica9, ra_900903) into RentalOfficeRentalAgreementOrigin
+!insert (office_jacksonville9, ra_900903) into RentalOfficeRentalAgreementDrop
+!insert (ra_900903, truck_ca_10ft_903) into RentalAgreementVehicle
+!insert (ra_900903, cust_co_citrus9) into RentalAgreementCustomer
+
+!insert (office_jacksonville9, ra_900904) into RentalOfficeRentalAgreementOrigin
+!insert (office_jacksonville9, ra_900904) into RentalOfficeRentalAgreementDrop
+!insert (ra_900904, trailer_de_open_906) into RentalAgreementVehicle
+!insert (ra_900904, cust_co_citrus9) into RentalAgreementCustomer
+
+!insert (office_reservations9, ra_900905) into RentalOfficeRentalAgreementOrigin
+!insert (office_santa_monica9, ra_900905) into RentalOfficeRentalAgreementDrop
+!insert (ra_900905, trailer_ca_covered_905) into RentalAgreementVehicle
+!insert (ra_900905, cust_ind_faith9) into RentalAgreementCustomer
+
+!insert (office_tempe9, ra_900906) into RentalOfficeRentalAgreementOrigin
+!insert (office_tempe9, ra_900906) into RentalOfficeRentalAgreementDrop
+!insert (ra_900906, truck_az_standard_902) into RentalAgreementVehicle
+!insert (ra_900906, cust_ind_riley9) into RentalAgreementCustomer

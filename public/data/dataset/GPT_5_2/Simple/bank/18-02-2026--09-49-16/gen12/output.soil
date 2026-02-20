@@ -1,0 +1,79 @@
+!new Bank('bankDK1')
+!bankDK1.country := 'Denmark'
+!bankDK1.name := 'Copenhagen Retail Bank'
+!bankDK1.bic := 'CRBNDKKKXXX'
+
+!new Bank('bankBR1')
+!bankBR1.country := 'Brazil'
+!bankBR1.name := 'Banco Horizonte'
+!bankBR1.bic := 'BHZOBRRJXXX'
+
+!new Person('z1')
+!z1.firstName := 'Freja'
+!z1.lastName := 'Jensen'
+!z1.age := 38
+
+!new Person('z2')
+!z2.firstName := 'Mads'
+!z2.lastName := 'Nielsen'
+!z2.age := 40
+
+!new Person('z3')
+!z3.firstName := 'Camila'
+!z3.lastName := 'Souza'
+!z3.age := 29
+
+!new Person('z4')
+!z4.firstName := 'Rafael'
+!z4.lastName := 'Almeida'
+!z4.age := 61
+
+!new Person('z5')
+!z5.firstName := 'Ida'
+!z5.lastName := 'Jensen'
+!z5.age := 17
+
+!new Person('z6')
+!z6.firstName := 'Bruno'
+!z6.lastName := 'Souza'
+!z6.age := 15
+
+!new Account('dkAcc1')
+!dkAcc1.iban := 'DK5000400440116243'
+!dkAcc1.balance := 2150
+
+!new Account('dkAcc2')
+!dkAcc2.iban := 'DK3200400123456789'
+!dkAcc2.balance := 0
+
+!new Account('brAcc1')
+!brAcc1.iban := 'BR00BHZ0AG00000000000001'
+!brAcc1.balance := 78000
+
+!new Account('brAcc2')
+!brAcc2.iban := 'BR00BHZ0AG00000000004567'
+!brAcc2.balance := 520
+
+!insert (bankDK1, dkAcc1) into AccountOfBanks
+!insert (bankDK1, dkAcc2) into AccountOfBanks
+!insert (bankBR1, brAcc1) into AccountOfBanks
+!insert (bankBR1, brAcc2) into AccountOfBanks
+
+!insert (z1, dkAcc1) into Ownership
+!insert (z2, dkAcc2) into Ownership
+!insert (z3, brAcc1) into Ownership
+!insert (z4, brAcc1) into Ownership
+!insert (z4, brAcc2) into Ownership
+
+!insert (z1, dkAcc1) into Use
+!insert (z2, dkAcc1) into Use
+!insert (z5, dkAcc1) into Use
+
+!insert (z1, dkAcc2) into Use
+!insert (z2, dkAcc2) into Use
+
+!insert (z3, brAcc1) into Use
+!insert (z6, brAcc1) into Use
+
+!insert (z3, brAcc2) into Use
+!insert (z2, brAcc2) into Use

@@ -1,0 +1,172 @@
+!new RentalOffice('office_boulder_main5')
+!office_boulder_main5.name := 'Flatirons Commercial Rentals - Boulder'
+!office_boulder_main5.number := 5001
+!office_boulder_main5.address := '6300 Spine Rd, Boulder, CO 80301'
+
+!new RentalOffice('office_sacramento_sat5')
+!office_sacramento_sat5.name := 'Sacramento Satellite Yard'
+!office_sacramento_sat5.number := 5002
+!office_sacramento_sat5.address := '8120 Fruitridge Rd, Sacramento, CA 95826'
+
+!new RentalOffice('office_wilmington_port5')
+!office_wilmington_port5.name := 'Wilmington Port Drop Yard'
+!office_wilmington_port5.number := 5003
+!office_wilmington_port5.address := '1 Port of Wilmington Rd, Wilmington, DE 19801'
+
+!new RentalOffice('office_hartford_admin5')
+!office_hartford_admin5.name := 'Hartford Back Office (Billing Only)'
+!office_hartford_admin5.number := 5004
+!office_hartford_admin5.address := '500 Main St, Hartford, CT 06103'
+
+!new Truck('truck_co_24ft_501')
+!truck_co_24ft_501.id := 95001
+!truck_co_24ft_501.registrationState := #CO
+!truck_co_24ft_501.licensePlateNumber := 'CO-TRK-95001'
+!truck_co_24ft_501.vehicleTypeCode := #TRUCK24
+!truck_co_24ft_501.registrationLastMaintenanceDate := Date('2026-06-10')
+!truck_co_24ft_501.expirationDate := Date('2027-06-30')
+!truck_co_24ft_501.odometerReading := 90440
+!truck_co_24ft_501.gasTankCapacity := 68.0
+!truck_co_24ft_501.workingRadio := true
+!truck_co_24ft_501.mileage := 8
+
+!new Truck('truck_ca_10ft_502')
+!truck_ca_10ft_502.id := 95002
+!truck_ca_10ft_502.registrationState := #CA
+!truck_ca_10ft_502.licensePlateNumber := 'CA-TRK-95002'
+!truck_ca_10ft_502.vehicleTypeCode := #TRUCK10
+!truck_ca_10ft_502.registrationLastMaintenanceDate := Date('2026-05-18')
+!truck_ca_10ft_502.expirationDate := Date('2027-05-31')
+!truck_ca_10ft_502.odometerReading := 14215
+!truck_ca_10ft_502.gasTankCapacity := 33.0
+!truck_ca_10ft_502.workingRadio := false
+!truck_ca_10ft_502.mileage := 16
+
+!new Vehicle('trailer_de_covered_501')
+!trailer_de_covered_501.id := 96001
+!trailer_de_covered_501.registrationState := #DE
+!trailer_de_covered_501.licensePlateNumber := 'DE-TRL-96001'
+!trailer_de_covered_501.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_501.registrationLastMaintenanceDate := Date('2026-04-21')
+!trailer_de_covered_501.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_ca_open_502')
+!trailer_ca_open_502.id := 96002
+!trailer_ca_open_502.registrationState := #CA
+!trailer_ca_open_502.licensePlateNumber := 'CA-TRL-96002'
+!trailer_ca_open_502.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ca_open_502.registrationLastMaintenanceDate := Date('2026-02-05')
+!trailer_ca_open_502.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_co_open_503')
+!trailer_co_open_503.id := 96003
+!trailer_co_open_503.registrationState := #CO
+!trailer_co_open_503.licensePlateNumber := 'CO-TRL-96003'
+!trailer_co_open_503.vehicleTypeCode := #OPEN_TRAILER
+!trailer_co_open_503.registrationLastMaintenanceDate := Date('2026-06-01')
+!trailer_co_open_503.expirationDate := Date('2027-06-30')
+
+!insert (office_boulder_main5, truck_co_24ft_501) into RentalOfficeVehicle
+!insert (office_sacramento_sat5, truck_ca_10ft_502) into RentalOfficeVehicle
+!insert (office_wilmington_port5, trailer_de_covered_501) into RentalOfficeVehicle
+!insert (office_sacramento_sat5, trailer_ca_open_502) into RentalOfficeVehicle
+!insert (office_boulder_main5, trailer_co_open_503) into RentalOfficeVehicle
+
+!new Individual('cust_ind_evan5')
+!cust_ind_evan5.name := 'Evan Price'
+!cust_ind_evan5.address := '1440 Pearl St, Boulder, CO 80302'
+!cust_ind_evan5.poorRisk := false
+!cust_ind_evan5.homePhone := '303-555-0106'
+!cust_ind_evan5.driverLicenseState := #CO
+!cust_ind_evan5.driverLicenseNumber := 66150328
+!cust_ind_evan5.driverLicenseExpirationDate := Date('2029-09-30')
+
+!new Company('cust_co_redcanyon5')
+!cust_co_redcanyon5.name := 'RedCanyon Auction Services'
+!cust_co_redcanyon5.address := '2850 Fruitridge Rd, Sacramento, CA 95820'
+!cust_co_redcanyon5.poorRisk := true
+!cust_co_redcanyon5.idNumber := 50588014
+
+!new Company('cust_co_baycold5')
+!cust_co_baycold5.name := 'BayCold Food Distribution'
+!cust_co_baycold5.address := '400 Port Center Dr, Wilmington, DE 19801'
+!cust_co_baycold5.poorRisk := false
+!cust_co_baycold5.idNumber := 50588991
+
+!new RentalAgreement('ra_500001')
+!ra_500001.number := 500001
+!ra_500001.rentalDate := Date('2026-02-02')
+!ra_500001.anticipatedDuration := 120
+!ra_500001.depositPaid := 0.00
+!ra_500001.quotedDailyRate := 52.00
+!ra_500001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_500002')
+!ra_500002.number := 500002
+!ra_500002.rentalDate := Date('2026-02-14')
+!ra_500002.anticipatedDuration := 2
+!ra_500002.depositPaid := 900.00
+!ra_500002.quotedDailyRate := 205.00
+!ra_500002.quotedRatePerMile := 0.97
+
+!new RentalAgreement('ra_500003')
+!ra_500003.number := 500003
+!ra_500003.rentalDate := Date('2026-03-01')
+!ra_500003.anticipatedDuration := 5
+!ra_500003.depositPaid := 150.00
+!ra_500003.quotedDailyRate := 44.00
+!ra_500003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_500004')
+!ra_500004.number := 500004
+!ra_500004.rentalDate := Date('2026-03-05')
+!ra_500004.anticipatedDuration := 1
+!ra_500004.depositPaid := 250.00
+!ra_500004.quotedDailyRate := 89.00
+!ra_500004.quotedRatePerMile := 0.65
+
+!new RentalAgreement('ra_500005')
+!ra_500005.number := 500005
+!ra_500005.rentalDate := Date('2026-03-18')
+!ra_500005.anticipatedDuration := 14
+!ra_500005.depositPaid := 400.00
+!ra_500005.quotedDailyRate := 35.00
+!ra_500005.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_500006')
+!ra_500006.number := 500006
+!ra_500006.rentalDate := Date('2026-04-01')
+!ra_500006.anticipatedDuration := 3
+!ra_500006.depositPaid := 700.00
+!ra_500006.quotedDailyRate := 175.00
+!ra_500006.quotedRatePerMile := 0.90
+
+!insert (office_hartford_admin5, ra_500001) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington_port5, ra_500001) into RentalOfficeRentalAgreementDrop
+!insert (ra_500001, trailer_de_covered_501) into RentalAgreementVehicle
+!insert (ra_500001, cust_co_baycold5) into RentalAgreementCustomer
+
+!insert (office_boulder_main5, ra_500002) into RentalOfficeRentalAgreementOrigin
+!insert (office_sacramento_sat5, ra_500002) into RentalOfficeRentalAgreementDrop
+!insert (ra_500002, truck_co_24ft_501) into RentalAgreementVehicle
+!insert (ra_500002, cust_ind_evan5) into RentalAgreementCustomer
+
+!insert (office_sacramento_sat5, ra_500003) into RentalOfficeRentalAgreementOrigin
+!insert (office_sacramento_sat5, ra_500003) into RentalOfficeRentalAgreementDrop
+!insert (ra_500003, trailer_ca_open_502) into RentalAgreementVehicle
+!insert (ra_500003, cust_co_redcanyon5) into RentalAgreementCustomer
+
+!insert (office_wilmington_port5, ra_500004) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_admin5, ra_500004) into RentalOfficeRentalAgreementDrop
+!insert (ra_500004, trailer_de_covered_501) into RentalAgreementVehicle
+!insert (ra_500004, cust_ind_evan5) into RentalAgreementCustomer
+
+!insert (office_boulder_main5, ra_500005) into RentalOfficeRentalAgreementOrigin
+!insert (office_boulder_main5, ra_500005) into RentalOfficeRentalAgreementDrop
+!insert (ra_500005, trailer_co_open_503) into RentalAgreementVehicle
+!insert (ra_500005, cust_ind_evan5) into RentalAgreementCustomer
+
+!insert (office_sacramento_sat5, ra_500006) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington_port5, ra_500006) into RentalOfficeRentalAgreementDrop
+!insert (ra_500006, truck_ca_10ft_502) into RentalAgreementVehicle
+!insert (ra_500006, cust_co_redcanyon5) into RentalAgreementCustomer

@@ -1,0 +1,194 @@
+!new StateMachine('smVending')
+!smVending.name := 'vendingMachineController'
+
+!new StateMachine('smSelHelper')
+!smSelHelper.name := 'selectingStartHelper'
+!new StateMachine('smPayHelper')
+!smPayHelper.name := 'awaitingPaymentStartHelper'
+!new StateMachine('smDispHelper')
+!smDispHelper.name := 'dispensingStartHelper'
+!new StateMachine('smOosHelper')
+!smOosHelper.name := 'outOfServiceStartHelper'
+!new StateMachine('smRefundHelper')
+!smRefundHelper.name := 'refundingStartHelper'
+
+
+!new State('stV_idle')
+!stV_idle.name := 'idle'
+!new State('stV_selecting')
+!stV_selecting.name := 'selecting'
+!new State('stV_awaitPay')
+!stV_awaitPay.name := 'awaitingPayment'
+!new State('stV_dispensing')
+!stV_dispensing.name := 'dispensing'
+!new State('stV_outOfService')
+!stV_outOfService.name := 'outOfService'
+!new State('stV_refunding')
+!stV_refunding.name := 'refunding'
+
+!insert (smVending, stV_idle) into StateMachineContainsStates
+!insert (smVending, stV_selecting) into StateMachineContainsStates
+!insert (smVending, stV_awaitPay) into StateMachineContainsStates
+!insert (smVending, stV_dispensing) into StateMachineContainsStates
+!insert (smVending, stV_outOfService) into StateMachineContainsStates
+!insert (smVending, stV_refunding) into StateMachineContainsStates
+
+!insert (smVending, stV_idle) into StateMachineStartsStates
+!insert (smSelHelper, stV_selecting) into StateMachineStartsStates
+!insert (smPayHelper, stV_awaitPay) into StateMachineStartsStates
+!insert (smDispHelper, stV_dispensing) into StateMachineStartsStates
+!insert (smOosHelper, stV_outOfService) into StateMachineStartsStates
+!insert (smRefundHelper, stV_refunding) into StateMachineStartsStates
+
+
+!new Transition('trV_beginSelection')
+!trV_beginSelection.name := 'beginSelection'
+!new TimeEvent('evV_beginSelection')
+!evV_beginSelection.time := 1
+!insert (smVending, trV_beginSelection) into StateMachineContainsTransitions
+!insert (trV_beginSelection, evV_beginSelection) into TransitionContainsEvents
+!insert (stV_idle, trV_beginSelection) into StateTransition
+!insert (trV_beginSelection, stV_selecting) into TransitionState
+
+!new Transition('trV_selectionTimeout')
+!trV_selectionTimeout.name := 'selectionTimeout'
+!new TimeEvent('evV_selectionTimeout')
+!evV_selectionTimeout.time := 20
+!insert (smVending, trV_selectionTimeout) into StateMachineContainsTransitions
+!insert (trV_selectionTimeout, evV_selectionTimeout) into TransitionContainsEvents
+!insert (stV_selecting, trV_selectionTimeout) into StateTransition
+!insert (trV_selectionTimeout, stV_idle) into TransitionState
+
+!new Transition('trV_confirmSelection')
+!trV_confirmSelection.name := 'confirmSelection'
+!new TimeEvent('evV_confirmSelection')
+!evV_confirmSelection.time := 2
+!insert (smVending, trV_confirmSelection) into StateMachineContainsTransitions
+!insert (trV_confirmSelection, evV_confirmSelection) into TransitionContainsEvents
+!insert (stV_selecting, trV_confirmSelection) into StateTransition
+!insert (trV_confirmSelection, stV_awaitPay) into TransitionState
+
+!new Transition('trV_paymentAccepted')
+!trV_paymentAccepted.name := 'paymentAccepted'
+!new TimeEvent('evV_paymentAccepted')
+!evV_paymentAccepted.time := 3
+!insert (smVending, trV_paymentAccepted) into StateMachineContainsTransitions
+!insert (trV_paymentAccepted, evV_paymentAccepted) into TransitionContainsEvents
+!insert (stV_awaitPay, trV_paymentAccepted) into StateTransition
+!insert (trV_paymentAccepted, stV_dispensing) into TransitionState
+
+!new Transition('trV_paymentTimeoutRefund')
+!trV_paymentTimeoutRefund.name := 'paymentTimeoutRefund'
+!new TimeEvent('evV_paymentTimeoutRefund')
+!evV_paymentTimeoutRefund.time := 45
+!insert (smVending, trV_paymentTimeoutRefund) into StateMachineContainsTransitions
+!insert (trV_paymentTimeoutRefund, evV_paymentTimeoutRefund) into TransitionContainsEvents
+!insert (stV_awaitPay, trV_paymentTimeoutRefund) into StateTransition
+!insert (trV_paymentTimeoutRefund, stV_refunding) into TransitionState
+
+!new Transition('trV_refundComplete')
+!trV_refundComplete.name := 'refundComplete'
+!new TimeEvent('evV_refundComplete')
+!evV_refundComplete.time := 6
+!insert (smVending, trV_refundComplete) into StateMachineContainsTransitions
+!insert (trV_refundComplete, evV_refundComplete) into TransitionContainsEvents
+!insert (stV_refunding, trV_refundComplete) into StateTransition
+!insert (trV_refundComplete, stV_idle) into TransitionState
+
+!new Transition('trV_dispenseComplete')
+!trV_dispenseComplete.name := 'dispenseComplete'
+!new TimeEvent('evV_dispenseComplete')
+!evV_dispenseComplete.time := 8
+!insert (smVending, trV_dispenseComplete) into StateMachineContainsTransitions
+!insert (trV_dispenseComplete, evV_dispenseComplete) into TransitionContainsEvents
+!insert (stV_dispensing, trV_dispenseComplete) into StateTransition
+!insert (trV_dispenseComplete, stV_idle) into TransitionState
+
+!new Transition('trV_faultToOos')
+!trV_faultToOos.name := 'hardwareFault'
+!new TimeEvent('evV_faultToOos')
+!evV_faultToOos.time := 1
+!insert (smVending, trV_faultToOos) into StateMachineContainsTransitions
+!insert (trV_faultToOos, evV_faultToOos) into TransitionContainsEvents
+!insert (stV_idle, trV_faultToOos) into StateTransition
+!insert (trV_faultToOos, stV_outOfService) into TransitionState
+
+!new Transition('trV_faultSelectingToOos')
+!trV_faultSelectingToOos.name := 'faultDuringSelection'
+!new TimeEvent('evV_faultSelectingToOos')
+!evV_faultSelectingToOos.time := 1
+!insert (smVending, trV_faultSelectingToOos) into StateMachineContainsTransitions
+!insert (trV_faultSelectingToOos, evV_faultSelectingToOos) into TransitionContainsEvents
+!insert (stV_selecting, trV_faultSelectingToOos) into StateTransition
+!insert (trV_faultSelectingToOos, stV_outOfService) into TransitionState
+
+!new Transition('trV_serviceReset')
+!trV_serviceReset.name := 'serviceReset'
+!new TimeEvent('evV_serviceReset')
+!evV_serviceReset.time := 120
+!insert (smVending, trV_serviceReset) into StateMachineContainsTransitions
+!insert (trV_serviceReset, evV_serviceReset) into TransitionContainsEvents
+!insert (stV_outOfService, trV_serviceReset) into StateTransition
+!insert (trV_serviceReset, stV_idle) into TransitionState
+
+
+
+!new StateMachine('smAqs')
+!smAqs.name := 'airQualitySensor'
+
+!new StateMachine('smAqsMeasureHelper')
+!smAqsMeasureHelper.name := 'measuringStartHelper'
+!new StateMachine('smAqsSleepHelper')
+!smAqsSleepHelper.name := 'sleepingStartHelper'
+
+!new State('stA_booting')
+!stA_booting.name := 'booting'
+!new State('stA_measuring')
+!stA_measuring.name := 'measuring'
+!new State('stA_sleeping')
+!stA_sleeping.name := 'sleeping'
+
+!insert (smAqs, stA_booting) into StateMachineContainsStates
+!insert (smAqs, stA_measuring) into StateMachineContainsStates
+!insert (smAqs, stA_sleeping) into StateMachineContainsStates
+
+!insert (smAqs, stA_booting) into StateMachineStartsStates
+!insert (smAqsMeasureHelper, stA_measuring) into StateMachineStartsStates
+!insert (smAqsSleepHelper, stA_sleeping) into StateMachineStartsStates
+
+
+!new Transition('trA_bootComplete')
+!trA_bootComplete.name := 'bootComplete'
+!new TimeEvent('evA_bootComplete')
+!evA_bootComplete.time := 12
+!insert (smAqs, trA_bootComplete) into StateMachineContainsTransitions
+!insert (trA_bootComplete, evA_bootComplete) into TransitionContainsEvents
+!insert (stA_booting, trA_bootComplete) into StateTransition
+!insert (trA_bootComplete, stA_measuring) into TransitionState
+
+!new Transition('trA_sampleCycle')
+!trA_sampleCycle.name := 'sampleCycle'
+!new TimeEvent('evA_sampleCycle')
+!evA_sampleCycle.time := 60
+!insert (smAqs, trA_sampleCycle) into StateMachineContainsTransitions
+!insert (trA_sampleCycle, evA_sampleCycle) into TransitionContainsEvents
+!insert (stA_measuring, trA_sampleCycle) into StateTransition
+!insert (trA_sampleCycle, stA_measuring) into TransitionState
+
+!new Transition('trA_sleepAfterReport')
+!trA_sleepAfterReport.name := 'sleepAfterReport'
+!new TimeEvent('evA_sleepAfterReport')
+!evA_sleepAfterReport.time := 5
+!insert (smAqs, trA_sleepAfterReport) into StateMachineContainsTransitions
+!insert (trA_sleepAfterReport, evA_sleepAfterReport) into TransitionContainsEvents
+!insert (stA_measuring, trA_sleepAfterReport) into StateTransition
+!insert (trA_sleepAfterReport, stA_sleeping) into TransitionState
+
+!new Transition('trA_wakeUp')
+!trA_wakeUp.name := 'wakeUp'
+!new TimeEvent('evA_wakeUp')
+!evA_wakeUp.time := 900
+!insert (smAqs, trA_wakeUp) into StateMachineContainsTransitions
+!insert (trA_wakeUp, evA_wakeUp) into TransitionContainsEvents
+!insert (stA_sleeping, trA_wakeUp) into StateTransition
+!insert (trA_wakeUp, stA_measuring) into TransitionState

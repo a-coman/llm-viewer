@@ -1,0 +1,251 @@
+!new StateMachine('smFirePanel')
+!smFirePanel.name := 'buildingFireAlarmPanel'
+
+!new State('fpNormal')
+!fpNormal.name := 'normal'
+!new State('fpPreAlarm')
+!fpPreAlarm.name := 'preAlarm'
+!new State('fpAlarm')
+!fpAlarm.name := 'alarm'
+!new State('fpSilenced')
+!fpSilenced.name := 'silenced'
+!new State('fpResetting')
+!fpResetting.name := 'resetting'
+!new State('fpFault')
+!fpFault.name := 'fault'
+
+!insert (smFirePanel, fpNormal) into StateMachineContainsStates
+!insert (smFirePanel, fpPreAlarm) into StateMachineContainsStates
+!insert (smFirePanel, fpAlarm) into StateMachineContainsStates
+!insert (smFirePanel, fpSilenced) into StateMachineContainsStates
+!insert (smFirePanel, fpResetting) into StateMachineContainsStates
+!insert (smFirePanel, fpFault) into StateMachineContainsStates
+
+!insert (smFirePanel, fpNormal) into StateMachineStartsStates
+
+
+!new Transition('trFpSmokeDetected')
+!trFpSmokeDetected.name := 'smokeDetected'
+!new TimeEvent('evFpSmokeDetected')
+!evFpSmokeDetected.time := 1
+
+!new Transition('trFpConfirmAlarm')
+!trFpConfirmAlarm.name := 'confirmAlarm'
+!new TimeEvent('evFpConfirmAlarm')
+!evFpConfirmAlarm.time := 20
+
+!new Transition('trFpFalseAlarmClear')
+!trFpFalseAlarmClear.name := 'falseAlarmClear'
+!new TimeEvent('evFpFalseAlarmClear')
+!evFpFalseAlarmClear.time := 15
+
+!new Transition('trFpManualAlarm')
+!trFpManualAlarm.name := 'manualPullStation'
+!new TimeEvent('evFpManualAlarm')
+!evFpManualAlarm.time := 1
+
+!new Transition('trFpSilenceAlarm')
+!trFpSilenceAlarm.name := 'silenceAlarm'
+!new TimeEvent('evFpSilenceAlarm')
+!evFpSilenceAlarm.time := 2
+
+!new Transition('trFpResetRequest')
+!trFpResetRequest.name := 'resetRequest'
+!new TimeEvent('evFpResetRequest')
+!evFpResetRequest.time := 5
+
+!new Transition('trFpResetComplete')
+!trFpResetComplete.name := 'resetComplete'
+!new TimeEvent('evFpResetComplete')
+!evFpResetComplete.time := 30
+
+!new Transition('trFpSupervisionFaultNormal')
+!trFpSupervisionFaultNormal.name := 'supervisionFault'
+!new TimeEvent('evFpSupervisionFaultNormal')
+!evFpSupervisionFaultNormal.time := 3
+
+!new Transition('trFpSupervisionFaultAlarm')
+!trFpSupervisionFaultAlarm.name := 'supervisionFault'
+!new TimeEvent('evFpSupervisionFaultAlarm')
+!evFpSupervisionFaultAlarm.time := 3
+
+!new Transition('trFpFaultCleared')
+!trFpFaultCleared.name := 'faultCleared'
+!new TimeEvent('evFpFaultCleared')
+!evFpFaultCleared.time := 60
+
+!new Transition('trFpStatusPoll')
+!trFpStatusPoll.name := 'statusPoll'
+!new TimeEvent('evFpStatusPoll')
+!evFpStatusPoll.time := 300
+
+
+!insert (smFirePanel, trFpSmokeDetected) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpConfirmAlarm) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpFalseAlarmClear) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpManualAlarm) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpSilenceAlarm) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpResetRequest) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpResetComplete) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpSupervisionFaultNormal) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpSupervisionFaultAlarm) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpFaultCleared) into StateMachineContainsTransitions
+!insert (smFirePanel, trFpStatusPoll) into StateMachineContainsTransitions
+
+!insert (trFpSmokeDetected, evFpSmokeDetected) into TransitionContainsEvents
+!insert (trFpConfirmAlarm, evFpConfirmAlarm) into TransitionContainsEvents
+!insert (trFpFalseAlarmClear, evFpFalseAlarmClear) into TransitionContainsEvents
+!insert (trFpManualAlarm, evFpManualAlarm) into TransitionContainsEvents
+!insert (trFpSilenceAlarm, evFpSilenceAlarm) into TransitionContainsEvents
+!insert (trFpResetRequest, evFpResetRequest) into TransitionContainsEvents
+!insert (trFpResetComplete, evFpResetComplete) into TransitionContainsEvents
+!insert (trFpSupervisionFaultNormal, evFpSupervisionFaultNormal) into TransitionContainsEvents
+!insert (trFpSupervisionFaultAlarm, evFpSupervisionFaultAlarm) into TransitionContainsEvents
+!insert (trFpFaultCleared, evFpFaultCleared) into TransitionContainsEvents
+!insert (trFpStatusPoll, evFpStatusPoll) into TransitionContainsEvents
+
+
+!insert (fpNormal, trFpSmokeDetected) into StateTransition
+!insert (trFpSmokeDetected, fpPreAlarm) into TransitionState
+
+!insert (fpPreAlarm, trFpConfirmAlarm) into StateTransition
+!insert (trFpConfirmAlarm, fpAlarm) into TransitionState
+
+!insert (fpPreAlarm, trFpFalseAlarmClear) into StateTransition
+!insert (trFpFalseAlarmClear, fpNormal) into TransitionState
+
+!insert (fpNormal, trFpManualAlarm) into StateTransition
+!insert (trFpManualAlarm, fpAlarm) into TransitionState
+
+!insert (fpAlarm, trFpSilenceAlarm) into StateTransition
+!insert (trFpSilenceAlarm, fpSilenced) into TransitionState
+
+!insert (fpSilenced, trFpResetRequest) into StateTransition
+!insert (trFpResetRequest, fpResetting) into TransitionState
+
+!insert (fpResetting, trFpResetComplete) into StateTransition
+!insert (trFpResetComplete, fpNormal) into TransitionState
+
+!insert (fpNormal, trFpSupervisionFaultNormal) into StateTransition
+!insert (trFpSupervisionFaultNormal, fpFault) into TransitionState
+
+!insert (fpAlarm, trFpSupervisionFaultAlarm) into StateTransition
+!insert (trFpSupervisionFaultAlarm, fpFault) into TransitionState
+
+!insert (fpFault, trFpFaultCleared) into StateTransition
+!insert (trFpFaultCleared, fpNormal) into TransitionState
+
+!insert (fpNormal, trFpStatusPoll) into StateTransition
+!insert (trFpStatusPoll, fpNormal) into TransitionState
+
+
+
+!new StateMachine('smInvoice')
+!smInvoice.name := 'invoiceBillingLifecycle'
+
+!new State('ivDraft')
+!ivDraft.name := 'draft'
+!new State('ivIssued')
+!ivIssued.name := 'issued'
+!new State('ivDue')
+!ivDue.name := 'due'
+!new State('ivPaid')
+!ivPaid.name := 'paid'
+!new State('ivOverdue')
+!ivOverdue.name := 'overdue'
+!new State('ivWrittenOff')
+!ivWrittenOff.name := 'writtenOff'
+
+!insert (smInvoice, ivDraft) into StateMachineContainsStates
+!insert (smInvoice, ivIssued) into StateMachineContainsStates
+!insert (smInvoice, ivDue) into StateMachineContainsStates
+!insert (smInvoice, ivPaid) into StateMachineContainsStates
+!insert (smInvoice, ivOverdue) into StateMachineContainsStates
+!insert (smInvoice, ivWrittenOff) into StateMachineContainsStates
+
+!insert (smInvoice, ivDraft) into StateMachineStartsStates
+
+
+!new Transition('trIvIssue')
+!trIvIssue.name := 'issueInvoice'
+!new TimeEvent('evIvIssue')
+!evIvIssue.time := 1
+
+!new Transition('trIvDueDateReached')
+!trIvDueDateReached.name := 'dueDateReached'
+!new TimeEvent('evIvDueDateReached')
+!evIvDueDateReached.time := 43200
+
+!new Transition('trIvPayOnTime')
+!trIvPayOnTime.name := 'payOnTime'
+!new TimeEvent('evIvPayOnTime')
+!evIvPayOnTime.time := 10
+
+!new Transition('trIvOverdueTick')
+!trIvOverdueTick.name := 'overdueTick'
+!new TimeEvent('evIvOverdueTick')
+!evIvOverdueTick.time := 1440
+
+!new Transition('trIvPayLate')
+!trIvPayLate.name := 'payLate'
+!new TimeEvent('evIvPayLate')
+!evIvPayLate.time := 20
+
+!new Transition('trIvWriteOff')
+!trIvWriteOff.name := 'writeOff'
+!new TimeEvent('evIvWriteOff')
+!evIvWriteOff.time := 43200
+
+!new Transition('trIvReminder')
+!trIvReminder.name := 'sendReminder'
+!new TimeEvent('evIvReminder')
+!evIvReminder.time := 720
+
+!new Transition('trIvReopenForCorrection')
+!trIvReopenForCorrection.name := 'reopenForCorrection'
+!new TimeEvent('evIvReopenForCorrection')
+!evIvReopenForCorrection.time := 60
+
+
+!insert (smInvoice, trIvIssue) into StateMachineContainsTransitions
+!insert (smInvoice, trIvDueDateReached) into StateMachineContainsTransitions
+!insert (smInvoice, trIvPayOnTime) into StateMachineContainsTransitions
+!insert (smInvoice, trIvOverdueTick) into StateMachineContainsTransitions
+!insert (smInvoice, trIvPayLate) into StateMachineContainsTransitions
+!insert (smInvoice, trIvWriteOff) into StateMachineContainsTransitions
+!insert (smInvoice, trIvReminder) into StateMachineContainsTransitions
+!insert (smInvoice, trIvReopenForCorrection) into StateMachineContainsTransitions
+
+!insert (trIvIssue, evIvIssue) into TransitionContainsEvents
+!insert (trIvDueDateReached, evIvDueDateReached) into TransitionContainsEvents
+!insert (trIvPayOnTime, evIvPayOnTime) into TransitionContainsEvents
+!insert (trIvOverdueTick, evIvOverdueTick) into TransitionContainsEvents
+!insert (trIvPayLate, evIvPayLate) into TransitionContainsEvents
+!insert (trIvWriteOff, evIvWriteOff) into TransitionContainsEvents
+!insert (trIvReminder, evIvReminder) into TransitionContainsEvents
+!insert (trIvReopenForCorrection, evIvReopenForCorrection) into TransitionContainsEvents
+
+
+!insert (ivDraft, trIvIssue) into StateTransition
+!insert (trIvIssue, ivIssued) into TransitionState
+
+!insert (ivIssued, trIvDueDateReached) into StateTransition
+!insert (trIvDueDateReached, ivDue) into TransitionState
+
+!insert (ivDue, trIvPayOnTime) into StateTransition
+!insert (trIvPayOnTime, ivPaid) into TransitionState
+
+!insert (ivDue, trIvOverdueTick) into StateTransition
+!insert (trIvOverdueTick, ivOverdue) into TransitionState
+
+!insert (ivOverdue, trIvPayLate) into StateTransition
+!insert (trIvPayLate, ivPaid) into TransitionState
+
+!insert (ivOverdue, trIvWriteOff) into StateTransition
+!insert (trIvWriteOff, ivWrittenOff) into TransitionState
+
+!insert (ivOverdue, trIvReminder) into StateTransition
+!insert (trIvReminder, ivOverdue) into TransitionState
+
+!insert (ivIssued, trIvReopenForCorrection) into StateTransition
+!insert (trIvReopenForCorrection, ivDraft) into TransitionState

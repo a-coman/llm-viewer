@@ -1,0 +1,79 @@
+!new Bank('bankLU1')
+!bankLU1.country := 'Luxembourg'
+!bankLU1.name := 'Grand Duchy Savings'
+!bankLU1.bic := 'GDSALULLXXX'
+
+!new Bank('bankLU2')
+!bankLU2.country := 'Luxembourg'
+!bankLU2.name := 'Moselle Private Bank'
+!bankLU2.bic := 'MPBKLULLXXX'
+
+!new Person('e1')
+!e1.firstName := 'Claire'
+!e1.lastName := 'Muller'
+!e1.age := 28
+
+!new Person('e2')
+!e2.firstName := 'Tom'
+!e2.lastName := 'Hansen'
+!e2.age := 30
+
+!new Person('e3')
+!e3.firstName := 'Jean'
+!e3.lastName := 'Dupont'
+!e3.age := 67
+
+!new Person('e4')
+!e4.firstName := 'Maja'
+!e4.lastName := 'Kovac'
+!e4.age := 18
+
+!new Person('e5')
+!e5.firstName := 'Leo'
+!e5.lastName := 'Muller'
+!e5.age := 16
+
+!new Person('e6')
+!e6.firstName := 'Nina'
+!e6.lastName := 'Hansen'
+!e6.age := 12
+
+!new Person('e7')
+!e7.firstName := 'Sven'
+!e7.lastName := 'Lindberg'
+!e7.age := 45
+
+!new Account('luAcc1')
+!luAcc1.iban := 'LU280019400644750000'
+!luAcc1.balance := 4200
+
+!new Account('luAcc2')
+!luAcc2.iban := 'LU120035000012345678'
+!luAcc2.balance := 0
+
+!new Account('luAcc3')
+!luAcc3.iban := 'LU430020091234567890'
+!luAcc3.balance := 75
+
+!insert (bankLU1, luAcc1) into AccountOfBanks
+!insert (bankLU1, luAcc2) into AccountOfBanks
+!insert (bankLU1, luAcc3) into AccountOfBanks
+
+!insert (e1, luAcc1) into Ownership
+!insert (e2, luAcc1) into Ownership
+
+!insert (e3, luAcc2) into Ownership
+
+!insert (e4, luAcc3) into Ownership
+!insert (e7, luAcc3) into Ownership
+
+!insert (e5, luAcc1) into Use
+!insert (e6, luAcc1) into Use
+!insert (e7, luAcc1) into Use
+
+!insert (e1, luAcc2) into Use
+!insert (e5, luAcc2) into Use
+
+!insert (e4, luAcc3) into Use
+!insert (e2, luAcc3) into Use
+!insert (e6, luAcc3) into Use

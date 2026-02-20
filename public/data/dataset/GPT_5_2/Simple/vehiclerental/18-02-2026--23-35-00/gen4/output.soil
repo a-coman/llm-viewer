@@ -1,0 +1,96 @@
+!new RentalOffice('office_sanfrancisco')
+!office_sanfrancisco.name := 'Bay City Trailer Rentals - San Francisco'
+!office_sanfrancisco.number := 610
+!office_sanfrancisco.address := '1200 3rd St, San Francisco, CA 94158'
+
+!new RentalOffice('office_orlando_drop')
+!office_orlando_drop.name := 'Central Florida Drop-Off Center - Orlando'
+!office_orlando_drop.number := 611
+!office_orlando_drop.address := '1 Jeff Fuqua Blvd, Orlando, FL 32827'
+
+!new RentalOffice('office_bridgeport')
+!office_bridgeport.name := 'Sound Shore Rentals - Bridgeport'
+!office_bridgeport.number := 612
+!office_bridgeport.address := '500 Seaview Ave, Bridgeport, CT 06607'
+
+!new Vehicle('trailer_ca_covered_10')
+!trailer_ca_covered_10.id := 11010
+!trailer_ca_covered_10.registrationState := #CA
+!trailer_ca_covered_10.licensePlateNumber := 'CA-TRL-2401'
+!trailer_ca_covered_10.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_10.registrationLastMaintenanceDate := Date('2026-02-20')
+!trailer_ca_covered_10.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ca_open_11')
+!trailer_ca_open_11.id := 11011
+!trailer_ca_open_11.registrationState := #CA
+!trailer_ca_open_11.licensePlateNumber := 'CA-TRL-2402'
+!trailer_ca_open_11.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ca_open_11.registrationLastMaintenanceDate := Date('2025-12-14')
+!trailer_ca_open_11.expirationDate := Date('2026-12-31')
+
+!new Vehicle('trailer_ct_open_12')
+!trailer_ct_open_12.id := 11012
+!trailer_ct_open_12.registrationState := #CT
+!trailer_ct_open_12.licensePlateNumber := 'CT-TRL-7715'
+!trailer_ct_open_12.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ct_open_12.registrationLastMaintenanceDate := Date('2026-01-03')
+!trailer_ct_open_12.expirationDate := Date('2027-01-31')
+
+!insert (office_sanfrancisco, trailer_ca_covered_10) into RentalOfficeVehicle
+!insert (office_sanfrancisco, trailer_ca_open_11) into RentalOfficeVehicle
+!insert (office_bridgeport, trailer_ct_open_12) into RentalOfficeVehicle
+
+!new Company('cust_co_silverframe')
+!cust_co_silverframe.name := 'SilverFrame Productions'
+!cust_co_silverframe.address := '2600 Marin St, San Francisco, CA 94124'
+!cust_co_silverframe.poorRisk := false
+!cust_co_silverframe.idNumber := 93004417
+
+!new Individual('cust_ind_danielle')
+!cust_ind_danielle.name := 'Danielle Morales'
+!cust_ind_danielle.address := '88 Atlantic St, Bridgeport, CT 06604'
+!cust_ind_danielle.poorRisk := false
+!cust_ind_danielle.homePhone := '203-555-0176'
+!cust_ind_danielle.driverLicenseState := #CT
+!cust_ind_danielle.driverLicenseNumber := 84512039
+!cust_ind_danielle.driverLicenseExpirationDate := Date('2028-09-22')
+
+!new RentalAgreement('ra_41001')
+!ra_41001.number := 41001
+!ra_41001.rentalDate := Date('2026-04-10')
+!ra_41001.anticipatedDuration := 9
+!ra_41001.depositPaid := 800.00
+!ra_41001.quotedDailyRate := 74.50
+!ra_41001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_41002')
+!ra_41002.number := 41002
+!ra_41002.rentalDate := Date('2026-04-12')
+!ra_41002.anticipatedDuration := 4
+!ra_41002.depositPaid := 125.00
+!ra_41002.quotedDailyRate := 32.00
+!ra_41002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_41003')
+!ra_41003.number := 41003
+!ra_41003.rentalDate := Date('2026-04-20')
+!ra_41003.anticipatedDuration := 2
+!ra_41003.depositPaid := 0.00
+!ra_41003.quotedDailyRate := 29.00
+!ra_41003.quotedRatePerMile := 0.00
+
+!insert (office_sanfrancisco, ra_41001) into RentalOfficeRentalAgreementOrigin
+!insert (office_orlando_drop, ra_41001) into RentalOfficeRentalAgreementDrop
+!insert (ra_41001, trailer_ca_covered_10) into RentalAgreementVehicle
+!insert (ra_41001, cust_co_silverframe) into RentalAgreementCustomer
+
+!insert (office_bridgeport, ra_41002) into RentalOfficeRentalAgreementOrigin
+!insert (office_bridgeport, ra_41002) into RentalOfficeRentalAgreementDrop
+!insert (ra_41002, trailer_ct_open_12) into RentalAgreementVehicle
+!insert (ra_41002, cust_ind_danielle) into RentalAgreementCustomer
+
+!insert (office_sanfrancisco, ra_41003) into RentalOfficeRentalAgreementOrigin
+!insert (office_sanfrancisco, ra_41003) into RentalOfficeRentalAgreementDrop
+!insert (ra_41003, trailer_ca_open_11) into RentalAgreementVehicle
+!insert (ra_41003, cust_co_silverframe) into RentalAgreementCustomer

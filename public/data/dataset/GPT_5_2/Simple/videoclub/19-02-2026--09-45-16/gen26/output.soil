@@ -1,0 +1,83 @@
+!new Client('altC1')
+!altC1.clientId := 2301
+!altC1.isSuspended := false
+
+!new Client('altC2')
+!altC2.clientId := 2302
+!altC2.isSuspended := false
+
+!new Client('altC3')
+!altC3.clientId := 2303
+!altC3.isSuspended := true
+
+!new Client('altC4')
+!altC4.clientId := 2304
+!altC4.isSuspended := false
+
+!new Actor('altA1')
+!altA1.name := 'Juno Carlisle'
+
+!new Actor('altA2')
+!altA2.name := 'Mateusz Krol'
+
+!new Actor('altA3')
+!altA3.name := 'Farida Nouri'
+
+!new Actor('altA4')
+!altA4.name := 'Elliot Barron'
+
+!new Cassette('altTape1')
+!altTape1.title := 'Public Speaking: Confident Delivery'
+!altTape1.availableCopies := 0
+
+!new Movie('altMov1')
+!altMov1.title := 'Crater Line'
+!altMov1.availableCopies := 3
+!altMov1.genre := #Action
+
+!new Movie('altMov2')
+!altMov2.title := 'The Unplanned Picnic'
+!altMov2.availableCopies := 2
+!altMov2.genre := #Comedy
+
+!new Series('altSer1')
+!altSer1.title := 'Harbor Dispatch'
+!altSer1.availableCopies := 1
+!altSer1.episode := 1
+
+!new Series('altSer2')
+!altSer2.title := 'Harbor Dispatch'
+!altSer2.availableCopies := 1
+!altSer2.episode := 2
+
+!insert (altTape1, altA1) into CassetteActor
+
+!insert (altMov1, altA1) into CassetteActor
+!insert (altMov1, altA2) into CassetteActor
+!insert (altMov1, altA3) into CassetteActor
+
+!insert (altMov2, altA1) into CassetteActor
+!insert (altMov2, altA4) into CassetteActor
+
+!insert (altSer1, altA2) into CassetteActor
+!insert (altSer1, altA3) into CassetteActor
+
+!insert (altSer2, altA2) into CassetteActor
+
+!new Rental('altR1')
+!altR1.date := Date('1987-09-04')
+!insert (altC1, altR1) into ClientRental
+!insert (altR1, altTape1) into RentalCassette
+
+!new Rental('altR2')
+!altR2.date := Date('1987-09-06')
+!insert (altC2, altR2) into ClientRental
+!insert (altR2, altMov1) into RentalCassette
+!insert (altR2, altSer1) into RentalCassette
+
+!new Rental('altR3')
+!altR3.date := Date('1987-10-01')
+!insert (altC4, altR3) into ClientRental
+!insert (altR3, altMov2) into RentalCassette
+!insert (altR3, altSer1) into RentalCassette
+!insert (altR3, altSer2) into RentalCassette

@@ -1,0 +1,218 @@
+!new StateMachine('smVacuum')
+!smVacuum.name := 'robotVacuum'
+
+!new State('vcDocked')
+!vcDocked.name := 'docked'
+!new State('vcCleaning')
+!vcCleaning.name := 'cleaning'
+!new State('vcReturning')
+!vcReturning.name := 'returning'
+!new State('vcCharging')
+!vcCharging.name := 'charging'
+!new State('vcStuck')
+!vcStuck.name := 'stuck'
+!new State('vcSleeping')
+!vcSleeping.name := 'sleeping'
+
+!insert (smVacuum, vcDocked) into StateMachineContainsStates
+!insert (smVacuum, vcCleaning) into StateMachineContainsStates
+!insert (smVacuum, vcReturning) into StateMachineContainsStates
+!insert (smVacuum, vcCharging) into StateMachineContainsStates
+!insert (smVacuum, vcStuck) into StateMachineContainsStates
+!insert (smVacuum, vcSleeping) into StateMachineContainsStates
+
+!insert (smVacuum, vcDocked) into StateMachineStartsStates
+
+
+!new Transition('trVcStartCleaning')
+!trVcStartCleaning.name := 'startCleaning'
+!new TimeEvent('evVcStartCleaning')
+!evVcStartCleaning.time := 1
+
+!new Transition('trVcLowBattery')
+!trVcLowBattery.name := 'lowBattery'
+!new TimeEvent('evVcLowBattery')
+!evVcLowBattery.time := 30
+
+!new Transition('trVcReachedDock')
+!trVcReachedDock.name := 'reachedDock'
+!new TimeEvent('evVcReachedDock')
+!evVcReachedDock.time := 10
+
+!new Transition('trVcChargeComplete')
+!trVcChargeComplete.name := 'chargeComplete'
+!new TimeEvent('evVcChargeComplete')
+!evVcChargeComplete.time := 120
+
+!new Transition('trVcStuckDetected')
+!trVcStuckDetected.name := 'stuckDetected'
+!new TimeEvent('evVcStuckDetected')
+!evVcStuckDetected.time := 2
+
+!new Transition('trVcUserUnstuck')
+!trVcUserUnstuck.name := 'userUnstuck'
+!new TimeEvent('evVcUserUnstuck')
+!evVcUserUnstuck.time := 5
+
+!new Transition('trVcSleepSchedule')
+!trVcSleepSchedule.name := 'sleepSchedule'
+!new TimeEvent('evVcSleepSchedule')
+!evVcSleepSchedule.time := 60
+
+!new Transition('trVcWakeUp')
+!trVcWakeUp.name := 'wakeUp'
+!new TimeEvent('evVcWakeUp')
+!evVcWakeUp.time := 480
+
+!new Transition('trVcCleaningPulse')
+!trVcCleaningPulse.name := 'cleaningPulse'
+!new TimeEvent('evVcCleaningPulse')
+!evVcCleaningPulse.time := 15
+
+
+!insert (smVacuum, trVcStartCleaning) into StateMachineContainsTransitions
+!insert (smVacuum, trVcLowBattery) into StateMachineContainsTransitions
+!insert (smVacuum, trVcReachedDock) into StateMachineContainsTransitions
+!insert (smVacuum, trVcChargeComplete) into StateMachineContainsTransitions
+!insert (smVacuum, trVcStuckDetected) into StateMachineContainsTransitions
+!insert (smVacuum, trVcUserUnstuck) into StateMachineContainsTransitions
+!insert (smVacuum, trVcSleepSchedule) into StateMachineContainsTransitions
+!insert (smVacuum, trVcWakeUp) into StateMachineContainsTransitions
+!insert (smVacuum, trVcCleaningPulse) into StateMachineContainsTransitions
+
+!insert (trVcStartCleaning, evVcStartCleaning) into TransitionContainsEvents
+!insert (trVcLowBattery, evVcLowBattery) into TransitionContainsEvents
+!insert (trVcReachedDock, evVcReachedDock) into TransitionContainsEvents
+!insert (trVcChargeComplete, evVcChargeComplete) into TransitionContainsEvents
+!insert (trVcStuckDetected, evVcStuckDetected) into TransitionContainsEvents
+!insert (trVcUserUnstuck, evVcUserUnstuck) into TransitionContainsEvents
+!insert (trVcSleepSchedule, evVcSleepSchedule) into TransitionContainsEvents
+!insert (trVcWakeUp, evVcWakeUp) into TransitionContainsEvents
+!insert (trVcCleaningPulse, evVcCleaningPulse) into TransitionContainsEvents
+
+
+!insert (vcDocked, trVcStartCleaning) into StateTransition
+!insert (trVcStartCleaning, vcCleaning) into TransitionState
+
+!insert (vcCleaning, trVcLowBattery) into StateTransition
+!insert (trVcLowBattery, vcReturning) into TransitionState
+
+!insert (vcReturning, trVcReachedDock) into StateTransition
+!insert (trVcReachedDock, vcCharging) into TransitionState
+
+!insert (vcCharging, trVcChargeComplete) into StateTransition
+!insert (trVcChargeComplete, vcDocked) into TransitionState
+
+!insert (vcCleaning, trVcStuckDetected) into StateTransition
+!insert (trVcStuckDetected, vcStuck) into TransitionState
+
+!insert (vcStuck, trVcUserUnstuck) into StateTransition
+!insert (trVcUserUnstuck, vcReturning) into TransitionState
+
+!insert (vcDocked, trVcSleepSchedule) into StateTransition
+!insert (trVcSleepSchedule, vcSleeping) into TransitionState
+
+!insert (vcSleeping, trVcWakeUp) into StateTransition
+!insert (trVcWakeUp, vcDocked) into TransitionState
+
+!insert (vcCleaning, trVcCleaningPulse) into StateTransition
+!insert (trVcCleaningPulse, vcCleaning) into TransitionState
+
+
+
+!new StateMachine('smKitchenTimer')
+!smKitchenTimer.name := 'kitchenTimerApp'
+
+!new State('ktIdle')
+!ktIdle.name := 'idle'
+!new State('ktSetting')
+!ktSetting.name := 'setting'
+!new State('ktCounting')
+!ktCounting.name := 'counting'
+!new State('ktRinging')
+!ktRinging.name := 'ringing'
+!new State('ktDismissed')
+!ktDismissed.name := 'dismissed'
+
+!insert (smKitchenTimer, ktIdle) into StateMachineContainsStates
+!insert (smKitchenTimer, ktSetting) into StateMachineContainsStates
+!insert (smKitchenTimer, ktCounting) into StateMachineContainsStates
+!insert (smKitchenTimer, ktRinging) into StateMachineContainsStates
+!insert (smKitchenTimer, ktDismissed) into StateMachineContainsStates
+
+!insert (smKitchenTimer, ktIdle) into StateMachineStartsStates
+
+
+!new Transition('trKtOpenSetting')
+!trKtOpenSetting.name := 'openSetting'
+!new TimeEvent('evKtOpenSetting')
+!evKtOpenSetting.time := 1
+
+!new Transition('trKtConfirmDuration')
+!trKtConfirmDuration.name := 'confirmDuration'
+!new TimeEvent('evKtConfirmDuration')
+!evKtConfirmDuration.time := 2
+
+!new Transition('trKtCancelSetting')
+!trKtCancelSetting.name := 'cancelSetting'
+!new TimeEvent('evKtCancelSetting')
+!evKtCancelSetting.time := 1
+
+!new Transition('trKtTick')
+!trKtTick.name := 'tick'
+!new TimeEvent('evKtTick')
+!evKtTick.time := 60
+
+!new Transition('trKtTimeUp')
+!trKtTimeUp.name := 'timeUp'
+!new TimeEvent('evKtTimeUp')
+!evKtTimeUp.time := 1
+
+!new Transition('trKtDismiss')
+!trKtDismiss.name := 'dismiss'
+!new TimeEvent('evKtDismiss')
+!evKtDismiss.time := 1
+
+!new Transition('trKtReset')
+!trKtReset.name := 'reset'
+!new TimeEvent('evKtReset')
+!evKtReset.time := 1
+
+
+!insert (smKitchenTimer, trKtOpenSetting) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtConfirmDuration) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtCancelSetting) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtTick) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtTimeUp) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtDismiss) into StateMachineContainsTransitions
+!insert (smKitchenTimer, trKtReset) into StateMachineContainsTransitions
+
+!insert (trKtOpenSetting, evKtOpenSetting) into TransitionContainsEvents
+!insert (trKtConfirmDuration, evKtConfirmDuration) into TransitionContainsEvents
+!insert (trKtCancelSetting, evKtCancelSetting) into TransitionContainsEvents
+!insert (trKtTick, evKtTick) into TransitionContainsEvents
+!insert (trKtTimeUp, evKtTimeUp) into TransitionContainsEvents
+!insert (trKtDismiss, evKtDismiss) into TransitionContainsEvents
+!insert (trKtReset, evKtReset) into TransitionContainsEvents
+
+
+!insert (ktIdle, trKtOpenSetting) into StateTransition
+!insert (trKtOpenSetting, ktSetting) into TransitionState
+
+!insert (ktSetting, trKtConfirmDuration) into StateTransition
+!insert (trKtConfirmDuration, ktCounting) into TransitionState
+
+!insert (ktSetting, trKtCancelSetting) into StateTransition
+!insert (trKtCancelSetting, ktIdle) into TransitionState
+
+!insert (ktCounting, trKtTick) into StateTransition
+!insert (trKtTick, ktCounting) into TransitionState
+
+!insert (ktCounting, trKtTimeUp) into StateTransition
+!insert (trKtTimeUp, ktRinging) into TransitionState
+
+!insert (ktRinging, trKtDismiss) into StateTransition
+!insert (trKtDismiss, ktDismissed) into TransitionState
+
+!insert (ktDismissed, trKtReset) into StateTransition
+!insert (trKtReset, ktIdle) into TransitionState

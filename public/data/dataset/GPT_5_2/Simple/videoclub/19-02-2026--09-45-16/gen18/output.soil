@@ -1,0 +1,83 @@
+!new Client('rC1')
+!rC1.clientId := 1501
+!rC1.isSuspended := false
+
+!new Client('rC2')
+!rC2.clientId := 1502
+!rC2.isSuspended := false
+
+!new Client('rC3')
+!rC3.clientId := 1503
+!rC3.isSuspended := true
+
+!new Cassette('rTape1')
+!rTape1.title := 'Yoga Basics: Beginner Session'
+!rTape1.availableCopies := 15
+
+!new Cassette('rTape2')
+!rTape2.title := 'Cooking Masterclass: Sauces'
+!rTape2.availableCopies := 0
+
+!new Movie('rMov1')
+!rMov1.title := 'Riot Highway'
+!rMov1.availableCopies := 1
+!rMov1.genre := #Action
+
+!new Series('rSer1')
+!rSer1.title := 'Mini Mysteries'
+!rSer1.availableCopies := 2
+!rSer1.episode := 25
+
+!new Actor('rA1')
+!rA1.name := 'Joanne Fields'
+
+!new Actor('rA2')
+!rA2.name := 'Khalid Mercer'
+
+!new Actor('rA3')
+!rA3.name := 'Irene Voss'
+
+!insert (rTape1, rA1) into CassetteActor
+!insert (rTape1, rA2) into CassetteActor
+
+!insert (rTape2, rA3) into CassetteActor
+
+!insert (rMov1, rA2) into CassetteActor
+!insert (rMov1, rA3) into CassetteActor
+
+!insert (rSer1, rA1) into CassetteActor
+!insert (rSer1, rA3) into CassetteActor
+
+!new Rental('rR1')
+!rR1.date := Date('2009-04-03')
+!insert (rC1, rR1) into ClientRental
+!insert (rR1, rTape1) into RentalCassette
+
+!new Rental('rR2')
+!rR2.date := Date('2009-04-10')
+!insert (rC1, rR2) into ClientRental
+!insert (rR2, rTape1) into RentalCassette
+!insert (rR2, rTape2) into RentalCassette
+
+!new Rental('rR3')
+!rR3.date := Date('2009-05-02')
+!insert (rC1, rR3) into ClientRental
+!insert (rR3, rMov1) into RentalCassette
+!insert (rR3, rTape2) into RentalCassette
+
+!new Rental('rR4')
+!rR4.date := Date('2009-06-14')
+!insert (rC2, rR4) into ClientRental
+!insert (rR4, rSer1) into RentalCassette
+!insert (rR4, rTape1) into RentalCassette
+
+!new Rental('rR5')
+!rR5.date := Date('2009-06-21')
+!insert (rC3, rR5) into ClientRental
+!insert (rR5, rTape1) into RentalCassette
+!insert (rR5, rSer1) into RentalCassette
+
+!new Rental('rR6')
+!rR6.date := Date('2009-07-01')
+!insert (rC3, rR6) into ClientRental
+!insert (rR6, rTape1) into RentalCassette

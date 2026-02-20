@@ -1,0 +1,68 @@
+!new Bank('bankBE1')
+!bankBE1.country := 'Belgium'
+!bankBE1.name := 'Brussels Savings Bank'
+!bankBE1.bic := 'BSBKBE22XXX'
+
+!new Bank('bankNO1')
+!bankNO1.country := 'Norway'
+!bankNO1.name := 'Fjord Finans'
+!bankNO1.bic := 'FJFDNO22XXX'
+
+!new Person('s1')
+!s1.firstName := 'Isabelle'
+!s1.lastName := 'Peeters'
+!s1.age := 47
+
+!new Person('s2')
+!s2.firstName := 'Thomas'
+!s2.lastName := 'Lambert'
+!s2.age := 20
+
+!new Person('s3')
+!s3.firstName := 'Kari'
+!s3.lastName := 'Olsen'
+!s3.age := 36
+
+!new Person('s4')
+!s4.firstName := 'Milan'
+!s4.lastName := 'Novak'
+!s4.age := 17
+
+!new Person('s5')
+!s5.firstName := 'Amina'
+!s5.lastName := 'Hassan'
+!s5.age := 63
+
+!new Account('accBEX1')
+!accBEX1.iban := 'BE71096123456769'
+!accBEX1.balance := 430
+
+!new Account('accBEX2')
+!accBEX2.iban := 'BE68539007547034'
+!accBEX2.balance := 25000
+
+!new Account('accNOK1')
+!accNOK1.iban := 'NO9386011117947'
+!accNOK1.balance := 5
+
+!insert (bankBE1, accBEX1) into AccountOfBanks
+!insert (bankBE1, accBEX2) into AccountOfBanks
+!insert (bankNO1, accNOK1) into AccountOfBanks
+
+!insert (s1, accBEX1) into Ownership
+
+!insert (s1, accBEX2) into Ownership
+!insert (s5, accBEX2) into Ownership
+
+!insert (s3, accNOK1) into Ownership
+
+!insert (s1, accBEX1) into Use
+!insert (s2, accBEX1) into Use
+!insert (s4, accBEX1) into Use
+
+!insert (s1, accBEX2) into Use
+!insert (s5, accBEX2) into Use
+!insert (s2, accBEX2) into Use
+
+!insert (s3, accNOK1) into Use
+!insert (s4, accNOK1) into Use

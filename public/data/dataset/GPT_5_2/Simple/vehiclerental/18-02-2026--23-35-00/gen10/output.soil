@@ -1,0 +1,148 @@
+!new RentalOffice('office_newcastle_de')
+!office_newcastle_de.name := 'Brandywine Vehicle Rental - New Castle'
+!office_newcastle_de.number := 1201
+!office_newcastle_de.address := '201 Basin Rd, New Castle, DE 19720'
+
+!new RentalOffice('office_stamford_ct')
+!office_stamford_ct.name := 'SoundLink Rentals - Stamford'
+!office_stamford_ct.number := 1202
+!office_stamford_ct.address := '350 Fairfield Ave, Stamford, CT 06902'
+
+!new RentalOffice('office_admin_center')
+!office_admin_center.name := 'National Reservations Admin Center'
+!office_admin_center.number := 1203
+!office_admin_center.address := '455 Mission St, San Francisco, CA 94105'
+
+!new Truck('truck_de_17ft_01')
+!truck_de_17ft_01.id := 56001
+!truck_de_17ft_01.registrationState := #DE
+!truck_de_17ft_01.licensePlateNumber := 'DE-TRK-9007'
+!truck_de_17ft_01.vehicleTypeCode := #TRUCK
+!truck_de_17ft_01.registrationLastMaintenanceDate := Date('2026-04-01')
+!truck_de_17ft_01.expirationDate := Date('2027-04-30')
+!truck_de_17ft_01.odometerReading := 39210
+!truck_de_17ft_01.gasTankCapacity := 48.0
+!truck_de_17ft_01.workingRadio := true
+!truck_de_17ft_01.mileage := 12
+
+!new Vehicle('trailer_de_covered_20')
+!trailer_de_covered_20.id := 56020
+!trailer_de_covered_20.registrationState := #DE
+!trailer_de_covered_20.licensePlateNumber := 'DE-TRL-3002'
+!trailer_de_covered_20.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_20.registrationLastMaintenanceDate := Date('2026-03-20')
+!trailer_de_covered_20.expirationDate := Date('2027-03-31')
+
+!new Truck('truck_ct_24ft_01')
+!truck_ct_24ft_01.id := 56101
+!truck_ct_24ft_01.registrationState := #CT
+!truck_ct_24ft_01.licensePlateNumber := 'CT-TRK-4481'
+!truck_ct_24ft_01.vehicleTypeCode := #TRUCK24
+!truck_ct_24ft_01.registrationLastMaintenanceDate := Date('2026-02-09')
+!truck_ct_24ft_01.expirationDate := Date('2026-10-31')
+!truck_ct_24ft_01.odometerReading := 101880
+!truck_ct_24ft_01.gasTankCapacity := 64.0
+!truck_ct_24ft_01.workingRadio := false
+!truck_ct_24ft_01.mileage := 9
+
+!new Vehicle('trailer_ct_open_20')
+!trailer_ct_open_20.id := 56120
+!trailer_ct_open_20.registrationState := #CT
+!trailer_ct_open_20.licensePlateNumber := 'CT-TRL-2209'
+!trailer_ct_open_20.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ct_open_20.registrationLastMaintenanceDate := Date('2026-04-03')
+!trailer_ct_open_20.expirationDate := Date('2027-04-30')
+
+!insert (office_newcastle_de, truck_de_17ft_01) into RentalOfficeVehicle
+!insert (office_newcastle_de, trailer_de_covered_20) into RentalOfficeVehicle
+!insert (office_stamford_ct, truck_ct_24ft_01) into RentalOfficeVehicle
+!insert (office_stamford_ct, trailer_ct_open_20) into RentalOfficeVehicle
+
+!new Individual('cust_ind_ramon')
+!cust_ind_ramon.name := 'Ramon Alvarez'
+!cust_ind_ramon.address := '18 E 7th St, New Castle, DE 19720'
+!cust_ind_ramon.poorRisk := true
+!cust_ind_ramon.homePhone := '302-555-0180'
+!cust_ind_ramon.driverLicenseState := #DE
+!cust_ind_ramon.driverLicenseNumber := 31804577
+!cust_ind_ramon.driverLicenseExpirationDate := Date('2026-12-20')
+
+!new Individual('cust_ind_julie')
+!cust_ind_julie.name := 'Julie Han'
+!cust_ind_julie.address := '77 Morgan St, Stamford, CT 06905'
+!cust_ind_julie.poorRisk := false
+!cust_ind_julie.homePhone := '203-555-0114'
+!cust_ind_julie.driverLicenseState := #CT
+!cust_ind_julie.driverLicenseNumber := 90277413
+!cust_ind_julie.driverLicenseExpirationDate := Date('2029-02-28')
+
+!new Company('cust_co_eastcoast')
+!cust_co_eastcoast.name := 'EastCoast Medical Supply Co.'
+!cust_co_eastcoast.address := '500 Waterfront Dr, New Castle, DE 19720'
+!cust_co_eastcoast.poorRisk := false
+!cust_co_eastcoast.idNumber := 50199201
+
+!new RentalAgreement('ra_100101')
+!ra_100101.number := 100101
+!ra_100101.rentalDate := Date('2026-06-14')
+!ra_100101.anticipatedDuration := 1
+!ra_100101.depositPaid := 200.00
+!ra_100101.quotedDailyRate := 89.00
+!ra_100101.quotedRatePerMile := 0.65
+
+!new RentalAgreement('ra_100102')
+!ra_100102.number := 100102
+!ra_100102.rentalDate := Date('2026-07-01')
+!ra_100102.anticipatedDuration := 7
+!ra_100102.depositPaid := 500.00
+!ra_100102.quotedDailyRate := 99.00
+!ra_100102.quotedRatePerMile := 0.60
+
+!new RentalAgreement('ra_100103')
+!ra_100103.number := 100103
+!ra_100103.rentalDate := Date('2026-07-10')
+!ra_100103.anticipatedDuration := 30
+!ra_100103.depositPaid := 0.00
+!ra_100103.quotedDailyRate := 25.00
+!ra_100103.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_100104')
+!ra_100104.number := 100104
+!ra_100104.rentalDate := Date('2026-07-15')
+!ra_100104.anticipatedDuration := 3
+!ra_100104.depositPaid := 100.00
+!ra_100104.quotedDailyRate := 29.00
+!ra_100104.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_100105')
+!ra_100105.number := 100105
+!ra_100105.rentalDate := Date('2026-07-20')
+!ra_100105.anticipatedDuration := 2
+!ra_100105.depositPaid := 800.00
+!ra_100105.quotedDailyRate := 175.00
+!ra_100105.quotedRatePerMile := 0.90
+
+!insert (office_newcastle_de, ra_100101) into RentalOfficeRentalAgreementOrigin
+!insert (office_newcastle_de, ra_100101) into RentalOfficeRentalAgreementDrop
+!insert (ra_100101, truck_de_17ft_01) into RentalAgreementVehicle
+!insert (ra_100101, cust_ind_ramon) into RentalAgreementCustomer
+
+!insert (office_admin_center, ra_100102) into RentalOfficeRentalAgreementOrigin
+!insert (office_stamford_ct, ra_100102) into RentalOfficeRentalAgreementDrop
+!insert (ra_100102, truck_de_17ft_01) into RentalAgreementVehicle
+!insert (ra_100102, cust_ind_ramon) into RentalAgreementCustomer
+
+!insert (office_newcastle_de, ra_100103) into RentalOfficeRentalAgreementOrigin
+!insert (office_stamford_ct, ra_100103) into RentalOfficeRentalAgreementDrop
+!insert (ra_100103, trailer_de_covered_20) into RentalAgreementVehicle
+!insert (ra_100103, cust_co_eastcoast) into RentalAgreementCustomer
+
+!insert (office_stamford_ct, ra_100104) into RentalOfficeRentalAgreementOrigin
+!insert (office_admin_center, ra_100104) into RentalOfficeRentalAgreementDrop
+!insert (ra_100104, trailer_ct_open_20) into RentalAgreementVehicle
+!insert (ra_100104, cust_ind_julie) into RentalAgreementCustomer
+
+!insert (office_stamford_ct, ra_100105) into RentalOfficeRentalAgreementOrigin
+!insert (office_stamford_ct, ra_100105) into RentalOfficeRentalAgreementDrop
+!insert (ra_100105, truck_ct_24ft_01) into RentalAgreementVehicle
+!insert (ra_100105, cust_co_eastcoast) into RentalAgreementCustomer

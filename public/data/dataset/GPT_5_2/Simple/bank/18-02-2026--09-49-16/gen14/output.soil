@@ -1,0 +1,93 @@
+!new Bank('bankMX1')
+!bankMX1.country := 'Mexico'
+!bankMX1.name := 'Banco Sierra Verde'
+!bankMX1.bic := 'BSVDMXMMXXX'
+
+!new Bank('bankNZ1')
+!bankNZ1.country := 'New Zealand'
+!bankNZ1.name := 'Harbour Pacific Bank'
+!bankNZ1.bic := 'HPACNZ2AXXX'
+
+!new Bank('bankZA1')
+!bankZA1.country := 'South Africa'
+!bankZA1.name := 'Cape Meridian Bank'
+!bankZA1.bic := 'CMBLZAJJXXX'
+
+!new Person('m1')
+!m1.firstName := 'Valeria'
+!m1.lastName := 'Hernandez'
+!m1.age := 36
+
+!new Person('m2')
+!m2.firstName := 'Javier'
+!m2.lastName := 'Ramos'
+!m2.age := 39
+
+!new Person('m3')
+!m3.firstName := 'Sofia'
+!m3.lastName := 'Lopez'
+!m3.age := 21
+
+!new Person('m4')
+!m4.firstName := 'Aroha'
+!m4.lastName := 'Ngata'
+!m4.age := 48
+
+!new Person('m5')
+!m5.firstName := 'Finn'
+!m5.lastName := 'Taylor'
+!m5.age := 20
+
+!new Person('m6')
+!m6.firstName := 'Mateo'
+!m6.lastName := 'Hernandez'
+!m6.age := 16
+
+!new Person('m7')
+!m7.firstName := 'Luca'
+!m7.lastName := 'Ramos'
+!m7.age := 14
+
+!new Account('mxAcc1')
+!mxAcc1.iban := 'MX00BSVD00000000000001'
+!mxAcc1.balance := 820
+
+!new Account('mxAcc2')
+!mxAcc2.iban := 'MX00BSVD00000000004567'
+!mxAcc2.balance := 0
+
+!new Account('nzAcc1')
+!nzAcc1.iban := 'NZ00HPAC00000000001234'
+!nzAcc1.balance := 15400
+
+!new Account('nzAcc2')
+!nzAcc2.iban := 'NZ00HPAC00000000999999'
+!nzAcc2.balance := 55
+
+!insert (bankMX1, mxAcc1) into AccountOfBanks
+!insert (bankMX1, mxAcc2) into AccountOfBanks
+!insert (bankNZ1, nzAcc1) into AccountOfBanks
+!insert (bankNZ1, nzAcc2) into AccountOfBanks
+
+!insert (m1, mxAcc1) into Ownership
+!insert (m2, mxAcc1) into Ownership
+
+!insert (m3, mxAcc2) into Ownership
+
+!insert (m4, nzAcc1) into Ownership
+!insert (m5, nzAcc1) into Ownership
+
+!insert (m4, nzAcc2) into Ownership
+
+!insert (m1, mxAcc1) into Use
+!insert (m2, mxAcc1) into Use
+!insert (m7, mxAcc1) into Use
+
+!insert (m3, mxAcc2) into Use
+!insert (m6, mxAcc2) into Use
+
+!insert (m4, nzAcc1) into Use
+!insert (m5, nzAcc1) into Use
+
+!insert (m4, nzAcc2) into Use
+!insert (m1, nzAcc2) into Use

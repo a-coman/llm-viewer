@@ -1,0 +1,80 @@
+!new Client('v17_c1')
+!v17_c1.clientId := 1801
+!v17_c1.isSuspended := false
+
+!new Client('v17_c2')
+!v17_c2.clientId := 1802
+!v17_c2.isSuspended := false
+
+!new Client('v17_c3')
+!v17_c3.clientId := 1803
+!v17_c3.isSuspended := true
+
+!new Client('v17_c4')
+!v17_c4.clientId := 1804
+!v17_c4.isSuspended := false
+
+!new Actor('v17_a1')
+!v17_a1.name := 'Dana Whitaker'
+
+!new Actor('v17_a2')
+!v17_a2.name := 'Ken Okamoto'
+
+!new Actor('v17_a3')
+!v17_a3.name := 'Laila Ben-Salem'
+
+!new Cassette('v17_t1')
+!v17_t1.title := 'Beginner Guitar: Chords and Rhythm'
+!v17_t1.availableCopies := 6
+
+!new Cassette('v17_t2')
+!v17_t2.title := 'Classic Aerobics 1993'
+!v17_t2.availableCopies := 0
+
+!new Cassette('v17_t3')
+!v17_t3.title := 'Wildlife Special: Desert Predators'
+!v17_t3.availableCopies := 2
+
+!new Cassette('v17_t4')
+!v17_t4.title := 'Intro to Cooking: Knife Skills'
+!v17_t4.availableCopies := 1
+
+!new Cassette('v17_t5')
+!v17_t5.title := 'Language Lab: Everyday Spanish'
+!v17_t5.availableCopies := 4
+
+!insert (v17_t1, v17_a1) into CassetteActor
+!insert (v17_t1, v17_a2) into CassetteActor
+
+!insert (v17_t2, v17_a3) into CassetteActor
+
+!insert (v17_t3, v17_a1) into CassetteActor
+!insert (v17_t3, v17_a3) into CassetteActor
+
+!insert (v17_t4, v17_a2) into CassetteActor
+
+!insert (v17_t5, v17_a1) into CassetteActor
+
+!new Rental('v17_r1')
+!v17_r1.date := Date('2007-03-02')
+!insert (v17_c1, v17_r1) into ClientRental
+!insert (v17_r1, v17_t1) into RentalCassette
+!insert (v17_r1, v17_t3) into RentalCassette
+
+!new Rental('v17_r2')
+!v17_r2.date := Date('2007-03-09')
+!insert (v17_c1, v17_r2) into ClientRental
+!insert (v17_r2, v17_t4) into RentalCassette
+!insert (v17_r2, v17_t5) into RentalCassette
+
+!new Rental('v17_r3')
+!v17_r3.date := Date('2007-03-16')
+!insert (v17_c1, v17_r3) into ClientRental
+!insert (v17_r3, v17_t1) into RentalCassette
+!insert (v17_r3, v17_t4) into RentalCassette
+!insert (v17_r3, v17_t5) into RentalCassette
+
+!new Rental('v17_r4')
+!v17_r4.date := Date('2007-04-01')
+!insert (v17_c4, v17_r4) into ClientRental
+!insert (v17_r4, v17_t2) into RentalCassette

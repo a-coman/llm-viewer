@@ -1,0 +1,189 @@
+!new AddressBook('ab3')
+
+!new Company('northwindTraders')
+!northwindTraders.name := 'Northwind Traders'
+!northwindTraders.phone := '+1-206-555-0140'
+!northwindTraders.website := 'https://northwind.example'
+!northwindTraders.email := 'hello@northwind.example'
+!northwindTraders.industry := 'Food Distribution'
+
+!new Company('northwindEurope')
+!northwindEurope.name := 'Northwind Europe GmbH'
+!northwindEurope.phone := '+49-30-555-0190'
+!northwindEurope.website := 'https://eu.northwind.example'
+!northwindEurope.email := 'kontakt@eu.northwind.example'
+!northwindEurope.industry := 'Logistics'
+
+!new Company('contosoRetail')
+!contosoRetail.name := 'Contoso Retail'
+!contosoRetail.phone := '+44-20-555-0133'
+!contosoRetail.website := 'https://contoso.example'
+!contosoRetail.email := 'support@contoso.example'
+!contosoRetail.industry := 'Retail'
+
+!new Person('evaMartinez')
+!evaMartinez.name := 'Eva Martinez'
+!evaMartinez.phone := '+1-425-555-0121'
+!evaMartinez.website := 'https://eva-martinez.example'
+!evaMartinez.email := 'eva.martinez@example.com'
+!evaMartinez.title := 'Operations Lead'
+
+!new Person('frankWatanabe')
+!frankWatanabe.name := 'Frank Watanabe'
+!frankWatanabe.phone := '+1-206-555-0161'
+!frankWatanabe.website := 'https://frank-watanabe.example'
+!frankWatanabe.email := 'frank.watanabe@example.com'
+!frankWatanabe.title := 'Warehouse Supervisor'
+
+!new Person('graceOkafor')
+!graceOkafor.name := 'Grace Okafor'
+!graceOkafor.phone := '+49-30-555-0117'
+!graceOkafor.website := 'https://grace-okafor.example'
+!graceOkafor.email := 'grace.okafor@example.com'
+!graceOkafor.title := 'Regional Director'
+
+!new Person('hassanAli')
+!hassanAli.name := 'Hassan Ali'
+!hassanAli.phone := '+44-20-555-0188'
+!hassanAli.website := 'https://hassan-ali.example'
+!hassanAli.email := 'hassan.ali@example.com'
+!hassanAli.title := 'Account Executive'
+
+!new Person('ivyChen')
+!ivyChen.name := 'Ivy Chen'
+!ivyChen.phone := '+1-503-555-0106'
+!ivyChen.website := 'https://ivy-chen.example'
+!ivyChen.email := 'ivy.chen@example.com'
+!ivyChen.title := 'Consultant'
+
+!insert (ab3, northwindTraders) into AddressBookMadeOfContact
+!insert (ab3, northwindEurope) into AddressBookMadeOfContact
+!insert (ab3, contosoRetail) into AddressBookMadeOfContact
+!insert (ab3, evaMartinez) into AddressBookMadeOfContact
+!insert (ab3, frankWatanabe) into AddressBookMadeOfContact
+!insert (ab3, graceOkafor) into AddressBookMadeOfContact
+!insert (ab3, hassanAli) into AddressBookMadeOfContact
+!insert (ab3, ivyChen) into AddressBookMadeOfContact
+
+!new Address('addrNorthwindHQ')
+!addrNorthwindHQ.city := 'Seattle'
+!addrNorthwindHQ.street := '1st Ave S'
+!addrNorthwindHQ.houseNr := '700'
+
+!new Address('addrNorthwindDock')
+!addrNorthwindDock.city := 'Seattle'
+!addrNorthwindDock.street := 'Alaskan Way'
+!addrNorthwindDock.houseNr := '91'
+
+!new Address('addrNorthwindEUOffice')
+!addrNorthwindEUOffice.city := 'Berlin'
+!addrNorthwindEUOffice.street := 'Friedrichstrasse'
+!addrNorthwindEUOffice.houseNr := '120'
+
+!new Address('addrContosoLondon')
+!addrContosoLondon.city := 'London'
+!addrContosoLondon.street := 'King William St'
+!addrContosoLondon.houseNr := '18'
+
+!new Address('addrEvaHome')
+!addrEvaHome.city := 'Redmond'
+!addrEvaHome.street := 'NE 76th St'
+!addrEvaHome.houseNr := '1445'
+
+!new Address('addrEvaWork')
+!addrEvaWork.city := 'Seattle'
+!addrEvaWork.street := 'Western Ave'
+!addrEvaWork.houseNr := '212'
+
+!new Address('addrFrankHome')
+!addrFrankHome.city := 'Seattle'
+!addrFrankHome.street := 'Beacon Ave S'
+!addrFrankHome.houseNr := '3320'
+
+!new Address('addrHassanHome')
+!addrHassanHome.city := 'London'
+!addrHassanHome.street := 'Baker St'
+!addrHassanHome.houseNr := '221B'
+
+!insert (northwindTraders, addrNorthwindHQ) into ContactContainsAddress
+!insert (northwindTraders, addrNorthwindDock) into ContactContainsAddress
+!insert (northwindEurope, addrNorthwindEUOffice) into ContactContainsAddress
+!insert (contosoRetail, addrContosoLondon) into ContactContainsAddress
+!insert (evaMartinez, addrEvaHome) into ContactContainsAddress
+!insert (evaMartinez, addrEvaWork) into ContactContainsAddress
+!insert (frankWatanabe, addrFrankHome) into ContactContainsAddress
+!insert (hassanAli, addrHassanHome) into ContactContainsAddress
+
+!new Note('nNorthwindEmailPolicy')
+!nNorthwindEmailPolicy.author := 'Compliance Team'
+!nNorthwindEmailPolicy.time := Date('2026-02-10 08:15')
+!nNorthwindEmailPolicy.type := #EMAIL
+!nNorthwindEmailPolicy.comment := 'Shared updated supplier audit checklist and documentation requirements.'
+
+!new Note('nEvaMeetingOps')
+!nEvaMeetingOps.author := 'Eva Martinez'
+!nEvaMeetingOps.time := Date('2026-02-12 10:00')
+!nEvaMeetingOps.type := #MEETING
+!nEvaMeetingOps.comment := 'Weekly ops sync; reviewed shipment delays and staffing plan.'
+
+!new Note('nFrankCallVendor')
+!nFrankCallVendor.author := 'Frank Watanabe'
+!nFrankCallVendor.time := Date('2026-02-13 15:40')
+!nFrankCallVendor.type := #CALL
+!nFrankCallVendor.comment := 'Called pallet vendor about lead times; confirmed expedited option for next week.'
+
+!new Note('nHassanEmailProposal')
+!nHassanEmailProposal.author := 'Hassan Ali'
+!nHassanEmailProposal.time := Date('2026-02-14 09:05')
+!nHassanEmailProposal.type := #EMAIL
+!nHassanEmailProposal.comment := 'Sent pricing proposal and draft SLA for retail partnership.'
+
+!insert (northwindTraders, nNorthwindEmailPolicy) into ContactContainsNote
+!insert (evaMartinez, nEvaMeetingOps) into ContactContainsNote
+!insert (frankWatanabe, nFrankCallVendor) into ContactContainsNote
+!insert (hassanAli, nHassanEmailProposal) into ContactContainsNote
+
+!new Relationship('relEvaBossIsGrace')
+!relEvaBossIsGrace.type := #BOSS
+!insert (evaMartinez, relEvaBossIsGrace) into ContactToRelationship
+!insert (relEvaBossIsGrace, graceOkafor) into RelationshipToContact
+
+!new Relationship('relEvaCoworkerFrank')
+!relEvaCoworkerFrank.type := #COWORKER
+!insert (evaMartinez, relEvaCoworkerFrank) into ContactToRelationship
+!insert (relEvaCoworkerFrank, frankWatanabe) into RelationshipToContact
+
+!new Relationship('relFrankCoworkerEva')
+!relFrankCoworkerEva.type := #COWORKER
+!insert (frankWatanabe, relFrankCoworkerEva) into ContactToRelationship
+!insert (relFrankCoworkerEva, evaMartinez) into RelationshipToContact
+
+!new Relationship('relFrankEmployeeOfNorthwind')
+!relFrankEmployeeOfNorthwind.type := #EMPLOYEE
+!insert (frankWatanabe, relFrankEmployeeOfNorthwind) into ContactToRelationship
+!insert (relFrankEmployeeOfNorthwind, northwindTraders) into RelationshipToContact
+
+!new Relationship('relGraceEmployeeOfNWEurope')
+!relGraceEmployeeOfNWEurope.type := #EMPLOYEE
+!insert (graceOkafor, relGraceEmployeeOfNWEurope) into ContactToRelationship
+!insert (relGraceEmployeeOfNWEurope, northwindEurope) into RelationshipToContact
+
+!new Relationship('relNorthwindSubdivisionEU')
+!relNorthwindSubdivisionEU.type := #SUBDIVISION
+!insert (northwindTraders, relNorthwindSubdivisionEU) into ContactToRelationship
+!insert (relNorthwindSubdivisionEU, northwindEurope) into RelationshipToContact
+
+!new Relationship('relContosoCoworkerNorthwind')
+!relContosoCoworkerNorthwind.type := #COWORKER
+!insert (contosoRetail, relContosoCoworkerNorthwind) into ContactToRelationship
+!insert (relContosoCoworkerNorthwind, northwindTraders) into RelationshipToContact
+
+!new Relationship('relHassanBossIsEva')
+!relHassanBossIsEva.type := #BOSS
+!insert (hassanAli, relHassanBossIsEva) into ContactToRelationship
+!insert (relHassanBossIsEva, evaMartinez) into RelationshipToContact
+
+!new Relationship('relHassanEmployeeOfContoso')
+!relHassanEmployeeOfContoso.type := #EMPLOYEE
+!insert (hassanAli, relHassanEmployeeOfContoso) into ContactToRelationship
+!insert (relHassanEmployeeOfContoso, contosoRetail) into RelationshipToContact

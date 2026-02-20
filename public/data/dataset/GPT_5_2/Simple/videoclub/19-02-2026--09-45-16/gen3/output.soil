@@ -1,0 +1,102 @@
+!new Client('cx1')
+!cx1.clientId := 21
+!cx1.isSuspended := false
+
+!new Client('cx2')
+!cx2.clientId := 22
+!cx2.isSuspended := false
+
+!new Client('cx3')
+!cx3.clientId := 23
+!cx3.isSuspended := true
+
+!new Client('cx4')
+!cx4.clientId := 24
+!cx4.isSuspended := false
+
+!new Movie('mx1')
+!mx1.title := 'Steel Horizon'
+!mx1.availableCopies := 2
+!mx1.genre := #Action
+
+!new Movie('mx2')
+!mx2.title := 'The Awkward Reunion'
+!mx2.availableCopies := 0
+!mx2.genre := #Comedy
+
+!new Series('sx1')
+!sx1.title := 'Harbor Nights'
+!sx1.availableCopies := 4
+!sx1.episode := 3
+
+!new Series('sx2')
+!sx2.title := 'Quantum Street'
+!sx2.availableCopies := 1
+!sx2.episode := 12
+
+!new Series('sx3')
+!sx3.title := 'Quantum Street'
+!sx3.availableCopies := 0
+!sx3.episode := 13
+
+!new Actor('ax1')
+!ax1.name := 'Mina Park'
+
+!new Actor('ax2')
+!ax2.name := 'Julian Cross'
+
+!new Actor('ax3')
+!ax3.name := 'Ravi Mehta'
+
+!new Actor('ax4')
+!ax4.name := 'Sofia Alvarez'
+
+!new Actor('ax5')
+!ax5.name := 'Helen Briggs'
+
+!new Actor('ax6')
+!ax6.name := 'Noah Bennett'
+
+!insert (mx1, ax1) into CassetteActor
+!insert (mx1, ax2) into CassetteActor
+!insert (mx1, ax3) into CassetteActor
+
+!insert (mx2, ax3) into CassetteActor
+!insert (mx2, ax4) into CassetteActor
+
+!insert (sx1, ax5) into CassetteActor
+
+!insert (sx2, ax5) into CassetteActor
+!insert (sx2, ax6) into CassetteActor
+
+!insert (sx3, ax2) into CassetteActor
+!insert (sx3, ax6) into CassetteActor
+
+!new Rental('rx1')
+!rx1.date := Date('2026-02-01')
+!insert (cx1, rx1) into ClientRental
+!insert (rx1, mx1) into RentalCassette
+!insert (rx1, sx1) into RentalCassette
+
+!new Rental('rx2')
+!rx2.date := Date('2026-02-05')
+!insert (cx1, rx2) into ClientRental
+!insert (rx2, mx2) into RentalCassette
+
+!new Rental('rx3')
+!rx3.date := Date('2026-02-06')
+!insert (cx2, rx3) into ClientRental
+!insert (rx3, sx2) into RentalCassette
+!insert (rx3, sx3) into RentalCassette
+
+!new Rental('rx4')
+!rx4.date := Date('2026-02-10')
+!insert (cx3, rx4) into ClientRental
+!insert (rx4, mx1) into RentalCassette
+!insert (rx4, mx2) into RentalCassette
+!insert (rx4, sx2) into RentalCassette
+
+!new Rental('rx5')
+!rx5.date := Date('2026-03-01')
+!insert (cx2, rx5) into ClientRental
+!insert (rx5, mx1) into RentalCassette

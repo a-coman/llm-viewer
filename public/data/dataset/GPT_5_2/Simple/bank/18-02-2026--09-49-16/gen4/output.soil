@@ -1,0 +1,115 @@
+!new Bank('bankIT1')
+!bankIT1.country := 'Italy'
+!bankIT1.name := 'Banca del Centro'
+!bankIT1.bic := 'BDCEITMMXXX'
+
+!new Bank('bankUK1')
+!bankUK1.country := 'United Kingdom'
+!bankUK1.name := 'Westbridge Bank plc'
+!bankUK1.bic := 'WBRGGB2LXXX'
+
+!new Bank('bankSE1')
+!bankSE1.country := 'Sweden'
+!bankSE1.name := 'Norr Finans AB'
+!bankSE1.bic := 'NORRSESSXXX'
+
+!new Person('r1')
+!r1.firstName := 'Giulia'
+!r1.lastName := 'Conti'
+!r1.age := 29
+
+!new Person('r2')
+!r2.firstName := 'Marco'
+!r2.lastName := 'Conti'
+!r2.age := 31
+
+!new Person('r3')
+!r3.firstName := 'Lucia'
+!r3.lastName := 'Bianchi'
+!r3.age := 45
+
+!new Person('r4')
+!r4.firstName := 'Oliver'
+!r4.lastName := 'Smith'
+!r4.age := 38
+
+!new Person('r5')
+!r5.firstName := 'Hannah'
+!r5.lastName := 'Jones'
+!r5.age := 22
+
+!new Person('r6')
+!r6.firstName := 'Tom'
+!r6.lastName := 'Smith'
+!r6.age := 14
+
+!new Person('r7')
+!r7.firstName := 'Sara'
+!r7.lastName := 'Bianchi'
+!r7.age := 17
+
+!new Person('r8')
+!r8.firstName := 'Ethan'
+!r8.lastName := 'Brown'
+!r8.age := 19
+
+!new Account('accI1')
+!accI1.iban := 'IT60X0542811101000000123456'
+!accI1.balance := 2100
+
+!new Account('accI2')
+!accI2.iban := 'IT33H0300203280000400001234'
+!accI2.balance := 18500
+
+!new Account('accI3')
+!accI3.iban := 'IT18K0103003205000012345678'
+!accI3.balance := 15
+
+!new Account('accU1')
+!accU1.iban := 'GB29NWBK60161331926819'
+!accU1.balance := 640
+
+!new Account('accU2')
+!accU2.iban := 'GB33BUKB20201555555555'
+!accU2.balance := 9200
+
+!new Account('accU3')
+!accU3.iban := 'GB58BARC20040112345678'
+!accU3.balance := 0
+
+!insert (bankIT1, accI1) into AccountOfBanks
+!insert (bankIT1, accI2) into AccountOfBanks
+!insert (bankIT1, accI3) into AccountOfBanks
+!insert (bankUK1, accU1) into AccountOfBanks
+!insert (bankUK1, accU2) into AccountOfBanks
+!insert (bankUK1, accU3) into AccountOfBanks
+
+!insert (r1, accI1) into Ownership
+!insert (r1, accI2) into Ownership
+!insert (r2, accI2) into Ownership
+!insert (r3, accI3) into Ownership
+!insert (r1, accU1) into Ownership
+!insert (r4, accU1) into Ownership
+!insert (r4, accU2) into Ownership
+!insert (r5, accU3) into Ownership
+
+!insert (r1, accI1) into Use
+!insert (r2, accI1) into Use
+
+!insert (r1, accI2) into Use
+!insert (r2, accI2) into Use
+!insert (r7, accI2) into Use
+
+!insert (r3, accI3) into Use
+!insert (r7, accI3) into Use
+
+!insert (r1, accU1) into Use
+!insert (r4, accU1) into Use
+!insert (r6, accU1) into Use
+!insert (r8, accU1) into Use
+
+!insert (r4, accU2) into Use
+!insert (r6, accU2) into Use
+
+!insert (r5, accU3) into Use
+!insert (r8, accU3) into Use

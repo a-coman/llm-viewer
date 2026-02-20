@@ -1,0 +1,130 @@
+!new AddressBook('ab17')
+
+!new Company('aquaFarm')
+!aquaFarm.name := 'AquaFarm Cooperative'
+!aquaFarm.phone := '+1-904-555-1700'
+!aquaFarm.website := 'https://aquafarm.example'
+!aquaFarm.email := 'office@aquafarm.example'
+!aquaFarm.industry := 'Aquaculture'
+
+!new Company('aquaFarmRuralUnit')
+!aquaFarmRuralUnit.name := 'AquaFarm Rural Unit'
+!aquaFarmRuralUnit.phone := '+1-386-555-1708'
+!aquaFarmRuralUnit.website := ''
+!aquaFarmRuralUnit.email := 'rural@aquafarm.example'
+!aquaFarmRuralUnit.industry := 'Aquaculture'
+
+!new Company('deltaShipping')
+!deltaShipping.name := 'Delta Shoreline Shipping'
+!deltaShipping.phone := '+1-912-555-1750'
+!deltaShipping.website := 'https://deltashoreline.example'
+!deltaShipping.email := 'dispatch@deltashoreline.example'
+!deltaShipping.industry := 'Logistics'
+
+!new Person('kiraSantos')
+!kiraSantos.name := 'Kira Santos'
+!kiraSantos.phone := '+1-904-555-1711'
+!kiraSantos.website := 'https://kirasantos.example'
+!kiraSantos.email := 'kira.santos@example.com'
+!kiraSantos.title := 'Process Consultant'
+
+!new Person('hugoBernal')
+!hugoBernal.name := 'Hugo Bernal'
+!hugoBernal.phone := '+1-912-555-1712'
+!hugoBernal.website := ''
+!hugoBernal.email := 'hugo.bernal@deltashoreline.example'
+!hugoBernal.title := 'Route Planner'
+
+!insert (ab17, aquaFarm) into AddressBookMadeOfContact
+!insert (ab17, aquaFarmRuralUnit) into AddressBookMadeOfContact
+!insert (ab17, deltaShipping) into AddressBookMadeOfContact
+!insert (ab17, kiraSantos) into AddressBookMadeOfContact
+!insert (ab17, hugoBernal) into AddressBookMadeOfContact
+
+!new Address('addrAquaFarmHQ')
+!addrAquaFarmHQ.city := 'Jacksonville'
+!addrAquaFarmHQ.street := 'Bay St'
+!addrAquaFarmHQ.houseNr := '88'
+
+!new Address('addrRuralPonds')
+!addrRuralPonds.city := 'Palatka'
+!addrRuralPonds.street := 'County Rd 216'
+!addrRuralPonds.houseNr := '1500'
+
+!new Address('addrDeltaHQ')
+!addrDeltaHQ.city := 'Savannah'
+!addrDeltaHQ.street := 'River St'
+!addrDeltaHQ.houseNr := '410'
+
+!new Address('addrDeltaPortOffice')
+!addrDeltaPortOffice.city := 'Savannah'
+!addrDeltaPortOffice.street := 'Port Blvd'
+!addrDeltaPortOffice.houseNr := '12'
+
+!new Address('addrHugoHome')
+!addrHugoHome.city := 'Pooler'
+!addrHugoHome.street := 'Blue Moon Xing'
+!addrHugoHome.houseNr := '27'
+
+!insert (aquaFarm, addrAquaFarmHQ) into ContactContainsAddress
+!insert (aquaFarmRuralUnit, addrRuralPonds) into ContactContainsAddress
+!insert (deltaShipping, addrDeltaHQ) into ContactContainsAddress
+!insert (deltaShipping, addrDeltaPortOffice) into ContactContainsAddress
+!insert (hugoBernal, addrHugoHome) into ContactContainsAddress
+
+!new Note('nKiraMeetingIntake')
+!nKiraMeetingIntake.author := 'Kira Santos'
+!nKiraMeetingIntake.time := Date('2026-02-05 09:00')
+!nKiraMeetingIntake.type := #MEETING
+!nKiraMeetingIntake.comment := 'Intake meeting with operations; mapped current stocking-to-harvest workflow and pain points.'
+
+!new Note('nKiraEmailRecommendations')
+!nKiraEmailRecommendations.author := 'Kira Santos'
+!nKiraEmailRecommendations.time := Date('2026-02-07 18:20')
+!nKiraEmailRecommendations.type := #EMAIL
+!nKiraEmailRecommendations.comment := 'Sent draft recommendations for cold-chain logging and delivery handoff checklist.'
+
+!new Note('nDeltaCallDelay')
+!nDeltaCallDelay.author := 'Dispatch Desk'
+!nDeltaCallDelay.time := Date('2026-02-08 06:35')
+!nDeltaCallDelay.type := #CALL
+!nDeltaCallDelay.comment := 'Reported weather delay for coastal route; rescheduled pickup window and notified client.'
+
+!insert (kiraSantos, nKiraMeetingIntake) into ContactContainsNote
+!insert (kiraSantos, nKiraEmailRecommendations) into ContactContainsNote
+!insert (deltaShipping, nDeltaCallDelay) into ContactContainsNote
+
+!new Relationship('relAquaSubdivisionRural')
+!relAquaSubdivisionRural.type := #SUBDIVISION
+!insert (aquaFarm, relAquaSubdivisionRural) into ContactToRelationship
+!insert (relAquaSubdivisionRural, aquaFarmRuralUnit) into RelationshipToContact
+
+!new Relationship('relAquaCoworkerDelta')
+!relAquaCoworkerDelta.type := #COWORKER
+!insert (aquaFarm, relAquaCoworkerDelta) into ContactToRelationship
+!insert (relAquaCoworkerDelta, deltaShipping) into RelationshipToContact
+
+!new Relationship('relDeltaCoworkerAqua')
+!relDeltaCoworkerAqua.type := #COWORKER
+!insert (deltaShipping, relDeltaCoworkerAqua) into ContactToRelationship
+!insert (relDeltaCoworkerAqua, aquaFarm) into RelationshipToContact
+
+!new Relationship('relKiraEmployeeOfAqua')
+!relKiraEmployeeOfAqua.type := #EMPLOYEE
+!insert (kiraSantos, relKiraEmployeeOfAqua) into ContactToRelationship
+!insert (relKiraEmployeeOfAqua, aquaFarm) into RelationshipToContact
+
+!new Relationship('relHugoEmployeeOfDelta')
+!relHugoEmployeeOfDelta.type := #EMPLOYEE
+!insert (hugoBernal, relHugoEmployeeOfDelta) into ContactToRelationship
+!insert (relHugoEmployeeOfDelta, deltaShipping) into RelationshipToContact
+
+!new Relationship('relHugoBossIsKira')
+!relHugoBossIsKira.type := #BOSS
+!insert (hugoBernal, relHugoBossIsKira) into ContactToRelationship
+!insert (relHugoBossIsKira, kiraSantos) into RelationshipToContact
+
+!new Relationship('relKiraCoworkerHugo')
+!relKiraCoworkerHugo.type := #COWORKER
+!insert (kiraSantos, relKiraCoworkerHugo) into ContactToRelationship
+!insert (relKiraCoworkerHugo, hugoBernal) into RelationshipToContact

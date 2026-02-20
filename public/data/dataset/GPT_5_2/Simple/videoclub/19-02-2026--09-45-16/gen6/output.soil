@@ -1,0 +1,80 @@
+!new Client('p1')
+!p1.clientId := 301
+!p1.isSuspended := false
+
+!new Client('p2')
+!p2.clientId := 302
+!p2.isSuspended := false
+
+!new Client('p3')
+!p3.clientId := 303
+!p3.isSuspended := true
+
+!new Client('p4')
+!p4.clientId := 304
+!p4.isSuspended := false
+
+!new Client('p5')
+!p5.clientId := 305
+!p5.isSuspended := false
+
+!new Client('p6')
+!p6.clientId := 306
+!p6.isSuspended := true
+
+!new Movie('film1')
+!film1.title := 'Desert Signal'
+!film1.availableCopies := 0
+!film1.genre := #Action
+
+!new Movie('film2')
+!film2.title := 'Office Pranks'
+!film2.availableCopies := 4
+!film2.genre := #Comedy
+
+!new Movie('film3')
+!film3.title := 'Night Ferry'
+!film3.availableCopies := 2
+!film3.genre := #Action
+
+!new Series('show1')
+!show1.title := 'Mountain Clinic'
+!show1.availableCopies := 1
+!show1.episode := 5
+
+!new Series('show2')
+!show2.title := 'Mountain Clinic'
+!show2.availableCopies := 1
+!show2.episode := 6
+
+!new Actor('star1')
+!star1.name := 'Chloe Barrett'
+
+!new Actor('star2')
+!star2.name := 'Hassan Ridley'
+
+!new Actor('star3')
+!star3.name := 'Yuki Tanaka'
+
+!insert (film1, star2) into CassetteActor
+!insert (film1, star3) into CassetteActor
+
+!insert (film2, star1) into CassetteActor
+
+!insert (film3, star2) into CassetteActor
+
+!insert (show1, star1) into CassetteActor
+!insert (show1, star3) into CassetteActor
+
+!insert (show2, star3) into CassetteActor
+
+!new Rental('rent1')
+!rent1.date := Date('2022-03-18')
+!insert (p2, rent1) into ClientRental
+!insert (rent1, film2) into RentalCassette
+
+!new Rental('rent2')
+!rent2.date := Date('2022-03-25')
+!insert (p2, rent2) into ClientRental
+!insert (rent2, show1) into RentalCassette
+!insert (rent2, film3) into RentalCassette

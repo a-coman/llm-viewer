@@ -1,0 +1,110 @@
+!new StateMachine('smOrder')
+!smOrder.name := 'onlineOrderFlow'
+
+!new State('stBrowsing')
+!stBrowsing.name := 'browsing'
+!new State('stCheckout')
+!stCheckout.name := 'checkout'
+!new State('stPaymentPending')
+!stPaymentPending.name := 'paymentPending'
+!new State('stFulfilled')
+!stFulfilled.name := 'fulfilled'
+!new State('stCancelled')
+!stCancelled.name := 'cancelled'
+!new State('stReturned')
+!stReturned.name := 'returned'
+!new State('stSupport')
+!stSupport.name := 'support'
+
+!insert (smOrder, stBrowsing) into StateMachineContainsStates
+!insert (smOrder, stCheckout) into StateMachineContainsStates
+!insert (smOrder, stPaymentPending) into StateMachineContainsStates
+!insert (smOrder, stFulfilled) into StateMachineContainsStates
+!insert (smOrder, stCancelled) into StateMachineContainsStates
+!insert (smOrder, stReturned) into StateMachineContainsStates
+!insert (smOrder, stSupport) into StateMachineContainsStates
+
+!insert (smOrder, stBrowsing) into StateMachineStartsStates
+
+
+!new Transition('trBrowseToCheckout')
+!trBrowseToCheckout.name := 'proceedToCheckout'
+!new TimeEvent('evBrowseToCheckout')
+!evBrowseToCheckout.time := 1
+!insert (smOrder, trBrowseToCheckout) into StateMachineContainsTransitions
+!insert (trBrowseToCheckout, evBrowseToCheckout) into TransitionContainsEvents
+!insert (stBrowsing, trBrowseToCheckout) into StateTransition
+!insert (trBrowseToCheckout, stCheckout) into TransitionState
+
+!new Transition('trCheckoutToPayment')
+!trCheckoutToPayment.name := 'confirmOrder'
+!new TimeEvent('evCheckoutToPayment')
+!evCheckoutToPayment.time := 1
+!insert (smOrder, trCheckoutToPayment) into StateMachineContainsTransitions
+!insert (trCheckoutToPayment, evCheckoutToPayment) into TransitionContainsEvents
+!insert (stCheckout, trCheckoutToPayment) into StateTransition
+!insert (trCheckoutToPayment, stPaymentPending) into TransitionState
+
+!new Transition('trPaymentToFulfilled')
+!trPaymentToFulfilled.name := 'paymentAccepted'
+!new TimeEvent('evPaymentToFulfilled')
+!evPaymentToFulfilled.time := 2
+!insert (smOrder, trPaymentToFulfilled) into StateMachineContainsTransitions
+!insert (trPaymentToFulfilled, evPaymentToFulfilled) into TransitionContainsEvents
+!insert (stPaymentPending, trPaymentToFulfilled) into StateTransition
+!insert (trPaymentToFulfilled, stFulfilled) into TransitionState
+
+!new Transition('trPaymentTimeoutToCancelled')
+!trPaymentTimeoutToCancelled.name := 'paymentTimeout'
+!new TimeEvent('evPaymentTimeoutToCancelled')
+!evPaymentTimeoutToCancelled.time := 15
+!insert (smOrder, trPaymentTimeoutToCancelled) into StateMachineContainsTransitions
+!insert (trPaymentTimeoutToCancelled, evPaymentTimeoutToCancelled) into TransitionContainsEvents
+!insert (stPaymentPending, trPaymentTimeoutToCancelled) into StateTransition
+!insert (trPaymentTimeoutToCancelled, stCancelled) into TransitionState
+
+!new Transition('trCheckoutCancel')
+!trCheckoutCancel.name := 'userCancels'
+!new TimeEvent('evCheckoutCancel')
+!evCheckoutCancel.time := 1
+!insert (smOrder, trCheckoutCancel) into StateMachineContainsTransitions
+!insert (trCheckoutCancel, evCheckoutCancel) into TransitionContainsEvents
+!insert (stCheckout, trCheckoutCancel) into StateTransition
+!insert (trCheckoutCancel, stCancelled) into TransitionState
+
+!new Transition('trFulfilledToReturned')
+!trFulfilledToReturned.name := 'returnRequested'
+!new TimeEvent('evFulfilledToReturned')
+!evFulfilledToReturned.time := 43200
+!insert (smOrder, trFulfilledToReturned) into StateMachineContainsTransitions
+!insert (trFulfilledToReturned, evFulfilledToReturned) into TransitionContainsEvents
+!insert (stFulfilled, trFulfilledToReturned) into StateTransition
+!insert (trFulfilledToReturned, stReturned) into TransitionState
+
+!new Transition('trCancelledToSupport')
+!trCancelledToSupport.name := 'contactSupport'
+!new TimeEvent('evCancelledToSupport')
+!evCancelledToSupport.time := 5
+!insert (smOrder, trCancelledToSupport) into StateMachineContainsTransitions
+!insert (trCancelledToSupport, evCancelledToSupport) into TransitionContainsEvents
+!insert (stCancelled, trCancelledToSupport) into StateTransition
+!insert (trCancelledToSupport, stSupport) into TransitionState
+
+!new Transition('trReturnedToSupport')
+!trReturnedToSupport.name := 'returnIssue'
+!new TimeEvent('evReturnedToSupport')
+!evReturnedToSupport.time := 5
+!insert (smOrder, trReturnedToSupport) into StateMachineContainsTransitions
+!insert (trReturnedToSupport, evReturnedToSupport) into TransitionContainsEvents
+!insert (stReturned, trReturnedToSupport) into StateTransition
+!insert (trReturnedToSupport, stSupport) into TransitionState
+
+
+!new StateMachine('smArchive')
+!smArchive.name := 'dataArchiveLifecycle'
+
+!new State('stArchived')
+!stArchived.name := 'archived'
+
+!insert (smArchive, stArchived) into StateMachineContainsStates
+!insert (smArchive, stArchived) into StateMachineStartsStates

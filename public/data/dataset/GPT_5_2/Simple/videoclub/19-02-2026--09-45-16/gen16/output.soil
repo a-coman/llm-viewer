@@ -1,0 +1,93 @@
+!new Client('tc1')
+!tc1.clientId := 1301
+!tc1.isSuspended := false
+
+!new Client('tc2')
+!tc2.clientId := 1302
+!tc2.isSuspended := false
+
+!new Client('tc3')
+!tc3.clientId := 1303
+!tc3.isSuspended := true
+
+!new Client('tc4')
+!tc4.clientId := 1304
+!tc4.isSuspended := false
+
+!new Actor('ta1')
+!ta1.name := 'Rohan Desai'
+
+!new Actor('ta2')
+!ta2.name := 'Elise Fournier'
+
+!new Actor('ta3')
+!ta3.name := 'Mateo Silva'
+
+!new Actor('ta4')
+!ta4.name := 'Greta Holm'
+
+!new Actor('ta5')
+!ta5.name := 'Jun Park'
+
+!new Movie('tm1')
+!tm1.title := 'Crosswind Directive'
+!tm1.availableCopies := 3
+!tm1.genre := #Action
+
+!new Movie('tm2')
+!tm2.title := 'Family Elevator'
+!tm2.availableCopies := 0
+!tm2.genre := #Comedy
+
+!new Series('ts1')
+!ts1.title := 'City Workshop'
+!ts1.availableCopies := 2
+!ts1.episode := 101
+
+!new Series('ts2')
+!ts2.title := 'City Workshop'
+!ts2.availableCopies := 2
+!ts2.episode := 102
+
+!new Series('ts3')
+!ts3.title := 'Hidden Recipes'
+!ts3.availableCopies := 5
+!ts3.episode := 1
+
+!new Series('ts4')
+!ts4.title := 'Hidden Recipes'
+!ts4.availableCopies := 5
+!ts4.episode := 2
+
+!insert (tm1, ta1) into CassetteActor
+!insert (tm1, ta2) into CassetteActor
+!insert (tm1, ta5) into CassetteActor
+
+!insert (tm2, ta1) into CassetteActor
+!insert (tm2, ta3) into CassetteActor
+
+!insert (ts1, ta1) into CassetteActor
+!insert (ts1, ta4) into CassetteActor
+
+!insert (ts2, ta1) into CassetteActor
+!insert (ts2, ta4) into CassetteActor
+!insert (ts2, ta5) into CassetteActor
+
+!insert (ts3, ta1) into CassetteActor
+!insert (ts3, ta2) into CassetteActor
+!insert (ts3, ta3) into CassetteActor
+
+!insert (ts4, ta1) into CassetteActor
+!insert (ts4, ta2) into CassetteActor
+
+!new Rental('tr1')
+!tr1.date := Date('2012-10-06')
+!insert (tc2, tr1) into ClientRental
+!insert (tr1, tm1) into RentalCassette
+!insert (tr1, ts1) into RentalCassette
+!insert (tr1, ts3) into RentalCassette
+
+!new Rental('tr2')
+!tr2.date := Date('2012-10-20')
+!insert (tc2, tr2) into ClientRental
+!insert (tr2, tm2) into RentalCassette

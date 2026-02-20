@@ -1,0 +1,126 @@
+!new Currency('curUSD')
+!curUSD.name := 'US Dollar'
+!curUSD.abbreviation := 'USD'
+
+!new Currency('curEUR')
+!curEUR.name := 'Euro'
+!curEUR.abbreviation := 'EUR'
+
+!new Expense('expJanHousehold')
+!expJanHousehold.amount := 81.00
+!expJanHousehold.startDate := Date('2026-01-01')
+!expJanHousehold.endDate := Date('2026-01-31')
+
+!new Bill('billGroceries_2026_01_05')
+!billGroceries_2026_01_05.amount := 23.50
+!billGroceries_2026_01_05.category := 'Groceries'
+!billGroceries_2026_01_05.date := Date('2026-01-05')
+!billGroceries_2026_01_05.paymentMethod := #CREDIT_CARD
+!billGroceries_2026_01_05.status := #VERIFIED
+
+!new Bill('billHousehold_2026_01_12')
+!billHousehold_2026_01_12.amount := 45.20
+!billHousehold_2026_01_12.category := 'Household'
+!billHousehold_2026_01_12.date := Date('2026-01-12')
+!billHousehold_2026_01_12.paymentMethod := #CASH
+!billHousehold_2026_01_12.status := #VALIDATED
+
+!new Bill('billPharmacy_2026_01_20')
+!billPharmacy_2026_01_20.amount := 12.30
+!billPharmacy_2026_01_20.category := 'Pharmacy'
+!billPharmacy_2026_01_20.date := Date('2026-01-20')
+!billPharmacy_2026_01_20.paymentMethod := #CREDIT_CARD
+!billPharmacy_2026_01_20.status := #PENDING
+
+!insert (expJanHousehold, billGroceries_2026_01_05) into ExpenseContainsBills
+!insert (expJanHousehold, billHousehold_2026_01_12) into ExpenseContainsBills
+!insert (expJanHousehold, billPharmacy_2026_01_20) into ExpenseContainsBills
+
+!insert (billGroceries_2026_01_05, curEUR) into BillCurrency
+!insert (billHousehold_2026_01_12, curEUR) into BillCurrency
+!insert (billPharmacy_2026_01_20, curEUR) into BillCurrency
+
+!new Comment('cmtJan1')
+!cmtJan1.text := 'Monthly household spending for January.'
+!new Comment('cmtJan2')
+!cmtJan2.text := 'Pharmacy receipt pending verification from provider.'
+
+!insert (expJanHousehold, cmtJan1) into ExpenseComment
+!insert (expJanHousehold, cmtJan2) into ExpenseComment
+
+
+!new Expense('expFebTravel')
+!expFebTravel.amount := 234.99
+!expFebTravel.startDate := Date('2026-02-10')
+!expFebTravel.endDate := Date('2026-02-15')
+
+!new Bill('billFlight_2026_02_10')
+!billFlight_2026_02_10.amount := 199.99
+!billFlight_2026_02_10.category := 'Travel - Flight'
+!billFlight_2026_02_10.date := Date('2026-02-10')
+!billFlight_2026_02_10.paymentMethod := #CREDIT_CARD
+!billFlight_2026_02_10.status := #VALIDATED
+
+!new Bill('billMetro_2026_02_13')
+!billMetro_2026_02_13.amount := 35.00
+!billMetro_2026_02_13.category := 'Travel - Local transport'
+!billMetro_2026_02_13.date := Date('2026-02-13')
+!billMetro_2026_02_13.paymentMethod := #CASH
+!billMetro_2026_02_13.status := #VERIFIED
+
+!insert (expFebTravel, billFlight_2026_02_10) into ExpenseContainsBills
+!insert (expFebTravel, billMetro_2026_02_13) into ExpenseContainsBills
+
+!insert (billFlight_2026_02_10, curUSD) into BillCurrency
+!insert (billMetro_2026_02_13, curUSD) into BillCurrency
+
+!new Comment('cmtTravel1')
+!cmtTravel1.text := 'Business trip; flight booked with corporate card.'
+!new Comment('cmtTravel2')
+!cmtTravel2.text := 'Local transport reimbursed as cash expense.'
+
+!insert (expFebTravel, cmtTravel1) into ExpenseComment
+!insert (expFebTravel, cmtTravel2) into ExpenseComment
+
+
+!new Expense('expMarUtilities')
+!expMarUtilities.amount := 118.00
+!expMarUtilities.startDate := Date('2026-03-01')
+!expMarUtilities.endDate := Date('2026-03-31')
+
+!new Bill('billInternet_2026_03_03')
+!billInternet_2026_03_03.amount := 60.00
+!billInternet_2026_03_03.category := 'Utilities - Internet'
+!billInternet_2026_03_03.date := Date('2026-03-03')
+!billInternet_2026_03_03.paymentMethod := #CREDIT_CARD
+!billInternet_2026_03_03.status := #PENDING
+
+!new Bill('billElectricity_2026_03_14')
+!billElectricity_2026_03_14.amount := 42.75
+!billElectricity_2026_03_14.category := 'Utilities - Electricity'
+!billElectricity_2026_03_14.date := Date('2026-03-14')
+!billElectricity_2026_03_14.paymentMethod := #CHECK
+!billElectricity_2026_03_14.status := #VERIFIED
+
+!new Bill('billWater_2026_03_28')
+!billWater_2026_03_28.amount := 15.25
+!billWater_2026_03_28.category := 'Utilities - Water'
+!billWater_2026_03_28.date := Date('2026-03-28')
+!billWater_2026_03_28.paymentMethod := #CHECK
+!billWater_2026_03_28.status := #DRAFT
+
+!insert (expMarUtilities, billInternet_2026_03_03) into ExpenseContainsBills
+!insert (expMarUtilities, billElectricity_2026_03_14) into ExpenseContainsBills
+!insert (expMarUtilities, billWater_2026_03_28) into ExpenseContainsBills
+
+!insert (billInternet_2026_03_03, curEUR) into BillCurrency
+!insert (billElectricity_2026_03_14, curEUR) into BillCurrency
+!insert (billWater_2026_03_28, curEUR) into BillCurrency
+
+!new Comment('cmtUtil1')
+!cmtUtil1.text := 'Utilities for March; electricity paid by check.'
+!new Comment('cmtUtil2')
+!cmtUtil2.text := 'Water bill drafted; waiting for final meter reading.'
+
+!insert (expMarUtilities, cmtUtil1) into ExpenseComment
+!insert (expMarUtilities, cmtUtil2) into ExpenseComment

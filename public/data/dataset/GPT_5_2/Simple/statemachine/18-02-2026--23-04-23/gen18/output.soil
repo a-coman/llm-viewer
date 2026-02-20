@@ -1,0 +1,221 @@
+!new StateMachine('smBaggage')
+!smBaggage.name := 'baggageHandlingSystem'
+
+!new State('bgWaiting')
+!bgWaiting.name := 'waiting'
+!new State('bgScanning')
+!bgScanning.name := 'scanning'
+!new State('bgRouting')
+!bgRouting.name := 'routing'
+!new State('bgLoading')
+!bgLoading.name := 'loading'
+!new State('bgInTransit')
+!bgInTransit.name := 'inTransit'
+!new State('bgDelivered')
+!bgDelivered.name := 'delivered'
+!new State('bgMisrouted')
+!bgMisrouted.name := 'misrouted'
+!new State('bgException')
+!bgException.name := 'exception'
+
+!insert (smBaggage, bgWaiting) into StateMachineContainsStates
+!insert (smBaggage, bgScanning) into StateMachineContainsStates
+!insert (smBaggage, bgRouting) into StateMachineContainsStates
+!insert (smBaggage, bgLoading) into StateMachineContainsStates
+!insert (smBaggage, bgInTransit) into StateMachineContainsStates
+!insert (smBaggage, bgDelivered) into StateMachineContainsStates
+!insert (smBaggage, bgMisrouted) into StateMachineContainsStates
+!insert (smBaggage, bgException) into StateMachineContainsStates
+
+!insert (smBaggage, bgWaiting) into StateMachineStartsStates
+
+
+!new Transition('trBagCheckIn')
+!trBagCheckIn.name := 'checkInAccepted'
+!new TimeEvent('evBagCheckIn')
+!evBagCheckIn.time := 1
+
+!new Transition('trBagScanOk')
+!trBagScanOk.name := 'scanOk'
+!new TimeEvent('evBagScanOk')
+!evBagScanOk.time := 2
+
+!new Transition('trBagScanFail')
+!trBagScanFail.name := 'scanFail'
+!new TimeEvent('evBagScanFail')
+!evBagScanFail.time := 3
+
+!new Transition('trBagRouteAssigned')
+!trBagRouteAssigned.name := 'routeAssigned'
+!new TimeEvent('evBagRouteAssigned')
+!evBagRouteAssigned.time := 5
+
+!new Transition('trBagLoadCart')
+!trBagLoadCart.name := 'loadToCart'
+!new TimeEvent('evBagLoadCart')
+!evBagLoadCart.time := 4
+
+!new Transition('trBagDepartTerminal')
+!trBagDepartTerminal.name := 'departTerminal'
+!new TimeEvent('evBagDepartTerminal')
+!evBagDepartTerminal.time := 12
+
+!new Transition('trBagArriveClaim')
+!trBagArriveClaim.name := 'arriveClaimBelt'
+!new TimeEvent('evBagArriveClaim')
+!evBagArriveClaim.time := 20
+
+!new Transition('trBagClaimed')
+!trBagClaimed.name := 'claimedByPassenger'
+!new TimeEvent('evBagClaimed')
+!evBagClaimed.time := 30
+
+!new Transition('trBagMisrouteDetected')
+!trBagMisrouteDetected.name := 'misrouteDetected'
+!new TimeEvent('evBagMisrouteDetected')
+!evBagMisrouteDetected.time := 1
+
+!new Transition('trBagReRoute')
+!trBagReRoute.name := 'reroute'
+!new TimeEvent('evBagReRoute')
+!evBagReRoute.time := 10
+
+!new Transition('trBagManualException')
+!trBagManualException.name := 'manualException'
+!new TimeEvent('evBagManualException')
+!evBagManualException.time := 1
+
+!new Transition('trBagResolveException')
+!trBagResolveException.name := 'resolveException'
+!new TimeEvent('evBagResolveException')
+!evBagResolveException.time := 25
+
+
+!insert (smBaggage, trBagCheckIn) into StateMachineContainsTransitions
+!insert (smBaggage, trBagScanOk) into StateMachineContainsTransitions
+!insert (smBaggage, trBagScanFail) into StateMachineContainsTransitions
+!insert (smBaggage, trBagRouteAssigned) into StateMachineContainsTransitions
+!insert (smBaggage, trBagLoadCart) into StateMachineContainsTransitions
+!insert (smBaggage, trBagDepartTerminal) into StateMachineContainsTransitions
+!insert (smBaggage, trBagArriveClaim) into StateMachineContainsTransitions
+!insert (smBaggage, trBagClaimed) into StateMachineContainsTransitions
+!insert (smBaggage, trBagMisrouteDetected) into StateMachineContainsTransitions
+!insert (smBaggage, trBagReRoute) into StateMachineContainsTransitions
+!insert (smBaggage, trBagManualException) into StateMachineContainsTransitions
+!insert (smBaggage, trBagResolveException) into StateMachineContainsTransitions
+
+!insert (trBagCheckIn, evBagCheckIn) into TransitionContainsEvents
+!insert (trBagScanOk, evBagScanOk) into TransitionContainsEvents
+!insert (trBagScanFail, evBagScanFail) into TransitionContainsEvents
+!insert (trBagRouteAssigned, evBagRouteAssigned) into TransitionContainsEvents
+!insert (trBagLoadCart, evBagLoadCart) into TransitionContainsEvents
+!insert (trBagDepartTerminal, evBagDepartTerminal) into TransitionContainsEvents
+!insert (trBagArriveClaim, evBagArriveClaim) into TransitionContainsEvents
+!insert (trBagClaimed, evBagClaimed) into TransitionContainsEvents
+!insert (trBagMisrouteDetected, evBagMisrouteDetected) into TransitionContainsEvents
+!insert (trBagReRoute, evBagReRoute) into TransitionContainsEvents
+!insert (trBagManualException, evBagManualException) into TransitionContainsEvents
+!insert (trBagResolveException, evBagResolveException) into TransitionContainsEvents
+
+
+!insert (bgWaiting, trBagCheckIn) into StateTransition
+!insert (trBagCheckIn, bgScanning) into TransitionState
+
+!insert (bgScanning, trBagScanOk) into StateTransition
+!insert (trBagScanOk, bgRouting) into TransitionState
+
+!insert (bgScanning, trBagScanFail) into StateTransition
+!insert (trBagScanFail, bgException) into TransitionState
+
+!insert (bgRouting, trBagRouteAssigned) into StateTransition
+!insert (trBagRouteAssigned, bgLoading) into TransitionState
+
+!insert (bgLoading, trBagLoadCart) into StateTransition
+!insert (trBagLoadCart, bgInTransit) into TransitionState
+
+!insert (bgInTransit, trBagDepartTerminal) into StateTransition
+!insert (trBagDepartTerminal, bgInTransit) into TransitionState
+
+!insert (bgInTransit, trBagArriveClaim) into StateTransition
+!insert (trBagArriveClaim, bgDelivered) into TransitionState
+
+!insert (bgDelivered, trBagClaimed) into StateTransition
+!insert (trBagClaimed, bgWaiting) into TransitionState
+
+!insert (bgRouting, trBagMisrouteDetected) into StateTransition
+!insert (trBagMisrouteDetected, bgMisrouted) into TransitionState
+
+!insert (bgMisrouted, trBagReRoute) into StateTransition
+!insert (trBagReRoute, bgRouting) into TransitionState
+
+!insert (bgLoading, trBagManualException) into StateTransition
+!insert (trBagManualException, bgException) into TransitionState
+
+!insert (bgException, trBagResolveException) into StateTransition
+!insert (trBagResolveException, bgScanning) into TransitionState
+
+
+
+!new StateMachine('smNewsletter')
+!smNewsletter.name := 'newsletterSignup'
+
+!new State('nsDraft')
+!nsDraft.name := 'draft'
+!new State('nsPending')
+!nsPending.name := 'pendingConfirmation'
+!new State('nsConfirmed')
+!nsConfirmed.name := 'confirmed'
+!new State('nsExpired')
+!nsExpired.name := 'expired'
+
+!insert (smNewsletter, nsDraft) into StateMachineContainsStates
+!insert (smNewsletter, nsPending) into StateMachineContainsStates
+!insert (smNewsletter, nsConfirmed) into StateMachineContainsStates
+!insert (smNewsletter, nsExpired) into StateMachineContainsStates
+
+!insert (smNewsletter, nsDraft) into StateMachineStartsStates
+
+
+!new Transition('trNsSubmitEmail')
+!trNsSubmitEmail.name := 'submitEmail'
+!new TimeEvent('evNsSubmitEmail')
+!evNsSubmitEmail.time := 1
+
+!new Transition('trNsConfirmLink')
+!trNsConfirmLink.name := 'confirmLink'
+!new TimeEvent('evNsConfirmLink')
+!evNsConfirmLink.time := 3
+
+!new Transition('trNsConfirmTimeout')
+!trNsConfirmTimeout.name := 'confirmTimeout'
+!new TimeEvent('evNsConfirmTimeout')
+!evNsConfirmTimeout.time := 1440
+
+!new Transition('trNsResubscribe')
+!trNsResubscribe.name := 'resubscribe'
+!new TimeEvent('evNsResubscribe')
+!evNsResubscribe.time := 2
+
+
+!insert (smNewsletter, trNsSubmitEmail) into StateMachineContainsTransitions
+!insert (smNewsletter, trNsConfirmLink) into StateMachineContainsTransitions
+!insert (smNewsletter, trNsConfirmTimeout) into StateMachineContainsTransitions
+!insert (smNewsletter, trNsResubscribe) into StateMachineContainsTransitions
+
+!insert (trNsSubmitEmail, evNsSubmitEmail) into TransitionContainsEvents
+!insert (trNsConfirmLink, evNsConfirmLink) into TransitionContainsEvents
+!insert (trNsConfirmTimeout, evNsConfirmTimeout) into TransitionContainsEvents
+!insert (trNsResubscribe, evNsResubscribe) into TransitionContainsEvents
+
+
+!insert (nsDraft, trNsSubmitEmail) into StateTransition
+!insert (trNsSubmitEmail, nsPending) into TransitionState
+
+!insert (nsPending, trNsConfirmLink) into StateTransition
+!insert (trNsConfirmLink, nsConfirmed) into TransitionState
+
+!insert (nsPending, trNsConfirmTimeout) into StateTransition
+!insert (trNsConfirmTimeout, nsExpired) into TransitionState
+
+!insert (nsExpired, trNsResubscribe) into StateTransition
+!insert (trNsResubscribe, nsPending) into TransitionState

@@ -1,0 +1,116 @@
+!new Client('sc1')
+!sc1.clientId := 3001
+!sc1.isSuspended := false
+
+!new Client('sc2')
+!sc2.clientId := 3002
+!sc2.isSuspended := true
+
+!new Client('sc3')
+!sc3.clientId := 3003
+!sc3.isSuspended := false
+
+!new Client('sc4')
+!sc4.clientId := 3004
+!sc4.isSuspended := false
+
+!new Client('sc5')
+!sc5.clientId := 3005
+!sc5.isSuspended := true
+
+!new Client('sc6')
+!sc6.clientId := 3006
+!sc6.isSuspended := false
+
+!new Cassette('tA')
+!tA.title := 'How to Draw: Perspective Basics'
+!tA.availableCopies := 2
+
+!new Cassette('tB')
+!tB.title := 'Beginner Coding: Algorithms on VHS'
+!tB.availableCopies := 0
+
+!new Movie('mA')
+!mA.title := 'Harborline Assault'
+!mA.availableCopies := 4
+!mA.genre := #Action
+
+!new Movie('mB')
+!mB.title := 'The Accidental Roommate'
+!mB.availableCopies := 1
+!mB.genre := #Comedy
+
+!new Series('sA')
+!sA.title := 'Civic Hospital'
+!sA.availableCopies := 3
+!sA.episode := 5
+
+!new Series('sB')
+!sB.title := 'Civic Hospital'
+!sB.availableCopies := 3
+!sB.episode := 6
+
+!new Series('sC')
+!sC.title := 'Midtown Mechanics'
+!sC.availableCopies := 1
+!sC.episode := 1
+
+!new Actor('sa1')
+!sa1.name := 'Erin Wallace'
+
+!new Actor('sa2')
+!sa2.name := 'Jonas Miura'
+
+!new Actor('sa3')
+!sa3.name := 'Kofi Mensah'
+
+!new Actor('sa4')
+!sa4.name := 'Lucia Benitez'
+
+!new Actor('sa5')
+!sa5.name := 'Theo Gardner'
+
+!new Actor('sa6')
+!sa6.name := 'Nadia Kwon'
+
+!new Actor('sa7')
+!sa7.name := 'Priit Saar'
+
+!new Actor('sa8')
+!sa8.name := 'Elif Demir'
+
+!insert (tA, sa7) into CassetteActor
+
+!insert (tB, sa8) into CassetteActor
+!insert (tB, sa6) into CassetteActor
+
+!insert (mA, sa2) into CassetteActor
+!insert (mA, sa3) into CassetteActor
+!insert (mA, sa5) into CassetteActor
+
+!insert (mB, sa1) into CassetteActor
+!insert (mB, sa4) into CassetteActor
+
+!insert (sA, sa1) into CassetteActor
+!insert (sA, sa6) into CassetteActor
+
+!insert (sB, sa1) into CassetteActor
+!insert (sB, sa6) into CassetteActor
+!insert (sB, sa5) into CassetteActor
+
+!insert (sC, sa2) into CassetteActor
+
+!new Rental('sr1')
+!sr1.date := Date('2003-03-12')
+!insert (sc1, sr1) into ClientRental
+!insert (sr1, tA) into RentalCassette
+!insert (sr1, mA) into RentalCassette
+
+!new Rental('sr2')
+!sr2.date := Date('2003-03-19')
+!insert (sc1, sr2) into ClientRental
+!insert (sr2, sA) into RentalCassette
+!insert (sr2, sB) into RentalCassette
+!insert (sr2, sC) into RentalCassette
+!insert (sr2, mB) into RentalCassette
+!insert (sr2, tB) into RentalCassette

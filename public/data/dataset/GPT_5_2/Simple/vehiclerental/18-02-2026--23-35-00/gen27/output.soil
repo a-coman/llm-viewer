@@ -1,0 +1,161 @@
+!new RentalOffice('office_tucson14')
+!office_tucson14.name := 'Sonoran Commercial Rentals - Tucson'
+!office_tucson14.number := 14001
+!office_tucson14.address := '2210 E Valencia Rd, Tucson, AZ 85706'
+
+!new RentalOffice('office_colorado_springs14')
+!office_colorado_springs14.name := 'Pikes Peak Return & Service - Colorado Springs'
+!office_colorado_springs14.number := 14002
+!office_colorado_springs14.address := '3775 Airport Rd, Colorado Springs, CO 80910'
+
+!new RentalOffice('office_wilmington_admin14')
+!office_wilmington_admin14.name := 'Delaware Corporate Admin Desk'
+!office_wilmington_admin14.number := 14003
+!office_wilmington_admin14.address := '900 N Market St, Wilmington, DE 19801'
+
+!new Truck('truck_az_24ft_1401')
+!truck_az_24ft_1401.id := 140101
+!truck_az_24ft_1401.registrationState := #AZ
+!truck_az_24ft_1401.licensePlateNumber := 'AZ-TRK-1401'
+!truck_az_24ft_1401.vehicleTypeCode := #TRUCK24
+!truck_az_24ft_1401.registrationLastMaintenanceDate := Date('2026-06-07')
+!truck_az_24ft_1401.expirationDate := Date('2027-06-30')
+!truck_az_24ft_1401.odometerReading := 60218
+!truck_az_24ft_1401.gasTankCapacity := 63.0
+!truck_az_24ft_1401.workingRadio := true
+!truck_az_24ft_1401.mileage := 9
+
+!new Truck('truck_co_10ft_1402')
+!truck_co_10ft_1402.id := 140102
+!truck_co_10ft_1402.registrationState := #CO
+!truck_co_10ft_1402.licensePlateNumber := 'CO-TRK-1402'
+!truck_co_10ft_1402.vehicleTypeCode := #TRUCK10
+!truck_co_10ft_1402.registrationLastMaintenanceDate := Date('2026-05-11')
+!truck_co_10ft_1402.expirationDate := Date('2027-05-31')
+!truck_co_10ft_1402.odometerReading := 17890
+!truck_co_10ft_1402.gasTankCapacity := 34.0
+!truck_co_10ft_1402.workingRadio := false
+!truck_co_10ft_1402.mileage := 16
+
+!new Vehicle('trailer_az_covered_1403')
+!trailer_az_covered_1403.id := 140103
+!trailer_az_covered_1403.registrationState := #AZ
+!trailer_az_covered_1403.licensePlateNumber := 'AZ-TRL-1403'
+!trailer_az_covered_1403.vehicleTypeCode := #COVERED_TRAILER
+!trailer_az_covered_1403.registrationLastMaintenanceDate := Date('2026-04-19')
+!trailer_az_covered_1403.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_de_open_1404')
+!trailer_de_open_1404.id := 140104
+!trailer_de_open_1404.registrationState := #DE
+!trailer_de_open_1404.licensePlateNumber := 'DE-TRL-1404'
+!trailer_de_open_1404.vehicleTypeCode := #OPEN_TRAILER
+!trailer_de_open_1404.registrationLastMaintenanceDate := Date('2026-03-02')
+!trailer_de_open_1404.expirationDate := Date('2027-03-31')
+
+!insert (office_tucson14, truck_az_24ft_1401) into RentalOfficeVehicle
+!insert (office_colorado_springs14, truck_co_10ft_1402) into RentalOfficeVehicle
+!insert (office_tucson14, trailer_az_covered_1403) into RentalOfficeVehicle
+!insert (office_wilmington_admin14, trailer_de_open_1404) into RentalOfficeVehicle
+
+!new Company('cust_co_evergreen14')
+!cust_co_evergreen14.name := 'Evergreen Facilities Group'
+!cust_co_evergreen14.address := '1200 N Market St, Wilmington, DE 19801'
+!cust_co_evergreen14.poorRisk := false
+!cust_co_evergreen14.idNumber := 14088077
+
+!new Individual('cust_ind_alina14')
+!cust_ind_alina14.name := 'Alina Voss'
+!cust_ind_alina14.address := '630 E Grant Rd, Tucson, AZ 85705'
+!cust_ind_alina14.poorRisk := false
+!cust_ind_alina14.homePhone := '520-555-0161'
+!cust_ind_alina14.driverLicenseState := #AZ
+!cust_ind_alina14.driverLicenseNumber := 50311982
+!cust_ind_alina14.driverLicenseExpirationDate := Date('2028-11-30')
+
+!new Individual('cust_ind_ben14')
+!cust_ind_ben14.name := 'Ben Holloway'
+!cust_ind_ben14.address := '11 N Tejon St, Colorado Springs, CO 80903'
+!cust_ind_ben14.poorRisk := true
+!cust_ind_ben14.homePhone := '719-555-0127'
+!cust_ind_ben14.driverLicenseState := #CO
+!cust_ind_ben14.driverLicenseNumber := 77190240
+!cust_ind_ben14.driverLicenseExpirationDate := Date('2026-10-31')
+
+!new RentalAgreement('ra_140001')
+!ra_140001.number := 140001
+!ra_140001.rentalDate := Date('2026-01-15')
+!ra_140001.anticipatedDuration := 365
+!ra_140001.depositPaid := 0.00
+!ra_140001.quotedDailyRate := 22.00
+!ra_140001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_140002')
+!ra_140002.number := 140002
+!ra_140002.rentalDate := Date('2026-02-02')
+!ra_140002.anticipatedDuration := 2
+!ra_140002.depositPaid := 300.00
+!ra_140002.quotedDailyRate := 0.00
+!ra_140002.quotedRatePerMile := 1.18
+
+!new RentalAgreement('ra_140003')
+!ra_140003.number := 140003
+!ra_140003.rentalDate := Date('2026-02-10')
+!ra_140003.anticipatedDuration := 7
+!ra_140003.depositPaid := 500.00
+!ra_140003.quotedDailyRate := 59.00
+!ra_140003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_140004')
+!ra_140004.number := 140004
+!ra_140004.rentalDate := Date('2026-02-18')
+!ra_140004.anticipatedDuration := 1
+!ra_140004.depositPaid := 150.00
+!ra_140004.quotedDailyRate := 45.00
+!ra_140004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_140005')
+!ra_140005.number := 140005
+!ra_140005.rentalDate := Date('2026-03-01')
+!ra_140005.anticipatedDuration := 10
+!ra_140005.depositPaid := 800.00
+!ra_140005.quotedDailyRate := 129.00
+!ra_140005.quotedRatePerMile := 0.72
+
+!new RentalAgreement('ra_140006')
+!ra_140006.number := 140006
+!ra_140006.rentalDate := Date('2026-03-05')
+!ra_140006.anticipatedDuration := 3
+!ra_140006.depositPaid := 0.00
+!ra_140006.quotedDailyRate := 28.00
+!ra_140006.quotedRatePerMile := 0.00
+
+!insert (office_wilmington_admin14, ra_140001) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington_admin14, ra_140001) into RentalOfficeRentalAgreementDrop
+!insert (ra_140001, trailer_de_open_1404) into RentalAgreementVehicle
+!insert (ra_140001, cust_co_evergreen14) into RentalAgreementCustomer
+
+!insert (office_tucson14, ra_140002) into RentalOfficeRentalAgreementOrigin
+!insert (office_colorado_springs14, ra_140002) into RentalOfficeRentalAgreementDrop
+!insert (ra_140002, truck_az_24ft_1401) into RentalAgreementVehicle
+!insert (ra_140002, cust_ind_alina14) into RentalAgreementCustomer
+
+!insert (office_colorado_springs14, ra_140003) into RentalOfficeRentalAgreementOrigin
+!insert (office_colorado_springs14, ra_140003) into RentalOfficeRentalAgreementDrop
+!insert (ra_140003, truck_co_10ft_1402) into RentalAgreementVehicle
+!insert (ra_140003, cust_ind_ben14) into RentalAgreementCustomer
+
+!insert (office_tucson14, ra_140004) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson14, ra_140004) into RentalOfficeRentalAgreementDrop
+!insert (ra_140004, trailer_az_covered_1403) into RentalAgreementVehicle
+!insert (ra_140004, cust_ind_alina14) into RentalAgreementCustomer
+
+!insert (office_wilmington_admin14, ra_140005) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson14, ra_140005) into RentalOfficeRentalAgreementDrop
+!insert (ra_140005, truck_az_24ft_1401) into RentalAgreementVehicle
+!insert (ra_140005, cust_co_evergreen14) into RentalAgreementCustomer
+
+!insert (office_wilmington_admin14, ra_140006) into RentalOfficeRentalAgreementOrigin
+!insert (office_colorado_springs14, ra_140006) into RentalOfficeRentalAgreementDrop
+!insert (ra_140006, trailer_de_open_1404) into RentalAgreementVehicle
+!insert (ra_140006, cust_ind_ben14) into RentalAgreementCustomer

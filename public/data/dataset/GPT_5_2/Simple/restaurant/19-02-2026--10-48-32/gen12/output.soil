@@ -1,0 +1,324 @@
+!new Restaurant('rest15')
+!rest15.name := 'Airport Express Eatery'
+
+!new Owner('own34')
+!own34.name := 'Sasha Novak'
+!own34.percentageShares := 10
+!new Owner('own35')
+!own35.name := 'Minho Park'
+!own35.percentageShares := 20
+!new Owner('own36')
+!own36.name := 'Elena Garcia'
+!own36.percentageShares := 30
+!new Owner('own37')
+!own37.name := 'Thomas Wright'
+!own37.percentageShares := 40
+
+!insert (rest15, own34) into RestaurantOwner
+!insert (rest15, own35) into RestaurantOwner
+!insert (rest15, own36) into RestaurantOwner
+!insert (rest15, own37) into RestaurantOwner
+
+!new Manager('mgr6')
+!mgr6.name := 'Rachel Stone'
+!mgr6.dateOfBirth := Date('1988-08-08')
+!mgr6.phoneNumber := '555-7700'
+
+!new HeadWaiter('hw15')
+!hw15.name := 'Ian Porter'
+!hw15.dateOfBirth := Date('1983-04-04')
+!hw15.phoneNumber := '555-7701'
+
+!new HeadWaiter('hw16')
+!hw16.name := 'Sabine Koch'
+!hw16.dateOfBirth := Date('1985-12-12')
+!hw16.phoneNumber := '555-7702'
+
+!new Waiter('w32')
+!w32.name := 'Nina Lopez'
+!w32.dateOfBirth := Date('1999-01-20')
+!w32.phoneNumber := '555-7710'
+!w32.spokenLanguage := #English
+
+!new Waiter('w33')
+!w33.name := 'Rafael Mendez'
+!w33.dateOfBirth := Date('1996-07-02')
+!w33.phoneNumber := '555-7711'
+!w33.spokenLanguage := #Spanish
+
+!new Waiter('w34')
+!w34.name := 'Johann Seidel'
+!w34.dateOfBirth := Date('1991-10-29')
+!w34.phoneNumber := '555-7712'
+!w34.spokenLanguage := #German
+
+!insert (hw15, w32) into HeadWaiterWaiter
+!insert (hw15, w33) into HeadWaiterWaiter
+!insert (hw16, w34) into HeadWaiterWaiter
+
+!new Chef('chef21')
+!chef21.name := 'Carla Bianchi'
+!chef21.dateOfBirth := Date('1979-03-17')
+!chef21.phoneNumber := '555-7720'
+
+!new Chef('chef22')
+!chef22.name := 'Hassan Farid'
+!chef22.dateOfBirth := Date('1982-09-01')
+!chef22.phoneNumber := '555-7721'
+
+!new Cook('cook32')
+!cook32.name := 'Devon Gray'
+!cook32.dateOfBirth := Date('1994-05-05')
+!cook32.phoneNumber := '555-7730'
+!cook32.yearsOfExperience := 6
+
+!new Cook('cook33')
+!cook33.name := 'Mai Nguyen'
+!cook33.dateOfBirth := Date('1998-02-18')
+!cook33.phoneNumber := '555-7731'
+!cook33.yearsOfExperience := 2
+
+!new Cook('cook34')
+!cook34.name := 'Leila Haddad'
+!cook34.dateOfBirth := Date('1990-11-11')
+!cook34.phoneNumber := '555-7732'
+!cook34.yearsOfExperience := 10
+
+!insert (chef21, cook32) into ChefCook
+!insert (chef21, cook33) into ChefCook
+!insert (chef22, cook34) into ChefCook
+
+!new Allergen('alg15Gluten')
+!alg15Gluten.type := #Gluten
+!new Allergen('alg15Lactose')
+!alg15Lactose.type := #Lactose
+!new Allergen('alg15Nuts')
+!alg15Nuts.type := #Nuts
+
+!new FoodItem('fiCroissant15')
+!fiCroissant15.number := 1201
+!fiCroissant15.description := 'Butter croissant'
+!fiCroissant15.purchaseFlag := true
+!fiCroissant15.unit := #Dozen
+
+!new FoodItem('fiEggs15')
+!fiEggs15.number := 1202
+!fiEggs15.description := 'Eggs'
+!fiEggs15.purchaseFlag := true
+!fiEggs15.unit := #Dozen
+
+!new FoodItem('fiGreekYogurt15')
+!fiGreekYogurt15.number := 1203
+!fiGreekYogurt15.description := 'Greek yogurt'
+!fiGreekYogurt15.purchaseFlag := true
+!fiGreekYogurt15.unit := #Ounce
+
+!new FoodItem('fiBerries15')
+!fiBerries15.number := 1204
+!fiBerries15.description := 'Mixed berries'
+!fiBerries15.purchaseFlag := true
+!fiBerries15.unit := #Pound
+
+!new FoodItem('fiGranola15')
+!fiGranola15.number := 1205
+!fiGranola15.description := 'House granola'
+!fiGranola15.purchaseFlag := false
+!fiGranola15.unit := #Ounce
+
+!new FoodItem('fiAlmondButter15')
+!fiAlmondButter15.number := 1206
+!fiAlmondButter15.description := 'Almond butter'
+!fiAlmondButter15.purchaseFlag := true
+!fiAlmondButter15.unit := #Ounce
+
+!new FoodItem('fiOrangeJuice15')
+!fiOrangeJuice15.number := 1207
+!fiOrangeJuice15.description := 'Orange juice'
+!fiOrangeJuice15.purchaseFlag := true
+!fiOrangeJuice15.unit := #Ounce
+
+!insert (fiCroissant15, alg15Gluten) into FoodItemAllergen
+!insert (fiGranola15, alg15Gluten) into FoodItemAllergen
+!insert (fiGreekYogurt15, alg15Lactose) into FoodItemAllergen
+!insert (fiAlmondButter15, alg15Nuts) into FoodItemAllergen
+
+!new MenuItem('miQuickBreakfast15')
+!miQuickBreakfast15.description := 'Croissant with scrambled eggs'
+!miQuickBreakfast15.prepTime := 9.0
+!miQuickBreakfast15.classification := #Main
+
+!new MenuItem('miYogurtParfait15')
+!miYogurtParfait15.description := 'Yogurt parfait with granola and berries'
+!miYogurtParfait15.prepTime := 4.0
+!miYogurtParfait15.classification := #Dessert
+
+!new MenuItem('miOrangeJuice15')
+!miOrangeJuice15.description := 'Fresh orange juice'
+!miOrangeJuice15.prepTime := 1.0
+!miOrangeJuice15.classification := #Beverage
+
+!new MenuItem('miAlmondBites15')
+!miAlmondBites15.description := 'Almond butter bites'
+!miAlmondBites15.prepTime := 3.0
+!miAlmondBites15.classification := #Apetizer
+
+!insert (miQuickBreakfast15, chef21) into MenuItemChef
+!insert (miYogurtParfait15, chef22) into MenuItemChef
+!insert (miOrangeJuice15, chef21) into MenuItemChef
+!insert (miAlmondBites15, chef22) into MenuItemChef
+
+!insert (miQuickBreakfast15, fiCroissant15) into MenuItemFoodItem
+!insert (miQuickBreakfast15, fiEggs15) into MenuItemFoodItem
+
+!insert (miYogurtParfait15, fiGreekYogurt15) into MenuItemFoodItem
+!insert (miYogurtParfait15, fiGranola15) into MenuItemFoodItem
+!insert (miYogurtParfait15, fiBerries15) into MenuItemFoodItem
+
+!insert (miOrangeJuice15, fiOrangeJuice15) into MenuItemFoodItem
+
+!insert (miAlmondBites15, fiAlmondButter15) into MenuItemFoodItem
+
+!new Individual('res19')
+!res19.time := Time('06:10')
+!res19.date := Date('2027-02-03')
+!res19.numberPeople := 1
+!res19.name := 'Early Traveler'
+!res19.phoneNumber := '555-7801'
+!res19.number := 21001
+!res19.seating := #Inside
+!res19.smoking := #NonSmoking
+
+!insert (rest15, res19) into RestaurantReservation
+!insert (res19, w32) into ReservationWaiter
+
+!new Table('tRes19A')
+!tRes19A.number := 1
+!tRes19A.description := 'Counter seat'
+!tRes19A.capacity := 2
+!insert (res19, tRes19A) into ReservationTable
+
+!new ItemOrder('ioRes19_1')
+!ioRes19_1.time := Time('06:15')
+!insert (res19, ioRes19_1) into ReservationItemOrdered
+!insert (ioRes19_1, miOrangeJuice15) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes19_2')
+!ioRes19_2.time := Time('06:18')
+!insert (res19, ioRes19_2) into ReservationItemOrdered
+!insert (ioRes19_2, miQuickBreakfast15) into ItemOrderMenuItem
+
+!new Individual('res20')
+!res20.time := Time('07:45')
+!res20.date := Date('2027-02-03')
+!res20.numberPeople := 8
+!res20.name := 'Conference Transfer Group'
+!res20.phoneNumber := '555-7802'
+!res20.number := 21002
+!res20.seating := #Inside
+!res20.smoking := #NonSmoking
+
+!insert (rest15, res20) into RestaurantReservation
+!insert (res20, w32) into ReservationWaiter
+!insert (res20, w33) into ReservationWaiter
+
+!new Table('tRes20A')
+!tRes20A.number := 10
+!tRes20A.description := 'High-top table A'
+!tRes20A.capacity := 4
+!insert (res20, tRes20A) into ReservationTable
+
+!new Table('tRes20B')
+!tRes20B.number := 11
+!tRes20B.description := 'High-top table B'
+!tRes20B.capacity := 4
+!insert (res20, tRes20B) into ReservationTable
+
+!new ItemOrder('ioRes20_1')
+!ioRes20_1.time := Time('08:00')
+!insert (res20, ioRes20_1) into ReservationItemOrdered
+!insert (ioRes20_1, miYogurtParfait15) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes20_2')
+!ioRes20_2.time := Time('08:02')
+!insert (res20, ioRes20_2) into ReservationItemOrdered
+!insert (ioRes20_2, miOrangeJuice15) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes20_3')
+!ioRes20_3.time := Time('08:10')
+!insert (res20, ioRes20_3) into ReservationItemOrdered
+!insert (ioRes20_3, miAlmondBites15) into ItemOrderMenuItem
+
+!new Banquet('banq12')
+!banq12.time := Time('13:00')
+!banq12.date := Date('2027-02-04')
+!banq12.numberPeople := 120
+!banq12.name := 'Flight Crew Reunion Committee'
+!banq12.phoneNumber := '555-7803'
+!banq12.number := 22001
+!banq12.groupName := 'Flight Crew Reunion'
+!banq12.paymentMethod := #CreditCard
+!banq12.busService := true
+
+!insert (rest15, banq12) into RestaurantReservation
+!insert (banq12, w34) into ReservationWaiter
+
+!new Table('tBanq12A')
+!tBanq12A.number := 201
+!tBanq12A.description := 'Ballroom row A'
+!tBanq12A.capacity := 20
+!insert (banq12, tBanq12A) into ReservationTable
+
+!new Table('tBanq12B')
+!tBanq12B.number := 202
+!tBanq12B.description := 'Ballroom row B'
+!tBanq12B.capacity := 20
+!insert (banq12, tBanq12B) into ReservationTable
+
+!new Table('tBanq12C')
+!tBanq12C.number := 203
+!tBanq12C.description := 'Ballroom row C'
+!tBanq12C.capacity := 20
+!insert (banq12, tBanq12C) into ReservationTable
+
+!new Table('tBanq12D')
+!tBanq12D.number := 204
+!tBanq12D.description := 'Ballroom row D'
+!tBanq12D.capacity := 20
+!insert (banq12, tBanq12D) into ReservationTable
+
+!new Table('tBanq12E')
+!tBanq12E.number := 205
+!tBanq12E.description := 'Ballroom row E'
+!tBanq12E.capacity := 20
+!insert (banq12, tBanq12E) into ReservationTable
+
+!new Table('tBanq12F')
+!tBanq12F.number := 206
+!tBanq12F.description := 'Ballroom row F'
+!tBanq12F.capacity := 20
+!insert (banq12, tBanq12F) into ReservationTable
+
+!new ItemOrder('ioBanq12_1')
+!ioBanq12_1.time := Time('13:20')
+!insert (banq12, ioBanq12_1) into ReservationItemOrdered
+!insert (ioBanq12_1, miQuickBreakfast15) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq12_2')
+!ioBanq12_2.time := Time('13:25')
+!insert (banq12, ioBanq12_2) into ReservationItemOrdered
+!insert (ioBanq12_2, miOrangeJuice15) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq12_3')
+!ioBanq12_3.time := Time('13:40')
+!insert (banq12, ioBanq12_3) into ReservationItemOrdered
+!insert (ioBanq12_3, miYogurtParfait15) into ItemOrderMenuItem
+
+!new RegularCustomer('cust17')
+!cust17.name := 'Samir Youssef'
+!cust17.prefferedLanguage := #English
+
+!new DietaryRequirement('dietReq13')
+!dietReq13.diet := #Kosher
+
+!new ReportedAllergy('repAlg13')
+!repAlg13.allergen := #Nuts

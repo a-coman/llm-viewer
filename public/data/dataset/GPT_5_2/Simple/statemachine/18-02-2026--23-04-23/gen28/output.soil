@@ -1,0 +1,212 @@
+!new StateMachine('smAirlock')
+!smAirlock.name := 'spaceStationAirlock'
+
+!new State('alSealed')
+!alSealed.name := 'sealed'
+!new State('alInnerOpen')
+!alInnerOpen.name := 'innerDoorOpen'
+!new State('alOuterOpen')
+!alOuterOpen.name := 'outerDoorOpen'
+!new State('alPressurizing')
+!alPressurizing.name := 'pressurizing'
+!new State('alDepressurizing')
+!alDepressurizing.name := 'depressurizing'
+!new State('alFault')
+!alFault.name := 'fault'
+
+!insert (smAirlock, alSealed) into StateMachineContainsStates
+!insert (smAirlock, alInnerOpen) into StateMachineContainsStates
+!insert (smAirlock, alOuterOpen) into StateMachineContainsStates
+!insert (smAirlock, alPressurizing) into StateMachineContainsStates
+!insert (smAirlock, alDepressurizing) into StateMachineContainsStates
+!insert (smAirlock, alFault) into StateMachineContainsStates
+
+!insert (smAirlock, alSealed) into StateMachineStartsStates
+
+
+!new Transition('trAlOpenInner')
+!trAlOpenInner.name := 'openInnerDoor'
+!new TimeEvent('evAlOpenInner')
+!evAlOpenInner.time := 3
+
+!new Transition('trAlCloseInner')
+!trAlCloseInner.name := 'closeInnerDoor'
+!new TimeEvent('evAlCloseInner')
+!evAlCloseInner.time := 3
+
+!new Transition('trAlOpenOuter')
+!trAlOpenOuter.name := 'openOuterDoor'
+!new TimeEvent('evAlOpenOuter')
+!evAlOpenOuter.time := 4
+
+!new Transition('trAlCloseOuter')
+!trAlCloseOuter.name := 'closeOuterDoor'
+!new TimeEvent('evAlCloseOuter')
+!evAlCloseOuter.time := 4
+
+!new Transition('trAlStartDepress')
+!trAlStartDepress.name := 'startDepressurize'
+!new TimeEvent('evAlStartDepress')
+!evAlStartDepress.time := 1
+
+!new Transition('trAlDepressDone')
+!trAlDepressDone.name := 'depressurizeDone'
+!new TimeEvent('evAlDepressDone')
+!evAlDepressDone.time := 90
+
+!new Transition('trAlStartPress')
+!trAlStartPress.name := 'startPressurize'
+!new TimeEvent('evAlStartPress')
+!evAlStartPress.time := 1
+
+!new Transition('trAlPressDone')
+!trAlPressDone.name := 'pressurizeDone'
+!new TimeEvent('evAlPressDone')
+!evAlPressDone.time := 120
+
+!new Transition('trAlLeakDetectedDepress')
+!trAlLeakDetectedDepress.name := 'leakDetected'
+!new TimeEvent('evAlLeakDetectedDepress')
+!evAlLeakDetectedDepress.time := 1
+
+!new Transition('trAlLeakDetectedPress')
+!trAlLeakDetectedPress.name := 'leakDetected'
+!new TimeEvent('evAlLeakDetectedPress')
+!evAlLeakDetectedPress.time := 1
+
+!new Transition('trAlResetFromFault')
+!trAlResetFromFault.name := 'resetAfterInspection'
+!new TimeEvent('evAlResetFromFault')
+!evAlResetFromFault.time := 300
+
+
+!insert (smAirlock, trAlOpenInner) into StateMachineContainsTransitions
+!insert (smAirlock, trAlCloseInner) into StateMachineContainsTransitions
+!insert (smAirlock, trAlOpenOuter) into StateMachineContainsTransitions
+!insert (smAirlock, trAlCloseOuter) into StateMachineContainsTransitions
+!insert (smAirlock, trAlStartDepress) into StateMachineContainsTransitions
+!insert (smAirlock, trAlDepressDone) into StateMachineContainsTransitions
+!insert (smAirlock, trAlStartPress) into StateMachineContainsTransitions
+!insert (smAirlock, trAlPressDone) into StateMachineContainsTransitions
+!insert (smAirlock, trAlLeakDetectedDepress) into StateMachineContainsTransitions
+!insert (smAirlock, trAlLeakDetectedPress) into StateMachineContainsTransitions
+!insert (smAirlock, trAlResetFromFault) into StateMachineContainsTransitions
+
+!insert (trAlOpenInner, evAlOpenInner) into TransitionContainsEvents
+!insert (trAlCloseInner, evAlCloseInner) into TransitionContainsEvents
+!insert (trAlOpenOuter, evAlOpenOuter) into TransitionContainsEvents
+!insert (trAlCloseOuter, evAlCloseOuter) into TransitionContainsEvents
+!insert (trAlStartDepress, evAlStartDepress) into TransitionContainsEvents
+!insert (trAlDepressDone, evAlDepressDone) into TransitionContainsEvents
+!insert (trAlStartPress, evAlStartPress) into TransitionContainsEvents
+!insert (trAlPressDone, evAlPressDone) into TransitionContainsEvents
+!insert (trAlLeakDetectedDepress, evAlLeakDetectedDepress) into TransitionContainsEvents
+!insert (trAlLeakDetectedPress, evAlLeakDetectedPress) into TransitionContainsEvents
+!insert (trAlResetFromFault, evAlResetFromFault) into TransitionContainsEvents
+
+
+!insert (alSealed, trAlOpenInner) into StateTransition
+!insert (trAlOpenInner, alInnerOpen) into TransitionState
+
+!insert (alInnerOpen, trAlCloseInner) into StateTransition
+!insert (trAlCloseInner, alSealed) into TransitionState
+
+!insert (alSealed, trAlStartDepress) into StateTransition
+!insert (trAlStartDepress, alDepressurizing) into TransitionState
+
+!insert (alDepressurizing, trAlDepressDone) into StateTransition
+!insert (trAlDepressDone, alSealed) into TransitionState
+
+!insert (alSealed, trAlOpenOuter) into StateTransition
+!insert (trAlOpenOuter, alOuterOpen) into TransitionState
+
+!insert (alOuterOpen, trAlCloseOuter) into StateTransition
+!insert (trAlCloseOuter, alSealed) into TransitionState
+
+!insert (alSealed, trAlStartPress) into StateTransition
+!insert (trAlStartPress, alPressurizing) into TransitionState
+
+!insert (alPressurizing, trAlPressDone) into StateTransition
+!insert (trAlPressDone, alSealed) into TransitionState
+
+!insert (alDepressurizing, trAlLeakDetectedDepress) into StateTransition
+!insert (trAlLeakDetectedDepress, alFault) into TransitionState
+
+!insert (alPressurizing, trAlLeakDetectedPress) into StateTransition
+!insert (trAlLeakDetectedPress, alFault) into TransitionState
+
+!insert (alFault, trAlResetFromFault) into StateTransition
+!insert (trAlResetFromFault, alSealed) into TransitionState
+
+
+
+!new StateMachine('smRateLimit')
+!smRateLimit.name := 'apiRateLimiting'
+
+!new State('rlNormal')
+!rlNormal.name := 'normal'
+!new State('rlThrottled')
+!rlThrottled.name := 'throttled'
+!new State('rlBlocked')
+!rlBlocked.name := 'blocked'
+
+!insert (smRateLimit, rlNormal) into StateMachineContainsStates
+!insert (smRateLimit, rlThrottled) into StateMachineContainsStates
+!insert (smRateLimit, rlBlocked) into StateMachineContainsStates
+
+!insert (smRateLimit, rlNormal) into StateMachineStartsStates
+
+
+!new Transition('trRlSpikeDetected')
+!trRlSpikeDetected.name := 'spikeDetected'
+!new TimeEvent('evRlSpikeDetected')
+!evRlSpikeDetected.time := 1
+
+!new Transition('trRlAutoRecover')
+!trRlAutoRecover.name := 'autoRecover'
+!new TimeEvent('evRlAutoRecover')
+!evRlAutoRecover.time := 60
+
+!new Transition('trRlAbuseDetected')
+!trRlAbuseDetected.name := 'abuseDetected'
+!new TimeEvent('evRlAbuseDetected')
+!evRlAbuseDetected.time := 5
+
+!new Transition('trRlBlockExpires')
+!trRlBlockExpires.name := 'blockExpires'
+!new TimeEvent('evRlBlockExpires')
+!evRlBlockExpires.time := 900
+
+!new Transition('trRlPeriodicAudit')
+!trRlPeriodicAudit.name := 'periodicAudit'
+!new TimeEvent('evRlPeriodicAudit')
+!evRlPeriodicAudit.time := 300
+
+
+!insert (smRateLimit, trRlSpikeDetected) into StateMachineContainsTransitions
+!insert (smRateLimit, trRlAutoRecover) into StateMachineContainsTransitions
+!insert (smRateLimit, trRlAbuseDetected) into StateMachineContainsTransitions
+!insert (smRateLimit, trRlBlockExpires) into StateMachineContainsTransitions
+!insert (smRateLimit, trRlPeriodicAudit) into StateMachineContainsTransitions
+
+!insert (trRlSpikeDetected, evRlSpikeDetected) into TransitionContainsEvents
+!insert (trRlAutoRecover, evRlAutoRecover) into TransitionContainsEvents
+!insert (trRlAbuseDetected, evRlAbuseDetected) into TransitionContainsEvents
+!insert (trRlBlockExpires, evRlBlockExpires) into TransitionContainsEvents
+!insert (trRlPeriodicAudit, evRlPeriodicAudit) into TransitionContainsEvents
+
+
+!insert (rlNormal, trRlSpikeDetected) into StateTransition
+!insert (trRlSpikeDetected, rlThrottled) into TransitionState
+
+!insert (rlThrottled, trRlAutoRecover) into StateTransition
+!insert (trRlAutoRecover, rlNormal) into TransitionState
+
+!insert (rlThrottled, trRlAbuseDetected) into StateTransition
+!insert (trRlAbuseDetected, rlBlocked) into TransitionState
+
+!insert (rlBlocked, trRlBlockExpires) into StateTransition
+!insert (trRlBlockExpires, rlThrottled) into TransitionState
+
+!insert (rlNormal, trRlPeriodicAudit) into StateTransition
+!insert (trRlPeriodicAudit, rlNormal) into TransitionState

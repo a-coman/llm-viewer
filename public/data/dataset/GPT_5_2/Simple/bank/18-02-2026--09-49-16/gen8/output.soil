@@ -1,0 +1,101 @@
+!new Bank('bankCZ1')
+!bankCZ1.country := 'Czech Republic'
+!bankCZ1.name := 'Prague Metropolitan Bank'
+!bankCZ1.bic := 'KOMBCZPPXXX'
+
+!new Bank('bankHU1')
+!bankHU1.country := 'Hungary'
+!bankHU1.name := 'Danube Commercial Bank'
+!bankHU1.bic := 'OTPVHUHBXXX'
+
+!new Bank('bankRO1')
+!bankRO1.country := 'Romania'
+!bankRO1.name := 'Carpathia Savings'
+!bankRO1.bic := 'RNCBROBUXXX'
+
+!new Person('v1')
+!v1.firstName := 'Jakub'
+!v1.lastName := 'Novak'
+!v1.age := 19
+
+!new Person('v2')
+!v2.firstName := 'Petra'
+!v2.lastName := 'Svobodova'
+!v2.age := 54
+
+!new Person('v3')
+!v3.firstName := 'Milan'
+!v3.lastName := 'Svoboda'
+!v3.age := 50
+
+!new Person('v4')
+!v4.firstName := 'Eszter'
+!v4.lastName := 'Nagy'
+!v4.age := 27
+
+!new Person('v5')
+!v5.firstName := 'Bence'
+!v5.lastName := 'Kovacs'
+!v5.age := 29
+
+!new Person('v6')
+!v6.firstName := 'Ioana'
+!v6.lastName := 'Popescu'
+!v6.age := 65
+
+!new Person('v7')
+!v7.firstName := 'Tomas'
+!v7.lastName := 'Novak'
+!v7.age := 16
+
+!new Person('v8')
+!v8.firstName := 'Eva'
+!v8.lastName := 'Svobodova'
+!v8.age := 12
+
+!new Account('czAcc1')
+!czAcc1.iban := 'CZ6508000000192000145399'
+!czAcc1.balance := 120
+
+!new Account('czAcc2')
+!czAcc2.iban := 'CZ5855000000001265098001'
+!czAcc2.balance := 43210
+
+!new Account('huAcc1')
+!huAcc1.iban := 'HU42117730161111101800000000'
+!huAcc1.balance := 890
+
+!new Account('huAcc2')
+!huAcc2.iban := 'HU93116000060000000012345676'
+!huAcc2.balance := 2600
+
+!new Account('roAcc1')
+!roAcc1.iban := 'RO49AAAA1B31007593840000'
+!roAcc1.balance := 50
+
+!insert (bankCZ1, czAcc1) into AccountOfBanks
+!insert (bankCZ1, czAcc2) into AccountOfBanks
+!insert (bankHU1, huAcc1) into AccountOfBanks
+!insert (bankHU1, huAcc2) into AccountOfBanks
+!insert (bankRO1, roAcc1) into AccountOfBanks
+
+!insert (v1, czAcc1) into Ownership
+!insert (v2, czAcc2) into Ownership
+!insert (v3, czAcc2) into Ownership
+!insert (v4, huAcc1) into Ownership
+!insert (v4, huAcc2) into Ownership
+!insert (v5, huAcc2) into Ownership
+!insert (v6, roAcc1) into Ownership
+
+!insert (v1, czAcc1) into Use
+!insert (v7, czAcc1) into Use
+
+!insert (v2, czAcc2) into Use
+!insert (v3, czAcc2) into Use
+!insert (v8, czAcc2) into Use
+
+!insert (v4, huAcc2) into Use
+!insert (v5, huAcc2) into Use
+!insert (v7, huAcc2) into Use
+
+!insert (v6, roAcc1) into Use

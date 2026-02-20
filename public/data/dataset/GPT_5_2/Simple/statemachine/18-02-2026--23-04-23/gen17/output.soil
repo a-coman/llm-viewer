@@ -1,0 +1,251 @@
+!new StateMachine('smMusic')
+!smMusic.name := 'musicPlayer'
+
+!new State('mpStopped')
+!mpStopped.name := 'stopped'
+!new State('mpLoading')
+!mpLoading.name := 'loading'
+!new State('mpReady')
+!mpReady.name := 'ready'
+!new State('mpPlaying')
+!mpPlaying.name := 'playing'
+!new State('mpPaused')
+!mpPaused.name := 'paused'
+!new State('mpBuffering')
+!mpBuffering.name := 'buffering'
+!new State('mpError')
+!mpError.name := 'error'
+
+!insert (smMusic, mpStopped) into StateMachineContainsStates
+!insert (smMusic, mpLoading) into StateMachineContainsStates
+!insert (smMusic, mpReady) into StateMachineContainsStates
+!insert (smMusic, mpPlaying) into StateMachineContainsStates
+!insert (smMusic, mpPaused) into StateMachineContainsStates
+!insert (smMusic, mpBuffering) into StateMachineContainsStates
+!insert (smMusic, mpError) into StateMachineContainsStates
+
+!insert (smMusic, mpStopped) into StateMachineStartsStates
+
+
+!new Transition('tMpLoadTrack')
+!tMpLoadTrack.name := 'loadTrack'
+!new TimeEvent('evMpLoadTrack')
+!evMpLoadTrack.time := 1
+
+!new Transition('tMpLoadOk')
+!tMpLoadOk.name := 'loadOk'
+!new TimeEvent('evMpLoadOk')
+!evMpLoadOk.time := 2
+
+!new Transition('tMpLoadFail')
+!tMpLoadFail.name := 'loadFail'
+!new TimeEvent('evMpLoadFail')
+!evMpLoadFail.time := 3
+
+!new Transition('tMpPlay')
+!tMpPlay.name := 'play'
+!new TimeEvent('evMpPlay')
+!evMpPlay.time := 1
+
+!new Transition('tMpPause')
+!tMpPause.name := 'pause'
+!new TimeEvent('evMpPause')
+!evMpPause.time := 1
+
+!new Transition('tMpResume')
+!tMpResume.name := 'resume'
+!new TimeEvent('evMpResume')
+!evMpResume.time := 1
+
+!new Transition('tMpBufferStart')
+!tMpBufferStart.name := 'bufferStart'
+!new TimeEvent('evMpBufferStart')
+!evMpBufferStart.time := 1
+
+!new Transition('tMpBufferEnd')
+!tMpBufferEnd.name := 'bufferEnd'
+!new TimeEvent('evMpBufferEnd')
+!evMpBufferEnd.time := 4
+
+!new Transition('tMpStopFromPlaying')
+!tMpStopFromPlaying.name := 'stop'
+!new TimeEvent('evMpStopFromPlaying')
+!evMpStopFromPlaying.time := 1
+
+!new Transition('tMpStopFromPaused')
+!tMpStopFromPaused.name := 'stop'
+!new TimeEvent('evMpStopFromPaused')
+!evMpStopFromPaused.time := 1
+
+!new Transition('tMpRetryLoad')
+!tMpRetryLoad.name := 'retryLoad'
+!new TimeEvent('evMpRetryLoad')
+!evMpRetryLoad.time := 5
+
+!new Transition('tMpAutoShutdownTick')
+!tMpAutoShutdownTick.name := 'autoShutdownTick'
+!new TimeEvent('evMpAutoShutdownTick')
+!evMpAutoShutdownTick.time := 600
+
+
+!insert (smMusic, tMpLoadTrack) into StateMachineContainsTransitions
+!insert (smMusic, tMpLoadOk) into StateMachineContainsTransitions
+!insert (smMusic, tMpLoadFail) into StateMachineContainsTransitions
+!insert (smMusic, tMpPlay) into StateMachineContainsTransitions
+!insert (smMusic, tMpPause) into StateMachineContainsTransitions
+!insert (smMusic, tMpResume) into StateMachineContainsTransitions
+!insert (smMusic, tMpBufferStart) into StateMachineContainsTransitions
+!insert (smMusic, tMpBufferEnd) into StateMachineContainsTransitions
+!insert (smMusic, tMpStopFromPlaying) into StateMachineContainsTransitions
+!insert (smMusic, tMpStopFromPaused) into StateMachineContainsTransitions
+!insert (smMusic, tMpRetryLoad) into StateMachineContainsTransitions
+!insert (smMusic, tMpAutoShutdownTick) into StateMachineContainsTransitions
+
+!insert (tMpLoadTrack, evMpLoadTrack) into TransitionContainsEvents
+!insert (tMpLoadOk, evMpLoadOk) into TransitionContainsEvents
+!insert (tMpLoadFail, evMpLoadFail) into TransitionContainsEvents
+!insert (tMpPlay, evMpPlay) into TransitionContainsEvents
+!insert (tMpPause, evMpPause) into TransitionContainsEvents
+!insert (tMpResume, evMpResume) into TransitionContainsEvents
+!insert (tMpBufferStart, evMpBufferStart) into TransitionContainsEvents
+!insert (tMpBufferEnd, evMpBufferEnd) into TransitionContainsEvents
+!insert (tMpStopFromPlaying, evMpStopFromPlaying) into TransitionContainsEvents
+!insert (tMpStopFromPaused, evMpStopFromPaused) into TransitionContainsEvents
+!insert (tMpRetryLoad, evMpRetryLoad) into TransitionContainsEvents
+!insert (tMpAutoShutdownTick, evMpAutoShutdownTick) into TransitionContainsEvents
+
+
+!insert (mpStopped, tMpLoadTrack) into StateTransition
+!insert (tMpLoadTrack, mpLoading) into TransitionState
+
+!insert (mpLoading, tMpLoadOk) into StateTransition
+!insert (tMpLoadOk, mpReady) into TransitionState
+
+!insert (mpLoading, tMpLoadFail) into StateTransition
+!insert (tMpLoadFail, mpError) into TransitionState
+
+!insert (mpReady, tMpPlay) into StateTransition
+!insert (tMpPlay, mpPlaying) into TransitionState
+
+!insert (mpPlaying, tMpPause) into StateTransition
+!insert (tMpPause, mpPaused) into TransitionState
+
+!insert (mpPaused, tMpResume) into StateTransition
+!insert (tMpResume, mpPlaying) into TransitionState
+
+!insert (mpPlaying, tMpBufferStart) into StateTransition
+!insert (tMpBufferStart, mpBuffering) into TransitionState
+
+!insert (mpBuffering, tMpBufferEnd) into StateTransition
+!insert (tMpBufferEnd, mpPlaying) into TransitionState
+
+!insert (mpPlaying, tMpStopFromPlaying) into StateTransition
+!insert (tMpStopFromPlaying, mpStopped) into TransitionState
+
+!insert (mpPaused, tMpStopFromPaused) into StateTransition
+!insert (tMpStopFromPaused, mpStopped) into TransitionState
+
+!insert (mpError, tMpRetryLoad) into StateTransition
+!insert (tMpRetryLoad, mpLoading) into TransitionState
+
+!insert (mpStopped, tMpAutoShutdownTick) into StateTransition
+!insert (tMpAutoShutdownTick, mpStopped) into TransitionState
+
+
+
+!new StateMachine('smGreenhouse')
+!smGreenhouse.name := 'greenhouseVentilation'
+
+!new State('ghClosed')
+!ghClosed.name := 'closed'
+!new State('ghOpening')
+!ghOpening.name := 'opening'
+!new State('ghOpen')
+!ghOpen.name := 'open'
+!new State('ghClosing')
+!ghClosing.name := 'closing'
+!new State('ghJam')
+!ghJam.name := 'jammed'
+
+!insert (smGreenhouse, ghClosed) into StateMachineContainsStates
+!insert (smGreenhouse, ghOpening) into StateMachineContainsStates
+!insert (smGreenhouse, ghOpen) into StateMachineContainsStates
+!insert (smGreenhouse, ghClosing) into StateMachineContainsStates
+!insert (smGreenhouse, ghJam) into StateMachineContainsStates
+
+!insert (smGreenhouse, ghClosed) into StateMachineStartsStates
+
+
+!new Transition('tGhOpenCommand')
+!tGhOpenCommand.name := 'openCommand'
+!new TimeEvent('evGhOpenCommand')
+!evGhOpenCommand.time := 1
+
+!new Transition('tGhOpened')
+!tGhOpened.name := 'opened'
+!new TimeEvent('evGhOpened')
+!evGhOpened.time := 12
+
+!new Transition('tGhCloseCommand')
+!tGhCloseCommand.name := 'closeCommand'
+!new TimeEvent('evGhCloseCommand')
+!evGhCloseCommand.time := 1
+
+!new Transition('tGhClosed')
+!tGhClosed.name := 'closed'
+!new TimeEvent('evGhClosed')
+!evGhClosed.time := 10
+
+!new Transition('tGhJamOnOpen')
+!tGhJamOnOpen.name := 'jamDetected'
+!new TimeEvent('evGhJamOnOpen')
+!evGhJamOnOpen.time := 2
+
+!new Transition('tGhJamOnClose')
+!tGhJamOnClose.name := 'jamDetected'
+!new TimeEvent('evGhJamOnClose')
+!evGhJamOnClose.time := 2
+
+!new Transition('tGhReset')
+!tGhReset.name := 'reset'
+!new TimeEvent('evGhReset')
+!evGhReset.time := 30
+
+
+!insert (smGreenhouse, tGhOpenCommand) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhOpened) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhCloseCommand) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhClosed) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhJamOnOpen) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhJamOnClose) into StateMachineContainsTransitions
+!insert (smGreenhouse, tGhReset) into StateMachineContainsTransitions
+
+!insert (tGhOpenCommand, evGhOpenCommand) into TransitionContainsEvents
+!insert (tGhOpened, evGhOpened) into TransitionContainsEvents
+!insert (tGhCloseCommand, evGhCloseCommand) into TransitionContainsEvents
+!insert (tGhClosed, evGhClosed) into TransitionContainsEvents
+!insert (tGhJamOnOpen, evGhJamOnOpen) into TransitionContainsEvents
+!insert (tGhJamOnClose, evGhJamOnClose) into TransitionContainsEvents
+!insert (tGhReset, evGhReset) into TransitionContainsEvents
+
+
+!insert (ghClosed, tGhOpenCommand) into StateTransition
+!insert (tGhOpenCommand, ghOpening) into TransitionState
+
+!insert (ghOpening, tGhOpened) into StateTransition
+!insert (tGhOpened, ghOpen) into TransitionState
+
+!insert (ghOpen, tGhCloseCommand) into StateTransition
+!insert (tGhCloseCommand, ghClosing) into TransitionState
+
+!insert (ghClosing, tGhClosed) into StateTransition
+!insert (tGhClosed, ghClosed) into TransitionState
+
+!insert (ghOpening, tGhJamOnOpen) into StateTransition
+!insert (tGhJamOnOpen, ghJam) into TransitionState
+
+!insert (ghClosing, tGhJamOnClose) into StateTransition
+!insert (tGhJamOnClose, ghJam) into TransitionState
+
+!insert (ghJam, tGhReset) into StateTransition
+!insert (tGhReset, ghClosed) into TransitionState

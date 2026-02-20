@@ -1,0 +1,60 @@
+!new Client('cz1')
+!cz1.clientId := 201
+!cz1.isSuspended := false
+
+!new Client('cz2')
+!cz2.clientId := 202
+!cz2.isSuspended := false
+
+!new Client('cz3')
+!cz3.clientId := 203
+!cz3.isSuspended := true
+
+!new Client('cz4')
+!cz4.clientId := 204
+!cz4.isSuspended := false
+
+!new Client('cz5')
+!cz5.clientId := 205
+!cz5.isSuspended := true
+
+!new Actor('az1')
+!az1.name := 'Lena Moritz'
+
+!new Actor('az2')
+!az2.name := 'Omar Nasser'
+
+!new Movie('mz1')
+!mz1.title := 'Harbor Chase'
+!mz1.availableCopies := 7
+!mz1.genre := #Action
+
+!new Series('sz1')
+!sz1.title := 'Kitchen Stories'
+!sz1.availableCopies := 0
+!sz1.episode := 4
+
+!new Series('sz2')
+!sz2.title := 'Northern Lights'
+!sz2.availableCopies := 2
+!sz2.episode := 1
+
+!new Series('sz3')
+!sz3.title := 'Northern Lights'
+!sz3.availableCopies := 2
+!sz3.episode := 2
+
+!insert (mz1, az1) into CassetteActor
+!insert (mz1, az2) into CassetteActor
+
+!insert (sz1, az1) into CassetteActor
+!insert (sz2, az1) into CassetteActor
+!insert (sz3, az1) into CassetteActor
+
+!new Rental('rz1')
+!rz1.date := Date('2023-11-30')
+!insert (cz3, rz1) into ClientRental
+!insert (rz1, mz1) into RentalCassette
+!insert (rz1, sz1) into RentalCassette
+!insert (rz1, sz2) into RentalCassette
+!insert (rz1, sz3) into RentalCassette

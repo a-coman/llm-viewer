@@ -1,0 +1,203 @@
+!new StateMachine('smSecurity')
+!smSecurity.name := 'smartHomeSecurity'
+
+!new State('secDisarmed')
+!secDisarmed.name := 'disarmed'
+!new State('secArming')
+!secArming.name := 'arming'
+!new State('secArmedHome')
+!secArmedHome.name := 'armedHome'
+!new State('secArmedAway')
+!secArmedAway.name := 'armedAway'
+!new State('secEntryDelay')
+!secEntryDelay.name := 'entryDelay'
+!new State('secAlarm')
+!secAlarm.name := 'alarm'
+!new State('secSnooze')
+!secSnooze.name := 'snooze'
+!new State('secMaintenance')
+!secMaintenance.name := 'maintenance'
+
+!insert (smSecurity, secDisarmed) into StateMachineContainsStates
+!insert (smSecurity, secArming) into StateMachineContainsStates
+!insert (smSecurity, secArmedHome) into StateMachineContainsStates
+!insert (smSecurity, secArmedAway) into StateMachineContainsStates
+!insert (smSecurity, secEntryDelay) into StateMachineContainsStates
+!insert (smSecurity, secAlarm) into StateMachineContainsStates
+!insert (smSecurity, secSnooze) into StateMachineContainsStates
+!insert (smSecurity, secMaintenance) into StateMachineContainsStates
+
+!insert (smSecurity, secDisarmed) into StateMachineStartsStates
+
+
+!new Transition('secT_startArming')
+!secT_startArming.name := 'startArming'
+!new TimeEvent('secE_startArming')
+!secE_startArming.time := 1
+!insert (smSecurity, secT_startArming) into StateMachineContainsTransitions
+!insert (secT_startArming, secE_startArming) into TransitionContainsEvents
+!insert (secDisarmed, secT_startArming) into StateTransition
+!insert (secT_startArming, secArming) into TransitionState
+
+!new Transition('secT_armHome')
+!secT_armHome.name := 'armHome'
+!new TimeEvent('secE_armHome')
+!secE_armHome.time := 30
+!insert (smSecurity, secT_armHome) into StateMachineContainsTransitions
+!insert (secT_armHome, secE_armHome) into TransitionContainsEvents
+!insert (secArming, secT_armHome) into StateTransition
+!insert (secT_armHome, secArmedHome) into TransitionState
+
+!new Transition('secT_armAway')
+!secT_armAway.name := 'armAway'
+!new TimeEvent('secE_armAway')
+!secE_armAway.time := 30
+!insert (smSecurity, secT_armAway) into StateMachineContainsTransitions
+!insert (secT_armAway, secE_armAway) into TransitionContainsEvents
+!insert (secArming, secT_armAway) into StateTransition
+!insert (secT_armAway, secArmedAway) into TransitionState
+
+!new Transition('secT_cancelArming')
+!secT_cancelArming.name := 'cancelArming'
+!new TimeEvent('secE_cancelArming')
+!secE_cancelArming.time := 5
+!insert (smSecurity, secT_cancelArming) into StateMachineContainsTransitions
+!insert (secT_cancelArming, secE_cancelArming) into TransitionContainsEvents
+!insert (secArming, secT_cancelArming) into StateTransition
+!insert (secT_cancelArming, secDisarmed) into TransitionState
+
+!new Transition('secT_doorOpenedHome')
+!secT_doorOpenedHome.name := 'doorOpened'
+!new TimeEvent('secE_doorOpenedHome')
+!secE_doorOpenedHome.time := 1
+!insert (smSecurity, secT_doorOpenedHome) into StateMachineContainsTransitions
+!insert (secT_doorOpenedHome, secE_doorOpenedHome) into TransitionContainsEvents
+!insert (secArmedHome, secT_doorOpenedHome) into StateTransition
+!insert (secT_doorOpenedHome, secEntryDelay) into TransitionState
+
+!new Transition('secT_doorOpenedAway')
+!secT_doorOpenedAway.name := 'doorOpened'
+!new TimeEvent('secE_doorOpenedAway')
+!secE_doorOpenedAway.time := 1
+!insert (smSecurity, secT_doorOpenedAway) into StateMachineContainsTransitions
+!insert (secT_doorOpenedAway, secE_doorOpenedAway) into TransitionContainsEvents
+!insert (secArmedAway, secT_doorOpenedAway) into StateTransition
+!insert (secT_doorOpenedAway, secEntryDelay) into TransitionState
+
+!new Transition('secT_disarmDuringEntry')
+!secT_disarmDuringEntry.name := 'disarm'
+!new TimeEvent('secE_disarmDuringEntry')
+!secE_disarmDuringEntry.time := 10
+!insert (smSecurity, secT_disarmDuringEntry) into StateMachineContainsTransitions
+!insert (secT_disarmDuringEntry, secE_disarmDuringEntry) into TransitionContainsEvents
+!insert (secEntryDelay, secT_disarmDuringEntry) into StateTransition
+!insert (secT_disarmDuringEntry, secDisarmed) into TransitionState
+
+!new Transition('secT_entryTimeout')
+!secT_entryTimeout.name := 'entryTimeout'
+!new TimeEvent('secE_entryTimeout')
+!secE_entryTimeout.time := 20
+!insert (smSecurity, secT_entryTimeout) into StateMachineContainsTransitions
+!insert (secT_entryTimeout, secE_entryTimeout) into TransitionContainsEvents
+!insert (secEntryDelay, secT_entryTimeout) into StateTransition
+!insert (secT_entryTimeout, secAlarm) into TransitionState
+
+!new Transition('secT_snoozeAlarm')
+!secT_snoozeAlarm.name := 'snoozeAlarm'
+!new TimeEvent('secE_snoozeAlarm')
+!secE_snoozeAlarm.time := 2
+!insert (smSecurity, secT_snoozeAlarm) into StateMachineContainsTransitions
+!insert (secT_snoozeAlarm, secE_snoozeAlarm) into TransitionContainsEvents
+!insert (secAlarm, secT_snoozeAlarm) into StateTransition
+!insert (secT_snoozeAlarm, secSnooze) into TransitionState
+
+!new Transition('secT_snoozeEnds')
+!secT_snoozeEnds.name := 'snoozeEnds'
+!new TimeEvent('secE_snoozeEnds')
+!secE_snoozeEnds.time := 60
+!insert (smSecurity, secT_snoozeEnds) into StateMachineContainsTransitions
+!insert (secT_snoozeEnds, secE_snoozeEnds) into TransitionContainsEvents
+!insert (secSnooze, secT_snoozeEnds) into StateTransition
+!insert (secT_snoozeEnds, secAlarm) into TransitionState
+
+!new Transition('secT_disarmFromAlarm')
+!secT_disarmFromAlarm.name := 'disarm'
+!new TimeEvent('secE_disarmFromAlarm')
+!secE_disarmFromAlarm.time := 5
+!insert (smSecurity, secT_disarmFromAlarm) into StateMachineContainsTransitions
+!insert (secT_disarmFromAlarm, secE_disarmFromAlarm) into TransitionContainsEvents
+!insert (secAlarm, secT_disarmFromAlarm) into StateTransition
+!insert (secT_disarmFromAlarm, secDisarmed) into TransitionState
+
+!new Transition('secT_enterMaintenance')
+!secT_enterMaintenance.name := 'enterMaintenance'
+!new TimeEvent('secE_enterMaintenance')
+!secE_enterMaintenance.time := 1
+!insert (smSecurity, secT_enterMaintenance) into StateMachineContainsTransitions
+!insert (secT_enterMaintenance, secE_enterMaintenance) into TransitionContainsEvents
+!insert (secDisarmed, secT_enterMaintenance) into StateTransition
+!insert (secT_enterMaintenance, secMaintenance) into TransitionState
+
+!new Transition('secT_exitMaintenance')
+!secT_exitMaintenance.name := 'exitMaintenance'
+!new TimeEvent('secE_exitMaintenance')
+!secE_exitMaintenance.time := 120
+!insert (smSecurity, secT_exitMaintenance) into StateMachineContainsTransitions
+!insert (secT_exitMaintenance, secE_exitMaintenance) into TransitionContainsEvents
+!insert (secMaintenance, secT_exitMaintenance) into StateTransition
+!insert (secT_exitMaintenance, secDisarmed) into TransitionState
+
+
+
+!new StateMachine('smMedication')
+!smMedication.name := 'medicationReminder'
+
+!new State('mrIdle')
+!mrIdle.name := 'idle'
+!new State('mrReminding')
+!mrReminding.name := 'reminding'
+!new State('mrAcknowledged')
+!mrAcknowledged.name := 'acknowledged'
+
+!insert (smMedication, mrIdle) into StateMachineContainsStates
+!insert (smMedication, mrReminding) into StateMachineContainsStates
+!insert (smMedication, mrAcknowledged) into StateMachineContainsStates
+
+!insert (smMedication, mrIdle) into StateMachineStartsStates
+
+
+!new Transition('mrT_dailyReminder')
+!mrT_dailyReminder.name := 'dailyReminder'
+!new TimeEvent('mrE_dailyReminder')
+!mrE_dailyReminder.time := 480
+!insert (smMedication, mrT_dailyReminder) into StateMachineContainsTransitions
+!insert (mrT_dailyReminder, mrE_dailyReminder) into TransitionContainsEvents
+!insert (mrIdle, mrT_dailyReminder) into StateTransition
+!insert (mrT_dailyReminder, mrReminding) into TransitionState
+
+!new Transition('mrT_ackNow')
+!mrT_ackNow.name := 'acknowledge'
+!new TimeEvent('mrE_ackNow')
+!mrE_ackNow.time := 1
+!insert (smMedication, mrT_ackNow) into StateMachineContainsTransitions
+!insert (mrT_ackNow, mrE_ackNow) into TransitionContainsEvents
+!insert (mrReminding, mrT_ackNow) into StateTransition
+!insert (mrT_ackNow, mrAcknowledged) into TransitionState
+
+!new Transition('mrT_ackToIdle')
+!mrT_ackToIdle.name := 'returnToIdle'
+!new TimeEvent('mrE_ackToIdle')
+!mrE_ackToIdle.time := 5
+!insert (smMedication, mrT_ackToIdle) into StateMachineContainsTransitions
+!insert (mrT_ackToIdle, mrE_ackToIdle) into TransitionContainsEvents
+!insert (mrAcknowledged, mrT_ackToIdle) into StateTransition
+!insert (mrT_ackToIdle, mrIdle) into TransitionState
+
+!new Transition('mrT_missedDose')
+!mrT_missedDose.name := 'missedDose'
+!new TimeEvent('mrE_missedDose')
+!mrE_missedDose.time := 15
+!insert (smMedication, mrT_missedDose) into StateMachineContainsTransitions
+!insert (mrT_missedDose, mrE_missedDose) into TransitionContainsEvents
+!insert (mrReminding, mrT_missedDose) into StateTransition
+!insert (mrT_missedDose, mrIdle) into TransitionState

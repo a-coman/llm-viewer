@@ -1,0 +1,60 @@
+!new Bank('bankJP1')
+!bankJP1.country := 'Japan'
+!bankJP1.name := 'Sakura City Bank'
+!bankJP1.bic := 'SAKRJPJTXXX'
+
+!new Person('x1')
+!x1.firstName := 'Haruto'
+!x1.lastName := 'Tanaka'
+!x1.age := 70
+
+!new Person('x2')
+!x2.firstName := 'Yui'
+!x2.lastName := 'Sato'
+!x2.age := 24
+
+!new Person('x3')
+!x3.firstName := 'Ren'
+!x3.lastName := 'Kobayashi'
+!x3.age := 19
+
+!new Person('x4')
+!x4.firstName := 'Mei'
+!x4.lastName := 'Tanaka'
+!x4.age := 15
+
+!new Person('x5')
+!x5.firstName := 'Sora'
+!x5.lastName := 'Sato'
+!x5.age := 11
+
+!new Account('jpAcc1')
+!jpAcc1.iban := 'JP00SAKR0000000000000001'
+!jpAcc1.balance := 0
+
+!new Account('jpAcc2')
+!jpAcc2.iban := 'JP00SAKR0000000000000456'
+!jpAcc2.balance := 4321
+
+!new Account('jpAcc3')
+!jpAcc3.iban := 'JP00SAKR0000000000009999'
+!jpAcc3.balance := 250000
+
+!insert (bankJP1, jpAcc1) into AccountOfBanks
+!insert (bankJP1, jpAcc2) into AccountOfBanks
+!insert (bankJP1, jpAcc3) into AccountOfBanks
+
+!insert (x1, jpAcc1) into Ownership
+
+!insert (x2, jpAcc2) into Ownership
+!insert (x3, jpAcc2) into Ownership
+
+!insert (x1, jpAcc3) into Ownership
+!insert (x2, jpAcc3) into Ownership
+
+!insert (x2, jpAcc2) into Use
+!insert (x3, jpAcc2) into Use
+!insert (x4, jpAcc2) into Use
+!insert (x5, jpAcc2) into Use
+
+!insert (x1, jpAcc3) into Use

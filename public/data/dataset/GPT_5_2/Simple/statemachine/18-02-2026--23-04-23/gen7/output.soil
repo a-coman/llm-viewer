@@ -1,0 +1,200 @@
+!new StateMachine('smClinic')
+!smClinic.name := 'clinicAppointmentFlow'
+
+!new State('stRequested')
+!stRequested.name := 'requested'
+!new State('stScheduled')
+!stScheduled.name := 'scheduled'
+!new State('stCheckedIn')
+!stCheckedIn.name := 'checkedIn'
+!new State('stInConsult')
+!stInConsult.name := 'inConsultation'
+!new State('stCompleted')
+!stCompleted.name := 'completed'
+!new State('stNoShow')
+!stNoShow.name := 'noShow'
+!new State('stCancelled')
+!stCancelled.name := 'cancelled'
+
+!insert (smClinic, stRequested) into StateMachineContainsStates
+!insert (smClinic, stScheduled) into StateMachineContainsStates
+!insert (smClinic, stCheckedIn) into StateMachineContainsStates
+!insert (smClinic, stInConsult) into StateMachineContainsStates
+!insert (smClinic, stCompleted) into StateMachineContainsStates
+!insert (smClinic, stNoShow) into StateMachineContainsStates
+!insert (smClinic, stCancelled) into StateMachineContainsStates
+
+!insert (smClinic, stRequested) into StateMachineStartsStates
+
+
+!new Transition('trReqToSched')
+!trReqToSched.name := 'requestAccepted'
+!new TimeEvent('evReqToSched')
+!evReqToSched.time := 10
+!insert (smClinic, trReqToSched) into StateMachineContainsTransitions
+!insert (trReqToSched, evReqToSched) into TransitionContainsEvents
+!insert (stRequested, trReqToSched) into StateTransition
+!insert (trReqToSched, stScheduled) into TransitionState
+
+!new Transition('trSchedToCheckin')
+!trSchedToCheckin.name := 'patientArrives'
+!new TimeEvent('evSchedToCheckin')
+!evSchedToCheckin.time := 1440
+!insert (smClinic, trSchedToCheckin) into StateMachineContainsTransitions
+!insert (trSchedToCheckin, evSchedToCheckin) into TransitionContainsEvents
+!insert (stScheduled, trSchedToCheckin) into StateTransition
+!insert (trSchedToCheckin, stCheckedIn) into TransitionState
+
+!new Transition('trCheckinToConsult')
+!trCheckinToConsult.name := 'callIn'
+!new TimeEvent('evCheckinToConsult')
+!evCheckinToConsult.time := 15
+!insert (smClinic, trCheckinToConsult) into StateMachineContainsTransitions
+!insert (trCheckinToConsult, evCheckinToConsult) into TransitionContainsEvents
+!insert (stCheckedIn, trCheckinToConsult) into StateTransition
+!insert (trCheckinToConsult, stInConsult) into TransitionState
+
+!new Transition('trConsultToComplete')
+!trConsultToComplete.name := 'finishConsultation'
+!new TimeEvent('evConsultToComplete')
+!evConsultToComplete.time := 30
+!insert (smClinic, trConsultToComplete) into StateMachineContainsTransitions
+!insert (trConsultToComplete, evConsultToComplete) into TransitionContainsEvents
+!insert (stInConsult, trConsultToComplete) into StateTransition
+!insert (trConsultToComplete, stCompleted) into TransitionState
+
+!new Transition('trSchedToCancelled')
+!trSchedToCancelled.name := 'cancelAppointment'
+!new TimeEvent('evSchedToCancelled')
+!evSchedToCancelled.time := 60
+!insert (smClinic, trSchedToCancelled) into StateMachineContainsTransitions
+!insert (trSchedToCancelled, evSchedToCancelled) into TransitionContainsEvents
+!insert (stScheduled, trSchedToCancelled) into StateTransition
+!insert (trSchedToCancelled, stCancelled) into TransitionState
+
+!new Transition('trSchedToNoShow')
+!trSchedToNoShow.name := 'markNoShow'
+!new TimeEvent('evSchedToNoShow')
+!evSchedToNoShow.time := 30
+!insert (smClinic, trSchedToNoShow) into StateMachineContainsTransitions
+!insert (trSchedToNoShow, evSchedToNoShow) into TransitionContainsEvents
+!insert (stScheduled, trSchedToNoShow) into StateTransition
+!insert (trSchedToNoShow, stNoShow) into TransitionState
+
+!new Transition('trCancelledToRequested')
+!trCancelledToRequested.name := 'rebookAfterCancel'
+!new TimeEvent('evCancelledToRequested')
+!evCancelledToRequested.time := 5
+!insert (smClinic, trCancelledToRequested) into StateMachineContainsTransitions
+!insert (trCancelledToRequested, evCancelledToRequested) into TransitionContainsEvents
+!insert (stCancelled, trCancelledToRequested) into StateTransition
+!insert (trCancelledToRequested, stRequested) into TransitionState
+
+!new Transition('trNoShowToRequested')
+!trNoShowToRequested.name := 'rebookAfterNoShow'
+!new TimeEvent('evNoShowToRequested')
+!evNoShowToRequested.time := 10080
+!insert (smClinic, trNoShowToRequested) into StateMachineContainsTransitions
+!insert (trNoShowToRequested, evNoShowToRequested) into TransitionContainsEvents
+!insert (stNoShow, trNoShowToRequested) into StateTransition
+!insert (trNoShowToRequested, stRequested) into TransitionState
+
+
+
+!new StateMachine('smCi')
+!smCi.name := 'ciPipeline'
+
+!new State('stQueued')
+!stQueued.name := 'queued'
+!new State('stRunning')
+!stRunning.name := 'running'
+!new State('stTesting')
+!stTesting.name := 'testing'
+!new State('stDeploying')
+!stDeploying.name := 'deploying'
+!new State('stSucceeded')
+!stSucceeded.name := 'succeeded'
+!new State('stFailed')
+!stFailed.name := 'failed'
+
+!insert (smCi, stQueued) into StateMachineContainsStates
+!insert (smCi, stRunning) into StateMachineContainsStates
+!insert (smCi, stTesting) into StateMachineContainsStates
+!insert (smCi, stDeploying) into StateMachineContainsStates
+!insert (smCi, stSucceeded) into StateMachineContainsStates
+!insert (smCi, stFailed) into StateMachineContainsStates
+
+!insert (smCi, stQueued) into StateMachineStartsStates
+
+
+!new Transition('trQueueToRun')
+!trQueueToRun.name := 'startRunner'
+!new TimeEvent('evQueueToRun')
+!evQueueToRun.time := 1
+!insert (smCi, trQueueToRun) into StateMachineContainsTransitions
+!insert (trQueueToRun, evQueueToRun) into TransitionContainsEvents
+!insert (stQueued, trQueueToRun) into StateTransition
+!insert (trQueueToRun, stRunning) into TransitionState
+
+!new Transition('trRunToTest')
+!trRunToTest.name := 'buildComplete'
+!new TimeEvent('evRunToTest')
+!evRunToTest.time := 8
+!insert (smCi, trRunToTest) into StateMachineContainsTransitions
+!insert (trRunToTest, evRunToTest) into TransitionContainsEvents
+!insert (stRunning, trRunToTest) into StateTransition
+!insert (trRunToTest, stTesting) into TransitionState
+
+!new Transition('trTestToDeploy')
+!trTestToDeploy.name := 'testsPassed'
+!new TimeEvent('evTestToDeploy')
+!evTestToDeploy.time := 6
+!insert (smCi, trTestToDeploy) into StateMachineContainsTransitions
+!insert (trTestToDeploy, evTestToDeploy) into TransitionContainsEvents
+!insert (stTesting, trTestToDeploy) into StateTransition
+!insert (trTestToDeploy, stDeploying) into TransitionState
+
+!new Transition('trDeployToSuccess')
+!trDeployToSuccess.name := 'deployOk'
+!new TimeEvent('evDeployToSuccess')
+!evDeployToSuccess.time := 3
+!insert (smCi, trDeployToSuccess) into StateMachineContainsTransitions
+!insert (trDeployToSuccess, evDeployToSuccess) into TransitionContainsEvents
+!insert (stDeploying, trDeployToSuccess) into StateTransition
+!insert (trDeployToSuccess, stSucceeded) into TransitionState
+
+!new Transition('trTestToFail')
+!trTestToFail.name := 'testsFailed'
+!new TimeEvent('evTestToFail')
+!evTestToFail.time := 1
+!insert (smCi, trTestToFail) into StateMachineContainsTransitions
+!insert (trTestToFail, evTestToFail) into TransitionContainsEvents
+!insert (stTesting, trTestToFail) into StateTransition
+!insert (trTestToFail, stFailed) into TransitionState
+
+!new Transition('trRunToFail')
+!trRunToFail.name := 'buildCrashed'
+!new TimeEvent('evRunToFail')
+!evRunToFail.time := 1
+!insert (smCi, trRunToFail) into StateMachineContainsTransitions
+!insert (trRunToFail, evRunToFail) into TransitionContainsEvents
+!insert (stRunning, trRunToFail) into StateTransition
+!insert (trRunToFail, stFailed) into TransitionState
+
+!new Transition('trFailToQueued')
+!trFailToQueued.name := 'retry'
+!new TimeEvent('evFailToQueued')
+!evFailToQueued.time := 5
+!insert (smCi, trFailToQueued) into StateMachineContainsTransitions
+!insert (trFailToQueued, evFailToQueued) into TransitionContainsEvents
+!insert (stFailed, trFailToQueued) into StateTransition
+!insert (trFailToQueued, stQueued) into TransitionState
+
+!new Transition('trSuccessToQueued')
+!trSuccessToQueued.name := 'nightlyRebuild'
+!new TimeEvent('evSuccessToQueued')
+!evSuccessToQueued.time := 60
+!insert (smCi, trSuccessToQueued) into StateMachineContainsTransitions
+!insert (trSuccessToQueued, evSuccessToQueued) into TransitionContainsEvents
+!insert (stSucceeded, trSuccessToQueued) into StateTransition
+!insert (trSuccessToQueued, stQueued) into TransitionState

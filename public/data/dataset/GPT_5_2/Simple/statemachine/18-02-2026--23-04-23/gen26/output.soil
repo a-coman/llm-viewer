@@ -1,0 +1,277 @@
+!new StateMachine('smBankTransfer')
+!smBankTransfer.name := 'bankTransferWorkflow'
+
+!new State('btInitiated')
+!btInitiated.name := 'initiated'
+!new State('btKycCheck')
+!btKycCheck.name := 'kycCheck'
+!new State('btAwaitingApproval')
+!btAwaitingApproval.name := 'awaitingApproval'
+!new State('btExecuting')
+!btExecuting.name := 'executing'
+!new State('btCompleted')
+!btCompleted.name := 'completed'
+!new State('btFailed')
+!btFailed.name := 'failed'
+!new State('btReversed')
+!btReversed.name := 'reversed'
+
+!insert (smBankTransfer, btInitiated) into StateMachineContainsStates
+!insert (smBankTransfer, btKycCheck) into StateMachineContainsStates
+!insert (smBankTransfer, btAwaitingApproval) into StateMachineContainsStates
+!insert (smBankTransfer, btExecuting) into StateMachineContainsStates
+!insert (smBankTransfer, btCompleted) into StateMachineContainsStates
+!insert (smBankTransfer, btFailed) into StateMachineContainsStates
+!insert (smBankTransfer, btReversed) into StateMachineContainsStates
+
+!insert (smBankTransfer, btInitiated) into StateMachineStartsStates
+
+
+!new Transition('trBtSubmitKyc')
+!trBtSubmitKyc.name := 'submitKyc'
+!new TimeEvent('evBtSubmitKyc')
+!evBtSubmitKyc.time := 2
+
+!new Transition('trBtKycPassed')
+!trBtKycPassed.name := 'kycPassed'
+!new TimeEvent('evBtKycPassed')
+!evBtKycPassed.time := 30
+
+!new Transition('trBtKycFailed')
+!trBtKycFailed.name := 'kycFailed'
+!new TimeEvent('evBtKycFailed')
+!evBtKycFailed.time := 25
+
+!new Transition('trBtApprovalGranted')
+!trBtApprovalGranted.name := 'approvalGranted'
+!new TimeEvent('evBtApprovalGranted')
+!evBtApprovalGranted.time := 60
+
+!new Transition('trBtApprovalTimeout')
+!trBtApprovalTimeout.name := 'approvalTimeout'
+!new TimeEvent('evBtApprovalTimeout')
+!evBtApprovalTimeout.time := 120
+
+!new Transition('trBtExecuteOk')
+!trBtExecuteOk.name := 'executeOk'
+!new TimeEvent('evBtExecuteOk')
+!evBtExecuteOk.time := 5
+
+!new Transition('trBtExecuteFail')
+!trBtExecuteFail.name := 'executeFail'
+!new TimeEvent('evBtExecuteFail')
+!evBtExecuteFail.time := 5
+
+!new Transition('trBtRetryExecution')
+!trBtRetryExecution.name := 'retryExecution'
+!new TimeEvent('evBtRetryExecution')
+!evBtRetryExecution.time := 10
+
+!new Transition('trBtCancelBeforeKyc')
+!trBtCancelBeforeKyc.name := 'cancel'
+!new TimeEvent('evBtCancelBeforeKyc')
+!evBtCancelBeforeKyc.time := 1
+
+!new Transition('trBtRequestReversal')
+!trBtRequestReversal.name := 'requestReversal'
+!new TimeEvent('evBtRequestReversal')
+!evBtRequestReversal.time := 1440
+
+!new Transition('trBtApprovalHeartbeat')
+!trBtApprovalHeartbeat.name := 'approvalHeartbeat'
+!new TimeEvent('evBtApprovalHeartbeat')
+!evBtApprovalHeartbeat.time := 15
+
+
+!insert (smBankTransfer, trBtSubmitKyc) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtKycPassed) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtKycFailed) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtApprovalGranted) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtApprovalTimeout) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtExecuteOk) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtExecuteFail) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtRetryExecution) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtCancelBeforeKyc) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtRequestReversal) into StateMachineContainsTransitions
+!insert (smBankTransfer, trBtApprovalHeartbeat) into StateMachineContainsTransitions
+
+!insert (trBtSubmitKyc, evBtSubmitKyc) into TransitionContainsEvents
+!insert (trBtKycPassed, evBtKycPassed) into TransitionContainsEvents
+!insert (trBtKycFailed, evBtKycFailed) into TransitionContainsEvents
+!insert (trBtApprovalGranted, evBtApprovalGranted) into TransitionContainsEvents
+!insert (trBtApprovalTimeout, evBtApprovalTimeout) into TransitionContainsEvents
+!insert (trBtExecuteOk, evBtExecuteOk) into TransitionContainsEvents
+!insert (trBtExecuteFail, evBtExecuteFail) into TransitionContainsEvents
+!insert (trBtRetryExecution, evBtRetryExecution) into TransitionContainsEvents
+!insert (trBtCancelBeforeKyc, evBtCancelBeforeKyc) into TransitionContainsEvents
+!insert (trBtRequestReversal, evBtRequestReversal) into TransitionContainsEvents
+!insert (trBtApprovalHeartbeat, evBtApprovalHeartbeat) into TransitionContainsEvents
+
+
+!insert (btInitiated, trBtSubmitKyc) into StateTransition
+!insert (trBtSubmitKyc, btKycCheck) into TransitionState
+
+!insert (btKycCheck, trBtKycPassed) into StateTransition
+!insert (trBtKycPassed, btAwaitingApproval) into TransitionState
+
+!insert (btKycCheck, trBtKycFailed) into StateTransition
+!insert (trBtKycFailed, btFailed) into TransitionState
+
+!insert (btAwaitingApproval, trBtApprovalGranted) into StateTransition
+!insert (trBtApprovalGranted, btExecuting) into TransitionState
+
+!insert (btAwaitingApproval, trBtApprovalTimeout) into StateTransition
+!insert (trBtApprovalTimeout, btFailed) into TransitionState
+
+!insert (btExecuting, trBtExecuteOk) into StateTransition
+!insert (trBtExecuteOk, btCompleted) into TransitionState
+
+!insert (btExecuting, trBtExecuteFail) into StateTransition
+!insert (trBtExecuteFail, btFailed) into TransitionState
+
+!insert (btFailed, trBtRetryExecution) into StateTransition
+!insert (trBtRetryExecution, btExecuting) into TransitionState
+
+!insert (btInitiated, trBtCancelBeforeKyc) into StateTransition
+!insert (trBtCancelBeforeKyc, btFailed) into TransitionState
+
+!insert (btCompleted, trBtRequestReversal) into StateTransition
+!insert (trBtRequestReversal, btReversed) into TransitionState
+
+!insert (btAwaitingApproval, trBtApprovalHeartbeat) into StateTransition
+!insert (trBtApprovalHeartbeat, btAwaitingApproval) into TransitionState
+
+
+
+!new StateMachine('smMatchmaking')
+!smMatchmaking.name := 'gameMatchmaking'
+
+!new State('mmIdle')
+!mmIdle.name := 'idle'
+!new State('mmSearching')
+!mmSearching.name := 'searching'
+!new State('mmMatchFound')
+!mmMatchFound.name := 'matchFound'
+!new State('mmLoading')
+!mmLoading.name := 'loadingGame'
+!new State('mmInGame')
+!mmInGame.name := 'inGame'
+!new State('mmPostGame')
+!mmPostGame.name := 'postGame'
+!new State('mmDisconnected')
+!mmDisconnected.name := 'disconnected'
+
+!insert (smMatchmaking, mmIdle) into StateMachineContainsStates
+!insert (smMatchmaking, mmSearching) into StateMachineContainsStates
+!insert (smMatchmaking, mmMatchFound) into StateMachineContainsStates
+!insert (smMatchmaking, mmLoading) into StateMachineContainsStates
+!insert (smMatchmaking, mmInGame) into StateMachineContainsStates
+!insert (smMatchmaking, mmPostGame) into StateMachineContainsStates
+!insert (smMatchmaking, mmDisconnected) into StateMachineContainsStates
+
+!insert (smMatchmaking, mmIdle) into StateMachineStartsStates
+
+
+!new Transition('trMmStartSearch')
+!trMmStartSearch.name := 'startSearch'
+!new TimeEvent('evMmStartSearch')
+!evMmStartSearch.time := 1
+
+!new Transition('trMmSearchTimeout')
+!trMmSearchTimeout.name := 'searchTimeout'
+!new TimeEvent('evMmSearchTimeout')
+!evMmSearchTimeout.time := 90
+
+!new Transition('trMmCancelSearch')
+!trMmCancelSearch.name := 'cancelSearch'
+!new TimeEvent('evMmCancelSearch')
+!evMmCancelSearch.time := 2
+
+!new Transition('trMmFoundMatch')
+!trMmFoundMatch.name := 'foundMatch'
+!new TimeEvent('evMmFoundMatch')
+!evMmFoundMatch.time := 20
+
+!new Transition('trMmAcceptMatch')
+!trMmAcceptMatch.name := 'acceptMatch'
+!new TimeEvent('evMmAcceptMatch')
+!evMmAcceptMatch.time := 10
+
+!new Transition('trMmLoadDone')
+!trMmLoadDone.name := 'loadDone'
+!new TimeEvent('evMmLoadDone')
+!evMmLoadDone.time := 15
+
+!new Transition('trMmGameEnds')
+!trMmGameEnds.name := 'gameEnds'
+!new TimeEvent('evMmGameEnds')
+!evMmGameEnds.time := 1800
+
+!new Transition('trMmReturnLobby')
+!trMmReturnLobby.name := 'returnToLobby'
+!new TimeEvent('evMmReturnLobby')
+!evMmReturnLobby.time := 5
+
+!new Transition('trMmDisconnect')
+!trMmDisconnect.name := 'disconnect'
+!new TimeEvent('evMmDisconnect')
+!evMmDisconnect.time := 1
+
+!new Transition('trMmReconnect')
+!trMmReconnect.name := 'reconnect'
+!new TimeEvent('evMmReconnect')
+!evMmReconnect.time := 20
+
+
+!insert (smMatchmaking, trMmStartSearch) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmSearchTimeout) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmCancelSearch) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmFoundMatch) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmAcceptMatch) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmLoadDone) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmGameEnds) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmReturnLobby) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmDisconnect) into StateMachineContainsTransitions
+!insert (smMatchmaking, trMmReconnect) into StateMachineContainsTransitions
+
+!insert (trMmStartSearch, evMmStartSearch) into TransitionContainsEvents
+!insert (trMmSearchTimeout, evMmSearchTimeout) into TransitionContainsEvents
+!insert (trMmCancelSearch, evMmCancelSearch) into TransitionContainsEvents
+!insert (trMmFoundMatch, evMmFoundMatch) into TransitionContainsEvents
+!insert (trMmAcceptMatch, evMmAcceptMatch) into TransitionContainsEvents
+!insert (trMmLoadDone, evMmLoadDone) into TransitionContainsEvents
+!insert (trMmGameEnds, evMmGameEnds) into TransitionContainsEvents
+!insert (trMmReturnLobby, evMmReturnLobby) into TransitionContainsEvents
+!insert (trMmDisconnect, evMmDisconnect) into TransitionContainsEvents
+!insert (trMmReconnect, evMmReconnect) into TransitionContainsEvents
+
+
+!insert (mmIdle, trMmStartSearch) into StateTransition
+!insert (trMmStartSearch, mmSearching) into TransitionState
+
+!insert (mmSearching, trMmSearchTimeout) into StateTransition
+!insert (trMmSearchTimeout, mmIdle) into TransitionState
+
+!insert (mmSearching, trMmCancelSearch) into StateTransition
+!insert (trMmCancelSearch, mmIdle) into TransitionState
+
+!insert (mmSearching, trMmFoundMatch) into StateTransition
+!insert (trMmFoundMatch, mmMatchFound) into TransitionState
+
+!insert (mmMatchFound, trMmAcceptMatch) into StateTransition
+!insert (trMmAcceptMatch, mmLoading) into TransitionState
+
+!insert (mmLoading, trMmLoadDone) into StateTransition
+!insert (trMmLoadDone, mmInGame) into TransitionState
+
+!insert (mmInGame, trMmGameEnds) into StateTransition
+!insert (trMmGameEnds, mmPostGame) into TransitionState
+
+!insert (mmPostGame, trMmReturnLobby) into StateTransition
+!insert (trMmReturnLobby, mmIdle) into TransitionState
+
+!insert (mmInGame, trMmDisconnect) into StateTransition
+!insert (trMmDisconnect, mmDisconnected) into TransitionState
+
+!insert (mmDisconnected, trMmReconnect) into StateTransition
+!insert (trMmReconnect, mmInGame) into TransitionState

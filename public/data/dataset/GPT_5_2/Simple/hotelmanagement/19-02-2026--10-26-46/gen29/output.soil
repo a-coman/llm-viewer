@@ -1,0 +1,141 @@
+!new Booking('booking31')
+!booking31.startDate := '2031-07-01'
+!booking31.endDate := '2031-07-12'
+!booking31.canceled := false
+!booking31.bookingId := 10800
+!booking31.confirmed := true
+
+!new Customer('customer31')
+!customer31.firstName := 'Leila'
+!customer31.lastName := 'Haddad'
+
+!insert (booking31, customer31) into BookingCustomer
+
+!new RoomReservation('rr43')
+!rr43.checkInDate := '2031-07-01'
+!rr43.checkOutDate := '2031-07-04'
+
+!new RoomReservation('rr44')
+!rr44.checkInDate := '2031-07-04'
+!rr44.checkOutDate := '2031-07-08'
+
+!new RoomReservation('rr45')
+!rr45.checkInDate := '2031-07-08'
+!rr45.checkOutDate := '2031-07-10'
+
+!new RoomReservation('rr46')
+!rr46.checkInDate := '2031-07-10'
+!rr46.checkOutDate := '2031-07-12'
+
+!insert (booking31, rr43) into BookingRoomReservation
+!insert (booking31, rr44) into BookingRoomReservation
+!insert (booking31, rr45) into BookingRoomReservation
+!insert (booking31, rr46) into BookingRoomReservation
+
+!new Room('room4101')
+!room4101.roomNumber := 4101
+!room4101.numBeds := 2
+!room4101.pricePerNight := 155.0
+!room4101.occupied := false
+!room4101.blocked := true
+
+!new Room('room4102')
+!room4102.roomNumber := 4102
+!room4102.numBeds := 2
+!room4102.pricePerNight := 155.0
+!room4102.occupied := false
+!room4102.blocked := true
+
+!new Room('room1110')
+!room1110.roomNumber := 1110
+!room1110.numBeds := 3
+!room1110.pricePerNight := 240.0
+!room1110.occupied := false
+!room1110.blocked := true
+
+!new Room('room0520')
+!room0520.roomNumber := 520
+!room0520.numBeds := 1
+!room0520.pricePerNight := 125.0
+!room0520.occupied := false
+!room0520.blocked := true
+
+!new Room('room2305')
+!room2305.roomNumber := 2305
+!room2305.numBeds := 2
+!room2305.pricePerNight := 185.0
+!room2305.occupied := false
+!room2305.blocked := true
+
+!new Room('room2306')
+!room2306.roomNumber := 2306
+!room2306.numBeds := 2
+!room2306.pricePerNight := 185.0
+!room2306.occupied := false
+!room2306.blocked := true
+
+!insert (rr43, room4101) into RoomReservationRoom
+!insert (rr43, room4102) into RoomReservationRoom
+!insert (rr44, room1110) into RoomReservationRoom
+!insert (rr45, room0520) into RoomReservationRoom
+!insert (rr46, room2305) into RoomReservationRoom
+!insert (rr46, room2306) into RoomReservationRoom
+
+!new RoomExtra('extraCrib')
+!extraCrib.price := 0.0
+!extraCrib.description := 'Baby crib (included)'
+
+!new RoomExtra('extraKitchenetteAccess')
+!extraKitchenetteAccess.price := 30.0
+!extraKitchenetteAccess.description := 'Kitchenette access fee'
+
+!new RoomExtra('extraMaintenanceMoveNote')
+!extraMaintenanceMoveNote.price := 0.0
+!extraMaintenanceMoveNote.description := 'Room move due to maintenance'
+
+!new RoomExtra('extraEveningShuttle')
+!extraEveningShuttle.price := 25.0
+!extraEveningShuttle.description := 'Evening shuttle to airport'
+
+!insert (rr43, extraCrib) into RoomReservationExtras
+!insert (rr43, extraKitchenetteAccess) into RoomReservationExtras
+!insert (rr45, extraMaintenanceMoveNote) into RoomReservationExtras
+!insert (rr46, extraEveningShuttle) into RoomReservationExtras
+
+!new Bill('bill44')
+!bill44.billId := 28001
+!bill44.price := 310.0
+
+!new Bill('bill45')
+!bill45.billId := 28002
+!bill45.price := 960.0
+
+!new Bill('bill46')
+!bill46.billId := 28003
+!bill46.price := 250.0
+
+!new Bill('bill47')
+!bill47.billId := 28004
+!bill47.price := 765.0
+
+!insert (bill44, rr43) into BillRoomReservation
+!insert (bill45, rr44) into BillRoomReservation
+!insert (bill46, rr45) into BillRoomReservation
+!insert (bill47, rr46) into BillRoomReservation
+
+!insert (booking31, bill44) into BookingBill
+!insert (booking31, bill45) into BookingBill
+!insert (booking31, bill46) into BookingBill
+!insert (booking31, bill47) into BookingBill
+
+!new FreeRoomTypesDTO('dtoJulyFamilyConnect')
+!dtoJulyFamilyConnect.roomTypeDescription := 'Family connecting rooms (July)'
+!dtoJulyFamilyConnect.numBeds := 2
+!dtoJulyFamilyConnect.pricePerNight := 155.0
+!dtoJulyFamilyConnect.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('dtoJulyTriple')
+!dtoJulyTriple.roomTypeDescription := 'Triple room (July peak)'
+!dtoJulyTriple.numBeds := 3
+!dtoJulyTriple.pricePerNight := 240.0
+!dtoJulyTriple.numFreeRooms := 0

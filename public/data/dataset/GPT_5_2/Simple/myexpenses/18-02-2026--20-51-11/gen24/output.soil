@@ -1,0 +1,79 @@
+!new Currency('curBHD')
+!curBHD.name := 'Bahraini Dinar'
+!curBHD.abbreviation := 'BHD'
+
+!new Expense('expNewYearCelebration')
+!expNewYearCelebration.amount := 312.75
+!expNewYearCelebration.startDate := Date('2026-12-31')
+!expNewYearCelebration.endDate := Date('2027-01-02')
+
+!new Bill('billCateringDeposit_2026_12_31')
+!billCateringDeposit_2026_12_31.amount := 150.00
+!billCateringDeposit_2026_12_31.category := 'Events - Catering deposit'
+!billCateringDeposit_2026_12_31.date := Date('2026-12-31')
+!billCateringDeposit_2026_12_31.paymentMethod := #CREDIT_CARD
+!billCateringDeposit_2026_12_31.status := #PENDING
+
+!new Bill('billFireworksPermit_2026_12_31')
+!billFireworksPermit_2026_12_31.amount := 79.50
+!billFireworksPermit_2026_12_31.category := 'Events - Fireworks permit'
+!billFireworksPermit_2026_12_31.date := Date('2026-12-31')
+!billFireworksPermit_2026_12_31.paymentMethod := #CASH
+!billFireworksPermit_2026_12_31.status := #VALIDATED
+
+!new Bill('billLateNightTransit_2027_01_01')
+!billLateNightTransit_2027_01_01.amount := 23.25
+!billLateNightTransit_2027_01_01.category := 'Transport - Late-night transit'
+!billLateNightTransit_2027_01_01.date := Date('2027-01-01')
+!billLateNightTransit_2027_01_01.paymentMethod := #CASH
+!billLateNightTransit_2027_01_01.status := #VERIFIED
+
+!new Bill('billVenueCleanup_2027_01_02')
+!billVenueCleanup_2027_01_02.amount := 60.00
+!billVenueCleanup_2027_01_02.category := 'Events - Venue cleanup fee'
+!billVenueCleanup_2027_01_02.date := Date('2027-01-02')
+!billVenueCleanup_2027_01_02.paymentMethod := #CHECK
+!billVenueCleanup_2027_01_02.status := #VERIFIED
+
+!insert (expNewYearCelebration, billCateringDeposit_2026_12_31) into ExpenseContainsBills
+!insert (expNewYearCelebration, billFireworksPermit_2026_12_31) into ExpenseContainsBills
+!insert (expNewYearCelebration, billLateNightTransit_2027_01_01) into ExpenseContainsBills
+!insert (expNewYearCelebration, billVenueCleanup_2027_01_02) into ExpenseContainsBills
+
+!insert (billCateringDeposit_2026_12_31, curBHD) into BillCurrency
+!insert (billFireworksPermit_2026_12_31, curBHD) into BillCurrency
+!insert (billLateNightTransit_2027_01_01, curBHD) into BillCurrency
+!insert (billVenueCleanup_2027_01_02, curBHD) into BillCurrency
+
+!new Comment('cmtNY1')
+!cmtNY1.text := 'New Year celebration spanning two calendar years; deposit still pending final catering invoice.'
+!new Comment('cmtNY2')
+!cmtNY2.text := 'Cleanup fee confirmed by venue manager; transit receipt kept for reference.'
+!insert (expNewYearCelebration, cmtNY1) into ExpenseComment
+!insert (expNewYearCelebration, cmtNY2) into ExpenseComment
+
+
+!new Expense('expJanCharityAuction')
+!expJanCharityAuction.amount := 980.00
+!expJanCharityAuction.startDate := Date('2027-01-15')
+!expJanCharityAuction.endDate := Date('2027-01-15')
+
+!new Bill('billAuctionTableSponsor_2027_01_15')
+!billAuctionTableSponsor_2027_01_15.amount := 750.00
+!billAuctionTableSponsor_2027_01_15.category := 'Charity - Auction table sponsorship'
+!billAuctionTableSponsor_2027_01_15.date := Date('2027-01-15')
+!billAuctionTableSponsor_2027_01_15.paymentMethod := #CREDIT_CARD
+!billAuctionTableSponsor_2027_01_15.status := #VALIDATED
+
+!new Bill('billProgramPrinting_2027_01_15')
+!billProgramPrinting_2027_01_15.amount := 230.00
+!billProgramPrinting_2027_01_15.category := 'Charity - Program printing'
+!billProgramPrinting_2027_01_15.date := Date('2027-01-15')
+!billProgramPrinting_2027_01_15.paymentMethod := #CHECK
+!billProgramPrinting_2027_01_15.status := #PENDING
+
+!insert (expJanCharityAuction, billAuctionTableSponsor_2027_01_15) into ExpenseContainsBills
+!insert (expJanCharityAuction, billProgramPrinting_2027_01_15) into ExpenseContainsBills
+
+!insert (billAuctionTableSponsor_2027_01_15, curBHD) into BillCurrency
+!insert (billProgramPrinting_2027_01_15, curBHD) into BillCurrency

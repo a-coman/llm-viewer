@@ -1,0 +1,166 @@
+!new RentalOffice('office_pensacola')
+!office_pensacola.name := 'Panhandle Vehicle Rental - Pensacola'
+!office_pensacola.number := 2101
+!office_pensacola.address := '4200 N Davis Hwy, Pensacola, FL 32503'
+
+!new RentalOffice('office_tucson_north2')
+!office_tucson_north2.name := 'Tucson North Truck & Trailer Rental'
+!office_tucson_north2.number := 2102
+!office_tucson_north2.address := '4700 N Flowing Wells Rd, Tucson, AZ 85705'
+
+!new RentalOffice('office_newcastle_drop4')
+!office_newcastle_drop4.name := 'New Castle Drop Yard - After Hours'
+!office_newcastle_drop4.number := 2103
+!office_newcastle_drop4.address := '305 Terminal Ave, New Castle, DE 19720'
+
+!new RentalOffice('office_reservations_mid')
+!office_reservations_mid.name := 'Central Reservations Office'
+!office_reservations_mid.number := 2104
+!office_reservations_mid.address := '1600 Broadway, Denver, CO 80202'
+
+!new Truck('truck_fl_24ft_210')
+!truck_fl_24ft_210.id := 92110
+!truck_fl_24ft_210.registrationState := #FL
+!truck_fl_24ft_210.licensePlateNumber := 'FL-TRK-92110'
+!truck_fl_24ft_210.vehicleTypeCode := #TRUCK24
+!truck_fl_24ft_210.registrationLastMaintenanceDate := Date('2026-01-18')
+!truck_fl_24ft_210.expirationDate := Date('2027-01-31')
+!truck_fl_24ft_210.odometerReading := 41890
+!truck_fl_24ft_210.gasTankCapacity := 63.0
+!truck_fl_24ft_210.workingRadio := true
+!truck_fl_24ft_210.mileage := 10
+
+!new Truck('truck_az_10ft_211')
+!truck_az_10ft_211.id := 92111
+!truck_az_10ft_211.registrationState := #AZ
+!truck_az_10ft_211.licensePlateNumber := 'AZ-TRK-92111'
+!truck_az_10ft_211.vehicleTypeCode := #TRUCK10
+!truck_az_10ft_211.registrationLastMaintenanceDate := Date('2026-02-22')
+!truck_az_10ft_211.expirationDate := Date('2026-11-30')
+!truck_az_10ft_211.odometerReading := 16505
+!truck_az_10ft_211.gasTankCapacity := 32.5
+!truck_az_10ft_211.workingRadio := false
+!truck_az_10ft_211.mileage := 16
+
+!new Vehicle('trailer_de_covered_212')
+!trailer_de_covered_212.id := 93112
+!trailer_de_covered_212.registrationState := #DE
+!trailer_de_covered_212.licensePlateNumber := 'DE-TRL-93112'
+!trailer_de_covered_212.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_212.registrationLastMaintenanceDate := Date('2025-12-05')
+!trailer_de_covered_212.expirationDate := Date('2026-12-31')
+
+!new Vehicle('trailer_fl_open_213')
+!trailer_fl_open_213.id := 93113
+!trailer_fl_open_213.registrationState := #FL
+!trailer_fl_open_213.licensePlateNumber := 'FL-TRL-93113'
+!trailer_fl_open_213.vehicleTypeCode := #OPEN_TRAILER
+!trailer_fl_open_213.registrationLastMaintenanceDate := Date('2026-03-01')
+!trailer_fl_open_213.expirationDate := Date('2027-02-28')
+
+!insert (office_pensacola, truck_fl_24ft_210) into RentalOfficeVehicle
+!insert (office_tucson_north2, truck_az_10ft_211) into RentalOfficeVehicle
+!insert (office_newcastle_drop4, trailer_de_covered_212) into RentalOfficeVehicle
+!insert (office_pensacola, trailer_fl_open_213) into RentalOfficeVehicle
+
+!new Company('cust_co_skyline')
+!cust_co_skyline.name := 'Skyline Stage & Lighting, Inc.'
+!cust_co_skyline.address := '1550 Industrial Dr, Pensacola, FL 32505'
+!cust_co_skyline.poorRisk := false
+!cust_co_skyline.idNumber := 61022018
+
+!new Individual('cust_ind_kevin')
+!cust_ind_kevin.name := 'Kevin OBrien'
+!cust_ind_kevin.address := '922 W Congress St, Tucson, AZ 85745'
+!cust_ind_kevin.poorRisk := false
+!cust_ind_kevin.homePhone := '520-555-0122'
+!cust_ind_kevin.driverLicenseState := #AZ
+!cust_ind_kevin.driverLicenseNumber := 88014420
+!cust_ind_kevin.driverLicenseExpirationDate := Date('2029-05-10')
+
+!new Individual('cust_ind_melissa')
+!cust_ind_melissa.name := 'Melissa Hart'
+!cust_ind_melissa.address := '18 Battery Park, New Castle, DE 19720'
+!cust_ind_melissa.poorRisk := true
+!cust_ind_melissa.homePhone := '302-555-0155'
+!cust_ind_melissa.driverLicenseState := #DE
+!cust_ind_melissa.driverLicenseNumber := 34099127
+!cust_ind_melissa.driverLicenseExpirationDate := Date('2026-05-30')
+
+!new RentalAgreement('ra_210001')
+!ra_210001.number := 210001
+!ra_210001.rentalDate := Date('2026-02-03')
+!ra_210001.anticipatedDuration := 60
+!ra_210001.depositPaid := 0.00
+!ra_210001.quotedDailyRate := 79.00
+!ra_210001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_210002')
+!ra_210002.number := 210002
+!ra_210002.rentalDate := Date('2026-02-06')
+!ra_210002.anticipatedDuration := 2
+!ra_210002.depositPaid := 700.00
+!ra_210002.quotedDailyRate := 189.00
+!ra_210002.quotedRatePerMile := 0.98
+
+!new RentalAgreement('ra_210003')
+!ra_210003.number := 210003
+!ra_210003.rentalDate := Date('2026-02-10')
+!ra_210003.anticipatedDuration := 1
+!ra_210003.depositPaid := 50.00
+!ra_210003.quotedDailyRate := 39.00
+!ra_210003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_210004')
+!ra_210004.number := 210004
+!ra_210004.rentalDate := Date('2026-02-15')
+!ra_210004.anticipatedDuration := 9
+!ra_210004.depositPaid := 400.00
+!ra_210004.quotedDailyRate := 119.00
+!ra_210004.quotedRatePerMile := 0.75
+
+!new RentalAgreement('ra_210005')
+!ra_210005.number := 210005
+!ra_210005.rentalDate := Date('2026-03-01')
+!ra_210005.anticipatedDuration := 3
+!ra_210005.depositPaid := 0.00
+!ra_210005.quotedDailyRate := 29.50
+!ra_210005.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_210006')
+!ra_210006.number := 210006
+!ra_210006.rentalDate := Date('2026-03-04')
+!ra_210006.anticipatedDuration := 5
+!ra_210006.depositPaid := 300.00
+!ra_210006.quotedDailyRate := 35.00
+!ra_210006.quotedRatePerMile := 0.00
+
+!insert (office_reservations_mid, ra_210001) into RentalOfficeRentalAgreementOrigin
+!insert (office_newcastle_drop4, ra_210001) into RentalOfficeRentalAgreementDrop
+!insert (ra_210001, trailer_de_covered_212) into RentalAgreementVehicle
+!insert (ra_210001, cust_co_skyline) into RentalAgreementCustomer
+
+!insert (office_pensacola, ra_210002) into RentalOfficeRentalAgreementOrigin
+!insert (office_pensacola, ra_210002) into RentalOfficeRentalAgreementDrop
+!insert (ra_210002, truck_fl_24ft_210) into RentalAgreementVehicle
+!insert (ra_210002, cust_co_skyline) into RentalAgreementCustomer
+
+!insert (office_pensacola, ra_210003) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson_north2, ra_210003) into RentalOfficeRentalAgreementDrop
+!insert (ra_210003, trailer_fl_open_213) into RentalAgreementVehicle
+!insert (ra_210003, cust_ind_kevin) into RentalAgreementCustomer
+
+!insert (office_tucson_north2, ra_210004) into RentalOfficeRentalAgreementOrigin
+!insert (office_newcastle_drop4, ra_210004) into RentalOfficeRentalAgreementDrop
+!insert (ra_210004, truck_az_10ft_211) into RentalAgreementVehicle
+!insert (ra_210004, cust_ind_kevin) into RentalAgreementCustomer
+
+!insert (office_newcastle_drop4, ra_210005) into RentalOfficeRentalAgreementOrigin
+!insert (office_newcastle_drop4, ra_210005) into RentalOfficeRentalAgreementDrop
+!insert (ra_210005, trailer_de_covered_212) into RentalAgreementVehicle
+!insert (ra_210005, cust_ind_melissa) into RentalAgreementCustomer
+
+!insert (office_reservations_mid, ra_210006) into RentalOfficeRentalAgreementOrigin
+!insert (office_pensacola, ra_210006) into RentalOfficeRentalAgreementDrop
+!insert (ra_210006, trailer_fl_open_213) into RentalAgreementVehicle
+!insert (ra_210006, cust_co_skyline) into RentalAgreementCustomer

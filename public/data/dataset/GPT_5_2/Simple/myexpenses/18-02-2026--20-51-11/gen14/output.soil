@@ -1,0 +1,78 @@
+!new Currency('curILS')
+!curILS.name := 'Israeli New Shekel'
+!curILS.abbreviation := 'ILS'
+
+!new Currency('curCZK')
+!curCZK.name := 'Czech Koruna'
+!curCZK.abbreviation := 'CZK'
+
+!new Expense('expAprSpringMaintenance')
+!expAprSpringMaintenance.amount := 570.00
+!expAprSpringMaintenance.startDate := Date('2026-04-01')
+!expAprSpringMaintenance.endDate := Date('2026-04-30')
+
+!new Bill('billBikeService_2026_04_02')
+!billBikeService_2026_04_02.amount := 120.00
+!billBikeService_2026_04_02.category := 'Transport - Bicycle service'
+!billBikeService_2026_04_02.date := Date('2026-04-02')
+!billBikeService_2026_04_02.paymentMethod := #CASH
+!billBikeService_2026_04_02.status := #VALIDATED
+
+!new Bill('billGardenSupplies_2026_04_05')
+!billGardenSupplies_2026_04_05.amount := 89.90
+!billGardenSupplies_2026_04_05.category := 'Home - Garden supplies'
+!billGardenSupplies_2026_04_05.date := Date('2026-04-05')
+!billGardenSupplies_2026_04_05.paymentMethod := #CREDIT_CARD
+!billGardenSupplies_2026_04_05.status := #VERIFIED
+
+!new Bill('billKeyCopy_2026_04_06')
+!billKeyCopy_2026_04_06.amount := 15.60
+!billKeyCopy_2026_04_06.category := 'Home - Key copy'
+!billKeyCopy_2026_04_06.date := Date('2026-04-06')
+!billKeyCopy_2026_04_06.paymentMethod := #CASH
+!billKeyCopy_2026_04_06.status := #DRAFT
+
+!new Bill('billSmokeDetectors_2026_04_08')
+!billSmokeDetectors_2026_04_08.amount := 40.00
+!billSmokeDetectors_2026_04_08.category := 'Home - Safety equipment'
+!billSmokeDetectors_2026_04_08.date := Date('2026-04-08')
+!billSmokeDetectors_2026_04_08.paymentMethod := #CREDIT_CARD
+!billSmokeDetectors_2026_04_08.status := #PENDING
+
+!new Bill('billWaterHeaterService_2026_04_12')
+!billWaterHeaterService_2026_04_12.amount := 210.00
+!billWaterHeaterService_2026_04_12.category := 'Home - Water heater maintenance'
+!billWaterHeaterService_2026_04_12.date := Date('2026-04-12')
+!billWaterHeaterService_2026_04_12.paymentMethod := #CHECK
+!billWaterHeaterService_2026_04_12.status := #VERIFIED
+
+!new Bill('billReplacementHose_2026_04_17')
+!billReplacementHose_2026_04_17.amount := 33.33
+!billReplacementHose_2026_04_17.category := 'Home - Plumbing parts'
+!billReplacementHose_2026_04_17.date := Date('2026-04-17')
+!billReplacementHose_2026_04_17.paymentMethod := #CASH
+!billReplacementHose_2026_04_17.status := #REFUNDED
+
+!new Bill('billWindowRepair_2026_04_25')
+!billWindowRepair_2026_04_25.amount := 61.17
+!billWindowRepair_2026_04_25.category := 'Home - Window repair'
+!billWindowRepair_2026_04_25.date := Date('2026-04-25')
+!billWindowRepair_2026_04_25.paymentMethod := #CREDIT_CARD
+!billWindowRepair_2026_04_25.status := #REFUSED
+
+!insert (expAprSpringMaintenance, billBikeService_2026_04_02) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billGardenSupplies_2026_04_05) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billKeyCopy_2026_04_06) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billSmokeDetectors_2026_04_08) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billWaterHeaterService_2026_04_12) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billReplacementHose_2026_04_17) into ExpenseContainsBills
+!insert (expAprSpringMaintenance, billWindowRepair_2026_04_25) into ExpenseContainsBills
+
+!insert (billBikeService_2026_04_02, curILS) into BillCurrency
+!insert (billGardenSupplies_2026_04_05, curILS) into BillCurrency
+!insert (billKeyCopy_2026_04_06, curILS) into BillCurrency
+!insert (billSmokeDetectors_2026_04_08, curILS) into BillCurrency
+
+!insert (billWaterHeaterService_2026_04_12, curCZK) into BillCurrency
+!insert (billReplacementHose_2026_04_17, curCZK) into BillCurrency
+!insert (billWindowRepair_2026_04_25, curCZK) into BillCurrency

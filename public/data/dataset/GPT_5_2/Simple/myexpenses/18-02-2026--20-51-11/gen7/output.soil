@@ -1,0 +1,59 @@
+!new Currency('curAUD')
+!curAUD.name := 'Australian Dollar'
+!curAUD.abbreviation := 'AUD'
+
+!new Currency('curCHF')
+!curCHF.name := 'Swiss Franc'
+!curCHF.abbreviation := 'CHF'
+
+!new Expense('expOctInternationalOnlineOrder')
+!expOctInternationalOnlineOrder.amount := 145.75
+!expOctInternationalOnlineOrder.startDate := Date('2026-10-01')
+!expOctInternationalOnlineOrder.endDate := Date('2026-10-31')
+
+!new Bill('billGadget_2026_10_04')
+!billGadget_2026_10_04.amount := 59.95
+!billGadget_2026_10_04.category := 'Shopping - Electronics'
+!billGadget_2026_10_04.date := Date('2026-10-04')
+!billGadget_2026_10_04.paymentMethod := #CREDIT_CARD
+!billGadget_2026_10_04.status := #VERIFIED
+
+!new Bill('billShipping_2026_10_04')
+!billShipping_2026_10_04.amount := 18.50
+!billShipping_2026_10_04.category := 'Shopping - Shipping'
+!billShipping_2026_10_04.date := Date('2026-10-04')
+!billShipping_2026_10_04.paymentMethod := #CREDIT_CARD
+!billShipping_2026_10_04.status := #VALIDATED
+
+!new Bill('billImportDuty_2026_10_11')
+!billImportDuty_2026_10_11.amount := 12.00
+!billImportDuty_2026_10_11.category := 'Taxes - Import duty'
+!billImportDuty_2026_10_11.date := Date('2026-10-11')
+!billImportDuty_2026_10_11.paymentMethod := #CASH
+!billImportDuty_2026_10_11.status := #PENDING
+
+!new Bill('billReturnLabel_2026_10_19')
+!billReturnLabel_2026_10_19.amount := 45.00
+!billReturnLabel_2026_10_19.category := 'Shopping - Return label'
+!billReturnLabel_2026_10_19.date := Date('2026-10-19')
+!billReturnLabel_2026_10_19.paymentMethod := #CHECK
+!billReturnLabel_2026_10_19.status := #REFUNDED
+
+!new Bill('billBankFee_2026_10_20')
+!billBankFee_2026_10_20.amount := 10.30
+!billBankFee_2026_10_20.category := 'Banking - Foreign transaction fee'
+!billBankFee_2026_10_20.date := Date('2026-10-20')
+!billBankFee_2026_10_20.paymentMethod := #CREDIT_CARD
+!billBankFee_2026_10_20.status := #VERIFIED
+
+!insert (expOctInternationalOnlineOrder, billGadget_2026_10_04) into ExpenseContainsBills
+!insert (expOctInternationalOnlineOrder, billShipping_2026_10_04) into ExpenseContainsBills
+!insert (expOctInternationalOnlineOrder, billImportDuty_2026_10_11) into ExpenseContainsBills
+!insert (expOctInternationalOnlineOrder, billReturnLabel_2026_10_19) into ExpenseContainsBills
+!insert (expOctInternationalOnlineOrder, billBankFee_2026_10_20) into ExpenseContainsBills
+
+!insert (billGadget_2026_10_04, curAUD) into BillCurrency
+!insert (billShipping_2026_10_04, curAUD) into BillCurrency
+!insert (billImportDuty_2026_10_11, curAUD) into BillCurrency
+!insert (billReturnLabel_2026_10_19, curCHF) into BillCurrency
+!insert (billBankFee_2026_10_20, curCHF) into BillCurrency

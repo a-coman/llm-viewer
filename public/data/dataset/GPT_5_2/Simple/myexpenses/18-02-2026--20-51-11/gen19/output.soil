@@ -1,0 +1,107 @@
+!new Currency('curPHP')
+!curPHP.name := 'Philippine Peso'
+!curPHP.abbreviation := 'PHP'
+
+!new Currency('curRON')
+!curRON.name := 'Romanian Leu'
+!curRON.abbreviation := 'RON'
+
+
+!new Expense('expAugChildcareSchool')
+!expAugChildcareSchool.amount := 13951.25
+!expAugChildcareSchool.startDate := Date('2026-08-01')
+!expAugChildcareSchool.endDate := Date('2026-08-31')
+
+!new Bill('billDaycareMonthly_2026_08_01')
+!billDaycareMonthly_2026_08_01.amount := 8000.00
+!billDaycareMonthly_2026_08_01.category := 'Childcare - Daycare monthly fee'
+!billDaycareMonthly_2026_08_01.date := Date('2026-08-01')
+!billDaycareMonthly_2026_08_01.paymentMethod := #CREDIT_CARD
+!billDaycareMonthly_2026_08_01.status := #VALIDATED
+
+!new Bill('billAfterSchoolProgram_2026_08_07')
+!billAfterSchoolProgram_2026_08_07.amount := 3500.00
+!billAfterSchoolProgram_2026_08_07.category := 'Childcare - After-school program'
+!billAfterSchoolProgram_2026_08_07.date := Date('2026-08-07')
+!billAfterSchoolProgram_2026_08_07.paymentMethod := #CHECK
+!billAfterSchoolProgram_2026_08_07.status := #PENDING
+
+!new Bill('billSchoolCanteenTopUp_2026_08_12')
+!billSchoolCanteenTopUp_2026_08_12.amount := 1200.50
+!billSchoolCanteenTopUp_2026_08_12.category := 'School - Canteen top-up'
+!billSchoolCanteenTopUp_2026_08_12.date := Date('2026-08-12')
+!billSchoolCanteenTopUp_2026_08_12.paymentMethod := #CASH
+!billSchoolCanteenTopUp_2026_08_12.status := #VERIFIED
+
+!new Bill('billSchoolSupplies_2026_08_15')
+!billSchoolSupplies_2026_08_15.amount := 950.75
+!billSchoolSupplies_2026_08_15.category := 'School - Supplies'
+!billSchoolSupplies_2026_08_15.date := Date('2026-08-15')
+!billSchoolSupplies_2026_08_15.paymentMethod := #CREDIT_CARD
+!billSchoolSupplies_2026_08_15.status := #VERIFIED
+
+!new Bill('billOverpaymentReturn_2026_08_28')
+!billOverpaymentReturn_2026_08_28.amount := 300.00
+!billOverpaymentReturn_2026_08_28.category := 'Childcare - Overpayment return processed'
+!billOverpaymentReturn_2026_08_28.date := Date('2026-08-28')
+!billOverpaymentReturn_2026_08_28.paymentMethod := #CASH
+!billOverpaymentReturn_2026_08_28.status := #REFUNDED
+
+!insert (expAugChildcareSchool, billDaycareMonthly_2026_08_01) into ExpenseContainsBills
+!insert (expAugChildcareSchool, billAfterSchoolProgram_2026_08_07) into ExpenseContainsBills
+!insert (expAugChildcareSchool, billSchoolCanteenTopUp_2026_08_12) into ExpenseContainsBills
+!insert (expAugChildcareSchool, billSchoolSupplies_2026_08_15) into ExpenseContainsBills
+!insert (expAugChildcareSchool, billOverpaymentReturn_2026_08_28) into ExpenseContainsBills
+
+!insert (billDaycareMonthly_2026_08_01, curPHP) into BillCurrency
+!insert (billAfterSchoolProgram_2026_08_07, curPHP) into BillCurrency
+!insert (billSchoolCanteenTopUp_2026_08_12, curPHP) into BillCurrency
+!insert (billSchoolSupplies_2026_08_15, curPHP) into BillCurrency
+!insert (billOverpaymentReturn_2026_08_28, curPHP) into BillCurrency
+
+!new Comment('cmtChildcare1')
+!cmtChildcare1.text := 'August childcare and school-related costs; includes one refunded overpayment.'
+!insert (expAugChildcareSchool, cmtChildcare1) into ExpenseComment
+
+
+!new Expense('expAugPassportRenewal')
+!expAugPassportRenewal.amount := 167.50
+!expAugPassportRenewal.startDate := Date('2026-08-20')
+!expAugPassportRenewal.endDate := Date('2026-08-20')
+
+!new Bill('billPassportFee_2026_08_20')
+!billPassportFee_2026_08_20.amount := 120.00
+!billPassportFee_2026_08_20.category := 'Administration - Passport renewal fee'
+!billPassportFee_2026_08_20.date := Date('2026-08-20')
+!billPassportFee_2026_08_20.paymentMethod := #CREDIT_CARD
+!billPassportFee_2026_08_20.status := #VALIDATED
+
+!new Bill('billPassportPhotos_2026_08_20')
+!billPassportPhotos_2026_08_20.amount := 35.50
+!billPassportPhotos_2026_08_20.category := 'Administration - Passport photos'
+!billPassportPhotos_2026_08_20.date := Date('2026-08-20')
+!billPassportPhotos_2026_08_20.paymentMethod := #CASH
+!billPassportPhotos_2026_08_20.status := #VERIFIED
+
+!new Bill('billTransitToOffice_2026_08_20')
+!billTransitToOffice_2026_08_20.amount := 12.00
+!billTransitToOffice_2026_08_20.category := 'Transport - Transit to government office'
+!billTransitToOffice_2026_08_20.date := Date('2026-08-20')
+!billTransitToOffice_2026_08_20.paymentMethod := #CASH
+!billTransitToOffice_2026_08_20.status := #PENDING
+
+!insert (expAugPassportRenewal, billPassportFee_2026_08_20) into ExpenseContainsBills
+!insert (expAugPassportRenewal, billPassportPhotos_2026_08_20) into ExpenseContainsBills
+!insert (expAugPassportRenewal, billTransitToOffice_2026_08_20) into ExpenseContainsBills
+
+!insert (billPassportFee_2026_08_20, curRON) into BillCurrency
+!insert (billPassportPhotos_2026_08_20, curRON) into BillCurrency
+!insert (billTransitToOffice_2026_08_20, curPHP) into BillCurrency
+
+!new Comment('cmtPassport1')
+!cmtPassport1.text := 'Renewal completed in one visit; transit ticket kept as supporting document.'
+!new Comment('cmtPassport2')
+!cmtPassport2.text := 'Photo booth receipt verified; fee payment validated.'
+
+!insert (expAugPassportRenewal, cmtPassport1) into ExpenseComment
+!insert (expAugPassportRenewal, cmtPassport2) into ExpenseComment

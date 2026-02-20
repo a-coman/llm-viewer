@@ -1,0 +1,372 @@
+!new StateMachine('smAtm')
+!smAtm.name := 'bankAtm'
+
+!new State('sAtmIdle')
+!sAtmIdle.name := 'idle'
+!new State('sAtmCardInserted')
+!sAtmCardInserted.name := 'cardInserted'
+!new State('sAtmPinEntry')
+!sAtmPinEntry.name := 'pinEntry'
+!new State('sAtmAuthenticated')
+!sAtmAuthenticated.name := 'authenticated'
+!new State('sAtmMenu')
+!sAtmMenu.name := 'menu'
+!new State('sAtmDispensingCash')
+!sAtmDispensingCash.name := 'dispensingCash'
+!new State('sAtmPrintingReceipt')
+!sAtmPrintingReceipt.name := 'printingReceipt'
+!new State('sAtmEjectingCard')
+!sAtmEjectingCard.name := 'ejectingCard'
+!new State('sAtmLocked')
+!sAtmLocked.name := 'locked'
+
+!insert (smAtm, sAtmIdle) into StateMachineContainsStates
+!insert (smAtm, sAtmCardInserted) into StateMachineContainsStates
+!insert (smAtm, sAtmPinEntry) into StateMachineContainsStates
+!insert (smAtm, sAtmAuthenticated) into StateMachineContainsStates
+!insert (smAtm, sAtmMenu) into StateMachineContainsStates
+!insert (smAtm, sAtmDispensingCash) into StateMachineContainsStates
+!insert (smAtm, sAtmPrintingReceipt) into StateMachineContainsStates
+!insert (smAtm, sAtmEjectingCard) into StateMachineContainsStates
+!insert (smAtm, sAtmLocked) into StateMachineContainsStates
+
+!insert (smAtm, sAtmIdle) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartCardInserted')
+!smAtmStartCardInserted.name := 'cardInsertedStart'
+!insert (smAtmStartCardInserted, sAtmCardInserted) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartPinEntry')
+!smAtmStartPinEntry.name := 'pinEntryStart'
+!insert (smAtmStartPinEntry, sAtmPinEntry) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartAuthenticated')
+!smAtmStartAuthenticated.name := 'authenticatedStart'
+!insert (smAtmStartAuthenticated, sAtmAuthenticated) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartMenu')
+!smAtmStartMenu.name := 'menuStart'
+!insert (smAtmStartMenu, sAtmMenu) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartDispensing')
+!smAtmStartDispensing.name := 'dispensingStart'
+!insert (smAtmStartDispensing, sAtmDispensingCash) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartReceipt')
+!smAtmStartReceipt.name := 'receiptStart'
+!insert (smAtmStartReceipt, sAtmPrintingReceipt) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartEjecting')
+!smAtmStartEjecting.name := 'ejectingStart'
+!insert (smAtmStartEjecting, sAtmEjectingCard) into StateMachineStartsStates
+
+!new StateMachine('smAtmStartLocked')
+!smAtmStartLocked.name := 'lockedStart'
+!insert (smAtmStartLocked, sAtmLocked) into StateMachineStartsStates
+
+
+!new Transition('tAtmHeartbeat')
+!tAtmHeartbeat.name := 'heartbeat'
+!new TimeEvent('eAtmHeartbeat')
+!eAtmHeartbeat.time := 120
+
+!new Transition('tAtmInsertCard')
+!tAtmInsertCard.name := 'insertCard'
+!new TimeEvent('eAtmInsertCard')
+!eAtmInsertCard.time := 1
+
+!new Transition('tAtmCardReadOk')
+!tAtmCardReadOk.name := 'cardReadOk'
+!new TimeEvent('eAtmCardReadOk')
+!eAtmCardReadOk.time := 2
+
+!new Transition('tAtmPinOk')
+!tAtmPinOk.name := 'pinOk'
+!new TimeEvent('eAtmPinOk')
+!eAtmPinOk.time := 10
+
+!new Transition('tAtmPinFail')
+!tAtmPinFail.name := 'pinFail'
+!new TimeEvent('eAtmPinFail')
+!eAtmPinFail.time := 15
+
+!new Transition('tAtmTooManyFails')
+!tAtmTooManyFails.name := 'tooManyFails'
+!new TimeEvent('eAtmTooManyFails')
+!eAtmTooManyFails.time := 45
+
+!new Transition('tAtmAuthToMenu')
+!tAtmAuthToMenu.name := 'showMenu'
+!new TimeEvent('eAtmAuthToMenu')
+!eAtmAuthToMenu.time := 1
+
+!new Transition('tAtmSelectWithdraw')
+!tAtmSelectWithdraw.name := 'selectWithdraw'
+!new TimeEvent('eAtmSelectWithdraw')
+!eAtmSelectWithdraw.time := 1
+
+!new Transition('tAtmDispenseDone')
+!tAtmDispenseDone.name := 'dispenseDone'
+!new TimeEvent('eAtmDispenseDone')
+!eAtmDispenseDone.time := 20
+
+!new Transition('tAtmReceiptPrinted')
+!tAtmReceiptPrinted.name := 'receiptPrinted'
+!new TimeEvent('eAtmReceiptPrinted')
+!eAtmReceiptPrinted.time := 5
+
+!new Transition('tAtmEjectDone')
+!tAtmEjectDone.name := 'ejectDone'
+!new TimeEvent('eAtmEjectDone')
+!eAtmEjectDone.time := 3
+
+!new Transition('tAtmCancel')
+!tAtmCancel.name := 'cancelSession'
+!new TimeEvent('eAtmCancel')
+!eAtmCancel.time := 1
+
+!new Transition('tAtmSessionTimeout')
+!tAtmSessionTimeout.name := 'sessionTimeout'
+!new TimeEvent('eAtmSessionTimeout')
+!eAtmSessionTimeout.time := 60
+
+!new Transition('tAtmLockTimeout')
+!tAtmLockTimeout.name := 'lockTimeout'
+!new TimeEvent('eAtmLockTimeout')
+!eAtmLockTimeout.time := 300
+
+
+!insert (smAtm, tAtmHeartbeat) into StateMachineContainsTransitions
+!insert (smAtm, tAtmInsertCard) into StateMachineContainsTransitions
+!insert (smAtm, tAtmCardReadOk) into StateMachineContainsTransitions
+!insert (smAtm, tAtmPinOk) into StateMachineContainsTransitions
+!insert (smAtm, tAtmPinFail) into StateMachineContainsTransitions
+!insert (smAtm, tAtmTooManyFails) into StateMachineContainsTransitions
+!insert (smAtm, tAtmAuthToMenu) into StateMachineContainsTransitions
+!insert (smAtm, tAtmSelectWithdraw) into StateMachineContainsTransitions
+!insert (smAtm, tAtmDispenseDone) into StateMachineContainsTransitions
+!insert (smAtm, tAtmReceiptPrinted) into StateMachineContainsTransitions
+!insert (smAtm, tAtmEjectDone) into StateMachineContainsTransitions
+!insert (smAtm, tAtmCancel) into StateMachineContainsTransitions
+!insert (smAtm, tAtmSessionTimeout) into StateMachineContainsTransitions
+!insert (smAtm, tAtmLockTimeout) into StateMachineContainsTransitions
+
+!insert (tAtmHeartbeat, eAtmHeartbeat) into TransitionContainsEvents
+!insert (tAtmInsertCard, eAtmInsertCard) into TransitionContainsEvents
+!insert (tAtmCardReadOk, eAtmCardReadOk) into TransitionContainsEvents
+!insert (tAtmPinOk, eAtmPinOk) into TransitionContainsEvents
+!insert (tAtmPinFail, eAtmPinFail) into TransitionContainsEvents
+!insert (tAtmTooManyFails, eAtmTooManyFails) into TransitionContainsEvents
+!insert (tAtmAuthToMenu, eAtmAuthToMenu) into TransitionContainsEvents
+!insert (tAtmSelectWithdraw, eAtmSelectWithdraw) into TransitionContainsEvents
+!insert (tAtmDispenseDone, eAtmDispenseDone) into TransitionContainsEvents
+!insert (tAtmReceiptPrinted, eAtmReceiptPrinted) into TransitionContainsEvents
+!insert (tAtmEjectDone, eAtmEjectDone) into TransitionContainsEvents
+!insert (tAtmCancel, eAtmCancel) into TransitionContainsEvents
+!insert (tAtmSessionTimeout, eAtmSessionTimeout) into TransitionContainsEvents
+!insert (tAtmLockTimeout, eAtmLockTimeout) into TransitionContainsEvents
+
+
+!insert (sAtmIdle, tAtmHeartbeat) into StateTransition
+!insert (tAtmHeartbeat, sAtmIdle) into TransitionState
+
+!insert (sAtmIdle, tAtmInsertCard) into StateTransition
+!insert (tAtmInsertCard, sAtmCardInserted) into TransitionState
+
+!insert (sAtmCardInserted, tAtmCardReadOk) into StateTransition
+!insert (tAtmCardReadOk, sAtmPinEntry) into TransitionState
+
+!insert (sAtmPinEntry, tAtmPinOk) into StateTransition
+!insert (tAtmPinOk, sAtmAuthenticated) into TransitionState
+
+!insert (sAtmPinEntry, tAtmPinFail) into StateTransition
+!insert (tAtmPinFail, sAtmPinEntry) into TransitionState
+
+!insert (sAtmPinEntry, tAtmTooManyFails) into StateTransition
+!insert (tAtmTooManyFails, sAtmLocked) into TransitionState
+
+!insert (sAtmAuthenticated, tAtmAuthToMenu) into StateTransition
+!insert (tAtmAuthToMenu, sAtmMenu) into TransitionState
+
+!insert (sAtmMenu, tAtmSelectWithdraw) into StateTransition
+!insert (tAtmSelectWithdraw, sAtmDispensingCash) into TransitionState
+
+!insert (sAtmDispensingCash, tAtmDispenseDone) into StateTransition
+!insert (tAtmDispenseDone, sAtmPrintingReceipt) into TransitionState
+
+!insert (sAtmPrintingReceipt, tAtmReceiptPrinted) into StateTransition
+!insert (tAtmReceiptPrinted, sAtmEjectingCard) into TransitionState
+
+!insert (sAtmEjectingCard, tAtmEjectDone) into StateTransition
+!insert (tAtmEjectDone, sAtmIdle) into TransitionState
+
+!insert (sAtmMenu, tAtmCancel) into StateTransition
+!insert (tAtmCancel, sAtmEjectingCard) into TransitionState
+
+!insert (sAtmMenu, tAtmSessionTimeout) into StateTransition
+!insert (tAtmSessionTimeout, sAtmEjectingCard) into TransitionState
+
+!insert (sAtmLocked, tAtmLockTimeout) into StateTransition
+!insert (tAtmLockTimeout, sAtmIdle) into TransitionState
+
+
+
+!new StateMachine('smSprinkler')
+!smSprinkler.name := 'gardenSprinkler'
+
+!new State('spOff')
+!spOff.name := 'off'
+!new State('spScheduled')
+!spScheduled.name := 'scheduled'
+!new State('spWatering')
+!spWatering.name := 'watering'
+!new State('spRainDelay')
+!spRainDelay.name := 'rainDelay'
+!new State('spManual')
+!spManual.name := 'manualOverride'
+!new State('spError')
+!spError.name := 'error'
+
+!insert (smSprinkler, spOff) into StateMachineContainsStates
+!insert (smSprinkler, spScheduled) into StateMachineContainsStates
+!insert (smSprinkler, spWatering) into StateMachineContainsStates
+!insert (smSprinkler, spRainDelay) into StateMachineContainsStates
+!insert (smSprinkler, spManual) into StateMachineContainsStates
+!insert (smSprinkler, spError) into StateMachineContainsStates
+
+!insert (smSprinkler, spOff) into StateMachineStartsStates
+
+!new StateMachine('smSprinklerStartScheduled')
+!smSprinklerStartScheduled.name := 'scheduledStart'
+!insert (smSprinklerStartScheduled, spScheduled) into StateMachineStartsStates
+
+!new StateMachine('smSprinklerStartWatering')
+!smSprinklerStartWatering.name := 'wateringStart'
+!insert (smSprinklerStartWatering, spWatering) into StateMachineStartsStates
+
+!new StateMachine('smSprinklerStartRainDelay')
+!smSprinklerStartRainDelay.name := 'rainDelayStart'
+!insert (smSprinklerStartRainDelay, spRainDelay) into StateMachineStartsStates
+
+!new StateMachine('smSprinklerStartManual')
+!smSprinklerStartManual.name := 'manualStart'
+!insert (smSprinklerStartManual, spManual) into StateMachineStartsStates
+
+!new StateMachine('smSprinklerStartError')
+!smSprinklerStartError.name := 'errorStart'
+!insert (smSprinklerStartError, spError) into StateMachineStartsStates
+
+
+!new Transition('tSpSetSchedule')
+!tSpSetSchedule.name := 'setSchedule'
+!new TimeEvent('eSpSetSchedule')
+!eSpSetSchedule.time := 5
+
+!new Transition('tSpStartScheduled')
+!tSpStartScheduled.name := 'startScheduled'
+!new TimeEvent('eSpStartScheduled')
+!eSpStartScheduled.time := 1
+
+!new Transition('tSpStopAfterDuration')
+!tSpStopAfterDuration.name := 'stopAfterDuration'
+!new TimeEvent('eSpStopAfterDuration')
+!eSpStopAfterDuration.time := 1800
+
+!new Transition('tSpRainDetected')
+!tSpRainDetected.name := 'rainDetected'
+!new TimeEvent('eSpRainDetected')
+!eSpRainDetected.time := 1
+
+!new Transition('tSpDelayExpired')
+!tSpDelayExpired.name := 'delayExpired'
+!new TimeEvent('eSpDelayExpired')
+!eSpDelayExpired.time := 3600
+
+!new Transition('tSpManualStart')
+!tSpManualStart.name := 'manualStart'
+!new TimeEvent('eSpManualStart')
+!eSpManualStart.time := 1
+
+!new Transition('tSpManualStop')
+!tSpManualStop.name := 'manualStop'
+!new TimeEvent('eSpManualStop')
+!eSpManualStop.time := 600
+
+!new Transition('tSpTurnOff')
+!tSpTurnOff.name := 'turnOff'
+!new TimeEvent('eSpTurnOff')
+!eSpTurnOff.time := 1
+
+!new Transition('tSpEmergencyStop')
+!tSpEmergencyStop.name := 'emergencyStop'
+!new TimeEvent('eSpEmergencyStop')
+!eSpEmergencyStop.time := 1
+
+!new Transition('tSpSensorFault')
+!tSpSensorFault.name := 'sensorFault'
+!new TimeEvent('eSpSensorFault')
+!eSpSensorFault.time := 1
+
+!new Transition('tSpReset')
+!tSpReset.name := 'reset'
+!new TimeEvent('eSpReset')
+!eSpReset.time := 30
+
+
+!insert (smSprinkler, tSpSetSchedule) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpStartScheduled) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpStopAfterDuration) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpRainDetected) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpDelayExpired) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpManualStart) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpManualStop) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpTurnOff) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpEmergencyStop) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpSensorFault) into StateMachineContainsTransitions
+!insert (smSprinkler, tSpReset) into StateMachineContainsTransitions
+
+!insert (tSpSetSchedule, eSpSetSchedule) into TransitionContainsEvents
+!insert (tSpStartScheduled, eSpStartScheduled) into TransitionContainsEvents
+!insert (tSpStopAfterDuration, eSpStopAfterDuration) into TransitionContainsEvents
+!insert (tSpRainDetected, eSpRainDetected) into TransitionContainsEvents
+!insert (tSpDelayExpired, eSpDelayExpired) into TransitionContainsEvents
+!insert (tSpManualStart, eSpManualStart) into TransitionContainsEvents
+!insert (tSpManualStop, eSpManualStop) into TransitionContainsEvents
+!insert (tSpTurnOff, eSpTurnOff) into TransitionContainsEvents
+!insert (tSpEmergencyStop, eSpEmergencyStop) into TransitionContainsEvents
+!insert (tSpSensorFault, eSpSensorFault) into TransitionContainsEvents
+!insert (tSpReset, eSpReset) into TransitionContainsEvents
+
+
+!insert (spOff, tSpSetSchedule) into StateTransition
+!insert (tSpSetSchedule, spScheduled) into TransitionState
+
+!insert (spScheduled, tSpStartScheduled) into StateTransition
+!insert (tSpStartScheduled, spWatering) into TransitionState
+
+!insert (spWatering, tSpStopAfterDuration) into StateTransition
+!insert (tSpStopAfterDuration, spScheduled) into TransitionState
+
+!insert (spWatering, tSpRainDetected) into StateTransition
+!insert (tSpRainDetected, spRainDelay) into TransitionState
+
+!insert (spRainDelay, tSpDelayExpired) into StateTransition
+!insert (tSpDelayExpired, spScheduled) into TransitionState
+
+!insert (spScheduled, tSpManualStart) into StateTransition
+!insert (tSpManualStart, spManual) into TransitionState
+
+!insert (spManual, tSpManualStop) into StateTransition
+!insert (tSpManualStop, spScheduled) into TransitionState
+
+!insert (spScheduled, tSpTurnOff) into StateTransition
+!insert (tSpTurnOff, spOff) into TransitionState
+
+!insert (spWatering, tSpEmergencyStop) into StateTransition
+!insert (tSpEmergencyStop, spOff) into TransitionState
+
+!insert (spWatering, tSpSensorFault) into StateTransition
+!insert (tSpSensorFault, spError) into TransitionState
+
+!insert (spError, tSpReset) into StateTransition
+!insert (tSpReset, spOff) into TransitionState

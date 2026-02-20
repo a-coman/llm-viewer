@@ -1,0 +1,122 @@
+!new RentalOffice('office_orlando_main')
+!office_orlando_main.name := 'Orange County Vehicle Rental - Orlando'
+!office_orlando_main.number := 1301
+!office_orlando_main.address := '7350 Cargo Rd, Orlando, FL 32827'
+
+!new RentalOffice('office_boulder')
+!office_boulder.name := 'Flatirons Fleet Rentals - Boulder'
+!office_boulder.number := 1302
+!office_boulder.address := '5555 Arapahoe Ave, Boulder, CO 80303'
+
+!new RentalOffice('office_hartford_ct3')
+!office_hartford_ct3.name := 'Capitol Area Drop-Off Site - Hartford'
+!office_hartford_ct3.number := 1303
+!office_hartford_ct3.address := '25 Brainard Rd, Hartford, CT 06114'
+
+!new Truck('truck_fl_24ft_31')
+!truck_fl_24ft_31.id := 63131
+!truck_fl_24ft_31.registrationState := #FL
+!truck_fl_24ft_31.licensePlateNumber := 'FL-TRK-6409'
+!truck_fl_24ft_31.vehicleTypeCode := #TRUCK24
+!truck_fl_24ft_31.registrationLastMaintenanceDate := Date('2026-04-06')
+!truck_fl_24ft_31.expirationDate := Date('2027-04-30')
+!truck_fl_24ft_31.odometerReading := 58802
+!truck_fl_24ft_31.gasTankCapacity := 61.0
+!truck_fl_24ft_31.workingRadio := true
+!truck_fl_24ft_31.mileage := 10
+
+!new Vehicle('trailer_fl_covered_31')
+!trailer_fl_covered_31.id := 64131
+!trailer_fl_covered_31.registrationState := #FL
+!trailer_fl_covered_31.licensePlateNumber := 'FL-TRL-2408'
+!trailer_fl_covered_31.vehicleTypeCode := #COVERED_TRAILER
+!trailer_fl_covered_31.registrationLastMaintenanceDate := Date('2026-03-28')
+!trailer_fl_covered_31.expirationDate := Date('2027-03-31')
+
+!new Vehicle('trailer_co_open_31')
+!trailer_co_open_31.id := 65131
+!trailer_co_open_31.registrationState := #CO
+!trailer_co_open_31.licensePlateNumber := 'CO-TRL-9110'
+!trailer_co_open_31.vehicleTypeCode := #OPEN_TRAILER
+!trailer_co_open_31.registrationLastMaintenanceDate := Date('2025-12-02')
+!trailer_co_open_31.expirationDate := Date('2026-12-31')
+
+!insert (office_orlando_main, truck_fl_24ft_31) into RentalOfficeVehicle
+!insert (office_orlando_main, trailer_fl_covered_31) into RentalOfficeVehicle
+!insert (office_boulder, trailer_co_open_31) into RentalOfficeVehicle
+
+!new Individual('cust_ind_tomas')
+!cust_ind_tomas.name := 'Tomas Ibarra'
+!cust_ind_tomas.address := '9107 Lakeside Dr, Orlando, FL 32810'
+!cust_ind_tomas.poorRisk := false
+!cust_ind_tomas.homePhone := '407-555-0194'
+!cust_ind_tomas.driverLicenseState := #FL
+!cust_ind_tomas.driverLicenseNumber := 45199210
+!cust_ind_tomas.driverLicenseExpirationDate := Date('2028-01-31')
+
+!new Individual('cust_ind_amelia')
+!cust_ind_amelia.name := 'Amelia Grant'
+!cust_ind_amelia.address := '3120 Walnut St, Boulder, CO 80301'
+!cust_ind_amelia.poorRisk := false
+!cust_ind_amelia.homePhone := '720-555-0103'
+!cust_ind_amelia.driverLicenseState := #CO
+!cust_ind_amelia.driverLicenseNumber := 77314009
+!cust_ind_amelia.driverLicenseExpirationDate := Date('2027-10-12')
+
+!new Company('cust_co_greenvalley')
+!cust_co_greenvalley.name := 'GreenValley Office Interiors'
+!cust_co_greenvalley.address := '4800 Innovation Dr, Orlando, FL 32826'
+!cust_co_greenvalley.poorRisk := true
+!cust_co_greenvalley.idNumber := 72004490
+
+!new RentalAgreement('ra_120001')
+!ra_120001.number := 120001
+!ra_120001.rentalDate := Date('2026-10-04')
+!ra_120001.anticipatedDuration := 4
+!ra_120001.depositPaid := 950.00
+!ra_120001.quotedDailyRate := 172.00
+!ra_120001.quotedRatePerMile := 0.91
+
+!new RentalAgreement('ra_120002')
+!ra_120002.number := 120002
+!ra_120002.rentalDate := Date('2026-10-08')
+!ra_120002.anticipatedDuration := 2
+!ra_120002.depositPaid := 0.00
+!ra_120002.quotedDailyRate := 34.00
+!ra_120002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_120003')
+!ra_120003.number := 120003
+!ra_120003.rentalDate := Date('2026-10-10')
+!ra_120003.anticipatedDuration := 7
+!ra_120003.depositPaid := 200.00
+!ra_120003.quotedDailyRate := 49.95
+!ra_120003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_120004')
+!ra_120004.number := 120004
+!ra_120004.rentalDate := Date('2026-10-20')
+!ra_120004.anticipatedDuration := 1
+!ra_120004.depositPaid := 300.00
+!ra_120004.quotedDailyRate := 189.00
+!ra_120004.quotedRatePerMile := 0.99
+
+!insert (office_orlando_main, ra_120001) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_ct3, ra_120001) into RentalOfficeRentalAgreementDrop
+!insert (ra_120001, truck_fl_24ft_31) into RentalAgreementVehicle
+!insert (ra_120001, cust_co_greenvalley) into RentalAgreementCustomer
+
+!insert (office_boulder, ra_120002) into RentalOfficeRentalAgreementOrigin
+!insert (office_boulder, ra_120002) into RentalOfficeRentalAgreementDrop
+!insert (ra_120002, trailer_co_open_31) into RentalAgreementVehicle
+!insert (ra_120002, cust_ind_amelia) into RentalAgreementCustomer
+
+!insert (office_orlando_main, ra_120003) into RentalOfficeRentalAgreementOrigin
+!insert (office_orlando_main, ra_120003) into RentalOfficeRentalAgreementDrop
+!insert (ra_120003, trailer_fl_covered_31) into RentalAgreementVehicle
+!insert (ra_120003, cust_ind_tomas) into RentalAgreementCustomer
+
+!insert (office_hartford_ct3, ra_120004) into RentalOfficeRentalAgreementOrigin
+!insert (office_orlando_main, ra_120004) into RentalOfficeRentalAgreementDrop
+!insert (ra_120004, truck_fl_24ft_31) into RentalAgreementVehicle
+!insert (ra_120004, cust_ind_amelia) into RentalAgreementCustomer

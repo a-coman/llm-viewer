@@ -1,0 +1,99 @@
+!new Currency('curMYR_2026')
+!curMYR_2026.name := 'Malaysian Ringgit'
+!curMYR_2026.abbreviation := 'MYR'
+
+!new Expense('expFebPublicTransportPasses')
+!expFebPublicTransportPasses.amount := 215.00
+!expFebPublicTransportPasses.startDate := Date('2026-02-01')
+!expFebPublicTransportPasses.endDate := Date('2026-02-29')
+
+!new Bill('billMonthlyTransitPass_2026_02_01')
+!billMonthlyTransitPass_2026_02_01.amount := 180.00
+!billMonthlyTransitPass_2026_02_01.category := 'Transport - Monthly transit pass'
+!billMonthlyTransitPass_2026_02_01.date := Date('2026-02-01')
+!billMonthlyTransitPass_2026_02_01.paymentMethod := #CREDIT_CARD
+!billMonthlyTransitPass_2026_02_01.status := #VALIDATED
+
+!new Bill('billBikeShareAddOn_2026_02_03')
+!billBikeShareAddOn_2026_02_03.amount := 25.00
+!billBikeShareAddOn_2026_02_03.category := 'Transport - Bike-share add-on'
+!billBikeShareAddOn_2026_02_03.date := Date('2026-02-03')
+!billBikeShareAddOn_2026_02_03.paymentMethod := #CASH
+!billBikeShareAddOn_2026_02_03.status := #PENDING
+
+!new Bill('billTravelCardReplacement_2026_02_12')
+!billTravelCardReplacement_2026_02_12.amount := 10.00
+!billTravelCardReplacement_2026_02_12.category := 'Transport - Travel card replacement fee'
+!billTravelCardReplacement_2026_02_12.date := Date('2026-02-12')
+!billTravelCardReplacement_2026_02_12.paymentMethod := #CHECK
+!billTravelCardReplacement_2026_02_12.status := #REFUSED
+
+!insert (expFebPublicTransportPasses, billMonthlyTransitPass_2026_02_01) into ExpenseContainsBills
+!insert (expFebPublicTransportPasses, billBikeShareAddOn_2026_02_03) into ExpenseContainsBills
+!insert (expFebPublicTransportPasses, billTravelCardReplacement_2026_02_12) into ExpenseContainsBills
+
+!insert (billMonthlyTransitPass_2026_02_01, curMYR_2026) into BillCurrency
+!insert (billBikeShareAddOn_2026_02_03, curMYR_2026) into BillCurrency
+!insert (billTravelCardReplacement_2026_02_12, curMYR_2026) into BillCurrency
+
+
+!new Expense('expFebKitchenApplianceRepair')
+!expFebKitchenApplianceRepair.amount := 370.50
+!expFebKitchenApplianceRepair.startDate := Date('2026-02-08')
+!expFebKitchenApplianceRepair.endDate := Date('2026-02-09')
+
+!new Bill('billTechnicianCallout_2026_02_08')
+!billTechnicianCallout_2026_02_08.amount := 90.00
+!billTechnicianCallout_2026_02_08.category := 'Home - Appliance technician callout'
+!billTechnicianCallout_2026_02_08.date := Date('2026-02-08')
+!billTechnicianCallout_2026_02_08.paymentMethod := #CASH
+!billTechnicianCallout_2026_02_08.status := #VERIFIED
+
+!new Bill('billReplacementControlBoard_2026_02_09')
+!billReplacementControlBoard_2026_02_09.amount := 250.50
+!billReplacementControlBoard_2026_02_09.category := 'Home - Appliance replacement part'
+!billReplacementControlBoard_2026_02_09.date := Date('2026-02-09')
+!billReplacementControlBoard_2026_02_09.paymentMethod := #CREDIT_CARD
+!billReplacementControlBoard_2026_02_09.status := #PENDING
+
+!new Bill('billWarrantyHandlingFee_2026_02_09')
+!billWarrantyHandlingFee_2026_02_09.amount := 30.00
+!billWarrantyHandlingFee_2026_02_09.category := 'Home - Warranty handling fee'
+!billWarrantyHandlingFee_2026_02_09.date := Date('2026-02-09')
+!billWarrantyHandlingFee_2026_02_09.paymentMethod := #CHECK
+!billWarrantyHandlingFee_2026_02_09.status := #REFUNDED
+
+!insert (expFebKitchenApplianceRepair, billTechnicianCallout_2026_02_08) into ExpenseContainsBills
+!insert (expFebKitchenApplianceRepair, billReplacementControlBoard_2026_02_09) into ExpenseContainsBills
+!insert (expFebKitchenApplianceRepair, billWarrantyHandlingFee_2026_02_09) into ExpenseContainsBills
+
+!insert (billTechnicianCallout_2026_02_08, curMYR_2026) into BillCurrency
+!insert (billReplacementControlBoard_2026_02_09, curMYR_2026) into BillCurrency
+!insert (billWarrantyHandlingFee_2026_02_09, curMYR_2026) into BillCurrency
+
+!new Comment('cmtAppliance1')
+!cmtAppliance1.text := 'Repair completed, but part charge still pending until merchant posts final settlement.'
+!insert (expFebKitchenApplianceRepair, cmtAppliance1) into ExpenseComment
+
+
+!new Expense('expMarCourseCancellation')
+!expMarCourseCancellation.amount := 600.00
+!expMarCourseCancellation.startDate := Date('2026-03-01')
+!expMarCourseCancellation.endDate := Date('2026-03-15')
+
+!new Bill('billCourseEnrollment_2026_03_01')
+!billCourseEnrollment_2026_03_01.amount := 600.00
+!billCourseEnrollment_2026_03_01.category := 'Education - Short course enrollment'
+!billCourseEnrollment_2026_03_01.date := Date('2026-03-01')
+!billCourseEnrollment_2026_03_01.paymentMethod := #CREDIT_CARD
+!billCourseEnrollment_2026_03_01.status := #REFUNDED
+
+!insert (expMarCourseCancellation, billCourseEnrollment_2026_03_01) into ExpenseContainsBills
+!insert (billCourseEnrollment_2026_03_01, curMYR_2026) into BillCurrency
+
+!new Comment('cmtCourse1')
+!cmtCourse1.text := 'Course was cancelled by provider; refund processed to the original card.'
+!new Comment('cmtCourse2')
+!cmtCourse2.text := 'Kept confirmation email as supporting document for the refunded transaction.'
+!insert (expMarCourseCancellation, cmtCourse1) into ExpenseComment
+!insert (expMarCourseCancellation, cmtCourse2) into ExpenseComment

@@ -1,0 +1,87 @@
+!new Currency('curTHB')
+!curTHB.name := 'Thai Baht'
+!curTHB.abbreviation := 'THB'
+
+!new Currency('curVND')
+!curVND.name := 'Vietnamese Dong'
+!curVND.abbreviation := 'VND'
+
+!new Expense('expNovFreelanceProjectCosts')
+!expNovFreelanceProjectCosts.amount := 83.34
+!expNovFreelanceProjectCosts.startDate := Date('2026-11-04')
+!expNovFreelanceProjectCosts.endDate := Date('2026-11-11')
+
+!new Bill('billCodeRepoPlan_2026_11_04')
+!billCodeRepoPlan_2026_11_04.amount := 15.00
+!billCodeRepoPlan_2026_11_04.category := 'Business - Code repository plan'
+!billCodeRepoPlan_2026_11_04.date := Date('2026-11-04')
+!billCodeRepoPlan_2026_11_04.paymentMethod := #CREDIT_CARD
+!billCodeRepoPlan_2026_11_04.status := #VALIDATED
+
+!new Bill('billCoworkingPass_2026_11_05')
+!billCoworkingPass_2026_11_05.amount := 25.50
+!billCoworkingPass_2026_11_05.category := 'Business - Coworking day pass'
+!billCoworkingPass_2026_11_05.date := Date('2026-11-05')
+!billCoworkingPass_2026_11_05.paymentMethod := #CASH
+!billCoworkingPass_2026_11_05.status := #VERIFIED
+
+!new Bill('billStockPhotos_2026_11_06')
+!billStockPhotos_2026_11_06.amount := 12.99
+!billStockPhotos_2026_11_06.category := 'Business - Stock photos'
+!billStockPhotos_2026_11_06.date := Date('2026-11-06')
+!billStockPhotos_2026_11_06.paymentMethod := #CREDIT_CARD
+!billStockPhotos_2026_11_06.status := #PENDING
+
+!new Bill('billClientCoffee_2026_11_07')
+!billClientCoffee_2026_11_07.amount := 7.80
+!billClientCoffee_2026_11_07.category := 'Business - Client meeting refreshments'
+!billClientCoffee_2026_11_07.date := Date('2026-11-07')
+!billClientCoffee_2026_11_07.paymentMethod := #CASH
+!billClientCoffee_2026_11_07.status := #VALIDATED
+
+!new Bill('billTaxiToClient_2026_11_07')
+!billTaxiToClient_2026_11_07.amount := 9.20
+!billTaxiToClient_2026_11_07.category := 'Transport - Taxi to client site'
+!billTaxiToClient_2026_11_07.date := Date('2026-11-07')
+!billTaxiToClient_2026_11_07.paymentMethod := #CASH
+!billTaxiToClient_2026_11_07.status := #DRAFT
+
+!new Bill('billPrintProofs_2026_11_09')
+!billPrintProofs_2026_11_09.amount := 4.00
+!billPrintProofs_2026_11_09.category := 'Business - Print proofs'
+!billPrintProofs_2026_11_09.date := Date('2026-11-09')
+!billPrintProofs_2026_11_09.paymentMethod := #CHECK
+!billPrintProofs_2026_11_09.status := #VERIFIED
+
+!new Bill('billMobileDataTopUp_2026_11_10')
+!billMobileDataTopUp_2026_11_10.amount := 6.75
+!billMobileDataTopUp_2026_11_10.category := 'Communication - Mobile data top-up'
+!billMobileDataTopUp_2026_11_10.date := Date('2026-11-10')
+!billMobileDataTopUp_2026_11_10.paymentMethod := #CREDIT_CARD
+!billMobileDataTopUp_2026_11_10.status := #REFUNDED
+
+!new Bill('billBankCharge_2026_11_11')
+!billBankCharge_2026_11_11.amount := 2.10
+!billBankCharge_2026_11_11.category := 'Banking - Small transaction charge'
+!billBankCharge_2026_11_11.date := Date('2026-11-11')
+!billBankCharge_2026_11_11.paymentMethod := #CASH
+!billBankCharge_2026_11_11.status := #REFUSED
+
+!insert (expNovFreelanceProjectCosts, billCodeRepoPlan_2026_11_04) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billCoworkingPass_2026_11_05) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billStockPhotos_2026_11_06) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billClientCoffee_2026_11_07) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billTaxiToClient_2026_11_07) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billPrintProofs_2026_11_09) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billMobileDataTopUp_2026_11_10) into ExpenseContainsBills
+!insert (expNovFreelanceProjectCosts, billBankCharge_2026_11_11) into ExpenseContainsBills
+
+!insert (billCodeRepoPlan_2026_11_04, curTHB) into BillCurrency
+!insert (billCoworkingPass_2026_11_05, curTHB) into BillCurrency
+!insert (billStockPhotos_2026_11_06, curTHB) into BillCurrency
+!insert (billClientCoffee_2026_11_07, curTHB) into BillCurrency
+!insert (billTaxiToClient_2026_11_07, curTHB) into BillCurrency
+
+!insert (billPrintProofs_2026_11_09, curVND) into BillCurrency
+!insert (billMobileDataTopUp_2026_11_10, curVND) into BillCurrency
+!insert (billBankCharge_2026_11_11, curVND) into BillCurrency

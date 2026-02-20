@@ -1,0 +1,40 @@
+!new Booking('booking25')
+!booking25.startDate := '2029-08-18'
+!booking25.endDate := '2029-08-19'
+!booking25.canceled := false
+!booking25.bookingId := 10250
+!booking25.confirmed := true
+
+!new Customer('customer25')
+!customer25.firstName := 'Mason'
+!customer25.lastName := 'Reed'
+
+!insert (booking25, customer25) into BookingCustomer
+
+!new RoomReservation('rr33')
+!rr33.checkInDate := '2029-08-18'
+!rr33.checkOutDate := '2029-08-19'
+
+!insert (booking25, rr33) into BookingRoomReservation
+
+!new Room('room905')
+!room905.roomNumber := 905
+!room905.numBeds := 3
+!room905.pricePerNight := 0.0
+!room905.occupied := false
+!room905.blocked := true
+
+!insert (rr33, room905) into RoomReservationRoom
+
+!new Bill('bill34')
+!bill34.billId := 23001
+!bill34.price := 0.0
+
+!insert (bill34, rr33) into BillRoomReservation
+!insert (booking25, bill34) into BookingBill
+
+!new FreeRoomTypesDTO('dtoEmergencyComp')
+!dtoEmergencyComp.roomTypeDescription := 'Emergency relocation (complimentary triple)'
+!dtoEmergencyComp.numBeds := 3
+!dtoEmergencyComp.pricePerNight := 0.0
+!dtoEmergencyComp.numFreeRooms := 0

@@ -1,0 +1,174 @@
+!new AddressBook('ab5')
+
+!new Company('riverdaleUniversity')
+!riverdaleUniversity.name := 'Riverdale University'
+!riverdaleUniversity.phone := '+1-617-555-0600'
+!riverdaleUniversity.website := 'https://www.riverdaleu.example'
+!riverdaleUniversity.email := 'info@riverdaleu.example'
+!riverdaleUniversity.industry := 'Higher Education'
+
+!new Company('ruComputerScience')
+!ruComputerScience.name := 'RU Department of Computer Science'
+!ruComputerScience.phone := '+1-617-555-0615'
+!ruComputerScience.website := 'https://cs.riverdaleu.example'
+!ruComputerScience.email := 'cs-office@riverdaleu.example'
+!ruComputerScience.industry := 'Education'
+
+!new Person('profLiu')
+!profLiu.name := 'Dr. Wen Liu'
+!profLiu.phone := '+1-617-555-0622'
+!profLiu.website := 'https://liu-lab.example'
+!profLiu.email := 'wen.liu@riverdaleu.example'
+!profLiu.title := 'Associate Professor'
+
+!new Person('mayaSingh')
+!mayaSingh.name := 'Maya Singh'
+!mayaSingh.phone := '+1-617-555-0629'
+!mayaSingh.website := ''
+!mayaSingh.email := 'maya.singh@riverdaleu.example'
+!mayaSingh.title := 'Graduate Student'
+
+!new Person('ruthDiaz')
+!ruthDiaz.name := 'Ruth Diaz'
+!ruthDiaz.phone := '+1-617-555-0630'
+!ruthDiaz.website := ''
+!ruthDiaz.email := 'ruth.diaz@riverdaleu.example'
+!ruthDiaz.title := 'Department Administrator'
+
+!new Person('omarHaddad')
+!omarHaddad.name := 'Omar Haddad'
+!omarHaddad.phone := '+1-857-555-0638'
+!omarHaddad.website := 'https://omarh.example'
+!omarHaddad.email := 'omar.haddad@riverdaleu.example'
+!omarHaddad.title := 'Postdoctoral Researcher'
+
+!new Person('zanePatel')
+!zanePatel.name := 'Zane Patel'
+!zanePatel.phone := '+1-781-555-0644'
+!zanePatel.website := 'https://zpatel.example'
+!zanePatel.email := 'zane@zpatel.example'
+!zanePatel.title := 'Events Coordinator'
+
+!insert (ab5, riverdaleUniversity) into AddressBookMadeOfContact
+!insert (ab5, ruComputerScience) into AddressBookMadeOfContact
+!insert (ab5, profLiu) into AddressBookMadeOfContact
+!insert (ab5, mayaSingh) into AddressBookMadeOfContact
+!insert (ab5, ruthDiaz) into AddressBookMadeOfContact
+!insert (ab5, omarHaddad) into AddressBookMadeOfContact
+!insert (ab5, zanePatel) into AddressBookMadeOfContact
+
+!new Address('addrRUCampus')
+!addrRUCampus.city := 'Cambridge'
+!addrRUCampus.street := 'College Ave'
+!addrRUCampus.houseNr := '1'
+
+!new Address('addrCSBuilding')
+!addrCSBuilding.city := 'Cambridge'
+!addrCSBuilding.street := 'Science Way'
+!addrCSBuilding.houseNr := '42'
+
+!new Address('addrLiuOffice')
+!addrLiuOffice.city := 'Cambridge'
+!addrLiuOffice.street := 'Science Way'
+!addrLiuOffice.houseNr := '42-318'
+
+!new Address('addrMayaDorm')
+!addrMayaDorm.city := 'Cambridge'
+!addrMayaDorm.street := 'Dormitory Rd'
+!addrMayaDorm.houseNr := '8B'
+
+!new Address('addrOmarHome')
+!addrOmarHome.city := 'Somerville'
+!addrOmarHome.street := 'Highland Ave'
+!addrOmarHome.houseNr := '155'
+
+!new Address('addrZaneOffice')
+!addrZaneOffice.city := 'Boston'
+!addrZaneOffice.street := 'Huntington Ave'
+!addrZaneOffice.houseNr := '500'
+
+!insert (riverdaleUniversity, addrRUCampus) into ContactContainsAddress
+!insert (ruComputerScience, addrCSBuilding) into ContactContainsAddress
+!insert (profLiu, addrLiuOffice) into ContactContainsAddress
+!insert (mayaSingh, addrMayaDorm) into ContactContainsAddress
+!insert (omarHaddad, addrOmarHome) into ContactContainsAddress
+!insert (zanePatel, addrZaneOffice) into ContactContainsAddress
+
+!new Note('nCSBudgetEmail')
+!nCSBudgetEmail.author := 'Ruth Diaz'
+!nCSBudgetEmail.time := Date('2026-01-20 09:10')
+!nCSBudgetEmail.type := #EMAIL
+!nCSBudgetEmail.comment := 'Submitted updated departmental budget request; pending approval from central administration.'
+
+!new Note('nMayaAdvisorMeeting')
+!nMayaAdvisorMeeting.author := 'Dr. Wen Liu'
+!nMayaAdvisorMeeting.time := Date('2026-02-06 11:00')
+!nMayaAdvisorMeeting.type := #MEETING
+!nMayaAdvisorMeeting.comment := 'Discussed thesis scope and evaluation plan; next checkpoint scheduled in two weeks.'
+
+!new Note('nMayaCallWithZane')
+!nMayaCallWithZane.author := 'Maya Singh'
+!nMayaCallWithZane.time := Date('2026-02-07 17:25')
+!nMayaCallWithZane.type := #CALL
+!nMayaCallWithZane.comment := 'Coordinated logistics for seminar series; confirmed room capacity and A/V needs.'
+
+!new Note('nOmarEmailDataset')
+!nOmarEmailDataset.author := 'Omar Haddad'
+!nOmarEmailDataset.time := Date('2026-02-09 08:40')
+!nOmarEmailDataset.type := #EMAIL
+!nOmarEmailDataset.comment := 'Shared curated dataset link and preprocessing notes; requested review of annotation guidelines.'
+
+!insert (ruComputerScience, nCSBudgetEmail) into ContactContainsNote
+!insert (mayaSingh, nMayaAdvisorMeeting) into ContactContainsNote
+!insert (mayaSingh, nMayaCallWithZane) into ContactContainsNote
+!insert (omarHaddad, nOmarEmailDataset) into ContactContainsNote
+
+!new Relationship('relDeptSubdivisionOfRU')
+!relDeptSubdivisionOfRU.type := #SUBDIVISION
+!insert (riverdaleUniversity, relDeptSubdivisionOfRU) into ContactToRelationship
+!insert (relDeptSubdivisionOfRU, ruComputerScience) into RelationshipToContact
+
+!new Relationship('relRuthEmployeeOfDept')
+!relRuthEmployeeOfDept.type := #EMPLOYEE
+!insert (ruthDiaz, relRuthEmployeeOfDept) into ContactToRelationship
+!insert (relRuthEmployeeOfDept, ruComputerScience) into RelationshipToContact
+
+!new Relationship('relLiuEmployeeOfDept')
+!relLiuEmployeeOfDept.type := #EMPLOYEE
+!insert (profLiu, relLiuEmployeeOfDept) into ContactToRelationship
+!insert (relLiuEmployeeOfDept, ruComputerScience) into RelationshipToContact
+
+!new Relationship('relOmarEmployeeOfDept')
+!relOmarEmployeeOfDept.type := #EMPLOYEE
+!insert (omarHaddad, relOmarEmployeeOfDept) into ContactToRelationship
+!insert (relOmarEmployeeOfDept, ruComputerScience) into RelationshipToContact
+
+!new Relationship('relMayaEmployeeOfDept')
+!relMayaEmployeeOfDept.type := #EMPLOYEE
+!insert (mayaSingh, relMayaEmployeeOfDept) into ContactToRelationship
+!insert (relMayaEmployeeOfDept, ruComputerScience) into RelationshipToContact
+
+!new Relationship('relLiuBossIsRuth')
+!relLiuBossIsRuth.type := #BOSS
+!insert (profLiu, relLiuBossIsRuth) into ContactToRelationship
+!insert (relLiuBossIsRuth, ruthDiaz) into RelationshipToContact
+
+!new Relationship('relMayaBossIsLiu')
+!relMayaBossIsLiu.type := #BOSS
+!insert (mayaSingh, relMayaBossIsLiu) into ContactToRelationship
+!insert (relMayaBossIsLiu, profLiu) into RelationshipToContact
+
+!new Relationship('relOmarBossIsLiu')
+!relOmarBossIsLiu.type := #BOSS
+!insert (omarHaddad, relOmarBossIsLiu) into ContactToRelationship
+!insert (relOmarBossIsLiu, profLiu) into RelationshipToContact
+
+!new Relationship('relMayaCoworkerOmar')
+!relMayaCoworkerOmar.type := #COWORKER
+!insert (mayaSingh, relMayaCoworkerOmar) into ContactToRelationship
+!insert (relMayaCoworkerOmar, omarHaddad) into RelationshipToContact
+
+!new Relationship('relZaneCoworkerRuth')
+!relZaneCoworkerRuth.type := #COWORKER
+!insert (zanePatel, relZaneCoworkerRuth) into ContactToRelationship
+!insert (relZaneCoworkerRuth, ruthDiaz) into RelationshipToContact

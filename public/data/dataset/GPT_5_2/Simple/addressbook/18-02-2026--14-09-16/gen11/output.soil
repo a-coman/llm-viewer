@@ -1,0 +1,157 @@
+!new AddressBook('ab12')
+
+!new Company('blueRiverRobotics')
+!blueRiverRobotics.name := 'BlueRiver Robotics'
+!blueRiverRobotics.phone := '+1-512-555-2100'
+!blueRiverRobotics.website := 'https://blueriverrobotics.example'
+!blueRiverRobotics.email := 'hello@blueriverrobotics.example'
+!blueRiverRobotics.industry := 'Robotics'
+
+!new Company('blueRiverFieldOps')
+!blueRiverFieldOps.name := 'BlueRiver Field Operations'
+!blueRiverFieldOps.phone := '+1-512-555-2108'
+!blueRiverFieldOps.website := ''
+!blueRiverFieldOps.email := 'fieldops@blueriverrobotics.example'
+!blueRiverFieldOps.industry := 'Robotics Services'
+
+!new Company('seedFundVentures')
+!seedFundVentures.name := 'SeedFund Ventures'
+!seedFundVentures.phone := '+1-650-555-2200'
+!seedFundVentures.website := 'https://seedfund.example'
+!seedFundVentures.email := 'partners@seedfund.example'
+!seedFundVentures.industry := 'Venture Capital'
+
+!new Person('ceoAminaSaleh')
+!ceoAminaSaleh.name := 'Amina Saleh'
+!ceoAminaSaleh.phone := '+1-512-555-2111'
+!ceoAminaSaleh.website := 'https://amina-saleh.example'
+!ceoAminaSaleh.email := 'amina.saleh@blueriverrobotics.example'
+!ceoAminaSaleh.title := 'CEO'
+
+!new Person('internMateoReed')
+!internMateoReed.name := 'Mateo Reed'
+!internMateoReed.phone := '+1-512-555-2112'
+!internMateoReed.website := ''
+!internMateoReed.email := 'mateo.reed@blueriverrobotics.example'
+!internMateoReed.title := 'Engineering Intern'
+
+!new Person('investorLailaMoore')
+!investorLailaMoore.name := 'Laila Moore'
+!investorLailaMoore.phone := '+1-650-555-2210'
+!investorLailaMoore.website := ''
+!investorLailaMoore.email := 'laila.moore@seedfund.example'
+!investorLailaMoore.title := 'Principal'
+
+!new Person('contractorDerekYu')
+!contractorDerekYu.name := 'Derek Yu'
+!contractorDerekYu.phone := '+1-415-555-2222'
+!contractorDerekYu.website := 'https://derekyu.example'
+!contractorDerekYu.email := 'derek.yu@example.com'
+!contractorDerekYu.title := 'Contract QA Lead'
+
+!insert (ab12, blueRiverRobotics) into AddressBookMadeOfContact
+!insert (ab12, blueRiverFieldOps) into AddressBookMadeOfContact
+!insert (ab12, seedFundVentures) into AddressBookMadeOfContact
+!insert (ab12, ceoAminaSaleh) into AddressBookMadeOfContact
+!insert (ab12, internMateoReed) into AddressBookMadeOfContact
+!insert (ab12, investorLailaMoore) into AddressBookMadeOfContact
+!insert (ab12, contractorDerekYu) into AddressBookMadeOfContact
+
+!new Address('addrBlueRiverHQ')
+!addrBlueRiverHQ.city := 'Austin'
+!addrBlueRiverHQ.street := 'Congress Ave'
+!addrBlueRiverHQ.houseNr := '901'
+
+!new Address('addrSeedFundOffice')
+!addrSeedFundOffice.city := 'Palo Alto'
+!addrSeedFundOffice.street := 'University Ave'
+!addrSeedFundOffice.houseNr := '300'
+
+!new Address('addrAminaHome')
+!addrAminaHome.city := 'Austin'
+!addrAminaHome.street := 'Barton Springs Rd'
+!addrAminaHome.houseNr := '1420'
+
+!new Address('addrDerekMailing')
+!addrDerekMailing.city := 'San Francisco'
+!addrDerekMailing.street := 'Brannan St'
+!addrDerekMailing.houseNr := '680'
+
+!insert (blueRiverRobotics, addrBlueRiverHQ) into ContactContainsAddress
+!insert (seedFundVentures, addrSeedFundOffice) into ContactContainsAddress
+!insert (ceoAminaSaleh, addrAminaHome) into ContactContainsAddress
+!insert (contractorDerekYu, addrDerekMailing) into ContactContainsAddress
+
+!new Note('nAminaMeetingPitch')
+!nAminaMeetingPitch.author := 'Amina Saleh'
+!nAminaMeetingPitch.time := Date('2026-02-01 09:00')
+!nAminaMeetingPitch.type := #MEETING
+!nAminaMeetingPitch.comment := 'Met with SeedFund to review pilot metrics and proposed use of funds for manufacturing.'
+
+!new Note('nAminaEmailRunway')
+!nAminaEmailRunway.author := 'Finance'
+!nAminaEmailRunway.time := Date('2026-02-03 17:30')
+!nAminaEmailRunway.type := #EMAIL
+!nAminaEmailRunway.comment := 'Updated cash runway model and shared revised hiring plan for the next two quarters.'
+
+!new Note('nMateoCallAccess')
+!nMateoCallAccess.author := 'IT Desk'
+!nMateoCallAccess.time := Date('2026-02-04 10:10')
+!nMateoCallAccess.type := #CALL
+!nMateoCallAccess.comment := 'Resolved repository access issue; confirmed correct permission group for intern account.'
+
+!new Note('nSeedFundEmailTermsheet')
+!nSeedFundEmailTermsheet.author := 'SeedFund Legal'
+!nSeedFundEmailTermsheet.time := Date('2026-02-05 08:25')
+!nSeedFundEmailTermsheet.type := #EMAIL
+!nSeedFundEmailTermsheet.comment := 'Sent initial term sheet draft and requested cap table confirmation.'
+
+!insert (ceoAminaSaleh, nAminaMeetingPitch) into ContactContainsNote
+!insert (ceoAminaSaleh, nAminaEmailRunway) into ContactContainsNote
+!insert (internMateoReed, nMateoCallAccess) into ContactContainsNote
+!insert (seedFundVentures, nSeedFundEmailTermsheet) into ContactContainsNote
+
+!new Relationship('relBlueRiverSubdivisionFieldOps')
+!relBlueRiverSubdivisionFieldOps.type := #SUBDIVISION
+!insert (blueRiverRobotics, relBlueRiverSubdivisionFieldOps) into ContactToRelationship
+!insert (relBlueRiverSubdivisionFieldOps, blueRiverFieldOps) into RelationshipToContact
+
+!new Relationship('relAminaEmployeeOfBlueRiver')
+!relAminaEmployeeOfBlueRiver.type := #EMPLOYEE
+!insert (ceoAminaSaleh, relAminaEmployeeOfBlueRiver) into ContactToRelationship
+!insert (relAminaEmployeeOfBlueRiver, blueRiverRobotics) into RelationshipToContact
+
+!new Relationship('relMateoEmployeeOfFieldOps')
+!relMateoEmployeeOfFieldOps.type := #EMPLOYEE
+!insert (internMateoReed, relMateoEmployeeOfFieldOps) into ContactToRelationship
+!insert (relMateoEmployeeOfFieldOps, blueRiverFieldOps) into RelationshipToContact
+
+!new Relationship('relLailaEmployeeOfSeedFund')
+!relLailaEmployeeOfSeedFund.type := #EMPLOYEE
+!insert (investorLailaMoore, relLailaEmployeeOfSeedFund) into ContactToRelationship
+!insert (relLailaEmployeeOfSeedFund, seedFundVentures) into RelationshipToContact
+
+!new Relationship('relMateoBossIsAmina')
+!relMateoBossIsAmina.type := #BOSS
+!insert (internMateoReed, relMateoBossIsAmina) into ContactToRelationship
+!insert (relMateoBossIsAmina, ceoAminaSaleh) into RelationshipToContact
+
+!new Relationship('relDerekBossIsAmina')
+!relDerekBossIsAmina.type := #BOSS
+!insert (contractorDerekYu, relDerekBossIsAmina) into ContactToRelationship
+!insert (relDerekBossIsAmina, ceoAminaSaleh) into RelationshipToContact
+
+!new Relationship('relAminaCoworkerDerek')
+!relAminaCoworkerDerek.type := #COWORKER
+!insert (ceoAminaSaleh, relAminaCoworkerDerek) into ContactToRelationship
+!insert (relAminaCoworkerDerek, contractorDerekYu) into RelationshipToContact
+
+!new Relationship('relBlueRiverCoworkerSeedFund')
+!relBlueRiverCoworkerSeedFund.type := #COWORKER
+!insert (blueRiverRobotics, relBlueRiverCoworkerSeedFund) into ContactToRelationship
+!insert (relBlueRiverCoworkerSeedFund, seedFundVentures) into RelationshipToContact
+
+!new Relationship('relLailaCoworkerAmina')
+!relLailaCoworkerAmina.type := #COWORKER
+!insert (investorLailaMoore, relLailaCoworkerAmina) into ContactToRelationship
+!insert (relLailaCoworkerAmina, ceoAminaSaleh) into RelationshipToContact

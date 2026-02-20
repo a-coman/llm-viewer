@@ -1,0 +1,163 @@
+!new AddressBook('ab22')
+
+!new Company('terraNovaTours')
+!terraNovaTours.name := 'Terra Nova Tours'
+!terraNovaTours.phone := '+1-415-555-2200'
+!terraNovaTours.website := 'https://terranovatours.example'
+!terraNovaTours.email := 'info@terranovatours.example'
+!terraNovaTours.industry := 'Travel Services'
+
+!new Company('terraNovaEurope')
+!terraNovaEurope.name := 'Terra Nova Tours Europe'
+!terraNovaEurope.phone := '+49-69-555-2205'
+!terraNovaEurope.website := ''
+!terraNovaEurope.email := 'eu@terranovatours.example'
+!terraNovaEurope.industry := 'Travel Services'
+
+!new Company('sunriseHotels')
+!sunriseHotels.name := 'Sunrise Hotels Group'
+!sunriseHotels.phone := '+1-702-555-2210'
+!sunriseHotels.website := 'https://sunrisehotels.example'
+!sunriseHotels.email := 'partners@sunrisehotels.example'
+!sunriseHotels.industry := 'Hospitality'
+
+!new Company('skyRail')
+!skyRail.name := 'SkyRail Intercity'
+!skyRail.phone := '+1-312-555-2220'
+!skyRail.website := 'https://skyrail.example'
+!skyRail.email := 'support@skyrail.example'
+!skyRail.industry := 'Transportation'
+
+!new Person('oliviaGrant')
+!oliviaGrant.name := 'Olivia Grant'
+!oliviaGrant.phone := '+1-415-555-2231'
+!oliviaGrant.website := 'https://oliviagrant.example'
+!oliviaGrant.email := 'olivia.grant@terranovatours.example'
+!oliviaGrant.title := 'Travel Advisor'
+
+!new Person('markusWeber')
+!markusWeber.name := 'Markus Weber'
+!markusWeber.phone := '+49-69-555-2232'
+!markusWeber.website := ''
+!markusWeber.email := 'markus.weber@terranovatours.example'
+!markusWeber.title := 'Regional Manager'
+
+!new Person('hanaKlein')
+!hanaKlein.name := 'Hana Klein'
+!hanaKlein.phone := '+1-415-555-2233'
+!hanaKlein.website := ''
+!hanaKlein.email := 'hana.klein@terranovatours.example'
+!hanaKlein.title := 'Customer Success Specialist'
+
+!insert (ab22, terraNovaTours) into AddressBookMadeOfContact
+!insert (ab22, terraNovaEurope) into AddressBookMadeOfContact
+!insert (ab22, sunriseHotels) into AddressBookMadeOfContact
+!insert (ab22, skyRail) into AddressBookMadeOfContact
+!insert (ab22, oliviaGrant) into AddressBookMadeOfContact
+!insert (ab22, markusWeber) into AddressBookMadeOfContact
+!insert (ab22, hanaKlein) into AddressBookMadeOfContact
+
+!new Address('addrTerraNovaSF')
+!addrTerraNovaSF.city := 'San Francisco'
+!addrTerraNovaSF.street := 'Montgomery St'
+!addrTerraNovaSF.houseNr := '580'
+
+!new Address('addrTerraNovaEU')
+!addrTerraNovaEU.city := 'Frankfurt'
+!addrTerraNovaEU.street := 'Taunusanlage'
+!addrTerraNovaEU.houseNr := '12'
+
+!new Address('addrOliviaOffice')
+!addrOliviaOffice.city := 'San Francisco'
+!addrOliviaOffice.street := 'Montgomery St'
+!addrOliviaOffice.houseNr := '580-14F'
+
+!new Address('addrOliviaMailing')
+!addrOliviaMailing.city := 'Oakland'
+!addrOliviaMailing.street := 'Grand Ave'
+!addrOliviaMailing.houseNr := '155'
+
+!new Address('addrSkyRailHub')
+!addrSkyRailHub.city := 'Chicago'
+!addrSkyRailHub.street := 'Canal St'
+!addrSkyRailHub.houseNr := '210'
+
+!insert (terraNovaTours, addrTerraNovaSF) into ContactContainsAddress
+!insert (terraNovaEurope, addrTerraNovaEU) into ContactContainsAddress
+!insert (oliviaGrant, addrOliviaOffice) into ContactContainsAddress
+!insert (oliviaGrant, addrOliviaMailing) into ContactContainsAddress
+!insert (skyRail, addrSkyRailHub) into ContactContainsAddress
+
+!new Note('nOliviaMeetingItinerary')
+!nOliviaMeetingItinerary.author := 'Olivia Grant'
+!nOliviaMeetingItinerary.time := Date('2026-02-09 10:00')
+!nOliviaMeetingItinerary.type := #MEETING
+!nOliviaMeetingItinerary.comment := 'Reviewed a 10-day itinerary template and agreed on standard rail and hotel options.'
+
+!new Note('nOliviaEmailPartnerRates')
+!nOliviaEmailPartnerRates.author := 'Partnerships Desk'
+!nOliviaEmailPartnerRates.time := Date('2026-02-10 08:25')
+!nOliviaEmailPartnerRates.type := #EMAIL
+!nOliviaEmailPartnerRates.comment := 'Sent updated partner rate sheet and blackout dates for spring travel.'
+
+!new Note('nHanaCallSupportCase')
+!nHanaCallSupportCase.author := 'Hana Klein'
+!nHanaCallSupportCase.time := Date('2026-02-11 16:40')
+!nHanaCallSupportCase.type := #CALL
+!nHanaCallSupportCase.comment := 'Called customer to confirm rebooking; documented preferred seat and accessibility needs.'
+
+!new Note('nMarkusEmailPolicy')
+!nMarkusEmailPolicy.author := 'Markus Weber'
+!nMarkusEmailPolicy.time := Date('2026-02-12 07:50')
+!nMarkusEmailPolicy.type := #EMAIL
+!nMarkusEmailPolicy.comment := 'Shared escalation policy and after-hours coverage schedule for the region.'
+
+!insert (oliviaGrant, nOliviaMeetingItinerary) into ContactContainsNote
+!insert (oliviaGrant, nOliviaEmailPartnerRates) into ContactContainsNote
+!insert (hanaKlein, nHanaCallSupportCase) into ContactContainsNote
+!insert (markusWeber, nMarkusEmailPolicy) into ContactContainsNote
+
+!new Relationship('relToursSubdivisionEU')
+!relToursSubdivisionEU.type := #SUBDIVISION
+!insert (terraNovaTours, relToursSubdivisionEU) into ContactToRelationship
+!insert (relToursSubdivisionEU, terraNovaEurope) into RelationshipToContact
+
+!new Relationship('relOliviaEmployeeTours')
+!relOliviaEmployeeTours.type := #EMPLOYEE
+!insert (oliviaGrant, relOliviaEmployeeTours) into ContactToRelationship
+!insert (relOliviaEmployeeTours, terraNovaTours) into RelationshipToContact
+
+!new Relationship('relHanaEmployeeTours')
+!relHanaEmployeeTours.type := #EMPLOYEE
+!insert (hanaKlein, relHanaEmployeeTours) into ContactToRelationship
+!insert (relHanaEmployeeTours, terraNovaTours) into RelationshipToContact
+
+!new Relationship('relMarkusEmployeeEU')
+!relMarkusEmployeeEU.type := #EMPLOYEE
+!insert (markusWeber, relMarkusEmployeeEU) into ContactToRelationship
+!insert (relMarkusEmployeeEU, terraNovaEurope) into RelationshipToContact
+
+!new Relationship('relMarkusBossOfOlivia')
+!relMarkusBossOfOlivia.type := #BOSS
+!insert (markusWeber, relMarkusBossOfOlivia) into ContactToRelationship
+!insert (relMarkusBossOfOlivia, oliviaGrant) into RelationshipToContact
+
+!new Relationship('relOliviaBossOfHana')
+!relOliviaBossOfHana.type := #BOSS
+!insert (oliviaGrant, relOliviaBossOfHana) into ContactToRelationship
+!insert (relOliviaBossOfHana, hanaKlein) into RelationshipToContact
+
+!new Relationship('relToursCoworkerHotels')
+!relToursCoworkerHotels.type := #COWORKER
+!insert (terraNovaTours, relToursCoworkerHotels) into ContactToRelationship
+!insert (relToursCoworkerHotels, sunriseHotels) into RelationshipToContact
+
+!new Relationship('relHotelsCoworkerSkyRail')
+!relHotelsCoworkerSkyRail.type := #COWORKER
+!insert (sunriseHotels, relHotelsCoworkerSkyRail) into ContactToRelationship
+!insert (relHotelsCoworkerSkyRail, skyRail) into RelationshipToContact
+
+!new Relationship('relOliviaCoworkerSkyRail')
+!relOliviaCoworkerSkyRail.type := #COWORKER
+!insert (oliviaGrant, relOliviaCoworkerSkyRail) into ContactToRelationship
+!insert (relOliviaCoworkerSkyRail, skyRail) into RelationshipToContact

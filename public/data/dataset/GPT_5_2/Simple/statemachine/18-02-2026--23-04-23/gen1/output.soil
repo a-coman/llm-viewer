@@ -1,0 +1,131 @@
+!new StateMachine('smTraffic')
+!smTraffic.name := 'trafficLightController'
+
+!new StateMachine('smGreenStart')
+!smGreenStart.name := 'greenStartHelper'
+
+!new StateMachine('smYellowStart')
+!smYellowStart.name := 'yellowStartHelper'
+
+!new StateMachine('smDoor')
+!smDoor.name := 'automaticDoor'
+
+!new StateMachine('smOpenStart')
+!smOpenStart.name := 'openStartHelper'
+
+!new StateMachine('smMaintenance')
+!smMaintenance.name := 'maintenanceMode'
+
+
+!new State('sRed')
+!sRed.name := 'red'
+!new State('sGreen')
+!sGreen.name := 'green'
+!new State('sYellow')
+!sYellow.name := 'yellow'
+
+!new State('sClosed')
+!sClosed.name := 'closed'
+!new State('sOpen')
+!sOpen.name := 'open'
+
+!new State('sMaintIdle')
+!sMaintIdle.name := 'idle'
+
+
+!insert (smTraffic, sRed) into StateMachineContainsStates
+!insert (smTraffic, sGreen) into StateMachineContainsStates
+!insert (smTraffic, sYellow) into StateMachineContainsStates
+
+!insert (smDoor, sClosed) into StateMachineContainsStates
+!insert (smDoor, sOpen) into StateMachineContainsStates
+
+!insert (smMaintenance, sMaintIdle) into StateMachineContainsStates
+
+
+!insert (smTraffic, sRed) into StateMachineStartsStates
+!insert (smGreenStart, sGreen) into StateMachineStartsStates
+!insert (smYellowStart, sYellow) into StateMachineStartsStates
+!insert (smDoor, sClosed) into StateMachineStartsStates
+!insert (smOpenStart, sOpen) into StateMachineStartsStates
+!insert (smMaintenance, sMaintIdle) into StateMachineStartsStates
+
+
+!new Transition('tRedToGreen')
+!tRedToGreen.name := 'toGreen'
+!new TimeEvent('teRedToGreen')
+!teRedToGreen.time := 30
+
+!new Transition('tGreenToYellow')
+!tGreenToYellow.name := 'toYellow'
+!new TimeEvent('teGreenToYellow')
+!teGreenToYellow.time := 5
+
+!new Transition('tYellowToRed')
+!tYellowToRed.name := 'toRed'
+!new TimeEvent('teYellowToRed')
+!teYellowToRed.time := 4
+
+!new Transition('tBlinkRed')
+!tBlinkRed.name := 'blinkRed'
+!new TimeEvent('teBlinkRed')
+!teBlinkRed.time := 1
+
+
+!insert (smTraffic, tRedToGreen) into StateMachineContainsTransitions
+!insert (smTraffic, tGreenToYellow) into StateMachineContainsTransitions
+!insert (smTraffic, tYellowToRed) into StateMachineContainsTransitions
+!insert (smTraffic, tBlinkRed) into StateMachineContainsTransitions
+
+!insert (tRedToGreen, teRedToGreen) into TransitionContainsEvents
+!insert (tGreenToYellow, teGreenToYellow) into TransitionContainsEvents
+!insert (tYellowToRed, teYellowToRed) into TransitionContainsEvents
+!insert (tBlinkRed, teBlinkRed) into TransitionContainsEvents
+
+
+!insert (sRed, tRedToGreen) into StateTransition
+!insert (tRedToGreen, sGreen) into TransitionState
+
+!insert (sGreen, tGreenToYellow) into StateTransition
+!insert (tGreenToYellow, sYellow) into TransitionState
+
+!insert (sYellow, tYellowToRed) into StateTransition
+!insert (tYellowToRed, sRed) into TransitionState
+
+!insert (sRed, tBlinkRed) into StateTransition
+!insert (tBlinkRed, sRed) into TransitionState
+
+
+!new Transition('tClosedToOpen')
+!tClosedToOpen.name := 'openDoor'
+!new TimeEvent('teClosedToOpen')
+!teClosedToOpen.time := 2
+
+!new Transition('tOpenToClosed')
+!tOpenToClosed.name := 'closeDoor'
+!new TimeEvent('teOpenToClosed')
+!teOpenToClosed.time := 7
+
+!new Transition('tHoldOpen')
+!tHoldOpen.name := 'holdOpen'
+!new TimeEvent('teHoldOpen')
+!teHoldOpen.time := 10
+
+
+!insert (smDoor, tClosedToOpen) into StateMachineContainsTransitions
+!insert (smDoor, tOpenToClosed) into StateMachineContainsTransitions
+!insert (smDoor, tHoldOpen) into StateMachineContainsTransitions
+
+!insert (tClosedToOpen, teClosedToOpen) into TransitionContainsEvents
+!insert (tOpenToClosed, teOpenToClosed) into TransitionContainsEvents
+!insert (tHoldOpen, teHoldOpen) into TransitionContainsEvents
+
+
+!insert (sClosed, tClosedToOpen) into StateTransition
+!insert (tClosedToOpen, sOpen) into TransitionState
+
+!insert (sOpen, tOpenToClosed) into StateTransition
+!insert (tOpenToClosed, sClosed) into TransitionState
+
+!insert (sOpen, tHoldOpen) into StateTransition
+!insert (tHoldOpen, sOpen) into TransitionState

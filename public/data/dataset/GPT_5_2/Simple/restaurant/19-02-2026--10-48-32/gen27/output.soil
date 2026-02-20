@@ -1,0 +1,265 @@
+!new Restaurant('rest35')
+!rest35.name := 'Cobalt Oyster House'
+
+!new Owner('own100')
+!own100.name := 'Dana Whitfield'
+!own100.percentageShares := 34
+
+!new Owner('own101')
+!own101.name := 'Ruben Castillo'
+!own101.percentageShares := 33
+
+!new Owner('own102')
+!own102.name := 'Yvonne Schaefer'
+!own102.percentageShares := 33
+
+!insert (rest35, own100) into RestaurantOwner
+!insert (rest35, own101) into RestaurantOwner
+!insert (rest35, own102) into RestaurantOwner
+
+!new HeadWaiter('hw70')
+!hw70.name := 'Miles Carter'
+!hw70.dateOfBirth := Date('1986-02-16')
+!hw70.phoneNumber := '555-9000'
+
+!new Waiter('w100')
+!w100.name := 'Sofia Vega'
+!w100.dateOfBirth := Date('1999-08-08')
+!w100.phoneNumber := '555-9001'
+!w100.spokenLanguage := #Spanish
+
+!new Waiter('w101')
+!w101.name := 'Lena Schmidt'
+!w101.dateOfBirth := Date('1996-04-19')
+!w101.phoneNumber := '555-9002'
+!w101.spokenLanguage := #German
+
+!insert (hw70, w100) into HeadWaiterWaiter
+!insert (hw70, w101) into HeadWaiterWaiter
+
+!new HeadWaiter('hw71')
+!hw71.name := 'Olivia Park'
+!hw71.dateOfBirth := Date('1983-11-03')
+!hw71.phoneNumber := '555-9010'
+
+!new Waiter('w102')
+!w102.name := 'Marco Bassi'
+!w102.dateOfBirth := Date('1994-06-27')
+!w102.phoneNumber := '555-9011'
+!w102.spokenLanguage := #Italian
+
+!insert (hw71, w102) into HeadWaiterWaiter
+
+!new Chef('chef80')
+!chef80.name := 'Evelyn Cho'
+!chef80.dateOfBirth := Date('1977-03-25')
+!chef80.phoneNumber := '555-9100'
+
+!new Cook('cook100')
+!cook100.name := 'Aiden Price'
+!cook100.dateOfBirth := Date('1990-09-14')
+!cook100.phoneNumber := '555-9101'
+!cook100.yearsOfExperience := 8
+
+!new Cook('cook101')
+!cook101.name := 'Marta Novak'
+!cook101.dateOfBirth := Date('1998-01-06')
+!cook101.phoneNumber := '555-9102'
+!cook101.yearsOfExperience := 1
+
+!insert (chef80, cook100) into ChefCook
+!insert (chef80, cook101) into ChefCook
+
+!new Chef('chef81')
+!chef81.name := 'Hassan Nouri'
+!chef81.dateOfBirth := Date('1981-12-30')
+!chef81.phoneNumber := '555-9110'
+
+!new Cook('cook102')
+!cook102.name := 'Giulia Romano'
+!cook102.dateOfBirth := Date('1992-07-11')
+!cook102.phoneNumber := '555-9111'
+!cook102.yearsOfExperience := 12
+
+!insert (chef81, cook102) into ChefCook
+
+!new Allergen('algSeafood35')
+!algSeafood35.type := #Seafood
+
+!new Allergen('algLactose35')
+!algLactose35.type := #Lactose
+
+!new Allergen('algGluten35')
+!algGluten35.type := #Gluten
+
+!new FoodItem('fiOysters35')
+!fiOysters35.number := 3501
+!fiOysters35.description := 'Fresh oysters'
+!fiOysters35.purchaseFlag := true
+!fiOysters35.unit := #Dozen
+
+!new FoodItem('fiCream35')
+!fiCream35.number := 3502
+!fiCream35.description := 'Heavy cream'
+!fiCream35.purchaseFlag := true
+!fiCream35.unit := #Ounce
+
+!new FoodItem('fiFlour35')
+!fiFlour35.number := 3503
+!fiFlour35.description := 'Wheat flour'
+!fiFlour35.purchaseFlag := true
+!fiFlour35.unit := #Pound
+
+!new FoodItem('fiLimes35')
+!fiLimes35.number := 3504
+!fiLimes35.description := 'Key limes'
+!fiLimes35.purchaseFlag := true
+!fiLimes35.unit := #Dozen
+
+!insert (fiOysters35, algSeafood35) into FoodItemAllergen
+!insert (fiCream35, algLactose35) into FoodItemAllergen
+!insert (fiFlour35, algGluten35) into FoodItemAllergen
+
+!new MenuItem('miOysterShot35')
+!miOysterShot35.description := 'Oyster shot with lime'
+!miOysterShot35.prepTime := 3.0
+!miOysterShot35.classification := #Apetizer
+
+!new MenuItem('miSeafoodStew35')
+!miSeafoodStew35.description := 'Creamy oyster stew'
+!miSeafoodStew35.prepTime := 22.0
+!miSeafoodStew35.classification := #Main
+
+!new MenuItem('miKeyLimePie35')
+!miKeyLimePie35.description := 'Key lime pie slice'
+!miKeyLimePie35.prepTime := 9.0
+!miKeyLimePie35.classification := #Dessert
+
+!new MenuItem('miSparklingCider35')
+!miSparklingCider35.description := 'Dry sparkling cider'
+!miSparklingCider35.prepTime := 1.0
+!miSparklingCider35.classification := #Beverage
+
+!insert (miOysterShot35, chef80) into MenuItemChef
+!insert (miSeafoodStew35, chef80) into MenuItemChef
+!insert (miKeyLimePie35, chef81) into MenuItemChef
+!insert (miSparklingCider35, chef81) into MenuItemChef
+
+!insert (miOysterShot35, fiOysters35) into MenuItemFoodItem
+!insert (miOysterShot35, fiLimes35) into MenuItemFoodItem
+
+!insert (miSeafoodStew35, fiOysters35) into MenuItemFoodItem
+!insert (miSeafoodStew35, fiCream35) into MenuItemFoodItem
+
+!insert (miKeyLimePie35, fiFlour35) into MenuItemFoodItem
+!insert (miKeyLimePie35, fiCream35) into MenuItemFoodItem
+!insert (miKeyLimePie35, fiLimes35) into MenuItemFoodItem
+
+!new RegularCustomer('cust80')
+!cust80.name := 'Nora Klein'
+!cust80.prefferedLanguage := #German
+
+!new RegularCustomer('cust81')
+!cust81.name := 'Luis Herrera'
+!cust81.prefferedLanguage := #Spanish
+
+!new Individual('res70')
+!res70.time := Time('16:40')
+!res70.date := Date('2028-04-21')
+!res70.numberPeople := 3
+!res70.name := 'Transit Layover'
+!res70.phoneNumber := '555-9200'
+!res70.number := 91001
+!res70.seating := #Inside
+!res70.smoking := #NonSmoking
+
+!insert (res70, w100) into ReservationWaiter
+
+!new Table('tRes70A')
+!tRes70A.number := 7
+!tRes70A.description := 'Bar two-top A'
+!tRes70A.capacity := 2
+
+!new Table('tRes70B')
+!tRes70B.number := 8
+!tRes70B.description := 'Bar two-top B'
+!tRes70B.capacity := 2
+
+!insert (res70, tRes70A) into ReservationTable
+!insert (res70, tRes70B) into ReservationTable
+
+!new Individual('res71')
+!res71.time := Time('18:10')
+!res71.date := Date('2028-04-21')
+!res71.numberPeople := 2
+!res71.name := 'Nora Klein'
+!res71.phoneNumber := '555-9201'
+!res71.number := 91002
+!res71.seating := #Patio
+!res71.smoking := #NonSmoking
+
+!insert (rest35, res71) into RestaurantReservation
+!insert (res71, cust80) into ReservationCustomer
+!insert (res71, w101) into ReservationWaiter
+
+!new Table('tRes71A')
+!tRes71A.number := 14
+!tRes71A.description := 'Patio two-top by heater'
+!tRes71A.capacity := 2
+!insert (res71, tRes71A) into ReservationTable
+
+!new ItemOrder('io710')
+!io710.time := Time('18:25')
+!insert (res71, io710) into ReservationItemOrdered
+!insert (io710, miOysterShot35) into ItemOrderMenuItem
+
+!new BusDriver('bd60')
+!bd60.name := 'Erica Wells'
+!bd60.dateOfBirth := Date('1972-01-29')
+!bd60.phoneNumber := '555-9300'
+!bd60.driverLicenseNr := 'D-8400173'
+
+!new Banquet('banq60')
+!banq60.time := Time('19:30')
+!banq60.date := Date('2028-04-22')
+!banq60.numberPeople := 18
+!banq60.name := 'Harborview Architects'
+!banq60.phoneNumber := '555-9301'
+!banq60.number := 92001
+!banq60.groupName := 'Project Completion Dinner'
+!banq60.paymentMethod := #CreditCard
+!banq60.busService := true
+
+!insert (rest35, banq60) into RestaurantReservation
+!insert (banq60, w101) into ReservationWaiter
+!insert (banq60, w102) into ReservationWaiter
+!insert (banq60, bd60) into BanquetBusDriver
+
+!new Table('tBanq60A')
+!tBanq60A.number := 50
+!tBanq60A.description := 'Private room table A'
+!tBanq60A.capacity := 10
+
+!new Table('tBanq60B')
+!tBanq60B.number := 51
+!tBanq60B.description := 'Private room table B'
+!tBanq60B.capacity := 8
+
+!insert (banq60, tBanq60A) into ReservationTable
+!insert (banq60, tBanq60B) into ReservationTable
+
+!new ItemOrder('ioBanq60_1')
+!ioBanq60_1.time := Time('19:45')
+!insert (banq60, ioBanq60_1) into ReservationItemOrdered
+!insert (ioBanq60_1, miSeafoodStew35) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq60_2')
+!ioBanq60_2.time := Time('20:05')
+!insert (banq60, ioBanq60_2) into ReservationItemOrdered
+!insert (ioBanq60_2, miSparklingCider35) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq35')
+!dietReq35.diet := #Kosher
+
+!new ReportedAllergy('repAlg35')
+!repAlg35.allergen := #Seafood

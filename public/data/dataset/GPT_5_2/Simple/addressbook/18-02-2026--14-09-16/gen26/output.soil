@@ -1,0 +1,127 @@
+!new AddressBook('ab27')
+
+!new Company('atlasFoods')
+!atlasFoods.name := 'Atlas Foods Group'
+!atlasFoods.phone := '+1-404-555-2700'
+!atlasFoods.website := 'https://atlasfoods.example'
+!atlasFoods.email := 'info@atlasfoods.example'
+!atlasFoods.industry := 'Food Production'
+
+!new Company('atlasLogistics')
+!atlasLogistics.name := 'Atlas ColdChain Logistics'
+!atlasLogistics.phone := '+1-404-555-2708'
+!atlasLogistics.website := ''
+!atlasLogistics.email := 'dispatch@atlasfoods.example'
+!atlasLogistics.industry := 'Cold-Chain Logistics'
+
+!new Company('atlasRetail')
+!atlasRetail.name := 'Atlas Retail Markets'
+!atlasRetail.phone := '+1-678-555-2712'
+!atlasRetail.website := 'https://markets.atlasfoods.example'
+!atlasRetail.email := 'customers@markets.atlasfoods.example'
+!atlasRetail.industry := 'Grocery Retail'
+
+!new Company('harvestSupplies')
+!harvestSupplies.name := 'Harvest Supplies Co'
+!harvestSupplies.phone := '+1-704-555-2720'
+!harvestSupplies.website := 'https://harvestsupplies.example'
+!harvestSupplies.email := 'orders@harvestsupplies.example'
+!harvestSupplies.industry := 'Packaging and Supplies'
+
+!insert (ab27, atlasFoods) into AddressBookMadeOfContact
+!insert (ab27, atlasLogistics) into AddressBookMadeOfContact
+!insert (ab27, atlasRetail) into AddressBookMadeOfContact
+!insert (ab27, harvestSupplies) into AddressBookMadeOfContact
+
+!new Address('addrAtlasHQ')
+!addrAtlasHQ.city := 'Atlanta'
+!addrAtlasHQ.street := 'Peachtree St NE'
+!addrAtlasHQ.houseNr := '1200'
+
+!new Address('addrAtlasPlant')
+!addrAtlasPlant.city := 'Decatur'
+!addrAtlasPlant.street := 'Industrial Way'
+!addrAtlasPlant.houseNr := '75'
+
+!new Address('addrLogisticsDepot')
+!addrLogisticsDepot.city := 'Atlanta'
+!addrLogisticsDepot.street := 'Moreland Ave SE'
+!addrLogisticsDepot.houseNr := '4100'
+
+!new Address('addrRetailOffice')
+!addrRetailOffice.city := 'Norcross'
+!addrRetailOffice.street := 'Buford Hwy'
+!addrRetailOffice.houseNr := '5800'
+
+!new Address('addrRetailStore1')
+!addrRetailStore1.city := 'Marietta'
+!addrRetailStore1.street := 'Cobb Pkwy'
+!addrRetailStore1.houseNr := '1650'
+
+!new Address('addrHarvestWarehouse')
+!addrHarvestWarehouse.city := 'Charlotte'
+!addrHarvestWarehouse.street := 'S Tryon St'
+!addrHarvestWarehouse.houseNr := '2700'
+
+!insert (atlasFoods, addrAtlasHQ) into ContactContainsAddress
+!insert (atlasFoods, addrAtlasPlant) into ContactContainsAddress
+!insert (atlasLogistics, addrLogisticsDepot) into ContactContainsAddress
+!insert (atlasRetail, addrRetailOffice) into ContactContainsAddress
+!insert (atlasRetail, addrRetailStore1) into ContactContainsAddress
+!insert (harvestSupplies, addrHarvestWarehouse) into ContactContainsAddress
+
+!new Note('nAtlasEmailRecallDrill')
+!nAtlasEmailRecallDrill.author := 'Quality Assurance'
+!nAtlasEmailRecallDrill.time := Date('2026-02-01 08:05')
+!nAtlasEmailRecallDrill.type := #EMAIL
+!nAtlasEmailRecallDrill.comment := 'Distributed updated recall drill checklist and contact tree for plant supervisors.'
+
+!new Note('nAtlasMeetingForecast')
+!nAtlasMeetingForecast.author := 'Operations Planning'
+!nAtlasMeetingForecast.time := Date('2026-02-03 10:00')
+!nAtlasMeetingForecast.type := #MEETING
+!nAtlasMeetingForecast.comment := 'Reviewed Q2 demand forecast and confirmed production runs for frozen items.'
+
+!new Note('nLogisticsCallBreakdown')
+!nLogisticsCallBreakdown.author := 'Dispatch'
+!nLogisticsCallBreakdown.time := Date('2026-02-04 05:50')
+!nLogisticsCallBreakdown.type := #CALL
+!nLogisticsCallBreakdown.comment := 'Reported refrigeration unit alarm on trailer; rerouted load to backup truck and logged incident.'
+
+!new Note('nRetailEmailPromo')
+!nRetailEmailPromo.author := 'Retail Marketing'
+!nRetailEmailPromo.time := Date('2026-02-05 14:25')
+!nRetailEmailPromo.type := #EMAIL
+!nRetailEmailPromo.comment := 'Sent weekend promotion plan and updated signage specs to store managers.'
+
+!new Note('nHarvestMeetingPackaging')
+!nHarvestMeetingPackaging.author := 'Account Team'
+!nHarvestMeetingPackaging.time := Date('2026-02-06 11:30')
+!nHarvestMeetingPackaging.type := #MEETING
+!nHarvestMeetingPackaging.comment := 'Packaging review: confirmed carton dimensions, lead times, and pallet labeling requirements.'
+
+!insert (atlasFoods, nAtlasEmailRecallDrill) into ContactContainsNote
+!insert (atlasFoods, nAtlasMeetingForecast) into ContactContainsNote
+!insert (atlasLogistics, nLogisticsCallBreakdown) into ContactContainsNote
+!insert (atlasRetail, nRetailEmailPromo) into ContactContainsNote
+!insert (harvestSupplies, nHarvestMeetingPackaging) into ContactContainsNote
+
+!new Relationship('relAtlasSubdivisionLogistics')
+!relAtlasSubdivisionLogistics.type := #SUBDIVISION
+!insert (atlasFoods, relAtlasSubdivisionLogistics) into ContactToRelationship
+!insert (relAtlasSubdivisionLogistics, atlasLogistics) into RelationshipToContact
+
+!new Relationship('relAtlasSubdivisionRetail')
+!relAtlasSubdivisionRetail.type := #SUBDIVISION
+!insert (atlasFoods, relAtlasSubdivisionRetail) into ContactToRelationship
+!insert (relAtlasSubdivisionRetail, atlasRetail) into RelationshipToContact
+
+!new Relationship('relRetailCoworkerHarvest')
+!relRetailCoworkerHarvest.type := #COWORKER
+!insert (atlasRetail, relRetailCoworkerHarvest) into ContactToRelationship
+!insert (relRetailCoworkerHarvest, harvestSupplies) into RelationshipToContact
+
+!new Relationship('relLogisticsCoworkerHarvest')
+!relLogisticsCoworkerHarvest.type := #COWORKER
+!insert (atlasLogistics, relLogisticsCoworkerHarvest) into ContactToRelationship
+!insert (relLogisticsCoworkerHarvest, harvestSupplies) into RelationshipToContact

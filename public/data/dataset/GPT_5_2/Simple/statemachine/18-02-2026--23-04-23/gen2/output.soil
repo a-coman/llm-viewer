@@ -1,0 +1,158 @@
+!new StateMachine('smElevator')
+!smElevator.name := 'elevatorControl'
+
+!new StateMachine('smPayment')
+!smPayment.name := 'paymentSession'
+
+
+!new State('stIdle')
+!stIdle.name := 'idle'
+!new State('stDoorOpen')
+!stDoorOpen.name := 'doorOpen'
+!new State('stMovingUp')
+!stMovingUp.name := 'movingUp'
+!new State('stMovingDown')
+!stMovingDown.name := 'movingDown'
+
+!insert (smElevator, stIdle) into StateMachineContainsStates
+!insert (smElevator, stDoorOpen) into StateMachineContainsStates
+!insert (smElevator, stMovingUp) into StateMachineContainsStates
+!insert (smElevator, stMovingDown) into StateMachineContainsStates
+
+!insert (smElevator, stIdle) into StateMachineStartsStates
+
+
+!new Transition('trCallOpensDoor')
+!trCallOpensDoor.name := 'callOpensDoor'
+!new TimeEvent('evCallOpensDoor')
+!evCallOpensDoor.time := 1
+!insert (smElevator, trCallOpensDoor) into StateMachineContainsTransitions
+!insert (trCallOpensDoor, evCallOpensDoor) into TransitionContainsEvents
+!insert (stIdle, trCallOpensDoor) into StateTransition
+!insert (trCallOpensDoor, stDoorOpen) into TransitionState
+
+!new Transition('trCloseDoor')
+!trCloseDoor.name := 'closeDoor'
+!new TimeEvent('evCloseDoor')
+!evCloseDoor.time := 3
+!insert (smElevator, trCloseDoor) into StateMachineContainsTransitions
+!insert (trCloseDoor, evCloseDoor) into TransitionContainsEvents
+!insert (stDoorOpen, trCloseDoor) into StateTransition
+!insert (trCloseDoor, stIdle) into TransitionState
+
+!new Transition('trSelectUp')
+!trSelectUp.name := 'selectUp'
+!new TimeEvent('evSelectUp')
+!evSelectUp.time := 1
+!insert (smElevator, trSelectUp) into StateMachineContainsTransitions
+!insert (trSelectUp, evSelectUp) into TransitionContainsEvents
+!insert (stIdle, trSelectUp) into StateTransition
+!insert (trSelectUp, stMovingUp) into TransitionState
+
+!new Transition('trSelectDown')
+!trSelectDown.name := 'selectDown'
+!new TimeEvent('evSelectDown')
+!evSelectDown.time := 1
+!insert (smElevator, trSelectDown) into StateMachineContainsTransitions
+!insert (trSelectDown, evSelectDown) into TransitionContainsEvents
+!insert (stIdle, trSelectDown) into StateTransition
+!insert (trSelectDown, stMovingDown) into TransitionState
+
+!new Transition('trArriveFromUp')
+!trArriveFromUp.name := 'arriveFromUp'
+!new TimeEvent('evArriveFromUp')
+!evArriveFromUp.time := 6
+!insert (smElevator, trArriveFromUp) into StateMachineContainsTransitions
+!insert (trArriveFromUp, evArriveFromUp) into TransitionContainsEvents
+!insert (stMovingUp, trArriveFromUp) into StateTransition
+!insert (trArriveFromUp, stIdle) into TransitionState
+
+!new Transition('trArriveFromDown')
+!trArriveFromDown.name := 'arriveFromDown'
+!new TimeEvent('evArriveFromDown')
+!evArriveFromDown.time := 5
+!insert (smElevator, trArriveFromDown) into StateMachineContainsTransitions
+!insert (trArriveFromDown, evArriveFromDown) into TransitionContainsEvents
+!insert (stMovingDown, trArriveFromDown) into StateTransition
+!insert (trArriveFromDown, stIdle) into TransitionState
+
+!new Transition('trHoldDoorOpen')
+!trHoldDoorOpen.name := 'holdDoorOpen'
+!new TimeEvent('evHoldDoorOpen')
+!evHoldDoorOpen.time := 2
+!insert (smElevator, trHoldDoorOpen) into StateMachineContainsTransitions
+!insert (trHoldDoorOpen, evHoldDoorOpen) into TransitionContainsEvents
+!insert (stDoorOpen, trHoldDoorOpen) into StateTransition
+!insert (trHoldDoorOpen, stDoorOpen) into TransitionState
+
+
+!new State('stUnauth')
+!stUnauth.name := 'unauthenticated'
+!new State('stAuthing')
+!stAuthing.name := 'authenticating'
+!new State('stAuth')
+!stAuth.name := 'authenticated'
+!new State('stLocked')
+!stLocked.name := 'locked'
+
+!insert (smPayment, stUnauth) into StateMachineContainsStates
+!insert (smPayment, stAuthing) into StateMachineContainsStates
+!insert (smPayment, stAuth) into StateMachineContainsStates
+!insert (smPayment, stLocked) into StateMachineContainsStates
+
+!insert (smPayment, stUnauth) into StateMachineStartsStates
+
+
+!new Transition('trStartLogin')
+!trStartLogin.name := 'startLogin'
+!new TimeEvent('evStartLogin')
+!evStartLogin.time := 1
+!insert (smPayment, trStartLogin) into StateMachineContainsTransitions
+!insert (trStartLogin, evStartLogin) into TransitionContainsEvents
+!insert (stUnauth, trStartLogin) into StateTransition
+!insert (trStartLogin, stAuthing) into TransitionState
+
+!new Transition('trLoginOk')
+!trLoginOk.name := 'loginOk'
+!new TimeEvent('evLoginOk')
+!evLoginOk.time := 2
+!insert (smPayment, trLoginOk) into StateMachineContainsTransitions
+!insert (trLoginOk, evLoginOk) into TransitionContainsEvents
+!insert (stAuthing, trLoginOk) into StateTransition
+!insert (trLoginOk, stAuth) into TransitionState
+
+!new Transition('trLoginFailLock')
+!trLoginFailLock.name := 'loginFailLock'
+!new TimeEvent('evLoginFailLock')
+!evLoginFailLock.time := 3
+!insert (smPayment, trLoginFailLock) into StateMachineContainsTransitions
+!insert (trLoginFailLock, evLoginFailLock) into TransitionContainsEvents
+!insert (stAuthing, trLoginFailLock) into StateTransition
+!insert (trLoginFailLock, stLocked) into TransitionState
+
+!new Transition('trUnlockTimeout')
+!trUnlockTimeout.name := 'unlockTimeout'
+!new TimeEvent('evUnlockTimeout')
+!evUnlockTimeout.time := 30
+!insert (smPayment, trUnlockTimeout) into StateMachineContainsTransitions
+!insert (trUnlockTimeout, evUnlockTimeout) into TransitionContainsEvents
+!insert (stLocked, trUnlockTimeout) into StateTransition
+!insert (trUnlockTimeout, stUnauth) into TransitionState
+
+!new Transition('trLogout')
+!trLogout.name := 'logout'
+!new TimeEvent('evLogout')
+!evLogout.time := 10
+!insert (smPayment, trLogout) into StateMachineContainsTransitions
+!insert (trLogout, evLogout) into TransitionContainsEvents
+!insert (stAuth, trLogout) into StateTransition
+!insert (trLogout, stUnauth) into TransitionState
+
+!new Transition('trRefreshSession')
+!trRefreshSession.name := 'refreshSession'
+!new TimeEvent('evRefreshSession')
+!evRefreshSession.time := 15
+!insert (smPayment, trRefreshSession) into StateMachineContainsTransitions
+!insert (trRefreshSession, evRefreshSession) into TransitionContainsEvents
+!insert (stAuth, trRefreshSession) into StateTransition
+!insert (trRefreshSession, stAuth) into TransitionState

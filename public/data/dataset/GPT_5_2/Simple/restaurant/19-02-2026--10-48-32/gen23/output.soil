@@ -1,0 +1,301 @@
+!new Restaurant('rest30')
+!rest30.name := 'Aurora Vegan Deli'
+
+!new Owner('own73')
+!own73.name := 'Leila Morgan'
+!own73.percentageShares := 45
+
+!new Owner('own74')
+!own74.name := 'Tomas Ilic'
+!own74.percentageShares := 35
+
+!new Owner('own75')
+!own75.name := 'Priya Deshmukh'
+!own75.percentageShares := 20
+
+!insert (rest30, own73) into RestaurantOwner
+!insert (rest30, own74) into RestaurantOwner
+!insert (rest30, own75) into RestaurantOwner
+
+!new HeadWaiter('hw42')
+!hw42.name := 'Sergio Alvarez'
+!hw42.dateOfBirth := Date('1984-05-09')
+!hw42.phoneNumber := '555-7400'
+
+!new Waiter('w73')
+!w73.name := 'Mila Novak'
+!w73.dateOfBirth := Date('1998-08-11')
+!w73.phoneNumber := '555-7401'
+!w73.spokenLanguage := #English
+
+!new Waiter('w74')
+!w74.name := 'Gianni Costa'
+!w74.dateOfBirth := Date('1995-02-18')
+!w74.phoneNumber := '555-7402'
+!w74.spokenLanguage := #Italian
+
+!new Waiter('w75')
+!w75.name := 'Clara Rios'
+!w75.dateOfBirth := Date('1999-10-04')
+!w75.phoneNumber := '555-7403'
+!w75.spokenLanguage := #Spanish
+
+!insert (hw42, w73) into HeadWaiterWaiter
+!insert (hw42, w74) into HeadWaiterWaiter
+!insert (hw42, w75) into HeadWaiterWaiter
+
+!new HeadWaiter('hw43')
+!hw43.name := 'Nadine Weber'
+!hw43.dateOfBirth := Date('1981-01-21')
+!hw43.phoneNumber := '555-7410'
+
+!new Waiter('w76')
+!w76.name := 'Lars Braun'
+!w76.dateOfBirth := Date('1993-06-30')
+!w76.phoneNumber := '555-7411'
+!w76.spokenLanguage := #German
+
+!insert (hw43, w76) into HeadWaiterWaiter
+
+!new Chef('chef49')
+!chef49.name := 'Aiko Tanaka'
+!chef49.dateOfBirth := Date('1977-09-27')
+!chef49.phoneNumber := '555-7420'
+
+!new Chef('chef50')
+!chef50.name := 'Omar Haddad'
+!chef50.dateOfBirth := Date('1980-12-12')
+!chef50.phoneNumber := '555-7421'
+
+!new Cook('cook73')
+!cook73.name := 'Jenna Park'
+!cook73.dateOfBirth := Date('2001-03-03')
+!cook73.phoneNumber := '555-7430'
+!cook73.yearsOfExperience := 0
+
+!new Cook('cook74')
+!cook74.name := 'Hugo Martins'
+!cook74.dateOfBirth := Date('1992-11-09')
+!cook74.phoneNumber := '555-7431'
+!cook74.yearsOfExperience := 5
+
+!new Cook('cook75')
+!cook75.name := 'Elena Petrov'
+!cook75.dateOfBirth := Date('1988-07-22')
+!cook75.phoneNumber := '555-7432'
+!cook75.yearsOfExperience := 12
+
+!insert (chef49, cook73) into ChefCook
+!insert (chef49, cook74) into ChefCook
+!insert (chef50, cook75) into ChefCook
+
+!new Allergen('alg30Gluten')
+!alg30Gluten.type := #Gluten
+!new Allergen('alg30Nuts')
+!alg30Nuts.type := #Nuts
+
+!new FoodItem('fiSeitan30')
+!fiSeitan30.number := 2301
+!fiSeitan30.description := 'Seitan strips'
+!fiSeitan30.purchaseFlag := true
+!fiSeitan30.unit := #Pound
+
+!new FoodItem('fiSourdough30')
+!fiSourdough30.number := 2302
+!fiSourdough30.description := 'Sourdough bread'
+!fiSourdough30.purchaseFlag := true
+!fiSourdough30.unit := #Dozen
+
+!new FoodItem('fiCashews30')
+!fiCashews30.number := 2303
+!fiCashews30.description := 'Cashews'
+!fiCashews30.purchaseFlag := true
+!fiCashews30.unit := #Ounce
+
+!new FoodItem('fiOats30')
+!fiOats30.number := 2304
+!fiOats30.description := 'Rolled oats'
+!fiOats30.purchaseFlag := true
+!fiOats30.unit := #Pound
+
+!new FoodItem('fiCoffeeBeans30')
+!fiCoffeeBeans30.number := 2305
+!fiCoffeeBeans30.description := 'Coffee beans'
+!fiCoffeeBeans30.purchaseFlag := true
+!fiCoffeeBeans30.unit := #Pound
+
+!new FoodItem('fiSparklingWater30')
+!fiSparklingWater30.number := 2306
+!fiSparklingWater30.description := 'Sparkling water'
+!fiSparklingWater30.purchaseFlag := true
+!fiSparklingWater30.unit := #Ounce
+
+!insert (fiSeitan30, alg30Gluten) into FoodItemAllergen
+!insert (fiSourdough30, alg30Gluten) into FoodItemAllergen
+!insert (fiOats30, alg30Gluten) into FoodItemAllergen
+!insert (fiCashews30, alg30Nuts) into FoodItemAllergen
+
+!new MenuItem('miSeitanReuben30')
+!miSeitanReuben30.description := 'Seitan reuben on sourdough'
+!miSeitanReuben30.prepTime := 12.0
+!miSeitanReuben30.classification := #Main
+
+!new MenuItem('miCashewCheesecake30')
+!miCashewCheesecake30.description := 'Cashew cheesecake slice'
+!miCashewCheesecake30.prepTime := 7.0
+!miCashewCheesecake30.classification := #Dessert
+
+!new MenuItem('miOvernightOats30')
+!miOvernightOats30.description := 'Overnight oats'
+!miOvernightOats30.prepTime := 3.0
+!miOvernightOats30.classification := #Dessert
+
+!new MenuItem('miHouseCoffee30')
+!miHouseCoffee30.description := 'House drip coffee'
+!miHouseCoffee30.prepTime := 2.0
+!miHouseCoffee30.classification := #Beverage
+
+!new MenuItem('miSparklingWater30')
+!miSparklingWater30.description := 'Sparkling water'
+!miSparklingWater30.prepTime := 1.0
+!miSparklingWater30.classification := #Beverage
+
+!insert (miSeitanReuben30, chef49) into MenuItemChef
+!insert (miCashewCheesecake30, chef50) into MenuItemChef
+!insert (miOvernightOats30, chef50) into MenuItemChef
+!insert (miHouseCoffee30, chef49) into MenuItemChef
+!insert (miSparklingWater30, chef49) into MenuItemChef
+
+!insert (miSeitanReuben30, fiSeitan30) into MenuItemFoodItem
+!insert (miSeitanReuben30, fiSourdough30) into MenuItemFoodItem
+
+!insert (miCashewCheesecake30, fiCashews30) into MenuItemFoodItem
+!insert (miCashewCheesecake30, fiOats30) into MenuItemFoodItem
+
+!insert (miOvernightOats30, fiOats30) into MenuItemFoodItem
+
+!insert (miHouseCoffee30, fiCoffeeBeans30) into MenuItemFoodItem
+
+!insert (miSparklingWater30, fiSparklingWater30) into MenuItemFoodItem
+
+!new Banquet('banq41')
+!banq41.time := Time('12:30')
+!banq41.date := Date('2027-12-15')
+!banq41.numberPeople := 25
+!banq41.name := 'Solar Tech Workshop'
+!banq41.phoneNumber := '555-7490'
+!banq41.number := 61001
+!banq41.groupName := 'Installer Training Lunch'
+!banq41.paymentMethod := #Cash
+!banq41.busService := false
+
+!insert (rest30, banq41) into RestaurantReservation
+!insert (banq41, w73) into ReservationWaiter
+!insert (banq41, w74) into ReservationWaiter
+
+!new Table('tBanq41A')
+!tBanq41A.number := 101
+!tBanq41A.description := 'Workshop table A'
+!tBanq41A.capacity := 10
+!insert (banq41, tBanq41A) into ReservationTable
+
+!new Table('tBanq41B')
+!tBanq41B.number := 102
+!tBanq41B.description := 'Workshop table B'
+!tBanq41B.capacity := 10
+!insert (banq41, tBanq41B) into ReservationTable
+
+!new Table('tBanq41C')
+!tBanq41C.number := 103
+!tBanq41C.description := 'Workshop table C'
+!tBanq41C.capacity := 8
+!insert (banq41, tBanq41C) into ReservationTable
+
+!new ItemOrder('ioBanq41_1')
+!ioBanq41_1.time := Time('12:45')
+!insert (banq41, ioBanq41_1) into ReservationItemOrdered
+!insert (ioBanq41_1, miHouseCoffee30) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq41_2')
+!ioBanq41_2.time := Time('13:05')
+!insert (banq41, ioBanq41_2) into ReservationItemOrdered
+!insert (ioBanq41_2, miSeitanReuben30) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq41_3')
+!ioBanq41_3.time := Time('13:25')
+!insert (banq41, ioBanq41_3) into ReservationItemOrdered
+!insert (ioBanq41_3, miSparklingWater30) into ItemOrderMenuItem
+
+!new Individual('res42')
+!res42.time := Time('07:05')
+!res42.date := Date('2027-12-16')
+!res42.numberPeople := 1
+!res42.name := 'Morning Commuter'
+!res42.phoneNumber := '555-7491'
+!res42.number := 61002
+!res42.seating := #Inside
+!res42.smoking := #NonSmoking
+
+!insert (rest30, res42) into RestaurantReservation
+!insert (res42, w75) into ReservationWaiter
+
+!new Table('tRes42A')
+!tRes42A.number := 7
+!tRes42A.description := 'Single seat at bar'
+!tRes42A.capacity := 2
+!insert (res42, tRes42A) into ReservationTable
+
+!new ItemOrder('ioRes42_1')
+!ioRes42_1.time := Time('07:10')
+!insert (res42, ioRes42_1) into ReservationItemOrdered
+!insert (ioRes42_1, miHouseCoffee30) into ItemOrderMenuItem
+
+!new RegularCustomer('cust42')
+!cust42.name := 'Jasper Miller'
+!cust42.prefferedLanguage := #English
+
+!new RegularCustomer('cust43')
+!cust43.name := 'Alessia Romano'
+!cust43.prefferedLanguage := #Italian
+
+!new Individual('res43')
+!res43.time := Time('20:10')
+!res43.date := Date('2027-12-16')
+!res43.numberPeople := 6
+!res43.name := 'Alessia Romano'
+!res43.phoneNumber := '555-7492'
+!res43.number := 61003
+!res43.seating := #Patio
+!res43.smoking := #Smoking
+
+!insert (rest30, res43) into RestaurantReservation
+!insert (res43, cust43) into ReservationCustomer
+!insert (res43, w73) into ReservationWaiter
+
+!new Table('tRes43A')
+!tRes43A.number := 31
+!tRes43A.description := 'Patio four-top'
+!tRes43A.capacity := 4
+!insert (res43, tRes43A) into ReservationTable
+
+!new Table('tRes43B')
+!tRes43B.number := 32
+!tRes43B.description := 'Patio two-top'
+!tRes43B.capacity := 2
+!insert (res43, tRes43B) into ReservationTable
+
+!new ItemOrder('ioRes43_1')
+!ioRes43_1.time := Time('20:25')
+!insert (res43, ioRes43_1) into ReservationItemOrdered
+!insert (ioRes43_1, miSeitanReuben30) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes43_2')
+!ioRes43_2.time := Time('20:55')
+!insert (res43, ioRes43_2) into ReservationItemOrdered
+!insert (ioRes43_2, miCashewCheesecake30) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq21')
+!dietReq21.diet := #Vegan
+
+!new ReportedAllergy('repAlg21')
+!repAlg21.allergen := #Gluten

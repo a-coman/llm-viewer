@@ -1,0 +1,166 @@
+!new RentalOffice('office_fairbanks_main')
+!office_fairbanks_main.name := 'Interior Fleet Rentals - Fairbanks'
+!office_fairbanks_main.number := 1501
+!office_fairbanks_main.address := '6450 Airport Way, Fairbanks, AK 99709'
+
+!new RentalOffice('office_tucson_east')
+!office_tucson_east.name := 'Sonoran Vehicle Rental - Tucson East'
+!office_tucson_east.number := 1502
+!office_tucson_east.address := '7401 E 22nd St, Tucson, AZ 85710'
+
+!new RentalOffice('office_newark_depot3')
+!office_newark_depot3.name := 'Christiana Fleet Depot - Newark'
+!office_newark_depot3.number := 1503
+!office_newark_depot3.address := '900 Churchmans Rd, Newark, DE 19713'
+
+!new RentalOffice('office_national_reservations2')
+!office_national_reservations2.name := 'National Reservations Center - West'
+!office_national_reservations2.number := 1504
+!office_national_reservations2.address := '1 Market St, San Francisco, CA 94105'
+
+!new Truck('truck_ak_24ft_501')
+!truck_ak_24ft_501.id := 35001
+!truck_ak_24ft_501.registrationState := #AK
+!truck_ak_24ft_501.licensePlateNumber := 'AK-TRK-3501'
+!truck_ak_24ft_501.vehicleTypeCode := #TRUCK24
+!truck_ak_24ft_501.registrationLastMaintenanceDate := Date('2026-05-21')
+!truck_ak_24ft_501.expirationDate := Date('2027-05-31')
+!truck_ak_24ft_501.odometerReading := 46218
+!truck_ak_24ft_501.gasTankCapacity := 64.0
+!truck_ak_24ft_501.workingRadio := true
+!truck_ak_24ft_501.mileage := 9
+
+!new Truck('truck_de_10ft_502')
+!truck_de_10ft_502.id := 35002
+!truck_de_10ft_502.registrationState := #DE
+!truck_de_10ft_502.licensePlateNumber := 'DE-TRK-3502'
+!truck_de_10ft_502.vehicleTypeCode := #TRUCK10
+!truck_de_10ft_502.registrationLastMaintenanceDate := Date('2026-04-30')
+!truck_de_10ft_502.expirationDate := Date('2027-04-30')
+!truck_de_10ft_502.odometerReading := 11040
+!truck_de_10ft_502.gasTankCapacity := 0.0
+!truck_de_10ft_502.workingRadio := false
+!truck_de_10ft_502.mileage := 0
+
+!new Vehicle('trailer_az_covered_503')
+!trailer_az_covered_503.id := 36003
+!trailer_az_covered_503.registrationState := #AZ
+!trailer_az_covered_503.licensePlateNumber := 'AZ-TRL-8820'
+!trailer_az_covered_503.vehicleTypeCode := #COVERED_TRAILER
+!trailer_az_covered_503.registrationLastMaintenanceDate := Date('2026-02-16')
+!trailer_az_covered_503.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ak_open_504')
+!trailer_ak_open_504.id := 36004
+!trailer_ak_open_504.registrationState := #AK
+!trailer_ak_open_504.licensePlateNumber := 'AK-TRL-1140'
+!trailer_ak_open_504.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ak_open_504.registrationLastMaintenanceDate := Date('2026-01-09')
+!trailer_ak_open_504.expirationDate := Date('2026-12-31')
+
+!insert (office_fairbanks_main, truck_ak_24ft_501) into RentalOfficeVehicle
+!insert (office_newark_depot3, truck_de_10ft_502) into RentalOfficeVehicle
+!insert (office_tucson_east, trailer_az_covered_503) into RentalOfficeVehicle
+!insert (office_fairbanks_main, trailer_ak_open_504) into RentalOfficeVehicle
+
+!new Individual('cust_ind_lena')
+!cust_ind_lena.name := 'Lena Whitaker'
+!cust_ind_lena.address := '904 College Rd, Fairbanks, AK 99709'
+!cust_ind_lena.poorRisk := false
+!cust_ind_lena.homePhone := '907-555-0112'
+!cust_ind_lena.driverLicenseState := #AK
+!cust_ind_lena.driverLicenseNumber := 40011229
+!cust_ind_lena.driverLicenseExpirationDate := Date('2028-10-31')
+
+!new Individual('cust_ind_george')
+!cust_ind_george.name := 'George Simmons'
+!cust_ind_george.address := '12 W Main St, Newark, DE 19711'
+!cust_ind_george.poorRisk := true
+!cust_ind_george.homePhone := '302-555-0177'
+!cust_ind_george.driverLicenseState := #DE
+!cust_ind_george.driverLicenseNumber := 77890114
+!cust_ind_george.driverLicenseExpirationDate := Date('2026-08-20')
+
+!new Company('cust_co_northbridge')
+!cust_co_northbridge.name := 'NorthBridge Retail Fixtures'
+!cust_co_northbridge.address := '3100 E Valencia Rd, Tucson, AZ 85706'
+!cust_co_northbridge.poorRisk := false
+!cust_co_northbridge.idNumber := 60177009
+
+!new RentalAgreement('ra_14001')
+!ra_14001.number := 14001
+!ra_14001.rentalDate := Date('2026-12-05')
+!ra_14001.anticipatedDuration := 12
+!ra_14001.depositPaid := 1000.00
+!ra_14001.quotedDailyRate := 158.00
+!ra_14001.quotedRatePerMile := 0.84
+
+!new RentalAgreement('ra_14002')
+!ra_14002.number := 14002
+!ra_14002.rentalDate := Date('2026-12-08')
+!ra_14002.anticipatedDuration := 3
+!ra_14002.depositPaid := 0.00
+!ra_14002.quotedDailyRate := 27.50
+!ra_14002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_14003')
+!ra_14003.number := 14003
+!ra_14003.rentalDate := Date('2026-12-10')
+!ra_14003.anticipatedDuration := 1
+!ra_14003.depositPaid := 200.00
+!ra_14003.quotedDailyRate := 69.00
+!ra_14003.quotedRatePerMile := 0.79
+
+!new RentalAgreement('ra_14004')
+!ra_14004.number := 14004
+!ra_14004.rentalDate := Date('2026-12-15')
+!ra_14004.anticipatedDuration := 20
+!ra_14004.depositPaid := 0.00
+!ra_14004.quotedDailyRate := 58.00
+!ra_14004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_14005')
+!ra_14005.number := 14005
+!ra_14005.rentalDate := Date('2026-12-18')
+!ra_14005.anticipatedDuration := 2
+!ra_14005.depositPaid := 150.00
+!ra_14005.quotedDailyRate := 75.00
+!ra_14005.quotedRatePerMile := 0.65
+
+!new RentalAgreement('ra_14006')
+!ra_14006.number := 14006
+!ra_14006.rentalDate := Date('2026-12-20')
+!ra_14006.anticipatedDuration := 5
+!ra_14006.depositPaid := 500.00
+!ra_14006.quotedDailyRate := 140.00
+!ra_14006.quotedRatePerMile := 0.80
+
+!insert (office_national_reservations2, ra_14001) into RentalOfficeRentalAgreementOrigin
+!insert (office_fairbanks_main, ra_14001) into RentalOfficeRentalAgreementDrop
+!insert (ra_14001, truck_ak_24ft_501) into RentalAgreementVehicle
+!insert (ra_14001, cust_co_northbridge) into RentalAgreementCustomer
+
+!insert (office_fairbanks_main, ra_14002) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson_east, ra_14002) into RentalOfficeRentalAgreementDrop
+!insert (ra_14002, trailer_ak_open_504) into RentalAgreementVehicle
+!insert (ra_14002, cust_ind_lena) into RentalAgreementCustomer
+
+!insert (office_newark_depot3, ra_14003) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_depot3, ra_14003) into RentalOfficeRentalAgreementDrop
+!insert (ra_14003, truck_de_10ft_502) into RentalAgreementVehicle
+!insert (ra_14003, cust_ind_george) into RentalAgreementCustomer
+
+!insert (office_tucson_east, ra_14004) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_depot3, ra_14004) into RentalOfficeRentalAgreementDrop
+!insert (ra_14004, trailer_az_covered_503) into RentalAgreementVehicle
+!insert (ra_14004, cust_co_northbridge) into RentalAgreementCustomer
+
+!insert (office_national_reservations2, ra_14005) into RentalOfficeRentalAgreementOrigin
+!insert (office_national_reservations2, ra_14005) into RentalOfficeRentalAgreementDrop
+!insert (ra_14005, truck_de_10ft_502) into RentalAgreementVehicle
+!insert (ra_14005, cust_ind_lena) into RentalAgreementCustomer
+
+!insert (office_fairbanks_main, ra_14006) into RentalOfficeRentalAgreementOrigin
+!insert (office_fairbanks_main, ra_14006) into RentalOfficeRentalAgreementDrop
+!insert (ra_14006, truck_ak_24ft_501) into RentalAgreementVehicle
+!insert (ra_14006, cust_ind_george) into RentalAgreementCustomer

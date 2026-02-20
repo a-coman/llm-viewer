@@ -1,0 +1,153 @@
+!new RentalOffice('office_denver_fleet12')
+!office_denver_fleet12.name := 'High Plains Fleet Pool - Denver'
+!office_denver_fleet12.number := 12001
+!office_denver_fleet12.address := '5200 Havana St, Denver, CO 80239'
+
+!new RentalOffice('office_hartford_counter12')
+!office_hartford_counter12.name := 'Hartford Airport Rental Counter'
+!office_hartford_counter12.number := 12002
+!office_hartford_counter12.address := '11 Schoephoester Rd, Windsor Locks, CT 06096'
+
+!new RentalOffice('office_wilmington_drop12')
+!office_wilmington_drop12.name := 'Wilmington Commercial Drop Yard'
+!office_wilmington_drop12.number := 12003
+!office_wilmington_drop12.address := '300 Terminal Ave, Wilmington, DE 19801'
+
+!new RentalOffice('office_anchorage_counter12')
+!office_anchorage_counter12.name := 'Anchorage Downtown Pickup'
+!office_anchorage_counter12.number := 12004
+!office_anchorage_counter12.address := '601 W 5th Ave, Anchorage, AK 99501'
+
+!new Truck('truck_co_24ft_1201')
+!truck_co_24ft_1201.id := 312001
+!truck_co_24ft_1201.registrationState := #CO
+!truck_co_24ft_1201.licensePlateNumber := 'CO-TRK-1201'
+!truck_co_24ft_1201.vehicleTypeCode := #TRUCK24
+!truck_co_24ft_1201.registrationLastMaintenanceDate := Date('2026-06-05')
+!truck_co_24ft_1201.expirationDate := Date('2027-06-30')
+!truck_co_24ft_1201.odometerReading := 158220
+!truck_co_24ft_1201.gasTankCapacity := 64.0
+!truck_co_24ft_1201.workingRadio := true
+!truck_co_24ft_1201.mileage := 8
+
+!new Truck('truck_de_10ft_1202')
+!truck_de_10ft_1202.id := 312002
+!truck_de_10ft_1202.registrationState := #DE
+!truck_de_10ft_1202.licensePlateNumber := 'DE-TRK-1202'
+!truck_de_10ft_1202.vehicleTypeCode := #TRUCK10
+!truck_de_10ft_1202.registrationLastMaintenanceDate := Date('2026-05-19')
+!truck_de_10ft_1202.expirationDate := Date('2027-05-31')
+!truck_de_10ft_1202.odometerReading := 24550
+!truck_de_10ft_1202.gasTankCapacity := 33.0
+!truck_de_10ft_1202.workingRadio := false
+!truck_de_10ft_1202.mileage := 16
+
+!new Vehicle('trailer_co_covered_1203')
+!trailer_co_covered_1203.id := 412003
+!trailer_co_covered_1203.registrationState := #CO
+!trailer_co_covered_1203.licensePlateNumber := 'CO-TRL-1203'
+!trailer_co_covered_1203.vehicleTypeCode := #COVERED_TRAILER
+!trailer_co_covered_1203.registrationLastMaintenanceDate := Date('2026-04-28')
+!trailer_co_covered_1203.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_ak_open_1204')
+!trailer_ak_open_1204.id := 412004
+!trailer_ak_open_1204.registrationState := #AK
+!trailer_ak_open_1204.licensePlateNumber := 'AK-TRL-1204'
+!trailer_ak_open_1204.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ak_open_1204.registrationLastMaintenanceDate := Date('2026-01-22')
+!trailer_ak_open_1204.expirationDate := Date('2026-12-31')
+
+!insert (office_denver_fleet12, truck_co_24ft_1201) into RentalOfficeVehicle
+!insert (office_denver_fleet12, truck_de_10ft_1202) into RentalOfficeVehicle
+!insert (office_denver_fleet12, trailer_co_covered_1203) into RentalOfficeVehicle
+!insert (office_denver_fleet12, trailer_ak_open_1204) into RentalOfficeVehicle
+
+!new Individual('cust_ind_luke12')
+!cust_ind_luke12.name := 'Luke Harrington'
+!cust_ind_luke12.address := '44 Alton Rd, Wilmington, DE 19810'
+!cust_ind_luke12.poorRisk := true
+!cust_ind_luke12.homePhone := '302-555-0138'
+!cust_ind_luke12.driverLicenseState := #DE
+!cust_ind_luke12.driverLicenseNumber := 50122874
+!cust_ind_luke12.driverLicenseExpirationDate := Date('2026-07-31')
+
+!new Individual('cust_ind_sonia12')
+!cust_ind_sonia12.name := 'Sonia Patel'
+!cust_ind_sonia12.address := '19 Garden St, Hartford, CT 06105'
+!cust_ind_sonia12.poorRisk := false
+!cust_ind_sonia12.homePhone := '860-555-0175'
+!cust_ind_sonia12.driverLicenseState := #CT
+!cust_ind_sonia12.driverLicenseNumber := 74201955
+!cust_ind_sonia12.driverLicenseExpirationDate := Date('2028-02-28')
+
+!new Company('cust_co_auroraworks12')
+!cust_co_auroraworks12.name := 'AuroraWorks Industrial Services'
+!cust_co_auroraworks12.address := '9000 E 40th Ave, Denver, CO 80238'
+!cust_co_auroraworks12.poorRisk := false
+!cust_co_auroraworks12.idNumber := 12088011
+
+!new RentalAgreement('ra_1200012')
+!ra_1200012.number := 1200012
+!ra_1200012.rentalDate := Date('2026-02-01')
+!ra_1200012.anticipatedDuration := 2
+!ra_1200012.depositPaid := 500.00
+!ra_1200012.quotedDailyRate := 0.00
+!ra_1200012.quotedRatePerMile := 1.20
+
+!new RentalAgreement('ra_1200013')
+!ra_1200013.number := 1200013
+!ra_1200013.rentalDate := Date('2026-02-03')
+!ra_1200013.anticipatedDuration := 14
+!ra_1200013.depositPaid := 0.00
+!ra_1200013.quotedDailyRate := 55.00
+!ra_1200013.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_1200014')
+!ra_1200014.number := 1200014
+!ra_1200014.rentalDate := Date('2026-02-10')
+!ra_1200014.anticipatedDuration := 1
+!ra_1200014.depositPaid := 200.00
+!ra_1200014.quotedDailyRate := 95.00
+!ra_1200014.quotedRatePerMile := 0.75
+
+!new RentalAgreement('ra_1200015')
+!ra_1200015.number := 1200015
+!ra_1200015.rentalDate := Date('2026-02-14')
+!ra_1200015.anticipatedDuration := 30
+!ra_1200015.depositPaid := 1000.00
+!ra_1200015.quotedDailyRate := 79.00
+!ra_1200015.quotedRatePerMile := 0.40
+
+!new RentalAgreement('ra_1200016')
+!ra_1200016.number := 1200016
+!ra_1200016.rentalDate := Date('2026-03-01')
+!ra_1200016.anticipatedDuration := 3
+!ra_1200016.depositPaid := 0.00
+!ra_1200016.quotedDailyRate := 39.95
+!ra_1200016.quotedRatePerMile := 0.00
+
+!insert (office_anchorage_counter12, ra_1200012) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver_fleet12, ra_1200012) into RentalOfficeRentalAgreementDrop
+!insert (ra_1200012, trailer_ak_open_1204) into RentalAgreementVehicle
+!insert (ra_1200012, cust_ind_sonia12) into RentalAgreementCustomer
+
+!insert (office_hartford_counter12, ra_1200013) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington_drop12, ra_1200013) into RentalOfficeRentalAgreementDrop
+!insert (ra_1200013, truck_de_10ft_1202) into RentalAgreementVehicle
+!insert (ra_1200013, cust_ind_luke12) into RentalAgreementCustomer
+
+!insert (office_denver_fleet12, ra_1200014) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver_fleet12, ra_1200014) into RentalOfficeRentalAgreementDrop
+!insert (ra_1200014, truck_co_24ft_1201) into RentalAgreementVehicle
+!insert (ra_1200014, cust_co_auroraworks12) into RentalAgreementCustomer
+
+!insert (office_denver_fleet12, ra_1200015) into RentalOfficeRentalAgreementOrigin
+!insert (office_anchorage_counter12, ra_1200015) into RentalOfficeRentalAgreementDrop
+!insert (ra_1200015, trailer_co_covered_1203) into RentalAgreementVehicle
+!insert (ra_1200015, cust_co_auroraworks12) into RentalAgreementCustomer
+
+!insert (office_wilmington_drop12, ra_1200016) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_counter12, ra_1200016) into RentalOfficeRentalAgreementDrop
+!insert (ra_1200016, truck_de_10ft_1202) into RentalAgreementVehicle
+!insert (ra_1200016, cust_ind_sonia12) into RentalAgreementCustomer

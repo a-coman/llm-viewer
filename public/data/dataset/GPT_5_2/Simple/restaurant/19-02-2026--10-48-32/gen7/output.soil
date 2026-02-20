@@ -1,0 +1,321 @@
+!new Restaurant('rest9')
+!rest9.name := 'Desert Rose Cafe'
+
+!new Restaurant('rest10')
+!rest10.name := 'Northern Fork'
+
+!new Owner('own21')
+!own21.name := 'Amira Haddad'
+!own21.percentageShares := 40
+!new Owner('own22')
+!own22.name := 'Caleb Morgan'
+!own22.percentageShares := 35
+!new Owner('own23')
+!own23.name := 'Nina Petrov'
+!own23.percentageShares := 25
+
+!new Owner('own24')
+!own24.name := 'Sven Larsson'
+!own24.percentageShares := 100
+
+!insert (rest9, own21) into RestaurantOwner
+!insert (rest9, own22) into RestaurantOwner
+!insert (rest9, own23) into RestaurantOwner
+!insert (rest10, own24) into RestaurantOwner
+
+!new HeadWaiter('hw9')
+!hw9.name := 'Diana Brooks'
+!hw9.dateOfBirth := Date('1981-09-04')
+!hw9.phoneNumber := '555-1100'
+
+!new Waiter('w18')
+!w18.name := 'Kevin Cho'
+!w18.dateOfBirth := Date('1998-05-11')
+!w18.phoneNumber := '555-1101'
+!w18.spokenLanguage := #English
+
+!insert (hw9, w18) into HeadWaiterWaiter
+
+!new HeadWaiter('hw10')
+!hw10.name := 'Fatima Nasser'
+!hw10.dateOfBirth := Date('1986-12-19')
+!hw10.phoneNumber := '555-1200'
+
+!new Waiter('w19')
+!w19.name := 'Isabel Cruz'
+!w19.dateOfBirth := Date('1995-02-07')
+!w19.phoneNumber := '555-1201'
+!w19.spokenLanguage := #Spanish
+
+!new Waiter('w20')
+!w20.name := 'Lorenzo De Luca'
+!w20.dateOfBirth := Date('1992-10-23')
+!w20.phoneNumber := '555-1202'
+!w20.spokenLanguage := #Italian
+
+!insert (hw10, w19) into HeadWaiterWaiter
+!insert (hw10, w20) into HeadWaiterWaiter
+
+!new Chef('chef11')
+!chef11.name := 'Mariam Saleh'
+!chef11.dateOfBirth := Date('1973-03-27')
+!chef11.phoneNumber := '555-1300'
+
+!new Cook('cook17')
+!cook17.name := 'Owen Price'
+!cook17.dateOfBirth := Date('1990-01-16')
+!cook17.phoneNumber := '555-1301'
+!cook17.yearsOfExperience := 5
+
+!new Cook('cook18')
+!cook18.name := 'Katerina Iliou'
+!cook18.dateOfBirth := Date('2000-06-08')
+!cook18.phoneNumber := '555-1302'
+!cook18.yearsOfExperience := 0
+
+!insert (chef11, cook17) into ChefCook
+!insert (chef11, cook18) into ChefCook
+
+!new Chef('chef12')
+!chef12.name := 'Jonah Whitaker'
+!chef12.dateOfBirth := Date('1980-07-30')
+!chef12.phoneNumber := '555-1400'
+
+!new Cook('cook19')
+!cook19.name := 'Pavel Novak'
+!cook19.dateOfBirth := Date('1987-11-12')
+!cook19.phoneNumber := '555-1401'
+!cook19.yearsOfExperience := 12
+
+!insert (chef12, cook19) into ChefCook
+
+!new Allergen('alg9Gluten')
+!alg9Gluten.type := #Gluten
+!new Allergen('alg9Nuts')
+!alg9Nuts.type := #Nuts
+
+!new FoodItem('fiChickpeas')
+!fiChickpeas.number := 701
+!fiChickpeas.description := 'Dried chickpeas'
+!fiChickpeas.purchaseFlag := true
+!fiChickpeas.unit := #Pound
+
+!new FoodItem('fiTahini')
+!fiTahini.number := 702
+!fiTahini.description := 'Tahini paste'
+!fiTahini.purchaseFlag := true
+!fiTahini.unit := #Ounce
+
+!new FoodItem('fiWheatPita')
+!fiWheatPita.number := 703
+!fiWheatPita.description := 'Wheat pita bread'
+!fiWheatPita.purchaseFlag := true
+!fiWheatPita.unit := #Dozen
+
+!new FoodItem('fiWalnuts9')
+!fiWalnuts9.number := 704
+!fiWalnuts9.description := 'Chopped walnuts'
+!fiWalnuts9.purchaseFlag := true
+!fiWalnuts9.unit := #Ounce
+
+!new FoodItem('fiHoney')
+!fiHoney.number := 705
+!fiHoney.description := 'Wildflower honey'
+!fiHoney.purchaseFlag := true
+!fiHoney.unit := #Ounce
+
+!new FoodItem('fiTeaLeaves9')
+!fiTeaLeaves9.number := 706
+!fiTeaLeaves9.description := 'Tea leaves'
+!fiTeaLeaves9.purchaseFlag := true
+!fiTeaLeaves9.unit := #Gram
+
+!new FoodItem('fiMint9')
+!fiMint9.number := 707
+!fiMint9.description := 'Fresh mint'
+!fiMint9.purchaseFlag := true
+!fiMint9.unit := #Gram
+
+!insert (fiWheatPita, alg9Gluten) into FoodItemAllergen
+!insert (fiWalnuts9, alg9Nuts) into FoodItemAllergen
+
+!new MenuItem('miHummus9')
+!miHummus9.description := 'Hummus with warm pita'
+!miHummus9.prepTime := 7.0
+!miHummus9.classification := #Apetizer
+
+!new MenuItem('miFalafel9')
+!miFalafel9.description := 'Falafel platter'
+!miFalafel9.prepTime := 16.0
+!miFalafel9.classification := #Main
+
+!new MenuItem('miMintTea9')
+!miMintTea9.description := 'Mint tea'
+!miMintTea9.prepTime := 3.0
+!miMintTea9.classification := #Beverage
+
+!new MenuItem('miBaklava9')
+!miBaklava9.description := 'Baklava with walnuts and honey'
+!miBaklava9.prepTime := 9.0
+!miBaklava9.classification := #Dessert
+
+!insert (miHummus9, chef11) into MenuItemChef
+!insert (miFalafel9, chef11) into MenuItemChef
+!insert (miMintTea9, chef12) into MenuItemChef
+!insert (miBaklava9, chef12) into MenuItemChef
+
+!insert (miHummus9, fiChickpeas) into MenuItemFoodItem
+!insert (miHummus9, fiTahini) into MenuItemFoodItem
+!insert (miHummus9, fiWheatPita) into MenuItemFoodItem
+
+!insert (miFalafel9, fiChickpeas) into MenuItemFoodItem
+!insert (miFalafel9, fiWheatPita) into MenuItemFoodItem
+
+!insert (miMintTea9, fiTeaLeaves9) into MenuItemFoodItem
+!insert (miMintTea9, fiMint9) into MenuItemFoodItem
+
+!insert (miBaklava9, fiWheatPita) into MenuItemFoodItem
+!insert (miBaklava9, fiWalnuts9) into MenuItemFoodItem
+!insert (miBaklava9, fiHoney) into MenuItemFoodItem
+
+!new RegularCustomer('cust9')
+!cust9.name := 'Erik Johansson'
+!cust9.prefferedLanguage := #English
+
+!new RegularCustomer('cust10')
+!cust10.name := 'Gianna Vitale'
+!cust10.prefferedLanguage := #Italian
+
+!new Individual('res9')
+!res9.time := Time('11:45')
+!res9.date := Date('2026-09-03')
+!res9.numberPeople := 3
+!res9.name := 'Erik Johansson'
+!res9.phoneNumber := '555-1501'
+!res9.number := 11001
+!res9.seating := #Inside
+!res9.smoking := #NonSmoking
+
+!insert (rest10, res9) into RestaurantReservation
+!insert (res9, cust9) into ReservationCustomer
+!insert (res9, w19) into ReservationWaiter
+
+!new Table('tRes9A')
+!tRes9A.number := 16
+!tRes9A.description := 'Three-seat counter section'
+!tRes9A.capacity := 4
+!insert (res9, tRes9A) into ReservationTable
+
+!new ItemOrder('ioRes9_1')
+!ioRes9_1.time := Time('12:00')
+!insert (res9, ioRes9_1) into ReservationItemOrdered
+!insert (ioRes9_1, miHummus9) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes9_2')
+!ioRes9_2.time := Time('12:05')
+!insert (res9, ioRes9_2) into ReservationItemOrdered
+!insert (ioRes9_2, miMintTea9) into ItemOrderMenuItem
+
+!new Individual('res10')
+!res10.time := Time('20:20')
+!res10.date := Date('2026-09-03')
+!res10.numberPeople := 4
+!res10.name := 'Late Walk-In'
+!res10.phoneNumber := '555-1502'
+!res10.number := 11002
+!res10.seating := #Patio
+!res10.smoking := #Smoking
+
+!insert (res10, w18) into ReservationWaiter
+
+!new Table('tRes10A')
+!tRes10A.number := 5
+!tRes10A.description := 'Patio two-top A'
+!tRes10A.capacity := 2
+!insert (res10, tRes10A) into ReservationTable
+
+!new Table('tRes10B')
+!tRes10B.number := 6
+!tRes10B.description := 'Patio two-top B'
+!tRes10B.capacity := 2
+!insert (res10, tRes10B) into ReservationTable
+
+!new ItemOrder('ioRes10_1')
+!ioRes10_1.time := Time('20:35')
+!insert (res10, ioRes10_1) into ReservationItemOrdered
+!insert (ioRes10_1, miFalafel9) into ItemOrderMenuItem
+
+!new BusDriver('bd8')
+!bd8.name := 'Marcos Lima'
+!bd8.dateOfBirth := Date('1970-05-10')
+!bd8.phoneNumber := '555-1600'
+!bd8.driverLicenseNr := 'D-6501207'
+
+!new BusDriver('bd9')
+!bd9.name := 'Elaine Turner'
+!bd9.dateOfBirth := Date('1976-01-29')
+!bd9.phoneNumber := '555-1601'
+!bd9.driverLicenseNr := 'D-8833115'
+
+!new Banquet('banq7')
+!banq7.time := Time('18:00')
+!banq7.date := Date('2026-09-05')
+!banq7.numberPeople := 60
+!banq7.name := 'Gianna Vitale'
+!banq7.phoneNumber := '555-1503'
+!banq7.number := 12001
+!banq7.groupName := 'University Alumni Meetup'
+!banq7.paymentMethod := #Cash
+!banq7.busService := true
+
+!insert (rest9, banq7) into RestaurantReservation
+!insert (banq7, cust10) into ReservationCustomer
+!insert (banq7, w19) into ReservationWaiter
+!insert (banq7, w20) into ReservationWaiter
+!insert (banq7, bd8) into BanquetBusDriver
+!insert (banq7, bd9) into BanquetBusDriver
+
+!new Table('tBanq7A')
+!tBanq7A.number := 401
+!tBanq7A.description := 'Banquet row A'
+!tBanq7A.capacity := 15
+!insert (banq7, tBanq7A) into ReservationTable
+
+!new Table('tBanq7B')
+!tBanq7B.number := 402
+!tBanq7B.description := 'Banquet row B'
+!tBanq7B.capacity := 15
+!insert (banq7, tBanq7B) into ReservationTable
+
+!new Table('tBanq7C')
+!tBanq7C.number := 403
+!tBanq7C.description := 'Banquet row C'
+!tBanq7C.capacity := 15
+!insert (banq7, tBanq7C) into ReservationTable
+
+!new Table('tBanq7D')
+!tBanq7D.number := 404
+!tBanq7D.description := 'Banquet row D'
+!tBanq7D.capacity := 15
+!insert (banq7, tBanq7D) into ReservationTable
+
+!new ItemOrder('ioBanq7_1')
+!ioBanq7_1.time := Time('18:20')
+!insert (banq7, ioBanq7_1) into ReservationItemOrdered
+!insert (ioBanq7_1, miFalafel9) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq7_2')
+!ioBanq7_2.time := Time('18:25')
+!insert (banq7, ioBanq7_2) into ReservationItemOrdered
+!insert (ioBanq7_2, miMintTea9) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq7_3')
+!ioBanq7_3.time := Time('18:50')
+!insert (banq7, ioBanq7_3) into ReservationItemOrdered
+!insert (ioBanq7_3, miBaklava9) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq7')
+!dietReq7.diet := #Vegan
+
+!new ReportedAllergy('repAlg7')
+!repAlg7.allergen := #Gluten

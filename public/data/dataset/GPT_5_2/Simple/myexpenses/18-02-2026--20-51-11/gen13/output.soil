@@ -1,0 +1,69 @@
+!new Currency('curNZD')
+!curNZD.name := 'New Zealand Dollar'
+!curNZD.abbreviation := 'NZD'
+
+!new Currency('curHUF')
+!curHUF.name := 'Hungarian Forint'
+!curHUF.abbreviation := 'HUF'
+
+!new Expense('expJanTaxFiling')
+!expJanTaxFiling.amount := 780.00
+!expJanTaxFiling.startDate := Date('2026-01-18')
+!expJanTaxFiling.endDate := Date('2026-01-18')
+
+!new Bill('billAccountantFee_2026_01_18')
+!billAccountantFee_2026_01_18.amount := 780.00
+!billAccountantFee_2026_01_18.category := 'Professional - Tax filing service'
+!billAccountantFee_2026_01_18.date := Date('2026-01-18')
+!billAccountantFee_2026_01_18.paymentMethod := #CHECK
+!billAccountantFee_2026_01_18.status := #VALIDATED
+
+!insert (expJanTaxFiling, billAccountantFee_2026_01_18) into ExpenseContainsBills
+!insert (billAccountantFee_2026_01_18, curHUF) into BillCurrency
+
+!new Comment('cmtTax1')
+!cmtTax1.text := 'Annual personal tax filing prepared by external accountant; paid by check.'
+!insert (expJanTaxFiling, cmtTax1) into ExpenseComment
+
+
+!new Expense('expJanFamilyEvent')
+!expJanFamilyEvent.amount := 346.75
+!expJanFamilyEvent.startDate := Date('2026-01-24')
+!expJanFamilyEvent.endDate := Date('2026-01-25')
+
+!new Bill('billVenueDeposit_2026_01_24')
+!billVenueDeposit_2026_01_24.amount := 120.00
+!billVenueDeposit_2026_01_24.category := 'Events - Venue deposit'
+!billVenueDeposit_2026_01_24.date := Date('2026-01-24')
+!billVenueDeposit_2026_01_24.paymentMethod := #CREDIT_CARD
+!billVenueDeposit_2026_01_24.status := #PENDING
+
+!new Bill('billDecorations_2026_01_24')
+!billDecorations_2026_01_24.amount := 56.75
+!billDecorations_2026_01_24.category := 'Events - Decorations'
+!billDecorations_2026_01_24.date := Date('2026-01-24')
+!billDecorations_2026_01_24.paymentMethod := #CASH
+!billDecorations_2026_01_24.status := #VERIFIED
+
+!new Bill('billCateringFinal_2026_01_25')
+!billCateringFinal_2026_01_25.amount := 170.00
+!billCateringFinal_2026_01_25.category := 'Events - Catering'
+!billCateringFinal_2026_01_25.date := Date('2026-01-25')
+!billCateringFinal_2026_01_25.paymentMethod := #CREDIT_CARD
+!billCateringFinal_2026_01_25.status := #VALIDATED
+
+!insert (expJanFamilyEvent, billVenueDeposit_2026_01_24) into ExpenseContainsBills
+!insert (expJanFamilyEvent, billDecorations_2026_01_24) into ExpenseContainsBills
+!insert (expJanFamilyEvent, billCateringFinal_2026_01_25) into ExpenseContainsBills
+
+!insert (billVenueDeposit_2026_01_24, curNZD) into BillCurrency
+!insert (billDecorations_2026_01_24, curNZD) into BillCurrency
+!insert (billCateringFinal_2026_01_25, curNZD) into BillCurrency
+
+!new Comment('cmtEvent1')
+!cmtEvent1.text := 'Family event costs split across deposit, decorations, and final catering bill.'
+!new Comment('cmtEvent2')
+!cmtEvent2.text := 'Venue deposit is pending confirmation from the event center.'
+
+!insert (expJanFamilyEvent, cmtEvent1) into ExpenseComment
+!insert (expJanFamilyEvent, cmtEvent2) into ExpenseComment

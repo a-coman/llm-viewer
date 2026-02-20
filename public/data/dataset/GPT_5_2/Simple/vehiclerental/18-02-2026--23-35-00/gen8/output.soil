@@ -1,0 +1,153 @@
+!new RentalOffice('office_honolulu_temp')
+!office_honolulu_temp.name := 'Island Freight Rentals - Temporary Counter'
+!office_honolulu_temp.number := 1001
+!office_honolulu_temp.address := '300 Rodgers Blvd, Honolulu, HI 96819'
+
+!new RentalOffice('office_phoenix_west')
+!office_phoenix_west.name := 'Phoenix West Truck Rental'
+!office_phoenix_west.number := 1002
+!office_phoenix_west.address := '5151 W Van Buren St, Phoenix, AZ 85043'
+
+!new RentalOffice('office_flagstaff_return')
+!office_flagstaff_return.name := 'Flagstaff Return Yard (After-Hours)'
+!office_flagstaff_return.number := 1003
+!office_flagstaff_return.address := '2200 N Fort Valley Rd, Flagstaff, AZ 86001'
+
+!new RentalOffice('office_tucson_micro')
+!office_tucson_micro.name := 'Tucson Micro Depot'
+!office_tucson_micro.number := 1004
+!office_tucson_micro.address := '1310 E Ajo Way, Tucson, AZ 85713'
+
+!new Truck('truck_az_24ft_90')
+!truck_az_24ft_90.id := 30990
+!truck_az_24ft_90.registrationState := #AZ
+!truck_az_24ft_90.licensePlateNumber := 'AZ-TRK-4908'
+!truck_az_24ft_90.vehicleTypeCode := #TRUCK24
+!truck_az_24ft_90.registrationLastMaintenanceDate := Date('2026-02-14')
+!truck_az_24ft_90.expirationDate := Date('2027-02-28')
+!truck_az_24ft_90.odometerReading := 45120
+!truck_az_24ft_90.gasTankCapacity := 63.5
+!truck_az_24ft_90.workingRadio := true
+!truck_az_24ft_90.mileage := 9
+
+!new Truck('truck_az_10ft_91')
+!truck_az_10ft_91.id := 30991
+!truck_az_10ft_91.registrationState := #AZ
+!truck_az_10ft_91.licensePlateNumber := 'AZ-TRK-7713'
+!truck_az_10ft_91.vehicleTypeCode := #TRUCK10
+!truck_az_10ft_91.registrationLastMaintenanceDate := Date('2026-03-11')
+!truck_az_10ft_91.expirationDate := Date('2026-12-31')
+!truck_az_10ft_91.odometerReading := 9055
+!truck_az_10ft_91.gasTankCapacity := 31.0
+!truck_az_10ft_91.workingRadio := false
+!truck_az_10ft_91.mileage := 17
+
+!new Vehicle('trailer_az_covered_92')
+!trailer_az_covered_92.id := 31992
+!trailer_az_covered_92.registrationState := #AZ
+!trailer_az_covered_92.licensePlateNumber := 'AZ-TRL-0082'
+!trailer_az_covered_92.vehicleTypeCode := #COVERED_TRAILER
+!trailer_az_covered_92.registrationLastMaintenanceDate := Date('2026-01-05')
+!trailer_az_covered_92.expirationDate := Date('2027-01-31')
+
+!new Vehicle('trailer_az_open_93')
+!trailer_az_open_93.id := 31993
+!trailer_az_open_93.registrationState := #AZ
+!trailer_az_open_93.licensePlateNumber := 'AZ-TRL-0194'
+!trailer_az_open_93.vehicleTypeCode := #OPEN_TRAILER
+!trailer_az_open_93.registrationLastMaintenanceDate := Date('2025-10-29')
+!trailer_az_open_93.expirationDate := Date('2026-10-31')
+
+!insert (office_phoenix_west, truck_az_24ft_90) into RentalOfficeVehicle
+!insert (office_tucson_micro, truck_az_10ft_91) into RentalOfficeVehicle
+!insert (office_tucson_micro, trailer_az_covered_92) into RentalOfficeVehicle
+!insert (office_phoenix_west, trailer_az_open_93) into RentalOfficeVehicle
+
+!new Individual('cust_ind_kyle')
+!cust_ind_kyle.name := 'Kyle Sanderson'
+!cust_ind_kyle.address := '742 W Roosevelt St, Phoenix, AZ 85007'
+!cust_ind_kyle.poorRisk := false
+!cust_ind_kyle.homePhone := '602-555-0126'
+!cust_ind_kyle.driverLicenseState := #AZ
+!cust_ind_kyle.driverLicenseNumber := 70018422
+!cust_ind_kyle.driverLicenseExpirationDate := Date('2029-03-20')
+
+!new Individual('cust_ind_mina')
+!cust_ind_mina.name := 'Mina Park'
+!cust_ind_mina.address := '3601 E 7th St, Tucson, AZ 85716'
+!cust_ind_mina.poorRisk := false
+!cust_ind_mina.homePhone := '520-555-0159'
+!cust_ind_mina.driverLicenseState := #AZ
+!cust_ind_mina.driverLicenseNumber := 61390211
+!cust_ind_mina.driverLicenseExpirationDate := Date('2027-08-31')
+
+!new Company('cust_co_canyon')
+!cust_co_canyon.name := 'Canyon Solar Installations'
+!cust_co_canyon.address := '2150 S Country Club Rd, Tucson, AZ 85713'
+!cust_co_canyon.poorRisk := true
+!cust_co_canyon.idNumber := 44001987
+
+!new RentalAgreement('ra_81001')
+!ra_81001.number := 81001
+!ra_81001.rentalDate := Date('2026-08-01')
+!ra_81001.anticipatedDuration := 2
+!ra_81001.depositPaid := 400.00
+!ra_81001.quotedDailyRate := 179.00
+!ra_81001.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_81002')
+!ra_81002.number := 81002
+!ra_81002.rentalDate := Date('2026-08-03')
+!ra_81002.anticipatedDuration := 30
+!ra_81002.depositPaid := 0.00
+!ra_81002.quotedDailyRate := 62.00
+!ra_81002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_81003')
+!ra_81003.number := 81003
+!ra_81003.rentalDate := Date('2026-08-05')
+!ra_81003.anticipatedDuration := 1
+!ra_81003.depositPaid := 150.00
+!ra_81003.quotedDailyRate := 49.00
+!ra_81003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_81004')
+!ra_81004.number := 81004
+!ra_81004.rentalDate := Date('2026-08-06')
+!ra_81004.anticipatedDuration := 6
+!ra_81004.depositPaid := 600.00
+!ra_81004.quotedDailyRate := 139.00
+!ra_81004.quotedRatePerMile := 0.78
+
+!new RentalAgreement('ra_81005')
+!ra_81005.number := 81005
+!ra_81005.rentalDate := Date('2026-08-10')
+!ra_81005.anticipatedDuration := 3
+!ra_81005.depositPaid := 0.00
+!ra_81005.quotedDailyRate := 29.95
+!ra_81005.quotedRatePerMile := 0.00
+
+!insert (office_phoenix_west, ra_81001) into RentalOfficeRentalAgreementOrigin
+!insert (office_flagstaff_return, ra_81001) into RentalOfficeRentalAgreementDrop
+!insert (ra_81001, truck_az_24ft_90) into RentalAgreementVehicle
+!insert (ra_81001, cust_ind_kyle) into RentalAgreementCustomer
+
+!insert (office_tucson_micro, ra_81002) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson_micro, ra_81002) into RentalOfficeRentalAgreementDrop
+!insert (ra_81002, trailer_az_covered_92) into RentalAgreementVehicle
+!insert (ra_81002, cust_co_canyon) into RentalAgreementCustomer
+
+!insert (office_tucson_micro, ra_81003) into RentalOfficeRentalAgreementOrigin
+!insert (office_phoenix_west, ra_81003) into RentalOfficeRentalAgreementDrop
+!insert (ra_81003, truck_az_10ft_91) into RentalAgreementVehicle
+!insert (ra_81003, cust_ind_mina) into RentalAgreementCustomer
+
+!insert (office_phoenix_west, ra_81004) into RentalOfficeRentalAgreementOrigin
+!insert (office_phoenix_west, ra_81004) into RentalOfficeRentalAgreementDrop
+!insert (ra_81004, truck_az_24ft_90) into RentalAgreementVehicle
+!insert (ra_81004, cust_co_canyon) into RentalAgreementCustomer
+
+!insert (office_phoenix_west, ra_81005) into RentalOfficeRentalAgreementOrigin
+!insert (office_honolulu_temp, ra_81005) into RentalOfficeRentalAgreementDrop
+!insert (ra_81005, trailer_az_open_93) into RentalAgreementVehicle
+!insert (ra_81005, cust_ind_kyle) into RentalAgreementCustomer

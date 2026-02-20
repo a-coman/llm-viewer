@@ -1,0 +1,188 @@
+!new AddressBook('ab7')
+
+!new Company('lumenFestOrg')
+!lumenFestOrg.name := 'LumenFest Organization'
+!lumenFestOrg.phone := '+1-310-555-0800'
+!lumenFestOrg.website := 'https://lumenfest.example'
+!lumenFestOrg.email := 'info@lumenfest.example'
+!lumenFestOrg.industry := 'Events'
+
+!new Company('lumenFestTickets')
+!lumenFestTickets.name := 'LumenFest Ticketing Services'
+!lumenFestTickets.phone := '+1-310-555-0811'
+!lumenFestTickets.website := 'https://tickets.lumenfest.example'
+!lumenFestTickets.email := 'support@tickets.lumenfest.example'
+!lumenFestTickets.industry := 'Ticketing'
+
+!new Company('cityArena')
+!cityArena.name := 'City Arena'
+!cityArena.phone := '+1-213-555-0820'
+!cityArena.website := 'https://cityarena.example'
+!cityArena.email := 'bookings@cityarena.example'
+!cityArena.industry := 'Venue Management'
+
+!new Company('auroraMedia')
+!auroraMedia.name := 'Aurora Media Studio'
+!auroraMedia.phone := '+1-424-555-0833'
+!auroraMedia.website := 'https://auroramedia.example'
+!auroraMedia.email := 'press@auroramedia.example'
+!auroraMedia.industry := 'Media'
+
+!new Person('kevinStone')
+!kevinStone.name := 'Kevin Stone'
+!kevinStone.phone := '+1-310-555-0801'
+!kevinStone.website := ''
+!kevinStone.email := 'kevin.stone@lumenfest.example'
+!kevinStone.title := 'Festival Director'
+
+!new Person('sophiaRamos')
+!sophiaRamos.name := 'Sophia Ramos'
+!sophiaRamos.phone := '+1-310-555-0802'
+!sophiaRamos.website := ''
+!sophiaRamos.email := 'sophia.ramos@lumenfest.example'
+!sophiaRamos.title := 'Sponsorship Manager'
+
+!new Person('liamOConnell')
+!liamOConnell.name := 'Liam OConnell'
+!liamOConnell.phone := '+1-213-555-0824'
+!liamOConnell.website := ''
+!liamOConnell.email := 'liam.oconnell@cityarena.example'
+!liamOConnell.title := 'Stage Technician'
+
+!new Person('hanaSuzuki')
+!hanaSuzuki.name := 'Hana Suzuki'
+!hanaSuzuki.phone := '+1-424-555-0838'
+!hanaSuzuki.website := 'https://hanasuzuki.example'
+!hanaSuzuki.email := 'hana.suzuki@auroramedia.example'
+!hanaSuzuki.title := 'PR Lead'
+
+!insert (ab7, lumenFestOrg) into AddressBookMadeOfContact
+!insert (ab7, lumenFestTickets) into AddressBookMadeOfContact
+!insert (ab7, cityArena) into AddressBookMadeOfContact
+!insert (ab7, auroraMedia) into AddressBookMadeOfContact
+!insert (ab7, kevinStone) into AddressBookMadeOfContact
+!insert (ab7, sophiaRamos) into AddressBookMadeOfContact
+!insert (ab7, liamOConnell) into AddressBookMadeOfContact
+!insert (ab7, hanaSuzuki) into AddressBookMadeOfContact
+
+!new Address('addrLumenFestHQ')
+!addrLumenFestHQ.city := 'Los Angeles'
+!addrLumenFestHQ.street := 'Sunset Blvd'
+!addrLumenFestHQ.houseNr := '910'
+
+!new Address('addrTicketingOffice')
+!addrTicketingOffice.city := 'Los Angeles'
+!addrTicketingOffice.street := 'Wilshire Blvd'
+!addrTicketingOffice.houseNr := '1200'
+
+!new Address('addrCityArena')
+!addrCityArena.city := 'Los Angeles'
+!addrCityArena.street := 'Figueroa St'
+!addrCityArena.houseNr := '500'
+
+!new Address('addrAuroraStudio')
+!addrAuroraStudio.city := 'Culver City'
+!addrAuroraStudio.street := 'Washington Blvd'
+!addrAuroraStudio.houseNr := '3850'
+
+!new Address('addrKevinMailing')
+!addrKevinMailing.city := 'West Hollywood'
+!addrKevinMailing.street := 'Santa Monica Blvd'
+!addrKevinMailing.houseNr := '777'
+
+!insert (lumenFestOrg, addrLumenFestHQ) into ContactContainsAddress
+!insert (lumenFestTickets, addrTicketingOffice) into ContactContainsAddress
+!insert (cityArena, addrCityArena) into ContactContainsAddress
+!insert (auroraMedia, addrAuroraStudio) into ContactContainsAddress
+!insert (kevinStone, addrKevinMailing) into ContactContainsAddress
+
+!new Note('nOrgEmailContract')
+!nOrgEmailContract.author := 'Legal Desk'
+!nOrgEmailContract.time := Date('2026-02-15 10:30')
+!nOrgEmailContract.type := #EMAIL
+!nOrgEmailContract.comment := 'Sent updated venue contract draft with revised load-in schedule and insurance clause.'
+
+!new Note('nKevinMeetingRunOfShow')
+!nKevinMeetingRunOfShow.author := 'Kevin Stone'
+!nKevinMeetingRunOfShow.time := Date('2026-02-16 09:00')
+!nKevinMeetingRunOfShow.type := #MEETING
+!nKevinMeetingRunOfShow.comment := 'Run-of-show review with production team; confirmed set times and changeover buffer.'
+
+!new Note('nSophiaCallSponsor')
+!nSophiaCallSponsor.author := 'Sophia Ramos'
+!nSophiaCallSponsor.time := Date('2026-02-16 13:45')
+!nSophiaCallSponsor.type := #CALL
+!nSophiaCallSponsor.comment := 'Sponsor call: confirmed on-site booth size and social media deliverables for gold package.'
+
+!new Note('nHanaEmailPress')
+!nHanaEmailPress.author := 'Hana Suzuki'
+!nHanaEmailPress.time := Date('2026-02-17 08:20')
+!nHanaEmailPress.type := #EMAIL
+!nHanaEmailPress.comment := 'Distributed press credentials guidelines and embargo details to media list.'
+
+!new Note('nLiamCallRigging')
+!nLiamCallRigging.author := 'Liam OConnell'
+!nLiamCallRigging.time := Date('2026-02-17 16:05')
+!nLiamCallRigging.type := #CALL
+!nLiamCallRigging.comment := 'Coordinated rigging points with external vendor; verified weight limits and inspection time.'
+
+!insert (lumenFestOrg, nOrgEmailContract) into ContactContainsNote
+!insert (kevinStone, nKevinMeetingRunOfShow) into ContactContainsNote
+!insert (sophiaRamos, nSophiaCallSponsor) into ContactContainsNote
+!insert (auroraMedia, nHanaEmailPress) into ContactContainsNote
+!insert (liamOConnell, nLiamCallRigging) into ContactContainsNote
+
+!new Relationship('relOrgSubdivisionTicketing')
+!relOrgSubdivisionTicketing.type := #SUBDIVISION
+!insert (lumenFestOrg, relOrgSubdivisionTicketing) into ContactToRelationship
+!insert (relOrgSubdivisionTicketing, lumenFestTickets) into RelationshipToContact
+
+!new Relationship('relKevinEmployeeOfOrg')
+!relKevinEmployeeOfOrg.type := #EMPLOYEE
+!insert (kevinStone, relKevinEmployeeOfOrg) into ContactToRelationship
+!insert (relKevinEmployeeOfOrg, lumenFestOrg) into RelationshipToContact
+
+!new Relationship('relSophiaEmployeeOfOrg')
+!relSophiaEmployeeOfOrg.type := #EMPLOYEE
+!insert (sophiaRamos, relSophiaEmployeeOfOrg) into ContactToRelationship
+!insert (relSophiaEmployeeOfOrg, lumenFestOrg) into RelationshipToContact
+
+!new Relationship('relSophiaBossIsKevin')
+!relSophiaBossIsKevin.type := #BOSS
+!insert (sophiaRamos, relSophiaBossIsKevin) into ContactToRelationship
+!insert (relSophiaBossIsKevin, kevinStone) into RelationshipToContact
+
+!new Relationship('relKevinCoworkerSophia')
+!relKevinCoworkerSophia.type := #COWORKER
+!insert (kevinStone, relKevinCoworkerSophia) into ContactToRelationship
+!insert (relKevinCoworkerSophia, sophiaRamos) into RelationshipToContact
+
+!new Relationship('relLiamEmployeeOfArena')
+!relLiamEmployeeOfArena.type := #EMPLOYEE
+!insert (liamOConnell, relLiamEmployeeOfArena) into ContactToRelationship
+!insert (relLiamEmployeeOfArena, cityArena) into RelationshipToContact
+
+!new Relationship('relLiamBossIsKevin')
+!relLiamBossIsKevin.type := #BOSS
+!insert (liamOConnell, relLiamBossIsKevin) into ContactToRelationship
+!insert (relLiamBossIsKevin, kevinStone) into RelationshipToContact
+
+!new Relationship('relHanaEmployeeOfAurora')
+!relHanaEmployeeOfAurora.type := #EMPLOYEE
+!insert (hanaSuzuki, relHanaEmployeeOfAurora) into ContactToRelationship
+!insert (relHanaEmployeeOfAurora, auroraMedia) into RelationshipToContact
+
+!new Relationship('relAuroraCoworkerOrg')
+!relAuroraCoworkerOrg.type := #COWORKER
+!insert (auroraMedia, relAuroraCoworkerOrg) into ContactToRelationship
+!insert (relAuroraCoworkerOrg, lumenFestOrg) into RelationshipToContact
+
+!new Relationship('relOrgCoworkerArena')
+!relOrgCoworkerArena.type := #COWORKER
+!insert (lumenFestOrg, relOrgCoworkerArena) into ContactToRelationship
+!insert (relOrgCoworkerArena, cityArena) into RelationshipToContact
+
+!new Relationship('relTicketingCoworkerAurora')
+!relTicketingCoworkerAurora.type := #COWORKER
+!insert (lumenFestTickets, relTicketingCoworkerAurora) into ContactToRelationship
+!insert (relTicketingCoworkerAurora, auroraMedia) into RelationshipToContact

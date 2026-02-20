@@ -1,0 +1,92 @@
+!new Bank('bankFI1')
+!bankFI1.country := 'Finland'
+!bankFI1.name := 'Aurora Cooperative Bank'
+!bankFI1.bic := 'AURAFIHHXXX'
+
+!new Bank('bankGR1')
+!bankGR1.country := 'Greece'
+!bankGR1.name := 'Aegean Trust Bank'
+!bankGR1.bic := 'AEGAGRAAXXX'
+
+!new Person('w1')
+!w1.firstName := 'Emilia'
+!w1.lastName := 'Korhonen'
+!w1.age := 18
+
+!new Person('w2')
+!w2.firstName := 'Mikko'
+!w2.lastName := 'Laine'
+!w2.age := 60
+
+!new Person('w3')
+!w3.firstName := 'Sanni'
+!w3.lastName := 'Niemi'
+!w3.age := 27
+
+!new Person('w4')
+!w4.firstName := 'Nikos'
+!w4.lastName := 'Pappas'
+!w4.age := 35
+
+!new Person('w5')
+!w5.firstName := 'Eleni'
+!w5.lastName := 'Pappas'
+!w5.age := 14
+
+!new Person('w6')
+!w6.firstName := 'Oskari'
+!w6.lastName := 'Laine'
+!w6.age := 16
+
+!new Account('accFI_A')
+!accFI_A.iban := 'FI2112345600000785'
+!accFI_A.balance := 12
+
+!new Account('accFI_B')
+!accFI_B.iban := 'FI4250001510000023'
+!accFI_B.balance := 9800
+
+!new Account('accGR_A')
+!accGR_A.iban := 'GR1601101250000000012300695'
+!accGR_A.balance := 0
+
+!new Account('accGR_B')
+!accGR_B.iban := 'GR4701401320000000013569874'
+!accGR_B.balance := 430
+
+!new Account('accGR_C')
+!accGR_C.iban := 'GR5808100010000001234567890'
+!accGR_C.balance := 500000
+
+!insert (bankFI1, accFI_A) into AccountOfBanks
+!insert (bankFI1, accFI_B) into AccountOfBanks
+!insert (bankGR1, accGR_A) into AccountOfBanks
+!insert (bankGR1, accGR_B) into AccountOfBanks
+!insert (bankGR1, accGR_C) into AccountOfBanks
+
+!insert (w1, accFI_A) into Ownership
+
+!insert (w2, accFI_B) into Ownership
+!insert (w3, accFI_B) into Ownership
+
+!insert (w2, accGR_A) into Ownership
+
+!insert (w4, accGR_B) into Ownership
+!insert (w2, accGR_B) into Ownership
+
+!insert (w3, accGR_C) into Ownership
+
+!insert (w1, accFI_A) into Use
+!insert (w5, accFI_A) into Use
+
+!insert (w2, accFI_B) into Use
+!insert (w3, accFI_B) into Use
+!insert (w6, accFI_B) into Use
+!insert (w4, accFI_B) into Use
+
+!insert (w2, accGR_A) into Use
+!insert (w5, accGR_A) into Use
+
+!insert (w2, accGR_B) into Use
+!insert (w4, accGR_B) into Use
+!insert (w1, accGR_B) into Use

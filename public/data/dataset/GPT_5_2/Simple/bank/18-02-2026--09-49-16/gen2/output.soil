@@ -1,0 +1,69 @@
+!new Bank('bankES1')
+!bankES1.country := 'Spain'
+!bankES1.name := 'Costa Sur Banco'
+!bankES1.bic := 'CSBKESMMXXX'
+
+!new Person('pa')
+!pa.firstName := 'Diego'
+!pa.lastName := 'Martinez'
+!pa.age := 23
+
+!new Person('pb')
+!pb.firstName := 'Carmen'
+!pb.lastName := 'Ruiz'
+!pb.age := 67
+
+!new Person('pc')
+!pc.firstName := 'Elena'
+!pc.lastName := 'Santos'
+!pc.age := 45
+
+!new Person('pd')
+!pd.firstName := 'Nuria'
+!pd.lastName := 'Martinez'
+!pd.age := 15
+
+!new Person('pe')
+!pe.firstName := 'Hugo'
+!pe.lastName := 'Santos'
+!pe.age := 12
+
+!new Person('pf')
+!pf.firstName := 'Adrian'
+!pf.lastName := 'Lopez'
+!pf.age := 19
+
+!new Account('accA')
+!accA.iban := 'ES9121000418450200051332'
+!accA.balance := 3400
+
+!new Account('accB')
+!accB.iban := 'ES6600491500051234567892'
+!accB.balance := 75
+
+!new Account('accC')
+!accC.iban := 'ES2301820001300000123456'
+!accC.balance := 120000
+
+!insert (bankES1, accA) into AccountOfBanks
+!insert (bankES1, accB) into AccountOfBanks
+!insert (bankES1, accC) into AccountOfBanks
+
+!insert (pa, accA) into Ownership
+
+!insert (pa, accB) into Ownership
+!insert (pc, accB) into Ownership
+
+!insert (pb, accC) into Ownership
+!insert (pf, accC) into Ownership
+
+!insert (pa, accA) into Use
+!insert (pd, accA) into Use
+
+!insert (pa, accB) into Use
+!insert (pc, accB) into Use
+!insert (pe, accB) into Use
+
+!insert (pb, accC) into Use
+!insert (pf, accC) into Use
+!insert (pc, accC) into Use

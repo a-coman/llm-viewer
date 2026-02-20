@@ -1,0 +1,78 @@
+!new Currency('curBRL')
+!curBRL.name := 'Brazilian Real'
+!curBRL.abbreviation := 'BRL'
+
+!new Currency('curSGD')
+!curSGD.name := 'Singapore Dollar'
+!curSGD.abbreviation := 'SGD'
+
+!new Expense('expFebHomeRenovation')
+!expFebHomeRenovation.amount := 2175.00
+!expFebHomeRenovation.startDate := Date('2026-02-01')
+!expFebHomeRenovation.endDate := Date('2026-02-28')
+
+!new Bill('billPaintAndPrimer_2026_02_03')
+!billPaintAndPrimer_2026_02_03.amount := 350.00
+!billPaintAndPrimer_2026_02_03.category := 'Home - Paint and primer'
+!billPaintAndPrimer_2026_02_03.date := Date('2026-02-03')
+!billPaintAndPrimer_2026_02_03.paymentMethod := #CREDIT_CARD
+!billPaintAndPrimer_2026_02_03.status := #VALIDATED
+
+!new Bill('billFlooringMaterials_2026_02_05')
+!billFlooringMaterials_2026_02_05.amount := 1200.00
+!billFlooringMaterials_2026_02_05.category := 'Home - Flooring materials'
+!billFlooringMaterials_2026_02_05.date := Date('2026-02-05')
+!billFlooringMaterials_2026_02_05.paymentMethod := #CHECK
+!billFlooringMaterials_2026_02_05.status := #PENDING
+
+!new Bill('billHardwareFasteners_2026_02_06')
+!billHardwareFasteners_2026_02_06.amount := 90.00
+!billHardwareFasteners_2026_02_06.category := 'Home - Hardware and fasteners'
+!billHardwareFasteners_2026_02_06.date := Date('2026-02-06')
+!billHardwareFasteners_2026_02_06.paymentMethod := #CASH
+!billHardwareFasteners_2026_02_06.status := #VERIFIED
+
+!new Bill('billToolRental_2026_02_07')
+!billToolRental_2026_02_07.amount := 180.00
+!billToolRental_2026_02_07.category := 'Home - Tool rental'
+!billToolRental_2026_02_07.date := Date('2026-02-07')
+!billToolRental_2026_02_07.paymentMethod := #CREDIT_CARD
+!billToolRental_2026_02_07.status := #VERIFIED
+
+!new Bill('billPlumbingFix_2026_02_10')
+!billPlumbingFix_2026_02_10.amount := 220.00
+!billPlumbingFix_2026_02_10.category := 'Home - Plumbing repair'
+!billPlumbingFix_2026_02_10.date := Date('2026-02-10')
+!billPlumbingFix_2026_02_10.paymentMethod := #CASH
+!billPlumbingFix_2026_02_10.status := #VALIDATED
+
+!new Bill('billElectricianVisit_2026_02_14')
+!billElectricianVisit_2026_02_14.amount := 60.00
+!billElectricianVisit_2026_02_14.category := 'Home - Electrician visit fee'
+!billElectricianVisit_2026_02_14.date := Date('2026-02-14')
+!billElectricianVisit_2026_02_14.paymentMethod := #CREDIT_CARD
+!billElectricianVisit_2026_02_14.status := #REFUNDED
+
+!new Bill('billSecondTripSupplies_2026_02_21')
+!billSecondTripSupplies_2026_02_21.amount := 75.00
+!billSecondTripSupplies_2026_02_21.category := 'Home - Additional supplies'
+!billSecondTripSupplies_2026_02_21.date := Date('2026-02-21')
+!billSecondTripSupplies_2026_02_21.paymentMethod := #CHECK
+!billSecondTripSupplies_2026_02_21.status := #DRAFT
+
+!insert (expFebHomeRenovation, billPaintAndPrimer_2026_02_03) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billFlooringMaterials_2026_02_05) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billHardwareFasteners_2026_02_06) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billToolRental_2026_02_07) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billPlumbingFix_2026_02_10) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billElectricianVisit_2026_02_14) into ExpenseContainsBills
+!insert (expFebHomeRenovation, billSecondTripSupplies_2026_02_21) into ExpenseContainsBills
+
+!insert (billPaintAndPrimer_2026_02_03, curBRL) into BillCurrency
+!insert (billFlooringMaterials_2026_02_05, curBRL) into BillCurrency
+!insert (billHardwareFasteners_2026_02_06, curBRL) into BillCurrency
+!insert (billPlumbingFix_2026_02_10, curBRL) into BillCurrency
+
+!insert (billToolRental_2026_02_07, curSGD) into BillCurrency
+!insert (billElectricianVisit_2026_02_14, curSGD) into BillCurrency
+!insert (billSecondTripSupplies_2026_02_21, curSGD) into BillCurrency

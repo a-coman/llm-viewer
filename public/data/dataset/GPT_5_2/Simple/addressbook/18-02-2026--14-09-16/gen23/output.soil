@@ -1,0 +1,161 @@
+!new AddressBook('ab24')
+
+!new Company('kestrelMarine')
+!kestrelMarine.name := 'Kestrel Marine Services'
+!kestrelMarine.phone := '+1-206-555-2400'
+!kestrelMarine.website := 'https://kestrelmarine.example'
+!kestrelMarine.email := 'operations@kestrelmarine.example'
+!kestrelMarine.industry := 'Maritime Services'
+
+!new Company('kestrelShipyard')
+!kestrelShipyard.name := 'Kestrel Shipyard'
+!kestrelShipyard.phone := '+1-206-555-2405'
+!kestrelShipyard.website := ''
+!kestrelShipyard.email := 'yard@kestrelmarine.example'
+!kestrelShipyard.industry := 'Ship Repair'
+
+!new Company('polarInsurance')
+!polarInsurance.name := 'Polar Harbor Insurance'
+!polarInsurance.phone := '+1-415-555-2410'
+!polarInsurance.website := 'https://polarinsurance.example'
+!polarInsurance.email := 'marine@polarinsurance.example'
+!polarInsurance.industry := 'Insurance'
+
+!new Person('lenaOrtiz')
+!lenaOrtiz.name := 'Lena Ortiz'
+!lenaOrtiz.phone := '+1-206-555-2421'
+!lenaOrtiz.website := ''
+!lenaOrtiz.email := 'lena.ortiz@kestrelmarine.example'
+!lenaOrtiz.title := 'Harbor Captain'
+
+!new Person('milesGrant')
+!milesGrant.name := 'Miles Grant'
+!milesGrant.phone := '+1-206-555-2422'
+!milesGrant.website := 'https://milesgrant.example'
+!milesGrant.email := 'miles.grant@kestrelmarine.example'
+!milesGrant.title := 'Marine Surveyor'
+
+!new Person('junPark')
+!junPark.name := 'Jun Park'
+!junPark.phone := '+1-206-555-2423'
+!junPark.website := ''
+!junPark.email := 'jun.park@kestrelmarine.example'
+!junPark.title := 'Dockmaster'
+
+!new Person('tariqHassan')
+!tariqHassan.name := 'Tariq Hassan'
+!tariqHassan.phone := '+1-415-555-2424'
+!tariqHassan.website := ''
+!tariqHassan.email := 'tariq.hassan@polarinsurance.example'
+!tariqHassan.title := 'Marine Underwriter'
+
+!insert (ab24, kestrelMarine) into AddressBookMadeOfContact
+!insert (ab24, kestrelShipyard) into AddressBookMadeOfContact
+!insert (ab24, polarInsurance) into AddressBookMadeOfContact
+!insert (ab24, lenaOrtiz) into AddressBookMadeOfContact
+!insert (ab24, milesGrant) into AddressBookMadeOfContact
+!insert (ab24, junPark) into AddressBookMadeOfContact
+!insert (ab24, tariqHassan) into AddressBookMadeOfContact
+
+!new Address('addrKestrelPierOffice')
+!addrKestrelPierOffice.city := 'Seattle'
+!addrKestrelPierOffice.street := 'Alaskan Way'
+!addrKestrelPierOffice.houseNr := '1700'
+
+!new Address('addrShipyardGate')
+!addrShipyardGate.city := 'Seattle'
+!addrShipyardGate.street := 'Harbor Island Dr'
+!addrShipyardGate.houseNr := '55'
+
+!new Address('addrPolarSF')
+!addrPolarSF.city := 'San Francisco'
+!addrPolarSF.street := 'California St'
+!addrPolarSF.houseNr := '600'
+
+!new Address('addrLenaHome')
+!addrLenaHome.city := 'Seattle'
+!addrLenaHome.street := 'Queen Anne Ave N'
+!addrLenaHome.houseNr := '140'
+
+!new Address('addrJunHome')
+!addrJunHome.city := 'Seattle'
+!addrJunHome.street := '15th Ave W'
+!addrJunHome.houseNr := '820'
+
+!insert (kestrelMarine, addrKestrelPierOffice) into ContactContainsAddress
+!insert (kestrelShipyard, addrShipyardGate) into ContactContainsAddress
+!insert (polarInsurance, addrPolarSF) into ContactContainsAddress
+!insert (lenaOrtiz, addrLenaHome) into ContactContainsAddress
+!insert (junPark, addrJunHome) into ContactContainsAddress
+
+!new Note('nShipyardMeetingDockPlan')
+!nShipyardMeetingDockPlan.author := 'Yard Office'
+!nShipyardMeetingDockPlan.time := Date('2026-02-10 07:30')
+!nShipyardMeetingDockPlan.type := #MEETING
+!nShipyardMeetingDockPlan.comment := 'Reviewed dry-dock schedule and confirmed crane availability for hull inspection.'
+
+!new Note('nTariqEmailPolicyRenewal')
+!nTariqEmailPolicyRenewal.author := 'Tariq Hassan'
+!nTariqEmailPolicyRenewal.time := Date('2026-02-11 16:20')
+!nTariqEmailPolicyRenewal.type := #EMAIL
+!nTariqEmailPolicyRenewal.comment := 'Sent renewal quote options and requested updated vessel survey report.'
+
+!new Note('nLenaCallWeatherHold')
+!nLenaCallWeatherHold.author := 'Lena Ortiz'
+!nLenaCallWeatherHold.time := Date('2026-02-12 05:55')
+!nLenaCallWeatherHold.type := #CALL
+!nLenaCallWeatherHold.comment := 'Called to place morning departures on hold due to dense fog; advised updated ETA at 08:00.'
+
+!insert (kestrelShipyard, nShipyardMeetingDockPlan) into ContactContainsNote
+!insert (tariqHassan, nTariqEmailPolicyRenewal) into ContactContainsNote
+!insert (lenaOrtiz, nLenaCallWeatherHold) into ContactContainsNote
+
+!new Relationship('relMarineSubdivisionShipyard')
+!relMarineSubdivisionShipyard.type := #SUBDIVISION
+!insert (kestrelMarine, relMarineSubdivisionShipyard) into ContactToRelationship
+!insert (relMarineSubdivisionShipyard, kestrelShipyard) into RelationshipToContact
+
+!new Relationship('relLenaEmployeeMarine')
+!relLenaEmployeeMarine.type := #EMPLOYEE
+!insert (lenaOrtiz, relLenaEmployeeMarine) into ContactToRelationship
+!insert (relLenaEmployeeMarine, kestrelMarine) into RelationshipToContact
+
+!new Relationship('relMilesEmployeeMarine')
+!relMilesEmployeeMarine.type := #EMPLOYEE
+!insert (milesGrant, relMilesEmployeeMarine) into ContactToRelationship
+!insert (relMilesEmployeeMarine, kestrelMarine) into RelationshipToContact
+
+!new Relationship('relJunEmployeeShipyard')
+!relJunEmployeeShipyard.type := #EMPLOYEE
+!insert (junPark, relJunEmployeeShipyard) into ContactToRelationship
+!insert (relJunEmployeeShipyard, kestrelShipyard) into RelationshipToContact
+
+!new Relationship('relTariqEmployeePolar')
+!relTariqEmployeePolar.type := #EMPLOYEE
+!insert (tariqHassan, relTariqEmployeePolar) into ContactToRelationship
+!insert (relTariqEmployeePolar, polarInsurance) into RelationshipToContact
+
+!new Relationship('relMarineCoworkerPolar')
+!relMarineCoworkerPolar.type := #COWORKER
+!insert (kestrelMarine, relMarineCoworkerPolar) into ContactToRelationship
+!insert (relMarineCoworkerPolar, polarInsurance) into RelationshipToContact
+
+!new Relationship('relPolarCoworkerShipyard')
+!relPolarCoworkerShipyard.type := #COWORKER
+!insert (polarInsurance, relPolarCoworkerShipyard) into ContactToRelationship
+!insert (relPolarCoworkerShipyard, kestrelShipyard) into RelationshipToContact
+
+!new Relationship('relJunBossIsLena')
+!relJunBossIsLena.type := #BOSS
+!insert (junPark, relJunBossIsLena) into ContactToRelationship
+!insert (relJunBossIsLena, lenaOrtiz) into RelationshipToContact
+
+!new Relationship('relLenaBossIsMiles')
+!relLenaBossIsMiles.type := #BOSS
+!insert (lenaOrtiz, relLenaBossIsMiles) into ContactToRelationship
+!insert (relLenaBossIsMiles, milesGrant) into RelationshipToContact
+
+!new Relationship('relMilesCoworkerJun')
+!relMilesCoworkerJun.type := #COWORKER
+!insert (milesGrant, relMilesCoworkerJun) into ContactToRelationship
+!insert (relMilesCoworkerJun, junPark) into RelationshipToContact

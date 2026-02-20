@@ -1,0 +1,206 @@
+!new AddressBook('ab6')
+
+!new Company('harborClinic')
+!harborClinic.name := 'Harbor Community Clinic'
+!harborClinic.phone := '+1-408-555-0700'
+!harborClinic.website := 'https://harborclinic.example'
+!harborClinic.email := 'contact@harborclinic.example'
+!harborClinic.industry := 'Healthcare'
+
+!new Company('harborOutreach')
+!harborOutreach.name := 'Harbor Outreach Program'
+!harborOutreach.phone := '+1-408-555-0715'
+!harborOutreach.website := ''
+!harborOutreach.email := 'outreach@harborclinic.example'
+!harborOutreach.industry := 'Nonprofit Services'
+
+!new Company('metroHealthNet')
+!metroHealthNet.name := 'Metro Health Network'
+!metroHealthNet.phone := '+1-510-555-0720'
+!metroHealthNet.website := 'https://metrohealthnet.example'
+!metroHealthNet.email := 'partners@metrohealthnet.example'
+!metroHealthNet.industry := 'Healthcare'
+
+!new Person('ninaBrooks')
+!ninaBrooks.name := 'Nina Brooks'
+!ninaBrooks.phone := '+1-408-555-0701'
+!ninaBrooks.website := ''
+!ninaBrooks.email := 'nina.brooks@harborclinic.example'
+!ninaBrooks.title := 'Executive Director'
+
+!new Person('leoPark')
+!leoPark.name := 'Leo Park'
+!leoPark.phone := '+1-408-555-0702'
+!leoPark.website := ''
+!leoPark.email := 'leo.park@harborclinic.example'
+!leoPark.title := 'Volunteer Coordinator'
+
+!new Person('saraIbrahim')
+!saraIbrahim.name := 'Sara Ibrahim'
+!saraIbrahim.phone := '+1-408-555-0703'
+!saraIbrahim.website := 'https://saraibrahim.example'
+!saraIbrahim.email := 'sara.ibrahim@harborclinic.example'
+!saraIbrahim.title := 'Community Health Worker'
+
+!new Person('tomasReyes')
+!tomasReyes.name := 'Tomás Reyes'
+!tomasReyes.phone := '+1-408-555-0704'
+!tomasReyes.website := ''
+!tomasReyes.email := 'tomas.reyes@harborclinic.example'
+!tomasReyes.title := 'Donor Liaison'
+
+!new Person('priyaNair')
+!priyaNair.name := 'Priya Nair'
+!priyaNair.phone := '+1-408-555-0705'
+!priyaNair.website := ''
+!priyaNair.email := 'priya.nair@harborclinic.example'
+!priyaNair.title := 'IT Support Specialist'
+
+!insert (ab6, harborClinic) into AddressBookMadeOfContact
+!insert (ab6, harborOutreach) into AddressBookMadeOfContact
+!insert (ab6, metroHealthNet) into AddressBookMadeOfContact
+!insert (ab6, ninaBrooks) into AddressBookMadeOfContact
+!insert (ab6, leoPark) into AddressBookMadeOfContact
+!insert (ab6, saraIbrahim) into AddressBookMadeOfContact
+!insert (ab6, tomasReyes) into AddressBookMadeOfContact
+!insert (ab6, priyaNair) into AddressBookMadeOfContact
+
+!new Address('addrClinicMain')
+!addrClinicMain.city := 'San Jose'
+!addrClinicMain.street := 'E Santa Clara St'
+!addrClinicMain.houseNr := '255'
+
+!new Address('addrClinicAnnex')
+!addrClinicAnnex.city := 'San Jose'
+!addrClinicAnnex.street := 'S 4th St'
+!addrClinicAnnex.houseNr := '19'
+
+!new Address('addrOutreachOffice')
+!addrOutreachOffice.city := 'San Jose'
+!addrOutreachOffice.street := 'Almaden Blvd'
+!addrOutreachOffice.houseNr := '780'
+
+!new Address('addrMetroHQ')
+!addrMetroHQ.city := 'Oakland'
+!addrMetroHQ.street := 'Broadway'
+!addrMetroHQ.houseNr := '1440'
+
+!new Address('addrLeoMailing')
+!addrLeoMailing.city := 'Campbell'
+!addrLeoMailing.street := 'Winchester Blvd'
+!addrLeoMailing.houseNr := '505'
+
+!new Address('addrSaraHome')
+!addrSaraHome.city := 'San Jose'
+!addrSaraHome.street := 'Willow St'
+!addrSaraHome.houseNr := '66'
+
+!insert (harborClinic, addrClinicMain) into ContactContainsAddress
+!insert (harborClinic, addrClinicAnnex) into ContactContainsAddress
+!insert (harborOutreach, addrOutreachOffice) into ContactContainsAddress
+!insert (metroHealthNet, addrMetroHQ) into ContactContainsAddress
+!insert (leoPark, addrLeoMailing) into ContactContainsAddress
+!insert (saraIbrahim, addrSaraHome) into ContactContainsAddress
+
+!new Note('nClinicEmailSupplies')
+!nClinicEmailSupplies.author := 'Operations'
+!nClinicEmailSupplies.time := Date('2026-02-02 08:05')
+!nClinicEmailSupplies.type := #EMAIL
+!nClinicEmailSupplies.comment := 'Reordered basic medical supplies; delivery expected by Friday.'
+
+!new Note('nNinaMeetingBoard')
+!nNinaMeetingBoard.author := 'Nina Brooks'
+!nNinaMeetingBoard.time := Date('2026-02-04 18:00')
+!nNinaMeetingBoard.type := #MEETING
+!nNinaMeetingBoard.comment := 'Board update: reviewed quarterly metrics, outreach expansion plan, and budget adjustments.'
+
+!new Note('nSaraCallInterpreter')
+!nSaraCallInterpreter.author := 'Sara Ibrahim'
+!nSaraCallInterpreter.time := Date('2026-02-06 09:25')
+!nSaraCallInterpreter.type := #CALL
+!nSaraCallInterpreter.comment := 'Arranged interpreter coverage for next week clinic hours; confirmed availability.'
+
+!new Note('nSaraEmailSchedule')
+!nSaraEmailSchedule.author := 'Leo Park'
+!nSaraEmailSchedule.time := Date('2026-02-06 12:10')
+!nSaraEmailSchedule.type := #EMAIL
+!nSaraEmailSchedule.comment := 'Sent updated volunteer schedule and check-in instructions for mobile clinic day.'
+
+!new Note('nMetroPartnerMeeting')
+!nMetroPartnerMeeting.author := 'Partner Relations'
+!nMetroPartnerMeeting.time := Date('2026-02-07 14:30')
+!nMetroPartnerMeeting.type := #MEETING
+!nMetroPartnerMeeting.comment := 'Discussed referral workflow and data sharing; agreed to pilot secure intake form.'
+
+!new Note('nOutreachEmailEvent')
+!nOutreachEmailEvent.author := 'Harbor Outreach'
+!nOutreachEmailEvent.time := Date('2026-02-08 16:45')
+!nOutreachEmailEvent.type := #EMAIL
+!nOutreachEmailEvent.comment := 'Announced neighborhood wellness event; requested additional volunteers for registration desk.'
+
+!insert (harborClinic, nClinicEmailSupplies) into ContactContainsNote
+!insert (ninaBrooks, nNinaMeetingBoard) into ContactContainsNote
+!insert (saraIbrahim, nSaraCallInterpreter) into ContactContainsNote
+!insert (saraIbrahim, nSaraEmailSchedule) into ContactContainsNote
+!insert (metroHealthNet, nMetroPartnerMeeting) into ContactContainsNote
+!insert (harborOutreach, nOutreachEmailEvent) into ContactContainsNote
+
+!new Relationship('relClinicSubdivisionOutreach')
+!relClinicSubdivisionOutreach.type := #SUBDIVISION
+!insert (harborClinic, relClinicSubdivisionOutreach) into ContactToRelationship
+!insert (relClinicSubdivisionOutreach, harborOutreach) into RelationshipToContact
+
+!new Relationship('relClinicCoworkerMetro')
+!relClinicCoworkerMetro.type := #COWORKER
+!insert (harborClinic, relClinicCoworkerMetro) into ContactToRelationship
+!insert (relClinicCoworkerMetro, metroHealthNet) into RelationshipToContact
+
+!new Relationship('relNinaEmployeeClinic')
+!relNinaEmployeeClinic.type := #EMPLOYEE
+!insert (ninaBrooks, relNinaEmployeeClinic) into ContactToRelationship
+!insert (relNinaEmployeeClinic, harborClinic) into RelationshipToContact
+
+!new Relationship('relLeoEmployeeClinic')
+!relLeoEmployeeClinic.type := #EMPLOYEE
+!insert (leoPark, relLeoEmployeeClinic) into ContactToRelationship
+!insert (relLeoEmployeeClinic, harborClinic) into RelationshipToContact
+
+!new Relationship('relSaraEmployeeOutreach')
+!relSaraEmployeeOutreach.type := #EMPLOYEE
+!insert (saraIbrahim, relSaraEmployeeOutreach) into ContactToRelationship
+!insert (relSaraEmployeeOutreach, harborOutreach) into RelationshipToContact
+
+!new Relationship('relTomasEmployeeClinic')
+!relTomasEmployeeClinic.type := #EMPLOYEE
+!insert (tomasReyes, relTomasEmployeeClinic) into ContactToRelationship
+!insert (relTomasEmployeeClinic, harborClinic) into RelationshipToContact
+
+!new Relationship('relPriyaEmployeeClinic')
+!relPriyaEmployeeClinic.type := #EMPLOYEE
+!insert (priyaNair, relPriyaEmployeeClinic) into ContactToRelationship
+!insert (relPriyaEmployeeClinic, harborClinic) into RelationshipToContact
+
+!new Relationship('relLeoBossIsNina')
+!relLeoBossIsNina.type := #BOSS
+!insert (leoPark, relLeoBossIsNina) into ContactToRelationship
+!insert (relLeoBossIsNina, ninaBrooks) into RelationshipToContact
+
+!new Relationship('relTomasBossIsNina')
+!relTomasBossIsNina.type := #BOSS
+!insert (tomasReyes, relTomasBossIsNina) into ContactToRelationship
+!insert (relTomasBossIsNina, ninaBrooks) into RelationshipToContact
+
+!new Relationship('relSaraBossIsLeo')
+!relSaraBossIsLeo.type := #BOSS
+!insert (saraIbrahim, relSaraBossIsLeo) into ContactToRelationship
+!insert (relSaraBossIsLeo, leoPark) into RelationshipToContact
+
+!new Relationship('relPriyaCoworkerLeo')
+!relPriyaCoworkerLeo.type := #COWORKER
+!insert (priyaNair, relPriyaCoworkerLeo) into ContactToRelationship
+!insert (relPriyaCoworkerLeo, leoPark) into RelationshipToContact
+
+!new Relationship('relSaraCoworkerPriya')
+!relSaraCoworkerPriya.type := #COWORKER
+!insert (saraIbrahim, relSaraCoworkerPriya) into ContactToRelationship
+!insert (relSaraCoworkerPriya, priyaNair) into RelationshipToContact

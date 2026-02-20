@@ -1,0 +1,159 @@
+!new Club('clubNW')
+!clubNW.name := 'Northwind FC'
+!clubNW.homeGround := 'Northwind Arena'
+!clubNW.chairman := 'Harriet Molina'
+
+!new Club('clubOS')
+!clubOS.name := 'Oakshire Wanderers'
+!clubOS.homeGround := 'Oakshire Green'
+!clubOS.chairman := 'Declan Murphy'
+
+!new Team('teamNW')
+!teamNW.name := 'Northwind XI'
+
+!new Team('teamOS')
+!teamOS.name := 'Oakshire XI'
+
+!insert (clubNW, teamNW) into ClubTeam
+!insert (clubOS, teamOS) into ClubTeam
+
+!new Competition('compNightLeague')
+!compNightLeague.name := 'Tuesday Night League'
+!compNightLeague.type := 'League'
+
+!new TrainingSession('tsNW_evening')
+!tsNW_evening.date := '2026-04-07'
+!tsNW_evening.location := 'Northwind Arena - 3G Pitch'
+!tsNW_evening.purpose := 'Defensive transitions and recovery runs'
+
+!new TrainingSession('tsOS_evening')
+!tsOS_evening.date := '2026-04-07'
+!tsOS_evening.location := 'Oakshire Green - Training Area'
+!tsOS_evening.purpose := 'Compactness and playing out under pressure'
+
+!insert (teamNW, tsNW_evening) into TeamTraining
+!insert (teamOS, tsOS_evening) into TeamTraining
+
+!new TrainingNotes('tnNW1')
+!tnNW1.note := 'Improved sprint recovery; midfield needs clearer communication when pressing.'
+!tnNW1.date := '2026-04-07'
+!insert (tsNW_evening, tnNW1) into TrainingTrainingNotes
+
+!new TrainingNotes('tnOS1')
+!tnOS1.note := 'Build-up better after adding third-man option; reduce forced passes into congestion.'
+!tnOS1.date := '2026-04-07'
+!insert (tsOS_evening, tnOS1) into TrainingTrainingNotes
+
+!new Player('pNW_MID')
+!pNW_MID.name := 'Elijah Stone'
+!pNW_MID.age := 26
+!pNW_MID.bestFoot := #BOTH
+!pNW_MID.phoneNumber := '+44 7700 810001'
+
+!new Player('pOS_DEF')
+!pOS_DEF.name := 'Mateo Alvarez'
+!pOS_DEF.age := 28
+!pOS_DEF.bestFoot := #RIGHT
+!pOS_DEF.phoneNumber := '+44 7700 820001'
+
+!insert (teamNW, pNW_MID) into TeamPlayer
+!insert (teamOS, pOS_DEF) into TeamPlayer
+
+!new Position('posNW_mid')
+!posNW_mid.positionName := #MIDFIELDER
+!insert (pNW_MID, posNW_mid) into PlayerPositions
+
+!new Position('posNW_fw')
+!posNW_fw.positionName := #FORWARD
+!insert (pNW_MID, posNW_fw) into PlayerPositions
+
+!new Position('posOS_def')
+!posOS_def.positionName := #DEFENDER
+!insert (pOS_DEF, posOS_def) into PlayerPositions
+
+!new TrainingObjective('objNW_1')
+!objNW_1.areaToImprove := 'Pressing timing in the middle third'
+!objNW_1.startDate := '2026-04-01'
+!objNW_1.endDate := '2026-05-01'
+!objNW_1.success := false
+!insert (objNW_1, pNW_MID) into TrainingObjectivePlayer
+
+!new TrainingObjective('objNW_2')
+!objNW_2.areaToImprove := 'Switching play with first-time passes'
+!objNW_2.startDate := '2026-04-01'
+!objNW_2.endDate := '2026-05-01'
+!objNW_2.success := true
+!insert (objNW_2, pNW_MID) into TrainingObjectivePlayer
+
+!new TrainingObjective('objOS_1')
+!objOS_1.areaToImprove := 'Defending runners at the back post'
+!objOS_1.startDate := '2026-04-01'
+!objOS_1.endDate := '2026-05-01'
+!objOS_1.success := false
+!insert (objOS_1, pOS_DEF) into TrainingObjectivePlayer
+
+!new TrainingFailedToAttend('tfaNW1')
+!tfaNW1.reason := 'Overtime at work'
+!insert (tsNW_evening, tfaNW1) into TrainingFailded
+!insert (tfaNW1, pNW_MID) into FailedPlayer
+
+!new PlayerNotes('pnNW1')
+!pnNW1.note := 'Leads well during drills; can simplify decisions when tired.'
+!pnNW1.date := '2026-04-08'
+!insert (pNW_MID, pnNW1) into PlayerPlayerNotes
+
+!new Match('matchNight1')
+!matchNight1.date := '2026-04-14'
+!matchNight1.homeAway := true
+
+!insert (compNightLeague, matchNight1) into CompetitionMatch
+
+!insert (teamNW, matchNight1) into LocalMatch
+!insert (teamOS, matchNight1) into VisitorMatch
+
+!new MatchReport('mrNight1')
+!mrNight1.duration := 90
+!mrNight1.scoreVisitor := 0
+!mrNight1.scoreLocal := 0
+!insert (matchNight1, mrNight1) into MatchMatchReport
+
+!new MatchEvent('evNight1_foul')
+!evNight1_foul.eventType := #FOUL
+!evNight1_foul.time := 44
+!insert (matchNight1, evNight1_foul) into MatchMatchEvent
+
+!new MatchEvent('evNight1_offside')
+!evNight1_offside.eventType := #OFFSIDE
+!evNight1_offside.time := 81
+!insert (matchNight1, evNight1_offside) into MatchMatchEvent
+
+!new MatchNote('mnNight1')
+!mnNight1.note := 'Even match with few chances; both sides defended well and kept shape.'
+!mnNight1.date := '2026-04-14'
+!insert (matchNight1, mnNight1) into MatchMatchNote
+
+!new MatchPlayer('mpNight1_NW')
+!mpNight1_NW.booked := false
+!mpNight1_NW.goals := 0
+!mpNight1_NW.rating := 7
+
+!new MatchPlayer('mpNight1_OS')
+!mpNight1_OS.booked := true
+!mpNight1_OS.goals := 0
+!mpNight1_OS.rating := 7
+
+!insert (matchNight1, mpNight1_NW) into MatchMatchPlayer
+!insert (matchNight1, mpNight1_OS) into MatchMatchPlayer
+
+!insert (pNW_MID, mpNight1_NW) into PlayerMatch
+!insert (pOS_DEF, mpNight1_OS) into PlayerMatch
+
+!new MatchPlayerPosition('mppNight1_NW')
+!mppNight1_NW.positionName := #MIDFIELDER
+!mppNight1_NW.number := 8
+!insert (mpNight1_NW, mppNight1_NW) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('mppNight1_OS')
+!mppNight1_OS.positionName := #DEFENDER
+!mppNight1_OS.number := 5
+!insert (mpNight1_OS, mppNight1_OS) into MatchPlayerMatchPlayerPosition

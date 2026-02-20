@@ -1,0 +1,290 @@
+!new Restaurant('rest7')
+!rest7.name := 'Harbor and Hearth'
+
+!new Restaurant('rest8')
+!rest8.name := 'Cedar Lounge'
+
+!new Owner('own18')
+!own18.name := 'Riley Thompson'
+!own18.percentageShares := 50
+
+!new Owner('own19')
+!own19.name := 'Sabrina Cole'
+!own19.percentageShares := 50
+
+!new Owner('own20')
+!own20.name := 'Ken Adams'
+!own20.percentageShares := 50
+
+!insert (rest7, own18) into RestaurantOwner
+!insert (rest7, own19) into RestaurantOwner
+!insert (rest8, own18) into RestaurantOwner
+!insert (rest8, own20) into RestaurantOwner
+
+!new HeadWaiter('hw7')
+!hw7.name := 'Derek Miles'
+!hw7.dateOfBirth := Date('1982-06-20')
+!hw7.phoneNumber := '555-9500'
+
+!new HeadWaiter('hw8')
+!hw8.name := 'Irene Fischer'
+!hw8.dateOfBirth := Date('1988-02-13')
+!hw8.phoneNumber := '555-9510'
+
+!new Waiter('w15')
+!w15.name := 'Chloe Bennett'
+!w15.dateOfBirth := Date('1999-09-01')
+!w15.phoneNumber := '555-9501'
+!w15.spokenLanguage := #English
+
+!new Waiter('w16')
+!w16.name := 'Paolo Greco'
+!w16.dateOfBirth := Date('1993-03-28')
+!w16.phoneNumber := '555-9502'
+!w16.spokenLanguage := #Italian
+
+!new Waiter('w17')
+!w17.name := 'Mara Vogel'
+!w17.dateOfBirth := Date('1996-12-05')
+!w17.phoneNumber := '555-9511'
+!w17.spokenLanguage := #German
+
+!insert (hw7, w15) into HeadWaiterWaiter
+!insert (hw7, w16) into HeadWaiterWaiter
+!insert (hw8, w17) into HeadWaiterWaiter
+
+!new Manager('mgr3')
+!mgr3.name := 'Anthony Reed'
+!mgr3.dateOfBirth := Date('1979-11-09')
+!mgr3.phoneNumber := '555-9520'
+
+!new Chef('chef9')
+!chef9.name := 'Lucia Ferraro'
+!chef9.dateOfBirth := Date('1975-01-15')
+!chef9.phoneNumber := '555-9600'
+
+!new Chef('chef10')
+!chef10.name := 'Markus Stein'
+!chef10.dateOfBirth := Date('1984-04-22')
+!chef10.phoneNumber := '555-9610'
+
+!new Cook('cook14')
+!cook14.name := 'Tanya Brooks'
+!cook14.dateOfBirth := Date('1990-07-03')
+!cook14.phoneNumber := '555-9601'
+!cook14.yearsOfExperience := 6
+
+!new Cook('cook15')
+!cook15.name := 'Eli Navarro'
+!cook15.dateOfBirth := Date('1997-10-30')
+!cook15.phoneNumber := '555-9602'
+!cook15.yearsOfExperience := 2
+
+!new Cook('cook16')
+!cook16.name := 'Greta Wolf'
+!cook16.dateOfBirth := Date('1992-05-17')
+!cook16.phoneNumber := '555-9611'
+!cook16.yearsOfExperience := 9
+
+!insert (chef9, cook14) into ChefCook
+!insert (chef9, cook15) into ChefCook
+!insert (chef10, cook16) into ChefCook
+
+!new Allergen('alg7Gluten')
+!alg7Gluten.type := #Gluten
+!new Allergen('alg7Seafood')
+!alg7Seafood.type := #Seafood
+!new Allergen('alg7Lactose')
+!alg7Lactose.type := #Lactose
+
+!new FoodItem('fiPasta7')
+!fiPasta7.number := 601
+!fiPasta7.description := 'Dry spaghetti'
+!fiPasta7.purchaseFlag := true
+!fiPasta7.unit := #Pound
+
+!new FoodItem('fiClams7')
+!fiClams7.number := 602
+!fiClams7.description := 'Fresh clams'
+!fiClams7.purchaseFlag := true
+!fiClams7.unit := #Pound
+
+!new FoodItem('fiCream7')
+!fiCream7.number := 603
+!fiCream7.description := 'Cooking cream'
+!fiCream7.purchaseFlag := true
+!fiCream7.unit := #Ounce
+
+!new FoodItem('fiHerbs7')
+!fiHerbs7.number := 604
+!fiHerbs7.description := 'Mixed herbs'
+!fiHerbs7.purchaseFlag := true
+!fiHerbs7.unit := #Gram
+
+!new FoodItem('fiSoda7')
+!fiSoda7.number := 605
+!fiSoda7.description := 'Club soda'
+!fiSoda7.purchaseFlag := true
+!fiSoda7.unit := #Ounce
+
+!new FoodItem('fiChocolate7')
+!fiChocolate7.number := 606
+!fiChocolate7.description := 'Dark chocolate'
+!fiChocolate7.purchaseFlag := true
+!fiChocolate7.unit := #Ounce
+
+!new FoodItem('fiFlour7')
+!fiFlour7.number := 607
+!fiFlour7.description := 'Cake flour'
+!fiFlour7.purchaseFlag := true
+!fiFlour7.unit := #Pound
+
+!insert (fiPasta7, alg7Gluten) into FoodItemAllergen
+!insert (fiFlour7, alg7Gluten) into FoodItemAllergen
+!insert (fiClams7, alg7Seafood) into FoodItemAllergen
+!insert (fiCream7, alg7Lactose) into FoodItemAllergen
+
+!new MenuItem('miClamPasta7')
+!miClamPasta7.description := 'Creamy clam pasta'
+!miClamPasta7.prepTime := 24.0
+!miClamPasta7.classification := #Main
+
+!new MenuItem('miHerbSoda7')
+!miHerbSoda7.description := 'Herbal spritzer'
+!miHerbSoda7.prepTime := 2.0
+!miHerbSoda7.classification := #Beverage
+
+!new MenuItem('miChocoCake7')
+!miChocoCake7.description := 'Chocolate cake slice'
+!miChocoCake7.prepTime := 7.0
+!miChocoCake7.classification := #Dessert
+
+!new MenuItem('miBreadsticks7')
+!miBreadsticks7.description := 'Warm breadsticks'
+!miBreadsticks7.prepTime := 6.0
+!miBreadsticks7.classification := #Apetizer
+
+!insert (miClamPasta7, chef9) into MenuItemChef
+!insert (miHerbSoda7, chef10) into MenuItemChef
+!insert (miChocoCake7, chef10) into MenuItemChef
+!insert (miBreadsticks7, chef9) into MenuItemChef
+
+!insert (miClamPasta7, fiPasta7) into MenuItemFoodItem
+!insert (miClamPasta7, fiClams7) into MenuItemFoodItem
+!insert (miClamPasta7, fiCream7) into MenuItemFoodItem
+!insert (miClamPasta7, fiHerbs7) into MenuItemFoodItem
+
+!insert (miHerbSoda7, fiSoda7) into MenuItemFoodItem
+!insert (miHerbSoda7, fiHerbs7) into MenuItemFoodItem
+
+!insert (miChocoCake7, fiChocolate7) into MenuItemFoodItem
+!insert (miChocoCake7, fiFlour7) into MenuItemFoodItem
+!insert (miChocoCake7, fiCream7) into MenuItemFoodItem
+
+!insert (miBreadsticks7, fiFlour7) into MenuItemFoodItem
+
+!new RegularCustomer('cust7')
+!cust7.name := 'Helena Schmitt'
+!cust7.prefferedLanguage := #German
+
+!new RegularCustomer('cust8')
+!cust8.name := 'Diego Prieto'
+!cust8.prefferedLanguage := #Spanish
+
+!new BusDriver('bd6')
+!bd6.name := 'Wendy Parker'
+!bd6.dateOfBirth := Date('1971-03-19')
+!bd6.phoneNumber := '555-9700'
+!bd6.driverLicenseNr := 'D-1188204'
+
+!new BusDriver('bd7')
+!bd7.name := 'Ibrahim Saleh'
+!bd7.dateOfBirth := Date('1966-08-02')
+!bd7.phoneNumber := '555-9701'
+!bd7.driverLicenseNr := 'D-4401299'
+
+!new Banquet('banq6')
+!banq6.time := Time('19:00')
+!banq6.date := Date('2026-08-08')
+!banq6.numberPeople := 18
+!banq6.name := 'Helena Schmitt'
+!banq6.phoneNumber := '555-9800'
+!banq6.number := 10001
+!banq6.groupName := 'Harbor Chess League'
+!banq6.paymentMethod := #CreditCard
+!banq6.busService := true
+
+!insert (rest7, banq6) into RestaurantReservation
+!insert (banq6, cust7) into ReservationCustomer
+!insert (banq6, w15) into ReservationWaiter
+!insert (banq6, w16) into ReservationWaiter
+!insert (banq6, w17) into ReservationWaiter
+!insert (banq6, bd6) into BanquetBusDriver
+!insert (banq6, bd7) into BanquetBusDriver
+
+!new Table('tBanq6A')
+!tBanq6A.number := 301
+!tBanq6A.description := 'Semi-private table A'
+!tBanq6A.capacity := 10
+!insert (banq6, tBanq6A) into ReservationTable
+
+!new Table('tBanq6B')
+!tBanq6B.number := 302
+!tBanq6B.description := 'Semi-private table B'
+!tBanq6B.capacity := 8
+!insert (banq6, tBanq6B) into ReservationTable
+
+!new ItemOrder('ioBanq6_1')
+!ioBanq6_1.time := Time('19:20')
+!insert (banq6, ioBanq6_1) into ReservationItemOrdered
+!insert (ioBanq6_1, miBreadsticks7) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq6_2')
+!ioBanq6_2.time := Time('19:45')
+!insert (banq6, ioBanq6_2) into ReservationItemOrdered
+!insert (ioBanq6_2, miClamPasta7) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq6_3')
+!ioBanq6_3.time := Time('20:10')
+!insert (banq6, ioBanq6_3) into ReservationItemOrdered
+!insert (ioBanq6_3, miHerbSoda7) into ItemOrderMenuItem
+
+!new Individual('res8')
+!res8.time := Time('17:10')
+!res8.date := Date('2026-08-09')
+!res8.numberPeople := 7
+!res8.name := 'Unassigned Reservation'
+!res8.phoneNumber := '555-9811'
+!res8.number := 10002
+!res8.seating := #Inside
+!res8.smoking := #NonSmoking
+
+!insert (res8, w17) into ReservationWaiter
+
+!new Table('tRes8A')
+!tRes8A.number := 41
+!tRes8A.description := 'Inside booth'
+!tRes8A.capacity := 4
+!insert (res8, tRes8A) into ReservationTable
+
+!new Table('tRes8B')
+!tRes8B.number := 42
+!tRes8B.description := 'Adjacent two-top combined'
+!tRes8B.capacity := 4
+!insert (res8, tRes8B) into ReservationTable
+
+!new ItemOrder('ioRes8_1')
+!ioRes8_1.time := Time('17:25')
+!insert (res8, ioRes8_1) into ReservationItemOrdered
+!insert (ioRes8_1, miHerbSoda7) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes8_2')
+!ioRes8_2.time := Time('17:40')
+!insert (res8, ioRes8_2) into ReservationItemOrdered
+!insert (ioRes8_2, miChocoCake7) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq6')
+!dietReq6.diet := #Vegetarian
+
+!new ReportedAllergy('repAlg6')
+!repAlg6.allergen := #Seafood

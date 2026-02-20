@@ -1,0 +1,196 @@
+!new StateMachine('smDrone')
+!smDrone.name := 'deliveryDrone'
+
+!new State('stGrounded')
+!stGrounded.name := 'grounded'
+!new State('stTakeoff')
+!stTakeoff.name := 'takeoff'
+!new State('stCruising')
+!stCruising.name := 'cruising'
+!new State('stDelivering')
+!stDelivering.name := 'delivering'
+!new State('stReturning')
+!stReturning.name := 'returning'
+!new State('stCharging')
+!stCharging.name := 'charging'
+!new State('stError')
+!stError.name := 'error'
+
+!insert (smDrone, stGrounded) into StateMachineContainsStates
+!insert (smDrone, stTakeoff) into StateMachineContainsStates
+!insert (smDrone, stCruising) into StateMachineContainsStates
+!insert (smDrone, stDelivering) into StateMachineContainsStates
+!insert (smDrone, stReturning) into StateMachineContainsStates
+!insert (smDrone, stCharging) into StateMachineContainsStates
+!insert (smDrone, stError) into StateMachineContainsStates
+
+!insert (smDrone, stGrounded) into StateMachineStartsStates
+
+
+!new Transition('trStartMotors')
+!trStartMotors.name := 'startMotors'
+!new TimeEvent('evStartMotors')
+!evStartMotors.time := 2
+!insert (smDrone, trStartMotors) into StateMachineContainsTransitions
+!insert (trStartMotors, evStartMotors) into TransitionContainsEvents
+!insert (stGrounded, trStartMotors) into StateTransition
+!insert (trStartMotors, stTakeoff) into TransitionState
+
+!new Transition('trReachAltitude')
+!trReachAltitude.name := 'reachAltitude'
+!new TimeEvent('evReachAltitude')
+!evReachAltitude.time := 15
+!insert (smDrone, trReachAltitude) into StateMachineContainsTransitions
+!insert (trReachAltitude, evReachAltitude) into TransitionContainsEvents
+!insert (stTakeoff, trReachAltitude) into StateTransition
+!insert (trReachAltitude, stCruising) into TransitionState
+
+!new Transition('trArriveDestination')
+!trArriveDestination.name := 'arriveDestination'
+!new TimeEvent('evArriveDestination')
+!evArriveDestination.time := 300
+!insert (smDrone, trArriveDestination) into StateMachineContainsTransitions
+!insert (trArriveDestination, evArriveDestination) into TransitionContainsEvents
+!insert (stCruising, trArriveDestination) into StateTransition
+!insert (trArriveDestination, stDelivering) into TransitionState
+
+!new Transition('trDropPackage')
+!trDropPackage.name := 'dropPackage'
+!new TimeEvent('evDropPackage')
+!evDropPackage.time := 20
+!insert (smDrone, trDropPackage) into StateMachineContainsTransitions
+!insert (trDropPackage, evDropPackage) into TransitionContainsEvents
+!insert (stDelivering, trDropPackage) into StateTransition
+!insert (trDropPackage, stReturning) into TransitionState
+
+!new Transition('trReachBase')
+!trReachBase.name := 'reachBase'
+!new TimeEvent('evReachBase')
+!evReachBase.time := 240
+!insert (smDrone, trReachBase) into StateMachineContainsTransitions
+!insert (trReachBase, evReachBase) into TransitionContainsEvents
+!insert (stReturning, trReachBase) into StateTransition
+!insert (trReachBase, stCharging) into TransitionState
+
+!new Transition('trChargeComplete')
+!trChargeComplete.name := 'chargeComplete'
+!new TimeEvent('evChargeComplete')
+!evChargeComplete.time := 3600
+!insert (smDrone, trChargeComplete) into StateMachineContainsTransitions
+!insert (trChargeComplete, evChargeComplete) into TransitionContainsEvents
+!insert (stCharging, trChargeComplete) into StateTransition
+!insert (trChargeComplete, stGrounded) into TransitionState
+
+!new Transition('trHoverStabilize')
+!trHoverStabilize.name := 'hoverStabilize'
+!new TimeEvent('evHoverStabilize')
+!evHoverStabilize.time := 5
+!insert (smDrone, trHoverStabilize) into StateMachineContainsTransitions
+!insert (trHoverStabilize, evHoverStabilize) into TransitionContainsEvents
+!insert (stCruising, trHoverStabilize) into StateTransition
+!insert (trHoverStabilize, stCruising) into TransitionState
+
+!new Transition('trFaultInCruise')
+!trFaultInCruise.name := 'faultInCruise'
+!new TimeEvent('evFaultInCruise')
+!evFaultInCruise.time := 1
+!insert (smDrone, trFaultInCruise) into StateMachineContainsTransitions
+!insert (trFaultInCruise, evFaultInCruise) into TransitionContainsEvents
+!insert (stCruising, trFaultInCruise) into StateTransition
+!insert (trFaultInCruise, stError) into TransitionState
+
+!new Transition('trFaultDuringDelivery')
+!trFaultDuringDelivery.name := 'faultDuringDelivery'
+!new TimeEvent('evFaultDuringDelivery')
+!evFaultDuringDelivery.time := 1
+!insert (smDrone, trFaultDuringDelivery) into StateMachineContainsTransitions
+!insert (trFaultDuringDelivery, evFaultDuringDelivery) into TransitionContainsEvents
+!insert (stDelivering, trFaultDuringDelivery) into StateTransition
+!insert (trFaultDuringDelivery, stError) into TransitionState
+
+!new Transition('trFaultOnReturn')
+!trFaultOnReturn.name := 'faultOnReturn'
+!new TimeEvent('evFaultOnReturn')
+!evFaultOnReturn.time := 1
+!insert (smDrone, trFaultOnReturn) into StateMachineContainsTransitions
+!insert (trFaultOnReturn, evFaultOnReturn) into TransitionContainsEvents
+!insert (stReturning, trFaultOnReturn) into StateTransition
+!insert (trFaultOnReturn, stError) into TransitionState
+
+!new Transition('trResetAfterError')
+!trResetAfterError.name := 'resetAfterError'
+!new TimeEvent('evResetAfterError')
+!evResetAfterError.time := 60
+!insert (smDrone, trResetAfterError) into StateMachineContainsTransitions
+!insert (trResetAfterError, evResetAfterError) into TransitionContainsEvents
+!insert (stError, trResetAfterError) into StateTransition
+!insert (trResetAfterError, stGrounded) into TransitionState
+
+
+!new StateMachine('smBackup')
+!smBackup.name := 'backupJob'
+
+!new State('stWaiting')
+!stWaiting.name := 'waiting'
+!new State('stRunning')
+!stRunning.name := 'running'
+!new State('stVerifying')
+!stVerifying.name := 'verifying'
+!new State('stDone')
+!stDone.name := 'done'
+!new State('stFailed')
+!stFailed.name := 'failed'
+
+!insert (smBackup, stWaiting) into StateMachineContainsStates
+!insert (smBackup, stRunning) into StateMachineContainsStates
+!insert (smBackup, stVerifying) into StateMachineContainsStates
+!insert (smBackup, stDone) into StateMachineContainsStates
+!insert (smBackup, stFailed) into StateMachineContainsStates
+
+!insert (smBackup, stWaiting) into StateMachineStartsStates
+
+
+!new Transition('trStartBackup')
+!trStartBackup.name := 'startBackup'
+!new TimeEvent('evStartBackup')
+!evStartBackup.time := 1
+!insert (smBackup, trStartBackup) into StateMachineContainsTransitions
+!insert (trStartBackup, evStartBackup) into TransitionContainsEvents
+!insert (stWaiting, trStartBackup) into StateTransition
+!insert (trStartBackup, stRunning) into TransitionState
+
+!new Transition('trBackupFinished')
+!trBackupFinished.name := 'backupFinished'
+!new TimeEvent('evBackupFinished')
+!evBackupFinished.time := 1200
+!insert (smBackup, trBackupFinished) into StateMachineContainsTransitions
+!insert (trBackupFinished, evBackupFinished) into TransitionContainsEvents
+!insert (stRunning, trBackupFinished) into StateTransition
+!insert (trBackupFinished, stVerifying) into TransitionState
+
+!new Transition('trVerifyOk')
+!trVerifyOk.name := 'verifyOk'
+!new TimeEvent('evVerifyOk')
+!evVerifyOk.time := 45
+!insert (smBackup, trVerifyOk) into StateMachineContainsTransitions
+!insert (trVerifyOk, evVerifyOk) into TransitionContainsEvents
+!insert (stVerifying, trVerifyOk) into StateTransition
+!insert (trVerifyOk, stDone) into TransitionState
+
+!new Transition('trVerifyFail')
+!trVerifyFail.name := 'verifyFail'
+!new TimeEvent('evVerifyFail')
+!evVerifyFail.time := 45
+!insert (smBackup, trVerifyFail) into StateMachineContainsTransitions
+!insert (trVerifyFail, evVerifyFail) into TransitionContainsEvents
+!insert (stVerifying, trVerifyFail) into StateTransition
+!insert (trVerifyFail, stFailed) into TransitionState
+
+!new Transition('trRetryBackup')
+!trRetryBackup.name := 'retryBackup'
+!new TimeEvent('evRetryBackup')
+!evRetryBackup.time := 300
+!insert (smBackup, trRetryBackup) into StateMachineContainsTransitions
+!insert (trRetryBackup, evRetryBackup) into TransitionContainsEvents
+!insert (stFailed, trRetryBackup) into StateTransition
+!insert (trRetryBackup, stRunning) into TransitionState

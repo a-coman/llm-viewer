@@ -1,0 +1,138 @@
+!new Currency('curEGP')
+!curEGP.name := 'Egyptian Pound'
+!curEGP.abbreviation := 'EGP'
+
+!new Currency('curPEN')
+!curPEN.name := 'Peruvian Sol'
+!curPEN.abbreviation := 'PEN'
+
+!new Expense('expDecMedicalInsurance')
+!expDecMedicalInsurance.amount := 960.00
+!expDecMedicalInsurance.startDate := Date('2026-12-01')
+!expDecMedicalInsurance.endDate := Date('2026-12-31')
+
+!new Bill('billInsurancePremium_2026_12_01')
+!billInsurancePremium_2026_12_01.amount := 800.00
+!billInsurancePremium_2026_12_01.category := 'Insurance - Monthly premium'
+!billInsurancePremium_2026_12_01.date := Date('2026-12-01')
+!billInsurancePremium_2026_12_01.paymentMethod := #CREDIT_CARD
+!billInsurancePremium_2026_12_01.status := #VALIDATED
+
+!new Bill('billClinicCopay_2026_12_19')
+!billClinicCopay_2026_12_19.amount := 160.00
+!billClinicCopay_2026_12_19.category := 'Health - Clinic co-pay'
+!billClinicCopay_2026_12_19.date := Date('2026-12-19')
+!billClinicCopay_2026_12_19.paymentMethod := #CASH
+!billClinicCopay_2026_12_19.status := #VERIFIED
+
+!insert (expDecMedicalInsurance, billInsurancePremium_2026_12_01) into ExpenseContainsBills
+!insert (expDecMedicalInsurance, billClinicCopay_2026_12_19) into ExpenseContainsBills
+
+!insert (billInsurancePremium_2026_12_01, curEGP) into BillCurrency
+!insert (billClinicCopay_2026_12_19, curEGP) into BillCurrency
+
+!new Comment('cmtInsurance1')
+!cmtInsurance1.text := 'Premium paid at the start of the month; co-pay recorded after appointment.'
+!insert (expDecMedicalInsurance, cmtInsurance1) into ExpenseComment
+
+
+!new Expense('expSepMicroDonations')
+!expSepMicroDonations.amount := 100.00
+!expSepMicroDonations.startDate := Date('2026-09-01')
+!expSepMicroDonations.endDate := Date('2026-09-30')
+
+!new Bill('billDonation1_2026_09_02')
+!billDonation1_2026_09_02.amount := 10.00
+!billDonation1_2026_09_02.category := 'Charity - Micro-donation (wildlife)'
+!billDonation1_2026_09_02.date := Date('2026-09-02')
+!billDonation1_2026_09_02.paymentMethod := #CREDIT_CARD
+!billDonation1_2026_09_02.status := #VERIFIED
+
+!new Bill('billDonation2_2026_09_05')
+!billDonation2_2026_09_05.amount := 10.00
+!billDonation2_2026_09_05.category := 'Charity - Micro-donation (education)'
+!billDonation2_2026_09_05.date := Date('2026-09-05')
+!billDonation2_2026_09_05.paymentMethod := #CASH
+!billDonation2_2026_09_05.status := #VALIDATED
+
+!new Bill('billDonation3_2026_09_07')
+!billDonation3_2026_09_07.amount := 10.00
+!billDonation3_2026_09_07.category := 'Charity - Micro-donation (food)'
+!billDonation3_2026_09_07.date := Date('2026-09-07')
+!billDonation3_2026_09_07.paymentMethod := #CHECK
+!billDonation3_2026_09_07.status := #PENDING
+
+!new Bill('billDonation4_2026_09_10')
+!billDonation4_2026_09_10.amount := 10.00
+!billDonation4_2026_09_10.category := 'Charity - Micro-donation (medical aid)'
+!billDonation4_2026_09_10.date := Date('2026-09-10')
+!billDonation4_2026_09_10.paymentMethod := #CREDIT_CARD
+!billDonation4_2026_09_10.status := #VERIFIED
+
+!new Bill('billDonation5_2026_09_13')
+!billDonation5_2026_09_13.amount := 10.00
+!billDonation5_2026_09_13.category := 'Charity - Micro-donation (clean water)'
+!billDonation5_2026_09_13.date := Date('2026-09-13')
+!billDonation5_2026_09_13.paymentMethod := #CASH
+!billDonation5_2026_09_13.status := #DRAFT
+
+!new Bill('billDonation6_2026_09_16')
+!billDonation6_2026_09_16.amount := 10.00
+!billDonation6_2026_09_16.category := 'Charity - Micro-donation (disaster relief)'
+!billDonation6_2026_09_16.date := Date('2026-09-16')
+!billDonation6_2026_09_16.paymentMethod := #CREDIT_CARD
+!billDonation6_2026_09_16.status := #VALIDATED
+
+!new Bill('billDonation7_2026_09_19')
+!billDonation7_2026_09_19.amount := 10.00
+!billDonation7_2026_09_19.category := 'Charity - Micro-donation (animal shelters)'
+!billDonation7_2026_09_19.date := Date('2026-09-19')
+!billDonation7_2026_09_19.paymentMethod := #CHECK
+!billDonation7_2026_09_19.status := #VERIFIED
+
+!new Bill('billDonation8_2026_09_22')
+!billDonation8_2026_09_22.amount := 10.00
+!billDonation8_2026_09_22.category := 'Charity - Micro-donation (community kitchens)'
+!billDonation8_2026_09_22.date := Date('2026-09-22')
+!billDonation8_2026_09_22.paymentMethod := #CASH
+!billDonation8_2026_09_22.status := #PENDING
+
+!new Bill('billDonation9_2026_09_25')
+!billDonation9_2026_09_25.amount := 10.00
+!billDonation9_2026_09_25.category := 'Charity - Micro-donation (libraries)'
+!billDonation9_2026_09_25.date := Date('2026-09-25')
+!billDonation9_2026_09_25.paymentMethod := #CREDIT_CARD
+!billDonation9_2026_09_25.status := #VERIFIED
+
+!new Bill('billDonation10_2026_09_28')
+!billDonation10_2026_09_28.amount := 10.00
+!billDonation10_2026_09_28.category := 'Charity - Micro-donation (youth sports)'
+!billDonation10_2026_09_28.date := Date('2026-09-28')
+!billDonation10_2026_09_28.paymentMethod := #CASH
+!billDonation10_2026_09_28.status := #VALIDATED
+
+!insert (expSepMicroDonations, billDonation1_2026_09_02) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation2_2026_09_05) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation3_2026_09_07) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation4_2026_09_10) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation5_2026_09_13) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation6_2026_09_16) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation7_2026_09_19) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation8_2026_09_22) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation9_2026_09_25) into ExpenseContainsBills
+!insert (expSepMicroDonations, billDonation10_2026_09_28) into ExpenseContainsBills
+
+!insert (billDonation1_2026_09_02, curPEN) into BillCurrency
+!insert (billDonation2_2026_09_05, curPEN) into BillCurrency
+!insert (billDonation3_2026_09_07, curPEN) into BillCurrency
+!insert (billDonation4_2026_09_10, curPEN) into BillCurrency
+!insert (billDonation5_2026_09_13, curPEN) into BillCurrency
+!insert (billDonation6_2026_09_16, curPEN) into BillCurrency
+!insert (billDonation7_2026_09_19, curPEN) into BillCurrency
+!insert (billDonation8_2026_09_22, curPEN) into BillCurrency
+!insert (billDonation9_2026_09_25, curPEN) into BillCurrency
+!insert (billDonation10_2026_09_28, curPEN) into BillCurrency
+
+!new Comment('cmtDonations1')
+!cmtDonations1.text := 'September micro-donations split across multiple causes; some entries still pending or drafted.'
+!insert (expSepMicroDonations, cmtDonations1) into ExpenseComment

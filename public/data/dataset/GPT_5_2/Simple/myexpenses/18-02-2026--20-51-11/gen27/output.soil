@@ -1,0 +1,77 @@
+!new Currency('curXOF')
+!curXOF.name := 'West African CFA franc'
+!curXOF.abbreviation := 'XOF'
+
+!new Currency('curHRK')
+!curHRK.name := 'Croatian Kuna'
+!curHRK.abbreviation := 'HRK'
+
+!new Expense('expFebArtExhibition')
+!expFebArtExhibition.amount := 86.25
+!expFebArtExhibition.startDate := Date('2026-02-09')
+!expFebArtExhibition.endDate := Date('2026-02-09')
+
+!new Bill('billExhibitTickets_2026_02_09')
+!billExhibitTickets_2026_02_09.amount := 25.00
+!billExhibitTickets_2026_02_09.category := 'Leisure - Museum tickets'
+!billExhibitTickets_2026_02_09.date := Date('2026-02-09')
+!billExhibitTickets_2026_02_09.paymentMethod := #CREDIT_CARD
+!billExhibitTickets_2026_02_09.status := #VALIDATED
+
+!new Bill('billExhibitCatalog_2026_02_09')
+!billExhibitCatalog_2026_02_09.amount := 12.50
+!billExhibitCatalog_2026_02_09.category := 'Leisure - Exhibition catalog'
+!billExhibitCatalog_2026_02_09.date := Date('2026-02-09')
+!billExhibitCatalog_2026_02_09.paymentMethod := #CASH
+!billExhibitCatalog_2026_02_09.status := #VERIFIED
+
+!new Bill('billMuseumDonation_2026_02_09')
+!billMuseumDonation_2026_02_09.amount := 40.00
+!billMuseumDonation_2026_02_09.category := 'Charity - Museum support donation'
+!billMuseumDonation_2026_02_09.date := Date('2026-02-09')
+!billMuseumDonation_2026_02_09.paymentMethod := #CHECK
+!billMuseumDonation_2026_02_09.status := #PENDING
+
+!new Bill('billEventParking_2026_02_09')
+!billEventParking_2026_02_09.amount := 8.75
+!billEventParking_2026_02_09.category := 'Transport - Parking'
+!billEventParking_2026_02_09.date := Date('2026-02-09')
+!billEventParking_2026_02_09.paymentMethod := #CASH
+!billEventParking_2026_02_09.status := #DRAFT
+
+!insert (expFebArtExhibition, billExhibitTickets_2026_02_09) into ExpenseContainsBills
+!insert (expFebArtExhibition, billExhibitCatalog_2026_02_09) into ExpenseContainsBills
+!insert (expFebArtExhibition, billMuseumDonation_2026_02_09) into ExpenseContainsBills
+!insert (expFebArtExhibition, billEventParking_2026_02_09) into ExpenseContainsBills
+
+!insert (billExhibitTickets_2026_02_09, curXOF) into BillCurrency
+!insert (billExhibitCatalog_2026_02_09, curXOF) into BillCurrency
+!insert (billMuseumDonation_2026_02_09, curXOF) into BillCurrency
+!insert (billEventParking_2026_02_09, curXOF) into BillCurrency
+
+!new Comment('cmtExhibit1')
+!cmtExhibit1.text := 'Visited the special exhibition on opening week.'
+!new Comment('cmtExhibit2')
+!cmtExhibit2.text := 'Donation receipt pending confirmation from the museum foundation.'
+!new Comment('cmtExhibit3')
+!cmtExhibit3.text := 'Parking receipt still in draft because the kiosk printed a partial slip.'
+
+!insert (expFebArtExhibition, cmtExhibit1) into ExpenseComment
+!insert (expFebArtExhibition, cmtExhibit2) into ExpenseComment
+!insert (expFebArtExhibition, cmtExhibit3) into ExpenseComment
+
+
+!new Expense('expJunGardenIrrigationSystem')
+!expJunGardenIrrigationSystem.amount := 640.00
+!expJunGardenIrrigationSystem.startDate := Date('2026-06-03')
+!expJunGardenIrrigationSystem.endDate := Date('2026-06-03')
+
+!new Bill('billIrrigationInstall_2026_06_03')
+!billIrrigationInstall_2026_06_03.amount := 640.00
+!billIrrigationInstall_2026_06_03.category := 'Home - Irrigation system installation'
+!billIrrigationInstall_2026_06_03.date := Date('2026-06-03')
+!billIrrigationInstall_2026_06_03.paymentMethod := #CHECK
+!billIrrigationInstall_2026_06_03.status := #VERIFIED
+
+!insert (expJunGardenIrrigationSystem, billIrrigationInstall_2026_06_03) into ExpenseContainsBills
+!insert (billIrrigationInstall_2026_06_03, curHRK) into BillCurrency

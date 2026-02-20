@@ -1,0 +1,54 @@
+!new Booking('booking6')
+!booking6.startDate := '2026-08-30'
+!booking6.endDate := '2026-09-02'
+!booking6.canceled := false
+!booking6.bookingId := 4001
+!booking6.confirmed := false
+
+!new Customer('customer6')
+!customer6.firstName := 'Nadia'
+!customer6.lastName := 'El-Masri'
+
+!insert (booking6, customer6) into BookingCustomer
+
+!new RoomReservation('rr8')
+!rr8.checkInDate := '2026-08-30'
+!rr8.checkOutDate := '2026-09-02'
+
+!insert (booking6, rr8) into BookingRoomReservation
+
+!new Room('room601')
+!room601.roomNumber := 601
+!room601.numBeds := 2
+!room601.pricePerNight := 210.0
+!room601.occupied := false
+!room601.blocked := false
+
+!new Room('room602')
+!room602.roomNumber := 602
+!room602.numBeds := 2
+!room602.pricePerNight := 210.0
+!room602.occupied := false
+!room602.blocked := false
+
+!insert (rr8, room601) into RoomReservationRoom
+!insert (rr8, room602) into RoomReservationRoom
+
+!new Bill('bill9')
+!bill9.billId := 8001
+!bill9.price := 0.0
+
+!insert (bill9, rr8) into BillRoomReservation
+!insert (booking6, bill9) into BookingBill
+
+!new FreeRoomTypesDTO('dtoComplimentary')
+!dtoComplimentary.roomTypeDescription := 'Complimentary twin (promotion)'
+!dtoComplimentary.numBeds := 2
+!dtoComplimentary.pricePerNight := 0.0
+!dtoComplimentary.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('dtoPenthouse')
+!dtoPenthouse.roomTypeDescription := 'Penthouse suite (connecting rooms)'
+!dtoPenthouse.numBeds := 4
+!dtoPenthouse.pricePerNight := 520.0
+!dtoPenthouse.numFreeRooms := 0

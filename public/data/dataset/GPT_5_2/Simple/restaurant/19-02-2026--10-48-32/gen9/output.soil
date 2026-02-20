@@ -1,0 +1,253 @@
+!new Restaurant('rest12')
+!rest12.name := 'Luna Bistro'
+
+!new Owner('own27')
+!own27.name := 'Evelyn Moore'
+!own27.percentageShares := 100
+!insert (rest12, own27) into RestaurantOwner
+
+!new HeadWaiter('hw12')
+!hw12.name := 'Oscar Jensen'
+!hw12.dateOfBirth := Date('1986-05-28')
+!hw12.phoneNumber := '555-3001'
+
+!new Waiter('w25')
+!w25.name := 'Priyanka Iyer'
+!w25.dateOfBirth := Date('1997-02-10')
+!w25.phoneNumber := '555-3002'
+!w25.spokenLanguage := #English
+
+!new Waiter('w26')
+!w26.name := 'Mateo Silva'
+!w26.dateOfBirth := Date('1993-08-19')
+!w26.phoneNumber := '555-3003'
+!w26.spokenLanguage := #Spanish
+
+!insert (hw12, w25) into HeadWaiterWaiter
+!insert (hw12, w26) into HeadWaiterWaiter
+
+!new Manager('mgr5')
+!mgr5.name := 'Helen Dawson'
+!mgr5.dateOfBirth := Date('1981-01-11')
+!mgr5.phoneNumber := '555-3010'
+
+!new Chef('chef15')
+!chef15.name := 'Sven Richter'
+!chef15.dateOfBirth := Date('1979-03-09')
+!chef15.phoneNumber := '555-3101'
+
+!new Chef('chef16')
+!chef16.name := 'Camille Laurent'
+!chef16.dateOfBirth := Date('1984-12-22')
+!chef16.phoneNumber := '555-3102'
+
+!new Cook('cook23')
+!cook23.name := 'Brandon Lee'
+!cook23.dateOfBirth := Date('1990-10-04')
+!cook23.phoneNumber := '555-3100'
+!cook23.yearsOfExperience := 5
+
+!new Cook('cook24')
+!cook24.name := 'Elise Martin'
+!cook24.dateOfBirth := Date('1995-04-15')
+!cook24.phoneNumber := '555-3103'
+!cook24.yearsOfExperience := 7
+
+!insert (chef15, cook23) into ChefCook
+!insert (chef16, cook24) into ChefCook
+
+!new Allergen('alg12Gluten')
+!alg12Gluten.type := #Gluten
+!new Allergen('alg12Lactose')
+!alg12Lactose.type := #Lactose
+!new Allergen('alg12Nuts')
+!alg12Nuts.type := #Nuts
+
+!new FoodItem('fiOats12')
+!fiOats12.number := 901
+!fiOats12.description := 'Rolled oats'
+!fiOats12.purchaseFlag := true
+!fiOats12.unit := #Pound
+
+!new FoodItem('fiAlmondMilk12')
+!fiAlmondMilk12.number := 902
+!fiAlmondMilk12.description := 'Almond milk'
+!fiAlmondMilk12.purchaseFlag := true
+!fiAlmondMilk12.unit := #Ounce
+
+!new FoodItem('fiAlmonds12')
+!fiAlmonds12.number := 903
+!fiAlmonds12.description := 'Almonds'
+!fiAlmonds12.purchaseFlag := true
+!fiAlmonds12.unit := #Ounce
+
+!new FoodItem('fiWheatBun12')
+!fiWheatBun12.number := 904
+!fiWheatBun12.description := 'Wheat bun'
+!fiWheatBun12.purchaseFlag := true
+!fiWheatBun12.unit := #Dozen
+
+!new FoodItem('fiChicken12')
+!fiChicken12.number := 905
+!fiChicken12.description := 'Chicken breast'
+!fiChicken12.purchaseFlag := true
+!fiChicken12.unit := #Pound
+
+!new FoodItem('fiYogurt12')
+!fiYogurt12.number := 906
+!fiYogurt12.description := 'Plain yogurt'
+!fiYogurt12.purchaseFlag := true
+!fiYogurt12.unit := #Ounce
+
+!new FoodItem('fiSparkTeaBase12')
+!fiSparkTeaBase12.number := 907
+!fiSparkTeaBase12.description := 'Black tea concentrate'
+!fiSparkTeaBase12.purchaseFlag := true
+!fiSparkTeaBase12.unit := #Ounce
+
+!insert (fiWheatBun12, alg12Gluten) into FoodItemAllergen
+!insert (fiYogurt12, alg12Lactose) into FoodItemAllergen
+!insert (fiAlmondMilk12, alg12Nuts) into FoodItemAllergen
+!insert (fiAlmonds12, alg12Nuts) into FoodItemAllergen
+
+!new MenuItem('miOvernightOats12')
+!miOvernightOats12.description := 'Overnight oats with almond milk'
+!miOvernightOats12.prepTime := 4.0
+!miOvernightOats12.classification := #Dessert
+
+!new MenuItem('miChickenSandwich12')
+!miChickenSandwich12.description := 'Grilled chicken sandwich'
+!miChickenSandwich12.prepTime := 14.0
+!miChickenSandwich12.classification := #Main
+
+!new MenuItem('miYogurtDip12')
+!miYogurtDip12.description := 'Herbed yogurt dip'
+!miYogurtDip12.prepTime := 5.0
+!miYogurtDip12.classification := #Apetizer
+
+!new MenuItem('miSparkTea12')
+!miSparkTea12.description := 'Sparkling iced tea'
+!miSparkTea12.prepTime := 2.0
+!miSparkTea12.classification := #Beverage
+
+!insert (miOvernightOats12, chef16) into MenuItemChef
+!insert (miChickenSandwich12, chef15) into MenuItemChef
+!insert (miYogurtDip12, chef16) into MenuItemChef
+!insert (miSparkTea12, chef15) into MenuItemChef
+
+!insert (miOvernightOats12, fiOats12) into MenuItemFoodItem
+!insert (miOvernightOats12, fiAlmondMilk12) into MenuItemFoodItem
+!insert (miOvernightOats12, fiAlmonds12) into MenuItemFoodItem
+
+!insert (miChickenSandwich12, fiChicken12) into MenuItemFoodItem
+!insert (miChickenSandwich12, fiWheatBun12) into MenuItemFoodItem
+
+!insert (miYogurtDip12, fiYogurt12) into MenuItemFoodItem
+
+!insert (miSparkTea12, fiSparkTeaBase12) into MenuItemFoodItem
+
+!new Individual('res14')
+!res14.time := Time('09:20')
+!res14.date := Date('2026-11-02')
+!res14.numberPeople := 11
+!res14.name := 'Neighborhood Study Group'
+!res14.phoneNumber := '555-3200'
+!res14.number := 15001
+!res14.seating := #Inside
+!res14.smoking := #NonSmoking
+
+!insert (rest12, res14) into RestaurantReservation
+!insert (res14, w25) into ReservationWaiter
+!insert (res14, w26) into ReservationWaiter
+
+!new Table('tRes14A')
+!tRes14A.number := 61
+!tRes14A.description := 'Long table (left)'
+!tRes14A.capacity := 4
+!insert (res14, tRes14A) into ReservationTable
+
+!new Table('tRes14B')
+!tRes14B.number := 62
+!tRes14B.description := 'Long table (center)'
+!tRes14B.capacity := 4
+!insert (res14, tRes14B) into ReservationTable
+
+!new Table('tRes14C')
+!tRes14C.number := 63
+!tRes14C.description := 'Long table (right)'
+!tRes14C.capacity := 4
+!insert (res14, tRes14C) into ReservationTable
+
+!new ItemOrder('ioRes14_1')
+!ioRes14_1.time := Time('09:35')
+!insert (res14, ioRes14_1) into ReservationItemOrdered
+!insert (ioRes14_1, miSparkTea12) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes14_2')
+!ioRes14_2.time := Time('09:45')
+!insert (res14, ioRes14_2) into ReservationItemOrdered
+!insert (ioRes14_2, miYogurtDip12) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes14_3')
+!ioRes14_3.time := Time('10:05')
+!insert (res14, ioRes14_3) into ReservationItemOrdered
+!insert (ioRes14_3, miChickenSandwich12) into ItemOrderMenuItem
+
+!new Banquet('banq9')
+!banq9.time := Time('15:00')
+!banq9.date := Date('2026-11-04')
+!banq9.numberPeople := 40
+!banq9.name := 'City Department Meeting'
+!banq9.phoneNumber := '555-3300'
+!banq9.number := 16001
+!banq9.groupName := 'Public Works Briefing'
+!banq9.paymentMethod := #CreditCard
+!banq9.busService := false
+
+!insert (rest12, banq9) into RestaurantReservation
+!insert (banq9, w26) into ReservationWaiter
+
+!new Table('tBanq9A')
+!tBanq9A.number := 71
+!tBanq9A.description := 'Conference table A'
+!tBanq9A.capacity := 20
+!insert (banq9, tBanq9A) into ReservationTable
+
+!new Table('tBanq9B')
+!tBanq9B.number := 72
+!tBanq9B.description := 'Conference table B'
+!tBanq9B.capacity := 12
+!insert (banq9, tBanq9B) into ReservationTable
+
+!new Table('tBanq9C')
+!tBanq9C.number := 73
+!tBanq9C.description := 'Conference table C'
+!tBanq9C.capacity := 10
+!insert (banq9, tBanq9C) into ReservationTable
+
+!new ItemOrder('ioBanq9_1')
+!ioBanq9_1.time := Time('15:20')
+!insert (banq9, ioBanq9_1) into ReservationItemOrdered
+!insert (ioBanq9_1, miChickenSandwich12) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq9_2')
+!ioBanq9_2.time := Time('15:25')
+!insert (banq9, ioBanq9_2) into ReservationItemOrdered
+!insert (ioBanq9_2, miSparkTea12) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq9_3')
+!ioBanq9_3.time := Time('15:55')
+!insert (banq9, ioBanq9_3) into ReservationItemOrdered
+!insert (ioBanq9_3, miOvernightOats12) into ItemOrderMenuItem
+
+!new RegularCustomer('cust13')
+!cust13.name := 'Marta Kowalczyk'
+!cust13.prefferedLanguage := #German
+
+!insert (res14, cust13) into ReservationCustomer
+
+!new DietaryRequirement('dietReq9')
+!dietReq9.diet := #Halal
+
+!new ReportedAllergy('repAlg9')
+!repAlg9.allergen := #Gluten

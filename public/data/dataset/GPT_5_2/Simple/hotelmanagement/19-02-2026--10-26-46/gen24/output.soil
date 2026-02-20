@@ -1,0 +1,37 @@
+!new Booking('booking26')
+!booking26.startDate := '2029-12-05'
+!booking26.endDate := '2029-12-12'
+!booking26.canceled := false
+!booking26.bookingId := 10310
+!booking26.confirmed := true
+
+!new Customer('customer26')
+!customer26.firstName := 'Amir'
+!customer26.lastName := 'Rahimi'
+
+!insert (booking26, customer26) into BookingCustomer
+
+!new RoomReservation('rr34')
+!rr34.checkInDate := '2029-12-05'
+!rr34.checkOutDate := '2029-12-12'
+
+!insert (booking26, rr34) into BookingRoomReservation
+
+!new Bill('bill35')
+!bill35.billId := 23010
+!bill35.price := 1190.0
+
+!insert (bill35, rr34) into BillRoomReservation
+!insert (booking26, bill35) into BookingBill
+
+!new FreeRoomTypesDTO('dtoWinterWeekStandard')
+!dtoWinterWeekStandard.roomTypeDescription := 'Standard room (winter week)'
+!dtoWinterWeekStandard.numBeds := 2
+!dtoWinterWeekStandard.pricePerNight := 170.0
+!dtoWinterWeekStandard.numFreeRooms := 8
+
+!new FreeRoomTypesDTO('dtoWinterWeekSingle')
+!dtoWinterWeekSingle.roomTypeDescription := 'Single room (winter week)'
+!dtoWinterWeekSingle.numBeds := 1
+!dtoWinterWeekSingle.pricePerNight := 110.0
+!dtoWinterWeekSingle.numFreeRooms := 5

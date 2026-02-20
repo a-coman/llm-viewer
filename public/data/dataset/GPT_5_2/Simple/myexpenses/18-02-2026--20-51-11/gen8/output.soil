@@ -1,0 +1,85 @@
+!new Currency('curSEK')
+!curSEK.name := 'Swedish Krona'
+!curSEK.abbreviation := 'SEK'
+
+!new Expense('expNovHealth')
+!expNovHealth.amount := 1400.50
+!expNovHealth.startDate := Date('2026-11-01')
+!expNovHealth.endDate := Date('2026-11-30')
+
+!new Bill('billDental_2026_11_03')
+!billDental_2026_11_03.amount := 850.00
+!billDental_2026_11_03.category := 'Health - Dental'
+!billDental_2026_11_03.date := Date('2026-11-03')
+!billDental_2026_11_03.paymentMethod := #CREDIT_CARD
+!billDental_2026_11_03.status := #VALIDATED
+
+!new Bill('billPrescription_2026_11_10')
+!billPrescription_2026_11_10.amount := 120.50
+!billPrescription_2026_11_10.category := 'Health - Prescription'
+!billPrescription_2026_11_10.date := Date('2026-11-10')
+!billPrescription_2026_11_10.paymentMethod := #CASH
+!billPrescription_2026_11_10.status := #VERIFIED
+
+!new Bill('billPhysio_2026_11_21')
+!billPhysio_2026_11_21.amount := 430.00
+!billPhysio_2026_11_21.category := 'Health - Physiotherapy'
+!billPhysio_2026_11_21.date := Date('2026-11-21')
+!billPhysio_2026_11_21.paymentMethod := #CHECK
+!billPhysio_2026_11_21.status := #PENDING
+
+!insert (expNovHealth, billDental_2026_11_03) into ExpenseContainsBills
+!insert (expNovHealth, billPrescription_2026_11_10) into ExpenseContainsBills
+!insert (expNovHealth, billPhysio_2026_11_21) into ExpenseContainsBills
+
+!insert (billDental_2026_11_03, curSEK) into BillCurrency
+!insert (billPrescription_2026_11_10, curSEK) into BillCurrency
+!insert (billPhysio_2026_11_21, curSEK) into BillCurrency
+
+
+!new Expense('expNovGifts')
+!expNovGifts.amount := 528.50
+!expNovGifts.startDate := Date('2026-11-15')
+!expNovGifts.endDate := Date('2026-11-28')
+
+!new Bill('billToyStore_2026_11_16')
+!billToyStore_2026_11_16.amount := 299.00
+!billToyStore_2026_11_16.category := 'Gifts - Toy store'
+!billToyStore_2026_11_16.date := Date('2026-11-16')
+!billToyStore_2026_11_16.paymentMethod := #CREDIT_CARD
+!billToyStore_2026_11_16.status := #VERIFIED
+
+!new Bill('billBookshop_2026_11_17')
+!billBookshop_2026_11_17.amount := 159.00
+!billBookshop_2026_11_17.category := 'Gifts - Bookshop'
+!billBookshop_2026_11_17.date := Date('2026-11-17')
+!billBookshop_2026_11_17.paymentMethod := #CASH
+!billBookshop_2026_11_17.status := #VALIDATED
+
+!new Bill('billWrapping_2026_11_18')
+!billWrapping_2026_11_18.amount := 25.00
+!billWrapping_2026_11_18.category := 'Gifts - Wrapping supplies'
+!billWrapping_2026_11_18.date := Date('2026-11-18')
+!billWrapping_2026_11_18.paymentMethod := #CASH
+!billWrapping_2026_11_18.status := #DRAFT
+
+!new Bill('billCourier_2026_11_22')
+!billCourier_2026_11_22.amount := 45.50
+!billCourier_2026_11_22.category := 'Gifts - Courier shipping'
+!billCourier_2026_11_22.date := Date('2026-11-22')
+!billCourier_2026_11_22.paymentMethod := #CREDIT_CARD
+!billCourier_2026_11_22.status := #REFUNDED
+
+!insert (expNovGifts, billToyStore_2026_11_16) into ExpenseContainsBills
+!insert (expNovGifts, billBookshop_2026_11_17) into ExpenseContainsBills
+!insert (expNovGifts, billWrapping_2026_11_18) into ExpenseContainsBills
+!insert (expNovGifts, billCourier_2026_11_22) into ExpenseContainsBills
+
+!insert (billToyStore_2026_11_16, curSEK) into BillCurrency
+!insert (billBookshop_2026_11_17, curSEK) into BillCurrency
+!insert (billWrapping_2026_11_18, curSEK) into BillCurrency
+!insert (billCourier_2026_11_22, curSEK) into BillCurrency
+
+!new Comment('cmtGifts1')
+!cmtGifts1.text := 'Holiday gifts in November; one shipping charge was refunded after a delivery delay.'
+!insert (expNovGifts, cmtGifts1) into ExpenseComment

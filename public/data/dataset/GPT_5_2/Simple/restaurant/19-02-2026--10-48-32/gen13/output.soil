@@ -1,0 +1,282 @@
+!new Restaurant('rest16')
+!rest16.name := 'Lakeside Grill'
+
+!new Restaurant('rest17')
+!rest17.name := 'Metro Bento'
+
+!new Owner('own38')
+!own38.name := 'Quinn Hart'
+!own38.percentageShares := 50
+
+!new Owner('own39')
+!own39.name := 'Elisa Moreno'
+!own39.percentageShares := 30
+
+!new Owner('own40')
+!own40.name := 'Viktor Petrenko'
+!own40.percentageShares := 20
+
+!new Owner('own41')
+!own41.name := 'Sofia Lange'
+!own41.percentageShares := 20
+
+!insert (rest16, own38) into RestaurantOwner
+!insert (rest16, own39) into RestaurantOwner
+!insert (rest16, own40) into RestaurantOwner
+
+!insert (rest17, own38) into RestaurantOwner
+!insert (rest17, own39) into RestaurantOwner
+!insert (rest17, own41) into RestaurantOwner
+
+!new HeadWaiter('hw17')
+!hw17.name := 'Monica Hale'
+!hw17.dateOfBirth := Date('1984-03-12')
+!hw17.phoneNumber := '555-8800'
+
+!new HeadWaiter('hw18')
+!hw18.name := 'Armin Keller'
+!hw18.dateOfBirth := Date('1980-11-06')
+!hw18.phoneNumber := '555-8801'
+
+!new Waiter('w35')
+!w35.name := 'Jorge Alvarez'
+!w35.dateOfBirth := Date('1996-05-02')
+!w35.phoneNumber := '555-8810'
+!w35.spokenLanguage := #Spanish
+
+!new Waiter('w36')
+!w36.name := 'Emily Nguyen'
+!w36.dateOfBirth := Date('1999-09-19')
+!w36.phoneNumber := '555-8811'
+!w36.spokenLanguage := #English
+
+!new Waiter('w37')
+!w37.name := 'Nico Schneider'
+!w37.dateOfBirth := Date('1993-01-23')
+!w37.phoneNumber := '555-8812'
+!w37.spokenLanguage := #German
+
+!insert (hw17, w35) into HeadWaiterWaiter
+!insert (hw17, w36) into HeadWaiterWaiter
+!insert (hw18, w37) into HeadWaiterWaiter
+
+!new Chef('chef23')
+!chef23.name := 'Daniela Rizzo'
+!chef23.dateOfBirth := Date('1978-07-28')
+!chef23.phoneNumber := '555-8900'
+
+!new Chef('chef24')
+!chef24.name := 'Hiro Matsuda'
+!chef24.dateOfBirth := Date('1982-02-17')
+!chef24.phoneNumber := '555-8901'
+
+!new Cook('cook35')
+!cook35.name := 'Amina Farouk'
+!cook35.dateOfBirth := Date('1991-10-10')
+!cook35.phoneNumber := '555-8910'
+!cook35.yearsOfExperience := 7
+
+!new Cook('cook36')
+!cook36.name := 'Calvin Brooks'
+!cook36.dateOfBirth := Date('1998-04-14')
+!cook36.phoneNumber := '555-8911'
+!cook36.yearsOfExperience := 1
+
+!new Cook('cook37')
+!cook37.name := 'Marta Zielinska'
+!cook37.dateOfBirth := Date('1989-12-03')
+!cook37.phoneNumber := '555-8912'
+!cook37.yearsOfExperience := 12
+
+!insert (chef23, cook35) into ChefCook
+!insert (chef23, cook36) into ChefCook
+!insert (chef24, cook37) into ChefCook
+
+!new Allergen('alg16Gluten')
+!alg16Gluten.type := #Gluten
+
+!new Allergen('alg16Lactose')
+!alg16Lactose.type := #Lactose
+
+!new FoodItem('fiBeef16')
+!fiBeef16.number := 1301
+!fiBeef16.description := 'Sliced roast beef'
+!fiBeef16.purchaseFlag := true
+!fiBeef16.unit := #Pound
+
+!new FoodItem('fiBread16')
+!fiBread16.number := 1302
+!fiBread16.description := 'Sandwich rolls'
+!fiBread16.purchaseFlag := true
+!fiBread16.unit := #Dozen
+
+!new FoodItem('fiButter16')
+!fiButter16.number := 1303
+!fiButter16.description := 'Salted butter'
+!fiButter16.purchaseFlag := true
+!fiButter16.unit := #Ounce
+
+!new FoodItem('fiCoffee16')
+!fiCoffee16.number := 1304
+!fiCoffee16.description := 'Coffee beans'
+!fiCoffee16.purchaseFlag := true
+!fiCoffee16.unit := #Pound
+
+!new FoodItem('fiMilk16')
+!fiMilk16.number := 1305
+!fiMilk16.description := 'Milk'
+!fiMilk16.purchaseFlag := true
+!fiMilk16.unit := #Ounce
+
+!new FoodItem('fiBerries16')
+!fiBerries16.number := 1306
+!fiBerries16.description := 'Mixed berries'
+!fiBerries16.purchaseFlag := true
+!fiBerries16.unit := #Pound
+
+!insert (fiBread16, alg16Gluten) into FoodItemAllergen
+!insert (fiButter16, alg16Lactose) into FoodItemAllergen
+!insert (fiMilk16, alg16Lactose) into FoodItemAllergen
+
+!new MenuItem('miSteakSandwich16')
+!miSteakSandwich16.description := 'Roast beef sandwich on fresh roll'
+!miSteakSandwich16.prepTime := 11.0
+!miSteakSandwich16.classification := #Main
+
+!new MenuItem('miIcedLatte16')
+!miIcedLatte16.description := 'Iced latte'
+!miIcedLatte16.prepTime := 3.0
+!miIcedLatte16.classification := #Beverage
+
+!new MenuItem('miBerryTart16')
+!miBerryTart16.description := 'Berry tart slice'
+!miBerryTart16.prepTime := 8.0
+!miBerryTart16.classification := #Dessert
+
+!new MenuItem('miGarlicBread16')
+!miGarlicBread16.description := 'Garlic bread side'
+!miGarlicBread16.prepTime := 5.0
+!miGarlicBread16.classification := #Apetizer
+
+!insert (miSteakSandwich16, chef23) into MenuItemChef
+!insert (miIcedLatte16, chef24) into MenuItemChef
+!insert (miBerryTart16, chef24) into MenuItemChef
+!insert (miGarlicBread16, chef23) into MenuItemChef
+
+!insert (miSteakSandwich16, fiBeef16) into MenuItemFoodItem
+!insert (miSteakSandwich16, fiBread16) into MenuItemFoodItem
+
+!insert (miIcedLatte16, fiCoffee16) into MenuItemFoodItem
+!insert (miIcedLatte16, fiMilk16) into MenuItemFoodItem
+
+!insert (miBerryTart16, fiBerries16) into MenuItemFoodItem
+!insert (miBerryTart16, fiButter16) into MenuItemFoodItem
+!insert (miBerryTart16, fiBread16) into MenuItemFoodItem
+
+!insert (miGarlicBread16, fiBread16) into MenuItemFoodItem
+!insert (miGarlicBread16, fiButter16) into MenuItemFoodItem
+
+!new Individual('res21')
+!res21.time := Time('17:25')
+!res21.date := Date('2027-03-10')
+!res21.numberPeople := 5
+!res21.name := 'Family Lake Trip'
+!res21.phoneNumber := '555-9009'
+!res21.number := 23001
+!res21.seating := #Patio
+!res21.smoking := #NonSmoking
+
+!insert (rest16, res21) into RestaurantReservation
+!insert (res21, w35) into ReservationWaiter
+
+!new Table('tRes21A')
+!tRes21A.number := 31
+!tRes21A.description := 'Patio table near railing'
+!tRes21A.capacity := 6
+!insert (res21, tRes21A) into ReservationTable
+
+!new ItemOrder('ioRes21_1')
+!ioRes21_1.time := Time('17:40')
+!insert (res21, ioRes21_1) into ReservationItemOrdered
+!insert (ioRes21_1, miGarlicBread16) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes21_2')
+!ioRes21_2.time := Time('18:05')
+!insert (res21, ioRes21_2) into ReservationItemOrdered
+!insert (ioRes21_2, miSteakSandwich16) into ItemOrderMenuItem
+
+!new RegularCustomer('cust18')
+!cust18.name := 'Mina Ortiz'
+!cust18.prefferedLanguage := #Spanish
+
+!new Individual('res22')
+!res22.time := Time('22:10')
+!res22.date := Date('2027-03-10')
+!res22.numberPeople := 2
+!res22.name := 'Mina Ortiz'
+!res22.phoneNumber := '555-9010'
+!res22.number := 23002
+!res22.seating := #Inside
+!res22.smoking := #Smoking
+
+!insert (res22, cust18) into ReservationCustomer
+!insert (res22, w36) into ReservationWaiter
+
+!new Table('tRes22A')
+!tRes22A.number := 99
+!tRes22A.description := 'Late-night two-top'
+!tRes22A.capacity := 2
+!insert (res22, tRes22A) into ReservationTable
+
+!new ItemOrder('ioRes22_1')
+!ioRes22_1.time := Time('22:20')
+!insert (res22, ioRes22_1) into ReservationItemOrdered
+!insert (ioRes22_1, miIcedLatte16) into ItemOrderMenuItem
+
+!new Banquet('banq13')
+!banq13.time := Time('12:15')
+!banq13.date := Date('2027-03-12')
+!banq13.numberPeople := 16
+!banq13.name := 'Bento Office Team'
+!banq13.phoneNumber := '555-9100'
+!banq13.number := 24001
+!banq13.groupName := 'Quarterly Planning Lunch'
+!banq13.paymentMethod := #Cash
+!banq13.busService := false
+
+!insert (rest17, banq13) into RestaurantReservation
+!insert (banq13, w36) into ReservationWaiter
+!insert (banq13, w37) into ReservationWaiter
+
+!new Table('tBanq13A')
+!tBanq13A.number := 401
+!tBanq13A.description := 'Shared table A'
+!tBanq13A.capacity := 8
+!insert (banq13, tBanq13A) into ReservationTable
+
+!new Table('tBanq13B')
+!tBanq13B.number := 402
+!tBanq13B.description := 'Shared table B'
+!tBanq13B.capacity := 10
+!insert (banq13, tBanq13B) into ReservationTable
+
+!new ItemOrder('ioBanq13_1')
+!ioBanq13_1.time := Time('12:35')
+!insert (banq13, ioBanq13_1) into ReservationItemOrdered
+!insert (ioBanq13_1, miSteakSandwich16) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq13_2')
+!ioBanq13_2.time := Time('12:40')
+!insert (banq13, ioBanq13_2) into ReservationItemOrdered
+!insert (ioBanq13_2, miIcedLatte16) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq13_3')
+!ioBanq13_3.time := Time('13:05')
+!insert (banq13, ioBanq13_3) into ReservationItemOrdered
+!insert (ioBanq13_3, miBerryTart16) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq14')
+!dietReq14.diet := #Vegan
+
+!new ReportedAllergy('repAlg14')
+!repAlg14.allergen := #Gluten

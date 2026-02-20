@@ -1,0 +1,177 @@
+!new AddressBook('ab9')
+
+!new Company('cityLibrary')
+!cityLibrary.name := 'Riverside City Library'
+!cityLibrary.phone := '+1-415-555-1010'
+!cityLibrary.website := 'https://riversidelibrary.example'
+!cityLibrary.email := 'frontdesk@riversidelibrary.example'
+!cityLibrary.industry := 'Public Services'
+
+!new Company('artisansCoop')
+!artisansCoop.name := 'Harbor Artisans Cooperative'
+!artisansCoop.phone := '+1-415-555-1020'
+!artisansCoop.website := 'https://harborartisans.example'
+!artisansCoop.email := 'contact@harborartisans.example'
+!artisansCoop.industry := 'Crafts and Retail'
+
+!new Person('nadiaKhan')
+!nadiaKhan.name := 'Nadia Khan'
+!nadiaKhan.phone := '+1-415-555-1031'
+!nadiaKhan.website := ''
+!nadiaKhan.email := 'nadia.khan@riversidelibrary.example'
+!nadiaKhan.title := 'Library Director'
+
+!new Person('samirHolt')
+!samirHolt.name := 'Samir Holt'
+!samirHolt.phone := '+1-415-555-1032'
+!samirHolt.website := 'https://samirholt.example'
+!samirHolt.email := 'samir.holt@riversidelibrary.example'
+!samirHolt.title := 'Archivist'
+
+!new Person('lenaGao')
+!lenaGao.name := 'Lena Gao'
+!lenaGao.phone := '+1-415-555-1033'
+!lenaGao.website := ''
+!lenaGao.email := 'lena.gao@riversidelibrary.example'
+!lenaGao.title := 'Volunteer Coordinator'
+
+!new Person('marcoSilva')
+!marcoSilva.name := 'Marco Silva'
+!marcoSilva.phone := '+1-415-555-1044'
+!marcoSilva.website := ''
+!marcoSilva.email := 'marco.silva@harborartisans.example'
+!marcoSilva.title := 'Supply Manager'
+
+!insert (ab9, cityLibrary) into AddressBookMadeOfContact
+!insert (ab9, artisansCoop) into AddressBookMadeOfContact
+!insert (ab9, nadiaKhan) into AddressBookMadeOfContact
+!insert (ab9, samirHolt) into AddressBookMadeOfContact
+!insert (ab9, lenaGao) into AddressBookMadeOfContact
+!insert (ab9, marcoSilva) into AddressBookMadeOfContact
+
+!new Address('addrLibraryMain')
+!addrLibraryMain.city := 'San Francisco'
+!addrLibraryMain.street := 'Market St'
+!addrLibraryMain.houseNr := '1800'
+
+!new Address('addrLibraryArchive')
+!addrLibraryArchive.city := 'San Francisco'
+!addrLibraryArchive.street := 'Mission St'
+!addrLibraryArchive.houseNr := '455'
+
+!new Address('addrCoopShop')
+!addrCoopShop.city := 'San Francisco'
+!addrCoopShop.street := 'Embarcadero'
+!addrCoopShop.houseNr := '12'
+
+!new Address('addrNadiaHome')
+!addrNadiaHome.city := 'San Francisco'
+!addrNadiaHome.street := 'Fulton St'
+!addrNadiaHome.houseNr := '920'
+
+!new Address('addrSamirHome')
+!addrSamirHome.city := 'Daly City'
+!addrSamirHome.street := 'Junipero Serra Blvd'
+!addrSamirHome.houseNr := '140'
+
+!new Address('addrLenaHome')
+!addrLenaHome.city := 'San Francisco'
+!addrLenaHome.street := 'Irving St'
+!addrLenaHome.houseNr := '301'
+
+!new Address('addrMarcoHome')
+!addrMarcoHome.city := 'Oakland'
+!addrMarcoHome.street := 'Telegraph Ave'
+!addrMarcoHome.houseNr := '2120'
+
+!insert (cityLibrary, addrLibraryMain) into ContactContainsAddress
+!insert (cityLibrary, addrLibraryArchive) into ContactContainsAddress
+!insert (artisansCoop, addrCoopShop) into ContactContainsAddress
+!insert (nadiaKhan, addrNadiaHome) into ContactContainsAddress
+!insert (samirHolt, addrSamirHome) into ContactContainsAddress
+!insert (lenaGao, addrLenaHome) into ContactContainsAddress
+!insert (marcoSilva, addrMarcoHome) into ContactContainsAddress
+
+!new Note('nLibraryEmailDonation')
+!nLibraryEmailDonation.author := 'Riverside City Library'
+!nLibraryEmailDonation.time := Date('2026-01-18 10:05')
+!nLibraryEmailDonation.type := #EMAIL
+!nLibraryEmailDonation.comment := 'Sent donation receipt and cataloging timeline for the new local history collection.'
+
+!new Note('nNadiaMeetingVendors')
+!nNadiaMeetingVendors.author := 'Nadia Khan'
+!nNadiaMeetingVendors.time := Date('2026-02-02 15:00')
+!nNadiaMeetingVendors.type := #MEETING
+!nNadiaMeetingVendors.comment := 'Met with local vendors about workshop materials; confirmed safety requirements and delivery dates.'
+
+!new Note('nSamirCallArchive')
+!nSamirCallArchive.author := 'Samir Holt'
+!nSamirCallArchive.time := Date('2026-02-05 09:35')
+!nSamirCallArchive.type := #CALL
+!nSamirCallArchive.comment := 'Called municipal records office to request digitization permissions for 1970s planning maps.'
+
+!new Note('nCoopEmailInvoice')
+!nCoopEmailInvoice.author := 'Marco Silva'
+!nCoopEmailInvoice.time := Date('2026-02-06 12:20')
+!nCoopEmailInvoice.type := #EMAIL
+!nCoopEmailInvoice.comment := 'Issued invoice for workshop supply bundle and offered discounted refill options for recurring events.'
+
+!insert (cityLibrary, nLibraryEmailDonation) into ContactContainsNote
+!insert (nadiaKhan, nNadiaMeetingVendors) into ContactContainsNote
+!insert (samirHolt, nSamirCallArchive) into ContactContainsNote
+!insert (artisansCoop, nCoopEmailInvoice) into ContactContainsNote
+
+!new Relationship('relNadiaEmployeeLibrary')
+!relNadiaEmployeeLibrary.type := #EMPLOYEE
+!insert (nadiaKhan, relNadiaEmployeeLibrary) into ContactToRelationship
+!insert (relNadiaEmployeeLibrary, cityLibrary) into RelationshipToContact
+
+!new Relationship('relSamirEmployeeLibrary')
+!relSamirEmployeeLibrary.type := #EMPLOYEE
+!insert (samirHolt, relSamirEmployeeLibrary) into ContactToRelationship
+!insert (relSamirEmployeeLibrary, cityLibrary) into RelationshipToContact
+
+!new Relationship('relLenaEmployeeLibrary')
+!relLenaEmployeeLibrary.type := #EMPLOYEE
+!insert (lenaGao, relLenaEmployeeLibrary) into ContactToRelationship
+!insert (relLenaEmployeeLibrary, cityLibrary) into RelationshipToContact
+
+!new Relationship('relMarcoEmployeeCoop')
+!relMarcoEmployeeCoop.type := #EMPLOYEE
+!insert (marcoSilva, relMarcoEmployeeCoop) into ContactToRelationship
+!insert (relMarcoEmployeeCoop, artisansCoop) into RelationshipToContact
+
+!new Relationship('relSamirBossIsNadia')
+!relSamirBossIsNadia.type := #BOSS
+!insert (samirHolt, relSamirBossIsNadia) into ContactToRelationship
+!insert (relSamirBossIsNadia, nadiaKhan) into RelationshipToContact
+
+!new Relationship('relLenaBossIsNadia')
+!relLenaBossIsNadia.type := #BOSS
+!insert (lenaGao, relLenaBossIsNadia) into ContactToRelationship
+!insert (relLenaBossIsNadia, nadiaKhan) into RelationshipToContact
+
+!new Relationship('relSamirCoworkerLena')
+!relSamirCoworkerLena.type := #COWORKER
+!insert (samirHolt, relSamirCoworkerLena) into ContactToRelationship
+!insert (relSamirCoworkerLena, lenaGao) into RelationshipToContact
+
+!new Relationship('relLenaCoworkerSamir')
+!relLenaCoworkerSamir.type := #COWORKER
+!insert (lenaGao, relLenaCoworkerSamir) into ContactToRelationship
+!insert (relLenaCoworkerSamir, samirHolt) into RelationshipToContact
+
+!new Relationship('relLibraryCoworkerCoop')
+!relLibraryCoworkerCoop.type := #COWORKER
+!insert (cityLibrary, relLibraryCoworkerCoop) into ContactToRelationship
+!insert (relLibraryCoworkerCoop, artisansCoop) into RelationshipToContact
+
+!new Relationship('relCoopCoworkerLibrary')
+!relCoopCoworkerLibrary.type := #COWORKER
+!insert (artisansCoop, relCoopCoworkerLibrary) into ContactToRelationship
+!insert (relCoopCoworkerLibrary, cityLibrary) into RelationshipToContact
+
+!new Relationship('relMarcoCoworkerNadia')
+!relMarcoCoworkerNadia.type := #COWORKER
+!insert (marcoSilva, relMarcoCoworkerNadia) into ContactToRelationship
+!insert (relMarcoCoworkerNadia, nadiaKhan) into RelationshipToContact

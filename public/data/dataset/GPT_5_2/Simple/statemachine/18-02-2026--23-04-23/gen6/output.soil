@@ -1,0 +1,221 @@
+!new StateMachine('smThermostat')
+!smThermostat.name := 'homeThermostat'
+
+!new State('stT_off')
+!stT_off.name := 'off'
+!new State('stT_idle')
+!stT_idle.name := 'idle'
+!new State('stT_heating')
+!stT_heating.name := 'heating'
+!new State('stT_cooling')
+!stT_cooling.name := 'cooling'
+!new State('stT_error')
+!stT_error.name := 'error'
+
+!insert (smThermostat, stT_off) into StateMachineContainsStates
+!insert (smThermostat, stT_idle) into StateMachineContainsStates
+!insert (smThermostat, stT_heating) into StateMachineContainsStates
+!insert (smThermostat, stT_cooling) into StateMachineContainsStates
+!insert (smThermostat, stT_error) into StateMachineContainsStates
+
+!insert (smThermostat, stT_off) into StateMachineStartsStates
+
+!new Transition('trT_powerOn')
+!trT_powerOn.name := 'powerOn'
+!new TimeEvent('evT_powerOn')
+!evT_powerOn.time := 1
+!insert (smThermostat, trT_powerOn) into StateMachineContainsTransitions
+!insert (trT_powerOn, evT_powerOn) into TransitionContainsEvents
+!insert (stT_off, trT_powerOn) into StateTransition
+!insert (trT_powerOn, stT_idle) into TransitionState
+
+!new Transition('trT_powerOff')
+!trT_powerOff.name := 'powerOff'
+!new TimeEvent('evT_powerOff')
+!evT_powerOff.time := 1
+!insert (smThermostat, trT_powerOff) into StateMachineContainsTransitions
+!insert (trT_powerOff, evT_powerOff) into TransitionContainsEvents
+!insert (stT_idle, trT_powerOff) into StateTransition
+!insert (trT_powerOff, stT_off) into TransitionState
+
+!new Transition('trT_tempLow')
+!trT_tempLow.name := 'tempLow'
+!new TimeEvent('evT_tempLow')
+!evT_tempLow.time := 2
+!insert (smThermostat, trT_tempLow) into StateMachineContainsTransitions
+!insert (trT_tempLow, evT_tempLow) into TransitionContainsEvents
+!insert (stT_idle, trT_tempLow) into StateTransition
+!insert (trT_tempLow, stT_heating) into TransitionState
+
+!new Transition('trT_tempOkFromHeat')
+!trT_tempOkFromHeat.name := 'tempOkFromHeat'
+!new TimeEvent('evT_tempOkFromHeat')
+!evT_tempOkFromHeat.time := 5
+!insert (smThermostat, trT_tempOkFromHeat) into StateMachineContainsTransitions
+!insert (trT_tempOkFromHeat, evT_tempOkFromHeat) into TransitionContainsEvents
+!insert (stT_heating, trT_tempOkFromHeat) into StateTransition
+!insert (trT_tempOkFromHeat, stT_idle) into TransitionState
+
+!new Transition('trT_tempHigh')
+!trT_tempHigh.name := 'tempHigh'
+!new TimeEvent('evT_tempHigh')
+!evT_tempHigh.time := 2
+!insert (smThermostat, trT_tempHigh) into StateMachineContainsTransitions
+!insert (trT_tempHigh, evT_tempHigh) into TransitionContainsEvents
+!insert (stT_idle, trT_tempHigh) into StateTransition
+!insert (trT_tempHigh, stT_cooling) into TransitionState
+
+!new Transition('trT_tempOkFromCool')
+!trT_tempOkFromCool.name := 'tempOkFromCool'
+!new TimeEvent('evT_tempOkFromCool')
+!evT_tempOkFromCool.time := 5
+!insert (smThermostat, trT_tempOkFromCool) into StateMachineContainsTransitions
+!insert (trT_tempOkFromCool, evT_tempOkFromCool) into TransitionContainsEvents
+!insert (stT_cooling, trT_tempOkFromCool) into StateTransition
+!insert (trT_tempOkFromCool, stT_idle) into TransitionState
+
+!new Transition('trT_sensorFault')
+!trT_sensorFault.name := 'sensorFault'
+!new TimeEvent('evT_sensorFault')
+!evT_sensorFault.time := 1
+!insert (smThermostat, trT_sensorFault) into StateMachineContainsTransitions
+!insert (trT_sensorFault, evT_sensorFault) into TransitionContainsEvents
+!insert (stT_idle, trT_sensorFault) into StateTransition
+!insert (trT_sensorFault, stT_error) into TransitionState
+
+!new Transition('trT_reset')
+!trT_reset.name := 'reset'
+!new TimeEvent('evT_reset')
+!evT_reset.time := 10
+!insert (smThermostat, trT_reset) into StateMachineContainsTransitions
+!insert (trT_reset, evT_reset) into TransitionContainsEvents
+!insert (stT_error, trT_reset) into StateTransition
+!insert (trT_reset, stT_off) into TransitionState
+
+!new Transition('trT_keepAlive')
+!trT_keepAlive.name := 'keepAlive'
+!new TimeEvent('evT_keepAlive')
+!evT_keepAlive.time := 60
+!insert (smThermostat, trT_keepAlive) into StateMachineContainsTransitions
+!insert (trT_keepAlive, evT_keepAlive) into TransitionContainsEvents
+!insert (stT_idle, trT_keepAlive) into StateTransition
+!insert (trT_keepAlive, stT_idle) into TransitionState
+
+
+!new StateMachine('smWasher')
+!smWasher.name := 'washingProgram'
+
+!new State('stW_idle')
+!stW_idle.name := 'idle'
+!new State('stW_filling')
+!stW_filling.name := 'filling'
+!new State('stW_washing')
+!stW_washing.name := 'washing'
+!new State('stW_draining')
+!stW_draining.name := 'draining'
+!new State('stW_spinning')
+!stW_spinning.name := 'spinning'
+!new State('stW_paused')
+!stW_paused.name := 'paused'
+!new State('stW_done')
+!stW_done.name := 'done'
+
+!insert (smWasher, stW_idle) into StateMachineContainsStates
+!insert (smWasher, stW_filling) into StateMachineContainsStates
+!insert (smWasher, stW_washing) into StateMachineContainsStates
+!insert (smWasher, stW_draining) into StateMachineContainsStates
+!insert (smWasher, stW_spinning) into StateMachineContainsStates
+!insert (smWasher, stW_paused) into StateMachineContainsStates
+!insert (smWasher, stW_done) into StateMachineContainsStates
+
+!insert (smWasher, stW_idle) into StateMachineStartsStates
+
+!new Transition('trW_startFill')
+!trW_startFill.name := 'startFill'
+!new TimeEvent('evW_startFill')
+!evW_startFill.time := 1
+!insert (smWasher, trW_startFill) into StateMachineContainsTransitions
+!insert (trW_startFill, evW_startFill) into TransitionContainsEvents
+!insert (stW_idle, trW_startFill) into StateTransition
+!insert (trW_startFill, stW_filling) into TransitionState
+
+!new Transition('trW_fillComplete')
+!trW_fillComplete.name := 'fillComplete'
+!new TimeEvent('evW_fillComplete')
+!evW_fillComplete.time := 180
+!insert (smWasher, trW_fillComplete) into StateMachineContainsTransitions
+!insert (trW_fillComplete, evW_fillComplete) into TransitionContainsEvents
+!insert (stW_filling, trW_fillComplete) into StateTransition
+!insert (trW_fillComplete, stW_washing) into TransitionState
+
+!new Transition('trW_washComplete')
+!trW_washComplete.name := 'washComplete'
+!new TimeEvent('evW_washComplete')
+!evW_washComplete.time := 900
+!insert (smWasher, trW_washComplete) into StateMachineContainsTransitions
+!insert (trW_washComplete, evW_washComplete) into TransitionContainsEvents
+!insert (stW_washing, trW_washComplete) into StateTransition
+!insert (trW_washComplete, stW_draining) into TransitionState
+
+!new Transition('trW_drainComplete')
+!trW_drainComplete.name := 'drainComplete'
+!new TimeEvent('evW_drainComplete')
+!evW_drainComplete.time := 120
+!insert (smWasher, trW_drainComplete) into StateMachineContainsTransitions
+!insert (trW_drainComplete, evW_drainComplete) into TransitionContainsEvents
+!insert (stW_draining, trW_drainComplete) into StateTransition
+!insert (trW_drainComplete, stW_spinning) into TransitionState
+
+!new Transition('trW_spinComplete')
+!trW_spinComplete.name := 'spinComplete'
+!new TimeEvent('evW_spinComplete')
+!evW_spinComplete.time := 300
+!insert (smWasher, trW_spinComplete) into StateMachineContainsTransitions
+!insert (trW_spinComplete, evW_spinComplete) into TransitionContainsEvents
+!insert (stW_spinning, trW_spinComplete) into StateTransition
+!insert (trW_spinComplete, stW_done) into TransitionState
+
+!new Transition('trW_pauseFromFilling')
+!trW_pauseFromFilling.name := 'pause'
+!new TimeEvent('evW_pauseFromFilling')
+!evW_pauseFromFilling.time := 1
+!insert (smWasher, trW_pauseFromFilling) into StateMachineContainsTransitions
+!insert (trW_pauseFromFilling, evW_pauseFromFilling) into TransitionContainsEvents
+!insert (stW_filling, trW_pauseFromFilling) into StateTransition
+!insert (trW_pauseFromFilling, stW_paused) into TransitionState
+
+!new Transition('trW_pauseFromWashing')
+!trW_pauseFromWashing.name := 'pause'
+!new TimeEvent('evW_pauseFromWashing')
+!evW_pauseFromWashing.time := 1
+!insert (smWasher, trW_pauseFromWashing) into StateMachineContainsTransitions
+!insert (trW_pauseFromWashing, evW_pauseFromWashing) into TransitionContainsEvents
+!insert (stW_washing, trW_pauseFromWashing) into StateTransition
+!insert (trW_pauseFromWashing, stW_paused) into TransitionState
+
+!new Transition('trW_resumeToWashing')
+!trW_resumeToWashing.name := 'resume'
+!new TimeEvent('evW_resumeToWashing')
+!evW_resumeToWashing.time := 1
+!insert (smWasher, trW_resumeToWashing) into StateMachineContainsTransitions
+!insert (trW_resumeToWashing, evW_resumeToWashing) into TransitionContainsEvents
+!insert (stW_paused, trW_resumeToWashing) into StateTransition
+!insert (trW_resumeToWashing, stW_washing) into TransitionState
+
+!new Transition('trW_cancelToIdle')
+!trW_cancelToIdle.name := 'cancel'
+!new TimeEvent('evW_cancelToIdle')
+!evW_cancelToIdle.time := 2
+!insert (smWasher, trW_cancelToIdle) into StateMachineContainsTransitions
+!insert (trW_cancelToIdle, evW_cancelToIdle) into TransitionContainsEvents
+!insert (stW_paused, trW_cancelToIdle) into StateTransition
+!insert (trW_cancelToIdle, stW_idle) into TransitionState
+
+!new Transition('trW_autoSleep')
+!trW_autoSleep.name := 'autoSleep'
+!new TimeEvent('evW_autoSleep')
+!evW_autoSleep.time := 600
+!insert (smWasher, trW_autoSleep) into StateMachineContainsTransitions
+!insert (trW_autoSleep, evW_autoSleep) into TransitionContainsEvents
+!insert (stW_done, trW_autoSleep) into StateTransition
+!insert (trW_autoSleep, stW_idle) into TransitionState

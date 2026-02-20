@@ -1,0 +1,227 @@
+!new StateMachine('smRobot')
+!smRobot.name := 'factoryRobotController'
+
+!new State('rbBoot')
+!rbBoot.name := 'booting'
+!new State('rbIdle')
+!rbIdle.name := 'idle'
+!new State('rbActive')
+!rbActive.name := 'active'
+!new State('rbPaused')
+!rbPaused.name := 'paused'
+!new State('rbEStop')
+!rbEStop.name := 'emergencyStop'
+!new State('rbService')
+!rbService.name := 'service'
+
+!insert (smRobot, rbBoot) into StateMachineContainsStates
+!insert (smRobot, rbIdle) into StateMachineContainsStates
+!insert (smRobot, rbActive) into StateMachineContainsStates
+!insert (smRobot, rbPaused) into StateMachineContainsStates
+!insert (smRobot, rbEStop) into StateMachineContainsStates
+!insert (smRobot, rbService) into StateMachineContainsStates
+
+!insert (smRobot, rbBoot) into StateMachineStartsStates
+
+!new StateMachine('smRobotStartIdle')
+!smRobotStartIdle.name := 'idleStartHelper'
+!insert (smRobotStartIdle, rbIdle) into StateMachineStartsStates
+
+!new StateMachine('smRobotStartActive')
+!smRobotStartActive.name := 'activeStartHelper'
+!insert (smRobotStartActive, rbActive) into StateMachineStartsStates
+
+!new StateMachine('smRobotStartPaused')
+!smRobotStartPaused.name := 'pausedStartHelper'
+!insert (smRobotStartPaused, rbPaused) into StateMachineStartsStates
+
+!new StateMachine('smRobotStartEStop')
+!smRobotStartEStop.name := 'estopStartHelper'
+!insert (smRobotStartEStop, rbEStop) into StateMachineStartsStates
+
+!new StateMachine('smRobotStartService')
+!smRobotStartService.name := 'serviceStartHelper'
+!insert (smRobotStartService, rbService) into StateMachineStartsStates
+
+
+!new Transition('trRbBootComplete')
+!trRbBootComplete.name := 'bootComplete'
+!new TimeEvent('evRbBootComplete')
+!evRbBootComplete.time := 12
+
+!new Transition('trRbStartJob')
+!trRbStartJob.name := 'startJob'
+!new TimeEvent('evRbStartJob')
+!evRbStartJob.time := 2
+
+!new Transition('trRbPauseJob')
+!trRbPauseJob.name := 'pauseJob'
+!new TimeEvent('evRbPauseJob')
+!evRbPauseJob.time := 1
+
+!new Transition('trRbResumeJob')
+!trRbResumeJob.name := 'resumeJob'
+!new TimeEvent('evRbResumeJob')
+!evRbResumeJob.time := 1
+
+!new Transition('trRbEmergencyTrip')
+!trRbEmergencyTrip.name := 'emergencyTrip'
+!new TimeEvent('evRbEmergencyTrip')
+!evRbEmergencyTrip.time := 1
+
+!new Transition('trRbEnterService')
+!trRbEnterService.name := 'enterService'
+!new TimeEvent('evRbEnterService')
+!evRbEnterService.time := 30
+
+!new Transition('trRbServiceComplete')
+!trRbServiceComplete.name := 'serviceComplete'
+!new TimeEvent('evRbServiceComplete')
+!evRbServiceComplete.time := 900
+
+!new Transition('trRbAutoHealthCheck')
+!trRbAutoHealthCheck.name := 'autoHealthCheck'
+!new TimeEvent('evRbAutoHealthCheck')
+!evRbAutoHealthCheck.time := 300
+
+
+!insert (smRobot, trRbBootComplete) into StateMachineContainsTransitions
+!insert (smRobot, trRbStartJob) into StateMachineContainsTransitions
+!insert (smRobot, trRbPauseJob) into StateMachineContainsTransitions
+!insert (smRobot, trRbResumeJob) into StateMachineContainsTransitions
+!insert (smRobot, trRbEmergencyTrip) into StateMachineContainsTransitions
+!insert (smRobot, trRbEnterService) into StateMachineContainsTransitions
+!insert (smRobot, trRbServiceComplete) into StateMachineContainsTransitions
+!insert (smRobot, trRbAutoHealthCheck) into StateMachineContainsTransitions
+
+!insert (trRbBootComplete, evRbBootComplete) into TransitionContainsEvents
+!insert (trRbStartJob, evRbStartJob) into TransitionContainsEvents
+!insert (trRbPauseJob, evRbPauseJob) into TransitionContainsEvents
+!insert (trRbResumeJob, evRbResumeJob) into TransitionContainsEvents
+!insert (trRbEmergencyTrip, evRbEmergencyTrip) into TransitionContainsEvents
+!insert (trRbEnterService, evRbEnterService) into TransitionContainsEvents
+!insert (trRbServiceComplete, evRbServiceComplete) into TransitionContainsEvents
+!insert (trRbAutoHealthCheck, evRbAutoHealthCheck) into TransitionContainsEvents
+
+
+!insert (rbBoot, trRbBootComplete) into StateTransition
+!insert (trRbBootComplete, rbIdle) into TransitionState
+
+!insert (rbIdle, trRbStartJob) into StateTransition
+!insert (trRbStartJob, rbActive) into TransitionState
+
+!insert (rbActive, trRbPauseJob) into StateTransition
+!insert (trRbPauseJob, rbPaused) into TransitionState
+
+!insert (rbPaused, trRbResumeJob) into StateTransition
+!insert (trRbResumeJob, rbActive) into TransitionState
+
+!insert (rbActive, trRbEmergencyTrip) into StateTransition
+!insert (trRbEmergencyTrip, rbEStop) into TransitionState
+
+!insert (rbEStop, trRbEnterService) into StateTransition
+!insert (trRbEnterService, rbService) into TransitionState
+
+!insert (rbService, trRbServiceComplete) into StateTransition
+!insert (trRbServiceComplete, rbIdle) into TransitionState
+
+!insert (rbIdle, trRbAutoHealthCheck) into StateTransition
+!insert (trRbAutoHealthCheck, rbIdle) into TransitionState
+
+
+
+!new StateMachine('smTicketGate')
+!smTicketGate.name := 'metroTicketGate'
+
+!new State('tgLocked')
+!tgLocked.name := 'locked'
+!new State('tgReading')
+!tgReading.name := 'readingTicket'
+!new State('tgUnlocked')
+!tgUnlocked.name := 'unlocked'
+!new State('tgAlarm')
+!tgAlarm.name := 'alarm'
+
+!insert (smTicketGate, tgLocked) into StateMachineContainsStates
+!insert (smTicketGate, tgReading) into StateMachineContainsStates
+!insert (smTicketGate, tgUnlocked) into StateMachineContainsStates
+!insert (smTicketGate, tgAlarm) into StateMachineContainsStates
+
+!insert (smTicketGate, tgLocked) into StateMachineStartsStates
+
+!new StateMachine('smTicketGateStartReading')
+!smTicketGateStartReading.name := 'readingStartHelper'
+!insert (smTicketGateStartReading, tgReading) into StateMachineStartsStates
+
+!new StateMachine('smTicketGateStartUnlocked')
+!smTicketGateStartUnlocked.name := 'unlockedStartHelper'
+!insert (smTicketGateStartUnlocked, tgUnlocked) into StateMachineStartsStates
+
+!new StateMachine('smTicketGateStartAlarm')
+!smTicketGateStartAlarm.name := 'alarmStartHelper'
+!insert (smTicketGateStartAlarm, tgAlarm) into StateMachineStartsStates
+
+
+!new Transition('trTgPresentCard')
+!trTgPresentCard.name := 'presentCard'
+!new TimeEvent('evTgPresentCard')
+!evTgPresentCard.time := 1
+
+!new Transition('trTgValidateOk')
+!trTgValidateOk.name := 'validateOk'
+!new TimeEvent('evTgValidateOk')
+!evTgValidateOk.time := 1
+
+!new Transition('trTgValidateFail')
+!trTgValidateFail.name := 'validateFail'
+!new TimeEvent('evTgValidateFail')
+!evTgValidateFail.time := 1
+
+!new Transition('trTgPassThrough')
+!trTgPassThrough.name := 'passThrough'
+!new TimeEvent('evTgPassThrough')
+!evTgPassThrough.time := 4
+
+!new Transition('trTgUnlockTimeout')
+!trTgUnlockTimeout.name := 'unlockTimeout'
+!new TimeEvent('evTgUnlockTimeout')
+!evTgUnlockTimeout.time := 6
+
+!new Transition('trTgAlarmReset')
+!trTgAlarmReset.name := 'alarmReset'
+!new TimeEvent('evTgAlarmReset')
+!evTgAlarmReset.time := 20
+
+
+!insert (smTicketGate, trTgPresentCard) into StateMachineContainsTransitions
+!insert (smTicketGate, trTgValidateOk) into StateMachineContainsTransitions
+!insert (smTicketGate, trTgValidateFail) into StateMachineContainsTransitions
+!insert (smTicketGate, trTgPassThrough) into StateMachineContainsTransitions
+!insert (smTicketGate, trTgUnlockTimeout) into StateMachineContainsTransitions
+!insert (smTicketGate, trTgAlarmReset) into StateMachineContainsTransitions
+
+!insert (trTgPresentCard, evTgPresentCard) into TransitionContainsEvents
+!insert (trTgValidateOk, evTgValidateOk) into TransitionContainsEvents
+!insert (trTgValidateFail, evTgValidateFail) into TransitionContainsEvents
+!insert (trTgPassThrough, evTgPassThrough) into TransitionContainsEvents
+!insert (trTgUnlockTimeout, evTgUnlockTimeout) into TransitionContainsEvents
+!insert (trTgAlarmReset, evTgAlarmReset) into TransitionContainsEvents
+
+
+!insert (tgLocked, trTgPresentCard) into StateTransition
+!insert (trTgPresentCard, tgReading) into TransitionState
+
+!insert (tgReading, trTgValidateOk) into StateTransition
+!insert (trTgValidateOk, tgUnlocked) into TransitionState
+
+!insert (tgReading, trTgValidateFail) into StateTransition
+!insert (trTgValidateFail, tgAlarm) into TransitionState
+
+!insert (tgUnlocked, trTgPassThrough) into StateTransition
+!insert (trTgPassThrough, tgLocked) into TransitionState
+
+!insert (tgUnlocked, trTgUnlockTimeout) into StateTransition
+!insert (trTgUnlockTimeout, tgLocked) into TransitionState
+
+!insert (tgAlarm, trTgAlarmReset) into StateTransition
+!insert (trTgAlarmReset, tgLocked) into TransitionState

@@ -1,0 +1,124 @@
+!new AddressBook('ab20')
+
+!new Company('nimbusAir')
+!nimbusAir.name := 'Nimbus Air'
+!nimbusAir.phone := '+1-305-555-2000'
+!nimbusAir.website := 'https://nimbusair.example'
+!nimbusAir.email := 'contact@nimbusair.example'
+!nimbusAir.industry := 'Aviation'
+
+!new Company('nimbusCargo')
+!nimbusCargo.name := 'Nimbus Cargo'
+!nimbusCargo.phone := '+1-305-555-2005'
+!nimbusCargo.website := ''
+!nimbusCargo.email := 'ops@nimbuscargo.example'
+!nimbusCargo.industry := 'Air Freight'
+
+!new Company('skyPortAuthority')
+!skyPortAuthority.name := 'SkyPort Authority'
+!skyPortAuthority.phone := '+1-305-555-2010'
+!skyPortAuthority.website := 'https://skyport.example'
+!skyPortAuthority.email := 'admin@skyport.example'
+!skyPortAuthority.industry := 'Airport Operations'
+
+!new Company('aeroFuelServices')
+!aeroFuelServices.name := 'AeroFuel Services'
+!aeroFuelServices.phone := '+1-954-555-2020'
+!aeroFuelServices.website := 'https://aerofuel.example'
+!aeroFuelServices.email := 'dispatch@aerofuel.example'
+!aeroFuelServices.industry := 'Fuel Logistics'
+
+!insert (ab20, nimbusAir) into AddressBookMadeOfContact
+!insert (ab20, nimbusCargo) into AddressBookMadeOfContact
+!insert (ab20, skyPortAuthority) into AddressBookMadeOfContact
+!insert (ab20, aeroFuelServices) into AddressBookMadeOfContact
+
+!new Address('addrNimbusAirHQ')
+!addrNimbusAirHQ.city := 'Miami'
+!addrNimbusAirHQ.street := 'NW 36th St'
+!addrNimbusAirHQ.houseNr := '4200'
+
+!new Address('addrNimbusAirHangar')
+!addrNimbusAirHangar.city := 'Miami'
+!addrNimbusAirHangar.street := 'Aviation Dr'
+!addrNimbusAirHangar.houseNr := '12'
+
+!new Address('addrNimbusCargoTerminal')
+!addrNimbusCargoTerminal.city := 'Miami'
+!addrNimbusCargoTerminal.street := 'Cargo Rd'
+!addrNimbusCargoTerminal.houseNr := '7'
+
+!new Address('addrSkyPortAdmin')
+!addrSkyPortAdmin.city := 'Miami'
+!addrSkyPortAdmin.street := 'Terminal Pkwy'
+!addrSkyPortAdmin.houseNr := '1'
+
+!new Address('addrAeroFuelDepot')
+!addrAeroFuelDepot.city := 'Fort Lauderdale'
+!addrAeroFuelDepot.street := 'E Sunrise Blvd'
+!addrAeroFuelDepot.houseNr := '950'
+
+!insert (nimbusAir, addrNimbusAirHQ) into ContactContainsAddress
+!insert (nimbusAir, addrNimbusAirHangar) into ContactContainsAddress
+!insert (nimbusCargo, addrNimbusCargoTerminal) into ContactContainsAddress
+!insert (skyPortAuthority, addrSkyPortAdmin) into ContactContainsAddress
+!insert (aeroFuelServices, addrAeroFuelDepot) into ContactContainsAddress
+
+!new Note('nAirEmailSlots')
+!nAirEmailSlots.author := 'SkyPort Scheduling'
+!nAirEmailSlots.time := Date('2026-02-02 06:55')
+!nAirEmailSlots.type := #EMAIL
+!nAirEmailSlots.comment := 'Issued updated gate allocation and turnaround slot times for next week.'
+
+!new Note('nCargoCallCustoms')
+!nCargoCallCustoms.author := 'Nimbus Cargo Ops'
+!nCargoCallCustoms.time := Date('2026-02-03 11:15')
+!nCargoCallCustoms.type := #CALL
+!nCargoCallCustoms.comment := 'Called customs broker about hold release; confirmed inspection window and documentation.'
+
+!new Note('nSkyPortMeetingDrill')
+!nSkyPortMeetingDrill.author := 'Safety Office'
+!nSkyPortMeetingDrill.time := Date('2026-02-06 09:00')
+!nSkyPortMeetingDrill.type := #MEETING
+!nSkyPortMeetingDrill.comment := 'Tabletop emergency drill completed; actions assigned for communications and perimeter control.'
+
+!new Note('nFuelEmailPricing')
+!nFuelEmailPricing.author := 'AeroFuel Dispatch'
+!nFuelEmailPricing.time := Date('2026-02-07 15:35')
+!nFuelEmailPricing.type := #EMAIL
+!nFuelEmailPricing.comment := 'Shared revised contract pricing sheet and confirmed night refueling availability.'
+
+!insert (nimbusAir, nAirEmailSlots) into ContactContainsNote
+!insert (nimbusCargo, nCargoCallCustoms) into ContactContainsNote
+!insert (skyPortAuthority, nSkyPortMeetingDrill) into ContactContainsNote
+!insert (aeroFuelServices, nFuelEmailPricing) into ContactContainsNote
+
+!new Relationship('relAirSubdivisionCargo')
+!relAirSubdivisionCargo.type := #SUBDIVISION
+!insert (nimbusAir, relAirSubdivisionCargo) into ContactToRelationship
+!insert (relAirSubdivisionCargo, nimbusCargo) into RelationshipToContact
+
+!new Relationship('relAirCoworkerSkyPort')
+!relAirCoworkerSkyPort.type := #COWORKER
+!insert (nimbusAir, relAirCoworkerSkyPort) into ContactToRelationship
+!insert (relAirCoworkerSkyPort, skyPortAuthority) into RelationshipToContact
+
+!new Relationship('relSkyPortCoworkerAir')
+!relSkyPortCoworkerAir.type := #COWORKER
+!insert (skyPortAuthority, relSkyPortCoworkerAir) into ContactToRelationship
+!insert (relSkyPortCoworkerAir, nimbusAir) into RelationshipToContact
+
+!new Relationship('relFuelCoworkerCargo')
+!relFuelCoworkerCargo.type := #COWORKER
+!insert (aeroFuelServices, relFuelCoworkerCargo) into ContactToRelationship
+!insert (relFuelCoworkerCargo, nimbusCargo) into RelationshipToContact
+
+!new Relationship('relCargoCoworkerFuel')
+!relCargoCoworkerFuel.type := #COWORKER
+!insert (nimbusCargo, relCargoCoworkerFuel) into ContactToRelationship
+!insert (relCargoCoworkerFuel, aeroFuelServices) into RelationshipToContact
+
+!new Relationship('relFuelCoworkerSkyPort')
+!relFuelCoworkerSkyPort.type := #COWORKER
+!insert (aeroFuelServices, relFuelCoworkerSkyPort) into ContactToRelationship
+!insert (relFuelCoworkerSkyPort, skyPortAuthority) into RelationshipToContact

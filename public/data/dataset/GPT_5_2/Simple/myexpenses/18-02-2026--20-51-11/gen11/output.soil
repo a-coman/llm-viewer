@@ -1,0 +1,50 @@
+!new Currency('curNOK')
+!curNOK.name := 'Norwegian Krone'
+!curNOK.abbreviation := 'NOK'
+
+!new Currency('curPLN')
+!curPLN.name := 'Polish Zloty'
+!curPLN.abbreviation := 'PLN'
+
+!new Expense('expMarCarRepair')
+!expMarCarRepair.amount := 4250.00
+!expMarCarRepair.startDate := Date('2026-03-04')
+!expMarCarRepair.endDate := Date('2026-03-12')
+
+!new Bill('billCarPartsOrder_2026_03_04')
+!billCarPartsOrder_2026_03_04.amount := 1500.00
+!billCarPartsOrder_2026_03_04.category := 'Vehicle - Parts'
+!billCarPartsOrder_2026_03_04.date := Date('2026-03-04')
+!billCarPartsOrder_2026_03_04.paymentMethod := #CREDIT_CARD
+!billCarPartsOrder_2026_03_04.status := #PENDING
+
+!new Bill('billGarageLabor_2026_03_08')
+!billGarageLabor_2026_03_08.amount := 2200.00
+!billGarageLabor_2026_03_08.category := 'Vehicle - Labor'
+!billGarageLabor_2026_03_08.date := Date('2026-03-08')
+!billGarageLabor_2026_03_08.paymentMethod := #CHECK
+!billGarageLabor_2026_03_08.status := #VERIFIED
+
+!new Bill('billTowingService_2026_03_09')
+!billTowingService_2026_03_09.amount := 350.00
+!billTowingService_2026_03_09.category := 'Vehicle - Towing'
+!billTowingService_2026_03_09.date := Date('2026-03-09')
+!billTowingService_2026_03_09.paymentMethod := #CASH
+!billTowingService_2026_03_09.status := #VALIDATED
+
+!new Bill('billSafetyInspection_2026_03_12')
+!billSafetyInspection_2026_03_12.amount := 200.00
+!billSafetyInspection_2026_03_12.category := 'Vehicle - Inspection'
+!billSafetyInspection_2026_03_12.date := Date('2026-03-12')
+!billSafetyInspection_2026_03_12.paymentMethod := #CREDIT_CARD
+!billSafetyInspection_2026_03_12.status := #VALIDATED
+
+!insert (expMarCarRepair, billCarPartsOrder_2026_03_04) into ExpenseContainsBills
+!insert (expMarCarRepair, billGarageLabor_2026_03_08) into ExpenseContainsBills
+!insert (expMarCarRepair, billTowingService_2026_03_09) into ExpenseContainsBills
+!insert (expMarCarRepair, billSafetyInspection_2026_03_12) into ExpenseContainsBills
+
+!insert (billCarPartsOrder_2026_03_04, curPLN) into BillCurrency
+!insert (billGarageLabor_2026_03_08, curNOK) into BillCurrency
+!insert (billTowingService_2026_03_09, curNOK) into BillCurrency
+!insert (billSafetyInspection_2026_03_12, curNOK) into BillCurrency

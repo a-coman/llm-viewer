@@ -1,0 +1,91 @@
+!new Client('zC1')
+!zC1.clientId := 1101
+!zC1.isSuspended := false
+
+!new Client('zC2')
+!zC2.clientId := 1102
+!zC2.isSuspended := true
+
+!new Movie('zMov1')
+!zMov1.title := 'Quantum Heist'
+!zMov1.availableCopies := 4
+!zMov1.genre := #Action
+
+!new Movie('zMov2')
+!zMov2.title := 'Dinner for Strangers'
+!zMov2.availableCopies := 1
+!zMov2.genre := #Comedy
+
+!new Series('zSer1')
+!zSer1.title := 'Museum Shift'
+!zSer1.availableCopies := 0
+!zSer1.episode := 11
+
+!new Series('zSer2')
+!zSer2.title := 'Museum Shift'
+!zSer2.availableCopies := 0
+!zSer2.episode := 12
+
+!new Series('zSer3')
+!zSer3.title := 'Desert Radio'
+!zSer3.availableCopies := 2
+!zSer3.episode := 1
+
+!new Actor('zA1')
+!zA1.name := 'Sienna Patel'
+
+!new Actor('zA2')
+!zA2.name := 'Arthur Kim'
+
+!new Actor('zA3')
+!zA3.name := 'Bianca Rossi'
+
+!new Actor('zA4')
+!zA4.name := 'Mikhail Orlov'
+
+!new Actor('zA5')
+!zA5.name := 'Nolan Pierce'
+
+!new Actor('zA6')
+!zA6.name := 'Grace Okafor'
+
+!new Actor('zA7')
+!zA7.name := 'Evan Duarte'
+
+!insert (zMov1, zA1) into CassetteActor
+!insert (zMov1, zA2) into CassetteActor
+!insert (zMov1, zA3) into CassetteActor
+!insert (zMov1, zA4) into CassetteActor
+!insert (zMov1, zA5) into CassetteActor
+!insert (zMov1, zA6) into CassetteActor
+
+!insert (zMov2, zA1) into CassetteActor
+
+!insert (zSer1, zA7) into CassetteActor
+!insert (zSer2, zA7) into CassetteActor
+!insert (zSer3, zA2) into CassetteActor
+
+!new Rental('zR1')
+!zR1.date := Date('2015-09-17')
+!insert (zC1, zR1) into ClientRental
+!insert (zR1, zMov1) into RentalCassette
+!insert (zR1, zMov2) into RentalCassette
+!insert (zR1, zSer1) into RentalCassette
+!insert (zR1, zSer2) into RentalCassette
+!insert (zR1, zSer3) into RentalCassette
+
+!new Rental('zR2')
+!zR2.date := Date('2015-10-01')
+!insert (zC2, zR2) into ClientRental
+!insert (zR2, zMov1) into RentalCassette
+
+!new Rental('zR3')
+!zR3.date := Date('2015-10-12')
+!insert (zC2, zR3) into ClientRental
+!insert (zR3, zMov1) into RentalCassette
+!insert (zR3, zSer3) into RentalCassette
+
+!new Rental('zR4')
+!zR4.date := Date('2015-11-03')
+!insert (zC1, zR4) into ClientRental
+!insert (zR4, zSer2) into RentalCassette

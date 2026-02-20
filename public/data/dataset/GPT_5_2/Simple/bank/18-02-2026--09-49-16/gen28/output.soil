@@ -1,0 +1,99 @@
+!new Bank('bankIL1')
+!bankIL1.country := 'Israel'
+!bankIL1.name := 'Tel Aviv International Bank'
+!bankIL1.bic := 'TAIBILITXXX'
+
+!new Bank('bankNO2')
+!bankNO2.country := 'Norway'
+!bankNO2.name := 'Nordfjord Savings'
+!bankNO2.bic := 'NFSVNO22XXX'
+
+!new Person('sA1')
+!sA1.firstName := 'Noam'
+!sA1.lastName := 'Cohen'
+!sA1.age := 46
+
+!new Person('sA2')
+!sA2.firstName := 'Yael'
+!sA2.lastName := 'Levi'
+!sA2.age := 43
+
+!new Person('sA3')
+!sA3.firstName := 'Daniel'
+!sA3.lastName := 'Friedman'
+!sA3.age := 38
+
+!new Person('sA4')
+!sA4.firstName := 'Ingrid'
+!sA4.lastName := 'Nilsen'
+!sA4.age := 57
+
+!new Person('sA5')
+!sA5.firstName := 'Maya'
+!sA5.lastName := 'Cohen'
+!sA5.age := 17
+
+!new Person('sA6')
+!sA6.firstName := 'Eitan'
+!sA6.lastName := 'Levi'
+!sA6.age := 15
+
+!new Person('sA7')
+!sA7.firstName := 'Oren'
+!sA7.lastName := 'Shamir'
+!sA7.age := 24
+
+!new Account('ilAcc1')
+!ilAcc1.iban := 'IL620108000000099999999'
+!ilAcc1.balance := 150
+
+!new Account('ilAcc2')
+!ilAcc2.iban := 'IL140108000000012345678'
+!ilAcc2.balance := 98000
+
+!new Account('ilAcc3')
+!ilAcc3.iban := 'IL330108000000000000001'
+!ilAcc3.balance := 0
+
+!new Account('ilAcc4')
+!ilAcc4.iban := 'IL870108000000055555555'
+!ilAcc4.balance := 4200
+
+!new Account('noAcc1')
+!noAcc1.iban := 'NO9386011117001'
+!noAcc1.balance := 75
+
+!insert (bankIL1, ilAcc1) into AccountOfBanks
+!insert (bankIL1, ilAcc2) into AccountOfBanks
+!insert (bankIL1, ilAcc3) into AccountOfBanks
+!insert (bankIL1, ilAcc4) into AccountOfBanks
+!insert (bankNO2, noAcc1) into AccountOfBanks
+
+!insert (sA1, ilAcc1) into Ownership
+
+!insert (sA1, ilAcc2) into Ownership
+!insert (sA2, ilAcc2) into Ownership
+
+!insert (sA2, ilAcc3) into Ownership
+!insert (sA3, ilAcc3) into Ownership
+
+!insert (sA7, ilAcc4) into Ownership
+
+!insert (sA4, noAcc1) into Ownership
+!insert (sA1, noAcc1) into Ownership
+
+!insert (sA1, ilAcc1) into Use
+!insert (sA5, ilAcc1) into Use
+!insert (sA6, ilAcc1) into Use
+
+!insert (sA2, ilAcc2) into Use
+!insert (sA3, ilAcc2) into Use
+
+!insert (sA2, ilAcc3) into Use
+!insert (sA7, ilAcc3) into Use
+
+!insert (sA7, ilAcc4) into Use
+!insert (sA1, ilAcc4) into Use
+
+!insert (sA4, noAcc1) into Use
+!insert (sA5, noAcc1) into Use

@@ -1,0 +1,135 @@
+!new RentalOffice('office_sacramento')
+!office_sacramento.name := 'Capitol Region Vehicle Rental - Sacramento'
+!office_sacramento.number := 901
+!office_sacramento.address := '3400 Florin Rd, Sacramento, CA 95823'
+
+!new RentalOffice('office_tucson')
+!office_tucson.name := 'Sonoran Fleet Rental - Tucson'
+!office_tucson.number := 902
+!office_tucson.address := '4550 E Benson Hwy, Tucson, AZ 85706'
+
+!new RentalOffice('office_sandiego_return')
+!office_sandiego_return.name := 'San Diego Return Center'
+!office_sandiego_return.number := 903
+!office_sandiego_return.address := '3270 Kurtz St, San Diego, CA 92110'
+
+!new Truck('truck_ca_24ft_20')
+!truck_ca_24ft_20.id := 21020
+!truck_ca_24ft_20.registrationState := #CA
+!truck_ca_24ft_20.licensePlateNumber := 'CA-TRK-2047'
+!truck_ca_24ft_20.vehicleTypeCode := #TRUCK24
+!truck_ca_24ft_20.registrationLastMaintenanceDate := Date('2026-02-08')
+!truck_ca_24ft_20.expirationDate := Date('2026-12-31')
+!truck_ca_24ft_20.odometerReading := 66705
+!truck_ca_24ft_20.gasTankCapacity := 64.0
+!truck_ca_24ft_20.workingRadio := false
+!truck_ca_24ft_20.mileage := 9
+
+!new Truck('truck_ca_10ft_21')
+!truck_ca_10ft_21.id := 21021
+!truck_ca_10ft_21.registrationState := #CA
+!truck_ca_10ft_21.licensePlateNumber := 'CA-TRK-3391'
+!truck_ca_10ft_21.vehicleTypeCode := #TRUCK10
+!truck_ca_10ft_21.registrationLastMaintenanceDate := Date('2026-03-02')
+!truck_ca_10ft_21.expirationDate := Date('2027-03-31')
+!truck_ca_10ft_21.odometerReading := 12005
+!truck_ca_10ft_21.gasTankCapacity := 32.0
+!truck_ca_10ft_21.workingRadio := true
+!truck_ca_10ft_21.mileage := 17
+
+!new Vehicle('trailer_ca_open_20')
+!trailer_ca_open_20.id := 22020
+!trailer_ca_open_20.registrationState := #CA
+!trailer_ca_open_20.licensePlateNumber := 'CA-TRL-5188'
+!trailer_ca_open_20.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ca_open_20.registrationLastMaintenanceDate := Date('2025-11-05')
+!trailer_ca_open_20.expirationDate := Date('2026-11-30')
+
+!new Vehicle('trailer_ca_covered_21')
+!trailer_ca_covered_21.id := 22021
+!trailer_ca_covered_21.registrationState := #CA
+!trailer_ca_covered_21.licensePlateNumber := 'CA-TRL-5199'
+!trailer_ca_covered_21.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_21.registrationLastMaintenanceDate := Date('2026-01-19')
+!trailer_ca_covered_21.expirationDate := Date('2027-01-31')
+
+!new Vehicle('trailer_az_open_22')
+!trailer_az_open_22.id := 23022
+!trailer_az_open_22.registrationState := #AZ
+!trailer_az_open_22.licensePlateNumber := 'AZ-TRL-7401'
+!trailer_az_open_22.vehicleTypeCode := #OPEN_TRAILER
+!trailer_az_open_22.registrationLastMaintenanceDate := Date('2026-02-26')
+!trailer_az_open_22.expirationDate := Date('2027-02-28')
+
+!insert (office_sacramento, truck_ca_24ft_20) into RentalOfficeVehicle
+!insert (office_sacramento, truck_ca_10ft_21) into RentalOfficeVehicle
+!insert (office_sacramento, trailer_ca_open_20) into RentalOfficeVehicle
+!insert (office_sacramento, trailer_ca_covered_21) into RentalOfficeVehicle
+!insert (office_tucson, trailer_az_open_22) into RentalOfficeVehicle
+
+!new Company('cust_co_redstone')
+!cust_co_redstone.name := 'RedStone Data Center Services'
+!cust_co_redstone.address := '1800 Del Paso Rd, Sacramento, CA 95834'
+!cust_co_redstone.poorRisk := false
+!cust_co_redstone.idNumber := 66050177
+
+!new Individual('cust_ind_oliver')
+!cust_ind_oliver.name := 'Oliver Bennett'
+!cust_ind_oliver.address := '925 E 2nd St, Tucson, AZ 85719'
+!cust_ind_oliver.poorRisk := false
+!cust_ind_oliver.homePhone := '520-555-0188'
+!cust_ind_oliver.driverLicenseState := #AZ
+!cust_ind_oliver.driverLicenseNumber := 50888142
+!cust_ind_oliver.driverLicenseExpirationDate := Date('2028-12-05')
+
+!new RentalAgreement('ra_71001')
+!ra_71001.number := 71001
+!ra_71001.rentalDate := Date('2026-06-03')
+!ra_71001.anticipatedDuration := 5
+!ra_71001.depositPaid := 750.00
+!ra_71001.quotedDailyRate := 164.00
+!ra_71001.quotedRatePerMile := 0.86
+
+!new RentalAgreement('ra_71002')
+!ra_71002.number := 71002
+!ra_71002.rentalDate := Date('2026-06-06')
+!ra_71002.anticipatedDuration := 2
+!ra_71002.depositPaid := 100.00
+!ra_71002.quotedDailyRate := 33.50
+!ra_71002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_71003')
+!ra_71003.number := 71003
+!ra_71003.rentalDate := Date('2026-06-08')
+!ra_71003.anticipatedDuration := 21
+!ra_71003.depositPaid := 0.00
+!ra_71003.quotedDailyRate := 69.00
+!ra_71003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_71004')
+!ra_71004.number := 71004
+!ra_71004.rentalDate := Date('2026-07-01')
+!ra_71004.anticipatedDuration := 1
+!ra_71004.depositPaid := 300.00
+!ra_71004.quotedDailyRate := 179.00
+!ra_71004.quotedRatePerMile := 0.92
+
+!insert (office_tucson, ra_71001) into RentalOfficeRentalAgreementOrigin
+!insert (office_sacramento, ra_71001) into RentalOfficeRentalAgreementDrop
+!insert (ra_71001, truck_ca_24ft_20) into RentalAgreementVehicle
+!insert (ra_71001, cust_co_redstone) into RentalAgreementCustomer
+
+!insert (office_tucson, ra_71002) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson, ra_71002) into RentalOfficeRentalAgreementDrop
+!insert (ra_71002, trailer_az_open_22) into RentalAgreementVehicle
+!insert (ra_71002, cust_ind_oliver) into RentalAgreementCustomer
+
+!insert (office_sacramento, ra_71003) into RentalOfficeRentalAgreementOrigin
+!insert (office_sandiego_return, ra_71003) into RentalOfficeRentalAgreementDrop
+!insert (ra_71003, trailer_ca_covered_21) into RentalAgreementVehicle
+!insert (ra_71003, cust_co_redstone) into RentalAgreementCustomer
+
+!insert (office_tucson, ra_71004) into RentalOfficeRentalAgreementOrigin
+!insert (office_tucson, ra_71004) into RentalOfficeRentalAgreementDrop
+!insert (ra_71004, truck_ca_24ft_20) into RentalAgreementVehicle
+!insert (ra_71004, cust_ind_oliver) into RentalAgreementCustomer

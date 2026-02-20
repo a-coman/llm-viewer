@@ -1,0 +1,114 @@
+!new Client('q1')
+!q1.clientId := 801
+!q1.isSuspended := false
+
+!new Client('q2')
+!q2.clientId := 802
+!q2.isSuspended := true
+
+!new Client('q3')
+!q3.clientId := 803
+!q3.isSuspended := false
+
+!new Actor('qa1')
+!qa1.name := 'Elena Brody'
+
+!new Actor('qa2')
+!qa2.name := 'Mason Kline'
+
+!new Actor('qa3')
+!qa3.name := 'Ibrahim Saleh'
+
+!new Actor('qa4')
+!qa4.name := 'Claire Dubois'
+
+!new Actor('qa5')
+!qa5.name := 'Jae-min Choi'
+
+!new Actor('qa6')
+!qa6.name := 'Nadia Petrova'
+
+!new Actor('qa7')
+!qa7.name := 'Luis Aranda'
+
+!new Movie('qm1')
+!qm1.title := 'Silent Uprising'
+!qm1.availableCopies := 0
+!qm1.genre := #Action
+
+!new Movie('qm2')
+!qm2.title := 'Roommates Forever'
+!qm2.availableCopies := 3
+!qm2.genre := #Comedy
+
+!new Movie('qm3')
+!qm3.title := 'Festival of Jokes'
+!qm3.availableCopies := 1
+!qm3.genre := #Comedy
+
+!new Series('qsA1')
+!qsA1.title := 'Bake Lab'
+!qsA1.availableCopies := 6
+!qsA1.episode := 1
+
+!new Series('qsA2')
+!qsA2.title := 'Bake Lab'
+!qsA2.availableCopies := 6
+!qsA2.episode := 2
+
+!new Series('qsB1')
+!qsB1.title := 'Street Myths'
+!qsB1.availableCopies := 1
+!qsB1.episode := 1
+
+!new Series('qsC1')
+!qsC1.title := 'One Minute History'
+!qsC1.availableCopies := 0
+!qsC1.episode := 99
+
+!insert (qm1, qa1) into CassetteActor
+!insert (qm1, qa2) into CassetteActor
+!insert (qm1, qa3) into CassetteActor
+!insert (qm1, qa4) into CassetteActor
+
+!insert (qm2, qa5) into CassetteActor
+
+!insert (qm3, qa7) into CassetteActor
+
+!insert (qsA1, qa6) into CassetteActor
+
+!insert (qsA2, qa6) into CassetteActor
+!insert (qsA2, qa7) into CassetteActor
+
+!insert (qsB1, qa2) into CassetteActor
+
+!insert (qsC1, qa3) into CassetteActor
+!insert (qsC1, qa5) into CassetteActor
+
+!new Rental('qr1')
+!qr1.date := Date('2018-06-01')
+!insert (q1, qr1) into ClientRental
+!insert (qr1, qm2) into RentalCassette
+
+!new Rental('qr2')
+!qr2.date := Date('2018-06-03')
+!insert (q1, qr2) into ClientRental
+!insert (qr2, qsA1) into RentalCassette
+!insert (qr2, qsA2) into RentalCassette
+
+!new Rental('qr3')
+!qr3.date := Date('2018-06-10')
+!insert (q1, qr3) into ClientRental
+!insert (qr3, qm1) into RentalCassette
+!insert (qr3, qsB1) into RentalCassette
+!insert (qr3, qsC1) into RentalCassette
+
+!new Rental('qr4')
+!qr4.date := Date('2018-07-04')
+!insert (q2, qr4) into ClientRental
+!insert (qr4, qm1) into RentalCassette
+
+!new Rental('qr5')
+!qr5.date := Date('2018-07-05')
+!insert (q2, qr5) into ClientRental
+!insert (qr5, qsB1) into RentalCassette

@@ -1,0 +1,103 @@
+!new Bank('bankAU2')
+!bankAU2.country := 'Australia'
+!bankAU2.name := 'Coral Coast Bank'
+!bankAU2.bic := 'CCBKAU2SXXX'
+
+!new Bank('bankJP2')
+!bankJP2.country := 'Japan'
+!bankJP2.name := 'Kansai Regional Bank'
+!bankJP2.bic := 'KANRJPJTXXX'
+
+!new Bank('bankZA3')
+!bankZA3.country := 'South Africa'
+!bankZA3.name := 'Highveld Mutual Bank'
+!bankZA3.bic := 'HVMZZAJJXXX'
+
+!new Person('perA')
+!perA.firstName := 'Amelia'
+!perA.lastName := 'Ross'
+!perA.age := 26
+
+!new Person('perB')
+!perB.firstName := 'Kenji'
+!perB.lastName := 'Watanabe'
+!perB.age := 63
+
+!new Person('perC')
+!perC.firstName := 'Thandi'
+!perC.lastName := 'Mokoena'
+!perC.age := 45
+
+!new Person('perD')
+!perD.firstName := 'Luca'
+!perD.lastName := 'Bianchi'
+!perD.age := 18
+
+!new Person('perE')
+!perE.firstName := 'Hana'
+!perE.lastName := 'Ross'
+!perE.age := 7
+
+!new Account('accA1')
+!accA1.iban := 'AU00CCBK000000000100'
+!accA1.balance := 250
+
+!new Account('accA2')
+!accA2.iban := 'AU00CCBK000000000200'
+!accA2.balance := 8900
+
+!new Account('accA3')
+!accA3.iban := 'AU00CCBK000000000300'
+!accA3.balance := 0
+
+!new Account('accJ1')
+!accJ1.iban := 'JP00KANR000000000010'
+!accJ1.balance := 12500
+
+!new Account('accJ2')
+!accJ2.iban := 'JP00KANR000000000020'
+!accJ2.balance := 60
+
+!new Account('accZ1')
+!accZ1.iban := 'ZA00HVMZ000000000001'
+!accZ1.balance := 470000
+
+!insert (bankAU2, accA1) into AccountOfBanks
+!insert (bankAU2, accA2) into AccountOfBanks
+!insert (bankAU2, accA3) into AccountOfBanks
+!insert (bankJP2, accJ1) into AccountOfBanks
+!insert (bankJP2, accJ2) into AccountOfBanks
+!insert (bankZA3, accZ1) into AccountOfBanks
+
+!insert (perA, accA1) into Ownership
+
+!insert (perA, accA2) into Ownership
+!insert (perC, accA2) into Ownership
+
+!insert (perB, accA3) into Ownership
+
+!insert (perD, accJ1) into Ownership
+!insert (perC, accJ1) into Ownership
+
+!insert (perB, accJ2) into Ownership
+!insert (perA, accJ2) into Ownership
+
+!insert (perC, accZ1) into Ownership
+
+!insert (perA, accA1) into Use
+!insert (perD, accA1) into Use
+
+!insert (perC, accA2) into Use
+!insert (perE, accA2) into Use
+
+!insert (perB, accA3) into Use
+!insert (perD, accA3) into Use
+
+!insert (perD, accJ1) into Use
+
+!insert (perA, accJ2) into Use
+!insert (perB, accJ2) into Use
+!insert (perE, accJ2) into Use
+
+!insert (perC, accZ1) into Use
+!insert (perA, accZ1) into Use

@@ -1,0 +1,153 @@
+!new RentalOffice('office_fleet_hub15')
+!office_fleet_hub15.name := 'West Coast Fleet Hub'
+!office_fleet_hub15.number := 15001
+!office_fleet_hub15.address := '8900 Slauson Ave, Los Angeles, CA 90040'
+
+!new RentalOffice('office_backoffice15')
+!office_backoffice15.name := 'Customer Care & Billing Office'
+!office_backoffice15.number := 15002
+!office_backoffice15.address := '151 Farmington Ave, Hartford, CT 06105'
+
+!new RentalOffice('office_event_popup15')
+!office_event_popup15.name := 'Seasonal Pickup Counter - Jacksonville'
+!office_event_popup15.number := 15003
+!office_event_popup15.address := '2400 Monument Rd, Jacksonville, FL 32225'
+
+!new RentalOffice('office_remote_drop15')
+!office_remote_drop15.name := 'Remote Drop Lot - Flagstaff'
+!office_remote_drop15.number := 15004
+!office_remote_drop15.address := '5200 N US Highway 89, Flagstaff, AZ 86004'
+
+!new Truck('truck_ca_24ft_1501')
+!truck_ca_24ft_1501.id := 515001
+!truck_ca_24ft_1501.registrationState := #CA
+!truck_ca_24ft_1501.licensePlateNumber := 'CA-TRK-15A01'
+!truck_ca_24ft_1501.vehicleTypeCode := #TRUCK24
+!truck_ca_24ft_1501.registrationLastMaintenanceDate := Date('2026-06-16')
+!truck_ca_24ft_1501.expirationDate := Date('2027-06-30')
+!truck_ca_24ft_1501.odometerReading := 221905
+!truck_ca_24ft_1501.gasTankCapacity := 65.0
+!truck_ca_24ft_1501.workingRadio := true
+!truck_ca_24ft_1501.mileage := 8
+
+!new Truck('truck_ca_10ft_1502')
+!truck_ca_10ft_1502.id := 515002
+!truck_ca_10ft_1502.registrationState := #CA
+!truck_ca_10ft_1502.licensePlateNumber := 'CA-TRK-15B02'
+!truck_ca_10ft_1502.vehicleTypeCode := #TRUCK10
+!truck_ca_10ft_1502.registrationLastMaintenanceDate := Date('2026-05-09')
+!truck_ca_10ft_1502.expirationDate := Date('2027-05-31')
+!truck_ca_10ft_1502.odometerReading := 40880
+!truck_ca_10ft_1502.gasTankCapacity := 33.0
+!truck_ca_10ft_1502.workingRadio := false
+!truck_ca_10ft_1502.mileage := 16
+
+!new Vehicle('trailer_ca_open_1503')
+!trailer_ca_open_1503.id := 525003
+!trailer_ca_open_1503.registrationState := #CA
+!trailer_ca_open_1503.licensePlateNumber := 'CA-TRL-15C03'
+!trailer_ca_open_1503.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ca_open_1503.registrationLastMaintenanceDate := Date('2026-04-04')
+!trailer_ca_open_1503.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_ca_covered_1504')
+!trailer_ca_covered_1504.id := 525004
+!trailer_ca_covered_1504.registrationState := #CA
+!trailer_ca_covered_1504.licensePlateNumber := 'CA-TRL-15D04'
+!trailer_ca_covered_1504.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_1504.registrationLastMaintenanceDate := Date('2026-03-11')
+!trailer_ca_covered_1504.expirationDate := Date('2027-03-31')
+
+!insert (office_fleet_hub15, truck_ca_24ft_1501) into RentalOfficeVehicle
+!insert (office_fleet_hub15, truck_ca_10ft_1502) into RentalOfficeVehicle
+!insert (office_fleet_hub15, trailer_ca_open_1503) into RentalOfficeVehicle
+!insert (office_fleet_hub15, trailer_ca_covered_1504) into RentalOfficeVehicle
+
+!new Company('cust_co_stagecraft15')
+!cust_co_stagecraft15.name := 'StageCraft Touring Services'
+!cust_co_stagecraft15.address := '3100 E 46th St, Los Angeles, CA 90058'
+!cust_co_stagecraft15.poorRisk := false
+!cust_co_stagecraft15.idNumber := 15077001
+
+!new Individual('cust_ind_noah15')
+!cust_ind_noah15.name := 'Noah Kim'
+!cust_ind_noah15.address := '34 Park Pl, Hartford, CT 06106'
+!cust_ind_noah15.poorRisk := false
+!cust_ind_noah15.homePhone := '860-555-0144'
+!cust_ind_noah15.driverLicenseState := #CT
+!cust_ind_noah15.driverLicenseNumber := 60441982
+!cust_ind_noah15.driverLicenseExpirationDate := Date('2029-03-31')
+
+!new Individual('cust_ind_iris15')
+!cust_ind_iris15.name := 'Iris Delgado'
+!cust_ind_iris15.address := '88 Beach Blvd, Jacksonville, FL 32250'
+!cust_ind_iris15.poorRisk := true
+!cust_ind_iris15.homePhone := '904-555-0129'
+!cust_ind_iris15.driverLicenseState := #FL
+!cust_ind_iris15.driverLicenseNumber := 33099110
+!cust_ind_iris15.driverLicenseExpirationDate := Date('2026-05-31')
+
+!new RentalAgreement('ra_150001')
+!ra_150001.number := 150001
+!ra_150001.rentalDate := Date('2026-01-08')
+!ra_150001.anticipatedDuration := 120
+!ra_150001.depositPaid := 0.00
+!ra_150001.quotedDailyRate := 89.00
+!ra_150001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_150002')
+!ra_150002.number := 150002
+!ra_150002.rentalDate := Date('2026-01-12')
+!ra_150002.anticipatedDuration := 1
+!ra_150002.depositPaid := 150.00
+!ra_150002.quotedDailyRate := 0.00
+!ra_150002.quotedRatePerMile := 1.30
+
+!new RentalAgreement('ra_150003')
+!ra_150003.number := 150003
+!ra_150003.rentalDate := Date('2026-01-15')
+!ra_150003.anticipatedDuration := 7
+!ra_150003.depositPaid := 700.00
+!ra_150003.quotedDailyRate := 179.00
+!ra_150003.quotedRatePerMile := 0.90
+
+!new RentalAgreement('ra_150004')
+!ra_150004.number := 150004
+!ra_150004.rentalDate := Date('2026-02-01')
+!ra_150004.anticipatedDuration := 3
+!ra_150004.depositPaid := 0.00
+!ra_150004.quotedDailyRate := 35.00
+!ra_150004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_150005')
+!ra_150005.number := 150005
+!ra_150005.rentalDate := Date('2026-02-10')
+!ra_150005.anticipatedDuration := 2
+!ra_150005.depositPaid := 400.00
+!ra_150005.quotedDailyRate := 0.00
+!ra_150005.quotedRatePerMile := 0.95
+
+!insert (office_backoffice15, ra_150001) into RentalOfficeRentalAgreementOrigin
+!insert (office_fleet_hub15, ra_150001) into RentalOfficeRentalAgreementDrop
+!insert (ra_150001, trailer_ca_covered_1504) into RentalAgreementVehicle
+!insert (ra_150001, cust_co_stagecraft15) into RentalAgreementCustomer
+
+!insert (office_event_popup15, ra_150002) into RentalOfficeRentalAgreementOrigin
+!insert (office_remote_drop15, ra_150002) into RentalOfficeRentalAgreementDrop
+!insert (ra_150002, truck_ca_10ft_1502) into RentalAgreementVehicle
+!insert (ra_150002, cust_ind_iris15) into RentalAgreementCustomer
+
+!insert (office_backoffice15, ra_150003) into RentalOfficeRentalAgreementOrigin
+!insert (office_event_popup15, ra_150003) into RentalOfficeRentalAgreementDrop
+!insert (ra_150003, truck_ca_24ft_1501) into RentalAgreementVehicle
+!insert (ra_150003, cust_co_stagecraft15) into RentalAgreementCustomer
+
+!insert (office_remote_drop15, ra_150004) into RentalOfficeRentalAgreementOrigin
+!insert (office_remote_drop15, ra_150004) into RentalOfficeRentalAgreementDrop
+!insert (ra_150004, trailer_ca_open_1503) into RentalAgreementVehicle
+!insert (ra_150004, cust_ind_noah15) into RentalAgreementCustomer
+
+!insert (office_backoffice15, ra_150005) into RentalOfficeRentalAgreementOrigin
+!insert (office_backoffice15, ra_150005) into RentalOfficeRentalAgreementDrop
+!insert (ra_150005, truck_ca_10ft_1502) into RentalAgreementVehicle
+!insert (ra_150005, cust_ind_noah15) into RentalAgreementCustomer

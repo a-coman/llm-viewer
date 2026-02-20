@@ -1,0 +1,79 @@
+!new Booking('booking16')
+!booking16.startDate := '2028-01-04'
+!booking16.endDate := '2028-01-06'
+!booking16.canceled := true
+!booking16.bookingId := 9400
+!booking16.confirmed := false
+
+!new Customer('customer16')
+!customer16.firstName := 'Daniela'
+!customer16.lastName := 'Meyer'
+
+!insert (booking16, customer16) into BookingCustomer
+
+!new RoomReservation('rr22')
+!rr22.checkInDate := '2028-01-04'
+!rr22.checkOutDate := '2028-01-05'
+
+!new RoomReservation('rr23')
+!rr23.checkInDate := '2028-01-05'
+!rr23.checkOutDate := '2028-01-06'
+
+!insert (booking16, rr22) into BookingRoomReservation
+!insert (booking16, rr23) into BookingRoomReservation
+
+!new Room('room1402')
+!room1402.roomNumber := 1402
+!room1402.numBeds := 2
+!room1402.pricePerNight := 220.0
+!room1402.occupied := false
+!room1402.blocked := false
+
+!insert (rr22, room1402) into RoomReservationRoom
+
+!new RoomExtra('extraRoomServiceLate')
+!extraRoomServiceLate.price := 35.0
+!extraRoomServiceLate.description := 'Late room service'
+
+!new RoomExtra('extraExpressCleaning')
+!extraExpressCleaning.price := 0.0
+!extraExpressCleaning.description := 'Express cleaning (goodwill)'
+
+!new RoomExtra('extraCancellationAdmin')
+!extraCancellationAdmin.price := 20.0
+!extraCancellationAdmin.description := 'Cancellation administration fee'
+
+!new RoomExtra('extraRebookingVoucher')
+!extraRebookingVoucher.price := 0.0
+!extraRebookingVoucher.description := 'Rebooking voucher issued'
+
+!insert (rr22, extraRoomServiceLate) into RoomReservationExtras
+!insert (rr22, extraExpressCleaning) into RoomReservationExtras
+!insert (rr23, extraCancellationAdmin) into RoomReservationExtras
+!insert (rr23, extraRebookingVoucher) into RoomReservationExtras
+
+!new Bill('bill23')
+!bill23.billId := 16001
+!bill23.price := 255.0
+
+!new Bill('bill24')
+!bill24.billId := 16002
+!bill24.price := 20.0
+
+!insert (bill23, rr22) into BillRoomReservation
+!insert (bill24, rr23) into BillRoomReservation
+
+!insert (booking16, bill23) into BookingBill
+!insert (booking16, bill24) into BookingBill
+
+!new FreeRoomTypesDTO('dtoJanLimited')
+!dtoJanLimited.roomTypeDescription := 'January limited offer (suite-like double)'
+!dtoJanLimited.numBeds := 2
+!dtoJanLimited.pricePerNight := 220.0
+!dtoJanLimited.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('dtoJanEconomy')
+!dtoJanEconomy.roomTypeDescription := 'January economy single'
+!dtoJanEconomy.numBeds := 1
+!dtoJanEconomy.pricePerNight := 85.0
+!dtoJanEconomy.numFreeRooms := 18

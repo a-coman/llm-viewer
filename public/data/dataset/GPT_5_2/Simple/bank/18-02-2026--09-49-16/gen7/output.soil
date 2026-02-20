@@ -1,0 +1,90 @@
+!new Bank('bankIE1')
+!bankIE1.country := 'Ireland'
+!bankIE1.name := 'Liffey Community Bank'
+!bankIE1.bic := 'LIFIIE2DXXX'
+
+!new Bank('bankPL1')
+!bankPL1.country := 'Poland'
+!bankPL1.name := 'Mazovia Bank SA'
+!bankPL1.bic := 'MAZBPLPWXXX'
+
+!new Person('u1')
+!u1.firstName := 'Aoife'
+!u1.lastName := 'Kelly'
+!u1.age := 44
+
+!new Person('u2')
+!u2.firstName := 'Conor'
+!u2.lastName := 'Byrne'
+!u2.age := 46
+
+!new Person('u3')
+!u3.firstName := 'Ewa'
+!u3.lastName := 'Nowak'
+!u3.age := 37
+
+!new Person('u4')
+!u4.firstName := 'Marek'
+!u4.lastName := 'Zielinski'
+!u4.age := 55
+
+!new Person('u5')
+!u5.firstName := 'Siobhan'
+!u5.lastName := 'Murphy'
+!u5.age := 28
+
+!new Person('u6')
+!u6.firstName := 'Kacper'
+!u6.lastName := 'Nowak'
+!u6.age := 17
+
+!new Account('ieA1')
+!ieA1.iban := 'IE29AIBK93115212345678'
+!ieA1.balance := 300
+
+!new Account('ieA2')
+!ieA2.iban := 'IE64BOFI90001712345678'
+!ieA2.balance := 18250
+
+!new Account('ieA3')
+!ieA3.iban := 'IE07IRCE92050198765432'
+!ieA3.balance := 0
+
+!new Account('ieA4')
+!ieA4.iban := 'IE21ULSB98550011223344'
+!ieA4.balance := 910
+
+!new Account('ieA5')
+!ieA5.iban := 'IE90AIBK93115299887766'
+!ieA5.balance := 6400
+
+!new Account('plA1')
+!plA1.iban := 'PL10105000997603123456789123'
+!plA1.balance := 125
+
+!insert (bankIE1, ieA1) into AccountOfBanks
+!insert (bankIE1, ieA2) into AccountOfBanks
+!insert (bankIE1, ieA3) into AccountOfBanks
+!insert (bankIE1, ieA4) into AccountOfBanks
+!insert (bankIE1, ieA5) into AccountOfBanks
+!insert (bankPL1, plA1) into AccountOfBanks
+
+!insert (u1, ieA1) into Ownership
+!insert (u1, ieA2) into Ownership
+!insert (u2, ieA2) into Ownership
+!insert (u3, ieA3) into Ownership
+!insert (u4, ieA4) into Ownership
+!insert (u5, ieA4) into Ownership
+!insert (u5, ieA5) into Ownership
+!insert (u2, plA1) into Ownership
+
+!insert (u6, ieA1) into Use
+!insert (u1, ieA2) into Use
+!insert (u2, ieA2) into Use
+!insert (u6, ieA2) into Use
+!insert (u3, ieA3) into Use
+!insert (u5, ieA4) into Use
+!insert (u5, ieA5) into Use
+!insert (u1, ieA5) into Use
+!insert (u2, plA1) into Use
+!insert (u6, plA1) into Use

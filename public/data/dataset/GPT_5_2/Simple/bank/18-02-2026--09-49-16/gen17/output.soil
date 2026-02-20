@@ -1,0 +1,89 @@
+!new Bank('bankQA1')
+!bankQA1.country := 'Qatar'
+!bankQA1.name := 'Doha Peninsula Bank'
+!bankQA1.bic := 'DPBKQAQAXXX'
+
+!new Bank('bankIS1')
+!bankIS1.country := 'Iceland'
+!bankIS1.name := 'Reykjavik Microbank'
+!bankIS1.bic := 'RYMBISREXXX'
+
+!new Person('bb1')
+!bb1.firstName := 'Fatima'
+!bb1.lastName := 'AlThani'
+!bb1.age := 44
+
+!new Person('bb2')
+!bb2.firstName := 'Omar'
+!bb2.lastName := 'Hassan'
+!bb2.age := 47
+
+!new Person('bb3')
+!bb3.firstName := 'Leila'
+!bb3.lastName := 'Nasser'
+!bb3.age := 33
+
+!new Person('bb4')
+!bb4.firstName := 'Khalid'
+!bb4.lastName := 'Saad'
+!bb4.age := 28
+
+!new Person('bb5')
+!bb5.firstName := 'Mariam'
+!bb5.lastName := 'Hassan'
+!bb5.age := 9
+
+!new Person('bb6')
+!bb6.firstName := 'Yousef'
+!bb6.lastName := 'Hassan'
+!bb6.age := 15
+
+!new Person('bb7')
+!bb7.firstName := 'Noura'
+!bb7.lastName := 'Salem'
+!bb7.age := 22
+
+!new Account('qaAcc1')
+!qaAcc1.iban := 'QA00DPBK00000000000001'
+!qaAcc1.balance := 100
+
+!new Account('qaAcc2')
+!qaAcc2.iban := 'QA00DPBK00000000004567'
+!qaAcc2.balance := 5000
+
+!new Account('qaAcc3')
+!qaAcc3.iban := 'QA00DPBK00000000012345'
+!qaAcc3.balance := 0
+
+!new Account('qaAcc4')
+!qaAcc4.iban := 'QA00DPBK00000000999999'
+!qaAcc4.balance := 200000
+
+!insert (bankQA1, qaAcc1) into AccountOfBanks
+!insert (bankQA1, qaAcc2) into AccountOfBanks
+!insert (bankQA1, qaAcc3) into AccountOfBanks
+!insert (bankQA1, qaAcc4) into AccountOfBanks
+
+!insert (bb1, qaAcc1) into Ownership
+!insert (bb2, qaAcc1) into Ownership
+
+!insert (bb3, qaAcc2) into Ownership
+
+!insert (bb1, qaAcc3) into Ownership
+
+!insert (bb2, qaAcc4) into Ownership
+!insert (bb4, qaAcc4) into Ownership
+
+!insert (bb5, qaAcc1) into Use
+!insert (bb6, qaAcc1) into Use
+!insert (bb7, qaAcc1) into Use
+
+!insert (bb3, qaAcc2) into Use
+!insert (bb1, qaAcc2) into Use
+!insert (bb5, qaAcc2) into Use
+
+!insert (bb1, qaAcc3) into Use
+
+!insert (bb4, qaAcc4) into Use
+!insert (bb7, qaAcc4) into Use
+!insert (bb3, qaAcc4) into Use

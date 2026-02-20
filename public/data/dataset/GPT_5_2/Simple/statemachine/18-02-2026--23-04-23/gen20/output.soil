@@ -1,0 +1,323 @@
+!new StateMachine('smPassport')
+!smPassport.name := 'passportEGate'
+
+!new State('ppIdle')
+!ppIdle.name := 'idle'
+!new State('ppDocPresented')
+!ppDocPresented.name := 'documentPresented'
+!new State('ppScanning')
+!ppScanning.name := 'scanning'
+!new State('ppBiometric')
+!ppBiometric.name := 'biometricCheck'
+!new State('ppApproved')
+!ppApproved.name := 'approved'
+!new State('ppRejected')
+!ppRejected.name := 'rejected'
+!new State('ppManual')
+!ppManual.name := 'manualInspection'
+
+!insert (smPassport, ppIdle) into StateMachineContainsStates
+!insert (smPassport, ppDocPresented) into StateMachineContainsStates
+!insert (smPassport, ppScanning) into StateMachineContainsStates
+!insert (smPassport, ppBiometric) into StateMachineContainsStates
+!insert (smPassport, ppApproved) into StateMachineContainsStates
+!insert (smPassport, ppRejected) into StateMachineContainsStates
+!insert (smPassport, ppManual) into StateMachineContainsStates
+
+!insert (smPassport, ppIdle) into StateMachineStartsStates
+!new StateMachine('smPassportStartDocPresented')
+!smPassportStartDocPresented.name := 'docPresentedStart'
+!insert (smPassportStartDocPresented, ppDocPresented) into StateMachineStartsStates
+!new StateMachine('smPassportStartScanning')
+!smPassportStartScanning.name := 'scanningStart'
+!insert (smPassportStartScanning, ppScanning) into StateMachineStartsStates
+!new StateMachine('smPassportStartBiometric')
+!smPassportStartBiometric.name := 'biometricStart'
+!insert (smPassportStartBiometric, ppBiometric) into StateMachineStartsStates
+!new StateMachine('smPassportStartApproved')
+!smPassportStartApproved.name := 'approvedStart'
+!insert (smPassportStartApproved, ppApproved) into StateMachineStartsStates
+!new StateMachine('smPassportStartRejected')
+!smPassportStartRejected.name := 'rejectedStart'
+!insert (smPassportStartRejected, ppRejected) into StateMachineStartsStates
+!new StateMachine('smPassportStartManual')
+!smPassportStartManual.name := 'manualStart'
+!insert (smPassportStartManual, ppManual) into StateMachineStartsStates
+
+
+!new Transition('trPpPresentDoc')
+!trPpPresentDoc.name := 'presentDocument'
+!new TimeEvent('evPpPresentDoc')
+!evPpPresentDoc.time := 1
+
+!new Transition('trPpBeginScan')
+!trPpBeginScan.name := 'beginScan'
+!new TimeEvent('evPpBeginScan')
+!evPpBeginScan.time := 2
+
+!new Transition('trPpScanOk')
+!trPpScanOk.name := 'scanOk'
+!new TimeEvent('evPpScanOk')
+!evPpScanOk.time := 4
+
+!new Transition('trPpScanFail')
+!trPpScanFail.name := 'scanFail'
+!new TimeEvent('evPpScanFail')
+!evPpScanFail.time := 6
+
+!new Transition('trPpBioOk')
+!trPpBioOk.name := 'biometricOk'
+!new TimeEvent('evPpBioOk')
+!evPpBioOk.time := 5
+
+!new Transition('trPpBioMismatch')
+!trPpBioMismatch.name := 'biometricMismatch'
+!new TimeEvent('evPpBioMismatch')
+!evPpBioMismatch.time := 5
+
+!new Transition('trPpApprovedExit')
+!trPpApprovedExit.name := 'openGate'
+!new TimeEvent('evPpApprovedExit')
+!evPpApprovedExit.time := 3
+
+!new Transition('trPpRejectedToManual')
+!trPpRejectedToManual.name := 'sendToManual'
+!new TimeEvent('evPpRejectedToManual')
+!evPpRejectedToManual.time := 1
+
+!new Transition('trPpManualCleared')
+!trPpManualCleared.name := 'manualCleared'
+!new TimeEvent('evPpManualCleared')
+!evPpManualCleared.time := 900
+
+!new Transition('trPpManualDenied')
+!trPpManualDenied.name := 'manualDenied'
+!new TimeEvent('evPpManualDenied')
+!evPpManualDenied.time := 900
+
+!new Transition('trPpSessionTimeout')
+!trPpSessionTimeout.name := 'sessionTimeout'
+!new TimeEvent('evPpSessionTimeout')
+!evPpSessionTimeout.time := 45
+
+
+!insert (smPassport, trPpPresentDoc) into StateMachineContainsTransitions
+!insert (smPassport, trPpBeginScan) into StateMachineContainsTransitions
+!insert (smPassport, trPpScanOk) into StateMachineContainsTransitions
+!insert (smPassport, trPpScanFail) into StateMachineContainsTransitions
+!insert (smPassport, trPpBioOk) into StateMachineContainsTransitions
+!insert (smPassport, trPpBioMismatch) into StateMachineContainsTransitions
+!insert (smPassport, trPpApprovedExit) into StateMachineContainsTransitions
+!insert (smPassport, trPpRejectedToManual) into StateMachineContainsTransitions
+!insert (smPassport, trPpManualCleared) into StateMachineContainsTransitions
+!insert (smPassport, trPpManualDenied) into StateMachineContainsTransitions
+!insert (smPassport, trPpSessionTimeout) into StateMachineContainsTransitions
+
+!insert (trPpPresentDoc, evPpPresentDoc) into TransitionContainsEvents
+!insert (trPpBeginScan, evPpBeginScan) into TransitionContainsEvents
+!insert (trPpScanOk, evPpScanOk) into TransitionContainsEvents
+!insert (trPpScanFail, evPpScanFail) into TransitionContainsEvents
+!insert (trPpBioOk, evPpBioOk) into TransitionContainsEvents
+!insert (trPpBioMismatch, evPpBioMismatch) into TransitionContainsEvents
+!insert (trPpApprovedExit, evPpApprovedExit) into TransitionContainsEvents
+!insert (trPpRejectedToManual, evPpRejectedToManual) into TransitionContainsEvents
+!insert (trPpManualCleared, evPpManualCleared) into TransitionContainsEvents
+!insert (trPpManualDenied, evPpManualDenied) into TransitionContainsEvents
+!insert (trPpSessionTimeout, evPpSessionTimeout) into TransitionContainsEvents
+
+
+!insert (ppIdle, trPpPresentDoc) into StateTransition
+!insert (trPpPresentDoc, ppDocPresented) into TransitionState
+
+!insert (ppDocPresented, trPpBeginScan) into StateTransition
+!insert (trPpBeginScan, ppScanning) into TransitionState
+
+!insert (ppScanning, trPpScanOk) into StateTransition
+!insert (trPpScanOk, ppBiometric) into TransitionState
+
+!insert (ppScanning, trPpScanFail) into StateTransition
+!insert (trPpScanFail, ppRejected) into TransitionState
+
+!insert (ppBiometric, trPpBioOk) into StateTransition
+!insert (trPpBioOk, ppApproved) into TransitionState
+
+!insert (ppBiometric, trPpBioMismatch) into StateTransition
+!insert (trPpBioMismatch, ppRejected) into TransitionState
+
+!insert (ppApproved, trPpApprovedExit) into StateTransition
+!insert (trPpApprovedExit, ppIdle) into TransitionState
+
+!insert (ppRejected, trPpRejectedToManual) into StateTransition
+!insert (trPpRejectedToManual, ppManual) into TransitionState
+
+!insert (ppManual, trPpManualCleared) into StateTransition
+!insert (trPpManualCleared, ppApproved) into TransitionState
+
+!insert (ppManual, trPpManualDenied) into StateTransition
+!insert (trPpManualDenied, ppRejected) into TransitionState
+
+!insert (ppDocPresented, trPpSessionTimeout) into StateTransition
+!insert (trPpSessionTimeout, ppIdle) into TransitionState
+
+
+
+!new StateMachine('smInverter')
+!smInverter.name := 'solarInverterControl'
+
+!new State('invOffline')
+!invOffline.name := 'offline'
+!new State('invStarting')
+!invStarting.name := 'starting'
+!new State('invSyncing')
+!invSyncing.name := 'syncingToGrid'
+!new State('invProducing')
+!invProducing.name := 'producing'
+!new State('invDerating')
+!invDerating.name := 'derating'
+!new State('invFault')
+!invFault.name := 'fault'
+!new State('invShutdown')
+!invShutdown.name := 'shutdown'
+
+!insert (smInverter, invOffline) into StateMachineContainsStates
+!insert (smInverter, invStarting) into StateMachineContainsStates
+!insert (smInverter, invSyncing) into StateMachineContainsStates
+!insert (smInverter, invProducing) into StateMachineContainsStates
+!insert (smInverter, invDerating) into StateMachineContainsStates
+!insert (smInverter, invFault) into StateMachineContainsStates
+!insert (smInverter, invShutdown) into StateMachineContainsStates
+
+!insert (smInverter, invOffline) into StateMachineStartsStates
+!new StateMachine('smInverterStartStarting')
+!smInverterStartStarting.name := 'startingStart'
+!insert (smInverterStartStarting, invStarting) into StateMachineStartsStates
+!new StateMachine('smInverterStartSyncing')
+!smInverterStartSyncing.name := 'syncingStart'
+!insert (smInverterStartSyncing, invSyncing) into StateMachineStartsStates
+!new StateMachine('smInverterStartProducing')
+!smInverterStartProducing.name := 'producingStart'
+!insert (smInverterStartProducing, invProducing) into StateMachineStartsStates
+!new StateMachine('smInverterStartDerating')
+!smInverterStartDerating.name := 'deratingStart'
+!insert (smInverterStartDerating, invDerating) into StateMachineStartsStates
+!new StateMachine('smInverterStartFault')
+!smInverterStartFault.name := 'faultStart'
+!insert (smInverterStartFault, invFault) into StateMachineStartsStates
+!new StateMachine('smInverterStartShutdown')
+!smInverterStartShutdown.name := 'shutdownStart'
+!insert (smInverterStartShutdown, invShutdown) into StateMachineStartsStates
+
+
+!new Transition('trInvPowerOn')
+!trInvPowerOn.name := 'powerOn'
+!new TimeEvent('evInvPowerOn')
+!evInvPowerOn.time := 1
+
+!new Transition('trInvInitComplete')
+!trInvInitComplete.name := 'initComplete'
+!new TimeEvent('evInvInitComplete')
+!evInvInitComplete.time := 8
+
+!new Transition('trInvGridSyncOk')
+!trInvGridSyncOk.name := 'gridSyncOk'
+!new TimeEvent('evInvGridSyncOk')
+!evInvGridSyncOk.time := 12
+
+!new Transition('trInvOverTemp')
+!trInvOverTemp.name := 'overTemperature'
+!new TimeEvent('evInvOverTemp')
+!evInvOverTemp.time := 3
+
+!new Transition('trInvTempNormal')
+!trInvTempNormal.name := 'temperatureNormal'
+!new TimeEvent('evInvTempNormal')
+!evInvTempNormal.time := 120
+
+!new Transition('trInvFaultTripStart')
+!trInvFaultTripStart.name := 'faultTrip'
+!new TimeEvent('evInvFaultTripStart')
+!evInvFaultTripStart.time := 1
+
+!new Transition('trInvFaultTripRun')
+!trInvFaultTripRun.name := 'faultTrip'
+!new TimeEvent('evInvFaultTripRun')
+!evInvFaultTripRun.time := 1
+
+!new Transition('trInvResetFault')
+!trInvResetFault.name := 'resetFault'
+!new TimeEvent('evInvResetFault')
+!evInvResetFault.time := 60
+
+!new Transition('trInvShutdownCmd')
+!trInvShutdownCmd.name := 'shutdownCommand'
+!new TimeEvent('evInvShutdownCmd')
+!evInvShutdownCmd.time := 2
+
+!new Transition('trInvShutdownComplete')
+!trInvShutdownComplete.name := 'shutdownComplete'
+!new TimeEvent('evInvShutdownComplete')
+!evInvShutdownComplete.time := 10
+
+!new Transition('trInvHeartbeat')
+!trInvHeartbeat.name := 'heartbeat'
+!new TimeEvent('evInvHeartbeat')
+!evInvHeartbeat.time := 300
+
+
+!insert (smInverter, trInvPowerOn) into StateMachineContainsTransitions
+!insert (smInverter, trInvInitComplete) into StateMachineContainsTransitions
+!insert (smInverter, trInvGridSyncOk) into StateMachineContainsTransitions
+!insert (smInverter, trInvOverTemp) into StateMachineContainsTransitions
+!insert (smInverter, trInvTempNormal) into StateMachineContainsTransitions
+!insert (smInverter, trInvFaultTripStart) into StateMachineContainsTransitions
+!insert (smInverter, trInvFaultTripRun) into StateMachineContainsTransitions
+!insert (smInverter, trInvResetFault) into StateMachineContainsTransitions
+!insert (smInverter, trInvShutdownCmd) into StateMachineContainsTransitions
+!insert (smInverter, trInvShutdownComplete) into StateMachineContainsTransitions
+!insert (smInverter, trInvHeartbeat) into StateMachineContainsTransitions
+
+!insert (trInvPowerOn, evInvPowerOn) into TransitionContainsEvents
+!insert (trInvInitComplete, evInvInitComplete) into TransitionContainsEvents
+!insert (trInvGridSyncOk, evInvGridSyncOk) into TransitionContainsEvents
+!insert (trInvOverTemp, evInvOverTemp) into TransitionContainsEvents
+!insert (trInvTempNormal, evInvTempNormal) into TransitionContainsEvents
+!insert (trInvFaultTripStart, evInvFaultTripStart) into TransitionContainsEvents
+!insert (trInvFaultTripRun, evInvFaultTripRun) into TransitionContainsEvents
+!insert (trInvResetFault, evInvResetFault) into TransitionContainsEvents
+!insert (trInvShutdownCmd, evInvShutdownCmd) into TransitionContainsEvents
+!insert (trInvShutdownComplete, evInvShutdownComplete) into TransitionContainsEvents
+!insert (trInvHeartbeat, evInvHeartbeat) into TransitionContainsEvents
+
+
+!insert (invOffline, trInvPowerOn) into StateTransition
+!insert (trInvPowerOn, invStarting) into TransitionState
+
+!insert (invStarting, trInvInitComplete) into StateTransition
+!insert (trInvInitComplete, invSyncing) into TransitionState
+
+!insert (invSyncing, trInvGridSyncOk) into StateTransition
+!insert (trInvGridSyncOk, invProducing) into TransitionState
+
+!insert (invProducing, trInvOverTemp) into StateTransition
+!insert (trInvOverTemp, invDerating) into TransitionState
+
+!insert (invDerating, trInvTempNormal) into StateTransition
+!insert (trInvTempNormal, invProducing) into TransitionState
+
+!insert (invStarting, trInvFaultTripStart) into StateTransition
+!insert (trInvFaultTripStart, invFault) into TransitionState
+
+!insert (invProducing, trInvFaultTripRun) into StateTransition
+!insert (trInvFaultTripRun, invFault) into TransitionState
+
+!insert (invFault, trInvResetFault) into StateTransition
+!insert (trInvResetFault, invStarting) into TransitionState
+
+!insert (invProducing, trInvShutdownCmd) into StateTransition
+!insert (trInvShutdownCmd, invShutdown) into TransitionState
+
+!insert (invShutdown, trInvShutdownComplete) into StateTransition
+!insert (trInvShutdownComplete, invOffline) into TransitionState
+
+!insert (invProducing, trInvHeartbeat) into StateTransition
+!insert (trInvHeartbeat, invProducing) into TransitionState

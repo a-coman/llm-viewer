@@ -1,0 +1,160 @@
+!new AddressBook('ab18')
+
+!new Company('openSourceFoundation')
+!openSourceFoundation.name := 'Open Source Foundation'
+!openSourceFoundation.phone := '+1-202-555-1800'
+!openSourceFoundation.website := 'https://osf.example'
+!openSourceFoundation.email := 'contact@osf.example'
+!openSourceFoundation.industry := 'Nonprofit'
+
+!new Company('communityHub')
+!communityHub.name := 'Community Hub Space'
+!communityHub.phone := '+1-202-555-1810'
+!communityHub.website := ''
+!communityHub.email := 'hello@communityhub.example'
+!communityHub.industry := 'Coworking'
+
+!new Person('lucasGrant')
+!lucasGrant.name := 'Lucas Grant'
+!lucasGrant.phone := '+1-202-555-1821'
+!lucasGrant.website := 'https://lucasgrant.example'
+!lucasGrant.email := 'lucas.grant@osf.example'
+!lucasGrant.title := 'Program Director'
+
+!new Person('fatimaElAmrani')
+!fatimaElAmrani.name := 'Fatima ElAmrani'
+!fatimaElAmrani.phone := '+1-202-555-1822'
+!fatimaElAmrani.website := ''
+!fatimaElAmrani.email := 'fatima.elamrani@osf.example'
+!fatimaElAmrani.title := 'Community Manager'
+
+!new Person('yukiTanaka')
+!yukiTanaka.name := 'Yuki Tanaka'
+!yukiTanaka.phone := '+1-202-555-1823'
+!yukiTanaka.website := ''
+!yukiTanaka.email := 'yuki.tanaka@communityhub.example'
+!yukiTanaka.title := 'Facilities Lead'
+
+!new Person('martaNovak')
+!martaNovak.name := 'Marta Novak'
+!martaNovak.phone := '+1-571-555-1824'
+!martaNovak.website := 'https://martanovak.example'
+!martaNovak.email := 'marta.novak@example.com'
+!martaNovak.title := 'Volunteer Developer'
+
+!insert (ab18, openSourceFoundation) into AddressBookMadeOfContact
+!insert (ab18, communityHub) into AddressBookMadeOfContact
+!insert (ab18, lucasGrant) into AddressBookMadeOfContact
+!insert (ab18, fatimaElAmrani) into AddressBookMadeOfContact
+!insert (ab18, yukiTanaka) into AddressBookMadeOfContact
+!insert (ab18, martaNovak) into AddressBookMadeOfContact
+
+!new Address('addrOSFOffice')
+!addrOSFOffice.city := 'Washington'
+!addrOSFOffice.street := 'K St NW'
+!addrOSFOffice.houseNr := '950'
+
+!new Address('addrOSFMailing')
+!addrOSFMailing.city := 'Washington'
+!addrOSFMailing.street := 'P.O. Box'
+!addrOSFMailing.houseNr := '2041'
+
+!new Address('addrHubSpace')
+!addrHubSpace.city := 'Washington'
+!addrHubSpace.street := '7th St NW'
+!addrHubSpace.houseNr := '120'
+
+!new Address('addrLucasHome')
+!addrLucasHome.city := 'Arlington'
+!addrLucasHome.street := 'Wilson Blvd'
+!addrLucasHome.houseNr := '3100'
+
+!new Address('addrMartaHome')
+!addrMartaHome.city := 'Alexandria'
+!addrMartaHome.street := 'King St'
+!addrMartaHome.houseNr := '1701'
+
+!insert (openSourceFoundation, addrOSFOffice) into ContactContainsAddress
+!insert (openSourceFoundation, addrOSFMailing) into ContactContainsAddress
+!insert (communityHub, addrHubSpace) into ContactContainsAddress
+!insert (lucasGrant, addrLucasHome) into ContactContainsAddress
+!insert (martaNovak, addrMartaHome) into ContactContainsAddress
+
+!new Note('nOSFEmailGrantReport')
+!nOSFEmailGrantReport.author := 'Grants Team'
+!nOSFEmailGrantReport.time := Date('2026-02-01 13:10')
+!nOSFEmailGrantReport.type := #EMAIL
+!nOSFEmailGrantReport.comment := 'Submitted quarterly impact report; requested renewal approval by end of month.'
+
+!new Note('nFatimaMeetingCommunity')
+!nFatimaMeetingCommunity.author := 'Fatima ElAmrani'
+!nFatimaMeetingCommunity.time := Date('2026-02-03 17:00')
+!nFatimaMeetingCommunity.type := #MEETING
+!nFatimaMeetingCommunity.comment := 'Hosted contributor meetup; collected feedback on onboarding documentation and mentorship needs.'
+
+!new Note('nHubCallMaintenance')
+!nHubCallMaintenance.author := 'Yuki Tanaka'
+!nHubCallMaintenance.time := Date('2026-02-05 08:05')
+!nHubCallMaintenance.type := #CALL
+!nHubCallMaintenance.comment := 'Called building maintenance about HVAC issue in conference room; repair scheduled for Friday.'
+
+!new Note('nMartaEmailPatch')
+!nMartaEmailPatch.author := 'Marta Novak'
+!nMartaEmailPatch.time := Date('2026-02-06 21:40')
+!nMartaEmailPatch.type := #EMAIL
+!nMartaEmailPatch.comment := 'Sent patch for translation updates and asked for review on CI warnings.'
+
+!insert (openSourceFoundation, nOSFEmailGrantReport) into ContactContainsNote
+!insert (fatimaElAmrani, nFatimaMeetingCommunity) into ContactContainsNote
+!insert (communityHub, nHubCallMaintenance) into ContactContainsNote
+!insert (martaNovak, nMartaEmailPatch) into ContactContainsNote
+
+!new Relationship('relOSFSubdivisionHub')
+!relOSFSubdivisionHub.type := #SUBDIVISION
+!insert (openSourceFoundation, relOSFSubdivisionHub) into ContactToRelationship
+!insert (relOSFSubdivisionHub, communityHub) into RelationshipToContact
+
+!new Relationship('relLucasEmployeeOSF')
+!relLucasEmployeeOSF.type := #EMPLOYEE
+!insert (lucasGrant, relLucasEmployeeOSF) into ContactToRelationship
+!insert (relLucasEmployeeOSF, openSourceFoundation) into RelationshipToContact
+
+!new Relationship('relFatimaEmployeeOSF')
+!relFatimaEmployeeOSF.type := #EMPLOYEE
+!insert (fatimaElAmrani, relFatimaEmployeeOSF) into ContactToRelationship
+!insert (relFatimaEmployeeOSF, openSourceFoundation) into RelationshipToContact
+
+!new Relationship('relYukiEmployeeHub')
+!relYukiEmployeeHub.type := #EMPLOYEE
+!insert (yukiTanaka, relYukiEmployeeHub) into ContactToRelationship
+!insert (relYukiEmployeeHub, communityHub) into RelationshipToContact
+
+!new Relationship('relMartaEmployeeOSF')
+!relMartaEmployeeOSF.type := #EMPLOYEE
+!insert (martaNovak, relMartaEmployeeOSF) into ContactToRelationship
+!insert (relMartaEmployeeOSF, openSourceFoundation) into RelationshipToContact
+
+!new Relationship('relFatimaBossIsLucas')
+!relFatimaBossIsLucas.type := #BOSS
+!insert (fatimaElAmrani, relFatimaBossIsLucas) into ContactToRelationship
+!insert (relFatimaBossIsLucas, lucasGrant) into RelationshipToContact
+
+!new Relationship('relMartaBossIsFatima')
+!relMartaBossIsFatima.type := #BOSS
+!insert (martaNovak, relMartaBossIsFatima) into ContactToRelationship
+!insert (relMartaBossIsFatima, fatimaElAmrani) into RelationshipToContact
+
+!new Relationship('relYukiBossIsLucas')
+!relYukiBossIsLucas.type := #BOSS
+!insert (yukiTanaka, relYukiBossIsLucas) into ContactToRelationship
+!insert (relYukiBossIsLucas, lucasGrant) into RelationshipToContact
+
+!new Relationship('relLucasCoworkerYuki')
+!relLucasCoworkerYuki.type := #COWORKER
+!insert (lucasGrant, relLucasCoworkerYuki) into ContactToRelationship
+!insert (relLucasCoworkerYuki, yukiTanaka) into RelationshipToContact
+
+!new Relationship('relYukiCoworkerFatima')
+!relYukiCoworkerFatima.type := #COWORKER
+!insert (yukiTanaka, relYukiCoworkerFatima) into ContactToRelationship
+!insert (relYukiCoworkerFatima, fatimaElAmrani) into RelationshipToContact

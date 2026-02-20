@@ -1,0 +1,216 @@
+!new Restaurant('rest31')
+!rest31.name := 'Old Town Noodle Club'
+
+!new Owner('own76')
+!own76.name := 'Ruth Gallagher'
+!own76.percentageShares := 55
+
+!new Owner('own77')
+!own77.name := 'Kenji Arai'
+!own77.percentageShares := 45
+
+!insert (rest31, own76) into RestaurantOwner
+!insert (rest31, own77) into RestaurantOwner
+
+!new HeadWaiter('hw44')
+!hw44.name := 'Marek Lis'
+!hw44.dateOfBirth := Date('1984-02-25')
+!hw44.phoneNumber := '555-8100'
+
+!new Waiter('w77')
+!w77.name := 'Elisa Conti'
+!w77.dateOfBirth := Date('1998-06-18')
+!w77.phoneNumber := '555-8101'
+!w77.spokenLanguage := #Italian
+
+!new Waiter('w78')
+!w78.name := 'Sergio Morales'
+!w78.dateOfBirth := Date('1995-10-07')
+!w78.phoneNumber := '555-8102'
+!w78.spokenLanguage := #Spanish
+
+!insert (hw44, w77) into HeadWaiterWaiter
+!insert (hw44, w78) into HeadWaiterWaiter
+
+!new Chef('chef51')
+!chef51.name := 'Hana Kobayashi'
+!chef51.dateOfBirth := Date('1979-08-09')
+!chef51.phoneNumber := '555-8110'
+
+!new Cook('cook76')
+!cook76.name := 'Jordan Pike'
+!cook76.dateOfBirth := Date('1990-11-11')
+!cook76.phoneNumber := '555-8111'
+!cook76.yearsOfExperience := 8
+
+!new Cook('cook77')
+!cook77.name := 'Marta Sokolov'
+!cook77.dateOfBirth := Date('1997-01-30')
+!cook77.phoneNumber := '555-8112'
+!cook77.yearsOfExperience := 2
+
+!insert (chef51, cook76) into ChefCook
+!insert (chef51, cook77) into ChefCook
+
+!new Allergen('alg31Gluten')
+!alg31Gluten.type := #Gluten
+
+!new Allergen('alg31Seafood')
+!alg31Seafood.type := #Seafood
+
+!new FoodItem('fiUdon31')
+!fiUdon31.number := 2401
+!fiUdon31.description := 'Udon noodles'
+!fiUdon31.purchaseFlag := true
+!fiUdon31.unit := #Pound
+
+!new FoodItem('fiSoySauce31')
+!fiSoySauce31.number := 2402
+!fiSoySauce31.description := 'Soy sauce'
+!fiSoySauce31.purchaseFlag := true
+!fiSoySauce31.unit := #Ounce
+
+!new FoodItem('fiChicken31')
+!fiChicken31.number := 2403
+!fiChicken31.description := 'Chicken thigh'
+!fiChicken31.purchaseFlag := true
+!fiChicken31.unit := #Pound
+
+!new FoodItem('fiBroccoli31')
+!fiBroccoli31.number := 2404
+!fiBroccoli31.description := 'Broccoli'
+!fiBroccoli31.purchaseFlag := true
+!fiBroccoli31.unit := #Pound
+
+!new FoodItem('fiShrimp31')
+!fiShrimp31.number := 2405
+!fiShrimp31.description := 'Shrimp'
+!fiShrimp31.purchaseFlag := true
+!fiShrimp31.unit := #Pound
+
+!new FoodItem('fiCoffeeBeans31')
+!fiCoffeeBeans31.number := 2406
+!fiCoffeeBeans31.description := 'Coffee beans'
+!fiCoffeeBeans31.purchaseFlag := true
+!fiCoffeeBeans31.unit := #Pound
+
+!insert (fiUdon31, alg31Gluten) into FoodItemAllergen
+!insert (fiSoySauce31, alg31Gluten) into FoodItemAllergen
+!insert (fiShrimp31, alg31Seafood) into FoodItemAllergen
+
+!new MenuItem('miChickenUdon31')
+!miChickenUdon31.description := 'Chicken udon bowl with broccoli'
+!miChickenUdon31.prepTime := 13.0
+!miChickenUdon31.classification := #Main
+
+!new MenuItem('miShrimpUdon31')
+!miShrimpUdon31.description := 'Shrimp udon bowl'
+!miShrimpUdon31.prepTime := 14.0
+!miShrimpUdon31.classification := #Main
+
+!new MenuItem('miIcedCoffee31')
+!miIcedCoffee31.description := 'Iced coffee'
+!miIcedCoffee31.prepTime := 2.0
+!miIcedCoffee31.classification := #Beverage
+
+!insert (miChickenUdon31, chef51) into MenuItemChef
+!insert (miShrimpUdon31, chef51) into MenuItemChef
+!insert (miIcedCoffee31, chef51) into MenuItemChef
+
+!insert (miChickenUdon31, fiUdon31) into MenuItemFoodItem
+!insert (miChickenUdon31, fiSoySauce31) into MenuItemFoodItem
+!insert (miChickenUdon31, fiChicken31) into MenuItemFoodItem
+!insert (miChickenUdon31, fiBroccoli31) into MenuItemFoodItem
+
+!insert (miShrimpUdon31, fiUdon31) into MenuItemFoodItem
+!insert (miShrimpUdon31, fiSoySauce31) into MenuItemFoodItem
+!insert (miShrimpUdon31, fiShrimp31) into MenuItemFoodItem
+
+!insert (miIcedCoffee31, fiCoffeeBeans31) into MenuItemFoodItem
+
+!new RegularCustomer('cust44')
+!cust44.name := 'Petra Novak'
+!cust44.prefferedLanguage := #German
+
+!new Individual('res44')
+!res44.time := Time('19:05')
+!res44.date := Date('2028-01-08')
+!res44.numberPeople := 5
+!res44.name := 'Local Food Bloggers'
+!res44.phoneNumber := '555-8200'
+!res44.number := 71001
+!res44.seating := #Inside
+!res44.smoking := #NonSmoking
+
+!insert (res44, w77) into ReservationWaiter
+
+!new Table('tRes44A')
+!tRes44A.number := 11
+!tRes44A.description := 'Corner booth'
+!tRes44A.capacity := 4
+
+!new Table('tRes44B')
+!tRes44B.number := 12
+!tRes44B.description := 'Add-on two-top'
+!tRes44B.capacity := 2
+
+!insert (res44, tRes44A) into ReservationTable
+!insert (res44, tRes44B) into ReservationTable
+
+!new ItemOrder('ioRes44_1')
+!ioRes44_1.time := Time('19:15')
+!insert (res44, ioRes44_1) into ReservationItemOrdered
+!insert (ioRes44_1, miChickenUdon31) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes44_2')
+!ioRes44_2.time := Time('19:20')
+!insert (res44, ioRes44_2) into ReservationItemOrdered
+!insert (ioRes44_2, miIcedCoffee31) into ItemOrderMenuItem
+
+!new Banquet('banq42')
+!banq42.time := Time('12:10')
+!banq42.date := Date('2028-01-09')
+!banq42.numberPeople := 18
+!banq42.name := 'Neighborhood Workshop'
+!banq42.phoneNumber := '555-8201'
+!banq42.number := 72001
+!banq42.groupName := 'Winter Crafts Meetup'
+!banq42.paymentMethod := #Cash
+!banq42.busService := false
+
+!insert (banq42, w77) into ReservationWaiter
+!insert (banq42, w78) into ReservationWaiter
+
+!new Table('tBanq42A')
+!tBanq42A.number := 30
+!tBanq42A.description := 'Community table A'
+!tBanq42A.capacity := 10
+
+!new Table('tBanq42B')
+!tBanq42B.number := 31
+!tBanq42B.description := 'Community table B'
+!tBanq42B.capacity := 8
+
+!insert (banq42, tBanq42A) into ReservationTable
+!insert (banq42, tBanq42B) into ReservationTable
+
+!new ItemOrder('ioBanq42_1')
+!ioBanq42_1.time := Time('12:25')
+!insert (banq42, ioBanq42_1) into ReservationItemOrdered
+!insert (ioBanq42_1, miShrimpUdon31) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq42_2')
+!ioBanq42_2.time := Time('12:25')
+!insert (banq42, ioBanq42_2) into ReservationItemOrdered
+!insert (ioBanq42_2, miChickenUdon31) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq42_3')
+!ioBanq42_3.time := Time('12:30')
+!insert (banq42, ioBanq42_3) into ReservationItemOrdered
+!insert (ioBanq42_3, miIcedCoffee31) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq22')
+!dietReq22.diet := #Vegan
+
+!new ReportedAllergy('repAlg22')
+!repAlg22.allergen := #Seafood

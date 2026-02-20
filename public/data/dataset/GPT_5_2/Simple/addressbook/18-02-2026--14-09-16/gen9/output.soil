@@ -1,0 +1,173 @@
+!new AddressBook('ab10')
+
+!new Company('brightHomeRepairs')
+!brightHomeRepairs.name := 'BrightHome Repairs'
+!brightHomeRepairs.phone := '+1-702-555-1100'
+!brightHomeRepairs.website := 'https://brighthomerepairs.example'
+!brightHomeRepairs.email := 'service@brighthomerepairs.example'
+!brightHomeRepairs.industry := 'Home Services'
+
+!new Company('brightHomeMobile')
+!brightHomeMobile.name := 'BrightHome Mobile Unit'
+!brightHomeMobile.phone := '+1-702-555-1109'
+!brightHomeMobile.website := ''
+!brightHomeMobile.email := 'dispatch@brighthomerepairs.example'
+!brightHomeMobile.industry := 'Field Services'
+
+!new Company('civicBank')
+!civicBank.name := 'Civic Bank'
+!civicBank.phone := '+1-702-555-1200'
+!civicBank.website := 'https://civicbank.example'
+!civicBank.email := 'business@civicbank.example'
+!civicBank.industry := 'Banking'
+
+!new Person('taraQuinn')
+!taraQuinn.name := 'Tara Quinn'
+!taraQuinn.phone := '+1-702-555-1111'
+!taraQuinn.website := ''
+!taraQuinn.email := 'tara.quinn@brighthomerepairs.example'
+!taraQuinn.title := 'Owner'
+
+!new Person('ethanQuinn')
+!ethanQuinn.name := 'Ethan Quinn'
+!ethanQuinn.phone := '+1-702-555-1112'
+!ethanQuinn.website := ''
+!ethanQuinn.email := 'ethan.quinn@brighthomerepairs.example'
+!ethanQuinn.title := 'Apprentice Technician'
+
+!new Person('meeraDas')
+!meeraDas.name := 'Meera Das'
+!meeraDas.phone := '+1-702-555-1113'
+!meeraDas.website := 'https://meeradas.example'
+!meeraDas.email := 'meera.das@brighthomerepairs.example'
+!meeraDas.title := 'Office Manager'
+
+!new Person('svenLarsson')
+!svenLarsson.name := 'Sven Larsson'
+!svenLarsson.phone := '+1-702-555-1212'
+!svenLarsson.website := ''
+!svenLarsson.email := 'sven.larsson@civicbank.example'
+!svenLarsson.title := 'Business Account Manager'
+
+!insert (ab10, brightHomeRepairs) into AddressBookMadeOfContact
+!insert (ab10, brightHomeMobile) into AddressBookMadeOfContact
+!insert (ab10, civicBank) into AddressBookMadeOfContact
+!insert (ab10, taraQuinn) into AddressBookMadeOfContact
+!insert (ab10, ethanQuinn) into AddressBookMadeOfContact
+!insert (ab10, meeraDas) into AddressBookMadeOfContact
+!insert (ab10, svenLarsson) into AddressBookMadeOfContact
+
+!new Address('addrBrightHomeShop')
+!addrBrightHomeShop.city := 'Las Vegas'
+!addrBrightHomeShop.street := 'S Rainbow Blvd'
+!addrBrightHomeShop.houseNr := '4550'
+
+!new Address('addrBrightHomeWarehouse')
+!addrBrightHomeWarehouse.city := 'Las Vegas'
+!addrBrightHomeWarehouse.street := 'W Sunset Rd'
+!addrBrightHomeWarehouse.houseNr := '980'
+
+!new Address('addrCivicBankBranch')
+!addrCivicBankBranch.city := 'Las Vegas'
+!addrCivicBankBranch.street := 'E Flamingo Rd'
+!addrCivicBankBranch.houseNr := '300'
+
+!new Address('addrTaraHome')
+!addrTaraHome.city := 'Henderson'
+!addrTaraHome.street := 'Green Valley Pkwy'
+!addrTaraHome.houseNr := '720'
+
+!new Address('addrEthanHome')
+!addrEthanHome.city := 'Las Vegas'
+!addrEthanHome.street := 'Spring Mountain Rd'
+!addrEthanHome.houseNr := '1650'
+
+!insert (brightHomeRepairs, addrBrightHomeShop) into ContactContainsAddress
+!insert (brightHomeRepairs, addrBrightHomeWarehouse) into ContactContainsAddress
+!insert (civicBank, addrCivicBankBranch) into ContactContainsAddress
+!insert (taraQuinn, addrTaraHome) into ContactContainsAddress
+!insert (ethanQuinn, addrEthanHome) into ContactContainsAddress
+
+!new Note('nBrightHomeMeetingSafety')
+!nBrightHomeMeetingSafety.author := 'Meera Das'
+!nBrightHomeMeetingSafety.time := Date('2026-02-10 08:30')
+!nBrightHomeMeetingSafety.type := #MEETING
+!nBrightHomeMeetingSafety.comment := 'Morning briefing: reviewed ladder safety and new customer scheduling process.'
+
+!new Note('nTaraEmailInsurance')
+!nTaraEmailInsurance.author := 'Tara Quinn'
+!nTaraEmailInsurance.time := Date('2026-02-11 16:05')
+!nTaraEmailInsurance.type := #EMAIL
+!nTaraEmailInsurance.comment := 'Requested updated certificate of insurance for a commercial job starting next month.'
+
+!new Note('nEthanCallDispatch')
+!nEthanCallDispatch.author := 'Ethan Quinn'
+!nEthanCallDispatch.time := Date('2026-02-12 07:50')
+!nEthanCallDispatch.type := #CALL
+!nEthanCallDispatch.comment := 'Called dispatch to confirm parts pickup and first appointment address.'
+
+!new Note('nBankEmailAccount')
+!nBankEmailAccount.author := 'Sven Larsson'
+!nBankEmailAccount.time := Date('2026-02-13 09:15')
+!nBankEmailAccount.type := #EMAIL
+!nBankEmailAccount.comment := 'Sent instructions for adding a second signer to the business checking account.'
+
+!insert (brightHomeRepairs, nBrightHomeMeetingSafety) into ContactContainsNote
+!insert (taraQuinn, nTaraEmailInsurance) into ContactContainsNote
+!insert (ethanQuinn, nEthanCallDispatch) into ContactContainsNote
+!insert (civicBank, nBankEmailAccount) into ContactContainsNote
+
+!new Relationship('relBrightHomeSubdivisionMobile')
+!relBrightHomeSubdivisionMobile.type := #SUBDIVISION
+!insert (brightHomeRepairs, relBrightHomeSubdivisionMobile) into ContactToRelationship
+!insert (relBrightHomeSubdivisionMobile, brightHomeMobile) into RelationshipToContact
+
+!new Relationship('relTaraEmployeeOfBrightHome')
+!relTaraEmployeeOfBrightHome.type := #EMPLOYEE
+!insert (taraQuinn, relTaraEmployeeOfBrightHome) into ContactToRelationship
+!insert (relTaraEmployeeOfBrightHome, brightHomeRepairs) into RelationshipToContact
+
+!new Relationship('relMeeraEmployeeOfBrightHome')
+!relMeeraEmployeeOfBrightHome.type := #EMPLOYEE
+!insert (meeraDas, relMeeraEmployeeOfBrightHome) into ContactToRelationship
+!insert (relMeeraEmployeeOfBrightHome, brightHomeRepairs) into RelationshipToContact
+
+!new Relationship('relEthanEmployeeOfBrightHomeMobile')
+!relEthanEmployeeOfBrightHomeMobile.type := #EMPLOYEE
+!insert (ethanQuinn, relEthanEmployeeOfBrightHomeMobile) into ContactToRelationship
+!insert (relEthanEmployeeOfBrightHomeMobile, brightHomeMobile) into RelationshipToContact
+
+!new Relationship('relSvenEmployeeOfBank')
+!relSvenEmployeeOfBank.type := #EMPLOYEE
+!insert (svenLarsson, relSvenEmployeeOfBank) into ContactToRelationship
+!insert (relSvenEmployeeOfBank, civicBank) into RelationshipToContact
+
+!new Relationship('relEthanBossIsTara')
+!relEthanBossIsTara.type := #BOSS
+!insert (ethanQuinn, relEthanBossIsTara) into ContactToRelationship
+!insert (relEthanBossIsTara, taraQuinn) into RelationshipToContact
+
+!new Relationship('relMeeraBossIsTara')
+!relMeeraBossIsTara.type := #BOSS
+!insert (meeraDas, relMeeraBossIsTara) into ContactToRelationship
+!insert (relMeeraBossIsTara, taraQuinn) into RelationshipToContact
+
+!new Relationship('relMeeraCoworkerEthan')
+!relMeeraCoworkerEthan.type := #COWORKER
+!insert (meeraDas, relMeeraCoworkerEthan) into ContactToRelationship
+!insert (relMeeraCoworkerEthan, ethanQuinn) into RelationshipToContact
+
+!new Relationship('relEthanCoworkerMeera')
+!relEthanCoworkerMeera.type := #COWORKER
+!insert (ethanQuinn, relEthanCoworkerMeera) into ContactToRelationship
+!insert (relEthanCoworkerMeera, meeraDas) into RelationshipToContact
+
+!new Relationship('relTaraCoworkerSven')
+!relTaraCoworkerSven.type := #COWORKER
+!insert (taraQuinn, relTaraCoworkerSven) into ContactToRelationship
+!insert (relTaraCoworkerSven, svenLarsson) into RelationshipToContact
+
+!new Relationship('relBrightHomeCoworkerBank')
+!relBrightHomeCoworkerBank.type := #COWORKER
+!insert (brightHomeRepairs, relBrightHomeCoworkerBank) into ContactToRelationship
+!insert (relBrightHomeCoworkerBank, civicBank) into RelationshipToContact

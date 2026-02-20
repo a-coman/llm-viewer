@@ -1,0 +1,113 @@
+!new Currency('curKRW')
+!curKRW.name := 'South Korean Won'
+!curKRW.abbreviation := 'KRW'
+
+!new Currency('curTRY')
+!curTRY.name := 'Turkish Lira'
+!curTRY.abbreviation := 'TRY'
+
+
+!new Expense('expFebAcademicJournal')
+!expFebAcademicJournal.amount := 28000.00
+!expFebAcademicJournal.startDate := Date('2026-02-02')
+!expFebAcademicJournal.endDate := Date('2026-02-02')
+
+!new Bill('billJournalAccess_2026_02_02')
+!billJournalAccess_2026_02_02.amount := 28000.00
+!billJournalAccess_2026_02_02.category := 'Education - Journal access'
+!billJournalAccess_2026_02_02.date := Date('2026-02-02')
+!billJournalAccess_2026_02_02.paymentMethod := #CREDIT_CARD
+!billJournalAccess_2026_02_02.status := #VALIDATED
+
+!insert (expFebAcademicJournal, billJournalAccess_2026_02_02) into ExpenseContainsBills
+!insert (billJournalAccess_2026_02_02, curKRW) into BillCurrency
+
+
+!new Expense('expFebEmergencyFund')
+!expFebEmergencyFund.amount := 915.40
+!expFebEmergencyFund.startDate := Date('2026-02-16')
+!expFebEmergencyFund.endDate := Date('2026-02-16')
+
+!new Bill('billCashWithdrawal_2026_02_16')
+!billCashWithdrawal_2026_02_16.amount := 500.00
+!billCashWithdrawal_2026_02_16.category := 'Finance - Emergency cash withdrawal'
+!billCashWithdrawal_2026_02_16.date := Date('2026-02-16')
+!billCashWithdrawal_2026_02_16.paymentMethod := #CASH
+!billCashWithdrawal_2026_02_16.status := #VERIFIED
+
+!new Bill('billLocksmithCallout_2026_02_16')
+!billLocksmithCallout_2026_02_16.amount := 399.90
+!billLocksmithCallout_2026_02_16.category := 'Home - Locksmith callout'
+!billLocksmithCallout_2026_02_16.date := Date('2026-02-16')
+!billLocksmithCallout_2026_02_16.paymentMethod := #CREDIT_CARD
+!billLocksmithCallout_2026_02_16.status := #PENDING
+
+!new Bill('billATMServiceFee_2026_02_16')
+!billATMServiceFee_2026_02_16.amount := 15.50
+!billATMServiceFee_2026_02_16.category := 'Banking - ATM service fee'
+!billATMServiceFee_2026_02_16.date := Date('2026-02-16')
+!billATMServiceFee_2026_02_16.paymentMethod := #CASH
+!billATMServiceFee_2026_02_16.status := #VALIDATED
+
+!insert (expFebEmergencyFund, billCashWithdrawal_2026_02_16) into ExpenseContainsBills
+!insert (expFebEmergencyFund, billLocksmithCallout_2026_02_16) into ExpenseContainsBills
+!insert (expFebEmergencyFund, billATMServiceFee_2026_02_16) into ExpenseContainsBills
+
+!insert (billCashWithdrawal_2026_02_16, curTRY) into BillCurrency
+!insert (billLocksmithCallout_2026_02_16, curTRY) into BillCurrency
+!insert (billATMServiceFee_2026_02_16, curKRW) into BillCurrency
+
+!new Comment('cmtEmergency1')
+!cmtEmergency1.text := 'Unexpected lockout; kept receipts for reimbursement review.'
+!insert (expFebEmergencyFund, cmtEmergency1) into ExpenseComment
+
+
+!new Expense('expFebWorkshopMaterials')
+!expFebWorkshopMaterials.amount := 242.75
+!expFebWorkshopMaterials.startDate := Date('2026-02-20')
+!expFebWorkshopMaterials.endDate := Date('2026-02-23')
+
+!new Bill('billNotebooks_2026_02_20')
+!billNotebooks_2026_02_20.amount := 89.25
+!billNotebooks_2026_02_20.category := 'Education - Notebooks'
+!billNotebooks_2026_02_20.date := Date('2026-02-20')
+!billNotebooks_2026_02_20.paymentMethod := #CASH
+!billNotebooks_2026_02_20.status := #VERIFIED
+
+!new Bill('billMarkers_2026_02_21')
+!billMarkers_2026_02_21.amount := 33.50
+!billMarkers_2026_02_21.category := 'Education - Markers'
+!billMarkers_2026_02_21.date := Date('2026-02-21')
+!billMarkers_2026_02_21.paymentMethod := #CASH
+!billMarkers_2026_02_21.status := #VALIDATED
+
+!new Bill('billPrintouts_2026_02_22')
+!billPrintouts_2026_02_22.amount := 56.00
+!billPrintouts_2026_02_22.category := 'Education - Workshop printouts'
+!billPrintouts_2026_02_22.date := Date('2026-02-22')
+!billPrintouts_2026_02_22.paymentMethod := #CREDIT_CARD
+!billPrintouts_2026_02_22.status := #PENDING
+
+!new Bill('billRoomEquipment_2026_02_23')
+!billRoomEquipment_2026_02_23.amount := 64.00
+!billRoomEquipment_2026_02_23.category := 'Education - Room equipment rental'
+!billRoomEquipment_2026_02_23.date := Date('2026-02-23')
+!billRoomEquipment_2026_02_23.paymentMethod := #CHECK
+!billRoomEquipment_2026_02_23.status := #DRAFT
+
+!insert (expFebWorkshopMaterials, billNotebooks_2026_02_20) into ExpenseContainsBills
+!insert (expFebWorkshopMaterials, billMarkers_2026_02_21) into ExpenseContainsBills
+!insert (expFebWorkshopMaterials, billPrintouts_2026_02_22) into ExpenseContainsBills
+!insert (expFebWorkshopMaterials, billRoomEquipment_2026_02_23) into ExpenseContainsBills
+
+!insert (billNotebooks_2026_02_20, curTRY) into BillCurrency
+!insert (billMarkers_2026_02_21, curTRY) into BillCurrency
+!insert (billPrintouts_2026_02_22, curTRY) into BillCurrency
+!insert (billRoomEquipment_2026_02_23, curTRY) into BillCurrency
+
+!new Comment('cmtWorkshop1')
+!cmtWorkshop1.text := 'Materials purchased for a weekend skills workshop.'
+!new Comment('cmtWorkshop2')
+!cmtWorkshop2.text := 'Room equipment bill is still in draft until the final invoice is issued.'
+!insert (expFebWorkshopMaterials, cmtWorkshop1) into ExpenseComment
+!insert (expFebWorkshopMaterials, cmtWorkshop2) into ExpenseComment

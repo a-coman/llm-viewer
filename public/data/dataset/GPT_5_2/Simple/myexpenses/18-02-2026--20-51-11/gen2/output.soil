@@ -1,0 +1,46 @@
+!new Currency('curGBP')
+!curGBP.name := 'Pound Sterling'
+!curGBP.abbreviation := 'GBP'
+
+!new Expense('expMayConference')
+!expMayConference.amount := 512.40
+!expMayConference.startDate := Date('2026-05-06')
+!expMayConference.endDate := Date('2026-05-09')
+
+!new Bill('billHotel_2026_05_06')
+!billHotel_2026_05_06.amount := 300.00
+!billHotel_2026_05_06.category := 'Travel - Hotel'
+!billHotel_2026_05_06.date := Date('2026-05-06')
+!billHotel_2026_05_06.paymentMethod := #CREDIT_CARD
+!billHotel_2026_05_06.status := #VALIDATED
+
+!new Bill('billConferenceFee_2026_05_07')
+!billConferenceFee_2026_05_07.amount := 150.00
+!billConferenceFee_2026_05_07.category := 'Professional - Conference fee'
+!billConferenceFee_2026_05_07.date := Date('2026-05-07')
+!billConferenceFee_2026_05_07.paymentMethod := #CHECK
+!billConferenceFee_2026_05_07.status := #PENDING
+
+!new Bill('billTaxi_2026_05_08')
+!billTaxi_2026_05_08.amount := 42.40
+!billTaxi_2026_05_08.category := 'Travel - Taxi'
+!billTaxi_2026_05_08.date := Date('2026-05-08')
+!billTaxi_2026_05_08.paymentMethod := #CASH
+!billTaxi_2026_05_08.status := #REFUNDED
+
+!new Bill('billMeal_2026_05_09')
+!billMeal_2026_05_09.amount := 20.00
+!billMeal_2026_05_09.category := 'Meals'
+!billMeal_2026_05_09.date := Date('2026-05-09')
+!billMeal_2026_05_09.paymentMethod := #CREDIT_CARD
+!billMeal_2026_05_09.status := #REFUSED
+
+!insert (expMayConference, billHotel_2026_05_06) into ExpenseContainsBills
+!insert (expMayConference, billConferenceFee_2026_05_07) into ExpenseContainsBills
+!insert (expMayConference, billTaxi_2026_05_08) into ExpenseContainsBills
+!insert (expMayConference, billMeal_2026_05_09) into ExpenseContainsBills
+
+!insert (billHotel_2026_05_06, curGBP) into BillCurrency
+!insert (billConferenceFee_2026_05_07, curGBP) into BillCurrency
+!insert (billTaxi_2026_05_08, curGBP) into BillCurrency
+!insert (billMeal_2026_05_09, curGBP) into BillCurrency

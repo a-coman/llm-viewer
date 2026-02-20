@@ -1,0 +1,264 @@
+!new StateMachine('smRover')
+!smRover.name := 'marsRoverMission'
+
+!new State('rvAsleep')
+!rvAsleep.name := 'asleep'
+!new State('rvBooting')
+!rvBooting.name := 'booting'
+!new State('rvSelfCheck')
+!rvSelfCheck.name := 'selfCheck'
+!new State('rvWaiting')
+!rvWaiting.name := 'waitingCommand'
+!new State('rvDriving')
+!rvDriving.name := 'driving'
+!new State('rvSampling')
+!rvSampling.name := 'sampling'
+!new State('rvUploading')
+!rvUploading.name := 'uploading'
+!new State('rvSafeMode')
+!rvSafeMode.name := 'safeMode'
+
+!insert (smRover, rvAsleep) into StateMachineContainsStates
+!insert (smRover, rvBooting) into StateMachineContainsStates
+!insert (smRover, rvSelfCheck) into StateMachineContainsStates
+!insert (smRover, rvWaiting) into StateMachineContainsStates
+!insert (smRover, rvDriving) into StateMachineContainsStates
+!insert (smRover, rvSampling) into StateMachineContainsStates
+!insert (smRover, rvUploading) into StateMachineContainsStates
+!insert (smRover, rvSafeMode) into StateMachineContainsStates
+
+!insert (smRover, rvAsleep) into StateMachineStartsStates
+
+
+!new Transition('tRvWake')
+!tRvWake.name := 'wakeUp'
+!new TimeEvent('eRvWake')
+!eRvWake.time := 1
+
+!new Transition('tRvBootDone')
+!tRvBootDone.name := 'bootDone'
+!new TimeEvent('eRvBootDone')
+!eRvBootDone.time := 15
+
+!new Transition('tRvCheckOk')
+!tRvCheckOk.name := 'checkOk'
+!new TimeEvent('eRvCheckOk')
+!eRvCheckOk.time := 30
+
+!new Transition('tRvDriveCmd')
+!tRvDriveCmd.name := 'receiveDriveCommand'
+!new TimeEvent('eRvDriveCmd')
+!eRvDriveCmd.time := 2
+
+!new Transition('tRvReachWaypoint')
+!tRvReachWaypoint.name := 'reachWaypoint'
+!new TimeEvent('eRvReachWaypoint')
+!eRvReachWaypoint.time := 600
+
+!new Transition('tRvStartSampling')
+!tRvStartSampling.name := 'startSampling'
+!new TimeEvent('eRvStartSampling')
+!eRvStartSampling.time := 1
+
+!new Transition('tRvSampleDone')
+!tRvSampleDone.name := 'sampleDone'
+!new TimeEvent('eRvSampleDone')
+!eRvSampleDone.time := 180
+
+!new Transition('tRvStartUpload')
+!tRvStartUpload.name := 'startUpload'
+!new TimeEvent('eRvStartUpload')
+!eRvStartUpload.time := 1
+
+!new Transition('tRvUploadDone')
+!tRvUploadDone.name := 'uploadDone'
+!new TimeEvent('eRvUploadDone')
+!eRvUploadDone.time := 120
+
+!new Transition('tRvAnomaly')
+!tRvAnomaly.name := 'anomalyDetected'
+!new TimeEvent('eRvAnomaly')
+!eRvAnomaly.time := 1
+
+!new Transition('tRvRecover')
+!tRvRecover.name := 'recover'
+!new TimeEvent('eRvRecover')
+!eRvRecover.time := 300
+
+!new Transition('tRvSleep')
+!tRvSleep.name := 'enterSleep'
+!new TimeEvent('eRvSleep')
+!eRvSleep.time := 3600
+
+
+!insert (smRover, tRvWake) into StateMachineContainsTransitions
+!insert (smRover, tRvBootDone) into StateMachineContainsTransitions
+!insert (smRover, tRvCheckOk) into StateMachineContainsTransitions
+!insert (smRover, tRvDriveCmd) into StateMachineContainsTransitions
+!insert (smRover, tRvReachWaypoint) into StateMachineContainsTransitions
+!insert (smRover, tRvStartSampling) into StateMachineContainsTransitions
+!insert (smRover, tRvSampleDone) into StateMachineContainsTransitions
+!insert (smRover, tRvStartUpload) into StateMachineContainsTransitions
+!insert (smRover, tRvUploadDone) into StateMachineContainsTransitions
+!insert (smRover, tRvAnomaly) into StateMachineContainsTransitions
+!insert (smRover, tRvRecover) into StateMachineContainsTransitions
+!insert (smRover, tRvSleep) into StateMachineContainsTransitions
+
+!insert (tRvWake, eRvWake) into TransitionContainsEvents
+!insert (tRvBootDone, eRvBootDone) into TransitionContainsEvents
+!insert (tRvCheckOk, eRvCheckOk) into TransitionContainsEvents
+!insert (tRvDriveCmd, eRvDriveCmd) into TransitionContainsEvents
+!insert (tRvReachWaypoint, eRvReachWaypoint) into TransitionContainsEvents
+!insert (tRvStartSampling, eRvStartSampling) into TransitionContainsEvents
+!insert (tRvSampleDone, eRvSampleDone) into TransitionContainsEvents
+!insert (tRvStartUpload, eRvStartUpload) into TransitionContainsEvents
+!insert (tRvUploadDone, eRvUploadDone) into TransitionContainsEvents
+!insert (tRvAnomaly, eRvAnomaly) into TransitionContainsEvents
+!insert (tRvRecover, eRvRecover) into TransitionContainsEvents
+!insert (tRvSleep, eRvSleep) into TransitionContainsEvents
+
+
+!insert (rvAsleep, tRvWake) into StateTransition
+!insert (tRvWake, rvBooting) into TransitionState
+
+!insert (rvBooting, tRvBootDone) into StateTransition
+!insert (tRvBootDone, rvSelfCheck) into TransitionState
+
+!insert (rvSelfCheck, tRvCheckOk) into StateTransition
+!insert (tRvCheckOk, rvWaiting) into TransitionState
+
+!insert (rvWaiting, tRvDriveCmd) into StateTransition
+!insert (tRvDriveCmd, rvDriving) into TransitionState
+
+!insert (rvDriving, tRvReachWaypoint) into StateTransition
+!insert (tRvReachWaypoint, rvWaiting) into TransitionState
+
+!insert (rvWaiting, tRvStartSampling) into StateTransition
+!insert (tRvStartSampling, rvSampling) into TransitionState
+
+!insert (rvSampling, tRvSampleDone) into StateTransition
+!insert (tRvSampleDone, rvWaiting) into TransitionState
+
+!insert (rvWaiting, tRvStartUpload) into StateTransition
+!insert (tRvStartUpload, rvUploading) into TransitionState
+
+!insert (rvUploading, tRvUploadDone) into StateTransition
+!insert (tRvUploadDone, rvWaiting) into TransitionState
+
+!insert (rvDriving, tRvAnomaly) into StateTransition
+!insert (tRvAnomaly, rvSafeMode) into TransitionState
+
+!insert (rvSafeMode, tRvRecover) into StateTransition
+!insert (tRvRecover, rvWaiting) into TransitionState
+
+!insert (rvWaiting, tRvSleep) into StateTransition
+!insert (tRvSleep, rvAsleep) into TransitionState
+
+
+
+!new StateMachine('smHotelRoom')
+!smHotelRoom.name := 'hotelRoomKeycard'
+
+!new State('htVacant')
+!htVacant.name := 'vacant'
+!new State('htOccupied')
+!htOccupied.name := 'occupied'
+!new State('htDnd')
+!htDnd.name := 'doNotDisturb'
+!new State('htCleaning')
+!htCleaning.name := 'cleaning'
+!new State('htMaintenance')
+!htMaintenance.name := 'maintenance'
+
+!insert (smHotelRoom, htVacant) into StateMachineContainsStates
+!insert (smHotelRoom, htOccupied) into StateMachineContainsStates
+!insert (smHotelRoom, htDnd) into StateMachineContainsStates
+!insert (smHotelRoom, htCleaning) into StateMachineContainsStates
+!insert (smHotelRoom, htMaintenance) into StateMachineContainsStates
+
+!insert (smHotelRoom, htVacant) into StateMachineStartsStates
+
+
+!new Transition('tHtCheckIn')
+!tHtCheckIn.name := 'checkIn'
+!new TimeEvent('eHtCheckIn')
+!eHtCheckIn.time := 1
+
+!new Transition('tHtEnableDnd')
+!tHtEnableDnd.name := 'enableDnd'
+!new TimeEvent('eHtEnableDnd')
+!eHtEnableDnd.time := 1
+
+!new Transition('tHtDisableDnd')
+!tHtDisableDnd.name := 'disableDnd'
+!new TimeEvent('eHtDisableDnd')
+!eHtDisableDnd.time := 1
+
+!new Transition('tHtCheckOut')
+!tHtCheckOut.name := 'checkOut'
+!new TimeEvent('eHtCheckOut')
+!eHtCheckOut.time := 1
+
+!new Transition('tHtFinishClean')
+!tHtFinishClean.name := 'finishCleaning'
+!new TimeEvent('eHtFinishClean')
+!eHtFinishClean.time := 45
+
+!new Transition('tHtReportIssue')
+!tHtReportIssue.name := 'reportIssue'
+!new TimeEvent('eHtReportIssue')
+!eHtReportIssue.time := 2
+
+!new Transition('tHtFixRoom')
+!tHtFixRoom.name := 'fixRoom'
+!new TimeEvent('eHtFixRoom')
+!eHtFixRoom.time := 240
+
+!new Transition('tHtAutoInspect')
+!tHtAutoInspect.name := 'autoInspect'
+!new TimeEvent('eHtAutoInspect')
+!eHtAutoInspect.time := 1440
+
+
+!insert (smHotelRoom, tHtCheckIn) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtEnableDnd) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtDisableDnd) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtCheckOut) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtFinishClean) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtReportIssue) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtFixRoom) into StateMachineContainsTransitions
+!insert (smHotelRoom, tHtAutoInspect) into StateMachineContainsTransitions
+
+!insert (tHtCheckIn, eHtCheckIn) into TransitionContainsEvents
+!insert (tHtEnableDnd, eHtEnableDnd) into TransitionContainsEvents
+!insert (tHtDisableDnd, eHtDisableDnd) into TransitionContainsEvents
+!insert (tHtCheckOut, eHtCheckOut) into TransitionContainsEvents
+!insert (tHtFinishClean, eHtFinishClean) into TransitionContainsEvents
+!insert (tHtReportIssue, eHtReportIssue) into TransitionContainsEvents
+!insert (tHtFixRoom, eHtFixRoom) into TransitionContainsEvents
+!insert (tHtAutoInspect, eHtAutoInspect) into TransitionContainsEvents
+
+
+!insert (htVacant, tHtCheckIn) into StateTransition
+!insert (tHtCheckIn, htOccupied) into TransitionState
+
+!insert (htOccupied, tHtEnableDnd) into StateTransition
+!insert (tHtEnableDnd, htDnd) into TransitionState
+
+!insert (htDnd, tHtDisableDnd) into StateTransition
+!insert (tHtDisableDnd, htOccupied) into TransitionState
+
+!insert (htOccupied, tHtCheckOut) into StateTransition
+!insert (tHtCheckOut, htCleaning) into TransitionState
+
+!insert (htCleaning, tHtFinishClean) into StateTransition
+!insert (tHtFinishClean, htVacant) into TransitionState
+
+!insert (htCleaning, tHtReportIssue) into StateTransition
+!insert (tHtReportIssue, htMaintenance) into TransitionState
+
+!insert (htMaintenance, tHtFixRoom) into StateTransition
+!insert (tHtFixRoom, htVacant) into TransitionState
+
+!insert (htVacant, tHtAutoInspect) into StateTransition
+!insert (tHtAutoInspect, htVacant) into TransitionState

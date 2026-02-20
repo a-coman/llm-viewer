@@ -1,0 +1,157 @@
+!new RentalOffice('office_mobile')
+!office_mobile.name := 'Gulf Coast Vehicle Rental - Mobile'
+!office_mobile.number := 801
+!office_mobile.address := '3100 Airport Blvd, Mobile, AL 36606'
+
+!new RentalOffice('office_tallahassee')
+!office_tallahassee.name := 'Capital City Truck Rental - Tallahassee'
+!office_tallahassee.number := 802
+!office_tallahassee.address := '3850 N Monroe St, Tallahassee, FL 32303'
+
+!new RentalOffice('office_newhaven')
+!office_newhaven.name := 'Harborline Rentals - New Haven'
+!office_newhaven.number := 803
+!office_newhaven.address := '60 S Water St, New Haven, CT 06519'
+
+!new RentalOffice('office_de_drop_yard')
+!office_de_drop_yard.name := 'Delaware Return Yard (Unstaffed)'
+!office_de_drop_yard.number := 804
+!office_de_drop_yard.address := '250 River Rd, New Castle, DE 19720'
+
+!new Truck('truck_al_standard_01')
+!truck_al_standard_01.id := 16001
+!truck_al_standard_01.registrationState := #AL
+!truck_al_standard_01.licensePlateNumber := 'AL-TRK-8801'
+!truck_al_standard_01.vehicleTypeCode := #TRUCK
+!truck_al_standard_01.registrationLastMaintenanceDate := Date('2026-03-08')
+!truck_al_standard_01.expirationDate := Date('2027-03-31')
+!truck_al_standard_01.odometerReading := 40755
+!truck_al_standard_01.gasTankCapacity := 50.0
+!truck_al_standard_01.workingRadio := true
+!truck_al_standard_01.mileage := 11
+
+!new Vehicle('trailer_al_covered_01')
+!trailer_al_covered_01.id := 17001
+!trailer_al_covered_01.registrationState := #AL
+!trailer_al_covered_01.licensePlateNumber := 'AL-TRL-6008'
+!trailer_al_covered_01.vehicleTypeCode := #COVERED_TRAILER
+!trailer_al_covered_01.registrationLastMaintenanceDate := Date('2026-02-19')
+!trailer_al_covered_01.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_fl_open_01')
+!trailer_fl_open_01.id := 17002
+!trailer_fl_open_01.registrationState := #FL
+!trailer_fl_open_01.licensePlateNumber := 'FL-TRL-8904'
+!trailer_fl_open_01.vehicleTypeCode := #OPEN_TRAILER
+!trailer_fl_open_01.registrationLastMaintenanceDate := Date('2025-11-27')
+!trailer_fl_open_01.expirationDate := Date('2026-11-30')
+
+!new Truck('truck_fl_10ft_01')
+!truck_fl_10ft_01.id := 16002
+!truck_fl_10ft_01.registrationState := #FL
+!truck_fl_10ft_01.licensePlateNumber := 'FL-TRK-3120'
+!truck_fl_10ft_01.vehicleTypeCode := #TRUCK10
+!truck_fl_10ft_01.registrationLastMaintenanceDate := Date('2026-01-30')
+!truck_fl_10ft_01.expirationDate := Date('2026-09-30')
+!truck_fl_10ft_01.odometerReading := 27110
+!truck_fl_10ft_01.gasTankCapacity := 36.0
+!truck_fl_10ft_01.workingRadio := false
+!truck_fl_10ft_01.mileage := 15
+
+!insert (office_mobile, truck_al_standard_01) into RentalOfficeVehicle
+!insert (office_mobile, trailer_al_covered_01) into RentalOfficeVehicle
+!insert (office_tallahassee, trailer_fl_open_01) into RentalOfficeVehicle
+!insert (office_tallahassee, truck_fl_10ft_01) into RentalOfficeVehicle
+
+!new Company('cust_co_gulfport')
+!cust_co_gulfport.name := 'GulfPort Movers & Storage'
+!cust_co_gulfport.address := '920 Government St, Mobile, AL 36604'
+!cust_co_gulfport.poorRisk := false
+!cust_co_gulfport.idNumber := 99012001
+
+!new Individual('cust_ind_priya')
+!cust_ind_priya.name := 'Priya Desai'
+!cust_ind_priya.address := '155 Orange St, New Haven, CT 06510'
+!cust_ind_priya.poorRisk := true
+!cust_ind_priya.homePhone := '475-555-0160'
+!cust_ind_priya.driverLicenseState := #CT
+!cust_ind_priya.driverLicenseNumber := 77441028
+!cust_ind_priya.driverLicenseExpirationDate := Date('2026-06-01')
+
+!new RentalAgreement('ra_61001')
+!ra_61001.number := 61001
+!ra_61001.rentalDate := Date('2026-05-01')
+!ra_61001.anticipatedDuration := 11
+!ra_61001.depositPaid := 1000.00
+!ra_61001.quotedDailyRate := 145.00
+!ra_61001.quotedRatePerMile := 0.82
+
+!new RentalAgreement('ra_61002')
+!ra_61002.number := 61002
+!ra_61002.rentalDate := Date('2026-05-02')
+!ra_61002.anticipatedDuration := 3
+!ra_61002.depositPaid := 150.00
+!ra_61002.quotedDailyRate := 39.95
+!ra_61002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_61003')
+!ra_61003.number := 61003
+!ra_61003.rentalDate := Date('2026-05-04')
+!ra_61003.anticipatedDuration := 1
+!ra_61003.depositPaid := 75.00
+!ra_61003.quotedDailyRate := 59.00
+!ra_61003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_61004')
+!ra_61004.number := 61004
+!ra_61004.rentalDate := Date('2026-05-06')
+!ra_61004.anticipatedDuration := 6
+!ra_61004.depositPaid := 0.00
+!ra_61004.quotedDailyRate := 35.00
+!ra_61004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_61005')
+!ra_61005.number := 61005
+!ra_61005.rentalDate := Date('2026-05-07')
+!ra_61005.anticipatedDuration := 4
+!ra_61005.depositPaid := 500.00
+!ra_61005.quotedDailyRate := 119.00
+!ra_61005.quotedRatePerMile := 0.75
+
+!new RentalAgreement('ra_61006')
+!ra_61006.number := 61006
+!ra_61006.rentalDate := Date('2026-05-10')
+!ra_61006.anticipatedDuration := 2
+!ra_61006.depositPaid := 200.00
+!ra_61006.quotedDailyRate := 109.00
+!ra_61006.quotedRatePerMile := 0.70
+
+!insert (office_mobile, ra_61001) into RentalOfficeRentalAgreementOrigin
+!insert (office_de_drop_yard, ra_61001) into RentalOfficeRentalAgreementDrop
+!insert (ra_61001, truck_al_standard_01) into RentalAgreementVehicle
+!insert (ra_61001, cust_co_gulfport) into RentalAgreementCustomer
+
+!insert (office_mobile, ra_61002) into RentalOfficeRentalAgreementOrigin
+!insert (office_newhaven, ra_61002) into RentalOfficeRentalAgreementDrop
+!insert (ra_61002, trailer_al_covered_01) into RentalAgreementVehicle
+!insert (ra_61002, cust_co_gulfport) into RentalAgreementCustomer
+
+!insert (office_newhaven, ra_61003) into RentalOfficeRentalAgreementOrigin
+!insert (office_newhaven, ra_61003) into RentalOfficeRentalAgreementDrop
+!insert (ra_61003, trailer_al_covered_01) into RentalAgreementVehicle
+!insert (ra_61003, cust_ind_priya) into RentalAgreementCustomer
+
+!insert (office_tallahassee, ra_61004) into RentalOfficeRentalAgreementOrigin
+!insert (office_de_drop_yard, ra_61004) into RentalOfficeRentalAgreementDrop
+!insert (ra_61004, trailer_fl_open_01) into RentalAgreementVehicle
+!insert (ra_61004, cust_ind_priya) into RentalAgreementCustomer
+
+!insert (office_tallahassee, ra_61005) into RentalOfficeRentalAgreementOrigin
+!insert (office_mobile, ra_61005) into RentalOfficeRentalAgreementDrop
+!insert (ra_61005, truck_fl_10ft_01) into RentalAgreementVehicle
+!insert (ra_61005, cust_co_gulfport) into RentalAgreementCustomer
+
+!insert (office_tallahassee, ra_61006) into RentalOfficeRentalAgreementOrigin
+!insert (office_tallahassee, ra_61006) into RentalOfficeRentalAgreementDrop
+!insert (ra_61006, truck_fl_10ft_01) into RentalAgreementVehicle
+!insert (ra_61006, cust_ind_priya) into RentalAgreementCustomer

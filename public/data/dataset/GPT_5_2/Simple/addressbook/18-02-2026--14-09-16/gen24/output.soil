@@ -1,0 +1,156 @@
+!new AddressBook('ab25')
+
+!new Company('zenithIncubator')
+!zenithIncubator.name := 'Zenith Innovation Incubator'
+!zenithIncubator.phone := '+1-617-555-2500'
+!zenithIncubator.website := 'https://zenith-incubator.example'
+!zenithIncubator.email := 'hello@zenith-incubator.example'
+!zenithIncubator.industry := 'Startup Incubation'
+
+!new Company('sparrowStartups')
+!sparrowStartups.name := 'Sparrow Startups'
+!sparrowStartups.phone := '+1-857-555-2508'
+!sparrowStartups.website := 'https://sparrowstartups.example'
+!sparrowStartups.email := 'contact@sparrowstartups.example'
+!sparrowStartups.industry := 'SaaS'
+
+!new Company('sparrowLabs')
+!sparrowLabs.name := 'Sparrow Labs'
+!sparrowLabs.phone := '+1-857-555-2510'
+!sparrowLabs.website := ''
+!sparrowLabs.email := 'labs@sparrowstartups.example'
+!sparrowLabs.industry := 'Applied Research'
+
+!new Person('hanaeBoucher')
+!hanaeBoucher.name := 'Hanae Boucher'
+!hanaeBoucher.phone := '+1-617-555-2515'
+!hanaeBoucher.website := ''
+!hanaeBoucher.email := 'hanae.boucher@zenith-incubator.example'
+!hanaeBoucher.title := 'Program Manager'
+
+!new Person('lucHenderson')
+!lucHenderson.name := 'Luc Henderson'
+!lucHenderson.phone := '+1-857-555-2516'
+!lucHenderson.website := 'https://luchenderson.example'
+!lucHenderson.email := 'luc.henderson@sparrowstartups.example'
+!lucHenderson.title := 'Founder'
+
+!new Person('rajMehta')
+!rajMehta.name := 'Raj Mehta'
+!rajMehta.phone := '+1-857-555-2517'
+!rajMehta.website := ''
+!rajMehta.email := 'raj.mehta@sparrowstartups.example'
+!rajMehta.title := 'Data Engineer'
+
+!new Person('sylviaKeller')
+!sylviaKeller.name := 'Sylvia Keller'
+!sylviaKeller.phone := '+1-617-555-2518'
+!sylviaKeller.website := 'https://sylviakeller.example'
+!sylviaKeller.email := 'sylvia.keller@zenith-incubator.example'
+!sylviaKeller.title := 'Director'
+
+!insert (ab25, zenithIncubator) into AddressBookMadeOfContact
+!insert (ab25, sparrowStartups) into AddressBookMadeOfContact
+!insert (ab25, sparrowLabs) into AddressBookMadeOfContact
+!insert (ab25, hanaeBoucher) into AddressBookMadeOfContact
+!insert (ab25, lucHenderson) into AddressBookMadeOfContact
+!insert (ab25, rajMehta) into AddressBookMadeOfContact
+!insert (ab25, sylviaKeller) into AddressBookMadeOfContact
+
+!new Address('addrZenithHQ')
+!addrZenithHQ.city := 'Cambridge'
+!addrZenithHQ.street := 'Kendall St'
+!addrZenithHQ.houseNr := '245'
+
+!new Address('addrSparrowOffice')
+!addrSparrowOffice.city := 'Somerville'
+!addrSparrowOffice.street := 'Highland Ave'
+!addrSparrowOffice.houseNr := '85'
+
+!new Address('addrSylviaHome')
+!addrSylviaHome.city := 'Boston'
+!addrSylviaHome.street := 'Beacon St'
+!addrSylviaHome.houseNr := '710'
+
+!insert (zenithIncubator, addrZenithHQ) into ContactContainsAddress
+!insert (sparrowStartups, addrSparrowOffice) into ContactContainsAddress
+!insert (sylviaKeller, addrSylviaHome) into ContactContainsAddress
+
+!new Note('nZenithEmailCohort')
+!nZenithEmailCohort.author := 'Admissions Desk'
+!nZenithEmailCohort.time := Date('2026-02-01 08:10')
+!nZenithEmailCohort.type := #EMAIL
+!nZenithEmailCohort.comment := 'Confirmed cohort onboarding schedule and shared building access instructions.'
+
+!new Note('nHanaeMeetingIntros')
+!nHanaeMeetingIntros.author := 'Hanae Boucher'
+!nHanaeMeetingIntros.time := Date('2026-02-02 10:00')
+!nHanaeMeetingIntros.type := #MEETING
+!nHanaeMeetingIntros.comment := 'Introductions with new founders; captured goals and primary risks for each team.'
+
+!new Note('nLucCallLegal')
+!nLucCallLegal.author := 'Luc Henderson'
+!nLucCallLegal.time := Date('2026-02-03 16:25')
+!nLucCallLegal.type := #CALL
+!nLucCallLegal.comment := 'Called counsel about converting contract templates and updating privacy notice.'
+
+!new Note('nRajEmailPipeline')
+!nRajEmailPipeline.author := 'Raj Mehta'
+!nRajEmailPipeline.time := Date('2026-02-06 19:05')
+!nRajEmailPipeline.type := #EMAIL
+!nRajEmailPipeline.comment := 'Sent a summary of the new ingestion pipeline and monitoring dashboard links.'
+
+!insert (zenithIncubator, nZenithEmailCohort) into ContactContainsNote
+!insert (hanaeBoucher, nHanaeMeetingIntros) into ContactContainsNote
+!insert (lucHenderson, nLucCallLegal) into ContactContainsNote
+!insert (rajMehta, nRajEmailPipeline) into ContactContainsNote
+
+!new Relationship('relSparrowSubdivisionLabs')
+!relSparrowSubdivisionLabs.type := #SUBDIVISION
+!insert (sparrowStartups, relSparrowSubdivisionLabs) into ContactToRelationship
+!insert (relSparrowSubdivisionLabs, sparrowLabs) into RelationshipToContact
+
+!new Relationship('relZenithCoworkerSparrow')
+!relZenithCoworkerSparrow.type := #COWORKER
+!insert (zenithIncubator, relZenithCoworkerSparrow) into ContactToRelationship
+!insert (relZenithCoworkerSparrow, sparrowStartups) into RelationshipToContact
+
+!new Relationship('relHanaeEmployeeZenith')
+!relHanaeEmployeeZenith.type := #EMPLOYEE
+!insert (hanaeBoucher, relHanaeEmployeeZenith) into ContactToRelationship
+!insert (relHanaeEmployeeZenith, zenithIncubator) into RelationshipToContact
+
+!new Relationship('relSylviaEmployeeZenith')
+!relSylviaEmployeeZenith.type := #EMPLOYEE
+!insert (sylviaKeller, relSylviaEmployeeZenith) into ContactToRelationship
+!insert (relSylviaEmployeeZenith, zenithIncubator) into RelationshipToContact
+
+!new Relationship('relLucEmployeeSparrow')
+!relLucEmployeeSparrow.type := #EMPLOYEE
+!insert (lucHenderson, relLucEmployeeSparrow) into ContactToRelationship
+!insert (relLucEmployeeSparrow, sparrowStartups) into RelationshipToContact
+
+!new Relationship('relRajEmployeeSparrow')
+!relRajEmployeeSparrow.type := #EMPLOYEE
+!insert (rajMehta, relRajEmployeeSparrow) into ContactToRelationship
+!insert (relRajEmployeeSparrow, sparrowStartups) into RelationshipToContact
+
+!new Relationship('relHanaeBossIsSylvia')
+!relHanaeBossIsSylvia.type := #BOSS
+!insert (hanaeBoucher, relHanaeBossIsSylvia) into ContactToRelationship
+!insert (relHanaeBossIsSylvia, sylviaKeller) into RelationshipToContact
+
+!new Relationship('relLucBossIsHanae')
+!relLucBossIsHanae.type := #BOSS
+!insert (lucHenderson, relLucBossIsHanae) into ContactToRelationship
+!insert (relLucBossIsHanae, hanaeBoucher) into RelationshipToContact
+
+!new Relationship('relRajBossIsLuc')
+!relRajBossIsLuc.type := #BOSS
+!insert (rajMehta, relRajBossIsLuc) into ContactToRelationship
+!insert (relRajBossIsLuc, lucHenderson) into RelationshipToContact
+
+!new Relationship('relHanaeCoworkerLuc')
+!relHanaeCoworkerLuc.type := #COWORKER
+!insert (hanaeBoucher, relHanaeCoworkerLuc) into ContactToRelationship
+!insert (relHanaeCoworkerLuc, lucHenderson) into RelationshipToContact

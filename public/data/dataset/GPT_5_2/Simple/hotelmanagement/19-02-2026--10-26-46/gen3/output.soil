@@ -1,0 +1,71 @@
+!new Booking('booking5')
+!booking5.startDate := '2026-07-02'
+!booking5.endDate := '2026-07-10'
+!booking5.canceled := false
+!booking5.bookingId := 3001
+!booking5.confirmed := true
+
+!new Customer('customer5')
+!customer5.firstName := 'Sara'
+!customer5.lastName := 'Connor'
+
+!insert (booking5, customer5) into BookingCustomer
+
+!new RoomReservation('rr6')
+!rr6.checkInDate := '2026-07-02'
+!rr6.checkOutDate := '2026-07-05'
+
+!new RoomReservation('rr7')
+!rr7.checkInDate := '2026-07-05'
+!rr7.checkOutDate := '2026-07-10'
+
+!insert (booking5, rr6) into BookingRoomReservation
+!insert (booking5, rr7) into BookingRoomReservation
+
+!new Room('room515')
+!room515.roomNumber := 515
+!room515.numBeds := 2
+!room515.pricePerNight := 180.0
+!room515.occupied := true
+!room515.blocked := false
+
+!new Room('room212')
+!room212.roomNumber := 212
+!room212.numBeds := 1
+!room212.pricePerNight := 130.0
+!room212.occupied := true
+!room212.blocked := false
+
+!insert (rr6, room515) into RoomReservationRoom
+!insert (rr7, room212) into RoomReservationRoom
+
+!new RoomExtra('extraMinibarUse')
+!extraMinibarUse.price := 35.0
+!extraMinibarUse.description := 'Minibar consumption'
+
+!new RoomExtra('extraPetFee')
+!extraPetFee.price := 50.0
+!extraPetFee.description := 'Pet fee'
+
+!insert (rr7, extraMinibarUse) into RoomReservationExtras
+!insert (rr7, extraPetFee) into RoomReservationExtras
+
+!new Bill('bill7')
+!bill7.billId := 7001
+!bill7.price := 540.0
+
+!new Bill('bill8')
+!bill8.billId := 7002
+!bill8.price := 735.0
+
+!insert (bill7, rr6) into BillRoomReservation
+!insert (bill8, rr7) into BillRoomReservation
+
+!insert (booking5, bill7) into BookingBill
+!insert (booking5, bill8) into BookingBill
+
+!new FreeRoomTypesDTO('dtoBusinessDouble')
+!dtoBusinessDouble.roomTypeDescription := 'Business double (high floor)'
+!dtoBusinessDouble.numBeds := 2
+!dtoBusinessDouble.pricePerNight := 180.0
+!dtoBusinessDouble.numFreeRooms := 4

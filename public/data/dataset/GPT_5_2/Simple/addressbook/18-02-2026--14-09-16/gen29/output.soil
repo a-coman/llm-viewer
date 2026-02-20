@@ -1,0 +1,162 @@
+!new AddressBook('ab30')
+
+!new Company('cedarValleyFarm')
+!cedarValleyFarm.name := 'Cedar Valley Farm'
+!cedarValleyFarm.phone := '+1-608-555-3000'
+!cedarValleyFarm.website := 'https://cedarvalleyfarm.example'
+!cedarValleyFarm.email := 'hello@cedarvalleyfarm.example'
+!cedarValleyFarm.industry := 'Sustainable Agriculture'
+
+!new Company('cedarValleyMarket')
+!cedarValleyMarket.name := 'Cedar Valley Market'
+!cedarValleyMarket.phone := '+1-608-555-3010'
+!cedarValleyMarket.website := 'https://cedarvalleymarket.example'
+!cedarValleyMarket.email := 'support@cedarvalleymarket.example'
+!cedarValleyMarket.industry := 'Retail Grocery'
+
+!new Company('stateAgAgency')
+!stateAgAgency.name := 'State Agriculture Agency'
+!stateAgAgency.phone := '+1-608-555-3090'
+!stateAgAgency.website := 'https://agagency.example'
+!stateAgAgency.email := 'inspections@agagency.example'
+!stateAgAgency.industry := 'Government'
+
+!new Person('drakeCole')
+!drakeCole.name := 'Drake Cole'
+!drakeCole.phone := '+1-608-555-3001'
+!drakeCole.website := ''
+!drakeCole.email := 'drake.cole@cedarvalleyfarm.example'
+!drakeCole.title := 'Owner'
+
+!new Person('melissaRowe')
+!melissaRowe.name := 'Melissa Rowe'
+!melissaRowe.phone := '+1-608-555-3002'
+!melissaRowe.website := 'https://melissarowe.example'
+!melissaRowe.email := 'melissa.rowe@cedarvalleyfarm.example'
+!melissaRowe.title := 'Farm Manager'
+
+!new Person('peterNg')
+!peterNg.name := 'Peter Ng'
+!peterNg.phone := '+1-608-555-3012'
+!peterNg.website := ''
+!peterNg.email := 'peter.ng@cedarvalleymarket.example'
+!peterNg.title := 'Produce Buyer'
+
+!new Person('sanaHussein')
+!sanaHussein.name := 'Sana Hussein'
+!sanaHussein.phone := '+1-608-555-3092'
+!sanaHussein.website := ''
+!sanaHussein.email := 'sana.hussein@agagency.example'
+!sanaHussein.title := 'Food Safety Inspector'
+
+!insert (ab30, cedarValleyFarm) into AddressBookMadeOfContact
+!insert (ab30, cedarValleyMarket) into AddressBookMadeOfContact
+!insert (ab30, stateAgAgency) into AddressBookMadeOfContact
+!insert (ab30, drakeCole) into AddressBookMadeOfContact
+!insert (ab30, melissaRowe) into AddressBookMadeOfContact
+!insert (ab30, peterNg) into AddressBookMadeOfContact
+!insert (ab30, sanaHussein) into AddressBookMadeOfContact
+
+!new Address('addrFarmMain')
+!addrFarmMain.city := 'Madison'
+!addrFarmMain.street := 'County Hwy M'
+!addrFarmMain.houseNr := '1840'
+
+!new Address('addrFarmColdStorage')
+!addrFarmColdStorage.city := 'Madison'
+!addrFarmColdStorage.street := 'County Hwy M'
+!addrFarmColdStorage.houseNr := '1840-Bldg 2'
+
+!new Address('addrMarketStore')
+!addrMarketStore.city := 'Madison'
+!addrMarketStore.street := 'Monroe St'
+!addrMarketStore.houseNr := '910'
+
+!new Address('addrAgencyOffice')
+!addrAgencyOffice.city := 'Madison'
+!addrAgencyOffice.street := 'Capitol Square'
+!addrAgencyOffice.houseNr := '12'
+
+!new Address('addrMelissaHome')
+!addrMelissaHome.city := 'Middleton'
+!addrMelissaHome.street := 'Park St'
+!addrMelissaHome.houseNr := '66'
+
+!new Address('addrPeterHome')
+!addrPeterHome.city := 'Madison'
+!addrPeterHome.street := 'E Johnson St'
+!addrPeterHome.houseNr := '140'
+
+!insert (cedarValleyFarm, addrFarmMain) into ContactContainsAddress
+!insert (cedarValleyFarm, addrFarmColdStorage) into ContactContainsAddress
+!insert (cedarValleyMarket, addrMarketStore) into ContactContainsAddress
+!insert (stateAgAgency, addrAgencyOffice) into ContactContainsAddress
+!insert (melissaRowe, addrMelissaHome) into ContactContainsAddress
+!insert (peterNg, addrPeterHome) into ContactContainsAddress
+
+!new Note('nFarmEmailDelivery')
+!nFarmEmailDelivery.author := 'Dispatch'
+!nFarmEmailDelivery.time := Date('2026-02-09 06:20')
+!nFarmEmailDelivery.type := #EMAIL
+!nFarmEmailDelivery.comment := 'Confirmed delivery window for mixed greens and eggs; driver will check in at cold storage.'
+
+!new Note('nPeterCallOrderAdjust')
+!nPeterCallOrderAdjust.author := 'Peter Ng'
+!nPeterCallOrderAdjust.time := Date('2026-02-10 15:05')
+!nPeterCallOrderAdjust.type := #CALL
+!nPeterCallOrderAdjust.comment := 'Called to increase weekly order of carrots due to higher weekend demand; requested updated pricing.'
+
+!new Note('nSanaMeetingInspection')
+!nSanaMeetingInspection.author := 'Sana Hussein'
+!nSanaMeetingInspection.time := Date('2026-02-12 09:30')
+!nSanaMeetingInspection.type := #MEETING
+!nSanaMeetingInspection.comment := 'On-site inspection completed; reviewed sanitation logs and provided corrective action guidance.'
+
+!insert (cedarValleyFarm, nFarmEmailDelivery) into ContactContainsNote
+!insert (peterNg, nPeterCallOrderAdjust) into ContactContainsNote
+!insert (sanaHussein, nSanaMeetingInspection) into ContactContainsNote
+
+!new Relationship('relFarmSubdivisionMarket')
+!relFarmSubdivisionMarket.type := #SUBDIVISION
+!insert (cedarValleyFarm, relFarmSubdivisionMarket) into ContactToRelationship
+!insert (relFarmSubdivisionMarket, cedarValleyMarket) into RelationshipToContact
+
+!new Relationship('relMelissaEmployeeFarm')
+!relMelissaEmployeeFarm.type := #EMPLOYEE
+!insert (melissaRowe, relMelissaEmployeeFarm) into ContactToRelationship
+!insert (relMelissaEmployeeFarm, cedarValleyFarm) into RelationshipToContact
+
+!new Relationship('relDrakeEmployeeFarm')
+!relDrakeEmployeeFarm.type := #EMPLOYEE
+!insert (drakeCole, relDrakeEmployeeFarm) into ContactToRelationship
+!insert (relDrakeEmployeeFarm, cedarValleyFarm) into RelationshipToContact
+
+!new Relationship('relPeterEmployeeMarket')
+!relPeterEmployeeMarket.type := #EMPLOYEE
+!insert (peterNg, relPeterEmployeeMarket) into ContactToRelationship
+!insert (relPeterEmployeeMarket, cedarValleyMarket) into RelationshipToContact
+
+!new Relationship('relSanaEmployeeAgency')
+!relSanaEmployeeAgency.type := #EMPLOYEE
+!insert (sanaHussein, relSanaEmployeeAgency) into ContactToRelationship
+!insert (relSanaEmployeeAgency, stateAgAgency) into RelationshipToContact
+
+!new Relationship('relMelissaBossIsDrake')
+!relMelissaBossIsDrake.type := #BOSS
+!insert (melissaRowe, relMelissaBossIsDrake) into ContactToRelationship
+!insert (relMelissaBossIsDrake, drakeCole) into RelationshipToContact
+
+!new Relationship('relPeterCoworkerMelissa')
+!relPeterCoworkerMelissa.type := #COWORKER
+!insert (peterNg, relPeterCoworkerMelissa) into ContactToRelationship
+!insert (relPeterCoworkerMelissa, melissaRowe) into RelationshipToContact
+
+!new Relationship('relSanaCoworkerFarm')
+!relSanaCoworkerFarm.type := #COWORKER
+!insert (sanaHussein, relSanaCoworkerFarm) into ContactToRelationship
+!insert (relSanaCoworkerFarm, cedarValleyFarm) into RelationshipToContact
+
+!new Relationship('relAgencyCoworkerMarket')
+!relAgencyCoworkerMarket.type := #COWORKER
+!insert (stateAgAgency, relAgencyCoworkerMarket) into ContactToRelationship
+!insert (relAgencyCoworkerMarket, cedarValleyMarket) into RelationshipToContact

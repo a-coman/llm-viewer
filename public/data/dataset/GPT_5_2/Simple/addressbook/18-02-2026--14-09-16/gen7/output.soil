@@ -1,0 +1,167 @@
+!new AddressBook('ab8')
+
+!new Company('bluePeakDesign')
+!bluePeakDesign.name := 'Blue Peak Design Studio'
+!bluePeakDesign.phone := '+1-503-555-0900'
+!bluePeakDesign.website := 'https://bluepeakdesign.example'
+!bluePeakDesign.email := 'contact@bluepeakdesign.example'
+!bluePeakDesign.industry := 'Graphic Design'
+
+!new Company('stonebridgePublishing')
+!stonebridgePublishing.name := 'Stonebridge Publishing'
+!stonebridgePublishing.phone := '+1-212-555-0910'
+!stonebridgePublishing.website := 'https://stonebridgepublishing.example'
+!stonebridgePublishing.email := 'info@stonebridgepublishing.example'
+!stonebridgePublishing.industry := 'Publishing'
+
+!new Company('stonebridgeImprint')
+!stonebridgeImprint.name := 'Stonebridge Imprint Lab'
+!stonebridgeImprint.phone := '+1-212-555-0912'
+!stonebridgeImprint.website := ''
+!stonebridgeImprint.email := 'imprint@stonebridgepublishing.example'
+!stonebridgeImprint.industry := 'Publishing'
+
+!new Company('greenfieldPrint')
+!greenfieldPrint.name := 'Greenfield Print Works'
+!greenfieldPrint.phone := '+1-201-555-0920'
+!greenfieldPrint.website := 'https://greenfieldprint.example'
+!greenfieldPrint.email := 'sales@greenfieldprint.example'
+!greenfieldPrint.industry := 'Printing'
+
+!new Person('ivyFreelancer')
+!ivyFreelancer.name := 'Ivy Foster'
+!ivyFreelancer.phone := '+1-503-555-0907'
+!ivyFreelancer.website := 'https://ivyfoster.example'
+!ivyFreelancer.email := 'ivy.foster@example.com'
+!ivyFreelancer.title := 'Freelance Art Director'
+
+!new Person('jonasMeyer')
+!jonasMeyer.name := 'Jonas Meyer'
+!jonasMeyer.phone := '+1-917-555-0918'
+!jonasMeyer.website := ''
+!jonasMeyer.email := 'jonas.meyer@stonebridgepublishing.example'
+!jonasMeyer.title := 'Managing Editor'
+
+!new Person('elenaCosta')
+!elenaCosta.name := 'Elena Costa'
+!elenaCosta.phone := '+1-201-555-0926'
+!elenaCosta.website := ''
+!elenaCosta.email := 'elena.costa@greenfieldprint.example'
+!elenaCosta.title := 'Print Production Coordinator'
+
+!insert (ab8, bluePeakDesign) into AddressBookMadeOfContact
+!insert (ab8, stonebridgePublishing) into AddressBookMadeOfContact
+!insert (ab8, stonebridgeImprint) into AddressBookMadeOfContact
+!insert (ab8, greenfieldPrint) into AddressBookMadeOfContact
+!insert (ab8, ivyFreelancer) into AddressBookMadeOfContact
+!insert (ab8, jonasMeyer) into AddressBookMadeOfContact
+!insert (ab8, elenaCosta) into AddressBookMadeOfContact
+
+!new Address('addrBluePeakOffice')
+!addrBluePeakOffice.city := 'Portland'
+!addrBluePeakOffice.street := 'NW Everett St'
+!addrBluePeakOffice.houseNr := '233'
+
+!new Address('addrStonebridgeHQ')
+!addrStonebridgeHQ.city := 'New York'
+!addrStonebridgeHQ.street := 'W 23rd St'
+!addrStonebridgeHQ.houseNr := '145'
+
+!new Address('addrImprintSuite')
+!addrImprintSuite.city := 'New York'
+!addrImprintSuite.street := 'W 23rd St'
+!addrImprintSuite.houseNr := '145-Suite 6A'
+
+!new Address('addrJonasHome')
+!addrJonasHome.city := 'Queens'
+!addrJonasHome.street := '38th Ave'
+!addrJonasHome.houseNr := '77-12'
+
+!new Address('addrGreenfieldPlant')
+!addrGreenfieldPlant.city := 'Jersey City'
+!addrGreenfieldPlant.street := 'Communipaw Ave'
+!addrGreenfieldPlant.houseNr := '980'
+
+!new Address('addrElenaHome')
+!addrElenaHome.city := 'Hoboken'
+!addrElenaHome.street := 'Washington St'
+!addrElenaHome.houseNr := '319'
+
+!insert (bluePeakDesign, addrBluePeakOffice) into ContactContainsAddress
+!insert (stonebridgePublishing, addrStonebridgeHQ) into ContactContainsAddress
+!insert (stonebridgeImprint, addrImprintSuite) into ContactContainsAddress
+!insert (greenfieldPrint, addrGreenfieldPlant) into ContactContainsAddress
+!insert (jonasMeyer, addrJonasHome) into ContactContainsAddress
+!insert (elenaCosta, addrElenaHome) into ContactContainsAddress
+
+!new Note('nIvyEmailBranding')
+!nIvyEmailBranding.author := 'Ivy Foster'
+!nIvyEmailBranding.time := Date('2026-02-10 09:20')
+!nIvyEmailBranding.type := #EMAIL
+!nIvyEmailBranding.comment := 'Sent updated cover branding kit (typography and color palette) for spring catalog.'
+
+!new Note('nIvyCallProofs')
+!nIvyCallProofs.author := 'Elena Costa'
+!nIvyCallProofs.time := Date('2026-02-12 16:10')
+!nIvyCallProofs.type := #CALL
+!nIvyCallProofs.comment := 'Reviewed print proofs on the phone; agreed to adjust black levels and rerun two pages.'
+
+!new Note('nStonebridgeMeetingSchedule')
+!nStonebridgeMeetingSchedule.author := 'Jonas Meyer'
+!nStonebridgeMeetingSchedule.time := Date('2026-02-13 11:00')
+!nStonebridgeMeetingSchedule.type := #MEETING
+!nStonebridgeMeetingSchedule.comment := 'Editorial planning: locked manuscript deadlines and finalized production handoff dates.'
+
+!insert (ivyFreelancer, nIvyEmailBranding) into ContactContainsNote
+!insert (ivyFreelancer, nIvyCallProofs) into ContactContainsNote
+!insert (stonebridgePublishing, nStonebridgeMeetingSchedule) into ContactContainsNote
+
+!new Relationship('relStonebridgeSubdivisionImprint')
+!relStonebridgeSubdivisionImprint.type := #SUBDIVISION
+!insert (stonebridgePublishing, relStonebridgeSubdivisionImprint) into ContactToRelationship
+!insert (relStonebridgeSubdivisionImprint, stonebridgeImprint) into RelationshipToContact
+
+!new Relationship('relIvyEmployeeBluePeak')
+!relIvyEmployeeBluePeak.type := #EMPLOYEE
+!insert (ivyFreelancer, relIvyEmployeeBluePeak) into ContactToRelationship
+!insert (relIvyEmployeeBluePeak, bluePeakDesign) into RelationshipToContact
+
+!new Relationship('relIvyEmployeeImprint')
+!relIvyEmployeeImprint.type := #EMPLOYEE
+!insert (ivyFreelancer, relIvyEmployeeImprint) into ContactToRelationship
+!insert (relIvyEmployeeImprint, stonebridgeImprint) into RelationshipToContact
+
+!new Relationship('relJonasEmployeeStonebridge')
+!relJonasEmployeeStonebridge.type := #EMPLOYEE
+!insert (jonasMeyer, relJonasEmployeeStonebridge) into ContactToRelationship
+!insert (relJonasEmployeeStonebridge, stonebridgePublishing) into RelationshipToContact
+
+!new Relationship('relElenaEmployeeGreenfield')
+!relElenaEmployeeGreenfield.type := #EMPLOYEE
+!insert (elenaCosta, relElenaEmployeeGreenfield) into ContactToRelationship
+!insert (relElenaEmployeeGreenfield, greenfieldPrint) into RelationshipToContact
+
+!new Relationship('relIvyBossIsJonas')
+!relIvyBossIsJonas.type := #BOSS
+!insert (ivyFreelancer, relIvyBossIsJonas) into ContactToRelationship
+!insert (relIvyBossIsJonas, jonasMeyer) into RelationshipToContact
+
+!new Relationship('relGreenfieldCoworkerStonebridge')
+!relGreenfieldCoworkerStonebridge.type := #COWORKER
+!insert (greenfieldPrint, relGreenfieldCoworkerStonebridge) into ContactToRelationship
+!insert (relGreenfieldCoworkerStonebridge, stonebridgePublishing) into RelationshipToContact
+
+!new Relationship('relStonebridgeCoworkerGreenfield')
+!relStonebridgeCoworkerGreenfield.type := #COWORKER
+!insert (stonebridgePublishing, relStonebridgeCoworkerGreenfield) into ContactToRelationship
+!insert (relStonebridgeCoworkerGreenfield, greenfieldPrint) into RelationshipToContact
+
+!new Relationship('relElenaCoworkerIvy')
+!relElenaCoworkerIvy.type := #COWORKER
+!insert (elenaCosta, relElenaCoworkerIvy) into ContactToRelationship
+!insert (relElenaCoworkerIvy, ivyFreelancer) into RelationshipToContact
+
+!new Relationship('relIvyCoworkerElena')
+!relIvyCoworkerElena.type := #COWORKER
+!insert (ivyFreelancer, relIvyCoworkerElena) into ContactToRelationship
+!insert (relIvyCoworkerElena, elenaCosta) into RelationshipToContact

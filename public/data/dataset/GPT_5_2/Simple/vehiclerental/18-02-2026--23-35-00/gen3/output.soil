@@ -1,0 +1,154 @@
+!new RentalOffice('office_anchorage')
+!office_anchorage.name := 'Northern Lights Vehicle Rental - Anchorage'
+!office_anchorage.number := 501
+!office_anchorage.address := '4550 Spenard Rd, Anchorage, AK 99517'
+
+!new RentalOffice('office_phoenix')
+!office_phoenix.name := 'Desert Ridge Truck Rental - Phoenix'
+!office_phoenix.number := 502
+!office_phoenix.address := '2100 W Broadway Rd, Phoenix, AZ 85041'
+
+!new RentalOffice('office_wilmington')
+!office_wilmington.name := 'First State Fleet Rentals - Wilmington'
+!office_wilmington.number := 503
+!office_wilmington.address := '700 S Madison St, Wilmington, DE 19801'
+
+!new Truck('truck_ak_10ft_01')
+!truck_ak_10ft_01.id := 9001
+!truck_ak_10ft_01.registrationState := #AK
+!truck_ak_10ft_01.licensePlateNumber := 'AK-TRK-0448'
+!truck_ak_10ft_01.vehicleTypeCode := #TRUCK10
+!truck_ak_10ft_01.registrationLastMaintenanceDate := Date('2026-01-28')
+!truck_ak_10ft_01.expirationDate := Date('2026-12-31')
+!truck_ak_10ft_01.odometerReading := 22805
+!truck_ak_10ft_01.gasTankCapacity := 34.5
+!truck_ak_10ft_01.workingRadio := false
+!truck_ak_10ft_01.mileage := 15
+
+!new Truck('truck_az_24ft_02')
+!truck_az_24ft_02.id := 9002
+!truck_az_24ft_02.registrationState := #AZ
+!truck_az_24ft_02.licensePlateNumber := 'AZ-TRK-9821'
+!truck_az_24ft_02.vehicleTypeCode := #TRUCK24
+!truck_az_24ft_02.registrationLastMaintenanceDate := Date('2025-12-03')
+!truck_az_24ft_02.expirationDate := Date('2026-06-30')
+!truck_az_24ft_02.odometerReading := 98760
+!truck_az_24ft_02.gasTankCapacity := 63.0
+!truck_az_24ft_02.workingRadio := true
+!truck_az_24ft_02.mileage := 9
+
+!new Vehicle('trailer_az_open_01')
+!trailer_az_open_01.id := 9101
+!trailer_az_open_01.registrationState := #AZ
+!trailer_az_open_01.licensePlateNumber := 'AZ-TRL-3306'
+!trailer_az_open_01.vehicleTypeCode := #OPEN_TRAILER
+!trailer_az_open_01.registrationLastMaintenanceDate := Date('2026-02-11')
+!trailer_az_open_01.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_de_covered_01')
+!trailer_de_covered_01.id := 9201
+!trailer_de_covered_01.registrationState := #DE
+!trailer_de_covered_01.licensePlateNumber := 'DE-TRL-5770'
+!trailer_de_covered_01.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_01.registrationLastMaintenanceDate := Date('2025-10-22')
+!trailer_de_covered_01.expirationDate := Date('2026-10-31')
+
+!insert (office_anchorage, truck_ak_10ft_01) into RentalOfficeVehicle
+!insert (office_phoenix, truck_az_24ft_02) into RentalOfficeVehicle
+!insert (office_phoenix, trailer_az_open_01) into RentalOfficeVehicle
+!insert (office_wilmington, trailer_de_covered_01) into RentalOfficeVehicle
+
+!new Individual('cust_ind_nora')
+!cust_ind_nora.name := 'Nora Ellsworth'
+!cust_ind_nora.address := '812 W 7th Ave, Anchorage, AK 99501'
+!cust_ind_nora.poorRisk := false
+!cust_ind_nora.homePhone := '907-555-0164'
+!cust_ind_nora.driverLicenseState := #AK
+!cust_ind_nora.driverLicenseNumber := 40318827
+!cust_ind_nora.driverLicenseExpirationDate := Date('2029-01-14')
+
+!new Individual('cust_ind_javier')
+!cust_ind_javier.name := 'Javier Soto'
+!cust_ind_javier.address := '1660 E Camelback Rd, Phoenix, AZ 85016'
+!cust_ind_javier.poorRisk := false
+!cust_ind_javier.homePhone := '602-555-0109'
+!cust_ind_javier.driverLicenseState := #AZ
+!cust_ind_javier.driverLicenseNumber := 66290113
+!cust_ind_javier.driverLicenseExpirationDate := Date('2027-05-02')
+
+!new Company('cust_co_desertworks')
+!cust_co_desertworks.name := 'DesertWorks Landscaping Co.'
+!cust_co_desertworks.address := '4301 S 36th St, Phoenix, AZ 85040'
+!cust_co_desertworks.poorRisk := false
+!cust_co_desertworks.idNumber := 88001234
+
+!new Company('cust_co_firststate')
+!cust_co_firststate.name := 'FirstState Distribution Group'
+!cust_co_firststate.address := '12 Boxwood Rd, Wilmington, DE 19804'
+!cust_co_firststate.poorRisk := true
+!cust_co_firststate.idNumber := 88007890
+
+!new RentalAgreement('ra_30001')
+!ra_30001.number := 30001
+!ra_30001.rentalDate := Date('2026-03-18')
+!ra_30001.anticipatedDuration := 6
+!ra_30001.depositPaid := 400.00
+!ra_30001.quotedDailyRate := 119.00
+!ra_30001.quotedRatePerMile := 0.72
+
+!new RentalAgreement('ra_30002')
+!ra_30002.number := 30002
+!ra_30002.rentalDate := Date('2026-03-19')
+!ra_30002.anticipatedDuration := 10
+!ra_30002.depositPaid := 0.00
+!ra_30002.quotedDailyRate := 34.95
+!ra_30002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_30003')
+!ra_30003.number := 30003
+!ra_30003.rentalDate := Date('2026-03-30')
+!ra_30003.anticipatedDuration := 3
+!ra_30003.depositPaid := 150.00
+!ra_30003.quotedDailyRate := 42.00
+!ra_30003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_30004')
+!ra_30004.number := 30004
+!ra_30004.rentalDate := Date('2026-04-02')
+!ra_30004.anticipatedDuration := 1
+!ra_30004.depositPaid := 50.00
+!ra_30004.quotedDailyRate := 49.00
+!ra_30004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_30005')
+!ra_30005.number := 30005
+!ra_30005.rentalDate := Date('2026-04-05')
+!ra_30005.anticipatedDuration := 12
+!ra_30005.depositPaid := 900.00
+!ra_30005.quotedDailyRate := 169.00
+!ra_30005.quotedRatePerMile := 0.88
+
+!insert (office_anchorage, ra_30001) into RentalOfficeRentalAgreementOrigin
+!insert (office_phoenix, ra_30001) into RentalOfficeRentalAgreementDrop
+!insert (ra_30001, truck_ak_10ft_01) into RentalAgreementVehicle
+!insert (ra_30001, cust_ind_nora) into RentalAgreementCustomer
+
+!insert (office_phoenix, ra_30002) into RentalOfficeRentalAgreementOrigin
+!insert (office_phoenix, ra_30002) into RentalOfficeRentalAgreementDrop
+!insert (ra_30002, trailer_az_open_01) into RentalAgreementVehicle
+!insert (ra_30002, cust_co_desertworks) into RentalAgreementCustomer
+
+!insert (office_phoenix, ra_30003) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington, ra_30003) into RentalOfficeRentalAgreementDrop
+!insert (ra_30003, trailer_az_open_01) into RentalAgreementVehicle
+!insert (ra_30003, cust_co_firststate) into RentalAgreementCustomer
+
+!insert (office_wilmington, ra_30004) into RentalOfficeRentalAgreementOrigin
+!insert (office_wilmington, ra_30004) into RentalOfficeRentalAgreementDrop
+!insert (ra_30004, trailer_de_covered_01) into RentalAgreementVehicle
+!insert (ra_30004, cust_ind_javier) into RentalAgreementCustomer
+
+!insert (office_phoenix, ra_30005) into RentalOfficeRentalAgreementOrigin
+!insert (office_anchorage, ra_30005) into RentalOfficeRentalAgreementDrop
+!insert (ra_30005, truck_az_24ft_02) into RentalAgreementVehicle
+!insert (ra_30005, cust_co_desertworks) into RentalAgreementCustomer

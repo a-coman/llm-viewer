@@ -1,0 +1,68 @@
+!new Booking('booking18')
+!booking18.startDate := '2028-05-01'
+!booking18.endDate := '2028-05-07'
+!booking18.canceled := false
+!booking18.bookingId := 9600
+!booking18.confirmed := true
+
+!new Customer('customer18')
+!customer18.firstName := 'Tomasz'
+!customer18.lastName := 'Kowalski'
+
+!insert (booking18, customer18) into BookingCustomer
+
+!new RoomReservation('rr26')
+!rr26.checkInDate := '2028-05-01'
+!rr26.checkOutDate := '2028-05-01'
+
+!new RoomReservation('rr27')
+!rr27.checkInDate := '2028-05-03'
+!rr27.checkOutDate := '2028-05-07'
+
+!insert (booking18, rr26) into BookingRoomReservation
+!insert (booking18, rr27) into BookingRoomReservation
+
+!new RoomExtra('extraAdvancePayment')
+!extraAdvancePayment.price := 200.0
+!extraAdvancePayment.description := 'Advance payment (room assignment pending)'
+
+!insert (rr26, extraAdvancePayment) into RoomReservationExtras
+
+!new Bill('bill27')
+!bill27.billId := 18001
+!bill27.price := 200.0
+
+!new Bill('bill28')
+!bill28.billId := 18002
+!bill28.price := 2460.0
+
+!insert (bill27, rr26) into BillRoomReservation
+!insert (bill28, rr27) into BillRoomReservation
+
+!insert (booking18, bill27) into BookingBill
+!insert (booking18, bill28) into BookingBill
+
+!new Room('room1501')
+!room1501.roomNumber := 1501
+!room1501.numBeds := 2
+!room1501.pricePerNight := 205.0
+!room1501.occupied := false
+!room1501.blocked := true
+
+!new Room('room1502')
+!room1502.roomNumber := 1502
+!room1502.numBeds := 2
+!room1502.pricePerNight := 205.0
+!room1502.occupied := false
+!room1502.blocked := true
+
+!new Room('room1503')
+!room1503.roomNumber := 1503
+!room1503.numBeds := 1
+!room1503.pricePerNight := 160.0
+!room1503.occupied := false
+!room1503.blocked := true
+
+!insert (rr27, room1501) into RoomReservationRoom
+!insert (rr27, room1502) into RoomReservationRoom
+!insert (rr27, room1503) into RoomReservationRoom

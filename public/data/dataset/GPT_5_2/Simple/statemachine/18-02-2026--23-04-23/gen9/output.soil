@@ -1,0 +1,194 @@
+!new StateMachine('smSpaceProbe')
+!smSpaceProbe.name := 'spaceProbeOperations'
+
+!new State('spDormant')
+!spDormant.name := 'dormant'
+!new State('spBooting')
+!spBooting.name := 'booting'
+!new State('spCalibrating')
+!spCalibrating.name := 'calibrating'
+!new State('spCollecting')
+!spCollecting.name := 'collectingData'
+!new State('spTransmitting')
+!spTransmitting.name := 'transmitting'
+!new State('spSafeMode')
+!spSafeMode.name := 'safeMode'
+
+!insert (smSpaceProbe, spDormant) into StateMachineContainsStates
+!insert (smSpaceProbe, spBooting) into StateMachineContainsStates
+!insert (smSpaceProbe, spCalibrating) into StateMachineContainsStates
+!insert (smSpaceProbe, spCollecting) into StateMachineContainsStates
+!insert (smSpaceProbe, spTransmitting) into StateMachineContainsStates
+!insert (smSpaceProbe, spSafeMode) into StateMachineContainsStates
+
+!insert (smSpaceProbe, spDormant) into StateMachineStartsStates
+
+
+!new Transition('trWake')
+!trWake.name := 'wakeUp'
+!new TimeEvent('evWake')
+!evWake.time := 1
+!insert (smSpaceProbe, trWake) into StateMachineContainsTransitions
+!insert (trWake, evWake) into TransitionContainsEvents
+!insert (spDormant, trWake) into StateTransition
+!insert (trWake, spBooting) into TransitionState
+
+!new Transition('trBootOk')
+!trBootOk.name := 'bootOk'
+!new TimeEvent('evBootOk')
+!evBootOk.time := 20
+!insert (smSpaceProbe, trBootOk) into StateMachineContainsTransitions
+!insert (trBootOk, evBootOk) into TransitionContainsEvents
+!insert (spBooting, trBootOk) into StateTransition
+!insert (trBootOk, spCalibrating) into TransitionState
+
+!new Transition('trCalibrateOk')
+!trCalibrateOk.name := 'calibrateOk'
+!new TimeEvent('evCalibrateOk')
+!evCalibrateOk.time := 45
+!insert (smSpaceProbe, trCalibrateOk) into StateMachineContainsTransitions
+!insert (trCalibrateOk, evCalibrateOk) into TransitionContainsEvents
+!insert (spCalibrating, trCalibrateOk) into StateTransition
+!insert (trCalibrateOk, spCollecting) into TransitionState
+
+!new Transition('trSampleTick')
+!trSampleTick.name := 'sampleTick'
+!new TimeEvent('evSampleTick')
+!evSampleTick.time := 60
+!insert (smSpaceProbe, trSampleTick) into StateMachineContainsTransitions
+!insert (trSampleTick, evSampleTick) into TransitionContainsEvents
+!insert (spCollecting, trSampleTick) into StateTransition
+!insert (trSampleTick, spCollecting) into TransitionState
+
+!new Transition('trDataFull')
+!trDataFull.name := 'dataBufferFull'
+!new TimeEvent('evDataFull')
+!evDataFull.time := 600
+!insert (smSpaceProbe, trDataFull) into StateMachineContainsTransitions
+!insert (trDataFull, evDataFull) into TransitionContainsEvents
+!insert (spCollecting, trDataFull) into StateTransition
+!insert (trDataFull, spTransmitting) into TransitionState
+
+!new Transition('trTxDone')
+!trTxDone.name := 'txComplete'
+!new TimeEvent('evTxDone')
+!evTxDone.time := 180
+!insert (smSpaceProbe, trTxDone) into StateMachineContainsTransitions
+!insert (trTxDone, evTxDone) into TransitionContainsEvents
+!insert (spTransmitting, trTxDone) into StateTransition
+!insert (trTxDone, spCollecting) into TransitionState
+
+!new Transition('trAnomalyCollect')
+!trAnomalyCollect.name := 'anomalyDetected'
+!new TimeEvent('evAnomalyCollect')
+!evAnomalyCollect.time := 1
+!insert (smSpaceProbe, trAnomalyCollect) into StateMachineContainsTransitions
+!insert (trAnomalyCollect, evAnomalyCollect) into TransitionContainsEvents
+!insert (spCollecting, trAnomalyCollect) into StateTransition
+!insert (trAnomalyCollect, spSafeMode) into TransitionState
+
+!new Transition('trAnomalyTx')
+!trAnomalyTx.name := 'anomalyDuringTx'
+!new TimeEvent('evAnomalyTx')
+!evAnomalyTx.time := 1
+!insert (smSpaceProbe, trAnomalyTx) into StateMachineContainsTransitions
+!insert (trAnomalyTx, evAnomalyTx) into TransitionContainsEvents
+!insert (spTransmitting, trAnomalyTx) into StateTransition
+!insert (trAnomalyTx, spSafeMode) into TransitionState
+
+!new Transition('trRecover')
+!trRecover.name := 'recoverToDormant'
+!new TimeEvent('evRecover')
+!evRecover.time := 300
+!insert (smSpaceProbe, trRecover) into StateMachineContainsTransitions
+!insert (trRecover, evRecover) into TransitionContainsEvents
+!insert (spSafeMode, trRecover) into StateTransition
+!insert (trRecover, spDormant) into TransitionState
+
+
+
+!new StateMachine('smBattery')
+!smBattery.name := 'batteryProtection'
+
+!new State('btNormal')
+!btNormal.name := 'normal'
+!new State('btLow')
+!btLow.name := 'low'
+!new State('btCritical')
+!btCritical.name := 'critical'
+!new State('btCharging')
+!btCharging.name := 'charging'
+!new State('btShutDown')
+!btShutDown.name := 'shutdown'
+
+!insert (smBattery, btNormal) into StateMachineContainsStates
+!insert (smBattery, btLow) into StateMachineContainsStates
+!insert (smBattery, btCritical) into StateMachineContainsStates
+!insert (smBattery, btCharging) into StateMachineContainsStates
+!insert (smBattery, btShutDown) into StateMachineContainsStates
+
+!insert (smBattery, btNormal) into StateMachineStartsStates
+
+
+!new Transition('trDropToLow')
+!trDropToLow.name := 'voltageDrops'
+!new TimeEvent('evDropToLow')
+!evDropToLow.time := 120
+!insert (smBattery, trDropToLow) into StateMachineContainsTransitions
+!insert (trDropToLow, evDropToLow) into TransitionContainsEvents
+!insert (btNormal, trDropToLow) into StateTransition
+!insert (trDropToLow, btLow) into TransitionState
+
+!new Transition('trDropToCritical')
+!trDropToCritical.name := 'voltageCritical'
+!new TimeEvent('evDropToCritical')
+!evDropToCritical.time := 60
+!insert (smBattery, trDropToCritical) into StateMachineContainsTransitions
+!insert (trDropToCritical, evDropToCritical) into TransitionContainsEvents
+!insert (btLow, trDropToCritical) into StateTransition
+!insert (trDropToCritical, btCritical) into TransitionState
+
+!new Transition('trPlugInCharge')
+!trPlugInCharge.name := 'plugIn'
+!new TimeEvent('evPlugInCharge')
+!evPlugInCharge.time := 1
+!insert (smBattery, trPlugInCharge) into StateMachineContainsTransitions
+!insert (trPlugInCharge, evPlugInCharge) into TransitionContainsEvents
+!insert (btLow, trPlugInCharge) into StateTransition
+!insert (trPlugInCharge, btCharging) into TransitionState
+
+!new Transition('trChargeFromCritical')
+!trChargeFromCritical.name := 'plugInEmergency'
+!new TimeEvent('evChargeFromCritical')
+!evChargeFromCritical.time := 1
+!insert (smBattery, trChargeFromCritical) into StateMachineContainsTransitions
+!insert (trChargeFromCritical, evChargeFromCritical) into TransitionContainsEvents
+!insert (btCritical, trChargeFromCritical) into StateTransition
+!insert (trChargeFromCritical, btCharging) into TransitionState
+
+!new Transition('trChargeComplete')
+!trChargeComplete.name := 'chargeComplete'
+!new TimeEvent('evChargeComplete2')
+!evChargeComplete2.time := 5400
+!insert (smBattery, trChargeComplete) into StateMachineContainsTransitions
+!insert (trChargeComplete, evChargeComplete2) into TransitionContainsEvents
+!insert (btCharging, trChargeComplete) into StateTransition
+!insert (trChargeComplete, btNormal) into TransitionState
+
+!new Transition('trCriticalShutdown')
+!trCriticalShutdown.name := 'autoShutdown'
+!new TimeEvent('evCriticalShutdown')
+!evCriticalShutdown.time := 10
+!insert (smBattery, trCriticalShutdown) into StateMachineContainsTransitions
+!insert (trCriticalShutdown, evCriticalShutdown) into TransitionContainsEvents
+!insert (btCritical, trCriticalShutdown) into StateTransition
+!insert (trCriticalShutdown, btShutDown) into TransitionState
+
+!new Transition('trShutdownRecovery')
+!trShutdownRecovery.name := 'restartAfterCharge'
+!new TimeEvent('evShutdownRecovery')
+!evShutdownRecovery.time := 30
+!insert (smBattery, trShutdownRecovery) into StateMachineContainsTransitions
+!insert (trShutdownRecovery, evShutdownRecovery) into TransitionContainsEvents
+!insert (btShutDown, trShutdownRecovery) into StateTransition
+!insert (trShutdownRecovery, btCharging) into TransitionState

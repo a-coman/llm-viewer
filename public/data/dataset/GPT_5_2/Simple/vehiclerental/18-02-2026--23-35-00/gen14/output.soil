@@ -1,0 +1,158 @@
+!new RentalOffice('office_callcenter_east')
+!office_callcenter_east.name := 'National Reservations Call Center - East'
+!office_callcenter_east.number := 2001
+!office_callcenter_east.address := '1000 Market St, Wilmington, DE 19801'
+
+!new RentalOffice('office_newark_de4')
+!office_newark_de4.name := 'Christiana Trailer Depot - Newark'
+!office_newark_de4.number := 2002
+!office_newark_de4.address := '35 S College Ave, Newark, DE 19713'
+
+!new RentalOffice('office_hartford_ct4')
+!office_hartford_ct4.name := 'Capitol Trailer Lot - Hartford'
+!office_hartford_ct4.number := 2003
+!office_hartford_ct4.address := '180 Weston St, Hartford, CT 06120'
+
+!new RentalOffice('office_montgomery_al')
+!office_montgomery_al.name := 'River Region Rentals - Montgomery'
+!office_montgomery_al.number := 2004
+!office_montgomery_al.address := '2750 Eastern Blvd, Montgomery, AL 36117'
+
+!new Vehicle('trailer_de_open_a1')
+!trailer_de_open_a1.id := 50101
+!trailer_de_open_a1.registrationState := #DE
+!trailer_de_open_a1.licensePlateNumber := 'DE-TRL-4107'
+!trailer_de_open_a1.vehicleTypeCode := #OPEN_TRAILER
+!trailer_de_open_a1.registrationLastMaintenanceDate := Date('2026-04-15')
+!trailer_de_open_a1.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_de_covered_a2')
+!trailer_de_covered_a2.id := 50102
+!trailer_de_covered_a2.registrationState := #DE
+!trailer_de_covered_a2.licensePlateNumber := 'DE-TRL-4112'
+!trailer_de_covered_a2.vehicleTypeCode := #COVERED_TRAILER
+!trailer_de_covered_a2.registrationLastMaintenanceDate := Date('2026-02-28')
+!trailer_de_covered_a2.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ct_open_b1')
+!trailer_ct_open_b1.id := 50103
+!trailer_ct_open_b1.registrationState := #CT
+!trailer_ct_open_b1.licensePlateNumber := 'CT-TRL-8803'
+!trailer_ct_open_b1.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ct_open_b1.registrationLastMaintenanceDate := Date('2026-05-02')
+!trailer_ct_open_b1.expirationDate := Date('2027-05-31')
+
+!new Vehicle('trailer_al_covered_c1')
+!trailer_al_covered_c1.id := 50104
+!trailer_al_covered_c1.registrationState := #AL
+!trailer_al_covered_c1.licensePlateNumber := 'AL-TRL-2204'
+!trailer_al_covered_c1.vehicleTypeCode := #COVERED_TRAILER
+!trailer_al_covered_c1.registrationLastMaintenanceDate := Date('2026-03-10')
+!trailer_al_covered_c1.expirationDate := Date('2027-03-31')
+
+!insert (office_newark_de4, trailer_de_open_a1) into RentalOfficeVehicle
+!insert (office_newark_de4, trailer_de_covered_a2) into RentalOfficeVehicle
+!insert (office_hartford_ct4, trailer_ct_open_b1) into RentalOfficeVehicle
+!insert (office_montgomery_al, trailer_al_covered_c1) into RentalOfficeVehicle
+
+!new Company('cust_co_artisanhomes')
+!cust_co_artisanhomes.name := 'Artisan Homes & Renovation'
+!cust_co_artisanhomes.address := '4100 Kirkwood Hwy, Wilmington, DE 19808'
+!cust_co_artisanhomes.poorRisk := false
+!cust_co_artisanhomes.idNumber := 81204519
+
+!new Individual('cust_ind_zoe')
+!cust_ind_zoe.name := 'Zoe Franklin'
+!cust_ind_zoe.address := '9 Park Ter, Hartford, CT 06106'
+!cust_ind_zoe.poorRisk := false
+!cust_ind_zoe.homePhone := '860-555-0142'
+!cust_ind_zoe.driverLicenseState := #CT
+!cust_ind_zoe.driverLicenseNumber := 60319941
+!cust_ind_zoe.driverLicenseExpirationDate := Date('2028-06-30')
+
+!new Individual('cust_ind_derek')
+!cust_ind_derek.name := 'Derek Wallace'
+!cust_ind_derek.address := '1205 Carmichael Rd, Montgomery, AL 36106'
+!cust_ind_derek.poorRisk := true
+!cust_ind_derek.homePhone := '334-555-0186'
+!cust_ind_derek.driverLicenseState := #AL
+!cust_ind_derek.driverLicenseNumber := 77104502
+!cust_ind_derek.driverLicenseExpirationDate := Date('2026-11-05')
+
+!new RentalAgreement('ra_200001')
+!ra_200001.number := 200001
+!ra_200001.rentalDate := Date('2026-01-05')
+!ra_200001.anticipatedDuration := 14
+!ra_200001.depositPaid := 0.00
+!ra_200001.quotedDailyRate := 28.00
+!ra_200001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_200002')
+!ra_200002.number := 200002
+!ra_200002.rentalDate := Date('2026-01-07')
+!ra_200002.anticipatedDuration := 3
+!ra_200002.depositPaid := 75.00
+!ra_200002.quotedDailyRate := 34.50
+!ra_200002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_200003')
+!ra_200003.number := 200003
+!ra_200003.rentalDate := Date('2026-01-12')
+!ra_200003.anticipatedDuration := 5
+!ra_200003.depositPaid := 150.00
+!ra_200003.quotedDailyRate := 39.00
+!ra_200003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_200004')
+!ra_200004.number := 200004
+!ra_200004.rentalDate := Date('2026-02-01')
+!ra_200004.anticipatedDuration := 21
+!ra_200004.depositPaid := 300.00
+!ra_200004.quotedDailyRate := 25.00
+!ra_200004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_200005')
+!ra_200005.number := 200005
+!ra_200005.rentalDate := Date('2026-02-18')
+!ra_200005.anticipatedDuration := 2
+!ra_200005.depositPaid := 100.00
+!ra_200005.quotedDailyRate := 45.00
+!ra_200005.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_200006')
+!ra_200006.number := 200006
+!ra_200006.rentalDate := Date('2026-03-03')
+!ra_200006.anticipatedDuration := 8
+!ra_200006.depositPaid := 200.00
+!ra_200006.quotedDailyRate := 29.50
+!ra_200006.quotedRatePerMile := 0.00
+
+!insert (office_callcenter_east, ra_200001) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_de4, ra_200001) into RentalOfficeRentalAgreementDrop
+!insert (ra_200001, trailer_de_open_a1) into RentalAgreementVehicle
+!insert (ra_200001, cust_co_artisanhomes) into RentalAgreementCustomer
+
+!insert (office_newark_de4, ra_200002) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_de4, ra_200002) into RentalOfficeRentalAgreementDrop
+!insert (ra_200002, trailer_de_open_a1) into RentalAgreementVehicle
+!insert (ra_200002, cust_ind_zoe) into RentalAgreementCustomer
+
+!insert (office_callcenter_east, ra_200003) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_ct4, ra_200003) into RentalOfficeRentalAgreementDrop
+!insert (ra_200003, trailer_ct_open_b1) into RentalAgreementVehicle
+!insert (ra_200003, cust_ind_zoe) into RentalAgreementCustomer
+
+!insert (office_callcenter_east, ra_200004) into RentalOfficeRentalAgreementOrigin
+!insert (office_montgomery_al, ra_200004) into RentalOfficeRentalAgreementDrop
+!insert (ra_200004, trailer_al_covered_c1) into RentalAgreementVehicle
+!insert (ra_200004, cust_ind_derek) into RentalAgreementCustomer
+
+!insert (office_montgomery_al, ra_200005) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_de4, ra_200005) into RentalOfficeRentalAgreementDrop
+!insert (ra_200005, trailer_de_covered_a2) into RentalAgreementVehicle
+!insert (ra_200005, cust_co_artisanhomes) into RentalAgreementCustomer
+
+!insert (office_hartford_ct4, ra_200006) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_ct4, ra_200006) into RentalOfficeRentalAgreementDrop
+!insert (ra_200006, trailer_ct_open_b1) into RentalAgreementVehicle
+!insert (ra_200006, cust_co_artisanhomes) into RentalAgreementCustomer

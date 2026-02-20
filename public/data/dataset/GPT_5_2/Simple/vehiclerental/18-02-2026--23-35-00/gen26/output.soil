@@ -1,0 +1,135 @@
+!new RentalOffice('office_mesa13')
+!office_mesa13.name := 'East Valley Vehicle Rental - Mesa'
+!office_mesa13.number := 13001
+!office_mesa13.address := '1150 S Country Club Dr, Mesa, AZ 85210'
+
+!new RentalOffice('office_sanbernardino13')
+!office_sanbernardino13.name := 'Inland Empire Fleet Rentals - San Bernardino'
+!office_sanbernardino13.number := 13002
+!office_sanbernardino13.address := '400 S E St, San Bernardino, CA 92401'
+
+!new RentalOffice('office_newlondon13')
+!office_newlondon13.name := 'Thames Coast Rentals - New London'
+!office_newlondon13.number := 13003
+!office_newlondon13.address := '150 Pequot Ave, New London, CT 06320'
+
+!new Truck('truck_az_24ft_1301')
+!truck_az_24ft_1301.id := 130101
+!truck_az_24ft_1301.registrationState := #AZ
+!truck_az_24ft_1301.licensePlateNumber := 'AZ-TRK-1301'
+!truck_az_24ft_1301.vehicleTypeCode := #TRUCK24
+!truck_az_24ft_1301.registrationLastMaintenanceDate := Date('2026-06-12')
+!truck_az_24ft_1301.expirationDate := Date('2027-06-30')
+!truck_az_24ft_1301.odometerReading := 106440
+!truck_az_24ft_1301.gasTankCapacity := 63.0
+!truck_az_24ft_1301.workingRadio := true
+!truck_az_24ft_1301.mileage := 9
+
+!new Truck('truck_ca_10ft_1302')
+!truck_ca_10ft_1302.id := 130102
+!truck_ca_10ft_1302.registrationState := #CA
+!truck_ca_10ft_1302.licensePlateNumber := 'CA-TRK-1302'
+!truck_ca_10ft_1302.vehicleTypeCode := #TRUCK10
+!truck_ca_10ft_1302.registrationLastMaintenanceDate := Date('2026-05-22')
+!truck_ca_10ft_1302.expirationDate := Date('2027-05-31')
+!truck_ca_10ft_1302.odometerReading := 18470
+!truck_ca_10ft_1302.gasTankCapacity := 32.0
+!truck_ca_10ft_1302.workingRadio := false
+!truck_ca_10ft_1302.mileage := 17
+
+!new Vehicle('trailer_ct_covered_1303')
+!trailer_ct_covered_1303.id := 130103
+!trailer_ct_covered_1303.registrationState := #CT
+!trailer_ct_covered_1303.licensePlateNumber := 'CT-TRL-1303'
+!trailer_ct_covered_1303.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ct_covered_1303.registrationLastMaintenanceDate := Date('2026-04-09')
+!trailer_ct_covered_1303.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_az_open_1304')
+!trailer_az_open_1304.id := 130104
+!trailer_az_open_1304.registrationState := #AZ
+!trailer_az_open_1304.licensePlateNumber := 'AZ-TRL-1304'
+!trailer_az_open_1304.vehicleTypeCode := #OPEN_TRAILER
+!trailer_az_open_1304.registrationLastMaintenanceDate := Date('2026-03-18')
+!trailer_az_open_1304.expirationDate := Date('2027-03-31')
+
+!insert (office_mesa13, truck_az_24ft_1301) into RentalOfficeVehicle
+!insert (office_sanbernardino13, truck_ca_10ft_1302) into RentalOfficeVehicle
+!insert (office_newlondon13, trailer_ct_covered_1303) into RentalOfficeVehicle
+!insert (office_mesa13, trailer_az_open_1304) into RentalOfficeVehicle
+
+!new Company('cust_co_summitstaging13')
+!cust_co_summitstaging13.name := 'Summit Staging & AV, LLC'
+!cust_co_summitstaging13.address := '780 W Main St, Mesa, AZ 85201'
+!cust_co_summitstaging13.poorRisk := false
+!cust_co_summitstaging13.idNumber := 13055001
+
+!new Individual('cust_ind_joel13')
+!cust_ind_joel13.name := 'Joel Ramirez'
+!cust_ind_joel13.address := '950 E 2nd St, San Bernardino, CA 92410'
+!cust_ind_joel13.poorRisk := true
+!cust_ind_joel13.homePhone := '909-555-0146'
+!cust_ind_joel13.driverLicenseState := #CA
+!cust_ind_joel13.driverLicenseNumber := 77214019
+!cust_ind_joel13.driverLicenseExpirationDate := Date('2026-08-31')
+
+!new Individual('cust_ind_emily13')
+!cust_ind_emily13.name := 'Emily Chen'
+!cust_ind_emily13.address := '12 Ocean Ave, New London, CT 06320'
+!cust_ind_emily13.poorRisk := false
+!cust_ind_emily13.homePhone := '860-555-0125'
+!cust_ind_emily13.driverLicenseState := #CT
+!cust_ind_emily13.driverLicenseNumber := 50190312
+!cust_ind_emily13.driverLicenseExpirationDate := Date('2029-01-31')
+
+!new RentalAgreement('ra_130001')
+!ra_130001.number := 130001
+!ra_130001.rentalDate := Date('2026-04-03')
+!ra_130001.anticipatedDuration := 2
+!ra_130001.depositPaid := 250.00
+!ra_130001.quotedDailyRate := 0.00
+!ra_130001.quotedRatePerMile := 1.05
+
+!new RentalAgreement('ra_130002')
+!ra_130002.number := 130002
+!ra_130002.rentalDate := Date('2026-04-07')
+!ra_130002.anticipatedDuration := 21
+!ra_130002.depositPaid := 0.00
+!ra_130002.quotedDailyRate := 49.00
+!ra_130002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_130003')
+!ra_130003.number := 130003
+!ra_130003.rentalDate := Date('2026-04-15')
+!ra_130003.anticipatedDuration := 1
+!ra_130003.depositPaid := 900.00
+!ra_130003.quotedDailyRate := 199.00
+!ra_130003.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_130004')
+!ra_130004.number := 130004
+!ra_130004.rentalDate := Date('2026-04-18')
+!ra_130004.anticipatedDuration := 5
+!ra_130004.depositPaid := 100.00
+!ra_130004.quotedDailyRate := 32.00
+!ra_130004.quotedRatePerMile := 0.00
+
+!insert (office_mesa13, ra_130001) into RentalOfficeRentalAgreementOrigin
+!insert (office_sanbernardino13, ra_130001) into RentalOfficeRentalAgreementDrop
+!insert (ra_130001, truck_az_24ft_1301) into RentalAgreementVehicle
+!insert (ra_130001, cust_co_summitstaging13) into RentalAgreementCustomer
+
+!insert (office_newlondon13, ra_130002) into RentalOfficeRentalAgreementOrigin
+!insert (office_newlondon13, ra_130002) into RentalOfficeRentalAgreementDrop
+!insert (ra_130002, trailer_ct_covered_1303) into RentalAgreementVehicle
+!insert (ra_130002, cust_ind_emily13) into RentalAgreementCustomer
+
+!insert (office_sanbernardino13, ra_130003) into RentalOfficeRentalAgreementOrigin
+!insert (office_mesa13, ra_130003) into RentalOfficeRentalAgreementDrop
+!insert (ra_130003, truck_ca_10ft_1302) into RentalAgreementVehicle
+!insert (ra_130003, cust_ind_joel13) into RentalAgreementCustomer
+
+!insert (office_mesa13, ra_130004) into RentalOfficeRentalAgreementOrigin
+!insert (office_mesa13, ra_130004) into RentalOfficeRentalAgreementDrop
+!insert (ra_130004, trailer_az_open_1304) into RentalAgreementVehicle
+!insert (ra_130004, cust_co_summitstaging13) into RentalAgreementCustomer

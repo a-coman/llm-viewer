@@ -1,0 +1,224 @@
+!new StateMachine('smCheckin')
+!smCheckin.name := 'airlineCheckinProcess'
+
+!new State('ciNotCheckedIn')
+!ciNotCheckedIn.name := 'notCheckedIn'
+!new State('ciIdentityVerified')
+!ciIdentityVerified.name := 'identityVerified'
+!new State('ciSeatSelected')
+!ciSeatSelected.name := 'seatSelected'
+!new State('ciBagsDropped')
+!ciBagsDropped.name := 'bagsDropped'
+!new State('ciPassIssued')
+!ciPassIssued.name := 'boardingPassIssued'
+!new State('ciSecurityCleared')
+!ciSecurityCleared.name := 'securityCleared'
+!new State('ciBoarded')
+!ciBoarded.name := 'boarded'
+!new State('ciMissedFlight')
+!ciMissedFlight.name := 'missedFlight'
+
+!insert (smCheckin, ciNotCheckedIn) into StateMachineContainsStates
+!insert (smCheckin, ciIdentityVerified) into StateMachineContainsStates
+!insert (smCheckin, ciSeatSelected) into StateMachineContainsStates
+!insert (smCheckin, ciBagsDropped) into StateMachineContainsStates
+!insert (smCheckin, ciPassIssued) into StateMachineContainsStates
+!insert (smCheckin, ciSecurityCleared) into StateMachineContainsStates
+!insert (smCheckin, ciBoarded) into StateMachineContainsStates
+!insert (smCheckin, ciMissedFlight) into StateMachineContainsStates
+
+!insert (smCheckin, ciNotCheckedIn) into StateMachineStartsStates
+
+
+!new Transition('trCiVerifyIdentity')
+!trCiVerifyIdentity.name := 'verifyIdentity'
+!new TimeEvent('teCiVerifyIdentity')
+!teCiVerifyIdentity.time := 2
+
+!new Transition('trCiSelectSeat')
+!trCiSelectSeat.name := 'selectSeat'
+!new TimeEvent('teCiSelectSeat')
+!teCiSelectSeat.time := 3
+
+!new Transition('trCiDropBags')
+!trCiDropBags.name := 'dropBags'
+!new TimeEvent('teCiDropBags')
+!teCiDropBags.time := 8
+
+!new Transition('trCiIssuePass')
+!trCiIssuePass.name := 'issueBoardingPass'
+!new TimeEvent('teCiIssuePass')
+!teCiIssuePass.time := 1
+
+!new Transition('trCiReprintPass')
+!trCiReprintPass.name := 'reprintPass'
+!new TimeEvent('teCiReprintPass')
+!teCiReprintPass.time := 1
+
+!new Transition('trCiClearSecurity')
+!trCiClearSecurity.name := 'clearSecurity'
+!new TimeEvent('teCiClearSecurity')
+!teCiClearSecurity.time := 25
+
+!new Transition('trCiBoardPlane')
+!trCiBoardPlane.name := 'boardPlane'
+!new TimeEvent('teCiBoardPlane')
+!teCiBoardPlane.time := 15
+
+!new Transition('trCiNoShowFromNotCheckedIn')
+!trCiNoShowFromNotCheckedIn.name := 'checkinClosed'
+!new TimeEvent('teCiNoShowFromNotCheckedIn')
+!teCiNoShowFromNotCheckedIn.time := 120
+
+!new Transition('trCiNoShowFromPassIssued')
+!trCiNoShowFromPassIssued.name := 'gateClosed'
+!new TimeEvent('teCiNoShowFromPassIssued')
+!teCiNoShowFromPassIssued.time := 75
+
+!new Transition('trCiNoShowFromSecurityCleared')
+!trCiNoShowFromSecurityCleared.name := 'boardingEnded'
+!new TimeEvent('teCiNoShowFromSecurityCleared')
+!teCiNoShowFromSecurityCleared.time := 20
+
+
+!insert (smCheckin, trCiVerifyIdentity) into StateMachineContainsTransitions
+!insert (smCheckin, trCiSelectSeat) into StateMachineContainsTransitions
+!insert (smCheckin, trCiDropBags) into StateMachineContainsTransitions
+!insert (smCheckin, trCiIssuePass) into StateMachineContainsTransitions
+!insert (smCheckin, trCiReprintPass) into StateMachineContainsTransitions
+!insert (smCheckin, trCiClearSecurity) into StateMachineContainsTransitions
+!insert (smCheckin, trCiBoardPlane) into StateMachineContainsTransitions
+!insert (smCheckin, trCiNoShowFromNotCheckedIn) into StateMachineContainsTransitions
+!insert (smCheckin, trCiNoShowFromPassIssued) into StateMachineContainsTransitions
+!insert (smCheckin, trCiNoShowFromSecurityCleared) into StateMachineContainsTransitions
+
+!insert (trCiVerifyIdentity, teCiVerifyIdentity) into TransitionContainsEvents
+!insert (trCiSelectSeat, teCiSelectSeat) into TransitionContainsEvents
+!insert (trCiDropBags, teCiDropBags) into TransitionContainsEvents
+!insert (trCiIssuePass, teCiIssuePass) into TransitionContainsEvents
+!insert (trCiReprintPass, teCiReprintPass) into TransitionContainsEvents
+!insert (trCiClearSecurity, teCiClearSecurity) into TransitionContainsEvents
+!insert (trCiBoardPlane, teCiBoardPlane) into TransitionContainsEvents
+!insert (trCiNoShowFromNotCheckedIn, teCiNoShowFromNotCheckedIn) into TransitionContainsEvents
+!insert (trCiNoShowFromPassIssued, teCiNoShowFromPassIssued) into TransitionContainsEvents
+!insert (trCiNoShowFromSecurityCleared, teCiNoShowFromSecurityCleared) into TransitionContainsEvents
+
+
+!insert (ciNotCheckedIn, trCiVerifyIdentity) into StateTransition
+!insert (trCiVerifyIdentity, ciIdentityVerified) into TransitionState
+
+!insert (ciIdentityVerified, trCiSelectSeat) into StateTransition
+!insert (trCiSelectSeat, ciSeatSelected) into TransitionState
+
+!insert (ciSeatSelected, trCiDropBags) into StateTransition
+!insert (trCiDropBags, ciBagsDropped) into TransitionState
+
+!insert (ciBagsDropped, trCiIssuePass) into StateTransition
+!insert (trCiIssuePass, ciPassIssued) into TransitionState
+
+!insert (ciPassIssued, trCiReprintPass) into StateTransition
+!insert (trCiReprintPass, ciPassIssued) into TransitionState
+
+!insert (ciPassIssued, trCiClearSecurity) into StateTransition
+!insert (trCiClearSecurity, ciSecurityCleared) into TransitionState
+
+!insert (ciSecurityCleared, trCiBoardPlane) into StateTransition
+!insert (trCiBoardPlane, ciBoarded) into TransitionState
+
+!insert (ciNotCheckedIn, trCiNoShowFromNotCheckedIn) into StateTransition
+!insert (trCiNoShowFromNotCheckedIn, ciMissedFlight) into TransitionState
+
+!insert (ciPassIssued, trCiNoShowFromPassIssued) into StateTransition
+!insert (trCiNoShowFromPassIssued, ciMissedFlight) into TransitionState
+
+!insert (ciSecurityCleared, trCiNoShowFromSecurityCleared) into StateTransition
+!insert (trCiNoShowFromSecurityCleared, ciMissedFlight) into TransitionState
+
+
+
+!new StateMachine('smManuscript')
+!smManuscript.name := 'manuscriptReview'
+
+!new State('msDraft')
+!msDraft.name := 'draft'
+!new State('msSubmitted')
+!msSubmitted.name := 'submitted'
+!new State('msUnderReview')
+!msUnderReview.name := 'underReview'
+!new State('msAccepted')
+!msAccepted.name := 'accepted'
+!new State('msRejected')
+!msRejected.name := 'rejected'
+
+!insert (smManuscript, msDraft) into StateMachineContainsStates
+!insert (smManuscript, msSubmitted) into StateMachineContainsStates
+!insert (smManuscript, msUnderReview) into StateMachineContainsStates
+!insert (smManuscript, msAccepted) into StateMachineContainsStates
+!insert (smManuscript, msRejected) into StateMachineContainsStates
+
+!insert (smManuscript, msDraft) into StateMachineStartsStates
+
+
+!new Transition('trMsSubmit')
+!trMsSubmit.name := 'submit'
+!new TimeEvent('teMsSubmit')
+!teMsSubmit.time := 1
+
+!new Transition('trMsAssignReviewers')
+!trMsAssignReviewers.name := 'assignReviewers'
+!new TimeEvent('teMsAssignReviewers')
+!teMsAssignReviewers.time := 1440
+
+!new Transition('trMsAccept')
+!trMsAccept.name := 'accept'
+!new TimeEvent('teMsAccept')
+!teMsAccept.time := 10080
+
+!new Transition('trMsReject')
+!trMsReject.name := 'reject'
+!new TimeEvent('teMsReject')
+!teMsReject.time := 10080
+
+!new Transition('trMsReviseAfterReject')
+!trMsReviseAfterReject.name := 'reviseAfterReject'
+!new TimeEvent('teMsReviseAfterReject')
+!teMsReviseAfterReject.time := 43200
+
+!new Transition('trMsResubmit')
+!trMsResubmit.name := 'resubmit'
+!new TimeEvent('teMsResubmit')
+!teMsResubmit.time := 5
+
+
+!insert (smManuscript, trMsSubmit) into StateMachineContainsTransitions
+!insert (smManuscript, trMsAssignReviewers) into StateMachineContainsTransitions
+!insert (smManuscript, trMsAccept) into StateMachineContainsTransitions
+!insert (smManuscript, trMsReject) into StateMachineContainsTransitions
+!insert (smManuscript, trMsReviseAfterReject) into StateMachineContainsTransitions
+!insert (smManuscript, trMsResubmit) into StateMachineContainsTransitions
+
+!insert (trMsSubmit, teMsSubmit) into TransitionContainsEvents
+!insert (trMsAssignReviewers, teMsAssignReviewers) into TransitionContainsEvents
+!insert (trMsAccept, teMsAccept) into TransitionContainsEvents
+!insert (trMsReject, teMsReject) into TransitionContainsEvents
+!insert (trMsReviseAfterReject, teMsReviseAfterReject) into TransitionContainsEvents
+!insert (trMsResubmit, teMsResubmit) into TransitionContainsEvents
+
+
+!insert (msDraft, trMsSubmit) into StateTransition
+!insert (trMsSubmit, msSubmitted) into TransitionState
+
+!insert (msSubmitted, trMsAssignReviewers) into StateTransition
+!insert (trMsAssignReviewers, msUnderReview) into TransitionState
+
+!insert (msUnderReview, trMsAccept) into StateTransition
+!insert (trMsAccept, msAccepted) into TransitionState
+
+!insert (msUnderReview, trMsReject) into StateTransition
+!insert (trMsReject, msRejected) into TransitionState
+
+!insert (msRejected, trMsReviseAfterReject) into StateTransition
+!insert (trMsReviseAfterReject, msDraft) into TransitionState
+
+!insert (msDraft, trMsResubmit) into StateTransition
+!insert (trMsResubmit, msSubmitted) into TransitionState

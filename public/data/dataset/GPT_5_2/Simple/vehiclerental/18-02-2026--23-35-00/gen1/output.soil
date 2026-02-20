@@ -1,0 +1,167 @@
+!new RentalOffice('office_denver')
+!office_denver.name := 'Front Range Rentals - Denver'
+!office_denver.number := 101
+!office_denver.address := '2450 W Colfax Ave, Denver, CO 80204'
+
+!new RentalOffice('office_miami')
+!office_miami.name := 'SunCoast Vehicle Rental - Miami'
+!office_miami.number := 202
+!office_miami.address := '7800 NW 25th St, Miami, FL 33122'
+
+!new RentalOffice('office_losangeles')
+!office_losangeles.name := 'Pacific Fleet Rentals - Los Angeles'
+!office_losangeles.number := 303
+!office_losangeles.address := '6100 S Alameda St, Los Angeles, CA 90001'
+
+!new Truck('truck_den_24ft_01')
+!truck_den_24ft_01.id := 5001
+!truck_den_24ft_01.registrationState := #CO
+!truck_den_24ft_01.licensePlateNumber := 'CO-TRK-8152'
+!truck_den_24ft_01.vehicleTypeCode := #TRUCK24
+!truck_den_24ft_01.registrationLastMaintenanceDate := Date('2025-12-10')
+!truck_den_24ft_01.expirationDate := Date('2026-11-30')
+!truck_den_24ft_01.odometerReading := 84215
+!truck_den_24ft_01.gasTankCapacity := 60.0
+!truck_den_24ft_01.workingRadio := true
+!truck_den_24ft_01.mileage := 10
+
+!new Truck('truck_den_10ft_02')
+!truck_den_10ft_02.id := 5002
+!truck_den_10ft_02.registrationState := #CO
+!truck_den_10ft_02.licensePlateNumber := 'CO-TRK-1934'
+!truck_den_10ft_02.vehicleTypeCode := #TRUCK10
+!truck_den_10ft_02.registrationLastMaintenanceDate := Date('2026-01-15')
+!truck_den_10ft_02.expirationDate := Date('2026-08-31')
+!truck_den_10ft_02.odometerReading := 31990
+!truck_den_10ft_02.gasTankCapacity := 35.0
+!truck_den_10ft_02.workingRadio := false
+!truck_den_10ft_02.mileage := 14
+
+!new Vehicle('trailer_mia_open_01')
+!trailer_mia_open_01.id := 7001
+!trailer_mia_open_01.registrationState := #FL
+!trailer_mia_open_01.licensePlateNumber := 'FL-TRL-4029'
+!trailer_mia_open_01.vehicleTypeCode := #OPEN_TRAILER
+!trailer_mia_open_01.registrationLastMaintenanceDate := Date('2025-11-20')
+!trailer_mia_open_01.expirationDate := Date('2026-10-31')
+
+!new Vehicle('trailer_mia_covered_02')
+!trailer_mia_covered_02.id := 7002
+!trailer_mia_covered_02.registrationState := #FL
+!trailer_mia_covered_02.licensePlateNumber := 'FL-TRL-1187'
+!trailer_mia_covered_02.vehicleTypeCode := #COVERED_TRAILER
+!trailer_mia_covered_02.registrationLastMaintenanceDate := Date('2026-02-01')
+!trailer_mia_covered_02.expirationDate := Date('2027-01-31')
+
+!new Truck('truck_la_24ft_03')
+!truck_la_24ft_03.id := 5003
+!truck_la_24ft_03.registrationState := #CA
+!truck_la_24ft_03.licensePlateNumber := 'CA-TRK-7710'
+!truck_la_24ft_03.vehicleTypeCode := #TRUCK24
+!truck_la_24ft_03.registrationLastMaintenanceDate := Date('2025-09-05')
+!truck_la_24ft_03.expirationDate := Date('2026-09-30')
+!truck_la_24ft_03.odometerReading := 126540
+!truck_la_24ft_03.gasTankCapacity := 65.0
+!truck_la_24ft_03.workingRadio := true
+!truck_la_24ft_03.mileage := 9
+
+!insert (office_denver, truck_den_24ft_01) into RentalOfficeVehicle
+!insert (office_denver, truck_den_10ft_02) into RentalOfficeVehicle
+!insert (office_miami, trailer_mia_open_01) into RentalOfficeVehicle
+!insert (office_miami, trailer_mia_covered_02) into RentalOfficeVehicle
+!insert (office_losangeles, truck_la_24ft_03) into RentalOfficeVehicle
+
+!new Individual('cust_ind_sarah')
+!cust_ind_sarah.name := 'Sarah Nguyen'
+!cust_ind_sarah.address := '1128 S Pearl St, Denver, CO 80210'
+!cust_ind_sarah.poorRisk := false
+!cust_ind_sarah.homePhone := '303-555-0148'
+!cust_ind_sarah.driverLicenseState := #CO
+!cust_ind_sarah.driverLicenseNumber := 48201933
+!cust_ind_sarah.driverLicenseExpirationDate := Date('2028-04-18')
+
+!new Individual('cust_ind_marcus')
+!cust_ind_marcus.name := 'Marcus Reed'
+!cust_ind_marcus.address := '4100 NW 79th Ave, Doral, FL 33166'
+!cust_ind_marcus.poorRisk := true
+!cust_ind_marcus.homePhone := '786-555-0192'
+!cust_ind_marcus.driverLicenseState := #FL
+!cust_ind_marcus.driverLicenseNumber := 77120456
+!cust_ind_marcus.driverLicenseExpirationDate := Date('2026-07-09')
+
+!new Company('cust_co_bluepeak')
+!cust_co_bluepeak.name := 'BluePeak Construction, Inc.'
+!cust_co_bluepeak.address := '9800 E Easter Ave, Centennial, CO 80112'
+!cust_co_bluepeak.poorRisk := false
+!cust_co_bluepeak.idNumber := 90014522
+
+!new Company('cust_co_oceanfreight')
+!cust_co_oceanfreight.name := 'OceanFreight Logistics LLC'
+!cust_co_oceanfreight.address := '2250 NW 102nd Pl, Miami, FL 33172'
+!cust_co_oceanfreight.poorRisk := false
+!cust_co_oceanfreight.idNumber := 90028710
+
+!new RentalAgreement('ra_10001')
+!ra_10001.number := 10001
+!ra_10001.rentalDate := Date('2026-02-05')
+!ra_10001.anticipatedDuration := 3
+!ra_10001.depositPaid := 250.00
+!ra_10001.quotedDailyRate := 129.99
+!ra_10001.quotedRatePerMile := 0.79
+
+!new RentalAgreement('ra_10002')
+!ra_10002.number := 10002
+!ra_10002.rentalDate := Date('2026-02-07')
+!ra_10002.anticipatedDuration := 1
+!ra_10002.depositPaid := 0.00
+!ra_10002.quotedDailyRate := 39.00
+!ra_10002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_10003')
+!ra_10003.number := 10003
+!ra_10003.rentalDate := Date('2026-02-10')
+!ra_10003.anticipatedDuration := 5
+!ra_10003.depositPaid := 500.00
+!ra_10003.quotedDailyRate := 149.50
+!ra_10003.quotedRatePerMile := 0.69
+
+!new RentalAgreement('ra_10004')
+!ra_10004.number := 10004
+!ra_10004.rentalDate := Date('2026-02-12')
+!ra_10004.anticipatedDuration := 2
+!ra_10004.depositPaid := 150.00
+!ra_10004.quotedDailyRate := 45.00
+!ra_10004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_10005')
+!ra_10005.number := 10005
+!ra_10005.rentalDate := Date('2026-02-15')
+!ra_10005.anticipatedDuration := 4
+!ra_10005.depositPaid := 300.00
+!ra_10005.quotedDailyRate := 139.00
+!ra_10005.quotedRatePerMile := 0.75
+
+!insert (office_denver, ra_10001) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver, ra_10001) into RentalOfficeRentalAgreementDrop
+!insert (ra_10001, truck_den_24ft_01) into RentalAgreementVehicle
+!insert (ra_10001, cust_ind_sarah) into RentalAgreementCustomer
+
+!insert (office_miami, ra_10002) into RentalOfficeRentalAgreementOrigin
+!insert (office_miami, ra_10002) into RentalOfficeRentalAgreementDrop
+!insert (ra_10002, trailer_mia_open_01) into RentalAgreementVehicle
+!insert (ra_10002, cust_ind_marcus) into RentalAgreementCustomer
+
+!insert (office_denver, ra_10003) into RentalOfficeRentalAgreementOrigin
+!insert (office_losangeles, ra_10003) into RentalOfficeRentalAgreementDrop
+!insert (ra_10003, truck_den_10ft_02) into RentalAgreementVehicle
+!insert (ra_10003, cust_co_bluepeak) into RentalAgreementCustomer
+
+!insert (office_miami, ra_10004) into RentalOfficeRentalAgreementOrigin
+!insert (office_miami, ra_10004) into RentalOfficeRentalAgreementDrop
+!insert (ra_10004, trailer_mia_covered_02) into RentalAgreementVehicle
+!insert (ra_10004, cust_co_oceanfreight) into RentalAgreementCustomer
+
+!insert (office_losangeles, ra_10005) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver, ra_10005) into RentalOfficeRentalAgreementDrop
+!insert (ra_10005, truck_la_24ft_03) into RentalAgreementVehicle
+!insert (ra_10005, cust_ind_sarah) into RentalAgreementCustomer

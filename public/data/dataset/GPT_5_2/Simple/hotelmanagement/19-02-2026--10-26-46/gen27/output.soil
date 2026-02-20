@@ -1,0 +1,72 @@
+!new Booking('booking29')
+!booking29.startDate := '2030-09-01'
+!booking29.endDate := '2030-09-05'
+!booking29.canceled := false
+!booking29.bookingId := 10600
+!booking29.confirmed := false
+
+!new Customer('customer29')
+!customer29.firstName := 'Helene'
+!customer29.lastName := 'Fischer'
+
+!insert (booking29, customer29) into BookingCustomer
+
+!new RoomReservation('rr40')
+!rr40.checkInDate := '2030-09-01'
+!rr40.checkOutDate := '2030-09-03'
+
+!new RoomReservation('rr41')
+!rr41.checkInDate := '2030-09-03'
+!rr41.checkOutDate := '2030-09-05'
+
+!insert (booking29, rr40) into BookingRoomReservation
+!insert (booking29, rr41) into BookingRoomReservation
+
+!new RoomExtra('extraPreauthDeposit')
+!extraPreauthDeposit.price := 100.0
+!extraPreauthDeposit.description := 'Pre-authorization deposit (rooms not assigned yet)'
+
+!insert (rr40, extraPreauthDeposit) into RoomReservationExtras
+
+!new Room('room512')
+!room512.roomNumber := 512
+!room512.numBeds := 1
+!room512.pricePerNight := 190.0
+!room512.occupied := false
+!room512.blocked := true
+
+!new Room('room513')
+!room513.roomNumber := 513
+!room513.numBeds := 1
+!room513.pricePerNight := 190.0
+!room513.occupied := false
+!room513.blocked := true
+
+!insert (rr41, room512) into RoomReservationRoom
+!insert (rr41, room513) into RoomReservationRoom
+
+!new Bill('bill41')
+!bill41.billId := 26001
+!bill41.price := 100.0
+
+!new Bill('bill42')
+!bill42.billId := 26002
+!bill42.price := 760.0
+
+!insert (bill41, rr40) into BillRoomReservation
+!insert (bill42, rr41) into BillRoomReservation
+
+!insert (booking29, bill41) into BookingBill
+!insert (booking29, bill42) into BookingBill
+
+!new FreeRoomTypesDTO('dtoSeptemberWalkIn')
+!dtoSeptemberWalkIn.roomTypeDescription := 'September walk-in rooms (unblocked)'
+!dtoSeptemberWalkIn.numBeds := 1
+!dtoSeptemberWalkIn.pricePerNight := 120.0
+!dtoSeptemberWalkIn.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('dtoSeptemberConnectingSingles')
+!dtoSeptemberConnectingSingles.roomTypeDescription := 'Connecting singles (limited)'
+!dtoSeptemberConnectingSingles.numBeds := 1
+!dtoSeptemberConnectingSingles.pricePerNight := 190.0
+!dtoSeptemberConnectingSingles.numFreeRooms := 0

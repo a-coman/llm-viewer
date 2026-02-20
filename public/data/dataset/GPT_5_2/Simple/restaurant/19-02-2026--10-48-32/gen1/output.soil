@@ -1,0 +1,369 @@
+!new Restaurant('rest1')
+!rest1.name := 'Bistro Verde'
+
+!new Restaurant('rest2')
+!rest2.name := 'Ocean Grill'
+
+!new Owner('own1')
+!own1.name := 'Alice Romano'
+!own1.percentageShares := 60
+
+!new Owner('own2')
+!own2.name := 'Marco Bianchi'
+!own2.percentageShares := 40
+
+!new Owner('own3')
+!own3.name := 'Linda Chen'
+!own3.percentageShares := 100
+
+!insert (rest1, own1) into RestaurantOwner
+!insert (rest1, own2) into RestaurantOwner
+!insert (rest2, own3) into RestaurantOwner
+
+!new HeadWaiter('hw1')
+!hw1.name := 'Samuel Price'
+!hw1.dateOfBirth := Date('1985-06-12')
+!hw1.phoneNumber := '555-0100'
+
+!new Waiter('w1')
+!w1.name := 'Eva Martinez'
+!w1.dateOfBirth := Date('1998-03-02')
+!w1.phoneNumber := '555-0101'
+!w1.spokenLanguage := #Spanish
+
+!new Waiter('w2')
+!w2.name := 'Jonas Keller'
+!w2.dateOfBirth := Date('1992-11-19')
+!w2.phoneNumber := '555-0102'
+!w2.spokenLanguage := #German
+
+!insert (hw1, w1) into HeadWaiterWaiter
+!insert (hw1, w2) into HeadWaiterWaiter
+
+!new HeadWaiter('hw2')
+!hw2.name := 'Giulia Conti'
+!hw2.dateOfBirth := Date('1989-02-08')
+!hw2.phoneNumber := '555-0200'
+
+!new Waiter('w3')
+!w3.name := 'Daniela Rossi'
+!w3.dateOfBirth := Date('1996-07-14')
+!w3.phoneNumber := '555-0201'
+!w3.spokenLanguage := #Italian
+
+!new Waiter('w4')
+!w4.name := 'Peter Wilson'
+!w4.dateOfBirth := Date('1990-12-03')
+!w4.phoneNumber := '555-0202'
+!w4.spokenLanguage := #English
+
+!insert (hw2, w3) into HeadWaiterWaiter
+!insert (hw2, w4) into HeadWaiterWaiter
+
+!new Chef('chef1')
+!chef1.name := 'Antoine Dubois'
+!chef1.dateOfBirth := Date('1978-01-21')
+!chef1.phoneNumber := '555-0301'
+
+!new Cook('cook1')
+!cook1.name := 'Mina Patel'
+!cook1.dateOfBirth := Date('1988-09-30')
+!cook1.phoneNumber := '555-0311'
+!cook1.yearsOfExperience := 10
+
+!new Cook('cook2')
+!cook2.name := 'Robert King'
+!cook2.dateOfBirth := Date('1994-04-17')
+!cook2.phoneNumber := '555-0312'
+!cook2.yearsOfExperience := 3
+
+!insert (chef1, cook1) into ChefCook
+!insert (chef1, cook2) into ChefCook
+
+!new Chef('chef2')
+!chef2.name := 'Noor Al-Hassan'
+!chef2.dateOfBirth := Date('1981-05-05')
+!chef2.phoneNumber := '555-0401'
+
+!new Cook('cook3')
+!cook3.name := 'Hiro Tanaka'
+!cook3.dateOfBirth := Date('1991-10-11')
+!cook3.phoneNumber := '555-0411'
+!cook3.yearsOfExperience := 7
+
+!insert (chef2, cook3) into ChefCook
+
+!new Allergen('algLactose')
+!algLactose.type := #Lactose
+
+!new Allergen('algGluten')
+!algGluten.type := #Gluten
+
+!new Allergen('algNuts')
+!algNuts.type := #Nuts
+
+!new Allergen('algSeafood')
+!algSeafood.type := #Seafood
+
+!new FoodItem('fiTomatoes')
+!fiTomatoes.number := 101
+!fiTomatoes.description := 'Roma tomatoes'
+!fiTomatoes.purchaseFlag := true
+!fiTomatoes.unit := #Pound
+
+!new FoodItem('fiBaguette')
+!fiBaguette.number := 102
+!fiBaguette.description := 'Baguette'
+!fiBaguette.purchaseFlag := true
+!fiBaguette.unit := #Dozen
+
+!new FoodItem('fiParmesan')
+!fiParmesan.number := 103
+!fiParmesan.description := 'Parmesan cheese'
+!fiParmesan.purchaseFlag := true
+!fiParmesan.unit := #Ounce
+
+!new FoodItem('fiRice')
+!fiRice.number := 104
+!fiRice.description := 'Arborio rice'
+!fiRice.purchaseFlag := true
+!fiRice.unit := #Pound
+
+!new FoodItem('fiMushrooms')
+!fiMushrooms.number := 105
+!fiMushrooms.description := 'Cremini mushrooms'
+!fiMushrooms.purchaseFlag := true
+!fiMushrooms.unit := #Pound
+
+!new FoodItem('fiEggs')
+!fiEggs.number := 106
+!fiEggs.description := 'Eggs'
+!fiEggs.purchaseFlag := true
+!fiEggs.unit := #Dozen
+
+!new FoodItem('fiMascarpone')
+!fiMascarpone.number := 107
+!fiMascarpone.description := 'Mascarpone'
+!fiMascarpone.purchaseFlag := true
+!fiMascarpone.unit := #Ounce
+
+!new FoodItem('fiSalmon')
+!fiSalmon.number := 108
+!fiSalmon.description := 'Atlantic salmon fillet'
+!fiSalmon.purchaseFlag := true
+!fiSalmon.unit := #Pound
+
+!new FoodItem('fiLemon')
+!fiLemon.number := 109
+!fiLemon.description := 'Lemons'
+!fiLemon.purchaseFlag := true
+!fiLemon.unit := #Dozen
+
+!new FoodItem('fiSugar')
+!fiSugar.number := 110
+!fiSugar.description := 'Granulated sugar'
+!fiSugar.purchaseFlag := true
+!fiSugar.unit := #Pound
+
+!new FoodItem('fiAlmonds')
+!fiAlmonds.number := 112
+!fiAlmonds.description := 'Sliced almonds'
+!fiAlmonds.purchaseFlag := true
+!fiAlmonds.unit := #Ounce
+
+!insert (fiBaguette, algGluten) into FoodItemAllergen
+!insert (fiParmesan, algLactose) into FoodItemAllergen
+!insert (fiMascarpone, algLactose) into FoodItemAllergen
+!insert (fiSalmon, algSeafood) into FoodItemAllergen
+!insert (fiAlmonds, algNuts) into FoodItemAllergen
+
+!new MenuItem('miBruschetta')
+!miBruschetta.description := 'Bruschetta with tomato and basil'
+!miBruschetta.prepTime := 8.0
+!miBruschetta.classification := #Apetizer
+
+!new MenuItem('miRisotto')
+!miRisotto.description := 'Mushroom risotto'
+!miRisotto.prepTime := 18.0
+!miRisotto.classification := #Main
+
+!new MenuItem('miTiramisu')
+!miTiramisu.description := 'Classic tiramisu'
+!miTiramisu.prepTime := 12.0
+!miTiramisu.classification := #Dessert
+
+!new MenuItem('miSalmonPlate')
+!miSalmonPlate.description := 'Grilled salmon with lemon'
+!miSalmonPlate.prepTime := 20.0
+!miSalmonPlate.classification := #Main
+
+!new MenuItem('miLemonade')
+!miLemonade.description := 'Fresh lemonade'
+!miLemonade.prepTime := 2.0
+!miLemonade.classification := #Beverage
+
+!insert (miBruschetta, chef1) into MenuItemChef
+!insert (miRisotto, chef1) into MenuItemChef
+!insert (miTiramisu, chef1) into MenuItemChef
+!insert (miSalmonPlate, chef2) into MenuItemChef
+!insert (miLemonade, chef2) into MenuItemChef
+
+!insert (miBruschetta, fiTomatoes) into MenuItemFoodItem
+!insert (miBruschetta, fiBaguette) into MenuItemFoodItem
+!insert (miBruschetta, fiParmesan) into MenuItemFoodItem
+
+!insert (miRisotto, fiRice) into MenuItemFoodItem
+!insert (miRisotto, fiMushrooms) into MenuItemFoodItem
+!insert (miRisotto, fiParmesan) into MenuItemFoodItem
+
+!insert (miTiramisu, fiEggs) into MenuItemFoodItem
+!insert (miTiramisu, fiMascarpone) into MenuItemFoodItem
+!insert (miTiramisu, fiSugar) into MenuItemFoodItem
+!insert (miTiramisu, fiAlmonds) into MenuItemFoodItem
+
+!insert (miSalmonPlate, fiSalmon) into MenuItemFoodItem
+!insert (miSalmonPlate, fiLemon) into MenuItemFoodItem
+
+!insert (miLemonade, fiLemon) into MenuItemFoodItem
+!insert (miLemonade, fiSugar) into MenuItemFoodItem
+
+!new RegularCustomer('cust1')
+!cust1.name := 'Sophia Hart'
+!cust1.prefferedLanguage := #English
+
+!new RegularCustomer('cust2')
+!cust2.name := 'Hector Ruiz'
+!cust2.prefferedLanguage := #Spanish
+
+!new RegularCustomer('cust3')
+!cust3.name := 'Olivia Grant'
+!cust3.prefferedLanguage := #English
+
+!new Individual('res1')
+!res1.time := Time('18:30')
+!res1.date := Date('2026-02-20')
+!res1.numberPeople := 2
+!res1.name := 'Sophia Hart'
+!res1.phoneNumber := '555-1001'
+!res1.number := 2001
+!res1.seating := #Inside
+!res1.smoking := #NonSmoking
+
+!insert (rest1, res1) into RestaurantReservation
+!insert (res1, cust1) into ReservationCustomer
+!insert (res1, w1) into ReservationWaiter
+
+!new Table('tRes1A')
+!tRes1A.number := 11
+!tRes1A.description := 'Window two-top'
+!tRes1A.capacity := 2
+!insert (res1, tRes1A) into ReservationTable
+
+!new ItemOrder('io1')
+!io1.time := Time('18:45')
+!insert (res1, io1) into ReservationItemOrdered
+!insert (io1, miBruschetta) into ItemOrderMenuItem
+
+!new ItemOrder('io2')
+!io2.time := Time('19:05')
+!insert (res1, io2) into ReservationItemOrdered
+!insert (io2, miRisotto) into ItemOrderMenuItem
+
+!new Individual('res2')
+!res2.time := Time('19:15')
+!res2.date := Date('2026-02-20')
+!res2.numberPeople := 4
+!res2.name := 'Hector Ruiz'
+!res2.phoneNumber := '555-1002'
+!res2.number := 2002
+!res2.seating := #Patio
+!res2.smoking := #Smoking
+
+!insert (rest1, res2) into RestaurantReservation
+!insert (res2, cust2) into ReservationCustomer
+!insert (res2, w1) into ReservationWaiter
+!insert (res2, w2) into ReservationWaiter
+
+!new Table('tRes2A')
+!tRes2A.number := 21
+!tRes2A.description := 'Patio table (2 seats)'
+!tRes2A.capacity := 2
+!insert (res2, tRes2A) into ReservationTable
+
+!new Table('tRes2B')
+!tRes2B.number := 22
+!tRes2B.description := 'Patio table (2 seats)'
+!tRes2B.capacity := 2
+!insert (res2, tRes2B) into ReservationTable
+
+!new ItemOrder('io3')
+!io3.time := Time('19:35')
+!insert (res2, io3) into ReservationItemOrdered
+!insert (io3, miSalmonPlate) into ItemOrderMenuItem
+
+!new ItemOrder('io4')
+!io4.time := Time('19:50')
+!insert (res2, io4) into ReservationItemOrdered
+!insert (io4, miLemonade) into ItemOrderMenuItem
+
+!new Banquet('banq1')
+!banq1.time := Time('12:00')
+!banq1.date := Date('2026-03-05')
+!banq1.numberPeople := 30
+!banq1.name := 'Olivia Grant'
+!banq1.phoneNumber := '555-2000'
+!banq1.number := 3001
+!banq1.groupName := 'Tech Summit Lunch'
+!banq1.paymentMethod := #CreditCard
+!banq1.busService := true
+
+!insert (rest2, banq1) into RestaurantReservation
+!insert (banq1, cust3) into ReservationCustomer
+!insert (banq1, w3) into ReservationWaiter
+!insert (banq1, w4) into ReservationWaiter
+
+!new Table('tBanq1A')
+!tBanq1A.number := 51
+!tBanq1A.description := 'Banquet table A'
+!tBanq1A.capacity := 10
+!insert (banq1, tBanq1A) into ReservationTable
+
+!new Table('tBanq1B')
+!tBanq1B.number := 52
+!tBanq1B.description := 'Banquet table B'
+!tBanq1B.capacity := 10
+!insert (banq1, tBanq1B) into ReservationTable
+
+!new Table('tBanq1C')
+!tBanq1C.number := 53
+!tBanq1C.description := 'Banquet table C'
+!tBanq1C.capacity := 10
+!insert (banq1, tBanq1C) into ReservationTable
+
+!new BusDriver('bd1')
+!bd1.name := 'Carl Jensen'
+!bd1.dateOfBirth := Date('1970-09-09')
+!bd1.phoneNumber := '555-3000'
+!bd1.driverLicenseNr := 'D-8839201'
+!insert (banq1, bd1) into BanquetBusDriver
+
+!new ItemOrder('io5')
+!io5.time := Time('12:10')
+!insert (banq1, io5) into ReservationItemOrdered
+!insert (io5, miSalmonPlate) into ItemOrderMenuItem
+
+!new ItemOrder('io6')
+!io6.time := Time('12:10')
+!insert (banq1, io6) into ReservationItemOrdered
+!insert (io6, miLemonade) into ItemOrderMenuItem
+
+!new ItemOrder('io7')
+!io7.time := Time('12:25')
+!insert (banq1, io7) into ReservationItemOrdered
+!insert (io7, miTiramisu) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq1')
+!dietReq1.diet := #Vegetarian
+
+!new ReportedAllergy('repAlg1')
+!repAlg1.allergen := #Gluten

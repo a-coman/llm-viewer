@@ -1,0 +1,111 @@
+!new Bank('bankTH1')
+!bankTH1.country := 'Thailand'
+!bankTH1.name := 'Chao Phraya Bank'
+!bankTH1.bic := 'CPBKTHBKXXX'
+
+!new Bank('bankDE3')
+!bankDE3.country := 'Germany'
+!bankDE3.name := 'Rheinland Direktbank'
+!bankDE3.bic := 'RHDBDEFFXXX'
+
+!new Person('uA1')
+!uA1.firstName := 'Somchai'
+!uA1.lastName := 'Kittipong'
+!uA1.age := 46
+
+!new Person('uA2')
+!uA2.firstName := 'Anong'
+!uA2.lastName := 'Kittipong'
+!uA2.age := 44
+
+!new Person('uA3')
+!uA3.firstName := 'Ploy'
+!uA3.lastName := 'Srisuk'
+!uA3.age := 22
+
+!new Person('uA4')
+!uA4.firstName := 'Jonas'
+!uA4.lastName := 'Keller'
+!uA4.age := 33
+
+!new Person('uA5')
+!uA5.firstName := 'Miriam'
+!uA5.lastName := 'Keller'
+!uA5.age := 31
+
+!new Person('uA6')
+!uA6.firstName := 'Lina'
+!uA6.lastName := 'Keller'
+!uA6.age := 14
+
+!new Person('uA7')
+!uA7.firstName := 'Niran'
+!uA7.lastName := 'Prasert'
+!uA7.age := 19
+
+!new Account('thAcc1')
+!thAcc1.iban := 'TH00CPBK00000000000001'
+!thAcc1.balance := 250
+
+!new Account('thAcc2')
+!thAcc2.iban := 'TH00CPBK00000000004567'
+!thAcc2.balance := 82000
+
+!new Account('thAcc3')
+!thAcc3.iban := 'TH00CPBK00000000009999'
+!thAcc3.balance := 0
+
+!new Account('deAcc1')
+!deAcc1.iban := 'DE78500105179999887766'
+!deAcc1.balance := 4300
+
+!new Account('deAcc2')
+!deAcc2.iban := 'DE02100100101234567890'
+!deAcc2.balance := 15
+
+!new Account('deAcc3')
+!deAcc3.iban := 'DE44500105170000000001'
+!deAcc3.balance := 120000
+
+!insert (bankTH1, thAcc1) into AccountOfBanks
+!insert (bankTH1, thAcc2) into AccountOfBanks
+!insert (bankTH1, thAcc3) into AccountOfBanks
+!insert (bankDE3, deAcc1) into AccountOfBanks
+!insert (bankDE3, deAcc2) into AccountOfBanks
+!insert (bankDE3, deAcc3) into AccountOfBanks
+
+!insert (uA1, thAcc1) into Ownership
+
+!insert (uA1, thAcc2) into Ownership
+!insert (uA2, thAcc2) into Ownership
+
+!insert (uA3, thAcc3) into Ownership
+!insert (uA7, thAcc3) into Ownership
+
+!insert (uA4, deAcc1) into Ownership
+!insert (uA5, deAcc1) into Ownership
+
+!insert (uA5, deAcc2) into Ownership
+
+!insert (uA2, deAcc3) into Ownership
+!insert (uA4, deAcc3) into Ownership
+
+!insert (uA2, thAcc1) into Use
+!insert (uA3, thAcc1) into Use
+
+!insert (uA1, thAcc2) into Use
+!insert (uA2, thAcc2) into Use
+!insert (uA6, thAcc2) into Use
+
+!insert (uA7, thAcc3) into Use
+!insert (uA1, thAcc3) into Use
+
+!insert (uA4, deAcc1) into Use
+!insert (uA5, deAcc1) into Use
+!insert (uA6, deAcc1) into Use
+
+!insert (uA3, deAcc2) into Use
+
+!insert (uA4, deAcc3) into Use
+!insert (uA2, deAcc3) into Use
+!insert (uA7, deAcc3) into Use

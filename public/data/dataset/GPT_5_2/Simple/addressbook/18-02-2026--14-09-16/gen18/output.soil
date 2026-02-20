@@ -1,0 +1,163 @@
+!new AddressBook('ab19')
+
+!new Company('emberStudios')
+!emberStudios.name := 'Ember Studios'
+!emberStudios.phone := '+1-323-555-1900'
+!emberStudios.website := 'https://emberstudios.example'
+!emberStudios.email := 'contact@emberstudios.example'
+!emberStudios.industry := 'Film Production'
+
+!new Company('emberPost')
+!emberPost.name := 'Ember Postproduction'
+!emberPost.phone := '+1-323-555-1905'
+!emberPost.website := ''
+!emberPost.email := 'post@emberstudios.example'
+!emberPost.industry := 'Postproduction'
+
+!new Company('silverlineDistribution')
+!silverlineDistribution.name := 'Silverline Distribution'
+!silverlineDistribution.phone := '+1-310-555-1910'
+!silverlineDistribution.website := 'https://silverline.example'
+!silverlineDistribution.email := 'acquisitions@silverline.example'
+!silverlineDistribution.industry := 'Film Distribution'
+
+!new Company('arcLightRental')
+!arcLightRental.name := 'ArcLight Equipment Rental'
+!arcLightRental.phone := '+1-818-555-1920'
+!arcLightRental.website := 'https://arclightrental.example'
+!arcLightRental.email := 'rentals@arclightrental.example'
+!arcLightRental.industry := 'Equipment Rental'
+
+!new Person('rachelKing')
+!rachelKing.name := 'Rachel King'
+!rachelKing.phone := '+1-323-555-1931'
+!rachelKing.website := ''
+!rachelKing.email := 'rachel.king@emberstudios.example'
+!rachelKing.title := 'Executive Producer'
+
+!new Person('quinnLee')
+!quinnLee.name := 'Quinn Lee'
+!quinnLee.phone := '+1-323-555-1932'
+!quinnLee.website := 'https://quinnlee.example'
+!quinnLee.email := 'quinn.lee@emberstudios.example'
+!quinnLee.title := 'Line Producer'
+
+!insert (ab19, emberStudios) into AddressBookMadeOfContact
+!insert (ab19, emberPost) into AddressBookMadeOfContact
+!insert (ab19, silverlineDistribution) into AddressBookMadeOfContact
+!insert (ab19, arcLightRental) into AddressBookMadeOfContact
+!insert (ab19, rachelKing) into AddressBookMadeOfContact
+!insert (ab19, quinnLee) into AddressBookMadeOfContact
+
+!new Address('addrEmberHQ')
+!addrEmberHQ.city := 'Los Angeles'
+!addrEmberHQ.street := 'Melrose Ave'
+!addrEmberHQ.houseNr := '6100'
+
+!new Address('addrEmberStage')
+!addrEmberStage.city := 'Burbank'
+!addrEmberStage.street := 'Olive Ave'
+!addrEmberStage.houseNr := '275'
+
+!new Address('addrPostSuite')
+!addrPostSuite.city := 'Los Angeles'
+!addrPostSuite.street := 'Sunset Blvd'
+!addrPostSuite.houseNr := '5050'
+
+!new Address('addrSilverlineOffice')
+!addrSilverlineOffice.city := 'Santa Monica'
+!addrSilverlineOffice.street := 'Ocean Ave'
+!addrSilverlineOffice.houseNr := '101'
+
+!new Address('addrArcLightWarehouse')
+!addrArcLightWarehouse.city := 'North Hollywood'
+!addrArcLightWarehouse.street := 'Lankershim Blvd'
+!addrArcLightWarehouse.houseNr := '10620'
+
+!new Address('addrQuinnHome')
+!addrQuinnHome.city := 'Glendale'
+!addrQuinnHome.street := 'Brand Blvd'
+!addrQuinnHome.houseNr := '225'
+
+!insert (emberStudios, addrEmberHQ) into ContactContainsAddress
+!insert (emberStudios, addrEmberStage) into ContactContainsAddress
+!insert (emberPost, addrPostSuite) into ContactContainsAddress
+!insert (silverlineDistribution, addrSilverlineOffice) into ContactContainsAddress
+!insert (arcLightRental, addrArcLightWarehouse) into ContactContainsAddress
+!insert (quinnLee, addrQuinnHome) into ContactContainsAddress
+
+!new Note('nEmberEmailCrew')
+!nEmberEmailCrew.author := 'Production Office'
+!nEmberEmailCrew.time := Date('2026-02-05 09:10')
+!nEmberEmailCrew.type := #EMAIL
+!nEmberEmailCrew.comment := 'Sent updated crew list and call sheet template for the next shooting block.'
+
+!new Note('nRachelMeetingBudget')
+!nRachelMeetingBudget.author := 'Rachel King'
+!nRachelMeetingBudget.time := Date('2026-02-06 14:00')
+!nRachelMeetingBudget.type := #MEETING
+!nRachelMeetingBudget.comment := 'Reviewed revised budget with department heads; approved contingency allocation.'
+
+!new Note('nQuinnCallPermits')
+!nQuinnCallPermits.author := 'Quinn Lee'
+!nQuinnCallPermits.time := Date('2026-02-07 08:35')
+!nQuinnCallPermits.type := #CALL
+!nQuinnCallPermits.comment := 'Called city permitting office to confirm street closure windows and insurance requirements.'
+
+!new Note('nPostEmailDelivery')
+!nPostEmailDelivery.author := 'Post Supervisor'
+!nPostEmailDelivery.time := Date('2026-02-10 18:20')
+!nPostEmailDelivery.type := #EMAIL
+!nPostEmailDelivery.comment := 'Shared delivery specs for audio stems and final color; confirmed DCP timeline.'
+
+!new Note('nSilverlineMeetingAcquisition')
+!nSilverlineMeetingAcquisition.author := 'Silverline Acquisitions'
+!nSilverlineMeetingAcquisition.time := Date('2026-02-12 11:30')
+!nSilverlineMeetingAcquisition.type := #MEETING
+!nSilverlineMeetingAcquisition.comment := 'Discussed festival strategy and distribution windows; requested screener and EPK assets.'
+
+!insert (emberStudios, nEmberEmailCrew) into ContactContainsNote
+!insert (rachelKing, nRachelMeetingBudget) into ContactContainsNote
+!insert (quinnLee, nQuinnCallPermits) into ContactContainsNote
+!insert (emberPost, nPostEmailDelivery) into ContactContainsNote
+!insert (silverlineDistribution, nSilverlineMeetingAcquisition) into ContactContainsNote
+
+!new Relationship('relEmberSubdivisionPost')
+!relEmberSubdivisionPost.type := #SUBDIVISION
+!insert (emberStudios, relEmberSubdivisionPost) into ContactToRelationship
+!insert (relEmberSubdivisionPost, emberPost) into RelationshipToContact
+
+!new Relationship('relRachelEmployeeOfEmber')
+!relRachelEmployeeOfEmber.type := #EMPLOYEE
+!insert (rachelKing, relRachelEmployeeOfEmber) into ContactToRelationship
+!insert (relRachelEmployeeOfEmber, emberStudios) into RelationshipToContact
+
+!new Relationship('relQuinnEmployeeOfEmber')
+!relQuinnEmployeeOfEmber.type := #EMPLOYEE
+!insert (quinnLee, relQuinnEmployeeOfEmber) into ContactToRelationship
+!insert (relQuinnEmployeeOfEmber, emberStudios) into RelationshipToContact
+
+!new Relationship('relQuinnBossIsRachel')
+!relQuinnBossIsRachel.type := #BOSS
+!insert (quinnLee, relQuinnBossIsRachel) into ContactToRelationship
+!insert (relQuinnBossIsRachel, rachelKing) into RelationshipToContact
+
+!new Relationship('relEmberCoworkerSilverline')
+!relEmberCoworkerSilverline.type := #COWORKER
+!insert (emberStudios, relEmberCoworkerSilverline) into ContactToRelationship
+!insert (relEmberCoworkerSilverline, silverlineDistribution) into RelationshipToContact
+
+!new Relationship('relSilverlineCoworkerEmber')
+!relSilverlineCoworkerEmber.type := #COWORKER
+!insert (silverlineDistribution, relSilverlineCoworkerEmber) into ContactToRelationship
+!insert (relSilverlineCoworkerEmber, emberStudios) into RelationshipToContact
+
+!new Relationship('relArcLightCoworkerEmber')
+!relArcLightCoworkerEmber.type := #COWORKER
+!insert (arcLightRental, relArcLightCoworkerEmber) into ContactToRelationship
+!insert (relArcLightCoworkerEmber, emberStudios) into RelationshipToContact
+
+!new Relationship('relQuinnCoworkerArcLight')
+!relQuinnCoworkerArcLight.type := #COWORKER
+!insert (quinnLee, relQuinnCoworkerArcLight) into ContactToRelationship
+!insert (relQuinnCoworkerArcLight, arcLightRental) into RelationshipToContact

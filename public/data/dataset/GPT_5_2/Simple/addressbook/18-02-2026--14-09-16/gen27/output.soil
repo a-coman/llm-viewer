@@ -1,0 +1,124 @@
+!new AddressBook('ab28')
+
+!new Company('novaUniversity')
+!novaUniversity.name := 'Nova Technical University'
+!novaUniversity.phone := '+1-617-555-2800'
+!novaUniversity.website := 'https://ntu.example'
+!novaUniversity.email := 'info@ntu.example'
+!novaUniversity.industry := 'Higher Education'
+
+!new Company('quantumLab')
+!quantumLab.name := 'Quantum Systems Laboratory'
+!quantumLab.phone := '+1-617-555-2805'
+!quantumLab.website := 'https://quantumsystems.example'
+!quantumLab.email := 'contact@quantumsystems.example'
+!quantumLab.industry := 'Research'
+
+!new Company('spectrumCloud')
+!spectrumCloud.name := 'Spectrum Cloud Services'
+!spectrumCloud.phone := '+1-646-555-2810'
+!spectrumCloud.website := 'https://spectrumcloud.example'
+!spectrumCloud.email := 'support@spectrumcloud.example'
+!spectrumCloud.industry := 'Cloud Computing'
+
+!new Person('drIreneCho')
+!drIreneCho.name := 'Irene Cho'
+!drIreneCho.phone := '+1-617-555-2815'
+!drIreneCho.website := 'https://irenecho.example'
+!drIreneCho.email := 'irene.cho@ntu.example'
+!drIreneCho.title := 'Research Director'
+
+!new Person('paulReed')
+!paulReed.name := 'Paul Reed'
+!paulReed.phone := '+1-646-555-2816'
+!paulReed.website := ''
+!paulReed.email := 'paul.reed@spectrumcloud.example'
+!paulReed.title := 'Solutions Architect'
+
+!insert (ab28, novaUniversity) into AddressBookMadeOfContact
+!insert (ab28, quantumLab) into AddressBookMadeOfContact
+!insert (ab28, spectrumCloud) into AddressBookMadeOfContact
+!insert (ab28, drIreneCho) into AddressBookMadeOfContact
+!insert (ab28, paulReed) into AddressBookMadeOfContact
+
+!new Address('addrNTUCampus')
+!addrNTUCampus.city := 'Cambridge'
+!addrNTUCampus.street := 'Technology Sq'
+!addrNTUCampus.houseNr := '10'
+
+!new Address('addrQuantumLabSuite')
+!addrQuantumLabSuite.city := 'Cambridge'
+!addrQuantumLabSuite.street := 'Technology Sq'
+!addrQuantumLabSuite.houseNr := '10-L2'
+
+!new Address('addrSpectrumNYOffice')
+!addrSpectrumNYOffice.city := 'New York'
+!addrSpectrumNYOffice.street := 'Broadway'
+!addrSpectrumNYOffice.houseNr := '770'
+
+!new Address('addrIreneOffice')
+!addrIreneOffice.city := 'Cambridge'
+!addrIreneOffice.street := 'Technology Sq'
+!addrIreneOffice.houseNr := '10-5A'
+
+!insert (novaUniversity, addrNTUCampus) into ContactContainsAddress
+!insert (quantumLab, addrQuantumLabSuite) into ContactContainsAddress
+!insert (spectrumCloud, addrSpectrumNYOffice) into ContactContainsAddress
+!insert (drIreneCho, addrIreneOffice) into ContactContainsAddress
+
+!new Note('nNTUEmailConsortium')
+!nNTUEmailConsortium.author := 'Office of Research'
+!nNTUEmailConsortium.time := Date('2026-02-02 09:00')
+!nNTUEmailConsortium.type := #EMAIL
+!nNTUEmailConsortium.comment := 'Shared consortium participation terms and requested a technical point of contact.'
+
+!new Note('nIreneMeetingRoadmap')
+!nIreneMeetingRoadmap.author := 'Irene Cho'
+!nIreneMeetingRoadmap.time := Date('2026-02-05 15:30')
+!nIreneMeetingRoadmap.type := #MEETING
+!nIreneMeetingRoadmap.comment := 'Roadmap review for the pilot; agreed on data collection plan and security signoff steps.'
+
+!new Note('nPaulCallConnectivity')
+!nPaulCallConnectivity.author := 'Paul Reed'
+!nPaulCallConnectivity.time := Date('2026-02-06 11:10')
+!nPaulCallConnectivity.type := #CALL
+!nPaulCallConnectivity.comment := 'Discussed VPN connectivity and SSO integration requirements for the lab environment.'
+
+!insert (novaUniversity, nNTUEmailConsortium) into ContactContainsNote
+!insert (drIreneCho, nIreneMeetingRoadmap) into ContactContainsNote
+!insert (paulReed, nPaulCallConnectivity) into ContactContainsNote
+
+!new Relationship('relNTUSubdivisionQuantum')
+!relNTUSubdivisionQuantum.type := #SUBDIVISION
+!insert (novaUniversity, relNTUSubdivisionQuantum) into ContactToRelationship
+!insert (relNTUSubdivisionQuantum, quantumLab) into RelationshipToContact
+
+!new Relationship('relQuantumCoworkerSpectrum')
+!relQuantumCoworkerSpectrum.type := #COWORKER
+!insert (quantumLab, relQuantumCoworkerSpectrum) into ContactToRelationship
+!insert (relQuantumCoworkerSpectrum, spectrumCloud) into RelationshipToContact
+
+!new Relationship('relSpectrumCoworkerQuantum')
+!relSpectrumCoworkerQuantum.type := #COWORKER
+!insert (spectrumCloud, relSpectrumCoworkerQuantum) into ContactToRelationship
+!insert (relSpectrumCoworkerQuantum, quantumLab) into RelationshipToContact
+
+!new Relationship('relIreneEmployeeNTU')
+!relIreneEmployeeNTU.type := #EMPLOYEE
+!insert (drIreneCho, relIreneEmployeeNTU) into ContactToRelationship
+!insert (relIreneEmployeeNTU, novaUniversity) into RelationshipToContact
+
+!new Relationship('relPaulEmployeeSpectrum')
+!relPaulEmployeeSpectrum.type := #EMPLOYEE
+!insert (paulReed, relPaulEmployeeSpectrum) into ContactToRelationship
+!insert (relPaulEmployeeSpectrum, spectrumCloud) into RelationshipToContact
+
+!new Relationship('relIreneBossIsPaul')
+!relIreneBossIsPaul.type := #BOSS
+!insert (drIreneCho, relIreneBossIsPaul) into ContactToRelationship
+!insert (relIreneBossIsPaul, paulReed) into RelationshipToContact
+
+!new Relationship('relPaulCoworkerIrene')
+!relPaulCoworkerIrene.type := #COWORKER
+!insert (paulReed, relPaulCoworkerIrene) into ContactToRelationship
+!insert (relPaulCoworkerIrene, drIreneCho) into RelationshipToContact

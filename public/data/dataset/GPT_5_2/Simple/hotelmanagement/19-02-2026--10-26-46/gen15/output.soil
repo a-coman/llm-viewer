@@ -1,0 +1,72 @@
+!new Booking('booking17')
+!booking17.startDate := '2028-02-14'
+!booking17.endDate := '2028-02-15'
+!booking17.canceled := false
+!booking17.bookingId := 9500
+!booking17.confirmed := true
+
+!new Customer('customer17')
+!customer17.firstName := 'Ibrahim'
+!customer17.lastName := 'Khan'
+
+!insert (booking17, customer17) into BookingCustomer
+
+!new RoomReservation('rr24')
+!rr24.checkInDate := '2028-02-14'
+!rr24.checkOutDate := '2028-02-14'
+
+!new RoomReservation('rr25')
+!rr25.checkInDate := '2028-02-14'
+!rr25.checkOutDate := '2028-02-15'
+
+!insert (booking17, rr24) into BookingRoomReservation
+!insert (booking17, rr25) into BookingRoomReservation
+
+!new RoomExtra('extraDayUseWorkspace')
+!extraDayUseWorkspace.price := 45.0
+!extraDayUseWorkspace.description := 'Day-use workspace fee'
+
+!insert (rr24, extraDayUseWorkspace) into RoomReservationExtras
+
+!new Room('room020')
+!room020.roomNumber := 20
+!room020.numBeds := 1
+!room020.pricePerNight := 92.0
+!room020.occupied := false
+!room020.blocked := true
+
+!new Room('room021')
+!room021.roomNumber := 21
+!room021.numBeds := 1
+!room021.pricePerNight := 92.0
+!room021.occupied := false
+!room021.blocked := true
+
+!insert (rr25, room020) into RoomReservationRoom
+!insert (rr25, room021) into RoomReservationRoom
+
+!new Bill('bill25')
+!bill25.billId := 17001
+!bill25.price := 45.0
+
+!new Bill('bill26')
+!bill26.billId := 17002
+!bill26.price := 184.0
+
+!insert (bill25, rr24) into BillRoomReservation
+!insert (bill26, rr25) into BillRoomReservation
+
+!insert (booking17, bill25) into BookingBill
+!insert (booking17, bill26) into BookingBill
+
+!new FreeRoomTypesDTO('dtoDayUseSingle')
+!dtoDayUseSingle.roomTypeDescription := 'Compact single (day-use eligible)'
+!dtoDayUseSingle.numBeds := 1
+!dtoDayUseSingle.pricePerNight := 92.0
+!dtoDayUseSingle.numFreeRooms := 6
+
+!new FreeRoomTypesDTO('dtoQuietSingle')
+!dtoQuietSingle.roomTypeDescription := 'Quiet single (inner courtyard)'
+!dtoQuietSingle.numBeds := 1
+!dtoQuietSingle.pricePerNight := 105.0
+!dtoQuietSingle.numFreeRooms := 3

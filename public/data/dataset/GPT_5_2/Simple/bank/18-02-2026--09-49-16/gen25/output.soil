@@ -1,0 +1,85 @@
+!new Bank('bankSE2')
+!bankSE2.country := 'Sweden'
+!bankSE2.name := 'Svea Household Bank'
+!bankSE2.bic := 'SVEASESSXXX'
+
+!new Bank('bankKR2')
+!bankKR2.country := 'South Korea'
+!bankKR2.name := 'Busan Cooperative Bank'
+!bankKR2.bic := 'BUSAKRSEXXX'
+
+!new Bank('bankZA2')
+!bankZA2.country := 'South Africa'
+!bankZA2.name := 'Karoo Reserve Bank'
+!bankZA2.bic := 'KRRBZAJJXXX'
+
+!new Person('h1')
+!h1.firstName := 'Erik'
+!h1.lastName := 'Lund'
+!h1.age := 23
+
+!new Person('h2')
+!h2.firstName := 'Karin'
+!h2.lastName := 'Svensson'
+!h2.age := 50
+
+!new Person('h3')
+!h3.firstName := 'Jonas'
+!h3.lastName := 'Svensson'
+!h3.age := 48
+
+!new Person('h4')
+!h4.firstName := 'Joon'
+!h4.lastName := 'Choi'
+!h4.age := 19
+
+!new Person('h5')
+!h5.firstName := 'Alva'
+!h5.lastName := 'Lund'
+!h5.age := 9
+
+!new Person('h6')
+!h6.firstName := 'Noel'
+!h6.lastName := 'Berg'
+!h6.age := 16
+
+!new Account('seAccA')
+!seAccA.iban := 'SE4550000000058398257466'
+!seAccA.balance := 320
+
+!new Account('seAccB')
+!seAccB.iban := 'SE3550000000061111222233'
+!seAccB.balance := 450000
+
+!new Account('krAccA')
+!krAccA.iban := 'KR00BUSA000000000010'
+!krAccA.balance := 70
+
+!new Account('krAccB')
+!krAccB.iban := 'KR00BUSA000000000999'
+!krAccB.balance := 12000
+
+!insert (bankSE2, seAccA) into AccountOfBanks
+!insert (bankSE2, seAccB) into AccountOfBanks
+!insert (bankKR2, krAccA) into AccountOfBanks
+!insert (bankKR2, krAccB) into AccountOfBanks
+
+!insert (h1, seAccA) into Ownership
+
+!insert (h2, seAccB) into Ownership
+!insert (h3, seAccB) into Ownership
+
+!insert (h4, krAccA) into Ownership
+
+!insert (h1, krAccB) into Ownership
+!insert (h4, krAccB) into Ownership
+
+!insert (h1, seAccA) into Use
+!insert (h5, seAccA) into Use
+!insert (h6, seAccA) into Use
+
+!insert (h4, krAccA) into Use
+!insert (h2, krAccA) into Use
+!insert (h6, krAccA) into Use
+
+!insert (h3, krAccB) into Use

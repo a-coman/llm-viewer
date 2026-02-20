@@ -1,0 +1,132 @@
+!new RentalOffice('office_online_center8')
+!office_online_center8.name := 'National Online Booking Center'
+!office_online_center8.number := 8001
+!office_online_center8.address := '500 Central Ave, Wilmington, DE 19801'
+
+!new RentalOffice('office_fleet_yard8')
+!office_fleet_yard8.name := 'Fleet Pool & Maintenance Yard'
+!office_fleet_yard8.number := 8002
+!office_fleet_yard8.address := '2500 Industrial Pkwy, Hartford, CT 06120'
+
+!new RentalOffice('office_drop_hub8')
+!office_drop_hub8.name := 'Coastal Drop Hub'
+!office_drop_hub8.number := 8003
+!office_drop_hub8.address := '901 Harbor Blvd, Miami, FL 33132'
+
+!new Truck('truck_fl_24ft_801')
+!truck_fl_24ft_801.id := 88001
+!truck_fl_24ft_801.registrationState := #FL
+!truck_fl_24ft_801.licensePlateNumber := 'FL-TRK-88001'
+!truck_fl_24ft_801.vehicleTypeCode := #TRUCK24
+!truck_fl_24ft_801.registrationLastMaintenanceDate := Date('2026-06-04')
+!truck_fl_24ft_801.expirationDate := Date('2027-06-30')
+!truck_fl_24ft_801.odometerReading := 210455
+!truck_fl_24ft_801.gasTankCapacity := 64.0
+!truck_fl_24ft_801.workingRadio := true
+!truck_fl_24ft_801.mileage := 8
+
+!new Truck('truck_de_standard_802')
+!truck_de_standard_802.id := 88002
+!truck_de_standard_802.registrationState := #DE
+!truck_de_standard_802.licensePlateNumber := 'DE-TRK-88002'
+!truck_de_standard_802.vehicleTypeCode := #TRUCK
+!truck_de_standard_802.registrationLastMaintenanceDate := Date('2026-05-22')
+!truck_de_standard_802.expirationDate := Date('2027-05-31')
+!truck_de_standard_802.odometerReading := 48210
+!truck_de_standard_802.gasTankCapacity := 47.5
+!truck_de_standard_802.workingRadio := false
+!truck_de_standard_802.mileage := 12
+
+!new Vehicle('trailer_ct_covered_803')
+!trailer_ct_covered_803.id := 89003
+!trailer_ct_covered_803.registrationState := #CT
+!trailer_ct_covered_803.licensePlateNumber := 'CT-TRL-89003'
+!trailer_ct_covered_803.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ct_covered_803.registrationLastMaintenanceDate := Date('2026-04-30')
+!trailer_ct_covered_803.expirationDate := Date('2027-04-30')
+
+!new Vehicle('trailer_ak_open_804')
+!trailer_ak_open_804.id := 89004
+!trailer_ak_open_804.registrationState := #AK
+!trailer_ak_open_804.licensePlateNumber := 'AK-TRL-89004'
+!trailer_ak_open_804.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ak_open_804.registrationLastMaintenanceDate := Date('2026-01-26')
+!trailer_ak_open_804.expirationDate := Date('2026-12-31')
+
+!insert (office_fleet_yard8, truck_fl_24ft_801) into RentalOfficeVehicle
+!insert (office_fleet_yard8, truck_de_standard_802) into RentalOfficeVehicle
+!insert (office_fleet_yard8, trailer_ct_covered_803) into RentalOfficeVehicle
+!insert (office_drop_hub8, trailer_ak_open_804) into RentalOfficeVehicle
+
+!new Company('cust_co_nightowl8')
+!cust_co_nightowl8.name := 'NightOwl Film Services'
+!cust_co_nightowl8.address := '18 Studio Way, Stamford, CT 06902'
+!cust_co_nightowl8.poorRisk := false
+!cust_co_nightowl8.idNumber := 88014021
+
+!new Company('cust_co_budgethaul8')
+!cust_co_budgethaul8.name := 'BudgetHaul Wholesale'
+!cust_co_budgethaul8.address := '2100 NW 7th Ave, Miami, FL 33127'
+!cust_co_budgethaul8.poorRisk := true
+!cust_co_budgethaul8.idNumber := 88019990
+
+!new Individual('cust_ind_samira8')
+!cust_ind_samira8.name := 'Samira Hassan'
+!cust_ind_samira8.address := '740 NE 14th St, Miami, FL 33132'
+!cust_ind_samira8.poorRisk := false
+!cust_ind_samira8.homePhone := '305-555-0118'
+!cust_ind_samira8.driverLicenseState := #FL
+!cust_ind_samira8.driverLicenseNumber := 61245019
+!cust_ind_samira8.driverLicenseExpirationDate := Date('2029-04-15')
+
+!new RentalAgreement('ra_800001')
+!ra_800001.number := 800001
+!ra_800001.rentalDate := Date('2026-02-02')
+!ra_800001.anticipatedDuration := 2
+!ra_800001.depositPaid := 200.00
+!ra_800001.quotedDailyRate := 0.00
+!ra_800001.quotedRatePerMile := 1.25
+
+!new RentalAgreement('ra_800002')
+!ra_800002.number := 800002
+!ra_800002.rentalDate := Date('2026-02-10')
+!ra_800002.anticipatedDuration := 180
+!ra_800002.depositPaid := 0.00
+!ra_800002.quotedDailyRate := 45.00
+!ra_800002.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_800003')
+!ra_800003.number := 800003
+!ra_800003.rentalDate := Date('2026-02-14')
+!ra_800003.anticipatedDuration := 10
+!ra_800003.depositPaid := 1000.00
+!ra_800003.quotedDailyRate := 99.00
+!ra_800003.quotedRatePerMile := 0.55
+
+!new RentalAgreement('ra_800004')
+!ra_800004.number := 800004
+!ra_800004.rentalDate := Date('2026-03-01')
+!ra_800004.anticipatedDuration := 7
+!ra_800004.depositPaid := 50.00
+!ra_800004.quotedDailyRate := 25.00
+!ra_800004.quotedRatePerMile := 0.00
+
+!insert (office_online_center8, ra_800001) into RentalOfficeRentalAgreementOrigin
+!insert (office_drop_hub8, ra_800001) into RentalOfficeRentalAgreementDrop
+!insert (ra_800001, truck_fl_24ft_801) into RentalAgreementVehicle
+!insert (ra_800001, cust_ind_samira8) into RentalAgreementCustomer
+
+!insert (office_online_center8, ra_800002) into RentalOfficeRentalAgreementOrigin
+!insert (office_fleet_yard8, ra_800002) into RentalOfficeRentalAgreementDrop
+!insert (ra_800002, trailer_ct_covered_803) into RentalAgreementVehicle
+!insert (ra_800002, cust_co_nightowl8) into RentalAgreementCustomer
+
+!insert (office_drop_hub8, ra_800003) into RentalOfficeRentalAgreementOrigin
+!insert (office_drop_hub8, ra_800003) into RentalOfficeRentalAgreementDrop
+!insert (ra_800003, truck_de_standard_802) into RentalAgreementVehicle
+!insert (ra_800003, cust_co_budgethaul8) into RentalAgreementCustomer
+
+!insert (office_fleet_yard8, ra_800004) into RentalOfficeRentalAgreementOrigin
+!insert (office_online_center8, ra_800004) into RentalOfficeRentalAgreementDrop
+!insert (ra_800004, trailer_ak_open_804) into RentalAgreementVehicle
+!insert (ra_800004, cust_ind_samira8) into RentalAgreementCustomer

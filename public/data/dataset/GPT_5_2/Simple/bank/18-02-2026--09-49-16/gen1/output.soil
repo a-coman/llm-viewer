@@ -1,0 +1,78 @@
+!new Bank('bankDE1')
+!bankDE1.country := 'Germany'
+!bankDE1.name := 'Nordstadt Bank AG'
+!bankDE1.bic := 'NORSDEFFXXX'
+
+!new Bank('bankNL1')
+!bankNL1.country := 'Netherlands'
+!bankNL1.name := 'Delta Finans NV'
+!bankNL1.bic := 'DELTNL2AXXX'
+
+!new Person('p1')
+!p1.firstName := 'Anna'
+!p1.lastName := 'Schmidt'
+!p1.age := 34
+
+!new Person('p2')
+!p2.firstName := 'Lukas'
+!p2.lastName := 'Weber'
+!p2.age := 41
+
+!new Person('p3')
+!p3.firstName := 'Marta'
+!p3.lastName := 'Kowalski'
+!p3.age := 28
+
+!new Person('p4')
+!p4.firstName := 'Joris'
+!p4.lastName := 'van Dijk'
+!p4.age := 52
+
+!new Person('p5')
+!p5.firstName := 'Sophie'
+!p5.lastName := 'Weber'
+!p5.age := 16
+
+!new Account('acc1')
+!acc1.iban := 'DE02120300000000202051'
+!acc1.balance := 1250
+
+!new Account('acc2')
+!acc2.iban := 'DE44500105175407324931'
+!acc2.balance := 0
+
+!new Account('acc3')
+!acc3.iban := 'NL91ABNA0417164300'
+!acc3.balance := 98765
+
+!new Account('acc4')
+!acc4.iban := 'NL39RABO0300065264'
+!acc4.balance := 250
+
+!insert (bankDE1, acc1) into AccountOfBanks
+!insert (bankDE1, acc2) into AccountOfBanks
+!insert (bankNL1, acc3) into AccountOfBanks
+!insert (bankNL1, acc4) into AccountOfBanks
+
+!insert (p1, acc1) into Ownership
+!insert (p2, acc1) into Ownership
+
+!insert (p1, acc2) into Ownership
+
+!insert (p4, acc3) into Ownership
+
+!insert (p3, acc4) into Ownership
+!insert (p4, acc4) into Ownership
+
+!insert (p1, acc1) into Use
+!insert (p2, acc1) into Use
+!insert (p5, acc1) into Use
+
+!insert (p1, acc2) into Use
+!insert (p3, acc2) into Use
+
+!insert (p4, acc3) into Use
+
+!insert (p3, acc4) into Use
+!insert (p4, acc4) into Use
+!insert (p2, acc4) into Use

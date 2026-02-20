@@ -1,0 +1,205 @@
+!new Restaurant('rest3')
+!rest3.name := 'Mountain Hearth'
+
+!new Owner('own4')
+!own4.name := 'Harper Singh'
+!own4.percentageShares := 50
+
+!new Owner('own5')
+!own5.name := 'Elena Novak'
+!own5.percentageShares := 30
+
+!new Owner('own6')
+!own6.name := 'Miguel Santos'
+!own6.percentageShares := 20
+
+!insert (rest3, own4) into RestaurantOwner
+!insert (rest3, own5) into RestaurantOwner
+!insert (rest3, own6) into RestaurantOwner
+
+!new HeadWaiter('hw3')
+!hw3.name := 'Nora Fields'
+!hw3.dateOfBirth := Date('1987-08-26')
+!hw3.phoneNumber := '555-4000'
+
+!new Waiter('w5')
+!w5.name := 'Aisha Khan'
+!w5.dateOfBirth := Date('1999-01-09')
+!w5.phoneNumber := '555-4001'
+!w5.spokenLanguage := #English
+
+!new Waiter('w6')
+!w6.name := 'Luis Herrera'
+!w6.dateOfBirth := Date('1995-05-23')
+!w6.phoneNumber := '555-4002'
+!w6.spokenLanguage := #Spanish
+
+!insert (hw3, w5) into HeadWaiterWaiter
+!insert (hw3, w6) into HeadWaiterWaiter
+
+!new Manager('mgr1')
+!mgr1.name := 'Donna Lee'
+!mgr1.dateOfBirth := Date('1980-10-01')
+!mgr1.phoneNumber := '555-4010'
+
+!new Chef('chef3')
+!chef3.name := 'Kenji Watanabe'
+!chef3.dateOfBirth := Date('1976-03-18')
+!chef3.phoneNumber := '555-4100'
+
+!new Cook('cook4')
+!cook4.name := 'Sara Ahmed'
+!cook4.dateOfBirth := Date('1990-02-12')
+!cook4.phoneNumber := '555-4101'
+!cook4.yearsOfExperience := 14
+
+!new Cook('cook5')
+!cook5.name := 'Tom Becker'
+!cook5.dateOfBirth := Date('1998-09-05')
+!cook5.phoneNumber := '555-4102'
+!cook5.yearsOfExperience := 0
+
+!insert (chef3, cook4) into ChefCook
+!insert (chef3, cook5) into ChefCook
+
+!new Allergen('alg3Gluten')
+!alg3Gluten.type := #Gluten
+
+!new Allergen('alg3Nuts')
+!alg3Nuts.type := #Nuts
+
+!new FoodItem('fiFlour')
+!fiFlour.number := 201
+!fiFlour.description := 'All-purpose flour'
+!fiFlour.purchaseFlag := true
+!fiFlour.unit := #Pound
+
+!new FoodItem('fiTortillaSheets')
+!fiTortillaSheets.number := 202
+!fiTortillaSheets.description := 'Tortilla sheets'
+!fiTortillaSheets.purchaseFlag := true
+!fiTortillaSheets.unit := #Sheet
+
+!new FoodItem('fiBlackBeans')
+!fiBlackBeans.number := 203
+!fiBlackBeans.description := 'Black beans'
+!fiBlackBeans.purchaseFlag := true
+!fiBlackBeans.unit := #Gram
+
+!new FoodItem('fiWalnuts')
+!fiWalnuts.number := 204
+!fiWalnuts.description := 'Walnuts'
+!fiWalnuts.purchaseFlag := true
+!fiWalnuts.unit := #Ounce
+
+!new FoodItem('fiCoffeeBeans')
+!fiCoffeeBeans.number := 205
+!fiCoffeeBeans.description := 'Coffee beans'
+!fiCoffeeBeans.purchaseFlag := true
+!fiCoffeeBeans.unit := #Pound
+
+!insert (fiFlour, alg3Gluten) into FoodItemAllergen
+!insert (fiTortillaSheets, alg3Gluten) into FoodItemAllergen
+!insert (fiWalnuts, alg3Nuts) into FoodItemAllergen
+
+!new MenuItem('miBeanSoup')
+!miBeanSoup.description := 'Smoky black bean soup'
+!miBeanSoup.prepTime := 15.0
+!miBeanSoup.classification := #Main
+
+!new MenuItem('miWalnutBrownie')
+!miWalnutBrownie.description := 'Warm walnut brownie'
+!miWalnutBrownie.prepTime := 10.0
+!miWalnutBrownie.classification := #Dessert
+
+!new MenuItem('miCoffee')
+!miCoffee.description := 'House-brewed coffee'
+!miCoffee.prepTime := 3.0
+!miCoffee.classification := #Beverage
+
+!new MenuItem('miCrispTortilla')
+!miCrispTortilla.description := 'Crisp tortilla chips'
+!miCrispTortilla.prepTime := 5.0
+!miCrispTortilla.classification := #Apetizer
+
+!insert (miBeanSoup, chef3) into MenuItemChef
+!insert (miWalnutBrownie, chef3) into MenuItemChef
+!insert (miCoffee, chef3) into MenuItemChef
+!insert (miCrispTortilla, chef3) into MenuItemChef
+
+!insert (miBeanSoup, fiBlackBeans) into MenuItemFoodItem
+!insert (miWalnutBrownie, fiFlour) into MenuItemFoodItem
+!insert (miWalnutBrownie, fiWalnuts) into MenuItemFoodItem
+!insert (miCoffee, fiCoffeeBeans) into MenuItemFoodItem
+!insert (miCrispTortilla, fiTortillaSheets) into MenuItemFoodItem
+
+!new Banquet('banq2')
+!banq2.time := Time('17:00')
+!banq2.date := Date('2026-04-12')
+!banq2.numberPeople := 12
+!banq2.name := 'Green Valley Club'
+!banq2.phoneNumber := '555-5000'
+!banq2.number := 5001
+!banq2.groupName := 'Annual Board Dinner'
+!banq2.paymentMethod := #Cash
+!banq2.busService := false
+
+!insert (rest3, banq2) into RestaurantReservation
+!insert (banq2, w6) into ReservationWaiter
+
+!new Table('tBanq2A')
+!tBanq2A.number := 61
+!tBanq2A.description := 'Private room table A'
+!tBanq2A.capacity := 6
+!insert (banq2, tBanq2A) into ReservationTable
+
+!new Table('tBanq2B')
+!tBanq2B.number := 62
+!tBanq2B.description := 'Private room table B'
+!tBanq2B.capacity := 6
+!insert (banq2, tBanq2B) into ReservationTable
+
+!new ItemOrder('ioBanq2_1')
+!ioBanq2_1.time := Time('17:20')
+!insert (banq2, ioBanq2_1) into ReservationItemOrdered
+!insert (ioBanq2_1, miBeanSoup) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq2_2')
+!ioBanq2_2.time := Time('17:20')
+!insert (banq2, ioBanq2_2) into ReservationItemOrdered
+!insert (ioBanq2_2, miCoffee) into ItemOrderMenuItem
+
+!new Individual('res3')
+!res3.time := Time('08:15')
+!res3.date := Date('2026-04-13')
+!res3.numberPeople := 3
+!res3.name := 'Walk-in Guest'
+!res3.phoneNumber := '555-5001'
+!res3.number := 5002
+!res3.seating := #Inside
+!res3.smoking := #NonSmoking
+
+!insert (rest3, res3) into RestaurantReservation
+!insert (res3, w5) into ReservationWaiter
+
+!new Table('tRes3A')
+!tRes3A.number := 12
+!tRes3A.description := 'Booth near fireplace'
+!tRes3A.capacity := 5
+!insert (res3, tRes3A) into ReservationTable
+
+!new ItemOrder('ioRes3_1')
+!ioRes3_1.time := Time('08:25')
+!insert (res3, ioRes3_1) into ReservationItemOrdered
+!insert (ioRes3_1, miCoffee) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes3_2')
+!ioRes3_2.time := Time('08:30')
+!insert (res3, ioRes3_2) into ReservationItemOrdered
+!insert (ioRes3_2, miCrispTortilla) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq2')
+!dietReq2.diet := #Vegan
+
+!new ReportedAllergy('repAlg2')
+!repAlg2.allergen := #Nuts

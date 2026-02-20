@@ -1,0 +1,94 @@
+!new Currency('curCLP')
+!curCLP.name := 'Chilean Peso'
+!curCLP.abbreviation := 'CLP'
+
+!new Currency('curNGN')
+!curNGN.name := 'Nigerian Naira'
+!curNGN.abbreviation := 'NGN'
+
+!new Currency('curIDR')
+!curIDR.name := 'Indonesian Rupiah'
+!curIDR.abbreviation := 'IDR'
+
+
+!new Expense('expOctSolarInstall')
+!expOctSolarInstall.amount := 8500.00
+!expOctSolarInstall.startDate := Date('2026-10-05')
+!expOctSolarInstall.endDate := Date('2026-10-22')
+
+!new Bill('billSolarPanelsKit_2026_10_05')
+!billSolarPanelsKit_2026_10_05.amount := 7500.00
+!billSolarPanelsKit_2026_10_05.category := 'Home - Solar panels kit'
+!billSolarPanelsKit_2026_10_05.date := Date('2026-10-05')
+!billSolarPanelsKit_2026_10_05.paymentMethod := #CREDIT_CARD
+!billSolarPanelsKit_2026_10_05.status := #PENDING
+
+!new Bill('billElectricalPermit_2026_10_07')
+!billElectricalPermit_2026_10_07.amount := 500.00
+!billElectricalPermit_2026_10_07.category := 'Home - Electrical permit'
+!billElectricalPermit_2026_10_07.date := Date('2026-10-07')
+!billElectricalPermit_2026_10_07.paymentMethod := #CASH
+!billElectricalPermit_2026_10_07.status := #VALIDATED
+
+!new Bill('billInstallerLabor_2026_10_22')
+!billInstallerLabor_2026_10_22.amount := 500.00
+!billInstallerLabor_2026_10_22.category := 'Home - Solar installation labor'
+!billInstallerLabor_2026_10_22.date := Date('2026-10-22')
+!billInstallerLabor_2026_10_22.paymentMethod := #CHECK
+!billInstallerLabor_2026_10_22.status := #VERIFIED
+
+!insert (expOctSolarInstall, billSolarPanelsKit_2026_10_05) into ExpenseContainsBills
+!insert (expOctSolarInstall, billElectricalPermit_2026_10_07) into ExpenseContainsBills
+!insert (expOctSolarInstall, billInstallerLabor_2026_10_22) into ExpenseContainsBills
+
+!insert (billSolarPanelsKit_2026_10_05, curCLP) into BillCurrency
+!insert (billElectricalPermit_2026_10_07, curCLP) into BillCurrency
+!insert (billInstallerLabor_2026_10_22, curCLP) into BillCurrency
+
+
+!new Expense('expAprMortgageClosingCosts')
+!expAprMortgageClosingCosts.amount := 1375.25
+!expAprMortgageClosingCosts.startDate := Date('2026-04-14')
+!expAprMortgageClosingCosts.endDate := Date('2026-04-14')
+
+!new Bill('billPropertyAppraisal_2026_04_14')
+!billPropertyAppraisal_2026_04_14.amount := 450.00
+!billPropertyAppraisal_2026_04_14.category := 'Finance - Property appraisal'
+!billPropertyAppraisal_2026_04_14.date := Date('2026-04-14')
+!billPropertyAppraisal_2026_04_14.paymentMethod := #CREDIT_CARD
+!billPropertyAppraisal_2026_04_14.status := #VERIFIED
+
+!new Bill('billNotaryFees_2026_04_14')
+!billNotaryFees_2026_04_14.amount := 125.25
+!billNotaryFees_2026_04_14.category := 'Finance - Notary fees'
+!billNotaryFees_2026_04_14.date := Date('2026-04-14')
+!billNotaryFees_2026_04_14.paymentMethod := #CASH
+!billNotaryFees_2026_04_14.status := #VALIDATED
+
+!new Bill('billBankProcessing_2026_04_14')
+!billBankProcessing_2026_04_14.amount := 300.00
+!billBankProcessing_2026_04_14.category := 'Finance - Bank processing fee'
+!billBankProcessing_2026_04_14.date := Date('2026-04-14')
+!billBankProcessing_2026_04_14.paymentMethod := #CHECK
+!billBankProcessing_2026_04_14.status := #PENDING
+
+!new Bill('billInsuranceEscrow_2026_04_14')
+!billInsuranceEscrow_2026_04_14.amount := 500.00
+!billInsuranceEscrow_2026_04_14.category := 'Finance - Insurance escrow deposit'
+!billInsuranceEscrow_2026_04_14.date := Date('2026-04-14')
+!billInsuranceEscrow_2026_04_14.paymentMethod := #CREDIT_CARD
+!billInsuranceEscrow_2026_04_14.status := #DRAFT
+
+!insert (expAprMortgageClosingCosts, billPropertyAppraisal_2026_04_14) into ExpenseContainsBills
+!insert (expAprMortgageClosingCosts, billNotaryFees_2026_04_14) into ExpenseContainsBills
+!insert (expAprMortgageClosingCosts, billBankProcessing_2026_04_14) into ExpenseContainsBills
+!insert (expAprMortgageClosingCosts, billInsuranceEscrow_2026_04_14) into ExpenseContainsBills
+
+!insert (billPropertyAppraisal_2026_04_14, curNGN) into BillCurrency
+!insert (billNotaryFees_2026_04_14, curNGN) into BillCurrency
+!insert (billBankProcessing_2026_04_14, curIDR) into BillCurrency
+!insert (billInsuranceEscrow_2026_04_14, curIDR) into BillCurrency
+
+!new Comment('cmtMortgage1')
+!cmtMortgage1.text := 'Closing costs paid on signing day; escrow deposit still marked as draft until the lender issues the final statement.'
+!insert (expAprMortgageClosingCosts, cmtMortgage1) into ExpenseComment

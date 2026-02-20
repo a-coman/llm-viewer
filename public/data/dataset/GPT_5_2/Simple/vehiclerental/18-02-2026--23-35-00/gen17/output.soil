@@ -1,0 +1,188 @@
+!new RentalOffice('office_denver_res4')
+!office_denver_res4.name := 'Rocky Mountain Reservations Desk'
+!office_denver_res4.number := 4001
+!office_denver_res4.address := '1700 Lincoln St, Denver, CO 80203'
+
+!new RentalOffice('office_sandiego_ops4')
+!office_sandiego_ops4.name := 'Coastal Operations Yard - San Diego'
+!office_sandiego_ops4.number := 4002
+!office_sandiego_ops4.address := '3120 Kurtz St, San Diego, CA 92110'
+
+!new RentalOffice('office_huntsville4')
+!office_huntsville4.name := 'Tennessee Valley Rentals - Huntsville'
+!office_huntsville4.number := 4003
+!office_huntsville4.address := '2850 Wall Triana Hwy, Huntsville, AL 35824'
+
+!new RentalOffice('office_fortlauderdale4')
+!office_fortlauderdale4.name := 'Fort Lauderdale Drop & Service Lot'
+!office_fortlauderdale4.number := 4004
+!office_fortlauderdale4.address := '600 Terminal Dr, Fort Lauderdale, FL 33315'
+
+!new Truck('truck_ca_24ft_401')
+!truck_ca_24ft_401.id := 84001
+!truck_ca_24ft_401.registrationState := #CA
+!truck_ca_24ft_401.licensePlateNumber := 'CA-TRK-84001'
+!truck_ca_24ft_401.vehicleTypeCode := #TRUCK24
+!truck_ca_24ft_401.registrationLastMaintenanceDate := Date('2026-05-29')
+!truck_ca_24ft_401.expirationDate := Date('2027-05-31')
+!truck_ca_24ft_401.odometerReading := 142330
+!truck_ca_24ft_401.gasTankCapacity := 65.0
+!truck_ca_24ft_401.workingRadio := true
+!truck_ca_24ft_401.mileage := 8
+
+!new Truck('truck_al_10ft_402')
+!truck_al_10ft_402.id := 84002
+!truck_al_10ft_402.registrationState := #AL
+!truck_al_10ft_402.licensePlateNumber := 'AL-TRK-84002'
+!truck_al_10ft_402.vehicleTypeCode := #TRUCK10
+!truck_al_10ft_402.registrationLastMaintenanceDate := Date('2026-04-12')
+!truck_al_10ft_402.expirationDate := Date('2027-04-30')
+!truck_al_10ft_402.odometerReading := 25505
+!truck_al_10ft_402.gasTankCapacity := 36.0
+!truck_al_10ft_402.workingRadio := false
+!truck_al_10ft_402.mileage := 15
+
+!new Vehicle('trailer_ca_covered_401')
+!trailer_ca_covered_401.id := 84501
+!trailer_ca_covered_401.registrationState := #CA
+!trailer_ca_covered_401.licensePlateNumber := 'CA-TRL-84501'
+!trailer_ca_covered_401.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ca_covered_401.registrationLastMaintenanceDate := Date('2026-03-07')
+!trailer_ca_covered_401.expirationDate := Date('2027-03-31')
+
+!new Vehicle('trailer_co_open_401')
+!trailer_co_open_401.id := 84502
+!trailer_co_open_401.registrationState := #CO
+!trailer_co_open_401.licensePlateNumber := 'CO-TRL-84502'
+!trailer_co_open_401.vehicleTypeCode := #OPEN_TRAILER
+!trailer_co_open_401.registrationLastMaintenanceDate := Date('2026-02-18')
+!trailer_co_open_401.expirationDate := Date('2027-02-28')
+
+!new Vehicle('trailer_ct_open_401')
+!trailer_ct_open_401.id := 84503
+!trailer_ct_open_401.registrationState := #CT
+!trailer_ct_open_401.licensePlateNumber := 'CT-TRL-84503'
+!trailer_ct_open_401.vehicleTypeCode := #OPEN_TRAILER
+!trailer_ct_open_401.registrationLastMaintenanceDate := Date('2026-04-03')
+!trailer_ct_open_401.expirationDate := Date('2027-04-30')
+
+!insert (office_sandiego_ops4, truck_ca_24ft_401) into RentalOfficeVehicle
+!insert (office_huntsville4, truck_al_10ft_402) into RentalOfficeVehicle
+!insert (office_sandiego_ops4, trailer_ca_covered_401) into RentalOfficeVehicle
+!insert (office_denver_res4, trailer_co_open_401) into RentalOfficeVehicle
+!insert (office_fortlauderdale4, trailer_ct_open_401) into RentalOfficeVehicle
+
+!new Company('cust_co_vertexmed4')
+!cust_co_vertexmed4.name := 'Vertex Medical Logistics'
+!cust_co_vertexmed4.address := '4550 Morena Blvd, San Diego, CA 92117'
+!cust_co_vertexmed4.poorRisk := false
+!cust_co_vertexmed4.idNumber := 41088021
+
+!new Individual('cust_ind_renee4')
+!cust_ind_renee4.name := 'Renee Lawson'
+!cust_ind_renee4.address := '2105 Governors Dr SW, Huntsville, AL 35801'
+!cust_ind_renee4.poorRisk := false
+!cust_ind_renee4.homePhone := '256-555-0139'
+!cust_ind_renee4.driverLicenseState := #AL
+!cust_ind_renee4.driverLicenseNumber := 55019384
+!cust_ind_renee4.driverLicenseExpirationDate := Date('2028-07-12')
+
+!new Individual('cust_ind_malcolm4')
+!cust_ind_malcolm4.name := 'Malcolm Pierce'
+!cust_ind_malcolm4.address := '920 E Las Olas Blvd, Fort Lauderdale, FL 33301'
+!cust_ind_malcolm4.poorRisk := true
+!cust_ind_malcolm4.homePhone := '954-555-0170'
+!cust_ind_malcolm4.driverLicenseState := #FL
+!cust_ind_malcolm4.driverLicenseNumber := 88077102
+!cust_ind_malcolm4.driverLicenseExpirationDate := Date('2026-03-31')
+
+!new RentalAgreement('ra_400001')
+!ra_400001.number := 400001
+!ra_400001.rentalDate := Date('2026-01-11')
+!ra_400001.anticipatedDuration := 90
+!ra_400001.depositPaid := 0.00
+!ra_400001.quotedDailyRate := 69.00
+!ra_400001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_400002')
+!ra_400002.number := 400002
+!ra_400002.rentalDate := Date('2026-02-01')
+!ra_400002.anticipatedDuration := 2
+!ra_400002.depositPaid := 1200.00
+!ra_400002.quotedDailyRate := 210.00
+!ra_400002.quotedRatePerMile := 0.98
+
+!new RentalAgreement('ra_400003')
+!ra_400003.number := 400003
+!ra_400003.rentalDate := Date('2026-02-05')
+!ra_400003.anticipatedDuration := 7
+!ra_400003.depositPaid := 300.00
+!ra_400003.quotedDailyRate := 45.00
+!ra_400003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_400004')
+!ra_400004.number := 400004
+!ra_400004.rentalDate := Date('2026-02-12')
+!ra_400004.anticipatedDuration := 1
+!ra_400004.depositPaid := 0.00
+!ra_400004.quotedDailyRate := 35.00
+!ra_400004.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_400005')
+!ra_400005.number := 400005
+!ra_400005.rentalDate := Date('2026-03-03')
+!ra_400005.anticipatedDuration := 4
+!ra_400005.depositPaid := 500.00
+!ra_400005.quotedDailyRate := 160.00
+!ra_400005.quotedRatePerMile := 0.85
+
+!new RentalAgreement('ra_400006')
+!ra_400006.number := 400006
+!ra_400006.rentalDate := Date('2026-03-15')
+!ra_400006.anticipatedDuration := 14
+!ra_400006.depositPaid := 150.00
+!ra_400006.quotedDailyRate := 29.95
+!ra_400006.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_400007')
+!ra_400007.number := 400007
+!ra_400007.rentalDate := Date('2026-04-01')
+!ra_400007.anticipatedDuration := 3
+!ra_400007.depositPaid := 250.00
+!ra_400007.quotedDailyRate := 79.00
+!ra_400007.quotedRatePerMile := 0.60
+
+!insert (office_denver_res4, ra_400001) into RentalOfficeRentalAgreementOrigin
+!insert (office_denver_res4, ra_400001) into RentalOfficeRentalAgreementDrop
+!insert (ra_400001, trailer_co_open_401) into RentalAgreementVehicle
+!insert (ra_400001, cust_co_vertexmed4) into RentalAgreementCustomer
+
+!insert (office_denver_res4, ra_400002) into RentalOfficeRentalAgreementOrigin
+!insert (office_fortlauderdale4, ra_400002) into RentalOfficeRentalAgreementDrop
+!insert (ra_400002, truck_ca_24ft_401) into RentalAgreementVehicle
+!insert (ra_400002, cust_co_vertexmed4) into RentalAgreementCustomer
+
+!insert (office_huntsville4, ra_400003) into RentalOfficeRentalAgreementOrigin
+!insert (office_huntsville4, ra_400003) into RentalOfficeRentalAgreementDrop
+!insert (ra_400003, truck_al_10ft_402) into RentalAgreementVehicle
+!insert (ra_400003, cust_ind_renee4) into RentalAgreementCustomer
+
+!insert (office_denver_res4, ra_400004) into RentalOfficeRentalAgreementOrigin
+!insert (office_sandiego_ops4, ra_400004) into RentalOfficeRentalAgreementDrop
+!insert (ra_400004, trailer_ca_covered_401) into RentalAgreementVehicle
+!insert (ra_400004, cust_ind_renee4) into RentalAgreementCustomer
+
+!insert (office_sandiego_ops4, ra_400005) into RentalOfficeRentalAgreementOrigin
+!insert (office_sandiego_ops4, ra_400005) into RentalOfficeRentalAgreementDrop
+!insert (ra_400005, truck_ca_24ft_401) into RentalAgreementVehicle
+!insert (ra_400005, cust_ind_malcolm4) into RentalAgreementCustomer
+
+!insert (office_fortlauderdale4, ra_400006) into RentalOfficeRentalAgreementOrigin
+!insert (office_fortlauderdale4, ra_400006) into RentalOfficeRentalAgreementDrop
+!insert (ra_400006, trailer_ct_open_401) into RentalAgreementVehicle
+!insert (ra_400006, cust_ind_malcolm4) into RentalAgreementCustomer
+
+!insert (office_denver_res4, ra_400007) into RentalOfficeRentalAgreementOrigin
+!insert (office_huntsville4, ra_400007) into RentalOfficeRentalAgreementDrop
+!insert (ra_400007, truck_al_10ft_402) into RentalAgreementVehicle
+!insert (ra_400007, cust_co_vertexmed4) into RentalAgreementCustomer

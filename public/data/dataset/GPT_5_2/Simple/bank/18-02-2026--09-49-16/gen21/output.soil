@@ -1,0 +1,65 @@
+!new Bank('bankUS2')
+!bankUS2.country := 'United States'
+!bankUS2.name := 'Lakeside Trust Bank'
+!bankUS2.bic := 'LSTBUS44XXX'
+
+!new Bank('bankES2')
+!bankES2.country := 'Spain'
+!bankES2.name := 'Banco de Castilla'
+!bankES2.bic := 'BDCAESMMXXX'
+
+!new Person('pA')
+!pA.firstName := 'Chloe'
+!pA.lastName := 'Morgan'
+!pA.age := 18
+
+!new Person('pB')
+!pB.firstName := 'Henry'
+!pB.lastName := 'Wallace'
+!pB.age := 72
+
+!new Person('pC')
+!pC.firstName := 'Alicia'
+!pC.lastName := 'Perez'
+!pC.age := 45
+
+!new Person('pD')
+!pD.firstName := 'Jordan'
+!pD.lastName := 'Nguyen'
+!pD.age := 29
+
+!new Person('pE')
+!pE.firstName := 'Evan'
+!pE.lastName := 'Brooks'
+!pE.age := 16
+
+!new Person('pF')
+!pF.firstName := 'Priyanka'
+!pF.lastName := 'Shah'
+!pF.age := 31
+
+!new Account('accX1')
+!accX1.iban := 'US00LSTB000000000101'
+!accX1.balance := 10
+
+!new Account('accX2')
+!accX2.iban := 'US00LSTB000000000202'
+!accX2.balance := 999
+
+!new Account('accX3')
+!accX3.iban := 'US00LSTB000000000303'
+!accX3.balance := 20000
+
+!insert (bankUS2, accX1) into AccountOfBanks
+!insert (bankUS2, accX2) into AccountOfBanks
+!insert (bankUS2, accX3) into AccountOfBanks
+
+!insert (pA, accX1) into Ownership
+!insert (pB, accX2) into Ownership
+!insert (pC, accX2) into Ownership
+!insert (pD, accX3) into Ownership
+
+!insert (pE, accX1) into Use
+!insert (pE, accX3) into Use
+!insert (pF, accX2) into Use
+!insert (pA, accX2) into Use

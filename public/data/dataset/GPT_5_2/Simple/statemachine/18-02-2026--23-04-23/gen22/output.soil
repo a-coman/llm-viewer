@@ -1,0 +1,162 @@
+!new StateMachine('smStateNew')
+!smStateNew.name := 'orderStateNew'
+!new State('stNew')
+!stNew.name := 'new'
+!insert (smStateNew, stNew) into StateMachineContainsStates
+!insert (smStateNew, stNew) into StateMachineStartsStates
+
+!new StateMachine('smStatePacked')
+!smStatePacked.name := 'orderStatePacked'
+!new State('stPacked')
+!stPacked.name := 'packed'
+!insert (smStatePacked, stPacked) into StateMachineContainsStates
+!insert (smStatePacked, stPacked) into StateMachineStartsStates
+
+!new StateMachine('smStateShipped')
+!smStateShipped.name := 'orderStateShipped'
+!new State('stShipped')
+!stShipped.name := 'shipped'
+!insert (smStateShipped, stShipped) into StateMachineContainsStates
+!insert (smStateShipped, stShipped) into StateMachineStartsStates
+
+!new StateMachine('smStateDelivered')
+!smStateDelivered.name := 'orderStateDelivered'
+!new State('stDelivered')
+!stDelivered.name := 'delivered'
+!insert (smStateDelivered, stDelivered) into StateMachineContainsStates
+!insert (smStateDelivered, stDelivered) into StateMachineStartsStates
+
+!new StateMachine('smStateReturned')
+!smStateReturned.name := 'orderStateReturned'
+!new State('stReturned')
+!stReturned.name := 'returned'
+!insert (smStateReturned, stReturned) into StateMachineContainsStates
+!insert (smStateReturned, stReturned) into StateMachineStartsStates
+
+!new StateMachine('smStateCancelled')
+!smStateCancelled.name := 'orderStateCancelled'
+!new State('stCancelled')
+!stCancelled.name := 'cancelled'
+!insert (smStateCancelled, stCancelled) into StateMachineContainsStates
+!insert (smStateCancelled, stCancelled) into StateMachineStartsStates
+
+
+!new StateMachine('smLogisticsProcess')
+!smLogisticsProcess.name := 'logisticsOrchestrator'
+
+!new State('lpNew')
+!lpNew.name := 'new'
+!new State('lpPacked')
+!lpPacked.name := 'packed'
+!new State('lpShipped')
+!lpShipped.name := 'shipped'
+!new State('lpDelivered')
+!lpDelivered.name := 'delivered'
+!new State('lpReturned')
+!lpReturned.name := 'returned'
+!new State('lpCancelled')
+!lpCancelled.name := 'cancelled'
+
+!insert (smLogisticsProcess, lpNew) into StateMachineContainsStates
+!insert (smLogisticsProcess, lpPacked) into StateMachineContainsStates
+!insert (smLogisticsProcess, lpShipped) into StateMachineContainsStates
+!insert (smLogisticsProcess, lpDelivered) into StateMachineContainsStates
+!insert (smLogisticsProcess, lpReturned) into StateMachineContainsStates
+!insert (smLogisticsProcess, lpCancelled) into StateMachineContainsStates
+
+!insert (smLogisticsProcess, lpNew) into StateMachineStartsStates
+
+
+!new Transition('trPackOrder')
+!trPackOrder.name := 'packOrder'
+!new TimeEvent('evPackOrder')
+!evPackOrder.time := 45
+
+!new Transition('trShipOrder')
+!trShipOrder.name := 'handoverToCarrier'
+!new TimeEvent('evShipOrder')
+!evShipOrder.time := 180
+
+!new Transition('trDeliverOrder')
+!trDeliverOrder.name := 'deliverToCustomer'
+!new TimeEvent('evDeliverOrder')
+!evDeliverOrder.time := 2880
+
+!new Transition('trCustomerReturn')
+!trCustomerReturn.name := 'customerReturn'
+!new TimeEvent('evCustomerReturn')
+!evCustomerReturn.time := 10080
+
+!new Transition('trReturnWindowCloses')
+!trReturnWindowCloses.name := 'returnWindowCloses'
+!new TimeEvent('evReturnWindowCloses')
+!evReturnWindowCloses.time := 20160
+
+!new Transition('trCancelBeforePacking')
+!trCancelBeforePacking.name := 'cancelBeforePacking'
+!new TimeEvent('evCancelBeforePacking')
+!evCancelBeforePacking.time := 10
+
+!new Transition('trReshipAfterReturn')
+!trReshipAfterReturn.name := 'reshipReplacement'
+!new TimeEvent('evReshipAfterReturn')
+!evReshipAfterReturn.time := 7200
+
+
+!insert (smLogisticsProcess, trPackOrder) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trShipOrder) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trDeliverOrder) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trCustomerReturn) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trReturnWindowCloses) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trCancelBeforePacking) into StateMachineContainsTransitions
+!insert (smLogisticsProcess, trReshipAfterReturn) into StateMachineContainsTransitions
+
+!insert (trPackOrder, evPackOrder) into TransitionContainsEvents
+!insert (trShipOrder, evShipOrder) into TransitionContainsEvents
+!insert (trDeliverOrder, evDeliverOrder) into TransitionContainsEvents
+!insert (trCustomerReturn, evCustomerReturn) into TransitionContainsEvents
+!insert (trReturnWindowCloses, evReturnWindowCloses) into TransitionContainsEvents
+!insert (trCancelBeforePacking, evCancelBeforePacking) into TransitionContainsEvents
+!insert (trReshipAfterReturn, evReshipAfterReturn) into TransitionContainsEvents
+
+
+!insert (lpNew, trPackOrder) into StateTransition
+!insert (trPackOrder, lpPacked) into TransitionState
+
+!insert (lpPacked, trShipOrder) into StateTransition
+!insert (trShipOrder, lpShipped) into TransitionState
+
+!insert (lpShipped, trDeliverOrder) into StateTransition
+!insert (trDeliverOrder, lpDelivered) into TransitionState
+
+!insert (lpDelivered, trCustomerReturn) into StateTransition
+!insert (trCustomerReturn, lpReturned) into TransitionState
+
+!insert (lpDelivered, trReturnWindowCloses) into StateTransition
+!insert (trReturnWindowCloses, lpDelivered) into TransitionState
+
+!insert (lpNew, trCancelBeforePacking) into StateTransition
+!insert (trCancelBeforePacking, lpCancelled) into TransitionState
+
+!insert (lpReturned, trReshipAfterReturn) into StateTransition
+!insert (trReshipAfterReturn, lpShipped) into TransitionState
+
+
+
+!new StateMachine('smWaterFilter')
+!smWaterFilter.name := 'waterFilterController'
+
+!new State('wfOperational')
+!wfOperational.name := 'operational'
+!insert (smWaterFilter, wfOperational) into StateMachineContainsStates
+!insert (smWaterFilter, wfOperational) into StateMachineStartsStates
+
+!new Transition('trWfFlushCycle')
+!trWfFlushCycle.name := 'flushCycle'
+!new TimeEvent('evWfFlushCycle')
+!evWfFlushCycle.time := 30
+
+!insert (smWaterFilter, trWfFlushCycle) into StateMachineContainsTransitions
+!insert (trWfFlushCycle, evWfFlushCycle) into TransitionContainsEvents
+!insert (wfOperational, trWfFlushCycle) into StateTransition
+!insert (trWfFlushCycle, wfOperational) into TransitionState

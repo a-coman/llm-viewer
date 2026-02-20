@@ -1,0 +1,79 @@
+!new Client('hC1')
+!hC1.clientId := 1701
+!hC1.isSuspended := false
+
+!new Client('hC2')
+!hC2.clientId := 1702
+!hC2.isSuspended := false
+
+!new Client('hC3')
+!hC3.clientId := 1703
+!hC3.isSuspended := true
+
+!new Client('hC4')
+!hC4.clientId := 1704
+!hC4.isSuspended := false
+
+!new Client('hC5')
+!hC5.clientId := 1705
+!hC5.isSuspended := true
+
+!new Actor('hA1')
+!hA1.name := 'Camille Hart'
+
+!new Actor('hA2')
+!hA2.name := 'Noel Ramirez'
+
+!new Actor('hA3')
+!hA3.name := 'Sanjay Kapoor'
+
+!new Actor('hA4')
+!hA4.name := 'Marta Nowicka'
+
+!new Actor('hA5')
+!hA5.name := 'Evan Sinclair'
+
+!new Cassette('hTape1')
+!hTape1.title := 'Workout Mix: Cardio Classics'
+!hTape1.availableCopies := 8
+
+!new Cassette('hTape2')
+!hTape2.title := 'Travel Guide: Islands of the North'
+!hTape2.availableCopies := 0
+
+!new Movie('hMov1')
+!hMov1.title := 'Signal Breaker'
+!hMov1.availableCopies := 2
+!hMov1.genre := #Action
+
+!new Series('hSer1')
+!hSer1.title := 'The Short Detectives'
+!hSer1.availableCopies := 1
+!hSer1.episode := 55
+
+!insert (hTape1, hA1) into CassetteActor
+!insert (hTape1, hA2) into CassetteActor
+!insert (hTape1, hA3) into CassetteActor
+
+!insert (hTape2, hA2) into CassetteActor
+
+!insert (hMov1, hA1) into CassetteActor
+!insert (hMov1, hA2) into CassetteActor
+!insert (hMov1, hA4) into CassetteActor
+!insert (hMov1, hA5) into CassetteActor
+
+!insert (hSer1, hA1) into CassetteActor
+!insert (hSer1, hA3) into CassetteActor
+
+!new Rental('hR1')
+!hR1.date := Date('2001-12-24')
+!insert (hC1, hR1) into ClientRental
+!insert (hR1, hTape1) into RentalCassette
+!insert (hR1, hTape2) into RentalCassette
+!insert (hR1, hMov1) into RentalCassette
+!insert (hR1, hSer1) into RentalCassette
+
+!new Rental('hR2')
+!hR2.date := Date('2002-01-02')
+!insert (hC1, hR2) into ClientRental
+!insert (hR2, hTape1) into RentalCassette

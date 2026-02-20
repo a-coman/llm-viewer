@@ -1,0 +1,100 @@
+!new Client('instC1')
+!instC1.clientId := 2501
+!instC1.isSuspended := false
+
+!new Client('instC2')
+!instC2.clientId := 2502
+!instC2.isSuspended := false
+
+!new Client('instC3')
+!instC3.clientId := 2503
+!instC3.isSuspended := true
+
+!new Client('instC4')
+!instC4.clientId := 2504
+!instC4.isSuspended := false
+
+!new Cassette('instTape1')
+!instTape1.title := 'Science Today: Solar Storms'
+!instTape1.availableCopies := 0
+
+!new Cassette('instTape2')
+!instTape2.title := 'Kids Workshop: Simple Experiments'
+!instTape2.availableCopies := 7
+
+!new Movie('instMovie1')
+!instMovie1.title := 'Nightwatch Protocol'
+!instMovie1.availableCopies := 2
+!instMovie1.genre := #Action
+
+!new Movie('instMovie2')
+!instMovie2.title := 'The Lost Umbrella'
+!instMovie2.availableCopies := 1
+!instMovie2.genre := #Comedy
+
+!new Series('instSeries1')
+!instSeries1.title := 'Coastal Rescue Unit'
+!instSeries1.availableCopies := 3
+!instSeries1.episode := 1
+
+!new Series('instSeries2')
+!instSeries2.title := 'Coastal Rescue Unit'
+!instSeries2.availableCopies := 3
+!instSeries2.episode := 2
+
+!new Actor('instA1')
+!instA1.name := 'Stella Grayson'
+
+!new Actor('instA2')
+!instA2.name := 'Naveen Pillai'
+
+!new Actor('instA3')
+!instA3.name := 'Carlo Venturi'
+
+!new Actor('instA4')
+!instA4.name := 'Mina Jorgensen'
+
+!new Actor('instA5')
+!instA5.name := 'Jasper Cole'
+
+!insert (instTape1, instA2) into CassetteActor
+!insert (instTape1, instA4) into CassetteActor
+
+!insert (instTape2, instA1) into CassetteActor
+
+!insert (instMovie1, instA3) into CassetteActor
+!insert (instMovie1, instA5) into CassetteActor
+
+!insert (instMovie2, instA1) into CassetteActor
+!insert (instMovie2, instA3) into CassetteActor
+
+!insert (instSeries1, instA2) into CassetteActor
+!insert (instSeries1, instA3) into CassetteActor
+!insert (instSeries1, instA4) into CassetteActor
+
+!insert (instSeries2, instA2) into CassetteActor
+!insert (instSeries2, instA4) into CassetteActor
+
+!new Rental('instR1')
+!instR1.date := Date('1999-06-12')
+!insert (instC1, instR1) into ClientRental
+!insert (instR1, instTape2) into RentalCassette
+
+!new Rental('instR2')
+!instR2.date := Date('1999-06-19')
+!insert (instC1, instR2) into ClientRental
+!insert (instR2, instMovie1) into RentalCassette
+!insert (instR2, instSeries1) into RentalCassette
+!insert (instR2, instSeries2) into RentalCassette
+!insert (instR2, instTape1) into RentalCassette
+
+!new Rental('instR3')
+!instR3.date := Date('1999-07-02')
+!insert (instC2, instR3) into ClientRental
+!insert (instR3, instMovie2) into RentalCassette
+!insert (instR3, instTape2) into RentalCassette
+
+!new Rental('instR4')
+!instR4.date := Date('1999-07-03')
+!insert (instC3, instR4) into ClientRental
+!insert (instR4, instTape1) into RentalCassette

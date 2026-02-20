@@ -1,0 +1,40 @@
+!new Booking('booking30')
+!booking30.startDate := '2031-01-20'
+!booking30.endDate := '2031-01-27'
+!booking30.canceled := false
+!booking30.bookingId := 10700
+!booking30.confirmed := true
+
+!new Customer('customer30')
+!customer30.firstName := 'Asha'
+!customer30.lastName := 'Patel'
+
+!insert (booking30, customer30) into BookingCustomer
+
+!new RoomReservation('rr42')
+!rr42.checkInDate := '2031-01-20'
+!rr42.checkOutDate := '2031-01-27'
+
+!insert (booking30, rr42) into BookingRoomReservation
+
+!new Room('room3001')
+!room3001.roomNumber := 3001
+!room3001.numBeds := 2
+!room3001.pricePerNight := 165.0
+!room3001.occupied := false
+!room3001.blocked := true
+
+!insert (rr42, room3001) into RoomReservationRoom
+
+!new Bill('bill43')
+!bill43.billId := 27001
+!bill43.price := 1155.0
+
+!insert (bill43, rr42) into BillRoomReservation
+!insert (booking30, bill43) into BookingBill
+
+!new FreeRoomTypesDTO('dtoJanuaryLongStay')
+!dtoJanuaryLongStay.roomTypeDescription := 'January long-stay double'
+!dtoJanuaryLongStay.numBeds := 2
+!dtoJanuaryLongStay.pricePerNight := 165.0
+!dtoJanuaryLongStay.numFreeRooms := 1

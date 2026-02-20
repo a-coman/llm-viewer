@@ -1,0 +1,68 @@
+!new Client('va')
+!va.clientId := 901
+!va.isSuspended := false
+
+!new Client('vb')
+!vb.clientId := 902
+!vb.isSuspended := true
+
+!new Client('vc')
+!vc.clientId := 903
+!vc.isSuspended := false
+
+!new Actor('vxAct1')
+!vxAct1.name := 'Patricia Yen'
+
+!new Actor('vxAct2')
+!vxAct2.name := 'George Mbeki'
+
+!new Series('vxS1')
+!vxS1.title := 'The Archivist'
+!vxS1.availableCopies := 0
+!vxS1.episode := 1
+
+!new Series('vxS2')
+!vxS2.title := 'The Archivist'
+!vxS2.availableCopies := 0
+!vxS2.episode := 2
+
+!new Series('vxS3')
+!vxS3.title := 'The Archivist'
+!vxS3.availableCopies := 1
+!vxS3.episode := 3
+
+!new Movie('vxM1')
+!vxM1.title := 'Slapstick Summer'
+!vxM1.availableCopies := 2
+!vxM1.genre := #Comedy
+
+!new Movie('vxM2')
+!vxM2.title := 'Iron Meridian'
+!vxM2.availableCopies := 5
+!vxM2.genre := #Action
+
+!insert (vxS1, vxAct1) into CassetteActor
+!insert (vxS1, vxAct2) into CassetteActor
+!insert (vxS2, vxAct1) into CassetteActor
+!insert (vxS3, vxAct1) into CassetteActor
+!insert (vxM1, vxAct2) into CassetteActor
+!insert (vxM2, vxAct1) into CassetteActor
+!insert (vxM2, vxAct2) into CassetteActor
+
+!new Rental('vxR1')
+!vxR1.date := Date('2017-12-31')
+!insert (vb, vxR1) into ClientRental
+!insert (vxR1, vxS1) into RentalCassette
+!insert (vxR1, vxS2) into RentalCassette
+!insert (vxR1, vxS3) into RentalCassette
+
+!new Rental('vxR2')
+!vxR2.date := Date('2018-01-05')
+!insert (va, vxR2) into ClientRental
+!insert (vxR2, vxM2) into RentalCassette
+
+!new Rental('vxR3')
+!vxR3.date := Date('2018-02-14')
+!insert (va, vxR3) into ClientRental
+!insert (vxR3, vxM1) into RentalCassette
+!insert (vxR3, vxS3) into RentalCassette

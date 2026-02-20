@@ -1,0 +1,186 @@
+!new AddressBook('ab14')
+
+!new Company('pineValleyTheater')
+!pineValleyTheater.name := 'Pine Valley Community Theater'
+!pineValleyTheater.phone := '+1-503-555-1400'
+!pineValleyTheater.website := 'https://pinevalleytheater.example'
+!pineValleyTheater.email := 'office@pinevalleytheater.example'
+!pineValleyTheater.industry := 'Performing Arts'
+
+!new Company('pineValleyYouthProgram')
+!pineValleyYouthProgram.name := 'Pine Valley Youth Program'
+!pineValleyYouthProgram.phone := '+1-503-555-1412'
+!pineValleyYouthProgram.website := ''
+!pineValleyYouthProgram.email := 'youth@pinevalleytheater.example'
+!pineValleyYouthProgram.industry := 'Arts Education'
+
+!new Company('stageLightCo')
+!stageLightCo.name := 'StageLight Co'
+!stageLightCo.phone := '+1-971-555-1420'
+!stageLightCo.website := 'https://stagelight.example'
+!stageLightCo.email := 'support@stagelight.example'
+!stageLightCo.industry := 'Event Production'
+
+!new Person('harperDean')
+!harperDean.name := 'Harper Dean'
+!harperDean.phone := '+1-503-555-1401'
+!harperDean.website := 'https://harperdean.example'
+!harperDean.email := 'harper.dean@pinevalleytheater.example'
+!harperDean.title := 'Artistic Director'
+
+!new Person('nicoSalazar')
+!nicoSalazar.name := 'Nico Salazar'
+!nicoSalazar.phone := '+1-503-555-1402'
+!nicoSalazar.website := ''
+!nicoSalazar.email := 'nico.salazar@pinevalleytheater.example'
+!nicoSalazar.title := 'Stage Manager'
+
+!new Person('jadeMorgan')
+!jadeMorgan.name := 'Jade Morgan'
+!jadeMorgan.phone := '+1-503-555-1403'
+!jadeMorgan.website := ''
+!jadeMorgan.email := 'jade.morgan@example.com'
+!jadeMorgan.title := 'Actor'
+
+!new Person('minaKaur')
+!minaKaur.name := 'Mina Kaur'
+!minaKaur.phone := '+1-971-555-1421'
+!minaKaur.website := ''
+!minaKaur.email := 'mina.kaur@stagelight.example'
+!minaKaur.title := 'Account Lead'
+
+!new Person('roryBell')
+!roryBell.name := 'Rory Bell'
+!roryBell.phone := '+1-971-555-1422'
+!roryBell.website := ''
+!roryBell.email := 'rory.bell@stagelight.example'
+!roryBell.title := 'Lighting Technician'
+
+!insert (ab14, pineValleyTheater) into AddressBookMadeOfContact
+!insert (ab14, pineValleyYouthProgram) into AddressBookMadeOfContact
+!insert (ab14, stageLightCo) into AddressBookMadeOfContact
+!insert (ab14, harperDean) into AddressBookMadeOfContact
+!insert (ab14, nicoSalazar) into AddressBookMadeOfContact
+!insert (ab14, jadeMorgan) into AddressBookMadeOfContact
+!insert (ab14, minaKaur) into AddressBookMadeOfContact
+!insert (ab14, roryBell) into AddressBookMadeOfContact
+
+!new Address('addrTheaterVenue')
+!addrTheaterVenue.city := 'Portland'
+!addrTheaterVenue.street := 'SE Belmont St'
+!addrTheaterVenue.houseNr := '1120'
+
+!new Address('addrYouthStudio')
+!addrYouthStudio.city := 'Portland'
+!addrYouthStudio.street := 'SE Hawthorne Blvd'
+!addrYouthStudio.houseNr := '2805'
+
+!new Address('addrStageLightOffice')
+!addrStageLightOffice.city := 'Tigard'
+!addrStageLightOffice.street := 'SW 72nd Ave'
+!addrStageLightOffice.houseNr := '9150'
+
+!new Address('addrHarperHome')
+!addrHarperHome.city := 'Portland'
+!addrHarperHome.street := 'NE Alberta St'
+!addrHarperHome.houseNr := '412'
+
+!new Address('addrJadeHome')
+!addrJadeHome.city := 'Beaverton'
+!addrJadeHome.street := 'SW Canyon Rd'
+!addrJadeHome.houseNr := '13600'
+
+!insert (pineValleyTheater, addrTheaterVenue) into ContactContainsAddress
+!insert (pineValleyYouthProgram, addrYouthStudio) into ContactContainsAddress
+!insert (stageLightCo, addrStageLightOffice) into ContactContainsAddress
+!insert (harperDean, addrHarperHome) into ContactContainsAddress
+!insert (jadeMorgan, addrJadeHome) into ContactContainsAddress
+
+!new Note('nHarperMeetingSeason')
+!nHarperMeetingSeason.author := 'Harper Dean'
+!nHarperMeetingSeason.time := Date('2026-02-08 19:00')
+!nHarperMeetingSeason.type := #MEETING
+!nHarperMeetingSeason.comment := 'Season planning meeting; selected three productions and drafted rehearsal calendar.'
+
+!new Note('nHarperEmailCasting')
+!nHarperEmailCasting.author := 'Harper Dean'
+!nHarperEmailCasting.time := Date('2026-02-09 08:45')
+!nHarperEmailCasting.type := #EMAIL
+!nHarperEmailCasting.comment := 'Sent casting decisions and first read-through details to the ensemble.'
+
+!new Note('nJadeCallSchedule')
+!nJadeCallSchedule.author := 'Jade Morgan'
+!nJadeCallSchedule.time := Date('2026-02-10 12:05')
+!nJadeCallSchedule.type := #CALL
+!nJadeCallSchedule.comment := 'Called stage manager to confirm costume fitting time and rehearsal availability.'
+
+!new Note('nVendorEmailQuote')
+!nVendorEmailQuote.author := 'Mina Kaur'
+!nVendorEmailQuote.time := Date('2026-02-11 10:20')
+!nVendorEmailQuote.type := #EMAIL
+!nVendorEmailQuote.comment := 'Provided updated lighting rental quote and delivery window for tech week.'
+
+!insert (harperDean, nHarperMeetingSeason) into ContactContainsNote
+!insert (harperDean, nHarperEmailCasting) into ContactContainsNote
+!insert (jadeMorgan, nJadeCallSchedule) into ContactContainsNote
+!insert (stageLightCo, nVendorEmailQuote) into ContactContainsNote
+
+!new Relationship('relTheaterSubdivisionYouth')
+!relTheaterSubdivisionYouth.type := #SUBDIVISION
+!insert (pineValleyTheater, relTheaterSubdivisionYouth) into ContactToRelationship
+!insert (relTheaterSubdivisionYouth, pineValleyYouthProgram) into RelationshipToContact
+
+!new Relationship('relTheaterCoworkerVendor')
+!relTheaterCoworkerVendor.type := #COWORKER
+!insert (pineValleyTheater, relTheaterCoworkerVendor) into ContactToRelationship
+!insert (relTheaterCoworkerVendor, stageLightCo) into RelationshipToContact
+
+!new Relationship('relHarperEmployeeTheater')
+!relHarperEmployeeTheater.type := #EMPLOYEE
+!insert (harperDean, relHarperEmployeeTheater) into ContactToRelationship
+!insert (relHarperEmployeeTheater, pineValleyTheater) into RelationshipToContact
+
+!new Relationship('relNicoEmployeeTheater')
+!relNicoEmployeeTheater.type := #EMPLOYEE
+!insert (nicoSalazar, relNicoEmployeeTheater) into ContactToRelationship
+!insert (relNicoEmployeeTheater, pineValleyTheater) into RelationshipToContact
+
+!new Relationship('relJadeEmployeeYouth')
+!relJadeEmployeeYouth.type := #EMPLOYEE
+!insert (jadeMorgan, relJadeEmployeeYouth) into ContactToRelationship
+!insert (relJadeEmployeeYouth, pineValleyYouthProgram) into RelationshipToContact
+
+!new Relationship('relMinaEmployeeVendor')
+!relMinaEmployeeVendor.type := #EMPLOYEE
+!insert (minaKaur, relMinaEmployeeVendor) into ContactToRelationship
+!insert (relMinaEmployeeVendor, stageLightCo) into RelationshipToContact
+
+!new Relationship('relRoryEmployeeVendor')
+!relRoryEmployeeVendor.type := #EMPLOYEE
+!insert (roryBell, relRoryEmployeeVendor) into ContactToRelationship
+!insert (relRoryEmployeeVendor, stageLightCo) into RelationshipToContact
+
+!new Relationship('relNicoBossIsHarper')
+!relNicoBossIsHarper.type := #BOSS
+!insert (nicoSalazar, relNicoBossIsHarper) into ContactToRelationship
+!insert (relNicoBossIsHarper, harperDean) into RelationshipToContact
+
+!new Relationship('relJadeBossIsHarper')
+!relJadeBossIsHarper.type := #BOSS
+!insert (jadeMorgan, relJadeBossIsHarper) into ContactToRelationship
+!insert (relJadeBossIsHarper, harperDean) into RelationshipToContact
+
+!new Relationship('relRoryBossIsMina')
+!relRoryBossIsMina.type := #BOSS
+!insert (roryBell, relRoryBossIsMina) into ContactToRelationship
+!insert (relRoryBossIsMina, minaKaur) into RelationshipToContact
+
+!new Relationship('relJadeCoworkerNico')
+!relJadeCoworkerNico.type := #COWORKER
+!insert (jadeMorgan, relJadeCoworkerNico) into ContactToRelationship
+!insert (relJadeCoworkerNico, nicoSalazar) into RelationshipToContact
+
+!new Relationship('relNicoCoworkerJade')
+!relNicoCoworkerJade.type := #COWORKER
+!insert (nicoSalazar, relNicoCoworkerJade) into ContactToRelationship
+!insert (relNicoCoworkerJade, jadeMorgan) into RelationshipToContact

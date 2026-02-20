@@ -1,0 +1,87 @@
+!new Bank('bankCN1')
+!bankCN1.country := 'China'
+!bankCN1.name := 'Pearl River Commercial Bank'
+!bankCN1.bic := 'PRCBCNSHXXX'
+
+!new Bank('bankEE1')
+!bankEE1.country := 'Estonia'
+!bankEE1.name := 'Tallinn Digital Bank'
+!bankEE1.bic := 'TALDEE2XXXX'
+
+!new Person('c1')
+!c1.firstName := 'Wei'
+!c1.lastName := 'Zhang'
+!c1.age := 20
+
+!new Person('c2')
+!c2.firstName := 'Kadri'
+!c2.lastName := 'Tamm'
+!c2.age := 25
+
+!new Person('c3')
+!c3.firstName := 'Juhan'
+!c3.lastName := 'Saare'
+!c3.age := 64
+
+!new Person('c4')
+!c4.firstName := 'Li'
+!c4.lastName := 'Chen'
+!c4.age := 38
+
+!new Person('c5')
+!c5.firstName := 'Rasmus'
+!c5.lastName := 'Tamm'
+!c5.age := 17
+
+!new Person('c6')
+!c6.firstName := 'Mia'
+!c6.lastName := 'Saare'
+!c6.age := 8
+
+!new Account('cnAcc1')
+!cnAcc1.iban := 'CN00PRCB00000000000001'
+!cnAcc1.balance := 0
+
+!new Account('cnAcc2')
+!cnAcc2.iban := 'CN00PRCB00000000123456'
+!cnAcc2.balance := 250000
+
+!new Account('eeAcc1')
+!eeAcc1.iban := 'EE382200221020145685'
+!eeAcc1.balance := 15
+
+!new Account('eeAcc2')
+!eeAcc2.iban := 'EE471000001020145685'
+!eeAcc2.balance := 800
+
+!new Account('eeAcc3')
+!eeAcc3.iban := 'EE901010010012345678'
+!eeAcc3.balance := 5000
+
+!insert (bankCN1, cnAcc1) into AccountOfBanks
+!insert (bankCN1, cnAcc2) into AccountOfBanks
+!insert (bankEE1, eeAcc1) into AccountOfBanks
+!insert (bankEE1, eeAcc2) into AccountOfBanks
+!insert (bankEE1, eeAcc3) into AccountOfBanks
+
+!insert (c1, cnAcc1) into Ownership
+
+!insert (c3, cnAcc2) into Ownership
+!insert (c4, cnAcc2) into Ownership
+
+!insert (c2, eeAcc1) into Ownership
+
+!insert (c1, eeAcc2) into Ownership
+!insert (c2, eeAcc2) into Ownership
+
+!insert (c4, eeAcc3) into Ownership
+
+!insert (c5, cnAcc1) into Use
+!insert (c6, cnAcc1) into Use
+
+!insert (c2, eeAcc1) into Use
+!insert (c1, eeAcc1) into Use
+
+!insert (c5, eeAcc2) into Use
+!insert (c6, eeAcc2) into Use
+!insert (c4, eeAcc2) into Use

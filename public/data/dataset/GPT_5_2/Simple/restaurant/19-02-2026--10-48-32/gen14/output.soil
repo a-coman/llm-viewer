@@ -1,0 +1,299 @@
+!new Restaurant('rest18')
+!rest18.name := 'Polar Lights Cantina'
+
+!new Owner('own42')
+!own42.name := 'Iris Coleman'
+!own42.percentageShares := 45
+
+!new Owner('own43')
+!own43.name := 'Noah Petrov'
+!own43.percentageShares := 35
+
+!new Owner('own44')
+!own44.name := 'Selma Aydin'
+!own44.percentageShares := 20
+
+!insert (rest18, own42) into RestaurantOwner
+!insert (rest18, own43) into RestaurantOwner
+!insert (rest18, own44) into RestaurantOwner
+
+!new HeadWaiter('hw19')
+!hw19.name := 'Grant Holloway'
+!hw19.dateOfBirth := Date('1982-08-31')
+!hw19.phoneNumber := '555-8600'
+
+!new Waiter('w38')
+!w38.name := 'Sienna Park'
+!w38.dateOfBirth := Date('1998-03-06')
+!w38.phoneNumber := '555-8601'
+!w38.spokenLanguage := #English
+
+!new Waiter('w39')
+!w39.name := 'Mateo Cruz'
+!w39.dateOfBirth := Date('1994-09-24')
+!w39.phoneNumber := '555-8602'
+!w39.spokenLanguage := #Spanish
+
+!new Waiter('w40')
+!w40.name := 'Anja Weber'
+!w40.dateOfBirth := Date('1996-12-12')
+!w40.phoneNumber := '555-8603'
+!w40.spokenLanguage := #German
+
+!insert (hw19, w38) into HeadWaiterWaiter
+!insert (hw19, w39) into HeadWaiterWaiter
+!insert (hw19, w40) into HeadWaiterWaiter
+
+!new Chef('chef25')
+!chef25.name := 'Marisol Vega'
+!chef25.dateOfBirth := Date('1976-04-02')
+!chef25.phoneNumber := '555-8610'
+
+!new Chef('chef26')
+!chef26.name := 'Luca Marino'
+!chef26.dateOfBirth := Date('1980-10-15')
+!chef26.phoneNumber := '555-8611'
+
+!new Cook('cook38')
+!cook38.name := 'Heather Lin'
+!cook38.dateOfBirth := Date('1990-02-17')
+!cook38.phoneNumber := '555-8620'
+!cook38.yearsOfExperience := 9
+
+!new Cook('cook39')
+!cook39.name := 'Rafael Ortega'
+!cook39.dateOfBirth := Date('1997-07-01')
+!cook39.phoneNumber := '555-8621'
+!cook39.yearsOfExperience := 2
+
+!new Cook('cook40')
+!cook40.name := 'Daria Novak'
+!cook40.dateOfBirth := Date('1989-11-28')
+!cook40.phoneNumber := '555-8622'
+!cook40.yearsOfExperience := 12
+
+!insert (chef25, cook38) into ChefCook
+!insert (chef25, cook39) into ChefCook
+!insert (chef26, cook40) into ChefCook
+
+!new Allergen('alg18Gluten')
+!alg18Gluten.type := #Gluten
+
+!new Allergen('alg18Lactose')
+!alg18Lactose.type := #Lactose
+
+!new FoodItem('fiTortillas18')
+!fiTortillas18.number := 1401
+!fiTortillas18.description := 'Flour tortillas'
+!fiTortillas18.purchaseFlag := true
+!fiTortillas18.unit := #Dozen
+
+!new FoodItem('fiBeef18')
+!fiBeef18.number := 1402
+!fiBeef18.description := 'Seasoned beef'
+!fiBeef18.purchaseFlag := true
+!fiBeef18.unit := #Pound
+
+!new FoodItem('fiRice18')
+!fiRice18.number := 1403
+!fiRice18.description := 'Long-grain rice'
+!fiRice18.purchaseFlag := true
+!fiRice18.unit := #Pound
+
+!new FoodItem('fiBeans18')
+!fiBeans18.number := 1404
+!fiBeans18.description := 'Black beans'
+!fiBeans18.purchaseFlag := true
+!fiBeans18.unit := #Gram
+
+!new FoodItem('fiFlour18')
+!fiFlour18.number := 1405
+!fiFlour18.description := 'Pastry flour'
+!fiFlour18.purchaseFlag := true
+!fiFlour18.unit := #Pound
+
+!new FoodItem('fiSugar18')
+!fiSugar18.number := 1406
+!fiSugar18.description := 'Cane sugar'
+!fiSugar18.purchaseFlag := true
+!fiSugar18.unit := #Pound
+
+!new FoodItem('fiMilk18')
+!fiMilk18.number := 1407
+!fiMilk18.description := 'Whole milk'
+!fiMilk18.purchaseFlag := true
+!fiMilk18.unit := #Ounce
+
+!insert (fiTortillas18, alg18Gluten) into FoodItemAllergen
+!insert (fiFlour18, alg18Gluten) into FoodItemAllergen
+!insert (fiMilk18, alg18Lactose) into FoodItemAllergen
+
+!new MenuItem('miTacos18')
+!miTacos18.description := 'Beef tacos with flour tortillas'
+!miTacos18.prepTime := 13.0
+!miTacos18.classification := #Main
+
+!new MenuItem('miVeggieBowl18')
+!miVeggieBowl18.description := 'Rice and black bean bowl'
+!miVeggieBowl18.prepTime := 10.0
+!miVeggieBowl18.classification := #Main
+
+!new MenuItem('miChurros18')
+!miChurros18.description := 'Churros with sugar'
+!miChurros18.prepTime := 9.0
+!miChurros18.classification := #Dessert
+
+!new MenuItem('miHorchata18')
+!miHorchata18.description := 'Horchata'
+!miHorchata18.prepTime := 3.0
+!miHorchata18.classification := #Beverage
+
+!new MenuItem('miSalsaChips18')
+!miSalsaChips18.description := 'Chips with salsa'
+!miSalsaChips18.prepTime := 4.0
+!miSalsaChips18.classification := #Apetizer
+
+!insert (miTacos18, chef25) into MenuItemChef
+!insert (miVeggieBowl18, chef25) into MenuItemChef
+!insert (miSalsaChips18, chef25) into MenuItemChef
+!insert (miChurros18, chef26) into MenuItemChef
+!insert (miHorchata18, chef26) into MenuItemChef
+
+!insert (miTacos18, fiTortillas18) into MenuItemFoodItem
+!insert (miTacos18, fiBeef18) into MenuItemFoodItem
+
+!insert (miVeggieBowl18, fiRice18) into MenuItemFoodItem
+!insert (miVeggieBowl18, fiBeans18) into MenuItemFoodItem
+
+!insert (miChurros18, fiFlour18) into MenuItemFoodItem
+!insert (miChurros18, fiSugar18) into MenuItemFoodItem
+
+!insert (miHorchata18, fiMilk18) into MenuItemFoodItem
+!insert (miHorchata18, fiSugar18) into MenuItemFoodItem
+
+!insert (miSalsaChips18, fiTortillas18) into MenuItemFoodItem
+
+!new BusDriver('bd17')
+!bd17.name := 'Nikolai Reed'
+!bd17.dateOfBirth := Date('1967-05-21')
+!bd17.phoneNumber := '555-8630'
+!bd17.driverLicenseNr := 'D-6301194'
+
+!new BusDriver('bd18')
+!bd18.name := 'Patricia Owens'
+!bd18.dateOfBirth := Date('1973-01-09')
+!bd18.phoneNumber := '555-8631'
+!bd18.driverLicenseNr := 'D-9902810'
+
+!new Banquet('banq14')
+!banq14.time := Time('14:00')
+!banq14.date := Date('2027-04-05')
+!banq14.numberPeople := 28
+!banq14.name := 'Aviation Club'
+!banq14.phoneNumber := '555-8640'
+!banq14.number := 25001
+!banq14.groupName := 'Pilot Luncheon'
+!banq14.paymentMethod := #Cash
+!banq14.busService := true
+
+!insert (rest18, banq14) into RestaurantReservation
+!insert (banq14, w38) into ReservationWaiter
+!insert (banq14, w39) into ReservationWaiter
+!insert (banq14, bd17) into BanquetBusDriver
+!insert (banq14, bd18) into BanquetBusDriver
+
+!new Table('tBanq14A')
+!tBanq14A.number := 501
+!tBanq14A.description := 'Banquet table A'
+!tBanq14A.capacity := 16
+!insert (banq14, tBanq14A) into ReservationTable
+
+!new Table('tBanq14B')
+!tBanq14B.number := 502
+!tBanq14B.description := 'Banquet table B'
+!tBanq14B.capacity := 12
+!insert (banq14, tBanq14B) into ReservationTable
+
+!new ItemOrder('ioBanq14_1')
+!ioBanq14_1.time := Time('14:15')
+!insert (banq14, ioBanq14_1) into ReservationItemOrdered
+!insert (ioBanq14_1, miSalsaChips18) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq14_2')
+!ioBanq14_2.time := Time('14:30')
+!insert (banq14, ioBanq14_2) into ReservationItemOrdered
+!insert (ioBanq14_2, miTacos18) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq14_3')
+!ioBanq14_3.time := Time('14:55')
+!insert (banq14, ioBanq14_3) into ReservationItemOrdered
+!insert (ioBanq14_3, miHorchata18) into ItemOrderMenuItem
+
+!new RegularCustomer('cust19')
+!cust19.name := 'Lena Rossi'
+!cust19.prefferedLanguage := #Italian
+
+!new Individual('res23')
+!res23.time := Time('19:10')
+!res23.date := Date('2027-04-05')
+!res23.numberPeople := 10
+!res23.name := 'Evening Tour Group'
+!res23.phoneNumber := '555-8650'
+!res23.number := 25002
+!res23.seating := #Patio
+!res23.smoking := #NonSmoking
+
+!insert (rest18, res23) into RestaurantReservation
+!insert (res23, cust19) into ReservationCustomer
+!insert (res23, w40) into ReservationWaiter
+
+!new Table('tRes23A')
+!tRes23A.number := 41
+!tRes23A.description := 'Patio table A'
+!tRes23A.capacity := 6
+!insert (res23, tRes23A) into ReservationTable
+
+!new Table('tRes23B')
+!tRes23B.number := 42
+!tRes23B.description := 'Patio table B'
+!tRes23B.capacity := 4
+!insert (res23, tRes23B) into ReservationTable
+
+!new ItemOrder('ioRes23_1')
+!ioRes23_1.time := Time('19:25')
+!insert (res23, ioRes23_1) into ReservationItemOrdered
+!insert (ioRes23_1, miVeggieBowl18) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes23_2')
+!ioRes23_2.time := Time('19:40')
+!insert (res23, ioRes23_2) into ReservationItemOrdered
+!insert (ioRes23_2, miTacos18) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes23_3')
+!ioRes23_3.time := Time('20:05')
+!insert (res23, ioRes23_3) into ReservationItemOrdered
+!insert (ioRes23_3, miChurros18) into ItemOrderMenuItem
+
+!new Individual('res24')
+!res24.time := Time('18:00')
+!res24.date := Date('2027-04-06')
+!res24.numberPeople := 2
+!res24.name := 'Pending Booking'
+!res24.phoneNumber := '555-8651'
+!res24.number := 25003
+!res24.seating := #Inside
+!res24.smoking := #NonSmoking
+
+!insert (res24, w39) into ReservationWaiter
+
+!new Table('tRes24A')
+!tRes24A.number := 7
+!tRes24A.description := 'Two-top by entry'
+!tRes24A.capacity := 2
+!insert (res24, tRes24A) into ReservationTable
+
+!new DietaryRequirement('dietReq15')
+!dietReq15.diet := #Vegan
+
+!new ReportedAllergy('repAlg15')
+!repAlg15.allergen := #Gluten

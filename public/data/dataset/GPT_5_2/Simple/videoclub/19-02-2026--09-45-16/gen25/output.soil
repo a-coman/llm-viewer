@@ -1,0 +1,81 @@
+!new Client('zzClient1')
+!zzClient1.clientId := 2201
+!zzClient1.isSuspended := false
+
+!new Client('zzClient2')
+!zzClient2.clientId := 2202
+!zzClient2.isSuspended := true
+
+!new Client('zzClient3')
+!zzClient3.clientId := 2203
+!zzClient3.isSuspended := false
+
+!new Actor('zzActor1')
+!zzActor1.name := 'Nikolai Jensen'
+
+!new Actor('zzActor2')
+!zzActor2.name := 'Priyanka Mehra'
+
+!new Actor('zzActor3')
+!zzActor3.name := 'Cesar Dominguez'
+
+!new Actor('zzActor4')
+!zzActor4.name := 'Anya Volante'
+
+!new Actor('zzActor5')
+!zzActor5.name := 'Miriam Osei'
+
+!new Actor('zzActor6')
+!zzActor6.name := 'Cole Harrington'
+
+!new Actor('zzActorUnused')
+!zzActorUnused.name := 'Sven Larsson'
+
+!new Cassette('zzTape1')
+!zzTape1.title := 'First Aid Essentials (Training Tape)'
+!zzTape1.availableCopies := 20
+
+!new Movie('zzMovie1')
+!zzMovie1.title := 'Shadow Corridor'
+!zzMovie1.availableCopies := 1
+!zzMovie1.genre := #Action
+
+!new Series('zzSeries1')
+!zzSeries1.title := 'Museum Curators'
+!zzSeries1.availableCopies := 0
+!zzSeries1.episode := 6
+
+!new Series('zzSeries2')
+!zzSeries2.title := 'Museum Curators'
+!zzSeries2.availableCopies := 0
+!zzSeries2.episode := 7
+
+!insert (zzTape1, zzActor5) into CassetteActor
+
+!insert (zzMovie1, zzActor1) into CassetteActor
+!insert (zzMovie1, zzActor2) into CassetteActor
+!insert (zzMovie1, zzActor3) into CassetteActor
+
+!insert (zzSeries1, zzActor4) into CassetteActor
+!insert (zzSeries1, zzActor5) into CassetteActor
+
+!insert (zzSeries2, zzActor4) into CassetteActor
+!insert (zzSeries2, zzActor6) into CassetteActor
+
+!new Rental('zzRental1')
+!zzRental1.date := Date('2010-12-01')
+!insert (zzClient1, zzRental1) into ClientRental
+!insert (zzRental1, zzTape1) into RentalCassette
+!insert (zzRental1, zzSeries1) into RentalCassette
+!insert (zzRental1, zzMovie1) into RentalCassette
+
+!new Rental('zzRental2')
+!zzRental2.date := Date('2010-12-15')
+!insert (zzClient1, zzRental2) into ClientRental
+!insert (zzRental2, zzSeries2) into RentalCassette
+
+!new Rental('zzRental3')
+!zzRental3.date := Date('2011-01-05')
+!insert (zzClient2, zzRental3) into ClientRental
+!insert (zzRental3, zzMovie1) into RentalCassette
+!insert (zzRental3, zzSeries2) into RentalCassette

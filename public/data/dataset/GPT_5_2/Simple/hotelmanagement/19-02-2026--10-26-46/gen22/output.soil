@@ -1,0 +1,47 @@
+!new Booking('booking23')
+!booking23.startDate := '2029-04-22'
+!booking23.endDate := '2029-04-25'
+!booking23.canceled := false
+!booking23.bookingId := 10075
+!booking23.confirmed := true
+
+!new Customer('customer23')
+!customer23.firstName := 'Renee'
+!customer23.lastName := 'Dubois'
+
+!insert (booking23, customer23) into BookingCustomer
+
+!new RoomReservation('rr32')
+!rr32.checkInDate := '2029-04-22'
+!rr32.checkOutDate := '2029-04-25'
+
+!insert (booking23, rr32) into BookingRoomReservation
+
+!new RoomExtra('extraGreenOption')
+!extraGreenOption.price := 0.0
+!extraGreenOption.description := 'Green option (no daily housekeeping)'
+
+!new RoomExtra('extraCarbonOffset')
+!extraCarbonOffset.price := 8.0
+!extraCarbonOffset.description := 'Carbon offset contribution'
+
+!new RoomExtra('extraCorporateRateNote')
+!extraCorporateRateNote.price := 0.0
+!extraCorporateRateNote.description := 'Corporate rate applied (billing to company)'
+
+!insert (rr32, extraGreenOption) into RoomReservationExtras
+!insert (rr32, extraCarbonOffset) into RoomReservationExtras
+!insert (rr32, extraCorporateRateNote) into RoomReservationExtras
+
+!new Bill('bill33')
+!bill33.billId := 22001
+!bill33.price := 8.0
+
+!insert (bill33, rr32) into BillRoomReservation
+!insert (booking23, bill33) into BookingBill
+
+!new FreeRoomTypesDTO('dtoCorporateApril')
+!dtoCorporateApril.roomTypeDescription := 'Corporate rooms (assignment at check-in)'
+!dtoCorporateApril.numBeds := 1
+!dtoCorporateApril.pricePerNight := 115.0
+!dtoCorporateApril.numFreeRooms := 6

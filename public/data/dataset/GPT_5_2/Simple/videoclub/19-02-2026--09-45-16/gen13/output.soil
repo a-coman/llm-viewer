@@ -1,0 +1,116 @@
+!new Client('wC1')
+!wC1.clientId := 1001
+!wC1.isSuspended := false
+
+!new Client('wC2')
+!wC2.clientId := 1002
+!wC2.isSuspended := false
+
+!new Client('wC3')
+!wC3.clientId := 1003
+!wC3.isSuspended := true
+
+!new Client('wC4')
+!wC4.clientId := 1004
+!wC4.isSuspended := false
+
+!new Client('wC5')
+!wC5.clientId := 1005
+!wC5.isSuspended := true
+
+!new Movie('wM1')
+!wM1.title := 'Bridge Over Ashes'
+!wM1.availableCopies := 2
+!wM1.genre := #Action
+
+!new Movie('wM2')
+!wM2.title := 'Holiday Misread'
+!wM2.availableCopies := 0
+!wM2.genre := #Comedy
+
+!new Series('wS1')
+!wS1.title := 'Ocean Chronicles'
+!wS1.availableCopies := 4
+!wS1.episode := 1
+
+!new Series('wS2')
+!wS2.title := 'Ocean Chronicles'
+!wS2.availableCopies := 4
+!wS2.episode := 2
+
+!new Series('wS3')
+!wS3.title := 'Tiny House Tales'
+!wS3.availableCopies := 1
+!wS3.episode := 8
+
+!new Series('wS4')
+!wS4.title := 'Algorithm Alley'
+!wS4.availableCopies := 3
+!wS4.episode := 42
+
+!new Series('wS5')
+!wS5.title := 'Algorithm Alley'
+!wS5.availableCopies := 3
+!wS5.episode := 43
+
+!new Actor('wA1')
+!wA1.name := 'Harper Quinn'
+
+!new Actor('wA2')
+!wA2.name := 'Dmitri Volkov'
+
+!new Actor('wA3')
+!wA3.name := 'Aisha Rahman'
+
+!new Actor('wA4')
+!wA4.name := 'Luca Bianchi'
+
+!new Actor('wA5')
+!wA5.name := 'Zoe Delgado'
+
+!new Actor('wA6')
+!wA6.name := 'Caleb Ng'
+
+!new Actor('wA7')
+!wA7.name := 'Ines Ferreira'
+
+!new Actor('wA8')
+!wA8.name := 'Rita Johansson'
+
+!new Actor('wA9')
+!wA9.name := 'Bartosz Nowak'
+
+!insert (wM1, wA1) into CassetteActor
+!insert (wM1, wA2) into CassetteActor
+!insert (wM1, wA3) into CassetteActor
+!insert (wM1, wA4) into CassetteActor
+!insert (wM1, wA5) into CassetteActor
+
+!insert (wM2, wA6) into CassetteActor
+
+!insert (wS1, wA2) into CassetteActor
+!insert (wS1, wA7) into CassetteActor
+
+!insert (wS2, wA2) into CassetteActor
+!insert (wS2, wA7) into CassetteActor
+
+!insert (wS3, wA5) into CassetteActor
+!insert (wS3, wA7) into CassetteActor
+
+!insert (wS4, wA1) into CassetteActor
+
+!insert (wS5, wA1) into CassetteActor
+!insert (wS5, wA3) into CassetteActor
+
+!new Rental('wR1')
+!wR1.date := Date('2016-05-20')
+!insert (wC3, wR1) into ClientRental
+!insert (wR1, wM1) into RentalCassette
+!insert (wR1, wS1) into RentalCassette
+!insert (wR1, wS2) into RentalCassette
+!insert (wR1, wS3) into RentalCassette
+
+!new Rental('wR2')
+!wR2.date := Date('2016-06-01')
+!insert (wC3, wR2) into ClientRental
+!insert (wR2, wS4) into RentalCassette

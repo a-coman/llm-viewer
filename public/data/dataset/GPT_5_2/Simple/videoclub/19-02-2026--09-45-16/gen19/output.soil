@@ -1,0 +1,77 @@
+!new Client('mC1')
+!mC1.clientId := 1601
+!mC1.isSuspended := true
+
+!new Client('mC2')
+!mC2.clientId := 1602
+!mC2.isSuspended := false
+
+!new Cassette('mTapeA')
+!mTapeA.title := 'Home Repair: Plumbing Essentials'
+!mTapeA.availableCopies := 3
+
+!new Cassette('mTapeB')
+!mTapeB.title := 'Language Course: Intro to Italian'
+!mTapeB.availableCopies := 0
+
+!new Movie('mMovieA')
+!mMovieA.title := 'Steel Harbor Raid'
+!mMovieA.availableCopies := 2
+!mMovieA.genre := #Action
+
+!new Series('mSeriesA1')
+!mSeriesA1.title := 'Comedy Nights'
+!mSeriesA1.availableCopies := 1
+!mSeriesA1.episode := 1
+
+!new Series('mSeriesA2')
+!mSeriesA2.title := 'Comedy Nights'
+!mSeriesA2.availableCopies := 1
+!mSeriesA2.episode := 2
+
+!new Series('mSeriesB1')
+!mSeriesB1.title := 'Arctic Dispatch'
+!mSeriesB1.availableCopies := 5
+!mSeriesB1.episode := 10
+
+!new Actor('mAct1')
+!mAct1.name := 'Riley Chen'
+
+!new Actor('mAct2')
+!mAct2.name := 'Svetlana Morozova'
+
+!new Actor('mAct3')
+!mAct3.name := 'Diego Marin'
+
+!new Actor('mAct4')
+!mAct4.name := 'Hannah Okoye'
+
+!new Actor('mActUnused')
+!mActUnused.name := 'George Ivers'
+
+!insert (mTapeA, mAct4) into CassetteActor
+!insert (mTapeB, mAct1) into CassetteActor
+
+!insert (mMovieA, mAct2) into CassetteActor
+!insert (mMovieA, mAct3) into CassetteActor
+
+!insert (mSeriesA1, mAct1) into CassetteActor
+!insert (mSeriesA1, mAct3) into CassetteActor
+
+!insert (mSeriesA2, mAct1) into CassetteActor
+
+!insert (mSeriesB1, mAct2) into CassetteActor
+
+!new Rental('mR1')
+!mR1.date := Date('2004-01-17')
+!insert (mC2, mR1) into ClientRental
+!insert (mR1, mTapeA) into RentalCassette
+!insert (mR1, mTapeB) into RentalCassette
+!insert (mR1, mMovieA) into RentalCassette
+!insert (mR1, mSeriesA1) into RentalCassette
+!insert (mR1, mSeriesA2) into RentalCassette
+
+!new Rental('mR2')
+!mR2.date := Date('2004-02-03')
+!insert (mC1, mR2) into ClientRental
+!insert (mR2, mSeriesB1) into RentalCassette

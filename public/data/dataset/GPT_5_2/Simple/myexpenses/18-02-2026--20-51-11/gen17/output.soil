@@ -1,0 +1,76 @@
+!new Currency('curARS')
+!curARS.name := 'Argentine Peso'
+!curARS.abbreviation := 'ARS'
+
+!new Currency('curCOP')
+!curCOP.name := 'Colombian Peso'
+!curCOP.abbreviation := 'COP'
+
+
+!new Expense('expMarCommunityProject')
+!expMarCommunityProject.amount := 27700.00
+!expMarCommunityProject.startDate := Date('2026-03-01')
+!expMarCommunityProject.endDate := Date('2026-03-10')
+
+!new Bill('billCommunityMaterials_2026_03_01')
+!billCommunityMaterials_2026_03_01.amount := 18000.00
+!billCommunityMaterials_2026_03_01.category := 'Community - Building materials'
+!billCommunityMaterials_2026_03_01.date := Date('2026-03-01')
+!billCommunityMaterials_2026_03_01.paymentMethod := #CREDIT_CARD
+!billCommunityMaterials_2026_03_01.status := #VERIFIED
+
+!new Bill('billPermitFee_2026_03_02')
+!billPermitFee_2026_03_02.amount := 2500.00
+!billPermitFee_2026_03_02.category := 'Community - Permit fee'
+!billPermitFee_2026_03_02.date := Date('2026-03-02')
+!billPermitFee_2026_03_02.paymentMethod := #CHECK
+!billPermitFee_2026_03_02.status := #VALIDATED
+
+!new Bill('billVolunteerLunch_2026_03_10')
+!billVolunteerLunch_2026_03_10.amount := 7200.00
+!billVolunteerLunch_2026_03_10.category := 'Community - Volunteer lunch'
+!billVolunteerLunch_2026_03_10.date := Date('2026-03-10')
+!billVolunteerLunch_2026_03_10.paymentMethod := #CASH
+!billVolunteerLunch_2026_03_10.status := #PENDING
+
+!insert (expMarCommunityProject, billCommunityMaterials_2026_03_01) into ExpenseContainsBills
+!insert (expMarCommunityProject, billPermitFee_2026_03_02) into ExpenseContainsBills
+!insert (expMarCommunityProject, billVolunteerLunch_2026_03_10) into ExpenseContainsBills
+
+!insert (billCommunityMaterials_2026_03_01, curARS) into BillCurrency
+!insert (billPermitFee_2026_03_02, curARS) into BillCurrency
+!insert (billVolunteerLunch_2026_03_10, curARS) into BillCurrency
+
+
+!new Expense('expMarRemoteSupport')
+!expMarRemoteSupport.amount := 41500.00
+!expMarRemoteSupport.startDate := Date('2026-03-15')
+!expMarRemoteSupport.endDate := Date('2026-03-16')
+
+!new Bill('billRemoteConsulting_2026_03_15')
+!billRemoteConsulting_2026_03_15.amount := 40000.00
+!billRemoteConsulting_2026_03_15.category := 'Services - Remote technical support'
+!billRemoteConsulting_2026_03_15.date := Date('2026-03-15')
+!billRemoteConsulting_2026_03_15.paymentMethod := #CREDIT_CARD
+!billRemoteConsulting_2026_03_15.status := #VERIFIED
+
+!new Bill('billTransferProcessing_2026_03_16')
+!billTransferProcessing_2026_03_16.amount := 1500.00
+!billTransferProcessing_2026_03_16.category := 'Banking - Transfer processing fee'
+!billTransferProcessing_2026_03_16.date := Date('2026-03-16')
+!billTransferProcessing_2026_03_16.paymentMethod := #CASH
+!billTransferProcessing_2026_03_16.status := #REFUNDED
+
+!insert (expMarRemoteSupport, billRemoteConsulting_2026_03_15) into ExpenseContainsBills
+!insert (expMarRemoteSupport, billTransferProcessing_2026_03_16) into ExpenseContainsBills
+
+!insert (billRemoteConsulting_2026_03_15, curCOP) into BillCurrency
+!insert (billTransferProcessing_2026_03_16, curARS) into BillCurrency
+
+!new Comment('cmtRemote1')
+!cmtRemote1.text := 'Short-notice remote support session for a legacy system.'
+!new Comment('cmtRemote2')
+!cmtRemote2.text := 'Transfer fee was refunded after the bank corrected a duplicate charge.'
+
+!insert (expMarRemoteSupport, cmtRemote1) into ExpenseComment
+!insert (expMarRemoteSupport, cmtRemote2) into ExpenseComment

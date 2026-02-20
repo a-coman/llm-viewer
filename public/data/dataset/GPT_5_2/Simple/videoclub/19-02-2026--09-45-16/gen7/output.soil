@@ -1,0 +1,71 @@
+!new Client('u1')
+!u1.clientId := 401
+!u1.isSuspended := false
+
+!new Client('u2')
+!u2.clientId := 402
+!u2.isSuspended := true
+
+!new Movie('mv401')
+!mv401.title := 'Crimson Velocity'
+!mv401.availableCopies := 6
+!mv401.genre := #Action
+
+!new Movie('mv402')
+!mv402.title := 'Cafe Confessions'
+!mv402.availableCopies := 1
+!mv402.genre := #Comedy
+
+!new Series('sr401')
+!sr401.title := 'Deep Space Audit'
+!sr401.availableCopies := 0
+!sr401.episode := 21
+
+!new Series('sr402')
+!sr402.title := 'River County'
+!sr402.availableCopies := 3
+!sr402.episode := 1
+
+!new Actor('ac401')
+!ac401.name := 'Isabelle Grant'
+
+!new Actor('ac402')
+!ac402.name := 'Marcus Vela'
+
+!new Actor('ac403')
+!ac403.name := 'Tariq Osman'
+
+!new Actor('ac404')
+!ac404.name := 'Selena Cho'
+
+!new Actor('ac405')
+!ac405.name := 'Peter Novak'
+
+!insert (mv401, ac402) into CassetteActor
+!insert (mv401, ac403) into CassetteActor
+
+!insert (mv402, ac401) into CassetteActor
+!insert (mv402, ac404) into CassetteActor
+
+!insert (sr401, ac405) into CassetteActor
+
+!insert (sr402, ac401) into CassetteActor
+!insert (sr402, ac402) into CassetteActor
+!insert (sr402, ac405) into CassetteActor
+
+!new Rental('rr401')
+!rr401.date := Date('2021-09-02')
+!insert (u1, rr401) into ClientRental
+!insert (rr401, mv401) into RentalCassette
+
+!new Rental('rr402')
+!rr402.date := Date('2021-09-10')
+!insert (u1, rr402) into ClientRental
+!insert (rr402, mv401) into RentalCassette
+!insert (rr402, mv402) into RentalCassette
+!insert (rr402, sr402) into RentalCassette
+
+!new Rental('rr403')
+!rr403.date := Date('2021-10-01')
+!insert (u1, rr403) into ClientRental
+!insert (rr403, sr401) into RentalCassette

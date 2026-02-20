@@ -1,0 +1,96 @@
+!new RentalOffice('office_hartford_ct16b')
+!office_hartford_ct16b.name := 'Capitol Region Trailer Rentals - Hartford'
+!office_hartford_ct16b.number := 16010
+!office_hartford_ct16b.address := '90 Weston St, Hartford, CT 06120'
+
+!new RentalOffice('office_newark_de16b')
+!office_newark_de16b.name := 'Christiana Drop Yard - Newark'
+!office_newark_de16b.number := 16011
+!office_newark_de16b.address := '4100 Ogletown Stanton Rd, Newark, DE 19713'
+
+!new RentalOffice('office_miami_fl16b')
+!office_miami_fl16b.name := 'Port of Miami Trailer Counter'
+!office_miami_fl16b.number := 16012
+!office_miami_fl16b.address := '1015 N America Way, Miami, FL 33132'
+
+!new Vehicle('trailer_ct_covered_16b01')
+!trailer_ct_covered_16b01.id := 160901
+!trailer_ct_covered_16b01.registrationState := #CT
+!trailer_ct_covered_16b01.licensePlateNumber := 'CT-TRL-160901'
+!trailer_ct_covered_16b01.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ct_covered_16b01.registrationLastMaintenanceDate := Date('2026-06-01')
+!trailer_ct_covered_16b01.expirationDate := Date('2027-05-31')
+
+!new Vehicle('trailer_fl_open_16b02')
+!trailer_fl_open_16b02.id := 160902
+!trailer_fl_open_16b02.registrationState := #FL
+!trailer_fl_open_16b02.licensePlateNumber := 'FL-TRL-160902'
+!trailer_fl_open_16b02.vehicleTypeCode := #OPEN_TRAILER
+!trailer_fl_open_16b02.registrationLastMaintenanceDate := Date('2026-04-20')
+!trailer_fl_open_16b02.expirationDate := Date('2027-04-30')
+
+!insert (office_hartford_ct16b, trailer_ct_covered_16b01) into RentalOfficeVehicle
+!insert (office_miami_fl16b, trailer_fl_open_16b02) into RentalOfficeVehicle
+
+!new Company('cust_co_archivestorage16b')
+!cust_co_archivestorage16b.name := 'ArchiveStorage Services LLC'
+!cust_co_archivestorage16b.address := '12 Research Pkwy, Hartford, CT 06120'
+!cust_co_archivestorage16b.poorRisk := false
+!cust_co_archivestorage16b.idNumber := 16050101
+
+!new Individual('cust_ind_kendra16b')
+!cust_ind_kendra16b.name := 'Kendra Wallace'
+!cust_ind_kendra16b.address := '85 Haines St, Newark, DE 19711'
+!cust_ind_kendra16b.poorRisk := false
+!cust_ind_kendra16b.homePhone := '302-555-0108'
+!cust_ind_kendra16b.driverLicenseState := #DE
+!cust_ind_kendra16b.driverLicenseNumber := 50993321
+!cust_ind_kendra16b.driverLicenseExpirationDate := Date('2028-10-31')
+
+!new Individual('cust_ind_omar16b')
+!cust_ind_omar16b.name := 'Omar Haddad'
+!cust_ind_omar16b.address := '151 SE 1st St, Miami, FL 33131'
+!cust_ind_omar16b.poorRisk := true
+!cust_ind_omar16b.homePhone := '305-555-0172'
+!cust_ind_omar16b.driverLicenseState := #FL
+!cust_ind_omar16b.driverLicenseNumber := 77120018
+!cust_ind_omar16b.driverLicenseExpirationDate := Date('2026-08-31')
+
+!new RentalAgreement('ra_16b_001')
+!ra_16b_001.number := 160001
+!ra_16b_001.rentalDate := Date('2026-05-06')
+!ra_16b_001.anticipatedDuration := 28
+!ra_16b_001.depositPaid := 0.00
+!ra_16b_001.quotedDailyRate := 35.00
+!ra_16b_001.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_16b_002')
+!ra_16b_002.number := 160002
+!ra_16b_002.rentalDate := Date('2026-05-15')
+!ra_16b_002.anticipatedDuration := 2
+!ra_16b_002.depositPaid := 125.00
+!ra_16b_002.quotedDailyRate := 0.00
+!ra_16b_002.quotedRatePerMile := 0.85
+
+!new RentalAgreement('ra_16b_003')
+!ra_16b_003.number := 160003
+!ra_16b_003.rentalDate := Date('2026-05-20')
+!ra_16b_003.anticipatedDuration := 7
+!ra_16b_003.depositPaid := 50.00
+!ra_16b_003.quotedDailyRate := 22.00
+!ra_16b_003.quotedRatePerMile := 0.00
+
+!insert (office_hartford_ct16b, ra_16b_001) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_de16b, ra_16b_001) into RentalOfficeRentalAgreementDrop
+!insert (ra_16b_001, trailer_ct_covered_16b01) into RentalAgreementVehicle
+!insert (ra_16b_001, cust_co_archivestorage16b) into RentalAgreementCustomer
+
+!insert (office_newark_de16b, ra_16b_002) into RentalOfficeRentalAgreementOrigin
+!insert (office_newark_de16b, ra_16b_002) into RentalOfficeRentalAgreementDrop
+!insert (ra_16b_002, trailer_ct_covered_16b01) into RentalAgreementVehicle
+!insert (ra_16b_002, cust_ind_kendra16b) into RentalAgreementCustomer
+
+!insert (office_miami_fl16b, ra_16b_003) into RentalOfficeRentalAgreementOrigin
+!insert (office_miami_fl16b, ra_16b_003) into RentalOfficeRentalAgreementDrop
+!insert (ra_16b_003, trailer_fl_open_16b02) into RentalAgreementVehicle
+!insert (ra_16b_003, cust_ind_omar16b) into RentalAgreementCustomer

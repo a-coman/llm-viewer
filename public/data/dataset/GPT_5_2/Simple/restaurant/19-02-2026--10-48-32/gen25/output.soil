@@ -1,0 +1,324 @@
+!new Restaurant('rest32')
+!rest32.name := 'River Lantern Izakaya'
+
+!new Owner('own80')
+!own80.name := 'Keiko Yamamoto'
+!own80.percentageShares := 70
+
+!new Owner('own81')
+!own81.name := 'Daniel Hughes'
+!own81.percentageShares := 30
+
+!insert (rest32, own80) into RestaurantOwner
+!insert (rest32, own81) into RestaurantOwner
+
+!new Manager('mgr10')
+!mgr10.name := 'Alicia Stern'
+!mgr10.dateOfBirth := Date('1982-07-17')
+!mgr10.phoneNumber := '555-8800'
+
+!new HeadWaiter('hw50')
+!hw50.name := 'Victor Nguyen'
+!hw50.dateOfBirth := Date('1986-01-09')
+!hw50.phoneNumber := '555-8801'
+
+!new Waiter('w80')
+!w80.name := 'Emily Tan'
+!w80.dateOfBirth := Date('1999-04-12')
+!w80.phoneNumber := '555-8802'
+!w80.spokenLanguage := #English
+
+!new Waiter('w81')
+!w81.name := 'Jonas Richter'
+!w81.dateOfBirth := Date('1994-10-21')
+!w81.phoneNumber := '555-8803'
+!w81.spokenLanguage := #German
+
+!new Waiter('w82')
+!w82.name := 'Carmen Ruiz'
+!w82.dateOfBirth := Date('1997-02-02')
+!w82.phoneNumber := '555-8804'
+!w82.spokenLanguage := #Spanish
+
+!insert (hw50, w80) into HeadWaiterWaiter
+!insert (hw50, w81) into HeadWaiterWaiter
+!insert (hw50, w82) into HeadWaiterWaiter
+
+!new Chef('chef60')
+!chef60.name := 'Sora Takahashi'
+!chef60.dateOfBirth := Date('1978-03-03')
+!chef60.phoneNumber := '555-8815'
+
+!new Chef('chef61')
+!chef61.name := 'Marta Kowalska'
+!chef61.dateOfBirth := Date('1983-09-28')
+!chef61.phoneNumber := '555-8816'
+
+!new Cook('cook80')
+!cook80.name := 'Ibrahim Saleh'
+!cook80.dateOfBirth := Date('1991-05-20')
+!cook80.phoneNumber := '555-8820'
+!cook80.yearsOfExperience := 8
+
+!new Cook('cook81')
+!cook81.name := 'Lena Hoffmann'
+!cook81.dateOfBirth := Date('1998-12-05')
+!cook81.phoneNumber := '555-8821'
+!cook81.yearsOfExperience := 1
+
+!new Cook('cook82')
+!cook82.name := 'Pedro Alvarez'
+!cook82.dateOfBirth := Date('1989-08-14')
+!cook82.phoneNumber := '555-8822'
+!cook82.yearsOfExperience := 12
+
+!insert (chef60, cook80) into ChefCook
+!insert (chef60, cook81) into ChefCook
+!insert (chef61, cook82) into ChefCook
+
+!new Allergen('alg32Gluten')
+!alg32Gluten.type := #Gluten
+!new Allergen('alg32Seafood')
+!alg32Seafood.type := #Seafood
+!new Allergen('alg32Nuts')
+!alg32Nuts.type := #Nuts
+!new Allergen('alg32Lactose')
+!alg32Lactose.type := #Lactose
+
+!new FoodItem('fiSobaNoodles32')
+!fiSobaNoodles32.number := 3001
+!fiSobaNoodles32.description := 'Soba noodles'
+!fiSobaNoodles32.purchaseFlag := true
+!fiSobaNoodles32.unit := #Pound
+
+!new FoodItem('fiShrimp32')
+!fiShrimp32.number := 3002
+!fiShrimp32.description := 'Shrimp'
+!fiShrimp32.purchaseFlag := true
+!fiShrimp32.unit := #Pound
+
+!new FoodItem('fiWheatFlour32')
+!fiWheatFlour32.number := 3003
+!fiWheatFlour32.description := 'Wheat flour'
+!fiWheatFlour32.purchaseFlag := true
+!fiWheatFlour32.unit := #Pound
+
+!new FoodItem('fiPeanutSauce32')
+!fiPeanutSauce32.number := 3004
+!fiPeanutSauce32.description := 'Peanut sauce'
+!fiPeanutSauce32.purchaseFlag := true
+!fiPeanutSauce32.unit := #Ounce
+
+!new FoodItem('fiTofu32')
+!fiTofu32.number := 3005
+!fiTofu32.description := 'Firm tofu'
+!fiTofu32.purchaseFlag := true
+!fiTofu32.unit := #Pound
+
+!new FoodItem('fiRice32')
+!fiRice32.number := 3006
+!fiRice32.description := 'Steamed rice'
+!fiRice32.purchaseFlag := true
+!fiRice32.unit := #Pound
+
+!new FoodItem('fiSoyMilk32')
+!fiSoyMilk32.number := 3007
+!fiSoyMilk32.description := 'Soy milk'
+!fiSoyMilk32.purchaseFlag := true
+!fiSoyMilk32.unit := #Ounce
+
+!new FoodItem('fiMatcha32')
+!fiMatcha32.number := 3008
+!fiMatcha32.description := 'Matcha powder'
+!fiMatcha32.purchaseFlag := true
+!fiMatcha32.unit := #Gram
+
+!new FoodItem('fiSparklingWater32')
+!fiSparklingWater32.number := 3009
+!fiSparklingWater32.description := 'Sparkling water'
+!fiSparklingWater32.purchaseFlag := true
+!fiSparklingWater32.unit := #Ounce
+
+!new FoodItem('fiButter32')
+!fiButter32.number := 3010
+!fiButter32.description := 'Butter'
+!fiButter32.purchaseFlag := true
+!fiButter32.unit := #Ounce
+
+!insert (fiSobaNoodles32, alg32Gluten) into FoodItemAllergen
+!insert (fiWheatFlour32, alg32Gluten) into FoodItemAllergen
+!insert (fiShrimp32, alg32Seafood) into FoodItemAllergen
+!insert (fiPeanutSauce32, alg32Nuts) into FoodItemAllergen
+!insert (fiButter32, alg32Lactose) into FoodItemAllergen
+
+!new MenuItem('miSobaSalad32')
+!miSobaSalad32.description := 'Cold soba salad with tofu and peanut dressing'
+!miSobaSalad32.prepTime := 8.0
+!miSobaSalad32.classification := #Apetizer
+
+!new MenuItem('miShrimpTempura32')
+!miShrimpTempura32.description := 'Shrimp tempura'
+!miShrimpTempura32.prepTime := 16.0
+!miShrimpTempura32.classification := #Main
+
+!new MenuItem('miRiceBowl32')
+!miRiceBowl32.description := 'Tofu rice bowl'
+!miRiceBowl32.prepTime := 12.0
+!miRiceBowl32.classification := #Main
+
+!new MenuItem('miMatchaPudding32')
+!miMatchaPudding32.description := 'Matcha pudding made with soy milk'
+!miMatchaPudding32.prepTime := 6.0
+!miMatchaPudding32.classification := #Dessert
+
+!new MenuItem('miGreenTeaSoda32')
+!miGreenTeaSoda32.description := 'Matcha green tea soda'
+!miGreenTeaSoda32.prepTime := 2.0
+!miGreenTeaSoda32.classification := #Beverage
+
+!insert (miSobaSalad32, chef60) into MenuItemChef
+!insert (miShrimpTempura32, chef60) into MenuItemChef
+!insert (miRiceBowl32, chef61) into MenuItemChef
+!insert (miMatchaPudding32, chef61) into MenuItemChef
+!insert (miGreenTeaSoda32, chef61) into MenuItemChef
+
+!insert (miSobaSalad32, fiSobaNoodles32) into MenuItemFoodItem
+!insert (miSobaSalad32, fiTofu32) into MenuItemFoodItem
+!insert (miSobaSalad32, fiPeanutSauce32) into MenuItemFoodItem
+
+!insert (miShrimpTempura32, fiShrimp32) into MenuItemFoodItem
+!insert (miShrimpTempura32, fiWheatFlour32) into MenuItemFoodItem
+
+!insert (miRiceBowl32, fiRice32) into MenuItemFoodItem
+!insert (miRiceBowl32, fiTofu32) into MenuItemFoodItem
+
+!insert (miMatchaPudding32, fiMatcha32) into MenuItemFoodItem
+!insert (miMatchaPudding32, fiSoyMilk32) into MenuItemFoodItem
+
+!insert (miGreenTeaSoda32, fiMatcha32) into MenuItemFoodItem
+!insert (miGreenTeaSoda32, fiSparklingWater32) into MenuItemFoodItem
+
+!new RegularCustomer('cust50')
+!cust50.name := 'Emily Tan'
+!cust50.prefferedLanguage := #English
+
+!new RegularCustomer('cust51')
+!cust51.name := 'Stefan Kruger'
+!cust51.prefferedLanguage := #German
+
+!new Individual('res50')
+!res50.time := Time('18:30')
+!res50.date := Date('2028-02-14')
+!res50.numberPeople := 3
+!res50.name := 'Emily Tan'
+!res50.phoneNumber := '555-8808'
+!res50.number := 80001
+!res50.seating := #Patio
+!res50.smoking := #NonSmoking
+
+!insert (rest32, res50) into RestaurantReservation
+!insert (res50, cust50) into ReservationCustomer
+!insert (res50, w80) into ReservationWaiter
+!insert (res50, w81) into ReservationWaiter
+
+!new Table('t501')
+!t501.number := 501
+!t501.description := 'Patio two-top A'
+!t501.capacity := 2
+
+!new Table('t502')
+!t502.number := 502
+!t502.description := 'Patio two-top B'
+!t502.capacity := 2
+
+!insert (res50, t501) into ReservationTable
+!insert (res50, t502) into ReservationTable
+
+!new ItemOrder('io501')
+!io501.time := Time('18:45')
+!insert (res50, io501) into ReservationItemOrdered
+!insert (io501, miSobaSalad32) into ItemOrderMenuItem
+
+!new ItemOrder('io502')
+!io502.time := Time('19:05')
+!insert (res50, io502) into ReservationItemOrdered
+!insert (io502, miShrimpTempura32) into ItemOrderMenuItem
+
+!new ItemOrder('io503')
+!io503.time := Time('19:20')
+!insert (res50, io503) into ReservationItemOrdered
+!insert (io503, miGreenTeaSoda32) into ItemOrderMenuItem
+
+!new BusDriver('bd50')
+!bd50.name := 'Harold Finch'
+!bd50.dateOfBirth := Date('1970-10-30')
+!bd50.phoneNumber := '555-8811'
+!bd50.driverLicenseNr := 'D-5531902'
+
+!new Banquet('banq50')
+!banq50.time := Time('12:00')
+!banq50.date := Date('2028-02-15')
+!banq50.numberPeople := 20
+!banq50.name := 'Helios Corp'
+!banq50.phoneNumber := '555-8810'
+!banq50.number := 80002
+!banq50.groupName := 'Product Launch Lunch'
+!banq50.paymentMethod := #CreditCard
+!banq50.busService := true
+
+!insert (rest32, banq50) into RestaurantReservation
+!insert (banq50, cust51) into ReservationCustomer
+!insert (banq50, w82) into ReservationWaiter
+!insert (banq50, bd50) into BanquetBusDriver
+
+!new Table('t510')
+!t510.number := 510
+!t510.description := 'Private room table A'
+!t510.capacity := 10
+
+!new Table('t511')
+!t511.number := 511
+!t511.description := 'Private room table B'
+!t511.capacity := 10
+
+!insert (banq50, t510) into ReservationTable
+!insert (banq50, t511) into ReservationTable
+
+!new ItemOrder('io510')
+!io510.time := Time('12:15')
+!insert (banq50, io510) into ReservationItemOrdered
+!insert (io510, miRiceBowl32) into ItemOrderMenuItem
+
+!new ItemOrder('io511')
+!io511.time := Time('12:45')
+!insert (banq50, io511) into ReservationItemOrdered
+!insert (io511, miMatchaPudding32) into ItemOrderMenuItem
+
+!new Individual('res51')
+!res51.time := Time('22:00')
+!res51.date := Date('2028-02-14')
+!res51.numberPeople := 2
+!res51.name := 'Late Pair'
+!res51.phoneNumber := '555-8899'
+!res51.number := 80003
+!res51.seating := #Inside
+!res51.smoking := #Smoking
+
+!insert (res51, w81) into ReservationWaiter
+
+!new Table('t520')
+!t520.number := 520
+!t520.description := 'Two-top near entrance'
+!t520.capacity := 2
+!insert (res51, t520) into ReservationTable
+
+!new ItemOrder('io520')
+!io520.time := Time('22:10')
+!insert (res51, io520) into ReservationItemOrdered
+!insert (io520, miGreenTeaSoda32) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq50')
+!dietReq50.diet := #Vegan
+
+!new ReportedAllergy('repAlg50')
+!repAlg50.allergen := #Seafood

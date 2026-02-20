@@ -1,0 +1,139 @@
+!new RentalOffice('office_callcenter10')
+!office_callcenter10.name := 'National Booking Hotline Center'
+!office_callcenter10.number := 10010
+!office_callcenter10.address := '2000 Reservation Blvd, Wilmington, DE 19801'
+
+!new RentalOffice('office_philadelphia_yard10')
+!office_philadelphia_yard10.name := 'Mid-Atlantic Fleet Yard - Philadelphia'
+!office_philadelphia_yard10.number := 10011
+!office_philadelphia_yard10.address := '4600 Island Ave, Philadelphia, PA 19153'
+
+!new RentalOffice('office_orange_county_return10')
+!office_orange_county_return10.name := 'Orange County Return Yard - Anaheim'
+!office_orange_county_return10.number := 10012
+!office_orange_county_return10.address := '1290 S Anaheim Blvd, Anaheim, CA 92805'
+
+!new Truck('truck_de_24ft_10a')
+!truck_de_24ft_10a.id := 51010
+!truck_de_24ft_10a.registrationState := #DE
+!truck_de_24ft_10a.licensePlateNumber := 'DE-TRK-51010'
+!truck_de_24ft_10a.vehicleTypeCode := #TRUCK24
+!truck_de_24ft_10a.registrationLastMaintenanceDate := Date('2026-06-08')
+!truck_de_24ft_10a.expirationDate := Date('2027-06-30')
+!truck_de_24ft_10a.odometerReading := 132405
+!truck_de_24ft_10a.gasTankCapacity := 65.0
+!truck_de_24ft_10a.workingRadio := true
+!truck_de_24ft_10a.mileage := 8
+
+!new Truck('truck_ct_10ft_10b')
+!truck_ct_10ft_10b.id := 51011
+!truck_ct_10ft_10b.registrationState := #CT
+!truck_ct_10ft_10b.licensePlateNumber := 'CT-TRK-51011'
+!truck_ct_10ft_10b.vehicleTypeCode := #TRUCK10
+!truck_ct_10ft_10b.registrationLastMaintenanceDate := Date('2026-05-14')
+!truck_ct_10ft_10b.expirationDate := Date('2027-05-31')
+!truck_ct_10ft_10b.odometerReading := 28490
+!truck_ct_10ft_10b.gasTankCapacity := 34.0
+!truck_ct_10ft_10b.workingRadio := false
+!truck_ct_10ft_10b.mileage := 16
+
+!new Vehicle('trailer_ct_covered_10c')
+!trailer_ct_covered_10c.id := 52010
+!trailer_ct_covered_10c.registrationState := #CT
+!trailer_ct_covered_10c.licensePlateNumber := 'CT-TRL-52010'
+!trailer_ct_covered_10c.vehicleTypeCode := #COVERED_TRAILER
+!trailer_ct_covered_10c.registrationLastMaintenanceDate := Date('2026-04-02')
+!trailer_ct_covered_10c.expirationDate := Date('2027-04-30')
+
+!insert (office_philadelphia_yard10, truck_de_24ft_10a) into RentalOfficeVehicle
+!insert (office_philadelphia_yard10, truck_ct_10ft_10b) into RentalOfficeVehicle
+!insert (office_philadelphia_yard10, trailer_ct_covered_10c) into RentalOfficeVehicle
+
+!new Individual('cust_ind_morgan10')
+!cust_ind_morgan10.name := 'Morgan Ellis'
+!cust_ind_morgan10.address := '41 S 3rd St, Newark, DE 19711'
+!cust_ind_morgan10.poorRisk := false
+!cust_ind_morgan10.homePhone := '302-555-0140'
+!cust_ind_morgan10.driverLicenseState := #DE
+!cust_ind_morgan10.driverLicenseNumber := 61044022
+!cust_ind_morgan10.driverLicenseExpirationDate := Date('2028-08-31')
+
+!new Individual('cust_ind_tanya10')
+!cust_ind_tanya10.name := 'Tanya Brooks'
+!cust_ind_tanya10.address := '88 Park St, Hartford, CT 06106'
+!cust_ind_tanya10.poorRisk := true
+!cust_ind_tanya10.homePhone := '860-555-0111'
+!cust_ind_tanya10.driverLicenseState := #CT
+!cust_ind_tanya10.driverLicenseNumber := 90331107
+!cust_ind_tanya10.driverLicenseExpirationDate := Date('2026-12-31')
+
+!new Company('cust_co_northline10')
+!cust_co_northline10.name := 'NorthLine Exhibit & Trade Services'
+!cust_co_northline10.address := '700 Essington Ave, Philadelphia, PA 19153'
+!cust_co_northline10.poorRisk := false
+!cust_co_northline10.idNumber := 31061010
+
+!new RentalAgreement('ra_100100')
+!ra_100100.number := 100100
+!ra_100100.rentalDate := Date('2026-01-03')
+!ra_100100.anticipatedDuration := 1
+!ra_100100.depositPaid := 300.00
+!ra_100100.quotedDailyRate := 0.00
+!ra_100100.quotedRatePerMile := 1.15
+
+!new RentalAgreement('ra_1001010')
+!ra_1001010.number := 1001010
+!ra_1001010.rentalDate := Date('2026-01-10')
+!ra_1001010.anticipatedDuration := 14
+!ra_1001010.depositPaid := 0.00
+!ra_1001010.quotedDailyRate := 59.00
+!ra_1001010.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_1001020')
+!ra_1001020.number := 1001020
+!ra_1001020.rentalDate := Date('2026-01-18')
+!ra_1001020.anticipatedDuration := 3
+!ra_1001020.depositPaid := 800.00
+!ra_1001020.quotedDailyRate := 189.00
+!ra_1001020.quotedRatePerMile := 0.95
+
+!new RentalAgreement('ra_1001030')
+!ra_1001030.number := 1001030
+!ra_1001030.rentalDate := Date('2026-02-01')
+!ra_1001030.anticipatedDuration := 30
+!ra_1001030.depositPaid := 500.00
+!ra_1001030.quotedDailyRate := 35.00
+!ra_1001030.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_1001040')
+!ra_1001040.number := 1001040
+!ra_1001040.rentalDate := Date('2026-02-20')
+!ra_1001040.anticipatedDuration := 2
+!ra_1001040.depositPaid := 150.00
+!ra_1001040.quotedDailyRate := 49.00
+!ra_1001040.quotedRatePerMile := 0.00
+
+!insert (office_callcenter10, ra_100100) into RentalOfficeRentalAgreementOrigin
+!insert (office_philadelphia_yard10, ra_100100) into RentalOfficeRentalAgreementDrop
+!insert (ra_100100, truck_ct_10ft_10b) into RentalAgreementVehicle
+!insert (ra_100100, cust_ind_morgan10) into RentalAgreementCustomer
+
+!insert (office_callcenter10, ra_1001010) into RentalOfficeRentalAgreementOrigin
+!insert (office_orange_county_return10, ra_1001010) into RentalOfficeRentalAgreementDrop
+!insert (ra_1001010, trailer_ct_covered_10c) into RentalAgreementVehicle
+!insert (ra_1001010, cust_co_northline10) into RentalAgreementCustomer
+
+!insert (office_philadelphia_yard10, ra_1001020) into RentalOfficeRentalAgreementOrigin
+!insert (office_philadelphia_yard10, ra_1001020) into RentalOfficeRentalAgreementDrop
+!insert (ra_1001020, truck_de_24ft_10a) into RentalAgreementVehicle
+!insert (ra_1001020, cust_ind_tanya10) into RentalAgreementCustomer
+
+!insert (office_callcenter10, ra_1001030) into RentalOfficeRentalAgreementOrigin
+!insert (office_philadelphia_yard10, ra_1001030) into RentalOfficeRentalAgreementDrop
+!insert (ra_1001030, truck_de_24ft_10a) into RentalAgreementVehicle
+!insert (ra_1001030, cust_co_northline10) into RentalAgreementCustomer
+
+!insert (office_orange_county_return10, ra_1001040) into RentalOfficeRentalAgreementOrigin
+!insert (office_orange_county_return10, ra_1001040) into RentalOfficeRentalAgreementDrop
+!insert (ra_1001040, truck_ct_10ft_10b) into RentalAgreementVehicle
+!insert (ra_1001040, cust_ind_morgan10) into RentalAgreementCustomer

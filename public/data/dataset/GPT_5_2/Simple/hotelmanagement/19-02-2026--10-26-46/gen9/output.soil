@@ -1,0 +1,109 @@
+!new Booking('booking11')
+!booking11.startDate := '2027-04-05'
+!booking11.endDate := '2027-04-12'
+!booking11.canceled := false
+!booking11.bookingId := 9001
+!booking11.confirmed := true
+
+!new Customer('customer11')
+!customer11.firstName := 'Chloe'
+!customer11.lastName := 'Martin'
+
+!insert (booking11, customer11) into BookingCustomer
+
+!new RoomReservation('rr15')
+!rr15.checkInDate := '2027-04-05'
+!rr15.checkOutDate := '2027-04-07'
+
+!new RoomReservation('rr16')
+!rr16.checkInDate := '2027-04-07'
+!rr16.checkOutDate := '2027-04-10'
+
+!new RoomReservation('rr17')
+!rr17.checkInDate := '2027-04-10'
+!rr17.checkOutDate := '2027-04-12'
+
+!insert (booking11, rr15) into BookingRoomReservation
+!insert (booking11, rr16) into BookingRoomReservation
+!insert (booking11, rr17) into BookingRoomReservation
+
+!new Room('room430')
+!room430.roomNumber := 430
+!room430.numBeds := 2
+!room430.pricePerNight := 205.0
+!room430.occupied := true
+!room430.blocked := false
+
+!new Room('room431')
+!room431.roomNumber := 431
+!room431.numBeds := 2
+!room431.pricePerNight := 205.0
+!room431.occupied := true
+!room431.blocked := false
+
+!new Room('room115')
+!room115.roomNumber := 115
+!room115.numBeds := 1
+!room115.pricePerNight := 125.0
+!room115.occupied := true
+!room115.blocked := false
+
+!new Room('room116')
+!room116.roomNumber := 116
+!room116.numBeds := 1
+!room116.pricePerNight := 125.0
+!room116.occupied := true
+!room116.blocked := false
+
+!insert (rr15, room430) into RoomReservationRoom
+!insert (rr16, room431) into RoomReservationRoom
+!insert (rr17, room115) into RoomReservationRoom
+!insert (rr17, room116) into RoomReservationRoom
+
+!new RoomExtra('extraMeetingRoom')
+!extraMeetingRoom.price := 90.0
+!extraMeetingRoom.description := 'Meeting room (2 hours)'
+
+!new RoomExtra('extraProjector')
+!extraProjector.price := 25.0
+!extraProjector.description := 'Projector rental'
+
+!new RoomExtra('extraSnackTray')
+!extraSnackTray.price := 35.0
+!extraSnackTray.description := 'Snack tray'
+
+!insert (rr16, extraMeetingRoom) into RoomReservationExtras
+!insert (rr16, extraProjector) into RoomReservationExtras
+!insert (rr15, extraSnackTray) into RoomReservationExtras
+
+!new Bill('bill16')
+!bill16.billId := 12001
+!bill16.price := 445.0
+
+!new Bill('bill17')
+!bill17.billId := 12002
+!bill17.price := 730.0
+
+!new Bill('bill18')
+!bill18.billId := 12003
+!bill18.price := 500.0
+
+!insert (bill16, rr15) into BillRoomReservation
+!insert (bill17, rr16) into BillRoomReservation
+!insert (bill18, rr17) into BillRoomReservation
+
+!insert (booking11, bill16) into BookingBill
+!insert (booking11, bill17) into BookingBill
+!insert (booking11, bill18) into BookingBill
+
+!new FreeRoomTypesDTO('dtoConferenceTwin')
+!dtoConferenceTwin.roomTypeDescription := 'Conference twin (near elevator)'
+!dtoConferenceTwin.numBeds := 2
+!dtoConferenceTwin.pricePerNight := 205.0
+!dtoConferenceTwin.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('dtoBudgetSingle')
+!dtoBudgetSingle.roomTypeDescription := 'Budget single (ground floor)'
+!dtoBudgetSingle.numBeds := 1
+!dtoBudgetSingle.pricePerNight := 125.0
+!dtoBudgetSingle.numFreeRooms := 8

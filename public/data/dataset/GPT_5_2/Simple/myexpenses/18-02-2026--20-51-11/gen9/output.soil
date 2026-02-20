@@ -1,0 +1,103 @@
+!new Currency('curMXN')
+!curMXN.name := 'Mexican Peso'
+!curMXN.abbreviation := 'MXN'
+
+!new Currency('curINR')
+!curINR.name := 'Indian Rupee'
+!curINR.abbreviation := 'INR'
+
+!new Currency('curZAR')
+!curZAR.name := 'South African Rand'
+!curZAR.abbreviation := 'ZAR'
+
+
+!new Expense('expDecYearEndGiving')
+!expDecYearEndGiving.amount := 1200.00
+!expDecYearEndGiving.startDate := Date('2026-12-01')
+!expDecYearEndGiving.endDate := Date('2026-12-31')
+
+!new Bill('billFoodBankDonation_2026_12_03')
+!billFoodBankDonation_2026_12_03.amount := 250.00
+!billFoodBankDonation_2026_12_03.category := 'Charity - Food bank donation'
+!billFoodBankDonation_2026_12_03.date := Date('2026-12-03')
+!billFoodBankDonation_2026_12_03.paymentMethod := #CASH
+!billFoodBankDonation_2026_12_03.status := #VERIFIED
+
+!new Bill('billDisasterRelief_2026_12_08')
+!billDisasterRelief_2026_12_08.amount := 300.00
+!billDisasterRelief_2026_12_08.category := 'Charity - Disaster relief'
+!billDisasterRelief_2026_12_08.date := Date('2026-12-08')
+!billDisasterRelief_2026_12_08.paymentMethod := #CREDIT_CARD
+!billDisasterRelief_2026_12_08.status := #VALIDATED
+
+!new Bill('billEducationFund_2026_12_12')
+!billEducationFund_2026_12_12.amount := 150.00
+!billEducationFund_2026_12_12.category := 'Charity - Education fund'
+!billEducationFund_2026_12_12.date := Date('2026-12-12')
+!billEducationFund_2026_12_12.paymentMethod := #CHECK
+!billEducationFund_2026_12_12.status := #PENDING
+
+!new Bill('billFundraisingDinner_2026_12_18')
+!billFundraisingDinner_2026_12_18.amount := 420.75
+!billFundraisingDinner_2026_12_18.category := 'Charity - Fundraising dinner ticket'
+!billFundraisingDinner_2026_12_18.date := Date('2026-12-18')
+!billFundraisingDinner_2026_12_18.paymentMethod := #CREDIT_CARD
+!billFundraisingDinner_2026_12_18.status := #VERIFIED
+
+!new Bill('billIntlTransferFee_2026_12_21')
+!billIntlTransferFee_2026_12_21.amount := 79.25
+!billIntlTransferFee_2026_12_21.category := 'Banking - International transfer fee'
+!billIntlTransferFee_2026_12_21.date := Date('2026-12-21')
+!billIntlTransferFee_2026_12_21.paymentMethod := #CASH
+!billIntlTransferFee_2026_12_21.status := #REFUNDED
+
+!insert (expDecYearEndGiving, billFoodBankDonation_2026_12_03) into ExpenseContainsBills
+!insert (expDecYearEndGiving, billDisasterRelief_2026_12_08) into ExpenseContainsBills
+!insert (expDecYearEndGiving, billEducationFund_2026_12_12) into ExpenseContainsBills
+!insert (expDecYearEndGiving, billFundraisingDinner_2026_12_18) into ExpenseContainsBills
+!insert (expDecYearEndGiving, billIntlTransferFee_2026_12_21) into ExpenseContainsBills
+
+!insert (billFoodBankDonation_2026_12_03, curMXN) into BillCurrency
+!insert (billDisasterRelief_2026_12_08, curMXN) into BillCurrency
+!insert (billEducationFund_2026_12_12, curINR) into BillCurrency
+!insert (billFundraisingDinner_2026_12_18, curINR) into BillCurrency
+!insert (billIntlTransferFee_2026_12_21, curZAR) into BillCurrency
+
+!new Comment('cmtGiving1')
+!cmtGiving1.text := 'Year-end donations and fundraising expenses across multiple organizations.'
+!insert (expDecYearEndGiving, cmtGiving1) into ExpenseComment
+
+
+!new Expense('expDecPetCare')
+!expDecPetCare.amount := 270.00
+!expDecPetCare.startDate := Date('2026-12-05')
+!expDecPetCare.endDate := Date('2026-12-20')
+
+!new Bill('billVetVaccination_2026_12_06')
+!billVetVaccination_2026_12_06.amount := 180.00
+!billVetVaccination_2026_12_06.category := 'Pet - Vaccination'
+!billVetVaccination_2026_12_06.date := Date('2026-12-06')
+!billVetVaccination_2026_12_06.paymentMethod := #CREDIT_CARD
+!billVetVaccination_2026_12_06.status := #VALIDATED
+
+!new Bill('billPetGrooming_2026_12_14')
+!billPetGrooming_2026_12_14.amount := 65.50
+!billPetGrooming_2026_12_14.category := 'Pet - Grooming'
+!billPetGrooming_2026_12_14.date := Date('2026-12-14')
+!billPetGrooming_2026_12_14.paymentMethod := #CASH
+!billPetGrooming_2026_12_14.status := #VERIFIED
+
+!new Bill('billPetFood_2026_12_19')
+!billPetFood_2026_12_19.amount := 24.50
+!billPetFood_2026_12_19.category := 'Pet - Food'
+!billPetFood_2026_12_19.date := Date('2026-12-19')
+!billPetFood_2026_12_19.paymentMethod := #CASH
+!billPetFood_2026_12_19.status := #DRAFT
+
+!insert (expDecPetCare, billVetVaccination_2026_12_06) into ExpenseContainsBills
+!insert (expDecPetCare, billPetGrooming_2026_12_14) into ExpenseContainsBills
+!insert (expDecPetCare, billPetFood_2026_12_19) into ExpenseContainsBills
+
+!insert (billVetVaccination_2026_12_06, curZAR) into BillCurrency
+!insert (billPetGrooming_2026_12_14, curZAR) into BillCurrency
+!insert (billPetFood_2026_12_19, curZAR) into BillCurrency

@@ -1,0 +1,113 @@
+!new Bank('bankAU1')
+!bankAU1.country := 'Australia'
+!bankAU1.name := 'Southern Cross Bank'
+!bankAU1.bic := 'SCBKAU2SXXX'
+
+!new Bank('bankSG1')
+!bankSG1.country := 'Singapore'
+!bankSG1.name := 'Merlion Digital Bank'
+!bankSG1.bic := 'MLDBSGSGXXX'
+
+!new Person('a1')
+!a1.firstName := 'Olivia'
+!a1.lastName := 'Chen'
+!a1.age := 27
+
+!new Person('a2')
+!a2.firstName := 'Liam'
+!a2.lastName := 'OConnor'
+!a2.age := 35
+
+!new Person('a3')
+!a3.firstName := 'Amir'
+!a3.lastName := 'Rahman'
+!a3.age := 42
+
+!new Person('a4')
+!a4.firstName := 'Grace'
+!a4.lastName := 'Tan'
+!a4.age := 30
+
+!new Person('a5')
+!a5.firstName := 'Mia'
+!a5.lastName := 'Chen'
+!a5.age := 13
+
+!new Person('a6')
+!a6.firstName := 'Noah'
+!a6.lastName := 'Rahman'
+!a6.age := 16
+
+!new Person('a7')
+!a7.firstName := 'Evelyn'
+!a7.lastName := 'Lim'
+!a7.age := 19
+
+!new Person('a8')
+!a8.firstName := 'Jack'
+!a8.lastName := 'Wu'
+!a8.age := 22
+
+!new Account('auAcc1')
+!auAcc1.iban := 'AU00SCBK000000000001'
+!auAcc1.balance := 2450
+
+!new Account('auAcc2')
+!auAcc2.iban := 'AU00SCBK000000000145'
+!auAcc2.balance := 0
+
+!new Account('auAcc3')
+!auAcc3.iban := 'AU00SCBK000000009876'
+!auAcc3.balance := 70000
+
+!new Account('auAcc4')
+!auAcc4.iban := 'AU00SCBK000000000777'
+!auAcc4.balance := 510
+
+!new Account('sgAcc1')
+!sgAcc1.iban := 'SG00MLDB000000000012'
+!sgAcc1.balance := 125
+
+!new Account('sgAcc2')
+!sgAcc2.iban := 'SG00MLDB000000004321'
+!sgAcc2.balance := 300000
+
+!insert (bankAU1, auAcc1) into AccountOfBanks
+!insert (bankAU1, auAcc2) into AccountOfBanks
+!insert (bankAU1, auAcc3) into AccountOfBanks
+!insert (bankAU1, auAcc4) into AccountOfBanks
+!insert (bankSG1, sgAcc1) into AccountOfBanks
+!insert (bankSG1, sgAcc2) into AccountOfBanks
+
+!insert (a1, auAcc1) into Ownership
+
+!insert (a1, auAcc2) into Ownership
+!insert (a2, auAcc2) into Ownership
+
+!insert (a3, auAcc3) into Ownership
+
+!insert (a4, auAcc4) into Ownership
+!insert (a7, auAcc4) into Ownership
+
+!insert (a8, sgAcc1) into Ownership
+
+!insert (a2, sgAcc2) into Ownership
+!insert (a4, sgAcc2) into Ownership
+
+!insert (a1, auAcc1) into Use
+!insert (a5, auAcc1) into Use
+
+!insert (a1, auAcc2) into Use
+!insert (a2, auAcc2) into Use
+!insert (a6, auAcc2) into Use
+
+!insert (a4, auAcc4) into Use
+!insert (a7, auAcc4) into Use
+!insert (a5, auAcc4) into Use
+
+!insert (a8, sgAcc1) into Use
+!insert (a7, sgAcc1) into Use
+
+!insert (a2, sgAcc2) into Use
+!insert (a4, sgAcc2) into Use
+!insert (a8, sgAcc2) into Use

@@ -1,0 +1,149 @@
+!new AddressBook('ab21')
+
+!new Company('orchardHousing')
+!orchardHousing.name := 'Orchard Housing Association'
+!orchardHousing.phone := '+1-416-555-2100'
+!orchardHousing.website := 'https://orchardhousing.example'
+!orchardHousing.email := 'admin@orchardhousing.example'
+!orchardHousing.industry := 'Property Management'
+
+!new Company('orchardMaintenance')
+!orchardMaintenance.name := 'Orchard Maintenance Services'
+!orchardMaintenance.phone := '+1-416-555-2108'
+!orchardMaintenance.website := ''
+!orchardMaintenance.email := 'service@orchardhousing.example'
+!orchardMaintenance.industry := 'Building Maintenance'
+
+!new Person('reneeWalsh')
+!reneeWalsh.name := 'Renee Walsh'
+!reneeWalsh.phone := '+1-416-555-2111'
+!reneeWalsh.website := ''
+!reneeWalsh.email := 'renee.walsh@orchardhousing.example'
+!reneeWalsh.title := 'Board Chair'
+
+!new Person('gavinLi')
+!gavinLi.name := 'Gavin Li'
+!gavinLi.phone := '+1-416-555-2112'
+!gavinLi.website := ''
+!gavinLi.email := 'gavin.li@orchardhousing.example'
+!gavinLi.title := 'Caretaker'
+
+!new Person('sahanaRao')
+!sahanaRao.name := 'Sahana Rao'
+!sahanaRao.phone := '+1-416-555-2113'
+!sahanaRao.website := 'https://sahanarao.example'
+!sahanaRao.email := 'sahana.rao@example.com'
+!sahanaRao.title := 'Resident Representative'
+
+!new Person('milaNovak')
+!milaNovak.name := 'Mila Novak'
+!milaNovak.phone := '+1-647-555-2114'
+!milaNovak.website := 'https://milanovak.example'
+!milaNovak.email := 'mila.novak@example.com'
+!milaNovak.title := 'Electrical Contractor'
+
+!insert (ab21, orchardHousing) into AddressBookMadeOfContact
+!insert (ab21, orchardMaintenance) into AddressBookMadeOfContact
+!insert (ab21, reneeWalsh) into AddressBookMadeOfContact
+!insert (ab21, gavinLi) into AddressBookMadeOfContact
+!insert (ab21, sahanaRao) into AddressBookMadeOfContact
+!insert (ab21, milaNovak) into AddressBookMadeOfContact
+
+!new Address('addrOrchardOffice')
+!addrOrchardOffice.city := 'Toronto'
+!addrOrchardOffice.street := 'Bloor St W'
+!addrOrchardOffice.houseNr := '250'
+
+!new Address('addrOrchardMaintenanceShop')
+!addrOrchardMaintenanceShop.city := 'Toronto'
+!addrOrchardMaintenanceShop.street := 'Dundas St W'
+!addrOrchardMaintenanceShop.houseNr := '1190'
+
+!new Address('addrReneeHome')
+!addrReneeHome.city := 'Toronto'
+!addrReneeHome.street := 'St Clair Ave W'
+!addrReneeHome.houseNr := '880'
+
+!new Address('addrGavinUnit')
+!addrGavinUnit.city := 'Toronto'
+!addrGavinUnit.street := 'Bloor St W'
+!addrGavinUnit.houseNr := '250-2B'
+
+!insert (orchardHousing, addrOrchardOffice) into ContactContainsAddress
+!insert (orchardMaintenance, addrOrchardMaintenanceShop) into ContactContainsAddress
+!insert (reneeWalsh, addrReneeHome) into ContactContainsAddress
+!insert (gavinLi, addrGavinUnit) into ContactContainsAddress
+
+!new Note('nHousingEmailInspection')
+!nHousingEmailInspection.author := 'Orchard Housing Association'
+!nHousingEmailInspection.time := Date('2026-02-05 09:30')
+!nHousingEmailInspection.type := #EMAIL
+!nHousingEmailInspection.comment := 'Notified residents about annual fire safety inspection and access requirements.'
+
+!new Note('nReneeMeetingBudget')
+!nReneeMeetingBudget.author := 'Renee Walsh'
+!nReneeMeetingBudget.time := Date('2026-02-06 18:00')
+!nReneeMeetingBudget.type := #MEETING
+!nReneeMeetingBudget.comment := 'Board meeting: approved reserve fund contribution and elevator maintenance plan.'
+
+!new Note('nGavinCallWaterLeak')
+!nGavinCallWaterLeak.author := 'Gavin Li'
+!nGavinCallWaterLeak.time := Date('2026-02-07 07:15')
+!nGavinCallWaterLeak.type := #CALL
+!nGavinCallWaterLeak.comment := 'Received call about a water leak in stairwell; shut off valve and arranged drying service.'
+
+!new Note('nMilaEmailInvoice')
+!nMilaEmailInvoice.author := 'Mila Novak'
+!nMilaEmailInvoice.time := Date('2026-02-08 16:40')
+!nMilaEmailInvoice.type := #EMAIL
+!nMilaEmailInvoice.comment := 'Sent invoice for panel replacement and provided photos of completed work.'
+
+!insert (orchardHousing, nHousingEmailInspection) into ContactContainsNote
+!insert (reneeWalsh, nReneeMeetingBudget) into ContactContainsNote
+!insert (gavinLi, nGavinCallWaterLeak) into ContactContainsNote
+!insert (milaNovak, nMilaEmailInvoice) into ContactContainsNote
+
+!new Relationship('relHousingSubdivisionMaintenance')
+!relHousingSubdivisionMaintenance.type := #SUBDIVISION
+!insert (orchardHousing, relHousingSubdivisionMaintenance) into ContactToRelationship
+!insert (relHousingSubdivisionMaintenance, orchardMaintenance) into RelationshipToContact
+
+!new Relationship('relReneeEmployeeHousing')
+!relReneeEmployeeHousing.type := #EMPLOYEE
+!insert (reneeWalsh, relReneeEmployeeHousing) into ContactToRelationship
+!insert (relReneeEmployeeHousing, orchardHousing) into RelationshipToContact
+
+!new Relationship('relGavinEmployeeMaintenance')
+!relGavinEmployeeMaintenance.type := #EMPLOYEE
+!insert (gavinLi, relGavinEmployeeMaintenance) into ContactToRelationship
+!insert (relGavinEmployeeMaintenance, orchardMaintenance) into RelationshipToContact
+
+!new Relationship('relMilaEmployeeMaintenance')
+!relMilaEmployeeMaintenance.type := #EMPLOYEE
+!insert (milaNovak, relMilaEmployeeMaintenance) into ContactToRelationship
+!insert (relMilaEmployeeMaintenance, orchardMaintenance) into RelationshipToContact
+
+!new Relationship('relSahanaCoworkerHousing')
+!relSahanaCoworkerHousing.type := #COWORKER
+!insert (sahanaRao, relSahanaCoworkerHousing) into ContactToRelationship
+!insert (relSahanaCoworkerHousing, orchardHousing) into RelationshipToContact
+
+!new Relationship('relGavinBossIsRenee')
+!relGavinBossIsRenee.type := #BOSS
+!insert (gavinLi, relGavinBossIsRenee) into ContactToRelationship
+!insert (relGavinBossIsRenee, reneeWalsh) into RelationshipToContact
+
+!new Relationship('relMilaBossIsGavin')
+!relMilaBossIsGavin.type := #BOSS
+!insert (milaNovak, relMilaBossIsGavin) into ContactToRelationship
+!insert (relMilaBossIsGavin, gavinLi) into RelationshipToContact
+
+!new Relationship('relSahanaBossIsRenee')
+!relSahanaBossIsRenee.type := #BOSS
+!insert (sahanaRao, relSahanaBossIsRenee) into ContactToRelationship
+!insert (relSahanaBossIsRenee, reneeWalsh) into RelationshipToContact
+
+!new Relationship('relGavinCoworkerMila')
+!relGavinCoworkerMila.type := #COWORKER
+!insert (gavinLi, relGavinCoworkerMila) into ContactToRelationship
+!insert (relGavinCoworkerMila, milaNovak) into RelationshipToContact

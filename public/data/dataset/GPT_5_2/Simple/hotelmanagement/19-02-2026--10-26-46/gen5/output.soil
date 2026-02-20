@@ -1,0 +1,116 @@
+!new Booking('booking7')
+!booking7.startDate := '2026-12-24'
+!booking7.endDate := '2026-12-27'
+!booking7.canceled := true
+!booking7.bookingId := 5001
+!booking7.confirmed := true
+
+!new Customer('customer7')
+!customer7.firstName := 'Elena'
+!customer7.lastName := 'Rossi'
+
+!insert (booking7, customer7) into BookingCustomer
+
+!new RoomReservation('rr9')
+!rr9.checkInDate := '2026-12-24'
+!rr9.checkOutDate := '2026-12-25'
+
+!new RoomReservation('rr10')
+!rr10.checkInDate := '2026-12-25'
+!rr10.checkOutDate := '2026-12-26'
+
+!new RoomReservation('rr11')
+!rr11.checkInDate := '2026-12-26'
+!rr11.checkOutDate := '2026-12-27'
+
+!insert (booking7, rr9) into BookingRoomReservation
+!insert (booking7, rr10) into BookingRoomReservation
+!insert (booking7, rr11) into BookingRoomReservation
+
+!new Room('room701')
+!room701.roomNumber := 701
+!room701.numBeds := 2
+!room701.pricePerNight := 210.0
+!room701.occupied := false
+!room701.blocked := true
+
+!new Room('room702')
+!room702.roomNumber := 702
+!room702.numBeds := 2
+!room702.pricePerNight := 210.0
+!room702.occupied := false
+!room702.blocked := true
+
+!new Room('room850')
+!room850.roomNumber := 850
+!room850.numBeds := 1
+!room850.pricePerNight := 140.0
+!room850.occupied := false
+!room850.blocked := true
+
+!new Room('room851')
+!room851.roomNumber := 851
+!room851.numBeds := 1
+!room851.pricePerNight := 140.0
+!room851.occupied := false
+!room851.blocked := true
+
+!new Room('room303')
+!room303.roomNumber := 303
+!room303.numBeds := 3
+!room303.pricePerNight := 260.0
+!room303.occupied := false
+!room303.blocked := true
+
+!insert (rr9, room701) into RoomReservationRoom
+!insert (rr9, room702) into RoomReservationRoom
+!insert (rr10, room850) into RoomReservationRoom
+!insert (rr10, room851) into RoomReservationRoom
+!insert (rr11, room303) into RoomReservationRoom
+
+!new RoomExtra('extraWelcomeFruit')
+!extraWelcomeFruit.price := 18.0
+!extraWelcomeFruit.description := 'Welcome fruit basket'
+
+!new RoomExtra('extraChampagne')
+!extraChampagne.price := 55.0
+!extraChampagne.description := 'Champagne in room'
+
+!new RoomExtra('extraDinner')
+!extraDinner.price := 120.0
+!extraDinner.description := 'Holiday dinner (2 persons)'
+
+!new RoomExtra('extraCityTax')
+!extraCityTax.price := 0.0
+!extraCityTax.description := 'City tax included'
+
+!insert (rr9, extraWelcomeFruit) into RoomReservationExtras
+!insert (rr9, extraChampagne) into RoomReservationExtras
+!insert (rr10, extraDinner) into RoomReservationExtras
+!insert (rr11, extraCityTax) into RoomReservationExtras
+
+!new Bill('bill10')
+!bill10.billId := 9001
+!bill10.price := 475.0
+
+!new Bill('bill11')
+!bill11.billId := 9002
+!bill11.price := 400.0
+
+!new Bill('bill12')
+!bill12.billId := 9003
+!bill12.price := 260.0
+
+!insert (bill10, rr9) into BillRoomReservation
+!insert (bill11, rr10) into BillRoomReservation
+!insert (bill12, rr11) into BillRoomReservation
+
+!insert (booking7, bill10) into BookingBill
+!insert (booking7, bill11) into BookingBill
+!insert (booking7, bill12) into BookingBill
+
+!new FreeRoomTypesDTO('dtoHolidayConnecting')
+!dtoHolidayConnecting.roomTypeDescription := 'Holiday connecting double rooms'
+!dtoHolidayConnecting.numBeds := 2
+!dtoHolidayConnecting.pricePerNight := 210.0
+!dtoHolidayConnecting.numFreeRooms := 0

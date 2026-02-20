@@ -1,0 +1,90 @@
+!new Bank('bankCA1')
+!bankCA1.country := 'Canada'
+!bankCA1.name := 'Maple Horizon Bank'
+!bankCA1.bic := 'MHORCATTXXX'
+
+!new Bank('bankUS1')
+!bankUS1.country := 'United States'
+!bankUS1.name := 'Redwood Federal Bank'
+!bankUS1.bic := 'RWFBUS33XXX'
+
+!new Person('y1')
+!y1.firstName := 'Nora'
+!y1.lastName := 'Campbell'
+!y1.age := 52
+
+!new Person('y2')
+!y2.firstName := 'Ethan'
+!y2.lastName := 'Brooks'
+!y2.age := 18
+
+!new Person('y3')
+!y3.firstName := 'Priya'
+!y3.lastName := 'Iyer'
+!y3.age := 33
+
+!new Person('y4')
+!y4.firstName := 'Miles'
+!y4.lastName := 'Reed'
+!y4.age := 27
+
+!new Person('y5')
+!y5.firstName := 'Grace'
+!y5.lastName := 'Reed'
+!y5.age := 26
+
+!new Person('y6')
+!y6.firstName := 'Logan'
+!y6.lastName := 'Price'
+!y6.age := 41
+
+!new Account('caAcc1')
+!caAcc1.iban := 'CA00MHOR000000000001'
+!caAcc1.balance := 90
+
+!new Account('caAcc2')
+!caAcc2.iban := 'CA00MHOR000000000145'
+!caAcc2.balance := 12000
+
+!new Account('caAcc3')
+!caAcc3.iban := 'CA00MHOR000000009999'
+!caAcc3.balance := 3
+
+!new Account('usAcc1')
+!usAcc1.iban := 'US00RWFB000000000010'
+!usAcc1.balance := 600
+
+!new Account('usAcc2')
+!usAcc2.iban := 'US00RWFB000000005500'
+!usAcc2.balance := 250000
+
+!new Account('usAcc3')
+!usAcc3.iban := 'US00RWFB000000000000'
+!usAcc3.balance := 0
+
+!insert (bankCA1, caAcc1) into AccountOfBanks
+!insert (bankCA1, caAcc2) into AccountOfBanks
+!insert (bankCA1, caAcc3) into AccountOfBanks
+!insert (bankUS1, usAcc1) into AccountOfBanks
+!insert (bankUS1, usAcc2) into AccountOfBanks
+!insert (bankUS1, usAcc3) into AccountOfBanks
+
+!insert (y1, caAcc1) into Ownership
+!insert (y1, caAcc2) into Ownership
+!insert (y2, caAcc2) into Ownership
+!insert (y3, caAcc3) into Ownership
+!insert (y1, usAcc1) into Ownership
+!insert (y4, usAcc2) into Ownership
+!insert (y5, usAcc2) into Ownership
+!insert (y2, usAcc3) into Ownership
+
+!insert (y1, caAcc1) into Use
+!insert (y6, caAcc1) into Use
+
+!insert (y2, caAcc2) into Use
+
+!insert (y6, usAcc1) into Use
+
+!insert (y4, usAcc2) into Use
+!insert (y5, usAcc2) into Use
+!insert (y6, usAcc2) into Use

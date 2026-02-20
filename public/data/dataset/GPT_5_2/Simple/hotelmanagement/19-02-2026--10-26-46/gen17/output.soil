@@ -1,0 +1,64 @@
+!new Booking('booking19')
+!booking19.startDate := '2028-07-19'
+!booking19.endDate := '2028-07-23'
+!booking19.canceled := false
+!booking19.bookingId := 9700
+!booking19.confirmed := true
+
+!new Customer('customer19')
+!customer19.firstName := 'Wei'
+!customer19.lastName := 'Zhang'
+
+!insert (booking19, customer19) into BookingCustomer
+
+!new RoomReservation('rr28')
+!rr28.checkInDate := '2028-07-19'
+!rr28.checkOutDate := '2028-07-20'
+
+!new RoomReservation('rr29')
+!rr29.checkInDate := '2028-07-20'
+!rr29.checkOutDate := '2028-07-23'
+
+!insert (booking19, rr28) into BookingRoomReservation
+!insert (booking19, rr29) into BookingRoomReservation
+
+!new RoomExtra('extraReservationDeposit')
+!extraReservationDeposit.price := 150.0
+!extraReservationDeposit.description := 'Reservation deposit (room assignment pending)'
+
+!insert (rr28, extraReservationDeposit) into RoomReservationExtras
+
+!new Room('room1707')
+!room1707.roomNumber := 1707
+!room1707.numBeds := 2
+!room1707.pricePerNight := 210.0
+!room1707.occupied := false
+!room1707.blocked := true
+
+!insert (rr29, room1707) into RoomReservationRoom
+
+!new Bill('bill29')
+!bill29.billId := 19001
+!bill29.price := 150.0
+
+!new Bill('bill30')
+!bill30.billId := 19002
+!bill30.price := 630.0
+
+!insert (bill29, rr28) into BillRoomReservation
+!insert (bill30, rr29) into BillRoomReservation
+
+!insert (booking19, bill29) into BookingBill
+!insert (booking19, bill30) into BookingBill
+
+!new FreeRoomTypesDTO('dtoSummerDouble')
+!dtoSummerDouble.roomTypeDescription := 'Summer double (river side)'
+!dtoSummerDouble.numBeds := 2
+!dtoSummerDouble.pricePerNight := 210.0
+!dtoSummerDouble.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('dtoSummerSinglePromo')
+!dtoSummerSinglePromo.roomTypeDescription := 'Summer single (promo rate)'
+!dtoSummerSinglePromo.numBeds := 1
+!dtoSummerSinglePromo.pricePerNight := 98.0
+!dtoSummerSinglePromo.numFreeRooms := 10

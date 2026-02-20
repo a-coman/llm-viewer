@@ -1,0 +1,234 @@
+!new StateMachine('smTriage')
+!smTriage.name := 'erTriageWorkflow'
+
+!new State('stArriving')
+!stArriving.name := 'arriving'
+!new State('stTriage')
+!stTriage.name := 'triage'
+!new State('stWaiting')
+!stWaiting.name := 'waiting'
+!new State('stTreatment')
+!stTreatment.name := 'treatment'
+!new State('stObservation')
+!stObservation.name := 'observation'
+!new State('stDischarged')
+!stDischarged.name := 'discharged'
+!new State('stAdmitted')
+!stAdmitted.name := 'admitted'
+!new State('stLeft')
+!stLeft.name := 'leftWithoutBeingSeen'
+
+!insert (smTriage, stArriving) into StateMachineContainsStates
+!insert (smTriage, stTriage) into StateMachineContainsStates
+!insert (smTriage, stWaiting) into StateMachineContainsStates
+!insert (smTriage, stTreatment) into StateMachineContainsStates
+!insert (smTriage, stObservation) into StateMachineContainsStates
+!insert (smTriage, stDischarged) into StateMachineContainsStates
+!insert (smTriage, stAdmitted) into StateMachineContainsStates
+!insert (smTriage, stLeft) into StateMachineContainsStates
+
+!insert (smTriage, stArriving) into StateMachineStartsStates
+
+
+!new Transition('trRegister')
+!trRegister.name := 'registerPatient'
+!new TimeEvent('teRegister')
+!teRegister.time := 2
+
+!new Transition('trMinorDischarge')
+!trMinorDischarge.name := 'minorIssueDischarge'
+!new TimeEvent('teMinorDischarge')
+!teMinorDischarge.time := 15
+
+!new Transition('trAssignQueue')
+!trAssignQueue.name := 'assignToQueue'
+!new TimeEvent('teAssignQueue')
+!teAssignQueue.time := 3
+
+!new Transition('trLeaveWaiting')
+!trLeaveWaiting.name := 'leaveDueToWait'
+!new TimeEvent('teLeaveWaiting')
+!teLeaveWaiting.time := 120
+
+!new Transition('trCallIn')
+!trCallIn.name := 'callInForTreatment'
+!new TimeEvent('teCallIn')
+!teCallIn.time := 45
+
+!new Transition('trTreatToObs')
+!trTreatToObs.name := 'moveToObservation'
+!new TimeEvent('teTreatToObs')
+!teTreatToObs.time := 60
+
+!new Transition('trTreatAdmit')
+!trTreatAdmit.name := 'admitFromTreatment'
+!new TimeEvent('teTreatAdmit')
+!teTreatAdmit.time := 30
+
+!new Transition('trObsDischarge')
+!trObsDischarge.name := 'dischargeAfterObservation'
+!new TimeEvent('teObsDischarge')
+!teObsDischarge.time := 240
+
+!new Transition('trObsAdmit')
+!trObsAdmit.name := 'admitAfterObservation'
+!new TimeEvent('teObsAdmit')
+!teObsAdmit.time := 180
+
+!new Transition('trHospitalStayEnds')
+!trHospitalStayEnds.name := 'hospitalStayEnds'
+!new TimeEvent('teHospitalStayEnds')
+!teHospitalStayEnds.time := 4320
+
+!new Transition('trReturnLater')
+!trReturnLater.name := 'returnLater'
+!new TimeEvent('teReturnLater')
+!teReturnLater.time := 1440
+
+!new Transition('trNewVisit')
+!trNewVisit.name := 'newVisit'
+!new TimeEvent('teNewVisit')
+!teNewVisit.time := 10080
+
+
+!insert (smTriage, trRegister) into StateMachineContainsTransitions
+!insert (smTriage, trMinorDischarge) into StateMachineContainsTransitions
+!insert (smTriage, trAssignQueue) into StateMachineContainsTransitions
+!insert (smTriage, trLeaveWaiting) into StateMachineContainsTransitions
+!insert (smTriage, trCallIn) into StateMachineContainsTransitions
+!insert (smTriage, trTreatToObs) into StateMachineContainsTransitions
+!insert (smTriage, trTreatAdmit) into StateMachineContainsTransitions
+!insert (smTriage, trObsDischarge) into StateMachineContainsTransitions
+!insert (smTriage, trObsAdmit) into StateMachineContainsTransitions
+!insert (smTriage, trHospitalStayEnds) into StateMachineContainsTransitions
+!insert (smTriage, trReturnLater) into StateMachineContainsTransitions
+!insert (smTriage, trNewVisit) into StateMachineContainsTransitions
+
+!insert (trRegister, teRegister) into TransitionContainsEvents
+!insert (trMinorDischarge, teMinorDischarge) into TransitionContainsEvents
+!insert (trAssignQueue, teAssignQueue) into TransitionContainsEvents
+!insert (trLeaveWaiting, teLeaveWaiting) into TransitionContainsEvents
+!insert (trCallIn, teCallIn) into TransitionContainsEvents
+!insert (trTreatToObs, teTreatToObs) into TransitionContainsEvents
+!insert (trTreatAdmit, teTreatAdmit) into TransitionContainsEvents
+!insert (trObsDischarge, teObsDischarge) into TransitionContainsEvents
+!insert (trObsAdmit, teObsAdmit) into TransitionContainsEvents
+!insert (trHospitalStayEnds, teHospitalStayEnds) into TransitionContainsEvents
+!insert (trReturnLater, teReturnLater) into TransitionContainsEvents
+!insert (trNewVisit, teNewVisit) into TransitionContainsEvents
+
+
+!insert (stArriving, trRegister) into StateTransition
+!insert (trRegister, stTriage) into TransitionState
+
+!insert (stTriage, trMinorDischarge) into StateTransition
+!insert (trMinorDischarge, stDischarged) into TransitionState
+
+!insert (stTriage, trAssignQueue) into StateTransition
+!insert (trAssignQueue, stWaiting) into TransitionState
+
+!insert (stWaiting, trLeaveWaiting) into StateTransition
+!insert (trLeaveWaiting, stLeft) into TransitionState
+
+!insert (stWaiting, trCallIn) into StateTransition
+!insert (trCallIn, stTreatment) into TransitionState
+
+!insert (stTreatment, trTreatToObs) into StateTransition
+!insert (trTreatToObs, stObservation) into TransitionState
+
+!insert (stTreatment, trTreatAdmit) into StateTransition
+!insert (trTreatAdmit, stAdmitted) into TransitionState
+
+!insert (stObservation, trObsDischarge) into StateTransition
+!insert (trObsDischarge, stDischarged) into TransitionState
+
+!insert (stObservation, trObsAdmit) into StateTransition
+!insert (trObsAdmit, stAdmitted) into TransitionState
+
+!insert (stAdmitted, trHospitalStayEnds) into StateTransition
+!insert (trHospitalStayEnds, stDischarged) into TransitionState
+
+!insert (stLeft, trReturnLater) into StateTransition
+!insert (trReturnLater, stArriving) into TransitionState
+
+!insert (stDischarged, trNewVisit) into StateTransition
+!insert (trNewVisit, stArriving) into TransitionState
+
+
+
+!new StateMachine('smMigration')
+!smMigration.name := 'dataMigrationJob'
+
+!new State('mjPlanned')
+!mjPlanned.name := 'planned'
+!new State('mjRunning')
+!mjRunning.name := 'running'
+!new State('mjValidating')
+!mjValidating.name := 'validating'
+!new State('mjRolledBack')
+!mjRolledBack.name := 'rolledBack'
+!new State('mjCompleted')
+!mjCompleted.name := 'completed'
+
+!insert (smMigration, mjPlanned) into StateMachineContainsStates
+!insert (smMigration, mjRunning) into StateMachineContainsStates
+!insert (smMigration, mjValidating) into StateMachineContainsStates
+!insert (smMigration, mjRolledBack) into StateMachineContainsStates
+!insert (smMigration, mjCompleted) into StateMachineContainsStates
+
+!insert (smMigration, mjPlanned) into StateMachineStartsStates
+
+
+!new Transition('trMjStart')
+!trMjStart.name := 'startJob'
+!new TimeEvent('teMjStart')
+!teMjStart.time := 1
+
+!new Transition('trMjRunDone')
+!trMjRunDone.name := 'runDone'
+!new TimeEvent('teMjRunDone')
+!teMjRunDone.time := 600
+
+!new Transition('trMjValidateOk')
+!trMjValidateOk.name := 'validateOk'
+!new TimeEvent('teMjValidateOk')
+!teMjValidateOk.time := 30
+
+!new Transition('trMjValidateFail')
+!trMjValidateFail.name := 'validateFail'
+!new TimeEvent('teMjValidateFail')
+!teMjValidateFail.time := 20
+
+!new Transition('trMjRollbackDone')
+!trMjRollbackDone.name := 'rollbackDone'
+!new TimeEvent('teMjRollbackDone')
+!teMjRollbackDone.time := 120
+
+
+!insert (smMigration, trMjStart) into StateMachineContainsTransitions
+!insert (smMigration, trMjRunDone) into StateMachineContainsTransitions
+!insert (smMigration, trMjValidateOk) into StateMachineContainsTransitions
+!insert (smMigration, trMjValidateFail) into StateMachineContainsTransitions
+!insert (smMigration, trMjRollbackDone) into StateMachineContainsTransitions
+
+!insert (trMjStart, teMjStart) into TransitionContainsEvents
+!insert (trMjRunDone, teMjRunDone) into TransitionContainsEvents
+!insert (trMjValidateOk, teMjValidateOk) into TransitionContainsEvents
+!insert (trMjValidateFail, teMjValidateFail) into TransitionContainsEvents
+!insert (trMjRollbackDone, teMjRollbackDone) into TransitionContainsEvents
+
+
+!insert (mjPlanned, trMjStart) into StateTransition
+!insert (trMjStart, mjRunning) into TransitionState
+
+!insert (mjRunning, trMjRunDone) into StateTransition
+!insert (trMjRunDone, mjValidating) into TransitionState
+
+!insert (mjValidating, trMjValidateOk) into StateTransition
+!insert (trMjValidateOk, mjCompleted) into TransitionState
+
+!insert (mjValidating, trMjValidateFail) into StateTransition
+!insert (trMjValidateFail, mjRolledBack) into TransitionState
+
+!insert (mjRolledBack, trMjRollbackDone) into StateTransition
+!insert (trMjRollbackDone, mjPlanned) into TransitionState

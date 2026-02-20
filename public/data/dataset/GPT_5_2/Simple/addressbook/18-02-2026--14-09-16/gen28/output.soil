@@ -1,0 +1,161 @@
+!new AddressBook('ab29')
+
+!new Company('meridianObservatory')
+!meridianObservatory.name := 'Meridian Mountain Observatory'
+!meridianObservatory.phone := '+1-520-555-2900'
+!meridianObservatory.website := 'https://meridianobservatory.example'
+!meridianObservatory.email := 'contact@meridianobservatory.example'
+!meridianObservatory.industry := 'Astronomy Research'
+
+!new Company('meridianOutreach')
+!meridianOutreach.name := 'Meridian Public Outreach'
+!meridianOutreach.phone := '+1-520-555-2906'
+!meridianOutreach.website := ''
+!meridianOutreach.email := 'outreach@meridianobservatory.example'
+!meridianOutreach.industry := 'Science Education'
+
+!new Company('cosmoEquipment')
+!cosmoEquipment.name := 'Cosmo Equipment Supply'
+!cosmoEquipment.phone := '+1-480-555-2910'
+!cosmoEquipment.website := 'https://cosmoequipment.example'
+!cosmoEquipment.email := 'sales@cosmoequipment.example'
+!cosmoEquipment.industry := 'Scientific Equipment'
+
+!new Person('averyNg')
+!averyNg.name := 'Avery Ng'
+!averyNg.phone := '+1-520-555-2920'
+!averyNg.website := ''
+!averyNg.email := 'avery.ng@meridianobservatory.example'
+!averyNg.title := 'Operations Director'
+
+!new Person('seleneVega')
+!seleneVega.name := 'Selene Vega'
+!seleneVega.phone := '+1-520-555-2921'
+!seleneVega.website := 'https://selenevega.example'
+!seleneVega.email := 'selene.vega@meridianobservatory.example'
+!seleneVega.title := 'Astrophysicist'
+
+!new Person('tomHughes')
+!tomHughes.name := 'Tom Hughes'
+!tomHughes.phone := '+1-520-555-2922'
+!tomHughes.website := ''
+!tomHughes.email := 'tom.hughes@meridianobservatory.example'
+!tomHughes.title := 'Instrumentation Technician'
+
+!insert (ab29, meridianObservatory) into AddressBookMadeOfContact
+!insert (ab29, meridianOutreach) into AddressBookMadeOfContact
+!insert (ab29, cosmoEquipment) into AddressBookMadeOfContact
+!insert (ab29, averyNg) into AddressBookMadeOfContact
+!insert (ab29, seleneVega) into AddressBookMadeOfContact
+!insert (ab29, tomHughes) into AddressBookMadeOfContact
+
+!new Address('addrMeridianHQ')
+!addrMeridianHQ.city := 'Tucson'
+!addrMeridianHQ.street := 'E Science Park Dr'
+!addrMeridianHQ.houseNr := '240'
+
+!new Address('addrMeridianRemoteSite')
+!addrMeridianRemoteSite.city := 'Mount Lemmon'
+!addrMeridianRemoteSite.street := 'Sky Ridge Rd'
+!addrMeridianRemoteSite.houseNr := '1'
+
+!new Address('addrOutreachOffice')
+!addrOutreachOffice.city := 'Tucson'
+!addrOutreachOffice.street := 'University Blvd'
+!addrOutreachOffice.houseNr := '812'
+
+!new Address('addrCosmoWarehouse')
+!addrCosmoWarehouse.city := 'Tempe'
+!addrCosmoWarehouse.street := 'S Mill Ave'
+!addrCosmoWarehouse.houseNr := '505'
+
+!new Address('addrAveryHome')
+!addrAveryHome.city := 'Tucson'
+!addrAveryHome.street := 'E Speedway Blvd'
+!addrAveryHome.houseNr := '3100'
+
+!new Address('addrTomHome')
+!addrTomHome.city := 'Oro Valley'
+!addrTomHome.street := 'N La Canada Dr'
+!addrTomHome.houseNr := '1055'
+
+!insert (meridianObservatory, addrMeridianHQ) into ContactContainsAddress
+!insert (meridianObservatory, addrMeridianRemoteSite) into ContactContainsAddress
+!insert (meridianOutreach, addrOutreachOffice) into ContactContainsAddress
+!insert (cosmoEquipment, addrCosmoWarehouse) into ContactContainsAddress
+!insert (averyNg, addrAveryHome) into ContactContainsAddress
+!insert (tomHughes, addrTomHome) into ContactContainsAddress
+
+!new Note('nObsEmailMaintenanceWindow')
+!nObsEmailMaintenanceWindow.author := 'Systems Desk'
+!nObsEmailMaintenanceWindow.time := Date('2026-02-09 07:05')
+!nObsEmailMaintenanceWindow.type := #EMAIL
+!nObsEmailMaintenanceWindow.comment := 'Scheduled network maintenance window for the remote site; expected downtime 30 minutes.'
+
+!new Note('nSeleneMeetingProposal')
+!nSeleneMeetingProposal.author := 'Selene Vega'
+!nSeleneMeetingProposal.time := Date('2026-02-10 10:30')
+!nSeleneMeetingProposal.type := #MEETING
+!nSeleneMeetingProposal.comment := 'Reviewed observing proposal draft and assigned sections for data management and outreach.'
+
+!new Note('nTomCallPartsETA')
+!nTomCallPartsETA.author := 'Tom Hughes'
+!nTomCallPartsETA.time := Date('2026-02-11 08:15')
+!nTomCallPartsETA.type := #CALL
+!nTomCallPartsETA.comment := 'Called supplier to confirm ETA for CCD controller replacement; arranged pickup at warehouse.'
+
+!new Note('nOutreachEmailEvent')
+!nOutreachEmailEvent.author := 'Meridian Outreach'
+!nOutreachEmailEvent.time := Date('2026-02-12 16:40')
+!nOutreachEmailEvent.type := #EMAIL
+!nOutreachEmailEvent.comment := 'Announced public star party schedule and volunteer briefing time.'
+
+!insert (meridianObservatory, nObsEmailMaintenanceWindow) into ContactContainsNote
+!insert (seleneVega, nSeleneMeetingProposal) into ContactContainsNote
+!insert (tomHughes, nTomCallPartsETA) into ContactContainsNote
+!insert (meridianOutreach, nOutreachEmailEvent) into ContactContainsNote
+
+!new Relationship('relObsSubdivisionOutreach')
+!relObsSubdivisionOutreach.type := #SUBDIVISION
+!insert (meridianObservatory, relObsSubdivisionOutreach) into ContactToRelationship
+!insert (relObsSubdivisionOutreach, meridianOutreach) into RelationshipToContact
+
+!new Relationship('relAveryEmployeeObs')
+!relAveryEmployeeObs.type := #EMPLOYEE
+!insert (averyNg, relAveryEmployeeObs) into ContactToRelationship
+!insert (relAveryEmployeeObs, meridianObservatory) into RelationshipToContact
+
+!new Relationship('relSeleneEmployeeObs')
+!relSeleneEmployeeObs.type := #EMPLOYEE
+!insert (seleneVega, relSeleneEmployeeObs) into ContactToRelationship
+!insert (relSeleneEmployeeObs, meridianObservatory) into RelationshipToContact
+
+!new Relationship('relTomEmployeeObs')
+!relTomEmployeeObs.type := #EMPLOYEE
+!insert (tomHughes, relTomEmployeeObs) into ContactToRelationship
+!insert (relTomEmployeeObs, meridianObservatory) into RelationshipToContact
+
+!new Relationship('relSeleneBossIsAvery')
+!relSeleneBossIsAvery.type := #BOSS
+!insert (seleneVega, relSeleneBossIsAvery) into ContactToRelationship
+!insert (relSeleneBossIsAvery, averyNg) into RelationshipToContact
+
+!new Relationship('relTomBossIsSelene')
+!relTomBossIsSelene.type := #BOSS
+!insert (tomHughes, relTomBossIsSelene) into ContactToRelationship
+!insert (relTomBossIsSelene, seleneVega) into RelationshipToContact
+
+!new Relationship('relOutreachCoworkerCosmo')
+!relOutreachCoworkerCosmo.type := #COWORKER
+!insert (meridianOutreach, relOutreachCoworkerCosmo) into ContactToRelationship
+!insert (relOutreachCoworkerCosmo, cosmoEquipment) into RelationshipToContact
+
+!new Relationship('relSeleneCoworkerTom')
+!relSeleneCoworkerTom.type := #COWORKER
+!insert (seleneVega, relSeleneCoworkerTom) into ContactToRelationship
+!insert (relSeleneCoworkerTom, tomHughes) into RelationshipToContact
+
+!new Relationship('relTomCoworkerSelene')
+!relTomCoworkerSelene.type := #COWORKER
+!insert (tomHughes, relTomCoworkerSelene) into ContactToRelationship
+!insert (relTomCoworkerSelene, seleneVega) into RelationshipToContact

@@ -1,0 +1,77 @@
+!new Currency('curTND')
+!curTND.name := 'Tunisian Dinar'
+!curTND.abbreviation := 'TND'
+
+!new Currency('curGEL')
+!curGEL.name := 'Georgian Lari'
+!curGEL.abbreviation := 'GEL'
+
+!new Expense('expAugDisasterPreparednessKit')
+!expAugDisasterPreparednessKit.amount := 344.24
+!expAugDisasterPreparednessKit.startDate := Date('2026-08-08')
+!expAugDisasterPreparednessKit.endDate := Date('2026-08-14')
+
+!new Bill('billWaterJugs_2026_08_08')
+!billWaterJugs_2026_08_08.amount := 38.75
+!billWaterJugs_2026_08_08.category := 'Emergency - Water storage containers'
+!billWaterJugs_2026_08_08.date := Date('2026-08-08')
+!billWaterJugs_2026_08_08.paymentMethod := #CASH
+!billWaterJugs_2026_08_08.status := #VERIFIED
+
+!new Bill('billFirstAidSupplies_2026_08_09')
+!billFirstAidSupplies_2026_08_09.amount := 74.20
+!billFirstAidSupplies_2026_08_09.category := 'Emergency - First aid supplies'
+!billFirstAidSupplies_2026_08_09.date := Date('2026-08-09')
+!billFirstAidSupplies_2026_08_09.paymentMethod := #CREDIT_CARD
+!billFirstAidSupplies_2026_08_09.status := #VALIDATED
+
+!new Bill('billPortableStove_2026_08_10')
+!billPortableStove_2026_08_10.amount := 112.00
+!billPortableStove_2026_08_10.category := 'Emergency - Portable stove'
+!billPortableStove_2026_08_10.date := Date('2026-08-10')
+!billPortableStove_2026_08_10.paymentMethod := #CREDIT_CARD
+!billPortableStove_2026_08_10.status := #PENDING
+
+!new Bill('billFuelCanister_2026_08_10')
+!billFuelCanister_2026_08_10.amount := 16.80
+!billFuelCanister_2026_08_10.category := 'Emergency - Fuel canister'
+!billFuelCanister_2026_08_10.date := Date('2026-08-10')
+!billFuelCanister_2026_08_10.paymentMethod := #CASH
+!billFuelCanister_2026_08_10.status := #DRAFT
+
+!new Bill('billThermalBlankets_2026_08_11')
+!billThermalBlankets_2026_08_11.amount := 22.50
+!billThermalBlankets_2026_08_11.category := 'Emergency - Thermal blankets'
+!billThermalBlankets_2026_08_11.date := Date('2026-08-11')
+!billThermalBlankets_2026_08_11.paymentMethod := #CASH
+!billThermalBlankets_2026_08_11.status := #VERIFIED
+
+!new Bill('billPowerBank_2026_08_12')
+!billPowerBank_2026_08_12.amount := 49.99
+!billPowerBank_2026_08_12.category := 'Emergency - Phone power bank'
+!billPowerBank_2026_08_12.date := Date('2026-08-12')
+!billPowerBank_2026_08_12.paymentMethod := #CREDIT_CARD
+!billPowerBank_2026_08_12.status := #REFUNDED
+
+!new Bill('billHomeSafetyClass_2026_08_14')
+!billHomeSafetyClass_2026_08_14.amount := 30.00
+!billHomeSafetyClass_2026_08_14.category := 'Emergency - Home safety training class'
+!billHomeSafetyClass_2026_08_14.date := Date('2026-08-14')
+!billHomeSafetyClass_2026_08_14.paymentMethod := #CHECK
+!billHomeSafetyClass_2026_08_14.status := #REFUSED
+
+!insert (expAugDisasterPreparednessKit, billWaterJugs_2026_08_08) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billFirstAidSupplies_2026_08_09) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billPortableStove_2026_08_10) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billFuelCanister_2026_08_10) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billThermalBlankets_2026_08_11) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billPowerBank_2026_08_12) into ExpenseContainsBills
+!insert (expAugDisasterPreparednessKit, billHomeSafetyClass_2026_08_14) into ExpenseContainsBills
+
+!insert (billWaterJugs_2026_08_08, curTND) into BillCurrency
+!insert (billFirstAidSupplies_2026_08_09, curTND) into BillCurrency
+!insert (billPortableStove_2026_08_10, curGEL) into BillCurrency
+!insert (billFuelCanister_2026_08_10, curGEL) into BillCurrency
+!insert (billThermalBlankets_2026_08_11, curTND) into BillCurrency
+!insert (billPowerBank_2026_08_12, curGEL) into BillCurrency
+!insert (billHomeSafetyClass_2026_08_14, curTND) into BillCurrency

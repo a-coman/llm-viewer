@@ -1,0 +1,110 @@
+!new RentalOffice('office_sanjose')
+!office_sanjose.name := 'Silicon Valley Vehicle Rental - San Jose'
+!office_sanjose.number := 1101
+!office_sanjose.address := '1650 S 7th St, San Jose, CA 95112'
+
+!new RentalOffice('office_jacksonville')
+!office_jacksonville.name := 'River City Fleet Rentals - Jacksonville'
+!office_jacksonville.number := 1102
+!office_jacksonville.address := '8800 Baymeadows Rd, Jacksonville, FL 32256'
+
+!new RentalOffice('office_hartford_returnonly')
+!office_hartford_returnonly.name := 'Hartford Return-Only Depot'
+!office_hartford_returnonly.number := 1103
+!office_hartford_returnonly.address := '1400 Park St, Hartford, CT 06106'
+
+!new Truck('truck_de_24ft_55')
+!truck_de_24ft_55.id := 45555
+!truck_de_24ft_55.registrationState := #DE
+!truck_de_24ft_55.licensePlateNumber := 'DE-TRK-5520'
+!truck_de_24ft_55.vehicleTypeCode := #TRUCK24
+!truck_de_24ft_55.registrationLastMaintenanceDate := Date('2026-02-27')
+!truck_de_24ft_55.expirationDate := Date('2027-02-28')
+!truck_de_24ft_55.odometerReading := 70512
+!truck_de_24ft_55.gasTankCapacity := 55.0
+!truck_de_24ft_55.workingRadio := true
+!truck_de_24ft_55.mileage := 8
+
+!new Vehicle('trailer_co_open_55')
+!trailer_co_open_55.id := 46655
+!trailer_co_open_55.registrationState := #CO
+!trailer_co_open_55.licensePlateNumber := 'CO-TRL-6605'
+!trailer_co_open_55.vehicleTypeCode := #OPEN_TRAILER
+!trailer_co_open_55.registrationLastMaintenanceDate := Date('2026-03-06')
+!trailer_co_open_55.expirationDate := Date('2027-03-31')
+
+!new Vehicle('trailer_fl_covered_56')
+!trailer_fl_covered_56.id := 47756
+!trailer_fl_covered_56.registrationState := #FL
+!trailer_fl_covered_56.licensePlateNumber := 'FL-TRL-5588'
+!trailer_fl_covered_56.vehicleTypeCode := #COVERED_TRAILER
+!trailer_fl_covered_56.registrationLastMaintenanceDate := Date('2025-12-09')
+!trailer_fl_covered_56.expirationDate := Date('2026-12-31')
+
+!insert (office_sanjose, truck_de_24ft_55) into RentalOfficeVehicle
+!insert (office_sanjose, trailer_co_open_55) into RentalOfficeVehicle
+!insert (office_jacksonville, trailer_fl_covered_56) into RentalOfficeVehicle
+
+!new Company('cust_co_northstarit')
+!cust_co_northstarit.name := 'NorthStar IT Relocations'
+!cust_co_northstarit.address := '99 N 1st St, San Jose, CA 95113'
+!cust_co_northstarit.poorRisk := false
+!cust_co_northstarit.idNumber := 31004567
+
+!new Company('cust_co_quickship')
+!cust_co_quickship.name := 'QuickShip Freight Brokers'
+!cust_co_quickship.address := '10140 Philips Hwy, Jacksonville, FL 32256'
+!cust_co_quickship.poorRisk := true
+!cust_co_quickship.idNumber := 31007881
+
+!new RentalAgreement('ra_90001')
+!ra_90001.number := 90001
+!ra_90001.rentalDate := Date('2026-09-02')
+!ra_90001.anticipatedDuration := 2
+!ra_90001.depositPaid := 600.00
+!ra_90001.quotedDailyRate := 189.00
+!ra_90001.quotedRatePerMile := 0.99
+
+!new RentalAgreement('ra_90002')
+!ra_90002.number := 90002
+!ra_90002.rentalDate := Date('2026-09-06')
+!ra_90002.anticipatedDuration := 9
+!ra_90002.depositPaid := 0.00
+!ra_90002.quotedDailyRate := 155.00
+!ra_90002.quotedRatePerMile := 0.87
+
+!new RentalAgreement('ra_90003')
+!ra_90003.number := 90003
+!ra_90003.rentalDate := Date('2026-09-10')
+!ra_90003.anticipatedDuration := 5
+!ra_90003.depositPaid := 250.00
+!ra_90003.quotedDailyRate := 58.00
+!ra_90003.quotedRatePerMile := 0.00
+
+!new RentalAgreement('ra_90004')
+!ra_90004.number := 90004
+!ra_90004.rentalDate := Date('2026-09-12')
+!ra_90004.anticipatedDuration := 1
+!ra_90004.depositPaid := 50.00
+!ra_90004.quotedDailyRate := 35.00
+!ra_90004.quotedRatePerMile := 0.00
+
+!insert (office_sanjose, ra_90001) into RentalOfficeRentalAgreementOrigin
+!insert (office_sanjose, ra_90001) into RentalOfficeRentalAgreementDrop
+!insert (ra_90001, truck_de_24ft_55) into RentalAgreementVehicle
+!insert (ra_90001, cust_co_northstarit) into RentalAgreementCustomer
+
+!insert (office_sanjose, ra_90002) into RentalOfficeRentalAgreementOrigin
+!insert (office_jacksonville, ra_90002) into RentalOfficeRentalAgreementDrop
+!insert (ra_90002, truck_de_24ft_55) into RentalAgreementVehicle
+!insert (ra_90002, cust_co_quickship) into RentalAgreementCustomer
+
+!insert (office_jacksonville, ra_90003) into RentalOfficeRentalAgreementOrigin
+!insert (office_jacksonville, ra_90003) into RentalOfficeRentalAgreementDrop
+!insert (ra_90003, trailer_fl_covered_56) into RentalAgreementVehicle
+!insert (ra_90003, cust_co_quickship) into RentalAgreementCustomer
+
+!insert (office_sanjose, ra_90004) into RentalOfficeRentalAgreementOrigin
+!insert (office_hartford_returnonly, ra_90004) into RentalOfficeRentalAgreementDrop
+!insert (ra_90004, trailer_co_open_55) into RentalAgreementVehicle
+!insert (ra_90004, cust_co_northstarit) into RentalAgreementCustomer

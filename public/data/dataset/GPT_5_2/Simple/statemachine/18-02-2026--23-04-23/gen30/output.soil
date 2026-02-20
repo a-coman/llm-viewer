@@ -1,0 +1,337 @@
+!new StateMachine('smHabitat')
+!smHabitat.name := 'marsHabitatLifeSupport'
+
+!new State('hsNormal')
+!hsNormal.name := 'normal'
+!new State('hsCo2Scrubbing')
+!hsCo2Scrubbing.name := 'co2Scrubbing'
+!new State('hsOxygenBoost')
+!hsOxygenBoost.name := 'oxygenBoost'
+!new State('hsEmergencyVent')
+!hsEmergencyVent.name := 'emergencyVent'
+!new State('hsMaintenance')
+!hsMaintenance.name := 'maintenance'
+!new State('hsOffline')
+!hsOffline.name := 'offline'
+
+!insert (smHabitat, hsNormal) into StateMachineContainsStates
+!insert (smHabitat, hsCo2Scrubbing) into StateMachineContainsStates
+!insert (smHabitat, hsOxygenBoost) into StateMachineContainsStates
+!insert (smHabitat, hsEmergencyVent) into StateMachineContainsStates
+!insert (smHabitat, hsMaintenance) into StateMachineContainsStates
+!insert (smHabitat, hsOffline) into StateMachineContainsStates
+
+!insert (smHabitat, hsNormal) into StateMachineStartsStates
+
+
+!new Transition('trHsDailyCheck')
+!trHsDailyCheck.name := 'dailyCheck'
+!new TimeEvent('evHsDailyCheck')
+!evHsDailyCheck.time := 1440
+
+!new Transition('trHsCo2High')
+!trHsCo2High.name := 'co2High'
+!new TimeEvent('evHsCo2High')
+!evHsCo2High.time := 2
+
+!new Transition('trHsScrubComplete')
+!trHsScrubComplete.name := 'scrubComplete'
+!new TimeEvent('evHsScrubComplete')
+!evHsScrubComplete.time := 15
+
+!new Transition('trHsO2Low')
+!trHsO2Low.name := 'o2Low'
+!new TimeEvent('evHsO2Low')
+!evHsO2Low.time := 2
+
+!new Transition('trHsBoostComplete')
+!trHsBoostComplete.name := 'boostComplete'
+!new TimeEvent('evHsBoostComplete')
+!evHsBoostComplete.time := 10
+
+!new Transition('trHsLeakDetected')
+!trHsLeakDetected.name := 'leakDetected'
+!new TimeEvent('evHsLeakDetected')
+!evHsLeakDetected.time := 1
+
+!new Transition('trHsVentCycle')
+!trHsVentCycle.name := 'ventCycle'
+!new TimeEvent('evHsVentCycle')
+!evHsVentCycle.time := 5
+
+!new Transition('trHsMaintenanceRequest')
+!trHsMaintenanceRequest.name := 'maintenanceRequest'
+!new TimeEvent('evHsMaintenanceRequest')
+!evHsMaintenanceRequest.time := 1
+
+!new Transition('trHsMaintenanceDone')
+!trHsMaintenanceDone.name := 'maintenanceDone'
+!new TimeEvent('evHsMaintenanceDone')
+!evHsMaintenanceDone.time := 60
+
+!new Transition('trHsRestartSystems')
+!trHsRestartSystems.name := 'restartSystems'
+!new TimeEvent('evHsRestartSystems')
+!evHsRestartSystems.time := 30
+
+
+!insert (smHabitat, trHsDailyCheck) into StateMachineContainsTransitions
+!insert (smHabitat, trHsCo2High) into StateMachineContainsTransitions
+!insert (smHabitat, trHsScrubComplete) into StateMachineContainsTransitions
+!insert (smHabitat, trHsO2Low) into StateMachineContainsTransitions
+!insert (smHabitat, trHsBoostComplete) into StateMachineContainsTransitions
+!insert (smHabitat, trHsLeakDetected) into StateMachineContainsTransitions
+!insert (smHabitat, trHsVentCycle) into StateMachineContainsTransitions
+!insert (smHabitat, trHsMaintenanceRequest) into StateMachineContainsTransitions
+!insert (smHabitat, trHsMaintenanceDone) into StateMachineContainsTransitions
+!insert (smHabitat, trHsRestartSystems) into StateMachineContainsTransitions
+
+!insert (trHsDailyCheck, evHsDailyCheck) into TransitionContainsEvents
+!insert (trHsCo2High, evHsCo2High) into TransitionContainsEvents
+!insert (trHsScrubComplete, evHsScrubComplete) into TransitionContainsEvents
+!insert (trHsO2Low, evHsO2Low) into TransitionContainsEvents
+!insert (trHsBoostComplete, evHsBoostComplete) into TransitionContainsEvents
+!insert (trHsLeakDetected, evHsLeakDetected) into TransitionContainsEvents
+!insert (trHsVentCycle, evHsVentCycle) into TransitionContainsEvents
+!insert (trHsMaintenanceRequest, evHsMaintenanceRequest) into TransitionContainsEvents
+!insert (trHsMaintenanceDone, evHsMaintenanceDone) into TransitionContainsEvents
+!insert (trHsRestartSystems, evHsRestartSystems) into TransitionContainsEvents
+
+
+!insert (hsNormal, trHsDailyCheck) into StateTransition
+!insert (trHsDailyCheck, hsNormal) into TransitionState
+
+!insert (hsNormal, trHsCo2High) into StateTransition
+!insert (trHsCo2High, hsCo2Scrubbing) into TransitionState
+
+!insert (hsCo2Scrubbing, trHsScrubComplete) into StateTransition
+!insert (trHsScrubComplete, hsNormal) into TransitionState
+
+!insert (hsNormal, trHsO2Low) into StateTransition
+!insert (trHsO2Low, hsOxygenBoost) into TransitionState
+
+!insert (hsOxygenBoost, trHsBoostComplete) into StateTransition
+!insert (trHsBoostComplete, hsNormal) into TransitionState
+
+!insert (hsNormal, trHsLeakDetected) into StateTransition
+!insert (trHsLeakDetected, hsEmergencyVent) into TransitionState
+
+!insert (hsEmergencyVent, trHsVentCycle) into StateTransition
+!insert (trHsVentCycle, hsOffline) into TransitionState
+
+!insert (hsNormal, trHsMaintenanceRequest) into StateTransition
+!insert (trHsMaintenanceRequest, hsMaintenance) into TransitionState
+
+!insert (hsMaintenance, trHsMaintenanceDone) into StateTransition
+!insert (trHsMaintenanceDone, hsNormal) into TransitionState
+
+!insert (hsOffline, trHsRestartSystems) into StateTransition
+!insert (trHsRestartSystems, hsNormal) into TransitionState
+
+
+
+!new StateMachine('smWallet')
+!smWallet.name := 'cryptoWallet'
+
+!new State('wlLocked')
+!wlLocked.name := 'locked'
+!new State('wlAuthenticating')
+!wlAuthenticating.name := 'authenticating'
+!new State('wlUnlocked')
+!wlUnlocked.name := 'unlocked'
+!new State('wlSigning')
+!wlSigning.name := 'signing'
+!new State('wlBroadcasting')
+!wlBroadcasting.name := 'broadcasting'
+!new State('wlFailed')
+!wlFailed.name := 'failed'
+
+!insert (smWallet, wlLocked) into StateMachineContainsStates
+!insert (smWallet, wlAuthenticating) into StateMachineContainsStates
+!insert (smWallet, wlUnlocked) into StateMachineContainsStates
+!insert (smWallet, wlSigning) into StateMachineContainsStates
+!insert (smWallet, wlBroadcasting) into StateMachineContainsStates
+!insert (smWallet, wlFailed) into StateMachineContainsStates
+
+!insert (smWallet, wlLocked) into StateMachineStartsStates
+
+
+!new Transition('trWlUnlockRequest')
+!trWlUnlockRequest.name := 'unlockRequest'
+!new TimeEvent('evWlUnlockRequest')
+!evWlUnlockRequest.time := 1
+
+!new Transition('trWlAuthOk')
+!trWlAuthOk.name := 'authOk'
+!new TimeEvent('evWlAuthOk')
+!evWlAuthOk.time := 3
+
+!new Transition('trWlAuthFail')
+!trWlAuthFail.name := 'authFail'
+!new TimeEvent('evWlAuthFail')
+!evWlAuthFail.time := 3
+
+!new Transition('trWlResetFail')
+!trWlResetFail.name := 'resetFail'
+!new TimeEvent('evWlResetFail')
+!evWlResetFail.time := 30
+
+!new Transition('trWlLockTimeout')
+!trWlLockTimeout.name := 'lockTimeout'
+!new TimeEvent('evWlLockTimeout')
+!evWlLockTimeout.time := 600
+
+!new Transition('trWlSignTx')
+!trWlSignTx.name := 'signTx'
+!new TimeEvent('evWlSignTx')
+!evWlSignTx.time := 1
+
+!new Transition('trWlCancelSign')
+!trWlCancelSign.name := 'cancelSign'
+!new TimeEvent('evWlCancelSign')
+!evWlCancelSign.time := 1
+
+!new Transition('trWlSigned')
+!trWlSigned.name := 'signed'
+!new TimeEvent('evWlSigned')
+!evWlSigned.time := 2
+
+!new Transition('trWlBroadcastOk')
+!trWlBroadcastOk.name := 'broadcastOk'
+!new TimeEvent('evWlBroadcastOk')
+!evWlBroadcastOk.time := 4
+
+!new Transition('trWlBroadcastFail')
+!trWlBroadcastFail.name := 'broadcastFail'
+!new TimeEvent('evWlBroadcastFail')
+!evWlBroadcastFail.time := 4
+
+
+!insert (smWallet, trWlUnlockRequest) into StateMachineContainsTransitions
+!insert (smWallet, trWlAuthOk) into StateMachineContainsTransitions
+!insert (smWallet, trWlAuthFail) into StateMachineContainsTransitions
+!insert (smWallet, trWlResetFail) into StateMachineContainsTransitions
+!insert (smWallet, trWlLockTimeout) into StateMachineContainsTransitions
+!insert (smWallet, trWlSignTx) into StateMachineContainsTransitions
+!insert (smWallet, trWlCancelSign) into StateMachineContainsTransitions
+!insert (smWallet, trWlSigned) into StateMachineContainsTransitions
+!insert (smWallet, trWlBroadcastOk) into StateMachineContainsTransitions
+!insert (smWallet, trWlBroadcastFail) into StateMachineContainsTransitions
+
+!insert (trWlUnlockRequest, evWlUnlockRequest) into TransitionContainsEvents
+!insert (trWlAuthOk, evWlAuthOk) into TransitionContainsEvents
+!insert (trWlAuthFail, evWlAuthFail) into TransitionContainsEvents
+!insert (trWlResetFail, evWlResetFail) into TransitionContainsEvents
+!insert (trWlLockTimeout, evWlLockTimeout) into TransitionContainsEvents
+!insert (trWlSignTx, evWlSignTx) into TransitionContainsEvents
+!insert (trWlCancelSign, evWlCancelSign) into TransitionContainsEvents
+!insert (trWlSigned, evWlSigned) into TransitionContainsEvents
+!insert (trWlBroadcastOk, evWlBroadcastOk) into TransitionContainsEvents
+!insert (trWlBroadcastFail, evWlBroadcastFail) into TransitionContainsEvents
+
+
+!insert (wlLocked, trWlUnlockRequest) into StateTransition
+!insert (trWlUnlockRequest, wlAuthenticating) into TransitionState
+
+!insert (wlAuthenticating, trWlAuthOk) into StateTransition
+!insert (trWlAuthOk, wlUnlocked) into TransitionState
+
+!insert (wlAuthenticating, trWlAuthFail) into StateTransition
+!insert (trWlAuthFail, wlFailed) into TransitionState
+
+!insert (wlFailed, trWlResetFail) into StateTransition
+!insert (trWlResetFail, wlLocked) into TransitionState
+
+!insert (wlUnlocked, trWlLockTimeout) into StateTransition
+!insert (trWlLockTimeout, wlLocked) into TransitionState
+
+!insert (wlUnlocked, trWlSignTx) into StateTransition
+!insert (trWlSignTx, wlSigning) into TransitionState
+
+!insert (wlSigning, trWlCancelSign) into StateTransition
+!insert (trWlCancelSign, wlUnlocked) into TransitionState
+
+!insert (wlSigning, trWlSigned) into StateTransition
+!insert (trWlSigned, wlBroadcasting) into TransitionState
+
+!insert (wlBroadcasting, trWlBroadcastOk) into StateTransition
+!insert (trWlBroadcastOk, wlUnlocked) into TransitionState
+
+!insert (wlBroadcasting, trWlBroadcastFail) into StateTransition
+!insert (trWlBroadcastFail, wlFailed) into TransitionState
+
+
+
+!new StateMachine('smPurgeJob')
+!smPurgeJob.name := 'logPurgeJob'
+
+!new State('pjIdle')
+!pjIdle.name := 'idle'
+!new State('pjScanning')
+!pjScanning.name := 'scanning'
+!new State('pjDeleting')
+!pjDeleting.name := 'deleting'
+!new State('pjDone')
+!pjDone.name := 'done'
+
+!insert (smPurgeJob, pjIdle) into StateMachineContainsStates
+!insert (smPurgeJob, pjScanning) into StateMachineContainsStates
+!insert (smPurgeJob, pjDeleting) into StateMachineContainsStates
+!insert (smPurgeJob, pjDone) into StateMachineContainsStates
+
+!insert (smPurgeJob, pjIdle) into StateMachineStartsStates
+
+
+!new Transition('trPjScheduleTick')
+!trPjScheduleTick.name := 'scheduleTick'
+!new TimeEvent('evPjScheduleTick')
+!evPjScheduleTick.time := 1440
+
+!new Transition('trPjStartPurge')
+!trPjStartPurge.name := 'startPurge'
+!new TimeEvent('evPjStartPurge')
+!evPjStartPurge.time := 1
+
+!new Transition('trPjScanComplete')
+!trPjScanComplete.name := 'scanComplete'
+!new TimeEvent('evPjScanComplete')
+!evPjScanComplete.time := 15
+
+!new Transition('trPjDeleteComplete')
+!trPjDeleteComplete.name := 'deleteComplete'
+!new TimeEvent('evPjDeleteComplete')
+!evPjDeleteComplete.time := 30
+
+!new Transition('trPjReset')
+!trPjReset.name := 'reset'
+!new TimeEvent('evPjReset')
+!evPjReset.time := 5
+
+
+!insert (smPurgeJob, trPjScheduleTick) into StateMachineContainsTransitions
+!insert (smPurgeJob, trPjStartPurge) into StateMachineContainsTransitions
+!insert (smPurgeJob, trPjScanComplete) into StateMachineContainsTransitions
+!insert (smPurgeJob, trPjDeleteComplete) into StateMachineContainsTransitions
+!insert (smPurgeJob, trPjReset) into StateMachineContainsTransitions
+
+!insert (trPjScheduleTick, evPjScheduleTick) into TransitionContainsEvents
+!insert (trPjStartPurge, evPjStartPurge) into TransitionContainsEvents
+!insert (trPjScanComplete, evPjScanComplete) into TransitionContainsEvents
+!insert (trPjDeleteComplete, evPjDeleteComplete) into TransitionContainsEvents
+!insert (trPjReset, evPjReset) into TransitionContainsEvents
+
+
+!insert (pjIdle, trPjScheduleTick) into StateTransition
+!insert (trPjScheduleTick, pjIdle) into TransitionState
+
+!insert (pjIdle, trPjStartPurge) into StateTransition
+!insert (trPjStartPurge, pjScanning) into TransitionState
+
+!insert (pjScanning, trPjScanComplete) into StateTransition
+!insert (trPjScanComplete, pjDeleting) into TransitionState
+
+!insert (pjDeleting, trPjDeleteComplete) into StateTransition
+!insert (trPjDeleteComplete, pjDone) into TransitionState
+
+!insert (pjDone, trPjReset) into StateTransition
+!insert (trPjReset, pjIdle) into TransitionState

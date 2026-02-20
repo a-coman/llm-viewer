@@ -1,0 +1,96 @@
+!new Booking('booking27')
+!booking27.startDate := '2030-02-10'
+!booking27.endDate := '2030-02-20'
+!booking27.canceled := false
+!booking27.bookingId := 10400
+!booking27.confirmed := false
+
+!new Customer('customer27')
+!customer27.firstName := 'Isabella'
+!customer27.lastName := 'Santiago'
+
+!insert (booking27, customer27) into BookingCustomer
+
+!new RoomReservation('rr35')
+!rr35.checkInDate := '2030-02-10'
+!rr35.checkOutDate := '2030-02-13'
+
+!new RoomReservation('rr36')
+!rr36.checkInDate := '2030-02-13'
+!rr36.checkOutDate := '2030-02-17'
+
+!new RoomReservation('rr37')
+!rr37.checkInDate := '2030-02-17'
+!rr37.checkOutDate := '2030-02-20'
+
+!insert (booking27, rr35) into BookingRoomReservation
+!insert (booking27, rr36) into BookingRoomReservation
+!insert (booking27, rr37) into BookingRoomReservation
+
+!new Room('room1608')
+!room1608.roomNumber := 1608
+!room1608.numBeds := 1
+!room1608.pricePerNight := 118.0
+!room1608.occupied := false
+!room1608.blocked := true
+
+!new Room('room1701')
+!room1701.roomNumber := 1701
+!room1701.numBeds := 2
+!room1701.pricePerNight := 175.0
+!room1701.occupied := false
+!room1701.blocked := true
+
+!new Room('room1715')
+!room1715.roomNumber := 1715
+!room1715.numBeds := 2
+!room1715.pricePerNight := 175.0
+!room1715.occupied := false
+!room1715.blocked := true
+
+!insert (rr35, room1608) into RoomReservationRoom
+!insert (rr36, room1701) into RoomReservationRoom
+!insert (rr37, room1715) into RoomReservationRoom
+
+!new RoomExtra('extraKeyReplacement')
+!extraKeyReplacement.price := 10.0
+!extraKeyReplacement.description := 'Key card replacement'
+
+!new RoomExtra('extraPrintDocuments')
+!extraPrintDocuments.price := 5.0
+!extraPrintDocuments.description := 'Printing documents at reception'
+
+!insert (rr36, extraKeyReplacement) into RoomReservationExtras
+!insert (rr37, extraPrintDocuments) into RoomReservationExtras
+
+!new Bill('bill36')
+!bill36.billId := 24001
+!bill36.price := 354.0
+
+!new Bill('bill37')
+!bill37.billId := 24002
+!bill37.price := 710.0
+
+!new Bill('bill38')
+!bill38.billId := 24003
+!bill38.price := 530.0
+
+!insert (bill36, rr35) into BillRoomReservation
+!insert (bill37, rr36) into BillRoomReservation
+!insert (bill38, rr37) into BillRoomReservation
+
+!insert (booking27, bill36) into BookingBill
+!insert (booking27, bill37) into BookingBill
+!insert (booking27, bill38) into BookingBill
+
+!new FreeRoomTypesDTO('dtoFebSolo')
+!dtoFebSolo.roomTypeDescription := 'February solo traveler (single)'
+!dtoFebSolo.numBeds := 1
+!dtoFebSolo.pricePerNight := 118.0
+!dtoFebSolo.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('dtoFebTwinFlexible')
+!dtoFebTwinFlexible.roomTypeDescription := 'February flexible twin (refundable)'
+!dtoFebTwinFlexible.numBeds := 2
+!dtoFebTwinFlexible.pricePerNight := 175.0
+!dtoFebTwinFlexible.numFreeRooms := 2

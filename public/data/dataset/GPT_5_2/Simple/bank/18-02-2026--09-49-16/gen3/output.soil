@@ -1,0 +1,102 @@
+!new Bank('bankFR1')
+!bankFR1.country := 'France'
+!bankFR1.name := 'Banque Riviere SA'
+!bankFR1.bic := 'RIVIFRPPXXX'
+
+!new Bank('bankCH1')
+!bankCH1.country := 'Switzerland'
+!bankCH1.name := 'Alpenbank Genossenschaft'
+!bankCH1.bic := 'ALPNCHZZXXX'
+
+!new Bank('bankFR2')
+!bankFR2.country := 'France'
+!bankFR2.name := 'Hexa Online Bank'
+!bankFR2.bic := 'HEXA FRPPXXX'
+
+!new Person('q1')
+!q1.firstName := 'Marie'
+!q1.lastName := 'Durand'
+!q1.age := 30
+
+!new Person('q2')
+!q2.firstName := 'Paul'
+!q2.lastName := 'Lefevre'
+!q2.age := 32
+
+!new Person('q3')
+!q3.firstName := 'Ursula'
+!q3.lastName := 'Meier'
+!q3.age := 58
+
+!new Person('q4')
+!q4.firstName := 'Ahmed'
+!q4.lastName := 'Haddad'
+!q4.age := 22
+
+!new Person('q5')
+!q5.firstName := 'Lucie'
+!q5.lastName := 'Durand'
+!q5.age := 10
+
+!new Person('q6')
+!q6.firstName := 'Noah'
+!q6.lastName := 'Meier'
+!q6.age := 16
+
+!new Person('q7')
+!q7.firstName := 'Elisa'
+!q7.lastName := 'Rossi'
+!q7.age := 25
+
+!new Account('accF1')
+!accF1.iban := 'FR7630006000011234567890189'
+!accF1.balance := 540
+
+!new Account('accF2')
+!accF2.iban := 'FR1420041010050500013M02606'
+!accF2.balance := 8200
+
+!new Account('accC1')
+!accC1.iban := 'CH9300762011623852957'
+!accC1.balance := 15000
+
+!new Account('accC2')
+!accC2.iban := 'CH5604835012345678009'
+!accC2.balance := 60
+
+!new Account('accC3')
+!accC3.iban := 'CH2509000000123456789'
+!accC3.balance := 3100
+
+!insert (bankFR1, accF1) into AccountOfBanks
+!insert (bankFR1, accF2) into AccountOfBanks
+!insert (bankCH1, accC1) into AccountOfBanks
+!insert (bankCH1, accC2) into AccountOfBanks
+!insert (bankCH1, accC3) into AccountOfBanks
+
+!insert (q1, accF1) into Ownership
+!insert (q2, accF1) into Ownership
+
+!insert (q1, accF2) into Ownership
+
+!insert (q3, accC1) into Ownership
+
+!insert (q2, accC2) into Ownership
+!insert (q3, accC2) into Ownership
+
+!insert (q4, accC3) into Ownership
+
+!insert (q1, accF1) into Use
+!insert (q2, accF1) into Use
+!insert (q5, accF1) into Use
+
+!insert (q1, accF2) into Use
+!insert (q5, accF2) into Use
+
+!insert (q3, accC1) into Use
+!insert (q6, accC1) into Use
+
+!insert (q2, accC2) into Use
+
+!insert (q4, accC3) into Use
+!insert (q7, accC3) into Use

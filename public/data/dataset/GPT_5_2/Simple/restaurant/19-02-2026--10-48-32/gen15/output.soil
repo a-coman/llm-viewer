@@ -1,0 +1,253 @@
+!new Restaurant('rest19')
+!rest19.name := 'Heritage Bakery & Kitchen'
+
+!new Restaurant('rest20')
+!rest20.name := 'Night Owl Bar & Grill'
+
+!new Owner('own45')
+!own45.name := 'Daphne Nguyen'
+!own45.percentageShares := 50
+
+!new Owner('own46')
+!own46.name := 'Robert Stein'
+!own46.percentageShares := 30
+
+!new Owner('own47')
+!own47.name := 'Salma Idris'
+!own47.percentageShares := 20
+
+!insert (rest19, own45) into RestaurantOwner
+!insert (rest19, own46) into RestaurantOwner
+!insert (rest19, own47) into RestaurantOwner
+
+!insert (rest20, own45) into RestaurantOwner
+!insert (rest20, own46) into RestaurantOwner
+!insert (rest20, own47) into RestaurantOwner
+
+!new Manager('mgr7')
+!mgr7.name := 'Julian Cross'
+!mgr7.dateOfBirth := Date('1981-06-06')
+!mgr7.phoneNumber := '555-6108'
+
+!new HeadWaiter('hw20')
+!hw20.name := 'Alicia Romero'
+!hw20.dateOfBirth := Date('1989-03-10')
+!hw20.phoneNumber := '555-6110'
+
+!new Waiter('w41')
+!w41.name := 'Jonah Kim'
+!w41.dateOfBirth := Date('1998-01-22')
+!w41.phoneNumber := '555-6111'
+!w41.spokenLanguage := #English
+
+!new Waiter('w42')
+!w42.name := 'Marina Costa'
+!w42.dateOfBirth := Date('1996-09-30')
+!w42.phoneNumber := '555-6112'
+!w42.spokenLanguage := #Italian
+
+!insert (hw20, w41) into HeadWaiterWaiter
+!insert (hw20, w42) into HeadWaiterWaiter
+
+!new HeadWaiter('hw21')
+!hw21.name := 'Felix Weber'
+!hw21.dateOfBirth := Date('1984-12-01')
+!hw21.phoneNumber := '555-6120'
+
+!new Waiter('w43')
+!w43.name := 'Helena Ortiz'
+!w43.dateOfBirth := Date('1995-05-14')
+!w43.phoneNumber := '555-6121'
+!w43.spokenLanguage := #Spanish
+
+!insert (hw21, w43) into HeadWaiterWaiter
+
+!new Chef('chef27')
+!chef27.name := 'Pierre Lambert'
+!chef27.dateOfBirth := Date('1976-02-19')
+!chef27.phoneNumber := '555-6200'
+
+!new Cook('cook41')
+!cook41.name := 'Ava Schultz'
+!cook41.dateOfBirth := Date('1991-11-08')
+!cook41.phoneNumber := '555-6201'
+!cook41.yearsOfExperience := 6
+
+!new Cook('cook42')
+!cook42.name := 'Omar Nasser'
+!cook42.dateOfBirth := Date('1997-07-16')
+!cook42.phoneNumber := '555-6202'
+!cook42.yearsOfExperience := 2
+
+!insert (chef27, cook41) into ChefCook
+!insert (chef27, cook42) into ChefCook
+
+!new Chef('chef28')
+!chef28.name := 'Greta Hoffmann'
+!chef28.dateOfBirth := Date('1980-10-04')
+!chef28.phoneNumber := '555-6210'
+
+!new Cook('cook43')
+!cook43.name := 'Keiko Tanaka'
+!cook43.dateOfBirth := Date('1990-04-25')
+!cook43.phoneNumber := '555-6211'
+!cook43.yearsOfExperience := 11
+
+!insert (chef28, cook43) into ChefCook
+
+!new Allergen('algGluten19')
+!algGluten19.type := #Gluten
+!new Allergen('algLactose19')
+!algLactose19.type := #Lactose
+!new Allergen('algNuts19')
+!algNuts19.type := #Nuts
+
+!new FoodItem('fiFlour19')
+!fiFlour19.number := 1501
+!fiFlour19.description := 'Bread flour'
+!fiFlour19.purchaseFlag := true
+!fiFlour19.unit := #Pound
+
+!new FoodItem('fiButter19')
+!fiButter19.number := 1502
+!fiButter19.description := 'Unsalted butter'
+!fiButter19.purchaseFlag := true
+!fiButter19.unit := #Ounce
+
+!new FoodItem('fiAlmonds19')
+!fiAlmonds19.number := 1503
+!fiAlmonds19.description := 'Toasted almonds'
+!fiAlmonds19.purchaseFlag := true
+!fiAlmonds19.unit := #Ounce
+
+!new FoodItem('fiLettuce19')
+!fiLettuce19.number := 1504
+!fiLettuce19.description := 'Baby greens'
+!fiLettuce19.purchaseFlag := true
+!fiLettuce19.unit := #Gram
+
+!new FoodItem('fiChicken19')
+!fiChicken19.number := 1505
+!fiChicken19.description := 'Roasted chicken'
+!fiChicken19.purchaseFlag := true
+!fiChicken19.unit := #Pound
+
+!new FoodItem('fiCoffee19')
+!fiCoffee19.number := 1506
+!fiCoffee19.description := 'Espresso beans'
+!fiCoffee19.purchaseFlag := true
+!fiCoffee19.unit := #Pound
+
+!insert (fiFlour19, algGluten19) into FoodItemAllergen
+!insert (fiButter19, algLactose19) into FoodItemAllergen
+!insert (fiAlmonds19, algNuts19) into FoodItemAllergen
+
+!new MenuItem('miAlmondCroissant19')
+!miAlmondCroissant19.description := 'Almond croissant'
+!miAlmondCroissant19.prepTime := 6.0
+!miAlmondCroissant19.classification := #Dessert
+
+!new MenuItem('miChickenGreens19')
+!miChickenGreens19.description := 'Chicken and greens salad'
+!miChickenGreens19.prepTime := 10.0
+!miChickenGreens19.classification := #Main
+
+!new MenuItem('miBreadBasket19')
+!miBreadBasket19.description := 'Warm bread basket'
+!miBreadBasket19.prepTime := 4.0
+!miBreadBasket19.classification := #Apetizer
+
+!new MenuItem('miEspresso19')
+!miEspresso19.description := 'Double espresso'
+!miEspresso19.prepTime := 1.5
+!miEspresso19.classification := #Beverage
+
+!insert (miAlmondCroissant19, chef28) into MenuItemChef
+!insert (miChickenGreens19, chef27) into MenuItemChef
+!insert (miBreadBasket19, chef27) into MenuItemChef
+!insert (miEspresso19, chef28) into MenuItemChef
+
+!insert (miAlmondCroissant19, fiFlour19) into MenuItemFoodItem
+!insert (miAlmondCroissant19, fiButter19) into MenuItemFoodItem
+!insert (miAlmondCroissant19, fiAlmonds19) into MenuItemFoodItem
+
+!insert (miChickenGreens19, fiChicken19) into MenuItemFoodItem
+!insert (miChickenGreens19, fiLettuce19) into MenuItemFoodItem
+
+!insert (miBreadBasket19, fiFlour19) into MenuItemFoodItem
+!insert (miBreadBasket19, fiButter19) into MenuItemFoodItem
+
+!insert (miEspresso19, fiCoffee19) into MenuItemFoodItem
+
+!new BusDriver('bd19')
+!bd19.name := 'Megan Pierce'
+!bd19.dateOfBirth := Date('1971-09-09')
+!bd19.phoneNumber := '555-6305'
+!bd19.driverLicenseNr := 'D-5157001'
+
+!new BusDriver('bd20')
+!bd20.name := 'Karim Boulos'
+!bd20.dateOfBirth := Date('1968-03-03')
+!bd20.phoneNumber := '555-6306'
+!bd20.driverLicenseNr := 'D-8827009'
+
+!new Banquet('banq15')
+!banq15.time := Time('10:30')
+!banq15.date := Date('2027-05-18')
+!banq15.numberPeople := 55
+!banq15.name := 'Regional Sales Meetup'
+!banq15.phoneNumber := '555-6400'
+!banq15.number := 26001
+!banq15.groupName := 'North Region Q2 Breakfast'
+!banq15.paymentMethod := #CreditCard
+!banq15.busService := true
+
+!insert (banq15, w41) into ReservationWaiter
+!insert (banq15, w43) into ReservationWaiter
+!insert (banq15, bd19) into BanquetBusDriver
+!insert (banq15, bd20) into BanquetBusDriver
+
+!new Table('tBanq15A')
+!tBanq15A.number := 801
+!tBanq15A.description := 'Conference hall table A'
+!tBanq15A.capacity := 20
+
+!new Table('tBanq15B')
+!tBanq15B.number := 802
+!tBanq15B.description := 'Conference hall table B'
+!tBanq15B.capacity := 20
+
+!new Table('tBanq15C')
+!tBanq15C.number := 803
+!tBanq15C.description := 'Conference hall table C'
+!tBanq15C.capacity := 20
+
+!insert (banq15, tBanq15A) into ReservationTable
+!insert (banq15, tBanq15B) into ReservationTable
+!insert (banq15, tBanq15C) into ReservationTable
+
+!new ItemOrder('ioBanq15_1')
+!ioBanq15_1.time := Time('10:40')
+!insert (banq15, ioBanq15_1) into ReservationItemOrdered
+!insert (ioBanq15_1, miBreadBasket19) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq15_2')
+!ioBanq15_2.time := Time('10:45')
+!insert (banq15, ioBanq15_2) into ReservationItemOrdered
+!insert (ioBanq15_2, miEspresso19) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq15_3')
+!ioBanq15_3.time := Time('11:10')
+!insert (banq15, ioBanq15_3) into ReservationItemOrdered
+!insert (ioBanq15_3, miChickenGreens19) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq15_4')
+!ioBanq15_4.time := Time('11:25')
+!insert (banq15, ioBanq15_4) into ReservationItemOrdered
+!insert (ioBanq15_4, miAlmondCroissant19) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq16')
+!dietReq16.diet := #Vegetarian
+
+!new ReportedAllergy('repAlg16')
+!repAlg16.allergen := #Nuts

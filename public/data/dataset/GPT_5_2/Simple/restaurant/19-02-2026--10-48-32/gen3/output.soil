@@ -1,0 +1,277 @@
+!new Restaurant('rest4')
+!rest4.name := 'Skyline Tapas'
+
+!new Owner('own7')
+!own7.name := 'Priya Nair'
+!own7.percentageShares := 25
+!new Owner('own8')
+!own8.name := 'George Bennett'
+!own8.percentageShares := 25
+!new Owner('own9')
+!own9.name := 'Sofia Alvarez'
+!own9.percentageShares := 25
+!new Owner('own10')
+!own10.name := 'Tomasz Kowalski'
+!own10.percentageShares := 25
+
+!insert (rest4, own7) into RestaurantOwner
+!insert (rest4, own8) into RestaurantOwner
+!insert (rest4, own9) into RestaurantOwner
+!insert (rest4, own10) into RestaurantOwner
+
+!new HeadWaiter('hw4')
+!hw4.name := 'Clara Nguyen'
+!hw4.dateOfBirth := Date('1984-04-09')
+!hw4.phoneNumber := '555-6000'
+
+!new Waiter('w7')
+!w7.name := 'Matteo Ricci'
+!w7.dateOfBirth := Date('1997-06-30')
+!w7.phoneNumber := '555-6001'
+!w7.spokenLanguage := #Italian
+
+!new Waiter('w8')
+!w8.name := 'Lea Schneider'
+!w8.dateOfBirth := Date('1993-01-27')
+!w8.phoneNumber := '555-6002'
+!w8.spokenLanguage := #German
+
+!new Waiter('w9')
+!w9.name := 'Camila Ortega'
+!w9.dateOfBirth := Date('2000-09-15')
+!w9.phoneNumber := '555-6003'
+!w9.spokenLanguage := #Spanish
+
+!insert (hw4, w7) into HeadWaiterWaiter
+!insert (hw4, w8) into HeadWaiterWaiter
+!insert (hw4, w9) into HeadWaiterWaiter
+
+!new Chef('chef4')
+!chef4.name := 'Isabella Moretti'
+!chef4.dateOfBirth := Date('1979-12-01')
+!chef4.phoneNumber := '555-6100'
+
+!new Cook('cook6')
+!cook6.name := 'Omar Haddad'
+!cook6.dateOfBirth := Date('1989-07-07')
+!cook6.phoneNumber := '555-6101'
+!cook6.yearsOfExperience := 11
+
+!new Cook('cook7')
+!cook7.name := 'Julia Smirnova'
+!cook7.dateOfBirth := Date('1996-02-22')
+!cook7.phoneNumber := '555-6102'
+!cook7.yearsOfExperience := 4
+
+!insert (chef4, cook6) into ChefCook
+!insert (chef4, cook7) into ChefCook
+
+!new Chef('chef5')
+!chef5.name := 'Patrick OConnell'
+!chef5.dateOfBirth := Date('1983-05-16')
+!chef5.phoneNumber := '555-6200'
+
+!new Cook('cook8')
+!cook8.name := 'Mai Tran'
+!cook8.dateOfBirth := Date('1992-11-08')
+!cook8.phoneNumber := '555-6201'
+!cook8.yearsOfExperience := 8
+
+!insert (chef5, cook8) into ChefCook
+
+!new Allergen('alg4Seafood')
+!alg4Seafood.type := #Seafood
+!new Allergen('alg4Nuts')
+!alg4Nuts.type := #Nuts
+!new Allergen('alg4Lactose')
+!alg4Lactose.type := #Lactose
+!new Allergen('alg4Gluten')
+!alg4Gluten.type := #Gluten
+
+!new FoodItem('fiShrimp')
+!fiShrimp.number := 301
+!fiShrimp.description := 'Shrimp'
+!fiShrimp.purchaseFlag := true
+!fiShrimp.unit := #Pound
+
+!new FoodItem('fiPeanuts')
+!fiPeanuts.number := 302
+!fiPeanuts.description := 'Roasted peanuts'
+!fiPeanuts.purchaseFlag := true
+!fiPeanuts.unit := #Ounce
+
+!new FoodItem('fiMilk')
+!fiMilk.number := 303
+!fiMilk.description := 'Whole milk'
+!fiMilk.purchaseFlag := true
+!fiMilk.unit := #Ounce
+
+!new FoodItem('fiRice')
+!fiRice.number := 304
+!fiRice.description := 'Short-grain rice'
+!fiRice.purchaseFlag := true
+!fiRice.unit := #Pound
+
+!new FoodItem('fiSaffron')
+!fiSaffron.number := 305
+!fiSaffron.description := 'Saffron'
+!fiSaffron.purchaseFlag := true
+!fiSaffron.unit := #Gram
+
+!new FoodItem('fiSparklingWater')
+!fiSparklingWater.number := 306
+!fiSparklingWater.description := 'Sparkling water'
+!fiSparklingWater.purchaseFlag := true
+!fiSparklingWater.unit := #Ounce
+
+!new FoodItem('fiWheatCrackers')
+!fiWheatCrackers.number := 307
+!fiWheatCrackers.description := 'Wheat crackers'
+!fiWheatCrackers.purchaseFlag := true
+!fiWheatCrackers.unit := #Dozen
+
+!insert (fiShrimp, alg4Seafood) into FoodItemAllergen
+!insert (fiPeanuts, alg4Nuts) into FoodItemAllergen
+!insert (fiMilk, alg4Lactose) into FoodItemAllergen
+!insert (fiWheatCrackers, alg4Gluten) into FoodItemAllergen
+
+!new MenuItem('miShrimpPaella')
+!miShrimpPaella.description := 'Shrimp paella with saffron rice'
+!miShrimpPaella.prepTime := 28.0
+!miShrimpPaella.classification := #Main
+
+!new MenuItem('miPeanutSkewers')
+!miPeanutSkewers.description := 'Peanut satay skewers'
+!miPeanutSkewers.prepTime := 14.0
+!miPeanutSkewers.classification := #Apetizer
+
+!new MenuItem('miGelato')
+!miGelato.description := 'Vanilla gelato'
+!miGelato.prepTime := 6.0
+!miGelato.classification := #Dessert
+
+!new MenuItem('miSparklingWater')
+!miSparklingWater.description := 'Chilled sparkling water'
+!miSparklingWater.prepTime := 1.0
+!miSparklingWater.classification := #Beverage
+
+!new MenuItem('miCrackers')
+!miCrackers.description := 'Wheat crackers plate'
+!miCrackers.prepTime := 2.0
+!miCrackers.classification := #Apetizer
+
+!insert (miShrimpPaella, chef4) into MenuItemChef
+!insert (miPeanutSkewers, chef5) into MenuItemChef
+!insert (miGelato, chef5) into MenuItemChef
+!insert (miSparklingWater, chef4) into MenuItemChef
+!insert (miCrackers, chef4) into MenuItemChef
+
+!insert (miShrimpPaella, fiShrimp) into MenuItemFoodItem
+!insert (miShrimpPaella, fiRice) into MenuItemFoodItem
+!insert (miShrimpPaella, fiSaffron) into MenuItemFoodItem
+
+!insert (miPeanutSkewers, fiPeanuts) into MenuItemFoodItem
+
+!insert (miGelato, fiMilk) into MenuItemFoodItem
+
+!insert (miSparklingWater, fiSparklingWater) into MenuItemFoodItem
+
+!insert (miCrackers, fiWheatCrackers) into MenuItemFoodItem
+
+!new BusDriver('bd2')
+!bd2.name := 'Renee Carter'
+!bd2.dateOfBirth := Date('1968-02-14')
+!bd2.phoneNumber := '555-6300'
+!bd2.driverLicenseNr := 'D-7712049'
+
+!new BusDriver('bd3')
+!bd3.name := 'Ahmed Farouk'
+!bd3.dateOfBirth := Date('1975-09-28')
+!bd3.phoneNumber := '555-6301'
+!bd3.driverLicenseNr := 'D-5521980'
+
+!new Banquet('banq3')
+!banq3.time := Time('20:00')
+!banq3.date := Date('2026-05-22')
+!banq3.numberPeople := 45
+!banq3.name := 'City Arts Foundation'
+!banq3.phoneNumber := '555-7000'
+!banq3.number := 7001
+!banq3.groupName := 'Fundraising Gala Dinner'
+!banq3.paymentMethod := #CreditCard
+!banq3.busService := true
+
+!insert (rest4, banq3) into RestaurantReservation
+!insert (banq3, w7) into ReservationWaiter
+!insert (banq3, w8) into ReservationWaiter
+!insert (banq3, w9) into ReservationWaiter
+!insert (banq3, bd2) into BanquetBusDriver
+!insert (banq3, bd3) into BanquetBusDriver
+
+!new Table('tGalaA')
+!tGalaA.number := 81
+!tGalaA.description := 'Gala table A'
+!tGalaA.capacity := 20
+!insert (banq3, tGalaA) into ReservationTable
+
+!new Table('tGalaB')
+!tGalaB.number := 82
+!tGalaB.description := 'Gala table B'
+!tGalaB.capacity := 15
+!insert (banq3, tGalaB) into ReservationTable
+
+!new Table('tGalaC')
+!tGalaC.number := 83
+!tGalaC.description := 'Gala table C'
+!tGalaC.capacity := 10
+!insert (banq3, tGalaC) into ReservationTable
+
+!new ItemOrder('ioGala1')
+!ioGala1.time := Time('20:15')
+!insert (banq3, ioGala1) into ReservationItemOrdered
+!insert (ioGala1, miCrackers) into ItemOrderMenuItem
+
+!new ItemOrder('ioGala2')
+!ioGala2.time := Time('20:40')
+!insert (banq3, ioGala2) into ReservationItemOrdered
+!insert (ioGala2, miShrimpPaella) into ItemOrderMenuItem
+
+!new ItemOrder('ioGala3')
+!ioGala3.time := Time('21:10')
+!insert (banq3, ioGala3) into ReservationItemOrdered
+!insert (ioGala3, miGelato) into ItemOrderMenuItem
+
+!new RegularCustomer('cust4')
+!cust4.name := 'Anika Vogel'
+!cust4.prefferedLanguage := #German
+
+!new Individual('res4')
+!res4.time := Time('16:10')
+!res4.date := Date('2026-05-23')
+!res4.numberPeople := 1
+!res4.name := 'Anika Vogel'
+!res4.phoneNumber := '555-7001'
+!res4.number := 7002
+!res4.seating := #Patio
+!res4.smoking := #NonSmoking
+
+!insert (rest4, res4) into RestaurantReservation
+!insert (res4, cust4) into ReservationCustomer
+!insert (res4, w8) into ReservationWaiter
+
+!new Table('tSolo1')
+!tSolo1.number := 14
+!tSolo1.description := 'Small patio table'
+!tSolo1.capacity := 2
+!insert (res4, tSolo1) into ReservationTable
+
+!new ItemOrder('ioSolo1')
+!ioSolo1.time := Time('16:20')
+!insert (res4, ioSolo1) into ReservationItemOrdered
+!insert (ioSolo1, miSparklingWater) into ItemOrderMenuItem
+
+!new ReportedAllergy('repAlg3')
+!repAlg3.allergen := #Seafood
+
+!new DietaryRequirement('dietReq3')
+!dietReq3.diet := #Kosher

@@ -1,0 +1,243 @@
+!new Restaurant('rest38')
+!rest38.name := 'City Spice Canteen'
+
+!new Restaurant('rest39')
+!rest39.name := 'Arcade Lunchroom'
+
+!new Owner('own110')
+!own110.name := 'Samantha Reed'
+!own110.percentageShares := 50
+
+!new Owner('own111')
+!own111.name := 'Yusuf Demir'
+!own111.percentageShares := 30
+
+!new Owner('own112')
+!own112.name := 'Paula Nguyen'
+!own112.percentageShares := 20
+
+!new Owner('own113')
+!own113.name := 'Brent Holman'
+!own113.percentageShares := 100
+
+!insert (rest38, own110) into RestaurantOwner
+!insert (rest38, own111) into RestaurantOwner
+!insert (rest38, own112) into RestaurantOwner
+
+!insert (rest39, own113) into RestaurantOwner
+
+!new HeadWaiter('hw90')
+!hw90.name := 'Damon Ellis'
+!hw90.dateOfBirth := Date('1988-09-09')
+!hw90.phoneNumber := '555-3000'
+
+!new Waiter('w120')
+!w120.name := 'Rocio Perez'
+!w120.dateOfBirth := Date('1999-05-12')
+!w120.phoneNumber := '555-3001'
+!w120.spokenLanguage := #Spanish
+
+!new Waiter('w121')
+!w121.name := 'Marlon Becker'
+!w121.dateOfBirth := Date('1994-11-21')
+!w121.phoneNumber := '555-3002'
+!w121.spokenLanguage := #German
+
+!insert (hw90, w120) into HeadWaiterWaiter
+!insert (hw90, w121) into HeadWaiterWaiter
+
+!new Chef('chef100')
+!chef100.name := 'Ivy Chen'
+!chef100.dateOfBirth := Date('1979-02-18')
+!chef100.phoneNumber := '555-3010'
+
+!new Chef('chef101')
+!chef101.name := 'Matteo Galli'
+!chef101.dateOfBirth := Date('1983-07-04')
+!chef101.phoneNumber := '555-3011'
+
+!new Cook('cook120')
+!cook120.name := 'Tariq Abbas'
+!cook120.dateOfBirth := Date('1990-03-03')
+!cook120.phoneNumber := '555-3020'
+!cook120.yearsOfExperience := 9
+
+!new Cook('cook121')
+!cook121.name := 'Lena Hoffmann'
+!cook121.dateOfBirth := Date('1998-12-14')
+!cook121.phoneNumber := '555-3021'
+!cook121.yearsOfExperience := 1
+
+!new Cook('cook122')
+!cook122.name := 'Daniela Costa'
+!cook122.dateOfBirth := Date('1992-06-28')
+!cook122.phoneNumber := '555-3022'
+!cook122.yearsOfExperience := 6
+
+!insert (chef100, cook120) into ChefCook
+!insert (chef100, cook121) into ChefCook
+!insert (chef101, cook122) into ChefCook
+
+!new Allergen('alg38Gluten')
+!alg38Gluten.type := #Gluten
+
+!new Allergen('alg38Seafood')
+!alg38Seafood.type := #Seafood
+
+!new Allergen('alg38Nuts')
+!alg38Nuts.type := #Nuts
+
+!new FoodItem('fiShrimp38')
+!fiShrimp38.number := 3801
+!fiShrimp38.description := 'Shrimp'
+!fiShrimp38.purchaseFlag := true
+!fiShrimp38.unit := #Pound
+
+!new FoodItem('fiPeanuts38')
+!fiPeanuts38.number := 3802
+!fiPeanuts38.description := 'Crushed peanuts'
+!fiPeanuts38.purchaseFlag := true
+!fiPeanuts38.unit := #Ounce
+
+!new FoodItem('fiSoySauce38')
+!fiSoySauce38.number := 3803
+!fiSoySauce38.description := 'Soy sauce'
+!fiSoySauce38.purchaseFlag := true
+!fiSoySauce38.unit := #Ounce
+
+!new FoodItem('fiRice38')
+!fiRice38.number := 3804
+!fiRice38.description := 'Jasmine rice'
+!fiRice38.purchaseFlag := true
+!fiRice38.unit := #Pound
+
+!new FoodItem('fiLimes38')
+!fiLimes38.number := 3805
+!fiLimes38.description := 'Limes'
+!fiLimes38.purchaseFlag := true
+!fiLimes38.unit := #Dozen
+
+!new FoodItem('fiSodaWater38')
+!fiSodaWater38.number := 3806
+!fiSodaWater38.description := 'Soda water'
+!fiSodaWater38.purchaseFlag := true
+!fiSodaWater38.unit := #Ounce
+
+!insert (fiShrimp38, alg38Seafood) into FoodItemAllergen
+!insert (fiPeanuts38, alg38Nuts) into FoodItemAllergen
+!insert (fiSoySauce38, alg38Gluten) into FoodItemAllergen
+
+!new MenuItem('miShrimpSatay38')
+!miShrimpSatay38.description := 'Shrimp satay with peanut sauce'
+!miShrimpSatay38.prepTime := 12.0
+!miShrimpSatay38.classification := #Apetizer
+
+!new MenuItem('miSoyRiceBowl38')
+!miSoyRiceBowl38.description := 'Rice bowl with soy glaze'
+!miSoyRiceBowl38.prepTime := 9.0
+!miSoyRiceBowl38.classification := #Main
+
+!new MenuItem('miLimeSoda38')
+!miLimeSoda38.description := 'Fresh lime soda'
+!miLimeSoda38.prepTime := 2.0
+!miLimeSoda38.classification := #Beverage
+
+!new MenuItem('miPeanutCrumble38')
+!miPeanutCrumble38.description := 'Sweet peanut crumble cup'
+!miPeanutCrumble38.prepTime := 5.0
+!miPeanutCrumble38.classification := #Dessert
+
+!insert (miShrimpSatay38, chef100) into MenuItemChef
+!insert (miSoyRiceBowl38, chef100) into MenuItemChef
+!insert (miLimeSoda38, chef101) into MenuItemChef
+!insert (miPeanutCrumble38, chef101) into MenuItemChef
+
+!insert (miShrimpSatay38, fiShrimp38) into MenuItemFoodItem
+!insert (miShrimpSatay38, fiPeanuts38) into MenuItemFoodItem
+!insert (miShrimpSatay38, fiSoySauce38) into MenuItemFoodItem
+
+!insert (miSoyRiceBowl38, fiRice38) into MenuItemFoodItem
+!insert (miSoyRiceBowl38, fiSoySauce38) into MenuItemFoodItem
+
+!insert (miLimeSoda38, fiLimes38) into MenuItemFoodItem
+!insert (miLimeSoda38, fiSodaWater38) into MenuItemFoodItem
+
+!insert (miPeanutCrumble38, fiPeanuts38) into MenuItemFoodItem
+
+!new Individual('res80')
+!res80.time := Time('11:55')
+!res80.date := Date('2028-07-19')
+!res80.numberPeople := 1
+!res80.name := 'Counter Seat Guest'
+!res80.phoneNumber := '555-3030'
+!res80.number := 88001
+!res80.seating := #Inside
+!res80.smoking := #NonSmoking
+
+!insert (rest38, res80) into RestaurantReservation
+!insert (res80, w120) into ReservationWaiter
+
+!new Table('tRes80A')
+!tRes80A.number := 1
+!tRes80A.description := 'Counter seat section'
+!tRes80A.capacity := 2
+!insert (res80, tRes80A) into ReservationTable
+
+!new ItemOrder('ioRes80_1')
+!ioRes80_1.time := Time('12:05')
+!insert (res80, ioRes80_1) into ReservationItemOrdered
+!insert (ioRes80_1, miLimeSoda38) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes80_2')
+!ioRes80_2.time := Time('12:12')
+!insert (res80, ioRes80_2) into ReservationItemOrdered
+!insert (ioRes80_2, miSoyRiceBowl38) into ItemOrderMenuItem
+
+!new BusDriver('bd80')
+!bd80.name := 'Hector Velez'
+!bd80.dateOfBirth := Date('1970-01-10')
+!bd80.phoneNumber := '555-3040'
+!bd80.driverLicenseNr := 'D-3008182'
+
+!new Banquet('banq80')
+!banq80.time := Time('15:30')
+!banq80.date := Date('2028-07-19')
+!banq80.numberPeople := 9
+!banq80.name := 'Esports Team Lunch'
+!banq80.phoneNumber := '555-3031'
+!banq80.number := 89001
+!banq80.groupName := 'Regional Qualifiers'
+!banq80.paymentMethod := #CreditCard
+!banq80.busService := true
+
+!insert (rest38, banq80) into RestaurantReservation
+!insert (banq80, w120) into ReservationWaiter
+!insert (banq80, w121) into ReservationWaiter
+!insert (banq80, bd80) into BanquetBusDriver
+
+!new Table('tBanq80A')
+!tBanq80A.number := 40
+!tBanq80A.description := 'Group table near stage screen'
+!tBanq80A.capacity := 10
+!insert (banq80, tBanq80A) into ReservationTable
+
+!new ItemOrder('ioBanq80_1')
+!ioBanq80_1.time := Time('15:45')
+!insert (banq80, ioBanq80_1) into ReservationItemOrdered
+!insert (ioBanq80_1, miShrimpSatay38) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq80_2')
+!ioBanq80_2.time := Time('16:05')
+!insert (banq80, ioBanq80_2) into ReservationItemOrdered
+!insert (ioBanq80_2, miSoyRiceBowl38) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq80_3')
+!ioBanq80_3.time := Time('16:20')
+!insert (banq80, ioBanq80_3) into ReservationItemOrdered
+!insert (ioBanq80_3, miPeanutCrumble38) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq80')
+!dietReq80.diet := #Vegan
+
+!new ReportedAllergy('repAlg80')
+!repAlg80.allergen := #Gluten

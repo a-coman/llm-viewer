@@ -1,0 +1,66 @@
+!new Booking('booking32')
+!booking32.startDate := '2031-09-05'
+!booking32.endDate := '2031-09-09'
+!booking32.canceled := true
+!booking32.bookingId := 10900
+!booking32.confirmed := true
+
+!new Customer('customer32')
+!customer32.firstName := 'Ethan'
+!customer32.lastName := 'Brooks'
+
+!insert (booking32, customer32) into BookingCustomer
+
+!new RoomReservation('rr47')
+!rr47.checkInDate := '2031-09-05'
+!rr47.checkOutDate := '2031-09-09'
+
+!new RoomReservation('rr48')
+!rr48.checkInDate := '2031-09-05'
+!rr48.checkOutDate := '2031-09-05'
+
+!insert (booking32, rr47) into BookingRoomReservation
+!insert (booking32, rr48) into BookingRoomReservation
+
+!new Room('room1444')
+!room1444.roomNumber := 1444
+!room1444.numBeds := 2
+!room1444.pricePerNight := 198.0
+!room1444.occupied := false
+!room1444.blocked := true
+
+!new Room('room1445')
+!room1445.roomNumber := 1445
+!room1445.numBeds := 2
+!room1445.pricePerNight := 198.0
+!room1445.occupied := false
+!room1445.blocked := true
+
+!insert (rr47, room1444) into RoomReservationRoom
+!insert (rr47, room1445) into RoomReservationRoom
+
+!new RoomExtra('extraCancellationCharge')
+!extraCancellationCharge.price := 35.0
+!extraCancellationCharge.description := 'Late cancellation charge'
+
+!insert (rr48, extraCancellationCharge) into RoomReservationExtras
+
+!new Bill('bill48')
+!bill48.billId := 29001
+!bill48.price := 0.0
+
+!new Bill('bill49')
+!bill49.billId := 29002
+!bill49.price := 35.0
+
+!insert (bill48, rr47) into BillRoomReservation
+!insert (bill49, rr48) into BillRoomReservation
+
+!insert (booking32, bill48) into BookingBill
+!insert (booking32, bill49) into BookingBill
+
+!new FreeRoomTypesDTO('dtoSeptemberAfterCancel')
+!dtoSeptemberAfterCancel.roomTypeDescription := 'Standard double (released after cancellation)'
+!dtoSeptemberAfterCancel.numBeds := 2
+!dtoSeptemberAfterCancel.pricePerNight := 198.0
+!dtoSeptemberAfterCancel.numFreeRooms := 2

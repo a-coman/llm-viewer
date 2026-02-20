@@ -1,0 +1,341 @@
+!new Restaurant('rest11')
+!rest11.name := 'Sunrise Sushi Bar'
+
+!new Owner('own25')
+!own25.name := 'Naomi Ito'
+!own25.percentageShares := 70
+
+!new Owner('own26')
+!own26.name := 'Chris Meyer'
+!own26.percentageShares := 30
+
+!insert (rest11, own25) into RestaurantOwner
+!insert (rest11, own26) into RestaurantOwner
+
+!new Manager('mgr4')
+!mgr4.name := 'Teresa Quinn'
+!mgr4.dateOfBirth := Date('1983-02-02')
+!mgr4.phoneNumber := '555-2008'
+
+!new HeadWaiter('hw11')
+!hw11.name := 'Kenji Sakamoto'
+!hw11.dateOfBirth := Date('1987-09-16')
+!hw11.phoneNumber := '555-2000'
+
+!new Waiter('w21')
+!w21.name := 'Maya Torres'
+!w21.dateOfBirth := Date('1999-04-25')
+!w21.phoneNumber := '555-2001'
+!w21.spokenLanguage := #Spanish
+
+!new Waiter('w22')
+!w22.name := 'Liam Carter'
+!w22.dateOfBirth := Date('1996-01-08')
+!w22.phoneNumber := '555-2002'
+!w22.spokenLanguage := #English
+
+!new Waiter('w23')
+!w23.name := 'Greta Hahn'
+!w23.dateOfBirth := Date('1994-06-12')
+!w23.phoneNumber := '555-2003'
+!w23.spokenLanguage := #German
+
+!new Waiter('w24')
+!w24.name := 'Paolo Romano'
+!w24.dateOfBirth := Date('1992-11-03')
+!w24.phoneNumber := '555-2004'
+!w24.spokenLanguage := #Italian
+
+!insert (hw11, w21) into HeadWaiterWaiter
+!insert (hw11, w22) into HeadWaiterWaiter
+!insert (hw11, w23) into HeadWaiterWaiter
+!insert (hw11, w24) into HeadWaiterWaiter
+
+!new Chef('chef13')
+!chef13.name := 'Aya Nakamura'
+!chef13.dateOfBirth := Date('1978-05-20')
+!chef13.phoneNumber := '555-2100'
+
+!new Cook('cook20')
+!cook20.name := 'Ben Wallace'
+!cook20.dateOfBirth := Date('1991-03-14')
+!cook20.phoneNumber := '555-2101'
+!cook20.yearsOfExperience := 6
+
+!new Cook('cook21')
+!cook21.name := 'Sora Kim'
+!cook21.dateOfBirth := Date('1997-07-27')
+!cook21.phoneNumber := '555-2102'
+!cook21.yearsOfExperience := 2
+
+!insert (chef13, cook20) into ChefCook
+!insert (chef13, cook21) into ChefCook
+
+!new Chef('chef14')
+!chef14.name := 'Miguel Ortega'
+!chef14.dateOfBirth := Date('1981-10-06')
+!chef14.phoneNumber := '555-2200'
+
+!new Cook('cook22')
+!cook22.name := 'Alina Petrova'
+!cook22.dateOfBirth := Date('1989-12-09')
+!cook22.phoneNumber := '555-2201'
+!cook22.yearsOfExperience := 11
+
+!insert (chef14, cook22) into ChefCook
+
+!new Allergen('alg11Seafood')
+!alg11Seafood.type := #Seafood
+!new Allergen('alg11Gluten')
+!alg11Gluten.type := #Gluten
+!new Allergen('alg11Lactose')
+!alg11Lactose.type := #Lactose
+
+!new FoodItem('fiMisoPaste')
+!fiMisoPaste.number := 801
+!fiMisoPaste.description := 'Miso paste'
+!fiMisoPaste.purchaseFlag := true
+!fiMisoPaste.unit := #Gram
+
+!new FoodItem('fiTofu11')
+!fiTofu11.number := 802
+!fiTofu11.description := 'Silken tofu'
+!fiTofu11.purchaseFlag := true
+!fiTofu11.unit := #Pound
+
+!new FoodItem('fiSalmon11')
+!fiSalmon11.number := 803
+!fiSalmon11.description := 'Sushi-grade salmon'
+!fiSalmon11.purchaseFlag := true
+!fiSalmon11.unit := #Pound
+
+!new FoodItem('fiSushiRice11')
+!fiSushiRice11.number := 804
+!fiSushiRice11.description := 'Sushi rice'
+!fiSushiRice11.purchaseFlag := true
+!fiSushiRice11.unit := #Pound
+
+!new FoodItem('fiNori11')
+!fiNori11.number := 805
+!fiNori11.description := 'Nori sheets'
+!fiNori11.purchaseFlag := true
+!fiNori11.unit := #Sheet
+
+!new FoodItem('fiMochiDough11')
+!fiMochiDough11.number := 806
+!fiMochiDough11.description := 'Mochi dough'
+!fiMochiDough11.purchaseFlag := false
+!fiMochiDough11.unit := #Gram
+
+!new FoodItem('fiIceCream11')
+!fiIceCream11.number := 807
+!fiIceCream11.description := 'Vanilla ice cream base'
+!fiIceCream11.purchaseFlag := true
+!fiIceCream11.unit := #Ounce
+
+!new FoodItem('fiTea11')
+!fiTea11.number := 808
+!fiTea11.description := 'Green tea leaves'
+!fiTea11.purchaseFlag := true
+!fiTea11.unit := #Gram
+
+!insert (fiSalmon11, alg11Seafood) into FoodItemAllergen
+!insert (fiMisoPaste, alg11Gluten) into FoodItemAllergen
+!insert (fiMochiDough11, alg11Gluten) into FoodItemAllergen
+!insert (fiIceCream11, alg11Lactose) into FoodItemAllergen
+
+!new MenuItem('miMisoSoup11')
+!miMisoSoup11.description := 'Miso soup with tofu'
+!miMisoSoup11.prepTime := 6.0
+!miMisoSoup11.classification := #Apetizer
+
+!new MenuItem('miSalmonNigiri11')
+!miSalmonNigiri11.description := 'Salmon nigiri (2 pcs)'
+!miSalmonNigiri11.prepTime := 4.0
+!miSalmonNigiri11.classification := #Main
+
+!new MenuItem('miMochiIceCream11')
+!miMochiIceCream11.description := 'Mochi ice cream'
+!miMochiIceCream11.prepTime := 3.0
+!miMochiIceCream11.classification := #Dessert
+
+!new MenuItem('miGreenTea11')
+!miGreenTea11.description := 'Hot green tea'
+!miGreenTea11.prepTime := 2.0
+!miGreenTea11.classification := #Beverage
+
+!new MenuItem('miMakiRoll11')
+!miMakiRoll11.description := 'Salmon maki roll'
+!miMakiRoll11.prepTime := 7.0
+!miMakiRoll11.classification := #Main
+
+!insert (miMisoSoup11, chef13) into MenuItemChef
+!insert (miSalmonNigiri11, chef13) into MenuItemChef
+!insert (miMakiRoll11, chef13) into MenuItemChef
+!insert (miMochiIceCream11, chef14) into MenuItemChef
+!insert (miGreenTea11, chef14) into MenuItemChef
+
+!insert (miMisoSoup11, fiMisoPaste) into MenuItemFoodItem
+!insert (miMisoSoup11, fiTofu11) into MenuItemFoodItem
+
+!insert (miSalmonNigiri11, fiSalmon11) into MenuItemFoodItem
+!insert (miSalmonNigiri11, fiSushiRice11) into MenuItemFoodItem
+
+!insert (miMakiRoll11, fiSalmon11) into MenuItemFoodItem
+!insert (miMakiRoll11, fiSushiRice11) into MenuItemFoodItem
+!insert (miMakiRoll11, fiNori11) into MenuItemFoodItem
+
+!insert (miMochiIceCream11, fiMochiDough11) into MenuItemFoodItem
+!insert (miMochiIceCream11, fiIceCream11) into MenuItemFoodItem
+
+!insert (miGreenTea11, fiTea11) into MenuItemFoodItem
+
+!new RegularCustomer('cust11')
+!cust11.name := 'Yara Hassan'
+!cust11.prefferedLanguage := #English
+
+!new RegularCustomer('cust12')
+!cust12.name := 'Stefan Muller'
+!cust12.prefferedLanguage := #German
+
+!new Individual('res11')
+!res11.time := Time('18:05')
+!res11.date := Date('2026-10-02')
+!res11.numberPeople := 9
+!res11.name := 'Yara Hassan'
+!res11.phoneNumber := '555-2301'
+!res11.number := 13001
+!res11.seating := #Inside
+!res11.smoking := #NonSmoking
+
+!insert (rest11, res11) into RestaurantReservation
+!insert (res11, cust11) into ReservationCustomer
+!insert (res11, w21) into ReservationWaiter
+!insert (res11, w22) into ReservationWaiter
+
+!new Table('tRes11A')
+!tRes11A.number := 110
+!tRes11A.description := 'Communal table'
+!tRes11A.capacity := 10
+!insert (res11, tRes11A) into ReservationTable
+
+!new ItemOrder('ioRes11_1')
+!ioRes11_1.time := Time('18:20')
+!insert (res11, ioRes11_1) into ReservationItemOrdered
+!insert (ioRes11_1, miMisoSoup11) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes11_2')
+!ioRes11_2.time := Time('18:35')
+!insert (res11, ioRes11_2) into ReservationItemOrdered
+!insert (ioRes11_2, miMakiRoll11) into ItemOrderMenuItem
+
+!new ItemOrder('ioRes11_3')
+!ioRes11_3.time := Time('19:05')
+!insert (res11, ioRes11_3) into ReservationItemOrdered
+!insert (ioRes11_3, miGreenTea11) into ItemOrderMenuItem
+
+!new Individual('res12')
+!res12.time := Time('12:10')
+!res12.date := Date('2026-10-03')
+!res12.numberPeople := 2
+!res12.name := 'Stefan Muller'
+!res12.phoneNumber := '555-2302'
+!res12.number := 13002
+!res12.seating := #Patio
+!res12.smoking := #NonSmoking
+
+!insert (rest11, res12) into RestaurantReservation
+!insert (res12, cust12) into ReservationCustomer
+!insert (res12, w23) into ReservationWaiter
+
+!new Table('tRes12A')
+!tRes12A.number := 12
+!tRes12A.description := 'Patio two-top'
+!tRes12A.capacity := 2
+!insert (res12, tRes12A) into ReservationTable
+
+!new BusDriver('bd10')
+!bd10.name := 'Gloria Pierce'
+!bd10.dateOfBirth := Date('1968-12-04')
+!bd10.phoneNumber := '555-2400'
+!bd10.driverLicenseNr := 'D-9087741'
+
+!new BusDriver('bd11')
+!bd11.name := 'Hassan Ali'
+!bd11.dateOfBirth := Date('1972-04-18')
+!bd11.phoneNumber := '555-2401'
+!bd11.driverLicenseNr := 'D-7710955'
+
+!new Banquet('banq8')
+!banq8.time := Time('19:30')
+!banq8.date := Date('2026-10-05')
+!banq8.numberPeople := 24
+!banq8.name := 'Community Theater'
+!banq8.phoneNumber := '555-2309'
+!banq8.number := 14001
+!banq8.groupName := 'Cast Celebration Dinner'
+!banq8.paymentMethod := #CreditCard
+!banq8.busService := true
+
+!insert (rest11, banq8) into RestaurantReservation
+!insert (banq8, w23) into ReservationWaiter
+!insert (banq8, w24) into ReservationWaiter
+!insert (banq8, bd10) into BanquetBusDriver
+!insert (banq8, bd11) into BanquetBusDriver
+
+!new Table('tBanq8A')
+!tBanq8A.number := 201
+!tBanq8A.description := 'Banquet table A'
+!tBanq8A.capacity := 8
+!insert (banq8, tBanq8A) into ReservationTable
+
+!new Table('tBanq8B')
+!tBanq8B.number := 202
+!tBanq8B.description := 'Banquet table B'
+!tBanq8B.capacity := 8
+!insert (banq8, tBanq8B) into ReservationTable
+
+!new Table('tBanq8C')
+!tBanq8C.number := 203
+!tBanq8C.description := 'Banquet table C'
+!tBanq8C.capacity := 10
+!insert (banq8, tBanq8C) into ReservationTable
+
+!new ItemOrder('ioBanq8_1')
+!ioBanq8_1.time := Time('19:50')
+!insert (banq8, ioBanq8_1) into ReservationItemOrdered
+!insert (ioBanq8_1, miSalmonNigiri11) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq8_2')
+!ioBanq8_2.time := Time('20:20')
+!insert (banq8, ioBanq8_2) into ReservationItemOrdered
+!insert (ioBanq8_2, miMochiIceCream11) into ItemOrderMenuItem
+
+!new Individual('res13')
+!res13.time := Time('21:10')
+!res13.date := Date('2026-10-05')
+!res13.numberPeople := 3
+!res13.name := 'After-Show Table'
+!res13.phoneNumber := '555-2310'
+!res13.number := 14002
+!res13.seating := #Inside
+!res13.smoking := #NonSmoking
+
+!insert (res13, w24) into ReservationWaiter
+
+!new Table('tRes13A')
+!tRes13A.number := 17
+!tRes13A.description := 'Bar-side high table'
+!tRes13A.capacity := 4
+!insert (res13, tRes13A) into ReservationTable
+
+!new ItemOrder('ioRes13_1')
+!ioRes13_1.time := Time('21:25')
+!insert (res13, ioRes13_1) into ReservationItemOrdered
+!insert (ioRes13_1, miGreenTea11) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq8')
+!dietReq8.diet := #Kosher
+
+!new ReportedAllergy('repAlg8')
+!repAlg8.allergen := #Lactose

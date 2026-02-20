@@ -1,0 +1,83 @@
+!new Bank('bankKE1')
+!bankKE1.country := 'Kenya'
+!bankKE1.name := 'Nairobi Commercial Bank'
+!bankKE1.bic := 'NAIBKENA'
+
+!new Bank('bankEG1')
+!bankEG1.country := 'Egypt'
+!bankEG1.name := 'Cairo Nile Bank'
+!bankEG1.bic := 'CNILEGCA'
+
+!new Person('d1')
+!d1.firstName := 'Amina'
+!d1.lastName := 'Mwangi'
+!d1.age := 32
+
+!new Person('d2')
+!d2.firstName := 'Joseph'
+!d2.lastName := 'Otieno'
+!d2.age := 35
+
+!new Person('d3')
+!d3.firstName := 'Salma'
+!d3.lastName := 'Hassan'
+!d3.age := 50
+
+!new Person('d4')
+!d4.firstName := 'Karim'
+!d4.lastName := 'Fahmy'
+!d4.age := 21
+
+!new Person('d5')
+!d5.firstName := 'Daniel'
+!d5.lastName := 'Kimani'
+!d5.age := 19
+
+!new Person('d6')
+!d6.firstName := 'Layla'
+!d6.lastName := 'Nabil'
+!d6.age := 27
+
+!new Account('keAcc1')
+!keAcc1.iban := 'KE00NAIB00000000000001'
+!keAcc1.balance := 150
+
+!new Account('keAcc2')
+!keAcc2.iban := 'KE00NAIB00000000004567'
+!keAcc2.balance := 22000
+
+!new Account('keAcc3')
+!keAcc3.iban := 'KE00NAIB00000000999999'
+!keAcc3.balance := 0
+
+!new Account('egAcc1')
+!egAcc1.iban := 'EG00CNIL00000000001234'
+!egAcc1.balance := 7800
+
+!insert (bankKE1, keAcc1) into AccountOfBanks
+!insert (bankKE1, keAcc2) into AccountOfBanks
+!insert (bankKE1, keAcc3) into AccountOfBanks
+!insert (bankEG1, egAcc1) into AccountOfBanks
+
+!insert (d1, keAcc1) into Ownership
+!insert (d2, keAcc1) into Ownership
+
+!insert (d1, keAcc2) into Ownership
+
+!insert (d2, keAcc3) into Ownership
+!insert (d5, keAcc3) into Ownership
+
+!insert (d3, egAcc1) into Ownership
+!insert (d4, egAcc1) into Ownership
+
+!insert (d6, keAcc1) into Use
+!insert (d5, keAcc1) into Use
+
+!insert (d2, keAcc2) into Use
+!insert (d5, keAcc2) into Use
+!insert (d6, keAcc2) into Use
+
+!insert (d1, keAcc3) into Use
+
+!insert (d6, egAcc1) into Use
+!insert (d3, egAcc1) into Use

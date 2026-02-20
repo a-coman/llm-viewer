@@ -1,0 +1,96 @@
+!new Client('d1')
+!d1.clientId := 501
+!d1.isSuspended := false
+
+!new Client('d2')
+!d2.clientId := 502
+!d2.isSuspended := false
+
+!new Client('d3')
+!d3.clientId := 503
+!d3.isSuspended := true
+
+!new Movie('movR')
+!movR.title := 'Laughing Under Pressure'
+!movR.availableCopies := 2
+!movR.genre := #Comedy
+
+!new Movie('movNR')
+!movNR.title := 'Operation Black Tide'
+!movNR.availableCopies := 8
+!movNR.genre := #Action
+
+!new Series('serX1')
+!serX1.title := 'Garden Secrets'
+!serX1.availableCopies := 0
+!serX1.episode := 1
+
+!new Series('serX2')
+!serX2.title := 'Garden Secrets'
+!serX2.availableCopies := 0
+!serX2.episode := 2
+
+!new Series('serX3')
+!serX3.title := 'Garden Secrets'
+!serX3.availableCopies := 0
+!serX3.episode := 3
+
+!new Series('serY1')
+!serY1.title := 'Metro Patrol'
+!serY1.availableCopies := 1
+!serY1.episode := 9
+
+!new Actor('b1')
+!b1.name := 'Renee Coleman'
+
+!new Actor('b2')
+!b2.name := 'Diego Santana'
+
+!new Actor('b3')
+!b3.name := 'Farah Iqbal'
+
+!new Actor('b4')
+!b4.name := 'Jonas Keller'
+
+!new Actor('b5')
+!b5.name := 'Mei Watanabe'
+
+!new Actor('unused1')
+!unused1.name := 'Tomasz Zielinski'
+
+!insert (movR, b1) into CassetteActor
+!insert (movR, b2) into CassetteActor
+
+!insert (movNR, b4) into CassetteActor
+!insert (movNR, b5) into CassetteActor
+
+!insert (serX1, b3) into CassetteActor
+!insert (serX2, b3) into CassetteActor
+!insert (serX3, b3) into CassetteActor
+
+!insert (serY1, b2) into CassetteActor
+!insert (serY1, b4) into CassetteActor
+
+!new Rental('rd1_1')
+!rd1_1.date := Date('2020-04-15')
+!insert (d1, rd1_1) into ClientRental
+!insert (rd1_1, serX1) into RentalCassette
+
+!new Rental('rd1_2')
+!rd1_2.date := Date('2020-04-18')
+!insert (d1, rd1_2) into ClientRental
+!insert (rd1_2, movR) into RentalCassette
+!insert (rd1_2, serX1) into RentalCassette
+!insert (rd1_2, serX2) into RentalCassette
+!insert (rd1_2, serX3) into RentalCassette
+
+!new Rental('rd2_1')
+!rd2_1.date := Date('2020-05-02')
+!insert (d2, rd2_1) into ClientRental
+!insert (rd2_1, serY1) into RentalCassette
+
+!new Rental('rd3_1')
+!rd3_1.date := Date('2020-05-03')
+!insert (d3, rd3_1) into ClientRental
+!insert (rd3_1, movR) into RentalCassette
+!insert (rd3_1, serY1) into RentalCassette

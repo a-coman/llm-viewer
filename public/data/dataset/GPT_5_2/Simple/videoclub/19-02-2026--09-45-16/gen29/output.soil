@@ -1,0 +1,78 @@
+!new Client('yC1')
+!yC1.clientId := 2601
+!yC1.isSuspended := true
+
+!new Client('yC2')
+!yC2.clientId := 2602
+!yC2.isSuspended := false
+
+!new Movie('yMovie1')
+!yMovie1.title := 'Glacier Strike'
+!yMovie1.availableCopies := 3
+!yMovie1.genre := #Action
+
+!new Series('ySeries1')
+!ySeries1.title := 'Metro Laughs'
+!ySeries1.availableCopies := 0
+!ySeries1.episode := 1
+
+!new Series('ySeries2')
+!ySeries2.title := 'Metro Laughs'
+!ySeries2.availableCopies := 0
+!ySeries2.episode := 2
+
+!new Series('ySeries3')
+!ySeries3.title := 'Signal Room'
+!ySeries3.availableCopies := 2
+!ySeries3.episode := 9
+
+!new Cassette('yTape1')
+!yTape1.title := 'Training Tape: Customer Service Basics'
+!yTape1.availableCopies := 12
+
+!new Actor('yA1')
+!yA1.name := 'Sibel Arman'
+
+!new Actor('yA2')
+!yA2.name := 'Grant Holloway'
+
+!new Actor('yA3')
+!yA3.name := 'Alina Popescu'
+
+!new Actor('yA4')
+!yA4.name := 'Mateo Kruger'
+
+!insert (yMovie1, yA2) into CassetteActor
+!insert (yMovie1, yA3) into CassetteActor
+!insert (yMovie1, yA4) into CassetteActor
+
+!insert (ySeries1, yA1) into CassetteActor
+!insert (ySeries1, yA3) into CassetteActor
+
+!insert (ySeries2, yA1) into CassetteActor
+
+!insert (ySeries3, yA2) into CassetteActor
+!insert (ySeries3, yA4) into CassetteActor
+
+!insert (yTape1, yA1) into CassetteActor
+!insert (yTape1, yA2) into CassetteActor
+!insert (yTape1, yA3) into CassetteActor
+!insert (yTape1, yA4) into CassetteActor
+
+!new Rental('yR1')
+!yR1.date := Date('2006-08-17')
+!insert (yC2, yR1) into ClientRental
+!insert (yR1, yTape1) into RentalCassette
+
+!new Rental('yR2')
+!yR2.date := Date('2006-08-18')
+!insert (yC2, yR2) into ClientRental
+!insert (yR2, ySeries1) into RentalCassette
+!insert (yR2, ySeries2) into RentalCassette
+!insert (yR2, ySeries3) into RentalCassette
+
+!new Rental('yR3')
+!yR3.date := Date('2006-08-19')
+!insert (yC1, yR3) into ClientRental
+!insert (yR3, yMovie1) into RentalCassette
+!insert (yR3, yTape1) into RentalCassette

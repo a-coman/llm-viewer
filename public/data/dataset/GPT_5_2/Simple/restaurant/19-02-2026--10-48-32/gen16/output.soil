@@ -1,0 +1,261 @@
+!new Restaurant('rest21')
+!rest21.name := 'Pop-Up Pierogi House'
+
+!new Restaurant('rest22')
+!rest22.name := 'Quiet Tea Corner'
+
+!new Owner('own48')
+!own48.name := 'Karolina Nowak'
+!own48.percentageShares := 50
+
+!new Owner('own49')
+!own49.name := 'Elias Romero'
+!own49.percentageShares := 30
+
+!new Owner('own50')
+!own50.name := 'Wen Li'
+!own50.percentageShares := 20
+
+!new Owner('own51')
+!own51.name := 'Harriet Bloom'
+!own51.percentageShares := 50
+
+!insert (rest21, own48) into RestaurantOwner
+!insert (rest21, own49) into RestaurantOwner
+!insert (rest21, own50) into RestaurantOwner
+
+!insert (rest22, own48) into RestaurantOwner
+!insert (rest22, own51) into RestaurantOwner
+
+!new HeadWaiter('hw22')
+!hw22.name := 'Victor Shaw'
+!hw22.dateOfBirth := Date('1986-09-02')
+!hw22.phoneNumber := '555-4109'
+
+!new HeadWaiter('hw23')
+!hw23.name := 'Lara Neumann'
+!hw23.dateOfBirth := Date('1983-01-30')
+!hw23.phoneNumber := '555-4110'
+
+!new Waiter('w44')
+!w44.name := 'Sofia Marin'
+!w44.dateOfBirth := Date('1999-05-05')
+!w44.phoneNumber := '555-4111'
+!w44.spokenLanguage := #Italian
+
+!new Waiter('w45')
+!w45.name := 'Diego Serrano'
+!w45.dateOfBirth := Date('1996-08-18')
+!w45.phoneNumber := '555-4112'
+!w45.spokenLanguage := #Spanish
+
+!new Waiter('w46')
+!w46.name := 'Hannah Keller'
+!w46.dateOfBirth := Date('1994-11-12')
+!w46.phoneNumber := '555-4113'
+!w46.spokenLanguage := #German
+
+!insert (hw22, w44) into HeadWaiterWaiter
+!insert (hw22, w45) into HeadWaiterWaiter
+!insert (hw23, w46) into HeadWaiterWaiter
+
+!new Chef('chef29')
+!chef29.name := 'Marek Zielinski'
+!chef29.dateOfBirth := Date('1977-03-07')
+!chef29.phoneNumber := '555-4209'
+
+!new Chef('chef30')
+!chef30.name := 'Nora Schmidt'
+!chef30.dateOfBirth := Date('1982-07-21')
+!chef30.phoneNumber := '555-4210'
+
+!new Cook('cook44')
+!cook44.name := 'Amal Hussein'
+!cook44.dateOfBirth := Date('1991-02-28')
+!cook44.phoneNumber := '555-4211'
+!cook44.yearsOfExperience := 9
+
+!new Cook('cook45')
+!cook45.name := 'Tom Jensen'
+!cook45.dateOfBirth := Date('1998-10-09')
+!cook45.phoneNumber := '555-4212'
+!cook45.yearsOfExperience := 0
+
+!new Cook('cook46')
+!cook46.name := 'Mina Park'
+!cook46.dateOfBirth := Date('1989-04-16')
+!cook46.phoneNumber := '555-4213'
+!cook46.yearsOfExperience := 12
+
+!insert (chef29, cook44) into ChefCook
+!insert (chef29, cook45) into ChefCook
+!insert (chef30, cook46) into ChefCook
+
+!new Allergen('alg21Gluten')
+!alg21Gluten.type := #Gluten
+
+!new Allergen('alg21Lactose')
+!alg21Lactose.type := #Lactose
+
+!new Allergen('alg21Nuts')
+!alg21Nuts.type := #Nuts
+
+!new FoodItem('fiFlour21')
+!fiFlour21.number := 1601
+!fiFlour21.description := 'Wheat flour'
+!fiFlour21.purchaseFlag := true
+!fiFlour21.unit := #Pound
+
+!new FoodItem('fiFarmCheese21')
+!fiFarmCheese21.number := 1602
+!fiFarmCheese21.description := 'Farm cheese'
+!fiFarmCheese21.purchaseFlag := true
+!fiFarmCheese21.unit := #Ounce
+
+!new FoodItem('fiSpinach21')
+!fiSpinach21.number := 1603
+!fiSpinach21.description := 'Spinach'
+!fiSpinach21.purchaseFlag := true
+!fiSpinach21.unit := #Pound
+
+!new FoodItem('fiWalnuts21')
+!fiWalnuts21.number := 1604
+!fiWalnuts21.description := 'Walnuts'
+!fiWalnuts21.purchaseFlag := true
+!fiWalnuts21.unit := #Ounce
+
+!new FoodItem('fiTeaLeaves21')
+!fiTeaLeaves21.number := 1605
+!fiTeaLeaves21.description := 'Black tea leaves'
+!fiTeaLeaves21.purchaseFlag := true
+!fiTeaLeaves21.unit := #Gram
+
+!new FoodItem('fiCucumbers21')
+!fiCucumbers21.number := 1606
+!fiCucumbers21.description := 'Pickling cucumbers'
+!fiCucumbers21.purchaseFlag := true
+!fiCucumbers21.unit := #Pound
+
+!insert (fiFlour21, alg21Gluten) into FoodItemAllergen
+!insert (fiFarmCheese21, alg21Lactose) into FoodItemAllergen
+!insert (fiWalnuts21, alg21Nuts) into FoodItemAllergen
+
+!new MenuItem('miPierogi21')
+!miPierogi21.description := 'Pierogi with cheese and spinach'
+!miPierogi21.prepTime := 25.0
+!miPierogi21.classification := #Main
+
+!new MenuItem('miWalnutCake21')
+!miWalnutCake21.description := 'Walnut cake slice'
+!miWalnutCake21.prepTime := 8.0
+!miWalnutCake21.classification := #Dessert
+
+!new MenuItem('miBlackTea21')
+!miBlackTea21.description := 'Hot black tea'
+!miBlackTea21.prepTime := 2.0
+!miBlackTea21.classification := #Beverage
+
+!new MenuItem('miPickles21')
+!miPickles21.description := 'House pickles'
+!miPickles21.prepTime := 1.0
+!miPickles21.classification := #Apetizer
+
+!insert (miPierogi21, chef29) into MenuItemChef
+!insert (miPickles21, chef29) into MenuItemChef
+!insert (miWalnutCake21, chef30) into MenuItemChef
+!insert (miBlackTea21, chef30) into MenuItemChef
+
+!insert (miPierogi21, fiFlour21) into MenuItemFoodItem
+!insert (miPierogi21, fiFarmCheese21) into MenuItemFoodItem
+!insert (miPierogi21, fiSpinach21) into MenuItemFoodItem
+
+!insert (miWalnutCake21, fiFlour21) into MenuItemFoodItem
+!insert (miWalnutCake21, fiWalnuts21) into MenuItemFoodItem
+!insert (miWalnutCake21, fiFarmCheese21) into MenuItemFoodItem
+
+!insert (miBlackTea21, fiTeaLeaves21) into MenuItemFoodItem
+
+!insert (miPickles21, fiCucumbers21) into MenuItemFoodItem
+
+!new Individual('res25')
+!res25.time := Time('18:10')
+!res25.date := Date('2027-06-14')
+!res25.numberPeople := 12
+!res25.name := 'Community Choir'
+!res25.phoneNumber := '555-4300'
+!res25.number := 27001
+!res25.seating := #Inside
+!res25.smoking := #NonSmoking
+
+!insert (res25, w44) into ReservationWaiter
+!insert (res25, w45) into ReservationWaiter
+
+!new Table('tRes25A')
+!tRes25A.number := 101
+!tRes25A.description := 'Main hall table A'
+!tRes25A.capacity := 6
+
+!new Table('tRes25B')
+!tRes25B.number := 102
+!tRes25B.description := 'Main hall table B'
+!tRes25B.capacity := 4
+
+!new Table('tRes25C')
+!tRes25C.number := 103
+!tRes25C.description := 'Main hall table C'
+!tRes25C.capacity := 2
+
+!insert (res25, tRes25A) into ReservationTable
+!insert (res25, tRes25B) into ReservationTable
+!insert (res25, tRes25C) into ReservationTable
+
+!new ItemOrder('ioRes25_1')
+!ioRes25_1.time := Time('19:05')
+!insert (res25, ioRes25_1) into ReservationItemOrdered
+!insert (ioRes25_1, miWalnutCake21) into ItemOrderMenuItem
+
+!new RegularCustomer('cust20')
+!cust20.name := 'Amina Yilmaz'
+!cust20.prefferedLanguage := #English
+
+!new Banquet('banq16')
+!banq16.time := Time('12:00')
+!banq16.date := Date('2027-06-15')
+!banq16.numberPeople := 25
+!banq16.name := 'Amina Yilmaz'
+!banq16.phoneNumber := '555-4301'
+!banq16.number := 28001
+!banq16.groupName := 'Museum Volunteer Brunch'
+!banq16.paymentMethod := #Cash
+!banq16.busService := false
+
+!insert (rest22, banq16) into RestaurantReservation
+!insert (banq16, cust20) into ReservationCustomer
+!insert (banq16, w46) into ReservationWaiter
+
+!new Table('tBanq16A')
+!tBanq16A.number := 210
+!tBanq16A.description := 'Tea room long table'
+!tBanq16A.capacity := 30
+!insert (banq16, tBanq16A) into ReservationTable
+
+!new ItemOrder('ioBanq16_1')
+!ioBanq16_1.time := Time('12:15')
+!insert (banq16, ioBanq16_1) into ReservationItemOrdered
+!insert (ioBanq16_1, miPickles21) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq16_2')
+!ioBanq16_2.time := Time('12:40')
+!insert (banq16, ioBanq16_2) into ReservationItemOrdered
+!insert (ioBanq16_2, miPierogi21) into ItemOrderMenuItem
+
+!new ItemOrder('ioBanq16_3')
+!ioBanq16_3.time := Time('13:05')
+!insert (banq16, ioBanq16_3) into ReservationItemOrdered
+!insert (ioBanq16_3, miBlackTea21) into ItemOrderMenuItem
+
+!new DietaryRequirement('dietReq17')
+!dietReq17.diet := #Vegan
+
+!new ReportedAllergy('repAlg17')
+!repAlg17.allergen := #Gluten

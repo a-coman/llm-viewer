@@ -1,0 +1,107 @@
+!new Currency('curAED')
+!curAED.name := 'United Arab Emirates Dirham'
+!curAED.abbreviation := 'AED'
+
+!new Currency('curUAH')
+!curUAH.name := 'Ukrainian Hryvnia'
+!curUAH.abbreviation := 'UAH'
+
+
+!new Expense('expFebWeddingRegistry')
+!expFebWeddingRegistry.amount := 1750.00
+!expFebWeddingRegistry.startDate := Date('2026-02-04')
+!expFebWeddingRegistry.endDate := Date('2026-02-06')
+
+!new Bill('billVenueReservation_2026_02_04')
+!billVenueReservation_2026_02_04.amount := 1200.00
+!billVenueReservation_2026_02_04.category := 'Events - Venue reservation'
+!billVenueReservation_2026_02_04.date := Date('2026-02-04')
+!billVenueReservation_2026_02_04.paymentMethod := #CHECK
+!billVenueReservation_2026_02_04.status := #PENDING
+
+!new Bill('billPhotographerDeposit_2026_02_06')
+!billPhotographerDeposit_2026_02_06.amount := 550.00
+!billPhotographerDeposit_2026_02_06.category := 'Events - Photographer deposit'
+!billPhotographerDeposit_2026_02_06.date := Date('2026-02-06')
+!billPhotographerDeposit_2026_02_06.paymentMethod := #CREDIT_CARD
+!billPhotographerDeposit_2026_02_06.status := #VERIFIED
+
+!insert (expFebWeddingRegistry, billVenueReservation_2026_02_04) into ExpenseContainsBills
+!insert (expFebWeddingRegistry, billPhotographerDeposit_2026_02_06) into ExpenseContainsBills
+
+!insert (billVenueReservation_2026_02_04, curAED) into BillCurrency
+!insert (billPhotographerDeposit_2026_02_06, curAED) into BillCurrency
+
+!new Comment('cmtWedding1')
+!cmtWedding1.text := 'Initial deposits for venue and photographer; final invoices to follow.'
+!insert (expFebWeddingRegistry, cmtWedding1) into ExpenseComment
+
+
+!new Expense('expMayZeroValueReceipts')
+!expMayZeroValueReceipts.amount := 0.00
+!expMayZeroValueReceipts.startDate := Date('2026-05-01')
+!expMayZeroValueReceipts.endDate := Date('2026-05-01')
+
+!new Bill('billWarrantyReplacement_2026_05_01')
+!billWarrantyReplacement_2026_05_01.amount := 0.00
+!billWarrantyReplacement_2026_05_01.category := 'Shopping - Warranty replacement'
+!billWarrantyReplacement_2026_05_01.date := Date('2026-05-01')
+!billWarrantyReplacement_2026_05_01.paymentMethod := #CASH
+!billWarrantyReplacement_2026_05_01.status := #VALIDATED
+
+!new Bill('billPromotionalSample_2026_05_01')
+!billPromotionalSample_2026_05_01.amount := 0.00
+!billPromotionalSample_2026_05_01.category := 'Shopping - Promotional sample'
+!billPromotionalSample_2026_05_01.date := Date('2026-05-01')
+!billPromotionalSample_2026_05_01.paymentMethod := #CREDIT_CARD
+!billPromotionalSample_2026_05_01.status := #VERIFIED
+
+!new Bill('billNoChargeService_2026_05_01')
+!billNoChargeService_2026_05_01.amount := 0.00
+!billNoChargeService_2026_05_01.category := 'Services - No-charge adjustment'
+!billNoChargeService_2026_05_01.date := Date('2026-05-01')
+!billNoChargeService_2026_05_01.paymentMethod := #CHECK
+!billNoChargeService_2026_05_01.status := #REFUNDED
+
+!insert (expMayZeroValueReceipts, billWarrantyReplacement_2026_05_01) into ExpenseContainsBills
+!insert (expMayZeroValueReceipts, billPromotionalSample_2026_05_01) into ExpenseContainsBills
+!insert (expMayZeroValueReceipts, billNoChargeService_2026_05_01) into ExpenseContainsBills
+
+!insert (billWarrantyReplacement_2026_05_01, curUAH) into BillCurrency
+!insert (billPromotionalSample_2026_05_01, curUAH) into BillCurrency
+!insert (billNoChargeService_2026_05_01, curUAH) into BillCurrency
+
+
+!new Expense('expJunSoftwareLicenses')
+!expJunSoftwareLicenses.amount := 99.95
+!expJunSoftwareLicenses.startDate := Date('2026-06-12')
+!expJunSoftwareLicenses.endDate := Date('2026-06-12')
+
+!new Bill('billAntivirus_2026_06_12')
+!billAntivirus_2026_06_12.amount := 49.99
+!billAntivirus_2026_06_12.category := 'Software - Antivirus'
+!billAntivirus_2026_06_12.date := Date('2026-06-12')
+!billAntivirus_2026_06_12.paymentMethod := #CREDIT_CARD
+!billAntivirus_2026_06_12.status := #VALIDATED
+
+!new Bill('billPluginBundle_2026_06_12')
+!billPluginBundle_2026_06_12.amount := 29.98
+!billPluginBundle_2026_06_12.category := 'Software - Plugin bundle'
+!billPluginBundle_2026_06_12.date := Date('2026-06-12')
+!billPluginBundle_2026_06_12.paymentMethod := #CREDIT_CARD
+!billPluginBundle_2026_06_12.status := #PENDING
+
+!new Bill('billFontLicense_2026_06_12')
+!billFontLicense_2026_06_12.amount := 19.98
+!billFontLicense_2026_06_12.category := 'Software - Font license'
+!billFontLicense_2026_06_12.date := Date('2026-06-12')
+!billFontLicense_2026_06_12.paymentMethod := #CREDIT_CARD
+!billFontLicense_2026_06_12.status := #VERIFIED
+
+!insert (expJunSoftwareLicenses, billAntivirus_2026_06_12) into ExpenseContainsBills
+!insert (expJunSoftwareLicenses, billPluginBundle_2026_06_12) into ExpenseContainsBills
+!insert (expJunSoftwareLicenses, billFontLicense_2026_06_12) into ExpenseContainsBills
+
+!insert (billAntivirus_2026_06_12, curAED) into BillCurrency
+!insert (billPluginBundle_2026_06_12, curAED) into BillCurrency
+!insert (billFontLicense_2026_06_12, curAED) into BillCurrency

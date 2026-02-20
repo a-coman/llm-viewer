@@ -1,0 +1,94 @@
+!new Bank('bankIN1')
+!bankIN1.country := 'India'
+!bankIN1.name := 'Mumbai National Bank'
+!bankIN1.bic := 'MNBKINBBXXX'
+
+!new Bank('bankAE1')
+!bankAE1.country := 'United Arab Emirates'
+!bankAE1.name := 'Gulf Crescent Bank'
+!bankAE1.bic := 'GCBLAEADXXX'
+
+!new Person('k1')
+!k1.firstName := 'Arjun'
+!k1.lastName := 'Mehta'
+!k1.age := 55
+
+!new Person('k2')
+!k2.firstName := 'Neha'
+!k2.lastName := 'Sharma'
+!k2.age := 24
+
+!new Person('k3')
+!k3.firstName := 'Ravi'
+!k3.lastName := 'Patel'
+!k3.age := 19
+
+!new Person('k4')
+!k4.firstName := 'Zara'
+!k4.lastName := 'Khan'
+!k4.age := 17
+
+!new Person('k5')
+!k5.firstName := 'Ibrahim'
+!k5.lastName := 'Khan'
+!k5.age := 12
+
+!new Person('k6')
+!k6.firstName := 'Maya'
+!k6.lastName := 'Nair'
+!k6.age := 33
+
+!new Account('inAcc1')
+!inAcc1.iban := 'IN00MNBK000000000001'
+!inAcc1.balance := 0
+
+!new Account('inAcc2')
+!inAcc2.iban := 'IN00MNBK000000004567'
+!inAcc2.balance := 45000
+
+!new Account('inAcc3')
+!inAcc3.iban := 'IN00MNBK000000009999'
+!inAcc3.balance := 1200
+
+!new Account('aeAcc1')
+!aeAcc1.iban := 'AE00GCBL000000000123'
+!aeAcc1.balance := 800
+
+!new Account('aeAcc2')
+!aeAcc2.iban := 'AE00GCBL000000009876'
+!aeAcc2.balance := 999999
+
+!insert (bankIN1, inAcc1) into AccountOfBanks
+!insert (bankIN1, inAcc2) into AccountOfBanks
+!insert (bankIN1, inAcc3) into AccountOfBanks
+!insert (bankAE1, aeAcc1) into AccountOfBanks
+!insert (bankAE1, aeAcc2) into AccountOfBanks
+
+!insert (k2, inAcc1) into Ownership
+
+!insert (k1, inAcc2) into Ownership
+!insert (k3, inAcc2) into Ownership
+
+!insert (k3, inAcc3) into Ownership
+
+!insert (k6, aeAcc1) into Ownership
+!insert (k2, aeAcc1) into Ownership
+
+!insert (k1, aeAcc2) into Ownership
+
+!insert (k2, inAcc1) into Use
+!insert (k4, inAcc1) into Use
+!insert (k5, inAcc1) into Use
+
+!insert (k1, inAcc2) into Use
+!insert (k3, inAcc2) into Use
+!insert (k4, inAcc2) into Use
+
+!insert (k2, aeAcc1) into Use
+!insert (k6, aeAcc1) into Use
+!insert (k5, aeAcc1) into Use
+
+!insert (k1, aeAcc2) into Use
+!insert (k2, aeAcc2) into Use
+!insert (k6, aeAcc2) into Use
+!insert (k3, aeAcc2) into Use
