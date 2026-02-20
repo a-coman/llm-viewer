@@ -1,6 +1,7 @@
 import re
 import json
 import os
+from difflib import SequenceMatcher
 
 
 def get_experiment_info(loaded_data, experiment_id):
@@ -186,18 +187,19 @@ def parse_judge_logs(logs_path, exp_type):
     return result, system_prompt
 
 
-def parse_judge_output_stats(logs_path, exp_type):
+def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
     """
     Parse judge-logs.md to extract output stats from # Output IJudge sections.
     Returns:
-        - per_gen_stats: {gen_id: {"input_tokens": N, "output_tokens": N, "total_tokens": N, "time_seconds": N}}
-          For CoT: {gen_id: {category: {...}}}
-        - summary_stats: {"input_tokens": N, "output_tokens": N, "total_tokens": N, "time_seconds": N}
+            - per_domain_stats:
+                Simple: {domain: {gen_id: {"input_tokens": N, "output_tokens": N, "total_tokens": N, "time_seconds": N}}}
+                CoT: {domain: {gen_id: {category: {...}}}}
+            - summary_stats: {"input_tokens": N, "output_tokens": N, "total_tokens": N, "time_seconds": N}
     """
     with open(logs_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    per_gen_stats = {}
+    per_domain_stats = {}
     summary_stats = {
         "input_tokens": 0,
         "output_tokens": 0,
@@ -218,6 +220,82 @@ def parse_judge_output_stats(logs_path, exp_type):
             "total_tokens": int(summary_match.group(4)),
             "time_seconds": float(summary_match.group(1)),
         }
+
+    def normalize_text_for_match(text):
+        if not text:
+            return ""
+        return re.sub(r"\s+", " ", text).strip().lower()
+
+    def text_similarity(a, b):
+        if not a and not b:
+            return 1.0
+        if not a or not b:
+            return 0.0
+        return SequenceMatcher(None, a, b).ratio()
+
+    def get_simple_domain_by_response(gen_id, response_text, why_text, responses_data):
+        if not responses_data:
+            return None
+
+        normalized_response = normalize_text_for_match(response_text)
+        normalized_why = normalize_text_for_match(why_text)
+        best_domain = None
+        best_score = -1.0
+
+        for domain_name, domain_gens in responses_data.items():
+            if gen_id not in domain_gens:
+                continue
+
+            candidate = domain_gens[gen_id]
+            candidate_response = normalize_text_for_match(candidate.get("response", ""))
+            candidate_why = normalize_text_for_match(candidate.get("why", ""))
+
+            if candidate_response != normalized_response:
+                continue
+
+            score = text_similarity(candidate_why, normalized_why)
+            if score > best_score:
+                best_score = score
+                best_domain = domain_name
+
+        if best_score >= 0.55:
+            return best_domain
+
+        return None
+
+    def get_cot_domain_by_response(
+        gen_id, category, response_text, why_text, responses_data
+    ):
+        if not responses_data:
+            return None
+
+        normalized_response = normalize_text_for_match(response_text)
+        normalized_why = normalize_text_for_match(why_text)
+        best_domain = None
+        best_score = -1.0
+
+        for domain_name, domain_gens in responses_data.items():
+            if gen_id not in domain_gens:
+                continue
+            if category not in domain_gens[gen_id]:
+                continue
+
+            candidate = domain_gens[gen_id][category]
+            candidate_response = normalize_text_for_match(candidate.get("response", ""))
+            candidate_why = normalize_text_for_match(candidate.get("why", ""))
+
+            if candidate_response != normalized_response:
+                continue
+
+            score = text_similarity(candidate_why, normalized_why)
+            if score > best_score:
+                best_score = score
+                best_domain = domain_name
+
+        if best_score >= 0.55:
+            return best_domain
+
+        return None
 
     # Parse per-generation stats
     if exp_type == "cot":
@@ -256,9 +334,27 @@ def parse_judge_output_stats(logs_path, exp_type):
                 "time_seconds": float(time_match.group(1)) if time_match else 0,
             }
 
-            if gen_id not in per_gen_stats:
-                per_gen_stats[gen_id] = {}
-            per_gen_stats[gen_id][category] = stats
+            response_match = re.search(r"\*\*Response\*\*:\s*([^\n]+)", block)
+            why_match = re.search(
+                r"\*\*Why\*\*:\s*(.*?)(?=\n\n|\n\||$)", block, re.DOTALL
+            )
+
+            response_text = response_match.group(1).strip() if response_match else ""
+            why_text = why_match.group(1).strip() if why_match else ""
+
+            domain_name = get_cot_domain_by_response(
+                gen_id, category, response_text, why_text, responses_data
+            )
+
+            if domain_name is None:
+                continue
+
+            if domain_name not in per_domain_stats:
+                per_domain_stats[domain_name] = {}
+            if gen_id not in per_domain_stats[domain_name]:
+                per_domain_stats[domain_name][gen_id] = {}
+
+            per_domain_stats[domain_name][gen_id][category] = stats
     else:
         # Simple format: # Output IJudge : genX
         pattern = r"^# Output IJudge : gen(\d+)"
@@ -284,14 +380,33 @@ def parse_judge_output_stats(logs_path, exp_type):
             total_match = re.search(r"Total Tokens: (\d+)", block)
             time_match = re.search(r"Generation Time: ([\d.]+) seconds", block)
 
-            per_gen_stats[gen_id] = {
+            stats = {
                 "input_tokens": int(input_match.group(1)) if input_match else 0,
                 "output_tokens": int(output_match.group(1)) if output_match else 0,
                 "total_tokens": int(total_match.group(1)) if total_match else 0,
                 "time_seconds": float(time_match.group(1)) if time_match else 0,
             }
 
-    return per_gen_stats, summary_stats
+            response_match = re.search(r"\*\*Response\*\*:\s*([^\n]+)", block)
+            why_match = re.search(
+                r"\*\*Why\*\*:\s*(.*?)(?=\n\n|\n\||$)", block, re.DOTALL
+            )
+
+            response_text = response_match.group(1).strip() if response_match else ""
+            why_text = why_match.group(1).strip() if why_match else ""
+
+            domain_name = get_simple_domain_by_response(
+                gen_id, response_text, why_text, responses_data
+            )
+
+            if domain_name is None:
+                continue
+
+            if domain_name not in per_domain_stats:
+                per_domain_stats[domain_name] = {}
+            per_domain_stats[domain_name][gen_id] = stats
+
+    return per_domain_stats, summary_stats
 
 
 def parse_judge_responses(responses_path, exp_type):
@@ -737,7 +852,9 @@ if __name__ == "__main__":
         logs_data, system_prompt = parse_judge_logs(bundle["logs"], exp_type)
         responses_data = parse_judge_responses(bundle["responses"], exp_type)
         results_data = parse_judge_results(bundle["results"])
-        output_stats, summary_stats = parse_judge_output_stats(bundle["logs"], exp_type)
+        output_stats_by_domain, summary_stats = parse_judge_output_stats(
+            bundle["logs"], exp_type, responses_data
+        )
 
         if model_id not in output_by_model:
             output_by_model[model_id] = {
@@ -795,7 +912,7 @@ if __name__ == "__main__":
                 exp_type,
                 domain_name,
                 exp_id,
-                output_stats,
+                output_stats_by_domain.get(domain_name, {}),
             )
 
             output_by_model[model_id][exp_type]["experiments"].append(experiment)
