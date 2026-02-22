@@ -55,11 +55,12 @@ export const INFINITY_SYMBOL = "∞";
 // Metric Explanations
 export const METRIC_EXPLANATIONS = {
   cost: {
-    title: "Cost",
+    title: "Stats",
     description:
-      "Measures the cost of the instantiation. It does not account for cached tokens.",
+      "Breakdown of the total cost and elapsed time for generating the instances.",
     examples: [
-      "Total Cost = (input tokens * input price) + (output tokens * output price)",
+      "Elapsed Time = Console Time (ie. Processing Time + API Calls)",
+      "Cost = (input tokens * input price) + (output tokens * output price)",
     ],
   },
   validation: {
@@ -107,7 +108,7 @@ export const METRIC_EXPLANATIONS = {
     description:
       "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtfull) the realism of each instance and explain its decision.",
     examples: [
-      "Realism = Total Number of \"realistic\" instances / Total Number of instances",
+      'Realism = Total Number of "realistic" instances / Total Number of instances',
     ],
   },
 
@@ -119,7 +120,7 @@ export const METRIC_EXPLANATIONS = {
       "Similarity = 1 - (GED / (0.5 * (GED_to_empty_A + GED_to_empty_B)))",
       "1 = red = identical graphs",
       "<=0.5 = green = different graphs",
-      "We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]"
+      "We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
     ],
   },
 } as const;
