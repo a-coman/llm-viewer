@@ -403,6 +403,10 @@ function sumTokens(attempts: Attempt[] = []) {
   );
 }
 
+function sumTimeSeconds(attempts: Attempt[] = []) {
+  return attempts.reduce((sum, att) => sum + (att.time_seconds || 0), 0);
+}
+
 export function getModelData(
   modelSlug: string,
   experimentId?: string,
@@ -481,6 +485,7 @@ export function getModelData(
           | undefined;
         const attempt = gen.attempts?.[gen.attempts.length - 1];
         const tokens = sumTokens(gen.attempts);
+        const elapsedSeconds = sumTimeSeconds(gen.attempts);
 
         if (mGen && attempt) {
           const genMetrics: any = {
@@ -499,6 +504,7 @@ export function getModelData(
               tokenInput: tokens.input,
               tokenOutput: tokens.output,
             },
+            elapsedSeconds,
           };
 
           const instanceName = attempt.instance_name || "output";
@@ -546,6 +552,7 @@ export function getModelData(
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,
         },
+        elapsedSeconds: logExp.time_seconds,
         diversity: {
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.simple?.ged,
@@ -564,6 +571,7 @@ export function getModelData(
       coverage: { ...EMPTY_COVERAGE_METRICS },
       generations: [],
       price: { price: 0, tokenInput: 0, tokenOutput: 0 },
+      elapsedSeconds: 0,
       diversity: { ...EMPTY_DIVERSITY },
       judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
       shannon: [],
@@ -686,6 +694,9 @@ export function getModelData(
           const instantiatorTokens = sumTokens(attempts);
           const totalIn = creatorTokens.input + instantiatorTokens.input;
           const totalOut = creatorTokens.output + instantiatorTokens.output;
+          const creatorTime = sumTimeSeconds(catLog.IListCreator?.attempts);
+          const instantiatorTime = sumTimeSeconds(attempts);
+          const elapsedSeconds = creatorTime + instantiatorTime;
 
           // Extract prompts from all 3 agents
           const creatorAttempts = catLog.IListCreator?.attempts || [];
@@ -726,6 +737,7 @@ export function getModelData(
               tokenInput: totalIn,
               tokenOutput: totalOut,
             },
+            elapsedSeconds,
             prompts,
             judge: judgeCat
               ? {
@@ -795,6 +807,7 @@ export function getModelData(
           tokenInput: logExp.input_tokens,
           tokenOutput: logExp.output_tokens,
         },
+        elapsedSeconds: logExp.time_seconds,
         diversity: {
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.cot?.ged,
@@ -811,6 +824,7 @@ export function getModelData(
       coverage: { ...EMPTY_COVERAGE_METRICS },
       generations: [],
       price: { price: 0, tokenInput: 0, tokenOutput: 0 },
+      elapsedSeconds: 0,
       diversity: { ...EMPTY_DIVERSITY },
       judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
       shannon: [],
@@ -909,6 +923,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
         tokenInput: logs?.input_tokens || 0,
         tokenOutput: logs?.output_tokens || 0,
       },
+      elapsedSeconds: logs?.time_seconds || 0,
       metrics: {
         syntax: calculateRate(metrics?.syntax),
         multiplicities: calculateRate(metrics?.multiplicities),

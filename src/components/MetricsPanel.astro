@@ -40,6 +40,8 @@ interface Metrics {
   };
   judge?: { successRate: number };
   price?: { price: number };
+  elapsedSeconds?: number;
+  time_seconds?: number;
   instantiation?: InstantiationItem;
   realism?: number;
 }
@@ -152,11 +154,25 @@ function getInstantiationDisplay(
   };
 }
 
+function formatElapsedSeconds(value: number | undefined | null): string {
+  if (value === undefined || value === null || isNaN(value)) return "—";
+  const totalSeconds = Number(value);
+  if (totalSeconds < 60) return `${totalSeconds.toFixed(2)}s`;
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) return `${hours}h ${minutes}m ${seconds.toFixed(1)}s`;
+  return `${minutes}m ${seconds.toFixed(1)}s`;
+}
+
 const cov = metrics?.coverage?.coverage || metrics?.coverage;
 const inst = metrics?.coverage?.instantiation || metrics?.instantiation;
 const div = metrics?.diversity;
 const judge = metrics?.judge || { successRate: metrics?.realism };
 const price = metrics?.price;
+const elapsedSeconds = metrics?.elapsedSeconds ?? metrics?.time_seconds;
 ---
 
 <div class="metrics-panel">
@@ -164,25 +180,33 @@ const price = metrics?.price;
 
   {
     showSections.cost &&
-      (price !== undefined || metrics?.cost !== undefined) && (
+      (price !== undefined ||
+        metrics?.cost !== undefined ||
+        elapsedSeconds !== undefined) && (
         <div class="metric-section">
-          <h3 class="sober-label">
-            Cost
-            <Tooltip metricType="cost" />
-          </h3>
+          <h3 class="sober-label">Stats</h3>
 
           <table class="metrics-table">
             <tbody>
-              <tr>
-                <td>Total Cost</td>
-                <td
-                  style={
-                    getDisplayValue(price ?? metrics?.cost, "currency").style
-                  }
-                >
-                  {getDisplayValue(price ?? metrics?.cost, "currency").text}
-                </td>
-              </tr>
+              {elapsedSeconds !== undefined && (
+                <tr>
+                  <td>Elapsed Time</td>
+                  <td>{formatElapsedSeconds(elapsedSeconds)}</td>
+                </tr>
+              )}
+
+              {(price !== undefined || metrics?.cost !== undefined) && (
+                <tr>
+                  <td>Total Cost</td>
+                  <td
+                    style={
+                      getDisplayValue(price ?? metrics?.cost, "currency").style
+                    }
+                  >
+                    {getDisplayValue(price ?? metrics?.cost, "currency").text}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

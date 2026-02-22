@@ -543,6 +543,8 @@ export interface GenerationMetrics {
   invariants: number | MetricStat;
   coverage: CoverageMetrics;
   diversity?: DiversityMetrics;
+  price?: PriceInfo;
+  elapsedSeconds?: number;
   domainErrors?: Record<
     string,
     { invalid: number; total: number; failureRate: number }
@@ -606,6 +608,7 @@ export interface ModelData {
   diagramUseCode: string;
   simple: {
     price: PriceInfo;
+    elapsedSeconds: number;
     metrics: ModelMetrics;
     coverage: CoverageMetrics;
     diversity: DiversityMetrics;
@@ -618,6 +621,7 @@ export interface ModelData {
 
   cot: {
     price: PriceInfo;
+    elapsedSeconds: number;
     metrics: ModelMetrics;
     coverage: CoverageMetrics;
     diversity: DiversityMetrics;
@@ -633,6 +637,7 @@ export interface DashboardData {
   totals: {
     simple: {
       price: PriceInfo;
+      elapsedSeconds: number;
       metrics: ModelMetrics;
       coverage: CoverageMetrics;
       diversity: DiversityMetrics;
@@ -640,6 +645,7 @@ export interface DashboardData {
     };
     cot: {
       price: PriceInfo;
+      elapsedSeconds: number;
       metrics: ModelMetrics;
       coverage: CoverageMetrics;
       diversity: DiversityMetrics;
