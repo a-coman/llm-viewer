@@ -1,0 +1,63 @@
+!new Currency('currencyBHD')
+!currencyBHD.name := 'Bahraini Dinar'
+!currencyBHD.abbreviation := 'BHD'
+
+!new Currency('currencyNZD')
+!currencyNZD.name := 'New Zealand Dollar'
+!currencyNZD.abbreviation := 'NZD'
+
+!new Expense('expenseECommentOnly')
+!expenseECommentOnly.amount := 0.00
+!expenseECommentOnly.startDate := Date('9999-12-31')
+!expenseECommentOnly.endDate := Date('9999-12-31')
+
+!new Comment('commentECommentOnly_CCO1')
+!commentECommentOnly_CCO1.text := 'No bills attached: this is a placeholder expense used to test comment workflows only.'
+
+!new Comment('commentECommentOnly_CCO2')
+!commentECommentOnly_CCO2.text := 'नोट: कुल राशि शून्य है क्योंकि कोई रसीद संलग्न नहीं है।'
+
+!new Comment('commentECommentOnly_CCO3')
+!commentECommentOnly_CCO3.text := 'ملاحظة: سيتم إضافة الفواتير لاحقًا إذا لزم الأمر.'
+
+!new Comment('commentECommentOnly_CCO4')
+!commentECommentOnly_CCO4.text := 'Дата установлена на 9999-12-31 для проверки предельных значений.'
+
+!insert (expenseECommentOnly, commentECommentOnly_CCO1) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO2) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO3) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO4) into ExpenseComment
+
+!new Expense('expenseEPrecise')
+!expenseEPrecise.amount := 13.01
+!expenseEPrecise.startDate := Date('2026-02-28')
+!expenseEPrecise.endDate := Date('2026-02-28')
+
+!new Bill('billEPrecise_BP1')
+!billEPrecise_BP1.amount := 12.345
+!billEPrecise_BP1.category := 'Client dinner (Manama)'
+!billEPrecise_BP1.date := Date('2026-02-28')
+!billEPrecise_BP1.paymentMethod := #CREDIT_CARD
+!billEPrecise_BP1.status := #VERIFIED
+
+!new Bill('billEPrecise_BP2')
+!billEPrecise_BP2.amount := 0.655
+!billEPrecise_BP2.category := 'Service charge adjustment'
+!billEPrecise_BP2.date := Date('2026-02-28')
+!billEPrecise_BP2.paymentMethod := #CHECK
+!billEPrecise_BP2.status := #VALIDATED
+
+!new Bill('billEPrecise_BP3')
+!billEPrecise_BP3.amount := 0.01
+!billEPrecise_BP3.category := 'Koha (token contribution)'
+!billEPrecise_BP3.date := Date('2026-02-28')
+!billEPrecise_BP3.paymentMethod := #CASH
+!billEPrecise_BP3.status := #PENDING
+
+!insert (expenseEPrecise, billEPrecise_BP1) into ExpenseContainsBills
+!insert (expenseEPrecise, billEPrecise_BP2) into ExpenseContainsBills
+!insert (expenseEPrecise, billEPrecise_BP3) into ExpenseContainsBills
+
+!insert (billEPrecise_BP1, currencyBHD) into BillCurrency
+!insert (billEPrecise_BP2, currencyBHD) into BillCurrency
+!insert (billEPrecise_BP3, currencyNZD) into BillCurrency

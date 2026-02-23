@@ -1,0 +1,357 @@
+!new Customer('C1')
+!C1.firstName := 'Marta'
+!C1.lastName := 'García-López'
+
+!new Booking('B1001')
+!B1001.startDate := '2026-04-10'
+!B1001.endDate := '2026-04-14'
+!B1001.canceled := false
+!B1001.bookingId := 1001
+!B1001.confirmed := true
+
+!new RoomReservation('RR1')
+!RR1.checkInDate := '2026-04-10'
+!RR1.checkOutDate := '2026-04-13'
+
+!new RoomReservation('RR2')
+!RR2.checkInDate := '2026-04-13'
+!RR2.checkOutDate := '2026-04-14'
+
+!new Room('R212')
+!R212.numBeds := 2
+!R212.pricePerNight := 120.00
+!R212.occupied := false
+!R212.blocked := false
+!R212.roomNumber := 212
+
+!new Room('R305')
+!R305.numBeds := 1
+!R305.pricePerNight := 95.00
+!R305.occupied := false
+!R305.blocked := false
+!R305.roomNumber := 305
+
+!new RoomExtra('E1')
+!E1.price := 45.00
+!E1.description := 'Breakfast buffet (3 mornings)'
+
+!new RoomExtra('E2')
+!E2.price := 25.00
+!E2.description := 'Late check-out until 14:00'
+
+!new Bill('BL7001')
+!BL7001.price := 430.00
+!BL7001.billId := 7001
+
+!new Bill('BL7002')
+!BL7002.price := 95.00
+!BL7002.billId := 7002
+
+!new FreeRoomTypesDTO('D1')
+!D1.roomTypeDescription := 'Standard Twin (Courtyard View)'
+!D1.numBeds := 2
+!D1.pricePerNight := 120.00
+!D1.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('D2')
+!D2.roomTypeDescription := 'Single Economy (Compact)'
+!D2.numBeds := 1
+!D2.pricePerNight := 95.00
+!D2.numFreeRooms := 2
+
+!insert (B1001, C1) into BookingCustomer
+
+!insert (B1001, RR1) into BookingRoomReservation
+!insert (B1001, RR2) into BookingRoomReservation
+
+!insert (RR1, R212) into RoomReservationRoom
+!insert (RR2, R305) into RoomReservationRoom
+
+!insert (RR1, E1) into RoomReservationExtras
+!insert (RR1, E2) into RoomReservationExtras
+
+!insert (B1001, BL7001) into BookingBill
+!insert (B1001, BL7002) into BookingBill
+
+!insert (BL7001, RR1) into BillRoomReservation
+!insert (BL7002, RR2) into BillRoomReservation
+
+!new Customer('C3')
+!C3.firstName := 'Amina'
+!C3.lastName := 'El‑Sayed'
+
+!new Booking('B999999')
+!B999999.bookingId := 999999
+!B999999.startDate := '2026-03-10'
+!B999999.endDate := '2026-03-05'
+!B999999.confirmed := true
+!B999999.canceled := true
+
+!new RoomReservation('R1')
+!R1.checkInDate := '2026-03-10'
+!R1.checkOutDate := '2026-03-12'
+
+!new RoomReservation('R2')
+!R2.checkInDate := '2026-03-10'
+!R2.checkOutDate := '2026-03-11'
+
+!new RoomExtra('E4')
+!E4.description := 'Late checkout waiver (manual override)'
+!E4.price := 0.0
+
+!new RoomExtra('E5')
+!E5.description := 'Welcome tea set (complimentary)'
+!E5.price := 0.0
+
+!new RoomExtra('E6')
+!E6.description := 'Airport pickup note added, service not scheduled'
+!E6.price := 0.0
+
+!new Bill('BL50001')
+!BL50001.billId := 50001
+!BL50001.price := 0.0
+
+!new Room('R13')
+!R13.roomNumber := 13
+!R13.numBeds := 1
+!R13.pricePerNight := 0.01
+!R13.occupied := false
+!R13.blocked := true
+
+!new Room('R666')
+!R666.roomNumber := 666
+!R666.numBeds := 2
+!R666.pricePerNight := 9999.99
+!R666.occupied := true
+!R666.blocked := false
+
+!new Bill('BL50002')
+!BL50002.billId := 50002
+!BL50002.price := 10000.00
+
+!new FreeRoomTypesDTO('D5')
+!D5.roomTypeDescription := 'Capsule room (Shinjuku-style), mixed floor'
+!D5.numBeds := 1
+!D5.pricePerNight := 35.50
+!D5.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D6')
+!D6.roomTypeDescription := 'Presidential suite with private hammam (limited offer)'
+!D6.numBeds := 3
+!D6.pricePerNight := 12000.00
+!D6.numFreeRooms := 1
+
+!insert (B999999, C3) into BookingCustomer
+
+!insert (B999999, R1) into BookingRoomReservation
+!insert (B999999, R2) into BookingRoomReservation
+
+!insert (R1, E4) into RoomReservationExtras
+!insert (R1, E5) into RoomReservationExtras
+!insert (R1, E6) into RoomReservationExtras
+
+!insert (R2, R13) into RoomReservationRoom
+!insert (R2, R666) into RoomReservationRoom
+
+!insert (B999999, BL50001) into BookingBill
+!insert (B999999, BL50002) into BookingBill
+
+!insert (BL50001, R1) into BillRoomReservation
+!insert (BL50002, R2) into BillRoomReservation
+
+!new FreeRoomTypesDTO('D7')
+!D7.roomTypeDescription := 'Single capsule (windowless)'
+!D7.numBeds := 1
+!D7.pricePerNight := 0.0
+!D7.numFreeRooms := 0
+
+!new Customer('C4')
+!C4.firstName := 'Aiko'
+!C4.lastName := 'Tanaka'
+
+!new Customer('C5')
+!C5.firstName := 'Óscar'
+!C5.lastName := 'Núñez'
+
+!new Booking('B1')
+!B1.startDate := '2026-03-01'
+!B1.endDate := '2026-03-01'
+!B1.canceled := false
+!B1.bookingId := 1
+!B1.confirmed := false
+
+!new RoomReservation('R1_B1')
+!R1_B1.checkInDate := '2026-03-01'
+!R1_B1.checkOutDate := '2026-03-01'
+
+!new Bill('BL1')
+!BL1.price := 0.0
+!BL1.billId := 1001
+
+!new RoomReservation('R2_B1')
+!R2_B1.checkInDate := '2026-03-01'
+!R2_B1.checkOutDate := '2026-03-01'
+
+!new Room('RM1')
+!RM1.numBeds := 1
+!RM1.pricePerNight := 0.0
+!RM1.occupied := false
+!RM1.blocked := true
+!RM1.roomNumber := 1
+
+!new RoomExtra('E7')
+!E7.price := 0.0
+!E7.description := 'Complimentary welcome tea'
+
+!new Bill('BL2')
+!BL2.price := 0.0
+!BL2.billId := 1002
+
+!new Booking('B2')
+!B2.startDate := '2026-12-31'
+!B2.endDate := '2026-12-31'
+!B2.canceled := true
+!B2.bookingId := 2
+!B2.confirmed := false
+
+!insert (B1, C4) into BookingCustomer
+!insert (B2, C5) into BookingCustomer
+
+!insert (B1, R1_B1) into BookingRoomReservation
+!insert (B1, R2_B1) into BookingRoomReservation
+
+!insert (B1, BL1) into BookingBill
+!insert (B1, BL2) into BookingBill
+
+!insert (BL1, R1_B1) into BillRoomReservation
+!insert (BL2, R2_B1) into BillRoomReservation
+
+!insert (R2_B1, RM1) into RoomReservationRoom
+!insert (R2_B1, E7) into RoomReservationExtras
+
+!new Customer('C6')
+!C6.firstName := 'Amina'
+!C6.lastName := 'El‑Sayed'
+
+!new Booking('B78021')
+!B78021.bookingId := 78021
+!B78021.startDate := '2026-03-10'
+!B78021.endDate := '2026-03-16'
+!B78021.confirmed := true
+!B78021.canceled := false
+
+!new RoomReservation('RR78021_1')
+!RR78021_1.checkInDate := '2026-03-10'
+!RR78021_1.checkOutDate := '2026-03-13'
+
+!new RoomReservation('RR78021_2')
+!RR78021_2.checkInDate := '2026-03-13'
+!RR78021_2.checkOutDate := '2026-03-16'
+
+!new RoomReservation('RR78021_3')
+!RR78021_3.checkInDate := '2026-03-10'
+!RR78021_3.checkOutDate := '2026-03-12'
+
+!new Room('R412')
+!R412.roomNumber := 412
+!R412.numBeds := 2
+!R412.pricePerNight := 165.00
+!R412.occupied := false
+!R412.blocked := false
+
+!new Room('R414')
+!R414.roomNumber := 414
+!R414.numBeds := 1
+!R414.pricePerNight := 140.00
+!R414.occupied := false
+!R414.blocked := false
+
+!new Room('R701')
+!R701.roomNumber := 701
+!R701.numBeds := 2
+!R701.pricePerNight := 320.00
+!R701.occupied := false
+!R701.blocked := false
+
+!new Room('R118')
+!R118.roomNumber := 118
+!R118.numBeds := 1
+!R118.pricePerNight := 85.00
+!R118.occupied := false
+!R118.blocked := false
+
+!new RoomExtra('E8')
+!E8.description := 'Breakfast buffet package (2 adults) — per stay segment'
+!E8.price := 90.00
+
+!new RoomExtra('E9')
+!E9.description := 'Baby crib (requested in advance)'
+!E9.price := 0.00
+
+!new RoomExtra('E10')
+!E10.description := 'Hammam/spa access pass (2 persons)'
+!E10.price := 80.00
+
+!new RoomExtra('E11')
+!E11.description := 'Late checkout until 16:00'
+!E11.price := 40.00
+
+!new RoomExtra('E12')
+!E12.description := 'Airport pickup (one-way) scheduled at 22:40'
+!E12.price := 25.00
+
+!new Bill('BL990501')
+!BL990501.billId := 990501
+!BL990501.price := 1005.00
+
+!new Bill('BL990502')
+!BL990502.billId := 990502
+!BL990502.price := 1080.00
+
+!new Bill('BL990503')
+!BL990503.billId := 990503
+!BL990503.price := 195.00
+
+!new FreeRoomTypesDTO('D8')
+!D8.roomTypeDescription := 'Standard Queen (city view) — non-smoking'
+!D8.numBeds := 1
+!D8.pricePerNight := 120.00
+!D8.numFreeRooms := 6
+
+!new FreeRoomTypesDTO('D9')
+!D9.roomTypeDescription := 'Twin Room (connecting option available)'
+!D9.numBeds := 2
+!D9.pricePerNight := 160.00
+!D9.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D10')
+!D10.roomTypeDescription := 'Family Suite (courtyard side, includes sofa bed)'
+!D10.numBeds := 3
+!D10.pricePerNight := 310.00
+!D10.numFreeRooms := 1
+
+!insert (B78021, C6) into BookingCustomer
+
+!insert (B78021, RR78021_1) into BookingRoomReservation
+!insert (B78021, RR78021_2) into BookingRoomReservation
+!insert (B78021, RR78021_3) into BookingRoomReservation
+
+!insert (RR78021_1, R412) into RoomReservationRoom
+!insert (RR78021_1, R414) into RoomReservationRoom
+!insert (RR78021_2, R701) into RoomReservationRoom
+!insert (RR78021_3, R118) into RoomReservationRoom
+
+!insert (RR78021_1, E8) into RoomReservationExtras
+!insert (RR78021_1, E9) into RoomReservationExtras
+!insert (RR78021_2, E10) into RoomReservationExtras
+!insert (RR78021_2, E11) into RoomReservationExtras
+!insert (RR78021_3, E12) into RoomReservationExtras
+
+!insert (B78021, BL990501) into BookingBill
+!insert (B78021, BL990502) into BookingBill
+!insert (B78021, BL990503) into BookingBill
+
+!insert (BL990501, RR78021_1) into BillRoomReservation
+!insert (BL990502, RR78021_2) into BillRoomReservation
+!insert (BL990503, RR78021_3) into BillRoomReservation
+

@@ -1,0 +1,81 @@
+!new Currency('currencyBRL')
+!currencyBRL.name := 'Brazilian Real'
+!currencyBRL.abbreviation := 'BRL'
+
+!new Currency('currencyUSDBRLTrip')
+!currencyUSDBRLTrip.name := 'US Dollar'
+!currencyUSDBRLTrip.abbreviation := 'USD'
+
+!new Expense('expenseEXP2026014')
+!expenseEXP2026014.amount := 1211.80
+!expenseEXP2026014.startDate := Date('2026-02-03')
+!expenseEXP2026014.endDate := Date('2026-02-07')
+
+!new Bill('billBILL101')
+!billBILL101.amount := 28.50
+!billBILL101.category := 'Local transport'
+!billBILL101.date := Date('2026-02-03')
+!billBILL101.paymentMethod := #CASH
+!billBILL101.status := #VALIDATED
+
+!new Bill('billBILL102')
+!billBILL102.amount := 610.00
+!billBILL102.category := 'Lodging'
+!billBILL102.date := Date('2026-02-03')
+!billBILL102.paymentMethod := #CREDIT_CARD
+!billBILL102.status := #VERIFIED
+
+!new Bill('billBILL103')
+!billBILL103.amount := 195.40
+!billBILL103.category := 'Meals & entertainment'
+!billBILL103.date := Date('2026-02-05')
+!billBILL103.paymentMethod := #CREDIT_CARD
+!billBILL103.status := #PENDING
+
+!new Bill('billBILL104')
+!billBILL104.amount := 42.90
+!billBILL104.category := 'Office supplies'
+!billBILL104.date := Date('2026-02-06')
+!billBILL104.paymentMethod := #CASH
+!billBILL104.status := #REFUSED
+
+!new Bill('billBILL105')
+!billBILL105.amount := 320.00
+!billBILL105.category := 'Conference fees'
+!billBILL105.date := Date('2026-02-04')
+!billBILL105.paymentMethod := #CHECK
+!billBILL105.status := #VALIDATED
+
+!new Bill('billBILL106')
+!billBILL106.amount := 15.00
+!billBILL106.category := 'Telecom'
+!billBILL106.date := Date('2026-02-03')
+!billBILL106.paymentMethod := #CREDIT_CARD
+!billBILL106.status := #REFUNDED
+
+!insert (expenseEXP2026014, billBILL101) into ExpenseContainsBills
+!insert (expenseEXP2026014, billBILL102) into ExpenseContainsBills
+!insert (expenseEXP2026014, billBILL103) into ExpenseContainsBills
+!insert (expenseEXP2026014, billBILL104) into ExpenseContainsBills
+!insert (expenseEXP2026014, billBILL105) into ExpenseContainsBills
+!insert (expenseEXP2026014, billBILL106) into ExpenseContainsBills
+
+!insert (billBILL101, currencyBRL) into BillCurrency
+!insert (billBILL102, currencyBRL) into BillCurrency
+!insert (billBILL103, currencyBRL) into BillCurrency
+!insert (billBILL104, currencyBRL) into BillCurrency
+!insert (billBILL105, currencyBRL) into BillCurrency
+!insert (billBILL106, currencyUSDBRLTrip) into BillCurrency
+
+!new Comment('commentCMT101')
+!commentCMT101.text := 'Observação: a gráfica não aceitou CNPJ na nota; por isso o item de impressão foi recusado.'
+
+!new Comment('commentCMT102')
+!commentCMT102.text := 'Conference fee was paid by check per vendor requirement; receipt provided by the organizer.'
+
+!new Comment('commentCMT103')
+!commentCMT103.text := 'E-SIM plan was refunded by the provider due to activation issues; keeping record for audit trail.'
+
+!insert (expenseEXP2026014, commentCMT101) into ExpenseComment
+!insert (expenseEXP2026014, commentCMT102) into ExpenseComment
+!insert (expenseEXP2026014, commentCMT103) into ExpenseComment

@@ -1,0 +1,243 @@
+!new StateMachine('sm_zurichHospitalMriWorkflowSM')
+!sm_zurichHospitalMriWorkflowSM.name := 'zurichHospitalMriWorkflowSM'
+
+!new State('st_zhm_register')
+!st_zhm_register.name := 'register'
+!new State('st_zhm_safetyScreening')
+!st_zhm_safetyScreening.name := 'safetyScreening'
+!new State('st_zhm_changeRoom')
+!st_zhm_changeRoom.name := 'changeRoom'
+!new State('st_zhm_ivPlacement')
+!st_zhm_ivPlacement.name := 'ivPlacement'
+!new State('st_zhm_preScanQueue')
+!st_zhm_preScanQueue.name := 'preScanQueue'
+!new State('st_zhm_positioning')
+!st_zhm_positioning.name := 'positioning'
+!new State('st_zhm_scanLocalizer')
+!st_zhm_scanLocalizer.name := 'scanLocalizer'
+!new State('st_zhm_scanT1')
+!st_zhm_scanT1.name := 'scanT1'
+!new State('st_zhm_scanT2')
+!st_zhm_scanT2.name := 'scanT2'
+!new State('st_zhm_contrastInjection')
+!st_zhm_contrastInjection.name := 'contrastInjection'
+!new State('st_zhm_postContrastScan')
+!st_zhm_postContrastScan.name := 'postContrastScan'
+!new State('st_zhm_imageCheck')
+!st_zhm_imageCheck.name := 'imageCheck'
+!new State('st_zhm_patientDischarge')
+!st_zhm_patientDischarge.name := 'patientDischarge'
+!new State('st_zhm_roomDisinfection')
+!st_zhm_roomDisinfection.name := 'roomDisinfection'
+!new State('st_zhm_incidentHold')
+!st_zhm_incidentHold.name := 'incidentHold'
+
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_register) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_safetyScreening) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_changeRoom) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_ivPlacement) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_preScanQueue) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_positioning) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanLocalizer) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanT1) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanT2) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_contrastInjection) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_postContrastScan) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_imageCheck) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_patientDischarge) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_roomDisinfection) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_incidentHold) into StateMachineContainsStates
+
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_register) into StateMachineStartsStates
+
+!new Transition('tr_zhm_startScreening')
+!tr_zhm_startScreening.name := 'startScreening'
+!new Transition('tr_zhm_screeningPassToChange')
+!tr_zhm_screeningPassToChange.name := 'screeningPassToChange'
+!new Transition('tr_zhm_metalOrImplantIssue')
+!tr_zhm_metalOrImplantIssue.name := 'metalOrImplantIssue'
+!new Transition('tr_zhm_changeCompleteToIv')
+!tr_zhm_changeCompleteToIv.name := 'changeCompleteToIv'
+!new Transition('tr_zhm_ivDoneToQueue')
+!tr_zhm_ivDoneToQueue.name := 'ivDoneToQueue'
+!new Transition('tr_zhm_queueTick')
+!tr_zhm_queueTick.name := 'queueTick'
+!new Transition('tr_zhm_callPatientIn')
+!tr_zhm_callPatientIn.name := 'callPatientIn'
+!new Transition('tr_zhm_positionedStartLocalizer')
+!tr_zhm_positionedStartLocalizer.name := 'positionedStartLocalizer'
+!new Transition('tr_zhm_localizerComplete')
+!tr_zhm_localizerComplete.name := 'localizerComplete'
+!new Transition('tr_zhm_t1Complete')
+!tr_zhm_t1Complete.name := 't1Complete'
+!new Transition('tr_zhm_t2CompleteDecideContrast')
+!tr_zhm_t2CompleteDecideContrast.name := 't2CompleteDecideContrast'
+!new Transition('tr_zhm_injectThenWait')
+!tr_zhm_injectThenWait.name := 'injectThenWait'
+!new Transition('tr_zhm_postContrastComplete')
+!tr_zhm_postContrastComplete.name := 'postContrastComplete'
+!new Transition('tr_zhm_qualityOkProceed')
+!tr_zhm_qualityOkProceed.name := 'qualityOkProceed'
+!new Transition('tr_zhm_motionArtifactRepeatT2')
+!tr_zhm_motionArtifactRepeatT2.name := 'motionArtifactRepeatT2'
+!new Transition('tr_zhm_allergyOrPanicEvent')
+!tr_zhm_allergyOrPanicEvent.name := 'allergyOrPanicEvent'
+!new Transition('tr_zhm_resolveIncidentToDischarge')
+!tr_zhm_resolveIncidentToDischarge.name := 'resolveIncidentToDischarge'
+!new Transition('tr_zhm_dischargeToCleaning')
+!tr_zhm_dischargeToCleaning.name := 'dischargeToCleaning'
+!new Transition('tr_zhm_cleaningCompleteBackToRegister')
+!tr_zhm_cleaningCompleteBackToRegister.name := 'cleaningCompleteBackToRegister'
+
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_startScreening) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_screeningPassToChange) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_metalOrImplantIssue) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_changeCompleteToIv) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_ivDoneToQueue) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_queueTick) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_callPatientIn) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_positionedStartLocalizer) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_localizerComplete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_t1Complete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_t2CompleteDecideContrast) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_injectThenWait) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_postContrastComplete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_qualityOkProceed) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_motionArtifactRepeatT2) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_allergyOrPanicEvent) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_resolveIncidentToDischarge) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_dischargeToCleaning) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_cleaningCompleteBackToRegister) into StateMachineContainsTransitions
+
+!insert (st_zhm_register, tr_zhm_startScreening) into StateTransition
+!insert (tr_zhm_startScreening, st_zhm_safetyScreening) into TransitionState
+
+!insert (st_zhm_safetyScreening, tr_zhm_screeningPassToChange) into StateTransition
+!insert (tr_zhm_screeningPassToChange, st_zhm_changeRoom) into TransitionState
+
+!insert (st_zhm_safetyScreening, tr_zhm_metalOrImplantIssue) into StateTransition
+!insert (tr_zhm_metalOrImplantIssue, st_zhm_incidentHold) into TransitionState
+
+!insert (st_zhm_changeRoom, tr_zhm_changeCompleteToIv) into StateTransition
+!insert (tr_zhm_changeCompleteToIv, st_zhm_ivPlacement) into TransitionState
+
+!insert (st_zhm_ivPlacement, tr_zhm_ivDoneToQueue) into StateTransition
+!insert (tr_zhm_ivDoneToQueue, st_zhm_preScanQueue) into TransitionState
+
+!insert (st_zhm_preScanQueue, tr_zhm_queueTick) into StateTransition
+!insert (tr_zhm_queueTick, st_zhm_preScanQueue) into TransitionState
+
+!insert (st_zhm_preScanQueue, tr_zhm_callPatientIn) into StateTransition
+!insert (tr_zhm_callPatientIn, st_zhm_positioning) into TransitionState
+
+!insert (st_zhm_positioning, tr_zhm_positionedStartLocalizer) into StateTransition
+!insert (tr_zhm_positionedStartLocalizer, st_zhm_scanLocalizer) into TransitionState
+
+!insert (st_zhm_scanLocalizer, tr_zhm_localizerComplete) into StateTransition
+!insert (tr_zhm_localizerComplete, st_zhm_scanT1) into TransitionState
+
+!insert (st_zhm_scanT1, tr_zhm_t1Complete) into StateTransition
+!insert (tr_zhm_t1Complete, st_zhm_scanT2) into TransitionState
+
+!insert (st_zhm_scanT2, tr_zhm_t2CompleteDecideContrast) into StateTransition
+!insert (tr_zhm_t2CompleteDecideContrast, st_zhm_contrastInjection) into TransitionState
+
+!insert (st_zhm_contrastInjection, tr_zhm_injectThenWait) into StateTransition
+!insert (tr_zhm_injectThenWait, st_zhm_postContrastScan) into TransitionState
+
+!insert (st_zhm_postContrastScan, tr_zhm_postContrastComplete) into StateTransition
+!insert (tr_zhm_postContrastComplete, st_zhm_imageCheck) into TransitionState
+
+!insert (st_zhm_imageCheck, tr_zhm_qualityOkProceed) into StateTransition
+!insert (tr_zhm_qualityOkProceed, st_zhm_patientDischarge) into TransitionState
+
+!insert (st_zhm_imageCheck, tr_zhm_motionArtifactRepeatT2) into StateTransition
+!insert (tr_zhm_motionArtifactRepeatT2, st_zhm_scanT2) into TransitionState
+
+!insert (st_zhm_postContrastScan, tr_zhm_allergyOrPanicEvent) into StateTransition
+!insert (tr_zhm_allergyOrPanicEvent, st_zhm_incidentHold) into TransitionState
+
+!insert (st_zhm_incidentHold, tr_zhm_resolveIncidentToDischarge) into StateTransition
+!insert (tr_zhm_resolveIncidentToDischarge, st_zhm_patientDischarge) into TransitionState
+
+!insert (st_zhm_patientDischarge, tr_zhm_dischargeToCleaning) into StateTransition
+!insert (tr_zhm_dischargeToCleaning, st_zhm_roomDisinfection) into TransitionState
+
+!insert (st_zhm_roomDisinfection, tr_zhm_cleaningCompleteBackToRegister) into StateTransition
+!insert (tr_zhm_cleaningCompleteBackToRegister, st_zhm_register) into TransitionState
+
+!new TimeEvent('te_zhm_MTE1')
+!te_zhm_MTE1.time := 5
+!insert (tr_zhm_startScreening, te_zhm_MTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE2')
+!te_zhm_MTE2.time := 6
+!insert (tr_zhm_screeningPassToChange, te_zhm_MTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE3')
+!te_zhm_MTE3.time := 1
+!insert (tr_zhm_metalOrImplantIssue, te_zhm_MTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE4')
+!te_zhm_MTE4.time := 7
+!insert (tr_zhm_changeCompleteToIv, te_zhm_MTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE5')
+!te_zhm_MTE5.time := 3
+!insert (tr_zhm_ivDoneToQueue, te_zhm_MTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE6')
+!te_zhm_MTE6.time := 10
+!insert (tr_zhm_queueTick, te_zhm_MTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE7')
+!te_zhm_MTE7.time := 1
+!insert (tr_zhm_callPatientIn, te_zhm_MTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE8')
+!te_zhm_MTE8.time := 4
+!insert (tr_zhm_positionedStartLocalizer, te_zhm_MTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE9')
+!te_zhm_MTE9.time := 2
+!insert (tr_zhm_localizerComplete, te_zhm_MTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE10')
+!te_zhm_MTE10.time := 9
+!insert (tr_zhm_t1Complete, te_zhm_MTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE11')
+!te_zhm_MTE11.time := 11
+!insert (tr_zhm_t2CompleteDecideContrast, te_zhm_MTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE12')
+!te_zhm_MTE12.time := 2
+!insert (tr_zhm_injectThenWait, te_zhm_MTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE13')
+!te_zhm_MTE13.time := 12
+!insert (tr_zhm_postContrastComplete, te_zhm_MTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE14')
+!te_zhm_MTE14.time := 3
+!insert (tr_zhm_qualityOkProceed, te_zhm_MTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE15')
+!te_zhm_MTE15.time := 1
+!insert (tr_zhm_motionArtifactRepeatT2, te_zhm_MTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE16')
+!te_zhm_MTE16.time := 1
+!insert (tr_zhm_allergyOrPanicEvent, te_zhm_MTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE17')
+!te_zhm_MTE17.time := 20
+!insert (tr_zhm_resolveIncidentToDischarge, te_zhm_MTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE18')
+!te_zhm_MTE18.time := 2
+!insert (tr_zhm_dischargeToCleaning, te_zhm_MTE18) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE19')
+!te_zhm_MTE19.time := 15
+!insert (tr_zhm_cleaningCompleteBackToRegister, te_zhm_MTE19) into TransitionContainsEvents

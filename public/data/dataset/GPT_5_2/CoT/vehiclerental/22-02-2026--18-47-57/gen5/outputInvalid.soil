@@ -1,0 +1,51 @@
+!new RentalOffice('RO_61_GC')
+!RO_61_GC.name := 'Gulf Coast Commercial Rentals - Mobile'
+!RO_61_GC.number := 61
+!RO_61_GC.address := '1201 Water St, Mobile, AL 36602, USA'
+
+!new RentalOffice('RO_62_PEN')
+!RO_62_PEN.name := 'Panhandle Returns Desk - Pensacola'
+!RO_62_PEN.number := 62
+!RO_62_PEN.address := '2430 Airport Blvd, Pensacola, FL 32504, USA'
+
+!new Truck('T_99001_OC5')
+!T_99001_OC5.id := 99001
+!T_99001_OC5.registrationState := #FL
+!T_99001_OC5.licensePlateNumber := 'FL-NEW-4812'
+!T_99001_OC5.vehicleTypeCode := #TRUCK24
+!T_99001_OC5.registrationLastMaintenanceDate := Date('2026-02-05')
+!T_99001_OC5.expirationDate := Date('2027-02-28')
+!T_99001_OC5.odometerReading := 1250
+!T_99001_OC5.gasTankCapacity := 80.0
+!T_99001_OC5.workingRadio := true
+!T_99001_OC5.mileage := 10
+
+!new Vehicle('V_99077_OC5')
+!V_99077_OC5.id := 99077
+!V_99077_OC5.registrationState := #AL
+!V_99077_OC5.licensePlateNumber := 'AL-TRL-3301'
+!V_99077_OC5.vehicleTypeCode := #OPEN_TRAILER
+!V_99077_OC5.registrationLastMaintenanceDate := Date('2026-01-20')
+!V_99077_OC5.expirationDate := Date('2026-08-31')
+
+!new Company('C_Kleber_OC5')
+!C_Kleber_OC5.name := 'Kléber & Sons Event Logistics, Inc.'
+!C_Kleber_OC5.address := '505 Dauphin St, Mobile, AL 36602, USA'
+!C_Kleber_OC5.poorRisk := false
+!C_Kleber_OC5.idNumber := 7700319
+
+!new RentalAgreement('RA_770045_OC5')
+!RA_770045_OC5.number := 770045
+!RA_770045_OC5.rentalDate := Date('2026-03-01')
+!RA_770045_OC5.anticipatedDuration := 2
+!RA_770045_OC5.depositPaid := 300.0
+!RA_770045_OC5.quotedDailyRate := 210.0
+!RA_770045_OC5.quotedRatePerMile := 0.65
+
+!insert (RO_61_GC, V_99077_OC5) into RentalOfficeVehicle
+
+!insert (RO_61_GC, RA_770045_OC5) into RentalOfficeRentalAgreementOrigin
+!insert (RO_62_PEN, RA_770045_OC5) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_770045_OC5, C_Kleber_OC5) into RentalAgreementCustomer
+

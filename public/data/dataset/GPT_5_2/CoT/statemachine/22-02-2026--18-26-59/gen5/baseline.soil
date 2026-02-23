@@ -1,0 +1,106 @@
+!new StateMachine('sm_subakIrrigationController')
+!sm_subakIrrigationController.name := 'subakIrrigationController'
+
+!new State('st_subak_sensing')
+!st_subak_sensing.name := 'sensing'
+!new State('st_subak_calculatingAllocation')
+!st_subak_calculatingAllocation.name := 'calculatingAllocation'
+!new State('st_subak_openingGates')
+!st_subak_openingGates.name := 'openingGates'
+!new State('st_subak_irrigating')
+!st_subak_irrigating.name := 'irrigating'
+!new State('st_subak_flushingCanals')
+!st_subak_flushingCanals.name := 'flushingCanals'
+!new State('st_subak_faultLockout')
+!st_subak_faultLockout.name := 'faultLockout'
+
+!insert (sm_subakIrrigationController, st_subak_sensing) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_calculatingAllocation) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_openingGates) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_irrigating) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_flushingCanals) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_faultLockout) into StateMachineContainsStates
+
+!insert (sm_subakIrrigationController, st_subak_sensing) into StateMachineStartsStates
+
+!new Transition('tr_subak_periodicSample')
+!tr_subak_periodicSample.name := 'periodicSample'
+!new Transition('tr_subak_computeShare')
+!tr_subak_computeShare.name := 'computeShare'
+!new Transition('tr_subak_actuateGates')
+!tr_subak_actuateGates.name := 'actuateGates'
+!new Transition('tr_subak_beginIrrigation')
+!tr_subak_beginIrrigation.name := 'beginIrrigation'
+!new Transition('tr_subak_scheduledFlush')
+!tr_subak_scheduledFlush.name := 'scheduledFlush'
+!new Transition('tr_subak_finishFlush')
+!tr_subak_finishFlush.name := 'finishFlush'
+!new Transition('tr_subak_detectFault')
+!tr_subak_detectFault.name := 'detectFault'
+!new Transition('tr_subak_autoRecover')
+!tr_subak_autoRecover.name := 'autoRecover'
+
+!insert (sm_subakIrrigationController, tr_subak_periodicSample) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_computeShare) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_actuateGates) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_beginIrrigation) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_scheduledFlush) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_finishFlush) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_detectFault) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_autoRecover) into StateMachineContainsTransitions
+
+!insert (st_subak_sensing, tr_subak_periodicSample) into StateTransition
+!insert (tr_subak_periodicSample, st_subak_sensing) into TransitionState
+
+!insert (st_subak_sensing, tr_subak_computeShare) into StateTransition
+!insert (tr_subak_computeShare, st_subak_calculatingAllocation) into TransitionState
+
+!insert (st_subak_calculatingAllocation, tr_subak_actuateGates) into StateTransition
+!insert (tr_subak_actuateGates, st_subak_openingGates) into TransitionState
+
+!insert (st_subak_openingGates, tr_subak_beginIrrigation) into StateTransition
+!insert (tr_subak_beginIrrigation, st_subak_irrigating) into TransitionState
+
+!insert (st_subak_irrigating, tr_subak_scheduledFlush) into StateTransition
+!insert (tr_subak_scheduledFlush, st_subak_flushingCanals) into TransitionState
+
+!insert (st_subak_flushingCanals, tr_subak_finishFlush) into StateTransition
+!insert (tr_subak_finishFlush, st_subak_sensing) into TransitionState
+
+!insert (st_subak_irrigating, tr_subak_detectFault) into StateTransition
+!insert (tr_subak_detectFault, st_subak_faultLockout) into TransitionState
+
+!insert (st_subak_faultLockout, tr_subak_autoRecover) into StateTransition
+!insert (tr_subak_autoRecover, st_subak_sensing) into TransitionState
+
+!new TimeEvent('te_subak_t_periodicSample')
+!te_subak_t_periodicSample.time := 120
+!insert (tr_subak_periodicSample, te_subak_t_periodicSample) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_computeShare')
+!te_subak_t_computeShare.time := 30
+!insert (tr_subak_computeShare, te_subak_t_computeShare) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_actuateGates')
+!te_subak_t_actuateGates.time := 15
+!insert (tr_subak_actuateGates, te_subak_t_actuateGates) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_beginIrrigation')
+!te_subak_t_beginIrrigation.time := 10
+!insert (tr_subak_beginIrrigation, te_subak_t_beginIrrigation) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_scheduledFlush')
+!te_subak_t_scheduledFlush.time := 3600
+!insert (tr_subak_scheduledFlush, te_subak_t_scheduledFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_finishFlush')
+!te_subak_t_finishFlush.time := 180
+!insert (tr_subak_finishFlush, te_subak_t_finishFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_detectFault')
+!te_subak_t_detectFault.time := 5
+!insert (tr_subak_detectFault, te_subak_t_detectFault) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_autoRecover')
+!te_subak_t_autoRecover.time := 600
+!insert (tr_subak_autoRecover, te_subak_t_autoRecover) into TransitionContainsEvents

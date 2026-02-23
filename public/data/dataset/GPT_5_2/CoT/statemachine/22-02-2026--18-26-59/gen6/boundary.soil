@@ -1,0 +1,54 @@
+!new StateMachine('sm_hanoiPhoStallSchedule')
+!sm_hanoiPhoStallSchedule.name := 'hanoiPhoStallSchedule'
+
+!new State('st_hps_closed')
+!st_hps_closed.name := 'closed'
+!new State('st_hps_waiting')
+!st_hps_waiting.name := 'waiting'
+!new State('st_hps_ordering')
+!st_hps_ordering.name := 'ordering'
+!new State('st_hps_eating')
+!st_hps_eating.name := 'eating'
+!new State('st_hps_paying')
+!st_hps_paying.name := 'paying'
+!new State('st_hps_cleanup')
+!st_hps_cleanup.name := 'cleanup'
+!new State('st_hps_restocking')
+!st_hps_restocking.name := 'restocking'
+!new State('st_hps_rainDelay')
+!st_hps_rainDelay.name := 'rainDelay'
+!new State('st_hps_takeaway')
+!st_hps_takeaway.name := 'takeaway'
+!new State('st_hps_tourGroup')
+!st_hps_tourGroup.name := 'tourGroup'
+!new State('st_hps_spicyChallenge')
+!st_hps_spicyChallenge.name := 'spicyChallenge'
+!new State('st_hps_vip')
+!st_hps_vip.name := 'vip'
+
+!insert (sm_hanoiPhoStallSchedule, st_hps_closed) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_waiting) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_ordering) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_eating) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_paying) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_cleanup) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_restocking) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_rainDelay) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_takeaway) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_tourGroup) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_spicyChallenge) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_vip) into StateMachineContainsStates
+
+!insert (sm_hanoiPhoStallSchedule, st_hps_closed) into StateMachineStartsStates
+
+!new Transition('tr_hps_openStall')
+!tr_hps_openStall.name := 'openStall'
+
+!insert (sm_hanoiPhoStallSchedule, tr_hps_openStall) into StateMachineContainsTransitions
+
+!insert (st_hps_closed, tr_hps_openStall) into StateTransition
+!insert (tr_hps_openStall, st_hps_waiting) into TransitionState
+
+!new TimeEvent('te_hps_t_openStall')
+!te_hps_t_openStall.time := 1
+!insert (tr_hps_openStall, te_hps_t_openStall) into TransitionContainsEvents

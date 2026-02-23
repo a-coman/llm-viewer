@@ -1,0 +1,55 @@
+!new Bank('b54')
+!b54.country := 'Spain'
+!b54.name := 'Bankia, S.A.'
+!b54.bic := 'BKAESMMXXX'
+
+!new Bank('b55')
+!b55.country := 'Spain'
+!b55.name := 'CaixaBank, S.A.'
+!b55.bic := 'CAIXESBBXXX'
+
+!new Bank('b56')
+!b56.country := 'Argentina'
+!b56.name := 'Banco de la Nación Argentina'
+!b56.bic := 'NACNARBAXXX'
+
+!new Person('p152')
+!p152.firstName := 'Youssef'
+!p152.lastName := 'El Mansouri'
+!p152.age := 36
+
+!new Person('p153')
+!p153.firstName := 'Laura'
+!p153.lastName := 'García'
+!p153.age := 34
+
+!new Person('p154')
+!p154.firstName := 'Jordi'
+!p154.lastName := 'Pujol'
+!p154.age := 63
+
+!new Person('p155')
+!p155.firstName := 'Marta'
+!p155.lastName := 'Pujol'
+!p155.age := 60
+
+!new Account('a98')
+!a98.iban := 'ES30 2038 4501 12 1234567890'
+!a98.balance := 1450
+
+!new Account('a99')
+!a99.iban := 'ES92 2100 0418 4502 0005 1332'
+!a99.balance := 6200
+
+!insert (b55, a98) into AccountOfBanks
+!insert (b55, a99) into AccountOfBanks
+
+!insert (p152, a98) into Ownership
+!insert (p154, a99) into Ownership
+!insert (p155, a99) into Ownership
+
+!insert (p152, a98) into Use
+!insert (p153, a98) into Use
+
+!insert (p154, a99) into Use
+!insert (p155, a99) into Use

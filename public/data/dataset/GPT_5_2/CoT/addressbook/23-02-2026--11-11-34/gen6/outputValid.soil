@@ -1,0 +1,822 @@
+!new AddressBook('AB_OutgoingHub_NoDetails_1')
+
+!new Company('C_Aurora_1')
+!C_Aurora_1.name := 'Aurora Marítima AS'
+!C_Aurora_1.phone := '+47 21 000 111'
+!C_Aurora_1.website := 'https://aurora-maritima.example.no'
+!C_Aurora_1.email := 'contact@aurora-maritima.example.no'
+!C_Aurora_1.industry := 'Shipping & Marine Services'
+!insert (AB_OutgoingHub_NoDetails_1, C_Aurora_1) into AddressBookMadeOfContact
+
+!new Person('P_SO_1')
+!P_SO_1.name := 'Saoirse Ó Dálaigh'
+!P_SO_1.phone := '+353 1 555 0202'
+!P_SO_1.website := ''
+!P_SO_1.email := 'saoirse.odalaigh@example.ie'
+!P_SO_1.title := 'Mx.'
+!insert (AB_OutgoingHub_NoDetails_1, P_SO_1) into AddressBookMadeOfContact
+
+!new Person('P_OK_1')
+!P_OK_1.name := 'Omar El Khatib'
+!P_OK_1.phone := '+212 5 0000 0303'
+!P_OK_1.website := 'https://omar-el-khatib.example.ma'
+!P_OK_1.email := ''
+!P_OK_1.title := ''
+!insert (AB_OutgoingHub_NoDetails_1, P_OK_1) into AddressBookMadeOfContact
+
+!new Person('P_SV_1')
+!P_SV_1.name := 'Svitlana Hrytsenko'
+!P_SV_1.phone := '+380 44 000 0404'
+!P_SV_1.website := ''
+!P_SV_1.email := 'svitlana.hrytsenko@example.ua'
+!P_SV_1.title := 'Ms.'
+!insert (AB_OutgoingHub_NoDetails_1, P_SV_1) into AddressBookMadeOfContact
+
+!new Company('C_SambaTech_1')
+!C_SambaTech_1.name := 'SambaTech Comércio e Serviços Ltda.'
+!C_SambaTech_1.phone := '+55 11 0000 0505'
+!C_SambaTech_1.website := 'https://sambatech.example.br'
+!C_SambaTech_1.email := 'contato@sambatech.example.br'
+!C_SambaTech_1.industry := 'IT Services'
+!insert (AB_OutgoingHub_NoDetails_1, C_SambaTech_1) into AddressBookMadeOfContact
+
+!new Company('C_Himalaya_1')
+!C_Himalaya_1.name := 'Himalaya Systems Pvt. Ltd.'
+!C_Himalaya_1.phone := '+977 1 000 0606'
+!C_Himalaya_1.website := ''
+!C_Himalaya_1.email := ''
+!C_Himalaya_1.industry := 'Infrastructure Engineering'
+!insert (AB_OutgoingHub_NoDetails_1, C_Himalaya_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_Aurora_R1_1')
+!Rel_Aurora_R1_1.type := #BOSS
+!insert (C_Aurora_1, Rel_Aurora_R1_1) into ContactToRelationship
+!insert (Rel_Aurora_R1_1, P_SV_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R2_1')
+!Rel_Aurora_R2_1.type := #EMPLOYEE
+!insert (C_Aurora_1, Rel_Aurora_R2_1) into ContactToRelationship
+!insert (Rel_Aurora_R2_1, P_SO_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R3_1')
+!Rel_Aurora_R3_1.type := #EMPLOYEE
+!insert (C_Aurora_1, Rel_Aurora_R3_1) into ContactToRelationship
+!insert (Rel_Aurora_R3_1, P_OK_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R4_1')
+!Rel_Aurora_R4_1.type := #SUBDIVISION
+!insert (C_Aurora_1, Rel_Aurora_R4_1) into ContactToRelationship
+!insert (Rel_Aurora_R4_1, C_SambaTech_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R5_1')
+!Rel_Aurora_R5_1.type := #COWORKER
+!insert (C_Aurora_1, Rel_Aurora_R5_1) into ContactToRelationship
+!insert (Rel_Aurora_R5_1, C_Himalaya_1) into RelationshipToContact
+
+!new Relationship('Rel_PSO_R1_1')
+!Rel_PSO_R1_1.type := #COWORKER
+!insert (P_SO_1, Rel_PSO_R1_1) into ContactToRelationship
+!insert (Rel_PSO_R1_1, P_OK_1) into RelationshipToContact
+
+!new Relationship('Rel_POK_R1_1')
+!Rel_POK_R1_1.type := #COWORKER
+!insert (P_OK_1, Rel_POK_R1_1) into ContactToRelationship
+!insert (Rel_POK_R1_1, P_SV_1) into RelationshipToContact
+
+!new Relationship('Rel_PSV_R1_1')
+!Rel_PSV_R1_1.type := #COWORKER
+!insert (P_SV_1, Rel_PSV_R1_1) into ContactToRelationship
+!insert (Rel_PSV_R1_1, P_SO_1) into RelationshipToContact
+
+!new Relationship('Rel_SambaTech_R1_1')
+!Rel_SambaTech_R1_1.type := #SUBDIVISION
+!insert (C_SambaTech_1, Rel_SambaTech_R1_1) into ContactToRelationship
+!insert (Rel_SambaTech_R1_1, C_Himalaya_1) into RelationshipToContact
+
+!new AddressBook('AB_CompletelyEmpty_1')
+
+!new AddressBook('AB_CycloneKiboRelief_1')
+
+!new Person('P_Kibo_Rui_1')
+!P_Kibo_Rui_1.name := 'Rui Matola'
+!P_Kibo_Rui_1.phone := '+258 21 555 090'
+!P_Kibo_Rui_1.website := 'https://rui-matola.example'
+!P_Kibo_Rui_1.email := 'rui.matola@example.mz'
+!P_Kibo_Rui_1.title := 'Eng.'
+!insert (AB_CycloneKiboRelief_1, P_Kibo_Rui_1) into AddressBookMadeOfContact
+
+!new Person('P_Kibo_Agnes_1')
+!P_Kibo_Agnes_1.name := 'Agnes Mwale'
+!P_Kibo_Agnes_1.phone := '+265 1 555 771'
+!P_Kibo_Agnes_1.website := 'https://agnes-mwale.example'
+!P_Kibo_Agnes_1.email := 'agnes.mwale@example.mw'
+!P_Kibo_Agnes_1.title := 'Sr.'
+!insert (AB_CycloneKiboRelief_1, P_Kibo_Agnes_1) into AddressBookMadeOfContact
+
+!new Person('P_Kibo_Tomas_1')
+!P_Kibo_Tomas_1.name := 'Tomás Pereira'
+!P_Kibo_Tomas_1.phone := '+351 22 555 1188'
+!P_Kibo_Tomas_1.website := 'https://tomas-pereira.example'
+!P_Kibo_Tomas_1.email := 'tomas.pereira@example.pt'
+!P_Kibo_Tomas_1.title := 'Mr.'
+!insert (AB_CycloneKiboRelief_1, P_Kibo_Tomas_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_EOC_Maputo_1')
+!C_Kibo_EOC_Maputo_1.name := 'Maputo Emergency Operations Center (EOC)'
+!C_Kibo_EOC_Maputo_1.phone := '+258 21 555 000'
+!C_Kibo_EOC_Maputo_1.website := 'https://eoc-maputo.example'
+!C_Kibo_EOC_Maputo_1.email := 'desk@eoc-maputo.example'
+!C_Kibo_EOC_Maputo_1.industry := 'Disaster response coordination (government)'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_EOC_Maputo_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_EOC_FieldBeira_1')
+!C_Kibo_EOC_FieldBeira_1.name := 'Maputo EOC – Field Unit (Beira)'
+!C_Kibo_EOC_FieldBeira_1.phone := '+258 23 555 212'
+!C_Kibo_EOC_FieldBeira_1.website := 'https://eoc-maputo.example/field-beira'
+!C_Kibo_EOC_FieldBeira_1.email := 'field.beira@eoc-maputo.example'
+!C_Kibo_EOC_FieldBeira_1.industry := 'Field operations (emergency response)'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_EOC_FieldBeira_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_HelpingHands_1')
+!C_Kibo_HelpingHands_1.name := 'Helping Hands International'
+!C_Kibo_HelpingHands_1.phone := '+27 11 555 4040'
+!C_Kibo_HelpingHands_1.website := 'https://helpinghands.example'
+!C_Kibo_HelpingHands_1.email := 'coordination@helpinghands.example'
+!C_Kibo_HelpingHands_1.industry := 'Humanitarian NGO'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_HelpingHands_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_SunCo_1')
+!C_Kibo_SunCo_1.name := 'SunCo Solar Solutions Lda'
+!C_Kibo_SunCo_1.phone := '+244 222 555 313'
+!C_Kibo_SunCo_1.website := 'https://sunco-solar.example'
+!C_Kibo_SunCo_1.email := 'dispatch@sunco-solar.example'
+!C_Kibo_SunCo_1.industry := 'Solar power systems and microgrid deployment'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_SunCo_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_Coastline_1')
+!C_Kibo_Coastline_1.name := 'Coastline Logistics SARL'
+!C_Kibo_Coastline_1.phone := '+261 20 555 8899'
+!C_Kibo_Coastline_1.website := 'https://coastline-logistics.example'
+!C_Kibo_Coastline_1.email := 'ops@coastline-logistics.example'
+!C_Kibo_Coastline_1.industry := 'Regional freight and last-mile delivery'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_Coastline_1) into AddressBookMadeOfContact
+
+!new Company('C_Kibo_AquaPure_1')
+!C_Kibo_AquaPure_1.name := 'AquaPure Water Services PLC'
+!C_Kibo_AquaPure_1.phone := '+251 11 555 6670'
+!C_Kibo_AquaPure_1.website := 'https://aquapure.example'
+!C_Kibo_AquaPure_1.email := 'support@aquapure.example'
+!C_Kibo_AquaPure_1.industry := 'Water treatment and purification equipment'
+!insert (AB_CycloneKiboRelief_1, C_Kibo_AquaPure_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Kibo_Rui_Maputo_1')
+!Addr_Kibo_Rui_Maputo_1.street := 'Av. Julius Nyerere'
+!Addr_Kibo_Rui_Maputo_1.houseNr := '1140'
+!Addr_Kibo_Rui_Maputo_1.city := 'Maputo'
+!insert (P_Kibo_Rui_1, Addr_Kibo_Rui_Maputo_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_Rui_1')
+!Note_Kibo_Rui_1.author := 'Maputo EOC Duty Desk'
+!Note_Kibo_Rui_1.time := Date('2026-02-02')
+!Note_Kibo_Rui_1.type := #CALL
+!Note_Kibo_Rui_1.comment := 'Rui confirmed he will be the single point of contact for supplier approvals and transport routing.'
+!insert (P_Kibo_Rui_1, Note_Kibo_Rui_1) into ContactContainsNote
+
+!new Note('Note_Kibo_Rui_2')
+!Note_Kibo_Rui_2.author := 'Rui Matola'
+!Note_Kibo_Rui_2.time := Date('2026-02-04')
+!Note_Kibo_Rui_2.type := #EMAIL
+!Note_Kibo_Rui_2.comment := 'Sent consolidated needs list: water purification units, solar lanterns, and tarpaulins; requested delivery ETA to Beira.'
+!insert (P_Kibo_Rui_1, Note_Kibo_Rui_2) into ContactContainsNote
+
+!new Note('Note_Kibo_Agnes_1')
+!Note_Kibo_Agnes_1.author := 'Agnes Mwale'
+!Note_Kibo_Agnes_1.time := Date('2026-02-03')
+!Note_Kibo_Agnes_1.type := #MEETING
+!Note_Kibo_Agnes_1.comment := 'Met with Field Unit in Beira; agreed on distribution plan prioritizing clinics and temporary shelters.'
+!insert (P_Kibo_Agnes_1, Note_Kibo_Agnes_1) into ContactContainsNote
+
+!new Address('Addr_Kibo_Tomas_Porto_1')
+!Addr_Kibo_Tomas_Porto_1.street := 'Rua do Porto'
+!Addr_Kibo_Tomas_Porto_1.houseNr := '17'
+!Addr_Kibo_Tomas_Porto_1.city := 'Porto'
+!insert (P_Kibo_Tomas_1, Addr_Kibo_Tomas_Porto_1) into ContactContainsAddress
+
+!new Address('Addr_Kibo_Tomas_Beira_1')
+!Addr_Kibo_Tomas_Beira_1.street := 'Estrada Nacional 1'
+!Addr_Kibo_Tomas_Beira_1.houseNr := 'KM 12'
+!Addr_Kibo_Tomas_Beira_1.city := 'Beira'
+!insert (P_Kibo_Tomas_1, Addr_Kibo_Tomas_Beira_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_Tomas_1')
+!Note_Kibo_Tomas_1.author := 'Tomás Pereira'
+!Note_Kibo_Tomas_1.time := Date('2026-02-05')
+!Note_Kibo_Tomas_1.type := #CALL
+!Note_Kibo_Tomas_1.comment := 'Called Coastline Logistics to reserve two refrigerated trucks for medical cold-chain boxes.'
+!insert (P_Kibo_Tomas_1, Note_Kibo_Tomas_1) into ContactContainsNote
+
+!new Address('Addr_Kibo_EOC_Maputo_1')
+!Addr_Kibo_EOC_Maputo_1.street := 'Praça da Independência'
+!Addr_Kibo_EOC_Maputo_1.houseNr := '1'
+!Addr_Kibo_EOC_Maputo_1.city := 'Maputo'
+!insert (C_Kibo_EOC_Maputo_1, Addr_Kibo_EOC_Maputo_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_EOC_1')
+!Note_Kibo_EOC_1.author := 'EOC Logistics Section'
+!Note_Kibo_EOC_1.time := Date('2026-02-01')
+!Note_Kibo_EOC_1.type := #EMAIL
+!Note_Kibo_EOC_1.comment := 'Issued vendor onboarding instructions and documentation requirements for emergency procurement.'
+!insert (C_Kibo_EOC_Maputo_1, Note_Kibo_EOC_1) into ContactContainsNote
+
+!new Address('Addr_Kibo_FieldBeira_1')
+!Addr_Kibo_FieldBeira_1.street := 'Av. do Zimbabwe'
+!Addr_Kibo_FieldBeira_1.houseNr := '260'
+!Addr_Kibo_FieldBeira_1.city := 'Beira'
+!insert (C_Kibo_EOC_FieldBeira_1, Addr_Kibo_FieldBeira_1) into ContactContainsAddress
+
+!new Address('Addr_Kibo_HHI_Johannesburg_1')
+!Addr_Kibo_HHI_Johannesburg_1.street := 'Jan Smuts Avenue'
+!Addr_Kibo_HHI_Johannesburg_1.houseNr := '50'
+!Addr_Kibo_HHI_Johannesburg_1.city := 'Johannesburg'
+!insert (C_Kibo_HelpingHands_1, Addr_Kibo_HHI_Johannesburg_1) into ContactContainsAddress
+
+!new Address('Addr_Kibo_HHI_Beira_1')
+!Addr_Kibo_HHI_Beira_1.street := 'Rua da Frente'
+!Addr_Kibo_HHI_Beira_1.houseNr := '9'
+!Addr_Kibo_HHI_Beira_1.city := 'Beira'
+!insert (C_Kibo_HelpingHands_1, Addr_Kibo_HHI_Beira_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_HHI_1')
+!Note_Kibo_HHI_1.author := 'Helping Hands Logistics'
+!Note_Kibo_HHI_1.time := Date('2026-02-02')
+!Note_Kibo_HHI_1.type := #CALL
+!Note_Kibo_HHI_1.comment := 'Confirmed shared warehousing arrangement with Tomás for incoming hygiene kits.'
+!insert (C_Kibo_HelpingHands_1, Note_Kibo_HHI_1) into ContactContainsNote
+
+!new Address('Addr_Kibo_SunCo_Luanda_1')
+!Addr_Kibo_SunCo_Luanda_1.street := 'Rua Rainha Ginga'
+!Addr_Kibo_SunCo_Luanda_1.houseNr := '101'
+!Addr_Kibo_SunCo_Luanda_1.city := 'Luanda'
+!insert (C_Kibo_SunCo_1, Addr_Kibo_SunCo_Luanda_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_SunCo_1')
+!Note_Kibo_SunCo_1.author := 'SunCo Ops'
+!Note_Kibo_SunCo_1.time := Date('2026-02-06')
+!Note_Kibo_SunCo_1.type := #EMAIL
+!Note_Kibo_SunCo_1.comment := 'Confirmed availability of 120 solar lanterns and 6 portable clinic power kits; requested delivery coordinates.'
+!insert (C_Kibo_SunCo_1, Note_Kibo_SunCo_1) into ContactContainsNote
+
+!new Address('Addr_Kibo_Coastline_Toamasina_1')
+!Addr_Kibo_Coastline_Toamasina_1.street := 'Boulevard de l’Indépendance'
+!Addr_Kibo_Coastline_Toamasina_1.houseNr := '27'
+!Addr_Kibo_Coastline_Toamasina_1.city := 'Toamasina'
+!insert (C_Kibo_Coastline_1, Addr_Kibo_Coastline_Toamasina_1) into ContactContainsAddress
+
+!new Note('Note_Kibo_AquaPure_1')
+!Note_Kibo_AquaPure_1.author := 'Agnes Mwale'
+!Note_Kibo_AquaPure_1.time := Date('2026-02-07')
+!Note_Kibo_AquaPure_1.type := #CALL
+!Note_Kibo_AquaPure_1.comment := 'Discussed spare filter availability and training handouts for local volunteers in Beira.'
+!insert (C_Kibo_AquaPure_1, Note_Kibo_AquaPure_1) into ContactContainsNote
+
+!new Relationship('Rel_Kibo_Rui_to_EOC_Employee_1')
+!Rel_Kibo_Rui_to_EOC_Employee_1.type := #EMPLOYEE
+!insert (P_Kibo_Rui_1, Rel_Kibo_Rui_to_EOC_Employee_1) into ContactToRelationship
+!insert (Rel_Kibo_Rui_to_EOC_Employee_1, C_Kibo_EOC_Maputo_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Rui_to_Tomas_Boss_1')
+!Rel_Kibo_Rui_to_Tomas_Boss_1.type := #BOSS
+!insert (P_Kibo_Rui_1, Rel_Kibo_Rui_to_Tomas_Boss_1) into ContactToRelationship
+!insert (Rel_Kibo_Rui_to_Tomas_Boss_1, P_Kibo_Tomas_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Rui_to_Agnes_Coworker_1')
+!Rel_Kibo_Rui_to_Agnes_Coworker_1.type := #COWORKER
+!insert (P_Kibo_Rui_1, Rel_Kibo_Rui_to_Agnes_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_Rui_to_Agnes_Coworker_1, P_Kibo_Agnes_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Agnes_to_HHI_Employee_1')
+!Rel_Kibo_Agnes_to_HHI_Employee_1.type := #EMPLOYEE
+!insert (P_Kibo_Agnes_1, Rel_Kibo_Agnes_to_HHI_Employee_1) into ContactToRelationship
+!insert (Rel_Kibo_Agnes_to_HHI_Employee_1, C_Kibo_HelpingHands_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Agnes_to_FieldBeira_Coworker_1')
+!Rel_Kibo_Agnes_to_FieldBeira_Coworker_1.type := #COWORKER
+!insert (P_Kibo_Agnes_1, Rel_Kibo_Agnes_to_FieldBeira_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_Agnes_to_FieldBeira_Coworker_1, C_Kibo_EOC_FieldBeira_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Agnes_to_AquaPure_Coworker_1')
+!Rel_Kibo_Agnes_to_AquaPure_Coworker_1.type := #COWORKER
+!insert (P_Kibo_Agnes_1, Rel_Kibo_Agnes_to_AquaPure_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_Agnes_to_AquaPure_Coworker_1, C_Kibo_AquaPure_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Tomas_to_Rui_Employee_1')
+!Rel_Kibo_Tomas_to_Rui_Employee_1.type := #EMPLOYEE
+!insert (P_Kibo_Tomas_1, Rel_Kibo_Tomas_to_Rui_Employee_1) into ContactToRelationship
+!insert (Rel_Kibo_Tomas_to_Rui_Employee_1, P_Kibo_Rui_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Tomas_to_Coastline_Coworker_1')
+!Rel_Kibo_Tomas_to_Coastline_Coworker_1.type := #COWORKER
+!insert (P_Kibo_Tomas_1, Rel_Kibo_Tomas_to_Coastline_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_Tomas_to_Coastline_Coworker_1, C_Kibo_Coastline_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_EOC_to_FieldBeira_Subdivision_1')
+!Rel_Kibo_EOC_to_FieldBeira_Subdivision_1.type := #SUBDIVISION
+!insert (C_Kibo_EOC_Maputo_1, Rel_Kibo_EOC_to_FieldBeira_Subdivision_1) into ContactToRelationship
+!insert (Rel_Kibo_EOC_to_FieldBeira_Subdivision_1, C_Kibo_EOC_FieldBeira_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_EOC_to_Rui_Boss_1')
+!Rel_Kibo_EOC_to_Rui_Boss_1.type := #BOSS
+!insert (C_Kibo_EOC_Maputo_1, Rel_Kibo_EOC_to_Rui_Boss_1) into ContactToRelationship
+!insert (Rel_Kibo_EOC_to_Rui_Boss_1, P_Kibo_Rui_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_FieldBeira_to_Coastline_Coworker_1')
+!Rel_Kibo_FieldBeira_to_Coastline_Coworker_1.type := #COWORKER
+!insert (C_Kibo_EOC_FieldBeira_1, Rel_Kibo_FieldBeira_to_Coastline_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_FieldBeira_to_Coastline_Coworker_1, C_Kibo_Coastline_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_FieldBeira_to_SunCo_Boss_1')
+!Rel_Kibo_FieldBeira_to_SunCo_Boss_1.type := #BOSS
+!insert (C_Kibo_EOC_FieldBeira_1, Rel_Kibo_FieldBeira_to_SunCo_Boss_1) into ContactToRelationship
+!insert (Rel_Kibo_FieldBeira_to_SunCo_Boss_1, C_Kibo_SunCo_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_HHI_to_Agnes_Boss_1')
+!Rel_Kibo_HHI_to_Agnes_Boss_1.type := #BOSS
+!insert (C_Kibo_HelpingHands_1, Rel_Kibo_HHI_to_Agnes_Boss_1) into ContactToRelationship
+!insert (Rel_Kibo_HHI_to_Agnes_Boss_1, P_Kibo_Agnes_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_SunCo_to_Coastline_Coworker_1')
+!Rel_Kibo_SunCo_to_Coastline_Coworker_1.type := #COWORKER
+!insert (C_Kibo_SunCo_1, Rel_Kibo_SunCo_to_Coastline_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_SunCo_to_Coastline_Coworker_1, C_Kibo_Coastline_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_Coastline_to_FieldBeira_Employee_1')
+!Rel_Kibo_Coastline_to_FieldBeira_Employee_1.type := #EMPLOYEE
+!insert (C_Kibo_Coastline_1, Rel_Kibo_Coastline_to_FieldBeira_Employee_1) into ContactToRelationship
+!insert (Rel_Kibo_Coastline_to_FieldBeira_Employee_1, C_Kibo_EOC_FieldBeira_1) into RelationshipToContact
+
+!new Relationship('Rel_Kibo_AquaPure_to_HHI_Coworker_1')
+!Rel_Kibo_AquaPure_to_HHI_Coworker_1.type := #COWORKER
+!insert (C_Kibo_AquaPure_1, Rel_Kibo_AquaPure_to_HHI_Coworker_1) into ContactToRelationship
+!insert (Rel_Kibo_AquaPure_to_HHI_Coworker_1, C_Kibo_HelpingHands_1) into RelationshipToContact
+
+!new AddressBook('AB_KoruCare_Telehealth_Q2_2026_1')
+
+!new Person('P_Koru_Thandiwe_1')
+!P_Koru_Thandiwe_1.name := 'Dr. Thandiwe Mokoena'
+!P_Koru_Thandiwe_1.title := 'Dr.'
+!P_Koru_Thandiwe_1.phone := '+27 11 555 2109'
+!P_Koru_Thandiwe_1.website := 'https://thandiwe-mokoena.example.za'
+!P_Koru_Thandiwe_1.email := 'thandiwe.mokoena@example.za'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, P_Koru_Thandiwe_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Thandiwe_JHB_1')
+!Addr_Koru_Thandiwe_JHB_1.city := 'Johannesburg'
+!Addr_Koru_Thandiwe_JHB_1.street := 'Jan Smuts Avenue'
+!Addr_Koru_Thandiwe_JHB_1.houseNr := '144'
+!insert (P_Koru_Thandiwe_1, Addr_Koru_Thandiwe_JHB_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_Thandiwe_CapeTown_1')
+!Addr_Koru_Thandiwe_CapeTown_1.city := 'Cape Town'
+!Addr_Koru_Thandiwe_CapeTown_1.street := 'Main Road'
+!Addr_Koru_Thandiwe_CapeTown_1.houseNr := '28'
+!insert (P_Koru_Thandiwe_1, Addr_Koru_Thandiwe_CapeTown_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Thandiwe_1')
+!Note_Koru_Thandiwe_1.author := 'Thandiwe Mokoena'
+!Note_Koru_Thandiwe_1.time := Date('2026-03-03')
+!Note_Koru_Thandiwe_1.type := #MEETING
+!Note_Koru_Thandiwe_1.comment := 'Clinical governance: approved escalation pathway for chest pain and stroke symptoms; require documented handoff to local clinics.'
+!insert (P_Koru_Thandiwe_1, Note_Koru_Thandiwe_1) into ContactContainsNote
+
+!new Note('Note_Koru_Thandiwe_2')
+!Note_Koru_Thandiwe_2.author := 'Eirík Jónsson'
+!Note_Koru_Thandiwe_2.time := Date('2026-03-08')
+!Note_Koru_Thandiwe_2.type := #EMAIL
+!Note_Koru_Thandiwe_2.comment := 'Reminder: consent screen must separate treatment consent from data-sharing consent for analytics.'
+!insert (P_Koru_Thandiwe_1, Note_Koru_Thandiwe_2) into ContactContainsNote
+
+!new Person('P_Koru_Ahmed_1')
+!P_Koru_Ahmed_1.name := 'Ahmed Al‑Mansouri'
+!P_Koru_Ahmed_1.title := 'Mr.'
+!P_Koru_Ahmed_1.phone := '+971 50 555 7741'
+!P_Koru_Ahmed_1.website := 'https://ahmed-al-mansouri.example.ae'
+!P_Koru_Ahmed_1.email := 'ahmed.almansouri@example.ae'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, P_Koru_Ahmed_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Ahmed_Dubai_1')
+!Addr_Koru_Ahmed_Dubai_1.city := 'Dubai'
+!Addr_Koru_Ahmed_Dubai_1.street := 'Sheikh Zayed Road'
+!Addr_Koru_Ahmed_Dubai_1.houseNr := '301'
+!insert (P_Koru_Ahmed_1, Addr_Koru_Ahmed_Dubai_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Ahmed_1')
+!Note_Koru_Ahmed_1.author := 'Ahmed Al‑Mansouri'
+!Note_Koru_Ahmed_1.time := Date('2026-03-05')
+!Note_Koru_Ahmed_1.type := #CALL
+!Note_Koru_Ahmed_1.comment := 'Confirmed cold-chain packaging for insulin deliveries; pharmacy needs cutoff times per emirate.'
+!insert (P_Koru_Ahmed_1, Note_Koru_Ahmed_1) into ContactContainsNote
+
+!new Note('Note_Koru_Ahmed_2')
+!Note_Koru_Ahmed_2.author := 'SaharaScript Ops'
+!Note_Koru_Ahmed_2.time := Date('2026-03-07')
+!Note_Koru_Ahmed_2.type := #EMAIL
+!Note_Koru_Ahmed_2.comment := 'Requested API rate limits for prescription status polling; proposing webhook-based updates.'
+!insert (P_Koru_Ahmed_1, Note_Koru_Ahmed_2) into ContactContainsNote
+
+!new Person('P_Koru_Eirik_1')
+!P_Koru_Eirik_1.name := 'Eirík Jónsson'
+!P_Koru_Eirik_1.title := 'Mr.'
+!P_Koru_Eirik_1.phone := '+354 555 0188'
+!P_Koru_Eirik_1.website := 'https://eirik-jonsson.example.is'
+!P_Koru_Eirik_1.email := 'eirik.jonsson@example.is'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, P_Koru_Eirik_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Eirik_Reykjavik_1')
+!Addr_Koru_Eirik_Reykjavik_1.city := 'Reykjavík'
+!Addr_Koru_Eirik_Reykjavik_1.street := 'Laugavegur'
+!Addr_Koru_Eirik_Reykjavik_1.houseNr := '66'
+!insert (P_Koru_Eirik_1, Addr_Koru_Eirik_Reykjavik_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Eirik_1')
+!Note_Koru_Eirik_1.author := 'Eirík Jónsson'
+!Note_Koru_Eirik_1.time := Date('2026-03-02')
+!Note_Koru_Eirik_1.type := #EMAIL
+!Note_Koru_Eirik_1.comment := 'DPIA draft: patient chat transcripts must have retention limit; propose 180 days for operational logs.'
+!insert (P_Koru_Eirik_1, Note_Koru_Eirik_1) into ContactContainsNote
+
+!new Note('Note_Koru_Eirik_2')
+!Note_Koru_Eirik_2.author := 'Eirík Jónsson'
+!Note_Koru_Eirik_2.time := Date('2026-03-10')
+!Note_Koru_Eirik_2.type := #MEETING
+!Note_Koru_Eirik_2.comment := 'Reviewed identity proofing flow with FjordID; require fallback for users without NFC passports.'
+!insert (P_Koru_Eirik_1, Note_Koru_Eirik_2) into ContactContainsNote
+
+!new Person('P_Koru_Naran_1')
+!P_Koru_Naran_1.name := 'Naran Bold'
+!P_Koru_Naran_1.title := 'Ms.'
+!P_Koru_Naran_1.phone := '+976 11 555 2200'
+!P_Koru_Naran_1.website := 'https://naran-bold.example.mn'
+!P_Koru_Naran_1.email := 'naran.bold@example.mn'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, P_Koru_Naran_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Naran_Ulaanbaatar_1')
+!Addr_Koru_Naran_Ulaanbaatar_1.city := 'Ulaanbaatar'
+!Addr_Koru_Naran_Ulaanbaatar_1.street := 'Peace Avenue'
+!Addr_Koru_Naran_Ulaanbaatar_1.houseNr := '12-4'
+!insert (P_Koru_Naran_1, Addr_Koru_Naran_Ulaanbaatar_1) into ContactContainsAddress
+
+!new Person('P_Koru_Camila_1')
+!P_Koru_Camila_1.name := 'Camila Souza'
+!P_Koru_Camila_1.title := 'Ms.'
+!P_Koru_Camila_1.phone := '+55 11 5555 9040'
+!P_Koru_Camila_1.website := 'https://camila-souza.example.br'
+!P_Koru_Camila_1.email := 'camila.souza@example.br'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, P_Koru_Camila_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Camila_SaoPaulo_1')
+!Addr_Koru_Camila_SaoPaulo_1.city := 'São Paulo'
+!Addr_Koru_Camila_SaoPaulo_1.street := 'Avenida Paulista'
+!Addr_Koru_Camila_SaoPaulo_1.houseNr := '1578'
+!insert (P_Koru_Camila_1, Addr_Koru_Camila_SaoPaulo_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Camila_1')
+!Note_Koru_Camila_1.author := 'Camila Souza'
+!Note_Koru_Camila_1.time := Date('2026-03-06')
+!Note_Koru_Camila_1.type := #MEETING
+!Note_Koru_Camila_1.comment := 'Nurse triage training: finalized scripts for respiratory complaints; added language for low-bandwidth video failures.'
+!insert (P_Koru_Camila_1, Note_Koru_Camila_1) into ContactContainsNote
+
+!new Note('Note_Koru_Camila_2')
+!Note_Koru_Camila_2.author := 'Thandiwe Mokoena'
+!Note_Koru_Camila_2.time := Date('2026-03-09')
+!Note_Koru_Camila_2.type := #EMAIL
+!Note_Koru_Camila_2.comment := 'Please ensure referral notes include vital signs when available; otherwise explicitly mark ‘not measured’.'
+!insert (P_Koru_Camila_1, Note_Koru_Camila_2) into ContactContainsNote
+
+!new Company('C_Koru_Health_1')
+!C_Koru_Health_1.name := 'KoruCare Health Pty Ltd'
+!C_Koru_Health_1.industry := 'Telemedicine & Remote Patient Support'
+!C_Koru_Health_1.phone := '+27 10 555 8000'
+!C_Koru_Health_1.website := 'https://korucare.example'
+!C_Koru_Health_1.email := 'contact@korucare.example'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_Health_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Health_JHB_1')
+!Addr_Koru_Health_JHB_1.city := 'Johannesburg'
+!Addr_Koru_Health_JHB_1.street := 'Simmonds Street'
+!Addr_Koru_Health_JHB_1.houseNr := '45'
+!insert (C_Koru_Health_1, Addr_Koru_Health_JHB_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_Health_Durban_1')
+!Addr_Koru_Health_Durban_1.city := 'Durban'
+!Addr_Koru_Health_Durban_1.street := 'Umhlanga Ridge Boulevard'
+!Addr_Koru_Health_Durban_1.houseNr := '6'
+!insert (C_Koru_Health_1, Addr_Koru_Health_Durban_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Health_1')
+!Note_Koru_Health_1.author := 'Legal Team'
+!Note_Koru_Health_1.time := Date('2026-03-01')
+!Note_Koru_Health_1.type := #EMAIL
+!Note_Koru_Health_1.comment := 'Updated Terms of Service to include cross-border processing disclosures and dispute resolution venue.'
+!insert (C_Koru_Health_1, Note_Koru_Health_1) into ContactContainsNote
+
+!new Company('C_Koru_EU_1')
+!C_Koru_EU_1.name := 'KoruCare EU SARL'
+!C_Koru_EU_1.industry := 'Telemedicine (EU Operations & Compliance)'
+!C_Koru_EU_1.phone := '+352 27 555 112'
+!C_Koru_EU_1.website := 'https://eu.korucare.example'
+!C_Koru_EU_1.email := 'eu-office@korucare.example'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_EU_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_EU_Luxembourg_1')
+!Addr_Koru_EU_Luxembourg_1.city := 'Luxembourg'
+!Addr_Koru_EU_Luxembourg_1.street := 'Boulevard Royal'
+!Addr_Koru_EU_Luxembourg_1.houseNr := '18'
+!insert (C_Koru_EU_1, Addr_Koru_EU_Luxembourg_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_EU_Dublin_1')
+!Addr_Koru_EU_Dublin_1.city := 'Dublin'
+!Addr_Koru_EU_Dublin_1.street := 'Pearse Street'
+!Addr_Koru_EU_Dublin_1.houseNr := '40'
+!insert (C_Koru_EU_1, Addr_Koru_EU_Dublin_1) into ContactContainsAddress
+
+!new Company('C_Koru_SupportDesk_1')
+!C_Koru_SupportDesk_1.name := 'KoruCare Support Desk (Internal Unit)'
+!C_Koru_SupportDesk_1.industry := 'Customer Support & Incident Triage'
+!C_Koru_SupportDesk_1.phone := '+27 10 555 8111'
+!C_Koru_SupportDesk_1.website := 'https://support.korucare.example'
+!C_Koru_SupportDesk_1.email := 'support@korucare.example'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_SupportDesk_1) into AddressBookMadeOfContact
+
+!new Note('Note_Koru_SupportDesk_1')
+!Note_Koru_SupportDesk_1.author := 'Shift Lead'
+!Note_Koru_SupportDesk_1.time := Date('2026-03-04')
+!Note_Koru_SupportDesk_1.type := #CALL
+!Note_Koru_SupportDesk_1.comment := 'Weekend protocol: if video consult fails twice, switch to voice and document connectivity issue tag.'
+!insert (C_Koru_SupportDesk_1, Note_Koru_SupportDesk_1) into ContactContainsNote
+
+!new Company('C_Koru_UbuntuClinics_1')
+!C_Koru_UbuntuClinics_1.name := 'Ubuntu Clinic Network NPC'
+!C_Koru_UbuntuClinics_1.industry := 'Primary Care Clinics & Community Health'
+!C_Koru_UbuntuClinics_1.phone := '+27 31 555 6600'
+!C_Koru_UbuntuClinics_1.website := 'https://ubuntu-clinics.example.za'
+!C_Koru_UbuntuClinics_1.email := 'referrals@ubuntu-clinics.example.za'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_UbuntuClinics_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Ubuntu_Durban_1')
+!Addr_Koru_Ubuntu_Durban_1.city := 'Durban'
+!Addr_Koru_Ubuntu_Durban_1.street := 'Smith Street'
+!Addr_Koru_Ubuntu_Durban_1.houseNr := '90'
+!insert (C_Koru_UbuntuClinics_1, Addr_Koru_Ubuntu_Durban_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_Ubuntu_Polokwane_1')
+!Addr_Koru_Ubuntu_Polokwane_1.city := 'Polokwane'
+!Addr_Koru_Ubuntu_Polokwane_1.street := 'Market Street'
+!Addr_Koru_Ubuntu_Polokwane_1.houseNr := '7'
+!insert (C_Koru_UbuntuClinics_1, Addr_Koru_Ubuntu_Polokwane_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Ubuntu_1')
+!Note_Koru_Ubuntu_1.author := 'Clinic Coordinator'
+!Note_Koru_Ubuntu_1.time := Date('2026-03-06')
+!Note_Koru_Ubuntu_1.type := #MEETING
+!Note_Koru_Ubuntu_1.comment := 'Agreed on referral slot allocation: 6 urgent slots/day reserved for KoruCare tele-triage transfers.'
+!insert (C_Koru_UbuntuClinics_1, Note_Koru_Ubuntu_1) into ContactContainsNote
+
+!new Company('C_Koru_SaharaScript_1')
+!C_Koru_SaharaScript_1.name := 'SaharaScript Pharmacy Co.'
+!C_Koru_SaharaScript_1.industry := 'e‑Pharmacy & Prescription Fulfillment'
+!C_Koru_SaharaScript_1.phone := '+971 4 555 9920'
+!C_Koru_SaharaScript_1.website := 'https://saharascript.example.ae'
+!C_Koru_SaharaScript_1.email := 'integrations@saharascript.example.ae'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_SaharaScript_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Sahara_Dubai_1')
+!Addr_Koru_Sahara_Dubai_1.city := 'Dubai'
+!Addr_Koru_Sahara_Dubai_1.street := 'Al Khaleej Street'
+!Addr_Koru_Sahara_Dubai_1.houseNr := '14'
+!insert (C_Koru_SaharaScript_1, Addr_Koru_Sahara_Dubai_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_Sahara_Sharjah_1')
+!Addr_Koru_Sahara_Sharjah_1.city := 'Sharjah'
+!Addr_Koru_Sahara_Sharjah_1.street := 'King Faisal Street'
+!Addr_Koru_Sahara_Sharjah_1.houseNr := '88'
+!insert (C_Koru_SaharaScript_1, Addr_Koru_Sahara_Sharjah_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Sahara_1')
+!Note_Koru_Sahara_1.author := 'Integration Team'
+!Note_Koru_Sahara_1.time := Date('2026-03-08')
+!Note_Koru_Sahara_1.type := #EMAIL
+!Note_Koru_Sahara_1.comment := 'Need physician license jurisdiction on each eRx; will reject orders without country code field.'
+!insert (C_Koru_SaharaScript_1, Note_Koru_Sahara_1) into ContactContainsNote
+
+!new Company('C_Koru_FjordID_1')
+!C_Koru_FjordID_1.name := 'FjordID ehf'
+!C_Koru_FjordID_1.industry := 'Digital Identity Verification & KYC'
+!C_Koru_FjordID_1.phone := '+354 555 7007'
+!C_Koru_FjordID_1.website := 'https://fjordid.example.is'
+!C_Koru_FjordID_1.email := 'b2b@fjordid.example.is'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_FjordID_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_FjordID_Reykjavik_1')
+!Addr_Koru_FjordID_Reykjavik_1.city := 'Reykjavík'
+!Addr_Koru_FjordID_Reykjavik_1.street := 'Borgartún'
+!Addr_Koru_FjordID_Reykjavik_1.houseNr := '8'
+!insert (C_Koru_FjordID_1, Addr_Koru_FjordID_Reykjavik_1) into ContactContainsAddress
+
+!new Company('C_Koru_SteppeConnect_1')
+!C_Koru_SteppeConnect_1.name := 'SteppeConnect LLC'
+!C_Koru_SteppeConnect_1.industry := 'Mobile Networks & Rural Connectivity'
+!C_Koru_SteppeConnect_1.phone := '+976 7011 5533'
+!C_Koru_SteppeConnect_1.website := 'https://steppeconnect.example.mn'
+!C_Koru_SteppeConnect_1.email := 'partners@steppeconnect.example.mn'
+!insert (AB_KoruCare_Telehealth_Q2_2026_1, C_Koru_SteppeConnect_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Koru_Steppe_Ulaanbaatar_1')
+!Addr_Koru_Steppe_Ulaanbaatar_1.city := 'Ulaanbaatar'
+!Addr_Koru_Steppe_Ulaanbaatar_1.street := 'Chinggis Avenue'
+!Addr_Koru_Steppe_Ulaanbaatar_1.houseNr := '25'
+!insert (C_Koru_SteppeConnect_1, Addr_Koru_Steppe_Ulaanbaatar_1) into ContactContainsAddress
+
+!new Address('Addr_Koru_Steppe_Erdenet_1')
+!Addr_Koru_Steppe_Erdenet_1.city := 'Erdenet'
+!Addr_Koru_Steppe_Erdenet_1.street := 'Copper Street'
+!Addr_Koru_Steppe_Erdenet_1.houseNr := '2'
+!insert (C_Koru_SteppeConnect_1, Addr_Koru_Steppe_Erdenet_1) into ContactContainsAddress
+
+!new Note('Note_Koru_Steppe_1')
+!Note_Koru_Steppe_1.author := 'Partner Engineering'
+!Note_Koru_Steppe_1.time := Date('2026-03-07')
+!Note_Koru_Steppe_1.type := #CALL
+!Note_Koru_Steppe_1.comment := 'Confirmed zero-rating option for health app traffic; requires monthly usage report and endpoint IP list.'
+!insert (C_Koru_SteppeConnect_1, Note_Koru_Steppe_1) into ContactContainsNote
+
+!new Relationship('Rel_Koru_Thandiwe_to_Camila_Boss_1')
+!Rel_Koru_Thandiwe_to_Camila_Boss_1.type := #BOSS
+!insert (P_Koru_Thandiwe_1, Rel_Koru_Thandiwe_to_Camila_Boss_1) into ContactToRelationship
+!insert (Rel_Koru_Thandiwe_to_Camila_Boss_1, P_Koru_Camila_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Thandiwe_to_Ahmed_Boss_1')
+!Rel_Koru_Thandiwe_to_Ahmed_Boss_1.type := #BOSS
+!insert (P_Koru_Thandiwe_1, Rel_Koru_Thandiwe_to_Ahmed_Boss_1) into ContactToRelationship
+!insert (Rel_Koru_Thandiwe_to_Ahmed_Boss_1, P_Koru_Ahmed_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Thandiwe_to_Ubuntu_Coworker_1')
+!Rel_Koru_Thandiwe_to_Ubuntu_Coworker_1.type := #COWORKER
+!insert (P_Koru_Thandiwe_1, Rel_Koru_Thandiwe_to_Ubuntu_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Thandiwe_to_Ubuntu_Coworker_1, C_Koru_UbuntuClinics_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Thandiwe_to_KoruHealth_Employee_1')
+!Rel_Koru_Thandiwe_to_KoruHealth_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Thandiwe_1, Rel_Koru_Thandiwe_to_KoruHealth_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Thandiwe_to_KoruHealth_Employee_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Ahmed_to_Thandiwe_Employee_1')
+!Rel_Koru_Ahmed_to_Thandiwe_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Ahmed_1, Rel_Koru_Ahmed_to_Thandiwe_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Ahmed_to_Thandiwe_Employee_1, P_Koru_Thandiwe_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Ahmed_to_Sahara_Coworker_1')
+!Rel_Koru_Ahmed_to_Sahara_Coworker_1.type := #COWORKER
+!insert (P_Koru_Ahmed_1, Rel_Koru_Ahmed_to_Sahara_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Ahmed_to_Sahara_Coworker_1, C_Koru_SaharaScript_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Ahmed_to_SupportDesk_Coworker_1')
+!Rel_Koru_Ahmed_to_SupportDesk_Coworker_1.type := #COWORKER
+!insert (P_Koru_Ahmed_1, Rel_Koru_Ahmed_to_SupportDesk_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Ahmed_to_SupportDesk_Coworker_1, C_Koru_SupportDesk_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Ahmed_to_KoruHealth_Employee_1')
+!Rel_Koru_Ahmed_to_KoruHealth_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Ahmed_1, Rel_Koru_Ahmed_to_KoruHealth_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Ahmed_to_KoruHealth_Employee_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Eirik_to_KoruEU_Employee_1')
+!Rel_Koru_Eirik_to_KoruEU_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Eirik_1, Rel_Koru_Eirik_to_KoruEU_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Eirik_to_KoruEU_Employee_1, C_Koru_EU_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Eirik_to_FjordID_Coworker_1')
+!Rel_Koru_Eirik_to_FjordID_Coworker_1.type := #COWORKER
+!insert (P_Koru_Eirik_1, Rel_Koru_Eirik_to_FjordID_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Eirik_to_FjordID_Coworker_1, C_Koru_FjordID_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Naran_to_SteppeConnect_Coworker_1')
+!Rel_Koru_Naran_to_SteppeConnect_Coworker_1.type := #COWORKER
+!insert (P_Koru_Naran_1, Rel_Koru_Naran_to_SteppeConnect_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Naran_to_SteppeConnect_Coworker_1, C_Koru_SteppeConnect_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Naran_to_Camila_Coworker_1')
+!Rel_Koru_Naran_to_Camila_Coworker_1.type := #COWORKER
+!insert (P_Koru_Naran_1, Rel_Koru_Naran_to_Camila_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Naran_to_Camila_Coworker_1, P_Koru_Camila_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Camila_to_Thandiwe_Employee_1')
+!Rel_Koru_Camila_to_Thandiwe_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Camila_1, Rel_Koru_Camila_to_Thandiwe_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Camila_to_Thandiwe_Employee_1, P_Koru_Thandiwe_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Camila_to_Ubuntu_Coworker_1')
+!Rel_Koru_Camila_to_Ubuntu_Coworker_1.type := #COWORKER
+!insert (P_Koru_Camila_1, Rel_Koru_Camila_to_Ubuntu_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Camila_to_Ubuntu_Coworker_1, C_Koru_UbuntuClinics_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Camila_to_KoruHealth_Employee_1')
+!Rel_Koru_Camila_to_KoruHealth_Employee_1.type := #EMPLOYEE
+!insert (P_Koru_Camila_1, Rel_Koru_Camila_to_KoruHealth_Employee_1) into ContactToRelationship
+!insert (Rel_Koru_Camila_to_KoruHealth_Employee_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_Koru_Camila_to_Naran_Coworker_1')
+!Rel_Koru_Camila_to_Naran_Coworker_1.type := #COWORKER
+!insert (P_Koru_Camila_1, Rel_Koru_Camila_to_Naran_Coworker_1) into ContactToRelationship
+!insert (Rel_Koru_Camila_to_Naran_Coworker_1, P_Koru_Naran_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruHealth_to_KoruEU_Subdivision_1')
+!Rel_KoruHealth_to_KoruEU_Subdivision_1.type := #SUBDIVISION
+!insert (C_Koru_Health_1, Rel_KoruHealth_to_KoruEU_Subdivision_1) into ContactToRelationship
+!insert (Rel_KoruHealth_to_KoruEU_Subdivision_1, C_Koru_EU_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruHealth_to_SupportDesk_Subdivision_1')
+!Rel_KoruHealth_to_SupportDesk_Subdivision_1.type := #SUBDIVISION
+!insert (C_Koru_Health_1, Rel_KoruHealth_to_SupportDesk_Subdivision_1) into ContactToRelationship
+!insert (Rel_KoruHealth_to_SupportDesk_Subdivision_1, C_Koru_SupportDesk_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruHealth_to_Ubuntu_Coworker_1')
+!Rel_KoruHealth_to_Ubuntu_Coworker_1.type := #COWORKER
+!insert (C_Koru_Health_1, Rel_KoruHealth_to_Ubuntu_Coworker_1) into ContactToRelationship
+!insert (Rel_KoruHealth_to_Ubuntu_Coworker_1, C_Koru_UbuntuClinics_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruHealth_to_Sahara_Coworker_1')
+!Rel_KoruHealth_to_Sahara_Coworker_1.type := #COWORKER
+!insert (C_Koru_Health_1, Rel_KoruHealth_to_Sahara_Coworker_1) into ContactToRelationship
+!insert (Rel_KoruHealth_to_Sahara_Coworker_1, C_Koru_SaharaScript_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruEU_to_FjordID_Coworker_1')
+!Rel_KoruEU_to_FjordID_Coworker_1.type := #COWORKER
+!insert (C_Koru_EU_1, Rel_KoruEU_to_FjordID_Coworker_1) into ContactToRelationship
+!insert (Rel_KoruEU_to_FjordID_Coworker_1, C_Koru_FjordID_1) into RelationshipToContact
+
+!new Relationship('Rel_KoruEU_to_KoruHealth_Coworker_1')
+!Rel_KoruEU_to_KoruHealth_Coworker_1.type := #COWORKER
+!insert (C_Koru_EU_1, Rel_KoruEU_to_KoruHealth_Coworker_1) into ContactToRelationship
+!insert (Rel_KoruEU_to_KoruHealth_Coworker_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_SupportDesk_to_Sahara_Coworker_1')
+!Rel_SupportDesk_to_Sahara_Coworker_1.type := #COWORKER
+!insert (C_Koru_SupportDesk_1, Rel_SupportDesk_to_Sahara_Coworker_1) into ContactToRelationship
+!insert (Rel_SupportDesk_to_Sahara_Coworker_1, C_Koru_SaharaScript_1) into RelationshipToContact
+
+!new Relationship('Rel_SupportDesk_to_Ubuntu_Coworker_1')
+!Rel_SupportDesk_to_Ubuntu_Coworker_1.type := #COWORKER
+!insert (C_Koru_SupportDesk_1, Rel_SupportDesk_to_Ubuntu_Coworker_1) into ContactToRelationship
+!insert (Rel_SupportDesk_to_Ubuntu_Coworker_1, C_Koru_UbuntuClinics_1) into RelationshipToContact
+
+!new Relationship('Rel_Ubuntu_to_KoruHealth_Coworker_1')
+!Rel_Ubuntu_to_KoruHealth_Coworker_1.type := #COWORKER
+!insert (C_Koru_UbuntuClinics_1, Rel_Ubuntu_to_KoruHealth_Coworker_1) into ContactToRelationship
+!insert (Rel_Ubuntu_to_KoruHealth_Coworker_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_Ubuntu_to_Camila_Coworker_1')
+!Rel_Ubuntu_to_Camila_Coworker_1.type := #COWORKER
+!insert (C_Koru_UbuntuClinics_1, Rel_Ubuntu_to_Camila_Coworker_1) into ContactToRelationship
+!insert (Rel_Ubuntu_to_Camila_Coworker_1, P_Koru_Camila_1) into RelationshipToContact
+
+!new Relationship('Rel_Ubuntu_to_Thandiwe_Coworker_1')
+!Rel_Ubuntu_to_Thandiwe_Coworker_1.type := #COWORKER
+!insert (C_Koru_UbuntuClinics_1, Rel_Ubuntu_to_Thandiwe_Coworker_1) into ContactToRelationship
+!insert (Rel_Ubuntu_to_Thandiwe_Coworker_1, P_Koru_Thandiwe_1) into RelationshipToContact
+
+!new Relationship('Rel_Sahara_to_KoruHealth_Coworker_1')
+!Rel_Sahara_to_KoruHealth_Coworker_1.type := #COWORKER
+!insert (C_Koru_SaharaScript_1, Rel_Sahara_to_KoruHealth_Coworker_1) into ContactToRelationship
+!insert (Rel_Sahara_to_KoruHealth_Coworker_1, C_Koru_Health_1) into RelationshipToContact
+
+!new Relationship('Rel_Sahara_to_SupportDesk_Coworker_1')
+!Rel_Sahara_to_SupportDesk_Coworker_1.type := #COWORKER
+!insert (C_Koru_SaharaScript_1, Rel_Sahara_to_SupportDesk_Coworker_1) into ContactToRelationship
+!insert (Rel_Sahara_to_SupportDesk_Coworker_1, C_Koru_SupportDesk_1) into RelationshipToContact
+
+!new Relationship('Rel_Sahara_to_Ahmed_Coworker_1')
+!Rel_Sahara_to_Ahmed_Coworker_1.type := #COWORKER
+!insert (C_Koru_SaharaScript_1, Rel_Sahara_to_Ahmed_Coworker_1) into ContactToRelationship
+!insert (Rel_Sahara_to_Ahmed_Coworker_1, P_Koru_Ahmed_1) into RelationshipToContact
+
+!new Relationship('Rel_FjordID_to_KoruEU_Coworker_1')
+!Rel_FjordID_to_KoruEU_Coworker_1.type := #COWORKER
+!insert (C_Koru_FjordID_1, Rel_FjordID_to_KoruEU_Coworker_1) into ContactToRelationship
+!insert (Rel_FjordID_to_KoruEU_Coworker_1, C_Koru_EU_1) into RelationshipToContact
+
+!new Relationship('Rel_FjordID_to_Eirik_Coworker_1')
+!Rel_FjordID_to_Eirik_Coworker_1.type := #COWORKER
+!insert (C_Koru_FjordID_1, Rel_FjordID_to_Eirik_Coworker_1) into ContactToRelationship
+!insert (Rel_FjordID_to_Eirik_Coworker_1, P_Koru_Eirik_1) into RelationshipToContact
+
+!new Relationship('Rel_SteppeConnect_to_Naran_Coworker_1')
+!Rel_SteppeConnect_to_Naran_Coworker_1.type := #COWORKER
+!insert (C_Koru_SteppeConnect_1, Rel_SteppeConnect_to_Naran_Coworker_1) into ContactToRelationship
+!insert (Rel_SteppeConnect_to_Naran_Coworker_1, P_Koru_Naran_1) into RelationshipToContact
+
+!new Relationship('Rel_SteppeConnect_to_KoruHealth_Coworker_1')
+!Rel_SteppeConnect_to_KoruHealth_Coworker_1.type := #COWORKER
+!insert (C_Koru_SteppeConnect_1, Rel_SteppeConnect_to_KoruHealth_Coworker_1) into ContactToRelationship
+!insert (Rel_SteppeConnect_to_KoruHealth_Coworker_1, C_Koru_Health_1) into RelationshipToContact
+

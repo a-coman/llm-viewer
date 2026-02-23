@@ -1,0 +1,64 @@
+!new Client('clientEdge2C10')
+!clientEdge2C10.clientId := 2
+!clientEdge2C10.isSuspended := false
+
+!new Client('clientEdge2C11')
+!clientEdge2C11.clientId := 3
+!clientEdge2C11.isSuspended := true
+
+!new Rental('rentalEdge2R10')
+!rentalEdge2R10.date := Date('1970-01-01')
+
+!new Rental('rentalEdge2R11')
+!rentalEdge2R11.date := Date('1970-01-01')
+
+!new Rental('rentalEdge2R12')
+!rentalEdge2R12.date := Date('1970-01-01')
+
+!new Rental('rentalEdge2R13')
+!rentalEdge2R13.date := Date('1970-01-01')
+
+!new Rental('rentalEdge2R14')
+!rentalEdge2R14.date := Date('31/12/1999')
+
+!new Series('seriesEdge2S10')
+!seriesEdge2S10.title := ''
+!seriesEdge2S10.availableCopies := 0
+!seriesEdge2S10.episode := 1
+
+!new Series('seriesEdge2S11')
+!seriesEdge2S11.title := 'المدينة بعد منتصف الليل'
+!seriesEdge2S11.availableCopies := 0
+!seriesEdge2S11.episode := 2
+
+!new Movie('movieEdge2M10')
+!movieEdge2M10.title := 'हँसी का तूफ़ान'
+!movieEdge2M10.availableCopies := 0
+!movieEdge2M10.genre := #Comedy
+
+!new Actor('actorEdge2A10')
+!actorEdge2A10.name := 'Anaïs N’Doye'
+
+!new Actor('actorEdge2A11')
+!actorEdge2A11.name := 'Kenji Watanabe'
+
+!new Actor('actorEdge2A12')
+!actorEdge2A12.name := 'Luca Fernández'
+
+!insert (clientEdge2C10, rentalEdge2R10) into ClientRental
+!insert (clientEdge2C10, rentalEdge2R11) into ClientRental
+!insert (clientEdge2C10, rentalEdge2R12) into ClientRental
+!insert (clientEdge2C10, rentalEdge2R13) into ClientRental
+!insert (clientEdge2C10, rentalEdge2R14) into ClientRental
+
+!insert (rentalEdge2R10, seriesEdge2S10) into RentalCassette
+!insert (rentalEdge2R11, seriesEdge2S10) into RentalCassette
+!insert (rentalEdge2R12, seriesEdge2S10) into RentalCassette
+!insert (rentalEdge2R13, seriesEdge2S10) into RentalCassette
+!insert (rentalEdge2R14, seriesEdge2S11) into RentalCassette
+
+!insert (seriesEdge2S10, actorEdge2A10) into CassetteActor
+!insert (seriesEdge2S11, actorEdge2A10) into CassetteActor
+!insert (seriesEdge2S11, actorEdge2A11) into CassetteActor
+!insert (movieEdge2M10, actorEdge2A10) into CassetteActor
+!insert (movieEdge2M10, actorEdge2A12) into CassetteActor

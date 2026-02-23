@@ -1,0 +1,170 @@
+!new AddressBook('AB_SingleSuperConnector_1')
+
+!new Person('P_Archivist_1')
+!P_Archivist_1.name := 'The Archivist (匿名アーキビスト)'
+!P_Archivist_1.phone := '+44 20 0000 0000'
+!P_Archivist_1.website := 'urn:contact:archivist'
+!P_Archivist_1.email := 'archivist@routing.example'
+!P_Archivist_1.title := 'Custodian'
+!insert (AB_SingleSuperConnector_1, P_Archivist_1) into AddressBookMadeOfContact
+
+!new Note('Note_Archivist_1')
+!Note_Archivist_1.author := 'Archivist'
+!Note_Archivist_1.time := Date('2026年02月23日')
+!Note_Archivist_1.type := #EMAIL
+!Note_Archivist_1.comment := 'Created an address book entry that only makes sense as a relationship router.'
+!insert (P_Archivist_1, Note_Archivist_1) into ContactContainsNote
+
+!new Note('Note_Archivist_2')
+!Note_Archivist_2.author := 'Archivist'
+!Note_Archivist_2.time := Date('23/02/2026')
+!Note_Archivist_2.type := #CALL
+!Note_Archivist_2.comment := 'Verified each target contact can be reached even if they never initiate any relationships.'
+!insert (P_Archivist_1, Note_Archivist_2) into ContactContainsNote
+
+!new Note('Note_Archivist_3')
+!Note_Archivist_3.author := 'Archivist'
+!Note_Archivist_3.time := Date('Thu, 23 Feb 2026')
+!Note_Archivist_3.type := #MEETING
+!Note_Archivist_3.comment := 'Met with four parties separately; stored all links as directed edges from me only.'
+!insert (P_Archivist_1, Note_Archivist_3) into ContactContainsNote
+
+!new Address('Addr_Archivist_1')
+!Addr_Archivist_1.city := 'Valletta'
+!Addr_Archivist_1.houseNr := '1/0'
+!Addr_Archivist_1.street := 'Archive Lane'
+!insert (P_Archivist_1, Addr_Archivist_1) into ContactContainsAddress
+
+!new Person('P_Haakon_1')
+!P_Haakon_1.name := 'Håkon Østergård'
+!P_Haakon_1.phone := '+47 900 00 000'
+!P_Haakon_1.website := 'https://haakon.example.no'
+!P_Haakon_1.email := 'haakon.o@example.no'
+!P_Haakon_1.title := 'Mr.'
+!insert (AB_SingleSuperConnector_1, P_Haakon_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Haakon_1')
+!Addr_Haakon_1.city := 'Oslo'
+!Addr_Haakon_1.houseNr := '0001'
+!Addr_Haakon_1.street := 'Karl Johans gate'
+!insert (P_Haakon_1, Addr_Haakon_1) into ContactContainsAddress
+
+!new Address('Addr_Haakon_2')
+!Addr_Haakon_2.city := 'Tórshavn'
+!Addr_Haakon_2.houseNr := '5'
+!Addr_Haakon_2.street := 'Bryggjubakki'
+!insert (P_Haakon_1, Addr_Haakon_2) into ContactContainsAddress
+
+!new Person('P_Fatou_1')
+!P_Fatou_1.name := 'Fatou Ndiaye'
+!P_Fatou_1.phone := '+221 77 000 0000'
+!P_Fatou_1.website := 'https://fatou.example.sn'
+!P_Fatou_1.email := 'fatou.ndiaye@example.sn'
+!P_Fatou_1.title := 'Mme'
+!insert (AB_SingleSuperConnector_1, P_Fatou_1) into AddressBookMadeOfContact
+
+!new Note('Note_Fatou_1')
+!Note_Fatou_1.author := 'Fatou'
+!Note_Fatou_1.time := Date('2026-02-23')
+!Note_Fatou_1.type := #EMAIL
+!Note_Fatou_1.comment := 'I do not link to anyone; the Archivist links to me twice for redundancy.'
+!insert (P_Fatou_1, Note_Fatou_1) into ContactContainsNote
+
+!new Company('C_Paperless_1')
+!C_Paperless_1.name := 'कागज़-रहित प्रणालियाँ Pvt Ltd'
+!C_Paperless_1.phone := '+91 11 0000 0000'
+!C_Paperless_1.website := 'https://paperless.example.in'
+!C_Paperless_1.email := 'info@paperless.example.in'
+!C_Paperless_1.industry := 'Document automation'
+!insert (AB_SingleSuperConnector_1, C_Paperless_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Paperless_1')
+!Addr_Paperless_1.city := 'New Delhi'
+!Addr_Paperless_1.houseNr := '१२-A'
+!Addr_Paperless_1.street := 'Ring Road'
+!insert (C_Paperless_1, Addr_Paperless_1) into ContactContainsAddress
+
+!new Address('Addr_Paperless_2')
+!Addr_Paperless_2.city := 'Kathmandu'
+!Addr_Paperless_2.houseNr := '3'
+!Addr_Paperless_2.street := 'धेरै सडक'
+!insert (C_Paperless_1, Addr_Paperless_2) into ContactContainsAddress
+
+!new Address('Addr_Paperless_3')
+!Addr_Paperless_3.city := 'Port Louis'
+!Addr_Paperless_3.houseNr := 'Lot 7'
+!Addr_Paperless_3.street := 'Avenue des Docks'
+!insert (C_Paperless_1, Addr_Paperless_3) into ContactContainsAddress
+
+!new Company('C_MicroEtats_1')
+!C_MicroEtats_1.name := 'Société des Micro-États'
+!C_MicroEtats_1.phone := '+377 00 00 00 00'
+!C_MicroEtats_1.website := 'https://micro-etats.example.mc'
+!C_MicroEtats_1.email := 'contact@micro-etats.example.mc'
+!C_MicroEtats_1.industry := 'Jurisdictional consulting'
+!insert (AB_SingleSuperConnector_1, C_MicroEtats_1) into AddressBookMadeOfContact
+
+!new Note('Note_MicroEtats_1')
+!Note_MicroEtats_1.author := 'Legal Desk'
+!Note_MicroEtats_1.time := Date('2026-02-23')
+!Note_MicroEtats_1.type := #MEETING
+!Note_MicroEtats_1.comment := 'Agreed to be modeled simultaneously as boss, subdivision, and employer in a test dataset.'
+!insert (C_MicroEtats_1, Note_MicroEtats_1) into ContactContainsNote
+
+!new Note('Note_MicroEtats_2')
+!Note_MicroEtats_2.author := 'Legal Desk'
+!Note_MicroEtats_2.time := Date('2026-02-23')
+!Note_MicroEtats_2.type := #CALL
+!Note_MicroEtats_2.comment := 'Confirmed that contradictions are acceptable because RelationshipType is just a label.'
+!insert (C_MicroEtats_1, Note_MicroEtats_2) into ContactContainsNote
+
+!new Address('Addr_MicroEtats_1')
+!Addr_MicroEtats_1.city := 'Monaco'
+!Addr_MicroEtats_1.houseNr := '1'
+!Addr_MicroEtats_1.street := 'Rue des Tests'
+!insert (C_MicroEtats_1, Addr_MicroEtats_1) into ContactContainsAddress
+
+!new Relationship('Rel_Archivist_R1_1')
+!Rel_Archivist_R1_1.type := #BOSS
+!insert (P_Archivist_1, Rel_Archivist_R1_1) into ContactToRelationship
+!insert (Rel_Archivist_R1_1, P_Haakon_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R2_1')
+!Rel_Archivist_R2_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R2_1) into ContactToRelationship
+!insert (Rel_Archivist_R2_1, P_Haakon_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R3_1')
+!Rel_Archivist_R3_1.type := #COWORKER
+!insert (P_Archivist_1, Rel_Archivist_R3_1) into ContactToRelationship
+!insert (Rel_Archivist_R3_1, P_Fatou_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R4_1')
+!Rel_Archivist_R4_1.type := #COWORKER
+!insert (P_Archivist_1, Rel_Archivist_R4_1) into ContactToRelationship
+!insert (Rel_Archivist_R4_1, P_Fatou_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R5_1')
+!Rel_Archivist_R5_1.type := #SUBDIVISION
+!insert (P_Archivist_1, Rel_Archivist_R5_1) into ContactToRelationship
+!insert (Rel_Archivist_R5_1, C_Paperless_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R6_1')
+!Rel_Archivist_R6_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R6_1) into ContactToRelationship
+!insert (Rel_Archivist_R6_1, C_Paperless_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R7_1')
+!Rel_Archivist_R7_1.type := #BOSS
+!insert (P_Archivist_1, Rel_Archivist_R7_1) into ContactToRelationship
+!insert (Rel_Archivist_R7_1, C_MicroEtats_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R8_1')
+!Rel_Archivist_R8_1.type := #SUBDIVISION
+!insert (P_Archivist_1, Rel_Archivist_R8_1) into ContactToRelationship
+!insert (Rel_Archivist_R8_1, C_MicroEtats_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R9_1')
+!Rel_Archivist_R9_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R9_1) into ContactToRelationship
+!insert (Rel_Archivist_R9_1, C_MicroEtats_1) into RelationshipToContact

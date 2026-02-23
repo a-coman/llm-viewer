@@ -1,0 +1,485 @@
+!new Client('clientC30')
+!clientC30.clientId := 6
+!clientC30.isSuspended := false
+
+!new Client('clientC31')
+!clientC31.clientId := 540
+!clientC31.isSuspended := false
+
+!new Rental('rentalR30')
+!rentalR30.date := Date('2025-01-14')
+
+!new Rental('rentalR31')
+!rentalR31.date := Date('2025-01-16')
+
+!new Rental('rentalR32')
+!rentalR32.date := Date('2025-02-02')
+
+!new Rental('rentalR33')
+!rentalR33.date := Date('2025-03-10')
+
+!new Movie('movieM30')
+!movieM30.title := 'Rainy Season Heist'
+!movieM30.availableCopies := 5
+!movieM30.genre := #Action
+
+!new Movie('movieM31')
+!movieM31.title := 'The Bakery Next Door'
+!movieM31.availableCopies := 2
+!movieM31.genre := #Comedy
+
+!new Movie('movieM32')
+!movieM32.title := 'Kite-Festival Mix-Up'
+!movieM32.availableCopies := 1
+!movieM32.genre := #Comedy
+
+!new Series('seriesS30')
+!seriesS30.title := 'Harbor Radio'
+!seriesS30.availableCopies := 3
+!seriesS30.episode := 8
+
+!new Series('seriesS31')
+!seriesS31.title := 'Harbor Radio'
+!seriesS31.availableCopies := 3
+!seriesS31.episode := 9
+
+!new Actor('actorA30')
+!actorA30.name := 'Anaïs Dubois'
+
+!new Actor('actorA31')
+!actorA31.name := 'Bashir Al-Khatib'
+
+!new Actor('actorA32')
+!actorA32.name := 'Keiko Nakamura'
+
+!new Actor('actorA33')
+!actorA33.name := 'Mateo García'
+
+!new Actor('actorA34')
+!actorA34.name := 'Zola Ndlovu'
+
+!new Actor('actorA35')
+!actorA35.name := 'Sven Larsson'
+
+!new Actor('actorA36')
+!actorA36.name := 'Priya Iyer'
+
+!new Actor('actorA37')
+!actorA37.name := 'Hassan Reza'
+
+!insert (clientC30, rentalR30) into ClientRental
+!insert (clientC30, rentalR31) into ClientRental
+!insert (clientC30, rentalR32) into ClientRental
+!insert (clientC31, rentalR33) into ClientRental
+
+!insert (rentalR30, movieM31) into RentalCassette
+!insert (rentalR30, seriesS30) into RentalCassette
+!insert (rentalR30, movieM30) into RentalCassette
+
+!insert (rentalR31, seriesS31) into RentalCassette
+
+!insert (rentalR32, movieM30) into RentalCassette
+!insert (rentalR32, movieM32) into RentalCassette
+!insert (rentalR32, seriesS30) into RentalCassette
+!insert (rentalR32, seriesS31) into RentalCassette
+
+!insert (rentalR33, movieM31) into RentalCassette
+!insert (rentalR33, movieM32) into RentalCassette
+
+!insert (movieM30, actorA31) into CassetteActor
+!insert (movieM30, actorA35) into CassetteActor
+!insert (movieM30, actorA37) into CassetteActor
+
+!insert (movieM31, actorA30) into CassetteActor
+!insert (movieM31, actorA33) into CassetteActor
+
+!insert (movieM32, actorA36) into CassetteActor
+!insert (movieM32, actorA34) into CassetteActor
+!insert (movieM32, actorA33) into CassetteActor
+
+!insert (seriesS30, actorA32) into CassetteActor
+!insert (seriesS30, actorA37) into CassetteActor
+
+!insert (seriesS31, actorA32) into CassetteActor
+
+!new Client('clientHubC30')
+!clientHubC30.clientId := 6
+!clientHubC30.isSuspended := true
+
+!new Rental('rentalHubR30')
+!rentalHubR30.date := Date('0001-01-01')
+
+!new Movie('movieHubM30')
+!movieHubM30.title := 'Ulaanbaatar Run'
+!movieHubM30.availableCopies := 0
+!movieHubM30.genre := #Action
+
+!new Movie('movieHubM31')
+!movieHubM31.title := 'Comédia do Silêncio'
+!movieHubM31.availableCopies := 0
+!movieHubM31.genre := #Comedy
+
+!new Movie('movieHubM32')
+!movieHubM32.title := 'The Last Tram in Praha'
+!movieHubM32.availableCopies := 0
+!movieHubM32.genre := #Action
+
+!new Movie('movieHubM33')
+!movieHubM33.title := 'Kisah Lucu Jakarta'
+!movieHubM33.availableCopies := 0
+!movieHubM33.genre := #Comedy
+
+!new Movie('movieHubM34')
+!movieHubM34.title := 'Δρόμος της Σκιάς'
+!movieHubM34.availableCopies := 0
+!movieHubM34.genre := #Action
+
+!new Series('seriesHubS30')
+!seriesHubS30.title := 'Noite de Episódio'
+!seriesHubS30.availableCopies := 0
+!seriesHubS30.episode := 1
+
+!new Series('seriesHubS31')
+!seriesHubS31.title := 'Şehir Günlükleri'
+!seriesHubS31.availableCopies := 0
+!seriesHubS31.episode := 1
+
+!new Series('seriesHubS32')
+!seriesHubS32.title := 'Kraków Files'
+!seriesHubS32.availableCopies := 0
+!seriesHubS32.episode := 1
+
+!new Movie('movieHubM35')
+!movieHubM35.title := 'Cairo Punchline'
+!movieHubM35.availableCopies := 0
+!movieHubM35.genre := #Comedy
+
+!new Series('seriesHubS33')
+!seriesHubS33.title := 'Helsinki Signal'
+!seriesHubS33.availableCopies := 0
+!seriesHubS33.episode := 1
+
+!new Actor('actorHubA30')
+!actorHubA30.name := 'Samira Kovač'
+
+!insert (clientHubC30, rentalHubR30) into ClientRental
+
+!insert (rentalHubR30, movieHubM30) into RentalCassette
+!insert (rentalHubR30, movieHubM31) into RentalCassette
+!insert (rentalHubR30, movieHubM32) into RentalCassette
+!insert (rentalHubR30, movieHubM33) into RentalCassette
+!insert (rentalHubR30, movieHubM34) into RentalCassette
+!insert (rentalHubR30, seriesHubS30) into RentalCassette
+!insert (rentalHubR30, seriesHubS31) into RentalCassette
+!insert (rentalHubR30, seriesHubS32) into RentalCassette
+
+!insert (movieHubM30, actorHubA30) into CassetteActor
+!insert (movieHubM31, actorHubA30) into CassetteActor
+!insert (movieHubM32, actorHubA30) into CassetteActor
+!insert (movieHubM33, actorHubA30) into CassetteActor
+!insert (movieHubM34, actorHubA30) into CassetteActor
+!insert (seriesHubS30, actorHubA30) into CassetteActor
+!insert (seriesHubS31, actorHubA30) into CassetteActor
+!insert (seriesHubS32, actorHubA30) into CassetteActor
+!insert (movieHubM35, actorHubA30) into CassetteActor
+!insert (seriesHubS33, actorHubA30) into CassetteActor
+
+!new Client('clientComplex4C30')
+!clientComplex4C30.clientId := 501
+!clientComplex4C30.isSuspended := false
+
+!new Client('clientComplex4C31')
+!clientComplex4C31.clientId := 502
+!clientComplex4C31.isSuspended := false
+
+!new Client('clientComplex4C32')
+!clientComplex4C32.clientId := 503
+!clientComplex4C32.isSuspended := true
+
+!new Client('clientComplex4C33')
+!clientComplex4C33.clientId := 504
+!clientComplex4C33.isSuspended := false
+
+!new Client('clientComplex4C34')
+!clientComplex4C34.clientId := 505
+!clientComplex4C34.isSuspended := false
+
+!new Client('clientComplex4C35')
+!clientComplex4C35.clientId := 506
+!clientComplex4C35.isSuspended := true
+
+!new Movie('movieComplex4M30')
+!movieComplex4M30.title := 'Typhoon Over Taipei'
+!movieComplex4M30.availableCopies := 1
+!movieComplex4M30.genre := #Action
+
+!new Movie('movieComplex4M31')
+!movieComplex4M31.title := 'Nonna’s New Recipe'
+!movieComplex4M31.availableCopies := 3
+!movieComplex4M31.genre := #Comedy
+
+!new Movie('movieComplex4M32')
+!movieComplex4M32.title := 'Baltic Heist'
+!movieComplex4M32.availableCopies := 0
+!movieComplex4M32.genre := #Action
+
+!new Series('seriesComplex4S30')
+!seriesComplex4S30.title := 'Kraków Detectives — Season 1'
+!seriesComplex4S30.availableCopies := 2
+!seriesComplex4S30.episode := 1
+
+!new Series('seriesComplex4S31')
+!seriesComplex4S31.title := 'Kraków Detectives — Season 1'
+!seriesComplex4S31.availableCopies := 2
+!seriesComplex4S31.episode := 2
+
+!new Series('seriesComplex4S32')
+!seriesComplex4S32.title := 'Kraków Detectives — Season 1'
+!seriesComplex4S32.availableCopies := 1
+!seriesComplex4S32.episode := 3
+
+!new Series('seriesComplex4S33')
+!seriesComplex4S33.title := 'Kraków Detectives — Season 1'
+!seriesComplex4S33.availableCopies := 1
+!seriesComplex4S33.episode := 4
+
+!new Series('seriesComplex4S34')
+!seriesComplex4S34.title := 'Andes Airlift — Season 2'
+!seriesComplex4S34.availableCopies := 0
+!seriesComplex4S34.episode := 6
+
+!new Series('seriesComplex4S35')
+!seriesComplex4S35.title := 'Mombasa Studio Sessions — Season 1'
+!seriesComplex4S35.availableCopies := 4
+!seriesComplex4S35.episode := 8
+
+!new Actor('actorComplex4A30')
+!actorComplex4A30.name := 'Priya Deshpande'
+
+!new Actor('actorComplex4A31')
+!actorComplex4A31.name := 'Zofia Kowalczyk'
+
+!new Actor('actorComplex4A32')
+!actorComplex4A32.name := 'Kemal Yıldırım'
+
+!new Actor('actorComplex4A33')
+!actorComplex4A33.name := 'Litia Vaʻani'
+
+!new Actor('actorComplex4A34')
+!actorComplex4A34.name := 'Tesfaye Bekele'
+
+!new Actor('actorComplex4A35')
+!actorComplex4A35.name := 'Émile Tremblay'
+
+!new Actor('actorComplex4A36')
+!actorComplex4A36.name := 'Marisol Quispe'
+
+!new Actor('actorComplex4A37')
+!actorComplex4A37.name := 'Nari Kim'
+
+!new Actor('actorComplex4A38')
+!actorComplex4A38.name := 'Hana Suzuki'
+
+!new Actor('actorComplex4A39')
+!actorComplex4A39.name := 'Oskar Nowak'
+
+!new Actor('actorComplex4A40')
+!actorComplex4A40.name := 'Asha Mwangi'
+
+!new Rental('rentalComplex4R30')
+!rentalComplex4R30.date := Date('2025-10-03')
+
+!new Rental('rentalComplex4R31')
+!rentalComplex4R31.date := Date('2025-10-10')
+
+!new Rental('rentalComplex4R32')
+!rentalComplex4R32.date := Date('2025-11-01')
+
+!new Rental('rentalComplex4R33')
+!rentalComplex4R33.date := Date('2025-11-02')
+
+!new Rental('rentalComplex4R34')
+!rentalComplex4R34.date := Date('2025-11-15')
+
+!new Rental('rentalComplex4R35')
+!rentalComplex4R35.date := Date('2025-12-05')
+
+!new Rental('rentalComplex4R36')
+!rentalComplex4R36.date := Date('2025-12-20')
+
+!new Rental('rentalComplex4R37')
+!rentalComplex4R37.date := Date('2026-01-08')
+
+!insert (clientComplex4C30, rentalComplex4R30) into ClientRental
+!insert (clientComplex4C30, rentalComplex4R31) into ClientRental
+!insert (clientComplex4C31, rentalComplex4R32) into ClientRental
+!insert (clientComplex4C32, rentalComplex4R33) into ClientRental
+!insert (clientComplex4C33, rentalComplex4R34) into ClientRental
+!insert (clientComplex4C30, rentalComplex4R35) into ClientRental
+!insert (clientComplex4C32, rentalComplex4R36) into ClientRental
+!insert (clientComplex4C33, rentalComplex4R37) into ClientRental
+
+!insert (rentalComplex4R30, seriesComplex4S30) into RentalCassette
+!insert (rentalComplex4R30, seriesComplex4S31) into RentalCassette
+!insert (rentalComplex4R30, seriesComplex4S32) into RentalCassette
+
+!insert (rentalComplex4R31, seriesComplex4S33) into RentalCassette
+
+!insert (rentalComplex4R32, movieComplex4M31) into RentalCassette
+
+!insert (rentalComplex4R33, movieComplex4M32) into RentalCassette
+!insert (rentalComplex4R33, seriesComplex4S34) into RentalCassette
+
+!insert (rentalComplex4R34, movieComplex4M30) into RentalCassette
+!insert (rentalComplex4R34, seriesComplex4S35) into RentalCassette
+
+!insert (rentalComplex4R35, movieComplex4M30) into RentalCassette
+!insert (rentalComplex4R35, movieComplex4M31) into RentalCassette
+!insert (rentalComplex4R35, movieComplex4M32) into RentalCassette
+!insert (rentalComplex4R35, seriesComplex4S30) into RentalCassette
+!insert (rentalComplex4R35, seriesComplex4S34) into RentalCassette
+!insert (rentalComplex4R35, seriesComplex4S35) into RentalCassette
+
+!insert (rentalComplex4R36, seriesComplex4S35) into RentalCassette
+
+!insert (rentalComplex4R37, seriesComplex4S31) into RentalCassette
+!insert (rentalComplex4R37, movieComplex4M31) into RentalCassette
+
+!insert (movieComplex4M30, actorComplex4A30) into CassetteActor
+!insert (movieComplex4M30, actorComplex4A37) into CassetteActor
+!insert (movieComplex4M30, actorComplex4A38) into CassetteActor
+
+!insert (movieComplex4M31, actorComplex4A30) into CassetteActor
+!insert (movieComplex4M31, actorComplex4A35) into CassetteActor
+!insert (movieComplex4M31, actorComplex4A33) into CassetteActor
+
+!insert (movieComplex4M32, actorComplex4A30) into CassetteActor
+!insert (movieComplex4M32, actorComplex4A31) into CassetteActor
+!insert (movieComplex4M32, actorComplex4A39) into CassetteActor
+!insert (movieComplex4M32, actorComplex4A32) into CassetteActor
+
+!insert (seriesComplex4S30, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S30, actorComplex4A31) into CassetteActor
+!insert (seriesComplex4S30, actorComplex4A39) into CassetteActor
+
+!insert (seriesComplex4S31, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S31, actorComplex4A31) into CassetteActor
+!insert (seriesComplex4S31, actorComplex4A34) into CassetteActor
+
+!insert (seriesComplex4S32, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S32, actorComplex4A39) into CassetteActor
+!insert (seriesComplex4S32, actorComplex4A32) into CassetteActor
+
+!insert (seriesComplex4S33, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S33, actorComplex4A31) into CassetteActor
+!insert (seriesComplex4S33, actorComplex4A35) into CassetteActor
+
+!insert (seriesComplex4S34, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S34, actorComplex4A36) into CassetteActor
+
+!insert (seriesComplex4S35, actorComplex4A30) into CassetteActor
+!insert (seriesComplex4S35, actorComplex4A40) into CassetteActor
+!insert (seriesComplex4S35, actorComplex4A34) into CassetteActor
+
+!new Client('clientEdge4C30')
+!clientEdge4C30.clientId := 6
+!clientEdge4C30.isSuspended := false
+
+!new Client('clientEdge4C31')
+!clientEdge4C31.clientId := 7
+!clientEdge4C31.isSuspended := false
+
+!new Client('clientEdge4C32')
+!clientEdge4C32.clientId := 8
+!clientEdge4C32.isSuspended := true
+
+!new Rental('rentalEdge4R30')
+!rentalEdge4R30.date := Date('')
+
+!new Rental('rentalEdge4R31')
+!rentalEdge4R31.date := Date('1900-01-01')
+
+!new Rental('rentalEdge4R32')
+!rentalEdge4R32.date := Date('1900-01-01')
+
+!new Rental('rentalEdge4R33')
+!rentalEdge4R33.date := Date('31-04-2020')
+
+!new Rental('rentalEdge4R34')
+!rentalEdge4R34.date := Date('2020-W53-7')
+
+!new Rental('rentalEdge4R35')
+!rentalEdge4R35.date := Date('9999-12-31')
+
+!new Movie('movieEdge4M30')
+!movieEdge4M30.title := '∅ (Zero Feature)'
+!movieEdge4M30.availableCopies := 0
+!movieEdge4M30.genre := #Action
+
+!new Movie('movieEdge4M31')
+!movieEdge4M31.title := 'The Infinite Shelf Experiment'
+!movieEdge4M31.availableCopies := 2147483647
+!movieEdge4M31.genre := #Comedy
+
+!new Series('seriesEdge4S30')
+!seriesEdge4S30.title := 'Saudade Radio Play'
+!seriesEdge4S30.availableCopies := 0
+!seriesEdge4S30.episode := 1
+
+!new Series('seriesEdge4S31')
+!seriesEdge4S31.title := 'Te Marama Files'
+!seriesEdge4S31.availableCopies := 0
+!seriesEdge4S31.episode := 2
+
+!new Actor('actorEdge4A40')
+!actorEdge4A40.name := 'Noor Qamar'
+
+!new Actor('actorEdge4A41')
+!actorEdge4A41.name := 'Giulia Bianchi'
+
+!new Actor('actorEdge4A42')
+!actorEdge4A42.name := 'Hiroto Sakamoto'
+
+!new Actor('actorEdge4A43')
+!actorEdge4A43.name := 'Sipho Dlamini'
+
+!new Actor('actorEdge4A44')
+!actorEdge4A44.name := 'Aoife Ní Bhraonáin'
+
+!insert (clientEdge4C30, rentalEdge4R30) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R31) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R32) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R33) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R34) into ClientRental
+!insert (clientEdge4C31, rentalEdge4R35) into ClientRental
+
+!insert (rentalEdge4R30, movieEdge4M30) into RentalCassette
+
+!insert (rentalEdge4R31, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R31, seriesEdge4S30) into RentalCassette
+
+!insert (rentalEdge4R32, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R32, movieEdge4M31) into RentalCassette
+
+!insert (rentalEdge4R33, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R33, seriesEdge4S31) into RentalCassette
+
+!insert (rentalEdge4R34, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R34, seriesEdge4S30) into RentalCassette
+!insert (rentalEdge4R34, seriesEdge4S31) into RentalCassette
+
+!insert (rentalEdge4R35, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R35, movieEdge4M31) into RentalCassette
+
+!insert (movieEdge4M30, actorEdge4A40) into CassetteActor
+
+!insert (movieEdge4M31, actorEdge4A40) into CassetteActor
+!insert (movieEdge4M31, actorEdge4A41) into CassetteActor
+
+!insert (seriesEdge4S30, actorEdge4A40) into CassetteActor
+!insert (seriesEdge4S30, actorEdge4A42) into CassetteActor
+!insert (seriesEdge4S30, actorEdge4A43) into CassetteActor
+
+!insert (seriesEdge4S31, actorEdge4A40) into CassetteActor
+!insert (seriesEdge4S31, actorEdge4A44) into CassetteActor
+

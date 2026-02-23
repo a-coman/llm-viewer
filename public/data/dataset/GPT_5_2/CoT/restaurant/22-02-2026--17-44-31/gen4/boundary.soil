@@ -1,0 +1,278 @@
+!new Restaurant('R25')
+!R25.name := 'Ryokan Riverstone Izakaya'
+
+!new Owner('O54')
+!O54.name := 'Haruto Saitō'
+!O54.percentageShares := 99
+!insert (R25, O54) into RestaurantOwner
+
+!new Owner('O55')
+!O55.name := 'Lê Ánh Nguyên'
+!O55.percentageShares := 1
+!insert (R25, O55) into RestaurantOwner
+
+!new HeadWaiter('HW24')
+!HW24.name := 'Ayesha Khan'
+!HW24.dateOfBirth := Date('1982-02-20')
+!HW24.phoneNumber := '+81 3 5555 0100'
+
+!new Waiter('W53')
+!W53.name := 'Kenji Watanabe'
+!W53.dateOfBirth := Date('1994-09-13')
+!W53.phoneNumber := '+81 3 5555 0101'
+!W53.spokenLanguage := #English
+!insert (HW24, W53) into HeadWaiterWaiter
+
+!new Waiter('W54')
+!W54.name := 'Lucía Ortega'
+!W54.dateOfBirth := Date('1998-01-04')
+!W54.phoneNumber := '+81 3 5555 0102'
+!W54.spokenLanguage := #Spanish
+!insert (HW24, W54) into HeadWaiterWaiter
+
+!new Waiter('W55')
+!W55.name := 'Marius Vogel'
+!W55.dateOfBirth := Date('1993-06-28')
+!W55.phoneNumber := '+81 3 5555 0103'
+!W55.spokenLanguage := #German
+!insert (HW24, W55) into HeadWaiterWaiter
+
+!new Waiter('W56')
+!W56.name := 'Chiara De Santis'
+!W56.dateOfBirth := Date('1999-11-19')
+!W56.phoneNumber := '+81 3 5555 0104'
+!W56.spokenLanguage := #Italian
+!insert (HW24, W56) into HeadWaiterWaiter
+
+!new Waiter('W57')
+!W57.name := 'Noah Williams'
+!W57.dateOfBirth := Date('2002-03-02')
+!W57.phoneNumber := '+81 3 5555 0105'
+!W57.spokenLanguage := #English
+!insert (HW24, W57) into HeadWaiterWaiter
+
+!new Manager('M19')
+!M19.name := 'Soo-jin Park'
+!M19.dateOfBirth := Date('1977-07-07')
+!M19.phoneNumber := '+81 3 5555 0199'
+
+!new Cook('K39')
+!K39.name := 'Boris Ivanov'
+!K39.dateOfBirth := Date('1987-12-01')
+!K39.phoneNumber := '+81 3 5555 0200'
+!K39.yearsOfExperience := 0
+
+!new Cook('K40')
+!K40.name := 'Boris Ivanov'
+!K40.dateOfBirth := Date('1987-12-01')
+!K40.phoneNumber := '+81 3 5555 0200'
+!K40.yearsOfExperience := 0
+
+!new Cook('K41')
+!K41.name := 'Boris Ivanov'
+!K41.dateOfBirth := Date('1987-12-01')
+!K41.phoneNumber := '+81 3 5555 0200'
+!K41.yearsOfExperience := 0
+
+!new Chef('CH42')
+!CH42.name := 'Mai Nakamura'
+!CH42.dateOfBirth := Date('1990-05-15')
+!CH42.phoneNumber := '+81 3 5555 0301'
+!insert (CH42, K39) into ChefCook
+
+!new Chef('CH43')
+!CH43.name := 'Rashid Al-Farsi'
+!CH43.dateOfBirth := Date('1989-08-08')
+!CH43.phoneNumber := '+81 3 5555 0302'
+!insert (CH43, K40) into ChefCook
+
+!new Chef('CH44')
+!CH44.name := 'Elena Popescu'
+!CH44.dateOfBirth := Date('1996-10-10')
+!CH44.phoneNumber := '+81 3 5555 0303'
+!insert (CH44, K41) into ChefCook
+
+!new Allergen('A_GLU25')
+!A_GLU25.type := #Gluten
+
+!new FoodItem('F1301')
+!F1301.number := 500
+!F1301.description := 'Eggs (for custard)'
+!F1301.purchaseFlag := true
+!F1301.unit := #Dozen
+
+!new FoodItem('F1302')
+!F1302.number := 501
+!F1302.description := 'Wheat udon noodles'
+!F1302.purchaseFlag := true
+!F1302.unit := #Pound
+!insert (F1302, A_GLU25) into FoodItemAllergen
+
+!new FoodItem('F1303')
+!F1303.number := 502
+!F1303.description := 'Broth concentrate'
+!F1303.purchaseFlag := true
+!F1303.unit := #Ounce
+
+!new FoodItem('F1304')
+!F1304.number := 503
+!F1304.description := 'Roasted barley tea leaves'
+!F1304.purchaseFlag := false
+!F1304.unit := #Gram
+!insert (F1304, A_GLU25) into FoodItemAllergen
+
+!new MenuItem('MI65')
+!MI65.description := 'Kyoto-style Udon Bowl'
+!MI65.prepTime := 18.0
+!MI65.classification := #Main
+!insert (MI65, CH42) into MenuItemChef
+!insert (MI65, F1302) into MenuItemFoodItem
+!insert (MI65, F1303) into MenuItemFoodItem
+
+!new MenuItem('MI66')
+!MI66.description := 'Matcha Custard Pot'
+!MI66.prepTime := 30.0
+!MI66.classification := #Dessert
+!insert (MI66, CH43) into MenuItemChef
+!insert (MI66, F1301) into MenuItemFoodItem
+
+!new MenuItem('MI67')
+!MI67.description := 'Barley Tea Service'
+!MI67.prepTime := 4.0
+!MI67.classification := #Beverage
+!insert (MI67, CH42) into MenuItemChef
+!insert (MI67, F1304) into MenuItemFoodItem
+
+!new RegularCustomer('C27')
+!C27.name := 'Chloé Martin'
+!C27.prefferedLanguage := #German
+
+!new Individual('IR27')
+!IR27.number := 300
+!IR27.date := Date('2026-04-05')
+!IR27.time := Time('19:10')
+!IR27.numberPeople := 8
+!IR27.name := 'Chloé Martin'
+!IR27.phoneNumber := '+81 80 5555 0300'
+!IR27.seating := #Inside
+!IR27.smoking := #NonSmoking
+!insert (R25, IR27) into RestaurantReservation
+!insert (IR27, C27) into ReservationCustomer
+!insert (IR27, W53) into ReservationWaiter
+
+!new Table('T201_RRI')
+!T201_RRI.number := 201
+!T201_RRI.description := 'Window counter seat 1'
+!T201_RRI.capacity := 1
+!insert (IR27, T201_RRI) into ReservationTable
+
+!new Table('T202_RRI')
+!T202_RRI.number := 202
+!T202_RRI.description := 'Window counter seat 2'
+!T202_RRI.capacity := 1
+!insert (IR27, T202_RRI) into ReservationTable
+
+!new Table('T203_RRI')
+!T203_RRI.number := 203
+!T203_RRI.description := 'Window counter seat 3'
+!T203_RRI.capacity := 1
+!insert (IR27, T203_RRI) into ReservationTable
+
+!new Table('T204_RRI')
+!T204_RRI.number := 204
+!T204_RRI.description := 'Window counter seat 4'
+!T204_RRI.capacity := 1
+!insert (IR27, T204_RRI) into ReservationTable
+
+!new Table('T205_RRI')
+!T205_RRI.number := 205
+!T205_RRI.description := 'Window counter seat 5'
+!T205_RRI.capacity := 1
+!insert (IR27, T205_RRI) into ReservationTable
+
+!new Table('T206_RRI')
+!T206_RRI.number := 206
+!T206_RRI.description := 'Window counter seat 6'
+!T206_RRI.capacity := 1
+!insert (IR27, T206_RRI) into ReservationTable
+
+!new Table('T207_RRI')
+!T207_RRI.number := 207
+!T207_RRI.description := 'Window counter seat 7'
+!T207_RRI.capacity := 1
+!insert (IR27, T207_RRI) into ReservationTable
+
+!new Table('T208_RRI')
+!T208_RRI.number := 208
+!T208_RRI.description := 'Window counter seat 8'
+!T208_RRI.capacity := 1
+!insert (IR27, T208_RRI) into ReservationTable
+
+!new ItemOrder('IO2201')
+!IO2201.time := Time('19:20')
+!insert (IR27, IO2201) into ReservationItemOrdered
+!insert (IO2201, MI67) into ItemOrderMenuItem
+
+!new ItemOrder('IO2202')
+!IO2202.time := Time('19:22')
+!insert (IR27, IO2202) into ReservationItemOrdered
+!insert (IO2202, MI67) into ItemOrderMenuItem
+
+!new ItemOrder('IO2203')
+!IO2203.time := Time('19:35')
+!insert (IR27, IO2203) into ReservationItemOrdered
+!insert (IO2203, MI65) into ItemOrderMenuItem
+
+!new ItemOrder('IO2204')
+!IO2204.time := Time('19:36')
+!insert (IR27, IO2204) into ReservationItemOrdered
+!insert (IO2204, MI65) into ItemOrderMenuItem
+
+!new ItemOrder('IO2205')
+!IO2205.time := Time('20:05')
+!insert (IR27, IO2205) into ReservationItemOrdered
+!insert (IO2205, MI66) into ItemOrderMenuItem
+
+!new ItemOrder('IO2206')
+!IO2206.time := Time('20:06')
+!insert (IR27, IO2206) into ReservationItemOrdered
+!insert (IO2206, MI66) into ItemOrderMenuItem
+
+!new Banquet('BR21')
+!BR21.number := 301
+!BR21.date := Date('2026-04-05')
+!BR21.time := Time('20:00')
+!BR21.numberPeople := 12
+!BR21.name := 'C. Martin (Host)'
+!BR21.phoneNumber := '+81 80 5555 0300'
+!BR21.groupName := 'Osaka Startup Meetup (Tokyo Chapter)'
+!BR21.paymentMethod := #Cash
+!BR21.busService := false
+!insert (R25, BR21) into RestaurantReservation
+!insert (BR21, C27) into ReservationCustomer
+!insert (BR21, W53) into ReservationWaiter
+!insert (BR21, W54) into ReservationWaiter
+
+!new Table('T209_RRI')
+!T209_RRI.number := 209
+!T209_RRI.description := 'Tatami room table A'
+!T209_RRI.capacity := 4
+!insert (BR21, T209_RRI) into ReservationTable
+
+!new Table('T210_RRI')
+!T210_RRI.number := 210
+!T210_RRI.description := 'Tatami room table B'
+!T210_RRI.capacity := 4
+!insert (BR21, T210_RRI) into ReservationTable
+
+!new Table('T211_RRI')
+!T211_RRI.number := 211
+!T211_RRI.description := 'Tatami room table C'
+!T211_RRI.capacity := 4
+!insert (BR21, T211_RRI) into ReservationTable
+
+!new DietaryRequirement('DR22')
+!DR22.diet := #Kosher
+
+!new ReportedAllergy('RA22')
+!RA22.allergen := #Nuts

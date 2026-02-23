@@ -1,0 +1,98 @@
+!new Station('S3NBO')
+!new Station('S4REK')
+
+!new Driver('D3301')
+!D3301.id := 'D-3301'
+!D3301.name := 'Wanjiku Mwangi'
+
+!new Driver('D3302')
+!D3302.id := 'D-3302'
+!D3302.name := 'Ahmed Hassan'
+
+!insert (S3NBO, D3301) into StationContainsDriver
+!insert (S3NBO, D3302) into StationContainsDriver
+
+!new Customer('C7301')
+!C7301.id := 'C-7301'
+!C7301.name := 'Njeri Kamau'
+!C7301.twitterUserName := '@njeri_kamau'
+
+!new Customer('C7302')
+!C7302.id := 'C-7302'
+!C7302.name := 'Diego Fernández'
+!C7302.twitterUserName := '@dfernandez_travel'
+
+!insert (S3NBO, C7301) into StationContainsCustomer
+!insert (S3NBO, C7302) into StationContainsCustomer
+
+!new Address('AS3_1')
+!AS3_1.text := 'Kariobangi North, near the Kenya Power offices, Nairobi, Kenya'
+!new GeoLocation('GLS3_1')
+!GLS3_1.latitude := -1.2460
+!GLS3_1.longitude := 36.9025
+!insert (AS3_1, GLS3_1) into AddressContainsGeoLocation
+
+!new Address('AS3_2')
+!AS3_2.text := 'Apartment 4C, Kilimani, Nairobi, Kenya'
+!new GeoLocation('GLS3_2')
+!GLS3_2.latitude := -1.2921
+!GLS3_2.longitude := 36.7890
+!insert (AS3_2, GLS3_2) into AddressContainsGeoLocation
+
+!new Address('AS3_3')
+!AS3_3.text := 'Greenhouse Mall, Ngong Road, Nairobi, Kenya'
+!new GeoLocation('GLS3_3')
+!GLS3_3.latitude := -1.3005
+!GLS3_3.longitude := 36.7768
+!insert (AS3_3, GLS3_3) into AddressContainsGeoLocation
+
+!new Address('AS3_4')
+!AS3_4.text := 'Jomo Kenyatta International Airport (JKIA), Arrivals, Nairobi, Kenya'
+!new GeoLocation('GLS3_4')
+!GLS3_4.latitude := -1.3192
+!GLS3_4.longitude := 36.9278
+!insert (AS3_4, GLS3_4) into AddressContainsGeoLocation
+
+!new Shipment('SH99010')
+!SH99010.id := 'SH-99010'
+!SH99010.status := #UNDERWAY
+
+!new Shipment('SH99011')
+!SH99011.id := 'SH-99011'
+!SH99011.status := #DELIVERED
+
+!new Shipment('SH99012')
+!SH99012.id := 'SH-99012'
+!SH99012.status := #NEW
+
+!insert (S3NBO, SH99010) into StationShipment
+!insert (S3NBO, SH99011) into StationShipment
+!insert (S3NBO, SH99012) into StationShipment
+
+!insert (C7301, SH99010) into CustomerConsistsOfShipment
+!insert (C7301, SH99012) into CustomerConsistsOfShipment
+!insert (C7302, SH99011) into CustomerConsistsOfShipment
+
+!insert (SH99010, AS3_1) into ShipmentContainsPickUpAddress
+!insert (SH99010, AS3_2) into ShipmentContainsDeliveryAddress
+!insert (D3301, SH99010) into DriverShipment
+
+!insert (SH99011, AS3_2) into ShipmentContainsPickUpAddress
+!insert (SH99011, AS3_4) into ShipmentContainsDeliveryAddress
+!insert (D3301, SH99011) into DriverShipment
+
+!insert (SH99012, AS3_3) into ShipmentContainsPickUpAddress
+!insert (SH99012, AS3_1) into ShipmentContainsDeliveryAddress
+
+!new Driver('D4401')
+!D4401.id := 'D-4401'
+!D4401.name := 'Sóley Jónsdóttir'
+
+!insert (S4REK, D4401) into StationContainsDriver
+
+!new Customer('C8401')
+!C8401.id := 'C-8401'
+!C8401.name := 'Ethan Chen'
+!C8401.twitterUserName := '@ethan_chen_is'
+
+!insert (S4REK, C8401) into StationContainsCustomer

@@ -1,0 +1,136 @@
+!new Customer('C35')
+!C35.firstName := 'Lena'
+!C35.lastName := 'Schmidt'
+
+!new Booking('B77110')
+!B77110.bookingId := 77110
+!B77110.startDate := '2026-09-05'
+!B77110.endDate := '2026-09-08'
+!B77110.confirmed := true
+!B77110.canceled := false
+
+!new RoomReservation('RR_L1')
+!RR_L1.checkInDate := '2026-09-05'
+!RR_L1.checkOutDate := '2026-09-08'
+
+!new Room('R901_L1')
+!R901_L1.roomNumber := 901
+!R901_L1.numBeds := 1
+!R901_L1.pricePerNight := 155.00
+!R901_L1.occupied := false
+!R901_L1.blocked := false
+
+!new Room('R902_L1')
+!R902_L1.roomNumber := 902
+!R902_L1.numBeds := 1
+!R902_L1.pricePerNight := 155.00
+!R902_L1.occupied := false
+!R902_L1.blocked := false
+
+!new Room('R903_L1')
+!R903_L1.roomNumber := 903
+!R903_L1.numBeds := 1
+!R903_L1.pricePerNight := 155.00
+!R903_L1.occupied := false
+!R903_L1.blocked := false
+
+!new Bill('BL1200450')
+!BL1200450.billId := 1200450
+!BL1200450.price := 1395.00
+
+!new Customer('C36')
+!C36.firstName := 'João'
+!C36.lastName := 'Pereira'
+
+!new Booking('B77111')
+!B77111.bookingId := 77111
+!B77111.startDate := '2026-09-07'
+!B77111.endDate := '2026-09-12'
+!B77111.confirmed := false
+!B77111.canceled := true
+
+!new RoomReservation('RR_J1')
+!RR_J1.checkInDate := '2026-09-07'
+!RR_J1.checkOutDate := '2026-09-10'
+
+!new Room('R120_J1')
+!R120_J1.roomNumber := 120
+!R120_J1.numBeds := 2
+!R120_J1.pricePerNight := 98.00
+!R120_J1.occupied := false
+!R120_J1.blocked := false
+
+!new RoomExtra('J1_1')
+!J1_1.description := 'Bicycle rental (3 days)'
+!J1_1.price := 45.00
+
+!new RoomExtra('J1_2')
+!J1_2.description := 'Pet deep-clean fee (small dog)'
+!J1_2.price := 30.00
+
+!new Bill('BL1200451')
+!BL1200451.billId := 1200451
+!BL1200451.price := 369.00
+
+!new RoomReservation('RR_J2')
+!RR_J2.checkInDate := '2026-09-10'
+!RR_J2.checkOutDate := '2026-09-12'
+
+!new Room('R121_J2')
+!R121_J2.roomNumber := 121
+!R121_J2.numBeds := 2
+!R121_J2.pricePerNight := 98.00
+!R121_J2.occupied := false
+!R121_J2.blocked := true
+
+!new RoomExtra('J2_1')
+!J2_1.description := 'Cancellation/relocation waiver (documented service disruption)'
+!J2_1.price := 0.00
+
+!new Bill('BL1200452')
+!BL1200452.billId := 1200452
+!BL1200452.price := 0.00
+
+!new FreeRoomTypesDTO('D61')
+!D61.roomTypeDescription := 'Einzelzimmer (ruhige Lage) — Innenhof'
+!D61.numBeds := 1
+!D61.pricePerNight := 120.00
+!D61.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('D62')
+!D62.roomTypeDescription := 'Quarto duplo — perto da praia'
+!D62.numBeds := 2
+!D62.pricePerNight := 150.00
+!D62.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D63')
+!D63.roomTypeDescription := 'غرفة عائلية (Family room) — إطلالة مدينة'
+!D63.numBeds := 3
+!D63.pricePerNight := 220.00
+!D63.numFreeRooms := 1
+
+!insert (B77110, C35) into BookingCustomer
+!insert (B77111, C36) into BookingCustomer
+
+!insert (B77110, RR_L1) into BookingRoomReservation
+!insert (B77111, RR_J1) into BookingRoomReservation
+!insert (B77111, RR_J2) into BookingRoomReservation
+
+!insert (RR_L1, R901_L1) into RoomReservationRoom
+!insert (RR_L1, R902_L1) into RoomReservationRoom
+!insert (RR_L1, R903_L1) into RoomReservationRoom
+
+!insert (RR_J1, R120_J1) into RoomReservationRoom
+!insert (RR_J2, R121_J2) into RoomReservationRoom
+
+!insert (RR_J1, J1_1) into RoomReservationExtras
+!insert (RR_J1, J1_2) into RoomReservationExtras
+!insert (RR_J2, J2_1) into RoomReservationExtras
+
+!insert (B77110, BL1200450) into BookingBill
+!insert (B77111, BL1200451) into BookingBill
+!insert (B77111, BL1200452) into BookingBill
+
+!insert (BL1200450, RR_L1) into BillRoomReservation
+!insert (BL1200451, RR_J1) into BillRoomReservation
+!insert (BL1200452, RR_J2) into BillRoomReservation

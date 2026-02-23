@@ -1,0 +1,103 @@
+!new Client('clientC30')
+!clientC30.clientId := 6
+!clientC30.isSuspended := false
+
+!new Client('clientC31')
+!clientC31.clientId := 540
+!clientC31.isSuspended := false
+
+!new Rental('rentalR30')
+!rentalR30.date := Date('2025-01-14')
+
+!new Rental('rentalR31')
+!rentalR31.date := Date('2025-01-16')
+
+!new Rental('rentalR32')
+!rentalR32.date := Date('2025-02-02')
+
+!new Rental('rentalR33')
+!rentalR33.date := Date('2025-03-10')
+
+!new Movie('movieM30')
+!movieM30.title := 'Rainy Season Heist'
+!movieM30.availableCopies := 5
+!movieM30.genre := #Action
+
+!new Movie('movieM31')
+!movieM31.title := 'The Bakery Next Door'
+!movieM31.availableCopies := 2
+!movieM31.genre := #Comedy
+
+!new Movie('movieM32')
+!movieM32.title := 'Kite-Festival Mix-Up'
+!movieM32.availableCopies := 1
+!movieM32.genre := #Comedy
+
+!new Series('seriesS30')
+!seriesS30.title := 'Harbor Radio'
+!seriesS30.availableCopies := 3
+!seriesS30.episode := 8
+
+!new Series('seriesS31')
+!seriesS31.title := 'Harbor Radio'
+!seriesS31.availableCopies := 3
+!seriesS31.episode := 9
+
+!new Actor('actorA30')
+!actorA30.name := 'Anaïs Dubois'
+
+!new Actor('actorA31')
+!actorA31.name := 'Bashir Al-Khatib'
+
+!new Actor('actorA32')
+!actorA32.name := 'Keiko Nakamura'
+
+!new Actor('actorA33')
+!actorA33.name := 'Mateo García'
+
+!new Actor('actorA34')
+!actorA34.name := 'Zola Ndlovu'
+
+!new Actor('actorA35')
+!actorA35.name := 'Sven Larsson'
+
+!new Actor('actorA36')
+!actorA36.name := 'Priya Iyer'
+
+!new Actor('actorA37')
+!actorA37.name := 'Hassan Reza'
+
+!insert (clientC30, rentalR30) into ClientRental
+!insert (clientC30, rentalR31) into ClientRental
+!insert (clientC30, rentalR32) into ClientRental
+!insert (clientC31, rentalR33) into ClientRental
+
+!insert (rentalR30, movieM31) into RentalCassette
+!insert (rentalR30, seriesS30) into RentalCassette
+!insert (rentalR30, movieM30) into RentalCassette
+
+!insert (rentalR31, seriesS31) into RentalCassette
+
+!insert (rentalR32, movieM30) into RentalCassette
+!insert (rentalR32, movieM32) into RentalCassette
+!insert (rentalR32, seriesS30) into RentalCassette
+!insert (rentalR32, seriesS31) into RentalCassette
+
+!insert (rentalR33, movieM31) into RentalCassette
+!insert (rentalR33, movieM32) into RentalCassette
+
+!insert (movieM30, actorA31) into CassetteActor
+!insert (movieM30, actorA35) into CassetteActor
+!insert (movieM30, actorA37) into CassetteActor
+
+!insert (movieM31, actorA30) into CassetteActor
+!insert (movieM31, actorA33) into CassetteActor
+
+!insert (movieM32, actorA36) into CassetteActor
+!insert (movieM32, actorA34) into CassetteActor
+!insert (movieM32, actorA33) into CassetteActor
+
+!insert (seriesS30, actorA32) into CassetteActor
+!insert (seriesS30, actorA37) into CassetteActor
+
+!insert (seriesS31, actorA32) into CassetteActor

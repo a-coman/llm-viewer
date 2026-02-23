@@ -1,0 +1,302 @@
+!new Restaurant('R10')
+!R10.name := 'La Estación Patio'
+
+!new Owner('O23')
+!O23.name := 'Carmen Ruiz'
+!O23.percentageShares := 40
+!insert (R10, O23) into RestaurantOwner
+
+!new Owner('O24')
+!O24.name := 'Thomas Müller'
+!O24.percentageShares := 25
+!insert (R10, O24) into RestaurantOwner
+
+!new Owner('O25')
+!O25.name := 'Giovanni Conti'
+!O25.percentageShares := 20
+!insert (R10, O25) into RestaurantOwner
+
+!new Owner('O26')
+!O26.name := 'Evelyn Carter'
+!O26.percentageShares := 15
+!insert (R10, O26) into RestaurantOwner
+
+!new HeadWaiter('HW10')
+!HW10.name := 'María Fernanda López'
+!HW10.dateOfBirth := Date('1983-12-30')
+!HW10.phoneNumber := '+52 55 5000 1100'
+
+!new Waiter('W20')
+!W20.name := 'Enzo Romano'
+!W20.dateOfBirth := Date('1998-02-03')
+!W20.phoneNumber := '+1 415 500 1101'
+!W20.spokenLanguage := #Italian
+!insert (HW10, W20) into HeadWaiterWaiter
+
+!new Waiter('W21')
+!W21.name := 'Klara Weiss'
+!W21.dateOfBirth := Date('2000-08-19')
+!W21.phoneNumber := '+43 1 500 1102'
+!W21.spokenLanguage := #German
+!insert (HW10, W21) into HeadWaiterWaiter
+
+!new Waiter('W22')
+!W22.name := 'Javier Soto'
+!W22.dateOfBirth := Date('1996-05-07')
+!W22.phoneNumber := '+34 93 500 1103'
+!W22.spokenLanguage := #Spanish
+!insert (HW10, W22) into HeadWaiterWaiter
+
+!new Cook('K14')
+!K14.name := 'Ritu Sharma'
+!K14.dateOfBirth := Date('1989-10-12')
+!K14.phoneNumber := '+44 20 5000 2200'
+!K14.yearsOfExperience := 12
+
+!new Cook('K15')
+!K15.name := 'Aria Mahmoud'
+!K15.dateOfBirth := Date('1990-05-20')
+!K15.phoneNumber := '+44 20 5000 2201'
+!K15.yearsOfExperience := 9
+
+!new Chef('CH17')
+!CH17.name := 'Omar Haddad'
+!CH17.dateOfBirth := Date('1991-03-22')
+!CH17.phoneNumber := '+971 4 500 3301'
+
+!new Chef('CH18')
+!CH18.name := 'Naomi Brooks'
+!CH18.dateOfBirth := Date('1993-07-14')
+!CH18.phoneNumber := '+1 212 500 3302'
+
+!insert (CH17, K14) into ChefCook
+!insert (CH18, K15) into ChefCook
+
+!new Manager('M10')
+!M10.name := 'Peter Johnson'
+!M10.dateOfBirth := Date('1975-01-05')
+!M10.phoneNumber := '+1 312 500 4400'
+
+!new Allergen('A_GLU10')
+!A_GLU10.type := #Gluten
+
+!new Allergen('A_LAC10')
+!A_LAC10.type := #Lactose
+
+!new Allergen('A_SEA10')
+!A_SEA10.type := #Seafood
+
+!new Allergen('A_NUT10')
+!A_NUT10.type := #Nuts
+
+!new FoodItem('F700')
+!F700.number := 200
+!F700.description := 'Wheat flatbread'
+!F700.purchaseFlag := true
+!F700.unit := #Sheet
+!insert (F700, A_GLU10) into FoodItemAllergen
+
+!new FoodItem('F701')
+!F701.number := 201
+!F701.description := 'Greek yogurt'
+!F701.purchaseFlag := true
+!F701.unit := #Ounce
+!insert (F701, A_LAC10) into FoodItemAllergen
+
+!new FoodItem('F702')
+!F702.number := 202
+!F702.description := 'Shrimp (peeled)'
+!F702.purchaseFlag := true
+!F702.unit := #Pound
+!insert (F702, A_SEA10) into FoodItemAllergen
+
+!new FoodItem('F703')
+!F703.number := 203
+!F703.description := 'Pine nuts'
+!F703.purchaseFlag := true
+!F703.unit := #Gram
+!insert (F703, A_NUT10) into FoodItemAllergen
+
+!new FoodItem('F704')
+!F704.number := 204
+!F704.description := 'Spice blend (house-made)'
+!F704.purchaseFlag := false
+!F704.unit := #Gram
+
+!new MenuItem('MI29')
+!MI29.description := 'Shrimp Flatbread with Yogurt Sauce'
+!MI29.prepTime := 14.5
+!MI29.classification := #Main
+!insert (MI29, CH17) into MenuItemChef
+!insert (MI29, F700) into MenuItemFoodItem
+!insert (MI29, F701) into MenuItemFoodItem
+!insert (MI29, F702) into MenuItemFoodItem
+!insert (MI29, F704) into MenuItemFoodItem
+
+!new MenuItem('MI30')
+!MI30.description := 'Pine-Nut Citrus Salad'
+!MI30.prepTime := 6.0
+!MI30.classification := #Apetizer
+!insert (MI30, CH18) into MenuItemChef
+!insert (MI30, F703) into MenuItemFoodItem
+!insert (MI30, F704) into MenuItemFoodItem
+
+!new MenuItem('MI31')
+!MI31.description := 'Sparkling Mineral Water'
+!MI31.prepTime := 0.2
+!MI31.classification := #Beverage
+!insert (MI31, CH18) into MenuItemChef
+
+!new RegularCustomer('C11')
+!C11.name := 'Alessia Venturi'
+!C11.prefferedLanguage := #Italian
+
+!new Banquet('BR10')
+!BR10.number := 9001
+!BR10.date := Date('2026-06-18')
+!BR10.time := Time('20:30')
+!BR10.numberPeople := 25
+!BR10.name := 'S. Delgado'
+!BR10.phoneNumber := '+1 646 500 9001'
+!BR10.groupName := 'Coastal Research Delegation'
+!BR10.paymentMethod := #CreditCard
+!BR10.busService := true
+!insert (BR10, C11) into ReservationCustomer
+!insert (BR10, W20) into ReservationWaiter
+!insert (BR10, W21) into ReservationWaiter
+!insert (BR10, W22) into ReservationWaiter
+
+!new BusDriver('BD11')
+!BD11.name := 'Miguel Herrera'
+!BD11.dateOfBirth := Date('1980-09-01')
+!BD11.phoneNumber := '+1 305 500 7711'
+!BD11.driverLicenseNr := 'FL-HR-558102'
+!insert (BR10, BD11) into BanquetBusDriver
+
+!new BusDriver('BD12')
+!BD12.name := 'Sara Nordin'
+!BD12.dateOfBirth := Date('1987-02-28')
+!BD12.phoneNumber := '+46 8 500 7712'
+!BD12.driverLicenseNr := 'SE-ND-204499'
+!insert (BR10, BD12) into BanquetBusDriver
+
+!new Table('T50_LEP2')
+!T50_LEP2.number := 50
+!T50_LEP2.description := 'Patio two-top A'
+!T50_LEP2.capacity := 2
+!insert (BR10, T50_LEP2) into ReservationTable
+
+!new Table('T51_LEP2')
+!T51_LEP2.number := 51
+!T51_LEP2.description := 'Patio two-top B'
+!T51_LEP2.capacity := 2
+!insert (BR10, T51_LEP2) into ReservationTable
+
+!new Table('T52_LEP2')
+!T52_LEP2.number := 52
+!T52_LEP2.description := 'Patio two-top C'
+!T52_LEP2.capacity := 2
+!insert (BR10, T52_LEP2) into ReservationTable
+
+!new Table('T53_LEP2')
+!T53_LEP2.number := 53
+!T53_LEP2.description := 'Patio two-top D'
+!T53_LEP2.capacity := 2
+!insert (BR10, T53_LEP2) into ReservationTable
+
+!new Table('T54_LEP2')
+!T54_LEP2.number := 54
+!T54_LEP2.description := 'Patio two-top E'
+!T54_LEP2.capacity := 2
+!insert (BR10, T54_LEP2) into ReservationTable
+
+!new Table('T55_LEP2')
+!T55_LEP2.number := 55
+!T55_LEP2.description := 'Patio two-top F'
+!T55_LEP2.capacity := 2
+!insert (BR10, T55_LEP2) into ReservationTable
+
+!new Table('T56_LEP2')
+!T56_LEP2.number := 56
+!T56_LEP2.description := 'Patio two-top G'
+!T56_LEP2.capacity := 2
+!insert (BR10, T56_LEP2) into ReservationTable
+
+!new Table('T57_LEP2')
+!T57_LEP2.number := 57
+!T57_LEP2.description := 'Patio two-top H'
+!T57_LEP2.capacity := 2
+!insert (BR10, T57_LEP2) into ReservationTable
+
+!new Table('T58_LEP2')
+!T58_LEP2.number := 58
+!T58_LEP2.description := 'Patio two-top I'
+!T58_LEP2.capacity := 2
+!insert (BR10, T58_LEP2) into ReservationTable
+
+!new Table('T59_LEP2')
+!T59_LEP2.number := 59
+!T59_LEP2.description := 'Patio two-top J'
+!T59_LEP2.capacity := 2
+!insert (BR10, T59_LEP2) into ReservationTable
+
+!new Table('T60_LEP2')
+!T60_LEP2.number := 60
+!T60_LEP2.description := 'Patio two-top K'
+!T60_LEP2.capacity := 2
+!insert (BR10, T60_LEP2) into ReservationTable
+
+!new Table('T61_LEP2')
+!T61_LEP2.number := 61
+!T61_LEP2.description := 'Patio two-top L'
+!T61_LEP2.capacity := 2
+!insert (BR10, T61_LEP2) into ReservationTable
+
+!new Table('T62_LEP2')
+!T62_LEP2.number := 62
+!T62_LEP2.description := 'Patio single add-on chair'
+!T62_LEP2.capacity := 1
+!insert (BR10, T62_LEP2) into ReservationTable
+
+!new ItemOrder('IO1301')
+!IO1301.time := Time('20:45')
+!insert (BR10, IO1301) into ReservationItemOrdered
+!insert (IO1301, MI30) into ItemOrderMenuItem
+
+!new ItemOrder('IO1302')
+!IO1302.time := Time('21:05')
+!insert (BR10, IO1302) into ReservationItemOrdered
+!insert (IO1302, MI29) into ItemOrderMenuItem
+
+!new ItemOrder('IO1303')
+!IO1303.time := Time('21:07')
+!insert (BR10, IO1303) into ReservationItemOrdered
+!insert (IO1303, MI29) into ItemOrderMenuItem
+
+!new ItemOrder('IO1304')
+!IO1304.time := Time('21:20')
+!insert (BR10, IO1304) into ReservationItemOrdered
+!insert (IO1304, MI31) into ItemOrderMenuItem
+
+!new Individual('IR12')
+!IR12.number := 9002
+!IR12.date := Date('2026-06-18')
+!IR12.time := Time('18:00')
+!IR12.numberPeople := 3
+!IR12.name := 'Walk-in Hold'
+!IR12.phoneNumber := '+1 000 000 0000'
+!IR12.seating := #Patio
+!IR12.smoking := #NonSmoking
+!insert (IR12, W21) into ReservationWaiter
+
+!new Table('T70_LEP2')
+!T70_LEP2.number := 70
+!T70_LEP2.description := 'Patio corner three-top'
+!T70_LEP2.capacity := 3
+!insert (IR12, T70_LEP2) into ReservationTable
+
+!new DietaryRequirement('DR8')
+!DR8.diet := #Halal
+
+!new ReportedAllergy('RA7')
+!RA7.allergen := #Gluten

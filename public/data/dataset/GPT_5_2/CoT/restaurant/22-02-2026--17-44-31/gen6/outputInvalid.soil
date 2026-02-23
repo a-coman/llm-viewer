@@ -1,0 +1,197 @@
+!new Restaurant('R34')
+!R34.name := 'Harbor Spice Kitchen'
+
+!new Owner('O74')
+!O74.name := 'Mei Lin Tan'
+!O74.percentageShares := 51
+!insert (R34, O74) into RestaurantOwner
+
+!new Owner('O75')
+!O75.name := 'Arjun Menon'
+!O75.percentageShares := 49
+!insert (R34, O75) into RestaurantOwner
+
+!new HeadWaiter('HW32')
+!HW32.name := 'Daniel Wong'
+!HW32.dateOfBirth := Date('1986-02-25')
+!HW32.phoneNumber := '+65 8123 4000'
+
+!new Waiter('W71')
+!W71.name := 'Alicia Reyes'
+!W71.dateOfBirth := Date('1998-06-09')
+!W71.phoneNumber := '+65 8123 4001'
+!W71.spokenLanguage := #English
+!insert (HW32, W71) into HeadWaiterWaiter
+
+!new Waiter('W72')
+!W72.name := 'Giorgio Rinaldi'
+!W72.dateOfBirth := Date('1993-12-17')
+!W72.phoneNumber := '+65 8123 4002'
+!W72.spokenLanguage := #Italian
+!insert (HW32, W72) into HeadWaiterWaiter
+
+!new Cook('K53')
+!K53.name := 'Nur Aisyah'
+!K53.dateOfBirth := Date('1981-08-03')
+!K53.phoneNumber := '+65 8123 5000'
+!K53.yearsOfExperience := 5
+
+!new Cook('K54')
+!K54.name := 'Nur Aisyah'
+!K54.dateOfBirth := Date('1981-08-03')
+!K54.phoneNumber := '+65 8123 5000'
+!K54.yearsOfExperience := 5
+
+!new Chef('CH57')
+!CH57.name := 'Wei Jun Lim'
+!CH57.dateOfBirth := Date('1989-04-10')
+!CH57.phoneNumber := '+65 8123 6000'
+!insert (CH57, K53) into ChefCook
+
+!new Chef('CH58')
+!CH58.name := 'Priya Iyer'
+!CH58.dateOfBirth := Date('1990-01-29')
+!CH58.phoneNumber := '+65 8123 6001'
+!insert (CH58, K54) into ChefCook
+
+!new Table('T51_HSK')
+!T51_HSK.number := 51
+!T51_HSK.description := 'Inside two-top by the herb wall'
+!T51_HSK.capacity := 2
+
+!new Table('T52_HSK')
+!T52_HSK.number := 52
+!T52_HSK.description := 'Corner four-top with view of the open kitchen'
+!T52_HSK.capacity := 4
+
+!new RegularCustomer('C36')
+!C36.name := 'Ethan Carter'
+!C36.prefferedLanguage := #English
+
+!new Individual('IR36')
+!IR36.time := Time('18:30')
+!IR36.date := Date('2026-10-18')
+!IR36.numberPeople := 2
+!IR36.name := 'Ethan Carter'
+!IR36.phoneNumber := '+1 415 555 0199'
+!IR36.number := 30021
+!IR36.seating := #Inside
+!IR36.smoking := #NonSmoking
+!insert (R34, IR36) into RestaurantReservation
+!insert (IR36, C36) into ReservationCustomer
+!insert (IR36, W71) into ReservationWaiter
+!insert (IR36, T51_HSK) into ReservationTable
+
+!new Banquet('BR26')
+!BR26.time := Time('20:00')
+!BR26.date := Date('2026-10-18')
+!BR26.numberPeople := 4
+!BR26.name := 'Orchid Studio'
+!BR26.phoneNumber := '+65 6777 1212'
+!BR26.number := 30022
+!BR26.groupName := 'Orchid Studio Project Wrap-up'
+!BR26.paymentMethod := #CreditCard
+!BR26.busService := false
+!insert (R34, BR26) into RestaurantReservation
+!insert (BR26, W71) into ReservationWaiter
+!insert (BR26, W72) into ReservationWaiter
+!insert (BR26, T52_HSK) into ReservationTable
+
+!new Allergen('A6S_HSK')
+!A6S_HSK.type := #Seafood
+
+!new Allergen('A6G_HSK')
+!A6G_HSK.type := #Gluten
+
+!new Allergen('A6N_HSK')
+!A6N_HSK.type := #Nuts
+
+!new Allergen('A6L_HSK')
+!A6L_HSK.type := #Lactose
+
+!new FoodItem('F1501')
+!F1501.number := 610
+!F1501.description := 'Crab meat (fresh)'
+!F1501.purchaseFlag := true
+!F1501.unit := #Pound
+!insert (F1501, A6S_HSK) into FoodItemAllergen
+
+!new FoodItem('F1502')
+!F1502.number := 611
+!F1502.description := 'Wheat linguine'
+!F1502.purchaseFlag := true
+!F1502.unit := #Pound
+!insert (F1502, A6G_HSK) into FoodItemAllergen
+
+!new FoodItem('F1503')
+!F1503.number := 612
+!F1503.description := 'Peanut sambal base'
+!F1503.purchaseFlag := true
+!F1503.unit := #Ounce
+!insert (F1503, A6N_HSK) into FoodItemAllergen
+
+!new FoodItem('F1504')
+!F1504.number := 613
+!F1504.description := 'Heavy cream'
+!F1504.purchaseFlag := true
+!F1504.unit := #Ounce
+!insert (F1504, A6L_HSK) into FoodItemAllergen
+
+!new MenuItem('MI85')
+!MI85.description := 'Chili crab linguine'
+!MI85.prepTime := 22.0
+!MI85.classification := #Main
+!insert (MI85, CH57) into MenuItemChef
+!insert (MI85, F1501) into MenuItemFoodItem
+!insert (MI85, F1502) into MenuItemFoodItem
+
+!new MenuItem('MI86')
+!MI86.description := 'Sambal peanut noodles (small plate)'
+!MI86.prepTime := 12.0
+!MI86.classification := #Apetizer
+!insert (MI86, CH58) into MenuItemChef
+!insert (MI86, F1502) into MenuItemFoodItem
+!insert (MI86, F1503) into MenuItemFoodItem
+
+!new MenuItem('MI87')
+!MI87.description := 'Creamy pandan pot (mini dessert)'
+!MI87.prepTime := 10.0
+!MI87.classification := #Dessert
+!insert (MI87, CH58) into MenuItemChef
+!insert (MI87, F1504) into MenuItemFoodItem
+
+!new MenuItem('MI88')
+!MI88.description := 'Signature Laksa Two-Ways tasting bowl'
+!MI88.prepTime := 18.0
+!MI88.classification := #Main
+!insert (MI88, CH57) into MenuItemChef
+!insert (MI88, CH58) into MenuItemChef
+!insert (MI88, F1501) into MenuItemFoodItem
+!insert (MI88, F1503) into MenuItemFoodItem
+
+!new ItemOrder('IO2606')
+!IO2606.time := Time('18:45')
+!insert (IR36, IO2606) into ReservationItemOrdered
+!insert (IO2606, MI85) into ItemOrderMenuItem
+
+!new ItemOrder('IO2607')
+!IO2607.time := Time('19:10')
+!insert (IR36, IO2607) into ReservationItemOrdered
+!insert (IO2607, MI87) into ItemOrderMenuItem
+
+!new ItemOrder('IO2608')
+!IO2608.time := Time('20:20')
+!insert (BR26, IO2608) into ReservationItemOrdered
+!insert (IO2608, MI88) into ItemOrderMenuItem
+
+!new ItemOrder('IO2609')
+!IO2609.time := Time('20:25')
+!insert (BR26, IO2609) into ReservationItemOrdered
+!insert (IO2609, MI86) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR27')
+!DR27.diet := #Halal
+
+!new ReportedAllergy('RA27')
+!RA27.allergen := #Seafood
+

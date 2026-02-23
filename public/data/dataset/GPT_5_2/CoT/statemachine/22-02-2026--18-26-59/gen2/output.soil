@@ -1,0 +1,427 @@
+!new StateMachine('sm_kyotoTeaCeremony')
+!sm_kyotoTeaCeremony.name := 'kyotoTeaCeremony'
+
+!new State('st_preparing')
+!st_preparing.name := 'preparing'
+
+!insert (sm_kyotoTeaCeremony, st_preparing) into StateMachineContainsStates
+!insert (sm_kyotoTeaCeremony, st_preparing) into StateMachineStartsStates
+
+!new StateMachine('sm_disconnectedArchive')
+!sm_disconnectedArchive.name := 'disconnectedArchive'
+
+!new State('st_da_alpha')
+!st_da_alpha.name := 'alpha'
+!new State('st_da_betaGreek')
+!st_da_betaGreek.name := 'βeta'
+!new State('st_da_cafe')
+!st_da_cafe.name := 'café'
+!new State('st_da_dormant')
+!st_da_dormant.name := 'dormant'
+!new State('st_da_estadoN')
+!st_da_estadoN.name := 'estadoÑ'
+!new State('st_da_arabicMarhala')
+!st_da_arabicMarhala.name := 'مرحلة'
+!new State('st_da_hiraganaAida')
+!st_da_hiraganaAida.name := 'あいだ'
+
+!insert (sm_disconnectedArchive, st_da_alpha) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_betaGreek) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_cafe) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_dormant) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_estadoN) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_arabicMarhala) into StateMachineContainsStates
+!insert (sm_disconnectedArchive, st_da_hiraganaAida) into StateMachineContainsStates
+
+!insert (sm_disconnectedArchive, st_da_dormant) into StateMachineStartsStates
+
+!new StateMachine('sm_solarMicrogridController')
+!sm_solarMicrogridController.name := 'solarMicrogridController'
+
+!new State('st_solar_monitoring')
+!st_solar_monitoring.name := 'monitoring'
+!new State('st_solar_warningIssued')
+!st_solar_warningIssued.name := 'warningIssued'
+!new State('st_solar_sheddingLoads')
+!st_solar_sheddingLoads.name := 'sheddingLoads'
+!new State('st_solar_runningOnBattery')
+!st_solar_runningOnBattery.name := 'runningOnBattery'
+!new State('st_solar_restoringGrid')
+!st_solar_restoringGrid.name := 'restoringGrid'
+!new State('st_solar_maintenanceMode')
+!st_solar_maintenanceMode.name := 'maintenanceMode'
+
+!insert (sm_solarMicrogridController, st_solar_monitoring) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_warningIssued) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_sheddingLoads) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_runningOnBattery) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_restoringGrid) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_maintenanceMode) into StateMachineContainsStates
+
+!insert (sm_solarMicrogridController, st_solar_monitoring) into StateMachineStartsStates
+
+!new Transition('tr_solar_routineSample')
+!tr_solar_routineSample.name := 'routineSample'
+!new Transition('tr_solar_raiseWarning')
+!tr_solar_raiseWarning.name := 'raiseWarning'
+!new Transition('tr_solar_startShedding')
+!tr_solar_startShedding.name := 'startShedding'
+!new Transition('tr_solar_switchToBattery')
+!tr_solar_switchToBattery.name := 'switchToBattery'
+!new Transition('tr_solar_beginRestore')
+!tr_solar_beginRestore.name := 'beginRestore'
+!new Transition('tr_solar_attemptRestoreFromShedding')
+!tr_solar_attemptRestoreFromShedding.name := 'attemptRestoreFromShedding'
+!new Transition('tr_solar_completeRestore')
+!tr_solar_completeRestore.name := 'completeRestore'
+!new Transition('tr_solar_enterMaintenance')
+!tr_solar_enterMaintenance.name := 'enterMaintenance'
+!new Transition('tr_solar_enterMaintenanceFromWarning')
+!tr_solar_enterMaintenanceFromWarning.name := 'enterMaintenanceFromWarning'
+!new Transition('tr_solar_exitMaintenance')
+!tr_solar_exitMaintenance.name := 'exitMaintenance'
+
+!insert (sm_solarMicrogridController, tr_solar_routineSample) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_raiseWarning) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_startShedding) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_switchToBattery) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_beginRestore) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_attemptRestoreFromShedding) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_completeRestore) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_enterMaintenance) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_enterMaintenanceFromWarning) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_exitMaintenance) into StateMachineContainsTransitions
+
+!insert (st_solar_monitoring, tr_solar_routineSample) into StateTransition
+!insert (tr_solar_routineSample, st_solar_monitoring) into TransitionState
+
+!insert (st_solar_monitoring, tr_solar_raiseWarning) into StateTransition
+!insert (tr_solar_raiseWarning, st_solar_warningIssued) into TransitionState
+
+!insert (st_solar_warningIssued, tr_solar_startShedding) into StateTransition
+!insert (tr_solar_startShedding, st_solar_sheddingLoads) into TransitionState
+
+!insert (st_solar_sheddingLoads, tr_solar_switchToBattery) into StateTransition
+!insert (tr_solar_switchToBattery, st_solar_runningOnBattery) into TransitionState
+
+!insert (st_solar_runningOnBattery, tr_solar_beginRestore) into StateTransition
+!insert (tr_solar_beginRestore, st_solar_restoringGrid) into TransitionState
+
+!insert (st_solar_sheddingLoads, tr_solar_attemptRestoreFromShedding) into StateTransition
+!insert (tr_solar_attemptRestoreFromShedding, st_solar_restoringGrid) into TransitionState
+
+!insert (st_solar_restoringGrid, tr_solar_completeRestore) into StateTransition
+!insert (tr_solar_completeRestore, st_solar_monitoring) into TransitionState
+
+!insert (st_solar_monitoring, tr_solar_enterMaintenance) into StateTransition
+!insert (tr_solar_enterMaintenance, st_solar_maintenanceMode) into TransitionState
+
+!insert (st_solar_warningIssued, tr_solar_enterMaintenanceFromWarning) into StateTransition
+!insert (tr_solar_enterMaintenanceFromWarning, st_solar_maintenanceMode) into TransitionState
+
+!insert (st_solar_maintenanceMode, tr_solar_exitMaintenance) into StateTransition
+!insert (tr_solar_exitMaintenance, st_solar_monitoring) into TransitionState
+
+!new TimeEvent('te_solar_t_routineSample')
+!te_solar_t_routineSample.time := 60
+!insert (tr_solar_routineSample, te_solar_t_routineSample) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_raiseWarning')
+!te_solar_t_raiseWarning.time := 15
+!insert (tr_solar_raiseWarning, te_solar_t_raiseWarning) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_startShedding')
+!te_solar_t_startShedding.time := 20
+!insert (tr_solar_startShedding, te_solar_t_startShedding) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_switchToBattery')
+!te_solar_t_switchToBattery.time := 5
+!insert (tr_solar_switchToBattery, te_solar_t_switchToBattery) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_beginRestore')
+!te_solar_t_beginRestore.time := 120
+!insert (tr_solar_beginRestore, te_solar_t_beginRestore) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_attemptRestoreFromShedding')
+!te_solar_t_attemptRestoreFromShedding.time := 90
+!insert (tr_solar_attemptRestoreFromShedding, te_solar_t_attemptRestoreFromShedding) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_completeRestore')
+!te_solar_t_completeRestore.time := 10
+!insert (tr_solar_completeRestore, te_solar_t_completeRestore) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_enterMaintenance')
+!te_solar_t_enterMaintenance.time := 3
+!insert (tr_solar_enterMaintenance, te_solar_t_enterMaintenance) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_enterMaintenanceFromWarning')
+!te_solar_t_enterMaintenanceFromWarning.time := 3
+!insert (tr_solar_enterMaintenanceFromWarning, te_solar_t_enterMaintenanceFromWarning) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_exitMaintenance')
+!te_solar_t_exitMaintenance.time := 5
+!insert (tr_solar_exitMaintenance, te_solar_t_exitMaintenance) into TransitionContainsEvents
+
+!new StateMachine('sm_saoPauloFloodgateControllerSM')
+!sm_saoPauloFloodgateControllerSM.name := 'saoPauloFloodgateControllerSM'
+
+!new State('st_sp_standby')
+!st_sp_standby.name := 'standby'
+!new State('st_sp_sampling')
+!st_sp_sampling.name := 'sampling'
+!new State('st_sp_forecastSync')
+!st_sp_forecastSync.name := 'forecastSync'
+!new State('st_sp_openingGates')
+!st_sp_openingGates.name := 'openingGates'
+!new State('st_sp_holdingOpen')
+!st_sp_holdingOpen.name := 'holdingOpen'
+!new State('st_sp_closingGates')
+!st_sp_closingGates.name := 'closingGates'
+!new State('st_sp_alarm')
+!st_sp_alarm.name := 'alarm'
+!new State('st_sp_manualOverride')
+!st_sp_manualOverride.name := 'manualOverride'
+
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_standby) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_sampling) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_forecastSync) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_openingGates) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_holdingOpen) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_closingGates) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_alarm) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_manualOverride) into StateMachineContainsStates
+
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_standby) into StateMachineStartsStates
+
+!new Transition('tr_sp_wakeForSampling')
+!tr_sp_wakeForSampling.name := 'wakeForSampling'
+!new Transition('tr_sp_syncForecast')
+!tr_sp_syncForecast.name := 'syncForecast'
+!new Transition('tr_sp_evaluateAndReturn')
+!tr_sp_evaluateAndReturn.name := 'evaluateAndReturn'
+!new Transition('tr_sp_initiateOpening')
+!tr_sp_initiateOpening.name := 'initiateOpening'
+!new Transition('tr_sp_completeOpening')
+!tr_sp_completeOpening.name := 'completeOpening'
+!new Transition('tr_sp_holdCyclePulse')
+!tr_sp_holdCyclePulse.name := 'holdCyclePulse'
+!new Transition('tr_sp_startClosing')
+!tr_sp_startClosing.name := 'startClosing'
+!new Transition('tr_sp_completeClosing')
+!tr_sp_completeClosing.name := 'completeClosing'
+!new Transition('tr_sp_sensorFaultToAlarm')
+!tr_sp_sensorFaultToAlarm.name := 'sensorFaultToAlarm'
+!new Transition('tr_sp_motorFaultToAlarm')
+!tr_sp_motorFaultToAlarm.name := 'motorFaultToAlarm'
+!new Transition('tr_sp_stuckGateToAlarm')
+!tr_sp_stuckGateToAlarm.name := 'stuckGateToAlarm'
+!new Transition('tr_sp_escalateToManual')
+!tr_sp_escalateToManual.name := 'escalateToManual'
+!new Transition('tr_sp_manualResetToStandby')
+!tr_sp_manualResetToStandby.name := 'manualResetToStandby'
+
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_wakeForSampling) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_syncForecast) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_evaluateAndReturn) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_initiateOpening) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_completeOpening) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_holdCyclePulse) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_startClosing) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_completeClosing) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_sensorFaultToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_motorFaultToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_stuckGateToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_escalateToManual) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_manualResetToStandby) into StateMachineContainsTransitions
+
+!insert (st_sp_standby, tr_sp_wakeForSampling) into StateTransition
+!insert (tr_sp_wakeForSampling, st_sp_sampling) into TransitionState
+
+!insert (st_sp_sampling, tr_sp_syncForecast) into StateTransition
+!insert (tr_sp_syncForecast, st_sp_forecastSync) into TransitionState
+
+!insert (st_sp_forecastSync, tr_sp_evaluateAndReturn) into StateTransition
+!insert (tr_sp_evaluateAndReturn, st_sp_standby) into TransitionState
+
+!insert (st_sp_forecastSync, tr_sp_initiateOpening) into StateTransition
+!insert (tr_sp_initiateOpening, st_sp_openingGates) into TransitionState
+
+!insert (st_sp_openingGates, tr_sp_completeOpening) into StateTransition
+!insert (tr_sp_completeOpening, st_sp_holdingOpen) into TransitionState
+
+!insert (st_sp_holdingOpen, tr_sp_holdCyclePulse) into StateTransition
+!insert (tr_sp_holdCyclePulse, st_sp_holdingOpen) into TransitionState
+
+!insert (st_sp_holdingOpen, tr_sp_startClosing) into StateTransition
+!insert (tr_sp_startClosing, st_sp_closingGates) into TransitionState
+
+!insert (st_sp_closingGates, tr_sp_completeClosing) into StateTransition
+!insert (tr_sp_completeClosing, st_sp_standby) into TransitionState
+
+!insert (st_sp_sampling, tr_sp_sensorFaultToAlarm) into StateTransition
+!insert (tr_sp_sensorFaultToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_openingGates, tr_sp_motorFaultToAlarm) into StateTransition
+!insert (tr_sp_motorFaultToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_closingGates, tr_sp_stuckGateToAlarm) into StateTransition
+!insert (tr_sp_stuckGateToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_alarm, tr_sp_escalateToManual) into StateTransition
+!insert (tr_sp_escalateToManual, st_sp_manualOverride) into TransitionState
+
+!insert (st_sp_manualOverride, tr_sp_manualResetToStandby) into StateTransition
+!insert (tr_sp_manualResetToStandby, st_sp_standby) into TransitionState
+
+!new TimeEvent('te_sp_FTE1')
+!te_sp_FTE1.time := 15
+!insert (tr_sp_wakeForSampling, te_sp_FTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE2')
+!te_sp_FTE2.time := 3
+!insert (tr_sp_syncForecast, te_sp_FTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE3')
+!te_sp_FTE3.time := 2
+!insert (tr_sp_evaluateAndReturn, te_sp_FTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE4')
+!te_sp_FTE4.time := 1
+!insert (tr_sp_initiateOpening, te_sp_FTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE5')
+!te_sp_FTE5.time := 20
+!insert (tr_sp_completeOpening, te_sp_FTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE6')
+!te_sp_FTE6.time := 10
+!insert (tr_sp_holdCyclePulse, te_sp_FTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE7')
+!te_sp_FTE7.time := 60
+!insert (tr_sp_startClosing, te_sp_FTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE8')
+!te_sp_FTE8.time := 25
+!insert (tr_sp_completeClosing, te_sp_FTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE9')
+!te_sp_FTE9.time := 1
+!insert (tr_sp_sensorFaultToAlarm, te_sp_FTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE10')
+!te_sp_FTE10.time := 1
+!insert (tr_sp_motorFaultToAlarm, te_sp_FTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE11')
+!te_sp_FTE11.time := 1
+!insert (tr_sp_stuckGateToAlarm, te_sp_FTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE12')
+!te_sp_FTE12.time := 120
+!insert (tr_sp_escalateToManual, te_sp_FTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE13')
+!te_sp_FTE13.time := 30
+!insert (tr_sp_manualResetToStandby, te_sp_FTE13) into TransitionContainsEvents
+
+!new State('st_shared_welcome_fix')
+!st_shared_welcome_fix.name := 'welcome'
+
+!new StateMachine('sm_intakeWorkflowTZ_fix')
+!sm_intakeWorkflowTZ_fix.name := 'intakeWorkflowTZ'
+
+!new State('st_intake_chooseLanguage_fix')
+!st_intake_chooseLanguage_fix.name := 'chooseLanguage'
+!new State('st_intake_collectSymptoms_fix')
+!st_intake_collectSymptoms_fix.name := 'collectSymptoms'
+!new State('st_intake_intakeComplete_fix')
+!st_intake_intakeComplete_fix.name := 'intakeComplete'
+
+!insert (sm_intakeWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_chooseLanguage_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_collectSymptoms_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_intakeComplete_fix) into StateMachineContainsStates
+
+!insert (sm_intakeWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineStartsStates
+
+!new Transition('tr_intake_tWelcomeToLanguage_fix')
+!tr_intake_tWelcomeToLanguage_fix.name := 'tWelcomeToLanguage'
+!new Transition('tr_intake_tLanguageToSymptoms_fix')
+!tr_intake_tLanguageToSymptoms_fix.name := 'tLanguageToSymptoms'
+!new Transition('tr_intake_tSymptomsToComplete_fix')
+!tr_intake_tSymptomsToComplete_fix.name := 'tSymptomsToComplete'
+
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tWelcomeToLanguage_fix) into StateMachineContainsTransitions
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tLanguageToSymptoms_fix) into StateMachineContainsTransitions
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tSymptomsToComplete_fix) into StateMachineContainsTransitions
+
+!insert (st_shared_welcome_fix, tr_intake_tWelcomeToLanguage_fix) into StateTransition
+!insert (tr_intake_tWelcomeToLanguage_fix, st_intake_chooseLanguage_fix) into TransitionState
+
+!insert (st_intake_chooseLanguage_fix, tr_intake_tLanguageToSymptoms_fix) into StateTransition
+!insert (tr_intake_tLanguageToSymptoms_fix, st_intake_collectSymptoms_fix) into TransitionState
+
+!insert (st_intake_collectSymptoms_fix, tr_intake_tSymptomsToComplete_fix) into StateTransition
+!insert (tr_intake_tSymptomsToComplete_fix, st_intake_intakeComplete_fix) into TransitionState
+
+!new TimeEvent('te_intake_tWelcomeToLanguage_fix')
+!te_intake_tWelcomeToLanguage_fix.time := 1
+!insert (tr_intake_tWelcomeToLanguage_fix, te_intake_tWelcomeToLanguage_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_intake_tLanguageToSymptoms_fix')
+!te_intake_tLanguageToSymptoms_fix.time := 8
+!insert (tr_intake_tLanguageToSymptoms_fix, te_intake_tLanguageToSymptoms_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_intake_tSymptomsToComplete_fix')
+!te_intake_tSymptomsToComplete_fix.time := 3
+!insert (tr_intake_tSymptomsToComplete_fix, te_intake_tSymptomsToComplete_fix) into TransitionContainsEvents
+
+!new StateMachine('sm_consentWorkflowTZ_fix')
+!sm_consentWorkflowTZ_fix.name := 'consentWorkflowTZ'
+
+!new State('st_consent_showConsent_fix')
+!st_consent_showConsent_fix.name := 'showConsent'
+!new State('st_consent_captureSignature_fix')
+!st_consent_captureSignature_fix.name := 'captureSignature'
+!new State('st_consent_consentComplete_fix')
+!st_consent_consentComplete_fix.name := 'consentComplete'
+
+!insert (sm_consentWorkflowTZ_fix, st_consent_showConsent_fix) into StateMachineContainsStates
+!insert (sm_consentWorkflowTZ_fix, st_consent_captureSignature_fix) into StateMachineContainsStates
+!insert (sm_consentWorkflowTZ_fix, st_consent_consentComplete_fix) into StateMachineContainsStates
+
+!insert (sm_consentWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineStartsStates
+
+!new Transition('tr_consent_tWelcomeToConsent_fix')
+!tr_consent_tWelcomeToConsent_fix.name := 'tWelcomeToConsent'
+!new Transition('tr_consent_tConsentToSignature_fix')
+!tr_consent_tConsentToSignature_fix.name := 'tConsentToSignature'
+!new Transition('tr_consent_tSignatureToComplete_fix')
+!tr_consent_tSignatureToComplete_fix.name := 'tSignatureToComplete'
+
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tWelcomeToConsent_fix) into StateMachineContainsTransitions
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tConsentToSignature_fix) into StateMachineContainsTransitions
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tSignatureToComplete_fix) into StateMachineContainsTransitions
+
+!insert (st_shared_welcome_fix, tr_consent_tWelcomeToConsent_fix) into StateTransition
+!insert (tr_consent_tWelcomeToConsent_fix, st_consent_showConsent_fix) into TransitionState
+
+!insert (st_consent_showConsent_fix, tr_consent_tConsentToSignature_fix) into StateTransition
+!insert (tr_consent_tConsentToSignature_fix, st_consent_captureSignature_fix) into TransitionState
+
+!insert (st_consent_captureSignature_fix, tr_consent_tSignatureToComplete_fix) into StateTransition
+!insert (tr_consent_tSignatureToComplete_fix, st_consent_consentComplete_fix) into TransitionState
+
+!new TimeEvent('te_consent_tWelcomeToConsent_fix')
+!te_consent_tWelcomeToConsent_fix.time := 1
+!insert (tr_consent_tWelcomeToConsent_fix, te_consent_tWelcomeToConsent_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_consent_tConsentToSignature_fix')
+!te_consent_tConsentToSignature_fix.time := 20
+!insert (tr_consent_tConsentToSignature_fix, te_consent_tConsentToSignature_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_consent_tSignatureToComplete_fix')
+!te_consent_tSignatureToComplete_fix.time := 2
+!insert (tr_consent_tSignatureToComplete_fix, te_consent_tSignatureToComplete_fix) into TransitionContainsEvents
+

@@ -1,0 +1,82 @@
+!new Currency('currencyCURA')
+!currencyCURA.name := 'US Dollar'
+!currencyCURA.abbreviation := 'USD'
+
+!new Currency('currencyCURB')
+!currencyCURB.name := 'Universal Service Dollar'
+!currencyCURB.abbreviation := 'USD'
+
+!new Expense('expenseEXPEDGE002')
+!expenseEXPEDGE002.amount := 0.00
+!expenseEXPEDGE002.startDate := Date('2025-12-31')
+!expenseEXPEDGE002.endDate := Date('2025-01-01')
+
+!new Bill('billEXPEDGE002_101')
+!billEXPEDGE002_101.amount := 0.00
+!billEXPEDGE002_101.category := 'Complimentary lounge access (no charge)'
+!billEXPEDGE002_101.date := Date('2025-06-15')
+!billEXPEDGE002_101.paymentMethod := #CREDIT_CARD
+!billEXPEDGE002_101.status := #VALIDATED
+
+!new Bill('billEXPEDGE002_102')
+!billEXPEDGE002_102.amount := 0.00
+!billEXPEDGE002_102.category := 'Receipt placeholder / missing amount'
+!billEXPEDGE002_102.date := Date('2025-06-15')
+!billEXPEDGE002_102.paymentMethod := #CASH
+!billEXPEDGE002_102.status := #DRAFT
+
+!new Bill('billEXPEDGE002_103')
+!billEXPEDGE002_103.amount := 0.00
+!billEXPEDGE002_103.category := 'Transaction refused by vendor (no settlement)'
+!billEXPEDGE002_103.date := Date('2025-06-16')
+!billEXPEDGE002_103.paymentMethod := #CHECK
+!billEXPEDGE002_103.status := #REFUSED
+
+!new Bill('billEXPEDGE002_104')
+!billEXPEDGE002_104.amount := 0.00
+!billEXPEDGE002_104.category := 'Internal voucher issued (non-monetary)'
+!billEXPEDGE002_104.date := Date('2025-06-16')
+!billEXPEDGE002_104.paymentMethod := #CASH
+!billEXPEDGE002_104.status := #PENDING
+
+!new Bill('billEXPEDGE002_105')
+!billEXPEDGE002_105.amount := 0.00
+!billEXPEDGE002_105.category := 'Voucher reversal (net zero)'
+!billEXPEDGE002_105.date := Date('2025-06-17')
+!billEXPEDGE002_105.paymentMethod := #CREDIT_CARD
+!billEXPEDGE002_105.status := #REFUNDED
+
+!insert (expenseEXPEDGE002, billEXPEDGE002_101) into ExpenseContainsBills
+!insert (expenseEXPEDGE002, billEXPEDGE002_102) into ExpenseContainsBills
+!insert (expenseEXPEDGE002, billEXPEDGE002_103) into ExpenseContainsBills
+!insert (expenseEXPEDGE002, billEXPEDGE002_104) into ExpenseContainsBills
+!insert (expenseEXPEDGE002, billEXPEDGE002_105) into ExpenseContainsBills
+
+!insert (billEXPEDGE002_101, currencyCURA) into BillCurrency
+!insert (billEXPEDGE002_102, currencyCURA) into BillCurrency
+!insert (billEXPEDGE002_103, currencyCURA) into BillCurrency
+!insert (billEXPEDGE002_104, currencyCURB) into BillCurrency
+!insert (billEXPEDGE002_105, currencyCURB) into BillCurrency
+
+!new Comment('commentEXPEDGE002_COM101')
+!commentEXPEDGE002_COM101.text := 'All bills are zero by design to stress-test sum invariants and workflow states.'
+
+!new Comment('commentEXPEDGE002_COM102')
+!commentEXPEDGE002_COM102.text := 'Note: two different currencies share abbreviation USD (intentional edge-case for reporting).'
+
+!new Comment('commentEXPEDGE002_COM103')
+!commentEXPEDGE002_COM103.text := '备注：该报销单日期范围反常，但模型未限制。Комментарий: суммы нулевые.'
+
+!insert (expenseEXPEDGE002, commentEXPEDGE002_COM101) into ExpenseComment
+!insert (expenseEXPEDGE002, commentEXPEDGE002_COM102) into ExpenseComment
+!insert (expenseEXPEDGE002, commentEXPEDGE002_COM103) into ExpenseComment
+
+!new Expense('expenseEXPEDGE003')
+!expenseEXPEDGE003.amount := 0.00
+!expenseEXPEDGE003.startDate := Date('1900-01-01')
+!expenseEXPEDGE003.endDate := Date('1900-01-01')
+
+!new Comment('commentEXPEDGE003_COM201')
+!commentEXPEDGE003_COM201.text := 'Empty expense shell created by an integration before bills were imported; valid because amount=0 and there are no bills.'
+
+!insert (expenseEXPEDGE003, commentEXPEDGE003_COM201) into ExpenseComment

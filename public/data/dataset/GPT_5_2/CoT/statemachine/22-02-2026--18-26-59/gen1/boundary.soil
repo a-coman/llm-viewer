@@ -1,0 +1,20 @@
+!new StateMachine('sm_parisMetroTimer')
+!sm_parisMetroTimer.name := 'parisMetroTimer'
+
+!new State('st_depart')
+!st_depart.name := 'départ'
+
+!insert (sm_parisMetroTimer, st_depart) into StateMachineContainsStates
+!insert (sm_parisMetroTimer, st_depart) into StateMachineStartsStates
+
+!new Transition('tr_boucleAttente')
+!tr_boucleAttente.name := 'boucleAttente'
+
+!insert (sm_parisMetroTimer, tr_boucleAttente) into StateMachineContainsTransitions
+
+!insert (st_depart, tr_boucleAttente) into StateTransition
+!insert (tr_boucleAttente, st_depart) into TransitionState
+
+!new TimeEvent('te_t1')
+!te_t1.time := 1
+!insert (tr_boucleAttente, te_t1) into TransitionContainsEvents

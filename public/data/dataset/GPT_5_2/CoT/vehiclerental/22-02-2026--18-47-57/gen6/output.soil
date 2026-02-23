@@ -1,0 +1,675 @@
+!new RentalOffice('RO_SD_9_OC6')
+!RO_SD_9_OC6.name := 'San Diego Airport Commercial Desk'
+!RO_SD_9_OC6.number := 9
+!RO_SD_9_OC6.address := '3225 N Harbor Dr, San Diego, CA 92101, USA'
+
+!new RentalOffice('RO_TUC_33_OC6')
+!RO_TUC_33_OC6.name := 'Tucson Downtown Fleet Center'
+!RO_TUC_33_OC6.number := 33
+!RO_TUC_33_OC6.address := '450 E Congress St, Tucson, AZ 85701, USA'
+
+!new Truck('T_77110_OC6')
+!T_77110_OC6.id := 77110
+!T_77110_OC6.registrationState := #CA
+!T_77110_OC6.licensePlateNumber := 'CA-8HXR219'
+!T_77110_OC6.vehicleTypeCode := #TRUCK10
+!T_77110_OC6.registrationLastMaintenanceDate := Date('2026-06-28')
+!T_77110_OC6.expirationDate := Date('2027-06-30')
+!T_77110_OC6.odometerReading := 55804
+!T_77110_OC6.gasTankCapacity := 35.5
+!T_77110_OC6.workingRadio := true
+!T_77110_OC6.mileage := 14
+
+!new Individual('I_LuisHernandez_OC6')
+!I_LuisHernandez_OC6.name := 'Luis Hernández'
+!I_LuisHernandez_OC6.address := '1090 W Morena Blvd, San Diego, CA 92110, USA'
+!I_LuisHernandez_OC6.poorRisk := false
+!I_LuisHernandez_OC6.homePhone := '+1 (619) 555-0106'
+!I_LuisHernandez_OC6.driverLicenseState := #CA
+!I_LuisHernandez_OC6.driverLicenseNumber := 72840115
+!I_LuisHernandez_OC6.driverLicenseExpirationDate := Date('2028-11-19')
+
+!new Company('C_SolySombra_OC6')
+!C_SolySombra_OC6.name := 'Sol y Sombra Solar, Inc.'
+!C_SolySombra_OC6.address := '2450 Kettner Blvd, San Diego, CA 92101, USA'
+!C_SolySombra_OC6.poorRisk := false
+!C_SolySombra_OC6.idNumber := 6004182
+
+!new RentalAgreement('RA_88001_OC6')
+!RA_88001_OC6.number := 88001
+!RA_88001_OC6.rentalDate := Date('2026-07-15')
+!RA_88001_OC6.anticipatedDuration := 21
+!RA_88001_OC6.depositPaid := 250.0
+!RA_88001_OC6.quotedDailyRate := 119.0
+!RA_88001_OC6.quotedRatePerMile := 0.49
+
+!insert (RO_SD_9_OC6, T_77110_OC6) into RentalOfficeVehicle
+
+!insert (RO_SD_9_OC6, RA_88001_OC6) into RentalOfficeRentalAgreementOrigin
+!insert (RO_TUC_33_OC6, RA_88001_OC6) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_88001_OC6, T_77110_OC6) into RentalAgreementVehicle
+
+!insert (RA_88001_OC6, I_LuisHernandez_OC6) into RentalAgreementCustomer
+!insert (RA_88001_OC6, C_SolySombra_OC6) into RentalAgreementCustomer
+
+!new RentalOffice('RO_800')
+!RO_800.name := 'Sunset Blvd Rentals'
+!RO_800.number := 800
+!RO_800.address := '800 Sunset Blvd, Los Angeles, CA'
+
+!new RentalOffice('RO_801')
+!RO_801.name := 'Riverfront Pickup'
+!RO_801.number := 801
+!RO_801.address := '801 Riverside Dr, Hartford, CT'
+
+!new RentalOffice('RO_802')
+!RO_802.name := 'Old Port Counter'
+!RO_802.number := 802
+!RO_802.address := '802 Market St, Wilmington, DE'
+
+!new RentalOffice('RO_803')
+!RO_803.name := 'Causeway Returns'
+!RO_803.number := 803
+!RO_803.address := '803 Bayshore Dr, Miami, FL'
+
+!new RentalOffice('RO_804')
+!RO_804.name := 'High Plains Service Desk'
+!RO_804.number := 804
+!RO_804.address := '804 16th St, Denver, CO'
+
+!new Vehicle('V_800')
+!V_800.id := 800
+!V_800.registrationState := #CA
+!V_800.licensePlateNumber := 'CA-OPEN-0800'
+!V_800.vehicleTypeCode := #OPEN_TRAILER
+!V_800.registrationLastMaintenanceDate := Date('2026-01-10')
+!V_800.expirationDate := Date('2027-01-10')
+
+!new Vehicle('V_801')
+!V_801.id := 801
+!V_801.registrationState := #CT
+!V_801.licensePlateNumber := 'CT-COV-0801'
+!V_801.vehicleTypeCode := #COVERED_TRAILER
+!V_801.registrationLastMaintenanceDate := Date('2025-12-31')
+!V_801.expirationDate := Date('2026-12-31')
+
+!new Vehicle('V_802')
+!V_802.id := 802
+!V_802.registrationState := #DE
+!V_802.licensePlateNumber := 'DE-OPEN-0802'
+!V_802.vehicleTypeCode := #OPEN_TRAILER
+!V_802.registrationLastMaintenanceDate := Date('2026-02-01')
+!V_802.expirationDate := Date('2026-02-02')
+
+!new Vehicle('V_803')
+!V_803.id := 803
+!V_803.registrationState := #FL
+!V_803.licensePlateNumber := 'FL-COV-0803'
+!V_803.vehicleTypeCode := #COVERED_TRAILER
+!V_803.registrationLastMaintenanceDate := Date('2026-03-15')
+!V_803.expirationDate := Date('2028-03-15')
+
+!new Truck('T_804')
+!T_804.id := 804
+!T_804.registrationState := #CO
+!T_804.licensePlateNumber := 'CO-TRK-0804'
+!T_804.vehicleTypeCode := #TRUCK24
+!T_804.registrationLastMaintenanceDate := Date('2026-01-01')
+!T_804.expirationDate := Date('2026-01-02')
+!T_804.odometerReading := 0
+!T_804.gasTankCapacity := 0.0
+!T_804.workingRadio := false
+!T_804.mileage := 0
+
+!new Individual('I_800')
+!I_800.name := 'Chloé Martin'
+!I_800.address := '10 Vine St, Los Angeles, CA'
+!I_800.poorRisk := false
+!I_800.homePhone := '+1-213-555-0800'
+!I_800.driverLicenseState := #CA
+!I_800.driverLicenseNumber := 80001
+!I_800.driverLicenseExpirationDate := Date('2029-11-30')
+
+!new Individual('I_801')
+!I_801.name := 'DeShawn Carter'
+!I_801.address := '22 Pearl St, Hartford, CT'
+!I_801.poorRisk := true
+!I_801.homePhone := '+1-860-555-0801'
+!I_801.driverLicenseState := #CT
+!I_801.driverLicenseNumber := 80101
+!I_801.driverLicenseExpirationDate := Date('2026-12-31')
+
+!new Company('C_802')
+!C_802.name := 'Mercado y Mar LLC'
+!C_802.address := '5 Wharf Rd, Wilmington, DE'
+!C_802.poorRisk := false
+!C_802.idNumber := 802
+
+!new Company('C_803')
+!C_803.name := 'Sundial Event Supply, Inc.'
+!C_803.address := '803 Brickell Ave, Miami, FL'
+!C_803.poorRisk := false
+!C_803.idNumber := 803
+
+!new Individual('I_804')
+!I_804.name := 'Nguyễn Minh'
+!I_804.address := '99 Colfax Ave, Denver, CO'
+!I_804.poorRisk := false
+!I_804.homePhone := '+1-303-555-0804'
+!I_804.driverLicenseState := #CO
+!I_804.driverLicenseNumber := 80401
+!I_804.driverLicenseExpirationDate := Date('2031-05-01')
+
+!new RentalAgreement('RA_8000')
+!RA_8000.number := 8000
+!RA_8000.rentalDate := Date('2026-04-01')
+!RA_8000.anticipatedDuration := 0
+!RA_8000.depositPaid := 0.0
+!RA_8000.quotedDailyRate := 0.0
+!RA_8000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_8001')
+!RA_8001.number := 8001
+!RA_8001.rentalDate := Date('2026-04-02')
+!RA_8001.anticipatedDuration := 2147483647
+!RA_8001.depositPaid := 0.01
+!RA_8001.quotedDailyRate := 1.0
+!RA_8001.quotedRatePerMile := 9999.99
+
+!new RentalAgreement('RA_8002')
+!RA_8002.number := 8002
+!RA_8002.rentalDate := Date('2026-02-02')
+!RA_8002.anticipatedDuration := 1
+!RA_8002.depositPaid := 500.0
+!RA_8002.quotedDailyRate := 0.0
+!RA_8002.quotedRatePerMile := 0.5
+
+!new RentalAgreement('RA_8003')
+!RA_8003.number := 8003
+!RA_8003.rentalDate := Date('2026-04-03')
+!RA_8003.anticipatedDuration := 2
+!RA_8003.depositPaid := 0.0
+!RA_8003.quotedDailyRate := 250.0
+!RA_8003.quotedRatePerMile := 0.0
+
+!insert (RO_800, V_800) into RentalOfficeVehicle
+!insert (RO_801, V_801) into RentalOfficeVehicle
+!insert (RO_802, V_802) into RentalOfficeVehicle
+!insert (RO_803, V_803) into RentalOfficeVehicle
+!insert (RO_804, T_804) into RentalOfficeVehicle
+
+!insert (RO_800, RA_8000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801, RA_8001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_802, RA_8002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_803, RA_8003) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_800, RA_8000) into RentalOfficeRentalAgreementDrop
+!insert (RO_803, RA_8001) into RentalOfficeRentalAgreementDrop
+!insert (RO_801, RA_8002) into RentalOfficeRentalAgreementDrop
+!insert (RO_802, RA_8003) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_8000, V_800) into RentalAgreementVehicle
+!insert (RA_8001, V_801) into RentalAgreementVehicle
+!insert (RA_8002, V_802) into RentalAgreementVehicle
+!insert (RA_8003, V_803) into RentalAgreementVehicle
+
+!insert (RA_8000, I_800) into RentalAgreementCustomer
+!insert (RA_8001, I_801) into RentalAgreementCustomer
+!insert (RA_8002, C_802) into RentalAgreementCustomer
+!insert (RA_8003, C_803) into RentalAgreementCustomer
+
+!new RentalOffice('RO50_EC6')
+!RO50_EC6.name := 'One-Stop Micro Branch'
+!RO50_EC6.number := 50
+!RO50_EC6.address := '50 Union Sq, Wilmington, DE 19801 (single counter for pickup/return)'
+
+!new Truck('V500_EC6')
+!V500_EC6.id := 500
+!V500_EC6.registrationState := #DE
+!V500_EC6.licensePlateNumber := 'DE-ONLYOFFICE-500-XXXXXXXXXXXXXXXX'
+!V500_EC6.vehicleTypeCode := #TRUCK
+!V500_EC6.registrationLastMaintenanceDate := Date('2026-01-01+14:00')
+!V500_EC6.expirationDate := Date('2026-01-01-12:00')
+!V500_EC6.odometerReading := 0
+!V500_EC6.gasTankCapacity := 0.0
+!V500_EC6.workingRadio := false
+!V500_EC6.mileage := 0
+
+!new Vehicle('V501_EC6')
+!V501_EC6.id := 501
+!V501_EC6.registrationState := #FL
+!V501_EC6.licensePlateNumber := 'FL-TRAIL-501'
+!V501_EC6.vehicleTypeCode := #COVERED_TRAILER
+!V501_EC6.registrationLastMaintenanceDate := Date('1990-05-20')
+!V501_EC6.expirationDate := Date('2099-12-31')
+
+!new Individual('I50_EC6')
+!I50_EC6.name := 'Oumar Ndiaye'
+!I50_EC6.address := 'c/o One-Stop Micro Branch, 50 Union Sq, Wilmington, DE 19801'
+!I50_EC6.poorRisk := false
+!I50_EC6.homePhone := '+1 302 555 0150'
+!I50_EC6.driverLicenseState := #DE
+!I50_EC6.driverLicenseNumber := 2147483647
+!I50_EC6.driverLicenseExpirationDate := Date('2026-12-31T23:59:60Z')
+
+!new Company('C50_EC6')
+!C50_EC6.name := 'Apex Zero-Day Shipping, Inc.'
+!C50_EC6.address := '1 Warehouse Loop, Orlando, FL 32827'
+!C50_EC6.poorRisk := true
+!C50_EC6.idNumber := 50
+
+!new Company('C51_EC6')
+!C51_EC6.name := 'Silent Ledger Ltd.'
+!C51_EC6.address := 'PO Box 501, Wilmington, DE 19899'
+!C51_EC6.poorRisk := false
+!C51_EC6.idNumber := 0
+
+!new RentalAgreement('RA500_EC6')
+!RA500_EC6.number := -500
+!RA500_EC6.rentalDate := Date('2026-01-01+14:00')
+!RA500_EC6.anticipatedDuration := -1
+!RA500_EC6.depositPaid := 0.0
+!RA500_EC6.quotedDailyRate := 0.0
+!RA500_EC6.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA501_EC6')
+!RA501_EC6.number := 501
+!RA501_EC6.rentalDate := Date('2026-12-31T23:59:60Z')
+!RA501_EC6.anticipatedDuration := 0
+!RA501_EC6.depositPaid := 9999999999.99
+!RA501_EC6.quotedDailyRate := 0.0000000001
+!RA501_EC6.quotedRatePerMile := 123456789.123456
+
+!insert (RO50_EC6, V500_EC6) into RentalOfficeVehicle
+!insert (RO50_EC6, V501_EC6) into RentalOfficeVehicle
+
+!insert (RO50_EC6, RA500_EC6) into RentalOfficeRentalAgreementOrigin
+!insert (RO50_EC6, RA501_EC6) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO50_EC6, RA500_EC6) into RentalOfficeRentalAgreementDrop
+!insert (RO50_EC6, RA501_EC6) into RentalOfficeRentalAgreementDrop
+
+!insert (RA500_EC6, V500_EC6) into RentalAgreementVehicle
+!insert (RA501_EC6, V501_EC6) into RentalAgreementVehicle
+
+!insert (RA500_EC6, I50_EC6) into RentalAgreementCustomer
+!insert (RA501_EC6, C50_EC6) into RentalAgreementCustomer
+
+!new RentalOffice('RO_501_FC')
+!RO_501_FC.name := 'High Plains Rental Yard – Fort Collins'
+!RO_501_FC.number := 501
+!RO_501_FC.address := '2400 S College Ave, Fort Collins, CO 80525, USA'
+
+!new RentalOffice('RO_502_BP')
+!RO_502_BP.name := 'Seaside Counter – Bridgeport Ferry Terminal'
+!RO_502_BP.number := 502
+!RO_502_BP.address := '1 Ferry Access Rd, Bridgeport, CT 06604, USA'
+
+!new Truck('V_20010')
+!V_20010.id := 20010
+!V_20010.registrationState := #CO
+!V_20010.licensePlateNumber := 'CO-HP-82010'
+!V_20010.vehicleTypeCode := #TRUCK24
+!V_20010.registrationLastMaintenanceDate := Date('2026-03-02')
+!V_20010.expirationDate := Date('2026-12-15')
+!V_20010.odometerReading := 41875
+!V_20010.gasTankCapacity := 29.8
+!V_20010.workingRadio := true
+!V_20010.mileage := 16
+
+!new Vehicle('V_20011')
+!V_20011.id := 20011
+!V_20011.registrationState := #CO
+!V_20011.licensePlateNumber := 'CO-TRL-20011'
+!V_20011.vehicleTypeCode := #OPEN_TRAILER
+!V_20011.registrationLastMaintenanceDate := Date('2025-10-30')
+!V_20011.expirationDate := Date('2026-10-30')
+
+!new Vehicle('V_20012')
+!V_20012.id := 20012
+!V_20012.registrationState := #AL
+!V_20012.licensePlateNumber := 'AL-COV-7740'
+!V_20012.vehicleTypeCode := #COVERED_TRAILER
+!V_20012.registrationLastMaintenanceDate := Date('2026-01-19')
+!V_20012.expirationDate := Date('2027-01-31')
+
+!new Individual('CUST_I_240')
+!CUST_I_240.name := 'Søren Nielsen'
+!CUST_I_240.address := '33 Fairfield Ave, Bridgeport, CT 06604, USA'
+!CUST_I_240.poorRisk := false
+!CUST_I_240.homePhone := '+1-203-555-0133'
+!CUST_I_240.driverLicenseState := #CT
+!CUST_I_240.driverLicenseNumber := 31077244
+!CUST_I_240.driverLicenseExpirationDate := Date('2027-08-01')
+
+!new Company('CUST_C_241')
+!CUST_C_241.name := 'La Estrella Catering & Events, LLC'
+!CUST_C_241.address := '1450 Larimer St, Denver, CO 80202, USA'
+!CUST_C_241.poorRisk := true
+!CUST_C_241.idNumber := 24190066
+
+!new RentalAgreement('RA_50100')
+!RA_50100.number := 50100
+!RA_50100.rentalDate := Date('2026-07-08')
+!RA_50100.anticipatedDuration := 6
+!RA_50100.depositPaid := 850.0
+!RA_50100.quotedDailyRate := 175.0
+!RA_50100.quotedRatePerMile := 0.58
+
+!new RentalAgreement('RA_50101')
+!RA_50101.number := 50101
+!RA_50101.rentalDate := Date('2026-07-15')
+!RA_50101.anticipatedDuration := 2
+!RA_50101.depositPaid := 50.0
+!RA_50101.quotedDailyRate := 29.0
+!RA_50101.quotedRatePerMile := 0.12
+
+!insert (RO_501_FC, V_20010) into RentalOfficeVehicle
+!insert (RO_501_FC, V_20011) into RentalOfficeVehicle
+!insert (RO_501_FC, V_20012) into RentalOfficeVehicle
+
+!insert (RO_502_BP, RA_50100) into RentalOfficeRentalAgreementOrigin
+!insert (RO_502_BP, RA_50101) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_501_FC, RA_50100) into RentalOfficeRentalAgreementDrop
+!insert (RO_502_BP, RA_50101) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_50100, V_20010) into RentalAgreementVehicle
+!insert (RA_50101, V_20011) into RentalAgreementVehicle
+
+!insert (RA_50100, CUST_C_241) into RentalAgreementCustomer
+!insert (RA_50101, CUST_I_240) into RentalAgreementCustomer
+
+!new RentalOffice('RO_801_NL_CX6')
+!RO_801_NL_CX6.name := 'Thames River Truck & Trailer Rental — New London'
+!RO_801_NL_CX6.number := 801
+!RO_801_NL_CX6.address := '160 Bank St, New London, CT 06320'
+
+!new Truck('T_12001_CX6')
+!T_12001_CX6.id := 12001
+!T_12001_CX6.registrationState := #CT
+!T_12001_CX6.licensePlateNumber := 'CT 8KM-1442'
+!T_12001_CX6.vehicleTypeCode := #TRUCK24
+!T_12001_CX6.registrationLastMaintenanceDate := Date('2026-01-11')
+!T_12001_CX6.expirationDate := Date('2027-01-31')
+!T_12001_CX6.odometerReading := 178440
+!T_12001_CX6.gasTankCapacity := 44.0
+!T_12001_CX6.workingRadio := true
+!T_12001_CX6.mileage := 8
+
+!new Truck('T_12002_CX6')
+!T_12002_CX6.id := 12002
+!T_12002_CX6.registrationState := #DE
+!T_12002_CX6.licensePlateNumber := 'DE 5H-9920'
+!T_12002_CX6.vehicleTypeCode := #TRUCK10
+!T_12002_CX6.registrationLastMaintenanceDate := Date('2026-02-03')
+!T_12002_CX6.expirationDate := Date('2027-02-28')
+!T_12002_CX6.odometerReading := 62155
+!T_12002_CX6.gasTankCapacity := 28.5
+!T_12002_CX6.workingRadio := false
+!T_12002_CX6.mileage := 14
+
+!new Truck('T_12003_CX6')
+!T_12003_CX6.id := 12003
+!T_12003_CX6.registrationState := #FL
+!T_12003_CX6.licensePlateNumber := 'FL HZN-203'
+!T_12003_CX6.vehicleTypeCode := #TRUCK
+!T_12003_CX6.registrationLastMaintenanceDate := Date('2026-03-06')
+!T_12003_CX6.expirationDate := Date('2027-03-31')
+!T_12003_CX6.odometerReading := 90512
+!T_12003_CX6.gasTankCapacity := 35.0
+!T_12003_CX6.workingRadio := true
+!T_12003_CX6.mileage := 12
+
+!new Vehicle('V_12101_CX6')
+!V_12101_CX6.id := 12101
+!V_12101_CX6.registrationState := #CT
+!V_12101_CX6.licensePlateNumber := 'CT TR-7701'
+!V_12101_CX6.vehicleTypeCode := #COVERED_TRAILER
+!V_12101_CX6.registrationLastMaintenanceDate := Date('2025-12-20')
+!V_12101_CX6.expirationDate := Date('2026-12-31')
+
+!new Vehicle('V_12102_CX6')
+!V_12102_CX6.id := 12102
+!V_12102_CX6.registrationState := #CA
+!V_12102_CX6.licensePlateNumber := 'CA 3LKT609'
+!V_12102_CX6.vehicleTypeCode := #OPEN_TRAILER
+!V_12102_CX6.registrationLastMaintenanceDate := Date('2026-01-05')
+!V_12102_CX6.expirationDate := Date('2027-01-31')
+
+!new Vehicle('V_12103_CX6')
+!V_12103_CX6.id := 12103
+!V_12103_CX6.registrationState := #CO
+!V_12103_CX6.licensePlateNumber := 'CO CT-4490'
+!V_12103_CX6.vehicleTypeCode := #COVERED_TRAILER
+!V_12103_CX6.registrationLastMaintenanceDate := Date('2025-11-02')
+!V_12103_CX6.expirationDate := Date('2026-11-30')
+
+!new Vehicle('V_12104_CX6')
+!V_12104_CX6.id := 12104
+!V_12104_CX6.registrationState := #DE
+!V_12104_CX6.licensePlateNumber := 'DE OT-6612'
+!V_12104_CX6.vehicleTypeCode := #OPEN_TRAILER
+!V_12104_CX6.registrationLastMaintenanceDate := Date('2026-02-18')
+!V_12104_CX6.expirationDate := Date('2027-02-28')
+
+!new Individual('CUST_I_51_CX6')
+!CUST_I_51_CX6.name := 'Linh Trần'
+!CUST_I_51_CX6.address := '22 Broad St, New London, CT 06320'
+!CUST_I_51_CX6.poorRisk := false
+!CUST_I_51_CX6.homePhone := '+1-860-555-0101'
+!CUST_I_51_CX6.driverLicenseState := #CT
+!CUST_I_51_CX6.driverLicenseNumber := 51022017
+!CUST_I_51_CX6.driverLicenseExpirationDate := Date('2028-05-30')
+
+!new Individual('CUST_I_52_CX6')
+!CUST_I_52_CX6.name := 'Derek O’Connell'
+!CUST_I_52_CX6.address := '9 Ocean Ave, Groton, CT 06340'
+!CUST_I_52_CX6.poorRisk := true
+!CUST_I_52_CX6.homePhone := '+1-860-555-0184'
+!CUST_I_52_CX6.driverLicenseState := #CT
+!CUST_I_52_CX6.driverLicenseNumber := 77290110
+!CUST_I_52_CX6.driverLicenseExpirationDate := Date('2026-08-21')
+
+!new Individual('CUST_I_53_CX6')
+!CUST_I_53_CX6.name := 'Samira El-Amin'
+!CUST_I_53_CX6.address := '145 State St, New London, CT 06320'
+!CUST_I_53_CX6.poorRisk := false
+!CUST_I_53_CX6.homePhone := '+1-860-555-0155'
+!CUST_I_53_CX6.driverLicenseState := #DE
+!CUST_I_53_CX6.driverLicenseNumber := 66031492
+!CUST_I_53_CX6.driverLicenseExpirationDate := Date('2027-12-09')
+
+!new Company('CUST_C_51_CX6')
+!CUST_C_51_CX6.name := 'Soundview Maritime Services, Inc.'
+!CUST_C_51_CX6.address := '400 Water St, New London, CT 06320'
+!CUST_C_51_CX6.poorRisk := false
+!CUST_C_51_CX6.idNumber := 80134011
+
+!new Company('CUST_C_52_CX6')
+!CUST_C_52_CX6.name := 'Northeast Salvage & Cleanout Co.'
+!CUST_C_52_CX6.address := '18 Fort Hill Rd, Groton, CT 06340'
+!CUST_C_52_CX6.poorRisk := true
+!CUST_C_52_CX6.idNumber := 80199070
+
+!new RentalAgreement('RA_120901')
+!RA_120901.number := 120901
+!RA_120901.rentalDate := Date('2026-03-20')
+!RA_120901.anticipatedDuration := 1
+!RA_120901.depositPaid := 120.0
+!RA_120901.quotedDailyRate := 35.0
+!RA_120901.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120902')
+!RA_120902.number := 120902
+!RA_120902.rentalDate := Date('2026-03-22')
+!RA_120902.anticipatedDuration := 3
+!RA_120902.depositPaid := 700.0
+!RA_120902.quotedDailyRate := 210.0
+!RA_120902.quotedRatePerMile := 1.05
+
+!new RentalAgreement('RA_120903')
+!RA_120903.number := 120903
+!RA_120903.rentalDate := Date('2026-03-25')
+!RA_120903.anticipatedDuration := 2
+!RA_120903.depositPaid := 250.0
+!RA_120903.quotedDailyRate := 89.0
+!RA_120903.quotedRatePerMile := 0.72
+
+!new RentalAgreement('RA_120904')
+!RA_120904.number := 120904
+!RA_120904.rentalDate := Date('2026-03-28')
+!RA_120904.anticipatedDuration := 2
+!RA_120904.depositPaid := 500.0
+!RA_120904.quotedDailyRate := 175.0
+!RA_120904.quotedRatePerMile := 0.95
+
+!new RentalAgreement('RA_120905')
+!RA_120905.number := 120905
+!RA_120905.rentalDate := Date('2026-03-29')
+!RA_120905.anticipatedDuration := 1
+!RA_120905.depositPaid := 90.0
+!RA_120905.quotedDailyRate := 30.0
+!RA_120905.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120906')
+!RA_120906.number := 120906
+!RA_120906.rentalDate := Date('2026-04-02')
+!RA_120906.anticipatedDuration := 4
+!RA_120906.depositPaid := 0.0
+!RA_120906.quotedDailyRate := 28.0
+!RA_120906.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120907')
+!RA_120907.number := 120907
+!RA_120907.rentalDate := Date('2026-04-06')
+!RA_120907.anticipatedDuration := 2
+!RA_120907.depositPaid := 140.0
+!RA_120907.quotedDailyRate := 34.0
+!RA_120907.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120908')
+!RA_120908.number := 120908
+!RA_120908.rentalDate := Date('2026-04-10')
+!RA_120908.anticipatedDuration := 3
+!RA_120908.depositPaid := 900.0
+!RA_120908.quotedDailyRate := 195.0
+!RA_120908.quotedRatePerMile := 1.1
+
+!new RentalAgreement('RA_120909')
+!RA_120909.number := 120909
+!RA_120909.rentalDate := Date('2026-04-12')
+!RA_120909.anticipatedDuration := 1
+!RA_120909.depositPaid := 60.0
+!RA_120909.quotedDailyRate := 22.0
+!RA_120909.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120910')
+!RA_120910.number := 120910
+!RA_120910.rentalDate := Date('2026-04-15')
+!RA_120910.anticipatedDuration := 2
+!RA_120910.depositPaid := 650.0
+!RA_120910.quotedDailyRate := 205.0
+!RA_120910.quotedRatePerMile := 1.0
+
+!new RentalAgreement('RA_120911')
+!RA_120911.number := 120911
+!RA_120911.rentalDate := Date('2026-04-18')
+!RA_120911.anticipatedDuration := 5
+!RA_120911.depositPaid := 300.0
+!RA_120911.quotedDailyRate := 92.0
+!RA_120911.quotedRatePerMile := 0.68
+
+!new RentalAgreement('RA_120912')
+!RA_120912.number := 120912
+!RA_120912.rentalDate := Date('2026-04-21')
+!RA_120912.anticipatedDuration := 2
+!RA_120912.depositPaid := 110.0
+!RA_120912.quotedDailyRate := 27.0
+!RA_120912.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120913')
+!RA_120913.number := 120913
+!RA_120913.rentalDate := Date('2026-04-25')
+!RA_120913.anticipatedDuration := 1
+!RA_120913.depositPaid := 85.0
+!RA_120913.quotedDailyRate := 29.0
+!RA_120913.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_120914')
+!RA_120914.number := 120914
+!RA_120914.rentalDate := Date('2026-04-28')
+!RA_120914.anticipatedDuration := 3
+!RA_120914.depositPaid := 450.0
+!RA_120914.quotedDailyRate := 160.0
+!RA_120914.quotedRatePerMile := 0.9
+
+!insert (RO_801_NL_CX6, T_12001_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, T_12002_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, T_12003_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, V_12101_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, V_12102_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, V_12103_CX6) into RentalOfficeVehicle
+!insert (RO_801_NL_CX6, V_12104_CX6) into RentalOfficeVehicle
+
+!insert (RO_801_NL_CX6, RA_120901) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120902) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120903) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120904) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120905) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120906) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120907) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120908) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120909) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120910) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120911) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120912) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120913) into RentalOfficeRentalAgreementOrigin
+!insert (RO_801_NL_CX6, RA_120914) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_801_NL_CX6, RA_120901) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120902) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120903) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120904) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120905) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120906) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120907) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120908) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120909) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120910) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120911) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120912) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120913) into RentalOfficeRentalAgreementDrop
+!insert (RO_801_NL_CX6, RA_120914) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_120901, V_12102_CX6) into RentalAgreementVehicle
+!insert (RA_120902, T_12001_CX6) into RentalAgreementVehicle
+!insert (RA_120903, T_12002_CX6) into RentalAgreementVehicle
+!insert (RA_120904, T_12003_CX6) into RentalAgreementVehicle
+!insert (RA_120905, V_12104_CX6) into RentalAgreementVehicle
+!insert (RA_120906, V_12102_CX6) into RentalAgreementVehicle
+!insert (RA_120907, V_12103_CX6) into RentalAgreementVehicle
+!insert (RA_120908, T_12001_CX6) into RentalAgreementVehicle
+!insert (RA_120909, V_12101_CX6) into RentalAgreementVehicle
+!insert (RA_120910, T_12001_CX6) into RentalAgreementVehicle
+!insert (RA_120911, T_12002_CX6) into RentalAgreementVehicle
+!insert (RA_120912, V_12104_CX6) into RentalAgreementVehicle
+!insert (RA_120913, V_12102_CX6) into RentalAgreementVehicle
+!insert (RA_120914, T_12003_CX6) into RentalAgreementVehicle
+
+!insert (RA_120901, CUST_I_51_CX6) into RentalAgreementCustomer
+!insert (RA_120902, CUST_C_51_CX6) into RentalAgreementCustomer
+!insert (RA_120903, CUST_I_53_CX6) into RentalAgreementCustomer
+!insert (RA_120904, CUST_C_52_CX6) into RentalAgreementCustomer
+!insert (RA_120905, CUST_I_52_CX6) into RentalAgreementCustomer
+!insert (RA_120906, CUST_C_51_CX6) into RentalAgreementCustomer
+!insert (RA_120907, CUST_I_51_CX6) into RentalAgreementCustomer
+!insert (RA_120908, CUST_C_52_CX6) into RentalAgreementCustomer
+!insert (RA_120909, CUST_I_53_CX6) into RentalAgreementCustomer
+!insert (RA_120910, CUST_I_52_CX6) into RentalAgreementCustomer
+!insert (RA_120911, CUST_C_51_CX6) into RentalAgreementCustomer
+!insert (RA_120912, CUST_C_52_CX6) into RentalAgreementCustomer
+!insert (RA_120913, CUST_I_52_CX6) into RentalAgreementCustomer
+!insert (RA_120914, CUST_I_51_CX6) into RentalAgreementCustomer
+

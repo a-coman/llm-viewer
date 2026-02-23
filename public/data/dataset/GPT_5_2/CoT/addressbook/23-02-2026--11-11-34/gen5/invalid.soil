@@ -1,0 +1,85 @@
+!new AddressBook('AB6_RaoKhan_WeddingPlanning_1')
+
+!new Person('P_AB6_Ananya_1')
+!P_AB6_Ananya_1.name := 'Ananya Rao'
+!P_AB6_Ananya_1.title := 'Ms.'
+!P_AB6_Ananya_1.phone := '+91 98450 11223'
+!P_AB6_Ananya_1.website := 'https://ananya-rao.example.in'
+!P_AB6_Ananya_1.email := 'ananya.rao@example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, P_AB6_Ananya_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB6_AD60_1')
+!Addr_AB6_AD60_1.city := 'Bengaluru'
+!Addr_AB6_AD60_1.street := '12th Main, Indiranagar'
+!Addr_AB6_AD60_1.houseNr := '418'
+!insert (P_AB6_Ananya_1, Addr_AB6_AD60_1) into ContactContainsAddress
+
+!new Note('Note_AB6_N60_1')
+!Note_AB6_N60_1.author := 'Ananya Rao'
+!Note_AB6_N60_1.time := Date('2026-01-30')
+!Note_AB6_N60_1.type := #CALL
+!Note_AB6_N60_1.comment := 'Spoke with priest about muhurta timings; confirm final slot after venue booking.'
+!insert (P_AB6_Ananya_1, Note_AB6_N60_1) into ContactContainsNote
+
+!new Person('P_AB6_Imran_1')
+!P_AB6_Imran_1.name := 'Imran Khan'
+!P_AB6_Imran_1.title := 'Mr.'
+!P_AB6_Imran_1.phone := '+91 99860 33445'
+!P_AB6_Imran_1.website := 'https://imran-khan.example.in'
+!P_AB6_Imran_1.email := 'imran.khan@example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, P_AB6_Imran_1) into AddressBookMadeOfContact
+
+!new Note('Note_AB6_N61_1')
+!Note_AB6_N61_1.author := 'Imran Khan'
+!Note_AB6_N61_1.time := Date('2026-02-02')
+!Note_AB6_N61_1.type := #EMAIL
+!Note_AB6_N61_1.comment := 'Emailed caterer to request a separate vegetarian buffet line and nut-free dessert options.'
+!insert (P_AB6_Imran_1, Note_AB6_N61_1) into ContactContainsNote
+
+!new Company('C_AB6_ShubhamHall_1')
+!C_AB6_ShubhamHall_1.name := 'Shubham Convention Hall'
+!C_AB6_ShubhamHall_1.industry := 'Event venue services'
+!C_AB6_ShubhamHall_1.phone := '+91 80 4123 9000'
+!C_AB6_ShubhamHall_1.website := 'https://shubhamhall.example.in'
+!C_AB6_ShubhamHall_1.email := 'bookings@shubhamhall.example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, C_AB6_ShubhamHall_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB6_AD61_1')
+!Addr_AB6_AD61_1.city := 'Bengaluru'
+!Addr_AB6_AD61_1.street := 'Tumkur Road'
+!Addr_AB6_AD61_1.houseNr := '55'
+!insert (C_AB6_ShubhamHall_1, Addr_AB6_AD61_1) into ContactContainsAddress
+
+!new Company('C_AB6_CateringDesk_1')
+!C_AB6_CateringDesk_1.name := 'Shubham Convention Hall – Catering Partner Desk'
+!C_AB6_CateringDesk_1.industry := 'Event catering coordination'
+!C_AB6_CateringDesk_1.phone := '+91 80 4123 9005'
+!C_AB6_CateringDesk_1.website := 'https://shubhamhall.example.in/catering'
+!C_AB6_CateringDesk_1.email := 'cateringdesk@shubhamhall.example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, C_AB6_CateringDesk_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_AB6_R60_1')
+!Rel_AB6_R60_1.type := #COWORKER
+!insert (P_AB6_Ananya_1, Rel_AB6_R60_1) into ContactToRelationship
+!insert (Rel_AB6_R60_1, P_AB6_Imran_1) into RelationshipToContact
+
+!new Relationship('Rel_AB6_R61_1')
+!Rel_AB6_R61_1.type := #COWORKER
+!insert (P_AB6_Imran_1, Rel_AB6_R61_1) into ContactToRelationship
+!insert (Rel_AB6_R61_1, C_AB6_ShubhamHall_1) into RelationshipToContact
+
+!new Relationship('Rel_AB6_R62_1')
+!Rel_AB6_R62_1.type := #SUBDIVISION
+!insert (C_AB6_ShubhamHall_1, Rel_AB6_R62_1) into ContactToRelationship
+!insert (Rel_AB6_R62_1, C_AB6_CateringDesk_1) into RelationshipToContact
+
+!new Address('Addr_AB6_AD62_1')
+!Addr_AB6_AD62_1.city := 'Bengaluru'
+!Addr_AB6_AD62_1.street := 'Cubbon Park (Main Gate)'
+!Addr_AB6_AD62_1.houseNr := '—'
+
+!new Note('Note_AB6_N62_1')
+!Note_AB6_N62_1.author := 'Wedding Planning Spreadsheet (shared)'
+!Note_AB6_N62_1.time := Date('2026-02-07')
+!Note_AB6_N62_1.type := #MEETING
+!Note_AB6_N62_1.comment := 'Checklist: confirm guest count, finalize seating draft, book mehndi artist, print signage, confirm parking volunteers.'

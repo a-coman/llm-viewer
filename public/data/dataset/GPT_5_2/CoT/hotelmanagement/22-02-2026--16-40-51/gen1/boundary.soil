@@ -1,0 +1,69 @@
+!new FreeRoomTypesDTO('D7')
+!D7.roomTypeDescription := 'Single capsule (windowless)'
+!D7.numBeds := 1
+!D7.pricePerNight := 0.0
+!D7.numFreeRooms := 0
+
+!new Customer('C4')
+!C4.firstName := 'Aiko'
+!C4.lastName := 'Tanaka'
+
+!new Customer('C5')
+!C5.firstName := 'Óscar'
+!C5.lastName := 'Núñez'
+
+!new Booking('B1')
+!B1.startDate := '2026-03-01'
+!B1.endDate := '2026-03-01'
+!B1.canceled := false
+!B1.bookingId := 1
+!B1.confirmed := false
+
+!new RoomReservation('R1_B1')
+!R1_B1.checkInDate := '2026-03-01'
+!R1_B1.checkOutDate := '2026-03-01'
+
+!new Bill('BL1')
+!BL1.price := 0.0
+!BL1.billId := 1001
+
+!new RoomReservation('R2_B1')
+!R2_B1.checkInDate := '2026-03-01'
+!R2_B1.checkOutDate := '2026-03-01'
+
+!new Room('RM1')
+!RM1.numBeds := 1
+!RM1.pricePerNight := 0.0
+!RM1.occupied := false
+!RM1.blocked := true
+!RM1.roomNumber := 1
+
+!new RoomExtra('E7')
+!E7.price := 0.0
+!E7.description := 'Complimentary welcome tea'
+
+!new Bill('BL2')
+!BL2.price := 0.0
+!BL2.billId := 1002
+
+!new Booking('B2')
+!B2.startDate := '2026-12-31'
+!B2.endDate := '2026-12-31'
+!B2.canceled := true
+!B2.bookingId := 2
+!B2.confirmed := false
+
+!insert (B1, C4) into BookingCustomer
+!insert (B2, C5) into BookingCustomer
+
+!insert (B1, R1_B1) into BookingRoomReservation
+!insert (B1, R2_B1) into BookingRoomReservation
+
+!insert (B1, BL1) into BookingBill
+!insert (B1, BL2) into BookingBill
+
+!insert (BL1, R1_B1) into BillRoomReservation
+!insert (BL2, R2_B1) into BillRoomReservation
+
+!insert (R2_B1, RM1) into RoomReservationRoom
+!insert (R2_B1, E7) into RoomReservationExtras

@@ -1,0 +1,73 @@
+!new StateMachine('sm_museumAudioGuide')
+!sm_museumAudioGuide.name := 'museumAudioGuide'
+
+!new State('st_mag_boot')
+!st_mag_boot.name := 'boot'
+!new State('st_mag_languageSelect')
+!st_mag_languageSelect.name := 'languageSelect'
+!new State('st_mag_ready')
+!st_mag_ready.name := 'ready'
+!new State('st_mag_playing')
+!st_mag_playing.name := 'playing'
+!new State('st_mag_sleep')
+!st_mag_sleep.name := 'sleep'
+
+!insert (sm_museumAudioGuide, st_mag_boot) into StateMachineContainsStates
+!insert (sm_museumAudioGuide, st_mag_languageSelect) into StateMachineContainsStates
+!insert (sm_museumAudioGuide, st_mag_ready) into StateMachineContainsStates
+!insert (sm_museumAudioGuide, st_mag_playing) into StateMachineContainsStates
+!insert (sm_museumAudioGuide, st_mag_sleep) into StateMachineContainsStates
+
+!insert (sm_museumAudioGuide, st_mag_boot) into StateMachineStartsStates
+
+!new Transition('tr_mag_tBootToLanguage')
+!tr_mag_tBootToLanguage.name := 'tBootToLanguage'
+!new Transition('tr_mag_tLanguageToReady')
+!tr_mag_tLanguageToReady.name := 'tLanguageToReady'
+!new Transition('tr_mag_tReadyToPlaying')
+!tr_mag_tReadyToPlaying.name := 'tReadyToPlaying'
+!new Transition('tr_mag_tPlayingToSleep')
+!tr_mag_tPlayingToSleep.name := 'tPlayingToSleep'
+!new Transition('tr_mag_tSleepToReady')
+!tr_mag_tSleepToReady.name := 'tSleepToReady'
+
+!insert (sm_museumAudioGuide, tr_mag_tBootToLanguage) into StateMachineContainsTransitions
+!insert (sm_museumAudioGuide, tr_mag_tLanguageToReady) into StateMachineContainsTransitions
+!insert (sm_museumAudioGuide, tr_mag_tReadyToPlaying) into StateMachineContainsTransitions
+!insert (sm_museumAudioGuide, tr_mag_tPlayingToSleep) into StateMachineContainsTransitions
+!insert (sm_museumAudioGuide, tr_mag_tSleepToReady) into StateMachineContainsTransitions
+
+!insert (st_mag_boot, tr_mag_tBootToLanguage) into StateTransition
+!insert (tr_mag_tBootToLanguage, st_mag_languageSelect) into TransitionState
+
+!insert (st_mag_languageSelect, tr_mag_tLanguageToReady) into StateTransition
+!insert (tr_mag_tLanguageToReady, st_mag_ready) into TransitionState
+
+!insert (st_mag_ready, tr_mag_tReadyToPlaying) into StateTransition
+!insert (tr_mag_tReadyToPlaying, st_mag_playing) into TransitionState
+
+!insert (st_mag_playing, tr_mag_tPlayingToSleep) into StateTransition
+!insert (tr_mag_tPlayingToSleep, st_mag_sleep) into TransitionState
+
+!insert (st_mag_sleep, tr_mag_tSleepToReady) into StateTransition
+!insert (tr_mag_tSleepToReady, st_mag_ready) into TransitionState
+
+!new TimeEvent('te_mag_tBootToLanguage')
+!te_mag_tBootToLanguage.time := 0
+!insert (tr_mag_tBootToLanguage, te_mag_tBootToLanguage) into TransitionContainsEvents
+
+!new TimeEvent('te_mag_tLanguageToReady')
+!te_mag_tLanguageToReady.time := 0
+!insert (tr_mag_tLanguageToReady, te_mag_tLanguageToReady) into TransitionContainsEvents
+
+!new TimeEvent('te_mag_tReadyToPlaying')
+!te_mag_tReadyToPlaying.time := 1
+!insert (tr_mag_tReadyToPlaying, te_mag_tReadyToPlaying) into TransitionContainsEvents
+
+!new TimeEvent('te_mag_tPlayingToSleep')
+!te_mag_tPlayingToSleep.time := 600
+!insert (tr_mag_tPlayingToSleep, te_mag_tPlayingToSleep) into TransitionContainsEvents
+
+!new TimeEvent('te_mag_tSleepToReady')
+!te_mag_tSleepToReady.time := 0
+!insert (tr_mag_tSleepToReady, te_mag_tSleepToReady) into TransitionContainsEvents

@@ -1,0 +1,64 @@
+!new Currency('currencyZARStatuses')
+!currencyZARStatuses.name := 'South African Rand'
+!currencyZARStatuses.abbreviation := 'ZAR'
+
+!new Expense('expenseEStatusesSmall')
+!expenseEStatusesSmall.amount := 0.03
+!expenseEStatusesSmall.startDate := Date('1900-02-28')
+!expenseEStatusesSmall.endDate := Date('1900-02-28')
+
+!new Bill('billEStatusesSmall_BS1')
+!billEStatusesSmall_BS1.amount := 0.01
+!billEStatusesSmall_BS1.category := 'Photocopy (archival record)'
+!billEStatusesSmall_BS1.date := Date('1900-02-28')
+!billEStatusesSmall_BS1.paymentMethod := #CASH
+!billEStatusesSmall_BS1.status := #DRAFT
+
+!new Bill('billEStatusesSmall_BS2')
+!billEStatusesSmall_BS2.amount := 0.01
+!billEStatusesSmall_BS2.category := 'Local transit fare adjustment'
+!billEStatusesSmall_BS2.date := Date('1900-02-28')
+!billEStatusesSmall_BS2.paymentMethod := #CREDIT_CARD
+!billEStatusesSmall_BS2.status := #PENDING
+
+!new Bill('billEStatusesSmall_BS3')
+!billEStatusesSmall_BS3.amount := 0.01
+!billEStatusesSmall_BS3.category := 'Stationery (single label)'
+!billEStatusesSmall_BS3.date := Date('1900-02-28')
+!billEStatusesSmall_BS3.paymentMethod := #CHECK
+!billEStatusesSmall_BS3.status := #VERIFIED
+
+!new Bill('billEStatusesSmall_BS4')
+!billEStatusesSmall_BS4.amount := 0.00
+!billEStatusesSmall_BS4.category := 'Invoice reprint (no fee)'
+!billEStatusesSmall_BS4.date := Date('1900-02-28')
+!billEStatusesSmall_BS4.paymentMethod := #CASH
+!billEStatusesSmall_BS4.status := #VALIDATED
+
+!new Bill('billEStatusesSmall_BS5')
+!billEStatusesSmall_BS5.amount := 0.00
+!billEStatusesSmall_BS5.category := 'Charge disputed (rejected by policy)'
+!billEStatusesSmall_BS5.date := Date('1900-02-28')
+!billEStatusesSmall_BS5.paymentMethod := #CREDIT_CARD
+!billEStatusesSmall_BS5.status := #REFUSED
+
+!new Bill('billEStatusesSmall_BS6')
+!billEStatusesSmall_BS6.amount := 0.00
+!billEStatusesSmall_BS6.category := 'Voided line item (refunded immediately)'
+!billEStatusesSmall_BS6.date := Date('1900-02-28')
+!billEStatusesSmall_BS6.paymentMethod := #CHECK
+!billEStatusesSmall_BS6.status := #REFUNDED
+
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS1) into ExpenseContainsBills
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS2) into ExpenseContainsBills
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS3) into ExpenseContainsBills
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS4) into ExpenseContainsBills
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS5) into ExpenseContainsBills
+!insert (expenseEStatusesSmall, billEStatusesSmall_BS6) into ExpenseContainsBills
+
+!insert (billEStatusesSmall_BS1, currencyZARStatuses) into BillCurrency
+!insert (billEStatusesSmall_BS2, currencyZARStatuses) into BillCurrency
+!insert (billEStatusesSmall_BS3, currencyZARStatuses) into BillCurrency
+!insert (billEStatusesSmall_BS4, currencyZARStatuses) into BillCurrency
+!insert (billEStatusesSmall_BS5, currencyZARStatuses) into BillCurrency
+!insert (billEStatusesSmall_BS6, currencyZARStatuses) into BillCurrency

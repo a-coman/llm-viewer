@@ -1,0 +1,567 @@
+!new Club('C5')
+!C5.name := 'FC København'
+!C5.homeGround := 'Parken Stadium (Copenhagen)'
+!C5.chairman := 'Claus Thomsen'
+
+!new Team('T5')
+!T5.name := 'FCK First Team'
+!insert (C5, T5) into ClubTeam
+
+!new Club('C6')
+!C6.name := 'Malmö FF'
+!C6.homeGround := 'Eleda Stadion (Malmö)'
+!C6.chairman := 'Katrin Nilsson'
+
+!new Team('T6')
+!T6.name := 'MFF Senior Men'
+!insert (C6, T6) into ClubTeam
+
+!new Club('C7')
+!C7.name := 'IFK Göteborg'
+!C7.homeGround := 'Gamla Ullevi (Gothenburg)'
+!C7.chairman := 'Lars-Åke Berg'
+
+!new Team('T7')
+!T7.name := 'IFK Göteborg A-team'
+!insert (C7, T7) into ClubTeam
+
+!new Club('C8')
+!C8.name := 'HJK Helsinki'
+!C8.homeGround := 'Bolt Arena (Helsinki)'
+!C8.chairman := 'Sari Lehtinen'
+
+!new Team('T8')
+!T8.name := 'HJK Edustus'
+!insert (C8, T8) into ClubTeam
+
+!new Player('P5')
+!P5.name := 'Emil Hartmann'
+!P5.age := 24
+!P5.bestFoot := #RIGHT
+!P5.phoneNumber := '+45 20 11 34 90'
+!insert (T5, P5) into TeamPlayer
+
+!new Position('POS9')
+!POS9.positionName := #GOALKEEPER
+!insert (P5, POS9) into PlayerPositions
+
+!new TrainingObjective('TO6')
+!TO6.areaToImprove := 'Quicker distribution under press'
+!TO6.startDate := '2026-01-05'
+!TO6.endDate := '2026-02-05'
+!TO6.success := true
+!insert (TO6, P5) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN5')
+!PN5.note := 'Strong communication in defensive set pieces'
+!PN5.date := '2026-01-12'
+!insert (P5, PN5) into PlayerPlayerNotes
+
+!new Player('P6')
+!P6.name := 'Youssef El-Sayed'
+!P6.age := 21
+!P6.bestFoot := #BOTH
+!P6.phoneNumber := '+45 31 77 04 18'
+!insert (T5, P6) into TeamPlayer
+
+!new Position('POS10')
+!POS10.positionName := #MIDFIELDER
+!insert (P6, POS10) into PlayerPositions
+
+!new Position('POS11')
+!POS11.positionName := #FORWARD
+!insert (P6, POS11) into PlayerPositions
+
+!new TrainingObjective('TO7')
+!TO7.areaToImprove := 'Improve first-touch receiving on the half-turn'
+!TO7.startDate := '2026-01-03'
+!TO7.endDate := '2026-02-10'
+!TO7.success := false
+!insert (TO7, P6) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN6')
+!PN6.note := 'Needs to scan earlier before receiving'
+!PN6.date := '2026-01-10'
+!insert (P6, PN6) into PlayerPlayerNotes
+
+!new Player('P7')
+!P7.name := 'Kenji Nakamura'
+!P7.age := 27
+!P7.bestFoot := #LEFT
+!P7.phoneNumber := '+45 52 08 66 21'
+!insert (T5, P7) into TeamPlayer
+
+!new Position('POS12')
+!POS12.positionName := #DEFENDER
+!insert (P7, POS12) into PlayerPositions
+
+!new Position('POS13')
+!POS13.positionName := #MIDFIELDER
+!insert (P7, POS13) into PlayerPositions
+
+!new TrainingObjective('TO8')
+!TO8.areaToImprove := 'Timing of overlaps and recovery runs'
+!TO8.startDate := '2026-01-04'
+!TO8.endDate := '2026-02-20'
+!TO8.success := true
+!insert (TO8, P7) into TrainingObjectivePlayer
+
+!new TrainingSession('TS5')
+!TS5.date := '2026-01-11'
+!TS5.location := 'FCK Training Centre, Copenhagen'
+!TS5.purpose := 'Pre-season pressing triggers + set-piece routines'
+!insert (T5, TS5) into TeamTraining
+
+!new TrainingNotes('TN5')
+!TN5.note := 'Pressing line was too deep in first 20 minutes; corrected with shorter distances.'
+!TN5.date := '2026-01-11'
+!insert (TS5, TN5) into TrainingTrainingNotes
+
+!new TrainingNotes('TN6')
+!TN6.note := 'Attacking corner routine "Near-post screen" executed well.'
+!TN6.date := '2026-01-11'
+!insert (TS5, TN6) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA3')
+!FA3.reason := 'Flu symptoms; sent home by medical staff.'
+!insert (TS5, FA3) into TrainingFailded
+!insert (FA3, P6) into FailedPlayer
+
+!new Player('P8')
+!P8.name := 'Oskar Lind'
+!P8.age := 26
+!P8.bestFoot := #RIGHT
+!P8.phoneNumber := '+46 70 418 22 19'
+!insert (T6, P8) into TeamPlayer
+
+!new Position('POS14')
+!POS14.positionName := #DEFENDER
+!insert (P8, POS14) into PlayerPositions
+
+!new TrainingObjective('TO9')
+!TO9.areaToImprove := 'Improve 1v1 defending in wide areas'
+!TO9.startDate := '2026-01-02'
+!TO9.endDate := '2026-02-15'
+!TO9.success := false
+!insert (TO9, P8) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN7')
+!PN7.note := 'Over-commits when winger feints inside'
+!PN7.date := '2026-01-09'
+!insert (P8, PN7) into PlayerPlayerNotes
+
+!new Player('P9')
+!P9.name := 'Mateo Kovačević'
+!P9.age := 23
+!P9.bestFoot := #LEFT
+!P9.phoneNumber := '+46 73 990 14 02'
+!insert (T6, P9) into TeamPlayer
+
+!new Position('POS15')
+!POS15.positionName := #FORWARD
+!insert (P9, POS15) into PlayerPositions
+
+!new TrainingObjective('TO10')
+!TO10.areaToImprove := 'Finishing with weaker foot in the box'
+!TO10.startDate := '2026-01-06'
+!TO10.endDate := '2026-02-28'
+!TO10.success := true
+!insert (TO10, P9) into TrainingObjectivePlayer
+
+!new TrainingSession('TS6')
+!TS6.date := '2026-01-10'
+!TS6.location := 'Malmö Stadion Training Pitch'
+!TS6.purpose := 'Transitions after losing possession'
+!insert (T6, TS6) into TeamTraining
+
+!new TrainingNotes('TN7')
+!TN7.note := 'Better counter-press shape; distances still inconsistent late.'
+!TN7.date := '2026-01-10'
+!insert (TS6, TN7) into TrainingTrainingNotes
+
+!new TrainingNotes('TN8')
+!TN8.note := 'Forward pressing cues improved after video clip review.'
+!TN8.date := '2026-01-10'
+!insert (TS6, TN8) into TrainingTrainingNotes
+
+!new Player('P10')
+!P10.name := 'Ahmed Al-Khatib'
+!P10.age := 28
+!P10.bestFoot := #RIGHT
+!P10.phoneNumber := '+46 72 118 40 55'
+!insert (T7, P10) into TeamPlayer
+
+!new Position('POS16')
+!POS16.positionName := #MIDFIELDER
+!insert (P10, POS16) into PlayerPositions
+
+!new TrainingObjective('TO11')
+!TO11.areaToImprove := 'Reduce risky passes in own third'
+!TO11.startDate := '2026-01-04'
+!TO11.endDate := '2026-02-04'
+!TO11.success := true
+!insert (TO11, P10) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN8')
+!PN8.note := 'Excellent tempo control when leading'
+!PN8.date := '2026-01-13'
+!insert (P10, PN8) into PlayerPlayerNotes
+
+!new Player('P11')
+!P11.name := 'Viktor Sjöberg'
+!P11.age := 20
+!P11.bestFoot := #BOTH
+!P11.phoneNumber := '+46 76 331 09 70'
+!insert (T7, P11) into TeamPlayer
+
+!new Position('POS17')
+!POS17.positionName := #GOALKEEPER
+!insert (P11, POS17) into PlayerPositions
+
+!new TrainingObjective('TO12')
+!TO12.areaToImprove := 'Improve high-claiming on crosses'
+!TO12.startDate := '2026-01-07'
+!TO12.endDate := '2026-02-21'
+!TO12.success := false
+!insert (TO12, P11) into TrainingObjectivePlayer
+
+!new TrainingSession('TS7')
+!TS7.date := '2026-01-09'
+!TS7.location := 'Kamratgården'
+!TS7.purpose := 'Defensive block organization'
+!insert (T7, TS7) into TeamTraining
+
+!new TrainingNotes('TN9')
+!TN9.note := 'Back line stepped together well; midfield line was late twice.'
+!TN9.date := '2026-01-09'
+!insert (TS7, TN9) into TrainingTrainingNotes
+
+!new TrainingNotes('TN10')
+!TN10.note := 'Goalkeeper communication drills repeated after confusion on second balls.'
+!TN10.date := '2026-01-09'
+!insert (TS7, TN10) into TrainingTrainingNotes
+
+!new Player('P12')
+!P12.name := 'Aino Laaksonen'
+!P12.age := 22
+!P12.bestFoot := #LEFT
+!P12.phoneNumber := '+358 40 221 7788'
+!insert (T8, P12) into TeamPlayer
+
+!new Position('POS18')
+!POS18.positionName := #MIDFIELDER
+!insert (P12, POS18) into PlayerPositions
+
+!new TrainingObjective('TO13')
+!TO13.areaToImprove := 'Improve long passing accuracy to switch play'
+!TO13.startDate := '2026-01-05'
+!TO13.endDate := '2026-02-25'
+!TO13.success := true
+!insert (TO13, P12) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN9')
+!PN9.note := 'Very good awareness between lines'
+!PN9.date := '2026-01-14'
+!insert (P12, PN9) into PlayerPlayerNotes
+
+!new Player('P13')
+!P13.name := 'Petteri Vuorinen'
+!P13.age := 25
+!P13.bestFoot := #RIGHT
+!P13.phoneNumber := '+358 50 901 4412'
+!insert (T8, P13) into TeamPlayer
+
+!new Position('POS19')
+!POS19.positionName := #FORWARD
+!insert (P13, POS19) into PlayerPositions
+
+!new TrainingObjective('TO14')
+!TO14.areaToImprove := 'Better near-post runs on cutbacks'
+!TO14.startDate := '2026-01-08'
+!TO14.endDate := '2026-02-18'
+!TO14.success := false
+!insert (TO14, P13) into TrainingObjectivePlayer
+
+!new TrainingSession('TS8')
+!TS8.date := '2026-01-12'
+!TS8.location := 'Bolt Arena Indoor'
+!TS8.purpose := 'Finishing patterns + quick combinations'
+!insert (T8, TS8) into TeamTraining
+
+!new TrainingNotes('TN11')
+!TN11.note := 'Shot volume high; needs calmer final touch under pressure.'
+!TN11.date := '2026-01-12'
+!insert (TS8, TN11) into TrainingTrainingNotes
+
+!new TrainingNotes('TN12')
+!TN12.note := 'Combination play improved when third-man runs were emphasized.'
+!TN12.date := '2026-01-12'
+!insert (TS8, TN12) into TrainingTrainingNotes
+
+!new Competition('COMP3')
+!COMP3.name := 'Nordic Invitational Cup 2026'
+!COMP3.type := 'Pre-season tournament'
+
+!new Match('M3')
+!M3.date := '2026-01-14'
+!M3.homeAway := true
+!insert (COMP3, M3) into CompetitionMatch
+!insert (T5, M3) into LocalMatch
+!insert (T6, M3) into VisitorMatch
+
+!new MatchReport('MR3')
+!MR3.duration := 90
+!MR3.scoreLocal := 2
+!MR3.scoreVisitor := 1
+!insert (M3, MR3) into MatchMatchReport
+
+!new MatchEvent('ME1')
+!ME1.eventType := #GOAL
+!ME1.time := 17
+!insert (M3, ME1) into MatchMatchEvent
+
+!new MatchEvent('ME2')
+!ME2.eventType := #FOUL
+!ME2.time := 33
+!insert (M3, ME2) into MatchMatchEvent
+
+!new MatchEvent('ME3')
+!ME3.eventType := #GOAL
+!ME3.time := 51
+!insert (M3, ME3) into MatchMatchEvent
+
+!new MatchEvent('ME4')
+!ME4.eventType := #CORNER
+!ME4.time := 68
+!insert (M3, ME4) into MatchMatchEvent
+
+!new MatchEvent('ME5')
+!ME5.eventType := #GOAL
+!ME5.time := 84
+!insert (M3, ME5) into MatchMatchEvent
+
+!new MatchNote('MN3')
+!MN3.note := 'FCK controlled central areas; Malmö dangerous on quick counters.'
+!MN3.date := '2026-01-14'
+!insert (M3, MN3) into MatchMatchNote
+
+!new MatchPlayer('MP5')
+!MP5.booked := false
+!MP5.goals := 0
+!MP5.rating := 7
+!insert (P5, MP5) into PlayerMatch
+!insert (M3, MP5) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP5')
+!MPP5.positionName := #GOALKEEPER
+!MPP5.number := 1
+!insert (MP5, MPP5) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP6')
+!MP6.booked := true
+!MP6.goals := 0
+!MP6.rating := 7
+!insert (P7, MP6) into PlayerMatch
+!insert (M3, MP6) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP6')
+!MPP6.positionName := #DEFENDER
+!MPP6.number := 3
+!insert (MP6, MPP6) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP7')
+!MP7.booked := false
+!MP7.goals := 0
+!MP7.rating := 6
+!insert (P8, MP7) into PlayerMatch
+!insert (M3, MP7) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP7')
+!MPP7.positionName := #DEFENDER
+!MPP7.number := 4
+!insert (MP7, MPP7) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP8')
+!MP8.booked := false
+!MP8.goals := 1
+!MP8.rating := 7
+!insert (P9, MP8) into PlayerMatch
+!insert (M3, MP8) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP8')
+!MPP8.positionName := #FORWARD
+!MPP8.number := 9
+!insert (MP8, MPP8) into MatchPlayerMatchPlayerPosition
+
+!new Match('M4')
+!M4.date := '2026-01-17'
+!M4.homeAway := true
+!insert (COMP3, M4) into CompetitionMatch
+!insert (T7, M4) into LocalMatch
+!insert (T5, M4) into VisitorMatch
+
+!new MatchReport('MR4')
+!MR4.duration := 90
+!MR4.scoreLocal := 0
+!MR4.scoreVisitor := 0
+!insert (M4, MR4) into MatchMatchReport
+
+!new MatchEvent('ME6')
+!ME6.eventType := #OFFSIDE
+!ME6.time := 12
+!insert (M4, ME6) into MatchMatchEvent
+
+!new MatchEvent('ME7')
+!ME7.eventType := #FOUL
+!ME7.time := 57
+!insert (M4, ME7) into MatchMatchEvent
+
+!new MatchNote('MN4')
+!MN4.note := 'Very compact game; both sides prioritized fitness and structure.'
+!MN4.date := '2026-01-17'
+!insert (M4, MN4) into MatchMatchNote
+
+!new MatchPlayer('MP9')
+!MP9.booked := false
+!MP9.goals := 0
+!MP9.rating := 6
+!insert (P6, MP9) into PlayerMatch
+!insert (M4, MP9) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP9')
+!MPP9.positionName := #MIDFIELDER
+!MPP9.number := 11
+!insert (MP9, MPP9) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP10')
+!MP10.booked := false
+!MP10.goals := 0
+!MP10.rating := 7
+!insert (P7, MP10) into PlayerMatch
+!insert (M4, MP10) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP10')
+!MPP10.positionName := #DEFENDER
+!MPP10.number := 3
+!insert (MP10, MPP10) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP11')
+!MP11.booked := true
+!MP11.goals := 0
+!MP11.rating := 7
+!insert (P10, MP11) into PlayerMatch
+!insert (M4, MP11) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP11')
+!MPP11.positionName := #MIDFIELDER
+!MPP11.number := 8
+!insert (MP11, MPP11) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP12')
+!MP12.booked := false
+!MP12.goals := 0
+!MP12.rating := 7
+!insert (P11, MP12) into PlayerMatch
+!insert (M4, MP12) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP12')
+!MPP12.positionName := #GOALKEEPER
+!MPP12.number := 1
+!insert (MP12, MPP12) into MatchPlayerMatchPlayerPosition
+
+!new Match('M5')
+!M5.date := '2026-01-20'
+!M5.homeAway := true
+!insert (COMP3, M5) into CompetitionMatch
+!insert (T5, M5) into LocalMatch
+!insert (T8, M5) into VisitorMatch
+
+!new MatchReport('MR5')
+!MR5.duration := 90
+!MR5.scoreLocal := 1
+!MR5.scoreVisitor := 3
+!insert (M5, MR5) into MatchMatchReport
+
+!new MatchEvent('ME8')
+!ME8.eventType := #GOAL
+!ME8.time := 9
+!insert (M5, ME8) into MatchMatchEvent
+
+!new MatchEvent('ME9')
+!ME9.eventType := #GOAL
+!ME9.time := 23
+!insert (M5, ME9) into MatchMatchEvent
+
+!new MatchEvent('ME10')
+!ME10.eventType := #PENALTY
+!ME10.time := 24
+!insert (M5, ME10) into MatchMatchEvent
+
+!new MatchEvent('ME11')
+!ME11.eventType := #GOAL
+!ME11.time := 25
+!insert (M5, ME11) into MatchMatchEvent
+
+!new MatchEvent('ME12')
+!ME12.eventType := #CORNER
+!ME12.time := 41
+!insert (M5, ME12) into MatchMatchEvent
+
+!new MatchEvent('ME13')
+!ME13.eventType := #GOAL
+!ME13.time := 77
+!insert (M5, ME13) into MatchMatchEvent
+
+!new MatchNote('MN5')
+!MN5.note := 'HJKs midfield rotations created overloads; FCK struggled after the penalty sequence.'
+!MN5.date := '2026-01-20'
+!insert (M5, MN5) into MatchMatchNote
+
+!new MatchPlayer('MP13')
+!MP13.booked := false
+!MP13.goals := 0
+!MP13.rating := 6
+!insert (P5, MP13) into PlayerMatch
+!insert (M5, MP13) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP13')
+!MPP13.positionName := #GOALKEEPER
+!MPP13.number := 1
+!insert (MP13, MPP13) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP14')
+!MP14.booked := false
+!MP14.goals := 1
+!MP14.rating := 7
+!insert (P6, MP14) into PlayerMatch
+!insert (M5, MP14) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP14')
+!MPP14.positionName := #FORWARD
+!MPP14.number := 11
+!insert (MP14, MPP14) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP15')
+!MP15.booked := false
+!MP15.goals := 0
+!MP15.rating := 8
+!insert (P12, MP15) into PlayerMatch
+!insert (M5, MP15) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP15')
+!MPP15.positionName := #MIDFIELDER
+!MPP15.number := 10
+!insert (MP15, MPP15) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP16')
+!MP16.booked := false
+!MP16.goals := 2
+!MP16.rating := 8
+!insert (P13, MP16) into PlayerMatch
+!insert (M5, MP16) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP16')
+!MPP16.positionName := #FORWARD
+!MPP16.number := 9
+!insert (MP16, MPP16) into MatchPlayerMatchPlayerPosition
+

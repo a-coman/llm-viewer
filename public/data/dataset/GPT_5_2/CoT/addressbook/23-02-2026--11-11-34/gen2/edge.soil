@@ -1,0 +1,155 @@
+!new AddressBook('AB_PopupConference_1')
+
+!new Company('C_PopupHub_1')
+!C_PopupHub_1.name := 'Pop‑Up Registration Kiosk Co.'
+!C_PopupHub_1.phone := ''
+!C_PopupHub_1.website := 'https://popup-kiosk.example'
+!C_PopupHub_1.email := 'ops@popup-kiosk.example'
+!C_PopupHub_1.industry := 'Event services'
+!insert (AB_PopupConference_1, C_PopupHub_1) into AddressBookMadeOfContact
+
+!new Person('P_Cher_1')
+!P_Cher_1.name := 'Cher'
+!P_Cher_1.phone := '+1-555-0100'
+!P_Cher_1.website := ''
+!P_Cher_1.email := 'cher@localhost'
+!P_Cher_1.title := ''
+!insert (AB_PopupConference_1, P_Cher_1) into AddressBookMadeOfContact
+
+!new Note('Note_Cher_1')
+!Note_Cher_1.author := 'Cher'
+!Note_Cher_1.time := Date('1900-02-29')
+!Note_Cher_1.type := #CALL
+!Note_Cher_1.comment := ''
+!insert (P_Cher_1, Note_Cher_1) into ContactContainsNote
+
+!new Note('Note_Cher_2')
+!Note_Cher_2.author := ''
+!Note_Cher_2.time := Date('2026-01-01')
+!Note_Cher_2.type := #EMAIL
+!Note_Cher_2.comment := 'Sent badge-print template with no signature line as requested.'
+!insert (P_Cher_1, Note_Cher_2) into ContactContainsNote
+
+!new Address('Addr_Cher_LA_1')
+!Addr_Cher_LA_1.city := 'Los Angeles'
+!Addr_Cher_LA_1.houseNr := '—'
+!Addr_Cher_LA_1.street := 'Sunset Blvd'
+!insert (P_Cher_1, Addr_Cher_LA_1) into ContactContainsAddress
+
+!new Person('P_Minh_1')
+!P_Minh_1.name := 'Nguyễn Thị Minh'
+!P_Minh_1.phone := '+84 28 0000 0000'
+!P_Minh_1.website := 'https://minh.example.vn'
+!P_Minh_1.email := 'minh+conf2026@example.vn'
+!P_Minh_1.title := 'Ms.'
+!insert (AB_PopupConference_1, P_Minh_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Minh_HCMC_1')
+!Addr_Minh_HCMC_1.city := 'Hồ Chí Minh City'
+!Addr_Minh_HCMC_1.houseNr := '0'
+!Addr_Minh_HCMC_1.street := 'Đường số 1'
+!insert (P_Minh_1, Addr_Minh_HCMC_1) into ContactContainsAddress
+
+!new Address('Addr_Minh_Empty_1')
+!Addr_Minh_Empty_1.city := ''
+!Addr_Minh_Empty_1.houseNr := ''
+!Addr_Minh_Empty_1.street := ''
+!insert (P_Minh_1, Addr_Minh_Empty_1) into ContactContainsAddress
+
+!new Company('C_SahelEnergy_1')
+!C_SahelEnergy_1.name := 'Coopérative Énergie du Sahel'
+!C_SahelEnergy_1.phone := '+227 20 00 00 00'
+!C_SahelEnergy_1.website := 'https://energie-sahel.example.ne'
+!C_SahelEnergy_1.email := 'contact@energie-sahel.example.ne'
+!C_SahelEnergy_1.industry := 'Community solar'
+!insert (AB_PopupConference_1, C_SahelEnergy_1) into AddressBookMadeOfContact
+
+!new Note('Note_SahelEnergy_1')
+!Note_SahelEnergy_1.author := 'Aïchatou'
+!Note_SahelEnergy_1.time := Date('1582-10-15')
+!Note_SahelEnergy_1.type := #MEETING
+!Note_SahelEnergy_1.comment := 'Recorded as “first day” after calendar migration in legacy ledger import.'
+!insert (C_SahelEnergy_1, Note_SahelEnergy_1) into ContactContainsNote
+
+!new Address('Addr_SahelEnergy_Niamey_1')
+!Addr_SahelEnergy_Niamey_1.city := 'Niamey'
+!Addr_SahelEnergy_Niamey_1.houseNr := '1'
+!Addr_SahelEnergy_Niamey_1.street := 'Rue de la Coopération'
+!insert (C_SahelEnergy_1, Addr_SahelEnergy_Niamey_1) into ContactContainsAddress
+
+!new Person('P_OlegPetrov_1')
+!P_OlegPetrov_1.name := 'Олег Петров'
+!P_OlegPetrov_1.phone := '+7 495 000-00-00'
+!P_OlegPetrov_1.website := 'https://пример.рф/олег'
+!P_OlegPetrov_1.email := 'oleg.petrov@example.ru'
+!P_OlegPetrov_1.title := 'Mr.'
+!insert (AB_PopupConference_1, P_OlegPetrov_1) into AddressBookMadeOfContact
+
+!new Note('Note_Oleg_1')
+!Note_Oleg_1.author := 'Олег'
+!Note_Oleg_1.time := Date('2025-12-31')
+!Note_Oleg_1.type := #CALL
+!Note_Oleg_1.comment := 'Confirmed he will only answer calls between 03:00–03:05 local time.'
+!insert (P_OlegPetrov_1, Note_Oleg_1) into ContactContainsNote
+
+!new Note('Note_Oleg_2')
+!Note_Oleg_2.author := 'Олег'
+!Note_Oleg_2.time := Date('2025-12-31')
+!Note_Oleg_2.type := #CALL
+!Note_Oleg_2.comment := 'Duplicate call log kept intentionally for audit replay.'
+!insert (P_OlegPetrov_1, Note_Oleg_2) into ContactContainsNote
+
+!new Company('C_MizuhoTemp_1')
+!C_MizuhoTemp_1.name := '株式会社ミズホ臨時窓口'
+!C_MizuhoTemp_1.phone := '+81 3 0000 0000'
+!C_MizuhoTemp_1.website := 'https://mizuho-temp.example.jp'
+!C_MizuhoTemp_1.email := 'desk@mizuho-temp.example.jp'
+!C_MizuhoTemp_1.industry := 'Temporary staffing'
+!insert (AB_PopupConference_1, C_MizuhoTemp_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Mizuho_Tokyo_1')
+!Addr_Mizuho_Tokyo_1.city := '東京'
+!Addr_Mizuho_Tokyo_1.houseNr := '000'
+!Addr_Mizuho_Tokyo_1.street := '臨時通り'
+!insert (C_MizuhoTemp_1, Addr_Mizuho_Tokyo_1) into ContactContainsAddress
+
+!new Address('Addr_Mizuho_SaoPaulo_1')
+!Addr_Mizuho_SaoPaulo_1.city := 'São Paulo'
+!Addr_Mizuho_SaoPaulo_1.houseNr := '13'
+!Addr_Mizuho_SaoPaulo_1.street := 'Rua do Evento'
+!insert (C_MizuhoTemp_1, Addr_Mizuho_SaoPaulo_1) into ContactContainsAddress
+
+!new Relationship('Rel_Cher_to_Hub_Employee_1')
+!Rel_Cher_to_Hub_Employee_1.type := #EMPLOYEE
+!insert (P_Cher_1, Rel_Cher_to_Hub_Employee_1) into ContactToRelationship
+!insert (Rel_Cher_to_Hub_Employee_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_Cher_to_Hub_Coworker_1')
+!Rel_Cher_to_Hub_Coworker_1.type := #COWORKER
+!insert (P_Cher_1, Rel_Cher_to_Hub_Coworker_1) into ContactToRelationship
+!insert (Rel_Cher_to_Hub_Coworker_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_Minh_to_Hub_Boss_1')
+!Rel_Minh_to_Hub_Boss_1.type := #BOSS
+!insert (P_Minh_1, Rel_Minh_to_Hub_Boss_1) into ContactToRelationship
+!insert (Rel_Minh_to_Hub_Boss_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_SahelEnergy_to_Hub_Subdivision_1')
+!Rel_SahelEnergy_to_Hub_Subdivision_1.type := #SUBDIVISION
+!insert (C_SahelEnergy_1, Rel_SahelEnergy_to_Hub_Subdivision_1) into ContactToRelationship
+!insert (Rel_SahelEnergy_to_Hub_Subdivision_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_Oleg_to_Hub_Coworker_1')
+!Rel_Oleg_to_Hub_Coworker_1.type := #COWORKER
+!insert (P_OlegPetrov_1, Rel_Oleg_to_Hub_Coworker_1) into ContactToRelationship
+!insert (Rel_Oleg_to_Hub_Coworker_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_Mizuho_to_Hub_Employee_1')
+!Rel_Mizuho_to_Hub_Employee_1.type := #EMPLOYEE
+!insert (C_MizuhoTemp_1, Rel_Mizuho_to_Hub_Employee_1) into ContactToRelationship
+!insert (Rel_Mizuho_to_Hub_Employee_1, C_PopupHub_1) into RelationshipToContact
+
+!new Relationship('Rel_Mizuho_to_SahelEnergy_Subdivision_1')
+!Rel_Mizuho_to_SahelEnergy_Subdivision_1.type := #SUBDIVISION
+!insert (C_MizuhoTemp_1, Rel_Mizuho_to_SahelEnergy_Subdivision_1) into ContactToRelationship
+!insert (Rel_Mizuho_to_SahelEnergy_Subdivision_1, C_SahelEnergy_1) into RelationshipToContact

@@ -1,0 +1,139 @@
+!new Club('C1')
+!C1.name := 'Kawasaki Seaside FC'
+!C1.homeGround := 'Todoroki Riverside Park Stadium'
+!C1.chairman := 'Hiroshi Tanaka'
+
+!new Team('T1')
+!T1.name := 'Seaside First XI'
+!insert (C1, T1) into ClubTeam
+
+!new Club('C2')
+!C2.name := 'Casablanca Atlas Athletic'
+!C2.homeGround := 'Stade Al Atlas (Casablanca)'
+!C2.chairman := 'Amina El Fassi'
+
+!new Team('T2')
+!T2.name := 'Atlas Seniors'
+!insert (C2, T2) into ClubTeam
+
+!new Player('P1')
+!P1.name := 'Ren Sato'
+!P1.age := 18
+!P1.bestFoot := #BOTH
+!P1.phoneNumber := '+81-70-1234-5678'
+!insert (T1, P1) into TeamPlayer
+
+!new Position('POS1')
+!POS1.positionName := #GOALKEEPER
+!insert (P1, POS1) into PlayerPositions
+
+!new Position('POS2')
+!POS2.positionName := #DEFENDER
+!insert (P1, POS2) into PlayerPositions
+
+!new Position('POS3')
+!POS3.positionName := #MIDFIELDER
+!insert (P1, POS3) into PlayerPositions
+
+!new TrainingObjective('TO1')
+!TO1.areaToImprove := 'High-ball handling under pressure'
+!TO1.startDate := '2026-02-01'
+!TO1.endDate := '2026-02-28'
+!TO1.success := false
+!insert (TO1, P1) into TrainingObjectivePlayer
+
+!new Player('P2')
+!P2.name := 'Youssef Benali'
+!P2.age := 38
+!P2.bestFoot := #RIGHT
+!P2.phoneNumber := '+212-6-12-34-56-78'
+!insert (T2, P2) into TeamPlayer
+
+!new Position('POS4')
+!POS4.positionName := #FORWARD
+!insert (P2, POS4) into PlayerPositions
+
+!new TrainingObjective('TO2')
+!TO2.areaToImprove := 'First-touch control in tight spaces'
+!TO2.startDate := '2026-02-10'
+!TO2.endDate := '2026-03-10'
+!TO2.success := true
+!insert (TO2, P2) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN1')
+!PN1.note := 'Arrived early and stayed after to practice finishing.'
+!PN1.date := '2026-02-12'
+!insert (P2, PN1) into PlayerPlayerNotes
+
+!new PlayerNotes('PN2')
+!PN2.note := 'Requested instructions in French; responded well to bilingual cues.'
+!PN2.date := '2026-02-15'
+!insert (P2, PN2) into PlayerPlayerNotes
+
+!new TrainingSession('TS1')
+!TS1.date := '2026-02-18'
+!TS1.location := 'Kawasaki Waterfront Training Pitch'
+!TS1.purpose := 'Low-intensity recovery and goalkeeper footwork'
+!insert (T1, TS1) into TeamTraining
+
+!new TrainingNotes('TN1')
+!TN1.note := 'Kept the session short; focused on technique and mobility.'
+!TN1.date := '2026-02-18'
+!insert (TS1, TN1) into TrainingTrainingNotes
+
+!new TrainingSession('TS2')
+!TS2.date := '2026-02-18'
+!TS2.location := 'Casablanca Corniche Sports Complex'
+!TS2.purpose := 'Attacking patterns and crossing drills'
+!insert (T2, TS2) into TeamTraining
+
+!new TrainingNotes('TN2')
+!TN2.note := 'Emphasis on near-post runs; timing improved by the end.'
+!TN2.date := '2026-02-18'
+!insert (TS2, TN2) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA1')
+!FA1.reason := 'Delayed by intercity rail disruption; arrived after session ended.'
+!insert (TS2, FA1) into TrainingFailded
+!insert (FA1, P2) into FailedPlayer
+
+!new Competition('COMP1')
+!COMP1.name := 'Intercontinental Friendly Cup'
+!COMP1.type := 'Friendly'
+
+!new Match('M1')
+!M1.date := '2026-02-21'
+!M1.homeAway := true
+!insert (COMP1, M1) into CompetitionMatch
+!insert (T1, M1) into LocalMatch
+!insert (T2, M1) into VisitorMatch
+
+!new MatchReport('MR1')
+!MR1.duration := 90
+!MR1.scoreVisitor := 0
+!MR1.scoreLocal := 0
+!insert (M1, MR1) into MatchMatchReport
+
+!new MatchPlayer('MP1')
+!MP1.booked := false
+!MP1.goals := 0
+!MP1.rating := 0
+!insert (P1, MP1) into PlayerMatch
+!insert (M1, MP1) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP1')
+!MPP1.positionName := #GOALKEEPER
+!MPP1.number := 1
+!insert (MP1, MPP1) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP2')
+!MP2.booked := false
+!MP2.goals := 0
+!MP2.rating := 1
+!insert (P2, MP2) into PlayerMatch
+!insert (M1, MP2) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP2')
+!MPP2.positionName := #FORWARD
+!MPP2.number := 9
+!insert (MP2, MPP2) into MatchPlayerMatchPlayerPosition

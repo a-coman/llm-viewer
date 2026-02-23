@@ -1,0 +1,106 @@
+!new Customer('C11')
+!C11.firstName := 'Amina'
+!C11.lastName := 'El Khatib'
+
+!new Booking('B3107')
+!B3107.bookingId := 3107
+!B3107.startDate := '2026-06-05'
+!B3107.endDate := '2026-06-12'
+!B3107.confirmed := true
+!B3107.canceled := false
+
+!new RoomReservation('RR4')
+!RR4.checkInDate := '2026-06-05'
+!RR4.checkOutDate := '2026-06-07'
+
+!new RoomReservation('RR5')
+!RR5.checkInDate := '2026-06-07'
+!RR5.checkOutDate := '2026-06-10'
+
+!new RoomReservation('RR6')
+!RR6.checkInDate := '2026-06-10'
+!RR6.checkOutDate := '2026-06-12'
+
+!new Room('R110')
+!R110.roomNumber := 110
+!R110.numBeds := 1
+!R110.pricePerNight := 70.00
+!R110.occupied := true
+!R110.blocked := false
+
+!new Room('R223')
+!R223.roomNumber := 223
+!R223.numBeds := 2
+!R223.pricePerNight := 100.00
+!R223.occupied := false
+!R223.blocked := false
+
+!new Room('R417')
+!R417.roomNumber := 417
+!R417.numBeds := 3
+!R417.pricePerNight := 120.00
+!R417.occupied := false
+!R417.blocked := false
+
+!new RoomExtra('E16')
+!E16.description := 'Traditional dinner reservation (rooftop terrace)'
+!E16.price := 80.00
+
+!new RoomExtra('E17')
+!E17.description := 'Laundry service (1 bag)'
+!E17.price := 30.00
+
+!new RoomExtra('E18')
+!E18.description := 'Hammam/spa session (60 minutes)'
+!E18.price := 55.00
+
+!new RoomExtra('E19')
+!E19.description := 'Baby crib (on request)'
+!E19.price := 0.00
+
+!new Bill('BL9101')
+!BL9101.billId := 9101
+!BL9101.price := 140.00
+
+!new Bill('BL9102')
+!BL9102.billId := 9102
+!BL9102.price := 410.00
+
+!new Bill('BL9103')
+!BL9103.billId := 9103
+!BL9103.price := 295.00
+
+!new FreeRoomTypesDTO('D17')
+!D17.roomTypeDescription := 'Chambre Double (vue médina)'
+!D17.numBeds := 2
+!D17.pricePerNight := 100.00
+!D17.numFreeRooms := 3
+
+!new FreeRoomTypesDTO('D18')
+!D18.roomTypeDescription := 'Suite Familiale (3 lits)'
+!D18.numBeds := 3
+!D18.pricePerNight := 120.00
+!D18.numFreeRooms := 1
+
+!insert (B3107, C11) into BookingCustomer
+
+!insert (B3107, RR4) into BookingRoomReservation
+!insert (B3107, RR5) into BookingRoomReservation
+!insert (B3107, RR6) into BookingRoomReservation
+
+!insert (RR4, R110) into RoomReservationRoom
+!insert (RR5, R223) into RoomReservationRoom
+!insert (RR6, R417) into RoomReservationRoom
+
+!insert (RR5, E16) into RoomReservationExtras
+!insert (RR5, E17) into RoomReservationExtras
+!insert (RR6, E18) into RoomReservationExtras
+!insert (RR6, E19) into RoomReservationExtras
+
+!insert (B3107, BL9101) into BookingBill
+!insert (B3107, BL9102) into BookingBill
+!insert (B3107, BL9103) into BookingBill
+
+!insert (BL9101, RR4) into BillRoomReservation
+!insert (BL9102, RR5) into BillRoomReservation
+!insert (BL9103, RR6) into BillRoomReservation

@@ -1,0 +1,280 @@
+!new Client('clientC1')
+!clientC1.clientId := 101
+!clientC1.isSuspended := false
+
+!new Client('clientC2')
+!clientC2.clientId := 202
+!clientC2.isSuspended := true
+
+!new Rental('rentalR1')
+!rentalR1.date := Date('2026-02-10')
+
+!new Rental('rentalR2')
+!rentalR2.date := Date('2026-02-18')
+
+!new Movie('movieM1')
+!movieM1.title := 'Metro Pursuit'
+!movieM1.availableCopies := 3
+!movieM1.genre := #Action
+
+!new Series('seriesS1')
+!seriesS1.title := 'Café Detectives'
+!seriesS1.availableCopies := 0
+!seriesS1.episode := 5
+
+!new Actor('actorA1')
+!actorA1.name := 'Amina El-Sayed'
+
+!new Actor('actorA2')
+!actorA2.name := 'Kenji Tanaka'
+
+!new Actor('actorA3')
+!actorA3.name := 'Lucía Herrera'
+
+!insert (clientC1, rentalR1) into ClientRental
+!insert (clientC1, rentalR2) into ClientRental
+
+!insert (rentalR1, movieM1) into RentalCassette
+!insert (rentalR1, seriesS1) into RentalCassette
+!insert (rentalR2, movieM1) into RentalCassette
+
+!insert (movieM1, actorA1) into CassetteActor
+!insert (movieM1, actorA2) into CassetteActor
+!insert (seriesS1, actorA3) into CassetteActor
+!insert (seriesS1, actorA2) into CassetteActor
+
+!new Client('clientEC1')
+!clientEC1.clientId := 1
+!clientEC1.isSuspended := true
+
+!new Client('clientEC2')
+!clientEC2.clientId := 2147483647
+!clientEC2.isSuspended := false
+
+!new Rental('rentalE1')
+!rentalE1.date := Date('0001-01-01')
+
+!new Rental('rentalE2')
+!rentalE2.date := Date('2999-12-31')
+
+!new Movie('movieE1')
+!movieE1.title := 'El Último Tren (Director’s Cut)'
+!movieE1.availableCopies := 0
+!movieE1.genre := #Action
+
+!new Movie('movieE2')
+!movieE2.title := 'Käsekuchen Chaos'
+!movieE2.availableCopies := 9999
+!movieE2.genre := #Comedy
+
+!new Series('seriesE1')
+!seriesE1.title := 'Nairobi Nights — Episode File'
+!seriesE1.availableCopies := 0
+!seriesE1.episode := 1
+
+!new Series('seriesE2')
+!seriesE2.title := 'Arctic Signal — Special Transmission'
+!seriesE2.availableCopies := 1
+!seriesE2.episode := 2147483647
+
+!new Actor('actorE1')
+!actorE1.name := 'María-José K. Tanaka'
+
+!new Actor('actorE2')
+!actorE2.name := 'Ousmane Diop'
+
+!new Actor('actorE3')
+!actorE3.name := 'Sven Østergård'
+
+!new Actor('actorE4')
+!actorE4.name := 'Priya Nair'
+
+!new Actor('actorE5')
+!actorE5.name := 'Zhang Wei (张伟)'
+
+!new Actor('actorE6')
+!actorE6.name := 'Uncredited Voice Performer'
+
+!insert (clientEC1, rentalE1) into ClientRental
+!insert (clientEC1, rentalE2) into ClientRental
+
+!insert (rentalE1, movieE1) into RentalCassette
+!insert (rentalE1, seriesE1) into RentalCassette
+!insert (rentalE1, seriesE2) into RentalCassette
+!insert (rentalE2, movieE1) into RentalCassette
+!insert (rentalE2, movieE2) into RentalCassette
+!insert (rentalE2, seriesE1) into RentalCassette
+!insert (rentalE2, seriesE2) into RentalCassette
+
+!insert (movieE1, actorE1) into CassetteActor
+!insert (movieE1, actorE2) into CassetteActor
+!insert (movieE1, actorE5) into CassetteActor
+!insert (movieE2, actorE3) into CassetteActor
+!insert (seriesE1, actorE2) into CassetteActor
+!insert (seriesE1, actorE4) into CassetteActor
+!insert (seriesE2, actorE1) into CassetteActor
+!insert (seriesE2, actorE3) into CassetteActor
+!insert (seriesE2, actorE4) into CassetteActor
+!insert (seriesE2, actorE5) into CassetteActor
+
+!new Client('clientB1')
+!clientB1.clientId := 1
+!clientB1.isSuspended := false
+
+!new Client('clientB2')
+!clientB2.clientId := 2
+!clientB2.isSuspended := true
+
+!new Rental('rentalB1')
+!rentalB1.date := Date('1970-01-01')
+
+!new Rental('rentalB2')
+!rentalB2.date := Date('1970-01-02')
+
+!new Movie('movieB1')
+!movieB1.title := 'El Último Chiste'
+!movieB1.availableCopies := 0
+!movieB1.genre := #Comedy
+
+!new Series('seriesB1')
+!seriesB1.title := '北風の町'
+!seriesB1.availableCopies := 0
+!seriesB1.episode := 1
+
+!new Actor('actorB1')
+!actorB1.name := 'María-José Lira'
+
+!new Actor('actorB2')
+!actorB2.name := 'Kenji Sato'
+
+!new Actor('actorB3')
+!actorB3.name := 'Nils Ødegård'
+
+!insert (clientB1, rentalB1) into ClientRental
+!insert (clientB1, rentalB2) into ClientRental
+
+!insert (rentalB1, movieB1) into RentalCassette
+!insert (rentalB2, movieB1) into RentalCassette
+
+!insert (movieB1, actorB1) into CassetteActor
+!insert (seriesB1, actorB2) into CassetteActor
+
+!new Client('clientX1')
+!clientX1.clientId := 101
+!clientX1.isSuspended := false
+
+!new Client('clientX2')
+!clientX2.clientId := 202
+!clientX2.isSuspended := true
+
+!new Client('clientX3')
+!clientX3.clientId := 303
+!clientX3.isSuspended := false
+
+!new Movie('movieX1')
+!movieX1.title := 'Metro Chase'
+!movieX1.availableCopies := 2
+!movieX1.genre := #Action
+
+!new Movie('movieX2')
+!movieX2.title := 'Laughing in Lagos'
+!movieX2.availableCopies := 0
+!movieX2.genre := #Comedy
+
+!new Movie('movieX3')
+!movieX3.title := 'Samurai Weekend'
+!movieX3.availableCopies := 1
+!movieX3.genre := #Comedy
+
+!new Series('seriesX1')
+!seriesX1.title := 'Nordic Noir — Season 1'
+!seriesX1.availableCopies := 1
+!seriesX1.episode := 3
+
+!new Series('seriesX2')
+!seriesX2.title := 'Hearts of Seoul — Season 2'
+!seriesX2.availableCopies := 4
+!seriesX2.episode := 12
+
+!new Series('seriesX3')
+!seriesX3.title := 'Río de Pasiones — Temporada 1'
+!seriesX3.availableCopies := 3
+!seriesX3.episode := 1
+
+!new Actor('actorX1')
+!actorX1.name := 'Amina Okafor'
+
+!new Actor('actorX2')
+!actorX2.name := 'Kenji Tanaka'
+
+!new Actor('actorX3')
+!actorX3.name := 'Ingrid Svendsen'
+
+!new Actor('actorX4')
+!actorX4.name := 'Sofía Martínez'
+
+!new Actor('actorX5')
+!actorX5.name := 'Min-ji Park'
+
+!new Actor('actorX6')
+!actorX6.name := 'Idris El-Masri'
+
+!new Actor('actorX7')
+!actorX7.name := 'João Silva'
+
+!new Actor('actorX8')
+!actorX8.name := 'Maya Chen'
+
+!new Rental('rentalX1')
+!rentalX1.date := Date('2026-01-05')
+
+!new Rental('rentalX2')
+!rentalX2.date := Date('2026-01-06')
+
+!new Rental('rentalX3')
+!rentalX3.date := Date('2026-01-10')
+
+!new Rental('rentalX4')
+!rentalX4.date := Date('2026-02-01')
+
+!new Rental('rentalX5')
+!rentalX5.date := Date('2026-02-15')
+
+!insert (clientX1, rentalX1) into ClientRental
+!insert (clientX1, rentalX2) into ClientRental
+!insert (clientX2, rentalX3) into ClientRental
+!insert (clientX3, rentalX4) into ClientRental
+!insert (clientX2, rentalX5) into ClientRental
+
+!insert (rentalX1, movieX1) into RentalCassette
+!insert (rentalX1, seriesX1) into RentalCassette
+
+!insert (rentalX2, movieX2) into RentalCassette
+
+!insert (rentalX3, movieX1) into RentalCassette
+!insert (rentalX3, seriesX2) into RentalCassette
+!insert (rentalX3, seriesX3) into RentalCassette
+
+!insert (rentalX4, seriesX1) into RentalCassette
+!insert (rentalX4, movieX3) into RentalCassette
+
+!insert (rentalX5, movieX3) into RentalCassette
+
+!insert (movieX1, actorX2) into CassetteActor
+!insert (movieX1, actorX6) into CassetteActor
+
+!insert (movieX2, actorX1) into CassetteActor
+!insert (movieX2, actorX7) into CassetteActor
+
+!insert (movieX3, actorX2) into CassetteActor
+!insert (movieX3, actorX3) into CassetteActor
+
+!insert (seriesX1, actorX3) into CassetteActor
+!insert (seriesX1, actorX6) into CassetteActor
+
+!insert (seriesX2, actorX5) into CassetteActor
+!insert (seriesX2, actorX2) into CassetteActor
+
+!insert (seriesX3, actorX4) into CassetteActor
+!insert (seriesX3, actorX7) into CassetteActor
+

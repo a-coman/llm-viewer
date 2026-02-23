@@ -1,0 +1,84 @@
+!new Customer('C16')
+!C16.firstName := 'Khadija'
+!C16.lastName := 'El Amrani'
+
+!new Booking('B7007')
+!B7007.bookingId := 7007
+!B7007.startDate := '2026-11-18'
+!B7007.endDate := '2026-11-22'
+!B7007.confirmed := true
+!B7007.canceled := false
+
+!new RoomReservation('R7701')
+!R7701.checkInDate := '2026-11-18'
+!R7701.checkOutDate := '2026-11-22'
+
+!new RoomReservation('R7702')
+!R7702.checkInDate := '2026-11-18'
+!R7702.checkOutDate := '2026-11-22'
+
+!new Room('RM210')
+!RM210.roomNumber := 210
+!RM210.numBeds := 1
+!RM210.pricePerNight := 84.00
+!RM210.occupied := false
+!RM210.blocked := false
+
+!new Room('RM212')
+!RM212.roomNumber := 212
+!RM212.numBeds := 2
+!RM212.pricePerNight := 112.00
+!RM212.occupied := false
+!RM212.blocked := false
+
+!new RoomExtra('X7701A')
+!X7701A.description := 'Airport transfer (late-night pickup)'
+!X7701A.price := 22.00
+
+!new RoomExtra('X7702A')
+!X7702A.description := 'Traditional hammam spa access'
+!X7702A.price := 30.00
+
+!new RoomExtra('X7702B')
+!X7702B.description := 'Extra baby cot'
+!X7702B.price := 10.00
+
+!new Bill('BL1200')
+!BL1200.billId := 1200
+!BL1200.price := 846.00
+
+!new FreeRoomTypesDTO('D27')
+!D27.roomTypeDescription := 'Single room, inner courtyard'
+!D27.numBeds := 1
+!D27.pricePerNight := 84.00
+!D27.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('D28')
+!D28.roomTypeDescription := 'Double room, city view'
+!D28.numBeds := 2
+!D28.pricePerNight := 112.00
+!D28.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D29')
+!D29.roomTypeDescription := 'Family room, 3 beds'
+!D29.numBeds := 3
+!D29.pricePerNight := 145.00
+!D29.numFreeRooms := 0
+
+!insert (B7007, C16) into BookingCustomer
+
+!insert (B7007, R7701) into BookingRoomReservation
+!insert (B7007, R7702) into BookingRoomReservation
+
+!insert (R7701, RM210) into RoomReservationRoom
+!insert (R7702, RM212) into RoomReservationRoom
+
+!insert (R7701, X7701A) into RoomReservationExtras
+!insert (R7702, X7702A) into RoomReservationExtras
+!insert (R7702, X7702B) into RoomReservationExtras
+
+!insert (B7007, BL1200) into BookingBill
+
+!insert (BL1200, R7701) into BillRoomReservation
+!insert (BL1200, R7702) into BillRoomReservation
+

@@ -1,0 +1,93 @@
+!new Customer('C22')
+!C22.firstName := 'Anand'
+!C22.lastName := 'Iyer'
+
+!new Booking('B6002')
+!B6002.bookingId := 6002
+!B6002.startDate := '2026-02-10'
+!B6002.endDate := '2026-02-13'
+!B6002.confirmed := true
+!B6002.canceled := false
+
+!new RoomReservation('RR9')
+!RR9.checkInDate := '2026-02-10'
+!RR9.checkOutDate := '2026-02-12'
+
+!new RoomReservation('RR10')
+!RR10.checkInDate := '2026-02-12'
+!RR10.checkOutDate := '2026-02-13'
+
+!new RoomReservation('RR11')
+!RR11.checkInDate := '2026-02-11'
+!RR11.checkOutDate := '2026-02-11'
+
+!new Room('R1201')
+!R1201.roomNumber := 1201
+!R1201.numBeds := 1
+!R1201.pricePerNight := 110.00
+!R1201.occupied := true
+!R1201.blocked := false
+
+!new Room('R1202')
+!R1202.roomNumber := 1202
+!R1202.numBeds := 4
+!R1202.pricePerNight := 120.00
+!R1202.occupied := false
+!R1202.blocked := false
+
+!new RoomExtra('E34')
+!E34.description := 'Rollaway bed (one night)'
+!E34.price := 15.00
+
+!new RoomExtra('E35')
+!E35.description := 'Vegetarian set dinner'
+!E35.price := 30.00
+
+!new RoomExtra('E36')
+!E36.description := 'Meeting room rental (2 hours)'
+!E36.price := 200.00
+
+!new Bill('BL15001')
+!BL15001.billId := 15001
+!BL15001.price := 0.00
+
+!new Bill('BL15002')
+!BL15002.billId := 15002
+!BL15002.price := 165.00
+
+!new Bill('BL15003')
+!BL15003.billId := 15003
+!BL15003.price := 200.00
+
+!new FreeRoomTypesDTO('D38')
+!D38.roomTypeDescription := 'Standard Einzelzimmer (ruhige Lage)'
+!D38.numBeds := 1
+!D38.pricePerNight := 110.00
+!D38.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('D39')
+!D39.roomTypeDescription := 'Chumba cha Familia (vitanda vinne)'
+!D39.numBeds := 4
+!D39.pricePerNight := 120.00
+!D39.numFreeRooms := 1
+
+!insert (B6002, C22) into BookingCustomer
+
+!insert (B6002, RR9) into BookingRoomReservation
+!insert (B6002, RR10) into BookingRoomReservation
+!insert (B6002, RR11) into BookingRoomReservation
+
+!insert (RR9, R1201) into RoomReservationRoom
+!insert (RR10, R1202) into RoomReservationRoom
+
+!insert (RR10, E34) into RoomReservationExtras
+!insert (RR10, E35) into RoomReservationExtras
+!insert (RR11, E36) into RoomReservationExtras
+
+!insert (B6002, BL15001) into BookingBill
+!insert (B6002, BL15002) into BookingBill
+!insert (B6002, BL15003) into BookingBill
+
+!insert (BL15001, RR9) into BillRoomReservation
+!insert (BL15002, RR10) into BillRoomReservation
+!insert (BL15003, RR11) into BillRoomReservation

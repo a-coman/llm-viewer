@@ -1,0 +1,66 @@
+!new RentalOffice('RO_edge1')
+!RO_edge1.name := 'Downtown Satellite Kiosk'
+!RO_edge1.number := 0
+!RO_edge1.address := '1½ Market St, Wilmington, DE 19801'
+
+!new RentalOffice('RO_edge2')
+!RO_edge2.name := 'Interstate Drop Yard'
+!RO_edge2.number := 999999
+!RO_edge2.address := 'Exit 7 Service Rd, Dover, DE 19901'
+
+!new Truck('V_edge1')
+!V_edge1.id := 1
+!V_edge1.registrationState := #AK
+!V_edge1.licensePlateNumber := 'AK-000000'
+!V_edge1.vehicleTypeCode := #TRUCK10
+!V_edge1.registrationLastMaintenanceDate := Date('2026-02-21')
+!V_edge1.expirationDate := Date('2025-01-01')
+!V_edge1.odometerReading := 0
+!V_edge1.gasTankCapacity := 0.0
+!V_edge1.workingRadio := false
+!V_edge1.mileage := 0
+
+!new Individual('C_edge1')
+!C_edge1.name := 'María-José Núñez'
+!C_edge1.address := 'Unit B, 12 Orange St, Dover, DE 19901'
+!C_edge1.poorRisk := true
+!C_edge1.homePhone := '+1-302-555-0100'
+!C_edge1.driverLicenseState := #CA
+!C_edge1.driverLicenseNumber := 0
+!C_edge1.driverLicenseExpirationDate := Date('2000-01-01')
+
+!new Company('C_edge2')
+!C_edge2.name := 'Kalaallit Logistics LLC'
+!C_edge2.address := 'Harbor Rd 5, Dover, DE 19904'
+!C_edge2.poorRisk := false
+!C_edge2.idNumber := 0
+
+!new RentalAgreement('RA_1000000')
+!RA_1000000.number := 1000000
+!RA_1000000.rentalDate := Date('2026-02-22')
+!RA_1000000.anticipatedDuration := 0
+!RA_1000000.depositPaid := 0.0
+!RA_1000000.quotedDailyRate := 0.0
+!RA_1000000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_1000001')
+!RA_1000001.number := 1000001
+!RA_1000001.rentalDate := Date('2026-02-22')
+!RA_1000001.anticipatedDuration := 0
+!RA_1000001.depositPaid := 0.0
+!RA_1000001.quotedDailyRate := 0.0
+!RA_1000001.quotedRatePerMile := 0.0
+
+!insert (RO_edge1, V_edge1) into RentalOfficeVehicle
+
+!insert (RO_edge1, RA_1000000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_edge1, RA_1000001) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_edge2, RA_1000000) into RentalOfficeRentalAgreementDrop
+!insert (RO_edge1, RA_1000001) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_1000000, V_edge1) into RentalAgreementVehicle
+!insert (RA_1000001, V_edge1) into RentalAgreementVehicle
+
+!insert (RA_1000000, C_edge1) into RentalAgreementCustomer
+!insert (RA_1000001, C_edge2) into RentalAgreementCustomer

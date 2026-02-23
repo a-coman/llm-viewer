@@ -1,0 +1,105 @@
+!new Client('clientC40')
+!clientC40.clientId := 44
+!clientC40.isSuspended := false
+
+!new Client('clientC41')
+!clientC41.clientId := 1201
+!clientC41.isSuspended := true
+
+!new Client('clientC42')
+!clientC42.clientId := 318
+!clientC42.isSuspended := false
+
+!new Client('clientC43')
+!clientC43.clientId := 9
+!clientC43.isSuspended := false
+
+!new Rental('rentalR40')
+!rentalR40.date := Date('2023-08-14')
+
+!new Rental('rentalR41')
+!rentalR41.date := Date('2023-08-20')
+
+!new Rental('rentalR42')
+!rentalR42.date := Date('2023-09-02')
+
+!new Movie('movieM40')
+!movieM40.title := 'Whānau Warriors'
+!movieM40.availableCopies := 2
+!movieM40.genre := #Action
+
+!new Movie('movieM41')
+!movieM41.title := 'Sauna Sitcom'
+!movieM41.availableCopies := 0
+!movieM41.genre := #Comedy
+
+!new Movie('movieM42')
+!movieM42.title := 'Steppe Chase'
+!movieM42.availableCopies := 6
+!movieM42.genre := #Action
+
+!new Series('seriesS40')
+!seriesS40.title := 'Orbital Classroom'
+!seriesS40.availableCopies := 1
+!seriesS40.episode := 2
+
+!new Series('seriesS41')
+!seriesS41.title := 'Orbital Classroom'
+!seriesS41.availableCopies := 1
+!seriesS41.episode := 7
+
+!new Series('seriesS42')
+!seriesS42.title := 'Orbital Classroom'
+!seriesS42.availableCopies := 3
+!seriesS42.episode := 1
+
+!new Actor('actorA40')
+!actorA40.name := 'Hine Te Rangi'
+
+!new Actor('actorA41')
+!actorA41.name := 'Joon-ho Park'
+
+!new Actor('actorA42')
+!actorA42.name := 'Aino Kallio'
+
+!new Actor('actorA43')
+!actorA43.name := 'Batbayar Enkh'
+
+!new Actor('actorA44')
+!actorA44.name := 'Lara Nascimento'
+
+!new Actor('actorA45')
+!actorA45.name := 'Samir Qureshi'
+
+!new Actor('actorA46')
+!actorA46.name := 'Eleni Papadakis'
+
+!insert (clientC40, rentalR40) into ClientRental
+!insert (clientC40, rentalR41) into ClientRental
+!insert (clientC43, rentalR42) into ClientRental
+
+!insert (rentalR40, movieM40) into RentalCassette
+!insert (rentalR40, movieM41) into RentalCassette
+!insert (rentalR40, seriesS40) into RentalCassette
+!insert (rentalR40, seriesS41) into RentalCassette
+!insert (rentalR40, seriesS42) into RentalCassette
+
+!insert (rentalR41, movieM40) into RentalCassette
+
+!insert (rentalR42, seriesS41) into RentalCassette
+
+!insert (movieM40, actorA40) into CassetteActor
+!insert (movieM40, actorA41) into CassetteActor
+
+!insert (movieM41, actorA42) into CassetteActor
+
+!insert (movieM42, actorA43) into CassetteActor
+!insert (movieM42, actorA44) into CassetteActor
+!insert (movieM42, actorA40) into CassetteActor
+
+!insert (seriesS40, actorA45) into CassetteActor
+
+!insert (seriesS41, actorA41) into CassetteActor
+!insert (seriesS41, actorA46) into CassetteActor
+
+!insert (seriesS42, actorA40) into CassetteActor

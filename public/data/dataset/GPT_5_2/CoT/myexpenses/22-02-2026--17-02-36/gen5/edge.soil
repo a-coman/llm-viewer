@@ -1,0 +1,97 @@
+!new Currency('currencyXOFEdge')
+!currencyXOFEdge.name := 'West African CFA franc'
+!currencyXOFEdge.abbreviation := 'XOF'
+
+!new Currency('currencyTOPEdge')
+!currencyTOPEdge.name := 'Tongan Paʻanga'
+!currencyTOPEdge.abbreviation := 'TOP'
+
+!new Currency('currencyWSTEdge')
+!currencyWSTEdge.name := 'Samoan Tālā'
+!currencyWSTEdge.abbreviation := 'WST'
+
+!new Currency('currencyCLFEdge')
+!currencyCLFEdge.name := 'Chilean Unidad de Fomento'
+!currencyCLFEdge.abbreviation := 'CLF'
+
+!new Expense('expenseEXPEDGE009')
+!expenseEXPEDGE009.amount := 0.00
+!expenseEXPEDGE009.startDate := Date('1970-01-01')
+!expenseEXPEDGE009.endDate := Date('1970-01-01')
+
+!new Comment('commentEXPEDGE009_COM901')
+!commentEXPEDGE009_COM901.text := 'Created automatically by an import job; awaiting bills from upstream system.'
+
+!new Comment('commentEXPEDGE009_COM902')
+!commentEXPEDGE009_COM902.text := 'No bills were attached; keeping record for audit trail only.'
+
+!new Comment('commentEXPEDGE009_COM903')
+!commentEXPEDGE009_COM903.text := '日本語: 請求書未連携のため保留。'
+
+!new Comment('commentEXPEDGE009_COM904')
+!commentEXPEDGE009_COM904.text := 'Français : brouillon sans justificatifs (cas limite volontaire).'
+
+!new Comment('commentEXPEDGE009_COM905')
+!commentEXPEDGE009_COM905.text := '한국어 메모: 영수증이 아직 없습니다.'
+
+!new Comment('commentEXPEDGE009_COM906')
+!commentEXPEDGE009_COM906.text := 'Multiline note:\n- Step 1: create expense\n- Step 2: attach bills later\n- Step 3: reconcile totals'
+
+!new Comment('commentEXPEDGE009_COM907')
+!commentEXPEDGE009_COM907.text := '⚠ System note: This expense is valid in the model because sum(empty bills)=0.'
+
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM901) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM902) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM903) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM904) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM905) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM906) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM907) into ExpenseComment
+
+!new Expense('expenseEXPEDGE010')
+!expenseEXPEDGE010.amount := 0.02
+!expenseEXPEDGE010.startDate := Date('0001-01-01')
+!expenseEXPEDGE010.endDate := Date('9999-12-31')
+
+!new Bill('billEXPEDGE010_BILL1001')
+!billEXPEDGE010_BILL1001.amount := 1000.00
+!billEXPEDGE010_BILL1001.category := 'Foundational charge (legacy ledger seed)'
+!billEXPEDGE010_BILL1001.date := Date('0001-01-01')
+!billEXPEDGE010_BILL1001.paymentMethod := #CASH
+!billEXPEDGE010_BILL1001.status := #VERIFIED
+
+!new Bill('billEXPEDGE010_BILL1002')
+!billEXPEDGE010_BILL1002.amount := -999.99
+!billEXPEDGE010_BILL1002.category := 'Retroactive correction/refund'
+!billEXPEDGE010_BILL1002.date := Date('9999-12-31')
+!billEXPEDGE010_BILL1002.paymentMethod := #CREDIT_CARD
+!billEXPEDGE010_BILL1002.status := #REFUNDED
+
+!new Bill('billEXPEDGE010_BILL1003')
+!billEXPEDGE010_BILL1003.amount := 0.00
+!billEXPEDGE010_BILL1003.category := 'Zero-value verification line'
+!billEXPEDGE010_BILL1003.date := Date('2000-01-01')
+!billEXPEDGE010_BILL1003.paymentMethod := #CHECK
+!billEXPEDGE010_BILL1003.status := #VALIDATED
+
+!new Bill('billEXPEDGE010_BILL1004')
+!billEXPEDGE010_BILL1004.amount := 0.01
+!billEXPEDGE010_BILL1004.category := 'Precision residue A'
+!billEXPEDGE010_BILL1004.date := Date('2016-12-31')
+!billEXPEDGE010_BILL1004.paymentMethod := #CASH
+!billEXPEDGE010_BILL1004.status := #PENDING
+
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1001) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1002) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1003) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1004) into ExpenseContainsBills
+
+!insert (billEXPEDGE010_BILL1001, currencyXOFEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1002, currencyTOPEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1003, currencyWSTEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1004, currencyCLFEdge) into BillCurrency
+
+!new Comment('commentEXPEDGE010_COM1001')
+!commentEXPEDGE010_COM1001.text := 'Edge test: bills span the earliest and latest representable dates; totals rely on near-cancellation (1000.00 - 999.99 + 0 + 0.01 = 0.02).'
+
+!insert (expenseEXPEDGE010, commentEXPEDGE010_COM1001) into ExpenseComment

@@ -1,0 +1,107 @@
+!new RentalOffice('RO10')
+!RO10.name := 'Border Returns Depot'
+!RO10.number := -1
+!RO10.address := '1250 Alameda Ave, El Paso, TX (US–MX crossing lane)'
+
+!new RentalOffice('RO11')
+!RO11.name := 'Miami Aeropuerto – Lote B'
+!RO11.number := 214
+!RO11.address := 'NW 21st St, Miami, FL (Shuttle Stop B)'
+
+!new RentalOffice('RO12')
+!RO12.name := 'Phoenix Night Desk (24h)'
+!RO12.number := 215
+!RO12.address := '3400 E Sky Harbor Blvd, Phoenix, AZ (after-hours kiosk)'
+
+!new Vehicle('V100')
+!V100.id := 0
+!V100.registrationState := #FL
+!V100.licensePlateNumber := 'FL-TRAIL-000'
+!V100.vehicleTypeCode := #OPEN_TRAILER
+!V100.registrationLastMaintenanceDate := Date('2020-02-29')
+!V100.expirationDate := Date('2099-12-31')
+
+!new Vehicle('V101')
+!V101.id := 2147483647
+!V101.registrationState := #DE
+!V101.licensePlateNumber := 'DE-CVR-7'
+!V101.vehicleTypeCode := #COVERED_TRAILER
+!V101.registrationLastMaintenanceDate := Date('2026-06-30')
+!V101.expirationDate := Date('2099-12-31')
+
+!new Truck('V102')
+!V102.id := -500
+!V102.registrationState := #AZ
+!V102.licensePlateNumber := 'AZ-EDGE-500'
+!V102.vehicleTypeCode := #TRUCK24
+!V102.registrationLastMaintenanceDate := Date('2026-06-30')
+!V102.expirationDate := Date('2026-06-30')
+!V102.odometerReading := 9999999
+!V102.gasTankCapacity := 9999.99
+!V102.workingRadio := true
+!V102.mileage := 1000000
+
+!new Truck('V103')
+!V103.id := 42
+!V103.registrationState := #CO
+!V103.licensePlateNumber := 'CO-MIN-042'
+!V103.vehicleTypeCode := #TRUCK
+!V103.registrationLastMaintenanceDate := Date('2026-06-30')
+!V103.expirationDate := Date('2099-12-31')
+!V103.odometerReading := 1
+!V103.gasTankCapacity := 0.0
+!V103.workingRadio := true
+!V103.mileage := 0
+
+!new Company('C10')
+!C10.name := 'Sunrise Cátering S.A.'
+!C10.address := '8000 NW 25th St, Miami, FL'
+!C10.poorRisk := true
+!C10.idNumber := 2147483647
+
+!new Individual('I10')
+!I10.name := 'Håkon Østergård'
+!I10.address := '1901 Blake St, Denver, CO'
+!I10.poorRisk := false
+!I10.homePhone := '+1-720-555-0199'
+!I10.driverLicenseState := #CT
+!I10.driverLicenseNumber := 987654321
+!I10.driverLicenseExpirationDate := Date('2099-01-01')
+
+!new Company('C11')
+!C11.name := 'No-Contract Holdings Inc.'
+!C11.address := '100 King St, Wilmington, DE'
+!C11.poorRisk := false
+!C11.idNumber := 555
+
+!new RentalAgreement('RA200')
+!RA200.number := 0
+!RA200.rentalDate := Date('1900-01-01')
+!RA200.anticipatedDuration := 1
+!RA200.depositPaid := 0.0
+!RA200.quotedDailyRate := 99999.99
+!RA200.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA201')
+!RA201.number := 2147483647
+!RA201.rentalDate := Date('2099-12-31')
+!RA201.anticipatedDuration := 999999999
+!RA201.depositPaid := 1000000000.0
+!RA201.quotedDailyRate := 0.0
+!RA201.quotedRatePerMile := 12345.67
+
+!insert (RO12, V100) into RentalOfficeVehicle
+!insert (RO12, V101) into RentalOfficeVehicle
+!insert (RO10, V102) into RentalOfficeVehicle
+!insert (RO11, V103) into RentalOfficeVehicle
+
+!insert (RO11, RA200) into RentalOfficeRentalAgreementOrigin
+!insert (RO10, RA200) into RentalOfficeRentalAgreementDrop
+!insert (RO12, RA201) into RentalOfficeRentalAgreementOrigin
+!insert (RO12, RA201) into RentalOfficeRentalAgreementDrop
+
+!insert (RA200, V100) into RentalAgreementVehicle
+!insert (RA201, V102) into RentalAgreementVehicle
+
+!insert (RA200, C10) into RentalAgreementCustomer
+!insert (RA201, I10) into RentalAgreementCustomer

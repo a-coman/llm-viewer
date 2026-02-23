@@ -1,0 +1,92 @@
+!new Client('clientC20')
+!clientC20.clientId := 412
+!clientC20.isSuspended := false
+
+!new Client('clientC21')
+!clientC21.clientId := 73
+!clientC21.isSuspended := false
+
+!new Client('clientC22')
+!clientC22.clientId := 999
+!clientC22.isSuspended := true
+
+!new Rental('rentalR20')
+!rentalR20.date := Date('2024-06-14')
+
+!new Rental('rentalR21')
+!rentalR21.date := Date('2024-07-01')
+
+!new Rental('rentalR22')
+!rentalR22.date := Date('2024-09-09')
+
+!new Movie('movieM20')
+!movieM20.title := 'Midnight Tuk-Tuk'
+!movieM20.availableCopies := 0
+!movieM20.genre := #Comedy
+
+!new Movie('movieM21')
+!movieM21.title := 'Baltic Strike'
+!movieM21.availableCopies := 4
+!movieM21.genre := #Action
+
+!new Movie('movieM22')
+!movieM22.title := 'Paper Lanterns'
+!movieM22.availableCopies := 2
+!movieM22.genre := #Comedy
+
+!new Series('seriesS20')
+!seriesS20.title := 'Coastline Dispatch'
+!seriesS20.availableCopies := 1
+!seriesS20.episode := 3
+
+!new Series('seriesS21')
+!seriesS21.title := 'Coastline Dispatch'
+!seriesS21.availableCopies := 1
+!seriesS21.episode := 24
+
+!new Actor('actorA20')
+!actorA20.name := 'Chinwe Okafor'
+
+!new Actor('actorA21')
+!actorA21.name := 'Ilya Petrov'
+
+!new Actor('actorA22')
+!actorA22.name := 'Mina Park'
+
+!new Actor('actorA23')
+!actorA23.name := 'Tomás Ribeiro'
+
+!new Actor('actorA24')
+!actorA24.name := 'Salma Benali'
+
+!new Actor('actorA25')
+!actorA25.name := 'Noah Williams'
+
+!new Actor('actorA26')
+!actorA26.name := 'Linh Trần'
+
+!insert (clientC20, rentalR20) into ClientRental
+!insert (clientC20, rentalR21) into ClientRental
+!insert (clientC22, rentalR22) into ClientRental
+
+!insert (rentalR20, movieM20) into RentalCassette
+
+!insert (rentalR21, seriesS20) into RentalCassette
+!insert (rentalR21, seriesS21) into RentalCassette
+!insert (rentalR21, movieM21) into RentalCassette
+
+!insert (rentalR22, movieM21) into RentalCassette
+
+!insert (movieM20, actorA20) into CassetteActor
+!insert (movieM20, actorA23) into CassetteActor
+
+!insert (movieM21, actorA21) into CassetteActor
+!insert (movieM21, actorA24) into CassetteActor
+!insert (movieM21, actorA25) into CassetteActor
+
+!insert (movieM22, actorA22) into CassetteActor
+
+!insert (seriesS20, actorA24) into CassetteActor
+!insert (seriesS20, actorA22) into CassetteActor
+
+!insert (seriesS21, actorA20) into CassetteActor

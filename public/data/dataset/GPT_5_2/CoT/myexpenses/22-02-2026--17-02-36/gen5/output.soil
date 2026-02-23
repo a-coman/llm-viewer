@@ -1,0 +1,528 @@
+!new Currency('currencyBHD')
+!currencyBHD.name := 'Bahraini Dinar'
+!currencyBHD.abbreviation := 'BHD'
+
+!new Currency('currencyNZD')
+!currencyNZD.name := 'New Zealand Dollar'
+!currencyNZD.abbreviation := 'NZD'
+
+!new Expense('expenseECommentOnly')
+!expenseECommentOnly.amount := 0.00
+!expenseECommentOnly.startDate := Date('9999-12-31')
+!expenseECommentOnly.endDate := Date('9999-12-31')
+
+!new Comment('commentECommentOnly_CCO1')
+!commentECommentOnly_CCO1.text := 'No bills attached: this is a placeholder expense used to test comment workflows only.'
+
+!new Comment('commentECommentOnly_CCO2')
+!commentECommentOnly_CCO2.text := 'नोट: कुल राशि शून्य है क्योंकि कोई रसीद संलग्न नहीं है।'
+
+!new Comment('commentECommentOnly_CCO3')
+!commentECommentOnly_CCO3.text := 'ملاحظة: سيتم إضافة الفواتير لاحقًا إذا لزم الأمر.'
+
+!new Comment('commentECommentOnly_CCO4')
+!commentECommentOnly_CCO4.text := 'Дата установлена на 9999-12-31 для проверки предельных значений.'
+
+!insert (expenseECommentOnly, commentECommentOnly_CCO1) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO2) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO3) into ExpenseComment
+!insert (expenseECommentOnly, commentECommentOnly_CCO4) into ExpenseComment
+
+!new Expense('expenseEPrecise')
+!expenseEPrecise.amount := 13.01
+!expenseEPrecise.startDate := Date('2026-02-28')
+!expenseEPrecise.endDate := Date('2026-02-28')
+
+!new Bill('billEPrecise_BP1')
+!billEPrecise_BP1.amount := 12.345
+!billEPrecise_BP1.category := 'Client dinner (Manama)'
+!billEPrecise_BP1.date := Date('2026-02-28')
+!billEPrecise_BP1.paymentMethod := #CREDIT_CARD
+!billEPrecise_BP1.status := #VERIFIED
+
+!new Bill('billEPrecise_BP2')
+!billEPrecise_BP2.amount := 0.655
+!billEPrecise_BP2.category := 'Service charge adjustment'
+!billEPrecise_BP2.date := Date('2026-02-28')
+!billEPrecise_BP2.paymentMethod := #CHECK
+!billEPrecise_BP2.status := #VALIDATED
+
+!new Bill('billEPrecise_BP3')
+!billEPrecise_BP3.amount := 0.01
+!billEPrecise_BP3.category := 'Koha (token contribution)'
+!billEPrecise_BP3.date := Date('2026-02-28')
+!billEPrecise_BP3.paymentMethod := #CASH
+!billEPrecise_BP3.status := #PENDING
+
+!insert (expenseEPrecise, billEPrecise_BP1) into ExpenseContainsBills
+!insert (expenseEPrecise, billEPrecise_BP2) into ExpenseContainsBills
+!insert (expenseEPrecise, billEPrecise_BP3) into ExpenseContainsBills
+
+!insert (billEPrecise_BP1, currencyBHD) into BillCurrency
+!insert (billEPrecise_BP2, currencyBHD) into BillCurrency
+!insert (billEPrecise_BP3, currencyNZD) into BillCurrency
+
+!new Currency('currencyPHP')
+!currencyPHP.name := 'Philippine Peso'
+!currencyPHP.abbreviation := 'PHP'
+
+!new Currency('currencySGD')
+!currencySGD.name := 'Singapore Dollar'
+!currencySGD.abbreviation := 'SGD'
+
+!new Expense('expenseEXP2026072')
+!expenseEXP2026072.amount := 0.00
+!expenseEXP2026072.startDate := Date('2026-04-01')
+!expenseEXP2026072.endDate := Date('2026-04-30')
+
+!new Comment('commentEXP2026072_CMT401')
+!commentEXP2026072_CMT401.text := 'Created for record-keeping; no reimbursable purchases were made during this period.'
+
+!insert (expenseEXP2026072, commentEXP2026072_CMT401) into ExpenseComment
+
+!new Expense('expenseEXP2026073')
+!expenseEXP2026073.amount := 5328.90
+!expenseEXP2026073.startDate := Date('2026-04-05')
+!expenseEXP2026073.endDate := Date('2026-04-12')
+
+!new Bill('billEXP2026073_BILL401')
+!billEXP2026073_BILL401.amount := 1200.00
+!billEXP2026073_BILL401.category := 'Air travel'
+!billEXP2026073_BILL401.date := Date('2026-04-05')
+!billEXP2026073_BILL401.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL401.status := #VALIDATED
+
+!new Bill('billEXP2026073_BILL402')
+!billEXP2026073_BILL402.amount := 300.00
+!billEXP2026073_BILL402.category := 'Telecom'
+!billEXP2026073_BILL402.date := Date('2026-04-06')
+!billEXP2026073_BILL402.paymentMethod := #CASH
+!billEXP2026073_BILL402.status := #VERIFIED
+
+!new Bill('billEXP2026073_BILL403')
+!billEXP2026073_BILL403.amount := 560.50
+!billEXP2026073_BILL403.category := 'Local transport'
+!billEXP2026073_BILL403.date := Date('2026-04-07')
+!billEXP2026073_BILL403.paymentMethod := #CASH
+!billEXP2026073_BILL403.status := #PENDING
+
+!new Bill('billEXP2026073_BILL404')
+!billEXP2026073_BILL404.amount := 2450.00
+!billEXP2026073_BILL404.category := 'Supplies'
+!billEXP2026073_BILL404.date := Date('2026-04-08')
+!billEXP2026073_BILL404.paymentMethod := #CHECK
+!billEXP2026073_BILL404.status := #VERIFIED
+
+!new Bill('billEXP2026073_BILL405')
+!billEXP2026073_BILL405.amount := 18.40
+!billEXP2026073_BILL405.category := 'Meals'
+!billEXP2026073_BILL405.date := Date('2026-04-05')
+!billEXP2026073_BILL405.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL405.status := #REFUNDED
+
+!new Bill('billEXP2026073_BILL406')
+!billEXP2026073_BILL406.amount := 800.00
+!billEXP2026073_BILL406.category := 'Lodging'
+!billEXP2026073_BILL406.date := Date('2026-04-10')
+!billEXP2026073_BILL406.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL406.status := #REFUSED
+
+!insert (expenseEXP2026073, billEXP2026073_BILL401) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL402) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL403) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL404) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL405) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL406) into ExpenseContainsBills
+
+!insert (billEXP2026073_BILL401, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL402, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL403, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL404, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL405, currencySGD) into BillCurrency
+!insert (billEXP2026073_BILL406, currencyPHP) into BillCurrency
+
+!new Comment('commentEXP2026073_CMT402')
+!commentEXP2026073_CMT402.text := 'Refund applied for the Singapore layover charge; refund confirmation attached.'
+
+!new Comment('commentEXP2026073_CMT403')
+!commentEXP2026073_CMT403.text := 'Paki-verify po ang cancellation fee—na-refuse dahil wala sa approved accommodation list.'
+
+!insert (expenseEXP2026073, commentEXP2026073_CMT402) into ExpenseComment
+!insert (expenseEXP2026073, commentEXP2026073_CMT403) into ExpenseComment
+
+!new Currency('currencySGD_DCC')
+!currencySGD_DCC.name := 'Singapore Dollar'
+!currencySGD_DCC.abbreviation := 'SGD'
+
+!new Currency('currencyUSD_DCC')
+!currencyUSD_DCC.name := 'US Dollar'
+!currencyUSD_DCC.abbreviation := 'USD'
+
+!new Expense('expenseSingaporeConferenceDCC')
+!expenseSingaporeConferenceDCC.amount := 1345.00
+!expenseSingaporeConferenceDCC.startDate := Date('2026-02-16')
+!expenseSingaporeConferenceDCC.endDate := Date('2026-02-18')
+
+!new Bill('billSingaporeSG1')
+!billSingaporeSG1.amount := 1280.00
+!billSingaporeSG1.category := 'Hotel (3 nights, invoice shows SGD + DCC USD)'
+!billSingaporeSG1.date := Date('2026-02-18')
+!billSingaporeSG1.paymentMethod := #CREDIT_CARD
+!billSingaporeSG1.status := #PENDING
+
+!new Bill('billSingaporeSG2')
+!billSingaporeSG2.amount := 65.00
+!billSingaporeSG2.category := 'Metro & bus (EZ-Link top-up)'
+!billSingaporeSG2.date := Date('2026-02-17')
+!billSingaporeSG2.paymentMethod := #CASH
+!billSingaporeSG2.status := #VERIFIED
+
+!insert (expenseSingaporeConferenceDCC, billSingaporeSG1) into ExpenseContainsBills
+!insert (expenseSingaporeConferenceDCC, billSingaporeSG2) into ExpenseContainsBills
+
+!insert (billSingaporeSG1, currencySGD_DCC) into BillCurrency
+!insert (billSingaporeSG1, currencyUSD_DCC) into BillCurrency
+!insert (billSingaporeSG2, currencySGD_DCC) into BillCurrency
+
+!new Comment('commentSingaporeDCC1')
+!commentSingaporeDCC1.text := 'Hotel receipt lists 1,280.00 SGD, but terminal also printed Dynamic Currency Conversion showing 950.00 USD. Finance asked to keep both figures for audit.'
+
+!new Comment('commentSingaporeDCC2')
+!commentSingaporeDCC2.text := '请注意：同一笔交易有本地币种与结算币种两种金额 (SGD vs USD).'
+
+!insert (expenseSingaporeConferenceDCC, commentSingaporeDCC1) into ExpenseComment
+!insert (expenseSingaporeConferenceDCC, commentSingaporeDCC2) into ExpenseComment
+
+!new Currency('currencySEKComplex4')
+!currencySEKComplex4.name := 'Swedish Krona'
+!currencySEKComplex4.abbreviation := 'SEK'
+
+!new Currency('currencyTHBComplex4')
+!currencyTHBComplex4.name := 'Thai Baht'
+!currencyTHBComplex4.abbreviation := 'THB'
+
+!new Currency('currencyAEDComplex4')
+!currencyAEDComplex4.name := 'United Arab Emirates Dirham'
+!currencyAEDComplex4.abbreviation := 'AED'
+
+!new Currency('currencyNZDComplex4')
+!currencyNZDComplex4.name := 'New Zealand Dollar'
+!currencyNZDComplex4.abbreviation := 'NZD'
+
+!new Currency('currencyKRWComplex4')
+!currencyKRWComplex4.name := 'South Korean Won'
+!currencyKRWComplex4.abbreviation := 'KRW'
+
+!new Expense('expenseStockholmDesignSprint')
+!expenseStockholmDesignSprint.amount := 5790.50
+!expenseStockholmDesignSprint.startDate := Date('2025-02-10')
+!expenseStockholmDesignSprint.endDate := Date('2025-02-14')
+
+!new Bill('billStockholmST1')
+!billStockholmST1.amount := 3200.00
+!billStockholmST1.category := 'Hotel (4 nights)'
+!billStockholmST1.date := Date('2025-02-10')
+!billStockholmST1.paymentMethod := #CREDIT_CARD
+!billStockholmST1.status := #VALIDATED
+
+!new Bill('billStockholmST2')
+!billStockholmST2.amount := 280.00
+!billStockholmST2.category := 'Transit pass (SL 7-day)'
+!billStockholmST2.date := Date('2025-02-11')
+!billStockholmST2.paymentMethod := #CASH
+!billStockholmST2.status := #VERIFIED
+
+!new Bill('billStockholmST3')
+!billStockholmST3.amount := 1450.00
+!billStockholmST3.category := 'Workshop room rental'
+!billStockholmST3.date := Date('2025-02-12')
+!billStockholmST3.paymentMethod := #CHECK
+!billStockholmST3.status := #PENDING
+
+!new Bill('billStockholmST4')
+!billStockholmST4.amount := 860.50
+!billStockholmST4.category := 'Team meals (fika + working lunch)'
+!billStockholmST4.date := Date('2025-02-13')
+!billStockholmST4.paymentMethod := #CREDIT_CARD
+!billStockholmST4.status := #VERIFIED
+
+!insert (expenseStockholmDesignSprint, billStockholmST1) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST2) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST3) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST4) into ExpenseContainsBills
+
+!insert (billStockholmST1, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST2, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST3, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST4, currencySEKComplex4) into BillCurrency
+
+!new Comment('commentStockholmSTC1')
+!commentStockholmSTC1.text := 'Room rental is pending because the municipality requested the purchase order reference (PO-nummer) on the invoice.'
+
+!insert (expenseStockholmDesignSprint, commentStockholmSTC1) into ExpenseComment
+
+!new Expense('expenseBangkokRiverSampling')
+!expenseBangkokRiverSampling.amount := 7920.00
+!expenseBangkokRiverSampling.startDate := Date('2026-05-03')
+!expenseBangkokRiverSampling.endDate := Date('2026-05-09')
+
+!new Bill('billBangkokBK1')
+!billBangkokBK1.amount := 4200.00
+!billBangkokBK1.category := 'Longtail boat hire (half-day)'
+!billBangkokBK1.date := Date('2026-05-04')
+!billBangkokBK1.paymentMethod := #CASH
+!billBangkokBK1.status := #VERIFIED
+
+!new Bill('billBangkokBK2')
+!billBangkokBK2.amount := 980.00
+!billBangkokBK2.category := 'Sample containers (sterile bottles)'
+!billBangkokBK2.date := Date('2026-05-04')
+!billBangkokBK2.paymentMethod := #CREDIT_CARD
+!billBangkokBK2.status := #VERIFIED
+
+!new Bill('billBangkokBK3')
+!billBangkokBK3.amount := 560.00
+!billBangkokBK3.category := 'Ice packs + cooler supplies'
+!billBangkokBK3.date := Date('2026-05-05')
+!billBangkokBK3.paymentMethod := #CASH
+!billBangkokBK3.status := #DRAFT
+
+!new Bill('billBangkokBK4')
+!billBangkokBK4.amount := 300.00
+!billBangkokBK4.category := 'PPE (masks, nitrile gloves)'
+!billBangkokBK4.date := Date('2026-05-05')
+!billBangkokBK4.paymentMethod := #CASH
+!billBangkokBK4.status := #VERIFIED
+
+!new Bill('billBangkokBK5')
+!billBangkokBK5.amount := 450.00
+!billBangkokBK5.category := 'SIM top-up (field communications)'
+!billBangkokBK5.date := Date('2026-05-06')
+!billBangkokBK5.paymentMethod := #CASH
+!billBangkokBK5.status := #REFUNDED
+
+!new Bill('billBangkokBK6')
+!billBangkokBK6.amount := 1250.00
+!billBangkokBK6.category := 'Basic lab analysis fee (same-week processing)'
+!billBangkokBK6.date := Date('2026-05-07')
+!billBangkokBK6.paymentMethod := #CHECK
+!billBangkokBK6.status := #PENDING
+
+!new Bill('billBangkokBK7')
+!billBangkokBK7.amount := 180.00
+!billBangkokBK7.category := 'Printing (sampling maps)'
+!billBangkokBK7.date := Date('2026-05-08')
+!billBangkokBK7.paymentMethod := #CASH
+!billBangkokBK7.status := #VERIFIED
+
+!insert (expenseBangkokRiverSampling, billBangkokBK1) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK2) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK3) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK4) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK5) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK6) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK7) into ExpenseContainsBills
+
+!insert (billBangkokBK1, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK2, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK3, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK4, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK5, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK6, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK7, currencyTHBComplex4) into BillCurrency
+
+!new Comment('commentBangkokBKC1')
+!commentBangkokBKC1.text := 'Ice packs bill is draft because the receipt is faded; vendor will reprint (ขอใบเสร็จใหม่).'
+
+!new Comment('commentBangkokBKC2')
+!commentBangkokBKC2.text := 'SIM top-up was refunded after wrong package was activated; refund slip attached.'
+
+!new Comment('commentBangkokBKC3')
+!commentBangkokBKC3.text := 'Lab analysis marked pending until chain-of-custody form is signed by the receiving technician.'
+
+!insert (expenseBangkokRiverSampling, commentBangkokBKC1) into ExpenseComment
+!insert (expenseBangkokRiverSampling, commentBangkokBKC2) into ExpenseComment
+!insert (expenseBangkokRiverSampling, commentBangkokBKC3) into ExpenseComment
+
+!new Expense('expenseDubaiFoodIndustryExpo')
+!expenseDubaiFoodIndustryExpo.amount := 2500.00
+!expenseDubaiFoodIndustryExpo.startDate := Date('2025-09-20')
+!expenseDubaiFoodIndustryExpo.endDate := Date('2025-09-23')
+
+!new Bill('billDubaiDX1')
+!billDubaiDX1.amount := 1650.00
+!billDubaiDX1.category := 'Expo access package (3-day badge)'
+!billDubaiDX1.date := Date('2025-09-20')
+!billDubaiDX1.paymentMethod := #CREDIT_CARD
+!billDubaiDX1.status := #VALIDATED
+
+!new Bill('billDubaiDX2')
+!billDubaiDX2.amount := 740.00
+!billDubaiDX2.category := 'Hotel (1 night extension)'
+!billDubaiDX2.date := Date('2025-09-22')
+!billDubaiDX2.paymentMethod := #CREDIT_CARD
+!billDubaiDX2.status := #VERIFIED
+
+!new Bill('billDubaiDX3')
+!billDubaiDX3.amount := 110.00
+!billDubaiDX3.category := 'Taxi between venue and hotel'
+!billDubaiDX3.date := Date('2025-09-23')
+!billDubaiDX3.paymentMethod := #CASH
+!billDubaiDX3.status := #REFUSED
+
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX1) into ExpenseContainsBills
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX2) into ExpenseContainsBills
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX3) into ExpenseContainsBills
+
+!insert (billDubaiDX1, currencyAEDComplex4) into BillCurrency
+!insert (billDubaiDX2, currencyAEDComplex4) into BillCurrency
+!insert (billDubaiDX3, currencyAEDComplex4) into BillCurrency
+
+!new Comment('commentDubaiDXC1')
+!commentDubaiDXC1.text := 'Taxi bill refused because it was a non-itemized handwritten slip; reviewer requested official meter receipt.'
+
+!insert (expenseDubaiFoodIndustryExpo, commentDubaiDXC1) into ExpenseComment
+
+!new Expense('expenseWellingtonCoDesignWorkshop')
+!expenseWellingtonCoDesignWorkshop.amount := 745.75
+!expenseWellingtonCoDesignWorkshop.startDate := Date('2026-03-15')
+!expenseWellingtonCoDesignWorkshop.endDate := Date('2026-03-16')
+
+!new Bill('billWellingtonWL1')
+!billWellingtonWL1.amount := 480.00
+!billWellingtonWL1.category := 'Venue hire (community hall)'
+!billWellingtonWL1.date := Date('2026-03-15')
+!billWellingtonWL1.paymentMethod := #CHECK
+!billWellingtonWL1.status := #VERIFIED
+
+!new Bill('billWellingtonWL2')
+!billWellingtonWL2.amount := 265.75
+!billWellingtonWL2.category := 'Catering (tea, sandwiches)'
+!billWellingtonWL2.date := Date('2026-03-16')
+!billWellingtonWL2.paymentMethod := #CREDIT_CARD
+!billWellingtonWL2.status := #VALIDATED
+
+!insert (expenseWellingtonCoDesignWorkshop, billWellingtonWL1) into ExpenseContainsBills
+!insert (expenseWellingtonCoDesignWorkshop, billWellingtonWL2) into ExpenseContainsBills
+
+!insert (billWellingtonWL1, currencyNZDComplex4) into BillCurrency
+!insert (billWellingtonWL2, currencyNZDComplex4) into BillCurrency
+
+!new Expense('expenseSeoulVendorSoftwareLicense')
+!expenseSeoulVendorSoftwareLicense.amount := 198000.00
+!expenseSeoulVendorSoftwareLicense.startDate := Date('2025-12-01')
+!expenseSeoulVendorSoftwareLicense.endDate := Date('2025-12-01')
+
+!new Bill('billSeoulSL1')
+!billSeoulSL1.amount := 198000.00
+!billSeoulSL1.category := 'Annual license: localization QA plugin'
+!billSeoulSL1.date := Date('2025-12-01')
+!billSeoulSL1.paymentMethod := #CREDIT_CARD
+!billSeoulSL1.status := #PENDING
+
+!insert (expenseSeoulVendorSoftwareLicense, billSeoulSL1) into ExpenseContainsBills
+!insert (billSeoulSL1, currencyKRWComplex4) into BillCurrency
+
+!new Comment('commentSeoulSLC1')
+!commentSeoulSLC1.text := 'Pending until IT confirms the license is assigned to the shared build account (not a personal email).'
+
+!insert (expenseSeoulVendorSoftwareLicense, commentSeoulSLC1) into ExpenseComment
+
+!new Currency('currencyXOFEdge')
+!currencyXOFEdge.name := 'West African CFA franc'
+!currencyXOFEdge.abbreviation := 'XOF'
+
+!new Currency('currencyTOPEdge')
+!currencyTOPEdge.name := 'Tongan Paʻanga'
+!currencyTOPEdge.abbreviation := 'TOP'
+
+!new Currency('currencyWSTEdge')
+!currencyWSTEdge.name := 'Samoan Tālā'
+!currencyWSTEdge.abbreviation := 'WST'
+
+!new Currency('currencyCLFEdge')
+!currencyCLFEdge.name := 'Chilean Unidad de Fomento'
+!currencyCLFEdge.abbreviation := 'CLF'
+
+!new Expense('expenseEXPEDGE009')
+!expenseEXPEDGE009.amount := 0.00
+!expenseEXPEDGE009.startDate := Date('1970-01-01')
+!expenseEXPEDGE009.endDate := Date('1970-01-01')
+
+!new Comment('commentEXPEDGE009_COM901')
+!commentEXPEDGE009_COM901.text := 'Created automatically by an import job; awaiting bills from upstream system.'
+
+!new Comment('commentEXPEDGE009_COM902')
+!commentEXPEDGE009_COM902.text := 'No bills were attached; keeping record for audit trail only.'
+
+!new Comment('commentEXPEDGE009_COM903')
+!commentEXPEDGE009_COM903.text := '日本語: 請求書未連携のため保留。'
+
+!new Comment('commentEXPEDGE009_COM904')
+!commentEXPEDGE009_COM904.text := 'Français : brouillon sans justificatifs (cas limite volontaire).'
+
+!new Comment('commentEXPEDGE009_COM905')
+!commentEXPEDGE009_COM905.text := '한국어 메모: 영수증이 아직 없습니다.'
+
+!new Comment('commentEXPEDGE009_COM906')
+!commentEXPEDGE009_COM906.text := 'Multiline note:\n- Step 1: create expense\n- Step 2: attach bills later\n- Step 3: reconcile totals'
+
+!new Comment('commentEXPEDGE009_COM907')
+!commentEXPEDGE009_COM907.text := '⚠ System note: This expense is valid in the model because sum(empty bills)=0.'
+
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM901) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM902) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM903) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM904) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM905) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM906) into ExpenseComment
+!insert (expenseEXPEDGE009, commentEXPEDGE009_COM907) into ExpenseComment
+
+!new Expense('expenseEXPEDGE010')
+!expenseEXPEDGE010.amount := 0.02
+!expenseEXPEDGE010.startDate := Date('0001-01-01')
+!expenseEXPEDGE010.endDate := Date('9999-12-31')
+
+!new Bill('billEXPEDGE010_BILL1001')
+!billEXPEDGE010_BILL1001.amount := 1000.00
+!billEXPEDGE010_BILL1001.category := 'Foundational charge (legacy ledger seed)'
+!billEXPEDGE010_BILL1001.date := Date('0001-01-01')
+!billEXPEDGE010_BILL1001.paymentMethod := #CASH
+!billEXPEDGE010_BILL1001.status := #VERIFIED
+
+!new Bill('billEXPEDGE010_BILL1002')
+!billEXPEDGE010_BILL1002.amount := -999.99
+!billEXPEDGE010_BILL1002.category := 'Retroactive correction/refund'
+!billEXPEDGE010_BILL1002.date := Date('9999-12-31')
+!billEXPEDGE010_BILL1002.paymentMethod := #CREDIT_CARD
+!billEXPEDGE010_BILL1002.status := #REFUNDED
+
+!new Bill('billEXPEDGE010_BILL1003')
+!billEXPEDGE010_BILL1003.amount := 0.00
+!billEXPEDGE010_BILL1003.category := 'Zero-value verification line'
+!billEXPEDGE010_BILL1003.date := Date('2000-01-01')
+!billEXPEDGE010_BILL1003.paymentMethod := #CHECK
+!billEXPEDGE010_BILL1003.status := #VALIDATED
+
+!new Bill('billEXPEDGE010_BILL1004')
+!billEXPEDGE010_BILL1004.amount := 0.01
+!billEXPEDGE010_BILL1004.category := 'Precision residue A'
+!billEXPEDGE010_BILL1004.date := Date('2016-12-31')
+!billEXPEDGE010_BILL1004.paymentMethod := #CASH
+!billEXPEDGE010_BILL1004.status := #PENDING
+
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1001) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1002) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1003) into ExpenseContainsBills
+!insert (expenseEXPEDGE010, billEXPEDGE010_BILL1004) into ExpenseContainsBills
+
+!insert (billEXPEDGE010_BILL1001, currencyXOFEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1002, currencyTOPEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1003, currencyWSTEdge) into BillCurrency
+!insert (billEXPEDGE010_BILL1004, currencyCLFEdge) into BillCurrency
+
+!new Comment('commentEXPEDGE010_COM1001')
+!commentEXPEDGE010_COM1001.text := 'Edge test: bills span the earliest and latest representable dates; totals rely on near-cancellation (1000.00 - 999.99 + 0 + 0.01 = 0.02).'
+
+!insert (expenseEXPEDGE010, commentEXPEDGE010_COM1001) into ExpenseComment
+

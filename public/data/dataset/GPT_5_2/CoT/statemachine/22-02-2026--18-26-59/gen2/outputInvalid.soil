@@ -1,0 +1,100 @@
+!new State('st_shared_welcome_fix')
+!st_shared_welcome_fix.name := 'welcome'
+
+!new StateMachine('sm_intakeWorkflowTZ_fix')
+!sm_intakeWorkflowTZ_fix.name := 'intakeWorkflowTZ'
+
+!new State('st_intake_chooseLanguage_fix')
+!st_intake_chooseLanguage_fix.name := 'chooseLanguage'
+!new State('st_intake_collectSymptoms_fix')
+!st_intake_collectSymptoms_fix.name := 'collectSymptoms'
+!new State('st_intake_intakeComplete_fix')
+!st_intake_intakeComplete_fix.name := 'intakeComplete'
+
+!insert (sm_intakeWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_chooseLanguage_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_collectSymptoms_fix) into StateMachineContainsStates
+!insert (sm_intakeWorkflowTZ_fix, st_intake_intakeComplete_fix) into StateMachineContainsStates
+
+!insert (sm_intakeWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineStartsStates
+
+!new Transition('tr_intake_tWelcomeToLanguage_fix')
+!tr_intake_tWelcomeToLanguage_fix.name := 'tWelcomeToLanguage'
+!new Transition('tr_intake_tLanguageToSymptoms_fix')
+!tr_intake_tLanguageToSymptoms_fix.name := 'tLanguageToSymptoms'
+!new Transition('tr_intake_tSymptomsToComplete_fix')
+!tr_intake_tSymptomsToComplete_fix.name := 'tSymptomsToComplete'
+
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tWelcomeToLanguage_fix) into StateMachineContainsTransitions
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tLanguageToSymptoms_fix) into StateMachineContainsTransitions
+!insert (sm_intakeWorkflowTZ_fix, tr_intake_tSymptomsToComplete_fix) into StateMachineContainsTransitions
+
+!insert (st_shared_welcome_fix, tr_intake_tWelcomeToLanguage_fix) into StateTransition
+!insert (tr_intake_tWelcomeToLanguage_fix, st_intake_chooseLanguage_fix) into TransitionState
+
+!insert (st_intake_chooseLanguage_fix, tr_intake_tLanguageToSymptoms_fix) into StateTransition
+!insert (tr_intake_tLanguageToSymptoms_fix, st_intake_collectSymptoms_fix) into TransitionState
+
+!insert (st_intake_collectSymptoms_fix, tr_intake_tSymptomsToComplete_fix) into StateTransition
+!insert (tr_intake_tSymptomsToComplete_fix, st_intake_intakeComplete_fix) into TransitionState
+
+!new TimeEvent('te_intake_tWelcomeToLanguage_fix')
+!te_intake_tWelcomeToLanguage_fix.time := 1
+!insert (tr_intake_tWelcomeToLanguage_fix, te_intake_tWelcomeToLanguage_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_intake_tLanguageToSymptoms_fix')
+!te_intake_tLanguageToSymptoms_fix.time := 8
+!insert (tr_intake_tLanguageToSymptoms_fix, te_intake_tLanguageToSymptoms_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_intake_tSymptomsToComplete_fix')
+!te_intake_tSymptomsToComplete_fix.time := 3
+!insert (tr_intake_tSymptomsToComplete_fix, te_intake_tSymptomsToComplete_fix) into TransitionContainsEvents
+
+!new StateMachine('sm_consentWorkflowTZ_fix')
+!sm_consentWorkflowTZ_fix.name := 'consentWorkflowTZ'
+
+!new State('st_consent_showConsent_fix')
+!st_consent_showConsent_fix.name := 'showConsent'
+!new State('st_consent_captureSignature_fix')
+!st_consent_captureSignature_fix.name := 'captureSignature'
+!new State('st_consent_consentComplete_fix')
+!st_consent_consentComplete_fix.name := 'consentComplete'
+
+!insert (sm_consentWorkflowTZ_fix, st_consent_showConsent_fix) into StateMachineContainsStates
+!insert (sm_consentWorkflowTZ_fix, st_consent_captureSignature_fix) into StateMachineContainsStates
+!insert (sm_consentWorkflowTZ_fix, st_consent_consentComplete_fix) into StateMachineContainsStates
+
+!insert (sm_consentWorkflowTZ_fix, st_shared_welcome_fix) into StateMachineStartsStates
+
+!new Transition('tr_consent_tWelcomeToConsent_fix')
+!tr_consent_tWelcomeToConsent_fix.name := 'tWelcomeToConsent'
+!new Transition('tr_consent_tConsentToSignature_fix')
+!tr_consent_tConsentToSignature_fix.name := 'tConsentToSignature'
+!new Transition('tr_consent_tSignatureToComplete_fix')
+!tr_consent_tSignatureToComplete_fix.name := 'tSignatureToComplete'
+
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tWelcomeToConsent_fix) into StateMachineContainsTransitions
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tConsentToSignature_fix) into StateMachineContainsTransitions
+!insert (sm_consentWorkflowTZ_fix, tr_consent_tSignatureToComplete_fix) into StateMachineContainsTransitions
+
+!insert (st_shared_welcome_fix, tr_consent_tWelcomeToConsent_fix) into StateTransition
+!insert (tr_consent_tWelcomeToConsent_fix, st_consent_showConsent_fix) into TransitionState
+
+!insert (st_consent_showConsent_fix, tr_consent_tConsentToSignature_fix) into StateTransition
+!insert (tr_consent_tConsentToSignature_fix, st_consent_captureSignature_fix) into TransitionState
+
+!insert (st_consent_captureSignature_fix, tr_consent_tSignatureToComplete_fix) into StateTransition
+!insert (tr_consent_tSignatureToComplete_fix, st_consent_consentComplete_fix) into TransitionState
+
+!new TimeEvent('te_consent_tWelcomeToConsent_fix')
+!te_consent_tWelcomeToConsent_fix.time := 1
+!insert (tr_consent_tWelcomeToConsent_fix, te_consent_tWelcomeToConsent_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_consent_tConsentToSignature_fix')
+!te_consent_tConsentToSignature_fix.time := 20
+!insert (tr_consent_tConsentToSignature_fix, te_consent_tConsentToSignature_fix) into TransitionContainsEvents
+
+!new TimeEvent('te_consent_tSignatureToComplete_fix')
+!te_consent_tSignatureToComplete_fix.time := 2
+!insert (tr_consent_tSignatureToComplete_fix, te_consent_tSignatureToComplete_fix) into TransitionContainsEvents
+

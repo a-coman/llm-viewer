@@ -1,0 +1,489 @@
+!new StateMachine('sm_isolatedStartSingleLink')
+!sm_isolatedStartSingleLink.name := 'isolatedStartSingleLink'
+
+!new State('st_issl_startpunkt')
+!st_issl_startpunkt.name := 'startpunkt'
+!new State('st_issl_reseau')
+!st_issl_reseau.name := 'réseau'
+!new State('st_issl_koncowka')
+!st_issl_koncowka.name := 'końcówka'
+!new State('st_issl_koritsu')
+!st_issl_koritsu.name := '孤立'
+
+!insert (sm_isolatedStartSingleLink, st_issl_startpunkt) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_reseau) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_koncowka) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_koritsu) into StateMachineContainsStates
+
+!insert (sm_isolatedStartSingleLink, st_issl_startpunkt) into StateMachineStartsStates
+
+!new Transition('tr_issl_handover')
+!tr_issl_handover.name := 'handover'
+
+!insert (sm_isolatedStartSingleLink, tr_issl_handover) into StateMachineContainsTransitions
+
+!insert (st_issl_reseau, tr_issl_handover) into StateTransition
+!insert (tr_issl_handover, st_issl_koncowka) into TransitionState
+
+!new TimeEvent('te_issl_handover')
+!te_issl_handover.time := 1
+!insert (tr_issl_handover, te_issl_handover) into TransitionContainsEvents
+
+!new StateMachine('sm_subakIrrigationController')
+!sm_subakIrrigationController.name := 'subakIrrigationController'
+
+!new State('st_subak_sensing')
+!st_subak_sensing.name := 'sensing'
+!new State('st_subak_calculatingAllocation')
+!st_subak_calculatingAllocation.name := 'calculatingAllocation'
+!new State('st_subak_openingGates')
+!st_subak_openingGates.name := 'openingGates'
+!new State('st_subak_irrigating')
+!st_subak_irrigating.name := 'irrigating'
+!new State('st_subak_flushingCanals')
+!st_subak_flushingCanals.name := 'flushingCanals'
+!new State('st_subak_faultLockout')
+!st_subak_faultLockout.name := 'faultLockout'
+
+!insert (sm_subakIrrigationController, st_subak_sensing) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_calculatingAllocation) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_openingGates) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_irrigating) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_flushingCanals) into StateMachineContainsStates
+!insert (sm_subakIrrigationController, st_subak_faultLockout) into StateMachineContainsStates
+
+!insert (sm_subakIrrigationController, st_subak_sensing) into StateMachineStartsStates
+
+!new Transition('tr_subak_periodicSample')
+!tr_subak_periodicSample.name := 'periodicSample'
+!new Transition('tr_subak_computeShare')
+!tr_subak_computeShare.name := 'computeShare'
+!new Transition('tr_subak_actuateGates')
+!tr_subak_actuateGates.name := 'actuateGates'
+!new Transition('tr_subak_beginIrrigation')
+!tr_subak_beginIrrigation.name := 'beginIrrigation'
+!new Transition('tr_subak_scheduledFlush')
+!tr_subak_scheduledFlush.name := 'scheduledFlush'
+!new Transition('tr_subak_finishFlush')
+!tr_subak_finishFlush.name := 'finishFlush'
+!new Transition('tr_subak_detectFault')
+!tr_subak_detectFault.name := 'detectFault'
+!new Transition('tr_subak_autoRecover')
+!tr_subak_autoRecover.name := 'autoRecover'
+
+!insert (sm_subakIrrigationController, tr_subak_periodicSample) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_computeShare) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_actuateGates) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_beginIrrigation) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_scheduledFlush) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_finishFlush) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_detectFault) into StateMachineContainsTransitions
+!insert (sm_subakIrrigationController, tr_subak_autoRecover) into StateMachineContainsTransitions
+
+!insert (st_subak_sensing, tr_subak_periodicSample) into StateTransition
+!insert (tr_subak_periodicSample, st_subak_sensing) into TransitionState
+
+!insert (st_subak_sensing, tr_subak_computeShare) into StateTransition
+!insert (tr_subak_computeShare, st_subak_calculatingAllocation) into TransitionState
+
+!insert (st_subak_calculatingAllocation, tr_subak_actuateGates) into StateTransition
+!insert (tr_subak_actuateGates, st_subak_openingGates) into TransitionState
+
+!insert (st_subak_openingGates, tr_subak_beginIrrigation) into StateTransition
+!insert (tr_subak_beginIrrigation, st_subak_irrigating) into TransitionState
+
+!insert (st_subak_irrigating, tr_subak_scheduledFlush) into StateTransition
+!insert (tr_subak_scheduledFlush, st_subak_flushingCanals) into TransitionState
+
+!insert (st_subak_flushingCanals, tr_subak_finishFlush) into StateTransition
+!insert (tr_subak_finishFlush, st_subak_sensing) into TransitionState
+
+!insert (st_subak_irrigating, tr_subak_detectFault) into StateTransition
+!insert (tr_subak_detectFault, st_subak_faultLockout) into TransitionState
+
+!insert (st_subak_faultLockout, tr_subak_autoRecover) into StateTransition
+!insert (tr_subak_autoRecover, st_subak_sensing) into TransitionState
+
+!new TimeEvent('te_subak_t_periodicSample')
+!te_subak_t_periodicSample.time := 120
+!insert (tr_subak_periodicSample, te_subak_t_periodicSample) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_computeShare')
+!te_subak_t_computeShare.time := 30
+!insert (tr_subak_computeShare, te_subak_t_computeShare) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_actuateGates')
+!te_subak_t_actuateGates.time := 15
+!insert (tr_subak_actuateGates, te_subak_t_actuateGates) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_beginIrrigation')
+!te_subak_t_beginIrrigation.time := 10
+!insert (tr_subak_beginIrrigation, te_subak_t_beginIrrigation) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_scheduledFlush')
+!te_subak_t_scheduledFlush.time := 3600
+!insert (tr_subak_scheduledFlush, te_subak_t_scheduledFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_finishFlush')
+!te_subak_t_finishFlush.time := 180
+!insert (tr_subak_finishFlush, te_subak_t_finishFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_detectFault')
+!te_subak_t_detectFault.time := 5
+!insert (tr_subak_detectFault, te_subak_t_detectFault) into TransitionContainsEvents
+
+!new TimeEvent('te_subak_t_autoRecover')
+!te_subak_t_autoRecover.time := 600
+!insert (tr_subak_autoRecover, te_subak_t_autoRecover) into TransitionContainsEvents
+
+!new StateMachine('sm_lagosFerryBoarding')
+!sm_lagosFerryBoarding.name := 'lagosFerryBoarding'
+
+!new State('st_lagos_fila')
+!st_lagos_fila.name := 'fila'
+!new State('st_lagos_bilheteria')
+!st_lagos_bilheteria.name := 'bilheteria'
+!new State('st_lagos_embarque')
+!st_lagos_embarque.name := 'embarque'
+!new State('st_lagos_travessia')
+!st_lagos_travessia.name := 'travessia'
+!new State('st_lagos_chegada')
+!st_lagos_chegada.name := 'chegada'
+
+!insert (sm_lagosFerryBoarding, st_lagos_fila) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_bilheteria) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_embarque) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_travessia) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_chegada) into StateMachineContainsStates
+
+!insert (sm_lagosFerryBoarding, st_lagos_fila) into StateMachineStartsStates
+
+!new StateMachine('sm_icelandVolcanoAlert')
+!sm_icelandVolcanoAlert.name := 'icelandVolcanoAlert'
+
+!new State('st_iva_calm')
+!st_iva_calm.name := 'calm'
+!new State('st_iva_alert')
+!st_iva_alert.name := 'alert'
+
+!insert (sm_icelandVolcanoAlert, st_iva_calm) into StateMachineContainsStates
+!insert (sm_icelandVolcanoAlert, st_iva_alert) into StateMachineContainsStates
+
+!insert (sm_icelandVolcanoAlert, st_iva_calm) into StateMachineStartsStates
+
+!new Transition('tr_iva_advisoryToAlert')
+!tr_iva_advisoryToAlert.name := 'advisoryToAlert'
+!new Transition('tr_iva_sensorSpikeToAlert')
+!tr_iva_sensorSpikeToAlert.name := 'sensorSpikeToAlert'
+!new Transition('tr_iva_manualSwitchToAlert')
+!tr_iva_manualSwitchToAlert.name := 'manualSwitchToAlert'
+!new Transition('tr_iva_falseAlarmToCalm')
+!tr_iva_falseAlarmToCalm.name := 'falseAlarmToCalm'
+!new Transition('tr_iva_allClearToCalm')
+!tr_iva_allClearToCalm.name := 'allClearToCalm'
+!new Transition('tr_iva_timeoutToCalm')
+!tr_iva_timeoutToCalm.name := 'timeoutToCalm'
+!new Transition('tr_iva_repeatSiren')
+!tr_iva_repeatSiren.name := 'repeatSiren'
+
+!insert (sm_icelandVolcanoAlert, tr_iva_advisoryToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_sensorSpikeToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_manualSwitchToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_falseAlarmToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_allClearToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_timeoutToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_repeatSiren) into StateMachineContainsTransitions
+
+!insert (st_iva_calm, tr_iva_advisoryToAlert) into StateTransition
+!insert (tr_iva_advisoryToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_calm, tr_iva_sensorSpikeToAlert) into StateTransition
+!insert (tr_iva_sensorSpikeToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_calm, tr_iva_manualSwitchToAlert) into StateTransition
+!insert (tr_iva_manualSwitchToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_alert, tr_iva_falseAlarmToCalm) into StateTransition
+!insert (tr_iva_falseAlarmToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_allClearToCalm) into StateTransition
+!insert (tr_iva_allClearToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_timeoutToCalm) into StateTransition
+!insert (tr_iva_timeoutToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_repeatSiren) into StateTransition
+!insert (tr_iva_repeatSiren, st_iva_alert) into TransitionState
+
+!new TimeEvent('te_iva_t_advisoryToAlert')
+!te_iva_t_advisoryToAlert.time := 60
+!insert (tr_iva_advisoryToAlert, te_iva_t_advisoryToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_sensorSpikeToAlert')
+!te_iva_t_sensorSpikeToAlert.time := 1
+!insert (tr_iva_sensorSpikeToAlert, te_iva_t_sensorSpikeToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_manualSwitchToAlert')
+!te_iva_t_manualSwitchToAlert.time := 2147483646
+!insert (tr_iva_manualSwitchToAlert, te_iva_t_manualSwitchToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_falseAlarmToCalm')
+!te_iva_t_falseAlarmToCalm.time := 5
+!insert (tr_iva_falseAlarmToCalm, te_iva_t_falseAlarmToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_allClearToCalm')
+!te_iva_t_allClearToCalm.time := 1800
+!insert (tr_iva_allClearToCalm, te_iva_t_allClearToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_timeoutToCalm')
+!te_iva_t_timeoutToCalm.time := 120
+!insert (tr_iva_timeoutToCalm, te_iva_t_timeoutToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_repeatSiren')
+!te_iva_t_repeatSiren.time := 2
+!insert (tr_iva_repeatSiren, te_iva_t_repeatSiren) into TransitionContainsEvents
+
+!new StateMachine('sm_zurichHospitalMriWorkflowSM')
+!sm_zurichHospitalMriWorkflowSM.name := 'zurichHospitalMriWorkflowSM'
+
+!new State('st_zhm_register')
+!st_zhm_register.name := 'register'
+!new State('st_zhm_safetyScreening')
+!st_zhm_safetyScreening.name := 'safetyScreening'
+!new State('st_zhm_changeRoom')
+!st_zhm_changeRoom.name := 'changeRoom'
+!new State('st_zhm_ivPlacement')
+!st_zhm_ivPlacement.name := 'ivPlacement'
+!new State('st_zhm_preScanQueue')
+!st_zhm_preScanQueue.name := 'preScanQueue'
+!new State('st_zhm_positioning')
+!st_zhm_positioning.name := 'positioning'
+!new State('st_zhm_scanLocalizer')
+!st_zhm_scanLocalizer.name := 'scanLocalizer'
+!new State('st_zhm_scanT1')
+!st_zhm_scanT1.name := 'scanT1'
+!new State('st_zhm_scanT2')
+!st_zhm_scanT2.name := 'scanT2'
+!new State('st_zhm_contrastInjection')
+!st_zhm_contrastInjection.name := 'contrastInjection'
+!new State('st_zhm_postContrastScan')
+!st_zhm_postContrastScan.name := 'postContrastScan'
+!new State('st_zhm_imageCheck')
+!st_zhm_imageCheck.name := 'imageCheck'
+!new State('st_zhm_patientDischarge')
+!st_zhm_patientDischarge.name := 'patientDischarge'
+!new State('st_zhm_roomDisinfection')
+!st_zhm_roomDisinfection.name := 'roomDisinfection'
+!new State('st_zhm_incidentHold')
+!st_zhm_incidentHold.name := 'incidentHold'
+
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_register) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_safetyScreening) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_changeRoom) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_ivPlacement) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_preScanQueue) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_positioning) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanLocalizer) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanT1) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_scanT2) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_contrastInjection) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_postContrastScan) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_imageCheck) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_patientDischarge) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_roomDisinfection) into StateMachineContainsStates
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_incidentHold) into StateMachineContainsStates
+
+!insert (sm_zurichHospitalMriWorkflowSM, st_zhm_register) into StateMachineStartsStates
+
+!new Transition('tr_zhm_startScreening')
+!tr_zhm_startScreening.name := 'startScreening'
+!new Transition('tr_zhm_screeningPassToChange')
+!tr_zhm_screeningPassToChange.name := 'screeningPassToChange'
+!new Transition('tr_zhm_metalOrImplantIssue')
+!tr_zhm_metalOrImplantIssue.name := 'metalOrImplantIssue'
+!new Transition('tr_zhm_changeCompleteToIv')
+!tr_zhm_changeCompleteToIv.name := 'changeCompleteToIv'
+!new Transition('tr_zhm_ivDoneToQueue')
+!tr_zhm_ivDoneToQueue.name := 'ivDoneToQueue'
+!new Transition('tr_zhm_queueTick')
+!tr_zhm_queueTick.name := 'queueTick'
+!new Transition('tr_zhm_callPatientIn')
+!tr_zhm_callPatientIn.name := 'callPatientIn'
+!new Transition('tr_zhm_positionedStartLocalizer')
+!tr_zhm_positionedStartLocalizer.name := 'positionedStartLocalizer'
+!new Transition('tr_zhm_localizerComplete')
+!tr_zhm_localizerComplete.name := 'localizerComplete'
+!new Transition('tr_zhm_t1Complete')
+!tr_zhm_t1Complete.name := 't1Complete'
+!new Transition('tr_zhm_t2CompleteDecideContrast')
+!tr_zhm_t2CompleteDecideContrast.name := 't2CompleteDecideContrast'
+!new Transition('tr_zhm_injectThenWait')
+!tr_zhm_injectThenWait.name := 'injectThenWait'
+!new Transition('tr_zhm_postContrastComplete')
+!tr_zhm_postContrastComplete.name := 'postContrastComplete'
+!new Transition('tr_zhm_qualityOkProceed')
+!tr_zhm_qualityOkProceed.name := 'qualityOkProceed'
+!new Transition('tr_zhm_motionArtifactRepeatT2')
+!tr_zhm_motionArtifactRepeatT2.name := 'motionArtifactRepeatT2'
+!new Transition('tr_zhm_allergyOrPanicEvent')
+!tr_zhm_allergyOrPanicEvent.name := 'allergyOrPanicEvent'
+!new Transition('tr_zhm_resolveIncidentToDischarge')
+!tr_zhm_resolveIncidentToDischarge.name := 'resolveIncidentToDischarge'
+!new Transition('tr_zhm_dischargeToCleaning')
+!tr_zhm_dischargeToCleaning.name := 'dischargeToCleaning'
+!new Transition('tr_zhm_cleaningCompleteBackToRegister')
+!tr_zhm_cleaningCompleteBackToRegister.name := 'cleaningCompleteBackToRegister'
+
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_startScreening) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_screeningPassToChange) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_metalOrImplantIssue) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_changeCompleteToIv) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_ivDoneToQueue) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_queueTick) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_callPatientIn) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_positionedStartLocalizer) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_localizerComplete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_t1Complete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_t2CompleteDecideContrast) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_injectThenWait) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_postContrastComplete) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_qualityOkProceed) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_motionArtifactRepeatT2) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_allergyOrPanicEvent) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_resolveIncidentToDischarge) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_dischargeToCleaning) into StateMachineContainsTransitions
+!insert (sm_zurichHospitalMriWorkflowSM, tr_zhm_cleaningCompleteBackToRegister) into StateMachineContainsTransitions
+
+!insert (st_zhm_register, tr_zhm_startScreening) into StateTransition
+!insert (tr_zhm_startScreening, st_zhm_safetyScreening) into TransitionState
+
+!insert (st_zhm_safetyScreening, tr_zhm_screeningPassToChange) into StateTransition
+!insert (tr_zhm_screeningPassToChange, st_zhm_changeRoom) into TransitionState
+
+!insert (st_zhm_safetyScreening, tr_zhm_metalOrImplantIssue) into StateTransition
+!insert (tr_zhm_metalOrImplantIssue, st_zhm_incidentHold) into TransitionState
+
+!insert (st_zhm_changeRoom, tr_zhm_changeCompleteToIv) into StateTransition
+!insert (tr_zhm_changeCompleteToIv, st_zhm_ivPlacement) into TransitionState
+
+!insert (st_zhm_ivPlacement, tr_zhm_ivDoneToQueue) into StateTransition
+!insert (tr_zhm_ivDoneToQueue, st_zhm_preScanQueue) into TransitionState
+
+!insert (st_zhm_preScanQueue, tr_zhm_queueTick) into StateTransition
+!insert (tr_zhm_queueTick, st_zhm_preScanQueue) into TransitionState
+
+!insert (st_zhm_preScanQueue, tr_zhm_callPatientIn) into StateTransition
+!insert (tr_zhm_callPatientIn, st_zhm_positioning) into TransitionState
+
+!insert (st_zhm_positioning, tr_zhm_positionedStartLocalizer) into StateTransition
+!insert (tr_zhm_positionedStartLocalizer, st_zhm_scanLocalizer) into TransitionState
+
+!insert (st_zhm_scanLocalizer, tr_zhm_localizerComplete) into StateTransition
+!insert (tr_zhm_localizerComplete, st_zhm_scanT1) into TransitionState
+
+!insert (st_zhm_scanT1, tr_zhm_t1Complete) into StateTransition
+!insert (tr_zhm_t1Complete, st_zhm_scanT2) into TransitionState
+
+!insert (st_zhm_scanT2, tr_zhm_t2CompleteDecideContrast) into StateTransition
+!insert (tr_zhm_t2CompleteDecideContrast, st_zhm_contrastInjection) into TransitionState
+
+!insert (st_zhm_contrastInjection, tr_zhm_injectThenWait) into StateTransition
+!insert (tr_zhm_injectThenWait, st_zhm_postContrastScan) into TransitionState
+
+!insert (st_zhm_postContrastScan, tr_zhm_postContrastComplete) into StateTransition
+!insert (tr_zhm_postContrastComplete, st_zhm_imageCheck) into TransitionState
+
+!insert (st_zhm_imageCheck, tr_zhm_qualityOkProceed) into StateTransition
+!insert (tr_zhm_qualityOkProceed, st_zhm_patientDischarge) into TransitionState
+
+!insert (st_zhm_imageCheck, tr_zhm_motionArtifactRepeatT2) into StateTransition
+!insert (tr_zhm_motionArtifactRepeatT2, st_zhm_scanT2) into TransitionState
+
+!insert (st_zhm_postContrastScan, tr_zhm_allergyOrPanicEvent) into StateTransition
+!insert (tr_zhm_allergyOrPanicEvent, st_zhm_incidentHold) into TransitionState
+
+!insert (st_zhm_incidentHold, tr_zhm_resolveIncidentToDischarge) into StateTransition
+!insert (tr_zhm_resolveIncidentToDischarge, st_zhm_patientDischarge) into TransitionState
+
+!insert (st_zhm_patientDischarge, tr_zhm_dischargeToCleaning) into StateTransition
+!insert (tr_zhm_dischargeToCleaning, st_zhm_roomDisinfection) into TransitionState
+
+!insert (st_zhm_roomDisinfection, tr_zhm_cleaningCompleteBackToRegister) into StateTransition
+!insert (tr_zhm_cleaningCompleteBackToRegister, st_zhm_register) into TransitionState
+
+!new TimeEvent('te_zhm_MTE1')
+!te_zhm_MTE1.time := 5
+!insert (tr_zhm_startScreening, te_zhm_MTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE2')
+!te_zhm_MTE2.time := 6
+!insert (tr_zhm_screeningPassToChange, te_zhm_MTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE3')
+!te_zhm_MTE3.time := 1
+!insert (tr_zhm_metalOrImplantIssue, te_zhm_MTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE4')
+!te_zhm_MTE4.time := 7
+!insert (tr_zhm_changeCompleteToIv, te_zhm_MTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE5')
+!te_zhm_MTE5.time := 3
+!insert (tr_zhm_ivDoneToQueue, te_zhm_MTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE6')
+!te_zhm_MTE6.time := 10
+!insert (tr_zhm_queueTick, te_zhm_MTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE7')
+!te_zhm_MTE7.time := 1
+!insert (tr_zhm_callPatientIn, te_zhm_MTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE8')
+!te_zhm_MTE8.time := 4
+!insert (tr_zhm_positionedStartLocalizer, te_zhm_MTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE9')
+!te_zhm_MTE9.time := 2
+!insert (tr_zhm_localizerComplete, te_zhm_MTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE10')
+!te_zhm_MTE10.time := 9
+!insert (tr_zhm_t1Complete, te_zhm_MTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE11')
+!te_zhm_MTE11.time := 11
+!insert (tr_zhm_t2CompleteDecideContrast, te_zhm_MTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE12')
+!te_zhm_MTE12.time := 2
+!insert (tr_zhm_injectThenWait, te_zhm_MTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE13')
+!te_zhm_MTE13.time := 12
+!insert (tr_zhm_postContrastComplete, te_zhm_MTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE14')
+!te_zhm_MTE14.time := 3
+!insert (tr_zhm_qualityOkProceed, te_zhm_MTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE15')
+!te_zhm_MTE15.time := 1
+!insert (tr_zhm_motionArtifactRepeatT2, te_zhm_MTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE16')
+!te_zhm_MTE16.time := 1
+!insert (tr_zhm_allergyOrPanicEvent, te_zhm_MTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE17')
+!te_zhm_MTE17.time := 20
+!insert (tr_zhm_resolveIncidentToDischarge, te_zhm_MTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE18')
+!te_zhm_MTE18.time := 2
+!insert (tr_zhm_dischargeToCleaning, te_zhm_MTE18) into TransitionContainsEvents
+
+!new TimeEvent('te_zhm_MTE19')
+!te_zhm_MTE19.time := 15
+!insert (tr_zhm_cleaningCompleteBackToRegister, te_zhm_MTE19) into TransitionContainsEvents
+

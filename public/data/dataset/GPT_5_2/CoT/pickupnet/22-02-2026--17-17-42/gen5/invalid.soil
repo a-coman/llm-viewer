@@ -1,0 +1,69 @@
+!new Station('DELCENTRAL')
+
+!new Driver('DIN301')
+!DIN301.id := 'D-IN-301'
+!DIN301.name := 'Arjun Mehta'
+
+!new Driver('DIN302')
+!DIN302.id := 'D-IN-302'
+!DIN302.name := 'Farah Khan'
+
+!insert (DELCENTRAL, DIN301) into StationContainsDriver
+!insert (DELCENTRAL, DIN302) into StationContainsDriver
+
+!new Customer('CIN501')
+!CIN501.id := 'C-IN-501'
+!CIN501.name := 'Rahul Verma'
+!CIN501.twitterUserName := '@rahulverma_del'
+
+!new Customer('CINNEW998')
+!CINNEW998.id := 'C-IN-NEW998'
+!CINNEW998.name := 'Savitri Devi'
+!CINNEW998.twitterUserName := '@savitri_new998'
+
+!insert (DELCENTRAL, CIN501) into StationContainsCustomer
+
+!new Address('ADEL_PICK07')
+!ADEL_PICK07.text := 'Shop 14, Lajpat Nagar Central Market, New Delhi 110024, India'
+!new GeoLocation('GLDELLAJPAT')
+!GLDELLAJPAT.latitude := 28.5677
+!GLDELLAJPAT.longitude := 77.2426
+!insert (ADEL_PICK07, GLDELLAJPAT) into AddressContainsGeoLocation
+
+!new Address('ABIH_DEL02')
+!ABIH_DEL02.text := 'Khetpur Village, near the old banyan tree and the handpump, P.S. Barharia area, Siwan district, Bihar, India'
+
+!new Address('ADEL_PICK08')
+!ADEL_PICK08.text := 'Connaught Place, Inner Circle, Gate near Rajiv Chowk Metro Exit 6, New Delhi 110001, India'
+!new GeoLocation('GLDELCP')
+!GLDELCP.latitude := 28.6315
+!GLDELCP.longitude := 77.2167
+!insert (ADEL_PICK08, GLDELCP) into AddressContainsGeoLocation
+
+!new Address('ADEL_DEL09')
+!ADEL_DEL09.text := 'AIIMS Main Gate, Sri Aurobindo Marg, New Delhi 110029, India'
+!new GeoLocation('GLDELAIIMS')
+!GLDELAIIMS.latitude := 28.5672
+!GLDELAIIMS.longitude := 77.2100
+!insert (ADEL_DEL09, GLDELAIIMS) into AddressContainsGeoLocation
+
+!new Shipment('SHPIN12001')
+!SHPIN12001.id := 'SHP-IN-12001'
+!SHPIN12001.status := #NEW
+
+!new Shipment('SHPIN12002')
+!SHPIN12002.id := 'SHP-IN-12002'
+!SHPIN12002.status := #ASSIGNED
+
+!insert (DELCENTRAL, SHPIN12002) into StationShipment
+
+!insert (CINNEW998, SHPIN12001) into CustomerConsistsOfShipment
+!insert (CIN501, SHPIN12002) into CustomerConsistsOfShipment
+
+!insert (SHPIN12001, ADEL_PICK07) into ShipmentContainsPickUpAddress
+!insert (SHPIN12001, ABIH_DEL02) into ShipmentContainsDeliveryAddress
+
+!insert (SHPIN12002, ADEL_PICK08) into ShipmentContainsPickUpAddress
+!insert (SHPIN12002, ADEL_DEL09) into ShipmentContainsDeliveryAddress
+
+!insert (DIN301, SHPIN12002) into DriverShipment

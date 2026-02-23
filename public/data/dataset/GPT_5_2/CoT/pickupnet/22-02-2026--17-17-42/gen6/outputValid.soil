@@ -1,0 +1,618 @@
+!new Station('S7')
+
+!new Driver('DRVLONG7000000001')
+!DRVLONG7000000001.id := 'DRV-LONG-7000000001'
+!DRVLONG7000000001.name := 'Jean-Baptiste Tremblay'
+
+!new Driver('DRV7002_S7')
+!DRV7002_S7.id := 'DRV-7002'
+!DRV7002_S7.name := 'Samira Al-Masri'
+
+!insert (S7, DRVLONG7000000001) into StationContainsDriver
+!insert (S7, DRV7002_S7) into StationContainsDriver
+
+!new Customer('CUST7001_S7')
+!CUST7001_S7.id := 'CUST-7001'
+!CUST7001_S7.name := 'Noura El Idrissi'
+!CUST7001_S7.twitterUserName := '@noura_casa'
+
+!new Customer('CUST7002_S7')
+!CUST7002_S7.id := 'CUST-7002'
+!CUST7002_S7.name := 'ᐊᓂᑲ ᑕᐸᓐ (Anika Tapan)'
+!CUST7002_S7.twitterUserName := '@anika_nunavut'
+
+!new Customer('CUST7003_S7')
+!CUST7003_S7.id := 'CUST-7003'
+!CUST7003_S7.name := 'François Dubois'
+!CUST7003_S7.twitterUserName := '@francois_dubois_qc'
+
+!new Customer('CUST7004_S7')
+!CUST7004_S7.id := 'CUST-7004'
+!CUST7004_S7.name := 'أحمد الزهراني (Ahmed Al-Zahrani)'
+!CUST7004_S7.twitterUserName := '@ahmed_الطلبات_السريعة_2026'
+
+!insert (S7, CUST7001_S7) into StationContainsCustomer
+!insert (S7, CUST7002_S7) into StationContainsCustomer
+!insert (S7, CUST7003_S7) into StationContainsCustomer
+!insert (S7, CUST7004_S7) into StationContainsCustomer
+
+!new Address('ADLCOMMON700')
+!ADLCOMMON700.text := 'Community Parcel Locker Bank #7, Avenida de la Constitución, Seville, Spain'
+!new GeoLocation('GDLCOMMON700')
+!GDLCOMMON700.latitude := 37.3891
+!GDLCOMMON700.longitude := -0.0
+!insert (ADLCOMMON700, GDLCOMMON700) into AddressContainsGeoLocation
+
+!new Address('APU7001')
+!APU7001.text := 'Rue de la Liberté, Casablanca, Maroc'
+!new GeoLocation('GPU7001')
+!GPU7001.latitude := 33.5731
+!GPU7001.longitude := -7.5898
+!insert (APU7001, GPU7001) into AddressContainsGeoLocation
+
+!new Address('APU7002')
+!APU7002.text := 'Iqaluit cargo shed, Nunavut, Canada'
+!new GeoLocation('GPU7002')
+!GPU7002.latitude := 63.7467
+!GPU7002.longitude := -68.5167
+!insert (APU7002, GPU7002) into AddressContainsGeoLocation
+
+!new Address('APU7003')
+!APU7003.text := 'Port-aux-Français supply pier, Kerguelen Islands (TAAF)'
+!new GeoLocation('GPU7003')
+!GPU7003.latitude := -49.3497
+!GPU7003.longitude := 70.2196
+!insert (APU7003, GPU7003) into AddressContainsGeoLocation
+
+!new Address('APU7004')
+!APU7004.text := 'Remote waypoint on the 180th meridian (pickup marker)'
+!new GeoLocation('GPU7004')
+!GPU7004.latitude := 10.0
+!GPU7004.longitude := 180.0
+!insert (APU7004, GPU7004) into AddressContainsGeoLocation
+
+!new Shipment('SHP7001')
+!SHP7001.id := 'SHP-7001'
+!SHP7001.status := #NEW
+
+!new Shipment('SHP7002')
+!SHP7002.id := 'SHP-7002'
+!SHP7002.status := #ASSIGNED
+
+!new Shipment('SHP7003')
+!SHP7003.id := 'SHP-7003'
+!SHP7003.status := #UNDERWAY
+
+!new Shipment('SHP7004')
+!SHP7004.id := 'SHP-7004'
+!SHP7004.status := #DELIVERED
+
+!insert (S7, SHP7001) into StationShipment
+!insert (S7, SHP7002) into StationShipment
+!insert (S7, SHP7003) into StationShipment
+!insert (S7, SHP7004) into StationShipment
+
+!insert (CUST7001_S7, SHP7001) into CustomerConsistsOfShipment
+!insert (CUST7002_S7, SHP7002) into CustomerConsistsOfShipment
+!insert (CUST7003_S7, SHP7003) into CustomerConsistsOfShipment
+!insert (CUST7004_S7, SHP7004) into CustomerConsistsOfShipment
+
+!insert (SHP7001, APU7001) into ShipmentContainsPickUpAddress
+!insert (SHP7001, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+
+!insert (SHP7002, APU7002) into ShipmentContainsPickUpAddress
+!insert (SHP7002, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRVLONG7000000001, SHP7002) into DriverShipment
+
+!insert (SHP7003, APU7003) into ShipmentContainsPickUpAddress
+!insert (SHP7003, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRV7002_S7, SHP7003) into DriverShipment
+
+!insert (SHP7004, APU7004) into ShipmentContainsPickUpAddress
+!insert (SHP7004, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRVLONG7000000001, SHP7004) into DriverShipment
+
+!new Station('S7DXB')
+!new Station('S8CUZ')
+
+!new Driver('D7701')
+!D7701.id := 'D-7701'
+!D7701.name := 'Rogelio Santos'
+
+!new Driver('D7702')
+!D7702.id := 'D-7702'
+!D7702.name := 'Fatima Al Hammadi'
+
+!insert (S7DXB, D7701) into StationContainsDriver
+!insert (S7DXB, D7702) into StationContainsDriver
+
+!new Customer('C7701')
+!C7701.id := 'C-7701'
+!C7701.name := 'Maha Al Suwaidi'
+!C7701.twitterUserName := '@maha_suwaidi'
+
+!new Customer('C7702')
+!C7702.id := 'C-7702'
+!C7702.name := 'Vikram Nair'
+!C7702.twitterUserName := '@vikramnair_uae'
+
+!insert (S7DXB, C7701) into StationContainsCustomer
+!insert (S7DXB, C7702) into StationContainsCustomer
+
+!new Address('DXB_A1')
+!DXB_A1.text := 'JAFZA Gate 5, Warehouse Cluster J, Dubai, UAE'
+!new GeoLocation('DXB_GL1')
+!DXB_GL1.latitude := 24.9882
+!DXB_GL1.longitude := 55.0696
+!insert (DXB_A1, DXB_GL1) into AddressContainsGeoLocation
+
+!new Address('DXB_A2')
+!DXB_A2.text := 'Dubai Marina, The Walk (JBR), Dubai, UAE'
+!new GeoLocation('DXB_GL2')
+!DXB_GL2.latitude := 25.0800
+!DXB_GL2.longitude := 55.1362
+!insert (DXB_A2, DXB_GL2) into AddressContainsGeoLocation
+
+!new Address('DXB_A3')
+!DXB_A3.text := 'Al Fahidi Historical Neighbourhood, Bur Dubai, UAE'
+!new GeoLocation('DXB_GL3')
+!DXB_GL3.latitude := 25.2632
+!DXB_GL3.longitude := 55.2973
+!insert (DXB_A3, DXB_GL3) into AddressContainsGeoLocation
+
+!new Address('DXB_A4')
+!DXB_A4.text := 'Mall of the Emirates, Sheikh Zayed Rd, Dubai, UAE'
+!new GeoLocation('DXB_GL4')
+!DXB_GL4.latitude := 25.1180
+!DXB_GL4.longitude := 55.2006
+!insert (DXB_A4, DXB_GL4) into AddressContainsGeoLocation
+
+!new Address('DXB_A5')
+!DXB_A5.text := 'Gold Souk, Deira, Dubai, UAE'
+!new GeoLocation('DXB_GL5')
+!DXB_GL5.latitude := 25.2696
+!DXB_GL5.longitude := 55.2972
+!insert (DXB_A5, DXB_GL5) into AddressContainsGeoLocation
+
+!new Shipment('SH77001')
+!SH77001.id := 'SH-77001'
+!SH77001.status := #UNDERWAY
+
+!new Shipment('SH77002')
+!SH77002.id := 'SH-77002'
+!SH77002.status := #DELIVERED
+
+!new Shipment('SH77003')
+!SH77003.id := 'SH-77003'
+!SH77003.status := #ASSIGNED
+
+!new Shipment('SH77004')
+!SH77004.id := 'SH-77004'
+!SH77004.status := #NEW
+
+!insert (S7DXB, SH77001) into StationShipment
+!insert (S7DXB, SH77002) into StationShipment
+!insert (S7DXB, SH77003) into StationShipment
+!insert (S7DXB, SH77004) into StationShipment
+
+!insert (C7701, SH77001) into CustomerConsistsOfShipment
+!insert (C7701, SH77002) into CustomerConsistsOfShipment
+!insert (C7702, SH77003) into CustomerConsistsOfShipment
+!insert (C7702, SH77004) into CustomerConsistsOfShipment
+
+!insert (SH77001, DXB_A1) into ShipmentContainsPickUpAddress
+!insert (SH77001, DXB_A2) into ShipmentContainsDeliveryAddress
+!insert (D7701, SH77001) into DriverShipment
+
+!insert (SH77002, DXB_A3) into ShipmentContainsPickUpAddress
+!insert (SH77002, DXB_A4) into ShipmentContainsDeliveryAddress
+!insert (D7702, SH77002) into DriverShipment
+
+!insert (SH77003, DXB_A5) into ShipmentContainsPickUpAddress
+!insert (SH77003, DXB_A4) into ShipmentContainsDeliveryAddress
+!insert (D7701, SH77003) into DriverShipment
+
+!insert (SH77004, DXB_A1) into ShipmentContainsPickUpAddress
+!insert (SH77004, DXB_A5) into ShipmentContainsDeliveryAddress
+
+!new Customer('C8801')
+!C8801.id := 'C-8801'
+!C8801.name := 'Rosa Quispe'
+!C8801.twitterUserName := '@rosa_quispe_cusco'
+
+!insert (S8CUZ, C8801) into StationContainsCustomer
+
+!new Address('CUZ_A1')
+!CUZ_A1.text := 'Av. El Sol 800, Centro Histórico, Cusco, Perú'
+!new GeoLocation('CUZ_GL1')
+!CUZ_GL1.latitude := -13.5209
+!CUZ_GL1.longitude := -71.9753
+!insert (CUZ_A1, CUZ_GL1) into AddressContainsGeoLocation
+
+!new Address('CUZ_A2')
+!CUZ_A2.text := 'Terminal Terrestre de Cusco, Av. Industrial, Cusco, Perú'
+!new GeoLocation('CUZ_GL2')
+!CUZ_GL2.latitude := -13.5383
+!CUZ_GL2.longitude := -71.9187
+!insert (CUZ_A2, CUZ_GL2) into AddressContainsGeoLocation
+
+!new Shipment('SH88001_CUZ')
+!SH88001_CUZ.id := 'SH-88001-CUZ'
+!SH88001_CUZ.status := #NEW
+
+!new Shipment('SH88002_CUZ')
+!SH88002_CUZ.id := 'SH-88002-CUZ'
+!SH88002_CUZ.status := #NEW
+
+!insert (S8CUZ, SH88001_CUZ) into StationShipment
+!insert (S8CUZ, SH88002_CUZ) into StationShipment
+
+!insert (C8801, SH88001_CUZ) into CustomerConsistsOfShipment
+!insert (C8801, SH88002_CUZ) into CustomerConsistsOfShipment
+
+!insert (SH88001_CUZ, CUZ_A2) into ShipmentContainsPickUpAddress
+!insert (SH88001_CUZ, CUZ_A1) into ShipmentContainsDeliveryAddress
+
+!insert (SH88002_CUZ, CUZ_A1) into ShipmentContainsPickUpAddress
+!insert (SH88002_CUZ, CUZ_A2) into ShipmentContainsDeliveryAddress
+
+!new Station('S10_EDGE6')
+!new Station('S11_EDGE6')
+!new Station('S12_EDGE6')
+
+!new Driver('EDGE6_D80')
+!EDGE6_D80.id := 'DRV-EDGE-080'
+!EDGE6_D80.name := 'Lucía Quintana'
+
+!new Driver('EDGE6_D81')
+!EDGE6_D81.id := 'DRV-EDGE-081'
+!EDGE6_D81.name := 'Tenzin Norbu (བསྟན་འཛིན)'
+
+!new Driver('EDGE6_D82')
+!EDGE6_D82.id := 'DRV-EDGE-082'
+!EDGE6_D82.name := 'Adeyemi Ọlábísí'
+
+!insert (S12_EDGE6, EDGE6_D80) into StationContainsDriver
+!insert (S12_EDGE6, EDGE6_D81) into StationContainsDriver
+!insert (S12_EDGE6, EDGE6_D82) into StationContainsDriver
+
+!new Customer('EDGE6_C50')
+!EDGE6_C50.id := 'CUS-EDGE-5001'
+!EDGE6_C50.name := 'Мария Петрова'
+!EDGE6_C50.twitterUserName := '@masha_pet'
+
+!new Customer('EDGE6_C51')
+!EDGE6_C51.id := 'CUS-EDGE-5002'
+!EDGE6_C51.name := 'Kāne Kealoha'
+!EDGE6_C51.twitterUserName := '@kane_kealoha'
+
+!new Customer('EDGE6_C52')
+!EDGE6_C52.id := 'CUS-EDGE-5003'
+!EDGE6_C52.name := 'Fatima el-Masri'
+!EDGE6_C52.twitterUserName := '@fatima_elmasri'
+
+!new Customer('EDGE6_C53')
+!EDGE6_C53.id := 'CUS-EDGE-5004'
+!EDGE6_C53.name := 'บริษัท ลานนาเหนือ (Lanna Nuea Co.)'
+!EDGE6_C53.twitterUserName := '@lanna_nuea'
+
+!insert (S11_EDGE6, EDGE6_C50) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C51) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C52) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C53) into StationContainsCustomer
+
+!new Address('EDGE6_A501')
+!EDGE6_A501.text := 'Cargo cage “K-17”, Keleti pályaudvar service tunnel, Budapest, Hungary'
+!new GeoLocation('EDGE6_GL501')
+!EDGE6_GL501.latitude := 47.500930
+!EDGE6_GL501.longitude := 19.083280
+!insert (EDGE6_A501, EDGE6_GL501) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A502')
+!EDGE6_A502.text := '“Bibliobus” stop, Place de la République, 75011 Paris, France'
+!new GeoLocation('EDGE6_GL502')
+!EDGE6_GL502.latitude := 48.867380
+!EDGE6_GL502.longitude := 2.363410
+!insert (EDGE6_A502, EDGE6_GL502) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A503')
+!EDGE6_A503.text := '〒100-0005 東京都千代田区丸の内1丁目 地下搬入口 (地下B2), Japan'
+!new GeoLocation('EDGE6_GL503')
+!EDGE6_GL503.latitude := 35.681236
+!EDGE6_GL503.longitude := 139.767125
+!insert (EDGE6_A503, EDGE6_GL503) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A504')
+!EDGE6_A504.text := 'Long-form address: Unit 9999, Tower “A”, Mega-Complex “Seven Rivers”, District 12, Sector 4, Block 27, Lot 3 (rear ramp), Ciudad del Este, Paraguay'
+!new GeoLocation('EDGE6_GL504')
+!EDGE6_GL504.latitude := -25.509500
+!EDGE6_GL504.longitude := -54.611000
+!insert (EDGE6_A504, EDGE6_GL504) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A505')
+!EDGE6_A505.text := 'PO Box 000, General Delivery counter, Stanley, Falkland Islands'
+!new GeoLocation('EDGE6_GL505')
+!EDGE6_GL505.latitude := -51.693500
+!EDGE6_GL505.longitude := -57.851600
+!insert (EDGE6_A505, EDGE6_GL505) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A506')
+!EDGE6_A506.text := 'Field drop “Outcrop-Δ”, Simpson Desert track marker, Australia'
+!new GeoLocation('EDGE6_GL506')
+!EDGE6_GL506.latitude := -25.000000
+!EDGE6_GL506.longitude := 137.000000
+!insert (EDGE6_A506, EDGE6_GL506) into AddressContainsGeoLocation
+
+!new Shipment('EDGE6_SHP5001')
+!EDGE6_SHP5001.id := 'SHP-EDGE-5001'
+!EDGE6_SHP5001.status := #UNDERWAY
+
+!new Shipment('EDGE6_SHP5002')
+!EDGE6_SHP5002.id := 'SHP-EDGE-5002'
+!EDGE6_SHP5002.status := #ASSIGNED
+
+!new Shipment('EDGE6_SHP5003')
+!EDGE6_SHP5003.id := 'SHP-EDGE-5003'
+!EDGE6_SHP5003.status := #NEW
+
+!new Shipment('EDGE6_SHP5004')
+!EDGE6_SHP5004.id := 'SHP-EDGE-5004'
+!EDGE6_SHP5004.status := #DELIVERED
+
+!new Shipment('EDGE6_SHP5005')
+!EDGE6_SHP5005.id := 'SHP-EDGE-5005'
+!EDGE6_SHP5005.status := #ASSIGNED
+
+!insert (S10_EDGE6, EDGE6_SHP5001) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5002) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5003) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5004) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5005) into StationShipment
+
+!insert (EDGE6_C50, EDGE6_SHP5001) into CustomerConsistsOfShipment
+!insert (EDGE6_C50, EDGE6_SHP5002) into CustomerConsistsOfShipment
+!insert (EDGE6_C50, EDGE6_SHP5003) into CustomerConsistsOfShipment
+!insert (EDGE6_C51, EDGE6_SHP5004) into CustomerConsistsOfShipment
+!insert (EDGE6_C52, EDGE6_SHP5005) into CustomerConsistsOfShipment
+
+!insert (EDGE6_SHP5001, EDGE6_A501) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5001, EDGE6_A502) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5002, EDGE6_A502) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5002, EDGE6_A503) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5003, EDGE6_A503) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5003, EDGE6_A501) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5004, EDGE6_A504) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5004, EDGE6_A505) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5005, EDGE6_A506) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5005, EDGE6_A504) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_D80, EDGE6_SHP5001) into DriverShipment
+!insert (EDGE6_D81, EDGE6_SHP5002) into DriverShipment
+!insert (EDGE6_D81, EDGE6_SHP5003) into DriverShipment
+!insert (EDGE6_D80, EDGE6_SHP5004) into DriverShipment
+
+!new Station('DXBJAFZACrossDock')
+!new Station('KGLGasaboDepot')
+
+!new Driver('DRVDXB801')
+!DRVDXB801.id := 'DRV-DXB-801'
+!DRVDXB801.name := 'Fatima Al Suwaidi'
+
+!new Driver('DRVDXB802')
+!DRVDXB802.id := 'DRV-DXB-802'
+!DRVDXB802.name := 'Rajesh Nair'
+
+!new Driver('DRVDXB803')
+!DRVDXB803.id := 'DRV-DXB-803'
+!DRVDXB803.name := 'Omar Haddad'
+
+!insert (DXBJAFZACrossDock, DRVDXB801) into StationContainsDriver
+!insert (DXBJAFZACrossDock, DRVDXB802) into StationContainsDriver
+!insert (DXBJAFZACrossDock, DRVDXB803) into StationContainsDriver
+
+!new Driver('DRVKGL401')
+!DRVKGL401.id := 'DRV-KGL-401'
+!DRVKGL401.name := 'Jean‑Claude Nshimiyimana'
+
+!new Driver('DRVKGL402')
+!DRVKGL402.id := 'DRV-KGL-402'
+!DRVKGL402.name := 'Aline Mukamana'
+
+!insert (KGLGasaboDepot, DRVKGL401) into StationContainsDriver
+!insert (KGLGasaboDepot, DRVKGL402) into StationContainsDriver
+
+!new Customer('CUSTDXB9001')
+!CUSTDXB9001.id := 'CUST-DXB-9001'
+!CUSTDXB9001.name := 'Gulf DutyFree Trading LLC'
+!CUSTDXB9001.twitterUserName := '@gulfdutyfree'
+!insert (DXBJAFZACrossDock, CUSTDXB9001) into StationContainsCustomer
+
+!new Customer('CUSTKGL3001')
+!CUSTKGL3001.id := 'CUST-KGL-3001'
+!CUSTKGL3001.name := 'Akagera Coffee Cooperative'
+!CUSTKGL3001.twitterUserName := '@akageracoffee'
+
+!new Customer('CUSTKGL3002')
+!CUSTKGL3002.id := 'CUST-KGL-3002'
+!CUSTKGL3002.name := 'Umuryango Health Clinic'
+!CUSTKGL3002.twitterUserName := '@umuryango_clinic'
+
+!new Customer('CUSTKGL3003')
+!CUSTKGL3003.id := 'CUST-KGL-3003'
+!CUSTKGL3003.name := 'Nadia Habimana'
+!CUSTKGL3003.twitterUserName := '@nadia_habi'
+
+!insert (KGLGasaboDepot, CUSTKGL3001) into StationContainsCustomer
+!insert (KGLGasaboDepot, CUSTKGL3002) into StationContainsCustomer
+!insert (KGLGasaboDepot, CUSTKGL3003) into StationContainsCustomer
+
+!new Address('DXBCD_D1')
+!DXBCD_D1.text := 'مطار دبي الدولي DXB – Cargo Village, Dubai, UAE'
+!new GeoLocation('DXBCD_GL1')
+!DXBCD_GL1.latitude := 25.2532
+!DXBCD_GL1.longitude := 55.3657
+!insert (DXBCD_D1, DXBCD_GL1) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D2')
+!DXBCD_D2.text := 'Jebel Ali Free Zone (JAFZA) Warehouse Block M, Dubai, UAE'
+!new GeoLocation('DXBCD_GL2')
+!DXBCD_GL2.latitude := 24.9948
+!DXBCD_GL2.longitude := 55.0612
+!insert (DXBCD_D2, DXBCD_GL2) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D3')
+!DXBCD_D3.text := 'Gold Souk, Deira, Dubai, UAE'
+!new GeoLocation('DXBCD_GL3')
+!DXBCD_GL3.latitude := 25.2706
+!DXBCD_GL3.longitude := 55.2963
+!insert (DXBCD_D3, DXBCD_GL3) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D4')
+!DXBCD_D4.text := 'Dubai Marina Mall – Receiving Bay, Dubai, UAE'
+!new GeoLocation('DXBCD_GL4')
+!DXBCD_GL4.latitude := 25.0773
+!DXBCD_GL4.longitude := 55.1403
+!insert (DXBCD_D4, DXBCD_GL4) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D5')
+!DXBCD_D5.text := 'Al Quoz Industrial Area 3 – Loading Gate, Dubai, UAE'
+!new GeoLocation('DXBCD_GL5')
+!DXBCD_GL5.latitude := 25.1267
+!DXBCD_GL5.longitude := 55.2230
+!insert (DXBCD_D5, DXBCD_GL5) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D6')
+!DXBCD_D6.text := 'Downtown Dubai – Souk Al Bahar Service Entrance, Dubai, UAE'
+!new GeoLocation('DXBCD_GL6')
+!DXBCD_GL6.latitude := 25.1955
+!DXBCD_GL6.longitude := 55.2797
+!insert (DXBCD_D6, DXBCD_GL6) into AddressContainsGeoLocation
+
+!new Address('DXBCD_D7')
+!DXBCD_D7.text := 'Dubai Silicon Oasis – Tech Park Delivery Point, Dubai, UAE'
+!new GeoLocation('DXBCD_GL7')
+!DXBCD_GL7.latitude := 25.1279
+!DXBCD_GL7.longitude := 55.3888
+!insert (DXBCD_D7, DXBCD_GL7) into AddressContainsGeoLocation
+
+!new Address('KGLD_K1')
+!KGLD_K1.text := 'Kigali Special Economic Zone (KSEZ), Masoro, Rwanda'
+!new GeoLocation('KGLD_GL1')
+!KGLD_GL1.latitude := -1.9356
+!KGLD_GL1.longitude := 30.1767
+!insert (KGLD_K1, KGLD_GL1) into AddressContainsGeoLocation
+
+!new Address('KGLD_K2')
+!KGLD_K2.text := 'Kimironko Market (Amasoko ya Kimironko), Kigali, Rwanda'
+!new GeoLocation('KGLD_GL2')
+!KGLD_GL2.latitude := -1.9369
+!KGLD_GL2.longitude := 30.1306
+!insert (KGLD_K2, KGLD_GL2) into AddressContainsGeoLocation
+
+!new Address('KGLD_K3')
+!KGLD_K3.text := 'Kigali Convention Centre, KG 2 Roundabout, Kigali, Rwanda'
+!new GeoLocation('KGLD_GL3')
+!KGLD_GL3.latitude := -1.9537
+!KGLD_GL3.longitude := 30.0927
+!insert (KGLD_K3, KGLD_GL3) into AddressContainsGeoLocation
+
+!new Address('KGLD_K4')
+!KGLD_K4.text := 'Kigali International Airport (Kanombe) – Cargo/Stores Gate, Rwanda'
+!new GeoLocation('KGLD_GL4')
+!KGLD_GL4.latitude := -1.9686
+!KGLD_GL4.longitude := 30.1395
+!insert (KGLD_K4, KGLD_GL4) into AddressContainsGeoLocation
+
+!new Address('KGLD_K5')
+!KGLD_K5.text := 'Nyabugogo Bus Terminal – Parcel Point, Kigali, Rwanda'
+!new GeoLocation('KGLD_GL5')
+!KGLD_GL5.latitude := -1.9444
+!KGLD_GL5.longitude := 30.0588
+!insert (KGLD_K5, KGLD_GL5) into AddressContainsGeoLocation
+
+!new Shipment('SHPDXB6101')
+!SHPDXB6101.id := 'SHP-DXB-2026-6101'
+!SHPDXB6101.status := #NEW
+
+!new Shipment('SHPDXB6102')
+!SHPDXB6102.id := 'SHP-DXB-2026-6102'
+!SHPDXB6102.status := #ASSIGNED
+
+!new Shipment('SHPDXB6103')
+!SHPDXB6103.id := 'SHP-DXB-2026-6103'
+!SHPDXB6103.status := #UNDERWAY
+
+!new Shipment('SHPDXB6104')
+!SHPDXB6104.id := 'SHP-DXB-2026-6104'
+!SHPDXB6104.status := #DELIVERED
+
+!new Shipment('SHPDXB6105')
+!SHPDXB6105.id := 'SHP-DXB-2026-6105'
+!SHPDXB6105.status := #ASSIGNED
+
+!new Shipment('SHPDXB6106')
+!SHPDXB6106.id := 'SHP-DXB-2026-6106'
+!SHPDXB6106.status := #NEW
+
+!insert (DXBJAFZACrossDock, SHPDXB6101) into StationShipment
+!insert (DXBJAFZACrossDock, SHPDXB6102) into StationShipment
+!insert (DXBJAFZACrossDock, SHPDXB6103) into StationShipment
+!insert (DXBJAFZACrossDock, SHPDXB6104) into StationShipment
+!insert (DXBJAFZACrossDock, SHPDXB6105) into StationShipment
+!insert (DXBJAFZACrossDock, SHPDXB6106) into StationShipment
+
+!insert (CUSTDXB9001, SHPDXB6101) into CustomerConsistsOfShipment
+!insert (CUSTDXB9001, SHPDXB6102) into CustomerConsistsOfShipment
+!insert (CUSTDXB9001, SHPDXB6103) into CustomerConsistsOfShipment
+!insert (CUSTDXB9001, SHPDXB6104) into CustomerConsistsOfShipment
+!insert (CUSTDXB9001, SHPDXB6105) into CustomerConsistsOfShipment
+!insert (CUSTDXB9001, SHPDXB6106) into CustomerConsistsOfShipment
+
+!insert (SHPDXB6101, DXBCD_D1) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6101, DXBCD_D2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPDXB6102, DXBCD_D2) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6102, DXBCD_D4) into ShipmentContainsDeliveryAddress
+!insert (DRVDXB801, SHPDXB6102) into DriverShipment
+
+!insert (SHPDXB6103, DXBCD_D3) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6103, DXBCD_D2) into ShipmentContainsDeliveryAddress
+!insert (DRVDXB802, SHPDXB6103) into DriverShipment
+
+!insert (SHPDXB6104, DXBCD_D5) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6104, DXBCD_D6) into ShipmentContainsDeliveryAddress
+!insert (DRVDXB801, SHPDXB6104) into DriverShipment
+
+!insert (SHPDXB6105, DXBCD_D1) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6105, DXBCD_D7) into ShipmentContainsDeliveryAddress
+!insert (DRVDXB802, SHPDXB6105) into DriverShipment
+
+!insert (SHPDXB6106, DXBCD_D2) into ShipmentContainsPickUpAddress
+!insert (SHPDXB6106, DXBCD_D3) into ShipmentContainsDeliveryAddress
+
+!new Shipment('SHPKGL1201')
+!SHPKGL1201.id := 'SHP-KGL-2026-1201'
+!SHPKGL1201.status := #UNDERWAY
+
+!new Shipment('SHPKGL1202')
+!SHPKGL1202.id := 'SHP-KGL-2026-1202'
+!SHPKGL1202.status := #DELIVERED
+
+!insert (KGLGasaboDepot, SHPKGL1201) into StationShipment
+!insert (KGLGasaboDepot, SHPKGL1202) into StationShipment
+
+!insert (CUSTKGL3001, SHPKGL1201) into CustomerConsistsOfShipment
+!insert (CUSTKGL3001, SHPKGL1202) into CustomerConsistsOfShipment
+
+!insert (SHPKGL1201, KGLD_K1) into ShipmentContainsPickUpAddress
+!insert (SHPKGL1201, KGLD_K4) into ShipmentContainsDeliveryAddress
+!insert (DRVKGL401, SHPKGL1201) into DriverShipment
+
+!insert (SHPKGL1202, KGLD_K2) into ShipmentContainsPickUpAddress
+!insert (SHPKGL1202, KGLD_K5) into ShipmentContainsDeliveryAddress
+!insert (DRVKGL402, SHPKGL1202) into DriverShipment
+

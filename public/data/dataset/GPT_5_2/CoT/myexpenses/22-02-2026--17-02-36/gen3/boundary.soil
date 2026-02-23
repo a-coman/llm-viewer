@@ -1,0 +1,75 @@
+!new Currency('currencyCHFBoundary')
+!currencyCHFBoundary.name := 'Swiss Franc'
+!currencyCHFBoundary.abbreviation := 'CHF'
+
+!new Currency('currencyMADBoundary')
+!currencyMADBoundary.name := 'Moroccan Dirham'
+!currencyMADBoundary.abbreviation := 'MAD'
+
+!new Expense('expenseEZeroNonEmpty')
+!expenseEZeroNonEmpty.amount := 0.00
+!expenseEZeroNonEmpty.startDate := Date('2025-12-31')
+!expenseEZeroNonEmpty.endDate := Date('2026-01-01')
+
+!new Expense('expenseEMicro')
+!expenseEMicro.amount := 0.02
+!expenseEMicro.startDate := Date('2026-01-15')
+!expenseEMicro.endDate := Date('2026-01-15')
+
+!new Bill('billEZeroNonEmpty_BZ1')
+!billEZeroNonEmpty_BZ1.amount := 0.00
+!billEZeroNonEmpty_BZ1.category := 'VAT receipt correction (no charge)'
+!billEZeroNonEmpty_BZ1.date := Date('2025-12-31')
+!billEZeroNonEmpty_BZ1.paymentMethod := #CHECK
+!billEZeroNonEmpty_BZ1.status := #DRAFT
+
+!new Bill('billEZeroNonEmpty_BZ2')
+!billEZeroNonEmpty_BZ2.amount := 0.00
+!billEZeroNonEmpty_BZ2.category := 'Parking session cancelled at gate'
+!billEZeroNonEmpty_BZ2.date := Date('2026-01-01')
+!billEZeroNonEmpty_BZ2.paymentMethod := #CASH
+!billEZeroNonEmpty_BZ2.status := #REFUSED
+
+!new Bill('billEZeroNonEmpty_BZ3')
+!billEZeroNonEmpty_BZ3.amount := 0.00
+!billEZeroNonEmpty_BZ3.category := 'Merchant test transaction void'
+!billEZeroNonEmpty_BZ3.date := Date('2026-01-01')
+!billEZeroNonEmpty_BZ3.paymentMethod := #CREDIT_CARD
+!billEZeroNonEmpty_BZ3.status := #REFUNDED
+
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ1) into ExpenseContainsBills
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ2) into ExpenseContainsBills
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ3) into ExpenseContainsBills
+
+!insert (billEZeroNonEmpty_BZ1, currencyCHFBoundary) into BillCurrency
+!insert (billEZeroNonEmpty_BZ2, currencyCHFBoundary) into BillCurrency
+!insert (billEZeroNonEmpty_BZ3, currencyMADBoundary) into BillCurrency
+
+!new Bill('billEMicro_BM1')
+!billEMicro_BM1.amount := 0.01
+!billEMicro_BM1.category := 'SMS receipt delivery fee'
+!billEMicro_BM1.date := Date('2026-01-15')
+!billEMicro_BM1.paymentMethod := #CASH
+!billEMicro_BM1.status := #PENDING
+
+!new Bill('billEMicro_BM2')
+!billEMicro_BM2.amount := 0.01
+!billEMicro_BM2.category := 'Rounding adjustment'
+!billEMicro_BM2.date := Date('2026-01-15')
+!billEMicro_BM2.paymentMethod := #CREDIT_CARD
+!billEMicro_BM2.status := #VALIDATED
+
+!insert (expenseEMicro, billEMicro_BM1) into ExpenseContainsBills
+!insert (expenseEMicro, billEMicro_BM2) into ExpenseContainsBills
+
+!insert (billEMicro_BM1, currencyMADBoundary) into BillCurrency
+!insert (billEMicro_BM2, currencyCHFBoundary) into BillCurrency
+
+!new Comment('commentEMicro_CM1')
+!commentEMicro_CM1.text := 'هذه مبالغ رمزية لاختبار إدخال الفواتير قبل الإرسال.'
+
+!new Comment('commentEMicro_CM2')
+!commentEMicro_CM2.text := 'Note: Two tiny items split across currencies to verify multi-currency handling.'
+
+!insert (expenseEMicro, commentEMicro_CM1) into ExpenseComment
+!insert (expenseEMicro, commentEMicro_CM2) into ExpenseComment

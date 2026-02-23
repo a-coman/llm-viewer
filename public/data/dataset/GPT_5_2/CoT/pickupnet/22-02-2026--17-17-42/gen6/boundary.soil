@@ -1,0 +1,113 @@
+!new Station('S7')
+
+!new Driver('DRVLONG7000000001')
+!DRVLONG7000000001.id := 'DRV-LONG-7000000001'
+!DRVLONG7000000001.name := 'Jean-Baptiste Tremblay'
+
+!new Driver('DRV7002_S7')
+!DRV7002_S7.id := 'DRV-7002'
+!DRV7002_S7.name := 'Samira Al-Masri'
+
+!insert (S7, DRVLONG7000000001) into StationContainsDriver
+!insert (S7, DRV7002_S7) into StationContainsDriver
+
+!new Customer('CUST7001_S7')
+!CUST7001_S7.id := 'CUST-7001'
+!CUST7001_S7.name := 'Noura El Idrissi'
+!CUST7001_S7.twitterUserName := '@noura_casa'
+
+!new Customer('CUST7002_S7')
+!CUST7002_S7.id := 'CUST-7002'
+!CUST7002_S7.name := 'ᐊᓂᑲ ᑕᐸᓐ (Anika Tapan)'
+!CUST7002_S7.twitterUserName := '@anika_nunavut'
+
+!new Customer('CUST7003_S7')
+!CUST7003_S7.id := 'CUST-7003'
+!CUST7003_S7.name := 'François Dubois'
+!CUST7003_S7.twitterUserName := '@francois_dubois_qc'
+
+!new Customer('CUST7004_S7')
+!CUST7004_S7.id := 'CUST-7004'
+!CUST7004_S7.name := 'أحمد الزهراني (Ahmed Al-Zahrani)'
+!CUST7004_S7.twitterUserName := '@ahmed_الطلبات_السريعة_2026'
+
+!insert (S7, CUST7001_S7) into StationContainsCustomer
+!insert (S7, CUST7002_S7) into StationContainsCustomer
+!insert (S7, CUST7003_S7) into StationContainsCustomer
+!insert (S7, CUST7004_S7) into StationContainsCustomer
+
+!new Address('ADLCOMMON700')
+!ADLCOMMON700.text := 'Community Parcel Locker Bank #7, Avenida de la Constitución, Seville, Spain'
+!new GeoLocation('GDLCOMMON700')
+!GDLCOMMON700.latitude := 37.3891
+!GDLCOMMON700.longitude := -0.0
+!insert (ADLCOMMON700, GDLCOMMON700) into AddressContainsGeoLocation
+
+!new Address('APU7001')
+!APU7001.text := 'Rue de la Liberté, Casablanca, Maroc'
+!new GeoLocation('GPU7001')
+!GPU7001.latitude := 33.5731
+!GPU7001.longitude := -7.5898
+!insert (APU7001, GPU7001) into AddressContainsGeoLocation
+
+!new Address('APU7002')
+!APU7002.text := 'Iqaluit cargo shed, Nunavut, Canada'
+!new GeoLocation('GPU7002')
+!GPU7002.latitude := 63.7467
+!GPU7002.longitude := -68.5167
+!insert (APU7002, GPU7002) into AddressContainsGeoLocation
+
+!new Address('APU7003')
+!APU7003.text := 'Port-aux-Français supply pier, Kerguelen Islands (TAAF)'
+!new GeoLocation('GPU7003')
+!GPU7003.latitude := -49.3497
+!GPU7003.longitude := 70.2196
+!insert (APU7003, GPU7003) into AddressContainsGeoLocation
+
+!new Address('APU7004')
+!APU7004.text := 'Remote waypoint on the 180th meridian (pickup marker)'
+!new GeoLocation('GPU7004')
+!GPU7004.latitude := 10.0
+!GPU7004.longitude := 180.0
+!insert (APU7004, GPU7004) into AddressContainsGeoLocation
+
+!new Shipment('SHP7001')
+!SHP7001.id := 'SHP-7001'
+!SHP7001.status := #NEW
+
+!new Shipment('SHP7002')
+!SHP7002.id := 'SHP-7002'
+!SHP7002.status := #ASSIGNED
+
+!new Shipment('SHP7003')
+!SHP7003.id := 'SHP-7003'
+!SHP7003.status := #UNDERWAY
+
+!new Shipment('SHP7004')
+!SHP7004.id := 'SHP-7004'
+!SHP7004.status := #DELIVERED
+
+!insert (S7, SHP7001) into StationShipment
+!insert (S7, SHP7002) into StationShipment
+!insert (S7, SHP7003) into StationShipment
+!insert (S7, SHP7004) into StationShipment
+
+!insert (CUST7001_S7, SHP7001) into CustomerConsistsOfShipment
+!insert (CUST7002_S7, SHP7002) into CustomerConsistsOfShipment
+!insert (CUST7003_S7, SHP7003) into CustomerConsistsOfShipment
+!insert (CUST7004_S7, SHP7004) into CustomerConsistsOfShipment
+
+!insert (SHP7001, APU7001) into ShipmentContainsPickUpAddress
+!insert (SHP7001, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+
+!insert (SHP7002, APU7002) into ShipmentContainsPickUpAddress
+!insert (SHP7002, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRVLONG7000000001, SHP7002) into DriverShipment
+
+!insert (SHP7003, APU7003) into ShipmentContainsPickUpAddress
+!insert (SHP7003, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRV7002_S7, SHP7003) into DriverShipment
+
+!insert (SHP7004, APU7004) into ShipmentContainsPickUpAddress
+!insert (SHP7004, ADLCOMMON700) into ShipmentContainsDeliveryAddress
+!insert (DRVLONG7000000001, SHP7004) into DriverShipment

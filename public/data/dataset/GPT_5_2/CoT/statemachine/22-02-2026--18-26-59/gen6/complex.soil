@@ -1,0 +1,306 @@
+!new StateMachine('sm_lagosJunctionTrafficSignalSM')
+!sm_lagosJunctionTrafficSignalSM.name := 'lagosJunctionTrafficSignalSM'
+
+!new State('st_ljt_boot')
+!st_ljt_boot.name := 'boot'
+!new State('st_ljt_selfTest')
+!st_ljt_selfTest.name := 'selfTest'
+!new State('st_ljt_allRedStart')
+!st_ljt_allRedStart.name := 'allRedStart'
+!new State('st_ljt_nsGreen')
+!st_ljt_nsGreen.name := 'nsGreen'
+!new State('st_ljt_nsYellow')
+!st_ljt_nsYellow.name := 'nsYellow'
+!new State('st_ljt_pedWalkNs')
+!st_ljt_pedWalkNs.name := 'pedWalkNs'
+!new State('st_ljt_pedClearNs')
+!st_ljt_pedClearNs.name := 'pedClearNs'
+!new State('st_ljt_allRedNsToEw')
+!st_ljt_allRedNsToEw.name := 'allRedNsToEw'
+!new State('st_ljt_ewGreen')
+!st_ljt_ewGreen.name := 'ewGreen'
+!new State('st_ljt_ewYellow')
+!st_ljt_ewYellow.name := 'ewYellow'
+!new State('st_ljt_pedWalkEw')
+!st_ljt_pedWalkEw.name := 'pedWalkEw'
+!new State('st_ljt_pedClearEw')
+!st_ljt_pedClearEw.name := 'pedClearEw'
+!new State('st_ljt_allRedEwToNs')
+!st_ljt_allRedEwToNs.name := 'allRedEwToNs'
+!new State('st_ljt_emergencyPreempt')
+!st_ljt_emergencyPreempt.name := 'emergencyPreempt'
+!new State('st_ljt_nightFlash')
+!st_ljt_nightFlash.name := 'nightFlash'
+!new State('st_ljt_maintenanceLock')
+!st_ljt_maintenanceLock.name := 'maintenanceLock'
+
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_boot) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_selfTest) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedStart) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nsGreen) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nsYellow) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedWalkNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedClearNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedNsToEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_ewGreen) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_ewYellow) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedWalkEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedClearEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedEwToNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_emergencyPreempt) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nightFlash) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_maintenanceLock) into StateMachineContainsStates
+
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_boot) into StateMachineStartsStates
+
+!new Transition('tr_ljt_powerOnToSelfTest')
+!tr_ljt_powerOnToSelfTest.name := 'powerOnToSelfTest'
+!new Transition('tr_ljt_selfTestToAllRed')
+!tr_ljt_selfTestToAllRed.name := 'selfTestToAllRed'
+!new Transition('tr_ljt_enterMaintenanceLock')
+!tr_ljt_enterMaintenanceLock.name := 'enterMaintenanceLock'
+!new Transition('tr_ljt_maintenanceCompleteToAllRed')
+!tr_ljt_maintenanceCompleteToAllRed.name := 'maintenanceCompleteToAllRed'
+!new Transition('tr_ljt_allRedToNsGreen')
+!tr_ljt_allRedToNsGreen.name := 'allRedToNsGreen'
+!new Transition('tr_ljt_nsGreenToNsYellow')
+!tr_ljt_nsGreenToNsYellow.name := 'nsGreenToNsYellow'
+!new Transition('tr_ljt_nsYellowToPedWalkNs')
+!tr_ljt_nsYellowToPedWalkNs.name := 'nsYellowToPedWalkNs'
+!new Transition('tr_ljt_pedWalkNsToPedClearNs')
+!tr_ljt_pedWalkNsToPedClearNs.name := 'pedWalkNsToPedClearNs'
+!new Transition('tr_ljt_pedClearNsToAllRedNsToEw')
+!tr_ljt_pedClearNsToAllRedNsToEw.name := 'pedClearNsToAllRedNsToEw'
+!new Transition('tr_ljt_allRedNsToEwToEwGreen')
+!tr_ljt_allRedNsToEwToEwGreen.name := 'allRedNsToEwToEwGreen'
+!new Transition('tr_ljt_ewGreenToEwYellow')
+!tr_ljt_ewGreenToEwYellow.name := 'ewGreenToEwYellow'
+!new Transition('tr_ljt_ewYellowToPedWalkEw')
+!tr_ljt_ewYellowToPedWalkEw.name := 'ewYellowToPedWalkEw'
+!new Transition('tr_ljt_pedWalkEwToPedClearEw')
+!tr_ljt_pedWalkEwToPedClearEw.name := 'pedWalkEwToPedClearEw'
+!new Transition('tr_ljt_pedClearEwToAllRedEwToNs')
+!tr_ljt_pedClearEwToAllRedEwToNs.name := 'pedClearEwToAllRedEwToNs'
+!new Transition('tr_ljt_allRedEwToNsToNsGreen')
+!tr_ljt_allRedEwToNsToNsGreen.name := 'allRedEwToNsToNsGreen'
+!new Transition('tr_ljt_preemptFromNsGreen')
+!tr_ljt_preemptFromNsGreen.name := 'preemptFromNsGreen'
+!new Transition('tr_ljt_preemptFromEwGreen')
+!tr_ljt_preemptFromEwGreen.name := 'preemptFromEwGreen'
+!new Transition('tr_ljt_preemptFromNsYellow')
+!tr_ljt_preemptFromNsYellow.name := 'preemptFromNsYellow'
+!new Transition('tr_ljt_preemptFromEwYellow')
+!tr_ljt_preemptFromEwYellow.name := 'preemptFromEwYellow'
+!new Transition('tr_ljt_preemptFromPedWalkNs')
+!tr_ljt_preemptFromPedWalkNs.name := 'preemptFromPedWalkNs'
+!new Transition('tr_ljt_preemptFromPedWalkEw')
+!tr_ljt_preemptFromPedWalkEw.name := 'preemptFromPedWalkEw'
+!new Transition('tr_ljt_endPreemptToAllRed')
+!tr_ljt_endPreemptToAllRed.name := 'endPreemptToAllRed'
+!new Transition('tr_ljt_switchToNightFlash')
+!tr_ljt_switchToNightFlash.name := 'switchToNightFlash'
+!new Transition('tr_ljt_nightFlashBlinkPulse')
+!tr_ljt_nightFlashBlinkPulse.name := 'nightFlashBlinkPulse'
+!new Transition('tr_ljt_exitNightFlashToAllRed')
+!tr_ljt_exitNightFlashToAllRed.name := 'exitNightFlashToAllRed'
+
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_powerOnToSelfTest) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_selfTestToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_enterMaintenanceLock) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_maintenanceCompleteToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedToNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nsGreenToNsYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nsYellowToPedWalkNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedWalkNsToPedClearNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedClearNsToAllRedNsToEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedNsToEwToEwGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_ewGreenToEwYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_ewYellowToPedWalkEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedWalkEwToPedClearEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedClearEwToAllRedEwToNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedEwToNsToNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromEwGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromNsYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromEwYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromPedWalkNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromPedWalkEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_endPreemptToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_switchToNightFlash) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nightFlashBlinkPulse) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_exitNightFlashToAllRed) into StateMachineContainsTransitions
+
+!insert (st_ljt_boot, tr_ljt_powerOnToSelfTest) into StateTransition
+!insert (tr_ljt_powerOnToSelfTest, st_ljt_selfTest) into TransitionState
+
+!insert (st_ljt_selfTest, tr_ljt_selfTestToAllRed) into StateTransition
+!insert (tr_ljt_selfTestToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_selfTest, tr_ljt_enterMaintenanceLock) into StateTransition
+!insert (tr_ljt_enterMaintenanceLock, st_ljt_maintenanceLock) into TransitionState
+
+!insert (st_ljt_maintenanceLock, tr_ljt_maintenanceCompleteToAllRed) into StateTransition
+!insert (tr_ljt_maintenanceCompleteToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_allRedStart, tr_ljt_allRedToNsGreen) into StateTransition
+!insert (tr_ljt_allRedToNsGreen, st_ljt_nsGreen) into TransitionState
+
+!insert (st_ljt_nsGreen, tr_ljt_nsGreenToNsYellow) into StateTransition
+!insert (tr_ljt_nsGreenToNsYellow, st_ljt_nsYellow) into TransitionState
+
+!insert (st_ljt_nsYellow, tr_ljt_nsYellowToPedWalkNs) into StateTransition
+!insert (tr_ljt_nsYellowToPedWalkNs, st_ljt_pedWalkNs) into TransitionState
+
+!insert (st_ljt_pedWalkNs, tr_ljt_pedWalkNsToPedClearNs) into StateTransition
+!insert (tr_ljt_pedWalkNsToPedClearNs, st_ljt_pedClearNs) into TransitionState
+
+!insert (st_ljt_pedClearNs, tr_ljt_pedClearNsToAllRedNsToEw) into StateTransition
+!insert (tr_ljt_pedClearNsToAllRedNsToEw, st_ljt_allRedNsToEw) into TransitionState
+
+!insert (st_ljt_allRedNsToEw, tr_ljt_allRedNsToEwToEwGreen) into StateTransition
+!insert (tr_ljt_allRedNsToEwToEwGreen, st_ljt_ewGreen) into TransitionState
+
+!insert (st_ljt_ewGreen, tr_ljt_ewGreenToEwYellow) into StateTransition
+!insert (tr_ljt_ewGreenToEwYellow, st_ljt_ewYellow) into TransitionState
+
+!insert (st_ljt_ewYellow, tr_ljt_ewYellowToPedWalkEw) into StateTransition
+!insert (tr_ljt_ewYellowToPedWalkEw, st_ljt_pedWalkEw) into TransitionState
+
+!insert (st_ljt_pedWalkEw, tr_ljt_pedWalkEwToPedClearEw) into StateTransition
+!insert (tr_ljt_pedWalkEwToPedClearEw, st_ljt_pedClearEw) into TransitionState
+
+!insert (st_ljt_pedClearEw, tr_ljt_pedClearEwToAllRedEwToNs) into StateTransition
+!insert (tr_ljt_pedClearEwToAllRedEwToNs, st_ljt_allRedEwToNs) into TransitionState
+
+!insert (st_ljt_allRedEwToNs, tr_ljt_allRedEwToNsToNsGreen) into StateTransition
+!insert (tr_ljt_allRedEwToNsToNsGreen, st_ljt_nsGreen) into TransitionState
+
+!insert (st_ljt_nsGreen, tr_ljt_preemptFromNsGreen) into StateTransition
+!insert (tr_ljt_preemptFromNsGreen, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_ewGreen, tr_ljt_preemptFromEwGreen) into StateTransition
+!insert (tr_ljt_preemptFromEwGreen, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_nsYellow, tr_ljt_preemptFromNsYellow) into StateTransition
+!insert (tr_ljt_preemptFromNsYellow, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_ewYellow, tr_ljt_preemptFromEwYellow) into StateTransition
+!insert (tr_ljt_preemptFromEwYellow, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_pedWalkNs, tr_ljt_preemptFromPedWalkNs) into StateTransition
+!insert (tr_ljt_preemptFromPedWalkNs, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_pedWalkEw, tr_ljt_preemptFromPedWalkEw) into StateTransition
+!insert (tr_ljt_preemptFromPedWalkEw, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_emergencyPreempt, tr_ljt_endPreemptToAllRed) into StateTransition
+!insert (tr_ljt_endPreemptToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_allRedStart, tr_ljt_switchToNightFlash) into StateTransition
+!insert (tr_ljt_switchToNightFlash, st_ljt_nightFlash) into TransitionState
+
+!insert (st_ljt_nightFlash, tr_ljt_nightFlashBlinkPulse) into StateTransition
+!insert (tr_ljt_nightFlashBlinkPulse, st_ljt_nightFlash) into TransitionState
+
+!insert (st_ljt_nightFlash, tr_ljt_exitNightFlashToAllRed) into StateTransition
+!insert (tr_ljt_exitNightFlashToAllRed, st_ljt_allRedStart) into TransitionState
+
+!new TimeEvent('te_ljt_TTE1')
+!te_ljt_TTE1.time := 2
+!insert (tr_ljt_powerOnToSelfTest, te_ljt_TTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE2')
+!te_ljt_TTE2.time := 5
+!insert (tr_ljt_selfTestToAllRed, te_ljt_TTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE3')
+!te_ljt_TTE3.time := 1
+!insert (tr_ljt_enterMaintenanceLock, te_ljt_TTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE4')
+!te_ljt_TTE4.time := 600
+!insert (tr_ljt_maintenanceCompleteToAllRed, te_ljt_TTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE5')
+!te_ljt_TTE5.time := 2
+!insert (tr_ljt_allRedToNsGreen, te_ljt_TTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE6')
+!te_ljt_TTE6.time := 45
+!insert (tr_ljt_nsGreenToNsYellow, te_ljt_TTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE7')
+!te_ljt_TTE7.time := 3
+!insert (tr_ljt_nsYellowToPedWalkNs, te_ljt_TTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE8')
+!te_ljt_TTE8.time := 10
+!insert (tr_ljt_pedWalkNsToPedClearNs, te_ljt_TTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE9')
+!te_ljt_TTE9.time := 3
+!insert (tr_ljt_pedClearNsToAllRedNsToEw, te_ljt_TTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE10')
+!te_ljt_TTE10.time := 2
+!insert (tr_ljt_allRedNsToEwToEwGreen, te_ljt_TTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE11')
+!te_ljt_TTE11.time := 40
+!insert (tr_ljt_ewGreenToEwYellow, te_ljt_TTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE12')
+!te_ljt_TTE12.time := 3
+!insert (tr_ljt_ewYellowToPedWalkEw, te_ljt_TTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE13')
+!te_ljt_TTE13.time := 10
+!insert (tr_ljt_pedWalkEwToPedClearEw, te_ljt_TTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE14')
+!te_ljt_TTE14.time := 3
+!insert (tr_ljt_pedClearEwToAllRedEwToNs, te_ljt_TTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE15')
+!te_ljt_TTE15.time := 2
+!insert (tr_ljt_allRedEwToNsToNsGreen, te_ljt_TTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE16')
+!te_ljt_TTE16.time := 1
+!insert (tr_ljt_preemptFromNsGreen, te_ljt_TTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE17')
+!te_ljt_TTE17.time := 1
+!insert (tr_ljt_preemptFromEwGreen, te_ljt_TTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE18')
+!te_ljt_TTE18.time := 1
+!insert (tr_ljt_preemptFromNsYellow, te_ljt_TTE18) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE19')
+!te_ljt_TTE19.time := 1
+!insert (tr_ljt_preemptFromEwYellow, te_ljt_TTE19) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE20')
+!te_ljt_TTE20.time := 1
+!insert (tr_ljt_preemptFromPedWalkNs, te_ljt_TTE20) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE21')
+!te_ljt_TTE21.time := 1
+!insert (tr_ljt_preemptFromPedWalkEw, te_ljt_TTE21) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE22')
+!te_ljt_TTE22.time := 20
+!insert (tr_ljt_endPreemptToAllRed, te_ljt_TTE22) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE23')
+!te_ljt_TTE23.time := 1
+!insert (tr_ljt_switchToNightFlash, te_ljt_TTE23) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE24')
+!te_ljt_TTE24.time := 2
+!insert (tr_ljt_nightFlashBlinkPulse, te_ljt_TTE24) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE25')
+!te_ljt_TTE25.time := 1
+!insert (tr_ljt_exitNightFlashToAllRed, te_ljt_TTE25) into TransitionContainsEvents

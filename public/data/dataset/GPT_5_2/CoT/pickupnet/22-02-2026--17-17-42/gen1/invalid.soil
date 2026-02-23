@@ -1,0 +1,85 @@
+!new Station('OSK_HUB')
+!new Station('KYO_HUB')
+
+!new Customer('CJP104_OSK')
+!CJP104_OSK.id := 'C-JP-104'
+!CJP104_OSK.name := 'Yumi Nakamura'
+!CJP104_OSK.twitterUserName := '@yumi_naka'
+
+!new Customer('CJP104_KYO')
+!CJP104_KYO.id := 'C-JP-104'
+!CJP104_KYO.name := 'Yumi Nakamura'
+!CJP104_KYO.twitterUserName := '@yumi_naka'
+
+!insert (OSK_HUB, CJP104_OSK) into StationContainsCustomer
+!insert (KYO_HUB, CJP104_KYO) into StationContainsCustomer
+
+!new Driver('DOSK01_2')
+!DOSK01_2.id := 'D-OSK-01'
+!DOSK01_2.name := 'Haruto Sato'
+
+!new Driver('DOSK02_2')
+!DOSK02_2.id := 'D-OSK-02'
+!DOSK02_2.name := 'Mei Tanaka'
+
+!new Driver('DKYO01_2')
+!DKYO01_2.id := 'D-KYO-01'
+!DKYO01_2.name := 'Jean Dubois'
+
+!insert (OSK_HUB, DOSK01_2) into StationContainsDriver
+!insert (OSK_HUB, DOSK02_2) into StationContainsDriver
+!insert (KYO_HUB, DKYO01_2) into StationContainsDriver
+
+!new Address('AOSKGFO_2')
+!AOSKGFO_2.text := 'グランフロント大阪 北館 3F（Grand Front Osaka North Building 3F）, 3-1 Ofukachō, Kita-ku, Osaka 530-0011, Japan'
+!new GeoLocation('GLOSKGFO_2')
+!GLOSKGFO_2.latitude := 34.7053
+!GLOSKGFO_2.longitude := 135.4949
+!insert (AOSKGFO_2, GLOSKGFO_2) into AddressContainsGeoLocation
+
+!new Address('AKYOPICK_2')
+!AKYOPICK_2.text := '〒600-8216 京都府京都市下京区東塩小路町 901 (Kyoto Station area), Japan'
+!new GeoLocation('GLKYOPICK_2')
+!GLKYOPICK_2.latitude := 34.9855
+!GLKYOPICK_2.longitude := 135.7586
+!insert (AKYOPICK_2, GLKYOPICK_2) into AddressContainsGeoLocation
+
+!new Address('AKYODEST_2')
+!AKYODEST_2.text := '京都大学医学部附属病院, 54 Kawahara-chō, Shōgoin, Sakyo Ward, Kyoto 606-8507, Japan'
+!new GeoLocation('GLKYODEST_2')
+!GLKYODEST_2.latitude := 35.0260
+!GLKYODEST_2.longitude := 135.7809
+!insert (AKYODEST_2, GLKYODEST_2) into AddressContainsGeoLocation
+
+!new Shipment('SHPOSK0007_L1')
+!SHPOSK0007_L1.id := 'SHP-OSK-0007'
+!SHPOSK0007_L1.status := #UNDERWAY
+
+!new Shipment('SHPOSK0007_L2')
+!SHPOSK0007_L2.id := 'SHP-OSK-0007'
+!SHPOSK0007_L2.status := #UNDERWAY
+
+!new Shipment('SHPKYO0031_2')
+!SHPKYO0031_2.id := 'SHP-KYO-0031'
+!SHPKYO0031_2.status := #ASSIGNED
+
+!insert (OSK_HUB, SHPOSK0007_L1) into StationShipment
+!insert (OSK_HUB, SHPOSK0007_L2) into StationShipment
+!insert (KYO_HUB, SHPKYO0031_2) into StationShipment
+
+!insert (CJP104_OSK, SHPOSK0007_L1) into CustomerConsistsOfShipment
+!insert (CJP104_OSK, SHPOSK0007_L2) into CustomerConsistsOfShipment
+!insert (CJP104_KYO, SHPKYO0031_2) into CustomerConsistsOfShipment
+
+!insert (SHPOSK0007_L1, AOSKGFO_2) into ShipmentContainsPickUpAddress
+!insert (SHPOSK0007_L1, AOSKGFO_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK0007_L2, AOSKGFO_2) into ShipmentContainsPickUpAddress
+!insert (SHPOSK0007_L2, AOSKGFO_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPKYO0031_2, AKYOPICK_2) into ShipmentContainsPickUpAddress
+!insert (SHPKYO0031_2, AKYODEST_2) into ShipmentContainsDeliveryAddress
+
+!insert (DOSK01_2, SHPOSK0007_L1) into DriverShipment
+!insert (DOSK02_2, SHPOSK0007_L2) into DriverShipment
+!insert (DKYO01_2, SHPKYO0031_2) into DriverShipment

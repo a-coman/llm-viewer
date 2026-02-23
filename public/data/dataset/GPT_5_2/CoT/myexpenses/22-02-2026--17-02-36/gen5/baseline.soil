@@ -1,0 +1,87 @@
+!new Currency('currencyPHP')
+!currencyPHP.name := 'Philippine Peso'
+!currencyPHP.abbreviation := 'PHP'
+
+!new Currency('currencySGD')
+!currencySGD.name := 'Singapore Dollar'
+!currencySGD.abbreviation := 'SGD'
+
+!new Expense('expenseEXP2026072')
+!expenseEXP2026072.amount := 0.00
+!expenseEXP2026072.startDate := Date('2026-04-01')
+!expenseEXP2026072.endDate := Date('2026-04-30')
+
+!new Comment('commentEXP2026072_CMT401')
+!commentEXP2026072_CMT401.text := 'Created for record-keeping; no reimbursable purchases were made during this period.'
+
+!insert (expenseEXP2026072, commentEXP2026072_CMT401) into ExpenseComment
+
+!new Expense('expenseEXP2026073')
+!expenseEXP2026073.amount := 5328.90
+!expenseEXP2026073.startDate := Date('2026-04-05')
+!expenseEXP2026073.endDate := Date('2026-04-12')
+
+!new Bill('billEXP2026073_BILL401')
+!billEXP2026073_BILL401.amount := 1200.00
+!billEXP2026073_BILL401.category := 'Air travel'
+!billEXP2026073_BILL401.date := Date('2026-04-05')
+!billEXP2026073_BILL401.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL401.status := #VALIDATED
+
+!new Bill('billEXP2026073_BILL402')
+!billEXP2026073_BILL402.amount := 300.00
+!billEXP2026073_BILL402.category := 'Telecom'
+!billEXP2026073_BILL402.date := Date('2026-04-06')
+!billEXP2026073_BILL402.paymentMethod := #CASH
+!billEXP2026073_BILL402.status := #VERIFIED
+
+!new Bill('billEXP2026073_BILL403')
+!billEXP2026073_BILL403.amount := 560.50
+!billEXP2026073_BILL403.category := 'Local transport'
+!billEXP2026073_BILL403.date := Date('2026-04-07')
+!billEXP2026073_BILL403.paymentMethod := #CASH
+!billEXP2026073_BILL403.status := #PENDING
+
+!new Bill('billEXP2026073_BILL404')
+!billEXP2026073_BILL404.amount := 2450.00
+!billEXP2026073_BILL404.category := 'Supplies'
+!billEXP2026073_BILL404.date := Date('2026-04-08')
+!billEXP2026073_BILL404.paymentMethod := #CHECK
+!billEXP2026073_BILL404.status := #VERIFIED
+
+!new Bill('billEXP2026073_BILL405')
+!billEXP2026073_BILL405.amount := 18.40
+!billEXP2026073_BILL405.category := 'Meals'
+!billEXP2026073_BILL405.date := Date('2026-04-05')
+!billEXP2026073_BILL405.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL405.status := #REFUNDED
+
+!new Bill('billEXP2026073_BILL406')
+!billEXP2026073_BILL406.amount := 800.00
+!billEXP2026073_BILL406.category := 'Lodging'
+!billEXP2026073_BILL406.date := Date('2026-04-10')
+!billEXP2026073_BILL406.paymentMethod := #CREDIT_CARD
+!billEXP2026073_BILL406.status := #REFUSED
+
+!insert (expenseEXP2026073, billEXP2026073_BILL401) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL402) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL403) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL404) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL405) into ExpenseContainsBills
+!insert (expenseEXP2026073, billEXP2026073_BILL406) into ExpenseContainsBills
+
+!insert (billEXP2026073_BILL401, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL402, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL403, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL404, currencyPHP) into BillCurrency
+!insert (billEXP2026073_BILL405, currencySGD) into BillCurrency
+!insert (billEXP2026073_BILL406, currencyPHP) into BillCurrency
+
+!new Comment('commentEXP2026073_CMT402')
+!commentEXP2026073_CMT402.text := 'Refund applied for the Singapore layover charge; refund confirmation attached.'
+
+!new Comment('commentEXP2026073_CMT403')
+!commentEXP2026073_CMT403.text := 'Paki-verify po ang cancellation fee—na-refuse dahil wala sa approved accommodation list.'
+
+!insert (expenseEXP2026073, commentEXP2026073_CMT402) into ExpenseComment
+!insert (expenseEXP2026073, commentEXP2026073_CMT403) into ExpenseComment

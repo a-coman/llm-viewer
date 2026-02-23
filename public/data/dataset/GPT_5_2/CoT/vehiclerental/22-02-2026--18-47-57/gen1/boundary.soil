@@ -1,0 +1,57 @@
+!new RentalOffice('RO_0')
+!RO_0.name := 'Downtown Minimal Depot'
+!RO_0.number := 0
+!RO_0.address := '1 Main St, Los Angeles, CA'
+
+!new RentalOffice('RO_1')
+!RO_1.name := 'Harbor Return Point'
+!RO_1.number := 1
+!RO_1.address := '2 Dock Rd, Wilmington, CA'
+
+!new RentalOffice('RO_2')
+!RO_2.name := 'Quiet Satellite Office'
+!RO_2.number := 2
+!RO_2.address := '3 Empty Ln, Dover, DE'
+
+!new Truck('T_0')
+!T_0.id := 0
+!T_0.registrationState := #FL
+!T_0.licensePlateNumber := '0'
+!T_0.vehicleTypeCode := #TRUCK10
+!T_0.registrationLastMaintenanceDate := Date('2026-01-01')
+!T_0.expirationDate := Date('2026-12-31')
+!T_0.odometerReading := 0
+!T_0.gasTankCapacity := 0.0
+!T_0.workingRadio := false
+!T_0.mileage := 0
+
+!new Individual('I_0')
+!I_0.name := 'Ana Núñez'
+!I_0.address := '4 Short St, Los Angeles, CA'
+!I_0.poorRisk := false
+!I_0.homePhone := '000-0000'
+!I_0.driverLicenseState := #CA
+!I_0.driverLicenseNumber := 0
+!I_0.driverLicenseExpirationDate := Date('2027-01-01')
+
+!new Company('C_0')
+!C_0.name := 'Société Zéro'
+!C_0.address := '5 Rue Min, Dover, DE'
+!C_0.poorRisk := true
+!C_0.idNumber := 0
+
+!new RentalAgreement('RA_0')
+!RA_0.number := 0
+!RA_0.rentalDate := Date('2026-01-02')
+!RA_0.anticipatedDuration := 0
+!RA_0.depositPaid := 0.0
+!RA_0.quotedDailyRate := 0.0
+!RA_0.quotedRatePerMile := 0.0
+
+!insert (RO_0, T_0) into RentalOfficeVehicle
+
+!insert (RO_0, RA_0) into RentalOfficeRentalAgreementOrigin
+!insert (RO_1, RA_0) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_0, T_0) into RentalAgreementVehicle
+!insert (RA_0, I_0) into RentalAgreementCustomer

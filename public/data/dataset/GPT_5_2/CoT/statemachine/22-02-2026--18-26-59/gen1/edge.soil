@@ -1,0 +1,31 @@
+!new StateMachine('sm_edgeTimerMachine')
+!sm_edgeTimerMachine.name := 'edgeTimerMachine'
+
+!new State('st_unico')
+!st_unico.name := 'único'
+
+!insert (sm_edgeTimerMachine, st_unico) into StateMachineContainsStates
+!insert (sm_edgeTimerMachine, st_unico) into StateMachineStartsStates
+
+!new Transition('tr_tickFast')
+!tr_tickFast.name := 'tickFast'
+
+!new Transition('tr_tickForever')
+!tr_tickForever.name := 'tickForever'
+
+!insert (sm_edgeTimerMachine, tr_tickFast) into StateMachineContainsTransitions
+!insert (sm_edgeTimerMachine, tr_tickForever) into StateMachineContainsTransitions
+
+!insert (st_unico, tr_tickFast) into StateTransition
+!insert (tr_tickFast, st_unico) into TransitionState
+
+!insert (st_unico, tr_tickForever) into StateTransition
+!insert (tr_tickForever, st_unico) into TransitionState
+
+!new TimeEvent('te_t_min')
+!te_t_min.time := 1
+!insert (tr_tickFast, te_t_min) into TransitionContainsEvents
+
+!new TimeEvent('te_t_huge')
+!te_t_huge.time := 2147483647
+!insert (tr_tickForever, te_t_huge) into TransitionContainsEvents

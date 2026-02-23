@@ -1,0 +1,109 @@
+!new AddressBook('AB4_KauriKayaks_1')
+
+!new Person('P_AB4_HanaRangi_1')
+!P_AB4_HanaRangi_1.name := 'Hana Rangi'
+!P_AB4_HanaRangi_1.title := 'Ms.'
+!P_AB4_HanaRangi_1.phone := '+64 21 447 390'
+!P_AB4_HanaRangi_1.website := 'https://hanarangi.example.nz'
+!P_AB4_HanaRangi_1.email := 'hana.rangi@example.nz'
+!insert (AB4_KauriKayaks_1, P_AB4_HanaRangi_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB4_AD30_1')
+!Addr_AB4_AD30_1.city := 'Whangārei'
+!Addr_AB4_AD30_1.street := 'Bank Street'
+!Addr_AB4_AD30_1.houseNr := '33'
+!insert (P_AB4_HanaRangi_1, Addr_AB4_AD30_1) into ContactContainsAddress
+
+!new Note('Note_AB4_N30_1')
+!Note_AB4_N30_1.author := 'Hana Rangi'
+!Note_AB4_N30_1.time := Date('2026-02-01')
+!Note_AB4_N30_1.type := #EMAIL
+!Note_AB4_N30_1.comment := 'Filed GST return; reminder to reconcile invoices before end of month.'
+!insert (P_AB4_HanaRangi_1, Note_AB4_N30_1) into ContactContainsNote
+
+!new Note('Note_AB4_N31_1')
+!Note_AB4_N31_1.author := 'Moana Te Whaiti'
+!Note_AB4_N31_1.time := Date('2026-02-18')
+!Note_AB4_N31_1.type := #CALL
+!Note_AB4_N31_1.comment := 'Confirmed weekend tour roster; weather contingency plan discussed.'
+!insert (P_AB4_HanaRangi_1, Note_AB4_N31_1) into ContactContainsNote
+
+!new Company('C_AB4_KauriKayaks_1')
+!C_AB4_KauriKayaks_1.name := 'Kauri Kayaks Ltd.'
+!C_AB4_KauriKayaks_1.industry := 'Eco-tourism'
+!C_AB4_KauriKayaks_1.phone := '+64 9 430 8802'
+!C_AB4_KauriKayaks_1.website := 'https://kaurikayaks.example.nz'
+!C_AB4_KauriKayaks_1.email := 'bookings@kaurikayaks.example.nz'
+!insert (AB4_KauriKayaks_1, C_AB4_KauriKayaks_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB4_AD31_1')
+!Addr_AB4_AD31_1.city := 'Tutukaka'
+!Addr_AB4_AD31_1.street := 'Marina Road'
+!Addr_AB4_AD31_1.houseNr := '5'
+!insert (C_AB4_KauriKayaks_1, Addr_AB4_AD31_1) into ContactContainsAddress
+
+!new Note('Note_AB4_N32_1')
+!Note_AB4_N32_1.author := 'Hana Rangi'
+!Note_AB4_N32_1.time := Date('2026-02-06')
+!Note_AB4_N32_1.type := #MEETING
+!Note_AB4_N32_1.comment := 'Met with council rep about beach access signage; awaiting written approval.'
+!insert (C_AB4_KauriKayaks_1, Note_AB4_N32_1) into ContactContainsNote
+
+!new Person('P_AB4_MoanaTeWhaiti_1')
+!P_AB4_MoanaTeWhaiti_1.name := 'Moana Te Whaiti'
+!P_AB4_MoanaTeWhaiti_1.title := 'Ms.'
+!P_AB4_MoanaTeWhaiti_1.phone := '+64 27 602 1199'
+!P_AB4_MoanaTeWhaiti_1.website := 'https://moanatewhaiti.example.nz'
+!P_AB4_MoanaTeWhaiti_1.email := 'moana.tewhaiti@example.nz'
+!insert (AB4_KauriKayaks_1, P_AB4_MoanaTeWhaiti_1) into AddressBookMadeOfContact
+
+!new Note('Note_AB4_N33_1')
+!Note_AB4_N33_1.author := 'Hana Rangi'
+!Note_AB4_N33_1.time := Date('2026-02-09')
+!Note_AB4_N33_1.type := #EMAIL
+!Note_AB4_N33_1.comment := 'Sent updated safety checklist and incident reporting procedure.'
+!insert (P_AB4_MoanaTeWhaiti_1, Note_AB4_N33_1) into ContactContainsNote
+
+!new Person('P_AB4_LucaBianchi_1')
+!P_AB4_LucaBianchi_1.name := 'Luca Bianchi'
+!P_AB4_LucaBianchi_1.title := 'Mr.'
+!P_AB4_LucaBianchi_1.phone := '+39 06 9480 2211'
+!P_AB4_LucaBianchi_1.website := 'https://lucabianchi.example.it'
+!P_AB4_LucaBianchi_1.email := 'luca.bianchi@example.it'
+!insert (AB4_KauriKayaks_1, P_AB4_LucaBianchi_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB4_AD32_1')
+!Addr_AB4_AD32_1.city := 'Roma'
+!Addr_AB4_AD32_1.street := 'Via del Corso'
+!Addr_AB4_AD32_1.houseNr := '101'
+!insert (P_AB4_LucaBianchi_1, Addr_AB4_AD32_1) into ContactContainsAddress
+
+!new Relationship('Rel_AB4_R30_1')
+!Rel_AB4_R30_1.type := #BOSS
+!insert (P_AB4_HanaRangi_1, Rel_AB4_R30_1) into ContactToRelationship
+!insert (Rel_AB4_R30_1, P_AB4_HanaRangi_1) into RelationshipToContact
+
+!new Relationship('Rel_AB4_R31_1')
+!Rel_AB4_R31_1.type := #BOSS
+!insert (P_AB4_HanaRangi_1, Rel_AB4_R31_1) into ContactToRelationship
+!insert (Rel_AB4_R31_1, P_AB4_MoanaTeWhaiti_1) into RelationshipToContact
+
+!new Relationship('Rel_AB4_R32_1')
+!Rel_AB4_R32_1.type := #COWORKER
+!insert (P_AB4_HanaRangi_1, Rel_AB4_R32_1) into ContactToRelationship
+!insert (Rel_AB4_R32_1, C_AB4_KauriKayaks_1) into RelationshipToContact
+
+!new Relationship('Rel_AB4_R33_1')
+!Rel_AB4_R33_1.type := #EMPLOYEE
+!insert (C_AB4_KauriKayaks_1, Rel_AB4_R33_1) into ContactToRelationship
+!insert (Rel_AB4_R33_1, P_AB4_HanaRangi_1) into RelationshipToContact
+
+!new Relationship('Rel_AB4_R34_1')
+!Rel_AB4_R34_1.type := #EMPLOYEE
+!insert (C_AB4_KauriKayaks_1, Rel_AB4_R34_1) into ContactToRelationship
+!insert (Rel_AB4_R34_1, P_AB4_MoanaTeWhaiti_1) into RelationshipToContact
+
+!new Relationship('Rel_AB4_R35_1')
+!Rel_AB4_R35_1.type := #COWORKER
+!insert (P_AB4_MoanaTeWhaiti_1, Rel_AB4_R35_1) into ContactToRelationship
+!insert (Rel_AB4_R35_1, P_AB4_HanaRangi_1) into RelationshipToContact

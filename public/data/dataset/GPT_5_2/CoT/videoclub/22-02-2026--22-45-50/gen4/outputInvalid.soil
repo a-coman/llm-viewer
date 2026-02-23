@@ -1,0 +1,68 @@
+!new Client('clientFestC30')
+!clientFestC30.clientId := 501
+!clientFestC30.isSuspended := false
+
+!new Client('clientFestC31')
+!clientFestC31.clientId := 502
+!clientFestC31.isSuspended := false
+
+!new Rental('rentalFestR30')
+!rentalFestR30.date := Date('2026-02-21')
+
+!new Rental('rentalFestR31')
+!rentalFestR31.date := Date('2026-02-21')
+
+!new Rental('rentalFestR32')
+!rentalFestR32.date := Date('2026-02-22')
+
+!new Movie('movieFestM30')
+!movieFestM30.title := 'Desert Courier'
+!movieFestM30.availableCopies := 6
+!movieFestM30.genre := #Action
+
+!new Movie('movieFestM31')
+!movieFestM31.title := 'Les rires du marché'
+!movieFestM31.availableCopies := 1
+!movieFestM31.genre := #Comedy
+
+!new Series('seriesFestS30')
+!seriesFestS30.title := 'Coastline Detectives'
+!seriesFestS30.availableCopies := 2
+!seriesFestS30.episode := 5
+
+!new Series('seriesFestS31')
+!seriesFestS31.title := 'Festival Diaries'
+!seriesFestS31.availableCopies := 0
+!seriesFestS31.episode := 1
+
+!new Actor('actorFestA30')
+!actorFestA30.name := 'Noura Benali'
+
+!new Actor('actorFestA31')
+!actorFestA31.name := 'Jean-Paul Mercier'
+
+!new Actor('actorFestA32')
+!actorFestA32.name := 'Mateo Rojas'
+
+!new Actor('actorFestA33')
+!actorFestA33.name := 'Ece Yıldırım'
+
+!new Actor('actorFestA34')
+!actorFestA34.name := 'Satoshi Mori'
+
+!insert (clientFestC30, rentalFestR31) into ClientRental
+!insert (clientFestC31, rentalFestR32) into ClientRental
+
+!insert (rentalFestR30, movieFestM31) into RentalCassette
+!insert (rentalFestR30, seriesFestS31) into RentalCassette
+!insert (rentalFestR31, movieFestM30) into RentalCassette
+!insert (rentalFestR32, seriesFestS30) into RentalCassette
+!insert (rentalFestR32, movieFestM30) into RentalCassette
+
+!insert (movieFestM30, actorFestA30) into CassetteActor
+!insert (movieFestM30, actorFestA32) into CassetteActor
+!insert (movieFestM31, actorFestA31) into CassetteActor
+!insert (seriesFestS30, actorFestA33) into CassetteActor
+!insert (seriesFestS30, actorFestA34) into CassetteActor
+!insert (seriesFestS31, actorFestA32) into CassetteActor
+

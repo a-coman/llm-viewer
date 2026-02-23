@@ -1,0 +1,68 @@
+!new Currency('currencyMADSplitProjects2')
+!currencyMADSplitProjects2.name := 'Moroccan Dirham'
+!currencyMADSplitProjects2.abbreviation := 'MAD'
+
+!new Expense('expenseProjectAtlasCasablancaSplit2')
+!expenseProjectAtlasCasablancaSplit2.amount := 1200.00
+!expenseProjectAtlasCasablancaSplit2.startDate := Date('2026-02-03')
+!expenseProjectAtlasCasablancaSplit2.endDate := Date('2026-02-05')
+
+!new Expense('expenseProjectBeaconCasablancaSplit2')
+!expenseProjectBeaconCasablancaSplit2.amount := 1650.00
+!expenseProjectBeaconCasablancaSplit2.startDate := Date('2026-02-03')
+!expenseProjectBeaconCasablancaSplit2.endDate := Date('2026-02-05')
+
+!new Bill('billProjectAtlasH1_2')
+!billProjectAtlasH1_2.amount := 1200.00
+!billProjectAtlasH1_2.category := 'Hotel invoice (shared stay)'
+!billProjectAtlasH1_2.date := Date('2026-02-05')
+!billProjectAtlasH1_2.paymentMethod := #CREDIT_CARD
+!billProjectAtlasH1_2.status := #PENDING
+
+!new Bill('billProjectBeaconH1_2')
+!billProjectBeaconH1_2.amount := 1200.00
+!billProjectBeaconH1_2.category := 'Hotel invoice (shared stay)'
+!billProjectBeaconH1_2.date := Date('2026-02-05')
+!billProjectBeaconH1_2.paymentMethod := #CREDIT_CARD
+!billProjectBeaconH1_2.status := #PENDING
+
+!new Bill('billProjectBeaconC1_2')
+!billProjectBeaconC1_2.amount := 350.00
+!billProjectBeaconC1_2.category := 'Catering (working lunch)'
+!billProjectBeaconC1_2.date := Date('2026-02-04')
+!billProjectBeaconC1_2.paymentMethod := #CASH
+!billProjectBeaconC1_2.status := #VERIFIED
+
+!new Bill('billProjectBeaconP1_2')
+!billProjectBeaconP1_2.amount := 100.00
+!billProjectBeaconP1_2.category := 'Printing & badges'
+!billProjectBeaconP1_2.date := Date('2026-02-03')
+!billProjectBeaconP1_2.paymentMethod := #CHECK
+!billProjectBeaconP1_2.status := #DRAFT
+
+!insert (expenseProjectAtlasCasablancaSplit2, billProjectAtlasH1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconH1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconC1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconP1_2) into ExpenseContainsBills
+
+!insert (billProjectAtlasH1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconH1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconC1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconP1_2, currencyMADSplitProjects2) into BillCurrency
+
+!new Comment('commentProjectSplitSharedAtlas2')
+!commentProjectSplitSharedAtlas2.text := 'Single hotel invoice to be split across two project codes (Atlas/Beacon) per finance instruction.'
+
+!new Comment('commentProjectSplitA1_2')
+!commentProjectSplitA1_2.text := 'Atlas share booked as 1200 MAD based on internal allocation sheet.'
+
+!new Comment('commentProjectSplitSharedBeacon2')
+!commentProjectSplitSharedBeacon2.text := 'Single hotel invoice to be split across two project codes (Atlas/Beacon) per finance instruction.'
+
+!new Comment('commentProjectSplitB1_2')
+!commentProjectSplitB1_2.text := 'Beacon paid catering locally; receipt handwritten in French/Arabic, scanned for audit.'
+
+!insert (expenseProjectAtlasCasablancaSplit2, commentProjectSplitSharedAtlas2) into ExpenseComment
+!insert (expenseProjectAtlasCasablancaSplit2, commentProjectSplitA1_2) into ExpenseComment
+!insert (expenseProjectBeaconCasablancaSplit2, commentProjectSplitSharedBeacon2) into ExpenseComment
+!insert (expenseProjectBeaconCasablancaSplit2, commentProjectSplitB1_2) into ExpenseComment

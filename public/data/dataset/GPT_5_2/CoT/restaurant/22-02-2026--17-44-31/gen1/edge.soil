@@ -1,0 +1,302 @@
+!new Restaurant('R6')
+!R6.name := 'Nordic Tapas Lab'
+
+!new Owner('O11')
+!O11.name := 'Ingrid Løken'
+!O11.percentageShares := 98
+!insert (R6, O11) into RestaurantOwner
+
+!new Owner('O12')
+!O12.name := 'Mateo Rojas'
+!O12.percentageShares := 2
+!insert (R6, O12) into RestaurantOwner
+
+!new Owner('O13')
+!O13.name := 'Amina El-Sayed'
+!O13.percentageShares := 0
+!insert (R6, O13) into RestaurantOwner
+
+!new RegularCustomer('C5')
+!C5.name := 'Klara Vogel'
+!C5.prefferedLanguage := #German
+
+!new RegularCustomer('C6')
+!C6.name := 'Javier Ortega'
+!C6.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW6')
+!HW6.name := 'Salma Benali'
+!HW6.dateOfBirth := Date('1980-11-03')
+!HW6.phoneNumber := '+212-6-555-0199'
+
+!new Waiter('W11')
+!W11.name := 'Gianni Russo'
+!W11.dateOfBirth := Date('2004-01-09')
+!W11.phoneNumber := '+39-347-555-0122'
+!W11.spokenLanguage := #Italian
+!insert (HW6, W11) into HeadWaiterWaiter
+
+!new Cook('K8')
+!K8.name := 'Noah Kim'
+!K8.dateOfBirth := Date('1996-06-30')
+!K8.phoneNumber := '+1-415-555-0140'
+!K8.yearsOfExperience := 0
+
+!new Chef('CH9')
+!CH9.name := 'Élodie Martin'
+!CH9.dateOfBirth := Date('1990-02-18')
+!CH9.phoneNumber := '+33-6-12-34-56-78'
+!insert (CH9, K8) into ChefCook
+
+!new Manager('M7')
+!M7.name := 'Peter Schmidt'
+!M7.dateOfBirth := Date('1975-09-22')
+!M7.phoneNumber := '+49-151-555-0110'
+
+!new BusDriver('BD5')
+!BD5.name := 'Ravi Singh'
+!BD5.dateOfBirth := Date('1988-04-05')
+!BD5.phoneNumber := '+91-98-5555-0101'
+!BD5.driverLicenseNr := 'DL-IN-4488-2031'
+
+!new Allergen('AL1_6')
+!AL1_6.type := #Lactose
+
+!new Allergen('AL2_6')
+!AL2_6.type := #Seafood
+
+!new Allergen('AL3_6')
+!AL3_6.type := #Nuts
+
+!new Allergen('AL4_6')
+!AL4_6.type := #Gluten
+
+!new FoodItem('FI10')
+!FI10.number := 10
+!FI10.description := 'Nori seaweed sheets'
+!FI10.purchaseFlag := true
+!FI10.unit := #Sheet
+
+!new FoodItem('FI11')
+!FI11.number := 11
+!FI11.description := 'Tahini (sesame paste)'
+!FI11.purchaseFlag := true
+!FI11.unit := #Ounce
+!insert (FI11, AL3_6) into FoodItemAllergen
+
+!new FoodItem('FI12')
+!FI12.number := 12
+!FI12.description := 'Shrimp powder'
+!FI12.purchaseFlag := true
+!FI12.unit := #Gram
+!insert (FI12, AL2_6) into FoodItemAllergen
+
+!new FoodItem('FI13')
+!FI13.number := 13
+!FI13.description := 'Milk foam base'
+!FI13.purchaseFlag := false
+!FI13.unit := #Pound
+!insert (FI13, AL1_6) into FoodItemAllergen
+
+!new FoodItem('FI14')
+!FI14.number := 14
+!FI14.description := 'Wheat cracker crumbs'
+!FI14.purchaseFlag := true
+!FI14.unit := #Dozen
+!insert (FI14, AL4_6) into FoodItemAllergen
+
+!new MenuItem('MI16')
+!MI16.description := 'Invisible Water (concept beverage served in an empty glass)'
+!MI16.prepTime := 0.0
+!MI16.classification := #Beverage
+!insert (MI16, CH9) into MenuItemChef
+
+!new MenuItem('MI17')
+!MI17.description := 'Seaweed–Sesame Crisps'
+!MI17.prepTime := 1.5
+!MI17.classification := #Apetizer
+!insert (MI17, CH9) into MenuItemChef
+!insert (MI17, FI10) into MenuItemFoodItem
+!insert (MI17, FI11) into MenuItemFoodItem
+!insert (MI17, FI14) into MenuItemFoodItem
+
+!new MenuItem('MI18')
+!MI18.description := 'Midnight Shrimp Foam on Milk Air'
+!MI18.prepTime := 3.0
+!MI18.classification := #Dessert
+!insert (MI18, CH9) into MenuItemChef
+!insert (MI18, FI12) into MenuItemFoodItem
+!insert (MI18, FI13) into MenuItemFoodItem
+
+!new Banquet('BR5')
+!BR5.time := Time('00:00')
+!BR5.date := Date('2026-02-29')
+!BR5.numberPeople := 20
+!BR5.name := 'Yuki Tanaka'
+!BR5.phoneNumber := '+81-90-5555-0100'
+!BR5.number := 9001
+!BR5.groupName := 'Kōhaku no Kai'
+!BR5.paymentMethod := #Cash
+!BR5.busService := false
+!insert (BR5, W11) into ReservationWaiter
+!insert (BR5, BD5) into BanquetBusDriver
+
+!new Table('T01_NTL')
+!T01_NTL.number := 1
+!T01_NTL.description := 'Single-top, corner A'
+!T01_NTL.capacity := 1
+!insert (BR5, T01_NTL) into ReservationTable
+
+!new Table('T02_NTL')
+!T02_NTL.number := 2
+!T02_NTL.description := 'Single-top, corner B'
+!T02_NTL.capacity := 1
+!insert (BR5, T02_NTL) into ReservationTable
+
+!new Table('T03_NTL')
+!T03_NTL.number := 3
+!T03_NTL.description := 'Single-top, near bar'
+!T03_NTL.capacity := 1
+!insert (BR5, T03_NTL) into ReservationTable
+
+!new Table('T04_NTL')
+!T04_NTL.number := 4
+!T04_NTL.description := 'Single-top, window 1'
+!T04_NTL.capacity := 1
+!insert (BR5, T04_NTL) into ReservationTable
+
+!new Table('T05_NTL')
+!T05_NTL.number := 5
+!T05_NTL.description := 'Single-top, window 2'
+!T05_NTL.capacity := 1
+!insert (BR5, T05_NTL) into ReservationTable
+
+!new Table('T06_NTL')
+!T06_NTL.number := 6
+!T06_NTL.description := 'Single-top, aisle 1'
+!T06_NTL.capacity := 1
+!insert (BR5, T06_NTL) into ReservationTable
+
+!new Table('T07_NTL')
+!T07_NTL.number := 7
+!T07_NTL.description := 'Single-top, aisle 2'
+!T07_NTL.capacity := 1
+!insert (BR5, T07_NTL) into ReservationTable
+
+!new Table('T08_NTL')
+!T08_NTL.number := 8
+!T08_NTL.description := 'Single-top, aisle 3'
+!T08_NTL.capacity := 1
+!insert (BR5, T08_NTL) into ReservationTable
+
+!new Table('T09_NTL')
+!T09_NTL.number := 9
+!T09_NTL.description := 'Single-top, aisle 4'
+!T09_NTL.capacity := 1
+!insert (BR5, T09_NTL) into ReservationTable
+
+!new Table('T10_NTL')
+!T10_NTL.number := 10
+!T10_NTL.description := 'Single-top, kitchen pass'
+!T10_NTL.capacity := 1
+!insert (BR5, T10_NTL) into ReservationTable
+
+!new Table('T11_NTL')
+!T11_NTL.number := 11
+!T11_NTL.description := 'Single-top, pillar left'
+!T11_NTL.capacity := 1
+!insert (BR5, T11_NTL) into ReservationTable
+
+!new Table('T12_NTL')
+!T12_NTL.number := 12
+!T12_NTL.description := 'Single-top, pillar right'
+!T12_NTL.capacity := 1
+!insert (BR5, T12_NTL) into ReservationTable
+
+!new Table('T13_NTL')
+!T13_NTL.number := 13
+!T13_NTL.description := 'Single-top, alcove 1'
+!T13_NTL.capacity := 1
+!insert (BR5, T13_NTL) into ReservationTable
+
+!new Table('T14_NTL')
+!T14_NTL.number := 14
+!T14_NTL.description := 'Single-top, alcove 2'
+!T14_NTL.capacity := 1
+!insert (BR5, T14_NTL) into ReservationTable
+
+!new Table('T15_NTL')
+!T15_NTL.number := 15
+!T15_NTL.description := 'Single-top, near restroom'
+!T15_NTL.capacity := 1
+!insert (BR5, T15_NTL) into ReservationTable
+
+!new Table('T16_NTL')
+!T16_NTL.number := 16
+!T16_NTL.description := 'Single-top, entry left'
+!T16_NTL.capacity := 1
+!insert (BR5, T16_NTL) into ReservationTable
+
+!new Table('T17_NTL')
+!T17_NTL.number := 17
+!T17_NTL.description := 'Single-top, entry right'
+!T17_NTL.capacity := 1
+!insert (BR5, T17_NTL) into ReservationTable
+
+!new Table('T18_NTL')
+!T18_NTL.number := 18
+!T18_NTL.description := 'Single-top, back wall 1'
+!T18_NTL.capacity := 1
+!insert (BR5, T18_NTL) into ReservationTable
+
+!new Table('T19_NTL')
+!T19_NTL.number := 19
+!T19_NTL.description := 'Single-top, back wall 2'
+!T19_NTL.capacity := 1
+!insert (BR5, T19_NTL) into ReservationTable
+
+!new Table('T20_NTL')
+!T20_NTL.number := 20
+!T20_NTL.description := 'Single-top, back wall 3'
+!T20_NTL.capacity := 1
+!insert (BR5, T20_NTL) into ReservationTable
+
+!new ItemOrder('IO901')
+!IO901.time := Time('00:01')
+!insert (BR5, IO901) into ReservationItemOrdered
+!insert (IO901, MI16) into ItemOrderMenuItem
+
+!new ItemOrder('IO902')
+!IO902.time := Time('00:01')
+!insert (BR5, IO902) into ReservationItemOrdered
+!insert (IO902, MI17) into ItemOrderMenuItem
+
+!new ItemOrder('IO903')
+!IO903.time := Time('00:02')
+!insert (BR5, IO903) into ReservationItemOrdered
+!insert (IO903, MI18) into ItemOrderMenuItem
+
+!new Individual('IR7')
+!IR7.time := Time('23:59')
+!IR7.date := Date('2026-02-28')
+!IR7.numberPeople := 1
+!IR7.name := 'Klara Vogel'
+!IR7.phoneNumber := '+49-30-555-0102'
+!IR7.number := 42
+!IR7.seating := #Inside
+!IR7.smoking := #Smoking
+!insert (R6, IR7) into RestaurantReservation
+!insert (IR7, C5) into ReservationCustomer
+!insert (IR7, W11) into ReservationWaiter
+
+!new Table('T99_NTL')
+!T99_NTL.number := 99
+!T99_NTL.description := 'Single-top, VIP nook'
+!T99_NTL.capacity := 1
+!insert (IR7, T99_NTL) into ReservationTable
+
+!new DietaryRequirement('DR5')
+!DR5.diet := #Vegan
+
+!new ReportedAllergy('RA4')
+!RA4.allergen := #Gluten

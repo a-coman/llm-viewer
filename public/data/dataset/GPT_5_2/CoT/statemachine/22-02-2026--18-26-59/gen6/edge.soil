@@ -1,0 +1,106 @@
+!new StateMachine('sm_returnHubOddReachability')
+!sm_returnHubOddReachability.name := 'returnHubOddReachability'
+
+!new State('st_rhor_home')
+!st_rhor_home.name := 'home'
+!new State('st_rhor_zona')
+!st_rhor_zona.name := 'zona'
+!new State('st_rhor_exito')
+!st_rhor_exito.name := 'éxito'
+!new State('st_rhor_kentro')
+!st_rhor_kentro.name := 'κέντρο'
+!new State('st_rhor_razvorot')
+!st_rhor_razvorot.name := 'разворот'
+!new State('st_rhor_marhaba')
+!st_rhor_marhaba.name := 'مرحبا'
+
+!insert (sm_returnHubOddReachability, st_rhor_home) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_zona) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_exito) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_kentro) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_razvorot) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_marhaba) into StateMachineContainsStates
+
+!insert (sm_returnHubOddReachability, st_rhor_home) into StateMachineStartsStates
+
+!new Transition('tr_rhor_dispatch')
+!tr_rhor_dispatch.name := 'dispatch'
+!new Transition('tr_rhor_returnQuick')
+!tr_rhor_returnQuick.name := 'returnQuick'
+!new Transition('tr_rhor_returnSlow')
+!tr_rhor_returnSlow.name := 'returnSlow'
+!new Transition('tr_rhor_reportSuccess')
+!tr_rhor_reportSuccess.name := 'reportSuccess'
+!new Transition('tr_rhor_spin')
+!tr_rhor_spin.name := 'spin'
+!new Transition('tr_rhor_backToHome')
+!tr_rhor_backToHome.name := 'backToHome'
+!new Transition('tr_rhor_uTurn')
+!tr_rhor_uTurn.name := 'uTurn'
+!new Transition('tr_rhor_greetAndReturn')
+!tr_rhor_greetAndReturn.name := 'greetAndReturn'
+
+!insert (sm_returnHubOddReachability, tr_rhor_dispatch) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_returnQuick) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_returnSlow) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_reportSuccess) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_spin) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_backToHome) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_uTurn) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_greetAndReturn) into StateMachineContainsTransitions
+
+!insert (st_rhor_home, tr_rhor_dispatch) into StateTransition
+!insert (tr_rhor_dispatch, st_rhor_zona) into TransitionState
+
+!insert (st_rhor_zona, tr_rhor_returnQuick) into StateTransition
+!insert (tr_rhor_returnQuick, st_rhor_home) into TransitionState
+
+!insert (st_rhor_zona, tr_rhor_returnSlow) into StateTransition
+!insert (tr_rhor_returnSlow, st_rhor_home) into TransitionState
+
+!insert (st_rhor_exito, tr_rhor_reportSuccess) into StateTransition
+!insert (tr_rhor_reportSuccess, st_rhor_home) into TransitionState
+
+!insert (st_rhor_kentro, tr_rhor_spin) into StateTransition
+!insert (tr_rhor_spin, st_rhor_kentro) into TransitionState
+
+!insert (st_rhor_kentro, tr_rhor_backToHome) into StateTransition
+!insert (tr_rhor_backToHome, st_rhor_home) into TransitionState
+
+!insert (st_rhor_razvorot, tr_rhor_uTurn) into StateTransition
+!insert (tr_rhor_uTurn, st_rhor_home) into TransitionState
+
+!insert (st_rhor_marhaba, tr_rhor_greetAndReturn) into StateTransition
+!insert (tr_rhor_greetAndReturn, st_rhor_home) into TransitionState
+
+!new TimeEvent('te_rhor_dispatch')
+!te_rhor_dispatch.time := 1
+!insert (tr_rhor_dispatch, te_rhor_dispatch) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_returnQuick')
+!te_rhor_returnQuick.time := 1
+!insert (tr_rhor_returnQuick, te_rhor_returnQuick) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_returnSlow')
+!te_rhor_returnSlow.time := 120
+!insert (tr_rhor_returnSlow, te_rhor_returnSlow) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_reportSuccess')
+!te_rhor_reportSuccess.time := 7
+!insert (tr_rhor_reportSuccess, te_rhor_reportSuccess) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_spin')
+!te_rhor_spin.time := 9
+!insert (tr_rhor_spin, te_rhor_spin) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_backToHome')
+!te_rhor_backToHome.time := 10
+!insert (tr_rhor_backToHome, te_rhor_backToHome) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_uTurn')
+!te_rhor_uTurn.time := 2
+!insert (tr_rhor_uTurn, te_rhor_uTurn) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_greetAndReturn')
+!te_rhor_greetAndReturn.time := 3
+!insert (tr_rhor_greetAndReturn, te_rhor_greetAndReturn) into TransitionContainsEvents

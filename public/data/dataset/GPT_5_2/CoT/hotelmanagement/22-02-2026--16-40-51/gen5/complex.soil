@@ -1,0 +1,152 @@
+!new Customer('C30')
+!C30.firstName := 'Oluwaseun'
+!C30.lastName := 'Adeyemi'
+
+!new Booking('B31577')
+!B31577.bookingId := 31577
+!B31577.startDate := '2026-12-24'
+!B31577.endDate := '2027-01-02'
+!B31577.confirmed := true
+!B31577.canceled := false
+
+!new RoomReservation('RR_H1')
+!RR_H1.checkInDate := '2026-12-24'
+!RR_H1.checkOutDate := '2026-12-26'
+
+!new RoomReservation('RR_H2')
+!RR_H2.checkInDate := '2026-12-26'
+!RR_H2.checkOutDate := '2026-12-29'
+
+!new RoomReservation('RR_H3')
+!RR_H3.checkInDate := '2026-12-29'
+!RR_H3.checkOutDate := '2027-01-02'
+
+!new RoomReservation('RR_H4')
+!RR_H4.checkInDate := '2026-12-31'
+!RR_H4.checkOutDate := '2027-01-01'
+
+!new Room('R12_H1_31577')
+!R12_H1_31577.roomNumber := 12
+!R12_H1_31577.numBeds := 1
+!R12_H1_31577.pricePerNight := 110.00
+!R12_H1_31577.occupied := true
+!R12_H1_31577.blocked := false
+
+!new Room('R14_H1_31577')
+!R14_H1_31577.roomNumber := 14
+!R14_H1_31577.numBeds := 2
+!R14_H1_31577.pricePerNight := 145.00
+!R14_H1_31577.occupied := true
+!R14_H1_31577.blocked := false
+
+!new RoomExtra('EH1_1_31577')
+!EH1_1_31577.description := 'Festive welcome hamper (non-alcoholic)'
+!EH1_1_31577.price := 25.00
+
+!new Bill('BL940001')
+!BL940001.billId := 940001
+!BL940001.price := 535.00
+
+!new Room('R406_H2_31577')
+!R406_H2_31577.roomNumber := 406
+!R406_H2_31577.numBeds := 1
+!R406_H2_31577.pricePerNight := 125.00
+!R406_H2_31577.occupied := true
+!R406_H2_31577.blocked := false
+
+!new Bill('BL940002')
+!BL940002.billId := 940002
+!BL940002.price := 375.00
+
+!new Room('R918_H3_31577')
+!R918_H3_31577.roomNumber := 918
+!R918_H3_31577.numBeds := 2
+!R918_H3_31577.pricePerNight := 190.00
+!R918_H3_31577.occupied := false
+!R918_H3_31577.blocked := false
+
+!new RoomExtra('EH3_1_31577')
+!EH3_1_31577.description := 'New Year’s Eve set dinner (2 persons)'
+!EH3_1_31577.price := 160.00
+
+!new RoomExtra('EH3_2_31577')
+!EH3_2_31577.description := 'Extra heater (guest comfort request)'
+!EH3_2_31577.price := 15.00
+
+!new RoomExtra('EH3_3_31577')
+!EH3_3_31577.description := 'Secure luggage storage after checkout'
+!EH3_3_31577.price := 5.00
+
+!new Bill('BL940003')
+!BL940003.billId := 940003
+!BL940003.price := 940.00
+
+!new Room('R520_H4_31577')
+!R520_H4_31577.roomNumber := 520
+!R520_H4_31577.numBeds := 2
+!R520_H4_31577.pricePerNight := 170.00
+!R520_H4_31577.occupied := false
+!R520_H4_31577.blocked := false
+
+!new Room('R521_H4_31577')
+!R521_H4_31577.roomNumber := 521
+!R521_H4_31577.numBeds := 2
+!R521_H4_31577.pricePerNight := 170.00
+!R521_H4_31577.occupied := false
+!R521_H4_31577.blocked := false
+
+!new RoomExtra('EH4_1_31577')
+!EH4_1_31577.description := 'Additional bedding set (2 rollaway mattresses)'
+!EH4_1_31577.price := 40.00
+
+!new Bill('BL940004')
+!BL940004.billId := 940004
+!BL940004.price := 380.00
+
+!new FreeRoomTypesDTO('D56')
+!D56.roomTypeDescription := 'Suite ya familia (Yorùbá/EN mix): Family suite — ocean side'
+!D56.numBeds := 3
+!D56.pricePerNight := 260.00
+!D56.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('D57')
+!D57.roomTypeDescription := 'Standard Single — quiet floor (near library lounge)'
+!D57.numBeds := 1
+!D57.pricePerNight := 115.00
+!D57.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('D58')
+!D58.roomTypeDescription := 'Kahden hengen huone (Twin) — aamiaisen kanssa'
+!D58.numBeds := 2
+!D58.pricePerNight := 155.00
+!D58.numFreeRooms := 2
+
+!insert (B31577, C30) into BookingCustomer
+
+!insert (B31577, RR_H1) into BookingRoomReservation
+!insert (B31577, RR_H2) into BookingRoomReservation
+!insert (B31577, RR_H3) into BookingRoomReservation
+!insert (B31577, RR_H4) into BookingRoomReservation
+
+!insert (RR_H1, R12_H1_31577) into RoomReservationRoom
+!insert (RR_H1, R14_H1_31577) into RoomReservationRoom
+!insert (RR_H2, R406_H2_31577) into RoomReservationRoom
+!insert (RR_H3, R918_H3_31577) into RoomReservationRoom
+!insert (RR_H4, R520_H4_31577) into RoomReservationRoom
+!insert (RR_H4, R521_H4_31577) into RoomReservationRoom
+
+!insert (RR_H1, EH1_1_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_1_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_2_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_3_31577) into RoomReservationExtras
+!insert (RR_H4, EH4_1_31577) into RoomReservationExtras
+
+!insert (B31577, BL940001) into BookingBill
+!insert (B31577, BL940002) into BookingBill
+!insert (B31577, BL940003) into BookingBill
+!insert (B31577, BL940004) into BookingBill
+
+!insert (BL940001, RR_H1) into BillRoomReservation
+!insert (BL940002, RR_H2) into BillRoomReservation
+!insert (BL940003, RR_H3) into BillRoomReservation
+!insert (BL940004, RR_H4) into BillRoomReservation

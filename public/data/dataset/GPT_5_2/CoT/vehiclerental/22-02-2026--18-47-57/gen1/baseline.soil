@@ -1,0 +1,75 @@
+!new RentalOffice('RO_101')
+!RO_101.name := 'Sunshine Vehicle Rentals – Miami Airport'
+!RO_101.number := 101
+!RO_101.address := '3900 NW 25th St, Miami, FL 33142, USA'
+
+!new RentalOffice('RO_205')
+!RO_205.name := 'Front Range Vehicle Rentals – Denver'
+!RO_205.number := 205
+!RO_205.address := '2460 17th St, Denver, CO 80202, USA'
+
+!new Truck('V_5001')
+!V_5001.id := 5001
+!V_5001.registrationState := #FL
+!V_5001.licensePlateNumber := 'FL-TRK-8421'
+!V_5001.vehicleTypeCode := #TRUCK10
+!V_5001.registrationLastMaintenanceDate := Date('2026-01-12')
+!V_5001.expirationDate := Date('2026-12-31')
+!V_5001.odometerReading := 48320
+!V_5001.gasTankCapacity := 26.5
+!V_5001.workingRadio := true
+!V_5001.mileage := 17
+
+!new Vehicle('V_7802')
+!V_7802.id := 7802
+!V_7802.registrationState := #CO
+!V_7802.licensePlateNumber := 'CO-TRL-1907'
+!V_7802.vehicleTypeCode := #OPEN_TRAILER
+!V_7802.registrationLastMaintenanceDate := Date('2025-11-20')
+!V_7802.expirationDate := Date('2026-11-30')
+
+!new Individual('CUST_I_300')
+!CUST_I_300.name := 'María Elena Rivera'
+!CUST_I_300.address := '1180 SW 8th St, Miami, FL 33130, USA'
+!CUST_I_300.poorRisk := false
+!CUST_I_300.homePhone := '+1-305-555-0148'
+!CUST_I_300.driverLicenseState := #FL
+!CUST_I_300.driverLicenseNumber := 74219833
+!CUST_I_300.driverLicenseExpirationDate := Date('2028-06-15')
+
+!new Company('CUST_C_410')
+!CUST_C_410.name := 'Alpine Event Logistics, LLC'
+!CUST_C_410.address := '5600 Federal Blvd, Denver, CO 80221, USA'
+!CUST_C_410.poorRisk := false
+!CUST_C_410.idNumber := 91004577
+
+!new RentalAgreement('RA_9001')
+!RA_9001.number := 9001
+!RA_9001.rentalDate := Date('2026-02-10')
+!RA_9001.anticipatedDuration := 4
+!RA_9001.depositPaid := 250.0
+!RA_9001.quotedDailyRate := 89.99
+!RA_9001.quotedRatePerMile := 0.29
+
+!new RentalAgreement('RA_9002')
+!RA_9002.number := 9002
+!RA_9002.rentalDate := Date('2026-02-18')
+!RA_9002.anticipatedDuration := 2
+!RA_9002.depositPaid := 100.0
+!RA_9002.quotedDailyRate := 34.5
+!RA_9002.quotedRatePerMile := 0.0
+
+!insert (RO_101, V_5001) into RentalOfficeVehicle
+!insert (RO_205, V_7802) into RentalOfficeVehicle
+
+!insert (RO_101, RA_9001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_205, RA_9002) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_205, RA_9001) into RentalOfficeRentalAgreementDrop
+!insert (RO_205, RA_9002) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_9001, V_5001) into RentalAgreementVehicle
+!insert (RA_9002, V_7802) into RentalAgreementVehicle
+
+!insert (RA_9001, CUST_I_300) into RentalAgreementCustomer
+!insert (RA_9002, CUST_C_410) into RentalAgreementCustomer

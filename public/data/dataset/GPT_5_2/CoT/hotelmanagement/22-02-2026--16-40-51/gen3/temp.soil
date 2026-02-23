@@ -1,0 +1,104 @@
+!new Customer('C20')
+!C20.firstName := 'Takahiro'
+!C20.lastName := 'Watanabe'
+
+!new Booking('B64018')
+!B64018.bookingId := 64018
+!B64018.startDate := '2026-05-20'
+!B64018.endDate := '2026-05-23'
+!B64018.confirmed := false
+!B64018.canceled := false
+
+!new RoomReservation('RR_X')
+!RR_X.checkInDate := '2026-05-20'
+!RR_X.checkOutDate := '2026-05-23'
+
+!new RoomReservation('RR_Y')
+!RR_Y.checkInDate := '2026-05-21'
+!RR_Y.checkOutDate := '2026-05-22'
+
+!new Room('R1507')
+!R1507.roomNumber := 1507
+!R1507.numBeds := 1
+!R1507.pricePerNight := 210.00
+!R1507.occupied := true
+!R1507.blocked := false
+
+!new Room('R1508')
+!R1508.roomNumber := 1508
+!R1508.numBeds := 2
+!R1508.pricePerNight := 260.00
+!R1508.occupied := false
+!R1508.blocked := false
+
+!new RoomExtra('X1_RX')
+!X1_RX.description := 'Traditional futon/tatami setup request'
+!X1_RX.price := 30.00
+
+!new RoomExtra('X2_RX')
+!X2_RX.description := 'Kaiseki dinner set (1 person, vegetarian)'
+!X2_RX.price := 120.00
+
+!new RoomExtra('X3_RX')
+!X3_RX.description := 'Airport limousine transfer (one-way)'
+!X3_RX.price := 85.00
+
+!new Bill('BL770900')
+!BL770900.billId := 770900
+!BL770900.price := 1645.00
+
+!new RoomExtra('Y1_RY')
+!Y1_RY.description := 'Meeting package: projector + HDMI switch'
+!Y1_RY.price := 45.00
+
+!new RoomExtra('Y2_RY')
+!Y2_RY.description := 'Coffee/tea service for 6 (afternoon)'
+!Y2_RY.price := 60.00
+
+!new RoomExtra('Y3_RY')
+!Y3_RY.description := 'Interpretation headsets rental (6 units)'
+!Y3_RY.price := 35.00
+
+!new Bill('BL770901')
+!BL770901.billId := 770901
+!BL770901.price := 140.00
+
+!new FreeRoomTypesDTO('D33')
+!D33.roomTypeDescription := 'シングル（禁煙）— 高層階'
+!D33.numBeds := 1
+!D33.pricePerNight := 205.00
+!D33.numFreeRooms := 3
+
+!new FreeRoomTypesDTO('D34')
+!D34.roomTypeDescription := 'Deluxe Twin — river view'
+!D34.numBeds := 2
+!D34.pricePerNight := 275.00
+!D34.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('D35')
+!D35.roomTypeDescription := 'Economy Single — shared workspace access'
+!D35.numBeds := 1
+!D35.pricePerNight := 110.00
+!D35.numFreeRooms := 8
+
+!insert (B64018, C20) into BookingCustomer
+
+!insert (B64018, RR_X) into BookingRoomReservation
+!insert (B64018, RR_Y) into BookingRoomReservation
+
+!insert (RR_X, R1507) into RoomReservationRoom
+!insert (RR_X, R1508) into RoomReservationRoom
+
+!insert (RR_X, X1_RX) into RoomReservationExtras
+!insert (RR_X, X2_RX) into RoomReservationExtras
+!insert (RR_X, X3_RX) into RoomReservationExtras
+
+!insert (RR_Y, Y1_RY) into RoomReservationExtras
+!insert (RR_Y, Y2_RY) into RoomReservationExtras
+!insert (RR_Y, Y3_RY) into RoomReservationExtras
+
+!insert (B64018, BL770900) into BookingBill
+!insert (B64018, BL770901) into BookingBill
+
+!insert (BL770900, RR_X) into BillRoomReservation
+!insert (BL770901, RR_Y) into BillRoomReservation

@@ -1,0 +1,49 @@
+!new Currency('currencyINRKerala')
+!currencyINRKerala.name := 'Indian Rupee'
+!currencyINRKerala.abbreviation := 'INR'
+
+!new Currency('currencyGBPKerala')
+!currencyGBPKerala.name := 'Pound Sterling'
+!currencyGBPKerala.abbreviation := 'GBP'
+
+!new Expense('expenseKeralaCommunityFieldwork')
+!expenseKeralaCommunityFieldwork.amount := 2350.00
+!expenseKeralaCommunityFieldwork.startDate := Date('2026-01-18')
+!expenseKeralaCommunityFieldwork.endDate := Date('2026-01-22')
+
+!new Bill('billKeralaIN1')
+!billKeralaIN1.amount := 1750.00
+!billKeralaIN1.category := 'Lodging (homestay contribution)'
+!billKeralaIN1.date := Date('2026-01-19')
+!billKeralaIN1.paymentMethod := #CASH
+!billKeralaIN1.status := #VERIFIED
+
+!new Bill('billKeralaIN2')
+!billKeralaIN2.amount := 600.00
+!billKeralaIN2.category := 'Local transport (auto-rickshaw pooled rides)'
+!billKeralaIN2.date := Date('2026-01-21')
+!billKeralaIN2.paymentMethod := #CASH
+!billKeralaIN2.status := #PENDING
+
+!insert (expenseKeralaCommunityFieldwork, billKeralaIN1) into ExpenseContainsBills
+!insert (expenseKeralaCommunityFieldwork, billKeralaIN2) into ExpenseContainsBills
+
+!insert (billKeralaIN1, currencyINRKerala) into BillCurrency
+!insert (billKeralaIN2, currencyINRKerala) into BillCurrency
+
+!new Comment('commentKeralaE1')
+!commentKeralaE1.text := 'Receipts are a mix of Malayalam and English; translations provided on the scan.'
+
+!insert (expenseKeralaCommunityFieldwork, commentKeralaE1) into ExpenseComment
+
+!new Bill('billUnassignedUK1')
+!billUnassignedUK1.amount := 28.40
+!billUnassignedUK1.category := 'Rail ticket (London–Cambridge)'
+!billUnassignedUK1.date := Date('2026-01-16')
+!billUnassignedUK1.paymentMethod := #CREDIT_CARD
+!billUnassignedUK1.status := #DRAFT
+
+!insert (billUnassignedUK1, currencyGBPKerala) into BillCurrency
+
+!new Comment('commentUnassignedFREE1')
+!commentUnassignedFREE1.text := 'Waiting for supervisor to confirm whether this trip should be billed to Project A or Project B.'

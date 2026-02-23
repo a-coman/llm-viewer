@@ -1,0 +1,75 @@
+!new Customer('C34')
+!C34.firstName := 'Örn'
+!C34.lastName := 'Þórðardóttir'
+
+!new Booking('B1_DUP')
+!B1_DUP.bookingId := 1
+!B1_DUP.startDate := '   2026-12-31   '
+!B1_DUP.endDate := '2026-01-01'
+!B1_DUP.confirmed := true
+!B1_DUP.canceled := false
+
+!new RoomReservation('RR_DUP_101')
+!RR_DUP_101.checkInDate := 'N/A'
+!RR_DUP_101.checkOutDate := 'N/A'
+
+!new Room('R101A_DUP')
+!R101A_DUP.roomNumber := 101
+!R101A_DUP.numBeds := 1
+!R101A_DUP.pricePerNight := 0.0
+!R101A_DUP.occupied := true
+!R101A_DUP.blocked := false
+
+!new Room('R101B_DUP')
+!R101B_DUP.roomNumber := 101
+!R101B_DUP.numBeds := 2
+!R101B_DUP.pricePerNight := 0.0
+!R101B_DUP.occupied := false
+!R101B_DUP.blocked := true
+
+!new RoomExtra('D1_DUP')
+!D1_DUP.description := 'Duplicate-room-number handling fee'
+!D1_DUP.price := 10.0
+
+!new RoomExtra('D2_DUP')
+!D2_DUP.description := 'Manual discount (rounding)'
+!D2_DUP.price := -0.01
+
+!new RoomExtra('D3_DUP')
+!D3_DUP.description := 'Cultural event ticket precharge'
+!D3_DUP.price := 250.0
+
+!new RoomExtra('D4_DUP')
+!D4_DUP.description := 'Chargeback reversal placeholder'
+!D4_DUP.price := -260.0
+
+!new RoomExtra('D5_DUP')
+!D5_DUP.description := 'Local tax record-only line'
+!D5_DUP.price := 0.0
+
+!new Bill('BL1_MIN')
+!BL1_MIN.billId := 1
+!BL1_MIN.price := 0.0
+
+!new FreeRoomTypesDTO('D60')
+!D60.roomTypeDescription := 'Aurora-view lounge pod (no privacy curtain)'
+!D60.numBeds := 1
+!D60.pricePerNight := 0.0
+!D60.numFreeRooms := -1
+
+!insert (B1_DUP, C34) into BookingCustomer
+
+!insert (B1_DUP, RR_DUP_101) into BookingRoomReservation
+
+!insert (RR_DUP_101, R101A_DUP) into RoomReservationRoom
+!insert (RR_DUP_101, R101B_DUP) into RoomReservationRoom
+
+!insert (RR_DUP_101, D1_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D2_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D3_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D4_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D5_DUP) into RoomReservationExtras
+
+!insert (B1_DUP, BL1_MIN) into BookingBill
+
+!insert (BL1_MIN, RR_DUP_101) into BillRoomReservation

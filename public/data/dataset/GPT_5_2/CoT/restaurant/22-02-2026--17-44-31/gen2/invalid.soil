@@ -1,0 +1,216 @@
+!new Restaurant('R8')
+!R8.name := 'Trattoria del Fiume'
+
+!new Owner('O17')
+!O17.name := 'Lucia Ferraro'
+!O17.percentageShares := 55
+!insert (R8, O17) into RestaurantOwner
+
+!new Owner('O18')
+!O18.name := 'Paolo Ricci'
+!O18.percentageShares := 45
+!insert (R8, O18) into RestaurantOwner
+
+!new HeadWaiter('HW8')
+!HW8.name := 'Enzo Martini'
+!HW8.dateOfBirth := Date('1978-02-14')
+!HW8.phoneNumber := '+39 333 120 4455'
+
+!new Waiter('W15')
+!W15.name := 'Chiara Gallo'
+!W15.dateOfBirth := Date('1999-07-22')
+!W15.phoneNumber := '+39 333 220 5566'
+!W15.spokenLanguage := #Italian
+!insert (HW8, W15) into HeadWaiterWaiter
+
+!new Waiter('W16')
+!W16.name := 'Diego Morales'
+!W16.dateOfBirth := Date('1994-12-01')
+!W16.phoneNumber := '+39 333 330 6677'
+!W16.spokenLanguage := #Spanish
+!insert (HW8, W16) into HeadWaiterWaiter
+
+!new Cook('K12')
+!K12.name := 'Nadia Borkowski'
+!K12.dateOfBirth := Date('1986-09-10')
+!K12.phoneNumber := '+39 333 440 7788'
+!K12.yearsOfExperience := 0
+
+!new Chef('CH13')
+!CH13.name := 'Matteo Conti'
+!CH13.dateOfBirth := Date('1983-04-03')
+!CH13.phoneNumber := '+39 333 550 8899'
+!insert (CH13, K12) into ChefCook
+
+!new Chef('CH14')
+!CH14.name := 'Sara De Luca'
+!CH14.dateOfBirth := Date('1991-01-19')
+!CH14.phoneNumber := '+39 333 660 9900'
+!insert (CH14, K12) into ChefCook
+
+!new BusDriver('BD8')
+!BD8.name := 'Alessandro Greco'
+!BD8.dateOfBirth := Date('1970-05-08')
+!BD8.phoneNumber := '+39 333 770 1010'
+!BD8.driverLicenseNr := 'IT-FI-777210'
+
+!new Table('T1_TDF')
+!T1_TDF.number := 1
+!T1_TDF.description := 'Two-top by the wine shelves (inside)'
+!T1_TDF.capacity := 2
+
+!new Table('T2_TDF')
+!T2_TDF.number := 2
+!T2_TDF.description := 'Four-top near the open kitchen (inside)'
+!T2_TDF.capacity := 4
+
+!new Table('T11_TDF')
+!T11_TDF.number := 11
+!T11_TDF.description := 'Outdoor terrace table under pergola'
+!T11_TDF.capacity := 6
+
+!new Table('T12_TDF')
+!T12_TDF.number := 12
+!T12_TDF.description := 'Private room: central table'
+!T12_TDF.capacity := 8
+
+!new Table('T13_TDF')
+!T13_TDF.number := 13
+!T13_TDF.description := 'Private room: side table'
+!T13_TDF.capacity := 8
+
+!new Table('T14_TDF')
+!T14_TDF.number := 14
+!T14_TDF.description := 'Private room: round table'
+!T14_TDF.capacity := 10
+
+!new RegularCustomer('C9')
+!C9.name := 'Giovanni Bianchi'
+!C9.prefferedLanguage := #Italian
+
+!new Individual('IR9')
+!IR9.time := Time('19:15')
+!IR9.date := Date('2026-09-03')
+!IR9.numberPeople := 2
+!IR9.name := 'Giovanni Bianchi'
+!IR9.phoneNumber := '+39 328 555 1212'
+!IR9.number := 5201
+!IR9.seating := #Patio
+!IR9.smoking := #NonSmoking
+!insert (R8, IR9) into RestaurantReservation
+!insert (IR9, C9) into ReservationCustomer
+!insert (IR9, W15) into ReservationWaiter
+!insert (IR9, T1_TDF) into ReservationTable
+
+!new Banquet('BR7')
+!BR7.time := Time('18:30')
+!BR7.date := Date('2026-09-10')
+!BR7.numberPeople := 20
+!BR7.name := 'Rossi Wedding Coordinator'
+!BR7.phoneNumber := '+39 055 700 111'
+!BR7.number := 6301
+!BR7.groupName := 'Matrimonio Rossi'
+!BR7.paymentMethod := #CreditCard
+!BR7.busService := true
+!insert (R8, BR7) into RestaurantReservation
+!insert (BR7, W15) into ReservationWaiter
+!insert (BR7, W16) into ReservationWaiter
+!insert (BR7, T12_TDF) into ReservationTable
+!insert (BR7, T13_TDF) into ReservationTable
+!insert (BR7, T11_TDF) into ReservationTable
+!insert (BR7, BD8) into BanquetBusDriver
+
+!new Banquet('BR8')
+!BR8.time := Time('12:00')
+!BR8.date := Date('2026-09-11')
+!BR8.numberPeople := 9
+!BR8.name := 'Arno Bank Events Team'
+!BR8.phoneNumber := '+39 055 701 222'
+!BR8.number := 6302
+!BR8.groupName := 'Arno Bank Executive Lunch'
+!BR8.paymentMethod := #Cash
+!BR8.busService := true
+!insert (R8, BR8) into RestaurantReservation
+!insert (BR8, W16) into ReservationWaiter
+!insert (BR8, T14_TDF) into ReservationTable
+!insert (BR8, BD8) into BanquetBusDriver
+
+!new Allergen('AL1_TDF')
+!AL1_TDF.type := #Gluten
+
+!new Allergen('AL2_TDF')
+!AL2_TDF.type := #Nuts
+
+!new Allergen('AL3_TDF')
+!AL3_TDF.type := #Lactose
+
+!new FoodItem('F501')
+!F501.number := 210
+!F501.description := 'Durum wheat pasta'
+!F501.purchaseFlag := true
+!F501.unit := #Pound
+!insert (F501, AL1_TDF) into FoodItemAllergen
+
+!new FoodItem('F502')
+!F502.number := 211
+!F502.description := 'Parmigiano Reggiano'
+!F502.purchaseFlag := true
+!F502.unit := #Ounce
+!insert (F502, AL3_TDF) into FoodItemAllergen
+
+!new FoodItem('F503')
+!F503.number := 212
+!F503.description := 'Pine nuts'
+!F503.purchaseFlag := true
+!F503.unit := #Gram
+!insert (F503, AL2_TDF) into FoodItemAllergen
+
+!new FoodItem('F504')
+!F504.number := 213
+!F504.description := 'Egg sheets for lasagna'
+!F504.purchaseFlag := true
+!F504.unit := #Sheet
+!insert (F504, AL1_TDF) into FoodItemAllergen
+
+!new MenuItem('MI23')
+!MI23.description := 'Pesto pasta (traditional)'
+!MI23.prepTime := 14.0
+!MI23.classification := #Main
+!insert (MI23, CH13) into MenuItemChef
+!insert (MI23, F501) into MenuItemFoodItem
+!insert (MI23, F503) into MenuItemFoodItem
+!insert (MI23, F502) into MenuItemFoodItem
+
+!new MenuItem('MI24')
+!MI24.description := 'Lasagna al forno'
+!MI24.prepTime := 40.0
+!MI24.classification := #Main
+!insert (MI24, CH14) into MenuItemChef
+!insert (MI24, F504) into MenuItemFoodItem
+!insert (MI24, F502) into MenuItemFoodItem
+
+!new MenuItem('MI25')
+!MI25.description := 'Espresso'
+!MI25.prepTime := 2.0
+!MI25.classification := #Beverage
+!insert (MI25, CH13) into MenuItemChef
+
+!new ItemOrder('IO1101')
+!IO1101.time := Time('19:25')
+!insert (IR9, IO1101) into ReservationItemOrdered
+!insert (IO1101, MI25) into ItemOrderMenuItem
+
+!new ItemOrder('IO1102')
+!IO1102.time := Time('19:35')
+!insert (IR9, IO1102) into ReservationItemOrdered
+!insert (IO1102, MI23) into ItemOrderMenuItem
+
+!new ItemOrder('IO1103')
+!IO1103.time := Time('19:10')
+!insert (BR7, IO1103) into ReservationItemOrdered
+!insert (IO1103, MI24) into ItemOrderMenuItem
+
+!new ItemOrder('IO1104')
+!IO1104.time := Time('12:20')
+!insert (BR8, IO1104) into ReservationItemOrdered
+!insert (IO1104, MI23) into ItemOrderMenuItem

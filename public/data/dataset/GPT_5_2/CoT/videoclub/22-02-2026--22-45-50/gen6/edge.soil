@@ -1,0 +1,126 @@
+!new Client('clientSeriesOnly2C50')
+!clientSeriesOnly2C50.clientId := 13
+!clientSeriesOnly2C50.isSuspended := true
+
+!new Client('clientSeriesOnly2C51')
+!clientSeriesOnly2C51.clientId := 14
+!clientSeriesOnly2C51.isSuspended := true
+
+!new Client('clientSeriesOnly2C52')
+!clientSeriesOnly2C52.clientId := 15
+!clientSeriesOnly2C52.isSuspended := false
+
+!new Client('clientSeriesOnly2C53')
+!clientSeriesOnly2C53.clientId := 16
+!clientSeriesOnly2C53.isSuspended := false
+
+!new Rental('rentalSeriesOnly2R50')
+!rentalSeriesOnly2R50.date := Date('0000-00-00')
+
+!new Rental('rentalSeriesOnly2R51')
+!rentalSeriesOnly2R51.date := Date('13/13/2013')
+
+!new Rental('rentalSeriesOnly2R52')
+!rentalSeriesOnly2R52.date := Date('2001-09-09T09:09:09Z')
+
+!new Rental('rentalSeriesOnly2R53')
+!rentalSeriesOnly2R53.date := Date('   ')
+
+!new Series('seriesSeriesOnly2S40')
+!seriesSeriesOnly2S40.title := 'La Serie Sin Nombre'
+!seriesSeriesOnly2S40.availableCopies := 0
+!seriesSeriesOnly2S40.episode := 1
+
+!new Series('seriesSeriesOnly2S41')
+!seriesSeriesOnly2S41.title := 'ドラマ『空の階段』'
+!seriesSeriesOnly2S41.availableCopies := 1
+!seriesSeriesOnly2S41.episode := 2
+
+!new Series('seriesSeriesOnly2S42')
+!seriesSeriesOnly2S42.title := 'Северный архив'
+!seriesSeriesOnly2S42.availableCopies := 0
+!seriesSeriesOnly2S42.episode := 999999999
+
+!new Series('seriesSeriesOnly2S43')
+!seriesSeriesOnly2S43.title := 'قصص الميناء'
+!seriesSeriesOnly2S43.availableCopies := 2
+!seriesSeriesOnly2S43.episode := 3
+
+!new Series('seriesSeriesOnly2S44')
+!seriesSeriesOnly2S44.title := 'Επεισόδιο'
+!seriesSeriesOnly2S44.availableCopies := 0
+!seriesSeriesOnly2S44.episode := 4
+
+!new Series('seriesSeriesOnly2S45')
+!seriesSeriesOnly2S45.title := 'The Lost Pilot'
+!seriesSeriesOnly2S45.availableCopies := 0
+!seriesSeriesOnly2S45.episode := 5
+
+!new Actor('actorSeriesOnly2A60')
+!actorSeriesOnly2A60.name := 'Linh Trần'
+
+!new Actor('actorSeriesOnly2A61')
+!actorSeriesOnly2A61.name := 'Ömer Yılmaz'
+
+!new Actor('actorSeriesOnly2A62')
+!actorSeriesOnly2A62.name := 'Chinwe Okafor'
+
+!new Actor('actorSeriesOnly2A63')
+!actorSeriesOnly2A63.name := 'Ilya Kuznetsov'
+
+!new Actor('actorSeriesOnly2A64')
+!actorSeriesOnly2A64.name := 'Sofía García Márquez'
+
+!new Actor('actorSeriesOnly2A65')
+!actorSeriesOnly2A65.name := 'Aroha Te Kāhu'
+
+!new Actor('actorSeriesOnly2A66')
+!actorSeriesOnly2A66.name := 'Niamh O\'Rourke'
+
+!new Actor('actorSeriesOnly2A67')
+!actorSeriesOnly2A67.name := 'Ravi Singh'
+
+!new Actor('actorSeriesOnly2A68')
+!actorSeriesOnly2A68.name := 'Helena Papadopoulos'
+
+!new Actor('actorSeriesOnly2A69')
+!actorSeriesOnly2A69.name := 'Samira Haddou'
+
+!new Actor('actorSeriesOnly2A70')
+!actorSeriesOnly2A70.name := 'Stage Name: NULL'
+
+!insert (clientSeriesOnly2C50, rentalSeriesOnly2R50) into ClientRental
+!insert (clientSeriesOnly2C50, rentalSeriesOnly2R52) into ClientRental
+!insert (clientSeriesOnly2C51, rentalSeriesOnly2R51) into ClientRental
+!insert (clientSeriesOnly2C52, rentalSeriesOnly2R53) into ClientRental
+
+!insert (rentalSeriesOnly2R50, seriesSeriesOnly2S40) into RentalCassette
+!insert (rentalSeriesOnly2R50, seriesSeriesOnly2S41) into RentalCassette
+!insert (rentalSeriesOnly2R50, seriesSeriesOnly2S42) into RentalCassette
+!insert (rentalSeriesOnly2R50, seriesSeriesOnly2S43) into RentalCassette
+!insert (rentalSeriesOnly2R50, seriesSeriesOnly2S44) into RentalCassette
+
+!insert (rentalSeriesOnly2R51, seriesSeriesOnly2S42) into RentalCassette
+
+!insert (rentalSeriesOnly2R52, seriesSeriesOnly2S40) into RentalCassette
+!insert (rentalSeriesOnly2R52, seriesSeriesOnly2S43) into RentalCassette
+
+!insert (rentalSeriesOnly2R53, seriesSeriesOnly2S44) into RentalCassette
+
+!insert (seriesSeriesOnly2S40, actorSeriesOnly2A60) into CassetteActor
+
+!insert (seriesSeriesOnly2S41, actorSeriesOnly2A61) into CassetteActor
+!insert (seriesSeriesOnly2S41, actorSeriesOnly2A65) into CassetteActor
+
+!insert (seriesSeriesOnly2S42, actorSeriesOnly2A63) into CassetteActor
+!insert (seriesSeriesOnly2S42, actorSeriesOnly2A62) into CassetteActor
+!insert (seriesSeriesOnly2S42, actorSeriesOnly2A64) into CassetteActor
+!insert (seriesSeriesOnly2S42, actorSeriesOnly2A67) into CassetteActor
+!insert (seriesSeriesOnly2S42, actorSeriesOnly2A69) into CassetteActor
+
+!insert (seriesSeriesOnly2S43, actorSeriesOnly2A62) into CassetteActor
+!insert (seriesSeriesOnly2S43, actorSeriesOnly2A66) into CassetteActor
+
+!insert (seriesSeriesOnly2S44, actorSeriesOnly2A68) into CassetteActor
+
+!insert (seriesSeriesOnly2S45, actorSeriesOnly2A64) into CassetteActor

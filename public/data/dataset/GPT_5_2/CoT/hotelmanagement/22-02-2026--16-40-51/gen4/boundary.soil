@@ -1,0 +1,174 @@
+!new FreeRoomTypesDTO('D43')
+!D43.roomTypeDescription := 'Unspecified placeholder type'
+!D43.numBeds := 0
+!D43.pricePerNight := 0.0
+!D43.numFreeRooms := 0
+
+!new Customer('C24')
+!C24.firstName := 'Nguyễn'
+!C24.lastName := ''
+
+!new Booking('B6_LEAP')
+!B6_LEAP.startDate := '2028-02-29'
+!B6_LEAP.endDate := '2028-03-02'
+!B6_LEAP.canceled := false
+!B6_LEAP.bookingId := 0
+!B6_LEAP.confirmed := true
+
+!new RoomReservation('R9_B6')
+!R9_B6.checkInDate := '2028-02-29'
+!R9_B6.checkOutDate := '2028-02-29'
+
+!new Room('RM200_B6')
+!RM200_B6.numBeds := 1
+!RM200_B6.pricePerNight := 0.01
+!RM200_B6.occupied := true
+!RM200_B6.blocked := false
+!RM200_B6.roomNumber := 0
+
+!new Bill('BL4001')
+!BL4001.price := 0.01
+!BL4001.billId := 4001
+
+!new RoomReservation('R10_B6')
+!R10_B6.checkInDate := '2028-02-29'
+!R10_B6.checkOutDate := '2028-03-01'
+
+!new Bill('BL4002')
+!BL4002.price := 0.0
+!BL4002.billId := 4002
+
+!new RoomReservation('R11_B6')
+!R11_B6.checkInDate := '2028-03-01'
+!R11_B6.checkOutDate := '2028-03-01'
+
+!new Room('RM201_B6')
+!RM201_B6.numBeds := 100
+!RM201_B6.pricePerNight := 12345.67
+!RM201_B6.occupied := false
+!RM201_B6.blocked := false
+!RM201_B6.roomNumber := 10000
+
+!new Room('RM202_B6')
+!RM202_B6.numBeds := 50
+!RM202_B6.pricePerNight := 54321.0
+!RM202_B6.occupied := false
+!RM202_B6.blocked := true
+!RM202_B6.roomNumber := 10001
+
+!new RoomExtra('E41_B6')
+!E41_B6.price := 0.0
+!E41_B6.description := 'Carbon-offset certificate (digital)'
+
+!new Bill('BL4003')
+!BL4003.price := 66666.67
+!BL4003.billId := 4003
+
+!new RoomReservation('R12_B6')
+!R12_B6.checkInDate := '2028-03-01'
+!R12_B6.checkOutDate := '2028-03-02'
+
+!new Room('RM203_B6')
+!RM203_B6.numBeds := 2
+!RM203_B6.pricePerNight := 999999.99
+!RM203_B6.occupied := true
+!RM203_B6.blocked := true
+!RM203_B6.roomNumber := 404
+
+!new RoomExtra('E42_B6')
+!E42_B6.price := 0.0
+!E42_B6.description := 'Welcome water ration (complimentary)'
+
+!new RoomExtra('E43_B6')
+!E43_B6.price := 250.0
+!E43_B6.description := 'Satellite internet day-pass'
+
+!new RoomExtra('E44_B6')
+!E44_B6.price := 1000.0
+!E44_B6.description := 'Generator fuel surcharge'
+
+!new RoomExtra('E45_B6')
+!E45_B6.price := 75.5
+!E45_B6.description := 'Thermal blanket rental'
+
+!new RoomExtra('E46_B6')
+!E46_B6.price := 0.01
+!E46_B6.description := 'Local tax rounding adjustment'
+
+!new RoomExtra('E47_B6')
+!E47_B6.price := 500.0
+!E47_B6.description := 'Guided stargazing session'
+
+!new RoomExtra('E48_B6')
+!E48_B6.price := 120.0
+!E48_B6.description := 'Medical check-in (on call)'
+
+!new Bill('BL4004')
+!BL4004.price := 1001945.50
+!BL4004.billId := 4004
+
+!new RoomReservation('R13_B6')
+!R13_B6.checkInDate := '2028-03-02'
+!R13_B6.checkOutDate := '2028-03-02'
+
+!new Room('RM204_B6')
+!RM204_B6.numBeds := 1
+!RM204_B6.pricePerNight := 0.0
+!RM204_B6.occupied := false
+!RM204_B6.blocked := false
+!RM204_B6.roomNumber := -1
+
+!new Room('RM205_B6')
+!RM205_B6.numBeds := 1
+!RM205_B6.pricePerNight := 0.0
+!RM205_B6.occupied := false
+!RM205_B6.blocked := false
+!RM205_B6.roomNumber := -2
+
+!new Room('RM206_B6')
+!RM206_B6.numBeds := 1
+!RM206_B6.pricePerNight := 0.0
+!RM206_B6.occupied := false
+!RM206_B6.blocked := false
+!RM206_B6.roomNumber := -3
+
+!new Bill('BL4005')
+!BL4005.price := 0.0
+!BL4005.billId := 4005
+
+!insert (B6_LEAP, C24) into BookingCustomer
+
+!insert (B6_LEAP, R9_B6) into BookingRoomReservation
+!insert (B6_LEAP, R10_B6) into BookingRoomReservation
+!insert (B6_LEAP, R11_B6) into BookingRoomReservation
+!insert (B6_LEAP, R12_B6) into BookingRoomReservation
+!insert (B6_LEAP, R13_B6) into BookingRoomReservation
+
+!insert (R9_B6, RM200_B6) into RoomReservationRoom
+!insert (R11_B6, RM201_B6) into RoomReservationRoom
+!insert (R11_B6, RM202_B6) into RoomReservationRoom
+!insert (R12_B6, RM203_B6) into RoomReservationRoom
+!insert (R13_B6, RM204_B6) into RoomReservationRoom
+!insert (R13_B6, RM205_B6) into RoomReservationRoom
+!insert (R13_B6, RM206_B6) into RoomReservationRoom
+
+!insert (R11_B6, E41_B6) into RoomReservationExtras
+!insert (R12_B6, E42_B6) into RoomReservationExtras
+!insert (R12_B6, E43_B6) into RoomReservationExtras
+!insert (R12_B6, E44_B6) into RoomReservationExtras
+!insert (R12_B6, E45_B6) into RoomReservationExtras
+!insert (R12_B6, E46_B6) into RoomReservationExtras
+!insert (R12_B6, E47_B6) into RoomReservationExtras
+!insert (R12_B6, E48_B6) into RoomReservationExtras
+
+!insert (B6_LEAP, BL4001) into BookingBill
+!insert (B6_LEAP, BL4002) into BookingBill
+!insert (B6_LEAP, BL4003) into BookingBill
+!insert (B6_LEAP, BL4004) into BookingBill
+!insert (B6_LEAP, BL4005) into BookingBill
+
+!insert (BL4001, R9_B6) into BillRoomReservation
+!insert (BL4002, R10_B6) into BillRoomReservation
+!insert (BL4003, R11_B6) into BillRoomReservation
+!insert (BL4004, R12_B6) into BillRoomReservation
+!insert (BL4005, R13_B6) into BillRoomReservation

@@ -1,0 +1,107 @@
+!new AddressBook('AB5_NairobiFilmCrew_1')
+
+!new Person('P_AB5_Wanjiku_1')
+!P_AB5_Wanjiku_1.name := 'Wanjiku Njoroge'
+!P_AB5_Wanjiku_1.title := 'Ms.'
+!P_AB5_Wanjiku_1.phone := '+254 712 345 678'
+!P_AB5_Wanjiku_1.website := 'https://wanjiku-njoroge.example.ke'
+!P_AB5_Wanjiku_1.email := 'wanjiku.njoroge@example.ke'
+!insert (AB5_NairobiFilmCrew_1, P_AB5_Wanjiku_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB5_AD50_1')
+!Addr_AB5_AD50_1.city := 'Nairobi'
+!Addr_AB5_AD50_1.street := 'Kenyatta Avenue'
+!Addr_AB5_AD50_1.houseNr := '17'
+!insert (P_AB5_Wanjiku_1, Addr_AB5_AD50_1) into ContactContainsAddress
+
+!new Note('Note_AB5_N50_1')
+!Note_AB5_N50_1.author := 'Wanjiku Njoroge'
+!Note_AB5_N50_1.time := Date('2026-02-20')
+!Note_AB5_N50_1.type := #MEETING
+!Note_AB5_N50_1.comment := 'Pre-production meeting: confirmed shoot dates, crew availability, and equipment pickup window.'
+!insert (P_AB5_Wanjiku_1, Note_AB5_N50_1) into ContactContainsNote
+
+!new Person('P_AB5_Aarav_1')
+!P_AB5_Aarav_1.name := 'Aarav Patel'
+!P_AB5_Aarav_1.title := 'Mr.'
+!P_AB5_Aarav_1.phone := '+254 733 901 224'
+!P_AB5_Aarav_1.website := 'https://aaravpatel.example'
+!P_AB5_Aarav_1.email := 'aarav.patel@example.com'
+!insert (AB5_NairobiFilmCrew_1, P_AB5_Aarav_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB5_AD51_1')
+!Addr_AB5_AD51_1.city := 'Nairobi'
+!Addr_AB5_AD51_1.street := 'Ngong Road'
+!Addr_AB5_AD51_1.houseNr := '88'
+!insert (P_AB5_Aarav_1, Addr_AB5_AD51_1) into ContactContainsAddress
+
+!new Person('P_AB5_Zainab_1')
+!P_AB5_Zainab_1.name := 'Zainab Hassan'
+!P_AB5_Zainab_1.title := 'Ms.'
+!P_AB5_Zainab_1.phone := '+254 790 555 041'
+!P_AB5_Zainab_1.website := 'https://zainabhassan.example'
+!P_AB5_Zainab_1.email := 'zainab.hassan@example.com'
+!insert (AB5_NairobiFilmCrew_1, P_AB5_Zainab_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB5_AD52_1')
+!Addr_AB5_AD52_1.city := 'Mombasa'
+!Addr_AB5_AD52_1.street := 'Moi Avenue'
+!Addr_AB5_AD52_1.houseNr := '42'
+!insert (P_AB5_Zainab_1, Addr_AB5_AD52_1) into ContactContainsAddress
+
+!new Note('Note_AB5_N51_1')
+!Note_AB5_N51_1.author := 'Wanjiku Njoroge'
+!Note_AB5_N51_1.time := Date('2026-02-21')
+!Note_AB5_N51_1.type := #CALL
+!Note_AB5_N51_1.comment := 'Zainab requested a lightweight gimbal; confirmed it’s available from rental house.'
+!insert (P_AB5_Zainab_1, Note_AB5_N51_1) into ContactContainsNote
+
+!new Company('C_AB5_SavannaPost_1')
+!C_AB5_SavannaPost_1.name := 'Savanna Post Studio'
+!C_AB5_SavannaPost_1.industry := 'Film post-production'
+!C_AB5_SavannaPost_1.phone := '+254 20 555 8800'
+!C_AB5_SavannaPost_1.website := 'https://savannapost.example.ke'
+!C_AB5_SavannaPost_1.email := 'bookings@savannapost.example.ke'
+!insert (AB5_NairobiFilmCrew_1, C_AB5_SavannaPost_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB5_AD53_1')
+!Addr_AB5_AD53_1.city := 'Nairobi'
+!Addr_AB5_AD53_1.street := 'Chiromo Lane'
+!Addr_AB5_AD53_1.houseNr := '6'
+!insert (C_AB5_SavannaPost_1, Addr_AB5_AD53_1) into ContactContainsAddress
+
+!new Note('Note_AB5_N52_1')
+!Note_AB5_N52_1.author := 'Studio Coordinator'
+!Note_AB5_N52_1.time := Date('2026-02-22')
+!Note_AB5_N52_1.type := #EMAIL
+!Note_AB5_N52_1.comment := 'Reserved color grading suite for March 3–5; deposit invoice sent.'
+!insert (C_AB5_SavannaPost_1, Note_AB5_N52_1) into ContactContainsNote
+
+!new Company('C_AB5_SavannaSound_1')
+!C_AB5_SavannaSound_1.name := 'Savanna Post Studio – Sound Department'
+!C_AB5_SavannaSound_1.industry := 'Audio post-production'
+!C_AB5_SavannaSound_1.phone := '+254 20 555 8801'
+!C_AB5_SavannaSound_1.website := 'https://savannapost.example.ke/sound'
+!C_AB5_SavannaSound_1.email := 'sound@savannapost.example.ke'
+!insert (AB5_NairobiFilmCrew_1, C_AB5_SavannaSound_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_AB5_R50_1')
+!Rel_AB5_R50_1.type := #EMPLOYEE
+!insert (P_AB5_Wanjiku_1, Rel_AB5_R50_1) into ContactToRelationship
+!insert (Rel_AB5_R50_1, P_AB5_Aarav_1) into RelationshipToContact
+!insert (Rel_AB5_R50_1, P_AB5_Zainab_1) into RelationshipToContact
+
+!new Relationship('Rel_AB5_R51_1')
+!Rel_AB5_R51_1.type := #COWORKER
+!insert (P_AB5_Wanjiku_1, Rel_AB5_R51_1) into ContactToRelationship
+!insert (Rel_AB5_R51_1, C_AB5_SavannaPost_1) into RelationshipToContact
+
+!new Relationship('Rel_AB5_R52_1')
+!Rel_AB5_R52_1.type := #COWORKER
+!insert (P_AB5_Aarav_1, Rel_AB5_R52_1) into ContactToRelationship
+!insert (Rel_AB5_R52_1, P_AB5_Zainab_1) into RelationshipToContact
+
+!new Relationship('Rel_AB5_R53_1')
+!Rel_AB5_R53_1.type := #SUBDIVISION
+!insert (C_AB5_SavannaPost_1, Rel_AB5_R53_1) into ContactToRelationship
+!insert (Rel_AB5_R53_1, C_AB5_SavannaSound_1) into RelationshipToContact

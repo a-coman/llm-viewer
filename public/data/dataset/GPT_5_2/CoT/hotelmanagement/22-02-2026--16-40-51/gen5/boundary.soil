@@ -1,0 +1,90 @@
+!new FreeRoomTypesDTO('D59')
+!D59.roomTypeDescription := 'Dormitory bunk (mixed)'
+!D59.numBeds := 20
+!D59.pricePerNight := 15.0
+!D59.numFreeRooms := 0
+
+!new Customer('C31')
+!C31.firstName := 'Léa'
+!C31.lastName := 'Moreau'
+
+!new Booking('B7')
+!B7.startDate := ''
+!B7.endDate := ''
+!B7.canceled := true
+!B7.bookingId := -99
+!B7.confirmed := false
+
+!new Customer('C32')
+!C32.firstName := 'Илья'
+!C32.lastName := 'Петров'
+
+!new Booking('B8')
+!B8.startDate := '2026-06-15'
+!B8.endDate := '2026-06-16'
+!B8.canceled := false
+!B8.bookingId := 6
+!B8.confirmed := true
+
+!new RoomReservation('RR14_B8')
+!RR14_B8.checkInDate := '2026-06-15'
+!RR14_B8.checkOutDate := '2026-06-16'
+
+!new Room('RM301_B8')
+!RM301_B8.numBeds := 1
+!RM301_B8.pricePerNight := 0.0
+!RM301_B8.occupied := false
+!RM301_B8.blocked := false
+!RM301_B8.roomNumber := 7
+
+!new Room('RM302_B8')
+!RM302_B8.numBeds := 2147483647
+!RM302_B8.pricePerNight := 0.0
+!RM302_B8.occupied := false
+!RM302_B8.blocked := true
+!RM302_B8.roomNumber := 8
+
+!new Bill('BL5001')
+!BL5001.price := 0.0
+!BL5001.billId := 5001
+
+!new Customer('C33')
+!C33.firstName := 'Amrita'
+!C33.lastName := 'Singh'
+
+!new Booking('B9')
+!B9.startDate := '2026-11-01'
+!B9.endDate := '2026-11-02'
+!B9.canceled := false
+!B9.bookingId := 7
+!B9.confirmed := false
+
+!new RoomReservation('RR15_B9')
+!RR15_B9.checkInDate := '2026-11-01'
+!RR15_B9.checkOutDate := '2026-11-02'
+
+!new RoomExtra('E49_B9')
+!E49_B9.price := 0.0
+!E49_B9.description := 'Diya lamp set for festival welcome'
+
+!new Bill('BL5002')
+!BL5002.price := 0.0
+!BL5002.billId := 5002
+
+!insert (B7, C31) into BookingCustomer
+!insert (B8, C32) into BookingCustomer
+!insert (B9, C33) into BookingCustomer
+
+!insert (B8, RR14_B8) into BookingRoomReservation
+!insert (B9, RR15_B9) into BookingRoomReservation
+
+!insert (RR14_B8, RM301_B8) into RoomReservationRoom
+!insert (RR14_B8, RM302_B8) into RoomReservationRoom
+
+!insert (RR15_B9, E49_B9) into RoomReservationExtras
+
+!insert (B8, BL5001) into BookingBill
+!insert (B9, BL5002) into BookingBill
+
+!insert (BL5001, RR14_B8) into BillRoomReservation
+!insert (BL5002, RR15_B9) into BillRoomReservation

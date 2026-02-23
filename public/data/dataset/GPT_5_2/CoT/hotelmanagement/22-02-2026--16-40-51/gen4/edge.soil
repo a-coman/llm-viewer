@@ -1,0 +1,186 @@
+!new Customer('C25')
+!C25.firstName := 'Māia'
+!C25.lastName := 'Te Rangi-Whaitiri'
+
+!new Booking('B77')
+!B77.bookingId := 77
+!B77.startDate := '2026-04-01'
+!B77.endDate := '2026-04-02'
+!B77.confirmed := true
+!B77.canceled := false
+
+!new RoomReservation('RR77_1')
+!RR77_1.checkInDate := '2026-03-30'
+!RR77_1.checkOutDate := '2026-03-30'
+
+!new Room('R1_RR77')
+!R1_RR77.roomNumber := 1
+!R1_RR77.numBeds := 1
+!R1_RR77.pricePerNight := 0.005
+!R1_RR77.occupied := false
+!R1_RR77.blocked := false
+
+!new Bill('BL7001_77')
+!BL7001_77.billId := 7001
+!BL7001_77.price := 0.01
+
+!new RoomReservation('RR77_2')
+!RR77_2.checkInDate := '2026-04-01'
+!RR77_2.checkOutDate := '2026-04-10'
+
+!new Bill('BL7002_77')
+!BL7002_77.billId := 7002
+!BL7002_77.price := 0.0
+
+!new RoomReservation('RR77_3')
+!RR77_3.checkInDate := '2027-01-01'
+!RR77_3.checkOutDate := '2027-01-02'
+
+!new Room('R900000')
+!R900000.roomNumber := 900000
+!R900000.numBeds := 2
+!R900000.pricePerNight := 150.0
+!R900000.occupied := true
+!R900000.blocked := false
+
+!new Room('R900001')
+!R900001.roomNumber := 900001
+!R900001.numBeds := 1
+!R900001.pricePerNight := 150.0
+!R900001.occupied := false
+!R900001.blocked := false
+
+!new RoomExtra('EX3A')
+!EX3A.description := 'Satellite internet add-on (remote location test)'
+!EX3A.price := 50.0
+
+!new Bill('BL7003_77')
+!BL7003_77.billId := 7003
+!BL7003_77.price := 350.0
+
+!new RoomReservation('RR77_4')
+!RR77_4.checkInDate := '2026-04-01'
+!RR77_4.checkOutDate := '2026-04-02'
+
+!new Room('R404_RR77')
+!R404_RR77.roomNumber := 404
+!R404_RR77.numBeds := 1
+!R404_RR77.pricePerNight := 88.88
+!R404_RR77.occupied := false
+!R404_RR77.blocked := true
+
+!new RoomExtra('EX4A')
+!EX4A.description := 'Printed map (local language)'
+!EX4A.price := 0.20
+
+!new RoomExtra('EX4B')
+!EX4B.description := 'Luggage tag'
+!EX4B.price := 0.05
+
+!new RoomExtra('EX4C')
+!EX4C.description := 'Electricity surcharge rounding adjustment'
+!EX4C.price := 0.01
+
+!new RoomExtra('EX4D')
+!EX4D.description := 'Reusable water bottle'
+!EX4D.price := 3.99
+
+!new RoomExtra('EX4E')
+!EX4E.description := 'Local call minute bundle'
+!EX4E.price := 1.30
+
+!new Bill('BL7004_77')
+!BL7004_77.billId := 7004
+!BL7004_77.price := 5.55
+
+!new RoomReservation('RR77_5')
+!RR77_5.checkInDate := ''
+!RR77_5.checkOutDate := ''
+
+!new Room('R2147483000')
+!R2147483000.roomNumber := 2147483000
+!R2147483000.numBeds := 3
+!R2147483000.pricePerNight := 1.0
+!R2147483000.occupied := true
+!R2147483000.blocked := true
+
+!new Bill('BL7005_77')
+!BL7005_77.billId := 7005
+!BL7005_77.price := 1.0
+
+!new RoomReservation('RR77_6')
+!RR77_6.checkInDate := '2026-04-02'
+!RR77_6.checkOutDate := '2026-04-02'
+
+!new RoomExtra('EX6A')
+!EX6A.description := 'Invoice re-issue fee (waived)'
+!EX6A.price := 0.0
+
+!new RoomExtra('EX6B')
+!EX6B.description := 'Currency conversion note line'
+!EX6B.price := 0.0
+
+!new RoomExtra('EX6C')
+!EX6C.description := 'Municipal tax exemption recorded'
+!EX6C.price := 0.0
+
+!new Bill('BL7006_77')
+!BL7006_77.billId := 7006
+!BL7006_77.price := 0.0
+
+!new FreeRoomTypesDTO('D44')
+!D44.roomTypeDescription := 'Sótano compartido (sin señal móvil)'
+!D44.numBeds := 8
+!D44.pricePerNight := 12.0
+!D44.numFreeRooms := -3
+
+!new FreeRoomTypesDTO('D45')
+!D45.roomTypeDescription := 'Ice hotel room (seasonal, melts)'
+!D45.numBeds := 1
+!D45.pricePerNight := 250.0
+!D45.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D46')
+!D46.roomTypeDescription := 'Family longhouse (communal sleeping hall)'
+!D46.numBeds := 30
+!D46.pricePerNight := 5.0
+!D46.numFreeRooms := 2
+
+!insert (B77, C25) into BookingCustomer
+
+!insert (B77, RR77_1) into BookingRoomReservation
+!insert (B77, RR77_2) into BookingRoomReservation
+!insert (B77, RR77_3) into BookingRoomReservation
+!insert (B77, RR77_4) into BookingRoomReservation
+!insert (B77, RR77_5) into BookingRoomReservation
+!insert (B77, RR77_6) into BookingRoomReservation
+
+!insert (RR77_1, R1_RR77) into RoomReservationRoom
+!insert (RR77_3, R900000) into RoomReservationRoom
+!insert (RR77_3, R900001) into RoomReservationRoom
+!insert (RR77_4, R404_RR77) into RoomReservationRoom
+!insert (RR77_5, R2147483000) into RoomReservationRoom
+
+!insert (RR77_3, EX3A) into RoomReservationExtras
+!insert (RR77_4, EX4A) into RoomReservationExtras
+!insert (RR77_4, EX4B) into RoomReservationExtras
+!insert (RR77_4, EX4C) into RoomReservationExtras
+!insert (RR77_4, EX4D) into RoomReservationExtras
+!insert (RR77_4, EX4E) into RoomReservationExtras
+!insert (RR77_6, EX6A) into RoomReservationExtras
+!insert (RR77_6, EX6B) into RoomReservationExtras
+!insert (RR77_6, EX6C) into RoomReservationExtras
+
+!insert (B77, BL7001_77) into BookingBill
+!insert (B77, BL7002_77) into BookingBill
+!insert (B77, BL7003_77) into BookingBill
+!insert (B77, BL7004_77) into BookingBill
+!insert (B77, BL7005_77) into BookingBill
+!insert (B77, BL7006_77) into BookingBill
+
+!insert (BL7001_77, RR77_1) into BillRoomReservation
+!insert (BL7002_77, RR77_2) into BillRoomReservation
+!insert (BL7003_77, RR77_3) into BillRoomReservation
+!insert (BL7004_77, RR77_4) into BillRoomReservation
+!insert (BL7005_77, RR77_5) into BillRoomReservation
+!insert (BL7006_77, RR77_6) into BillRoomReservation

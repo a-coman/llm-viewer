@@ -1,0 +1,1501 @@
+!new Restaurant('R17')
+!R17.name := 'Desert Pearl Café'
+
+!new Owner('O38')
+!O38.name := 'Aisha Al Mansoori'
+!O38.percentageShares := 80
+!insert (R17, O38) into RestaurantOwner
+
+!new Owner('O39')
+!O39.name := 'Omar Haddad'
+!O39.percentageShares := 20
+!insert (R17, O39) into RestaurantOwner
+
+!new Manager('M15')
+!M15.name := 'Priya Nair'
+!M15.dateOfBirth := Date('1987-03-21')
+!M15.phoneNumber := '+971 50 222 1000'
+
+!new HeadWaiter('HW16')
+!HW16.name := 'Samir Khalil'
+!HW16.dateOfBirth := Date('1982-09-09')
+!HW16.phoneNumber := '+971 50 222 2000'
+
+!new Waiter('W35')
+!W35.name := 'Emily Johnson'
+!W35.dateOfBirth := Date('1995-01-15')
+!W35.phoneNumber := '+971 50 222 3000'
+!W35.spokenLanguage := #English
+!insert (HW16, W35) into HeadWaiterWaiter
+
+!new Waiter('W36')
+!W36.name := 'Carlos Reyes'
+!W36.dateOfBirth := Date('1991-06-02')
+!W36.phoneNumber := '+971 50 222 4000'
+!W36.spokenLanguage := #Spanish
+!insert (HW16, W36) into HeadWaiterWaiter
+
+!new Cook('K26')
+!K26.name := 'Ravi Kumar'
+!K26.dateOfBirth := Date('1980-11-30')
+!K26.phoneNumber := '+971 50 222 5000'
+!K26.yearsOfExperience := 15
+
+!new Chef('CH29')
+!CH29.name := 'Hiro Tanaka'
+!CH29.dateOfBirth := Date('1976-04-18')
+!CH29.phoneNumber := '+971 50 222 6000'
+
+!new Table('T31_DPC')
+!T31_DPC.number := 31
+!T31_DPC.description := 'Indoor booth near the coffee bar'
+!T31_DPC.capacity := 4
+
+!new Table('T32_DPC')
+!T32_DPC.number := 32
+!T32_DPC.description := 'Patio table with shade (smoke-free section)'
+!T32_DPC.capacity := 2
+
+!new Table('T33_DPC')
+!T33_DPC.number := 33
+!T33_DPC.description := 'Large round table in the back room for groups'
+!T33_DPC.capacity := 8
+
+!new RegularCustomer('C19')
+!C19.name := 'María Fernández'
+!C19.prefferedLanguage := #Spanish
+
+!new Individual('IR20')
+!IR20.time := Time('10:30')
+!IR20.date := Date('2026-12-04')
+!IR20.numberPeople := 2
+!IR20.name := 'María Fernández'
+!IR20.phoneNumber := '+34 610 111 222'
+!IR20.number := 9001
+!IR20.seating := #Patio
+!IR20.smoking := #NonSmoking
+!insert (R17, IR20) into RestaurantReservation
+!insert (IR20, C19) into ReservationCustomer
+!insert (IR20, W36) into ReservationWaiter
+!insert (IR20, T32_DPC) into ReservationTable
+
+!new Banquet('BR16')
+!BR16.time := Time('13:00')
+!BR16.date := Date('2026-12-04')
+!BR16.numberPeople := 7
+!BR16.name := 'Gulf Tech Procurement'
+!BR16.phoneNumber := '+971 4 555 1212'
+!BR16.number := 9002
+!BR16.groupName := 'Gulf Tech Team Lunch'
+!BR16.paymentMethod := #CreditCard
+!BR16.busService := false
+!insert (R17, BR16) into RestaurantReservation
+!insert (BR16, W35) into ReservationWaiter
+!insert (BR16, W36) into ReservationWaiter
+!insert (BR16, T33_DPC) into ReservationTable
+
+!new Allergen('A4G_DPC')
+!A4G_DPC.type := #Gluten
+
+!new Allergen('A4N_DPC')
+!A4N_DPC.type := #Nuts
+
+!new FoodItem('F906')
+!F906.number := 801
+!F906.description := 'Sesame flatbread (contains wheat)'
+!F906.purchaseFlag := true
+!F906.unit := #Dozen
+!insert (F906, A4G_DPC) into FoodItemAllergen
+
+!new FoodItem('F907')
+!F907.number := 802
+!F907.description := 'Pistachio crumble'
+!F907.purchaseFlag := true
+!F907.unit := #Gram
+!insert (F907, A4N_DPC) into FoodItemAllergen
+
+!new MenuItem('MI49')
+!MI49.description := 'Spiced lamb flatbread with pistachio garnish'
+!MI49.prepTime := 16.0
+!MI49.classification := #Main
+!insert (MI49, CH29) into MenuItemChef
+!insert (MI49, F906) into MenuItemFoodItem
+!insert (MI49, F907) into MenuItemFoodItem
+
+!new ItemOrder('IO1701')
+!IO1701.time := Time('10:45')
+!insert (IR20, IO1701) into ReservationItemOrdered
+!insert (IO1701, MI49) into ItemOrderMenuItem
+
+!new ItemOrder('IO1702')
+!IO1702.time := Time('13:20')
+!insert (BR16, IO1702) into ReservationItemOrdered
+!insert (IO1702, MI49) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR15')
+!DR15.diet := #Halal
+
+!new ReportedAllergy('RA13')
+!RA13.allergen := #Nuts
+
+!new Restaurant('R20')
+!R20.name := 'Azul Mercado Brasserie'
+
+!new Owner('O42')
+!O42.name := 'Renata Souza'
+!O42.percentageShares := 45
+!insert (R20, O42) into RestaurantOwner
+
+!new Owner('O43')
+!O43.name := 'Jonas Richter'
+!O43.percentageShares := 35
+!insert (R20, O43) into RestaurantOwner
+
+!new Owner('O44')
+!O44.name := 'Isabella Rossi'
+!O44.percentageShares := 20
+!insert (R20, O44) into RestaurantOwner
+
+!new RegularCustomer('C21')
+!C21.name := 'Marta Kowalska'
+!C21.prefferedLanguage := #German
+
+!new RegularCustomer('C22')
+!C22.name := 'Diego Herrera'
+!C22.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW19')
+!HW19.name := 'Nina Petrova'
+!HW19.dateOfBirth := Date('1982-10-10')
+!HW19.phoneNumber := '+351-21-555-0100'
+
+!new Waiter('W43')
+!W43.name := 'Paolo Greco'
+!W43.dateOfBirth := Date('1998-04-06')
+!W43.phoneNumber := '+39-345-555-2233'
+!W43.spokenLanguage := #Italian
+!insert (HW19, W43) into HeadWaiterWaiter
+
+!new Manager('M16')
+!M16.name := 'Ava Thompson'
+!M16.dateOfBirth := Date('1977-05-25')
+!M16.phoneNumber := '+1-503-555-3322'
+
+!new Cook('K30')
+!K30.name := 'Farid Benali'
+!K30.dateOfBirth := Date('1986-01-17')
+!K30.phoneNumber := '+212-5-555-7788'
+!K30.yearsOfExperience := 6
+
+!new Cook('K31')
+!K31.name := 'Farid Benali'
+!K31.dateOfBirth := Date('1986-01-17')
+!K31.phoneNumber := '+212-5-555-7788'
+!K31.yearsOfExperience := 6
+
+!new Cook('K32')
+!K32.name := 'Farid Benali'
+!K32.dateOfBirth := Date('1986-01-17')
+!K32.phoneNumber := '+212-5-555-7788'
+!K32.yearsOfExperience := 6
+
+!new Chef('CH33')
+!CH33.name := 'Samantha Lee'
+!CH33.dateOfBirth := Date('1991-09-09')
+!CH33.phoneNumber := '+1-415-555-1109'
+!insert (CH33, K30) into ChefCook
+
+!new Chef('CH34')
+!CH34.name := 'Tomás Silva'
+!CH34.dateOfBirth := Date('1989-12-20')
+!CH34.phoneNumber := '+55-11-555-8899'
+!insert (CH34, K31) into ChefCook
+
+!new Chef('CH35')
+!CH35.name := 'Helena Nowak'
+!CH35.dateOfBirth := Date('1994-06-02')
+!CH35.phoneNumber := '+48-22-555-9911'
+!insert (CH35, K32) into ChefCook
+
+!new BusDriver('BD22')
+!BD22.name := 'Seán Murphy'
+!BD22.dateOfBirth := Date('1973-03-13')
+!BD22.phoneNumber := '+353-1-555-7781'
+!BD22.driverLicenseNr := 'IE-DL-560044'
+
+!new Individual('IR21')
+!IR21.time := Time('17:45')
+!IR21.date := Date('2026-06-10')
+!IR21.numberPeople := 1
+!IR21.name := 'Walk-in: Jamie Park'
+!IR21.phoneNumber := '+1-206-555-0404'
+!IR21.number := 1201
+!IR21.seating := #Patio
+!IR21.smoking := #NonSmoking
+!insert (R20, IR21) into RestaurantReservation
+!insert (IR21, W43) into ReservationWaiter
+
+!new Individual('IR22')
+!IR22.time := Time('13:00')
+!IR22.date := Date('2026-06-11')
+!IR22.numberPeople := 6
+!IR22.name := 'S. Martins'
+!IR22.phoneNumber := '+55-21-555-5151'
+!IR22.number := 1202
+!IR22.seating := #Inside
+!IR22.smoking := #NonSmoking
+!insert (R20, IR22) into RestaurantReservation
+!insert (IR22, W43) into ReservationWaiter
+
+!new Banquet('BR18')
+!BR18.time := Time('20:30')
+!BR18.date := Date('2026-06-12')
+!BR18.numberPeople := 22
+!BR18.name := 'Marta Kowalska'
+!BR18.phoneNumber := '+49-170-555-6010'
+!BR18.number := 1300
+!BR18.groupName := 'International Chamber Networking Night'
+!BR18.paymentMethod := #Cash
+!BR18.busService := true
+!insert (R20, BR18) into RestaurantReservation
+!insert (BR18, C21) into ReservationCustomer
+!insert (BR18, W43) into ReservationWaiter
+!insert (BR18, BD22) into BanquetBusDriver
+
+!new Table('T70_AMB')
+!T70_AMB.number := 70
+!T70_AMB.description := 'Patio two-top near herb planters'
+!T70_AMB.capacity := 2
+!insert (IR21, T70_AMB) into ReservationTable
+
+!new Table('T71_AMB')
+!T71_AMB.number := 71
+!T71_AMB.description := 'Indoor four-top near open kitchen pass'
+!T71_AMB.capacity := 4
+!insert (IR22, T71_AMB) into ReservationTable
+
+!new Table('T72_AMB')
+!T72_AMB.number := 72
+!T72_AMB.description := 'Indoor four-top adjacent to table 71 (can be joined)'
+!T72_AMB.capacity := 4
+!insert (IR22, T72_AMB) into ReservationTable
+
+!new Table('T80_AMB')
+!T80_AMB.number := 80
+!T80_AMB.description := 'Banquet table by presentation screen'
+!T80_AMB.capacity := 8
+!insert (BR18, T80_AMB) into ReservationTable
+
+!new Table('T81_AMB')
+!T81_AMB.number := 81
+!T81_AMB.description := 'Banquet table center aisle'
+!T81_AMB.capacity := 8
+!insert (BR18, T81_AMB) into ReservationTable
+
+!new Table('T82_AMB')
+!T82_AMB.number := 82
+!T82_AMB.description := 'Banquet table near windows (VIP sponsors)'
+!T82_AMB.capacity := 10
+!insert (BR18, T82_AMB) into ReservationTable
+
+!new Allergen('A4_GLU20')
+!A4_GLU20.type := #Gluten
+
+!new Allergen('A4_NUT20')
+!A4_NUT20.type := #Nuts
+
+!new Allergen('A4_LAC20')
+!A4_LAC20.type := #Lactose
+
+!new Allergen('A4_SEA20')
+!A4_SEA20.type := #Seafood
+
+!new FoodItem('F1001')
+!F1001.number := 401
+!F1001.description := 'Wheat noodles (udon)'
+!F1001.purchaseFlag := true
+!F1001.unit := #Pound
+!insert (F1001, A4_GLU20) into FoodItemAllergen
+
+!new FoodItem('F1002')
+!F1002.number := 402
+!F1002.description := 'Cashews (roasted)'
+!F1002.purchaseFlag := true
+!F1002.unit := #Gram
+!insert (F1002, A4_NUT20) into FoodItemAllergen
+
+!new FoodItem('F1003')
+!F1003.number := 403
+!F1003.description := 'Parmesan cheese'
+!F1003.purchaseFlag := true
+!F1003.unit := #Ounce
+!insert (F1003, A4_LAC20) into FoodItemAllergen
+
+!new FoodItem('F1004')
+!F1004.number := 404
+!F1004.description := 'Octopus (cleaned)'
+!F1004.purchaseFlag := true
+!F1004.unit := #Pound
+!insert (F1004, A4_SEA20) into FoodItemAllergen
+
+!new FoodItem('F1005')
+!F1005.number := 405
+!F1005.description := 'Eggs'
+!F1005.purchaseFlag := true
+!F1005.unit := #Dozen
+
+!new MenuItem('MI53')
+!MI53.description := 'Octopus fritter skewers'
+!MI53.prepTime := 13.0
+!MI53.classification := #Apetizer
+!insert (MI53, CH33) into MenuItemChef
+!insert (MI53, F1004) into MenuItemFoodItem
+!insert (MI53, F1005) into MenuItemFoodItem
+
+!new MenuItem('MI54')
+!MI54.description := 'Cashew pesto udon'
+!MI54.prepTime := 19.0
+!MI54.classification := #Main
+!insert (MI54, CH34) into MenuItemChef
+!insert (MI54, F1001) into MenuItemFoodItem
+!insert (MI54, F1002) into MenuItemFoodItem
+!insert (MI54, F1003) into MenuItemFoodItem
+
+!new MenuItem('MI55')
+!MI55.description := 'Tiramisu jar (espresso-soaked layers)'
+!MI55.prepTime := 8.5
+!MI55.classification := #Dessert
+!insert (MI55, CH35) into MenuItemChef
+!insert (MI55, F1003) into MenuItemFoodItem
+!insert (MI55, F1005) into MenuItemFoodItem
+
+!new MenuItem('MI56')
+!MI56.description := 'Sparkling citrus tonic'
+!MI56.prepTime := 2.5
+!MI56.classification := #Beverage
+!insert (MI56, CH33) into MenuItemChef
+
+!new ItemOrder('IO1901')
+!IO1901.time := Time('18:05')
+!insert (IR21, IO1901) into ReservationItemOrdered
+!insert (IO1901, MI56) into ItemOrderMenuItem
+
+!new ItemOrder('IO1902')
+!IO1902.time := Time('20:50')
+!insert (BR18, IO1902) into ReservationItemOrdered
+!insert (IO1902, MI53) into ItemOrderMenuItem
+
+!new ItemOrder('IO1903')
+!IO1903.time := Time('21:10')
+!insert (BR18, IO1903) into ReservationItemOrdered
+!insert (IO1903, MI54) into ItemOrderMenuItem
+
+!new ItemOrder('IO1904')
+!IO1904.time := Time('21:35')
+!insert (BR18, IO1904) into ReservationItemOrdered
+!insert (IO1904, MI55) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR17')
+!DR17.diet := #Vegetarian
+
+!new ReportedAllergy('RA15')
+!RA15.allergen := #Lactose
+
+!new Restaurant('R25')
+!R25.name := 'Ryokan Riverstone Izakaya'
+
+!new Owner('O54')
+!O54.name := 'Haruto Saitō'
+!O54.percentageShares := 99
+!insert (R25, O54) into RestaurantOwner
+
+!new Owner('O55')
+!O55.name := 'Lê Ánh Nguyên'
+!O55.percentageShares := 1
+!insert (R25, O55) into RestaurantOwner
+
+!new HeadWaiter('HW24')
+!HW24.name := 'Ayesha Khan'
+!HW24.dateOfBirth := Date('1982-02-20')
+!HW24.phoneNumber := '+81 3 5555 0100'
+
+!new Waiter('W53')
+!W53.name := 'Kenji Watanabe'
+!W53.dateOfBirth := Date('1994-09-13')
+!W53.phoneNumber := '+81 3 5555 0101'
+!W53.spokenLanguage := #English
+!insert (HW24, W53) into HeadWaiterWaiter
+
+!new Waiter('W54')
+!W54.name := 'Lucía Ortega'
+!W54.dateOfBirth := Date('1998-01-04')
+!W54.phoneNumber := '+81 3 5555 0102'
+!W54.spokenLanguage := #Spanish
+!insert (HW24, W54) into HeadWaiterWaiter
+
+!new Waiter('W55')
+!W55.name := 'Marius Vogel'
+!W55.dateOfBirth := Date('1993-06-28')
+!W55.phoneNumber := '+81 3 5555 0103'
+!W55.spokenLanguage := #German
+!insert (HW24, W55) into HeadWaiterWaiter
+
+!new Waiter('W56')
+!W56.name := 'Chiara De Santis'
+!W56.dateOfBirth := Date('1999-11-19')
+!W56.phoneNumber := '+81 3 5555 0104'
+!W56.spokenLanguage := #Italian
+!insert (HW24, W56) into HeadWaiterWaiter
+
+!new Waiter('W57')
+!W57.name := 'Noah Williams'
+!W57.dateOfBirth := Date('2002-03-02')
+!W57.phoneNumber := '+81 3 5555 0105'
+!W57.spokenLanguage := #English
+!insert (HW24, W57) into HeadWaiterWaiter
+
+!new Manager('M19')
+!M19.name := 'Soo-jin Park'
+!M19.dateOfBirth := Date('1977-07-07')
+!M19.phoneNumber := '+81 3 5555 0199'
+
+!new Cook('K39')
+!K39.name := 'Boris Ivanov'
+!K39.dateOfBirth := Date('1987-12-01')
+!K39.phoneNumber := '+81 3 5555 0200'
+!K39.yearsOfExperience := 0
+
+!new Cook('K40')
+!K40.name := 'Boris Ivanov'
+!K40.dateOfBirth := Date('1987-12-01')
+!K40.phoneNumber := '+81 3 5555 0200'
+!K40.yearsOfExperience := 0
+
+!new Cook('K41')
+!K41.name := 'Boris Ivanov'
+!K41.dateOfBirth := Date('1987-12-01')
+!K41.phoneNumber := '+81 3 5555 0200'
+!K41.yearsOfExperience := 0
+
+!new Chef('CH42')
+!CH42.name := 'Mai Nakamura'
+!CH42.dateOfBirth := Date('1990-05-15')
+!CH42.phoneNumber := '+81 3 5555 0301'
+!insert (CH42, K39) into ChefCook
+
+!new Chef('CH43')
+!CH43.name := 'Rashid Al-Farsi'
+!CH43.dateOfBirth := Date('1989-08-08')
+!CH43.phoneNumber := '+81 3 5555 0302'
+!insert (CH43, K40) into ChefCook
+
+!new Chef('CH44')
+!CH44.name := 'Elena Popescu'
+!CH44.dateOfBirth := Date('1996-10-10')
+!CH44.phoneNumber := '+81 3 5555 0303'
+!insert (CH44, K41) into ChefCook
+
+!new Allergen('A_GLU25')
+!A_GLU25.type := #Gluten
+
+!new FoodItem('F1301')
+!F1301.number := 500
+!F1301.description := 'Eggs (for custard)'
+!F1301.purchaseFlag := true
+!F1301.unit := #Dozen
+
+!new FoodItem('F1302')
+!F1302.number := 501
+!F1302.description := 'Wheat udon noodles'
+!F1302.purchaseFlag := true
+!F1302.unit := #Pound
+!insert (F1302, A_GLU25) into FoodItemAllergen
+
+!new FoodItem('F1303')
+!F1303.number := 502
+!F1303.description := 'Broth concentrate'
+!F1303.purchaseFlag := true
+!F1303.unit := #Ounce
+
+!new FoodItem('F1304')
+!F1304.number := 503
+!F1304.description := 'Roasted barley tea leaves'
+!F1304.purchaseFlag := false
+!F1304.unit := #Gram
+!insert (F1304, A_GLU25) into FoodItemAllergen
+
+!new MenuItem('MI65')
+!MI65.description := 'Kyoto-style Udon Bowl'
+!MI65.prepTime := 18.0
+!MI65.classification := #Main
+!insert (MI65, CH42) into MenuItemChef
+!insert (MI65, F1302) into MenuItemFoodItem
+!insert (MI65, F1303) into MenuItemFoodItem
+
+!new MenuItem('MI66')
+!MI66.description := 'Matcha Custard Pot'
+!MI66.prepTime := 30.0
+!MI66.classification := #Dessert
+!insert (MI66, CH43) into MenuItemChef
+!insert (MI66, F1301) into MenuItemFoodItem
+
+!new MenuItem('MI67')
+!MI67.description := 'Barley Tea Service'
+!MI67.prepTime := 4.0
+!MI67.classification := #Beverage
+!insert (MI67, CH42) into MenuItemChef
+!insert (MI67, F1304) into MenuItemFoodItem
+
+!new RegularCustomer('C27')
+!C27.name := 'Chloé Martin'
+!C27.prefferedLanguage := #German
+
+!new Individual('IR27')
+!IR27.number := 300
+!IR27.date := Date('2026-04-05')
+!IR27.time := Time('19:10')
+!IR27.numberPeople := 8
+!IR27.name := 'Chloé Martin'
+!IR27.phoneNumber := '+81 80 5555 0300'
+!IR27.seating := #Inside
+!IR27.smoking := #NonSmoking
+!insert (R25, IR27) into RestaurantReservation
+!insert (IR27, C27) into ReservationCustomer
+!insert (IR27, W53) into ReservationWaiter
+
+!new Table('T201_RRI')
+!T201_RRI.number := 201
+!T201_RRI.description := 'Window counter seat 1'
+!T201_RRI.capacity := 1
+!insert (IR27, T201_RRI) into ReservationTable
+
+!new Table('T202_RRI')
+!T202_RRI.number := 202
+!T202_RRI.description := 'Window counter seat 2'
+!T202_RRI.capacity := 1
+!insert (IR27, T202_RRI) into ReservationTable
+
+!new Table('T203_RRI')
+!T203_RRI.number := 203
+!T203_RRI.description := 'Window counter seat 3'
+!T203_RRI.capacity := 1
+!insert (IR27, T203_RRI) into ReservationTable
+
+!new Table('T204_RRI')
+!T204_RRI.number := 204
+!T204_RRI.description := 'Window counter seat 4'
+!T204_RRI.capacity := 1
+!insert (IR27, T204_RRI) into ReservationTable
+
+!new Table('T205_RRI')
+!T205_RRI.number := 205
+!T205_RRI.description := 'Window counter seat 5'
+!T205_RRI.capacity := 1
+!insert (IR27, T205_RRI) into ReservationTable
+
+!new Table('T206_RRI')
+!T206_RRI.number := 206
+!T206_RRI.description := 'Window counter seat 6'
+!T206_RRI.capacity := 1
+!insert (IR27, T206_RRI) into ReservationTable
+
+!new Table('T207_RRI')
+!T207_RRI.number := 207
+!T207_RRI.description := 'Window counter seat 7'
+!T207_RRI.capacity := 1
+!insert (IR27, T207_RRI) into ReservationTable
+
+!new Table('T208_RRI')
+!T208_RRI.number := 208
+!T208_RRI.description := 'Window counter seat 8'
+!T208_RRI.capacity := 1
+!insert (IR27, T208_RRI) into ReservationTable
+
+!new ItemOrder('IO2201')
+!IO2201.time := Time('19:20')
+!insert (IR27, IO2201) into ReservationItemOrdered
+!insert (IO2201, MI67) into ItemOrderMenuItem
+
+!new ItemOrder('IO2202')
+!IO2202.time := Time('19:22')
+!insert (IR27, IO2202) into ReservationItemOrdered
+!insert (IO2202, MI67) into ItemOrderMenuItem
+
+!new ItemOrder('IO2203')
+!IO2203.time := Time('19:35')
+!insert (IR27, IO2203) into ReservationItemOrdered
+!insert (IO2203, MI65) into ItemOrderMenuItem
+
+!new ItemOrder('IO2204')
+!IO2204.time := Time('19:36')
+!insert (IR27, IO2204) into ReservationItemOrdered
+!insert (IO2204, MI65) into ItemOrderMenuItem
+
+!new ItemOrder('IO2205')
+!IO2205.time := Time('20:05')
+!insert (IR27, IO2205) into ReservationItemOrdered
+!insert (IO2205, MI66) into ItemOrderMenuItem
+
+!new ItemOrder('IO2206')
+!IO2206.time := Time('20:06')
+!insert (IR27, IO2206) into ReservationItemOrdered
+!insert (IO2206, MI66) into ItemOrderMenuItem
+
+!new Banquet('BR21')
+!BR21.number := 301
+!BR21.date := Date('2026-04-05')
+!BR21.time := Time('20:00')
+!BR21.numberPeople := 12
+!BR21.name := 'C. Martin (Host)'
+!BR21.phoneNumber := '+81 80 5555 0300'
+!BR21.groupName := 'Osaka Startup Meetup (Tokyo Chapter)'
+!BR21.paymentMethod := #Cash
+!BR21.busService := false
+!insert (R25, BR21) into RestaurantReservation
+!insert (BR21, C27) into ReservationCustomer
+!insert (BR21, W53) into ReservationWaiter
+!insert (BR21, W54) into ReservationWaiter
+
+!new Table('T209_RRI')
+!T209_RRI.number := 209
+!T209_RRI.description := 'Tatami room table A'
+!T209_RRI.capacity := 4
+!insert (BR21, T209_RRI) into ReservationTable
+
+!new Table('T210_RRI')
+!T210_RRI.number := 210
+!T210_RRI.description := 'Tatami room table B'
+!T210_RRI.capacity := 4
+!insert (BR21, T210_RRI) into ReservationTable
+
+!new Table('T211_RRI')
+!T211_RRI.number := 211
+!T211_RRI.description := 'Tatami room table C'
+!T211_RRI.capacity := 4
+!insert (BR21, T211_RRI) into ReservationTable
+
+!new DietaryRequirement('DR22')
+!DR22.diet := #Kosher
+
+!new ReportedAllergy('RA22')
+!RA22.allergen := #Nuts
+
+!new Restaurant('R36')
+!R36.name := 'Kiez Koshery'
+
+!new Restaurant('R37')
+!R37.name := 'Desert Road Smokehouse'
+
+!new Owner('O79')
+!O79.name := 'Miriam Klein'
+!O79.percentageShares := 40
+!insert (R36, O79) into RestaurantOwner
+
+!new Owner('O80')
+!O80.name := 'David Rosen'
+!O80.percentageShares := 25
+!insert (R36, O80) into RestaurantOwner
+
+!new Owner('O81')
+!O81.name := 'Selin Yılmaz'
+!O81.percentageShares := 20
+!insert (R36, O81) into RestaurantOwner
+
+!new Owner('O82')
+!O82.name := 'Jakob Weiss'
+!O82.percentageShares := 15
+!insert (R36, O82) into RestaurantOwner
+
+!new Owner('O83')
+!O83.name := 'Wade Thornton'
+!O83.percentageShares := 100
+!insert (R37, O83) into RestaurantOwner
+
+!new RegularCustomer('C39')
+!C39.name := 'Anke Schneider'
+!C39.prefferedLanguage := #German
+
+!new RegularCustomer('C40')
+!C40.name := 'Noah Stein'
+!C40.prefferedLanguage := #English
+
+!new HeadWaiter('HW34')
+!HW34.name := 'Britta Neumann'
+!HW34.dateOfBirth := Date('1980-01-17')
+!HW34.phoneNumber := '+49 30 555 1200'
+
+!new Waiter('W78')
+!W78.name := 'Tarek Mansour'
+!W78.dateOfBirth := Date('1992-06-08')
+!W78.phoneNumber := '+49 30 555 1201'
+!W78.spokenLanguage := #German
+!insert (HW34, W78) into HeadWaiterWaiter
+
+!new Waiter('W79')
+!W79.name := 'Elena Rossi'
+!W79.dateOfBirth := Date('1995-03-26')
+!W79.phoneNumber := '+49 30 555 1202'
+!W79.spokenLanguage := #Italian
+!insert (HW34, W79) into HeadWaiterWaiter
+
+!new HeadWaiter('HW35')
+!HW35.name := 'Jolene Hart'
+!HW35.dateOfBirth := Date('1984-09-04')
+!HW35.phoneNumber := '+1 512 555 2200'
+
+!new Waiter('W80')
+!W80.name := 'Mason Cole'
+!W80.dateOfBirth := Date('1990-02-12')
+!W80.phoneNumber := '+1 512 555 2201'
+!W80.spokenLanguage := #English
+!insert (HW35, W80) into HeadWaiterWaiter
+
+!new Waiter('W81')
+!W81.name := 'Camila Reyes'
+!W81.dateOfBirth := Date('1996-07-21')
+!W81.phoneNumber := '+1 512 555 2202'
+!W81.spokenLanguage := #Spanish
+!insert (HW35, W81) into HeadWaiterWaiter
+
+!new Waiter('W82')
+!W82.name := 'Jonas Richter'
+!W82.dateOfBirth := Date('1993-11-02')
+!W82.phoneNumber := '+1 512 555 2203'
+!W82.spokenLanguage := #German
+!insert (HW35, W82) into HeadWaiterWaiter
+
+!new Cook('K58')
+!K58.name := 'Farah Haddad'
+!K58.dateOfBirth := Date('1979-05-09')
+!K58.phoneNumber := '+49 30 555 3300'
+!K58.yearsOfExperience := 18
+
+!new Cook('K59')
+!K59.name := 'Farah Haddad'
+!K59.dateOfBirth := Date('1979-05-09')
+!K59.phoneNumber := '+49 30 555 3300'
+!K59.yearsOfExperience := 18
+
+!new Cook('K60')
+!K60.name := 'Farah Haddad'
+!K60.dateOfBirth := Date('1979-05-09')
+!K60.phoneNumber := '+49 30 555 3300'
+!K60.yearsOfExperience := 18
+
+!new Cook('K61')
+!K61.name := 'Hank Miller'
+!K61.dateOfBirth := Date('1986-12-28')
+!K61.phoneNumber := '+1 512 555 3301'
+!K61.yearsOfExperience := 6
+
+!new Chef('CH62')
+!CH62.name := 'Leila Cohen'
+!CH62.dateOfBirth := Date('1991-04-15')
+!CH62.phoneNumber := '+49 30 555 3310'
+!insert (CH62, K58) into ChefCook
+
+!new Chef('CH63')
+!CH63.name := 'Felix Brandt'
+!CH63.dateOfBirth := Date('1988-10-07')
+!CH63.phoneNumber := '+49 30 555 3311'
+!insert (CH63, K59) into ChefCook
+
+!new Chef('CH64')
+!CH64.name := 'Sara Ben-David'
+!CH64.dateOfBirth := Date('1994-02-20')
+!CH64.phoneNumber := '+49 30 555 3312'
+!insert (CH64, K60) into ChefCook
+
+!new Chef('CH65')
+!CH65.name := 'Travis King'
+!CH65.dateOfBirth := Date('1985-08-02')
+!CH65.phoneNumber := '+1 512 555 3313'
+!insert (CH65, K61) into ChefCook
+
+!new Manager('M25')
+!M25.name := 'Petra Lange'
+!M25.dateOfBirth := Date('1973-06-18')
+!M25.phoneNumber := '+49 30 555 4400'
+
+!new Manager('M26')
+!M26.name := 'Riley Dawson'
+!M26.dateOfBirth := Date('1977-01-26')
+!M26.phoneNumber := '+1 512 555 4401'
+
+!new BusDriver('BD34')
+!BD34.name := 'Scott Nguyen'
+!BD34.dateOfBirth := Date('1970-03-13')
+!BD34.phoneNumber := '+1 512 555 5500'
+!BD34.driverLicenseNr := 'TX-CDL-448812'
+
+!new BusDriver('BD35')
+!BD35.name := 'Marisol Peña'
+!BD35.dateOfBirth := Date('1982-09-30')
+!BD35.phoneNumber := '+1 512 555 5501'
+!BD35.driverLicenseNr := 'TX-CDL-772190'
+
+!new Allergen('A1_KK')
+!A1_KK.type := #Gluten
+
+!new Allergen('A2_KK')
+!A2_KK.type := #Lactose
+
+!new Allergen('A3_KK')
+!A3_KK.type := #Nuts
+
+!new Allergen('A4_KK')
+!A4_KK.type := #Seafood
+
+!new FoodItem('F1701')
+!F1701.number := 401
+!F1701.description := 'Smoked beef brisket'
+!F1701.purchaseFlag := true
+!F1701.unit := #Pound
+
+!new FoodItem('F1702')
+!F1702.number := 402
+!F1702.description := 'BBQ sauce (wheat-thickened)'
+!F1702.purchaseFlag := true
+!F1702.unit := #Ounce
+!insert (F1702, A1_KK) into FoodItemAllergen
+
+!new FoodItem('F1703')
+!F1703.number := 403
+!F1703.description := 'Sesame bagel (wheat)'
+!F1703.purchaseFlag := true
+!F1703.unit := #Dozen
+!insert (F1703, A1_KK) into FoodItemAllergen
+
+!new FoodItem('F1704')
+!F1704.number := 404
+!F1704.description := 'Cream cheese'
+!F1704.purchaseFlag := true
+!F1704.unit := #Ounce
+!insert (F1704, A2_KK) into FoodItemAllergen
+
+!new FoodItem('F1705')
+!F1705.number := 405
+!F1705.description := 'Peanut-cocoa filling'
+!F1705.purchaseFlag := false
+!F1705.unit := #Ounce
+!insert (F1705, A3_KK) into FoodItemAllergen
+
+!new FoodItem('F1706')
+!F1706.number := 406
+!F1706.description := 'Shrimp (peeled)'
+!F1706.purchaseFlag := true
+!F1706.unit := #Pound
+!insert (F1706, A4_KK) into FoodItemAllergen
+
+!new FoodItem('F1707')
+!F1707.number := 407
+!F1707.description := 'Buttered brioche bun'
+!F1707.purchaseFlag := true
+!F1707.unit := #Dozen
+!insert (F1707, A1_KK) into FoodItemAllergen
+!insert (F1707, A2_KK) into FoodItemAllergen
+
+!new FoodItem('F1708')
+!F1708.number := 408
+!F1708.description := 'Walnut brownie base (milk + flour)'
+!F1708.purchaseFlag := true
+!F1708.unit := #Sheet
+!insert (F1708, A1_KK) into FoodItemAllergen
+!insert (F1708, A2_KK) into FoodItemAllergen
+!insert (F1708, A3_KK) into FoodItemAllergen
+
+!new FoodItem('F1709')
+!F1709.number := 409
+!F1709.description := 'Barley malt extract'
+!F1709.purchaseFlag := true
+!F1709.unit := #Gram
+!insert (F1709, A1_KK) into FoodItemAllergen
+
+!new MenuItem('MI93')
+!MI93.description := 'Bagel & schmear'
+!MI93.prepTime := 4.0
+!MI93.classification := #Apetizer
+!insert (MI93, CH62) into MenuItemChef
+!insert (MI93, F1703) into MenuItemFoodItem
+!insert (MI93, F1704) into MenuItemFoodItem
+
+!new MenuItem('MI94')
+!MI94.description := 'Brisket plate with sauce'
+!MI94.prepTime := 17.0
+!MI94.classification := #Main
+!insert (MI94, CH65) into MenuItemChef
+!insert (MI94, F1701) into MenuItemFoodItem
+!insert (MI94, F1702) into MenuItemFoodItem
+
+!new MenuItem('MI95')
+!MI95.description := 'Shrimp brioche slider'
+!MI95.prepTime := 11.5
+!MI95.classification := #Main
+!insert (MI95, CH63) into MenuItemChef
+!insert (MI95, F1706) into MenuItemFoodItem
+!insert (MI95, F1707) into MenuItemFoodItem
+
+!new MenuItem('MI96')
+!MI96.description := 'Peanut-walnut brownie square'
+!MI96.prepTime := 9.5
+!MI96.classification := #Dessert
+!insert (MI96, CH64) into MenuItemChef
+!insert (MI96, F1705) into MenuItemFoodItem
+!insert (MI96, F1708) into MenuItemFoodItem
+
+!new MenuItem('MI97')
+!MI97.description := 'House lager (draft)'
+!MI97.prepTime := 1.0
+!MI97.classification := #Beverage
+!insert (MI97, CH65) into MenuItemChef
+!insert (MI97, F1709) into MenuItemFoodItem
+
+!new Individual('IR39')
+!IR39.time := Time('08:15')
+!IR39.date := Date('2026-06-14')
+!IR39.numberPeople := 1
+!IR39.name := 'Anke Schneider'
+!IR39.phoneNumber := '+49 170 555 9090'
+!IR39.number := 1001
+!IR39.seating := #Inside
+!IR39.smoking := #NonSmoking
+!insert (R36, IR39) into RestaurantReservation
+!insert (IR39, C39) into ReservationCustomer
+!insert (IR39, W78) into ReservationWaiter
+
+!new Table('T100_KK')
+!T100_KK.number := 100
+!T100_KK.description := 'Counter-side two-top'
+!T100_KK.capacity := 2
+!insert (IR39, T100_KK) into ReservationTable
+
+!new ItemOrder('IO2801')
+!IO2801.time := Time('08:22')
+!insert (IR39, IO2801) into ReservationItemOrdered
+!insert (IO2801, MI93) into ItemOrderMenuItem
+
+!new Banquet('BR28')
+!BR28.time := Time('18:30')
+!BR28.date := Date('2026-06-14')
+!BR28.numberPeople := 12
+!BR28.name := 'Noah Stein'
+!BR28.phoneNumber := '+49 30 777 1212'
+!BR28.number := 2002
+!BR28.groupName := 'Startup Shabbat Dinner'
+!BR28.paymentMethod := #Cash
+!BR28.busService := false
+!insert (R36, BR28) into RestaurantReservation
+!insert (BR28, C40) into ReservationCustomer
+!insert (BR28, W78) into ReservationWaiter
+!insert (BR28, W79) into ReservationWaiter
+
+!new Table('T110_KK')
+!T110_KK.number := 110
+!T110_KK.description := 'Long table near bookcase'
+!T110_KK.capacity := 8
+!insert (BR28, T110_KK) into ReservationTable
+
+!new Table('T111_KK')
+!T111_KK.number := 111
+!T111_KK.description := 'Four-top joined to banquet end'
+!T111_KK.capacity := 4
+!insert (BR28, T111_KK) into ReservationTable
+
+!new ItemOrder('IO2802')
+!IO2802.time := Time('18:45')
+!insert (BR28, IO2802) into ReservationItemOrdered
+!insert (IO2802, MI93) into ItemOrderMenuItem
+
+!new ItemOrder('IO2803')
+!IO2803.time := Time('18:46')
+!insert (BR28, IO2803) into ReservationItemOrdered
+!insert (IO2803, MI93) into ItemOrderMenuItem
+
+!new ItemOrder('IO2804')
+!IO2804.time := Time('19:05')
+!insert (BR28, IO2804) into ReservationItemOrdered
+!insert (IO2804, MI95) into ItemOrderMenuItem
+
+!new ItemOrder('IO2805')
+!IO2805.time := Time('19:06')
+!insert (BR28, IO2805) into ReservationItemOrdered
+!insert (IO2805, MI95) into ItemOrderMenuItem
+
+!new ItemOrder('IO2806')
+!IO2806.time := Time('19:10')
+!insert (BR28, IO2806) into ReservationItemOrdered
+!insert (IO2806, MI96) into ItemOrderMenuItem
+
+!new Individual('IR40')
+!IR40.time := Time('20:00')
+!IR40.date := Date('2026-06-20')
+!IR40.numberPeople := 8
+!IR40.name := 'Casey Harper'
+!IR40.phoneNumber := '+1 512 555 7788'
+!IR40.number := 3003
+!IR40.seating := #Patio
+!IR40.smoking := #Smoking
+!insert (R37, IR40) into RestaurantReservation
+!insert (IR40, W80) into ReservationWaiter
+
+!new Table('T210_DRS')
+!T210_DRS.number := 210
+!T210_DRS.description := 'Patio six-top near fire pit'
+!T210_DRS.capacity := 6
+!insert (IR40, T210_DRS) into ReservationTable
+
+!new Table('T211_DRS')
+!T211_DRS.number := 211
+!T211_DRS.description := 'Patio four-top pulled in'
+!T211_DRS.capacity := 4
+!insert (IR40, T211_DRS) into ReservationTable
+
+!new ItemOrder('IO2807')
+!IO2807.time := Time('20:10')
+!insert (IR40, IO2807) into ReservationItemOrdered
+!insert (IO2807, MI94) into ItemOrderMenuItem
+
+!new ItemOrder('IO2808')
+!IO2808.time := Time('20:11')
+!insert (IR40, IO2808) into ReservationItemOrdered
+!insert (IO2808, MI94) into ItemOrderMenuItem
+
+!new ItemOrder('IO2809')
+!IO2809.time := Time('20:18')
+!insert (IR40, IO2809) into ReservationItemOrdered
+!insert (IO2809, MI97) into ItemOrderMenuItem
+
+!new ItemOrder('IO2810')
+!IO2810.time := Time('20:19')
+!insert (IR40, IO2810) into ReservationItemOrdered
+!insert (IO2810, MI97) into ItemOrderMenuItem
+
+!new ItemOrder('IO2811')
+!IO2811.time := Time('20:40')
+!insert (IR40, IO2811) into ReservationItemOrdered
+!insert (IO2811, MI96) into ItemOrderMenuItem
+
+!new Banquet('BR29')
+!BR29.time := Time('17:00')
+!BR29.date := Date('2026-06-21')
+!BR29.numberPeople := 70
+!BR29.name := 'Morgan Ellis'
+!BR29.phoneNumber := '+1 512 555 9900'
+!BR29.number := 4004
+!BR29.groupName := 'Veterans Reunion'
+!BR29.paymentMethod := #CreditCard
+!BR29.busService := true
+!insert (R37, BR29) into RestaurantReservation
+!insert (BR29, BD34) into BanquetBusDriver
+!insert (BR29, BD35) into BanquetBusDriver
+!insert (BR29, W80) into ReservationWaiter
+!insert (BR29, W81) into ReservationWaiter
+!insert (BR29, W82) into ReservationWaiter
+
+!new Table('T300_DRS')
+!T300_DRS.number := 300
+!T300_DRS.description := 'Banquet hall row 1'
+!T300_DRS.capacity := 20
+!insert (BR29, T300_DRS) into ReservationTable
+
+!new Table('T301_DRS')
+!T301_DRS.number := 301
+!T301_DRS.description := 'Banquet hall row 2'
+!T301_DRS.capacity := 20
+!insert (BR29, T301_DRS) into ReservationTable
+
+!new Table('T302_DRS')
+!T302_DRS.number := 302
+!T302_DRS.description := 'Banquet hall row 3'
+!T302_DRS.capacity := 15
+!insert (BR29, T302_DRS) into ReservationTable
+
+!new Table('T303_DRS')
+!T303_DRS.number := 303
+!T303_DRS.description := 'Banquet hall row 4'
+!T303_DRS.capacity := 15
+!insert (BR29, T303_DRS) into ReservationTable
+
+!new ItemOrder('IO2812')
+!IO2812.time := Time('17:20')
+!insert (BR29, IO2812) into ReservationItemOrdered
+!insert (IO2812, MI97) into ItemOrderMenuItem
+
+!new ItemOrder('IO2813')
+!IO2813.time := Time('17:21')
+!insert (BR29, IO2813) into ReservationItemOrdered
+!insert (IO2813, MI97) into ItemOrderMenuItem
+
+!new ItemOrder('IO2814')
+!IO2814.time := Time('17:22')
+!insert (BR29, IO2814) into ReservationItemOrdered
+!insert (IO2814, MI97) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR30')
+!DR30.diet := #Kosher
+
+!new DietaryRequirement('DR31')
+!DR31.diet := #Vegetarian
+
+!new ReportedAllergy('RA30')
+!RA30.allergen := #Seafood
+
+!new ReportedAllergy('RA31')
+!RA31.allergen := #Gluten
+
+!new Restaurant('R39')
+!R39.name := 'Himalayan Steam & Sourdough'
+
+!new Restaurant('R40')
+!R40.name := 'Cedar Reef Rotisserie'
+
+!new Owner('O87')
+!O87.name := 'Tenzin Norbu'
+!O87.percentageShares := 100
+!insert (R39, O87) into RestaurantOwner
+
+!new Owner('O88')
+!O88.name := 'Tenzin Norbu'
+!O88.percentageShares := 0
+!insert (R40, O88) into RestaurantOwner
+
+!new Owner('O89')
+!O89.name := 'Catherine Dubois'
+!O89.percentageShares := 40
+!insert (R40, O89) into RestaurantOwner
+
+!new Owner('O90')
+!O90.name := 'Adeola Okoye'
+!O90.percentageShares := 30
+!insert (R40, O90) into RestaurantOwner
+
+!new Owner('O91')
+!O91.name := 'Håkon Strand'
+!O91.percentageShares := 30
+!insert (R40, O91) into RestaurantOwner
+
+!new RegularCustomer('C43')
+!C43.name := 'Mina El-Sherif'
+!C43.prefferedLanguage := #English
+
+!new RegularCustomer('C44')
+!C44.name := 'Jonas Weber'
+!C44.prefferedLanguage := #German
+
+!new HeadWaiter('HW37')
+!HW37.name := 'Rosa Martínez'
+!HW37.dateOfBirth := Date('1981-05-28')
+!HW37.phoneNumber := '+34-91-555-0191'
+
+!new HeadWaiter('HW38')
+!HW38.name := 'Giovanni De Luca'
+!HW38.dateOfBirth := Date('1970-01-03')
+!HW38.phoneNumber := '+39-06-555-0130'
+
+!new Waiter('W87')
+!W87.name := 'Sara Ibrahim'
+!W87.dateOfBirth := Date('2002-09-09')
+!W87.phoneNumber := '+20-11-555-0108'
+!W87.spokenLanguage := #English
+!insert (HW37, W87) into HeadWaiterWaiter
+
+!new Waiter('W88')
+!W88.name := 'Luis Herrera'
+!W88.dateOfBirth := Date('1998-04-14')
+!W88.phoneNumber := '+52-55-5555-0119'
+!W88.spokenLanguage := #Spanish
+!insert (HW37, W88) into HeadWaiterWaiter
+
+!new Waiter('W89')
+!W89.name := 'Emma Rossi'
+!W89.dateOfBirth := Date('1995-12-20')
+!W89.phoneNumber := '+1-503-555-0166'
+!W89.spokenLanguage := #Italian
+!insert (HW37, W89) into HeadWaiterWaiter
+
+!new Waiter('W90')
+!W90.name := 'Lukas Schneider'
+!W90.dateOfBirth := Date('1991-07-02')
+!W90.phoneNumber := '+49-40-555-0172'
+!W90.spokenLanguage := #German
+!insert (HW38, W90) into HeadWaiterWaiter
+
+!new Cook('K65')
+!K65.name := 'Somchai Prasert'
+!K65.dateOfBirth := Date('1948-02-11')
+!K65.phoneNumber := '+66-81-555-0144'
+!K65.yearsOfExperience := 70
+
+!new Cook('K66')
+!K66.name := 'Somchai Prasert'
+!K66.dateOfBirth := Date('1948-02-11')
+!K66.phoneNumber := '+66-81-555-0144'
+!K66.yearsOfExperience := 70
+
+!new Cook('K67')
+!K67.name := 'Somchai Prasert'
+!K67.dateOfBirth := Date('1948-02-11')
+!K67.phoneNumber := '+66-81-555-0144'
+!K67.yearsOfExperience := 70
+
+!new Cook('K68')
+!K68.name := 'Ava Nguyen'
+!K68.dateOfBirth := Date('2000-03-30')
+!K68.phoneNumber := '+1-206-555-0105'
+!K68.yearsOfExperience := 0
+
+!new Cook('K69')
+!K69.name := 'Ava Nguyen'
+!K69.dateOfBirth := Date('2000-03-30')
+!K69.phoneNumber := '+1-206-555-0105'
+!K69.yearsOfExperience := 0
+
+!new Chef('CH69')
+!CH69.name := 'Farid Hossain'
+!CH69.dateOfBirth := Date('1988-10-10')
+!CH69.phoneNumber := '+880-17-5555-0123'
+!insert (CH69, K65) into ChefCook
+
+!new Chef('CH70')
+!CH70.name := 'Nina Petrović'
+!CH70.dateOfBirth := Date('1993-06-06')
+!CH70.phoneNumber := '+381-64-555-0120'
+!insert (CH70, K66) into ChefCook
+
+!new Chef('CH71')
+!CH71.name := 'Ibrahim Diallo'
+!CH71.dateOfBirth := Date('1985-08-25')
+!CH71.phoneNumber := '+223-70-555-0190'
+!insert (CH71, K67) into ChefCook
+
+!new Chef('CH72')
+!CH72.name := 'Omar Alavi'
+!CH72.dateOfBirth := Date('1997-01-17')
+!CH72.phoneNumber := '+971-55-555-0188'
+!insert (CH72, K68) into ChefCook
+
+!new Chef('CH73')
+!CH73.name := 'Hannah Cohen'
+!CH73.dateOfBirth := Date('1990-11-29')
+!CH73.phoneNumber := '+1-312-555-0112'
+!insert (CH73, K69) into ChefCook
+
+!new Allergen('AL9_E4')
+!AL9_E4.type := #Gluten
+
+!new Allergen('AL10_E4')
+!AL10_E4.type := #Lactose
+
+!new Allergen('AL11_E4')
+!AL11_E4.type := #Nuts
+
+!new Allergen('AL12_E4')
+!AL12_E4.type := #Seafood
+
+!new FoodItem('FI40_E4')
+!FI40_E4.number := 40
+!FI40_E4.description := 'Chef’s All-Flags concentrate (test batch)'
+!FI40_E4.purchaseFlag := false
+!FI40_E4.unit := #Ounce
+!insert (FI40_E4, AL9_E4) into FoodItemAllergen
+!insert (FI40_E4, AL10_E4) into FoodItemAllergen
+!insert (FI40_E4, AL11_E4) into FoodItemAllergen
+!insert (FI40_E4, AL12_E4) into FoodItemAllergen
+
+!new FoodItem('FI41_E4')
+!FI41_E4.number := 41
+!FI41_E4.description := 'Steamed dumpling wrappers'
+!FI41_E4.purchaseFlag := true
+!FI41_E4.unit := #Dozen
+!insert (FI41_E4, AL9_E4) into FoodItemAllergen
+
+!new FoodItem('FI42_E4')
+!FI42_E4.number := 42
+!FI42_E4.description := 'Roasted barley tea'
+!FI42_E4.purchaseFlag := true
+!FI42_E4.unit := #Gram
+!insert (FI42_E4, AL9_E4) into FoodItemAllergen
+
+!new FoodItem('FI43_E4')
+!FI43_E4.number := 43
+!FI43_E4.description := 'Cultured butter'
+!FI43_E4.purchaseFlag := true
+!FI43_E4.unit := #Ounce
+!insert (FI43_E4, AL10_E4) into FoodItemAllergen
+
+!new FoodItem('FI44_E4')
+!FI44_E4.number := 44
+!FI44_E4.description := 'Ground pistachio'
+!FI44_E4.purchaseFlag := true
+!FI44_E4.unit := #Gram
+!insert (FI44_E4, AL11_E4) into FoodItemAllergen
+
+!new FoodItem('FI45_E4')
+!FI45_E4.number := 45
+!FI45_E4.description := 'Dried shrimp flakes'
+!FI45_E4.purchaseFlag := true
+!FI45_E4.unit := #Gram
+!insert (FI45_E4, AL12_E4) into FoodItemAllergen
+
+!new MenuItem('MI102')
+!MI102.description := 'Dumplings with Caution Sauce'
+!MI102.prepTime := 7.0
+!MI102.classification := #Apetizer
+!insert (MI102, CH69) into MenuItemChef
+!insert (MI102, FI41_E4) into MenuItemFoodItem
+!insert (MI102, FI40_E4) into MenuItemFoodItem
+
+!new MenuItem('MI103')
+!MI103.description := 'Barley Tea, Double-Strength'
+!MI103.prepTime := 0.5
+!MI103.classification := #Beverage
+!insert (MI103, CH70) into MenuItemChef
+!insert (MI103, FI42_E4) into MenuItemFoodItem
+
+!new MenuItem('MI104')
+!MI104.description := '240-minute Butter-Braised Rotisserie Base'
+!MI104.prepTime := 240.0
+!MI104.classification := #Main
+!insert (MI104, CH69) into MenuItemChef
+!insert (MI104, FI43_E4) into MenuItemFoodItem
+!insert (MI104, FI40_E4) into MenuItemFoodItem
+
+!new MenuItem('MI105')
+!MI105.description := 'Pistachio Sand (tiny dessert)'
+!MI105.prepTime := 1.0
+!MI105.classification := #Dessert
+!insert (MI105, CH72) into MenuItemChef
+!insert (MI105, FI44_E4) into MenuItemFoodItem
+
+!new MenuItem('MI106')
+!MI106.description := 'Shrimp-Flake Crackle Over Dumpling Skin'
+!MI106.prepTime := 4.0
+!MI106.classification := #Main
+!insert (MI106, CH73) into MenuItemChef
+!insert (MI106, FI41_E4) into MenuItemFoodItem
+!insert (MI106, FI45_E4) into MenuItemFoodItem
+
+!new Individual('IR43')
+!IR43.time := Time('19:00')
+!IR43.date := Date('2026-03-13')
+!IR43.numberPeople := 3
+!IR43.name := 'Алексей'
+!IR43.phoneNumber := ''
+!IR43.number := 0
+!IR43.seating := #Inside
+!IR43.smoking := #NonSmoking
+!insert (IR43, W87) into ReservationWaiter
+!insert (IR43, W88) into ReservationWaiter
+
+!new Table('T500_E4')
+!T500_E4.number := 0
+!T500_E4.description := 'Narrow inside ledge table'
+!T500_E4.capacity := 2
+!insert (IR43, T500_E4) into ReservationTable
+
+!new Table('T501_E4')
+!T501_E4.number := -7
+!T501_E4.description := 'Temporary stool-table (inventory tag -7)'
+!T501_E4.capacity := 1
+!insert (IR43, T501_E4) into ReservationTable
+
+!new ItemOrder('IO3001')
+!IO3001.time := Time('19:00')
+!insert (IR43, IO3001) into ReservationItemOrdered
+!insert (IO3001, MI102) into ItemOrderMenuItem
+
+!new ItemOrder('IO3002')
+!IO3002.time := Time('19:00')
+!insert (IR43, IO3002) into ReservationItemOrdered
+!insert (IO3002, MI103) into ItemOrderMenuItem
+
+!new Banquet('BR31')
+!BR31.time := Time('02:22')
+!BR31.date := Date('2026-08-08')
+!BR31.numberPeople := 120
+!BR31.name := 'Mina El-Sherif'
+!BR31.phoneNumber := '+1-416-555-0200'
+!BR31.number := 99005
+!BR31.groupName := 'Coastal Night Fishermen Cooperative'
+!BR31.paymentMethod := #Cash
+!BR31.busService := false
+!insert (R40, BR31) into RestaurantReservation
+!insert (BR31, C43) into ReservationCustomer
+!insert (BR31, W89) into ReservationWaiter
+
+!new Table('T600_E4')
+!T600_E4.number := 600
+!T600_E4.description := 'One-piece hall table (custom build)'
+!T600_E4.capacity := 120
+!insert (BR31, T600_E4) into ReservationTable
+
+!new BusDriver('BD38')
+!BD38.name := 'Svetlana Ivanova'
+!BD38.dateOfBirth := Date('1982-02-02')
+!BD38.phoneNumber := '+7-921-555-0101'
+!BD38.driverLicenseNr := 'RU-SPB-2202'
+!insert (BR31, BD38) into BanquetBusDriver
+
+!new BusDriver('BD39')
+!BD39.name := 'José da Silva'
+!BD39.dateOfBirth := Date('1977-07-19')
+!BD39.phoneNumber := '+55-21-5555-0144'
+!BD39.driverLicenseNr := 'BR-RJ-7719'
+!insert (BR31, BD39) into BanquetBusDriver
+
+!new BusDriver('BD40')
+!BD40.name := 'Fatou Ndiaye'
+!BD40.dateOfBirth := Date('1990-09-09')
+!BD40.phoneNumber := '+221-76-555-0176'
+!BD40.driverLicenseNr := 'SN-DK-9009'
+!insert (BR31, BD40) into BanquetBusDriver
+
+!new BusDriver('BD41')
+!BD41.name := 'Arman Hakobyan'
+!BD41.dateOfBirth := Date('1986-12-12')
+!BD41.phoneNumber := '+374-77-555-012'
+!BD41.driverLicenseNr := 'AM-1212-86'
+!insert (BR31, BD41) into BanquetBusDriver
+
+!new BusDriver('BD42')
+!BD42.name := 'Linh Pham'
+!BD42.dateOfBirth := Date('1994-04-24')
+!BD42.phoneNumber := '+84-90-555-0199'
+!BD42.driverLicenseNr := 'VN-HCM-4424'
+!insert (BR31, BD42) into BanquetBusDriver
+
+!new Individual('IR44')
+!IR44.time := Time('23:58')
+!IR44.date := Date('2026-08-07')
+!IR44.numberPeople := 1
+!IR44.name := 'Mina El-Sherif'
+!IR44.phoneNumber := '+1-416-555-0200'
+!IR44.number := 99006
+!IR44.seating := #Patio
+!IR44.smoking := #Smoking
+!insert (R39, IR44) into RestaurantReservation
+!insert (IR44, C43) into ReservationCustomer
+!insert (IR44, W90) into ReservationWaiter
+
+!new Table('T900_E4')
+!T900_E4.number := 900
+!T900_E4.description := 'Patio mega-table held for privacy'
+!T900_E4.capacity := 12
+!insert (IR44, T900_E4) into ReservationTable
+
+!new ItemOrder('IO3003')
+!IO3003.time := Time('23:59')
+!insert (IR44, IO3003) into ReservationItemOrdered
+!insert (IO3003, MI105) into ItemOrderMenuItem
+
+!new ItemOrder('IO3004')
+!IO3004.time := Time('23:59')
+!insert (IR44, IO3004) into ReservationItemOrdered
+!insert (IO3004, MI106) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR33')
+!DR33.diet := #Vegan
+
+!new ReportedAllergy('RA33')
+!RA33.allergen := #Nuts
+

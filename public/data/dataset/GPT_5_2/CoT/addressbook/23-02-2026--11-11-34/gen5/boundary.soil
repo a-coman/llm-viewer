@@ -1,0 +1,27 @@
+!new AddressBook('AB_TwoWay_Employment_1')
+
+!new Person('P_AN_1')
+!P_AN_1.name := 'Anika Ndlovu'
+!P_AN_1.phone := '+27 11 555 0199'
+!P_AN_1.website := 'https://anika-ndlovu.example.za'
+!P_AN_1.email := 'anika.ndlovu@example.za'
+!P_AN_1.title := 'Ms.'
+!insert (AB_TwoWay_Employment_1, P_AN_1) into AddressBookMadeOfContact
+
+!new Company('C_UL_1')
+!C_UL_1.name := 'Ubuntu Logistics (Pty) Ltd.'
+!C_UL_1.phone := '+27 21 400 2200'
+!C_UL_1.website := ''
+!C_UL_1.email := 'hr@ubuntu-logistics.example.za'
+!C_UL_1.industry := 'Logistics'
+!insert (AB_TwoWay_Employment_1, C_UL_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_P_AN_R1_1')
+!Rel_P_AN_R1_1.type := #EMPLOYEE
+!insert (P_AN_1, Rel_P_AN_R1_1) into ContactToRelationship
+!insert (Rel_P_AN_R1_1, C_UL_1) into RelationshipToContact
+
+!new Relationship('Rel_C_UL_R1_1')
+!Rel_C_UL_R1_1.type := #BOSS
+!insert (C_UL_1, Rel_C_UL_R1_1) into ContactToRelationship
+!insert (Rel_C_UL_R1_1, P_AN_1) into RelationshipToContact

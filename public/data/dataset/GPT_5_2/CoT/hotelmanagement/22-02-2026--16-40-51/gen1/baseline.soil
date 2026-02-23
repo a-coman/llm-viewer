@@ -1,0 +1,77 @@
+!new Customer('C1')
+!C1.firstName := 'Marta'
+!C1.lastName := 'García-López'
+
+!new Booking('B1001')
+!B1001.startDate := '2026-04-10'
+!B1001.endDate := '2026-04-14'
+!B1001.canceled := false
+!B1001.bookingId := 1001
+!B1001.confirmed := true
+
+!new RoomReservation('RR1')
+!RR1.checkInDate := '2026-04-10'
+!RR1.checkOutDate := '2026-04-13'
+
+!new RoomReservation('RR2')
+!RR2.checkInDate := '2026-04-13'
+!RR2.checkOutDate := '2026-04-14'
+
+!new Room('R212')
+!R212.numBeds := 2
+!R212.pricePerNight := 120.00
+!R212.occupied := false
+!R212.blocked := false
+!R212.roomNumber := 212
+
+!new Room('R305')
+!R305.numBeds := 1
+!R305.pricePerNight := 95.00
+!R305.occupied := false
+!R305.blocked := false
+!R305.roomNumber := 305
+
+!new RoomExtra('E1')
+!E1.price := 45.00
+!E1.description := 'Breakfast buffet (3 mornings)'
+
+!new RoomExtra('E2')
+!E2.price := 25.00
+!E2.description := 'Late check-out until 14:00'
+
+!new Bill('BL7001')
+!BL7001.price := 430.00
+!BL7001.billId := 7001
+
+!new Bill('BL7002')
+!BL7002.price := 95.00
+!BL7002.billId := 7002
+
+!new FreeRoomTypesDTO('D1')
+!D1.roomTypeDescription := 'Standard Twin (Courtyard View)'
+!D1.numBeds := 2
+!D1.pricePerNight := 120.00
+!D1.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('D2')
+!D2.roomTypeDescription := 'Single Economy (Compact)'
+!D2.numBeds := 1
+!D2.pricePerNight := 95.00
+!D2.numFreeRooms := 2
+
+!insert (B1001, C1) into BookingCustomer
+
+!insert (B1001, RR1) into BookingRoomReservation
+!insert (B1001, RR2) into BookingRoomReservation
+
+!insert (RR1, R212) into RoomReservationRoom
+!insert (RR2, R305) into RoomReservationRoom
+
+!insert (RR1, E1) into RoomReservationExtras
+!insert (RR1, E2) into RoomReservationExtras
+
+!insert (B1001, BL7001) into BookingBill
+!insert (B1001, BL7002) into BookingBill
+
+!insert (BL7001, RR1) into BillRoomReservation
+!insert (BL7002, RR2) into BillRoomReservation

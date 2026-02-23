@@ -1,0 +1,228 @@
+!new Restaurant('R1')
+!R1.name := 'Harbor & Hearth Bistro'
+
+!new Owner('O1')
+!O1.name := 'Amina El-Sayed'
+!O1.percentageShares := 60
+
+!new Owner('O2')
+!O2.name := 'Luca Bianchi'
+!O2.percentageShares := 40
+
+!insert (R1, O1) into RestaurantOwner
+!insert (R1, O2) into RestaurantOwner
+
+!new RegularCustomer('C1')
+!C1.name := 'María Gómez'
+!C1.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW1')
+!HW1.name := 'Heinrich Keller'
+!HW1.dateOfBirth := Date('1978-11-02')
+!HW1.phoneNumber := '+49-30-555-0182'
+
+!new Waiter('W1')
+!W1.name := 'Sofía Álvarez'
+!W1.dateOfBirth := Date('1996-05-14')
+!W1.phoneNumber := '+34-91-555-0101'
+!W1.spokenLanguage := #Spanish
+
+!new Waiter('W2')
+!W2.name := 'Ethan Miller'
+!W2.dateOfBirth := Date('2001-09-21')
+!W2.phoneNumber := '+1-617-555-0147'
+!W2.spokenLanguage := #English
+
+!insert (HW1, W1) into HeadWaiterWaiter
+!insert (HW1, W2) into HeadWaiterWaiter
+
+!new Manager('M1')
+!M1.name := 'Giulia Conti'
+!M1.dateOfBirth := Date('1985-01-30')
+!M1.phoneNumber := '+39-06-555-0120'
+
+!new Cook('K1')
+!K1.name := 'Noah Stein'
+!K1.dateOfBirth := Date('1988-07-08')
+!K1.phoneNumber := '+1-212-555-0177'
+!K1.yearsOfExperience := 12
+
+!new Cook('K2')
+!K2.name := 'Leila Farouk'
+!K2.dateOfBirth := Date('1991-06-23')
+!K2.phoneNumber := '+44-20-555-0111'
+!K2.yearsOfExperience := 8
+
+!new Chef('CH1')
+!CH1.name := 'Priya Nair'
+!CH1.dateOfBirth := Date('1990-03-19')
+!CH1.phoneNumber := '+91-22-555-0133'
+
+!new Chef('CH2')
+!CH2.name := 'Kenji Sato'
+!CH2.dateOfBirth := Date('1992-12-05')
+!CH2.phoneNumber := '+81-3-555-0168'
+
+!insert (CH1, K1) into ChefCook
+!insert (CH2, K2) into ChefCook
+
+!new BusDriver('BD1')
+!BD1.name := 'Omar Haddad'
+!BD1.dateOfBirth := Date('1975-04-11')
+!BD1.phoneNumber := '+44-20-555-0199'
+!BD1.driverLicenseNr := 'UK-DLN-7781-OM'
+
+!new Individual('IR1')
+!IR1.time := Time('19:00')
+!IR1.date := Date('2026-03-05')
+!IR1.numberPeople := 2
+!IR1.name := 'María Gómez'
+!IR1.phoneNumber := '+34-600-123-456'
+!IR1.number := 501
+!IR1.seating := #Inside
+!IR1.smoking := #NonSmoking
+
+!insert (R1, IR1) into RestaurantReservation
+!insert (IR1, C1) into ReservationCustomer
+!insert (IR1, W1) into ReservationWaiter
+
+!new Banquet('BR1')
+!BR1.time := Time('20:00')
+!BR1.date := Date('2026-03-12')
+!BR1.numberPeople := 30
+!BR1.name := 'Dr. S. Patel'
+!BR1.phoneNumber := '+1-415-555-0139'
+!BR1.number := 880
+!BR1.groupName := 'Bay Area Robotics Society'
+!BR1.paymentMethod := #CreditCard
+!BR1.busService := true
+
+!insert (R1, BR1) into RestaurantReservation
+!insert (BR1, W1) into ReservationWaiter
+!insert (BR1, W2) into ReservationWaiter
+!insert (BR1, BD1) into BanquetBusDriver
+
+!new Table('T10')
+!T10.number := 10
+!T10.description := 'Two-top by the window near the fireplace'
+!T10.capacity := 4
+
+!new Table('T20')
+!T20.number := 20
+!T20.description := 'Banquet table left side, near AV screen'
+!T20.capacity := 12
+
+!new Table('T21')
+!T21.number := 21
+!T21.description := 'Banquet table center, open floor'
+!T21.capacity := 12
+
+!new Table('T22')
+!T22.number := 22
+!T22.description := 'Banquet table right side, near patio doors'
+!T22.capacity := 8
+
+!insert (IR1, T10) into ReservationTable
+!insert (BR1, T20) into ReservationTable
+!insert (BR1, T21) into ReservationTable
+!insert (BR1, T22) into ReservationTable
+
+!new Allergen('A_LAC')
+!A_LAC.type := #Lactose
+
+!new Allergen('A_SEA')
+!A_SEA.type := #Seafood
+
+!new Allergen('A_NUT')
+!A_NUT.type := #Nuts
+
+!new Allergen('A_GLU')
+!A_GLU.type := #Gluten
+
+!new FoodItem('F101')
+!F101.number := 101
+!F101.description := 'Wheat flour'
+!F101.purchaseFlag := true
+!F101.unit := #Pound
+
+!new FoodItem('F102')
+!F102.number := 102
+!F102.description := 'Whole milk'
+!F102.purchaseFlag := true
+!F102.unit := #Ounce
+
+!new FoodItem('F103')
+!F103.number := 103
+!F103.description := 'Shrimp (peeled)'
+!F103.purchaseFlag := true
+!F103.unit := #Pound
+
+!new FoodItem('F104')
+!F104.number := 104
+!F104.description := 'Almonds (sliced)'
+!F104.purchaseFlag := true
+!F104.unit := #Gram
+
+!new FoodItem('F105')
+!F105.number := 105
+!F105.description := 'Fresh basil'
+!F105.purchaseFlag := true
+!F105.unit := #Gram
+
+!insert (F101, A_GLU) into FoodItemAllergen
+!insert (F102, A_LAC) into FoodItemAllergen
+!insert (F103, A_SEA) into FoodItemAllergen
+!insert (F104, A_NUT) into FoodItemAllergen
+
+!new MenuItem('MI1')
+!MI1.description := 'Crispy Calamari with lemon-basil aioli'
+!MI1.prepTime := 12.5
+!MI1.classification := #Apetizer
+
+!new MenuItem('MI2')
+!MI2.description := 'Creamy mushroom pasta (house-made noodles)'
+!MI2.prepTime := 18.0
+!MI2.classification := #Main
+
+!new MenuItem('MI3')
+!MI3.description := 'Almond honey tart'
+!MI3.prepTime := 9.0
+!MI3.classification := #Dessert
+
+!insert (MI1, CH1) into MenuItemChef
+!insert (MI2, CH1) into MenuItemChef
+!insert (MI3, CH2) into MenuItemChef
+
+!insert (MI1, F103) into MenuItemFoodItem
+!insert (MI1, F105) into MenuItemFoodItem
+!insert (MI1, F102) into MenuItemFoodItem
+
+!insert (MI2, F101) into MenuItemFoodItem
+!insert (MI2, F102) into MenuItemFoodItem
+
+!insert (MI3, F104) into MenuItemFoodItem
+!insert (MI3, F101) into MenuItemFoodItem
+!insert (MI3, F102) into MenuItemFoodItem
+
+!new ItemOrder('IO1')
+!IO1.time := Time('19:12')
+
+!new ItemOrder('IO2')
+!IO2.time := Time('19:35')
+
+!new ItemOrder('IO3')
+!IO3.time := Time('20:20')
+
+!insert (IR1, IO1) into ReservationItemOrdered
+!insert (IR1, IO2) into ReservationItemOrdered
+!insert (BR1, IO3) into ReservationItemOrdered
+
+!insert (IO1, MI1) into ItemOrderMenuItem
+!insert (IO2, MI2) into ItemOrderMenuItem
+!insert (IO3, MI3) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR1')
+!DR1.diet := #Halal
+
+!new ReportedAllergy('RA1')
+!RA1.allergen := #Nuts

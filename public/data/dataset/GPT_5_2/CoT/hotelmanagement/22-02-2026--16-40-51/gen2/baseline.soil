@@ -1,0 +1,77 @@
+!new Customer('C7')
+!C7.firstName := 'Kenji'
+!C7.lastName := 'Tanaka'
+
+!new Booking('B2045')
+!B2045.bookingId := 2045
+!B2045.startDate := '2026-12-31'
+!B2045.endDate := '2027-01-03'
+!B2045.confirmed := false
+!B2045.canceled := true
+
+!new RoomReservation('RR3_B2045')
+!RR3_B2045.checkInDate := '2026-12-31'
+!RR3_B2045.checkOutDate := '2027-01-03'
+
+!new Room('R508')
+!R508.roomNumber := 508
+!R508.numBeds := 2
+!R508.pricePerNight := 180.00
+!R508.occupied := false
+!R508.blocked := false
+
+!new Room('R510')
+!R510.roomNumber := 510
+!R510.numBeds := 1
+!R510.pricePerNight := 140.00
+!R510.occupied := false
+!R510.blocked := true
+
+!new RoomExtra('E13')
+!E13.description := 'Airport pickup (late-night)'
+!E13.price := 60.00
+
+!new RoomExtra('E14')
+!E14.description := 'Dinner set (2 people, New Year’s menu)'
+!E14.price := 110.00
+
+!new RoomExtra('E15')
+!E15.description := 'Extra futon/bedding set'
+!E15.price := 25.00
+
+!new Bill('BL8010')
+!BL8010.billId := 8010
+!BL8010.price := 375.00
+
+!new FreeRoomTypesDTO('D11')
+!D11.roomTypeDescription := 'Tatami Suite (Japanese-style, shared onsen access)'
+!D11.numBeds := 2
+!D11.pricePerNight := 210.00
+!D11.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('D12')
+!D12.roomTypeDescription := 'Family Connecting Rooms (2 rooms, internal door)'
+!D12.numBeds := 4
+!D12.pricePerNight := 320.00
+!D12.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D13')
+!D13.roomTypeDescription := 'Business Single (High floor, city view)'
+!D13.numBeds := 1
+!D13.pricePerNight := 130.00
+!D13.numFreeRooms := 6
+
+!insert (B2045, C7) into BookingCustomer
+
+!insert (B2045, RR3_B2045) into BookingRoomReservation
+
+!insert (RR3_B2045, R508) into RoomReservationRoom
+!insert (RR3_B2045, R510) into RoomReservationRoom
+
+!insert (RR3_B2045, E13) into RoomReservationExtras
+!insert (RR3_B2045, E14) into RoomReservationExtras
+!insert (RR3_B2045, E15) into RoomReservationExtras
+
+!insert (B2045, BL8010) into BookingBill
+
+!insert (BL8010, RR3_B2045) into BillRoomReservation

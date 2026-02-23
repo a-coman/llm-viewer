@@ -1,0 +1,287 @@
+!new Restaurant('R46')
+!R46.name := 'Aurora Capsule Diner'
+
+!new Restaurant('R47')
+!R47.name := 'Orbital Bento Bar'
+
+!new Owner('O109')
+!O109.name := 'Dr. Selene Kaur'
+!O109.percentageShares := 100
+!insert (R46, O109) into RestaurantOwner
+!insert (R47, O109) into RestaurantOwner
+
+!new RegularCustomer('C52')
+!C52.name := 'Bastian Neumann'
+!C52.prefferedLanguage := #German
+
+!new RegularCustomer('C53')
+!C53.name := 'Marisol Vega'
+!C53.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW44')
+!HW44.name := 'Keiko Mori'
+!HW44.dateOfBirth := Date('1982-02-06')
+!HW44.phoneNumber := '+81-90-5555-0300'
+
+!new HeadWaiter('HW45')
+!HW45.name := 'Omar Haddad'
+!HW45.dateOfBirth := Date('1976-10-12')
+!HW45.phoneNumber := '+971-50-555-0333'
+
+!new Waiter('W104')
+!W104.name := 'Nadia Ristova'
+!W104.dateOfBirth := Date('1999-03-01')
+!W104.phoneNumber := '+389-70-555-011'
+!W104.spokenLanguage := #English
+!insert (HW44, W104) into HeadWaiterWaiter
+
+!new Waiter('W105')
+!W105.name := 'Pablo Ibáñez'
+!W105.dateOfBirth := Date('1994-08-24')
+!W105.phoneNumber := '+34-611-555-019'
+!W105.spokenLanguage := #Spanish
+!insert (HW45, W105) into HeadWaiterWaiter
+
+!new Waiter('W106')
+!W106.name := 'Greta Schmid'
+!W106.dateOfBirth := Date('2003-05-09')
+!W106.phoneNumber := '+49-151-555-0212'
+!W106.spokenLanguage := #German
+!insert (HW44, W106) into HeadWaiterWaiter
+
+!new Cook('K79')
+!K79.name := 'Arturo Menéndez'
+!K79.dateOfBirth := Date('1955-01-20')
+!K79.phoneNumber := '+1-702-555-0100'
+!K79.yearsOfExperience := 99
+
+!new Cook('K80')
+!K80.name := 'Arturo Menéndez'
+!K80.dateOfBirth := Date('1955-01-20')
+!K80.phoneNumber := '+1-702-555-0100'
+!K80.yearsOfExperience := 99
+
+!new Cook('K81')
+!K81.name := 'Siti Nur Aisyah'
+!K81.dateOfBirth := Date('1988-11-30')
+!K81.phoneNumber := '+60-12-555-0111'
+!K81.yearsOfExperience := 7
+
+!new Chef('CH83')
+!CH83.name := 'Mikhail Orlov'
+!CH83.dateOfBirth := Date('1990-04-14')
+!CH83.phoneNumber := '+7-925-555-0144'
+!insert (CH83, K79) into ChefCook
+
+!new Chef('CH84')
+!CH84.name := 'Hye-jin Park'
+!CH84.dateOfBirth := Date('1993-09-18')
+!CH84.phoneNumber := '+82-10-5555-0161'
+!insert (CH84, K80) into ChefCook
+
+!new Chef('CH85')
+!CH85.name := 'Tariq Al-Masri'
+!CH85.dateOfBirth := Date('1987-06-25')
+!CH85.phoneNumber := '+962-79-555-0183'
+!insert (CH85, K81) into ChefCook
+
+!new Manager('M31')
+!M31.name := 'Evelyn Hart'
+!M31.dateOfBirth := Date('1979-07-07')
+!M31.phoneNumber := '+1-415-555-0330'
+
+!new Allergen('AY1_E6')
+!AY1_E6.type := #Gluten
+
+!new Allergen('AY2_E6')
+!AY2_E6.type := #Lactose
+
+!new Allergen('AY3_E6')
+!AY3_E6.type := #Nuts
+
+!new Allergen('AY4_E6')
+!AY4_E6.type := #Seafood
+
+!new FoodItem('FI60_E6')
+!FI60_E6.number := 60
+!FI60_E6.description := 'Sourdough crumb'
+!FI60_E6.purchaseFlag := true
+!FI60_E6.unit := #Ounce
+!insert (FI60_E6, AY1_E6) into FoodItemAllergen
+
+!new FoodItem('FI61_E6')
+!FI61_E6.number := 61
+!FI61_E6.description := 'Condensed milk ribbon'
+!FI61_E6.purchaseFlag := true
+!FI61_E6.unit := #Gram
+!insert (FI61_E6, AY2_E6) into FoodItemAllergen
+
+!new FoodItem('FI62_E6')
+!FI62_E6.number := 62
+!FI62_E6.description := 'Toasted almond granules'
+!FI62_E6.purchaseFlag := true
+!FI62_E6.unit := #Gram
+!insert (FI62_E6, AY3_E6) into FoodItemAllergen
+
+!new FoodItem('FI63_E6')
+!FI63_E6.number := 63
+!FI63_E6.description := 'Anchovy essence'
+!FI63_E6.purchaseFlag := false
+!FI63_E6.unit := #Ounce
+!insert (FI63_E6, AY4_E6) into FoodItemAllergen
+
+!new FoodItem('FI64_E6')
+!FI64_E6.number := 64
+!FI64_E6.description := 'Sea-salt foam (no allergens)'
+!FI64_E6.purchaseFlag := false
+!FI64_E6.unit := #Ounce
+
+!new MenuItem('MI120')
+!MI120.description := 'Allergen Spectrum Spoon'
+!MI120.prepTime := 5.0
+!MI120.classification := #Apetizer
+!insert (MI120, CH83) into MenuItemChef
+!insert (MI120, FI60_E6) into MenuItemFoodItem
+!insert (MI120, FI61_E6) into MenuItemFoodItem
+!insert (MI120, FI62_E6) into MenuItemFoodItem
+!insert (MI120, FI63_E6) into MenuItemFoodItem
+
+!new MenuItem('MI121')
+!MI121.description := 'Salt-Foam Water (tiny)'
+!MI121.prepTime := 0.3
+!MI121.classification := #Beverage
+!insert (MI121, CH84) into MenuItemChef
+!insert (MI121, FI64_E6) into MenuItemFoodItem
+
+!new MenuItem('MI122')
+!MI122.description := 'Anchovy-Butter Crumb Bowl'
+!MI122.prepTime := 8.0
+!MI122.classification := #Main
+!insert (MI122, CH85) into MenuItemChef
+!insert (MI122, FI60_E6) into MenuItemFoodItem
+!insert (MI122, FI61_E6) into MenuItemFoodItem
+!insert (MI122, FI63_E6) into MenuItemFoodItem
+
+!new MenuItem('MI123')
+!MI123.description := 'Milk Ribbon on Almond Snow'
+!MI123.prepTime := 2.0
+!MI123.classification := #Dessert
+!insert (MI123, CH83) into MenuItemChef
+!insert (MI123, FI61_E6) into MenuItemFoodItem
+!insert (MI123, FI62_E6) into MenuItemFoodItem
+
+!new MenuItem('MI124')
+!MI124.description := 'Crumb & Salt Minimal Plate'
+!MI124.prepTime := 1.0
+!MI124.classification := #Main
+!insert (MI124, CH85) into MenuItemChef
+!insert (MI124, FI60_E6) into MenuItemFoodItem
+!insert (MI124, FI64_E6) into MenuItemFoodItem
+
+!new Banquet('BR36')
+!BR36.time := Time('03:03')
+!BR36.date := Date('2026-04-01')
+!BR36.numberPeople := 4
+!BR36.name := 'Bastian Neumann'
+!BR36.phoneNumber := '+49-30-555-0404'
+!BR36.number := 4041
+!BR36.groupName := 'April Night Micro-Banquet'
+!BR36.paymentMethod := #CreditCard
+!BR36.busService := true
+!insert (R46, BR36) into RestaurantReservation
+!insert (BR36, C52) into ReservationCustomer
+!insert (BR36, W104) into ReservationWaiter
+!insert (BR36, W105) into ReservationWaiter
+
+!new Table('T910_ACD')
+!T910_ACD.number := 910
+!T910_ACD.description := 'Capsule seat A'
+!T910_ACD.capacity := 1
+!insert (BR36, T910_ACD) into ReservationTable
+
+!new Table('T911_ACD')
+!T911_ACD.number := 911
+!T911_ACD.description := 'Capsule seat B'
+!T911_ACD.capacity := 1
+!insert (BR36, T911_ACD) into ReservationTable
+
+!new Table('T912_ACD')
+!T912_ACD.number := 912
+!T912_ACD.description := 'Capsule seat C'
+!T912_ACD.capacity := 1
+!insert (BR36, T912_ACD) into ReservationTable
+
+!new Table('T913_ACD')
+!T913_ACD.number := 913
+!T913_ACD.description := 'Capsule seat D'
+!T913_ACD.capacity := 1
+!insert (BR36, T913_ACD) into ReservationTable
+
+!new BusDriver('BD47')
+!BD47.name := 'Rina Sokolov'
+!BD47.dateOfBirth := Date('1992-02-02')
+!BD47.phoneNumber := '+972-54-555-0199'
+!BD47.driverLicenseNr := 'IL-DL-920202'
+!insert (BR36, BD47) into BanquetBusDriver
+
+!new ItemOrder('IO3401')
+!IO3401.time := Time('02:50')
+!insert (BR36, IO3401) into ReservationItemOrdered
+!insert (IO3401, MI120) into ItemOrderMenuItem
+
+!new ItemOrder('IO3402')
+!IO3402.time := Time('02:51')
+!insert (BR36, IO3402) into ReservationItemOrdered
+!insert (IO3402, MI121) into ItemOrderMenuItem
+
+!new ItemOrder('IO3403')
+!IO3403.time := Time('02:52')
+!insert (BR36, IO3403) into ReservationItemOrdered
+!insert (IO3403, MI123) into ItemOrderMenuItem
+
+!new Individual('IR53')
+!IR53.time := Time('20:20')
+!IR53.date := Date('2026-04-01')
+!IR53.numberPeople := 2
+!IR53.name := 'Marisol Vega'
+!IR53.phoneNumber := '+34-622-555-020'
+!IR53.number := 2020
+!IR53.seating := #Inside
+!IR53.smoking := #NonSmoking
+!insert (R47, IR53) into RestaurantReservation
+!insert (IR53, C53) into ReservationCustomer
+!insert (IR53, W106) into ReservationWaiter
+
+!new Table('T914_OBB')
+!T914_OBB.number := 914
+!T914_OBB.description := 'Two-seat counter slot'
+!T914_OBB.capacity := 2
+!insert (IR53, T914_OBB) into ReservationTable
+
+!new Individual('IR54')
+!IR54.time := Time('09:09')
+!IR54.date := Date('2026-04-02')
+!IR54.numberPeople := 1
+!IR54.name := 'Walk-in: Nova'
+!IR54.phoneNumber := '+1-000-909-0909'
+!IR54.number := 909
+!IR54.seating := #Patio
+!IR54.smoking := #Smoking
+!insert (IR54, W104) into ReservationWaiter
+
+!new Table('T915_FREE')
+!T915_FREE.number := 915
+!T915_FREE.description := 'Patio platform table reserved for one'
+!T915_FREE.capacity := 10
+!insert (IR54, T915_FREE) into ReservationTable
+
+!new ItemOrder('IO3404')
+!IO3404.time := Time('09:08')
+!insert (IR54, IO3404) into ReservationItemOrdered
+!insert (IO3404, MI124) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR38')
+!DR38.diet := #Vegetarian
+
+!new ReportedAllergy('RA38')
+!RA38.allergen := #Seafood

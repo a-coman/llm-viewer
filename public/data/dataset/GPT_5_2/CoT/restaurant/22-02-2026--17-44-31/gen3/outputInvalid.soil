@@ -1,0 +1,162 @@
+!new Restaurant('R11')
+!R11.name := 'Spreeufer Kantine'
+
+!new Owner('O27')
+!O27.name := 'Katrin Vogel'
+!O27.percentageShares := 70
+!insert (R11, O27) into RestaurantOwner
+
+!new Owner('O28')
+!O28.name := 'Emre Yılmaz'
+!O28.percentageShares := 30
+!insert (R11, O28) into RestaurantOwner
+
+!new HeadWaiter('HW11')
+!HW11.name := 'Sabine Krüger'
+!HW11.dateOfBirth := Date('1980-06-16')
+!HW11.phoneNumber := '+49 30 5550 1000'
+
+!new Waiter('W23')
+!W23.name := 'Jonas Weber'
+!W23.dateOfBirth := Date('1997-02-11')
+!W23.phoneNumber := '+49 30 5550 1001'
+!W23.spokenLanguage := #German
+!insert (HW11, W23) into HeadWaiterWaiter
+
+!new Waiter('W24')
+!W24.name := 'Hannah Smith'
+!W24.dateOfBirth := Date('1993-09-29')
+!W24.phoneNumber := '+49 30 5550 1002'
+!W24.spokenLanguage := #English
+!insert (HW11, W24) into HeadWaiterWaiter
+
+!new Cook('K16')
+!K16.name := 'Peter Neumann'
+!K16.dateOfBirth := Date('1974-01-08')
+!K16.phoneNumber := '+49 30 5550 2000'
+!K16.yearsOfExperience := 7
+
+!new Cook('K17')
+!K17.name := 'Aylin Demir'
+!K17.dateOfBirth := Date('1988-12-20')
+!K17.phoneNumber := '+49 30 5550 2001'
+!K17.yearsOfExperience := 2
+
+!new Chef('CH19')
+!CH19.name := 'Luca Romano'
+!CH19.dateOfBirth := Date('1985-04-14')
+!CH19.phoneNumber := '+49 30 5550 3000'
+!insert (CH19, K16) into ChefCook
+
+!new Chef('CH20')
+!CH20.name := 'Miriam Cohen'
+!CH20.dateOfBirth := Date('1990-07-03')
+!CH20.phoneNumber := '+49 30 5550 3001'
+!insert (CH20, K17) into ChefCook
+
+!new Allergen('ALG11')
+!ALG11.type := #Gluten
+
+!new Allergen('ALL11')
+!ALL11.type := #Lactose
+
+!new Allergen('ALN11')
+!ALN11.type := #Nuts
+
+!new FoodItem('F801')
+!F801.number := 501
+!F801.description := 'Rye bread slices'
+!F801.purchaseFlag := true
+!F801.unit := #Dozen
+!insert (F801, ALG11) into FoodItemAllergen
+
+!new FoodItem('F802')
+!F802.number := 502
+!F802.description := 'Quark cheese'
+!F802.purchaseFlag := true
+!F802.unit := #Ounce
+!insert (F802, ALL11) into FoodItemAllergen
+
+!new FoodItem('F803')
+!F803.number := 503
+!F803.description := 'Hazelnut crumble'
+!F803.purchaseFlag := true
+!F803.unit := #Gram
+!insert (F803, ALN11) into FoodItemAllergen
+
+!new MenuItem('MI32')
+!MI32.description := 'Rye bread with herb quark'
+!MI32.prepTime := 6.0
+!MI32.classification := #Apetizer
+!insert (MI32, CH19) into MenuItemChef
+!insert (MI32, F801) into MenuItemFoodItem
+!insert (MI32, F802) into MenuItemFoodItem
+
+!new MenuItem('MI33')
+!MI33.description := 'Apple-hazelnut crumble'
+!MI33.prepTime := 20.0
+!MI33.classification := #Dessert
+!insert (MI33, CH20) into MenuItemChef
+!insert (MI33, F803) into MenuItemFoodItem
+
+!new MenuItem('MI34')
+!MI34.description := 'Sparkling water (bottle)'
+!MI34.prepTime := 0.5
+!MI34.classification := #Beverage
+!insert (MI34, CH19) into MenuItemChef
+
+!new Table('T21_SK')
+!T21_SK.number := 21
+!T21_SK.description := 'High-top near the river-facing windows'
+!T21_SK.capacity := 4
+
+!new RegularCustomer('C12')
+!C12.name := 'Oliver Brown'
+!C12.prefferedLanguage := #English
+
+!new Individual('IR13')
+!IR13.time := Time('18:45')
+!IR13.date := Date('2026-11-05')
+!IR13.numberPeople := 3
+!IR13.name := 'Oliver Brown'
+!IR13.phoneNumber := '+44 7700 900123'
+!IR13.number := 8802
+!IR13.seating := #Inside
+!IR13.smoking := #NonSmoking
+!insert (R11, IR13) into RestaurantReservation
+!insert (IR13, C12) into ReservationCustomer
+!insert (IR13, W24) into ReservationWaiter
+!insert (IR13, T21_SK) into ReservationTable
+
+!new ItemOrder('IO1401')
+!IO1401.time := Time('19:00')
+!insert (IR13, IO1401) into ReservationItemOrdered
+!insert (IO1401, MI32) into ItemOrderMenuItem
+
+!new ItemOrder('IO1402')
+!IO1402.time := Time('19:05')
+!insert (IR13, IO1402) into ReservationItemOrdered
+!insert (IO1402, MI34) into ItemOrderMenuItem
+
+!new ItemOrder('IO1403')
+!IO1403.time := Time('19:40')
+!insert (IR13, IO1403) into ReservationItemOrdered
+!insert (IO1403, MI33) into ItemOrderMenuItem
+
+!new Individual('IR14')
+!IR14.time := Time('20:15')
+!IR14.date := Date('2026-11-05')
+!IR14.numberPeople := 2
+!IR14.name := 'Nora Klein'
+!IR14.phoneNumber := '+49 157 111 2233'
+!IR14.number := 8803
+!IR14.seating := #Inside
+!IR14.smoking := #NonSmoking
+!insert (R11, IR14) into RestaurantReservation
+
+!new DietaryRequirement('DR9')
+!DR9.diet := #Vegetarian
+
+!new ReportedAllergy('RA8')
+!RA8.allergen := #Gluten
+

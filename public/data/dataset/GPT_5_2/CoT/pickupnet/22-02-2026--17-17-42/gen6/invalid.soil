@@ -1,0 +1,73 @@
+!new Station('PARHUB13_2')
+
+!new Customer('CFR700_2')
+!CFR700_2.id := 'C-FR-700'
+!CFR700_2.name := 'Élodie Moreau'
+!CFR700_2.twitterUserName := '@elodie_mr'
+!insert (PARHUB13_2, CFR700_2) into StationContainsCustomer
+
+!new Driver('DFR013_2')
+!DFR013_2.id := 'D-FR-013'
+!DFR013_2.name := 'Karim Benali'
+!insert (PARHUB13_2, DFR013_2) into StationContainsDriver
+
+!new Driver('DFRFLEX9_2')
+!DFRFLEX9_2.id := 'D-FR-FLEX-9'
+!DFRFLEX9_2.name := 'Sofía Álvarez'
+
+!new Address('APARPICK01_2')
+!APARPICK01_2.text := '12 Rue de Tolbiac, 75013 Paris, France'
+!new GeoLocation('GLPARTOLBIAC_2')
+!GLPARTOLBIAC_2.latitude := 48.8276
+!GLPARTOLBIAC_2.longitude := 2.3554
+!insert (APARPICK01_2, GLPARTOLBIAC_2) into AddressContainsGeoLocation
+
+!new Address('APARPUDO01_2')
+!APARPUDO01_2.text := 'Point Relais — Tabac du Square, 5 Avenue d’Italie, 75013 Paris, France'
+!new GeoLocation('GLPARITALIE_2')
+!GLPARITALIE_2.latitude := 48.8322
+!GLPARITALIE_2.longitude := 2.3559
+!insert (APARPUDO01_2, GLPARITALIE_2) into AddressContainsGeoLocation
+
+!new Address('APARPUDO02_2')
+!APARPUDO02_2.text := 'Point Relais — Librairie des Gobelins, 73 Avenue des Gobelins, 75013 Paris, France'
+!new GeoLocation('GLPARGOBELINS_2')
+!GLPARGOBELINS_2.latitude := 48.8352
+!GLPARGOBELINS_2.longitude := 2.3529
+!insert (APARPUDO02_2, GLPARGOBELINS_2) into AddressContainsGeoLocation
+
+!new Address('AORLYWH01_2')
+!AORLYWH01_2.text := 'Entrepôt Marchand, 8 Rue du Parc des Vergers, 94310 Orly, France'
+!new GeoLocation('GLORLYWH_2')
+!GLORLYWH_2.latitude := 48.7422
+!GLORLYWH_2.longitude := 2.3896
+!insert (AORLYWH01_2, GLORLYWH_2) into AddressContainsGeoLocation
+
+!new Address('APARAREAONLY_2')
+!APARAREAONLY_2.text := 'Paris (zone de livraison à confirmer par le destinataire)'
+!new GeoLocation('GLPARCENTER_2')
+!GLPARCENTER_2.latitude := 48.8566
+!GLPARCENTER_2.longitude := 2.3522
+!insert (APARAREAONLY_2, GLPARCENTER_2) into AddressContainsGeoLocation
+
+!new Shipment('SHPFR2601_2')
+!SHPFR2601_2.id := 'SHP-FR-2601'
+!SHPFR2601_2.status := #NEW
+
+!new Shipment('SHPFR2602_2')
+!SHPFR2602_2.id := 'SHP-FR-2602'
+!SHPFR2602_2.status := #ASSIGNED
+
+!insert (PARHUB13_2, SHPFR2601_2) into StationShipment
+!insert (PARHUB13_2, SHPFR2602_2) into StationShipment
+
+!insert (CFR700_2, SHPFR2601_2) into CustomerConsistsOfShipment
+!insert (CFR700_2, SHPFR2602_2) into CustomerConsistsOfShipment
+
+!insert (SHPFR2601_2, APARPICK01_2) into ShipmentContainsPickUpAddress
+
+!insert (SHPFR2602_2, APARPUDO01_2) into ShipmentContainsPickUpAddress
+!insert (SHPFR2602_2, APARPUDO02_2) into ShipmentContainsPickUpAddress
+!insert (SHPFR2602_2, AORLYWH01_2) into ShipmentContainsDeliveryAddress
+
+!insert (DFRFLEX9_2, SHPFR2602_2) into DriverShipment

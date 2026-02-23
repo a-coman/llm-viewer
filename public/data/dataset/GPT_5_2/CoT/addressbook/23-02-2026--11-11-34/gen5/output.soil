@@ -1,0 +1,1023 @@
+!new AddressBook('AB_TwoWay_Employment_1')
+
+!new Person('P_AN_1')
+!P_AN_1.name := 'Anika Ndlovu'
+!P_AN_1.phone := '+27 11 555 0199'
+!P_AN_1.website := 'https://anika-ndlovu.example.za'
+!P_AN_1.email := 'anika.ndlovu@example.za'
+!P_AN_1.title := 'Ms.'
+!insert (AB_TwoWay_Employment_1, P_AN_1) into AddressBookMadeOfContact
+
+!new Company('C_UL_1')
+!C_UL_1.name := 'Ubuntu Logistics (Pty) Ltd.'
+!C_UL_1.phone := '+27 21 400 2200'
+!C_UL_1.website := ''
+!C_UL_1.email := 'hr@ubuntu-logistics.example.za'
+!C_UL_1.industry := 'Logistics'
+!insert (AB_TwoWay_Employment_1, C_UL_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_P_AN_R1_1')
+!Rel_P_AN_R1_1.type := #EMPLOYEE
+!insert (P_AN_1, Rel_P_AN_R1_1) into ContactToRelationship
+!insert (Rel_P_AN_R1_1, C_UL_1) into RelationshipToContact
+
+!new Relationship('Rel_C_UL_R1_1')
+!Rel_C_UL_R1_1.type := #BOSS
+!insert (C_UL_1, Rel_C_UL_R1_1) into ContactToRelationship
+!insert (Rel_C_UL_R1_1, P_AN_1) into RelationshipToContact
+
+!new AddressBook('AB6_RaoKhan_WeddingPlanning_1')
+
+!new Person('P_AB6_Ananya_1')
+!P_AB6_Ananya_1.name := 'Ananya Rao'
+!P_AB6_Ananya_1.title := 'Ms.'
+!P_AB6_Ananya_1.phone := '+91 98450 11223'
+!P_AB6_Ananya_1.website := 'https://ananya-rao.example.in'
+!P_AB6_Ananya_1.email := 'ananya.rao@example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, P_AB6_Ananya_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB6_AD60_1')
+!Addr_AB6_AD60_1.city := 'Bengaluru'
+!Addr_AB6_AD60_1.street := '12th Main, Indiranagar'
+!Addr_AB6_AD60_1.houseNr := '418'
+!insert (P_AB6_Ananya_1, Addr_AB6_AD60_1) into ContactContainsAddress
+
+!new Note('Note_AB6_N60_1')
+!Note_AB6_N60_1.author := 'Ananya Rao'
+!Note_AB6_N60_1.time := Date('2026-01-30')
+!Note_AB6_N60_1.type := #CALL
+!Note_AB6_N60_1.comment := 'Spoke with priest about muhurta timings; confirm final slot after venue booking.'
+!insert (P_AB6_Ananya_1, Note_AB6_N60_1) into ContactContainsNote
+
+!new Person('P_AB6_Imran_1')
+!P_AB6_Imran_1.name := 'Imran Khan'
+!P_AB6_Imran_1.title := 'Mr.'
+!P_AB6_Imran_1.phone := '+91 99860 33445'
+!P_AB6_Imran_1.website := 'https://imran-khan.example.in'
+!P_AB6_Imran_1.email := 'imran.khan@example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, P_AB6_Imran_1) into AddressBookMadeOfContact
+
+!new Note('Note_AB6_N61_1')
+!Note_AB6_N61_1.author := 'Imran Khan'
+!Note_AB6_N61_1.time := Date('2026-02-02')
+!Note_AB6_N61_1.type := #EMAIL
+!Note_AB6_N61_1.comment := 'Emailed caterer to request a separate vegetarian buffet line and nut-free dessert options.'
+!insert (P_AB6_Imran_1, Note_AB6_N61_1) into ContactContainsNote
+
+!new Company('C_AB6_ShubhamHall_1')
+!C_AB6_ShubhamHall_1.name := 'Shubham Convention Hall'
+!C_AB6_ShubhamHall_1.industry := 'Event venue services'
+!C_AB6_ShubhamHall_1.phone := '+91 80 4123 9000'
+!C_AB6_ShubhamHall_1.website := 'https://shubhamhall.example.in'
+!C_AB6_ShubhamHall_1.email := 'bookings@shubhamhall.example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, C_AB6_ShubhamHall_1) into AddressBookMadeOfContact
+
+!new Address('Addr_AB6_AD61_1')
+!Addr_AB6_AD61_1.city := 'Bengaluru'
+!Addr_AB6_AD61_1.street := 'Tumkur Road'
+!Addr_AB6_AD61_1.houseNr := '55'
+!insert (C_AB6_ShubhamHall_1, Addr_AB6_AD61_1) into ContactContainsAddress
+
+!new Company('C_AB6_CateringDesk_1')
+!C_AB6_CateringDesk_1.name := 'Shubham Convention Hall – Catering Partner Desk'
+!C_AB6_CateringDesk_1.industry := 'Event catering coordination'
+!C_AB6_CateringDesk_1.phone := '+91 80 4123 9005'
+!C_AB6_CateringDesk_1.website := 'https://shubhamhall.example.in/catering'
+!C_AB6_CateringDesk_1.email := 'cateringdesk@shubhamhall.example.in'
+!insert (AB6_RaoKhan_WeddingPlanning_1, C_AB6_CateringDesk_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_AB6_R60_1')
+!Rel_AB6_R60_1.type := #COWORKER
+!insert (P_AB6_Ananya_1, Rel_AB6_R60_1) into ContactToRelationship
+!insert (Rel_AB6_R60_1, P_AB6_Imran_1) into RelationshipToContact
+
+!new Relationship('Rel_AB6_R61_1')
+!Rel_AB6_R61_1.type := #COWORKER
+!insert (P_AB6_Imran_1, Rel_AB6_R61_1) into ContactToRelationship
+!insert (Rel_AB6_R61_1, C_AB6_ShubhamHall_1) into RelationshipToContact
+
+!new Relationship('Rel_AB6_R62_1')
+!Rel_AB6_R62_1.type := #SUBDIVISION
+!insert (C_AB6_ShubhamHall_1, Rel_AB6_R62_1) into ContactToRelationship
+!insert (Rel_AB6_R62_1, C_AB6_CateringDesk_1) into RelationshipToContact
+
+!new Address('Addr_AB6_AD62_1')
+!Addr_AB6_AD62_1.city := 'Bengaluru'
+!Addr_AB6_AD62_1.street := 'Cubbon Park (Main Gate)'
+!Addr_AB6_AD62_1.houseNr := '—'
+
+!new Note('Note_AB6_N62_1')
+!Note_AB6_N62_1.author := 'Wedding Planning Spreadsheet (shared)'
+!Note_AB6_N62_1.time := Date('2026-02-07')
+!Note_AB6_N62_1.type := #MEETING
+!Note_AB6_N62_1.comment := 'Checklist: confirm guest count, finalize seating draft, book mehndi artist, print signage, confirm parking volunteers.'
+
+!new AddressBook('AB_StadshavenExchange_Spring2026_1')
+
+!new Person('P_Stad_Noura_1')
+!P_Stad_Noura_1.name := 'Noura Benali'
+!P_Stad_Noura_1.phone := '+31 20 555 7011'
+!P_Stad_Noura_1.website := 'https://noura-benali.example'
+!P_Stad_Noura_1.email := 'n.benali@example.nl'
+!P_Stad_Noura_1.title := 'Prof.'
+!insert (AB_StadshavenExchange_Spring2026_1, P_Stad_Noura_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_Noura_Amsterdam_1')
+!Addr_Stad_Noura_Amsterdam_1.street := 'Herengracht'
+!Addr_Stad_Noura_Amsterdam_1.houseNr := '312'
+!Addr_Stad_Noura_Amsterdam_1.city := 'Amsterdam'
+!insert (P_Stad_Noura_1, Addr_Stad_Noura_Amsterdam_1) into ContactContainsAddress
+
+!new Note('Note_Stad_Noura_1')
+!Note_Stad_Noura_1.author := 'Prof. Noura Benali'
+!Note_Stad_Noura_1.time := Date('2026-03-04')
+!Note_Stad_Noura_1.type := #EMAIL
+!Note_Stad_Noura_1.comment := 'Sent Luca the reading list and lab safety briefing; copied Zuzanna for onboarding logistics.'
+!insert (P_Stad_Noura_1, Note_Stad_Noura_1) into ContactContainsNote
+
+!new Person('P_Stad_Luca_1')
+!P_Stad_Luca_1.name := 'Luca Bianchi'
+!P_Stad_Luca_1.phone := '+39 02 555 0190'
+!P_Stad_Luca_1.website := 'https://lucabianchi.example'
+!P_Stad_Luca_1.email := 'luca.bianchi@example.it'
+!P_Stad_Luca_1.title := 'Mr.'
+!insert (AB_StadshavenExchange_Spring2026_1, P_Stad_Luca_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_Luca_Milan_1')
+!Addr_Stad_Luca_Milan_1.street := 'Via Paolo Sarpi'
+!Addr_Stad_Luca_Milan_1.houseNr := '21'
+!Addr_Stad_Luca_Milan_1.city := 'Milan'
+!insert (P_Stad_Luca_1, Addr_Stad_Luca_Milan_1) into ContactContainsAddress
+
+!new Note('Note_Stad_Luca_1')
+!Note_Stad_Luca_1.author := 'Zuzanna Nowak'
+!Note_Stad_Luca_1.time := Date('2026-03-01')
+!Note_Stad_Luca_1.type := #EMAIL
+!Note_Stad_Luca_1.comment := 'Emailed Luca instructions for residence registration appointment and the university ID pickup.'
+!insert (P_Stad_Luca_1, Note_Stad_Luca_1) into ContactContainsNote
+
+!new Note('Note_Stad_Luca_2')
+!Note_Stad_Luca_2.author := 'Luca Bianchi'
+!Note_Stad_Luca_2.time := Date('2026-03-09')
+!Note_Stad_Luca_2.type := #CALL
+!Note_Stad_Luca_2.comment := 'Called CanalView Housing to report a heater issue in the assigned room; asked for an inspection slot.'
+!insert (P_Stad_Luca_1, Note_Stad_Luca_2) into ContactContainsNote
+
+!new Person('P_Stad_Zuzanna_1')
+!P_Stad_Zuzanna_1.name := 'Zuzanna Nowak'
+!P_Stad_Zuzanna_1.phone := '+31 6 555 8821'
+!P_Stad_Zuzanna_1.website := 'https://zuzanna-nowak.example'
+!P_Stad_Zuzanna_1.email := 'z.nowak@example.nl'
+!P_Stad_Zuzanna_1.title := 'Ms.'
+!insert (AB_StadshavenExchange_Spring2026_1, P_Stad_Zuzanna_1) into AddressBookMadeOfContact
+
+!new Note('Note_Stad_Zuzanna_1')
+!Note_Stad_Zuzanna_1.author := 'Stadshaven International Office'
+!Note_Stad_Zuzanna_1.time := Date('2026-02-25')
+!Note_Stad_Zuzanna_1.type := #MEETING
+!Note_Stad_Zuzanna_1.comment := 'Weekly intake meeting: confirmed arrival dates for four exchange students and assigned housing liaisons.'
+!insert (P_Stad_Zuzanna_1, Note_Stad_Zuzanna_1) into ContactContainsNote
+
+!new Person('P_Stad_Siti_1')
+!P_Stad_Siti_1.name := 'Siti Nur Aisyah'
+!P_Stad_Siti_1.phone := '+62 21 555 3310'
+!P_Stad_Siti_1.website := 'https://sitinuraisyah.example'
+!P_Stad_Siti_1.email := 'siti.aisyah@example.id'
+!P_Stad_Siti_1.title := 'Ms.'
+!insert (AB_StadshavenExchange_Spring2026_1, P_Stad_Siti_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_Siti_Jakarta_1')
+!Addr_Stad_Siti_Jakarta_1.street := 'Jl. Diponegoro'
+!Addr_Stad_Siti_Jakarta_1.houseNr := '17'
+!Addr_Stad_Siti_Jakarta_1.city := 'Jakarta'
+!insert (P_Stad_Siti_1, Addr_Stad_Siti_Jakarta_1) into ContactContainsAddress
+
+!new Address('Addr_Stad_Siti_Amsterdam_1')
+!Addr_Stad_Siti_Amsterdam_1.street := 'Oudezijds Achterburgwal'
+!Addr_Stad_Siti_Amsterdam_1.houseNr := '101'
+!Addr_Stad_Siti_Amsterdam_1.city := 'Amsterdam'
+!insert (P_Stad_Siti_1, Addr_Stad_Siti_Amsterdam_1) into ContactContainsAddress
+
+!new Note('Note_Stad_Siti_1')
+!Note_Stad_Siti_1.author := 'Siti Nur Aisyah'
+!Note_Stad_Siti_1.time := Date('2026-03-06')
+!Note_Stad_Siti_1.type := #EMAIL
+!Note_Stad_Siti_1.comment := 'Confirmed arrival time and requested halal-friendly grocery guidance near the student housing.'
+!insert (P_Stad_Siti_1, Note_Stad_Siti_1) into ContactContainsNote
+
+!new Company('C_Stad_University_1')
+!C_Stad_University_1.name := 'Universiteit Stadshaven'
+!C_Stad_University_1.phone := '+31 20 555 0000'
+!C_Stad_University_1.website := 'https://stadshaven-university.example'
+!C_Stad_University_1.email := 'info@stadshaven-university.example'
+!C_Stad_University_1.industry := 'Higher education'
+!insert (AB_StadshavenExchange_Spring2026_1, C_Stad_University_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_University_Amsterdam_1')
+!Addr_Stad_University_Amsterdam_1.street := 'Science Park'
+!Addr_Stad_University_Amsterdam_1.houseNr := '904'
+!Addr_Stad_University_Amsterdam_1.city := 'Amsterdam'
+!insert (C_Stad_University_1, Addr_Stad_University_Amsterdam_1) into ContactContainsAddress
+
+!new Company('C_Stad_IntOffice_1')
+!C_Stad_IntOffice_1.name := 'Stadshaven International Office'
+!C_Stad_IntOffice_1.phone := '+31 20 555 0101'
+!C_Stad_IntOffice_1.website := 'https://stadshaven-university.example/international'
+!C_Stad_IntOffice_1.email := 'international@stadshaven-university.example'
+!C_Stad_IntOffice_1.industry := 'University student services'
+!insert (AB_StadshavenExchange_Spring2026_1, C_Stad_IntOffice_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_IntOffice_Amsterdam_1')
+!Addr_Stad_IntOffice_Amsterdam_1.street := 'Science Park'
+!Addr_Stad_IntOffice_Amsterdam_1.houseNr := '906'
+!Addr_Stad_IntOffice_Amsterdam_1.city := 'Amsterdam'
+!insert (C_Stad_IntOffice_1, Addr_Stad_IntOffice_Amsterdam_1) into ContactContainsAddress
+
+!new Note('Note_Stad_IntOffice_1')
+!Note_Stad_IntOffice_1.author := 'Front Desk'
+!Note_Stad_IntOffice_1.time := Date('2026-02-27')
+!Note_Stad_IntOffice_1.type := #CALL
+!Note_Stad_IntOffice_1.comment := 'Called CanalView Housing to verify room allocation list and key pickup procedure.'
+!insert (C_Stad_IntOffice_1, Note_Stad_IntOffice_1) into ContactContainsNote
+
+!new Company('C_Stad_CanalView_1')
+!C_Stad_CanalView_1.name := 'CanalView Housing B.V.'
+!C_Stad_CanalView_1.phone := '+31 20 555 2222'
+!C_Stad_CanalView_1.website := 'https://canalview-housing.example'
+!C_Stad_CanalView_1.email := 'support@canalview-housing.example'
+!C_Stad_CanalView_1.industry := 'Student accommodation and property management'
+!insert (AB_StadshavenExchange_Spring2026_1, C_Stad_CanalView_1) into AddressBookMadeOfContact
+
+!new Note('Note_Stad_CanalView_1')
+!Note_Stad_CanalView_1.author := 'CanalView Housing B.V.'
+!Note_Stad_CanalView_1.time := Date('2026-03-02')
+!Note_Stad_CanalView_1.type := #EMAIL
+!Note_Stad_CanalView_1.comment := 'Sent digital lease packet and QR code for key locker access; advised to bring passport for verification.'
+!insert (C_Stad_CanalView_1, Note_Stad_CanalView_1) into ContactContainsNote
+
+!new Company('C_Stad_MaintUnit_1')
+!C_Stad_MaintUnit_1.name := 'CanalView Housing – Maintenance Unit'
+!C_Stad_MaintUnit_1.phone := '+31 20 555 2233'
+!C_Stad_MaintUnit_1.website := 'https://canalview-housing.example/maintenance'
+!C_Stad_MaintUnit_1.email := 'maintenance@canalview-housing.example'
+!C_Stad_MaintUnit_1.industry := 'Building maintenance services'
+!insert (AB_StadshavenExchange_Spring2026_1, C_Stad_MaintUnit_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Stad_Maint_Houthavens_1')
+!Addr_Stad_Maint_Houthavens_1.street := 'Houthavens'
+!Addr_Stad_Maint_Houthavens_1.houseNr := '5'
+!Addr_Stad_Maint_Houthavens_1.city := 'Amsterdam'
+!insert (C_Stad_MaintUnit_1, Addr_Stad_Maint_Houthavens_1) into ContactContainsAddress
+
+!new Address('Addr_Stad_Maint_Transformatorweg_1')
+!Addr_Stad_Maint_Transformatorweg_1.street := 'Transformatorweg'
+!Addr_Stad_Maint_Transformatorweg_1.houseNr := '12'
+!Addr_Stad_Maint_Transformatorweg_1.city := 'Amsterdam'
+!insert (C_Stad_MaintUnit_1, Addr_Stad_Maint_Transformatorweg_1) into ContactContainsAddress
+
+!new Note('Note_Stad_Maint_1')
+!Note_Stad_Maint_1.author := 'Dispatch'
+!Note_Stad_Maint_1.time := Date('2026-03-10')
+!Note_Stad_Maint_1.type := #MEETING
+!Note_Stad_Maint_1.comment := 'Scheduled on-site inspection for heater issue reported by Luca; parts availability check initiated.'
+!insert (C_Stad_MaintUnit_1, Note_Stad_Maint_1) into ContactContainsNote
+
+!new Relationship('Rel_Stad_Noura_to_Luca_Boss_1')
+!Rel_Stad_Noura_to_Luca_Boss_1.type := #BOSS
+!insert (P_Stad_Noura_1, Rel_Stad_Noura_to_Luca_Boss_1) into ContactToRelationship
+!insert (Rel_Stad_Noura_to_Luca_Boss_1, P_Stad_Luca_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Noura_to_Zuzanna_Coworker_1')
+!Rel_Stad_Noura_to_Zuzanna_Coworker_1.type := #COWORKER
+!insert (P_Stad_Noura_1, Rel_Stad_Noura_to_Zuzanna_Coworker_1) into ContactToRelationship
+!insert (Rel_Stad_Noura_to_Zuzanna_Coworker_1, P_Stad_Zuzanna_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Luca_to_Noura_Employee_1')
+!Rel_Stad_Luca_to_Noura_Employee_1.type := #EMPLOYEE
+!insert (P_Stad_Luca_1, Rel_Stad_Luca_to_Noura_Employee_1) into ContactToRelationship
+!insert (Rel_Stad_Luca_to_Noura_Employee_1, P_Stad_Noura_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Luca_to_Siti_Coworker_1')
+!Rel_Stad_Luca_to_Siti_Coworker_1.type := #COWORKER
+!insert (P_Stad_Luca_1, Rel_Stad_Luca_to_Siti_Coworker_1) into ContactToRelationship
+!insert (Rel_Stad_Luca_to_Siti_Coworker_1, P_Stad_Siti_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Zuzanna_to_IntOffice_Employee_1')
+!Rel_Stad_Zuzanna_to_IntOffice_Employee_1.type := #EMPLOYEE
+!insert (P_Stad_Zuzanna_1, Rel_Stad_Zuzanna_to_IntOffice_Employee_1) into ContactToRelationship
+!insert (Rel_Stad_Zuzanna_to_IntOffice_Employee_1, C_Stad_IntOffice_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Zuzanna_to_Siti_Boss_1')
+!Rel_Stad_Zuzanna_to_Siti_Boss_1.type := #BOSS
+!insert (P_Stad_Zuzanna_1, Rel_Stad_Zuzanna_to_Siti_Boss_1) into ContactToRelationship
+!insert (Rel_Stad_Zuzanna_to_Siti_Boss_1, P_Stad_Siti_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Zuzanna_to_CanalView_Coworker_1')
+!Rel_Stad_Zuzanna_to_CanalView_Coworker_1.type := #COWORKER
+!insert (P_Stad_Zuzanna_1, Rel_Stad_Zuzanna_to_CanalView_Coworker_1) into ContactToRelationship
+!insert (Rel_Stad_Zuzanna_to_CanalView_Coworker_1, C_Stad_CanalView_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Siti_to_Zuzanna_Employee_1')
+!Rel_Stad_Siti_to_Zuzanna_Employee_1.type := #EMPLOYEE
+!insert (P_Stad_Siti_1, Rel_Stad_Siti_to_Zuzanna_Employee_1) into ContactToRelationship
+!insert (Rel_Stad_Siti_to_Zuzanna_Employee_1, P_Stad_Zuzanna_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_University_to_IntOffice_Subdivision_1')
+!Rel_Stad_University_to_IntOffice_Subdivision_1.type := #SUBDIVISION
+!insert (C_Stad_University_1, Rel_Stad_University_to_IntOffice_Subdivision_1) into ContactToRelationship
+!insert (Rel_Stad_University_to_IntOffice_Subdivision_1, C_Stad_IntOffice_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_IntOffice_to_Zuzanna_Boss_1')
+!Rel_Stad_IntOffice_to_Zuzanna_Boss_1.type := #BOSS
+!insert (C_Stad_IntOffice_1, Rel_Stad_IntOffice_to_Zuzanna_Boss_1) into ContactToRelationship
+!insert (Rel_Stad_IntOffice_to_Zuzanna_Boss_1, P_Stad_Zuzanna_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_CanalView_to_Maint_Subdivision_1')
+!Rel_Stad_CanalView_to_Maint_Subdivision_1.type := #SUBDIVISION
+!insert (C_Stad_CanalView_1, Rel_Stad_CanalView_to_Maint_Subdivision_1) into ContactToRelationship
+!insert (Rel_Stad_CanalView_to_Maint_Subdivision_1, C_Stad_MaintUnit_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_CanalView_to_Maint_Boss_1')
+!Rel_Stad_CanalView_to_Maint_Boss_1.type := #BOSS
+!insert (C_Stad_CanalView_1, Rel_Stad_CanalView_to_Maint_Boss_1) into ContactToRelationship
+!insert (Rel_Stad_CanalView_to_Maint_Boss_1, C_Stad_MaintUnit_1) into RelationshipToContact
+
+!new Relationship('Rel_Stad_Maint_to_CanalView_Employee_1')
+!Rel_Stad_Maint_to_CanalView_Employee_1.type := #EMPLOYEE
+!insert (C_Stad_MaintUnit_1, Rel_Stad_Maint_to_CanalView_Employee_1) into ContactToRelationship
+!insert (Rel_Stad_Maint_to_CanalView_Employee_1, C_Stad_CanalView_1) into RelationshipToContact
+
+!new AddressBook('AB_SingleSuperConnector_1')
+
+!new Person('P_Archivist_1')
+!P_Archivist_1.name := 'The Archivist (匿名アーキビスト)'
+!P_Archivist_1.phone := '+44 20 0000 0000'
+!P_Archivist_1.website := 'urn:contact:archivist'
+!P_Archivist_1.email := 'archivist@routing.example'
+!P_Archivist_1.title := 'Custodian'
+!insert (AB_SingleSuperConnector_1, P_Archivist_1) into AddressBookMadeOfContact
+
+!new Note('Note_Archivist_1')
+!Note_Archivist_1.author := 'Archivist'
+!Note_Archivist_1.time := Date('2026年02月23日')
+!Note_Archivist_1.type := #EMAIL
+!Note_Archivist_1.comment := 'Created an address book entry that only makes sense as a relationship router.'
+!insert (P_Archivist_1, Note_Archivist_1) into ContactContainsNote
+
+!new Note('Note_Archivist_2')
+!Note_Archivist_2.author := 'Archivist'
+!Note_Archivist_2.time := Date('23/02/2026')
+!Note_Archivist_2.type := #CALL
+!Note_Archivist_2.comment := 'Verified each target contact can be reached even if they never initiate any relationships.'
+!insert (P_Archivist_1, Note_Archivist_2) into ContactContainsNote
+
+!new Note('Note_Archivist_3')
+!Note_Archivist_3.author := 'Archivist'
+!Note_Archivist_3.time := Date('Thu, 23 Feb 2026')
+!Note_Archivist_3.type := #MEETING
+!Note_Archivist_3.comment := 'Met with four parties separately; stored all links as directed edges from me only.'
+!insert (P_Archivist_1, Note_Archivist_3) into ContactContainsNote
+
+!new Address('Addr_Archivist_1')
+!Addr_Archivist_1.city := 'Valletta'
+!Addr_Archivist_1.houseNr := '1/0'
+!Addr_Archivist_1.street := 'Archive Lane'
+!insert (P_Archivist_1, Addr_Archivist_1) into ContactContainsAddress
+
+!new Person('P_Haakon_1')
+!P_Haakon_1.name := 'Håkon Østergård'
+!P_Haakon_1.phone := '+47 900 00 000'
+!P_Haakon_1.website := 'https://haakon.example.no'
+!P_Haakon_1.email := 'haakon.o@example.no'
+!P_Haakon_1.title := 'Mr.'
+!insert (AB_SingleSuperConnector_1, P_Haakon_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Haakon_1')
+!Addr_Haakon_1.city := 'Oslo'
+!Addr_Haakon_1.houseNr := '0001'
+!Addr_Haakon_1.street := 'Karl Johans gate'
+!insert (P_Haakon_1, Addr_Haakon_1) into ContactContainsAddress
+
+!new Address('Addr_Haakon_2')
+!Addr_Haakon_2.city := 'Tórshavn'
+!Addr_Haakon_2.houseNr := '5'
+!Addr_Haakon_2.street := 'Bryggjubakki'
+!insert (P_Haakon_1, Addr_Haakon_2) into ContactContainsAddress
+
+!new Person('P_Fatou_1')
+!P_Fatou_1.name := 'Fatou Ndiaye'
+!P_Fatou_1.phone := '+221 77 000 0000'
+!P_Fatou_1.website := 'https://fatou.example.sn'
+!P_Fatou_1.email := 'fatou.ndiaye@example.sn'
+!P_Fatou_1.title := 'Mme'
+!insert (AB_SingleSuperConnector_1, P_Fatou_1) into AddressBookMadeOfContact
+
+!new Note('Note_Fatou_1')
+!Note_Fatou_1.author := 'Fatou'
+!Note_Fatou_1.time := Date('2026-02-23')
+!Note_Fatou_1.type := #EMAIL
+!Note_Fatou_1.comment := 'I do not link to anyone; the Archivist links to me twice for redundancy.'
+!insert (P_Fatou_1, Note_Fatou_1) into ContactContainsNote
+
+!new Company('C_Paperless_1')
+!C_Paperless_1.name := 'कागज़-रहित प्रणालियाँ Pvt Ltd'
+!C_Paperless_1.phone := '+91 11 0000 0000'
+!C_Paperless_1.website := 'https://paperless.example.in'
+!C_Paperless_1.email := 'info@paperless.example.in'
+!C_Paperless_1.industry := 'Document automation'
+!insert (AB_SingleSuperConnector_1, C_Paperless_1) into AddressBookMadeOfContact
+
+!new Address('Addr_Paperless_1')
+!Addr_Paperless_1.city := 'New Delhi'
+!Addr_Paperless_1.houseNr := '१२-A'
+!Addr_Paperless_1.street := 'Ring Road'
+!insert (C_Paperless_1, Addr_Paperless_1) into ContactContainsAddress
+
+!new Address('Addr_Paperless_2')
+!Addr_Paperless_2.city := 'Kathmandu'
+!Addr_Paperless_2.houseNr := '3'
+!Addr_Paperless_2.street := 'धेरै सडक'
+!insert (C_Paperless_1, Addr_Paperless_2) into ContactContainsAddress
+
+!new Address('Addr_Paperless_3')
+!Addr_Paperless_3.city := 'Port Louis'
+!Addr_Paperless_3.houseNr := 'Lot 7'
+!Addr_Paperless_3.street := 'Avenue des Docks'
+!insert (C_Paperless_1, Addr_Paperless_3) into ContactContainsAddress
+
+!new Company('C_MicroEtats_1')
+!C_MicroEtats_1.name := 'Société des Micro-États'
+!C_MicroEtats_1.phone := '+377 00 00 00 00'
+!C_MicroEtats_1.website := 'https://micro-etats.example.mc'
+!C_MicroEtats_1.email := 'contact@micro-etats.example.mc'
+!C_MicroEtats_1.industry := 'Jurisdictional consulting'
+!insert (AB_SingleSuperConnector_1, C_MicroEtats_1) into AddressBookMadeOfContact
+
+!new Note('Note_MicroEtats_1')
+!Note_MicroEtats_1.author := 'Legal Desk'
+!Note_MicroEtats_1.time := Date('2026-02-23')
+!Note_MicroEtats_1.type := #MEETING
+!Note_MicroEtats_1.comment := 'Agreed to be modeled simultaneously as boss, subdivision, and employer in a test dataset.'
+!insert (C_MicroEtats_1, Note_MicroEtats_1) into ContactContainsNote
+
+!new Note('Note_MicroEtats_2')
+!Note_MicroEtats_2.author := 'Legal Desk'
+!Note_MicroEtats_2.time := Date('2026-02-23')
+!Note_MicroEtats_2.type := #CALL
+!Note_MicroEtats_2.comment := 'Confirmed that contradictions are acceptable because RelationshipType is just a label.'
+!insert (C_MicroEtats_1, Note_MicroEtats_2) into ContactContainsNote
+
+!new Address('Addr_MicroEtats_1')
+!Addr_MicroEtats_1.city := 'Monaco'
+!Addr_MicroEtats_1.houseNr := '1'
+!Addr_MicroEtats_1.street := 'Rue des Tests'
+!insert (C_MicroEtats_1, Addr_MicroEtats_1) into ContactContainsAddress
+
+!new Relationship('Rel_Archivist_R1_1')
+!Rel_Archivist_R1_1.type := #BOSS
+!insert (P_Archivist_1, Rel_Archivist_R1_1) into ContactToRelationship
+!insert (Rel_Archivist_R1_1, P_Haakon_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R2_1')
+!Rel_Archivist_R2_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R2_1) into ContactToRelationship
+!insert (Rel_Archivist_R2_1, P_Haakon_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R3_1')
+!Rel_Archivist_R3_1.type := #COWORKER
+!insert (P_Archivist_1, Rel_Archivist_R3_1) into ContactToRelationship
+!insert (Rel_Archivist_R3_1, P_Fatou_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R4_1')
+!Rel_Archivist_R4_1.type := #COWORKER
+!insert (P_Archivist_1, Rel_Archivist_R4_1) into ContactToRelationship
+!insert (Rel_Archivist_R4_1, P_Fatou_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R5_1')
+!Rel_Archivist_R5_1.type := #SUBDIVISION
+!insert (P_Archivist_1, Rel_Archivist_R5_1) into ContactToRelationship
+!insert (Rel_Archivist_R5_1, C_Paperless_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R6_1')
+!Rel_Archivist_R6_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R6_1) into ContactToRelationship
+!insert (Rel_Archivist_R6_1, C_Paperless_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R7_1')
+!Rel_Archivist_R7_1.type := #BOSS
+!insert (P_Archivist_1, Rel_Archivist_R7_1) into ContactToRelationship
+!insert (Rel_Archivist_R7_1, C_MicroEtats_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R8_1')
+!Rel_Archivist_R8_1.type := #SUBDIVISION
+!insert (P_Archivist_1, Rel_Archivist_R8_1) into ContactToRelationship
+!insert (Rel_Archivist_R8_1, C_MicroEtats_1) into RelationshipToContact
+
+!new Relationship('Rel_Archivist_R9_1')
+!Rel_Archivist_R9_1.type := #EMPLOYEE
+!insert (P_Archivist_1, Rel_Archivist_R9_1) into ContactToRelationship
+!insert (Rel_Archivist_R9_1, C_MicroEtats_1) into RelationshipToContact
+
+!new AddressBook('AB_SunWeave_Microgrid_2026_1')
+
+!new Person('P_SW_Kojo_1')
+!P_SW_Kojo_1.name := 'Eng. Kojo Mensah'
+!P_SW_Kojo_1.title := 'Eng.'
+!P_SW_Kojo_1.phone := '+233 30 255 1807'
+!P_SW_Kojo_1.website := 'https://kojomensah.example.gh'
+!P_SW_Kojo_1.email := 'kojo.mensah@example.gh'
+!insert (AB_SunWeave_Microgrid_2026_1, P_SW_Kojo_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Kojo_Accra_1')
+!Addr_SW_Kojo_Accra_1.city := 'Accra'
+!Addr_SW_Kojo_Accra_1.street := 'Ring Road Central'
+!Addr_SW_Kojo_Accra_1.houseNr := '16'
+!insert (P_SW_Kojo_1, Addr_SW_Kojo_Accra_1) into ContactContainsAddress
+
+!new Address('Addr_SW_Kojo_Tamale_1')
+!Addr_SW_Kojo_Tamale_1.city := 'Tamale'
+!Addr_SW_Kojo_Tamale_1.street := 'Hospital Road'
+!Addr_SW_Kojo_Tamale_1.houseNr := '3A'
+!insert (P_SW_Kojo_1, Addr_SW_Kojo_Tamale_1) into ContactContainsAddress
+
+!new Note('Note_SW_Kojo_1')
+!Note_SW_Kojo_1.author := 'Kojo Mensah'
+!Note_SW_Kojo_1.time := Date('2026-01-12')
+!Note_SW_Kojo_1.type := #MEETING
+!Note_SW_Kojo_1.comment := 'Community kickoff in San Isidro; agreed on metering pilot with prepaid option and paper fallback receipts.'
+!insert (P_SW_Kojo_1, Note_SW_Kojo_1) into ContactContainsNote
+
+!new Note('Note_SW_Kojo_2')
+!Note_SW_Kojo_2.author := 'Benoît Tremblay'
+!Note_SW_Kojo_2.time := Date('2026-01-20')
+!Note_SW_Kojo_2.type := #EMAIL
+!Note_SW_Kojo_2.comment := 'Flagged that the interconnect requires anti-islanding test documentation before final sign-off.'
+!insert (P_SW_Kojo_1, Note_SW_Kojo_2) into ContactContainsNote
+
+!new Note('Note_SW_Kojo_3')
+!Note_SW_Kojo_3.author := 'Sanna Lehtinen'
+!Note_SW_Kojo_3.time := Date('2026-02-02')
+!Note_SW_Kojo_3.type := #CALL
+!Note_SW_Kojo_3.comment := 'Battery enclosure venting must be updated for tropical humidity; sending revised BOM.'
+!insert (P_SW_Kojo_1, Note_SW_Kojo_3) into ContactContainsNote
+
+!new Person('P_SW_Malou_1')
+!P_SW_Malou_1.name := 'Maria‑Luisa “Malou” Reyes'
+!P_SW_Malou_1.title := 'Ms.'
+!P_SW_Malou_1.phone := '+63 917 650 4102'
+!P_SW_Malou_1.website := 'https://malou-reyes.example.ph'
+!P_SW_Malou_1.email := 'malou.reyes@example.ph'
+!insert (AB_SunWeave_Microgrid_2026_1, P_SW_Malou_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Malou_Iloilo_1')
+!Addr_SW_Malou_Iloilo_1.city := 'Iloilo City'
+!Addr_SW_Malou_Iloilo_1.street := 'Jaro Plaza'
+!Addr_SW_Malou_Iloilo_1.houseNr := '9'
+!insert (P_SW_Malou_1, Addr_SW_Malou_Iloilo_1) into ContactContainsAddress
+
+!new Address('Addr_SW_Malou_SanIsidro_1')
+!Addr_SW_Malou_SanIsidro_1.city := 'San Isidro'
+!Addr_SW_Malou_SanIsidro_1.street := 'Rizal Street'
+!Addr_SW_Malou_SanIsidro_1.houseNr := '1'
+!insert (P_SW_Malou_1, Addr_SW_Malou_SanIsidro_1) into ContactContainsAddress
+
+!new Note('Note_SW_Malou_1')
+!Note_SW_Malou_1.author := 'Malou Reyes'
+!Note_SW_Malou_1.time := Date('2026-01-14')
+!Note_SW_Malou_1.type := #CALL
+!Note_SW_Malou_1.comment := 'Barangay leaders asked for clear rules on disconnection and medical-exemption cases.'
+!insert (P_SW_Malou_1, Note_SW_Malou_1) into ContactContainsNote
+
+!new Note('Note_SW_Malou_2')
+!Note_SW_Malou_2.author := 'Malou Reyes'
+!Note_SW_Malou_2.time := Date('2026-02-05')
+!Note_SW_Malou_2.type := #EMAIL
+!Note_SW_Malou_2.comment := 'Translated customer FAQ into Hiligaynon; requested approval to print 500 copies.'
+!insert (P_SW_Malou_1, Note_SW_Malou_2) into ContactContainsNote
+
+!new Person('P_SW_Sanna_1')
+!P_SW_Sanna_1.name := 'Sanna Lehtinen'
+!P_SW_Sanna_1.title := 'Ms.'
+!P_SW_Sanna_1.phone := '+358 40 555 8810'
+!P_SW_Sanna_1.website := 'https://sanna-lehtinen.example.fi'
+!P_SW_Sanna_1.email := 'sanna.lehtinen@example.fi'
+!insert (AB_SunWeave_Microgrid_2026_1, P_SW_Sanna_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Sanna_Tampere_1')
+!Addr_SW_Sanna_Tampere_1.city := 'Tampere'
+!Addr_SW_Sanna_Tampere_1.street := 'Hämeenkatu'
+!Addr_SW_Sanna_Tampere_1.houseNr := '27'
+!insert (P_SW_Sanna_1, Addr_SW_Sanna_Tampere_1) into ContactContainsAddress
+
+!new Note('Note_SW_Sanna_1')
+!Note_SW_Sanna_1.author := 'Sanna Lehtinen'
+!Note_SW_Sanna_1.time := Date('2026-01-09')
+!Note_SW_Sanna_1.type := #MEETING
+!Note_SW_Sanna_1.comment := 'Reviewed inverter-battery integration; recommended adding surge suppression for unstable generator handover.'
+!insert (P_SW_Sanna_1, Note_SW_Sanna_1) into ContactContainsNote
+
+!new Note('Note_SW_Sanna_2')
+!Note_SW_Sanna_2.author := 'HydroNord Tech Desk'
+!Note_SW_Sanna_2.time := Date('2026-01-21')
+!Note_SW_Sanna_2.type := #EMAIL
+!Note_SW_Sanna_2.comment := 'Requested frequency response test results and firmware hash for the controller.'
+!insert (P_SW_Sanna_1, Note_SW_Sanna_2) into ContactContainsNote
+
+!new Person('P_SW_Benoit_1')
+!P_SW_Benoit_1.name := 'Benoît Tremblay'
+!P_SW_Benoit_1.title := 'Mr.'
+!P_SW_Benoit_1.phone := '+1 418-555-9033'
+!P_SW_Benoit_1.website := 'https://benoit-tremblay.example.ca'
+!P_SW_Benoit_1.email := 'benoit.tremblay@example.ca'
+!insert (AB_SunWeave_Microgrid_2026_1, P_SW_Benoit_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Benoit_QuebecCity_1')
+!Addr_SW_Benoit_QuebecCity_1.city := 'Québec City'
+!Addr_SW_Benoit_QuebecCity_1.street := 'Boulevard René‑Lévesque Ouest'
+!Addr_SW_Benoit_QuebecCity_1.houseNr := '455'
+!insert (P_SW_Benoit_1, Addr_SW_Benoit_QuebecCity_1) into ContactContainsAddress
+
+!new Note('Note_SW_Benoit_1')
+!Note_SW_Benoit_1.author := 'Benoît Tremblay'
+!Note_SW_Benoit_1.time := Date('2026-01-18')
+!Note_SW_Benoit_1.type := #MEETING
+!Note_SW_Benoit_1.comment := 'Compliance review: confirmed acceptable relay settings; need onsite witness test dates.'
+!insert (P_SW_Benoit_1, Note_SW_Benoit_1) into ContactContainsNote
+
+!new Note('Note_SW_Benoit_2')
+!Note_SW_Benoit_2.author := 'Kojo Mensah'
+!Note_SW_Benoit_2.time := Date('2026-01-25')
+!Note_SW_Benoit_2.type := #EMAIL
+!Note_SW_Benoit_2.comment := 'Shared proposed commissioning schedule; requested regulator observer availability.'
+!insert (P_SW_Benoit_1, Note_SW_Benoit_2) into ContactContainsNote
+
+!new Person('P_SW_Fatou_1')
+!P_SW_Fatou_1.name := 'Fatou Ndiaye'
+!P_SW_Fatou_1.title := 'Ms.'
+!P_SW_Fatou_1.phone := '+221 33 555 7001'
+!P_SW_Fatou_1.website := 'https://fatou-ndiaye.example.sn'
+!P_SW_Fatou_1.email := 'fatou.ndiaye@example.sn'
+!insert (AB_SunWeave_Microgrid_2026_1, P_SW_Fatou_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Fatou_Dakar_1')
+!Addr_SW_Fatou_Dakar_1.city := 'Dakar'
+!Addr_SW_Fatou_Dakar_1.street := 'Avenue Léopold Sédar Senghor'
+!Addr_SW_Fatou_Dakar_1.houseNr := '10'
+!insert (P_SW_Fatou_1, Addr_SW_Fatou_Dakar_1) into ContactContainsAddress
+
+!new Address('Addr_SW_Fatou_Paris_1')
+!Addr_SW_Fatou_Paris_1.city := 'Paris'
+!Addr_SW_Fatou_Paris_1.street := 'Rue La Boétie'
+!Addr_SW_Fatou_Paris_1.houseNr := '41'
+!insert (P_SW_Fatou_1, Addr_SW_Fatou_Paris_1) into ContactContainsAddress
+
+!new Note('Note_SW_Fatou_1')
+!Note_SW_Fatou_1.author := 'Fatou Ndiaye'
+!Note_SW_Fatou_1.time := Date('2026-01-16')
+!Note_SW_Fatou_1.type := #EMAIL
+!Note_SW_Fatou_1.comment := 'Financing conditions: require theft coverage for meters and monthly revenue reconciliation reports.'
+!insert (P_SW_Fatou_1, Note_SW_Fatou_1) into ContactContainsNote
+
+!new Note('Note_SW_Fatou_2')
+!Note_SW_Fatou_2.author := 'Sahel Impact Bank Credit Committee'
+!Note_SW_Fatou_2.time := Date('2026-02-06')
+!Note_SW_Fatou_2.type := #MEETING
+!Note_SW_Fatou_2.comment := 'Approved tranche 1 subject to regulator interconnect confirmation and community grievance mechanism.'
+!insert (P_SW_Fatou_1, Note_SW_Fatou_2) into ContactContainsNote
+
+!new Company('C_SW_SunWeave_1')
+!C_SW_SunWeave_1.name := 'SunWeave Energy Cooperative'
+!C_SW_SunWeave_1.industry := 'Community Renewable Energy & Microgrids'
+!C_SW_SunWeave_1.phone := '+233 30 255 1000'
+!C_SW_SunWeave_1.website := 'https://sunweave.example'
+!C_SW_SunWeave_1.email := 'info@sunweave.example'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_SunWeave_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_SunWeave_Accra_1')
+!Addr_SW_SunWeave_Accra_1.city := 'Accra'
+!Addr_SW_SunWeave_Accra_1.street := 'Independence Avenue'
+!Addr_SW_SunWeave_Accra_1.houseNr := '88'
+!insert (C_SW_SunWeave_1, Addr_SW_SunWeave_Accra_1) into ContactContainsAddress
+
+!new Address('Addr_SW_SunWeave_CapeCoast_1')
+!Addr_SW_SunWeave_CapeCoast_1.city := 'Cape Coast'
+!Addr_SW_SunWeave_CapeCoast_1.street := 'Kotoka Road'
+!Addr_SW_SunWeave_CapeCoast_1.houseNr := '5'
+!insert (C_SW_SunWeave_1, Addr_SW_SunWeave_CapeCoast_1) into ContactContainsAddress
+
+!new Note('Note_SW_SunWeave_1')
+!Note_SW_SunWeave_1.author := 'Operations Desk'
+!Note_SW_SunWeave_1.time := Date('2026-01-08')
+!Note_SW_SunWeave_1.type := #EMAIL
+!Note_SW_SunWeave_1.comment := 'Reminder: all meter serials must be logged before distribution; photos required for audit trail.'
+!insert (C_SW_SunWeave_1, Note_SW_SunWeave_1) into ContactContainsNote
+
+!new Company('C_SW_SunWeave_FieldAccra_1')
+!C_SW_SunWeave_FieldAccra_1.name := 'SunWeave Energy Cooperative — Accra Field Office'
+!C_SW_SunWeave_FieldAccra_1.industry := 'Microgrid Field Deployment'
+!C_SW_SunWeave_FieldAccra_1.phone := '+233 30 255 1044'
+!C_SW_SunWeave_FieldAccra_1.website := 'https://field.sunweave.example'
+!C_SW_SunWeave_FieldAccra_1.email := 'fieldops@sunweave.example'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_SunWeave_FieldAccra_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Field_Accra_1')
+!Addr_SW_Field_Accra_1.city := 'Accra'
+!Addr_SW_Field_Accra_1.street := 'Spintex Road'
+!Addr_SW_Field_Accra_1.houseNr := '14'
+!insert (C_SW_SunWeave_FieldAccra_1, Addr_SW_Field_Accra_1) into ContactContainsAddress
+
+!new Company('C_SW_AuroraStorage_1')
+!C_SW_AuroraStorage_1.name := 'Aurora Storage Oy'
+!C_SW_AuroraStorage_1.industry := 'Battery Systems & Power Electronics'
+!C_SW_AuroraStorage_1.phone := '+358 9 555 2100'
+!C_SW_AuroraStorage_1.website := 'https://aurorastorage.example.fi'
+!C_SW_AuroraStorage_1.email := 'projects@aurorastorage.example.fi'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_AuroraStorage_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Aurora_Espoo_1')
+!Addr_SW_Aurora_Espoo_1.city := 'Espoo'
+!Addr_SW_Aurora_Espoo_1.street := 'Keilaniementie'
+!Addr_SW_Aurora_Espoo_1.houseNr := '4'
+!insert (C_SW_AuroraStorage_1, Addr_SW_Aurora_Espoo_1) into ContactContainsAddress
+
+!new Address('Addr_SW_Aurora_Oulu_1')
+!Addr_SW_Aurora_Oulu_1.city := 'Oulu'
+!Addr_SW_Aurora_Oulu_1.street := 'Teknologiantie'
+!Addr_SW_Aurora_Oulu_1.houseNr := '12'
+!insert (C_SW_AuroraStorage_1, Addr_SW_Aurora_Oulu_1) into ContactContainsAddress
+
+!new Note('Note_SW_Aurora_1')
+!Note_SW_Aurora_1.author := 'Service Coordinator'
+!Note_SW_Aurora_1.time := Date('2026-01-23')
+!Note_SW_Aurora_1.type := #CALL
+!Note_SW_Aurora_1.comment := 'Spare parts kit will ship with two fans and one controller board; confirm destination customs broker.'
+!insert (C_SW_AuroraStorage_1, Note_SW_Aurora_1) into ContactContainsNote
+
+!new Company('C_SW_HydroNord_1')
+!C_SW_HydroNord_1.name := 'HydroNord Régie'
+!C_SW_HydroNord_1.industry := 'Grid Regulation & Utility Interconnect Services'
+!C_SW_HydroNord_1.phone := '+1 514-555-6620'
+!C_SW_HydroNord_1.website := 'https://hydronord.example.ca'
+!C_SW_HydroNord_1.email := 'interconnect@hydronord.example.ca'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_HydroNord_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_HydroNord_Montreal_1')
+!Addr_SW_HydroNord_Montreal_1.city := 'Montréal'
+!Addr_SW_HydroNord_Montreal_1.street := 'Rue Saint‑Jacques'
+!Addr_SW_HydroNord_Montreal_1.houseNr := '200'
+!insert (C_SW_HydroNord_1, Addr_SW_HydroNord_Montreal_1) into ContactContainsAddress
+
+!new Note('Note_SW_HydroNord_1')
+!Note_SW_HydroNord_1.author := 'Interconnect Office'
+!Note_SW_HydroNord_1.time := Date('2026-01-19')
+!Note_SW_HydroNord_1.type := #EMAIL
+!Note_SW_HydroNord_1.comment := 'Submitted list of required commissioning tests: protection relay verification, black-start simulation, and logs retention policy.'
+!insert (C_SW_HydroNord_1, Note_SW_HydroNord_1) into ContactContainsNote
+
+!new Company('C_SW_SahelImpact_1')
+!C_SW_SahelImpact_1.name := 'Sahel Impact Bank S.A.'
+!C_SW_SahelImpact_1.industry := 'Development Finance & Micro‑Infrastructure Lending'
+!C_SW_SahelImpact_1.phone := '+221 33 555 7010'
+!C_SW_SahelImpact_1.website := 'https://sahelimpact.example.sn'
+!C_SW_SahelImpact_1.email := 'loans@sahelimpact.example.sn'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_SahelImpact_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Sahel_Dakar_1')
+!Addr_SW_Sahel_Dakar_1.city := 'Dakar'
+!Addr_SW_Sahel_Dakar_1.street := 'Plateau'
+!Addr_SW_Sahel_Dakar_1.houseNr := '2'
+!insert (C_SW_SahelImpact_1, Addr_SW_Sahel_Dakar_1) into ContactContainsAddress
+
+!new Address('Addr_SW_Sahel_Abidjan_1')
+!Addr_SW_Sahel_Abidjan_1.city := 'Abidjan'
+!Addr_SW_Sahel_Abidjan_1.street := 'Boulevard de la République'
+!Addr_SW_Sahel_Abidjan_1.houseNr := '15'
+!insert (C_SW_SahelImpact_1, Addr_SW_Sahel_Abidjan_1) into ContactContainsAddress
+
+!new Company('C_SW_SahelParis_1')
+!C_SW_SahelParis_1.name := 'Sahel Impact Bank — Paris Desk'
+!C_SW_SahelParis_1.industry := 'Development Finance (EU Liaison)'
+!C_SW_SahelParis_1.phone := '+33 1 55 55 09 70'
+!C_SW_SahelParis_1.website := 'https://eu.sahelimpact.example.sn'
+!C_SW_SahelParis_1.email := 'parisdesk@sahelimpact.example.sn'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_SahelParis_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_SahelParis_Paris_1')
+!Addr_SW_SahelParis_Paris_1.city := 'Paris'
+!Addr_SW_SahelParis_Paris_1.street := 'Avenue de l’Opéra'
+!Addr_SW_SahelParis_Paris_1.houseNr := '20'
+!insert (C_SW_SahelParis_1, Addr_SW_SahelParis_Paris_1) into ContactContainsAddress
+
+!new Note('Note_SW_SahelParis_1')
+!Note_SW_SahelParis_1.author := 'Paris Desk Analyst'
+!Note_SW_SahelParis_1.time := Date('2026-02-01')
+!Note_SW_SahelParis_1.type := #EMAIL
+!Note_SW_SahelParis_1.comment := 'Requested translated governance documents for the cooperative (French/English) and board signatory list.'
+!insert (C_SW_SahelParis_1, Note_SW_SahelParis_1) into ContactContainsNote
+
+!new Company('C_SW_BarangaySanIsidro_1')
+!C_SW_BarangaySanIsidro_1.name := 'Barangay San Isidro Council'
+!C_SW_BarangaySanIsidro_1.industry := 'Local Government & Community Services'
+!C_SW_BarangaySanIsidro_1.phone := '+63 33 555 1200'
+!C_SW_BarangaySanIsidro_1.website := 'https://sanisidro-barangay.example.ph'
+!C_SW_BarangaySanIsidro_1.email := 'council@sanisidro-barangay.example.ph'
+!insert (AB_SunWeave_Microgrid_2026_1, C_SW_BarangaySanIsidro_1) into AddressBookMadeOfContact
+
+!new Address('Addr_SW_Barangay_SanIsidro_1')
+!Addr_SW_Barangay_SanIsidro_1.city := 'San Isidro'
+!Addr_SW_Barangay_SanIsidro_1.street := 'Barangay Hall Road'
+!Addr_SW_Barangay_SanIsidro_1.houseNr := '1'
+!insert (C_SW_BarangaySanIsidro_1, Addr_SW_Barangay_SanIsidro_1) into ContactContainsAddress
+
+!new Note('Note_SW_Barangay_1')
+!Note_SW_Barangay_1.author := 'Barangay Secretary'
+!Note_SW_Barangay_1.time := Date('2026-01-15')
+!Note_SW_Barangay_1.type := #MEETING
+!Note_SW_Barangay_1.comment := 'Approved public posting of tariff table; requested monthly townhall for complaints and outage reporting.'
+!insert (C_SW_BarangaySanIsidro_1, Note_SW_Barangay_1) into ContactContainsNote
+
+!new Relationship('Rel_SW_Kojo_Boss_Malou_1')
+!Rel_SW_Kojo_Boss_Malou_1.type := #BOSS
+!insert (P_SW_Kojo_1, Rel_SW_Kojo_Boss_Malou_1) into ContactToRelationship
+!insert (Rel_SW_Kojo_Boss_Malou_1, P_SW_Malou_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Kojo_CW_Sanna_1')
+!Rel_SW_Kojo_CW_Sanna_1.type := #COWORKER
+!insert (P_SW_Kojo_1, Rel_SW_Kojo_CW_Sanna_1) into ContactToRelationship
+!insert (Rel_SW_Kojo_CW_Sanna_1, P_SW_Sanna_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Kojo_CW_Benoit_1')
+!Rel_SW_Kojo_CW_Benoit_1.type := #COWORKER
+!insert (P_SW_Kojo_1, Rel_SW_Kojo_CW_Benoit_1) into ContactToRelationship
+!insert (Rel_SW_Kojo_CW_Benoit_1, P_SW_Benoit_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Kojo_Emp_SunWeave_1')
+!Rel_SW_Kojo_Emp_SunWeave_1.type := #EMPLOYEE
+!insert (P_SW_Kojo_1, Rel_SW_Kojo_Emp_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_Kojo_Emp_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Kojo_CW_Sahel_1')
+!Rel_SW_Kojo_CW_Sahel_1.type := #COWORKER
+!insert (P_SW_Kojo_1, Rel_SW_Kojo_CW_Sahel_1) into ContactToRelationship
+!insert (Rel_SW_Kojo_CW_Sahel_1, C_SW_SahelImpact_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Malou_Emp_Kojo_1')
+!Rel_SW_Malou_Emp_Kojo_1.type := #EMPLOYEE
+!insert (P_SW_Malou_1, Rel_SW_Malou_Emp_Kojo_1) into ContactToRelationship
+!insert (Rel_SW_Malou_Emp_Kojo_1, P_SW_Kojo_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Malou_Emp_Barangay_1')
+!Rel_SW_Malou_Emp_Barangay_1.type := #EMPLOYEE
+!insert (P_SW_Malou_1, Rel_SW_Malou_Emp_Barangay_1) into ContactToRelationship
+!insert (Rel_SW_Malou_Emp_Barangay_1, C_SW_BarangaySanIsidro_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Malou_CW_Field_1')
+!Rel_SW_Malou_CW_Field_1.type := #COWORKER
+!insert (P_SW_Malou_1, Rel_SW_Malou_CW_Field_1) into ContactToRelationship
+!insert (Rel_SW_Malou_CW_Field_1, C_SW_SunWeave_FieldAccra_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sanna_Emp_Aurora_1')
+!Rel_SW_Sanna_Emp_Aurora_1.type := #EMPLOYEE
+!insert (P_SW_Sanna_1, Rel_SW_Sanna_Emp_Aurora_1) into ContactToRelationship
+!insert (Rel_SW_Sanna_Emp_Aurora_1, C_SW_AuroraStorage_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sanna_CW_Kojo_1')
+!Rel_SW_Sanna_CW_Kojo_1.type := #COWORKER
+!insert (P_SW_Sanna_1, Rel_SW_Sanna_CW_Kojo_1) into ContactToRelationship
+!insert (Rel_SW_Sanna_CW_Kojo_1, P_SW_Kojo_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sanna_CW_HydroNord_1')
+!Rel_SW_Sanna_CW_HydroNord_1.type := #COWORKER
+!insert (P_SW_Sanna_1, Rel_SW_Sanna_CW_HydroNord_1) into ContactToRelationship
+!insert (Rel_SW_Sanna_CW_HydroNord_1, C_SW_HydroNord_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Benoit_Emp_HydroNord_1')
+!Rel_SW_Benoit_Emp_HydroNord_1.type := #EMPLOYEE
+!insert (P_SW_Benoit_1, Rel_SW_Benoit_Emp_HydroNord_1) into ContactToRelationship
+!insert (Rel_SW_Benoit_Emp_HydroNord_1, C_SW_HydroNord_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Benoit_CW_Kojo_1')
+!Rel_SW_Benoit_CW_Kojo_1.type := #COWORKER
+!insert (P_SW_Benoit_1, Rel_SW_Benoit_CW_Kojo_1) into ContactToRelationship
+!insert (Rel_SW_Benoit_CW_Kojo_1, P_SW_Kojo_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Benoit_CW_Sanna_1')
+!Rel_SW_Benoit_CW_Sanna_1.type := #COWORKER
+!insert (P_SW_Benoit_1, Rel_SW_Benoit_CW_Sanna_1) into ContactToRelationship
+!insert (Rel_SW_Benoit_CW_Sanna_1, P_SW_Sanna_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Fatou_Emp_Sahel_1')
+!Rel_SW_Fatou_Emp_Sahel_1.type := #EMPLOYEE
+!insert (P_SW_Fatou_1, Rel_SW_Fatou_Emp_Sahel_1) into ContactToRelationship
+!insert (Rel_SW_Fatou_Emp_Sahel_1, C_SW_SahelImpact_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Fatou_CW_Kojo_1')
+!Rel_SW_Fatou_CW_Kojo_1.type := #COWORKER
+!insert (P_SW_Fatou_1, Rel_SW_Fatou_CW_Kojo_1) into ContactToRelationship
+!insert (Rel_SW_Fatou_CW_Kojo_1, P_SW_Kojo_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Fatou_CW_SunWeave_1')
+!Rel_SW_Fatou_CW_SunWeave_1.type := #COWORKER
+!insert (P_SW_Fatou_1, Rel_SW_Fatou_CW_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_Fatou_CW_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Fatou_CW_SahelParis_1')
+!Rel_SW_Fatou_CW_SahelParis_1.type := #COWORKER
+!insert (P_SW_Fatou_1, Rel_SW_Fatou_CW_SahelParis_1) into ContactToRelationship
+!insert (Rel_SW_Fatou_CW_SahelParis_1, C_SW_SahelParis_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SunWeave_Sub_Field_1')
+!Rel_SW_SunWeave_Sub_Field_1.type := #SUBDIVISION
+!insert (C_SW_SunWeave_1, Rel_SW_SunWeave_Sub_Field_1) into ContactToRelationship
+!insert (Rel_SW_SunWeave_Sub_Field_1, C_SW_SunWeave_FieldAccra_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SunWeave_CW_Aurora_1')
+!Rel_SW_SunWeave_CW_Aurora_1.type := #COWORKER
+!insert (C_SW_SunWeave_1, Rel_SW_SunWeave_CW_Aurora_1) into ContactToRelationship
+!insert (Rel_SW_SunWeave_CW_Aurora_1, C_SW_AuroraStorage_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SunWeave_CW_HydroNord_1')
+!Rel_SW_SunWeave_CW_HydroNord_1.type := #COWORKER
+!insert (C_SW_SunWeave_1, Rel_SW_SunWeave_CW_HydroNord_1) into ContactToRelationship
+!insert (Rel_SW_SunWeave_CW_HydroNord_1, C_SW_HydroNord_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SunWeave_CW_Sahel_1')
+!Rel_SW_SunWeave_CW_Sahel_1.type := #COWORKER
+!insert (C_SW_SunWeave_1, Rel_SW_SunWeave_CW_Sahel_1) into ContactToRelationship
+!insert (Rel_SW_SunWeave_CW_Sahel_1, C_SW_SahelImpact_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SunWeave_CW_Barangay_1')
+!Rel_SW_SunWeave_CW_Barangay_1.type := #COWORKER
+!insert (C_SW_SunWeave_1, Rel_SW_SunWeave_CW_Barangay_1) into ContactToRelationship
+!insert (Rel_SW_SunWeave_CW_Barangay_1, C_SW_BarangaySanIsidro_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Field_CW_Barangay_1')
+!Rel_SW_Field_CW_Barangay_1.type := #COWORKER
+!insert (C_SW_SunWeave_FieldAccra_1, Rel_SW_Field_CW_Barangay_1) into ContactToRelationship
+!insert (Rel_SW_Field_CW_Barangay_1, C_SW_BarangaySanIsidro_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Field_CW_Aurora_1')
+!Rel_SW_Field_CW_Aurora_1.type := #COWORKER
+!insert (C_SW_SunWeave_FieldAccra_1, Rel_SW_Field_CW_Aurora_1) into ContactToRelationship
+!insert (Rel_SW_Field_CW_Aurora_1, C_SW_AuroraStorage_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Aurora_CW_SunWeave_1')
+!Rel_SW_Aurora_CW_SunWeave_1.type := #COWORKER
+!insert (C_SW_AuroraStorage_1, Rel_SW_Aurora_CW_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_Aurora_CW_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Aurora_CW_HydroNord_1')
+!Rel_SW_Aurora_CW_HydroNord_1.type := #COWORKER
+!insert (C_SW_AuroraStorage_1, Rel_SW_Aurora_CW_HydroNord_1) into ContactToRelationship
+!insert (Rel_SW_Aurora_CW_HydroNord_1, C_SW_HydroNord_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_HydroNord_CW_SunWeave_1')
+!Rel_SW_HydroNord_CW_SunWeave_1.type := #COWORKER
+!insert (C_SW_HydroNord_1, Rel_SW_HydroNord_CW_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_HydroNord_CW_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_HydroNord_CW_Aurora_1')
+!Rel_SW_HydroNord_CW_Aurora_1.type := #COWORKER
+!insert (C_SW_HydroNord_1, Rel_SW_HydroNord_CW_Aurora_1) into ContactToRelationship
+!insert (Rel_SW_HydroNord_CW_Aurora_1, C_SW_AuroraStorage_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_HydroNord_CW_Sahel_1')
+!Rel_SW_HydroNord_CW_Sahel_1.type := #COWORKER
+!insert (C_SW_HydroNord_1, Rel_SW_HydroNord_CW_Sahel_1) into ContactToRelationship
+!insert (Rel_SW_HydroNord_CW_Sahel_1, C_SW_SahelImpact_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sahel_Sub_Paris_1')
+!Rel_SW_Sahel_Sub_Paris_1.type := #SUBDIVISION
+!insert (C_SW_SahelImpact_1, Rel_SW_Sahel_Sub_Paris_1) into ContactToRelationship
+!insert (Rel_SW_Sahel_Sub_Paris_1, C_SW_SahelParis_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sahel_CW_SunWeave_1')
+!Rel_SW_Sahel_CW_SunWeave_1.type := #COWORKER
+!insert (C_SW_SahelImpact_1, Rel_SW_Sahel_CW_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_Sahel_CW_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Sahel_CW_HydroNord_1')
+!Rel_SW_Sahel_CW_HydroNord_1.type := #COWORKER
+!insert (C_SW_SahelImpact_1, Rel_SW_Sahel_CW_HydroNord_1) into ContactToRelationship
+!insert (Rel_SW_Sahel_CW_HydroNord_1, C_SW_HydroNord_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_SahelParis_CW_Fatou_1')
+!Rel_SW_SahelParis_CW_Fatou_1.type := #COWORKER
+!insert (C_SW_SahelParis_1, Rel_SW_SahelParis_CW_Fatou_1) into ContactToRelationship
+!insert (Rel_SW_SahelParis_CW_Fatou_1, P_SW_Fatou_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Barangay_CW_SunWeave_1')
+!Rel_SW_Barangay_CW_SunWeave_1.type := #COWORKER
+!insert (C_SW_BarangaySanIsidro_1, Rel_SW_Barangay_CW_SunWeave_1) into ContactToRelationship
+!insert (Rel_SW_Barangay_CW_SunWeave_1, C_SW_SunWeave_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Barangay_CW_Field_1')
+!Rel_SW_Barangay_CW_Field_1.type := #COWORKER
+!insert (C_SW_BarangaySanIsidro_1, Rel_SW_Barangay_CW_Field_1) into ContactToRelationship
+!insert (Rel_SW_Barangay_CW_Field_1, C_SW_SunWeave_FieldAccra_1) into RelationshipToContact
+
+!new Relationship('Rel_SW_Barangay_CW_Malou_1')
+!Rel_SW_Barangay_CW_Malou_1.type := #COWORKER
+!insert (C_SW_BarangaySanIsidro_1, Rel_SW_Barangay_CW_Malou_1) into ContactToRelationship
+!insert (Rel_SW_Barangay_CW_Malou_1, P_SW_Malou_1) into RelationshipToContact
+

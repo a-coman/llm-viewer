@@ -1,0 +1,18 @@
+!new Client('clientMinC40')
+!clientMinC40.clientId := 7
+!clientMinC40.isSuspended := true
+
+!new Rental('rentalMinR40')
+!rentalMinR40.date := Date('1582-10-15')
+
+!new Series('seriesMinS40')
+!seriesMinS40.title := 'Ngā Wāhanga Tuatahi'
+!seriesMinS40.availableCopies := 0
+!seriesMinS40.episode := 1
+
+!new Actor('actorMinA40')
+!actorMinA40.name := 'Þórður Jónsson'
+
+!insert (clientMinC40, rentalMinR40) into ClientRental
+!insert (rentalMinR40, seriesMinS40) into RentalCassette
+!insert (seriesMinS40, actorMinA40) into CassetteActor

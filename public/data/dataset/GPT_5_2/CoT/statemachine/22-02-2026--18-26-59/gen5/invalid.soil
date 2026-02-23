@@ -1,0 +1,83 @@
+!new StateMachine('sm_baggageCarouselControl_fix')
+!sm_baggageCarouselControl_fix.name := 'baggageCarouselControl'
+
+!new State('st_bccf_stopped')
+!st_bccf_stopped.name := 'stopped'
+!new State('st_bccf_starting')
+!st_bccf_starting.name := 'starting'
+!new State('st_bccf_running')
+!st_bccf_running.name := 'running'
+!new State('st_bccf_stopping')
+!st_bccf_stopping.name := 'stopping'
+!new State('st_bccf_jammed')
+!st_bccf_jammed.name := 'jammed'
+
+!insert (sm_baggageCarouselControl_fix, st_bccf_stopped) into StateMachineContainsStates
+!insert (sm_baggageCarouselControl_fix, st_bccf_starting) into StateMachineContainsStates
+!insert (sm_baggageCarouselControl_fix, st_bccf_running) into StateMachineContainsStates
+!insert (sm_baggageCarouselControl_fix, st_bccf_stopping) into StateMachineContainsStates
+!insert (sm_baggageCarouselControl_fix, st_bccf_jammed) into StateMachineContainsStates
+
+!insert (sm_baggageCarouselControl_fix, st_bccf_stopped) into StateMachineStartsStates
+
+!new Transition('tr_bccf_tStartMotor')
+!tr_bccf_tStartMotor.name := 'tStartMotor'
+!new Transition('tr_bccf_tStartupToRunning')
+!tr_bccf_tStartupToRunning.name := 'tStartupToRunning'
+!new Transition('tr_bccf_tRequestStop')
+!tr_bccf_tRequestStop.name := 'tRequestStop'
+!new Transition('tr_bccf_tStoppingToStopped')
+!tr_bccf_tStoppingToStopped.name := 'tStoppingToStopped'
+!new Transition('tr_bccf_tDetectJam')
+!tr_bccf_tDetectJam.name := 'tDetectJam'
+!new Transition('tr_bccf_tResetFromJam')
+!tr_bccf_tResetFromJam.name := 'tResetFromJam'
+
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tStartMotor) into StateMachineContainsTransitions
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tStartupToRunning) into StateMachineContainsTransitions
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tRequestStop) into StateMachineContainsTransitions
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tStoppingToStopped) into StateMachineContainsTransitions
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tDetectJam) into StateMachineContainsTransitions
+!insert (sm_baggageCarouselControl_fix, tr_bccf_tResetFromJam) into StateMachineContainsTransitions
+
+!insert (st_bccf_stopped, tr_bccf_tStartMotor) into StateTransition
+!insert (tr_bccf_tStartMotor, st_bccf_starting) into TransitionState
+
+!insert (st_bccf_starting, tr_bccf_tStartupToRunning) into StateTransition
+!insert (tr_bccf_tStartupToRunning, st_bccf_running) into TransitionState
+
+!insert (st_bccf_running, tr_bccf_tRequestStop) into StateTransition
+!insert (tr_bccf_tRequestStop, st_bccf_stopping) into TransitionState
+
+!insert (st_bccf_stopping, tr_bccf_tStoppingToStopped) into StateTransition
+!insert (tr_bccf_tStoppingToStopped, st_bccf_stopped) into TransitionState
+
+!insert (st_bccf_running, tr_bccf_tDetectJam) into StateTransition
+!insert (tr_bccf_tDetectJam, st_bccf_jammed) into TransitionState
+
+!insert (st_bccf_jammed, tr_bccf_tResetFromJam) into StateTransition
+!insert (tr_bccf_tResetFromJam, st_bccf_running) into TransitionState
+
+!new TimeEvent('te_bccf_tStartMotor')
+!te_bccf_tStartMotor.time := 1
+!insert (tr_bccf_tStartMotor, te_bccf_tStartMotor) into TransitionContainsEvents
+
+!new TimeEvent('te_bccf_heartbeat5s_startup')
+!te_bccf_heartbeat5s_startup.time := 5
+!insert (tr_bccf_tStartupToRunning, te_bccf_heartbeat5s_startup) into TransitionContainsEvents
+
+!new TimeEvent('te_bccf_tRequestStop')
+!te_bccf_tRequestStop.time := 2
+!insert (tr_bccf_tRequestStop, te_bccf_tRequestStop) into TransitionContainsEvents
+
+!new TimeEvent('te_bccf_heartbeat5s_stopping')
+!te_bccf_heartbeat5s_stopping.time := 5
+!insert (tr_bccf_tStoppingToStopped, te_bccf_heartbeat5s_stopping) into TransitionContainsEvents
+
+!new TimeEvent('te_bccf_tDetectJam')
+!te_bccf_tDetectJam.time := 3
+!insert (tr_bccf_tDetectJam, te_bccf_tDetectJam) into TransitionContainsEvents
+
+!new TimeEvent('te_bccf_tResetFromJam')
+!te_bccf_tResetFromJam.time := 10
+!insert (tr_bccf_tResetFromJam, te_bccf_tResetFromJam) into TransitionContainsEvents

@@ -1,0 +1,80 @@
+!new Customer('C15')
+!C15.firstName := 'Nguyễn Thị'
+!C15.lastName := 'Mai'
+
+!new Booking('B4550')
+!B4550.bookingId := 4550
+!B4550.startDate := '2026-09-18'
+!B4550.endDate := '2026-09-20'
+!B4550.confirmed := true
+!B4550.canceled := false
+
+!new RoomReservation('RR7')
+!RR7.checkInDate := '2026-09-18'
+!RR7.checkOutDate := '2026-09-20'
+
+!new RoomReservation('RR8')
+!RR8.checkInDate := '2026-09-18'
+!RR8.checkOutDate := '2026-09-18'
+
+!new Room('R902')
+!R902.roomNumber := 902
+!R902.numBeds := 2
+!R902.pricePerNight := 160.00
+!R902.occupied := true
+!R902.blocked := false
+
+!new RoomExtra('E20')
+!E20.description := 'Welcome fruit + herbal tea set'
+!E20.price := 20.00
+
+!new RoomExtra('E21_2')
+!E21_2.description := 'Co-working lounge day pass (4 hours)'
+!E21_2.price := 15.00
+
+!new RoomExtra('E22_2')
+!E22_2.description := 'Luggage storage (pre check-in)'
+!E22_2.price := 0.00
+
+!new Bill('BL12005')
+!BL12005.billId := 12005
+!BL12005.price := 340.00
+
+!new Bill('BL12006')
+!BL12006.billId := 12006
+!BL12006.price := 15.00
+
+!new FreeRoomTypesDTO('D24')
+!D24.roomTypeDescription := 'Quarto Executivo (andar alto, vista cidade)'
+!D24.numBeds := 1
+!D24.pricePerNight := 150.00
+!D24.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('D25')
+!D25.roomTypeDescription := 'Семейный номер (две спальни)'
+!D25.numBeds := 4
+!D25.pricePerNight := 260.00
+!D25.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('D26')
+!D26.roomTypeDescription := 'Accessible Double (roll-in shower)'
+!D26.numBeds := 2
+!D26.pricePerNight := 170.00
+!D26.numFreeRooms := 0
+
+!insert (B4550, C15) into BookingCustomer
+
+!insert (B4550, RR7) into BookingRoomReservation
+!insert (B4550, RR8) into BookingRoomReservation
+
+!insert (RR7, R902) into RoomReservationRoom
+
+!insert (RR7, E20) into RoomReservationExtras
+!insert (RR8, E21_2) into RoomReservationExtras
+!insert (RR8, E22_2) into RoomReservationExtras
+
+!insert (B4550, BL12005) into BookingBill
+!insert (B4550, BL12006) into BookingBill
+
+!insert (BL12005, RR7) into BillRoomReservation
+!insert (BL12006, RR8) into BillRoomReservation

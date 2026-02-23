@@ -1,0 +1,75 @@
+!new Station('S1')
+
+!new Driver('D1001')
+!D1001.id := 'D-1001'
+!D1001.name := 'Marek Nowak'
+
+!new Driver('D1002')
+!D1002.id := 'D-1002'
+!D1002.name := 'Aylin Demir'
+
+!insert (S1, D1001) into StationContainsDriver
+!insert (S1, D1002) into StationContainsDriver
+
+!new Customer('C2001')
+!C2001.id := 'C-2001'
+!C2001.name := 'Hannah Müller'
+!C2001.twitterUserName := '@hannahmueller'
+
+!new Customer('C2002')
+!C2002.id := 'C-2002'
+!C2002.name := 'Kenji Sato'
+!C2002.twitterUserName := '@kenjisato_berlin'
+
+!insert (S1, C2001) into StationContainsCustomer
+!insert (S1, C2002) into StationContainsCustomer
+
+!new Address('APU1')
+!APU1.text := 'Kantstraße 12, 10623 Berlin, Germany'
+!new GeoLocation('GL1')
+!GL1.latitude := 52.5076
+!GL1.longitude := 13.3290
+!insert (APU1, GL1) into AddressContainsGeoLocation
+
+!new Address('ADEL1')
+!ADEL1.text := 'Revaler Str. 99, 10245 Berlin, Germany'
+!new GeoLocation('GL2')
+!GL2.latitude := 52.5070
+!GL2.longitude := 13.4550
+!insert (ADEL1, GL2) into AddressContainsGeoLocation
+
+!new Address('APU2')
+!APU2.text := 'Hardenbergplatz 8, 10623 Berlin, Germany'
+!new GeoLocation('GL3')
+!GL3.latitude := 52.5063
+!GL3.longitude := 13.3335
+!insert (APU2, GL3) into AddressContainsGeoLocation
+
+!new Address('ADEL2')
+!ADEL2.text := 'Tempelhofer Damm 216, 12099 Berlin, Germany'
+!new GeoLocation('GL4')
+!GL4.latitude := 52.4561
+!GL4.longitude := 13.3852
+!insert (ADEL2, GL4) into AddressContainsGeoLocation
+
+!new Shipment('SH3001')
+!SH3001.id := 'SH-3001'
+!SH3001.status := #ASSIGNED
+
+!new Shipment('SH3002')
+!SH3002.id := 'SH-3002'
+!SH3002.status := #NEW
+
+!insert (S1, SH3001) into StationShipment
+!insert (S1, SH3002) into StationShipment
+
+!insert (C2001, SH3001) into CustomerConsistsOfShipment
+!insert (C2002, SH3002) into CustomerConsistsOfShipment
+
+!insert (SH3001, APU1) into ShipmentContainsPickUpAddress
+!insert (SH3001, ADEL1) into ShipmentContainsDeliveryAddress
+
+!insert (SH3002, APU2) into ShipmentContainsPickUpAddress
+!insert (SH3002, ADEL2) into ShipmentContainsDeliveryAddress
+
+!insert (D1001, SH3001) into DriverShipment

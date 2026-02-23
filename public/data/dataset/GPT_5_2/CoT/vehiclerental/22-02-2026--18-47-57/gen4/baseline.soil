@@ -1,0 +1,134 @@
+!new RentalOffice('RO_41_NHV')
+!RO_41_NHV.name := 'Soundside Truck & Trailer – New Haven'
+!RO_41_NHV.number := 41
+!RO_41_NHV.address := '250 State St, New Haven, CT 06510, USA'
+
+!new RentalOffice('RO_42_WILRF')
+!RO_42_WILRF.name := 'Brandywine Rentals – Wilmington Riverfront'
+!RO_42_WILRF.number := 42
+!RO_42_WILRF.address := '760 Justison St, Wilmington, DE 19801, USA'
+
+!new RentalOffice('RO_9_KW')
+!RO_9_KW.name := 'Island Drop Point – Key West'
+!RO_9_KW.number := 9
+!RO_9_KW.address := '101 Front St, Key West, FL 33040, USA'
+
+!new Truck('V_3001')
+!V_3001.id := 3001
+!V_3001.registrationState := #CT
+!V_3001.licensePlateNumber := 'CT-HL-7049'
+!V_3001.vehicleTypeCode := #TRUCK24
+!V_3001.registrationLastMaintenanceDate := Date('2026-01-08')
+!V_3001.expirationDate := Date('2026-07-31')
+!V_3001.odometerReading := 88910
+!V_3001.gasTankCapacity := 31.5
+!V_3001.workingRadio := true
+!V_3001.mileage := 12
+
+!new Vehicle('V_3002')
+!V_3002.id := 3002
+!V_3002.registrationState := #CT
+!V_3002.licensePlateNumber := 'CT-CV-2210'
+!V_3002.vehicleTypeCode := #COVERED_TRAILER
+!V_3002.registrationLastMaintenanceDate := Date('2025-12-14')
+!V_3002.expirationDate := Date('2026-12-14')
+
+!new Vehicle('V_3003')
+!V_3003.id := 3003
+!V_3003.registrationState := #DE
+!V_3003.licensePlateNumber := 'DE-OP-9031'
+!V_3003.vehicleTypeCode := #OPEN_TRAILER
+!V_3003.registrationLastMaintenanceDate := Date('2026-02-11')
+!V_3003.expirationDate := Date('2027-02-28')
+
+!new Company('CUST_C_600')
+!CUST_C_600.name := 'Nordic Film Crew AB (US Unit)'
+!CUST_C_600.address := '500 S Buena Vista St, Burbank, CA 91521, USA'
+!CUST_C_600.poorRisk := false
+!CUST_C_600.idNumber := 6007712
+
+!new Individual('CUST_I_155')
+!CUST_I_155.name := 'Zoë Martínez'
+!CUST_I_155.address := '18 Wooster Pl, New Haven, CT 06511, USA'
+!CUST_I_155.poorRisk := false
+!CUST_I_155.homePhone := '+1-203-555-0164'
+!CUST_I_155.driverLicenseState := #CT
+!CUST_I_155.driverLicenseNumber := 41855021
+!CUST_I_155.driverLicenseExpirationDate := Date('2028-09-30')
+
+!new Individual('CUST_I_156')
+!CUST_I_156.name := 'Caleb Johnson'
+!CUST_I_156.address := '904 N Market St, Wilmington, DE 19801, USA'
+!CUST_I_156.poorRisk := true
+!CUST_I_156.homePhone := '+1-302-555-0108'
+!CUST_I_156.driverLicenseState := #DE
+!CUST_I_156.driverLicenseNumber := 9901735
+!CUST_I_156.driverLicenseExpirationDate := Date('2026-11-20')
+
+!new RentalAgreement('RA_41001')
+!RA_41001.number := 41001
+!RA_41001.rentalDate := Date('2026-05-02')
+!RA_41001.anticipatedDuration := 2
+!RA_41001.depositPaid := 500.0
+!RA_41001.quotedDailyRate := 149.0
+!RA_41001.quotedRatePerMile := 0.55
+
+!new RentalAgreement('RA_41002')
+!RA_41002.number := 41002
+!RA_41002.rentalDate := Date('2026-05-04')
+!RA_41002.anticipatedDuration := 6
+!RA_41002.depositPaid := 100.0
+!RA_41002.quotedDailyRate := 42.0
+!RA_41002.quotedRatePerMile := 0.1
+
+!new RentalAgreement('RA_41003')
+!RA_41003.number := 41003
+!RA_41003.rentalDate := Date('2026-05-11')
+!RA_41003.anticipatedDuration := 5
+!RA_41003.depositPaid := 0.0
+!RA_41003.quotedDailyRate := 165.0
+!RA_41003.quotedRatePerMile := 0.6
+
+!new RentalAgreement('RA_41004')
+!RA_41004.number := 41004
+!RA_41004.rentalDate := Date('2026-05-18')
+!RA_41004.anticipatedDuration := 1
+!RA_41004.depositPaid := 75.0
+!RA_41004.quotedDailyRate := 35.0
+!RA_41004.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_41005')
+!RA_41005.number := 41005
+!RA_41005.rentalDate := Date('2026-05-25')
+!RA_41005.anticipatedDuration := 3
+!RA_41005.depositPaid := 250.0
+!RA_41005.quotedDailyRate := 139.5
+!RA_41005.quotedRatePerMile := 0.49
+
+!insert (RO_41_NHV, V_3001) into RentalOfficeVehicle
+!insert (RO_41_NHV, V_3002) into RentalOfficeVehicle
+!insert (RO_42_WILRF, V_3003) into RentalOfficeVehicle
+
+!insert (RO_41_NHV, RA_41001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41003) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41004) into RentalOfficeRentalAgreementOrigin
+!insert (RO_41_NHV, RA_41005) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_42_WILRF, RA_41001) into RentalOfficeRentalAgreementDrop
+!insert (RO_41_NHV, RA_41002) into RentalOfficeRentalAgreementDrop
+!insert (RO_9_KW, RA_41003) into RentalOfficeRentalAgreementDrop
+!insert (RO_42_WILRF, RA_41004) into RentalOfficeRentalAgreementDrop
+!insert (RO_41_NHV, RA_41005) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_41001, V_3001) into RentalAgreementVehicle
+!insert (RA_41002, V_3002) into RentalAgreementVehicle
+!insert (RA_41003, V_3001) into RentalAgreementVehicle
+!insert (RA_41004, V_3003) into RentalAgreementVehicle
+!insert (RA_41005, V_3001) into RentalAgreementVehicle
+
+!insert (RA_41001, CUST_C_600) into RentalAgreementCustomer
+!insert (RA_41002, CUST_I_155) into RentalAgreementCustomer
+!insert (RA_41003, CUST_I_156) into RentalAgreementCustomer
+!insert (RA_41004, CUST_C_600) into RentalAgreementCustomer
+!insert (RA_41005, CUST_I_156) into RentalAgreementCustomer

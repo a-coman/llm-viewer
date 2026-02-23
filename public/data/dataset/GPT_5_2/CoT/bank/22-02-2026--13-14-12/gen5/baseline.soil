@@ -1,0 +1,78 @@
+!new Bank('b33')
+!b33.name := 'Aegean Trust Bank'
+!b33.country := 'Greece'
+!b33.bic := 'AETRGRAAXXX'
+
+!new Bank('b34')
+!b34.name := 'Nordlys Sparebank'
+!b34.country := 'Norway'
+!b34.bic := 'NLSBNO21XXX'
+
+!new Person('p93')
+!p93.firstName := 'Eleni'
+!p93.lastName := 'Papadopoulos'
+!p93.age := 37
+
+!new Person('p94')
+!p94.firstName := 'Giorgos'
+!p94.lastName := 'Nikolaidis'
+!p94.age := 39
+
+!new Person('p95')
+!p95.firstName := 'Rania'
+!p95.lastName := 'Ibrahim'
+!p95.age := 26
+
+!new Person('p96')
+!p96.firstName := 'Lars'
+!p96.lastName := 'Nygård'
+!p96.age := 58
+
+!new Person('p97')
+!p97.firstName := 'Ingrid'
+!p97.lastName := 'Johansen'
+!p97.age := 55
+
+!new Person('p98')
+!p98.firstName := 'Tomasz'
+!p98.lastName := 'Kowalski'
+!p98.age := 24
+
+!new Account('a55')
+!a55.iban := 'GR16 0110 1250 0000 0001 2300 695'
+!a55.balance := 0
+
+!new Account('a56')
+!a56.iban := 'GR94 0140 1320 0000 0003 5200 115'
+!a56.balance := 320
+
+!new Account('a57')
+!a57.iban := 'GR03 0171 2100 0000 0009 8765 432'
+!a57.balance := 50000
+
+!new Account('a58')
+!a58.iban := 'NO93 8601 1117 947'
+!a58.balance := 1250
+
+!insert (b33, a55) into AccountOfBanks
+!insert (b33, a56) into AccountOfBanks
+!insert (b33, a57) into AccountOfBanks
+!insert (b34, a58) into AccountOfBanks
+
+!insert (p93, a55) into Ownership
+!insert (p93, a56) into Ownership
+!insert (p94, a56) into Ownership
+!insert (p95, a57) into Ownership
+!insert (p96, a58) into Ownership
+!insert (p97, a58) into Ownership
+
+!insert (p93, a55) into Use
+!insert (p98, a55) into Use
+
+!insert (p94, a56) into Use
+
+!insert (p95, a57) into Use
+!insert (p93, a57) into Use
+
+!insert (p96, a58) into Use
+!insert (p98, a58) into Use

@@ -1,0 +1,101 @@
+!new Station('S6AKL')
+
+!new Driver('D6601')
+!D6601.id := 'D-6601'
+!D6601.name := 'Wiremu Te Rangi'
+
+!new Driver('D6602')
+!D6602.id := 'D-6602'
+!D6602.name := 'Sofia Papadopoulos'
+
+!insert (S6AKL, D6601) into StationContainsDriver
+!insert (S6AKL, D6602) into StationContainsDriver
+
+!new Customer('C6601')
+!C6601.id := 'C-6601'
+!C6601.name := 'Aroha Ngata'
+!C6601.twitterUserName := '@aroha_ngata'
+
+!new Customer('C6602')
+!C6602.id := 'C-6602'
+!C6602.name := 'Yusuf Al-Khalil'
+!C6602.twitterUserName := '@yusuf_alkhalil'
+
+!insert (S6AKL, C6601) into StationContainsCustomer
+!insert (S6AKL, C6602) into StationContainsCustomer
+
+!new Address('AAKLPu1')
+!AAKLPu1.text := 'ParcelPoint Depot, 14 Timberly Rd, Mangere, Auckland 2022, New Zealand'
+!new GeoLocation('GLAKL1')
+!GLAKL1.latitude := -36.9686
+!GLAKL1.longitude := 174.7866
+!insert (AAKLPu1, GLAKL1) into AddressContainsGeoLocation
+
+!new Address('AAKLDel1')
+!AAKLDel1.text := 'Auckland City Hospital, 2 Park Rd, Grafton, Auckland 1023, New Zealand'
+!new GeoLocation('GLAKL2')
+!GLAKL2.latitude := -36.8629
+!GLAKL2.longitude := 174.7706
+!insert (AAKLDel1, GLAKL2) into AddressContainsGeoLocation
+
+!new Address('AAKLDel2')
+!AAKLDel2.text := 'University of Auckland, 22 Princes St, Auckland CBD, Auckland 1010, New Zealand'
+!new GeoLocation('GLAKL3')
+!GLAKL3.latitude := -36.8523
+!GLAKL3.longitude := 174.7680
+!insert (AAKLDel2, GLAKL3) into AddressContainsGeoLocation
+
+!new Address('AAKLPu2')
+!AAKLPu2.text := 'K Road Bookshop, 172 Karangahape Rd, Auckland 1010, New Zealand'
+!new GeoLocation('GLAKL4')
+!GLAKL4.latitude := -36.8576
+!GLAKL4.longitude := 174.7594
+!insert (AAKLPu2, GLAKL4) into AddressContainsGeoLocation
+
+!new Address('AAKLDel3')
+!AAKLDel3.text := 'Auckland Airport (International Arrivals), Ray Emery Dr, Auckland 2022, New Zealand'
+!new GeoLocation('GLAKL5')
+!GLAKL5.latitude := -37.0082
+!GLAKL5.longitude := 174.7850
+!insert (AAKLDel3, GLAKL5) into AddressContainsGeoLocation
+
+!new Shipment('SH66001')
+!SH66001.id := 'SH-66001'
+!SH66001.status := #NEW
+
+!new Shipment('SH66002')
+!SH66002.id := 'SH-66002'
+!SH66002.status := #ASSIGNED
+
+!new Shipment('SH66003')
+!SH66003.id := 'SH-66003'
+!SH66003.status := #UNDERWAY
+
+!new Shipment('SH66004')
+!SH66004.id := 'SH-66004'
+!SH66004.status := #DELIVERED
+
+!insert (S6AKL, SH66001) into StationShipment
+!insert (S6AKL, SH66002) into StationShipment
+!insert (S6AKL, SH66003) into StationShipment
+!insert (S6AKL, SH66004) into StationShipment
+
+!insert (C6602, SH66001) into CustomerConsistsOfShipment
+!insert (C6601, SH66002) into CustomerConsistsOfShipment
+!insert (C6601, SH66003) into CustomerConsistsOfShipment
+!insert (C6602, SH66004) into CustomerConsistsOfShipment
+
+!insert (SH66001, AAKLPu2) into ShipmentContainsPickUpAddress
+!insert (SH66001, AAKLDel3) into ShipmentContainsDeliveryAddress
+
+!insert (SH66002, AAKLPu1) into ShipmentContainsPickUpAddress
+!insert (SH66002, AAKLDel2) into ShipmentContainsDeliveryAddress
+!insert (D6601, SH66002) into DriverShipment
+
+!insert (SH66003, AAKLPu1) into ShipmentContainsPickUpAddress
+!insert (SH66003, AAKLDel1) into ShipmentContainsDeliveryAddress
+!insert (D6602, SH66003) into DriverShipment
+
+!insert (SH66004, AAKLPu2) into ShipmentContainsPickUpAddress
+!insert (SH66004, AAKLDel1) into ShipmentContainsDeliveryAddress
+!insert (D6601, SH66004) into DriverShipment

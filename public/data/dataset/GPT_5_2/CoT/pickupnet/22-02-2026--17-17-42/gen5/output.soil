@@ -1,0 +1,741 @@
+!new Station('S6')
+
+!new Driver('DRV600')
+!DRV600.id := 'DRV-600'
+!DRV600.name := 'Kofi Mensah'
+
+!new Driver('DRV601')
+!DRV601.id := 'DRV-601'
+!DRV601.name := 'Anastasiya Petrova'
+
+!new Driver('DRV602')
+!DRV602.id := 'DRV-602'
+!DRV602.name := 'Priya Nair'
+
+!new Driver('DRV603')
+!DRV603.id := 'DRV-603'
+!DRV603.name := 'Liam Byrne'
+
+!insert (S6, DRV600) into StationContainsDriver
+!insert (S6, DRV601) into StationContainsDriver
+!insert (S6, DRV602) into StationContainsDriver
+!insert (S6, DRV603) into StationContainsDriver
+
+!new Customer('CUST6001')
+!CUST6001.id := 'CUST-6001'
+!CUST6001.name := 'Ananya Mukherjee'
+!CUST6001.twitterUserName := '@ananya_sends'
+
+!new Customer('CUST6002')
+!CUST6002.id := 'CUST-6002'
+!CUST6002.name := 'Tenzin Dorje'
+!CUST6002.twitterUserName := '@བོད་སྐྱེལ'
+
+!new Customer('CUST6003')
+!CUST6003.id := 'CUST-6003'
+!CUST6003.name := 'Adaeze Okafor'
+!CUST6003.twitterUserName := ''
+
+!insert (S6, CUST6001) into StationContainsCustomer
+!insert (S6, CUST6002) into StationContainsCustomer
+!insert (S6, CUST6003) into StationContainsCustomer
+
+!new Address('AORIG600')
+!AORIG600.text := 'Howrah Station parcel counter, Kolkata, India'
+!new GeoLocation('GORIG600')
+!GORIG600.latitude := 22.5850
+!GORIG600.longitude := 88.3426
+!insert (AORIG600, GORIG600) into AddressContainsGeoLocation
+
+!new Address('ADEST600')
+!ADEST600.text := 'Durbar Marg, Kathmandu, Nepal'
+!new GeoLocation('GDEST600')
+!GDEST600.latitude := 27.7172
+!GDEST600.longitude := 85.3240
+!insert (ADEST600, GDEST600) into AddressContainsGeoLocation
+
+!new Address('ABLANK600')
+!ABLANK600.text := ''
+!new GeoLocation('GBLANK600')
+!GBLANK600.latitude := 0.0
+!GBLANK600.longitude := -179.9999
+!insert (ABLANK600, GBLANK600) into AddressContainsGeoLocation
+
+!new Address('AIDL600')
+!AIDL600.text := 'Kiritimati (Christmas Island) cargo pier, Kiribati'
+!new GeoLocation('GIDL600')
+!GIDL600.latitude := 1.8721
+!GIDL600.longitude := 179.9999
+!insert (AIDL600, GIDL600) into AddressContainsGeoLocation
+
+!new Address('ANORTH600')
+!ANORTH600.text := 'Arctic ice camp waypoint (near the pole)'
+!new GeoLocation('GNORTH600')
+!GNORTH600.latitude := 89.9999
+!GNORTH600.longitude := 45.0
+!insert (ANORTH600, GNORTH600) into AddressContainsGeoLocation
+
+!new Address('ASOUTH600')
+!ASOUTH600.text := 'Antarctic field depot waypoint (near the pole)'
+!new GeoLocation('GSOUTH600')
+!GSOUTH600.latitude := -89.9999
+!GSOUTH600.longitude := -45.0
+!insert (ASOUTH600, GSOUTH600) into AddressContainsGeoLocation
+
+!new Shipment('SHP6001')
+!SHP6001.id := 'SHP-6001'
+!SHP6001.status := #ASSIGNED
+
+!new Shipment('SHP6002')
+!SHP6002.id := 'SHP-6002'
+!SHP6002.status := #UNDERWAY
+
+!new Shipment('SHP6003')
+!SHP6003.id := 'SHP-6003'
+!SHP6003.status := #DELIVERED
+
+!new Shipment('SHP6004')
+!SHP6004.id := 'SHP-6004'
+!SHP6004.status := #NEW
+
+!insert (S6, SHP6001) into StationShipment
+!insert (S6, SHP6002) into StationShipment
+!insert (S6, SHP6003) into StationShipment
+!insert (S6, SHP6004) into StationShipment
+
+!insert (CUST6001, SHP6001) into CustomerConsistsOfShipment
+!insert (CUST6001, SHP6002) into CustomerConsistsOfShipment
+!insert (CUST6002, SHP6003) into CustomerConsistsOfShipment
+!insert (CUST6002, SHP6004) into CustomerConsistsOfShipment
+
+!insert (SHP6001, AORIG600) into ShipmentContainsPickUpAddress
+!insert (SHP6001, ABLANK600) into ShipmentContainsDeliveryAddress
+!insert (DRV602, SHP6001) into DriverShipment
+
+!insert (SHP6002, ABLANK600) into ShipmentContainsPickUpAddress
+!insert (SHP6002, AIDL600) into ShipmentContainsDeliveryAddress
+!insert (DRV600, SHP6002) into DriverShipment
+
+!insert (SHP6003, ANORTH600) into ShipmentContainsPickUpAddress
+!insert (SHP6003, ASOUTH600) into ShipmentContainsDeliveryAddress
+!insert (DRV601, SHP6003) into DriverShipment
+
+!insert (SHP6004, AIDL600) into ShipmentContainsPickUpAddress
+!insert (SHP6004, ADEST600) into ShipmentContainsDeliveryAddress
+
+!new Station('S6AKL')
+
+!new Driver('D6601')
+!D6601.id := 'D-6601'
+!D6601.name := 'Wiremu Te Rangi'
+
+!new Driver('D6602')
+!D6602.id := 'D-6602'
+!D6602.name := 'Sofia Papadopoulos'
+
+!insert (S6AKL, D6601) into StationContainsDriver
+!insert (S6AKL, D6602) into StationContainsDriver
+
+!new Customer('C6601')
+!C6601.id := 'C-6601'
+!C6601.name := 'Aroha Ngata'
+!C6601.twitterUserName := '@aroha_ngata'
+
+!new Customer('C6602')
+!C6602.id := 'C-6602'
+!C6602.name := 'Yusuf Al-Khalil'
+!C6602.twitterUserName := '@yusuf_alkhalil'
+
+!insert (S6AKL, C6601) into StationContainsCustomer
+!insert (S6AKL, C6602) into StationContainsCustomer
+
+!new Address('AAKLPu1')
+!AAKLPu1.text := 'ParcelPoint Depot, 14 Timberly Rd, Mangere, Auckland 2022, New Zealand'
+!new GeoLocation('GLAKL1')
+!GLAKL1.latitude := -36.9686
+!GLAKL1.longitude := 174.7866
+!insert (AAKLPu1, GLAKL1) into AddressContainsGeoLocation
+
+!new Address('AAKLDel1')
+!AAKLDel1.text := 'Auckland City Hospital, 2 Park Rd, Grafton, Auckland 1023, New Zealand'
+!new GeoLocation('GLAKL2')
+!GLAKL2.latitude := -36.8629
+!GLAKL2.longitude := 174.7706
+!insert (AAKLDel1, GLAKL2) into AddressContainsGeoLocation
+
+!new Address('AAKLDel2')
+!AAKLDel2.text := 'University of Auckland, 22 Princes St, Auckland CBD, Auckland 1010, New Zealand'
+!new GeoLocation('GLAKL3')
+!GLAKL3.latitude := -36.8523
+!GLAKL3.longitude := 174.7680
+!insert (AAKLDel2, GLAKL3) into AddressContainsGeoLocation
+
+!new Address('AAKLPu2')
+!AAKLPu2.text := 'K Road Bookshop, 172 Karangahape Rd, Auckland 1010, New Zealand'
+!new GeoLocation('GLAKL4')
+!GLAKL4.latitude := -36.8576
+!GLAKL4.longitude := 174.7594
+!insert (AAKLPu2, GLAKL4) into AddressContainsGeoLocation
+
+!new Address('AAKLDel3')
+!AAKLDel3.text := 'Auckland Airport (International Arrivals), Ray Emery Dr, Auckland 2022, New Zealand'
+!new GeoLocation('GLAKL5')
+!GLAKL5.latitude := -37.0082
+!GLAKL5.longitude := 174.7850
+!insert (AAKLDel3, GLAKL5) into AddressContainsGeoLocation
+
+!new Shipment('SH66001')
+!SH66001.id := 'SH-66001'
+!SH66001.status := #NEW
+
+!new Shipment('SH66002')
+!SH66002.id := 'SH-66002'
+!SH66002.status := #ASSIGNED
+
+!new Shipment('SH66003')
+!SH66003.id := 'SH-66003'
+!SH66003.status := #UNDERWAY
+
+!new Shipment('SH66004')
+!SH66004.id := 'SH-66004'
+!SH66004.status := #DELIVERED
+
+!insert (S6AKL, SH66001) into StationShipment
+!insert (S6AKL, SH66002) into StationShipment
+!insert (S6AKL, SH66003) into StationShipment
+!insert (S6AKL, SH66004) into StationShipment
+
+!insert (C6602, SH66001) into CustomerConsistsOfShipment
+!insert (C6601, SH66002) into CustomerConsistsOfShipment
+!insert (C6601, SH66003) into CustomerConsistsOfShipment
+!insert (C6602, SH66004) into CustomerConsistsOfShipment
+
+!insert (SH66001, AAKLPu2) into ShipmentContainsPickUpAddress
+!insert (SH66001, AAKLDel3) into ShipmentContainsDeliveryAddress
+
+!insert (SH66002, AAKLPu1) into ShipmentContainsPickUpAddress
+!insert (SH66002, AAKLDel2) into ShipmentContainsDeliveryAddress
+!insert (D6601, SH66002) into DriverShipment
+
+!insert (SH66003, AAKLPu1) into ShipmentContainsPickUpAddress
+!insert (SH66003, AAKLDel1) into ShipmentContainsDeliveryAddress
+!insert (D6602, SH66003) into DriverShipment
+
+!insert (SH66004, AAKLPu2) into ShipmentContainsPickUpAddress
+!insert (SH66004, AAKLDel1) into ShipmentContainsDeliveryAddress
+!insert (D6601, SH66004) into DriverShipment
+
+!new Station('DELCENTRAL')
+
+!new Driver('DIN301')
+!DIN301.id := 'D-IN-301'
+!DIN301.name := 'Arjun Mehta'
+
+!new Driver('DIN302')
+!DIN302.id := 'D-IN-302'
+!DIN302.name := 'Farah Khan'
+
+!insert (DELCENTRAL, DIN301) into StationContainsDriver
+!insert (DELCENTRAL, DIN302) into StationContainsDriver
+
+!new Customer('CIN501')
+!CIN501.id := 'C-IN-501'
+!CIN501.name := 'Rahul Verma'
+!CIN501.twitterUserName := '@rahulverma_del'
+
+!new Customer('CINNEW998')
+!CINNEW998.id := 'C-IN-NEW998'
+!CINNEW998.name := 'Savitri Devi'
+!CINNEW998.twitterUserName := '@savitri_new998'
+
+!insert (DELCENTRAL, CIN501) into StationContainsCustomer
+
+!new Address('ADEL_PICK07')
+!ADEL_PICK07.text := 'Shop 14, Lajpat Nagar Central Market, New Delhi 110024, India'
+!new GeoLocation('GLDELLAJPAT')
+!GLDELLAJPAT.latitude := 28.5677
+!GLDELLAJPAT.longitude := 77.2426
+!insert (ADEL_PICK07, GLDELLAJPAT) into AddressContainsGeoLocation
+
+!new Address('ABIH_DEL02')
+!ABIH_DEL02.text := 'Khetpur Village, near the old banyan tree and the handpump, P.S. Barharia area, Siwan district, Bihar, India'
+
+!new Address('ADEL_PICK08')
+!ADEL_PICK08.text := 'Connaught Place, Inner Circle, Gate near Rajiv Chowk Metro Exit 6, New Delhi 110001, India'
+!new GeoLocation('GLDELCP')
+!GLDELCP.latitude := 28.6315
+!GLDELCP.longitude := 77.2167
+!insert (ADEL_PICK08, GLDELCP) into AddressContainsGeoLocation
+
+!new Address('ADEL_DEL09')
+!ADEL_DEL09.text := 'AIIMS Main Gate, Sri Aurobindo Marg, New Delhi 110029, India'
+!new GeoLocation('GLDELAIIMS')
+!GLDELAIIMS.latitude := 28.5672
+!GLDELAIIMS.longitude := 77.2100
+!insert (ADEL_DEL09, GLDELAIIMS) into AddressContainsGeoLocation
+
+!new Shipment('SHPIN12001')
+!SHPIN12001.id := 'SHP-IN-12001'
+!SHPIN12001.status := #NEW
+
+!new Shipment('SHPIN12002')
+!SHPIN12002.id := 'SHP-IN-12002'
+!SHPIN12002.status := #ASSIGNED
+
+!insert (DELCENTRAL, SHPIN12002) into StationShipment
+
+!insert (CINNEW998, SHPIN12001) into CustomerConsistsOfShipment
+!insert (CIN501, SHPIN12002) into CustomerConsistsOfShipment
+
+!insert (SHPIN12001, ADEL_PICK07) into ShipmentContainsPickUpAddress
+!insert (SHPIN12001, ABIH_DEL02) into ShipmentContainsDeliveryAddress
+
+!insert (SHPIN12002, ADEL_PICK08) into ShipmentContainsPickUpAddress
+!insert (SHPIN12002, ADEL_DEL09) into ShipmentContainsDeliveryAddress
+
+!insert (DIN301, SHPIN12002) into DriverShipment
+
+!new Station('S8_EDGE5')
+!new Station('S9_EDGE5')
+
+!new Driver('EDGE5_D60')
+!EDGE5_D60.id := 'DRV-EDGE-060'
+!EDGE5_D60.name := '陈伟 (Chen Wei)'
+
+!new Driver('EDGE5_D61')
+!EDGE5_D61.id := 'DRV-EDGE-061'
+!EDGE5_D61.name := 'Aïssatou Mbaye'
+
+!new Driver('EDGE5_D62')
+!EDGE5_D62.id := 'DRV-EDGE-062'
+!EDGE5_D62.name := 'Mikkel Sørensen'
+
+!insert (S9_EDGE5, EDGE5_D60) into StationContainsDriver
+!insert (S9_EDGE5, EDGE5_D61) into StationContainsDriver
+!insert (S9_EDGE5, EDGE5_D62) into StationContainsDriver
+
+!new Customer('EDGE5_C40')
+!EDGE5_C40.id := 'CUS-EDGE-4001'
+!EDGE5_C40.name := 'अनुष्का वर्मा (Anushka Verma)'
+!EDGE5_C40.twitterUserName := '@anushka_v'
+
+!new Customer('EDGE5_C41')
+!EDGE5_C41.id := 'CUS-EDGE-4002'
+!EDGE5_C41.name := 'Jean-Baptiste Désir'
+!EDGE5_C41.twitterUserName := '@jb_desir'
+
+!insert (S8_EDGE5, EDGE5_C40) into StationContainsCustomer
+!insert (S8_EDGE5, EDGE5_C41) into StationContainsCustomer
+
+!new Address('EDGE5_A401')
+!EDGE5_A401.text := 'Collection kiosk, Changi Airport T2 service road, Singapore'
+!new GeoLocation('EDGE5_GL401')
+!EDGE5_GL401.latitude := 1.364420
+!EDGE5_GL401.longitude := 103.991531
+!insert (EDGE5_A401, EDGE5_GL401) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A402')
+!EDGE5_A402.text := 'Batam Center ferry terminal locker bank, Batam, Indonesia'
+!new GeoLocation('EDGE5_GL402')
+!EDGE5_GL402.latitude := 1.129815
+!EDGE5_GL402.longitude := 104.053014
+!insert (EDGE5_A402, EDGE5_GL402) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A403')
+!EDGE5_A403.text := '“Dateline East” marker buoy, open ocean'
+!new GeoLocation('EDGE5_GL403')
+!EDGE5_GL403.latitude := 10.000000
+!EDGE5_GL403.longitude := 180.0
+!insert (EDGE5_A403, EDGE5_GL403) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A404')
+!EDGE5_A404.text := '“Dateline West” marker buoy, open ocean'
+!new GeoLocation('EDGE5_GL404')
+!EDGE5_GL404.latitude := 10.000000
+!EDGE5_GL404.longitude := -180.0
+!insert (EDGE5_A404, EDGE5_GL404) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A405')
+!EDGE5_A405.text := '   '
+!new GeoLocation('EDGE5_GL405')
+!EDGE5_GL405.latitude := 51.500700
+!EDGE5_GL405.longitude := -0.124600
+!insert (EDGE5_A405, EDGE5_GL405) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A406')
+!EDGE5_A406.text := 'Pedestrian-only gate, Parliament Square perimeter, London, UK'
+!new GeoLocation('EDGE5_GL406')
+!EDGE5_GL406.latitude := 51.501000
+!EDGE5_GL406.longitude := -0.125700
+!insert (EDGE5_A406, EDGE5_GL406) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A407')
+!EDGE5_A407.text := 'Pickup window “窗口B”, West Kowloon Station service level, Hong Kong'
+!new GeoLocation('EDGE5_GL407')
+!EDGE5_GL407.latitude := 22.304900
+!EDGE5_GL407.longitude := 114.162800
+!insert (EDGE5_A407, EDGE5_GL407) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A408')
+!EDGE5_A408.text := 'GPO Poste Restante counter, Central, Hong Kong'
+!new GeoLocation('EDGE5_GL408')
+!EDGE5_GL408.latitude := 22.284900
+!EDGE5_GL408.longitude := 114.158900
+!insert (EDGE5_A408, EDGE5_GL408) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A409')
+!EDGE5_A409.text := 'Research float “MICRO-1”, coastal test basin'
+!new GeoLocation('EDGE5_GL409')
+!EDGE5_GL409.latitude := 0.000000001
+!EDGE5_GL409.longitude := -0.000000001
+!insert (EDGE5_A409, EDGE5_GL409) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A410')
+!EDGE5_A410.text := 'Research float “MICRO-2”, coastal test basin'
+!new GeoLocation('EDGE5_GL410')
+!EDGE5_GL410.latitude := 0.000000002
+!EDGE5_GL410.longitude := -0.000000002
+!insert (EDGE5_A410, EDGE5_GL410) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A411')
+!EDGE5_A411.text := 'Cité Soleil transfer point, Port-au-Prince, Haïti'
+!new GeoLocation('EDGE5_GL411')
+!EDGE5_GL411.latitude := 18.594400
+!EDGE5_GL411.longitude := -72.293600
+!insert (EDGE5_A411, EDGE5_GL411) into AddressContainsGeoLocation
+
+!new Address('EDGE5_A412')
+!EDGE5_A412.text := 'Papine market drop zone, Port-au-Prince, Haïti'
+!new GeoLocation('EDGE5_GL412')
+!EDGE5_GL412.latitude := 18.539200
+!EDGE5_GL412.longitude := -72.336400
+!insert (EDGE5_A412, EDGE5_GL412) into AddressContainsGeoLocation
+
+!new Shipment('EDGE5_SHP4001')
+!EDGE5_SHP4001.id := 'SHP-EDGE-4001'
+!EDGE5_SHP4001.status := #ASSIGNED
+
+!new Shipment('EDGE5_SHP4002')
+!EDGE5_SHP4002.id := 'SHP-EDGE-4002'
+!EDGE5_SHP4002.status := #UNDERWAY
+
+!new Shipment('EDGE5_SHP4003')
+!EDGE5_SHP4003.id := 'SHP-EDGE-4003'
+!EDGE5_SHP4003.status := #NEW
+
+!new Shipment('EDGE5_SHP4004')
+!EDGE5_SHP4004.id := 'SHP-EDGE-4004'
+!EDGE5_SHP4004.status := #DELIVERED
+
+!new Shipment('EDGE5_SHP4005')
+!EDGE5_SHP4005.id := 'SHP-EDGE-4005'
+!EDGE5_SHP4005.status := #ASSIGNED
+
+!new Shipment('EDGE5_SHP4006')
+!EDGE5_SHP4006.id := 'SHP-EDGE-4006'
+!EDGE5_SHP4006.status := #UNDERWAY
+
+!insert (S8_EDGE5, EDGE5_SHP4001) into StationShipment
+!insert (S8_EDGE5, EDGE5_SHP4002) into StationShipment
+!insert (S8_EDGE5, EDGE5_SHP4003) into StationShipment
+!insert (S8_EDGE5, EDGE5_SHP4004) into StationShipment
+!insert (S8_EDGE5, EDGE5_SHP4005) into StationShipment
+!insert (S8_EDGE5, EDGE5_SHP4006) into StationShipment
+
+!insert (EDGE5_C40, EDGE5_SHP4001) into CustomerConsistsOfShipment
+!insert (EDGE5_C40, EDGE5_SHP4002) into CustomerConsistsOfShipment
+!insert (EDGE5_C40, EDGE5_SHP4003) into CustomerConsistsOfShipment
+!insert (EDGE5_C40, EDGE5_SHP4004) into CustomerConsistsOfShipment
+!insert (EDGE5_C40, EDGE5_SHP4005) into CustomerConsistsOfShipment
+!insert (EDGE5_C41, EDGE5_SHP4006) into CustomerConsistsOfShipment
+
+!insert (EDGE5_SHP4001, EDGE5_A401) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4001, EDGE5_A402) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_SHP4002, EDGE5_A403) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4002, EDGE5_A404) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_SHP4003, EDGE5_A405) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4003, EDGE5_A406) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_SHP4004, EDGE5_A407) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4004, EDGE5_A408) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_SHP4005, EDGE5_A409) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4005, EDGE5_A410) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_SHP4006, EDGE5_A411) into ShipmentContainsPickUpAddress
+!insert (EDGE5_SHP4006, EDGE5_A412) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE5_D60, EDGE5_SHP4001) into DriverShipment
+!insert (EDGE5_D60, EDGE5_SHP4002) into DriverShipment
+!insert (EDGE5_D61, EDGE5_SHP4003) into DriverShipment
+!insert (EDGE5_D62, EDGE5_SHP4004) into DriverShipment
+!insert (EDGE5_D60, EDGE5_SHP4006) into DriverShipment
+
+!new Station('AKLCarbonBikeHub')
+!new Station('SELSongpaSmartDepot')
+
+!new Driver('DRVSEL110')
+!DRVSEL110.id := 'DRV-SEL-110'
+!DRVSEL110.name := 'Park Min-jun (박민준)'
+
+!new Driver('DRVSEL111')
+!DRVSEL111.id := 'DRV-SEL-111'
+!DRVSEL111.name := 'Choi Hye-jin (최혜진)'
+
+!new Driver('DRVSEL112')
+!DRVSEL112.id := 'DRV-SEL-112'
+!DRVSEL112.name := 'Lee Joon-ho (이준호)'
+
+!new Driver('DRVSEL113')
+!DRVSEL113.id := 'DRV-SEL-113'
+!DRVSEL113.name := 'Nguyen Thi Lan'
+
+!insert (SELSongpaSmartDepot, DRVSEL110) into StationContainsDriver
+!insert (SELSongpaSmartDepot, DRVSEL111) into StationContainsDriver
+!insert (SELSongpaSmartDepot, DRVSEL112) into StationContainsDriver
+!insert (SELSongpaSmartDepot, DRVSEL113) into StationContainsDriver
+
+!new Customer('CUSTAKL5101')
+!CUSTAKL5101.id := 'CUST-AKL-5101'
+!CUSTAKL5101.name := 'Tāmaki Eco Grocers'
+!CUSTAKL5101.twitterUserName := '@tamaki_ecogrocer'
+
+!new Customer('CUSTAKL5102')
+!CUSTAKL5102.id := 'CUST-AKL-5102'
+!CUSTAKL5102.name := 'Mereana Rangi'
+!CUSTAKL5102.twitterUserName := '@mereana_rangi'
+
+!new Customer('CUSTAKL5103')
+!CUSTAKL5103.id := 'CUST-AKL-5103'
+!CUSTAKL5103.name := 'Kauri Print Studio'
+!CUSTAKL5103.twitterUserName := '@kauriprint'
+
+!new Customer('CUSTAKL5104')
+!CUSTAKL5104.id := 'CUST-AKL-5104'
+!CUSTAKL5104.name := 'Noah Thompson'
+!CUSTAKL5104.twitterUserName := '@noahthompson_nz'
+
+!insert (AKLCarbonBikeHub, CUSTAKL5101) into StationContainsCustomer
+!insert (AKLCarbonBikeHub, CUSTAKL5102) into StationContainsCustomer
+!insert (AKLCarbonBikeHub, CUSTAKL5103) into StationContainsCustomer
+!insert (AKLCarbonBikeHub, CUSTAKL5104) into StationContainsCustomer
+
+!new Customer('CUSTSEL6001')
+!CUSTSEL6001.id := 'CUST-SEL-6001'
+!CUSTSEL6001.name := 'HanRiver Merch Co.'
+!CUSTSEL6001.twitterUserName := '@hanrivermerch'
+
+!new Customer('CUSTSEL6002')
+!CUSTSEL6002.id := 'CUST-SEL-6002'
+!CUSTSEL6002.name := 'Yuki Sato'
+!CUSTSEL6002.twitterUserName := '@yuki_in_seoul'
+
+!new Customer('CUSTSEL6003')
+!CUSTSEL6003.id := 'CUST-SEL-6003'
+!CUSTSEL6003.name := 'Dr. Kim Ara (김아라)'
+!CUSTSEL6003.twitterUserName := '@ara_kim_md'
+
+!insert (SELSongpaSmartDepot, CUSTSEL6001) into StationContainsCustomer
+!insert (SELSongpaSmartDepot, CUSTSEL6002) into StationContainsCustomer
+!insert (SELSongpaSmartDepot, CUSTSEL6003) into StationContainsCustomer
+
+!new Address('AKLCB_A1')
+!AKLCB_A1.text := 'Wynyard Quarter Micro-Depot, 120 Halsey St, Auckland 1010, New Zealand'
+!new GeoLocation('AKLCB_GL1')
+!AKLCB_GL1.latitude := -36.8426
+!AKLCB_GL1.longitude := 174.7580
+!insert (AKLCB_A1, AKLCB_GL1) into AddressContainsGeoLocation
+
+!new Address('AKLCB_A2')
+!AKLCB_A2.text := 'Britomart Transport Centre, 8-10 Queen St, Auckland 1010, New Zealand'
+!new GeoLocation('AKLCB_GL2')
+!AKLCB_GL2.latitude := -36.8445
+!AKLCB_GL2.longitude := 174.7670
+!insert (AKLCB_A2, AKLCB_GL2) into AddressContainsGeoLocation
+
+!new Address('AKLCB_A3')
+!AKLCB_A3.text := 'Auckland City Hospital – Loading Bay, Park Rd, Grafton, Auckland 1023, New Zealand'
+!new GeoLocation('AKLCB_GL3')
+!AKLCB_GL3.latitude := -36.8666
+!AKLCB_GL3.longitude := 174.7700
+!insert (AKLCB_A3, AKLCB_GL3) into AddressContainsGeoLocation
+
+!new Address('AKLCB_A4')
+!AKLCB_A4.text := 'Mt Eden Village (Pickup Counter), 449 Mt Eden Rd, Auckland 1024, New Zealand'
+!new GeoLocation('AKLCB_GL4')
+!AKLCB_GL4.latitude := -36.8759
+!AKLCB_GL4.longitude := 174.7610
+!insert (AKLCB_A4, AKLCB_GL4) into AddressContainsGeoLocation
+
+!new Address('AKLCB_A5')
+!AKLCB_A5.text := 'Auckland Airport Freight Precinct, Ray Emery Dr, Māngere, Auckland 2022, New Zealand'
+!new GeoLocation('AKLCB_GL5')
+!AKLCB_GL5.latitude := -37.0082
+!AKLCB_GL5.longitude := 174.7850
+!insert (AKLCB_A5, AKLCB_GL5) into AddressContainsGeoLocation
+
+!new Address('AKLCB_A6')
+!AKLCB_A6.text := 'Devonport Ferry Terminal, Queens Parade, Devonport, Auckland 0624, New Zealand'
+!new GeoLocation('AKLCB_GL6')
+!AKLCB_GL6.latitude := -36.8309
+!AKLCB_GL6.longitude := 174.7978
+!insert (AKLCB_A6, AKLCB_GL6) into AddressContainsGeoLocation
+
+!new Address('SELSD_A1')
+!SELSD_A1.text := '인천국제공항 화물터미널 (Incheon Int’l Airport Cargo), Incheon, South Korea'
+!new GeoLocation('SELSD_GL1')
+!SELSD_GL1.latitude := 37.4691
+!SELSD_GL1.longitude := 126.4505
+!insert (SELSD_A1, SELSD_GL1) into AddressContainsGeoLocation
+
+!new Address('SELSD_A2')
+!SELSD_A2.text := '잠실역 7번출구 (Jamsil Station Exit 7), 송파구, 서울, South Korea'
+!new GeoLocation('SELSD_GL2')
+!SELSD_GL2.latitude := 37.5133
+!SELSD_GL2.longitude := 127.1002
+!insert (SELSD_A2, SELSD_GL2) into AddressContainsGeoLocation
+
+!new Address('SELSD_A3')
+!SELSD_A3.text := '롯데월드타워 물류출입구 (Lotte World Tower Receiving), 300 Olympic-ro, 송파구, 서울'
+!new GeoLocation('SELSD_GL3')
+!SELSD_GL3.latitude := 37.5126
+!SELSD_GL3.longitude := 127.1026
+!insert (SELSD_A3, SELSD_GL3) into AddressContainsGeoLocation
+
+!new Address('SELSD_A4')
+!SELSD_A4.text := '구로디지털단지역 (Guro Digital Complex), 구로구, 서울, South Korea'
+!new GeoLocation('SELSD_GL4')
+!SELSD_GL4.latitude := 37.4853
+!SELSD_GL4.longitude := 126.9015
+!insert (SELSD_A4, SELSD_GL4) into AddressContainsGeoLocation
+
+!new Address('SELSD_A5')
+!SELSD_A5.text := '서울대학교병원 물품하역장 (SNUH Receiving), 종로구, 서울, South Korea'
+!new GeoLocation('SELSD_GL5')
+!SELSD_GL5.latitude := 37.5796
+!SELSD_GL5.longitude := 126.9970
+!insert (SELSD_A5, SELSD_GL5) into AddressContainsGeoLocation
+
+!new Address('SELSD_A6')
+!SELSD_A6.text := '코엑스 (COEX Mall Delivery Bay), 강남구, 서울, South Korea'
+!new GeoLocation('SELSD_GL6')
+!SELSD_GL6.latitude := 37.5125
+!SELSD_GL6.longitude := 127.0588
+!insert (SELSD_A6, SELSD_GL6) into AddressContainsGeoLocation
+
+!new Address('SELSD_A7')
+!SELSD_A7.text := '성수동 공방거리 (Seongsu Workshop Street), 성동구, 서울, South Korea'
+!new GeoLocation('SELSD_GL7')
+!SELSD_GL7.latitude := 37.5446
+!SELSD_GL7.longitude := 127.0564
+!insert (SELSD_A7, SELSD_GL7) into AddressContainsGeoLocation
+
+!new Address('SELSD_A8')
+!SELSD_A8.text := '강남대로 396 (Gangnam-daero 396, Office Reception), 강남구, 서울, South Korea'
+!new GeoLocation('SELSD_GL8')
+!SELSD_GL8.latitude := 37.4979
+!SELSD_GL8.longitude := 127.0276
+!insert (SELSD_A8, SELSD_GL8) into AddressContainsGeoLocation
+
+!new Shipment('SHPAKL20264001')
+!SHPAKL20264001.id := 'SHP-AKL-2026-4001'
+!SHPAKL20264001.status := #NEW
+
+!new Shipment('SHPAKL20264002')
+!SHPAKL20264002.id := 'SHP-AKL-2026-4002'
+!SHPAKL20264002.status := #NEW
+
+!new Shipment('SHPAKL20264003')
+!SHPAKL20264003.id := 'SHP-AKL-2026-4003'
+!SHPAKL20264003.status := #NEW
+
+!insert (AKLCarbonBikeHub, SHPAKL20264001) into StationShipment
+!insert (AKLCarbonBikeHub, SHPAKL20264002) into StationShipment
+!insert (AKLCarbonBikeHub, SHPAKL20264003) into StationShipment
+
+!insert (CUSTAKL5101, SHPAKL20264001) into CustomerConsistsOfShipment
+!insert (CUSTAKL5102, SHPAKL20264002) into CustomerConsistsOfShipment
+!insert (CUSTAKL5101, SHPAKL20264003) into CustomerConsistsOfShipment
+
+!insert (SHPAKL20264001, AKLCB_A1) into ShipmentContainsPickUpAddress
+!insert (SHPAKL20264001, AKLCB_A2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPAKL20264002, AKLCB_A4) into ShipmentContainsPickUpAddress
+!insert (SHPAKL20264002, AKLCB_A6) into ShipmentContainsDeliveryAddress
+
+!insert (SHPAKL20264003, AKLCB_A5) into ShipmentContainsPickUpAddress
+!insert (SHPAKL20264003, AKLCB_A1) into ShipmentContainsDeliveryAddress
+
+!new Shipment('SHPSEL20269001')
+!SHPSEL20269001.id := 'SHP-SEL-2026-9001'
+!SHPSEL20269001.status := #ASSIGNED
+
+!new Shipment('SHPSEL20269002')
+!SHPSEL20269002.id := 'SHP-SEL-2026-9002'
+!SHPSEL20269002.status := #UNDERWAY
+
+!new Shipment('SHPSEL20269003')
+!SHPSEL20269003.id := 'SHP-SEL-2026-9003'
+!SHPSEL20269003.status := #DELIVERED
+
+!new Shipment('SHPSEL20269004')
+!SHPSEL20269004.id := 'SHP-SEL-2026-9004'
+!SHPSEL20269004.status := #NEW
+
+!new Shipment('SHPSEL20269005')
+!SHPSEL20269005.id := 'SHP-SEL-2026-9005'
+!SHPSEL20269005.status := #ASSIGNED
+
+!new Shipment('SHPSEL20269006')
+!SHPSEL20269006.id := 'SHP-SEL-2026-9006'
+!SHPSEL20269006.status := #UNDERWAY
+
+!new Shipment('SHPSEL20269007')
+!SHPSEL20269007.id := 'SHP-SEL-2026-9007'
+!SHPSEL20269007.status := #DELIVERED
+
+!insert (SELSongpaSmartDepot, SHPSEL20269001) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269002) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269003) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269004) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269005) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269006) into StationShipment
+!insert (SELSongpaSmartDepot, SHPSEL20269007) into StationShipment
+
+!insert (CUSTSEL6001, SHPSEL20269001) into CustomerConsistsOfShipment
+!insert (CUSTSEL6001, SHPSEL20269002) into CustomerConsistsOfShipment
+!insert (CUSTSEL6002, SHPSEL20269003) into CustomerConsistsOfShipment
+!insert (CUSTSEL6002, SHPSEL20269004) into CustomerConsistsOfShipment
+!insert (CUSTSEL6001, SHPSEL20269005) into CustomerConsistsOfShipment
+!insert (CUSTSEL6001, SHPSEL20269006) into CustomerConsistsOfShipment
+!insert (CUSTSEL6001, SHPSEL20269007) into CustomerConsistsOfShipment
+
+!insert (SHPSEL20269001, SELSD_A1) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269001, SELSD_A3) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL110, SHPSEL20269001) into DriverShipment
+
+!insert (SHPSEL20269002, SELSD_A7) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269002, SELSD_A8) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL111, SHPSEL20269002) into DriverShipment
+
+!insert (SHPSEL20269003, SELSD_A2) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269003, SELSD_A6) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL112, SHPSEL20269003) into DriverShipment
+
+!insert (SHPSEL20269004, SELSD_A6) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269004, SELSD_A2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPSEL20269005, SELSD_A1) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269005, SELSD_A5) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL110, SHPSEL20269005) into DriverShipment
+
+!insert (SHPSEL20269006, SELSD_A4) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269006, SELSD_A7) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL113, SHPSEL20269006) into DriverShipment
+
+!insert (SHPSEL20269007, SELSD_A3) into ShipmentContainsPickUpAddress
+!insert (SHPSEL20269007, SELSD_A8) into ShipmentContainsDeliveryAddress
+!insert (DRVSEL111, SHPSEL20269007) into DriverShipment
+

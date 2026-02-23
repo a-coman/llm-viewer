@@ -1,0 +1,49 @@
+!new Bank('b24')
+!b24.country := 'Switzerland'
+!b24.name := 'UBS Switzerland AG'
+!b24.bic := 'UBSWCHZH80A'
+
+!new Bank('b25')
+!b25.country := 'Spain'
+!b25.name := 'Banco Santander, S.A.'
+!b25.bic := 'BSCHESMMXXX'
+
+!new Person('p64')
+!p64.firstName := 'Hans'
+!p64.lastName := 'Keller'
+!p64.age := 52
+
+!new Person('p65')
+!p65.firstName := 'Élodie'
+!p65.lastName := 'Martin'
+!p65.age := 34
+
+!new Person('p66')
+!p66.firstName := 'Lucía'
+!p66.lastName := 'Ríos'
+!p66.age := 17
+
+!new Person('p67')
+!p67.firstName := 'Carmen'
+!p67.lastName := 'Ríos'
+!p67.age := 45
+
+!new Account('a40')
+!a40.iban := 'CH93 0023 0000 9876 5432 1'
+!a40.balance := 250000
+
+!new Account('a41')
+!a41.iban := 'ES91 0049 1500 1234 5678 9012'
+!a41.balance := 840
+
+!insert (b24, a40) into AccountOfBanks
+!insert (b25, a41) into AccountOfBanks
+
+!insert (p66, a41) into Ownership
+
+!insert (p64, a40) into Use
+!insert (p65, a40) into Use
+
+!insert (p66, a41) into Use
+!insert (p67, a41) into Use
+

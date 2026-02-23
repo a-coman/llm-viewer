@@ -1,0 +1,141 @@
+!new AddressBook('AB_GlobalWorkPartners_1')
+
+!new Person('P_Amina_ElSayed')
+!P_Amina_ElSayed.name := 'Amina El-Sayed'
+!P_Amina_ElSayed.phone := '+20 2 5550 0199'
+!P_Amina_ElSayed.website := 'https://www.aminasayed.example'
+!P_Amina_ElSayed.email := 'amina.el-sayed@example.com'
+!P_Amina_ElSayed.title := 'Dr.'
+!insert (AB_GlobalWorkPartners_1, P_Amina_ElSayed) into AddressBookMadeOfContact
+
+!new Address('Addr_Amina_Cairo_1')
+!Addr_Amina_Cairo_1.street := 'Tahrir Square'
+!Addr_Amina_Cairo_1.houseNr := '12B'
+!Addr_Amina_Cairo_1.city := 'Cairo'
+!insert (P_Amina_ElSayed, Addr_Amina_Cairo_1) into ContactContainsAddress
+
+!new Note('Note_Amina_1')
+!Note_Amina_1.author := 'Jordan Lee'
+!Note_Amina_1.time := Date('2026-01-15')
+!Note_Amina_1.type := #MEETING
+!Note_Amina_1.comment := 'Introductory meeting about analytics support for Q2 reporting; agreed to follow up with a proposal.'
+!insert (P_Amina_ElSayed, Note_Amina_1) into ContactContainsNote
+
+!new Note('Note_Amina_2')
+!Note_Amina_2.author := 'Amina El-Sayed'
+!Note_Amina_2.time := Date('2026-02-03')
+!Note_Amina_2.type := #EMAIL
+!Note_Amina_2.comment := 'Sent project summary and access requirements to Riverstone Analytics.'
+!insert (P_Amina_ElSayed, Note_Amina_2) into ContactContainsNote
+
+!new Person('P_Kenji_Tanaka')
+!P_Kenji_Tanaka.name := 'Kenji Tanaka'
+!P_Kenji_Tanaka.phone := '+81 3 6800 1122'
+!P_Kenji_Tanaka.website := 'https://www.kenjitanaka.example'
+!P_Kenji_Tanaka.email := 'kenji.tanaka@example.jp'
+!P_Kenji_Tanaka.title := 'Mr.'
+!insert (AB_GlobalWorkPartners_1, P_Kenji_Tanaka) into AddressBookMadeOfContact
+
+!new Address('Addr_Kenji_Tokyo_1')
+!Addr_Kenji_Tokyo_1.street := 'Chuo-dori'
+!Addr_Kenji_Tokyo_1.houseNr := '5-14'
+!Addr_Kenji_Tokyo_1.city := 'Tokyo'
+!insert (P_Kenji_Tanaka, Addr_Kenji_Tokyo_1) into ContactContainsAddress
+
+!new Note('Note_Kenji_1')
+!Note_Kenji_1.author := 'Amina El-Sayed'
+!Note_Kenji_1.time := Date('2026-01-18')
+!Note_Kenji_1.type := #CALL
+!Note_Kenji_1.comment := 'Quick call: Kenji confirmed timeline and flagged data quality risk in one source feed.'
+!insert (P_Kenji_Tanaka, Note_Kenji_1) into ContactContainsNote
+
+!new Person('P_Maria_Gonzalez')
+!P_Maria_Gonzalez.name := 'María González'
+!P_Maria_Gonzalez.phone := '+34 91 123 45 67'
+!P_Maria_Gonzalez.website := 'https://www.mariagonzalez.example'
+!P_Maria_Gonzalez.email := 'maria.gonzalez@example.es'
+!P_Maria_Gonzalez.title := 'Ms.'
+!insert (AB_GlobalWorkPartners_1, P_Maria_Gonzalez) into AddressBookMadeOfContact
+
+!new Address('Addr_Maria_Madrid_1')
+!Addr_Maria_Madrid_1.street := 'Calle de Alcalá'
+!Addr_Maria_Madrid_1.houseNr := '45'
+!Addr_Maria_Madrid_1.city := 'Madrid'
+!insert (P_Maria_Gonzalez, Addr_Maria_Madrid_1) into ContactContainsAddress
+
+!new Note('Note_Maria_1')
+!Note_Maria_1.author := 'María González'
+!Note_Maria_1.time := Date('2026-02-10')
+!Note_Maria_1.type := #EMAIL
+!Note_Maria_1.comment := 'Emailed Kenji the revised dashboard mockups; awaiting confirmation from Amina.'
+!insert (P_Maria_Gonzalez, Note_Maria_1) into ContactContainsNote
+
+!new Company('C_Riverstone_Ltd')
+!C_Riverstone_Ltd.name := 'Riverstone Analytics Ltd.'
+!C_Riverstone_Ltd.phone := '+44 20 7946 0810'
+!C_Riverstone_Ltd.website := 'https://www.riverstone-analytics.example'
+!C_Riverstone_Ltd.email := 'contact@riverstone-analytics.example'
+!C_Riverstone_Ltd.industry := 'Data analytics and business intelligence consulting'
+!insert (AB_GlobalWorkPartners_1, C_Riverstone_Ltd) into AddressBookMadeOfContact
+
+!new Address('Addr_Riverstone_London_1')
+!Addr_Riverstone_London_1.street := 'Bishopsgate'
+!Addr_Riverstone_London_1.houseNr := '110'
+!Addr_Riverstone_London_1.city := 'London'
+!insert (C_Riverstone_Ltd, Addr_Riverstone_London_1) into ContactContainsAddress
+
+!new Note('Note_Riverstone_Ltd_1')
+!Note_Riverstone_Ltd_1.author := 'Kenji Tanaka'
+!Note_Riverstone_Ltd_1.time := Date('2026-01-22')
+!Note_Riverstone_Ltd_1.type := #MEETING
+!Note_Riverstone_Ltd_1.comment := 'Vendor briefing completed; they can provide ETL support and dashboard QA within 3 weeks.'
+!insert (C_Riverstone_Ltd, Note_Riverstone_Ltd_1) into ContactContainsNote
+
+!new Company('C_Riverstone_Iberia')
+!C_Riverstone_Iberia.name := 'Riverstone Analytics Iberia S.L.'
+!C_Riverstone_Iberia.phone := '+34 93 555 01 20'
+!C_Riverstone_Iberia.website := 'https://iberia.riverstone-analytics.example'
+!C_Riverstone_Iberia.email := 'hola@iberia.riverstone-analytics.example'
+!C_Riverstone_Iberia.industry := 'Data analytics (regional delivery center)'
+!insert (AB_GlobalWorkPartners_1, C_Riverstone_Iberia) into AddressBookMadeOfContact
+
+!new Address('Addr_Riverstone_Barcelona_1')
+!Addr_Riverstone_Barcelona_1.street := 'Avinguda Diagonal'
+!Addr_Riverstone_Barcelona_1.houseNr := '640'
+!Addr_Riverstone_Barcelona_1.city := 'Barcelona'
+!insert (C_Riverstone_Iberia, Addr_Riverstone_Barcelona_1) into ContactContainsAddress
+
+!new Relationship('Rel_Amina_to_Kenji_Boss_1')
+!Rel_Amina_to_Kenji_Boss_1.type := #BOSS
+!insert (P_Amina_ElSayed, Rel_Amina_to_Kenji_Boss_1) into ContactToRelationship
+!insert (Rel_Amina_to_Kenji_Boss_1, P_Kenji_Tanaka) into RelationshipToContact
+
+!new Relationship('Rel_Amina_to_Maria_Boss_1')
+!Rel_Amina_to_Maria_Boss_1.type := #BOSS
+!insert (P_Amina_ElSayed, Rel_Amina_to_Maria_Boss_1) into ContactToRelationship
+!insert (Rel_Amina_to_Maria_Boss_1, P_Maria_Gonzalez) into RelationshipToContact
+
+!new Relationship('Rel_Kenji_to_Amina_Employee_1')
+!Rel_Kenji_to_Amina_Employee_1.type := #EMPLOYEE
+!insert (P_Kenji_Tanaka, Rel_Kenji_to_Amina_Employee_1) into ContactToRelationship
+!insert (Rel_Kenji_to_Amina_Employee_1, P_Amina_ElSayed) into RelationshipToContact
+
+!new Relationship('Rel_Kenji_to_Maria_Coworker_1')
+!Rel_Kenji_to_Maria_Coworker_1.type := #COWORKER
+!insert (P_Kenji_Tanaka, Rel_Kenji_to_Maria_Coworker_1) into ContactToRelationship
+!insert (Rel_Kenji_to_Maria_Coworker_1, P_Maria_Gonzalez) into RelationshipToContact
+
+!new Relationship('Rel_Maria_to_Amina_Employee_1')
+!Rel_Maria_to_Amina_Employee_1.type := #EMPLOYEE
+!insert (P_Maria_Gonzalez, Rel_Maria_to_Amina_Employee_1) into ContactToRelationship
+!insert (Rel_Maria_to_Amina_Employee_1, P_Amina_ElSayed) into RelationshipToContact
+
+!new Relationship('Rel_RiverstoneLtd_to_Iberia_Subdivision_1')
+!Rel_RiverstoneLtd_to_Iberia_Subdivision_1.type := #SUBDIVISION
+!insert (C_Riverstone_Ltd, Rel_RiverstoneLtd_to_Iberia_Subdivision_1) into ContactToRelationship
+!insert (Rel_RiverstoneLtd_to_Iberia_Subdivision_1, C_Riverstone_Iberia) into RelationshipToContact
+
+!new Relationship('Rel_RiverstoneLtd_to_Kenji_Boss_1')
+!Rel_RiverstoneLtd_to_Kenji_Boss_1.type := #BOSS
+!insert (C_Riverstone_Ltd, Rel_RiverstoneLtd_to_Kenji_Boss_1) into ContactToRelationship
+!insert (Rel_RiverstoneLtd_to_Kenji_Boss_1, P_Kenji_Tanaka) into RelationshipToContact

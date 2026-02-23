@@ -1,0 +1,84 @@
+!new RentalOffice('RO_501_FC')
+!RO_501_FC.name := 'High Plains Rental Yard – Fort Collins'
+!RO_501_FC.number := 501
+!RO_501_FC.address := '2400 S College Ave, Fort Collins, CO 80525, USA'
+
+!new RentalOffice('RO_502_BP')
+!RO_502_BP.name := 'Seaside Counter – Bridgeport Ferry Terminal'
+!RO_502_BP.number := 502
+!RO_502_BP.address := '1 Ferry Access Rd, Bridgeport, CT 06604, USA'
+
+!new Truck('V_20010')
+!V_20010.id := 20010
+!V_20010.registrationState := #CO
+!V_20010.licensePlateNumber := 'CO-HP-82010'
+!V_20010.vehicleTypeCode := #TRUCK24
+!V_20010.registrationLastMaintenanceDate := Date('2026-03-02')
+!V_20010.expirationDate := Date('2026-12-15')
+!V_20010.odometerReading := 41875
+!V_20010.gasTankCapacity := 29.8
+!V_20010.workingRadio := true
+!V_20010.mileage := 16
+
+!new Vehicle('V_20011')
+!V_20011.id := 20011
+!V_20011.registrationState := #CO
+!V_20011.licensePlateNumber := 'CO-TRL-20011'
+!V_20011.vehicleTypeCode := #OPEN_TRAILER
+!V_20011.registrationLastMaintenanceDate := Date('2025-10-30')
+!V_20011.expirationDate := Date('2026-10-30')
+
+!new Vehicle('V_20012')
+!V_20012.id := 20012
+!V_20012.registrationState := #AL
+!V_20012.licensePlateNumber := 'AL-COV-7740'
+!V_20012.vehicleTypeCode := #COVERED_TRAILER
+!V_20012.registrationLastMaintenanceDate := Date('2026-01-19')
+!V_20012.expirationDate := Date('2027-01-31')
+
+!new Individual('CUST_I_240')
+!CUST_I_240.name := 'Søren Nielsen'
+!CUST_I_240.address := '33 Fairfield Ave, Bridgeport, CT 06604, USA'
+!CUST_I_240.poorRisk := false
+!CUST_I_240.homePhone := '+1-203-555-0133'
+!CUST_I_240.driverLicenseState := #CT
+!CUST_I_240.driverLicenseNumber := 31077244
+!CUST_I_240.driverLicenseExpirationDate := Date('2027-08-01')
+
+!new Company('CUST_C_241')
+!CUST_C_241.name := 'La Estrella Catering & Events, LLC'
+!CUST_C_241.address := '1450 Larimer St, Denver, CO 80202, USA'
+!CUST_C_241.poorRisk := true
+!CUST_C_241.idNumber := 24190066
+
+!new RentalAgreement('RA_50100')
+!RA_50100.number := 50100
+!RA_50100.rentalDate := Date('2026-07-08')
+!RA_50100.anticipatedDuration := 6
+!RA_50100.depositPaid := 850.0
+!RA_50100.quotedDailyRate := 175.0
+!RA_50100.quotedRatePerMile := 0.58
+
+!new RentalAgreement('RA_50101')
+!RA_50101.number := 50101
+!RA_50101.rentalDate := Date('2026-07-15')
+!RA_50101.anticipatedDuration := 2
+!RA_50101.depositPaid := 50.0
+!RA_50101.quotedDailyRate := 29.0
+!RA_50101.quotedRatePerMile := 0.12
+
+!insert (RO_501_FC, V_20010) into RentalOfficeVehicle
+!insert (RO_501_FC, V_20011) into RentalOfficeVehicle
+!insert (RO_501_FC, V_20012) into RentalOfficeVehicle
+
+!insert (RO_502_BP, RA_50100) into RentalOfficeRentalAgreementOrigin
+!insert (RO_502_BP, RA_50101) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_501_FC, RA_50100) into RentalOfficeRentalAgreementDrop
+!insert (RO_502_BP, RA_50101) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_50100, V_20010) into RentalAgreementVehicle
+!insert (RA_50101, V_20011) into RentalAgreementVehicle
+
+!insert (RA_50100, CUST_C_241) into RentalAgreementCustomer
+!insert (RA_50101, CUST_I_240) into RentalAgreementCustomer

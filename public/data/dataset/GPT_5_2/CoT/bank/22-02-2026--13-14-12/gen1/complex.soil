@@ -1,0 +1,126 @@
+!new Bank('b9')
+!b9.name := 'RheinMain Bank AG'
+!b9.country := 'Germany'
+!b9.bic := 'RHMNDEFFXXX'
+
+!new Bank('b10')
+!b10.name := 'Banco del Pacífico Andino'
+!b10.country := 'Spain'
+!b10.bic := 'BPANESMMXXX'
+
+!new Bank('b11')
+!b11.name := 'Atlas Sahara Bank'
+!b11.country := 'Morocco'
+!b11.bic := 'ATSBMA MCXXX'
+
+!new Person('p20')
+!p20.firstName := 'Anna-Klara'
+!p20.lastName := 'Vogel'
+!p20.age := 34
+
+!new Person('p21')
+!p21.firstName := 'Mehmet'
+!p21.lastName := 'Kaya'
+!p21.age := 45
+
+!new Person('p22')
+!p22.firstName := 'Helga'
+!p22.lastName := 'Vogel'
+!p22.age := 68
+
+!new Person('p23')
+!p23.firstName := 'Luis'
+!p23.lastName := 'Martínez'
+!p23.age := 39
+
+!new Person('p24')
+!p24.firstName := 'Samira'
+!p24.lastName := 'El Idrissi'
+!p24.age := 28
+
+!new Person('p25')
+!p25.firstName := 'François'
+!p25.lastName := 'Dubois'
+!p25.age := 52
+
+!new Person('p26')
+!p26.firstName := 'Niamh'
+!p26.lastName := 'O’Connor'
+!p26.age := 23
+
+!new Person('p27')
+!p27.firstName := 'Youssef'
+!p27.lastName := 'Benali'
+!p27.age := 17
+
+!new Account('a10')
+!a10.iban := 'DE89370400440532013000'
+!a10.balance := 4820
+
+!new Account('a11')
+!a11.iban := 'DE44500105175407324931'
+!a11.balance := 12950
+
+!new Account('a12')
+!a12.iban := 'DE12500105170648489890'
+!a12.balance := 76000
+
+!new Account('a13')
+!a13.iban := 'ES9121000418450200051332'
+!a13.balance := 2300
+
+!new Account('a14')
+!a14.iban := 'ES7900491500310012345678'
+!a14.balance := 15400
+
+!new Account('a15')
+!a15.iban := 'MA6400005000080012345678901'
+!a15.balance := 980
+
+!new Account('a16')
+!a16.iban := 'MA9300021020210012345678901'
+!a16.balance := 50500
+
+!insert (b9, a10) into AccountOfBanks
+!insert (b9, a11) into AccountOfBanks
+!insert (b9, a12) into AccountOfBanks
+!insert (b10, a13) into AccountOfBanks
+!insert (b10, a14) into AccountOfBanks
+!insert (b11, a15) into AccountOfBanks
+!insert (b11, a16) into AccountOfBanks
+
+!insert (p20, a10) into Ownership
+!insert (p20, a11) into Ownership
+!insert (p21, a11) into Ownership
+!insert (p22, a12) into Ownership
+!insert (p23, a13) into Ownership
+!insert (p23, a14) into Ownership
+!insert (p24, a14) into Ownership
+!insert (p24, a15) into Ownership
+!insert (p24, a16) into Ownership
+!insert (p25, a16) into Ownership
+
+!insert (p20, a10) into Use
+!insert (p22, a10) into Use
+!insert (p26, a10) into Use
+
+!insert (p20, a11) into Use
+!insert (p21, a11) into Use
+!insert (p27, a11) into Use
+
+!insert (p22, a12) into Use
+!insert (p20, a12) into Use
+
+!insert (p23, a13) into Use
+!insert (p25, a13) into Use
+
+!insert (p23, a14) into Use
+!insert (p24, a14) into Use
+!insert (p26, a14) into Use
+
+!insert (p24, a15) into Use
+!insert (p27, a15) into Use
+
+!insert (p24, a16) into Use
+!insert (p25, a16) into Use
+!insert (p20, a16) into Use

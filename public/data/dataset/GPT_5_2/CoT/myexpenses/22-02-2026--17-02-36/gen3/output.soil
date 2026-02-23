@@ -1,0 +1,559 @@
+!new Currency('currencyCHFBoundary')
+!currencyCHFBoundary.name := 'Swiss Franc'
+!currencyCHFBoundary.abbreviation := 'CHF'
+
+!new Currency('currencyMADBoundary')
+!currencyMADBoundary.name := 'Moroccan Dirham'
+!currencyMADBoundary.abbreviation := 'MAD'
+
+!new Expense('expenseEZeroNonEmpty')
+!expenseEZeroNonEmpty.amount := 0.00
+!expenseEZeroNonEmpty.startDate := Date('2025-12-31')
+!expenseEZeroNonEmpty.endDate := Date('2026-01-01')
+
+!new Expense('expenseEMicro')
+!expenseEMicro.amount := 0.02
+!expenseEMicro.startDate := Date('2026-01-15')
+!expenseEMicro.endDate := Date('2026-01-15')
+
+!new Bill('billEZeroNonEmpty_BZ1')
+!billEZeroNonEmpty_BZ1.amount := 0.00
+!billEZeroNonEmpty_BZ1.category := 'VAT receipt correction (no charge)'
+!billEZeroNonEmpty_BZ1.date := Date('2025-12-31')
+!billEZeroNonEmpty_BZ1.paymentMethod := #CHECK
+!billEZeroNonEmpty_BZ1.status := #DRAFT
+
+!new Bill('billEZeroNonEmpty_BZ2')
+!billEZeroNonEmpty_BZ2.amount := 0.00
+!billEZeroNonEmpty_BZ2.category := 'Parking session cancelled at gate'
+!billEZeroNonEmpty_BZ2.date := Date('2026-01-01')
+!billEZeroNonEmpty_BZ2.paymentMethod := #CASH
+!billEZeroNonEmpty_BZ2.status := #REFUSED
+
+!new Bill('billEZeroNonEmpty_BZ3')
+!billEZeroNonEmpty_BZ3.amount := 0.00
+!billEZeroNonEmpty_BZ3.category := 'Merchant test transaction void'
+!billEZeroNonEmpty_BZ3.date := Date('2026-01-01')
+!billEZeroNonEmpty_BZ3.paymentMethod := #CREDIT_CARD
+!billEZeroNonEmpty_BZ3.status := #REFUNDED
+
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ1) into ExpenseContainsBills
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ2) into ExpenseContainsBills
+!insert (expenseEZeroNonEmpty, billEZeroNonEmpty_BZ3) into ExpenseContainsBills
+
+!insert (billEZeroNonEmpty_BZ1, currencyCHFBoundary) into BillCurrency
+!insert (billEZeroNonEmpty_BZ2, currencyCHFBoundary) into BillCurrency
+!insert (billEZeroNonEmpty_BZ3, currencyMADBoundary) into BillCurrency
+
+!new Bill('billEMicro_BM1')
+!billEMicro_BM1.amount := 0.01
+!billEMicro_BM1.category := 'SMS receipt delivery fee'
+!billEMicro_BM1.date := Date('2026-01-15')
+!billEMicro_BM1.paymentMethod := #CASH
+!billEMicro_BM1.status := #PENDING
+
+!new Bill('billEMicro_BM2')
+!billEMicro_BM2.amount := 0.01
+!billEMicro_BM2.category := 'Rounding adjustment'
+!billEMicro_BM2.date := Date('2026-01-15')
+!billEMicro_BM2.paymentMethod := #CREDIT_CARD
+!billEMicro_BM2.status := #VALIDATED
+
+!insert (expenseEMicro, billEMicro_BM1) into ExpenseContainsBills
+!insert (expenseEMicro, billEMicro_BM2) into ExpenseContainsBills
+
+!insert (billEMicro_BM1, currencyMADBoundary) into BillCurrency
+!insert (billEMicro_BM2, currencyCHFBoundary) into BillCurrency
+
+!new Comment('commentEMicro_CM1')
+!commentEMicro_CM1.text := 'هذه مبالغ رمزية لاختبار إدخال الفواتير قبل الإرسال.'
+
+!new Comment('commentEMicro_CM2')
+!commentEMicro_CM2.text := 'Note: Two tiny items split across currencies to verify multi-currency handling.'
+
+!insert (expenseEMicro, commentEMicro_CM1) into ExpenseComment
+!insert (expenseEMicro, commentEMicro_CM2) into ExpenseComment
+
+!new Currency('currencyMADTrip033')
+!currencyMADTrip033.name := 'Moroccan Dirham'
+!currencyMADTrip033.abbreviation := 'MAD'
+
+!new Expense('expenseEXP2026033')
+!expenseEXP2026033.amount := 1850.00
+!expenseEXP2026033.startDate := Date('2026-03-18')
+!expenseEXP2026033.endDate := Date('2026-03-22')
+
+!new Bill('billEXP2026033_BILL201')
+!billEXP2026033_BILL201.amount := 650.00
+!billEXP2026033_BILL201.category := 'Lodging'
+!billEXP2026033_BILL201.date := Date('2026-03-18')
+!billEXP2026033_BILL201.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL201.status := #VERIFIED
+
+!new Bill('billEXP2026033_BILL202')
+!billEXP2026033_BILL202.amount := 120.00
+!billEXP2026033_BILL202.category := 'Intercity transport'
+!billEXP2026033_BILL202.date := Date('2026-03-19')
+!billEXP2026033_BILL202.paymentMethod := #CASH
+!billEXP2026033_BILL202.status := #VALIDATED
+
+!new Bill('billEXP2026033_BILL203')
+!billEXP2026033_BILL203.amount := 310.50
+!billEXP2026033_BILL203.category := 'Meals'
+!billEXP2026033_BILL203.date := Date('2026-03-20')
+!billEXP2026033_BILL203.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL203.status := #PENDING
+
+!new Bill('billEXP2026033_BILL204')
+!billEXP2026033_BILL204.amount := 45.00
+!billEXP2026033_BILL204.category := 'Local transport'
+!billEXP2026033_BILL204.date := Date('2026-03-20')
+!billEXP2026033_BILL204.paymentMethod := #CASH
+!billEXP2026033_BILL204.status := #DRAFT
+
+!new Bill('billEXP2026033_BILL205')
+!billEXP2026033_BILL205.amount := 220.00
+!billEXP2026033_BILL205.category := 'Client relations'
+!billEXP2026033_BILL205.date := Date('2026-03-21')
+!billEXP2026033_BILL205.paymentMethod := #CHECK
+!billEXP2026033_BILL205.status := #VALIDATED
+
+!new Bill('billEXP2026033_BILL206')
+!billEXP2026033_BILL206.amount := 15.25
+!billEXP2026033_BILL206.category := 'Telecom'
+!billEXP2026033_BILL206.date := Date('2026-03-19')
+!billEXP2026033_BILL206.paymentMethod := #CASH
+!billEXP2026033_BILL206.status := #REFUSED
+
+!new Bill('billEXP2026033_BILL207')
+!billEXP2026033_BILL207.amount := 489.25
+!billEXP2026033_BILL207.category := 'Fuel'
+!billEXP2026033_BILL207.date := Date('2026-03-22')
+!billEXP2026033_BILL207.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL207.status := #REFUNDED
+
+!insert (expenseEXP2026033, billEXP2026033_BILL201) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL202) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL203) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL204) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL205) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL206) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL207) into ExpenseContainsBills
+
+!insert (billEXP2026033_BILL201, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL202, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL203, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL204, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL205, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL206, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL207, currencyMADTrip033) into BillCurrency
+
+!new Comment('commentEXP2026033_CMT201')
+!commentEXP2026033_CMT201.text := 'Note: parking receipt is handwritten; kept as draft until finance confirms it is acceptable.'
+
+!new Comment('commentEXP2026033_CMT202')
+!commentEXP2026033_CMT202.text := 'ملاحظة: تعبئة الهاتف رُفضت لأن الإيصال بلا تاريخ واضح. (Top-up refused due to missing clear date on receipt.)'
+
+!insert (expenseEXP2026033, commentEXP2026033_CMT201) into ExpenseComment
+!insert (expenseEXP2026033, commentEXP2026033_CMT202) into ExpenseComment
+
+!new Currency('currencyMADSplitProjects2')
+!currencyMADSplitProjects2.name := 'Moroccan Dirham'
+!currencyMADSplitProjects2.abbreviation := 'MAD'
+
+!new Expense('expenseProjectAtlasCasablancaSplit2')
+!expenseProjectAtlasCasablancaSplit2.amount := 1200.00
+!expenseProjectAtlasCasablancaSplit2.startDate := Date('2026-02-03')
+!expenseProjectAtlasCasablancaSplit2.endDate := Date('2026-02-05')
+
+!new Expense('expenseProjectBeaconCasablancaSplit2')
+!expenseProjectBeaconCasablancaSplit2.amount := 1650.00
+!expenseProjectBeaconCasablancaSplit2.startDate := Date('2026-02-03')
+!expenseProjectBeaconCasablancaSplit2.endDate := Date('2026-02-05')
+
+!new Bill('billProjectAtlasH1_2')
+!billProjectAtlasH1_2.amount := 1200.00
+!billProjectAtlasH1_2.category := 'Hotel invoice (shared stay)'
+!billProjectAtlasH1_2.date := Date('2026-02-05')
+!billProjectAtlasH1_2.paymentMethod := #CREDIT_CARD
+!billProjectAtlasH1_2.status := #PENDING
+
+!new Bill('billProjectBeaconH1_2')
+!billProjectBeaconH1_2.amount := 1200.00
+!billProjectBeaconH1_2.category := 'Hotel invoice (shared stay)'
+!billProjectBeaconH1_2.date := Date('2026-02-05')
+!billProjectBeaconH1_2.paymentMethod := #CREDIT_CARD
+!billProjectBeaconH1_2.status := #PENDING
+
+!new Bill('billProjectBeaconC1_2')
+!billProjectBeaconC1_2.amount := 350.00
+!billProjectBeaconC1_2.category := 'Catering (working lunch)'
+!billProjectBeaconC1_2.date := Date('2026-02-04')
+!billProjectBeaconC1_2.paymentMethod := #CASH
+!billProjectBeaconC1_2.status := #VERIFIED
+
+!new Bill('billProjectBeaconP1_2')
+!billProjectBeaconP1_2.amount := 100.00
+!billProjectBeaconP1_2.category := 'Printing & badges'
+!billProjectBeaconP1_2.date := Date('2026-02-03')
+!billProjectBeaconP1_2.paymentMethod := #CHECK
+!billProjectBeaconP1_2.status := #DRAFT
+
+!insert (expenseProjectAtlasCasablancaSplit2, billProjectAtlasH1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconH1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconC1_2) into ExpenseContainsBills
+!insert (expenseProjectBeaconCasablancaSplit2, billProjectBeaconP1_2) into ExpenseContainsBills
+
+!insert (billProjectAtlasH1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconH1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconC1_2, currencyMADSplitProjects2) into BillCurrency
+!insert (billProjectBeaconP1_2, currencyMADSplitProjects2) into BillCurrency
+
+!new Comment('commentProjectSplitSharedAtlas2')
+!commentProjectSplitSharedAtlas2.text := 'Single hotel invoice to be split across two project codes (Atlas/Beacon) per finance instruction.'
+
+!new Comment('commentProjectSplitA1_2')
+!commentProjectSplitA1_2.text := 'Atlas share booked as 1200 MAD based on internal allocation sheet.'
+
+!new Comment('commentProjectSplitSharedBeacon2')
+!commentProjectSplitSharedBeacon2.text := 'Single hotel invoice to be split across two project codes (Atlas/Beacon) per finance instruction.'
+
+!new Comment('commentProjectSplitB1_2')
+!commentProjectSplitB1_2.text := 'Beacon paid catering locally; receipt handwritten in French/Arabic, scanned for audit.'
+
+!insert (expenseProjectAtlasCasablancaSplit2, commentProjectSplitSharedAtlas2) into ExpenseComment
+!insert (expenseProjectAtlasCasablancaSplit2, commentProjectSplitA1_2) into ExpenseComment
+!insert (expenseProjectBeaconCasablancaSplit2, commentProjectSplitSharedBeacon2) into ExpenseComment
+!insert (expenseProjectBeaconCasablancaSplit2, commentProjectSplitB1_2) into ExpenseComment
+
+!new Currency('currencyCHFMedCongress')
+!currencyCHFMedCongress.name := 'Swiss Franc'
+!currencyCHFMedCongress.abbreviation := 'CHF'
+
+!new Currency('currencyAUDResearchVisit')
+!currencyAUDResearchVisit.name := 'Australian Dollar'
+!currencyAUDResearchVisit.abbreviation := 'AUD'
+
+!new Currency('currencyMXNOutreach')
+!currencyMXNOutreach.name := 'Mexican Peso'
+!currencyMXNOutreach.abbreviation := 'MXN'
+
+!new Currency('currencyZARCapeTown')
+!currencyZARCapeTown.name := 'South African Rand'
+!currencyZARCapeTown.abbreviation := 'ZAR'
+
+!new Expense('expenseZurichCardiologyCongress')
+!expenseZurichCardiologyCongress.amount := 740.70
+!expenseZurichCardiologyCongress.startDate := Date('2026-03-02')
+!expenseZurichCardiologyCongress.endDate := Date('2026-03-05')
+
+!new Bill('billZurichZH1')
+!billZurichZH1.amount := 480.00
+!billZurichZH1.category := 'Hotel (3 nights)'
+!billZurichZH1.date := Date('2026-03-02')
+!billZurichZH1.paymentMethod := #CREDIT_CARD
+!billZurichZH1.status := #VALIDATED
+
+!new Bill('billZurichZH2')
+!billZurichZH2.amount := 34.00
+!billZurichZH2.category := 'Tram pass'
+!billZurichZH2.date := Date('2026-03-02')
+!billZurichZH2.paymentMethod := #CASH
+!billZurichZH2.status := #VERIFIED
+
+!new Bill('billZurichZH3')
+!billZurichZH3.amount := 76.50
+!billZurichZH3.category := 'Poster printing'
+!billZurichZH3.date := Date('2026-03-03')
+!billZurichZH3.paymentMethod := #CREDIT_CARD
+!billZurichZH3.status := #PENDING
+
+!new Bill('billZurichZH4')
+!billZurichZH4.amount := 58.20
+!billZurichZH4.category := 'Lunch with scientific committee'
+!billZurichZH4.date := Date('2026-03-04')
+!billZurichZH4.paymentMethod := #CREDIT_CARD
+!billZurichZH4.status := #VERIFIED
+
+!new Bill('billZurichZH5')
+!billZurichZH5.amount := 92.00
+!billZurichZH5.category := 'Airport transfer'
+!billZurichZH5.date := Date('2026-03-05')
+!billZurichZH5.paymentMethod := #CASH
+!billZurichZH5.status := #DRAFT
+
+!insert (expenseZurichCardiologyCongress, billZurichZH1) into ExpenseContainsBills
+!insert (expenseZurichCardiologyCongress, billZurichZH2) into ExpenseContainsBills
+!insert (expenseZurichCardiologyCongress, billZurichZH3) into ExpenseContainsBills
+!insert (expenseZurichCardiologyCongress, billZurichZH4) into ExpenseContainsBills
+!insert (expenseZurichCardiologyCongress, billZurichZH5) into ExpenseContainsBills
+
+!insert (billZurichZH1, currencyCHFMedCongress) into BillCurrency
+!insert (billZurichZH2, currencyCHFMedCongress) into BillCurrency
+!insert (billZurichZH3, currencyCHFMedCongress) into BillCurrency
+!insert (billZurichZH4, currencyCHFMedCongress) into BillCurrency
+!insert (billZurichZH5, currencyCHFMedCongress) into BillCurrency
+
+!new Expense('expenseSydneyUniversityCollaborationWeek')
+!expenseSydneyUniversityCollaborationWeek.amount := 1056.00
+!expenseSydneyUniversityCollaborationWeek.startDate := Date('2025-08-18')
+!expenseSydneyUniversityCollaborationWeek.endDate := Date('2025-08-24')
+
+!new Bill('billSydneySY1')
+!billSydneySY1.amount := 315.40
+!billSydneySY1.category := 'Domestic flight (MEL-SYD)'
+!billSydneySY1.date := Date('2025-08-18')
+!billSydneySY1.paymentMethod := #CREDIT_CARD
+!billSydneySY1.status := #VERIFIED
+
+!new Bill('billSydneySY2')
+!billSydneySY2.amount := 128.60
+!billSydneySY2.category := 'Lab consumables (pipette tips, tubes)'
+!billSydneySY2.date := Date('2025-08-20')
+!billSydneySY2.paymentMethod := #CREDIT_CARD
+!billSydneySY2.status := #PENDING
+
+!new Bill('billSydneySY3')
+!billSydneySY3.amount := 612.00
+!billSydneySY3.category := 'Serviced apartment'
+!billSydneySY3.date := Date('2025-08-18')
+!billSydneySY3.paymentMethod := #CHECK
+!billSydneySY3.status := #VALIDATED
+
+!insert (expenseSydneyUniversityCollaborationWeek, billSydneySY1) into ExpenseContainsBills
+!insert (expenseSydneyUniversityCollaborationWeek, billSydneySY2) into ExpenseContainsBills
+!insert (expenseSydneyUniversityCollaborationWeek, billSydneySY3) into ExpenseContainsBills
+
+!insert (billSydneySY1, currencyAUDResearchVisit) into BillCurrency
+!insert (billSydneySY2, currencyAUDResearchVisit) into BillCurrency
+!insert (billSydneySY3, currencyAUDResearchVisit) into BillCurrency
+
+!new Comment('commentSydneySYC1')
+!commentSydneySYC1.text := 'Apartment paid by check because the supplier required local bank deposit; receipt attached as scanned PDF.'
+
+!new Comment('commentSydneySYC2')
+!commentSydneySYC2.text := 'Lab consumables pending: project code confirmation requested by grants office.'
+
+!new Comment('commentSydneySYC3')
+!commentSydneySYC3.text := 'Flight receipt includes a name abbreviation that matches passport; travel desk verified identity.'
+
+!insert (expenseSydneyUniversityCollaborationWeek, commentSydneySYC1) into ExpenseComment
+!insert (expenseSydneyUniversityCollaborationWeek, commentSydneySYC2) into ExpenseComment
+!insert (expenseSydneyUniversityCollaborationWeek, commentSydneySYC3) into ExpenseComment
+
+!new Expense('expenseCDMXCommunityHealthOutreach')
+!expenseCDMXCommunityHealthOutreach.amount := 4891.25
+!expenseCDMXCommunityHealthOutreach.startDate := Date('2024-11-09')
+!expenseCDMXCommunityHealthOutreach.endDate := Date('2024-11-10')
+
+!new Bill('billCDMXMX1')
+!billCDMXMX1.amount := 2500.00
+!billCDMXMX1.category := 'Venue deposit'
+!billCDMXMX1.date := Date('2024-11-09')
+!billCDMXMX1.paymentMethod := #CASH
+!billCDMXMX1.status := #VALIDATED
+
+!new Bill('billCDMXMX2')
+!billCDMXMX2.amount := 1320.50
+!billCDMXMX2.category := 'Catering (agua, snacks)'
+!billCDMXMX2.date := Date('2024-11-10')
+!billCDMXMX2.paymentMethod := #CREDIT_CARD
+!billCDMXMX2.status := #PENDING
+
+!new Bill('billCDMXMX3')
+!billCDMXMX3.amount := 860.00
+!billCDMXMX3.category := 'Flyers and signage printing'
+!billCDMXMX3.date := Date('2024-11-09')
+!billCDMXMX3.paymentMethod := #CASH
+!billCDMXMX3.status := #VERIFIED
+
+!new Bill('billCDMXMX4')
+!billCDMXMX4.amount := 210.75
+!billCDMXMX4.category := 'Ride-hailing to venue'
+!billCDMXMX4.date := Date('2024-11-10')
+!billCDMXMX4.paymentMethod := #CREDIT_CARD
+!billCDMXMX4.status := #REFUSED
+
+!insert (expenseCDMXCommunityHealthOutreach, billCDMXMX1) into ExpenseContainsBills
+!insert (expenseCDMXCommunityHealthOutreach, billCDMXMX2) into ExpenseContainsBills
+!insert (expenseCDMXCommunityHealthOutreach, billCDMXMX3) into ExpenseContainsBills
+!insert (expenseCDMXCommunityHealthOutreach, billCDMXMX4) into ExpenseContainsBills
+
+!insert (billCDMXMX1, currencyMXNOutreach) into BillCurrency
+!insert (billCDMXMX2, currencyMXNOutreach) into BillCurrency
+!insert (billCDMXMX3, currencyMXNOutreach) into BillCurrency
+!insert (billCDMXMX4, currencyMXNOutreach) into BillCurrency
+
+!new Comment('commentCDMXMXC1')
+!commentCDMXMXC1.text := 'Ride-hailing refused: receipt lacked route and tax details; requested a compliant factura invoice from the provider.'
+
+!insert (expenseCDMXCommunityHealthOutreach, commentCDMXMXC1) into ExpenseComment
+
+!new Expense('expenseCapeTownComplianceOnboardingAdmin')
+!expenseCapeTownComplianceOnboardingAdmin.amount := 1170.00
+!expenseCapeTownComplianceOnboardingAdmin.startDate := Date('2026-01-06')
+!expenseCapeTownComplianceOnboardingAdmin.endDate := Date('2026-01-07')
+
+!new Bill('billCapeTownCT1')
+!billCapeTownCT1.amount := 950.00
+!billCapeTownCT1.category := 'Certified document translation'
+!billCapeTownCT1.date := Date('2026-01-06')
+!billCapeTownCT1.paymentMethod := #CHECK
+!billCapeTownCT1.status := #VERIFIED
+
+!new Bill('billCapeTownCT2')
+!billCapeTownCT2.amount := 220.00
+!billCapeTownCT2.category := 'Mobile data top-up (field access)'
+!billCapeTownCT2.date := Date('2026-01-07')
+!billCapeTownCT2.paymentMethod := #CASH
+!billCapeTownCT2.status := #REFUNDED
+
+!insert (expenseCapeTownComplianceOnboardingAdmin, billCapeTownCT1) into ExpenseContainsBills
+!insert (expenseCapeTownComplianceOnboardingAdmin, billCapeTownCT2) into ExpenseContainsBills
+
+!insert (billCapeTownCT1, currencyZARCapeTown) into BillCurrency
+!insert (billCapeTownCT2, currencyZARCapeTown) into BillCurrency
+
+!new Comment('commentCapeTownCTC1')
+!commentCapeTownCTC1.text := 'Translation required for HR file submission; vendor provided stamped certificate page.'
+
+!new Comment('commentCapeTownCTC2')
+!commentCapeTownCTC2.text := 'Data top-up refunded after wrong bundle purchased; refund confirmation included on the operator slip.'
+
+!insert (expenseCapeTownComplianceOnboardingAdmin, commentCapeTownCTC1) into ExpenseComment
+!insert (expenseCapeTownComplianceOnboardingAdmin, commentCapeTownCTC2) into ExpenseComment
+
+!new Currency('currencyCURX_BTC2')
+!currencyCURX_BTC2.name := 'Bitcoin'
+!currencyCURX_BTC2.abbreviation := 'BTC'
+
+!new Currency('currencyCURY_ISK2')
+!currencyCURY_ISK2.name := 'Icelandic Króna'
+!currencyCURY_ISK2.abbreviation := 'ISK'
+
+!new Currency('currencyCURZ_MAD2')
+!currencyCURZ_MAD2.name := 'Moroccan Dirham'
+!currencyCURZ_MAD2.abbreviation := 'MAD'
+
+!new Expense('expenseEXPEDGE004_2')
+!expenseEXPEDGE004_2.amount := 0.00000001
+!expenseEXPEDGE004_2.startDate := Date('9999-12-31')
+!expenseEXPEDGE004_2.endDate := Date('9999-12-31')
+
+!new Bill('billEXPEDGE004_2_BILL401')
+!billEXPEDGE004_2_BILL401.amount := 0.00000001
+!billEXPEDGE004_2_BILL401.category := 'On-chain fee (1 satoshi equivalent)'
+!billEXPEDGE004_2_BILL401.date := Date('9999-12-31')
+!billEXPEDGE004_2_BILL401.paymentMethod := #CREDIT_CARD
+!billEXPEDGE004_2_BILL401.status := #VERIFIED
+
+!insert (expenseEXPEDGE004_2, billEXPEDGE004_2_BILL401) into ExpenseContainsBills
+!insert (billEXPEDGE004_2_BILL401, currencyCURX_BTC2) into BillCurrency
+
+!new Expense('expenseEXPEDGE005_2')
+!expenseEXPEDGE005_2.amount := 40201.00
+!expenseEXPEDGE005_2.startDate := Date('2026-01-01')
+!expenseEXPEDGE005_2.endDate := Date('2026-01-31')
+
+!new Bill('billEXPEDGE005_2_BILL501')
+!billEXPEDGE005_2_BILL501.amount := 199.99
+!billEXPEDGE005_2_BILL501.category := 'Riad lodging (مبيت رياض)'
+!billEXPEDGE005_2_BILL501.date := Date('2025-12-15')
+!billEXPEDGE005_2_BILL501.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL501.status := #PENDING
+
+!new Bill('billEXPEDGE005_2_BILL502')
+!billEXPEDGE005_2_BILL502.amount := 0.01
+!billEXPEDGE005_2_BILL502.category := 'Local tax rounding remainder'
+!billEXPEDGE005_2_BILL502.date := Date('2026-02-01')
+!billEXPEDGE005_2_BILL502.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL502.status := #VALIDATED
+
+!new Bill('billEXPEDGE005_2_BILL503')
+!billEXPEDGE005_2_BILL503.amount := 35000.00
+!billEXPEDGE005_2_BILL503.category := 'Geothermal spa entry (Bláa lónið)'
+!billEXPEDGE005_2_BILL503.date := Date('2026-01-10')
+!billEXPEDGE005_2_BILL503.paymentMethod := #CREDIT_CARD
+!billEXPEDGE005_2_BILL503.status := #VALIDATED
+
+!new Bill('billEXPEDGE005_2_BILL504')
+!billEXPEDGE005_2_BILL504.amount := 1.00
+!billEXPEDGE005_2_BILL504.category := 'Parking meter test charge'
+!billEXPEDGE005_2_BILL504.date := Date('2026-01-11')
+!billEXPEDGE005_2_BILL504.paymentMethod := #CHECK
+!billEXPEDGE005_2_BILL504.status := #DRAFT
+
+!new Bill('billEXPEDGE005_2_BILL505')
+!billEXPEDGE005_2_BILL505.amount := 0.00
+!billEXPEDGE005_2_BILL505.category := 'Duplicate scan rejected'
+!billEXPEDGE005_2_BILL505.date := Date('2026-01-12')
+!billEXPEDGE005_2_BILL505.paymentMethod := #CREDIT_CARD
+!billEXPEDGE005_2_BILL505.status := #REFUSED
+
+!new Bill('billEXPEDGE005_2_BILL506')
+!billEXPEDGE005_2_BILL506.amount := 5000.00
+!billEXPEDGE005_2_BILL506.category := 'Archival service fee — extremely delayed invoicing / seirbhís chartlainne / خدمة الأرشفة'
+!billEXPEDGE005_2_BILL506.date := Date('1800-01-01')
+!billEXPEDGE005_2_BILL506.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL506.status := #VERIFIED
+
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL501) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL502) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL503) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL504) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL505) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL506) into ExpenseContainsBills
+
+!insert (billEXPEDGE005_2_BILL501, currencyCURZ_MAD2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL502, currencyCURZ_MAD2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL503, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL504, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL505, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL506, currencyCURY_ISK2) into BillCurrency
+
+!new Comment('commentEXPEDGE005_2_COM501')
+!commentEXPEDGE005_2_COM501.text := 'Bills intentionally include dates before and after the expense period to test validation gaps.'
+
+!new Comment('commentEXPEDGE005_2_COM502')
+!commentEXPEDGE005_2_COM502.text := ''
+
+!new Comment('commentEXPEDGE005_2_COM503')
+!commentEXPEDGE005_2_COM503.text := 'Cross-currency total is nonsensical financially but valid per model (sum of Real amounts only).'
+
+!new Comment('commentEXPEDGE005_2_COM504')
+!commentEXPEDGE005_2_COM504.text := 'Ath.: ISK bills include decimals even though the real currency often does not; allowed by Real.'
+
+!new Comment('commentEXPEDGE005_2_COM505')
+!commentEXPEDGE005_2_COM505.text := 'Nota en español: revisar el recibo del año 1800; es un caso extremo deliberado.'
+
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM501) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM502) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM503) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM504) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM505) into ExpenseComment
+
+!new Expense('expenseEXPEDGE006_2')
+!expenseEXPEDGE006_2.amount := 1.00
+!expenseEXPEDGE006_2.startDate := Date('1582-10-15')
+!expenseEXPEDGE006_2.endDate := Date('1582-10-04')
+
+!new Bill('billEXPEDGE006_2_BILL601')
+!billEXPEDGE006_2_BILL601.amount := 0.50
+!billEXPEDGE006_2_BILL601.category := 'Historical per diem half-unit'
+!billEXPEDGE006_2_BILL601.date := Date('1582-10-04')
+!billEXPEDGE006_2_BILL601.paymentMethod := #CHECK
+!billEXPEDGE006_2_BILL601.status := #PENDING
+
+!new Bill('billEXPEDGE006_2_BILL602')
+!billEXPEDGE006_2_BILL602.amount := 0.50
+!billEXPEDGE006_2_BILL602.category := 'Archivo fee / رسوم الأرشيف'
+!billEXPEDGE006_2_BILL602.date := Date('1582-10-15')
+!billEXPEDGE006_2_BILL602.paymentMethod := #CASH
+!billEXPEDGE006_2_BILL602.status := #DRAFT
+
+!insert (expenseEXPEDGE006_2, billEXPEDGE006_2_BILL601) into ExpenseContainsBills
+!insert (expenseEXPEDGE006_2, billEXPEDGE006_2_BILL602) into ExpenseContainsBills
+
+!insert (billEXPEDGE006_2_BILL601, currencyCURX_BTC2) into BillCurrency
+!insert (billEXPEDGE006_2_BILL602, currencyCURY_ISK2) into BillCurrency
+

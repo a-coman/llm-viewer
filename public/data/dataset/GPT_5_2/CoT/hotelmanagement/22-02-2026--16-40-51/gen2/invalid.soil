@@ -1,0 +1,89 @@
+!new Customer('C12')
+!C12.firstName := 'Sofía'
+!C12.lastName := 'Núñez'
+
+!new Customer('C13')
+!C13.firstName := 'Asha'
+!C13.lastName := 'Nair'
+
+!new Booking('B3001')
+!B3001.bookingId := 3001
+!B3001.startDate := '2026-02-01'
+!B3001.endDate := '2026-02-04'
+!B3001.confirmed := true
+!B3001.canceled := false
+
+!new Booking('B3002')
+!B3002.bookingId := 3002
+!B3002.startDate := '2026-02-10'
+!B3002.endDate := '2026-02-12'
+!B3002.confirmed := true
+!B3002.canceled := false
+
+!new RoomReservation('R9101')
+!R9101.checkInDate := '2026-02-01'
+!R9101.checkOutDate := '2026-02-04'
+
+!new RoomReservation('R9102')
+!R9102.checkInDate := '2026-02-10'
+!R9102.checkOutDate := '2026-02-12'
+
+!new Room('RM110_QC')
+!RM110_QC.roomNumber := 110
+!RM110_QC.numBeds := 1
+!RM110_QC.pricePerNight := 158.00
+!RM110_QC.occupied := false
+!RM110_QC.blocked := false
+
+!new Room('RM508_QC')
+!RM508_QC.roomNumber := 508
+!RM508_QC.numBeds := 2
+!RM508_QC.pricePerNight := 96.50
+!RM508_QC.occupied := false
+!RM508_QC.blocked := false
+
+!new RoomExtra('EX1')
+!EX1.description := 'Snow gear drying service'
+!EX1.price := 12.00
+
+!new RoomExtra('EX2')
+!EX2.description := 'Vegetarian dinner package (2 nights)'
+!EX2.price := 38.00
+
+!new Bill('BL_QC_42')
+!BL_QC_42.billId := 42
+!BL_QC_42.price := 486.00
+
+!new Bill('BL_KOCHI_42')
+!BL_KOCHI_42.billId := 42
+!BL_KOCHI_42.price := 231.00
+
+!new FreeRoomTypesDTO('D19')
+!D19.roomTypeDescription := 'Compact single, old-town view'
+!D19.numBeds := 1
+!D19.pricePerNight := 158.00
+!D19.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D20')
+!D20.roomTypeDescription := 'Twin room, courtyard'
+!D20.numBeds := 2
+!D20.pricePerNight := 176.00
+!D20.numFreeRooms := 1
+
+!insert (B3001, C12) into BookingCustomer
+!insert (B3002, C13) into BookingCustomer
+
+!insert (B3001, R9101) into BookingRoomReservation
+!insert (B3002, R9102) into BookingRoomReservation
+
+!insert (R9101, RM110_QC) into RoomReservationRoom
+!insert (R9102, RM508_QC) into RoomReservationRoom
+
+!insert (R9101, EX1) into RoomReservationExtras
+!insert (R9102, EX2) into RoomReservationExtras
+
+!insert (B3001, BL_QC_42) into BookingBill
+!insert (B3002, BL_KOCHI_42) into BookingBill
+
+!insert (BL_QC_42, R9101) into BillRoomReservation
+!insert (BL_KOCHI_42, R9102) into BillRoomReservation

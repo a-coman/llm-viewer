@@ -1,0 +1,232 @@
+!new Currency('currencyGBPNew2')
+!currencyGBPNew2.name := 'British Pound Sterling'
+!currencyGBPNew2.abbreviation := 'GBP'
+
+!new Currency('currencyBRLNew2')
+!currencyBRLNew2.name := 'Brazilian Real'
+!currencyBRLNew2.abbreviation := 'BRL'
+
+!new Currency('currencyINRNew2')
+!currencyINRNew2.name := 'Indian Rupee'
+!currencyINRNew2.abbreviation := 'INR'
+
+!new Currency('currencyUSDNew2')
+!currencyUSDNew2.name := 'US Dollar'
+!currencyUSDNew2.abbreviation := 'USD'
+
+!new Expense('expenseHomeOfficeUpgradeManchester2')
+!expenseHomeOfficeUpgradeManchester2.amount := 360.44
+!expenseHomeOfficeUpgradeManchester2.startDate := Date('2026-02-01')
+!expenseHomeOfficeUpgradeManchester2.endDate := Date('2026-02-02')
+
+!new Bill('billHomeOfficeD1_2')
+!billHomeOfficeD1_2.amount := 249.99
+!billHomeOfficeD1_2.category := 'External monitor'
+!billHomeOfficeD1_2.date := Date('2026-02-01')
+!billHomeOfficeD1_2.paymentMethod := #CREDIT_CARD
+!billHomeOfficeD1_2.status := #PENDING
+
+!new Bill('billHomeOfficeD2_2')
+!billHomeOfficeD2_2.amount := 79.50
+!billHomeOfficeD2_2.category := 'Keyboard and mouse'
+!billHomeOfficeD2_2.date := Date('2026-02-01')
+!billHomeOfficeD2_2.paymentMethod := #CREDIT_CARD
+!billHomeOfficeD2_2.status := #DRAFT
+
+!new Bill('billHomeOfficeD3_2')
+!billHomeOfficeD3_2.amount := 18.00
+!billHomeOfficeD3_2.category := 'USB-C to HDMI adapter'
+!billHomeOfficeD3_2.date := Date('2026-02-02')
+!billHomeOfficeD3_2.paymentMethod := #CASH
+!billHomeOfficeD3_2.status := #VERIFIED
+
+!new Bill('billHomeOfficeD4_2')
+!billHomeOfficeD4_2.amount := 12.95
+!billHomeOfficeD4_2.category := 'Shipping fee'
+!billHomeOfficeD4_2.date := Date('2026-02-02')
+!billHomeOfficeD4_2.paymentMethod := #CREDIT_CARD
+!billHomeOfficeD4_2.status := #VERIFIED
+
+!insert (expenseHomeOfficeUpgradeManchester2, billHomeOfficeD1_2) into ExpenseContainsBills
+!insert (expenseHomeOfficeUpgradeManchester2, billHomeOfficeD2_2) into ExpenseContainsBills
+!insert (expenseHomeOfficeUpgradeManchester2, billHomeOfficeD3_2) into ExpenseContainsBills
+!insert (expenseHomeOfficeUpgradeManchester2, billHomeOfficeD4_2) into ExpenseContainsBills
+
+!insert (billHomeOfficeD1_2, currencyGBPNew2) into BillCurrency
+!insert (billHomeOfficeD2_2, currencyGBPNew2) into BillCurrency
+!insert (billHomeOfficeD3_2, currencyGBPNew2) into BillCurrency
+!insert (billHomeOfficeD4_2, currencyGBPNew2) into BillCurrency
+
+!new Comment('commentHomeOfficeDC1_2')
+!commentHomeOfficeDC1_2.text := 'Monitor purchased to meet accessibility requirements; awaiting manager validation.'
+
+!new Comment('commentHomeOfficeDC2_2')
+!commentHomeOfficeDC2_2.text := 'Keyboard/mouse still in draft because the invoice PDF was missing VAT number; supplier resent it.'
+
+!insert (expenseHomeOfficeUpgradeManchester2, commentHomeOfficeDC1_2) into ExpenseComment
+!insert (expenseHomeOfficeUpgradeManchester2, commentHomeOfficeDC2_2) into ExpenseComment
+
+!new Expense('expenseSaoPauloWarehouseAudit2')
+!expenseSaoPauloWarehouseAudit2.amount := 890.00
+!expenseSaoPauloWarehouseAudit2.startDate := Date('2025-10-14')
+!expenseSaoPauloWarehouseAudit2.endDate := Date('2025-10-16')
+
+!new Bill('billSaoPauloE1_2')
+!billSaoPauloE1_2.amount := 680.00
+!billSaoPauloE1_2.category := 'Hotel (2 nights)'
+!billSaoPauloE1_2.date := Date('2025-10-14')
+!billSaoPauloE1_2.paymentMethod := #CREDIT_CARD
+!billSaoPauloE1_2.status := #VALIDATED
+
+!new Bill('billSaoPauloE2_2')
+!billSaoPauloE2_2.amount := 54.30
+!billSaoPauloE2_2.category := 'Airport bus'
+!billSaoPauloE2_2.date := Date('2025-10-14')
+!billSaoPauloE2_2.paymentMethod := #CASH
+!billSaoPauloE2_2.status := #VERIFIED
+
+!new Bill('billSaoPauloE3_2')
+!billSaoPauloE3_2.amount := 120.00
+!billSaoPauloE3_2.category := 'Ride-share to industrial park'
+!billSaoPauloE3_2.date := Date('2025-10-15')
+!billSaoPauloE3_2.paymentMethod := #CREDIT_CARD
+!billSaoPauloE3_2.status := #REFUSED
+
+!new Bill('billSaoPauloE4_2')
+!billSaoPauloE4_2.amount := 35.70
+!billSaoPauloE4_2.category := 'Printing & badges'
+!billSaoPauloE4_2.date := Date('2025-10-15')
+!billSaoPauloE4_2.paymentMethod := #CASH
+!billSaoPauloE4_2.status := #VERIFIED
+
+!insert (expenseSaoPauloWarehouseAudit2, billSaoPauloE1_2) into ExpenseContainsBills
+!insert (expenseSaoPauloWarehouseAudit2, billSaoPauloE2_2) into ExpenseContainsBills
+!insert (expenseSaoPauloWarehouseAudit2, billSaoPauloE3_2) into ExpenseContainsBills
+!insert (expenseSaoPauloWarehouseAudit2, billSaoPauloE4_2) into ExpenseContainsBills
+
+!insert (billSaoPauloE1_2, currencyBRLNew2) into BillCurrency
+!insert (billSaoPauloE2_2, currencyBRLNew2) into BillCurrency
+!insert (billSaoPauloE3_2, currencyBRLNew2) into BillCurrency
+!insert (billSaoPauloE4_2, currencyBRLNew2) into BillCurrency
+
+!new Comment('commentSaoPauloEC1_2')
+!commentSaoPauloEC1_2.text := 'Ride-share was refused: no itemized receipt provided by the app (requested re-issue).'
+
+!new Comment('commentSaoPauloEC2_2')
+!commentSaoPauloEC2_2.text := 'Hotel invoice includes ‘taxa de serviço’; accounting asked to keep the original hard copy.'
+
+!insert (expenseSaoPauloWarehouseAudit2, commentSaoPauloEC1_2) into ExpenseComment
+!insert (expenseSaoPauloWarehouseAudit2, commentSaoPauloEC2_2) into ExpenseComment
+
+!new Expense('expenseBengaluruOnboardingTraining2')
+!expenseBengaluruOnboardingTraining2.amount := 19020.00
+!expenseBengaluruOnboardingTraining2.startDate := Date('2025-07-07')
+!expenseBengaluruOnboardingTraining2.endDate := Date('2025-07-11')
+
+!new Bill('billBengaluruF1_2')
+!billBengaluruF1_2.amount := 15000.00
+!billBengaluruF1_2.category := 'Training fee (vendor invoice)'
+!billBengaluruF1_2.date := Date('2025-07-07')
+!billBengaluruF1_2.paymentMethod := #CHECK
+!billBengaluruF1_2.status := #VERIFIED
+
+!new Bill('billBengaluruF2_2')
+!billBengaluruF2_2.amount := 1850.00
+!billBengaluruF2_2.category := 'Coworking day passes'
+!billBengaluruF2_2.date := Date('2025-07-08')
+!billBengaluruF2_2.paymentMethod := #CREDIT_CARD
+!billBengaluruF2_2.status := #VALIDATED
+
+!new Bill('billBengaluruF3_2')
+!billBengaluruF3_2.amount := 640.00
+!billBengaluruF3_2.category := 'Metro card top-up'
+!billBengaluruF3_2.date := Date('2025-07-09')
+!billBengaluruF3_2.paymentMethod := #CASH
+!billBengaluruF3_2.status := #VERIFIED
+
+!new Bill('billBengaluruF4_2')
+!billBengaluruF4_2.amount := 1320.00
+!billBengaluruF4_2.category := 'Meals'
+!billBengaluruF4_2.date := Date('2025-07-10')
+!billBengaluruF4_2.paymentMethod := #CASH
+!billBengaluruF4_2.status := #PENDING
+
+!new Bill('billBengaluruF5_2')
+!billBengaluruF5_2.amount := 210.00
+!billBengaluruF5_2.category := 'Prepaid SIM (partial refund)'
+!billBengaluruF5_2.date := Date('2025-07-11')
+!billBengaluruF5_2.paymentMethod := #CASH
+!billBengaluruF5_2.status := #REFUNDED
+
+!insert (expenseBengaluruOnboardingTraining2, billBengaluruF1_2) into ExpenseContainsBills
+!insert (expenseBengaluruOnboardingTraining2, billBengaluruF2_2) into ExpenseContainsBills
+!insert (expenseBengaluruOnboardingTraining2, billBengaluruF3_2) into ExpenseContainsBills
+!insert (expenseBengaluruOnboardingTraining2, billBengaluruF4_2) into ExpenseContainsBills
+!insert (expenseBengaluruOnboardingTraining2, billBengaluruF5_2) into ExpenseContainsBills
+
+!insert (billBengaluruF1_2, currencyINRNew2) into BillCurrency
+!insert (billBengaluruF2_2, currencyINRNew2) into BillCurrency
+!insert (billBengaluruF3_2, currencyINRNew2) into BillCurrency
+!insert (billBengaluruF4_2, currencyINRNew2) into BillCurrency
+!insert (billBengaluruF5_2, currencyINRNew2) into BillCurrency
+
+!new Comment('commentBengaluruFC1_2')
+!commentBengaluruFC1_2.text := 'Training fee paid by check per vendor policy; receipt stamped PAID by finance desk.'
+
+!new Comment('commentBengaluruFC2_2')
+!commentBengaluruFC2_2.text := 'Meals are pending because one receipt is in Kannada; translation note attached for reviewers.'
+
+!new Comment('commentBengaluruFC3_2')
+!commentBengaluruFC3_2.text := 'SIM refund processed same day due to wrong plan activation; kept both the activation slip and refund slip.'
+
+!insert (expenseBengaluruOnboardingTraining2, commentBengaluruFC1_2) into ExpenseComment
+!insert (expenseBengaluruOnboardingTraining2, commentBengaluruFC2_2) into ExpenseComment
+!insert (expenseBengaluruOnboardingTraining2, commentBengaluruFC3_2) into ExpenseComment
+
+!new Expense('expenseNewYorkSameDayClientSupport2')
+!expenseNewYorkSameDayClientSupport2.amount := 188.67
+!expenseNewYorkSameDayClientSupport2.startDate := Date('2026-01-22')
+!expenseNewYorkSameDayClientSupport2.endDate := Date('2026-01-22')
+
+!new Bill('billNewYorkG1_2')
+!billNewYorkG1_2.amount := 42.18
+!billNewYorkG1_2.category := 'Local transit (subway)'
+!billNewYorkG1_2.date := Date('2026-01-22')
+!billNewYorkG1_2.paymentMethod := #CASH
+!billNewYorkG1_2.status := #VERIFIED
+
+!new Bill('billNewYorkG2_2')
+!billNewYorkG2_2.amount := 129.99
+!billNewYorkG2_2.category := 'Laptop charger (emergency replacement)'
+!billNewYorkG2_2.date := Date('2026-01-22')
+!billNewYorkG2_2.paymentMethod := #CREDIT_CARD
+!billNewYorkG2_2.status := #VALIDATED
+
+!new Bill('billNewYorkG3_2')
+!billNewYorkG3_2.amount := 16.50
+!billNewYorkG3_2.category := 'Client coffee'
+!billNewYorkG3_2.date := Date('2026-01-22')
+!billNewYorkG3_2.paymentMethod := #CREDIT_CARD
+!billNewYorkG3_2.status := #VERIFIED
+
+!insert (expenseNewYorkSameDayClientSupport2, billNewYorkG1_2) into ExpenseContainsBills
+!insert (expenseNewYorkSameDayClientSupport2, billNewYorkG2_2) into ExpenseContainsBills
+!insert (expenseNewYorkSameDayClientSupport2, billNewYorkG3_2) into ExpenseContainsBills
+
+!insert (billNewYorkG1_2, currencyUSDNew2) into BillCurrency
+!insert (billNewYorkG2_2, currencyUSDNew2) into BillCurrency
+!insert (billNewYorkG3_2, currencyUSDNew2) into BillCurrency
+
+!new Expense('expenseCancelledSiteVisitNoSpend2')
+!expenseCancelledSiteVisitNoSpend2.amount := 0.00
+!expenseCancelledSiteVisitNoSpend2.startDate := Date('2025-12-02')
+!expenseCancelledSiteVisitNoSpend2.endDate := Date('2025-12-04')
+
+!new Comment('commentCancelledHC1_2')
+!commentCancelledHC1_2.text := 'Trip cancelled due to weather disruption; created record for audit trail only.'
+
+!new Comment('commentCancelledHC2_2')
+!commentCancelledHC2_2.text := 'No charges incurred; bookings were cancelled within free-cancellation window.'
+
+!insert (expenseCancelledSiteVisitNoSpend2, commentCancelledHC1_2) into ExpenseComment
+!insert (expenseCancelledSiteVisitNoSpend2, commentCancelledHC2_2) into ExpenseComment

@@ -1,0 +1,107 @@
+!new Currency('currencyCURN1')
+!currencyCURN1.name := 'South African Rand'
+!currencyCURN1.abbreviation := 'zar'
+
+!new Currency('currencyCURN2')
+!currencyCURN2.name := ''
+!currencyCURN2.abbreviation := 'Ø'
+
+!new Currency('currencyCURN3')
+!currencyCURN3.name := 'Réunion franc (historic / test currency)'
+!currencyCURN3.abbreviation := 'RF'
+
+!new Expense('expenseEXPEDGE011_3')
+!expenseEXPEDGE011_3.amount := 25.00
+!expenseEXPEDGE011_3.startDate := Date('2026-03-10')
+!expenseEXPEDGE011_3.endDate := Date('2026-03-10')
+
+!new Bill('billEXPEDGE011_3_BILL1101')
+!billEXPEDGE011_3_BILL1101.amount := 10.00
+!billEXPEDGE011_3_BILL1101.category := 'Transit fare\n(printed on two lines)'
+!billEXPEDGE011_3_BILL1101.date := Date('2026-03-10')
+!billEXPEDGE011_3_BILL1101.paymentMethod := #CASH
+!billEXPEDGE011_3_BILL1101.status := #VERIFIED
+
+!new Bill('billEXPEDGE011_3_BILL1102')
+!billEXPEDGE011_3_BILL1102.amount := 20.00
+!billEXPEDGE011_3_BILL1102.category := 'Meal (rejected by policy but still logged)'
+!billEXPEDGE011_3_BILL1102.date := Date('2026-03-10')
+!billEXPEDGE011_3_BILL1102.paymentMethod := #CREDIT_CARD
+!billEXPEDGE011_3_BILL1102.status := #REFUSED
+
+!new Bill('billEXPEDGE011_3_BILL1103')
+!billEXPEDGE011_3_BILL1103.amount := -5.00
+!billEXPEDGE011_3_BILL1103.category := 'Partial refund applied after refusal'
+!billEXPEDGE011_3_BILL1103.date := Date('2026-03-10')
+!billEXPEDGE011_3_BILL1103.paymentMethod := #CREDIT_CARD
+!billEXPEDGE011_3_BILL1103.status := #REFUNDED
+
+!insert (expenseEXPEDGE011_3, billEXPEDGE011_3_BILL1101) into ExpenseContainsBills
+!insert (expenseEXPEDGE011_3, billEXPEDGE011_3_BILL1102) into ExpenseContainsBills
+!insert (expenseEXPEDGE011_3, billEXPEDGE011_3_BILL1103) into ExpenseContainsBills
+
+!insert (billEXPEDGE011_3_BILL1101, currencyCURN1) into BillCurrency
+!insert (billEXPEDGE011_3_BILL1102, currencyCURN1) into BillCurrency
+!insert (billEXPEDGE011_3_BILL1103, currencyCURN3) into BillCurrency
+
+!new Expense('expenseEXPEDGE012_3')
+!expenseEXPEDGE012_3.amount := 0.00
+!expenseEXPEDGE012_3.startDate := Date('2026-03-11')
+!expenseEXPEDGE012_3.endDate := Date('2026-03-10')
+
+!new Bill('billEXPEDGE012_3_BILL1201')
+!billEXPEDGE012_3_BILL1201.amount := 0.00
+!billEXPEDGE012_3_BILL1201.category := 'Zero-value placeholder A'
+!billEXPEDGE012_3_BILL1201.date := Date('2026-03-11')
+!billEXPEDGE012_3_BILL1201.paymentMethod := #CHECK
+!billEXPEDGE012_3_BILL1201.status := #DRAFT
+
+!new Bill('billEXPEDGE012_3_BILL1202')
+!billEXPEDGE012_3_BILL1202.amount := 0.00
+!billEXPEDGE012_3_BILL1202.category := 'Zero-value placeholder B'
+!billEXPEDGE012_3_BILL1202.date := Date('2026-03-09')
+!billEXPEDGE012_3_BILL1202.paymentMethod := #CASH
+!billEXPEDGE012_3_BILL1202.status := #PENDING
+
+!insert (expenseEXPEDGE012_3, billEXPEDGE012_3_BILL1201) into ExpenseContainsBills
+!insert (expenseEXPEDGE012_3, billEXPEDGE012_3_BILL1202) into ExpenseContainsBills
+
+!insert (billEXPEDGE012_3_BILL1201, currencyCURN3) into BillCurrency
+!insert (billEXPEDGE012_3_BILL1202, currencyCURN1) into BillCurrency
+
+!new Comment('commentEXPEDGE012_3_COM1201')
+!commentEXPEDGE012_3_COM1201.text := 'This expense intentionally contains only zero-amount bills.'
+
+!new Comment('commentEXPEDGE012_3_COM1202')
+!commentEXPEDGE012_3_COM1202.text := '   '
+
+!new Comment('commentEXPEDGE012_3_COM1203')
+!commentEXPEDGE012_3_COM1203.text := 'RTL/LTR mix test: العربية English עברית'
+
+!new Comment('commentEXPEDGE012_3_COM1204')
+!commentEXPEDGE012_3_COM1204.text := 'Very long note used as a boundary test for comment storage and display; no model constraint limits length, so this remains valid even if it is unusually verbose for an expense report comment.'
+
+!insert (expenseEXPEDGE012_3, commentEXPEDGE012_3_COM1201) into ExpenseComment
+!insert (expenseEXPEDGE012_3, commentEXPEDGE012_3_COM1202) into ExpenseComment
+!insert (expenseEXPEDGE012_3, commentEXPEDGE012_3_COM1203) into ExpenseComment
+!insert (expenseEXPEDGE012_3, commentEXPEDGE012_3_COM1204) into ExpenseComment
+
+!new Expense('expenseEXPEDGE013_3')
+!expenseEXPEDGE013_3.amount := 0.3333333333
+!expenseEXPEDGE013_3.startDate := Date('2026-03-12')
+!expenseEXPEDGE013_3.endDate := Date('2026-03-12')
+
+!new Bill('billEXPEDGE013_3_BILL1301')
+!billEXPEDGE013_3_BILL1301.amount := 0.3333333333
+!billEXPEDGE013_3_BILL1301.category := 'One-third allocation (precision stress test)'
+!billEXPEDGE013_3_BILL1301.date := Date('2026-03-12')
+!billEXPEDGE013_3_BILL1301.paymentMethod := #CHECK
+!billEXPEDGE013_3_BILL1301.status := #VALIDATED
+
+!insert (expenseEXPEDGE013_3, billEXPEDGE013_3_BILL1301) into ExpenseContainsBills
+!insert (billEXPEDGE013_3_BILL1301, currencyCURN2) into BillCurrency
+
+!new Comment('commentEXPEDGE013_3_COM1301')
+!commentEXPEDGE013_3_COM1301.text := 'Uses currency with empty name and a high-precision Real amount; valid per model.'
+
+!insert (expenseEXPEDGE013_3, commentEXPEDGE013_3_COM1301) into ExpenseComment

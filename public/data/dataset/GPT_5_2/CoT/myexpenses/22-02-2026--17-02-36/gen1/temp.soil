@@ -1,0 +1,158 @@
+!new Currency('currencyJPYComplex')
+!currencyJPYComplex.name := 'Japanese Yen'
+!currencyJPYComplex.abbreviation := 'JPY'
+
+!new Currency('currencyEURComplex')
+!currencyEURComplex.name := 'Euro'
+!currencyEURComplex.abbreviation := 'EUR'
+
+!new Currency('currencyMADComplex')
+!currencyMADComplex.name := 'Moroccan Dirham'
+!currencyMADComplex.abbreviation := 'MAD'
+
+!new Expense('expenseTokyoConferenceTravel')
+!expenseTokyoConferenceTravel.amount := 68600.00
+!expenseTokyoConferenceTravel.startDate := Date('2026-01-10')
+!expenseTokyoConferenceTravel.endDate := Date('2026-01-15')
+
+!new Bill('billTokyoA1')
+!billTokyoA1.amount := 18500.00
+!billTokyoA1.category := 'Hotel'
+!billTokyoA1.date := Date('2026-01-10')
+!billTokyoA1.paymentMethod := #CREDIT_CARD
+!billTokyoA1.status := #VERIFIED
+
+!new Bill('billTokyoA2')
+!billTokyoA2.amount := 3200.00
+!billTokyoA2.category := 'Airport train (Narita Express)'
+!billTokyoA2.date := Date('2026-01-10')
+!billTokyoA2.paymentMethod := #CASH
+!billTokyoA2.status := #VALIDATED
+
+!new Bill('billTokyoA3')
+!billTokyoA3.amount := 14600.00
+!billTokyoA3.category := 'Conference registration'
+!billTokyoA3.date := Date('2026-01-11')
+!billTokyoA3.paymentMethod := #CREDIT_CARD
+!billTokyoA3.status := #PENDING
+
+!new Bill('billTokyoA4')
+!billTokyoA4.amount := 9800.00
+!billTokyoA4.category := 'Meals'
+!billTokyoA4.date := Date('2026-01-12')
+!billTokyoA4.paymentMethod := #CASH
+!billTokyoA4.status := #VERIFIED
+
+!new Bill('billTokyoA5')
+!billTokyoA5.amount := 5400.00
+!billTokyoA5.category := 'Local taxi transfers'
+!billTokyoA5.date := Date('2026-01-13')
+!billTokyoA5.paymentMethod := #CASH
+!billTokyoA5.status := #VERIFIED
+
+!new Bill('billTokyoA6')
+!billTokyoA6.amount := 17100.00
+!billTokyoA6.category := 'Client dinner (Kanda)'
+!billTokyoA6.date := Date('2026-01-13')
+!billTokyoA6.paymentMethod := #CREDIT_CARD
+!billTokyoA6.status := #VALIDATED
+
+!insert (expenseTokyoConferenceTravel, billTokyoA1) into ExpenseContainsBills
+!insert (expenseTokyoConferenceTravel, billTokyoA2) into ExpenseContainsBills
+!insert (expenseTokyoConferenceTravel, billTokyoA3) into ExpenseContainsBills
+!insert (expenseTokyoConferenceTravel, billTokyoA4) into ExpenseContainsBills
+!insert (expenseTokyoConferenceTravel, billTokyoA5) into ExpenseContainsBills
+!insert (expenseTokyoConferenceTravel, billTokyoA6) into ExpenseContainsBills
+
+!insert (billTokyoA1, currencyJPYComplex) into BillCurrency
+!insert (billTokyoA2, currencyJPYComplex) into BillCurrency
+!insert (billTokyoA3, currencyJPYComplex) into BillCurrency
+!insert (billTokyoA4, currencyJPYComplex) into BillCurrency
+!insert (billTokyoA5, currencyJPYComplex) into BillCurrency
+!insert (billTokyoA6, currencyJPYComplex) into BillCurrency
+
+!new Comment('commentTokyoAC1')
+!commentTokyoAC1.text := 'Receipts are split between cash and card; hotel invoice includes city tax in the printed total.'
+
+!new Comment('commentTokyoAC2')
+!commentTokyoAC2.text := 'Conference badge pickup required ID; registration marked pending until attendance confirmed.'
+
+!insert (expenseTokyoConferenceTravel, commentTokyoAC1) into ExpenseComment
+!insert (expenseTokyoConferenceTravel, commentTokyoAC2) into ExpenseComment
+
+!new Expense('expenseMadridClientVisit')
+!expenseMadridClientVisit.amount := 312.40
+!expenseMadridClientVisit.startDate := Date('2025-11-03')
+!expenseMadridClientVisit.endDate := Date('2025-11-06')
+
+!new Bill('billMadridB1')
+!billMadridB1.amount := 189.00
+!billMadridB1.category := 'Hotel (Puerta del Sol)'
+!billMadridB1.date := Date('2025-11-03')
+!billMadridB1.paymentMethod := #CREDIT_CARD
+!billMadridB1.status := #VALIDATED
+
+!new Bill('billMadridB2')
+!billMadridB2.amount := 34.50
+!billMadridB2.category := 'Public transport (10-trip metro pass)'
+!billMadridB2.date := Date('2025-11-04')
+!billMadridB2.paymentMethod := #CASH
+!billMadridB2.status := #VERIFIED
+
+!new Bill('billMadridB3')
+!billMadridB3.amount := 88.90
+!billMadridB3.category := 'Team meal (tapas)'
+!billMadridB3.date := Date('2025-11-05')
+!billMadridB3.paymentMethod := #CREDIT_CARD
+!billMadridB3.status := #REFUNDED
+
+!insert (expenseMadridClientVisit, billMadridB1) into ExpenseContainsBills
+!insert (expenseMadridClientVisit, billMadridB2) into ExpenseContainsBills
+!insert (expenseMadridClientVisit, billMadridB3) into ExpenseContainsBills
+
+!insert (billMadridB1, currencyEURComplex) into BillCurrency
+!insert (billMadridB2, currencyEURComplex) into BillCurrency
+!insert (billMadridB3, currencyEURComplex) into BillCurrency
+
+!new Comment('commentMadridBC1')
+!commentMadridBC1.text := 'Meal was refunded due to duplicate charge; keep both the original slip and the refund confirmation.'
+
+!insert (expenseMadridClientVisit, commentMadridBC1) into ExpenseComment
+
+!new Expense('expenseCasablancaSupplierMeeting')
+!expenseCasablancaSupplierMeeting.amount := 1450.00
+!expenseCasablancaSupplierMeeting.startDate := Date('2025-09-18')
+!expenseCasablancaSupplierMeeting.endDate := Date('2025-09-20')
+
+!new Bill('billCasablancaC1')
+!billCasablancaC1.amount := 900.00
+!billCasablancaC1.category := 'Lodging (riad)'
+!billCasablancaC1.date := Date('2025-09-18')
+!billCasablancaC1.paymentMethod := #CASH
+!billCasablancaC1.status := #VERIFIED
+
+!new Bill('billCasablancaC2')
+!billCasablancaC2.amount := 550.00
+!billCasablancaC2.category := 'Train (Casa–Rabat round trip)'
+!billCasablancaC2.date := Date('2025-09-19')
+!billCasablancaC2.paymentMethod := #CHECK
+!billCasablancaC2.status := #REFUSED
+
+!insert (expenseCasablancaSupplierMeeting, billCasablancaC1) into ExpenseContainsBills
+!insert (expenseCasablancaSupplierMeeting, billCasablancaC2) into ExpenseContainsBills
+
+!insert (billCasablancaC1, currencyMADComplex) into BillCurrency
+!insert (billCasablancaC2, currencyMADComplex) into BillCurrency
+
+!new Comment('commentCasablancaCC1')
+!commentCasablancaCC1.text := 'Supplier requested payment evidence; check receipt attached to the train booking confirmation.'
+
+!new Comment('commentCasablancaCC2')
+!commentCasablancaCC2.text := 'Train expense refused pending clearer category justification (workshop vs. transport).'
+
+!new Comment('commentCasablancaCC3')
+!commentCasablancaCC3.text := 'Cash lodging receipt is handwritten; translation note added for accounting.'
+
+!insert (expenseCasablancaSupplierMeeting, commentCasablancaCC1) into ExpenseComment
+!insert (expenseCasablancaSupplierMeeting, commentCasablancaCC2) into ExpenseComment
+!insert (expenseCasablancaSupplierMeeting, commentCasablancaCC3) into ExpenseComment

@@ -1,0 +1,587 @@
+!new Station('S2')
+
+!new Driver('DRV100')
+!DRV100.id := 'DRV-100'
+!DRV100.name := 'María-José Ortega'
+
+!new Driver('DRV101')
+!DRV101.id := 'DRV-101'
+!DRV101.name := 'Kenji Tanaka'
+
+!insert (S2, DRV100) into StationContainsDriver
+!insert (S2, DRV101) into StationContainsDriver
+
+!new Customer('CUST2001')
+!CUST2001.id := 'CUST-2001'
+!CUST2001.name := 'Sofía Álvarez'
+!CUST2001.twitterUserName := '@sofia_envios'
+
+!new Customer('CUST2002')
+!CUST2002.id := 'CUST-2002'
+!CUST2002.name := 'Hiroko Saitō'
+!CUST2002.twitterUserName := '@斉藤ひろこ'
+
+!insert (S2, CUST2001) into StationContainsCustomer
+!insert (S2, CUST2002) into StationContainsCustomer
+
+!new Address('APU2001')
+!APU2001.text := 'Null Island buoy area, Gulf of Guinea (0°N 0°E)'
+!new GeoLocation('G2001')
+!G2001.latitude := 0.0
+!G2001.longitude := 0.0
+!insert (APU2001, G2001) into AddressContainsGeoLocation
+
+!new Address('ADL2001')
+!ADL2001.text := 'Suva Harbour, Fiji (near the International Date Line)'
+!new GeoLocation('G2002')
+!G2002.latitude := -18.1416
+!G2002.longitude := 179.9999
+!insert (ADL2001, G2002) into AddressContainsGeoLocation
+
+!new Address('APU2002')
+!APU2002.text := 'Apia, Samoa (western side of the Date Line)'
+!new GeoLocation('G2003')
+!G2003.latitude := -13.8333
+!G2003.longitude := -171.7667
+!insert (APU2002, G2003) into AddressContainsGeoLocation
+
+!new Address('ADL2002')
+!ADL2002.text := 'Nukuʻalofa, Tonga (eastern side of the Date Line)'
+!new GeoLocation('G2004')
+!G2004.latitude := -21.1394
+!G2004.longitude := -175.2049
+!insert (ADL2002, G2004) into AddressContainsGeoLocation
+
+!new Shipment('SHP2001')
+!SHP2001.id := 'SHP-2001'
+!SHP2001.status := #DELIVERED
+
+!new Shipment('SHP2002')
+!SHP2002.id := 'SHP-2002'
+!SHP2002.status := #UNDERWAY
+
+!insert (S2, SHP2001) into StationShipment
+!insert (S2, SHP2002) into StationShipment
+
+!insert (CUST2002, SHP2001) into CustomerConsistsOfShipment
+!insert (CUST2002, SHP2002) into CustomerConsistsOfShipment
+
+!insert (SHP2001, APU2001) into ShipmentContainsPickUpAddress
+!insert (SHP2001, ADL2001) into ShipmentContainsDeliveryAddress
+
+!insert (SHP2002, APU2002) into ShipmentContainsPickUpAddress
+!insert (SHP2002, ADL2002) into ShipmentContainsDeliveryAddress
+
+!new Station('S2_BLR')
+
+!new Driver('D2100')
+!D2100.id := 'D-2100'
+!D2100.name := 'Ananya Rao'
+!insert (S2_BLR, D2100) into StationContainsDriver
+
+!new Customer('C5101')
+!C5101.id := 'C-5101'
+!C5101.name := 'Priya Iyer'
+!C5101.twitterUserName := '@priyaiyer_blr'
+
+!new Customer('C5102')
+!C5102.id := 'C-5102'
+!C5102.name := 'Omar El-Badry'
+!C5102.twitterUserName := '@omar_elbadry'
+
+!new Customer('C5103')
+!C5103.id := 'C-5103'
+!C5103.name := 'Chloé Tremblay'
+!C5103.twitterUserName := '@chloe_tremblay'
+
+!insert (S2_BLR, C5101) into StationContainsCustomer
+!insert (S2_BLR, C5102) into StationContainsCustomer
+!insert (S2_BLR, C5103) into StationContainsCustomer
+
+!new Address('AWH1')
+!AWH1.text := 'Fulfillment Bay 3, 45 Hosur Road, Bommanahalli, Bengaluru 560068, India'
+!new GeoLocation('GL11_BLR')
+!GL11_BLR.latitude := 12.8928
+!GL11_BLR.longitude := 77.6366
+!insert (AWH1, GL11_BLR) into AddressContainsGeoLocation
+
+!new Address('AAPT1')
+!AAPT1.text := 'Flat 12B, 3rd Cross, Indiranagar, Bengaluru 560038, India'
+!new GeoLocation('GL12_BLR')
+!GL12_BLR.latitude := 12.9784
+!GL12_BLR.longitude := 77.6408
+!insert (AAPT1, GL12_BLR) into AddressContainsGeoLocation
+
+!new Address('AOFF1')
+!AOFF1.text := 'Unit 7, Manyata Tech Park, Nagawara, Bengaluru 560045, India'
+!new GeoLocation('GL13_BLR')
+!GL13_BLR.latitude := 13.0477
+!GL13_BLR.longitude := 77.6214
+!insert (AOFF1, GL13_BLR) into AddressContainsGeoLocation
+
+!new Address('APU2_BLR')
+!APU2_BLR.text := 'Omar’s Café, 9 Church Street, Bengaluru 560001, India'
+!new GeoLocation('GL14_BLR')
+!GL14_BLR.latitude := 12.9759
+!GL14_BLR.longitude := 77.6033
+!insert (APU2_BLR, GL14_BLR) into AddressContainsGeoLocation
+
+!new Shipment('SH88001')
+!SH88001.id := 'SH-88001'
+!SH88001.status := #UNDERWAY
+
+!new Shipment('SH88002')
+!SH88002.id := 'SH-88002'
+!SH88002.status := #DELIVERED
+
+!new Shipment('SH88003')
+!SH88003.id := 'SH-88003'
+!SH88003.status := #NEW
+
+!insert (S2_BLR, SH88001) into StationShipment
+!insert (S2_BLR, SH88002) into StationShipment
+!insert (S2_BLR, SH88003) into StationShipment
+
+!insert (C5101, SH88001) into CustomerConsistsOfShipment
+!insert (C5101, SH88002) into CustomerConsistsOfShipment
+!insert (C5102, SH88003) into CustomerConsistsOfShipment
+
+!insert (SH88001, AWH1) into ShipmentContainsPickUpAddress
+!insert (SH88001, AAPT1) into ShipmentContainsDeliveryAddress
+!insert (D2100, SH88001) into DriverShipment
+
+!insert (SH88002, AWH1) into ShipmentContainsPickUpAddress
+!insert (SH88002, AOFF1) into ShipmentContainsDeliveryAddress
+!insert (D2100, SH88002) into DriverShipment
+
+!insert (SH88003, APU2_BLR) into ShipmentContainsPickUpAddress
+!insert (SH88003, AOFF1) into ShipmentContainsDeliveryAddress
+
+!new Station('OSKNambaMicroHub')
+!new Station('ISLReykjavikDepot')
+
+!new Driver('DRVOSK001')
+!DRVOSK001.id := 'DRV-OSK-001'
+!DRVOSK001.name := 'Sakura Mori'
+
+!new Driver('DRVOSK002')
+!DRVOSK002.id := 'DRV-OSK-002'
+!DRVOSK002.name := 'Kenji Watanabe'
+
+!new Driver('DRVISL011')
+!DRVISL011.id := 'DRV-ISL-011'
+!DRVISL011.name := 'Sigríður Jónsdóttir'
+
+!insert (OSKNambaMicroHub, DRVOSK001) into StationContainsDriver
+!insert (OSKNambaMicroHub, DRVOSK002) into StationContainsDriver
+!insert (ISLReykjavikDepot, DRVISL011) into StationContainsDriver
+
+!new Customer('CUSTOSK2001')
+!CUSTOSK2001.id := 'CUST-OSK-2001'
+!CUSTOSK2001.name := 'Takeshi Nakamura'
+!CUSTOSK2001.twitterUserName := '@nkmr_takeshi'
+
+!new Customer('CUSTOSK2002')
+!CUSTOSK2002.id := 'CUST-OSK-2002'
+!CUSTOSK2002.name := 'Mei Chen'
+!CUSTOSK2002.twitterUserName := '@mei_chen_osaka'
+
+!new Customer('CUSTISL9001')
+!CUSTISL9001.id := 'CUST-ISL-9001'
+!CUSTISL9001.name := 'Einar Þór Guðmundsson'
+!CUSTISL9001.twitterUserName := '@einarthor'
+
+!new Customer('CUSTISL9002')
+!CUSTISL9002.id := 'CUST-ISL-9002'
+!CUSTISL9002.name := 'Aisha Al‑Harbi'
+!CUSTISL9002.twitterUserName := '@aisha_harbi'
+
+!insert (OSKNambaMicroHub, CUSTOSK2001) into StationContainsCustomer
+!insert (OSKNambaMicroHub, CUSTOSK2002) into StationContainsCustomer
+!insert (ISLReykjavikDepot, CUSTISL9001) into StationContainsCustomer
+!insert (ISLReykjavikDepot, CUSTISL9002) into StationContainsCustomer
+
+!new Address('OSK_O1')
+!OSK_O1.text := '〒542-0076 大阪府大阪市中央区難波1丁目 (Namba 1-chōme, Chūō-ku, Osaka)'
+!new GeoLocation('OSK_GL1')
+!OSK_GL1.latitude := 34.6687
+!OSK_GL1.longitude := 135.5019
+!insert (OSK_O1, OSK_GL1) into AddressContainsGeoLocation
+
+!new Address('OSK_O2')
+!OSK_O2.text := '〒542-0071 大阪府大阪市中央区道頓堀2丁目 (Dōtonbori 2-chōme, Chūō-ku, Osaka)'
+!new GeoLocation('OSK_GL2')
+!OSK_GL2.latitude := 34.6689
+!OSK_GL2.longitude := 135.5023
+!insert (OSK_O2, OSK_GL2) into AddressContainsGeoLocation
+
+!new Address('OSK_O3')
+!OSK_O3.text := '〒530-0001 大阪府大阪市北区梅田3丁目 大阪駅 (Osaka Station, Umeda 3-chōme, Kita-ku, Osaka)'
+!new GeoLocation('OSK_GL3')
+!OSK_GL3.latitude := 34.7025
+!OSK_GL3.longitude := 135.4959
+!insert (OSK_O3, OSK_GL3) into AddressContainsGeoLocation
+
+!new Address('OSK_O4')
+!OSK_O4.text := '〒532-0011 大阪府大阪市淀川区西中島5丁目 新大阪駅 (Shin-Osaka Station, Nishinakajima 5-chōme)'
+!new GeoLocation('OSK_GL4')
+!OSK_GL4.latitude := 34.7335
+!OSK_GL4.longitude := 135.5000
+!insert (OSK_O4, OSK_GL4) into AddressContainsGeoLocation
+
+!new Address('OSK_O5')
+!OSK_O5.text := '〒543-0051 大阪府大阪市天王寺区四天王寺1丁目 (Shitennōji 1-chōme, Tennōji-ku, Osaka)'
+!new GeoLocation('OSK_GL5')
+!OSK_GL5.latitude := 34.6546
+!OSK_GL5.longitude := 135.5160
+!insert (OSK_O5, OSK_GL5) into AddressContainsGeoLocation
+
+!new Address('OSK_O6')
+!OSK_O6.text := '〒544-0034 大阪府大阪市生野区桃谷5丁目 (Momodani 5-chōme, Ikuno-ku, Osaka)'
+!new GeoLocation('OSK_GL6')
+!OSK_GL6.latitude := 34.6609
+!OSK_GL6.longitude := 135.5287
+!insert (OSK_O6, OSK_GL6) into AddressContainsGeoLocation
+
+!new Address('OSK_O7')
+!OSK_O7.text := '〒559-0034 大阪府大阪市住之江区南港北2丁目 インテックス大阪 (INTEX Osaka, Nankō-kita 2-chōme)'
+!new GeoLocation('OSK_GL7')
+!OSK_GL7.latitude := 34.6380
+!OSK_GL7.longitude := 135.4143
+!insert (OSK_O7, OSK_GL7) into AddressContainsGeoLocation
+
+!new Address('ISL_R1')
+!ISL_R1.text := 'Laugavegur 12, 101 Reykjavík, Iceland'
+!new GeoLocation('ISL_GL1')
+!ISL_GL1.latitude := 64.1466
+!ISL_GL1.longitude := -21.9349
+!insert (ISL_R1, ISL_GL1) into AddressContainsGeoLocation
+
+!new Address('ISL_R2')
+!ISL_R2.text := 'Skólavörðustígur 6, 101 Reykjavík, Iceland'
+!new GeoLocation('ISL_GL2')
+!ISL_GL2.latitude := 64.1460
+!ISL_GL2.longitude := -21.9266
+!insert (ISL_R2, ISL_GL2) into AddressContainsGeoLocation
+
+!new Address('ISL_R3')
+!ISL_R3.text := 'Fiskislóð 31, 101 Reykjavík (Old Harbour), Iceland'
+!new GeoLocation('ISL_GL3')
+!ISL_GL3.latitude := 64.1505
+!ISL_GL3.longitude := -21.9483
+!insert (ISL_R3, ISL_GL3) into AddressContainsGeoLocation
+
+!new Address('ISL_R4')
+!ISL_R4.text := 'Kringlan 4, 103 Reykjavík, Iceland'
+!new GeoLocation('ISL_GL4')
+!ISL_GL4.latitude := 64.1319
+!ISL_GL4.longitude := -21.8895
+!insert (ISL_R4, ISL_GL4) into AddressContainsGeoLocation
+
+!new Address('ISL_R5')
+!ISL_R5.text := 'Keflavíkurflugvöllur (KEF) Cargo, 235 Reykjanesbær, Iceland'
+!new GeoLocation('ISL_GL5')
+!ISL_GL5.latitude := 63.9850
+!ISL_GL5.longitude := -22.6056
+!insert (ISL_R5, ISL_GL5) into AddressContainsGeoLocation
+
+!new Shipment('SHPOSK20260101')
+!SHPOSK20260101.id := 'SHP-OSK-2026-0101'
+!SHPOSK20260101.status := #NEW
+
+!new Shipment('SHPOSK20260102')
+!SHPOSK20260102.id := 'SHP-OSK-2026-0102'
+!SHPOSK20260102.status := #ASSIGNED
+
+!new Shipment('SHPOSK20260103')
+!SHPOSK20260103.id := 'SHP-OSK-2026-0103'
+!SHPOSK20260103.status := #UNDERWAY
+
+!new Shipment('SHPOSK20260104')
+!SHPOSK20260104.id := 'SHP-OSK-2026-0104'
+!SHPOSK20260104.status := #DELIVERED
+
+!new Shipment('SHPOSK20260105')
+!SHPOSK20260105.id := 'SHP-OSK-2026-0105'
+!SHPOSK20260105.status := #ASSIGNED
+
+!new Shipment('SHPOSK20260106')
+!SHPOSK20260106.id := 'SHP-OSK-2026-0106'
+!SHPOSK20260106.status := #NEW
+
+!new Shipment('SHPISL20267701')
+!SHPISL20267701.id := 'SHP-ISL-2026-7701'
+!SHPISL20267701.status := #UNDERWAY
+
+!new Shipment('SHPISL20267702')
+!SHPISL20267702.id := 'SHP-ISL-2026-7702'
+!SHPISL20267702.status := #ASSIGNED
+
+!new Shipment('SHPISL20267703')
+!SHPISL20267703.id := 'SHP-ISL-2026-7703'
+!SHPISL20267703.status := #DELIVERED
+
+!new Shipment('SHPISL20267704')
+!SHPISL20267704.id := 'SHP-ISL-2026-7704'
+!SHPISL20267704.status := #NEW
+
+!insert (OSKNambaMicroHub, SHPOSK20260101) into StationShipment
+!insert (OSKNambaMicroHub, SHPOSK20260102) into StationShipment
+!insert (OSKNambaMicroHub, SHPOSK20260103) into StationShipment
+!insert (OSKNambaMicroHub, SHPOSK20260104) into StationShipment
+!insert (OSKNambaMicroHub, SHPOSK20260105) into StationShipment
+!insert (OSKNambaMicroHub, SHPOSK20260106) into StationShipment
+
+!insert (ISLReykjavikDepot, SHPISL20267701) into StationShipment
+!insert (ISLReykjavikDepot, SHPISL20267702) into StationShipment
+!insert (ISLReykjavikDepot, SHPISL20267703) into StationShipment
+!insert (ISLReykjavikDepot, SHPISL20267704) into StationShipment
+
+!insert (CUSTOSK2001, SHPOSK20260101) into CustomerConsistsOfShipment
+!insert (CUSTOSK2001, SHPOSK20260102) into CustomerConsistsOfShipment
+!insert (CUSTOSK2002, SHPOSK20260103) into CustomerConsistsOfShipment
+!insert (CUSTOSK2002, SHPOSK20260104) into CustomerConsistsOfShipment
+!insert (CUSTOSK2001, SHPOSK20260105) into CustomerConsistsOfShipment
+!insert (CUSTOSK2002, SHPOSK20260106) into CustomerConsistsOfShipment
+
+!insert (CUSTISL9001, SHPISL20267701) into CustomerConsistsOfShipment
+!insert (CUSTISL9001, SHPISL20267702) into CustomerConsistsOfShipment
+!insert (CUSTISL9001, SHPISL20267703) into CustomerConsistsOfShipment
+!insert (CUSTISL9001, SHPISL20267704) into CustomerConsistsOfShipment
+
+!insert (SHPOSK20260101, OSK_O3) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260101, OSK_O1) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK20260102, OSK_O7) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260102, OSK_O5) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK20260103, OSK_O2) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260103, OSK_O6) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK20260104, OSK_O4) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260104, OSK_O2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK20260105, OSK_O1) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260105, OSK_O7) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK20260106, OSK_O5) into ShipmentContainsPickUpAddress
+!insert (SHPOSK20260106, OSK_O3) into ShipmentContainsDeliveryAddress
+
+!insert (SHPISL20267701, ISL_R5) into ShipmentContainsPickUpAddress
+!insert (SHPISL20267701, ISL_R3) into ShipmentContainsDeliveryAddress
+
+!insert (SHPISL20267702, ISL_R3) into ShipmentContainsPickUpAddress
+!insert (SHPISL20267702, ISL_R4) into ShipmentContainsDeliveryAddress
+
+!insert (SHPISL20267703, ISL_R1) into ShipmentContainsPickUpAddress
+!insert (SHPISL20267703, ISL_R2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPISL20267704, ISL_R4) into ShipmentContainsPickUpAddress
+!insert (SHPISL20267704, ISL_R1) into ShipmentContainsDeliveryAddress
+
+!insert (DRVOSK001, SHPOSK20260102) into DriverShipment
+!insert (DRVOSK002, SHPOSK20260103) into DriverShipment
+!insert (DRVOSK001, SHPOSK20260104) into DriverShipment
+!insert (DRVOSK002, SHPOSK20260105) into DriverShipment
+
+!insert (DRVISL011, SHPISL20267701) into DriverShipment
+!insert (DRVISL011, SHPISL20267702) into DriverShipment
+!insert (DRVISL011, SHPISL20267703) into DriverShipment
+
+!new Station('LAGHUB2')
+!new Station('ABVHUB2')
+
+!new Driver('DNG77_2')
+!DNG77_2.id := 'D-NG-77'
+!DNG77_2.name := 'Khadijat Musa'
+
+!new Driver('DNG05_2')
+!DNG05_2.id := 'D-NG-05'
+!DNG05_2.name := 'Tunde Adeyemi'
+
+!new Driver('DNG12_2')
+!DNG12_2.id := 'D-NG-12'
+!DNG12_2.name := 'Emeka Nwosu'
+
+!insert (LAGHUB2, DNG77_2) into StationContainsDriver
+!insert (LAGHUB2, DNG05_2) into StationContainsDriver
+!insert (ABVHUB2, DNG12_2) into StationContainsDriver
+
+!new Customer('CNG2001_2')
+!CNG2001_2.id := 'C-NG-2001'
+!CNG2001_2.name := 'Amina Bello'
+!CNG2001_2.twitterUserName := '@aminabello_ng'
+
+!new Customer('CNG2002_2')
+!CNG2002_2.id := 'C-NG-2002'
+!CNG2002_2.name := 'Chinedu Okoye'
+!CNG2002_2.twitterUserName := '@chinedu_ok'
+
+!insert (LAGHUB2, CNG2001_2) into StationContainsCustomer
+!insert (ABVHUB2, CNG2002_2) into StationContainsCustomer
+
+!new Address('ALAG01_2')
+!ALAG01_2.text := 'Ikeja City Mall, Gate A, Obafemi Awolowo Way, Ikeja, Lagos, Nigeria'
+!new GeoLocation('GLLAGMALL_A2')
+!GLLAGMALL_A2.latitude := 6.6069
+!GLLAGMALL_A2.longitude := 3.3491
+!insert (ALAG01_2, GLLAGMALL_A2) into AddressContainsGeoLocation
+
+!new Address('ALAG02_2')
+!ALAG02_2.text := 'Ikeja City Mall, Loading Bay Gate B (rear entrance), Ikeja, Lagos, Nigeria'
+!new GeoLocation('GLLAGMALL_B2')
+!GLLAGMALL_B2.latitude := 6.6069
+!GLLAGMALL_B2.longitude := 3.3491
+!insert (ALAG02_2, GLLAGMALL_B2) into AddressContainsGeoLocation
+
+!new Address('ALAG03_2')
+!ALAG03_2.text := 'Yaba College of Technology, Yaba, Lagos, Nigeria'
+!new GeoLocation('GLLAGYABA_2')
+!GLLAGYABA_2.latitude := 6.5160
+!GLLAGYABA_2.longitude := 3.3741
+!insert (ALAG03_2, GLLAGYABA_2) into AddressContainsGeoLocation
+
+!new Address('AABV01_2')
+!AABV01_2.text := 'Jabi Lake Mall, Jabi District, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVJABI_2')
+!GLABVJABI_2.latitude := 9.0765
+!GLABVJABI_2.longitude := 7.4266
+!insert (AABV01_2, GLABVJABI_2) into AddressContainsGeoLocation
+
+!new Address('AABV02_2')
+!AABV02_2.text := 'Wuse Market (Gate 3), Wuse Zone 5, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVWUSE_2')
+!GLABVWUSE_2.latitude := 9.0833
+!GLABVWUSE_2.longitude := 7.4756
+!insert (AABV02_2, GLABVWUSE_2) into AddressContainsGeoLocation
+
+!new Address('AABV03_2')
+!AABV03_2.text := 'Garki Area 11, Yakubu Gowon Crescent, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVGARKI_2')
+!GLABVGARKI_2.latitude := 9.0402
+!GLABVGARKI_2.longitude := 7.4897
+!insert (AABV03_2, GLABVGARKI_2) into AddressContainsGeoLocation
+
+!new Shipment('SHPNG4450_A2')
+!SHPNG4450_A2.id := 'SHP-NG-4450'
+!SHPNG4450_A2.status := #UNDERWAY
+
+!new Shipment('SHPNG4450_B2')
+!SHPNG4450_B2.id := 'SHP-NG-4450'
+!SHPNG4450_B2.status := #NEW
+
+!new Shipment('SHPNG7781_2')
+!SHPNG7781_2.id := 'SHP-NG-7781'
+!SHPNG7781_2.status := #DELIVERED
+
+!insert (LAGHUB2, SHPNG4450_A2) into StationShipment
+!insert (ABVHUB2, SHPNG4450_B2) into StationShipment
+!insert (LAGHUB2, SHPNG7781_2) into StationShipment
+
+!insert (CNG2001_2, SHPNG4450_A2) into CustomerConsistsOfShipment
+!insert (CNG2002_2, SHPNG4450_B2) into CustomerConsistsOfShipment
+!insert (CNG2001_2, SHPNG7781_2) into CustomerConsistsOfShipment
+
+!insert (SHPNG4450_A2, ALAG01_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG4450_A2, AABV01_2) into ShipmentContainsDeliveryAddress
+!insert (DNG77_2, SHPNG4450_A2) into DriverShipment
+
+!insert (SHPNG4450_B2, AABV02_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG4450_B2, AABV03_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPNG7781_2, ALAG02_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG7781_2, ALAG03_2) into ShipmentContainsDeliveryAddress
+!insert (DNG05_2, SHPNG7781_2) into DriverShipment
+
+!new Station('S2_driverless')
+
+!new Customer('C10')
+!C10.id := 'CUS-EDGE-1001'
+!C10.name := 'Kalaallit Express ApS'
+!C10.twitterUserName := '@kal_express'
+
+!new Customer('C11')
+!C11.id := 'CUS-EDGE-1002'
+!C11.name := 'Nawojka Żuk'
+!C11.twitterUserName := ''
+
+!new Customer('C12')
+!C12.id := 'CUS-EDGE-1003'
+!C12.name := 'Te Whare Pounamu Trust'
+!C12.twitterUserName := '@tewharepounamu'
+
+!insert (S2_driverless, C10) into StationContainsCustomer
+!insert (S2_driverless, C11) into StationContainsCustomer
+!insert (S2_driverless, C12) into StationContainsCustomer
+
+!new Address('A100')
+!A100.text := 'Polar cache “NP-90”, North Pole (no street address)'
+!new GeoLocation('GL100')
+!GL100.latitude := 90.0
+!GL100.longitude := 0.0
+!insert (A100, GL100) into AddressContainsGeoLocation
+
+!new Address('A101')
+!A101.text := 'Amundsen–Scott marker zone, South Pole, Antarctica'
+!new GeoLocation('GL101')
+!GL101.latitude := -90.0
+!GL101.longitude := 0.0
+!insert (A101, GL101) into AddressContainsGeoLocation
+
+!new Address('A102')
+!A102.text := 'International Date Line buoy (east side), equatorial Pacific'
+!new GeoLocation('GL102')
+!GL102.latitude := 0.0
+!GL102.longitude := 179.9999
+!insert (A102, GL102) into AddressContainsGeoLocation
+
+!new Address('A103')
+!A103.text := 'International Date Line buoy (west side), equatorial Pacific'
+!new GeoLocation('GL103')
+!GL103.latitude := 0.0
+!GL103.longitude := -179.9999
+!insert (A103, GL103) into AddressContainsGeoLocation
+
+!new Address('A104')
+!A104.text := '“Null Island” floating platform, Gulf of Guinea (0,0)'
+!new GeoLocation('GL104')
+!GL104.latitude := 0.0
+!GL104.longitude := 0.0
+!insert (A104, GL104) into AddressContainsGeoLocation
+
+!new Address('A105')
+!A105.text := '“Null Island” floating platform, Gulf of Guinea (0,0) — secondary deck'
+!new GeoLocation('GL105')
+!GL105.latitude := 0.0008
+!GL105.longitude := 0.0008
+!insert (A105, GL105) into AddressContainsGeoLocation
+
+!new Shipment('SHPEDGE1001')
+!SHPEDGE1001.id := 'SHP-EDGE-1001'
+!SHPEDGE1001.status := #ASSIGNED
+
+!new Shipment('SHPEDGE1002')
+!SHPEDGE1002.id := 'SHP-EDGE-1002'
+!SHPEDGE1002.status := #UNDERWAY
+
+!new Shipment('SHPEDGE1003')
+!SHPEDGE1003.id := 'SHP-EDGE-1003'
+!SHPEDGE1003.status := #DELIVERED
+
+!insert (S2_driverless, SHPEDGE1001) into StationShipment
+!insert (S2_driverless, SHPEDGE1002) into StationShipment
+!insert (S2_driverless, SHPEDGE1003) into StationShipment
+
+!insert (C10, SHPEDGE1001) into CustomerConsistsOfShipment
+!insert (C11, SHPEDGE1002) into CustomerConsistsOfShipment
+!insert (C11, SHPEDGE1003) into CustomerConsistsOfShipment
+
+!insert (SHPEDGE1001, A102) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1001, A103) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE1002, A100) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1002, A101) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE1003, A104) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1003, A105) into ShipmentContainsDeliveryAddress
+

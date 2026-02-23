@@ -1,0 +1,106 @@
+!new RentalOffice('RO_10')
+!RO_10.name := 'Little Havana Fleet Yard'
+!RO_10.number := 10
+!RO_10.address := '801 SW 8th St, Miami, FL'
+
+!new RentalOffice('RO_11_B')
+!RO_11_B.name := 'Rocky Mountain Counter'
+!RO_11_B.number := 11
+!RO_11_B.address := '1700 Wynkoop St, Denver, CO'
+
+!new RentalOffice('RO_12_B')
+!RO_12_B.name := 'First State Kiosk'
+!RO_12_B.number := 12
+!RO_12_B.address := '1 Market St, Wilmington, DE'
+
+!new RentalOffice('RO_13')
+!RO_13.name := 'Midnight Sun Desk'
+!RO_13.number := 13
+!RO_13.address := '99 Airport Way, Fairbanks, AK'
+
+!new Truck('T_1_B')
+!T_1_B.id := 1
+!T_1_B.registrationState := #FL
+!T_1_B.licensePlateNumber := 'FL-1A'
+!T_1_B.vehicleTypeCode := #TRUCK
+!T_1_B.registrationLastMaintenanceDate := Date('1900-01-01')
+!T_1_B.expirationDate := Date('9999-12-31')
+!T_1_B.odometerReading := 2147483000
+!T_1_B.gasTankCapacity := 0.0
+!T_1_B.workingRadio := true
+!T_1_B.mileage := 2147483647
+
+!new Truck('T_2_B')
+!T_2_B.id := 2
+!T_2_B.registrationState := #AZ
+!T_2_B.licensePlateNumber := 'AZ-0002'
+!T_2_B.vehicleTypeCode := #TRUCK10
+!T_2_B.registrationLastMaintenanceDate := Date('2026-02-29')
+!T_2_B.expirationDate := Date('2026-03-01')
+!T_2_B.odometerReading := 0
+!T_2_B.gasTankCapacity := 120.5
+!T_2_B.workingRadio := false
+!T_2_B.mileage := 0
+
+!new Vehicle('V_300_B')
+!V_300_B.id := 300
+!V_300_B.registrationState := #DE
+!V_300_B.licensePlateNumber := 'DE-COV-300'
+!V_300_B.vehicleTypeCode := #COVERED_TRAILER
+!V_300_B.registrationLastMaintenanceDate := Date('2025-05-05')
+!V_300_B.expirationDate := Date('2027-05-05')
+
+!new Vehicle('V_301_B')
+!V_301_B.id := 301
+!V_301_B.registrationState := #DE
+!V_301_B.licensePlateNumber := 'DE-OPN-301'
+!V_301_B.vehicleTypeCode := #OPEN_TRAILER
+!V_301_B.registrationLastMaintenanceDate := Date('2025-05-06')
+!V_301_B.expirationDate := Date('2027-05-06')
+
+!new Vehicle('V_302_B')
+!V_302_B.id := 302
+!V_302_B.registrationState := #FL
+!V_302_B.licensePlateNumber := 'FL-TRAIL-302'
+!V_302_B.vehicleTypeCode := #OPEN_TRAILER
+!V_302_B.registrationLastMaintenanceDate := Date('2024-12-31')
+!V_302_B.expirationDate := Date('2026-12-31')
+
+!new Vehicle('V_400_B')
+!V_400_B.id := 400
+!V_400_B.registrationState := #CO
+!V_400_B.licensePlateNumber := 'CO-COV-400'
+!V_400_B.vehicleTypeCode := #COVERED_TRAILER
+!V_400_B.registrationLastMaintenanceDate := Date('2026-01-01')
+!V_400_B.expirationDate := Date('2026-01-02')
+
+!new Individual('I_10_B')
+!I_10_B.name := 'Søren Mikkelsen'
+!I_10_B.address := '12 Biscayne Blvd, Miami, FL'
+!I_10_B.poorRisk := false
+!I_10_B.homePhone := '+1-305-555-0010'
+!I_10_B.driverLicenseState := #FL
+!I_10_B.driverLicenseNumber := 1000000000
+!I_10_B.driverLicenseExpirationDate := Date('9999-12-31')
+
+!new Individual('I_11_B')
+!I_11_B.name := 'María-José Rivera'
+!I_11_B.address := '2000 Larimer St, Denver, CO'
+!I_11_B.poorRisk := true
+!I_11_B.homePhone := '303-555-0011'
+!I_11_B.driverLicenseState := #CO
+!I_11_B.driverLicenseNumber := 1
+!I_11_B.driverLicenseExpirationDate := Date('1900-01-01')
+
+!new Company('C_10_B')
+!C_10_B.name := 'Kalaallit Freight Co.'
+!C_10_B.address := '5 Aurora Industrial Rd, Fairbanks, AK'
+!C_10_B.poorRisk := false
+!C_10_B.idNumber := 1
+
+!insert (RO_10, T_1_B) into RentalOfficeVehicle
+!insert (RO_10, T_2_B) into RentalOfficeVehicle
+!insert (RO_10, V_300_B) into RentalOfficeVehicle
+!insert (RO_10, V_301_B) into RentalOfficeVehicle
+!insert (RO_10, V_302_B) into RentalOfficeVehicle
+!insert (RO_11_B, V_400_B) into RentalOfficeVehicle

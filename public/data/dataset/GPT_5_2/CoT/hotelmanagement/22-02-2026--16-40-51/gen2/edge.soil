@@ -1,0 +1,78 @@
+!new Customer('C8')
+!C8.firstName := '李'
+!C8.lastName := '小龍'
+
+!new Booking('BKG_NEG_1')
+!BKG_NEG_1.bookingId := -1
+!BKG_NEG_1.startDate := ''
+!BKG_NEG_1.endDate := ''
+!BKG_NEG_1.confirmed := false
+!BKG_NEG_1.canceled := true
+
+!new Customer('C9')
+!C9.firstName := 'Siobhán'
+!C9.lastName := 'Ó Ríordáin'
+
+!new Booking('BKG_MAXINT')
+!BKG_MAXINT.bookingId := 2147483647
+!BKG_MAXINT.startDate := '2026-02-29'
+!BKG_MAXINT.endDate := '2026-02-29'
+!BKG_MAXINT.confirmed := true
+!BKG_MAXINT.canceled := false
+
+!new RoomReservation('RR_ZERO_NIGHT')
+!RR_ZERO_NIGHT.checkInDate := '2026-02-29'
+!RR_ZERO_NIGHT.checkOutDate := '2026-02-29'
+
+!new Room('R0')
+!R0.roomNumber := 0
+!R0.numBeds := 1
+!R0.pricePerNight := 0.0
+!R0.occupied := true
+!R0.blocked := true
+
+!new RoomExtra('X1')
+!X1.description := 'Promotional voucher (manual adjustment)'
+!X1.price := -25.0
+
+!new RoomExtra('X2')
+!X2.description := 'Noise-canceling headset rental'
+!X2.price := 15.0
+
+!new RoomExtra('X3')
+!X3.description := 'Security deposit (pre-authorization record)'
+!X3.price := 300.0
+
+!new RoomExtra('X4')
+!X4.description := '24-hour sauna access (same-day)'
+!X4.price := 0.0
+
+!new Bill('BL80001')
+!BL80001.billId := 80001
+!BL80001.price := 0.0
+
+!new FreeRoomTypesDTO('D14')
+!D14.roomTypeDescription := 'Habitación interior sin ventanas (tarifa experimental)'
+!D14.numBeds := 1
+!D14.pricePerNight := 0.0
+!D14.numFreeRooms := 1000000
+
+!new FreeRoomTypesDTO('D15')
+!D15.roomTypeDescription := 'Suite familiale (offre festival régional)'
+!D15.numBeds := 5
+!D15.pricePerNight := 180.75
+!D15.numFreeRooms := 1
+
+!insert (BKG_NEG_1, C8) into BookingCustomer
+!insert (BKG_MAXINT, C9) into BookingCustomer
+
+!insert (BKG_MAXINT, RR_ZERO_NIGHT) into BookingRoomReservation
+!insert (RR_ZERO_NIGHT, R0) into RoomReservationRoom
+
+!insert (RR_ZERO_NIGHT, X1) into RoomReservationExtras
+!insert (RR_ZERO_NIGHT, X2) into RoomReservationExtras
+!insert (RR_ZERO_NIGHT, X3) into RoomReservationExtras
+!insert (RR_ZERO_NIGHT, X4) into RoomReservationExtras
+
+!insert (BKG_MAXINT, BL80001) into BookingBill
+!insert (BL80001, RR_ZERO_NIGHT) into BillRoomReservation

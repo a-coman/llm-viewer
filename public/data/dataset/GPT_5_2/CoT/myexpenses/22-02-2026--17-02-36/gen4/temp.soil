@@ -1,0 +1,150 @@
+!new Currency('currencyBTN')
+!currencyBTN.name := 'Bhutanese Ngultrum'
+!currencyBTN.abbreviation := 'BTN'
+
+!new Currency('currencyXPF')
+!currencyXPF.name := 'CFP Franc'
+!currencyXPF.abbreviation := 'XPF'
+
+!new Currency('currencyKES')
+!currencyKES.name := 'Kenyan Shilling'
+!currencyKES.abbreviation := 'KES'
+
+!new Currency('currencyINREdgeHuge')
+!currencyINREdgeHuge.name := 'Indian Rupee'
+!currencyINREdgeHuge.abbreviation := 'INR'
+
+!new Expense('expenseEXPEDGE007')
+!expenseEXPEDGE007.amount := 0.00
+!expenseEXPEDGE007.startDate := Date('2026-06-01')
+!expenseEXPEDGE007.endDate := Date('2026-06-01')
+
+!new Bill('billEXPEDGE007_BILL701')
+!billEXPEDGE007_BILL701.amount := 500.00
+!billEXPEDGE007_BILL701.category := 'Deposit posted'
+!billEXPEDGE007_BILL701.date := Date('2026-06-01')
+!billEXPEDGE007_BILL701.paymentMethod := #CREDIT_CARD
+!billEXPEDGE007_BILL701.status := #PENDING
+
+!new Bill('billEXPEDGE007_BILL702')
+!billEXPEDGE007_BILL702.amount := -500.00
+!billEXPEDGE007_BILL702.category := 'Deposit reversal'
+!billEXPEDGE007_BILL702.date := Date('2026-06-01')
+!billEXPEDGE007_BILL702.paymentMethod := #CREDIT_CARD
+!billEXPEDGE007_BILL702.status := #REFUNDED
+
+!new Bill('billEXPEDGE007_BILL703')
+!billEXPEDGE007_BILL703.amount := 1.00
+!billEXPEDGE007_BILL703.category := 'Manual correction +1'
+!billEXPEDGE007_BILL703.date := Date('2026-06-01')
+!billEXPEDGE007_BILL703.paymentMethod := #CASH
+!billEXPEDGE007_BILL703.status := #VERIFIED
+
+!new Bill('billEXPEDGE007_BILL704')
+!billEXPEDGE007_BILL704.amount := -1.00
+!billEXPEDGE007_BILL704.category := 'Manual correction -1'
+!billEXPEDGE007_BILL704.date := Date('2026-06-01')
+!billEXPEDGE007_BILL704.paymentMethod := #CASH
+!billEXPEDGE007_BILL704.status := #VALIDATED
+
+!new Bill('billEXPEDGE007_BILL705')
+!billEXPEDGE007_BILL705.amount := 0.10
+!billEXPEDGE007_BILL705.category := 'Test micro-charge (decimal in KES)'
+!billEXPEDGE007_BILL705.date := Date('2026-06-01')
+!billEXPEDGE007_BILL705.paymentMethod := #CHECK
+!billEXPEDGE007_BILL705.status := #DRAFT
+
+!new Bill('billEXPEDGE007_BILL706')
+!billEXPEDGE007_BILL706.amount := -0.05
+!billEXPEDGE007_BILL706.category := 'Split refund part A'
+!billEXPEDGE007_BILL706.date := Date('2026-06-01')
+!billEXPEDGE007_BILL706.paymentMethod := #CHECK
+!billEXPEDGE007_BILL706.status := #REFUNDED
+
+!new Bill('billEXPEDGE007_BILL707')
+!billEXPEDGE007_BILL707.amount := -0.05
+!billEXPEDGE007_BILL707.category := 'Split refund part B'
+!billEXPEDGE007_BILL707.date := Date('2026-06-01')
+!billEXPEDGE007_BILL707.paymentMethod := #CHECK
+!billEXPEDGE007_BILL707.status := #REFUNDED
+
+!new Bill('billEXPEDGE007_BILL708')
+!billEXPEDGE007_BILL708.amount := 0.00
+!billEXPEDGE007_BILL708.category := '   '
+!billEXPEDGE007_BILL708.date := Date('2026-06-01')
+!billEXPEDGE007_BILL708.paymentMethod := #CASH
+!billEXPEDGE007_BILL708.status := #REFUSED
+
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL701) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL702) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL703) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL704) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL705) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL706) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL707) into ExpenseContainsBills
+!insert (expenseEXPEDGE007, billEXPEDGE007_BILL708) into ExpenseContainsBills
+
+!insert (billEXPEDGE007_BILL701, currencyBTN) into BillCurrency
+!insert (billEXPEDGE007_BILL702, currencyBTN) into BillCurrency
+!insert (billEXPEDGE007_BILL703, currencyXPF) into BillCurrency
+!insert (billEXPEDGE007_BILL704, currencyXPF) into BillCurrency
+!insert (billEXPEDGE007_BILL705, currencyKES) into BillCurrency
+!insert (billEXPEDGE007_BILL706, currencyKES) into BillCurrency
+!insert (billEXPEDGE007_BILL707, currencyKES) into BillCurrency
+!insert (billEXPEDGE007_BILL708, currencyKES) into BillCurrency
+
+!new Comment('commentEXPEDGE007_COM701')
+!commentEXPEDGE007_COM701.text := 'Zero-sum expense created to verify aggregation logic under mixed positive/negative bills.'
+
+!new Comment('commentEXPEDGE007_COM702')
+!commentEXPEDGE007_COM702.text := 'BTN deposit and reversal intentionally cancel out.'
+
+!new Comment('commentEXPEDGE007_COM703')
+!commentEXPEDGE007_COM703.text := 'XPF manual corrections included to test small-value adjustments.'
+
+!new Comment('commentEXPEDGE007_COM704')
+!commentEXPEDGE007_COM704.text := 'KES micro-charge split into two refund lines to test multiple negative entries.'
+
+!new Comment('commentEXPEDGE007_COM705')
+!commentEXPEDGE007_COM705.text := 'Arabic note: تمت التسوية إلى صفر.'
+
+!new Comment('commentEXPEDGE007_COM706')
+!commentEXPEDGE007_COM706.text := 'हिन्दी टिप्पणी: कुल राशि शून्य है।'
+
+!new Comment('commentEXPEDGE007_COM707')
+!commentEXPEDGE007_COM707.text := 'Note en français: cas limite — somme des factures = 0.'
+
+!new Comment('commentEXPEDGE007_COM708')
+!commentEXPEDGE007_COM708.text := '中文备注：该报销单用于测试边界情况（零合计）。'
+
+!new Comment('commentEXPEDGE007_COM709')
+!commentEXPEDGE007_COM709.text := 'Whitespace-only category on one bill is deliberate; category is a free String in the model.'
+
+!new Comment('commentEXPEDGE007_COM710')
+!commentEXPEDGE007_COM710.text := 'Audit trail: statuses span DRAFT/PENDING/VERIFIED/VALIDATED/REFUSED/REFUNDED in one expense.'
+
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM701) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM702) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM703) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM704) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM705) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM706) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM707) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM708) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM709) into ExpenseComment
+!insert (expenseEXPEDGE007, commentEXPEDGE007_COM710) into ExpenseComment
+
+!new Expense('expenseEXPEDGE008')
+!expenseEXPEDGE008.amount := 9999999999.99
+!expenseEXPEDGE008.startDate := Date('2020-01-01')
+!expenseEXPEDGE008.endDate := Date('2020-12-31')
+
+!new Bill('billEXPEDGE008_BILL801')
+!billEXPEDGE008_BILL801.amount := 9999999999.99
+!billEXPEDGE008_BILL801.category := 'One-off settlement invoice #00000001 (bulk reimbursement)'
+!billEXPEDGE008_BILL801.date := Date('2020-07-01')
+!billEXPEDGE008_BILL801.paymentMethod := #CHECK
+!billEXPEDGE008_BILL801.status := #VALIDATED
+
+!insert (expenseEXPEDGE008, billEXPEDGE008_BILL801) into ExpenseContainsBills
+!insert (billEXPEDGE008_BILL801, currencyINREdgeHuge) into BillCurrency

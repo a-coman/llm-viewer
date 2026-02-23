@@ -1,0 +1,80 @@
+!new Currency('currencyGBPUniTrip')
+!currencyGBPUniTrip.name := 'British Pound Sterling'
+!currencyGBPUniTrip.abbreviation := 'GBP'
+
+!new Currency('currencyNOKUniTrip')
+!currencyNOKUniTrip.name := 'Norwegian Krone'
+!currencyNOKUniTrip.abbreviation := 'NOK'
+
+!new Currency('currencySEKUniTrip')
+!currencySEKUniTrip.name := 'Swedish Krona'
+!currencySEKUniTrip.abbreviation := 'SEK'
+
+!new Expense('expenseEXP2026091')
+!expenseEXP2026091.amount := 2006.25
+!expenseEXP2026091.startDate := Date('2026-05-11')
+!expenseEXP2026091.endDate := Date('2026-05-16')
+
+!new Bill('billEXP2026091_BILL501')
+!billEXP2026091_BILL501.amount := 180.00
+!billEXP2026091_BILL501.category := 'Ground transport'
+!billEXP2026091_BILL501.date := Date('2026-05-11')
+!billEXP2026091_BILL501.paymentMethod := #CREDIT_CARD
+!billEXP2026091_BILL501.status := #VALIDATED
+
+!new Bill('billEXP2026091_BILL502')
+!billEXP2026091_BILL502.amount := 1250.00
+!billEXP2026091_BILL502.category := 'Lodging'
+!billEXP2026091_BILL502.date := Date('2026-05-12')
+!billEXP2026091_BILL502.paymentMethod := #CREDIT_CARD
+!billEXP2026091_BILL502.status := #VERIFIED
+
+!new Bill('billEXP2026091_BILL503')
+!billEXP2026091_BILL503.amount := 320.50
+!billEXP2026091_BILL503.category := 'Meals (work meeting)'
+!billEXP2026091_BILL503.date := Date('2026-05-14')
+!billEXP2026091_BILL503.paymentMethod := #CASH
+!billEXP2026091_BILL503.status := #PENDING
+
+!new Bill('billEXP2026091_BILL504')
+!billEXP2026091_BILL504.amount := 210.00
+!billEXP2026091_BILL504.category := 'Local transport'
+!billEXP2026091_BILL504.date := Date('2026-05-13')
+!billEXP2026091_BILL504.paymentMethod := #CASH
+!billEXP2026091_BILL504.status := #REFUNDED
+
+!new Bill('billEXP2026091_BILL505')
+!billEXP2026091_BILL505.amount := 45.75
+!billEXP2026091_BILL505.category := 'Printing'
+!billEXP2026091_BILL505.date := Date('2026-05-15')
+!billEXP2026091_BILL505.paymentMethod := #CHECK
+!billEXP2026091_BILL505.status := #DRAFT
+
+!insert (expenseEXP2026091, billEXP2026091_BILL501) into ExpenseContainsBills
+!insert (expenseEXP2026091, billEXP2026091_BILL502) into ExpenseContainsBills
+!insert (expenseEXP2026091, billEXP2026091_BILL503) into ExpenseContainsBills
+!insert (expenseEXP2026091, billEXP2026091_BILL504) into ExpenseContainsBills
+!insert (expenseEXP2026091, billEXP2026091_BILL505) into ExpenseContainsBills
+
+!insert (billEXP2026091_BILL501, currencyGBPUniTrip) into BillCurrency
+!insert (billEXP2026091_BILL502, currencyNOKUniTrip) into BillCurrency
+!insert (billEXP2026091_BILL503, currencySEKUniTrip) into BillCurrency
+!insert (billEXP2026091_BILL504, currencyNOKUniTrip) into BillCurrency
+!insert (billEXP2026091_BILL505, currencyGBPUniTrip) into BillCurrency
+
+!new Comment('commentEXP2026091_CMT501')
+!commentEXP2026091_CMT501.text := 'Trip covers two partner universities; some items are in local currency because the vendors required local payment.'
+
+!new Comment('commentEXP2026091_CMT502')
+!commentEXP2026091_CMT502.text := 'Transit card shows REFUNDED because the kiosk returned the remaining balance; included for traceability.'
+
+!new Comment('commentEXP2026091_CMT503')
+!commentEXP2026091_CMT503.text := 'Kvitto saknas för en del av lunchdricksen; resten finns på kvittot. (Tip partially missing from receipt.)'
+
+!new Comment('commentEXP2026091_CMT504')
+!commentEXP2026091_CMT504.text := 'Poster printing is still in DRAFT pending department confirmation of allowable cost center.'
+
+!insert (expenseEXP2026091, commentEXP2026091_CMT501) into ExpenseComment
+!insert (expenseEXP2026091, commentEXP2026091_CMT502) into ExpenseComment
+!insert (expenseEXP2026091, commentEXP2026091_CMT503) into ExpenseComment
+!insert (expenseEXP2026091, commentEXP2026091_CMT504) into ExpenseComment

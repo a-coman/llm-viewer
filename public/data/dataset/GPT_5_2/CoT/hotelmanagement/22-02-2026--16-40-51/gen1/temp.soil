@@ -1,0 +1,125 @@
+!new Customer('C6')
+!C6.firstName := 'Amina'
+!C6.lastName := 'El‑Sayed'
+
+!new Booking('B78021')
+!B78021.bookingId := 78021
+!B78021.startDate := '2026-03-10'
+!B78021.endDate := '2026-03-16'
+!B78021.confirmed := true
+!B78021.canceled := false
+
+!new RoomReservation('RR78021_1')
+!RR78021_1.checkInDate := '2026-03-10'
+!RR78021_1.checkOutDate := '2026-03-13'
+
+!new RoomReservation('RR78021_2')
+!RR78021_2.checkInDate := '2026-03-13'
+!RR78021_2.checkOutDate := '2026-03-16'
+
+!new RoomReservation('RR78021_3')
+!RR78021_3.checkInDate := '2026-03-10'
+!RR78021_3.checkOutDate := '2026-03-12'
+
+!new Room('R412')
+!R412.roomNumber := 412
+!R412.numBeds := 2
+!R412.pricePerNight := 165.00
+!R412.occupied := false
+!R412.blocked := false
+
+!new Room('R414')
+!R414.roomNumber := 414
+!R414.numBeds := 1
+!R414.pricePerNight := 140.00
+!R414.occupied := false
+!R414.blocked := false
+
+!new Room('R701')
+!R701.roomNumber := 701
+!R701.numBeds := 2
+!R701.pricePerNight := 320.00
+!R701.occupied := false
+!R701.blocked := false
+
+!new Room('R118')
+!R118.roomNumber := 118
+!R118.numBeds := 1
+!R118.pricePerNight := 85.00
+!R118.occupied := false
+!R118.blocked := false
+
+!new RoomExtra('E8')
+!E8.description := 'Breakfast buffet package (2 adults) — per stay segment'
+!E8.price := 90.00
+
+!new RoomExtra('E9')
+!E9.description := 'Baby crib (requested in advance)'
+!E9.price := 0.00
+
+!new RoomExtra('E10')
+!E10.description := 'Hammam/spa access pass (2 persons)'
+!E10.price := 80.00
+
+!new RoomExtra('E11')
+!E11.description := 'Late checkout until 16:00'
+!E11.price := 40.00
+
+!new RoomExtra('E12')
+!E12.description := 'Airport pickup (one-way) scheduled at 22:40'
+!E12.price := 25.00
+
+!new Bill('BL990501')
+!BL990501.billId := 990501
+!BL990501.price := 1005.00
+
+!new Bill('BL990502')
+!BL990502.billId := 990502
+!BL990502.price := 1080.00
+
+!new Bill('BL990503')
+!BL990503.billId := 990503
+!BL990503.price := 195.00
+
+!new FreeRoomTypesDTO('D8')
+!D8.roomTypeDescription := 'Standard Queen (city view) — non-smoking'
+!D8.numBeds := 1
+!D8.pricePerNight := 120.00
+!D8.numFreeRooms := 6
+
+!new FreeRoomTypesDTO('D9')
+!D9.roomTypeDescription := 'Twin Room (connecting option available)'
+!D9.numBeds := 2
+!D9.pricePerNight := 160.00
+!D9.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D10')
+!D10.roomTypeDescription := 'Family Suite (courtyard side, includes sofa bed)'
+!D10.numBeds := 3
+!D10.pricePerNight := 310.00
+!D10.numFreeRooms := 1
+
+!insert (B78021, C6) into BookingCustomer
+
+!insert (B78021, RR78021_1) into BookingRoomReservation
+!insert (B78021, RR78021_2) into BookingRoomReservation
+!insert (B78021, RR78021_3) into BookingRoomReservation
+
+!insert (RR78021_1, R412) into RoomReservationRoom
+!insert (RR78021_1, R414) into RoomReservationRoom
+!insert (RR78021_2, R701) into RoomReservationRoom
+!insert (RR78021_3, R118) into RoomReservationRoom
+
+!insert (RR78021_1, E8) into RoomReservationExtras
+!insert (RR78021_1, E9) into RoomReservationExtras
+!insert (RR78021_2, E10) into RoomReservationExtras
+!insert (RR78021_2, E11) into RoomReservationExtras
+!insert (RR78021_3, E12) into RoomReservationExtras
+
+!insert (B78021, BL990501) into BookingBill
+!insert (B78021, BL990502) into BookingBill
+!insert (B78021, BL990503) into BookingBill
+
+!insert (BL990501, RR78021_1) into BillRoomReservation
+!insert (BL990502, RR78021_2) into BillRoomReservation
+!insert (BL990503, RR78021_3) into BillRoomReservation

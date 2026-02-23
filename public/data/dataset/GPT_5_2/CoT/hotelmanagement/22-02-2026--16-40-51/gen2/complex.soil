@@ -1,0 +1,118 @@
+!new Customer('C14')
+!C14.firstName := 'Sofía'
+!C14.lastName := 'Núñez'
+
+!new Booking('B91044')
+!B91044.bookingId := 91044
+!B91044.startDate := '2026-11-02'
+!B91044.endDate := '2026-11-10'
+!B91044.confirmed := true
+!B91044.canceled := false
+
+!new RoomReservation('RR_A')
+!RR_A.checkInDate := '2026-11-02'
+!RR_A.checkOutDate := '2026-11-09'
+
+!new RoomReservation('RR_B')
+!RR_B.checkInDate := '2026-11-05'
+!RR_B.checkOutDate := '2026-11-10'
+
+!new Room('R203')
+!R203.roomNumber := 203
+!R203.numBeds := 2
+!R203.pricePerNight := 180.00
+!R203.occupied := false
+!R203.blocked := false
+
+!new Room('R204')
+!R204.roomNumber := 204
+!R204.numBeds := 2
+!R204.pricePerNight := 180.00
+!R204.occupied := false
+!R204.blocked := false
+
+!new Room('R205')
+!R205.roomNumber := 205
+!R205.numBeds := 2
+!R205.pricePerNight := 180.00
+!R205.occupied := false
+!R205.blocked := false
+
+!new Room('R219')
+!R219.roomNumber := 219
+!R219.numBeds := 1
+!R219.pricePerNight := 130.00
+!R219.occupied := false
+!R219.blocked := false
+
+!new RoomExtra('EA1')
+!EA1.description := 'Parking permits (2 vehicles) — one-time fee'
+!EA1.price := 70.00
+
+!new RoomExtra('EA2')
+!EA2.description := 'Laundry bundle for crew uniforms (weekly service)'
+!EA2.price := 120.00
+
+!new RoomExtra('EA3')
+!EA3.description := 'Portable Wi‑Fi hotspot rental (7 days)'
+!EA3.price := 35.00
+
+!new RoomExtra('EA4')
+!EA4.description := 'Welcome basket (sin gluten / gluten-free snacks)'
+!EA4.price := 55.00
+
+!new Bill('BL880110')
+!BL880110.billId := 880110
+!BL880110.price := 4970.00
+
+!new Room('R802')
+!R802.roomNumber := 802
+!R802.numBeds := 3
+!R802.pricePerNight := 350.00
+!R802.occupied := false
+!R802.blocked := false
+
+!new Bill('BL880111')
+!BL880111.billId := 880111
+!BL880111.price := 1750.00
+
+!new FreeRoomTypesDTO('D21')
+!D21.roomTypeDescription := 'Habitación Doble (dos camas) — cerca del ascensor'
+!D21.numBeds := 2
+!D21.pricePerNight := 175.00
+!D21.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('D22')
+!D22.roomTypeDescription := 'Chambre simple économique — vue intérieure'
+!D22.numBeds := 1
+!D22.pricePerNight := 95.00
+!D22.numFreeRooms := 9
+
+!new FreeRoomTypesDTO('D23')
+!D23.roomTypeDescription := 'Suite familiar (3 camas) — planta alta'
+!D23.numBeds := 3
+!D23.pricePerNight := 345.00
+!D23.numFreeRooms := 1
+
+!insert (B91044, C14) into BookingCustomer
+
+!insert (B91044, RR_A) into BookingRoomReservation
+!insert (B91044, RR_B) into BookingRoomReservation
+
+!insert (RR_A, R203) into RoomReservationRoom
+!insert (RR_A, R204) into RoomReservationRoom
+!insert (RR_A, R205) into RoomReservationRoom
+!insert (RR_A, R219) into RoomReservationRoom
+
+!insert (RR_B, R802) into RoomReservationRoom
+
+!insert (RR_A, EA1) into RoomReservationExtras
+!insert (RR_A, EA2) into RoomReservationExtras
+!insert (RR_A, EA3) into RoomReservationExtras
+!insert (RR_A, EA4) into RoomReservationExtras
+
+!insert (B91044, BL880110) into BookingBill
+!insert (B91044, BL880111) into BookingBill
+
+!insert (BL880110, RR_A) into BillRoomReservation
+!insert (BL880111, RR_B) into BillRoomReservation

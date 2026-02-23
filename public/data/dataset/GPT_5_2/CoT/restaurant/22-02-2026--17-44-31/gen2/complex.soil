@@ -1,0 +1,440 @@
+!new Restaurant('R13')
+!R13.name := 'Saffron & Cedar'
+
+!new Restaurant('R14')
+!R14.name := 'Trattoria del Porto'
+
+!new Owner('O31')
+!O31.name := 'Naomi Ben‑Ari'
+!O31.percentageShares := 50
+!insert (R13, O31) into RestaurantOwner
+!insert (R14, O31) into RestaurantOwner
+
+!new Owner('O32')
+!O32.name := 'Marco Lattanzi'
+!O32.percentageShares := 30
+!insert (R13, O32) into RestaurantOwner
+!insert (R14, O32) into RestaurantOwner
+
+!new Owner('O33')
+!O33.name := 'Priya Nair'
+!O33.percentageShares := 20
+!insert (R13, O33) into RestaurantOwner
+!insert (R14, O33) into RestaurantOwner
+
+!new RegularCustomer('C14')
+!C14.name := 'Gianni Russo'
+!C14.prefferedLanguage := #Italian
+
+!new RegularCustomer('C15')
+!C15.name := 'Emily Chen'
+!C15.prefferedLanguage := #English
+
+!new RegularCustomer('C16')
+!C16.name := 'Luis Herrera'
+!C16.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW13')
+!HW13.name := 'Fatima Al‑Saleh'
+!HW13.dateOfBirth := Date('1981-07-08')
+!HW13.phoneNumber := '+1 416 555 0140'
+
+!new Waiter('W27')
+!W27.name := 'Omar Haddad'
+!W27.dateOfBirth := Date('1994-11-19')
+!W27.phoneNumber := '+1 416 555 0141'
+!W27.spokenLanguage := #English
+!insert (HW13, W27) into HeadWaiterWaiter
+
+!new Waiter('W28')
+!W28.name := 'Carla Bianchi'
+!W28.dateOfBirth := Date('1997-03-02')
+!W28.phoneNumber := '+1 416 555 0142'
+!W28.spokenLanguage := #Italian
+!insert (HW13, W28) into HeadWaiterWaiter
+
+!new Waiter('W29')
+!W29.name := 'Sergio Morales'
+!W29.dateOfBirth := Date('1990-09-25')
+!W29.phoneNumber := '+1 416 555 0143'
+!W29.spokenLanguage := #Spanish
+!insert (HW13, W29) into HeadWaiterWaiter
+
+!new HeadWaiter('HW14')
+!HW14.name := 'Hannah Vogel'
+!HW14.dateOfBirth := Date('1986-02-14')
+!HW14.phoneNumber := '+39 010 555 0900'
+
+!new Waiter('W30')
+!W30.name := 'Paolo Serra'
+!W30.dateOfBirth := Date('1992-06-30')
+!W30.phoneNumber := '+39 010 555 0901'
+!W30.spokenLanguage := #Italian
+!insert (HW14, W30) into HeadWaiterWaiter
+
+!new Waiter('W31')
+!W31.name := 'Clara Weiss'
+!W31.dateOfBirth := Date('1995-12-06')
+!W31.phoneNumber := '+39 010 555 0902'
+!W31.spokenLanguage := #German
+!insert (HW14, W31) into HeadWaiterWaiter
+
+!new Cook('K20')
+!K20.name := 'Rami Khalil'
+!K20.dateOfBirth := Date('1978-05-11')
+!K20.phoneNumber := '+1 416 555 0200'
+!K20.yearsOfExperience := 15
+
+!new Cook('K21')
+!K21.name := 'Alessia Fontana'
+!K21.dateOfBirth := Date('1999-01-17')
+!K21.phoneNumber := '+39 010 555 0210'
+!K21.yearsOfExperience := 0
+
+!new Cook('K22')
+!K22.name := 'Rami Khalil'
+!K22.dateOfBirth := Date('1978-05-11')
+!K22.phoneNumber := '+1 416 555 0200'
+!K22.yearsOfExperience := 15
+
+!new Chef('CH23')
+!CH23.name := 'Yonatan Levi'
+!CH23.dateOfBirth := Date('1989-10-22')
+!CH23.phoneNumber := '+1 416 555 0201'
+!insert (CH23, K20) into ChefCook
+
+!new Chef('CH24')
+!CH24.name := 'Dalia Shamir'
+!CH24.dateOfBirth := Date('1991-08-04')
+!CH24.phoneNumber := '+1 416 555 0202'
+!insert (CH24, K22) into ChefCook
+
+!new Chef('CH25')
+!CH25.name := 'Federico Rizzo'
+!CH25.dateOfBirth := Date('1984-04-09')
+!CH25.phoneNumber := '+39 010 555 0211'
+!insert (CH25, K21) into ChefCook
+
+!new Manager('M12')
+!M12.name := 'Nadia Ibrahim'
+!M12.dateOfBirth := Date('1975-03-03')
+!M12.phoneNumber := '+1 416 555 0300'
+
+!new Manager('M13')
+!M13.name := 'Enrico Costa'
+!M13.dateOfBirth := Date('1972-09-15')
+!M13.phoneNumber := '+39 010 555 0310'
+
+!new BusDriver('BD14')
+!BD14.name := 'Michael O’Neill'
+!BD14.dateOfBirth := Date('1968-12-28')
+!BD14.phoneNumber := '+1 416 555 0400'
+!BD14.driverLicenseNr := 'ON-DZ-883102'
+
+!new Allergen('AL1_SC')
+!AL1_SC.type := #Gluten
+
+!new Allergen('AL2_SC')
+!AL2_SC.type := #Lactose
+
+!new Allergen('AL3_SC')
+!AL3_SC.type := #Nuts
+
+!new Allergen('AL4_SC')
+!AL4_SC.type := #Seafood
+
+!new FoodItem('FI201_SC')
+!FI201_SC.number := 201
+!FI201_SC.description := 'Durum semolina flour'
+!FI201_SC.purchaseFlag := true
+!FI201_SC.unit := #Pound
+!insert (FI201_SC, AL1_SC) into FoodItemAllergen
+
+!new FoodItem('FI202_SC')
+!FI202_SC.number := 202
+!FI202_SC.description := 'Ricotta cheese'
+!FI202_SC.purchaseFlag := true
+!FI202_SC.unit := #Ounce
+!insert (FI202_SC, AL2_SC) into FoodItemAllergen
+
+!new FoodItem('FI203_SC')
+!FI203_SC.number := 203
+!FI203_SC.description := 'Pistachios (chopped)'
+!FI203_SC.purchaseFlag := true
+!FI203_SC.unit := #Gram
+!insert (FI203_SC, AL3_SC) into FoodItemAllergen
+
+!new FoodItem('FI204_SC')
+!FI204_SC.number := 204
+!FI204_SC.description := 'Calamari rings'
+!FI204_SC.purchaseFlag := true
+!FI204_SC.unit := #Pound
+!insert (FI204_SC, AL4_SC) into FoodItemAllergen
+
+!new FoodItem('FI205_SC')
+!FI205_SC.number := 205
+!FI205_SC.description := 'Lentils (brown)'
+!FI205_SC.purchaseFlag := false
+!FI205_SC.unit := #Pound
+
+!new FoodItem('FI206_SC')
+!FI206_SC.number := 206
+!FI206_SC.description := 'Tomatoes (crushed)'
+!FI206_SC.purchaseFlag := true
+!FI206_SC.unit := #Pound
+
+!new FoodItem('FI207_SC')
+!FI207_SC.number := 207
+!FI207_SC.description := 'Butter'
+!FI207_SC.purchaseFlag := true
+!FI207_SC.unit := #Ounce
+!insert (FI207_SC, AL2_SC) into FoodItemAllergen
+
+!new FoodItem('FI208_SC')
+!FI208_SC.number := 208
+!FI208_SC.description := 'Phyllo dough sheets'
+!FI208_SC.purchaseFlag := true
+!FI208_SC.unit := #Sheet
+!insert (FI208_SC, AL1_SC) into FoodItemAllergen
+
+!new MenuItem('MI39')
+!MI39.description := 'Harira-style lentil soup'
+!MI39.prepTime := 16.0
+!MI39.classification := #Apetizer
+!insert (MI39, CH23) into MenuItemChef
+!insert (MI39, FI205_SC) into MenuItemFoodItem
+!insert (MI39, FI206_SC) into MenuItemFoodItem
+
+!new MenuItem('MI40')
+!MI40.description := 'Pistachio baklava'
+!MI40.prepTime := 35.0
+!MI40.classification := #Dessert
+!insert (MI40, CH24) into MenuItemChef
+!insert (MI40, FI203_SC) into MenuItemFoodItem
+!insert (MI40, FI208_SC) into MenuItemFoodItem
+!insert (MI40, FI207_SC) into MenuItemFoodItem
+
+!new MenuItem('MI41')
+!MI41.description := 'Calamari fritti'
+!MI41.prepTime := 14.5
+!MI41.classification := #Main
+!insert (MI41, CH25) into MenuItemChef
+!insert (MI41, FI204_SC) into MenuItemFoodItem
+!insert (MI41, FI201_SC) into MenuItemFoodItem
+
+!new MenuItem('MI42')
+!MI42.description := 'Espresso (single shot)'
+!MI42.prepTime := 2.5
+!MI42.classification := #Beverage
+!insert (MI42, CH25) into MenuItemChef
+
+!new MenuItem('MI43')
+!MI43.description := 'Ricotta ravioli with tomato butter sauce'
+!MI43.prepTime := 28.0
+!MI43.classification := #Main
+!insert (MI43, CH25) into MenuItemChef
+!insert (MI43, FI201_SC) into MenuItemFoodItem
+!insert (MI43, FI202_SC) into MenuItemFoodItem
+!insert (MI43, FI206_SC) into MenuItemFoodItem
+!insert (MI43, FI207_SC) into MenuItemFoodItem
+
+!new Individual('IR16')
+!IR16.time := Time('19:20')
+!IR16.date := Date('2026-04-11')
+!IR16.numberPeople := 3
+!IR16.name := 'Emily Chen'
+!IR16.phoneNumber := '+1 647 555 8899'
+!IR16.number := 410
+!IR16.seating := #Patio
+!IR16.smoking := #NonSmoking
+!insert (R13, IR16) into RestaurantReservation
+!insert (IR16, C15) into ReservationCustomer
+!insert (IR16, W27) into ReservationWaiter
+!insert (IR16, W28) into ReservationWaiter
+
+!new Table('TB501_SC')
+!TB501_SC.number := 501
+!TB501_SC.description := 'Patio two-top under heat lamp'
+!TB501_SC.capacity := 2
+!insert (IR16, TB501_SC) into ReservationTable
+
+!new Table('TB502_SC')
+!TB502_SC.number := 502
+!TB502_SC.description := 'Patio two-top near herb planters'
+!TB502_SC.capacity := 2
+!insert (IR16, TB502_SC) into ReservationTable
+
+!new ItemOrder('ORD4101_SC')
+!ORD4101_SC.time := Time('19:35')
+!insert (IR16, ORD4101_SC) into ReservationItemOrdered
+!insert (ORD4101_SC, MI39) into ItemOrderMenuItem
+
+!new ItemOrder('ORD4102_SC')
+!ORD4102_SC.time := Time('19:55')
+!insert (IR16, ORD4102_SC) into ReservationItemOrdered
+!insert (ORD4102_SC, MI42) into ItemOrderMenuItem
+
+!new Banquet('BR12')
+!BR12.time := Time('18:00')
+!BR12.date := Date('2026-04-12')
+!BR12.numberPeople := 40
+!BR12.name := 'Luis Herrera'
+!BR12.phoneNumber := '+1 416 555 7711'
+!BR12.number := 900
+!BR12.groupName := 'International Chess Federation Delegation'
+!BR12.paymentMethod := #Cash
+!BR12.busService := true
+!insert (R13, BR12) into RestaurantReservation
+!insert (BR12, C16) into ReservationCustomer
+!insert (BR12, BD14) into BanquetBusDriver
+!insert (BR12, W27) into ReservationWaiter
+!insert (BR12, W29) into ReservationWaiter
+
+!new Table('TB510_SC')
+!TB510_SC.number := 510
+!TB510_SC.description := 'Main hall banquet table A'
+!TB510_SC.capacity := 16
+!insert (BR12, TB510_SC) into ReservationTable
+
+!new Table('TB511_SC')
+!TB511_SC.number := 511
+!TB511_SC.description := 'Main hall banquet table B'
+!TB511_SC.capacity := 12
+!insert (BR12, TB511_SC) into ReservationTable
+
+!new Table('TB512_SC')
+!TB512_SC.number := 512
+!TB512_SC.description := 'Main hall banquet table C'
+!TB512_SC.capacity := 12
+!insert (BR12, TB512_SC) into ReservationTable
+
+!new ItemOrder('ORD9001_SC')
+!ORD9001_SC.time := Time('18:20')
+!insert (BR12, ORD9001_SC) into ReservationItemOrdered
+!insert (ORD9001_SC, MI39) into ItemOrderMenuItem
+
+!new ItemOrder('ORD9002_SC')
+!ORD9002_SC.time := Time('18:21')
+!insert (BR12, ORD9002_SC) into ReservationItemOrdered
+!insert (ORD9002_SC, MI39) into ItemOrderMenuItem
+
+!new ItemOrder('ORD9003_SC')
+!ORD9003_SC.time := Time('18:50')
+!insert (BR12, ORD9003_SC) into ReservationItemOrdered
+!insert (ORD9003_SC, MI41) into ItemOrderMenuItem
+
+!new ItemOrder('ORD9004_SC')
+!ORD9004_SC.time := Time('18:52')
+!insert (BR12, ORD9004_SC) into ReservationItemOrdered
+!insert (ORD9004_SC, MI41) into ItemOrderMenuItem
+
+!new ItemOrder('ORD9005_SC')
+!ORD9005_SC.time := Time('19:15')
+!insert (BR12, ORD9005_SC) into ReservationItemOrdered
+!insert (ORD9005_SC, MI40) into ItemOrderMenuItem
+
+!new Banquet('BR13')
+!BR13.time := Time('20:30')
+!BR13.date := Date('2026-04-18')
+!BR13.numberPeople := 18
+!BR13.name := 'Gianni Russo'
+!BR13.phoneNumber := '+39 333 111 2222'
+!BR13.number := 901
+!BR13.groupName := 'Porto Antico Rowing Club'
+!BR13.paymentMethod := #CreditCard
+!BR13.busService := false
+!insert (R14, BR13) into RestaurantReservation
+!insert (BR13, C14) into ReservationCustomer
+!insert (BR13, W30) into ReservationWaiter
+
+!new Table('TB610_SC')
+!TB610_SC.number := 610
+!TB610_SC.description := 'Harbor-view long table'
+!TB610_SC.capacity := 8
+!insert (BR13, TB610_SC) into ReservationTable
+
+!new Table('TB611_SC')
+!TB611_SC.number := 611
+!TB611_SC.description := 'Side long table near wine rack'
+!TB611_SC.capacity := 6
+!insert (BR13, TB611_SC) into ReservationTable
+
+!new Table('TB612_SC')
+!TB612_SC.number := 612
+!TB612_SC.description := 'Four-top annex table'
+!TB612_SC.capacity := 4
+!insert (BR13, TB612_SC) into ReservationTable
+
+!new Individual('IR17')
+!IR17.time := Time('19:45')
+!IR17.date := Date('2026-04-18')
+!IR17.numberPeople := 5
+!IR17.name := 'Marta Nowak'
+!IR17.phoneNumber := '+39 340 222 9090'
+!IR17.number := 411
+!IR17.seating := #Inside
+!IR17.smoking := #NonSmoking
+!insert (R14, IR17) into RestaurantReservation
+!insert (IR17, W31) into ReservationWaiter
+!insert (IR17, W30) into ReservationWaiter
+
+!new Table('TB620_SC')
+!TB620_SC.number := 620
+!TB620_SC.description := 'Inside four-top by the window'
+!TB620_SC.capacity := 4
+!insert (IR17, TB620_SC) into ReservationTable
+
+!new Table('TB621_SC')
+!TB621_SC.number := 621
+!TB621_SC.description := 'Inside two-top pulled adjacent'
+!TB621_SC.capacity := 2
+!insert (IR17, TB621_SC) into ReservationTable
+
+!new ItemOrder('ORD4111_SC')
+!ORD4111_SC.time := Time('20:00')
+!insert (IR17, ORD4111_SC) into ReservationItemOrdered
+!insert (ORD4111_SC, MI41) into ItemOrderMenuItem
+
+!new ItemOrder('ORD4112_SC')
+!ORD4112_SC.time := Time('20:10')
+!insert (IR17, ORD4112_SC) into ReservationItemOrdered
+!insert (ORD4112_SC, MI43) into ItemOrderMenuItem
+
+!new ItemOrder('ORD4113_SC')
+!ORD4113_SC.time := Time('20:35')
+!insert (IR17, ORD4113_SC) into ReservationItemOrdered
+!insert (ORD4113_SC, MI40) into ItemOrderMenuItem
+
+!new Individual('IR18')
+!IR18.time := Time('12:10')
+!IR18.date := Date('2026-04-13')
+!IR18.numberPeople := 1
+!IR18.name := 'Walk-in Placeholder'
+!IR18.phoneNumber := '+1 000 000 0000'
+!IR18.number := 412
+!IR18.seating := #Inside
+!IR18.smoking := #NonSmoking
+!insert (IR18, W28) into ReservationWaiter
+
+!new Table('TB530_SC')
+!TB530_SC.number := 530
+!TB530_SC.description := 'Spare two-top held for overflow'
+!TB530_SC.capacity := 2
+!insert (IR18, TB530_SC) into ReservationTable
+
+!new ItemOrder('ORD4121_SC')
+!ORD4121_SC.time := Time('12:15')
+!insert (IR18, ORD4121_SC) into ReservationItemOrdered
+!insert (ORD4121_SC, MI42) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR11')
+!DR11.diet := #Kosher
+
+!new DietaryRequirement('DR12')
+!DR12.diet := #Vegetarian
+
+!new ReportedAllergy('RA10')
+!RA10.allergen := #Seafood
+
+!new ReportedAllergy('RA11')
+!RA11.allergen := #Gluten

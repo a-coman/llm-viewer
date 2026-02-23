@@ -1,0 +1,30 @@
+!new StateMachine('sm_isolatedStartSingleLink')
+!sm_isolatedStartSingleLink.name := 'isolatedStartSingleLink'
+
+!new State('st_issl_startpunkt')
+!st_issl_startpunkt.name := 'startpunkt'
+!new State('st_issl_reseau')
+!st_issl_reseau.name := 'réseau'
+!new State('st_issl_koncowka')
+!st_issl_koncowka.name := 'końcówka'
+!new State('st_issl_koritsu')
+!st_issl_koritsu.name := '孤立'
+
+!insert (sm_isolatedStartSingleLink, st_issl_startpunkt) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_reseau) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_koncowka) into StateMachineContainsStates
+!insert (sm_isolatedStartSingleLink, st_issl_koritsu) into StateMachineContainsStates
+
+!insert (sm_isolatedStartSingleLink, st_issl_startpunkt) into StateMachineStartsStates
+
+!new Transition('tr_issl_handover')
+!tr_issl_handover.name := 'handover'
+
+!insert (sm_isolatedStartSingleLink, tr_issl_handover) into StateMachineContainsTransitions
+
+!insert (st_issl_reseau, tr_issl_handover) into StateTransition
+!insert (tr_issl_handover, st_issl_koncowka) into TransitionState
+
+!new TimeEvent('te_issl_handover')
+!te_issl_handover.time := 1
+!insert (tr_issl_handover, te_issl_handover) into TransitionContainsEvents

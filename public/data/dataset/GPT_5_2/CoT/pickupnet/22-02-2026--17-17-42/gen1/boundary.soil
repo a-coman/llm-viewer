@@ -1,0 +1,32 @@
+!new Station('S1')
+
+!new Customer('CUST0001')
+!CUST0001.id := 'CUST-0001'
+!CUST0001.name := 'Amina El-Hassan'
+!CUST0001.twitterUserName := '@Amina_الرحلات'
+
+!new Shipment('SHP0001')
+!SHP0001.id := 'SHP-0001'
+!SHP0001.status := #NEW
+
+!new Address('APU001')
+!APU001.text := 'Amundsen–Scott South Pole Station, Antarctic Plateau (pickup point)'
+!new GeoLocation('GPU001')
+!GPU001.latitude := -90.0
+!GPU001.longitude := -180.0
+
+!new Address('ADL001')
+!ADL001.text := 'Geographic North Pole research drop zone (delivery point)'
+!new GeoLocation('GDL001')
+!GDL001.latitude := 90.0
+!GDL001.longitude := 180.0
+
+!insert (S1, CUST0001) into StationContainsCustomer
+!insert (S1, SHP0001) into StationShipment
+!insert (CUST0001, SHP0001) into CustomerConsistsOfShipment
+
+!insert (SHP0001, APU001) into ShipmentContainsPickUpAddress
+!insert (SHP0001, ADL001) into ShipmentContainsDeliveryAddress
+
+!insert (APU001, GPU001) into AddressContainsGeoLocation
+!insert (ADL001, GDL001) into AddressContainsGeoLocation

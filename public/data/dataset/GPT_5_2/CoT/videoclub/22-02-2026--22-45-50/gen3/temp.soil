@@ -1,0 +1,180 @@
+!new Client('clientTC20')
+!clientTC20.clientId := 7
+!clientTC20.isSuspended := false
+
+!new Client('clientTC21')
+!clientTC21.clientId := 19
+!clientTC21.isSuspended := false
+
+!new Client('clientTC22')
+!clientTC22.clientId := 26
+!clientTC22.isSuspended := true
+
+!new Client('clientTC23')
+!clientTC23.clientId := 41
+!clientTC23.isSuspended := false
+
+!new Client('clientTC24')
+!clientTC24.clientId := 95
+!clientTC24.isSuspended := false
+
+!new Movie('movieTC20')
+!movieTC20.title := 'Streets of Saint Petersburg'
+!movieTC20.availableCopies := 0
+!movieTC20.genre := #Action
+
+!new Movie('movieTC21')
+!movieTC21.title := 'Bossa Nova Mishaps'
+!movieTC21.availableCopies := 2
+!movieTC21.genre := #Comedy
+
+!new Movie('movieTC22')
+!movieTC22.title := 'Sahara Protocol'
+!movieTC22.availableCopies := 1
+!movieTC22.genre := #Action
+
+!new Movie('movieTC23')
+!movieTC23.title := 'Dhaba Days'
+!movieTC23.availableCopies := 4
+!movieTC23.genre := #Comedy
+
+!new Movie('movieTC24')
+!movieTC24.title := 'Nairobi Night Run'
+!movieTC24.availableCopies := 1
+!movieTC24.genre := #Action
+
+!new Movie('movieTC25')
+!movieTC25.title := 'The Reykjavík Riddle'
+!movieTC25.availableCopies := 3
+!movieTC25.genre := #Comedy
+
+!new Series('seriesTC20')
+!seriesTC20.title := 'Harbor Signals — Season 1'
+!seriesTC20.availableCopies := 2
+!seriesTC20.episode := 5
+
+!new Series('seriesTC21')
+!seriesTC21.title := 'Casbah Chronicles — Season 4'
+!seriesTC21.availableCopies := 0
+!seriesTC21.episode := 18
+
+!new Series('seriesTC22')
+!seriesTC22.title := 'Amazonas Investigates — Season 2'
+!seriesTC22.availableCopies := 1
+!seriesTC22.episode := 2
+
+!new Series('seriesTC23')
+!seriesTC23.title := 'Midnight Matatu — Season 1'
+!seriesTC23.availableCopies := 2
+!seriesTC23.episode := 11
+
+!new Actor('actorTC20')
+!actorTC20.name := 'Irina Volkova'
+
+!new Actor('actorTC21')
+!actorTC21.name := 'Ahmed Al-Farsi'
+
+!new Actor('actorTC22')
+!actorTC22.name := 'Ravi Iyer'
+
+!new Actor('actorTC23')
+!actorTC23.name := 'Lúcia Carvalho'
+
+!new Actor('actorTC24')
+!actorTC24.name := 'Siti Nur Aisyah'
+
+!new Actor('actorTC25')
+!actorTC25.name := 'Jonas Einarsson'
+
+!new Actor('actorTC26')
+!actorTC26.name := 'Wanjiku Njoroge'
+
+!new Actor('actorTC27')
+!actorTC27.name := 'Mateo Rojas'
+
+!new Actor('actorTC28')
+!actorTC28.name := 'Salma Haddad'
+
+!new Rental('rentalTC20')
+!rentalTC20.date := Date('2026-03-01')
+
+!new Rental('rentalTC21')
+!rentalTC21.date := Date('2026-03-03')
+
+!new Rental('rentalTC22')
+!rentalTC22.date := Date('2026-03-04')
+
+!new Rental('rentalTC23')
+!rentalTC23.date := Date('2026-03-10')
+
+!new Rental('rentalTC24')
+!rentalTC24.date := Date('2026-03-11')
+
+!new Rental('rentalTC25')
+!rentalTC25.date := Date('2026-03-12')
+
+!new Rental('rentalTC26')
+!rentalTC26.date := Date('2026-03-15')
+
+!insert (clientTC20, rentalTC20) into ClientRental
+!insert (clientTC20, rentalTC21) into ClientRental
+!insert (clientTC21, rentalTC22) into ClientRental
+!insert (clientTC22, rentalTC23) into ClientRental
+!insert (clientTC23, rentalTC24) into ClientRental
+!insert (clientTC24, rentalTC25) into ClientRental
+!insert (clientTC22, rentalTC26) into ClientRental
+
+!insert (rentalTC20, movieTC20) into RentalCassette
+!insert (rentalTC20, seriesTC20) into RentalCassette
+
+!insert (rentalTC21, movieTC23) into RentalCassette
+
+!insert (rentalTC22, movieTC20) into RentalCassette
+!insert (rentalTC22, movieTC21) into RentalCassette
+!insert (rentalTC22, seriesTC21) into RentalCassette
+!insert (rentalTC22, seriesTC23) into RentalCassette
+!insert (rentalTC22, movieTC24) into RentalCassette
+
+!insert (rentalTC23, movieTC22) into RentalCassette
+!insert (rentalTC23, seriesTC21) into RentalCassette
+!insert (rentalTC23, movieTC20) into RentalCassette
+
+!insert (rentalTC24, seriesTC22) into RentalCassette
+!insert (rentalTC24, movieTC21) into RentalCassette
+
+!insert (rentalTC25, movieTC25) into RentalCassette
+!insert (rentalTC25, seriesTC23) into RentalCassette
+
+!insert (rentalTC26, movieTC20) into RentalCassette
+!insert (rentalTC26, seriesTC22) into RentalCassette
+!insert (rentalTC26, movieTC24) into RentalCassette
+
+!insert (movieTC20, actorTC20) into CassetteActor
+!insert (movieTC20, actorTC21) into CassetteActor
+
+!insert (movieTC21, actorTC23) into CassetteActor
+!insert (movieTC21, actorTC27) into CassetteActor
+
+!insert (movieTC22, actorTC21) into CassetteActor
+!insert (movieTC22, actorTC28) into CassetteActor
+!insert (movieTC22, actorTC24) into CassetteActor
+
+!insert (movieTC23, actorTC22) into CassetteActor
+
+!insert (movieTC24, actorTC26) into CassetteActor
+!insert (movieTC24, actorTC28) into CassetteActor
+
+!insert (movieTC25, actorTC25) into CassetteActor
+!insert (movieTC25, actorTC20) into CassetteActor
+
+!insert (seriesTC20, actorTC24) into CassetteActor
+!insert (seriesTC20, actorTC27) into CassetteActor
+
+!insert (seriesTC21, actorTC21) into CassetteActor
+!insert (seriesTC21, actorTC28) into CassetteActor
+
+!insert (seriesTC22, actorTC27) into CassetteActor
+!insert (seriesTC22, actorTC23) into CassetteActor
+
+!insert (seriesTC23, actorTC26) into CassetteActor
+!insert (seriesTC23, actorTC22) into CassetteActor

@@ -1,0 +1,101 @@
+!new Client('clientEdge4C30')
+!clientEdge4C30.clientId := 6
+!clientEdge4C30.isSuspended := false
+
+!new Client('clientEdge4C31')
+!clientEdge4C31.clientId := 7
+!clientEdge4C31.isSuspended := false
+
+!new Client('clientEdge4C32')
+!clientEdge4C32.clientId := 8
+!clientEdge4C32.isSuspended := true
+
+!new Rental('rentalEdge4R30')
+!rentalEdge4R30.date := Date('')
+
+!new Rental('rentalEdge4R31')
+!rentalEdge4R31.date := Date('1900-01-01')
+
+!new Rental('rentalEdge4R32')
+!rentalEdge4R32.date := Date('1900-01-01')
+
+!new Rental('rentalEdge4R33')
+!rentalEdge4R33.date := Date('31-04-2020')
+
+!new Rental('rentalEdge4R34')
+!rentalEdge4R34.date := Date('2020-W53-7')
+
+!new Rental('rentalEdge4R35')
+!rentalEdge4R35.date := Date('9999-12-31')
+
+!new Movie('movieEdge4M30')
+!movieEdge4M30.title := '∅ (Zero Feature)'
+!movieEdge4M30.availableCopies := 0
+!movieEdge4M30.genre := #Action
+
+!new Movie('movieEdge4M31')
+!movieEdge4M31.title := 'The Infinite Shelf Experiment'
+!movieEdge4M31.availableCopies := 2147483647
+!movieEdge4M31.genre := #Comedy
+
+!new Series('seriesEdge4S30')
+!seriesEdge4S30.title := 'Saudade Radio Play'
+!seriesEdge4S30.availableCopies := 0
+!seriesEdge4S30.episode := 1
+
+!new Series('seriesEdge4S31')
+!seriesEdge4S31.title := 'Te Marama Files'
+!seriesEdge4S31.availableCopies := 0
+!seriesEdge4S31.episode := 2
+
+!new Actor('actorEdge4A40')
+!actorEdge4A40.name := 'Noor Qamar'
+
+!new Actor('actorEdge4A41')
+!actorEdge4A41.name := 'Giulia Bianchi'
+
+!new Actor('actorEdge4A42')
+!actorEdge4A42.name := 'Hiroto Sakamoto'
+
+!new Actor('actorEdge4A43')
+!actorEdge4A43.name := 'Sipho Dlamini'
+
+!new Actor('actorEdge4A44')
+!actorEdge4A44.name := 'Aoife Ní Bhraonáin'
+
+!insert (clientEdge4C30, rentalEdge4R30) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R31) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R32) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R33) into ClientRental
+!insert (clientEdge4C30, rentalEdge4R34) into ClientRental
+!insert (clientEdge4C31, rentalEdge4R35) into ClientRental
+
+!insert (rentalEdge4R30, movieEdge4M30) into RentalCassette
+
+!insert (rentalEdge4R31, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R31, seriesEdge4S30) into RentalCassette
+
+!insert (rentalEdge4R32, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R32, movieEdge4M31) into RentalCassette
+
+!insert (rentalEdge4R33, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R33, seriesEdge4S31) into RentalCassette
+
+!insert (rentalEdge4R34, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R34, seriesEdge4S30) into RentalCassette
+!insert (rentalEdge4R34, seriesEdge4S31) into RentalCassette
+
+!insert (rentalEdge4R35, movieEdge4M30) into RentalCassette
+!insert (rentalEdge4R35, movieEdge4M31) into RentalCassette
+
+!insert (movieEdge4M30, actorEdge4A40) into CassetteActor
+
+!insert (movieEdge4M31, actorEdge4A40) into CassetteActor
+!insert (movieEdge4M31, actorEdge4A41) into CassetteActor
+
+!insert (seriesEdge4S30, actorEdge4A40) into CassetteActor
+!insert (seriesEdge4S30, actorEdge4A42) into CassetteActor
+!insert (seriesEdge4S30, actorEdge4A43) into CassetteActor
+
+!insert (seriesEdge4S31, actorEdge4A40) into CassetteActor
+!insert (seriesEdge4S31, actorEdge4A44) into CassetteActor

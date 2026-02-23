@@ -1,0 +1,640 @@
+!new StateMachine('sm_saoPauloCarnaval')
+!sm_saoPauloCarnaval.name := 'sãoPauloCarnaval'
+
+!new State('st_carn_concentracao')
+!st_carn_concentracao.name := 'concentração'
+!new State('st_carn_setorA')
+!st_carn_setorA.name := 'setorA'
+!new State('st_carn_setorB')
+!st_carn_setorB.name := 'setorB'
+!new State('st_carn_setorC')
+!st_carn_setorC.name := 'setorC'
+!new State('st_carn_apuracao')
+!st_carn_apuracao.name := 'apuração'
+!new State('st_carn_vipLounge')
+!st_carn_vipLounge.name := 'vipLounge'
+
+!insert (sm_saoPauloCarnaval, st_carn_concentracao) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorA) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorB) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorC) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_apuracao) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_vipLounge) into StateMachineContainsStates
+
+!insert (sm_saoPauloCarnaval, st_carn_concentracao) into StateMachineStartsStates
+
+!new Transition('tr_carn_abrirPortoesA')
+!tr_carn_abrirPortoesA.name := 'abrirPortoesA'
+!new Transition('tr_carn_abrirPortoesAextra')
+!tr_carn_abrirPortoesAextra.name := 'abrirPortoesAextra'
+!new Transition('tr_carn_abrirPortoesB')
+!tr_carn_abrirPortoesB.name := 'abrirPortoesB'
+!new Transition('tr_carn_abrirPortoesC')
+!tr_carn_abrirPortoesC.name := 'abrirPortoesC'
+!new Transition('tr_carn_encerrarEIrApuracao')
+!tr_carn_encerrarEIrApuracao.name := 'encerrarEIrApuração'
+!new Transition('tr_carn_desfileAConcluido')
+!tr_carn_desfileAConcluido.name := 'desfileAConcluido'
+!new Transition('tr_carn_desfileBConcluido')
+!tr_carn_desfileBConcluido.name := 'desfileBConcluido'
+!new Transition('tr_carn_desfileCConcluido')
+!tr_carn_desfileCConcluido.name := 'desfileCConcluido'
+
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesA) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesAextra) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesB) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesC) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_encerrarEIrApuracao) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileAConcluido) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileBConcluido) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileCConcluido) into StateMachineContainsTransitions
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesA) into StateTransition
+!insert (tr_carn_abrirPortoesA, st_carn_setorA) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesAextra) into StateTransition
+!insert (tr_carn_abrirPortoesAextra, st_carn_setorA) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesB) into StateTransition
+!insert (tr_carn_abrirPortoesB, st_carn_setorB) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesC) into StateTransition
+!insert (tr_carn_abrirPortoesC, st_carn_setorC) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_encerrarEIrApuracao) into StateTransition
+!insert (tr_carn_encerrarEIrApuracao, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorA, tr_carn_desfileAConcluido) into StateTransition
+!insert (tr_carn_desfileAConcluido, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorB, tr_carn_desfileBConcluido) into StateTransition
+!insert (tr_carn_desfileBConcluido, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorC, tr_carn_desfileCConcluido) into StateTransition
+!insert (tr_carn_desfileCConcluido, st_carn_apuracao) into TransitionState
+
+!new TimeEvent('te_carn_t_abrirPortoesA')
+!te_carn_t_abrirPortoesA.time := 1
+!insert (tr_carn_abrirPortoesA, te_carn_t_abrirPortoesA) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesAextra')
+!te_carn_t_abrirPortoesAextra.time := 1
+!insert (tr_carn_abrirPortoesAextra, te_carn_t_abrirPortoesAextra) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesB')
+!te_carn_t_abrirPortoesB.time := 1
+!insert (tr_carn_abrirPortoesB, te_carn_t_abrirPortoesB) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesC')
+!te_carn_t_abrirPortoesC.time := 1
+!insert (tr_carn_abrirPortoesC, te_carn_t_abrirPortoesC) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_encerrarEIrApuracao')
+!te_carn_t_encerrarEIrApuracao.time := 1
+!insert (tr_carn_encerrarEIrApuracao, te_carn_t_encerrarEIrApuracao) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileAConcluido')
+!te_carn_t_desfileAConcluido.time := 1
+!insert (tr_carn_desfileAConcluido, te_carn_t_desfileAConcluido) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileBConcluido')
+!te_carn_t_desfileBConcluido.time := 1
+!insert (tr_carn_desfileBConcluido, te_carn_t_desfileBConcluido) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileCConcluido')
+!te_carn_t_desfileCConcluido.time := 1
+!insert (tr_carn_desfileCConcluido, te_carn_t_desfileCConcluido) into TransitionContainsEvents
+
+!new StateMachine('sm_funnelToSilence')
+!sm_funnelToSilence.name := 'funnelToSilence'
+
+!new State('st_funnel_basla')
+!st_funnel_basla.name := 'başla'
+!new State('st_funnel_arbol')
+!st_funnel_arbol.name := 'árbol'
+!new State('st_funnel_uber')
+!st_funnel_uber.name := 'über'
+!new State('st_funnel_mod')
+!st_funnel_mod.name := 'mōd'
+!new State('st_funnel_tokyoKanji')
+!st_funnel_tokyoKanji.name := '東京'
+!new State('st_funnel_silence')
+!st_funnel_silence.name := 'silence'
+
+!insert (sm_funnelToSilence, st_funnel_basla) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_arbol) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_uber) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_mod) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_tokyoKanji) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_silence) into StateMachineContainsStates
+
+!insert (sm_funnelToSilence, st_funnel_basla) into StateMachineStartsStates
+
+!new Transition('tr_funnel_fromBaslaToSilence')
+!tr_funnel_fromBaslaToSilence.name := 'fromBaslaToSilence'
+!new Transition('tr_funnel_fromArbolToSilence')
+!tr_funnel_fromArbolToSilence.name := 'fromArbolToSilence'
+!new Transition('tr_funnel_fromUberToSilence')
+!tr_funnel_fromUberToSilence.name := 'fromUberToSilence'
+!new Transition('tr_funnel_fromModToSilence')
+!tr_funnel_fromModToSilence.name := 'fromModToSilence'
+!new Transition('tr_funnel_fromTokyoToSilence')
+!tr_funnel_fromTokyoToSilence.name := 'fromTokyoToSilence'
+
+!insert (sm_funnelToSilence, tr_funnel_fromBaslaToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromArbolToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromUberToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromModToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromTokyoToSilence) into StateMachineContainsTransitions
+
+!insert (st_funnel_basla, tr_funnel_fromBaslaToSilence) into StateTransition
+!insert (tr_funnel_fromBaslaToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_arbol, tr_funnel_fromArbolToSilence) into StateTransition
+!insert (tr_funnel_fromArbolToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_uber, tr_funnel_fromUberToSilence) into StateTransition
+!insert (tr_funnel_fromUberToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_mod, tr_funnel_fromModToSilence) into StateTransition
+!insert (tr_funnel_fromModToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_tokyoKanji, tr_funnel_fromTokyoToSilence) into StateTransition
+!insert (tr_funnel_fromTokyoToSilence, st_funnel_silence) into TransitionState
+
+!new TimeEvent('te_funnel_te_1')
+!te_funnel_te_1.time := 7
+!insert (tr_funnel_fromBaslaToSilence, te_funnel_te_1) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_2')
+!te_funnel_te_2.time := 11
+!insert (tr_funnel_fromArbolToSilence, te_funnel_te_2) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_3')
+!te_funnel_te_3.time := 13
+!insert (tr_funnel_fromUberToSilence, te_funnel_te_3) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_4')
+!te_funnel_te_4.time := 17
+!insert (tr_funnel_fromModToSilence, te_funnel_te_4) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_5')
+!te_funnel_te_5.time := 19
+!insert (tr_funnel_fromTokyoToSilence, te_funnel_te_5) into TransitionContainsEvents
+
+!new StateMachine('sm_globalWebinarSession')
+!sm_globalWebinarSession.name := 'globalWebinarSession'
+
+!new State('st_web_lobby')
+!st_web_lobby.name := 'lobby'
+!new State('st_web_preflightChecks')
+!st_web_preflightChecks.name := 'preflightChecks'
+!new State('st_web_broadcasting')
+!st_web_broadcasting.name := 'broadcasting'
+!new State('st_web_audienceQnA')
+!st_web_audienceQnA.name := 'audienceQnA'
+!new State('st_web_intermission')
+!st_web_intermission.name := 'intermission'
+!new State('st_web_wrappingUp')
+!st_web_wrappingUp.name := 'wrappingUp'
+!new State('st_web_archived')
+!st_web_archived.name := 'archived'
+
+!insert (sm_globalWebinarSession, st_web_lobby) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_preflightChecks) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_broadcasting) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_audienceQnA) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_intermission) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_wrappingUp) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_archived) into StateMachineContainsStates
+
+!insert (sm_globalWebinarSession, st_web_lobby) into StateMachineStartsStates
+
+!new Transition('tr_web_autoPreflight')
+!tr_web_autoPreflight.name := 'autoPreflight'
+!new Transition('tr_web_abortNoHost')
+!tr_web_abortNoHost.name := 'abortNoHost'
+!new Transition('tr_web_startBroadcast')
+!tr_web_startBroadcast.name := 'startBroadcast'
+!new Transition('tr_web_periodicHeartbeat')
+!tr_web_periodicHeartbeat.name := 'periodicHeartbeat'
+!new Transition('tr_web_openQnA')
+!tr_web_openQnA.name := 'openQnA'
+!new Transition('tr_web_closeQnA')
+!tr_web_closeQnA.name := 'closeQnA'
+!new Transition('tr_web_startIntermission')
+!tr_web_startIntermission.name := 'startIntermission'
+!new Transition('tr_web_resumeAfterBreak')
+!tr_web_resumeAfterBreak.name := 'resumeAfterBreak'
+!new Transition('tr_web_endSession')
+!tr_web_endSession.name := 'endSession'
+!new Transition('tr_web_finalizeArchive')
+!tr_web_finalizeArchive.name := 'finalizeArchive'
+
+!insert (sm_globalWebinarSession, tr_web_autoPreflight) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_abortNoHost) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_startBroadcast) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_periodicHeartbeat) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_openQnA) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_closeQnA) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_startIntermission) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_resumeAfterBreak) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_endSession) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_finalizeArchive) into StateMachineContainsTransitions
+
+!insert (st_web_lobby, tr_web_autoPreflight) into StateTransition
+!insert (tr_web_autoPreflight, st_web_preflightChecks) into TransitionState
+
+!insert (st_web_lobby, tr_web_abortNoHost) into StateTransition
+!insert (tr_web_abortNoHost, st_web_archived) into TransitionState
+
+!insert (st_web_preflightChecks, tr_web_startBroadcast) into StateTransition
+!insert (tr_web_startBroadcast, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_periodicHeartbeat) into StateTransition
+!insert (tr_web_periodicHeartbeat, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_openQnA) into StateTransition
+!insert (tr_web_openQnA, st_web_audienceQnA) into TransitionState
+
+!insert (st_web_audienceQnA, tr_web_closeQnA) into StateTransition
+!insert (tr_web_closeQnA, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_startIntermission) into StateTransition
+!insert (tr_web_startIntermission, st_web_intermission) into TransitionState
+
+!insert (st_web_intermission, tr_web_resumeAfterBreak) into StateTransition
+!insert (tr_web_resumeAfterBreak, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_endSession) into StateTransition
+!insert (tr_web_endSession, st_web_wrappingUp) into TransitionState
+
+!insert (st_web_wrappingUp, tr_web_finalizeArchive) into StateTransition
+!insert (tr_web_finalizeArchive, st_web_archived) into TransitionState
+
+!new TimeEvent('te_web_t_autoPreflight')
+!te_web_t_autoPreflight.time := 300
+!insert (tr_web_autoPreflight, te_web_t_autoPreflight) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_abortNoHost')
+!te_web_t_abortNoHost.time := 1800
+!insert (tr_web_abortNoHost, te_web_t_abortNoHost) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_startBroadcast')
+!te_web_t_startBroadcast.time := 120
+!insert (tr_web_startBroadcast, te_web_t_startBroadcast) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_periodicHeartbeat')
+!te_web_t_periodicHeartbeat.time := 60
+!insert (tr_web_periodicHeartbeat, te_web_t_periodicHeartbeat) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_openQnA')
+!te_web_t_openQnA.time := 900
+!insert (tr_web_openQnA, te_web_t_openQnA) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_closeQnA')
+!te_web_t_closeQnA.time := 600
+!insert (tr_web_closeQnA, te_web_t_closeQnA) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_startIntermission')
+!te_web_t_startIntermission.time := 2700
+!insert (tr_web_startIntermission, te_web_t_startIntermission) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_resumeAfterBreak')
+!te_web_t_resumeAfterBreak.time := 600
+!insert (tr_web_resumeAfterBreak, te_web_t_resumeAfterBreak) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_endSession')
+!te_web_t_endSession.time := 3600
+!insert (tr_web_endSession, te_web_t_endSession) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_finalizeArchive')
+!te_web_t_finalizeArchive.time := 180
+!insert (tr_web_finalizeArchive, te_web_t_finalizeArchive) into TransitionContainsEvents
+
+!new StateMachine('sm_greenhouseIrrigationZA')
+!sm_greenhouseIrrigationZA.name := 'greenhouseIrrigationZA'
+
+!new State('st_gh_idle')
+!st_gh_idle.name := 'idle'
+!new State('st_gh_watering')
+!st_gh_watering.name := 'watering'
+!new State('st_gh_draining')
+!st_gh_draining.name := 'draining'
+!new State('st_gh_rainHold')
+!st_gh_rainHold.name := 'rainHold'
+
+!insert (sm_greenhouseIrrigationZA, st_gh_idle) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_watering) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_draining) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_rainHold) into StateMachineContainsStates
+
+!insert (sm_greenhouseIrrigationZA, st_gh_idle) into StateMachineStartsStates
+
+!new Transition('tr_gh_tStartWatering')
+!tr_gh_tStartWatering.name := 'tStartWatering'
+!new Transition('tr_gh_tWateringToDraining')
+!tr_gh_tWateringToDraining.name := 'tWateringToDraining'
+!new Transition('tr_gh_tDrainingToIdle')
+!tr_gh_tDrainingToIdle.name := 'tDrainingToIdle'
+!new Transition('tr_gh_tIdleToRainHold')
+!tr_gh_tIdleToRainHold.name := 'tIdleToRainHold'
+!new Transition('tr_gh_tRainHoldToIdle')
+!tr_gh_tRainHoldToIdle.name := 'tRainHoldToIdle'
+
+!insert (sm_greenhouseIrrigationZA, tr_gh_tStartWatering) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tWateringToDraining) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tDrainingToIdle) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tIdleToRainHold) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tRainHoldToIdle) into StateMachineContainsTransitions
+
+!insert (st_gh_idle, tr_gh_tStartWatering) into StateTransition
+!insert (tr_gh_tStartWatering, st_gh_watering) into TransitionState
+
+!insert (st_gh_watering, tr_gh_tWateringToDraining) into StateTransition
+!insert (tr_gh_tWateringToDraining, st_gh_draining) into TransitionState
+
+!insert (st_gh_draining, tr_gh_tDrainingToIdle) into StateTransition
+!insert (tr_gh_tDrainingToIdle, st_gh_idle) into TransitionState
+
+!insert (st_gh_idle, tr_gh_tIdleToRainHold) into StateTransition
+!insert (tr_gh_tIdleToRainHold, st_gh_rainHold) into TransitionState
+
+!insert (st_gh_rainHold, tr_gh_tRainHoldToIdle) into StateTransition
+!insert (tr_gh_tRainHoldToIdle, st_gh_idle) into TransitionState
+
+!new TimeEvent('te_gh_startWatering_morning')
+!te_gh_startWatering_morning.time := 360
+!insert (tr_gh_tStartWatering, te_gh_startWatering_morning) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_startWatering_evening')
+!te_gh_startWatering_evening.time := 1080
+!insert (tr_gh_tStartWatering, te_gh_startWatering_evening) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tWateringToDraining')
+!te_gh_tWateringToDraining.time := 15
+!insert (tr_gh_tWateringToDraining, te_gh_tWateringToDraining) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tDrainingToIdle')
+!te_gh_tDrainingToIdle.time := 3
+!insert (tr_gh_tDrainingToIdle, te_gh_tDrainingToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tIdleToRainHold')
+!te_gh_tIdleToRainHold.time := 5
+!insert (tr_gh_tIdleToRainHold, te_gh_tIdleToRainHold) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tRainHoldToIdle')
+!te_gh_tRainHoldToIdle.time := 60
+!insert (tr_gh_tRainHoldToIdle, te_gh_tRainHoldToIdle) into TransitionContainsEvents
+
+!new StateMachine('sm_tromsoArcticDroneMissionSM')
+!sm_tromsoArcticDroneMissionSM.name := 'tromsoArcticDroneMissionSM'
+
+!new State('st_tromso_hangarIdle')
+!st_tromso_hangarIdle.name := 'hangarIdle'
+!new State('st_tromso_preflightCheck')
+!st_tromso_preflightCheck.name := 'preflightCheck'
+!new State('st_tromso_deice')
+!st_tromso_deice.name := 'deice'
+!new State('st_tromso_sensorCalibrate')
+!st_tromso_sensorCalibrate.name := 'sensorCalibrate'
+!new State('st_tromso_motorWarmup')
+!st_tromso_motorWarmup.name := 'motorWarmup'
+!new State('st_tromso_takeoff')
+!st_tromso_takeoff.name := 'takeoff'
+!new State('st_tromso_climb')
+!st_tromso_climb.name := 'climb'
+!new State('st_tromso_surveyRun')
+!st_tromso_surveyRun.name := 'surveyRun'
+!new State('st_tromso_returnLeg')
+!st_tromso_returnLeg.name := 'returnLeg'
+!new State('st_tromso_landing')
+!st_tromso_landing.name := 'landing'
+!new State('st_tromso_dataOffload')
+!st_tromso_dataOffload.name := 'dataOffload'
+!new State('st_tromso_batteryCharge')
+!st_tromso_batteryCharge.name := 'batteryCharge'
+!new State('st_tromso_fault')
+!st_tromso_fault.name := 'fault'
+!new State('st_tromso_recovery')
+!st_tromso_recovery.name := 'recovery'
+
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_hangarIdle) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_preflightCheck) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_deice) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_sensorCalibrate) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_motorWarmup) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_takeoff) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_climb) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_surveyRun) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_returnLeg) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_landing) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_dataOffload) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_batteryCharge) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_fault) into StateMachineContainsStates
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_recovery) into StateMachineContainsStates
+
+!insert (sm_tromsoArcticDroneMissionSM, st_tromso_hangarIdle) into StateMachineStartsStates
+
+!new Transition('tr_tromso_scheduledLaunchWindow')
+!tr_tromso_scheduledLaunchWindow.name := 'scheduledLaunchWindow'
+!new Transition('tr_tromso_preflightPassed')
+!tr_tromso_preflightPassed.name := 'preflightPassed'
+!new Transition('tr_tromso_extremeColdDeiceRequest')
+!tr_tromso_extremeColdDeiceRequest.name := 'extremeColdDeiceRequest'
+!new Transition('tr_tromso_deiceComplete')
+!tr_tromso_deiceComplete.name := 'deiceComplete'
+!new Transition('tr_tromso_calibrationComplete')
+!tr_tromso_calibrationComplete.name := 'calibrationComplete'
+!new Transition('tr_tromso_warmupComplete')
+!tr_tromso_warmupComplete.name := 'warmupComplete'
+!new Transition('tr_tromso_motorFaultAbort')
+!tr_tromso_motorFaultAbort.name := 'motorFaultAbort'
+!new Transition('tr_tromso_liftoffConfirmed')
+!tr_tromso_liftoffConfirmed.name := 'liftoffConfirmed'
+!new Transition('tr_tromso_takeoffInstabilityAbort')
+!tr_tromso_takeoffInstabilityAbort.name := 'takeoffInstabilityAbort'
+!new Transition('tr_tromso_reachSurveyAltitude')
+!tr_tromso_reachSurveyAltitude.name := 'reachSurveyAltitude'
+!new Transition('tr_tromso_gpsFaultAbort')
+!tr_tromso_gpsFaultAbort.name := 'gpsFaultAbort'
+!new Transition('tr_tromso_surveyWaypointPulse')
+!tr_tromso_surveyWaypointPulse.name := 'surveyWaypointPulse'
+!new Transition('tr_tromso_batteryLowReturn')
+!tr_tromso_batteryLowReturn.name := 'batteryLowReturn'
+!new Transition('tr_tromso_linkLostAbort')
+!tr_tromso_linkLostAbort.name := 'linkLostAbort'
+!new Transition('tr_tromso_returnArriveAtHomePoint')
+!tr_tromso_returnArriveAtHomePoint.name := 'returnArriveAtHomePoint'
+!new Transition('tr_tromso_touchdownAndDisarm')
+!tr_tromso_touchdownAndDisarm.name := 'touchdownAndDisarm'
+!new Transition('tr_tromso_offloadFinished')
+!tr_tromso_offloadFinished.name := 'offloadFinished'
+!new Transition('tr_tromso_chargeComplete')
+!tr_tromso_chargeComplete.name := 'chargeComplete'
+!new Transition('tr_tromso_faultHandledEnterRecovery')
+!tr_tromso_faultHandledEnterRecovery.name := 'faultHandledEnterRecovery'
+!new Transition('tr_tromso_recoveryResetToIdle')
+!tr_tromso_recoveryResetToIdle.name := 'recoveryResetToIdle'
+
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_scheduledLaunchWindow) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_preflightPassed) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_extremeColdDeiceRequest) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_deiceComplete) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_calibrationComplete) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_warmupComplete) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_motorFaultAbort) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_liftoffConfirmed) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_takeoffInstabilityAbort) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_reachSurveyAltitude) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_gpsFaultAbort) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_surveyWaypointPulse) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_batteryLowReturn) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_linkLostAbort) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_returnArriveAtHomePoint) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_touchdownAndDisarm) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_offloadFinished) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_chargeComplete) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_faultHandledEnterRecovery) into StateMachineContainsTransitions
+!insert (sm_tromsoArcticDroneMissionSM, tr_tromso_recoveryResetToIdle) into StateMachineContainsTransitions
+
+!insert (st_tromso_hangarIdle, tr_tromso_scheduledLaunchWindow) into StateTransition
+!insert (tr_tromso_scheduledLaunchWindow, st_tromso_preflightCheck) into TransitionState
+
+!insert (st_tromso_preflightCheck, tr_tromso_preflightPassed) into StateTransition
+!insert (tr_tromso_preflightPassed, st_tromso_sensorCalibrate) into TransitionState
+
+!insert (st_tromso_preflightCheck, tr_tromso_extremeColdDeiceRequest) into StateTransition
+!insert (tr_tromso_extremeColdDeiceRequest, st_tromso_deice) into TransitionState
+
+!insert (st_tromso_deice, tr_tromso_deiceComplete) into StateTransition
+!insert (tr_tromso_deiceComplete, st_tromso_sensorCalibrate) into TransitionState
+
+!insert (st_tromso_sensorCalibrate, tr_tromso_calibrationComplete) into StateTransition
+!insert (tr_tromso_calibrationComplete, st_tromso_motorWarmup) into TransitionState
+
+!insert (st_tromso_motorWarmup, tr_tromso_warmupComplete) into StateTransition
+!insert (tr_tromso_warmupComplete, st_tromso_takeoff) into TransitionState
+
+!insert (st_tromso_motorWarmup, tr_tromso_motorFaultAbort) into StateTransition
+!insert (tr_tromso_motorFaultAbort, st_tromso_fault) into TransitionState
+
+!insert (st_tromso_takeoff, tr_tromso_liftoffConfirmed) into StateTransition
+!insert (tr_tromso_liftoffConfirmed, st_tromso_climb) into TransitionState
+
+!insert (st_tromso_takeoff, tr_tromso_takeoffInstabilityAbort) into StateTransition
+!insert (tr_tromso_takeoffInstabilityAbort, st_tromso_fault) into TransitionState
+
+!insert (st_tromso_climb, tr_tromso_reachSurveyAltitude) into StateTransition
+!insert (tr_tromso_reachSurveyAltitude, st_tromso_surveyRun) into TransitionState
+
+!insert (st_tromso_climb, tr_tromso_gpsFaultAbort) into StateTransition
+!insert (tr_tromso_gpsFaultAbort, st_tromso_fault) into TransitionState
+
+!insert (st_tromso_surveyRun, tr_tromso_surveyWaypointPulse) into StateTransition
+!insert (tr_tromso_surveyWaypointPulse, st_tromso_surveyRun) into TransitionState
+
+!insert (st_tromso_surveyRun, tr_tromso_batteryLowReturn) into StateTransition
+!insert (tr_tromso_batteryLowReturn, st_tromso_returnLeg) into TransitionState
+
+!insert (st_tromso_surveyRun, tr_tromso_linkLostAbort) into StateTransition
+!insert (tr_tromso_linkLostAbort, st_tromso_fault) into TransitionState
+
+!insert (st_tromso_returnLeg, tr_tromso_returnArriveAtHomePoint) into StateTransition
+!insert (tr_tromso_returnArriveAtHomePoint, st_tromso_landing) into TransitionState
+
+!insert (st_tromso_landing, tr_tromso_touchdownAndDisarm) into StateTransition
+!insert (tr_tromso_touchdownAndDisarm, st_tromso_dataOffload) into TransitionState
+
+!insert (st_tromso_dataOffload, tr_tromso_offloadFinished) into StateTransition
+!insert (tr_tromso_offloadFinished, st_tromso_batteryCharge) into TransitionState
+
+!insert (st_tromso_batteryCharge, tr_tromso_chargeComplete) into StateTransition
+!insert (tr_tromso_chargeComplete, st_tromso_hangarIdle) into TransitionState
+
+!insert (st_tromso_fault, tr_tromso_faultHandledEnterRecovery) into StateTransition
+!insert (tr_tromso_faultHandledEnterRecovery, st_tromso_recovery) into TransitionState
+
+!insert (st_tromso_recovery, tr_tromso_recoveryResetToIdle) into StateTransition
+!insert (tr_tromso_recoveryResetToIdle, st_tromso_hangarIdle) into TransitionState
+
+!new TimeEvent('te_tromso_DTE1')
+!te_tromso_DTE1.time := 300
+!insert (tr_tromso_scheduledLaunchWindow, te_tromso_DTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE2')
+!te_tromso_DTE2.time := 120
+!insert (tr_tromso_preflightPassed, te_tromso_DTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE3')
+!te_tromso_DTE3.time := 1
+!insert (tr_tromso_extremeColdDeiceRequest, te_tromso_DTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE4')
+!te_tromso_DTE4.time := 240
+!insert (tr_tromso_deiceComplete, te_tromso_DTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE5')
+!te_tromso_DTE5.time := 90
+!insert (tr_tromso_calibrationComplete, te_tromso_DTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE6')
+!te_tromso_DTE6.time := 60
+!insert (tr_tromso_warmupComplete, te_tromso_DTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE7')
+!te_tromso_DTE7.time := 1
+!insert (tr_tromso_motorFaultAbort, te_tromso_DTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE8')
+!te_tromso_DTE8.time := 15
+!insert (tr_tromso_liftoffConfirmed, te_tromso_DTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE9')
+!te_tromso_DTE9.time := 1
+!insert (tr_tromso_takeoffInstabilityAbort, te_tromso_DTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE10')
+!te_tromso_DTE10.time := 180
+!insert (tr_tromso_reachSurveyAltitude, te_tromso_DTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE11')
+!te_tromso_DTE11.time := 1
+!insert (tr_tromso_gpsFaultAbort, te_tromso_DTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE12')
+!te_tromso_DTE12.time := 600
+!insert (tr_tromso_surveyWaypointPulse, te_tromso_DTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE13')
+!te_tromso_DTE13.time := 1
+!insert (tr_tromso_batteryLowReturn, te_tromso_DTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE14')
+!te_tromso_DTE14.time := 1
+!insert (tr_tromso_linkLostAbort, te_tromso_DTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE15')
+!te_tromso_DTE15.time := 240
+!insert (tr_tromso_returnArriveAtHomePoint, te_tromso_DTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE16')
+!te_tromso_DTE16.time := 30
+!insert (tr_tromso_touchdownAndDisarm, te_tromso_DTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE17')
+!te_tromso_DTE17.time := 900
+!insert (tr_tromso_offloadFinished, te_tromso_DTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE18')
+!te_tromso_DTE18.time := 5400
+!insert (tr_tromso_chargeComplete, te_tromso_DTE18) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE19')
+!te_tromso_DTE19.time := 600
+!insert (tr_tromso_faultHandledEnterRecovery, te_tromso_DTE19) into TransitionContainsEvents
+
+!new TimeEvent('te_tromso_DTE20')
+!te_tromso_DTE20.time := 60
+!insert (tr_tromso_recoveryResetToIdle, te_tromso_DTE20) into TransitionContainsEvents
+

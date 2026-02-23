@@ -1,0 +1,88 @@
+!new Station('SCLURB')
+
+!new Driver('DCL11')
+!DCL11.id := 'D-CL-11'
+!DCL11.name := 'Valentina Rojas'
+
+!new Driver('DCL44')
+!DCL44.id := 'D-CL-44'
+!DCL44.name := 'Matías González'
+
+!insert (SCLURB, DCL11) into StationContainsDriver
+!insert (SCLURB, DCL44) into StationContainsDriver
+
+!new Customer('CCL310')
+!CCL310.id := 'C-CL-310'
+!CCL310.name := 'Antü Leftraru'
+!CCL310.twitterUserName := '@antu_hechoamano'
+
+!new Customer('CCL502')
+!CCL502.id := 'C-CL-502'
+!CCL502.name := 'Camila Fernández'
+!CCL502.twitterUserName := '@cami_fernandez'
+
+!insert (SCLURB, CCL310) into StationContainsCustomer
+!insert (SCLURB, CCL502) into StationContainsCustomer
+
+!new Address('ASCLPICK01')
+!ASCLPICK01.text := 'Barrio Italia, Av. Italia 1150, Providencia, Santiago, Chile'
+!new GeoLocation('GLSCLITALIA')
+!GLSCLITALIA.latitude := -33.4449
+!GLSCLITALIA.longitude := -70.6273
+!insert (ASCLPICK01, GLSCLITALIA) into AddressContainsGeoLocation
+
+!new Address('ASCLDEL01')
+!ASCLDEL01.text := 'Edificio Mirador, Torre A, Depto. 1204, Av. Irarrázaval 3200, Ñuñoa, Santiago, Chile'
+!new GeoLocation('GLSCLIRRAZAPT')
+!GLSCLIRRAZAPT.latitude := -33.4562
+!GLSCLIRRAZAPT.longitude := -70.5969
+!insert (ASCLDEL01, GLSCLIRRAZAPT) into AddressContainsGeoLocation
+
+!new Address('ASCLDEL02')
+!ASCLDEL02.text := 'Edificio Mirador, Conserjería (lobby), Av. Irarrázaval 3200, Ñuñoa, Santiago, Chile'
+!new GeoLocation('GLSCLIRRAZLOBBY')
+!GLSCLIRRAZLOBBY.latitude := -33.4561
+!GLSCLIRRAZLOBBY.longitude := -70.5971
+!insert (ASCLDEL02, GLSCLIRRAZLOBBY) into AddressContainsGeoLocation
+
+!new Address('ASCLPICK02')
+!ASCLPICK02.text := 'Mercado Central de Santiago, San Pablo 967, Santiago Centro, Chile'
+!new GeoLocation('GLSCLMERCADOF')
+!GLSCLMERCADOF.latitude := -33.4367
+!GLSCLMERCADOF.longitude := -70.6503
+!new GeoLocation('GLSCLMERCADOL')
+!GLSCLMERCADOL.latitude := -33.4370
+!GLSCLMERCADOL.longitude := -70.6506
+!insert (ASCLPICK02, GLSCLMERCADOF) into AddressContainsGeoLocation
+!insert (ASCLPICK02, GLSCLMERCADOL) into AddressContainsGeoLocation
+
+!new Address('ASCLDEL03')
+!ASCLDEL03.text := 'Av. Apoquindo 4900, Las Condes, Santiago, Chile'
+!new GeoLocation('GLSCLAPOQUINDO')
+!GLSCLAPOQUINDO.latitude := -33.4096
+!GLSCLAPOQUINDO.longitude := -70.5664
+!insert (ASCLDEL03, GLSCLAPOQUINDO) into AddressContainsGeoLocation
+
+!new Shipment('SHPCL9002')
+!SHPCL9002.id := 'SHP-CL-9002'
+!SHPCL9002.status := #ASSIGNED
+
+!new Shipment('SHPCL9010')
+!SHPCL9010.id := 'SHP-CL-9010'
+!SHPCL9010.status := #UNDERWAY
+
+!insert (SCLURB, SHPCL9002) into StationShipment
+!insert (SCLURB, SHPCL9010) into StationShipment
+
+!insert (CCL310, SHPCL9002) into CustomerConsistsOfShipment
+!insert (CCL502, SHPCL9010) into CustomerConsistsOfShipment
+
+!insert (SHPCL9002, ASCLPICK01) into ShipmentContainsPickUpAddress
+!insert (SHPCL9002, ASCLDEL01) into ShipmentContainsDeliveryAddress
+!insert (SHPCL9002, ASCLDEL02) into ShipmentContainsDeliveryAddress
+!insert (DCL11, SHPCL9002) into DriverShipment
+
+!insert (SHPCL9010, ASCLPICK02) into ShipmentContainsPickUpAddress
+!insert (SHPCL9010, ASCLDEL03) into ShipmentContainsDeliveryAddress
+!insert (DCL44, SHPCL9010) into DriverShipment
+

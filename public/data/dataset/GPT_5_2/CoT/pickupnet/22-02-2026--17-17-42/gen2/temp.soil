@@ -1,0 +1,91 @@
+!new Station('S2_driverless')
+
+!new Customer('C10')
+!C10.id := 'CUS-EDGE-1001'
+!C10.name := 'Kalaallit Express ApS'
+!C10.twitterUserName := '@kal_express'
+
+!new Customer('C11')
+!C11.id := 'CUS-EDGE-1002'
+!C11.name := 'Nawojka Żuk'
+!C11.twitterUserName := ''
+
+!new Customer('C12')
+!C12.id := 'CUS-EDGE-1003'
+!C12.name := 'Te Whare Pounamu Trust'
+!C12.twitterUserName := '@tewharepounamu'
+
+!insert (S2_driverless, C10) into StationContainsCustomer
+!insert (S2_driverless, C11) into StationContainsCustomer
+!insert (S2_driverless, C12) into StationContainsCustomer
+
+!new Address('A100')
+!A100.text := 'Polar cache “NP-90”, North Pole (no street address)'
+!new GeoLocation('GL100')
+!GL100.latitude := 90.0
+!GL100.longitude := 0.0
+!insert (A100, GL100) into AddressContainsGeoLocation
+
+!new Address('A101')
+!A101.text := 'Amundsen–Scott marker zone, South Pole, Antarctica'
+!new GeoLocation('GL101')
+!GL101.latitude := -90.0
+!GL101.longitude := 0.0
+!insert (A101, GL101) into AddressContainsGeoLocation
+
+!new Address('A102')
+!A102.text := 'International Date Line buoy (east side), equatorial Pacific'
+!new GeoLocation('GL102')
+!GL102.latitude := 0.0
+!GL102.longitude := 179.9999
+!insert (A102, GL102) into AddressContainsGeoLocation
+
+!new Address('A103')
+!A103.text := 'International Date Line buoy (west side), equatorial Pacific'
+!new GeoLocation('GL103')
+!GL103.latitude := 0.0
+!GL103.longitude := -179.9999
+!insert (A103, GL103) into AddressContainsGeoLocation
+
+!new Address('A104')
+!A104.text := '“Null Island” floating platform, Gulf of Guinea (0,0)'
+!new GeoLocation('GL104')
+!GL104.latitude := 0.0
+!GL104.longitude := 0.0
+!insert (A104, GL104) into AddressContainsGeoLocation
+
+!new Address('A105')
+!A105.text := '“Null Island” floating platform, Gulf of Guinea (0,0) — secondary deck'
+!new GeoLocation('GL105')
+!GL105.latitude := 0.0008
+!GL105.longitude := 0.0008
+!insert (A105, GL105) into AddressContainsGeoLocation
+
+!new Shipment('SHPEDGE1001')
+!SHPEDGE1001.id := 'SHP-EDGE-1001'
+!SHPEDGE1001.status := #ASSIGNED
+
+!new Shipment('SHPEDGE1002')
+!SHPEDGE1002.id := 'SHP-EDGE-1002'
+!SHPEDGE1002.status := #UNDERWAY
+
+!new Shipment('SHPEDGE1003')
+!SHPEDGE1003.id := 'SHP-EDGE-1003'
+!SHPEDGE1003.status := #DELIVERED
+
+!insert (S2_driverless, SHPEDGE1001) into StationShipment
+!insert (S2_driverless, SHPEDGE1002) into StationShipment
+!insert (S2_driverless, SHPEDGE1003) into StationShipment
+
+!insert (C10, SHPEDGE1001) into CustomerConsistsOfShipment
+!insert (C11, SHPEDGE1002) into CustomerConsistsOfShipment
+!insert (C11, SHPEDGE1003) into CustomerConsistsOfShipment
+
+!insert (SHPEDGE1001, A102) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1001, A103) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE1002, A100) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1002, A101) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE1003, A104) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE1003, A105) into ShipmentContainsDeliveryAddress

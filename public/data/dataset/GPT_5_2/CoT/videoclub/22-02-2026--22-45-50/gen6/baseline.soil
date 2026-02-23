@@ -1,0 +1,141 @@
+!new Client('clientBaseD50')
+!clientBaseD50.clientId := 501
+!clientBaseD50.isSuspended := false
+
+!new Client('clientBaseD51')
+!clientBaseD51.clientId := 112
+!clientBaseD51.isSuspended := false
+
+!new Client('clientBaseD52')
+!clientBaseD52.clientId := 77
+!clientBaseD52.isSuspended := true
+
+!new Client('clientBaseD53')
+!clientBaseD53.clientId := 908
+!clientBaseD53.isSuspended := false
+
+!new Client('clientBaseD54')
+!clientBaseD54.clientId := 33
+!clientBaseD54.isSuspended := false
+
+!new Rental('rentalBaseD50')
+!rentalBaseD50.date := Date('2022-10-05')
+
+!new Rental('rentalBaseD51')
+!rentalBaseD51.date := Date('2022-10-19')
+
+!new Rental('rentalBaseD52')
+!rentalBaseD52.date := Date('2022-11-02')
+
+!new Rental('rentalBaseD53')
+!rentalBaseD53.date := Date('2022-12-28')
+
+!new Rental('rentalBaseD54')
+!rentalBaseD54.date := Date('2023-01-03')
+
+!new Movie('movieBaseD50')
+!movieBaseD50.title := 'Monsoon Break-In'
+!movieBaseD50.availableCopies := 0
+!movieBaseD50.genre := #Action
+
+!new Movie('movieBaseD51')
+!movieBaseD51.title := 'Cousins at the Market'
+!movieBaseD51.availableCopies := 8
+!movieBaseD51.genre := #Comedy
+
+!new Movie('movieBaseD52')
+!movieBaseD52.title := 'Andes Afternoon'
+!movieBaseD52.availableCopies := 3
+!movieBaseD52.genre := #Comedy
+
+!new Series('seriesBaseD50')
+!seriesBaseD50.title := 'Night Bus Chronicles'
+!seriesBaseD50.availableCopies := 1
+!seriesBaseD50.episode := 4
+
+!new Series('seriesBaseD51')
+!seriesBaseD51.title := 'Night Bus Chronicles'
+!seriesBaseD51.availableCopies := 1
+!seriesBaseD51.episode := 5
+
+!new Series('seriesBaseD52')
+!seriesBaseD52.title := 'Kitchen Alibis'
+!seriesBaseD52.availableCopies := 2
+!seriesBaseD52.episode := 16
+
+!new Series('seriesBaseD53')
+!seriesBaseD53.title := 'Kitchen Alibis'
+!seriesBaseD53.availableCopies := 2
+!seriesBaseD53.episode := 17
+
+!new Actor('actorBaseD50')
+!actorBaseD50.name := 'Siti Nur Aisyah'
+
+!new Actor('actorBaseD51')
+!actorBaseD51.name := 'Óscar Muñoz'
+
+!new Actor('actorBaseD52')
+!actorBaseD52.name := 'Kofi Mensah'
+
+!new Actor('actorBaseD53')
+!actorBaseD53.name := 'Inês Carvalho'
+
+!new Actor('actorBaseD54')
+!actorBaseD54.name := 'Yara Haddad'
+
+!new Actor('actorBaseD55')
+!actorBaseD55.name := 'Nikolai Varga'
+
+!new Actor('actorBaseD56')
+!actorBaseD56.name := 'Mai Phương'
+
+!new Actor('actorBaseD57')
+!actorBaseD57.name := 'Jacob Levi'
+
+!new Actor('actorBaseD58')
+!actorBaseD58.name := 'Tala Rami'
+
+!new Actor('actorBaseD59')
+!actorBaseD59.name := 'Sergio Bianchi'
+
+!insert (clientBaseD50, rentalBaseD50) into ClientRental
+!insert (clientBaseD50, rentalBaseD51) into ClientRental
+!insert (clientBaseD52, rentalBaseD52) into ClientRental
+!insert (clientBaseD53, rentalBaseD53) into ClientRental
+!insert (clientBaseD53, rentalBaseD54) into ClientRental
+
+!insert (rentalBaseD50, movieBaseD50) into RentalCassette
+!insert (rentalBaseD50, seriesBaseD50) into RentalCassette
+
+!insert (rentalBaseD51, seriesBaseD51) into RentalCassette
+
+!insert (rentalBaseD52, movieBaseD50) into RentalCassette
+!insert (rentalBaseD52, movieBaseD51) into RentalCassette
+!insert (rentalBaseD52, seriesBaseD52) into RentalCassette
+
+!insert (rentalBaseD53, seriesBaseD50) into RentalCassette
+!insert (rentalBaseD53, seriesBaseD52) into RentalCassette
+!insert (rentalBaseD53, seriesBaseD53) into RentalCassette
+!insert (rentalBaseD53, movieBaseD51) into RentalCassette
+
+!insert (rentalBaseD54, movieBaseD50) into RentalCassette
+
+!insert (movieBaseD50, actorBaseD50) into CassetteActor
+!insert (movieBaseD50, actorBaseD51) into CassetteActor
+!insert (movieBaseD50, actorBaseD52) into CassetteActor
+
+!insert (movieBaseD51, actorBaseD53) into CassetteActor
+
+!insert (movieBaseD52, actorBaseD54) into CassetteActor
+!insert (movieBaseD52, actorBaseD55) into CassetteActor
+
+!insert (seriesBaseD50, actorBaseD51) into CassetteActor
+!insert (seriesBaseD50, actorBaseD56) into CassetteActor
+
+!insert (seriesBaseD51, actorBaseD57) into CassetteActor
+
+!insert (seriesBaseD52, actorBaseD52) into CassetteActor
+!insert (seriesBaseD52, actorBaseD53) into CassetteActor
+!insert (seriesBaseD52, actorBaseD56) into CassetteActor
+
+!insert (seriesBaseD53, actorBaseD58) into CassetteActor

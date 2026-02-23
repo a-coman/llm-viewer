@@ -1,0 +1,81 @@
+!new Client('clientHubC30')
+!clientHubC30.clientId := 6
+!clientHubC30.isSuspended := true
+
+!new Rental('rentalHubR30')
+!rentalHubR30.date := Date('0001-01-01')
+
+!new Movie('movieHubM30')
+!movieHubM30.title := 'Ulaanbaatar Run'
+!movieHubM30.availableCopies := 0
+!movieHubM30.genre := #Action
+
+!new Movie('movieHubM31')
+!movieHubM31.title := 'Comédia do Silêncio'
+!movieHubM31.availableCopies := 0
+!movieHubM31.genre := #Comedy
+
+!new Movie('movieHubM32')
+!movieHubM32.title := 'The Last Tram in Praha'
+!movieHubM32.availableCopies := 0
+!movieHubM32.genre := #Action
+
+!new Movie('movieHubM33')
+!movieHubM33.title := 'Kisah Lucu Jakarta'
+!movieHubM33.availableCopies := 0
+!movieHubM33.genre := #Comedy
+
+!new Movie('movieHubM34')
+!movieHubM34.title := 'Δρόμος της Σκιάς'
+!movieHubM34.availableCopies := 0
+!movieHubM34.genre := #Action
+
+!new Series('seriesHubS30')
+!seriesHubS30.title := 'Noite de Episódio'
+!seriesHubS30.availableCopies := 0
+!seriesHubS30.episode := 1
+
+!new Series('seriesHubS31')
+!seriesHubS31.title := 'Şehir Günlükleri'
+!seriesHubS31.availableCopies := 0
+!seriesHubS31.episode := 1
+
+!new Series('seriesHubS32')
+!seriesHubS32.title := 'Kraków Files'
+!seriesHubS32.availableCopies := 0
+!seriesHubS32.episode := 1
+
+!new Movie('movieHubM35')
+!movieHubM35.title := 'Cairo Punchline'
+!movieHubM35.availableCopies := 0
+!movieHubM35.genre := #Comedy
+
+!new Series('seriesHubS33')
+!seriesHubS33.title := 'Helsinki Signal'
+!seriesHubS33.availableCopies := 0
+!seriesHubS33.episode := 1
+
+!new Actor('actorHubA30')
+!actorHubA30.name := 'Samira Kovač'
+
+!insert (clientHubC30, rentalHubR30) into ClientRental
+
+!insert (rentalHubR30, movieHubM30) into RentalCassette
+!insert (rentalHubR30, movieHubM31) into RentalCassette
+!insert (rentalHubR30, movieHubM32) into RentalCassette
+!insert (rentalHubR30, movieHubM33) into RentalCassette
+!insert (rentalHubR30, movieHubM34) into RentalCassette
+!insert (rentalHubR30, seriesHubS30) into RentalCassette
+!insert (rentalHubR30, seriesHubS31) into RentalCassette
+!insert (rentalHubR30, seriesHubS32) into RentalCassette
+
+!insert (movieHubM30, actorHubA30) into CassetteActor
+!insert (movieHubM31, actorHubA30) into CassetteActor
+!insert (movieHubM32, actorHubA30) into CassetteActor
+!insert (movieHubM33, actorHubA30) into CassetteActor
+!insert (movieHubM34, actorHubA30) into CassetteActor
+!insert (seriesHubS30, actorHubA30) into CassetteActor
+!insert (seriesHubS31, actorHubA30) into CassetteActor
+!insert (seriesHubS32, actorHubA30) into CassetteActor
+!insert (movieHubM35, actorHubA30) into CassetteActor
+!insert (seriesHubS33, actorHubA30) into CassetteActor

@@ -1,0 +1,592 @@
+!new RentalOffice('RO_500')
+!RO_500.name := 'Desert One-Stop Rentals'
+!RO_500.number := 500
+!RO_500.address := '500 E Van Buren St, Phoenix, AZ 85004'
+
+!new Truck('T_50')
+!T_50.id := 50
+!T_50.registrationState := #AZ
+!T_50.licensePlateNumber := 'AZ-DESERT-0050'
+!T_50.vehicleTypeCode := #TRUCK
+!T_50.registrationLastMaintenanceDate := Date('2026-01-31')
+!T_50.expirationDate := Date('2026-02-01')
+!T_50.odometerReading := 1
+!T_50.gasTankCapacity := 0.0
+!T_50.workingRadio := true
+!T_50.mileage := 1
+
+!new Vehicle('V_51')
+!V_51.id := 51
+!V_51.registrationState := #AL
+!V_51.licensePlateNumber := 'AL-TRAILER-000051'
+!V_51.vehicleTypeCode := #OPEN_TRAILER
+!V_51.registrationLastMaintenanceDate := Date('2025-08-15')
+!V_51.expirationDate := Date('2027-08-15')
+
+!new Individual('I_50')
+!I_50.name := 'Hiro Tanaka'
+!I_50.address := '12 W Monroe St, Phoenix, AZ'
+!I_50.poorRisk := true
+!I_50.homePhone := '+1-602-555-0050'
+!I_50.driverLicenseState := #AZ
+!I_50.driverLicenseNumber := 50050
+!I_50.driverLicenseExpirationDate := Date('2026-02-01')
+
+!new Company('C_51')
+!C_51.name := 'Alabama Stagecraft LLC'
+!C_51.address := '1 Theater Way, Montgomery, AL'
+!C_51.poorRisk := false
+!C_51.idNumber := 51
+
+!new RentalAgreement('RA_5000')
+!RA_5000.number := 5000
+!RA_5000.rentalDate := Date('2026-02-01')
+!RA_5000.anticipatedDuration := 0
+!RA_5000.depositPaid := 0.0
+!RA_5000.quotedDailyRate := 0.0
+!RA_5000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_5001_B')
+!RA_5001_B.number := 5001
+!RA_5001_B.rentalDate := Date('2026-02-02')
+!RA_5001_B.anticipatedDuration := 1
+!RA_5001_B.depositPaid := 0.0
+!RA_5001_B.quotedDailyRate := 250.0
+!RA_5001_B.quotedRatePerMile := 0.0
+
+!insert (RO_500, T_50) into RentalOfficeVehicle
+!insert (RO_500, V_51) into RentalOfficeVehicle
+
+!insert (RO_500, RA_5000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_500, RA_5001_B) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_500, RA_5000) into RentalOfficeRentalAgreementDrop
+!insert (RO_500, RA_5001_B) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_5000, T_50) into RentalAgreementVehicle
+!insert (RA_5001_B, V_51) into RentalAgreementVehicle
+
+!insert (RA_5000, I_50) into RentalAgreementCustomer
+!insert (RA_5001_B, I_50) into RentalAgreementCustomer
+
+!new RentalOffice('RO_41_NHV')
+!RO_41_NHV.name := 'Soundside Truck & Trailer – New Haven'
+!RO_41_NHV.number := 41
+!RO_41_NHV.address := '250 State St, New Haven, CT 06510, USA'
+
+!new RentalOffice('RO_42_WILRF')
+!RO_42_WILRF.name := 'Brandywine Rentals – Wilmington Riverfront'
+!RO_42_WILRF.number := 42
+!RO_42_WILRF.address := '760 Justison St, Wilmington, DE 19801, USA'
+
+!new RentalOffice('RO_9_KW')
+!RO_9_KW.name := 'Island Drop Point – Key West'
+!RO_9_KW.number := 9
+!RO_9_KW.address := '101 Front St, Key West, FL 33040, USA'
+
+!new Truck('V_3001')
+!V_3001.id := 3001
+!V_3001.registrationState := #CT
+!V_3001.licensePlateNumber := 'CT-HL-7049'
+!V_3001.vehicleTypeCode := #TRUCK24
+!V_3001.registrationLastMaintenanceDate := Date('2026-01-08')
+!V_3001.expirationDate := Date('2026-07-31')
+!V_3001.odometerReading := 88910
+!V_3001.gasTankCapacity := 31.5
+!V_3001.workingRadio := true
+!V_3001.mileage := 12
+
+!new Vehicle('V_3002')
+!V_3002.id := 3002
+!V_3002.registrationState := #CT
+!V_3002.licensePlateNumber := 'CT-CV-2210'
+!V_3002.vehicleTypeCode := #COVERED_TRAILER
+!V_3002.registrationLastMaintenanceDate := Date('2025-12-14')
+!V_3002.expirationDate := Date('2026-12-14')
+
+!new Vehicle('V_3003')
+!V_3003.id := 3003
+!V_3003.registrationState := #DE
+!V_3003.licensePlateNumber := 'DE-OP-9031'
+!V_3003.vehicleTypeCode := #OPEN_TRAILER
+!V_3003.registrationLastMaintenanceDate := Date('2026-02-11')
+!V_3003.expirationDate := Date('2027-02-28')
+
+!new Company('CUST_C_600')
+!CUST_C_600.name := 'Nordic Film Crew AB (US Unit)'
+!CUST_C_600.address := '500 S Buena Vista St, Burbank, CA 91521, USA'
+!CUST_C_600.poorRisk := false
+!CUST_C_600.idNumber := 6007712
+
+!new Individual('CUST_I_155')
+!CUST_I_155.name := 'Zoë Martínez'
+!CUST_I_155.address := '18 Wooster Pl, New Haven, CT 06511, USA'
+!CUST_I_155.poorRisk := false
+!CUST_I_155.homePhone := '+1-203-555-0164'
+!CUST_I_155.driverLicenseState := #CT
+!CUST_I_155.driverLicenseNumber := 41855021
+!CUST_I_155.driverLicenseExpirationDate := Date('2028-09-30')
+
+!new Individual('CUST_I_156')
+!CUST_I_156.name := 'Caleb Johnson'
+!CUST_I_156.address := '904 N Market St, Wilmington, DE 19801, USA'
+!CUST_I_156.poorRisk := true
+!CUST_I_156.homePhone := '+1-302-555-0108'
+!CUST_I_156.driverLicenseState := #DE
+!CUST_I_156.driverLicenseNumber := 9901735
+!CUST_I_156.driverLicenseExpirationDate := Date('2026-11-20')
+
+!new RentalAgreement('RA_41001')
+!RA_41001.number := 41001
+!RA_41001.rentalDate := Date('2026-05-02')
+!RA_41001.anticipatedDuration := 2
+!RA_41001.depositPaid := 500.0
+!RA_41001.quotedDailyRate := 149.0
+!RA_41001.quotedRatePerMile := 0.55
+
+!new RentalAgreement('RA_41002')
+!RA_41002.number := 41002
+!RA_41002.rentalDate := Date('2026-05-04')
+!RA_41002.anticipatedDuration := 6
+!RA_41002.depositPaid := 100.0
+!RA_41002.quotedDailyRate := 42.0
+!RA_41002.quotedRatePerMile := 0.1
+
+!new RentalAgreement('RA_41003')
+!RA_41003.number := 41003
+!RA_41003.rentalDate := Date('2026-05-11')
+!RA_41003.anticipatedDuration := 5
+!RA_41003.depositPaid := 0.0
+!RA_41003.quotedDailyRate := 165.0
+!RA_41003.quotedRatePerMile := 0.6
+
+!new RentalAgreement('RA_41004')
+!RA_41004.number := 41004
+!RA_41004.rentalDate := Date('2026-05-18')
+!RA_41004.anticipatedDuration := 1
+!RA_41004.depositPaid := 75.0
+!RA_41004.quotedDailyRate := 35.0
+!RA_41004.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_41005')
+!RA_41005.number := 41005
+!RA_41005.rentalDate := Date('2026-05-25')
+!RA_41005.anticipatedDuration := 3
+!RA_41005.depositPaid := 250.0
+!RA_41005.quotedDailyRate := 139.5
+!RA_41005.quotedRatePerMile := 0.49
+
+!insert (RO_41_NHV, V_3001) into RentalOfficeVehicle
+!insert (RO_41_NHV, V_3002) into RentalOfficeVehicle
+!insert (RO_42_WILRF, V_3003) into RentalOfficeVehicle
+
+!insert (RO_41_NHV, RA_41001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41003) into RentalOfficeRentalAgreementOrigin
+!insert (RO_42_WILRF, RA_41004) into RentalOfficeRentalAgreementOrigin
+!insert (RO_41_NHV, RA_41005) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_42_WILRF, RA_41001) into RentalOfficeRentalAgreementDrop
+!insert (RO_41_NHV, RA_41002) into RentalOfficeRentalAgreementDrop
+!insert (RO_9_KW, RA_41003) into RentalOfficeRentalAgreementDrop
+!insert (RO_42_WILRF, RA_41004) into RentalOfficeRentalAgreementDrop
+!insert (RO_41_NHV, RA_41005) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_41001, V_3001) into RentalAgreementVehicle
+!insert (RA_41002, V_3002) into RentalAgreementVehicle
+!insert (RA_41003, V_3001) into RentalAgreementVehicle
+!insert (RA_41004, V_3003) into RentalAgreementVehicle
+!insert (RA_41005, V_3001) into RentalAgreementVehicle
+
+!insert (RA_41001, CUST_C_600) into RentalAgreementCustomer
+!insert (RA_41002, CUST_I_155) into RentalAgreementCustomer
+!insert (RA_41003, CUST_I_156) into RentalAgreementCustomer
+!insert (RA_41004, CUST_C_600) into RentalAgreementCustomer
+!insert (RA_41005, CUST_I_156) into RentalAgreementCustomer
+
+!new RentalOffice('RO30_B2')
+!RO30_B2.name := 'Fleet Overflow Compound'
+!RO30_B2.number := 30
+!RO30_B2.address := ''
+
+!new RentalOffice('RO31_B2')
+!RO31_B2.name := 'Pop-up Event Desk'
+!RO31_B2.number := 31
+!RO31_B2.address := 'Temporary booth, Jacksonville, FL'
+
+!new Truck('V300_B2')
+!V300_B2.id := 300
+!V300_B2.registrationState := #CT
+!V300_B2.licensePlateNumber := 'CT-Ø-300'
+!V300_B2.vehicleTypeCode := #TRUCK
+!V300_B2.registrationLastMaintenanceDate := Date('2026-02-30')
+!V300_B2.expirationDate := Date('0001-01-01')
+!V300_B2.odometerReading := -10
+!V300_B2.gasTankCapacity := 0.0
+!V300_B2.workingRadio := true
+!V300_B2.mileage := 0
+
+!new Truck('V301_B2')
+!V301_B2.id := 301
+!V301_B2.registrationState := #AL
+!V301_B2.licensePlateNumber := 'AL-999999'
+!V301_B2.vehicleTypeCode := #TRUCK24
+!V301_B2.registrationLastMaintenanceDate := Date('1970-01-01')
+!V301_B2.expirationDate := Date('2099-12-31')
+!V301_B2.odometerReading := 99999999
+!V301_B2.gasTankCapacity := 999999.0
+!V301_B2.workingRadio := false
+!V301_B2.mileage := 2147483647
+
+!new Vehicle('V302_B2')
+!V302_B2.id := 302
+!V302_B2.registrationState := #FL
+!V302_B2.licensePlateNumber := 'FL-TRLR-302'
+!V302_B2.vehicleTypeCode := #OPEN_TRAILER
+!V302_B2.registrationLastMaintenanceDate := Date('2026-W05-3')
+!V302_B2.expirationDate := Date('2026-W05-3')
+
+!new Vehicle('V303_B2')
+!V303_B2.id := 303
+!V303_B2.registrationState := #DE
+!V303_B2.licensePlateNumber := 'DE-000'
+!V303_B2.vehicleTypeCode := #COVERED_TRAILER
+!V303_B2.registrationLastMaintenanceDate := Date('0001-01-01')
+!V303_B2.expirationDate := Date('2099-12-31')
+
+!new Vehicle('V304_B2')
+!V304_B2.id := -304
+!V304_B2.registrationState := #AK
+!V304_B2.licensePlateNumber := 'AK-ICE-304'
+!V304_B2.vehicleTypeCode := #OPEN_TRAILER
+!V304_B2.registrationLastMaintenanceDate := Date('2099-12-31')
+!V304_B2.expirationDate := Date('1970-01-01')
+
+!new Vehicle('V305_B2')
+!V305_B2.id := 305
+!V305_B2.registrationState := #CA
+!V305_B2.licensePlateNumber := ''
+!V305_B2.vehicleTypeCode := #COVERED_TRAILER
+!V305_B2.registrationLastMaintenanceDate := Date('1970-01-01')
+!V305_B2.expirationDate := Date('2026-02-30')
+
+!new Individual('I30_B2')
+!I30_B2.name := 'Nguyễn Thị Lan'
+!I30_B2.address := 'Apt 3, 77 Broad St, Wilmington, DE'
+!I30_B2.poorRisk := false
+!I30_B2.homePhone := '000-000-0000'
+!I30_B2.driverLicenseState := #DE
+!I30_B2.driverLicenseNumber := 1
+!I30_B2.driverLicenseExpirationDate := Date('0001-01-01')
+
+!new Individual('I31_B2')
+!I31_B2.name := 'Jean-Pierre Dubois'
+!I31_B2.address := ''
+!I31_B2.poorRisk := true
+!I31_B2.homePhone := '+1 (305) 555-0001'
+!I31_B2.driverLicenseState := #FL
+!I31_B2.driverLicenseNumber := -1
+!I31_B2.driverLicenseExpirationDate := Date('2099-12-31')
+
+!new Company('C30_B2')
+!C30_B2.name := 'Arctic Minute Rentals Oy'
+!C30_B2.address := 'Harbor Road 1, Dover, DE'
+!C30_B2.poorRisk := false
+!C30_B2.idNumber := -2147483647
+
+!insert (RO30_B2, V300_B2) into RentalOfficeVehicle
+!insert (RO30_B2, V301_B2) into RentalOfficeVehicle
+!insert (RO30_B2, V302_B2) into RentalOfficeVehicle
+!insert (RO30_B2, V303_B2) into RentalOfficeVehicle
+!insert (RO30_B2, V304_B2) into RentalOfficeVehicle
+!insert (RO30_B2, V305_B2) into RentalOfficeVehicle
+
+!new RentalOffice('RO_610')
+!RO_610.name := 'Elm City Commercial Rentals — New Haven'
+!RO_610.number := 610
+!RO_610.address := '1175 State St, New Haven, CT 06511'
+
+!new RentalOffice('RO_620')
+!RO_620.name := 'First State Returns Hub — Dover'
+!RO_620.number := 620
+!RO_620.address := '45 S Governors Ave, Dover, DE 19904'
+
+!new RentalOffice('RO_630')
+!RO_630.name := 'Desert Loop Truck & Trailer — Tempe'
+!RO_630.number := 630
+!RO_630.address := '2120 E University Dr, Tempe, AZ 85281'
+
+!new RentalOffice('RO_640')
+!RO_640.name := 'RiverCity Rentals — Jacksonville'
+!RO_640.number := 640
+!RO_640.address := '3100 Philips Hwy, Jacksonville, FL 32207'
+
+!new Truck('T_9101_CX4')
+!T_9101_CX4.id := 9101
+!T_9101_CX4.registrationState := #FL
+!T_9101_CX4.licensePlateNumber := 'FL RYQ-284'
+!T_9101_CX4.vehicleTypeCode := #TRUCK24
+!T_9101_CX4.registrationLastMaintenanceDate := Date('2026-01-19')
+!T_9101_CX4.expirationDate := Date('2027-01-31')
+!T_9101_CX4.odometerReading := 158220
+!T_9101_CX4.gasTankCapacity := 43.0
+!T_9101_CX4.workingRadio := true
+!T_9101_CX4.mileage := 8
+
+!new Truck('T_9102_CX4')
+!T_9102_CX4.id := 9102
+!T_9102_CX4.registrationState := #CT
+!T_9102_CX4.licensePlateNumber := 'CT 6AN-9031'
+!T_9102_CX4.vehicleTypeCode := #TRUCK10
+!T_9102_CX4.registrationLastMaintenanceDate := Date('2025-12-08')
+!T_9102_CX4.expirationDate := Date('2026-12-31')
+!T_9102_CX4.odometerReading := 52210
+!T_9102_CX4.gasTankCapacity := 26.0
+!T_9102_CX4.workingRadio := false
+!T_9102_CX4.mileage := 14
+
+!new Truck('T_9103_CX4')
+!T_9103_CX4.id := 9103
+!T_9103_CX4.registrationState := #AZ
+!T_9103_CX4.licensePlateNumber := 'AZ DPK-7710'
+!T_9103_CX4.vehicleTypeCode := #TRUCK
+!T_9103_CX4.registrationLastMaintenanceDate := Date('2026-02-03')
+!T_9103_CX4.expirationDate := Date('2027-02-28')
+!T_9103_CX4.odometerReading := 90340
+!T_9103_CX4.gasTankCapacity := 34.0
+!T_9103_CX4.workingRadio := true
+!T_9103_CX4.mileage := 12
+
+!new Vehicle('V_9201_CX4')
+!V_9201_CX4.id := 9201
+!V_9201_CX4.registrationState := #FL
+!V_9201_CX4.licensePlateNumber := 'FL TR-1107'
+!V_9201_CX4.vehicleTypeCode := #COVERED_TRAILER
+!V_9201_CX4.registrationLastMaintenanceDate := Date('2025-10-21')
+!V_9201_CX4.expirationDate := Date('2026-10-31')
+
+!new Vehicle('V_9202_CX4')
+!V_9202_CX4.id := 9202
+!V_9202_CX4.registrationState := #FL
+!V_9202_CX4.licensePlateNumber := 'FL OT-5582'
+!V_9202_CX4.vehicleTypeCode := #OPEN_TRAILER
+!V_9202_CX4.registrationLastMaintenanceDate := Date('2026-01-09')
+!V_9202_CX4.expirationDate := Date('2027-01-31')
+
+!new Vehicle('V_9301_CX4')
+!V_9301_CX4.id := 9301
+!V_9301_CX4.registrationState := #CT
+!V_9301_CX4.licensePlateNumber := 'CT TR-4402'
+!V_9301_CX4.vehicleTypeCode := #COVERED_TRAILER
+!V_9301_CX4.registrationLastMaintenanceDate := Date('2025-11-30')
+!V_9301_CX4.expirationDate := Date('2026-11-30')
+
+!new Vehicle('V_9302_CX4')
+!V_9302_CX4.id := 9302
+!V_9302_CX4.registrationState := #CO
+!V_9302_CX4.licensePlateNumber := 'CO OT-9011'
+!V_9302_CX4.vehicleTypeCode := #OPEN_TRAILER
+!V_9302_CX4.registrationLastMaintenanceDate := Date('2025-09-12')
+!V_9302_CX4.expirationDate := Date('2026-09-30')
+
+!new Vehicle('V_9401_CX4')
+!V_9401_CX4.id := 9401
+!V_9401_CX4.registrationState := #AZ
+!V_9401_CX4.licensePlateNumber := 'AZ TR-3008'
+!V_9401_CX4.vehicleTypeCode := #COVERED_TRAILER
+!V_9401_CX4.registrationLastMaintenanceDate := Date('2025-08-25')
+!V_9401_CX4.expirationDate := Date('2026-08-31')
+
+!new Vehicle('V_9402_CX4')
+!V_9402_CX4.id := 9402
+!V_9402_CX4.registrationState := #CA
+!V_9402_CX4.licensePlateNumber := 'CA 3JQW812'
+!V_9402_CX4.vehicleTypeCode := #OPEN_TRAILER
+!V_9402_CX4.registrationLastMaintenanceDate := Date('2025-07-17')
+!V_9402_CX4.expirationDate := Date('2026-07-31')
+
+!new Vehicle('V_9403_CX4')
+!V_9403_CX4.id := 9403
+!V_9403_CX4.registrationState := #AZ
+!V_9403_CX4.licensePlateNumber := 'AZ OT-7214'
+!V_9403_CX4.vehicleTypeCode := #OPEN_TRAILER
+!V_9403_CX4.registrationLastMaintenanceDate := Date('2025-12-02')
+!V_9403_CX4.expirationDate := Date('2026-12-31')
+
+!new Individual('CUST_I_31_CX4')
+!CUST_I_31_CX4.name := 'Nguyễn Thảo'
+!CUST_I_31_CX4.address := '940 Riverside Ave, Jacksonville, FL 32204'
+!CUST_I_31_CX4.poorRisk := false
+!CUST_I_31_CX4.homePhone := '+1-904-555-0141'
+!CUST_I_31_CX4.driverLicenseState := #FL
+!CUST_I_31_CX4.driverLicenseNumber := 77124019
+!CUST_I_31_CX4.driverLicenseExpirationDate := Date('2028-11-08')
+
+!new Individual('CUST_I_32_CX4')
+!CUST_I_32_CX4.name := 'Sofía Ibarra'
+!CUST_I_32_CX4.address := '155 W 5th St, Tempe, AZ 85281'
+!CUST_I_32_CX4.poorRisk := false
+!CUST_I_32_CX4.homePhone := '+1-480-555-0176'
+!CUST_I_32_CX4.driverLicenseState := #AZ
+!CUST_I_32_CX4.driverLicenseNumber := 22090118
+!CUST_I_32_CX4.driverLicenseExpirationDate := Date('2027-03-14')
+
+!new Company('CUST_C_31_CX4')
+!CUST_C_31_CX4.name := 'BlueHeron Disaster Response Corp.'
+!CUST_C_31_CX4.address := '50 N Laura St, Jacksonville, FL 32202'
+!CUST_C_31_CX4.poorRisk := true
+!CUST_C_31_CX4.idNumber := 64033021
+
+!new Company('CUST_C_32_CX4')
+!CUST_C_32_CX4.name := 'Kintsugi Art Shipping Co.'
+!CUST_C_32_CX4.address := '302 Crown St, New Haven, CT 06511'
+!CUST_C_32_CX4.poorRisk := false
+!CUST_C_32_CX4.idNumber := 61088004
+
+!new RentalAgreement('RA_98801_CX4')
+!RA_98801_CX4.number := 98801
+!RA_98801_CX4.rentalDate := Date('2026-05-02')
+!RA_98801_CX4.anticipatedDuration := 2
+!RA_98801_CX4.depositPaid := 0.0
+!RA_98801_CX4.quotedDailyRate := 199.0
+!RA_98801_CX4.quotedRatePerMile := 1.15
+
+!new RentalAgreement('RA_98802_CX4')
+!RA_98802_CX4.number := 98802
+!RA_98802_CX4.rentalDate := Date('2026-05-04')
+!RA_98802_CX4.anticipatedDuration := 1
+!RA_98802_CX4.depositPaid := 75.0
+!RA_98802_CX4.quotedDailyRate := 35.0
+!RA_98802_CX4.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_98803_CX4')
+!RA_98803_CX4.number := 98803
+!RA_98803_CX4.rentalDate := Date('2026-05-10')
+!RA_98803_CX4.anticipatedDuration := 3
+!RA_98803_CX4.depositPaid := 50.0
+!RA_98803_CX4.quotedDailyRate := 29.0
+!RA_98803_CX4.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_98804_CX4')
+!RA_98804_CX4.number := 98804
+!RA_98804_CX4.rentalDate := Date('2026-05-12')
+!RA_98804_CX4.anticipatedDuration := 6
+!RA_98804_CX4.depositPaid := 150.0
+!RA_98804_CX4.quotedDailyRate := 45.0
+!RA_98804_CX4.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_98805_CX4')
+!RA_98805_CX4.number := 98805
+!RA_98805_CX4.rentalDate := Date('2026-05-15')
+!RA_98805_CX4.anticipatedDuration := 2
+!RA_98805_CX4.depositPaid := 250.0
+!RA_98805_CX4.quotedDailyRate := 109.0
+!RA_98805_CX4.quotedRatePerMile := 0.65
+
+!new RentalAgreement('RA_98806_CX4')
+!RA_98806_CX4.number := 98806
+!RA_98806_CX4.rentalDate := Date('2026-05-18')
+!RA_98806_CX4.anticipatedDuration := 1
+!RA_98806_CX4.depositPaid := 200.0
+!RA_98806_CX4.quotedDailyRate := 99.0
+!RA_98806_CX4.quotedRatePerMile := 0.7
+
+!new RentalAgreement('RA_98807_CX4')
+!RA_98807_CX4.number := 98807
+!RA_98807_CX4.rentalDate := Date('2026-05-20')
+!RA_98807_CX4.anticipatedDuration := 4
+!RA_98807_CX4.depositPaid := 120.0
+!RA_98807_CX4.quotedDailyRate := 39.0
+!RA_98807_CX4.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_98808_CX4')
+!RA_98808_CX4.number := 98808
+!RA_98808_CX4.rentalDate := Date('2026-05-23')
+!RA_98808_CX4.anticipatedDuration := 2
+!RA_98808_CX4.depositPaid := 180.0
+!RA_98808_CX4.quotedDailyRate := 79.0
+!RA_98808_CX4.quotedRatePerMile := 0.55
+
+!new RentalAgreement('RA_98809_CX4')
+!RA_98809_CX4.number := 98809
+!RA_98809_CX4.rentalDate := Date('2026-05-26')
+!RA_98809_CX4.anticipatedDuration := 1
+!RA_98809_CX4.depositPaid := 60.0
+!RA_98809_CX4.quotedDailyRate := 27.0
+!RA_98809_CX4.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_98810_CX4')
+!RA_98810_CX4.number := 98810
+!RA_98810_CX4.rentalDate := Date('2026-06-01')
+!RA_98810_CX4.anticipatedDuration := 5
+!RA_98810_CX4.depositPaid := 0.0
+!RA_98810_CX4.quotedDailyRate := 205.0
+!RA_98810_CX4.quotedRatePerMile := 1.05
+
+!new RentalAgreement('RA_98811_CX4')
+!RA_98811_CX4.number := 98811
+!RA_98811_CX4.rentalDate := Date('2026-06-04')
+!RA_98811_CX4.anticipatedDuration := 1
+!RA_98811_CX4.depositPaid := 40.0
+!RA_98811_CX4.quotedDailyRate := 22.0
+!RA_98811_CX4.quotedRatePerMile := 0.0
+
+!insert (RO_640, T_9101_CX4) into RentalOfficeVehicle
+!insert (RO_610, T_9102_CX4) into RentalOfficeVehicle
+!insert (RO_630, T_9103_CX4) into RentalOfficeVehicle
+!insert (RO_640, V_9201_CX4) into RentalOfficeVehicle
+!insert (RO_640, V_9202_CX4) into RentalOfficeVehicle
+!insert (RO_610, V_9301_CX4) into RentalOfficeVehicle
+!insert (RO_610, V_9302_CX4) into RentalOfficeVehicle
+!insert (RO_630, V_9401_CX4) into RentalOfficeVehicle
+!insert (RO_630, V_9402_CX4) into RentalOfficeVehicle
+!insert (RO_630, V_9403_CX4) into RentalOfficeVehicle
+
+!insert (RO_640, RA_98801_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_640, RA_98802_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_640, RA_98803_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_640, RA_98804_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_610, RA_98805_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_610, RA_98806_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_610, RA_98807_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_630, RA_98808_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_640, RA_98809_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_640, RA_98810_CX4) into RentalOfficeRentalAgreementOrigin
+!insert (RO_610, RA_98811_CX4) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_620, RA_98801_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_640, RA_98802_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98803_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98804_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_610, RA_98805_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98806_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98807_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98808_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_640, RA_98809_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_620, RA_98810_CX4) into RentalOfficeRentalAgreementDrop
+!insert (RO_610, RA_98811_CX4) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_98801_CX4, T_9101_CX4) into RentalAgreementVehicle
+!insert (RA_98802_CX4, V_9202_CX4) into RentalAgreementVehicle
+!insert (RA_98803_CX4, V_9202_CX4) into RentalAgreementVehicle
+!insert (RA_98804_CX4, V_9201_CX4) into RentalAgreementVehicle
+!insert (RA_98805_CX4, T_9102_CX4) into RentalAgreementVehicle
+!insert (RA_98806_CX4, T_9102_CX4) into RentalAgreementVehicle
+!insert (RA_98807_CX4, V_9301_CX4) into RentalAgreementVehicle
+!insert (RA_98808_CX4, T_9103_CX4) into RentalAgreementVehicle
+!insert (RA_98809_CX4, V_9401_CX4) into RentalAgreementVehicle
+!insert (RA_98810_CX4, T_9101_CX4) into RentalAgreementVehicle
+!insert (RA_98811_CX4, V_9301_CX4) into RentalAgreementVehicle
+
+!insert (RA_98801_CX4, CUST_C_31_CX4) into RentalAgreementCustomer
+!insert (RA_98802_CX4, CUST_I_31_CX4) into RentalAgreementCustomer
+!insert (RA_98803_CX4, CUST_C_31_CX4) into RentalAgreementCustomer
+!insert (RA_98804_CX4, CUST_C_31_CX4) into RentalAgreementCustomer
+!insert (RA_98805_CX4, CUST_C_32_CX4) into RentalAgreementCustomer
+!insert (RA_98806_CX4, CUST_C_32_CX4) into RentalAgreementCustomer
+!insert (RA_98807_CX4, CUST_C_32_CX4) into RentalAgreementCustomer
+!insert (RA_98808_CX4, CUST_C_31_CX4) into RentalAgreementCustomer
+!insert (RA_98809_CX4, CUST_I_31_CX4) into RentalAgreementCustomer
+!insert (RA_98810_CX4, CUST_C_31_CX4) into RentalAgreementCustomer
+!insert (RA_98811_CX4, CUST_C_32_CX4) into RentalAgreementCustomer
+

@@ -1,0 +1,133 @@
+!new Currency('currencyCURX_BTC2')
+!currencyCURX_BTC2.name := 'Bitcoin'
+!currencyCURX_BTC2.abbreviation := 'BTC'
+
+!new Currency('currencyCURY_ISK2')
+!currencyCURY_ISK2.name := 'Icelandic Króna'
+!currencyCURY_ISK2.abbreviation := 'ISK'
+
+!new Currency('currencyCURZ_MAD2')
+!currencyCURZ_MAD2.name := 'Moroccan Dirham'
+!currencyCURZ_MAD2.abbreviation := 'MAD'
+
+!new Expense('expenseEXPEDGE004_2')
+!expenseEXPEDGE004_2.amount := 0.00000001
+!expenseEXPEDGE004_2.startDate := Date('9999-12-31')
+!expenseEXPEDGE004_2.endDate := Date('9999-12-31')
+
+!new Bill('billEXPEDGE004_2_BILL401')
+!billEXPEDGE004_2_BILL401.amount := 0.00000001
+!billEXPEDGE004_2_BILL401.category := 'On-chain fee (1 satoshi equivalent)'
+!billEXPEDGE004_2_BILL401.date := Date('9999-12-31')
+!billEXPEDGE004_2_BILL401.paymentMethod := #CREDIT_CARD
+!billEXPEDGE004_2_BILL401.status := #VERIFIED
+
+!insert (expenseEXPEDGE004_2, billEXPEDGE004_2_BILL401) into ExpenseContainsBills
+!insert (billEXPEDGE004_2_BILL401, currencyCURX_BTC2) into BillCurrency
+
+!new Expense('expenseEXPEDGE005_2')
+!expenseEXPEDGE005_2.amount := 40201.00
+!expenseEXPEDGE005_2.startDate := Date('2026-01-01')
+!expenseEXPEDGE005_2.endDate := Date('2026-01-31')
+
+!new Bill('billEXPEDGE005_2_BILL501')
+!billEXPEDGE005_2_BILL501.amount := 199.99
+!billEXPEDGE005_2_BILL501.category := 'Riad lodging (مبيت رياض)'
+!billEXPEDGE005_2_BILL501.date := Date('2025-12-15')
+!billEXPEDGE005_2_BILL501.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL501.status := #PENDING
+
+!new Bill('billEXPEDGE005_2_BILL502')
+!billEXPEDGE005_2_BILL502.amount := 0.01
+!billEXPEDGE005_2_BILL502.category := 'Local tax rounding remainder'
+!billEXPEDGE005_2_BILL502.date := Date('2026-02-01')
+!billEXPEDGE005_2_BILL502.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL502.status := #VALIDATED
+
+!new Bill('billEXPEDGE005_2_BILL503')
+!billEXPEDGE005_2_BILL503.amount := 35000.00
+!billEXPEDGE005_2_BILL503.category := 'Geothermal spa entry (Bláa lónið)'
+!billEXPEDGE005_2_BILL503.date := Date('2026-01-10')
+!billEXPEDGE005_2_BILL503.paymentMethod := #CREDIT_CARD
+!billEXPEDGE005_2_BILL503.status := #VALIDATED
+
+!new Bill('billEXPEDGE005_2_BILL504')
+!billEXPEDGE005_2_BILL504.amount := 1.00
+!billEXPEDGE005_2_BILL504.category := 'Parking meter test charge'
+!billEXPEDGE005_2_BILL504.date := Date('2026-01-11')
+!billEXPEDGE005_2_BILL504.paymentMethod := #CHECK
+!billEXPEDGE005_2_BILL504.status := #DRAFT
+
+!new Bill('billEXPEDGE005_2_BILL505')
+!billEXPEDGE005_2_BILL505.amount := 0.00
+!billEXPEDGE005_2_BILL505.category := 'Duplicate scan rejected'
+!billEXPEDGE005_2_BILL505.date := Date('2026-01-12')
+!billEXPEDGE005_2_BILL505.paymentMethod := #CREDIT_CARD
+!billEXPEDGE005_2_BILL505.status := #REFUSED
+
+!new Bill('billEXPEDGE005_2_BILL506')
+!billEXPEDGE005_2_BILL506.amount := 5000.00
+!billEXPEDGE005_2_BILL506.category := 'Archival service fee — extremely delayed invoicing / seirbhís chartlainne / خدمة الأرشفة'
+!billEXPEDGE005_2_BILL506.date := Date('1800-01-01')
+!billEXPEDGE005_2_BILL506.paymentMethod := #CASH
+!billEXPEDGE005_2_BILL506.status := #VERIFIED
+
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL501) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL502) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL503) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL504) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL505) into ExpenseContainsBills
+!insert (expenseEXPEDGE005_2, billEXPEDGE005_2_BILL506) into ExpenseContainsBills
+
+!insert (billEXPEDGE005_2_BILL501, currencyCURZ_MAD2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL502, currencyCURZ_MAD2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL503, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL504, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL505, currencyCURY_ISK2) into BillCurrency
+!insert (billEXPEDGE005_2_BILL506, currencyCURY_ISK2) into BillCurrency
+
+!new Comment('commentEXPEDGE005_2_COM501')
+!commentEXPEDGE005_2_COM501.text := 'Bills intentionally include dates before and after the expense period to test validation gaps.'
+
+!new Comment('commentEXPEDGE005_2_COM502')
+!commentEXPEDGE005_2_COM502.text := ''
+
+!new Comment('commentEXPEDGE005_2_COM503')
+!commentEXPEDGE005_2_COM503.text := 'Cross-currency total is nonsensical financially but valid per model (sum of Real amounts only).'
+
+!new Comment('commentEXPEDGE005_2_COM504')
+!commentEXPEDGE005_2_COM504.text := 'Ath.: ISK bills include decimals even though the real currency often does not; allowed by Real.'
+
+!new Comment('commentEXPEDGE005_2_COM505')
+!commentEXPEDGE005_2_COM505.text := 'Nota en español: revisar el recibo del año 1800; es un caso extremo deliberado.'
+
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM501) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM502) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM503) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM504) into ExpenseComment
+!insert (expenseEXPEDGE005_2, commentEXPEDGE005_2_COM505) into ExpenseComment
+
+!new Expense('expenseEXPEDGE006_2')
+!expenseEXPEDGE006_2.amount := 1.00
+!expenseEXPEDGE006_2.startDate := Date('1582-10-15')
+!expenseEXPEDGE006_2.endDate := Date('1582-10-04')
+
+!new Bill('billEXPEDGE006_2_BILL601')
+!billEXPEDGE006_2_BILL601.amount := 0.50
+!billEXPEDGE006_2_BILL601.category := 'Historical per diem half-unit'
+!billEXPEDGE006_2_BILL601.date := Date('1582-10-04')
+!billEXPEDGE006_2_BILL601.paymentMethod := #CHECK
+!billEXPEDGE006_2_BILL601.status := #PENDING
+
+!new Bill('billEXPEDGE006_2_BILL602')
+!billEXPEDGE006_2_BILL602.amount := 0.50
+!billEXPEDGE006_2_BILL602.category := 'Archivo fee / رسوم الأرشيف'
+!billEXPEDGE006_2_BILL602.date := Date('1582-10-15')
+!billEXPEDGE006_2_BILL602.paymentMethod := #CASH
+!billEXPEDGE006_2_BILL602.status := #DRAFT
+
+!insert (expenseEXPEDGE006_2, billEXPEDGE006_2_BILL601) into ExpenseContainsBills
+!insert (expenseEXPEDGE006_2, billEXPEDGE006_2_BILL602) into ExpenseContainsBills
+
+!insert (billEXPEDGE006_2_BILL601, currencyCURX_BTC2) into BillCurrency
+!insert (billEXPEDGE006_2_BILL602, currencyCURY_ISK2) into BillCurrency

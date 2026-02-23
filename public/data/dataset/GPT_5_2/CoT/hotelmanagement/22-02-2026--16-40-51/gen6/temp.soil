@@ -1,0 +1,140 @@
+!new FreeRoomTypesDTO('D65')
+!D65.roomTypeDescription := 'Twin room (basic, no view)'
+!D65.numBeds := 2
+!D65.pricePerNight := 0.01
+!D65.numFreeRooms := 1000000
+
+!new Customer('C39')
+!C39.firstName := 'Μαρία'
+!C39.lastName := 'Παπαδοπούλου'
+
+!new Booking('B10_BIGROOMS')
+!B10_BIGROOMS.startDate := '2026-09-09'
+!B10_BIGROOMS.endDate := '2026-09-10'
+!B10_BIGROOMS.canceled := false
+!B10_BIGROOMS.bookingId := 8
+!B10_BIGROOMS.confirmed := true
+
+!new RoomReservation('R16_BIGROOMS')
+!R16_BIGROOMS.checkInDate := '2026-09-09'
+!R16_BIGROOMS.checkOutDate := '2026-09-10'
+
+!new Room('RM_MIN_R16')
+!RM_MIN_R16.numBeds := 2
+!RM_MIN_R16.pricePerNight := 0.01
+!RM_MIN_R16.occupied := false
+!RM_MIN_R16.blocked := false
+!RM_MIN_R16.roomNumber := -2147483647
+
+!new Room('RM601_R16')
+!RM601_R16.numBeds := 2
+!RM601_R16.pricePerNight := 0.01
+!RM601_R16.occupied := true
+!RM601_R16.blocked := false
+!RM601_R16.roomNumber := 601
+
+!new Room('RM602_R16')
+!RM602_R16.numBeds := 2
+!RM602_R16.pricePerNight := 0.01
+!RM602_R16.occupied := true
+!RM602_R16.blocked := false
+!RM602_R16.roomNumber := 602
+
+!new Room('RM603_R16')
+!RM603_R16.numBeds := 2
+!RM603_R16.pricePerNight := 0.01
+!RM603_R16.occupied := false
+!RM603_R16.blocked := false
+!RM603_R16.roomNumber := 603
+
+!new Room('RM604_R16')
+!RM604_R16.numBeds := 2
+!RM604_R16.pricePerNight := 0.01
+!RM604_R16.occupied := false
+!RM604_R16.blocked := true
+!RM604_R16.roomNumber := 604
+
+!new Room('RM605_R16')
+!RM605_R16.numBeds := 2
+!RM605_R16.pricePerNight := 0.01
+!RM605_R16.occupied := true
+!RM605_R16.blocked := false
+!RM605_R16.roomNumber := 605
+
+!new Room('RM606_R16')
+!RM606_R16.numBeds := 2
+!RM606_R16.pricePerNight := 0.01
+!RM606_R16.occupied := false
+!RM606_R16.blocked := false
+!RM606_R16.roomNumber := 606
+
+!new Room('RM607_R16')
+!RM607_R16.numBeds := 2
+!RM607_R16.pricePerNight := 0.01
+!RM607_R16.occupied := false
+!RM607_R16.blocked := true
+!RM607_R16.roomNumber := 607
+
+!new Room('RM608_R16')
+!RM608_R16.numBeds := 2
+!RM608_R16.pricePerNight := 0.01
+!RM608_R16.occupied := true
+!RM608_R16.blocked := false
+!RM608_R16.roomNumber := 608
+
+!new Room('RM609_R16')
+!RM609_R16.numBeds := 2
+!RM609_R16.pricePerNight := 0.01
+!RM609_R16.occupied := false
+!RM609_R16.blocked := false
+!RM609_R16.roomNumber := 609
+
+!new Room('RM610_R16')
+!RM610_R16.numBeds := 2
+!RM610_R16.pricePerNight := 0.01
+!RM610_R16.occupied := true
+!RM610_R16.blocked := false
+!RM610_R16.roomNumber := 610
+
+!new Room('RM611_R16')
+!RM611_R16.numBeds := 2
+!RM611_R16.pricePerNight := 0.01
+!RM611_R16.occupied := false
+!RM611_R16.blocked := false
+!RM611_R16.roomNumber := 611
+
+!new Bill('BL16_B10')
+!BL16_B10.price := 0.12
+!BL16_B10.billId := 60010
+
+!new Customer('C40')
+!C40.firstName := 'Wanjiku'
+!C40.lastName := 'Mwangi'
+
+!new Booking('B11_CONF_EMPTY')
+!B11_CONF_EMPTY.startDate := '2026-05-05'
+!B11_CONF_EMPTY.endDate := '2026-05-05'
+!B11_CONF_EMPTY.canceled := false
+!B11_CONF_EMPTY.bookingId := 9
+!B11_CONF_EMPTY.confirmed := true
+
+!insert (B10_BIGROOMS, C39) into BookingCustomer
+!insert (B11_CONF_EMPTY, C40) into BookingCustomer
+
+!insert (B10_BIGROOMS, R16_BIGROOMS) into BookingRoomReservation
+
+!insert (R16_BIGROOMS, RM_MIN_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM601_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM602_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM603_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM604_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM605_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM606_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM607_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM608_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM609_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM610_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM611_R16) into RoomReservationRoom
+
+!insert (B10_BIGROOMS, BL16_B10) into BookingBill
+!insert (BL16_B10, R16_BIGROOMS) into BillRoomReservation

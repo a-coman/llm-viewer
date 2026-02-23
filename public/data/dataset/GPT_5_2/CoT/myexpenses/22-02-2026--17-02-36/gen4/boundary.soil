@@ -1,0 +1,59 @@
+!new Currency('currencyISK')
+!currencyISK.name := 'Icelandic Króna'
+!currencyISK.abbreviation := 'ISK'
+
+!new Expense('expenseEOneBillZero')
+!expenseEOneBillZero.amount := 0.00
+!expenseEOneBillZero.startDate := Date('1970-01-01')
+!expenseEOneBillZero.endDate := Date('1970-01-01')
+
+!new Bill('billEOneBillZeroOnly')
+!billEOneBillZeroOnly.amount := 0.00
+!billEOneBillZeroOnly.category := 'Reissued receipt (no charge)'
+!billEOneBillZeroOnly.date := Date('1970-01-01')
+!billEOneBillZeroOnly.paymentMethod := #CREDIT_CARD
+!billEOneBillZeroOnly.status := #VALIDATED
+
+!insert (expenseEOneBillZero, billEOneBillZeroOnly) into ExpenseContainsBills
+!insert (billEOneBillZeroOnly, currencyISK) into BillCurrency
+
+!new Comment('commentEOneBillZeroC1')
+!commentEOneBillZeroC1.text := 'Created as a zero-amount test case for audit: one bill only.'
+
+!new Comment('commentEOneBillZeroC2')
+!commentEOneBillZeroC2.text := 'Frais à 0,00 : document réémis, aucun paiement effectué.'
+
+!new Comment('commentEOneBillZeroC3')
+!commentEOneBillZeroC3.text := 'End date equals start date to represent a single-day expense period.'
+
+!new Comment('commentEOneBillZeroC4')
+!commentEOneBillZeroC4.text := 'Currency chosen: ISK to validate handling of less common currencies.'
+
+!new Comment('commentEOneBillZeroC5')
+!commentEOneBillZeroC5.text := 'Bill is marked VALIDATED despite 0.00 because it represents a corrected document.'
+
+!new Comment('commentEOneBillZeroC6')
+!commentEOneBillZeroC6.text := 'Internal control note: no reimbursement should be generated.'
+
+!new Comment('commentEOneBillZeroC7')
+!commentEOneBillZeroC7.text := 'Gögnin eru aðeins til prófunar í kerfinu.'
+
+!new Comment('commentEOneBillZeroC8')
+!commentEOneBillZeroC8.text := 'Ensure downstream export keeps 0.00 without dropping the line item.'
+
+!new Comment('commentEOneBillZeroC9')
+!commentEOneBillZeroC9.text := 'Single bill satisfies non-empty composition edge case.'
+
+!new Comment('commentEOneBillZeroC10')
+!commentEOneBillZeroC10.text := 'If validation rules change, keep this as a regression fixture.'
+
+!insert (expenseEOneBillZero, commentEOneBillZeroC1) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC2) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC3) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC4) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC5) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC6) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC7) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC8) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC9) into ExpenseComment
+!insert (expenseEOneBillZero, commentEOneBillZeroC10) into ExpenseComment

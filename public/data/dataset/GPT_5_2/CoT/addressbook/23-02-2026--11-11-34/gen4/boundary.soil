@@ -1,0 +1,35 @@
+!new AddressBook('AB_MinimumParts_OneLink_1')
+
+!new Person('P_ZW_1')
+!P_ZW_1.name := '张伟'
+!P_ZW_1.phone := '+86 10 0000 0000'
+!P_ZW_1.website := ''
+!P_ZW_1.email := 'zhang.wei@example.cn'
+!P_ZW_1.title := 'Dr.'
+!insert (AB_MinimumParts_OneLink_1, P_ZW_1) into AddressBookMadeOfContact
+
+!new Company('C_Kaitiaki_1')
+!C_Kaitiaki_1.name := 'Kaitiaki Energy Ltd.'
+!C_Kaitiaki_1.phone := '+64 9 000 0000'
+!C_Kaitiaki_1.website := 'https://kaitiaki.example.nz'
+!C_Kaitiaki_1.email := ''
+!C_Kaitiaki_1.industry := 'Renewable Energy'
+!insert (AB_MinimumParts_OneLink_1, C_Kaitiaki_1) into AddressBookMadeOfContact
+
+!new Note('Note_P_ZW_N1_1')
+!Note_P_ZW_N1_1.author := ''
+!Note_P_ZW_N1_1.time := Date('1970-01-01')
+!Note_P_ZW_N1_1.type := #CALL
+!Note_P_ZW_N1_1.comment := ''
+!insert (P_ZW_1, Note_P_ZW_N1_1) into ContactContainsNote
+
+!new Address('Addr_P_ZW_A1_1')
+!Addr_P_ZW_A1_1.city := ''
+!Addr_P_ZW_A1_1.street := ''
+!Addr_P_ZW_A1_1.houseNr := ''
+!insert (P_ZW_1, Addr_P_ZW_A1_1) into ContactContainsAddress
+
+!new Relationship('Rel_P_ZW_R1_1')
+!Rel_P_ZW_R1_1.type := #EMPLOYEE
+!insert (P_ZW_1, Rel_P_ZW_R1_1) into ContactToRelationship
+!insert (Rel_P_ZW_R1_1, C_Kaitiaki_1) into RelationshipToContact

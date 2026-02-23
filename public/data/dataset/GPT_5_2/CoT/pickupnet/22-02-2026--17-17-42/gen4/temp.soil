@@ -1,0 +1,127 @@
+!new Station('S5_HUBOPS_EDGE4')
+!new Station('S6_CUSTONLY_EDGE4')
+!new Station('S7_CUSTONLY_EDGE4')
+
+!new Driver('EDGE4_D50')
+!EDGE4_D50.id := 'DRV-EDGE-050'
+!EDGE4_D50.name := 'Samir Haddad'
+
+!new Driver('EDGE4_D51')
+!EDGE4_D51.id := 'DRV-EDGE-051'
+!EDGE4_D51.name := 'Samir Haddad'
+
+!new Driver('EDGE4_D52')
+!EDGE4_D52.id := 'DRV-EDGE-052'
+!EDGE4_D52.name := 'Inés Fernández'
+
+!insert (S5_HUBOPS_EDGE4, EDGE4_D50) into StationContainsDriver
+!insert (S5_HUBOPS_EDGE4, EDGE4_D51) into StationContainsDriver
+!insert (S5_HUBOPS_EDGE4, EDGE4_D52) into StationContainsDriver
+
+!new Customer('EDGE4_C30')
+!EDGE4_C30.id := 'CUS-EDGE-3001'
+!EDGE4_C30.name := 'Xóchitl Hernández'
+!EDGE4_C30.twitterUserName := '@xochitl_oax'
+
+!new Customer('EDGE4_C31')
+!EDGE4_C31.id := 'CUS-EDGE-3002'
+!EDGE4_C31.name := 'Nguyễn Hữu An'
+!EDGE4_C31.twitterUserName := '@an_nguyen_vn'
+
+!new Customer('EDGE4_C32')
+!EDGE4_C32.id := 'CUS-EDGE-3003'
+!EDGE4_C32.name := 'Bryndís Jónsdóttir'
+!EDGE4_C32.twitterUserName := '@bryndis_is'
+
+!insert (S6_CUSTONLY_EDGE4, EDGE4_C30) into StationContainsCustomer
+!insert (S6_CUSTONLY_EDGE4, EDGE4_C31) into StationContainsCustomer
+!insert (S7_CUSTONLY_EDGE4, EDGE4_C32) into StationContainsCustomer
+
+!new Address('EDGE4_A301')
+!EDGE4_A301.text := 'Side door (no signage), Calle de Bolívar, Centro Histórico, Ciudad de México, México'
+!new GeoLocation('EDGE4_GL301')
+!EDGE4_GL301.latitude := 19.4326077
+!EDGE4_GL301.longitude := -99.1332080
+!insert (EDGE4_A301, EDGE4_GL301) into AddressContainsGeoLocation
+
+!new Address('EDGE4_A302')
+!EDGE4_A302.text := 'PO Box 0 (general delivery), Reykjavík 101, Iceland'
+!new GeoLocation('EDGE4_GL302')
+!EDGE4_GL302.latitude := 64.1465820
+!EDGE4_GL302.longitude := -21.9426354
+!insert (EDGE4_A302, EDGE4_GL302) into AddressContainsGeoLocation
+
+!new Address('EDGE4_A303')
+!EDGE4_A303.text := ''
+!new GeoLocation('EDGE4_GL303')
+!EDGE4_GL303.latitude := -0.0
+!EDGE4_GL303.longitude := 0.0
+!insert (EDGE4_A303, EDGE4_GL303) into AddressContainsGeoLocation
+
+!new Address('EDGE4_A304')
+!EDGE4_A304.text := 'Ridge trail marker “7A”, Sơn Đoòng perimeter staging area, Quảng Bình, Việt Nam'
+!new GeoLocation('EDGE4_GL304')
+!EDGE4_GL304.latitude := 17.452389123456
+!EDGE4_GL304.longitude := 106.287441654321
+!insert (EDGE4_A304, EDGE4_GL304) into AddressContainsGeoLocation
+
+!new Shipment('EDGE4_SHP3001')
+!EDGE4_SHP3001.id := 'SHP-EDGE-3001'
+!EDGE4_SHP3001.status := #NEW
+
+!new Shipment('EDGE4_SHP3002')
+!EDGE4_SHP3002.id := 'SHP-EDGE-3002'
+!EDGE4_SHP3002.status := #UNDERWAY
+
+!new Shipment('EDGE4_SHP3003')
+!EDGE4_SHP3003.id := 'SHP-EDGE-3003'
+!EDGE4_SHP3003.status := #DELIVERED
+
+!new Shipment('EDGE4_SHP3004')
+!EDGE4_SHP3004.id := 'SHP-EDGE-3004'
+!EDGE4_SHP3004.status := #ASSIGNED
+
+!new Shipment('EDGE4_SHP3005')
+!EDGE4_SHP3005.id := 'SHP-EDGE-3005'
+!EDGE4_SHP3005.status := #DELIVERED
+
+!new Shipment('EDGE4_SHP3006')
+!EDGE4_SHP3006.id := 'SHP-EDGE-3006'
+!EDGE4_SHP3006.status := #NEW
+
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3001) into StationShipment
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3002) into StationShipment
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3003) into StationShipment
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3004) into StationShipment
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3005) into StationShipment
+!insert (S5_HUBOPS_EDGE4, EDGE4_SHP3006) into StationShipment
+
+!insert (EDGE4_C30, EDGE4_SHP3001) into CustomerConsistsOfShipment
+!insert (EDGE4_C30, EDGE4_SHP3002) into CustomerConsistsOfShipment
+!insert (EDGE4_C31, EDGE4_SHP3003) into CustomerConsistsOfShipment
+!insert (EDGE4_C31, EDGE4_SHP3004) into CustomerConsistsOfShipment
+!insert (EDGE4_C32, EDGE4_SHP3005) into CustomerConsistsOfShipment
+!insert (EDGE4_C32, EDGE4_SHP3006) into CustomerConsistsOfShipment
+
+!insert (EDGE4_SHP3001, EDGE4_A301) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3001, EDGE4_A302) into ShipmentContainsDeliveryAddress
+!insert (EDGE4_D50, EDGE4_SHP3001) into DriverShipment
+
+!insert (EDGE4_SHP3002, EDGE4_A301) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3002, EDGE4_A302) into ShipmentContainsDeliveryAddress
+!insert (EDGE4_D50, EDGE4_SHP3002) into DriverShipment
+
+!insert (EDGE4_SHP3003, EDGE4_A301) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3003, EDGE4_A303) into ShipmentContainsDeliveryAddress
+!insert (EDGE4_D50, EDGE4_SHP3003) into DriverShipment
+
+!insert (EDGE4_SHP3004, EDGE4_A303) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3004, EDGE4_A302) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE4_SHP3005, EDGE4_A304) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3005, EDGE4_A302) into ShipmentContainsDeliveryAddress
+!insert (EDGE4_D52, EDGE4_SHP3005) into DriverShipment
+
+!insert (EDGE4_SHP3006, EDGE4_A302) into ShipmentContainsPickUpAddress
+!insert (EDGE4_SHP3006, EDGE4_A301) into ShipmentContainsDeliveryAddress
+!insert (EDGE4_D50, EDGE4_SHP3006) into DriverShipment

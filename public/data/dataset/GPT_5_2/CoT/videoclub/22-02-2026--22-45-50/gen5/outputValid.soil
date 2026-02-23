@@ -1,0 +1,498 @@
+!new Client('clientC40')
+!clientC40.clientId := 44
+!clientC40.isSuspended := false
+
+!new Client('clientC41')
+!clientC41.clientId := 1201
+!clientC41.isSuspended := true
+
+!new Client('clientC42')
+!clientC42.clientId := 318
+!clientC42.isSuspended := false
+
+!new Client('clientC43')
+!clientC43.clientId := 9
+!clientC43.isSuspended := false
+
+!new Rental('rentalR40')
+!rentalR40.date := Date('2023-08-14')
+
+!new Rental('rentalR41')
+!rentalR41.date := Date('2023-08-20')
+
+!new Rental('rentalR42')
+!rentalR42.date := Date('2023-09-02')
+
+!new Movie('movieM40')
+!movieM40.title := 'Whānau Warriors'
+!movieM40.availableCopies := 2
+!movieM40.genre := #Action
+
+!new Movie('movieM41')
+!movieM41.title := 'Sauna Sitcom'
+!movieM41.availableCopies := 0
+!movieM41.genre := #Comedy
+
+!new Movie('movieM42')
+!movieM42.title := 'Steppe Chase'
+!movieM42.availableCopies := 6
+!movieM42.genre := #Action
+
+!new Series('seriesS40')
+!seriesS40.title := 'Orbital Classroom'
+!seriesS40.availableCopies := 1
+!seriesS40.episode := 2
+
+!new Series('seriesS41')
+!seriesS41.title := 'Orbital Classroom'
+!seriesS41.availableCopies := 1
+!seriesS41.episode := 7
+
+!new Series('seriesS42')
+!seriesS42.title := 'Orbital Classroom'
+!seriesS42.availableCopies := 3
+!seriesS42.episode := 1
+
+!new Actor('actorA40')
+!actorA40.name := 'Hine Te Rangi'
+
+!new Actor('actorA41')
+!actorA41.name := 'Joon-ho Park'
+
+!new Actor('actorA42')
+!actorA42.name := 'Aino Kallio'
+
+!new Actor('actorA43')
+!actorA43.name := 'Batbayar Enkh'
+
+!new Actor('actorA44')
+!actorA44.name := 'Lara Nascimento'
+
+!new Actor('actorA45')
+!actorA45.name := 'Samir Qureshi'
+
+!new Actor('actorA46')
+!actorA46.name := 'Eleni Papadakis'
+
+!insert (clientC40, rentalR40) into ClientRental
+!insert (clientC40, rentalR41) into ClientRental
+!insert (clientC43, rentalR42) into ClientRental
+
+!insert (rentalR40, movieM40) into RentalCassette
+!insert (rentalR40, movieM41) into RentalCassette
+!insert (rentalR40, seriesS40) into RentalCassette
+!insert (rentalR40, seriesS41) into RentalCassette
+!insert (rentalR40, seriesS42) into RentalCassette
+
+!insert (rentalR41, movieM40) into RentalCassette
+
+!insert (rentalR42, seriesS41) into RentalCassette
+
+!insert (movieM40, actorA40) into CassetteActor
+!insert (movieM40, actorA41) into CassetteActor
+
+!insert (movieM41, actorA42) into CassetteActor
+
+!insert (movieM42, actorA43) into CassetteActor
+!insert (movieM42, actorA44) into CassetteActor
+!insert (movieM42, actorA40) into CassetteActor
+
+!insert (seriesS40, actorA45) into CassetteActor
+
+!insert (seriesS41, actorA41) into CassetteActor
+!insert (seriesS41, actorA46) into CassetteActor
+
+!insert (seriesS42, actorA40) into CassetteActor
+
+!new Client('clientMinC40')
+!clientMinC40.clientId := 7
+!clientMinC40.isSuspended := true
+
+!new Rental('rentalMinR40')
+!rentalMinR40.date := Date('1582-10-15')
+
+!new Series('seriesMinS40')
+!seriesMinS40.title := 'Ngā Wāhanga Tuatahi'
+!seriesMinS40.availableCopies := 0
+!seriesMinS40.episode := 1
+
+!new Actor('actorMinA40')
+!actorMinA40.name := 'Þórður Jónsson'
+
+!insert (clientMinC40, rentalMinR40) into ClientRental
+!insert (rentalMinR40, seriesMinS40) into RentalCassette
+!insert (seriesMinS40, actorMinA40) into CassetteActor
+
+!new Client('clientComplex5C40')
+!clientComplex5C40.clientId := 901
+!clientComplex5C40.isSuspended := false
+
+!new Client('clientComplex5C41')
+!clientComplex5C41.clientId := 902
+!clientComplex5C41.isSuspended := false
+
+!new Client('clientComplex5C42')
+!clientComplex5C42.clientId := 903
+!clientComplex5C42.isSuspended := false
+
+!new Client('clientComplex5C43')
+!clientComplex5C43.clientId := 904
+!clientComplex5C43.isSuspended := true
+
+!new Client('clientComplex5C44')
+!clientComplex5C44.clientId := 905
+!clientComplex5C44.isSuspended := false
+
+!new Movie('movieComplex5M40')
+!movieComplex5M40.title := 'Koru Coast Pursuit'
+!movieComplex5M40.availableCopies := 1
+!movieComplex5M40.genre := #Action
+
+!new Movie('movieComplex5M41')
+!movieComplex5M41.title := 'Bangkok Banana Split'
+!movieComplex5M41.availableCopies := 0
+!movieComplex5M41.genre := #Comedy
+
+!new Movie('movieComplex5M42')
+!movieComplex5M42.title := 'Aurora Freight Run'
+!movieComplex5M42.availableCopies := 3
+!movieComplex5M42.genre := #Action
+
+!new Movie('movieComplex5M43')
+!movieComplex5M43.title := 'Carnaval Confidential'
+!movieComplex5M43.availableCopies := 2
+!movieComplex5M43.genre := #Comedy
+
+!new Movie('movieComplex5M44')
+!movieComplex5M44.title := 'Red Dunes Extraction'
+!movieComplex5M44.availableCopies := 0
+!movieComplex5M44.genre := #Action
+
+!new Series('seriesComplex5S40')
+!seriesComplex5S40.title := 'Atlas Station — Season 1'
+!seriesComplex5S40.availableCopies := 2
+!seriesComplex5S40.episode := 1
+
+!new Series('seriesComplex5S41')
+!seriesComplex5S41.title := 'Atlas Station — Season 1'
+!seriesComplex5S41.availableCopies := 1
+!seriesComplex5S41.episode := 2
+
+!new Series('seriesComplex5S42')
+!seriesComplex5S42.title := 'Atlas Station — Season 1'
+!seriesComplex5S42.availableCopies := 0
+!seriesComplex5S42.episode := 3
+
+!new Series('seriesComplex5S43')
+!seriesComplex5S43.title := 'Atlas Station — Season 1'
+!seriesComplex5S43.availableCopies := 1
+!seriesComplex5S43.episode := 4
+
+!new Series('seriesComplex5S44')
+!seriesComplex5S44.title := 'Tuk Tuk Tales — Season 2'
+!seriesComplex5S44.availableCopies := 4
+!seriesComplex5S44.episode := 9
+
+!new Series('seriesComplex5S45')
+!seriesComplex5S45.title := 'Tuk Tuk Tales — Season 2'
+!seriesComplex5S45.availableCopies := 0
+!seriesComplex5S45.episode := 10
+
+!new Series('seriesComplex5S46')
+!seriesComplex5S46.title := 'Tuk Tuk Tales — Season 2'
+!seriesComplex5S46.availableCopies := 2
+!seriesComplex5S46.episode := 11
+
+!new Actor('actorComplex5A40')
+!actorComplex5A40.name := 'Tāne Mahuta'
+
+!new Actor('actorComplex5A41')
+!actorComplex5A41.name := 'Lucía Álvarez'
+
+!new Actor('actorComplex5A42')
+!actorComplex5A42.name := 'Somchai Kittipong'
+
+!new Actor('actorComplex5A43')
+!actorComplex5A43.name := 'Anika Singh'
+
+!new Actor('actorComplex5A44')
+!actorComplex5A44.name := 'Noah Qamaniq'
+
+!new Actor('actorComplex5A45')
+!actorComplex5A45.name := 'Élodie Martin'
+
+!new Actor('actorComplex5A46')
+!actorComplex5A46.name := 'Rashid Al-Khalil'
+
+!new Actor('actorComplex5A47')
+!actorComplex5A47.name := 'Camila Rojas'
+
+!new Actor('actorComplex5A48')
+!actorComplex5A48.name := 'Sakura Ito'
+
+!new Actor('actorComplex5A49')
+!actorComplex5A49.name := 'Oksana Petrenko'
+
+!new Rental('rentalComplex5R40')
+!rentalComplex5R40.date := Date('2025-08-29')
+
+!new Rental('rentalComplex5R41')
+!rentalComplex5R41.date := Date('2025-09-05')
+
+!new Rental('rentalComplex5R42')
+!rentalComplex5R42.date := Date('2025-09-06')
+
+!new Rental('rentalComplex5R43')
+!rentalComplex5R43.date := Date('2025-09-10')
+
+!new Rental('rentalComplex5R44')
+!rentalComplex5R44.date := Date('2025-10-01')
+
+!new Rental('rentalComplex5R45')
+!rentalComplex5R45.date := Date('2025-10-03')
+
+!new Rental('rentalComplex5R46')
+!rentalComplex5R46.date := Date('2025-11-15')
+
+!new Rental('rentalComplex5R47')
+!rentalComplex5R47.date := Date('2026-01-12')
+
+!new Rental('rentalComplex5R48')
+!rentalComplex5R48.date := Date('2026-02-02')
+
+!insert (clientComplex5C40, rentalComplex5R40) into ClientRental
+!insert (clientComplex5C40, rentalComplex5R41) into ClientRental
+!insert (clientComplex5C41, rentalComplex5R42) into ClientRental
+!insert (clientComplex5C42, rentalComplex5R43) into ClientRental
+!insert (clientComplex5C43, rentalComplex5R44) into ClientRental
+!insert (clientComplex5C44, rentalComplex5R45) into ClientRental
+!insert (clientComplex5C41, rentalComplex5R46) into ClientRental
+!insert (clientComplex5C42, rentalComplex5R47) into ClientRental
+!insert (clientComplex5C40, rentalComplex5R48) into ClientRental
+
+!insert (rentalComplex5R40, seriesComplex5S40) into RentalCassette
+!insert (rentalComplex5R40, seriesComplex5S41) into RentalCassette
+!insert (rentalComplex5R40, seriesComplex5S42) into RentalCassette
+!insert (rentalComplex5R40, seriesComplex5S43) into RentalCassette
+
+!insert (rentalComplex5R41, movieComplex5M40) into RentalCassette
+!insert (rentalComplex5R41, movieComplex5M41) into RentalCassette
+
+!insert (rentalComplex5R42, movieComplex5M41) into RentalCassette
+!insert (rentalComplex5R42, seriesComplex5S44) into RentalCassette
+
+!insert (rentalComplex5R43, movieComplex5M42) into RentalCassette
+
+!insert (rentalComplex5R44, seriesComplex5S45) into RentalCassette
+!insert (rentalComplex5R44, seriesComplex5S46) into RentalCassette
+!insert (rentalComplex5R44, movieComplex5M43) into RentalCassette
+
+!insert (rentalComplex5R45, movieComplex5M44) into RentalCassette
+!insert (rentalComplex5R45, seriesComplex5S44) into RentalCassette
+!insert (rentalComplex5R45, seriesComplex5S45) into RentalCassette
+
+!insert (rentalComplex5R46, seriesComplex5S40) into RentalCassette
+!insert (rentalComplex5R46, movieComplex5M42) into RentalCassette
+!insert (rentalComplex5R46, movieComplex5M43) into RentalCassette
+!insert (rentalComplex5R46, movieComplex5M44) into RentalCassette
+
+!insert (rentalComplex5R47, seriesComplex5S46) into RentalCassette
+
+!insert (rentalComplex5R48, movieComplex5M40) into RentalCassette
+!insert (rentalComplex5R48, seriesComplex5S44) into RentalCassette
+!insert (rentalComplex5R48, movieComplex5M44) into RentalCassette
+!insert (rentalComplex5R48, seriesComplex5S41) into RentalCassette
+!insert (rentalComplex5R48, movieComplex5M42) into RentalCassette
+
+!insert (movieComplex5M40, actorComplex5A40) into CassetteActor
+!insert (movieComplex5M40, actorComplex5A41) into CassetteActor
+
+!insert (movieComplex5M41, actorComplex5A41) into CassetteActor
+!insert (movieComplex5M41, actorComplex5A42) into CassetteActor
+
+!insert (movieComplex5M42, actorComplex5A43) into CassetteActor
+!insert (movieComplex5M42, actorComplex5A44) into CassetteActor
+!insert (movieComplex5M42, actorComplex5A40) into CassetteActor
+
+!insert (movieComplex5M43, actorComplex5A45) into CassetteActor
+!insert (movieComplex5M43, actorComplex5A46) into CassetteActor
+
+!insert (movieComplex5M44, actorComplex5A47) into CassetteActor
+!insert (movieComplex5M44, actorComplex5A42) into CassetteActor
+!insert (movieComplex5M44, actorComplex5A46) into CassetteActor
+
+!insert (seriesComplex5S40, actorComplex5A45) into CassetteActor
+!insert (seriesComplex5S40, actorComplex5A48) into CassetteActor
+
+!insert (seriesComplex5S41, actorComplex5A45) into CassetteActor
+!insert (seriesComplex5S41, actorComplex5A48) into CassetteActor
+!insert (seriesComplex5S41, actorComplex5A49) into CassetteActor
+
+!insert (seriesComplex5S42, actorComplex5A45) into CassetteActor
+!insert (seriesComplex5S42, actorComplex5A49) into CassetteActor
+
+!insert (seriesComplex5S43, actorComplex5A45) into CassetteActor
+!insert (seriesComplex5S43, actorComplex5A48) into CassetteActor
+
+!insert (seriesComplex5S44, actorComplex5A42) into CassetteActor
+!insert (seriesComplex5S44, actorComplex5A47) into CassetteActor
+
+!insert (seriesComplex5S45, actorComplex5A42) into CassetteActor
+!insert (seriesComplex5S45, actorComplex5A43) into CassetteActor
+!insert (seriesComplex5S45, actorComplex5A47) into CassetteActor
+
+!insert (seriesComplex5S46, actorComplex5A47) into CassetteActor
+!insert (seriesComplex5S46, actorComplex5A44) into CassetteActor
+
+!new Client('clientLoopC40')
+!clientLoopC40.clientId := 9
+!clientLoopC40.isSuspended := true
+
+!new Client('clientLoopC41')
+!clientLoopC41.clientId := 10
+!clientLoopC41.isSuspended := false
+
+!new Client('clientLoopC42')
+!clientLoopC42.clientId := 11
+!clientLoopC42.isSuspended := false
+
+!new Client('clientLoopC43')
+!clientLoopC43.clientId := 12
+!clientLoopC43.isSuspended := false
+
+!new Rental('rentalLoopR40')
+!rentalLoopR40.date := Date('today')
+
+!new Rental('rentalLoopR41')
+!rentalLoopR41.date := Date('2026年02月22日')
+
+!new Rental('rentalLoopR42')
+!rentalLoopR42.date := Date('22-02-2026')
+
+!new Rental('rentalLoopR43')
+!rentalLoopR43.date := Date('٢٠٢٦-٠٢-٢٢')
+
+!new Rental('rentalLoopR44')
+!rentalLoopR44.date := Date('Sun Feb 30 2025')
+
+!new Rental('rentalLoopR45')
+!rentalLoopR45.date := Date('2026/02/22 25:61')
+
+!new Rental('rentalLoopR46')
+!rentalLoopR46.date := Date('∞')
+
+!new Movie('movieLoopM40')
+!movieLoopM40.title := 'Two Lines\nOne Tape'
+!movieLoopM40.availableCopies := 0
+!movieLoopM40.genre := #Action
+
+!new Movie('movieLoopM41')
+!movieLoopM41.title := 'Короткий Смех'
+!movieLoopM41.availableCopies := 0
+!movieLoopM41.genre := #Comedy
+
+!new Movie('movieLoopM42')
+!movieLoopM42.title := 'สายลับเงียบ'
+!movieLoopM42.availableCopies := 0
+!movieLoopM42.genre := #Action
+
+!new Movie('movieLoopM43')
+!movieLoopM43.title := 'The Very, Very, Very Long Screening Title Used Only to Stress Old Inventory Printers and Receipts'
+!movieLoopM43.availableCopies := 1
+!movieLoopM43.genre := #Comedy
+
+!new Movie('movieLoopM44')
+!movieLoopM44.title := '   The Punctuation Trial: (A) [B] {C} — D!   '
+!movieLoopM44.availableCopies := 0
+!movieLoopM44.genre := #Action
+
+!new Movie('movieLoopM45')
+!movieLoopM45.title := 'Noche de Vidrio'
+!movieLoopM45.availableCopies := 2
+!movieLoopM45.genre := #Comedy
+
+!new Movie('movieLoopM46')
+!movieLoopM46.title := 'Heimsendir'
+!movieLoopM46.availableCopies := 0
+!movieLoopM46.genre := #Action
+
+!new Actor('actorLoopA50')
+!actorLoopA50.name := 'Fátima Al‑Sayeed'
+
+!new Actor('actorLoopA51')
+!actorLoopA51.name := 'Tāne Raukura'
+
+!new Actor('actorLoopA52')
+!actorLoopA52.name := 'Ewa Kowalska'
+
+!new Actor('actorLoopA53')
+!actorLoopA53.name := 'Somchai Prasert'
+
+!new Actor('actorLoopA54')
+!actorLoopA54.name := 'Inuk Qamaniq'
+
+!new Actor('actorLoopA55')
+!actorLoopA55.name := 'Noura Benali'
+
+!new Actor('actorLoopA56')
+!actorLoopA56.name := 'Miguel Ángel Soto'
+
+!new Actor('actorLoopA57')
+!actorLoopA57.name := 'Hanae Nakamura'
+
+!new Actor('actorLoopA58')
+!actorLoopA58.name := 'Sigríður Jónsdóttir'
+
+!insert (clientLoopC41, rentalLoopR40) into ClientRental
+!insert (clientLoopC42, rentalLoopR41) into ClientRental
+!insert (clientLoopC41, rentalLoopR42) into ClientRental
+!insert (clientLoopC42, rentalLoopR43) into ClientRental
+!insert (clientLoopC41, rentalLoopR44) into ClientRental
+!insert (clientLoopC42, rentalLoopR45) into ClientRental
+!insert (clientLoopC41, rentalLoopR46) into ClientRental
+
+!insert (rentalLoopR40, movieLoopM40) into RentalCassette
+!insert (rentalLoopR40, movieLoopM41) into RentalCassette
+
+!insert (rentalLoopR41, movieLoopM41) into RentalCassette
+!insert (rentalLoopR41, movieLoopM42) into RentalCassette
+
+!insert (rentalLoopR42, movieLoopM42) into RentalCassette
+!insert (rentalLoopR42, movieLoopM43) into RentalCassette
+
+!insert (rentalLoopR43, movieLoopM43) into RentalCassette
+!insert (rentalLoopR43, movieLoopM44) into RentalCassette
+
+!insert (rentalLoopR44, movieLoopM44) into RentalCassette
+!insert (rentalLoopR44, movieLoopM45) into RentalCassette
+
+!insert (rentalLoopR45, movieLoopM45) into RentalCassette
+!insert (rentalLoopR45, movieLoopM46) into RentalCassette
+
+!insert (rentalLoopR46, movieLoopM46) into RentalCassette
+!insert (rentalLoopR46, movieLoopM40) into RentalCassette
+
+!insert (movieLoopM40, actorLoopA50) into CassetteActor
+!insert (movieLoopM40, actorLoopA54) into CassetteActor
+
+!insert (movieLoopM41, actorLoopA50) into CassetteActor
+!insert (movieLoopM41, actorLoopA52) into CassetteActor
+
+!insert (movieLoopM42, actorLoopA50) into CassetteActor
+!insert (movieLoopM42, actorLoopA53) into CassetteActor
+
+!insert (movieLoopM43, actorLoopA50) into CassetteActor
+!insert (movieLoopM43, actorLoopA51) into CassetteActor
+!insert (movieLoopM43, actorLoopA55) into CassetteActor
+!insert (movieLoopM43, actorLoopA56) into CassetteActor
+!insert (movieLoopM43, actorLoopA57) into CassetteActor
+
+!insert (movieLoopM44, actorLoopA50) into CassetteActor
+!insert (movieLoopM44, actorLoopA58) into CassetteActor
+
+!insert (movieLoopM45, actorLoopA50) into CassetteActor
+!insert (movieLoopM45, actorLoopA56) into CassetteActor
+
+!insert (movieLoopM46, actorLoopA50) into CassetteActor
+!insert (movieLoopM46, actorLoopA57) into CassetteActor
+

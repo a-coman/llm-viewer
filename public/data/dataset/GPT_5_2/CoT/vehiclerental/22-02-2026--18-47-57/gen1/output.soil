@@ -1,0 +1,461 @@
+!new RentalOffice('RO_101')
+!RO_101.name := 'Sunshine Vehicle Rentals – Miami Airport'
+!RO_101.number := 101
+!RO_101.address := '3900 NW 25th St, Miami, FL 33142, USA'
+
+!new RentalOffice('RO_205')
+!RO_205.name := 'Front Range Vehicle Rentals – Denver'
+!RO_205.number := 205
+!RO_205.address := '2460 17th St, Denver, CO 80202, USA'
+
+!new Truck('V_5001')
+!V_5001.id := 5001
+!V_5001.registrationState := #FL
+!V_5001.licensePlateNumber := 'FL-TRK-8421'
+!V_5001.vehicleTypeCode := #TRUCK10
+!V_5001.registrationLastMaintenanceDate := Date('2026-01-12')
+!V_5001.expirationDate := Date('2026-12-31')
+!V_5001.odometerReading := 48320
+!V_5001.gasTankCapacity := 26.5
+!V_5001.workingRadio := true
+!V_5001.mileage := 17
+
+!new Vehicle('V_7802')
+!V_7802.id := 7802
+!V_7802.registrationState := #CO
+!V_7802.licensePlateNumber := 'CO-TRL-1907'
+!V_7802.vehicleTypeCode := #OPEN_TRAILER
+!V_7802.registrationLastMaintenanceDate := Date('2025-11-20')
+!V_7802.expirationDate := Date('2026-11-30')
+
+!new Individual('CUST_I_300')
+!CUST_I_300.name := 'María Elena Rivera'
+!CUST_I_300.address := '1180 SW 8th St, Miami, FL 33130, USA'
+!CUST_I_300.poorRisk := false
+!CUST_I_300.homePhone := '+1-305-555-0148'
+!CUST_I_300.driverLicenseState := #FL
+!CUST_I_300.driverLicenseNumber := 74219833
+!CUST_I_300.driverLicenseExpirationDate := Date('2028-06-15')
+
+!new Company('CUST_C_410')
+!CUST_C_410.name := 'Alpine Event Logistics, LLC'
+!CUST_C_410.address := '5600 Federal Blvd, Denver, CO 80221, USA'
+!CUST_C_410.poorRisk := false
+!CUST_C_410.idNumber := 91004577
+
+!new RentalAgreement('RA_9001')
+!RA_9001.number := 9001
+!RA_9001.rentalDate := Date('2026-02-10')
+!RA_9001.anticipatedDuration := 4
+!RA_9001.depositPaid := 250.0
+!RA_9001.quotedDailyRate := 89.99
+!RA_9001.quotedRatePerMile := 0.29
+
+!new RentalAgreement('RA_9002')
+!RA_9002.number := 9002
+!RA_9002.rentalDate := Date('2026-02-18')
+!RA_9002.anticipatedDuration := 2
+!RA_9002.depositPaid := 100.0
+!RA_9002.quotedDailyRate := 34.5
+!RA_9002.quotedRatePerMile := 0.0
+
+!insert (RO_101, V_5001) into RentalOfficeVehicle
+!insert (RO_205, V_7802) into RentalOfficeVehicle
+
+!insert (RO_101, RA_9001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_205, RA_9002) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_205, RA_9001) into RentalOfficeRentalAgreementDrop
+!insert (RO_205, RA_9002) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_9001, V_5001) into RentalAgreementVehicle
+!insert (RA_9002, V_7802) into RentalAgreementVehicle
+
+!insert (RA_9001, CUST_I_300) into RentalAgreementCustomer
+!insert (RA_9002, CUST_C_410) into RentalAgreementCustomer
+
+!new RentalOffice('RO_0')
+!RO_0.name := 'Downtown Minimal Depot'
+!RO_0.number := 0
+!RO_0.address := '1 Main St, Los Angeles, CA'
+
+!new RentalOffice('RO_1')
+!RO_1.name := 'Harbor Return Point'
+!RO_1.number := 1
+!RO_1.address := '2 Dock Rd, Wilmington, CA'
+
+!new RentalOffice('RO_2')
+!RO_2.name := 'Quiet Satellite Office'
+!RO_2.number := 2
+!RO_2.address := '3 Empty Ln, Dover, DE'
+
+!new Truck('T_0')
+!T_0.id := 0
+!T_0.registrationState := #FL
+!T_0.licensePlateNumber := '0'
+!T_0.vehicleTypeCode := #TRUCK10
+!T_0.registrationLastMaintenanceDate := Date('2026-01-01')
+!T_0.expirationDate := Date('2026-12-31')
+!T_0.odometerReading := 0
+!T_0.gasTankCapacity := 0.0
+!T_0.workingRadio := false
+!T_0.mileage := 0
+
+!new Individual('I_0')
+!I_0.name := 'Ana Núñez'
+!I_0.address := '4 Short St, Los Angeles, CA'
+!I_0.poorRisk := false
+!I_0.homePhone := '000-0000'
+!I_0.driverLicenseState := #CA
+!I_0.driverLicenseNumber := 0
+!I_0.driverLicenseExpirationDate := Date('2027-01-01')
+
+!new Company('C_0')
+!C_0.name := 'Société Zéro'
+!C_0.address := '5 Rue Min, Dover, DE'
+!C_0.poorRisk := true
+!C_0.idNumber := 0
+
+!new RentalAgreement('RA_0')
+!RA_0.number := 0
+!RA_0.rentalDate := Date('2026-01-02')
+!RA_0.anticipatedDuration := 0
+!RA_0.depositPaid := 0.0
+!RA_0.quotedDailyRate := 0.0
+!RA_0.quotedRatePerMile := 0.0
+
+!insert (RO_0, T_0) into RentalOfficeVehicle
+
+!insert (RO_0, RA_0) into RentalOfficeRentalAgreementOrigin
+!insert (RO_1, RA_0) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_0, T_0) into RentalAgreementVehicle
+!insert (RA_0, I_0) into RentalAgreementCustomer
+
+!new RentalOffice('RO_edge1')
+!RO_edge1.name := 'Downtown Satellite Kiosk'
+!RO_edge1.number := 0
+!RO_edge1.address := '1½ Market St, Wilmington, DE 19801'
+
+!new RentalOffice('RO_edge2')
+!RO_edge2.name := 'Interstate Drop Yard'
+!RO_edge2.number := 999999
+!RO_edge2.address := 'Exit 7 Service Rd, Dover, DE 19901'
+
+!new Truck('V_edge1')
+!V_edge1.id := 1
+!V_edge1.registrationState := #AK
+!V_edge1.licensePlateNumber := 'AK-000000'
+!V_edge1.vehicleTypeCode := #TRUCK10
+!V_edge1.registrationLastMaintenanceDate := Date('2026-02-21')
+!V_edge1.expirationDate := Date('2025-01-01')
+!V_edge1.odometerReading := 0
+!V_edge1.gasTankCapacity := 0.0
+!V_edge1.workingRadio := false
+!V_edge1.mileage := 0
+
+!new Individual('C_edge1')
+!C_edge1.name := 'María-José Núñez'
+!C_edge1.address := 'Unit B, 12 Orange St, Dover, DE 19901'
+!C_edge1.poorRisk := true
+!C_edge1.homePhone := '+1-302-555-0100'
+!C_edge1.driverLicenseState := #CA
+!C_edge1.driverLicenseNumber := 0
+!C_edge1.driverLicenseExpirationDate := Date('2000-01-01')
+
+!new Company('C_edge2')
+!C_edge2.name := 'Kalaallit Logistics LLC'
+!C_edge2.address := 'Harbor Rd 5, Dover, DE 19904'
+!C_edge2.poorRisk := false
+!C_edge2.idNumber := 0
+
+!new RentalAgreement('RA_1000000')
+!RA_1000000.number := 1000000
+!RA_1000000.rentalDate := Date('2026-02-22')
+!RA_1000000.anticipatedDuration := 0
+!RA_1000000.depositPaid := 0.0
+!RA_1000000.quotedDailyRate := 0.0
+!RA_1000000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_1000001')
+!RA_1000001.number := 1000001
+!RA_1000001.rentalDate := Date('2026-02-22')
+!RA_1000001.anticipatedDuration := 0
+!RA_1000001.depositPaid := 0.0
+!RA_1000001.quotedDailyRate := 0.0
+!RA_1000001.quotedRatePerMile := 0.0
+
+!insert (RO_edge1, V_edge1) into RentalOfficeVehicle
+
+!insert (RO_edge1, RA_1000000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_edge1, RA_1000001) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_edge2, RA_1000000) into RentalOfficeRentalAgreementDrop
+!insert (RO_edge1, RA_1000001) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_1000000, V_edge1) into RentalAgreementVehicle
+!insert (RA_1000001, V_edge1) into RentalAgreementVehicle
+
+!insert (RA_1000000, C_edge1) into RentalAgreementCustomer
+!insert (RA_1000001, C_edge2) into RentalAgreementCustomer
+
+!new RentalOffice('RO_17')
+!RO_17.name := 'Port of Miami Commercial Rentals'
+!RO_17.number := 17
+!RO_17.address := '1015 North America Way, Miami, FL 33132, USA'
+
+!new RentalOffice('RO_42')
+!RO_42.name := 'Orlando Logistics Vehicle Desk'
+!RO_42.number := 42
+!RO_42.address := '1 Jeff Fuqua Blvd, Orlando, FL 32827, USA'
+
+!new RentalOffice('RO_88')
+!RO_88.name := 'Los Angeles Harbor Truck Center'
+!RO_88.number := 88
+!RO_88.address := '425 S Palos Verdes St, San Pedro, CA 90731, USA'
+
+!new Truck('T_60031')
+!T_60031.id := 60031
+!T_60031.registrationState := #FL
+!T_60031.licensePlateNumber := 'FL-3KZQ914'
+!T_60031.vehicleTypeCode := #TRUCK24
+!T_60031.registrationLastMaintenanceDate := Date('2026-01-12')
+!T_60031.expirationDate := Date('2026-11-30')
+!T_60031.odometerReading := 184220
+!T_60031.gasTankCapacity := 68.0
+!T_60031.workingRadio := true
+!T_60031.mileage := 8
+
+!new Company('C_CasaNova')
+!C_CasaNova.name := 'CasaNova Imports LLC'
+!C_CasaNova.address := '7800 NW 25th St, Doral, FL 33122, USA'
+!C_CasaNova.poorRisk := false
+!C_CasaNova.idNumber := 9137742
+
+!new Individual('I_Gomez')
+!I_Gomez.name := 'María-Luisa Gómez'
+!I_Gomez.address := '9200 NW 36th St, Doral, FL 33178, USA'
+!I_Gomez.poorRisk := false
+!I_Gomez.homePhone := '+1 (305) 555-0188'
+!I_Gomez.driverLicenseState := #FL
+!I_Gomez.driverLicenseNumber := 55319027
+!I_Gomez.driverLicenseExpirationDate := Date('2027-05-14')
+
+!new RentalAgreement('RA_202601990')
+!RA_202601990.number := 202601990
+!RA_202601990.rentalDate := Date('2026-02-20')
+!RA_202601990.anticipatedDuration := 5
+!RA_202601990.depositPaid := 0.0
+!RA_202601990.quotedDailyRate := 129.99
+!RA_202601990.quotedRatePerMile := 0.79
+
+!insert (RO_17, T_60031) into RentalOfficeVehicle
+!insert (RO_17, RA_202601990) into RentalOfficeRentalAgreementOrigin
+!insert (RA_202601990, T_60031) into RentalAgreementVehicle
+!insert (RA_202601990, C_CasaNova) into RentalAgreementCustomer
+!insert (RA_202601990, I_Gomez) into RentalAgreementCustomer
+
+!new RentalOffice('RO_101_PHX')
+!RO_101_PHX.name := 'Sonoran Moving & Truck Rental — Phoenix Central'
+!RO_101_PHX.number := 101
+!RO_101_PHX.address := '725 E Van Buren St, Phoenix, AZ 85006'
+
+!new RentalOffice('RO_202_MIA')
+!RO_202_MIA.name := 'SunCoast Vehicle Rentals — Miami Airport'
+!RO_202_MIA.number := 202
+!RO_202_MIA.address := '3900 NW 25th St, Miami, FL 33142'
+
+!new RentalOffice('RO_303_HFD')
+!RO_303_HFD.name := 'Capitol Region Truck & Trailer Rental — Hartford'
+!RO_303_HFD.number := 303
+!RO_303_HFD.address := '18 Weston St, Hartford, CT 06120'
+
+!new Truck('T_5001_PHX')
+!T_5001_PHX.id := 5001
+!T_5001_PHX.registrationState := #AZ
+!T_5001_PHX.licensePlateNumber := 'AZ B7K-2194'
+!T_5001_PHX.vehicleTypeCode := #TRUCK24
+!T_5001_PHX.registrationLastMaintenanceDate := Date('2025-12-02')
+!T_5001_PHX.expirationDate := Date('2026-11-30')
+!T_5001_PHX.odometerReading := 84215
+!T_5001_PHX.gasTankCapacity := 40.0
+!T_5001_PHX.workingRadio := true
+!T_5001_PHX.mileage := 10
+
+!new Truck('T_5002_PHX')
+!T_5002_PHX.id := 5002
+!T_5002_PHX.registrationState := #CA
+!T_5002_PHX.licensePlateNumber := 'CA 9XGZ021'
+!T_5002_PHX.vehicleTypeCode := #TRUCK10
+!T_5002_PHX.registrationLastMaintenanceDate := Date('2025-10-15')
+!T_5002_PHX.expirationDate := Date('2026-10-31')
+!T_5002_PHX.odometerReading := 31107
+!T_5002_PHX.gasTankCapacity := 25.5
+!T_5002_PHX.workingRadio := false
+!T_5002_PHX.mileage := 14
+
+!new Vehicle('V_6001_PHX')
+!V_6001_PHX.id := 6001
+!V_6001_PHX.registrationState := #CO
+!V_6001_PHX.licensePlateNumber := 'CO TRL-7712'
+!V_6001_PHX.vehicleTypeCode := #COVERED_TRAILER
+!V_6001_PHX.registrationLastMaintenanceDate := Date('2025-09-01')
+!V_6001_PHX.expirationDate := Date('2026-09-30')
+
+!new Truck('T_5003_MIA')
+!T_5003_MIA.id := 5003
+!T_5003_MIA.registrationState := #FL
+!T_5003_MIA.licensePlateNumber := 'FL KDT-440'
+!T_5003_MIA.vehicleTypeCode := #TRUCK
+!T_5003_MIA.registrationLastMaintenanceDate := Date('2025-11-20')
+!T_5003_MIA.expirationDate := Date('2026-11-30')
+!T_5003_MIA.odometerReading := 120433
+!T_5003_MIA.gasTankCapacity := 35.0
+!T_5003_MIA.workingRadio := true
+!T_5003_MIA.mileage := 12
+
+!new Vehicle('V_6002_MIA')
+!V_6002_MIA.id := 6002
+!V_6002_MIA.registrationState := #DE
+!V_6002_MIA.licensePlateNumber := 'DE 58T-PL'
+!V_6002_MIA.vehicleTypeCode := #OPEN_TRAILER
+!V_6002_MIA.registrationLastMaintenanceDate := Date('2025-08-18')
+!V_6002_MIA.expirationDate := Date('2026-08-31')
+
+!new Truck('T_5004_HFD')
+!T_5004_HFD.id := 5004
+!T_5004_HFD.registrationState := #CT
+!T_5004_HFD.licensePlateNumber := 'CT AT-30971'
+!T_5004_HFD.vehicleTypeCode := #TRUCK24
+!T_5004_HFD.registrationLastMaintenanceDate := Date('2025-12-10')
+!T_5004_HFD.expirationDate := Date('2026-12-31')
+!T_5004_HFD.odometerReading := 55790
+!T_5004_HFD.gasTankCapacity := 38.0
+!T_5004_HFD.workingRadio := true
+!T_5004_HFD.mileage := 9
+
+!new Individual('CUST_I_1')
+!CUST_I_1.name := 'María del Carmen Ruiz'
+!CUST_I_1.address := '1842 S 6th Ave, Tucson, AZ 85713'
+!CUST_I_1.poorRisk := false
+!CUST_I_1.homePhone := '+1-520-555-0148'
+!CUST_I_1.driverLicenseState := #AZ
+!CUST_I_1.driverLicenseNumber := 81200457
+!CUST_I_1.driverLicenseExpirationDate := Date('2027-04-19')
+
+!new Individual('CUST_I_2')
+!CUST_I_2.name := 'Omar Haddad'
+!CUST_I_2.address := '77 Wethersfield Ave, Hartford, CT 06114'
+!CUST_I_2.poorRisk := true
+!CUST_I_2.homePhone := '+1-860-555-0199'
+!CUST_I_2.driverLicenseState := #CT
+!CUST_I_2.driverLicenseNumber := 33991762
+!CUST_I_2.driverLicenseExpirationDate := Date('2026-06-30')
+
+!new Company('CUST_C_1')
+!CUST_C_1.name := 'Nordic Event Logistics, Inc.'
+!CUST_C_1.address := '1000 Brickell Ave, Suite 715, Miami, FL 33131'
+!CUST_C_1.poorRisk := false
+!CUST_C_1.idNumber := 90077123
+
+!new Company('CUST_C_2')
+!CUST_C_2.name := 'GreenLeaf Renovations LLC'
+!CUST_C_2.address := '2121 N 24th St, Phoenix, AZ 85008'
+!CUST_C_2.poorRisk := false
+!CUST_C_2.idNumber := 77831005
+
+!new RentalAgreement('RA_90001')
+!RA_90001.number := 90001
+!RA_90001.rentalDate := Date('2026-01-05')
+!RA_90001.anticipatedDuration := 3
+!RA_90001.depositPaid := 300.0
+!RA_90001.quotedDailyRate := 89.99
+!RA_90001.quotedRatePerMile := 0.79
+
+!new RentalAgreement('RA_90002')
+!RA_90002.number := 90002
+!RA_90002.rentalDate := Date('2026-01-12')
+!RA_90002.anticipatedDuration := 2
+!RA_90002.depositPaid := 150.0
+!RA_90002.quotedDailyRate := 49.0
+!RA_90002.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_90003')
+!RA_90003.number := 90003
+!RA_90003.rentalDate := Date('2026-01-20')
+!RA_90003.anticipatedDuration := 5
+!RA_90003.depositPaid := 500.0
+!RA_90003.quotedDailyRate := 129.0
+!RA_90003.quotedRatePerMile := 0.95
+
+!new RentalAgreement('RA_90004')
+!RA_90004.number := 90004
+!RA_90004.rentalDate := Date('2026-02-02')
+!RA_90004.anticipatedDuration := 1
+!RA_90004.depositPaid := 0.0
+!RA_90004.quotedDailyRate := 35.0
+!RA_90004.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_90005')
+!RA_90005.number := 90005
+!RA_90005.rentalDate := Date('2026-02-05')
+!RA_90005.anticipatedDuration := 4
+!RA_90005.depositPaid := 400.0
+!RA_90005.quotedDailyRate := 110.0
+!RA_90005.quotedRatePerMile := 0.85
+
+!new RentalAgreement('RA_90006')
+!RA_90006.number := 90006
+!RA_90006.rentalDate := Date('2026-02-10')
+!RA_90006.anticipatedDuration := 7
+!RA_90006.depositPaid := 600.0
+!RA_90006.quotedDailyRate := 140.0
+!RA_90006.quotedRatePerMile := 0.9
+
+!new RentalAgreement('RA_90007')
+!RA_90007.number := 90007
+!RA_90007.rentalDate := Date('2026-02-18')
+!RA_90007.anticipatedDuration := 2
+!RA_90007.depositPaid := 200.0
+!RA_90007.quotedDailyRate := 75.0
+!RA_90007.quotedRatePerMile := 0.6
+
+!insert (RO_101_PHX, T_5001_PHX) into RentalOfficeVehicle
+!insert (RO_101_PHX, T_5002_PHX) into RentalOfficeVehicle
+!insert (RO_101_PHX, V_6001_PHX) into RentalOfficeVehicle
+!insert (RO_202_MIA, T_5003_MIA) into RentalOfficeVehicle
+!insert (RO_202_MIA, V_6002_MIA) into RentalOfficeVehicle
+!insert (RO_303_HFD, T_5004_HFD) into RentalOfficeVehicle
+
+!insert (RO_101_PHX, RA_90001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_101_PHX, RA_90002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_202_MIA, RA_90003) into RentalOfficeRentalAgreementOrigin
+!insert (RO_202_MIA, RA_90004) into RentalOfficeRentalAgreementOrigin
+!insert (RO_303_HFD, RA_90005) into RentalOfficeRentalAgreementOrigin
+!insert (RO_101_PHX, RA_90006) into RentalOfficeRentalAgreementOrigin
+!insert (RO_303_HFD, RA_90007) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_101_PHX, RA_90001) into RentalOfficeRentalAgreementDrop
+!insert (RO_101_PHX, RA_90002) into RentalOfficeRentalAgreementDrop
+!insert (RO_202_MIA, RA_90003) into RentalOfficeRentalAgreementDrop
+!insert (RO_303_HFD, RA_90004) into RentalOfficeRentalAgreementDrop
+!insert (RO_303_HFD, RA_90005) into RentalOfficeRentalAgreementDrop
+!insert (RO_303_HFD, RA_90006) into RentalOfficeRentalAgreementDrop
+!insert (RO_101_PHX, RA_90007) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_90001, T_5001_PHX) into RentalAgreementVehicle
+!insert (RA_90002, V_6001_PHX) into RentalAgreementVehicle
+!insert (RA_90003, T_5003_MIA) into RentalAgreementVehicle
+!insert (RA_90004, V_6002_MIA) into RentalAgreementVehicle
+!insert (RA_90005, T_5004_HFD) into RentalAgreementVehicle
+!insert (RA_90006, T_5001_PHX) into RentalAgreementVehicle
+!insert (RA_90007, T_5002_PHX) into RentalAgreementVehicle
+
+!insert (RA_90001, CUST_C_2) into RentalAgreementCustomer
+!insert (RA_90002, CUST_I_1) into RentalAgreementCustomer
+!insert (RA_90003, CUST_C_1) into RentalAgreementCustomer
+!insert (RA_90004, CUST_C_1) into RentalAgreementCustomer
+!insert (RA_90005, CUST_I_2) into RentalAgreementCustomer
+!insert (RA_90006, CUST_I_1) into RentalAgreementCustomer
+!insert (RA_90007, CUST_C_2) into RentalAgreementCustomer
+

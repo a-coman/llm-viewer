@@ -1,0 +1,75 @@
+!new StateMachine('sm_greenhouseIrrigationZA')
+!sm_greenhouseIrrigationZA.name := 'greenhouseIrrigationZA'
+
+!new State('st_gh_idle')
+!st_gh_idle.name := 'idle'
+!new State('st_gh_watering')
+!st_gh_watering.name := 'watering'
+!new State('st_gh_draining')
+!st_gh_draining.name := 'draining'
+!new State('st_gh_rainHold')
+!st_gh_rainHold.name := 'rainHold'
+
+!insert (sm_greenhouseIrrigationZA, st_gh_idle) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_watering) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_draining) into StateMachineContainsStates
+!insert (sm_greenhouseIrrigationZA, st_gh_rainHold) into StateMachineContainsStates
+
+!insert (sm_greenhouseIrrigationZA, st_gh_idle) into StateMachineStartsStates
+
+!new Transition('tr_gh_tStartWatering')
+!tr_gh_tStartWatering.name := 'tStartWatering'
+!new Transition('tr_gh_tWateringToDraining')
+!tr_gh_tWateringToDraining.name := 'tWateringToDraining'
+!new Transition('tr_gh_tDrainingToIdle')
+!tr_gh_tDrainingToIdle.name := 'tDrainingToIdle'
+!new Transition('tr_gh_tIdleToRainHold')
+!tr_gh_tIdleToRainHold.name := 'tIdleToRainHold'
+!new Transition('tr_gh_tRainHoldToIdle')
+!tr_gh_tRainHoldToIdle.name := 'tRainHoldToIdle'
+
+!insert (sm_greenhouseIrrigationZA, tr_gh_tStartWatering) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tWateringToDraining) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tDrainingToIdle) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tIdleToRainHold) into StateMachineContainsTransitions
+!insert (sm_greenhouseIrrigationZA, tr_gh_tRainHoldToIdle) into StateMachineContainsTransitions
+
+!insert (st_gh_idle, tr_gh_tStartWatering) into StateTransition
+!insert (tr_gh_tStartWatering, st_gh_watering) into TransitionState
+
+!insert (st_gh_watering, tr_gh_tWateringToDraining) into StateTransition
+!insert (tr_gh_tWateringToDraining, st_gh_draining) into TransitionState
+
+!insert (st_gh_draining, tr_gh_tDrainingToIdle) into StateTransition
+!insert (tr_gh_tDrainingToIdle, st_gh_idle) into TransitionState
+
+!insert (st_gh_idle, tr_gh_tIdleToRainHold) into StateTransition
+!insert (tr_gh_tIdleToRainHold, st_gh_rainHold) into TransitionState
+
+!insert (st_gh_rainHold, tr_gh_tRainHoldToIdle) into StateTransition
+!insert (tr_gh_tRainHoldToIdle, st_gh_idle) into TransitionState
+
+!new TimeEvent('te_gh_startWatering_morning')
+!te_gh_startWatering_morning.time := 360
+!insert (tr_gh_tStartWatering, te_gh_startWatering_morning) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_startWatering_evening')
+!te_gh_startWatering_evening.time := 1080
+!insert (tr_gh_tStartWatering, te_gh_startWatering_evening) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tWateringToDraining')
+!te_gh_tWateringToDraining.time := 15
+!insert (tr_gh_tWateringToDraining, te_gh_tWateringToDraining) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tDrainingToIdle')
+!te_gh_tDrainingToIdle.time := 3
+!insert (tr_gh_tDrainingToIdle, te_gh_tDrainingToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tIdleToRainHold')
+!te_gh_tIdleToRainHold.time := 5
+!insert (tr_gh_tIdleToRainHold, te_gh_tIdleToRainHold) into TransitionContainsEvents
+
+!new TimeEvent('te_gh_tRainHoldToIdle')
+!te_gh_tRainHoldToIdle.time := 60
+!insert (tr_gh_tRainHoldToIdle, te_gh_tRainHoldToIdle) into TransitionContainsEvents
+

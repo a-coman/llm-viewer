@@ -1,0 +1,105 @@
+!new Station('LAGHUB2')
+!new Station('ABVHUB2')
+
+!new Driver('DNG77_2')
+!DNG77_2.id := 'D-NG-77'
+!DNG77_2.name := 'Khadijat Musa'
+
+!new Driver('DNG05_2')
+!DNG05_2.id := 'D-NG-05'
+!DNG05_2.name := 'Tunde Adeyemi'
+
+!new Driver('DNG12_2')
+!DNG12_2.id := 'D-NG-12'
+!DNG12_2.name := 'Emeka Nwosu'
+
+!insert (LAGHUB2, DNG77_2) into StationContainsDriver
+!insert (LAGHUB2, DNG05_2) into StationContainsDriver
+!insert (ABVHUB2, DNG12_2) into StationContainsDriver
+
+!new Customer('CNG2001_2')
+!CNG2001_2.id := 'C-NG-2001'
+!CNG2001_2.name := 'Amina Bello'
+!CNG2001_2.twitterUserName := '@aminabello_ng'
+
+!new Customer('CNG2002_2')
+!CNG2002_2.id := 'C-NG-2002'
+!CNG2002_2.name := 'Chinedu Okoye'
+!CNG2002_2.twitterUserName := '@chinedu_ok'
+
+!insert (LAGHUB2, CNG2001_2) into StationContainsCustomer
+!insert (ABVHUB2, CNG2002_2) into StationContainsCustomer
+
+!new Address('ALAG01_2')
+!ALAG01_2.text := 'Ikeja City Mall, Gate A, Obafemi Awolowo Way, Ikeja, Lagos, Nigeria'
+!new GeoLocation('GLLAGMALL_A2')
+!GLLAGMALL_A2.latitude := 6.6069
+!GLLAGMALL_A2.longitude := 3.3491
+!insert (ALAG01_2, GLLAGMALL_A2) into AddressContainsGeoLocation
+
+!new Address('ALAG02_2')
+!ALAG02_2.text := 'Ikeja City Mall, Loading Bay Gate B (rear entrance), Ikeja, Lagos, Nigeria'
+!new GeoLocation('GLLAGMALL_B2')
+!GLLAGMALL_B2.latitude := 6.6069
+!GLLAGMALL_B2.longitude := 3.3491
+!insert (ALAG02_2, GLLAGMALL_B2) into AddressContainsGeoLocation
+
+!new Address('ALAG03_2')
+!ALAG03_2.text := 'Yaba College of Technology, Yaba, Lagos, Nigeria'
+!new GeoLocation('GLLAGYABA_2')
+!GLLAGYABA_2.latitude := 6.5160
+!GLLAGYABA_2.longitude := 3.3741
+!insert (ALAG03_2, GLLAGYABA_2) into AddressContainsGeoLocation
+
+!new Address('AABV01_2')
+!AABV01_2.text := 'Jabi Lake Mall, Jabi District, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVJABI_2')
+!GLABVJABI_2.latitude := 9.0765
+!GLABVJABI_2.longitude := 7.4266
+!insert (AABV01_2, GLABVJABI_2) into AddressContainsGeoLocation
+
+!new Address('AABV02_2')
+!AABV02_2.text := 'Wuse Market (Gate 3), Wuse Zone 5, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVWUSE_2')
+!GLABVWUSE_2.latitude := 9.0833
+!GLABVWUSE_2.longitude := 7.4756
+!insert (AABV02_2, GLABVWUSE_2) into AddressContainsGeoLocation
+
+!new Address('AABV03_2')
+!AABV03_2.text := 'Garki Area 11, Yakubu Gowon Crescent, Abuja (FCT), Nigeria'
+!new GeoLocation('GLABVGARKI_2')
+!GLABVGARKI_2.latitude := 9.0402
+!GLABVGARKI_2.longitude := 7.4897
+!insert (AABV03_2, GLABVGARKI_2) into AddressContainsGeoLocation
+
+!new Shipment('SHPNG4450_A2')
+!SHPNG4450_A2.id := 'SHP-NG-4450'
+!SHPNG4450_A2.status := #UNDERWAY
+
+!new Shipment('SHPNG4450_B2')
+!SHPNG4450_B2.id := 'SHP-NG-4450'
+!SHPNG4450_B2.status := #NEW
+
+!new Shipment('SHPNG7781_2')
+!SHPNG7781_2.id := 'SHP-NG-7781'
+!SHPNG7781_2.status := #DELIVERED
+
+!insert (LAGHUB2, SHPNG4450_A2) into StationShipment
+!insert (ABVHUB2, SHPNG4450_B2) into StationShipment
+!insert (LAGHUB2, SHPNG7781_2) into StationShipment
+
+!insert (CNG2001_2, SHPNG4450_A2) into CustomerConsistsOfShipment
+!insert (CNG2002_2, SHPNG4450_B2) into CustomerConsistsOfShipment
+!insert (CNG2001_2, SHPNG7781_2) into CustomerConsistsOfShipment
+
+!insert (SHPNG4450_A2, ALAG01_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG4450_A2, AABV01_2) into ShipmentContainsDeliveryAddress
+!insert (DNG77_2, SHPNG4450_A2) into DriverShipment
+
+!insert (SHPNG4450_B2, AABV02_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG4450_B2, AABV03_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPNG7781_2, ALAG02_2) into ShipmentContainsPickUpAddress
+!insert (SHPNG7781_2, ALAG03_2) into ShipmentContainsDeliveryAddress
+!insert (DNG05_2, SHPNG7781_2) into DriverShipment
+

@@ -1,0 +1,388 @@
+!new StateMachine('sm_metroTicketKioskFlow')
+!sm_metroTicketKioskFlow.name := 'metroTicketKioskFlow'
+
+!new State('st_idle')
+!st_idle.name := 'idle'
+
+!new State('st_selectingTicket')
+!st_selectingTicket.name := 'selectingTicket'
+
+!new State('st_paying')
+!st_paying.name := 'paying'
+
+!new State('st_printingReceipt')
+!st_printingReceipt.name := 'printingReceipt'
+
+!insert (sm_metroTicketKioskFlow, st_idle) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_selectingTicket) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_paying) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_printingReceipt) into StateMachineContainsStates
+
+!insert (sm_metroTicketKioskFlow, st_idle) into StateMachineStartsStates
+
+!new Transition('tr_beginSelection')
+!tr_beginSelection.name := 'beginSelection'
+
+!new Transition('tr_promptPayment')
+!tr_promptPayment.name := 'promptPayment'
+
+!new Transition('tr_issueTicket')
+!tr_issueTicket.name := 'issueTicket'
+
+!new Transition('tr_resetAfterPrint')
+!tr_resetAfterPrint.name := 'resetAfterPrint'
+
+!insert (sm_metroTicketKioskFlow, tr_beginSelection) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_promptPayment) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_issueTicket) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_resetAfterPrint) into StateMachineContainsTransitions
+
+!insert (st_idle, tr_beginSelection) into StateTransition
+!insert (tr_beginSelection, st_selectingTicket) into TransitionState
+
+!insert (st_selectingTicket, tr_promptPayment) into StateTransition
+!insert (tr_promptPayment, st_paying) into TransitionState
+
+!insert (st_paying, tr_issueTicket) into StateTransition
+!insert (tr_issueTicket, st_printingReceipt) into TransitionState
+
+!insert (st_printingReceipt, tr_resetAfterPrint) into StateTransition
+!insert (tr_resetAfterPrint, st_idle) into TransitionState
+
+!new TimeEvent('te_t_beginSelection')
+!te_t_beginSelection.time := 5
+!insert (tr_beginSelection, te_t_beginSelection) into TransitionContainsEvents
+
+!new TimeEvent('te_t_promptPayment')
+!te_t_promptPayment.time := 30
+!insert (tr_promptPayment, te_t_promptPayment) into TransitionContainsEvents
+
+!new TimeEvent('te_t_issueTicket')
+!te_t_issueTicket.time := 2
+!insert (tr_issueTicket, te_t_issueTicket) into TransitionContainsEvents
+
+!new TimeEvent('te_t_resetAfterPrint')
+!te_t_resetAfterPrint.time := 10
+!insert (tr_resetAfterPrint, te_t_resetAfterPrint) into TransitionContainsEvents
+
+!new StateMachine('sm_parisMetroTimer')
+!sm_parisMetroTimer.name := 'parisMetroTimer'
+
+!new State('st_depart')
+!st_depart.name := 'départ'
+
+!insert (sm_parisMetroTimer, st_depart) into StateMachineContainsStates
+!insert (sm_parisMetroTimer, st_depart) into StateMachineStartsStates
+
+!new Transition('tr_boucleAttente')
+!tr_boucleAttente.name := 'boucleAttente'
+
+!insert (sm_parisMetroTimer, tr_boucleAttente) into StateMachineContainsTransitions
+
+!insert (st_depart, tr_boucleAttente) into StateTransition
+!insert (tr_boucleAttente, st_depart) into TransitionState
+
+!new TimeEvent('te_t1')
+!te_t1.time := 1
+!insert (tr_boucleAttente, te_t1) into TransitionContainsEvents
+
+!new StateMachine('sm_edgeTimerMachine')
+!sm_edgeTimerMachine.name := 'edgeTimerMachine'
+
+!new State('st_unico')
+!st_unico.name := 'único'
+
+!insert (sm_edgeTimerMachine, st_unico) into StateMachineContainsStates
+!insert (sm_edgeTimerMachine, st_unico) into StateMachineStartsStates
+
+!new Transition('tr_tickFast')
+!tr_tickFast.name := 'tickFast'
+
+!new Transition('tr_tickForever')
+!tr_tickForever.name := 'tickForever'
+
+!insert (sm_edgeTimerMachine, tr_tickFast) into StateMachineContainsTransitions
+!insert (sm_edgeTimerMachine, tr_tickForever) into StateMachineContainsTransitions
+
+!insert (st_unico, tr_tickFast) into StateTransition
+!insert (tr_tickFast, st_unico) into TransitionState
+
+!insert (st_unico, tr_tickForever) into StateTransition
+!insert (tr_tickForever, st_unico) into TransitionState
+
+!new TimeEvent('te_t_min')
+!te_t_min.time := 1
+!insert (tr_tickFast, te_t_min) into TransitionContainsEvents
+
+!new TimeEvent('te_t_huge')
+!te_t_huge.time := 2147483647
+!insert (tr_tickForever, te_t_huge) into TransitionContainsEvents
+
+!new StateMachine('sm_tokyoMetroEscalatorSafetySM')
+!sm_tokyoMetroEscalatorSafetySM.name := 'tokyoMetroEscalatorSafetySM'
+
+!new State('st_tokyo_idle')
+!st_tokyo_idle.name := 'idle'
+!new State('st_tokyo_sensingLoad')
+!st_tokyo_sensingLoad.name := 'sensingLoad'
+!new State('st_tokyo_acceleratingUp')
+!st_tokyo_acceleratingUp.name := 'acceleratingUp'
+!new State('st_tokyo_acceleratingDown')
+!st_tokyo_acceleratingDown.name := 'acceleratingDown'
+!new State('st_tokyo_steadyUp')
+!st_tokyo_steadyUp.name := 'steadyUp'
+!new State('st_tokyo_steadyDown')
+!st_tokyo_steadyDown.name := 'steadyDown'
+!new State('st_tokyo_cooling')
+!st_tokyo_cooling.name := 'cooling'
+!new State('st_tokyo_emergencyStop')
+!st_tokyo_emergencyStop.name := 'emergencyStop'
+!new State('st_tokyo_maintenance')
+!st_tokyo_maintenance.name := 'maintenance'
+
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_idle) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_sensingLoad) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_acceleratingUp) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_acceleratingDown) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_steadyUp) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_steadyDown) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_cooling) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_emergencyStop) into StateMachineContainsStates
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_maintenance) into StateMachineContainsStates
+
+!insert (sm_tokyoMetroEscalatorSafetySM, st_tokyo_idle) into StateMachineStartsStates
+
+!new Transition('tr_tokyo_pollSensors')
+!tr_tokyo_pollSensors.name := 'pollSensors'
+!new Transition('tr_tokyo_decideUpDirection')
+!tr_tokyo_decideUpDirection.name := 'decideUpDirection'
+!new Transition('tr_tokyo_decideDownDirection')
+!tr_tokyo_decideDownDirection.name := 'decideDownDirection'
+!new Transition('tr_tokyo_reachCruiseUp')
+!tr_tokyo_reachCruiseUp.name := 'reachCruiseUp'
+!new Transition('tr_tokyo_reachCruiseDown')
+!tr_tokyo_reachCruiseDown.name := 'reachCruiseDown'
+!new Transition('tr_tokyo_runUpThenCool')
+!tr_tokyo_runUpThenCool.name := 'runUpThenCool'
+!new Transition('tr_tokyo_runDownThenCool')
+!tr_tokyo_runDownThenCool.name := 'runDownThenCool'
+!new Transition('tr_tokyo_cooldownComplete')
+!tr_tokyo_cooldownComplete.name := 'cooldownComplete'
+!new Transition('tr_tokyo_triggerEmergencyFromSensing')
+!tr_tokyo_triggerEmergencyFromSensing.name := 'triggerEmergencyFromSensing'
+!new Transition('tr_tokyo_triggerEmergencyFromAccelUp')
+!tr_tokyo_triggerEmergencyFromAccelUp.name := 'triggerEmergencyFromAccelUp'
+!new Transition('tr_tokyo_triggerEmergencyFromAccelDown')
+!tr_tokyo_triggerEmergencyFromAccelDown.name := 'triggerEmergencyFromAccelDown'
+!new Transition('tr_tokyo_triggerEmergencyFromSteadyUp')
+!tr_tokyo_triggerEmergencyFromSteadyUp.name := 'triggerEmergencyFromSteadyUp'
+!new Transition('tr_tokyo_triggerEmergencyFromSteadyDown')
+!tr_tokyo_triggerEmergencyFromSteadyDown.name := 'triggerEmergencyFromSteadyDown'
+!new Transition('tr_tokyo_lockoutForInspection')
+!tr_tokyo_lockoutForInspection.name := 'lockoutForInspection'
+!new Transition('tr_tokyo_finishMaintenanceReset')
+!tr_tokyo_finishMaintenanceReset.name := 'finishMaintenanceReset'
+
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_pollSensors) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_decideUpDirection) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_decideDownDirection) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_reachCruiseUp) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_reachCruiseDown) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_runUpThenCool) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_runDownThenCool) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_cooldownComplete) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_triggerEmergencyFromSensing) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_triggerEmergencyFromAccelUp) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_triggerEmergencyFromAccelDown) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_triggerEmergencyFromSteadyUp) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_triggerEmergencyFromSteadyDown) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_lockoutForInspection) into StateMachineContainsTransitions
+!insert (sm_tokyoMetroEscalatorSafetySM, tr_tokyo_finishMaintenanceReset) into StateMachineContainsTransitions
+
+!insert (st_tokyo_idle, tr_tokyo_pollSensors) into StateTransition
+!insert (tr_tokyo_pollSensors, st_tokyo_sensingLoad) into TransitionState
+
+!insert (st_tokyo_sensingLoad, tr_tokyo_decideUpDirection) into StateTransition
+!insert (tr_tokyo_decideUpDirection, st_tokyo_acceleratingUp) into TransitionState
+
+!insert (st_tokyo_sensingLoad, tr_tokyo_decideDownDirection) into StateTransition
+!insert (tr_tokyo_decideDownDirection, st_tokyo_acceleratingDown) into TransitionState
+
+!insert (st_tokyo_acceleratingUp, tr_tokyo_reachCruiseUp) into StateTransition
+!insert (tr_tokyo_reachCruiseUp, st_tokyo_steadyUp) into TransitionState
+
+!insert (st_tokyo_acceleratingDown, tr_tokyo_reachCruiseDown) into StateTransition
+!insert (tr_tokyo_reachCruiseDown, st_tokyo_steadyDown) into TransitionState
+
+!insert (st_tokyo_steadyUp, tr_tokyo_runUpThenCool) into StateTransition
+!insert (tr_tokyo_runUpThenCool, st_tokyo_cooling) into TransitionState
+
+!insert (st_tokyo_steadyDown, tr_tokyo_runDownThenCool) into StateTransition
+!insert (tr_tokyo_runDownThenCool, st_tokyo_cooling) into TransitionState
+
+!insert (st_tokyo_cooling, tr_tokyo_cooldownComplete) into StateTransition
+!insert (tr_tokyo_cooldownComplete, st_tokyo_idle) into TransitionState
+
+!insert (st_tokyo_sensingLoad, tr_tokyo_triggerEmergencyFromSensing) into StateTransition
+!insert (tr_tokyo_triggerEmergencyFromSensing, st_tokyo_emergencyStop) into TransitionState
+
+!insert (st_tokyo_acceleratingUp, tr_tokyo_triggerEmergencyFromAccelUp) into StateTransition
+!insert (tr_tokyo_triggerEmergencyFromAccelUp, st_tokyo_emergencyStop) into TransitionState
+
+!insert (st_tokyo_acceleratingDown, tr_tokyo_triggerEmergencyFromAccelDown) into StateTransition
+!insert (tr_tokyo_triggerEmergencyFromAccelDown, st_tokyo_emergencyStop) into TransitionState
+
+!insert (st_tokyo_steadyUp, tr_tokyo_triggerEmergencyFromSteadyUp) into StateTransition
+!insert (tr_tokyo_triggerEmergencyFromSteadyUp, st_tokyo_emergencyStop) into TransitionState
+
+!insert (st_tokyo_steadyDown, tr_tokyo_triggerEmergencyFromSteadyDown) into StateTransition
+!insert (tr_tokyo_triggerEmergencyFromSteadyDown, st_tokyo_emergencyStop) into TransitionState
+
+!insert (st_tokyo_emergencyStop, tr_tokyo_lockoutForInspection) into StateTransition
+!insert (tr_tokyo_lockoutForInspection, st_tokyo_maintenance) into TransitionState
+
+!insert (st_tokyo_maintenance, tr_tokyo_finishMaintenanceReset) into StateTransition
+!insert (tr_tokyo_finishMaintenanceReset, st_tokyo_idle) into TransitionState
+
+!new TimeEvent('te_tokyo_TE1')
+!te_tokyo_TE1.time := 2
+!insert (tr_tokyo_pollSensors, te_tokyo_TE1) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE2')
+!te_tokyo_TE2.time := 1
+!insert (tr_tokyo_decideUpDirection, te_tokyo_TE2) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE3')
+!te_tokyo_TE3.time := 1
+!insert (tr_tokyo_decideDownDirection, te_tokyo_TE3) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE4')
+!te_tokyo_TE4.time := 5
+!insert (tr_tokyo_reachCruiseUp, te_tokyo_TE4) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE5')
+!te_tokyo_TE5.time := 5
+!insert (tr_tokyo_reachCruiseDown, te_tokyo_TE5) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE6')
+!te_tokyo_TE6.time := 180
+!insert (tr_tokyo_runUpThenCool, te_tokyo_TE6) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE7')
+!te_tokyo_TE7.time := 180
+!insert (tr_tokyo_runDownThenCool, te_tokyo_TE7) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE8')
+!te_tokyo_TE8.time := 30
+!insert (tr_tokyo_cooldownComplete, te_tokyo_TE8) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE9')
+!te_tokyo_TE9.time := 1
+!insert (tr_tokyo_triggerEmergencyFromSensing, te_tokyo_TE9) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE10')
+!te_tokyo_TE10.time := 1
+!insert (tr_tokyo_triggerEmergencyFromAccelUp, te_tokyo_TE10) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE11')
+!te_tokyo_TE11.time := 1
+!insert (tr_tokyo_triggerEmergencyFromAccelDown, te_tokyo_TE11) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE12')
+!te_tokyo_TE12.time := 1
+!insert (tr_tokyo_triggerEmergencyFromSteadyUp, te_tokyo_TE12) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE13')
+!te_tokyo_TE13.time := 1
+!insert (tr_tokyo_triggerEmergencyFromSteadyDown, te_tokyo_TE13) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE14')
+!te_tokyo_TE14.time := 600
+!insert (tr_tokyo_lockoutForInspection, te_tokyo_TE14) into TransitionContainsEvents
+
+!new TimeEvent('te_tokyo_TE15')
+!te_tokyo_TE15.time := 10
+!insert (tr_tokyo_finishMaintenanceReset, te_tokyo_TE15) into TransitionContainsEvents
+
+!new StateMachine('sm_metroGateController')
+!sm_metroGateController.name := 'metroGateController'
+
+!new State('st_mgc_Idle')
+!st_mgc_Idle.name := 'Idle'
+!new State('st_mgc_TicketValide')
+!st_mgc_TicketValide.name := 'TicketValidé'
+!new State('st_mgc_Open')
+!st_mgc_Open.name := 'Open'
+!new State('st_mgc_Alarm')
+!st_mgc_Alarm.name := 'Alarm'
+
+!insert (sm_metroGateController, st_mgc_Idle) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_TicketValide) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_Open) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_Alarm) into StateMachineContainsStates
+
+!insert (sm_metroGateController, st_mgc_Idle) into StateMachineStartsStates
+!insert (sm_metroGateController, st_mgc_Alarm) into StateMachineStartsStates
+
+!new Transition('tr_mgc_tSelfTestToIdle')
+!tr_mgc_tSelfTestToIdle.name := 'tSelfTestToIdle'
+!new Transition('tr_mgc_tBootToAlarm')
+!tr_mgc_tBootToAlarm.name := 'tBootToAlarm'
+!new Transition('tr_mgc_tIdleToValidated')
+!tr_mgc_tIdleToValidated.name := 'tIdleToValidated'
+!new Transition('tr_mgc_tValidatedToOpen')
+!tr_mgc_tValidatedToOpen.name := 'tValidatedToOpen'
+!new Transition('tr_mgc_tOpenToIdle')
+!tr_mgc_tOpenToIdle.name := 'tOpenToIdle'
+!new Transition('tr_mgc_tAlarmToIdle')
+!tr_mgc_tAlarmToIdle.name := 'tAlarmToIdle'
+
+!insert (sm_metroGateController, tr_mgc_tSelfTestToIdle) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tBootToAlarm) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tIdleToValidated) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tValidatedToOpen) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tOpenToIdle) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tAlarmToIdle) into StateMachineContainsTransitions
+
+!insert (st_mgc_Open, tr_mgc_tSelfTestToIdle) into StateTransition
+!insert (tr_mgc_tSelfTestToIdle, st_mgc_Idle) into TransitionState
+
+!insert (st_mgc_Open, tr_mgc_tBootToAlarm) into StateTransition
+!insert (tr_mgc_tBootToAlarm, st_mgc_Alarm) into TransitionState
+
+!insert (st_mgc_Idle, tr_mgc_tIdleToValidated) into StateTransition
+!insert (tr_mgc_tIdleToValidated, st_mgc_TicketValide) into TransitionState
+
+!insert (st_mgc_TicketValide, tr_mgc_tValidatedToOpen) into StateTransition
+!insert (tr_mgc_tValidatedToOpen, st_mgc_Open) into TransitionState
+
+!insert (st_mgc_Open, tr_mgc_tOpenToIdle) into StateTransition
+!insert (tr_mgc_tOpenToIdle, st_mgc_Idle) into TransitionState
+
+!insert (st_mgc_Alarm, tr_mgc_tAlarmToIdle) into StateTransition
+!insert (tr_mgc_tAlarmToIdle, st_mgc_Idle) into TransitionState
+
+!new TimeEvent('te_mgc_tSelfTestToIdle')
+!te_mgc_tSelfTestToIdle.time := 4
+!insert (tr_mgc_tSelfTestToIdle, te_mgc_tSelfTestToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tBootToAlarm')
+!te_mgc_tBootToAlarm.time := 4
+!insert (tr_mgc_tBootToAlarm, te_mgc_tBootToAlarm) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tIdleToValidated')
+!te_mgc_tIdleToValidated.time := 1
+!insert (tr_mgc_tIdleToValidated, te_mgc_tIdleToValidated) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tValidatedToOpen')
+!te_mgc_tValidatedToOpen.time := 2
+!insert (tr_mgc_tValidatedToOpen, te_mgc_tValidatedToOpen) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tOpenToIdle')
+!te_mgc_tOpenToIdle.time := 6
+!insert (tr_mgc_tOpenToIdle, te_mgc_tOpenToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tAlarmToIdle')
+!te_mgc_tAlarmToIdle.time := 30
+!insert (tr_mgc_tAlarmToIdle, te_mgc_tAlarmToIdle) into TransitionContainsEvents
+

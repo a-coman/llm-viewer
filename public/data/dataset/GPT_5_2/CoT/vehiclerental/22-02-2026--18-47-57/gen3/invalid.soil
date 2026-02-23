@@ -1,0 +1,59 @@
+!new RentalOffice('RO_501_OC3')
+!RO_501_OC3.name := 'Anchorage Equipment Yard'
+!RO_501_OC3.number := 501
+!RO_501_OC3.address := '5401 Old Seward Hwy, Anchorage, AK 99518, USA'
+
+!new RentalOffice('RO_502_OC3')
+!RO_502_OC3.name := 'Fairbanks Airport Truck Desk'
+!RO_502_OC3.number := 502
+!RO_502_OC3.address := '6450 Airport Way, Fairbanks, AK 99709, USA'
+
+!new RentalOffice('RO_503_OC3')
+!RO_503_OC3.name := 'Juneau Harbor Returns'
+!RO_503_OC3.number := 503
+!RO_503_OC3.address := '490 S Franklin St, Juneau, AK 99801, USA'
+
+!new Truck('T_30012_OC3')
+!T_30012_OC3.id := 30012
+!T_30012_OC3.registrationState := #AK
+!T_30012_OC3.licensePlateNumber := 'AK-JNU-2047'
+!T_30012_OC3.vehicleTypeCode := #TRUCK24
+!T_30012_OC3.registrationLastMaintenanceDate := Date('2026-04-05')
+!T_30012_OC3.expirationDate := Date('2027-04-30')
+!T_30012_OC3.odometerReading := 91207
+!T_30012_OC3.gasTankCapacity := 72.5
+!T_30012_OC3.workingRadio := true
+!T_30012_OC3.mileage := 9
+
+!new Vehicle('V_30088_OC3')
+!V_30088_OC3.id := 30088
+!V_30088_OC3.registrationState := #AK
+!V_30088_OC3.licensePlateNumber := 'AK-TRL-7710'
+!V_30088_OC3.vehicleTypeCode := #COVERED_TRAILER
+!V_30088_OC3.registrationLastMaintenanceDate := Date('2026-03-18')
+!V_30088_OC3.expirationDate := Date('2026-10-15')
+
+!new Company('C_AuroraBorealis_OC3')
+!C_AuroraBorealis_OC3.name := 'Aurora Borealis Field Sciences, Inc.'
+!C_AuroraBorealis_OC3.address := '1001 Spenard Rd, Anchorage, AK 99503, USA'
+!C_AuroraBorealis_OC3.poorRisk := false
+!C_AuroraBorealis_OC3.idNumber := 4401906
+
+!new RentalAgreement('RA_90077_OC3')
+!RA_90077_OC3.number := 90077
+!RA_90077_OC3.rentalDate := Date('2026-06-01')
+!RA_90077_OC3.anticipatedDuration := 14
+!RA_90077_OC3.depositPaid := -150.0
+!RA_90077_OC3.quotedDailyRate := 164.0
+!RA_90077_OC3.quotedRatePerMile := 0.55
+
+!insert (RO_502_OC3, T_30012_OC3) into RentalOfficeVehicle
+!insert (RO_501_OC3, V_30088_OC3) into RentalOfficeVehicle
+
+!insert (RA_90077_OC3, T_30012_OC3) into RentalAgreementVehicle
+!insert (RA_90077_OC3, C_AuroraBorealis_OC3) into RentalAgreementCustomer
+
+!insert (RO_503_OC3, RA_90077_OC3) into RentalOfficeRentalAgreementDrop
+
+!insert (RO_501_OC3, RA_90077_OC3) into RentalOfficeRentalAgreementOrigin
+!insert (RO_502_OC3, RA_90077_OC3) into RentalOfficeRentalAgreementOrigin

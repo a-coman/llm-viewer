@@ -1,0 +1,80 @@
+!new FreeRoomTypesDTO('D30')
+!D30.roomTypeDescription := 'Desert tent lodge (shared facilities)'
+!D30.numBeds := 2
+!D30.pricePerNight := 0.01
+!D30.numFreeRooms := 1
+
+!new Customer('C17')
+!C17.firstName := 'Fatima-Zahra'
+!C17.lastName := 'El Amrani'
+
+!new Booking('B4')
+!B4.startDate := '2026-12-31'
+!B4.endDate := '2027-01-01'
+!B4.canceled := true
+!B4.bookingId := 4
+!B4.confirmed := true
+
+!new RoomReservation('R7_B4')
+!R7_B4.checkInDate := '2026-12-31'
+!R7_B4.checkOutDate := '2027-01-01'
+
+!new RoomExtra('E31_B4')
+!E31_B4.price := 0.0
+!E31_B4.description := 'Mint tea welcome set'
+
+!new RoomExtra('E32_B4')
+!E32_B4.price := 25000.0
+!E32_B4.description := 'Private dune excursion (exclusive guide)'
+
+!new RoomExtra('E33_B4')
+!E33_B4.price := 0.01
+!E33_B4.description := 'Local SIM activation fee'
+
+!new Bill('BL3001')
+!BL3001.price := 25000.01
+!BL3001.billId := 3001
+
+!new Customer('C18')
+!C18.firstName := 'Solveig'
+!C18.lastName := 'Jónsdóttir'
+
+!new Booking('B5')
+!B5.startDate := '2026-01-31'
+!B5.endDate := '2026-02-01'
+!B5.canceled := false
+!B5.bookingId := 5
+!B5.confirmed := true
+
+!new RoomReservation('R8_B5')
+!R8_B5.checkInDate := '2026-01-31'
+!R8_B5.checkOutDate := '2026-02-01'
+
+!new Room('RM214_MAX')
+!RM214_MAX.numBeds := 1
+!RM214_MAX.pricePerNight := 0.01
+!RM214_MAX.occupied := false
+!RM214_MAX.blocked := false
+!RM214_MAX.roomNumber := 2147483647
+
+!new Bill('BL3002')
+!BL3002.price := 0.01
+!BL3002.billId := 3002
+
+!insert (B4, C17) into BookingCustomer
+!insert (B5, C18) into BookingCustomer
+
+!insert (B4, R7_B4) into BookingRoomReservation
+!insert (B5, R8_B5) into BookingRoomReservation
+
+!insert (R7_B4, E31_B4) into RoomReservationExtras
+!insert (R7_B4, E32_B4) into RoomReservationExtras
+!insert (R7_B4, E33_B4) into RoomReservationExtras
+
+!insert (R8_B5, RM214_MAX) into RoomReservationRoom
+
+!insert (B4, BL3001) into BookingBill
+!insert (B5, BL3002) into BookingBill
+
+!insert (BL3001, R7_B4) into BillRoomReservation
+!insert (BL3002, R8_B5) into BillRoomReservation

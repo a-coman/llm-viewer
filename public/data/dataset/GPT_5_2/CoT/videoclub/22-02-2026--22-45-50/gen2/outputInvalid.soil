@@ -1,0 +1,53 @@
+!new Client('clientCoopC10')
+!clientCoopC10.clientId := 11
+!clientCoopC10.isSuspended := false
+
+!new Client('clientCoopC11')
+!clientCoopC11.clientId := 12
+!clientCoopC11.isSuspended := false
+
+!new Client('clientCoopC12')
+!clientCoopC12.clientId := 305
+!clientCoopC12.isSuspended := true
+
+!new Rental('rentalCoopR10')
+!rentalCoopR10.date := Date('2026-02-14')
+
+!new Rental('rentalCoopR11')
+!rentalCoopR11.date := Date('2026-01-05')
+
+!new Movie('movieCoopM10')
+!movieCoopM10.title := 'The Silent Steppe (Тихая степь)'
+!movieCoopM10.availableCopies := 1
+
+!new Series('seriesCoopS10')
+!seriesCoopS10.title := 'Islands of Smoke'
+!seriesCoopS10.availableCopies := 4
+!seriesCoopS10.episode := 1
+
+!new Movie('movieCoopM11')
+!movieCoopM11.title := 'Café Laugh Riot'
+!movieCoopM11.availableCopies := 2
+!movieCoopM11.genre := #Comedy
+
+!new Actor('actorCoopA10')
+!actorCoopA10.name := 'Anu Saar'
+
+!new Actor('actorCoopA11')
+!actorCoopA11.name := 'Yaroslav Petrenko'
+
+!new Actor('actorCoopA12')
+!actorCoopA12.name := 'Mina Haddad'
+
+!insert (clientCoopC10, rentalCoopR10) into ClientRental
+!insert (clientCoopC11, rentalCoopR10) into ClientRental
+!insert (clientCoopC12, rentalCoopR11) into ClientRental
+
+!insert (rentalCoopR10, movieCoopM10) into RentalCassette
+!insert (rentalCoopR10, seriesCoopS10) into RentalCassette
+!insert (rentalCoopR11, movieCoopM11) into RentalCassette
+
+!insert (seriesCoopS10, actorCoopA10) into CassetteActor
+!insert (seriesCoopS10, actorCoopA12) into CassetteActor
+!insert (movieCoopM11, actorCoopA12) into CassetteActor
+

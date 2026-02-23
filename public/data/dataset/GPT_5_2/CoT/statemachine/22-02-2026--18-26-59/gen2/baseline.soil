@@ -1,0 +1,126 @@
+!new StateMachine('sm_solarMicrogridController')
+!sm_solarMicrogridController.name := 'solarMicrogridController'
+
+!new State('st_solar_monitoring')
+!st_solar_monitoring.name := 'monitoring'
+!new State('st_solar_warningIssued')
+!st_solar_warningIssued.name := 'warningIssued'
+!new State('st_solar_sheddingLoads')
+!st_solar_sheddingLoads.name := 'sheddingLoads'
+!new State('st_solar_runningOnBattery')
+!st_solar_runningOnBattery.name := 'runningOnBattery'
+!new State('st_solar_restoringGrid')
+!st_solar_restoringGrid.name := 'restoringGrid'
+!new State('st_solar_maintenanceMode')
+!st_solar_maintenanceMode.name := 'maintenanceMode'
+
+!insert (sm_solarMicrogridController, st_solar_monitoring) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_warningIssued) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_sheddingLoads) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_runningOnBattery) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_restoringGrid) into StateMachineContainsStates
+!insert (sm_solarMicrogridController, st_solar_maintenanceMode) into StateMachineContainsStates
+
+!insert (sm_solarMicrogridController, st_solar_monitoring) into StateMachineStartsStates
+
+!new Transition('tr_solar_routineSample')
+!tr_solar_routineSample.name := 'routineSample'
+!new Transition('tr_solar_raiseWarning')
+!tr_solar_raiseWarning.name := 'raiseWarning'
+!new Transition('tr_solar_startShedding')
+!tr_solar_startShedding.name := 'startShedding'
+!new Transition('tr_solar_switchToBattery')
+!tr_solar_switchToBattery.name := 'switchToBattery'
+!new Transition('tr_solar_beginRestore')
+!tr_solar_beginRestore.name := 'beginRestore'
+!new Transition('tr_solar_attemptRestoreFromShedding')
+!tr_solar_attemptRestoreFromShedding.name := 'attemptRestoreFromShedding'
+!new Transition('tr_solar_completeRestore')
+!tr_solar_completeRestore.name := 'completeRestore'
+!new Transition('tr_solar_enterMaintenance')
+!tr_solar_enterMaintenance.name := 'enterMaintenance'
+!new Transition('tr_solar_enterMaintenanceFromWarning')
+!tr_solar_enterMaintenanceFromWarning.name := 'enterMaintenanceFromWarning'
+!new Transition('tr_solar_exitMaintenance')
+!tr_solar_exitMaintenance.name := 'exitMaintenance'
+
+!insert (sm_solarMicrogridController, tr_solar_routineSample) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_raiseWarning) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_startShedding) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_switchToBattery) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_beginRestore) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_attemptRestoreFromShedding) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_completeRestore) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_enterMaintenance) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_enterMaintenanceFromWarning) into StateMachineContainsTransitions
+!insert (sm_solarMicrogridController, tr_solar_exitMaintenance) into StateMachineContainsTransitions
+
+!insert (st_solar_monitoring, tr_solar_routineSample) into StateTransition
+!insert (tr_solar_routineSample, st_solar_monitoring) into TransitionState
+
+!insert (st_solar_monitoring, tr_solar_raiseWarning) into StateTransition
+!insert (tr_solar_raiseWarning, st_solar_warningIssued) into TransitionState
+
+!insert (st_solar_warningIssued, tr_solar_startShedding) into StateTransition
+!insert (tr_solar_startShedding, st_solar_sheddingLoads) into TransitionState
+
+!insert (st_solar_sheddingLoads, tr_solar_switchToBattery) into StateTransition
+!insert (tr_solar_switchToBattery, st_solar_runningOnBattery) into TransitionState
+
+!insert (st_solar_runningOnBattery, tr_solar_beginRestore) into StateTransition
+!insert (tr_solar_beginRestore, st_solar_restoringGrid) into TransitionState
+
+!insert (st_solar_sheddingLoads, tr_solar_attemptRestoreFromShedding) into StateTransition
+!insert (tr_solar_attemptRestoreFromShedding, st_solar_restoringGrid) into TransitionState
+
+!insert (st_solar_restoringGrid, tr_solar_completeRestore) into StateTransition
+!insert (tr_solar_completeRestore, st_solar_monitoring) into TransitionState
+
+!insert (st_solar_monitoring, tr_solar_enterMaintenance) into StateTransition
+!insert (tr_solar_enterMaintenance, st_solar_maintenanceMode) into TransitionState
+
+!insert (st_solar_warningIssued, tr_solar_enterMaintenanceFromWarning) into StateTransition
+!insert (tr_solar_enterMaintenanceFromWarning, st_solar_maintenanceMode) into TransitionState
+
+!insert (st_solar_maintenanceMode, tr_solar_exitMaintenance) into StateTransition
+!insert (tr_solar_exitMaintenance, st_solar_monitoring) into TransitionState
+
+!new TimeEvent('te_solar_t_routineSample')
+!te_solar_t_routineSample.time := 60
+!insert (tr_solar_routineSample, te_solar_t_routineSample) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_raiseWarning')
+!te_solar_t_raiseWarning.time := 15
+!insert (tr_solar_raiseWarning, te_solar_t_raiseWarning) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_startShedding')
+!te_solar_t_startShedding.time := 20
+!insert (tr_solar_startShedding, te_solar_t_startShedding) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_switchToBattery')
+!te_solar_t_switchToBattery.time := 5
+!insert (tr_solar_switchToBattery, te_solar_t_switchToBattery) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_beginRestore')
+!te_solar_t_beginRestore.time := 120
+!insert (tr_solar_beginRestore, te_solar_t_beginRestore) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_attemptRestoreFromShedding')
+!te_solar_t_attemptRestoreFromShedding.time := 90
+!insert (tr_solar_attemptRestoreFromShedding, te_solar_t_attemptRestoreFromShedding) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_completeRestore')
+!te_solar_t_completeRestore.time := 10
+!insert (tr_solar_completeRestore, te_solar_t_completeRestore) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_enterMaintenance')
+!te_solar_t_enterMaintenance.time := 3
+!insert (tr_solar_enterMaintenance, te_solar_t_enterMaintenance) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_enterMaintenanceFromWarning')
+!te_solar_t_enterMaintenanceFromWarning.time := 3
+!insert (tr_solar_enterMaintenanceFromWarning, te_solar_t_enterMaintenanceFromWarning) into TransitionContainsEvents
+
+!new TimeEvent('te_solar_t_exitMaintenance')
+!te_solar_t_exitMaintenance.time := 5
+!insert (tr_solar_exitMaintenance, te_solar_t_exitMaintenance) into TransitionContainsEvents

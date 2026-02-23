@@ -1,0 +1,72 @@
+!new Customer('C26')
+!C26.firstName := 'Omar'
+!C26.lastName := 'Al‑Farsi'
+
+!new Booking('B9090')
+!B9090.bookingId := 9090
+!B9090.startDate := '2026-09-03'
+!B9090.endDate := '2026-09-04'
+!B9090.confirmed := true
+!B9090.canceled := false
+
+!new RoomReservation('R9090_RS')
+!R9090_RS.checkInDate := '2026-09-03'
+!R9090_RS.checkOutDate := '2026-09-04'
+
+!new Room('RM1201_B9090')
+!RM1201_B9090.roomNumber := 1201
+!RM1201_B9090.numBeds := 1
+!RM1201_B9090.pricePerNight := 210.00
+!RM1201_B9090.occupied := false
+!RM1201_B9090.blocked := false
+
+!new Room('RM1202_B9090')
+!RM1202_B9090.roomNumber := 1202
+!RM1202_B9090.numBeds := 1
+!RM1202_B9090.pricePerNight := 95.00
+!RM1202_B9090.occupied := false
+!RM1202_B9090.blocked := false
+
+!new RoomExtra('RX1_B9090')
+!RX1_B9090.description := 'Parking (overnight)'
+!RX1_B9090.price := 18.00
+
+!new RoomExtra('RX2_B9090')
+!RX2_B9090.description := 'Minibar snacks'
+!RX2_B9090.price := 14.50
+
+!new Bill('BL6001')
+!BL6001.billId := 6001
+!BL6001.price := 305.00
+
+!new Bill('BL6002')
+!BL6002.billId := 6002
+!BL6002.price := 32.50
+
+!new FreeRoomTypesDTO('D47')
+!D47.roomTypeDescription := 'Executive single'
+!D47.numBeds := 1
+!D47.pricePerNight := 210.00
+!D47.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('D48')
+!D48.roomTypeDescription := 'Small auxiliary room (day-use capable)'
+!D48.numBeds := 1
+!D48.pricePerNight := 95.00
+!D48.numFreeRooms := 2
+
+!insert (B9090, C26) into BookingCustomer
+
+!insert (B9090, R9090_RS) into BookingRoomReservation
+
+!insert (R9090_RS, RM1201_B9090) into RoomReservationRoom
+!insert (R9090_RS, RM1202_B9090) into RoomReservationRoom
+
+!insert (R9090_RS, RX1_B9090) into RoomReservationExtras
+!insert (R9090_RS, RX2_B9090) into RoomReservationExtras
+
+!insert (B9090, BL6001) into BookingBill
+!insert (B9090, BL6002) into BookingBill
+
+!insert (BL6001, R9090_RS) into BillRoomReservation
+!insert (BL6002, R9090_RS) into BillRoomReservation

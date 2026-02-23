@@ -1,0 +1,131 @@
+!new AddressBook('AB1_LinaOkafor_2')
+!new AddressBook('AB2_SakuraCRM_2')
+
+!new Person('P_Amina_AB1_2')
+!P_Amina_AB1_2.name := 'Dr. Amina El‑Sayed'
+!P_Amina_AB1_2.title := 'Dr.'
+!P_Amina_AB1_2.phone := '+20 2 2794 6100'
+!P_Amina_AB1_2.website := 'https://aminaelsayed.example.org'
+!P_Amina_AB1_2.email := 'amina.el-sayed@example.org'
+!insert (AB1_LinaOkafor_2, P_Amina_AB1_2) into AddressBookMadeOfContact
+
+!new Person('P_KenjiSato_2')
+!P_KenjiSato_2.name := 'Kenji Sato'
+!P_KenjiSato_2.title := 'Mr.'
+!P_KenjiSato_2.phone := '+81 3 4510 8821'
+!P_KenjiSato_2.website := 'https://kenji-sato.example.jp'
+!P_KenjiSato_2.email := 'kenji.sato@example.jp'
+!insert (AB1_LinaOkafor_2, P_KenjiSato_2) into AddressBookMadeOfContact
+
+!new Company('C_OficinaVerde_2')
+!C_OficinaVerde_2.name := 'Oficina Verde Ltda.'
+!C_OficinaVerde_2.industry := 'Sustainable architecture'
+!C_OficinaVerde_2.phone := '+55 11 5083 2001'
+!C_OficinaVerde_2.website := 'https://oficinaverde.example.br'
+!C_OficinaVerde_2.email := 'contato@oficinaverde.example.br'
+!insert (AB1_LinaOkafor_2, C_OficinaVerde_2) into AddressBookMadeOfContact
+
+!new Company('C_SakuraRobotics_2')
+!C_SakuraRobotics_2.name := 'Sakura Robotics Co., Ltd.'
+!C_SakuraRobotics_2.industry := 'Industrial automation'
+!C_SakuraRobotics_2.phone := '+81 3 6800 1122'
+!C_SakuraRobotics_2.website := 'https://sakura-robotics.example.jp'
+!C_SakuraRobotics_2.email := 'procurement@sakura-robotics.example.jp'
+!insert (AB2_SakuraCRM_2, C_SakuraRobotics_2) into AddressBookMadeOfContact
+
+!new Person('P_Amina_AB2_2')
+!P_Amina_AB2_2.name := 'Dr. Amina El‑Sayed'
+!P_Amina_AB2_2.title := 'Dr.'
+!P_Amina_AB2_2.phone := '+20 2 2794 6100'
+!P_Amina_AB2_2.website := 'https://aminaelsayed.example.org'
+!P_Amina_AB2_2.email := 'amina.el-sayed@example.org'
+!insert (AB2_SakuraCRM_2, P_Amina_AB2_2) into AddressBookMadeOfContact
+
+!new Address('Addr_Amina_Cairo_2')
+!Addr_Amina_Cairo_2.city := 'Cairo'
+!Addr_Amina_Cairo_2.street := 'Al Mansour Mohamed St.'
+!Addr_Amina_Cairo_2.houseNr := '14B'
+!insert (P_Amina_AB1_2, Addr_Amina_Cairo_2) into ContactContainsAddress
+
+!new Address('Addr_Amina_Tokyo_2')
+!Addr_Amina_Tokyo_2.city := 'Tokyo'
+!Addr_Amina_Tokyo_2.street := 'Chiyoda-dori'
+!Addr_Amina_Tokyo_2.houseNr := '2-15'
+!insert (P_Amina_AB1_2, Addr_Amina_Tokyo_2) into ContactContainsAddress
+
+!new Address('Addr_Kenji_Tokyo_2')
+!Addr_Kenji_Tokyo_2.city := 'Tokyo'
+!Addr_Kenji_Tokyo_2.street := 'Chiyoda-dori'
+!Addr_Kenji_Tokyo_2.houseNr := '2-15'
+!insert (P_KenjiSato_2, Addr_Kenji_Tokyo_2) into ContactContainsAddress
+
+!new Address('Addr_Sakura_Tokyo_2')
+!Addr_Sakura_Tokyo_2.city := 'Tokyo'
+!Addr_Sakura_Tokyo_2.street := 'Chiyoda-dori'
+!Addr_Sakura_Tokyo_2.houseNr := '2-15'
+!insert (C_SakuraRobotics_2, Addr_Sakura_Tokyo_2) into ContactContainsAddress
+
+!new Address('Addr_Oficina_SaoPaulo_2')
+!Addr_Oficina_SaoPaulo_2.city := 'São Paulo'
+!Addr_Oficina_SaoPaulo_2.street := 'Av. Paulista'
+!Addr_Oficina_SaoPaulo_2.houseNr := '1578'
+!insert (C_OficinaVerde_2, Addr_Oficina_SaoPaulo_2) into ContactContainsAddress
+
+!new Note('Note_Amina_Kickoff_2')
+!Note_Amina_Kickoff_2.author := 'Lina Okafor'
+!Note_Amina_Kickoff_2.time := Date('2026-02-10')
+!Note_Amina_Kickoff_2.type := #MEETING
+!Note_Amina_Kickoff_2.comment := 'Kickoff meeting at Sakura Robotics HQ with Dr. Amina El‑Sayed; discussed scope, timeline, and NDA.'
+!insert (P_Amina_AB1_2, Note_Amina_Kickoff_2) into ContactContainsNote
+
+!new Note('Note_Amina_RevisedSOW_2')
+!Note_Amina_RevisedSOW_2.author := 'Lina Okafor'
+!Note_Amina_RevisedSOW_2.time := Date('2026-02-12')
+!Note_Amina_RevisedSOW_2.type := #EMAIL
+!Note_Amina_RevisedSOW_2.comment := 'Sent Amina the revised statement of work; awaiting confirmation.'
+!insert (P_Amina_AB1_2, Note_Amina_RevisedSOW_2) into ContactContainsNote
+
+!new Note('Note_Kenji_Call_2')
+!Note_Kenji_Call_2.author := 'Lina Okafor'
+!Note_Kenji_Call_2.time := Date('2026-02-11')
+!Note_Kenji_Call_2.type := #CALL
+!Note_Kenji_Call_2.comment := 'Kenji confirmed lab access procedure and safety briefing requirements.'
+!insert (P_KenjiSato_2, Note_Kenji_Call_2) into ContactContainsNote
+
+!new Note('Note_Sakura_Kickoff_2')
+!Note_Sakura_Kickoff_2.author := 'Lina Okafor'
+!Note_Sakura_Kickoff_2.time := Date('2026-02-10')
+!Note_Sakura_Kickoff_2.type := #MEETING
+!Note_Sakura_Kickoff_2.comment := 'Kickoff meeting at Sakura Robotics HQ with Dr. Amina El‑Sayed; discussed scope, timeline, and NDA.'
+!insert (C_SakuraRobotics_2, Note_Sakura_Kickoff_2) into ContactContainsNote
+
+!new Relationship('Rel_Amina_to_Kenji_Coworker_2')
+!Rel_Amina_to_Kenji_Coworker_2.type := #COWORKER
+!insert (P_Amina_AB1_2, Rel_Amina_to_Kenji_Coworker_2) into ContactToRelationship
+!insert (Rel_Amina_to_Kenji_Coworker_2, P_KenjiSato_2) into RelationshipToContact
+
+!new Relationship('Rel_Amina_to_Sakura_Coworker_2')
+!Rel_Amina_to_Sakura_Coworker_2.type := #COWORKER
+!insert (P_Amina_AB1_2, Rel_Amina_to_Sakura_Coworker_2) into ContactToRelationship
+!insert (Rel_Amina_to_Sakura_Coworker_2, C_SakuraRobotics_2) into RelationshipToContact
+
+!new Relationship('Rel_Kenji_to_Sakura_Employee_2')
+!Rel_Kenji_to_Sakura_Employee_2.type := #EMPLOYEE
+!insert (P_KenjiSato_2, Rel_Kenji_to_Sakura_Employee_2) into ContactToRelationship
+!insert (Rel_Kenji_to_Sakura_Employee_2, C_SakuraRobotics_2) into RelationshipToContact
+
+!new Relationship('Rel_Kenji_to_Amina_Coworker_2')
+!Rel_Kenji_to_Amina_Coworker_2.type := #COWORKER
+!insert (P_KenjiSato_2, Rel_Kenji_to_Amina_Coworker_2) into ContactToRelationship
+!insert (Rel_Kenji_to_Amina_Coworker_2, P_Amina_AB1_2) into RelationshipToContact
+
+!new Relationship('Rel_Sakura_to_Kenji_Boss_2')
+!Rel_Sakura_to_Kenji_Boss_2.type := #BOSS
+!insert (C_SakuraRobotics_2, Rel_Sakura_to_Kenji_Boss_2) into ContactToRelationship
+!insert (Rel_Sakura_to_Kenji_Boss_2, P_KenjiSato_2) into RelationshipToContact
+
+!new Relationship('Rel_Sakura_to_Oficina_Subdivision_2')
+!Rel_Sakura_to_Oficina_Subdivision_2.type := #SUBDIVISION
+!insert (C_SakuraRobotics_2, Rel_Sakura_to_Oficina_Subdivision_2) into ContactToRelationship
+!insert (Rel_Sakura_to_Oficina_Subdivision_2, C_OficinaVerde_2) into RelationshipToContact
+

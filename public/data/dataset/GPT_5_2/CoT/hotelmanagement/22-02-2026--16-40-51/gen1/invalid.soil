@@ -1,0 +1,90 @@
+!new Customer('C2')
+!C2.firstName := 'Aiko'
+!C2.lastName := 'Tanaka'
+
+!new Booking('B1001_2')
+!B1001_2.bookingId := 1001
+!B1001_2.startDate := '2026-03-10'
+!B1001_2.endDate := '2026-03-14'
+!B1001_2.confirmed := true
+!B1001_2.canceled := false
+
+!new Booking('B1044')
+!B1044.bookingId := 1044
+!B1044.startDate := '2026-06-02'
+!B1044.endDate := '2026-06-05'
+!B1044.confirmed := true
+!B1044.canceled := false
+
+!new RoomReservation('R5001')
+!R5001.checkInDate := '2026-03-10'
+!R5001.checkOutDate := '2026-03-14'
+
+!new RoomReservation('R5099')
+!R5099.checkInDate := '2026-06-02'
+!R5099.checkOutDate := '2026-06-05'
+
+!new Room('RM402')
+!RM402.roomNumber := 402
+!RM402.numBeds := 1
+!RM402.pricePerNight := 129.00
+!RM402.occupied := false
+!RM402.blocked := false
+
+!new Room('RM305')
+!RM305.roomNumber := 305
+!RM305.numBeds := 2
+!RM305.pricePerNight := 179.00
+!RM305.occupied := false
+!RM305.blocked := false
+
+!new RoomExtra('E1_2')
+!E1_2.description := 'Late checkout (2pm)'
+!E1_2.price := 25.00
+
+!new RoomExtra('E2_2')
+!E2_2.description := 'Breakfast buffet (4 days)'
+!E2_2.price := 72.00
+
+!new RoomExtra('E3')
+!E3.description := 'Airport pickup (BER → hotel)'
+!E3.price := 49.00
+
+!new Bill('BL9001')
+!BL9001.billId := 9001
+!BL9001.price := 613.00
+
+!new Bill('BL9077')
+!BL9077.billId := 9077
+!BL9077.price := 436.00
+
+!new FreeRoomTypesDTO('D3')
+!D3.roomTypeDescription := 'Single room, courtyard view'
+!D3.numBeds := 1
+!D3.pricePerNight := 129.00
+!D3.numFreeRooms := 3
+
+!new FreeRoomTypesDTO('D4')
+!D4.roomTypeDescription := 'Double room, street view'
+!D4.numBeds := 2
+!D4.pricePerNight := 179.00
+!D4.numFreeRooms := 1
+
+!insert (B1001_2, C2) into BookingCustomer
+!insert (B1044, C2) into BookingCustomer
+
+!insert (B1001_2, R5001) into BookingRoomReservation
+!insert (B1044, R5099) into BookingRoomReservation
+
+!insert (R5001, E1_2) into RoomReservationExtras
+!insert (R5001, E2_2) into RoomReservationExtras
+!insert (R5099, E3) into RoomReservationExtras
+
+!insert (R5001, RM402) into RoomReservationRoom
+!insert (R5099, RM402) into RoomReservationRoom
+
+!insert (B1001_2, BL9001) into BookingBill
+!insert (B1044, BL9077) into BookingBill
+
+!insert (BL9001, R5001) into BillRoomReservation
+!insert (BL9077, R5099) into BillRoomReservation

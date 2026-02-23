@@ -1,0 +1,38 @@
+!new Bank('b1')
+!b1.name := 'Nordstadt Bank AG'
+!b1.country := 'Germany'
+!b1.bic := 'NDSBDEFFXXX'
+
+!new Person('p1')
+!p1.firstName := 'Anna'
+!p1.lastName := 'Müller'
+!p1.age := 34
+
+!new Person('p2')
+!p2.firstName := 'Marco'
+!p2.lastName := 'Rossi'
+!p2.age := 41
+
+!new Person('p3')
+!p3.firstName := 'Sofia'
+!p3.lastName := 'Müller'
+!p3.age := 17
+
+!new Account('a1')
+!a1.iban := 'DE89 3704 0044 0532 0130 00'
+!a1.balance := 2450
+
+!new Account('a2')
+!a2.iban := 'DE44 5001 0517 5407 3249 31'
+!a2.balance := 12000
+
+!insert (b1, a1) into AccountOfBanks
+!insert (b1, a2) into AccountOfBanks
+
+!insert (p1, a1) into Ownership
+!insert (p1, a2) into Ownership
+!insert (p2, a2) into Ownership
+
+!insert (p1, a1) into Use
+!insert (p3, a1) into Use
+!insert (p2, a2) into Use

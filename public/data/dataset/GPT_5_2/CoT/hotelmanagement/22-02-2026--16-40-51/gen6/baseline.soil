@@ -1,0 +1,109 @@
+!new Customer('C27')
+!C27.firstName := 'Olivia'
+!C27.lastName := 'Ndiaye'
+
+!new Booking('B7120')
+!B7120.bookingId := 7120
+!B7120.startDate := '2026-11-20'
+!B7120.endDate := '2026-11-22'
+!B7120.confirmed := false
+!B7120.canceled := false
+
+!new RoomReservation('RR12_B7120')
+!RR12_B7120.checkInDate := '2026-11-20'
+!RR12_B7120.checkOutDate := '2026-11-22'
+
+!new RoomReservation('RR13_B7120')
+!RR13_B7120.checkInDate := '2026-11-21'
+!RR13_B7120.checkOutDate := '2026-11-22'
+
+!new Room('R601_B7120')
+!R601_B7120.roomNumber := 601
+!R601_B7120.numBeds := 2
+!R601_B7120.pricePerNight := 145.00
+!R601_B7120.occupied := false
+!R601_B7120.blocked := false
+
+!new Room('R602_B7120')
+!R602_B7120.roomNumber := 602
+!R602_B7120.numBeds := 2
+!R602_B7120.pricePerNight := 145.00
+!R602_B7120.occupied := false
+!R602_B7120.blocked := false
+
+!new Room('R603_B7120')
+!R603_B7120.roomNumber := 603
+!R603_B7120.numBeds := 3
+!R603_B7120.pricePerNight := 175.00
+!R603_B7120.occupied := false
+!R603_B7120.blocked := false
+
+!new Room('R150_B7120')
+!R150_B7120.roomNumber := 150
+!R150_B7120.numBeds := 1
+!R150_B7120.pricePerNight := 90.00
+!R150_B7120.occupied := true
+!R150_B7120.blocked := false
+
+!new RoomExtra('E16_B7120')
+!E16_B7120.description := 'Projector rental (2 days)'
+!E16_B7120.price := 40.00
+
+!new RoomExtra('E17_B7120')
+!E17_B7120.description := 'Coffee/tea station (meeting corner)'
+!E17_B7120.price := 25.00
+
+!new RoomExtra('E18_B7120')
+!E18_B7120.description := 'Extra towels set (per room)'
+!E18_B7120.price := 15.00
+
+!new RoomExtra('E19_B7120')
+!E19_B7120.description := 'Complimentary city map + transit tips'
+!E19_B7120.price := 0.00
+
+!new Bill('BL16010')
+!BL16010.billId := 16010
+!BL16010.price := 845.00
+
+!new Bill('BL16011')
+!BL16011.billId := 16011
+!BL16011.price := 90.00
+
+!new FreeRoomTypesDTO('D49')
+!D49.roomTypeDescription := 'Habitación Doble (desayuno no incluido)'
+!D49.numBeds := 2
+!D49.pricePerNight := 145.00
+!D49.numFreeRooms := 8
+
+!new FreeRoomTypesDTO('D50')
+!D50.roomTypeDescription := 'غرفة مفردة اقتصادية (قريبة من المصعد)'
+!D50.numBeds := 1
+!D50.pricePerNight := 90.00
+!D50.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D51')
+!D51.roomTypeDescription := 'Triple Room (quiet corridor)'
+!D51.numBeds := 3
+!D51.pricePerNight := 175.00
+!D51.numFreeRooms := 2
+
+!insert (B7120, C27) into BookingCustomer
+
+!insert (B7120, RR12_B7120) into BookingRoomReservation
+!insert (B7120, RR13_B7120) into BookingRoomReservation
+
+!insert (RR12_B7120, R601_B7120) into RoomReservationRoom
+!insert (RR12_B7120, R602_B7120) into RoomReservationRoom
+!insert (RR12_B7120, R603_B7120) into RoomReservationRoom
+!insert (RR13_B7120, R150_B7120) into RoomReservationRoom
+
+!insert (RR12_B7120, E16_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E17_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E18_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E19_B7120) into RoomReservationExtras
+
+!insert (B7120, BL16010) into BookingBill
+!insert (B7120, BL16011) into BookingBill
+
+!insert (BL16010, RR12_B7120) into BillRoomReservation
+!insert (BL16011, RR13_B7120) into BillRoomReservation

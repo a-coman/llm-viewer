@@ -1,0 +1,225 @@
+!new Restaurant('R12')
+!R12.name := 'Nordic Lantern Café'
+
+!new Owner('O29')
+!O29.name := 'Kari Johansen'
+!O29.percentageShares := 70
+!insert (R12, O29) into RestaurantOwner
+
+!new Owner('O30')
+!O30.name := 'Samuel Adeyemi'
+!O30.percentageShares := 30
+!insert (R12, O30) into RestaurantOwner
+
+!new RegularCustomer('C13')
+!C13.name := 'Chloe Nguyen'
+!C13.prefferedLanguage := #English
+
+!new HeadWaiter('HW12')
+!HW12.name := 'Francesca Romano'
+!HW12.dateOfBirth := Date('1986-03-23')
+!HW12.phoneNumber := '+39-02-555-7711'
+
+!new Waiter('W25')
+!W25.name := 'Mateo García'
+!W25.dateOfBirth := Date('1997-07-01')
+!W25.phoneNumber := '+34-680-555-900'
+!W25.spokenLanguage := #Spanish
+!insert (HW12, W25) into HeadWaiterWaiter
+
+!new Waiter('W26')
+!W26.name := 'Hanna Vogel'
+!W26.dateOfBirth := Date('1990-11-18')
+!W26.phoneNumber := '+49-40-555-3344'
+!W26.spokenLanguage := #German
+!insert (HW12, W26) into HeadWaiterWaiter
+
+!new Manager('M11')
+!M11.name := 'Oliver Smith'
+!M11.dateOfBirth := Date('1976-08-09')
+!M11.phoneNumber := '+44-20-555-6060'
+
+!new Cook('K18')
+!K18.name := 'Sigrid Larsen'
+!K18.dateOfBirth := Date('1984-02-28')
+!K18.phoneNumber := '+47-21-555-1212'
+!K18.yearsOfExperience := 8
+
+!new Cook('K19')
+!K19.name := 'Eirik Lund'
+!K19.dateOfBirth := Date('1986-10-10')
+!K19.phoneNumber := '+47-21-555-1313'
+!K19.yearsOfExperience := 10
+
+!new Chef('CH21')
+!CH21.name := 'Arjun Mehta'
+!CH21.dateOfBirth := Date('1991-05-12')
+!CH21.phoneNumber := '+1-408-555-2323'
+!insert (CH21, K18) into ChefCook
+
+!new Chef('CH22')
+!CH22.name := 'Lucia Bianchi'
+!CH22.dateOfBirth := Date('1993-09-03')
+!CH22.phoneNumber := '+39-351-555-4545'
+!insert (CH22, K19) into ChefCook
+
+!new BusDriver('BD13')
+!BD13.name := 'George Papadopoulos'
+!BD13.dateOfBirth := Date('1970-01-26')
+!BD13.phoneNumber := '+30-21-555-9898'
+!BD13.driverLicenseNr := 'GR-LIC-88310'
+
+!new Individual('IR15')
+!IR15.time := Time('12:15')
+!IR15.date := Date('2026-05-03')
+!IR15.numberPeople := 3
+!IR15.name := 'Chloe Nguyen'
+!IR15.phoneNumber := '+1-206-555-0191'
+!IR15.number := 703
+!IR15.seating := #Inside
+!IR15.smoking := #Smoking
+!insert (R12, IR15) into RestaurantReservation
+!insert (IR15, C13) into ReservationCustomer
+!insert (IR15, W25) into ReservationWaiter
+!insert (IR15, W26) into ReservationWaiter
+
+!new Table('T50_NLC')
+!T50_NLC.number := 50
+!T50_NLC.description := 'Small indoor round table by bookcase'
+!T50_NLC.capacity := 3
+!insert (IR15, T50_NLC) into ReservationTable
+
+!new Banquet('BR11')
+!BR11.time := Time('18:00')
+!BR11.date := Date('2026-05-04')
+!BR11.numberPeople := 16
+!BR11.name := 'Elle Ranta'
+!BR11.phoneNumber := '+358-40-555-7777'
+!BR11.number := 915
+!BR11.groupName := 'Sámi Cultural Exchange Dinner'
+!BR11.paymentMethod := #CreditCard
+!BR11.busService := true
+!insert (R12, BR11) into RestaurantReservation
+!insert (BR11, W26) into ReservationWaiter
+!insert (BR11, BD13) into BanquetBusDriver
+
+!new Table('T60_NLC')
+!T60_NLC.number := 60
+!T60_NLC.description := 'Long banquet table near skylight'
+!T60_NLC.capacity := 10
+!insert (BR11, T60_NLC) into ReservationTable
+
+!new Table('T61_NLC')
+!T61_NLC.number := 61
+!T61_NLC.description := 'Secondary banquet table near entrance'
+!T61_NLC.capacity := 8
+!insert (BR11, T61_NLC) into ReservationTable
+
+!new Allergen('A3_GLU12')
+!A3_GLU12.type := #Gluten
+
+!new Allergen('A3_LAC12')
+!A3_LAC12.type := #Lactose
+
+!new Allergen('A3_NUT12')
+!A3_NUT12.type := #Nuts
+
+!new Allergen('A3_SEA12')
+!A3_SEA12.type := #Seafood
+
+!new FoodItem('F901')
+!F901.number := 301
+!F901.description := 'Rye crispbread'
+!F901.purchaseFlag := true
+!F901.unit := #Sheet
+!insert (F901, A3_GLU12) into FoodItemAllergen
+
+!new FoodItem('F902')
+!F902.number := 302
+!F902.description := 'Cultured butter'
+!F902.purchaseFlag := true
+!F902.unit := #Ounce
+!insert (F902, A3_LAC12) into FoodItemAllergen
+
+!new FoodItem('F903')
+!F903.number := 303
+!F903.description := 'Hazelnuts (toasted, crushed)'
+!F903.purchaseFlag := true
+!F903.unit := #Gram
+!insert (F903, A3_NUT12) into FoodItemAllergen
+
+!new FoodItem('F904')
+!F904.number := 304
+!F904.description := 'Smoked salmon'
+!F904.purchaseFlag := false
+!F904.unit := #Pound
+!insert (F904, A3_SEA12) into FoodItemAllergen
+
+!new FoodItem('F905')
+!F905.number := 305
+!F905.description := 'Cream'
+!F905.purchaseFlag := true
+!F905.unit := #Ounce
+!insert (F905, A3_LAC12) into FoodItemAllergen
+
+!new MenuItem('MI35')
+!MI35.description := 'Crispbread with smoked salmon and cultured butter'
+!MI35.prepTime := 7.0
+!MI35.classification := #Apetizer
+!insert (MI35, CH21) into MenuItemChef
+!insert (MI35, F901) into MenuItemFoodItem
+!insert (MI35, F904) into MenuItemFoodItem
+!insert (MI35, F902) into MenuItemFoodItem
+
+!new MenuItem('MI36')
+!MI36.description := 'Creamy salmon chowder (small bowl)'
+!MI36.prepTime := 16.0
+!MI36.classification := #Main
+!insert (MI36, CH22) into MenuItemChef
+!insert (MI36, F904) into MenuItemFoodItem
+!insert (MI36, F905) into MenuItemFoodItem
+
+!new MenuItem('MI37')
+!MI37.description := 'Nordic nut crumble (hazelnut)'
+!MI37.prepTime := 11.5
+!MI37.classification := #Dessert
+!insert (MI37, CH21) into MenuItemChef
+!insert (MI37, F903) into MenuItemFoodItem
+!insert (MI37, F902) into MenuItemFoodItem
+
+!new MenuItem('MI38')
+!MI38.description := 'House coffee'
+!MI38.prepTime := 3.0
+!MI38.classification := #Beverage
+!insert (MI38, CH22) into MenuItemChef
+
+!new ItemOrder('IO1501')
+!IO1501.time := Time('12:28')
+!insert (IR15, IO1501) into ReservationItemOrdered
+!insert (IO1501, MI35) into ItemOrderMenuItem
+
+!new ItemOrder('IO1502')
+!IO1502.time := Time('12:50')
+!insert (IR15, IO1502) into ReservationItemOrdered
+!insert (IO1502, MI38) into ItemOrderMenuItem
+
+!new ItemOrder('IO1503')
+!IO1503.time := Time('18:25')
+!insert (BR11, IO1503) into ReservationItemOrdered
+!insert (IO1503, MI35) into ItemOrderMenuItem
+
+!new ItemOrder('IO1504')
+!IO1504.time := Time('18:40')
+!insert (BR11, IO1504) into ReservationItemOrdered
+!insert (IO1504, MI36) into ItemOrderMenuItem
+
+!new ItemOrder('IO1505')
+!IO1505.time := Time('19:05')
+!insert (BR11, IO1505) into ReservationItemOrdered
+!insert (IO1505, MI37) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR10')
+!DR10.diet := #Vegan
+
+!new ReportedAllergy('RA9')
+!RA9.allergen := #Seafood

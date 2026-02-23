@@ -1,0 +1,64 @@
+!new RentalOffice('RO_305_DEN2')
+!RO_305_DEN2.name := 'Rocky Mountain Fleet Hub'
+!RO_305_DEN2.number := 305
+!RO_305_DEN2.address := '4900 Washington St, Denver, CO 80216, USA'
+
+!new RentalOffice('RO_12_WHL2')
+!RO_12_WHL2.name := 'Sunset Boulevard Rental Depot'
+!RO_12_WHL2.number := 12
+!RO_12_WHL2.address := '901 N San Vicente Blvd, West Hollywood, CA 90069, USA'
+
+!new RentalOffice('RO_77_PHX2')
+!RO_77_PHX2.name := 'Desert Cross-Dock Yard'
+!RO_77_PHX2.number := 77
+!RO_77_PHX2.address := '2302 E Magnolia St, Phoenix, AZ 85034, USA'
+
+!new Truck('T_71005_2')
+!T_71005_2.id := 71005
+!T_71005_2.registrationState := #CO
+!T_71005_2.licensePlateNumber := 'CO-ADP-7741'
+!T_71005_2.vehicleTypeCode := #TRUCK10
+!T_71005_2.registrationLastMaintenanceDate := Date('2026-02-01')
+!T_71005_2.expirationDate := Date('2027-01-31')
+!T_71005_2.odometerReading := 62311
+!T_71005_2.gasTankCapacity := 33.0
+!T_71005_2.workingRadio := false
+!T_71005_2.mileage := 12
+
+!new Vehicle('V_88040_2')
+!V_88040_2.id := 88040
+!V_88040_2.registrationState := #CA
+!V_88040_2.licensePlateNumber := 'NY-TL-98352'
+!V_88040_2.vehicleTypeCode := #OPEN_TRAILER
+!V_88040_2.registrationLastMaintenanceDate := Date('2025-12-18')
+!V_88040_2.expirationDate := Date('2026-12-31')
+
+!new Individual('I_KenjiSato2')
+!I_KenjiSato2.name := 'Kenji Sato'
+!I_KenjiSato2.address := '36-18 Main St, Flushing, NY 11354, USA'
+!I_KenjiSato2.poorRisk := false
+!I_KenjiSato2.homePhone := '+1 (718) 555-0144'
+!I_KenjiSato2.driverLicenseState := #CA
+!I_KenjiSato2.driverLicenseNumber := 90277155
+!I_KenjiSato2.driverLicenseExpirationDate := Date('2028-09-09')
+
+!new RentalAgreement('RA_5500123_2')
+!RA_5500123_2.number := 5500123
+!RA_5500123_2.rentalDate := Date('2026-03-10')
+!RA_5500123_2.anticipatedDuration := 4
+!RA_5500123_2.depositPaid := 500.0
+!RA_5500123_2.quotedDailyRate := 189.95
+!RA_5500123_2.quotedRatePerMile := 0.69
+
+!insert (RO_305_DEN2, T_71005_2) into RentalOfficeVehicle
+!insert (RO_77_PHX2, V_88040_2) into RentalOfficeVehicle
+!insert (RO_12_WHL2, V_88040_2) into RentalOfficeVehicle
+
+!insert (RO_305_DEN2, RA_5500123_2) into RentalOfficeRentalAgreementOrigin
+!insert (RO_12_WHL2, RA_5500123_2) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_5500123_2, I_KenjiSato2) into RentalAgreementCustomer
+
+!insert (RA_5500123_2, T_71005_2) into RentalAgreementVehicle
+!insert (RA_5500123_2, V_88040_2) into RentalAgreementVehicle
+

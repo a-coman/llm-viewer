@@ -1,0 +1,106 @@
+!new StateMachine('sm_saoPauloCarnaval')
+!sm_saoPauloCarnaval.name := 'sãoPauloCarnaval'
+
+!new State('st_carn_concentracao')
+!st_carn_concentracao.name := 'concentração'
+!new State('st_carn_setorA')
+!st_carn_setorA.name := 'setorA'
+!new State('st_carn_setorB')
+!st_carn_setorB.name := 'setorB'
+!new State('st_carn_setorC')
+!st_carn_setorC.name := 'setorC'
+!new State('st_carn_apuracao')
+!st_carn_apuracao.name := 'apuração'
+!new State('st_carn_vipLounge')
+!st_carn_vipLounge.name := 'vipLounge'
+
+!insert (sm_saoPauloCarnaval, st_carn_concentracao) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorA) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorB) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_setorC) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_apuracao) into StateMachineContainsStates
+!insert (sm_saoPauloCarnaval, st_carn_vipLounge) into StateMachineContainsStates
+
+!insert (sm_saoPauloCarnaval, st_carn_concentracao) into StateMachineStartsStates
+
+!new Transition('tr_carn_abrirPortoesA')
+!tr_carn_abrirPortoesA.name := 'abrirPortoesA'
+!new Transition('tr_carn_abrirPortoesAextra')
+!tr_carn_abrirPortoesAextra.name := 'abrirPortoesAextra'
+!new Transition('tr_carn_abrirPortoesB')
+!tr_carn_abrirPortoesB.name := 'abrirPortoesB'
+!new Transition('tr_carn_abrirPortoesC')
+!tr_carn_abrirPortoesC.name := 'abrirPortoesC'
+!new Transition('tr_carn_encerrarEIrApuracao')
+!tr_carn_encerrarEIrApuracao.name := 'encerrarEIrApuração'
+!new Transition('tr_carn_desfileAConcluido')
+!tr_carn_desfileAConcluido.name := 'desfileAConcluido'
+!new Transition('tr_carn_desfileBConcluido')
+!tr_carn_desfileBConcluido.name := 'desfileBConcluido'
+!new Transition('tr_carn_desfileCConcluido')
+!tr_carn_desfileCConcluido.name := 'desfileCConcluido'
+
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesA) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesAextra) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesB) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_abrirPortoesC) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_encerrarEIrApuracao) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileAConcluido) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileBConcluido) into StateMachineContainsTransitions
+!insert (sm_saoPauloCarnaval, tr_carn_desfileCConcluido) into StateMachineContainsTransitions
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesA) into StateTransition
+!insert (tr_carn_abrirPortoesA, st_carn_setorA) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesAextra) into StateTransition
+!insert (tr_carn_abrirPortoesAextra, st_carn_setorA) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesB) into StateTransition
+!insert (tr_carn_abrirPortoesB, st_carn_setorB) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_abrirPortoesC) into StateTransition
+!insert (tr_carn_abrirPortoesC, st_carn_setorC) into TransitionState
+
+!insert (st_carn_concentracao, tr_carn_encerrarEIrApuracao) into StateTransition
+!insert (tr_carn_encerrarEIrApuracao, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorA, tr_carn_desfileAConcluido) into StateTransition
+!insert (tr_carn_desfileAConcluido, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorB, tr_carn_desfileBConcluido) into StateTransition
+!insert (tr_carn_desfileBConcluido, st_carn_apuracao) into TransitionState
+
+!insert (st_carn_setorC, tr_carn_desfileCConcluido) into StateTransition
+!insert (tr_carn_desfileCConcluido, st_carn_apuracao) into TransitionState
+
+!new TimeEvent('te_carn_t_abrirPortoesA')
+!te_carn_t_abrirPortoesA.time := 1
+!insert (tr_carn_abrirPortoesA, te_carn_t_abrirPortoesA) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesAextra')
+!te_carn_t_abrirPortoesAextra.time := 1
+!insert (tr_carn_abrirPortoesAextra, te_carn_t_abrirPortoesAextra) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesB')
+!te_carn_t_abrirPortoesB.time := 1
+!insert (tr_carn_abrirPortoesB, te_carn_t_abrirPortoesB) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_abrirPortoesC')
+!te_carn_t_abrirPortoesC.time := 1
+!insert (tr_carn_abrirPortoesC, te_carn_t_abrirPortoesC) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_encerrarEIrApuracao')
+!te_carn_t_encerrarEIrApuracao.time := 1
+!insert (tr_carn_encerrarEIrApuracao, te_carn_t_encerrarEIrApuracao) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileAConcluido')
+!te_carn_t_desfileAConcluido.time := 1
+!insert (tr_carn_desfileAConcluido, te_carn_t_desfileAConcluido) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileBConcluido')
+!te_carn_t_desfileBConcluido.time := 1
+!insert (tr_carn_desfileBConcluido, te_carn_t_desfileBConcluido) into TransitionContainsEvents
+
+!new TimeEvent('te_carn_t_desfileCConcluido')
+!te_carn_t_desfileCConcluido.time := 1
+!insert (tr_carn_desfileCConcluido, te_carn_t_desfileCConcluido) into TransitionContainsEvents

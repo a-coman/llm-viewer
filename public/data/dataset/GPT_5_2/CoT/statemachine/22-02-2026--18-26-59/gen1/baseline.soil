@@ -1,0 +1,66 @@
+!new StateMachine('sm_metroTicketKioskFlow')
+!sm_metroTicketKioskFlow.name := 'metroTicketKioskFlow'
+
+!new State('st_idle')
+!st_idle.name := 'idle'
+
+!new State('st_selectingTicket')
+!st_selectingTicket.name := 'selectingTicket'
+
+!new State('st_paying')
+!st_paying.name := 'paying'
+
+!new State('st_printingReceipt')
+!st_printingReceipt.name := 'printingReceipt'
+
+!insert (sm_metroTicketKioskFlow, st_idle) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_selectingTicket) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_paying) into StateMachineContainsStates
+!insert (sm_metroTicketKioskFlow, st_printingReceipt) into StateMachineContainsStates
+
+!insert (sm_metroTicketKioskFlow, st_idle) into StateMachineStartsStates
+
+!new Transition('tr_beginSelection')
+!tr_beginSelection.name := 'beginSelection'
+
+!new Transition('tr_promptPayment')
+!tr_promptPayment.name := 'promptPayment'
+
+!new Transition('tr_issueTicket')
+!tr_issueTicket.name := 'issueTicket'
+
+!new Transition('tr_resetAfterPrint')
+!tr_resetAfterPrint.name := 'resetAfterPrint'
+
+!insert (sm_metroTicketKioskFlow, tr_beginSelection) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_promptPayment) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_issueTicket) into StateMachineContainsTransitions
+!insert (sm_metroTicketKioskFlow, tr_resetAfterPrint) into StateMachineContainsTransitions
+
+!insert (st_idle, tr_beginSelection) into StateTransition
+!insert (tr_beginSelection, st_selectingTicket) into TransitionState
+
+!insert (st_selectingTicket, tr_promptPayment) into StateTransition
+!insert (tr_promptPayment, st_paying) into TransitionState
+
+!insert (st_paying, tr_issueTicket) into StateTransition
+!insert (tr_issueTicket, st_printingReceipt) into TransitionState
+
+!insert (st_printingReceipt, tr_resetAfterPrint) into StateTransition
+!insert (tr_resetAfterPrint, st_idle) into TransitionState
+
+!new TimeEvent('te_t_beginSelection')
+!te_t_beginSelection.time := 5
+!insert (tr_beginSelection, te_t_beginSelection) into TransitionContainsEvents
+
+!new TimeEvent('te_t_promptPayment')
+!te_t_promptPayment.time := 30
+!insert (tr_promptPayment, te_t_promptPayment) into TransitionContainsEvents
+
+!new TimeEvent('te_t_issueTicket')
+!te_t_issueTicket.time := 2
+!insert (tr_issueTicket, te_t_issueTicket) into TransitionContainsEvents
+
+!new TimeEvent('te_t_resetAfterPrint')
+!te_t_resetAfterPrint.time := 10
+!insert (tr_resetAfterPrint, te_t_resetAfterPrint) into TransitionContainsEvents

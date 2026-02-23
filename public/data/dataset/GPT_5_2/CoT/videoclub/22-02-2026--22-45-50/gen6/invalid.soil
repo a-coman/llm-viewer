@@ -1,0 +1,54 @@
+!new Client('clientMont2C50')
+!clientMont2C50.clientId := 650
+!clientMont2C50.isSuspended := false
+
+!new Client('clientMont2C51')
+!clientMont2C51.clientId := 651
+!clientMont2C51.isSuspended := false
+
+!new Rental('rentalMont2R50')
+!rentalMont2R50.date := Date('2026-02-16')
+
+!new Rental('rentalMont2R51')
+!rentalMont2R51.date := Date('2026-02-17')
+
+!new Movie('movieMont2M50')
+!movieMont2M50.title := 'Kung-Fu Quiproquo'
+!movieMont2M50.availableCopies := 2
+!movieMont2M50.genre := #Action
+
+!new Movie('movieMont2M51')
+!movieMont2M51.title := 'Polar Heist'
+!movieMont2M51.availableCopies := 1
+!movieMont2M51.genre := #Action
+
+!new Series('seriesMont2S50')
+!seriesMont2S50.title := 'Les Contes du Métro'
+!seriesMont2S50.availableCopies := 3
+!seriesMont2S50.episode := 7
+
+!new Actor('actorMont2A50')
+!actorMont2A50.name := 'Nadia Benomar'
+
+!new Actor('actorMont2A51')
+!actorMont2A51.name := 'Étienne Gagnon'
+
+!new Actor('actorMont2A52')
+!actorMont2A52.name := 'Wei Chen'
+
+!new Actor('actorMont2A53')
+!actorMont2A53.name := 'Samira El-Khoury'
+
+!insert (clientMont2C50, rentalMont2R50) into ClientRental
+!insert (clientMont2C51, rentalMont2R51) into ClientRental
+
+!insert (rentalMont2R50, movieMont2M50) into RentalCassette
+!insert (rentalMont2R50, seriesMont2S50) into RentalCassette
+!insert (rentalMont2R51, movieMont2M50) into RentalCassette
+!insert (rentalMont2R51, movieMont2M51) into RentalCassette
+
+!insert (movieMont2M50, actorMont2A51) into CassetteActor
+!insert (movieMont2M50, actorMont2A52) into CassetteActor
+!insert (movieMont2M51, actorMont2A50) into CassetteActor
+!insert (seriesMont2S50, actorMont2A51) into CassetteActor
+!insert (seriesMont2S50, actorMont2A53) into CassetteActor

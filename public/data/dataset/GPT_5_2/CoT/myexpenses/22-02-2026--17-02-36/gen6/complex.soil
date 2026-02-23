@@ -1,0 +1,229 @@
+!new Currency('currencyCNYComplex5b')
+!currencyCNYComplex5b.name := 'Chinese Yuan Renminbi'
+!currencyCNYComplex5b.abbreviation := 'CNY'
+
+!new Currency('currencyARSComplex5b')
+!currencyARSComplex5b.name := 'Argentine Peso'
+!currencyARSComplex5b.abbreviation := 'ARS'
+
+!new Currency('currencyTRYComplex5b')
+!currencyTRYComplex5b.name := 'Turkish Lira'
+!currencyTRYComplex5b.abbreviation := 'TRY'
+
+!new Currency('currencyKESComplex5b')
+!currencyKESComplex5b.name := 'Kenyan Shilling'
+!currencyKESComplex5b.abbreviation := 'KES'
+
+!new Expense('expenseShanghaiPackagingSupplierAudit_b')
+!expenseShanghaiPackagingSupplierAudit_b.amount := 3245.50
+!expenseShanghaiPackagingSupplierAudit_b.startDate := Date('2025-06-09')
+!expenseShanghaiPackagingSupplierAudit_b.endDate := Date('2025-06-12')
+
+!new Bill('billShanghaiCN1_b')
+!billShanghaiCN1_b.amount := 1680.00
+!billShanghaiCN1_b.category := 'Hotel (3 nights)'
+!billShanghaiCN1_b.date := Date('2025-06-09')
+!billShanghaiCN1_b.paymentMethod := #CREDIT_CARD
+!billShanghaiCN1_b.status := #VALIDATED
+
+!new Bill('billShanghaiCN2_b')
+!billShanghaiCN2_b.amount := 120.00
+!billShanghaiCN2_b.category := 'Metro card top-up'
+!billShanghaiCN2_b.date := Date('2025-06-10')
+!billShanghaiCN2_b.paymentMethod := #CASH
+!billShanghaiCN2_b.status := #VERIFIED
+
+!new Bill('billShanghaiCN3_b')
+!billShanghaiCN3_b.amount := 85.50
+!billShanghaiCN3_b.category := 'On-site PPE (safety glasses, gloves)'
+!billShanghaiCN3_b.date := Date('2025-06-10')
+!billShanghaiCN3_b.paymentMethod := #CASH
+!billShanghaiCN3_b.status := #VERIFIED
+
+!new Bill('billShanghaiCN4_b')
+!billShanghaiCN4_b.amount := 460.00
+!billShanghaiCN4_b.category := 'Supplier working dinner'
+!billShanghaiCN4_b.date := Date('2025-06-11')
+!billShanghaiCN4_b.paymentMethod := #CREDIT_CARD
+!billShanghaiCN4_b.status := #PENDING
+
+!new Bill('billShanghaiCN5_b')
+!billShanghaiCN5_b.amount := 900.00
+!billShanghaiCN5_b.category := 'Interpreter (half-day, factory walkthrough)'
+!billShanghaiCN5_b.date := Date('2025-06-11')
+!billShanghaiCN5_b.paymentMethod := #CHECK
+!billShanghaiCN5_b.status := #DRAFT
+
+!insert (expenseShanghaiPackagingSupplierAudit_b, billShanghaiCN1_b) into ExpenseContainsBills
+!insert (expenseShanghaiPackagingSupplierAudit_b, billShanghaiCN2_b) into ExpenseContainsBills
+!insert (expenseShanghaiPackagingSupplierAudit_b, billShanghaiCN3_b) into ExpenseContainsBills
+!insert (expenseShanghaiPackagingSupplierAudit_b, billShanghaiCN4_b) into ExpenseContainsBills
+!insert (expenseShanghaiPackagingSupplierAudit_b, billShanghaiCN5_b) into ExpenseContainsBills
+
+!insert (billShanghaiCN1_b, currencyCNYComplex5b) into BillCurrency
+!insert (billShanghaiCN2_b, currencyCNYComplex5b) into BillCurrency
+!insert (billShanghaiCN3_b, currencyCNYComplex5b) into BillCurrency
+!insert (billShanghaiCN4_b, currencyCNYComplex5b) into BillCurrency
+!insert (billShanghaiCN5_b, currencyCNYComplex5b) into BillCurrency
+
+!new Expense('expenseBuenosAiresFintechComplianceConference_b')
+!expenseBuenosAiresFintechComplianceConference_b.amount := 51100.00
+!expenseBuenosAiresFintechComplianceConference_b.startDate := Date('2025-10-02')
+!expenseBuenosAiresFintechComplianceConference_b.endDate := Date('2025-10-05')
+
+!new Bill('billBuenosAiresAR1_b')
+!billBuenosAiresAR1_b.amount := 30000.00
+!billBuenosAiresAR1_b.category := 'Conference registration'
+!billBuenosAiresAR1_b.date := Date('2025-10-02')
+!billBuenosAiresAR1_b.paymentMethod := #CREDIT_CARD
+!billBuenosAiresAR1_b.status := #VERIFIED
+
+!new Bill('billBuenosAiresAR2_b')
+!billBuenosAiresAR2_b.amount := 8500.00
+!billBuenosAiresAR2_b.category := 'Airport taxi (EZE to city)'
+!billBuenosAiresAR2_b.date := Date('2025-10-02')
+!billBuenosAiresAR2_b.paymentMethod := #CASH
+!billBuenosAiresAR2_b.status := #REFUSED
+
+!new Bill('billBuenosAiresAR3_b')
+!billBuenosAiresAR3_b.amount := 12600.00
+!billBuenosAiresAR3_b.category := 'Client dinner (post-panel)'
+!billBuenosAiresAR3_b.date := Date('2025-10-04')
+!billBuenosAiresAR3_b.paymentMethod := #CREDIT_CARD
+!billBuenosAiresAR3_b.status := #VALIDATED
+
+!insert (expenseBuenosAiresFintechComplianceConference_b, billBuenosAiresAR1_b) into ExpenseContainsBills
+!insert (expenseBuenosAiresFintechComplianceConference_b, billBuenosAiresAR2_b) into ExpenseContainsBills
+!insert (expenseBuenosAiresFintechComplianceConference_b, billBuenosAiresAR3_b) into ExpenseContainsBills
+
+!insert (billBuenosAiresAR1_b, currencyARSComplex5b) into BillCurrency
+!insert (billBuenosAiresAR2_b, currencyARSComplex5b) into BillCurrency
+!insert (billBuenosAiresAR3_b, currencyARSComplex5b) into BillCurrency
+
+!new Comment('commentBuenosAiresARC1_b')
+!commentBuenosAiresARC1_b.text := 'Taxi bill refused: driver did not provide an official receipt; will attempt to obtain a compliant invoice from the dispatch company.'
+
+!new Comment('commentBuenosAiresARC2_b')
+!commentBuenosAiresARC2_b.text := 'Registration receipt includes attendee name without middle initial; badge photo attached to support verification.'
+
+!insert (expenseBuenosAiresFintechComplianceConference_b, commentBuenosAiresARC1_b) into ExpenseComment
+!insert (expenseBuenosAiresFintechComplianceConference_b, commentBuenosAiresARC2_b) into ExpenseComment
+
+!new Expense('expenseIstanbulCustomerWorkshopEnablement_b')
+!expenseIstanbulCustomerWorkshopEnablement_b.amount := 7730.00
+!expenseIstanbulCustomerWorkshopEnablement_b.startDate := Date('2026-02-09')
+!expenseIstanbulCustomerWorkshopEnablement_b.endDate := Date('2026-02-11')
+
+!new Bill('billIstanbulTR1_b')
+!billIstanbulTR1_b.amount := 4500.00
+!billIstanbulTR1_b.category := 'Workshop venue deposit'
+!billIstanbulTR1_b.date := Date('2026-02-09')
+!billIstanbulTR1_b.paymentMethod := #CHECK
+!billIstanbulTR1_b.status := #VERIFIED
+
+!new Bill('billIstanbulTR2_b')
+!billIstanbulTR2_b.amount := 2100.00
+!billIstanbulTR2_b.category := 'Catering (coffee break + lunch)'
+!billIstanbulTR2_b.date := Date('2026-02-10')
+!billIstanbulTR2_b.paymentMethod := #CREDIT_CARD
+!billIstanbulTR2_b.status := #PENDING
+
+!new Bill('billIstanbulTR3_b')
+!billIstanbulTR3_b.amount := 180.00
+!billIstanbulTR3_b.category := 'Ferry/transit fares'
+!billIstanbulTR3_b.date := Date('2026-02-10')
+!billIstanbulTR3_b.paymentMethod := #CASH
+!billIstanbulTR3_b.status := #VERIFIED
+
+!new Bill('billIstanbulTR4_b')
+!billIstanbulTR4_b.amount := 950.00
+!billIstanbulTR4_b.category := 'Projector rental (backup unit)'
+!billIstanbulTR4_b.date := Date('2026-02-10')
+!billIstanbulTR4_b.paymentMethod := #CREDIT_CARD
+!billIstanbulTR4_b.status := #VALIDATED
+
+!insert (expenseIstanbulCustomerWorkshopEnablement_b, billIstanbulTR1_b) into ExpenseContainsBills
+!insert (expenseIstanbulCustomerWorkshopEnablement_b, billIstanbulTR2_b) into ExpenseContainsBills
+!insert (expenseIstanbulCustomerWorkshopEnablement_b, billIstanbulTR3_b) into ExpenseContainsBills
+!insert (expenseIstanbulCustomerWorkshopEnablement_b, billIstanbulTR4_b) into ExpenseContainsBills
+
+!insert (billIstanbulTR1_b, currencyTRYComplex5b) into BillCurrency
+!insert (billIstanbulTR2_b, currencyTRYComplex5b) into BillCurrency
+!insert (billIstanbulTR3_b, currencyTRYComplex5b) into BillCurrency
+!insert (billIstanbulTR4_b, currencyTRYComplex5b) into BillCurrency
+
+!new Comment('commentIstanbulTRC1_b')
+!commentIstanbulTRC1_b.text := 'Catering is pending until the signed attendance sheet is uploaded to justify participant count.'
+
+!insert (expenseIstanbulCustomerWorkshopEnablement_b, commentIstanbulTRC1_b) into ExpenseComment
+
+!new Expense('expenseNairobiRuralConnectivityPilot_b')
+!expenseNairobiRuralConnectivityPilot_b.amount := 13200.00
+!expenseNairobiRuralConnectivityPilot_b.startDate := Date('2025-04-21')
+!expenseNairobiRuralConnectivityPilot_b.endDate := Date('2025-04-24')
+
+!new Bill('billNairobiKE1_b')
+!billNairobiKE1_b.amount := 7200.00
+!billNairobiKE1_b.category := 'Vehicle hire (2 days, driver included)'
+!billNairobiKE1_b.date := Date('2025-04-21')
+!billNairobiKE1_b.paymentMethod := #CASH
+!billNairobiKE1_b.status := #VERIFIED
+
+!new Bill('billNairobiKE2_b')
+!billNairobiKE2_b.amount := 3400.00
+!billNairobiKE2_b.category := 'Satellite data bundle (pilot testing)'
+!billNairobiKE2_b.date := Date('2025-04-22')
+!billNairobiKE2_b.paymentMethod := #CREDIT_CARD
+!billNairobiKE2_b.status := #VALIDATED
+
+!new Bill('billNairobiKE3_b')
+!billNairobiKE3_b.amount := 2600.00
+!billNairobiKE3_b.category := 'Meals and water (field team)'
+!billNairobiKE3_b.date := Date('2025-04-23')
+!billNairobiKE3_b.paymentMethod := #CASH
+!billNairobiKE3_b.status := #DRAFT
+
+!insert (expenseNairobiRuralConnectivityPilot_b, billNairobiKE1_b) into ExpenseContainsBills
+!insert (expenseNairobiRuralConnectivityPilot_b, billNairobiKE2_b) into ExpenseContainsBills
+!insert (expenseNairobiRuralConnectivityPilot_b, billNairobiKE3_b) into ExpenseContainsBills
+
+!insert (billNairobiKE1_b, currencyKESComplex5b) into BillCurrency
+!insert (billNairobiKE2_b, currencyKESComplex5b) into BillCurrency
+!insert (billNairobiKE3_b, currencyKESComplex5b) into BillCurrency
+
+!new Comment('commentNairobiKEC1_b')
+!commentNairobiKEC1_b.text := 'Meals marked draft because receipts were collected as a single handwritten note; supervisor requested itemization.'
+
+!new Comment('commentNairobiKEC2_b')
+!commentNairobiKEC2_b.text := 'Vehicle hire verified against daily logbook entries (odometer photos included).'
+
+!insert (expenseNairobiRuralConnectivityPilot_b, commentNairobiKEC1_b) into ExpenseComment
+!insert (expenseNairobiRuralConnectivityPilot_b, commentNairobiKEC2_b) into ExpenseComment
+
+!new Expense('expenseBuenosAiresInterpretationService_b')
+!expenseBuenosAiresInterpretationService_b.amount := 18000.00
+!expenseBuenosAiresInterpretationService_b.startDate := Date('2025-10-01')
+!expenseBuenosAiresInterpretationService_b.endDate := Date('2025-10-01')
+
+!new Bill('billBuenosAiresAR4_b')
+!billBuenosAiresAR4_b.amount := 18000.00
+!billBuenosAiresAR4_b.category := 'Interpretation service (2 hours, Spanish-English)'
+!billBuenosAiresAR4_b.date := Date('2025-10-01')
+!billBuenosAiresAR4_b.paymentMethod := #CHECK
+!billBuenosAiresAR4_b.status := #PENDING
+
+!insert (expenseBuenosAiresInterpretationService_b, billBuenosAiresAR4_b) into ExpenseContainsBills
+!insert (billBuenosAiresAR4_b, currencyARSComplex5b) into BillCurrency
+
+!new Comment('commentBuenosAiresARSVC1_b')
+!commentBuenosAiresARSVC1_b.text := 'Service invoiced under vendor contract; pending until procurement confirms the supplier is active in the system.'
+
+!new Comment('commentBuenosAiresARSVC2_b')
+!commentBuenosAiresARSVC2_b.text := 'Invoice lists event location only as Microcentro; request sent to add full address for audit trail.'
+
+!new Comment('commentBuenosAiresARSVC3_b')
+!commentBuenosAiresARSVC3_b.text := 'Payment by check used due to vendor preference; bank deposit slip will be attached once received.'
+
+!insert (expenseBuenosAiresInterpretationService_b, commentBuenosAiresARSVC1_b) into ExpenseComment
+!insert (expenseBuenosAiresInterpretationService_b, commentBuenosAiresARSVC2_b) into ExpenseComment
+!insert (expenseBuenosAiresInterpretationService_b, commentBuenosAiresARSVC3_b) into ExpenseComment

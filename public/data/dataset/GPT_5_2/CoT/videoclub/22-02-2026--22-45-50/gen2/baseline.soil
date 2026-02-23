@@ -1,0 +1,69 @@
+!new Client('clientC10')
+!clientC10.clientId := 17
+!clientC10.isSuspended := false
+
+!new Client('clientC11')
+!clientC11.clientId := 305
+!clientC11.isSuspended := false
+
+!new Client('clientC12')
+!clientC12.clientId := 88
+!clientC12.isSuspended := true
+
+!new Rental('rentalR10')
+!rentalR10.date := Date('2025-11-03')
+
+!new Rental('rentalR11')
+!rentalR11.date := Date('2025-12-21')
+
+!new Movie('movieM10')
+!movieM10.title := 'Lisbon Laugh Track'
+!movieM10.availableCopies := 1
+!movieM10.genre := #Comedy
+
+!new Movie('movieM11')
+!movieM11.title := 'Desert Run'
+!movieM11.availableCopies := 7
+!movieM11.genre := #Action
+
+!new Series('seriesS10')
+!seriesS10.title := 'Northern Lights: The Series'
+!seriesS10.availableCopies := 2
+!seriesS10.episode := 1
+
+!new Series('seriesS11')
+!seriesS11.title := 'Northern Lights: The Series'
+!seriesS11.availableCopies := 2
+!seriesS11.episode := 12
+
+!new Actor('actorA10')
+!actorA10.name := 'Rajiv Menon'
+
+!new Actor('actorA11')
+!actorA11.name := 'Sofía Martínez'
+
+!new Actor('actorA12')
+!actorA12.name := 'Noura Al-Hassan'
+
+!new Actor('actorA13')
+!actorA13.name := 'Ethan O\'Connor'
+
+!new Actor('actorA14')
+!actorA14.name := 'Haruto Sato'
+
+!insert (clientC10, rentalR10) into ClientRental
+!insert (clientC11, rentalR11) into ClientRental
+
+!insert (rentalR10, seriesS10) into RentalCassette
+!insert (rentalR10, movieM10) into RentalCassette
+!insert (rentalR10, seriesS11) into RentalCassette
+!insert (rentalR11, movieM11) into RentalCassette
+!insert (rentalR11, movieM10) into RentalCassette
+
+!insert (movieM10, actorA11) into CassetteActor
+!insert (movieM10, actorA13) into CassetteActor
+!insert (movieM11, actorA12) into CassetteActor
+!insert (movieM11, actorA14) into CassetteActor
+!insert (seriesS10, actorA10) into CassetteActor
+!insert (seriesS10, actorA14) into CassetteActor
+!insert (seriesS11, actorA10) into CassetteActor

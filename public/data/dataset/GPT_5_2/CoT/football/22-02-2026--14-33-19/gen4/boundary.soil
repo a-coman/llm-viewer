@@ -1,0 +1,270 @@
+!new Club('C38')
+!C38.name := 'Toronto Franco-Ontarian SC'
+!C38.homeGround := 'Parc du Lac Shoreline Field (Toronto)'
+!C38.chairman := 'Chloe Bouchard'
+
+!new Team('T47')
+!T47.name := 'TFO Senior Squad'
+!insert (C38, T47) into ClubTeam
+
+!new Club('C39')
+!C39.name := 'Punjab Rangers FC'
+!C39.homeGround := 'Guru Nanak Sports Complex (Ludhiana)'
+!C39.chairman := 'Harpreet Singh'
+
+!new Team('T48')
+!T48.name := 'Rangers A'
+!insert (C39, T48) into ClubTeam
+
+!new Player('P152')
+!P152.name := 'Etienne Morin'
+!P152.age := 27
+!P152.bestFoot := #LEFT
+!P152.phoneNumber := '+1-416-555-0198'
+!insert (T47, P152) into TeamPlayer
+
+!new Position('POS230')
+!POS230.positionName := #MIDFIELDER
+!insert (P152, POS230) into PlayerPositions
+
+!new TrainingObjective('TO166')
+!TO166.areaToImprove := 'Quicker release under pressure'
+!TO166.startDate := '2026-05-01'
+!TO166.endDate := '2026-05-31'
+!TO166.success := false
+!insert (TO166, P152) into TrainingObjectivePlayer
+
+!new Player('P153')
+!P153.name := 'Nadine Khelifi'
+!P153.age := 22
+!P153.bestFoot := #BOTH
+!P153.phoneNumber := '+1-647-555-0133'
+!insert (T47, P153) into TeamPlayer
+
+!new Position('POS231')
+!POS231.positionName := #DEFENDER
+!insert (P153, POS231) into PlayerPositions
+
+!new Position('POS232')
+!POS232.positionName := #MIDFIELDER
+!insert (P153, POS232) into PlayerPositions
+
+!new Position('POS233')
+!POS233.positionName := #FORWARD
+!insert (P153, POS233) into PlayerPositions
+
+!new TrainingObjective('TO167')
+!TO167.areaToImprove := 'Improve aerial duels'
+!TO167.startDate := '2026-05-01'
+!TO167.endDate := '2026-06-01'
+!TO167.success := false
+!insert (TO167, P153) into TrainingObjectivePlayer
+
+!new TrainingObjective('TO168')
+!TO168.areaToImprove := 'Reduce reckless challenges'
+!TO168.startDate := '2026-05-01'
+!TO168.endDate := '2026-05-20'
+!TO168.success := true
+!insert (TO168, P153) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN56')
+!PN56.note := 'Switches roles fluidly; needs clearer communication in French/English mix.'
+!PN56.date := '2026-05-03'
+!insert (P153, PN56) into PlayerPlayerNotes
+
+!new Player('P154')
+!P154.name := 'Arjunpreet Gill'
+!P154.age := 19
+!P154.bestFoot := #RIGHT
+!P154.phoneNumber := '+91-98765-12001'
+!insert (T48, P154) into TeamPlayer
+
+!new Position('POS234')
+!POS234.positionName := #FORWARD
+!insert (P154, POS234) into PlayerPositions
+
+!new Position('POS235')
+!POS235.positionName := #MIDFIELDER
+!insert (P154, POS235) into PlayerPositions
+
+!new TrainingObjective('TO169')
+!TO169.areaToImprove := 'First touch when receiving long balls'
+!TO169.startDate := '2026-04-25'
+!TO169.endDate := '2026-05-25'
+!TO169.success := false
+!insert (TO169, P154) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN57')
+!PN57.note := 'Good pace; must stay onside during early runs.'
+!PN57.date := '2026-04-28'
+!insert (P154, PN57) into PlayerPlayerNotes
+
+!new PlayerNotes('PN58')
+!PN58.note := 'Asked for video examples; learns quickly from clips.'
+!PN58.date := '2026-05-02'
+!insert (P154, PN58) into PlayerPlayerNotes
+
+!new Player('P155')
+!P155.name := 'Simran Kaur'
+!P155.age := 31
+!P155.bestFoot := #LEFT
+!P155.phoneNumber := '+91-98765-12009'
+!insert (T48, P155) into TeamPlayer
+
+!new Position('POS236')
+!POS236.positionName := #GOALKEEPER
+!insert (P155, POS236) into PlayerPositions
+
+!new TrainingObjective('TO170')
+!TO170.areaToImprove := 'Handling wet-ball shots'
+!TO170.startDate := '2026-04-20'
+!TO170.endDate := '2026-05-20'
+!TO170.success := true
+!insert (TO170, P155) into TrainingObjectivePlayer
+
+!new TrainingObjective('TO171')
+!TO171.areaToImprove := 'Commanding the six-yard box on corners'
+!TO171.startDate := '2026-04-20'
+!TO171.endDate := '2026-06-01'
+!TO171.success := false
+!insert (TO171, P155) into TrainingObjectivePlayer
+
+!new TrainingObjective('TO172')
+!TO172.areaToImprove := 'Faster ground distribution'
+!TO172.startDate := '2026-05-01'
+!TO172.endDate := '2026-05-30'
+!TO172.success := false
+!insert (TO172, P155) into TrainingObjectivePlayer
+
+!new TrainingSession('TS63')
+!TS63.date := '2026-05-04'
+!TS63.location := 'Toronto Lakeside Dome (indoor)'
+!TS63.purpose := 'Small-sided play + defensive transitions'
+!insert (T47, TS63) into TeamTraining
+
+!new TrainingNotes('TN103')
+!TN103.note := 'Defensive shape improved; midfielders tracked runners better.'
+!TN103.date := '2026-05-04'
+!insert (TS63, TN103) into TrainingTrainingNotes
+
+!new TrainingNotes('TN104')
+!TN104.note := 'Work on avoiding soft fouls in tight areas.'
+!TN104.date := '2026-05-04'
+!insert (TS63, TN104) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA43')
+!FA43.reason := 'Work shift overran; notified coach late'
+!insert (TS63, FA43) into TrainingFailded
+!insert (FA43, P152) into FailedPlayer
+
+!new TrainingFailedToAttend('FA44')
+!FA44.reason := 'Public transit delay due to service interruption'
+!insert (TS63, FA44) into TrainingFailded
+!insert (FA44, P153) into FailedPlayer
+
+!new TrainingSession('TS64')
+!TS64.date := '2026-05-05'
+!TS64.location := 'Guru Nanak Complex - Pitch 2'
+!TS64.purpose := 'Set-piece routines and offside discipline'
+!insert (T48, TS64) into TeamTraining
+
+!new TrainingNotes('TN105')
+!TN105.note := 'Rehearsed offside line; emphasized delayed runs for striker.'
+!TN105.date := '2026-05-05'
+!insert (TS64, TN105) into TrainingTrainingNotes
+
+!new Competition('COMP17')
+!COMP17.name := 'Monsoon Relief Charity Match'
+!COMP17.type := 'Charity Friendly'
+
+!new Match('M26')
+!M26.date := '2026-05-06'
+!M26.homeAway := false
+!insert (COMP17, M26) into CompetitionMatch
+!insert (T47, M26) into LocalMatch
+!insert (T48, M26) into VisitorMatch
+
+!new MatchReport('MR26')
+!MR26.duration := 0
+!MR26.scoreLocal := 0
+!MR26.scoreVisitor := 0
+!insert (M26, MR26) into MatchMatchReport
+
+!new MatchEvent('ME141')
+!ME141.eventType := #FOUL
+!ME141.time := 0
+!insert (M26, ME141) into MatchMatchEvent
+
+!new MatchEvent('ME142')
+!ME142.eventType := #OFFSIDE
+!ME142.time := 0
+!insert (M26, ME142) into MatchMatchEvent
+
+!new MatchEvent('ME143')
+!ME143.eventType := #CORNER
+!ME143.time := 0
+!insert (M26, ME143) into MatchMatchEvent
+
+!new MatchEvent('ME144')
+!ME144.eventType := #PENALTY
+!ME144.time := 0
+!insert (M26, ME144) into MatchMatchEvent
+
+!new MatchEvent('ME145')
+!ME145.eventType := #FOUL
+!ME145.time := 0
+!insert (M26, ME145) into MatchMatchEvent
+
+!new MatchEvent('ME146')
+!ME146.eventType := #OFFSIDE
+!ME146.time := 0
+!insert (M26, ME146) into MatchMatchEvent
+
+!new MatchEvent('ME147')
+!ME147.eventType := #CORNER
+!ME147.time := 0
+!insert (M26, ME147) into MatchMatchEvent
+
+!new MatchNote('MN33')
+!MN33.note := 'Match abandoned at kickoff due to lightning warning; safety protocol followed.'
+!MN33.date := '2026-05-06'
+!insert (M26, MN33) into MatchMatchNote
+
+!new MatchNote('MN34')
+!MN34.note := 'Penalty was awarded during warmup scrimmage phase; not converted; not counted as a goal event.'
+!MN34.date := '2026-05-06'
+!insert (M26, MN34) into MatchMatchNote
+
+!new MatchNote('MN35')
+!MN35.note := 'Officials recorded administrative events only; no play time recorded.'
+!MN35.date := '2026-05-06'
+!insert (M26, MN35) into MatchMatchNote
+
+!new MatchNote('MN36')
+!MN36.note := 'Charity program continued indoors; match reschedule discussed.'
+!MN36.date := '2026-05-06'
+!insert (M26, MN36) into MatchMatchNote
+
+!new MatchPlayer('MP150')
+!MP150.booked := false
+!MP150.goals := 0
+!MP150.rating := 0
+!insert (P152, MP150) into PlayerMatch
+!insert (M26, MP150) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP150')
+!MPP150.positionName := #MIDFIELDER
+!MPP150.number := 6
+!insert (MP150, MPP150) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP151')
+!MP151.booked := false
+!MP151.goals := 0
+!MP151.rating := 0
+!insert (P154, MP151) into PlayerMatch
+!insert (M26, MP151) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP151')
+!MPP151.positionName := #FORWARD
+!MPP151.number := 11
+!insert (MP151, MPP151) into MatchPlayerMatchPlayerPosition

@@ -1,0 +1,50 @@
+!new Currency('currencyMXN')
+!currencyMXN.name := 'Mexican Peso'
+!currencyMXN.abbreviation := 'MXN'
+
+!new Expense('expenseAdvanceSettlementGuadalajara')
+!expenseAdvanceSettlementGuadalajara.amount := -300.00
+!expenseAdvanceSettlementGuadalajara.startDate := Date('2026-02-10')
+!expenseAdvanceSettlementGuadalajara.endDate := Date('2026-02-12')
+
+!new Bill('billGuadalajara001')
+!billGuadalajara001.amount := 850.00
+!billGuadalajara001.category := 'Hotel (2 nights)'
+!billGuadalajara001.date := Date('2026-02-10')
+!billGuadalajara001.paymentMethod := #CREDIT_CARD
+!billGuadalajara001.status := #VALIDATED
+
+!new Bill('billGuadalajara002')
+!billGuadalajara002.amount := 420.00
+!billGuadalajara002.category := 'Meals (per receipts)'
+!billGuadalajara002.date := Date('2026-02-11')
+!billGuadalajara002.paymentMethod := #CASH
+!billGuadalajara002.status := #VERIFIED
+
+!new Bill('billGuadalajara003')
+!billGuadalajara003.amount := 130.00
+!billGuadalajara003.category := 'Local transport (ride-share)'
+!billGuadalajara003.date := Date('2026-02-12')
+!billGuadalajara003.paymentMethod := #CHECK
+!billGuadalajara003.status := #PENDING
+
+!insert (expenseAdvanceSettlementGuadalajara, billGuadalajara001) into ExpenseContainsBills
+!insert (expenseAdvanceSettlementGuadalajara, billGuadalajara002) into ExpenseContainsBills
+!insert (expenseAdvanceSettlementGuadalajara, billGuadalajara003) into ExpenseContainsBills
+
+!insert (billGuadalajara001, currencyMXN) into BillCurrency
+!insert (billGuadalajara002, currencyMXN) into BillCurrency
+!insert (billGuadalajara003, currencyMXN) into BillCurrency
+
+!new Comment('commentGuadalajara001')
+!commentGuadalajara001.text := 'Se entregó un anticipo de viaje de 1,700.00 MXN antes de la salida.'
+
+!new Comment('commentGuadalajara002')
+!commentGuadalajara002.text := 'Gastos comprobados: 850.00 + 420.00 + 130.00 = 1,400.00 MXN. Neto: 1,400.00 - 1,700.00 = -300.00 MXN (a devolver por el empleado).'
+
+!new Comment('commentGuadalajara003')
+!commentGuadalajara003.text := 'Contabilidad registró este reporte como liquidación de anticipo, no como reembolso.'
+
+!insert (expenseAdvanceSettlementGuadalajara, commentGuadalajara001) into ExpenseComment
+!insert (expenseAdvanceSettlementGuadalajara, commentGuadalajara002) into ExpenseComment
+!insert (expenseAdvanceSettlementGuadalajara, commentGuadalajara003) into ExpenseComment

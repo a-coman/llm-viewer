@@ -1,0 +1,123 @@
+!new RentalOffice('RO_700_BC')
+!RO_700_BC.name := 'Interstate Booking Center'
+!RO_700_BC.number := 700
+!RO_700_BC.address := '101 Asylum St, Hartford, CT'
+
+!new RentalOffice('RO_701_RL')
+!RO_701_RL.name := 'Steel City After-Hours Return Lot'
+!RO_701_RL.number := 701
+!RO_701_RL.address := '202 1st Ave N, Birmingham, AL'
+
+!new RentalOffice('RO_702_YD')
+!RO_702_YD.name := 'Pacific Maintenance Yard'
+!RO_702_YD.number := 702
+!RO_702_YD.address := '3030 Morena Blvd, San Diego, CA'
+
+!new Truck('T_700_YD')
+!T_700_YD.id := 700
+!T_700_YD.registrationState := #CA
+!T_700_YD.licensePlateNumber := 'CA-YARD-700'
+!T_700_YD.vehicleTypeCode := #TRUCK10
+!T_700_YD.registrationLastMaintenanceDate := Date('2026-04-30')
+!T_700_YD.expirationDate := Date('2026-05-01')
+!T_700_YD.odometerReading := 0
+!T_700_YD.gasTankCapacity := 0.0
+!T_700_YD.workingRadio := false
+!T_700_YD.mileage := 0
+
+!new Truck('T_701_LONG')
+!T_701_LONG.id := 701
+!T_701_LONG.registrationState := #AZ
+!T_701_LONG.licensePlateNumber := 'AZ-LONGHAUL-701'
+!T_701_LONG.vehicleTypeCode := #TRUCK24
+!T_701_LONG.registrationLastMaintenanceDate := Date('2025-01-01')
+!T_701_LONG.expirationDate := Date('2030-12-31')
+!T_701_LONG.odometerReading := 1999999999
+!T_701_LONG.gasTankCapacity := 1500.0
+!T_701_LONG.workingRadio := true
+!T_701_LONG.mileage := 2000000000
+
+!new Vehicle('V_702_TRLR')
+!V_702_TRLR.id := 702
+!V_702_TRLR.registrationState := #CA
+!V_702_TRLR.licensePlateNumber := 'CA-TRLR-0702'
+!V_702_TRLR.vehicleTypeCode := #OPEN_TRAILER
+!V_702_TRLR.registrationLastMaintenanceDate := Date('2026-01-15')
+!V_702_TRLR.expirationDate := Date('2027-01-15')
+
+!new Company('C_700_IMP')
+!C_700_IMP.name := 'Nile & Son Importers, Inc.'
+!C_700_IMP.address := '400 Commerce St, Hartford, CT'
+!C_700_IMP.poorRisk := false
+!C_700_IMP.idNumber := 700000000
+
+!new Individual('I_700_LINH')
+!I_700_LINH.name := 'Linh Trần'
+!I_700_LINH.address := '55 Magnolia Ave, Birmingham, AL'
+!I_700_LINH.poorRisk := false
+!I_700_LINH.homePhone := '+1-205-555-0700'
+!I_700_LINH.driverLicenseState := #AL
+!I_700_LINH.driverLicenseNumber := 7007007
+!I_700_LINH.driverLicenseExpirationDate := Date('2029-07-01')
+
+!new Company('C_701_PROPS')
+!C_701_PROPS.name := 'Coastal Props LLC'
+!C_701_PROPS.address := '999 Harbor Dr, San Diego, CA'
+!C_701_PROPS.poorRisk := true
+!C_701_PROPS.idNumber := 701
+
+!new RentalAgreement('RA_7000')
+!RA_7000.number := 7000
+!RA_7000.rentalDate := Date('2026-05-01')
+!RA_7000.anticipatedDuration := 0
+!RA_7000.depositPaid := 0.0
+!RA_7000.quotedDailyRate := 150.0
+!RA_7000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_7001')
+!RA_7001.number := 7001
+!RA_7001.rentalDate := Date('2026-05-02')
+!RA_7001.anticipatedDuration := 9999
+!RA_7001.depositPaid := 5000.0
+!RA_7001.quotedDailyRate := 0.0
+!RA_7001.quotedRatePerMile := 2.5
+
+!new RentalAgreement('RA_7002')
+!RA_7002.number := 7002
+!RA_7002.rentalDate := Date('2026-05-03')
+!RA_7002.anticipatedDuration := 1
+!RA_7002.depositPaid := 0.0
+!RA_7002.quotedDailyRate := 0.0
+!RA_7002.quotedRatePerMile := 0.01
+
+!new RentalAgreement('RA_7003')
+!RA_7003.number := 7003
+!RA_7003.rentalDate := Date('2026-05-04')
+!RA_7003.anticipatedDuration := 1
+!RA_7003.depositPaid := 0.01
+!RA_7003.quotedDailyRate := 0.01
+!RA_7003.quotedRatePerMile := 0.0
+
+!insert (RO_702_YD, T_700_YD) into RentalOfficeVehicle
+!insert (RO_702_YD, T_701_LONG) into RentalOfficeVehicle
+!insert (RO_702_YD, V_702_TRLR) into RentalOfficeVehicle
+
+!insert (RO_700_BC, RA_7000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_700_BC, RA_7001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_700_BC, RA_7002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_700_BC, RA_7003) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_701_RL, RA_7000) into RentalOfficeRentalAgreementDrop
+!insert (RO_701_RL, RA_7001) into RentalOfficeRentalAgreementDrop
+!insert (RO_701_RL, RA_7002) into RentalOfficeRentalAgreementDrop
+!insert (RO_701_RL, RA_7003) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_7000, T_700_YD) into RentalAgreementVehicle
+!insert (RA_7001, T_701_LONG) into RentalAgreementVehicle
+!insert (RA_7002, V_702_TRLR) into RentalAgreementVehicle
+!insert (RA_7003, T_701_LONG) into RentalAgreementVehicle
+
+!insert (RA_7000, C_700_IMP) into RentalAgreementCustomer
+!insert (RA_7001, C_700_IMP) into RentalAgreementCustomer
+!insert (RA_7002, I_700_LINH) into RentalAgreementCustomer
+!insert (RA_7003, C_700_IMP) into RentalAgreementCustomer

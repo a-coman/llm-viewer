@@ -1,0 +1,94 @@
+!new AddressBook('AB_OutgoingHub_NoDetails_1')
+
+!new Company('C_Aurora_1')
+!C_Aurora_1.name := 'Aurora Marítima AS'
+!C_Aurora_1.phone := '+47 21 000 111'
+!C_Aurora_1.website := 'https://aurora-maritima.example.no'
+!C_Aurora_1.email := 'contact@aurora-maritima.example.no'
+!C_Aurora_1.industry := 'Shipping & Marine Services'
+!insert (AB_OutgoingHub_NoDetails_1, C_Aurora_1) into AddressBookMadeOfContact
+
+!new Person('P_SO_1')
+!P_SO_1.name := 'Saoirse Ó Dálaigh'
+!P_SO_1.phone := '+353 1 555 0202'
+!P_SO_1.website := ''
+!P_SO_1.email := 'saoirse.odalaigh@example.ie'
+!P_SO_1.title := 'Mx.'
+!insert (AB_OutgoingHub_NoDetails_1, P_SO_1) into AddressBookMadeOfContact
+
+!new Person('P_OK_1')
+!P_OK_1.name := 'Omar El Khatib'
+!P_OK_1.phone := '+212 5 0000 0303'
+!P_OK_1.website := 'https://omar-el-khatib.example.ma'
+!P_OK_1.email := ''
+!P_OK_1.title := ''
+!insert (AB_OutgoingHub_NoDetails_1, P_OK_1) into AddressBookMadeOfContact
+
+!new Person('P_SV_1')
+!P_SV_1.name := 'Svitlana Hrytsenko'
+!P_SV_1.phone := '+380 44 000 0404'
+!P_SV_1.website := ''
+!P_SV_1.email := 'svitlana.hrytsenko@example.ua'
+!P_SV_1.title := 'Ms.'
+!insert (AB_OutgoingHub_NoDetails_1, P_SV_1) into AddressBookMadeOfContact
+
+!new Company('C_SambaTech_1')
+!C_SambaTech_1.name := 'SambaTech Comércio e Serviços Ltda.'
+!C_SambaTech_1.phone := '+55 11 0000 0505'
+!C_SambaTech_1.website := 'https://sambatech.example.br'
+!C_SambaTech_1.email := 'contato@sambatech.example.br'
+!C_SambaTech_1.industry := 'IT Services'
+!insert (AB_OutgoingHub_NoDetails_1, C_SambaTech_1) into AddressBookMadeOfContact
+
+!new Company('C_Himalaya_1')
+!C_Himalaya_1.name := 'Himalaya Systems Pvt. Ltd.'
+!C_Himalaya_1.phone := '+977 1 000 0606'
+!C_Himalaya_1.website := ''
+!C_Himalaya_1.email := ''
+!C_Himalaya_1.industry := 'Infrastructure Engineering'
+!insert (AB_OutgoingHub_NoDetails_1, C_Himalaya_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_Aurora_R1_1')
+!Rel_Aurora_R1_1.type := #BOSS
+!insert (C_Aurora_1, Rel_Aurora_R1_1) into ContactToRelationship
+!insert (Rel_Aurora_R1_1, P_SV_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R2_1')
+!Rel_Aurora_R2_1.type := #EMPLOYEE
+!insert (C_Aurora_1, Rel_Aurora_R2_1) into ContactToRelationship
+!insert (Rel_Aurora_R2_1, P_SO_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R3_1')
+!Rel_Aurora_R3_1.type := #EMPLOYEE
+!insert (C_Aurora_1, Rel_Aurora_R3_1) into ContactToRelationship
+!insert (Rel_Aurora_R3_1, P_OK_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R4_1')
+!Rel_Aurora_R4_1.type := #SUBDIVISION
+!insert (C_Aurora_1, Rel_Aurora_R4_1) into ContactToRelationship
+!insert (Rel_Aurora_R4_1, C_SambaTech_1) into RelationshipToContact
+
+!new Relationship('Rel_Aurora_R5_1')
+!Rel_Aurora_R5_1.type := #COWORKER
+!insert (C_Aurora_1, Rel_Aurora_R5_1) into ContactToRelationship
+!insert (Rel_Aurora_R5_1, C_Himalaya_1) into RelationshipToContact
+
+!new Relationship('Rel_PSO_R1_1')
+!Rel_PSO_R1_1.type := #COWORKER
+!insert (P_SO_1, Rel_PSO_R1_1) into ContactToRelationship
+!insert (Rel_PSO_R1_1, P_OK_1) into RelationshipToContact
+
+!new Relationship('Rel_POK_R1_1')
+!Rel_POK_R1_1.type := #COWORKER
+!insert (P_OK_1, Rel_POK_R1_1) into ContactToRelationship
+!insert (Rel_POK_R1_1, P_SV_1) into RelationshipToContact
+
+!new Relationship('Rel_PSV_R1_1')
+!Rel_PSV_R1_1.type := #COWORKER
+!insert (P_SV_1, Rel_PSV_R1_1) into ContactToRelationship
+!insert (Rel_PSV_R1_1, P_SO_1) into RelationshipToContact
+
+!new Relationship('Rel_SambaTech_R1_1')
+!Rel_SambaTech_R1_1.type := #SUBDIVISION
+!insert (C_SambaTech_1, Rel_SambaTech_R1_1) into ContactToRelationship
+!insert (Rel_SambaTech_R1_1, C_Himalaya_1) into RelationshipToContact

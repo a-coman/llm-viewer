@@ -1,0 +1,162 @@
+!new Station('S3')
+
+!new Driver('DRV500')
+!DRV500.id := 'DRV-500'
+!DRV500.name := 'Abebe Bekele'
+
+!new Driver('DRV501')
+!DRV501.id := 'DRV-501'
+!DRV501.name := 'Eileen O’Connor'
+
+!new Driver('DRV502')
+!DRV502.id := 'DRV-502'
+!DRV502.name := 'Nguyễn Minh'
+
+!insert (S3, DRV500) into StationContainsDriver
+!insert (S3, DRV501) into StationContainsDriver
+!insert (S3, DRV502) into StationContainsDriver
+
+!new Customer('CUST5001')
+!CUST5001.id := 'CUST-5001'
+!CUST5001.name := 'Laila Hassan'
+!CUST5001.twitterUserName := '@laila_dispatch'
+
+!insert (S3, CUST5001) into StationContainsCustomer
+
+!new Address('APUHUB')
+!APUHUB.text := 'Blue Port Consolidation Hub, Port of Rotterdam, Netherlands'
+!new GeoLocation('GPUHUB')
+!GPUHUB.latitude := 51.9496
+!GPUHUB.longitude := 4.1447
+!insert (APUHUB, GPUHUB) into AddressContainsGeoLocation
+
+!new Address('ADL5001')
+!ADL5001.text := 'Nuuk Airport Cargo Gate, Nuuk, Greenland'
+!new GeoLocation('GDL5001')
+!GDL5001.latitude := 64.1909
+!GDL5001.longitude := -51.6781
+!insert (ADL5001, GDL5001) into AddressContainsGeoLocation
+
+!new Address('ADL5002')
+!ADL5002.text := 'Papeete Ferry Terminal, Tahiti, French Polynesia'
+!new GeoLocation('GDL5002')
+!GDL5002.latitude := -17.5516
+!GDL5002.longitude := -149.5585
+!insert (ADL5002, GDL5002) into AddressContainsGeoLocation
+
+!new Address('ADL5003')
+!ADL5003.text := 'Tiksi Port, Sakha Republic, Russia (Arctic coast)'
+!new GeoLocation('GDL5003')
+!GDL5003.latitude := 71.6350
+!GDL5003.longitude := 128.8600
+!insert (ADL5003, GDL5003) into AddressContainsGeoLocation
+
+!new Address('ADL5004')
+!ADL5004.text := 'Pago Pago Harbor, American Samoa'
+!new GeoLocation('GDL5004')
+!GDL5004.latitude := -14.2756
+!GDL5004.longitude := -170.7020
+!insert (ADL5004, GDL5004) into AddressContainsGeoLocation
+
+!new Address('ADL5006')
+!ADL5006.text := 'Hanga Roa Airfield Cargo Shed, Rapa Nui (Easter Island), Chile'
+!new GeoLocation('GDL5006')
+!GDL5006.latitude := -27.1648
+!GDL5006.longitude := -109.4218
+!insert (ADL5006, GDL5006) into AddressContainsGeoLocation
+
+!new Address('ADL5007')
+!ADL5007.text := 'Longyearbyen Logistics Yard, Svalbard, Norway'
+!new GeoLocation('GDL5007')
+!GDL5007.latitude := 78.2232
+!GDL5007.longitude := 15.6469
+!insert (ADL5007, GDL5007) into AddressContainsGeoLocation
+
+!new Address('ADL5008')
+!ADL5008.text := 'Chatham Islands Wharf, Waitangi, New Zealand (near the Date Line)'
+!new GeoLocation('GDL5008')
+!GDL5008.latitude := -43.9535
+!GDL5008.longitude := -176.5597
+!insert (ADL5008, GDL5008) into AddressContainsGeoLocation
+
+!new Shipment('SHP5001')
+!SHP5001.id := 'SHP-5001'
+!SHP5001.status := #ASSIGNED
+
+!new Shipment('SHP5002')
+!SHP5002.id := 'SHP-5002'
+!SHP5002.status := #UNDERWAY
+
+!new Shipment('SHP5003')
+!SHP5003.id := 'SHP-5003'
+!SHP5003.status := #ASSIGNED
+
+!new Shipment('SHP5004')
+!SHP5004.id := 'SHP-5004'
+!SHP5004.status := #DELIVERED
+
+!new Shipment('SHP5005')
+!SHP5005.id := 'SHP-5005'
+!SHP5005.status := #UNDERWAY
+
+!new Shipment('SHP5006')
+!SHP5006.id := 'SHP-5006'
+!SHP5006.status := #ASSIGNED
+
+!new Shipment('SHP5007')
+!SHP5007.id := 'SHP-5007'
+!SHP5007.status := #DELIVERED
+
+!new Shipment('SHP5008')
+!SHP5008.id := 'SHP-5008'
+!SHP5008.status := #NEW
+
+!insert (S3, SHP5001) into StationShipment
+!insert (S3, SHP5002) into StationShipment
+!insert (S3, SHP5003) into StationShipment
+!insert (S3, SHP5004) into StationShipment
+!insert (S3, SHP5005) into StationShipment
+!insert (S3, SHP5006) into StationShipment
+!insert (S3, SHP5007) into StationShipment
+!insert (S3, SHP5008) into StationShipment
+
+!insert (CUST5001, SHP5001) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5002) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5003) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5004) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5005) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5006) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5007) into CustomerConsistsOfShipment
+!insert (CUST5001, SHP5008) into CustomerConsistsOfShipment
+
+!insert (SHP5001, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5001, ADL5001) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5002, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5002, ADL5002) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5003, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5003, ADL5003) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5004, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5004, ADL5004) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5005, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5005, ADL5004) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5006, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5006, ADL5006) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5007, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5007, ADL5007) into ShipmentContainsDeliveryAddress
+
+!insert (SHP5008, APUHUB) into ShipmentContainsPickUpAddress
+!insert (SHP5008, ADL5008) into ShipmentContainsDeliveryAddress
+
+!insert (DRV500, SHP5001) into DriverShipment
+!insert (DRV500, SHP5002) into DriverShipment
+!insert (DRV500, SHP5003) into DriverShipment
+!insert (DRV500, SHP5004) into DriverShipment
+!insert (DRV500, SHP5005) into DriverShipment
+!insert (DRV500, SHP5006) into DriverShipment
+!insert (DRV500, SHP5007) into DriverShipment

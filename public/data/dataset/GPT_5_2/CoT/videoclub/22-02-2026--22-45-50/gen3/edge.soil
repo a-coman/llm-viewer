@@ -1,0 +1,147 @@
+!new Client('clientEdge3C20')
+!clientEdge3C20.clientId := 4
+!clientEdge3C20.isSuspended := false
+
+!new Client('clientEdge3C21')
+!clientEdge3C21.clientId := 5
+!clientEdge3C21.isSuspended := false
+
+!new Rental('rentalEdge3R20')
+!rentalEdge3R20.date := Date('2024-02-30')
+
+!new Rental('rentalEdge3R21')
+!rentalEdge3R21.date := Date('Fri, 13th Month 2025')
+
+!new Movie('movieEdge3M20')
+!movieEdge3M20.title := '   '
+!movieEdge3M20.availableCopies := 0
+!movieEdge3M20.genre := #Action
+
+!new Movie('movieEdge3M21')
+!movieEdge3M21.title := 'The 400-Character Title Experiment: Part I — A Very Long Name Intended To Stress Display Fields In Older Point‑Of‑Sale Systems'
+!movieEdge3M21.availableCopies := 1
+!movieEdge3M21.genre := #Comedy
+
+!new Movie('movieEdge3M22')
+!movieEdge3M22.title := 'O Amor & o Caos'
+!movieEdge3M22.availableCopies := 2
+!movieEdge3M22.genre := #Comedy
+
+!new Movie('movieEdge3M23')
+!movieEdge3M23.title := 'Быстрый Переулок'
+!movieEdge3M23.availableCopies := 0
+!movieEdge3M23.genre := #Action
+
+!new Movie('movieEdge3M24')
+!movieEdge3M24.title := 'Kintsugi Heist'
+!movieEdge3M24.availableCopies := 1
+!movieEdge3M24.genre := #Action
+
+!new Movie('movieEdge3M25')
+!movieEdge3M25.title := 'La Última Broma'
+!movieEdge3M25.availableCopies := 0
+!movieEdge3M25.genre := #Comedy
+
+!new Series('seriesEdge3S20')
+!seriesEdge3S20.title := 'Signal Lantern'
+!seriesEdge3S20.availableCopies := 1
+!seriesEdge3S20.episode := 1
+
+!new Series('seriesEdge3S21')
+!seriesEdge3S21.title := 'Signal Lantern'
+!seriesEdge3S21.availableCopies := 1
+!seriesEdge3S21.episode := 2
+
+!new Series('seriesEdge3S22')
+!seriesEdge3S22.title := '都市の影 (City Shadows)'
+!seriesEdge3S22.availableCopies := 0
+!seriesEdge3S22.episode := 999999
+
+!new Series('seriesEdge3S23')
+!seriesEdge3S23.title := 'Café da Esquina'
+!seriesEdge3S23.availableCopies := 3
+!seriesEdge3S23.episode := 3
+
+!new Series('seriesEdge3S24')
+!seriesEdge3S24.title := 'Nordlys Journal'
+!seriesEdge3S24.availableCopies := 0
+!seriesEdge3S24.episode := 2147483647
+
+!new Series('seriesEdge3S25')
+!seriesEdge3S25.title := 'Desert Frequency'
+!seriesEdge3S25.availableCopies := 1
+!seriesEdge3S25.episode := 4
+
+!new Actor('actorEdge3A20')
+!actorEdge3A20.name := 'João Pereira'
+
+!new Actor('actorEdge3A21')
+!actorEdge3A21.name := 'Zahra Al‑Khalil'
+
+!new Actor('actorEdge3A22')
+!actorEdge3A22.name := 'Mina Cho (조민아)'
+
+!new Actor('actorEdge3A23')
+!actorEdge3A23.name := 'Étienne Morel'
+
+!new Actor('actorEdge3A24')
+!actorEdge3A24.name := 'Daria Nowak'
+
+!new Actor('actorEdge3A25')
+!actorEdge3A25.name := 'Adeola Ogun'
+
+!new Actor('actorEdge3A26')
+!actorEdge3A26.name := 'Nikolai Petrov'
+
+!new Actor('actorEdge3A27')
+!actorEdge3A27.name := 'Lucía Ríos'
+
+!new Actor('actorEdge3A28')
+!actorEdge3A28.name := 'Satoshi Kuroda'
+
+!new Actor('actorEdge3A29')
+!actorEdge3A29.name := 'Ingrid Haug'
+
+!new Actor('actorEdge3A30')
+!actorEdge3A30.name := 'Samir Haddad'
+
+!insert (clientEdge3C20, rentalEdge3R20) into ClientRental
+!insert (clientEdge3C21, rentalEdge3R21) into ClientRental
+
+!insert (rentalEdge3R20, movieEdge3M20) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M21) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M22) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M23) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M24) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M25) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S20) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S21) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S22) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S23) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S24) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S25) into RentalCassette
+
+!insert (rentalEdge3R21, movieEdge3M24) into RentalCassette
+
+!insert (movieEdge3M20, actorEdge3A26) into CassetteActor
+!insert (movieEdge3M21, actorEdge3A23) into CassetteActor
+!insert (movieEdge3M22, actorEdge3A20) into CassetteActor
+!insert (movieEdge3M22, actorEdge3A27) into CassetteActor
+!insert (movieEdge3M23, actorEdge3A26) into CassetteActor
+!insert (movieEdge3M23, actorEdge3A24) into CassetteActor
+!insert (movieEdge3M24, actorEdge3A28) into CassetteActor
+!insert (movieEdge3M25, actorEdge3A27) into CassetteActor
+
+!insert (seriesEdge3S20, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S21, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S21, actorEdge3A30) into CassetteActor
+!insert (seriesEdge3S22, actorEdge3A22) into CassetteActor
+!insert (seriesEdge3S23, actorEdge3A25) into CassetteActor
+!insert (seriesEdge3S24, actorEdge3A29) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A20) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A22) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A23) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A24) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A25) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A30) into CassetteActor

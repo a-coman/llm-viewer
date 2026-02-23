@@ -9,40 +9,40 @@
 ## pickupnet
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 1.0000 | 1.0000 | 0.8520 |
+| ALL Generations | 0.9995 | 1.0000 | 0.8849 |
 ## bank
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9872 | 0.9995 | 0.9148 |
+| ALL Generations | 0.9838 | 0.9994 | 0.9180 |
 ## hotelmanagement
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9695 | 0.9983 | 0.8080 |
+| ALL Generations | 0.9684 | 0.9986 | 0.8207 |
 ## addressbook
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | NaN | 0.9974 | NaN |
+| ALL Generations | NaN | 0.9986 | 0.9103 |
 ## myexpenses
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9938 | 0.9999 | 0.8583 |
+| ALL Generations | 0.9902 | 0.9990 | 0.8812 |
 ## restaurant
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9809 | 0.9997 | 0.8704 |
+| ALL Generations | 0.9801 | 0.9999 | 0.8818 |
 ## vehiclerental
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9843 | 1.0000 | 0.8554 |
+| ALL Generations | 0.9804 | 1.0000 | 0.8730 |
 ## statemachine
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9034 | 0.9992 | 0.8520 |
+| ALL Generations | 0.9118 | 0.9995 | 0.8580 |
 ## football
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9491 | 0.9986 | 0.8346 |
+| ALL Generations | 0.9458 | 0.9992 | 0.8327 |
 ## videoclub
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9382 | 0.9993 | 0.8406 |
+| ALL Generations | 0.9236 | 0.9996 | 0.8516 |

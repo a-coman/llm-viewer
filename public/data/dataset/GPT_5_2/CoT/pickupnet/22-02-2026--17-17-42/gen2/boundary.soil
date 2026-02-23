@@ -1,0 +1,73 @@
+!new Station('S2')
+
+!new Driver('DRV100')
+!DRV100.id := 'DRV-100'
+!DRV100.name := 'María-José Ortega'
+
+!new Driver('DRV101')
+!DRV101.id := 'DRV-101'
+!DRV101.name := 'Kenji Tanaka'
+
+!insert (S2, DRV100) into StationContainsDriver
+!insert (S2, DRV101) into StationContainsDriver
+
+!new Customer('CUST2001')
+!CUST2001.id := 'CUST-2001'
+!CUST2001.name := 'Sofía Álvarez'
+!CUST2001.twitterUserName := '@sofia_envios'
+
+!new Customer('CUST2002')
+!CUST2002.id := 'CUST-2002'
+!CUST2002.name := 'Hiroko Saitō'
+!CUST2002.twitterUserName := '@斉藤ひろこ'
+
+!insert (S2, CUST2001) into StationContainsCustomer
+!insert (S2, CUST2002) into StationContainsCustomer
+
+!new Address('APU2001')
+!APU2001.text := 'Null Island buoy area, Gulf of Guinea (0°N 0°E)'
+!new GeoLocation('G2001')
+!G2001.latitude := 0.0
+!G2001.longitude := 0.0
+!insert (APU2001, G2001) into AddressContainsGeoLocation
+
+!new Address('ADL2001')
+!ADL2001.text := 'Suva Harbour, Fiji (near the International Date Line)'
+!new GeoLocation('G2002')
+!G2002.latitude := -18.1416
+!G2002.longitude := 179.9999
+!insert (ADL2001, G2002) into AddressContainsGeoLocation
+
+!new Address('APU2002')
+!APU2002.text := 'Apia, Samoa (western side of the Date Line)'
+!new GeoLocation('G2003')
+!G2003.latitude := -13.8333
+!G2003.longitude := -171.7667
+!insert (APU2002, G2003) into AddressContainsGeoLocation
+
+!new Address('ADL2002')
+!ADL2002.text := 'Nukuʻalofa, Tonga (eastern side of the Date Line)'
+!new GeoLocation('G2004')
+!G2004.latitude := -21.1394
+!G2004.longitude := -175.2049
+!insert (ADL2002, G2004) into AddressContainsGeoLocation
+
+!new Shipment('SHP2001')
+!SHP2001.id := 'SHP-2001'
+!SHP2001.status := #DELIVERED
+
+!new Shipment('SHP2002')
+!SHP2002.id := 'SHP-2002'
+!SHP2002.status := #UNDERWAY
+
+!insert (S2, SHP2001) into StationShipment
+!insert (S2, SHP2002) into StationShipment
+
+!insert (CUST2002, SHP2001) into CustomerConsistsOfShipment
+!insert (CUST2002, SHP2002) into CustomerConsistsOfShipment
+
+!insert (SHP2001, APU2001) into ShipmentContainsPickUpAddress
+!insert (SHP2001, ADL2001) into ShipmentContainsDeliveryAddress
+
+!insert (SHP2002, APU2002) into ShipmentContainsPickUpAddress
+!insert (SHP2002, ADL2002) into ShipmentContainsDeliveryAddress

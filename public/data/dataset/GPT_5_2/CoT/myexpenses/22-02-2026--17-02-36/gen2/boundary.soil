@@ -1,0 +1,76 @@
+!new Currency('currencyUSDHigh')
+!currencyUSDHigh.name := 'US Dollar'
+!currencyUSDHigh.abbreviation := 'USD'
+
+!new Currency('currencyJPYHigh')
+!currencyJPYHigh.name := 'Japanese Yen'
+!currencyJPYHigh.abbreviation := 'JPY'
+
+!new Currency('currencyINRHigh')
+!currencyINRHigh.name := 'Indian Rupee'
+!currencyINRHigh.abbreviation := 'INR'
+
+!new Expense('expenseEHigh')
+!expenseEHigh.amount := 1000000000.00
+!expenseEHigh.startDate := Date('2024-02-29')
+!expenseEHigh.endDate := Date('2024-03-01')
+
+!new Bill('billEHighB1')
+!billEHighB1.amount := 999999999.99
+!billEHighB1.category := 'Intercontinental flight (business)'
+!billEHighB1.date := Date('2024-02-29')
+!billEHighB1.paymentMethod := #CREDIT_CARD
+!billEHighB1.status := #VERIFIED
+
+!new Bill('billEHighB2')
+!billEHighB2.amount := 0.00
+!billEHighB2.category := 'Tokyo metro ticket (promotional free ride)'
+!billEHighB2.date := Date('2024-02-29')
+!billEHighB2.paymentMethod := #CASH
+!billEHighB2.status := #REFUNDED
+
+!new Bill('billEHighB3')
+!billEHighB3.amount := 0.01
+!billEHighB3.category := 'Masala chai (token charge)'
+!billEHighB3.date := Date('2024-03-01')
+!billEHighB3.paymentMethod := #CASH
+!billEHighB3.status := #VALIDATED
+
+!new Bill('billEHighB4')
+!billEHighB4.amount := 0.00
+!billEHighB4.category := 'Hotel deposit pre-authorization (released)'
+!billEHighB4.date := Date('2024-03-01')
+!billEHighB4.paymentMethod := #CREDIT_CARD
+!billEHighB4.status := #REFUNDED
+
+!new Bill('billEHighB5')
+!billEHighB5.amount := 0.00
+!billEHighB5.category := 'Rail pass processing fee waived'
+!billEHighB5.date := Date('2024-03-01')
+!billEHighB5.paymentMethod := #CHECK
+!billEHighB5.status := #PENDING
+
+!insert (expenseEHigh, billEHighB1) into ExpenseContainsBills
+!insert (expenseEHigh, billEHighB2) into ExpenseContainsBills
+!insert (expenseEHigh, billEHighB3) into ExpenseContainsBills
+!insert (expenseEHigh, billEHighB4) into ExpenseContainsBills
+!insert (expenseEHigh, billEHighB5) into ExpenseContainsBills
+
+!insert (billEHighB1, currencyUSDHigh) into BillCurrency
+!insert (billEHighB2, currencyJPYHigh) into BillCurrency
+!insert (billEHighB3, currencyINRHigh) into BillCurrency
+!insert (billEHighB4, currencyUSDHigh) into BillCurrency
+!insert (billEHighB5, currencyJPYHigh) into BillCurrency
+
+!new Comment('commentEHighC1')
+!commentEHighC1.text := 'Flight cost is exceptionally high due to last-minute rebooking after a weather disruption.'
+
+!new Comment('commentEHighC2')
+!commentEHighC2.text := '領収書は電子版のみです（紙の発行なし）。'
+
+!new Comment('commentEHighC3')
+!commentEHighC3.text := 'Importante: los cargos de 0.00 corresponden a autorizaciones/liberaciones, no a gastos reales.'
+
+!insert (expenseEHigh, commentEHighC1) into ExpenseComment
+!insert (expenseEHigh, commentEHighC2) into ExpenseComment
+!insert (expenseEHigh, commentEHighC3) into ExpenseComment

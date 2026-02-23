@@ -1,0 +1,98 @@
+!new Restaurant('R2')
+!R2.name := 'Café Fjord'
+
+!new Owner('O3')
+!O3.name := 'Amina El‑Masri'
+!O3.percentageShares := 100
+!insert (R2, O3) into RestaurantOwner
+
+!new HeadWaiter('HW2')
+!HW2.name := 'Luca Bianchi'
+!HW2.dateOfBirth := Date('1979-11-02')
+!HW2.phoneNumber := '+39 02 5550 100'
+
+!new Waiter('W3')
+!W3.name := 'Sofía García'
+!W3.dateOfBirth := Date('2001-06-18')
+!W3.phoneNumber := '+34 91 555 0101'
+!W3.spokenLanguage := #Spanish
+!insert (HW2, W3) into HeadWaiterWaiter
+
+!new Cook('K3')
+!K3.name := 'Hans Schneider'
+!K3.dateOfBirth := Date('1990-01-15')
+!K3.phoneNumber := '+49 30 5550 222'
+!K3.yearsOfExperience := 0
+
+!new Chef('CH3')
+!CH3.name := 'Giulia Rossi'
+!CH3.dateOfBirth := Date('1995-09-09')
+!CH3.phoneNumber := '+39 06 5550 333'
+!insert (CH3, K3) into ChefCook
+
+!new Manager('M2')
+!M2.name := 'Keiko Tanaka'
+!M2.dateOfBirth := Date('1986-04-21')
+!M2.phoneNumber := '+81 3 5550 444'
+
+!new MenuItem('MI4')
+!MI4.description := 'Seasonal Sorbet (Chef’s zero-prep demo)'
+!MI4.prepTime := 0.0
+!MI4.classification := #Dessert
+!insert (MI4, CH3) into MenuItemChef
+
+!new FoodItem('F106')
+!F106.number := 1
+!F106.description := 'Sea salt flakes'
+!F106.purchaseFlag := true
+!F106.unit := #Gram
+
+!new Allergen('A_NUT2')
+!A_NUT2.type := #Nuts
+
+!new Individual('IR2')
+!IR2.number := 1
+!IR2.date := Date('2026-03-01')
+!IR2.time := Time('17:00')
+!IR2.numberPeople := 1
+!IR2.name := 'N. Min'
+!IR2.phoneNumber := '000-000-0000'
+!IR2.seating := #Inside
+!IR2.smoking := #NonSmoking
+!insert (R2, IR2) into RestaurantReservation
+!insert (IR2, W3) into ReservationWaiter
+
+!new Table('T1')
+!T1.number := 1
+!T1.description := 'Single stool at the espresso counter'
+!T1.capacity := 1
+!insert (IR2, T1) into ReservationTable
+
+!new Banquet('BR2')
+!BR2.number := 2
+!BR2.date := Date('2026-03-01')
+!BR2.time := Time('19:00')
+!BR2.numberPeople := 20
+!BR2.name := 'Göteborg Alumni Contact'
+!BR2.phoneNumber := '+46 31 555 0202'
+!BR2.groupName := 'Göteborg Alumni 2006'
+!BR2.paymentMethod := #Cash
+!BR2.busService := false
+!insert (R2, BR2) into RestaurantReservation
+!insert (BR2, W3) into ReservationWaiter
+
+!new Table('T2')
+!T2.number := 2
+!T2.description := 'Long communal table, left side'
+!T2.capacity := 10
+!insert (BR2, T2) into ReservationTable
+
+!new Table('T3')
+!T3.number := 3
+!T3.description := 'Long communal table, right side'
+!T3.capacity := 10
+!insert (BR2, T3) into ReservationTable
+
+!new RegularCustomer('C2')
+!C2.name := 'Marek Nowak'
+!C2.prefferedLanguage := #German

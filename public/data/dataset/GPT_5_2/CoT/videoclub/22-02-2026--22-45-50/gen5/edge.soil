@@ -1,0 +1,151 @@
+!new Client('clientLoopC40')
+!clientLoopC40.clientId := 9
+!clientLoopC40.isSuspended := true
+
+!new Client('clientLoopC41')
+!clientLoopC41.clientId := 10
+!clientLoopC41.isSuspended := false
+
+!new Client('clientLoopC42')
+!clientLoopC42.clientId := 11
+!clientLoopC42.isSuspended := false
+
+!new Client('clientLoopC43')
+!clientLoopC43.clientId := 12
+!clientLoopC43.isSuspended := false
+
+!new Rental('rentalLoopR40')
+!rentalLoopR40.date := Date('today')
+
+!new Rental('rentalLoopR41')
+!rentalLoopR41.date := Date('2026年02月22日')
+
+!new Rental('rentalLoopR42')
+!rentalLoopR42.date := Date('22-02-2026')
+
+!new Rental('rentalLoopR43')
+!rentalLoopR43.date := Date('٢٠٢٦-٠٢-٢٢')
+
+!new Rental('rentalLoopR44')
+!rentalLoopR44.date := Date('Sun Feb 30 2025')
+
+!new Rental('rentalLoopR45')
+!rentalLoopR45.date := Date('2026/02/22 25:61')
+
+!new Rental('rentalLoopR46')
+!rentalLoopR46.date := Date('∞')
+
+!new Movie('movieLoopM40')
+!movieLoopM40.title := 'Two Lines\nOne Tape'
+!movieLoopM40.availableCopies := 0
+!movieLoopM40.genre := #Action
+
+!new Movie('movieLoopM41')
+!movieLoopM41.title := 'Короткий Смех'
+!movieLoopM41.availableCopies := 0
+!movieLoopM41.genre := #Comedy
+
+!new Movie('movieLoopM42')
+!movieLoopM42.title := 'สายลับเงียบ'
+!movieLoopM42.availableCopies := 0
+!movieLoopM42.genre := #Action
+
+!new Movie('movieLoopM43')
+!movieLoopM43.title := 'The Very, Very, Very Long Screening Title Used Only to Stress Old Inventory Printers and Receipts'
+!movieLoopM43.availableCopies := 1
+!movieLoopM43.genre := #Comedy
+
+!new Movie('movieLoopM44')
+!movieLoopM44.title := '   The Punctuation Trial: (A) [B] {C} — D!   '
+!movieLoopM44.availableCopies := 0
+!movieLoopM44.genre := #Action
+
+!new Movie('movieLoopM45')
+!movieLoopM45.title := 'Noche de Vidrio'
+!movieLoopM45.availableCopies := 2
+!movieLoopM45.genre := #Comedy
+
+!new Movie('movieLoopM46')
+!movieLoopM46.title := 'Heimsendir'
+!movieLoopM46.availableCopies := 0
+!movieLoopM46.genre := #Action
+
+!new Actor('actorLoopA50')
+!actorLoopA50.name := 'Fátima Al‑Sayeed'
+
+!new Actor('actorLoopA51')
+!actorLoopA51.name := 'Tāne Raukura'
+
+!new Actor('actorLoopA52')
+!actorLoopA52.name := 'Ewa Kowalska'
+
+!new Actor('actorLoopA53')
+!actorLoopA53.name := 'Somchai Prasert'
+
+!new Actor('actorLoopA54')
+!actorLoopA54.name := 'Inuk Qamaniq'
+
+!new Actor('actorLoopA55')
+!actorLoopA55.name := 'Noura Benali'
+
+!new Actor('actorLoopA56')
+!actorLoopA56.name := 'Miguel Ángel Soto'
+
+!new Actor('actorLoopA57')
+!actorLoopA57.name := 'Hanae Nakamura'
+
+!new Actor('actorLoopA58')
+!actorLoopA58.name := 'Sigríður Jónsdóttir'
+
+!insert (clientLoopC41, rentalLoopR40) into ClientRental
+!insert (clientLoopC42, rentalLoopR41) into ClientRental
+!insert (clientLoopC41, rentalLoopR42) into ClientRental
+!insert (clientLoopC42, rentalLoopR43) into ClientRental
+!insert (clientLoopC41, rentalLoopR44) into ClientRental
+!insert (clientLoopC42, rentalLoopR45) into ClientRental
+!insert (clientLoopC41, rentalLoopR46) into ClientRental
+
+!insert (rentalLoopR40, movieLoopM40) into RentalCassette
+!insert (rentalLoopR40, movieLoopM41) into RentalCassette
+
+!insert (rentalLoopR41, movieLoopM41) into RentalCassette
+!insert (rentalLoopR41, movieLoopM42) into RentalCassette
+
+!insert (rentalLoopR42, movieLoopM42) into RentalCassette
+!insert (rentalLoopR42, movieLoopM43) into RentalCassette
+
+!insert (rentalLoopR43, movieLoopM43) into RentalCassette
+!insert (rentalLoopR43, movieLoopM44) into RentalCassette
+
+!insert (rentalLoopR44, movieLoopM44) into RentalCassette
+!insert (rentalLoopR44, movieLoopM45) into RentalCassette
+
+!insert (rentalLoopR45, movieLoopM45) into RentalCassette
+!insert (rentalLoopR45, movieLoopM46) into RentalCassette
+
+!insert (rentalLoopR46, movieLoopM46) into RentalCassette
+!insert (rentalLoopR46, movieLoopM40) into RentalCassette
+
+!insert (movieLoopM40, actorLoopA50) into CassetteActor
+!insert (movieLoopM40, actorLoopA54) into CassetteActor
+
+!insert (movieLoopM41, actorLoopA50) into CassetteActor
+!insert (movieLoopM41, actorLoopA52) into CassetteActor
+
+!insert (movieLoopM42, actorLoopA50) into CassetteActor
+!insert (movieLoopM42, actorLoopA53) into CassetteActor
+
+!insert (movieLoopM43, actorLoopA50) into CassetteActor
+!insert (movieLoopM43, actorLoopA51) into CassetteActor
+!insert (movieLoopM43, actorLoopA55) into CassetteActor
+!insert (movieLoopM43, actorLoopA56) into CassetteActor
+!insert (movieLoopM43, actorLoopA57) into CassetteActor
+
+!insert (movieLoopM44, actorLoopA50) into CassetteActor
+!insert (movieLoopM44, actorLoopA58) into CassetteActor
+
+!insert (movieLoopM45, actorLoopA50) into CassetteActor
+!insert (movieLoopM45, actorLoopA56) into CassetteActor
+
+!insert (movieLoopM46, actorLoopA50) into CassetteActor
+!insert (movieLoopM46, actorLoopA57) into CassetteActor

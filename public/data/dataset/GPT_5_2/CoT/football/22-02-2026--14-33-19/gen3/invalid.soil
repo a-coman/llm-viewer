@@ -1,0 +1,321 @@
+!new Club('C22')
+!C22.name := 'Auckland City FC'
+!C22.homeGround := 'Kiwitea Street (Auckland)'
+!C22.chairman := 'Kieran ONeill'
+
+!new Team('T27')
+!T27.name := 'Auckland City - First Team'
+!insert (C22, T27) into ClubTeam
+
+!new Team('T28')
+!T28.name := 'Auckland City - Reserves'
+!insert (C22, T28) into ClubTeam
+
+!new Club('C23')
+!C23.name := 'Waitakere United'
+!C23.homeGround := 'Trusts Arena (Auckland)'
+!C23.chairman := 'Moana Tauroa'
+
+!new Team('T29')
+!T29.name := 'Waitakere United - First Team'
+!insert (C23, T29) into ClubTeam
+
+!new Player('P83')
+!P83.name := 'Luka Petrovic'
+!P83.age := 31
+!P83.bestFoot := #RIGHT
+!P83.phoneNumber := '+64 21 445 901'
+!insert (T27, P83) into TeamPlayer
+
+!new Position('POS129')
+!POS129.positionName := #GOALKEEPER
+!insert (P83, POS129) into PlayerPositions
+
+!new TrainingObjective('TO91')
+!TO91.areaToImprove := 'Quicker restart decisions (throw vs short pass)'
+!TO91.startDate := '2026-02-01'
+!TO91.endDate := '2026-03-01'
+!TO91.success := true
+!insert (TO91, P83) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN33')
+!PN33.note := 'Excellent leadership; organizes back line well on corners.'
+!PN33.date := '2026-02-18'
+!insert (P83, PN33) into PlayerPlayerNotes
+
+!new Player('P84')
+!P84.name := 'Tama Rangi'
+!P84.age := 17
+!P84.bestFoot := #BOTH
+!P84.phoneNumber := '+64 22 780 1134'
+!insert (T27, P84) into TeamPlayer
+
+!new Position('POS130')
+!POS130.positionName := #MIDFIELDER
+!insert (P84, POS130) into PlayerPositions
+
+!new Position('POS131')
+!POS131.positionName := #FORWARD
+!insert (P84, POS131) into PlayerPositions
+
+!new TrainingObjective('TO92')
+!TO92.areaToImprove := 'Strength for hold-up play vs senior defenders'
+!TO92.startDate := '2026-02-03'
+!TO92.endDate := '2026-04-15'
+!TO92.success := false
+!insert (TO92, P84) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN34')
+!PN34.note := 'Technically ready; needs to manage energy across 90 minutes.'
+!PN34.date := '2026-02-20'
+!insert (P84, PN34) into PlayerPlayerNotes
+
+!new Player('P85')
+!P85.name := 'Haruto Sato'
+!P85.age := 26
+!P85.bestFoot := #LEFT
+!P85.phoneNumber := '+64 21 990 276'
+!insert (T27, P85) into TeamPlayer
+
+!new Position('POS132')
+!POS132.positionName := #DEFENDER
+!insert (P85, POS132) into PlayerPositions
+
+!new TrainingObjective('TO93')
+!TO93.areaToImprove := 'Defending back-post crosses'
+!TO93.startDate := '2026-02-05'
+!TO93.endDate := '2026-03-20'
+!TO93.success := true
+!insert (TO93, P85) into TrainingObjectivePlayer
+
+!new TrainingSession('TS36')
+!TS36.date := '2026-02-19'
+!TS36.location := 'Kiwitea Street Training Pitch'
+!TS36.purpose := 'Match prep: compact mid-block + fast counters'
+!insert (T27, TS36) into TeamTraining
+
+!new TrainingNotes('TN56')
+!TN56.note := 'Mid-block spacing improved; wingers tracked runners more consistently.'
+!TN56.date := '2026-02-19'
+!insert (TS36, TN56) into TrainingTrainingNotes
+
+!new TrainingNotes('TN57')
+!TN57.note := 'Counter patterns worked best when #10 receives on the half-turn.'
+!TN57.date := '2026-02-19'
+!insert (TS36, TN57) into TrainingTrainingNotes
+
+!new Player('P86')
+!P86.name := 'Noah Te Kiri'
+!P86.age := 19
+!P86.bestFoot := #RIGHT
+!P86.phoneNumber := '+64 27 310 6672'
+!insert (T28, P86) into TeamPlayer
+
+!new Position('POS133')
+!POS133.positionName := #MIDFIELDER
+!insert (P86, POS133) into PlayerPositions
+
+!new TrainingObjective('TO94')
+!TO94.areaToImprove := 'Awareness before receiving (shoulder checks)'
+!TO94.startDate := '2026-02-02'
+!TO94.endDate := '2026-03-30'
+!TO94.success := false
+!insert (TO94, P86) into TrainingObjectivePlayer
+
+!insert (T28, P84) into TeamPlayer
+
+!new TrainingObjective('TO95')
+!TO95.areaToImprove := 'Decision speed in final third (one-touch options)'
+!TO95.startDate := '2026-02-06'
+!TO95.endDate := '2026-04-01'
+!TO95.success := false
+!insert (TO95, P84) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN35')
+!PN35.note := 'Plays Reserves on Saturday, First Team bench midweek-workload carefully monitored.'
+!PN35.date := '2026-02-21'
+!insert (P84, PN35) into PlayerPlayerNotes
+
+!new TrainingSession('TS37')
+!TS37.date := '2026-02-21'
+!TS37.location := 'Western Springs Training Ground'
+!TS37.purpose := 'U23-style development: high pressing + combination play'
+!insert (T28, TS37) into TeamTraining
+
+!new TrainingNotes('TN58')
+!TN58.note := 'Press was intense but lines disconnected at times; corrected with shorter distances.'
+!TN58.date := '2026-02-21'
+!insert (TS37, TN58) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA20')
+!FA20.reason := 'Part-time work shift clash (approved).'
+!insert (TS37, FA20) into TrainingFailded
+!insert (FA20, P86) into FailedPlayer
+
+!new Player('P87')
+!P87.name := 'Sione Fetu'
+!P87.age := 27
+!P87.bestFoot := #RIGHT
+!P87.phoneNumber := '+64 21 774 188'
+!insert (T29, P87) into TeamPlayer
+
+!new Position('POS134')
+!POS134.positionName := #FORWARD
+!insert (P87, POS134) into PlayerPositions
+
+!new TrainingObjective('TO96')
+!TO96.areaToImprove := 'Finishing on early crosses'
+!TO96.startDate := '2026-02-01'
+!TO96.endDate := '2026-03-15'
+!TO96.success := true
+!insert (TO96, P87) into TrainingObjectivePlayer
+
+!new Player('P88')
+!P88.name := 'Gabriel Mendes'
+!P88.age := 23
+!P88.bestFoot := #LEFT
+!P88.phoneNumber := '+64 22 600 9010'
+!insert (T29, P88) into TeamPlayer
+
+!new Position('POS135')
+!POS135.positionName := #MIDFIELDER
+!insert (P88, POS135) into PlayerPositions
+
+!new Position('POS136')
+!POS136.positionName := #DEFENDER
+!insert (P88, POS136) into PlayerPositions
+
+!new TrainingObjective('TO97')
+!TO97.areaToImprove := 'Discipline in tactical fouls (avoid bookings)'
+!TO97.startDate := '2026-02-04'
+!TO97.endDate := '2026-03-25'
+!TO97.success := false
+!insert (TO97, P88) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN36')
+!PN36.note := 'Very aggressive stepping out; needs better timing.'
+!PN36.date := '2026-02-16'
+!insert (P88, PN36) into PlayerPlayerNotes
+
+!new TrainingSession('TS38')
+!TS38.date := '2026-02-18'
+!TS38.location := 'Trusts Arena Training Field'
+!TS38.purpose := 'Defending transitions + set-piece marking'
+!insert (T29, TS38) into TeamTraining
+
+!new TrainingNotes('TN59')
+!TN59.note := 'Set-piece marking assignments clarified; fewer free headers conceded.'
+!TN59.date := '2026-02-18'
+!insert (TS38, TN59) into TrainingTrainingNotes
+
+!new Competition('COMP10')
+!COMP10.name := 'NRFL Charity Shield 2026'
+!COMP10.type := 'One-off pre-season trophy match'
+
+!new Match('M16')
+!M16.date := '2026-02-23'
+!M16.homeAway := true
+!insert (COMP10, M16) into CompetitionMatch
+!insert (T27, M16) into LocalMatch
+!insert (T29, M16) into VisitorMatch
+
+!new MatchReport('MR16')
+!MR16.duration := 90
+!MR16.scoreLocal := 2
+!MR16.scoreVisitor := 2
+!insert (M16, MR16) into MatchMatchReport
+
+!new MatchEvent('ME88')
+!ME88.eventType := #GOAL
+!ME88.time := 14
+!insert (M16, ME88) into MatchMatchEvent
+
+!new MatchEvent('ME89')
+!ME89.eventType := #GOAL
+!ME89.time := 33
+!insert (M16, ME89) into MatchMatchEvent
+
+!new MatchEvent('ME90')
+!ME90.eventType := #FOUL
+!ME90.time := 44
+!insert (M16, ME90) into MatchMatchEvent
+
+!new MatchEvent('ME91')
+!ME91.eventType := #GOAL
+!ME91.time := 61
+!insert (M16, ME91) into MatchMatchEvent
+
+!new MatchEvent('ME92')
+!ME92.eventType := #CORNER
+!ME92.time := 74
+!insert (M16, ME92) into MatchMatchEvent
+
+!new MatchEvent('ME93')
+!ME93.eventType := #GOAL
+!ME93.time := 86
+!insert (M16, ME93) into MatchMatchEvent
+
+!new MatchNote('MN19')
+!MN19.note := 'High-tempo derby atmosphere; both sides used the match for fitness and squad testing.'
+!MN19.date := '2026-02-23'
+!insert (M16, MN19) into MatchMatchNote
+
+!new MatchPlayer('MP90')
+!MP90.booked := false
+!MP90.goals := 0
+!MP90.rating := 7
+!insert (P83, MP90) into PlayerMatch
+!insert (M16, MP90) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP90')
+!MPP90.positionName := #GOALKEEPER
+!MPP90.number := 1
+!insert (MP90, MPP90) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP91')
+!MP91.booked := false
+!MP91.goals := 0
+!MP91.rating := 6
+!insert (P85, MP91) into PlayerMatch
+!insert (M16, MP91) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP91')
+!MPP91.positionName := #DEFENDER
+!MPP91.number := 5
+!insert (MP91, MPP91) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP92')
+!MP92.booked := false
+!MP92.goals := 1
+!MP92.rating := 7
+!insert (P84, MP92) into PlayerMatch
+!insert (M16, MP92) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP92')
+!MPP92.positionName := #FORWARD
+!MPP92.number := 19
+!insert (MP92, MPP92) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP93')
+!MP93.booked := false
+!MP93.goals := 1
+!MP93.rating := 7
+!insert (P87, MP93) into PlayerMatch
+!insert (M16, MP93) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP93')
+!MPP93.positionName := #FORWARD
+!MPP93.number := 9
+!insert (MP93, MPP93) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP94')
+!MP94.booked := true
+!MP94.goals := 0
+!MP94.rating := 6
+!insert (P88, MP94) into PlayerMatch
+!insert (M16, MP94) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP94')
+!MPP94.positionName := #MIDFIELDER
+!MPP94.number := 6
+!insert (MP94, MPP94) into MatchPlayerMatchPlayerPosition

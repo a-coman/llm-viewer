@@ -1,0 +1,84 @@
+!new Station('S2_BLR')
+
+!new Driver('D2100')
+!D2100.id := 'D-2100'
+!D2100.name := 'Ananya Rao'
+!insert (S2_BLR, D2100) into StationContainsDriver
+
+!new Customer('C5101')
+!C5101.id := 'C-5101'
+!C5101.name := 'Priya Iyer'
+!C5101.twitterUserName := '@priyaiyer_blr'
+
+!new Customer('C5102')
+!C5102.id := 'C-5102'
+!C5102.name := 'Omar El-Badry'
+!C5102.twitterUserName := '@omar_elbadry'
+
+!new Customer('C5103')
+!C5103.id := 'C-5103'
+!C5103.name := 'Chloé Tremblay'
+!C5103.twitterUserName := '@chloe_tremblay'
+
+!insert (S2_BLR, C5101) into StationContainsCustomer
+!insert (S2_BLR, C5102) into StationContainsCustomer
+!insert (S2_BLR, C5103) into StationContainsCustomer
+
+!new Address('AWH1')
+!AWH1.text := 'Fulfillment Bay 3, 45 Hosur Road, Bommanahalli, Bengaluru 560068, India'
+!new GeoLocation('GL11_BLR')
+!GL11_BLR.latitude := 12.8928
+!GL11_BLR.longitude := 77.6366
+!insert (AWH1, GL11_BLR) into AddressContainsGeoLocation
+
+!new Address('AAPT1')
+!AAPT1.text := 'Flat 12B, 3rd Cross, Indiranagar, Bengaluru 560038, India'
+!new GeoLocation('GL12_BLR')
+!GL12_BLR.latitude := 12.9784
+!GL12_BLR.longitude := 77.6408
+!insert (AAPT1, GL12_BLR) into AddressContainsGeoLocation
+
+!new Address('AOFF1')
+!AOFF1.text := 'Unit 7, Manyata Tech Park, Nagawara, Bengaluru 560045, India'
+!new GeoLocation('GL13_BLR')
+!GL13_BLR.latitude := 13.0477
+!GL13_BLR.longitude := 77.6214
+!insert (AOFF1, GL13_BLR) into AddressContainsGeoLocation
+
+!new Address('APU2_BLR')
+!APU2_BLR.text := 'Omar’s Café, 9 Church Street, Bengaluru 560001, India'
+!new GeoLocation('GL14_BLR')
+!GL14_BLR.latitude := 12.9759
+!GL14_BLR.longitude := 77.6033
+!insert (APU2_BLR, GL14_BLR) into AddressContainsGeoLocation
+
+!new Shipment('SH88001')
+!SH88001.id := 'SH-88001'
+!SH88001.status := #UNDERWAY
+
+!new Shipment('SH88002')
+!SH88002.id := 'SH-88002'
+!SH88002.status := #DELIVERED
+
+!new Shipment('SH88003')
+!SH88003.id := 'SH-88003'
+!SH88003.status := #NEW
+
+!insert (S2_BLR, SH88001) into StationShipment
+!insert (S2_BLR, SH88002) into StationShipment
+!insert (S2_BLR, SH88003) into StationShipment
+
+!insert (C5101, SH88001) into CustomerConsistsOfShipment
+!insert (C5101, SH88002) into CustomerConsistsOfShipment
+!insert (C5102, SH88003) into CustomerConsistsOfShipment
+
+!insert (SH88001, AWH1) into ShipmentContainsPickUpAddress
+!insert (SH88001, AAPT1) into ShipmentContainsDeliveryAddress
+!insert (D2100, SH88001) into DriverShipment
+
+!insert (SH88002, AWH1) into ShipmentContainsPickUpAddress
+!insert (SH88002, AOFF1) into ShipmentContainsDeliveryAddress
+!insert (D2100, SH88002) into DriverShipment
+
+!insert (SH88003, APU2_BLR) into ShipmentContainsPickUpAddress
+!insert (SH88003, AOFF1) into ShipmentContainsDeliveryAddress

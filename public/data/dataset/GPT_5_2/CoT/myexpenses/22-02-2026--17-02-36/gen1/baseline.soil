@@ -1,0 +1,46 @@
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Expense('expenseEXP2026001')
+!expenseEXP2026001.amount := 323.70
+!expenseEXP2026001.startDate := Date('2026-01-10')
+!expenseEXP2026001.endDate := Date('2026-01-12')
+
+!new Bill('billBILL001')
+!billBILL001.amount := 240.00
+!billBILL001.category := 'Lodging'
+!billBILL001.date := Date('2026-01-10')
+!billBILL001.paymentMethod := #CREDIT_CARD
+!billBILL001.status := #VERIFIED
+
+!new Bill('billBILL002')
+!billBILL002.amount := 35.50
+!billBILL002.category := 'Transport'
+!billBILL002.date := Date('2026-01-10')
+!billBILL002.paymentMethod := #CASH
+!billBILL002.status := #VALIDATED
+
+!new Bill('billBILL003')
+!billBILL003.amount := 48.20
+!billBILL003.category := 'Meals'
+!billBILL003.date := Date('2026-01-11')
+!billBILL003.paymentMethod := #CREDIT_CARD
+!billBILL003.status := #PENDING
+
+!insert (expenseEXP2026001, billBILL001) into ExpenseContainsBills
+!insert (expenseEXP2026001, billBILL002) into ExpenseContainsBills
+!insert (expenseEXP2026001, billBILL003) into ExpenseContainsBills
+
+!insert (billBILL001, currencyEUR) into BillCurrency
+!insert (billBILL002, currencyEUR) into BillCurrency
+!insert (billBILL003, currencyEUR) into BillCurrency
+
+!new Comment('commentCMT001')
+!commentCMT001.text := 'Receipts attached for hotel, taxi, and meals. Taxi tip included in cash amount.'
+
+!new Comment('commentCMT002')
+!commentCMT002.text := 'Please confirm the meals comply with per-diem policy; hotel bill looks OK.'
+
+!insert (expenseEXP2026001, commentCMT001) into ExpenseComment
+!insert (expenseEXP2026001, commentCMT002) into ExpenseComment

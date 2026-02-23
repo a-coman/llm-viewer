@@ -1,0 +1,143 @@
+!new Station('S7DXB')
+!new Station('S8CUZ')
+
+!new Driver('D7701')
+!D7701.id := 'D-7701'
+!D7701.name := 'Rogelio Santos'
+
+!new Driver('D7702')
+!D7702.id := 'D-7702'
+!D7702.name := 'Fatima Al Hammadi'
+
+!insert (S7DXB, D7701) into StationContainsDriver
+!insert (S7DXB, D7702) into StationContainsDriver
+
+!new Customer('C7701')
+!C7701.id := 'C-7701'
+!C7701.name := 'Maha Al Suwaidi'
+!C7701.twitterUserName := '@maha_suwaidi'
+
+!new Customer('C7702')
+!C7702.id := 'C-7702'
+!C7702.name := 'Vikram Nair'
+!C7702.twitterUserName := '@vikramnair_uae'
+
+!insert (S7DXB, C7701) into StationContainsCustomer
+!insert (S7DXB, C7702) into StationContainsCustomer
+
+!new Address('DXB_A1')
+!DXB_A1.text := 'JAFZA Gate 5, Warehouse Cluster J, Dubai, UAE'
+!new GeoLocation('DXB_GL1')
+!DXB_GL1.latitude := 24.9882
+!DXB_GL1.longitude := 55.0696
+!insert (DXB_A1, DXB_GL1) into AddressContainsGeoLocation
+
+!new Address('DXB_A2')
+!DXB_A2.text := 'Dubai Marina, The Walk (JBR), Dubai, UAE'
+!new GeoLocation('DXB_GL2')
+!DXB_GL2.latitude := 25.0800
+!DXB_GL2.longitude := 55.1362
+!insert (DXB_A2, DXB_GL2) into AddressContainsGeoLocation
+
+!new Address('DXB_A3')
+!DXB_A3.text := 'Al Fahidi Historical Neighbourhood, Bur Dubai, UAE'
+!new GeoLocation('DXB_GL3')
+!DXB_GL3.latitude := 25.2632
+!DXB_GL3.longitude := 55.2973
+!insert (DXB_A3, DXB_GL3) into AddressContainsGeoLocation
+
+!new Address('DXB_A4')
+!DXB_A4.text := 'Mall of the Emirates, Sheikh Zayed Rd, Dubai, UAE'
+!new GeoLocation('DXB_GL4')
+!DXB_GL4.latitude := 25.1180
+!DXB_GL4.longitude := 55.2006
+!insert (DXB_A4, DXB_GL4) into AddressContainsGeoLocation
+
+!new Address('DXB_A5')
+!DXB_A5.text := 'Gold Souk, Deira, Dubai, UAE'
+!new GeoLocation('DXB_GL5')
+!DXB_GL5.latitude := 25.2696
+!DXB_GL5.longitude := 55.2972
+!insert (DXB_A5, DXB_GL5) into AddressContainsGeoLocation
+
+!new Shipment('SH77001')
+!SH77001.id := 'SH-77001'
+!SH77001.status := #UNDERWAY
+
+!new Shipment('SH77002')
+!SH77002.id := 'SH-77002'
+!SH77002.status := #DELIVERED
+
+!new Shipment('SH77003')
+!SH77003.id := 'SH-77003'
+!SH77003.status := #ASSIGNED
+
+!new Shipment('SH77004')
+!SH77004.id := 'SH-77004'
+!SH77004.status := #NEW
+
+!insert (S7DXB, SH77001) into StationShipment
+!insert (S7DXB, SH77002) into StationShipment
+!insert (S7DXB, SH77003) into StationShipment
+!insert (S7DXB, SH77004) into StationShipment
+
+!insert (C7701, SH77001) into CustomerConsistsOfShipment
+!insert (C7701, SH77002) into CustomerConsistsOfShipment
+!insert (C7702, SH77003) into CustomerConsistsOfShipment
+!insert (C7702, SH77004) into CustomerConsistsOfShipment
+
+!insert (SH77001, DXB_A1) into ShipmentContainsPickUpAddress
+!insert (SH77001, DXB_A2) into ShipmentContainsDeliveryAddress
+!insert (D7701, SH77001) into DriverShipment
+
+!insert (SH77002, DXB_A3) into ShipmentContainsPickUpAddress
+!insert (SH77002, DXB_A4) into ShipmentContainsDeliveryAddress
+!insert (D7702, SH77002) into DriverShipment
+
+!insert (SH77003, DXB_A5) into ShipmentContainsPickUpAddress
+!insert (SH77003, DXB_A4) into ShipmentContainsDeliveryAddress
+!insert (D7701, SH77003) into DriverShipment
+
+!insert (SH77004, DXB_A1) into ShipmentContainsPickUpAddress
+!insert (SH77004, DXB_A5) into ShipmentContainsDeliveryAddress
+
+!new Customer('C8801')
+!C8801.id := 'C-8801'
+!C8801.name := 'Rosa Quispe'
+!C8801.twitterUserName := '@rosa_quispe_cusco'
+
+!insert (S8CUZ, C8801) into StationContainsCustomer
+
+!new Address('CUZ_A1')
+!CUZ_A1.text := 'Av. El Sol 800, Centro Histórico, Cusco, Perú'
+!new GeoLocation('CUZ_GL1')
+!CUZ_GL1.latitude := -13.5209
+!CUZ_GL1.longitude := -71.9753
+!insert (CUZ_A1, CUZ_GL1) into AddressContainsGeoLocation
+
+!new Address('CUZ_A2')
+!CUZ_A2.text := 'Terminal Terrestre de Cusco, Av. Industrial, Cusco, Perú'
+!new GeoLocation('CUZ_GL2')
+!CUZ_GL2.latitude := -13.5383
+!CUZ_GL2.longitude := -71.9187
+!insert (CUZ_A2, CUZ_GL2) into AddressContainsGeoLocation
+
+!new Shipment('SH88001_CUZ')
+!SH88001_CUZ.id := 'SH-88001-CUZ'
+!SH88001_CUZ.status := #NEW
+
+!new Shipment('SH88002_CUZ')
+!SH88002_CUZ.id := 'SH-88002-CUZ'
+!SH88002_CUZ.status := #NEW
+
+!insert (S8CUZ, SH88001_CUZ) into StationShipment
+!insert (S8CUZ, SH88002_CUZ) into StationShipment
+
+!insert (C8801, SH88001_CUZ) into CustomerConsistsOfShipment
+!insert (C8801, SH88002_CUZ) into CustomerConsistsOfShipment
+
+!insert (SH88001_CUZ, CUZ_A2) into ShipmentContainsPickUpAddress
+!insert (SH88001_CUZ, CUZ_A1) into ShipmentContainsDeliveryAddress
+
+!insert (SH88002_CUZ, CUZ_A1) into ShipmentContainsPickUpAddress
+!insert (SH88002_CUZ, CUZ_A2) into ShipmentContainsDeliveryAddress

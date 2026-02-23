@@ -1,0 +1,139 @@
+!new Restaurant('R17')
+!R17.name := 'Desert Pearl Café'
+
+!new Owner('O38')
+!O38.name := 'Aisha Al Mansoori'
+!O38.percentageShares := 80
+!insert (R17, O38) into RestaurantOwner
+
+!new Owner('O39')
+!O39.name := 'Omar Haddad'
+!O39.percentageShares := 20
+!insert (R17, O39) into RestaurantOwner
+
+!new Manager('M15')
+!M15.name := 'Priya Nair'
+!M15.dateOfBirth := Date('1987-03-21')
+!M15.phoneNumber := '+971 50 222 1000'
+
+!new HeadWaiter('HW16')
+!HW16.name := 'Samir Khalil'
+!HW16.dateOfBirth := Date('1982-09-09')
+!HW16.phoneNumber := '+971 50 222 2000'
+
+!new Waiter('W35')
+!W35.name := 'Emily Johnson'
+!W35.dateOfBirth := Date('1995-01-15')
+!W35.phoneNumber := '+971 50 222 3000'
+!W35.spokenLanguage := #English
+!insert (HW16, W35) into HeadWaiterWaiter
+
+!new Waiter('W36')
+!W36.name := 'Carlos Reyes'
+!W36.dateOfBirth := Date('1991-06-02')
+!W36.phoneNumber := '+971 50 222 4000'
+!W36.spokenLanguage := #Spanish
+!insert (HW16, W36) into HeadWaiterWaiter
+
+!new Cook('K26')
+!K26.name := 'Ravi Kumar'
+!K26.dateOfBirth := Date('1980-11-30')
+!K26.phoneNumber := '+971 50 222 5000'
+!K26.yearsOfExperience := 15
+
+!new Chef('CH29')
+!CH29.name := 'Hiro Tanaka'
+!CH29.dateOfBirth := Date('1976-04-18')
+!CH29.phoneNumber := '+971 50 222 6000'
+
+!new Table('T31_DPC')
+!T31_DPC.number := 31
+!T31_DPC.description := 'Indoor booth near the coffee bar'
+!T31_DPC.capacity := 4
+
+!new Table('T32_DPC')
+!T32_DPC.number := 32
+!T32_DPC.description := 'Patio table with shade (smoke-free section)'
+!T32_DPC.capacity := 2
+
+!new Table('T33_DPC')
+!T33_DPC.number := 33
+!T33_DPC.description := 'Large round table in the back room for groups'
+!T33_DPC.capacity := 8
+
+!new RegularCustomer('C19')
+!C19.name := 'María Fernández'
+!C19.prefferedLanguage := #Spanish
+
+!new Individual('IR20')
+!IR20.time := Time('10:30')
+!IR20.date := Date('2026-12-04')
+!IR20.numberPeople := 2
+!IR20.name := 'María Fernández'
+!IR20.phoneNumber := '+34 610 111 222'
+!IR20.number := 9001
+!IR20.seating := #Patio
+!IR20.smoking := #NonSmoking
+!insert (R17, IR20) into RestaurantReservation
+!insert (IR20, C19) into ReservationCustomer
+!insert (IR20, W36) into ReservationWaiter
+!insert (IR20, T32_DPC) into ReservationTable
+
+!new Banquet('BR16')
+!BR16.time := Time('13:00')
+!BR16.date := Date('2026-12-04')
+!BR16.numberPeople := 7
+!BR16.name := 'Gulf Tech Procurement'
+!BR16.phoneNumber := '+971 4 555 1212'
+!BR16.number := 9002
+!BR16.groupName := 'Gulf Tech Team Lunch'
+!BR16.paymentMethod := #CreditCard
+!BR16.busService := false
+!insert (R17, BR16) into RestaurantReservation
+!insert (BR16, W35) into ReservationWaiter
+!insert (BR16, W36) into ReservationWaiter
+!insert (BR16, T33_DPC) into ReservationTable
+
+!new Allergen('A4G_DPC')
+!A4G_DPC.type := #Gluten
+
+!new Allergen('A4N_DPC')
+!A4N_DPC.type := #Nuts
+
+!new FoodItem('F906')
+!F906.number := 801
+!F906.description := 'Sesame flatbread (contains wheat)'
+!F906.purchaseFlag := true
+!F906.unit := #Dozen
+!insert (F906, A4G_DPC) into FoodItemAllergen
+
+!new FoodItem('F907')
+!F907.number := 802
+!F907.description := 'Pistachio crumble'
+!F907.purchaseFlag := true
+!F907.unit := #Gram
+!insert (F907, A4N_DPC) into FoodItemAllergen
+
+!new MenuItem('MI49')
+!MI49.description := 'Spiced lamb flatbread with pistachio garnish'
+!MI49.prepTime := 16.0
+!MI49.classification := #Main
+!insert (MI49, CH29) into MenuItemChef
+!insert (MI49, F906) into MenuItemFoodItem
+!insert (MI49, F907) into MenuItemFoodItem
+
+!new ItemOrder('IO1701')
+!IO1701.time := Time('10:45')
+!insert (IR20, IO1701) into ReservationItemOrdered
+!insert (IO1701, MI49) into ItemOrderMenuItem
+
+!new ItemOrder('IO1702')
+!IO1702.time := Time('13:20')
+!insert (BR16, IO1702) into ReservationItemOrdered
+!insert (IO1702, MI49) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR15')
+!DR15.diet := #Halal
+
+!new ReportedAllergy('RA13')
+!RA13.allergen := #Nuts

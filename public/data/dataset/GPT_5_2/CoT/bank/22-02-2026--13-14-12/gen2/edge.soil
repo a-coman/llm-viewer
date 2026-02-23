@@ -1,0 +1,75 @@
+!new Bank('b17')
+!b17.country := 'Japan'
+!b17.name := 'Shōnan Mirai Bank'
+!b17.bic := 'SMIRJPJT'
+
+!new Bank('b18')
+!b18.country := 'Brazil'
+!b18.name := 'Banco do Cerrado'
+!b18.bic := 'CERRBRSP'
+
+!new Person('p37')
+!p37.firstName := 'Haruto'
+!p37.lastName := 'Tanaka'
+!p37.age := 18
+
+!new Person('p38')
+!p38.firstName := 'Amina'
+!p38.lastName := 'Yusuf'
+!p38.age := 18
+
+!new Person('p39')
+!p39.firstName := 'Benedita'
+!p39.lastName := 'Oliveira'
+!p39.age := 45
+
+!new Person('p40')
+!p40.firstName := 'Marguerite'
+!p40.lastName := 'Laurent'
+!p40.age := 122
+
+!new Person('p41')
+!p41.firstName := 'Tiago'
+!p41.lastName := 'Santos'
+!p41.age := 17
+
+!new Person('p42')
+!p42.firstName := 'Mei'
+!p42.lastName := 'Chen'
+!p42.age := 34
+
+!new Person('p43')
+!p43.firstName := 'Sofia'
+!p43.lastName := 'Ribeiro'
+!p43.age := 5
+
+!new Account('a24')
+!a24.iban := 'JP79SMIR000000000123456789'
+!a24.balance := 0
+
+!new Account('a25')
+!a25.iban := 'JP79SMIR000000000987654321'
+!a25.balance := 2
+
+!new Account('a26')
+!a26.iban := 'BR15CERR0000000000004321001'
+!a26.balance := 0
+
+!insert (b17, a24) into AccountOfBanks
+!insert (b17, a25) into AccountOfBanks
+!insert (b18, a26) into AccountOfBanks
+
+!insert (p37, a24) into Ownership
+!insert (p38, a24) into Ownership
+
+!insert (p39, a25) into Ownership
+!insert (p40, a25) into Ownership
+
+!insert (p39, a26) into Ownership
+
+!insert (p41, a24) into Use
+!insert (p42, a24) into Use
+!insert (p43, a24) into Use
+
+!insert (p39, a26) into Use
+!insert (p42, a26) into Use

@@ -1,0 +1,228 @@
+!new Currency('currencyCADComplex3')
+!currencyCADComplex3.name := 'Canadian Dollar'
+!currencyCADComplex3.abbreviation := 'CAD'
+
+!new Currency('currencyNOKComplex3')
+!currencyNOKComplex3.name := 'Norwegian Krone'
+!currencyNOKComplex3.abbreviation := 'NOK'
+
+!new Currency('currencySGDComplex3')
+!currencySGDComplex3.name := 'Singapore Dollar'
+!currencySGDComplex3.abbreviation := 'SGD'
+
+!new Currency('currencyPLNComplex3')
+!currencyPLNComplex3.name := 'Polish Złoty'
+!currencyPLNComplex3.abbreviation := 'PLN'
+
+!new Expense('expenseVancouverDocumentaryShoot')
+!expenseVancouverDocumentaryShoot.amount := 1141.00
+!expenseVancouverDocumentaryShoot.startDate := Date('2026-04-11')
+!expenseVancouverDocumentaryShoot.endDate := Date('2026-04-16')
+
+!new Bill('billVancouverVC1')
+!billVancouverVC1.amount := 620.00
+!billVancouverVC1.category := 'Camera battery kit rental'
+!billVancouverVC1.date := Date('2026-04-11')
+!billVancouverVC1.paymentMethod := #CREDIT_CARD
+!billVancouverVC1.status := #VALIDATED
+
+!new Bill('billVancouverVC2')
+!billVancouverVC2.amount := 150.00
+!billVancouverVC2.category := 'Municipal filming permit'
+!billVancouverVC2.date := Date('2026-04-12')
+!billVancouverVC2.paymentMethod := #CHECK
+!billVancouverVC2.status := #VERIFIED
+
+!new Bill('billVancouverVC3')
+!billVancouverVC3.amount := 96.45
+!billVancouverVC3.category := 'Fuel (van refill)'
+!billVancouverVC3.date := Date('2026-04-13')
+!billVancouverVC3.paymentMethod := #CASH
+!billVancouverVC3.status := #VERIFIED
+
+!new Bill('billVancouverVC4')
+!billVancouverVC4.amount := 212.30
+!billVancouverVC4.category := 'On-set catering (2 days)'
+!billVancouverVC4.date := Date('2026-04-14')
+!billVancouverVC4.paymentMethod := #CREDIT_CARD
+!billVancouverVC4.status := #PENDING
+
+!new Bill('billVancouverVC5')
+!billVancouverVC5.amount := 28.00
+!billVancouverVC5.category := 'Parking (refund processed)'
+!billVancouverVC5.date := Date('2026-04-14')
+!billVancouverVC5.paymentMethod := #CASH
+!billVancouverVC5.status := #REFUNDED
+
+!new Bill('billVancouverVC6')
+!billVancouverVC6.amount := 34.25
+!billVancouverVC6.category := 'Courier to post-production'
+!billVancouverVC6.date := Date('2026-04-16')
+!billVancouverVC6.paymentMethod := #CREDIT_CARD
+!billVancouverVC6.status := #DRAFT
+
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC1) into ExpenseContainsBills
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC2) into ExpenseContainsBills
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC3) into ExpenseContainsBills
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC4) into ExpenseContainsBills
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC5) into ExpenseContainsBills
+!insert (expenseVancouverDocumentaryShoot, billVancouverVC6) into ExpenseContainsBills
+
+!insert (billVancouverVC1, currencyCADComplex3) into BillCurrency
+!insert (billVancouverVC2, currencyCADComplex3) into BillCurrency
+!insert (billVancouverVC3, currencyCADComplex3) into BillCurrency
+!insert (billVancouverVC4, currencyCADComplex3) into BillCurrency
+!insert (billVancouverVC5, currencyCADComplex3) into BillCurrency
+!insert (billVancouverVC6, currencyCADComplex3) into BillCurrency
+
+!new Comment('commentVancouverVCC1')
+!commentVancouverVCC1.text := 'Permit paid by check because the city office did not accept corporate cards.'
+
+!new Comment('commentVancouverVCC2')
+!commentVancouverVCC2.text := 'Catering marked pending until the call sheet is attached to justify headcount.'
+
+!insert (expenseVancouverDocumentaryShoot, commentVancouverVCC1) into ExpenseComment
+!insert (expenseVancouverDocumentaryShoot, commentVancouverVCC2) into ExpenseComment
+
+!new Expense('expenseOsloDataCenterInspection')
+!expenseOsloDataCenterInspection.amount := 3500.00
+!expenseOsloDataCenterInspection.startDate := Date('2025-03-05')
+!expenseOsloDataCenterInspection.endDate := Date('2025-03-07')
+
+!new Bill('billOsloOS1')
+!billOsloOS1.amount := 2400.00
+!billOsloOS1.category := 'Hotel near Fornebu'
+!billOsloOS1.date := Date('2025-03-05')
+!billOsloOS1.paymentMethod := #CREDIT_CARD
+!billOsloOS1.status := #VERIFIED
+
+!new Bill('billOsloOS2')
+!billOsloOS2.amount := 420.00
+!billOsloOS2.category := 'Airport express train'
+!billOsloOS2.date := Date('2025-03-05')
+!billOsloOS2.paymentMethod := #CASH
+!billOsloOS2.status := #VALIDATED
+
+!new Bill('billOsloOS3')
+!billOsloOS3.amount := 680.00
+!billOsloOS3.category := 'Client lunch (project stakeholders)'
+!billOsloOS3.date := Date('2025-03-06')
+!billOsloOS3.paymentMethod := #CREDIT_CARD
+!billOsloOS3.status := #REFUSED
+
+!insert (expenseOsloDataCenterInspection, billOsloOS1) into ExpenseContainsBills
+!insert (expenseOsloDataCenterInspection, billOsloOS2) into ExpenseContainsBills
+!insert (expenseOsloDataCenterInspection, billOsloOS3) into ExpenseContainsBills
+
+!insert (billOsloOS1, currencyNOKComplex3) into BillCurrency
+!insert (billOsloOS2, currencyNOKComplex3) into BillCurrency
+!insert (billOsloOS3, currencyNOKComplex3) into BillCurrency
+
+!new Comment('commentOsloOSC1')
+!commentOsloOSC1.text := 'Lunch refused: attendee list was missing; resubmission will include meeting agenda and participants.'
+
+!insert (expenseOsloDataCenterInspection, commentOsloOSC1) into ExpenseComment
+
+!new Expense('expenseSingaporeDemoDayBoothSupport')
+!expenseSingaporeDemoDayBoothSupport.amount := 242.40
+!expenseSingaporeDemoDayBoothSupport.startDate := Date('2026-02-18')
+!expenseSingaporeDemoDayBoothSupport.endDate := Date('2026-02-19')
+
+!new Bill('billSingaporeDemoSG1')
+!billSingaporeDemoSG1.amount := 180.00
+!billSingaporeDemoSG1.category := 'Booth poster printing'
+!billSingaporeDemoSG1.date := Date('2026-02-18')
+!billSingaporeDemoSG1.paymentMethod := #CASH
+!billSingaporeDemoSG1.status := #VERIFIED
+
+!new Bill('billSingaporeDemoSG2')
+!billSingaporeDemoSG2.amount := 39.90
+!billSingaporeDemoSG2.category := 'Universal power adapter'
+!billSingaporeDemoSG2.date := Date('2026-02-18')
+!billSingaporeDemoSG2.paymentMethod := #CREDIT_CARD
+!billSingaporeDemoSG2.status := #VERIFIED
+
+!new Bill('billSingaporeDemoSG3')
+!billSingaporeDemoSG3.amount := 22.50
+!billSingaporeDemoSG3.category := 'Ride-hailing to venue'
+!billSingaporeDemoSG3.date := Date('2026-02-19')
+!billSingaporeDemoSG3.paymentMethod := #CREDIT_CARD
+!billSingaporeDemoSG3.status := #PENDING
+
+!insert (expenseSingaporeDemoDayBoothSupport, billSingaporeDemoSG1) into ExpenseContainsBills
+!insert (expenseSingaporeDemoDayBoothSupport, billSingaporeDemoSG2) into ExpenseContainsBills
+!insert (expenseSingaporeDemoDayBoothSupport, billSingaporeDemoSG3) into ExpenseContainsBills
+
+!insert (billSingaporeDemoSG1, currencySGDComplex3) into BillCurrency
+!insert (billSingaporeDemoSG2, currencySGDComplex3) into BillCurrency
+!insert (billSingaporeDemoSG3, currencySGDComplex3) into BillCurrency
+
+!new Expense('expenseKrakowTranslationKickoff')
+!expenseKrakowTranslationKickoff.amount := 1735.70
+!expenseKrakowTranslationKickoff.startDate := Date('2025-05-12')
+!expenseKrakowTranslationKickoff.endDate := Date('2025-05-15')
+
+!new Bill('billKrakowKR1')
+!billKrakowKR1.amount := 300.00
+!billKrakowKR1.category := 'Coworking meeting room'
+!billKrakowKR1.date := Date('2025-05-12')
+!billKrakowKR1.paymentMethod := #CREDIT_CARD
+!billKrakowKR1.status := #VALIDATED
+
+!new Bill('billKrakowKR2')
+!billKrakowKR2.amount := 950.00
+!billKrakowKR2.category := 'Interpreter deposit'
+!billKrakowKR2.date := Date('2025-05-13')
+!billKrakowKR2.paymentMethod := #CHECK
+!billKrakowKR2.status := #VERIFIED
+
+!new Bill('billKrakowKR3')
+!billKrakowKR3.amount := 160.50
+!billKrakowKR3.category := 'Train (Warszawa–Kraków)'
+!billKrakowKR3.date := Date('2025-05-13')
+!billKrakowKR3.paymentMethod := #CASH
+!billKrakowKR3.status := #VERIFIED
+
+!new Bill('billKrakowKR4')
+!billKrakowKR4.amount := 280.00
+!billKrakowKR4.category := 'Vendor dinner (refund after overcharge)'
+!billKrakowKR4.date := Date('2025-05-14')
+!billKrakowKR4.paymentMethod := #CREDIT_CARD
+!billKrakowKR4.status := #REFUNDED
+
+!new Bill('billKrakowKR5')
+!billKrakowKR5.amount := 45.20
+!billKrakowKR5.category := 'Stationery for workshop'
+!billKrakowKR5.date := Date('2025-05-15')
+!billKrakowKR5.paymentMethod := #CASH
+!billKrakowKR5.status := #DRAFT
+
+!insert (expenseKrakowTranslationKickoff, billKrakowKR1) into ExpenseContainsBills
+!insert (expenseKrakowTranslationKickoff, billKrakowKR2) into ExpenseContainsBills
+!insert (expenseKrakowTranslationKickoff, billKrakowKR3) into ExpenseContainsBills
+!insert (expenseKrakowTranslationKickoff, billKrakowKR4) into ExpenseContainsBills
+!insert (expenseKrakowTranslationKickoff, billKrakowKR5) into ExpenseContainsBills
+
+!insert (billKrakowKR1, currencyPLNComplex3) into BillCurrency
+!insert (billKrakowKR2, currencyPLNComplex3) into BillCurrency
+!insert (billKrakowKR3, currencyPLNComplex3) into BillCurrency
+!insert (billKrakowKR4, currencyPLNComplex3) into BillCurrency
+!insert (billKrakowKR5, currencyPLNComplex3) into BillCurrency
+
+!new Comment('commentKrakowKRC1')
+!commentKrakowKRC1.text := 'Interpreter deposit paid by check per contract clause; final invoice expected after delivery.'
+
+!new Comment('commentKrakowKRC2')
+!commentKrakowKRC2.text := 'Dinner refunded due to incorrect tip calculation on the terminal; refund slip attached.'
+
+!new Comment('commentKrakowKRC3')
+!commentKrakowKRC3.text := 'Stationery is draft pending clearer categorization as training materials for the localization budget.'
+
+!insert (expenseKrakowTranslationKickoff, commentKrakowKRC1) into ExpenseComment
+!insert (expenseKrakowTranslationKickoff, commentKrakowKRC2) into ExpenseComment
+!insert (expenseKrakowTranslationKickoff, commentKrakowKRC3) into ExpenseComment
+
+!new Expense('expenseMonthEndPlaceholderAwaitingReceipts')
+!expenseMonthEndPlaceholderAwaitingReceipts.amount := 0.00
+!expenseMonthEndPlaceholderAwaitingReceipts.startDate := Date('2026-01-01')
+!expenseMonthEndPlaceholderAwaitingReceipts.endDate := Date('2026-01-31')

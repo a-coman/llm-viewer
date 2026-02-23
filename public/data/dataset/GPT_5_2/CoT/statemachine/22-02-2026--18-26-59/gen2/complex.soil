@@ -1,0 +1,162 @@
+!new StateMachine('sm_saoPauloFloodgateControllerSM')
+!sm_saoPauloFloodgateControllerSM.name := 'saoPauloFloodgateControllerSM'
+
+!new State('st_sp_standby')
+!st_sp_standby.name := 'standby'
+!new State('st_sp_sampling')
+!st_sp_sampling.name := 'sampling'
+!new State('st_sp_forecastSync')
+!st_sp_forecastSync.name := 'forecastSync'
+!new State('st_sp_openingGates')
+!st_sp_openingGates.name := 'openingGates'
+!new State('st_sp_holdingOpen')
+!st_sp_holdingOpen.name := 'holdingOpen'
+!new State('st_sp_closingGates')
+!st_sp_closingGates.name := 'closingGates'
+!new State('st_sp_alarm')
+!st_sp_alarm.name := 'alarm'
+!new State('st_sp_manualOverride')
+!st_sp_manualOverride.name := 'manualOverride'
+
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_standby) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_sampling) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_forecastSync) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_openingGates) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_holdingOpen) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_closingGates) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_alarm) into StateMachineContainsStates
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_manualOverride) into StateMachineContainsStates
+
+!insert (sm_saoPauloFloodgateControllerSM, st_sp_standby) into StateMachineStartsStates
+
+!new Transition('tr_sp_wakeForSampling')
+!tr_sp_wakeForSampling.name := 'wakeForSampling'
+!new Transition('tr_sp_syncForecast')
+!tr_sp_syncForecast.name := 'syncForecast'
+!new Transition('tr_sp_evaluateAndReturn')
+!tr_sp_evaluateAndReturn.name := 'evaluateAndReturn'
+!new Transition('tr_sp_initiateOpening')
+!tr_sp_initiateOpening.name := 'initiateOpening'
+!new Transition('tr_sp_completeOpening')
+!tr_sp_completeOpening.name := 'completeOpening'
+!new Transition('tr_sp_holdCyclePulse')
+!tr_sp_holdCyclePulse.name := 'holdCyclePulse'
+!new Transition('tr_sp_startClosing')
+!tr_sp_startClosing.name := 'startClosing'
+!new Transition('tr_sp_completeClosing')
+!tr_sp_completeClosing.name := 'completeClosing'
+!new Transition('tr_sp_sensorFaultToAlarm')
+!tr_sp_sensorFaultToAlarm.name := 'sensorFaultToAlarm'
+!new Transition('tr_sp_motorFaultToAlarm')
+!tr_sp_motorFaultToAlarm.name := 'motorFaultToAlarm'
+!new Transition('tr_sp_stuckGateToAlarm')
+!tr_sp_stuckGateToAlarm.name := 'stuckGateToAlarm'
+!new Transition('tr_sp_escalateToManual')
+!tr_sp_escalateToManual.name := 'escalateToManual'
+!new Transition('tr_sp_manualResetToStandby')
+!tr_sp_manualResetToStandby.name := 'manualResetToStandby'
+
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_wakeForSampling) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_syncForecast) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_evaluateAndReturn) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_initiateOpening) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_completeOpening) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_holdCyclePulse) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_startClosing) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_completeClosing) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_sensorFaultToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_motorFaultToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_stuckGateToAlarm) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_escalateToManual) into StateMachineContainsTransitions
+!insert (sm_saoPauloFloodgateControllerSM, tr_sp_manualResetToStandby) into StateMachineContainsTransitions
+
+!insert (st_sp_standby, tr_sp_wakeForSampling) into StateTransition
+!insert (tr_sp_wakeForSampling, st_sp_sampling) into TransitionState
+
+!insert (st_sp_sampling, tr_sp_syncForecast) into StateTransition
+!insert (tr_sp_syncForecast, st_sp_forecastSync) into TransitionState
+
+!insert (st_sp_forecastSync, tr_sp_evaluateAndReturn) into StateTransition
+!insert (tr_sp_evaluateAndReturn, st_sp_standby) into TransitionState
+
+!insert (st_sp_forecastSync, tr_sp_initiateOpening) into StateTransition
+!insert (tr_sp_initiateOpening, st_sp_openingGates) into TransitionState
+
+!insert (st_sp_openingGates, tr_sp_completeOpening) into StateTransition
+!insert (tr_sp_completeOpening, st_sp_holdingOpen) into TransitionState
+
+!insert (st_sp_holdingOpen, tr_sp_holdCyclePulse) into StateTransition
+!insert (tr_sp_holdCyclePulse, st_sp_holdingOpen) into TransitionState
+
+!insert (st_sp_holdingOpen, tr_sp_startClosing) into StateTransition
+!insert (tr_sp_startClosing, st_sp_closingGates) into TransitionState
+
+!insert (st_sp_closingGates, tr_sp_completeClosing) into StateTransition
+!insert (tr_sp_completeClosing, st_sp_standby) into TransitionState
+
+!insert (st_sp_sampling, tr_sp_sensorFaultToAlarm) into StateTransition
+!insert (tr_sp_sensorFaultToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_openingGates, tr_sp_motorFaultToAlarm) into StateTransition
+!insert (tr_sp_motorFaultToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_closingGates, tr_sp_stuckGateToAlarm) into StateTransition
+!insert (tr_sp_stuckGateToAlarm, st_sp_alarm) into TransitionState
+
+!insert (st_sp_alarm, tr_sp_escalateToManual) into StateTransition
+!insert (tr_sp_escalateToManual, st_sp_manualOverride) into TransitionState
+
+!insert (st_sp_manualOverride, tr_sp_manualResetToStandby) into StateTransition
+!insert (tr_sp_manualResetToStandby, st_sp_standby) into TransitionState
+
+!new TimeEvent('te_sp_FTE1')
+!te_sp_FTE1.time := 15
+!insert (tr_sp_wakeForSampling, te_sp_FTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE2')
+!te_sp_FTE2.time := 3
+!insert (tr_sp_syncForecast, te_sp_FTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE3')
+!te_sp_FTE3.time := 2
+!insert (tr_sp_evaluateAndReturn, te_sp_FTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE4')
+!te_sp_FTE4.time := 1
+!insert (tr_sp_initiateOpening, te_sp_FTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE5')
+!te_sp_FTE5.time := 20
+!insert (tr_sp_completeOpening, te_sp_FTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE6')
+!te_sp_FTE6.time := 10
+!insert (tr_sp_holdCyclePulse, te_sp_FTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE7')
+!te_sp_FTE7.time := 60
+!insert (tr_sp_startClosing, te_sp_FTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE8')
+!te_sp_FTE8.time := 25
+!insert (tr_sp_completeClosing, te_sp_FTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE9')
+!te_sp_FTE9.time := 1
+!insert (tr_sp_sensorFaultToAlarm, te_sp_FTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE10')
+!te_sp_FTE10.time := 1
+!insert (tr_sp_motorFaultToAlarm, te_sp_FTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE11')
+!te_sp_FTE11.time := 1
+!insert (tr_sp_stuckGateToAlarm, te_sp_FTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE12')
+!te_sp_FTE12.time := 120
+!insert (tr_sp_escalateToManual, te_sp_FTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_sp_FTE13')
+!te_sp_FTE13.time := 30
+!insert (tr_sp_manualResetToStandby, te_sp_FTE13) into TransitionContainsEvents

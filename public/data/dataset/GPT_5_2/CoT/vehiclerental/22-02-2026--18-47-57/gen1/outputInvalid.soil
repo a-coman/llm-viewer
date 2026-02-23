@@ -1,0 +1,56 @@
+!new RentalOffice('RO_17')
+!RO_17.name := 'Port of Miami Commercial Rentals'
+!RO_17.number := 17
+!RO_17.address := '1015 North America Way, Miami, FL 33132, USA'
+
+!new RentalOffice('RO_42')
+!RO_42.name := 'Orlando Logistics Vehicle Desk'
+!RO_42.number := 42
+!RO_42.address := '1 Jeff Fuqua Blvd, Orlando, FL 32827, USA'
+
+!new RentalOffice('RO_88')
+!RO_88.name := 'Los Angeles Harbor Truck Center'
+!RO_88.number := 88
+!RO_88.address := '425 S Palos Verdes St, San Pedro, CA 90731, USA'
+
+!new Truck('T_60031')
+!T_60031.id := 60031
+!T_60031.registrationState := #FL
+!T_60031.licensePlateNumber := 'FL-3KZQ914'
+!T_60031.vehicleTypeCode := #TRUCK24
+!T_60031.registrationLastMaintenanceDate := Date('2026-01-12')
+!T_60031.expirationDate := Date('2026-11-30')
+!T_60031.odometerReading := 184220
+!T_60031.gasTankCapacity := 68.0
+!T_60031.workingRadio := true
+!T_60031.mileage := 8
+
+!new Company('C_CasaNova')
+!C_CasaNova.name := 'CasaNova Imports LLC'
+!C_CasaNova.address := '7800 NW 25th St, Doral, FL 33122, USA'
+!C_CasaNova.poorRisk := false
+!C_CasaNova.idNumber := 9137742
+
+!new Individual('I_Gomez')
+!I_Gomez.name := 'María-Luisa Gómez'
+!I_Gomez.address := '9200 NW 36th St, Doral, FL 33178, USA'
+!I_Gomez.poorRisk := false
+!I_Gomez.homePhone := '+1 (305) 555-0188'
+!I_Gomez.driverLicenseState := #FL
+!I_Gomez.driverLicenseNumber := 55319027
+!I_Gomez.driverLicenseExpirationDate := Date('2027-05-14')
+
+!new RentalAgreement('RA_202601990')
+!RA_202601990.number := 202601990
+!RA_202601990.rentalDate := Date('2026-02-20')
+!RA_202601990.anticipatedDuration := 5
+!RA_202601990.depositPaid := 0.0
+!RA_202601990.quotedDailyRate := 129.99
+!RA_202601990.quotedRatePerMile := 0.79
+
+!insert (RO_17, T_60031) into RentalOfficeVehicle
+!insert (RO_17, RA_202601990) into RentalOfficeRentalAgreementOrigin
+!insert (RA_202601990, T_60031) into RentalAgreementVehicle
+!insert (RA_202601990, C_CasaNova) into RentalAgreementCustomer
+!insert (RA_202601990, I_Gomez) into RentalAgreementCustomer
+

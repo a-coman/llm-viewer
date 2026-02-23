@@ -1,0 +1,138 @@
+!new Station('S10_EDGE6')
+!new Station('S11_EDGE6')
+!new Station('S12_EDGE6')
+
+!new Driver('EDGE6_D80')
+!EDGE6_D80.id := 'DRV-EDGE-080'
+!EDGE6_D80.name := 'Lucía Quintana'
+
+!new Driver('EDGE6_D81')
+!EDGE6_D81.id := 'DRV-EDGE-081'
+!EDGE6_D81.name := 'Tenzin Norbu (བསྟན་འཛིན)'
+
+!new Driver('EDGE6_D82')
+!EDGE6_D82.id := 'DRV-EDGE-082'
+!EDGE6_D82.name := 'Adeyemi Ọlábísí'
+
+!insert (S12_EDGE6, EDGE6_D80) into StationContainsDriver
+!insert (S12_EDGE6, EDGE6_D81) into StationContainsDriver
+!insert (S12_EDGE6, EDGE6_D82) into StationContainsDriver
+
+!new Customer('EDGE6_C50')
+!EDGE6_C50.id := 'CUS-EDGE-5001'
+!EDGE6_C50.name := 'Мария Петрова'
+!EDGE6_C50.twitterUserName := '@masha_pet'
+
+!new Customer('EDGE6_C51')
+!EDGE6_C51.id := 'CUS-EDGE-5002'
+!EDGE6_C51.name := 'Kāne Kealoha'
+!EDGE6_C51.twitterUserName := '@kane_kealoha'
+
+!new Customer('EDGE6_C52')
+!EDGE6_C52.id := 'CUS-EDGE-5003'
+!EDGE6_C52.name := 'Fatima el-Masri'
+!EDGE6_C52.twitterUserName := '@fatima_elmasri'
+
+!new Customer('EDGE6_C53')
+!EDGE6_C53.id := 'CUS-EDGE-5004'
+!EDGE6_C53.name := 'บริษัท ลานนาเหนือ (Lanna Nuea Co.)'
+!EDGE6_C53.twitterUserName := '@lanna_nuea'
+
+!insert (S11_EDGE6, EDGE6_C50) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C51) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C52) into StationContainsCustomer
+!insert (S11_EDGE6, EDGE6_C53) into StationContainsCustomer
+
+!new Address('EDGE6_A501')
+!EDGE6_A501.text := 'Cargo cage “K-17”, Keleti pályaudvar service tunnel, Budapest, Hungary'
+!new GeoLocation('EDGE6_GL501')
+!EDGE6_GL501.latitude := 47.500930
+!EDGE6_GL501.longitude := 19.083280
+!insert (EDGE6_A501, EDGE6_GL501) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A502')
+!EDGE6_A502.text := '“Bibliobus” stop, Place de la République, 75011 Paris, France'
+!new GeoLocation('EDGE6_GL502')
+!EDGE6_GL502.latitude := 48.867380
+!EDGE6_GL502.longitude := 2.363410
+!insert (EDGE6_A502, EDGE6_GL502) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A503')
+!EDGE6_A503.text := '〒100-0005 東京都千代田区丸の内1丁目 地下搬入口 (地下B2), Japan'
+!new GeoLocation('EDGE6_GL503')
+!EDGE6_GL503.latitude := 35.681236
+!EDGE6_GL503.longitude := 139.767125
+!insert (EDGE6_A503, EDGE6_GL503) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A504')
+!EDGE6_A504.text := 'Long-form address: Unit 9999, Tower “A”, Mega-Complex “Seven Rivers”, District 12, Sector 4, Block 27, Lot 3 (rear ramp), Ciudad del Este, Paraguay'
+!new GeoLocation('EDGE6_GL504')
+!EDGE6_GL504.latitude := -25.509500
+!EDGE6_GL504.longitude := -54.611000
+!insert (EDGE6_A504, EDGE6_GL504) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A505')
+!EDGE6_A505.text := 'PO Box 000, General Delivery counter, Stanley, Falkland Islands'
+!new GeoLocation('EDGE6_GL505')
+!EDGE6_GL505.latitude := -51.693500
+!EDGE6_GL505.longitude := -57.851600
+!insert (EDGE6_A505, EDGE6_GL505) into AddressContainsGeoLocation
+
+!new Address('EDGE6_A506')
+!EDGE6_A506.text := 'Field drop “Outcrop-Δ”, Simpson Desert track marker, Australia'
+!new GeoLocation('EDGE6_GL506')
+!EDGE6_GL506.latitude := -25.000000
+!EDGE6_GL506.longitude := 137.000000
+!insert (EDGE6_A506, EDGE6_GL506) into AddressContainsGeoLocation
+
+!new Shipment('EDGE6_SHP5001')
+!EDGE6_SHP5001.id := 'SHP-EDGE-5001'
+!EDGE6_SHP5001.status := #UNDERWAY
+
+!new Shipment('EDGE6_SHP5002')
+!EDGE6_SHP5002.id := 'SHP-EDGE-5002'
+!EDGE6_SHP5002.status := #ASSIGNED
+
+!new Shipment('EDGE6_SHP5003')
+!EDGE6_SHP5003.id := 'SHP-EDGE-5003'
+!EDGE6_SHP5003.status := #NEW
+
+!new Shipment('EDGE6_SHP5004')
+!EDGE6_SHP5004.id := 'SHP-EDGE-5004'
+!EDGE6_SHP5004.status := #DELIVERED
+
+!new Shipment('EDGE6_SHP5005')
+!EDGE6_SHP5005.id := 'SHP-EDGE-5005'
+!EDGE6_SHP5005.status := #ASSIGNED
+
+!insert (S10_EDGE6, EDGE6_SHP5001) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5002) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5003) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5004) into StationShipment
+!insert (S10_EDGE6, EDGE6_SHP5005) into StationShipment
+
+!insert (EDGE6_C50, EDGE6_SHP5001) into CustomerConsistsOfShipment
+!insert (EDGE6_C50, EDGE6_SHP5002) into CustomerConsistsOfShipment
+!insert (EDGE6_C50, EDGE6_SHP5003) into CustomerConsistsOfShipment
+!insert (EDGE6_C51, EDGE6_SHP5004) into CustomerConsistsOfShipment
+!insert (EDGE6_C52, EDGE6_SHP5005) into CustomerConsistsOfShipment
+
+!insert (EDGE6_SHP5001, EDGE6_A501) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5001, EDGE6_A502) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5002, EDGE6_A502) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5002, EDGE6_A503) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5003, EDGE6_A503) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5003, EDGE6_A501) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5004, EDGE6_A504) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5004, EDGE6_A505) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_SHP5005, EDGE6_A506) into ShipmentContainsPickUpAddress
+!insert (EDGE6_SHP5005, EDGE6_A504) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE6_D80, EDGE6_SHP5001) into DriverShipment
+!insert (EDGE6_D81, EDGE6_SHP5002) into DriverShipment
+!insert (EDGE6_D81, EDGE6_SHP5003) into DriverShipment
+!insert (EDGE6_D80, EDGE6_SHP5004) into DriverShipment

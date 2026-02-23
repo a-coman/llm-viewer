@@ -1,0 +1,63 @@
+!new Bank('b26')
+!b26.name := 'Riyadh Horizons Bank'
+!b26.country := 'Saudi Arabia'
+!b26.bic := 'RHHBSAJEXXX'
+
+!new Bank('b27')
+!b27.name := 'Caja del Norte'
+!b27.country := 'Spain'
+!b27.bic := 'CDNRESMMXXX'
+
+!new Person('p68')
+!p68.firstName := 'Ahmed'
+!p68.lastName := 'Al-Qahtani'
+!p68.age := 28
+
+!new Person('p69')
+!p69.firstName := 'Noor'
+!p69.lastName := 'Al-Harbi'
+!p69.age := 30
+
+!new Person('p70')
+!p70.firstName := 'Lucía'
+!p70.lastName := 'Fernández'
+!p70.age := 46
+
+!new Person('p71')
+!p71.firstName := 'Diego'
+!p71.lastName := 'Martín'
+!p71.age := 22
+
+!new Person('p72')
+!p72.firstName := 'Mei'
+!p72.lastName := 'Tanaka'
+!p72.age := 31
+
+!new Account('a42')
+!a42.iban := 'SA44 8000 0000 6080 1016 7519'
+!a42.balance := 7350
+
+!new Account('a43')
+!a43.iban := 'ES91 2100 0418 4502 0005 1332'
+!a43.balance := 40
+
+!new Account('a44')
+!a44.iban := 'ES30 0049 1500 1234 5678 9012'
+!a44.balance := 1580
+
+!insert (b26, a42) into AccountOfBanks
+!insert (b27, a43) into AccountOfBanks
+!insert (b27, a44) into AccountOfBanks
+
+!insert (p68, a42) into Ownership
+!insert (p69, a42) into Ownership
+!insert (p70, a43) into Ownership
+!insert (p71, a44) into Ownership
+
+!insert (p68, a42) into Use
+!insert (p72, a42) into Use
+
+!insert (p71, a43) into Use
+
+!insert (p71, a44) into Use
+!insert (p70, a44) into Use

@@ -1,0 +1,47 @@
+!new Customer('C21')
+!C21.firstName := 'Fatou'
+!C21.lastName := 'Diop'
+
+!new Booking('B8080')
+!B8080.bookingId := 8080
+!B8080.startDate := '2026-08-14'
+!B8080.endDate := '2026-08-16'
+!B8080.confirmed := false
+!B8080.canceled := true
+
+!new RoomReservation('R8081')
+!R8081.checkInDate := '2026-08-14'
+!R8081.checkOutDate := '2026-08-16'
+
+!new Room('RM701_REF')
+!RM701_REF.roomNumber := 701
+!RM701_REF.numBeds := 1
+!RM701_REF.pricePerNight := 150.00
+!RM701_REF.occupied := false
+!RM701_REF.blocked := false
+
+!new Bill('BL5555')
+!BL5555.billId := 5555
+!BL5555.price := -100.00
+
+!new FreeRoomTypesDTO('D36')
+!D36.roomTypeDescription := 'Standard single, high floor'
+!D36.numBeds := 1
+!D36.pricePerNight := 150.00
+!D36.numFreeRooms := 6
+
+!new FreeRoomTypesDTO('D37')
+!D37.roomTypeDescription := 'Double room, balcony'
+!D37.numBeds := 2
+!D37.pricePerNight := 195.00
+!D37.numFreeRooms := 2
+
+!insert (B8080, C21) into BookingCustomer
+
+!insert (B8080, R8081) into BookingRoomReservation
+
+!insert (R8081, RM701_REF) into RoomReservationRoom
+
+!insert (B8080, BL5555) into BookingBill
+
+!insert (BL5555, R8081) into BillRoomReservation

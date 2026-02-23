@@ -1,0 +1,96 @@
+!new StateMachine('sm_turnoClinicaAndina')
+!sm_turnoClinicaAndina.name := 'turnoClinicaAndina'
+
+!new State('st_andes_esperando')
+!st_andes_esperando.name := 'esperando'
+!new State('st_andes_registrandoDatos')
+!st_andes_registrandoDatos.name := 'registrandoDatos'
+!new State('st_andes_verificandoSeguro')
+!st_andes_verificandoSeguro.name := 'verificandoSeguro'
+!new State('st_andes_enConsulta')
+!st_andes_enConsulta.name := 'enConsulta'
+!new State('st_andes_facturando')
+!st_andes_facturando.name := 'facturando'
+!new State('st_andes_finalizado')
+!st_andes_finalizado.name := 'finalizado'
+
+!insert (sm_turnoClinicaAndina, st_andes_esperando) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_registrandoDatos) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_verificandoSeguro) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_enConsulta) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_facturando) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_finalizado) into StateMachineContainsStates
+
+!insert (sm_turnoClinicaAndina, st_andes_esperando) into StateMachineStartsStates
+
+!new Transition('tr_andes_llamarPaciente')
+!tr_andes_llamarPaciente.name := 'llamarPaciente'
+!new Transition('tr_andes_cancelarPorInactividad')
+!tr_andes_cancelarPorInactividad.name := 'cancelarPorInactividad'
+!new Transition('tr_andes_datosListos')
+!tr_andes_datosListos.name := 'datosListos'
+!new Transition('tr_andes_omitirSeguro')
+!tr_andes_omitirSeguro.name := 'omitirSeguro'
+!new Transition('tr_andes_seguroAprobado')
+!tr_andes_seguroAprobado.name := 'seguroAprobado'
+!new Transition('tr_andes_cerrarConsulta')
+!tr_andes_cerrarConsulta.name := 'cerrarConsulta'
+!new Transition('tr_andes_emitirFactura')
+!tr_andes_emitirFactura.name := 'emitirFactura'
+
+!insert (sm_turnoClinicaAndina, tr_andes_llamarPaciente) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_cancelarPorInactividad) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_datosListos) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_omitirSeguro) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_seguroAprobado) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_cerrarConsulta) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_emitirFactura) into StateMachineContainsTransitions
+
+!insert (st_andes_esperando, tr_andes_llamarPaciente) into StateTransition
+!insert (tr_andes_llamarPaciente, st_andes_registrandoDatos) into TransitionState
+
+!insert (st_andes_esperando, tr_andes_cancelarPorInactividad) into StateTransition
+!insert (tr_andes_cancelarPorInactividad, st_andes_finalizado) into TransitionState
+
+!insert (st_andes_registrandoDatos, tr_andes_datosListos) into StateTransition
+!insert (tr_andes_datosListos, st_andes_verificandoSeguro) into TransitionState
+
+!insert (st_andes_registrandoDatos, tr_andes_omitirSeguro) into StateTransition
+!insert (tr_andes_omitirSeguro, st_andes_enConsulta) into TransitionState
+
+!insert (st_andes_verificandoSeguro, tr_andes_seguroAprobado) into StateTransition
+!insert (tr_andes_seguroAprobado, st_andes_enConsulta) into TransitionState
+
+!insert (st_andes_enConsulta, tr_andes_cerrarConsulta) into StateTransition
+!insert (tr_andes_cerrarConsulta, st_andes_facturando) into TransitionState
+
+!insert (st_andes_facturando, tr_andes_emitirFactura) into StateTransition
+!insert (tr_andes_emitirFactura, st_andes_finalizado) into TransitionState
+
+!new TimeEvent('te_andes_t_llamarPaciente')
+!te_andes_t_llamarPaciente.time := 10
+!insert (tr_andes_llamarPaciente, te_andes_t_llamarPaciente) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_cancelarPorInactividad')
+!te_andes_t_cancelarPorInactividad.time := 1800
+!insert (tr_andes_cancelarPorInactividad, te_andes_t_cancelarPorInactividad) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_datosListos')
+!te_andes_t_datosListos.time := 50
+!insert (tr_andes_datosListos, te_andes_t_datosListos) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_omitirSeguro')
+!te_andes_t_omitirSeguro.time := 20
+!insert (tr_andes_omitirSeguro, te_andes_t_omitirSeguro) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_seguroAprobado')
+!te_andes_t_seguroAprobado.time := 90
+!insert (tr_andes_seguroAprobado, te_andes_t_seguroAprobado) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_cerrarConsulta')
+!te_andes_t_cerrarConsulta.time := 1200
+!insert (tr_andes_cerrarConsulta, te_andes_t_cerrarConsulta) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_emitirFactura')
+!te_andes_t_emitirFactura.time := 75
+!insert (tr_andes_emitirFactura, te_andes_t_emitirFactura) into TransitionContainsEvents

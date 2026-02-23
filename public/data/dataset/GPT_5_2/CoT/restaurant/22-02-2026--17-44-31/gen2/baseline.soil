@@ -1,0 +1,276 @@
+!new Restaurant('R7')
+!R7.name := 'Saffron Cedar Rooftop'
+
+!new Owner('O14')
+!O14.name := 'Noura Al-Khatib'
+!O14.percentageShares := 50
+!insert (R7, O14) into RestaurantOwner
+
+!new Owner('O15')
+!O15.name := 'Patrick O’Rourke'
+!O15.percentageShares := 30
+!insert (R7, O15) into RestaurantOwner
+
+!new Owner('O16')
+!O16.name := 'Mei Lin'
+!O16.percentageShares := 20
+!insert (R7, O16) into RestaurantOwner
+
+!new RegularCustomer('C7')
+!C7.name := 'Giovanni Russo'
+!C7.prefferedLanguage := #Italian
+
+!new RegularCustomer('C8')
+!C8.name := 'Anika Schneider'
+!C8.prefferedLanguage := #German
+
+!new HeadWaiter('HW7')
+!HW7.name := 'Camila Torres'
+!HW7.dateOfBirth := Date('1983-06-09')
+!HW7.phoneNumber := '+52-55-5555-2001'
+
+!new Waiter('W12')
+!W12.name := 'Hassan Abdelrahman'
+!W12.dateOfBirth := Date('1994-10-22')
+!W12.phoneNumber := '+971-50-555-1100'
+!W12.spokenLanguage := #English
+!insert (HW7, W12) into HeadWaiterWaiter
+
+!new Waiter('W13')
+!W13.name := 'Lucía Fernández'
+!W13.dateOfBirth := Date('1999-02-03')
+!W13.phoneNumber := '+34-93-555-2202'
+!W13.spokenLanguage := #Spanish
+!insert (HW7, W13) into HeadWaiterWaiter
+
+!new Waiter('W14')
+!W14.name := 'Thomas Weber'
+!W14.dateOfBirth := Date('1991-08-15')
+!W14.phoneNumber := '+49-89-555-3303'
+!W14.spokenLanguage := #German
+!insert (HW7, W14) into HeadWaiterWaiter
+
+!new Manager('M8')
+!M8.name := 'Sarah Johnson'
+!M8.dateOfBirth := Date('1979-12-01')
+!M8.phoneNumber := '+1-312-555-4404'
+
+!new Cook('K9')
+!K9.name := 'Ravi Kapoor'
+!K9.dateOfBirth := Date('1987-04-28')
+!K9.phoneNumber := '+1-646-555-5505'
+!K9.yearsOfExperience := 0
+
+!new Cook('K10')
+!K10.name := 'Élodie Martin'
+!K10.dateOfBirth := Date('1982-09-17')
+!K10.phoneNumber := '+33-1-555-6606'
+!K10.yearsOfExperience := 15
+
+!new Cook('K11')
+!K11.name := 'Mariam Hassan'
+!K11.dateOfBirth := Date('1984-03-04')
+!K11.phoneNumber := '+1-646-555-6607'
+!K11.yearsOfExperience := 15
+
+!new Chef('CH10')
+!CH10.name := 'Yuki Tanaka'
+!CH10.dateOfBirth := Date('1990-01-11')
+!CH10.phoneNumber := '+81-90-5555-1010'
+!insert (CH10, K9) into ChefCook
+
+!new Chef('CH11')
+!CH11.name := 'Adeola Okoye'
+!CH11.dateOfBirth := Date('1989-05-30')
+!CH11.phoneNumber := '+234-1-555-7070'
+!insert (CH11, K10) into ChefCook
+
+!new Chef('CH12')
+!CH12.name := 'Leila Farah'
+!CH12.dateOfBirth := Date('1993-03-07')
+!CH12.phoneNumber := '+961-1-555-8080'
+!insert (CH12, K11) into ChefCook
+
+!new BusDriver('BD6')
+!BD6.name := 'Viktor Petrov'
+!BD6.dateOfBirth := Date('1972-11-20')
+!BD6.phoneNumber := '+1-718-555-9090'
+!BD6.driverLicenseNr := 'NY-CDL-44119'
+
+!new BusDriver('BD7')
+!BD7.name := 'Mina Hosseini'
+!BD7.dateOfBirth := Date('1980-02-14')
+!BD7.phoneNumber := '+1-917-555-1212'
+!BD7.driverLicenseNr := 'NY-CDL-55220'
+
+!new Individual('IR8')
+!IR8.time := Time('18:30')
+!IR8.date := Date('2026-04-18')
+!IR8.numberPeople := 5
+!IR8.name := 'Giovanni Russo'
+!IR8.phoneNumber := '+39-333-555-7878'
+!IR8.number := 610
+!IR8.seating := #Patio
+!IR8.smoking := #NonSmoking
+!insert (R7, IR8) into RestaurantReservation
+!insert (IR8, C7) into ReservationCustomer
+!insert (IR8, W12) into ReservationWaiter
+
+!new Table('T30_R7')
+!T30_R7.number := 30
+!T30_R7.description := 'Patio 4-top under heater'
+!T30_R7.capacity := 4
+!insert (IR8, T30_R7) into ReservationTable
+
+!new Table('T31_R7')
+!T31_R7.number := 31
+!T31_R7.description := 'Small patio 2-top adjacent to table 30'
+!T31_R7.capacity := 2
+!insert (IR8, T31_R7) into ReservationTable
+
+!new Banquet('BR6')
+!BR6.time := Time('21:00')
+!BR6.date := Date('2026-04-19')
+!BR6.numberPeople := 48
+!BR6.name := 'Keisha Brown'
+!BR6.phoneNumber := '+1-202-555-3434'
+!BR6.number := 902
+!BR6.groupName := 'Spring Charity Iftar Committee'
+!BR6.paymentMethod := #Cash
+!BR6.busService := true
+!insert (R7, BR6) into RestaurantReservation
+!insert (BR6, W13) into ReservationWaiter
+!insert (BR6, W14) into ReservationWaiter
+!insert (BR6, BD6) into BanquetBusDriver
+!insert (BR6, BD7) into BanquetBusDriver
+
+!new Table('T40_R7')
+!T40_R7.number := 40
+!T40_R7.description := 'Rooftop banquet round near stage'
+!T40_R7.capacity := 10
+!insert (BR6, T40_R7) into ReservationTable
+
+!new Table('T41_R7')
+!T41_R7.number := 41
+!T41_R7.description := 'Rooftop banquet round near bar'
+!T41_R7.capacity := 10
+!insert (BR6, T41_R7) into ReservationTable
+
+!new Table('T42_R7')
+!T42_R7.number := 42
+!T42_R7.description := 'Rooftop banquet round center-left'
+!T42_R7.capacity := 10
+!insert (BR6, T42_R7) into ReservationTable
+
+!new Table('T43_R7')
+!T43_R7.number := 43
+!T43_R7.description := 'Rooftop banquet round center-right'
+!T43_R7.capacity := 10
+!insert (BR6, T43_R7) into ReservationTable
+
+!new Table('T44_R7')
+!T44_R7.number := 44
+!T44_R7.description := 'Rooftop long table for VIP/family elders'
+!T44_R7.capacity := 12
+!insert (BR6, T44_R7) into ReservationTable
+
+!new Allergen('A2_GLU7')
+!A2_GLU7.type := #Gluten
+
+!new Allergen('A2_NUT7')
+!A2_NUT7.type := #Nuts
+
+!new Allergen('A2_SEA7')
+!A2_SEA7.type := #Seafood
+
+!new Allergen('A2_LAC7')
+!A2_LAC7.type := #Lactose
+
+!new FoodItem('F401')
+!F401.number := 201
+!F401.description := 'Phyllo dough sheets'
+!F401.purchaseFlag := true
+!F401.unit := #Sheet
+!insert (F401, A2_GLU7) into FoodItemAllergen
+
+!new FoodItem('F402')
+!F402.number := 202
+!F402.description := 'Pistachios'
+!F402.purchaseFlag := true
+!F402.unit := #Gram
+!insert (F402, A2_NUT7) into FoodItemAllergen
+
+!new FoodItem('F403')
+!F403.number := 203
+!F403.description := 'Labneh (strained yogurt)'
+!F403.purchaseFlag := true
+!F403.unit := #Ounce
+!insert (F403, A2_LAC7) into FoodItemAllergen
+
+!new FoodItem('F404')
+!F404.number := 204
+!F404.description := 'Salmon fillet'
+!F404.purchaseFlag := true
+!F404.unit := #Pound
+!insert (F404, A2_SEA7) into FoodItemAllergen
+
+!new FoodItem('F405')
+!F405.number := 205
+!F405.description := 'Eggs'
+!F405.purchaseFlag := true
+!F405.unit := #Dozen
+
+!new MenuItem('MI19')
+!MI19.description := 'Pistachio baklava bites'
+!MI19.prepTime := 14.0
+!MI19.classification := #Dessert
+!insert (MI19, CH10) into MenuItemChef
+!insert (MI19, F401) into MenuItemFoodItem
+!insert (MI19, F402) into MenuItemFoodItem
+
+!new MenuItem('MI20')
+!MI20.description := 'Charred salmon with herbed labneh'
+!MI20.prepTime := 22.0
+!MI20.classification := #Main
+!insert (MI20, CH11) into MenuItemChef
+!insert (MI20, F404) into MenuItemFoodItem
+!insert (MI20, F403) into MenuItemFoodItem
+
+!new MenuItem('MI21')
+!MI21.description := 'Rooftop mint tea service'
+!MI21.prepTime := 4.0
+!MI21.classification := #Beverage
+!insert (MI21, CH10) into MenuItemChef
+
+!new MenuItem('MI22')
+!MI22.description := 'Egg & herb starter (chef’s mezze plate component)'
+!MI22.prepTime := 10.0
+!MI22.classification := #Apetizer
+!insert (MI22, CH12) into MenuItemChef
+!insert (MI22, F405) into MenuItemFoodItem
+
+!new ItemOrder('IO1001')
+!IO1001.time := Time('18:45')
+!insert (IR8, IO1001) into ReservationItemOrdered
+!insert (IO1001, MI22) into ItemOrderMenuItem
+
+!new ItemOrder('IO1002')
+!IO1002.time := Time('19:05')
+!insert (IR8, IO1002) into ReservationItemOrdered
+!insert (IO1002, MI20) into ItemOrderMenuItem
+
+!new ItemOrder('IO1003')
+!IO1003.time := Time('21:20')
+!insert (BR6, IO1003) into ReservationItemOrdered
+!insert (IO1003, MI21) into ItemOrderMenuItem
+
+!new ItemOrder('IO1004')
+!IO1004.time := Time('21:40')
+!insert (BR6, IO1004) into ReservationItemOrdered
+!insert (IO1004, MI19) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR6')
+!DR6.diet := #Kosher
+
+!new ReportedAllergy('RA5')
+!RA5.allergen := #Gluten

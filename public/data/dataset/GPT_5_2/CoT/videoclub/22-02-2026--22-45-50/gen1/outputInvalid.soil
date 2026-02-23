@@ -1,0 +1,80 @@
+!new Client('clientD1')
+!clientD1.clientId := 101
+!clientD1.isSuspended := false
+
+!new Client('clientD2')
+!clientD2.clientId := 202
+!clientD2.isSuspended := true
+
+!new Rental('rentalD1')
+!rentalD1.date := Date('2026-01-10')
+
+!new Rental('rentalD2')
+!rentalD2.date := Date('2026-02-01')
+
+!new Rental('rentalD3')
+!rentalD3.date := Date('2025-12-22')
+
+!new Movie('movieD1')
+!movieD1.title := 'Mumbai Midnight Chase'
+!movieD1.availableCopies := 2
+!movieD1.genre := #Action
+
+!new Movie('movieD2')
+!movieD2.title := 'La Comedia del Barrio'
+!movieD2.availableCopies := 0
+!movieD2.genre := #Comedy
+
+!new Series('seriesD1')
+!seriesD1.title := 'Sakura Galaxy'
+!seriesD1.availableCopies := 5
+!seriesD1.episode := 0
+
+!new Series('seriesD2')
+!seriesD2.title := 'Nordic Noir: Season 1'
+!seriesD2.availableCopies := 1
+!seriesD2.episode := 3
+
+!new Cassette('cassetteD1')
+!cassetteD1.title := 'Himalayan Crafts — Instructional Tape (No Cast Listed)'
+!cassetteD1.availableCopies := 3
+
+!new Actor('actorD1')
+!actorD1.name := 'Riya Kapur'
+
+!new Actor('actorD2')
+!actorD2.name := 'Arjun Mehta'
+
+!new Actor('actorD3')
+!actorD3.name := 'Carmen López'
+
+!new Actor('actorD4')
+!actorD4.name := 'Haruka Saitō'
+
+!new Actor('actorD5')
+!actorD5.name := 'Kenji Watanabe'
+
+!new Actor('actorD6')
+!actorD6.name := 'Signe Nørgaard'
+
+!insert (clientD1, rentalD1) into ClientRental
+!insert (clientD1, rentalD2) into ClientRental
+!insert (clientD2, rentalD3) into ClientRental
+
+!insert (rentalD1, movieD1) into RentalCassette
+!insert (rentalD1, seriesD1) into RentalCassette
+!insert (rentalD1, cassetteD1) into RentalCassette
+
+!insert (rentalD3, movieD2) into RentalCassette
+!insert (rentalD3, seriesD2) into RentalCassette
+
+!insert (movieD1, actorD1) into CassetteActor
+!insert (movieD1, actorD2) into CassetteActor
+
+!insert (movieD2, actorD3) into CassetteActor
+
+!insert (seriesD1, actorD4) into CassetteActor
+!insert (seriesD1, actorD5) into CassetteActor
+
+!insert (seriesD2, actorD6) into CassetteActor
+

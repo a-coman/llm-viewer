@@ -1,0 +1,88 @@
+!new AddressBook('AB3_CoopSanteNord_2')
+
+!new Company('C_AB3_CoopSanteNord_2')
+!C_AB3_CoopSanteNord_2.name := 'Coop Santé Nord'
+!C_AB3_CoopSanteNord_2.industry := 'Community healthcare services'
+!C_AB3_CoopSanteNord_2.phone := '+1 514 555 0198'
+!C_AB3_CoopSanteNord_2.website := 'https://coopsantenord.example.ca'
+!C_AB3_CoopSanteNord_2.email := 'info@coopsantenord.example.ca'
+!insert (AB3_CoopSanteNord_2, C_AB3_CoopSanteNord_2) into AddressBookMadeOfContact
+
+!new Address('Addr_AB3_AD10_2')
+!Addr_AB3_AD10_2.city := 'Montréal'
+!Addr_AB3_AD10_2.street := 'Rue Saint-Jacques'
+!Addr_AB3_AD10_2.houseNr := '901'
+!insert (C_AB3_CoopSanteNord_2, Addr_AB3_AD10_2) into ContactContainsAddress
+
+!new Note('Note_AB3_N10_2')
+!Note_AB3_N10_2.author := 'Sophie Nguyen (Coordinator)'
+!Note_AB3_N10_2.time := Date('2026-01-14')
+!Note_AB3_N10_2.type := #EMAIL
+!Note_AB3_N10_2.comment := 'Updated volunteer onboarding PDF; send to new interpreters and reception backups.'
+!insert (C_AB3_CoopSanteNord_2, Note_AB3_N10_2) into ContactContainsNote
+
+!new Person('P_AB3_MariaJose_2')
+!P_AB3_MariaJose_2.name := 'María‑José García'
+!P_AB3_MariaJose_2.title := 'Ms.'
+!P_AB3_MariaJose_2.phone := '+1 438 555 7720'
+!P_AB3_MariaJose_2.website := 'https://mjgarcia.example'
+!P_AB3_MariaJose_2.email := 'mariajose.garcia@example.com'
+!insert (AB3_CoopSanteNord_2, P_AB3_MariaJose_2) into AddressBookMadeOfContact
+
+!new Address('Addr_AB3_AD11_2')
+!Addr_AB3_AD11_2.city := 'Montréal'
+!Addr_AB3_AD11_2.street := 'Boulevard René‑Lévesque Ouest'
+!Addr_AB3_AD11_2.houseNr := '1205'
+!insert (P_AB3_MariaJose_2, Addr_AB3_AD11_2) into ContactContainsAddress
+
+!new Note('Note_AB3_N11_2')
+!Note_AB3_N11_2.author := 'Sophie Nguyen (Coordinator)'
+!Note_AB3_N11_2.time := Date('2026-02-03')
+!Note_AB3_N11_2.type := #CALL
+!Note_AB3_N11_2.comment := 'María‑José confirmed she can interpret Spanish ↔ French on Tuesdays and Thursdays.'
+!insert (P_AB3_MariaJose_2, Note_AB3_N11_2) into ContactContainsNote
+
+!new Person('P_AB3_JeanPierre_2')
+!P_AB3_JeanPierre_2.name := 'Jean‑Pierre Lavoie'
+!P_AB3_JeanPierre_2.title := 'Mr.'
+!P_AB3_JeanPierre_2.phone := '+1 514 555 4402'
+!P_AB3_JeanPierre_2.website := 'https://jplavoie.example.ca'
+!P_AB3_JeanPierre_2.email := 'jean-pierre.lavoie@example.ca'
+!insert (AB3_CoopSanteNord_2, P_AB3_JeanPierre_2) into AddressBookMadeOfContact
+
+!new Address('Addr_AB3_AD12_2')
+!Addr_AB3_AD12_2.city := 'Laval'
+!Addr_AB3_AD12_2.street := 'Avenue des Laurentides'
+!Addr_AB3_AD12_2.houseNr := '3340'
+!insert (P_AB3_JeanPierre_2, Addr_AB3_AD12_2) into ContactContainsAddress
+
+!new Note('Note_AB3_N12_2')
+!Note_AB3_N12_2.author := 'Jean‑Pierre Lavoie'
+!Note_AB3_N12_2.time := Date('2026-02-05')
+!Note_AB3_N12_2.type := #MEETING
+!Note_AB3_N12_2.comment := 'Met María‑José before shift; agreed on glossary for medical intake questions (FR/ES).'
+!insert (P_AB3_JeanPierre_2, Note_AB3_N12_2) into ContactContainsNote
+
+!new Company('C_AB3_MinistryQC_1')
+!C_AB3_MinistryQC_1.name := 'Ministère de la Santé et des Services sociaux (Québec)'
+!C_AB3_MinistryQC_1.industry := 'Public health authority'
+!C_AB3_MinistryQC_1.phone := ''
+!C_AB3_MinistryQC_1.website := ''
+!C_AB3_MinistryQC_1.email := ''
+!insert (AB3_CoopSanteNord_2, C_AB3_MinistryQC_1) into AddressBookMadeOfContact
+
+!new Relationship('Rel_AB3_R11_2')
+!Rel_AB3_R11_2.type := #SUBDIVISION
+!insert (C_AB3_CoopSanteNord_2, Rel_AB3_R11_2) into ContactToRelationship
+!insert (Rel_AB3_R11_2, C_AB3_MinistryQC_1) into RelationshipToContact
+
+!new Relationship('Rel_AB3_R10a_2')
+!Rel_AB3_R10a_2.type := #COWORKER
+!insert (P_AB3_MariaJose_2, Rel_AB3_R10a_2) into ContactToRelationship
+!insert (Rel_AB3_R10a_2, P_AB3_JeanPierre_2) into RelationshipToContact
+
+!new Relationship('Rel_AB3_R10b_2')
+!Rel_AB3_R10b_2.type := #COWORKER
+!insert (P_AB3_JeanPierre_2, Rel_AB3_R10b_2) into ContactToRelationship
+!insert (Rel_AB3_R10b_2, P_AB3_MariaJose_2) into RelationshipToContact
+

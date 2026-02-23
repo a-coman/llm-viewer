@@ -1,0 +1,104 @@
+!new RentalOffice('RO_888_MOB')
+!RO_888_MOB.name := 'Gulf Coast Haul & Tow – Mobile Port'
+!RO_888_MOB.number := 888
+!RO_888_MOB.address := '201 S Water St, Mobile, AL 36602, USA'
+
+!new Truck('V_8801')
+!V_8801.id := 8801
+!V_8801.registrationState := #AL
+!V_8801.licensePlateNumber := 'AL-PH8-2041'
+!V_8801.vehicleTypeCode := #TRUCK24
+!V_8801.registrationLastMaintenanceDate := Date('2026-01-22')
+!V_8801.expirationDate := Date('2026-08-31')
+!V_8801.odometerReading := 76410
+!V_8801.gasTankCapacity := 34.0
+!V_8801.workingRadio := false
+!V_8801.mileage := 13
+
+!new Vehicle('V_8802')
+!V_8802.id := 8802
+!V_8802.registrationState := #FL
+!V_8802.licensePlateNumber := 'FL-TOW-6620'
+!V_8802.vehicleTypeCode := #OPEN_TRAILER
+!V_8802.registrationLastMaintenanceDate := Date('2025-10-14')
+!V_8802.expirationDate := Date('2026-10-14')
+
+!new Truck('V_8803')
+!V_8803.id := 8803
+!V_8803.registrationState := #AL
+!V_8803.licensePlateNumber := 'AL-WRK-9033'
+!V_8803.vehicleTypeCode := #TRUCK10
+!V_8803.registrationLastMaintenanceDate := Date('2026-02-03')
+!V_8803.expirationDate := Date('2027-02-28')
+!V_8803.odometerReading := 15420
+!V_8803.gasTankCapacity := 21.0
+!V_8803.workingRadio := true
+!V_8803.mileage := 18
+
+!new Vehicle('V_8804')
+!V_8804.id := 8804
+!V_8804.registrationState := #DE
+!V_8804.licensePlateNumber := 'DE-CVR-1187'
+!V_8804.vehicleTypeCode := #COVERED_TRAILER
+!V_8804.registrationLastMaintenanceDate := Date('2025-12-02')
+!V_8804.expirationDate := Date('2026-12-02')
+
+!new Individual('CUST_I_701')
+!CUST_I_701.name := 'Aïcha Ben Salem'
+!CUST_I_701.address := '58 Dauphin St, Mobile, AL 36602, USA'
+!CUST_I_701.poorRisk := false
+!CUST_I_701.homePhone := '+1-251-555-0129'
+!CUST_I_701.driverLicenseState := #AL
+!CUST_I_701.driverLicenseNumber := 28017364
+!CUST_I_701.driverLicenseExpirationDate := Date('2029-04-30')
+
+!new Company('CUST_C_775')
+!CUST_C_775.name := 'Delmarva Cold-Chain Shipping, Inc.'
+!CUST_C_775.address := '9 E Loockerman St, Dover, DE 19901, USA'
+!CUST_C_775.poorRisk := true
+!CUST_C_775.idNumber := 77500931
+
+!new RentalAgreement('RA_88001')
+!RA_88001.number := 88001
+!RA_88001.rentalDate := Date('2026-04-05')
+!RA_88001.anticipatedDuration := 3
+!RA_88001.depositPaid := 200.0
+!RA_88001.quotedDailyRate := 119.95
+!RA_88001.quotedRatePerMile := 0.35
+
+!new RentalAgreement('RA_88002')
+!RA_88002.number := 88002
+!RA_88002.rentalDate := Date('2026-04-08')
+!RA_88002.anticipatedDuration := 5
+!RA_88002.depositPaid := 0.0
+!RA_88002.quotedDailyRate := 64.0
+!RA_88002.quotedRatePerMile := 0.2
+
+!new RentalAgreement('RA_88003')
+!RA_88003.number := 88003
+!RA_88003.rentalDate := Date('2026-04-20')
+!RA_88003.anticipatedDuration := 1
+!RA_88003.depositPaid := 75.0
+!RA_88003.quotedDailyRate := 28.0
+!RA_88003.quotedRatePerMile := 0.0
+
+!insert (RO_888_MOB, V_8801) into RentalOfficeVehicle
+!insert (RO_888_MOB, V_8802) into RentalOfficeVehicle
+!insert (RO_888_MOB, V_8803) into RentalOfficeVehicle
+!insert (RO_888_MOB, V_8804) into RentalOfficeVehicle
+
+!insert (RO_888_MOB, RA_88001) into RentalOfficeRentalAgreementOrigin
+!insert (RO_888_MOB, RA_88002) into RentalOfficeRentalAgreementOrigin
+!insert (RO_888_MOB, RA_88003) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_888_MOB, RA_88001) into RentalOfficeRentalAgreementDrop
+!insert (RO_888_MOB, RA_88002) into RentalOfficeRentalAgreementDrop
+!insert (RO_888_MOB, RA_88003) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_88001, V_8801) into RentalAgreementVehicle
+!insert (RA_88002, V_8804) into RentalAgreementVehicle
+!insert (RA_88003, V_8802) into RentalAgreementVehicle
+
+!insert (RA_88001, CUST_I_701) into RentalAgreementCustomer
+!insert (RA_88002, CUST_C_775) into RentalAgreementCustomer
+!insert (RA_88003, CUST_I_701) into RentalAgreementCustomer

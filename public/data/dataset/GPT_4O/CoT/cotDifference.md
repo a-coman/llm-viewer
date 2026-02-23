@@ -65,7 +65,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9790 | 0.9992 | 0.8814 |
+| ALL Generations | 0.9799 | 0.9998 | 0.8819 |
 
 ## Statemachine
 
@@ -125,7 +125,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9172 | 0.9977 | 0.8410 |
+| ALL Generations | 0.9203 | 0.9992 | 0.8423 |
 
 ## Bank
 
@@ -185,7 +185,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9820 | 0.9976 | 0.9242 |
+| ALL Generations | 0.9846 | 0.9988 | 0.9254 |
 
 ## PickupNet
 
@@ -245,7 +245,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9949 | 0.9988 | 0.8933 |
+| ALL Generations | 0.9982 | 0.9999 | 0.8943 |
 
 ## AddressBook
 
@@ -305,7 +305,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | NaN | 0.9989 | 0.9008 |
+| ALL Generations | NaN | 0.9994 | 0.9012 |
 
 ## MyExpenses
 
@@ -365,7 +365,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9743 | 0.9927 | 0.8898 |
+| ALL Generations | 0.9780 | 0.9946 | 0.8914 |
 
 ## VideoClub
 
@@ -425,7 +425,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9560 | 0.9971 | 0.8397 |
+| ALL Generations | 0.9584 | 0.9997 | 0.8419 |
 
 ## Football
 
@@ -485,7 +485,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9689 | 0.9983 | 0.8582 |
+| ALL Generations | 0.9701 | 0.9987 | 0.8586 |
 
 ## HotelManagement
 
@@ -545,7 +545,7 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9758 | 0.9958 | 0.8308 |
+| ALL Generations | 0.9769 | 0.9973 | 0.8321 |
 
 ## VehicleRental
 
@@ -605,10 +605,10 @@
 
 | ALL Generations | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9857 | 0.9979 | 0.8927 |
+| ALL Generations | 0.9867 | 1.0000 | 0.8945 |
 
 ## ALL Experiments
 
 | ALL Experiments | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Systems | 0.9859 | 0.9997 | 0.9080 |
+| ALL Systems | 0.9862 | 0.9999 | 0.9081 |

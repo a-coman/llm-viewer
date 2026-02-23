@@ -1,0 +1,90 @@
+!new StateMachine('sm_stuckStartBusyElsewhere')
+!sm_stuckStartBusyElsewhere.name := 'stuckStartBusyElsewhere'
+
+!new State('st_ssbe_inicio')
+!st_ssbe_inicio.name := 'inicio'
+!new State('st_ssbe_rabota')
+!st_ssbe_rabota.name := 'работа'
+!new State('st_ssbe_hakuna')
+!st_ssbe_hakuna.name := 'hakuna'
+!new State('st_ssbe_defaillance')
+!st_ssbe_defaillance.name := 'défaillance'
+
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_inicio) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_rabota) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_hakuna) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_defaillance) into StateMachineContainsStates
+
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_inicio) into StateMachineStartsStates
+
+!new Transition('tr_ssbe_pulseA')
+!tr_ssbe_pulseA.name := 'pulseA'
+!new Transition('tr_ssbe_pulseB')
+!tr_ssbe_pulseB.name := 'pulseB'
+!new Transition('tr_ssbe_retry')
+!tr_ssbe_retry.name := 'retry'
+!new Transition('tr_ssbe_coolDown')
+!tr_ssbe_coolDown.name := 'coolDown'
+!new Transition('tr_ssbe_resume')
+!tr_ssbe_resume.name := 'resume'
+!new Transition('tr_ssbe_returnToStart')
+!tr_ssbe_returnToStart.name := 'returnToStart'
+!new Transition('tr_ssbe_linger')
+!tr_ssbe_linger.name := 'linger'
+
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_pulseA) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_pulseB) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_retry) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_coolDown) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_resume) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_returnToStart) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_linger) into StateMachineContainsTransitions
+
+!insert (st_ssbe_rabota, tr_ssbe_pulseA) into StateTransition
+!insert (tr_ssbe_pulseA, st_ssbe_defaillance) into TransitionState
+
+!insert (st_ssbe_rabota, tr_ssbe_pulseB) into StateTransition
+!insert (tr_ssbe_pulseB, st_ssbe_defaillance) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_retry) into StateTransition
+!insert (tr_ssbe_retry, st_ssbe_rabota) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_coolDown) into StateTransition
+!insert (tr_ssbe_coolDown, st_ssbe_hakuna) into TransitionState
+
+!insert (st_ssbe_hakuna, tr_ssbe_resume) into StateTransition
+!insert (tr_ssbe_resume, st_ssbe_rabota) into TransitionState
+
+!insert (st_ssbe_hakuna, tr_ssbe_returnToStart) into StateTransition
+!insert (tr_ssbe_returnToStart, st_ssbe_inicio) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_linger) into StateTransition
+!insert (tr_ssbe_linger, st_ssbe_defaillance) into TransitionState
+
+!new TimeEvent('te_ssbe_pulseA')
+!te_ssbe_pulseA.time := 2
+!insert (tr_ssbe_pulseA, te_ssbe_pulseA) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_pulseB')
+!te_ssbe_pulseB.time := 3
+!insert (tr_ssbe_pulseB, te_ssbe_pulseB) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_retry')
+!te_ssbe_retry.time := 60
+!insert (tr_ssbe_retry, te_ssbe_retry) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_coolDown')
+!te_ssbe_coolDown.time := 1
+!insert (tr_ssbe_coolDown, te_ssbe_coolDown) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_resume')
+!te_ssbe_resume.time := 15
+!insert (tr_ssbe_resume, te_ssbe_resume) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_returnToStart')
+!te_ssbe_returnToStart.time := 999999
+!insert (tr_ssbe_returnToStart, te_ssbe_returnToStart) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_linger')
+!te_ssbe_linger.time := 5
+!insert (tr_ssbe_linger, te_ssbe_linger) into TransitionContainsEvents

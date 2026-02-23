@@ -1,0 +1,234 @@
+!new Currency('currencySEKComplex4')
+!currencySEKComplex4.name := 'Swedish Krona'
+!currencySEKComplex4.abbreviation := 'SEK'
+
+!new Currency('currencyTHBComplex4')
+!currencyTHBComplex4.name := 'Thai Baht'
+!currencyTHBComplex4.abbreviation := 'THB'
+
+!new Currency('currencyAEDComplex4')
+!currencyAEDComplex4.name := 'United Arab Emirates Dirham'
+!currencyAEDComplex4.abbreviation := 'AED'
+
+!new Currency('currencyNZDComplex4')
+!currencyNZDComplex4.name := 'New Zealand Dollar'
+!currencyNZDComplex4.abbreviation := 'NZD'
+
+!new Currency('currencyKRWComplex4')
+!currencyKRWComplex4.name := 'South Korean Won'
+!currencyKRWComplex4.abbreviation := 'KRW'
+
+!new Expense('expenseStockholmDesignSprint')
+!expenseStockholmDesignSprint.amount := 5790.50
+!expenseStockholmDesignSprint.startDate := Date('2025-02-10')
+!expenseStockholmDesignSprint.endDate := Date('2025-02-14')
+
+!new Bill('billStockholmST1')
+!billStockholmST1.amount := 3200.00
+!billStockholmST1.category := 'Hotel (4 nights)'
+!billStockholmST1.date := Date('2025-02-10')
+!billStockholmST1.paymentMethod := #CREDIT_CARD
+!billStockholmST1.status := #VALIDATED
+
+!new Bill('billStockholmST2')
+!billStockholmST2.amount := 280.00
+!billStockholmST2.category := 'Transit pass (SL 7-day)'
+!billStockholmST2.date := Date('2025-02-11')
+!billStockholmST2.paymentMethod := #CASH
+!billStockholmST2.status := #VERIFIED
+
+!new Bill('billStockholmST3')
+!billStockholmST3.amount := 1450.00
+!billStockholmST3.category := 'Workshop room rental'
+!billStockholmST3.date := Date('2025-02-12')
+!billStockholmST3.paymentMethod := #CHECK
+!billStockholmST3.status := #PENDING
+
+!new Bill('billStockholmST4')
+!billStockholmST4.amount := 860.50
+!billStockholmST4.category := 'Team meals (fika + working lunch)'
+!billStockholmST4.date := Date('2025-02-13')
+!billStockholmST4.paymentMethod := #CREDIT_CARD
+!billStockholmST4.status := #VERIFIED
+
+!insert (expenseStockholmDesignSprint, billStockholmST1) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST2) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST3) into ExpenseContainsBills
+!insert (expenseStockholmDesignSprint, billStockholmST4) into ExpenseContainsBills
+
+!insert (billStockholmST1, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST2, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST3, currencySEKComplex4) into BillCurrency
+!insert (billStockholmST4, currencySEKComplex4) into BillCurrency
+
+!new Comment('commentStockholmSTC1')
+!commentStockholmSTC1.text := 'Room rental is pending because the municipality requested the purchase order reference (PO-nummer) on the invoice.'
+
+!insert (expenseStockholmDesignSprint, commentStockholmSTC1) into ExpenseComment
+
+!new Expense('expenseBangkokRiverSampling')
+!expenseBangkokRiverSampling.amount := 7920.00
+!expenseBangkokRiverSampling.startDate := Date('2026-05-03')
+!expenseBangkokRiverSampling.endDate := Date('2026-05-09')
+
+!new Bill('billBangkokBK1')
+!billBangkokBK1.amount := 4200.00
+!billBangkokBK1.category := 'Longtail boat hire (half-day)'
+!billBangkokBK1.date := Date('2026-05-04')
+!billBangkokBK1.paymentMethod := #CASH
+!billBangkokBK1.status := #VERIFIED
+
+!new Bill('billBangkokBK2')
+!billBangkokBK2.amount := 980.00
+!billBangkokBK2.category := 'Sample containers (sterile bottles)'
+!billBangkokBK2.date := Date('2026-05-04')
+!billBangkokBK2.paymentMethod := #CREDIT_CARD
+!billBangkokBK2.status := #VERIFIED
+
+!new Bill('billBangkokBK3')
+!billBangkokBK3.amount := 560.00
+!billBangkokBK3.category := 'Ice packs + cooler supplies'
+!billBangkokBK3.date := Date('2026-05-05')
+!billBangkokBK3.paymentMethod := #CASH
+!billBangkokBK3.status := #DRAFT
+
+!new Bill('billBangkokBK4')
+!billBangkokBK4.amount := 300.00
+!billBangkokBK4.category := 'PPE (masks, nitrile gloves)'
+!billBangkokBK4.date := Date('2026-05-05')
+!billBangkokBK4.paymentMethod := #CASH
+!billBangkokBK4.status := #VERIFIED
+
+!new Bill('billBangkokBK5')
+!billBangkokBK5.amount := 450.00
+!billBangkokBK5.category := 'SIM top-up (field communications)'
+!billBangkokBK5.date := Date('2026-05-06')
+!billBangkokBK5.paymentMethod := #CASH
+!billBangkokBK5.status := #REFUNDED
+
+!new Bill('billBangkokBK6')
+!billBangkokBK6.amount := 1250.00
+!billBangkokBK6.category := 'Basic lab analysis fee (same-week processing)'
+!billBangkokBK6.date := Date('2026-05-07')
+!billBangkokBK6.paymentMethod := #CHECK
+!billBangkokBK6.status := #PENDING
+
+!new Bill('billBangkokBK7')
+!billBangkokBK7.amount := 180.00
+!billBangkokBK7.category := 'Printing (sampling maps)'
+!billBangkokBK7.date := Date('2026-05-08')
+!billBangkokBK7.paymentMethod := #CASH
+!billBangkokBK7.status := #VERIFIED
+
+!insert (expenseBangkokRiverSampling, billBangkokBK1) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK2) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK3) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK4) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK5) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK6) into ExpenseContainsBills
+!insert (expenseBangkokRiverSampling, billBangkokBK7) into ExpenseContainsBills
+
+!insert (billBangkokBK1, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK2, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK3, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK4, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK5, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK6, currencyTHBComplex4) into BillCurrency
+!insert (billBangkokBK7, currencyTHBComplex4) into BillCurrency
+
+!new Comment('commentBangkokBKC1')
+!commentBangkokBKC1.text := 'Ice packs bill is draft because the receipt is faded; vendor will reprint (ขอใบเสร็จใหม่).'
+
+!new Comment('commentBangkokBKC2')
+!commentBangkokBKC2.text := 'SIM top-up was refunded after wrong package was activated; refund slip attached.'
+
+!new Comment('commentBangkokBKC3')
+!commentBangkokBKC3.text := 'Lab analysis marked pending until chain-of-custody form is signed by the receiving technician.'
+
+!insert (expenseBangkokRiverSampling, commentBangkokBKC1) into ExpenseComment
+!insert (expenseBangkokRiverSampling, commentBangkokBKC2) into ExpenseComment
+!insert (expenseBangkokRiverSampling, commentBangkokBKC3) into ExpenseComment
+
+!new Expense('expenseDubaiFoodIndustryExpo')
+!expenseDubaiFoodIndustryExpo.amount := 2500.00
+!expenseDubaiFoodIndustryExpo.startDate := Date('2025-09-20')
+!expenseDubaiFoodIndustryExpo.endDate := Date('2025-09-23')
+
+!new Bill('billDubaiDX1')
+!billDubaiDX1.amount := 1650.00
+!billDubaiDX1.category := 'Expo access package (3-day badge)'
+!billDubaiDX1.date := Date('2025-09-20')
+!billDubaiDX1.paymentMethod := #CREDIT_CARD
+!billDubaiDX1.status := #VALIDATED
+
+!new Bill('billDubaiDX2')
+!billDubaiDX2.amount := 740.00
+!billDubaiDX2.category := 'Hotel (1 night extension)'
+!billDubaiDX2.date := Date('2025-09-22')
+!billDubaiDX2.paymentMethod := #CREDIT_CARD
+!billDubaiDX2.status := #VERIFIED
+
+!new Bill('billDubaiDX3')
+!billDubaiDX3.amount := 110.00
+!billDubaiDX3.category := 'Taxi between venue and hotel'
+!billDubaiDX3.date := Date('2025-09-23')
+!billDubaiDX3.paymentMethod := #CASH
+!billDubaiDX3.status := #REFUSED
+
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX1) into ExpenseContainsBills
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX2) into ExpenseContainsBills
+!insert (expenseDubaiFoodIndustryExpo, billDubaiDX3) into ExpenseContainsBills
+
+!insert (billDubaiDX1, currencyAEDComplex4) into BillCurrency
+!insert (billDubaiDX2, currencyAEDComplex4) into BillCurrency
+!insert (billDubaiDX3, currencyAEDComplex4) into BillCurrency
+
+!new Comment('commentDubaiDXC1')
+!commentDubaiDXC1.text := 'Taxi bill refused because it was a non-itemized handwritten slip; reviewer requested official meter receipt.'
+
+!insert (expenseDubaiFoodIndustryExpo, commentDubaiDXC1) into ExpenseComment
+
+!new Expense('expenseWellingtonCoDesignWorkshop')
+!expenseWellingtonCoDesignWorkshop.amount := 745.75
+!expenseWellingtonCoDesignWorkshop.startDate := Date('2026-03-15')
+!expenseWellingtonCoDesignWorkshop.endDate := Date('2026-03-16')
+
+!new Bill('billWellingtonWL1')
+!billWellingtonWL1.amount := 480.00
+!billWellingtonWL1.category := 'Venue hire (community hall)'
+!billWellingtonWL1.date := Date('2026-03-15')
+!billWellingtonWL1.paymentMethod := #CHECK
+!billWellingtonWL1.status := #VERIFIED
+
+!new Bill('billWellingtonWL2')
+!billWellingtonWL2.amount := 265.75
+!billWellingtonWL2.category := 'Catering (tea, sandwiches)'
+!billWellingtonWL2.date := Date('2026-03-16')
+!billWellingtonWL2.paymentMethod := #CREDIT_CARD
+!billWellingtonWL2.status := #VALIDATED
+
+!insert (expenseWellingtonCoDesignWorkshop, billWellingtonWL1) into ExpenseContainsBills
+!insert (expenseWellingtonCoDesignWorkshop, billWellingtonWL2) into ExpenseContainsBills
+
+!insert (billWellingtonWL1, currencyNZDComplex4) into BillCurrency
+!insert (billWellingtonWL2, currencyNZDComplex4) into BillCurrency
+
+!new Expense('expenseSeoulVendorSoftwareLicense')
+!expenseSeoulVendorSoftwareLicense.amount := 198000.00
+!expenseSeoulVendorSoftwareLicense.startDate := Date('2025-12-01')
+!expenseSeoulVendorSoftwareLicense.endDate := Date('2025-12-01')
+
+!new Bill('billSeoulSL1')
+!billSeoulSL1.amount := 198000.00
+!billSeoulSL1.category := 'Annual license: localization QA plugin'
+!billSeoulSL1.date := Date('2025-12-01')
+!billSeoulSL1.paymentMethod := #CREDIT_CARD
+!billSeoulSL1.status := #PENDING
+
+!insert (expenseSeoulVendorSoftwareLicense, billSeoulSL1) into ExpenseContainsBills
+!insert (billSeoulSL1, currencyKRWComplex4) into BillCurrency
+
+!new Comment('commentSeoulSLC1')
+!commentSeoulSLC1.text := 'Pending until IT confirms the license is assigned to the shared build account (not a personal email).'
+
+!insert (expenseSeoulVendorSoftwareLicense, commentSeoulSLC1) into ExpenseComment

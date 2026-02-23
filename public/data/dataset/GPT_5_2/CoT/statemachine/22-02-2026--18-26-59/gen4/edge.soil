@@ -1,0 +1,76 @@
+!new StateMachine('sm_funnelToSilence')
+!sm_funnelToSilence.name := 'funnelToSilence'
+
+!new State('st_funnel_basla')
+!st_funnel_basla.name := 'başla'
+!new State('st_funnel_arbol')
+!st_funnel_arbol.name := 'árbol'
+!new State('st_funnel_uber')
+!st_funnel_uber.name := 'über'
+!new State('st_funnel_mod')
+!st_funnel_mod.name := 'mōd'
+!new State('st_funnel_tokyoKanji')
+!st_funnel_tokyoKanji.name := '東京'
+!new State('st_funnel_silence')
+!st_funnel_silence.name := 'silence'
+
+!insert (sm_funnelToSilence, st_funnel_basla) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_arbol) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_uber) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_mod) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_tokyoKanji) into StateMachineContainsStates
+!insert (sm_funnelToSilence, st_funnel_silence) into StateMachineContainsStates
+
+!insert (sm_funnelToSilence, st_funnel_basla) into StateMachineStartsStates
+
+!new Transition('tr_funnel_fromBaslaToSilence')
+!tr_funnel_fromBaslaToSilence.name := 'fromBaslaToSilence'
+!new Transition('tr_funnel_fromArbolToSilence')
+!tr_funnel_fromArbolToSilence.name := 'fromArbolToSilence'
+!new Transition('tr_funnel_fromUberToSilence')
+!tr_funnel_fromUberToSilence.name := 'fromUberToSilence'
+!new Transition('tr_funnel_fromModToSilence')
+!tr_funnel_fromModToSilence.name := 'fromModToSilence'
+!new Transition('tr_funnel_fromTokyoToSilence')
+!tr_funnel_fromTokyoToSilence.name := 'fromTokyoToSilence'
+
+!insert (sm_funnelToSilence, tr_funnel_fromBaslaToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromArbolToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromUberToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromModToSilence) into StateMachineContainsTransitions
+!insert (sm_funnelToSilence, tr_funnel_fromTokyoToSilence) into StateMachineContainsTransitions
+
+!insert (st_funnel_basla, tr_funnel_fromBaslaToSilence) into StateTransition
+!insert (tr_funnel_fromBaslaToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_arbol, tr_funnel_fromArbolToSilence) into StateTransition
+!insert (tr_funnel_fromArbolToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_uber, tr_funnel_fromUberToSilence) into StateTransition
+!insert (tr_funnel_fromUberToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_mod, tr_funnel_fromModToSilence) into StateTransition
+!insert (tr_funnel_fromModToSilence, st_funnel_silence) into TransitionState
+
+!insert (st_funnel_tokyoKanji, tr_funnel_fromTokyoToSilence) into StateTransition
+!insert (tr_funnel_fromTokyoToSilence, st_funnel_silence) into TransitionState
+
+!new TimeEvent('te_funnel_te_1')
+!te_funnel_te_1.time := 7
+!insert (tr_funnel_fromBaslaToSilence, te_funnel_te_1) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_2')
+!te_funnel_te_2.time := 11
+!insert (tr_funnel_fromArbolToSilence, te_funnel_te_2) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_3')
+!te_funnel_te_3.time := 13
+!insert (tr_funnel_fromUberToSilence, te_funnel_te_3) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_4')
+!te_funnel_te_4.time := 17
+!insert (tr_funnel_fromModToSilence, te_funnel_te_4) into TransitionContainsEvents
+
+!new TimeEvent('te_funnel_te_5')
+!te_funnel_te_5.time := 19
+!insert (tr_funnel_fromTokyoToSilence, te_funnel_te_5) into TransitionContainsEvents

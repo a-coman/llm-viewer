@@ -1,0 +1,80 @@
+!new Client('clientReuseC20')
+!clientReuseC20.clientId := 3
+!clientReuseC20.isSuspended := false
+
+!new Client('clientReuseC21')
+!clientReuseC21.clientId := 4
+!clientReuseC21.isSuspended := false
+
+!new Client('clientReuseC22')
+!clientReuseC22.clientId := 5
+!clientReuseC22.isSuspended := true
+
+!new Rental('rentalReuseR20')
+!rentalReuseR20.date := Date('2026-01-01')
+
+!new Rental('rentalReuseR21')
+!rentalReuseR21.date := Date('2026-01-02')
+
+!new Rental('rentalReuseR22')
+!rentalReuseR22.date := Date('2026-01-03')
+
+!new Rental('rentalReuseR23')
+!rentalReuseR23.date := Date('2026-01-04')
+
+!new Rental('rentalReuseR24')
+!rentalReuseR24.date := Date('2026-01-05')
+
+!new Rental('rentalReuseR25')
+!rentalReuseR25.date := Date('2026-01-06')
+
+!new Movie('movieReuseM20')
+!movieReuseM20.title := 'Oceans at Dawn'
+!movieReuseM20.availableCopies := 0
+!movieReuseM20.genre := #Action
+
+!new Series('seriesReuseS20')
+!seriesReuseS20.title := 'Les Chroniques du Métro'
+!seriesReuseS20.availableCopies := 0
+!seriesReuseS20.episode := 1
+
+!new Actor('actorReuseA20')
+!actorReuseA20.name := 'Amélie Rousseau'
+
+!new Actor('actorReuseA21')
+!actorReuseA21.name := 'Tariq Al-Karim'
+
+!new Actor('actorReuseA22')
+!actorReuseA22.name := 'Mei-Ling Chen'
+
+!new Actor('actorReuseA23')
+!actorReuseA23.name := 'João da Silva'
+
+!new Actor('actorReuseA24')
+!actorReuseA24.name := 'Irina Volkov'
+
+!new Actor('actorReuseA25')
+!actorReuseA25.name := 'Noah Williams'
+
+!insert (clientReuseC20, rentalReuseR20) into ClientRental
+!insert (clientReuseC20, rentalReuseR21) into ClientRental
+!insert (clientReuseC21, rentalReuseR22) into ClientRental
+!insert (clientReuseC21, rentalReuseR23) into ClientRental
+!insert (clientReuseC22, rentalReuseR24) into ClientRental
+!insert (clientReuseC22, rentalReuseR25) into ClientRental
+
+!insert (rentalReuseR20, movieReuseM20) into RentalCassette
+!insert (rentalReuseR21, movieReuseM20) into RentalCassette
+!insert (rentalReuseR22, movieReuseM20) into RentalCassette
+!insert (rentalReuseR23, movieReuseM20) into RentalCassette
+!insert (rentalReuseR24, seriesReuseS20) into RentalCassette
+!insert (rentalReuseR25, movieReuseM20) into RentalCassette
+
+!insert (movieReuseM20, actorReuseA20) into CassetteActor
+!insert (movieReuseM20, actorReuseA21) into CassetteActor
+!insert (movieReuseM20, actorReuseA22) into CassetteActor
+!insert (movieReuseM20, actorReuseA23) into CassetteActor
+!insert (movieReuseM20, actorReuseA24) into CassetteActor
+!insert (movieReuseM20, actorReuseA25) into CassetteActor
+
+!insert (seriesReuseS20, actorReuseA22) into CassetteActor

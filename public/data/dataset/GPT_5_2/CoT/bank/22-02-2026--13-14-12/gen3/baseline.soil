@@ -1,0 +1,70 @@
+!new Bank('b14')
+!b14.name := 'Banco do Atlântico, S.A.'
+!b14.country := 'Portugal'
+!b14.bic := 'ATLNPTL1XXX'
+
+!new Bank('b15')
+!b15.name := 'Türkiye Finans Bankası'
+!b15.country := 'Türkiye'
+!b15.bic := 'TFINTRISXXX'
+
+!new Bank('b16')
+!b16.name := 'Nairobi Heritage Bank'
+!b16.country := 'Kenya'
+!b16.bic := 'NHERKE22XXX'
+
+!new Person('p33')
+!p33.firstName := 'Catarina'
+!p33.lastName := 'Sousa'
+!p33.age := 29
+
+!new Person('p34')
+!p34.firstName := 'Emre'
+!p34.lastName := 'Yılmaz'
+!p34.age := 52
+
+!new Person('p35')
+!p35.firstName := 'Aylin'
+!p35.lastName := 'Demir'
+!p35.age := 33
+
+!new Person('p36')
+!p36.firstName := 'João'
+!p36.lastName := 'Pereira'
+!p36.age := 19
+
+!new Account('a20')
+!a20.iban := 'PT50 0002 0123 1234 5678 9015 4'
+!a20.balance := 150
+
+!new Account('a21')
+!a21.iban := 'TR33 0006 1005 1978 6457 8413 26'
+!a21.balance := 4300
+
+!new Account('a22')
+!a22.iban := 'TR12 0014 2000 0099 8877 6655 44'
+!a22.balance := 50
+
+!new Account('a23')
+!a23.iban := 'PT08 0002 0123 9876 5432 1098 7'
+!a23.balance := 20000
+
+!insert (b14, a20) into AccountOfBanks
+!insert (b14, a23) into AccountOfBanks
+!insert (b15, a21) into AccountOfBanks
+!insert (b15, a22) into AccountOfBanks
+
+!insert (p33, a20) into Ownership
+!insert (p34, a21) into Ownership
+!insert (p35, a21) into Ownership
+!insert (p36, a22) into Ownership
+!insert (p33, a23) into Ownership
+!insert (p35, a23) into Ownership
+
+!insert (p33, a20) into Use
+!insert (p36, a20) into Use
+
+!insert (p35, a21) into Use
+
+!insert (p34, a23) into Use
+!insert (p33, a23) into Use

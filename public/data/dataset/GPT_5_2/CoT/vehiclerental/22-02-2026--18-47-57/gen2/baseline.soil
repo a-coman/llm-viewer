@@ -1,0 +1,117 @@
+!new RentalOffice('RO_12')
+!RO_12.name := 'Northern Lights Rentals – Anchorage Downtown'
+!RO_12.number := 12
+!RO_12.address := '601 W 5th Ave, Anchorage, AK 99501, USA'
+
+!new RentalOffice('RO_77')
+!RO_77.name := 'Desert Haul Rentals – Tempe'
+!RO_77.number := 77
+!RO_77.address := '225 E University Dr, Tempe, AZ 85281, USA'
+
+!new RentalOffice('RO_330')
+!RO_330.name := 'Nutmeg Truck & Trailer – Hartford'
+!RO_330.number := 330
+!RO_330.address := '1200 Park St, Hartford, CT 06106, USA'
+
+!new Truck('V_6100')
+!V_6100.id := 6100
+!V_6100.registrationState := #AK
+!V_6100.licensePlateNumber := 'AK-7FZ219'
+!V_6100.vehicleTypeCode := #TRUCK24
+!V_6100.registrationLastMaintenanceDate := Date('2025-12-05')
+!V_6100.expirationDate := Date('2026-10-31')
+!V_6100.odometerReading := 102455
+!V_6100.gasTankCapacity := 33.0
+!V_6100.workingRadio := true
+!V_6100.mileage := 14
+
+!new Truck('V_6101')
+!V_6101.id := 6101
+!V_6101.registrationState := #AZ
+!V_6101.licensePlateNumber := 'AZ-BNA4431'
+!V_6101.vehicleTypeCode := #TRUCK
+!V_6101.registrationLastMaintenanceDate := Date('2026-02-01')
+!V_6101.expirationDate := Date('2027-02-28')
+!V_6101.odometerReading := 1200
+!V_6101.gasTankCapacity := 0.0
+!V_6101.workingRadio := false
+!V_6101.mileage := 0
+
+!new Vehicle('V_9105')
+!V_9105.id := 9105
+!V_9105.registrationState := #DE
+!V_9105.licensePlateNumber := 'DE-TL5903'
+!V_9105.vehicleTypeCode := #COVERED_TRAILER
+!V_9105.registrationLastMaintenanceDate := Date('2025-09-18')
+!V_9105.expirationDate := Date('2026-09-30')
+
+!new Individual('CUST_I_88')
+!CUST_I_88.name := 'Hiroshi Tanaka'
+!CUST_I_88.address := '2121 Sawtelle Blvd, Los Angeles, CA 90025, USA'
+!CUST_I_88.poorRisk := true
+!CUST_I_88.homePhone := '+1-424-555-0196'
+!CUST_I_88.driverLicenseState := #CA
+!CUST_I_88.driverLicenseNumber := 59300412
+!CUST_I_88.driverLicenseExpirationDate := Date('2027-11-09')
+
+!new Company('CUST_C_902')
+!CUST_C_902.name := 'Bayou Builders, Inc.'
+!CUST_C_902.address := '185 Government St, Mobile, AL 36602, USA'
+!CUST_C_902.poorRisk := false
+!CUST_C_902.idNumber := 22077104
+
+!new RentalAgreement('RA_30010')
+!RA_30010.number := 30010
+!RA_30010.rentalDate := Date('2026-03-01')
+!RA_30010.anticipatedDuration := 7
+!RA_30010.depositPaid := 0.0
+!RA_30010.quotedDailyRate := 129.0
+!RA_30010.quotedRatePerMile := 0.45
+
+!new RentalAgreement('RA_30011')
+!RA_30011.number := 30011
+!RA_30011.rentalDate := Date('2026-03-10')
+!RA_30011.anticipatedDuration := 1
+!RA_30011.depositPaid := 300.0
+!RA_30011.quotedDailyRate := 159.0
+!RA_30011.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_30012')
+!RA_30012.number := 30012
+!RA_30012.rentalDate := Date('2026-03-12')
+!RA_30012.anticipatedDuration := 3
+!RA_30012.depositPaid := 150.0
+!RA_30012.quotedDailyRate := 55.0
+!RA_30012.quotedRatePerMile := 0.15
+
+!new RentalAgreement('RA_30013')
+!RA_30013.number := 30013
+!RA_30013.rentalDate := Date('2026-03-15')
+!RA_30013.anticipatedDuration := 2
+!RA_30013.depositPaid := 200.0
+!RA_30013.quotedDailyRate := 118.5
+!RA_30013.quotedRatePerMile := 0.39
+
+!insert (RO_12, V_6100) into RentalOfficeVehicle
+!insert (RO_77, V_6101) into RentalOfficeVehicle
+!insert (RO_330, V_9105) into RentalOfficeVehicle
+
+!insert (RO_12, RA_30010) into RentalOfficeRentalAgreementOrigin
+!insert (RO_77, RA_30011) into RentalOfficeRentalAgreementOrigin
+!insert (RO_330, RA_30012) into RentalOfficeRentalAgreementOrigin
+!insert (RO_77, RA_30013) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_77, RA_30010) into RentalOfficeRentalAgreementDrop
+!insert (RO_77, RA_30011) into RentalOfficeRentalAgreementDrop
+!insert (RO_330, RA_30012) into RentalOfficeRentalAgreementDrop
+!insert (RO_12, RA_30013) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_30010, V_6100) into RentalAgreementVehicle
+!insert (RA_30011, V_6101) into RentalAgreementVehicle
+!insert (RA_30012, V_9105) into RentalAgreementVehicle
+!insert (RA_30013, V_6100) into RentalAgreementVehicle
+
+!insert (RA_30010, CUST_C_902) into RentalAgreementCustomer
+!insert (RA_30011, CUST_I_88) into RentalAgreementCustomer
+!insert (RA_30012, CUST_C_902) into RentalAgreementCustomer
+!insert (RA_30013, CUST_I_88) into RentalAgreementCustomer

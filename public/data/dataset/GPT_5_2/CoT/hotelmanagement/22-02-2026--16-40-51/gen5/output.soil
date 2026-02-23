@@ -1,0 +1,483 @@
+!new Customer('C22')
+!C22.firstName := 'Anand'
+!C22.lastName := 'Iyer'
+
+!new Booking('B6002')
+!B6002.bookingId := 6002
+!B6002.startDate := '2026-02-10'
+!B6002.endDate := '2026-02-13'
+!B6002.confirmed := true
+!B6002.canceled := false
+
+!new RoomReservation('RR9')
+!RR9.checkInDate := '2026-02-10'
+!RR9.checkOutDate := '2026-02-12'
+
+!new RoomReservation('RR10')
+!RR10.checkInDate := '2026-02-12'
+!RR10.checkOutDate := '2026-02-13'
+
+!new RoomReservation('RR11')
+!RR11.checkInDate := '2026-02-11'
+!RR11.checkOutDate := '2026-02-11'
+
+!new Room('R1201')
+!R1201.roomNumber := 1201
+!R1201.numBeds := 1
+!R1201.pricePerNight := 110.00
+!R1201.occupied := true
+!R1201.blocked := false
+
+!new Room('R1202')
+!R1202.roomNumber := 1202
+!R1202.numBeds := 4
+!R1202.pricePerNight := 120.00
+!R1202.occupied := false
+!R1202.blocked := false
+
+!new RoomExtra('E34')
+!E34.description := 'Rollaway bed (one night)'
+!E34.price := 15.00
+
+!new RoomExtra('E35')
+!E35.description := 'Vegetarian set dinner'
+!E35.price := 30.00
+
+!new RoomExtra('E36')
+!E36.description := 'Meeting room rental (2 hours)'
+!E36.price := 200.00
+
+!new Bill('BL15001')
+!BL15001.billId := 15001
+!BL15001.price := 0.00
+
+!new Bill('BL15002')
+!BL15002.billId := 15002
+!BL15002.price := 165.00
+
+!new Bill('BL15003')
+!BL15003.billId := 15003
+!BL15003.price := 200.00
+
+!new FreeRoomTypesDTO('D38')
+!D38.roomTypeDescription := 'Standard Einzelzimmer (ruhige Lage)'
+!D38.numBeds := 1
+!D38.pricePerNight := 110.00
+!D38.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('D39')
+!D39.roomTypeDescription := 'Chumba cha Familia (vitanda vinne)'
+!D39.numBeds := 4
+!D39.pricePerNight := 120.00
+!D39.numFreeRooms := 1
+
+!insert (B6002, C22) into BookingCustomer
+
+!insert (B6002, RR9) into BookingRoomReservation
+!insert (B6002, RR10) into BookingRoomReservation
+!insert (B6002, RR11) into BookingRoomReservation
+
+!insert (RR9, R1201) into RoomReservationRoom
+!insert (RR10, R1202) into RoomReservationRoom
+
+!insert (RR10, E34) into RoomReservationExtras
+!insert (RR10, E35) into RoomReservationExtras
+!insert (RR11, E36) into RoomReservationExtras
+
+!insert (B6002, BL15001) into BookingBill
+!insert (B6002, BL15002) into BookingBill
+!insert (B6002, BL15003) into BookingBill
+
+!insert (BL15001, RR9) into BillRoomReservation
+!insert (BL15002, RR10) into BillRoomReservation
+!insert (BL15003, RR11) into BillRoomReservation
+
+!new Customer('C26')
+!C26.firstName := 'Omar'
+!C26.lastName := 'Al‑Farsi'
+
+!new Booking('B9090')
+!B9090.bookingId := 9090
+!B9090.startDate := '2026-09-03'
+!B9090.endDate := '2026-09-04'
+!B9090.confirmed := true
+!B9090.canceled := false
+
+!new RoomReservation('R9090_RS')
+!R9090_RS.checkInDate := '2026-09-03'
+!R9090_RS.checkOutDate := '2026-09-04'
+
+!new Room('RM1201_B9090')
+!RM1201_B9090.roomNumber := 1201
+!RM1201_B9090.numBeds := 1
+!RM1201_B9090.pricePerNight := 210.00
+!RM1201_B9090.occupied := false
+!RM1201_B9090.blocked := false
+
+!new Room('RM1202_B9090')
+!RM1202_B9090.roomNumber := 1202
+!RM1202_B9090.numBeds := 1
+!RM1202_B9090.pricePerNight := 95.00
+!RM1202_B9090.occupied := false
+!RM1202_B9090.blocked := false
+
+!new RoomExtra('RX1_B9090')
+!RX1_B9090.description := 'Parking (overnight)'
+!RX1_B9090.price := 18.00
+
+!new RoomExtra('RX2_B9090')
+!RX2_B9090.description := 'Minibar snacks'
+!RX2_B9090.price := 14.50
+
+!new Bill('BL6001')
+!BL6001.billId := 6001
+!BL6001.price := 305.00
+
+!new Bill('BL6002')
+!BL6002.billId := 6002
+!BL6002.price := 32.50
+
+!new FreeRoomTypesDTO('D47')
+!D47.roomTypeDescription := 'Executive single'
+!D47.numBeds := 1
+!D47.pricePerNight := 210.00
+!D47.numFreeRooms := 4
+
+!new FreeRoomTypesDTO('D48')
+!D48.roomTypeDescription := 'Small auxiliary room (day-use capable)'
+!D48.numBeds := 1
+!D48.pricePerNight := 95.00
+!D48.numFreeRooms := 2
+
+!insert (B9090, C26) into BookingCustomer
+
+!insert (B9090, R9090_RS) into BookingRoomReservation
+
+!insert (R9090_RS, RM1201_B9090) into RoomReservationRoom
+!insert (R9090_RS, RM1202_B9090) into RoomReservationRoom
+
+!insert (R9090_RS, RX1_B9090) into RoomReservationExtras
+!insert (R9090_RS, RX2_B9090) into RoomReservationExtras
+
+!insert (B9090, BL6001) into BookingBill
+!insert (B9090, BL6002) into BookingBill
+
+!insert (BL6001, R9090_RS) into BillRoomReservation
+!insert (BL6002, R9090_RS) into BillRoomReservation
+
+!new Customer('C28')
+!C28.firstName := 'Khadija (خديجة)'
+!C28.lastName := 'Aït Benhaddou'
+
+!new Booking('B123456')
+!B123456.bookingId := 123456
+!B123456.startDate := '١٤٤٧-٠٩-٠١ (Hijri)'
+!B123456.endDate := '١٤٤٧-٠٩-٠٢ (Hijri)'
+!B123456.confirmed := true
+!B123456.canceled := false
+
+!new RoomReservation('RR_MULTIROOM_123456')
+!RR_MULTIROOM_123456.checkInDate := 'next Friday after Maghrib'
+!RR_MULTIROOM_123456.checkOutDate := 'yesterday'
+
+!new Room('RM12_123456')
+!RM12_123456.roomNumber := 12
+!RM12_123456.numBeds := 1
+!RM12_123456.pricePerNight := 0.0
+!RM12_123456.occupied := false
+!RM12_123456.blocked := false
+
+!new Room('RM1201_123456')
+!RM1201_123456.roomNumber := 1201
+!RM1201_123456.numBeds := 2
+!RM1201_123456.pricePerNight := 0.02
+!RM1201_123456.occupied := true
+!RM1201_123456.blocked := false
+
+!new Room('RM700_123456')
+!RM700_123456.roomNumber := 700
+!RM700_123456.numBeds := 4
+!RM700_123456.pricePerNight := 8888.88
+!RM700_123456.occupied := false
+!RM700_123456.blocked := true
+
+!new Room('RM100000_123456')
+!RM100000_123456.roomNumber := 100000
+!RM100000_123456.numBeds := 3
+!RM100000_123456.pricePerNight := 1.9999
+!RM100000_123456.occupied := true
+!RM100000_123456.blocked := true
+
+!new Bill('BL424242')
+!BL424242.billId := 424242
+!BL424242.price := 0.0
+
+!new FreeRoomTypesDTO('D52')
+!D52.roomTypeDescription := 'Riād courtyard room (traditional), shared bath'
+!D52.numBeds := 1
+!D52.pricePerNight := 60.0
+!D52.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D53')
+!D53.roomTypeDescription := 'Desert tent platform (stargazing), bring your own bedding'
+!D53.numBeds := 1
+!D53.pricePerNight := 5.0
+!D53.numFreeRooms := 99999
+
+!insert (B123456, C28) into BookingCustomer
+
+!insert (B123456, RR_MULTIROOM_123456) into BookingRoomReservation
+
+!insert (RR_MULTIROOM_123456, RM12_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM1201_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM700_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM100000_123456) into RoomReservationRoom
+
+!insert (B123456, BL424242) into BookingBill
+
+!insert (BL424242, RR_MULTIROOM_123456) into BillRoomReservation
+
+!new Customer('C30')
+!C30.firstName := 'Oluwaseun'
+!C30.lastName := 'Adeyemi'
+
+!new Booking('B31577')
+!B31577.bookingId := 31577
+!B31577.startDate := '2026-12-24'
+!B31577.endDate := '2027-01-02'
+!B31577.confirmed := true
+!B31577.canceled := false
+
+!new RoomReservation('RR_H1')
+!RR_H1.checkInDate := '2026-12-24'
+!RR_H1.checkOutDate := '2026-12-26'
+
+!new RoomReservation('RR_H2')
+!RR_H2.checkInDate := '2026-12-26'
+!RR_H2.checkOutDate := '2026-12-29'
+
+!new RoomReservation('RR_H3')
+!RR_H3.checkInDate := '2026-12-29'
+!RR_H3.checkOutDate := '2027-01-02'
+
+!new RoomReservation('RR_H4')
+!RR_H4.checkInDate := '2026-12-31'
+!RR_H4.checkOutDate := '2027-01-01'
+
+!new Room('R12_H1_31577')
+!R12_H1_31577.roomNumber := 12
+!R12_H1_31577.numBeds := 1
+!R12_H1_31577.pricePerNight := 110.00
+!R12_H1_31577.occupied := true
+!R12_H1_31577.blocked := false
+
+!new Room('R14_H1_31577')
+!R14_H1_31577.roomNumber := 14
+!R14_H1_31577.numBeds := 2
+!R14_H1_31577.pricePerNight := 145.00
+!R14_H1_31577.occupied := true
+!R14_H1_31577.blocked := false
+
+!new RoomExtra('EH1_1_31577')
+!EH1_1_31577.description := 'Festive welcome hamper (non-alcoholic)'
+!EH1_1_31577.price := 25.00
+
+!new Bill('BL940001')
+!BL940001.billId := 940001
+!BL940001.price := 535.00
+
+!new Room('R406_H2_31577')
+!R406_H2_31577.roomNumber := 406
+!R406_H2_31577.numBeds := 1
+!R406_H2_31577.pricePerNight := 125.00
+!R406_H2_31577.occupied := true
+!R406_H2_31577.blocked := false
+
+!new Bill('BL940002')
+!BL940002.billId := 940002
+!BL940002.price := 375.00
+
+!new Room('R918_H3_31577')
+!R918_H3_31577.roomNumber := 918
+!R918_H3_31577.numBeds := 2
+!R918_H3_31577.pricePerNight := 190.00
+!R918_H3_31577.occupied := false
+!R918_H3_31577.blocked := false
+
+!new RoomExtra('EH3_1_31577')
+!EH3_1_31577.description := 'New Year’s Eve set dinner (2 persons)'
+!EH3_1_31577.price := 160.00
+
+!new RoomExtra('EH3_2_31577')
+!EH3_2_31577.description := 'Extra heater (guest comfort request)'
+!EH3_2_31577.price := 15.00
+
+!new RoomExtra('EH3_3_31577')
+!EH3_3_31577.description := 'Secure luggage storage after checkout'
+!EH3_3_31577.price := 5.00
+
+!new Bill('BL940003')
+!BL940003.billId := 940003
+!BL940003.price := 940.00
+
+!new Room('R520_H4_31577')
+!R520_H4_31577.roomNumber := 520
+!R520_H4_31577.numBeds := 2
+!R520_H4_31577.pricePerNight := 170.00
+!R520_H4_31577.occupied := false
+!R520_H4_31577.blocked := false
+
+!new Room('R521_H4_31577')
+!R521_H4_31577.roomNumber := 521
+!R521_H4_31577.numBeds := 2
+!R521_H4_31577.pricePerNight := 170.00
+!R521_H4_31577.occupied := false
+!R521_H4_31577.blocked := false
+
+!new RoomExtra('EH4_1_31577')
+!EH4_1_31577.description := 'Additional bedding set (2 rollaway mattresses)'
+!EH4_1_31577.price := 40.00
+
+!new Bill('BL940004')
+!BL940004.billId := 940004
+!BL940004.price := 380.00
+
+!new FreeRoomTypesDTO('D56')
+!D56.roomTypeDescription := 'Suite ya familia (Yorùbá/EN mix): Family suite — ocean side'
+!D56.numBeds := 3
+!D56.pricePerNight := 260.00
+!D56.numFreeRooms := 1
+
+!new FreeRoomTypesDTO('D57')
+!D57.roomTypeDescription := 'Standard Single — quiet floor (near library lounge)'
+!D57.numBeds := 1
+!D57.pricePerNight := 115.00
+!D57.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('D58')
+!D58.roomTypeDescription := 'Kahden hengen huone (Twin) — aamiaisen kanssa'
+!D58.numBeds := 2
+!D58.pricePerNight := 155.00
+!D58.numFreeRooms := 2
+
+!insert (B31577, C30) into BookingCustomer
+
+!insert (B31577, RR_H1) into BookingRoomReservation
+!insert (B31577, RR_H2) into BookingRoomReservation
+!insert (B31577, RR_H3) into BookingRoomReservation
+!insert (B31577, RR_H4) into BookingRoomReservation
+
+!insert (RR_H1, R12_H1_31577) into RoomReservationRoom
+!insert (RR_H1, R14_H1_31577) into RoomReservationRoom
+!insert (RR_H2, R406_H2_31577) into RoomReservationRoom
+!insert (RR_H3, R918_H3_31577) into RoomReservationRoom
+!insert (RR_H4, R520_H4_31577) into RoomReservationRoom
+!insert (RR_H4, R521_H4_31577) into RoomReservationRoom
+
+!insert (RR_H1, EH1_1_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_1_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_2_31577) into RoomReservationExtras
+!insert (RR_H3, EH3_3_31577) into RoomReservationExtras
+!insert (RR_H4, EH4_1_31577) into RoomReservationExtras
+
+!insert (B31577, BL940001) into BookingBill
+!insert (B31577, BL940002) into BookingBill
+!insert (B31577, BL940003) into BookingBill
+!insert (B31577, BL940004) into BookingBill
+
+!insert (BL940001, RR_H1) into BillRoomReservation
+!insert (BL940002, RR_H2) into BillRoomReservation
+!insert (BL940003, RR_H3) into BillRoomReservation
+!insert (BL940004, RR_H4) into BillRoomReservation
+
+!new FreeRoomTypesDTO('D59')
+!D59.roomTypeDescription := 'Dormitory bunk (mixed)'
+!D59.numBeds := 20
+!D59.pricePerNight := 15.0
+!D59.numFreeRooms := 0
+
+!new Customer('C31')
+!C31.firstName := 'Léa'
+!C31.lastName := 'Moreau'
+
+!new Booking('B7')
+!B7.startDate := ''
+!B7.endDate := ''
+!B7.canceled := true
+!B7.bookingId := -99
+!B7.confirmed := false
+
+!new Customer('C32')
+!C32.firstName := 'Илья'
+!C32.lastName := 'Петров'
+
+!new Booking('B8')
+!B8.startDate := '2026-06-15'
+!B8.endDate := '2026-06-16'
+!B8.canceled := false
+!B8.bookingId := 6
+!B8.confirmed := true
+
+!new RoomReservation('RR14_B8')
+!RR14_B8.checkInDate := '2026-06-15'
+!RR14_B8.checkOutDate := '2026-06-16'
+
+!new Room('RM301_B8')
+!RM301_B8.numBeds := 1
+!RM301_B8.pricePerNight := 0.0
+!RM301_B8.occupied := false
+!RM301_B8.blocked := false
+!RM301_B8.roomNumber := 7
+
+!new Room('RM302_B8')
+!RM302_B8.numBeds := 2147483647
+!RM302_B8.pricePerNight := 0.0
+!RM302_B8.occupied := false
+!RM302_B8.blocked := true
+!RM302_B8.roomNumber := 8
+
+!new Bill('BL5001')
+!BL5001.price := 0.0
+!BL5001.billId := 5001
+
+!new Customer('C33')
+!C33.firstName := 'Amrita'
+!C33.lastName := 'Singh'
+
+!new Booking('B9')
+!B9.startDate := '2026-11-01'
+!B9.endDate := '2026-11-02'
+!B9.canceled := false
+!B9.bookingId := 7
+!B9.confirmed := false
+
+!new RoomReservation('RR15_B9')
+!RR15_B9.checkInDate := '2026-11-01'
+!RR15_B9.checkOutDate := '2026-11-02'
+
+!new RoomExtra('E49_B9')
+!E49_B9.price := 0.0
+!E49_B9.description := 'Diya lamp set for festival welcome'
+
+!new Bill('BL5002')
+!BL5002.price := 0.0
+!BL5002.billId := 5002
+
+!insert (B7, C31) into BookingCustomer
+!insert (B8, C32) into BookingCustomer
+!insert (B9, C33) into BookingCustomer
+
+!insert (B8, RR14_B8) into BookingRoomReservation
+!insert (B9, RR15_B9) into BookingRoomReservation
+
+!insert (RR14_B8, RM301_B8) into RoomReservationRoom
+!insert (RR14_B8, RM302_B8) into RoomReservationRoom
+
+!insert (RR15_B9, E49_B9) into RoomReservationExtras
+
+!insert (B8, BL5001) into BookingBill
+!insert (B9, BL5002) into BookingBill
+
+!insert (BL5001, RR14_B8) into BillRoomReservation
+!insert (BL5002, RR15_B9) into BillRoomReservation
+

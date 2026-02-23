@@ -1,0 +1,142 @@
+!new StateMachine('sm_atacamaWaterWorks')
+!sm_atacamaWaterWorks.name := 'atacamaWaterWorks'
+
+!new State('st_ata_idle')
+!st_ata_idle.name := 'idle'
+!new State('st_ata_intake')
+!st_ata_intake.name := 'intake'
+!new State('st_ata_prefilter')
+!st_ata_prefilter.name := 'prefilter'
+!new State('st_ata_osmosis')
+!st_ata_osmosis.name := 'osmosis'
+!new State('st_ata_remineralize')
+!st_ata_remineralize.name := 'remineralize'
+!new State('st_ata_storage')
+!st_ata_storage.name := 'storage'
+!new State('st_ata_distribute')
+!st_ata_distribute.name := 'distribute'
+!new State('st_ata_maintenance')
+!st_ata_maintenance.name := 'maintenance'
+
+!insert (sm_atacamaWaterWorks, st_ata_idle) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_intake) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_prefilter) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_osmosis) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_remineralize) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_storage) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_distribute) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_maintenance) into StateMachineContainsStates
+
+!insert (sm_atacamaWaterWorks, st_ata_idle) into StateMachineStartsStates
+
+!new Transition('tr_ata_startIntake')
+!tr_ata_startIntake.name := 'startIntake'
+!new Transition('tr_ata_toPrefilter')
+!tr_ata_toPrefilter.name := 'toPrefilter'
+!new Transition('tr_ata_toOsmosis')
+!tr_ata_toOsmosis.name := 'toOsmosis'
+!new Transition('tr_ata_toRemin')
+!tr_ata_toRemin.name := 'toRemin'
+!new Transition('tr_ata_toStorage')
+!tr_ata_toStorage.name := 'toStorage'
+!new Transition('tr_ata_toDistribute')
+!tr_ata_toDistribute.name := 'toDistribute'
+!new Transition('tr_ata_backToIdle')
+!tr_ata_backToIdle.name := 'backToIdle'
+!new Transition('tr_ata_emergencyMaintenance')
+!tr_ata_emergencyMaintenance.name := 'emergencyMaintenance'
+!new Transition('tr_ata_maintenanceDone')
+!tr_ata_maintenanceDone.name := 'maintenanceDone'
+!new Transition('tr_ata_storageFlush')
+!tr_ata_storageFlush.name := 'storageFlush'
+!new Transition('tr_ata_intakeStall')
+!tr_ata_intakeStall.name := 'intakeStall'
+
+!insert (sm_atacamaWaterWorks, tr_ata_startIntake) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toPrefilter) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toOsmosis) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toRemin) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toStorage) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toDistribute) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_backToIdle) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_emergencyMaintenance) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_maintenanceDone) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_storageFlush) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_intakeStall) into StateMachineContainsTransitions
+
+!insert (st_ata_idle, tr_ata_startIntake) into StateTransition
+!insert (tr_ata_startIntake, st_ata_intake) into TransitionState
+
+!insert (st_ata_intake, tr_ata_toPrefilter) into StateTransition
+!insert (tr_ata_toPrefilter, st_ata_prefilter) into TransitionState
+
+!insert (st_ata_prefilter, tr_ata_toOsmosis) into StateTransition
+!insert (tr_ata_toOsmosis, st_ata_osmosis) into TransitionState
+
+!insert (st_ata_osmosis, tr_ata_toRemin) into StateTransition
+!insert (tr_ata_toRemin, st_ata_remineralize) into TransitionState
+
+!insert (st_ata_remineralize, tr_ata_toStorage) into StateTransition
+!insert (tr_ata_toStorage, st_ata_storage) into TransitionState
+
+!insert (st_ata_storage, tr_ata_toDistribute) into StateTransition
+!insert (tr_ata_toDistribute, st_ata_distribute) into TransitionState
+
+!insert (st_ata_distribute, tr_ata_backToIdle) into StateTransition
+!insert (tr_ata_backToIdle, st_ata_idle) into TransitionState
+
+!insert (st_ata_osmosis, tr_ata_emergencyMaintenance) into StateTransition
+!insert (tr_ata_emergencyMaintenance, st_ata_maintenance) into TransitionState
+
+!insert (st_ata_maintenance, tr_ata_maintenanceDone) into StateTransition
+!insert (tr_ata_maintenanceDone, st_ata_idle) into TransitionState
+
+!insert (st_ata_storage, tr_ata_storageFlush) into StateTransition
+!insert (tr_ata_storageFlush, st_ata_prefilter) into TransitionState
+
+!insert (st_ata_intake, tr_ata_intakeStall) into StateTransition
+!insert (tr_ata_intakeStall, st_ata_idle) into TransitionState
+
+!new TimeEvent('te_ata_t_startIntake')
+!te_ata_t_startIntake.time := 5
+!insert (tr_ata_startIntake, te_ata_t_startIntake) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toPrefilter')
+!te_ata_t_toPrefilter.time := 30
+!insert (tr_ata_toPrefilter, te_ata_t_toPrefilter) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toOsmosis')
+!te_ata_t_toOsmosis.time := 120
+!insert (tr_ata_toOsmosis, te_ata_t_toOsmosis) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toRemin')
+!te_ata_t_toRemin.time := 300
+!insert (tr_ata_toRemin, te_ata_t_toRemin) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toStorage')
+!te_ata_t_toStorage.time := 60
+!insert (tr_ata_toStorage, te_ata_t_toStorage) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toDistribute')
+!te_ata_t_toDistribute.time := 10
+!insert (tr_ata_toDistribute, te_ata_t_toDistribute) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_backToIdle')
+!te_ata_t_backToIdle.time := 15
+!insert (tr_ata_backToIdle, te_ata_t_backToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_emergencyMaintenance')
+!te_ata_t_emergencyMaintenance.time := 2
+!insert (tr_ata_emergencyMaintenance, te_ata_t_emergencyMaintenance) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_maintenanceDone')
+!te_ata_t_maintenanceDone.time := 2147483647
+!insert (tr_ata_maintenanceDone, te_ata_t_maintenanceDone) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_storageFlush')
+!te_ata_t_storageFlush.time := 86400
+!insert (tr_ata_storageFlush, te_ata_t_storageFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_intakeStall')
+!te_ata_t_intakeStall.time := 999999999
+!insert (tr_ata_intakeStall, te_ata_t_intakeStall) into TransitionContainsEvents

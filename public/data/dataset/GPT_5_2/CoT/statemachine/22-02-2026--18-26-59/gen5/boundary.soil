@@ -1,0 +1,106 @@
+!new StateMachine('sm_lagosFerryBoarding')
+!sm_lagosFerryBoarding.name := 'lagosFerryBoarding'
+
+!new State('st_lagos_fila')
+!st_lagos_fila.name := 'fila'
+!new State('st_lagos_bilheteria')
+!st_lagos_bilheteria.name := 'bilheteria'
+!new State('st_lagos_embarque')
+!st_lagos_embarque.name := 'embarque'
+!new State('st_lagos_travessia')
+!st_lagos_travessia.name := 'travessia'
+!new State('st_lagos_chegada')
+!st_lagos_chegada.name := 'chegada'
+
+!insert (sm_lagosFerryBoarding, st_lagos_fila) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_bilheteria) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_embarque) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_travessia) into StateMachineContainsStates
+!insert (sm_lagosFerryBoarding, st_lagos_chegada) into StateMachineContainsStates
+
+!insert (sm_lagosFerryBoarding, st_lagos_fila) into StateMachineStartsStates
+
+!new StateMachine('sm_icelandVolcanoAlert')
+!sm_icelandVolcanoAlert.name := 'icelandVolcanoAlert'
+
+!new State('st_iva_calm')
+!st_iva_calm.name := 'calm'
+!new State('st_iva_alert')
+!st_iva_alert.name := 'alert'
+
+!insert (sm_icelandVolcanoAlert, st_iva_calm) into StateMachineContainsStates
+!insert (sm_icelandVolcanoAlert, st_iva_alert) into StateMachineContainsStates
+
+!insert (sm_icelandVolcanoAlert, st_iva_calm) into StateMachineStartsStates
+
+!new Transition('tr_iva_advisoryToAlert')
+!tr_iva_advisoryToAlert.name := 'advisoryToAlert'
+!new Transition('tr_iva_sensorSpikeToAlert')
+!tr_iva_sensorSpikeToAlert.name := 'sensorSpikeToAlert'
+!new Transition('tr_iva_manualSwitchToAlert')
+!tr_iva_manualSwitchToAlert.name := 'manualSwitchToAlert'
+!new Transition('tr_iva_falseAlarmToCalm')
+!tr_iva_falseAlarmToCalm.name := 'falseAlarmToCalm'
+!new Transition('tr_iva_allClearToCalm')
+!tr_iva_allClearToCalm.name := 'allClearToCalm'
+!new Transition('tr_iva_timeoutToCalm')
+!tr_iva_timeoutToCalm.name := 'timeoutToCalm'
+!new Transition('tr_iva_repeatSiren')
+!tr_iva_repeatSiren.name := 'repeatSiren'
+
+!insert (sm_icelandVolcanoAlert, tr_iva_advisoryToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_sensorSpikeToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_manualSwitchToAlert) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_falseAlarmToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_allClearToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_timeoutToCalm) into StateMachineContainsTransitions
+!insert (sm_icelandVolcanoAlert, tr_iva_repeatSiren) into StateMachineContainsTransitions
+
+!insert (st_iva_calm, tr_iva_advisoryToAlert) into StateTransition
+!insert (tr_iva_advisoryToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_calm, tr_iva_sensorSpikeToAlert) into StateTransition
+!insert (tr_iva_sensorSpikeToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_calm, tr_iva_manualSwitchToAlert) into StateTransition
+!insert (tr_iva_manualSwitchToAlert, st_iva_alert) into TransitionState
+
+!insert (st_iva_alert, tr_iva_falseAlarmToCalm) into StateTransition
+!insert (tr_iva_falseAlarmToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_allClearToCalm) into StateTransition
+!insert (tr_iva_allClearToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_timeoutToCalm) into StateTransition
+!insert (tr_iva_timeoutToCalm, st_iva_calm) into TransitionState
+
+!insert (st_iva_alert, tr_iva_repeatSiren) into StateTransition
+!insert (tr_iva_repeatSiren, st_iva_alert) into TransitionState
+
+!new TimeEvent('te_iva_t_advisoryToAlert')
+!te_iva_t_advisoryToAlert.time := 60
+!insert (tr_iva_advisoryToAlert, te_iva_t_advisoryToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_sensorSpikeToAlert')
+!te_iva_t_sensorSpikeToAlert.time := 1
+!insert (tr_iva_sensorSpikeToAlert, te_iva_t_sensorSpikeToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_manualSwitchToAlert')
+!te_iva_t_manualSwitchToAlert.time := 2147483646
+!insert (tr_iva_manualSwitchToAlert, te_iva_t_manualSwitchToAlert) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_falseAlarmToCalm')
+!te_iva_t_falseAlarmToCalm.time := 5
+!insert (tr_iva_falseAlarmToCalm, te_iva_t_falseAlarmToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_allClearToCalm')
+!te_iva_t_allClearToCalm.time := 1800
+!insert (tr_iva_allClearToCalm, te_iva_t_allClearToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_timeoutToCalm')
+!te_iva_t_timeoutToCalm.time := 120
+!insert (tr_iva_timeoutToCalm, te_iva_t_timeoutToCalm) into TransitionContainsEvents
+
+!new TimeEvent('te_iva_t_repeatSiren')
+!te_iva_t_repeatSiren.time := 2
+!insert (tr_iva_repeatSiren, te_iva_t_repeatSiren) into TransitionContainsEvents

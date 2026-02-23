@@ -1,0 +1,121 @@
+!new RentalOffice('RO_100')
+!RO_100.name := 'North Slope Logistics Desk'
+!RO_100.number := 100
+!RO_100.address := '500 Aurora Blvd, Anchorage, AK'
+
+!new RentalOffice('RO_200')
+!RO_200.name := 'Capitol Corridor Returns'
+!RO_200.number := 200
+!RO_200.address := '10 Constitution Plaza, Hartford, CT'
+
+!new Truck('T_2147483647')
+!T_2147483647.id := 2147483647
+!T_2147483647.registrationState := #AK
+!T_2147483647.licensePlateNumber := 'AK-999999'
+!T_2147483647.vehicleTypeCode := #TRUCK24
+!T_2147483647.registrationLastMaintenanceDate := Date('2025-12-31')
+!T_2147483647.expirationDate := Date('2035-12-31')
+!T_2147483647.odometerReading := 2000000000
+!T_2147483647.gasTankCapacity := 9999.99
+!T_2147483647.workingRadio := true
+!T_2147483647.mileage := 1500000000
+
+!new Truck('T_999')
+!T_999.id := 999
+!T_999.registrationState := #AZ
+!T_999.licensePlateNumber := 'AZ-ZZTOP1'
+!T_999.vehicleTypeCode := #TRUCK24
+!T_999.registrationLastMaintenanceDate := Date('2026-02-01')
+!T_999.expirationDate := Date('2027-02-01')
+!T_999.odometerReading := 1
+!T_999.gasTankCapacity := 1.0
+!T_999.workingRadio := false
+!T_999.mileage := 0
+
+!new Vehicle('V_501')
+!V_501.id := 501
+!V_501.registrationState := #CO
+!V_501.licensePlateNumber := 'CO-TRAIL-501'
+!V_501.vehicleTypeCode := #COVERED_TRAILER
+!V_501.registrationLastMaintenanceDate := Date('2026-01-15')
+!V_501.expirationDate := Date('2028-01-15')
+
+!new Vehicle('V_777')
+!V_777.id := 777
+!V_777.registrationState := #AL
+!V_777.licensePlateNumber := 'AL-777-OPN'
+!V_777.vehicleTypeCode := #OPEN_TRAILER
+!V_777.registrationLastMaintenanceDate := Date('2024-06-01')
+!V_777.expirationDate := Date('2026-06-01')
+
+!new Company('C_888')
+!C_888.name := 'Global Relief Transport GmbH'
+!C_888.address := '1 Harbor Ring, Anchorage, AK'
+!C_888.poorRisk := false
+!C_888.idNumber := 888
+
+!new Individual('I_404')
+!I_404.name := 'أمل حسين (Amal Hussein)'
+!I_404.address := '22 Maple Ave, Hartford, CT'
+!I_404.poorRisk := true
+!I_404.homePhone := '+1-860-555-0404'
+!I_404.driverLicenseState := #CT
+!I_404.driverLicenseNumber := 404404404
+!I_404.driverLicenseExpirationDate := Date('2030-05-20')
+
+!new RentalAgreement('RA_900')
+!RA_900.number := 900
+!RA_900.rentalDate := Date('2026-03-01')
+!RA_900.anticipatedDuration := 3650
+!RA_900.depositPaid := 1000000000.0
+!RA_900.quotedDailyRate := 999999.99
+!RA_900.quotedRatePerMile := 12345.67
+
+!new RentalAgreement('RA_901')
+!RA_901.number := 901
+!RA_901.rentalDate := Date('2026-03-02')
+!RA_901.anticipatedDuration := 1
+!RA_901.depositPaid := 0.01
+!RA_901.quotedDailyRate := 0.01
+!RA_901.quotedRatePerMile := 0.01
+
+!new RentalAgreement('RA_902')
+!RA_902.number := 902
+!RA_902.rentalDate := Date('2026-03-03')
+!RA_902.anticipatedDuration := 0
+!RA_902.depositPaid := 500000.0
+!RA_902.quotedDailyRate := 250000.0
+!RA_902.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_903')
+!RA_903.number := 903
+!RA_903.rentalDate := Date('2026-04-15')
+!RA_903.anticipatedDuration := 30
+!RA_903.depositPaid := 250.0
+!RA_903.quotedDailyRate := 79.95
+!RA_903.quotedRatePerMile := 0.45
+
+!insert (RO_100, T_2147483647) into RentalOfficeVehicle
+!insert (RO_200, T_999) into RentalOfficeVehicle
+!insert (RO_100, V_501) into RentalOfficeVehicle
+!insert (RO_200, V_777) into RentalOfficeVehicle
+
+!insert (RO_100, RA_900) into RentalOfficeRentalAgreementOrigin
+!insert (RO_100, RA_901) into RentalOfficeRentalAgreementOrigin
+!insert (RO_200, RA_902) into RentalOfficeRentalAgreementOrigin
+!insert (RO_200, RA_903) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_200, RA_900) into RentalOfficeRentalAgreementDrop
+!insert (RO_100, RA_901) into RentalOfficeRentalAgreementDrop
+!insert (RO_200, RA_902) into RentalOfficeRentalAgreementDrop
+!insert (RO_100, RA_903) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_900, T_2147483647) into RentalAgreementVehicle
+!insert (RA_901, T_2147483647) into RentalAgreementVehicle
+!insert (RA_902, T_2147483647) into RentalAgreementVehicle
+!insert (RA_903, T_999) into RentalAgreementVehicle
+
+!insert (RA_900, C_888) into RentalAgreementCustomer
+!insert (RA_901, C_888) into RentalAgreementCustomer
+!insert (RA_902, C_888) into RentalAgreementCustomer
+!insert (RA_903, I_404) into RentalAgreementCustomer

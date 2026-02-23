@@ -1,0 +1,82 @@
+!new Currency('currencyMADTrip033')
+!currencyMADTrip033.name := 'Moroccan Dirham'
+!currencyMADTrip033.abbreviation := 'MAD'
+
+!new Expense('expenseEXP2026033')
+!expenseEXP2026033.amount := 1850.00
+!expenseEXP2026033.startDate := Date('2026-03-18')
+!expenseEXP2026033.endDate := Date('2026-03-22')
+
+!new Bill('billEXP2026033_BILL201')
+!billEXP2026033_BILL201.amount := 650.00
+!billEXP2026033_BILL201.category := 'Lodging'
+!billEXP2026033_BILL201.date := Date('2026-03-18')
+!billEXP2026033_BILL201.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL201.status := #VERIFIED
+
+!new Bill('billEXP2026033_BILL202')
+!billEXP2026033_BILL202.amount := 120.00
+!billEXP2026033_BILL202.category := 'Intercity transport'
+!billEXP2026033_BILL202.date := Date('2026-03-19')
+!billEXP2026033_BILL202.paymentMethod := #CASH
+!billEXP2026033_BILL202.status := #VALIDATED
+
+!new Bill('billEXP2026033_BILL203')
+!billEXP2026033_BILL203.amount := 310.50
+!billEXP2026033_BILL203.category := 'Meals'
+!billEXP2026033_BILL203.date := Date('2026-03-20')
+!billEXP2026033_BILL203.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL203.status := #PENDING
+
+!new Bill('billEXP2026033_BILL204')
+!billEXP2026033_BILL204.amount := 45.00
+!billEXP2026033_BILL204.category := 'Local transport'
+!billEXP2026033_BILL204.date := Date('2026-03-20')
+!billEXP2026033_BILL204.paymentMethod := #CASH
+!billEXP2026033_BILL204.status := #DRAFT
+
+!new Bill('billEXP2026033_BILL205')
+!billEXP2026033_BILL205.amount := 220.00
+!billEXP2026033_BILL205.category := 'Client relations'
+!billEXP2026033_BILL205.date := Date('2026-03-21')
+!billEXP2026033_BILL205.paymentMethod := #CHECK
+!billEXP2026033_BILL205.status := #VALIDATED
+
+!new Bill('billEXP2026033_BILL206')
+!billEXP2026033_BILL206.amount := 15.25
+!billEXP2026033_BILL206.category := 'Telecom'
+!billEXP2026033_BILL206.date := Date('2026-03-19')
+!billEXP2026033_BILL206.paymentMethod := #CASH
+!billEXP2026033_BILL206.status := #REFUSED
+
+!new Bill('billEXP2026033_BILL207')
+!billEXP2026033_BILL207.amount := 489.25
+!billEXP2026033_BILL207.category := 'Fuel'
+!billEXP2026033_BILL207.date := Date('2026-03-22')
+!billEXP2026033_BILL207.paymentMethod := #CREDIT_CARD
+!billEXP2026033_BILL207.status := #REFUNDED
+
+!insert (expenseEXP2026033, billEXP2026033_BILL201) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL202) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL203) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL204) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL205) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL206) into ExpenseContainsBills
+!insert (expenseEXP2026033, billEXP2026033_BILL207) into ExpenseContainsBills
+
+!insert (billEXP2026033_BILL201, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL202, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL203, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL204, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL205, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL206, currencyMADTrip033) into BillCurrency
+!insert (billEXP2026033_BILL207, currencyMADTrip033) into BillCurrency
+
+!new Comment('commentEXP2026033_CMT201')
+!commentEXP2026033_CMT201.text := 'Note: parking receipt is handwritten; kept as draft until finance confirms it is acceptable.'
+
+!new Comment('commentEXP2026033_CMT202')
+!commentEXP2026033_CMT202.text := 'ملاحظة: تعبئة الهاتف رُفضت لأن الإيصال بلا تاريخ واضح. (Top-up refused due to missing clear date on receipt.)'
+
+!insert (expenseEXP2026033, commentEXP2026033_CMT201) into ExpenseComment
+!insert (expenseEXP2026033, commentEXP2026033_CMT202) into ExpenseComment

@@ -1,0 +1,82 @@
+!new StateMachine('sm_metroGateController')
+!sm_metroGateController.name := 'metroGateController'
+
+!new State('st_mgc_Idle')
+!st_mgc_Idle.name := 'Idle'
+!new State('st_mgc_TicketValide')
+!st_mgc_TicketValide.name := 'TicketValidé'
+!new State('st_mgc_Open')
+!st_mgc_Open.name := 'Open'
+!new State('st_mgc_Alarm')
+!st_mgc_Alarm.name := 'Alarm'
+
+!insert (sm_metroGateController, st_mgc_Idle) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_TicketValide) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_Open) into StateMachineContainsStates
+!insert (sm_metroGateController, st_mgc_Alarm) into StateMachineContainsStates
+
+!insert (sm_metroGateController, st_mgc_Idle) into StateMachineStartsStates
+!insert (sm_metroGateController, st_mgc_Alarm) into StateMachineStartsStates
+
+!new Transition('tr_mgc_tSelfTestToIdle')
+!tr_mgc_tSelfTestToIdle.name := 'tSelfTestToIdle'
+!new Transition('tr_mgc_tBootToAlarm')
+!tr_mgc_tBootToAlarm.name := 'tBootToAlarm'
+!new Transition('tr_mgc_tIdleToValidated')
+!tr_mgc_tIdleToValidated.name := 'tIdleToValidated'
+!new Transition('tr_mgc_tValidatedToOpen')
+!tr_mgc_tValidatedToOpen.name := 'tValidatedToOpen'
+!new Transition('tr_mgc_tOpenToIdle')
+!tr_mgc_tOpenToIdle.name := 'tOpenToIdle'
+!new Transition('tr_mgc_tAlarmToIdle')
+!tr_mgc_tAlarmToIdle.name := 'tAlarmToIdle'
+
+!insert (sm_metroGateController, tr_mgc_tSelfTestToIdle) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tBootToAlarm) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tIdleToValidated) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tValidatedToOpen) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tOpenToIdle) into StateMachineContainsTransitions
+!insert (sm_metroGateController, tr_mgc_tAlarmToIdle) into StateMachineContainsTransitions
+
+!insert (st_mgc_Open, tr_mgc_tSelfTestToIdle) into StateTransition
+!insert (tr_mgc_tSelfTestToIdle, st_mgc_Idle) into TransitionState
+
+!insert (st_mgc_Open, tr_mgc_tBootToAlarm) into StateTransition
+!insert (tr_mgc_tBootToAlarm, st_mgc_Alarm) into TransitionState
+
+!insert (st_mgc_Idle, tr_mgc_tIdleToValidated) into StateTransition
+!insert (tr_mgc_tIdleToValidated, st_mgc_TicketValide) into TransitionState
+
+!insert (st_mgc_TicketValide, tr_mgc_tValidatedToOpen) into StateTransition
+!insert (tr_mgc_tValidatedToOpen, st_mgc_Open) into TransitionState
+
+!insert (st_mgc_Open, tr_mgc_tOpenToIdle) into StateTransition
+!insert (tr_mgc_tOpenToIdle, st_mgc_Idle) into TransitionState
+
+!insert (st_mgc_Alarm, tr_mgc_tAlarmToIdle) into StateTransition
+!insert (tr_mgc_tAlarmToIdle, st_mgc_Idle) into TransitionState
+
+!new TimeEvent('te_mgc_tSelfTestToIdle')
+!te_mgc_tSelfTestToIdle.time := 4
+!insert (tr_mgc_tSelfTestToIdle, te_mgc_tSelfTestToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tBootToAlarm')
+!te_mgc_tBootToAlarm.time := 4
+!insert (tr_mgc_tBootToAlarm, te_mgc_tBootToAlarm) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tIdleToValidated')
+!te_mgc_tIdleToValidated.time := 1
+!insert (tr_mgc_tIdleToValidated, te_mgc_tIdleToValidated) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tValidatedToOpen')
+!te_mgc_tValidatedToOpen.time := 2
+!insert (tr_mgc_tValidatedToOpen, te_mgc_tValidatedToOpen) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tOpenToIdle')
+!te_mgc_tOpenToIdle.time := 6
+!insert (tr_mgc_tOpenToIdle, te_mgc_tOpenToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_mgc_tAlarmToIdle')
+!te_mgc_tAlarmToIdle.time := 30
+!insert (tr_mgc_tAlarmToIdle, te_mgc_tAlarmToIdle) into TransitionContainsEvents
+

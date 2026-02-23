@@ -1,0 +1,62 @@
+!new RentalOffice('RO_210_HFD')
+!RO_210_HFD.name := 'Hartford Downtown Truck Rental'
+!RO_210_HFD.number := 210
+!RO_210_HFD.address := '25 Columbus Blvd, Hartford, CT 06106, USA'
+
+!new RentalOffice('RO_211_WIL')
+!RO_211_WIL.name := 'Wilmington Service & Exchange Center'
+!RO_211_WIL.number := 211
+!RO_211_WIL.address := '400 N Market St, Wilmington, DE 19801, USA'
+
+!new Truck('T_45001')
+!T_45001.id := 45001
+!T_45001.registrationState := #CT
+!T_45001.licensePlateNumber := 'CT-7MZ-204'
+!T_45001.vehicleTypeCode := #TRUCK10
+!T_45001.registrationLastMaintenanceDate := Date('2026-01-08')
+!T_45001.expirationDate := Date('2026-12-31')
+!T_45001.odometerReading := 40312
+!T_45001.gasTankCapacity := 34.0
+!T_45001.workingRadio := true
+!T_45001.mileage := 13
+
+!new Truck('T_45044')
+!T_45044.id := 45044
+!T_45044.registrationState := #DE
+!T_45044.licensePlateNumber := 'DE-TRK-5580'
+!T_45044.vehicleTypeCode := #TRUCK10
+!T_45044.registrationLastMaintenanceDate := Date('2026-02-14')
+!T_45044.expirationDate := Date('2027-02-28')
+!T_45044.odometerReading := 19877
+!T_45044.gasTankCapacity := 36.0
+!T_45044.workingRadio := false
+!T_45044.mileage := 12
+
+!new Individual('I_AishaRahman')
+!I_AishaRahman.name := 'Aisha Rahman'
+!I_AishaRahman.address := '818 N Franklin St, Wilmington, DE 19805, USA'
+!I_AishaRahman.poorRisk := false
+!I_AishaRahman.homePhone := '+1 (302) 555-0139'
+!I_AishaRahman.driverLicenseState := #DE
+!I_AishaRahman.driverLicenseNumber := 77120488
+!I_AishaRahman.driverLicenseExpirationDate := Date('2029-06-30')
+
+!new RentalAgreement('RA_6100088')
+!RA_6100088.number := 6100088
+!RA_6100088.rentalDate := Date('2026-05-03')
+!RA_6100088.anticipatedDuration := 3
+!RA_6100088.depositPaid := 200.0
+!RA_6100088.quotedDailyRate := 99.0
+!RA_6100088.quotedRatePerMile := 0.45
+
+!insert (RO_210_HFD, T_45001) into RentalOfficeVehicle
+!insert (RO_211_WIL, T_45044) into RentalOfficeVehicle
+
+!insert (RO_210_HFD, RA_6100088) into RentalOfficeRentalAgreementOrigin
+!insert (RO_211_WIL, RA_6100088) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_6100088, I_AishaRahman) into RentalAgreementCustomer
+
+!insert (RA_6100088, T_45001) into RentalAgreementVehicle
+!insert (RA_6100088, T_45044) into RentalAgreementVehicle
+

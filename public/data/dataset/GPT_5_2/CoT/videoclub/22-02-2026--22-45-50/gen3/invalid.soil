@@ -1,0 +1,49 @@
+!new Client('clientKioskC20')
+!clientKioskC20.clientId := 0
+!clientKioskC20.isSuspended := false
+
+!new Client('clientKioskC21')
+!clientKioskC21.clientId := 77
+!clientKioskC21.isSuspended := false
+
+!new Rental('rentalKioskR20')
+!rentalKioskR20.date := Date('2026-02-20')
+
+!new Rental('rentalKioskR21')
+!rentalKioskR21.date := Date('2026-02-18')
+
+!new Movie('movieKioskM20')
+!movieKioskM20.title := 'Kōwhai Run'
+!movieKioskM20.availableCopies := -1
+!movieKioskM20.genre := #Action
+
+!new Series('seriesKioskS20')
+!seriesKioskS20.title := 'Radio Sahra (Desert Broadcast)'
+!seriesKioskS20.availableCopies := 2
+!seriesKioskS20.episode := 2
+
+!new Movie('movieKioskM21')
+!movieKioskM21.title := 'Laughter on the Fjord'
+!movieKioskM21.availableCopies := 1
+!movieKioskM21.genre := #Comedy
+
+!new Actor('actorKioskA20')
+!actorKioskA20.name := 'Aroha Te Rangi'
+
+!new Actor('actorKioskA21')
+!actorKioskA21.name := 'Hassan Al‑Masri'
+
+!new Actor('actorKioskA22')
+!actorKioskA22.name := 'Ingrid Solheim'
+
+!insert (clientKioskC20, rentalKioskR20) into ClientRental
+!insert (clientKioskC21, rentalKioskR21) into ClientRental
+
+!insert (rentalKioskR20, seriesKioskS20) into RentalCassette
+!insert (rentalKioskR21, movieKioskM20) into RentalCassette
+!insert (rentalKioskR21, movieKioskM21) into RentalCassette
+
+!insert (seriesKioskS20, actorKioskA21) into CassetteActor
+!insert (movieKioskM20, actorKioskA20) into CassetteActor
+!insert (movieKioskM20, actorKioskA21) into CassetteActor
+!insert (movieKioskM21, actorKioskA22) into CassetteActor

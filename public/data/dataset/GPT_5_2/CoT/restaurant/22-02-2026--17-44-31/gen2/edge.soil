@@ -1,0 +1,325 @@
+!new Restaurant('R15')
+!R15.name := 'Sahara Smokehouse & Tea'
+
+!new Restaurant('R16')
+!R16.name := 'Kintsugi Omakase Counter'
+
+!new Owner('O34')
+!O34.name := 'Leila Haddad'
+!O34.percentageShares := 25
+!insert (R15, O34) into RestaurantOwner
+!insert (R16, O34) into RestaurantOwner
+
+!new Owner('O35')
+!O35.name := 'Kenji Sato'
+!O35.percentageShares := 75
+!insert (R15, O35) into RestaurantOwner
+
+!new Owner('O36')
+!O36.name := 'Margaret O’Connor'
+!O36.percentageShares := 25
+!insert (R16, O36) into RestaurantOwner
+
+!new Owner('O37')
+!O37.name := 'Chen Wei'
+!O37.percentageShares := 50
+!insert (R16, O37) into RestaurantOwner
+
+!new RegularCustomer('C17')
+!C17.name := 'Harper Johnson'
+!C17.prefferedLanguage := #English
+
+!new RegularCustomer('C18')
+!C18.name := 'Lucía Fernández'
+!C18.prefferedLanguage := #Spanish
+
+!new HeadWaiter('HW15')
+!HW15.name := 'Dieter Klein'
+!HW15.dateOfBirth := Date('1979-12-14')
+!HW15.phoneNumber := '+49-89-555-0181'
+
+!new Waiter('W32')
+!W32.name := 'Ana María Cruz'
+!W32.dateOfBirth := Date('1999-05-10')
+!W32.phoneNumber := '+34-600-555-010'
+!W32.spokenLanguage := #Spanish
+!insert (HW15, W32) into HeadWaiterWaiter
+
+!new Waiter('W33')
+!W33.name := 'Ethan Brooks'
+!W33.dateOfBirth := Date('2001-08-21')
+!W33.phoneNumber := '+1-212-555-0111'
+!W33.spokenLanguage := #English
+!insert (HW15, W33) into HeadWaiterWaiter
+
+!new Waiter('W34')
+!W34.name := 'Sabrina Vogel'
+!W34.dateOfBirth := Date('1997-02-02')
+!W34.phoneNumber := '+43-699-555-0123'
+!W34.spokenLanguage := #German
+!insert (HW15, W34) into HeadWaiterWaiter
+
+!new Cook('K23')
+!K23.name := 'María Soledad Pérez'
+!K23.dateOfBirth := Date('1967-03-09')
+!K23.phoneNumber := '+54-11-5555-0166'
+!K23.yearsOfExperience := 45
+
+!new Cook('K24')
+!K24.name := 'María Soledad Pérez'
+!K24.dateOfBirth := Date('1967-03-09')
+!K24.phoneNumber := '+54-11-5555-0166'
+!K24.yearsOfExperience := 45
+
+!new Cook('K25')
+!K25.name := 'Tomáš Novák'
+!K25.dateOfBirth := Date('1998-10-28')
+!K25.phoneNumber := '+420-777-555-013'
+!K25.yearsOfExperience := 0
+
+!new Chef('CH26')
+!CH26.name := 'Rania Nasser'
+!CH26.dateOfBirth := Date('1985-01-30')
+!CH26.phoneNumber := '+971-50-555-0155'
+!insert (CH26, K23) into ChefCook
+
+!new Chef('CH27')
+!CH27.name := 'Hiro Tanabe'
+!CH27.dateOfBirth := Date('1992-07-07')
+!CH27.phoneNumber := '+81-80-5555-0144'
+!insert (CH27, K24) into ChefCook
+
+!new Chef('CH28')
+!CH28.name := 'Zoe Williams'
+!CH28.dateOfBirth := Date('1995-11-19')
+!CH28.phoneNumber := '+44-7700-555-022'
+!insert (CH28, K25) into ChefCook
+
+!new Manager('M14')
+!M14.name := 'Sanjay Patel'
+!M14.dateOfBirth := Date('1982-06-16')
+!M14.phoneNumber := '+1-647-555-0190'
+
+!new BusDriver('BD15')
+!BD15.name := 'Olga Petrova'
+!BD15.dateOfBirth := Date('1989-09-01')
+!BD15.phoneNumber := '+7-916-555-0102'
+!BD15.driverLicenseNr := 'RU-77-900122'
+
+!new BusDriver('BD16')
+!BD16.name := 'Kwame Mensah'
+!BD16.dateOfBirth := Date('1991-04-12')
+!BD16.phoneNumber := '+233-24-555-0110'
+!BD16.driverLicenseNr := 'GH-DL-441209'
+
+!new Allergen('ALG1_E2')
+!ALG1_E2.type := #Gluten
+
+!new Allergen('ALG2_E2')
+!ALG2_E2.type := #Lactose
+
+!new Allergen('ALG3_E2')
+!ALG3_E2.type := #Nuts
+
+!new Allergen('ALG4_E2')
+!ALG4_E2.type := #Seafood
+
+!new FoodItem('FI20_E2')
+!FI20_E2.number := 20
+!FI20_E2.description := 'Barley miso paste'
+!FI20_E2.purchaseFlag := true
+!FI20_E2.unit := #Ounce
+!insert (FI20_E2, ALG1_E2) into FoodItemAllergen
+
+!new FoodItem('FI21_E2')
+!FI21_E2.number := 21
+!FI21_E2.description := 'Cashew cream'
+!FI21_E2.purchaseFlag := false
+!FI21_E2.unit := #Gram
+!insert (FI21_E2, ALG3_E2) into FoodItemAllergen
+
+!new FoodItem('FI22_E2')
+!FI22_E2.number := 22
+!FI22_E2.description := 'Milk powder'
+!FI22_E2.purchaseFlag := true
+!FI22_E2.unit := #Pound
+!insert (FI22_E2, ALG2_E2) into FoodItemAllergen
+
+!new FoodItem('FI23_E2')
+!FI23_E2.number := 23
+!FI23_E2.description := 'Wheat ramen sheet (dried)'
+!FI23_E2.purchaseFlag := true
+!FI23_E2.unit := #Sheet
+!insert (FI23_E2, ALG1_E2) into FoodItemAllergen
+
+!new FoodItem('FI24_E2')
+!FI24_E2.number := 24
+!FI24_E2.description := 'Prawn stock concentrate'
+!FI24_E2.purchaseFlag := true
+!FI24_E2.unit := #Ounce
+!insert (FI24_E2, ALG4_E2) into FoodItemAllergen
+
+!new FoodItem('FI25_E2')
+!FI25_E2.number := 25
+!FI25_E2.description := 'Almond brittle shards'
+!FI25_E2.purchaseFlag := true
+!FI25_E2.unit := #Dozen
+!insert (FI25_E2, ALG3_E2) into FoodItemAllergen
+
+!new FoodItem('FI26_E2')
+!FI26_E2.number := 26
+!FI26_E2.description := 'Butter'
+!FI26_E2.purchaseFlag := true
+!FI26_E2.unit := #Ounce
+!insert (FI26_E2, ALG2_E2) into FoodItemAllergen
+
+!new MenuItem('MI44')
+!MI44.description := 'Charred Lamb over Barley-Miso Glaze'
+!MI44.prepTime := 35.0
+!MI44.classification := #Main
+!insert (MI44, CH26) into MenuItemChef
+!insert (MI44, FI20_E2) into MenuItemFoodItem
+!insert (MI44, FI26_E2) into MenuItemFoodItem
+
+!new MenuItem('MI45')
+!MI45.description := 'Cashew-Cloud Parfait with Almond Shards'
+!MI45.prepTime := 8.0
+!MI45.classification := #Dessert
+!insert (MI45, CH27) into MenuItemChef
+!insert (MI45, FI21_E2) into MenuItemFoodItem
+!insert (MI45, FI25_E2) into MenuItemFoodItem
+
+!new MenuItem('MI46')
+!MI46.description := 'Hot Milk Tea with Toasted Wheat Aroma'
+!MI46.prepTime := 4.5
+!MI46.classification := #Beverage
+!insert (MI46, CH28) into MenuItemChef
+!insert (MI46, FI22_E2) into MenuItemFoodItem
+!insert (MI46, FI23_E2) into MenuItemFoodItem
+
+!new MenuItem('MI47')
+!MI47.description := 'Prawn-Stock Ramen Bites'
+!MI47.prepTime := 12.0
+!MI47.classification := #Apetizer
+!insert (MI47, CH26) into MenuItemChef
+!insert (MI47, FI23_E2) into MenuItemFoodItem
+!insert (MI47, FI24_E2) into MenuItemFoodItem
+
+!new MenuItem('MI48')
+!MI48.description := 'Brown Butter Sip (mini)'
+!MI48.prepTime := 0.2
+!MI48.classification := #Beverage
+!insert (MI48, CH28) into MenuItemChef
+!insert (MI48, FI26_E2) into MenuItemFoodItem
+
+!new Banquet('BR14')
+!BR14.time := Time('18:00')
+!BR14.date := Date('2026-12-31')
+!BR14.numberPeople := 1
+!BR14.name := 'N. Qureshi'
+!BR14.phoneNumber := '+92-300-555-0100'
+!BR14.number := 88001
+!BR14.groupName := 'Solo Donor Salon'
+!BR14.paymentMethod := #CreditCard
+!BR14.busService := true
+!insert (R16, BR14) into RestaurantReservation
+!insert (BR14, W32) into ReservationWaiter
+!insert (BR14, W33) into ReservationWaiter
+!insert (BR14, W34) into ReservationWaiter
+
+!new Table('TB2_E2')
+!TB2_E2.number := 501
+!TB2_E2.description := 'Single seat at chef’s rail'
+!TB2_E2.capacity := 1
+!insert (BR14, TB2_E2) into ReservationTable
+
+!new Banquet('BR15')
+!BR15.time := Time('12:30')
+!BR15.date := Date('2026-05-01')
+!BR15.numberPeople := 60
+!BR15.name := 'Lucía Fernández'
+!BR15.phoneNumber := '+34-610-555-012'
+!BR15.number := 88002
+!BR15.groupName := 'Andalusian Wedding Lunch'
+!BR15.paymentMethod := #Cash
+!BR15.busService := true
+!insert (R16, BR15) into RestaurantReservation
+!insert (BR15, C18) into ReservationCustomer
+!insert (BR15, W32) into ReservationWaiter
+!insert (BR15, BD15) into BanquetBusDriver
+!insert (BR15, BD16) into BanquetBusDriver
+
+!new Table('TB3A_E2')
+!TB3A_E2.number := 601
+!TB3A_E2.description := 'Banquet table A (long)'
+!TB3A_E2.capacity := 30
+!insert (BR15, TB3A_E2) into ReservationTable
+
+!new Table('TB3B_E2')
+!TB3B_E2.number := 602
+!TB3B_E2.description := 'Banquet table B (long)'
+!TB3B_E2.capacity := 30
+!insert (BR15, TB3B_E2) into ReservationTable
+
+!new ItemOrder('IO1601')
+!IO1601.time := Time('12:40')
+!insert (BR15, IO1601) into ReservationItemOrdered
+!insert (IO1601, MI47) into ItemOrderMenuItem
+
+!new ItemOrder('IO1602')
+!IO1602.time := Time('12:41')
+!insert (BR15, IO1602) into ReservationItemOrdered
+!insert (IO1602, MI44) into ItemOrderMenuItem
+
+!new ItemOrder('IO1603')
+!IO1603.time := Time('12:42')
+!insert (BR15, IO1603) into ReservationItemOrdered
+!insert (IO1603, MI44) into ItemOrderMenuItem
+
+!new ItemOrder('IO1604')
+!IO1604.time := Time('12:50')
+!insert (BR15, IO1604) into ReservationItemOrdered
+!insert (IO1604, MI46) into ItemOrderMenuItem
+
+!new ItemOrder('IO1605')
+!IO1605.time := Time('13:05')
+!insert (BR15, IO1605) into ReservationItemOrdered
+!insert (IO1605, MI45) into ItemOrderMenuItem
+
+!new ItemOrder('IO1606')
+!IO1606.time := Time('13:06')
+!insert (BR15, IO1606) into ReservationItemOrdered
+!insert (IO1606, MI48) into ItemOrderMenuItem
+
+!new Individual('IR19')
+!IR19.time := Time('21:15')
+!IR19.date := Date('2026-05-01')
+!IR19.numberPeople := 2
+!IR19.name := 'Harper Johnson'
+!IR19.phoneNumber := '+1-416-555-0109'
+!IR19.number := 777
+!IR19.seating := #Patio
+!IR19.smoking := #NonSmoking
+!insert (R16, IR19) into RestaurantReservation
+!insert (IR19, C17) into ReservationCustomer
+!insert (IR19, W34) into ReservationWaiter
+
+!new Table('TI2_E2')
+!TI2_E2.number := 999
+!TI2_E2.description := 'Oversized communal table reserved for two (odd request)'
+!TI2_E2.capacity := 100
+!insert (IR19, TI2_E2) into ReservationTable
+
+!new ItemOrder('IO1607')
+!IO1607.time := Time('21:20')
+!insert (IR19, IO1607) into ReservationItemOrdered
+!insert (IO1607, MI46) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR13')
+!DR13.diet := #Halal
+
+!new DietaryRequirement('DR14')
+!DR14.diet := #Kosher
+
+!new ReportedAllergy('RA12')
+!RA12.allergen := #Seafood

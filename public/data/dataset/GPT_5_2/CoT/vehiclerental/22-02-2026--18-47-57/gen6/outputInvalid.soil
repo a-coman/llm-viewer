@@ -1,0 +1,55 @@
+!new RentalOffice('RO_SD_9_OC6')
+!RO_SD_9_OC6.name := 'San Diego Airport Commercial Desk'
+!RO_SD_9_OC6.number := 9
+!RO_SD_9_OC6.address := '3225 N Harbor Dr, San Diego, CA 92101, USA'
+
+!new RentalOffice('RO_TUC_33_OC6')
+!RO_TUC_33_OC6.name := 'Tucson Downtown Fleet Center'
+!RO_TUC_33_OC6.number := 33
+!RO_TUC_33_OC6.address := '450 E Congress St, Tucson, AZ 85701, USA'
+
+!new Truck('T_77110_OC6')
+!T_77110_OC6.id := 77110
+!T_77110_OC6.registrationState := #CA
+!T_77110_OC6.licensePlateNumber := 'CA-8HXR219'
+!T_77110_OC6.vehicleTypeCode := #TRUCK10
+!T_77110_OC6.registrationLastMaintenanceDate := Date('2026-06-28')
+!T_77110_OC6.expirationDate := Date('2027-06-30')
+!T_77110_OC6.odometerReading := 55804
+!T_77110_OC6.gasTankCapacity := 35.5
+!T_77110_OC6.workingRadio := true
+!T_77110_OC6.mileage := 14
+
+!new Individual('I_LuisHernandez_OC6')
+!I_LuisHernandez_OC6.name := 'Luis Hernández'
+!I_LuisHernandez_OC6.address := '1090 W Morena Blvd, San Diego, CA 92110, USA'
+!I_LuisHernandez_OC6.poorRisk := false
+!I_LuisHernandez_OC6.homePhone := '+1 (619) 555-0106'
+!I_LuisHernandez_OC6.driverLicenseState := #CA
+!I_LuisHernandez_OC6.driverLicenseNumber := 72840115
+!I_LuisHernandez_OC6.driverLicenseExpirationDate := Date('2028-11-19')
+
+!new Company('C_SolySombra_OC6')
+!C_SolySombra_OC6.name := 'Sol y Sombra Solar, Inc.'
+!C_SolySombra_OC6.address := '2450 Kettner Blvd, San Diego, CA 92101, USA'
+!C_SolySombra_OC6.poorRisk := false
+!C_SolySombra_OC6.idNumber := 6004182
+
+!new RentalAgreement('RA_88001_OC6')
+!RA_88001_OC6.number := 88001
+!RA_88001_OC6.rentalDate := Date('2026-07-15')
+!RA_88001_OC6.anticipatedDuration := 21
+!RA_88001_OC6.depositPaid := 250.0
+!RA_88001_OC6.quotedDailyRate := 119.0
+!RA_88001_OC6.quotedRatePerMile := 0.49
+
+!insert (RO_SD_9_OC6, T_77110_OC6) into RentalOfficeVehicle
+
+!insert (RO_SD_9_OC6, RA_88001_OC6) into RentalOfficeRentalAgreementOrigin
+!insert (RO_TUC_33_OC6, RA_88001_OC6) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_88001_OC6, T_77110_OC6) into RentalAgreementVehicle
+
+!insert (RA_88001_OC6, I_LuisHernandez_OC6) into RentalAgreementCustomer
+!insert (RA_88001_OC6, C_SolySombra_OC6) into RentalAgreementCustomer
+

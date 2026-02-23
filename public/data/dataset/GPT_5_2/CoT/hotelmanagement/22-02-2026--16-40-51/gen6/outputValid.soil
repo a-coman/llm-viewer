@@ -1,0 +1,464 @@
+!new Customer('C27')
+!C27.firstName := 'Olivia'
+!C27.lastName := 'Ndiaye'
+
+!new Booking('B7120')
+!B7120.bookingId := 7120
+!B7120.startDate := '2026-11-20'
+!B7120.endDate := '2026-11-22'
+!B7120.confirmed := false
+!B7120.canceled := false
+
+!new RoomReservation('RR12_B7120')
+!RR12_B7120.checkInDate := '2026-11-20'
+!RR12_B7120.checkOutDate := '2026-11-22'
+
+!new RoomReservation('RR13_B7120')
+!RR13_B7120.checkInDate := '2026-11-21'
+!RR13_B7120.checkOutDate := '2026-11-22'
+
+!new Room('R601_B7120')
+!R601_B7120.roomNumber := 601
+!R601_B7120.numBeds := 2
+!R601_B7120.pricePerNight := 145.00
+!R601_B7120.occupied := false
+!R601_B7120.blocked := false
+
+!new Room('R602_B7120')
+!R602_B7120.roomNumber := 602
+!R602_B7120.numBeds := 2
+!R602_B7120.pricePerNight := 145.00
+!R602_B7120.occupied := false
+!R602_B7120.blocked := false
+
+!new Room('R603_B7120')
+!R603_B7120.roomNumber := 603
+!R603_B7120.numBeds := 3
+!R603_B7120.pricePerNight := 175.00
+!R603_B7120.occupied := false
+!R603_B7120.blocked := false
+
+!new Room('R150_B7120')
+!R150_B7120.roomNumber := 150
+!R150_B7120.numBeds := 1
+!R150_B7120.pricePerNight := 90.00
+!R150_B7120.occupied := true
+!R150_B7120.blocked := false
+
+!new RoomExtra('E16_B7120')
+!E16_B7120.description := 'Projector rental (2 days)'
+!E16_B7120.price := 40.00
+
+!new RoomExtra('E17_B7120')
+!E17_B7120.description := 'Coffee/tea station (meeting corner)'
+!E17_B7120.price := 25.00
+
+!new RoomExtra('E18_B7120')
+!E18_B7120.description := 'Extra towels set (per room)'
+!E18_B7120.price := 15.00
+
+!new RoomExtra('E19_B7120')
+!E19_B7120.description := 'Complimentary city map + transit tips'
+!E19_B7120.price := 0.00
+
+!new Bill('BL16010')
+!BL16010.billId := 16010
+!BL16010.price := 845.00
+
+!new Bill('BL16011')
+!BL16011.billId := 16011
+!BL16011.price := 90.00
+
+!new FreeRoomTypesDTO('D49')
+!D49.roomTypeDescription := 'Habitación Doble (desayuno no incluido)'
+!D49.numBeds := 2
+!D49.pricePerNight := 145.00
+!D49.numFreeRooms := 8
+
+!new FreeRoomTypesDTO('D50')
+!D50.roomTypeDescription := 'غرفة مفردة اقتصادية (قريبة من المصعد)'
+!D50.numBeds := 1
+!D50.pricePerNight := 90.00
+!D50.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D51')
+!D51.roomTypeDescription := 'Triple Room (quiet corridor)'
+!D51.numBeds := 3
+!D51.pricePerNight := 175.00
+!D51.numFreeRooms := 2
+
+!insert (B7120, C27) into BookingCustomer
+
+!insert (B7120, RR12_B7120) into BookingRoomReservation
+!insert (B7120, RR13_B7120) into BookingRoomReservation
+
+!insert (RR12_B7120, R601_B7120) into RoomReservationRoom
+!insert (RR12_B7120, R602_B7120) into RoomReservationRoom
+!insert (RR12_B7120, R603_B7120) into RoomReservationRoom
+!insert (RR13_B7120, R150_B7120) into RoomReservationRoom
+
+!insert (RR12_B7120, E16_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E17_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E18_B7120) into RoomReservationExtras
+!insert (RR12_B7120, E19_B7120) into RoomReservationExtras
+
+!insert (B7120, BL16010) into BookingBill
+!insert (B7120, BL16011) into BookingBill
+
+!insert (BL16010, RR12_B7120) into BillRoomReservation
+!insert (BL16011, RR13_B7120) into BillRoomReservation
+
+!new Customer('C34')
+!C34.firstName := 'Örn'
+!C34.lastName := 'Þórðardóttir'
+
+!new Booking('B1_DUP')
+!B1_DUP.bookingId := 1
+!B1_DUP.startDate := '   2026-12-31   '
+!B1_DUP.endDate := '2026-01-01'
+!B1_DUP.confirmed := true
+!B1_DUP.canceled := false
+
+!new RoomReservation('RR_DUP_101')
+!RR_DUP_101.checkInDate := 'N/A'
+!RR_DUP_101.checkOutDate := 'N/A'
+
+!new Room('R101A_DUP')
+!R101A_DUP.roomNumber := 101
+!R101A_DUP.numBeds := 1
+!R101A_DUP.pricePerNight := 0.0
+!R101A_DUP.occupied := true
+!R101A_DUP.blocked := false
+
+!new Room('R101B_DUP')
+!R101B_DUP.roomNumber := 101
+!R101B_DUP.numBeds := 2
+!R101B_DUP.pricePerNight := 0.0
+!R101B_DUP.occupied := false
+!R101B_DUP.blocked := true
+
+!new RoomExtra('D1_DUP')
+!D1_DUP.description := 'Duplicate-room-number handling fee'
+!D1_DUP.price := 10.0
+
+!new RoomExtra('D2_DUP')
+!D2_DUP.description := 'Manual discount (rounding)'
+!D2_DUP.price := -0.01
+
+!new RoomExtra('D3_DUP')
+!D3_DUP.description := 'Cultural event ticket precharge'
+!D3_DUP.price := 250.0
+
+!new RoomExtra('D4_DUP')
+!D4_DUP.description := 'Chargeback reversal placeholder'
+!D4_DUP.price := -260.0
+
+!new RoomExtra('D5_DUP')
+!D5_DUP.description := 'Local tax record-only line'
+!D5_DUP.price := 0.0
+
+!new Bill('BL1_MIN')
+!BL1_MIN.billId := 1
+!BL1_MIN.price := 0.0
+
+!new FreeRoomTypesDTO('D60')
+!D60.roomTypeDescription := 'Aurora-view lounge pod (no privacy curtain)'
+!D60.numBeds := 1
+!D60.pricePerNight := 0.0
+!D60.numFreeRooms := -1
+
+!insert (B1_DUP, C34) into BookingCustomer
+
+!insert (B1_DUP, RR_DUP_101) into BookingRoomReservation
+
+!insert (RR_DUP_101, R101A_DUP) into RoomReservationRoom
+!insert (RR_DUP_101, R101B_DUP) into RoomReservationRoom
+
+!insert (RR_DUP_101, D1_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D2_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D3_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D4_DUP) into RoomReservationExtras
+!insert (RR_DUP_101, D5_DUP) into RoomReservationExtras
+
+!insert (B1_DUP, BL1_MIN) into BookingBill
+
+!insert (BL1_MIN, RR_DUP_101) into BillRoomReservation
+
+!new Customer('C35')
+!C35.firstName := 'Lena'
+!C35.lastName := 'Schmidt'
+
+!new Booking('B77110')
+!B77110.bookingId := 77110
+!B77110.startDate := '2026-09-05'
+!B77110.endDate := '2026-09-08'
+!B77110.confirmed := true
+!B77110.canceled := false
+
+!new RoomReservation('RR_L1')
+!RR_L1.checkInDate := '2026-09-05'
+!RR_L1.checkOutDate := '2026-09-08'
+
+!new Room('R901_L1')
+!R901_L1.roomNumber := 901
+!R901_L1.numBeds := 1
+!R901_L1.pricePerNight := 155.00
+!R901_L1.occupied := false
+!R901_L1.blocked := false
+
+!new Room('R902_L1')
+!R902_L1.roomNumber := 902
+!R902_L1.numBeds := 1
+!R902_L1.pricePerNight := 155.00
+!R902_L1.occupied := false
+!R902_L1.blocked := false
+
+!new Room('R903_L1')
+!R903_L1.roomNumber := 903
+!R903_L1.numBeds := 1
+!R903_L1.pricePerNight := 155.00
+!R903_L1.occupied := false
+!R903_L1.blocked := false
+
+!new Bill('BL1200450')
+!BL1200450.billId := 1200450
+!BL1200450.price := 1395.00
+
+!new Customer('C36')
+!C36.firstName := 'João'
+!C36.lastName := 'Pereira'
+
+!new Booking('B77111')
+!B77111.bookingId := 77111
+!B77111.startDate := '2026-09-07'
+!B77111.endDate := '2026-09-12'
+!B77111.confirmed := false
+!B77111.canceled := true
+
+!new RoomReservation('RR_J1')
+!RR_J1.checkInDate := '2026-09-07'
+!RR_J1.checkOutDate := '2026-09-10'
+
+!new Room('R120_J1')
+!R120_J1.roomNumber := 120
+!R120_J1.numBeds := 2
+!R120_J1.pricePerNight := 98.00
+!R120_J1.occupied := false
+!R120_J1.blocked := false
+
+!new RoomExtra('J1_1')
+!J1_1.description := 'Bicycle rental (3 days)'
+!J1_1.price := 45.00
+
+!new RoomExtra('J1_2')
+!J1_2.description := 'Pet deep-clean fee (small dog)'
+!J1_2.price := 30.00
+
+!new Bill('BL1200451')
+!BL1200451.billId := 1200451
+!BL1200451.price := 369.00
+
+!new RoomReservation('RR_J2')
+!RR_J2.checkInDate := '2026-09-10'
+!RR_J2.checkOutDate := '2026-09-12'
+
+!new Room('R121_J2')
+!R121_J2.roomNumber := 121
+!R121_J2.numBeds := 2
+!R121_J2.pricePerNight := 98.00
+!R121_J2.occupied := false
+!R121_J2.blocked := true
+
+!new RoomExtra('J2_1')
+!J2_1.description := 'Cancellation/relocation waiver (documented service disruption)'
+!J2_1.price := 0.00
+
+!new Bill('BL1200452')
+!BL1200452.billId := 1200452
+!BL1200452.price := 0.00
+
+!new FreeRoomTypesDTO('D61')
+!D61.roomTypeDescription := 'Einzelzimmer (ruhige Lage) — Innenhof'
+!D61.numBeds := 1
+!D61.pricePerNight := 120.00
+!D61.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('D62')
+!D62.roomTypeDescription := 'Quarto duplo — perto da praia'
+!D62.numBeds := 2
+!D62.pricePerNight := 150.00
+!D62.numFreeRooms := 2
+
+!new FreeRoomTypesDTO('D63')
+!D63.roomTypeDescription := 'غرفة عائلية (Family room) — إطلالة مدينة'
+!D63.numBeds := 3
+!D63.pricePerNight := 220.00
+!D63.numFreeRooms := 1
+
+!insert (B77110, C35) into BookingCustomer
+!insert (B77111, C36) into BookingCustomer
+
+!insert (B77110, RR_L1) into BookingRoomReservation
+!insert (B77111, RR_J1) into BookingRoomReservation
+!insert (B77111, RR_J2) into BookingRoomReservation
+
+!insert (RR_L1, R901_L1) into RoomReservationRoom
+!insert (RR_L1, R902_L1) into RoomReservationRoom
+!insert (RR_L1, R903_L1) into RoomReservationRoom
+
+!insert (RR_J1, R120_J1) into RoomReservationRoom
+!insert (RR_J2, R121_J2) into RoomReservationRoom
+
+!insert (RR_J1, J1_1) into RoomReservationExtras
+!insert (RR_J1, J1_2) into RoomReservationExtras
+!insert (RR_J2, J2_1) into RoomReservationExtras
+
+!insert (B77110, BL1200450) into BookingBill
+!insert (B77111, BL1200451) into BookingBill
+!insert (B77111, BL1200452) into BookingBill
+
+!insert (BL1200450, RR_L1) into BillRoomReservation
+!insert (BL1200451, RR_J1) into BillRoomReservation
+!insert (BL1200452, RR_J2) into BillRoomReservation
+
+!new FreeRoomTypesDTO('D65')
+!D65.roomTypeDescription := 'Twin room (basic, no view)'
+!D65.numBeds := 2
+!D65.pricePerNight := 0.01
+!D65.numFreeRooms := 1000000
+
+!new Customer('C39')
+!C39.firstName := 'Μαρία'
+!C39.lastName := 'Παπαδοπούλου'
+
+!new Booking('B10_BIGROOMS')
+!B10_BIGROOMS.startDate := '2026-09-09'
+!B10_BIGROOMS.endDate := '2026-09-10'
+!B10_BIGROOMS.canceled := false
+!B10_BIGROOMS.bookingId := 8
+!B10_BIGROOMS.confirmed := true
+
+!new RoomReservation('R16_BIGROOMS')
+!R16_BIGROOMS.checkInDate := '2026-09-09'
+!R16_BIGROOMS.checkOutDate := '2026-09-10'
+
+!new Room('RM_MIN_R16')
+!RM_MIN_R16.numBeds := 2
+!RM_MIN_R16.pricePerNight := 0.01
+!RM_MIN_R16.occupied := false
+!RM_MIN_R16.blocked := false
+!RM_MIN_R16.roomNumber := -2147483647
+
+!new Room('RM601_R16')
+!RM601_R16.numBeds := 2
+!RM601_R16.pricePerNight := 0.01
+!RM601_R16.occupied := true
+!RM601_R16.blocked := false
+!RM601_R16.roomNumber := 601
+
+!new Room('RM602_R16')
+!RM602_R16.numBeds := 2
+!RM602_R16.pricePerNight := 0.01
+!RM602_R16.occupied := true
+!RM602_R16.blocked := false
+!RM602_R16.roomNumber := 602
+
+!new Room('RM603_R16')
+!RM603_R16.numBeds := 2
+!RM603_R16.pricePerNight := 0.01
+!RM603_R16.occupied := false
+!RM603_R16.blocked := false
+!RM603_R16.roomNumber := 603
+
+!new Room('RM604_R16')
+!RM604_R16.numBeds := 2
+!RM604_R16.pricePerNight := 0.01
+!RM604_R16.occupied := false
+!RM604_R16.blocked := true
+!RM604_R16.roomNumber := 604
+
+!new Room('RM605_R16')
+!RM605_R16.numBeds := 2
+!RM605_R16.pricePerNight := 0.01
+!RM605_R16.occupied := true
+!RM605_R16.blocked := false
+!RM605_R16.roomNumber := 605
+
+!new Room('RM606_R16')
+!RM606_R16.numBeds := 2
+!RM606_R16.pricePerNight := 0.01
+!RM606_R16.occupied := false
+!RM606_R16.blocked := false
+!RM606_R16.roomNumber := 606
+
+!new Room('RM607_R16')
+!RM607_R16.numBeds := 2
+!RM607_R16.pricePerNight := 0.01
+!RM607_R16.occupied := false
+!RM607_R16.blocked := true
+!RM607_R16.roomNumber := 607
+
+!new Room('RM608_R16')
+!RM608_R16.numBeds := 2
+!RM608_R16.pricePerNight := 0.01
+!RM608_R16.occupied := true
+!RM608_R16.blocked := false
+!RM608_R16.roomNumber := 608
+
+!new Room('RM609_R16')
+!RM609_R16.numBeds := 2
+!RM609_R16.pricePerNight := 0.01
+!RM609_R16.occupied := false
+!RM609_R16.blocked := false
+!RM609_R16.roomNumber := 609
+
+!new Room('RM610_R16')
+!RM610_R16.numBeds := 2
+!RM610_R16.pricePerNight := 0.01
+!RM610_R16.occupied := true
+!RM610_R16.blocked := false
+!RM610_R16.roomNumber := 610
+
+!new Room('RM611_R16')
+!RM611_R16.numBeds := 2
+!RM611_R16.pricePerNight := 0.01
+!RM611_R16.occupied := false
+!RM611_R16.blocked := false
+!RM611_R16.roomNumber := 611
+
+!new Bill('BL16_B10')
+!BL16_B10.price := 0.12
+!BL16_B10.billId := 60010
+
+!new Customer('C40')
+!C40.firstName := 'Wanjiku'
+!C40.lastName := 'Mwangi'
+
+!new Booking('B11_CONF_EMPTY')
+!B11_CONF_EMPTY.startDate := '2026-05-05'
+!B11_CONF_EMPTY.endDate := '2026-05-05'
+!B11_CONF_EMPTY.canceled := false
+!B11_CONF_EMPTY.bookingId := 9
+!B11_CONF_EMPTY.confirmed := true
+
+!insert (B10_BIGROOMS, C39) into BookingCustomer
+!insert (B11_CONF_EMPTY, C40) into BookingCustomer
+
+!insert (B10_BIGROOMS, R16_BIGROOMS) into BookingRoomReservation
+
+!insert (R16_BIGROOMS, RM_MIN_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM601_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM602_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM603_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM604_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM605_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM606_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM607_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM608_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM609_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM610_R16) into RoomReservationRoom
+!insert (R16_BIGROOMS, RM611_R16) into RoomReservationRoom
+
+!insert (B10_BIGROOMS, BL16_B10) into BookingBill
+!insert (BL16_B10, R16_BIGROOMS) into BillRoomReservation
+

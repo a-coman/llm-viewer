@@ -1,0 +1,258 @@
+!new Restaurant('R41')
+!R41.name := 'Brasserie Côte d’Armor'
+
+!new Owner('O92')
+!O92.name := 'Élodie Martin'
+!O92.percentageShares := 50
+!insert (R41, O92) into RestaurantOwner
+
+!new Owner('O93')
+!O93.name := 'Tariq Benali'
+!O93.percentageShares := 50
+!insert (R41, O93) into RestaurantOwner
+
+!new HeadWaiter('HW39')
+!HW39.name := 'Camille Leclerc'
+!HW39.dateOfBirth := Date('1981-09-09')
+!HW39.phoneNumber := '+33 2 40 55 10 10'
+
+!new Waiter('W91')
+!W91.name := 'Rafael Costa'
+!W91.dateOfBirth := Date('1994-04-17')
+!W91.phoneNumber := '+351 22 555 1011'
+!W91.spokenLanguage := #English
+!insert (HW39, W91) into HeadWaiterWaiter
+
+!new Waiter('W92')
+!W92.name := 'Isabella Romano'
+!W92.dateOfBirth := Date('1997-02-25')
+!W92.phoneNumber := '+39 091 555 1012'
+!W92.spokenLanguage := #Italian
+!insert (HW39, W92) into HeadWaiterWaiter
+
+!new Manager('M28')
+!M28.name := 'Abdoulaye Ndiaye'
+!M28.dateOfBirth := Date('1973-12-03')
+!M28.phoneNumber := '+33 2 40 55 10 99'
+
+!new Cook('K70')
+!K70.name := 'Nora Svensson'
+!K70.dateOfBirth := Date('1999-01-10')
+!K70.phoneNumber := '+46 31 555 2020'
+!K70.yearsOfExperience := 0
+
+!new Cook('K71')
+!K71.name := 'Nora Svensson'
+!K71.dateOfBirth := Date('1999-01-10')
+!K71.phoneNumber := '+46 31 555 2020'
+!K71.yearsOfExperience := 0
+
+!new Chef('CH74')
+!CH74.name := 'Pierre Gauthier'
+!CH74.dateOfBirth := Date('1988-06-06')
+!CH74.phoneNumber := '+33 6 555 3031'
+!insert (CH74, K70) into ChefCook
+
+!new Chef('CH75')
+!CH75.name := 'Samira El Idrissi'
+!CH75.dateOfBirth := Date('1991-11-21')
+!CH75.phoneNumber := '+212 5 555 3032'
+!insert (CH75, K71) into ChefCook
+
+!new Allergen('AL_LAC_BCA')
+!AL_LAC_BCA.type := #Lactose
+
+!new Allergen('AL_NUT_BCA')
+!AL_NUT_BCA.type := #Nuts
+
+!new FoodItem('F1901')
+!F1901.number := 1000
+!F1901.description := 'Butter (unsalted)'
+!F1901.purchaseFlag := true
+!F1901.unit := #Ounce
+!insert (F1901, AL_LAC_BCA) into FoodItemAllergen
+
+!new FoodItem('F1902')
+!F1902.number := 1001
+!F1902.description := 'Heavy cream'
+!F1902.purchaseFlag := true
+!F1902.unit := #Ounce
+!insert (F1902, AL_LAC_BCA) into FoodItemAllergen
+
+!new FoodItem('F1903')
+!F1903.number := 1002
+!F1903.description := 'Hazelnut praline paste'
+!F1903.purchaseFlag := true
+!F1903.unit := #Gram
+!insert (F1903, AL_NUT_BCA) into FoodItemAllergen
+
+!new FoodItem('F1904')
+!F1904.number := 1003
+!F1904.description := 'Rice flour'
+!F1904.purchaseFlag := true
+!F1904.unit := #Pound
+
+!new FoodItem('F1905')
+!F1905.number := 1004
+!F1905.description := 'Hazelnut cream filling (dairy + nuts)'
+!F1905.purchaseFlag := false
+!F1905.unit := #Gram
+!insert (F1905, AL_LAC_BCA) into FoodItemAllergen
+!insert (F1905, AL_NUT_BCA) into FoodItemAllergen
+
+!new MenuItem('MI107')
+!MI107.description := 'Hazelnut Crème Tart (gluten-free base)'
+!MI107.prepTime := 22.0
+!MI107.classification := #Dessert
+!insert (MI107, CH74) into MenuItemChef
+!insert (MI107, F1904) into MenuItemFoodItem
+!insert (MI107, F1901) into MenuItemFoodItem
+!insert (MI107, F1905) into MenuItemFoodItem
+
+!new MenuItem('MI108')
+!MI108.description := 'Crème Chantilly Bowl'
+!MI108.prepTime := 3.0
+!MI108.classification := #Dessert
+!insert (MI108, CH75) into MenuItemChef
+!insert (MI108, F1902) into MenuItemFoodItem
+!insert (MI108, F1901) into MenuItemFoodItem
+
+!new MenuItem('MI109')
+!MI109.description := 'Praline Espresso Spoon'
+!MI109.prepTime := 1.0
+!MI109.classification := #Beverage
+!insert (MI109, CH74) into MenuItemChef
+!insert (MI109, F1903) into MenuItemFoodItem
+
+!new RegularCustomer('C45')
+!C45.name := 'Gianni Ferraro'
+!C45.prefferedLanguage := #Italian
+
+!new RegularCustomer('C46')
+!C46.name := 'Ana Torres'
+!C46.prefferedLanguage := #Spanish
+
+!new Individual('IR45')
+!IR45.number := 810
+!IR45.date := Date('2026-05-10')
+!IR45.time := Time('12:00')
+!IR45.numberPeople := 1
+!IR45.name := 'Gianni Ferraro'
+!IR45.phoneNumber := '+39 333 555 0810'
+!IR45.seating := #Inside
+!IR45.smoking := #NonSmoking
+!insert (R41, IR45) into RestaurantReservation
+!insert (IR45, C45) into ReservationCustomer
+!insert (IR45, W91) into ReservationWaiter
+
+!new Table('T1_BCA')
+!T1_BCA.number := 1
+!T1_BCA.description := 'Single seat by the pastry display'
+!T1_BCA.capacity := 1
+!insert (IR45, T1_BCA) into ReservationTable
+
+!new ItemOrder('IO3101')
+!IO3101.time := Time('12:10')
+!insert (IR45, IO3101) into ReservationItemOrdered
+!insert (IO3101, MI108) into ItemOrderMenuItem
+
+!new Individual('IR46')
+!IR46.number := 811
+!IR46.date := Date('2026-05-10')
+!IR46.time := Time('12:15')
+!IR46.numberPeople := 2
+!IR46.name := 'Walk-in Deux'
+!IR46.phoneNumber := '+33 0 000 0811'
+!IR46.seating := #Patio
+!IR46.smoking := #Smoking
+!insert (R41, IR46) into RestaurantReservation
+!insert (IR46, W91) into ReservationWaiter
+
+!new Table('T2_BCA')
+!T2_BCA.number := 2
+!T2_BCA.description := 'Small patio bistro table'
+!T2_BCA.capacity := 2
+!insert (IR46, T2_BCA) into ReservationTable
+
+!new Individual('IR47')
+!IR47.number := 812
+!IR47.date := Date('2026-05-10')
+!IR47.time := Time('12:30')
+!IR47.numberPeople := 3
+!IR47.name := 'Tasting Trio'
+!IR47.phoneNumber := '+33 0 000 0812'
+!IR47.seating := #Inside
+!IR47.smoking := #NonSmoking
+!insert (R41, IR47) into RestaurantReservation
+!insert (IR47, W91) into ReservationWaiter
+
+!new Table('T3_BCA')
+!T3_BCA.number := 3
+!T3_BCA.description := 'Inside two-top near window'
+!T3_BCA.capacity := 2
+!insert (IR47, T3_BCA) into ReservationTable
+
+!new Table('T4_BCA')
+!T4_BCA.number := 4
+!T4_BCA.description := 'Add-on single chair (tight fit)'
+!T4_BCA.capacity := 1
+!insert (IR47, T4_BCA) into ReservationTable
+
+!new ItemOrder('IO3102')
+!IO3102.time := Time('12:40')
+!insert (IR47, IO3102) into ReservationItemOrdered
+!insert (IO3102, MI107) into ItemOrderMenuItem
+
+!new ItemOrder('IO3103')
+!IO3103.time := Time('12:42')
+!insert (IR47, IO3103) into ReservationItemOrdered
+!insert (IO3103, MI108) into ItemOrderMenuItem
+
+!new Banquet('BR32')
+!BR32.number := 900
+!BR32.date := Date('2026-05-10')
+!BR32.time := Time('13:00')
+!BR32.numberPeople := 5
+!BR32.name := 'Gianni Ferraro (Host)'
+!BR32.phoneNumber := '+39 333 555 0900'
+!BR32.groupName := 'Cinque Amici Lunch'
+!BR32.paymentMethod := #CreditCard
+!BR32.busService := false
+!insert (R41, BR32) into RestaurantReservation
+!insert (BR32, C45) into ReservationCustomer
+!insert (BR32, W91) into ReservationWaiter
+!insert (BR32, W92) into ReservationWaiter
+
+!new Table('T5_BCA')
+!T5_BCA.number := 5
+!T5_BCA.description := 'Round table for five'
+!T5_BCA.capacity := 5
+!insert (BR32, T5_BCA) into ReservationTable
+
+!new BusDriver('BD43')
+!BD43.name := 'Milan Jovanović'
+!BD43.dateOfBirth := Date('1980-10-10')
+!BD43.phoneNumber := '+381 11 555 7700'
+!BD43.driverLicenseNr := 'RS-BG-773190'
+!insert (BR32, BD43) into BanquetBusDriver
+
+!new ItemOrder('IO3104')
+!IO3104.time := Time('13:10')
+!insert (BR32, IO3104) into ReservationItemOrdered
+!insert (IO3104, MI107) into ItemOrderMenuItem
+
+!new ItemOrder('IO3105')
+!IO3105.time := Time('13:12')
+!insert (BR32, IO3105) into ReservationItemOrdered
+!insert (IO3105, MI107) into ItemOrderMenuItem
+
+!new ItemOrder('IO3106')
+!IO3106.time := Time('13:20')
+!insert (BR32, IO3106) into ReservationItemOrdered
+!insert (IO3106, MI108) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR34')
+!DR34.diet := #Vegetarian
+
+!new ReportedAllergy('RA34')
+!RA34.allergen := #Nuts

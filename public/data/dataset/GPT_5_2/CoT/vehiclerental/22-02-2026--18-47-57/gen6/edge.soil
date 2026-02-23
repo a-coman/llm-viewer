@@ -1,0 +1,76 @@
+!new RentalOffice('RO50_EC6')
+!RO50_EC6.name := 'One-Stop Micro Branch'
+!RO50_EC6.number := 50
+!RO50_EC6.address := '50 Union Sq, Wilmington, DE 19801 (single counter for pickup/return)'
+
+!new Truck('V500_EC6')
+!V500_EC6.id := 500
+!V500_EC6.registrationState := #DE
+!V500_EC6.licensePlateNumber := 'DE-ONLYOFFICE-500-XXXXXXXXXXXXXXXX'
+!V500_EC6.vehicleTypeCode := #TRUCK
+!V500_EC6.registrationLastMaintenanceDate := Date('2026-01-01+14:00')
+!V500_EC6.expirationDate := Date('2026-01-01-12:00')
+!V500_EC6.odometerReading := 0
+!V500_EC6.gasTankCapacity := 0.0
+!V500_EC6.workingRadio := false
+!V500_EC6.mileage := 0
+
+!new Vehicle('V501_EC6')
+!V501_EC6.id := 501
+!V501_EC6.registrationState := #FL
+!V501_EC6.licensePlateNumber := 'FL-TRAIL-501'
+!V501_EC6.vehicleTypeCode := #COVERED_TRAILER
+!V501_EC6.registrationLastMaintenanceDate := Date('1990-05-20')
+!V501_EC6.expirationDate := Date('2099-12-31')
+
+!new Individual('I50_EC6')
+!I50_EC6.name := 'Oumar Ndiaye'
+!I50_EC6.address := 'c/o One-Stop Micro Branch, 50 Union Sq, Wilmington, DE 19801'
+!I50_EC6.poorRisk := false
+!I50_EC6.homePhone := '+1 302 555 0150'
+!I50_EC6.driverLicenseState := #DE
+!I50_EC6.driverLicenseNumber := 2147483647
+!I50_EC6.driverLicenseExpirationDate := Date('2026-12-31T23:59:60Z')
+
+!new Company('C50_EC6')
+!C50_EC6.name := 'Apex Zero-Day Shipping, Inc.'
+!C50_EC6.address := '1 Warehouse Loop, Orlando, FL 32827'
+!C50_EC6.poorRisk := true
+!C50_EC6.idNumber := 50
+
+!new Company('C51_EC6')
+!C51_EC6.name := 'Silent Ledger Ltd.'
+!C51_EC6.address := 'PO Box 501, Wilmington, DE 19899'
+!C51_EC6.poorRisk := false
+!C51_EC6.idNumber := 0
+
+!new RentalAgreement('RA500_EC6')
+!RA500_EC6.number := -500
+!RA500_EC6.rentalDate := Date('2026-01-01+14:00')
+!RA500_EC6.anticipatedDuration := -1
+!RA500_EC6.depositPaid := 0.0
+!RA500_EC6.quotedDailyRate := 0.0
+!RA500_EC6.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA501_EC6')
+!RA501_EC6.number := 501
+!RA501_EC6.rentalDate := Date('2026-12-31T23:59:60Z')
+!RA501_EC6.anticipatedDuration := 0
+!RA501_EC6.depositPaid := 9999999999.99
+!RA501_EC6.quotedDailyRate := 0.0000000001
+!RA501_EC6.quotedRatePerMile := 123456789.123456
+
+!insert (RO50_EC6, V500_EC6) into RentalOfficeVehicle
+!insert (RO50_EC6, V501_EC6) into RentalOfficeVehicle
+
+!insert (RO50_EC6, RA500_EC6) into RentalOfficeRentalAgreementOrigin
+!insert (RO50_EC6, RA501_EC6) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO50_EC6, RA500_EC6) into RentalOfficeRentalAgreementDrop
+!insert (RO50_EC6, RA501_EC6) into RentalOfficeRentalAgreementDrop
+
+!insert (RA500_EC6, V500_EC6) into RentalAgreementVehicle
+!insert (RA501_EC6, V501_EC6) into RentalAgreementVehicle
+
+!insert (RA500_EC6, I50_EC6) into RentalAgreementCustomer
+!insert (RA501_EC6, C50_EC6) into RentalAgreementCustomer

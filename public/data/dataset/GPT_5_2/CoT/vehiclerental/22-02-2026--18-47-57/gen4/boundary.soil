@@ -1,0 +1,70 @@
+!new RentalOffice('RO_500')
+!RO_500.name := 'Desert One-Stop Rentals'
+!RO_500.number := 500
+!RO_500.address := '500 E Van Buren St, Phoenix, AZ 85004'
+
+!new Truck('T_50')
+!T_50.id := 50
+!T_50.registrationState := #AZ
+!T_50.licensePlateNumber := 'AZ-DESERT-0050'
+!T_50.vehicleTypeCode := #TRUCK
+!T_50.registrationLastMaintenanceDate := Date('2026-01-31')
+!T_50.expirationDate := Date('2026-02-01')
+!T_50.odometerReading := 1
+!T_50.gasTankCapacity := 0.0
+!T_50.workingRadio := true
+!T_50.mileage := 1
+
+!new Vehicle('V_51')
+!V_51.id := 51
+!V_51.registrationState := #AL
+!V_51.licensePlateNumber := 'AL-TRAILER-000051'
+!V_51.vehicleTypeCode := #OPEN_TRAILER
+!V_51.registrationLastMaintenanceDate := Date('2025-08-15')
+!V_51.expirationDate := Date('2027-08-15')
+
+!new Individual('I_50')
+!I_50.name := 'Hiro Tanaka'
+!I_50.address := '12 W Monroe St, Phoenix, AZ'
+!I_50.poorRisk := true
+!I_50.homePhone := '+1-602-555-0050'
+!I_50.driverLicenseState := #AZ
+!I_50.driverLicenseNumber := 50050
+!I_50.driverLicenseExpirationDate := Date('2026-02-01')
+
+!new Company('C_51')
+!C_51.name := 'Alabama Stagecraft LLC'
+!C_51.address := '1 Theater Way, Montgomery, AL'
+!C_51.poorRisk := false
+!C_51.idNumber := 51
+
+!new RentalAgreement('RA_5000')
+!RA_5000.number := 5000
+!RA_5000.rentalDate := Date('2026-02-01')
+!RA_5000.anticipatedDuration := 0
+!RA_5000.depositPaid := 0.0
+!RA_5000.quotedDailyRate := 0.0
+!RA_5000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA_5001_B')
+!RA_5001_B.number := 5001
+!RA_5001_B.rentalDate := Date('2026-02-02')
+!RA_5001_B.anticipatedDuration := 1
+!RA_5001_B.depositPaid := 0.0
+!RA_5001_B.quotedDailyRate := 250.0
+!RA_5001_B.quotedRatePerMile := 0.0
+
+!insert (RO_500, T_50) into RentalOfficeVehicle
+!insert (RO_500, V_51) into RentalOfficeVehicle
+
+!insert (RO_500, RA_5000) into RentalOfficeRentalAgreementOrigin
+!insert (RO_500, RA_5001_B) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO_500, RA_5000) into RentalOfficeRentalAgreementDrop
+!insert (RO_500, RA_5001_B) into RentalOfficeRentalAgreementDrop
+
+!insert (RA_5000, T_50) into RentalAgreementVehicle
+!insert (RA_5001_B, V_51) into RentalAgreementVehicle
+
+!insert (RA_5000, I_50) into RentalAgreementCustomer
+!insert (RA_5001_B, I_50) into RentalAgreementCustomer

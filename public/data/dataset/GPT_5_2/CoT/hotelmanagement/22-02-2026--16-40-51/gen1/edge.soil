@@ -1,0 +1,82 @@
+!new Customer('C3')
+!C3.firstName := 'Amina'
+!C3.lastName := 'El‑Sayed'
+
+!new Booking('B999999')
+!B999999.bookingId := 999999
+!B999999.startDate := '2026-03-10'
+!B999999.endDate := '2026-03-05'
+!B999999.confirmed := true
+!B999999.canceled := true
+
+!new RoomReservation('R1')
+!R1.checkInDate := '2026-03-10'
+!R1.checkOutDate := '2026-03-12'
+
+!new RoomReservation('R2')
+!R2.checkInDate := '2026-03-10'
+!R2.checkOutDate := '2026-03-11'
+
+!new RoomExtra('E4')
+!E4.description := 'Late checkout waiver (manual override)'
+!E4.price := 0.0
+
+!new RoomExtra('E5')
+!E5.description := 'Welcome tea set (complimentary)'
+!E5.price := 0.0
+
+!new RoomExtra('E6')
+!E6.description := 'Airport pickup note added, service not scheduled'
+!E6.price := 0.0
+
+!new Bill('BL50001')
+!BL50001.billId := 50001
+!BL50001.price := 0.0
+
+!new Room('R13')
+!R13.roomNumber := 13
+!R13.numBeds := 1
+!R13.pricePerNight := 0.01
+!R13.occupied := false
+!R13.blocked := true
+
+!new Room('R666')
+!R666.roomNumber := 666
+!R666.numBeds := 2
+!R666.pricePerNight := 9999.99
+!R666.occupied := true
+!R666.blocked := false
+
+!new Bill('BL50002')
+!BL50002.billId := 50002
+!BL50002.price := 10000.00
+
+!new FreeRoomTypesDTO('D5')
+!D5.roomTypeDescription := 'Capsule room (Shinjuku-style), mixed floor'
+!D5.numBeds := 1
+!D5.pricePerNight := 35.50
+!D5.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D6')
+!D6.roomTypeDescription := 'Presidential suite with private hammam (limited offer)'
+!D6.numBeds := 3
+!D6.pricePerNight := 12000.00
+!D6.numFreeRooms := 1
+
+!insert (B999999, C3) into BookingCustomer
+
+!insert (B999999, R1) into BookingRoomReservation
+!insert (B999999, R2) into BookingRoomReservation
+
+!insert (R1, E4) into RoomReservationExtras
+!insert (R1, E5) into RoomReservationExtras
+!insert (R1, E6) into RoomReservationExtras
+
+!insert (R2, R13) into RoomReservationRoom
+!insert (R2, R666) into RoomReservationRoom
+
+!insert (B999999, BL50001) into BookingBill
+!insert (B999999, BL50002) into BookingBill
+
+!insert (BL50001, R1) into BillRoomReservation
+!insert (BL50002, R2) into BillRoomReservation

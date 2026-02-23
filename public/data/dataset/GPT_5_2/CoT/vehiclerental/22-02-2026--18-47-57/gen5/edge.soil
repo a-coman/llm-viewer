@@ -1,0 +1,149 @@
+!new RentalOffice('RO40')
+!RO40.name := 'Fairbanks Remote Counter'
+!RO40.number := 4040
+!RO40.address := '100 Aurora Dr, Fairbanks, AK'
+
+!new RentalOffice('RO41')
+!RO41.name := 'Call Center East (No On-Site Fleet)'
+!RO41.number := 4141
+!RO41.address := '200 Elm St, Hartford, CT'
+
+!new RentalOffice('RO42')
+!RO42.name := 'Orlando Return-Only Booth'
+!RO42.number := 4242
+!RO42.address := '1 Jetport Way, Orlando, FL (returns only)'
+
+!new RentalOffice('RO43')
+!RO43.name := 'Denver Maintenance Hangar'
+!RO43.number := 4343
+!RO43.address := '77 Service Rd, Denver, CO'
+
+!new Vehicle('V400')
+!V400.id := 400
+!V400.registrationState := #AK
+!V400.licensePlateNumber := 'AK-CCTR-400'
+!V400.vehicleTypeCode := #TRUCK24
+!V400.registrationLastMaintenanceDate := Date('2026-08-01')
+!V400.expirationDate := Date('2099-12-31')
+
+!new Truck('V401')
+!V401.id := 401
+!V401.registrationState := #CO
+!V401.licensePlateNumber := 'CO-DEN-401'
+!V401.vehicleTypeCode := #OPEN_TRAILER
+!V401.registrationLastMaintenanceDate := Date('2026-08-02')
+!V401.expirationDate := Date('2027-01-15')
+!V401.odometerReading := 5
+!V401.gasTankCapacity := 0.0
+!V401.workingRadio := false
+!V401.mileage := 0
+
+!new Vehicle('V402')
+!V402.id := 402
+!V402.registrationState := #CA
+!V402.licensePlateNumber := 'CA-COV-402'
+!V402.vehicleTypeCode := #COVERED_TRAILER
+!V402.registrationLastMaintenanceDate := Date('2099-12-31')
+!V402.expirationDate := Date('2099-12-31')
+
+!new Truck('V403')
+!V403.id := 403
+!V403.registrationState := #DE
+!V403.licensePlateNumber := 'DE-TRK10-403'
+!V403.vehicleTypeCode := #TRUCK10
+!V403.registrationLastMaintenanceDate := Date('0000-12-31')
+!V403.expirationDate := Date('2026-08-01')
+!V403.odometerReading := 2147483647
+!V403.gasTankCapacity := 0.000001
+!V403.workingRadio := true
+!V403.mileage := 0
+
+!new Vehicle('V404')
+!V404.id := 404
+!V404.registrationState := #AZ
+!V404.licensePlateNumber := ''
+!V404.vehicleTypeCode := #OPEN_TRAILER
+!V404.registrationLastMaintenanceDate := Date('2027-01-15')
+!V404.expirationDate := Date('0000-12-31')
+
+!new Individual('I40')
+!I40.name := '佐藤 太郎'
+!I40.address := '77 Service Rd, Denver, CO'
+!I40.poorRisk := false
+!I40.homePhone := '+1-303-555-0140'
+!I40.driverLicenseState := #CO
+!I40.driverLicenseNumber := 777
+!I40.driverLicenseExpirationDate := Date('2099-12-31')
+
+!new Individual('I41')
+!I41.name := 'ليلى منصور'
+!I41.address := '200 Elm St, Hartford, CT'
+!I41.poorRisk := true
+!I41.homePhone := '+1-860-555-0141'
+!I41.driverLicenseState := #CT
+!I41.driverLicenseNumber := 1
+!I41.driverLicenseExpirationDate := Date('0000-12-31')
+
+!new Individual('I42')
+!I42.name := 'Mikaël Jean-Baptiste'
+!I42.address := '1 Jetport Way, Orlando, FL'
+!I42.poorRisk := false
+!I42.homePhone := '+1-407-555-0142'
+!I42.driverLicenseState := #FL
+!I42.driverLicenseNumber := 999999
+!I42.driverLicenseExpirationDate := Date('2027-01-15')
+
+!new Individual('I43')
+!I43.name := 'Anya Petrova'
+!I43.address := '100 Aurora Dr, Fairbanks, AK'
+!I43.poorRisk := false
+!I43.homePhone := '+1-907-555-0143'
+!I43.driverLicenseState := #AK
+!I43.driverLicenseNumber := 0
+!I43.driverLicenseExpirationDate := Date('2026-08-01')
+
+!new RentalAgreement('RA4000')
+!RA4000.number := 4000
+!RA4000.rentalDate := Date('2026-08-02')
+!RA4000.anticipatedDuration := 0
+!RA4000.depositPaid := 0.0
+!RA4000.quotedDailyRate := 0.0
+!RA4000.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA4001')
+!RA4001.number := 4001
+!RA4001.rentalDate := Date('2026-08-02')
+!RA4001.anticipatedDuration := 1
+!RA4001.depositPaid := 0.01
+!RA4001.quotedDailyRate := 0.0
+!RA4001.quotedRatePerMile := 99999.9999
+
+!new RentalAgreement('RA4002')
+!RA4002.number := 4002
+!RA4002.rentalDate := Date('2026-08-02')
+!RA4002.anticipatedDuration := 365
+!RA4002.depositPaid := 0.0
+!RA4002.quotedDailyRate := 0.000000001
+!RA4002.quotedRatePerMile := 0.0
+
+!insert (RO40, V400) into RentalOfficeVehicle
+!insert (RO43, V401) into RentalOfficeVehicle
+!insert (RO43, V402) into RentalOfficeVehicle
+!insert (RO43, V403) into RentalOfficeVehicle
+!insert (RO42, V404) into RentalOfficeVehicle
+
+!insert (RO41, RA4000) into RentalOfficeRentalAgreementOrigin
+!insert (RO41, RA4001) into RentalOfficeRentalAgreementOrigin
+!insert (RO40, RA4002) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO42, RA4000) into RentalOfficeRentalAgreementDrop
+!insert (RO42, RA4001) into RentalOfficeRentalAgreementDrop
+!insert (RO42, RA4002) into RentalOfficeRentalAgreementDrop
+
+!insert (RA4000, V401) into RentalAgreementVehicle
+!insert (RA4001, V400) into RentalAgreementVehicle
+!insert (RA4002, V403) into RentalAgreementVehicle
+
+!insert (RA4000, I40) into RentalAgreementCustomer
+!insert (RA4001, I41) into RentalAgreementCustomer
+!insert (RA4002, I42) into RentalAgreementCustomer

@@ -1,0 +1,565 @@
+!new StateMachine('sm_atacamaWaterWorks')
+!sm_atacamaWaterWorks.name := 'atacamaWaterWorks'
+
+!new State('st_ata_idle')
+!st_ata_idle.name := 'idle'
+!new State('st_ata_intake')
+!st_ata_intake.name := 'intake'
+!new State('st_ata_prefilter')
+!st_ata_prefilter.name := 'prefilter'
+!new State('st_ata_osmosis')
+!st_ata_osmosis.name := 'osmosis'
+!new State('st_ata_remineralize')
+!st_ata_remineralize.name := 'remineralize'
+!new State('st_ata_storage')
+!st_ata_storage.name := 'storage'
+!new State('st_ata_distribute')
+!st_ata_distribute.name := 'distribute'
+!new State('st_ata_maintenance')
+!st_ata_maintenance.name := 'maintenance'
+
+!insert (sm_atacamaWaterWorks, st_ata_idle) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_intake) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_prefilter) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_osmosis) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_remineralize) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_storage) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_distribute) into StateMachineContainsStates
+!insert (sm_atacamaWaterWorks, st_ata_maintenance) into StateMachineContainsStates
+
+!insert (sm_atacamaWaterWorks, st_ata_idle) into StateMachineStartsStates
+
+!new Transition('tr_ata_startIntake')
+!tr_ata_startIntake.name := 'startIntake'
+!new Transition('tr_ata_toPrefilter')
+!tr_ata_toPrefilter.name := 'toPrefilter'
+!new Transition('tr_ata_toOsmosis')
+!tr_ata_toOsmosis.name := 'toOsmosis'
+!new Transition('tr_ata_toRemin')
+!tr_ata_toRemin.name := 'toRemin'
+!new Transition('tr_ata_toStorage')
+!tr_ata_toStorage.name := 'toStorage'
+!new Transition('tr_ata_toDistribute')
+!tr_ata_toDistribute.name := 'toDistribute'
+!new Transition('tr_ata_backToIdle')
+!tr_ata_backToIdle.name := 'backToIdle'
+!new Transition('tr_ata_emergencyMaintenance')
+!tr_ata_emergencyMaintenance.name := 'emergencyMaintenance'
+!new Transition('tr_ata_maintenanceDone')
+!tr_ata_maintenanceDone.name := 'maintenanceDone'
+!new Transition('tr_ata_storageFlush')
+!tr_ata_storageFlush.name := 'storageFlush'
+!new Transition('tr_ata_intakeStall')
+!tr_ata_intakeStall.name := 'intakeStall'
+
+!insert (sm_atacamaWaterWorks, tr_ata_startIntake) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toPrefilter) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toOsmosis) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toRemin) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toStorage) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_toDistribute) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_backToIdle) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_emergencyMaintenance) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_maintenanceDone) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_storageFlush) into StateMachineContainsTransitions
+!insert (sm_atacamaWaterWorks, tr_ata_intakeStall) into StateMachineContainsTransitions
+
+!insert (st_ata_idle, tr_ata_startIntake) into StateTransition
+!insert (tr_ata_startIntake, st_ata_intake) into TransitionState
+
+!insert (st_ata_intake, tr_ata_toPrefilter) into StateTransition
+!insert (tr_ata_toPrefilter, st_ata_prefilter) into TransitionState
+
+!insert (st_ata_prefilter, tr_ata_toOsmosis) into StateTransition
+!insert (tr_ata_toOsmosis, st_ata_osmosis) into TransitionState
+
+!insert (st_ata_osmosis, tr_ata_toRemin) into StateTransition
+!insert (tr_ata_toRemin, st_ata_remineralize) into TransitionState
+
+!insert (st_ata_remineralize, tr_ata_toStorage) into StateTransition
+!insert (tr_ata_toStorage, st_ata_storage) into TransitionState
+
+!insert (st_ata_storage, tr_ata_toDistribute) into StateTransition
+!insert (tr_ata_toDistribute, st_ata_distribute) into TransitionState
+
+!insert (st_ata_distribute, tr_ata_backToIdle) into StateTransition
+!insert (tr_ata_backToIdle, st_ata_idle) into TransitionState
+
+!insert (st_ata_osmosis, tr_ata_emergencyMaintenance) into StateTransition
+!insert (tr_ata_emergencyMaintenance, st_ata_maintenance) into TransitionState
+
+!insert (st_ata_maintenance, tr_ata_maintenanceDone) into StateTransition
+!insert (tr_ata_maintenanceDone, st_ata_idle) into TransitionState
+
+!insert (st_ata_storage, tr_ata_storageFlush) into StateTransition
+!insert (tr_ata_storageFlush, st_ata_prefilter) into TransitionState
+
+!insert (st_ata_intake, tr_ata_intakeStall) into StateTransition
+!insert (tr_ata_intakeStall, st_ata_idle) into TransitionState
+
+!new TimeEvent('te_ata_t_startIntake')
+!te_ata_t_startIntake.time := 5
+!insert (tr_ata_startIntake, te_ata_t_startIntake) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toPrefilter')
+!te_ata_t_toPrefilter.time := 30
+!insert (tr_ata_toPrefilter, te_ata_t_toPrefilter) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toOsmosis')
+!te_ata_t_toOsmosis.time := 120
+!insert (tr_ata_toOsmosis, te_ata_t_toOsmosis) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toRemin')
+!te_ata_t_toRemin.time := 300
+!insert (tr_ata_toRemin, te_ata_t_toRemin) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toStorage')
+!te_ata_t_toStorage.time := 60
+!insert (tr_ata_toStorage, te_ata_t_toStorage) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_toDistribute')
+!te_ata_t_toDistribute.time := 10
+!insert (tr_ata_toDistribute, te_ata_t_toDistribute) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_backToIdle')
+!te_ata_t_backToIdle.time := 15
+!insert (tr_ata_backToIdle, te_ata_t_backToIdle) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_emergencyMaintenance')
+!te_ata_t_emergencyMaintenance.time := 2
+!insert (tr_ata_emergencyMaintenance, te_ata_t_emergencyMaintenance) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_maintenanceDone')
+!te_ata_t_maintenanceDone.time := 2147483647
+!insert (tr_ata_maintenanceDone, te_ata_t_maintenanceDone) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_storageFlush')
+!te_ata_t_storageFlush.time := 86400
+!insert (tr_ata_storageFlush, te_ata_t_storageFlush) into TransitionContainsEvents
+
+!new TimeEvent('te_ata_t_intakeStall')
+!te_ata_t_intakeStall.time := 999999999
+!insert (tr_ata_intakeStall, te_ata_t_intakeStall) into TransitionContainsEvents
+
+!new StateMachine('sm_stuckStartBusyElsewhere')
+!sm_stuckStartBusyElsewhere.name := 'stuckStartBusyElsewhere'
+
+!new State('st_ssbe_inicio')
+!st_ssbe_inicio.name := 'inicio'
+!new State('st_ssbe_rabota')
+!st_ssbe_rabota.name := 'работа'
+!new State('st_ssbe_hakuna')
+!st_ssbe_hakuna.name := 'hakuna'
+!new State('st_ssbe_defaillance')
+!st_ssbe_defaillance.name := 'défaillance'
+
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_inicio) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_rabota) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_hakuna) into StateMachineContainsStates
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_defaillance) into StateMachineContainsStates
+
+!insert (sm_stuckStartBusyElsewhere, st_ssbe_inicio) into StateMachineStartsStates
+
+!new Transition('tr_ssbe_pulseA')
+!tr_ssbe_pulseA.name := 'pulseA'
+!new Transition('tr_ssbe_pulseB')
+!tr_ssbe_pulseB.name := 'pulseB'
+!new Transition('tr_ssbe_retry')
+!tr_ssbe_retry.name := 'retry'
+!new Transition('tr_ssbe_coolDown')
+!tr_ssbe_coolDown.name := 'coolDown'
+!new Transition('tr_ssbe_resume')
+!tr_ssbe_resume.name := 'resume'
+!new Transition('tr_ssbe_returnToStart')
+!tr_ssbe_returnToStart.name := 'returnToStart'
+!new Transition('tr_ssbe_linger')
+!tr_ssbe_linger.name := 'linger'
+
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_pulseA) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_pulseB) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_retry) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_coolDown) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_resume) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_returnToStart) into StateMachineContainsTransitions
+!insert (sm_stuckStartBusyElsewhere, tr_ssbe_linger) into StateMachineContainsTransitions
+
+!insert (st_ssbe_rabota, tr_ssbe_pulseA) into StateTransition
+!insert (tr_ssbe_pulseA, st_ssbe_defaillance) into TransitionState
+
+!insert (st_ssbe_rabota, tr_ssbe_pulseB) into StateTransition
+!insert (tr_ssbe_pulseB, st_ssbe_defaillance) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_retry) into StateTransition
+!insert (tr_ssbe_retry, st_ssbe_rabota) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_coolDown) into StateTransition
+!insert (tr_ssbe_coolDown, st_ssbe_hakuna) into TransitionState
+
+!insert (st_ssbe_hakuna, tr_ssbe_resume) into StateTransition
+!insert (tr_ssbe_resume, st_ssbe_rabota) into TransitionState
+
+!insert (st_ssbe_hakuna, tr_ssbe_returnToStart) into StateTransition
+!insert (tr_ssbe_returnToStart, st_ssbe_inicio) into TransitionState
+
+!insert (st_ssbe_defaillance, tr_ssbe_linger) into StateTransition
+!insert (tr_ssbe_linger, st_ssbe_defaillance) into TransitionState
+
+!new TimeEvent('te_ssbe_pulseA')
+!te_ssbe_pulseA.time := 2
+!insert (tr_ssbe_pulseA, te_ssbe_pulseA) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_pulseB')
+!te_ssbe_pulseB.time := 3
+!insert (tr_ssbe_pulseB, te_ssbe_pulseB) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_retry')
+!te_ssbe_retry.time := 60
+!insert (tr_ssbe_retry, te_ssbe_retry) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_coolDown')
+!te_ssbe_coolDown.time := 1
+!insert (tr_ssbe_coolDown, te_ssbe_coolDown) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_resume')
+!te_ssbe_resume.time := 15
+!insert (tr_ssbe_resume, te_ssbe_resume) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_returnToStart')
+!te_ssbe_returnToStart.time := 999999
+!insert (tr_ssbe_returnToStart, te_ssbe_returnToStart) into TransitionContainsEvents
+
+!new TimeEvent('te_ssbe_linger')
+!te_ssbe_linger.time := 5
+!insert (tr_ssbe_linger, te_ssbe_linger) into TransitionContainsEvents
+
+!new StateMachine('sm_turnoClinicaAndina')
+!sm_turnoClinicaAndina.name := 'turnoClinicaAndina'
+
+!new State('st_andes_esperando')
+!st_andes_esperando.name := 'esperando'
+!new State('st_andes_registrandoDatos')
+!st_andes_registrandoDatos.name := 'registrandoDatos'
+!new State('st_andes_verificandoSeguro')
+!st_andes_verificandoSeguro.name := 'verificandoSeguro'
+!new State('st_andes_enConsulta')
+!st_andes_enConsulta.name := 'enConsulta'
+!new State('st_andes_facturando')
+!st_andes_facturando.name := 'facturando'
+!new State('st_andes_finalizado')
+!st_andes_finalizado.name := 'finalizado'
+
+!insert (sm_turnoClinicaAndina, st_andes_esperando) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_registrandoDatos) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_verificandoSeguro) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_enConsulta) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_facturando) into StateMachineContainsStates
+!insert (sm_turnoClinicaAndina, st_andes_finalizado) into StateMachineContainsStates
+
+!insert (sm_turnoClinicaAndina, st_andes_esperando) into StateMachineStartsStates
+
+!new Transition('tr_andes_llamarPaciente')
+!tr_andes_llamarPaciente.name := 'llamarPaciente'
+!new Transition('tr_andes_cancelarPorInactividad')
+!tr_andes_cancelarPorInactividad.name := 'cancelarPorInactividad'
+!new Transition('tr_andes_datosListos')
+!tr_andes_datosListos.name := 'datosListos'
+!new Transition('tr_andes_omitirSeguro')
+!tr_andes_omitirSeguro.name := 'omitirSeguro'
+!new Transition('tr_andes_seguroAprobado')
+!tr_andes_seguroAprobado.name := 'seguroAprobado'
+!new Transition('tr_andes_cerrarConsulta')
+!tr_andes_cerrarConsulta.name := 'cerrarConsulta'
+!new Transition('tr_andes_emitirFactura')
+!tr_andes_emitirFactura.name := 'emitirFactura'
+
+!insert (sm_turnoClinicaAndina, tr_andes_llamarPaciente) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_cancelarPorInactividad) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_datosListos) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_omitirSeguro) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_seguroAprobado) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_cerrarConsulta) into StateMachineContainsTransitions
+!insert (sm_turnoClinicaAndina, tr_andes_emitirFactura) into StateMachineContainsTransitions
+
+!insert (st_andes_esperando, tr_andes_llamarPaciente) into StateTransition
+!insert (tr_andes_llamarPaciente, st_andes_registrandoDatos) into TransitionState
+
+!insert (st_andes_esperando, tr_andes_cancelarPorInactividad) into StateTransition
+!insert (tr_andes_cancelarPorInactividad, st_andes_finalizado) into TransitionState
+
+!insert (st_andes_registrandoDatos, tr_andes_datosListos) into StateTransition
+!insert (tr_andes_datosListos, st_andes_verificandoSeguro) into TransitionState
+
+!insert (st_andes_registrandoDatos, tr_andes_omitirSeguro) into StateTransition
+!insert (tr_andes_omitirSeguro, st_andes_enConsulta) into TransitionState
+
+!insert (st_andes_verificandoSeguro, tr_andes_seguroAprobado) into StateTransition
+!insert (tr_andes_seguroAprobado, st_andes_enConsulta) into TransitionState
+
+!insert (st_andes_enConsulta, tr_andes_cerrarConsulta) into StateTransition
+!insert (tr_andes_cerrarConsulta, st_andes_facturando) into TransitionState
+
+!insert (st_andes_facturando, tr_andes_emitirFactura) into StateTransition
+!insert (tr_andes_emitirFactura, st_andes_finalizado) into TransitionState
+
+!new TimeEvent('te_andes_t_llamarPaciente')
+!te_andes_t_llamarPaciente.time := 10
+!insert (tr_andes_llamarPaciente, te_andes_t_llamarPaciente) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_cancelarPorInactividad')
+!te_andes_t_cancelarPorInactividad.time := 1800
+!insert (tr_andes_cancelarPorInactividad, te_andes_t_cancelarPorInactividad) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_datosListos')
+!te_andes_t_datosListos.time := 50
+!insert (tr_andes_datosListos, te_andes_t_datosListos) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_omitirSeguro')
+!te_andes_t_omitirSeguro.time := 20
+!insert (tr_andes_omitirSeguro, te_andes_t_omitirSeguro) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_seguroAprobado')
+!te_andes_t_seguroAprobado.time := 90
+!insert (tr_andes_seguroAprobado, te_andes_t_seguroAprobado) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_cerrarConsulta')
+!te_andes_t_cerrarConsulta.time := 1200
+!insert (tr_andes_cerrarConsulta, te_andes_t_cerrarConsulta) into TransitionContainsEvents
+
+!new TimeEvent('te_andes_t_emitirFactura')
+!te_andes_t_emitirFactura.time := 75
+!insert (tr_andes_emitirFactura, te_andes_t_emitirFactura) into TransitionContainsEvents
+
+!new StateMachine('sm_munichBreweryFermentationSM')
+!sm_munichBreweryFermentationSM.name := 'munichBreweryFermentationSM'
+
+!new State('st_mbf_sanitize')
+!st_mbf_sanitize.name := 'sanitize'
+!new State('st_mbf_mashIn')
+!st_mbf_mashIn.name := 'mashIn'
+!new State('st_mbf_mashRest')
+!st_mbf_mashRest.name := 'mashRest'
+!new State('st_mbf_lautering')
+!st_mbf_lautering.name := 'lautering'
+!new State('st_mbf_boil')
+!st_mbf_boil.name := 'boil'
+!new State('st_mbf_hopStand')
+!st_mbf_hopStand.name := 'hopStand'
+!new State('st_mbf_whirlpool')
+!st_mbf_whirlpool.name := 'whirlpool'
+!new State('st_mbf_coolWort')
+!st_mbf_coolWort.name := 'coolWort'
+!new State('st_mbf_pitchYeast')
+!st_mbf_pitchYeast.name := 'pitchYeast'
+!new State('st_mbf_primaryFermentation')
+!st_mbf_primaryFermentation.name := 'primaryFermentation'
+!new State('st_mbf_diacetylRest')
+!st_mbf_diacetylRest.name := 'diacetylRest'
+!new State('st_mbf_coldCrash')
+!st_mbf_coldCrash.name := 'coldCrash'
+!new State('st_mbf_qualityHold')
+!st_mbf_qualityHold.name := 'qualityHold'
+!new State('st_mbf_packaging')
+!st_mbf_packaging.name := 'packaging'
+!new State('st_mbf_cleanInPlace')
+!st_mbf_cleanInPlace.name := 'cleanInPlace'
+
+!insert (sm_munichBreweryFermentationSM, st_mbf_sanitize) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_mashIn) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_mashRest) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_lautering) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_boil) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_hopStand) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_whirlpool) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_coolWort) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_pitchYeast) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_primaryFermentation) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_diacetylRest) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_coldCrash) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_qualityHold) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_packaging) into StateMachineContainsStates
+!insert (sm_munichBreweryFermentationSM, st_mbf_cleanInPlace) into StateMachineContainsStates
+
+!insert (sm_munichBreweryFermentationSM, st_mbf_sanitize) into StateMachineStartsStates
+
+!new Transition('tr_mbf_startMashIn')
+!tr_mbf_startMashIn.name := 'startMashIn'
+!new Transition('tr_mbf_stabilizeMash')
+!tr_mbf_stabilizeMash.name := 'stabilizeMash'
+!new Transition('tr_mbf_completeMashRest')
+!tr_mbf_completeMashRest.name := 'completeMashRest'
+!new Transition('tr_mbf_finishLauter')
+!tr_mbf_finishLauter.name := 'finishLauter'
+!new Transition('tr_mbf_endBoil')
+!tr_mbf_endBoil.name := 'endBoil'
+!new Transition('tr_mbf_finishHopStand')
+!tr_mbf_finishHopStand.name := 'finishHopStand'
+!new Transition('tr_mbf_settleTrub')
+!tr_mbf_settleTrub.name := 'settleTrub'
+!new Transition('tr_mbf_reachPitchTemp')
+!tr_mbf_reachPitchTemp.name := 'reachPitchTemp'
+!new Transition('tr_mbf_yeastPitched')
+!tr_mbf_yeastPitched.name := 'yeastPitched'
+!new Transition('tr_mbf_fermentationMonitorPulse')
+!tr_mbf_fermentationMonitorPulse.name := 'fermentationMonitorPulse'
+!new Transition('tr_mbf_moveToDiacetylRest')
+!tr_mbf_moveToDiacetylRest.name := 'moveToDiacetylRest'
+!new Transition('tr_mbf_finishDiacetylRest')
+!tr_mbf_finishDiacetylRest.name := 'finishDiacetylRest'
+!new Transition('tr_mbf_completeColdCrash')
+!tr_mbf_completeColdCrash.name := 'completeColdCrash'
+!new Transition('tr_mbf_releaseToPackaging')
+!tr_mbf_releaseToPackaging.name := 'releaseToPackaging'
+!new Transition('tr_mbf_packageComplete')
+!tr_mbf_packageComplete.name := 'packageComplete'
+!new Transition('tr_mbf_cipComplete')
+!tr_mbf_cipComplete.name := 'cipComplete'
+!new Transition('tr_mbf_contaminationDetected')
+!tr_mbf_contaminationDetected.name := 'contaminationDetected'
+!new Transition('tr_mbf_equipmentFault')
+!tr_mbf_equipmentFault.name := 'equipmentFault'
+
+!insert (sm_munichBreweryFermentationSM, tr_mbf_startMashIn) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_stabilizeMash) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_completeMashRest) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_finishLauter) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_endBoil) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_finishHopStand) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_settleTrub) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_reachPitchTemp) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_yeastPitched) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_fermentationMonitorPulse) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_moveToDiacetylRest) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_finishDiacetylRest) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_completeColdCrash) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_releaseToPackaging) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_packageComplete) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_cipComplete) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_contaminationDetected) into StateMachineContainsTransitions
+!insert (sm_munichBreweryFermentationSM, tr_mbf_equipmentFault) into StateMachineContainsTransitions
+
+!insert (st_mbf_sanitize, tr_mbf_startMashIn) into StateTransition
+!insert (tr_mbf_startMashIn, st_mbf_mashIn) into TransitionState
+
+!insert (st_mbf_mashIn, tr_mbf_stabilizeMash) into StateTransition
+!insert (tr_mbf_stabilizeMash, st_mbf_mashRest) into TransitionState
+
+!insert (st_mbf_mashRest, tr_mbf_completeMashRest) into StateTransition
+!insert (tr_mbf_completeMashRest, st_mbf_lautering) into TransitionState
+
+!insert (st_mbf_lautering, tr_mbf_finishLauter) into StateTransition
+!insert (tr_mbf_finishLauter, st_mbf_boil) into TransitionState
+
+!insert (st_mbf_boil, tr_mbf_endBoil) into StateTransition
+!insert (tr_mbf_endBoil, st_mbf_hopStand) into TransitionState
+
+!insert (st_mbf_hopStand, tr_mbf_finishHopStand) into StateTransition
+!insert (tr_mbf_finishHopStand, st_mbf_whirlpool) into TransitionState
+
+!insert (st_mbf_whirlpool, tr_mbf_settleTrub) into StateTransition
+!insert (tr_mbf_settleTrub, st_mbf_coolWort) into TransitionState
+
+!insert (st_mbf_coolWort, tr_mbf_reachPitchTemp) into StateTransition
+!insert (tr_mbf_reachPitchTemp, st_mbf_pitchYeast) into TransitionState
+
+!insert (st_mbf_pitchYeast, tr_mbf_yeastPitched) into StateTransition
+!insert (tr_mbf_yeastPitched, st_mbf_primaryFermentation) into TransitionState
+
+!insert (st_mbf_primaryFermentation, tr_mbf_fermentationMonitorPulse) into StateTransition
+!insert (tr_mbf_fermentationMonitorPulse, st_mbf_primaryFermentation) into TransitionState
+
+!insert (st_mbf_primaryFermentation, tr_mbf_moveToDiacetylRest) into StateTransition
+!insert (tr_mbf_moveToDiacetylRest, st_mbf_diacetylRest) into TransitionState
+
+!insert (st_mbf_diacetylRest, tr_mbf_finishDiacetylRest) into StateTransition
+!insert (tr_mbf_finishDiacetylRest, st_mbf_coldCrash) into TransitionState
+
+!insert (st_mbf_coldCrash, tr_mbf_completeColdCrash) into StateTransition
+!insert (tr_mbf_completeColdCrash, st_mbf_qualityHold) into TransitionState
+
+!insert (st_mbf_qualityHold, tr_mbf_releaseToPackaging) into StateTransition
+!insert (tr_mbf_releaseToPackaging, st_mbf_packaging) into TransitionState
+
+!insert (st_mbf_packaging, tr_mbf_packageComplete) into StateTransition
+!insert (tr_mbf_packageComplete, st_mbf_cleanInPlace) into TransitionState
+
+!insert (st_mbf_cleanInPlace, tr_mbf_cipComplete) into StateTransition
+!insert (tr_mbf_cipComplete, st_mbf_sanitize) into TransitionState
+
+!insert (st_mbf_primaryFermentation, tr_mbf_contaminationDetected) into StateTransition
+!insert (tr_mbf_contaminationDetected, st_mbf_cleanInPlace) into TransitionState
+
+!insert (st_mbf_mashRest, tr_mbf_equipmentFault) into StateTransition
+!insert (tr_mbf_equipmentFault, st_mbf_cleanInPlace) into TransitionState
+
+!new TimeEvent('te_mbf_BTE1')
+!te_mbf_BTE1.time := 30
+!insert (tr_mbf_startMashIn, te_mbf_BTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE2')
+!te_mbf_BTE2.time := 10
+!insert (tr_mbf_stabilizeMash, te_mbf_BTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE3')
+!te_mbf_BTE3.time := 60
+!insert (tr_mbf_completeMashRest, te_mbf_BTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE4')
+!te_mbf_BTE4.time := 45
+!insert (tr_mbf_finishLauter, te_mbf_BTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE5')
+!te_mbf_BTE5.time := 75
+!insert (tr_mbf_endBoil, te_mbf_BTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE6')
+!te_mbf_BTE6.time := 20
+!insert (tr_mbf_finishHopStand, te_mbf_BTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE7')
+!te_mbf_BTE7.time := 15
+!insert (tr_mbf_settleTrub, te_mbf_BTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE8')
+!te_mbf_BTE8.time := 25
+!insert (tr_mbf_reachPitchTemp, te_mbf_BTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE9')
+!te_mbf_BTE9.time := 5
+!insert (tr_mbf_yeastPitched, te_mbf_BTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE10')
+!te_mbf_BTE10.time := 720
+!insert (tr_mbf_fermentationMonitorPulse, te_mbf_BTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE11')
+!te_mbf_BTE11.time := 4320
+!insert (tr_mbf_moveToDiacetylRest, te_mbf_BTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE12')
+!te_mbf_BTE12.time := 1440
+!insert (tr_mbf_finishDiacetylRest, te_mbf_BTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE13')
+!te_mbf_BTE13.time := 2880
+!insert (tr_mbf_completeColdCrash, te_mbf_BTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE14')
+!te_mbf_BTE14.time := 60
+!insert (tr_mbf_releaseToPackaging, te_mbf_BTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE15')
+!te_mbf_BTE15.time := 180
+!insert (tr_mbf_packageComplete, te_mbf_BTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE16')
+!te_mbf_BTE16.time := 240
+!insert (tr_mbf_cipComplete, te_mbf_BTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE17')
+!te_mbf_BTE17.time := 1
+!insert (tr_mbf_contaminationDetected, te_mbf_BTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_mbf_BTE18')
+!te_mbf_BTE18.time := 1
+!insert (tr_mbf_equipmentFault, te_mbf_BTE18) into TransitionContainsEvents
+

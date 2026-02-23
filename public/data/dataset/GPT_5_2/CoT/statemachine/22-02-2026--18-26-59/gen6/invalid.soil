@@ -1,0 +1,91 @@
+!new StateMachine('sm_thermostatResumeController')
+!sm_thermostatResumeController.name := 'thermostatResumeController'
+
+!new State('st_th_standby')
+!st_th_standby.name := 'standby'
+!new State('st_th_heating')
+!st_th_heating.name := 'heating'
+!new State('st_th_cooling')
+!st_th_cooling.name := 'cooling'
+!new State('st_th_off')
+!st_th_off.name := 'off'
+!new State('st_th_fault')
+!st_th_fault.name := 'fault'
+
+!insert (sm_thermostatResumeController, st_th_standby) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_heating) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_cooling) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_off) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_fault) into StateMachineContainsStates
+
+!new Transition('tr_th_tStandbyToHeating')
+!tr_th_tStandbyToHeating.name := 'tStandbyToHeating'
+!new Transition('tr_th_tHeatingToStandby')
+!tr_th_tHeatingToStandby.name := 'tHeatingToStandby'
+!new Transition('tr_th_tStandbyToCooling')
+!tr_th_tStandbyToCooling.name := 'tStandbyToCooling'
+!new Transition('tr_th_tCoolingToStandby')
+!tr_th_tCoolingToStandby.name := 'tCoolingToStandby'
+!new Transition('tr_th_tStandbyToOff')
+!tr_th_tStandbyToOff.name := 'tStandbyToOff'
+!new Transition('tr_th_tOffToStandby')
+!tr_th_tOffToStandby.name := 'tOffToStandby'
+!new Transition('tr_th_tFaultToStandby')
+!tr_th_tFaultToStandby.name := 'tFaultToStandby'
+
+!insert (sm_thermostatResumeController, tr_th_tStandbyToHeating) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tHeatingToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tStandbyToCooling) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tCoolingToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tStandbyToOff) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tOffToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tFaultToStandby) into StateMachineContainsTransitions
+
+!insert (st_th_standby, tr_th_tStandbyToHeating) into StateTransition
+!insert (tr_th_tStandbyToHeating, st_th_heating) into TransitionState
+
+!insert (st_th_heating, tr_th_tHeatingToStandby) into StateTransition
+!insert (tr_th_tHeatingToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_standby, tr_th_tStandbyToCooling) into StateTransition
+!insert (tr_th_tStandbyToCooling, st_th_cooling) into TransitionState
+
+!insert (st_th_cooling, tr_th_tCoolingToStandby) into StateTransition
+!insert (tr_th_tCoolingToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_standby, tr_th_tStandbyToOff) into StateTransition
+!insert (tr_th_tStandbyToOff, st_th_off) into TransitionState
+
+!insert (st_th_off, tr_th_tOffToStandby) into StateTransition
+!insert (tr_th_tOffToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_fault, tr_th_tFaultToStandby) into StateTransition
+!insert (tr_th_tFaultToStandby, st_th_standby) into TransitionState
+
+!new TimeEvent('te_th_tStandbyToHeating')
+!te_th_tStandbyToHeating.time := 30
+!insert (tr_th_tStandbyToHeating, te_th_tStandbyToHeating) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tHeatingToStandby')
+!te_th_tHeatingToStandby.time := 180
+!insert (tr_th_tHeatingToStandby, te_th_tHeatingToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tStandbyToCooling')
+!te_th_tStandbyToCooling.time := 30
+!insert (tr_th_tStandbyToCooling, te_th_tStandbyToCooling) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tCoolingToStandby')
+!te_th_tCoolingToStandby.time := 180
+!insert (tr_th_tCoolingToStandby, te_th_tCoolingToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tStandbyToOff')
+!te_th_tStandbyToOff.time := 10
+!insert (tr_th_tStandbyToOff, te_th_tStandbyToOff) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tOffToStandby')
+!te_th_tOffToStandby.time := 5
+!insert (tr_th_tOffToStandby, te_th_tOffToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tFaultToStandby')
+!te_th_tFaultToStandby.time := 60
+!insert (tr_th_tFaultToStandby, te_th_tFaultToStandby) into TransitionContainsEvents

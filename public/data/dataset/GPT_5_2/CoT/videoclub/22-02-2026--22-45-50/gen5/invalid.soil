@@ -1,0 +1,70 @@
+!new Client('clientRioC40')
+!clientRioC40.clientId := 901
+!clientRioC40.isSuspended := false
+
+!new Client('clientRioC41')
+!clientRioC41.clientId := 902
+!clientRioC41.isSuspended := false
+
+!new Client('clientRioC42')
+!clientRioC42.clientId := 1203
+!clientRioC42.isSuspended := false
+
+!new Rental('rentalRioR40')
+!rentalRioR40.date := Date('2026-02-08')
+
+!new Rental('rentalRioR41')
+!rentalRioR41.date := Date('2026-02-09')
+
+!new Movie('movieRioM40')
+!movieRioM40.title := 'Barrio Getaway'
+!movieRioM40.availableCopies := 3
+!movieRioM40.genre := #Action
+
+!new Movie('movieRioM41')
+!movieRioM41.title := 'Tango for Two'
+!movieRioM41.availableCopies := 1
+!movieRioM41.genre := #Comedy
+
+!new Series('seriesRioS40')
+!seriesRioS40.title := 'Harbor Signals'
+!seriesRioS40.availableCopies := 2
+!seriesRioS40.episode := 4
+
+!new Series('seriesRioS41')
+!seriesRioS41.title := 'Midnight Repairs'
+!seriesRioS41.availableCopies := 0
+!seriesRioS41.episode := 2
+
+!new Actor('actorRioA40')
+!actorRioA40.name := 'Valentina Rossi'
+
+!new Actor('actorRioA41')
+!actorRioA41.name := 'Diego Fernández'
+
+!new Actor('actorRioA42')
+!actorRioA42.name := 'Lucía Pereira'
+
+!new Actor('actorRioA43')
+!actorRioA43.name := 'Kenji Nakamura'
+
+!insert (clientRioC40, rentalRioR40) into ClientRental
+!insert (clientRioC41, rentalRioR40) into ClientRental
+!insert (clientRioC42, rentalRioR41) into ClientRental
+
+!insert (rentalRioR40, movieRioM40) into RentalCassette
+!insert (rentalRioR40, seriesRioS40) into RentalCassette
+
+!insert (rentalRioR41, movieRioM41) into RentalCassette
+!insert (rentalRioR41, seriesRioS41) into RentalCassette
+!insert (rentalRioR41, movieRioM40) into RentalCassette
+
+!insert (movieRioM40, actorRioA40) into CassetteActor
+!insert (movieRioM40, actorRioA41) into CassetteActor
+
+!insert (movieRioM41, actorRioA42) into CassetteActor
+
+!insert (seriesRioS40, actorRioA41) into CassetteActor
+!insert (seriesRioS40, actorRioA43) into CassetteActor
+
+!insert (seriesRioS41, actorRioA40) into CassetteActor

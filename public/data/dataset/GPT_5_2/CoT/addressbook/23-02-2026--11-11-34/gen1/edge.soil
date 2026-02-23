@@ -1,0 +1,118 @@
+!new AddressBook('AB_TransnationalOddities_1')
+
+!new Person('P_C1_XAE12')
+!P_C1_XAE12.name := 'X Æ A-12'
+!P_C1_XAE12.phone := '+1-000-000-0000 ext. 0000'
+!P_C1_XAE12.website := 'https://example.invalid/🚫'
+!P_C1_XAE12.email := 'x@invalid'
+!P_C1_XAE12.title := 'Mx.'
+!insert (AB_TransnationalOddities_1, P_C1_XAE12) into AddressBookMadeOfContact
+
+!new Company('C_C2_ADT')
+!C_C2_ADT.name := 'Antarctic Data Trust (ADT)'
+!C_C2_ADT.phone := '+672 1 2345'
+!C_C2_ADT.website := 'https://adt.example.org'
+!C_C2_ADT.email := 'ops@adt.example.org'
+!C_C2_ADT.industry := 'Polar cloud hosting'
+!insert (AB_TransnationalOddities_1, C_C2_ADT) into AddressBookMadeOfContact
+
+!new Note('Note_C2_N1')
+!Note_C2_N1.author := 'София'
+!Note_C2_N1.time := Date('9999-12-31')
+!Note_C2_N1.type := #EMAIL
+!Note_C2_N1.comment := 'End-of-era contingency: rotate credentials after the “final audit”.'
+!insert (C_C2_ADT, Note_C2_N1) into ContactContainsNote
+
+!new Note('Note_C2_N2')
+!Note_C2_N2.author := 'María-José'
+!Note_C2_N2.time := Date('0001-01-01')
+!Note_C2_N2.type := #MEETING
+!Note_C2_N2.comment := 'Legacy record imported; original timestamp unknown, stored as earliest representable value.'
+!insert (C_C2_ADT, Note_C2_N2) into ContactContainsNote
+
+!new Address('Addr_C2_A1')
+!Addr_C2_A1.city := 'McMurdo Station'
+!Addr_C2_A1.houseNr := '0'
+!Addr_C2_A1.street := 'Ice Runway Rd'
+!insert (C_C2_ADT, Addr_C2_A1) into ContactContainsAddress
+
+!new Address('Addr_C2_A2')
+!Addr_C2_A2.city := 'Ushuaia'
+!Addr_C2_A2.houseNr := 'S/N'
+!Addr_C2_A2.street := 'Av. Maipú'
+!insert (C_C2_ADT, Addr_C2_A2) into ContactContainsAddress
+
+!new Company('C_C3_SVVL')
+!C_C3_SVVL.name := 'Svalbard Seed Vault Logistics AS'
+!C_C3_SVVL.phone := '+47 79 00 00 00'
+!C_C3_SVVL.website := 'https://svvl.no'
+!C_C3_SVVL.email := 'dispatch@svvl.no'
+!C_C3_SVVL.industry := 'Cryogenic logistics'
+!insert (AB_TransnationalOddities_1, C_C3_SVVL) into AddressBookMadeOfContact
+
+!new Note('Note_C3_N1')
+!Note_C3_N1.author := 'Nils'
+!Note_C3_N1.time := Date('2038-01-19')
+!Note_C3_N1.type := #CALL
+!Note_C3_N1.comment := 'Confirmed shipment containers rated for −196°C; client asked for “extra cold”.'
+!insert (C_C3_SVVL, Note_C3_N1) into ContactContainsNote
+
+!new Address('Addr_C3_A1')
+!Addr_C3_A1.city := 'Longyearbyen'
+!Addr_C3_A1.houseNr := '12B'
+!Addr_C3_A1.street := 'Vei 7'
+!insert (C_C3_SVVL, Addr_C3_A1) into ContactContainsAddress
+
+!new Person('P_C4_AminaKhalid')
+!P_C4_AminaKhalid.name := 'د. أمينة بنت خالد (Dr. Amina bint Khalid)'
+!P_C4_AminaKhalid.phone := '+971 2 555 0101'
+!P_C4_AminaKhalid.website := 'https://aminakh.example.ae'
+!P_C4_AminaKhalid.email := 'amina.khalid@example.ae'
+!P_C4_AminaKhalid.title := 'Dr.'
+!insert (AB_TransnationalOddities_1, P_C4_AminaKhalid) into AddressBookMadeOfContact
+
+!new Note('Note_C4_N1')
+!Note_C4_N1.author := 'Amina'
+!Note_C4_N1.time := Date('2026-02-29')
+!Note_C4_N1.type := #MEETING
+!Note_C4_N1.comment := 'Met with remote operations; agreed on “no paper trail” protocol for sensitive routing.'
+!insert (P_C4_AminaKhalid, Note_C4_N1) into ContactContainsNote
+
+!new Note('Note_C4_N2')
+!Note_C4_N2.author := '外部監査 (External Audit)'
+!Note_C4_N2.time := Date('2025-11-30')
+!Note_C4_N2.type := #EMAIL
+!Note_C4_N2.comment := 'Audit memo: validate cross-organization relationship graph for recursion (cycles allowed, self-links forbidden).'
+!insert (P_C4_AminaKhalid, Note_C4_N2) into ContactContainsNote
+
+!new Address('Addr_C4_A1')
+!Addr_C4_A1.city := 'Abu Dhabi'
+!Addr_C4_A1.houseNr := 'Ⅻ'
+!Addr_C4_A1.street := 'Corniche Rd'
+!insert (P_C4_AminaKhalid, Addr_C4_A1) into ContactContainsAddress
+
+!new Address('Addr_C4_A2')
+!Addr_C4_A2.city := 'Reykjavík'
+!Addr_C4_A2.houseNr := '-1'
+!Addr_C4_A2.street := 'Laugavegur'
+!insert (P_C4_AminaKhalid, Addr_C4_A2) into ContactContainsAddress
+
+!new Relationship('Rel_C2_R1_Subdivision_1')
+!Rel_C2_R1_Subdivision_1.type := #SUBDIVISION
+!insert (C_C2_ADT, Rel_C2_R1_Subdivision_1) into ContactToRelationship
+!insert (Rel_C2_R1_Subdivision_1, C_C3_SVVL) into RelationshipToContact
+
+!new Relationship('Rel_C3_R1_Boss_1')
+!Rel_C3_R1_Boss_1.type := #BOSS
+!insert (C_C3_SVVL, Rel_C3_R1_Boss_1) into ContactToRelationship
+!insert (Rel_C3_R1_Boss_1, P_C4_AminaKhalid) into RelationshipToContact
+
+!new Relationship('Rel_C4_R1_Employee_1')
+!Rel_C4_R1_Employee_1.type := #EMPLOYEE
+!insert (P_C4_AminaKhalid, Rel_C4_R1_Employee_1) into ContactToRelationship
+!insert (Rel_C4_R1_Employee_1, C_C2_ADT) into RelationshipToContact
+
+!new Relationship('Rel_C4_R2_Coworker_1')
+!Rel_C4_R2_Coworker_1.type := #COWORKER
+!insert (P_C4_AminaKhalid, Rel_C4_R2_Coworker_1) into ContactToRelationship
+!insert (Rel_C4_R2_Coworker_1, P_C1_XAE12) into RelationshipToContact

@@ -1,0 +1,107 @@
+!new Customer('C23')
+!C23.firstName := 'Nandini'
+!C23.lastName := 'Rao'
+
+!new Booking('B50233')
+!B50233.bookingId := 50233
+!B50233.startDate := '2026-08-14'
+!B50233.endDate := '2026-08-18'
+!B50233.confirmed := true
+!B50233.canceled := true
+
+!new RoomReservation('RR_M1')
+!RR_M1.checkInDate := '2026-08-14'
+!RR_M1.checkOutDate := '2026-08-16'
+
+!new RoomReservation('RR_M2')
+!RR_M2.checkInDate := '2026-08-16'
+!RR_M2.checkOutDate := '2026-08-18'
+
+!new RoomReservation('RR_M3')
+!RR_M3.checkInDate := '2026-08-14'
+!RR_M3.checkOutDate := '2026-08-15'
+
+!new Room('R305_M1')
+!R305_M1.roomNumber := 305
+!R305_M1.numBeds := 1
+!R305_M1.pricePerNight := 92.50
+!R305_M1.occupied := false
+!R305_M1.blocked := false
+
+!new RoomExtra('M1_1')
+!M1_1.description := 'South Indian breakfast set (2 mornings)'
+!M1_1.price := 18.00
+
+!new RoomExtra('M1_2')
+!M1_2.description := 'Station transfer (prepaid taxi)'
+!M1_2.price := 12.50
+
+!new Bill('BL660201')
+!BL660201.billId := 660201
+!BL660201.price := 215.50
+
+!new Room('R1110_M2')
+!R1110_M2.roomNumber := 1110
+!R1110_M2.numBeds := 2
+!R1110_M2.pricePerNight := 210.00
+!R1110_M2.occupied := false
+!R1110_M2.blocked := true
+
+!new RoomExtra('M2_1')
+!M2_1.description := 'Force-majeure waiver processing (documented disruption)'
+!M2_1.price := 0.00
+
+!new Bill('BL660202')
+!BL660202.billId := 660202
+!BL660202.price := 0.00
+
+!new Room('R210_M3')
+!R210_M3.roomNumber := 210
+!R210_M3.numBeds := 1
+!R210_M3.pricePerNight := 70.00
+!R210_M3.occupied := false
+!R210_M3.blocked := false
+
+!new Bill('BL660203')
+!BL660203.billId := 660203
+!BL660203.price := 70.00
+
+!new FreeRoomTypesDTO('D40')
+!D40.roomTypeDescription := 'Deluxe Double — AC, near lift'
+!D40.numBeds := 2
+!D40.pricePerNight := 205.00
+!D40.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D41')
+!D41.roomTypeDescription := 'स्टैंडर्ड सिंगल (Standard Single) — नॉन स्मोकिंग'
+!D41.numBeds := 1
+!D41.pricePerNight := 85.00
+!D41.numFreeRooms := 5
+
+!new FreeRoomTypesDTO('D42')
+!D42.roomTypeDescription := 'சூப்பீரியர் ட்வின் (Superior Twin) — city side'
+!D42.numBeds := 2
+!D42.pricePerNight := 155.00
+!D42.numFreeRooms := 2
+
+!insert (B50233, C23) into BookingCustomer
+
+!insert (B50233, RR_M1) into BookingRoomReservation
+!insert (B50233, RR_M2) into BookingRoomReservation
+!insert (B50233, RR_M3) into BookingRoomReservation
+
+!insert (RR_M1, R305_M1) into RoomReservationRoom
+!insert (RR_M2, R1110_M2) into RoomReservationRoom
+!insert (RR_M3, R210_M3) into RoomReservationRoom
+
+!insert (RR_M1, M1_1) into RoomReservationExtras
+!insert (RR_M1, M1_2) into RoomReservationExtras
+!insert (RR_M2, M2_1) into RoomReservationExtras
+
+!insert (B50233, BL660201) into BookingBill
+!insert (B50233, BL660202) into BookingBill
+!insert (B50233, BL660203) into BookingBill
+
+!insert (BL660201, RR_M1) into BillRoomReservation
+!insert (BL660202, RR_M2) into BillRoomReservation
+!insert (BL660203, RR_M3) into BillRoomReservation

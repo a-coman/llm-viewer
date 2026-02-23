@@ -1,0 +1,63 @@
+!new Currency('currencyCUR1')
+!currencyCUR1.name := 'Euro'
+!currencyCUR1.abbreviation := 'EUR'
+
+!new Currency('currencyCUR2')
+!currencyCUR2.name := 'Japanese Yen'
+!currencyCUR2.abbreviation := 'JPY'
+
+!new Currency('currencyCUR3')
+!currencyCUR3.name := 'Swiss Franc'
+!currencyCUR3.abbreviation := 'CHF'
+
+!new Expense('expenseEXPEDGE001')
+!expenseEXPEDGE001.amount := 0.01
+!expenseEXPEDGE001.startDate := Date('2024-02-29')
+!expenseEXPEDGE001.endDate := Date('2024-02-29')
+
+!new Bill('billEDGE001')
+!billEDGE001.amount := 0.00
+!billEDGE001.category := 'Administrative rounding adjustment'
+!billEDGE001.date := Date('2024-02-29')
+!billEDGE001.paymentMethod := #CASH
+!billEDGE001.status := #VERIFIED
+
+!new Bill('billEDGE002')
+!billEDGE002.amount := 125000.00
+!billEDGE002.category := 'Conference registration (prepaid)'
+!billEDGE002.date := Date('2024-02-29')
+!billEDGE002.paymentMethod := #CREDIT_CARD
+!billEDGE002.status := #VALIDATED
+
+!new Bill('billEDGE003')
+!billEDGE003.amount := -125000.00
+!billEDGE003.category := 'Full refund (same day reversal)'
+!billEDGE003.date := Date('2024-02-29')
+!billEDGE003.paymentMethod := #CHECK
+!billEDGE003.status := #REFUNDED
+
+!new Bill('billEDGE004')
+!billEDGE004.amount := 0.01
+!billEDGE004.category := 'Currency conversion remainder'
+!billEDGE004.date := Date('2024-02-29')
+!billEDGE004.paymentMethod := #CASH
+!billEDGE004.status := #PENDING
+
+!insert (expenseEXPEDGE001, billEDGE001) into ExpenseContainsBills
+!insert (expenseEXPEDGE001, billEDGE002) into ExpenseContainsBills
+!insert (expenseEXPEDGE001, billEDGE003) into ExpenseContainsBills
+!insert (expenseEXPEDGE001, billEDGE004) into ExpenseContainsBills
+
+!insert (billEDGE001, currencyCUR1) into BillCurrency
+!insert (billEDGE002, currencyCUR2) into BillCurrency
+!insert (billEDGE003, currencyCUR2) into BillCurrency
+!insert (billEDGE004, currencyCUR3) into BillCurrency
+
+!new Comment('commentEDGE001')
+!commentEDGE001.text := 'Multi-currency edge case: JPY charge and JPY refund cancel out; only CHF remainder stays. 日本語メモ: 返金済み. ملاحظة: تم الاسترداد.'
+
+!new Comment('commentEDGE002')
+!commentEDGE002.text := 'Leap-day single-day expense. Total intentionally tiny (0.01) to test rounding and sum-of-bills invariant.'
+
+!insert (expenseEXPEDGE001, commentEDGE001) into ExpenseComment
+!insert (expenseEXPEDGE001, commentEDGE002) into ExpenseComment

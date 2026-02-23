@@ -1,0 +1,58 @@
+!new Customer('C29')
+!C29.firstName := 'Hine'
+!C29.lastName := 'Rangi'
+
+!new Booking('B6100')
+!B6100.bookingId := 6100
+!B6100.startDate := '2026-07-05'
+!B6100.endDate := '2026-07-07'
+!B6100.confirmed := true
+!B6100.canceled := false
+
+!new RoomReservation('R6101')
+!R6101.checkInDate := '2026-07-05'
+!R6101.checkOutDate := '2026-07-07'
+
+!new Room('RM990')
+!RM990.roomNumber := 990
+!RM990.numBeds := 0
+!RM990.pricePerNight := 45.00
+!RM990.occupied := false
+!RM990.blocked := false
+
+!new RoomExtra('E6101_R6101')
+!E6101_R6101.description := 'Electric hookup (16A)'
+!E6101_R6101.price := 8.00
+
+!new RoomExtra('E6102_R6101')
+!E6102_R6101.description := 'Shower tokens (2)'
+!E6102_R6101.price := 6.00
+
+!new Bill('BL6101')
+!BL6101.billId := 6101
+!BL6101.price := 104.00
+
+!new FreeRoomTypesDTO('D54')
+!D54.roomTypeDescription := 'Campervan pitch with power (outdoor)'
+!D54.numBeds := 0
+!D54.pricePerNight := 45.00
+!D54.numFreeRooms := 7
+
+!new FreeRoomTypesDTO('D55')
+!D55.roomTypeDescription := 'Standard double room'
+!D55.numBeds := 2
+!D55.pricePerNight := 165.00
+!D55.numFreeRooms := 1
+
+!insert (B6100, C29) into BookingCustomer
+
+!insert (B6100, R6101) into BookingRoomReservation
+
+!insert (R6101, RM990) into RoomReservationRoom
+
+!insert (R6101, E6101_R6101) into RoomReservationExtras
+!insert (R6101, E6102_R6101) into RoomReservationExtras
+
+!insert (B6100, BL6101) into BookingBill
+
+!insert (BL6101, R6101) into BillRoomReservation

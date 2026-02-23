@@ -1,0 +1,136 @@
+!new Station('S1')
+
+!new Driver('EDGE_D1')
+!EDGE_D1.id := 'DRV-JP-0001'
+!EDGE_D1.name := 'Ayumi Tanaka'
+
+!new Driver('EDGE_D2')
+!EDGE_D2.id := 'DRV-JP-0002'
+!EDGE_D2.name := 'Олег Серов'
+
+!insert (S1, EDGE_D1) into StationContainsDriver
+!insert (S1, EDGE_D2) into StationContainsDriver
+
+!new Customer('EDGE_C1')
+!EDGE_C1.id := 'CUS-0001'
+!EDGE_C1.name := 'أمينة القحطاني'
+!EDGE_C1.twitterUserName := '@Amina_Q8'
+
+!new Customer('EDGE_C2')
+!EDGE_C2.id := 'CUS-0002'
+!EDGE_C2.name := 'Liam O’Connor'
+!EDGE_C2.twitterUserName := '@liamoconnor_ie'
+
+!new Customer('EDGE_C3')
+!EDGE_C3.id := 'CUS-0003'
+!EDGE_C3.name := 'Mina Park (박민아)'
+!EDGE_C3.twitterUserName := '@minapark_kr'
+
+!new Customer('EDGE_C4')
+!EDGE_C4.id := 'CUS-0004'
+!EDGE_C4.name := 'José da Silva'
+!EDGE_C4.twitterUserName := '@ze_silva_br'
+
+!insert (S1, EDGE_C1) into StationContainsCustomer
+!insert (S1, EDGE_C2) into StationContainsCustomer
+!insert (S1, EDGE_C3) into StationContainsCustomer
+!insert (S1, EDGE_C4) into StationContainsCustomer
+
+!new Address('EDGE_A1')
+!EDGE_A1.text := 'Service corridor Door C, Teine Station parcel cage, 5-1-1 Teinehoncho, Teine-ku, Sapporo, Hokkaidō 006-0021, Japan'
+!new GeoLocation('EDGE_GL1')
+!EDGE_GL1.latitude := 43.107487
+!EDGE_GL1.longitude := 141.243012
+!insert (EDGE_A1, EDGE_GL1) into AddressContainsGeoLocation
+
+!new Address('EDGE_A2')
+!EDGE_A2.text := 'Front lobby lockers (same street address), 5-1-1 Teinehoncho, Teine-ku, Sapporo, Hokkaidō 006-0021, Japan'
+!new GeoLocation('EDGE_GL2')
+!EDGE_GL2.latitude := 43.107487
+!EDGE_GL2.longitude := 141.243012
+!insert (EDGE_A2, EDGE_GL2) into AddressContainsGeoLocation
+
+!new Address('EDGE_A3')
+!EDGE_A3.text := 'Counter pickup, Sapporo Central Post Office, Kita 6 Nishi 1, Kita-ku, Sapporo, Hokkaidō 060-8799, Japan'
+!new GeoLocation('EDGE_GL3')
+!EDGE_GL3.latitude := 43.068660
+!EDGE_GL3.longitude := 141.350755
+!insert (EDGE_A3, EDGE_GL3) into AddressContainsGeoLocation
+
+!new Address('EDGE_A4')
+!EDGE_A4.text := 'Boat Slip 3, Port of Otaru, Otaru, Hokkaidō, Japan'
+!new GeoLocation('EDGE_GL4')
+!EDGE_GL4.latitude := 43.214965
+!EDGE_GL4.longitude := 141.003876
+!insert (EDGE_A4, EDGE_GL4) into AddressContainsGeoLocation
+
+!new Address('EDGE_A5')
+!EDGE_A5.text := 'Temporary festival stall “雪まつり” delivery point, Odori Park, Chuo-ku, Sapporo, Hokkaidō, Japan'
+!new GeoLocation('EDGE_GL5')
+!EDGE_GL5.latitude := 43.060540
+!EDGE_GL5.longitude := 141.351000
+!insert (EDGE_A5, EDGE_GL5) into AddressContainsGeoLocation
+
+!new Address('EDGE_A6')
+!EDGE_A6.text := 'UNIS logistics shed, Longyearbyen, Svalbard, Norway'
+!new GeoLocation('EDGE_GL6')
+!EDGE_GL6.latitude := 78.223200
+!EDGE_GL6.longitude := 15.646900
+!insert (EDGE_A6, EDGE_GL6) into AddressContainsGeoLocation
+
+!new Address('EDGE_A7')
+!EDGE_A7.text := 'McMurdo Station cargo pad, Ross Island, Antarctica'
+!new GeoLocation('EDGE_GL7')
+!EDGE_GL7.latitude := -77.841900
+!EDGE_GL7.longitude := 166.686300
+!insert (EDGE_A7, EDGE_GL7) into AddressContainsGeoLocation
+
+!new Shipment('EDGE_SHP1')
+!EDGE_SHP1.id := 'SHP-EDGE-0001'
+!EDGE_SHP1.status := #DELIVERED
+
+!new Shipment('EDGE_SHP2')
+!EDGE_SHP2.id := 'SHP-EDGE-0002'
+!EDGE_SHP2.status := #ASSIGNED
+
+!new Shipment('EDGE_SHP3')
+!EDGE_SHP3.id := 'SHP-EDGE-0003'
+!EDGE_SHP3.status := #NEW
+
+!new Shipment('EDGE_SHP4')
+!EDGE_SHP4.id := 'SHP-EDGE-0004'
+!EDGE_SHP4.status := #UNDERWAY
+
+!new Shipment('EDGE_SHP5')
+!EDGE_SHP5.id := 'SHP-EDGE-0005'
+!EDGE_SHP5.status := #UNDERWAY
+
+!insert (S1, EDGE_SHP1) into StationShipment
+!insert (S1, EDGE_SHP2) into StationShipment
+!insert (S1, EDGE_SHP3) into StationShipment
+!insert (S1, EDGE_SHP4) into StationShipment
+!insert (S1, EDGE_SHP5) into StationShipment
+
+!insert (EDGE_C1, EDGE_SHP1) into CustomerConsistsOfShipment
+!insert (EDGE_C1, EDGE_SHP2) into CustomerConsistsOfShipment
+!insert (EDGE_C2, EDGE_SHP3) into CustomerConsistsOfShipment
+!insert (EDGE_C2, EDGE_SHP4) into CustomerConsistsOfShipment
+!insert (EDGE_C3, EDGE_SHP5) into CustomerConsistsOfShipment
+
+!insert (EDGE_SHP1, EDGE_A1) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP1, EDGE_A2) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP2, EDGE_A1) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP2, EDGE_A3) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP3, EDGE_A4) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP3, EDGE_A5) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP4, EDGE_A6) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP4, EDGE_A7) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP5, EDGE_A5) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP5, EDGE_A3) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_D2, EDGE_SHP3) into DriverShipment
+!insert (EDGE_D2, EDGE_SHP4) into DriverShipment

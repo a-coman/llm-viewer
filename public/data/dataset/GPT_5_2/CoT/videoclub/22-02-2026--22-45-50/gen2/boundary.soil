@@ -1,0 +1,146 @@
+!new Client('clientVL10')
+!clientVL10.clientId := 2147483647
+!clientVL10.isSuspended := true
+
+!new Client('clientVL11')
+!clientVL11.clientId := 99999999
+!clientVL11.isSuspended := false
+
+!new Rental('rentalVL10')
+!rentalVL10.date := Date('9999-12-31')
+
+!new Rental('rentalVL11')
+!rentalVL11.date := Date('2100-01-01')
+
+!new Rental('rentalVL12')
+!rentalVL12.date := Date('2038-01-19')
+
+!new Rental('rentalVL13')
+!rentalVL13.date := Date('2000-02-29')
+
+!new Movie('movieVL10')
+!movieVL10.title := 'Nairobi Nights'
+!movieVL10.availableCopies := 1000000000
+!movieVL10.genre := #Action
+
+!new Movie('movieVL11')
+!movieVL11.title := 'La Risa Infinita'
+!movieVL11.availableCopies := 750000000
+!movieVL11.genre := #Comedy
+
+!new Movie('movieVL12')
+!movieVL12.title := 'Код Буря'
+!movieVL12.availableCopies := 2147483647
+!movieVL12.genre := #Action
+
+!new Movie('movieVL13')
+!movieVL13.title := 'Mumbai Mix-Up'
+!movieVL13.availableCopies := 500000000
+!movieVL13.genre := #Comedy
+
+!new Movie('movieVL14')
+!movieVL14.title := 'Viento Rojo'
+!movieVL14.availableCopies := 999999999
+!movieVL14.genre := #Action
+
+!new Series('seriesVL10')
+!seriesVL10.title := 'Sakura Protocol'
+!seriesVL10.availableCopies := 800000000
+!seriesVL10.episode := 999999
+
+!new Series('seriesVL11')
+!seriesVL11.title := 'مسلسلات الغد'
+!seriesVL11.availableCopies := 600000000
+!seriesVL11.episode := 2147483647
+
+!new Series('seriesVL12')
+!seriesVL12.title := 'Nordlys Arkiv'
+!seriesVL12.availableCopies := 900000000
+!seriesVL12.episode := 5000000
+
+!new Actor('actorVL10')
+!actorVL10.name := 'Zahra El-Fassi'
+
+!new Actor('actorVL11')
+!actorVL11.name := 'Diego Fernández-Lobo'
+
+!new Actor('actorVL12')
+!actorVL12.name := 'Ananya Iyer'
+
+!new Actor('actorVL13')
+!actorVL13.name := 'Oleg Petrov'
+
+!new Actor('actorVL14')
+!actorVL14.name := 'Hiro Tanaka'
+
+!new Actor('actorVL15')
+!actorVL15.name := 'Signe Nørgaard'
+
+!new Actor('actorVL16')
+!actorVL16.name := 'Chinedu Okafor'
+
+!new Actor('actorVL17')
+!actorVL17.name := 'Lucía Paredes'
+
+!new Actor('actorVL18')
+!actorVL18.name := 'Youssef Benali'
+
+!new Actor('actorVL19')
+!actorVL19.name := 'Priya Menon'
+
+!insert (clientVL10, rentalVL10) into ClientRental
+!insert (clientVL10, rentalVL11) into ClientRental
+!insert (clientVL10, rentalVL12) into ClientRental
+!insert (clientVL11, rentalVL13) into ClientRental
+
+!insert (rentalVL10, movieVL10) into RentalCassette
+!insert (rentalVL10, movieVL11) into RentalCassette
+!insert (rentalVL10, movieVL12) into RentalCassette
+!insert (rentalVL10, movieVL13) into RentalCassette
+!insert (rentalVL10, movieVL14) into RentalCassette
+!insert (rentalVL10, seriesVL10) into RentalCassette
+!insert (rentalVL10, seriesVL11) into RentalCassette
+!insert (rentalVL10, seriesVL12) into RentalCassette
+
+!insert (rentalVL11, movieVL12) into RentalCassette
+!insert (rentalVL11, seriesVL11) into RentalCassette
+
+!insert (rentalVL12, movieVL10) into RentalCassette
+!insert (rentalVL12, movieVL12) into RentalCassette
+!insert (rentalVL12, seriesVL10) into RentalCassette
+
+!insert (rentalVL13, movieVL11) into RentalCassette
+
+!insert (movieVL10, actorVL10) into CassetteActor
+!insert (movieVL10, actorVL16) into CassetteActor
+!insert (movieVL10, actorVL11) into CassetteActor
+
+!insert (movieVL11, actorVL17) into CassetteActor
+!insert (movieVL11, actorVL11) into CassetteActor
+!insert (movieVL11, actorVL12) into CassetteActor
+!insert (movieVL11, actorVL19) into CassetteActor
+
+!insert (movieVL12, actorVL13) into CassetteActor
+!insert (movieVL12, actorVL14) into CassetteActor
+!insert (movieVL12, actorVL10) into CassetteActor
+!insert (movieVL12, actorVL16) into CassetteActor
+!insert (movieVL12, actorVL18) into CassetteActor
+
+!insert (movieVL13, actorVL12) into CassetteActor
+!insert (movieVL13, actorVL19) into CassetteActor
+
+!insert (movieVL14, actorVL15) into CassetteActor
+!insert (movieVL14, actorVL11) into CassetteActor
+!insert (movieVL14, actorVL18) into CassetteActor
+
+!insert (seriesVL10, actorVL14) into CassetteActor
+!insert (seriesVL10, actorVL15) into CassetteActor
+!insert (seriesVL10, actorVL19) into CassetteActor
+
+!insert (seriesVL11, actorVL10) into CassetteActor
+!insert (seriesVL11, actorVL18) into CassetteActor
+!insert (seriesVL11, actorVL11) into CassetteActor
+!insert (seriesVL11, actorVL13) into CassetteActor
+
+!insert (seriesVL12, actorVL15) into CassetteActor
+!insert (seriesVL12, actorVL16) into CassetteActor

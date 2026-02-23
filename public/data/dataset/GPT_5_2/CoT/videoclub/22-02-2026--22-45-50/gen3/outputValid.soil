@@ -1,0 +1,503 @@
+!new Client('clientC20')
+!clientC20.clientId := 412
+!clientC20.isSuspended := false
+
+!new Client('clientC21')
+!clientC21.clientId := 73
+!clientC21.isSuspended := false
+
+!new Client('clientC22')
+!clientC22.clientId := 999
+!clientC22.isSuspended := true
+
+!new Rental('rentalR20')
+!rentalR20.date := Date('2024-06-14')
+
+!new Rental('rentalR21')
+!rentalR21.date := Date('2024-07-01')
+
+!new Rental('rentalR22')
+!rentalR22.date := Date('2024-09-09')
+
+!new Movie('movieM20')
+!movieM20.title := 'Midnight Tuk-Tuk'
+!movieM20.availableCopies := 0
+!movieM20.genre := #Comedy
+
+!new Movie('movieM21')
+!movieM21.title := 'Baltic Strike'
+!movieM21.availableCopies := 4
+!movieM21.genre := #Action
+
+!new Movie('movieM22')
+!movieM22.title := 'Paper Lanterns'
+!movieM22.availableCopies := 2
+!movieM22.genre := #Comedy
+
+!new Series('seriesS20')
+!seriesS20.title := 'Coastline Dispatch'
+!seriesS20.availableCopies := 1
+!seriesS20.episode := 3
+
+!new Series('seriesS21')
+!seriesS21.title := 'Coastline Dispatch'
+!seriesS21.availableCopies := 1
+!seriesS21.episode := 24
+
+!new Actor('actorA20')
+!actorA20.name := 'Chinwe Okafor'
+
+!new Actor('actorA21')
+!actorA21.name := 'Ilya Petrov'
+
+!new Actor('actorA22')
+!actorA22.name := 'Mina Park'
+
+!new Actor('actorA23')
+!actorA23.name := 'Tomás Ribeiro'
+
+!new Actor('actorA24')
+!actorA24.name := 'Salma Benali'
+
+!new Actor('actorA25')
+!actorA25.name := 'Noah Williams'
+
+!new Actor('actorA26')
+!actorA26.name := 'Linh Trần'
+
+!insert (clientC20, rentalR20) into ClientRental
+!insert (clientC20, rentalR21) into ClientRental
+!insert (clientC22, rentalR22) into ClientRental
+
+!insert (rentalR20, movieM20) into RentalCassette
+
+!insert (rentalR21, seriesS20) into RentalCassette
+!insert (rentalR21, seriesS21) into RentalCassette
+!insert (rentalR21, movieM21) into RentalCassette
+
+!insert (rentalR22, movieM21) into RentalCassette
+
+!insert (movieM20, actorA20) into CassetteActor
+!insert (movieM20, actorA23) into CassetteActor
+
+!insert (movieM21, actorA21) into CassetteActor
+!insert (movieM21, actorA24) into CassetteActor
+!insert (movieM21, actorA25) into CassetteActor
+
+!insert (movieM22, actorA22) into CassetteActor
+
+!insert (seriesS20, actorA24) into CassetteActor
+!insert (seriesS20, actorA22) into CassetteActor
+
+!insert (seriesS21, actorA20) into CassetteActor
+
+!new Client('clientReuseC20')
+!clientReuseC20.clientId := 3
+!clientReuseC20.isSuspended := false
+
+!new Client('clientReuseC21')
+!clientReuseC21.clientId := 4
+!clientReuseC21.isSuspended := false
+
+!new Client('clientReuseC22')
+!clientReuseC22.clientId := 5
+!clientReuseC22.isSuspended := true
+
+!new Rental('rentalReuseR20')
+!rentalReuseR20.date := Date('2026-01-01')
+
+!new Rental('rentalReuseR21')
+!rentalReuseR21.date := Date('2026-01-02')
+
+!new Rental('rentalReuseR22')
+!rentalReuseR22.date := Date('2026-01-03')
+
+!new Rental('rentalReuseR23')
+!rentalReuseR23.date := Date('2026-01-04')
+
+!new Rental('rentalReuseR24')
+!rentalReuseR24.date := Date('2026-01-05')
+
+!new Rental('rentalReuseR25')
+!rentalReuseR25.date := Date('2026-01-06')
+
+!new Movie('movieReuseM20')
+!movieReuseM20.title := 'Oceans at Dawn'
+!movieReuseM20.availableCopies := 0
+!movieReuseM20.genre := #Action
+
+!new Series('seriesReuseS20')
+!seriesReuseS20.title := 'Les Chroniques du Métro'
+!seriesReuseS20.availableCopies := 0
+!seriesReuseS20.episode := 1
+
+!new Actor('actorReuseA20')
+!actorReuseA20.name := 'Amélie Rousseau'
+
+!new Actor('actorReuseA21')
+!actorReuseA21.name := 'Tariq Al-Karim'
+
+!new Actor('actorReuseA22')
+!actorReuseA22.name := 'Mei-Ling Chen'
+
+!new Actor('actorReuseA23')
+!actorReuseA23.name := 'João da Silva'
+
+!new Actor('actorReuseA24')
+!actorReuseA24.name := 'Irina Volkov'
+
+!new Actor('actorReuseA25')
+!actorReuseA25.name := 'Noah Williams'
+
+!insert (clientReuseC20, rentalReuseR20) into ClientRental
+!insert (clientReuseC20, rentalReuseR21) into ClientRental
+!insert (clientReuseC21, rentalReuseR22) into ClientRental
+!insert (clientReuseC21, rentalReuseR23) into ClientRental
+!insert (clientReuseC22, rentalReuseR24) into ClientRental
+!insert (clientReuseC22, rentalReuseR25) into ClientRental
+
+!insert (rentalReuseR20, movieReuseM20) into RentalCassette
+!insert (rentalReuseR21, movieReuseM20) into RentalCassette
+!insert (rentalReuseR22, movieReuseM20) into RentalCassette
+!insert (rentalReuseR23, movieReuseM20) into RentalCassette
+!insert (rentalReuseR24, seriesReuseS20) into RentalCassette
+!insert (rentalReuseR25, movieReuseM20) into RentalCassette
+
+!insert (movieReuseM20, actorReuseA20) into CassetteActor
+!insert (movieReuseM20, actorReuseA21) into CassetteActor
+!insert (movieReuseM20, actorReuseA22) into CassetteActor
+!insert (movieReuseM20, actorReuseA23) into CassetteActor
+!insert (movieReuseM20, actorReuseA24) into CassetteActor
+!insert (movieReuseM20, actorReuseA25) into CassetteActor
+
+!insert (seriesReuseS20, actorReuseA22) into CassetteActor
+
+!new Client('clientEdge3C20')
+!clientEdge3C20.clientId := 4
+!clientEdge3C20.isSuspended := false
+
+!new Client('clientEdge3C21')
+!clientEdge3C21.clientId := 5
+!clientEdge3C21.isSuspended := false
+
+!new Rental('rentalEdge3R20')
+!rentalEdge3R20.date := Date('2024-02-30')
+
+!new Rental('rentalEdge3R21')
+!rentalEdge3R21.date := Date('Fri, 13th Month 2025')
+
+!new Movie('movieEdge3M20')
+!movieEdge3M20.title := '   '
+!movieEdge3M20.availableCopies := 0
+!movieEdge3M20.genre := #Action
+
+!new Movie('movieEdge3M21')
+!movieEdge3M21.title := 'The 400-Character Title Experiment: Part I — A Very Long Name Intended To Stress Display Fields In Older Point‑Of‑Sale Systems'
+!movieEdge3M21.availableCopies := 1
+!movieEdge3M21.genre := #Comedy
+
+!new Movie('movieEdge3M22')
+!movieEdge3M22.title := 'O Amor & o Caos'
+!movieEdge3M22.availableCopies := 2
+!movieEdge3M22.genre := #Comedy
+
+!new Movie('movieEdge3M23')
+!movieEdge3M23.title := 'Быстрый Переулок'
+!movieEdge3M23.availableCopies := 0
+!movieEdge3M23.genre := #Action
+
+!new Movie('movieEdge3M24')
+!movieEdge3M24.title := 'Kintsugi Heist'
+!movieEdge3M24.availableCopies := 1
+!movieEdge3M24.genre := #Action
+
+!new Movie('movieEdge3M25')
+!movieEdge3M25.title := 'La Última Broma'
+!movieEdge3M25.availableCopies := 0
+!movieEdge3M25.genre := #Comedy
+
+!new Series('seriesEdge3S20')
+!seriesEdge3S20.title := 'Signal Lantern'
+!seriesEdge3S20.availableCopies := 1
+!seriesEdge3S20.episode := 1
+
+!new Series('seriesEdge3S21')
+!seriesEdge3S21.title := 'Signal Lantern'
+!seriesEdge3S21.availableCopies := 1
+!seriesEdge3S21.episode := 2
+
+!new Series('seriesEdge3S22')
+!seriesEdge3S22.title := '都市の影 (City Shadows)'
+!seriesEdge3S22.availableCopies := 0
+!seriesEdge3S22.episode := 999999
+
+!new Series('seriesEdge3S23')
+!seriesEdge3S23.title := 'Café da Esquina'
+!seriesEdge3S23.availableCopies := 3
+!seriesEdge3S23.episode := 3
+
+!new Series('seriesEdge3S24')
+!seriesEdge3S24.title := 'Nordlys Journal'
+!seriesEdge3S24.availableCopies := 0
+!seriesEdge3S24.episode := 2147483647
+
+!new Series('seriesEdge3S25')
+!seriesEdge3S25.title := 'Desert Frequency'
+!seriesEdge3S25.availableCopies := 1
+!seriesEdge3S25.episode := 4
+
+!new Actor('actorEdge3A20')
+!actorEdge3A20.name := 'João Pereira'
+
+!new Actor('actorEdge3A21')
+!actorEdge3A21.name := 'Zahra Al‑Khalil'
+
+!new Actor('actorEdge3A22')
+!actorEdge3A22.name := 'Mina Cho (조민아)'
+
+!new Actor('actorEdge3A23')
+!actorEdge3A23.name := 'Étienne Morel'
+
+!new Actor('actorEdge3A24')
+!actorEdge3A24.name := 'Daria Nowak'
+
+!new Actor('actorEdge3A25')
+!actorEdge3A25.name := 'Adeola Ogun'
+
+!new Actor('actorEdge3A26')
+!actorEdge3A26.name := 'Nikolai Petrov'
+
+!new Actor('actorEdge3A27')
+!actorEdge3A27.name := 'Lucía Ríos'
+
+!new Actor('actorEdge3A28')
+!actorEdge3A28.name := 'Satoshi Kuroda'
+
+!new Actor('actorEdge3A29')
+!actorEdge3A29.name := 'Ingrid Haug'
+
+!new Actor('actorEdge3A30')
+!actorEdge3A30.name := 'Samir Haddad'
+
+!insert (clientEdge3C20, rentalEdge3R20) into ClientRental
+!insert (clientEdge3C21, rentalEdge3R21) into ClientRental
+
+!insert (rentalEdge3R20, movieEdge3M20) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M21) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M22) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M23) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M24) into RentalCassette
+!insert (rentalEdge3R20, movieEdge3M25) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S20) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S21) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S22) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S23) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S24) into RentalCassette
+!insert (rentalEdge3R20, seriesEdge3S25) into RentalCassette
+
+!insert (rentalEdge3R21, movieEdge3M24) into RentalCassette
+
+!insert (movieEdge3M20, actorEdge3A26) into CassetteActor
+!insert (movieEdge3M21, actorEdge3A23) into CassetteActor
+!insert (movieEdge3M22, actorEdge3A20) into CassetteActor
+!insert (movieEdge3M22, actorEdge3A27) into CassetteActor
+!insert (movieEdge3M23, actorEdge3A26) into CassetteActor
+!insert (movieEdge3M23, actorEdge3A24) into CassetteActor
+!insert (movieEdge3M24, actorEdge3A28) into CassetteActor
+!insert (movieEdge3M25, actorEdge3A27) into CassetteActor
+
+!insert (seriesEdge3S20, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S21, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S21, actorEdge3A30) into CassetteActor
+!insert (seriesEdge3S22, actorEdge3A22) into CassetteActor
+!insert (seriesEdge3S23, actorEdge3A25) into CassetteActor
+!insert (seriesEdge3S24, actorEdge3A29) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A20) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A21) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A22) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A23) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A24) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A25) into CassetteActor
+!insert (seriesEdge3S25, actorEdge3A30) into CassetteActor
+
+!new Client('clientTC20')
+!clientTC20.clientId := 7
+!clientTC20.isSuspended := false
+
+!new Client('clientTC21')
+!clientTC21.clientId := 19
+!clientTC21.isSuspended := false
+
+!new Client('clientTC22')
+!clientTC22.clientId := 26
+!clientTC22.isSuspended := true
+
+!new Client('clientTC23')
+!clientTC23.clientId := 41
+!clientTC23.isSuspended := false
+
+!new Client('clientTC24')
+!clientTC24.clientId := 95
+!clientTC24.isSuspended := false
+
+!new Movie('movieTC20')
+!movieTC20.title := 'Streets of Saint Petersburg'
+!movieTC20.availableCopies := 0
+!movieTC20.genre := #Action
+
+!new Movie('movieTC21')
+!movieTC21.title := 'Bossa Nova Mishaps'
+!movieTC21.availableCopies := 2
+!movieTC21.genre := #Comedy
+
+!new Movie('movieTC22')
+!movieTC22.title := 'Sahara Protocol'
+!movieTC22.availableCopies := 1
+!movieTC22.genre := #Action
+
+!new Movie('movieTC23')
+!movieTC23.title := 'Dhaba Days'
+!movieTC23.availableCopies := 4
+!movieTC23.genre := #Comedy
+
+!new Movie('movieTC24')
+!movieTC24.title := 'Nairobi Night Run'
+!movieTC24.availableCopies := 1
+!movieTC24.genre := #Action
+
+!new Movie('movieTC25')
+!movieTC25.title := 'The Reykjavík Riddle'
+!movieTC25.availableCopies := 3
+!movieTC25.genre := #Comedy
+
+!new Series('seriesTC20')
+!seriesTC20.title := 'Harbor Signals — Season 1'
+!seriesTC20.availableCopies := 2
+!seriesTC20.episode := 5
+
+!new Series('seriesTC21')
+!seriesTC21.title := 'Casbah Chronicles — Season 4'
+!seriesTC21.availableCopies := 0
+!seriesTC21.episode := 18
+
+!new Series('seriesTC22')
+!seriesTC22.title := 'Amazonas Investigates — Season 2'
+!seriesTC22.availableCopies := 1
+!seriesTC22.episode := 2
+
+!new Series('seriesTC23')
+!seriesTC23.title := 'Midnight Matatu — Season 1'
+!seriesTC23.availableCopies := 2
+!seriesTC23.episode := 11
+
+!new Actor('actorTC20')
+!actorTC20.name := 'Irina Volkova'
+
+!new Actor('actorTC21')
+!actorTC21.name := 'Ahmed Al-Farsi'
+
+!new Actor('actorTC22')
+!actorTC22.name := 'Ravi Iyer'
+
+!new Actor('actorTC23')
+!actorTC23.name := 'Lúcia Carvalho'
+
+!new Actor('actorTC24')
+!actorTC24.name := 'Siti Nur Aisyah'
+
+!new Actor('actorTC25')
+!actorTC25.name := 'Jonas Einarsson'
+
+!new Actor('actorTC26')
+!actorTC26.name := 'Wanjiku Njoroge'
+
+!new Actor('actorTC27')
+!actorTC27.name := 'Mateo Rojas'
+
+!new Actor('actorTC28')
+!actorTC28.name := 'Salma Haddad'
+
+!new Rental('rentalTC20')
+!rentalTC20.date := Date('2026-03-01')
+
+!new Rental('rentalTC21')
+!rentalTC21.date := Date('2026-03-03')
+
+!new Rental('rentalTC22')
+!rentalTC22.date := Date('2026-03-04')
+
+!new Rental('rentalTC23')
+!rentalTC23.date := Date('2026-03-10')
+
+!new Rental('rentalTC24')
+!rentalTC24.date := Date('2026-03-11')
+
+!new Rental('rentalTC25')
+!rentalTC25.date := Date('2026-03-12')
+
+!new Rental('rentalTC26')
+!rentalTC26.date := Date('2026-03-15')
+
+!insert (clientTC20, rentalTC20) into ClientRental
+!insert (clientTC20, rentalTC21) into ClientRental
+!insert (clientTC21, rentalTC22) into ClientRental
+!insert (clientTC22, rentalTC23) into ClientRental
+!insert (clientTC23, rentalTC24) into ClientRental
+!insert (clientTC24, rentalTC25) into ClientRental
+!insert (clientTC22, rentalTC26) into ClientRental
+
+!insert (rentalTC20, movieTC20) into RentalCassette
+!insert (rentalTC20, seriesTC20) into RentalCassette
+
+!insert (rentalTC21, movieTC23) into RentalCassette
+
+!insert (rentalTC22, movieTC20) into RentalCassette
+!insert (rentalTC22, movieTC21) into RentalCassette
+!insert (rentalTC22, seriesTC21) into RentalCassette
+!insert (rentalTC22, seriesTC23) into RentalCassette
+!insert (rentalTC22, movieTC24) into RentalCassette
+
+!insert (rentalTC23, movieTC22) into RentalCassette
+!insert (rentalTC23, seriesTC21) into RentalCassette
+!insert (rentalTC23, movieTC20) into RentalCassette
+
+!insert (rentalTC24, seriesTC22) into RentalCassette
+!insert (rentalTC24, movieTC21) into RentalCassette
+
+!insert (rentalTC25, movieTC25) into RentalCassette
+!insert (rentalTC25, seriesTC23) into RentalCassette
+
+!insert (rentalTC26, movieTC20) into RentalCassette
+!insert (rentalTC26, seriesTC22) into RentalCassette
+!insert (rentalTC26, movieTC24) into RentalCassette
+
+!insert (movieTC20, actorTC20) into CassetteActor
+!insert (movieTC20, actorTC21) into CassetteActor
+
+!insert (movieTC21, actorTC23) into CassetteActor
+!insert (movieTC21, actorTC27) into CassetteActor
+
+!insert (movieTC22, actorTC21) into CassetteActor
+!insert (movieTC22, actorTC28) into CassetteActor
+!insert (movieTC22, actorTC24) into CassetteActor
+
+!insert (movieTC23, actorTC22) into CassetteActor
+
+!insert (movieTC24, actorTC26) into CassetteActor
+!insert (movieTC24, actorTC28) into CassetteActor
+
+!insert (movieTC25, actorTC25) into CassetteActor
+!insert (movieTC25, actorTC20) into CassetteActor
+
+!insert (seriesTC20, actorTC24) into CassetteActor
+!insert (seriesTC20, actorTC27) into CassetteActor
+
+!insert (seriesTC21, actorTC21) into CassetteActor
+!insert (seriesTC21, actorTC28) into CassetteActor
+
+!insert (seriesTC22, actorTC27) into CassetteActor
+!insert (seriesTC22, actorTC23) into CassetteActor
+
+!insert (seriesTC23, actorTC26) into CassetteActor
+!insert (seriesTC23, actorTC22) into CassetteActor
+

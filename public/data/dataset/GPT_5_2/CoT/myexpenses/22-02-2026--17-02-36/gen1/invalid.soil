@@ -1,0 +1,45 @@
+!new Currency('currencyEuro2')
+!currencyEuro2.name := 'Euro'
+!currencyEuro2.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!new Expense('expenseJan2026ClientVisit')
+!expenseJan2026ClientVisit.amount := 142.00
+!expenseJan2026ClientVisit.startDate := Date('2026-01-10')
+!expenseJan2026ClientVisit.endDate := Date('2026-01-14')
+
+!new Bill('billClientVisit001')
+!billClientVisit001.amount := 100.00
+!billClientVisit001.category := 'Ground transport (airport taxi)'
+!billClientVisit001.date := Date('2026-01-11')
+!billClientVisit001.paymentMethod := #CREDIT_CARD
+!billClientVisit001.status := #VALIDATED
+
+!new Bill('billClientVisit002')
+!billClientVisit002.amount := 50.00
+!billClientVisit002.category := 'Meals (team dinner)'
+!billClientVisit002.date := Date('2026-01-12')
+!billClientVisit002.paymentMethod := #CASH
+!billClientVisit002.status := #VERIFIED
+
+!insert (expenseJan2026ClientVisit, billClientVisit001) into ExpenseContainsBills
+!insert (expenseJan2026ClientVisit, billClientVisit002) into ExpenseContainsBills
+
+!insert (billClientVisit001, currencyUSD) into BillCurrency
+!insert (billClientVisit002, currencyEuro2) into BillCurrency
+
+!new Comment('commentClientVisit001')
+!commentClientVisit001.text := 'USD taxi converted using corporate monthly rate: 1 USD = 0.92 EUR.'
+
+!new Comment('commentClientVisit002')
+!commentClientVisit002.text := 'Reimbursed total is 92.00 EUR (from USD) + 50.00 EUR = 142.00 EUR; receipts attached.'
+
+!insert (expenseJan2026ClientVisit, commentClientVisit001) into ExpenseComment
+!insert (expenseJan2026ClientVisit, commentClientVisit002) into ExpenseComment

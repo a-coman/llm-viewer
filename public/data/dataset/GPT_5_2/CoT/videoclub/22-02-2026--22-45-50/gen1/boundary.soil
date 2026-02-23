@@ -1,0 +1,41 @@
+!new Client('clientB1')
+!clientB1.clientId := 1
+!clientB1.isSuspended := false
+
+!new Client('clientB2')
+!clientB2.clientId := 2
+!clientB2.isSuspended := true
+
+!new Rental('rentalB1')
+!rentalB1.date := Date('1970-01-01')
+
+!new Rental('rentalB2')
+!rentalB2.date := Date('1970-01-02')
+
+!new Movie('movieB1')
+!movieB1.title := 'El Último Chiste'
+!movieB1.availableCopies := 0
+!movieB1.genre := #Comedy
+
+!new Series('seriesB1')
+!seriesB1.title := '北風の町'
+!seriesB1.availableCopies := 0
+!seriesB1.episode := 1
+
+!new Actor('actorB1')
+!actorB1.name := 'María-José Lira'
+
+!new Actor('actorB2')
+!actorB2.name := 'Kenji Sato'
+
+!new Actor('actorB3')
+!actorB3.name := 'Nils Ødegård'
+
+!insert (clientB1, rentalB1) into ClientRental
+!insert (clientB1, rentalB2) into ClientRental
+
+!insert (rentalB1, movieB1) into RentalCassette
+!insert (rentalB2, movieB1) into RentalCassette
+
+!insert (movieB1, actorB1) into CassetteActor
+!insert (seriesB1, actorB2) into CassetteActor

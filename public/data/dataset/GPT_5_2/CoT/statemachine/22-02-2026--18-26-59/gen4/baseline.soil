@@ -1,0 +1,129 @@
+!new StateMachine('sm_globalWebinarSession')
+!sm_globalWebinarSession.name := 'globalWebinarSession'
+
+!new State('st_web_lobby')
+!st_web_lobby.name := 'lobby'
+!new State('st_web_preflightChecks')
+!st_web_preflightChecks.name := 'preflightChecks'
+!new State('st_web_broadcasting')
+!st_web_broadcasting.name := 'broadcasting'
+!new State('st_web_audienceQnA')
+!st_web_audienceQnA.name := 'audienceQnA'
+!new State('st_web_intermission')
+!st_web_intermission.name := 'intermission'
+!new State('st_web_wrappingUp')
+!st_web_wrappingUp.name := 'wrappingUp'
+!new State('st_web_archived')
+!st_web_archived.name := 'archived'
+
+!insert (sm_globalWebinarSession, st_web_lobby) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_preflightChecks) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_broadcasting) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_audienceQnA) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_intermission) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_wrappingUp) into StateMachineContainsStates
+!insert (sm_globalWebinarSession, st_web_archived) into StateMachineContainsStates
+
+!insert (sm_globalWebinarSession, st_web_lobby) into StateMachineStartsStates
+
+!new Transition('tr_web_autoPreflight')
+!tr_web_autoPreflight.name := 'autoPreflight'
+!new Transition('tr_web_abortNoHost')
+!tr_web_abortNoHost.name := 'abortNoHost'
+!new Transition('tr_web_startBroadcast')
+!tr_web_startBroadcast.name := 'startBroadcast'
+!new Transition('tr_web_periodicHeartbeat')
+!tr_web_periodicHeartbeat.name := 'periodicHeartbeat'
+!new Transition('tr_web_openQnA')
+!tr_web_openQnA.name := 'openQnA'
+!new Transition('tr_web_closeQnA')
+!tr_web_closeQnA.name := 'closeQnA'
+!new Transition('tr_web_startIntermission')
+!tr_web_startIntermission.name := 'startIntermission'
+!new Transition('tr_web_resumeAfterBreak')
+!tr_web_resumeAfterBreak.name := 'resumeAfterBreak'
+!new Transition('tr_web_endSession')
+!tr_web_endSession.name := 'endSession'
+!new Transition('tr_web_finalizeArchive')
+!tr_web_finalizeArchive.name := 'finalizeArchive'
+
+!insert (sm_globalWebinarSession, tr_web_autoPreflight) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_abortNoHost) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_startBroadcast) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_periodicHeartbeat) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_openQnA) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_closeQnA) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_startIntermission) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_resumeAfterBreak) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_endSession) into StateMachineContainsTransitions
+!insert (sm_globalWebinarSession, tr_web_finalizeArchive) into StateMachineContainsTransitions
+
+!insert (st_web_lobby, tr_web_autoPreflight) into StateTransition
+!insert (tr_web_autoPreflight, st_web_preflightChecks) into TransitionState
+
+!insert (st_web_lobby, tr_web_abortNoHost) into StateTransition
+!insert (tr_web_abortNoHost, st_web_archived) into TransitionState
+
+!insert (st_web_preflightChecks, tr_web_startBroadcast) into StateTransition
+!insert (tr_web_startBroadcast, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_periodicHeartbeat) into StateTransition
+!insert (tr_web_periodicHeartbeat, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_openQnA) into StateTransition
+!insert (tr_web_openQnA, st_web_audienceQnA) into TransitionState
+
+!insert (st_web_audienceQnA, tr_web_closeQnA) into StateTransition
+!insert (tr_web_closeQnA, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_startIntermission) into StateTransition
+!insert (tr_web_startIntermission, st_web_intermission) into TransitionState
+
+!insert (st_web_intermission, tr_web_resumeAfterBreak) into StateTransition
+!insert (tr_web_resumeAfterBreak, st_web_broadcasting) into TransitionState
+
+!insert (st_web_broadcasting, tr_web_endSession) into StateTransition
+!insert (tr_web_endSession, st_web_wrappingUp) into TransitionState
+
+!insert (st_web_wrappingUp, tr_web_finalizeArchive) into StateTransition
+!insert (tr_web_finalizeArchive, st_web_archived) into TransitionState
+
+!new TimeEvent('te_web_t_autoPreflight')
+!te_web_t_autoPreflight.time := 300
+!insert (tr_web_autoPreflight, te_web_t_autoPreflight) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_abortNoHost')
+!te_web_t_abortNoHost.time := 1800
+!insert (tr_web_abortNoHost, te_web_t_abortNoHost) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_startBroadcast')
+!te_web_t_startBroadcast.time := 120
+!insert (tr_web_startBroadcast, te_web_t_startBroadcast) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_periodicHeartbeat')
+!te_web_t_periodicHeartbeat.time := 60
+!insert (tr_web_periodicHeartbeat, te_web_t_periodicHeartbeat) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_openQnA')
+!te_web_t_openQnA.time := 900
+!insert (tr_web_openQnA, te_web_t_openQnA) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_closeQnA')
+!te_web_t_closeQnA.time := 600
+!insert (tr_web_closeQnA, te_web_t_closeQnA) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_startIntermission')
+!te_web_t_startIntermission.time := 2700
+!insert (tr_web_startIntermission, te_web_t_startIntermission) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_resumeAfterBreak')
+!te_web_t_resumeAfterBreak.time := 600
+!insert (tr_web_resumeAfterBreak, te_web_t_resumeAfterBreak) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_endSession')
+!te_web_t_endSession.time := 3600
+!insert (tr_web_endSession, te_web_t_endSession) into TransitionContainsEvents
+
+!new TimeEvent('te_web_t_finalizeArchive')
+!te_web_t_finalizeArchive.time := 180
+!insert (tr_web_finalizeArchive, te_web_t_finalizeArchive) into TransitionContainsEvents

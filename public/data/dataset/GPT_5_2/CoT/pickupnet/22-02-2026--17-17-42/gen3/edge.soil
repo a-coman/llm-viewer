@@ -1,0 +1,139 @@
+!new Station('S3_EDGE3')
+!new Station('S4_EDGE3')
+
+!new Driver('EDGE3_D20')
+!EDGE3_D20.id := 'DRV-EDGE-020'
+!EDGE3_D20.name := 'Marta Nowak'
+
+!new Driver('EDGE3_D30')
+!EDGE3_D30.id := 'DRV-EDGE-030'
+!EDGE3_D30.name := 'Ravi Patel'
+
+!new Driver('EDGE3_D31')
+!EDGE3_D31.id := 'DRV-EDGE-031'
+!EDGE3_D31.name := 'Léa Dubois'
+
+!insert (S3_EDGE3, EDGE3_D20) into StationContainsDriver
+!insert (S4_EDGE3, EDGE3_D30) into StationContainsDriver
+!insert (S4_EDGE3, EDGE3_D31) into StationContainsDriver
+
+!new Customer('EDGE3_C20')
+!EDGE3_C20.id := 'CUS-EDGE-2001'
+!EDGE3_C20.name := 'Chinwe Okafor'
+!EDGE3_C20.twitterUserName := '@chinwe_okafor'
+
+!new Customer('EDGE3_C21')
+!EDGE3_C21.id := 'CUS-EDGE-2002'
+!EDGE3_C21.name := 'Søren Mikkelsen'
+!EDGE3_C21.twitterUserName := '@soren_mk'
+
+!insert (S3_EDGE3, EDGE3_C20) into StationContainsCustomer
+!insert (S3_EDGE3, EDGE3_C21) into StationContainsCustomer
+
+!new Address('A201')
+!A201.text := 'Kenyatta Market, back service gate, Nairobi, Kenya'
+!new GeoLocation('GL201')
+!GL201.latitude := -1.3032
+!GL201.longitude := 36.7859
+!insert (A201, GL201) into AddressContainsGeoLocation
+
+!new Address('A202')
+!A202.text := 'Kenyatta Market, main entrance, Nairobi, Kenya'
+!new GeoLocation('GL202')
+!GL202.latitude := -1.3030
+!GL202.longitude := 36.7862
+!insert (A202, GL202) into AddressContainsGeoLocation
+
+!new Address('A203')
+!A203.text := 'Virtual pickup point “Cloud Locker 7” (no physical street address)'
+!new GeoLocation('GL203')
+!GL203.latitude := 91.5
+!GL203.longitude := 181.2
+!insert (A203, GL203) into AddressContainsGeoLocation
+
+!new Address('A204')
+!A204.text := 'Virtual delivery endpoint “Cloud Locker 8” (no physical street address)'
+!new GeoLocation('GL204')
+!GL204.latitude := -91.0
+!GL204.longitude := -181.0
+!insert (A204, GL204) into AddressContainsGeoLocation
+
+!new Address('A205')
+!A205.text := 'Unnamed dirt track, “Kilometer 0” marker, roadside pull-off'
+!new GeoLocation('GL205')
+!GL205.latitude := 0.0
+!GL205.longitude := 30.0
+!insert (A205, GL205) into AddressContainsGeoLocation
+
+!new Address('A206')
+!A206.text := 'Unnamed dirt track, “Kilometer 0” marker, opposite shoulder'
+!new GeoLocation('GL206')
+!GL206.latitude := 0.0
+!GL206.longitude := 30.0001
+!insert (A206, GL206) into AddressContainsGeoLocation
+
+!new Address('A207')
+!A207.text := 'Nuuk supply shed, Nuuk, Greenland'
+!new GeoLocation('GL207')
+!GL207.latitude := 64.1835
+!GL207.longitude := -51.7216
+!insert (A207, GL207) into AddressContainsGeoLocation
+
+!new Address('A208')
+!A208.text := 'Frederiksberg parcel desk, Copenhagen, Denmark'
+!new GeoLocation('GL208')
+!GL208.latitude := 55.6796
+!GL208.longitude := 12.5346
+!insert (A208, GL208) into AddressContainsGeoLocation
+
+!new Shipment('SHPEDGE2001')
+!SHPEDGE2001.id := 'SHP-EDGE-2001'
+!SHPEDGE2001.status := #NEW
+
+!new Shipment('SHPEDGE2002')
+!SHPEDGE2002.id := 'SHP-EDGE-2002'
+!SHPEDGE2002.status := #DELIVERED
+
+!new Shipment('SHPEDGE2003')
+!SHPEDGE2003.id := 'SHP-EDGE-2003'
+!SHPEDGE2003.status := #UNDERWAY
+
+!new Shipment('SHPEDGE2004')
+!SHPEDGE2004.id := 'SHP-EDGE-2004'
+!SHPEDGE2004.status := #ASSIGNED
+
+!new Shipment('SHPEDGE2005')
+!SHPEDGE2005.id := 'SHP-EDGE-2005'
+!SHPEDGE2005.status := #ASSIGNED
+
+!insert (S4_EDGE3, SHPEDGE2001) into StationShipment
+!insert (S4_EDGE3, SHPEDGE2002) into StationShipment
+!insert (S4_EDGE3, SHPEDGE2003) into StationShipment
+!insert (S4_EDGE3, SHPEDGE2004) into StationShipment
+!insert (S3_EDGE3, SHPEDGE2005) into StationShipment
+
+!insert (EDGE3_C20, SHPEDGE2001) into CustomerConsistsOfShipment
+!insert (EDGE3_C20, SHPEDGE2002) into CustomerConsistsOfShipment
+!insert (EDGE3_C20, SHPEDGE2003) into CustomerConsistsOfShipment
+!insert (EDGE3_C20, SHPEDGE2004) into CustomerConsistsOfShipment
+!insert (EDGE3_C21, SHPEDGE2005) into CustomerConsistsOfShipment
+
+!insert (SHPEDGE2001, A201) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE2001, A202) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE2002, A202) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE2002, A201) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE2003, A203) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE2003, A204) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE2004, A205) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE2004, A206) into ShipmentContainsDeliveryAddress
+
+!insert (SHPEDGE2005, A207) into ShipmentContainsPickUpAddress
+!insert (SHPEDGE2005, A208) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE3_D30, SHPEDGE2001) into DriverShipment
+!insert (EDGE3_D30, SHPEDGE2002) into DriverShipment
+!insert (EDGE3_D31, SHPEDGE2004) into DriverShipment
+!insert (EDGE3_D20, SHPEDGE2005) into DriverShipment

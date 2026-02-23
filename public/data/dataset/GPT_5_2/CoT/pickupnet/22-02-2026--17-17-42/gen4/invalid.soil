@@ -1,0 +1,74 @@
+!new Station('YVRNORTH')
+
+!new Customer('CCA880')
+!CCA880.id := 'C-CA-880'
+!CCA880.name := 'Noah Chen'
+!CCA880.twitterUserName := '@noahchen_van'
+!insert (YVRNORTH, CCA880) into StationContainsCustomer
+
+!new Driver('DCA100A')
+!DCA100A.id := 'D-CA-100'
+!DCA100A.name := 'Avery Singh'
+
+!new Driver('DCA100B')
+!DCA100B.id := 'D-CA-100'
+!DCA100B.name := 'Avery S. (Subcontract)'
+
+!new Driver('DCA219')
+!DCA219.id := 'D-CA-219'
+!DCA219.name := 'Élodie Martin'
+
+!insert (YVRNORTH, DCA100A) into StationContainsDriver
+!insert (YVRNORTH, DCA100B) into StationContainsDriver
+!insert (YVRNORTH, DCA219) into StationContainsDriver
+
+!new Address('AYVRPICK01')
+!AYVRPICK01.text := 'Gastown Retail Counter, 101 Water St, Vancouver, BC V6B 1A7, Canada'
+!new GeoLocation('GLYVRWATER')
+!GLYVRWATER.latitude := 49.2832
+!GLYVRWATER.longitude := -123.1076
+!insert (AYVRPICK01, GLYVRWATER) into AddressContainsGeoLocation
+
+!new Address('AYVRPICK02')
+!AYVRPICK02.text := 'Micro-fulfillment unit, 55 Powell St, Vancouver, BC V6A 1E9, Canada'
+!new GeoLocation('GLYVRPOWELL')
+!GLYVRPOWELL.latitude := 49.2838
+!GLYVRPOWELL.longitude := -123.0989
+!insert (AYVRPICK02, GLYVRPOWELL) into AddressContainsGeoLocation
+
+!new Address('AYVRDEL01')
+!AYVRDEL01.text := 'Parcel concierge desk, 1288 Alberni St, Vancouver, BC V6E 4N5, Canada'
+!new GeoLocation('GLYVRALBERNI')
+!GLYVRALBERNI.latitude := 49.2891
+!GLYVRALBERNI.longitude := -123.1283
+!insert (AYVRDEL01, GLYVRALBERNI) into AddressContainsGeoLocation
+
+!new Address('AYVRDEL02')
+!AYVRDEL02.text := 'UBC Residence Front Desk, 6331 Crescent Rd, Vancouver, BC V6T 1Z1, Canada'
+!new GeoLocation('GLYVRUBC')
+!GLYVRUBC.latitude := 49.2623
+!GLYVRUBC.longitude := -123.2506
+!insert (AYVRDEL02, GLYVRUBC) into AddressContainsGeoLocation
+
+!new Shipment('SHPCA6009')
+!SHPCA6009.id := 'SHP-CA-6009'
+!SHPCA6009.status := #ASSIGNED
+
+!new Shipment('SHPCA6010')
+!SHPCA6010.id := 'SHP-CA-6010'
+!SHPCA6010.status := #UNDERWAY
+
+!insert (YVRNORTH, SHPCA6009) into StationShipment
+!insert (YVRNORTH, SHPCA6010) into StationShipment
+
+!insert (CCA880, SHPCA6009) into CustomerConsistsOfShipment
+!insert (CCA880, SHPCA6010) into CustomerConsistsOfShipment
+
+!insert (SHPCA6009, AYVRPICK01) into ShipmentContainsPickUpAddress
+!insert (SHPCA6009, AYVRPICK02) into ShipmentContainsPickUpAddress
+!insert (SHPCA6009, AYVRDEL01) into ShipmentContainsDeliveryAddress
+!insert (DCA100A, SHPCA6009) into DriverShipment
+
+!insert (SHPCA6010, AYVRPICK01) into ShipmentContainsPickUpAddress
+!insert (SHPCA6010, AYVRDEL02) into ShipmentContainsDeliveryAddress
+!insert (DCA219, SHPCA6010) into DriverShipment

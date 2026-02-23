@@ -1,0 +1,71 @@
+!new Customer('C28')
+!C28.firstName := 'Khadija (خديجة)'
+!C28.lastName := 'Aït Benhaddou'
+
+!new Booking('B123456')
+!B123456.bookingId := 123456
+!B123456.startDate := '١٤٤٧-٠٩-٠١ (Hijri)'
+!B123456.endDate := '١٤٤٧-٠٩-٠٢ (Hijri)'
+!B123456.confirmed := true
+!B123456.canceled := false
+
+!new RoomReservation('RR_MULTIROOM_123456')
+!RR_MULTIROOM_123456.checkInDate := 'next Friday after Maghrib'
+!RR_MULTIROOM_123456.checkOutDate := 'yesterday'
+
+!new Room('RM12_123456')
+!RM12_123456.roomNumber := 12
+!RM12_123456.numBeds := 1
+!RM12_123456.pricePerNight := 0.0
+!RM12_123456.occupied := false
+!RM12_123456.blocked := false
+
+!new Room('RM1201_123456')
+!RM1201_123456.roomNumber := 1201
+!RM1201_123456.numBeds := 2
+!RM1201_123456.pricePerNight := 0.02
+!RM1201_123456.occupied := true
+!RM1201_123456.blocked := false
+
+!new Room('RM700_123456')
+!RM700_123456.roomNumber := 700
+!RM700_123456.numBeds := 4
+!RM700_123456.pricePerNight := 8888.88
+!RM700_123456.occupied := false
+!RM700_123456.blocked := true
+
+!new Room('RM100000_123456')
+!RM100000_123456.roomNumber := 100000
+!RM100000_123456.numBeds := 3
+!RM100000_123456.pricePerNight := 1.9999
+!RM100000_123456.occupied := true
+!RM100000_123456.blocked := true
+
+!new Bill('BL424242')
+!BL424242.billId := 424242
+!BL424242.price := 0.0
+
+!new FreeRoomTypesDTO('D52')
+!D52.roomTypeDescription := 'Riād courtyard room (traditional), shared bath'
+!D52.numBeds := 1
+!D52.pricePerNight := 60.0
+!D52.numFreeRooms := 0
+
+!new FreeRoomTypesDTO('D53')
+!D53.roomTypeDescription := 'Desert tent platform (stargazing), bring your own bedding'
+!D53.numBeds := 1
+!D53.pricePerNight := 5.0
+!D53.numFreeRooms := 99999
+
+!insert (B123456, C28) into BookingCustomer
+
+!insert (B123456, RR_MULTIROOM_123456) into BookingRoomReservation
+
+!insert (RR_MULTIROOM_123456, RM12_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM1201_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM700_123456) into RoomReservationRoom
+!insert (RR_MULTIROOM_123456, RM100000_123456) into RoomReservationRoom
+
+!insert (B123456, BL424242) into BookingBill
+
+!insert (BL424242, RR_MULTIROOM_123456) into BillRoomReservation

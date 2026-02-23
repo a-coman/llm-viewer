@@ -1,0 +1,118 @@
+!new Client('clientX1')
+!clientX1.clientId := 101
+!clientX1.isSuspended := false
+
+!new Client('clientX2')
+!clientX2.clientId := 202
+!clientX2.isSuspended := true
+
+!new Client('clientX3')
+!clientX3.clientId := 303
+!clientX3.isSuspended := false
+
+!new Movie('movieX1')
+!movieX1.title := 'Metro Chase'
+!movieX1.availableCopies := 2
+!movieX1.genre := #Action
+
+!new Movie('movieX2')
+!movieX2.title := 'Laughing in Lagos'
+!movieX2.availableCopies := 0
+!movieX2.genre := #Comedy
+
+!new Movie('movieX3')
+!movieX3.title := 'Samurai Weekend'
+!movieX3.availableCopies := 1
+!movieX3.genre := #Comedy
+
+!new Series('seriesX1')
+!seriesX1.title := 'Nordic Noir — Season 1'
+!seriesX1.availableCopies := 1
+!seriesX1.episode := 3
+
+!new Series('seriesX2')
+!seriesX2.title := 'Hearts of Seoul — Season 2'
+!seriesX2.availableCopies := 4
+!seriesX2.episode := 12
+
+!new Series('seriesX3')
+!seriesX3.title := 'Río de Pasiones — Temporada 1'
+!seriesX3.availableCopies := 3
+!seriesX3.episode := 1
+
+!new Actor('actorX1')
+!actorX1.name := 'Amina Okafor'
+
+!new Actor('actorX2')
+!actorX2.name := 'Kenji Tanaka'
+
+!new Actor('actorX3')
+!actorX3.name := 'Ingrid Svendsen'
+
+!new Actor('actorX4')
+!actorX4.name := 'Sofía Martínez'
+
+!new Actor('actorX5')
+!actorX5.name := 'Min-ji Park'
+
+!new Actor('actorX6')
+!actorX6.name := 'Idris El-Masri'
+
+!new Actor('actorX7')
+!actorX7.name := 'João Silva'
+
+!new Actor('actorX8')
+!actorX8.name := 'Maya Chen'
+
+!new Rental('rentalX1')
+!rentalX1.date := Date('2026-01-05')
+
+!new Rental('rentalX2')
+!rentalX2.date := Date('2026-01-06')
+
+!new Rental('rentalX3')
+!rentalX3.date := Date('2026-01-10')
+
+!new Rental('rentalX4')
+!rentalX4.date := Date('2026-02-01')
+
+!new Rental('rentalX5')
+!rentalX5.date := Date('2026-02-15')
+
+!insert (clientX1, rentalX1) into ClientRental
+!insert (clientX1, rentalX2) into ClientRental
+!insert (clientX2, rentalX3) into ClientRental
+!insert (clientX3, rentalX4) into ClientRental
+!insert (clientX2, rentalX5) into ClientRental
+
+!insert (rentalX1, movieX1) into RentalCassette
+!insert (rentalX1, seriesX1) into RentalCassette
+
+!insert (rentalX2, movieX2) into RentalCassette
+
+!insert (rentalX3, movieX1) into RentalCassette
+!insert (rentalX3, seriesX2) into RentalCassette
+!insert (rentalX3, seriesX3) into RentalCassette
+
+!insert (rentalX4, seriesX1) into RentalCassette
+!insert (rentalX4, movieX3) into RentalCassette
+
+!insert (rentalX5, movieX3) into RentalCassette
+
+!insert (movieX1, actorX2) into CassetteActor
+!insert (movieX1, actorX6) into CassetteActor
+
+!insert (movieX2, actorX1) into CassetteActor
+!insert (movieX2, actorX7) into CassetteActor
+
+!insert (movieX3, actorX2) into CassetteActor
+!insert (movieX3, actorX3) into CassetteActor
+
+!insert (seriesX1, actorX3) into CassetteActor
+!insert (seriesX1, actorX6) into CassetteActor
+
+!insert (seriesX2, actorX5) into CassetteActor
+!insert (seriesX2, actorX2) into CassetteActor
+
+!insert (seriesX3, actorX4) into CassetteActor
+!insert (seriesX3, actorX7) into CassetteActor

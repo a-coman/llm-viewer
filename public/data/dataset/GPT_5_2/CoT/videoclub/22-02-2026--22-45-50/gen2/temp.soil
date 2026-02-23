@@ -1,0 +1,164 @@
+!new Client('clientCompC10')
+!clientCompC10.clientId := 11
+!clientCompC10.isSuspended := false
+
+!new Client('clientCompC11')
+!clientCompC11.clientId := 57
+!clientCompC11.isSuspended := true
+
+!new Client('clientCompC12')
+!clientCompC12.clientId := 88
+!clientCompC12.isSuspended := false
+
+!new Client('clientCompC13')
+!clientCompC13.clientId := 144
+!clientCompC13.isSuspended := false
+
+!new Movie('movieCompM10')
+!movieCompM10.title := 'Desert Drift'
+!movieCompM10.availableCopies := 5
+!movieCompM10.genre := #Action
+
+!new Movie('movieCompM11')
+!movieCompM11.title := 'Paris Pranks'
+!movieCompM11.availableCopies := 1
+!movieCompM11.genre := #Comedy
+
+!new Movie('movieCompM12')
+!movieCompM12.title := 'Mumbai Mayhem'
+!movieCompM12.availableCopies := 0
+!movieCompM12.genre := #Action
+
+!new Movie('movieCompM13')
+!movieCompM13.title := 'The Quiet Glacier'
+!movieCompM13.availableCopies := 2
+!movieCompM13.genre := #Action
+
+!new Movie('movieCompM14')
+!movieCompM14.title := 'Café Carousel'
+!movieCompM14.availableCopies := 3
+!movieCompM14.genre := #Comedy
+
+!new Movie('movieCompM15')
+!movieCompM15.title := 'Kyoto Kicks'
+!movieCompM15.availableCopies := 2
+!movieCompM15.genre := #Action
+
+!new Series('seriesCompS10')
+!seriesCompS10.title := 'Galactic Archivists — Volume 1'
+!seriesCompS10.availableCopies := 2
+!seriesCompS10.episode := 7
+
+!new Series('seriesCompS11')
+!seriesCompS11.title := 'Tales of the Silk Road — Season 3'
+!seriesCompS11.availableCopies := 0
+!seriesCompS11.episode := 2
+
+!new Series('seriesCompS12')
+!seriesCompS12.title := 'Cape Town Beat — Season 1'
+!seriesCompS12.availableCopies := 1
+!seriesCompS12.episode := 9
+
+!new Actor('actorCompA10')
+!actorCompA10.name := 'Leïla Benali'
+
+!new Actor('actorCompA11')
+!actorCompA11.name := 'Arjun Mehta'
+
+!new Actor('actorCompA12')
+!actorCompA12.name := 'Chloé Dubois'
+
+!new Actor('actorCompA13')
+!actorCompA13.name := 'Hiroshi Sato'
+
+!new Actor('actorCompA14')
+!actorCompA14.name := 'Naledi Khumalo'
+
+!new Actor('actorCompA15')
+!actorCompA15.name := 'Diego Fernández'
+
+!new Actor('actorCompA16')
+!actorCompA16.name := 'Sven Larsson'
+
+!new Actor('actorCompA17')
+!actorCompA17.name := 'Yara Haddad'
+
+!new Actor('actorCompA18')
+!actorCompA18.name := 'Omar Aziz'
+
+!new Actor('actorCompA19')
+!actorCompA19.name := 'Evelyn King'
+
+!new Rental('rentalCompR10')
+!rentalCompR10.date := Date('2025-11-20')
+
+!new Rental('rentalCompR11')
+!rentalCompR11.date := Date('2025-12-02')
+
+!new Rental('rentalCompR12')
+!rentalCompR12.date := Date('2026-01-18')
+
+!new Rental('rentalCompR13')
+!rentalCompR13.date := Date('2026-01-25')
+
+!new Rental('rentalCompR14')
+!rentalCompR14.date := Date('2026-02-05')
+
+!new Rental('rentalCompR15')
+!rentalCompR15.date := Date('2026-02-20')
+
+!insert (clientCompC10, rentalCompR10) into ClientRental
+!insert (clientCompC10, rentalCompR11) into ClientRental
+!insert (clientCompC10, rentalCompR12) into ClientRental
+!insert (clientCompC11, rentalCompR13) into ClientRental
+!insert (clientCompC12, rentalCompR14) into ClientRental
+!insert (clientCompC12, rentalCompR15) into ClientRental
+
+!insert (rentalCompR10, movieCompM10) into RentalCassette
+!insert (rentalCompR10, movieCompM11) into RentalCassette
+!insert (rentalCompR10, seriesCompS10) into RentalCassette
+!insert (rentalCompR10, movieCompM14) into RentalCassette
+
+!insert (rentalCompR11, seriesCompS11) into RentalCassette
+
+!insert (rentalCompR12, movieCompM13) into RentalCassette
+!insert (rentalCompR12, seriesCompS12) into RentalCassette
+
+!insert (rentalCompR13, movieCompM12) into RentalCassette
+!insert (rentalCompR13, movieCompM10) into RentalCassette
+
+!insert (rentalCompR14, movieCompM11) into RentalCassette
+!insert (rentalCompR14, seriesCompS10) into RentalCassette
+!insert (rentalCompR14, seriesCompS12) into RentalCassette
+
+!insert (rentalCompR15, movieCompM14) into RentalCassette
+
+!insert (movieCompM10, actorCompA10) into CassetteActor
+!insert (movieCompM10, actorCompA11) into CassetteActor
+!insert (movieCompM10, actorCompA18) into CassetteActor
+
+!insert (movieCompM11, actorCompA12) into CassetteActor
+!insert (movieCompM11, actorCompA15) into CassetteActor
+
+!insert (movieCompM12, actorCompA11) into CassetteActor
+!insert (movieCompM12, actorCompA17) into CassetteActor
+
+!insert (movieCompM13, actorCompA14) into CassetteActor
+!insert (movieCompM13, actorCompA16) into CassetteActor
+!insert (movieCompM13, actorCompA10) into CassetteActor
+
+!insert (movieCompM14, actorCompA12) into CassetteActor
+!insert (movieCompM14, actorCompA14) into CassetteActor
+
+!insert (movieCompM15, actorCompA13) into CassetteActor
+!insert (movieCompM15, actorCompA16) into CassetteActor
+
+!insert (seriesCompS10, actorCompA15) into CassetteActor
+!insert (seriesCompS10, actorCompA18) into CassetteActor
+
+!insert (seriesCompS11, actorCompA10) into CassetteActor
+!insert (seriesCompS11, actorCompA11) into CassetteActor
+!insert (seriesCompS11, actorCompA17) into CassetteActor
+
+!insert (seriesCompS12, actorCompA14) into CassetteActor
+!insert (seriesCompS12, actorCompA18) into CassetteActor

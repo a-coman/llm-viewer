@@ -1,0 +1,43 @@
+!new Currency('currencySGD_DCC')
+!currencySGD_DCC.name := 'Singapore Dollar'
+!currencySGD_DCC.abbreviation := 'SGD'
+
+!new Currency('currencyUSD_DCC')
+!currencyUSD_DCC.name := 'US Dollar'
+!currencyUSD_DCC.abbreviation := 'USD'
+
+!new Expense('expenseSingaporeConferenceDCC')
+!expenseSingaporeConferenceDCC.amount := 1345.00
+!expenseSingaporeConferenceDCC.startDate := Date('2026-02-16')
+!expenseSingaporeConferenceDCC.endDate := Date('2026-02-18')
+
+!new Bill('billSingaporeSG1')
+!billSingaporeSG1.amount := 1280.00
+!billSingaporeSG1.category := 'Hotel (3 nights, invoice shows SGD + DCC USD)'
+!billSingaporeSG1.date := Date('2026-02-18')
+!billSingaporeSG1.paymentMethod := #CREDIT_CARD
+!billSingaporeSG1.status := #PENDING
+
+!new Bill('billSingaporeSG2')
+!billSingaporeSG2.amount := 65.00
+!billSingaporeSG2.category := 'Metro & bus (EZ-Link top-up)'
+!billSingaporeSG2.date := Date('2026-02-17')
+!billSingaporeSG2.paymentMethod := #CASH
+!billSingaporeSG2.status := #VERIFIED
+
+!insert (expenseSingaporeConferenceDCC, billSingaporeSG1) into ExpenseContainsBills
+!insert (expenseSingaporeConferenceDCC, billSingaporeSG2) into ExpenseContainsBills
+
+!insert (billSingaporeSG1, currencySGD_DCC) into BillCurrency
+!insert (billSingaporeSG1, currencyUSD_DCC) into BillCurrency
+!insert (billSingaporeSG2, currencySGD_DCC) into BillCurrency
+
+!new Comment('commentSingaporeDCC1')
+!commentSingaporeDCC1.text := 'Hotel receipt lists 1,280.00 SGD, but terminal also printed Dynamic Currency Conversion showing 950.00 USD. Finance asked to keep both figures for audit.'
+
+!new Comment('commentSingaporeDCC2')
+!commentSingaporeDCC2.text := '请注意：同一笔交易有本地币种与结算币种两种金额 (SGD vs USD).'
+
+!insert (expenseSingaporeConferenceDCC, commentSingaporeDCC1) into ExpenseComment
+!insert (expenseSingaporeConferenceDCC, commentSingaporeDCC2) into ExpenseComment
+

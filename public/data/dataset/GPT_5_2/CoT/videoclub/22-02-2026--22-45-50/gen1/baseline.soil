@@ -1,0 +1,44 @@
+!new Client('clientC1')
+!clientC1.clientId := 101
+!clientC1.isSuspended := false
+
+!new Client('clientC2')
+!clientC2.clientId := 202
+!clientC2.isSuspended := true
+
+!new Rental('rentalR1')
+!rentalR1.date := Date('2026-02-10')
+
+!new Rental('rentalR2')
+!rentalR2.date := Date('2026-02-18')
+
+!new Movie('movieM1')
+!movieM1.title := 'Metro Pursuit'
+!movieM1.availableCopies := 3
+!movieM1.genre := #Action
+
+!new Series('seriesS1')
+!seriesS1.title := 'Café Detectives'
+!seriesS1.availableCopies := 0
+!seriesS1.episode := 5
+
+!new Actor('actorA1')
+!actorA1.name := 'Amina El-Sayed'
+
+!new Actor('actorA2')
+!actorA2.name := 'Kenji Tanaka'
+
+!new Actor('actorA3')
+!actorA3.name := 'Lucía Herrera'
+
+!insert (clientC1, rentalR1) into ClientRental
+!insert (clientC1, rentalR2) into ClientRental
+
+!insert (rentalR1, movieM1) into RentalCassette
+!insert (rentalR1, seriesS1) into RentalCassette
+!insert (rentalR2, movieM1) into RentalCassette
+
+!insert (movieM1, actorA1) into CassetteActor
+!insert (movieM1, actorA2) into CassetteActor
+!insert (seriesS1, actorA3) into CassetteActor
+!insert (seriesS1, actorA2) into CassetteActor

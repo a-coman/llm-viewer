@@ -9,35 +9,35 @@
 ## Statemachine
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9340 | 0.9986 | 0.8432 |
+| ALL Generations | 0.9437 | 0.9995 | 0.8439 |
 ## Bank
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9846 | 0.9984 | 0.9253 |
+| ALL Generations | 0.9865 | 0.9991 | 0.9258 |
 ## PickupNet
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9950 | 0.9993 | 0.8956 |
+| ALL Generations | 0.9962 | 0.9999 | 0.8946 |
 ## MyExpenses
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9727 | 0.9946 | 0.8919 |
+| ALL Generations | 0.9724 | 0.9965 | 0.8936 |
 ## VideoClub
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9580 | 0.9981 | 0.8391 |
+| ALL Generations | 0.9592 | 0.9998 | 0.8392 |
 ## Football
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9660 | 0.9990 | 0.8614 |
+| ALL Generations | 0.9647 | 0.9992 | 0.8623 |
 ## HotelManagement
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9755 | 0.9976 | 0.8582 |
+| ALL Generations | 0.9756 | 0.9987 | 0.8622 |
 ## VehicleRental
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9892 | 0.9988 | 0.8916 |
+| ALL Generations | 0.9913 | 0.9999 | 0.8901 |
 ## Example1
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
@@ -45,11 +45,11 @@
 ## Restaurant
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | 0.9788 | 0.9995 | 0.8842 |
+| ALL Generations | 0.9788 | 0.9998 | 0.8844 |
 ## AddressBook
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
-| ALL Generations | NaN | 0.9993 | 0.9007 |
+| ALL Generations | NaN | 0.9995 | 0.9003 |
 ## Example3
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|

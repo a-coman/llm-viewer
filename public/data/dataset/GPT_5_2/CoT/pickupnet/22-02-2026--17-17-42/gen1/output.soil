@@ -1,0 +1,554 @@
+!new Station('S1')
+
+!new Customer('CUST0001')
+!CUST0001.id := 'CUST-0001'
+!CUST0001.name := 'Amina El-Hassan'
+!CUST0001.twitterUserName := '@Amina_الرحلات'
+
+!new Shipment('SHP0001')
+!SHP0001.id := 'SHP-0001'
+!SHP0001.status := #NEW
+
+!new Address('APU001')
+!APU001.text := 'Amundsen–Scott South Pole Station, Antarctic Plateau (pickup point)'
+!new GeoLocation('GPU001')
+!GPU001.latitude := -90.0
+!GPU001.longitude := -180.0
+
+!new Address('ADL001')
+!ADL001.text := 'Geographic North Pole research drop zone (delivery point)'
+!new GeoLocation('GDL001')
+!GDL001.latitude := 90.0
+!GDL001.longitude := 180.0
+
+!insert (S1, CUST0001) into StationContainsCustomer
+!insert (S1, SHP0001) into StationShipment
+!insert (CUST0001, SHP0001) into CustomerConsistsOfShipment
+
+!insert (SHP0001, APU001) into ShipmentContainsPickUpAddress
+!insert (SHP0001, ADL001) into ShipmentContainsDeliveryAddress
+
+!insert (APU001, GPU001) into AddressContainsGeoLocation
+!insert (ADL001, GDL001) into AddressContainsGeoLocation
+
+!new Station('S1')
+
+!new Driver('D1001')
+!D1001.id := 'D-1001'
+!D1001.name := 'Marek Nowak'
+
+!new Driver('D1002')
+!D1002.id := 'D-1002'
+!D1002.name := 'Aylin Demir'
+
+!insert (S1, D1001) into StationContainsDriver
+!insert (S1, D1002) into StationContainsDriver
+
+!new Customer('C2001')
+!C2001.id := 'C-2001'
+!C2001.name := 'Hannah Müller'
+!C2001.twitterUserName := '@hannahmueller'
+
+!new Customer('C2002')
+!C2002.id := 'C-2002'
+!C2002.name := 'Kenji Sato'
+!C2002.twitterUserName := '@kenjisato_berlin'
+
+!insert (S1, C2001) into StationContainsCustomer
+!insert (S1, C2002) into StationContainsCustomer
+
+!new Address('APU1')
+!APU1.text := 'Kantstraße 12, 10623 Berlin, Germany'
+!new GeoLocation('GL1')
+!GL1.latitude := 52.5076
+!GL1.longitude := 13.3290
+!insert (APU1, GL1) into AddressContainsGeoLocation
+
+!new Address('ADEL1')
+!ADEL1.text := 'Revaler Str. 99, 10245 Berlin, Germany'
+!new GeoLocation('GL2')
+!GL2.latitude := 52.5070
+!GL2.longitude := 13.4550
+!insert (ADEL1, GL2) into AddressContainsGeoLocation
+
+!new Address('APU2')
+!APU2.text := 'Hardenbergplatz 8, 10623 Berlin, Germany'
+!new GeoLocation('GL3')
+!GL3.latitude := 52.5063
+!GL3.longitude := 13.3335
+!insert (APU2, GL3) into AddressContainsGeoLocation
+
+!new Address('ADEL2')
+!ADEL2.text := 'Tempelhofer Damm 216, 12099 Berlin, Germany'
+!new GeoLocation('GL4')
+!GL4.latitude := 52.4561
+!GL4.longitude := 13.3852
+!insert (ADEL2, GL4) into AddressContainsGeoLocation
+
+!new Shipment('SH3001')
+!SH3001.id := 'SH-3001'
+!SH3001.status := #ASSIGNED
+
+!new Shipment('SH3002')
+!SH3002.id := 'SH-3002'
+!SH3002.status := #NEW
+
+!insert (S1, SH3001) into StationShipment
+!insert (S1, SH3002) into StationShipment
+
+!insert (C2001, SH3001) into CustomerConsistsOfShipment
+!insert (C2002, SH3002) into CustomerConsistsOfShipment
+
+!insert (SH3001, APU1) into ShipmentContainsPickUpAddress
+!insert (SH3001, ADEL1) into ShipmentContainsDeliveryAddress
+
+!insert (SH3002, APU2) into ShipmentContainsPickUpAddress
+!insert (SH3002, ADEL2) into ShipmentContainsDeliveryAddress
+
+!insert (D1001, SH3001) into DriverShipment
+
+!new Station('OSK_HUB')
+!new Station('KYO_HUB')
+
+!new Customer('CJP104_OSK')
+!CJP104_OSK.id := 'C-JP-104'
+!CJP104_OSK.name := 'Yumi Nakamura'
+!CJP104_OSK.twitterUserName := '@yumi_naka'
+
+!new Customer('CJP104_KYO')
+!CJP104_KYO.id := 'C-JP-104'
+!CJP104_KYO.name := 'Yumi Nakamura'
+!CJP104_KYO.twitterUserName := '@yumi_naka'
+
+!insert (OSK_HUB, CJP104_OSK) into StationContainsCustomer
+!insert (KYO_HUB, CJP104_KYO) into StationContainsCustomer
+
+!new Driver('DOSK01_2')
+!DOSK01_2.id := 'D-OSK-01'
+!DOSK01_2.name := 'Haruto Sato'
+
+!new Driver('DOSK02_2')
+!DOSK02_2.id := 'D-OSK-02'
+!DOSK02_2.name := 'Mei Tanaka'
+
+!new Driver('DKYO01_2')
+!DKYO01_2.id := 'D-KYO-01'
+!DKYO01_2.name := 'Jean Dubois'
+
+!insert (OSK_HUB, DOSK01_2) into StationContainsDriver
+!insert (OSK_HUB, DOSK02_2) into StationContainsDriver
+!insert (KYO_HUB, DKYO01_2) into StationContainsDriver
+
+!new Address('AOSKGFO_2')
+!AOSKGFO_2.text := 'グランフロント大阪 北館 3F（Grand Front Osaka North Building 3F）, 3-1 Ofukachō, Kita-ku, Osaka 530-0011, Japan'
+!new GeoLocation('GLOSKGFO_2')
+!GLOSKGFO_2.latitude := 34.7053
+!GLOSKGFO_2.longitude := 135.4949
+!insert (AOSKGFO_2, GLOSKGFO_2) into AddressContainsGeoLocation
+
+!new Address('AKYOPICK_2')
+!AKYOPICK_2.text := '〒600-8216 京都府京都市下京区東塩小路町 901 (Kyoto Station area), Japan'
+!new GeoLocation('GLKYOPICK_2')
+!GLKYOPICK_2.latitude := 34.9855
+!GLKYOPICK_2.longitude := 135.7586
+!insert (AKYOPICK_2, GLKYOPICK_2) into AddressContainsGeoLocation
+
+!new Address('AKYODEST_2')
+!AKYODEST_2.text := '京都大学医学部附属病院, 54 Kawahara-chō, Shōgoin, Sakyo Ward, Kyoto 606-8507, Japan'
+!new GeoLocation('GLKYODEST_2')
+!GLKYODEST_2.latitude := 35.0260
+!GLKYODEST_2.longitude := 135.7809
+!insert (AKYODEST_2, GLKYODEST_2) into AddressContainsGeoLocation
+
+!new Shipment('SHPOSK0007_L1')
+!SHPOSK0007_L1.id := 'SHP-OSK-0007'
+!SHPOSK0007_L1.status := #UNDERWAY
+
+!new Shipment('SHPOSK0007_L2')
+!SHPOSK0007_L2.id := 'SHP-OSK-0007'
+!SHPOSK0007_L2.status := #UNDERWAY
+
+!new Shipment('SHPKYO0031_2')
+!SHPKYO0031_2.id := 'SHP-KYO-0031'
+!SHPKYO0031_2.status := #ASSIGNED
+
+!insert (OSK_HUB, SHPOSK0007_L1) into StationShipment
+!insert (OSK_HUB, SHPOSK0007_L2) into StationShipment
+!insert (KYO_HUB, SHPKYO0031_2) into StationShipment
+
+!insert (CJP104_OSK, SHPOSK0007_L1) into CustomerConsistsOfShipment
+!insert (CJP104_OSK, SHPOSK0007_L2) into CustomerConsistsOfShipment
+!insert (CJP104_KYO, SHPKYO0031_2) into CustomerConsistsOfShipment
+
+!insert (SHPOSK0007_L1, AOSKGFO_2) into ShipmentContainsPickUpAddress
+!insert (SHPOSK0007_L1, AOSKGFO_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPOSK0007_L2, AOSKGFO_2) into ShipmentContainsPickUpAddress
+!insert (SHPOSK0007_L2, AOSKGFO_2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPKYO0031_2, AKYOPICK_2) into ShipmentContainsPickUpAddress
+!insert (SHPKYO0031_2, AKYODEST_2) into ShipmentContainsDeliveryAddress
+
+!insert (DOSK01_2, SHPOSK0007_L1) into DriverShipment
+!insert (DOSK02_2, SHPOSK0007_L2) into DriverShipment
+!insert (DKYO01_2, SHPKYO0031_2) into DriverShipment
+
+!new Station('BCNPortOpsStation')
+
+!new Driver('DRVBCN017')
+!DRVBCN017.id := 'DRV-BCN-017'
+!DRVBCN017.name := 'Jordi Pujol'
+
+!new Driver('DRVBCN023')
+!DRVBCN023.id := 'DRV-BCN-023'
+!DRVBCN023.name := 'Amina El‑Tayeb'
+
+!new Driver('DRVBCN031')
+!DRVBCN031.id := 'DRV-BCN-031'
+!DRVBCN031.name := 'Lukas Schneider'
+
+!new Driver('DRVBCN045')
+!DRVBCN045.id := 'DRV-BCN-045'
+!DRVBCN045.name := 'María Fernanda Ríos'
+
+!insert (BCNPortOpsStation, DRVBCN017) into StationContainsDriver
+!insert (BCNPortOpsStation, DRVBCN023) into StationContainsDriver
+!insert (BCNPortOpsStation, DRVBCN031) into StationContainsDriver
+!insert (BCNPortOpsStation, DRVBCN045) into StationContainsDriver
+
+!new Customer('CUSTBCN1001')
+!CUSTBCN1001.id := 'CUST-BCN-1001'
+!CUSTBCN1001.name := 'Núria Solé'
+!CUSTBCN1001.twitterUserName := '@nuria_sole'
+
+!new Customer('CUSTBCN1002')
+!CUSTBCN1002.id := 'CUST-BCN-1002'
+!CUSTBCN1002.name := 'Hassan Al‑Khatib'
+!CUSTBCN1002.twitterUserName := '@HassanKhatib'
+
+!new Customer('CUSTBCN1003')
+!CUSTBCN1003.id := 'CUST-BCN-1003'
+!CUSTBCN1003.name := 'Keiko Tanaka'
+!CUSTBCN1003.twitterUserName := '@keikodelivers'
+
+!new Customer('CUSTBCN1004')
+!CUSTBCN1004.id := 'CUST-BCN-1004'
+!CUSTBCN1004.name := 'Olga Petrova'
+!CUSTBCN1004.twitterUserName := '@olga_petrova'
+
+!insert (BCNPortOpsStation, CUSTBCN1001) into StationContainsCustomer
+!insert (BCNPortOpsStation, CUSTBCN1002) into StationContainsCustomer
+!insert (BCNPortOpsStation, CUSTBCN1003) into StationContainsCustomer
+!insert (BCNPortOpsStation, CUSTBCN1004) into StationContainsCustomer
+
+!new Address('BCN_A1')
+!BCN_A1.text := 'Passeig de Gràcia 43, 08007 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL1')
+!BCN_GL1.latitude := 41.3929
+!BCN_GL1.longitude := 2.1649
+!insert (BCN_A1, BCN_GL1) into AddressContainsGeoLocation
+
+!new Address('BCN_A2')
+!BCN_A2.text := 'Carrer de la Marina 102, 08018 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL2')
+!BCN_GL2.latitude := 41.4033
+!BCN_GL2.longitude := 2.1886
+!insert (BCN_A2, BCN_GL2) into AddressContainsGeoLocation
+
+!new Address('BCN_A3')
+!BCN_A3.text := 'Terminal de Càrrega T1, Aeroport Josep Tarradellas Barcelona–El Prat, 08820 El Prat de Llobregat'
+!new GeoLocation('BCN_GL3')
+!BCN_GL3.latitude := 41.2974
+!BCN_GL3.longitude := 2.0833
+!insert (BCN_A3, BCN_GL3) into AddressContainsGeoLocation
+
+!new Address('BCN_A4')
+!BCN_A4.text := 'Carrer d’Aragó 255, 08007 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL4')
+!BCN_GL4.latitude := 41.3923
+!BCN_GL4.longitude := 2.1631
+!insert (BCN_A4, BCN_GL4) into AddressContainsGeoLocation
+
+!new Address('BCN_A5')
+!BCN_A5.text := 'Mercabarna, Carrer Major 76, 08040 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL5')
+!BCN_GL5.latitude := 41.3349
+!BCN_GL5.longitude := 2.1267
+!insert (BCN_A5, BCN_GL5) into AddressContainsGeoLocation
+
+!new Address('BCN_A6')
+!BCN_A6.text := 'Hospital Clínic (Entrada Logística), Carrer de Villarroel 170, 08036 Barcelona'
+!new GeoLocation('BCN_GL6')
+!BCN_GL6.latitude := 41.3892
+!BCN_GL6.longitude := 2.1535
+!insert (BCN_A6, BCN_GL6) into AddressContainsGeoLocation
+
+!new Address('BCN_A7')
+!BCN_A7.text := 'Carrer de Sants 210, 08028 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL7')
+!BCN_GL7.latitude := 41.3751
+!BCN_GL7.longitude := 2.1296
+!insert (BCN_A7, BCN_GL7) into AddressContainsGeoLocation
+
+!new Address('BCN_A8')
+!BCN_A8.text := 'Avinguda de Martí Pujol 120, 08912 Badalona, Catalunya, Spain'
+!new GeoLocation('BCN_GL8')
+!BCN_GL8.latitude := 41.4500
+!BCN_GL8.longitude := 2.2474
+!insert (BCN_A8, BCN_GL8) into AddressContainsGeoLocation
+
+!new Address('BCN_A9')
+!BCN_A9.text := 'Carrer de Sant Pau 18, 08870 Sitges, Catalunya, Spain'
+!new GeoLocation('BCN_GL9')
+!BCN_GL9.latitude := 41.2362
+!BCN_GL9.longitude := 1.8062
+!insert (BCN_A9, BCN_GL9) into AddressContainsGeoLocation
+
+!new Address('BCN_A10')
+!BCN_A10.text := 'Carrer de Balmes 67, 08007 Barcelona, Catalunya, Spain'
+!new GeoLocation('BCN_GL10')
+!BCN_GL10.latitude := 41.3899
+!BCN_GL10.longitude := 2.1619
+!insert (BCN_A10, BCN_GL10) into AddressContainsGeoLocation
+
+!new Address('BCN_A11')
+!BCN_A11.text := 'Avinguda de Cerdanyola 98, 08172 Sant Cugat del Vallès, Catalunya, Spain'
+!new GeoLocation('BCN_GL11')
+!BCN_GL11.latitude := 41.4722
+!BCN_GL11.longitude := 2.0860
+!insert (BCN_A11, BCN_GL11) into AddressContainsGeoLocation
+
+!new Address('BCN_A12')
+!BCN_A12.text := 'Carrer d’Irlanda 14, 08922 Santa Coloma de Gramenet, Catalunya, Spain'
+!new GeoLocation('BCN_GL12')
+!BCN_GL12.latitude := 41.4517
+!BCN_GL12.longitude := 2.2088
+!insert (BCN_A12, BCN_GL12) into AddressContainsGeoLocation
+
+!new Address('BCN_A13')
+!BCN_A13.text := 'Carrer de la Maquinista 12, 08003 Barcelona (Barceloneta), Catalunya, Spain'
+!new GeoLocation('BCN_GL13')
+!BCN_GL13.latitude := 41.3793
+!BCN_GL13.longitude := 2.1915
+!insert (BCN_A13, BCN_GL13) into AddressContainsGeoLocation
+
+!new Shipment('SHPBCN20260001')
+!SHPBCN20260001.id := 'SHP-BCN-2026-0001'
+!SHPBCN20260001.status := #NEW
+
+!new Shipment('SHPBCN20260002')
+!SHPBCN20260002.id := 'SHP-BCN-2026-0002'
+!SHPBCN20260002.status := #ASSIGNED
+
+!new Shipment('SHPBCN20260003')
+!SHPBCN20260003.id := 'SHP-BCN-2026-0003'
+!SHPBCN20260003.status := #UNDERWAY
+
+!new Shipment('SHPBCN20260004')
+!SHPBCN20260004.id := 'SHP-BCN-2026-0004'
+!SHPBCN20260004.status := #DELIVERED
+
+!new Shipment('SHPBCN20260005')
+!SHPBCN20260005.id := 'SHP-BCN-2026-0005'
+!SHPBCN20260005.status := #UNDERWAY
+
+!new Shipment('SHPBCN20260006')
+!SHPBCN20260006.id := 'SHP-BCN-2026-0006'
+!SHPBCN20260006.status := #ASSIGNED
+
+!new Shipment('SHPBCN20260007')
+!SHPBCN20260007.id := 'SHP-BCN-2026-0007'
+!SHPBCN20260007.status := #NEW
+
+!new Shipment('SHPBCN20260008')
+!SHPBCN20260008.id := 'SHP-BCN-2026-0008'
+!SHPBCN20260008.status := #DELIVERED
+
+!insert (BCNPortOpsStation, SHPBCN20260001) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260002) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260003) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260004) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260005) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260006) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260007) into StationShipment
+!insert (BCNPortOpsStation, SHPBCN20260008) into StationShipment
+
+!insert (CUSTBCN1001, SHPBCN20260001) into CustomerConsistsOfShipment
+!insert (CUSTBCN1001, SHPBCN20260002) into CustomerConsistsOfShipment
+!insert (CUSTBCN1001, SHPBCN20260003) into CustomerConsistsOfShipment
+
+!insert (CUSTBCN1002, SHPBCN20260004) into CustomerConsistsOfShipment
+!insert (CUSTBCN1002, SHPBCN20260005) into CustomerConsistsOfShipment
+
+!insert (CUSTBCN1003, SHPBCN20260006) into CustomerConsistsOfShipment
+!insert (CUSTBCN1003, SHPBCN20260007) into CustomerConsistsOfShipment
+!insert (CUSTBCN1003, SHPBCN20260008) into CustomerConsistsOfShipment
+
+!insert (SHPBCN20260001, BCN_A1) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260001, BCN_A2) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260002, BCN_A3) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260002, BCN_A4) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260003, BCN_A5) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260003, BCN_A6) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260004, BCN_A7) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260004, BCN_A8) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260005, BCN_A8) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260005, BCN_A9) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260006, BCN_A10) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260006, BCN_A7) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260007, BCN_A2) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260007, BCN_A11) into ShipmentContainsDeliveryAddress
+
+!insert (SHPBCN20260008, BCN_A12) into ShipmentContainsPickUpAddress
+!insert (SHPBCN20260008, BCN_A13) into ShipmentContainsDeliveryAddress
+
+!insert (DRVBCN017, SHPBCN20260002) into DriverShipment
+!insert (DRVBCN023, SHPBCN20260003) into DriverShipment
+!insert (DRVBCN031, SHPBCN20260004) into DriverShipment
+!insert (DRVBCN017, SHPBCN20260005) into DriverShipment
+!insert (DRVBCN023, SHPBCN20260006) into DriverShipment
+!insert (DRVBCN031, SHPBCN20260008) into DriverShipment
+
+!new Station('S1')
+
+!new Driver('EDGE_D1')
+!EDGE_D1.id := 'DRV-JP-0001'
+!EDGE_D1.name := 'Ayumi Tanaka'
+
+!new Driver('EDGE_D2')
+!EDGE_D2.id := 'DRV-JP-0002'
+!EDGE_D2.name := 'Олег Серов'
+
+!insert (S1, EDGE_D1) into StationContainsDriver
+!insert (S1, EDGE_D2) into StationContainsDriver
+
+!new Customer('EDGE_C1')
+!EDGE_C1.id := 'CUS-0001'
+!EDGE_C1.name := 'أمينة القحطاني'
+!EDGE_C1.twitterUserName := '@Amina_Q8'
+
+!new Customer('EDGE_C2')
+!EDGE_C2.id := 'CUS-0002'
+!EDGE_C2.name := 'Liam O’Connor'
+!EDGE_C2.twitterUserName := '@liamoconnor_ie'
+
+!new Customer('EDGE_C3')
+!EDGE_C3.id := 'CUS-0003'
+!EDGE_C3.name := 'Mina Park (박민아)'
+!EDGE_C3.twitterUserName := '@minapark_kr'
+
+!new Customer('EDGE_C4')
+!EDGE_C4.id := 'CUS-0004'
+!EDGE_C4.name := 'José da Silva'
+!EDGE_C4.twitterUserName := '@ze_silva_br'
+
+!insert (S1, EDGE_C1) into StationContainsCustomer
+!insert (S1, EDGE_C2) into StationContainsCustomer
+!insert (S1, EDGE_C3) into StationContainsCustomer
+!insert (S1, EDGE_C4) into StationContainsCustomer
+
+!new Address('EDGE_A1')
+!EDGE_A1.text := 'Service corridor Door C, Teine Station parcel cage, 5-1-1 Teinehoncho, Teine-ku, Sapporo, Hokkaidō 006-0021, Japan'
+!new GeoLocation('EDGE_GL1')
+!EDGE_GL1.latitude := 43.107487
+!EDGE_GL1.longitude := 141.243012
+!insert (EDGE_A1, EDGE_GL1) into AddressContainsGeoLocation
+
+!new Address('EDGE_A2')
+!EDGE_A2.text := 'Front lobby lockers (same street address), 5-1-1 Teinehoncho, Teine-ku, Sapporo, Hokkaidō 006-0021, Japan'
+!new GeoLocation('EDGE_GL2')
+!EDGE_GL2.latitude := 43.107487
+!EDGE_GL2.longitude := 141.243012
+!insert (EDGE_A2, EDGE_GL2) into AddressContainsGeoLocation
+
+!new Address('EDGE_A3')
+!EDGE_A3.text := 'Counter pickup, Sapporo Central Post Office, Kita 6 Nishi 1, Kita-ku, Sapporo, Hokkaidō 060-8799, Japan'
+!new GeoLocation('EDGE_GL3')
+!EDGE_GL3.latitude := 43.068660
+!EDGE_GL3.longitude := 141.350755
+!insert (EDGE_A3, EDGE_GL3) into AddressContainsGeoLocation
+
+!new Address('EDGE_A4')
+!EDGE_A4.text := 'Boat Slip 3, Port of Otaru, Otaru, Hokkaidō, Japan'
+!new GeoLocation('EDGE_GL4')
+!EDGE_GL4.latitude := 43.214965
+!EDGE_GL4.longitude := 141.003876
+!insert (EDGE_A4, EDGE_GL4) into AddressContainsGeoLocation
+
+!new Address('EDGE_A5')
+!EDGE_A5.text := 'Temporary festival stall “雪まつり” delivery point, Odori Park, Chuo-ku, Sapporo, Hokkaidō, Japan'
+!new GeoLocation('EDGE_GL5')
+!EDGE_GL5.latitude := 43.060540
+!EDGE_GL5.longitude := 141.351000
+!insert (EDGE_A5, EDGE_GL5) into AddressContainsGeoLocation
+
+!new Address('EDGE_A6')
+!EDGE_A6.text := 'UNIS logistics shed, Longyearbyen, Svalbard, Norway'
+!new GeoLocation('EDGE_GL6')
+!EDGE_GL6.latitude := 78.223200
+!EDGE_GL6.longitude := 15.646900
+!insert (EDGE_A6, EDGE_GL6) into AddressContainsGeoLocation
+
+!new Address('EDGE_A7')
+!EDGE_A7.text := 'McMurdo Station cargo pad, Ross Island, Antarctica'
+!new GeoLocation('EDGE_GL7')
+!EDGE_GL7.latitude := -77.841900
+!EDGE_GL7.longitude := 166.686300
+!insert (EDGE_A7, EDGE_GL7) into AddressContainsGeoLocation
+
+!new Shipment('EDGE_SHP1')
+!EDGE_SHP1.id := 'SHP-EDGE-0001'
+!EDGE_SHP1.status := #DELIVERED
+
+!new Shipment('EDGE_SHP2')
+!EDGE_SHP2.id := 'SHP-EDGE-0002'
+!EDGE_SHP2.status := #ASSIGNED
+
+!new Shipment('EDGE_SHP3')
+!EDGE_SHP3.id := 'SHP-EDGE-0003'
+!EDGE_SHP3.status := #NEW
+
+!new Shipment('EDGE_SHP4')
+!EDGE_SHP4.id := 'SHP-EDGE-0004'
+!EDGE_SHP4.status := #UNDERWAY
+
+!new Shipment('EDGE_SHP5')
+!EDGE_SHP5.id := 'SHP-EDGE-0005'
+!EDGE_SHP5.status := #UNDERWAY
+
+!insert (S1, EDGE_SHP1) into StationShipment
+!insert (S1, EDGE_SHP2) into StationShipment
+!insert (S1, EDGE_SHP3) into StationShipment
+!insert (S1, EDGE_SHP4) into StationShipment
+!insert (S1, EDGE_SHP5) into StationShipment
+
+!insert (EDGE_C1, EDGE_SHP1) into CustomerConsistsOfShipment
+!insert (EDGE_C1, EDGE_SHP2) into CustomerConsistsOfShipment
+!insert (EDGE_C2, EDGE_SHP3) into CustomerConsistsOfShipment
+!insert (EDGE_C2, EDGE_SHP4) into CustomerConsistsOfShipment
+!insert (EDGE_C3, EDGE_SHP5) into CustomerConsistsOfShipment
+
+!insert (EDGE_SHP1, EDGE_A1) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP1, EDGE_A2) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP2, EDGE_A1) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP2, EDGE_A3) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP3, EDGE_A4) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP3, EDGE_A5) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP4, EDGE_A6) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP4, EDGE_A7) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_SHP5, EDGE_A5) into ShipmentContainsPickUpAddress
+!insert (EDGE_SHP5, EDGE_A3) into ShipmentContainsDeliveryAddress
+
+!insert (EDGE_D2, EDGE_SHP3) into DriverShipment
+!insert (EDGE_D2, EDGE_SHP4) into DriverShipment
+

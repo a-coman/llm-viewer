@@ -1,0 +1,156 @@
+!new Club('C3')
+!C3.name := 'Knattspyrnufélag Tindur'
+!C3.homeGround := 'Hólar Frostpitch'
+!C3.chairman := 'Sigríður Ásbjörnsdóttir'
+
+!new Team('T3')
+!T3.name := 'Tindur Seniors'
+!insert (C3, T3) into ClubTeam
+
+!new Club('C4')
+!C4.name := 'Sakura United FC'
+!C4.homeGround := 'Kōen Stadium'
+!C4.chairman := 'Hiro Tanaka'
+
+!new Team('T4')
+!T4.name := 'さくらユナイテッドU-18 (playing up)'
+!insert (C4, T4) into ClubTeam
+
+!new Player('P3')
+!P3.name := 'Einar Már Jónsson'
+!P3.age := 44
+!P3.bestFoot := #RIGHT
+!P3.phoneNumber := '+354 777 0444'
+!insert (T3, P3) into TeamPlayer
+
+!new Position('POS5')
+!POS5.positionName := #GOALKEEPER
+!insert (P3, POS5) into PlayerPositions
+
+!new TrainingObjective('TO3')
+!TO3.areaToImprove := 'Low diving saves on icy surface'
+!TO3.startDate := '2026-01-02'
+!TO3.endDate := '2026-02-02'
+!TO3.success := false
+!insert (TO3, P3) into TrainingObjectivePlayer
+
+!new Player('P4')
+!P4.name := 'Aoi Nakamura'
+!P4.age := 15
+!P4.bestFoot := #BOTH
+!P4.phoneNumber := '+81-90-1234-5678'
+!insert (T4, P4) into TeamPlayer
+
+!new Position('POS6')
+!POS6.positionName := #DEFENDER
+!insert (P4, POS6) into PlayerPositions
+
+!new Position('POS7')
+!POS7.positionName := #MIDFIELDER
+!insert (P4, POS7) into PlayerPositions
+
+!new Position('POS8')
+!POS8.positionName := #FORWARD
+!insert (P4, POS8) into PlayerPositions
+
+!new PlayerNotes('PN3')
+!PN3.note := 'School schedule conflict risk during away travel.'
+!PN3.date := '2026-01-03'
+!insert (P4, PN3) into PlayerPlayerNotes
+
+!new PlayerNotes('PN4')
+!PN4.note := 'Excellent ambidextrous first touch; needs strength work.'
+!PN4.date := '2026-01-04'
+!insert (P4, PN4) into PlayerPlayerNotes
+
+!new TrainingObjective('TO4')
+!TO4.areaToImprove := 'Upper-body strength for senior matches'
+!TO4.startDate := '2026-01-01'
+!TO4.endDate := '2026-03-01'
+!TO4.success := false
+!insert (TO4, P4) into TrainingObjectivePlayer
+
+!new TrainingObjective('TO5')
+!TO5.areaToImprove := 'Aerial duels timing'
+!TO5.startDate := '2026-01-10'
+!TO5.endDate := '2026-02-10'
+!TO5.success := true
+!insert (TO5, P4) into TrainingObjectivePlayer
+
+!new TrainingSession('TS3')
+!TS3.date := '2026-01-05'
+!TS3.location := 'Hólar Frostpitch (half cleared of snow)'
+!TS3.purpose := 'Goalkeeper handling drills in extreme cold'
+!insert (T3, TS3) into TeamTraining
+
+!new TrainingNotes('TN3')
+!TN3.note := 'Ball hardness increased; switched to lower-pressure training balls.'
+!TN3.date := '2026-01-05'
+!insert (TS3, TN3) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA2')
+!FA2.reason := 'Road closed due to sudden blizzard; unable to reach ground.'
+!insert (TS3, FA2) into TrainingFailded
+!insert (FA2, P3) into FailedPlayer
+
+!new TrainingSession('TS4')
+!TS4.date := '2026-01-05'
+!TS4.location := 'Kōen Stadium Annex'
+!TS4.purpose := 'Compact one-player technical session (solo wall passes + sprint starts)'
+!insert (T4, TS4) into TeamTraining
+
+!new TrainingNotes('TN4')
+!TN4.note := 'Solo session logged; used rebound board to simulate pressure.'
+!TN4.date := '2026-01-05'
+!insert (TS4, TN4) into TrainingTrainingNotes
+
+!new Competition('COMP2')
+!COMP2.name := 'Transcontinental Friendly Cup'
+!COMP2.type := 'Friendly'
+
+!new Match('M2')
+!M2.date := '2026-01-06'
+!M2.homeAway := true
+!insert (COMP2, M2) into CompetitionMatch
+!insert (T3, M2) into LocalMatch
+!insert (T4, M2) into VisitorMatch
+
+!new MatchReport('MR2')
+!MR2.duration := 120
+!MR2.scoreVisitor := 0
+!MR2.scoreLocal := 0
+!insert (M2, MR2) into MatchMatchReport
+
+!new MatchNote('MN1')
+!MN1.note := 'Played behind closed doors due to weather; only two registered players participated.'
+!MN1.date := '2026-01-06'
+!insert (M2, MN1) into MatchMatchNote
+
+!new MatchNote('MN2')
+!MN2.note := 'Referee ended match after extended time; no shots on target recorded.'
+!MN2.date := '2026-01-06'
+!insert (M2, MN2) into MatchMatchNote
+
+!new MatchPlayer('MP3')
+!MP3.booked := false
+!MP3.goals := 0
+!MP3.rating := 0
+!insert (P3, MP3) into PlayerMatch
+!insert (M2, MP3) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP3')
+!MPP3.positionName := #GOALKEEPER
+!MPP3.number := 1
+!insert (MP3, MPP3) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP4')
+!MP4.booked := true
+!MP4.goals := 0
+!MP4.rating := 10
+!insert (P4, MP4) into PlayerMatch
+!insert (M2, MP4) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP4')
+!MPP4.positionName := #FORWARD
+!MPP4.number := 99
+!insert (MP4, MPP4) into MatchPlayerMatchPlayerPosition

@@ -1,0 +1,73 @@
+!new Client('clientEC1')
+!clientEC1.clientId := 1
+!clientEC1.isSuspended := true
+
+!new Client('clientEC2')
+!clientEC2.clientId := 2147483647
+!clientEC2.isSuspended := false
+
+!new Rental('rentalE1')
+!rentalE1.date := Date('0001-01-01')
+
+!new Rental('rentalE2')
+!rentalE2.date := Date('2999-12-31')
+
+!new Movie('movieE1')
+!movieE1.title := 'El Último Tren (Director’s Cut)'
+!movieE1.availableCopies := 0
+!movieE1.genre := #Action
+
+!new Movie('movieE2')
+!movieE2.title := 'Käsekuchen Chaos'
+!movieE2.availableCopies := 9999
+!movieE2.genre := #Comedy
+
+!new Series('seriesE1')
+!seriesE1.title := 'Nairobi Nights — Episode File'
+!seriesE1.availableCopies := 0
+!seriesE1.episode := 1
+
+!new Series('seriesE2')
+!seriesE2.title := 'Arctic Signal — Special Transmission'
+!seriesE2.availableCopies := 1
+!seriesE2.episode := 2147483647
+
+!new Actor('actorE1')
+!actorE1.name := 'María-José K. Tanaka'
+
+!new Actor('actorE2')
+!actorE2.name := 'Ousmane Diop'
+
+!new Actor('actorE3')
+!actorE3.name := 'Sven Østergård'
+
+!new Actor('actorE4')
+!actorE4.name := 'Priya Nair'
+
+!new Actor('actorE5')
+!actorE5.name := 'Zhang Wei (张伟)'
+
+!new Actor('actorE6')
+!actorE6.name := 'Uncredited Voice Performer'
+
+!insert (clientEC1, rentalE1) into ClientRental
+!insert (clientEC1, rentalE2) into ClientRental
+
+!insert (rentalE1, movieE1) into RentalCassette
+!insert (rentalE1, seriesE1) into RentalCassette
+!insert (rentalE1, seriesE2) into RentalCassette
+!insert (rentalE2, movieE1) into RentalCassette
+!insert (rentalE2, movieE2) into RentalCassette
+!insert (rentalE2, seriesE1) into RentalCassette
+!insert (rentalE2, seriesE2) into RentalCassette
+
+!insert (movieE1, actorE1) into CassetteActor
+!insert (movieE1, actorE2) into CassetteActor
+!insert (movieE1, actorE5) into CassetteActor
+!insert (movieE2, actorE3) into CassetteActor
+!insert (seriesE1, actorE2) into CassetteActor
+!insert (seriesE1, actorE4) into CassetteActor
+!insert (seriesE2, actorE1) into CassetteActor
+!insert (seriesE2, actorE3) into CassetteActor
+!insert (seriesE2, actorE4) into CassetteActor
+!insert (seriesE2, actorE5) into CassetteActor

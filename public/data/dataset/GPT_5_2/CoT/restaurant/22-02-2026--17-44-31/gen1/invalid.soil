@@ -1,0 +1,221 @@
+!new Restaurant('R3')
+!R3.name := 'Mar i Terra'
+
+!new Owner('O4')
+!O4.name := 'Ana García'
+!O4.percentageShares := 60
+
+!new Owner('O5')
+!O5.name := 'Marco Bianchi'
+!O5.percentageShares := 40
+
+!insert (R3, O4) into RestaurantOwner
+!insert (R3, O5) into RestaurantOwner
+
+!new HeadWaiter('HW3')
+!HW3.name := 'Giulia Rossi'
+!HW3.dateOfBirth := Date('1984-11-02')
+!HW3.phoneNumber := '+34 600 111 222'
+
+!new Waiter('W4')
+!W4.name := 'Sergio López'
+!W4.dateOfBirth := Date('1996-05-18')
+!W4.phoneNumber := '+34 600 222 333'
+!W4.spokenLanguage := #Spanish
+
+!new Waiter('W5')
+!W5.name := 'Klara Schneider'
+!W5.dateOfBirth := Date('1992-08-09')
+!W5.phoneNumber := '+34 600 333 444'
+!W5.spokenLanguage := #German
+
+!insert (HW3, W4) into HeadWaiterWaiter
+!insert (HW3, W5) into HeadWaiterWaiter
+
+!new Cook('K4')
+!K4.name := 'Fátima El Mansouri'
+!K4.dateOfBirth := Date('1979-03-12')
+!K4.phoneNumber := '+34 600 444 555'
+!K4.yearsOfExperience := 12
+
+!new Chef('CH4')
+!CH4.name := 'Jordi Pujol'
+!CH4.dateOfBirth := Date('1988-01-27')
+!CH4.phoneNumber := '+34 600 555 666'
+
+!new Chef('CH5')
+!CH5.name := 'Elena Conti'
+!CH5.dateOfBirth := Date('1990-10-05')
+!CH5.phoneNumber := '+34 600 666 777'
+
+!insert (CH4, K4) into ChefCook
+!insert (CH5, K4) into ChefCook
+
+!new BusDriver('BD2')
+!BD2.name := 'Miguel Santos'
+!BD2.dateOfBirth := Date('1975-06-30')
+!BD2.phoneNumber := '+34 600 777 888'
+!BD2.driverLicenseNr := 'ES-B-4920017'
+
+!new Table('T5')
+!T5.number := 5
+!T5.description := 'Window-side 4-top near the tiled mural'
+!T5.capacity := 4
+
+!new Table('T8')
+!T8.number := 8
+!T8.description := 'Long table on the patio under awning'
+!T8.capacity := 6
+
+!new Table('T9')
+!T9.number := 9
+!T9.description := 'Inside communal table, can be split by staff'
+!T9.capacity := 10
+
+!new RegularCustomer('RC1')
+!RC1.name := 'Thomas Müller'
+!RC1.prefferedLanguage := #German
+
+!new Individual('IR3')
+!IR3.time := Time('13:00')
+!IR3.date := Date('2026-06-14')
+!IR3.numberPeople := 2
+!IR3.name := 'Thomas Müller'
+!IR3.phoneNumber := '+49 151 23456789'
+!IR3.number := 3101
+!IR3.seating := #Inside
+!IR3.smoking := #NonSmoking
+
+!insert (R3, IR3) into RestaurantReservation
+!insert (IR3, RC1) into ReservationCustomer
+!insert (IR3, W5) into ReservationWaiter
+!insert (IR3, T5) into ReservationTable
+
+!new Banquet('BR3')
+!BR3.time := Time('20:00')
+!BR3.date := Date('2026-06-14')
+!BR3.numberPeople := 18
+!BR3.name := 'Círculo de Arquitectura BCN'
+!BR3.phoneNumber := '+34 93 555 0101'
+!BR3.number := 4107
+!BR3.groupName := 'Círculo de Arquitectura BCN — Summer Meetup'
+!BR3.paymentMethod := #CreditCard
+!BR3.busService := true
+
+!insert (R3, BR3) into RestaurantReservation
+!insert (BR3, W4) into ReservationWaiter
+!insert (BR3, W5) into ReservationWaiter
+!insert (BR3, BD2) into BanquetBusDriver
+!insert (BR3, T5) into ReservationTable
+!insert (BR3, T8) into ReservationTable
+!insert (BR3, T9) into ReservationTable
+
+!new Allergen('A_L2')
+!A_L2.type := #Lactose
+
+!new Allergen('A_G2')
+!A_G2.type := #Gluten
+
+!new Allergen('A_S2')
+!A_S2.type := #Seafood
+
+!new Allergen('A_N2')
+!A_N2.type := #Nuts
+
+!new FoodItem('F201')
+!F201.number := 101
+!F201.description := 'Wheat flour'
+!F201.purchaseFlag := true
+!F201.unit := #Pound
+
+!new FoodItem('F202')
+!F202.number := 102
+!F202.description := 'Butter'
+!F202.purchaseFlag := true
+!F202.unit := #Ounce
+
+!new FoodItem('F203')
+!F203.number := 103
+!F203.description := 'Shrimp (raw, peeled)'
+!F203.purchaseFlag := true
+!F203.unit := #Pound
+
+!new FoodItem('F204')
+!F204.number := 104
+!F204.description := 'Ground almonds'
+!F204.purchaseFlag := true
+!F204.unit := #Gram
+
+!insert (F201, A_G2) into FoodItemAllergen
+!insert (F202, A_L2) into FoodItemAllergen
+!insert (F203, A_S2) into FoodItemAllergen
+!insert (F204, A_N2) into FoodItemAllergen
+
+!new MenuItem('MI5')
+!MI5.description := 'Gambas al ajillo (garlic shrimp)'
+!MI5.prepTime := 12.0
+!MI5.classification := #Apetizer
+
+!new MenuItem('MI6')
+!MI6.description := 'Paella de marisco'
+!MI6.prepTime := 35.0
+!MI6.classification := #Main
+
+!new MenuItem('MI7')
+!MI7.description := 'Crema catalana with toasted sugar'
+!MI7.prepTime := 18.0
+!MI7.classification := #Dessert
+
+!new MenuItem('MI8')
+!MI8.description := 'Tarta de almendra (almond cake)'
+!MI8.prepTime := 25.0
+!MI8.classification := #Dessert
+
+!new MenuItem('MI9')
+!MI9.description := 'Cava brut (glass)'
+!MI9.prepTime := 1.0
+!MI9.classification := #Beverage
+
+!insert (MI5, CH4) into MenuItemChef
+!insert (MI6, CH4) into MenuItemChef
+!insert (MI7, CH5) into MenuItemChef
+!insert (MI8, CH5) into MenuItemChef
+!insert (MI9, CH5) into MenuItemChef
+
+!insert (MI5, F203) into MenuItemFoodItem
+!insert (MI6, F203) into MenuItemFoodItem
+!insert (MI6, F201) into MenuItemFoodItem
+!insert (MI7, F202) into MenuItemFoodItem
+!insert (MI8, F204) into MenuItemFoodItem
+!insert (MI8, F201) into MenuItemFoodItem
+
+!new ItemOrder('IO4')
+!IO4.time := Time('13:10')
+!insert (IR3, IO4) into ReservationItemOrdered
+!insert (IO4, MI9) into ItemOrderMenuItem
+
+!new ItemOrder('IO5')
+!IO5.time := Time('13:25')
+!insert (IR3, IO5) into ReservationItemOrdered
+!insert (IO5, MI7) into ItemOrderMenuItem
+
+!new ItemOrder('IO6')
+!IO6.time := Time('20:15')
+!insert (BR3, IO6) into ReservationItemOrdered
+!insert (IO6, MI6) into ItemOrderMenuItem
+
+!new ItemOrder('IO7')
+!IO7.time := Time('20:20')
+!insert (BR3, IO7) into ReservationItemOrdered
+!insert (IO7, MI5) into ItemOrderMenuItem
+
+!new ItemOrder('IO8')
+!IO8.time := Time('21:10')
+!insert (BR3, IO8) into ReservationItemOrdered
+!insert (IO8, MI8) into ItemOrderMenuItem
+
+!new DietaryRequirement('DR2')
+!DR2.diet := #Halal
+
+!new ReportedAllergy('RA2')
+!RA2.allergen := #Nuts

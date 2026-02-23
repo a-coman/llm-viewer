@@ -1,0 +1,194 @@
+!new Restaurant('R21')
+!R21.name := 'Santa Fe Cantina'
+
+!new Owner('O45')
+!O45.name := 'Marisol Ortega'
+!O45.percentageShares := 50
+!insert (R21, O45) into RestaurantOwner
+
+!new Owner('O46')
+!O46.name := 'Ethan Brooks'
+!O46.percentageShares := 30
+!insert (R21, O46) into RestaurantOwner
+
+!new Owner('O47')
+!O47.name := 'Kenji Sato'
+!O47.percentageShares := 20
+!insert (R21, O47) into RestaurantOwner
+
+!new HeadWaiter('HW20')
+!HW20.name := 'Rosa Martinez'
+!HW20.dateOfBirth := Date('1981-02-06')
+!HW20.phoneNumber := '+1 505 555 0101'
+
+!new HeadWaiter('HW21')
+!HW21.name := 'Caleb Johnson'
+!HW21.dateOfBirth := Date('1979-10-12')
+!HW21.phoneNumber := '+1 505 555 0102'
+
+!new Waiter('W45')
+!W45.name := 'Ava Nguyen'
+!W45.dateOfBirth := Date('1998-03-28')
+!W45.phoneNumber := '+1 505 555 0110'
+!W45.spokenLanguage := #English
+
+!new Waiter('W46')
+!W46.name := 'Luis Hernández'
+!W46.dateOfBirth := Date('1990-07-19')
+!W46.phoneNumber := '+1 505 555 0111'
+!W46.spokenLanguage := #Spanish
+
+!new Waiter('W47')
+!W47.name := 'Maya Patel'
+!W47.dateOfBirth := Date('1994-09-02')
+!W47.phoneNumber := '+1 505 555 0112'
+!W47.spokenLanguage := #English
+
+!insert (HW20, W45) into HeadWaiterWaiter
+!insert (HW21, W46) into HeadWaiterWaiter
+!insert (HW20, W47) into HeadWaiterWaiter
+!insert (HW21, W47) into HeadWaiterWaiter
+
+!new Cook('K33')
+!K33.name := 'Noah Wilson'
+!K33.dateOfBirth := Date('1985-05-05')
+!K33.phoneNumber := '+1 505 555 0200'
+!K33.yearsOfExperience := 9
+
+!new Cook('K34')
+!K34.name := 'Noah Wilson'
+!K34.dateOfBirth := Date('1985-05-05')
+!K34.phoneNumber := '+1 505 555 0200'
+!K34.yearsOfExperience := 9
+
+!new Chef('CH36')
+!CH36.name := 'Isabella Romero'
+!CH36.dateOfBirth := Date('1989-11-11')
+!CH36.phoneNumber := '+1 505 555 0300'
+!insert (CH36, K33) into ChefCook
+
+!new Chef('CH37')
+!CH37.name := 'Daniel Kim'
+!CH37.dateOfBirth := Date('1992-01-23')
+!CH37.phoneNumber := '+1 505 555 0301'
+!insert (CH37, K34) into ChefCook
+
+!new Table('T41_SFC')
+!T41_SFC.number := 41
+!T41_SFC.description := 'Inside booth by the adobe wall'
+!T41_SFC.capacity := 4
+
+!new Table('T42_SFC')
+!T42_SFC.number := 42
+!T42_SFC.description := 'Patio two-top with heat lamp'
+!T42_SFC.capacity := 2
+
+!new Table('T43_SFC')
+!T43_SFC.number := 43
+!T43_SFC.description := 'Large family table near the mariachi corner'
+!T43_SFC.capacity := 8
+
+!new RegularCustomer('C23')
+!C23.name := 'Sofía García'
+!C23.prefferedLanguage := #Spanish
+
+!new Allergen('AL5G_SFC')
+!AL5G_SFC.type := #Gluten
+
+!new Allergen('AL5L_SFC')
+!AL5L_SFC.type := #Lactose
+
+!new Allergen('AL5N_SFC')
+!AL5N_SFC.type := #Nuts
+
+!new FoodItem('F1101')
+!F1101.number := 901
+!F1101.description := 'Flour tortillas'
+!F1101.purchaseFlag := true
+!F1101.unit := #Dozen
+!insert (F1101, AL5G_SFC) into FoodItemAllergen
+
+!new FoodItem('F1102')
+!F1102.number := 902
+!F1102.description := 'Shredded cheese'
+!F1102.purchaseFlag := true
+!F1102.unit := #Pound
+!insert (F1102, AL5L_SFC) into FoodItemAllergen
+
+!new FoodItem('F1103')
+!F1103.number := 903
+!F1103.description := 'Almond horchata concentrate'
+!F1103.purchaseFlag := true
+!F1103.unit := #Ounce
+!insert (F1103, AL5N_SFC) into FoodItemAllergen
+
+!new MenuItem('MI57')
+!MI57.description := 'Quesadilla with cheese blend'
+!MI57.prepTime := 10.0
+!MI57.classification := #Main
+!insert (MI57, CH36) into MenuItemChef
+!insert (MI57, F1101) into MenuItemFoodItem
+!insert (MI57, F1102) into MenuItemFoodItem
+
+!new MenuItem('MI58')
+!MI58.description := 'Horchata (almond)'
+!MI58.prepTime := 2.0
+!MI58.classification := #Beverage
+!insert (MI58, CH37) into MenuItemChef
+!insert (MI58, F1103) into MenuItemFoodItem
+
+!new MenuItem('MI59')
+!MI59.description := 'House salsa trio'
+!MI59.prepTime := 4.0
+!MI59.classification := #Apetizer
+!insert (MI59, CH36) into MenuItemChef
+
+!new Individual('IR23')
+!IR23.time := Time('12:15')
+!IR23.date := Date('2026-08-22')
+!IR23.numberPeople := 2
+!IR23.name := 'Sofía García'
+!IR23.phoneNumber := '+1 505 222 7788'
+!IR23.number := 7101
+!IR23.seating := #Patio
+!IR23.smoking := #NonSmoking
+!insert (R21, IR23) into RestaurantReservation
+!insert (IR23, C23) into ReservationCustomer
+!insert (IR23, W46) into ReservationWaiter
+!insert (IR23, T42_SFC) into ReservationTable
+
+!new ItemOrder('IO2001')
+!IO2001.time := Time('12:25')
+!insert (IR23, IO2001) into ReservationItemOrdered
+!insert (IO2001, MI59) into ItemOrderMenuItem
+
+!new ItemOrder('IO2002')
+!IO2002.time := Time('12:35')
+!insert (IR23, IO2002) into ReservationItemOrdered
+!insert (IO2002, MI57) into ItemOrderMenuItem
+
+!new ItemOrder('IO2003')
+!IO2003.time := Time('12:40')
+!insert (IR23, IO2003) into ReservationItemOrdered
+!insert (IO2003, MI58) into ItemOrderMenuItem
+
+!new Banquet('BR19')
+!BR19.time := Time('19:00')
+!BR19.date := Date('2026-08-22')
+!BR19.numberPeople := 7
+!BR19.name := 'High Desert Cycling Club'
+!BR19.phoneNumber := '+1 505 555 9090'
+!BR19.number := 7102
+!BR19.groupName := 'HDC Club Season Wrap-up'
+!BR19.paymentMethod := #Cash
+!BR19.busService := false
+!insert (R21, BR19) into RestaurantReservation
+!insert (BR19, W45) into ReservationWaiter
+!insert (BR19, W47) into ReservationWaiter
+!insert (BR19, T43_SFC) into ReservationTable
+!insert (BR19, T41_SFC) into ReservationTable
+
+!new ItemOrder('IO2004')
+!IO2004.time := Time('19:20')
+!insert (BR19, IO2004) into ReservationItemOrdered
+!insert (IO2004, MI57) into ItemOrderMenuItem

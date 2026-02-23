@@ -1,0 +1,33 @@
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!new Expense('expenseEXP2026058')
+!expenseEXP2026058.amount := 464.49
+!expenseEXP2026058.startDate := Date('2026-01-01')
+!expenseEXP2026058.endDate := Date('2026-01-31')
+
+!new Bill('billEXP2026058_BILL301')
+!billEXP2026058_BILL301.amount := 389.99
+!billEXP2026058_BILL301.category := 'Home office equipment'
+!billEXP2026058_BILL301.date := Date('2026-01-12')
+!billEXP2026058_BILL301.paymentMethod := #CREDIT_CARD
+!billEXP2026058_BILL301.status := #VERIFIED
+
+!new Bill('billEXP2026058_BILL302')
+!billEXP2026058_BILL302.amount := 74.50
+!billEXP2026058_BILL302.category := 'Home office equipment'
+!billEXP2026058_BILL302.date := Date('2026-01-20')
+!billEXP2026058_BILL302.paymentMethod := #CASH
+!billEXP2026058_BILL302.status := #VALIDATED
+
+!insert (expenseEXP2026058, billEXP2026058_BILL301) into ExpenseContainsBills
+!insert (expenseEXP2026058, billEXP2026058_BILL302) into ExpenseContainsBills
+
+!insert (billEXP2026058_BILL301, currencyCAD) into BillCurrency
+!insert (billEXP2026058_BILL302, currencyCAD) into BillCurrency
+
+!new Comment('commentEXP2026058_CMT301')
+!commentEXP2026058_CMT301.text := 'Achat approuvé selon la politique télétravail (montant < 500 CAD). Receipts included for audit.'
+
+!insert (expenseEXP2026058, commentEXP2026058_CMT301) into ExpenseComment

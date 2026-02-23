@@ -1,0 +1,711 @@
+!new StateMachine('sm_returnHubOddReachability')
+!sm_returnHubOddReachability.name := 'returnHubOddReachability'
+
+!new State('st_rhor_home')
+!st_rhor_home.name := 'home'
+!new State('st_rhor_zona')
+!st_rhor_zona.name := 'zona'
+!new State('st_rhor_exito')
+!st_rhor_exito.name := 'éxito'
+!new State('st_rhor_kentro')
+!st_rhor_kentro.name := 'κέντρο'
+!new State('st_rhor_razvorot')
+!st_rhor_razvorot.name := 'разворот'
+!new State('st_rhor_marhaba')
+!st_rhor_marhaba.name := 'مرحبا'
+
+!insert (sm_returnHubOddReachability, st_rhor_home) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_zona) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_exito) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_kentro) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_razvorot) into StateMachineContainsStates
+!insert (sm_returnHubOddReachability, st_rhor_marhaba) into StateMachineContainsStates
+
+!insert (sm_returnHubOddReachability, st_rhor_home) into StateMachineStartsStates
+
+!new Transition('tr_rhor_dispatch')
+!tr_rhor_dispatch.name := 'dispatch'
+!new Transition('tr_rhor_returnQuick')
+!tr_rhor_returnQuick.name := 'returnQuick'
+!new Transition('tr_rhor_returnSlow')
+!tr_rhor_returnSlow.name := 'returnSlow'
+!new Transition('tr_rhor_reportSuccess')
+!tr_rhor_reportSuccess.name := 'reportSuccess'
+!new Transition('tr_rhor_spin')
+!tr_rhor_spin.name := 'spin'
+!new Transition('tr_rhor_backToHome')
+!tr_rhor_backToHome.name := 'backToHome'
+!new Transition('tr_rhor_uTurn')
+!tr_rhor_uTurn.name := 'uTurn'
+!new Transition('tr_rhor_greetAndReturn')
+!tr_rhor_greetAndReturn.name := 'greetAndReturn'
+
+!insert (sm_returnHubOddReachability, tr_rhor_dispatch) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_returnQuick) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_returnSlow) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_reportSuccess) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_spin) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_backToHome) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_uTurn) into StateMachineContainsTransitions
+!insert (sm_returnHubOddReachability, tr_rhor_greetAndReturn) into StateMachineContainsTransitions
+
+!insert (st_rhor_home, tr_rhor_dispatch) into StateTransition
+!insert (tr_rhor_dispatch, st_rhor_zona) into TransitionState
+
+!insert (st_rhor_zona, tr_rhor_returnQuick) into StateTransition
+!insert (tr_rhor_returnQuick, st_rhor_home) into TransitionState
+
+!insert (st_rhor_zona, tr_rhor_returnSlow) into StateTransition
+!insert (tr_rhor_returnSlow, st_rhor_home) into TransitionState
+
+!insert (st_rhor_exito, tr_rhor_reportSuccess) into StateTransition
+!insert (tr_rhor_reportSuccess, st_rhor_home) into TransitionState
+
+!insert (st_rhor_kentro, tr_rhor_spin) into StateTransition
+!insert (tr_rhor_spin, st_rhor_kentro) into TransitionState
+
+!insert (st_rhor_kentro, tr_rhor_backToHome) into StateTransition
+!insert (tr_rhor_backToHome, st_rhor_home) into TransitionState
+
+!insert (st_rhor_razvorot, tr_rhor_uTurn) into StateTransition
+!insert (tr_rhor_uTurn, st_rhor_home) into TransitionState
+
+!insert (st_rhor_marhaba, tr_rhor_greetAndReturn) into StateTransition
+!insert (tr_rhor_greetAndReturn, st_rhor_home) into TransitionState
+
+!new TimeEvent('te_rhor_dispatch')
+!te_rhor_dispatch.time := 1
+!insert (tr_rhor_dispatch, te_rhor_dispatch) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_returnQuick')
+!te_rhor_returnQuick.time := 1
+!insert (tr_rhor_returnQuick, te_rhor_returnQuick) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_returnSlow')
+!te_rhor_returnSlow.time := 120
+!insert (tr_rhor_returnSlow, te_rhor_returnSlow) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_reportSuccess')
+!te_rhor_reportSuccess.time := 7
+!insert (tr_rhor_reportSuccess, te_rhor_reportSuccess) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_spin')
+!te_rhor_spin.time := 9
+!insert (tr_rhor_spin, te_rhor_spin) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_backToHome')
+!te_rhor_backToHome.time := 10
+!insert (tr_rhor_backToHome, te_rhor_backToHome) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_uTurn')
+!te_rhor_uTurn.time := 2
+!insert (tr_rhor_uTurn, te_rhor_uTurn) into TransitionContainsEvents
+
+!new TimeEvent('te_rhor_greetAndReturn')
+!te_rhor_greetAndReturn.time := 3
+!insert (tr_rhor_greetAndReturn, te_rhor_greetAndReturn) into TransitionContainsEvents
+
+!new StateMachine('sm_autonomousDroneDelivery')
+!sm_autonomousDroneDelivery.name := 'autonomousDroneDelivery'
+
+!new State('st_add_standby')
+!st_add_standby.name := 'standby'
+!new State('st_add_preflight')
+!st_add_preflight.name := 'preflight'
+!new State('st_add_enroute')
+!st_add_enroute.name := 'enroute'
+!new State('st_add_delivering')
+!st_add_delivering.name := 'delivering'
+!new State('st_add_returning')
+!st_add_returning.name := 'returning'
+!new State('st_add_charging')
+!st_add_charging.name := 'charging'
+!new State('st_add_emergencyLanding')
+!st_add_emergencyLanding.name := 'emergencyLanding'
+
+!insert (sm_autonomousDroneDelivery, st_add_standby) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_preflight) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_enroute) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_delivering) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_returning) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_charging) into StateMachineContainsStates
+!insert (sm_autonomousDroneDelivery, st_add_emergencyLanding) into StateMachineContainsStates
+
+!insert (sm_autonomousDroneDelivery, st_add_standby) into StateMachineStartsStates
+
+!new Transition('tr_add_scheduleLaunch')
+!tr_add_scheduleLaunch.name := 'scheduleLaunch'
+!new Transition('tr_add_abortIfNoGpsFix')
+!tr_add_abortIfNoGpsFix.name := 'abortIfNoGpsFix'
+!new Transition('tr_add_takeoff')
+!tr_add_takeoff.name := 'takeoff'
+!new Transition('tr_add_periodicNavPing')
+!tr_add_periodicNavPing.name := 'periodicNavPing'
+!new Transition('tr_add_arriveAtDropZone')
+!tr_add_arriveAtDropZone.name := 'arriveAtDropZone'
+!new Transition('tr_add_confirmDropComplete')
+!tr_add_confirmDropComplete.name := 'confirmDropComplete'
+!new Transition('tr_add_retryDrop')
+!tr_add_retryDrop.name := 'retryDrop'
+!new Transition('tr_add_lowBatteryDivert')
+!tr_add_lowBatteryDivert.name := 'lowBatteryDivert'
+!new Transition('tr_add_criticalFaultLanding')
+!tr_add_criticalFaultLanding.name := 'criticalFaultLanding'
+!new Transition('tr_add_landAndReport')
+!tr_add_landAndReport.name := 'landAndReport'
+!new Transition('tr_add_dockAndCharge')
+!tr_add_dockAndCharge.name := 'dockAndCharge'
+!new Transition('tr_add_chargeComplete')
+!tr_add_chargeComplete.name := 'chargeComplete'
+
+!insert (sm_autonomousDroneDelivery, tr_add_scheduleLaunch) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_abortIfNoGpsFix) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_takeoff) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_periodicNavPing) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_arriveAtDropZone) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_confirmDropComplete) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_retryDrop) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_lowBatteryDivert) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_criticalFaultLanding) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_landAndReport) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_dockAndCharge) into StateMachineContainsTransitions
+!insert (sm_autonomousDroneDelivery, tr_add_chargeComplete) into StateMachineContainsTransitions
+
+!insert (st_add_standby, tr_add_scheduleLaunch) into StateTransition
+!insert (tr_add_scheduleLaunch, st_add_preflight) into TransitionState
+
+!insert (st_add_preflight, tr_add_abortIfNoGpsFix) into StateTransition
+!insert (tr_add_abortIfNoGpsFix, st_add_standby) into TransitionState
+
+!insert (st_add_preflight, tr_add_takeoff) into StateTransition
+!insert (tr_add_takeoff, st_add_enroute) into TransitionState
+
+!insert (st_add_enroute, tr_add_periodicNavPing) into StateTransition
+!insert (tr_add_periodicNavPing, st_add_enroute) into TransitionState
+
+!insert (st_add_enroute, tr_add_arriveAtDropZone) into StateTransition
+!insert (tr_add_arriveAtDropZone, st_add_delivering) into TransitionState
+
+!insert (st_add_delivering, tr_add_retryDrop) into StateTransition
+!insert (tr_add_retryDrop, st_add_delivering) into TransitionState
+
+!insert (st_add_delivering, tr_add_confirmDropComplete) into StateTransition
+!insert (tr_add_confirmDropComplete, st_add_returning) into TransitionState
+
+!insert (st_add_enroute, tr_add_lowBatteryDivert) into StateTransition
+!insert (tr_add_lowBatteryDivert, st_add_returning) into TransitionState
+
+!insert (st_add_enroute, tr_add_criticalFaultLanding) into StateTransition
+!insert (tr_add_criticalFaultLanding, st_add_emergencyLanding) into TransitionState
+
+!insert (st_add_emergencyLanding, tr_add_landAndReport) into StateTransition
+!insert (tr_add_landAndReport, st_add_charging) into TransitionState
+
+!insert (st_add_returning, tr_add_dockAndCharge) into StateTransition
+!insert (tr_add_dockAndCharge, st_add_charging) into TransitionState
+
+!insert (st_add_charging, tr_add_chargeComplete) into StateTransition
+!insert (tr_add_chargeComplete, st_add_standby) into TransitionState
+
+!new TimeEvent('te_add_t_scheduleLaunch')
+!te_add_t_scheduleLaunch.time := 300
+!insert (tr_add_scheduleLaunch, te_add_t_scheduleLaunch) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_abortIfNoGpsFix')
+!te_add_t_abortIfNoGpsFix.time := 45
+!insert (tr_add_abortIfNoGpsFix, te_add_t_abortIfNoGpsFix) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_takeoff')
+!te_add_t_takeoff.time := 60
+!insert (tr_add_takeoff, te_add_t_takeoff) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_periodicNavPing')
+!te_add_t_periodicNavPing.time := 30
+!insert (tr_add_periodicNavPing, te_add_t_periodicNavPing) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_arriveAtDropZone')
+!te_add_t_arriveAtDropZone.time := 900
+!insert (tr_add_arriveAtDropZone, te_add_t_arriveAtDropZone) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_retryDrop')
+!te_add_t_retryDrop.time := 20
+!insert (tr_add_retryDrop, te_add_t_retryDrop) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_confirmDropComplete')
+!te_add_t_confirmDropComplete.time := 120
+!insert (tr_add_confirmDropComplete, te_add_t_confirmDropComplete) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_lowBatteryDivert')
+!te_add_t_lowBatteryDivert.time := 10
+!insert (tr_add_lowBatteryDivert, te_add_t_lowBatteryDivert) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_criticalFaultLanding')
+!te_add_t_criticalFaultLanding.time := 5
+!insert (tr_add_criticalFaultLanding, te_add_t_criticalFaultLanding) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_landAndReport')
+!te_add_t_landAndReport.time := 180
+!insert (tr_add_landAndReport, te_add_t_landAndReport) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_dockAndCharge')
+!te_add_t_dockAndCharge.time := 240
+!insert (tr_add_dockAndCharge, te_add_t_dockAndCharge) into TransitionContainsEvents
+
+!new TimeEvent('te_add_t_chargeComplete')
+!te_add_t_chargeComplete.time := 1800
+!insert (tr_add_chargeComplete, te_add_t_chargeComplete) into TransitionContainsEvents
+
+!new StateMachine('sm_thermostatResumeController')
+!sm_thermostatResumeController.name := 'thermostatResumeController'
+
+!new State('st_th_standby')
+!st_th_standby.name := 'standby'
+!new State('st_th_heating')
+!st_th_heating.name := 'heating'
+!new State('st_th_cooling')
+!st_th_cooling.name := 'cooling'
+!new State('st_th_off')
+!st_th_off.name := 'off'
+!new State('st_th_fault')
+!st_th_fault.name := 'fault'
+
+!insert (sm_thermostatResumeController, st_th_standby) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_heating) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_cooling) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_off) into StateMachineContainsStates
+!insert (sm_thermostatResumeController, st_th_fault) into StateMachineContainsStates
+
+!new Transition('tr_th_tStandbyToHeating')
+!tr_th_tStandbyToHeating.name := 'tStandbyToHeating'
+!new Transition('tr_th_tHeatingToStandby')
+!tr_th_tHeatingToStandby.name := 'tHeatingToStandby'
+!new Transition('tr_th_tStandbyToCooling')
+!tr_th_tStandbyToCooling.name := 'tStandbyToCooling'
+!new Transition('tr_th_tCoolingToStandby')
+!tr_th_tCoolingToStandby.name := 'tCoolingToStandby'
+!new Transition('tr_th_tStandbyToOff')
+!tr_th_tStandbyToOff.name := 'tStandbyToOff'
+!new Transition('tr_th_tOffToStandby')
+!tr_th_tOffToStandby.name := 'tOffToStandby'
+!new Transition('tr_th_tFaultToStandby')
+!tr_th_tFaultToStandby.name := 'tFaultToStandby'
+
+!insert (sm_thermostatResumeController, tr_th_tStandbyToHeating) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tHeatingToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tStandbyToCooling) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tCoolingToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tStandbyToOff) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tOffToStandby) into StateMachineContainsTransitions
+!insert (sm_thermostatResumeController, tr_th_tFaultToStandby) into StateMachineContainsTransitions
+
+!insert (st_th_standby, tr_th_tStandbyToHeating) into StateTransition
+!insert (tr_th_tStandbyToHeating, st_th_heating) into TransitionState
+
+!insert (st_th_heating, tr_th_tHeatingToStandby) into StateTransition
+!insert (tr_th_tHeatingToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_standby, tr_th_tStandbyToCooling) into StateTransition
+!insert (tr_th_tStandbyToCooling, st_th_cooling) into TransitionState
+
+!insert (st_th_cooling, tr_th_tCoolingToStandby) into StateTransition
+!insert (tr_th_tCoolingToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_standby, tr_th_tStandbyToOff) into StateTransition
+!insert (tr_th_tStandbyToOff, st_th_off) into TransitionState
+
+!insert (st_th_off, tr_th_tOffToStandby) into StateTransition
+!insert (tr_th_tOffToStandby, st_th_standby) into TransitionState
+
+!insert (st_th_fault, tr_th_tFaultToStandby) into StateTransition
+!insert (tr_th_tFaultToStandby, st_th_standby) into TransitionState
+
+!new TimeEvent('te_th_tStandbyToHeating')
+!te_th_tStandbyToHeating.time := 30
+!insert (tr_th_tStandbyToHeating, te_th_tStandbyToHeating) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tHeatingToStandby')
+!te_th_tHeatingToStandby.time := 180
+!insert (tr_th_tHeatingToStandby, te_th_tHeatingToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tStandbyToCooling')
+!te_th_tStandbyToCooling.time := 30
+!insert (tr_th_tStandbyToCooling, te_th_tStandbyToCooling) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tCoolingToStandby')
+!te_th_tCoolingToStandby.time := 180
+!insert (tr_th_tCoolingToStandby, te_th_tCoolingToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tStandbyToOff')
+!te_th_tStandbyToOff.time := 10
+!insert (tr_th_tStandbyToOff, te_th_tStandbyToOff) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tOffToStandby')
+!te_th_tOffToStandby.time := 5
+!insert (tr_th_tOffToStandby, te_th_tOffToStandby) into TransitionContainsEvents
+
+!new TimeEvent('te_th_tFaultToStandby')
+!te_th_tFaultToStandby.time := 60
+!insert (tr_th_tFaultToStandby, te_th_tFaultToStandby) into TransitionContainsEvents
+
+!new StateMachine('sm_hanoiPhoStallSchedule')
+!sm_hanoiPhoStallSchedule.name := 'hanoiPhoStallSchedule'
+
+!new State('st_hps_closed')
+!st_hps_closed.name := 'closed'
+!new State('st_hps_waiting')
+!st_hps_waiting.name := 'waiting'
+!new State('st_hps_ordering')
+!st_hps_ordering.name := 'ordering'
+!new State('st_hps_eating')
+!st_hps_eating.name := 'eating'
+!new State('st_hps_paying')
+!st_hps_paying.name := 'paying'
+!new State('st_hps_cleanup')
+!st_hps_cleanup.name := 'cleanup'
+!new State('st_hps_restocking')
+!st_hps_restocking.name := 'restocking'
+!new State('st_hps_rainDelay')
+!st_hps_rainDelay.name := 'rainDelay'
+!new State('st_hps_takeaway')
+!st_hps_takeaway.name := 'takeaway'
+!new State('st_hps_tourGroup')
+!st_hps_tourGroup.name := 'tourGroup'
+!new State('st_hps_spicyChallenge')
+!st_hps_spicyChallenge.name := 'spicyChallenge'
+!new State('st_hps_vip')
+!st_hps_vip.name := 'vip'
+
+!insert (sm_hanoiPhoStallSchedule, st_hps_closed) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_waiting) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_ordering) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_eating) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_paying) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_cleanup) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_restocking) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_rainDelay) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_takeaway) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_tourGroup) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_spicyChallenge) into StateMachineContainsStates
+!insert (sm_hanoiPhoStallSchedule, st_hps_vip) into StateMachineContainsStates
+
+!insert (sm_hanoiPhoStallSchedule, st_hps_closed) into StateMachineStartsStates
+
+!new Transition('tr_hps_openStall')
+!tr_hps_openStall.name := 'openStall'
+
+!insert (sm_hanoiPhoStallSchedule, tr_hps_openStall) into StateMachineContainsTransitions
+
+!insert (st_hps_closed, tr_hps_openStall) into StateTransition
+!insert (tr_hps_openStall, st_hps_waiting) into TransitionState
+
+!new TimeEvent('te_hps_t_openStall')
+!te_hps_t_openStall.time := 1
+!insert (tr_hps_openStall, te_hps_t_openStall) into TransitionContainsEvents
+
+!new StateMachine('sm_lagosJunctionTrafficSignalSM')
+!sm_lagosJunctionTrafficSignalSM.name := 'lagosJunctionTrafficSignalSM'
+
+!new State('st_ljt_boot')
+!st_ljt_boot.name := 'boot'
+!new State('st_ljt_selfTest')
+!st_ljt_selfTest.name := 'selfTest'
+!new State('st_ljt_allRedStart')
+!st_ljt_allRedStart.name := 'allRedStart'
+!new State('st_ljt_nsGreen')
+!st_ljt_nsGreen.name := 'nsGreen'
+!new State('st_ljt_nsYellow')
+!st_ljt_nsYellow.name := 'nsYellow'
+!new State('st_ljt_pedWalkNs')
+!st_ljt_pedWalkNs.name := 'pedWalkNs'
+!new State('st_ljt_pedClearNs')
+!st_ljt_pedClearNs.name := 'pedClearNs'
+!new State('st_ljt_allRedNsToEw')
+!st_ljt_allRedNsToEw.name := 'allRedNsToEw'
+!new State('st_ljt_ewGreen')
+!st_ljt_ewGreen.name := 'ewGreen'
+!new State('st_ljt_ewYellow')
+!st_ljt_ewYellow.name := 'ewYellow'
+!new State('st_ljt_pedWalkEw')
+!st_ljt_pedWalkEw.name := 'pedWalkEw'
+!new State('st_ljt_pedClearEw')
+!st_ljt_pedClearEw.name := 'pedClearEw'
+!new State('st_ljt_allRedEwToNs')
+!st_ljt_allRedEwToNs.name := 'allRedEwToNs'
+!new State('st_ljt_emergencyPreempt')
+!st_ljt_emergencyPreempt.name := 'emergencyPreempt'
+!new State('st_ljt_nightFlash')
+!st_ljt_nightFlash.name := 'nightFlash'
+!new State('st_ljt_maintenanceLock')
+!st_ljt_maintenanceLock.name := 'maintenanceLock'
+
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_boot) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_selfTest) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedStart) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nsGreen) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nsYellow) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedWalkNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedClearNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedNsToEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_ewGreen) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_ewYellow) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedWalkEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_pedClearEw) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_allRedEwToNs) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_emergencyPreempt) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_nightFlash) into StateMachineContainsStates
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_maintenanceLock) into StateMachineContainsStates
+
+!insert (sm_lagosJunctionTrafficSignalSM, st_ljt_boot) into StateMachineStartsStates
+
+!new Transition('tr_ljt_powerOnToSelfTest')
+!tr_ljt_powerOnToSelfTest.name := 'powerOnToSelfTest'
+!new Transition('tr_ljt_selfTestToAllRed')
+!tr_ljt_selfTestToAllRed.name := 'selfTestToAllRed'
+!new Transition('tr_ljt_enterMaintenanceLock')
+!tr_ljt_enterMaintenanceLock.name := 'enterMaintenanceLock'
+!new Transition('tr_ljt_maintenanceCompleteToAllRed')
+!tr_ljt_maintenanceCompleteToAllRed.name := 'maintenanceCompleteToAllRed'
+!new Transition('tr_ljt_allRedToNsGreen')
+!tr_ljt_allRedToNsGreen.name := 'allRedToNsGreen'
+!new Transition('tr_ljt_nsGreenToNsYellow')
+!tr_ljt_nsGreenToNsYellow.name := 'nsGreenToNsYellow'
+!new Transition('tr_ljt_nsYellowToPedWalkNs')
+!tr_ljt_nsYellowToPedWalkNs.name := 'nsYellowToPedWalkNs'
+!new Transition('tr_ljt_pedWalkNsToPedClearNs')
+!tr_ljt_pedWalkNsToPedClearNs.name := 'pedWalkNsToPedClearNs'
+!new Transition('tr_ljt_pedClearNsToAllRedNsToEw')
+!tr_ljt_pedClearNsToAllRedNsToEw.name := 'pedClearNsToAllRedNsToEw'
+!new Transition('tr_ljt_allRedNsToEwToEwGreen')
+!tr_ljt_allRedNsToEwToEwGreen.name := 'allRedNsToEwToEwGreen'
+!new Transition('tr_ljt_ewGreenToEwYellow')
+!tr_ljt_ewGreenToEwYellow.name := 'ewGreenToEwYellow'
+!new Transition('tr_ljt_ewYellowToPedWalkEw')
+!tr_ljt_ewYellowToPedWalkEw.name := 'ewYellowToPedWalkEw'
+!new Transition('tr_ljt_pedWalkEwToPedClearEw')
+!tr_ljt_pedWalkEwToPedClearEw.name := 'pedWalkEwToPedClearEw'
+!new Transition('tr_ljt_pedClearEwToAllRedEwToNs')
+!tr_ljt_pedClearEwToAllRedEwToNs.name := 'pedClearEwToAllRedEwToNs'
+!new Transition('tr_ljt_allRedEwToNsToNsGreen')
+!tr_ljt_allRedEwToNsToNsGreen.name := 'allRedEwToNsToNsGreen'
+!new Transition('tr_ljt_preemptFromNsGreen')
+!tr_ljt_preemptFromNsGreen.name := 'preemptFromNsGreen'
+!new Transition('tr_ljt_preemptFromEwGreen')
+!tr_ljt_preemptFromEwGreen.name := 'preemptFromEwGreen'
+!new Transition('tr_ljt_preemptFromNsYellow')
+!tr_ljt_preemptFromNsYellow.name := 'preemptFromNsYellow'
+!new Transition('tr_ljt_preemptFromEwYellow')
+!tr_ljt_preemptFromEwYellow.name := 'preemptFromEwYellow'
+!new Transition('tr_ljt_preemptFromPedWalkNs')
+!tr_ljt_preemptFromPedWalkNs.name := 'preemptFromPedWalkNs'
+!new Transition('tr_ljt_preemptFromPedWalkEw')
+!tr_ljt_preemptFromPedWalkEw.name := 'preemptFromPedWalkEw'
+!new Transition('tr_ljt_endPreemptToAllRed')
+!tr_ljt_endPreemptToAllRed.name := 'endPreemptToAllRed'
+!new Transition('tr_ljt_switchToNightFlash')
+!tr_ljt_switchToNightFlash.name := 'switchToNightFlash'
+!new Transition('tr_ljt_nightFlashBlinkPulse')
+!tr_ljt_nightFlashBlinkPulse.name := 'nightFlashBlinkPulse'
+!new Transition('tr_ljt_exitNightFlashToAllRed')
+!tr_ljt_exitNightFlashToAllRed.name := 'exitNightFlashToAllRed'
+
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_powerOnToSelfTest) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_selfTestToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_enterMaintenanceLock) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_maintenanceCompleteToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedToNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nsGreenToNsYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nsYellowToPedWalkNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedWalkNsToPedClearNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedClearNsToAllRedNsToEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedNsToEwToEwGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_ewGreenToEwYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_ewYellowToPedWalkEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedWalkEwToPedClearEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_pedClearEwToAllRedEwToNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_allRedEwToNsToNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromNsGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromEwGreen) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromNsYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromEwYellow) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromPedWalkNs) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_preemptFromPedWalkEw) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_endPreemptToAllRed) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_switchToNightFlash) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_nightFlashBlinkPulse) into StateMachineContainsTransitions
+!insert (sm_lagosJunctionTrafficSignalSM, tr_ljt_exitNightFlashToAllRed) into StateMachineContainsTransitions
+
+!insert (st_ljt_boot, tr_ljt_powerOnToSelfTest) into StateTransition
+!insert (tr_ljt_powerOnToSelfTest, st_ljt_selfTest) into TransitionState
+
+!insert (st_ljt_selfTest, tr_ljt_selfTestToAllRed) into StateTransition
+!insert (tr_ljt_selfTestToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_selfTest, tr_ljt_enterMaintenanceLock) into StateTransition
+!insert (tr_ljt_enterMaintenanceLock, st_ljt_maintenanceLock) into TransitionState
+
+!insert (st_ljt_maintenanceLock, tr_ljt_maintenanceCompleteToAllRed) into StateTransition
+!insert (tr_ljt_maintenanceCompleteToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_allRedStart, tr_ljt_allRedToNsGreen) into StateTransition
+!insert (tr_ljt_allRedToNsGreen, st_ljt_nsGreen) into TransitionState
+
+!insert (st_ljt_nsGreen, tr_ljt_nsGreenToNsYellow) into StateTransition
+!insert (tr_ljt_nsGreenToNsYellow, st_ljt_nsYellow) into TransitionState
+
+!insert (st_ljt_nsYellow, tr_ljt_nsYellowToPedWalkNs) into StateTransition
+!insert (tr_ljt_nsYellowToPedWalkNs, st_ljt_pedWalkNs) into TransitionState
+
+!insert (st_ljt_pedWalkNs, tr_ljt_pedWalkNsToPedClearNs) into StateTransition
+!insert (tr_ljt_pedWalkNsToPedClearNs, st_ljt_pedClearNs) into TransitionState
+
+!insert (st_ljt_pedClearNs, tr_ljt_pedClearNsToAllRedNsToEw) into StateTransition
+!insert (tr_ljt_pedClearNsToAllRedNsToEw, st_ljt_allRedNsToEw) into TransitionState
+
+!insert (st_ljt_allRedNsToEw, tr_ljt_allRedNsToEwToEwGreen) into StateTransition
+!insert (tr_ljt_allRedNsToEwToEwGreen, st_ljt_ewGreen) into TransitionState
+
+!insert (st_ljt_ewGreen, tr_ljt_ewGreenToEwYellow) into StateTransition
+!insert (tr_ljt_ewGreenToEwYellow, st_ljt_ewYellow) into TransitionState
+
+!insert (st_ljt_ewYellow, tr_ljt_ewYellowToPedWalkEw) into StateTransition
+!insert (tr_ljt_ewYellowToPedWalkEw, st_ljt_pedWalkEw) into TransitionState
+
+!insert (st_ljt_pedWalkEw, tr_ljt_pedWalkEwToPedClearEw) into StateTransition
+!insert (tr_ljt_pedWalkEwToPedClearEw, st_ljt_pedClearEw) into TransitionState
+
+!insert (st_ljt_pedClearEw, tr_ljt_pedClearEwToAllRedEwToNs) into StateTransition
+!insert (tr_ljt_pedClearEwToAllRedEwToNs, st_ljt_allRedEwToNs) into TransitionState
+
+!insert (st_ljt_allRedEwToNs, tr_ljt_allRedEwToNsToNsGreen) into StateTransition
+!insert (tr_ljt_allRedEwToNsToNsGreen, st_ljt_nsGreen) into TransitionState
+
+!insert (st_ljt_nsGreen, tr_ljt_preemptFromNsGreen) into StateTransition
+!insert (tr_ljt_preemptFromNsGreen, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_ewGreen, tr_ljt_preemptFromEwGreen) into StateTransition
+!insert (tr_ljt_preemptFromEwGreen, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_nsYellow, tr_ljt_preemptFromNsYellow) into StateTransition
+!insert (tr_ljt_preemptFromNsYellow, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_ewYellow, tr_ljt_preemptFromEwYellow) into StateTransition
+!insert (tr_ljt_preemptFromEwYellow, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_pedWalkNs, tr_ljt_preemptFromPedWalkNs) into StateTransition
+!insert (tr_ljt_preemptFromPedWalkNs, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_pedWalkEw, tr_ljt_preemptFromPedWalkEw) into StateTransition
+!insert (tr_ljt_preemptFromPedWalkEw, st_ljt_emergencyPreempt) into TransitionState
+
+!insert (st_ljt_emergencyPreempt, tr_ljt_endPreemptToAllRed) into StateTransition
+!insert (tr_ljt_endPreemptToAllRed, st_ljt_allRedStart) into TransitionState
+
+!insert (st_ljt_allRedStart, tr_ljt_switchToNightFlash) into StateTransition
+!insert (tr_ljt_switchToNightFlash, st_ljt_nightFlash) into TransitionState
+
+!insert (st_ljt_nightFlash, tr_ljt_nightFlashBlinkPulse) into StateTransition
+!insert (tr_ljt_nightFlashBlinkPulse, st_ljt_nightFlash) into TransitionState
+
+!insert (st_ljt_nightFlash, tr_ljt_exitNightFlashToAllRed) into StateTransition
+!insert (tr_ljt_exitNightFlashToAllRed, st_ljt_allRedStart) into TransitionState
+
+!new TimeEvent('te_ljt_TTE1')
+!te_ljt_TTE1.time := 2
+!insert (tr_ljt_powerOnToSelfTest, te_ljt_TTE1) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE2')
+!te_ljt_TTE2.time := 5
+!insert (tr_ljt_selfTestToAllRed, te_ljt_TTE2) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE3')
+!te_ljt_TTE3.time := 1
+!insert (tr_ljt_enterMaintenanceLock, te_ljt_TTE3) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE4')
+!te_ljt_TTE4.time := 600
+!insert (tr_ljt_maintenanceCompleteToAllRed, te_ljt_TTE4) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE5')
+!te_ljt_TTE5.time := 2
+!insert (tr_ljt_allRedToNsGreen, te_ljt_TTE5) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE6')
+!te_ljt_TTE6.time := 45
+!insert (tr_ljt_nsGreenToNsYellow, te_ljt_TTE6) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE7')
+!te_ljt_TTE7.time := 3
+!insert (tr_ljt_nsYellowToPedWalkNs, te_ljt_TTE7) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE8')
+!te_ljt_TTE8.time := 10
+!insert (tr_ljt_pedWalkNsToPedClearNs, te_ljt_TTE8) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE9')
+!te_ljt_TTE9.time := 3
+!insert (tr_ljt_pedClearNsToAllRedNsToEw, te_ljt_TTE9) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE10')
+!te_ljt_TTE10.time := 2
+!insert (tr_ljt_allRedNsToEwToEwGreen, te_ljt_TTE10) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE11')
+!te_ljt_TTE11.time := 40
+!insert (tr_ljt_ewGreenToEwYellow, te_ljt_TTE11) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE12')
+!te_ljt_TTE12.time := 3
+!insert (tr_ljt_ewYellowToPedWalkEw, te_ljt_TTE12) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE13')
+!te_ljt_TTE13.time := 10
+!insert (tr_ljt_pedWalkEwToPedClearEw, te_ljt_TTE13) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE14')
+!te_ljt_TTE14.time := 3
+!insert (tr_ljt_pedClearEwToAllRedEwToNs, te_ljt_TTE14) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE15')
+!te_ljt_TTE15.time := 2
+!insert (tr_ljt_allRedEwToNsToNsGreen, te_ljt_TTE15) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE16')
+!te_ljt_TTE16.time := 1
+!insert (tr_ljt_preemptFromNsGreen, te_ljt_TTE16) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE17')
+!te_ljt_TTE17.time := 1
+!insert (tr_ljt_preemptFromEwGreen, te_ljt_TTE17) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE18')
+!te_ljt_TTE18.time := 1
+!insert (tr_ljt_preemptFromNsYellow, te_ljt_TTE18) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE19')
+!te_ljt_TTE19.time := 1
+!insert (tr_ljt_preemptFromEwYellow, te_ljt_TTE19) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE20')
+!te_ljt_TTE20.time := 1
+!insert (tr_ljt_preemptFromPedWalkNs, te_ljt_TTE20) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE21')
+!te_ljt_TTE21.time := 1
+!insert (tr_ljt_preemptFromPedWalkEw, te_ljt_TTE21) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE22')
+!te_ljt_TTE22.time := 20
+!insert (tr_ljt_endPreemptToAllRed, te_ljt_TTE22) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE23')
+!te_ljt_TTE23.time := 1
+!insert (tr_ljt_switchToNightFlash, te_ljt_TTE23) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE24')
+!te_ljt_TTE24.time := 2
+!insert (tr_ljt_nightFlashBlinkPulse, te_ljt_TTE24) into TransitionContainsEvents
+
+!new TimeEvent('te_ljt_TTE25')
+!te_ljt_TTE25.time := 1
+!insert (tr_ljt_exitNightFlashToAllRed, te_ljt_TTE25) into TransitionContainsEvents
+

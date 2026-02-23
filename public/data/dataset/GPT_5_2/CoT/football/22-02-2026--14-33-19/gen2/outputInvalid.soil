@@ -1,0 +1,336 @@
+!new Club('C14')
+!C14.name := 'Club Deportivo Guadalajara'
+!C14.homeGround := 'Estadio Akron (Zapopan, Jalisco)'
+!C14.chairman := 'Amaury Vergara'
+
+!new Team('T15')
+!T15.name := 'Chivas Primera'
+!insert (C14, T15) into ClubTeam
+
+!new Team('T16')
+!T16.name := 'Chivas Sub-23'
+!insert (C14, T16) into ClubTeam
+
+!new Player('P36')
+!P36.name := 'Jose Ramirez'
+!P36.age := 29
+!P36.bestFoot := #RIGHT
+!P36.phoneNumber := '+52 33 1450 7781'
+!insert (T15, P36) into TeamPlayer
+
+!new Position('POS58')
+!POS58.positionName := #GOALKEEPER
+!insert (P36, POS58) into PlayerPositions
+
+!new TrainingObjective('TO37')
+!TO37.areaToImprove := 'Better decision-making on short build-up vs high press'
+!TO37.startDate := '2026-06-15'
+!TO37.endDate := '2026-07-20'
+!TO37.success := false
+!insert (TO37, P36) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN15')
+!PN15.note := 'Commands the box well but rushes throws after saves.'
+!PN15.date := '2026-06-28'
+!insert (P36, PN15) into PlayerPlayerNotes
+
+!new Player('P37')
+!P37.name := 'Diego Castaneda'
+!P37.age := 24
+!P37.bestFoot := #LEFT
+!P37.phoneNumber := '+52 33 2099 1140'
+!insert (T15, P37) into TeamPlayer
+
+!new Position('POS59')
+!POS59.positionName := #DEFENDER
+!insert (P37, POS59) into PlayerPositions
+
+!new Position('POS60')
+!POS60.positionName := #MIDFIELDER
+!insert (P37, POS60) into PlayerPositions
+
+!new TrainingObjective('TO38')
+!TO38.areaToImprove := 'Timing of stepping into midfield to intercept'
+!TO38.startDate := '2026-06-10'
+!TO38.endDate := '2026-07-10'
+!TO38.success := true
+!insert (TO38, P37) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN16')
+!PN16.note := 'Excellent at breaking lines with carries when space opens.'
+!PN16.date := '2026-06-22'
+!insert (P37, PN16) into PlayerPlayerNotes
+
+!new Player('P38')
+!P38.name := 'Thiago Souza'
+!P38.age := 21
+!P38.bestFoot := #BOTH
+!P38.phoneNumber := '+52 33 8765 0032'
+!insert (T15, P38) into TeamPlayer
+
+!new Position('POS61')
+!POS61.positionName := #FORWARD
+!insert (P38, POS61) into PlayerPositions
+
+!new TrainingObjective('TO39')
+!TO39.areaToImprove := 'First-touch finishing under pressure'
+!TO39.startDate := '2026-06-12'
+!TO39.endDate := '2026-07-18'
+!TO39.success := false
+!insert (TO39, P38) into TrainingObjectivePlayer
+
+!new TrainingSession('TS18')
+!TS18.date := '2026-06-27'
+!TS18.location := 'Verde Valle Training Complex (Guadalajara)'
+!TS18.purpose := 'High press coordination + rest-defense after attacks'
+!insert (T15, TS18) into TeamTraining
+
+!new TrainingNotes('TN27')
+!TN27.note := 'Press triggers improved when the #9 curved runs to block the pivot.'
+!TN27.date := '2026-06-27'
+!insert (TS18, TN27) into TrainingTrainingNotes
+
+!new TrainingNotes('TN28')
+!TN28.note := 'Rest-defense spacing still too wide; corrected with 6-second rule after loss.'
+!TN28.date := '2026-06-27'
+!insert (TS18, TN28) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('FA9')
+!FA9.reason := 'Dental appointment (club-approved).'
+!insert (TS18, FA9) into TrainingFailded
+!insert (FA9, P38) into FailedPlayer
+
+!new TrainingSession('TS19')
+!TS19.date := '2026-07-02'
+!TS19.location := 'Estadio Akron auxiliary pitch'
+!TS19.purpose := 'Set pieces and match plan rehearsal for internal scrimmage'
+!insert (T15, TS19) into TeamTraining
+
+!new TrainingNotes('TN29')
+!TN29.note := 'Corner delivery targets clarified; near-post flick practiced 15 reps.'
+!TN29.date := '2026-07-02'
+!insert (TS19, TN29) into TrainingTrainingNotes
+
+!new TrainingNotes('TN30')
+!TN30.note := 'Defensive free-kick line held well; keeper communication improved.'
+!TN30.date := '2026-07-02'
+!insert (TS19, TN30) into TrainingTrainingNotes
+
+!new Player('P39')
+!P39.name := 'Emiliano Torres'
+!P39.age := 19
+!P39.bestFoot := #RIGHT
+!P39.phoneNumber := '+52 33 4401 6650'
+!insert (T16, P39) into TeamPlayer
+
+!new Position('POS62')
+!POS62.positionName := #GOALKEEPER
+!insert (P39, POS62) into PlayerPositions
+
+!new TrainingObjective('TO40')
+!TO40.areaToImprove := 'Handling crosses in traffic'
+!TO40.startDate := '2026-06-14'
+!TO40.endDate := '2026-07-30'
+!TO40.success := false
+!insert (TO40, P39) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN17')
+!PN17.note := 'Brave but tends to punch when catching is possible.'
+!PN17.date := '2026-06-25'
+!insert (P39, PN17) into PlayerPlayerNotes
+
+!new Player('P40')
+!P40.name := 'Rodrigo Ibarra'
+!P40.age := 20
+!P40.bestFoot := #LEFT
+!P40.phoneNumber := '+52 33 5100 9921'
+!insert (T16, P40) into TeamPlayer
+
+!new Position('POS63')
+!POS63.positionName := #DEFENDER
+!insert (P40, POS63) into PlayerPositions
+
+!new TrainingObjective('TO41')
+!TO41.areaToImprove := 'Body orientation when receiving under pressure'
+!TO41.startDate := '2026-06-18'
+!TO41.endDate := '2026-07-25'
+!TO41.success := true
+!insert (TO41, P40) into TrainingObjectivePlayer
+
+!new Player('P41')
+!P41.name := 'Mateo Jimenez'
+!P41.age := 18
+!P41.bestFoot := #BOTH
+!P41.phoneNumber := '+52 33 7012 0889'
+!insert (T16, P41) into TeamPlayer
+
+!new Position('POS64')
+!POS64.positionName := #MIDFIELDER
+!insert (P41, POS64) into PlayerPositions
+
+!new Position('POS65')
+!POS65.positionName := #FORWARD
+!insert (P41, POS65) into PlayerPositions
+
+!new TrainingObjective('TO42')
+!TO42.areaToImprove := 'Arriving in the box from midfield (late runs)'
+!TO42.startDate := '2026-06-16'
+!TO42.endDate := '2026-07-22'
+!TO42.success := false
+!insert (TO42, P41) into TrainingObjectivePlayer
+
+!new PlayerNotes('PN18')
+!PN18.note := 'Good acceleration over 5-10m; needs calmer final pass.'
+!PN18.date := '2026-06-29'
+!insert (P41, PN18) into PlayerPlayerNotes
+
+!new TrainingSession('TS20')
+!TS20.date := '2026-06-26'
+!TS20.location := 'Verde Valle Training Complex (Field 2)'
+!TS20.purpose := 'Playing out from the back vs man-marking; fast switches'
+!insert (T16, TS20) into TeamTraining
+
+!new TrainingNotes('TN31')
+!TN31.note := 'Center-backs found the third-man more often after adjusting spacing.'
+!TN31.date := '2026-06-26'
+!insert (TS20, TN31) into TrainingTrainingNotes
+
+!new TrainingNotes('TN32')
+!TN32.note := 'Final third decisions still rushed; added constraint of two-touch in zone 14.'
+!TN32.date := '2026-06-26'
+!insert (TS20, TN32) into TrainingTrainingNotes
+
+!new Competition('COMP6')
+!COMP6.name := 'Pretemporada Rojiblanca 2026'
+!COMP6.type := 'Internal pre-season friendlies (closed doors)'
+
+!new Match('M9')
+!M9.date := '2026-07-05'
+!M9.homeAway := true
+!insert (COMP6, M9) into CompetitionMatch
+!insert (T15, M9) into LocalMatch
+!insert (T16, M9) into VisitorMatch
+
+!new MatchReport('MR9')
+!MR9.duration := 90
+!MR9.scoreLocal := 3
+!MR9.scoreVisitor := 2
+!insert (M9, MR9) into MatchMatchReport
+
+!new MatchEvent('ME42')
+!ME42.eventType := #GOAL
+!ME42.time := 11
+!insert (M9, ME42) into MatchMatchEvent
+
+!new MatchEvent('ME43')
+!ME43.eventType := #GOAL
+!ME43.time := 27
+!insert (M9, ME43) into MatchMatchEvent
+
+!new MatchEvent('ME44')
+!ME44.eventType := #FOUL
+!ME44.time := 39
+!insert (M9, ME44) into MatchMatchEvent
+
+!new MatchEvent('ME45')
+!ME45.eventType := #GOAL
+!ME45.time := 55
+!insert (M9, ME45) into MatchMatchEvent
+
+!new MatchEvent('ME46')
+!ME46.eventType := #OFFSIDE
+!ME46.time := 63
+!insert (M9, ME46) into MatchMatchEvent
+
+!new MatchEvent('ME47')
+!ME47.eventType := #GOAL
+!ME47.time := 71
+!insert (M9, ME47) into MatchMatchEvent
+
+!new MatchEvent('ME48')
+!ME48.eventType := #GOAL
+!ME48.time := 88
+!insert (M9, ME48) into MatchMatchEvent
+
+!new MatchNote('MN11')
+!MN11.note := 'Scrimmage used to test pressing structure; Sub-23 exploited space behind the fullbacks twice.'
+!MN11.date := '2026-07-05'
+!insert (M9, MN11) into MatchMatchNote
+
+!new MatchNote('MN12')
+!MN12.note := 'First team improved after halftime by compressing distances between lines.'
+!MN12.date := '2026-07-05'
+!insert (M9, MN12) into MatchMatchNote
+
+!new MatchPlayer('MP33')
+!MP33.booked := false
+!MP33.goals := 0
+!MP33.rating := 6
+!insert (P36, MP33) into PlayerMatch
+!insert (M9, MP33) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP33')
+!MPP33.positionName := #GOALKEEPER
+!MPP33.number := 1
+!insert (MP33, MPP33) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP34')
+!MP34.booked := true
+!MP34.goals := 0
+!MP34.rating := 7
+!insert (P37, MP34) into PlayerMatch
+!insert (M9, MP34) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP34')
+!MPP34.positionName := #DEFENDER
+!MPP34.number := 4
+!insert (MP34, MPP34) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP35')
+!MP35.booked := false
+!MP35.goals := 2
+!MP35.rating := 8
+!insert (P38, MP35) into PlayerMatch
+!insert (M9, MP35) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP35')
+!MPP35.positionName := #FORWARD
+!MPP35.number := 9
+!insert (MP35, MPP35) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP36')
+!MP36.booked := false
+!MP36.goals := 0
+!MP36.rating := 6
+!insert (P39, MP36) into PlayerMatch
+!insert (M9, MP36) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP36')
+!MPP36.positionName := #GOALKEEPER
+!MPP36.number := 12
+!insert (MP36, MPP36) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP37')
+!MP37.booked := false
+!MP37.goals := 0
+!MP37.rating := 6
+!insert (P40, MP37) into PlayerMatch
+!insert (M9, MP37) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP37')
+!MPP37.positionName := #DEFENDER
+!MPP37.number := 3
+!insert (MP37, MPP37) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayer('MP38')
+!MP38.booked := false
+!MP38.goals := 2
+!MP38.rating := 7
+!insert (P41, MP38) into PlayerMatch
+!insert (M9, MP38) into MatchMatchPlayer
+
+!new MatchPlayerPosition('MPP38')
+!MPP38.positionName := #MIDFIELDER
+!MPP38.number := 8
+!insert (MP38, MPP38) into MatchPlayerMatchPlayerPosition
+

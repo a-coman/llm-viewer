@@ -1,0 +1,149 @@
+!new RentalOffice('RO20')
+!RO20.name := 'Central Reservations (No Fleet On Site)'
+!RO20.number := 20
+!RO20.address := 'Online-only desk, PO Box 20, Hartford, CT'
+
+!new RentalOffice('RO21')
+!RO21.name := 'Desert Storage Lot'
+!RO21.number := 21
+!RO21.address := '701 W Buckeye Rd, Phoenix, AZ'
+
+!new RentalOffice('RO22')
+!RO22.name := 'Coastal After-Hours Gate'
+!RO22.number := 22
+!RO22.address := '500 Port Blvd, Miami, FL (gate code required)'
+
+!new RentalOffice('RO23')
+!RO23.name := 'Old Town Counter'
+!RO23.number := 23
+!RO23.address := '12 King St, Wilmington, DE'
+
+!new Truck('V200')
+!V200.id := 200
+!V200.registrationState := #AZ
+!V200.licensePlateNumber := 'AZ-ZERO-200'
+!V200.vehicleTypeCode := #TRUCK10
+!V200.registrationLastMaintenanceDate := Date('1999-12-31')
+!V200.expirationDate := Date('2030-01-01')
+!V200.odometerReading := 0
+!V200.gasTankCapacity := 0.0
+!V200.workingRadio := false
+!V200.mileage := 0
+
+!new Vehicle('V201')
+!V201.id := 201
+!V201.registrationState := #FL
+!V201.licensePlateNumber := 'FL-OPEN-201'
+!V201.vehicleTypeCode := #OPEN_TRAILER
+!V201.registrationLastMaintenanceDate := Date('2026/07/04')
+!V201.expirationDate := Date('2026/07/04')
+
+!new Truck('V202')
+!V202.id := 202
+!V202.registrationState := #CO
+!V202.licensePlateNumber := 'CO-HIGH-202'
+!V202.vehicleTypeCode := #TRUCK24
+!V202.registrationLastMaintenanceDate := Date('2026-07-04T23:59:59Z')
+!V202.expirationDate := Date('2030-01-01')
+!V202.odometerReading := 888888
+!V202.gasTankCapacity := 150.5
+!V202.workingRadio := true
+!V202.mileage := 1
+
+!new Vehicle('V203')
+!V203.id := 203
+!V203.registrationState := #DE
+!V203.licensePlateNumber := 'DE-COV-203'
+!V203.vehicleTypeCode := #COVERED_TRAILER
+!V203.registrationLastMaintenanceDate := Date('04-07-2026')
+!V203.expirationDate := Date('2030-01-01')
+
+!new Individual('I20')
+!I20.name := 'Samir Al‑Khatib'
+!I20.address := '77 Maple Ave, Hartford, CT'
+!I20.poorRisk := true
+!I20.homePhone := ''
+!I20.driverLicenseState := #AL
+!I20.driverLicenseNumber := -12345
+!I20.driverLicenseExpirationDate := Date('2026/07/04')
+
+!new Company('C20')
+!C20.name := 'Kōyō Transport Co.'
+!C20.address := '1 Harbor Way, Miami, FL'
+!C20.poorRisk := false
+!C20.idNumber := -999
+
+!new Company('C21')
+!C21.name := 'Dormant Account GmbH'
+!C21.address := '12 King St, Wilmington, DE'
+!C21.poorRisk := false
+!C21.idNumber := 21
+
+!new RentalAgreement('RA300')
+!RA300.number := 300
+!RA300.rentalDate := Date('2026/07/04')
+!RA300.anticipatedDuration := 0
+!RA300.depositPaid := 0.0
+!RA300.quotedDailyRate := 0.0
+!RA300.quotedRatePerMile := 0.0001
+
+!new RentalAgreement('RA301')
+!RA301.number := 301
+!RA301.rentalDate := Date('2026/07/04')
+!RA301.anticipatedDuration := 999999
+!RA301.depositPaid := 0.0
+!RA301.quotedDailyRate := 999999.99
+!RA301.quotedRatePerMile := 0.0
+
+!new RentalAgreement('RA302')
+!RA302.number := 302
+!RA302.rentalDate := Date('04-07-2026')
+!RA302.anticipatedDuration := 1
+!RA302.depositPaid := 0.0
+!RA302.quotedDailyRate := 1.0
+!RA302.quotedRatePerMile := 1.0
+
+!new RentalAgreement('RA303')
+!RA303.number := 303
+!RA303.rentalDate := Date('2026-07-04T23:59:59Z')
+!RA303.anticipatedDuration := 0
+!RA303.depositPaid := 100000000.0
+!RA303.quotedDailyRate := 0.0
+!RA303.quotedRatePerMile := 5000.0
+
+!new RentalAgreement('RA304')
+!RA304.number := 304
+!RA304.rentalDate := Date('2026/07/04')
+!RA304.anticipatedDuration := 0
+!RA304.depositPaid := 0.0
+!RA304.quotedDailyRate := 0.0
+!RA304.quotedRatePerMile := 0.0
+
+!insert (RO21, V200) into RentalOfficeVehicle
+!insert (RO21, V201) into RentalOfficeVehicle
+!insert (RO21, V202) into RentalOfficeVehicle
+!insert (RO23, V203) into RentalOfficeVehicle
+
+!insert (RO20, RA300) into RentalOfficeRentalAgreementOrigin
+!insert (RO20, RA301) into RentalOfficeRentalAgreementOrigin
+!insert (RO20, RA302) into RentalOfficeRentalAgreementOrigin
+!insert (RO20, RA303) into RentalOfficeRentalAgreementOrigin
+!insert (RO20, RA304) into RentalOfficeRentalAgreementOrigin
+
+!insert (RO22, RA300) into RentalOfficeRentalAgreementDrop
+!insert (RO22, RA301) into RentalOfficeRentalAgreementDrop
+!insert (RO21, RA302) into RentalOfficeRentalAgreementDrop
+!insert (RO23, RA303) into RentalOfficeRentalAgreementDrop
+!insert (RO22, RA304) into RentalOfficeRentalAgreementDrop
+
+!insert (RA300, V200) into RentalAgreementVehicle
+!insert (RA301, V200) into RentalAgreementVehicle
+!insert (RA302, V201) into RentalAgreementVehicle
+!insert (RA303, V202) into RentalAgreementVehicle
+!insert (RA304, V200) into RentalAgreementVehicle
+
+!insert (RA300, I20) into RentalAgreementCustomer
+!insert (RA301, I20) into RentalAgreementCustomer
+!insert (RA302, I20) into RentalAgreementCustomer
+!insert (RA303, C20) into RentalAgreementCustomer
+!insert (RA304, I20) into RentalAgreementCustomer

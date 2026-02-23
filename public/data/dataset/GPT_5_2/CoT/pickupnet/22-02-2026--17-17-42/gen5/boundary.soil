@@ -1,0 +1,124 @@
+!new Station('S6')
+
+!new Driver('DRV600')
+!DRV600.id := 'DRV-600'
+!DRV600.name := 'Kofi Mensah'
+
+!new Driver('DRV601')
+!DRV601.id := 'DRV-601'
+!DRV601.name := 'Anastasiya Petrova'
+
+!new Driver('DRV602')
+!DRV602.id := 'DRV-602'
+!DRV602.name := 'Priya Nair'
+
+!new Driver('DRV603')
+!DRV603.id := 'DRV-603'
+!DRV603.name := 'Liam Byrne'
+
+!insert (S6, DRV600) into StationContainsDriver
+!insert (S6, DRV601) into StationContainsDriver
+!insert (S6, DRV602) into StationContainsDriver
+!insert (S6, DRV603) into StationContainsDriver
+
+!new Customer('CUST6001')
+!CUST6001.id := 'CUST-6001'
+!CUST6001.name := 'Ananya Mukherjee'
+!CUST6001.twitterUserName := '@ananya_sends'
+
+!new Customer('CUST6002')
+!CUST6002.id := 'CUST-6002'
+!CUST6002.name := 'Tenzin Dorje'
+!CUST6002.twitterUserName := '@བོད་སྐྱེལ'
+
+!new Customer('CUST6003')
+!CUST6003.id := 'CUST-6003'
+!CUST6003.name := 'Adaeze Okafor'
+!CUST6003.twitterUserName := ''
+
+!insert (S6, CUST6001) into StationContainsCustomer
+!insert (S6, CUST6002) into StationContainsCustomer
+!insert (S6, CUST6003) into StationContainsCustomer
+
+!new Address('AORIG600')
+!AORIG600.text := 'Howrah Station parcel counter, Kolkata, India'
+!new GeoLocation('GORIG600')
+!GORIG600.latitude := 22.5850
+!GORIG600.longitude := 88.3426
+!insert (AORIG600, GORIG600) into AddressContainsGeoLocation
+
+!new Address('ADEST600')
+!ADEST600.text := 'Durbar Marg, Kathmandu, Nepal'
+!new GeoLocation('GDEST600')
+!GDEST600.latitude := 27.7172
+!GDEST600.longitude := 85.3240
+!insert (ADEST600, GDEST600) into AddressContainsGeoLocation
+
+!new Address('ABLANK600')
+!ABLANK600.text := ''
+!new GeoLocation('GBLANK600')
+!GBLANK600.latitude := 0.0
+!GBLANK600.longitude := -179.9999
+!insert (ABLANK600, GBLANK600) into AddressContainsGeoLocation
+
+!new Address('AIDL600')
+!AIDL600.text := 'Kiritimati (Christmas Island) cargo pier, Kiribati'
+!new GeoLocation('GIDL600')
+!GIDL600.latitude := 1.8721
+!GIDL600.longitude := 179.9999
+!insert (AIDL600, GIDL600) into AddressContainsGeoLocation
+
+!new Address('ANORTH600')
+!ANORTH600.text := 'Arctic ice camp waypoint (near the pole)'
+!new GeoLocation('GNORTH600')
+!GNORTH600.latitude := 89.9999
+!GNORTH600.longitude := 45.0
+!insert (ANORTH600, GNORTH600) into AddressContainsGeoLocation
+
+!new Address('ASOUTH600')
+!ASOUTH600.text := 'Antarctic field depot waypoint (near the pole)'
+!new GeoLocation('GSOUTH600')
+!GSOUTH600.latitude := -89.9999
+!GSOUTH600.longitude := -45.0
+!insert (ASOUTH600, GSOUTH600) into AddressContainsGeoLocation
+
+!new Shipment('SHP6001')
+!SHP6001.id := 'SHP-6001'
+!SHP6001.status := #ASSIGNED
+
+!new Shipment('SHP6002')
+!SHP6002.id := 'SHP-6002'
+!SHP6002.status := #UNDERWAY
+
+!new Shipment('SHP6003')
+!SHP6003.id := 'SHP-6003'
+!SHP6003.status := #DELIVERED
+
+!new Shipment('SHP6004')
+!SHP6004.id := 'SHP-6004'
+!SHP6004.status := #NEW
+
+!insert (S6, SHP6001) into StationShipment
+!insert (S6, SHP6002) into StationShipment
+!insert (S6, SHP6003) into StationShipment
+!insert (S6, SHP6004) into StationShipment
+
+!insert (CUST6001, SHP6001) into CustomerConsistsOfShipment
+!insert (CUST6001, SHP6002) into CustomerConsistsOfShipment
+!insert (CUST6002, SHP6003) into CustomerConsistsOfShipment
+!insert (CUST6002, SHP6004) into CustomerConsistsOfShipment
+
+!insert (SHP6001, AORIG600) into ShipmentContainsPickUpAddress
+!insert (SHP6001, ABLANK600) into ShipmentContainsDeliveryAddress
+!insert (DRV602, SHP6001) into DriverShipment
+
+!insert (SHP6002, ABLANK600) into ShipmentContainsPickUpAddress
+!insert (SHP6002, AIDL600) into ShipmentContainsDeliveryAddress
+!insert (DRV600, SHP6002) into DriverShipment
+
+!insert (SHP6003, ANORTH600) into ShipmentContainsPickUpAddress
+!insert (SHP6003, ASOUTH600) into ShipmentContainsDeliveryAddress
+!insert (DRV601, SHP6003) into DriverShipment
+
+!insert (SHP6004, AIDL600) into ShipmentContainsPickUpAddress
+!insert (SHP6004, ADEST600) into ShipmentContainsDeliveryAddress
