@@ -34,6 +34,10 @@ export const prices = {
     input: 1.75,
     output: 14,
   },
+  GEMINI_3_PRO: {
+    input: 1.4,
+    output: 12.0,
+  }
 } as const;
 
 // Color ranges for getColor(value, green, red)

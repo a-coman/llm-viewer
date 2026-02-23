@@ -38,7 +38,12 @@ interface Metrics {
     stringLv: number;
     ged?: { mean: number; std: number };
   };
-  judge?: { successRate: number };
+  judge?: {
+    successRate: number;
+    price?: { price: number };
+    elapsedSeconds?: number;
+    time_seconds?: number;
+  };
   price?: { price: number };
   elapsedSeconds?: number;
   time_seconds?: number;
@@ -173,6 +178,8 @@ const div = metrics?.diversity;
 const judge = metrics?.judge || { successRate: metrics?.realism };
 const price = metrics?.price;
 const elapsedSeconds = metrics?.elapsedSeconds ?? metrics?.time_seconds;
+const judgePrice = judge?.price;
+const judgeElapsedSeconds = judge?.elapsedSeconds ?? judge?.time_seconds;
 ---
 
 <div class="metrics-panel">
@@ -357,6 +364,20 @@ const elapsedSeconds = metrics?.elapsedSeconds ?? metrics?.time_seconds;
                 {getDisplayValue(judge.successRate).text}
               </td>
             </tr>
+            {judgePrice !== undefined && (
+              <tr>
+                <td>Judge Cost</td>
+                <td style={getDisplayValue(judgePrice, "currency").style}>
+                  {getDisplayValue(judgePrice, "currency").text}
+                </td>
+              </tr>
+            )}
+            {judgeElapsedSeconds !== undefined && (
+              <tr>
+                <td>Judge Elapsed Time</td>
+                <td>{formatElapsedSeconds(judgeElapsedSeconds)}</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

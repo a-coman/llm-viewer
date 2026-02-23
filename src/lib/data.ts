@@ -381,6 +381,44 @@ function getJudgeResult(counts: RealismCounts | null | undefined): {
   };
 }
 
+function getJudgeResultWithStats(
+  counts: RealismCounts | null | undefined,
+  judgeStats:
+    | {
+        input_tokens: number;
+        output_tokens: number;
+        total_tokens: number;
+        time_seconds: number;
+      }
+    | null
+    | undefined,
+  judgeModelName: string | undefined,
+): {
+  realistic: number;
+  unrealistic: number;
+  unknown: number;
+  successRate: number;
+  price?: { price: number; tokenInput: number; tokenOutput: number };
+  elapsedSeconds?: number;
+} {
+  const base = getJudgeResult(counts);
+  if (!judgeStats || !judgeModelName) return base;
+
+  return {
+    ...base,
+    price: {
+      price: calculatePrice(
+        judgeModelName,
+        judgeStats.input_tokens,
+        judgeStats.output_tokens,
+      ),
+      tokenInput: judgeStats.input_tokens,
+      tokenOutput: judgeStats.output_tokens,
+    },
+    elapsedSeconds: judgeStats.time_seconds,
+  };
+}
+
 // Helper function to transform raw difference data to display format
 function rawDifferenceToDisplay(
   raw: RawDifferenceData | null | undefined,
@@ -557,8 +595,10 @@ export function getModelData(
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.simple?.ged,
         },
-        judge: getJudgeResult(
+        judge: getJudgeResultWithStats(
           judgeExp?.realism || cachedJudge?.simple?.realism,
+          judgeExp?.stats || cachedJudge?.simple?.stats,
+          cachedJudge?.simple?.model?.name || logExp.model.name,
         ),
         shannon: [],
         grakel: undefined,
@@ -812,7 +852,11 @@ export function getModelData(
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.cot?.ged,
         },
-        judge: getJudgeResult(judgeExp?.realism || cachedJudge?.cot?.realism),
+        judge: getJudgeResultWithStats(
+          judgeExp?.realism || cachedJudge?.cot?.realism,
+          judgeExp?.stats || cachedJudge?.cot?.stats,
+          cachedJudge?.cot?.model?.name || logExp.model.name,
+        ),
         shannon: [],
         grakel: undefined,
         gedHeatmap: gedExp?.ged,
@@ -934,7 +978,11 @@ export function getDashboardData(experimentId?: string): DashboardData {
         ...rawDifferenceToDisplay(differenceData?.difference),
         ged: gedData,
       },
-      judge: getJudgeResult(judgeData?.realism),
+      judge: getJudgeResultWithStats(
+        judgeData?.realism,
+        judgeData?.stats,
+        judgeData?.model?.name,
+      ),
     };
   };
 

@@ -472,6 +472,12 @@ export interface CoTJudgeGeneration {
 
 export interface JudgeExperimentEntry {
   experiment_id: string;
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
   realism: RealismCounts;
   generations: (SimpleJudgeGeneration | CoTJudgeGeneration)[];
 }
@@ -509,6 +515,8 @@ export interface JudgeResult {
   unrealistic: number;
   unknown: number;
   successRate: number;
+  price?: PriceInfo;
+  elapsedSeconds?: number;
 }
 
 export interface JudgeResponse {
