@@ -357,6 +357,11 @@ export interface DiversityMetrics {
   stringEquals: number;
   stringLv: number;
   ged?: GedSummary; // GED mean and std at model level
+  shannon?: GedSummary; // Shannon mean and std (dashboard-style summary)
+  shannonActive?: number; // Shannon eveness_active_groups (0-1)
+  shannonAll?: number; // Shannon eveness_all_groups (0-1)
+  shannonActiveStd?: number; // Std dev of eveness_active_groups
+  shannonAllStd?: number; // Std dev of eveness_all_groups
 }
 
 // --- GED (Graph Edit Distance) Types ---
@@ -417,6 +422,62 @@ export interface GedModelEntry {
 
 export interface GedFileRoot {
   experiments: GedModelEntry[];
+}
+
+// --- Shannon Types ---
+
+export interface ShannonSummaryGroups {
+  eveness_active_groups: GedSummary;
+  eveness_all_groups: GedSummary;
+}
+
+export interface ShannonSpecificEntry {
+  name: string;
+  values: Record<string, number>;
+  shannon: {
+    eveness_active_groups: number;
+    eveness_all_groups: number;
+  };
+}
+
+export interface ShannonSimpleGenerationEntry {
+  generation_id: string;
+  attempt_id: string;
+  specific: ShannonSpecificEntry[];
+}
+
+export interface ShannonCoTCategoryEntry {
+  name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
+  attempt_id: string;
+  specific: ShannonSpecificEntry[];
+}
+
+export interface ShannonCoTGenerationEntry {
+  generation_id: string;
+  specific: ShannonSpecificEntry[];
+  categories: ShannonCoTCategoryEntry[];
+}
+
+export interface ShannonExperimentEntry {
+  experiment_id: string;
+  specific: ShannonSpecificEntry[];
+  generations: (ShannonSimpleGenerationEntry | ShannonCoTGenerationEntry)[];
+}
+
+export interface ShannonModeData {
+  shannon: ShannonSummaryGroups;
+  number_experiments: number;
+  experiments: ShannonExperimentEntry[];
+}
+
+export interface ShannonModelEntry {
+  id: string;
+  simple: ShannonModeData;
+  cot: ShannonModeData;
+}
+
+export interface ShannonFileRoot {
+  experiments: ShannonModelEntry[];
 }
 
 // --- Judge.json Types ---
@@ -531,13 +592,12 @@ export interface PriceInfo {
 }
 
 export interface ShannonEntry {
-  attribute: string;
+  name: string;
   values: Record<string, number>;
-  entropy: number;
-  maxEntropyActive: number;
-  evennessActive: number;
-  maxEntropyAll: number;
-  evennessAll: number;
+  shannon: {
+    eveness_active_groups: number;
+    eveness_all_groups: number;
+  };
 }
 
 export interface GrakelMatrix {
@@ -575,6 +635,7 @@ export interface CotPromptsData {
 export interface CategoryMetrics extends GenerationMetrics {
   category: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   pdfUrl?: string;
+  shannon?: ShannonEntry[];
   prompts?: CotPromptsData;
   judge?: JudgeResponse;
   realism?: {
@@ -589,6 +650,7 @@ export interface SimpleGeneration {
   judge?: JudgeResponse;
   pdfAvailable: boolean;
   pdfUrl?: string;
+  shannon?: ShannonEntry[];
   systemPrompt?: string;
   userPrompt?: string;
 }
@@ -596,6 +658,7 @@ export interface SimpleGeneration {
 export interface CoTGeneration {
   id: string;
   categories: CategoryMetrics[];
+  shannon?: ShannonEntry[];
   metrics?: {
     syntax: MetricStat;
     multiplicities: MetricStat;

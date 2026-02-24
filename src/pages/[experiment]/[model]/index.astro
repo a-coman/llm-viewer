@@ -1,12 +1,12 @@
 ---
 import PageLayout from "../../../layouts/PageLayout.astro";
 import GedHeatmap from "../../../components/GedHeatmap.astro";
+import ShannonBars from "../../../components/ShannonBars.astro";
 import DataTable from "../../../components/DataTable.astro";
 import MetricsPanel from "../../../components/MetricsPanel.astro";
 import { MODELS_LOWER, COLOR_RANGES } from "../../../lib/constants";
 import { getModelName } from "../../../lib/utils";
 import { getModelData, getExperimentIds } from "../../../lib/data";
-import Tooltip from "../../../components/Tooltip.astro";
 
 export async function getStaticPaths() {
   const experimentIds = getExperimentIds();
@@ -55,20 +55,53 @@ const modelPanelSections = {
       </div>
     ) : (
       <>
-        {/* Simple Content */}
         <div class="tab-content active" data-content="simple">
           <div class="content-grid">
             <section class="section">
-              <h2>GED Similarity
-                <Tooltip metricType="ged" />
-              </h2>
-              {simpleData?.gedHeatmap ? (
-                <GedHeatmap data={simpleData.gedHeatmap} />
-              ) : (
-                <div class="sober-empty-state">
-                  <span class="sober-empty-text">No GED Data</span>
+              <div class="diagram-header sober-header">
+                <div class="viz-switch" data-viz-switch>
+                  <button
+                    class="viz-btn active"
+                    data-viz-target="ged"
+                    type="button"
+                  >
+                    GED
+                  </button>
+                  <button
+                    class="viz-btn"
+                    data-viz-target="shannon"
+                    type="button"
+                  >
+                    Shannon
+                  </button>
                 </div>
-              )}
+              </div>
+
+              <div class="viz-panel active" data-viz-content="ged">
+                {simpleData?.gedHeatmap ? (
+                  <GedHeatmap data={simpleData.gedHeatmap} />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">No GED Data</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="viz-panel" data-viz-content="shannon">
+                {simpleData?.shannon?.length ? (
+                  <ShannonBars data={simpleData.shannon} />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">
+                      No Shannon Data for this model
+                    </span>
+                    <span class="sober-empty-hint">
+                      Available: AddressBook, Football, MyExpenses, PickupNet,
+                      Restaurant, VehicleRental, VideoClub
+                    </span>
+                  </div>
+                )}
+              </div>
             </section>
 
             <div class="metrics-column">
@@ -96,20 +129,53 @@ const modelPanelSections = {
           </section>
         </div>
 
-        {/* CoT Content */}
         <div class="tab-content" data-content="cot">
           <div class="content-grid">
             <section class="section">
-              <h2>GED Similarity
-                <Tooltip metricType="ged" />
-              </h2>
-              {cotData?.gedHeatmap ? (
-                <GedHeatmap data={cotData.gedHeatmap} />
-              ) : (
-                <div class="sober-empty-state">
-                  <span class="sober-empty-text">No GED Data</span>
+              <div class="diagram-header sober-header">
+                <div class="viz-switch" data-viz-switch>
+                  <button
+                    class="viz-btn active"
+                    data-viz-target="ged"
+                    type="button"
+                  >
+                    GED
+                  </button>
+                  <button
+                    class="viz-btn"
+                    data-viz-target="shannon"
+                    type="button"
+                  >
+                    Shannon
+                  </button>
                 </div>
-              )}
+              </div>
+
+              <div class="viz-panel active" data-viz-content="ged">
+                {cotData?.gedHeatmap ? (
+                  <GedHeatmap data={cotData.gedHeatmap} />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">No GED Data</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="viz-panel" data-viz-content="shannon">
+                {cotData?.shannon?.length ? (
+                  <ShannonBars data={cotData.shannon} />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">
+                      No Shannon Data for this model
+                    </span>
+                    <span class="sober-empty-hint">
+                      Available: AddressBook, Football, MyExpenses, PickupNet,
+                      Restaurant, VehicleRental, VideoClub
+                    </span>
+                  </div>
+                )}
+              </div>
             </section>
 
             <div class="metrics-column">
@@ -148,6 +214,7 @@ const modelPanelSections = {
     const contents = document.querySelectorAll(".tab-content[data-content]");
     const params = new URLSearchParams(window.location.search);
     const initialTab = params.get("type") || "simple";
+    const initialViz = params.get("viz") === "shannon" ? "shannon" : "ged";
 
     function setTab(tabName: string) {
       document.documentElement.setAttribute("data-mode", tabName);
@@ -176,6 +243,45 @@ const modelPanelSections = {
         setTab(btn.getAttribute("data-mode") || "simple"),
       ),
     );
+
+    document.querySelectorAll("[data-viz-switch]").forEach((switchRoot) => {
+      const root = switchRoot.closest("section");
+      if (!root) return;
+
+      const buttons = switchRoot.querySelectorAll("[data-viz-target]");
+      const panels = root.querySelectorAll("[data-viz-content]");
+
+      const setViz = (target: string, updateUrl = true) => {
+        document.documentElement.setAttribute("data-viz", target);
+
+        buttons.forEach((btn) =>
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-viz-target") === target,
+          ),
+        );
+        panels.forEach((panel) =>
+          panel.classList.toggle(
+            "active",
+            panel.getAttribute("data-viz-content") === target,
+          ),
+        );
+
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("viz", target);
+          window.history.replaceState({}, "", url.toString());
+        }
+      };
+
+      setViz(initialViz, false);
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-viz-target") || "ged";
+          setViz(target, true);
+        });
+      });
+    });
   });
 </script>
 
@@ -187,16 +293,26 @@ const modelPanelSections = {
   }
 
   .content-grid > .section {
-    height: 100%;
+    height: auto;
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* Allow inner content to shrink if needed */
+    min-height: 0;
   }
 
-  /* Ensure the heatmap adapts to the flex container */
-  .content-grid > .section > :global(.heatmap-container) {
-    flex: 1;
-    min-height: 0;
+  .content-grid > * {
+    height: auto;
+  }
+
+  .content-grid {
+    align-items: start;
+  }
+
+  .metrics-column {
+    align-self: start;
+  }
+
+  .metrics-column :global(.metrics-panel) {
+    height: auto;
   }
 </style>

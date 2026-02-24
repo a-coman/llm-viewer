@@ -37,6 +37,11 @@ interface Metrics {
     stringEquals: number;
     stringLv: number;
     ged?: { mean: number; std: number };
+    shannon?: { mean: number; std: number };
+    shannonActive?: number;
+    shannonAll?: number;
+    shannonActiveStd?: number;
+    shannonAllStd?: number;
   };
   judge?: {
     successRate: number;
@@ -172,6 +177,11 @@ function formatElapsedSeconds(value: number | undefined | null): string {
   return `${minutes}m ${seconds.toFixed(1)}s`;
 }
 
+function formatDecimal(value: number | undefined | null): string {
+  if (value === undefined || value === null || isNaN(value)) return "—";
+  return value.toFixed(3);
+}
+
 const cov = metrics?.coverage?.coverage || metrics?.coverage;
 const inst = metrics?.coverage?.instantiation || metrics?.instantiation;
 const div = metrics?.diversity;
@@ -284,6 +294,34 @@ const judgeElapsedSeconds = judge?.elapsedSeconds ?? judge?.time_seconds;
                 <td>GED</td>
                 <td style={getColor(div.ged.mean, 0.5, 0.9)}>
                   {div.ged.mean.toFixed(3)} ± {div.ged.std.toFixed(3)}
+                </td>
+              </tr>
+            )}
+            {div.shannon && (
+              <tr>
+                <td>Shannon</td>
+                <td style={getColor(div.shannon.mean, 1, 0)}>
+                  {div.shannon.mean.toFixed(3)} ± {div.shannon.std.toFixed(3)}
+                </td>
+              </tr>
+            )}
+            {div.shannonActive !== undefined && (
+              <tr>
+                <td>Shannon (Active)</td>
+                <td style={getColor(div.shannonActive, 1, 0)}>
+                  {formatDecimal(div.shannonActive)}
+                  {div.shannonActiveStd !== undefined &&
+                    ` ± ${formatDecimal(div.shannonActiveStd)}`}
+                </td>
+              </tr>
+            )}
+            {div.shannonAll !== undefined && (
+              <tr>
+                <td>Shannon (All)</td>
+                <td style={getColor(div.shannonAll, 1, 0)}>
+                  {formatDecimal(div.shannonAll)}
+                  {div.shannonAllStd !== undefined &&
+                    ` ± ${formatDecimal(div.shannonAllStd)}`}
                 </td>
               </tr>
             )}

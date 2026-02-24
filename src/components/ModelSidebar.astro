@@ -445,6 +445,7 @@ const showGens = currentModel || currentPage === "dashboard";
         const currentView = currentParams.get("view");
         const currentCategory = currentParams.get("category");
         const currentAgent = currentParams.get("agent");
+        const currentViz = currentParams.get("viz");
 
         const pathParts = window.location.pathname.split("/");
         const expIndex = currentExperimentId
@@ -496,6 +497,7 @@ const showGens = currentModel || currentPage === "dashboard";
           params.set("view", currentView);
         if (currentAgent && currentAgent !== "IModelAnalyzer")
           params.set("agent", currentAgent);
+        if (currentViz && currentViz !== "ged") params.set("viz", currentViz);
 
         if (params.toString()) url += `?${params.toString()}`;
         window.location.href = url;
@@ -514,6 +516,7 @@ const showGens = currentModel || currentPage === "dashboard";
           const currentView = currentParams.get("view");
           const currentCategory = currentParams.get("category");
           const currentAgent = currentParams.get("agent");
+          const currentViz = currentParams.get("viz");
 
           // Parse the existing href to get base path and any existing params
           const [basePath, existingQuery] = href.split("?");
@@ -538,6 +541,9 @@ const showGens = currentModel || currentPage === "dashboard";
             currentAgent !== "IModelAnalyzer"
           ) {
             params.set("agent", currentAgent);
+          }
+          if (currentViz && currentViz !== "ged") {
+            params.set("viz", currentViz);
           }
 
           const url = params.toString()

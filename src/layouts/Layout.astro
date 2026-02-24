@@ -16,10 +16,17 @@ import { getUrl } from "../lib/utils";
         try {
           var params = new URLSearchParams(window.location.search);
           var type = params.get("type");
+          var viz = params.get("viz");
           if (type === "cot") {
             document.documentElement.setAttribute("data-mode", "cot");
           } else {
             document.documentElement.setAttribute("data-mode", "simple");
+          }
+
+          if (viz === "shannon") {
+            document.documentElement.setAttribute("data-viz", "shannon");
+          } else {
+            document.documentElement.setAttribute("data-viz", "ged");
           }
         } catch (e) {}
       })();

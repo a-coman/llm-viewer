@@ -32,6 +32,9 @@ import type {
   GedModeData,
   GedSummary,
   GedExperimentMatrix,
+  ShannonFileRoot,
+  ShannonModeData,
+  ShannonSpecificEntry,
   JudgeFileRoot,
   JudgeModeData,
   RealismCounts,
@@ -43,6 +46,7 @@ const LOGS_FILE = path.join(DATA_DIR, "logs.json");
 const COVERAGE_FILE = path.join(DATA_DIR, "coverage.json");
 const DIFFERENCE_FILE = path.join(DATA_DIR, "difference.json");
 const GED_FILE = path.join(DATA_DIR, "ged.json");
+const SHANNON_FILE = path.join(DATA_DIR, "shannon.json");
 const JUDGE_FILE = path.join(DATA_DIR, "judge.json");
 const DATASET_DIR = path.join(DATA_DIR, "data", "dataset");
 
@@ -52,6 +56,7 @@ let cachedLogsFile: LogsFileRoot | null = null;
 let cachedCoverageFile: CoverageFileRoot | null = null;
 let cachedDifferenceFile: DifferenceFileRoot | null = null;
 let cachedGedFile: GedFileRoot | null = null;
+let cachedShannonFile: ShannonFileRoot | null = null;
 let cachedJudgeFile: JudgeFileRoot | null = null;
 
 const EMPTY_METRIC_STAT = { errors: 0, total: 0, str: [] };
@@ -198,6 +203,15 @@ function loadData() {
       cachedJudgeFile = { experiments: [] };
     }
   }
+  if (!cachedShannonFile) {
+    try {
+      const shannonContent = fs.readFileSync(SHANNON_FILE, "utf-8");
+      cachedShannonFile = JSON.parse(shannonContent);
+    } catch (error) {
+      console.error("Error loading shannon.json:", error);
+      cachedShannonFile = { experiments: [] };
+    }
+  }
 }
 
 // Get list of all experiment IDs
@@ -213,6 +227,7 @@ function getExperimentData(experimentId?: string): {
   coverage: { simple: CoverageModeData; cot: CoverageModeData } | null;
   difference: { simple: DifferenceModeData; cot: DifferenceModeData } | null;
   ged: { simple: GedModeData; cot: GedModeData } | null;
+  shannon: { simple: ShannonModeData; cot: ShannonModeData } | null;
   judge: { simple: JudgeModeData; cot: JudgeModeData } | null;
 } {
   loadData();
@@ -241,6 +256,10 @@ function getExperimentData(experimentId?: string): {
     ? findById(cachedJudgeFile?.experiments, experimentId)
     : cachedJudgeFile?.experiments[0];
 
+  const shannonExp = experimentId
+    ? findById(cachedShannonFile?.experiments, experimentId)
+    : cachedShannonFile?.experiments[0];
+
   return {
     logs: logExp
       ? { simple: logExp.simple, cot: logExp.cot }
@@ -255,6 +274,9 @@ function getExperimentData(experimentId?: string): {
       ? { simple: differenceExp.simple, cot: differenceExp.cot }
       : null,
     ged: gedExp ? { simple: gedExp.simple, cot: gedExp.cot } : null,
+    shannon: shannonExp
+      ? { simple: shannonExp.simple, cot: shannonExp.cot }
+      : null,
     judge: judgeExp ? { simple: judgeExp.simple, cot: judgeExp.cot } : null,
   };
 }
@@ -445,6 +467,84 @@ function sumTimeSeconds(attempts: Attempt[] = []) {
   return attempts.reduce((sum, att) => sum + (att.time_seconds || 0), 0);
 }
 
+function getShannonMeanFromSpecific(
+  specific: ShannonSpecificEntry[] | undefined,
+): {
+  active?: number;
+  all?: number;
+  activeStd?: number;
+  allStd?: number;
+} {
+  if (!specific || specific.length === 0) {
+    return {};
+  }
+
+  const activeValues = specific
+    .map((entry) => entry.shannon?.eveness_active_groups)
+    .filter(
+      (value): value is number =>
+        typeof value === "number" && Number.isFinite(value),
+    );
+  const allValues = specific
+    .map((entry) => entry.shannon?.eveness_all_groups)
+    .filter(
+      (value): value is number =>
+        typeof value === "number" && Number.isFinite(value),
+    );
+
+  const active =
+    activeValues.length > 0
+      ? activeValues.reduce((acc, value) => acc + value, 0) /
+        activeValues.length
+      : undefined;
+  const all =
+    allValues.length > 0
+      ? allValues.reduce((acc, value) => acc + value, 0) / allValues.length
+      : undefined;
+
+  const activeStd =
+    active !== undefined && activeValues.length > 0
+      ? Math.sqrt(
+          activeValues.reduce((acc, value) => acc + (value - active) ** 2, 0) /
+            activeValues.length,
+        )
+      : undefined;
+  const allStd =
+    all !== undefined && allValues.length > 0
+      ? Math.sqrt(
+          allValues.reduce((acc, value) => acc + (value - all) ** 2, 0) /
+            allValues.length,
+        )
+      : undefined;
+
+  return { active, all, activeStd, allStd };
+}
+
+function findShannonExperiment(
+  experiments: { experiment_id: string }[] | undefined,
+  logExperimentId: string | undefined,
+  mode: "simple" | "cot",
+  domainLower: string,
+) {
+  if (!experiments || experiments.length === 0) return undefined;
+
+  const byId = logExperimentId
+    ? findByExperimentId(
+        experiments as Array<{ experiment_id: string }>,
+        logExperimentId,
+      )
+    : undefined;
+  if (byId) return byId;
+
+  const prefix = `${mode}-${domainLower}-`;
+  const fallbackMatches = experiments.filter((entry) =>
+    normalizeKey(entry.experiment_id).startsWith(prefix),
+  );
+  if (fallbackMatches.length === 0) return undefined;
+
+  return fallbackMatches[0];
+}
+
 export function getModelData(
   modelSlug: string,
   experimentId?: string,
@@ -455,6 +555,7 @@ export function getModelData(
     coverage: cachedCoverage,
     difference: cachedDifference,
     ged: cachedGed,
+    shannon: cachedShannon,
     judge: cachedJudge,
   } = getExperimentData(experimentId);
   const datasetExperimentDir = getDatasetExperimentDirName(experimentId);
@@ -470,6 +571,7 @@ export function getModelData(
     const coverageExps = cachedCoverage?.simple?.experiments || [];
     const differenceExps = cachedDifference?.simple?.experiments || [];
     const gedExps = cachedGed?.simple?.experiments || [];
+    const shannonExps = cachedShannon?.simple?.experiments || [];
     const judgeExps = cachedJudge?.simple?.experiments || [];
     const generations: SimpleGeneration[] = [];
 
@@ -480,6 +582,12 @@ export function getModelData(
       ? findByExperimentId(differenceExps, logExp.id)
       : null;
     const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
+    const shannonExp = findShannonExperiment(
+      shannonExps,
+      logExp?.id,
+      "simple",
+      domainLower,
+    );
     const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
 
     if (logExp && mExp) {
@@ -514,6 +622,20 @@ export function getModelData(
             | undefined,
           gen.id,
         );
+        const shannonGen = findByGenerationId(
+          shannonExp?.generations as
+            | Array<{
+                generation_id: string;
+                specific: ShannonSpecificEntry[];
+              }>
+            | undefined,
+          gen.id,
+        ) as
+          | {
+              generation_id: string;
+              specific: ShannonSpecificEntry[];
+            }
+          | undefined;
         // Find judge generation data - cast to SimpleJudgeGeneration type
         const judgeGen = findByGenerationId(judgeExp?.generations, gen.id) as
           | {
@@ -524,6 +646,10 @@ export function getModelData(
         const attempt = gen.attempts?.[gen.attempts.length - 1];
         const tokens = sumTokens(gen.attempts);
         const elapsedSeconds = sumTimeSeconds(gen.attempts);
+
+        const shannonGenSummary = getShannonMeanFromSpecific(
+          shannonGen?.specific,
+        );
 
         if (mGen && attempt) {
           const genMetrics: any = {
@@ -543,6 +669,14 @@ export function getModelData(
               tokenOutput: tokens.output,
             },
             elapsedSeconds,
+          };
+
+          genMetrics.diversity = {
+            ...(genMetrics.diversity || {}),
+            shannonActive: shannonGenSummary.active,
+            shannonAll: shannonGenSummary.all,
+            shannonActiveStd: shannonGenSummary.activeStd,
+            shannonAllStd: shannonGenSummary.allStd,
           };
 
           const instanceName = attempt.instance_name || "output";
@@ -566,12 +700,15 @@ export function getModelData(
             pdfAvailable: true,
             pdfUrl,
             metrics: genMetrics,
+            shannon: shannonGen?.specific || [],
             judge: judgeResponse,
             systemPrompt: logExp.system_prompt,
             userPrompt: attempt.prompt,
           });
         }
       });
+
+      const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
 
       return {
         metrics: {
@@ -594,13 +731,17 @@ export function getModelData(
         diversity: {
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.simple?.ged,
+          shannonActive: shannonSummary.active,
+          shannonAll: shannonSummary.all,
+          shannonActiveStd: shannonSummary.activeStd,
+          shannonAllStd: shannonSummary.allStd,
         },
         judge: getJudgeResultWithStats(
           judgeExp?.realism || cachedJudge?.simple?.realism,
           judgeExp?.stats || cachedJudge?.simple?.stats,
           cachedJudge?.simple?.model?.name || logExp.model.name,
         ),
-        shannon: [],
+        shannon: shannonExp?.specific || [],
         grakel: undefined,
         gedHeatmap: gedExp?.ged,
       };
@@ -629,6 +770,7 @@ export function getModelData(
     const coverageExps = cachedCoverage?.cot?.experiments || [];
     const differenceExps = cachedDifference?.cot?.experiments || [];
     const gedExps = cachedGed?.cot?.experiments || [];
+    const shannonExps = cachedShannon?.cot?.experiments || [];
     const judgeExps = cachedJudge?.cot?.experiments || [];
     const generations: CoTGeneration[] = [];
 
@@ -639,6 +781,12 @@ export function getModelData(
       ? findByExperimentId(differenceExps, logExp.id)
       : null;
     const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
+    const shannonExp = findShannonExperiment(
+      shannonExps,
+      logExp?.id,
+      "cot",
+      domainLower,
+    );
     const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
 
     if (logExp && mExp) {
@@ -698,6 +846,29 @@ export function getModelData(
             }
           | undefined;
 
+        const shannonGen = findByGenerationId(
+          shannonExp?.generations as
+            | Array<{
+                generation_id: string;
+                specific?: ShannonSpecificEntry[];
+                categories?: Array<{
+                  name: string;
+                  specific: ShannonSpecificEntry[];
+                }>;
+              }>
+            | undefined,
+          gen.id,
+        ) as
+          | {
+              generation_id: string;
+              specific?: ShannonSpecificEntry[];
+              categories?: Array<{
+                name: string;
+                specific: ShannonSpecificEntry[];
+              }>;
+            }
+          | undefined;
+
         if (!mGen) return;
 
         // Find judge generation data for CoT
@@ -725,6 +896,9 @@ export function getModelData(
 
           const covCat = findByName(covGen?.categories, catLog.name);
           const diffCat = findByName(diffGen?.categories, catLog.name);
+          const shannonCat = findByName(shannonGen?.categories, catLog.name) as
+            | { specific?: ShannonSpecificEntry[] }
+            | undefined;
           const attempts =
             catLog.IListInstantiator?.attempts || catLog.attempts || [];
           const attempt = attempts?.[attempts.length - 1];
@@ -737,6 +911,10 @@ export function getModelData(
           const creatorTime = sumTimeSeconds(catLog.IListCreator?.attempts);
           const instantiatorTime = sumTimeSeconds(attempts);
           const elapsedSeconds = creatorTime + instantiatorTime;
+
+          const shannonCatSummary = getShannonMeanFromSpecific(
+            shannonCat?.specific,
+          );
 
           // Extract prompts from all 3 agents
           const creatorAttempts = catLog.IListCreator?.attempts || [];
@@ -759,7 +937,7 @@ export function getModelData(
             },
           };
 
-          return {
+          const categoryData: any = {
             category: catLog.name,
             syntax: catMetric?.metrics?.syntax || { ...EMPTY_METRIC_STAT },
             multiplicities: catMetric?.metrics?.multiplicities || {
@@ -778,6 +956,7 @@ export function getModelData(
               tokenOutput: totalOut,
             },
             elapsedSeconds,
+            shannon: shannonCat?.specific || [],
             prompts,
             judge: judgeCat
               ? {
@@ -787,7 +966,21 @@ export function getModelData(
               : undefined,
             realism: judgeCat?.realism,
           };
+
+          categoryData.diversity = {
+            ...(categoryData.diversity || {}),
+            shannonActive: shannonCatSummary.active,
+            shannonAll: shannonCatSummary.all,
+            shannonActiveStd: shannonCatSummary.activeStd,
+            shannonAllStd: shannonCatSummary.allStd,
+          };
+
+          return categoryData;
         });
+
+        const shannonGenSummary = getShannonMeanFromSpecific(
+          shannonGen?.specific,
+        );
 
         // Build judge response - for CoT we calculate based on realism counts
         let judgeResponse: CoTGeneration["judge"] =
@@ -817,18 +1010,27 @@ export function getModelData(
           id: `gen${gen.id}`,
           pdfAvailable: true,
           pdfUrl: catMetricsList[0]?.pdfUrl,
+          shannon: shannonGen?.specific || [],
           categories: catMetricsList,
           metrics: {
             syntax: mGen.metrics.syntax,
             multiplicities: mGen.metrics.multiplicities,
             invariants: mGen.metrics.invariants,
             coverage: getCoverageMetrics(covGen),
-            diversity: rawDifferenceToDisplay(diffGen?.difference),
+            diversity: {
+              ...rawDifferenceToDisplay(diffGen?.difference),
+              shannonActive: shannonGenSummary.active,
+              shannonAll: shannonGenSummary.all,
+              shannonActiveStd: shannonGenSummary.activeStd,
+              shannonAllStd: shannonGenSummary.allStd,
+            },
           },
           judge: judgeResponse,
           realism: judgeGen?.realism,
         });
       });
+
+      const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
 
       return {
         metrics: {
@@ -851,13 +1053,17 @@ export function getModelData(
         diversity: {
           ...rawDifferenceToDisplay(diffExp?.difference),
           ged: cachedGed?.cot?.ged,
+          shannonActive: shannonSummary.active,
+          shannonAll: shannonSummary.all,
+          shannonActiveStd: shannonSummary.activeStd,
+          shannonAllStd: shannonSummary.allStd,
         },
         judge: getJudgeResultWithStats(
           judgeExp?.realism || cachedJudge?.cot?.realism,
           judgeExp?.stats || cachedJudge?.cot?.stats,
           cachedJudge?.cot?.model?.name || logExp.model.name,
         ),
-        shannon: [],
+        shannon: shannonExp?.specific || [],
         grakel: undefined,
         gedHeatmap: gedExp?.ged,
       };
@@ -916,6 +1122,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     coverage: cachedCoverage,
     difference: cachedDifference,
     ged: cachedGed,
+    shannon: cachedShannon,
     judge: cachedJudge,
   } = getExperimentData(experimentId);
   const modelsList: DashboardData["models"] = MODELS.map((modelName) => {
@@ -951,6 +1158,9 @@ export function getDashboardData(experimentId?: string): DashboardData {
     const coverageData = cachedCoverage?.[mode];
     const differenceData = cachedDifference?.[mode];
     const gedData = cachedGed?.[mode]?.ged;
+    const shannonData = cachedShannon?.[mode]?.shannon;
+    const shannonActiveSummary = shannonData?.eveness_active_groups;
+    const shannonAllSummary = shannonData?.eveness_all_groups;
     const judgeData = cachedJudge?.[mode];
 
     const experiments = logs?.experiments || [];
@@ -977,6 +1187,10 @@ export function getDashboardData(experimentId?: string): DashboardData {
       diversity: {
         ...rawDifferenceToDisplay(differenceData?.difference),
         ged: gedData,
+        shannonActive: shannonActiveSummary?.mean,
+        shannonAll: shannonAllSummary?.mean,
+        shannonActiveStd: shannonActiveSummary?.std,
+        shannonAllStd: shannonAllSummary?.std,
       },
       judge: getJudgeResultWithStats(
         judgeData?.realism,

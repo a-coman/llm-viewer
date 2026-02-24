@@ -342,6 +342,140 @@ html {
   display: block;
 }
 
+/* GED/Shannon Switcher */
+.viz-switch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.viz-btn {
+  height: 26px;
+  padding: 0 0.625rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  color: var(--color-secondary);
+  background: var(--color-muted);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.viz-btn:hover {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-accent);
+}
+
+.viz-btn.active {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+.viz-panel {
+  display: none;
+  padding: 0;
+}
+
+.viz-panel.active {
+  display: block;
+}
+
+/* Shannon Charts */
+.shannon-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 320px;
+}
+
+.shannon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.shannon-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.shannon-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--color-border-light);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.shannon-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+}
+
+.bar-chart {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+  gap: 0.5rem;
+  align-items: end;
+  min-height: 230px;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.bar-number {
+  font-size: 0.72rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.bar-track {
+  height: 150px;
+  width: 100%;
+  max-width: 56px;
+  background: var(--color-muted);
+  border: 1px solid var(--color-border-light);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-fill {
+  width: 100%;
+  transition: height 0.2s ease;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: var(--color-secondary);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Tooltip */
 .tooltip-container {
   position: relative;
@@ -455,6 +589,15 @@ html {
   .category-tabs {
     flex-wrap: wrap;
   }
+
+  .shannon-subtitle {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .bar-chart {
+    grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+  }
 }
 
 /* 
@@ -548,4 +691,45 @@ html[data-mode] .model-link.active,
 html[data-mode] .nav-link.active {
   background: var(--color-accent) !important;
   color: #ffffff !important;
+}
+
+/* Viz (GED/Shannon) Mode Overrides */
+html[data-viz="ged"] [data-viz-content="ged"] {
+  display: block !important;
+}
+
+html[data-viz="ged"] [data-viz-content="shannon"] {
+  display: none !important;
+}
+
+html[data-viz="shannon"] [data-viz-content="ged"] {
+  display: none !important;
+}
+
+html[data-viz="shannon"] [data-viz-content="shannon"] {
+  display: block !important;
+}
+
+html[data-viz="ged"] .viz-btn[data-viz-target="ged"] {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border-color: var(--color-accent) !important;
+}
+
+html[data-viz="ged"] .viz-btn[data-viz-target="shannon"] {
+  background: var(--color-muted) !important;
+  color: var(--color-secondary) !important;
+  border-color: var(--color-border) !important;
+}
+
+html[data-viz="shannon"] .viz-btn[data-viz-target="ged"] {
+  background: var(--color-muted) !important;
+  color: var(--color-secondary) !important;
+  border-color: var(--color-border) !important;
+}
+
+html[data-viz="shannon"] .viz-btn[data-viz-target="shannon"] {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border-color: var(--color-accent) !important;
 }

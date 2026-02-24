@@ -3,6 +3,7 @@ import PdfEmbed from "./PdfEmbed.astro";
 import CodeViewer from "./CodeViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
+import ShannonBars from "./ShannonBars.astro";
 import { COLOR_RANGES } from "../lib/constants";
 import { getUrl } from "../lib/utils";
 import type { CotPromptsData } from "../lib/types";
@@ -34,6 +35,7 @@ const code = data?.code || data?.metrics?.code;
 const metrics = data?.metrics || data;
 const pdfUrl = data?.pdfUrl || "";
 const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
+const shannonData = data?.shannon || [];
 
 // Determine if we're in CoT mode
 const isCoT = !!label && !!cotPrompts;
@@ -85,6 +87,12 @@ const isCoT = !!label && !!cotPrompts;
               </select>
             )
           }
+        </div>
+
+        <div class="selector-group" data-group="shannon">
+          <button type="button" class="group-btn" data-group-btn="shannon">
+            Shannon
+          </button>
         </div>
       </div>
     </div>
@@ -215,6 +223,24 @@ const isCoT = !!label && !!cotPrompts;
           )
         }
       </div>
+
+      <div class="diagram-view" data-view-content="shannon-graph">
+        {
+          shannonData?.length ? (
+            <ShannonBars data={shannonData} />
+          ) : (
+            <div class="sober-empty-state">
+              <span class="sober-empty-text">
+                No Shannon Data for this model
+              </span>
+              <span class="sober-empty-hint">
+                Available: AddressBook, Football, MyExpenses, PickupNet,
+                Restaurant, VehicleRental, VideoClub
+              </span>
+            </div>
+          )
+        }
+      </div>
     </div>
   </section>
 
@@ -246,11 +272,19 @@ const isCoT = !!label && !!cotPrompts;
     function getViewGroup(view: string): string {
       if (view.startsWith("instance-")) return "instance";
       if (view.startsWith("model-")) return "model";
+      if (view.startsWith("shannon-")) return "shannon";
       if (view.endsWith("-prompt")) return "prompt";
       return "instance";
     }
 
     function setView(viewName: string, updateUrl = true) {
+      const shannonExpanded = viewName === "shannon-graph";
+      document
+        .querySelectorAll(".diagram-section")
+        .forEach((section) =>
+          section.classList.toggle("shannon-expanded", shannonExpanded),
+        );
+
       // Update view content
       document
         .querySelectorAll("[data-view-content]")
@@ -322,8 +356,10 @@ const isCoT = !!label && !!cotPrompts;
         const select = document.querySelector(
           `[data-select="${group}"]`,
         ) as HTMLSelectElement;
-        if (select) {
-          setView(select.value);
+        if (select) return setView(select.value);
+
+        if (group === "shannon") {
+          setView("shannon-graph");
         }
       });
     });
@@ -349,7 +385,20 @@ const isCoT = !!label && !!cotPrompts;
     function syncAll() {
       try {
         const params = new URLSearchParams(window.location.search);
-        const view = params.get("view") || "instance-diagram";
+        const requestedView = params.get("view") || "instance-diagram";
+        const hasShannon =
+          document.querySelector('[data-group="shannon"]') !== null;
+        const view =
+          requestedView === "shannon-graph" && !hasShannon
+            ? "instance-diagram"
+            : requestedView;
+
+        const shannonExpanded = view === "shannon-graph";
+        document
+          .querySelectorAll(".diagram-section")
+          .forEach((section) =>
+            section.classList.toggle("shannon-expanded", shannonExpanded),
+          );
         const agent = params.get("agent") || "IModelAnalyzer";
 
         // Set active view
@@ -365,9 +414,11 @@ const isCoT = !!label && !!cotPrompts;
           ? "instance"
           : view.startsWith("model-")
             ? "model"
-            : view.endsWith("-prompt")
-              ? "prompt"
-              : "instance";
+            : view.startsWith("shannon-")
+              ? "shannon"
+              : view.endsWith("-prompt")
+                ? "prompt"
+                : "instance";
 
         // Set group active states
         document.querySelectorAll(".selector-group").forEach((g) => {
@@ -414,9 +465,14 @@ const isCoT = !!label && !!cotPrompts;
     margin: 0;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow: hidden;
     height: 100%;
     max-height: 631px;
+  }
+
+  .diagram-section.shannon-expanded {
+    max-height: none;
+    overflow: visible;
   }
 
   .metrics-column-wrapper {
@@ -530,6 +586,10 @@ const isCoT = !!label && !!cotPrompts;
     border-left: 1px solid var(--color-border);
   }
 
+  .selector-group[data-group="shannon"] .group-btn {
+    border-right: none;
+  }
+
   /* Views */
   .diagram-views {
     flex: 1;
@@ -544,6 +604,11 @@ const isCoT = !!label && !!cotPrompts;
 
   [data-view-content].active {
     display: block;
+  }
+
+  [data-view-content="shannon-graph"] {
+    height: auto;
+    overflow: visible;
   }
 
   /* Prompt content switching */
