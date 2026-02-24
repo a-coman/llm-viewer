@@ -747,5 +747,5 @@ export interface DashboardData {
   }[];
 }
 
-export type ModelName = (typeof MODELS)[number];
-export type CoTCategory = (typeof COT_CATEGORIES)[number];
+export type ModelName = (typeof MODELS)[keyof typeof MODELS];
+export type CoTCategory = (typeof COT_CATEGORIES)[keyof typeof COT_CATEGORIES];

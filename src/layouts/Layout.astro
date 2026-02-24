@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { getUrl } from "../lib/utils";
+import { QUERY_KEYS, QUERY_MODES, QUERY_VIEWS } from "../lib/constants";
 ---
 
 <!doctype html>
@@ -11,19 +12,28 @@ import { getUrl } from "../lib/utils";
     <link rel="icon" type="image/svg+xml" href={getUrl("/favicon.svg")} />
     <meta name="generator" content={Astro.generator} />
     <title>LLM Viewer</title>
-    <script is:inline>
+    <script
+      is:inline
+      define:vars={{
+        queryModeKey: QUERY_KEYS.mode,
+        queryViewKey: QUERY_KEYS.view,
+        modeCot: QUERY_MODES.cot,
+        modeSimple: QUERY_MODES.simple,
+        shannonView: QUERY_VIEWS.shannonGraph,
+      }}
+    >
       (function () {
         try {
           var params = new URLSearchParams(window.location.search);
-          var type = params.get("type");
-          var viz = params.get("viz");
-          if (type === "cot") {
-            document.documentElement.setAttribute("data-mode", "cot");
+          var type = params.get(queryModeKey);
+          var view = params.get(queryViewKey);
+          if (type === modeCot) {
+            document.documentElement.setAttribute("data-mode", modeCot);
           } else {
-            document.documentElement.setAttribute("data-mode", "simple");
+            document.documentElement.setAttribute("data-mode", modeSimple);
           }
 
-          if (viz === "shannon") {
+          if (view === shannonView) {
             document.documentElement.setAttribute("data-viz", "shannon");
           } else {
             document.documentElement.setAttribute("data-viz", "ged");

@@ -26,6 +26,8 @@ const {
 } = Astro.props;
 
 import { getUrl } from "../lib/utils";
+import { QUERY_KEYS, QUERY_MODES } from "../lib/constants";
+import { withViewerQuery, type ViewerMode } from "../lib/query";
 
 const simpleGens = Array.from(
   { length: simpleGenCount },
@@ -153,8 +155,11 @@ const showGens = currentModel || currentPage === "dashboard";
                 href={
                   currentPage === "dashboard"
                     ? "#"
-                    : getUrl(
-                        `${experimentId}/${currentModel?.toLowerCase()}?type=cot`,
+                    : withViewerQuery(
+                        getUrl(
+                          `${experimentId}/${currentModel?.toLowerCase()}`,
+                        ),
+                        { mode: QUERY_MODES.cot },
                       )
                 }
                 class:list={[
@@ -178,8 +183,11 @@ const showGens = currentModel || currentPage === "dashboard";
                   href={
                     currentPage === "dashboard"
                       ? "#"
-                      : getUrl(
-                          `${experimentId}/${currentModel?.toLowerCase()}/${g}?type=cot`,
+                      : withViewerQuery(
+                          getUrl(
+                            `${experimentId}/${currentModel?.toLowerCase()}/${g}`,
+                          ),
+                          { mode: QUERY_MODES.cot },
                         )
                   }
                   class:list={[
@@ -376,6 +384,14 @@ const showGens = currentModel || currentPage === "dashboard";
 </style>
 
 <script>
+  import { QUERY_MODES } from "../lib/constants";
+import {
+    getViewerState,
+    toViewerQuery,
+    applyViewerQueryToUrl,
+    type ViewerMode,
+  } from "../lib/query";
+
   document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.querySelector(".sidebar") as HTMLElement;
     const currentPage = sidebar?.getAttribute("data-current-page");
@@ -391,7 +407,7 @@ const showGens = currentModel || currentPage === "dashboard";
     // Get current mode from URL or active button
     const getCurrentMode = () =>
       document.querySelector(".mode-btn.active")?.getAttribute("data-mode") ||
-      "simple";
+      QUERY_MODES.simple;
 
     // Experiment selector - navigate to new experiment path
     const experimentSelect = document.getElementById("experiment-select");
@@ -441,11 +457,7 @@ const showGens = currentModel || currentPage === "dashboard";
         e.preventDefault();
         const modelName = link.getAttribute("data-model");
         const mode = getCurrentMode();
-        const currentParams = new URLSearchParams(window.location.search);
-        const currentView = currentParams.get("view");
-        const currentCategory = currentParams.get("category");
-        const currentAgent = currentParams.get("agent");
-        const currentViz = currentParams.get("viz");
+        const currentState = getViewerState(window.location.search);
 
         const pathParts = window.location.pathname.split("/");
         const expIndex = currentExperimentId
@@ -484,20 +496,12 @@ const showGens = currentModel || currentPage === "dashboard";
         // Append gen to URL if not "all"
         if (gen !== "all") url += `/${gen}`;
 
-        // Build query params
-        const params = new URLSearchParams();
-        if (mode === "cot") {
-          params.set("type", "cot");
-          // Preserve category in CoT mode (only if not baseline which is default)
-          if (currentCategory && currentCategory !== "baseline") {
-            params.set("category", currentCategory);
-          }
-        }
-        if (currentView && currentView !== "instance-diagram")
-          params.set("view", currentView);
-        if (currentAgent && currentAgent !== "IModelAnalyzer")
-          params.set("agent", currentAgent);
-        if (currentViz && currentViz !== "ged") params.set("viz", currentViz);
+        const params = toViewerQuery({
+          mode: mode as ViewerMode,
+          category: currentState.category,
+          agent: currentState.agent,
+          view: currentState.view,
+        });
 
         if (params.toString()) url += `?${params.toString()}`;
         window.location.href = url;
@@ -512,50 +516,24 @@ const showGens = currentModel || currentPage === "dashboard";
           const href = link.getAttribute("href");
           if (!href || href === "#") return;
 
-          const currentParams = new URLSearchParams(window.location.search);
-          const currentView = currentParams.get("view");
-          const currentCategory = currentParams.get("category");
-          const currentAgent = currentParams.get("agent");
-          const currentViz = currentParams.get("viz");
+          const currentState = getViewerState(window.location.search);
+          const targetUrl = new URL(href, window.location.origin);
+          const targetState = getViewerState(targetUrl.searchParams);
 
-          // Parse the existing href to get base path and any existing params
-          const [basePath, existingQuery] = href.split("?");
-          const params = new URLSearchParams(existingQuery || "");
+          targetUrl.search = toViewerQuery({
+            mode: targetState.mode,
+            category: currentState.category,
+            agent: currentState.agent,
+            view: currentState.view,
+          }).toString();
 
-          // Add view param if set
-          if (currentView && currentView !== "instance-diagram") {
-            params.set("view", currentView);
-          }
-          // Add category param if set and in CoT mode (only if not baseline which is default)
-          if (
-            params.get("type") === "cot" &&
-            currentCategory &&
-            currentCategory !== "baseline"
-          ) {
-            params.set("category", currentCategory);
-          }
-          // Add agent param if set and in CoT mode (only if not default)
-          if (
-            params.get("type") === "cot" &&
-            currentAgent &&
-            currentAgent !== "IModelAnalyzer"
-          ) {
-            params.set("agent", currentAgent);
-          }
-          if (currentViz && currentViz !== "ged") {
-            params.set("viz", currentViz);
-          }
-
-          const url = params.toString()
-            ? `${basePath}?${params.toString()}`
-            : basePath;
-          window.location.href = url;
+          window.location.href = targetUrl.toString();
         });
       });
     }
 
     // Helper to update gen link highlighting
-    function updateGenHighlighting(mode: string) {
+    function updateGenHighlighting(mode: ViewerMode | string) {
       if (isDashboard) return;
 
       // Get current gen from URL path
@@ -586,7 +564,7 @@ const showGens = currentModel || currentPage === "dashboard";
     // Mode switching
     modeBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const mode = btn.getAttribute("data-mode") || "simple";
+        const mode = btn.getAttribute("data-mode") || QUERY_MODES.simple;
         document.documentElement.setAttribute("data-mode", mode);
         modeBtns.forEach((b) => b.classList.toggle("active", b === btn));
         gensSections.forEach((s) =>
@@ -602,13 +580,7 @@ const showGens = currentModel || currentPage === "dashboard";
         // Update URL param without reload (for non-dashboard pages)
         if (!isDashboard) {
           const url = new URL(window.location.href);
-          if (mode === "cot") {
-            url.searchParams.set("type", "cot");
-          } else {
-            url.searchParams.delete("type");
-            url.searchParams.delete("category");
-            url.searchParams.delete("agent");
-          }
+          applyViewerQueryToUrl(url, { mode: mode as ViewerMode });
 
           window.history.replaceState({}, "", url.toString());
           window.dispatchEvent(new CustomEvent("sync-gen-view"));
@@ -618,18 +590,26 @@ const showGens = currentModel || currentPage === "dashboard";
   });
 </script>
 
-<script is:inline>
+<script
+  is:inline
+  define:vars={{
+    queryModeKey: QUERY_KEYS.mode,
+    modeCot: QUERY_MODES.cot,
+    modeSimple: QUERY_MODES.simple,
+  }}
+>
   (function () {
     try {
       const isCot =
-        new URLSearchParams(window.location.search).get("type") === "cot";
+        new URLSearchParams(window.location.search).get(queryModeKey) ===
+        modeCot;
       if (isCot) {
         // Switch mode buttons
         document
-          .querySelector('.mode-btn[data-mode="simple"]')
+          .querySelector(`.mode-btn[data-mode="${modeSimple}"]`)
           ?.classList.remove("active");
         document
-          .querySelector('.mode-btn[data-mode="cot"]')
+          .querySelector(`.mode-btn[data-mode="${modeCot}"]`)
           ?.classList.add("active");
         // Switch generation sections
         document

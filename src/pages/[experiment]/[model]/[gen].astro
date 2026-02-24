@@ -1,7 +1,13 @@
 ---
 import PageLayout from "../../../layouts/PageLayout.astro";
 import GenerationView from "../../../components/GenerationView.astro";
-import { MODELS_LOWER, COT_CATEGORIES } from "../../../lib/constants";
+import {
+  QUERY_KEYS,
+  QUERY_MODES,
+  MODELS_LOWER,
+  COT_CATEGORIES_VALUES,
+  QUERY_CATEGORIES,
+} from "../../../lib/constants";
 import { getModelName } from "../../../lib/utils";
 import { getModelData, getExperimentIds } from "../../../lib/data";
 
@@ -53,7 +59,7 @@ const hasCotData = genNum <= 30 && !!cotData;
     {
       hasCotData && (
         <div class="category-tabs hidden" data-nav="cot">
-          {COT_CATEGORIES.map((cat) => (
+          {COT_CATEGORIES_VALUES.map((cat) => (
             <button type="button" class="cat-tab" data-cat={cat}>
               {cat}
             </button>
@@ -89,7 +95,7 @@ const hasCotData = genNum <= 30 && !!cotData;
         {/* CoT Content */}
         {hasCotData && (
           <div class="tab-content" data-content="cot">
-            {COT_CATEGORIES.map((cat) => {
+            {COT_CATEGORIES_VALUES.map((cat) => {
               const catData = cotData?.categories?.find(
                 (c: any) => c.category === cat,
               );
@@ -113,6 +119,9 @@ const hasCotData = genNum <= 30 && !!cotData;
 </PageLayout>
 
 <script>
+  import { QUERY_MODES } from "../../../lib/constants";
+  import { getViewerState, applyViewerQueryToUrl } from "../../../lib/query";
+
   document.addEventListener("DOMContentLoaded", () => {
     const modeBtns = document.querySelectorAll(".mode-btn");
     const contents = document.querySelectorAll(".tab-content[data-content]");
@@ -123,9 +132,9 @@ const hasCotData = genNum <= 30 && !!cotData;
       ".cat-content[data-cat-content]",
     );
 
-    const params = new URLSearchParams(window.location.search);
-    const initialTab = params.get("type") || "simple";
-    const initialCategory = params.get("category") || "baseline";
+    const initialState = getViewerState(window.location.search);
+    const initialTab = initialState.mode;
+    const initialCategory = initialState.category;
 
     function setTab(tabName: string) {
       document.documentElement.setAttribute("data-mode", tabName);
@@ -141,19 +150,17 @@ const hasCotData = genNum <= 30 && !!cotData;
           c.getAttribute("data-content") === tabName,
         ),
       );
-      navs.forEach((n) => n.classList.toggle("hidden", tabName !== "cot"));
+      navs.forEach((n) =>
+        n.classList.toggle("hidden", tabName !== QUERY_MODES.cot),
+      );
       gensSections.forEach((s) =>
         s.classList.toggle("hidden", s.getAttribute("data-gens") !== tabName),
       );
 
       const url = new URL(window.location.href);
-      if (tabName === "simple") {
-        url.searchParams.delete("type");
-        url.searchParams.delete("category"); // Remove category when switching to simple
-        url.searchParams.delete("agent"); // Remove agent when switching to simple
-      } else {
-        url.searchParams.set("type", tabName);
-      }
+      applyViewerQueryToUrl(url, {
+        mode: tabName as (typeof QUERY_MODES)[keyof typeof QUERY_MODES],
+      });
       window.history.replaceState({}, "", url.toString());
       window.dispatchEvent(new CustomEvent("sync-gen-view"));
     }
@@ -169,31 +176,26 @@ const hasCotData = genNum <= 30 && !!cotData;
         ),
       );
 
-      // Update URL with category param
       const url = new URL(window.location.href);
-      if (catName === "baseline") {
-        url.searchParams.delete("category"); // baseline is default, no need to show in URL
-      } else {
-        url.searchParams.set("category", catName);
-      }
+      applyViewerQueryToUrl(url, { category: catName });
       window.history.replaceState({}, "", url.toString());
       window.dispatchEvent(new CustomEvent("sync-gen-view"));
     }
 
     setTab(initialTab);
-    if (initialTab === "cot") {
+    if (initialTab === QUERY_MODES.cot) {
       setCategory(initialCategory);
     }
 
     modeBtns.forEach((btn) =>
       btn.addEventListener("click", () => {
-        const mode = btn.getAttribute("data-mode") || "simple";
+        const mode = btn.getAttribute("data-mode") || QUERY_MODES.simple;
         setTab(mode);
         // When switching to CoT, apply current category from URL or default
-        if (mode === "cot") {
-          const currentCategory =
-            new URLSearchParams(window.location.search).get("category") ||
-            "baseline";
+        if (mode === QUERY_MODES.cot) {
+          const currentCategory = getViewerState(
+            window.location.search,
+          ).category;
           setCategory(currentCategory);
         }
       }),
@@ -209,12 +211,21 @@ const hasCotData = genNum <= 30 && !!cotData;
   });
 </script>
 
-<script is:inline>
+<script
+  is:inline
+  define:vars={{
+    queryModeKey: QUERY_KEYS.mode,
+    queryCategoryKey: QUERY_KEYS.category,
+    modeCot: QUERY_MODES.cot,
+    modeSimple: QUERY_MODES.simple,
+    baselineCategory: QUERY_CATEGORIES.baseline,
+  }}
+>
   (function () {
     try {
       const params = new URLSearchParams(window.location.search);
-      const isCot = params.get("type") === "cot";
-      const category = params.get("category") || "baseline";
+      const isCot = params.get(queryModeKey) === modeCot;
+      const category = params.get(queryCategoryKey) || baselineCategory;
 
       if (isCot) {
         document
@@ -243,10 +254,10 @@ const hasCotData = genNum <= 30 && !!cotData;
       } else {
         // Simple mode: set default category for when switching to CoT
         document
-          .querySelector('.cat-tab[data-cat="baseline"]')
+          .querySelector(`.cat-tab[data-cat="${baselineCategory}"]`)
           ?.classList.add("active");
         document
-          .querySelector('.cat-content[data-cat-content="baseline"]')
+          .querySelector(`.cat-content[data-cat-content="${baselineCategory}"]`)
           ?.classList.add("active");
       }
     } catch (e) {}

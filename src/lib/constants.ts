@@ -1,26 +1,54 @@
 // Shared constants
-export const MODELS = [
-  "Bank",
-  "Restaurant",
-  "AddressBook",
-  "PickupNet",
-  "HotelManagement",
-  "Football",
-  "MyExpenses",
-  "VideoClub",
-  "VehicleRental",
-  "Statemachine",
-] as const;
+export const MODELS = {
+  bank: "Bank",
+  restaurant: "Restaurant",
+  addressBook: "AddressBook",
+  pickupNet: "PickupNet",
+  hotelManagement: "HotelManagement",
+  football: "Football",
+  myExpenses: "MyExpenses",
+  videoClub: "VideoClub",
+  vehicleRental: "VehicleRental",
+  statemachine: "Statemachine",
+} as const;
 
-export const MODELS_LOWER = MODELS.map((m) => m.toLowerCase());
+export const MODELS_VALUES = Object.values(MODELS);
+export const MODELS_LOWER = MODELS_VALUES.map((m) => m.toLowerCase());
 
-export const COT_CATEGORIES = [
-  "baseline",
-  "boundary",
-  "complex",
-  "edge",
-  "invalid",
-] as const;
+export const COT_CATEGORIES = {
+  baseline: "baseline",
+  boundary: "boundary",
+  complex: "complex",
+  edge: "edge",
+  invalid: "invalid",
+} as const;
+
+export const COT_CATEGORIES_VALUES = Object.values(COT_CATEGORIES);
+
+export const QUERY_MODES = {
+  simple: "simple",
+  cot: "cot",
+} as const;
+
+export const QUERY_AGENTS = {
+  modelAnalyzer: "IModelAnalyzer",
+  listCreator: "IListCreator",
+  listInstantiator: "IListInstantiator",
+} as const;
+
+export const QUERY_VIEWS = {
+  instanceDiagram: "instance-diagram",
+  shannonGraph: "shannon-graph",
+} as const;
+
+export const QUERY_KEYS = {
+  mode: "type",
+  category: "category",
+  agent: "agent",
+  view: "view",
+} as const;
+
+export const QUERY_CATEGORIES = COT_CATEGORIES;
 
 export const SIMPLE_GEN_COUNT = 30;
 export const COT_GEN_COUNT = 6;
@@ -37,7 +65,7 @@ export const prices = {
   GEMINI_3_PRO: {
     input: 1.4,
     output: 12.0,
-  }
+  },
 } as const;
 
 // Color ranges for getColor(value, green, red)

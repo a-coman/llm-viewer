@@ -1,6 +1,7 @@
 ---
 import { getColor, formatPercent, getBinaryColor, getUrl } from "../lib/utils";
-import { INFINITY_SYMBOL, COLOR_RANGES } from "../lib/constants";
+import { INFINITY_SYMBOL, COLOR_RANGES, QUERY_MODES } from "../lib/constants";
+import { withViewerQuery } from "../lib/query";
 
 interface Props {
   data: any[];
@@ -213,14 +214,9 @@ const isGeneration = type === "generations";
               ? getUrl(`${experimentId}/${name.toLowerCase()}`)
               : getUrl(`${experimentId}/${modelSlug}/${item.id}`);
           const isCotLink = genType === "cot" || mode === "cot";
-
-          // Build query parameters (no longer need experimentId - it's in path)
-          const params = new URLSearchParams();
-          if (isCotLink) params.set("type", "cot");
-
-          const href = params.toString()
-            ? `${baseHref}?${params.toString()}`
-            : baseHref;
+          const href = withViewerQuery(baseHref, {
+            mode: isCotLink ? QUERY_MODES.cot : QUERY_MODES.simple,
+          });
           const source = getDataSource(item);
 
           return (

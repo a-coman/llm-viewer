@@ -4,7 +4,13 @@ import CodeViewer from "./CodeViewer.astro";
 import MetricsPanel from "./MetricsPanel.astro";
 import JudgeCard from "./JudgeCard.astro";
 import ShannonBars from "./ShannonBars.astro";
-import { COLOR_RANGES } from "../lib/constants";
+import {
+  COLOR_RANGES,
+  QUERY_KEYS,
+  QUERY_VIEWS,
+  QUERY_AGENTS,
+} from "../lib/constants";
+import { QUERY_DEFAULTS } from "../lib/query";
 import { getUrl } from "../lib/utils";
 import type { CotPromptsData } from "../lib/types";
 
@@ -36,6 +42,8 @@ const metrics = data?.metrics || data;
 const pdfUrl = data?.pdfUrl || "";
 const pdfAvailable = data?.pdfAvailable ?? !!pdfUrl;
 const shannonData = data?.shannon || [];
+const defaultAgent = QUERY_AGENTS.modelAnalyzer;
+const viewerAgents = Object.values(QUERY_AGENTS);
 
 // Determine if we're in CoT mode
 const isCoT = !!label && !!cotPrompts;
@@ -81,9 +89,15 @@ const isCoT = !!label && !!cotPrompts;
           {
             isCoT && (
               <select class="group-select" data-select="agent">
-                <option value="IModelAnalyzer">IModelAnalyzer</option>
-                <option value="IListCreator">IListCreator</option>
-                <option value="IListInstantiator">IListInstantiator</option>
+                <option value={QUERY_AGENTS.modelAnalyzer}>
+                  {QUERY_AGENTS.modelAnalyzer}
+                </option>
+                <option value={QUERY_AGENTS.listCreator}>
+                  {QUERY_AGENTS.listCreator}
+                </option>
+                <option value={QUERY_AGENTS.listInstantiator}>
+                  {QUERY_AGENTS.listInstantiator}
+                </option>
               </select>
             )
           }
@@ -150,11 +164,9 @@ const isCoT = !!label && !!cotPrompts;
               data-prompt-type="system"
               data-unique-id={uniqueId}
             >
-              {(
-                ["IModelAnalyzer", "IListCreator", "IListInstantiator"] as const
-              ).map((agent) => (
+              {viewerAgents.map((agent) => (
                 <div
-                  class={`prompt-content ${agent === "IModelAnalyzer" ? "active" : ""}`}
+                  class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
                   data-agent-content={agent}
                 >
                   {cotPrompts?.[agent]?.systemPrompt ? (
@@ -191,11 +203,9 @@ const isCoT = !!label && !!cotPrompts;
               data-prompt-type="user"
               data-unique-id={uniqueId}
             >
-              {(
-                ["IModelAnalyzer", "IListCreator", "IListInstantiator"] as const
-              ).map((agent) => (
+              {viewerAgents.map((agent) => (
                 <div
-                  class={`prompt-content ${agent === "IModelAnalyzer" ? "active" : ""}`}
+                  class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
                   data-agent-content={agent}
                 >
                   {cotPrompts?.[agent]?.userPrompt ? (
@@ -264,10 +274,13 @@ const isCoT = !!label && !!cotPrompts;
 </div>
 
 <script>
+  import { QUERY_VIEWS } from "../lib/constants";
+import { getViewerState, applyViewerQueryToUrl } from "../lib/query";
+
   document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const initialView = params.get("view") || "instance-diagram";
-    const initialAgent = params.get("agent") || "IModelAnalyzer";
+    const initialState = getViewerState(window.location.search);
+    const initialView = initialState.view;
+    const initialAgent = initialState.agent;
 
     function getViewGroup(view: string): string {
       if (view.startsWith("instance-")) return "instance";
@@ -278,7 +291,7 @@ const isCoT = !!label && !!cotPrompts;
     }
 
     function setView(viewName: string, updateUrl = true) {
-      const shannonExpanded = viewName === "shannon-graph";
+      const shannonExpanded = viewName === QUERY_VIEWS.shannonGraph;
       document
         .querySelectorAll(".diagram-section")
         .forEach((section) =>
@@ -315,9 +328,7 @@ const isCoT = !!label && !!cotPrompts;
 
       if (updateUrl) {
         const url = new URL(window.location.href);
-        viewName === "instance-diagram"
-          ? url.searchParams.delete("view")
-          : url.searchParams.set("view", viewName);
+        applyViewerQueryToUrl(url, { view: viewName });
         window.history.replaceState({}, "", url.toString());
       }
     }
@@ -336,9 +347,7 @@ const isCoT = !!label && !!cotPrompts;
 
       if (updateUrl) {
         const url = new URL(window.location.href);
-        agentName === "IModelAnalyzer"
-          ? url.searchParams.delete("agent")
-          : url.searchParams.set("agent", agentName);
+        applyViewerQueryToUrl(url, { agent: agentName });
         window.history.replaceState({}, "", url.toString());
       }
     }
@@ -359,7 +368,7 @@ const isCoT = !!label && !!cotPrompts;
         if (select) return setView(select.value);
 
         if (group === "shannon") {
-          setView("shannon-graph");
+          setView(QUERY_VIEWS.shannonGraph);
         }
       });
     });
@@ -380,26 +389,35 @@ const isCoT = !!label && !!cotPrompts;
   });
 </script>
 
-<script is:inline>
+<script
+  is:inline
+  define:vars={{
+    queryViewKey: QUERY_KEYS.view,
+    queryAgentKey: QUERY_KEYS.agent,
+    defaultView: QUERY_DEFAULTS.view,
+    defaultAgent: QUERY_DEFAULTS.agent,
+    shannonView: QUERY_VIEWS.shannonGraph,
+  }}
+>
   (function () {
     function syncAll() {
       try {
         const params = new URLSearchParams(window.location.search);
-        const requestedView = params.get("view") || "instance-diagram";
+        const requestedView = params.get(queryViewKey) || defaultView;
         const hasShannon =
           document.querySelector('[data-group="shannon"]') !== null;
         const view =
-          requestedView === "shannon-graph" && !hasShannon
-            ? "instance-diagram"
+          requestedView === shannonView && !hasShannon
+            ? defaultView
             : requestedView;
 
-        const shannonExpanded = view === "shannon-graph";
+        const shannonExpanded = view === shannonView;
         document
           .querySelectorAll(".diagram-section")
           .forEach((section) =>
             section.classList.toggle("shannon-expanded", shannonExpanded),
           );
-        const agent = params.get("agent") || "IModelAnalyzer";
+        const agent = params.get(queryAgentKey) || defaultAgent;
 
         // Set active view
         document.querySelectorAll("[data-view-content]").forEach((v) => {

@@ -209,12 +209,16 @@ const modelPanelSections = {
 </PageLayout>
 
 <script>
+  import { QUERY_MODES, QUERY_VIEWS } from "../../../lib/constants";
+  import { getViewerState, applyViewerQueryToUrl } from "../../../lib/query";
+
   document.addEventListener("DOMContentLoaded", () => {
     const modeBtns = document.querySelectorAll(".mode-btn");
     const contents = document.querySelectorAll(".tab-content[data-content]");
-    const params = new URLSearchParams(window.location.search);
-    const initialTab = params.get("type") || "simple";
-    const initialViz = params.get("viz") === "shannon" ? "shannon" : "ged";
+    const initialState = getViewerState(window.location.search);
+    const initialTab = initialState.mode;
+    const initialViz =
+      initialState.view === QUERY_VIEWS.shannonGraph ? "shannon" : "ged";
 
     function setTab(tabName: string) {
       document.documentElement.setAttribute("data-mode", tabName);
@@ -231,16 +235,16 @@ const modelPanelSections = {
         ),
       );
       const url = new URL(window.location.href);
-      tabName === "simple"
-        ? url.searchParams.delete("type")
-        : url.searchParams.set("type", tabName);
+      applyViewerQueryToUrl(url, {
+        mode: tabName as (typeof QUERY_MODES)[keyof typeof QUERY_MODES],
+      });
       window.history.replaceState({}, "", url.toString());
     }
 
     setTab(initialTab);
     modeBtns.forEach((btn) =>
       btn.addEventListener("click", () =>
-        setTab(btn.getAttribute("data-mode") || "simple"),
+        setTab(btn.getAttribute("data-mode") || QUERY_MODES.simple),
       ),
     );
 
@@ -269,7 +273,12 @@ const modelPanelSections = {
 
         if (updateUrl) {
           const url = new URL(window.location.href);
-          url.searchParams.set("viz", target);
+          applyViewerQueryToUrl(url, {
+            view:
+              target === "shannon"
+                ? QUERY_VIEWS.shannonGraph
+                : QUERY_VIEWS.instanceDiagram,
+          });
           window.history.replaceState({}, "", url.toString());
         }
       };

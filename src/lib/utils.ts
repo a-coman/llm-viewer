@@ -1,4 +1,4 @@
-import { MODELS, MODELS_LOWER } from "./constants";
+import { MODELS_VALUES, MODELS_LOWER } from "./constants";
 
 // Helper functions
 export function getColor(
@@ -39,7 +39,7 @@ export function formatCurrency(value: number | undefined | null): string {
 
 export function getModelName(modelSlug: string): string {
   const index = MODELS_LOWER.indexOf(modelSlug.toLowerCase());
-  return index !== -1 ? MODELS[index] : modelSlug;
+  return index !== -1 ? MODELS_VALUES[index] : modelSlug;
 }
 
 export function calculateRate(

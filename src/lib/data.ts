@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { MODELS, prices } from "./constants";
+import { MODELS_VALUES, prices } from "./constants";
 import { getModelName, calculateRate, calculatePrice } from "./utils";
 import type {
   ModelData,
@@ -1125,7 +1125,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     shannon: cachedShannon,
     judge: cachedJudge,
   } = getExperimentData(experimentId);
-  const modelsList: DashboardData["models"] = MODELS.map((modelName) => {
+  const modelsList: DashboardData["models"] = MODELS_VALUES.map((modelName) => {
     const data = getModelData(modelName, experimentId);
     if (!data) return null;
 
