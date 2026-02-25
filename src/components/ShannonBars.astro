@@ -13,16 +13,38 @@ interface Props {
   title?: string;
 }
 
+import { getColor } from "../lib/utils";
+
 const { data, title } = Astro.props;
-function getBarColor(evenness: number): string {
-  const hue = evenness * 120;
-  return `hsl(${hue}, 65%, 55%)`;
-}
 
 function getMaxValue(values: Record<string, number>): number {
   const allValues = Object.values(values || {});
   if (allValues.length === 0) return 1;
   return Math.max(...allValues, 1);
+}
+
+function getScaleStep(maxValue: number): number {
+  if (maxValue <= 10) return 2;
+  if (maxValue <= 50) return 5;
+  if (maxValue <= 100) return 10;
+  if (maxValue <= 250) return 25;
+  if (maxValue <= 500) return 50;
+  return 100;
+}
+
+function getScaleMax(maxValue: number, step: number): number {
+  if (maxValue <= 0) return step;
+  const roundedUp = Math.ceil(maxValue / step) * step;
+  return roundedUp === maxValue ? roundedUp + step : roundedUp;
+}
+
+function getYAxisTicks(scaleMax: number, step: number): number[] {
+  const ticks: number[] = [];
+  for (let tick = scaleMax; tick >= 0; tick -= step) {
+    ticks.push(tick);
+  }
+  if (ticks[ticks.length - 1] !== 0) ticks.push(0);
+  return ticks;
 }
 ---
 
@@ -50,28 +72,55 @@ function getMaxValue(values: Record<string, number>): number {
               </span>
             </div>
 
-            <div class="bar-chart">
-              {Object.entries(entry.values).map(([value, count]) => {
-                const maxValue = getMaxValue(entry.values);
-                const heightPercent = (count / maxValue) * 100;
-                return (
-                  <div class="bar-column">
-                    <span class="bar-number">{count}</span>
-                    <div class="bar-track">
-                      <div
-                        class="bar-fill"
-                        style={`height: ${heightPercent}%; background-color: ${getBarColor(
-                          entry.shannon.eveness_all_groups,
-                        )};`}
-                      />
-                    </div>
-                    <span class="bar-label" title={value}>
-                      {value}
-                    </span>
+            {(() => {
+              const observedMax = getMaxValue(entry.values);
+              const scaleStep = getScaleStep(observedMax);
+              const scaleMax = getScaleMax(observedMax, scaleStep);
+              const yAxisTicks = getYAxisTicks(scaleMax, scaleStep);
+
+              return (
+                <div class="bar-chart-shell">
+                  <div class="y-axis" aria-hidden="true">
+                    {yAxisTicks.map((tick) => (
+                      <div class="y-axis-tick-row">
+                        <div class="y-axis-tick">{tick}</div>
+                      </div>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
+
+                  <div class="bar-chart">
+                    <div class="y-grid-lines" aria-hidden="true">
+                      {yAxisTicks.map(() => (
+                        <div class="y-grid-line" />
+                      ))}
+                    </div>
+                    {Object.entries(entry.values).map(([value, count]) => {
+                      const heightPercent = (count / scaleMax) * 100;
+
+                      return (
+                        <div class="bar-column">
+                          <div class="bar-track">
+                            <div
+                              class="bar-fill"
+                              style={`height: ${heightPercent}%; ${getColor(
+                                entry.shannon.eveness_all_groups,
+                                0.9,
+                                0,
+                              )}`}
+                            >
+                              <span class="bar-number">{count}</span>
+                            </div>
+                          </div>
+                          <span class="bar-label" title={value}>
+                            {value}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         ))}
       </div>

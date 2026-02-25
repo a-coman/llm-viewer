@@ -17,7 +17,7 @@ export function getColor(
   // Hue 0 is Red, Hue 120 is Green
   const hue = score * 120;
 
-  return `background-color: hsl(${hue}, 80%, 92%);`;
+  return `background-color: hsl(${hue}, 78%, 87%);`;
 }
 
 // Binary color: green if good, red if bad (no gradient)
