@@ -368,18 +368,27 @@ const showGens = currentModel || currentPage === "dashboard";
       width: 100%;
       height: auto;
       position: relative;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      overflow: visible;
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 20px;
     }
+
     .nav-header {
-      border-bottom: none;
-      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      border-right: none;
     }
+
+    .mode-selector {
+      border-bottom: 1px solid var(--color-border);
+    }
+
     .models-section {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      display: block;
     }
+
     .models-section ul {
       display: flex;
       flex-wrap: wrap;
@@ -399,6 +408,8 @@ const showGens = currentModel || currentPage === "dashboard";
 
   document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.querySelector(".sidebar") as HTMLElement;
+    if (!sidebar) return;
+
     const currentPage = sidebar?.getAttribute("data-current-page");
     const currentExperimentId = sidebar?.getAttribute("data-experiment-id");
     const baseUrl = sidebar?.getAttribute("data-base-url") || "/";

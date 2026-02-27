@@ -721,6 +721,14 @@ const maxPromptAttempts = isCoT
     margin-bottom: 0;
   }
 
+  .diagram-header {
+    height: auto;
+    min-height: 38px;
+    align-items: flex-start;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
   /* View Selectors */
   .view-selectors {
     display: flex;
@@ -736,8 +744,9 @@ const maxPromptAttempts = isCoT
     border-radius: 0;
     overflow: hidden;
     background: var(--color-background);
-    height: 26px;
+    min-height: 26px;
     transition: border-color 0.1s ease;
+    min-width: 0;
   }
 
   .selector-group:hover {
@@ -794,6 +803,7 @@ const maxPromptAttempts = isCoT
     background-repeat: no-repeat;
     background-position: right 0.4rem center;
     padding-right: 1.25rem;
+    min-width: 0;
   }
 
   .group-select:hover {
@@ -870,8 +880,43 @@ const maxPromptAttempts = isCoT
 
   /* Responsive */
   @media (max-width: 768px) {
+    .diagram-header {
+      padding-left: 0.6rem;
+      padding-right: 0.6rem;
+    }
+
     .view-selectors {
       gap: 0.5rem;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .selector-group {
+      width: 100%;
+      height: auto;
+      min-height: 28px;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+
+    .group-btn {
+      min-height: 28px;
+    }
+
+    .group-select {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 28px;
+    }
+
+    .selector-group [data-select="attempt"] {
+      flex: 0 0 64px;
+      min-width: 64px;
+    }
+
+    .selector-group [data-select="agent"] {
+      min-width: 110px;
     }
   }
 </style>
