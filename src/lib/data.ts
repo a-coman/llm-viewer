@@ -494,6 +494,12 @@ function sumTimeSeconds(attempts: Attempt[] = []) {
   return attempts.reduce((sum, att) => sum + (att.time_seconds || 0), 0);
 }
 
+function getAttemptPrompts(attempts: Attempt[] = []): string[] {
+  return attempts
+    .map((att) => att.prompt || "")
+    .filter((prompt) => prompt.trim().length > 0);
+}
+
 function getShannonMeanFromSpecific(
   specific: ShannonSpecificEntry[] | undefined,
 ): {
@@ -747,6 +753,7 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
       };
 
       const lastAttempt = gen.attempts?.[gen.attempts.length - 1];
+      const promptAttempts = getAttemptPrompts(gen.attempts);
       const mGenMetrics = mGen?.metrics || buildMetricsFallback();
 
       let judgeResponse: SimpleGeneration["judge"] = gen.judge
@@ -792,7 +799,7 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
         shannon: shannonGen?.specific || [],
         judge: judgeResponse,
         systemPrompt: logExp.system_prompt,
-        userPrompt: lastAttempt?.prompt || "",
+        userPrompts: promptAttempts,
       };
     },
   );
@@ -906,6 +913,10 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
       const attempts =
         catLog.IListInstantiator?.attempts || catLog.attempts || [];
       const lastAttempt = attempts[attempts.length - 1];
+      const creatorPromptAttempts = getAttemptPrompts(
+        catLog.IListCreator?.attempts,
+      );
+      const instantiatorPromptAttempts = getAttemptPrompts(attempts);
       const creatorTokens = sumTokens(catLog.IListCreator?.attempts);
       const instantiatorTokens = sumTokens(attempts);
       const totalIn = creatorTokens.input + instantiatorTokens.input;
@@ -953,18 +964,17 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
         prompts: {
           IModelAnalyzer: {
             systemPrompt: logExp.IModelAnalyzer?.system_prompt || "",
-            userPrompt: logExp.IModelAnalyzer?.prompt || "",
+            userPrompts: logExp.IModelAnalyzer?.prompt
+              ? [logExp.IModelAnalyzer.prompt]
+              : [],
           },
           IListCreator: {
             systemPrompt: catLog.IListCreator?.system_prompt || "",
-            userPrompt:
-              catLog.IListCreator?.attempts?.[
-                catLog.IListCreator.attempts.length - 1
-              ]?.prompt || "",
+            userPrompts: creatorPromptAttempts,
           },
           IListInstantiator: {
             systemPrompt: catLog.IListInstantiator?.system_prompt || "",
-            userPrompt: lastAttempt?.prompt || "",
+            userPrompts: instantiatorPromptAttempts,
           },
         },
         judge: categoryJudge,

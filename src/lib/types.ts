@@ -521,7 +521,7 @@ export interface GenerationMetrics {
 
 export interface AgentPrompts {
   systemPrompt: string;
-  userPrompt: string;
+  userPrompts: string[];
 }
 
 export interface CategoryMetrics extends GenerationMetrics {
@@ -547,7 +547,7 @@ export interface SimpleGeneration {
     why: string;
   };
   systemPrompt: string;
-  userPrompt: string;
+  userPrompts: string[];
 }
 
 export interface CoTGeneration {
