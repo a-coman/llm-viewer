@@ -352,8 +352,12 @@ const maxPromptAttempts = isCoT
     }
 
     function getAttemptsForAgent(agentName: string): string[] {
+      const activeTab = document.querySelector(".tab-content.active");
+      const activeCategory = activeTab?.querySelector(".cat-content.active");
+      const scopeRoot = activeCategory || activeTab || document;
+
       const cotAttempts = Array.from(
-        document.querySelectorAll(
+        scopeRoot.querySelectorAll(
           `.prompt-content[data-prompt-type='user'][data-agent-content='${agentName}']`,
         ),
       )
@@ -364,7 +368,7 @@ const maxPromptAttempts = isCoT
       if (cotAttempts.length) return cotAttempts;
 
       return Array.from(
-        document.querySelectorAll(
+        scopeRoot.querySelectorAll(
           ".prompt-content[data-prompt-type='user']:not([data-agent-content])",
         ),
       )
@@ -538,6 +542,13 @@ const maxPromptAttempts = isCoT
         }
       });
     });
+
+    // When outer navigation changes (mode/category), re-default to latest attempt
+    window.addEventListener("sync-gen-view", () => {
+      currentAttempt = "";
+      syncAttemptSelector();
+      updatePromptContent();
+    });
   });
 </script>
 
@@ -578,9 +589,19 @@ const maxPromptAttempts = isCoT
             ? initialAttemptSelect.value
             : "";
 
+        if (view === "user-prompt") {
+          attempt = "";
+        }
+
         const getAttemptsForAgent = (agentName) => {
+          const activeTab = document.querySelector(".tab-content.active");
+          const activeCategory = activeTab?.querySelector(
+            ".cat-content.active",
+          );
+          const scopeRoot = activeCategory || activeTab || document;
+
           const cotAttempts = Array.from(
-            document.querySelectorAll(
+            scopeRoot.querySelectorAll(
               `.prompt-content[data-prompt-type='user'][data-agent-content='${agentName}']`,
             ),
           )
@@ -591,7 +612,7 @@ const maxPromptAttempts = isCoT
           if (cotAttempts.length) return cotAttempts;
 
           return Array.from(
-            document.querySelectorAll(
+            scopeRoot.querySelectorAll(
               ".prompt-content[data-prompt-type='user']:not([data-agent-content])",
             ),
           )
