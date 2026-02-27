@@ -7,6 +7,7 @@ import {
   MODELS_LOWER,
   COT_CATEGORIES_VALUES,
   QUERY_CATEGORIES,
+  SIMPLE_GEN_COUNT,
 } from "../../../lib/constants";
 import { getModelName } from "../../../lib/utils";
 import { getModelData, getExperimentIds } from "../../../lib/data";
@@ -18,7 +19,7 @@ export function getStaticPaths() {
   }[] = [];
   for (const experiment of experimentIds) {
     for (const model of MODELS_LOWER) {
-      for (let i = 1; i <= 30; i++) {
+      for (let i = 1; i <= SIMPLE_GEN_COUNT; i++) {
         paths.push({ params: { experiment, model, gen: `gen${i}` } });
       }
     }
@@ -43,7 +44,7 @@ const cotData = modelData?.cot.generations.find(
 const classDiagramPdf = modelData?.diagramPdf || "";
 const classDiagramUseCode = modelData?.diagramUseCode || "";
 
-const hasCotData = genNum <= 30 && !!cotData;
+const hasCotData = genNum <= SIMPLE_GEN_COUNT && !!cotData;
 ---
 
 <PageLayout

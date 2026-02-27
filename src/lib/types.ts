@@ -1,5 +1,34 @@
 import { MODELS, COT_CATEGORIES } from "./constants";
 
+// --- Base JSON Generics (Used across all metric files) ---
+
+export interface ModeData<S, E> {
+  number_experiments: number;
+  experiments: E[];
+  stats?: S; // Optional mode-level stats (e.g. Judge stats)
+}
+
+export interface TokenSummary {
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  time_seconds: number;
+}
+
+export interface LogsModeData
+  extends
+    ModeData<never, SimpleLogExperiment | CoTLogExperiment>,
+    TokenSummary {}
+
+export type MetricFileRoot<T> = {
+  experiments: (T & { id: string })[];
+};
+
+export interface ExperimentModes<S, C = S> {
+  simple: S;
+  cot: C;
+}
+
 // --- Logs.json Types (Strict Match) ---
 
 export interface Attempt {
@@ -7,14 +36,14 @@ export interface Attempt {
   status: "success" | "failed";
   prompt: string;
   response: string;
-  instance_name?: string; // Optional in CoT intermediate?
+  instance_name?: string;
   input_tokens: number;
   output_tokens: number;
   total_tokens: number;
   finish_reason?: string;
   time_seconds: number;
   error?: string;
-  attempts?: Attempt[]; // Recursive attempts in nested structures? Not seen in example
+  attempts?: Attempt[];
 }
 
 export interface GenerationLog {
@@ -35,7 +64,6 @@ export interface CoTCategoryLog {
     system_prompt: string;
     attempts: Attempt[];
   };
-  // Fallback
   attempts?: Attempt[];
 }
 
@@ -85,24 +113,7 @@ export interface CoTLogExperiment extends LogExperimentBase {
   generations: CoTGenerationLog[];
 }
 
-export interface LogDataRoot {
-  simple: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    time_seconds: number;
-    number_experiments: number;
-    experiments: SimpleLogExperiment[];
-  };
-  cot: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    time_seconds: number;
-    number_experiments: number;
-    experiments: CoTLogExperiment[];
-  };
-}
+export type LogsFileRoot = MetricFileRoot<ExperimentModes<LogsModeData>>;
 
 // --- Metrics.json Types (Strict Match) ---
 
@@ -137,11 +148,7 @@ export interface CoTCategoryMetric {
 export interface CoTGenerationMetric {
   generation_id: string;
   categories: CoTCategoryMetric[];
-  metrics: {
-    syntax: MetricStat;
-    multiplicities: MetricStat;
-    invariants: MetricStat;
-    specific?: Record<string, MetricStat>;
+  metrics: MetricsContent & {
     multiplicities_category_invalid?: MetricStat;
     invariants_category_invalid?: MetricStat;
   };
@@ -159,41 +166,16 @@ export interface CoTExperimentMetric {
   metrics: MetricsContent;
 }
 
-export interface MetricsDataRoot {
-  simple: {
-    number_experiments: number;
-    metrics: MetricsContent;
-    experiments: SimpleExperimentMetric[];
-  };
-  cot: {
-    number_experiments: number;
-    metrics: MetricsContent;
-    experiments: CoTExperimentMetric[];
-  };
+export interface MetricsModeData<E> extends ModeData<MetricsContent, E> {
+  metrics: MetricsContent;
 }
 
-// --- Multi-Experiment File Root Types ---
-// These wrap the original structures in an experiments array with IDs
-
-export interface ExperimentLogEntry {
-  id: string;
-  simple: LogDataRoot["simple"];
-  cot: LogDataRoot["cot"];
-}
-
-export interface ExperimentMetricsEntry {
-  id: string;
-  simple: MetricsDataRoot["simple"];
-  cot: MetricsDataRoot["cot"];
-}
-
-export interface LogsFileRoot {
-  experiments: ExperimentLogEntry[];
-}
-
-export interface MetricsFileRoot {
-  experiments: ExperimentMetricsEntry[];
-}
+export type MetricsFileRoot = MetricFileRoot<
+  ExperimentModes<
+    MetricsModeData<SimpleExperimentMetric>,
+    MetricsModeData<CoTExperimentMetric>
+  >
+>;
 
 // --- Coverage.json Types ---
 
@@ -211,7 +193,7 @@ export interface RawCoverageData {
 
 export interface RawInstantiationSubItem {
   total_instantiated: number;
-  total_defined: number; // 0 means infinity
+  total_defined: number;
 }
 
 export interface RawInstantiationData {
@@ -231,7 +213,6 @@ export interface CoverageCategoryEntry {
   name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   coverage: RawCoverageData;
   instantiation: RawInstantiationData;
-  attempt_id?: string;
 }
 
 export interface CoverageCoTGenerationEntry {
@@ -254,15 +235,9 @@ export interface CoverageModeData {
   experiments: CoverageModelExperiment[];
 }
 
-export interface CoverageExperimentEntry {
-  id: string;
-  simple: CoverageModeData;
-  cot: CoverageModeData;
-}
-
-export interface CoverageFileRoot {
-  experiments: CoverageExperimentEntry[];
-}
+export type CoverageFileRoot = MetricFileRoot<
+  ExperimentModes<CoverageModeData>
+>;
 
 // --- Difference.json Types (Diversity Metrics) ---
 
@@ -308,31 +283,21 @@ export interface DifferenceModeData {
   experiments: (SimpleDifferenceExperiment | CoTDifferenceExperiment)[];
 }
 
-export interface DifferenceExperimentEntry {
-  id: string;
-  simple: DifferenceModeData;
-  cot: DifferenceModeData;
-}
-
-export interface DifferenceFileRoot {
-  experiments: DifferenceExperimentEntry[];
-}
+export type DifferenceFileRoot = MetricFileRoot<
+  ExperimentModes<DifferenceModeData>
+>;
 
 // --- Application Domain Types (Derived/Processed) ---
-// These are used by the UI components (e.g. pages/models/[model].astro).
-// We transform Raw types into these.
 
-// Coverage display: percentage 0-1
 export interface CoverageItem {
   classes: number;
   attributes: number;
   relationships: number;
 }
 
-// Instantiation display: value/total where null total means infinity
 export interface InstantiationValueItem {
   value: number;
-  total: number | null; // null = infinity
+  total: number | null;
 }
 
 export interface InstantiationItem {
@@ -356,12 +321,12 @@ export interface DiversityMetrics {
   numeric: number;
   stringEquals: number;
   stringLv: number;
-  ged?: GedSummary; // GED mean and std at model level
-  shannon?: GedSummary; // Shannon mean and std (dashboard-style summary)
-  shannonActive?: number; // Shannon eveness_active_groups (0-1)
-  shannonAll?: number; // Shannon eveness_all_groups (0-1)
-  shannonActiveStd?: number; // Std dev of eveness_active_groups
-  shannonAllStd?: number; // Std dev of eveness_all_groups
+  ged?: GedSummary;
+  shannon?: GedSummary;
+  shannonActive?: number;
+  shannonAll?: number;
+  shannonActiveStd?: number;
+  shannonAllStd?: number;
 }
 
 // --- GED (Graph Edit Distance) Types ---
@@ -414,15 +379,7 @@ export interface GedModeData {
   experiments: GedExperimentEntry[];
 }
 
-export interface GedModelEntry {
-  id: string;
-  simple: GedModeData;
-  cot: GedModeData;
-}
-
-export interface GedFileRoot {
-  experiments: GedModelEntry[];
-}
+export type GedFileRoot = MetricFileRoot<ExperimentModes<GedModeData>>;
 
 // --- Shannon Types ---
 
@@ -470,15 +427,7 @@ export interface ShannonModeData {
   experiments: ShannonExperimentEntry[];
 }
 
-export interface ShannonModelEntry {
-  id: string;
-  simple: ShannonModeData;
-  cot: ShannonModeData;
-}
-
-export interface ShannonFileRoot {
-  experiments: ShannonModelEntry[];
-}
+export type ShannonFileRoot = MetricFileRoot<ExperimentModes<ShannonModeData>>;
 
 // --- Judge.json Types ---
 
@@ -510,25 +459,13 @@ export interface SimpleJudgeGeneration {
 export interface CoTJudgeCategory {
   name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   attempt_id: string;
-  realism: RealismCounts;
-  stats?: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    time_seconds: number;
-  };
+  realism: RealismCounts | JudgeGenerationRealism;
 }
 
 export interface CoTJudgeGeneration {
   generation_id: string;
   realism: RealismCounts;
   categories: CoTJudgeCategory[];
-  stats?: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    time_seconds: number;
-  };
 }
 
 export interface JudgeExperimentEntry {
@@ -561,29 +498,9 @@ export interface JudgeModeData {
   experiments: JudgeExperimentEntry[];
 }
 
-export interface JudgeModelEntry {
-  id: string;
-  simple: JudgeModeData;
-  cot: JudgeModeData;
-}
+export type JudgeFileRoot = MetricFileRoot<ExperimentModes<JudgeModeData>>;
 
-export interface JudgeFileRoot {
-  experiments: JudgeModelEntry[];
-}
-
-export interface JudgeResult {
-  realistic: number;
-  unrealistic: number;
-  unknown: number;
-  successRate: number;
-  price?: PriceInfo;
-  elapsedSeconds?: number;
-}
-
-export interface JudgeResponse {
-  response: "Realistic" | "Unrealistic" | "Unknown";
-  why: string;
-}
+// --- Merged Model Types (Used by Dashboard/UI) ---
 
 export interface PriceInfo {
   price: number;
@@ -591,39 +508,66 @@ export interface PriceInfo {
   tokenOutput: number;
 }
 
-export interface ShannonEntry {
-  name: string;
-  values: Record<string, number>;
-  shannon: {
-    eveness_active_groups: number;
-    eveness_all_groups: number;
-  };
-}
-
-export interface GrakelMatrix {
-  labels: string[];
-  values: number[][];
-}
-
 export interface GenerationMetrics {
-  syntax: number | MetricStat;
-  multiplicities: number | MetricStat;
-  invariants: number | MetricStat;
+  syntax: MetricStat;
+  multiplicities: MetricStat;
+  invariants: MetricStat;
   coverage: CoverageMetrics;
-  diversity?: DiversityMetrics;
-  price?: PriceInfo;
-  elapsedSeconds?: number;
-  domainErrors?: Record<
-    string,
-    { invalid: number; total: number; failureRate: number }
-  >;
-  code?: string;
+  diversity: DiversityMetrics;
+  code: string;
+  price: PriceInfo;
+  elapsedSeconds: number;
 }
 
-// Prompt data for each CoT agent
 export interface AgentPrompts {
   systemPrompt: string;
   userPrompt: string;
+}
+
+export interface CategoryMetrics extends GenerationMetrics {
+  category: string;
+  pdfUrl: string;
+  shannon: ShannonSpecificEntry[];
+  prompts?: CotPromptsData;
+  judge?: {
+    response: string;
+    why: string;
+  };
+  realism?: RealismCounts;
+}
+
+export interface SimpleGeneration {
+  id: string;
+  pdfAvailable: boolean;
+  pdfUrl: string;
+  metrics: GenerationMetrics;
+  shannon: ShannonSpecificEntry[];
+  judge?: {
+    response: "Realistic" | "Unrealistic" | "Unknown";
+    why: string;
+  };
+  systemPrompt: string;
+  userPrompt: string;
+}
+
+export interface CoTGeneration {
+  id: string;
+  pdfAvailable: boolean;
+  pdfUrl: string;
+  shannon: ShannonSpecificEntry[];
+  categories: CategoryMetrics[];
+  metrics: {
+    syntax: MetricStat;
+    multiplicities: MetricStat;
+    invariants: MetricStat;
+    coverage: CoverageMetrics;
+    diversity: DiversityMetrics;
+  };
+  judge?: {
+    response: "Realistic" | "Unrealistic" | "Unknown";
+    why: string;
+  };
+  realism?: RealismCounts;
 }
 
 export interface CotPromptsData {
@@ -632,98 +576,50 @@ export interface CotPromptsData {
   IListInstantiator: AgentPrompts;
 }
 
-export interface CategoryMetrics extends GenerationMetrics {
-  category: "baseline" | "boundary" | "complex" | "edge" | "invalid";
-  pdfUrl?: string;
-  shannon?: ShannonEntry[];
-  prompts?: CotPromptsData;
-  judge?: JudgeResponse;
-  realism?: {
-    response_type: string;
-    reasoning: string;
-  };
-}
-
-export interface SimpleGeneration {
-  id: string;
-  metrics: GenerationMetrics;
-  judge?: JudgeResponse;
-  pdfAvailable: boolean;
-  pdfUrl?: string;
-  shannon?: ShannonEntry[];
-  systemPrompt?: string;
-  userPrompt?: string;
-}
-
-export interface CoTGeneration {
-  id: string;
-  categories: CategoryMetrics[];
-  shannon?: ShannonEntry[];
-  metrics?: {
-    syntax: MetricStat;
-    multiplicities: MetricStat;
-    invariants: MetricStat;
-    coverage?: CoverageMetrics;
-    diversity?: DiversityMetrics;
-  };
-  judge?: JudgeResponse;
-  realism?: RealismCounts;
-  pdfAvailable: boolean;
-  pdfUrl?: string;
-}
-
 export interface ModelData {
   name: string;
   diagramPdf: string;
   diagramUse: string;
   diagramUseCode: string;
   simple: {
-    price: PriceInfo;
-    elapsedSeconds: number;
     metrics: ModelMetrics;
     coverage: CoverageMetrics;
-    diversity: DiversityMetrics;
-    judge: JudgeResult;
-    grakel?: GrakelMatrix;
-    shannon: ShannonEntry[];
     generations: SimpleGeneration[];
+    diversity: DiversityMetrics;
+    judge: {
+      realistic: number;
+      unrealistic: number;
+      unknown: number;
+      successRate: number;
+    };
+    price: PriceInfo;
+    elapsedSeconds: number;
+    shannon: ShannonSpecificEntry[];
     gedHeatmap?: GedExperimentMatrix;
   };
-
   cot: {
-    price: PriceInfo;
-    elapsedSeconds: number;
     metrics: ModelMetrics;
     coverage: CoverageMetrics;
-    diversity: DiversityMetrics;
-    judge: JudgeResult;
-    grakel?: GrakelMatrix;
-    shannon: ShannonEntry[];
     generations: CoTGeneration[];
+    diversity: DiversityMetrics;
+    judge: {
+      realistic: number;
+      unrealistic: number;
+      unknown: number;
+      successRate: number;
+    };
+    price: PriceInfo;
+    elapsedSeconds: number;
+    shannon: ShannonSpecificEntry[];
     gedHeatmap?: GedExperimentMatrix;
   };
 }
 
 export interface DashboardData {
   totals: {
-    simple: {
-      price: PriceInfo;
-      elapsedSeconds: number;
-      metrics: ModelMetrics;
-      coverage: CoverageMetrics;
-      diversity: DiversityMetrics;
-      judge: JudgeResult;
-    };
-    cot: {
-      price: PriceInfo;
-      elapsedSeconds: number;
-      metrics: ModelMetrics;
-      coverage: CoverageMetrics;
-      diversity: DiversityMetrics;
-      judge: JudgeResult;
-    };
+    simple: DashboardModeTotals;
+    cot: DashboardModeTotals;
   };
-
   models: {
     name: string;
     simple: {
@@ -732,7 +628,7 @@ export interface DashboardData {
       multiplicities: number;
       invariants: number;
       coverage: CoverageMetrics;
-      diversity?: DiversityMetrics;
+      diversity: DiversityMetrics;
       realism: number;
     };
     cot: {
@@ -741,10 +637,26 @@ export interface DashboardData {
       multiplicities: number;
       invariants: number;
       coverage: CoverageMetrics;
-      diversity?: DiversityMetrics;
+      diversity: DiversityMetrics;
       realism: number;
     };
   }[];
+}
+
+export interface DashboardModeTotals {
+  price: PriceInfo;
+  elapsedSeconds: number;
+  metrics: ModelMetrics;
+  coverage: CoverageMetrics;
+  diversity: DiversityMetrics;
+  judge: {
+    realistic: number;
+    unrealistic: number;
+    unknown: number;
+    successRate: number;
+    price?: PriceInfo;
+    elapsedSeconds?: number;
+  };
 }
 
 export type ModelName = (typeof MODELS)[keyof typeof MODELS];

@@ -1,43 +1,49 @@
 import fs from "node:fs";
 import path from "node:path";
-import { MODELS_VALUES, prices } from "./constants";
+import { MODELS_VALUES } from "./constants";
 import { getModelName, calculateRate, calculatePrice } from "./utils";
 import type {
   ModelData,
+  ExperimentModes,
   CoverageMetrics,
   CoverageItem,
   InstantiationItem,
   InstantiationValueItem,
   SimpleGeneration,
   CoTGeneration,
-  LogDataRoot,
-  MetricsDataRoot,
-  GenerationMetrics,
-  CategoryMetrics,
   DashboardData,
   Attempt,
   LogsFileRoot,
+  LogsModeData,
   MetricsFileRoot,
-  ExperimentLogEntry,
-  ExperimentMetricsEntry,
+  MetricsModeData,
+  MetricsContent,
+  MetricStat,
+  SimpleExperimentMetric,
+  CoTExperimentMetric,
+  SimpleLogExperiment,
+  CoTLogExperiment,
   CoverageFileRoot,
   CoverageModeData,
+  CoverageCategoryEntry,
   RawCoverageData,
   RawInstantiationData,
   DifferenceFileRoot,
   DifferenceModeData,
+  CoTDifferenceCategory,
   RawDifferenceData,
   DiversityMetrics,
   GedFileRoot,
   GedModeData,
-  GedSummary,
-  GedExperimentMatrix,
   ShannonFileRoot,
   ShannonModeData,
+  ShannonCoTCategoryEntry,
   ShannonSpecificEntry,
   JudgeFileRoot,
   JudgeModeData,
+  CoTJudgeCategory,
   RealismCounts,
+  CoTCategoryLog,
 } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "public");
@@ -50,23 +56,77 @@ const SHANNON_FILE = path.join(DATA_DIR, "shannon.json");
 const JUDGE_FILE = path.join(DATA_DIR, "judge.json");
 const DATASET_DIR = path.join(DATA_DIR, "data", "dataset");
 
-// Cache data in memory - now stores the full file with all experiments
-let cachedMetricsFile: MetricsFileRoot | null = null;
-let cachedLogsFile: LogsFileRoot | null = null;
-let cachedCoverageFile: CoverageFileRoot | null = null;
-let cachedDifferenceFile: DifferenceFileRoot | null = null;
-let cachedGedFile: GedFileRoot | null = null;
-let cachedShannonFile: ShannonFileRoot | null = null;
-let cachedJudgeFile: JudgeFileRoot | null = null;
+type LogsExperimentRoot = LogsFileRoot["experiments"][number];
+type MetricsExperimentRoot = MetricsFileRoot["experiments"][number];
+type CoverageExperimentRoot = CoverageFileRoot["experiments"][number];
+type DifferenceExperimentRoot = DifferenceFileRoot["experiments"][number];
+type GedExperimentRoot = GedFileRoot["experiments"][number];
+type ShannonExperimentRoot = ShannonFileRoot["experiments"][number];
+type JudgeExperimentRoot = JudgeFileRoot["experiments"][number];
 
-const EMPTY_METRIC_STAT = { errors: 0, total: 0, str: [] };
-const EMPTY_METRICS_CONTENT = {
-  syntax: { ...EMPTY_METRIC_STAT },
-  multiplicities: { ...EMPTY_METRIC_STAT },
-  invariants: { ...EMPTY_METRIC_STAT },
+type CachedFiles = {
+  metrics: Map<string, MetricsExperimentRoot>;
+  logs: Map<string, LogsExperimentRoot>;
+  coverage: Map<string, CoverageExperimentRoot>;
+  difference: Map<string, DifferenceExperimentRoot>;
+  ged: Map<string, GedExperimentRoot>;
+  shannon: Map<string, ShannonExperimentRoot>;
+  judge: Map<string, JudgeExperimentRoot>;
 };
 
-const EMPTY_MODE_LOGS = {
+type ExperimentData = {
+  logs: ExperimentModes<LogsModeData>;
+  metrics: ExperimentModes<
+    MetricsModeData<SimpleExperimentMetric>,
+    MetricsModeData<CoTExperimentMetric>
+  >;
+  coverage: ExperimentModes<CoverageModeData> | null;
+  difference: ExperimentModes<DifferenceModeData> | null;
+  ged: ExperimentModes<GedModeData> | null;
+  shannon: ExperimentModes<ShannonModeData> | null;
+  judge: ExperimentModes<JudgeModeData> | null;
+};
+
+// Cache data in memory - indexed by experiment ID for O(1) lookups
+const cachedFiles: CachedFiles = {
+  metrics: new Map<string, MetricsExperimentRoot>(),
+  logs: new Map<string, LogsExperimentRoot>(),
+  coverage: new Map<string, CoverageExperimentRoot>(),
+  difference: new Map<string, DifferenceExperimentRoot>(),
+  ged: new Map<string, GedExperimentRoot>(),
+  shannon: new Map<string, ShannonExperimentRoot>(),
+  judge: new Map<string, JudgeExperimentRoot>(),
+};
+
+// Tracking which files are loaded
+let isDataLoaded = false;
+
+const warnedKeys = new Set<string>();
+
+function warnOnce(key: string, message: string, error?: unknown) {
+  if (warnedKeys.has(key)) {
+    return;
+  }
+  warnedKeys.add(key);
+  console.warn(`[data] ${message}`);
+  if (error) {
+    console.warn(error);
+  }
+}
+
+function createEmptyMetricStat(): MetricStat {
+  return { errors: 0, total: 0, str: [] };
+}
+
+function createEmptyMetricsContent(): MetricsContent {
+  return {
+    syntax: createEmptyMetricStat(),
+    multiplicities: createEmptyMetricStat(),
+    invariants: createEmptyMetricStat(),
+  };
+}
+
+const EMPTY_MODE_LOGS: LogsModeData = {
   input_tokens: 0,
   output_tokens: 0,
   total_tokens: 0,
@@ -75,9 +135,15 @@ const EMPTY_MODE_LOGS = {
   experiments: [],
 };
 
-const EMPTY_MODE_METRICS = {
+const EMPTY_SIMPLE_MODE_METRICS: MetricsModeData<SimpleExperimentMetric> = {
   number_experiments: 0,
-  metrics: { ...EMPTY_METRICS_CONTENT },
+  metrics: createEmptyMetricsContent(),
+  experiments: [],
+};
+
+const EMPTY_COT_MODE_METRICS: MetricsModeData<CoTExperimentMetric> = {
+  number_experiments: 0,
+  metrics: createEmptyMetricsContent(),
   experiments: [],
 };
 
@@ -87,13 +153,6 @@ function normalizeKey(value?: string): string {
 
 function sameKey(left?: string, right?: string): boolean {
   return normalizeKey(left) === normalizeKey(right);
-}
-
-function findById<T extends { id: string }>(
-  items: T[] | undefined,
-  id: string,
-): T | undefined {
-  return items?.find((item) => sameKey(item.id, id));
 }
 
 function findByExperimentId<T extends { experiment_id: string }>(
@@ -126,7 +185,12 @@ function getDatasetExperimentDirName(experimentId?: string): string {
       (entry) => entry.isDirectory() && sameKey(entry.name, experimentId),
     );
     return matched?.name || fallback;
-  } catch {
+  } catch (error) {
+    warnOnce(
+      `dataset-dir-${experimentId}`,
+      `Could not resolve dataset experiment directory for '${experimentId}', using fallback.`,
+      error,
+    );
     return fallback;
   }
 }
@@ -143,141 +207,104 @@ function getChildDirNameIgnoreCase(
       (entry) => entry.isDirectory() && sameKey(entry.name, childDir),
     );
     return matched?.name || fallback;
-  } catch {
+  } catch (error) {
+    warnOnce(
+      `child-dir-${parentDir}-${childDir}`,
+      `Could not resolve child directory '${childDir}' under '${parentDir}', using fallback.`,
+      error,
+    );
     return fallback;
   }
 }
 
 function loadData() {
-  if (!cachedMetricsFile) {
+  if (isDataLoaded) return;
+
+  const files: Array<{
+    path: string;
+    key: keyof CachedFiles;
+  }> = [
+    { path: METRICS_FILE, key: "metrics" },
+    { path: LOGS_FILE, key: "logs" },
+    { path: COVERAGE_FILE, key: "coverage" },
+    { path: DIFFERENCE_FILE, key: "difference" },
+    { path: GED_FILE, key: "ged" },
+    { path: JUDGE_FILE, key: "judge" },
+    { path: SHANNON_FILE, key: "shannon" },
+  ] as const;
+
+  for (const { path, key } of files) {
     try {
-      const metricsContent = fs.readFileSync(METRICS_FILE, "utf-8");
-      cachedMetricsFile = JSON.parse(metricsContent);
+      if (!fs.existsSync(path)) {
+        warnOnce(`missing-file-${path}`, `Data file not found: ${path}`);
+        continue;
+      }
+
+      const content = fs.readFileSync(path, "utf-8");
+      const parsed = JSON.parse(content) as {
+        experiments?: Array<{ id: string }>;
+      };
+      const experiments = parsed.experiments || [];
+
+      for (const exp of experiments) {
+        if (!exp?.id) {
+          continue;
+        }
+        cachedFiles[key].set(normalizeKey(exp.id), exp as never);
+      }
     } catch (error) {
-      console.error("Error loading metrics.json:", error);
-      cachedMetricsFile = { experiments: [] };
+      warnOnce(`load-file-${path}`, `Failed to load data file: ${path}`, error);
     }
   }
-  if (!cachedLogsFile) {
-    try {
-      const logsContent = fs.readFileSync(LOGS_FILE, "utf-8");
-      cachedLogsFile = JSON.parse(logsContent);
-    } catch (error) {
-      console.error("Error loading logs.json:", error);
-      cachedLogsFile = { experiments: [] };
-    }
-  }
-  if (!cachedCoverageFile) {
-    try {
-      const coverageContent = fs.readFileSync(COVERAGE_FILE, "utf-8");
-      cachedCoverageFile = JSON.parse(coverageContent);
-    } catch (error) {
-      console.error("Error loading coverage.json:", error);
-      cachedCoverageFile = { experiments: [] };
-    }
-  }
-  if (!cachedDifferenceFile) {
-    try {
-      const differenceContent = fs.readFileSync(DIFFERENCE_FILE, "utf-8");
-      cachedDifferenceFile = JSON.parse(differenceContent);
-    } catch (error) {
-      console.error("Error loading difference.json:", error);
-      cachedDifferenceFile = { experiments: [] };
-    }
-  }
-  if (!cachedGedFile) {
-    try {
-      const gedContent = fs.readFileSync(GED_FILE, "utf-8");
-      cachedGedFile = JSON.parse(gedContent);
-    } catch (error) {
-      console.error("Error loading ged.json:", error);
-      cachedGedFile = { experiments: [] };
-    }
-  }
-  if (!cachedJudgeFile) {
-    try {
-      const judgeContent = fs.readFileSync(JUDGE_FILE, "utf-8");
-      cachedJudgeFile = JSON.parse(judgeContent);
-    } catch (error) {
-      console.error("Error loading judge.json:", error);
-      cachedJudgeFile = { experiments: [] };
-    }
-  }
-  if (!cachedShannonFile) {
-    try {
-      const shannonContent = fs.readFileSync(SHANNON_FILE, "utf-8");
-      cachedShannonFile = JSON.parse(shannonContent);
-    } catch (error) {
-      console.error("Error loading shannon.json:", error);
-      cachedShannonFile = { experiments: [] };
-    }
-  }
+
+  isDataLoaded = true;
 }
 
 // Get list of all experiment IDs
 export function getExperimentIds(): string[] {
   loadData();
-  return cachedLogsFile?.experiments.map((exp) => exp.id) || [];
+  return Array.from(cachedFiles.logs.keys());
 }
 
 // Get experiment data by ID (or first if not specified)
-function getExperimentData(experimentId?: string): {
-  logs: LogDataRoot;
-  metrics: MetricsDataRoot;
-  coverage: { simple: CoverageModeData; cot: CoverageModeData } | null;
-  difference: { simple: DifferenceModeData; cot: DifferenceModeData } | null;
-  ged: { simple: GedModeData; cot: GedModeData } | null;
-  shannon: { simple: ShannonModeData; cot: ShannonModeData } | null;
-  judge: { simple: JudgeModeData; cot: JudgeModeData } | null;
-} {
+function getExperimentData(experimentId?: string): ExperimentData {
   loadData();
+  const id = normalizeKey(experimentId || getExperimentIds()[0]);
 
-  const logExp = experimentId
-    ? findById(cachedLogsFile?.experiments, experimentId)
-    : cachedLogsFile?.experiments[0];
-
-  const metricExp = experimentId
-    ? findById(cachedMetricsFile?.experiments, experimentId)
-    : cachedMetricsFile?.experiments[0];
-
-  const coverageExp = experimentId
-    ? findById(cachedCoverageFile?.experiments, experimentId)
-    : cachedCoverageFile?.experiments[0];
-
-  const differenceExp = experimentId
-    ? findById(cachedDifferenceFile?.experiments, experimentId)
-    : cachedDifferenceFile?.experiments[0];
-
-  const gedExp = experimentId
-    ? findById(cachedGedFile?.experiments, experimentId)
-    : cachedGedFile?.experiments[0];
-
-  const judgeExp = experimentId
-    ? findById(cachedJudgeFile?.experiments, experimentId)
-    : cachedJudgeFile?.experiments[0];
-
-  const shannonExp = experimentId
-    ? findById(cachedShannonFile?.experiments, experimentId)
-    : cachedShannonFile?.experiments[0];
+  const logsRecord = cachedFiles.logs.get(id);
+  const metricsRecord = cachedFiles.metrics.get(id);
+  const coverageRecord = cachedFiles.coverage.get(id);
+  const differenceRecord = cachedFiles.difference.get(id);
+  const gedRecord = cachedFiles.ged.get(id);
+  const shannonRecord = cachedFiles.shannon.get(id);
+  const judgeRecord = cachedFiles.judge.get(id);
 
   return {
-    logs: logExp
-      ? { simple: logExp.simple, cot: logExp.cot }
-      : { simple: { ...EMPTY_MODE_LOGS }, cot: { ...EMPTY_MODE_LOGS } },
-    metrics: metricExp
-      ? { simple: metricExp.simple, cot: metricExp.cot }
-      : { simple: { ...EMPTY_MODE_METRICS }, cot: { ...EMPTY_MODE_METRICS } },
-    coverage: coverageExp
-      ? { simple: coverageExp.simple, cot: coverageExp.cot }
+    logs: logsRecord
+      ? { simple: logsRecord.simple, cot: logsRecord.cot }
+      : {
+          simple: { ...EMPTY_MODE_LOGS },
+          cot: { ...EMPTY_MODE_LOGS },
+        },
+    metrics: metricsRecord
+      ? { simple: metricsRecord.simple, cot: metricsRecord.cot }
+      : {
+          simple: { ...EMPTY_SIMPLE_MODE_METRICS },
+          cot: { ...EMPTY_COT_MODE_METRICS },
+        },
+    coverage: coverageRecord
+      ? { simple: coverageRecord.simple, cot: coverageRecord.cot }
       : null,
-    difference: differenceExp
-      ? { simple: differenceExp.simple, cot: differenceExp.cot }
+    difference: differenceRecord
+      ? { simple: differenceRecord.simple, cot: differenceRecord.cot }
       : null,
-    ged: gedExp ? { simple: gedExp.simple, cot: gedExp.cot } : null,
-    shannon: shannonExp
-      ? { simple: shannonExp.simple, cot: shannonExp.cot }
+    ged: gedRecord ? { simple: gedRecord.simple, cot: gedRecord.cot } : null,
+    shannon: shannonRecord
+      ? { simple: shannonRecord.simple, cot: shannonRecord.cot }
       : null,
-    judge: judgeExp ? { simple: judgeExp.simple, cot: judgeExp.cot } : null,
+    judge: judgeRecord
+      ? { simple: judgeRecord.simple, cot: judgeRecord.cot }
+      : null,
   };
 }
 
@@ -520,573 +547,531 @@ function getShannonMeanFromSpecific(
   return { active, all, activeStd, allStd };
 }
 
-function findShannonExperiment(
-  experiments: { experiment_id: string }[] | undefined,
+function findShannonExperiment<T extends { experiment_id: string }>(
+  experiments: T[] | undefined,
   logExperimentId: string | undefined,
-  mode: "simple" | "cot",
-  domainLower: string,
-) {
+): T | undefined {
   if (!experiments || experiments.length === 0) return undefined;
 
-  const byId = logExperimentId
-    ? findByExperimentId(
-        experiments as Array<{ experiment_id: string }>,
-        logExperimentId,
-      )
-    : undefined;
-  if (byId) return byId;
+  if (!logExperimentId) return undefined;
+  return findByExperimentId(experiments, logExperimentId);
+}
 
-  const prefix = `${mode}-${domainLower}-`;
-  const fallbackMatches = experiments.filter((entry) =>
-    normalizeKey(entry.experiment_id).startsWith(prefix),
+function buildMetricsFallback() {
+  return createEmptyMetricsContent();
+}
+
+function isSimpleLogExperiment(
+  experiment: SimpleLogExperiment | CoTLogExperiment,
+): experiment is SimpleLogExperiment {
+  return experiment.type === "simple";
+}
+
+function isCoTLogExperiment(
+  experiment: SimpleLogExperiment | CoTLogExperiment,
+): experiment is CoTLogExperiment {
+  return experiment.type === "cot";
+}
+
+function hasCoverageCategories(
+  value: unknown,
+): value is { categories: CoverageCategoryEntry[] } {
+  return Array.isArray((value as { categories?: unknown })?.categories);
+}
+
+function hasDifferenceCategories(
+  value: unknown,
+): value is { categories: CoTDifferenceCategory[] } {
+  return Array.isArray((value as { categories?: unknown })?.categories);
+}
+
+function hasShannonCategories(
+  value: unknown,
+): value is { categories: ShannonCoTCategoryEntry[] } {
+  return Array.isArray((value as { categories?: unknown })?.categories);
+}
+
+function hasJudgeCategories(
+  value: unknown,
+): value is { categories: CoTJudgeCategory[] } {
+  return Array.isArray((value as { categories?: unknown })?.categories);
+}
+
+function isRealismCounts(value: unknown): value is RealismCounts {
+  const realism = value as RealismCounts | undefined;
+  return !!(
+    realism &&
+    typeof realism.realistic === "number" &&
+    typeof realism.unrealistic === "number" &&
+    typeof realism.doubtful === "number"
   );
-  if (fallbackMatches.length === 0) return undefined;
+}
 
-  return fallbackMatches[0];
+function isJudgeResponseRealism(value: unknown): value is {
+  response_type: string;
+  reasoning: string;
+} {
+  const realism = value as { response_type?: unknown; reasoning?: unknown };
+  return (
+    typeof realism?.response_type === "string" &&
+    typeof realism?.reasoning === "string"
+  );
+}
+
+function resolveModePaths(
+  logExp: Pick<
+    SimpleLogExperiment | CoTLogExperiment,
+    "date" | "time" | "domain_name"
+  >,
+  mode: "simple" | "cot",
+  datasetExperimentDir: string,
+) {
+  const modeDir = getChildDirNameIgnoreCase(
+    path.join(DATASET_DIR, datasetExperimentDir),
+    mode === "simple" ? "Simple" : "CoT",
+  );
+  const domainFolder = getChildDirNameIgnoreCase(
+    path.join(DATASET_DIR, datasetExperimentDir, modeDir),
+    getModelName(logExp.domain_name),
+  );
+  const dateTime = `${logExp.date.split("-").reverse().join("-")}--${logExp.time.replace(/:/g, "-")}`;
+  const timestampDir = getChildDirNameIgnoreCase(
+    path.join(DATASET_DIR, datasetExperimentDir, modeDir, domainFolder),
+    dateTime,
+  );
+
+  return { modeDir, domainFolder, timestampDir };
+}
+
+function getMajorityRealismResponse(
+  counts?: RealismCounts,
+): "Realistic" | "Unrealistic" | "Unknown" {
+  if (!counts) {
+    return "Unknown";
+  }
+  const { realistic, unrealistic, doubtful } = counts;
+  if (realistic > unrealistic && realistic > doubtful) {
+    return "Realistic";
+  }
+  if (unrealistic > realistic && unrealistic > doubtful) {
+    return "Unrealistic";
+  }
+  return "Unknown";
+}
+
+function toJudgeLabel(
+  value: string | undefined,
+): "Realistic" | "Unrealistic" | "Unknown" {
+  const normalized = normalizeKey(value);
+  if (normalized === "realistic") {
+    return "Realistic";
+  }
+  if (normalized === "unrealistic") {
+    return "Unrealistic";
+  }
+  return "Unknown";
+}
+
+type ProcessCtx = {
+  logs: ExperimentData["logs"];
+  metrics: ExperimentData["metrics"];
+  coverage: ExperimentData["coverage"];
+  difference: ExperimentData["difference"];
+  ged: ExperimentData["ged"];
+  shannon: ExperimentData["shannon"];
+  judge: ExperimentData["judge"];
+  domainLower: string;
+  datasetExperimentDir: string;
+};
+
+type DifferenceGenerationLookup = {
+  generation_id: string;
+  difference?: RawDifferenceData;
+  categories?: CoTDifferenceCategory[];
+};
+
+function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
+  const {
+    logs,
+    metrics,
+    coverage,
+    difference,
+    ged,
+    shannon,
+    judge: judgeData,
+    domainLower,
+    datasetExperimentDir,
+  } = ctx;
+
+  const modeLogs = logs.simple;
+  const modeMetrics = metrics.simple;
+  const modeCoverage = coverage?.simple;
+  const modeDifference = difference?.simple;
+  const modeGed = ged?.simple;
+  const modeShannon = shannon?.simple;
+  const modeJudge = judgeData?.simple;
+
+  const logExp = modeLogs.experiments
+    .filter(isSimpleLogExperiment)
+    .find((entry) => normalizeKey(entry.domain_name) === domainLower);
+  if (!logExp) return null;
+
+  const mExp = findByExperimentId(modeMetrics.experiments, logExp.id);
+  const covExp = findByExperimentId(modeCoverage?.experiments, logExp.id);
+  const diffExp = findByExperimentId(modeDifference?.experiments, logExp.id);
+  const gedExpData = findByExperimentId(modeGed?.experiments, logExp.id);
+  const shannonExp = findShannonExperiment(modeShannon?.experiments, logExp.id);
+  const judgeExp = findByExperimentId(modeJudge?.experiments, logExp.id);
+
+  const { modeDir, domainFolder, timestampDir } = resolveModePaths(
+    logExp,
+    "simple",
+    datasetExperimentDir,
+  );
+
+  const generations: SimpleGeneration[] = (logExp.generations || []).map(
+    (gen) => {
+      const mGen = findByGenerationId(mExp?.generations, gen.id);
+      const covGen = findByGenerationId(covExp?.generations, gen.id);
+      const diffGen = findByGenerationId<DifferenceGenerationLookup>(
+        diffExp?.generations as DifferenceGenerationLookup[] | undefined,
+        gen.id,
+      );
+      const shannonGen = findByGenerationId(shannonExp?.generations, gen.id);
+      const judgeGen = findByGenerationId(judgeExp?.generations, gen.id);
+
+      const commonStats = {
+        tokens: sumTokens(gen.attempts),
+        elapsedSeconds: sumTimeSeconds(gen.attempts),
+        shannonSummary: getShannonMeanFromSpecific(shannonGen?.specific),
+      };
+
+      const lastAttempt = gen.attempts?.[gen.attempts.length - 1];
+      const mGenMetrics = mGen?.metrics || buildMetricsFallback();
+
+      let judgeResponse: SimpleGeneration["judge"] = gen.judge
+        ? {
+            response: toJudgeLabel(gen.judge.response),
+            why: gen.judge.why,
+          }
+        : undefined;
+      if (isJudgeResponseRealism(judgeGen?.realism)) {
+        judgeResponse = {
+          response: toJudgeLabel(judgeGen.realism.response_type),
+          why: judgeGen.realism.reasoning,
+        };
+      }
+
+      const instanceName = lastAttempt?.instance_name || "output";
+      return {
+        id: `gen${gen.id}`,
+        pdfAvailable: true,
+        pdfUrl: `data/dataset/${datasetExperimentDir}/${modeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${instanceName}.pdf`,
+        metrics: {
+          ...mGenMetrics,
+          coverage: getCoverageMetrics(covGen),
+          diversity: {
+            ...rawDifferenceToDisplay(diffGen?.difference),
+            shannonActive: commonStats.shannonSummary.active,
+            shannonAll: commonStats.shannonSummary.all,
+            shannonActiveStd: commonStats.shannonSummary.activeStd,
+            shannonAllStd: commonStats.shannonSummary.allStd,
+          },
+          price: {
+            price: calculatePrice(
+              logExp.model.name,
+              commonStats.tokens.input,
+              commonStats.tokens.output,
+            ),
+            tokenInput: commonStats.tokens.input,
+            tokenOutput: commonStats.tokens.output,
+          },
+          elapsedSeconds: commonStats.elapsedSeconds,
+          code: lastAttempt?.response || "",
+        },
+        shannon: shannonGen?.specific || [],
+        judge: judgeResponse,
+        systemPrompt: logExp.system_prompt,
+        userPrompt: lastAttempt?.prompt || "",
+      };
+    },
+  );
+
+  const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
+
+  return {
+    metrics: {
+      syntax: calculateRate(mExp?.metrics?.syntax),
+      multiplicities: calculateRate(mExp?.metrics?.multiplicities),
+      invariants: calculateRate(mExp?.metrics?.invariants),
+    },
+    coverage: getCoverageMetrics(covExp),
+    generations,
+    price: {
+      price: calculatePrice(
+        logExp.model.name,
+        logExp.input_tokens,
+        logExp.output_tokens,
+      ),
+      tokenInput: logExp.input_tokens,
+      tokenOutput: logExp.output_tokens,
+    },
+    elapsedSeconds: logExp.time_seconds,
+    diversity: {
+      ...rawDifferenceToDisplay(diffExp?.difference),
+      ged: modeGed?.ged,
+      shannonActive: shannonSummary.active,
+      shannonAll: shannonSummary.all,
+      shannonActiveStd: shannonSummary.activeStd,
+      shannonAllStd: shannonSummary.allStd,
+    },
+    judge: getJudgeResultWithStats(
+      judgeExp?.realism || modeJudge?.realism,
+      judgeExp?.stats || modeJudge?.stats,
+      modeJudge?.model?.name || logExp.model.name,
+    ),
+    shannon: shannonExp?.specific || [],
+    gedHeatmap: gedExpData?.ged,
+  };
+}
+
+function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
+  const {
+    logs,
+    metrics,
+    coverage,
+    difference,
+    ged,
+    shannon,
+    judge: judgeData,
+    domainLower,
+    datasetExperimentDir,
+  } = ctx;
+
+  const modeLogs = logs.cot;
+  const modeMetrics = metrics.cot;
+  const modeCoverage = coverage?.cot;
+  const modeDifference = difference?.cot;
+  const modeGed = ged?.cot;
+  const modeShannon = shannon?.cot;
+  const modeJudge = judgeData?.cot;
+
+  const logExp = modeLogs.experiments
+    .filter(isCoTLogExperiment)
+    .find((entry) => normalizeKey(entry.domain_name) === domainLower);
+  if (!logExp) return null;
+
+  const mExp = findByExperimentId(modeMetrics.experiments, logExp.id);
+  const covExp = findByExperimentId(modeCoverage?.experiments, logExp.id);
+  const diffExp = findByExperimentId(modeDifference?.experiments, logExp.id);
+  const gedExpData = findByExperimentId(modeGed?.experiments, logExp.id);
+  const shannonExp = findShannonExperiment(modeShannon?.experiments, logExp.id);
+  const judgeExp = findByExperimentId(modeJudge?.experiments, logExp.id);
+
+  const { modeDir, domainFolder, timestampDir } = resolveModePaths(
+    logExp,
+    "cot",
+    datasetExperimentDir,
+  );
+
+  const generations: CoTGeneration[] = (logExp.generations || []).map((gen) => {
+    const mGen = findByGenerationId(mExp?.generations, gen.id);
+    const covGen = findByGenerationId(covExp?.generations, gen.id);
+    const diffGen = findByGenerationId<DifferenceGenerationLookup>(
+      diffExp?.generations as DifferenceGenerationLookup[] | undefined,
+      gen.id,
+    );
+    const shannonGen = findByGenerationId(shannonExp?.generations, gen.id);
+    const judgeGen = findByGenerationId(judgeExp?.generations, gen.id);
+
+    const commonStats = {
+      shannonSummary: getShannonMeanFromSpecific(shannonGen?.specific),
+    };
+
+    const categories = (gen.categories || []).map((catLog: CoTCategoryLog) => {
+      const catMetric = findByName(mGen?.categories, catLog.name);
+      const judgeCat = hasJudgeCategories(judgeGen)
+        ? findByName(judgeGen.categories, catLog.name)
+        : undefined;
+      const covCat = hasCoverageCategories(covGen)
+        ? findByName(covGen.categories, catLog.name)
+        : undefined;
+      const diffCat = hasDifferenceCategories(diffGen)
+        ? findByName(diffGen.categories, catLog.name)
+        : undefined;
+      const shannonCat = hasShannonCategories(shannonGen)
+        ? findByName(shannonGen.categories, catLog.name)
+        : undefined;
+
+      const attempts =
+        catLog.IListInstantiator?.attempts || catLog.attempts || [];
+      const lastAttempt = attempts[attempts.length - 1];
+      const creatorTokens = sumTokens(catLog.IListCreator?.attempts);
+      const instantiatorTokens = sumTokens(attempts);
+      const totalIn = creatorTokens.input + instantiatorTokens.input;
+      const totalOut = creatorTokens.output + instantiatorTokens.output;
+
+      const shannonCatSummary = getShannonMeanFromSpecific(
+        shannonCat?.specific,
+      );
+
+      const judgeCatRealism = judgeCat?.realism;
+      const categoryJudge = isJudgeResponseRealism(judgeCatRealism)
+        ? {
+            response: toJudgeLabel(judgeCatRealism.response_type),
+            why: judgeCatRealism.reasoning,
+          }
+        : isRealismCounts(judgeCatRealism)
+          ? {
+              response: getMajorityRealismResponse(judgeCatRealism),
+              why: `${judgeCatRealism.realistic} realistic, ${judgeCatRealism.unrealistic} unrealistic, ${judgeCatRealism.doubtful} doubtful`,
+            }
+          : undefined;
+
+      return {
+        category: catLog.name,
+        ...(catMetric?.metrics || buildMetricsFallback()),
+        coverage: getCoverageMetrics(covCat),
+        diversity: {
+          ...rawDifferenceToDisplay(diffCat?.difference),
+          shannonActive: shannonCatSummary.active,
+          shannonAll: shannonCatSummary.all,
+          shannonActiveStd: shannonCatSummary.activeStd,
+          shannonAllStd: shannonCatSummary.allStd,
+        },
+        code: lastAttempt?.response || "",
+        pdfUrl: `data/dataset/${datasetExperimentDir}/${modeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${catLog.name}.pdf`,
+        price: {
+          price: calculatePrice(logExp.model.name, totalIn, totalOut),
+          tokenInput: totalIn,
+          tokenOutput: totalOut,
+        },
+        elapsedSeconds:
+          sumTimeSeconds(catLog.IListCreator?.attempts) +
+          sumTimeSeconds(attempts),
+        shannon: shannonCat?.specific || [],
+        prompts: {
+          IModelAnalyzer: {
+            systemPrompt: logExp.IModelAnalyzer?.system_prompt || "",
+            userPrompt: logExp.IModelAnalyzer?.prompt || "",
+          },
+          IListCreator: {
+            systemPrompt: catLog.IListCreator?.system_prompt || "",
+            userPrompt:
+              catLog.IListCreator?.attempts?.[
+                catLog.IListCreator.attempts.length - 1
+              ]?.prompt || "",
+          },
+          IListInstantiator: {
+            systemPrompt: catLog.IListInstantiator?.system_prompt || "",
+            userPrompt: lastAttempt?.prompt || "",
+          },
+        },
+        judge: categoryJudge,
+        realism: isRealismCounts(judgeCatRealism) ? judgeCatRealism : undefined,
+      };
+    });
+
+    let judgeResponse: CoTGeneration["judge"] = gen.judge
+      ? {
+          response: toJudgeLabel(gen.judge.response),
+          why: gen.judge.why,
+        }
+      : undefined;
+    if (isRealismCounts(judgeGen?.realism)) {
+      const { realistic, unrealistic, doubtful } = judgeGen.realism;
+      judgeResponse = {
+        response: getMajorityRealismResponse(judgeGen.realism),
+        why: `${realistic} realistic, ${unrealistic} unrealistic, ${doubtful} doubtful`,
+      };
+    } else if (isJudgeResponseRealism(judgeGen?.realism)) {
+      judgeResponse = {
+        response: toJudgeLabel(judgeGen.realism.response_type),
+        why: judgeGen.realism.reasoning,
+      };
+    }
+
+    return {
+      id: `gen${gen.id}`,
+      pdfAvailable: true,
+      pdfUrl: categories[0]?.pdfUrl || "",
+      shannon: shannonGen?.specific || [],
+      categories,
+      metrics: {
+        ...(mGen?.metrics || buildMetricsFallback()),
+        coverage: getCoverageMetrics(covGen),
+        diversity: {
+          ...rawDifferenceToDisplay(diffGen?.difference),
+          shannonActive: commonStats.shannonSummary.active,
+          shannonAll: commonStats.shannonSummary.all,
+          shannonActiveStd: commonStats.shannonSummary.activeStd,
+          shannonAllStd: commonStats.shannonSummary.allStd,
+        },
+      },
+      judge: judgeResponse,
+      realism: isRealismCounts(judgeGen?.realism)
+        ? judgeGen?.realism
+        : undefined,
+    };
+  });
+
+  const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
+
+  return {
+    metrics: {
+      syntax: calculateRate(mExp?.metrics?.syntax),
+      multiplicities: calculateRate(mExp?.metrics?.multiplicities),
+      invariants: calculateRate(mExp?.metrics?.invariants),
+    },
+    coverage: getCoverageMetrics(covExp),
+    generations,
+    price: {
+      price: calculatePrice(
+        logExp.model.name,
+        logExp.input_tokens,
+        logExp.output_tokens,
+      ),
+      tokenInput: logExp.input_tokens,
+      tokenOutput: logExp.output_tokens,
+    },
+    elapsedSeconds: logExp.time_seconds,
+    diversity: {
+      ...rawDifferenceToDisplay(diffExp?.difference),
+      ged: modeGed?.ged,
+      shannonActive: shannonSummary.active,
+      shannonAll: shannonSummary.all,
+      shannonActiveStd: shannonSummary.activeStd,
+      shannonAllStd: shannonSummary.allStd,
+    },
+    judge: getJudgeResultWithStats(
+      judgeExp?.realism || modeJudge?.realism,
+      judgeExp?.stats || modeJudge?.stats,
+      modeJudge?.model?.name || logExp.model.name,
+    ),
+    shannon: shannonExp?.specific || [],
+    gedHeatmap: gedExpData?.ged,
+  };
 }
 
 export function getModelData(
   modelSlug: string,
   experimentId?: string,
 ): ModelData | null {
-  const {
-    logs: cachedLogs,
-    metrics: cachedMetrics,
-    coverage: cachedCoverage,
-    difference: cachedDifference,
-    ged: cachedGed,
-    shannon: cachedShannon,
-    judge: cachedJudge,
-  } = getExperimentData(experimentId);
+  const cached = getExperimentData(experimentId);
   const datasetExperimentDir = getDatasetExperimentDirName(experimentId);
   const modelName = getModelName(modelSlug);
   const domainLower = modelName.toLowerCase();
 
-  const getSimples = () => {
-    const logExps =
-      cachedLogs?.simple?.experiments.filter(
-        (e) => e.domain_name.toLowerCase() === domainLower,
-      ) || [];
-    const metricExps = cachedMetrics?.simple?.experiments || [];
-    const coverageExps = cachedCoverage?.simple?.experiments || [];
-    const differenceExps = cachedDifference?.simple?.experiments || [];
-    const gedExps = cachedGed?.simple?.experiments || [];
-    const shannonExps = cachedShannon?.simple?.experiments || [];
-    const judgeExps = cachedJudge?.simple?.experiments || [];
-    const generations: SimpleGeneration[] = [];
-
-    const logExp = logExps[0];
-    const mExp = logExp ? findByExperimentId(metricExps, logExp.id) : null;
-    const covExp = logExp ? findByExperimentId(coverageExps, logExp.id) : null;
-    const diffExp = logExp
-      ? findByExperimentId(differenceExps, logExp.id)
-      : null;
-    const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
-    const shannonExp = findShannonExperiment(
-      shannonExps,
-      logExp?.id,
-      "simple",
-      domainLower,
-    );
-    const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
-
-    if (logExp && mExp) {
-      const dateTime = `${logExp.date
-        .split("-")
-        .reverse()
-        .join("-")}--${logExp.time.replace(/:/g, "-")}`;
-      const simpleModeDir = getChildDirNameIgnoreCase(
-        path.join(DATASET_DIR, datasetExperimentDir),
-        "Simple",
-      );
-      const domainFolder = getChildDirNameIgnoreCase(
-        path.join(DATASET_DIR, datasetExperimentDir, simpleModeDir),
-        getModelName(logExp.domain_name),
-      );
-      const timestampDir = getChildDirNameIgnoreCase(
-        path.join(
-          DATASET_DIR,
-          datasetExperimentDir,
-          simpleModeDir,
-          domainFolder,
-        ),
-        dateTime,
-      );
-
-      logExp.generations.forEach((gen) => {
-        const mGen = findByGenerationId(mExp.generations, gen.id);
-        const covGen = findByGenerationId(covExp?.generations, gen.id);
-        const diffGen = findByGenerationId(
-          diffExp?.generations as
-            | Array<{ generation_id: string; difference: RawDifferenceData }>
-            | undefined,
-          gen.id,
-        );
-        const shannonGen = findByGenerationId(
-          shannonExp?.generations as
-            | Array<{
-                generation_id: string;
-                specific: ShannonSpecificEntry[];
-              }>
-            | undefined,
-          gen.id,
-        ) as
-          | {
-              generation_id: string;
-              specific: ShannonSpecificEntry[];
-            }
-          | undefined;
-        // Find judge generation data - cast to SimpleJudgeGeneration type
-        const judgeGen = findByGenerationId(judgeExp?.generations, gen.id) as
-          | {
-              generation_id: string;
-              realism?: { response_type: string; reasoning: string };
-            }
-          | undefined;
-        const attempt = gen.attempts?.[gen.attempts.length - 1];
-        const tokens = sumTokens(gen.attempts);
-        const elapsedSeconds = sumTimeSeconds(gen.attempts);
-
-        const shannonGenSummary = getShannonMeanFromSpecific(
-          shannonGen?.specific,
-        );
-
-        if (mGen && attempt) {
-          const genMetrics: any = {
-            syntax: mGen.metrics.syntax,
-            multiplicities: mGen.metrics.multiplicities,
-            invariants: mGen.metrics.invariants,
-            coverage: getCoverageMetrics(covGen),
-            diversity: rawDifferenceToDisplay(diffGen?.difference),
-            code: attempt.response,
-            price: {
-              price: calculatePrice(
-                logExp.model.name,
-                tokens.input,
-                tokens.output,
-              ),
-              tokenInput: tokens.input,
-              tokenOutput: tokens.output,
-            },
-            elapsedSeconds,
-          };
-
-          genMetrics.diversity = {
-            ...(genMetrics.diversity || {}),
-            shannonActive: shannonGenSummary.active,
-            shannonAll: shannonGenSummary.all,
-            shannonActiveStd: shannonGenSummary.activeStd,
-            shannonAllStd: shannonGenSummary.allStd,
-          };
-
-          const instanceName = attempt.instance_name || "output";
-          const pdfUrl = `data/dataset/${datasetExperimentDir}/${simpleModeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${instanceName}.pdf`;
-
-          // Build judge response from judge data or fallback to logs
-          const judgeResponse = judgeGen?.realism
-            ? {
-                response: (judgeGen.realism.response_type
-                  .charAt(0)
-                  .toUpperCase() + judgeGen.realism.response_type.slice(1)) as
-                  | "Realistic"
-                  | "Unrealistic"
-                  | "Unknown",
-                why: judgeGen.realism.reasoning,
-              }
-            : (gen.judge as SimpleGeneration["judge"]);
-
-          generations.push({
-            id: `gen${gen.id}`,
-            pdfAvailable: true,
-            pdfUrl,
-            metrics: genMetrics,
-            shannon: shannonGen?.specific || [],
-            judge: judgeResponse,
-            systemPrompt: logExp.system_prompt,
-            userPrompt: attempt.prompt,
-          });
-        }
-      });
-
-      const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
-
-      return {
-        metrics: {
-          syntax: calculateRate(mExp.metrics.syntax),
-          multiplicities: calculateRate(mExp.metrics.multiplicities),
-          invariants: calculateRate(mExp.metrics.invariants),
-        },
-        coverage: getCoverageMetrics(covExp),
-        generations,
-        price: {
-          price: calculatePrice(
-            logExp.model.name,
-            logExp.input_tokens,
-            logExp.output_tokens,
-          ),
-          tokenInput: logExp.input_tokens,
-          tokenOutput: logExp.output_tokens,
-        },
-        elapsedSeconds: logExp.time_seconds,
-        diversity: {
-          ...rawDifferenceToDisplay(diffExp?.difference),
-          ged: cachedGed?.simple?.ged,
-          shannonActive: shannonSummary.active,
-          shannonAll: shannonSummary.all,
-          shannonActiveStd: shannonSummary.activeStd,
-          shannonAllStd: shannonSummary.allStd,
-        },
-        judge: getJudgeResultWithStats(
-          judgeExp?.realism || cachedJudge?.simple?.realism,
-          judgeExp?.stats || cachedJudge?.simple?.stats,
-          cachedJudge?.simple?.model?.name || logExp.model.name,
-        ),
-        shannon: shannonExp?.specific || [],
-        grakel: undefined,
-        gedHeatmap: gedExp?.ged,
-      };
-    }
-
-    return {
-      metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
-      coverage: { ...EMPTY_COVERAGE_METRICS },
-      generations: [],
-      price: { price: 0, tokenInput: 0, tokenOutput: 0 },
-      elapsedSeconds: 0,
-      diversity: { ...EMPTY_DIVERSITY },
-      judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
-      shannon: [],
-      grakel: undefined,
-      gedHeatmap: undefined,
-    };
+  const ctx = {
+    ...cached,
+    domainLower,
+    datasetExperimentDir,
   };
 
-  const getCoTs = () => {
-    const logExps =
-      cachedLogs?.cot?.experiments.filter(
-        (e) => e.domain_name.toLowerCase() === domainLower,
-      ) || [];
-    const metricExps = cachedMetrics?.cot?.experiments || [];
-    const coverageExps = cachedCoverage?.cot?.experiments || [];
-    const differenceExps = cachedDifference?.cot?.experiments || [];
-    const gedExps = cachedGed?.cot?.experiments || [];
-    const shannonExps = cachedShannon?.cot?.experiments || [];
-    const judgeExps = cachedJudge?.cot?.experiments || [];
-    const generations: CoTGeneration[] = [];
+  const simpleData = processSimpleMode(ctx);
+  const cotData = processCotMode(ctx);
 
-    const logExp = logExps[0];
-    const mExp = logExp ? findByExperimentId(metricExps, logExp.id) : null;
-    const covExp = logExp ? findByExperimentId(coverageExps, logExp.id) : null;
-    const diffExp = logExp
-      ? findByExperimentId(differenceExps, logExp.id)
-      : null;
-    const gedExp = logExp ? findByExperimentId(gedExps, logExp.id) : null;
-    const shannonExp = findShannonExperiment(
-      shannonExps,
-      logExp?.id,
-      "cot",
-      domainLower,
-    );
-    const judgeExp = logExp ? findByExperimentId(judgeExps, logExp.id) : null;
-
-    if (logExp && mExp) {
-      const dateTime = `${logExp.date
-        .split("-")
-        .reverse()
-        .join("-")}--${logExp.time.replace(/:/g, "-")}`;
-      const cotModeDir = getChildDirNameIgnoreCase(
-        path.join(DATASET_DIR, datasetExperimentDir),
-        "CoT",
-      );
-      const domainFolder = getChildDirNameIgnoreCase(
-        path.join(DATASET_DIR, datasetExperimentDir, cotModeDir),
-        getModelName(logExp.domain_name),
-      );
-      const timestampDir = getChildDirNameIgnoreCase(
-        path.join(DATASET_DIR, datasetExperimentDir, cotModeDir, domainFolder),
-        dateTime,
-      );
-
-      logExp.generations.forEach((gen) => {
-        const mGen = findByGenerationId(mExp.generations, gen.id);
-        // Find coverage generation - it may have categories
-        const covGen = findByGenerationId(covExp?.generations, gen.id) as
-          | {
-              generation_id: string;
-              categories?: Array<{
-                name: string;
-                coverage: RawCoverageData;
-                instantiation: RawInstantiationData;
-              }>;
-              coverage: RawCoverageData;
-              instantiation: RawInstantiationData;
-            }
-          | undefined;
-        // Find difference generation - it may have categories
-        const diffGen = findByGenerationId(
-          diffExp?.generations as
-            | Array<{
-                generation_id: string;
-                categories?: Array<{
-                  name: string;
-                  difference: RawDifferenceData;
-                }>;
-                difference: RawDifferenceData;
-              }>
-            | undefined,
-          gen.id,
-        ) as
-          | {
-              generation_id: string;
-              categories?: Array<{
-                name: string;
-                difference: RawDifferenceData;
-              }>;
-              difference: RawDifferenceData;
-            }
-          | undefined;
-
-        const shannonGen = findByGenerationId(
-          shannonExp?.generations as
-            | Array<{
-                generation_id: string;
-                specific?: ShannonSpecificEntry[];
-                categories?: Array<{
-                  name: string;
-                  specific: ShannonSpecificEntry[];
-                }>;
-              }>
-            | undefined,
-          gen.id,
-        ) as
-          | {
-              generation_id: string;
-              specific?: ShannonSpecificEntry[];
-              categories?: Array<{
-                name: string;
-                specific: ShannonSpecificEntry[];
-              }>;
-            }
-          | undefined;
-
-        if (!mGen) return;
-
-        // Find judge generation data for CoT
-        const judgeGen = findByGenerationId(judgeExp?.generations, gen.id) as
-          | {
-              generation_id: string;
-              realism?: {
-                realistic: number;
-                unrealistic: number;
-                doubtful: number;
-              };
-              categories?: {
-                name: string;
-                realism?: {
-                  response_type: string;
-                  reasoning: string;
-                };
-              }[];
-            }
-          | undefined;
-
-        const catMetricsList: any[] = gen.categories.map((catLog) => {
-          const catMetric = findByName(mGen.categories, catLog.name);
-          const judgeCat = findByName(judgeGen?.categories, catLog.name);
-
-          const covCat = findByName(covGen?.categories, catLog.name);
-          const diffCat = findByName(diffGen?.categories, catLog.name);
-          const shannonCat = findByName(shannonGen?.categories, catLog.name) as
-            | { specific?: ShannonSpecificEntry[] }
-            | undefined;
-          const attempts =
-            catLog.IListInstantiator?.attempts || catLog.attempts || [];
-          const attempt = attempts?.[attempts.length - 1];
-
-          // Sum tokens from both Creator and Instantiator if available
-          const creatorTokens = sumTokens(catLog.IListCreator?.attempts);
-          const instantiatorTokens = sumTokens(attempts);
-          const totalIn = creatorTokens.input + instantiatorTokens.input;
-          const totalOut = creatorTokens.output + instantiatorTokens.output;
-          const creatorTime = sumTimeSeconds(catLog.IListCreator?.attempts);
-          const instantiatorTime = sumTimeSeconds(attempts);
-          const elapsedSeconds = creatorTime + instantiatorTime;
-
-          const shannonCatSummary = getShannonMeanFromSpecific(
-            shannonCat?.specific,
-          );
-
-          // Extract prompts from all 3 agents
-          const creatorAttempts = catLog.IListCreator?.attempts || [];
-          const creatorLastAttempt =
-            creatorAttempts[creatorAttempts.length - 1];
-          const instantiatorLastAttempt = attempt;
-
-          const prompts = {
-            IModelAnalyzer: {
-              systemPrompt: logExp.IModelAnalyzer?.system_prompt || "",
-              userPrompt: logExp.IModelAnalyzer?.prompt || "",
-            },
-            IListCreator: {
-              systemPrompt: catLog.IListCreator?.system_prompt || "",
-              userPrompt: creatorLastAttempt?.prompt || "",
-            },
-            IListInstantiator: {
-              systemPrompt: catLog.IListInstantiator?.system_prompt || "",
-              userPrompt: instantiatorLastAttempt?.prompt || "",
-            },
-          };
-
-          const categoryData: any = {
-            category: catLog.name,
-            syntax: catMetric?.metrics?.syntax || { ...EMPTY_METRIC_STAT },
-            multiplicities: catMetric?.metrics?.multiplicities || {
-              ...EMPTY_METRIC_STAT,
-            },
-            invariants: catMetric?.metrics?.invariants || {
-              ...EMPTY_METRIC_STAT,
-            },
-            coverage: getCoverageMetrics(covCat),
-            diversity: rawDifferenceToDisplay(diffCat?.difference),
-            code: attempt?.response || "",
-            pdfUrl: `data/dataset/${datasetExperimentDir}/${cotModeDir}/${domainFolder}/${timestampDir}/gen${gen.id}/${catLog.name}.pdf`,
-            price: {
-              price: calculatePrice(logExp.model.name, totalIn, totalOut),
-              tokenInput: totalIn,
-              tokenOutput: totalOut,
-            },
-            elapsedSeconds,
-            shannon: shannonCat?.specific || [],
-            prompts,
-            judge: judgeCat
-              ? {
-                  response: judgeCat.realism?.response_type || "Unknown",
-                  why: judgeCat.realism?.reasoning || "",
-                }
-              : undefined,
-            realism: judgeCat?.realism,
-          };
-
-          categoryData.diversity = {
-            ...(categoryData.diversity || {}),
-            shannonActive: shannonCatSummary.active,
-            shannonAll: shannonCatSummary.all,
-            shannonActiveStd: shannonCatSummary.activeStd,
-            shannonAllStd: shannonCatSummary.allStd,
-          };
-
-          return categoryData;
-        });
-
-        const shannonGenSummary = getShannonMeanFromSpecific(
-          shannonGen?.specific,
-        );
-
-        // Build judge response - for CoT we calculate based on realism counts
-        let judgeResponse: CoTGeneration["judge"] =
-          gen.judge as CoTGeneration["judge"];
-        if (judgeGen?.realism) {
-          const counts = judgeGen.realism;
-          const total = counts.realistic + counts.unrealistic + counts.doubtful;
-          let responseType: "Realistic" | "Unrealistic" | "Unknown" = "Unknown";
-          if (
-            counts.realistic > counts.unrealistic &&
-            counts.realistic > counts.doubtful
-          ) {
-            responseType = "Realistic";
-          } else if (
-            counts.unrealistic > counts.realistic &&
-            counts.unrealistic > counts.doubtful
-          ) {
-            responseType = "Unrealistic";
-          }
-          judgeResponse = {
-            response: responseType,
-            why: `${counts.realistic} realistic, ${counts.unrealistic} unrealistic, ${counts.doubtful} doubtful`,
-          };
-        }
-
-        generations.push({
-          id: `gen${gen.id}`,
-          pdfAvailable: true,
-          pdfUrl: catMetricsList[0]?.pdfUrl,
-          shannon: shannonGen?.specific || [],
-          categories: catMetricsList,
-          metrics: {
-            syntax: mGen.metrics.syntax,
-            multiplicities: mGen.metrics.multiplicities,
-            invariants: mGen.metrics.invariants,
-            coverage: getCoverageMetrics(covGen),
-            diversity: {
-              ...rawDifferenceToDisplay(diffGen?.difference),
-              shannonActive: shannonGenSummary.active,
-              shannonAll: shannonGenSummary.all,
-              shannonActiveStd: shannonGenSummary.activeStd,
-              shannonAllStd: shannonGenSummary.allStd,
-            },
-          },
-          judge: judgeResponse,
-          realism: judgeGen?.realism,
-        });
-      });
-
-      const shannonSummary = getShannonMeanFromSpecific(shannonExp?.specific);
-
-      return {
-        metrics: {
-          syntax: calculateRate(mExp.metrics.syntax),
-          multiplicities: calculateRate(mExp.metrics.multiplicities),
-          invariants: calculateRate(mExp.metrics.invariants),
-        },
-        coverage: getCoverageMetrics(covExp),
-        generations,
-        price: {
-          price: calculatePrice(
-            logExp.model.name,
-            logExp.input_tokens,
-            logExp.output_tokens,
-          ),
-          tokenInput: logExp.input_tokens,
-          tokenOutput: logExp.output_tokens,
-        },
-        elapsedSeconds: logExp.time_seconds,
-        diversity: {
-          ...rawDifferenceToDisplay(diffExp?.difference),
-          ged: cachedGed?.cot?.ged,
-          shannonActive: shannonSummary.active,
-          shannonAll: shannonSummary.all,
-          shannonActiveStd: shannonSummary.activeStd,
-          shannonAllStd: shannonSummary.allStd,
-        },
-        judge: getJudgeResultWithStats(
-          judgeExp?.realism || cachedJudge?.cot?.realism,
-          judgeExp?.stats || cachedJudge?.cot?.stats,
-          cachedJudge?.cot?.model?.name || logExp.model.name,
-        ),
-        shannon: shannonExp?.specific || [],
-        grakel: undefined,
-        gedHeatmap: gedExp?.ged,
-      };
-    }
-
-    return {
-      metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
-      coverage: { ...EMPTY_COVERAGE_METRICS },
-      generations: [],
-      price: { price: 0, tokenInput: 0, tokenOutput: 0 },
-      elapsedSeconds: 0,
-      diversity: { ...EMPTY_DIVERSITY },
-      judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
-      shannon: [],
-      grakel: undefined,
-      gedHeatmap: undefined,
-    };
-  };
-
-  const simpleData = getSimples();
-  const cotData = getCoTs();
-
-  if (simpleData.generations.length === 0 && cotData.generations.length === 0) {
+  if (!simpleData?.generations.length && !cotData?.generations.length) {
     return null;
   }
 
@@ -1101,17 +1086,43 @@ export function getModelData(
       "diagram.use",
     );
     diagramUseCode = fs.readFileSync(useFilePath, "utf-8");
-  } catch (e) {
-    // File may not exist for some models
+  } catch (error) {
+    warnOnce(
+      `missing-use-${domainLower}`,
+      `Could not read diagram.use for domain '${domainLower}', using empty code.`,
+      error,
+    );
   }
+
+  const defaultSimpleStats: ModelData["simple"] = {
+    metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
+    coverage: { ...EMPTY_COVERAGE_METRICS },
+    generations: [],
+    diversity: { ...EMPTY_DIVERSITY },
+    judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
+    price: { price: 0, tokenInput: 0, tokenOutput: 0 },
+    elapsedSeconds: 0,
+    shannon: [],
+  };
+
+  const defaultCotStats: ModelData["cot"] = {
+    metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
+    coverage: { ...EMPTY_COVERAGE_METRICS },
+    generations: [],
+    diversity: { ...EMPTY_DIVERSITY },
+    judge: { realistic: 0, unrealistic: 0, unknown: 0, successRate: 0 },
+    price: { price: 0, tokenInput: 0, tokenOutput: 0 },
+    elapsedSeconds: 0,
+    shannon: [],
+  };
 
   return {
     name: modelName,
     diagramPdf: `data/prompts/${domainLower}/diagram.pdf`,
     diagramUse: `data/prompts/${domainLower}/diagram.use`,
     diagramUseCode,
-    simple: simpleData,
-    cot: cotData,
+    simple: simpleData || defaultSimpleStats,
+    cot: cotData || defaultCotStats,
   };
 }
 
@@ -1164,12 +1175,15 @@ export function getDashboardData(experimentId?: string): DashboardData {
     const judgeData = cachedJudge?.[mode];
 
     const experiments = logs?.experiments || [];
-    const totalPrice = experiments.reduce((sum, exp) => {
-      return (
-        sum +
-        calculatePrice(exp.model.name, exp.input_tokens, exp.output_tokens)
-      );
-    }, 0);
+    const totalPrice = experiments.reduce(
+      (sum: number, exp: SimpleLogExperiment | CoTLogExperiment) => {
+        return (
+          sum +
+          calculatePrice(exp.model.name, exp.input_tokens, exp.output_tokens)
+        );
+      },
+      0,
+    );
 
     return {
       price: {

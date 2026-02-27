@@ -19,14 +19,19 @@ const {
   currentPage = "model",
   showTabs = true,
   activeTab = "simple",
-  simpleGenCount = 30,
-  cotGenCount = 6,
+  simpleGenCount = SIMPLE_GEN_COUNT,
+  cotGenCount = COT_GEN_COUNT,
   experimentId = "",
   experimentIds = [],
 } = Astro.props;
 
 import { getUrl } from "../lib/utils";
-import { QUERY_KEYS, QUERY_MODES } from "../lib/constants";
+import {
+  QUERY_KEYS,
+  QUERY_MODES,
+  SIMPLE_GEN_COUNT,
+  COT_GEN_COUNT,
+} from "../lib/constants";
 import { withViewerQuery, type ViewerMode } from "../lib/query";
 
 const simpleGens = Array.from(
@@ -385,7 +390,7 @@ const showGens = currentModel || currentPage === "dashboard";
 
 <script>
   import { QUERY_MODES } from "../lib/constants";
-import {
+  import {
     getViewerState,
     toViewerQuery,
     applyViewerQueryToUrl,

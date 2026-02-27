@@ -258,7 +258,7 @@ const isCoT = !!label && !!cotPrompts;
     {
       showJudge && (
         <section class="section judge-section">
-          <JudgeCard response={data.judge?.response} why={data.judge?.why} />
+          <JudgeCard response={data?.judge?.response} why={data?.judge?.why} />
         </section>
       )
     }
@@ -275,7 +275,7 @@ const isCoT = !!label && !!cotPrompts;
 
 <script>
   import { QUERY_VIEWS } from "../lib/constants";
-import { getViewerState, applyViewerQueryToUrl } from "../lib/query";
+  import { getViewerState, applyViewerQueryToUrl } from "../lib/query";
 
   document.addEventListener("DOMContentLoaded", () => {
     const initialState = getViewerState(window.location.search);
