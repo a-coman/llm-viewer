@@ -1,0 +1,51 @@
+!new Bank('creditNational')
+!creditNational.country := 'France'
+!creditNational.name := 'Crédit National'
+!creditNational.bic := 'CNFRFRPPXXX'
+
+!new Account('account2_1')
+!account2_1.iban := 'FR7630004000031234567890185'
+!account2_1.balance := 2500
+
+!new Account('account2_2')
+!account2_2.iban := 'FR7630004000039876543210284'
+!account2_2.balance := 3500
+
+!new Account('account2_3')
+!account2_3.iban := 'FR7630004000037654321090187'
+!account2_3.balance := 0
+
+!new Person('jeanDupont')
+!jeanDupont.firstName := 'Jean'
+!jeanDupont.lastName := 'Dupont'
+!jeanDupont.age := 32
+
+!new Person('marieCharpentier')
+!marieCharpentier.firstName := 'Marie'
+!marieCharpentier.lastName := 'Charpentier'
+!marieCharpentier.age := 28
+
+!new Person('lucMartin')
+!lucMartin.firstName := 'Luc'
+!lucMartin.lastName := 'Martin'
+!lucMartin.age := 45
+
+!insert (creditNational, account2_1) into AccountOfBanks
+!insert (creditNational, account2_2) into AccountOfBanks
+!insert (creditNational, account2_3) into AccountOfBanks
+
+!insert (jeanDupont, account2_1) into Ownership
+!insert (marieCharpentier, account2_1) into Ownership
+
+!insert (lucMartin, account2_2) into Ownership
+
+!insert (jeanDupont, account2_3) into Ownership
+!insert (lucMartin, account2_3) into Ownership
+
+!insert (jeanDupont, account2_1) into Use
+!insert (marieCharpentier, account2_1) into Use
+!insert (lucMartin, account2_1) into Use
+
+!insert (lucMartin, account2_2) into Use
+
+!insert (jeanDupont, account2_3) into Use

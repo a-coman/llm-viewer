@@ -1,0 +1,136 @@
+!new Club('club27')
+!club27.name := 'Moon Wolves'
+!club27.homeGround := 'Lunar Arena'
+!club27.chairman := 'Selena Crescent'
+
+!new Club('club28')
+!club28.name := 'Sun Warriors'
+!club28.homeGround := 'Solar Stadium'
+!club28.chairman := 'Ra Helios'
+
+!new Team('team27')
+!team27.name := 'Lunar Howls'
+!insert (club27, team27) into ClubTeam
+
+!new Team('team28')
+!team28.name := 'Solar Flare'
+!insert (club28, team28) into ClubTeam
+
+!new Competition('galacticLeague')
+!galacticLeague.name := 'Galactic League'
+!galacticLeague.type := 'Round Robin'
+
+!new Match('match14')
+!match14.date := '2026-03-18'
+!match14.homeAway := true
+!insert (galacticLeague, match14) into CompetitionMatch
+!insert (team27, match14) into LocalMatch
+!insert (team28, match14) into VisitorMatch
+
+!new MatchReport('report14')
+!report14.duration := 90
+!report14.scoreVisitor := 3
+!report14.scoreLocal := 1
+!insert (match14, report14) into MatchMatchReport
+
+!new Player('player27')
+!player27.name := 'Lyra Night'
+!player27.age := 22
+!player27.bestFoot := #LEFT
+!player27.phoneNumber := '9432156780'
+!insert (team27, player27) into TeamPlayer
+
+!new Player('player28')
+!player28.name := 'Apollo Blaze'
+!player28.age := 30
+!player28.bestFoot := #BOTH
+!player28.phoneNumber := '8523697410'
+!insert (team28, player28) into TeamPlayer
+
+!new Position('position27')
+!position27.positionName := #DEFENDER
+!insert (player27, position27) into PlayerPositions
+
+!new Position('position28')
+!position28.positionName := #FORWARD
+!insert (player28, position28) into PlayerPositions
+
+!new MatchPlayer('matchPlayer27')
+!matchPlayer27.booked := true
+!matchPlayer27.goals := 0
+!matchPlayer27.rating := 6
+!insert (player27, matchPlayer27) into PlayerMatch
+!insert (match14, matchPlayer27) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer28')
+!matchPlayer28.booked := false
+!matchPlayer28.goals := 2
+!matchPlayer28.rating := 9
+!insert (player28, matchPlayer28) into PlayerMatch
+!insert (match14, matchPlayer28) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition27')
+!matchPlayerPosition27.positionName := #DEFENDER
+!matchPlayerPosition27.number := 4
+!insert (matchPlayer27, matchPlayerPosition27) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition28')
+!matchPlayerPosition28.positionName := #FORWARD
+!matchPlayerPosition28.number := 9
+!insert (matchPlayer28, matchPlayerPosition28) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event50')
+!event50.eventType := #GOAL
+!event50.time := 18
+!insert (match14, event50) into MatchMatchEvent
+
+!new MatchEvent('event51')
+!event51.eventType := #GOAL
+!event51.time := 47
+!insert (match14, event51) into MatchMatchEvent
+
+!new MatchEvent('event52')
+!event52.eventType := #GOAL
+!event52.time := 70
+!insert (match14, event52) into MatchMatchEvent
+
+!new MatchEvent('event53')
+!event53.eventType := #GOAL
+!event53.time := 82
+!insert (match14, event53) into MatchMatchEvent
+
+!new TrainingSession('training27')
+!training27.date := '2026-02-10'
+!training27.location := 'Moon Crater Field'
+!training27.purpose := 'Defensive Coordination'
+!insert (team27, training27) into TeamTraining
+
+!new TrainingSession('training28')
+!training28.date := '2026-02-15'
+!training28.location := 'Sunrise Pitch'
+!training28.purpose := 'Offensive Drills'
+!insert (team28, training28) into TeamTraining
+
+!new TrainingNotes('trainingNote27')
+!trainingNote27.note := 'Improvement in defensive walls'
+!trainingNote27.date := '2026-02-10'
+!insert (training27, trainingNote27) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote28')
+!trainingNote28.note := 'Efficiency in breakaway scoring'
+!trainingNote28.date := '2026-02-15'
+!insert (training28, trainingNote28) into TrainingTrainingNotes
+
+!new TrainingObjective('objective27')
+!objective27.areaToImprove := 'Team Synchronization'
+!objective27.startDate := '2026-01-01'
+!objective27.endDate := '2026-03-01'
+!objective27.success := false
+!insert (objective27, player27) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective28')
+!objective28.areaToImprove := 'Goal Scoring'
+!objective28.startDate := '2026-01-15'
+!objective28.endDate := '2026-03-15'
+!objective28.success := true
+!insert (objective28, player28) into TrainingObjectivePlayer

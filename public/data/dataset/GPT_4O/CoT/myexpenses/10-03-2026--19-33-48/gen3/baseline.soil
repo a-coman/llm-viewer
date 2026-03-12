@@ -1,0 +1,59 @@
+!new Expense('familySummerVacationExpense')
+!familySummerVacationExpense.amount := 1000.00
+!familySummerVacationExpense.startDate := Date('2023-07-20')
+!familySummerVacationExpense.endDate := Date('2023-07-30')
+
+!new Bill('airbnbRentalBill')
+!airbnbRentalBill.amount := 300.00
+!airbnbRentalBill.category := 'Airbnb Rental'
+!airbnbRentalBill.date := Date('2023-07-20')
+!airbnbRentalBill.paymentMethod := #CREDIT_CARD
+!airbnbRentalBill.status := #DRAFT
+
+!new Bill('groceryShoppingBill')
+!groceryShoppingBill.amount := 200.00
+!groceryShoppingBill.category := 'Grocery Shopping'
+!groceryShoppingBill.date := Date('2023-07-21')
+!groceryShoppingBill.paymentMethod := #CREDIT_CARD
+!groceryShoppingBill.status := #VERIFIED
+
+!new Bill('restaurantDiningBill')
+!restaurantDiningBill.amount := 250.00
+!restaurantDiningBill.category := 'Restaurant Dining'
+!restaurantDiningBill.date := Date('2023-07-25')
+!restaurantDiningBill.paymentMethod := #CHECK
+!restaurantDiningBill.status := #REFUNDED
+
+!new Bill('amusementParkTicketsBill')
+!amusementParkTicketsBill.amount := 250.00
+!amusementParkTicketsBill.category := 'Amusement Park Tickets'
+!amusementParkTicketsBill.date := Date('2023-07-28')
+!amusementParkTicketsBill.paymentMethod := #CASH
+!amusementParkTicketsBill.status := #VALIDATED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (airbnbRentalBill, currencyGBP) into BillCurrency
+!insert (groceryShoppingBill, currencyGBP) into BillCurrency
+!insert (restaurantDiningBill, currencyGBP) into BillCurrency
+!insert (amusementParkTicketsBill, currencyGBP) into BillCurrency
+
+!insert (familySummerVacationExpense, airbnbRentalBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, groceryShoppingBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, restaurantDiningBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, amusementParkTicketsBill) into ExpenseContainsBills
+
+!new Comment('commentAirbnb')
+!commentAirbnb.text := 'Loved the Airbnb, perfect for a family of five.'
+
+!new Comment('commentGroceryPrices')
+!commentGroceryPrices.text := 'Grocery prices were higher than expected, but great quality.'
+
+!new Comment('commentAmusementPark')
+!commentAmusementPark.text := 'The amusement park was a highlight; kids had a fantastic time!'
+
+!insert (familySummerVacationExpense, commentAirbnb) into ExpenseComment
+!insert (familySummerVacationExpense, commentGroceryPrices) into ExpenseComment
+!insert (familySummerVacationExpense, commentAmusementPark) into ExpenseComment

@@ -1,0 +1,66 @@
+!new AddressBook('addressBook10')
+
+!new Company('company10')
+!company10.name := 'CultureCrafters'
+!company10.phone := '555-666-7777'
+!company10.website := 'www.culturecrafters.com'
+!company10.email := 'contact@culturecrafters.com'
+!company10.industry := 'Event Management'
+
+!new Person('person16')
+!person16.name := 'Sophia Ramirez'
+!person16.phone := '818-929-3030'
+!person16.website := 'www.sophiaramirezevents.com'
+!person16.email := 'sophia.ramirez@culturecrafters.com'
+!person16.title := 'Event Director'
+
+!new Person('person17')
+!person17.name := 'Jack White'
+!person17.phone := '929-330-4040'
+!person17.website := 'www.jackwhitefreelance.com'
+!person17.email := 'jack.white@creativehub.com'
+!person17.title := 'Freelance Photographer'
+
+!new Note('note16')
+!note16.author := 'Sophia Ramirez'
+!note16.time := Date('2024-04-10')
+!note16.type := #EMAIL
+!note16.comment := 'Confirmed venue booking for the annual gala.'
+
+!new Note('note17')
+!note17.author := 'Jack White'
+!note17.time := Date('2024-04-12')
+!note17.type := #CALL
+!note17.comment := 'Phone call with client for event photography details.'
+
+!new Address('address17')
+!address17.city := 'Event City'
+!address17.houseNr := '450'
+!address17.street := 'Celebration Ave'
+
+!new Address('address18')
+!address18.city := 'Photo Town'
+!address18.houseNr := '89Y'
+!address18.street := 'Snapshot Street'
+
+!new Relationship('relationship18')
+!relationship18.type := #SUBDIVISION
+
+!new Relationship('relationship19')
+!relationship19.type := #COWORKER
+
+!insert (addressBook10, company10) into AddressBookMadeOfContact
+!insert (addressBook10, person16) into AddressBookMadeOfContact
+!insert (addressBook10, person17) into AddressBookMadeOfContact
+
+!insert (person16, note16) into ContactContainsNote
+!insert (person17, note17) into ContactContainsNote
+
+!insert (company10, relationship18) into ContactToRelationship
+!insert (relationship18, person16) into RelationshipToContact
+
+!insert (person16, relationship19) into ContactToRelationship
+!insert (relationship19, person17) into RelationshipToContact
+
+!insert (company10, address17) into ContactContainsAddress
+!insert (person17, address18) into ContactContainsAddress

@@ -1,0 +1,34 @@
+!new Client('client11')
+!client11.clientId := 87
+!client11.isSuspended := false
+
+!new Rental('rental15')
+!rental15.date := Date('2023-10-15')
+
+!new Movie('movie13')
+!movie13.title := 'Voices of the Outback'
+!movie13.availableCopies := 0
+!movie13.genre := #Action
+
+!new Movie('movie14')
+!movie14.title := 'Dreamtime Legends'
+!movie14.availableCopies := 0
+!movie14.genre := #Comedy
+
+!new Series('series13')
+!series13.title := 'Walkabout Chronicles'
+!series13.availableCopies := 0
+!series13.episode := 1
+
+!new Actor('actor25')
+!actor25.name := 'N/A'
+
+!insert (client11, rental15) into ClientRental
+
+!insert (rental15, movie13) into RentalCassette
+!insert (rental15, movie14) into RentalCassette
+!insert (rental15, series13) into RentalCassette
+
+!insert (movie13, actor25) into CassetteActor
+!insert (movie14, actor25) into CassetteActor
+!insert (series13, actor25) into CassetteActor

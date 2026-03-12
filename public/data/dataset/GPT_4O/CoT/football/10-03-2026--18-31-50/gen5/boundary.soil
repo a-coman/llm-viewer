@@ -1,0 +1,209 @@
+!new Club('clubAV')
+!clubAV.name := 'Sunshine Sharks'
+!clubAV.homeGround := 'Coral Reef Stadium'
+!clubAV.chairman := 'Miguel Santiago'
+
+!new Club('clubAW')
+!clubAW.name := 'Thunder Wolves'
+!clubAW.homeGround := 'Storm Valley Arena'
+!clubAW.chairman := 'Ingrid Svensson'
+
+!new Team('teamAV')
+!teamAV.name := 'Coral Predators'
+
+!new Team('teamAW')
+!teamAW.name := 'Lightning Strikers'
+
+!insert (clubAV, teamAV) into ClubTeam
+!insert (clubAW, teamAW) into ClubTeam
+
+!new Player('player54')
+!player54.name := 'Liam Jackson'
+!player54.age := 29
+!player54.bestFoot := #RIGHT
+!player54.phoneNumber := '+61400123456'
+
+!new Player('player55')
+!player55.name := 'Sofia Oliveira'
+!player55.age := 24
+!player55.bestFoot := #LEFT
+!player55.phoneNumber := '+351912345678'
+
+!insert (teamAV, player54) into TeamPlayer
+!insert (teamAV, player55) into TeamPlayer
+
+!new Position('position111')
+!position111.positionName := #DEFENDER
+
+!new Position('position114')
+!position114.positionName := #MIDFIELDER
+
+!new Position('position115')
+!position115.positionName := #ATTACKING_MIDFIELDER
+
+!insert (player54, position111) into PlayerPositions
+!insert (player55, position114) into PlayerPositions
+!insert (player55, position115) into PlayerPositions
+
+!new TrainingSession('trainingSession42')
+!trainingSession42.date := '2023-08-30'
+!trainingSession42.location := 'Ocean Front Park'
+!trainingSession42.purpose := 'Tactics for Wet Weather Play'
+
+!new TrainingSession('trainingSession43')
+!trainingSession43.date := '2023-08-31'
+!trainingSession43.location := 'Storm Valley Arena'
+!trainingSession43.purpose := 'Defensive Structuring under Pressure'
+
+!insert (teamAV, trainingSession42) into TeamTraining
+!insert (teamAW, trainingSession43) into TeamTraining
+
+!new TrainingNotes('trainingNote42')
+!trainingNote42.note := 'Practiced rapid ball movement on wet surfaces.'
+!trainingNote42.date := '2023-08-30'
+
+!new TrainingNotes('trainingNote43')
+!trainingNote43.note := 'Drills on maintaining line integrity under fast opponent incursions.'
+!trainingNote43.date := '2023-08-31'
+
+!insert (trainingSession42, trainingNote42) into TrainingTrainingNotes
+!insert (trainingSession43, trainingNote43) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail17')
+!trainingFail17.reason := 'Injury recovery'
+
+!insert (trainingFail17, player54) into FailedPlayer
+!insert (trainingSession42, trainingFail17) into TrainingFailded
+
+!new Competition('competition21')
+!competition21.name := 'Pacific Championship Cup'
+!competition21.type := 'Tournament'
+
+!new Match('match27')
+!match27.date := '2023-09-05'
+!match27.homeAway := true
+
+!insert (teamAW, match27) into LocalMatch
+!insert (teamAV, match27) into VisitorMatch
+!insert (competition21, match27) into CompetitionMatch
+
+!new MatchEvent('matchEvent75')
+!matchEvent75.eventType := #GOAL
+!matchEvent75.time := 10
+
+!new MatchEvent('matchEvent76')
+!matchEvent76.eventType := #GOAL
+!matchEvent76.time := 33
+
+!new MatchEvent('matchEvent77')
+!matchEvent77.eventType := #FOUL
+!matchEvent77.time := 55
+
+!insert (match27, matchEvent75) into MatchMatchEvent
+!insert (match27, matchEvent76) into MatchMatchEvent
+!insert (match27, matchEvent77) into MatchMatchEvent
+
+!new MatchReport('matchReport27')
+!matchReport27.duration := 90
+!matchReport27.scoreVisitor := 1
+!matchReport27.scoreLocal := 1
+
+!insert (match27, matchReport27) into MatchMatchReport
+
+!new MatchNote('matchNote17')
+!matchNote17.note := 'A tightly contested match with strong defensive displays.'
+!matchNote17.date := '2023-09-05'
+
+!insert (match27, matchNote17) into MatchMatchNote
+
+!new Match('match28')
+!match28.date := '2023-09-12'
+!match28.homeAway := false
+
+!insert (teamAV, match28) into LocalMatch
+!insert (teamAW, match28) into VisitorMatch
+!insert (competition21, match28) into CompetitionMatch
+
+!new MatchEvent('matchEvent78')
+!matchEvent78.eventType := #GOAL
+!matchEvent78.time := 48
+
+!new MatchEvent('matchEvent79')
+!matchEvent79.eventType := #FOUL
+!matchEvent79.time := 60
+
+!new MatchEvent('matchEvent80')
+!matchEvent80.eventType := #GOAL
+!matchEvent80.time := 77
+
+!insert (match28, matchEvent78) into MatchMatchEvent
+!insert (match28, matchEvent79) into MatchMatchEvent
+!insert (match28, matchEvent80) into MatchMatchEvent
+
+!new MatchReport('matchReport28')
+!matchReport28.duration := 90
+!matchReport28.scoreVisitor := 1
+!matchReport28.scoreLocal := 2
+
+!insert (match28, matchReport28) into MatchMatchReport
+
+!new MatchNote('matchNote18')
+!matchNote18.note := 'Coral Predators won their first championship title.'
+!matchNote18.date := '2023-09-12'
+
+!insert (match28, matchNote18) into MatchMatchNote
+
+!new PlayerNotes('playerNote23')
+!playerNote23.note := 'Key player in defensive line.'
+!playerNote23.date := '2023-06-15'
+
+!insert (player54, playerNote23) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote24')
+!playerNote24.note := 'Essential in midfield coordination.'
+!playerNote24.date := '2023-08-01'
+
+!insert (player55, playerNote24) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer49')
+!matchPlayer49.booked := true
+!matchPlayer49.goals := 0
+!matchPlayer49.rating := 8
+
+!new MatchPlayer('matchPlayer50')
+!matchPlayer50.booked := false
+!matchPlayer50.goals := 1
+!matchPlayer50.rating := 9
+
+!insert (player54, matchPlayer49) into PlayerMatch
+!insert (player55, matchPlayer50) into PlayerMatch
+
+!insert (match27, matchPlayer49) into MatchMatchPlayer
+!insert (match28, matchPlayer50) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp49')
+!mpp49.positionName := #DEFENDER
+!mpp49.number := 5
+
+!new MatchPlayerPosition('mpp50')
+!mpp50.positionName := #MIDFIELDER
+!mpp50.number := 10
+
+!insert (matchPlayer49, mpp49) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer50, mpp50) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective41')
+!trainingObjective41.areaToImprove := 'Enhance Match Stamina'
+!trainingObjective41.startDate := '2023-07-01'
+!trainingObjective41.endDate := '2023-08-01'
+!trainingObjective41.success := true
+
+!insert (trainingObjective41, player55) into TrainingObjectivePlayer
+
+!new TrainingObjective('trainingObjective42')
+!trainingObjective42.areaToImprove := 'Defensive Coordination'
+!trainingObjective42.startDate := '2023-07-01'
+!trainingObjective42.endDate := '2023-08-01'
+!trainingObjective42.success := true
+
+!insert (trainingObjective42, player54) into TrainingObjectivePlayer

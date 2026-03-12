@@ -1,0 +1,39 @@
+!new RentalOffice('officeOceanicRentalsHub')
+!officeOceanicRentalsHub.name := 'Oceanic Rentals Hub'
+!officeOceanicRentalsHub.number := 50000
+!officeOceanicRentalsHub.address := '500 Coastal Drive, Miami, FL'
+
+!new Truck('truckZeroId')
+!truckZeroId.id := 0
+!truckZeroId.registrationState := #FL
+!truckZeroId.licensePlateNumber := 'FL-ZERO-PLATE'
+!truckZeroId.vehicleTypeCode := #COVERED_TRAILER
+!truckZeroId.registrationLastMaintenanceDate := Date('2022-05-05')
+!truckZeroId.expirationDate := Date('2023-05-05')
+!truckZeroId.odometerReading := 10
+!truckZeroId.gasTankCapacity := 1.0
+!truckZeroId.workingRadio := false
+!truckZeroId.mileage := 1
+
+!new RentalAgreement('rentalAgreementZeroId')
+!rentalAgreementZeroId.number := 0
+!rentalAgreementZeroId.rentalDate := Date('2023-01-01')
+!rentalAgreementZeroId.anticipatedDuration := 1
+!rentalAgreementZeroId.depositPaid := 0.01
+!rentalAgreementZeroId.quotedDailyRate := 0.01
+!rentalAgreementZeroId.quotedRatePerMile := 0.01
+
+!new Individual('individualMinimalMax')
+!individualMinimalMax.name := 'Minimal Max'
+!individualMinimalMax.address := '1 Bay Avenue, Key West, FL'
+!individualMinimalMax.poorRisk := false
+!individualMinimalMax.homePhone := '111-111-1111'
+!individualMinimalMax.driverLicenseState := #FL
+!individualMinimalMax.driverLicenseNumber := 1
+!individualMinimalMax.driverLicenseExpirationDate := Date('2024-12-31')
+
+!insert (officeOceanicRentalsHub, truckZeroId) into RentalOfficeVehicle
+!insert (officeOceanicRentalsHub, rentalAgreementZeroId) into RentalOfficeRentalAgreementOrigin
+!insert (officeOceanicRentalsHub, rentalAgreementZeroId) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementZeroId, truckZeroId) into RentalAgreementVehicle
+!insert (rentalAgreementZeroId, individualMinimalMax) into RentalAgreementCustomer

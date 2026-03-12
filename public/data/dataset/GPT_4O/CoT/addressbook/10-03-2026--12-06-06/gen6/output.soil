@@ -1,0 +1,527 @@
+!new AddressBook('WorldCulinaryNetworkAddressBook')
+
+!new Company('GourmetGroupInc')
+!GourmetGroupInc.name := 'Gourmet Group Inc.'
+!GourmetGroupInc.phone := '+1-212-555-1020'
+!GourmetGroupInc.website := 'www.gourmetgroup.com'
+!GourmetGroupInc.email := 'inquiries@gourmetgroup.com'
+!GourmetGroupInc.industry := 'Hospitality & Food'
+
+!new Address('GourmetGroupAddress')
+!GourmetGroupAddress.city := 'New York'
+!GourmetGroupAddress.houseNr := '750'
+!GourmetGroupAddress.street := 'Culinary Plaza'
+!insert (GourmetGroupInc, GourmetGroupAddress) into ContactContainsAddress
+
+!new Person('ChefPierreDubois')
+!ChefPierreDubois.name := 'Chef Pierre Dubois'
+!ChefPierreDubois.phone := '+33-1-555-0654'
+!ChefPierreDubois.email := 'pierre.dubois@frenchflavor.fr'
+!ChefPierreDubois.title := 'Executive Chef'
+
+!new Address('PierreDuboisAddress')
+!PierreDuboisAddress.city := 'Paris'
+!PierreDuboisAddress.houseNr := '66'
+!PierreDuboisAddress.street := 'Rue de la Cuisine'
+!insert (ChefPierreDubois, PierreDuboisAddress) into ContactContainsAddress
+
+!new Note('PierreDuboisNote1')
+!PierreDuboisNote1.author := 'Gourmet Group Inc.'
+!PierreDuboisNote1.time := Date('2023-10-07')
+!PierreDuboisNote1.type := #EMAIL
+!PierreDuboisNote1.comment := 'Sent invitation to Global Culinary Summit.'
+!insert (ChefPierreDubois, PierreDuboisNote1) into ContactContainsNote
+
+!new Company('AsianCulinaryAcademy')
+!AsianCulinaryAcademy.name := 'Asian Culinary Academy'
+!AsianCulinaryAcademy.phone := '+81-3-5550-2208'
+!AsianCulinaryAcademy.website := 'www.asianculinary.ac.jp'
+!AsianCulinaryAcademy.email := 'info@asianculinary.ac.jp'
+!AsianCulinaryAcademy.industry := 'Education'
+
+!new Person('ChefMariaLopez')
+!ChefMariaLopez.name := 'Chef Maria Lopez'
+!ChefMariaLopez.phone := '+34-91-555-0423'
+!ChefMariaLopez.website := 'www.chefmaria.es'
+!ChefMariaLopez.email := 'maria.lopez@innovocuisine.es'
+!ChefMariaLopez.title := 'Pastry Chef'
+
+!new Address('MariaLopezAddress1')
+!MariaLopezAddress1.city := 'Madrid'
+!MariaLopezAddress1.houseNr := '99'
+!MariaLopezAddress1.street := 'Dulce Street'
+!insert (ChefMariaLopez, MariaLopezAddress1) into ContactContainsAddress
+
+!new Address('MariaLopezAddress2')
+!MariaLopezAddress2.city := 'Barcelona'
+!MariaLopezAddress2.houseNr := '88'
+!MariaLopezAddress2.street := 'Pastelería Avenue'
+!insert (ChefMariaLopez, MariaLopezAddress2) into ContactContainsAddress
+
+!new Relationship('GourmetToPierreBoss')
+!GourmetToPierreBoss.type := #BOSS
+!insert (GourmetToPierreBoss, ChefPierreDubois) into RelationshipToContact
+!insert (GourmetGroupInc, GourmetToPierreBoss) into ContactToRelationship
+
+!new Relationship('MariaToAsianCulinaryEmployee')
+!MariaToAsianCulinaryEmployee.type := #EMPLOYEE
+!insert (MariaToAsianCulinaryEmployee, AsianCulinaryAcademy) into RelationshipToContact
+!insert (ChefMariaLopez, MariaToAsianCulinaryEmployee) into ContactToRelationship
+
+!new Relationship('PierreToMariaCoworker')
+!PierreToMariaCoworker.type := #COWORKER
+!insert (PierreToMariaCoworker, ChefMariaLopez) into RelationshipToContact
+!insert (ChefPierreDubois, PierreToMariaCoworker) into ContactToRelationship
+
+!insert (WorldCulinaryNetworkAddressBook, GourmetGroupInc) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, ChefPierreDubois) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, AsianCulinaryAcademy) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, ChefMariaLopez) into AddressBookMadeOfContact
+
+!new AddressBook('TranscontinentalBusinessNetwork')
+
+!new Person('AnaSilva')
+!AnaSilva.name := 'Ana Silva'
+!AnaSilva.phone := '+55-21-98765-4321'
+!AnaSilva.website := 'www.anasilva.br'
+!AnaSilva.email := 'ana.silva@southamericatraders.br'
+!AnaSilva.title := 'International Trade Manager'
+
+!new Address('AnaSilvaAddress')
+!AnaSilvaAddress.city := 'Rio de Janeiro'
+!AnaSilvaAddress.houseNr := '50'
+!AnaSilvaAddress.street := 'Avenida Atlântica'
+!insert (AnaSilva, AnaSilvaAddress) into ContactContainsAddress
+
+!new Note('AnaSilvaNote')
+!AnaSilvaNote.author := 'Ana Silva'
+!AnaSilvaNote.time := Date('2023-01-18')
+!AnaSilvaNote.type := #CALL
+!AnaSilvaNote.comment := 'Confirm shipment details with European partners post-Brexit.'
+!insert (AnaSilva, AnaSilvaNote) into ContactContainsNote
+
+!new Company('PantherLogistics')
+!PantherLogistics.name := 'Panther Logistics'
+!PantherLogistics.phone := '+49-30-555-6666'
+!PantherLogistics.website := 'www.pantherlogistics.de'
+!PantherLogistics.email := 'contact@pantherlogistics.de'
+!PantherLogistics.industry := 'Logistics and Supply Chain'
+
+!new Address('PantherLogisticsAddress')
+!PantherLogisticsAddress.city := 'Berlin'
+!PantherLogisticsAddress.houseNr := '18'
+!PantherLogisticsAddress.street := 'Potsdamer Straße'
+!insert (PantherLogistics, PantherLogisticsAddress) into ContactContainsAddress
+
+!new Note('PantherLogisticsNote')
+!PantherLogisticsNote.author := 'Manfred Bauer'
+!PantherLogisticsNote.time := Date('2023-03-01')
+!PantherLogisticsNote.type := #MEETING
+!PantherLogisticsNote.comment := 'Discuss logistics optimization for the new cargo routes.'
+!insert (PantherLogistics, PantherLogisticsNote) into ContactContainsNote
+
+!new Person('MiguelSantana')
+!MiguelSantana.name := 'Miguel Santana'
+!MiguelSantana.phone := '+34-622-555-9933'
+!MiguelSantana.website := 'www.miguelsantana.es'
+!MiguelSantana.email := 'miguel.santana@esolutions.es'
+!MiguelSantana.title := 'Procurement Specialist'
+
+!new Address('MiguelSantanaAddress')
+!MiguelSantanaAddress.city := 'Madrid'
+!MiguelSantanaAddress.houseNr := '10'
+!MiguelSantanaAddress.street := 'Gran Vía'
+!insert (MiguelSantana, MiguelSantanaAddress) into ContactContainsAddress
+
+!new Note('MiguelSantanaNote')
+!MiguelSantanaNote.author := 'Miguel Santana'
+!MiguelSantanaNote.time := Date('2023-05-30')
+!MiguelSantanaNote.type := #EMAIL
+!MiguelSantanaNote.comment := 'Recommendations for sourcing sustainable materials from Asia.'
+!insert (MiguelSantana, MiguelSantanaNote) into ContactContainsNote
+
+!new Person('EmmaLi')
+!EmmaLi.name := 'Emma Li'
+!EmmaLi.phone := '+86-10-6655-2233'
+!EmmaLi.website := 'www.emmali.cn'
+!EmmaLi.email := 'emma.li@chinabusiness.cn'
+!EmmaLi.title := 'Regional Sales Director'
+
+!new Address('EmmaLiAddress')
+!EmmaLiAddress.city := 'Beijing'
+!EmmaLiAddress.houseNr := '47'
+!EmmaLiAddress.street := 'Dongcheng Street'
+!insert (EmmaLi, EmmaLiAddress) into ContactContainsAddress
+
+!new Note('EmmaLiNote')
+!EmmaLiNote.author := 'Emma Li'
+!EmmaLiNote.time := Date('2023-06-15')
+!EmmaLiNote.type := #EMAIL
+!EmmaLiNote.comment := 'Quarterly sales performance review with stakeholders.'
+!insert (EmmaLi, EmmaLiNote) into ContactContainsNote
+
+!new Relationship('AnaToMiguelBoss')
+!AnaToMiguelBoss.type := #BOSS
+!insert (AnaToMiguelBoss, MiguelSantana) into RelationshipToContact
+!insert (AnaSilva, AnaToMiguelBoss) into ContactToRelationship
+
+!new Relationship('MiguelToAnaEmployee')
+!MiguelToAnaEmployee.type := #EMPLOYEE
+!insert (MiguelToAnaEmployee, AnaSilva) into RelationshipToContact
+!insert (MiguelSantana, MiguelToAnaEmployee) into ContactToRelationship
+
+!new Relationship('AnaToEmmaCoworker')
+!AnaToEmmaCoworker.type := #COWORKER
+!insert (AnaToEmmaCoworker, EmmaLi) into RelationshipToContact
+!insert (AnaSilva, AnaToEmmaCoworker) into ContactToRelationship
+
+!new Relationship('EmmaToPantherSubdivision')
+!EmmaToPantherSubdivision.type := #SUBDIVISION
+!insert (EmmaToPantherSubdivision, PantherLogistics) into RelationshipToContact
+!insert (EmmaLi, EmmaToPantherSubdivision) into ContactToRelationship
+
+!insert (TranscontinentalBusinessNetwork, AnaSilva) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, PantherLogistics) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, MiguelSantana) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, EmmaLi) into AddressBookMadeOfContact
+
+!new AddressBook('CulinaryFestivalAddressBook')
+
+!new Company('InternationalCulinaryAcademy')
+!InternationalCulinaryAcademy.name := 'International Culinary Academy'
+!InternationalCulinaryAcademy.phone := '+1-213-555-0280'
+!InternationalCulinaryAcademy.website := 'www.iculinaryacademy.org'
+!InternationalCulinaryAcademy.email := 'info@iculinaryacademy.org'
+!InternationalCulinaryAcademy.industry := 'Education'
+
+!new Address('CulinaryAcademyAddress')
+!CulinaryAcademyAddress.city := 'Los Angeles'
+!CulinaryAcademyAddress.houseNr := '356'
+!CulinaryAcademyAddress.street := 'Gastronomy Blvd'
+!insert (InternationalCulinaryAcademy, CulinaryAcademyAddress) into ContactContainsAddress
+
+!new Note('CulinaryAcademyNote1')
+!CulinaryAcademyNote1.author := 'Festival Director'
+!CulinaryAcademyNote1.time := Date('2023-06-10')
+!CulinaryAcademyNote1.type := #EMAIL
+!CulinaryAcademyNote1.comment := 'Confirm participation in the international food festival.'
+!insert (InternationalCulinaryAcademy, CulinaryAcademyNote1) into ContactContainsNote
+
+!new Person('ChefMaria')
+!ChefMaria.name := 'Maria del Sol'
+!ChefMaria.phone := '+34-655-555123'
+!ChefMaria.email := 'maria.delsol@chefcuisine.es'
+!ChefMaria.title := 'Head Chef'
+
+!new Address('MariaDelSolAddress')
+!MariaDelSolAddress.city := 'Barcelona'
+!MariaDelSolAddress.houseNr := '18'
+!MariaDelSolAddress.street := 'Chef Street'
+!insert (ChefMaria, MariaDelSolAddress) into ContactContainsAddress
+
+!new Note('ChefMariaNote1')
+!ChefMariaNote1.author := 'Chef Maria'
+!ChefMariaNote1.time := Date('2023-05-12')
+!ChefMariaNote1.type := #MEETING
+!ChefMariaNote1.comment := 'Coordinate Mediterranean cuisine showcase plan.'
+!insert (ChefMaria, ChefMariaNote1) into ContactContainsNote
+
+!new Person('ChefAntoine')
+!ChefAntoine.name := 'Antoine Dubois'
+!ChefAntoine.phone := '+33-1-5557532'
+!ChefAntoine.email := 'antoine.dubois@frenchdelights.fr'
+!ChefAntoine.title := 'Pastry Chef'
+
+!new Address('AntoineDuboisAddress')
+!AntoineDuboisAddress.city := 'Paris'
+!AntoineDuboisAddress.houseNr := '24'
+!AntoineDuboisAddress.street := 'Desserts Alley'
+!insert (ChefAntoine, AntoineDuboisAddress) into ContactContainsAddress
+
+!new Note('ChefAntoineNote1')
+!ChefAntoineNote1.author := 'Patissier\'s Network'
+!ChefAntoineNote1.time := Date('2023-05-14')
+!ChefAntoineNote1.type := #CALL
+!ChefAntoineNote1.comment := 'Discuss the arrangement for the multi-national dessert tasting.'
+!insert (ChefAntoine, ChefAntoineNote1) into ContactContainsNote
+
+!new Person('SophiaTran')
+!SophiaTran.name := 'Sophia Tran'
+!SophiaTran.phone := '+61-3-5552377'
+!SophiaTran.email := 'sophia.tran@culinaryevents.com'
+!SophiaTran.title := 'Event Organizer'
+
+!new Address('SophiaTranAddress')
+!SophiaTranAddress.city := 'Melbourne'
+!SophiaTranAddress.houseNr := '200'
+!SophiaTranAddress.street := 'Event Drive'
+!insert (SophiaTran, SophiaTranAddress) into ContactContainsAddress
+
+!new Relationship('CulinaryAcademyToMariaEmployee')
+!CulinaryAcademyToMariaEmployee.type := #EMPLOYEE
+!insert (CulinaryAcademyToMariaEmployee, ChefMaria) into RelationshipToContact
+!insert (InternationalCulinaryAcademy, CulinaryAcademyToMariaEmployee) into ContactToRelationship
+
+!new Relationship('CulinaryAcademyToAntoineSubdivision')
+!CulinaryAcademyToAntoineSubdivision.type := #SUBDIVISION
+!insert (CulinaryAcademyToAntoineSubdivision, ChefAntoine) into RelationshipToContact
+!insert (InternationalCulinaryAcademy, CulinaryAcademyToAntoineSubdivision) into ContactToRelationship
+
+!new Relationship('MariaToAntoineCoworker')
+!MariaToAntoineCoworker.type := #COWORKER
+!insert (MariaToAntoineCoworker, ChefAntoine) into RelationshipToContact
+!insert (ChefMaria, MariaToAntoineCoworker) into ContactToRelationship
+
+!new Relationship('MariaToSophiaCoworker')
+!MariaToSophiaCoworker.type := #COWORKER
+!insert (MariaToSophiaCoworker, SophiaTran) into RelationshipToContact
+!insert (ChefMaria, MariaToSophiaCoworker) into ContactToRelationship
+
+!new Relationship('AntoineToCulinaryAcademyEmployee')
+!AntoineToCulinaryAcademyEmployee.type := #EMPLOYEE
+!insert (AntoineToCulinaryAcademyEmployee, InternationalCulinaryAcademy) into RelationshipToContact
+!insert (ChefAntoine, AntoineToCulinaryAcademyEmployee) into ContactToRelationship
+
+!insert (CulinaryFestivalAddressBook, InternationalCulinaryAcademy) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, ChefMaria) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, ChefAntoine) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, SophiaTran) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalEducationNetwork')
+
+!new Person('ProfElenaMartinez')
+!ProfElenaMartinez.name := 'Prof. Elena Martinez'
+!ProfElenaMartinez.phone := '+34 91 3344 9988'
+!ProfElenaMartinez.website := 'www.elenamartinez.academia.es'
+!ProfElenaMartinez.email := 'elena.martinez@univ.es'
+!ProfElenaMartinez.title := 'Dean of Social Sciences'
+
+!new Address('ElenaMartinezAddress')
+!ElenaMartinezAddress.city := 'Madrid'
+!ElenaMartinezAddress.street := 'Knowledge Lane'
+!ElenaMartinezAddress.houseNr := '101'
+!insert (ProfElenaMartinez, ElenaMartinezAddress) into ContactContainsAddress
+
+!new Note('ElenaMartinezNote1')
+!ElenaMartinezNote1.author := 'Prof. Elena Martinez'
+!ElenaMartinezNote1.time := Date('2023-05-12')
+!ElenaMartinezNote1.type := #MEETING
+!ElenaMartinezNote1.comment := 'Led panel on the impacts of globalization on education systems worldwide.'
+!insert (ProfElenaMartinez, ElenaMartinezNote1) into ContactContainsNote
+
+!new Note('ElenaMartinezNote2')
+!ElenaMartinezNote2.author := 'Prof. Elena Martinez'
+!ElenaMartinezNote2.time := Date('2023-05-20')
+!ElenaMartinezNote2.type := #EMAIL
+!ElenaMartinezNote2.comment := 'Sent a strategic proposal for a new international student exchange program.'
+!insert (ProfElenaMartinez, ElenaMartinezNote2) into ContactContainsNote
+
+!new Person('DrNiaHadjari')
+!DrNiaHadjari.name := 'Dr. Nia Hadjari'
+!DrNiaHadjari.phone := '+231 445 8876'
+!DrNiaHadjari.website := 'www.niahadjari.org'
+!DrNiaHadjari.email := 'nhadjari@minedu.gov.lr'
+!DrNiaHadjari.title := 'Educational Policy Advisor'
+
+!new Address('NiaHadjariAddress')
+!NiaHadjariAddress.city := 'Monrovia'
+!NiaHadjariAddress.street := 'Policy Drive'
+!NiaHadjariAddress.houseNr := '12'
+!insert (DrNiaHadjari, NiaHadjariAddress) into ContactContainsAddress
+
+!new Note('NiaHadjariNote')
+!NiaHadjariNote.author := 'Dr. Nia Hadjari'
+!NiaHadjariNote.time := Date('2023-06-07')
+!NiaHadjariNote.type := #CALL
+!NiaHadjariNote.comment := 'Phone call with EU representatives regarding educational initiatives.'
+!insert (DrNiaHadjari, NiaHadjariNote) into ContactContainsNote
+
+!new Company('EducationForAllFoundation')
+!EducationForAllFoundation.name := 'Education for All Foundation'
+!EducationForAllFoundation.phone := '+44 20 4455 6677'
+!EducationForAllFoundation.website := 'www.educationforall.org'
+!EducationForAllFoundation.email := 'info@educationforall.org'
+!EducationForAllFoundation.industry := 'Non-Profit Education'
+
+!new Address('EducationForAllAddress')
+!EducationForAllAddress.city := 'London'
+!EducationForAllAddress.street := 'Equity Street'
+!EducationForAllAddress.houseNr := '50'
+!insert (EducationForAllFoundation, EducationForAllAddress) into ContactContainsAddress
+
+!new Note('EducationForAllNote')
+!EducationForAllNote.author := 'Education for All Foundation'
+!EducationForAllNote.time := Date('2023-07-10')
+!EducationForAllNote.type := #MEETING
+!EducationForAllNote.comment := 'Hosted annual summit on educational access and equity.'
+!insert (EducationForAllFoundation, EducationForAllNote) into ContactContainsNote
+
+!new Company('GlobalLearningInitiative')
+!GlobalLearningInitiative.name := 'Global Learning Initiative'
+!GlobalLearningInitiative.phone := '+1 212 567 8901'
+!GlobalLearningInitiative.website := 'www.globallearninginitiative.org'
+!GlobalLearningInitiative.email := 'admin@globallearning.org'
+!GlobalLearningInitiative.industry := 'Educational Consulting'
+
+!new Address('GlobalLearningAddress')
+!GlobalLearningAddress.city := 'New York'
+!GlobalLearningAddress.street := 'Learning Avenue'
+!GlobalLearningAddress.houseNr := '88'
+!insert (GlobalLearningInitiative, GlobalLearningAddress) into ContactContainsAddress
+
+!new Note('GlobalLearningNote')
+!GlobalLearningNote.author := 'Global Learning Initiative'
+!GlobalLearningNote.time := Date('2023-07-25')
+!GlobalLearningNote.type := #EMAIL
+!GlobalLearningNote.comment := 'Announced new funding opportunities for collaborative educational projects.'
+!insert (GlobalLearningInitiative, GlobalLearningNote) into ContactContainsNote
+
+!new Relationship('ElenaToEducationForAllEmployee')
+!ElenaToEducationForAllEmployee.type := #EMPLOYEE
+!insert (ElenaToEducationForAllEmployee, EducationForAllFoundation) into RelationshipToContact
+!insert (ProfElenaMartinez, ElenaToEducationForAllEmployee) into ContactToRelationship
+
+!new Relationship('NiaToGlobalLearningEmployee')
+!NiaToGlobalLearningEmployee.type := #EMPLOYEE
+!insert (NiaToGlobalLearningEmployee, GlobalLearningInitiative) into RelationshipToContact
+!insert (DrNiaHadjari, NiaToGlobalLearningEmployee) into ContactToRelationship
+
+!new Relationship('EducationForAllToElenaBoss')
+!EducationForAllToElenaBoss.type := #BOSS
+!insert (EducationForAllToElenaBoss, ProfElenaMartinez) into RelationshipToContact
+!insert (EducationForAllFoundation, EducationForAllToElenaBoss) into ContactToRelationship
+
+!new Relationship('GlobalLearningToNiaBoss')
+!GlobalLearningToNiaBoss.type := #BOSS
+!insert (GlobalLearningToNiaBoss, DrNiaHadjari) into RelationshipToContact
+!insert (GlobalLearningInitiative, GlobalLearningToNiaBoss) into ContactToRelationship
+
+!new Relationship('GlobalLearningToEducationForAllSubdivision')
+!GlobalLearningToEducationForAllSubdivision.type := #SUBDIVISION
+!insert (GlobalLearningToEducationForAllSubdivision, EducationForAllFoundation) into RelationshipToContact
+!insert (GlobalLearningInitiative, GlobalLearningToEducationForAllSubdivision) into ContactToRelationship
+
+!insert (GlobalEducationNetwork, ProfElenaMartinez) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, DrNiaHadjari) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, EducationForAllFoundation) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, GlobalLearningInitiative) into AddressBookMadeOfContact
+
+!new AddressBook('MediaAndEntertainmentNetwork')
+
+!new Company('LunaProductions')
+!LunaProductions.name := 'Luna Productions'
+!LunaProductions.phone := '+1-310-7771234'
+!LunaProductions.website := 'www.lunaproductions.us'
+!LunaProductions.email := 'contact@lunaproductions.us'
+!LunaProductions.industry := 'Film Production'
+
+!new Address('LunaProductionsAddress')
+!LunaProductionsAddress.city := 'Los Angeles'
+!LunaProductionsAddress.houseNr := '500'
+!LunaProductionsAddress.street := 'Hollywood Boulevard'
+!insert (LunaProductions, LunaProductionsAddress) into ContactContainsAddress
+
+!new Note('LunaProductionsNote1')
+!LunaProductionsNote1.author := 'Evelyn Hart'
+!LunaProductionsNote1.time := Date('2023-09-15T10:00:00')
+!LunaProductionsNote1.type := #MEETING
+!LunaProductionsNote1.comment := 'Annual planning session held in Los Angeles.'
+!insert (LunaProductions, LunaProductionsNote1) into ContactContainsNote
+
+!new Company('BrighterDaysPublishing')
+!BrighterDaysPublishing.name := 'Brighter Days Publishing'
+!BrighterDaysPublishing.phone := '+44-20-76191122'
+!BrighterDaysPublishing.website := 'www.brighterdayspub.co.uk'
+!BrighterDaysPublishing.email := 'editor@brighterdayspub.co.uk'
+!BrighterDaysPublishing.industry := 'Publishing'
+
+!new Address('BrighterDaysAddress')
+!BrighterDaysAddress.city := 'London'
+!BrighterDaysAddress.houseNr := '120'
+!BrighterDaysAddress.street := 'Print Press Way'
+!insert (BrighterDaysPublishing, BrighterDaysAddress) into ContactContainsAddress
+
+!new Note('BrighterDaysNote1')
+!BrighterDaysNote1.author := 'Jonathan Price'
+!BrighterDaysNote1.time := Date('2023-06-22T08:30:00')
+!BrighterDaysNote1.type := #EMAIL
+!BrighterDaysNote1.comment := 'Draft collaboration agreement with Luna Productions.'
+!insert (BrighterDaysPublishing, BrighterDaysNote1) into ContactContainsNote
+
+!new Person('MaxwellChen')
+!MaxwellChen.name := 'Maxwell Chen'
+!MaxwellChen.phone := '+86-10-88765432'
+!MaxwellChen.website := 'www.maxwellchenmedia.cn'
+!MaxwellChen.email := 'm.chen@media.cn'
+!MaxwellChen.title := 'Media Strategist'
+
+!new Address('MaxwellChenAddress')
+!MaxwellChenAddress.city := 'Beijing'
+!MaxwellChenAddress.houseNr := '18'
+!MaxwellChenAddress.street := 'Media Hub Road'
+!insert (MaxwellChen, MaxwellChenAddress) into ContactContainsAddress
+
+!new Note('MaxwellChenNote1')
+!MaxwellChenNote1.author := 'Maxwell Chen'
+!MaxwellChenNote1.time := Date('2023-08-30T18:00:00')
+!MaxwellChenNote1.type := #CALL
+!MaxwellChenNote1.comment := 'Discussed expanding media research in Asian markets.'
+!insert (MaxwellChen, MaxwellChenNote1) into ContactContainsNote
+
+!new Note('MaxwellChenNote2')
+!MaxwellChenNote2.author := 'Maxwell Chen'
+!MaxwellChenNote2.time := Date('2023-07-04T14:00:00')
+!MaxwellChenNote2.type := #MEETING
+!MaxwellChenNote2.comment := 'Strategy meeting with multiple divisions in Beijing.'
+!insert (MaxwellChen, MaxwellChenNote2) into ContactContainsNote
+
+!new Company('StarSoundStudios')
+!StarSoundStudios.name := 'StarSound Studios'
+!StarSoundStudios.phone := '+91-80-66554433'
+!StarSoundStudios.website := 'www.starsoundstudios.in'
+!StarSoundStudios.email := 'info@starsoundstudios.in'
+!StarSoundStudios.industry := 'Music Production'
+
+!new Address('StarSoundAddress')
+!StarSoundAddress.city := 'Bangalore'
+!StarSoundAddress.houseNr := '33'
+!StarSoundAddress.street := 'Melody Lane'
+!insert (StarSoundStudios, StarSoundAddress) into ContactContainsAddress
+
+!new Note('StarSoundNote1')
+!StarSoundNote1.author := 'Priya Menon'
+!StarSoundNote1.time := Date('2023-05-10T11:30:00')
+!StarSoundNote1.type := #CALL
+!StarSoundNote1.comment := 'Meeting with investors on the upcoming music festival.'
+!insert (StarSoundStudios, StarSoundNote1) into ContactContainsNote
+
+!new Relationship('LunaToMaxwellCoworker')
+!LunaToMaxwellCoworker.type := #COWORKER
+!insert (LunaToMaxwellCoworker, MaxwellChen) into RelationshipToContact
+!insert (LunaProductions, LunaToMaxwellCoworker) into ContactToRelationship
+
+!new Relationship('LunaToBrighterDaysSubdivision')
+!LunaToBrighterDaysSubdivision.type := #SUBDIVISION
+!insert (LunaToBrighterDaysSubdivision, BrighterDaysPublishing) into RelationshipToContact
+!insert (LunaProductions, LunaToBrighterDaysSubdivision) into ContactToRelationship
+
+!new Relationship('BrighterDaysToLunaBoss')
+!BrighterDaysToLunaBoss.type := #BOSS
+!insert (BrighterDaysToLunaBoss, LunaProductions) into RelationshipToContact
+!insert (BrighterDaysPublishing, BrighterDaysToLunaBoss) into ContactToRelationship
+
+!new Relationship('BrighterDaysToMaxwellEmployee')
+!BrighterDaysToMaxwellEmployee.type := #EMPLOYEE
+!insert (BrighterDaysToMaxwellEmployee, MaxwellChen) into RelationshipToContact
+!insert (BrighterDaysPublishing, BrighterDaysToMaxwellEmployee) into ContactToRelationship
+
+!new Relationship('StarSoundToMaxwellCoworker')
+!StarSoundToMaxwellCoworker.type := #COWORKER
+!insert (StarSoundToMaxwellCoworker, MaxwellChen) into RelationshipToContact
+!insert (StarSoundStudios, StarSoundToMaxwellCoworker) into ContactToRelationship
+
+!insert (MediaAndEntertainmentNetwork, LunaProductions) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, BrighterDaysPublishing) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, MaxwellChen) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, StarSoundStudios) into AddressBookMadeOfContact
+

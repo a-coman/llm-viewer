@@ -1,0 +1,101 @@
+!new AddressBook('CulinaryFestivalAddressBook')
+
+!new Company('InternationalCulinaryAcademy')
+!InternationalCulinaryAcademy.name := 'International Culinary Academy'
+!InternationalCulinaryAcademy.phone := '+1-213-555-0280'
+!InternationalCulinaryAcademy.website := 'www.iculinaryacademy.org'
+!InternationalCulinaryAcademy.email := 'info@iculinaryacademy.org'
+!InternationalCulinaryAcademy.industry := 'Education'
+
+!new Address('CulinaryAcademyAddress')
+!CulinaryAcademyAddress.city := 'Los Angeles'
+!CulinaryAcademyAddress.houseNr := '356'
+!CulinaryAcademyAddress.street := 'Gastronomy Blvd'
+!insert (InternationalCulinaryAcademy, CulinaryAcademyAddress) into ContactContainsAddress
+
+!new Note('CulinaryAcademyNote1')
+!CulinaryAcademyNote1.author := 'Festival Director'
+!CulinaryAcademyNote1.time := Date('2023-06-10')
+!CulinaryAcademyNote1.type := #EMAIL
+!CulinaryAcademyNote1.comment := 'Confirm participation in the international food festival.'
+!insert (InternationalCulinaryAcademy, CulinaryAcademyNote1) into ContactContainsNote
+
+!new Person('ChefMaria')
+!ChefMaria.name := 'Maria del Sol'
+!ChefMaria.phone := '+34-655-555123'
+!ChefMaria.email := 'maria.delsol@chefcuisine.es'
+!ChefMaria.title := 'Head Chef'
+
+!new Address('MariaDelSolAddress')
+!MariaDelSolAddress.city := 'Barcelona'
+!MariaDelSolAddress.houseNr := '18'
+!MariaDelSolAddress.street := 'Chef Street'
+!insert (ChefMaria, MariaDelSolAddress) into ContactContainsAddress
+
+!new Note('ChefMariaNote1')
+!ChefMariaNote1.author := 'Chef Maria'
+!ChefMariaNote1.time := Date('2023-05-12')
+!ChefMariaNote1.type := #MEETING
+!ChefMariaNote1.comment := 'Coordinate Mediterranean cuisine showcase plan.'
+!insert (ChefMaria, ChefMariaNote1) into ContactContainsNote
+
+!new Person('ChefAntoine')
+!ChefAntoine.name := 'Antoine Dubois'
+!ChefAntoine.phone := '+33-1-5557532'
+!ChefAntoine.email := 'antoine.dubois@frenchdelights.fr'
+!ChefAntoine.title := 'Pastry Chef'
+
+!new Address('AntoineDuboisAddress')
+!AntoineDuboisAddress.city := 'Paris'
+!AntoineDuboisAddress.houseNr := '24'
+!AntoineDuboisAddress.street := 'Desserts Alley'
+!insert (ChefAntoine, AntoineDuboisAddress) into ContactContainsAddress
+
+!new Note('ChefAntoineNote1')
+!ChefAntoineNote1.author := 'Patissier\'s Network'
+!ChefAntoineNote1.time := Date('2023-05-14')
+!ChefAntoineNote1.type := #CALL
+!ChefAntoineNote1.comment := 'Discuss the arrangement for the multi-national dessert tasting.'
+!insert (ChefAntoine, ChefAntoineNote1) into ContactContainsNote
+
+!new Person('SophiaTran')
+!SophiaTran.name := 'Sophia Tran'
+!SophiaTran.phone := '+61-3-5552377'
+!SophiaTran.email := 'sophia.tran@culinaryevents.com'
+!SophiaTran.title := 'Event Organizer'
+
+!new Address('SophiaTranAddress')
+!SophiaTranAddress.city := 'Melbourne'
+!SophiaTranAddress.houseNr := '200'
+!SophiaTranAddress.street := 'Event Drive'
+!insert (SophiaTran, SophiaTranAddress) into ContactContainsAddress
+
+!new Relationship('CulinaryAcademyToMariaEmployee')
+!CulinaryAcademyToMariaEmployee.type := #EMPLOYEE
+!insert (CulinaryAcademyToMariaEmployee, ChefMaria) into RelationshipToContact
+!insert (InternationalCulinaryAcademy, CulinaryAcademyToMariaEmployee) into ContactToRelationship
+
+!new Relationship('CulinaryAcademyToAntoineSubdivision')
+!CulinaryAcademyToAntoineSubdivision.type := #SUBDIVISION
+!insert (CulinaryAcademyToAntoineSubdivision, ChefAntoine) into RelationshipToContact
+!insert (InternationalCulinaryAcademy, CulinaryAcademyToAntoineSubdivision) into ContactToRelationship
+
+!new Relationship('MariaToAntoineCoworker')
+!MariaToAntoineCoworker.type := #COWORKER
+!insert (MariaToAntoineCoworker, ChefAntoine) into RelationshipToContact
+!insert (ChefMaria, MariaToAntoineCoworker) into ContactToRelationship
+
+!new Relationship('MariaToSophiaCoworker')
+!MariaToSophiaCoworker.type := #COWORKER
+!insert (MariaToSophiaCoworker, SophiaTran) into RelationshipToContact
+!insert (ChefMaria, MariaToSophiaCoworker) into ContactToRelationship
+
+!new Relationship('AntoineToCulinaryAcademyEmployee')
+!AntoineToCulinaryAcademyEmployee.type := #EMPLOYEE
+!insert (AntoineToCulinaryAcademyEmployee, InternationalCulinaryAcademy) into RelationshipToContact
+!insert (ChefAntoine, AntoineToCulinaryAcademyEmployee) into ContactToRelationship
+
+!insert (CulinaryFestivalAddressBook, InternationalCulinaryAcademy) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, ChefMaria) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, ChefAntoine) into AddressBookMadeOfContact
+!insert (CulinaryFestivalAddressBook, SophiaTran) into AddressBookMadeOfContact

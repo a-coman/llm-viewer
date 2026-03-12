@@ -1,0 +1,68 @@
+!new Customer('customer19')
+!customer19.firstName := 'Leila'
+!customer19.lastName := 'Jafari'
+
+!new Booking('booking18')
+!booking18.startDate := '2024-06-15'
+!booking18.endDate := '2024-06-22'
+!booking18.canceled := false
+!booking18.bookingId := 104
+!booking18.confirmed := true
+
+!new Bill('bill37')
+!bill37.price := 1400.0
+!bill37.billId := 501
+
+!new Bill('bill38')
+!bill38.price := 600.0
+!bill38.billId := 502
+
+!new FreeRoomTypesDTO('freeRoomType15')
+!freeRoomType15.roomTypeDescription := 'Romantic Suite'
+!freeRoomType15.numBeds := 1
+!freeRoomType15.pricePerNight := 200.0
+!freeRoomType15.numFreeRooms := 2
+
+!new RoomReservation('roomReservation18_1')
+!roomReservation18_1.checkInDate := '2024-06-15'
+!roomReservation18_1.checkOutDate := '2024-06-22'
+
+!new RoomReservation('roomReservation18_2')
+!roomReservation18_2.checkInDate := '2024-06-15'
+!roomReservation18_2.checkOutDate := '2024-06-22'
+
+!new RoomExtra('extra18_1')
+!extra18_1.price := 120.0
+!extra18_1.description := 'Private Candlelight Dinner'
+
+!new RoomExtra('extra18_2')
+!extra18_2.price := 180.0
+!extra18_2.description := 'Couple Spa Session'
+
+!new RoomExtra('extra18_3')
+!extra18_3.price := 50.0
+!extra18_3.description := 'Complimentary Champagne on Arrival'
+
+!new Room('room18_601')
+!room18_601.numBeds := 1
+!room18_601.pricePerNight := 200.0
+!room18_601.occupied := false
+!room18_601.blocked := true
+!room18_601.roomNumber := 601
+
+!insert (booking18, customer19) into BookingCustomer
+
+!insert (booking18, bill37) into BookingBill
+!insert (booking18, bill38) into BookingBill
+
+!insert (booking18, roomReservation18_1) into BookingRoomReservation
+!insert (booking18, roomReservation18_2) into BookingRoomReservation
+
+!insert (roomReservation18_1, room18_601) into RoomReservationRoom
+
+!insert (roomReservation18_1, extra18_1) into RoomReservationExtras
+!insert (roomReservation18_1, extra18_2) into RoomReservationExtras
+!insert (roomReservation18_2, extra18_3) into RoomReservationExtras
+
+!insert (bill37, roomReservation18_1) into BillRoomReservation
+!insert (bill38, roomReservation18_2) into BillRoomReservation

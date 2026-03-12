@@ -1,0 +1,94 @@
+!new Restaurant('restaurant19')
+!restaurant19.name := 'Sunny Side Bistro'
+
+!new Owner('owner39')
+!owner39.name := 'Olga Ivanova'
+!owner39.percentageShares := 20
+
+!new Owner('owner40')
+!owner40.name := 'Mateo Garcia'
+!owner40.percentageShares := 30
+
+!new Owner('owner41')
+!owner41.name := 'Amneet Kaur'
+!owner41.percentageShares := 50
+
+!insert (restaurant19, owner39) into RestaurantOwner
+!insert (restaurant19, owner40) into RestaurantOwner
+!insert (restaurant19, owner41) into RestaurantOwner
+
+!new RegularCustomer('customer14')
+!customer14.name := 'Pierre Leblanc'
+!customer14.prefferedLanguage := #English
+
+!new HeadWaiter('headwaiter14')
+!headwaiter14.name := 'Naomi Okafor'
+!headwaiter14.dateOfBirth := Date('1983-01-01')  -- Arbitrary date of birth
+!headwaiter14.phoneNumber := '1111222233'        -- Arbitrary phone number
+
+!new Waiter('waiter35')
+!waiter35.name := 'Ricardo Sousa'
+!waiter35.dateOfBirth := Date('2000-01-01')      -- Arbitrary date of birth
+!waiter35.phoneNumber := '2222333344'            -- Arbitrary phone number
+!waiter35.spokenLanguage := #English
+
+!insert (headwaiter14, waiter35) into HeadWaiterWaiter
+
+!new Chef('chef20')
+!chef20.name := 'Sophie Dupont'
+!chef20.dateOfBirth := Date('1991-01-01')        -- Arbitrary date of birth
+!chef20.phoneNumber := '3333444455'              -- Arbitrary phone number
+
+!new Cook('cook24')
+!cook24.name := 'Juanito Cruz'
+!cook24.dateOfBirth := Date('2002-01-01')        -- Arbitrary date of birth
+!cook24.phoneNumber := '4444555566'              -- Arbitrary phone number
+!cook24.yearsOfExperience := 0
+
+!insert (chef20, cook24) into ChefCook
+
+!new BusDriver('busdriver16')
+!busdriver16.name := 'Alice Jensen'
+
+!new Table('table50')
+!table50.number := 5
+!table50.description := 'Outdoor garden view'
+!table50.capacity := 4
+
+!new MenuItem('menuitem27')
+!menuitem27.description := 'A vibrant plate of mixed grilled vegetables and quinoa.'
+!menuitem27.prepTime := 20.0
+!menuitem27.classification := #Main
+
+!insert (menuitem27, chef20) into MenuItemChef
+
+!new FoodItem('fooditem45')
+!fooditem45.number := 45
+!fooditem45.description := 'Quinoa'
+!fooditem45.purchaseFlag := true
+!fooditem45.unit := #Gram
+
+!insert (menuitem27, fooditem45) into MenuItemFoodItem
+
+!new Allergen('allergen16')
+!allergen16.type := #Nuts
+
+!insert (fooditem45, allergen16) into FoodItemAllergen
+
+!new Banquet('banquet16')
+!banquet16.date := Date('2023-12-20')
+!banquet16.time := Time('18:30')
+!banquet16.groupName := 'Annual Family Gathering'
+!banquet16.numberPeople := 4
+!banquet16.paymentMethod := #Cash
+
+!insert (restaurant19, banquet16) into RestaurantReservation
+!insert (banquet16, table50) into ReservationTable
+!insert (banquet16, waiter35) into ReservationWaiter
+!insert (banquet16, busdriver16) into BanquetBusDriver
+
+!new ItemOrder('itemorder4')
+!itemorder4.time := Time('18:45')
+
+!insert (banquet16, itemorder4) into ReservationItemOrdered
+!insert (itemorder4, menuitem27) into ItemOrderMenuItem

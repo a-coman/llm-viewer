@@ -1,0 +1,64 @@
+!new Driver('driver28')
+!driver28.id := 'D028'
+!driver28.name := 'Jessica Jones'
+
+!new Driver('driver29')
+!driver29.id := 'D029'
+!driver29.name := 'Luke Cage'
+
+!new Shipment('shipment31')
+!shipment31.id := 'SHP12375'
+!shipment31.status := #ASSIGNED
+
+!new Shipment('shipment32')
+!shipment32.id := 'SHP12376'
+!shipment32.status := #DELIVERED
+
+!new Address('address31')
+!address31.text := '2929 Alias Ln, Hell\'s Kitchen'
+
+!new Address('address32')
+!address32.text := '3030 Power Man Rd, Harlem'
+
+!new GeoLocation('geoLocation31')
+!geoLocation31.latitude := 40.7480
+!geoLocation31.longitude := -73.9857
+
+!new GeoLocation('geoLocation32')
+!geoLocation32.latitude := 40.8090
+!geoLocation32.longitude := -73.9500
+
+!insert (address31, geoLocation31) into AddressContainsGeoLocation
+!insert (address32, geoLocation32) into AddressContainsGeoLocation
+
+!new Customer('customer31')
+!customer31.id := 'CUST031'
+!customer31.name := 'Matt Murdock'
+!customer31.twitterUserName := '@daredevil'
+
+!new Customer('customer32')
+!customer32.id := 'CUST032'
+!customer32.name := 'Danny Rand'
+!customer32.twitterUserName := '@ironfist'
+
+!new Station('station16')
+
+!insert (station16, customer31) into StationContainsCustomer
+!insert (station16, customer32) into StationContainsCustomer
+
+!insert (station16, shipment31) into StationShipment
+!insert (station16, shipment32) into StationShipment
+
+!insert (station16, driver28) into StationContainsDriver
+!insert (station16, driver29) into StationContainsDriver
+
+!insert (shipment31, address31) into ShipmentContainsPickUpAddress
+!insert (shipment31, address32) into ShipmentContainsDeliveryAddress
+
+!insert (shipment32, address32) into ShipmentContainsPickUpAddress
+!insert (shipment32, address31) into ShipmentContainsDeliveryAddress
+
+!insert (customer31, shipment31) into CustomerConsistsOfShipment
+!insert (customer32, shipment32) into CustomerConsistsOfShipment
+
+!insert (driver29, shipment31) into DriverShipment

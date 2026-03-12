@@ -1,0 +1,66 @@
+!new AddressBook('addressBook9')
+
+!new Company('company9')
+!company9.name := 'TechSavvy Innovations'
+!company9.phone := '312-312-4242'
+!company9.website := 'www.techsavvy.com'
+!company9.email := 'hello@techsavvy.com'
+!company9.industry := 'Software Development'
+
+!new Person('person14')
+!person14.name := 'Evelyn Parker'
+!person14.phone := '646-747-8585'
+!person14.website := 'www.evelynparker.io'
+!person14.email := 'evelyn.parker@techsavvy.com'
+!person14.title := 'Lead Developer'
+
+!new Person('person15')
+!person15.name := 'Lucas Knight'
+!person15.phone := '919-828-1011'
+!person15.website := 'www.lucasknightdev.com'
+!person15.email := 'lucas.knight@freelance.io'
+!person15.title := 'Independent Software Engineer'
+
+!new Note('note14')
+!note14.author := 'Evelyn Parker'
+!note14.time := Date('2024-03-05')
+!note14.type := #MEETING
+!note14.comment := 'Team meeting on upcoming software release.'
+
+!new Note('note15')
+!note15.author := 'Lucas Knight'
+!note15.time := Date('2024-03-10')
+!note15.type := #EMAIL
+!note15.comment := 'Sent a proposal for collaboration.'
+
+!new Address('address15')
+!address15.city := 'Innovation City'
+!address15.houseNr := '99A'
+!address15.street := 'Developer Drive'
+
+!new Address('address16')
+!address16.city := 'Tech Town'
+!address16.houseNr := '80C'
+!address16.street := 'Binary Boulevard'
+
+!new Relationship('relationship16')
+!relationship16.type := #COWORKER
+
+!new Relationship('relationship17')
+!relationship17.type := #EMPLOYEE
+
+!insert (addressBook9, company9) into AddressBookMadeOfContact
+!insert (addressBook9, person14) into AddressBookMadeOfContact
+!insert (addressBook9, person15) into AddressBookMadeOfContact
+
+!insert (person14, note14) into ContactContainsNote
+!insert (person15, note15) into ContactContainsNote
+
+!insert (company9, relationship17) into ContactToRelationship
+!insert (relationship17, person14) into RelationshipToContact
+
+!insert (person15, relationship16) into ContactToRelationship
+!insert (relationship16, person14) into RelationshipToContact
+
+!insert (company9, address15) into ContactContainsAddress
+!insert (person15, address16) into ContactContainsAddress

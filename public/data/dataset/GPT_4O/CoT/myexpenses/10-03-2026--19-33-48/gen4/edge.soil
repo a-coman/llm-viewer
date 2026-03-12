@@ -1,0 +1,75 @@
+!new Expense('postDisasterInfrastructureRebuild')
+!postDisasterInfrastructureRebuild.amount := 86500.00
+!postDisasterInfrastructureRebuild.startDate := Date('2023-05-01')
+!postDisasterInfrastructureRebuild.endDate := Date('2023-05-05')
+
+!new Bill('constructionMaterialsBill')
+!constructionMaterialsBill.amount := 35000.00
+!constructionMaterialsBill.category := 'Construction Materials'
+!constructionMaterialsBill.date := Date('2023-05-01')
+!constructionMaterialsBill.paymentMethod := #CASH
+!constructionMaterialsBill.status := #PENDING
+
+!new Bill('laborCostsBill')
+!laborCostsBill.amount := 25000.00
+!laborCostsBill.category := 'Labor Costs'
+!laborCostsBill.date := Date('2023-05-03')
+!laborCostsBill.paymentMethod := #CREDIT_CARD
+!laborCostsBill.status := #VERIFIED
+
+!new Bill('machineryLeasingBill')
+!machineryLeasingBill.amount := 15000.00
+!machineryLeasingBill.category := 'Machinery Leasing'
+!machineryLeasingBill.date := Date('2023-05-04')
+!machineryLeasingBill.paymentMethod := #CHECK
+!machineryLeasingBill.status := #VALIDATED
+
+!new Bill('siteSecurityBill')
+!siteSecurityBill.amount := 11500.00
+!siteSecurityBill.category := 'Site Security'
+!siteSecurityBill.date := Date('2023-05-05')
+!siteSecurityBill.paymentMethod := #CREDIT_CARD
+!siteSecurityBill.status := #DRAFT
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (constructionMaterialsBill, currencyUSD) into BillCurrency
+!insert (laborCostsBill, currencyEUR) into BillCurrency
+!insert (machineryLeasingBill, currencyJPY) into BillCurrency
+!insert (siteSecurityBill, currencyGBP) into BillCurrency
+
+!insert (postDisasterInfrastructureRebuild, constructionMaterialsBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, laborCostsBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, machineryLeasingBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, siteSecurityBill) into ExpenseContainsBills
+
+!new Comment('materialsComment')
+!materialsComment.text := 'Urgent need for construction materials to prevent delays due to administrative hold-ups.'
+
+!new Comment('laborCostsComment')
+!laborCostsComment.text := 'Labor costs negotiated successfully, ensuring skillful workforce attendance.'
+
+!new Comment('machineryComment')
+!machineryComment.text := 'Machinery efficiency maximized within agreed leasing periods, confirming arrangements are effective.'
+
+!new Comment('securityComment')
+!securityComment.text := 'Pending security protocols for site need expedited draft approval, crucial for safety standards compliance.'
+
+!insert (postDisasterInfrastructureRebuild, materialsComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, laborCostsComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, machineryComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, securityComment) into ExpenseComment

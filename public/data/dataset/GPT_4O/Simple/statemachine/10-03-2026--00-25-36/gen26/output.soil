@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine27')
+!stateMachine27.name := 'onlineShoppingProcess'
+
+!new State('state100')
+!state100.name := 'browsingItems'
+
+!new State('state101')
+!state101.name := 'addingToCart'
+
+!new State('state102')
+!state102.name := 'checkout'
+
+!new State('state103')
+!state103.name := 'paymentProcessing'
+
+!new State('state104')
+!state104.name := 'orderComplete'
+
+!new Transition('transition101')
+!transition101.name := 'addItemToCart'
+
+!new Transition('transition102')
+!transition102.name := 'proceedToCheckout'
+
+!new Transition('transition103')
+!transition103.name := 'processPayment'
+
+!new Transition('transition104')
+!transition104.name := 'completeOrder'
+
+!new Transition('transition105')
+!transition105.name := 'returnToBrowsing'
+
+!new TimeEvent('timeEvent101')
+!timeEvent101.time := 2
+
+!new TimeEvent('timeEvent102')
+!timeEvent102.time := 1
+
+!new TimeEvent('timeEvent103')
+!timeEvent103.time := 3
+
+!new TimeEvent('timeEvent104')
+!timeEvent104.time := 1
+
+!new TimeEvent('timeEvent105')
+!timeEvent105.time := 2
+
+!insert (stateMachine27, state100) into StateMachineContainsStates
+!insert (stateMachine27, state101) into StateMachineContainsStates
+!insert (stateMachine27, state102) into StateMachineContainsStates
+!insert (stateMachine27, state103) into StateMachineContainsStates
+!insert (stateMachine27, state104) into StateMachineContainsStates
+
+!insert (stateMachine27, transition101) into StateMachineContainsTransitions
+!insert (stateMachine27, transition102) into StateMachineContainsTransitions
+!insert (stateMachine27, transition103) into StateMachineContainsTransitions
+!insert (stateMachine27, transition104) into StateMachineContainsTransitions
+!insert (stateMachine27, transition105) into StateMachineContainsTransitions
+
+!insert (transition101, timeEvent101) into TransitionContainsEvents
+!insert (transition102, timeEvent102) into TransitionContainsEvents
+!insert (transition103, timeEvent103) into TransitionContainsEvents
+!insert (transition104, timeEvent104) into TransitionContainsEvents
+!insert (transition105, timeEvent105) into TransitionContainsEvents
+
+!insert (state100, transition101) into StateTransition
+!insert (transition101, state101) into TransitionState
+
+!insert (state101, transition102) into StateTransition
+!insert (transition102, state102) into TransitionState
+
+!insert (state102, transition103) into StateTransition
+!insert (transition103, state103) into TransitionState
+
+!insert (state103, transition104) into StateTransition
+!insert (transition104, state104) into TransitionState
+
+!insert (state104, transition105) into StateTransition
+!insert (transition105, state100) into TransitionState
+
+!insert (stateMachine27, state100) into StateMachineStartsStates

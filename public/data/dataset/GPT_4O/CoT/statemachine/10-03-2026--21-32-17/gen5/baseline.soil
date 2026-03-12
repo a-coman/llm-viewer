@@ -1,0 +1,115 @@
+!new StateMachine('gardenWateringSystem')
+!gardenWateringSystem.name := 'gardenWateringSystem'
+
+!new State('waiting')
+!waiting.name := 'waiting'
+
+!new State('watering')
+!watering.name := 'watering'
+
+!new State('evaluating')
+!evaluating.name := 'evaluating'
+
+!new State('error')
+!error.name := 'error'
+
+!new State('finished')
+!finished.name := 'finished'
+
+!new Transition('waitingToWatering')
+!waitingToWatering.name := 'waitingToWatering'
+
+!new Transition('wateringToEvaluating')
+!wateringToEvaluating.name := 'wateringToEvaluating'
+
+!new Transition('evaluatingToWaiting')
+!evaluatingToWaiting.name := 'evaluatingToWaiting'
+
+!new Transition('evaluatingToWatering')
+!evaluatingToWatering.name := 'evaluatingToWatering'
+
+!new Transition('wateringToError')
+!wateringToError.name := 'wateringToError'
+
+!new Transition('errorToWaiting')
+!errorToWaiting.name := 'errorToWaiting'
+
+!new Transition('wateringToFinished')
+!wateringToFinished.name := 'wateringToFinished'
+
+!new Transition('finishedToWaiting')
+!finishedToWaiting.name := 'finishedToWaiting'
+
+!new TimeEvent('timeEvent720')
+!timeEvent720.time := 720
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent45')
+!timeEvent45.time := 45
+
+!new TimeEvent('timeEvent1440')
+!timeEvent1440.time := 1440
+
+!insert (gardenWateringSystem, waiting) into StateMachineContainsStates
+!insert (gardenWateringSystem, watering) into StateMachineContainsStates
+!insert (gardenWateringSystem, evaluating) into StateMachineContainsStates
+!insert (gardenWateringSystem, error) into StateMachineContainsStates
+!insert (gardenWateringSystem, finished) into StateMachineContainsStates
+
+!insert (gardenWateringSystem, waitingToWatering) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToEvaluating) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, evaluatingToWaiting) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, evaluatingToWatering) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToError) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, errorToWaiting) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToFinished) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, finishedToWaiting) into StateMachineContainsTransitions
+
+!insert (waitingToWatering, timeEvent720) into TransitionContainsEvents
+!insert (wateringToEvaluating, timeEvent30) into TransitionContainsEvents
+!insert (evaluatingToWaiting, timeEvent10) into TransitionContainsEvents
+!insert (evaluatingToWatering, timeEvent5) into TransitionContainsEvents
+!insert (wateringToError, timeEvent1) into TransitionContainsEvents
+!insert (errorToWaiting, timeEvent60) into TransitionContainsEvents
+!insert (wateringToFinished, timeEvent45) into TransitionContainsEvents
+!insert (finishedToWaiting, timeEvent1440) into TransitionContainsEvents
+
+!insert (waiting, waitingToWatering) into StateTransition
+!insert (waitingToWatering, watering) into TransitionState
+
+!insert (watering, wateringToEvaluating) into StateTransition
+!insert (wateringToEvaluating, evaluating) into TransitionState
+
+!insert (evaluating, evaluatingToWaiting) into StateTransition
+!insert (evaluatingToWaiting, waiting) into TransitionState
+
+!insert (evaluating, evaluatingToWatering) into StateTransition
+!insert (evaluatingToWatering, watering) into TransitionState
+
+!insert (watering, wateringToError) into StateTransition
+!insert (wateringToError, error) into TransitionState
+
+!insert (error, errorToWaiting) into StateTransition
+!insert (errorToWaiting, waiting) into TransitionState
+
+!insert (watering, wateringToFinished) into StateTransition
+!insert (wateringToFinished, finished) into TransitionState
+
+!insert (finished, finishedToWaiting) into StateTransition
+!insert (finishedToWaiting, waiting) into TransitionState
+
+!insert (gardenWateringSystem, waiting) into StateMachineStartsStates

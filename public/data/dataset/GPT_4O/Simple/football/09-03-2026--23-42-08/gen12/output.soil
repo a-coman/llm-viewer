@@ -1,0 +1,141 @@
+!new Club('club23')
+!club23.name := 'Polar Bears'
+!club23.homeGround := 'Iceberg Arena'
+!club23.chairman := 'Clara Frost'
+
+!new Club('club24')
+!club24.name := 'Desert Lions'
+!club24.homeGround := 'Desert Mirage Ground'
+!club24.chairman := 'Leo Sands'
+
+!new Team('team23')
+!team23.name := 'Bear Claws United'
+!insert (club23, team23) into ClubTeam
+
+!new Team('team24')
+!team24.name := 'Lion Roar Squad'
+!insert (club24, team24) into ClubTeam
+
+!new Competition('stormCup')
+!stormCup.name := 'Storm Cup'
+!stormCup.type := 'Knockout Stage'
+
+!new Match('match12')
+!match12.date := '2025-06-18'
+!match12.homeAway := true
+!insert (stormCup, match12) into CompetitionMatch
+!insert (team23, match12) into LocalMatch
+!insert (team24, match12) into VisitorMatch
+
+!new MatchReport('report12')
+!report12.duration := 120
+!report12.scoreVisitor := 2
+!report12.scoreLocal := 3
+!insert (match12, report12) into MatchMatchReport
+
+!new Player('player23')
+!player23.name := 'Fiona Snow'
+!player23.age := 27
+!player23.bestFoot := #LEFT
+!player23.phoneNumber := '5678123456'
+!insert (team23, player23) into TeamPlayer
+
+!new Player('player24')
+!player24.name := 'Carlos Heat'
+!player24.age := 29
+!player24.bestFoot := #RIGHT
+!player24.phoneNumber := '6789234567'
+!insert (team24, player24) into TeamPlayer
+
+!new Position('position23')
+!position23.positionName := #DEFENDER
+!insert (player23, position23) into PlayerPositions
+
+!new Position('position24')
+!position24.positionName := #FORWARD
+!insert (player24, position24) into PlayerPositions
+
+!new MatchPlayer('matchPlayer23')
+!matchPlayer23.booked := true
+!matchPlayer23.goals := 0
+!matchPlayer23.rating := 7
+!insert (player23, matchPlayer23) into PlayerMatch
+!insert (match12, matchPlayer23) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer24')
+!matchPlayer24.booked := false
+!matchPlayer24.goals := 1
+!matchPlayer24.rating := 8
+!insert (player24, matchPlayer24) into PlayerMatch
+!insert (match12, matchPlayer24) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition23')
+!matchPlayerPosition23.positionName := #DEFENDER
+!matchPlayerPosition23.number := 3
+!insert (matchPlayer23, matchPlayerPosition23) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition24')
+!matchPlayerPosition24.positionName := #FORWARD
+!matchPlayerPosition24.number := 11
+!insert (matchPlayer24, matchPlayerPosition24) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event40')
+!event40.eventType := #GOAL
+!event40.time := 30
+!insert (match12, event40) into MatchMatchEvent
+
+!new MatchEvent('event41')
+!event41.eventType := #GOAL
+!event41.time := 60
+!insert (match12, event41) into MatchMatchEvent
+
+!new MatchEvent('event42')
+!event42.eventType := #GOAL
+!event42.time := 100
+!insert (match12, event42) into MatchMatchEvent
+
+!new MatchEvent('event43')
+!event43.eventType := #GOAL
+!event43.time := 110
+!insert (match12, event43) into MatchMatchEvent
+
+!new MatchEvent('event44')
+!event44.eventType := #GOAL
+!event44.time := 119
+!insert (match12, event44) into MatchMatchEvent
+
+!new TrainingSession('training23')
+!training23.date := '2025-05-15'
+!training23.location := 'Iceberg Dome'
+!training23.purpose := 'Cold Weather Adaptation'
+!insert (team23, training23) into TeamTraining
+
+!new TrainingSession('training24')
+!training24.date := '2025-05-20'
+!training24.location := 'Desert Oasis'
+!training24.purpose := 'Heat Stamina Drills'
+!insert (team24, training24) into TeamTraining
+
+!new TrainingNotes('trainingNote23')
+!trainingNote23.note := 'Focused on endurance in low temperatures'
+!trainingNote23.date := '2025-05-15'
+!insert (training23, trainingNote23) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote24')
+!trainingNote24.note := 'Improved heat tolerance and stamina'
+!trainingNote24.date := '2025-05-20'
+!insert (training24, trainingNote24) into TrainingTrainingNotes
+
+!new TrainingObjective('objective23')
+!objective23.areaToImprove := 'Ice Control'
+!objective23.startDate := '2025-02-01'
+!objective23.endDate := '2025-06-01'
+!objective23.success := true
+!insert (objective23, player23) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective24')
+!objective24.areaToImprove := 'Sand Agility'
+!objective24.startDate := '2025-02-15'
+!objective24.endDate := '2025-06-15'
+!objective24.success := false
+!insert (objective24, player24) into TrainingObjectivePlayer

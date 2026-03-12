@@ -1,0 +1,36 @@
+!new RentalOffice('officeDesertShoresRentals')
+!officeDesertShoresRentals.name := 'Desert Shores Rentals'
+!officeDesertShoresRentals.number := 1000
+!officeDesertShoresRentals.address := '1000 Arid Lane, Phoenix, AZ'
+
+!new Truck('truck999')
+!truck999.id := 999
+!truck999.registrationState := #AZ
+!truck999.licensePlateNumber := 'AZ999DESERT'
+!truck999.vehicleTypeCode := #TRUCK
+!truck999.registrationLastMaintenanceDate := Date('2023-10-15')
+!truck999.expirationDate := Date('2024-10-15')
+!truck999.odometerReading := 150000
+!truck999.gasTankCapacity := 80.0
+!truck999.workingRadio := true
+!truck999.mileage := 120000
+
+!new RentalAgreement('rentalAgreement10000')
+!rentalAgreement10000.number := 10000
+!rentalAgreement10000.rentalDate := Date('2023-11-20')
+!rentalAgreement10000.anticipatedDuration := 7
+!rentalAgreement10000.depositPaid := 1500.0
+!rentalAgreement10000.quotedDailyRate := 150.0
+!rentalAgreement10000.quotedRatePerMile := 0.2
+
+!new Company('companyCactusLogisticsInc')
+!companyCactusLogisticsInc.name := 'Cactus Logistics Inc.'
+!companyCactusLogisticsInc.address := '900 Commerce Blvd, Tucson, AZ'
+!companyCactusLogisticsInc.poorRisk := true
+!companyCactusLogisticsInc.idNumber := 888888888
+
+!insert (officeDesertShoresRentals, truck999) into RentalOfficeVehicle
+!insert (officeDesertShoresRentals, rentalAgreement10000) into RentalOfficeRentalAgreementOrigin
+!insert (officeDesertShoresRentals, rentalAgreement10000) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement10000, truck999) into RentalAgreementVehicle
+!insert (rentalAgreement10000, companyCactusLogisticsInc) into RentalAgreementCustomer

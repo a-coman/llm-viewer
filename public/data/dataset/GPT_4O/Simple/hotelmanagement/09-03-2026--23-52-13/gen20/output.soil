@@ -1,0 +1,36 @@
+!new Booking('booking21')
+!booking21.startDate := '2025-07-20'
+!booking21.endDate := '2025-07-25'
+!booking21.canceled := false
+!booking21.bookingId := 121
+!booking21.confirmed := true
+
+!new Bill('bill21')
+!bill21.price := 550.00
+!bill21.billId := 5021
+
+!new Customer('customer21')
+!customer21.firstName := 'Victor'
+!customer21.lastName := 'Vasquez'
+
+!new RoomReservation('reservation21')
+!reservation21.checkInDate := '2025-07-20'
+!reservation21.checkOutDate := '2025-07-25'
+
+!new Room('room1801')
+!room1801.numBeds := 2
+!room1801.pricePerNight := 110.00
+!room1801.occupied := true
+!room1801.blocked := false
+!room1801.roomNumber := 1801
+
+!new RoomExtra('extra27')
+!extra27.price := 30.00
+!extra27.description := 'Beach Umbrella and Chair Set'
+
+!insert (booking21, bill21) into BookingBill
+!insert (booking21, customer21) into BookingCustomer
+!insert (booking21, reservation21) into BookingRoomReservation
+!insert (reservation21, extra27) into RoomReservationExtras
+!insert (reservation21, room1801) into RoomReservationRoom
+!insert (bill21, reservation21) into BillRoomReservation

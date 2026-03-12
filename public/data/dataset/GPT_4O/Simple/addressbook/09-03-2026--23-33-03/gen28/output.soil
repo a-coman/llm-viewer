@@ -1,0 +1,66 @@
+!new AddressBook('addressBook28')
+
+!new Company('company28')
+!company28.name := 'ArtVision Studio'
+!company28.phone := '555-909-8080'
+!company28.website := 'www.artvisionstudio.com'
+!company28.email := 'studio@artvisionstudio.com'
+!company28.industry := 'Visual Arts'
+
+!new Person('person52')
+!person52.name := 'Lily Turner'
+!person52.phone := '616-262-8282'
+!person52.website := 'www.lilyturnercreations.com'
+!person52.email := 'lily.turner@artvisionstudio.com'
+!person52.title := 'Creative Director'
+
+!new Person('person53')
+!person53.name := 'Max Wong'
+!person53.phone := '505-505-5050'
+!person53.website := 'www.maxwongart.com'
+!person53.email := 'max.wong@freelancedesigners.org'
+!person53.title := 'Freelance Illustrator'
+
+!new Note('note52')
+!note52.author := 'Lily Turner'
+!note52.time := Date('2025-10-12')
+!note52.type := #MEETING
+!note52.comment := 'Weekly team meeting to discuss project status.'
+
+!new Note('note53')
+!note53.author := 'Max Wong'
+!note53.time := Date('2025-10-15')
+!note53.type := #EMAIL
+!note53.comment := 'Submitted drafts for the new art exhibition.'
+
+!new Address('address53')
+!address53.city := 'Art City'
+!address53.houseNr := '456P'
+!address53.street := 'Canvas Court'
+
+!new Address('address54')
+!address54.city := 'Illustration Ville'
+!address54.houseNr := '78Z'
+!address54.street := 'Sketch Avenue'
+
+!new Relationship('relationship54')
+!relationship54.type := #SUBDIVISION
+
+!new Relationship('relationship55')
+!relationship55.type := #EMPLOYEE
+
+!insert (addressBook28, company28) into AddressBookMadeOfContact
+!insert (addressBook28, person52) into AddressBookMadeOfContact
+!insert (addressBook28, person53) into AddressBookMadeOfContact
+
+!insert (person52, note52) into ContactContainsNote
+!insert (person53, note53) into ContactContainsNote
+
+!insert (company28, relationship54) into ContactToRelationship
+!insert (relationship54, person52) into RelationshipToContact
+
+!insert (person52, relationship55) into ContactToRelationship
+!insert (relationship55, person53) into RelationshipToContact
+
+!insert (company28, address53) into ContactContainsAddress
+!insert (person53, address54) into ContactContainsAddress

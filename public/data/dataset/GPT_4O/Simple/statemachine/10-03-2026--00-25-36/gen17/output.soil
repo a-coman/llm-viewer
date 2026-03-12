@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine18')
+!stateMachine18.name := 'softwareDevelopmentLifecycle'
+
+!new State('state56')
+!state56.name := 'requirementsGathering'
+
+!new State('state57')
+!state57.name := 'design'
+
+!new State('state58')
+!state58.name := 'implementation'
+
+!new State('state59')
+!state59.name := 'testing'
+
+!new State('state60')
+!state60.name := 'deployment'
+
+!new Transition('transition57')
+!transition57.name := 'approveRequirements'
+
+!new Transition('transition58')
+!transition58.name := 'completeDesign'
+
+!new Transition('transition59')
+!transition59.name := 'finishImplementation'
+
+!new Transition('transition60')
+!transition60.name := 'passTests'
+
+!new Transition('transition61')
+!transition61.name := 'releaseSoftware'
+
+!new TimeEvent('timeEvent57')
+!timeEvent57.time := 7
+
+!new TimeEvent('timeEvent58')
+!timeEvent58.time := 14
+
+!new TimeEvent('timeEvent59')
+!timeEvent59.time := 30
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 10
+
+!new TimeEvent('timeEvent61')
+!timeEvent61.time := 5
+
+!insert (stateMachine18, state56) into StateMachineContainsStates
+!insert (stateMachine18, state57) into StateMachineContainsStates
+!insert (stateMachine18, state58) into StateMachineContainsStates
+!insert (stateMachine18, state59) into StateMachineContainsStates
+!insert (stateMachine18, state60) into StateMachineContainsStates
+
+!insert (stateMachine18, transition57) into StateMachineContainsTransitions
+!insert (stateMachine18, transition58) into StateMachineContainsTransitions
+!insert (stateMachine18, transition59) into StateMachineContainsTransitions
+!insert (stateMachine18, transition60) into StateMachineContainsTransitions
+!insert (stateMachine18, transition61) into StateMachineContainsTransitions
+
+!insert (transition57, timeEvent57) into TransitionContainsEvents
+!insert (transition58, timeEvent58) into TransitionContainsEvents
+!insert (transition59, timeEvent59) into TransitionContainsEvents
+!insert (transition60, timeEvent60) into TransitionContainsEvents
+!insert (transition61, timeEvent61) into TransitionContainsEvents
+
+!insert (state56, transition57) into StateTransition
+!insert (transition57, state57) into TransitionState
+
+!insert (state57, transition58) into StateTransition
+!insert (transition58, state58) into TransitionState
+
+!insert (state58, transition59) into StateTransition
+!insert (transition59, state59) into TransitionState
+
+!insert (state59, transition60) into StateTransition
+!insert (transition60, state60) into TransitionState
+
+!insert (state60, transition61) into StateTransition
+!insert (transition61, state56) into TransitionState
+
+!insert (stateMachine18, state56) into StateMachineStartsStates

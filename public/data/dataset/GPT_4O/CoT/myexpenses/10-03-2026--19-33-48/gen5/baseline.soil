@@ -1,0 +1,72 @@
+!new Expense('internationalResearchProjectExpense')
+!internationalResearchProjectExpense.amount := 5485.00
+!internationalResearchProjectExpense.startDate := Date('2023-05-01')
+!internationalResearchProjectExpense.endDate := Date('2023-05-31')
+
+!new Bill('laboratoryEquipmentBill')
+!laboratoryEquipmentBill.amount := 2500.00
+!laboratoryEquipmentBill.category := 'Laboratory Equipment Purchase'
+!laboratoryEquipmentBill.date := Date('2023-05-02')
+!laboratoryEquipmentBill.paymentMethod := #CREDIT_CARD
+!laboratoryEquipmentBill.status := #VERIFIED
+
+!new Bill('airfareBill')
+!airfareBill.amount := 1200.00
+!airfareBill.category := 'Airfare for Research Team'
+!airfareBill.date := Date('2023-04-28')
+!airfareBill.paymentMethod := #CREDIT_CARD
+!airfareBill.status := #VALIDATED
+
+!new Bill('hotelAccommodationBill')
+!hotelAccommodationBill.amount := 785.00
+!hotelAccommodationBill.category := 'Hotel Accommodation'
+!hotelAccommodationBill.date := Date('2023-05-03')
+!hotelAccommodationBill.paymentMethod := #CASH
+!hotelAccommodationBill.status := #VERIFIED
+
+!new Bill('fieldResearchTransportationBill')
+!fieldResearchTransportationBill.amount := 500.00
+!fieldResearchTransportationBill.category := 'Field Research Transportation'
+!fieldResearchTransportationBill.date := Date('2023-05-10')
+!fieldResearchTransportationBill.paymentMethod := #CHECK
+!fieldResearchTransportationBill.status := #PENDING
+
+!new Bill('conferenceFeeBill')
+!conferenceFeeBill.amount := 500.00
+!conferenceFeeBill.category := 'Conference Fee for Presentation of Findings'
+!conferenceFeeBill.date := Date('2023-05-15')
+!conferenceFeeBill.paymentMethod := #CREDIT_CARD
+!conferenceFeeBill.status := #REFUSED
+
+!new Currency('currencyCHF')
+!currencyCHF.name := 'Swiss Franc'
+!currencyCHF.abbreviation := 'CHF'
+
+!insert (laboratoryEquipmentBill, currencyCHF) into BillCurrency
+!insert (airfareBill, currencyCHF) into BillCurrency
+!insert (hotelAccommodationBill, currencyCHF) into BillCurrency
+!insert (fieldResearchTransportationBill, currencyCHF) into BillCurrency
+!insert (conferenceFeeBill, currencyCHF) into BillCurrency
+
+!insert (internationalResearchProjectExpense, laboratoryEquipmentBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, airfareBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, hotelAccommodationBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, fieldResearchTransportationBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, conferenceFeeBill) into ExpenseContainsBills
+
+!new Comment('equipmentComment')
+!equipmentComment.text := 'Equipment purchased was essential and within budget expectations.'
+
+!new Comment('flightComment')
+!flightComment.text := 'The research team''s flight was comfortable, with smooth booking procedure.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Accommodation was satisfactory, though a bit far from the research site.'
+
+!new Comment('transportationComment')
+!transportationComment.text := 'Transportation for fieldwork was a challenge but manageable.'
+
+!insert (internationalResearchProjectExpense, equipmentComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, flightComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, accommodationComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, transportationComment) into ExpenseComment

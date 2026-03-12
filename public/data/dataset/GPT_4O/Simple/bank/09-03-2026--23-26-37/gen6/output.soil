@@ -1,0 +1,50 @@
+!new Bank('bank11')
+!bank11.country := 'Sweden'
+!bank11.name := 'Svenska Handelsbanken'
+!bank11.bic := 'HANDSESS'
+
+!new Bank('bank12')
+!bank12.country := 'Mexico'
+!bank12.name := 'BBVA Bancomer'
+!bank12.bic := 'BCMRMXMM'
+
+!new Account('account16')
+!account16.iban := 'SE4550000000058398257466'
+!account16.balance := 15000
+
+!new Account('account17')
+!account17.iban := 'MX5500123456789012345678'
+!account17.balance := 6500
+
+!new Account('account18')
+!account18.iban := 'SE4550000000058398257467'
+!account18.balance := 3100
+
+!new Person('person16')
+!person16.firstName := 'Erik'
+!person16.lastName := 'Lindberg'
+!person16.age := 45
+
+!new Person('person17')
+!person17.firstName := 'Maria'
+!person17.lastName := 'Garcia'
+!person17.age := 38
+
+!new Person('person18')
+!person18.firstName := 'Johan'
+!person18.lastName := 'Andersson'
+!person18.age := 22
+
+!insert (person16, account16) into Ownership
+!insert (person17, account17) into Ownership
+!insert (person18, account18) into Ownership
+!insert (person16, account18) into Ownership
+
+!insert (person16, account16) into Use
+!insert (person17, account17) into Use
+!insert (person17, account16) into Use
+!insert (person18, account17) into Use
+
+!insert (bank11, account16) into AccountOfBanks
+!insert (bank12, account17) into AccountOfBanks
+!insert (bank11, account18) into AccountOfBanks

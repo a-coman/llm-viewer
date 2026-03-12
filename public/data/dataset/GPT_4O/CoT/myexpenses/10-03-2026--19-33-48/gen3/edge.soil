@@ -1,0 +1,58 @@
+!new Expense('internationalConferenceBudgetShortfall')
+!internationalConferenceBudgetShortfall.amount := 27300.00
+!internationalConferenceBudgetShortfall.startDate := Date('2024-06-15')
+!internationalConferenceBudgetShortfall.endDate := Date('2024-06-20')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 12500.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2024-06-15')
+!venueRentalBill.paymentMethod := #CREDIT_CARD
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 9800.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2024-06-16')
+!cateringServicesBill.paymentMethod := #CASH
+!cateringServicesBill.status := #REFUNDED
+
+!new Bill('speakerHonorariumsBill')
+!speakerHonorariumsBill.amount := 5000.00
+!speakerHonorariumsBill.category := 'Speaker Honorariums'
+!speakerHonorariumsBill.date := Date('2024-06-17')
+!speakerHonorariumsBill.paymentMethod := #CHECK
+!speakerHonorariumsBill.status := #REFUSED
+
+!new Currency('currencyCHF')
+!currencyCHF.name := 'Swiss Franc'
+!currencyCHF.abbreviation := 'CHF'
+
+!new Currency('currencyAUD')
+!currencyAUD.name := 'Australian Dollar'
+!currencyAUD.abbreviation := 'AUD'
+
+!new Currency('currencySGD')
+!currencySGD.name := 'Singapore Dollar'
+!currencySGD.abbreviation := 'SGD'
+
+!insert (venueRentalBill, currencyCHF) into BillCurrency
+!insert (cateringServicesBill, currencyAUD) into BillCurrency
+!insert (speakerHonorariumsBill, currencySGD) into BillCurrency
+
+!insert (internationalConferenceBudgetShortfall, venueRentalBill) into ExpenseContainsBills
+!insert (internationalConferenceBudgetShortfall, cateringServicesBill) into ExpenseContainsBills
+!insert (internationalConferenceBudgetShortfall, speakerHonorariumsBill) into ExpenseContainsBills
+
+!new Comment('venueComment')
+!venueComment.text := 'Venue rental finalized successfully, strategic location improved attendee engagement.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering refund processed after service quality issues reported by several delegates.'
+
+!new Comment('honorariumComment')
+!honorariumComment.text := 'Honorarium payment delayed due to incomplete documentation from international speakers.'
+
+!insert (internationalConferenceBudgetShortfall, venueComment) into ExpenseComment
+!insert (internationalConferenceBudgetShortfall, cateringComment) into ExpenseComment
+!insert (internationalConferenceBudgetShortfall, honorariumComment) into ExpenseComment

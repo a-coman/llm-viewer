@@ -1,0 +1,66 @@
+!new AddressBook('addressBook6')
+
+!new Company('company6')
+!company6.name := 'HealthPlus'
+!company6.phone := '999-000-1111'
+!company6.website := 'www.healthplus.com'
+!company6.email := 'support@healthplus.com'
+!company6.industry := 'Healthcare'
+
+!new Person('person9')
+!person9.name := 'Alice Carter'
+!person9.phone := '333-444-7788'
+!person9.website := 'www.alicecarterhealth.com'
+!person9.email := 'alice.carter@healthplus.com'
+!person9.title := 'Chief Medical Officer'
+
+!new Person('person10')
+!person10.name := 'Bob Miller'
+!person10.phone := '555-222-3333'
+!person10.website := 'www.bobmillerphysio.com'
+!person10.email := 'bob.miller@healthcenter.com'
+!person10.title := 'Physiotherapist'
+
+!new Note('note9')
+!note9.author := 'Alice Carter'
+!note9.time := Date('2024-02-10')
+!note9.type := #MEETING
+!note9.comment := 'Strategic planning session for Q1.'
+
+!new Note('note10')
+!note10.author := 'Bob Miller'
+!note10.time := Date('2024-02-15')
+!note10.type := #EMAIL
+!note10.comment := 'Response to client feedback.'
+
+!new Address('address9')
+!address9.city := 'Wellness City'
+!address9.houseNr := '345X'
+!address9.street := 'Vitality Ave'
+
+!new Address('address10')
+!address10.city := 'Healthy Town'
+!address10.houseNr := '678Y'
+!address10.street := 'Fitness Boulevard'
+
+!new Relationship('relationship10')
+!relationship10.type := #SUBDIVISION
+
+!new Relationship('relationship11')
+!relationship11.type := #EMPLOYEE
+
+!insert (addressBook6, company6) into AddressBookMadeOfContact
+!insert (addressBook6, person9) into AddressBookMadeOfContact
+!insert (addressBook6, person10) into AddressBookMadeOfContact
+
+!insert (person9, note9) into ContactContainsNote
+!insert (person10, note10) into ContactContainsNote
+
+!insert (company6, relationship10) into ContactToRelationship
+!insert (relationship10, person9) into RelationshipToContact
+
+!insert (person9, relationship11) into ContactToRelationship
+!insert (relationship11, person10) into RelationshipToContact
+
+!insert (company6, address9) into ContactContainsAddress
+!insert (person10, address10) into ContactContainsAddress

@@ -1,0 +1,30 @@
+!new Expense('myExpenses')
+!myExpenses.amount := 1000.00
+!myExpenses.startDate := Date('2023-09-01')
+!myExpenses.endDate := Date('2023-09-30')
+
+!new Bill('bill1LowerBound')
+!bill1LowerBound.amount := 0.01
+!bill1LowerBound.category := 'Charity Donation'
+!bill1LowerBound.date := Date('2023-09-01')
+!bill1LowerBound.paymentMethod := #CHECK
+!bill1LowerBound.status := #VERIFIED
+
+!new Bill('bill2UpperBound')
+!bill2UpperBound.amount := 999.99
+!bill2UpperBound.category := 'Office Equipment'
+!bill2UpperBound.date := Date('2023-09-10')
+!bill2UpperBound.paymentMethod := #CREDIT_CARD
+!bill2UpperBound.status := #VALIDATED
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (bill1LowerBound, currencyUSD) into BillCurrency
+!insert (bill2UpperBound, currencyUSD) into BillCurrency
+
+!insert (myExpenses, bill1LowerBound) into ExpenseContainsBills
+!insert (myExpenses, bill2UpperBound) into ExpenseContainsBills
+
+-- No comments to insert for this instance as there are none defined.

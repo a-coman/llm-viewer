@@ -1,0 +1,50 @@
+!new Bank('bank27')
+!bank27.country := 'Germany'
+!bank27.name := 'Commerzbank'
+!bank27.bic := 'COBADEFF'
+
+!new Bank('bank28')
+!bank28.country := 'Indonesia'
+!bank28.name := 'Bank Mandiri'
+!bank28.bic := 'BMRIIDJA'
+
+!new Account('account40')
+!account40.iban := 'DE89370400440532013001'
+!account40.balance := 10450
+
+!new Account('account41')
+!account41.iban := 'ID4512345678901234567890'
+!account41.balance := 8200
+
+!new Account('account42')
+!account42.iban := 'DE89370400440532013002'
+!account42.balance := 150
+
+!new Person('person40')
+!person40.firstName := 'Karl'
+!person40.lastName := 'Schmidt'
+!person40.age := 55
+
+!new Person('person41')
+!person41.firstName := 'Rini'
+!person41.lastName := 'Sutanto'
+!person41.age := 42
+
+!new Person('person42')
+!person42.firstName := 'Helga'
+!person42.lastName := 'Fischer'
+!person42.age := 39
+
+!insert (person40, account40) into Ownership
+!insert (person41, account41) into Ownership
+!insert (person42, account42) into Ownership
+!insert (person40, account42) into Ownership
+
+!insert (person40, account40) into Use
+!insert (person41, account41) into Use
+!insert (person42, account42) into Use
+!insert (person41, account40) into Use
+
+!insert (bank27, account40) into AccountOfBanks
+!insert (bank28, account41) into AccountOfBanks
+!insert (bank27, account42) into AccountOfBanks

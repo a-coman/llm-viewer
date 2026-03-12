@@ -1,0 +1,66 @@
+!new AddressBook('addressBook15')
+
+!new Company('company15')
+!company15.name := 'Global Logistics'
+!company15.phone := '981-233-4455'
+!company15.website := 'www.globallogistics.com'
+!company15.email := 'service@globallogistics.com'
+!company15.industry := 'Transport & Logistics'
+
+!new Person('person26')
+!person26.name := 'Mark Spencer'
+!person26.phone := '555-777-8888'
+!person26.website := 'www.markspencerlogistics.com'
+!person26.email := 'mark.spencer@globallogistics.com'
+!person26.title := 'Operations Manager'
+
+!new Person('person27')
+!person27.name := 'Amy Cooper'
+!person27.phone := '222-333-4444'
+!person27.website := 'www.amycooperdriver.com'
+!person27.email := 'amy.cooper@truckersunion.net'
+!person27.title := 'Senior Logistics Analyst'
+
+!new Note('note26')
+!note26.author := 'Mark Spencer'
+!note26.time := Date('2024-09-10')
+!note26.type := #MEETING
+!note26.comment := 'Discussed route optimization strategies.'
+
+!new Note('note27')
+!note27.author := 'Amy Cooper'
+!note27.time := Date('2024-09-11')
+!note27.type := #CALL
+!note27.comment := 'Client call regarding shipment tracking.'
+
+!new Address('address27')
+!address27.city := 'Transit Town'
+!address27.houseNr := '145A'
+!address27.street := 'Freight Lane'
+
+!new Address('address28')
+!address28.city := 'Shipping City'
+!address28.houseNr := '56Q'
+!address28.street := 'Logistics Road'
+
+!new Relationship('relationship28')
+!relationship28.type := #SUBDIVISION
+
+!new Relationship('relationship29')
+!relationship29.type := #EMPLOYEE
+
+!insert (addressBook15, company15) into AddressBookMadeOfContact
+!insert (addressBook15, person26) into AddressBookMadeOfContact
+!insert (addressBook15, person27) into AddressBookMadeOfContact
+
+!insert (person26, note26) into ContactContainsNote
+!insert (person27, note27) into ContactContainsNote
+
+!insert (company15, relationship28) into ContactToRelationship
+!insert (relationship28, person26) into RelationshipToContact
+
+!insert (person26, relationship29) into ContactToRelationship
+!insert (relationship29, person27) into RelationshipToContact
+
+!insert (company15, address27) into ContactContainsAddress
+!insert (person27, address28) into ContactContainsAddress

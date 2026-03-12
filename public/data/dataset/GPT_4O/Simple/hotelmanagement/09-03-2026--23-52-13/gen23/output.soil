@@ -1,0 +1,41 @@
+!new Booking('booking24')
+!booking24.startDate := '2025-10-12'
+!booking24.endDate := '2025-10-16'
+!booking24.canceled := false
+!booking24.bookingId := 124
+!booking24.confirmed := true
+
+!new Bill('bill24')
+!bill24.price := 400.00
+!bill24.billId := 5024
+
+!new Customer('customer24')
+!customer24.firstName := 'Yasmine'
+!customer24.lastName := 'Zimmerman'
+
+!new RoomReservation('reservation24')
+!reservation24.checkInDate := '2025-10-12'
+!reservation24.checkOutDate := '2025-10-16'
+
+!new Room('room2101')
+!room2101.numBeds := 1
+!room2101.pricePerNight := 100.00
+!room2101.occupied := true
+!room2101.blocked := false
+!room2101.roomNumber := 2101
+
+!new RoomExtra('extra30')
+!extra30.price := 50.00
+!extra30.description := 'Spa Access Package'
+
+!new RoomExtra('extra31')
+!extra31.price := 25.00
+!extra31.description := 'Complimentary Mini-bar'
+
+!insert (booking24, bill24) into BookingBill
+!insert (booking24, customer24) into BookingCustomer
+!insert (booking24, reservation24) into BookingRoomReservation
+!insert (reservation24, extra30) into RoomReservationExtras
+!insert (reservation24, extra31) into RoomReservationExtras
+!insert (reservation24, room2101) into RoomReservationRoom
+!insert (bill24, reservation24) into BillRoomReservation

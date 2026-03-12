@@ -1,0 +1,172 @@
+!new Restaurant('restaurant11')
+!restaurant11.name := 'Sakura'
+
+!new Owner('owner21')
+!owner21.name := 'Haruki Yamada'
+!owner21.percentageShares := 50
+
+!new Owner('owner22')
+!owner22.name := 'Aiko Sato'
+!owner22.percentageShares := 50
+
+!insert (restaurant11, owner21) into RestaurantOwner
+!insert (restaurant11, owner22) into RestaurantOwner
+
+!new Table('table27')
+!table27.number := 1
+!table27.description := 'Private room with tatami seating.'
+!table27.capacity := 8
+
+!new Table('table28')
+!table28.number := 2
+!table28.description := 'Family table near the sushi bar.'
+!table28.capacity := 5
+
+!new Table('table29')
+!table29.number := 3
+!table29.description := 'Outdoor seating in the Zen garden.'
+!table29.capacity := 4
+
+!new Table('table30')
+!table30.number := 4
+!table30.description := 'Elegant VIP seating area.'
+!table30.capacity := 6
+
+!new RegularCustomer('customer6')
+!customer6.name := 'Akira Suzuki'
+!customer6.prefferedLanguage := #English
+
+!new RegularCustomer('customer7')
+!customer7.name := 'Olivia Johnson'
+!customer7.prefferedLanguage := #English
+
+!new Individual('individualReservation5')
+!individualReservation5.date := Date('2023-11-05')
+!individualReservation5.time := Time('18:00')
+!individualReservation5.numberPeople := 1
+!individualReservation5.name := 'Akira Suzuki'
+!individualReservation5.phoneNumber := '5555555555'  -- Arbitrary phone number
+!individualReservation5.seating := #Inside
+!individualReservation5.smoking := #NonSmoking
+!individualReservation5.number := 5
+
+!insert (restaurant11, individualReservation5) into RestaurantReservation
+!insert (individualReservation5, customer6) into ReservationCustomer
+!insert (individualReservation5, table28) into ReservationTable
+
+!new Banquet('banquet9')
+!banquet9.date := Date('2023-11-05')
+!banquet9.time := Time('19:30')
+!banquet9.groupName := 'Olivia\'s Corporate Event'
+!banquet9.numberPeople := 18
+!banquet9.paymentMethod := #Cash
+
+!insert (restaurant11, banquet9) into RestaurantReservation
+!insert (banquet9, customer7) into ReservationCustomer
+!insert (banquet9, table27) into ReservationTable
+!insert (banquet9, table30) into ReservationTable
+!insert (banquet9, table29) into ReservationTable
+
+!new Waiter('waiter17')
+!waiter17.name := 'Taro Nishikawa'
+!waiter17.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter17.phoneNumber := '6666666666'           -- Arbitrary phone number
+!waiter17.spokenLanguage := #English
+
+!new Waiter('waiter18')
+!waiter18.name := 'Mei Tanaka'
+!waiter18.dateOfBirth := Date('1991-01-01')     -- Arbitrary date of birth
+!waiter18.phoneNumber := '7777777777'           -- Arbitrary phone number
+!waiter18.spokenLanguage := #English
+
+!insert (individualReservation5, waiter17) into ReservationWaiter
+!insert (banquet9, waiter17) into ReservationWaiter
+!insert (banquet9, waiter18) into ReservationWaiter
+
+!new HeadWaiter('headwaiter9')
+!headwaiter9.name := 'Hiroshi Kobayashi'
+!headwaiter9.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter9.phoneNumber := '8888888888'        -- Arbitrary phone number
+
+!insert (headwaiter9, waiter17) into HeadWaiterWaiter
+!insert (headwaiter9, waiter18) into HeadWaiterWaiter
+
+!new BusDriver('busdriver9')
+!busdriver9.name := 'Kenji Ito'
+
+!insert (banquet9, busdriver9) into BanquetBusDriver
+
+!new Chef('chef12')
+!chef12.name := 'Yumi Takahashi'
+!chef12.dateOfBirth := Date('1975-01-01')       -- Arbitrary date of birth
+!chef12.phoneNumber := '9999999999'             -- Arbitrary phone number
+
+!new Cook('cook14')
+!cook14.name := 'Noriko Fujita'
+!cook14.dateOfBirth := Date('1993-01-01')       -- Arbitrary date of birth
+!cook14.phoneNumber := '0101010101'             -- Arbitrary phone number
+!cook14.yearsOfExperience := 3
+
+!insert (chef12, cook14) into ChefCook
+
+!new MenuItem('menuitem15')
+!menuitem15.description := 'Selection of fresh sushi and sashimi.'
+!menuitem15.prepTime := 30.0
+!menuitem15.classification := #Main
+
+!insert (menuitem15, chef12) into MenuItemChef
+
+!new FoodItem('fooditem21')
+!fooditem21.number := 21
+!fooditem21.description := 'Tuna'
+!fooditem21.purchaseFlag := true
+!fooditem21.unit := #Gram
+
+!new FoodItem('fooditem22')
+!fooditem22.number := 22
+!fooditem22.description := 'Salmon'
+!fooditem22.purchaseFlag := true
+!fooditem22.unit := #Gram
+
+!new FoodItem('fooditem23')
+!fooditem23.number := 23
+!fooditem23.description := 'Rice'
+!fooditem23.purchaseFlag := true
+!fooditem23.unit := #Gram
+
+!insert (menuitem15, fooditem21) into MenuItemFoodItem
+!insert (menuitem15, fooditem22) into MenuItemFoodItem
+!insert (menuitem15, fooditem23) into MenuItemFoodItem
+
+!new MenuItem('menuitem16')
+!menuitem16.description := 'Italian dessert with a Japanese twist, infused with matcha.'
+!menuitem16.prepTime := 25.0
+!menuitem16.classification := #Dessert
+
+!insert (menuitem16, chef12) into MenuItemChef
+
+!new FoodItem('fooditem24')
+!fooditem24.number := 24
+!fooditem24.description := 'Mascarpone'
+!fooditem24.purchaseFlag := true
+!fooditem24.unit := #Ounce
+
+!new FoodItem('fooditem25')
+!fooditem25.number := 25
+!fooditem25.description := 'Matcha'
+!fooditem25.purchaseFlag := true
+!fooditem25.unit := #Gram
+
+!insert (menuitem16, fooditem24) into MenuItemFoodItem
+!insert (menuitem16, fooditem25) into MenuItemFoodItem
+
+!new Allergen('allergen9')
+!allergen9.type := #Seafood
+
+!insert (fooditem21, allergen9) into FoodItemAllergen
+!insert (fooditem22, allergen9) into FoodItemAllergen
+
+!new Allergen('allergen10')
+!allergen10.type := #Lactose
+
+!insert (fooditem24, allergen10) into FoodItemAllergen

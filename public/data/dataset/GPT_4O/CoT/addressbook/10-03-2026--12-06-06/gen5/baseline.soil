@@ -1,0 +1,106 @@
+!new AddressBook('GlobalEnterpriseConnections')
+
+!new Person('NnekaOkafor')
+!NnekaOkafor.name := 'Nneka Okafor'
+!NnekaOkafor.phone := '+234-703-555-1234'
+!NnekaOkafor.website := 'www.nnekaokafor.ng'
+!NnekaOkafor.email := 'nneka.okafor@africatechnology.ng'
+!NnekaOkafor.title := 'Chief Technology Officer'
+
+!new Address('NnekaOkaforAddress')
+!NnekaOkaforAddress.city := 'Lagos'
+!NnekaOkaforAddress.houseNr := '118'
+!NnekaOkaforAddress.street := 'Victoria Island'
+!insert (NnekaOkafor, NnekaOkaforAddress) into ContactContainsAddress
+
+!new Note('NnekaOkaforNote1')
+!NnekaOkaforNote1.author := 'Nneka Okafor'
+!NnekaOkaforNote1.time := Date('2023-05-10')
+!NnekaOkaforNote1.type := #CALL
+!NnekaOkaforNote1.comment := 'Follow-up with partners on the integration of blockchain technologies.'
+!insert (NnekaOkafor, NnekaOkaforNote1) into ContactContainsNote
+
+!new Company('DigitalInnovationsConsortium')
+!DigitalInnovationsConsortium.name := 'Digital Innovations Consortium'
+!DigitalInnovationsConsortium.phone := '+1-415-999-8888'
+!DigitalInnovationsConsortium.website := 'www.digitalinnovations.com'
+!DigitalInnovationsConsortium.email := 'info@digitalinnovations.com'
+!DigitalInnovationsConsortium.industry := 'Technology'
+
+!new Address('DigitalInnovationsAddress')
+!DigitalInnovationsAddress.city := 'San Francisco'
+!DigitalInnovationsAddress.houseNr := '200'
+!DigitalInnovationsAddress.street := 'Market Street'
+!insert (DigitalInnovationsConsortium, DigitalInnovationsAddress) into ContactContainsAddress
+
+!new Note('DigitalInnovationsNote1')
+!DigitalInnovationsNote1.author := 'Laura Johnson'
+!DigitalInnovationsNote1.time := Date('2023-07-29')
+!DigitalInnovationsNote1.type := #MEETING
+!DigitalInnovationsNote1.comment := 'Strategic planning session for expansion in African markets.'
+!insert (DigitalInnovationsConsortium, DigitalInnovationsNote1) into ContactContainsNote
+
+!new Person('SamuelMensah')
+!SamuelMensah.name := 'Samuel Mensah'
+!SamuelMensah.phone := '+233-24-888-5555'
+!SamuelMensah.website := 'www.samuelmensah.edu.gh'
+!SamuelMensah.email := 'samuel.mensah@ghanatech.com'
+!SamuelMensah.title := 'Data Scientist'
+
+!new Address('SamuelMensahAddress')
+!SamuelMensahAddress.city := 'Accra'
+!SamuelMensahAddress.houseNr := '9'
+!SamuelMensahAddress.street := 'Kwame Nkrumah Avenue'
+!insert (SamuelMensah, SamuelMensahAddress) into ContactContainsAddress
+
+!new Note('SamuelMensahNote1')
+!SamuelMensahNote1.author := 'Samuel Mensah'
+!SamuelMensahNote1.time := Date('2023-04-22')
+!SamuelMensahNote1.type := #EMAIL
+!SamuelMensahNote1.comment := 'Preliminary report on data analytics for market trends.'
+!insert (SamuelMensah, SamuelMensahNote1) into ContactContainsNote
+
+!new Person('LauraJohnson')
+!LauraJohnson.name := 'Laura Johnson'
+!LauraJohnson.phone := '+44-20-1234-6789'
+!LauraJohnson.website := 'www.laurajohnsonconsulting.co.uk'
+!LauraJohnson.email := 'laura.johnson@businessstrategy.co.uk'
+!LauraJohnson.title := 'Strategic Development Manager'
+
+!new Address('LauraJohnsonAddress')
+!LauraJohnsonAddress.city := 'London'
+!LauraJohnsonAddress.houseNr := '80'
+!LauraJohnsonAddress.street := 'Piccadilly'
+!insert (LauraJohnson, LauraJohnsonAddress) into ContactContainsAddress
+
+!new Note('LauraJohnsonNote1')
+!LauraJohnsonNote1.author := 'Laura Johnson'
+!LauraJohnsonNote1.time := Date('2023-08-12')
+!LauraJohnsonNote1.type := #EMAIL
+!LauraJohnsonNote1.comment := 'Update on the partnership proposal for green tech initiatives.'
+!insert (LauraJohnson, LauraJohnsonNote1) into ContactContainsNote
+
+!new Relationship('NnekaToSamuelBoss')
+!NnekaToSamuelBoss.type := #BOSS
+!insert (NnekaToSamuelBoss, SamuelMensah) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToSamuelBoss) into ContactToRelationship
+
+!new Relationship('SamuelToNnekaEmployee')
+!SamuelToNnekaEmployee.type := #EMPLOYEE
+!insert (SamuelToNnekaEmployee, NnekaOkafor) into RelationshipToContact
+!insert (SamuelMensah, SamuelToNnekaEmployee) into ContactToRelationship
+
+!new Relationship('NnekaToDigitalInnovationsSubdivision')
+!NnekaToDigitalInnovationsSubdivision.type := #SUBDIVISION
+!insert (NnekaToDigitalInnovationsSubdivision, DigitalInnovationsConsortium) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToDigitalInnovationsSubdivision) into ContactToRelationship
+
+!new Relationship('NnekaToLauraCoworker')
+!NnekaToLauraCoworker.type := #COWORKER
+!insert (NnekaToLauraCoworker, LauraJohnson) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToLauraCoworker) into ContactToRelationship
+
+!insert (GlobalEnterpriseConnections, NnekaOkafor) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, DigitalInnovationsConsortium) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, SamuelMensah) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, LauraJohnson) into AddressBookMadeOfContact

@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency23')
+!currency23.name := 'Indonesian Rupiah'
+!currency23.abbreviation := 'IDR'
+
+-- Creating instances of Bills
+!new Bill('bill57')
+!bill57.amount := 500000.00
+!bill57.category := 'Educational Workshops'
+!bill57.date := Date('2023-01-15')
+!bill57.paymentMethod := #CREDIT_CARD
+!bill57.status := #DRAFT
+!insert (bill57, currency23) into BillCurrency
+
+!new Bill('bill58')
+!bill58.amount := 300000.00
+!bill58.category := 'Training Materials'
+!bill58.date := Date('2023-01-18')
+!bill58.paymentMethod := #CASH
+!bill58.status := #REFUSED
+!insert (bill58, currency23) into BillCurrency
+
+!new Bill('bill59')
+!bill59.amount := 200000.00
+!bill59.category := 'Venue Rental'
+!bill59.date := Date('2023-01-20')
+!bill59.paymentMethod := #CHECK
+!bill59.status := #PENDING
+!insert (bill59, currency23) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment26')
+!comment26.text := 'Costs associated with organizing staff development workshops.'
+
+-- Creating instance of Expense
+!new Expense('expense23')
+!expense23.amount := 1000000.00
+!expense23.startDate := Date('2023-01-10')
+!expense23.endDate := Date('2023-01-25')
+!insert (expense23, bill57) into ExpenseContainsBills
+!insert (expense23, bill58) into ExpenseContainsBills
+!insert (expense23, bill59) into ExpenseContainsBills
+!insert (expense23, comment26) into ExpenseComment

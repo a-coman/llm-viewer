@@ -1,0 +1,122 @@
+!new RentalOffice('officeLoneStarRentals')
+!officeLoneStarRentals.name := 'Lone Star Rentals'
+!officeLoneStarRentals.number := 675
+!officeLoneStarRentals.address := '3500 S Congress Ave, Austin, TX 78704'
+
+!new Truck('truck8005')
+!truck8005.id := 8005
+!truck8005.registrationState := #CA
+!truck8005.licensePlateNumber := 'TX7890'
+!truck8005.vehicleTypeCode := #TRUCK
+!truck8005.registrationLastMaintenanceDate := Date('2023-04-22')
+!truck8005.expirationDate := Date('2024-04-22')
+!truck8005.odometerReading := 80000
+!truck8005.gasTankCapacity := 23.0
+!truck8005.workingRadio := true
+!truck8005.mileage := 13
+
+!new Truck('truck8006')
+!truck8006.id := 8006
+!truck8006.registrationState := #CA
+!truck8006.licensePlateNumber := 'LA0021'
+!truck8006.vehicleTypeCode := #TRUCK
+!truck8006.registrationLastMaintenanceDate := Date('2023-05-30')
+!truck8006.expirationDate := Date('2024-05-30')
+!truck8006.odometerReading := 65000
+!truck8006.gasTankCapacity := 24.0
+!truck8006.workingRadio := true
+!truck8006.mileage := 14
+
+!new Vehicle('coveredTrailer9010')
+!coveredTrailer9010.id := 9010
+!coveredTrailer9010.registrationState := #CA
+!coveredTrailer9010.licensePlateNumber := 'TX4512'
+!coveredTrailer9010.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer9010.registrationLastMaintenanceDate := Date('2023-06-10')
+!coveredTrailer9010.expirationDate := Date('2024-06-10')
+
+!new Vehicle('coveredTrailer9011')
+!coveredTrailer9011.id := 9011
+!coveredTrailer9011.registrationState := #CA
+!coveredTrailer9011.licensePlateNumber := 'AR2233'
+!coveredTrailer9011.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer9011.registrationLastMaintenanceDate := Date('2023-07-20')
+!coveredTrailer9011.expirationDate := Date('2024-07-20')
+
+!new Individual('individualEmmaRobinson')
+!individualEmmaRobinson.name := 'Emma Robinson'
+!individualEmmaRobinson.address := '789 W 5th St, Austin, TX 78701'
+!individualEmmaRobinson.poorRisk := false
+!individualEmmaRobinson.homePhone := '512-555-0144'
+!individualEmmaRobinson.driverLicenseState := #CA
+!individualEmmaRobinson.driverLicenseNumber := 55669988
+!individualEmmaRobinson.driverLicenseExpirationDate := Date('2026-11-25')
+
+!new Company('companyLiveMusicTransport')
+!companyLiveMusicTransport.name := 'Live Music Transport'
+!companyLiveMusicTransport.address := '1236 Sound Avenue, Austin, TX 78705'
+!companyLiveMusicTransport.poorRisk := false
+!companyLiveMusicTransport.idNumber := 5050
+
+!new Company('companyTechConDistributors')
+!companyTechConDistributors.name := 'TechCon Distributors'
+!companyTechConDistributors.address := '114 Amplify Ct, Austin, TX 78744'
+!companyTechConDistributors.poorRisk := true
+!companyTechConDistributors.idNumber := 5051
+
+!new RentalAgreement('rentalAgreement16002')
+!rentalAgreement16002.number := 16002
+!rentalAgreement16002.rentalDate := Date('2024-01-10')
+!rentalAgreement16002.anticipatedDuration := 4
+!rentalAgreement16002.depositPaid := 100.0
+!rentalAgreement16002.quotedDailyRate := 55.0
+!rentalAgreement16002.quotedRatePerMile := 0.50
+
+!new RentalAgreement('rentalAgreement17003')
+!rentalAgreement17003.number := 17003
+!rentalAgreement17003.rentalDate := Date('2024-01-22')
+!rentalAgreement17003.anticipatedDuration := 6
+!rentalAgreement17003.depositPaid := 300.0
+!rentalAgreement17003.quotedDailyRate := 40.0
+!rentalAgreement17003.quotedRatePerMile := 0.35
+
+!new RentalAgreement('rentalAgreement18004')
+!rentalAgreement18004.number := 18004
+!rentalAgreement18004.rentalDate := Date('2024-02-15')
+!rentalAgreement18004.anticipatedDuration := 8
+!rentalAgreement18004.depositPaid := 250.0
+!rentalAgreement18004.quotedDailyRate := 50.0
+!rentalAgreement18004.quotedRatePerMile := 0.38
+
+!new RentalAgreement('rentalAgreement17004')
+!rentalAgreement17004.number := 17004
+!rentalAgreement17004.rentalDate := Date('2024-03-01')
+!rentalAgreement17004.anticipatedDuration := 5
+!rentalAgreement17004.depositPaid := 120.0
+!rentalAgreement17004.quotedDailyRate := 33.0
+!rentalAgreement17004.quotedRatePerMile := 0.30
+
+!insert (officeLoneStarRentals, truck8005) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, truck8006) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, coveredTrailer9010) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, coveredTrailer9011) into RentalOfficeVehicle
+
+!insert (officeLoneStarRentals, rentalAgreement16002) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement17003) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement18004) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement17004) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeLoneStarRentals, rentalAgreement16002) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement17003) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement18004) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement17004) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement16002, truck8005) into RentalAgreementVehicle
+!insert (rentalAgreement17003, coveredTrailer9010) into RentalAgreementVehicle
+!insert (rentalAgreement18004, truck8006) into RentalAgreementVehicle
+!insert (rentalAgreement17004, coveredTrailer9011) into RentalAgreementVehicle
+
+!insert (rentalAgreement16002, individualEmmaRobinson) into RentalAgreementCustomer
+!insert (rentalAgreement17003, companyLiveMusicTransport) into RentalAgreementCustomer
+!insert (rentalAgreement18004, companyTechConDistributors) into RentalAgreementCustomer
+!insert (rentalAgreement17004, companyLiveMusicTransport) into RentalAgreementCustomer

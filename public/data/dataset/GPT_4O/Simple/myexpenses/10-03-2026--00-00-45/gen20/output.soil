@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency20')
+!currency20.name := 'South Korean Won'
+!currency20.abbreviation := 'KRW'
+
+-- Creating instances of Bills
+!new Bill('bill48')
+!bill48.amount := 800000.00
+!bill48.category := 'Product Development'
+!bill48.date := Date('2023-02-15')
+!bill48.paymentMethod := #CASH
+!bill48.status := #REFUNDED
+!insert (bill48, currency20) into BillCurrency
+
+!new Bill('bill49')
+!bill49.amount := 600000.00
+!bill49.category := 'Testing and QA'
+!bill49.date := Date('2023-02-20')
+!bill49.paymentMethod := #CREDIT_CARD
+!bill49.status := #VALIDATED
+!insert (bill49, currency20) into BillCurrency
+
+!new Bill('bill50')
+!bill50.amount := 400000.00
+!bill50.category := 'Prototyping'
+!bill50.date := Date('2023-02-25')
+!bill50.paymentMethod := #CHECK
+!bill50.status := #PENDING
+!insert (bill50, currency20) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment23')
+!comment23.text := 'R&D expenses for the next-gen wireless device.'
+
+-- Creating instance of Expense
+!new Expense('expense20')
+!expense20.amount := 1800000.00
+!expense20.startDate := Date('2023-02-10')
+!expense20.endDate := Date('2023-02-28')
+!insert (expense20, bill48) into ExpenseContainsBills
+!insert (expense20, bill49) into ExpenseContainsBills
+!insert (expense20, bill50) into ExpenseContainsBills
+!insert (expense20, comment23) into ExpenseComment

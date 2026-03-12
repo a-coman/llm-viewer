@@ -1,0 +1,41 @@
+!new StateMachine('isolatedMachine')
+!isolatedMachine.name := 'isolatedMachine'
+
+!new State('entryState')
+!entryState.name := 'entryState'
+
+!new State('connectedState')
+!connectedState.name := 'connectedState'
+
+!new State('disconnectedState')
+!disconnectedState.name := 'disconnectedState'
+
+!new Transition('connectTransition')
+!connectTransition.name := 'connectTransition'
+
+!new Transition('loopTransition')
+!loopTransition.name := 'loopTransition'
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent7')
+!timeEvent7.time := 7
+
+!insert (isolatedMachine, entryState) into StateMachineContainsStates
+!insert (isolatedMachine, connectedState) into StateMachineContainsStates
+!insert (isolatedMachine, disconnectedState) into StateMachineContainsStates
+
+!insert (isolatedMachine, connectTransition) into StateMachineContainsTransitions
+!insert (isolatedMachine, loopTransition) into StateMachineContainsTransitions
+
+!insert (connectTransition, timeEvent3) into TransitionContainsEvents
+!insert (loopTransition, timeEvent7) into TransitionContainsEvents
+
+!insert (entryState, connectTransition) into StateTransition
+!insert (connectTransition, connectedState) into TransitionState
+
+!insert (connectedState, loopTransition) into StateTransition
+!insert (loopTransition, connectedState) into TransitionState
+
+!insert (isolatedMachine, entryState) into StateMachineStartsStates

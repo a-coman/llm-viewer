@@ -1,0 +1,70 @@
+!new RentalOffice('office23')
+!office23.name := 'Pine Valley Rentals'
+!office23.number := 2323
+!office23.address := '456 Pine Valley Ave, Portland, OR'
+
+!new Truck('truck45')
+!truck45.id := 545
+!truck45.registrationState := #CA
+!truck45.licensePlateNumber := 'CA-TRK-5467'
+!truck45.vehicleTypeCode := #TRUCK
+!truck45.registrationLastMaintenanceDate := Date('2023-04-22')
+!truck45.expirationDate := Date('2024-04-22')
+!truck45.odometerReading := 17000
+!truck45.gasTankCapacity := 27.5
+!truck45.workingRadio := true
+!truck45.mileage := 22
+
+!new Individual('individual23')
+!individual23.name := 'Ethan Lee'
+!individual23.address := '190 Forest Ct, Salem, OR'
+!individual23.poorRisk := false
+!individual23.homePhone := '555-4433'
+!individual23.driverLicenseState := #CA
+!individual23.driverLicenseNumber := 45678901
+!individual23.driverLicenseExpirationDate := Date('2026-08-14')
+
+!new RentalAgreement('agreement45')
+!agreement45.number := 3045
+!agreement45.rentalDate := Date('2023-12-17')
+!agreement45.anticipatedDuration := 5
+!agreement45.depositPaid := 200.0
+!agreement45.quotedDailyRate := 70.00
+!agreement45.quotedRatePerMile := 0.60
+
+!new Truck('truck46')
+!truck46.id := 546
+!truck46.registrationState := #CT
+!truck46.licensePlateNumber := 'CT-TRK-8901'
+!truck46.vehicleTypeCode := #TRUCK10
+!truck46.registrationLastMaintenanceDate := Date('2023-08-02')
+!truck46.expirationDate := Date('2025-08-02')
+!truck46.odometerReading := 16000
+!truck46.gasTankCapacity := 31.0
+!truck46.workingRadio := false
+!truck46.mileage := 24
+
+!new Company('company23')
+!company23.name := 'Northwest Transports'
+!company23.address := '789 Cascade Ln, Eugene, OR'
+!company23.poorRisk := true
+!company23.idNumber := 341256
+
+!new RentalAgreement('agreement46')
+!agreement46.number := 3046
+!agreement46.rentalDate := Date('2023-12-23')
+!agreement46.anticipatedDuration := 6
+!agreement46.depositPaid := 330.0
+!agreement46.quotedDailyRate := 75.00
+!agreement46.quotedRatePerMile := 0.62
+
+!insert (office23, truck45) into RentalOfficeVehicle
+!insert (office23, truck46) into RentalOfficeVehicle
+!insert (office23, agreement45) into RentalOfficeRentalAgreementOrigin
+!insert (office23, agreement45) into RentalOfficeRentalAgreementDrop
+!insert (office23, agreement46) into RentalOfficeRentalAgreementOrigin
+!insert (office23, agreement46) into RentalOfficeRentalAgreementDrop
+!insert (agreement45, truck45) into RentalAgreementVehicle
+!insert (agreement45, individual23) into RentalAgreementCustomer
+!insert (agreement46, truck46) into RentalAgreementVehicle
+!insert (agreement46, company23) into RentalAgreementCustomer

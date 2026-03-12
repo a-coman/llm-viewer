@@ -1,0 +1,77 @@
+!new Customer('customer5')
+!customer5.firstName := 'Lakshmi'
+!customer5.lastName := 'Iyer'
+
+!new Booking('booking5')
+!booking5.startDate := '20-10-2023'
+!booking5.endDate := '20-11-2023'
+!booking5.canceled := false
+!booking5.bookingId := 101
+!booking5.confirmed := true
+
+!new RoomReservation('roomReservation5_1')
+!roomReservation5_1.checkInDate := '20-10-2023'
+!roomReservation5_1.checkOutDate := '10-11-2023'
+
+!new RoomReservation('roomReservation5_2')
+!roomReservation5_2.checkInDate := '10-11-2023'
+!roomReservation5_2.checkOutDate := '20-11-2023'
+
+!new Room('room5_301')
+!room5_301.numBeds := 2
+!room5_301.pricePerNight := 150.00
+!room5_301.occupied := true
+!room5_301.blocked := false
+!room5_301.roomNumber := 301
+
+!new RoomExtra('extra5_1')
+!extra5_1.price := 50.00
+!extra5_1.description := 'Daily Spa Access'
+
+!new RoomExtra('extra5_2')
+!extra5_2.price := 30.00
+!extra5_2.description := 'Cultural Festival Tickets'
+
+!new RoomExtra('extra5_3')
+!extra5_3.price := 20.00
+!extra5_3.description := 'Premium Breakfast'
+
+!new Bill('bill9')
+!bill9.price := 3200.00
+!bill9.billId := 501
+
+!new Bill('bill10')
+!bill10.price := 600.00
+!bill10.billId := 502
+
+!new Bill('bill11')
+!bill11.price := 200.00
+!bill11.billId := 503
+
+!insert (booking5, customer5) into BookingCustomer
+
+!insert (booking5, roomReservation5_1) into BookingRoomReservation
+!insert (booking5, roomReservation5_2) into BookingRoomReservation
+
+!insert (booking5, bill9) into BookingBill
+!insert (booking5, bill10) into BookingBill
+!insert (booking5, bill11) into BookingBill
+
+!insert (roomReservation5_1, extra5_1) into RoomReservationExtras
+!insert (roomReservation5_1, extra5_2) into RoomReservationExtras
+
+!insert (roomReservation5_2, extra5_3) into RoomReservationExtras
+
+!insert (bill9, roomReservation5_1) into BillRoomReservation
+!insert (bill10, roomReservation5_2) into BillRoomReservation
+!insert (bill11, roomReservation5_1) into BillRoomReservation
+
+!new Room('room5_302')
+!room5_302.numBeds := 2
+!room5_302.pricePerNight := 150.00
+!room5_302.occupied := true
+!room5_302.blocked := false
+!room5_302.roomNumber := 302
+
+!insert (roomReservation5_1, room5_301) into RoomReservationRoom
+!insert (roomReservation5_2, room5_302) into RoomReservationRoom

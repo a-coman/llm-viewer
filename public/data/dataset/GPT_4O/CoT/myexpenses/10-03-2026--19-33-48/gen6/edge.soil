@@ -1,0 +1,75 @@
+!new Expense('artExhibitionLaunchExpense')
+!artExhibitionLaunchExpense.amount := 33400.00
+!artExhibitionLaunchExpense.startDate := Date('2023-04-01')
+!artExhibitionLaunchExpense.endDate := Date('2023-04-05')
+
+!new Bill('artworkTransportationBill')
+!artworkTransportationBill.amount := 12000.00
+!artworkTransportationBill.category := 'Artwork Transportation'
+!artworkTransportationBill.date := Date('2023-04-01')
+!artworkTransportationBill.paymentMethod := #CHECK
+!artworkTransportationBill.status := #VERIFIED
+
+!new Bill('eventMarketingBill')
+!eventMarketingBill.amount := 8500.00
+!eventMarketingBill.category := 'Event Marketing'
+!eventMarketingBill.date := Date('2023-04-02')
+!eventMarketingBill.paymentMethod := #CREDIT_CARD
+!eventMarketingBill.status := #REFUNDED
+
+!new Bill('venueDecorationBill')
+!venueDecorationBill.amount := 9000.00
+!venueDecorationBill.category := 'Venue Decoration'
+!venueDecorationBill.date := Date('2023-04-03')
+!venueDecorationBill.paymentMethod := #CASH
+!venueDecorationBill.status := #PENDING
+
+!new Bill('artistAccommodationBill')
+!artistAccommodationBill.amount := 3900.00
+!artistAccommodationBill.category := 'Artist Accommodation'
+!artistAccommodationBill.date := Date('2023-04-04')
+!artistAccommodationBill.paymentMethod := #CREDIT_CARD
+!artistAccommodationBill.status := #REFUSED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (artworkTransportationBill, currencyGBP) into BillCurrency
+!insert (eventMarketingBill, currencyEUR) into BillCurrency
+!insert (venueDecorationBill, currencyUSD) into BillCurrency
+!insert (artistAccommodationBill, currencyJPY) into BillCurrency
+
+!insert (artExhibitionLaunchExpense, artworkTransportationBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, eventMarketingBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, venueDecorationBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, artistAccommodationBill) into ExpenseContainsBills
+
+!new Comment('transportationComment')
+!transportationComment.text := 'Verified dispatch of artwork transportation remains within regional compliance.'
+
+!new Comment('marketingComment')
+!marketingComment.text := 'Marketing expenditure refunded due to premature cancellation of ad placements.'
+
+!new Comment('decorationComment')
+!decorationComment.text := 'Pending verification of venue decor aligns with artistic director''s vision.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Artist accommodation payment refused due to invoice inconsistencies requiring further review.'
+
+!insert (artExhibitionLaunchExpense, transportationComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, marketingComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, decorationComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, accommodationComment) into ExpenseComment

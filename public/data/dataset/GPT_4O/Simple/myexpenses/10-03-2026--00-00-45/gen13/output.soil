@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency13')
+!currency13.name := 'Malaysian Ringgit'
+!currency13.abbreviation := 'MYR'
+
+-- Creating instances of Bills
+!new Bill('bill31')
+!bill31.amount := 1200.00
+!bill31.category := 'Professional Fees'
+!bill31.date := Date('2023-05-01')
+!bill31.paymentMethod := #CREDIT_CARD
+!bill31.status := #VALIDATED
+!insert (bill31, currency13) into BillCurrency
+
+!new Bill('bill32')
+!bill32.amount := 500.00
+!bill32.category := 'Customer Support'
+!bill32.date := Date('2023-05-04')
+!bill32.paymentMethod := #CASH
+!bill32.status := #REFUNDED
+!insert (bill32, currency13) into BillCurrency
+
+!new Bill('bill33')
+!bill33.amount := 300.00
+!bill33.category := 'Technical Resources'
+!bill33.date := Date('2023-05-06')
+!bill33.paymentMethod := #CHECK
+!bill33.status := #PENDING
+!insert (bill33, currency13) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment16')
+!comment16.text := 'Monthly expenses for operational activities.'
+
+-- Creating instance of Expense
+!new Expense('expense13')
+!expense13.amount := 2000.00
+!expense13.startDate := Date('2023-05-01')
+!expense13.endDate := Date('2023-05-10')
+!insert (expense13, bill31) into ExpenseContainsBills
+!insert (expense13, bill32) into ExpenseContainsBills
+!insert (expense13, bill33) into ExpenseContainsBills
+!insert (expense13, comment16) into ExpenseComment

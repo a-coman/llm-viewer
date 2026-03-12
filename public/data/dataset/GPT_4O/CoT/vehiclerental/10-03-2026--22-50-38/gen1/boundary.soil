@@ -1,0 +1,39 @@
+!new RentalOffice('officeBoundaryStateRentals')
+!officeBoundaryStateRentals.name := 'Boundary State Rentals'
+!officeBoundaryStateRentals.number := 1
+!officeBoundaryStateRentals.address := '123 Lone Star Road, Austin, TX'
+
+!new Truck('truckBoundaryCase')
+!truckBoundaryCase.id := 1
+!truckBoundaryCase.registrationState := #TX
+!truckBoundaryCase.licensePlateNumber := 'TX-0001-EDGE'
+!truckBoundaryCase.vehicleTypeCode := #TRUCK
+!truckBoundaryCase.registrationLastMaintenanceDate := Date('2024-01-01')
+!truckBoundaryCase.expirationDate := Date('2025-01-01')
+!truckBoundaryCase.odometerReading := 0
+!truckBoundaryCase.gasTankCapacity := 0.0
+!truckBoundaryCase.workingRadio := false
+!truckBoundaryCase.mileage := 0
+
+!new Individual('individualJohnNull')
+!individualJohnNull.name := 'John Null'
+!individualJohnNull.address := '456 Empty Lane, Nowhere, NY'
+!individualJohnNull.poorRisk := true
+!individualJohnNull.homePhone := '000-000-0000'
+!individualJohnNull.driverLicenseState := #NY
+!individualJohnNull.driverLicenseNumber := 1000000000
+!individualJohnNull.driverLicenseExpirationDate := Date('2023-10-01')
+
+!new RentalAgreement('rentalAgreementBoundaryCase')
+!rentalAgreementBoundaryCase.number := 1
+!rentalAgreementBoundaryCase.rentalDate := Date('2024-12-31')
+!rentalAgreementBoundaryCase.anticipatedDuration := 0
+!rentalAgreementBoundaryCase.depositPaid := 0.0
+!rentalAgreementBoundaryCase.quotedDailyRate := 0.0
+!rentalAgreementBoundaryCase.quotedRatePerMile := 0.0
+
+!insert (officeBoundaryStateRentals, truckBoundaryCase) into RentalOfficeVehicle
+!insert (officeBoundaryStateRentals, rentalAgreementBoundaryCase) into RentalOfficeRentalAgreementOrigin
+!insert (officeBoundaryStateRentals, rentalAgreementBoundaryCase) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementBoundaryCase, truckBoundaryCase) into RentalAgreementVehicle
+!insert (rentalAgreementBoundaryCase, individualJohnNull) into RentalAgreementCustomer

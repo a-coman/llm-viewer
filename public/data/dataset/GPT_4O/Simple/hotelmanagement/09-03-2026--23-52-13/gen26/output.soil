@@ -1,0 +1,41 @@
+!new Booking('booking27')
+!booking27.startDate := '2026-01-15'
+!booking27.endDate := '2026-01-20'
+!booking27.canceled := false
+!booking27.bookingId := 127
+!booking27.confirmed := true
+
+!new Bill('bill27')
+!bill27.price := 390.00
+!bill27.billId := 5027
+
+!new Customer('customer27')
+!customer27.firstName := 'Bella'
+!customer27.lastName := 'Carter'
+
+!new RoomReservation('reservation27')
+!reservation27.checkInDate := '2026-01-15'
+!reservation27.checkOutDate := '2026-01-20'
+
+!new Room('room2401')
+!room2401.numBeds := 1
+!room2401.pricePerNight := 95.00
+!room2401.occupied := true
+!room2401.blocked := false
+!room2401.roomNumber := 2401
+
+!new RoomExtra('extra35')
+!extra35.price := 25.00
+!extra35.description := 'Exclusive Wine Tasting'
+
+!new RoomExtra('extra36')
+!extra36.price := 10.00
+!extra36.description := 'Local Art Tour'
+
+!insert (booking27, bill27) into BookingBill
+!insert (booking27, customer27) into BookingCustomer
+!insert (booking27, reservation27) into BookingRoomReservation
+!insert (reservation27, extra35) into RoomReservationExtras
+!insert (reservation27, extra36) into RoomReservationExtras
+!insert (reservation27, room2401) into RoomReservationRoom
+!insert (bill27, reservation27) into BillRoomReservation

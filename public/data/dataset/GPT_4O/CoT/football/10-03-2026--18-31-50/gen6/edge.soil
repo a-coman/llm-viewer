@@ -1,0 +1,171 @@
+!new Club('clubAR')
+!clubAR.name := 'Eruption FC'
+!clubAR.homeGround := 'Lava Flow Stadium'
+!clubAR.chairman := 'Mr. Ignatius Molten'
+
+!new Club('clubAS')
+!clubAS.name := 'Magma Mavericks'
+!clubAS.homeGround := 'Volcanic Rim Arena'
+!clubAS.chairman := 'Ms. Petra Basalt'
+
+!new Team('teamAR')
+!teamAR.name := 'Lava Leapers'
+
+!new Team('teamAS')
+!teamAS.name := 'Ashen Warriors'
+
+!insert (clubAR, teamAR) into ClubTeam
+!insert (clubAS, teamAS) into ClubTeam
+
+!new Player('player50')
+!player50.name := 'Molten Dash'
+!player50.age := 23
+!player50.bestFoot := #RIGHT
+!player50.phoneNumber := '+5432167890'
+
+!new Player('player51')
+!player51.name := 'Obsidian Guard'
+!player51.age := 31
+!player51.bestFoot := #LEFT
+!player51.phoneNumber := '+6789012345'
+
+!insert (teamAR, player50) into TeamPlayer
+!insert (teamAS, player51) into TeamPlayer
+
+!new Position('position104')
+!position104.positionName := #FORWARD
+
+!new Position('position106')
+!position106.positionName := #DEFENDER
+
+!new Position('position100')
+!position100.positionName := #MIDFIELDER
+
+!insert (player50, position104) into PlayerPositions
+!insert (player51, position106) into PlayerPositions
+!insert (player51, position100) into PlayerPositions
+
+!new Competition('competition19')
+!competition19.name := 'Volcanic Shield Series'
+!competition19.type := 'Tournament'
+
+!new Match('match25')
+!match25.date := '21/02/2023'
+!match25.homeAway := false
+
+!insert (teamAS, match25) into LocalMatch
+!insert (teamAR, match25) into VisitorMatch
+!insert (competition19, match25) into CompetitionMatch
+
+!new MatchReport('matchReport25')
+!matchReport25.duration := 45
+!matchReport25.scoreVisitor := 1
+!matchReport25.scoreLocal := 2
+
+!insert (match25, matchReport25) into MatchMatchReport
+
+!new MatchEvent('matchEvent68')
+!matchEvent68.eventType := #GOAL
+!matchEvent68.time := 10
+
+!new MatchEvent('matchEvent69')
+!matchEvent69.eventType := #GOAL
+!matchEvent69.time := 24
+
+!new MatchEvent('matchEvent70')
+!matchEvent70.eventType := #GOAL
+!matchEvent70.time := 38
+
+!new MatchEvent('matchEvent71')
+!matchEvent71.eventType := #FOUL
+!matchEvent71.time := 40
+
+!insert (match25, matchEvent68) into MatchMatchEvent
+!insert (match25, matchEvent69) into MatchMatchEvent
+!insert (match25, matchEvent70) into MatchMatchEvent
+!insert (match25, matchEvent71) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer45')
+!matchPlayer45.booked := false
+!matchPlayer45.goals := 1
+!matchPlayer45.rating := 7
+
+!new MatchPlayer('matchPlayer46')
+!matchPlayer46.booked := false
+!matchPlayer46.goals := 1
+!matchPlayer46.rating := 8
+
+!insert (player50, matchPlayer45) into PlayerMatch
+!insert (player51, matchPlayer46) into PlayerMatch
+
+!insert (match25, matchPlayer45) into MatchMatchPlayer
+!insert (match25, matchPlayer46) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position107')
+!position107.positionName := #FORWARD
+!position107.number := 9
+
+!new MatchPlayerPosition('position108')
+!position108.positionName := #DEFENDER
+!position108.number := 3
+
+!insert (matchPlayer45, position107) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer46, position108) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession38')
+!trainingSession38.date := '18/02/2023'
+!trainingSession38.location := 'Lava Flow Stadium'
+!trainingSession38.purpose := 'Adapting to Volcanic Ash Air Quality'
+
+!insert (teamAR, trainingSession38) into TeamTraining
+
+!new TrainingSession('trainingSession39')
+!trainingSession39.date := '19/02/2023'
+!trainingSession39.location := 'Volcanic Rim Arena'
+!trainingSession39.purpose := 'Defensive Techniques in Low Visibility'
+
+!insert (teamAS, trainingSession39) into TeamTraining
+
+!new TrainingNotes('trainingNote38')
+!trainingNote38.note := 'Enhanced respiratory techniques improved coping with reduced air quality.'
+!trainingNote38.date := '18/02/2023'
+
+!new TrainingNotes('trainingNote39')
+!trainingNote39.note := 'Focus on handling unpredictable visibility and staying composed.'
+!trainingNote39.date := '19/02/2023'
+
+!insert (trainingSession38, trainingNote38) into TrainingTrainingNotes
+!insert (trainingSession39, trainingNote39) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail15')
+!trainingFail15.reason := 'Health precautions due to air conditions'
+
+!insert (trainingFail15, player51) into FailedPlayer
+!insert (trainingSession38, trainingFail15) into TrainingFailded
+
+!new TrainingObjective('trainingObjective37')
+!trainingObjective37.areaToImprove := 'Visibility and Handling Volcanic Particles'
+!trainingObjective37.startDate := '16/02/2023'
+!trainingObjective37.endDate := '20/02/2023'
+!trainingObjective37.success := false
+
+!new TrainingObjective('trainingObjective38')
+!trainingObjective38.areaToImprove := 'Defensive Coverage in Harsh Conditions'
+!trainingObjective38.startDate := '16/02/2023'
+!trainingObjective38.endDate := '20/02/2023'
+!trainingObjective38.success := true
+
+!insert (trainingObjective37, player50) into TrainingObjectivePlayer
+!insert (trainingObjective38, player51) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote20')
+!playerNote20.note := 'Speed and agility reduced under ash fallout.'
+!playerNote20.date := '19/02/2023'
+
+!insert (player50, playerNote20) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote21')
+!playerNote21.note := 'Strong defensive skills even in low visibility.'
+!playerNote21.date := '17/02/2023'
+
+!insert (player51, playerNote21) into PlayerPlayerNotes

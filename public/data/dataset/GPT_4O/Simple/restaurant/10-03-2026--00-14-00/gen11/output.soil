@@ -1,0 +1,114 @@
+!new Restaurant('restaurant11')
+!restaurant11.name := 'Nebula Grill'
+
+!new Owner('owner22')
+!owner22.name := 'Eleanor Parker'
+!owner22.percentageShares := 30
+!insert (restaurant11, owner22) into RestaurantOwner
+
+!new Owner('owner23')
+!owner23.name := 'Henry Walker'
+!owner23.percentageShares := 70
+!insert (restaurant11, owner23) into RestaurantOwner
+
+!new Table('table30')
+!table30.number := 30
+!table30.description := 'Galaxy Corner'
+!table30.capacity := 10
+
+!new Table('table31')
+!table31.number := 31
+!table31.description := 'Asteroid Deck'
+!table31.capacity := 20
+
+!new RegularCustomer('customer12')
+!customer12.name := 'Ricardo Diaz'
+!customer12.prefferedLanguage := #Spanish
+
+!new Waiter('waiter13')
+!waiter13.name := 'Lara Croft'
+!waiter13.dateOfBirth := Date('1992-08-22')
+!waiter13.phoneNumber := '555-8787'
+!waiter13.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter11')
+!headwaiter11.name := 'Nathan Drake'
+!headwaiter11.dateOfBirth := Date('1983-09-09')
+!headwaiter11.phoneNumber := '555-9999'
+
+!insert (headwaiter11, waiter13) into HeadWaiterWaiter
+
+!new Individual('reservation19')
+!reservation19.time := Time('21:15')
+!reservation19.date := Date('2024-06-15')
+!reservation19.numberPeople := 3
+!reservation19.name := 'Ricardo Diaz'
+!reservation19.phoneNumber := '555-4545'
+!reservation19.number := 19
+!reservation19.seating := #Patio
+!reservation19.smoking := #NonSmoking
+!insert (restaurant11, reservation19) into RestaurantReservation
+!insert (reservation19, customer12) into ReservationCustomer
+!insert (reservation19, waiter13) into ReservationWaiter
+!insert (reservation19, table30) into ReservationTable
+
+!new Banquet('reservation20')
+!reservation20.time := Time('19:30')
+!reservation20.date := Date('2024-07-20')
+!reservation20.numberPeople := 35
+!reservation20.name := 'Interstellar Symposium'
+!reservation20.phoneNumber := '555-9292'
+!reservation20.number := 20
+!reservation20.groupName := 'Space Enthusiasts'
+!reservation20.paymentMethod := #CreditCard
+!reservation20.busService := true
+!insert (restaurant11, reservation20) into RestaurantReservation
+!insert (reservation20, table31) into ReservationTable
+
+!new Table('tableExtra5')
+!tableExtra5.number := 32
+!tableExtra5.description := 'Lunar Lounge'
+!tableExtra5.capacity := 15
+!insert (reservation20, tableExtra5) into ReservationTable
+!insert (reservation20, waiter13) into ReservationWaiter
+
+!new BusDriver('busdriver8')
+!busdriver8.name := 'Sam Fisher'
+!busdriver8.dateOfBirth := Date('1970-02-12')
+!busdriver8.phoneNumber := '555-2121'
+!busdriver8.driverLicenseNr := 'DL456789'
+!insert (reservation20, busdriver8) into BanquetBusDriver
+
+!new ItemOrder('itemOrder11')
+!itemOrder11.time := Time('21:45')
+!insert (reservation19, itemOrder11) into ReservationItemOrdered
+
+!new MenuItem('menuItem11')
+!menuItem11.description := 'Galactic Gazpacho'
+!menuItem11.prepTime := 18.0
+!menuItem11.classification := #Apetizer
+!insert (itemOrder11, menuItem11) into ItemOrderMenuItem
+
+!new FoodItem('foodItem11')
+!foodItem11.number := 111
+!foodItem11.description := 'Organic Tomatoes'
+!foodItem11.purchaseFlag := true
+!foodItem11.unit := #Pound
+!insert (menuItem11, foodItem11) into MenuItemFoodItem
+
+!new Allergen('allergen11')
+!allergen11.type := #Gluten
+!insert (foodItem11, allergen11) into FoodItemAllergen
+
+!new Cook('cook11')
+!cook11.name := 'Laura Miles'
+!cook11.dateOfBirth := Date('1994-03-04')
+!cook11.phoneNumber := '555-6767'
+!cook11.yearsOfExperience := 3
+
+!new Chef('chef11')
+!chef11.name := 'Gordon Brown'
+!chef11.dateOfBirth := Date('1987-05-10')
+!chef11.phoneNumber := '555-3434'
+!insert (menuItem11, chef11) into MenuItemChef
+!insert (chef11, cook11) into ChefCook

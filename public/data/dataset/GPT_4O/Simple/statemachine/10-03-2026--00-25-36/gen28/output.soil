@@ -1,0 +1,93 @@
+!new StateMachine('stateMachine29')
+!stateMachine29.name := 'restaurantOrderProcess'
+
+!new State('state110')
+!state110.name := 'menuBrowsing'
+
+!new State('state111')
+!state111.name := 'orderPlaced'
+
+!new State('state112')
+!state112.name := 'orderPreparation'
+
+!new State('state113')
+!state113.name := 'orderServed'
+
+!new State('state114')
+!state114.name := 'billPayment'
+
+!new Transition('transition111')
+!transition111.name := 'placeOrder'
+
+!new Transition('transition112')
+!transition112.name := 'startPreparation'
+
+!new Transition('transition113')
+!transition113.name := 'serveOrder'
+
+!new Transition('transition114')
+!transition114.name := 'requestBill'
+
+!new Transition('transition115')
+!transition115.name := 'makePayment'
+
+!new Transition('transition116')
+!transition116.name := 'returnToMenu'
+
+!new TimeEvent('timeEvent111')
+!timeEvent111.time := 1
+
+!new TimeEvent('timeEvent112')
+!timeEvent112.time := 10
+
+!new TimeEvent('timeEvent113')
+!timeEvent113.time := 1
+
+!new TimeEvent('timeEvent114')
+!timeEvent114.time := 2
+
+!new TimeEvent('timeEvent115')
+!timeEvent115.time := 1
+
+!new TimeEvent('timeEvent116')
+!timeEvent116.time := 1
+
+!insert (stateMachine29, state110) into StateMachineContainsStates
+!insert (stateMachine29, state111) into StateMachineContainsStates
+!insert (stateMachine29, state112) into StateMachineContainsStates
+!insert (stateMachine29, state113) into StateMachineContainsStates
+!insert (stateMachine29, state114) into StateMachineContainsStates
+
+!insert (stateMachine29, transition111) into StateMachineContainsTransitions
+!insert (stateMachine29, transition112) into StateMachineContainsTransitions
+!insert (stateMachine29, transition113) into StateMachineContainsTransitions
+!insert (stateMachine29, transition114) into StateMachineContainsTransitions
+!insert (stateMachine29, transition115) into StateMachineContainsTransitions
+!insert (stateMachine29, transition116) into StateMachineContainsTransitions
+
+!insert (transition111, timeEvent111) into TransitionContainsEvents
+!insert (transition112, timeEvent112) into TransitionContainsEvents
+!insert (transition113, timeEvent113) into TransitionContainsEvents
+!insert (transition114, timeEvent114) into TransitionContainsEvents
+!insert (transition115, timeEvent115) into TransitionContainsEvents
+!insert (transition116, timeEvent116) into TransitionContainsEvents
+
+!insert (state110, transition111) into StateTransition
+!insert (transition111, state111) into TransitionState
+
+!insert (state111, transition112) into StateTransition
+!insert (transition112, state112) into TransitionState
+
+!insert (state112, transition113) into StateTransition
+!insert (transition113, state113) into TransitionState
+
+!insert (state113, transition114) into StateTransition
+!insert (transition114, state114) into TransitionState
+
+!insert (state114, transition115) into StateTransition
+!insert (transition115, state110) into TransitionState
+
+!insert (state114, transition116) into StateTransition
+!insert (transition116, state110) into TransitionState
+
+!insert (stateMachine29, state110) into StateMachineStartsStates

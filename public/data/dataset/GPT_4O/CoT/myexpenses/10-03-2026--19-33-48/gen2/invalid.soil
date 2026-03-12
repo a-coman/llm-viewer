@@ -1,0 +1,50 @@
+!new Expense('techConferenceExpense')
+!techConferenceExpense.amount := 2500.00
+!techConferenceExpense.startDate := Date('2024-08-10')
+!techConferenceExpense.endDate := Date('2024-08-15')
+
+!new Bill('flightTicketBill')
+!flightTicketBill.amount := 900.00
+!flightTicketBill.category := 'Round Trip Flight Ticket'
+!flightTicketBill.date := Date('2024-08-05')
+!flightTicketBill.paymentMethod := #CREDIT_CARD
+!flightTicketBill.status := #VERIFIED
+
+!new Bill('hotelStayBill')
+!hotelStayBill.amount := 500.00
+!hotelStayBill.category := 'Hotel Accommodation'
+!hotelStayBill.date := Date('2024-08-12')
+!hotelStayBill.paymentMethod := #CHECK
+!hotelStayBill.status := #PENDING
+
+!new Bill('conferenceFeeBill')
+!conferenceFeeBill.amount := 1100.00
+!conferenceFeeBill.category := 'Conference Registration Fee'
+!conferenceFeeBill.date := Date('2024-07-15')
+!conferenceFeeBill.paymentMethod := #CASH
+!conferenceFeeBill.status := #VALIDATED
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (flightTicketBill, currencyUSD) into BillCurrency
+!insert (hotelStayBill, currencyJPY) into BillCurrency
+!insert (conferenceFeeBill, currencyJPY) into BillCurrency
+
+!insert (techConferenceExpense, flightTicketBill) into ExpenseContainsBills
+!insert (techConferenceExpense, hotelStayBill) into ExpenseContainsBills
+!insert (techConferenceExpense, conferenceFeeBill) into ExpenseContainsBills
+
+!new Comment('networkingAdvice')
+!networkingAdvice.text := 'Remember to exchange business cards after each session.'
+
+!new Comment('budgetNote')
+!budgetNote.text := 'Collaborate with fellow attendees to split accommodation costs.'
+
+!insert (techConferenceExpense, networkingAdvice) into ExpenseComment
+!insert (techConferenceExpense, budgetNote) into ExpenseComment

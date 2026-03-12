@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine11')
+!stateMachine11.name := 'libraryManagementSystem'
+
+!new State('state29')
+!state29.name := 'booksAvailable'
+
+!new State('state30')
+!state30.name := 'bookCheckedOut'
+
+!new State('state31')
+!state31.name := 'bookReturned'
+
+!new Transition('transition30')
+!transition30.name := 'checkOutBook'
+
+!new Transition('transition31')
+!transition31.name := 'returnBook'
+
+!new Transition('transition32')
+!transition32.name := 'reshelveBook'
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 1
+
+!new TimeEvent('timeEvent31')
+!timeEvent31.time := 2
+
+!new TimeEvent('timeEvent32')
+!timeEvent32.time := 1
+
+!insert (stateMachine11, state29) into StateMachineContainsStates
+!insert (stateMachine11, state30) into StateMachineContainsStates
+!insert (stateMachine11, state31) into StateMachineContainsStates
+
+!insert (stateMachine11, transition30) into StateMachineContainsTransitions
+!insert (stateMachine11, transition31) into StateMachineContainsTransitions
+!insert (stateMachine11, transition32) into StateMachineContainsTransitions
+
+!insert (transition30, timeEvent30) into TransitionContainsEvents
+!insert (transition31, timeEvent31) into TransitionContainsEvents
+!insert (transition32, timeEvent32) into TransitionContainsEvents
+
+!insert (state29, transition30) into StateTransition
+!insert (transition30, state30) into TransitionState
+
+!insert (state30, transition31) into StateTransition
+!insert (transition31, state31) into TransitionState
+
+!insert (state31, transition32) into StateTransition
+!insert (transition32, state29) into TransitionState
+
+!insert (stateMachine11, state29) into StateMachineStartsStates

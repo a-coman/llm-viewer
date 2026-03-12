@@ -1,0 +1,44 @@
+!new Bank('bank3')
+!bank3.country := 'Japan'
+!bank3.name := 'Mizuho Bank'
+!bank3.bic := 'MHCBJPJT'
+
+!new Bank('bank4')
+!bank4.country := 'Canada'
+!bank4.name := 'Royal Bank of Canada'
+!bank4.bic := 'ROYCAT2V'
+
+!new Account('account5')
+!account5.iban := 'JP55012345678912345678'
+!account5.balance := 10000
+
+!new Account('account6')
+!account6.iban := 'CA58098765432109876543'
+!account6.balance := 4200
+
+!new Person('person5')
+!person5.firstName := 'Hiroshi'
+!person5.lastName := 'Yamamoto'
+!person5.age := 45
+
+!new Person('person6')
+!person6.firstName := 'Lucy'
+!person6.lastName := 'Wang'
+!person6.age := 32
+
+!new Person('person7')
+!person7.firstName := 'David'
+!person7.lastName := 'Marx'
+!person7.age := 29
+
+!insert (person5, account5) into Ownership
+!insert (person6, account6) into Ownership
+!insert (person7, account6) into Ownership
+
+!insert (person5, account5) into Use
+!insert (person6, account5) into Use
+!insert (person6, account6) into Use
+!insert (person7, account6) into Use
+
+!insert (bank3, account5) into AccountOfBanks
+!insert (bank4, account6) into AccountOfBanks

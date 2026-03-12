@@ -1,0 +1,36 @@
+!new Bank('alpenBank')
+!alpenBank.country := 'Switzerland'
+!alpenBank.name := 'AlpenBank'
+!alpenBank.bic := 'ALPNCHZZ001'
+
+!new Account('account16')
+!account16.iban := 'CH93ALPN0000001234567890'
+!account16.balance := 500000
+
+!new Person('lenaMuller')
+!lenaMuller.firstName := 'Lena'
+!lenaMuller.lastName := 'Müller'
+!lenaMuller.age := 38
+
+!new Person('hansZimmer')
+!hansZimmer.firstName := 'Hans'
+!hansZimmer.lastName := 'Zimmer'
+!hansZimmer.age := 45
+
+!new Person('franzMeier')
+!franzMeier.firstName := 'Franz'
+!franzMeier.lastName := 'Meier'
+!franzMeier.age := 52
+
+!new Person('klaraSchneider')
+!klaraSchneider.firstName := 'Klara'
+!klaraSchneider.lastName := 'Schneider'
+!klaraSchneider.age := 29
+
+!insert (alpenBank, account16) into AccountOfBanks
+
+!insert (lenaMuller, account16) into Ownership
+!insert (hansZimmer, account16) into Ownership
+
+!insert (franzMeier, account16) into Use
+!insert (klaraSchneider, account16) into Use

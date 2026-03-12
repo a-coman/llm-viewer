@@ -1,0 +1,36 @@
+!new Booking('booking22')
+!booking22.startDate := '2025-08-05'
+!booking22.endDate := '2025-08-10'
+!booking22.canceled := false
+!booking22.bookingId := 122
+!booking22.confirmed := true
+
+!new Bill('bill22')
+!bill22.price := 520.00
+!bill22.billId := 5022
+
+!new Customer('customer22')
+!customer22.firstName := 'Wendy'
+!customer22.lastName := 'Wong'
+
+!new RoomReservation('reservation22')
+!reservation22.checkInDate := '2025-08-05'
+!reservation22.checkOutDate := '2025-08-10'
+
+!new Room('room1901')
+!room1901.numBeds := 3
+!room1901.pricePerNight := 130.00
+!room1901.occupied := true
+!room1901.blocked := false
+!room1901.roomNumber := 1901
+
+!new RoomExtra('extra28')
+!extra28.price := 20.00
+!extra28.description := 'Childcare Service'
+
+!insert (booking22, bill22) into BookingBill
+!insert (booking22, customer22) into BookingCustomer
+!insert (booking22, reservation22) into BookingRoomReservation
+!insert (reservation22, extra28) into RoomReservationExtras
+!insert (reservation22, room1901) into RoomReservationRoom
+!insert (bill22, reservation22) into BillRoomReservation

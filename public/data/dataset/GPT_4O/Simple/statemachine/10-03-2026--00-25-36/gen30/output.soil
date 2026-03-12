@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine31')
+!stateMachine31.name := 'smartIrrigationSystem'
+
+!new State('state120')
+!state120.name := 'idle'
+
+!new State('state121')
+!state121.name := 'soilMoistureCheck'
+
+!new State('state122')
+!state122.name := 'irrigationActive'
+
+!new State('state123')
+!state123.name := 'irrigationPaused'
+
+!new State('state124')
+!state124.name := 'irrigationComplete'
+
+!new Transition('transition122')
+!transition122.name := 'checkSoilMoisture'
+
+!new Transition('transition123')
+!transition123.name := 'startIrrigation'
+
+!new Transition('transition124')
+!transition124.name := 'pauseIrrigation'
+
+!new Transition('transition125')
+!transition125.name := 'resumeIrrigation'
+
+!new Transition('transition126')
+!transition126.name := 'stopIrrigation'
+
+!new TimeEvent('timeEvent122')
+!timeEvent122.time := 3
+
+!new TimeEvent('timeEvent123')
+!timeEvent123.time := 5
+
+!new TimeEvent('timeEvent124')
+!timeEvent124.time := 2
+
+!new TimeEvent('timeEvent125')
+!timeEvent125.time := 2
+
+!new TimeEvent('timeEvent126')
+!timeEvent126.time := 1
+
+!insert (stateMachine31, state120) into StateMachineContainsStates
+!insert (stateMachine31, state121) into StateMachineContainsStates
+!insert (stateMachine31, state122) into StateMachineContainsStates
+!insert (stateMachine31, state123) into StateMachineContainsStates
+!insert (stateMachine31, state124) into StateMachineContainsStates
+
+!insert (stateMachine31, transition122) into StateMachineContainsTransitions
+!insert (stateMachine31, transition123) into StateMachineContainsTransitions
+!insert (stateMachine31, transition124) into StateMachineContainsTransitions
+!insert (stateMachine31, transition125) into StateMachineContainsTransitions
+!insert (stateMachine31, transition126) into StateMachineContainsTransitions
+
+!insert (transition122, timeEvent122) into TransitionContainsEvents
+!insert (transition123, timeEvent123) into TransitionContainsEvents
+!insert (transition124, timeEvent124) into TransitionContainsEvents
+!insert (transition125, timeEvent125) into TransitionContainsEvents
+!insert (transition126, timeEvent126) into TransitionContainsEvents
+
+!insert (state120, transition122) into StateTransition
+!insert (transition122, state121) into TransitionState
+
+!insert (state121, transition123) into StateTransition
+!insert (transition123, state122) into TransitionState
+
+!insert (state122, transition124) into StateTransition
+!insert (transition124, state123) into TransitionState
+
+!insert (state123, transition125) into StateTransition
+!insert (transition125, state122) into TransitionState
+
+!insert (state122, transition126) into StateTransition
+!insert (transition126, state124) into TransitionState
+
+!insert (stateMachine31, state120) into StateMachineStartsStates

@@ -1,0 +1,50 @@
+!new Bank('bank31')
+!bank31.country := 'Spain'
+!bank31.name := 'Banco Santander'
+!bank31.bic := 'BSCHESMM'
+
+!new Bank('bank32')
+!bank32.country := 'Philippines'
+!bank32.name := 'BDO Unibank'
+!bank32.bic := 'BNORPHMM'
+
+!new Account('account46')
+!account46.iban := 'ES9120000418450200051332'
+!account46.balance := 7200
+
+!new Account('account47')
+!account47.iban := 'PH230000012345678901258'
+!account47.balance := 5300
+
+!new Account('account48')
+!account48.iban := 'ES9120000418450200051333'
+!account48.balance := 1200
+
+!new Person('person46')
+!person46.firstName := 'Juan'
+!person46.lastName := 'Martinez'
+!person46.age := 34
+
+!new Person('person47')
+!person47.firstName := 'Angelo'
+!person47.lastName := 'Santos'
+!person47.age := 50
+
+!new Person('person48')
+!person48.firstName := 'Laura'
+!person48.lastName := 'Gomez'
+!person48.age := 28
+
+!insert (person46, account46) into Ownership
+!insert (person47, account47) into Ownership
+!insert (person48, account48) into Ownership
+!insert (person46, account48) into Ownership
+
+!insert (person46, account46) into Use
+!insert (person47, account47) into Use
+!insert (person48, account48) into Use
+!insert (person47, account46) into Use
+
+!insert (bank31, account46) into AccountOfBanks
+!insert (bank32, account47) into AccountOfBanks
+!insert (bank31, account48) into AccountOfBanks

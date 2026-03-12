@@ -1,0 +1,63 @@
+!new StateMachine('homeHeatingSystem')
+!homeHeatingSystem.name := 'homeHeatingSystem'
+
+!new State('comfyMode')
+!comfyMode.name := 'comfyMode'
+
+!new State('economyMode')
+!economyMode.name := 'economyMode'
+
+!new State('offMode')
+!offMode.name := 'offMode'
+
+!new Transition('comfyToEconomy')
+!comfyToEconomy.name := 'comfyToEconomy'
+
+!new Transition('economyToComfy')
+!economyToComfy.name := 'economyToComfy'
+
+!new Transition('comfyToOff')
+!comfyToOff.name := 'comfyToOff'
+
+!new Transition('offToComfy')
+!offToComfy.name := 'offToComfy'
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent120')
+!timeEvent120.time := 120
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!insert (homeHeatingSystem, comfyMode) into StateMachineContainsStates
+!insert (homeHeatingSystem, economyMode) into StateMachineContainsStates
+!insert (homeHeatingSystem, offMode) into StateMachineContainsStates
+
+!insert (homeHeatingSystem, comfyToEconomy) into StateMachineContainsTransitions
+!insert (homeHeatingSystem, economyToComfy) into StateMachineContainsTransitions
+!insert (homeHeatingSystem, comfyToOff) into StateMachineContainsTransitions
+!insert (homeHeatingSystem, offToComfy) into StateMachineContainsTransitions
+
+!insert (comfyToEconomy, timeEvent30) into TransitionContainsEvents
+!insert (economyToComfy, timeEvent5) into TransitionContainsEvents
+!insert (comfyToOff, timeEvent120) into TransitionContainsEvents
+!insert (offToComfy, timeEvent10) into TransitionContainsEvents
+
+!insert (comfyMode, comfyToEconomy) into StateTransition
+!insert (comfyToEconomy, economyMode) into TransitionState
+
+!insert (economyMode, economyToComfy) into StateTransition
+!insert (economyToComfy, comfyMode) into TransitionState
+
+!insert (comfyMode, comfyToOff) into StateTransition
+!insert (comfyToOff, offMode) into TransitionState
+
+!insert (offMode, offToComfy) into StateTransition
+!insert (offToComfy, comfyMode) into TransitionState
+
+!insert (homeHeatingSystem, comfyMode) into StateMachineStartsStates

@@ -1,0 +1,31 @@
+!new Client('client23')
+!client23.clientId := 300
+!client23.isSuspended := false
+
+!new Rental('rental37')
+!rental37.date := Date('2023-08-10')
+
+!new Movie('movie29')
+!movie29.title := 'The Andes Echo'
+!movie29.availableCopies := 0
+!movie29.genre := #Action
+
+!new Series('series29')
+!series29.title := 'Savannah Chronicles'
+!series29.availableCopies := 2
+!series29.episode := 5
+
+!new Actor('actor57')
+!actor57.name := 'Luis Miranda'
+
+!new Actor('actor58')
+!actor58.name := 'Gabriela Sánchez'
+
+!insert (client23, rental37) into ClientRental
+
+!insert (rental37, movie29) into RentalCassette
+!insert (rental37, series29) into RentalCassette
+
+!insert (movie29, actor57) into CassetteActor
+!insert (series29, actor57) into CassetteActor
+

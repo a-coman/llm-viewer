@@ -1,0 +1,243 @@
+!new Expense('weddingCelebrationExpense')
+!weddingCelebrationExpense.amount := 15000.00
+!weddingCelebrationExpense.startDate := Date('2023-06-15')
+!weddingCelebrationExpense.endDate := Date('2023-06-17')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 8000.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2023-05-10')
+!venueRentalBill.paymentMethod := #CREDIT_CARD
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 3000.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-06-16')
+!cateringServicesBill.paymentMethod := #CREDIT_CARD
+!cateringServicesBill.status := #VERIFIED
+
+!new Bill('decorationsAndFlowersBill')
+!decorationsAndFlowersBill.amount := 2000.00
+!decorationsAndFlowersBill.category := 'Decorations and Flowers'
+!decorationsAndFlowersBill.date := Date('2023-05-20')
+!decorationsAndFlowersBill.paymentMethod := #CASH
+!decorationsAndFlowersBill.status := #VERIFIED
+
+!new Bill('photographyBill')
+!photographyBill.amount := 1500.00
+!photographyBill.category := 'Photography'
+!photographyBill.date := Date('2023-06-16')
+!photographyBill.paymentMethod := #CHECK
+!photographyBill.status := #VERIFIED
+
+!new Bill('musicAndEntertainmentBill')
+!musicAndEntertainmentBill.amount := 500.00
+!musicAndEntertainmentBill.category := 'Music and Entertainment'
+!musicAndEntertainmentBill.date := Date('2023-06-17')
+!musicAndEntertainmentBill.paymentMethod := #CREDIT_CARD
+!musicAndEntertainmentBill.status := #VALIDATED
+
+!new Currency('currencyINR')
+!currencyINR.name := 'Indian Rupee'
+!currencyINR.abbreviation := 'INR'
+
+!insert (venueRentalBill, currencyINR) into BillCurrency
+!insert (cateringServicesBill, currencyINR) into BillCurrency
+!insert (decorationsAndFlowersBill, currencyINR) into BillCurrency
+!insert (photographyBill, currencyINR) into BillCurrency
+!insert (musicAndEntertainmentBill, currencyINR) into BillCurrency
+
+!insert (weddingCelebrationExpense, venueRentalBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, cateringServicesBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, decorationsAndFlowersBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, photographyBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, musicAndEntertainmentBill) into ExpenseContainsBills
+
+!new Comment('venueComment')
+!venueComment.text := 'The venue was breathtaking, complementing the beautiful outdoor setting.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering team did a wonderful job accommodating a variety of dietary needs.'
+
+!new Comment('flowersComment')
+!flowersComment.text := 'The choice of flowers was perfect, adding elegance to the decorations.'
+
+!new Comment('photographyComment')
+!photographyComment.text := 'Photography captured every magical moment beautifully.'
+
+!new Comment('musicComment')
+!musicComment.text := 'Live music kept everyone on their feet, an unforgettable celebration!'
+
+!insert (weddingCelebrationExpense, venueComment) into ExpenseComment
+!insert (weddingCelebrationExpense, cateringComment) into ExpenseComment
+!insert (weddingCelebrationExpense, flowersComment) into ExpenseComment
+!insert (weddingCelebrationExpense, photographyComment) into ExpenseComment
+!insert (weddingCelebrationExpense, musicComment) into ExpenseComment
+
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 0.00
+!boundaryCaseExpense.startDate := Date('2023-12-01')
+!boundaryCaseExpense.endDate := Date('2023-12-31')
+
+!new Bill('returnedMerchandiseBill')
+!returnedMerchandiseBill.amount := 0.00
+!returnedMerchandiseBill.category := 'Returned Merchandise'
+!returnedMerchandiseBill.date := Date('2023-12-10')
+!returnedMerchandiseBill.paymentMethod := #CASH
+!returnedMerchandiseBill.status := #REFUNDED
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (returnedMerchandiseBill, currencyCAD) into BillCurrency
+
+!insert (boundaryCaseExpense, returnedMerchandiseBill) into ExpenseContainsBills
+
+!new Comment('returnComment')
+!returnComment.text := 'All items from the purchase were returned; hence no expense incurred.'
+
+!insert (boundaryCaseExpense, returnComment) into ExpenseComment
+
+!new Expense('weddingPlanningExpense')
+!weddingPlanningExpense.amount := 17300.00
+!weddingPlanningExpense.startDate := Date('2024-03-01')
+!weddingPlanningExpense.endDate := Date('2024-04-30')
+
+!new Bill('venueAndCateringBill')
+!venueAndCateringBill.amount := 9000.00
+!venueAndCateringBill.category := 'Venue and Catering'
+!venueAndCateringBill.date := Date('2024-03-15')
+!venueAndCateringBill.paymentMethod := #CHECK
+!venueAndCateringBill.status := #VERIFIED
+
+!new Bill('photographyAndVideographyBill')
+!photographyAndVideographyBill.amount := 3000.00
+!photographyAndVideographyBill.category := 'Photography and Videography'
+!photographyAndVideographyBill.date := Date('2024-03-20')
+!photographyAndVideographyBill.paymentMethod := #CREDIT_CARD
+!photographyAndVideographyBill.status := #VERIFIED
+
+!new Bill('weddingAttireBill')
+!weddingAttireBill.amount := 2500.00
+!weddingAttireBill.category := 'Wedding Attire'
+!weddingAttireBill.date := Date('2024-03-25')
+!weddingAttireBill.paymentMethod := #CASH
+!weddingAttireBill.status := #DRAFT
+
+!new Bill('decorationAndFloralsBill')
+!decorationAndFloralsBill.amount := 1500.00
+!decorationAndFloralsBill.category := 'Decoration and Florals'
+!decorationAndFloralsBill.date := Date('2024-04-05')
+!decorationAndFloralsBill.paymentMethod := #CREDIT_CARD
+!decorationAndFloralsBill.status := #PENDING
+
+!new Bill('entertainmentAndMusicBill')
+!entertainmentAndMusicBill.amount := 1300.00
+!entertainmentAndMusicBill.category := 'Entertainment and Music'
+!entertainmentAndMusicBill.date := Date('2024-04-10')
+!entertainmentAndMusicBill.paymentMethod := #CHECK
+!entertainmentAndMusicBill.status := #REFUSED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (venueAndCateringBill, currencyEUR) into BillCurrency
+!insert (photographyAndVideographyBill, currencyEUR) into BillCurrency
+!insert (weddingAttireBill, currencyEUR) into BillCurrency
+!insert (decorationAndFloralsBill, currencyEUR) into BillCurrency
+!insert (entertainmentAndMusicBill, currencyEUR) into BillCurrency
+
+!insert (weddingPlanningExpense, venueAndCateringBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, photographyAndVideographyBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, weddingAttireBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, decorationAndFloralsBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, entertainmentAndMusicBill) into ExpenseContainsBills
+
+!new Comment('weddingComment1')
+!weddingComment1.text := 'Expenses for hosting our wedding ceremony and reception at Lakeview Resort, including all related services and arrangements.'
+
+!new Comment('weddingComment2')
+!weddingComment2.text := 'Everything from decoration to catering was exceptional, making it a day to remember for us and our guests.'
+
+!insert (weddingPlanningExpense, weddingComment1) into ExpenseComment
+!insert (weddingPlanningExpense, weddingComment2) into ExpenseComment
+
+!new Expense('artExhibitionLaunchExpense')
+!artExhibitionLaunchExpense.amount := 33400.00
+!artExhibitionLaunchExpense.startDate := Date('2023-04-01')
+!artExhibitionLaunchExpense.endDate := Date('2023-04-05')
+
+!new Bill('artworkTransportationBill')
+!artworkTransportationBill.amount := 12000.00
+!artworkTransportationBill.category := 'Artwork Transportation'
+!artworkTransportationBill.date := Date('2023-04-01')
+!artworkTransportationBill.paymentMethod := #CHECK
+!artworkTransportationBill.status := #VERIFIED
+
+!new Bill('eventMarketingBill')
+!eventMarketingBill.amount := 8500.00
+!eventMarketingBill.category := 'Event Marketing'
+!eventMarketingBill.date := Date('2023-04-02')
+!eventMarketingBill.paymentMethod := #CREDIT_CARD
+!eventMarketingBill.status := #REFUNDED
+
+!new Bill('venueDecorationBill')
+!venueDecorationBill.amount := 9000.00
+!venueDecorationBill.category := 'Venue Decoration'
+!venueDecorationBill.date := Date('2023-04-03')
+!venueDecorationBill.paymentMethod := #CASH
+!venueDecorationBill.status := #PENDING
+
+!new Bill('artistAccommodationBill')
+!artistAccommodationBill.amount := 3900.00
+!artistAccommodationBill.category := 'Artist Accommodation'
+!artistAccommodationBill.date := Date('2023-04-04')
+!artistAccommodationBill.paymentMethod := #CREDIT_CARD
+!artistAccommodationBill.status := #REFUSED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (artworkTransportationBill, currencyGBP) into BillCurrency
+!insert (eventMarketingBill, currencyEUR) into BillCurrency
+!insert (venueDecorationBill, currencyUSD) into BillCurrency
+!insert (artistAccommodationBill, currencyJPY) into BillCurrency
+
+!insert (artExhibitionLaunchExpense, artworkTransportationBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, eventMarketingBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, venueDecorationBill) into ExpenseContainsBills
+!insert (artExhibitionLaunchExpense, artistAccommodationBill) into ExpenseContainsBills
+
+!new Comment('transportationComment')
+!transportationComment.text := 'Verified dispatch of artwork transportation remains within regional compliance.'
+
+!new Comment('marketingComment')
+!marketingComment.text := 'Marketing expenditure refunded due to premature cancellation of ad placements.'
+
+!new Comment('decorationComment')
+!decorationComment.text := 'Pending verification of venue decor aligns with artistic director''s vision.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Artist accommodation payment refused due to invoice inconsistencies requiring further review.'
+
+!insert (artExhibitionLaunchExpense, transportationComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, marketingComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, decorationComment) into ExpenseComment
+!insert (artExhibitionLaunchExpense, accommodationComment) into ExpenseComment
+

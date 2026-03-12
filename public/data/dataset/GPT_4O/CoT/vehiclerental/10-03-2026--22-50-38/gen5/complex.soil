@@ -1,0 +1,122 @@
+!new RentalOffice('officeCascadiaRentals')
+!officeCascadiaRentals.name := 'Cascadia Rentals'
+!officeCascadiaRentals.number := 560
+!officeCascadiaRentals.address := '749 NW Portland St, Portland, OR 97209'
+
+!new Truck('truck6090')
+!truck6090.id := 6090
+!truck6090.registrationState := #CA
+!truck6090.licensePlateNumber := 'OR3344'
+!truck6090.vehicleTypeCode := #TRUCK
+!truck6090.registrationLastMaintenanceDate := Date('2023-11-01')
+!truck6090.expirationDate := Date('2024-11-01')
+!truck6090.odometerReading := 35000
+!truck6090.gasTankCapacity := 21.0
+!truck6090.workingRadio := true
+!truck6090.mileage := 16
+
+!new Truck('truck6091')
+!truck6091.id := 6091
+!truck6091.registrationState := #CA
+!truck6091.licensePlateNumber := 'CA5588'
+!truck6091.vehicleTypeCode := #TRUCK
+!truck6091.registrationLastMaintenanceDate := Date('2023-09-10')
+!truck6091.expirationDate := Date('2024-09-10')
+!truck6091.odometerReading := 55000
+!truck6091.gasTankCapacity := 27.5
+!truck6091.workingRadio := false
+!truck6091.mileage := 14
+
+!new Vehicle('coveredTrailer7102')
+!coveredTrailer7102.id := 7102
+!coveredTrailer7102.registrationState := #CA
+!coveredTrailer7102.licensePlateNumber := 'WA8923'
+!coveredTrailer7102.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer7102.registrationLastMaintenanceDate := Date('2023-08-22')
+!coveredTrailer7102.expirationDate := Date('2024-08-22')
+
+!new Vehicle('coveredTrailer7110')
+!coveredTrailer7110.id := 7110
+!coveredTrailer7110.registrationState := #CA
+!coveredTrailer7110.licensePlateNumber := 'ID1234'
+!coveredTrailer7110.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer7110.registrationLastMaintenanceDate := Date('2023-07-15')
+!coveredTrailer7110.expirationDate := Date('2024-07-15')
+
+!new Individual('individualLiamAnderson')
+!individualLiamAnderson.name := 'Liam Anderson'
+!individualLiamAnderson.address := '345 Elm St, Portland, OR 97210'
+!individualLiamAnderson.poorRisk := true
+!individualLiamAnderson.homePhone := '503-555-0377'
+!individualLiamAnderson.driverLicenseState := #CA
+!individualLiamAnderson.driverLicenseNumber := 78904567
+!individualLiamAnderson.driverLicenseExpirationDate := Date('2026-09-19')
+
+!new Company('companyEvergreenAdventures')
+!companyEvergreenAdventures.name := 'Evergreen Adventures'
+!companyEvergreenAdventures.address := '112 Spruce Ave, Bend, OR 97702'
+!companyEvergreenAdventures.poorRisk := false
+!companyEvergreenAdventures.idNumber := 1015
+
+!new Company('companySustainableSolutionsLLC')
+!companySustainableSolutionsLLC.name := 'Sustainable Solutions LLC'
+!companySustainableSolutionsLLC.address := '678 Greenway Dr, Eugene, OR 97401'
+!companySustainableSolutionsLLC.poorRisk := true
+!companySustainableSolutionsLLC.idNumber := 3030
+
+!new RentalAgreement('rentalAgreement13004')
+!rentalAgreement13004.number := 13004
+!rentalAgreement13004.rentalDate := Date('2024-03-14')
+!rentalAgreement13004.anticipatedDuration := 3
+!rentalAgreement13004.depositPaid := 90.0
+!rentalAgreement13004.quotedDailyRate := 45.0
+!rentalAgreement13004.quotedRatePerMile := 0.50
+
+!new RentalAgreement('rentalAgreement14007')
+!rentalAgreement14007.number := 14007
+!rentalAgreement14007.rentalDate := Date('2024-02-15')
+!rentalAgreement14007.anticipatedDuration := 10
+!rentalAgreement14007.depositPaid := 200.0
+!rentalAgreement14007.quotedDailyRate := 32.0
+!rentalAgreement14007.quotedRatePerMile := 0.25
+
+!new RentalAgreement('rentalAgreement15008')
+!rentalAgreement15008.number := 15008
+!rentalAgreement15008.rentalDate := Date('2024-04-05')
+!rentalAgreement15008.anticipatedDuration := 7
+!rentalAgreement15008.depositPaid := 150.0
+!rentalAgreement15008.quotedDailyRate := 28.0
+!rentalAgreement15008.quotedRatePerMile := 0.30
+
+!new RentalAgreement('rentalAgreement14009')
+!rentalAgreement14009.number := 14009
+!rentalAgreement14009.rentalDate := Date('2024-02-18')
+!rentalAgreement14009.anticipatedDuration := 14
+!rentalAgreement14009.depositPaid := 350.0
+!rentalAgreement14009.quotedDailyRate := 30.0
+!rentalAgreement14009.quotedRatePerMile := 0.40
+
+!insert (officeCascadiaRentals, truck6090) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, truck6091) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, coveredTrailer7102) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, coveredTrailer7110) into RentalOfficeVehicle
+
+!insert (officeCascadiaRentals, rentalAgreement13004) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement14007) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement15008) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement14009) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeCascadiaRentals, rentalAgreement13004) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement14007) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement15008) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement14009) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement13004, truck6090) into RentalAgreementVehicle
+!insert (rentalAgreement14007, coveredTrailer7102) into RentalAgreementVehicle
+!insert (rentalAgreement15008, coveredTrailer7110) into RentalAgreementVehicle
+!insert (rentalAgreement14009, truck6091) into RentalAgreementVehicle
+
+!insert (rentalAgreement13004, individualLiamAnderson) into RentalAgreementCustomer
+!insert (rentalAgreement14007, companyEvergreenAdventures) into RentalAgreementCustomer
+!insert (rentalAgreement15008, companySustainableSolutionsLLC) into RentalAgreementCustomer
+!insert (rentalAgreement14009, companyEvergreenAdventures) into RentalAgreementCustomer

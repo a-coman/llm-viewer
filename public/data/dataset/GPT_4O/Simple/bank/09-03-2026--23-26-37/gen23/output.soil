@@ -1,0 +1,50 @@
+!new Bank('bank45')
+!bank45.country := 'Norway'
+!bank45.name := 'DNB'
+!bank45.bic := 'DNBANOKK'
+
+!new Bank('bank46')
+!bank46.country := 'Mexico'
+!bank46.name := 'Santander México'
+!bank46.bic := 'BSCHMXMM'
+
+!new Account('account67')
+!account67.iban := 'NO9386011117947'
+!account67.balance := 6200
+
+!new Account('account68')
+!account68.iban := 'MX640002026548362643488'
+!account68.balance := 5000
+
+!new Account('account69')
+!account69.iban := 'NO9386011117948'
+!account69.balance := 1500
+
+!new Person('person67')
+!person67.firstName := 'Ole'
+!person67.lastName := 'Jensen'
+!person67.age := 52
+
+!new Person('person68')
+!person68.firstName := 'Carlos'
+!person68.lastName := 'Gonzalez'
+!person68.age := 41
+
+!new Person('person69')
+!person69.firstName := 'Emma'
+!person69.lastName := 'Johansen'
+!person69.age := 29
+
+!insert (person67, account67) into Ownership
+!insert (person68, account68) into Ownership
+!insert (person69, account69) into Ownership
+!insert (person67, account69) into Ownership
+
+!insert (person67, account67) into Use
+!insert (person68, account68) into Use
+!insert (person69, account69) into Use
+!insert (person68, account67) into Use
+
+!insert (bank45, account67) into AccountOfBanks
+!insert (bank46, account68) into AccountOfBanks
+!insert (bank45, account69) into AccountOfBanks

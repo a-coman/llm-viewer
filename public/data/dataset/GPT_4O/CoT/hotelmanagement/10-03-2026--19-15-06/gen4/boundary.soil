@@ -1,0 +1,76 @@
+!new Customer('customer17')
+!customer17.firstName := 'Claude'
+!customer17.lastName := 'Dubois'
+
+!new Booking('booking16')
+!booking16.startDate := '2024-08-15'
+!booking16.endDate := '2024-08-25'
+!booking16.canceled := false
+!booking16.bookingId := 404
+!booking16.confirmed := true
+
+!new Bill('bill31')
+!bill31.price := 3000.0
+!bill31.billId := 801
+
+!new Bill('bill32')
+!bill32.price := 1200.0
+!bill32.billId := 802
+
+!new FreeRoomTypesDTO('freeRoomType13')
+!freeRoomType13.roomTypeDescription := 'Family Suite'
+!freeRoomType13.numBeds := 5
+!freeRoomType13.pricePerNight := 300.00
+!freeRoomType13.numFreeRooms := 1
+
+!new RoomReservation('roomReservation16_1')
+!roomReservation16_1.checkInDate := '2024-08-15'
+!roomReservation16_1.checkOutDate := '2024-08-25'
+
+!new RoomReservation('roomReservation16_2')
+!roomReservation16_2.checkInDate := '2024-08-15'
+!roomReservation16_2.checkOutDate := '2024-08-25'
+
+!new RoomExtra('extra16_1')
+!extra16_1.price := 150.0
+!extra16_1.description := 'Guided City Tour'
+
+!new RoomExtra('extra16_2')
+!extra16_2.price := 75.0
+!extra16_2.description := 'Spa Package'
+
+!new RoomExtra('extra16_3')
+!extra16_3.price := 125.0
+!extra16_3.description := 'Dinner at Rooftop Restaurant'
+
+!new Room('room16_601')
+!room16_601.numBeds := 5
+!room16_601.pricePerNight := 250.0
+!room16_601.occupied := true
+!room16_601.blocked := false
+!room16_601.roomNumber := 601
+
+!new Room('room16_602')
+!room16_602.numBeds := 4
+!room16_602.pricePerNight := 200.0
+!room16_602.occupied := true
+!room16_602.blocked := false
+!room16_602.roomNumber := 602
+
+!insert (booking16, customer17) into BookingCustomer
+
+!insert (booking16, bill31) into BookingBill
+!insert (booking16, bill32) into BookingBill
+
+!insert (booking16, roomReservation16_1) into BookingRoomReservation
+!insert (booking16, roomReservation16_2) into BookingRoomReservation
+
+!insert (roomReservation16_1, room16_601) into RoomReservationRoom
+!insert (roomReservation16_2, room16_602) into RoomReservationRoom
+
+!insert (roomReservation16_1, extra16_1) into RoomReservationExtras
+!insert (roomReservation16_1, extra16_2) into RoomReservationExtras
+!insert (roomReservation16_2, extra16_3) into RoomReservationExtras
+
+!insert (bill31, roomReservation16_1) into BillRoomReservation
+!insert (bill32, roomReservation16_2) into BillRoomReservation

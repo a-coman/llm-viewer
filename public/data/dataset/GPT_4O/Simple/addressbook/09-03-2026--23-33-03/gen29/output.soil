@@ -1,0 +1,66 @@
+!new AddressBook('addressBook29')
+
+!new Company('company29')
+!company29.name := 'SoundWave Entertainment'
+!company29.phone := '111-222-3333'
+!company29.website := 'www.soundwaveent.com'
+!company29.email := 'info@soundwaveent.com'
+!company29.industry := 'Music Production'
+
+!new Person('person54')
+!person54.name := 'Julia Bennett'
+!person54.phone := '444-555-6666'
+!person54.website := 'www.juliabennettmusic.com'
+!person54.email := 'julia.bennett@soundwaveent.com'
+!person54.title := 'Music Producer'
+
+!new Person('person55')
+!person55.name := 'Luke Evans'
+!person55.phone := '777-888-9999'
+!person55.website := 'www.lukeevansdj.com'
+!person55.email := 'luke.evans@indiebeat.com'
+!person55.title := 'Freelance DJ'
+
+!new Note('note54')
+!note54.author := 'Julia Bennett'
+!note54.time := Date('2025-11-05')
+!note54.type := #CALL
+!note54.comment := 'Discussing studio time scheduling with artists.'
+
+!new Note('note55')
+!note55.author := 'Luke Evans'
+!note55.time := Date('2025-11-10')
+!note55.type := #EMAIL
+!note55.comment := 'Shared mix track demos with the production team.'
+
+!new Address('address55')
+!address55.city := 'Music City'
+!address55.houseNr := '301J'
+!address55.street := 'Harmony Blvd'
+
+!new Address('address56')
+!address56.city := 'Beats Town'
+!address56.houseNr := '99U'
+!address56.street := 'Rhythm Road'
+
+!new Relationship('relationship56')
+!relationship56.type := #COWORKER
+
+!new Relationship('relationship57')
+!relationship57.type := #BOSS
+
+!insert (addressBook29, company29) into AddressBookMadeOfContact
+!insert (addressBook29, person54) into AddressBookMadeOfContact
+!insert (addressBook29, person55) into AddressBookMadeOfContact
+
+!insert (person54, note54) into ContactContainsNote
+!insert (person55, note55) into ContactContainsNote
+
+!insert (company29, relationship57) into ContactToRelationship
+!insert (relationship57, person54) into RelationshipToContact
+
+!insert (person54, relationship56) into ContactToRelationship
+!insert (relationship56, person55) into RelationshipToContact
+
+!insert (company29, address55) into ContactContainsAddress
+!insert (person55, address56) into ContactContainsAddress

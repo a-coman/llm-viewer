@@ -1,0 +1,150 @@
+!new Driver('driver24')
+!driver24.id := 'DR-301'
+!driver24.name := 'Alyssa Tran'
+
+!new Driver('driver25')
+!driver25.id := 'DR-302'
+!driver25.name := 'Mohamed Alawi'
+
+!new Driver('driver26')
+!driver26.id := 'DR-303'
+!driver26.name := 'Deepa Roy'
+
+!new Shipment('shipment28')
+!shipment28.id := 'SH-701'
+!shipment28.status := #ASSIGNED
+
+!new Shipment('shipment29')
+!shipment29.id := 'SH-702'
+!shipment29.status := #NEW
+
+!new Shipment('shipment30')
+!shipment30.id := 'SH-703'
+!shipment30.status := #DELIVERED
+
+!new Shipment('shipment31')
+!shipment31.id := 'SH-704'
+!shipment31.status := #UNDERWAY
+
+!new Address('address53')
+!address53.text := '5 Lakeshore Blvd West, Etobicoke, ON'
+
+!new GeoLocation('geoLocation53')
+!geoLocation53.latitude := 43.6205
+!geoLocation53.longitude := -79.4997
+
+!insert (address53, geoLocation53) into AddressContainsGeoLocation
+
+!new Address('address54')
+!address54.text := '80 Bloor Street West, Downtown Toronto, ON'
+
+!new GeoLocation('geoLocation54')
+!geoLocation54.latitude := 43.6655
+!geoLocation54.longitude := -79.3871
+
+!insert (address54, geoLocation54) into AddressContainsGeoLocation
+
+!new Address('address55')
+!address55.text := '200 Main Street, Markham, ON'
+
+!new GeoLocation('geoLocation55')
+!geoLocation55.latitude := 43.8561
+!geoLocation55.longitude := -79.3370
+
+!insert (address55, geoLocation55) into AddressContainsGeoLocation
+
+!new Address('address56')
+!address56.text := '15 Richmond Hill Drive, Richmond Hill, ON'
+
+!new GeoLocation('geoLocation56')
+!geoLocation56.latitude := 43.8307
+!geoLocation56.longitude := -79.4163
+
+!insert (address56, geoLocation56) into AddressContainsGeoLocation
+
+!new Address('address57')
+!address57.text := '100 Finch Avenue West, North York, ON'
+
+!new GeoLocation('geoLocation57')
+!geoLocation57.latitude := 43.7807
+!geoLocation57.longitude := -79.4146
+
+!insert (address57, geoLocation57) into AddressContainsGeoLocation
+
+!new Address('address58')
+!address58.text := '50 Queen Street East, Downtown Toronto, ON'
+
+!new GeoLocation('geoLocation58')
+!geoLocation58.latitude := 43.6510
+!geoLocation58.longitude := -79.3786
+
+!insert (address58, geoLocation58) into AddressContainsGeoLocation
+
+!new Address('address59')
+!address59.text := '5 University Avenue, Toronto, ON'
+
+!new GeoLocation('geoLocation59')
+!geoLocation59.latitude := 43.6471
+!geoLocation59.longitude := -79.3870
+
+!insert (address59, geoLocation59) into AddressContainsGeoLocation
+
+!new Address('address60')
+!address60.text := '25 Sheppard Avenue East, North York, ON'
+
+!new GeoLocation('geoLocation60')
+!geoLocation60.latitude := 43.7613
+!geoLocation60.longitude := -79.4111
+
+!insert (address60, geoLocation60) into AddressContainsGeoLocation
+
+!new Station('station21')
+
+!new Station('station22')
+
+!new Customer('customer21')
+!customer21.id := 'CUST-501'
+!customer21.name := "Liam O'Reilly"
+!customer21.twitterUserName := '@liam_inTO'
+
+!new Customer('customer22')
+!customer22.id := 'CUST-502'
+!customer22.name := 'Sophia Chan'
+!customer22.twitterUserName := '@sophia_writes'
+
+!new Customer('customer23')
+!customer23.id := 'CUST-503'
+!customer23.name := 'Omar Khan'
+!customer23.twitterUserName := '@khanspeaks'
+
+!insert (driver24, shipment28) into DriverShipment
+!insert (driver25, shipment30) into DriverShipment
+!insert (driver26, shipment31) into DriverShipment
+
+!insert (shipment28, address53) into ShipmentContainsPickUpAddress
+!insert (shipment29, address55) into ShipmentContainsPickUpAddress
+!insert (shipment30, address57) into ShipmentContainsPickUpAddress
+!insert (shipment31, address59) into ShipmentContainsPickUpAddress
+
+!insert (shipment28, address54) into ShipmentContainsDeliveryAddress
+!insert (shipment29, address56) into ShipmentContainsDeliveryAddress
+!insert (shipment30, address58) into ShipmentContainsDeliveryAddress
+!insert (shipment31, address60) into ShipmentContainsDeliveryAddress
+
+!insert (customer21, shipment28) into CustomerConsistsOfShipment
+!insert (customer22, shipment29) into CustomerConsistsOfShipment
+!insert (customer22, shipment30) into CustomerConsistsOfShipment
+!insert (customer23, shipment31) into CustomerConsistsOfShipment
+
+!insert (station21, customer21) into StationContainsCustomer
+!insert (station21, customer22) into StationContainsCustomer
+!insert (station22, customer23) into StationContainsCustomer
+
+!insert (station21, shipment28) into StationShipment
+!insert (station21, shipment29) into StationShipment
+!insert (station22, shipment30) into StationShipment
+!insert (station22, shipment31) into StationShipment
+
+!insert (station21, driver24) into StationContainsDriver
+!insert (station21, driver25) into StationContainsDriver
+!insert (station22, driver26) into StationContainsDriver

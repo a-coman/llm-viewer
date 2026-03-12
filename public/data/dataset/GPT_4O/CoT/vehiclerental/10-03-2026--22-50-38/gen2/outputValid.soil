@@ -1,0 +1,252 @@
+!new RentalOffice('officeLosAngelesCenter')
+!officeLosAngelesCenter.name := 'Los Angeles Center'
+!officeLosAngelesCenter.number := 202
+!officeLosAngelesCenter.address := '789 Sunset Blvd, Los Angeles, CA 90028'
+
+!new Vehicle('coveredTrailer002')
+!coveredTrailer002.id := 302
+!coveredTrailer002.registrationState := #CA
+!coveredTrailer002.licensePlateNumber := 'CA5678CT'
+!coveredTrailer002.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer002.registrationLastMaintenanceDate := Date('2023-06-20')
+!coveredTrailer002.expirationDate := Date('2024-06-19')
+
+!new Truck('truck003')
+!truck003.id := 303
+!truck003.registrationState := #CA
+!truck003.licensePlateNumber := 'NV4683TR'
+!truck003.vehicleTypeCode := #TRUCK
+!truck003.registrationLastMaintenanceDate := Date('2023-07-10')
+!truck003.expirationDate := Date('2024-07-09')
+!truck003.odometerReading := 8000
+!truck003.gasTankCapacity := 13.2
+!truck003.workingRadio := false
+!truck003.mileage := 15000
+
+!new Company('companySunTechLogistics')
+!companySunTechLogistics.name := 'SunTech Logistics'
+!companySunTechLogistics.address := '100 Corporate Park, Los Angeles, CA 90001'
+!companySunTechLogistics.poorRisk := false
+!companySunTechLogistics.idNumber := 759001
+
+!new RentalAgreement('rentalAgreement2002')
+!rentalAgreement2002.number := 2002
+!rentalAgreement2002.rentalDate := Date('2023-10-05')
+!rentalAgreement2002.anticipatedDuration := 14
+!rentalAgreement2002.depositPaid := 400.0
+!rentalAgreement2002.quotedDailyRate := 70.0
+!rentalAgreement2002.quotedRatePerMile := 0.3
+
+!insert (officeLosAngelesCenter, coveredTrailer002) into RentalOfficeVehicle
+!insert (officeLosAngelesCenter, truck003) into RentalOfficeVehicle
+
+!insert (officeLosAngelesCenter, rentalAgreement2002) into RentalOfficeRentalAgreementOrigin
+!insert (officeLosAngelesCenter, rentalAgreement2002) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement2002, truck003) into RentalAgreementVehicle
+!insert (rentalAgreement2002, companySunTechLogistics) into RentalAgreementCustomer
+
+!new RentalOffice('officePeakPointRentals')
+!officePeakPointRentals.name := 'Peak Point Rentals'
+!officePeakPointRentals.number := 99999
+!officePeakPointRentals.address := '999 Summit Avenue, Denver, CO'
+
+!new Truck('truckMaxId')
+!truckMaxId.id := 2147483647
+!truckMaxId.registrationState := #CO
+!truckMaxId.licensePlateNumber := 'CO-MAX-999'
+!truckMaxId.vehicleTypeCode := #TRUCK
+!truckMaxId.registrationLastMaintenanceDate := Date('2023-08-15')
+!truckMaxId.expirationDate := Date('2024-08-15')
+!truckMaxId.odometerReading := 1000000
+!truckMaxId.gasTankCapacity := 100.0
+!truckMaxId.workingRadio := true
+!truckMaxId.mileage := 500000
+
+!new RentalAgreement('rentalAgreementMaxId')
+!rentalAgreementMaxId.number := 999999
+!rentalAgreementMaxId.rentalDate := Date('2023-12-01')
+!rentalAgreementMaxId.anticipatedDuration := 365
+!rentalAgreementMaxId.depositPaid := 10000.0
+!rentalAgreementMaxId.quotedDailyRate := 300.0
+!rentalAgreementMaxId.quotedRatePerMile := 5.0
+
+!new Company('companyBigTimeConstruction')
+!companyBigTimeConstruction.name := 'Big Time Construction Co'
+!companyBigTimeConstruction.address := '999 Builder\'s Way, Construction City, TN'
+!companyBigTimeConstruction.poorRisk := false
+!companyBigTimeConstruction.idNumber := 999999999
+
+!insert (officePeakPointRentals, truckMaxId) into RentalOfficeVehicle
+!insert (officePeakPointRentals, rentalAgreementMaxId) into RentalOfficeRentalAgreementOrigin
+!insert (officePeakPointRentals, rentalAgreementMaxId) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementMaxId, truckMaxId) into RentalAgreementVehicle
+!insert (rentalAgreementMaxId, companyBigTimeConstruction) into RentalAgreementCustomer
+
+!new RentalOffice('officeMileHighRentals')
+!officeMileHighRentals.name := 'Mile High Rentals'
+!officeMileHighRentals.number := 205
+!officeMileHighRentals.address := '1234 Colorado Blvd, Denver, CO 80206'
+
+!new Truck('truck1045')
+!truck1045.id := 1045
+!truck1045.registrationState := #CO
+!truck1045.licensePlateNumber := 'CO3456'
+!truck1045.vehicleTypeCode := #TRUCK
+!truck1045.registrationLastMaintenanceDate := Date('2023-06-20')
+!truck1045.expirationDate := Date('2024-06-20')
+!truck1045.odometerReading := 50000
+!truck1045.gasTankCapacity := 30.0
+!truck1045.workingRadio := false
+!truck1045.mileage := 12
+
+!new Vehicle('coveredTrailer2078')
+!coveredTrailer2078.id := 2078
+!coveredTrailer2078.registrationState := #CO
+!coveredTrailer2078.licensePlateNumber := 'CO7890'
+!coveredTrailer2078.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer2078.registrationLastMaintenanceDate := Date('2023-07-12')
+!coveredTrailer2078.expirationDate := Date('2024-07-12')
+
+!new Truck('truck1050')
+!truck1050.id := 1050
+!truck1050.registrationState := #TX
+!truck1050.licensePlateNumber := 'TX0987'
+!truck1050.vehicleTypeCode := #TRUCK
+!truck1050.registrationLastMaintenanceDate := Date('2023-05-18')
+!truck1050.expirationDate := Date('2024-05-18')
+!truck1050.odometerReading := 70000
+!truck1050.gasTankCapacity := 28.0
+!truck1050.workingRadio := true
+!truck1050.mileage := 10
+
+!new Individual('individualEmilyChen')
+!individualEmilyChen.name := 'Emily Chen'
+!individualEmilyChen.address := '456 Aspen Lane, Boulder, CO 80302'
+!individualEmilyChen.poorRisk := true
+!individualEmilyChen.homePhone := '303-555-0234'
+!individualEmilyChen.driverLicenseState := #CO
+!individualEmilyChen.driverLicenseNumber := 33221144
+!individualEmilyChen.driverLicenseExpirationDate := Date('2026-01-16')
+
+!new Company('companyRockyMountainAdventures')
+!companyRockyMountainAdventures.name := 'Rocky Mountain Adventures'
+!companyRockyMountainAdventures.address := '789 Peak Dr, Denver, CO 80202'
+!companyRockyMountainAdventures.poorRisk := false
+!companyRockyMountainAdventures.idNumber := 4568
+
+!new RentalAgreement('rentalAgreement7002')
+!rentalAgreement7002.number := 7002
+!rentalAgreement7002.rentalDate := Date('2023-10-05')
+!rentalAgreement7002.anticipatedDuration := 3
+!rentalAgreement7002.depositPaid := 100.0
+!rentalAgreement7002.quotedDailyRate := 50.0
+!rentalAgreement7002.quotedRatePerMile := 0.6
+
+!new RentalAgreement('rentalAgreement8004')
+!rentalAgreement8004.number := 8004
+!rentalAgreement8004.rentalDate := Date('2023-09-25')
+!rentalAgreement8004.anticipatedDuration := 10
+!rentalAgreement8004.depositPaid := 400.0
+!rentalAgreement8004.quotedDailyRate := 40.0
+!rentalAgreement8004.quotedRatePerMile := 0.4
+
+!new RentalAgreement('rentalAgreement9005')
+!rentalAgreement9005.number := 9005
+!rentalAgreement9005.rentalDate := Date('2023-10-10')
+!rentalAgreement9005.anticipatedDuration := 5
+!rentalAgreement9005.depositPaid := 250.0
+!rentalAgreement9005.quotedDailyRate := 55.0
+!rentalAgreement9005.quotedRatePerMile := 0.45
+
+!insert (officeMileHighRentals, truck1045) into RentalOfficeVehicle
+!insert (officeMileHighRentals, coveredTrailer2078) into RentalOfficeVehicle
+!insert (officeMileHighRentals, truck1050) into RentalOfficeVehicle
+
+!insert (officeMileHighRentals, rentalAgreement7002) into RentalOfficeRentalAgreementOrigin
+!insert (officeMileHighRentals, rentalAgreement8004) into RentalOfficeRentalAgreementOrigin
+!insert (officeMileHighRentals, rentalAgreement9005) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeMileHighRentals, rentalAgreement7002) into RentalOfficeRentalAgreementDrop
+!insert (officeMileHighRentals, rentalAgreement8004) into RentalOfficeRentalAgreementDrop
+!insert (officeMileHighRentals, rentalAgreement9005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement7002, truck1045) into RentalAgreementVehicle
+!insert (rentalAgreement8004, coveredTrailer2078) into RentalAgreementVehicle
+!insert (rentalAgreement9005, truck1050) into RentalAgreementVehicle
+
+!insert (rentalAgreement7002, individualEmilyChen) into RentalAgreementCustomer
+!insert (rentalAgreement8004, companyRockyMountainAdventures) into RentalAgreementCustomer
+!insert (rentalAgreement9005, companyRockyMountainAdventures) into RentalAgreementCustomer
+
+!new RentalOffice('officeTriStateHub')
+!officeTriStateHub.name := 'Tri-State Transportation Hub'
+!officeTriStateHub.number := 202
+!officeTriStateHub.address := '369 Border Loop, Tristate Area, IL-IN-KY 62000'
+
+!new Truck('truck67890')
+!truck67890.id := 67890
+!truck67890.registrationState := #IL
+!truck67890.licensePlateNumber := 'IL-456-HIJ'
+!truck67890.vehicleTypeCode := #TRUCK
+!truck67890.registrationLastMaintenanceDate := Date('2023-01-05')
+!truck67890.expirationDate := Date('2023-11-15')
+!truck67890.odometerReading := 500000
+!truck67890.gasTankCapacity := 100.0
+!truck67890.workingRadio := false
+!truck67890.mileage := 10
+
+!new Vehicle('coveredTrailer67891')
+!coveredTrailer67891.id := 67891
+!coveredTrailer67891.registrationState := #IN
+!coveredTrailer67891.licensePlateNumber := 'IN-789-KLM'
+!coveredTrailer67891.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer67891.registrationLastMaintenanceDate := Date('2022-11-10')
+!coveredTrailer67891.expirationDate := Date('2023-11-10')
+
+!new Individual('individualJesseInterstate')
+!individualJesseInterstate.name := 'Jesse Interstate'
+!individualJesseInterstate.address := '150 Route Road, Crossroads, KY 41001'
+!individualJesseInterstate.poorRisk := false
+!individualJesseInterstate.homePhone := '+1-859-555-0456'
+!individualJesseInterstate.driverLicenseState := #KY
+!individualJesseInterstate.driverLicenseNumber := 456123789
+!individualJesseInterstate.driverLicenseExpirationDate := Date('2026-05-22')
+
+!new Company('companyRegionalLogisticsLLC')
+!companyRegionalLogisticsLLC.name := 'Regional Logistics LLC'
+!companyRegionalLogisticsLLC.address := '312 Interstate Parkway, Commerce, IL 60007'
+!companyRegionalLogisticsLLC.poorRisk := true
+!companyRegionalLogisticsLLC.idNumber := 987456321
+
+!new RentalAgreement('rentalAgreement2003')
+!rentalAgreement2003.number := 2003
+!rentalAgreement2003.rentalDate := Date('2025-11-01')
+!rentalAgreement2003.anticipatedDuration := 3
+!rentalAgreement2003.depositPaid := 50.0
+!rentalAgreement2003.quotedDailyRate := 125.0
+!rentalAgreement2003.quotedRatePerMile := 2.5
+
+!new RentalAgreement('rentalAgreement2004')
+!rentalAgreement2004.number := 2004
+!rentalAgreement2004.rentalDate := Date('2025-11-01')
+!rentalAgreement2004.anticipatedDuration := 180
+!rentalAgreement2004.depositPaid := 500.0
+!rentalAgreement2004.quotedDailyRate := 35.0
+!rentalAgreement2004.quotedRatePerMile := 0.5
+
+!insert (officeTriStateHub, truck67890) into RentalOfficeVehicle
+!insert (officeTriStateHub, coveredTrailer67891) into RentalOfficeVehicle
+
+!insert (officeTriStateHub, rentalAgreement2003) into RentalOfficeRentalAgreementOrigin
+!insert (officeTriStateHub, rentalAgreement2004) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeTriStateHub, rentalAgreement2003) into RentalOfficeRentalAgreementDrop
+!insert (officeTriStateHub, rentalAgreement2004) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement2003, truck67890) into RentalAgreementVehicle
+!insert (rentalAgreement2004, coveredTrailer67891) into RentalAgreementVehicle
+
+!insert (rentalAgreement2003, individualJesseInterstate) into RentalAgreementCustomer
+!insert (rentalAgreement2004, companyRegionalLogisticsLLC) into RentalAgreementCustomer
+

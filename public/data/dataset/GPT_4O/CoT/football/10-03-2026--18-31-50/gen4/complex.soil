@@ -1,0 +1,209 @@
+!new Club('clubAP')
+!clubAP.name := 'Sydney Suns FC'
+!clubAP.homeGround := 'Allianz Stadium'
+!clubAP.chairman := 'Emma Wright'
+
+!new Club('clubAQ')
+!clubAQ.name := 'Berlin Bears'
+!clubAQ.homeGround := 'Olympiastadion Berlin'
+!clubAQ.chairman := 'Friedrich Müller'
+
+!new Team('teamAP')
+!teamAP.name := 'Sydney Suns Youth Team'
+
+!new Team('teamAQ')
+!teamAQ.name := 'Berlin Bears Junior Squad'
+
+!insert (clubAP, teamAP) into ClubTeam
+!insert (clubAQ, teamAQ) into ClubTeam
+
+!new Player('player47')
+!player47.name := 'Liam Thompson'
+!player47.age := 19
+!player47.bestFoot := #LEFT
+!player47.phoneNumber := '+61400123456'
+
+!new Player('player48')
+!player48.name := 'Jonas Schneider'
+!player48.age := 18
+!player48.bestFoot := #RIGHT
+!player48.phoneNumber := '+49301234567'
+
+!new Player('player49')
+!player49.name := 'Felix Müller'
+!player49.age := 20
+!player49.bestFoot := #RIGHT
+!player49.phoneNumber := '+491512345678'
+
+!insert (teamAP, player47) into TeamPlayer
+!insert (teamAQ, player48) into TeamPlayer
+!insert (teamAQ, player49) into TeamPlayer
+
+!new Position('position101')
+!position101.positionName := #MIDFIELDER
+
+!new Position('position102')
+!position102.positionName := #GOALKEEPER
+
+!new Position('position103')
+!position103.positionName := #FORWARD
+
+!insert (player47, position103) into PlayerPositions
+!insert (player48, position102) into PlayerPositions
+!insert (player49, position101) into PlayerPositions
+
+!new Competition('competition18')
+!competition18.name := 'Youth Global Championship'
+!competition18.type := 'Tournament'
+
+!new Match('match23')
+!match23.date := '12-09-2023'
+!match23.homeAway := true
+
+!new Match('match24')
+!match24.date := '20-09-2023'
+!match24.homeAway := false
+
+!insert (teamAP, match23) into LocalMatch
+!insert (teamAQ, match23) into VisitorMatch
+!insert (competition18, match23) into CompetitionMatch
+
+!insert (teamAQ, match24) into LocalMatch
+!insert (teamAP, match24) into VisitorMatch
+!insert (competition18, match24) into CompetitionMatch
+
+!new MatchReport('matchReport23')
+!matchReport23.duration := 90
+!matchReport23.scoreVisitor := 0
+!matchReport23.scoreLocal := 3
+
+!new MatchReport('matchReport24')
+!matchReport24.duration := 90
+!matchReport24.scoreVisitor := 3
+!matchReport24.scoreLocal := 2
+
+!insert (match23, matchReport23) into MatchMatchReport
+!insert (match24, matchReport24) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer42')
+!matchPlayer42.booked := true
+!matchPlayer42.goals := 1
+!matchPlayer42.rating := 8
+
+!new MatchPlayer('matchPlayer43')
+!matchPlayer43.booked := false
+!matchPlayer43.goals := 0
+!matchPlayer43.rating := 6
+
+!new MatchPlayer('matchPlayer44')
+!matchPlayer44.booked := true
+!matchPlayer44.goals := 1
+!matchPlayer44.rating := 9
+
+!insert (player47, matchPlayer42) into PlayerMatch
+!insert (player48, matchPlayer43) into PlayerMatch
+!insert (player49, matchPlayer44) into PlayerMatch
+
+!insert (match23, matchPlayer42) into MatchMatchPlayer
+!insert (match23, matchPlayer43) into MatchMatchPlayer
+!insert (match24, matchPlayer44) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp42')
+!mpp42.positionName := #FORWARD
+!mpp42.number := 11
+
+!new MatchPlayerPosition('mpp43')
+!mpp43.positionName := #GOALKEEPER
+!mpp43.number := 1
+
+!new MatchPlayerPosition('mpp44')
+!mpp44.positionName := #MIDFIELDER
+!mpp44.number := 8
+
+!insert (matchPlayer42, mpp42) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer43, mpp43) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer44, mpp44) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent62')
+!matchEvent62.eventType := #GOAL
+!matchEvent62.time := 14
+
+!new MatchEvent('matchEvent63')
+!matchEvent63.eventType := #FOUL
+!matchEvent63.time := 74
+
+!new MatchEvent('matchEvent64')
+!matchEvent64.eventType := #FOUL
+!matchEvent64.time := 55
+
+!new MatchEvent('matchEvent65')
+!matchEvent65.eventType := #GOAL
+!matchEvent65.time := 48
+
+!new MatchEvent('matchEvent66')
+!matchEvent66.eventType := #GOAL
+!matchEvent66.time := 20
+
+!new MatchEvent('matchEvent67')
+!matchEvent67.eventType := #GOAL
+!matchEvent67.time := 65
+
+!insert (match23, matchEvent62) into MatchMatchEvent
+!insert (match23, matchEvent66) into MatchMatchEvent
+!insert (match23, matchEvent65) into MatchMatchEvent
+!insert (match24, matchEvent63) into MatchMatchEvent
+!insert (match24, matchEvent64) into MatchMatchEvent
+!insert (match24, matchEvent67) into MatchMatchEvent
+
+!new TrainingSession('trainingSession36')
+!trainingSession36.date := '05-09-2023'
+!trainingSession36.location := 'Allianz Stadium Practice Field'
+!trainingSession36.purpose := 'Acclimatization drills to acclimate youth players to tournament settings.'
+
+!new TrainingSession('trainingSession37')
+!trainingSession37.date := '04-09-2023'
+!trainingSession37.location := 'Olympiastadion Berlin Practice Grounds'
+!trainingSession37.purpose := 'Enhanced goalkeeping reflexes under pressure.'
+
+!insert (teamAP, trainingSession36) into TeamTraining
+!insert (teamAQ, trainingSession37) into TeamTraining
+
+!new TrainingNotes('trainingNote36')
+!trainingNote36.note := 'Players adapted well to high-pressure situations showing enhanced focus.'
+!trainingNote36.date := '05-09-2023'
+
+!new TrainingNotes('trainingNote37')
+!trainingNote37.note := 'Goalkeepers demonstrated improved reflexes during situational drills.'
+!trainingNote37.date := '04-09-2023'
+
+!insert (trainingSession36, trainingNote36) into TrainingTrainingNotes
+!insert (trainingSession37, trainingNote37) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective34')
+!trainingObjective34.areaToImprove := 'Mental Resilience'
+!trainingObjective34.startDate := '01-09-2023'
+!trainingObjective34.endDate := '10-09-2023'
+!trainingObjective34.success := true
+
+!new TrainingObjective('trainingObjective35')
+!trainingObjective35.areaToImprove := 'Goalkeeping Reflexes'
+!trainingObjective35.startDate := '01-09-2023'
+!trainingObjective35.endDate := '10-09-2023'
+!trainingObjective35.success := true
+
+!insert (trainingObjective34, player47) into TrainingObjectivePlayer
+!insert (trainingObjective35, player48) into TrainingObjectivePlayer
+
+!new TrainingObjective('trainingObjective36')
+!trainingObjective36.areaToImprove := 'Attacking Strategies'
+!trainingObjective36.startDate := '01-09-2023'
+!trainingObjective36.endDate := '10-09-2023'
+!trainingObjective36.success := true
+
+!insert (trainingObjective36, player49) into TrainingObjectivePlayer
+
+!new TrainingFailedToAttend('trainingFail14')
+!trainingFail14.reason := 'Medical Check-up'
+
+!insert (trainingFail14, player49) into FailedPlayer
+!insert (trainingSession36, trainingFail14) into TrainingFailded

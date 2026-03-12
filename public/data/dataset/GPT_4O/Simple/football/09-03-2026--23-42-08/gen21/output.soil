@@ -1,0 +1,136 @@
+!new Club('club41')
+!club41.name := 'Coral Sharks'
+!club41.homeGround := 'Reef Stadium'
+!club41.chairman := 'Owen Coral'
+
+!new Club('club42')
+!club42.name := 'Ivory Elephants'
+!club42.homeGround := 'Savannah Grounds'
+!club42.chairman := 'Tara Ivory'
+
+!new Team('team41')
+!team41.name := 'Shark Sweepers'
+!insert (club41, team41) into ClubTeam
+
+!new Team('team42')
+!team42.name := 'Elephant Stompers'
+!insert (club42, team42) into ClubTeam
+
+!new Competition('oceanicTournament')
+!oceanicTournament.name := 'Oceanic Tournament'
+!oceanicTournament.type := 'Round Robin'
+
+!new Match('match21')
+!match21.date := '2028-06-30'
+!match21.homeAway := false
+!insert (oceanicTournament, match21) into CompetitionMatch
+!insert (team41, match21) into LocalMatch
+!insert (team42, match21) into VisitorMatch
+
+!new MatchReport('report21')
+!report21.duration := 90
+!report21.scoreVisitor := 3
+!report21.scoreLocal := 1
+!insert (match21, report21) into MatchMatchReport
+
+!new Player('player41')
+!player41.name := 'Marina Wave'
+!player41.age := 25
+!player41.bestFoot := #RIGHT
+!player41.phoneNumber := '8976542310'
+!insert (team41, player41) into TeamPlayer
+
+!new Player('player42')
+!player42.name := 'Kai Jumbo'
+!player42.age := 28
+!player42.bestFoot := #LEFT
+!player42.phoneNumber := '7654321980'
+!insert (team42, player42) into TeamPlayer
+
+!new Position('position41')
+!position41.positionName := #MIDFIELDER
+!insert (player41, position41) into PlayerPositions
+
+!new Position('position42')
+!position42.positionName := #DEFENDER
+!insert (player42, position42) into PlayerPositions
+
+!new MatchPlayer('matchPlayer41')
+!matchPlayer41.booked := false
+!matchPlayer41.goals := 0
+!matchPlayer41.rating := 7
+!insert (player41, matchPlayer41) into PlayerMatch
+!insert (match21, matchPlayer41) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer42')
+!matchPlayer42.booked := true
+!matchPlayer42.goals := 1
+!matchPlayer42.rating := 8
+!insert (player42, matchPlayer42) into PlayerMatch
+!insert (match21, matchPlayer42) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition41')
+!matchPlayerPosition41.positionName := #MIDFIELDER
+!matchPlayerPosition41.number := 7
+!insert (matchPlayer41, matchPlayerPosition41) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition42')
+!matchPlayerPosition42.positionName := #DEFENDER
+!matchPlayerPosition42.number := 4
+!insert (matchPlayer42, matchPlayerPosition42) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event77')
+!event77.eventType := #GOAL
+!event77.time := 20
+!insert (match21, event77) into MatchMatchEvent
+
+!new MatchEvent('event78')
+!event78.eventType := #GOAL
+!event78.time := 40
+!insert (match21, event78) into MatchMatchEvent
+
+!new MatchEvent('event79')
+!event79.eventType := #GOAL
+!event79.time := 65
+!insert (match21, event79) into MatchMatchEvent
+
+!new MatchEvent('event80')
+!event80.eventType := #GOAL
+!event80.time := 80
+!insert (match21, event80) into MatchMatchEvent
+
+!new TrainingSession('training41')
+!training41.date := '2028-05-10'
+!training41.location := 'Coral Arena'
+!training41.purpose := 'Midfield Coordination'
+!insert (team41, training41) into TeamTraining
+
+!new TrainingSession('training42')
+!training42.date := '2028-05-20'
+!training42.location := 'Elephant Grounds'
+!training42.purpose := 'Defensive Stability'
+!insert (team42, training42) into TeamTraining
+
+!new TrainingNotes('trainingNote41')
+!trainingNote41.note := 'Focused on passing under pressure'
+!trainingNote41.date := '2028-05-10'
+!insert (training41, trainingNote41) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote42')
+!trainingNote42.note := 'Improved defensive organization'
+!trainingNote42.date := '2028-05-20'
+!insert (training42, trainingNote42) into TrainingTrainingNotes
+
+!new TrainingObjective('objective41')
+!objective41.areaToImprove := 'Midfield Vision'
+!objective41.startDate := '2028-03-01'
+!objective41.endDate := '2028-06-01'
+!objective41.success := false
+!insert (objective41, player41) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective42')
+!objective42.areaToImprove := 'Tackling Precision'
+!objective42.startDate := '2028-03-15'
+!objective42.endDate := '2028-06-15'
+!objective42.success := true
+!insert (objective42, player42) into TrainingObjectivePlayer

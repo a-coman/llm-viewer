@@ -1,0 +1,161 @@
+!new Club('clubAH')
+!clubAH.name := 'Sydney Sharks'
+!clubAH.homeGround := "Sharks' Bay Stadium"
+!clubAH.chairman := 'Bruce Miller'
+
+!new Club('clubAI')
+!clubAI.name := 'Cape Town Rangers'
+!clubAI.homeGround := 'Rangers Arena'
+!clubAI.chairman := 'Thabo Mbeki'
+
+!new Team('teamAH')
+!teamAH.name := 'Sydney Sharks Main Squad'
+
+!new Team('teamAI')
+!teamAI.name := 'Cape Town Rangers First XI'
+
+!insert (clubAH, teamAH) into ClubTeam
+!insert (clubAI, teamAI) into ClubTeam
+
+!new Competition('competition15')
+!competition15.name := 'Continental Challenge Cup'
+!competition15.type := 'Regional League'
+
+!new TrainingSession('trainingSession29')
+!trainingSession29.date := '2023-10-05'
+!trainingSession29.location := 'Sharks Training Field'
+!trainingSession29.purpose := 'Tactical Awareness and Execution'
+
+!new TrainingSession('trainingSession30')
+!trainingSession30.date := '2023-10-07'
+!trainingSession30.location := 'Rangers Practice Grounds'
+!trainingSession30.purpose := 'Fitness and Conditioning'
+
+!insert (teamAH, trainingSession29) into TeamTraining
+!insert (teamAI, trainingSession30) into TeamTraining
+
+!new TrainingNotes('trainingNote29')
+!trainingNote29.note := 'Emphasized zonal marking and counter-attacks.'
+!trainingNote29.date := '2023-10-05'
+
+!new TrainingNotes('trainingNote30')
+!trainingNote30.note := 'Focus on increasing players\' stamina via endurance runs.'
+!trainingNote30.date := '2023-10-07'
+
+!insert (trainingSession29, trainingNote29) into TrainingTrainingNotes
+!insert (trainingSession30, trainingNote30) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail11')
+!trainingFail11.reason := 'Medical Appointment'
+
+!new Player('player38')
+!player38.name := 'Liam Johnson'
+!player38.age := 26
+!player38.bestFoot := #RIGHT
+!player38.phoneNumber := '+61-2-12345678'
+
+!new Player('player39')
+!player39.name := 'Nkosi Dlamini'
+!player39.age := 22
+!player39.bestFoot := #LEFT
+!player39.phoneNumber := '+27-21-5678901'
+
+!insert (teamAH, player38) into TeamPlayer
+!insert (teamAI, player39) into TeamPlayer
+
+!insert (trainingSession29, trainingFail11) into TrainingFailded
+!insert (trainingFail11, player38) into FailedPlayer
+
+!new Match('match18')
+!match18.date := '2023-11-12'
+!match18.homeAway := true
+
+!insert (teamAH, match18) into LocalMatch
+!insert (teamAI, match18) into VisitorMatch
+!insert (competition15, match18) into CompetitionMatch
+
+!new MatchReport('matchReport18')
+!matchReport18.duration := 90
+!matchReport18.scoreVisitor := 2
+!matchReport18.scoreLocal := 1
+
+!insert (match18, matchReport18) into MatchMatchReport
+
+!new MatchEvent('matchEvent49')
+!matchEvent49.eventType := #GOAL
+!matchEvent49.time := 22
+
+!new MatchEvent('matchEvent50')
+!matchEvent50.eventType := #PENALTY
+!matchEvent50.time := 58
+
+!new MatchEvent('matchEvent51')
+!matchEvent51.eventType := #GOAL
+!matchEvent51.time := 67
+
+!insert (match18, matchEvent49) into MatchMatchEvent
+!insert (match18, matchEvent50) into MatchMatchEvent
+!insert (match18, matchEvent51) into MatchMatchEvent
+
+!new MatchNote('matchNote12')
+!matchNote12.note := 'Cape Town Rangers showed resilience and composure under pressure.'
+!matchNote12.date := '2023-11-12'
+
+!insert (match18, matchNote12) into MatchMatchNote
+
+!new PlayerNotes('playerNote15')
+!playerNote15.note := 'Excellent at orchestrating attacks from midfield.'
+!playerNote15.date := '2023-08-05'
+
+!insert (player38, playerNote15) into PlayerPlayerNotes
+
+!new TrainingObjective('trainingObjective28')
+!trainingObjective28.areaToImprove := 'Speed and Agility'
+!trainingObjective28.startDate := '2023-09-01'
+!trainingObjective28.endDate := '2023-11-01'
+!trainingObjective28.success := true
+
+!new TrainingObjective('trainingObjective29')
+!trainingObjective29.areaToImprove := 'Tactical Awareness'
+!trainingObjective29.startDate := '2023-09-01'
+!trainingObjective29.endDate := '2023-11-01'
+!trainingObjective29.success := true
+
+!insert (trainingObjective28, player39) into TrainingObjectivePlayer
+!insert (trainingObjective29, player38) into TrainingObjectivePlayer
+
+!new MatchPlayer('matchPlayer33')
+!matchPlayer33.booked := false
+!matchPlayer33.goals := 0
+!matchPlayer33.rating := 7
+
+!new MatchPlayer('matchPlayer34')
+!matchPlayer34.booked := true
+!matchPlayer34.goals := 1
+!matchPlayer34.rating := 9
+
+!insert (player38, matchPlayer33) into PlayerMatch
+!insert (player39, matchPlayer34) into PlayerMatch
+
+!insert (match18, matchPlayer33) into MatchMatchPlayer
+!insert (match18, matchPlayer34) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position88')
+!position88.positionName := #MIDFIELDER
+!position88.number := 6
+
+!new MatchPlayerPosition('position89')
+!position89.positionName := #FORWARD
+!position89.number := 7
+
+!insert (matchPlayer33, position88) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer34, position89) into MatchPlayerMatchPlayerPosition
+
+!new Position('position90')
+!position90.positionName := #MIDFIELDER
+
+!new Position('position91')
+!position91.positionName := #FORWARD
+
+!insert (player38, position90) into PlayerPositions
+!insert (player39, position91) into PlayerPositions

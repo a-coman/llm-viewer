@@ -1,0 +1,87 @@
+!new Bank('mapleTrustBank')
+!mapleTrustBank.country := 'Canada'
+!mapleTrustBank.name := 'Maple Trust Bank'
+!mapleTrustBank.bic := 'MTCA00123'
+
+!new Bank('southernCrossBank')
+!southernCrossBank.country := 'Australia'
+!southernCrossBank.name := 'Southern Cross Bank'
+!southernCrossBank.bic := 'SCBAU78901'
+
+!new Person('liamMcCarthy')
+!liamMcCarthy.firstName := 'Liam'
+!liamMcCarthy.lastName := 'McCarthy'
+!liamMcCarthy.age := 28
+
+!new Person('chloeSmith')
+!chloeSmith.firstName := 'Chloe'
+!chloeSmith.lastName := 'Smith'
+!chloeSmith.age := 42
+
+!new Person('oliverWilliams')
+!oliverWilliams.firstName := 'Oliver'
+!oliverWilliams.lastName := 'Williams'
+!oliverWilliams.age := 49
+
+!new Person('miaJohnson')
+!miaJohnson.firstName := 'Mia'
+!miaJohnson.lastName := 'Johnson'
+!miaJohnson.age := 35
+
+!new Person('ethanBrown')
+!ethanBrown.firstName := 'Ethan'
+!ethanBrown.lastName := 'Brown'
+!ethanBrown.age := 46
+
+!new Account('account24_1')
+!account24_1.iban := 'CA5553338889M'
+!account24_1.balance := 200
+
+!new Account('account24_2')
+!account24_2.iban := 'AU7878689501N'
+!account24_2.balance := 7200
+
+!new Account('account24_3')
+!account24_3.iban := 'CA2233445566O'
+!account24_3.balance := 1200
+
+!new Account('account24_4')
+!account24_4.iban := 'AU1122334455P'
+!account24_4.balance := 6000
+
+!new Account('account24_5')
+!account24_5.iban := 'CA6677889900Q'
+!account24_5.balance := 0
+
+!insert (mapleTrustBank, account24_1) into AccountOfBanks
+!insert (southernCrossBank, account24_2) into AccountOfBanks
+!insert (mapleTrustBank, account24_3) into AccountOfBanks
+!insert (southernCrossBank, account24_4) into AccountOfBanks
+!insert (mapleTrustBank, account24_5) into AccountOfBanks
+
+!insert (liamMcCarthy, account24_1) into Ownership
+!insert (chloeSmith, account24_1) into Ownership
+
+!insert (miaJohnson, account24_2) into Ownership
+
+!insert (oliverWilliams, account24_3) into Ownership
+
+!insert (ethanBrown, account24_4) into Ownership
+
+!insert (chloeSmith, account24_5) into Ownership
+!insert (oliverWilliams, account24_5) into Ownership
+
+!insert (liamMcCarthy, account24_1) into Use
+!insert (chloeSmith, account24_1) into Use
+!insert (oliverWilliams, account24_1) into Use
+
+!insert (miaJohnson, account24_2) into Use
+!insert (ethanBrown, account24_2) into Use
+
+!insert (oliverWilliams, account24_3) into Use
+!insert (chloeSmith, account24_3) into Use
+
+!insert (ethanBrown, account24_4) into Use
+!insert (miaJohnson, account24_4) into Use
+
+!insert (chloeSmith, account24_5) into Use

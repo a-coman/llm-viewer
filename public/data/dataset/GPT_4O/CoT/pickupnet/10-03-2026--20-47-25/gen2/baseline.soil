@@ -1,0 +1,107 @@
+!new Driver('driver8')
+!driver8.id := 'DR-201'
+!driver8.name := 'Jake Morrison'
+
+!new Shipment('shipment9')
+!shipment9.id := 'SH-601'
+!shipment9.status := #NEW
+
+!new Shipment('shipment10')
+!shipment10.id := 'SH-602'
+!shipment10.status := #ASSIGNED
+
+!new Shipment('shipment11')
+!shipment11.id := 'SH-603'
+!shipment11.status := #UNDERWAY
+
+!new Address('address17')
+!address17.text := '15 Ocean Drive, Bondi Beach, NSW'
+
+!new GeoLocation('geoLocation17')
+!geoLocation17.latitude := -33.8915
+!geoLocation17.longitude := 151.2767
+
+!insert (address17, geoLocation17) into AddressContainsGeoLocation
+
+!new Address('address18')
+!address18.text := '220 George Street, Sydney CBD, NSW'
+
+!new GeoLocation('geoLocation18')
+!geoLocation18.latitude := -33.8650
+!geoLocation18.longitude := 151.2094
+
+!insert (address18, geoLocation18) into AddressContainsGeoLocation
+
+!new Address('address19')
+!address19.text := '34 King Road, Parramatta, NSW'
+
+!new GeoLocation('geoLocation19')
+!geoLocation19.latitude := -33.8146
+!geoLocation19.longitude := 151.0034
+
+!insert (address19, geoLocation19) into AddressContainsGeoLocation
+
+!new Address('address20')
+!address20.text := '100 Main Street, North Sydney, NSW'
+
+!new GeoLocation('geoLocation20')
+!geoLocation20.latitude := -33.8393
+!geoLocation20.longitude := 151.2093
+
+!insert (address20, geoLocation20) into AddressContainsGeoLocation
+
+!new Address('address21')
+!address21.text := '50 Mountain View, Blue Mountains, NSW'
+
+!new GeoLocation('geoLocation21')
+!geoLocation21.latitude := -33.7123
+!geoLocation21.longitude := 150.3119
+
+!insert (address21, geoLocation21) into AddressContainsGeoLocation
+
+!new Address('address22')
+!address22.text := '15 Park Lane, Manly Beach, NSW'
+
+!new GeoLocation('geoLocation22')
+!geoLocation22.latitude := -33.7979
+!geoLocation22.longitude := 151.2886
+
+!insert (address22, geoLocation22) into AddressContainsGeoLocation
+
+!new Station('station7')
+
+!new Station('station8')
+
+!new Customer('customer8')
+!customer8.id := 'CUST-401'
+!customer8.name := 'Emily Wong'
+!customer8.twitterUserName := '@emily.travel'
+
+!new Customer('customer9')
+!customer9.id := 'CUST-402'
+!customer9.name := 'Rajesh Kumar'
+!customer9.twitterUserName := '@rajeshSydney'
+
+!insert (driver8, shipment10) into DriverShipment
+!insert (driver8, shipment11) into DriverShipment
+
+!insert (shipment9, address17) into ShipmentContainsPickUpAddress
+!insert (shipment10, address19) into ShipmentContainsPickUpAddress
+!insert (shipment11, address21) into ShipmentContainsPickUpAddress
+
+!insert (shipment9, address18) into ShipmentContainsDeliveryAddress
+!insert (shipment10, address20) into ShipmentContainsDeliveryAddress
+!insert (shipment11, address22) into ShipmentContainsDeliveryAddress
+
+!insert (customer8, shipment9) into CustomerConsistsOfShipment
+!insert (customer8, shipment11) into CustomerConsistsOfShipment
+!insert (customer9, shipment10) into CustomerConsistsOfShipment
+
+!insert (station7, customer8) into StationContainsCustomer
+!insert (station7, customer9) into StationContainsCustomer
+
+!insert (station7, shipment9) into StationShipment
+!insert (station7, shipment10) into StationShipment
+!insert (station8, shipment11) into StationShipment
+
+!insert (station7, driver8) into StationContainsDriver

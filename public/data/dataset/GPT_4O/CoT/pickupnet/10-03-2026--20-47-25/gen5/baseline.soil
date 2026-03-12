@@ -1,0 +1,99 @@
+!new Driver('driver43')
+!driver43.id := 'DR-501'
+!driver43.name := 'Anjali Kumar'
+
+!new Driver('driver44')
+!driver44.id := 'DR-502'
+!driver44.name := 'Rohan Desai'
+
+!new Driver('driver45')
+!driver45.id := 'DR-503'
+!driver45.name := 'Priya Singh'
+
+!new Shipment('shipment57')
+!shipment57.id := 'SH-901'
+!shipment57.status := #UNDERWAY
+
+!new Shipment('shipment58')
+!shipment58.id := 'SH-902'
+!shipment58.status := #DELIVERED
+
+!new Shipment('shipment59')
+!shipment59.id := 'SH-903'
+!shipment59.status := #NEW
+
+!new Address('address101')
+!address101.text := '34 Marine Drive, Churchgate, Mumbai'
+
+!new GeoLocation('geoLocation101')
+!geoLocation101.latitude := 18.9440
+!geoLocation101.longitude := 72.8237
+
+!insert (address101, geoLocation101) into AddressContainsGeoLocation
+
+!new Address('address102')
+!address102.text := '12 Carter Road, Bandra, Mumbai'
+
+!new GeoLocation('geoLocation102')
+!geoLocation102.latitude := 19.0632
+!geoLocation102.longitude := 72.8308
+
+!insert (address102, geoLocation102) into AddressContainsGeoLocation
+
+!new Address('address103')
+!address103.text := '56 Linking Road, Bandra, Mumbai'
+
+!new GeoLocation('geoLocation103')
+!geoLocation103.latitude := 19.0645
+!geoLocation103.longitude := 72.8296
+
+!insert (address103, geoLocation103) into AddressContainsGeoLocation
+
+!new Address('address104')
+!address104.text := '90 Nariman Point, Mumbai'
+
+!new GeoLocation('geoLocation104')
+!geoLocation104.latitude := 18.9256
+!geoLocation104.longitude := 72.8242
+
+!insert (address104, geoLocation104) into AddressContainsGeoLocation
+
+!new Station('station38')
+
+!new Station('station39')
+
+!new Customer('customer44')
+!customer44.id := 'CUST-701'
+!customer44.name := 'Rajiv Verma'
+!customer44.twitterUserName := '@rajivv_mumbai'
+
+!new Customer('customer45')
+!customer45.id := 'CUST-702'
+!customer45.name := 'Sana Malhotra'
+!customer45.twitterUserName := '@sana_mj'
+
+!insert (driver43, shipment57) into DriverShipment
+!insert (driver44, shipment58) into DriverShipment
+
+!insert (shipment57, address101) into ShipmentContainsPickUpAddress
+!insert (shipment58, address103) into ShipmentContainsPickUpAddress
+!insert (shipment59, address103) into ShipmentContainsPickUpAddress
+
+!insert (shipment57, address102) into ShipmentContainsDeliveryAddress
+!insert (shipment58, address104) into ShipmentContainsDeliveryAddress
+!insert (shipment59, address102) into ShipmentContainsDeliveryAddress
+
+!insert (customer44, shipment57) into CustomerConsistsOfShipment
+!insert (customer45, shipment58) into CustomerConsistsOfShipment
+!insert (customer44, shipment59) into CustomerConsistsOfShipment
+
+!insert (station38, customer44) into StationContainsCustomer
+!insert (station38, customer45) into StationContainsCustomer
+
+!insert (station38, shipment57) into StationShipment
+!insert (station38, shipment58) into StationShipment
+!insert (station39, shipment59) into StationShipment
+
+!insert (station38, driver43) into StationContainsDriver
+!insert (station38, driver44) into StationContainsDriver
+!insert (station39, driver45) into StationContainsDriver

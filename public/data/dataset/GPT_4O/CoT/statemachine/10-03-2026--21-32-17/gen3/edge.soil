@@ -1,0 +1,67 @@
+!new StateMachine('cycleMachine')
+!cycleMachine.name := 'cycleMachine'
+
+!new State('entryState')
+!entryState.name := 'entryState'
+
+!new State('loopA')
+!loopA.name := 'loopA'
+
+!new State('loopB')
+!loopB.name := 'loopB'
+
+!new State('endNode')
+!endNode.name := 'endNode'
+
+!new Transition('initToA')
+!initToA.name := 'initToA'
+
+!new Transition('aToB')
+!aToB.name := 'aToB'
+
+!new Transition('bToA')
+!bToA.name := 'bToA'
+
+!new Transition('enterEnd')
+!enterEnd.name := 'enterEnd'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!insert (cycleMachine, entryState) into StateMachineContainsStates
+!insert (cycleMachine, loopA) into StateMachineContainsStates
+!insert (cycleMachine, loopB) into StateMachineContainsStates
+!insert (cycleMachine, endNode) into StateMachineContainsStates
+
+!insert (cycleMachine, initToA) into StateMachineContainsTransitions
+!insert (cycleMachine, aToB) into StateMachineContainsTransitions
+!insert (cycleMachine, bToA) into StateMachineContainsTransitions
+!insert (cycleMachine, enterEnd) into StateMachineContainsTransitions
+
+!insert (initToA, timeEvent2) into TransitionContainsEvents
+!insert (aToB, timeEvent1) into TransitionContainsEvents
+!insert (bToA, timeEvent3) into TransitionContainsEvents
+!insert (enterEnd, timeEvent4) into TransitionContainsEvents
+
+!insert (entryState, initToA) into StateTransition
+!insert (initToA, loopA) into TransitionState
+
+!insert (loopA, aToB) into StateTransition
+!insert (aToB, loopB) into TransitionState
+
+!insert (loopB, bToA) into StateTransition
+!insert (bToA, loopA) into TransitionState
+
+!insert (entryState, enterEnd) into StateTransition
+!insert (enterEnd, endNode) into TransitionState
+
+!insert (cycleMachine, entryState) into StateMachineStartsStates

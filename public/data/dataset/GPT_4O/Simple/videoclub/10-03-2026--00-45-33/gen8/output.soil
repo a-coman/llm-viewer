@@ -1,0 +1,51 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client15')
+!client15.clientId := 15
+!client15.isSuspended := true
+
+-- Adding an additional client with different suspension status
+!new Client('client16')
+!client16.clientId := 16
+!client16.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental12')
+!rental12.date := Date('2023-10-26')
+
+!new Rental('rental13')
+!rental13.date := Date('2023-10-27')
+
+-- Creating Cassettes and Movies
+!new Movie('movie10')
+!movie10.title := 'A Laughing Matter'
+!movie10.availableCopies := 6
+!movie10.genre := #Comedy
+
+-- Creating Series
+!new Series('series8')
+!series8.title := 'The Unknown'
+!series8.availableCopies := 3
+!series8.episode := 9
+
+-- Creating Actors
+!new Actor('actor14')
+!actor14.name := 'Henry Black'
+
+!new Actor('actor15')
+!actor15.name := 'Olivia Green'
+
+-- Creating associations between Client and Rentals
+!insert (client15, rental12) into ClientRental
+!insert (client16, rental13) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental12, movie10) into RentalCassette
+!insert (rental12, series8) into RentalCassette
+!insert (rental13, movie10) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie10, actor14) into CassetteActor
+!insert (series8, actor15) into CassetteActor
+!insert (series8, actor14) into CassetteActor

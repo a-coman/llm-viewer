@@ -1,0 +1,44 @@
+!new Bank('bank7')
+!bank7.country := 'France'
+!bank7.name := 'BNP Paribas'
+!bank7.bic := 'BNPAFRPP'
+
+!new Bank('bank8')
+!bank8.country := 'Brazil'
+!bank8.name := 'Banco do Brasil'
+!bank8.bic := 'BRASBRRJ'
+
+!new Account('account10')
+!account10.iban := 'FR7630006000011234567890189'
+!account10.balance := 6400
+
+!new Account('account11')
+!account11.iban := 'BR15000000012345678912345'
+!account11.balance := 2100
+
+!new Account('account12')
+!account12.iban := 'FR7630006000023456789012345'
+!account12.balance := 520
+
+!new Person('person11')
+!person11.firstName := 'Claire'
+!person11.lastName := 'Dupont'
+!person11.age := 41
+
+!new Person('person12')
+!person12.firstName := 'Pedro'
+!person12.lastName := 'Silva'
+!person12.age := 35
+
+!insert (person11, account10) into Ownership
+!insert (person12, account11) into Ownership
+!insert (person12, account12) into Ownership
+
+!insert (person11, account10) into Use
+!insert (person11, account12) into Use
+!insert (person12, account11) into Use
+!insert (person12, account10) into Use
+
+!insert (bank7, account10) into AccountOfBanks
+!insert (bank8, account11) into AccountOfBanks
+!insert (bank7, account12) into AccountOfBanks

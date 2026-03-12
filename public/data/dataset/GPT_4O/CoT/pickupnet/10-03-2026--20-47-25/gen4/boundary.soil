@@ -1,0 +1,90 @@
+!new Driver('driver37')
+!driver37.id := 'DR4321'
+!driver37.name := 'Juan López'
+
+!new Customer('customer35')
+!customer35.id := 'CU3000'
+!customer35.name := 'Zhen Yao'
+!customer35.twitterUserName := '@ZhenYaoChina'
+
+!new Shipment('shipment48')
+!shipment48.id := 'SH1001'
+!shipment48.status := #NEW
+
+!new Shipment('shipment49')
+!shipment49.id := 'SH1002'
+!shipment49.status := #ASSIGNED
+
+!new Shipment('shipment50')
+!shipment50.id := 'SH1003'
+!shipment50.status := #DELIVERED
+
+!new Address('address86')
+!address86.text := '65 Kyoto Street, Tokyo, Japan'
+
+!new GeoLocation('geoLocation86')
+!geoLocation86.latitude := 35.689487
+!geoLocation86.longitude := 139.691711
+
+!insert (address86, geoLocation86) into AddressContainsGeoLocation
+
+!new Address('address87')
+!address87.text := '123 Seoul Drive, Seoul, South Korea'
+
+!new GeoLocation('geoLocation87')
+!geoLocation87.latitude := 37.566536
+!geoLocation87.longitude := 126.977966
+
+!insert (address87, geoLocation87) into AddressContainsGeoLocation
+
+!new Address('address88')
+!address88.text := '456 Ganges Road, Mumbai, India'
+
+!new GeoLocation('geoLocation88')
+!geoLocation88.latitude := 19.076090
+!geoLocation88.longitude := 72.877426
+
+!insert (address88, geoLocation88) into AddressContainsGeoLocation
+
+!new Address('address89')
+!address89.text := '789 Great Wall Avenue, Beijing, China'
+
+!new GeoLocation('geoLocation89')
+!geoLocation89.latitude := 39.904202
+!geoLocation89.longitude := 116.407394
+
+!insert (address89, geoLocation89) into AddressContainsGeoLocation
+
+!new Address('address90')
+!address90.text := '234 Huangpu River Avenue, Shanghai, China'
+
+!new GeoLocation('geoLocation90')
+!geoLocation90.latitude := 31.230391
+!geoLocation90.longitude := 121.473701
+
+!insert (address90, geoLocation90) into AddressContainsGeoLocation
+
+!new Station('station32')
+
+!insert (driver37, shipment49) into DriverShipment
+
+!insert (shipment48, address86) into ShipmentContainsPickUpAddress
+!insert (shipment48, address87) into ShipmentContainsDeliveryAddress
+
+!insert (shipment49, address86) into ShipmentContainsPickUpAddress
+!insert (shipment49, address88) into ShipmentContainsDeliveryAddress
+
+!insert (shipment50, address89) into ShipmentContainsPickUpAddress
+!insert (shipment50, address90) into ShipmentContainsDeliveryAddress
+
+!insert (customer35, shipment48) into CustomerConsistsOfShipment
+!insert (customer35, shipment49) into CustomerConsistsOfShipment
+!insert (customer35, shipment50) into CustomerConsistsOfShipment
+
+!insert (station32, customer35) into StationContainsCustomer
+
+!insert (station32, shipment48) into StationShipment
+!insert (station32, shipment49) into StationShipment
+!insert (station32, shipment50) into StationShipment
+
+!insert (station32, driver37) into StationContainsDriver

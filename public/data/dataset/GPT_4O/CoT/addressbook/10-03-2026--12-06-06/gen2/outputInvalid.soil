@@ -1,0 +1,105 @@
+!new AddressBook('PrimaryAddressBook')
+
+!new Company('WorldAidInternational')
+!WorldAidInternational.name := 'WorldAid International'
+!WorldAidInternational.phone := '+1-888-555-1234'
+!WorldAidInternational.website := 'www.worldaid.org'
+!WorldAidInternational.email := 'contact@worldaid.org'
+!WorldAidInternational.industry := 'Non-profit Humanitarian Aid'
+
+!new Address('WorldAidInternationalAddress1')
+!WorldAidInternationalAddress1.city := 'New York'
+!WorldAidInternationalAddress1.houseNr := '870'
+!WorldAidInternationalAddress1.street := 'Liberty Avenue'
+!insert (WorldAidInternational, WorldAidInternationalAddress1) into ContactContainsAddress
+
+!new Company('WorldAidAsiaPacific')
+!WorldAidAsiaPacific.name := 'WorldAid Asia Pacific'
+!WorldAidAsiaPacific.phone := '+61-2-5550-9876'
+!WorldAidAsiaPacific.website := 'asia.worldaid.org'
+!WorldAidAsiaPacific.email := 'admin@asia.worldaid.org'
+!WorldAidAsiaPacific.industry := 'Non-profit Regional Branch'
+
+!new Address('WorldAidAsiaPacificAddress1')
+!WorldAidAsiaPacificAddress1.city := 'Sydney'
+!WorldAidAsiaPacificAddress1.houseNr := '101'
+!WorldAidAsiaPacificAddress1.street := 'Ocean Avenue'
+!insert (WorldAidAsiaPacific, WorldAidAsiaPacificAddress1) into ContactContainsAddress
+
+!new Company('WorldAidEurope')
+!WorldAidEurope.name := 'WorldAid Europe'
+!WorldAidEurope.phone := '+49-30-5551-2345'
+!WorldAidEurope.website := 'europe.worldaid.org'
+!WorldAidEurope.email := 'europe@worldaid.org'
+!WorldAidEurope.industry := 'Non-profit Regional Branch'
+
+!new Address('WorldAidEuropeAddress1')
+!WorldAidEuropeAddress1.city := 'Berlin'
+!WorldAidEuropeAddress1.houseNr := '75'
+!WorldAidEuropeAddress1.street := 'Wilhelmstrasse'
+!insert (WorldAidEurope, WorldAidEuropeAddress1) into ContactContainsAddress
+
+!new Company('HelpingHandsAsia')
+!HelpingHandsAsia.name := 'Helping Hands Asia'
+!HelpingHandsAsia.phone := '+91-40-5552-6789'
+!HelpingHandsAsia.website := 'helpinghands.org'
+!HelpingHandsAsia.email := 'info@helpinghands.org'
+!HelpingHandsAsia.industry := 'Local NGO'
+
+!new Address('HelpingHandsAsiaAddress1')
+!HelpingHandsAsiaAddress1.city := 'Mumbai'
+!HelpingHandsAsiaAddress1.houseNr := '50'
+!HelpingHandsAsiaAddress1.street := 'Unity Road'
+!insert (HelpingHandsAsia, HelpingHandsAsiaAddress1) into ContactContainsAddress
+
+!new Company('CareAndShareEurope')
+!CareAndShareEurope.name := 'Care & Share Europe'
+!CareAndShareEurope.phone := '+34-914-555722'
+!CareAndShareEurope.website := 'careandshare.org'
+!CareAndShareEurope.email := 'contact@careandshare.org'
+!CareAndShareEurope.industry := 'Local NGO'
+
+!new Address('CareAndShareEuropeAddress1')
+!CareAndShareEuropeAddress1.city := 'Madrid'
+!CareAndShareEuropeAddress1.houseNr := '190'
+!CareAndShareEuropeAddress1.street := 'Gran Via'
+!insert (CareAndShareEurope, CareAndShareEuropeAddress1) into ContactContainsAddress
+
+!new Note('WorldAidAsiaPacificNote1')
+!WorldAidAsiaPacificNote1.author := 'John D., Head of Operations'
+!WorldAidAsiaPacificNote1.time := Date('2023-08-01')
+!WorldAidAsiaPacificNote1.type := #CALL
+!WorldAidAsiaPacificNote1.comment := 'Coordination for the upcoming regional conference.'
+!insert (WorldAidAsiaPacific, WorldAidAsiaPacificNote1) into ContactContainsNote
+
+!new Relationship('WorldAidToAsiaSubdivision')
+!WorldAidToAsiaSubdivision.type := #SUBDIVISION
+!insert (WorldAidToAsiaSubdivision, WorldAidAsiaPacific) into RelationshipToContact
+!insert (WorldAidInternational, WorldAidToAsiaSubdivision) into ContactToRelationship
+
+!new Relationship('WorldAidToEuropeBoss')
+!WorldAidToEuropeBoss.type := #BOSS
+!insert (WorldAidToEuropeBoss, WorldAidEurope) into RelationshipToContact
+!insert (WorldAidInternational, WorldAidToEuropeBoss) into ContactToRelationship
+
+!new Relationship('AsiaToHelpingHandsPartner')
+!AsiaToHelpingHandsPartner.type := #COWORKER
+!insert (AsiaToHelpingHandsPartner, HelpingHandsAsia) into RelationshipToContact
+!insert (WorldAidAsiaPacific, AsiaToHelpingHandsPartner) into ContactToRelationship
+
+!new Relationship('EuropeToAsiaCoworker')
+!EuropeToAsiaCoworker.type := #COWORKER
+!insert (EuropeToAsiaCoworker, WorldAidAsiaPacific) into RelationshipToContact
+!insert (WorldAidEurope, EuropeToAsiaCoworker) into ContactToRelationship
+
+!new Relationship('EuropeToCareAndSharePartner')
+!EuropeToCareAndSharePartner.type := #COWORKER
+!insert (EuropeToCareAndSharePartner, CareAndShareEurope) into RelationshipToContact
+!insert (WorldAidEurope, EuropeToCareAndSharePartner) into ContactToRelationship
+
+!insert (PrimaryAddressBook, WorldAidInternational) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, WorldAidAsiaPacific) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, WorldAidEurope) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, HelpingHandsAsia) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, CareAndShareEurope) into AddressBookMadeOfContact
+

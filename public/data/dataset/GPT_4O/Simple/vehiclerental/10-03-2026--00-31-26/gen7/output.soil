@@ -1,0 +1,70 @@
+!new RentalOffice('office7')
+!office7.name := 'Mountain View Rentals'
+!office7.number := 707
+!office7.address := '888 Summit St, Boulder, CO'
+
+!new Truck('truck13')
+!truck13.id := 513
+!truck13.registrationState := #CO
+!truck13.licensePlateNumber := 'CO-TRK-4321'
+!truck13.vehicleTypeCode := #TRUCK10
+!truck13.registrationLastMaintenanceDate := Date('2023-11-01')
+!truck13.expirationDate := Date('2024-11-01')
+!truck13.odometerReading := 10000
+!truck13.gasTankCapacity := 31.0
+!truck13.workingRadio := true
+!truck13.mileage := 18
+
+!new Individual('individual7')
+!individual7.name := 'Jessica Lane'
+!individual7.address := '23 Pine St, Aspen, CO'
+!individual7.poorRisk := false
+!individual7.homePhone := '555-4321'
+!individual7.driverLicenseState := #CO
+!individual7.driverLicenseNumber := 12345678
+!individual7.driverLicenseExpirationDate := Date('2025-05-15')
+
+!new RentalAgreement('agreement13')
+!agreement13.number := 3013
+!agreement13.rentalDate := Date('2023-12-10')
+!agreement13.anticipatedDuration := 3
+!agreement13.depositPaid := 180.0
+!agreement13.quotedDailyRate := 55.00
+!agreement13.quotedRatePerMile := 0.40
+
+!new Truck('truck14')
+!truck14.id := 514
+!truck14.registrationState := #DE
+!truck14.licensePlateNumber := 'DE-TRK-8765'
+!truck14.vehicleTypeCode := #COVERED_TRAILER
+!truck14.registrationLastMaintenanceDate := Date('2023-10-20')
+!truck14.expirationDate := Date('2025-10-20')
+!truck14.odometerReading := 22000
+!truck14.gasTankCapacity := 27.0
+!truck14.workingRadio := true
+!truck14.mileage := 15
+
+!new Company('company7')
+!company7.name := 'Peak Transport Inc.'
+!company7.address := '456 Ridge Line, Wilmington, DE'
+!company7.poorRisk := false
+!company7.idNumber := 345678
+
+!new RentalAgreement('agreement14')
+!agreement14.number := 3014
+!agreement14.rentalDate := Date('2023-11-29')
+!agreement14.anticipatedDuration := 9
+!agreement14.depositPaid := 400.0
+!agreement14.quotedDailyRate := 75.00
+!agreement14.quotedRatePerMile := 0.65
+
+!insert (office7, truck13) into RentalOfficeVehicle
+!insert (office7, truck14) into RentalOfficeVehicle
+!insert (office7, agreement13) into RentalOfficeRentalAgreementOrigin
+!insert (office7, agreement13) into RentalOfficeRentalAgreementDrop
+!insert (office7, agreement14) into RentalOfficeRentalAgreementOrigin
+!insert (office7, agreement14) into RentalOfficeRentalAgreementDrop
+!insert (agreement13, truck13) into RentalAgreementVehicle
+!insert (agreement13, individual7) into RentalAgreementCustomer
+!insert (agreement14, truck14) into RentalAgreementVehicle
+!insert (agreement14, company7) into RentalAgreementCustomer

@@ -1,0 +1,168 @@
+!new Club('clubBH')
+!clubBH.name := 'Mumbai Mariners FC'
+!clubBH.homeGround := 'Navi Mumbai Arena'
+!clubBH.chairman := 'Ananya Mehta'
+
+!new Club('clubBI')
+!clubBI.name := 'Cape Town ke Nako'
+!clubBI.homeGround := 'Green Point Stadium'
+!clubBI.chairman := 'Sipho Ndlovu'
+
+!new Team('teamBH')
+!teamBH.name := 'Mumbai Mariners Young Stars'
+
+!new Team('teamBI')
+!teamBI.name := 'Cape Town Future Champions'
+
+!insert (clubBH, teamBH) into ClubTeam
+!insert (clubBI, teamBI) into ClubTeam
+
+!new Player('player67')
+!player67.name := 'Arjun Patel'
+!player67.age := 16
+!player67.bestFoot := #RIGHT
+!player67.phoneNumber := '+919876543210'
+
+!new Player('player68')
+!player68.name := 'Thandiwe Mbatha'
+!player68.age := 17
+!player68.bestFoot := #LEFT
+!player68.phoneNumber := '+27721234567'
+
+!new Player('player69')
+!player69.name := 'Karishma Joshi'
+!player69.age := 15
+!player69.bestFoot := #RIGHT
+!player69.phoneNumber := '+919123456789'
+
+!insert (teamBH, player67) into TeamPlayer
+!insert (teamBI, player68) into TeamPlayer
+!insert (teamBH, player69) into TeamPlayer
+
+!new Position('position120')
+!position120.positionName := #GOALKEEPER
+
+!new Position('position118')
+!position118.positionName := #DEFENDER
+
+!new Position('position117')
+!position117.positionName := #MIDFIELDER
+
+!insert (player67, position117) into PlayerPositions
+!insert (player68, position118) into PlayerPositions
+!insert (player69, position120) into PlayerPositions
+
+!new Competition('competition27')
+!competition27.name := 'Youth Integration League'
+!competition27.type := 'Development Program'
+
+!new Match('match35')
+!match35.date := '22-11-2023'
+!match35.homeAway := true
+
+!insert (teamBH, match35) into LocalMatch
+!insert (teamBI, match35) into VisitorMatch
+!insert (competition27, match35) into CompetitionMatch
+
+!new MatchReport('matchReport35')
+!matchReport35.duration := 60
+!matchReport35.scoreVisitor := 1
+!matchReport35.scoreLocal := 1
+
+!insert (match35, matchReport35) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer62')
+!matchPlayer62.booked := false
+!matchPlayer62.goals := 1
+!matchPlayer62.rating := 8
+
+!new MatchPlayer('matchPlayer63')
+!matchPlayer63.booked := false
+!matchPlayer63.goals := 1
+!matchPlayer63.rating := 9
+
+!new MatchPlayer('matchPlayer64')
+!matchPlayer64.booked := false
+!matchPlayer64.goals := 0
+!matchPlayer64.rating := 7
+
+!insert (player67, matchPlayer62) into PlayerMatch
+!insert (player68, matchPlayer63) into PlayerMatch
+!insert (player69, matchPlayer64) into PlayerMatch
+
+!insert (match35, matchPlayer62) into MatchMatchPlayer
+!insert (match35, matchPlayer63) into MatchMatchPlayer
+!insert (match35, matchPlayer64) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp62')
+!mpp62.positionName := #MIDFIELDER
+!mpp62.number := 8
+
+!new MatchPlayerPosition('mpp63')
+!mpp63.positionName := #FORWARD
+!mpp63.number := 11
+
+!new MatchPlayerPosition('mpp64')
+!mpp64.positionName := #GOALKEEPER
+!mpp64.number := 1
+
+!insert (matchPlayer62, mpp62) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer63, mpp63) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer64, mpp64) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent100')
+!matchEvent100.eventType := #GOAL
+!matchEvent100.time := 30
+
+!new MatchEvent('matchEvent101')
+!matchEvent101.eventType := #GOAL
+!matchEvent101.time := 48
+
+!insert (match35, matchEvent100) into MatchMatchEvent
+!insert (match35, matchEvent101) into MatchMatchEvent
+
+!new TrainingSession('trainingSession52')
+!trainingSession52.date := '18-11-2023'
+!trainingSession52.location := 'Navi Mumbai Arena Training Grounds'
+!trainingSession52.purpose := 'Enhance technical skills and foster community spirit.'
+
+!new TrainingSession('trainingSession53')
+!trainingSession53.date := '18-11-2023'
+!trainingSession53.location := 'Green Point Stadium Practice Area'
+!trainingSession53.purpose := 'Community-based skill enhancement and resilience building.'
+
+!insert (teamBH, trainingSession52) into TeamTraining
+!insert (teamBI, trainingSession53) into TeamTraining
+
+!new TrainingNotes('trainingNote52')
+!trainingNote52.note := 'Players showed improved communication and teamwork, creating a supportive community environment.'
+!trainingNote52.date := '18-11-2023'
+
+!new TrainingNotes('trainingNote53')
+!trainingNote53.note := 'Enhanced local engagement and skill cooperation.'
+!trainingNote53.date := '18-11-2023'
+
+!insert (trainingSession52, trainingNote52) into TrainingTrainingNotes
+!insert (trainingSession53, trainingNote53) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective50')
+!trainingObjective50.areaToImprove := 'Interpersonal Skills'
+!trainingObjective50.startDate := '15-11-2023'
+!trainingObjective50.endDate := '20-11-2023'
+!trainingObjective50.success := true
+
+!new TrainingObjective('trainingObjective51')
+!trainingObjective51.areaToImprove := 'Technical Skills'
+!trainingObjective51.startDate := '15-11-2023'
+!trainingObjective51.endDate := '20-11-2023'
+!trainingObjective51.success := true
+
+!insert (trainingObjective50, player67) into TrainingObjectivePlayer
+!insert (trainingObjective51, player68) into TrainingObjectivePlayer
+!insert (trainingObjective51, player69) into TrainingObjectivePlayer
+
+!new TrainingFailedToAttend('trainingFail22')
+!trainingFail22.reason := 'Attending exams'
+
+!insert (trainingFail22, player69) into FailedPlayer
+!insert (trainingSession52, trainingFail22) into TrainingFailded

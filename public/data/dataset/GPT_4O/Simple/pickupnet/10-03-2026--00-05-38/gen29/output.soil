@@ -1,0 +1,64 @@
+!new Driver('driver54')
+!driver54.id := 'D054'
+!driver54.name := 'Groot'
+
+!new Driver('driver55')
+!driver55.id := 'D055'
+!driver55.name := 'Mantis'
+
+!new Shipment('shipment57')
+!shipment57.id := 'SHP12401'
+!shipment57.status := #NEW
+
+!new Shipment('shipment58')
+!shipment58.id := 'SHP12402'
+!shipment58.status := #DELIVERED
+
+!new Address('address57')
+!address57.text := '5555 Sapling St, Planet X'
+
+!new Address('address58')
+!address58.text := '5656 Empath Ave, Ego'
+
+!new GeoLocation('geoLocation57')
+!geoLocation57.latitude := 23.6345
+!geoLocation57.longitude := -102.5528
+
+!new GeoLocation('geoLocation58')
+!geoLocation58.latitude := 22.9068
+!geoLocation58.longitude := -43.1729
+
+!insert (address57, geoLocation57) into AddressContainsGeoLocation
+!insert (address58, geoLocation58) into AddressContainsGeoLocation
+
+!new Customer('customer57')
+!customer57.id := 'CUST057'
+!customer57.name := 'Nebula'
+!customer57.twitterUserName := '@cyborgdaughter'
+
+!new Customer('customer58')
+!customer58.id := 'CUST058'
+!customer58.name := 'Yondu Udonta'
+!customer58.twitterUserName := '@ravagerleader'
+
+!new Station('station29')
+
+!insert (station29, customer57) into StationContainsCustomer
+!insert (station29, customer58) into StationContainsCustomer
+
+!insert (station29, shipment57) into StationShipment
+!insert (station29, shipment58) into StationShipment
+
+!insert (station29, driver54) into StationContainsDriver
+!insert (station29, driver55) into StationContainsDriver
+
+!insert (shipment57, address57) into ShipmentContainsPickUpAddress
+!insert (shipment57, address58) into ShipmentContainsDeliveryAddress
+
+!insert (shipment58, address58) into ShipmentContainsPickUpAddress
+!insert (shipment58, address57) into ShipmentContainsDeliveryAddress
+
+!insert (customer57, shipment57) into CustomerConsistsOfShipment
+!insert (customer58, shipment58) into CustomerConsistsOfShipment
+
+!insert (driver55, shipment58) into DriverShipment

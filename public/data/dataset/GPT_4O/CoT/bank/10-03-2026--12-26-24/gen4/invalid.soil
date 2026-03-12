@@ -1,0 +1,41 @@
+!new Bank('bankGlobal')
+!bankGlobal.country := 'United States'
+!bankGlobal.name := 'Transnational Banking Corporation'
+!bankGlobal.bic := 'TBCUS33'
+
+!new Person('weiZhang')
+!weiZhang.firstName := 'Wei'
+!weiZhang.lastName := 'Zhang'
+!weiZhang.age := 40
+
+!new Person('amaraNguyen')
+!amaraNguyen.firstName := 'Amara'
+!amaraNguyen.lastName := 'Nguyen'
+!amaraNguyen.age := 35
+
+!new Person('liamOConnor')
+!liamOConnor.firstName := 'Liam'
+!liamOConnor.lastName := 'O''Connor'
+!liamOConnor.age := 29
+
+!new Account('account19_7')
+!account19_7.iban := 'US72 1234 5678 9012'
+!account19_7.balance := 20000
+
+!new Account('account19_8')
+!account19_8.iban := 'US37 6789 0123 4567'
+
+!insert (bankGlobal, account19_7) into AccountOfBanks
+!insert (bankGlobal, account19_8) into AccountOfBanks
+
+!insert (weiZhang, account19_7) into Ownership
+!insert (amaraNguyen, account19_7) into Ownership
+
+!insert (liamOConnor, account19_8) into Ownership
+
+!insert (weiZhang, account19_7) into Use
+!insert (amaraNguyen, account19_7) into Use
+!insert (liamOConnor, account19_7) into Use
+
+!insert (liamOConnor, account19_8) into Use
+!insert (amaraNguyen, account19_8) into Use

@@ -1,0 +1,36 @@
+!new Booking('booking23')
+!booking23.startDate := '2025-09-15'
+!booking23.endDate := '2025-09-20'
+!booking23.canceled := true
+!booking23.bookingId := 123
+!booking23.confirmed := false
+
+!new Bill('bill23')
+!bill23.price := 0.00
+!bill23.billId := 5023
+
+!new Customer('customer23')
+!customer23.firstName := 'Xavier'
+!customer23.lastName := 'Young'
+
+!new RoomReservation('reservation23')
+!reservation23.checkInDate := '2025-09-15'
+!reservation23.checkOutDate := '2025-09-20'
+
+!new Room('room2001')
+!room2001.numBeds := 2
+!room2001.pricePerNight := 125.00
+!room2001.occupied := false
+!room2001.blocked := true
+!room2001.roomNumber := 2001
+
+!new RoomExtra('extra29')
+!extra29.price := 15.00
+!extra29.description := 'Golf Course Access'
+
+!insert (booking23, bill23) into BookingBill
+!insert (booking23, customer23) into BookingCustomer
+!insert (booking23, reservation23) into BookingRoomReservation
+!insert (reservation23, extra29) into RoomReservationExtras
+!insert (reservation23, room2001) into RoomReservationRoom
+!insert (bill23, reservation23) into BillRoomReservation

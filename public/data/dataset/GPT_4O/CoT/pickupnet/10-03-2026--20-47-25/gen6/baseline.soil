@@ -1,0 +1,91 @@
+!new Driver('driver51')
+!driver51.id := 'DR-601'
+!driver51.name := 'Lakshmi Reddy'
+
+!new Driver('driver52')
+!driver52.id := 'DR-602'
+!driver52.name := 'Akhil Nair'
+
+!new Shipment('shipment67')
+!shipment67.id := 'SH-1001'
+!shipment67.status := #NEW
+
+!new Shipment('shipment68')
+!shipment68.id := 'SH-1002'
+!shipment68.status := #UNDERWAY
+
+!new Shipment('shipment69')
+!shipment69.id := 'SH-1003'
+!shipment69.status := #ASSIGNED
+
+!new Address('address117')
+!address117.text := '24 MG Road, Ashok Nagar, Bangalore'
+
+!new GeoLocation('geoLocation117')
+!geoLocation117.latitude := 12.9716
+!geoLocation117.longitude := 77.5946
+
+!insert (address117, geoLocation117) into AddressContainsGeoLocation
+
+!new Address('address118')
+!address118.text := '2 Indiranagar, Bangalore'
+
+!new GeoLocation('geoLocation118')
+!geoLocation118.latitude := 12.9787
+!geoLocation118.longitude := 77.6401
+
+!insert (address118, geoLocation118) into AddressContainsGeoLocation
+
+!new Address('address119')
+!address119.text := '10 Whitefield Main Road, Bangalore'
+
+!new GeoLocation('geoLocation119')
+!geoLocation119.latitude := 12.9698
+!geoLocation119.longitude := 77.7500
+
+!insert (address119, geoLocation119) into AddressContainsGeoLocation
+
+!new Address('address120')
+!address120.text := '56 Electronic City, Bangalore'
+
+!new GeoLocation('geoLocation120')
+!geoLocation120.latitude := 12.8419
+!geoLocation120.longitude := 77.6770
+
+!insert (address120, geoLocation120) into AddressContainsGeoLocation
+
+!new Station('station45')
+
+!new Customer('customer51')
+!customer51.id := 'CUST-801'
+!customer51.name := 'Pranav Joshi'
+!customer51.twitterUserName := '@pranav_j'
+
+!new Customer('customer52')
+!customer52.id := 'CUST-802'
+!customer52.name := 'Meera Sinha'
+!customer52.twitterUserName := '@meera_sinha'
+
+!insert (driver51, shipment68) into DriverShipment
+
+!insert (shipment67, address117) into ShipmentContainsPickUpAddress
+!insert (shipment68, address119) into ShipmentContainsPickUpAddress
+!insert (shipment69, address117) into ShipmentContainsPickUpAddress
+
+!insert (shipment67, address118) into ShipmentContainsDeliveryAddress
+!insert (shipment68, address120) into ShipmentContainsDeliveryAddress
+!insert (shipment69, address118) into ShipmentContainsDeliveryAddress
+
+!insert (customer51, shipment67) into CustomerConsistsOfShipment
+!insert (customer52, shipment68) into CustomerConsistsOfShipment
+!insert (customer52, shipment69) into CustomerConsistsOfShipment
+
+!insert (station45, customer51) into StationContainsCustomer
+!insert (station45, customer52) into StationContainsCustomer
+
+!insert (station45, shipment67) into StationShipment
+!insert (station45, shipment68) into StationShipment
+!insert (station45, shipment69) into StationShipment
+
+!insert (station45, driver51) into StationContainsDriver
+!insert (station45, driver52) into StationContainsDriver

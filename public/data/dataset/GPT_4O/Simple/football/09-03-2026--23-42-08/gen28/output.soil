@@ -1,0 +1,136 @@
+!new Club('club55')
+!club55.name := 'Crystal Ravens'
+!club55.homeGround := 'Obsidian Arena'
+!club55.chairman := 'Raven Noir'
+
+!new Club('club56')
+!club56.name := 'Desert Falcons'
+!club56.homeGround := 'Sahara Nest'
+!club56.chairman := 'Falcon Blaze'
+
+!new Team('team55')
+!team55.name := 'Raven Shadows'
+!insert (club55, team55) into ClubTeam
+
+!new Team('team56')
+!team56.name := 'Falcon Fury'
+!insert (club56, team56) into ClubTeam
+
+!new Competition('sunsetSeries')
+!sunsetSeries.name := 'Sunset Series'
+!sunsetSeries.type := 'Round Robin'
+
+!new Match('match28')
+!match28.date := '2034-03-10'
+!match28.homeAway := false
+!insert (sunsetSeries, match28) into CompetitionMatch
+!insert (team55, match28) into LocalMatch
+!insert (team56, match28) into VisitorMatch
+
+!new MatchReport('report28')
+!report28.duration := 120
+!report28.scoreVisitor := 3
+!report28.scoreLocal := 1
+!insert (match28, report28) into MatchMatchReport
+
+!new Player('player55')
+!player55.name := 'Diana Eclipse'
+!player55.age := 31
+!player55.bestFoot := #RIGHT
+!player55.phoneNumber := '9123456789'
+!insert (team55, player55) into TeamPlayer
+
+!new Player('player56')
+!player56.name := 'Ray Blaze'
+!player56.age := 30
+!player56.bestFoot := #LEFT
+!player56.phoneNumber := '8765432190'
+!insert (team56, player56) into TeamPlayer
+
+!new Position('position55')
+!position55.positionName := #GOALKEEPER
+!insert (player55, position55) into PlayerPositions
+
+!new Position('position56')
+!position56.positionName := #FORWARD
+!insert (player56, position56) into PlayerPositions
+
+!new MatchPlayer('matchPlayer55')
+!matchPlayer55.booked := true
+!matchPlayer55.goals := 0
+!matchPlayer55.rating := 6
+!insert (player55, matchPlayer55) into PlayerMatch
+!insert (match28, matchPlayer55) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer56')
+!matchPlayer56.booked := false
+!matchPlayer56.goals := 2
+!matchPlayer56.rating := 9
+!insert (player56, matchPlayer56) into PlayerMatch
+!insert (match28, matchPlayer56) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition55')
+!matchPlayerPosition55.positionName := #GOALKEEPER
+!matchPlayerPosition55.number := 1
+!insert (matchPlayer55, matchPlayerPosition55) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition56')
+!matchPlayerPosition56.positionName := #FORWARD
+!matchPlayerPosition56.number := 11
+!insert (matchPlayer56, matchPlayerPosition56) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event109')
+!event109.eventType := #GOAL
+!event109.time := 30
+!insert (match28, event109) into MatchMatchEvent
+
+!new MatchEvent('event110')
+!event110.eventType := #GOAL
+!event110.time := 50
+!insert (match28, event110) into MatchMatchEvent
+
+!new MatchEvent('event111')
+!event111.eventType := #GOAL
+!event111.time := 75
+!insert (match28, event111) into MatchMatchEvent
+
+!new MatchEvent('event112')
+!event112.eventType := #GOAL
+!event112.time := 105
+!insert (match28, event112) into MatchMatchEvent
+
+!new TrainingSession('training55')
+!training55.date := '2034-02-10'
+!training55.location := 'Shaded Haven'
+!training55.purpose := 'Defensive Wall Practice'
+!insert (team55, training55) into TeamTraining
+
+!new TrainingSession('training56')
+!training56.date := '2034-02-18'
+!training56.location := 'Falcon Perch'
+!training56.purpose := 'Goal Scoring Drills'
+!insert (team56, training56) into TeamTraining
+
+!new TrainingNotes('trainingNote55')
+!trainingNote55.note := 'Focused on quick reflex save techniques'
+!trainingNote55.date := '2034-02-10'
+!insert (training55, trainingNote55) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote56')
+!trainingNote56.note := 'Enhanced targeting and power in shots'
+!trainingNote56.date := '2034-02-18'
+!insert (training56, trainingNote56) into TrainingTrainingNotes
+
+!new TrainingObjective('objective55')
+!objective55.areaToImprove := 'Penalty Defense'
+!objective55.startDate := '2033-11-01'
+!objective55.endDate := '2034-03-01'
+!objective55.success := false
+!insert (objective55, player55) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective56')
+!objective56.areaToImprove := 'Attacking Aggression'
+!objective56.startDate := '2033-11-15'
+!objective56.endDate := '2034-03-15'
+!objective56.success := true
+!insert (objective56, player56) into TrainingObjectivePlayer

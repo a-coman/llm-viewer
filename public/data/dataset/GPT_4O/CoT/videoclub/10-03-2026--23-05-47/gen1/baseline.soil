@@ -1,0 +1,30 @@
+!new Client('client1')
+!client1.clientId := 1023
+!client1.isSuspended := false
+
+!new Rental('rental1')
+!rental1.date := Date('2023-07-15')
+
+!new Movie('movie1')
+!movie1.title := 'The Adventurer\'s Quest'
+!movie1.availableCopies := 5
+!movie1.genre := #Action
+
+!new Series('series1')
+!series1.title := 'Comedy Nights Season 2'
+!series1.availableCopies := 3
+!series1.episode := 4
+
+!new Actor('actor1')
+!actor1.name := 'Liam O\'Sullivan'
+
+!new Actor('actor2')
+!actor2.name := 'Sophia Chen'
+
+!insert (client1, rental1) into ClientRental
+!insert (rental1, movie1) into RentalCassette
+!insert (rental1, series1) into RentalCassette
+
+!insert (movie1, actor1) into CassetteActor
+!insert (movie1, actor2) into CassetteActor
+!insert (series1, actor2) into CassetteActor

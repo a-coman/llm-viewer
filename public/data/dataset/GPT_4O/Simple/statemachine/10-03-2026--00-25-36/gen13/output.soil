@@ -1,0 +1,67 @@
+!new StateMachine('stateMachine14')
+!stateMachine14.name := 'ticketReservationSystem'
+
+!new State('state40')
+!state40.name := 'browsing'
+
+!new State('state41')
+!state41.name := 'seatSelection'
+
+!new State('state42')
+!state42.name := 'paymentPending'
+
+!new State('state43')
+!state43.name := 'reservationConfirmed'
+
+!new Transition('transition41')
+!transition41.name := 'selectSeat'
+
+!new Transition('transition42')
+!transition42.name := 'proceedToPayment'
+
+!new Transition('transition43')
+!transition43.name := 'confirmReservation'
+
+!new Transition('transition44')
+!transition44.name := 'restartBrowsing'
+
+!new TimeEvent('timeEvent41')
+!timeEvent41.time := 2
+
+!new TimeEvent('timeEvent42')
+!timeEvent42.time := 3
+
+!new TimeEvent('timeEvent43')
+!timeEvent43.time := 4
+
+!new TimeEvent('timeEvent44')
+!timeEvent44.time := 1
+
+!insert (stateMachine14, state40) into StateMachineContainsStates
+!insert (stateMachine14, state41) into StateMachineContainsStates
+!insert (stateMachine14, state42) into StateMachineContainsStates
+!insert (stateMachine14, state43) into StateMachineContainsStates
+
+!insert (stateMachine14, transition41) into StateMachineContainsTransitions
+!insert (stateMachine14, transition42) into StateMachineContainsTransitions
+!insert (stateMachine14, transition43) into StateMachineContainsTransitions
+!insert (stateMachine14, transition44) into StateMachineContainsTransitions
+
+!insert (transition41, timeEvent41) into TransitionContainsEvents
+!insert (transition42, timeEvent42) into TransitionContainsEvents
+!insert (transition43, timeEvent43) into TransitionContainsEvents
+!insert (transition44, timeEvent44) into TransitionContainsEvents
+
+!insert (state40, transition41) into StateTransition
+!insert (transition41, state41) into TransitionState
+
+!insert (state41, transition42) into StateTransition
+!insert (transition42, state42) into TransitionState
+
+!insert (state42, transition43) into StateTransition
+!insert (transition43, state43) into TransitionState
+
+!insert (state43, transition44) into StateTransition
+!insert (transition44, state40) into TransitionState
+
+!insert (stateMachine14, state40) into StateMachineStartsStates

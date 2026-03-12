@@ -1,0 +1,155 @@
+!new Club('clubAN')
+!clubAN.name := 'Alpine Eagles FC'
+!clubAN.homeGround := "Eagle's Nest Stadium, Innsbruck"
+!clubAN.chairman := 'Klaus Schneider'
+
+!new Club('clubAO')
+!clubAO.name := 'Danube Drifters FC'
+!clubAO.homeGround := 'Drifters Arena, Vienna'
+!clubAO.chairman := 'Petra Novak'
+
+!new Team('teamAN')
+!teamAN.name := 'Alpine Eagles Reserves'
+
+!new Team('teamAO')
+!teamAO.name := 'Danube Youth'
+
+!insert (clubAN, teamAN) into ClubTeam
+!insert (clubAO, teamAO) into ClubTeam
+
+!new Player('player44')
+!player44.name := 'Lukas Bauer'
+!player44.age := 21
+!player44.bestFoot := #LEFT
+!player44.phoneNumber := '+43 650 123 4567'
+
+!new Player('player45')
+!player45.name := 'Viktoria Klein'
+!player45.age := 22
+!player45.bestFoot := #RIGHT
+!player45.phoneNumber := '+43 660 876 5432'
+
+!new Player('player46')
+!player46.name := 'Martin Weber'
+!player46.age := 19
+!player46.bestFoot := #BOTH
+!player46.phoneNumber := '+43 670 321 9876'
+
+!insert (teamAN, player44) into TeamPlayer
+!insert (teamAO, player45) into TeamPlayer
+!insert (teamAN, player46) into TeamPlayer
+
+!new Position('position100')
+!position100.positionName := #MIDFIELDER
+
+!new Position('position97')
+!position97.positionName := #DEFENDER
+
+!new Position('position94')
+!position94.positionName := #GOALKEEPER
+
+!new Position('position83')
+!position83.positionName := #FORWARD
+
+!insert (player44, position100) into PlayerPositions
+!insert (player44, position97) into PlayerPositions
+!insert (player45, position83) into PlayerPositions
+!insert (player46, position97) into PlayerPositions
+!insert (player46, position100) into PlayerPositions
+!insert (player46, position94) into PlayerPositions
+
+!new Match('match22')
+!match22.date := '15th January 2024'
+!match22.homeAway := true
+
+!insert (teamAN, match22) into LocalMatch
+!insert (teamAO, match22) into VisitorMatch
+
+!new MatchReport('matchReport22')
+!matchReport22.duration := 90
+!matchReport22.scoreVisitor := 0
+!matchReport22.scoreLocal := 1
+
+!insert (match22, matchReport22) into MatchMatchReport
+
+!new MatchEvent('matchEvent60')
+!matchEvent60.eventType := #GOAL
+!matchEvent60.time := 50
+
+!new MatchEvent('matchEvent61')
+!matchEvent61.eventType := #FOUL
+!matchEvent61.time := 60
+
+!insert (match22, matchEvent60) into MatchMatchEvent
+!insert (match22, matchEvent61) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer39')
+!matchPlayer39.booked := false
+!matchPlayer39.goals := 0
+!matchPlayer39.rating := 7
+
+!new MatchPlayer('matchPlayer40')
+!matchPlayer40.booked := false
+!matchPlayer40.goals := 0
+!matchPlayer40.rating := 8
+
+!new MatchPlayer('matchPlayer41')
+!matchPlayer41.booked := true
+!matchPlayer41.goals := 1
+!matchPlayer41.rating := 9
+
+!insert (player44, matchPlayer39) into PlayerMatch
+!insert (player45, matchPlayer40) into PlayerMatch
+!insert (player46, matchPlayer41) into PlayerMatch
+
+!insert (match22, matchPlayer39) into MatchMatchPlayer
+!insert (match22, matchPlayer40) into MatchMatchPlayer
+!insert (match22, matchPlayer41) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position98')
+!position98.positionName := #MIDFIELDER
+!position98.number := 12
+
+!new MatchPlayerPosition('position86')
+!position86.positionName := #FORWARD
+!position86.number := 9
+
+!new MatchPlayerPosition('position99')
+!position99.positionName := #DEFENDER
+!position99.number := 2
+
+!insert (matchPlayer39, position98) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer40, position86) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer41, position99) into MatchPlayerMatchPlayerPosition
+
+!new MatchNote('matchNote15')
+!matchNote15.note := 'Despite adverse weather conditions, strategic use of player versatility turned the tide in favor of the Eagles.'
+!matchNote15.date := '16th January 2024'
+
+!insert (match22, matchNote15) into MatchMatchNote
+
+!new TrainingSession('trainingSession35')
+!trainingSession35.date := '17th January 2024'
+!trainingSession35.location := "Eagle's Nest Training Facility"
+!trainingSession35.purpose := 'Tactical refinement focusing on adaptive strategies and positional fluidity.'
+
+!insert (teamAN, trainingSession35) into TeamTraining
+
+!new TrainingNotes('trainingNote35')
+!trainingNote35.note := 'Training was disrupted due to Martin Weber\'s absence, with absence citing unexpected travel delays due to snow.'
+!trainingNote35.date := '17th January 2024'
+
+!insert (trainingSession35, trainingNote35) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail13')
+!trainingFail13.reason := 'Weather-induced travel disruptions led to unexplained absenteeism.'
+
+!insert (trainingFail13, player46) into FailedPlayer
+!insert (trainingSession35, trainingFail13) into TrainingFailded
+
+!new PlayerNotes('playerNote19')
+!playerNote19.note := 'Admired for adaptability in varied positions during the match, improvement needed in managing over-committed schedules.'
+!playerNote19.date := '18th January 2024'
+
+!insert (player46, playerNote19) into PlayerPlayerNotes
+

@@ -1,0 +1,50 @@
+!new Bank('bank37')
+!bank37.country := 'Italy'
+!bank37.name := 'Intesa Sanpaolo'
+!bank37.bic := 'BCITITMM'
+
+!new Bank('bank38')
+!bank38.country := 'Japan'
+!bank38.name := 'Mitsubishi UFJ Financial Group'
+!bank38.bic := 'BOTKJPJT'
+
+!new Account('account55')
+!account55.iban := 'IT60X0542811101000000123456'
+!account55.balance := 10400
+
+!new Account('account56')
+!account56.iban := 'JP018000030123456789012'
+!account56.balance := 5800
+
+!new Account('account57')
+!account57.iban := 'IT60X0542811101000000123457'
+!account57.balance := 700
+
+!new Person('person55')
+!person55.firstName := 'Giovanni'
+!person55.lastName := 'Rossi'
+!person55.age := 52
+
+!new Person('person56')
+!person56.firstName := 'Yuki'
+!person56.lastName := 'Tanaka'
+!person56.age := 36
+
+!new Person('person57')
+!person57.firstName := 'Alessia'
+!person57.lastName := 'Russo'
+!person57.age := 28
+
+!insert (person55, account55) into Ownership
+!insert (person56, account56) into Ownership
+!insert (person57, account57) into Ownership
+!insert (person55, account57) into Ownership
+
+!insert (person55, account55) into Use
+!insert (person56, account56) into Use
+!insert (person57, account57) into Use
+!insert (person56, account55) into Use
+
+!insert (bank37, account55) into AccountOfBanks
+!insert (bank38, account56) into AccountOfBanks
+!insert (bank37, account57) into AccountOfBanks

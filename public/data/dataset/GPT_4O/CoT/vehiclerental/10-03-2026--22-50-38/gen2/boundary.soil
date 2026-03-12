@@ -1,0 +1,36 @@
+!new RentalOffice('officePeakPointRentals')
+!officePeakPointRentals.name := 'Peak Point Rentals'
+!officePeakPointRentals.number := 99999
+!officePeakPointRentals.address := '999 Summit Avenue, Denver, CO'
+
+!new Truck('truckMaxId')
+!truckMaxId.id := 2147483647
+!truckMaxId.registrationState := #CO
+!truckMaxId.licensePlateNumber := 'CO-MAX-999'
+!truckMaxId.vehicleTypeCode := #TRUCK
+!truckMaxId.registrationLastMaintenanceDate := Date('2023-08-15')
+!truckMaxId.expirationDate := Date('2024-08-15')
+!truckMaxId.odometerReading := 1000000
+!truckMaxId.gasTankCapacity := 100.0
+!truckMaxId.workingRadio := true
+!truckMaxId.mileage := 500000
+
+!new RentalAgreement('rentalAgreementMaxId')
+!rentalAgreementMaxId.number := 999999
+!rentalAgreementMaxId.rentalDate := Date('2023-12-01')
+!rentalAgreementMaxId.anticipatedDuration := 365
+!rentalAgreementMaxId.depositPaid := 10000.0
+!rentalAgreementMaxId.quotedDailyRate := 300.0
+!rentalAgreementMaxId.quotedRatePerMile := 5.0
+
+!new Company('companyBigTimeConstruction')
+!companyBigTimeConstruction.name := 'Big Time Construction Co'
+!companyBigTimeConstruction.address := '999 Builder\'s Way, Construction City, TN'
+!companyBigTimeConstruction.poorRisk := false
+!companyBigTimeConstruction.idNumber := 999999999
+
+!insert (officePeakPointRentals, truckMaxId) into RentalOfficeVehicle
+!insert (officePeakPointRentals, rentalAgreementMaxId) into RentalOfficeRentalAgreementOrigin
+!insert (officePeakPointRentals, rentalAgreementMaxId) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementMaxId, truckMaxId) into RentalAgreementVehicle
+!insert (rentalAgreementMaxId, companyBigTimeConstruction) into RentalAgreementCustomer

@@ -1,0 +1,66 @@
+!new AddressBook('addressBook26')
+
+!new Company('company26')
+!company26.name := 'Bakers Delight'
+!company26.phone := '369-258-1470'
+!company26.website := 'www.bakersdelight.com'
+!company26.email := 'info@bakersdelight.com'
+!company26.industry := 'Food & Bakery'
+
+!new Person('person48')
+!person48.name := 'Hannah Blake'
+!person48.phone := '303-606-9090'
+!person48.website := 'www.hannahblakebakes.com'
+!person48.email := 'hannah.blake@bakersdelight.com'
+!person48.title := 'Pastry Chef'
+
+!new Person('person49')
+!person49.name := 'Oliver Smith'
+!person49.phone := '444-555-6666'
+!person49.website := 'www.oliversmithculinary.com'
+!person49.email := 'oliver.smith@flavorhub.org'
+!person49.title := 'Bakery Consultant'
+
+!new Note('note48')
+!note48.author := 'Hannah Blake'
+!note48.time := Date('2025-08-10')
+!note48.type := #MEETING
+!note48.comment := 'Team meeting to brainstorm new cake recipes.'
+
+!new Note('note49')
+!note49.author := 'Oliver Smith'
+!note49.time := Date('2025-08-12')
+!note49.type := #EMAIL
+!note49.comment := 'Finalized feedback on ingredient suppliers.'
+
+!new Address('address49')
+!address49.city := 'Sweet Tooth'
+!address49.houseNr := '789T'
+!address49.street := 'Cake Lane'
+
+!new Address('address50')
+!address50.city := 'Bakerstown'
+!address50.houseNr := '45J'
+!address50.street := 'Pastry Parade'
+
+!new Relationship('relationship50')
+!relationship50.type := #COWORKER
+
+!new Relationship('relationship51')
+!relationship51.type := #SUBDIVISION
+
+!insert (addressBook26, company26) into AddressBookMadeOfContact
+!insert (addressBook26, person48) into AddressBookMadeOfContact
+!insert (addressBook26, person49) into AddressBookMadeOfContact
+
+!insert (person48, note48) into ContactContainsNote
+!insert (person49, note49) into ContactContainsNote
+
+!insert (company26, relationship51) into ContactToRelationship
+!insert (relationship51, person48) into RelationshipToContact
+
+!insert (person48, relationship50) into ContactToRelationship
+!insert (relationship50, person49) into RelationshipToContact
+
+!insert (company26, address49) into ContactContainsAddress
+!insert (person49, address50) into ContactContainsAddress

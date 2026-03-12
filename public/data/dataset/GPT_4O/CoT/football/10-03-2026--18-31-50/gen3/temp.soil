@@ -1,0 +1,188 @@
+!new Club('clubAE')
+!clubAE.name := 'Johannesburg Jaguars FC'
+!clubAE.homeGround := 'Nelspruit Stadium'
+!clubAE.chairman := 'Lindiwe Madiba'
+
+!new Club('clubAF')
+!clubAF.name := 'Buenos Aires Strikers'
+!clubAF.homeGround := 'El Monumental'
+!clubAF.chairman := 'Alejandro Gomez'
+
+!new Club('clubAG')
+!clubAG.name := 'Nairobi Warriors'
+!clubAG.homeGround := 'Kasarani Stadium'
+!clubAG.chairman := 'David Otieno'
+
+!new Team('teamAE')
+!teamAE.name := 'Johannesburg Jaguars Senior Team'
+
+!new Team('teamAF')
+!teamAF.name := 'Buenos Aires Strikers Elite Squad'
+
+!new Team('teamAG')
+!teamAG.name := 'Nairobi Warriors All-Stars'
+
+!insert (clubAE, teamAE) into ClubTeam
+!insert (clubAF, teamAF) into ClubTeam
+!insert (clubAG, teamAG) into ClubTeam
+
+!new Player('player35')
+!player35.name := 'Thabo Mbeki'
+!player35.age := 30
+!player35.bestFoot := #RIGHT
+!player35.phoneNumber := '+27123456789'
+
+!new Player('player36')
+!player36.name := 'Marco Veron'
+!player36.age := 27
+!player36.bestFoot := #LEFT
+!player36.phoneNumber := '+5412345678'
+
+!new Player('player37')
+!player37.name := 'Kamau Wanjiku'
+!player37.age := 32
+!player37.bestFoot := #RIGHT
+!player37.phoneNumber := '+254701234567'
+
+!insert (teamAE, player35) into TeamPlayer
+!insert (teamAF, player36) into TeamPlayer
+!insert (teamAG, player37) into TeamPlayer
+
+!new Position('position84')
+!position84.positionName := #MIDFIELDER
+
+!new Position('position83')
+!position83.positionName := #FORWARD
+
+!new Position('position76')
+!position76.positionName := #DEFENDER
+
+!insert (player35, position84) into PlayerPositions
+!insert (player36, position83) into PlayerPositions
+!insert (player37, position76) into PlayerPositions
+
+!new Competition('competition14')
+!competition14.name := 'Africa-South America Cup'
+!competition14.type := 'International Tournament'
+
+!new Match('match16')
+!match16.date := '05-08-2023'
+!match16.homeAway := false
+
+!new Match('match17')
+!match17.date := '11-08-2023'
+!match17.homeAway := true
+
+!insert (teamAE, match16) into LocalMatch
+!insert (teamAG, match17) into LocalMatch
+
+!insert (competition14, match16) into CompetitionMatch
+!insert (competition14, match17) into CompetitionMatch
+
+!new MatchReport('matchReport16')
+!matchReport16.duration := 90
+!matchReport16.scoreVisitor := 1
+!matchReport16.scoreLocal := 1
+
+!new MatchReport('matchReport17')
+!matchReport17.duration := 90
+!matchReport17.scoreVisitor := 1
+!matchReport17.scoreLocal := 1
+
+!insert (match16, matchReport16) into MatchMatchReport
+!insert (match17, matchReport17) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer30')
+!matchPlayer30.booked := true
+!matchPlayer30.goals := 1
+!matchPlayer30.rating := 8
+
+!new MatchPlayer('matchPlayer31')
+!matchPlayer31.booked := false
+!matchPlayer31.goals := 0
+!matchPlayer31.rating := 9
+
+!new MatchPlayer('matchPlayer32')
+!matchPlayer32.booked := false
+!matchPlayer32.goals := 1
+!matchPlayer32.rating := 7
+
+!insert (player35, matchPlayer30) into PlayerMatch
+!insert (player36, matchPlayer31) into PlayerMatch
+!insert (player37, matchPlayer32) into PlayerMatch
+
+!insert (match16, matchPlayer30) into MatchMatchPlayer
+!insert (match17, matchPlayer31) into MatchMatchPlayer
+!insert (match17, matchPlayer32) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position85')
+!position85.positionName := #MIDFIELDER
+!position85.number := 7
+
+!new MatchPlayerPosition('position86')
+!position86.positionName := #FORWARD
+!position86.number := 9
+
+!new MatchPlayerPosition('position87')
+!position87.positionName := #DEFENDER
+!position87.number := 4
+
+!insert (matchPlayer30, position85) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer31, position86) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer32, position87) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent45')
+!matchEvent45.eventType := #GOAL
+!matchEvent45.time := 12
+
+!new MatchEvent('matchEvent46')
+!matchEvent46.eventType := #FOUL
+!matchEvent46.time := 53
+
+!new MatchEvent('matchEvent47')
+!matchEvent47.eventType := #GOAL
+!matchEvent47.time := 67
+
+!insert (match16, matchEvent45) into MatchMatchEvent
+!insert (match17, matchEvent46) into MatchMatchEvent
+!insert (match17, matchEvent47) into MatchMatchEvent
+
+!new TrainingSession('trainingSession26')
+!trainingSession26.date := '01-08-2023'
+!trainingSession26.location := 'El Monumental Training Ground'
+!trainingSession26.purpose := 'Enhance offensive capabilities in tight spaces.'
+
+!new TrainingSession('trainingSession28')
+!trainingSession28.date := '03-08-2023'
+!trainingSession28.location := 'Johannesburg Jaguars Training Ground'
+!trainingSession28.purpose := 'Defensive Strategies'
+
+!insert (teamAF, trainingSession26) into TeamTraining
+!insert (teamAE, trainingSession28) into TeamTraining
+
+!new TrainingNotes('trainingNote26')
+!trainingNote26.note := 'Team executed intricate passing drills effectively, showing robustness in attack.'
+!trainingNote26.date := '01-08-2023'
+
+!new TrainingNotes('trainingNote28')
+!trainingNote28.note := 'Solidified defense with innovative positioning tactics.'
+!trainingNote28.date := '03-08-2023'
+
+!insert (trainingSession26, trainingNote26) into TrainingTrainingNotes
+!insert (trainingSession28, trainingNote28) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective25')
+!trainingObjective25.areaToImprove := 'Offensive Plays'
+!trainingObjective25.startDate := '20-07-2023'
+!trainingObjective25.endDate := '03-08-2023'
+!trainingObjective25.success := true
+
+!new TrainingObjective('trainingObjective27')
+!trainingObjective27.areaToImprove := 'Defensive Resilience'
+!trainingObjective27.startDate := '20-07-2023'
+!trainingObjective27.endDate := '03-08-2023'
+!trainingObjective27.success := false
+
+!insert (trainingObjective25, player36) into TrainingObjectivePlayer
+!insert (trainingObjective27, player35) into TrainingObjectivePlayer
+!insert (trainingObjective27, player37) into TrainingObjectivePlayer

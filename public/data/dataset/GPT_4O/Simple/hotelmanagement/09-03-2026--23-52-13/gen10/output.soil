@@ -1,0 +1,36 @@
+!new Booking('booking11')
+!booking11.startDate := '2024-09-10'
+!booking11.endDate := '2024-09-12'
+!booking11.canceled := true
+!booking11.bookingId := 111
+!booking11.confirmed := false
+
+!new Bill('bill11')
+!bill11.price := 0.00
+!bill11.billId := 5011
+
+!new Customer('customer11')
+!customer11.firstName := 'Karen'
+!customer11.lastName := 'Lewis'
+
+!new RoomReservation('reservation11')
+!reservation11.checkInDate := '2024-09-10'
+!reservation11.checkOutDate := '2024-09-12'
+
+!new Room('room801')
+!room801.numBeds := 2
+!room801.pricePerNight := 110.00
+!room801.occupied := false
+!room801.blocked := true
+!room801.roomNumber := 801
+
+!new RoomExtra('extra14')
+!extra14.price := 40.00
+!extra14.description := 'Guided Tour'
+
+!insert (booking11, bill11) into BookingBill
+!insert (booking11, customer11) into BookingCustomer
+!insert (booking11, reservation11) into BookingRoomReservation
+!insert (reservation11, extra14) into RoomReservationExtras
+!insert (reservation11, room801) into RoomReservationRoom
+!insert (bill11, reservation11) into BillRoomReservation

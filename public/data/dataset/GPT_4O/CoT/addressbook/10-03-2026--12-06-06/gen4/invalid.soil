@@ -1,0 +1,106 @@
+!new AddressBook('FestivalCoordinationAddressBook')
+
+!new Company('ArtStreamProductions')
+!ArtStreamProductions.name := 'ArtStream Productions'
+!ArtStreamProductions.phone := '+44-7501-555987'
+!ArtStreamProductions.website := 'www.artstreamprod.uk'
+!ArtStreamProductions.email := 'contact@artstreamprod.uk'
+!ArtStreamProductions.industry := 'Event Production'
+
+!new Address('ArtStreamProductionsAddress')
+!ArtStreamProductionsAddress.city := 'London'
+!ArtStreamProductionsAddress.houseNr := '450'
+!ArtStreamProductionsAddress.street := 'Piccadilly Circus'
+!insert (ArtStreamProductions, ArtStreamProductionsAddress) into ContactContainsAddress
+
+!new Note('ArtStreamProductionsNote1')
+!ArtStreamProductionsNote1.author := 'Festival Committee'
+!ArtStreamProductionsNote1.time := Date('2023-10-02')
+!ArtStreamProductionsNote1.type := #EMAIL
+!ArtStreamProductionsNote1.comment := 'Confirm stage arrangements for the opening ceremony.'
+!insert (ArtStreamProductions, ArtStreamProductionsNote1) into ContactContainsNote
+
+!new Person('ElenaGarcia')
+!ElenaGarcia.name := 'Elena Garcia'
+!ElenaGarcia.phone := '+34-919-555132'
+!ElenaGarcia.email := 'elena.garcia@artnet.es'
+!ElenaGarcia.title := 'Visual Artist'
+
+!new Address('ElenaGarciaAddress')
+!ElenaGarciaAddress.city := 'Madrid'
+!ElenaGarciaAddress.houseNr := '25'
+!ElenaGarciaAddress.street := 'Painter\'s Alley'
+!insert (ElenaGarcia, ElenaGarciaAddress) into ContactContainsAddress
+
+!new Note('ElenaGarciaNote1')
+!ElenaGarciaNote1.author := 'Elena Garcia'
+!ElenaGarciaNote1.time := Date('2023-10-05')
+!ElenaGarciaNote1.type := #MEETING
+!ElenaGarciaNote1.comment := 'Discuss installation logistics with ArtStream Productions.'
+!insert (ElenaGarcia, ElenaGarciaNote1) into ContactContainsNote
+
+!new Person('RoanLee')
+!RoanLee.name := 'Roan Lee'
+!RoanLee.phone := '+82-10-5554098'
+!RoanLee.email := 'roan.lee@performances.kr'
+!RoanLee.title := 'Performance Artist'
+
+!new Address('RoanLeeAddress')
+!RoanLeeAddress.city := 'Seoul'
+!RoanLeeAddress.houseNr := '88'
+!RoanLeeAddress.street := 'Culture Street'
+!insert (RoanLee, RoanLeeAddress) into ContactContainsAddress
+
+!new Note('RoanLeeNote1')
+!RoanLeeNote1.author := 'Roan Lee'
+!RoanLeeNote1.time := Date('2023-09-20')
+!RoanLeeNote1.type := #CALL
+!RoanLeeNote1.comment := 'Finalize schedule for performance timetable.'
+!insert (RoanLee, RoanLeeNote1) into ContactContainsNote
+
+!new Person('MiaT')
+!MiaT.name := 'Mia T.'
+!MiaT.phone := '+1-202-555-0191'
+!MiaT.email := 'mia.t@festivalcoord.com'
+!MiaT.title := 'Festival Coordinator'
+
+!new Address('MiaTAddress')
+!MiaTAddress.city := 'New York'
+!MiaTAddress.houseNr := '1000'
+!MiaTAddress.street := 'Event Blvd'
+!insert (MiaT, MiaTAddress) into ContactContainsAddress
+
+!new Relationship('ArtStreamToElenaBoss')
+!ArtStreamToElenaBoss.type := #BOSS
+!insert (ArtStreamToElenaBoss, ElenaGarcia) into RelationshipToContact
+!insert (ArtStreamProductions, ArtStreamToElenaBoss) into ContactToRelationship
+
+!new Relationship('ArtStreamToMiaCoworker')
+!ArtStreamToMiaCoworker.type := #COWORKER
+!insert (ArtStreamToMiaCoworker, MiaT) into RelationshipToContact
+!insert (ArtStreamProductions, ArtStreamToMiaCoworker) into ContactToRelationship
+
+!new Relationship('ElenaToArtStreamEmployee')
+!ElenaToArtStreamEmployee.type := #EMPLOYEE
+!insert (ElenaToArtStreamEmployee, ArtStreamProductions) into RelationshipToContact
+!insert (ElenaGarcia, ElenaToArtStreamEmployee) into ContactToRelationship
+
+!new Relationship('ElenaToRoanCoworker')
+!ElenaToRoanCoworker.type := #COWORKER
+!insert (ElenaToRoanCoworker, RoanLee) into RelationshipToContact
+!insert (ElenaGarcia, ElenaToRoanCoworker) into ContactToRelationship
+
+!new Relationship('RoanToElenaCoworker')
+!RoanToElenaCoworker.type := #COWORKER
+!insert (RoanToElenaCoworker, ElenaGarcia) into RelationshipToContact
+!insert (RoanLee, RoanToElenaCoworker) into ContactToRelationship
+
+!new Relationship('RoanToMiaEmployee')
+!RoanToMiaEmployee.type := #EMPLOYEE
+!insert (RoanToMiaEmployee, MiaT) into RelationshipToContact
+!insert (RoanLee, RoanToMiaEmployee) into ContactToRelationship
+
+!insert (FestivalCoordinationAddressBook, ArtStreamProductions) into AddressBookMadeOfContact
+!insert (FestivalCoordinationAddressBook, ElenaGarcia) into AddressBookMadeOfContact
+!insert (FestivalCoordinationAddressBook, RoanLee) into AddressBookMadeOfContact
+!insert (FestivalCoordinationAddressBook, MiaT) into AddressBookMadeOfContact

@@ -1,0 +1,50 @@
+!new Bank('bank17')
+!bank17.country := 'Singapore'
+!bank17.name := 'DBS Bank'
+!bank17.bic := 'DBSSSGSG'
+
+!new Bank('bank18')
+!bank18.country := 'New Zealand'
+!bank18.name := 'ANZ Bank'
+!bank18.bic := 'ANZBNZ22'
+
+!new Account('account25')
+!account25.iban := 'SG9012345678000123456789'
+!account25.balance := 8900
+
+!new Account('account26')
+!account26.iban := 'NZ2012345678912345678900'
+!account26.balance := 3200
+
+!new Account('account27')
+!account27.iban := 'SG9012345678000123456790'
+!account27.balance := 100
+
+!new Person('person25')
+!person25.firstName := 'Wei'
+!person25.lastName := 'Tan'
+!person25.age := 48
+
+!new Person('person26')
+!person26.firstName := 'Peter'
+!person26.lastName := 'Hayes'
+!person26.age := 39 
+
+!new Person('person27')
+!person27.firstName := 'Jessica'
+!person27.lastName := 'Nguyen'
+!person27.age := 36
+
+!insert (person25, account25) into Ownership
+!insert (person26, account26) into Ownership
+!insert (person27, account27) into Ownership
+!insert (person25, account27) into Ownership
+
+!insert (person25, account25) into Use
+!insert (person26, account26) into Use
+!insert (person26, account25) into Use
+!insert (person27, account26) into Use
+
+!insert (bank17, account25) into AccountOfBanks
+!insert (bank18, account26) into AccountOfBanks
+!insert (bank17, account27) into AccountOfBanks

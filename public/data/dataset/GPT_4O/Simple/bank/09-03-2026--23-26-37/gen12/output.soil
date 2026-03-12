@@ -1,0 +1,50 @@
+!new Bank('bank23')
+!bank23.country := 'United Arab Emirates'
+!bank23.name := 'Emirates NBD'
+!bank23.bic := 'EBILAEAD'
+
+!new Bank('bank24')
+!bank24.country := 'Malaysia'
+!bank24.name := 'Maybank'
+!bank24.bic := 'MBBEMYKL'
+
+!new Account('account34')
+!account34.iban := 'AE070331234567890123456'
+!account34.balance := 12345
+
+!new Account('account35')
+!account35.iban := 'MY301234567898765432100'
+!account35.balance := 6750
+
+!new Account('account36')
+!account36.iban := 'AE070331234567890123457'
+!account36.balance := 2500
+
+!new Person('person34')
+!person34.firstName := 'Ahmed'
+!person34.lastName := 'Al-Farsi'
+!person34.age := 29
+
+!new Person('person35')
+!person35.firstName := 'Li'
+!person35.lastName := 'Chen'
+!person35.age := 47
+
+!new Person('person36')
+!person36.firstName := 'Fatima'
+!person36.lastName := 'Yusof'
+!person36.age := 33
+
+!insert (person34, account34) into Ownership
+!insert (person35, account35) into Ownership
+!insert (person36, account36) into Ownership
+!insert (person34, account36) into Ownership
+
+!insert (person34, account34) into Use
+!insert (person35, account35) into Use
+!insert (person36, account34) into Use
+!insert (person35, account36) into Use
+
+!insert (bank23, account34) into AccountOfBanks
+!insert (bank24, account35) into AccountOfBanks
+!insert (bank23, account36) into AccountOfBanks

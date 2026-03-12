@@ -1,0 +1,48 @@
+!new Bank('bankAlpha')
+!bankAlpha.country := 'Norway'
+!bankAlpha.name := 'Nordic Financial Group'
+!bankAlpha.bic := 'NFGNOR22'
+
+!new Bank('bankPrime')
+!bankPrime.country := 'Singapore'
+!bankPrime.name := 'Pacific Trust Bank'
+!bankPrime.bic := 'PTBSGSG1'
+
+!new Person('mariaFernandez')
+!mariaFernandez.firstName := 'Maria'
+!mariaFernandez.lastName := 'Fernandez'
+!mariaFernandez.age := 30
+
+!new Person('larsHansen')
+!larsHansen.firstName := 'Lars'
+!larsHansen.lastName := 'Hansen'
+!larsHansen.age := 25
+
+!new Person('lingTan')
+!lingTan.firstName := 'Ling'
+!lingTan.lastName := 'Tan'
+!lingTan.age := 28
+
+!new Account('account3_1')
+!account3_1.iban := 'NO93 8601 1117 947'
+!account3_1.balance := 5000
+
+!new Account('account3_2')
+!account3_2.iban := 'SG18 6761 9120 885'
+!account3_2.balance := 12000
+
+!insert (bankAlpha, account3_1) into AccountOfBanks
+!insert (bankPrime, account3_2) into AccountOfBanks
+
+!insert (mariaFernandez, account3_1) into Ownership
+!insert (larsHansen, account3_1) into Ownership
+
+!insert (mariaFernandez, account3_2) into Ownership
+
+!insert (mariaFernandez, account3_1) into Use
+!insert (larsHansen, account3_1) into Use
+!insert (lingTan, account3_1) into Use
+
+!insert (mariaFernandez, account3_2) into Use
+!insert (larsHansen, account3_2) into Use
+!insert (lingTan, account3_2) into Use

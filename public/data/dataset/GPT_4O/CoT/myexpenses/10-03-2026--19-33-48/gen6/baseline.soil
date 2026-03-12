@@ -1,0 +1,76 @@
+!new Expense('weddingCelebrationExpense')
+!weddingCelebrationExpense.amount := 15000.00
+!weddingCelebrationExpense.startDate := Date('2023-06-15')
+!weddingCelebrationExpense.endDate := Date('2023-06-17')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 8000.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2023-05-10')
+!venueRentalBill.paymentMethod := #CREDIT_CARD
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 3000.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-06-16')
+!cateringServicesBill.paymentMethod := #CREDIT_CARD
+!cateringServicesBill.status := #VERIFIED
+
+!new Bill('decorationsAndFlowersBill')
+!decorationsAndFlowersBill.amount := 2000.00
+!decorationsAndFlowersBill.category := 'Decorations and Flowers'
+!decorationsAndFlowersBill.date := Date('2023-05-20')
+!decorationsAndFlowersBill.paymentMethod := #CASH
+!decorationsAndFlowersBill.status := #VERIFIED
+
+!new Bill('photographyBill')
+!photographyBill.amount := 1500.00
+!photographyBill.category := 'Photography'
+!photographyBill.date := Date('2023-06-16')
+!photographyBill.paymentMethod := #CHECK
+!photographyBill.status := #VERIFIED
+
+!new Bill('musicAndEntertainmentBill')
+!musicAndEntertainmentBill.amount := 500.00
+!musicAndEntertainmentBill.category := 'Music and Entertainment'
+!musicAndEntertainmentBill.date := Date('2023-06-17')
+!musicAndEntertainmentBill.paymentMethod := #CREDIT_CARD
+!musicAndEntertainmentBill.status := #VALIDATED
+
+!new Currency('currencyINR')
+!currencyINR.name := 'Indian Rupee'
+!currencyINR.abbreviation := 'INR'
+
+!insert (venueRentalBill, currencyINR) into BillCurrency
+!insert (cateringServicesBill, currencyINR) into BillCurrency
+!insert (decorationsAndFlowersBill, currencyINR) into BillCurrency
+!insert (photographyBill, currencyINR) into BillCurrency
+!insert (musicAndEntertainmentBill, currencyINR) into BillCurrency
+
+!insert (weddingCelebrationExpense, venueRentalBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, cateringServicesBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, decorationsAndFlowersBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, photographyBill) into ExpenseContainsBills
+!insert (weddingCelebrationExpense, musicAndEntertainmentBill) into ExpenseContainsBills
+
+!new Comment('venueComment')
+!venueComment.text := 'The venue was breathtaking, complementing the beautiful outdoor setting.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering team did a wonderful job accommodating a variety of dietary needs.'
+
+!new Comment('flowersComment')
+!flowersComment.text := 'The choice of flowers was perfect, adding elegance to the decorations.'
+
+!new Comment('photographyComment')
+!photographyComment.text := 'Photography captured every magical moment beautifully.'
+
+!new Comment('musicComment')
+!musicComment.text := 'Live music kept everyone on their feet, an unforgettable celebration!'
+
+!insert (weddingCelebrationExpense, venueComment) into ExpenseComment
+!insert (weddingCelebrationExpense, cateringComment) into ExpenseComment
+!insert (weddingCelebrationExpense, flowersComment) into ExpenseComment
+!insert (weddingCelebrationExpense, photographyComment) into ExpenseComment
+!insert (weddingCelebrationExpense, musicComment) into ExpenseComment

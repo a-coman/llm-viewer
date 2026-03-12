@@ -1,0 +1,108 @@
+!new StateMachine('robotWorkflow')
+!robotWorkflow.name := 'robotWorkflow'
+
+!new State('standby')
+!standby.name := 'standby'
+
+!new State('operational')
+!operational.name := 'operational'
+
+!new State('maintenanceCheck')
+!maintenanceCheck.name := 'maintenanceCheck'
+
+!new State('errorMode')
+!errorMode.name := 'errorMode'
+
+!new State('shutdownProcedure')
+!shutdownProcedure.name := 'shutdownProcedure'
+
+!new State('calibration')
+!calibration.name := 'calibration'
+
+!new Transition('standbyToOperational')
+!standbyToOperational.name := 'standbyToOperational'
+
+!new Transition('operationalToMaintenance')
+!operationalToMaintenance.name := 'operationalToMaintenance'
+
+!new Transition('maintenanceToOperational')
+!maintenanceToOperational.name := 'maintenanceToOperational'
+
+!new Transition('operationalToError')
+!operationalToError.name := 'operationalToError'
+
+!new Transition('errorToShutdown')
+!errorToShutdown.name := 'errorToShutdown'
+
+!new Transition('errorToCalibration')
+!errorToCalibration.name := 'errorToCalibration'
+
+!new Transition('calibrationToOperational')
+!calibrationToOperational.name := 'calibrationToOperational'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEventDefault1')
+!timeEventDefault1.time := 1
+
+!new TimeEvent('timeEventDefault2')
+!timeEventDefault2.time := 1
+
+!new TimeEvent('timeEventDefault3')
+!timeEventDefault3.time := 1
+
+!insert (robotWorkflow, standby) into StateMachineContainsStates
+!insert (robotWorkflow, operational) into StateMachineContainsStates
+!insert (robotWorkflow, maintenanceCheck) into StateMachineContainsStates
+!insert (robotWorkflow, errorMode) into StateMachineContainsStates
+!insert (robotWorkflow, shutdownProcedure) into StateMachineContainsStates
+!insert (robotWorkflow, calibration) into StateMachineContainsStates
+
+!insert (robotWorkflow, standbyToOperational) into StateMachineContainsTransitions
+!insert (robotWorkflow, operationalToMaintenance) into StateMachineContainsTransitions
+!insert (robotWorkflow, maintenanceToOperational) into StateMachineContainsTransitions
+!insert (robotWorkflow, operationalToError) into StateMachineContainsTransitions
+!insert (robotWorkflow, errorToShutdown) into StateMachineContainsTransitions
+!insert (robotWorkflow, errorToCalibration) into StateMachineContainsTransitions
+!insert (robotWorkflow, calibrationToOperational) into StateMachineContainsTransitions
+
+!insert (standbyToOperational, timeEvent1) into TransitionContainsEvents
+!insert (operationalToMaintenance, timeEvent30) into TransitionContainsEvents
+!insert (maintenanceToOperational, timeEventDefault1) into TransitionContainsEvents
+!insert (operationalToError, timeEventDefault2) into TransitionContainsEvents
+!insert (errorToShutdown, timeEvent15) into TransitionContainsEvents
+!insert (errorToCalibration, timeEventDefault3) into TransitionContainsEvents
+!insert (calibrationToOperational, timeEvent5) into TransitionContainsEvents
+
+!insert (standby, standbyToOperational) into StateTransition
+!insert (standbyToOperational, operational) into TransitionState
+
+!insert (operational, operationalToMaintenance) into StateTransition
+!insert (operationalToMaintenance, maintenanceCheck) into TransitionState
+
+!insert (maintenanceCheck, maintenanceToOperational) into StateTransition
+!insert (maintenanceToOperational, operational) into TransitionState
+
+!insert (operational, operationalToError) into StateTransition
+!insert (operationalToError, errorMode) into TransitionState
+
+!insert (errorMode, errorToShutdown) into StateTransition
+!insert (errorToShutdown, shutdownProcedure) into TransitionState
+
+!insert (errorMode, errorToCalibration) into StateTransition
+!insert (errorToCalibration, calibration) into TransitionState
+
+!insert (calibration, calibrationToOperational) into StateTransition
+!insert (calibrationToOperational, operational) into TransitionState
+
+!insert (robotWorkflow, standby) into StateMachineStartsStates

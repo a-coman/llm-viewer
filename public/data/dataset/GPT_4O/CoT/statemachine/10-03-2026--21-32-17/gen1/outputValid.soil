@@ -1,0 +1,242 @@
+!new StateMachine('quietMachine')
+!quietMachine.name := 'quietMachine'
+
+!new State('startState')
+!startState.name := 'startState'
+
+!new State('intermediate')
+!intermediate.name := 'intermediate'
+
+!new State('lonely')
+!lonely.name := 'lonely'
+
+!new Transition('transitionOne')
+!transitionOne.name := 'transitionOne'
+
+!new Transition('loopBack')
+!loopBack.name := 'loopBack'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (quietMachine, startState) into StateMachineContainsStates
+!insert (quietMachine, intermediate) into StateMachineContainsStates
+!insert (quietMachine, lonely) into StateMachineContainsStates
+
+!insert (quietMachine, transitionOne) into StateMachineContainsTransitions
+!insert (quietMachine, loopBack) into StateMachineContainsTransitions
+
+!insert (transitionOne, timeEvent1) into TransitionContainsEvents
+!insert (loopBack, timeEvent2) into TransitionContainsEvents
+
+!insert (startState, transitionOne) into StateTransition
+!insert (transitionOne, lonely) into TransitionState
+
+!insert (lonely, loopBack) into StateTransition
+!insert (loopBack, lonely) into TransitionState
+
+!insert (quietMachine, lonely) into StateMachineStartsStates
+
+!new StateMachine('trafficControlSystem')
+!trafficControlSystem.name := 'trafficControlSystem'
+
+!new State('greenLight')
+!greenLight.name := 'greenLight'
+
+!new State('yellowLight')
+!yellowLight.name := 'yellowLight'
+
+!new State('redLight')
+!redLight.name := 'redLight'
+
+!new State('allRed')
+!allRed.name := 'allRed'
+
+!new Transition('greenToYellow')
+!greenToYellow.name := 'greenToYellow'
+
+!new Transition('yellowToRed')
+!yellowToRed.name := 'yellowToRed'
+
+!new Transition('redToAllRed')
+!redToAllRed.name := 'redToAllRed'
+
+!new Transition('allRedToGreen')
+!allRedToGreen.name := 'allRedToGreen'
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent55')
+!timeEvent55.time := 55
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (trafficControlSystem, greenLight) into StateMachineContainsStates
+!insert (trafficControlSystem, yellowLight) into StateMachineContainsStates
+!insert (trafficControlSystem, redLight) into StateMachineContainsStates
+!insert (trafficControlSystem, allRed) into StateMachineContainsStates
+
+!insert (trafficControlSystem, greenToYellow) into StateMachineContainsTransitions
+!insert (trafficControlSystem, yellowToRed) into StateMachineContainsTransitions
+!insert (trafficControlSystem, redToAllRed) into StateMachineContainsTransitions
+!insert (trafficControlSystem, allRedToGreen) into StateMachineContainsTransitions
+
+!insert (greenToYellow, timeEvent60) into TransitionContainsEvents
+!insert (yellowToRed, timeEvent5) into TransitionContainsEvents
+!insert (redToAllRed, timeEvent55) into TransitionContainsEvents
+!insert (allRedToGreen, timeEvent2) into TransitionContainsEvents
+
+!insert (greenLight, greenToYellow) into StateTransition
+!insert (greenToYellow, yellowLight) into TransitionState
+
+!insert (yellowLight, yellowToRed) into StateTransition
+!insert (yellowToRed, redLight) into TransitionState
+
+!insert (redLight, redToAllRed) into StateTransition
+!insert (redToAllRed, allRed) into TransitionState
+
+!insert (allRed, allRedToGreen) into StateTransition
+!insert (allRedToGreen, greenLight) into TransitionState
+
+!insert (trafficControlSystem, greenLight) into StateMachineStartsStates
+
+!new StateMachine('minimalMachine')
+!minimalMachine.name := 'minimalMachine'
+
+!new State('state1')
+!state1.name := 'state1'
+
+!new Transition('transition')
+!transition.name := 'transition'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!insert (minimalMachine, state1) into StateMachineContainsStates
+
+!insert (minimalMachine, transition) into StateMachineContainsTransitions
+
+!insert (transition, timeEvent1) into TransitionContainsEvents
+
+!insert (state1, transition) into StateTransition
+!insert (transition, state1) into TransitionState
+
+!insert (minimalMachine, state1) into StateMachineStartsStates
+
+!new StateMachine('trainControlSystem')
+!trainControlSystem.name := 'trainControlSystem'
+
+!new State('idle')
+!idle.name := 'idle'
+
+!new State('prepareForDeparture')
+!prepareForDeparture.name := 'prepareForDeparture'
+
+!new State('inMotion')
+!inMotion.name := 'inMotion'
+
+!new State('awaitingSignal')
+!awaitingSignal.name := 'awaitingSignal'
+
+!new State('atStation')
+!atStation.name := 'atStation'
+
+!new State('shutdown')
+!shutdown.name := 'shutdown'
+
+!new Transition('idleToPrepare')
+!idleToPrepare.name := 'idleToPrepare'
+
+!new Transition('prepareToInMotion')
+!prepareToInMotion.name := 'prepareToInMotion'
+
+!new Transition('inMotionToAwait')
+!inMotionToAwait.name := 'inMotionToAwait'
+
+!new Transition('awaitToInMotion')
+!awaitToInMotion.name := 'awaitToInMotion'
+
+!new Transition('inMotionToAtStation')
+!inMotionToAtStation.name := 'inMotionToAtStation'
+
+!new Transition('atStationToInMotion')
+!atStationToInMotion.name := 'atStationToInMotion'
+
+!new Transition('atStationToShutdown')
+!atStationToShutdown.name := 'atStationToShutdown'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 5
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 10
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 15
+
+!new TimeEvent('defaultTimeEvent1')
+!defaultTimeEvent1.time := 1
+
+!new TimeEvent('defaultTimeEvent2')
+!defaultTimeEvent2.time := 1
+
+!new TimeEvent('defaultTimeEvent3')
+!defaultTimeEvent3.time := 1
+
+!insert (trainControlSystem, idle) into StateMachineContainsStates
+!insert (trainControlSystem, prepareForDeparture) into StateMachineContainsStates
+!insert (trainControlSystem, inMotion) into StateMachineContainsStates
+!insert (trainControlSystem, awaitingSignal) into StateMachineContainsStates
+!insert (trainControlSystem, atStation) into StateMachineContainsStates
+!insert (trainControlSystem, shutdown) into StateMachineContainsStates
+
+!insert (trainControlSystem, idleToPrepare) into StateMachineContainsTransitions
+!insert (trainControlSystem, prepareToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, inMotionToAwait) into StateMachineContainsTransitions
+!insert (trainControlSystem, awaitToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, inMotionToAtStation) into StateMachineContainsTransitions
+!insert (trainControlSystem, atStationToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, atStationToShutdown) into StateMachineContainsTransitions
+
+!insert (idleToPrepare, timeEvent1) into TransitionContainsEvents
+!insert (prepareToInMotion, timeEvent2) into TransitionContainsEvents
+!insert (inMotionToAwait, defaultTimeEvent1) into TransitionContainsEvents
+!insert (awaitToInMotion, defaultTimeEvent2) into TransitionContainsEvents
+!insert (inMotionToAtStation, timeEvent3) into TransitionContainsEvents
+!insert (atStationToInMotion, defaultTimeEvent3) into TransitionContainsEvents
+!insert (atStationToShutdown, timeEvent4) into TransitionContainsEvents
+
+!insert (idle, idleToPrepare) into StateTransition
+!insert (idleToPrepare, prepareForDeparture) into TransitionState
+
+!insert (prepareForDeparture, prepareToInMotion) into StateTransition
+!insert (prepareToInMotion, inMotion) into TransitionState
+
+!insert (inMotion, inMotionToAwait) into StateTransition
+!insert (inMotionToAwait, awaitingSignal) into TransitionState
+
+!insert (awaitingSignal, awaitToInMotion) into StateTransition
+!insert (awaitToInMotion, inMotion) into TransitionState
+
+!insert (inMotion, inMotionToAtStation) into StateTransition
+!insert (inMotionToAtStation, atStation) into TransitionState
+
+!insert (atStation, atStationToInMotion) into StateTransition
+!insert (atStationToInMotion, inMotion) into TransitionState
+
+!insert (atStation, atStationToShutdown) into StateTransition
+!insert (atStationToShutdown, shutdown) into TransitionState
+
+!insert (trainControlSystem, idle) into StateMachineStartsStates
+

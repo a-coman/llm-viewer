@@ -1,0 +1,55 @@
+!new Expense('localCharityEventExpense')
+!localCharityEventExpense.amount := 1750.00
+!localCharityEventExpense.startDate := Date('2023-12-05')
+!localCharityEventExpense.endDate := Date('2023-12-07')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 500.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2023-12-01')
+!venueRentalBill.paymentMethod := #CHECK
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 750.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-12-05')
+!cateringServicesBill.paymentMethod := #CREDIT_CARD
+!cateringServicesBill.status := #VERIFIED
+
+!new Bill('decorationsBill')
+!decorationsBill.amount := 300.00
+!decorationsBill.category := 'Decorations'
+!decorationsBill.date := Date('2023-12-04')
+!decorationsBill.paymentMethod := #CASH
+!decorationsBill.status := #PENDING
+
+!new Bill('miscellaneousSuppliesBill')
+!miscellaneousSuppliesBill.amount := 200.00
+!miscellaneousSuppliesBill.category := 'Miscellaneous Supplies'
+!miscellaneousSuppliesBill.date := Date('2023-12-03')
+!miscellaneousSuppliesBill.paymentMethod := #CHECK
+!miscellaneousSuppliesBill.status := #DRAFT
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (venueRentalBill, currencyGBP) into BillCurrency
+!insert (cateringServicesBill, currencyGBP) into BillCurrency
+!insert (decorationsBill, currencyGBP) into BillCurrency
+!insert (miscellaneousSuppliesBill, currencyGBP) into BillCurrency
+
+!insert (localCharityEventExpense, venueRentalBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, cateringServicesBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, decorationsBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, miscellaneousSuppliesBill) into ExpenseContainsBills
+
+!new Comment('charityEventComment1')
+!charityEventComment1.text := 'Expenses for the annual charity gala, supporting the local animal shelter.'
+
+!new Comment('charityEventComment2')
+!charityEventComment2.text := 'Items included venue booking, catering services, and decoration. Event was a success, raising significant funds.'
+
+!insert (localCharityEventExpense, charityEventComment1) into ExpenseComment
+!insert (localCharityEventExpense, charityEventComment2) into ExpenseComment

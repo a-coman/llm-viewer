@@ -1,0 +1,85 @@
+!new Driver('driver49')
+!driver49.id := 'DRV512789'
+!driver49.name := 'Liam Segmented'
+
+!new Driver('driver50')
+!driver50.id := 'DRV512790'
+!driver50.name := 'Nora Patchwork'
+
+!new Shipment('shipment64')
+!shipment64.id := 'SHP404505'
+!shipment64.status := #DELIVERED
+
+!new Shipment('shipment65')
+!shipment65.id := 'SHP404506'
+!shipment65.status := #ASSIGNED
+
+!new Shipment('shipment66')
+!shipment66.id := 'SHP404507'
+!shipment66.status := #NEW
+
+!new Address('address113')
+!address113.text := 'Warehouse Hub, 5 Logistics Lane, Central City'
+
+!new GeoLocation('geoLocation113')
+!geoLocation113.latitude := 37.774929
+!geoLocation113.longitude := -122.419418
+
+!insert (address113, geoLocation113) into AddressContainsGeoLocation
+
+!new Address('address114')
+!address114.text := 'Shop 1, 14 Market Street, Central City'
+
+!new GeoLocation('geoLocation114')
+!geoLocation114.latitude := 37.775000
+!geoLocation114.longitude := -122.419300
+
+!insert (address114, geoLocation114) into AddressContainsGeoLocation
+
+!new Address('address115')
+!address115.text := 'Shop 2, 15 Beacon Road, Central City'
+
+!new GeoLocation('geoLocation115')
+!geoLocation115.latitude := 37.774850
+!geoLocation115.longitude := -122.418900
+
+!insert (address115, geoLocation115) into AddressContainsGeoLocation
+
+!new Address('address116')
+!address116.text := 'Shop 3, 16 Water Avenue, Central City'
+
+!new GeoLocation('geoLocation116')
+!geoLocation116.latitude := 37.775150
+!geoLocation116.longitude := -122.419100
+
+!insert (address116, geoLocation116) into AddressContainsGeoLocation
+
+!new Customer('customer50')
+!customer50.id := 'CUS808999'
+!customer50.name := 'City Retail Collective'
+!customer50.twitterUserName := '@CityRetailCo'
+
+!new Station('station44')
+
+!insert (driver49, shipment65) into DriverShipment
+!insert (driver50, shipment64) into DriverShipment
+
+!insert (shipment64, address113) into ShipmentContainsPickUpAddress
+!insert (shipment65, address113) into ShipmentContainsPickUpAddress
+!insert (shipment66, address113) into ShipmentContainsPickUpAddress
+
+!insert (shipment64, address114) into ShipmentContainsDeliveryAddress
+!insert (shipment65, address115) into ShipmentContainsDeliveryAddress
+!insert (shipment66, address116) into ShipmentContainsDeliveryAddress
+
+!insert (customer50, shipment64) into CustomerConsistsOfShipment
+!insert (customer50, shipment65) into CustomerConsistsOfShipment
+!insert (customer50, shipment66) into CustomerConsistsOfShipment
+
+!insert (station44, driver49) into StationContainsDriver
+!insert (station44, driver50) into StationContainsDriver
+!insert (station44, shipment64) into StationShipment
+!insert (station44, shipment65) into StationShipment
+!insert (station44, shipment66) into StationShipment
+
+!insert (station44, customer50) into StationContainsCustomer

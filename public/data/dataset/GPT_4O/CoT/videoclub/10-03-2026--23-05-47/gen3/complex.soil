@@ -1,0 +1,89 @@
+!new Client('client14')
+!client14.clientId := 503
+!client14.isSuspended := true
+
+!new Client('client15')
+!client15.clientId := 604
+!client15.isSuspended := false
+
+!new Rental('rental19')
+!rental19.date := Date('2023-07-14')
+
+!new Rental('rental20')
+!rental20.date := Date('2023-08-03')
+
+!new Rental('rental21')
+!rental21.date := Date('2023-09-22')
+
+!new Rental('rental22')
+!rental22.date := Date('2023-10-18')
+
+!new Rental('rental23')
+!rental23.date := Date('2023-11-05')
+
+!new Movie('movie18')
+!movie18.title := 'Wild Horizon'
+!movie18.availableCopies := 7
+!movie18.genre := #Action
+
+!new Movie('movie19')
+!movie19.title := 'The Laughing Hearts'
+!movie19.availableCopies := 1
+!movie19.genre := #Comedy
+
+!new Series('series17')
+!series17.title := 'Desert Chronicles'
+!series17.availableCopies := 3
+!series17.episode := 4
+
+!new Series('series18')
+!series18.title := 'Metropolis Blues'
+!series18.availableCopies := 2
+!series18.episode := 6
+
+!new Series('series19')
+!series19.title := 'Castaway Stories'
+!series19.availableCopies := 9
+!series19.episode := 10
+
+!new Actor('actor33')
+!actor33.name := 'Liam O\'Neill'
+
+!new Actor('actor34')
+!actor34.name := 'Karla Torrez'
+
+!new Actor('actor35')
+!actor35.name := 'Mischa Von Heide'
+
+!new Actor('actor36')
+!actor36.name := 'Zara Hamid'
+
+!insert (client14, rental20) into ClientRental
+
+!insert (client15, rental19) into ClientRental
+!insert (client15, rental21) into ClientRental
+!insert (client15, rental22) into ClientRental
+!insert (client15, rental23) into ClientRental
+
+!insert (rental19, movie19) into RentalCassette
+!insert (rental20, movie18) into RentalCassette
+!insert (rental20, series18) into RentalCassette
+!insert (rental21, series17) into RentalCassette
+!insert (rental21, movie18) into RentalCassette
+!insert (rental22, series19) into RentalCassette
+!insert (rental23, series18) into RentalCassette
+
+!insert (movie18, actor33) into CassetteActor
+!insert (movie18, actor36) into CassetteActor
+
+!insert (movie19, actor34) into CassetteActor
+!insert (movie19, actor35) into CassetteActor
+
+!insert (series17, actor35) into CassetteActor
+!insert (series17, actor34) into CassetteActor
+
+!insert (series18, actor33) into CassetteActor
+!insert (series18, actor36) into CassetteActor
+
+!insert (series19, actor36) into CassetteActor
+!insert (series19, actor35) into CassetteActor

@@ -1,0 +1,61 @@
+!new RentalOffice('officeCoastalEmergencyRentals')
+!officeCoastalEmergencyRentals.name := 'Coastal Emergency Rentals'
+!officeCoastalEmergencyRentals.number := 606
+!officeCoastalEmergencyRentals.address := '120 Shoreline Dr, Harbor Town, FL 33001'
+
+!new Truck('truck12345')
+!truck12345.id := 12345
+!truck12345.registrationState := #FL
+!truck12345.licensePlateNumber := 'FL-987-ZYX'
+!truck12345.vehicleTypeCode := #TRUCK
+!truck12345.registrationLastMaintenanceDate := Date('2023-03-01')
+!truck12345.expirationDate := Date('2024-03-01')
+!truck12345.odometerReading := 120000
+!truck12345.gasTankCapacity := 100.0
+!truck12345.workingRadio := false
+!truck12345.mileage := 7
+
+!new Individual('individualSarahBeachcomber')
+!individualSarahBeachcomber.name := 'Sarah Beachcomber'
+!individualSarahBeachcomber.address := '781 Ocean View Ave, Seaside Bay, FL 33301'
+!individualSarahBeachcomber.poorRisk := false
+!individualSarahBeachcomber.homePhone := '+1-754-555-0458'
+!individualSarahBeachcomber.driverLicenseState := #FL
+!individualSarahBeachcomber.driverLicenseNumber := 789012345
+!individualSarahBeachcomber.driverLicenseExpirationDate := Date('2027-12-31')
+
+!new Company('companyCoastalReliefCorps')
+!companyCoastalReliefCorps.name := 'Coastal Relief Corps'
+!companyCoastalReliefCorps.address := '500 Relief Rd, Sunshine Plaza, FL 33401'
+!companyCoastalReliefCorps.poorRisk := false
+!companyCoastalReliefCorps.idNumber := 334455667
+
+!new RentalAgreement('rentalAgreement6011')
+!rentalAgreement6011.number := 6011
+!rentalAgreement6011.rentalDate := Date('2025-09-05')
+!rentalAgreement6011.anticipatedDuration := 14
+!rentalAgreement6011.depositPaid := 100.0
+!rentalAgreement6011.quotedDailyRate := 50.0
+!rentalAgreement6011.quotedRatePerMile := 1.0
+
+!new RentalAgreement('rentalAgreement6012')
+!rentalAgreement6012.number := 6012
+!rentalAgreement6012.rentalDate := Date('2025-11-10')
+!rentalAgreement6012.anticipatedDuration := 60
+!rentalAgreement6012.depositPaid := 0.0
+!rentalAgreement6012.quotedDailyRate := 30.0
+!rentalAgreement6012.quotedRatePerMile := 0.5
+
+!insert (officeCoastalEmergencyRentals, truck12345) into RentalOfficeVehicle
+
+!insert (officeCoastalEmergencyRentals, rentalAgreement6011) into RentalOfficeRentalAgreementOrigin
+!insert (officeCoastalEmergencyRentals, rentalAgreement6012) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeCoastalEmergencyRentals, rentalAgreement6011) into RentalOfficeRentalAgreementDrop
+!insert (officeCoastalEmergencyRentals, rentalAgreement6012) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement6011, truck12345) into RentalAgreementVehicle
+!insert (rentalAgreement6012, truck12345) into RentalAgreementVehicle
+
+!insert (rentalAgreement6011, individualSarahBeachcomber) into RentalAgreementCustomer
+!insert (rentalAgreement6012, companyCoastalReliefCorps) into RentalAgreementCustomer

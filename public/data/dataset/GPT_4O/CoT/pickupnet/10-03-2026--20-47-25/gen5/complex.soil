@@ -1,0 +1,121 @@
+!new Driver('driver40')
+!driver40.id := 'DRV009'
+!driver40.name := 'Ana Beatriz Silva'
+
+!new Driver('driver41')
+!driver41.id := 'DRV010'
+!driver41.name := 'Lars Bergmann'
+
+!new Customer('customer37')
+!customer37.id := 'CUST012'
+!customer37.name := 'Javier Peña'
+!customer37.twitterUserName := '@javier_p_col'
+
+!new Customer('customer38')
+!customer38.id := 'CUST013'
+!customer38.name := 'Marta Rossi'
+!customer38.twitterUserName := '@marta_italia'
+
+!new Customer('customer39')
+!customer39.id := 'CUST014'
+!customer39.name := 'Isla McGregor'
+!customer39.twitterUserName := '@isla_m_sco'
+
+!new Address('address95')
+!address95.text := 'Avenida Paulista, São Paulo, Brazil'
+
+!new GeoLocation('geoLocation95')
+!geoLocation95.latitude := -23.561399
+!geoLocation95.longitude := -46.656196
+
+!insert (address95, geoLocation95) into AddressContainsGeoLocation
+
+!new Address('address96')
+!address96.text := 'Plaza de Cibeles, Madrid, Spain'
+
+!new GeoLocation('geoLocation96')
+!geoLocation96.latitude := 40.418056
+!geoLocation96.longitude := -3.699444
+
+!insert (address96, geoLocation96) into AddressContainsGeoLocation
+
+!new Address('address97')
+!address97.text := 'Via Appia Antica, Rome, Italy'
+
+!new GeoLocation('geoLocation97')
+!geoLocation97.latitude := 41.853271
+!geoLocation97.longitude := 12.500134
+
+!insert (address97, geoLocation97) into AddressContainsGeoLocation
+
+!new Address('address98')
+!address98.text := 'Alexanderplatz, Berlin, Germany'
+
+!new GeoLocation('geoLocation98')
+!geoLocation98.latitude := 52.521862
+!geoLocation98.longitude := 13.413201
+
+!insert (address98, geoLocation98) into AddressContainsGeoLocation
+
+!new Address('address99')
+!address99.text := 'Royal Mile, Edinburgh, Scotland'
+
+!new GeoLocation('geoLocation99')
+!geoLocation99.latitude := 55.9492
+!geoLocation99.longitude := -3.1939
+
+!insert (address99, geoLocation99) into AddressContainsGeoLocation
+
+!new Address('address100')
+!address100.text := 'Avenida del Libertador, Buenos Aires, Argentina'
+
+!new GeoLocation('geoLocation100')
+!geoLocation100.latitude := -34.5836
+!geoLocation100.longitude := -58.3931
+
+!insert (address100, geoLocation100) into AddressContainsGeoLocation
+
+!new Shipment('shipment54')
+!shipment54.id := 'SHIP012'
+!shipment54.status := #ASSIGNED
+
+!new Shipment('shipment55')
+!shipment55.id := 'SHIP013'
+!shipment55.status := #NEW
+
+!new Shipment('shipment56')
+!shipment56.id := 'SHIP014'
+!shipment56.status := #DELIVERED
+
+!insert (shipment54, address95) into ShipmentContainsPickUpAddress
+!insert (shipment54, address96) into ShipmentContainsDeliveryAddress
+
+!insert (shipment55, address97) into ShipmentContainsPickUpAddress
+!insert (shipment55, address98) into ShipmentContainsDeliveryAddress
+
+!insert (shipment56, address99) into ShipmentContainsPickUpAddress
+!insert (shipment56, address100) into ShipmentContainsDeliveryAddress
+
+!insert (customer37, shipment54) into CustomerConsistsOfShipment
+!insert (customer38, shipment55) into CustomerConsistsOfShipment
+!insert (customer39, shipment56) into CustomerConsistsOfShipment
+
+!insert (driver40, shipment54) into DriverShipment
+!insert (driver41, shipment56) into DriverShipment
+
+!new Station('station34')
+
+!new Station('station35')
+
+!new Station('station36')
+
+!insert (station34, customer37) into StationContainsCustomer
+!insert (station34, driver40) into StationContainsDriver
+!insert (station34, shipment54) into StationShipment
+
+!insert (station35, customer38) into StationContainsCustomer
+!insert (station35, shipment55) into StationShipment
+
+!insert (station36, customer39) into StationContainsCustomer
+!insert (station36, driver41) into StationContainsDriver
+!insert (station36, shipment56) into StationShipment

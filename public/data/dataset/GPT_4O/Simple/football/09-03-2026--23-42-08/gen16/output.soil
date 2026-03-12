@@ -1,0 +1,131 @@
+!new Club('club31')
+!club31.name := 'River Dolphins'
+!club31.homeGround := 'Aqua Arena'
+!club31.chairman := 'Liam Waters'
+
+!new Club('club32')
+!club32.name := 'Shadow Panthers'
+!club32.homeGround := 'Panther Cave'
+!club32.chairman := 'Eva Night'
+
+!new Team('team31')
+!team31.name := 'Dolphin Glide'
+!insert (club31, team31) into ClubTeam
+
+!new Team('team32')
+!team32.name := 'Panther Prowl'
+!insert (club32, team32) into ClubTeam
+
+!new Competition('aquaChallenge')
+!aquaChallenge.name := 'Aqua Challenge'
+!aquaChallenge.type := 'Tournament'
+
+!new Match('match16')
+!match16.date := '2026-09-12'
+!match16.homeAway := false
+!insert (aquaChallenge, match16) into CompetitionMatch
+!insert (team31, match16) into LocalMatch
+!insert (team32, match16) into VisitorMatch
+
+!new MatchReport('report16')
+!report16.duration := 90
+!report16.scoreVisitor := 3
+!report16.scoreLocal := 0
+!insert (match16, report16) into MatchMatchReport
+
+!new Player('player31')
+!player31.name := 'Kai Ocean'
+!player31.age := 24
+!player31.bestFoot := #LEFT
+!player31.phoneNumber := '7894321650'
+!insert (team31, player31) into TeamPlayer
+
+!new Player('player32')
+!player32.name := 'Zara Stealth'
+!player32.age := 27
+!player32.bestFoot := #RIGHT
+!player32.phoneNumber := '8905432160'
+!insert (team32, player32) into TeamPlayer
+
+!new Position('position31')
+!position31.positionName := #DEFENDER
+!insert (player31, position31) into PlayerPositions
+
+!new Position('position32')
+!position32.positionName := #MIDFIELDER
+!insert (player32, position32) into PlayerPositions
+
+!new MatchPlayer('matchPlayer31')
+!matchPlayer31.booked := false
+!matchPlayer31.goals := 0
+!matchPlayer31.rating := 6
+!insert (player31, matchPlayer31) into PlayerMatch
+!insert (match16, matchPlayer31) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer32')
+!matchPlayer32.booked := true
+!matchPlayer32.goals := 2
+!matchPlayer32.rating := 9
+!insert (player32, matchPlayer32) into PlayerMatch
+!insert (match16, matchPlayer32) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition31')
+!matchPlayerPosition31.positionName := #DEFENDER
+!matchPlayerPosition31.number := 5
+!insert (matchPlayer31, matchPlayerPosition31) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition32')
+!matchPlayerPosition32.positionName := #MIDFIELDER
+!matchPlayerPosition32.number := 8
+!insert (matchPlayer32, matchPlayerPosition32) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event58')
+!event58.eventType := #GOAL
+!event58.time := 35
+!insert (match16, event58) into MatchMatchEvent
+
+!new MatchEvent('event59')
+!event59.eventType := #GOAL
+!event59.time := 60
+!insert (match16, event59) into MatchMatchEvent
+
+!new MatchEvent('event60')
+!event60.eventType := #GOAL
+!event60.time := 80
+!insert (match16, event60) into MatchMatchEvent
+
+!new TrainingSession('training31')
+!training31.date := '2026-08-01'
+!training31.location := 'Dolphin Cove'
+!training31.purpose := 'Defensive Strategies'
+!insert (team31, training31) into TeamTraining
+
+!new TrainingSession('training32')
+!training32.date := '2026-08-10'
+!training32.location := 'Panther Den'
+!training32.purpose := 'Counterattack Techniques'
+!insert (team32, training32) into TeamTraining
+
+!new TrainingNotes('trainingNote31')
+!trainingNote31.note := 'Improved defensive team play'
+!trainingNote31.date := '2026-08-01'
+!insert (training31, trainingNote31) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote32')
+!trainingNote32.note := 'Enhanced speed and precision'
+!trainingNote32.date := '2026-08-10'
+!insert (training32, trainingNote32) into TrainingTrainingNotes
+
+!new TrainingObjective('objective31')
+!objective31.areaToImprove := 'Endurance in Defense'
+!objective31.startDate := '2026-06-01'
+!objective31.endDate := '2026-09-01'
+!objective31.success := false
+!insert (objective31, player31) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective32')
+!objective32.areaToImprove := 'Quick Attacks'
+!objective32.startDate := '2026-06-15'
+!objective32.endDate := '2026-09-15'
+!objective32.success := true
+!insert (objective32, player32) into TrainingObjectivePlayer

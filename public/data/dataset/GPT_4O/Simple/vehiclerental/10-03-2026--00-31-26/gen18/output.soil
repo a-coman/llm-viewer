@@ -1,0 +1,70 @@
+!new RentalOffice('office18')
+!office18.name := 'Highland Haulers'
+!office18.number := 1818
+!office18.address := '345 Hilltop Rd, Denver, CO'
+
+!new Truck('truck35')
+!truck35.id := 535
+!truck35.registrationState := #CO
+!truck35.licensePlateNumber := 'CO-TRK-5678'
+!truck35.vehicleTypeCode := #TRUCK10
+!truck35.registrationLastMaintenanceDate := Date('2023-10-01')
+!truck35.expirationDate := Date('2024-10-01')
+!truck35.odometerReading := 12000
+!truck35.gasTankCapacity := 26.0
+!truck35.workingRadio := true
+!truck35.mileage := 19
+
+!new Individual('individual18')
+!individual18.name := 'David Kim'
+!individual18.address := '101 Mountain View Dr, Boulder, CO'
+!individual18.poorRisk := false
+!individual18.homePhone := '555-5566'
+!individual18.driverLicenseState := #CO
+!individual18.driverLicenseNumber := 98765432
+!individual18.driverLicenseExpirationDate := Date('2025-07-20')
+
+!new RentalAgreement('agreement35')
+!agreement35.number := 3035
+!agreement35.rentalDate := Date('2023-12-05')
+!agreement35.anticipatedDuration := 7
+!agreement35.depositPaid := 300.0
+!agreement35.quotedDailyRate := 70.00
+!agreement35.quotedRatePerMile := 0.58
+
+!new Truck('truck36')
+!truck36.id := 536
+!truck36.registrationState := #FL
+!truck36.licensePlateNumber := 'FL-TRK-7890'
+!truck36.vehicleTypeCode := #COVERED_TRAILER
+!truck36.registrationLastMaintenanceDate := Date('2023-02-15')
+!truck36.expirationDate := Date('2025-02-15')
+!truck36.odometerReading := 15000
+!truck36.gasTankCapacity := 35.5
+!truck36.workingRadio := true
+!truck36.mileage := 22
+
+!new Company('company18')
+!company18.name := 'Summit Transport Group'
+!company18.address := '789 Peak Blvd, Colorado Springs, CO'
+!company18.poorRisk := false
+!company18.idNumber := 567982
+
+!new RentalAgreement('agreement36')
+!agreement36.number := 3036
+!agreement36.rentalDate := Date('2023-11-24')
+!agreement36.anticipatedDuration := 10
+!agreement36.depositPaid := 450.0
+!agreement36.quotedDailyRate := 85.00
+!agreement36.quotedRatePerMile := 0.65
+
+!insert (office18, truck35) into RentalOfficeVehicle
+!insert (office18, truck36) into RentalOfficeVehicle
+!insert (office18, agreement35) into RentalOfficeRentalAgreementOrigin
+!insert (office18, agreement35) into RentalOfficeRentalAgreementDrop
+!insert (office18, agreement36) into RentalOfficeRentalAgreementOrigin
+!insert (office18, agreement36) into RentalOfficeRentalAgreementDrop
+!insert (agreement35, truck35) into RentalAgreementVehicle
+!insert (agreement35, individual18) into RentalAgreementCustomer
+!insert (agreement36, truck36) into RentalAgreementVehicle
+!insert (agreement36, company18) into RentalAgreementCustomer

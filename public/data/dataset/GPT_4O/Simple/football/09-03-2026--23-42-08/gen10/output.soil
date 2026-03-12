@@ -1,0 +1,126 @@
+!new Club('club19')
+!club19.name := 'Lightning Strikers'
+!club19.homeGround := 'Thunder Field'
+!club19.chairman := 'Alice Storm'
+
+!new Club('club20')
+!club20.name := 'Volcano Vipers'
+!club20.homeGround := 'Lava Heights'
+!club20.chairman := 'Henry Blaze'
+
+!new Team('team19')
+!team19.name := 'Striker Zephyrs'
+!insert (club19, team19) into ClubTeam
+
+!new Team('team20')
+!team20.name := 'Viper Flames'
+!insert (club20, team20) into ClubTeam
+
+!new Competition('springFestival')
+!springFestival.name := 'Spring Festival'
+!springFestival.type := 'Cup'
+
+!new Match('match10')
+!match10.date := '2025-04-05'
+!match10.homeAway := false
+!insert (springFestival, match10) into CompetitionMatch
+!insert (team19, match10) into LocalMatch
+!insert (team20, match10) into VisitorMatch
+
+!new MatchReport('report10')
+!report10.duration := 120
+!report10.scoreVisitor := 1
+!report10.scoreLocal := 1
+!insert (match10, report10) into MatchMatchReport
+
+!new Player('player19')
+!player19.name := 'Liam Thunder'
+!player19.age := 29
+!player19.bestFoot := #RIGHT
+!player19.phoneNumber := '7654321980'
+!insert (team19, player19) into TeamPlayer
+
+!new Player('player20')
+!player20.name := 'Sophia Heat'
+!player20.age := 31
+!player20.bestFoot := #BOTH
+!player20.phoneNumber := '6543219801'
+!insert (team20, player20) into TeamPlayer
+
+!new Position('position19')
+!position19.positionName := #DEFENDER
+!insert (player19, position19) into PlayerPositions
+
+!new Position('position20')
+!position20.positionName := #FORWARD
+!insert (player20, position20) into PlayerPositions
+
+!new MatchPlayer('matchPlayer19')
+!matchPlayer19.booked := true
+!matchPlayer19.goals := 0
+!matchPlayer19.rating := 7
+!insert (player19, matchPlayer19) into PlayerMatch
+!insert (match10, matchPlayer19) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer20')
+!matchPlayer20.booked := false
+!matchPlayer20.goals := 1
+!matchPlayer20.rating := 9
+!insert (player20, matchPlayer20) into PlayerMatch
+!insert (match10, matchPlayer20) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition19')
+!matchPlayerPosition19.positionName := #DEFENDER
+!matchPlayerPosition19.number := 5
+!insert (matchPlayer19, matchPlayerPosition19) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition20')
+!matchPlayerPosition20.positionName := #FORWARD
+!matchPlayerPosition20.number := 10
+!insert (matchPlayer20, matchPlayerPosition20) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event35')
+!event35.eventType := #GOAL
+!event35.time := 45
+!insert (match10, event35) into MatchMatchEvent
+
+!new MatchEvent('event36')
+!event36.eventType := #GOAL
+!event36.time := 95
+!insert (match10, event36) into MatchMatchEvent
+
+!new TrainingSession('training19')
+!training19.date := '2025-03-01'
+!training19.location := 'Lightning Dome'
+!training19.purpose := 'Defensive Drills'
+!insert (team19, training19) into TeamTraining
+
+!new TrainingSession('training20')
+!training20.date := '2025-03-15'
+!training20.location := 'Lava Grounds'
+!training20.purpose := 'Offensive Strategies'
+!insert (team20, training20) into TeamTraining
+
+!new TrainingNotes('trainingNote19')
+!trainingNote19.note := 'Worked on defensive positioning and marking'
+!trainingNote19.date := '2025-03-01'
+!insert (training19, trainingNote19) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote20')
+!trainingNote20.note := 'Focused on creating goal-scoring opportunities'
+!trainingNote20.date := '2025-03-15'
+!insert (training20, trainingNote20) into TrainingTrainingNotes
+
+!new TrainingObjective('objective19')
+!objective19.areaToImprove := 'Defensive Cohesion'
+!objective19.startDate := '2025-01-01'
+!objective19.endDate := '2025-04-01'
+!objective19.success := false
+!insert (objective19, player19) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective20')
+!objective20.areaToImprove := 'Scoring Consistency'
+!objective20.startDate := '2025-01-10'
+!objective20.endDate := '2025-04-10'
+!objective20.success := true
+!insert (objective20, player20) into TrainingObjectivePlayer

@@ -1,0 +1,52 @@
+!new StateMachine('dynamicCircuit')
+!dynamicCircuit.name := 'dynamicCircuit'
+
+!new State('nodeA')
+!nodeA.name := 'nodeA'
+
+!new State('nodeB')
+!nodeB.name := 'nodeB'
+
+!new State('nodeC')
+!nodeC.name := 'nodeC'
+
+!new Transition('path1Transition')
+!path1Transition.name := 'path1Transition'
+
+!new Transition('path2Transition')
+!path2Transition.name := 'path2Transition'
+
+!new Transition('backTransition')
+!backTransition.name := 'backTransition'
+
+!new TimeEvent('timeEvent6')
+!timeEvent6.time := 6
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (dynamicCircuit, nodeA) into StateMachineContainsStates
+!insert (dynamicCircuit, nodeB) into StateMachineContainsStates
+!insert (dynamicCircuit, nodeC) into StateMachineContainsStates
+
+!insert (dynamicCircuit, path1Transition) into StateMachineContainsTransitions
+!insert (dynamicCircuit, path2Transition) into StateMachineContainsTransitions
+!insert (dynamicCircuit, backTransition) into StateMachineContainsTransitions
+
+!insert (path1Transition, timeEvent6) into TransitionContainsEvents
+!insert (path2Transition, timeEvent4) into TransitionContainsEvents
+!insert (backTransition, timeEvent5) into TransitionContainsEvents
+
+!insert (nodeA, path1Transition) into StateTransition
+!insert (path1Transition, nodeB) into TransitionState
+
+!insert (nodeA, path2Transition) into StateTransition
+!insert (path2Transition, nodeC) into TransitionState
+
+!insert (nodeC, backTransition) into StateTransition
+!insert (backTransition, nodeA) into TransitionState
+
+!insert (dynamicCircuit, nodeA) into StateMachineStartsStates

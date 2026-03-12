@@ -1,0 +1,67 @@
+!new Bank('sumitomoMitsuiBankingCorp')
+!sumitomoMitsuiBankingCorp.country := 'Japan'
+!sumitomoMitsuiBankingCorp.name := 'Sumitomo Mitsui Banking Corporation'
+!sumitomoMitsuiBankingCorp.bic := 'SMBCJPJTXXX'
+
+!new Account('account6_1')
+!account6_1.iban := 'JP668123455678987654321'
+!account6_1.balance := 12000
+
+!new Account('account6_2')
+!account6_2.iban := 'JP668123455678123456789'
+!account6_2.balance := 55000
+
+!new Account('account6_3')
+!account6_3.iban := 'JP668123455678234567891'
+!account6_3.balance := 0
+
+!new Account('account6_4')
+!account6_4.iban := 'JP668123455678345678912'
+!account6_4.balance := 20000
+
+!new Person('harutoTanaka')
+!harutoTanaka.firstName := 'Haruto'
+!harutoTanaka.lastName := 'Tanaka'
+!harutoTanaka.age := 39
+
+!new Person('sakuraYamada')
+!sakuraYamada.firstName := 'Sakura'
+!sakuraYamada.lastName := 'Yamada'
+!sakuraYamada.age := 27
+
+!new Person('kenjiSaito')
+!kenjiSaito.firstName := 'Kenji'
+!kenjiSaito.lastName := 'Saito'
+!kenjiSaito.age := 51
+
+!new Person('aikoFujimoto')
+!aikoFujimoto.firstName := 'Aiko'
+!aikoFujimoto.lastName := 'Fujimoto'
+!aikoFujimoto.age := 30
+
+!insert (sumitomoMitsuiBankingCorp, account6_1) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_2) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_3) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_4) into AccountOfBanks
+
+!insert (harutoTanaka, account6_1) into Ownership
+
+!insert (sakuraYamada, account6_2) into Ownership
+!insert (kenjiSaito, account6_2) into Ownership
+
+!insert (aikoFujimoto, account6_3) into Ownership
+!insert (harutoTanaka, account6_3) into Ownership
+
+!insert (kenjiSaito, account6_4) into Ownership
+
+!insert (harutoTanaka, account6_1) into Use
+!insert (sakuraYamada, account6_1) into Use
+
+!insert (kenjiSaito, account6_2) into Use
+
+!insert (aikoFujimoto, account6_3) into Use
+!insert (harutoTanaka, account6_3) into Use
+!insert (kenjiSaito, account6_3) into Use
+
+!insert (kenjiSaito, account6_4) into Use
+!insert (sakuraYamada, account6_4) into Use

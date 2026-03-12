@@ -1,0 +1,47 @@
+-- Creating instances of Currency
+!new Currency('currency5')
+!currency5.name := 'Canadian Dollar'
+!currency5.abbreviation := 'CAD'
+
+-- Creating instances of Bills
+!new Bill('bill11')
+!bill11.amount := 300.00
+!bill11.category := 'Healthcare'
+!bill11.date := Date('2023-06-10')
+!bill11.paymentMethod := #CREDIT_CARD
+!bill11.status := #VALIDATED
+!insert (bill11, currency5) into BillCurrency
+
+!new Bill('bill12')
+!bill12.amount := 150.00
+!bill12.category := 'Gym Membership'
+!bill12.date := Date('2023-06-12')
+!bill12.paymentMethod := #CHECK
+!bill12.status := #DRAFT
+!insert (bill12, currency5) into BillCurrency
+
+!new Bill('bill13')
+!bill13.amount := 50.00
+!bill13.category := 'Books'
+!bill13.date := Date('2023-06-15')
+!bill13.paymentMethod := #CASH
+!bill13.status := #REFUNDED
+!insert (bill13, currency5) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment7')
+!comment7.text := 'Expenses related to health and wellness.'
+
+!new Comment('comment8')
+!comment8.text := 'Book refund processed successfully.'
+
+-- Creating instance of Expense
+!new Expense('expense5')
+!expense5.amount := 500.00
+!expense5.startDate := Date('2023-06-10')
+!expense5.endDate := Date('2023-06-20')
+!insert (expense5, bill11) into ExpenseContainsBills
+!insert (expense5, bill12) into ExpenseContainsBills
+!insert (expense5, bill13) into ExpenseContainsBills
+!insert (expense5, comment7) into ExpenseComment
+!insert (expense5, comment8) into ExpenseComment

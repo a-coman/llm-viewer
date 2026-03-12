@@ -1,0 +1,114 @@
+!new Restaurant('restaurant4')
+!restaurant4.name := 'Spice Symphony'
+
+!new Owner('owner8')
+!owner8.name := 'Nina Simone'
+!owner8.percentageShares := 50
+!insert (restaurant4, owner8) into RestaurantOwner
+
+!new Owner('owner9')
+!owner9.name := 'Henry Lee'
+!owner9.percentageShares := 50
+!insert (restaurant4, owner9) into RestaurantOwner
+
+!new Table('table8')
+!table8.number := 8
+!table8.description := 'Long family table'
+!table8.capacity := 12
+
+!new Table('table9')
+!table9.number := 9
+!table9.description := 'Intimate booth'
+!table9.capacity := 4
+
+!new Table('table10')
+!table10.number := 10
+!table10.description := 'Outdoor dining'
+!table10.capacity := 16
+
+!new RegularCustomer('customer5')
+!customer5.name := 'Olivia Benson'
+!customer5.prefferedLanguage := #Spanish
+
+!new Waiter('waiter6')
+!waiter6.name := 'Carlos Ruiz'
+!waiter6.dateOfBirth := Date('1993-04-14')
+!waiter6.phoneNumber := '555-9988'
+!waiter6.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter4')
+!headwaiter4.name := 'Samantha Brown'
+!headwaiter4.dateOfBirth := Date('1981-09-20')
+!headwaiter4.phoneNumber := '555-4433'
+
+!insert (headwaiter4, waiter6) into HeadWaiterWaiter
+
+!new Individual('reservation5')
+!reservation5.time := Time('20:00')
+!reservation5.date := Date('2023-12-24')
+!reservation5.numberPeople := 2
+!reservation5.name := 'Olivia Benson'
+!reservation5.phoneNumber := '555-7766'
+!reservation5.number := 5
+!reservation5.seating := #Inside
+!reservation5.smoking := #NonSmoking
+!insert (restaurant4, reservation5) into RestaurantReservation
+!insert (reservation5, customer5) into ReservationCustomer
+!insert (reservation5, waiter6) into ReservationWaiter
+!insert (reservation5, table9) into ReservationTable
+
+!new Banquet('reservation6')
+!reservation6.time := Time('19:00')
+!reservation6.date := Date('2023-12-31')
+!reservation6.numberPeople := 25
+!reservation6.name := 'New Year Party'
+!reservation6.phoneNumber := '555-4567'
+!reservation6.number := 6
+!reservation6.groupName := 'Celebration Group'
+!reservation6.paymentMethod := #CreditCard
+!reservation6.busService := true
+!insert (restaurant4, reservation6) into RestaurantReservation
+!insert (reservation6, table8) into ReservationTable
+!insert (reservation6, table10) into ReservationTable
+!insert (reservation6, waiter6) into ReservationWaiter
+
+!new BusDriver('busdriver3')
+!busdriver3.name := 'Larry Knight'
+!busdriver3.dateOfBirth := Date('1975-02-02')
+!busdriver3.phoneNumber := '555-9090'
+!busdriver3.driverLicenseNr := 'DL789101'
+!insert (reservation6, busdriver3) into BanquetBusDriver
+
+!new ItemOrder('itemOrder4')
+!itemOrder4.time := Time('20:45')
+!insert (reservation5, itemOrder4) into ReservationItemOrdered
+
+!new MenuItem('menuItem4')
+!menuItem4.description := 'Spicy Thai Curry'
+!menuItem4.prepTime := 30.0
+!menuItem4.classification := #Main
+!insert (itemOrder4, menuItem4) into ItemOrderMenuItem
+
+!new FoodItem('foodItem4')
+!foodItem4.number := 104
+!foodItem4.description := 'Chili Peppers'
+!foodItem4.purchaseFlag := true
+!foodItem4.unit := #Pound
+!insert (menuItem4, foodItem4) into MenuItemFoodItem
+
+!new Allergen('allergen4')
+!allergen4.type := #Lactose
+!insert (foodItem4, allergen4) into FoodItemAllergen
+
+!new Cook('cook4')
+!cook4.name := 'Mason Green'
+!cook4.dateOfBirth := Date('1988-11-16')
+!cook4.phoneNumber := '555-3344'
+!cook4.yearsOfExperience := 6
+
+!new Chef('chef4')
+!chef4.name := 'Ella Fitzgerald'
+!chef4.dateOfBirth := Date('1984-07-23')
+!chef4.phoneNumber := '555-5566'
+!insert (menuItem4, chef4) into MenuItemChef
+!insert (chef4, cook4) into ChefCook

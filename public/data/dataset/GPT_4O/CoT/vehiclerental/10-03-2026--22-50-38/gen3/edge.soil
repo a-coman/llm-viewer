@@ -1,0 +1,61 @@
+!new RentalOffice('officeDesertMirageRentals')
+!officeDesertMirageRentals.name := 'Desert Mirage Rentals'
+!officeDesertMirageRentals.number := 303
+!officeDesertMirageRentals.address := '477 Oasis Dr, Mirage City, NV 89001'
+
+!new Truck('truck78901')
+!truck78901.id := 78901
+!truck78901.registrationState := #NV
+!truck78901.licensePlateNumber := 'NV-654-OPQ'
+!truck78901.vehicleTypeCode := #TRUCK
+!truck78901.registrationLastMaintenanceDate := Date('2023-08-01')
+!truck78901.expirationDate := Date('2024-08-01')
+!truck78901.odometerReading := 15000
+!truck78901.gasTankCapacity := 150.0
+!truck78901.workingRadio := true
+!truck78901.mileage := 12
+
+!new Individual('individualSandyDunes')
+!individualSandyDunes.name := 'Sandy Dunes'
+!individualSandyDunes.address := '900 Windy Path, Sun Valley, AZ 85001'
+!individualSandyDunes.poorRisk := false
+!individualSandyDunes.homePhone := '+1-602-555-0789'
+!individualSandyDunes.driverLicenseState := #AZ
+!individualSandyDunes.driverLicenseNumber := 1239876543
+!individualSandyDunes.driverLicenseExpirationDate := Date('2023-05-01')
+
+!new Company('companyRenewableExplorationsCorp')
+!companyRenewableExplorationsCorp.name := 'Renewable Explorations Corp.'
+!companyRenewableExplorationsCorp.address := '101 Solar Field, Desert Outpost, CA 93501'
+!companyRenewableExplorationsCorp.poorRisk := false
+!companyRenewableExplorationsCorp.idNumber := 556677889
+
+!new RentalAgreement('rentalAgreement3005')
+!rentalAgreement3005.number := 3005
+!rentalAgreement3005.rentalDate := Date('2025-02-01')
+!rentalAgreement3005.anticipatedDuration := 10
+!rentalAgreement3005.depositPaid := 500.0
+!rentalAgreement3005.quotedDailyRate := 110.0
+!rentalAgreement3005.quotedRatePerMile := 3.0
+
+!new RentalAgreement('rentalAgreement3006')
+!rentalAgreement3006.number := 3006
+!rentalAgreement3006.rentalDate := Date('2025-07-01')
+!rentalAgreement3006.anticipatedDuration := 30
+!rentalAgreement3006.depositPaid := 1500.0
+!rentalAgreement3006.quotedDailyRate := 70.0
+!rentalAgreement3006.quotedRatePerMile := 0.8
+
+!insert (officeDesertMirageRentals, truck78901) into RentalOfficeVehicle
+
+!insert (officeDesertMirageRentals, rentalAgreement3005) into RentalOfficeRentalAgreementOrigin
+!insert (officeDesertMirageRentals, rentalAgreement3006) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeDesertMirageRentals, rentalAgreement3005) into RentalOfficeRentalAgreementDrop
+!insert (officeDesertMirageRentals, rentalAgreement3006) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement3005, truck78901) into RentalAgreementVehicle
+!insert (rentalAgreement3006, truck78901) into RentalAgreementVehicle
+
+!insert (rentalAgreement3005, individualSandyDunes) into RentalAgreementCustomer
+!insert (rentalAgreement3006, companyRenewableExplorationsCorp) into RentalAgreementCustomer

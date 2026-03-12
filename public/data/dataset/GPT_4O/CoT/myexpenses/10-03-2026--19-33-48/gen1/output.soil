@@ -1,0 +1,235 @@
+!new Expense('weekendGetawayExpense')
+!weekendGetawayExpense.amount := 550.00
+!weekendGetawayExpense.startDate := Date('2023-01-15')
+!weekendGetawayExpense.endDate := Date('2023-01-17')
+
+!new Bill('bill1')
+!bill1.amount := 350.00
+!bill1.category := 'Hotel Accommodation'
+!bill1.date := Date('2023-01-15')
+!bill1.paymentMethod := #CREDIT_CARD
+!bill1.status := #VERIFIED
+
+!new Bill('bill2')
+!bill2.amount := 100.00
+!bill2.category := 'Meals'
+!bill2.date := Date('2023-01-16')
+!bill2.paymentMethod := #CASH
+!bill2.status := #VALIDATED
+
+!new Bill('bill3')
+!bill3.amount := 100.00
+!bill3.category := 'Gasoline'
+!bill3.date := Date('2023-01-17')
+!bill3.paymentMethod := #CHECK
+!bill3.status := #PENDING
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (bill1, currencyUSD) into BillCurrency
+!insert (bill2, currencyUSD) into BillCurrency
+!insert (bill3, currencyUSD) into BillCurrency
+
+!insert (weekendGetawayExpense, bill1) into ExpenseContainsBills
+!insert (weekendGetawayExpense, bill2) into ExpenseContainsBills
+!insert (weekendGetawayExpense, bill3) into ExpenseContainsBills
+
+!new Comment('comment1')
+!comment1.text := 'Nice and cozy hotel, worth the price!'
+
+!insert (weekendGetawayExpense, comment1) into ExpenseComment
+
+!new Expense('myExpenses')
+!myExpenses.amount := 1000.00
+!myExpenses.startDate := Date('2023-09-01')
+!myExpenses.endDate := Date('2023-09-30')
+
+!new Bill('bill1LowerBound')
+!bill1LowerBound.amount := 0.01
+!bill1LowerBound.category := 'Charity Donation'
+!bill1LowerBound.date := Date('2023-09-01')
+!bill1LowerBound.paymentMethod := #CHECK
+!bill1LowerBound.status := #VERIFIED
+
+!new Bill('bill2UpperBound')
+!bill2UpperBound.amount := 999.99
+!bill2UpperBound.category := 'Office Equipment'
+!bill2UpperBound.date := Date('2023-09-10')
+!bill2UpperBound.paymentMethod := #CREDIT_CARD
+!bill2UpperBound.status := #VALIDATED
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (bill1LowerBound, currencyUSD) into BillCurrency
+!insert (bill2UpperBound, currencyUSD) into BillCurrency
+
+!insert (myExpenses, bill1LowerBound) into ExpenseContainsBills
+!insert (myExpenses, bill2UpperBound) into ExpenseContainsBills
+
+-- No comments to insert for this instance as there are none defined.
+
+!new Expense('internationalBusinessTrip')
+!internationalBusinessTrip.amount := 1200.00
+!internationalBusinessTrip.startDate := Date('2023-09-15')
+!internationalBusinessTrip.endDate := Date('2023-09-22')
+
+!new Bill('bill1')
+!bill1.amount := 600.00
+!bill1.category := 'Hotel Accommodation'
+!bill1.date := Date('2023-09-15')
+!bill1.paymentMethod := #CREDIT_CARD
+!bill1.status := #VERIFIED
+
+!new Bill('bill2')
+!bill2.amount := 400.00
+!bill2.category := 'Flights'
+!bill2.date := Date('2023-09-14')
+!bill2.paymentMethod := #CREDIT_CARD
+!bill2.status := #VALIDATED
+
+!new Bill('bill3')
+!bill3.amount := 100.00
+!bill3.category := 'Meals'
+!bill3.date := Date('2023-09-16')
+!bill3.paymentMethod := #CASH
+!bill3.status := #VERIFIED
+
+!new Bill('bill4')
+!bill4.amount := 100.00
+!bill4.category := 'Local Transportation'
+!bill4.date := Date('2023-09-21')
+!bill4.paymentMethod := #CHECK
+!bill4.status := #PENDING
+
+!new Currency('currencyEuro')
+!currencyEuro.name := 'Euro'
+!currencyEuro.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (bill1, currencyEuro) into BillCurrency
+!insert (bill2, currencyUSD) into BillCurrency
+!insert (bill3, currencyEuro) into BillCurrency
+!insert (bill4, currencyEuro) into BillCurrency
+
+!insert (internationalBusinessTrip, bill1) into ExpenseContainsBills
+!insert (internationalBusinessTrip, bill2) into ExpenseContainsBills
+!insert (internationalBusinessTrip, bill3) into ExpenseContainsBills
+!insert (internationalBusinessTrip, bill4) into ExpenseContainsBills
+
+!new Comment('comment1')
+!comment1.text := 'Business trip to Europe for client meetings and a conference.'
+
+!new Comment('comment2')
+!comment2.text := 'Attempted to keep expenses within budget where possible.'
+
+!insert (internationalBusinessTrip, comment1) into ExpenseComment
+!insert (internationalBusinessTrip, comment2) into ExpenseComment
+
+!new Expense('endOfYearMultiCurrencySurge')
+!endOfYearMultiCurrencySurge.amount := 17750.00
+!endOfYearMultiCurrencySurge.startDate := Date('2023-12-28')
+!endOfYearMultiCurrencySurge.endDate := Date('2024-01-03')
+
+!new Bill('billSupplierInvoice')
+!billSupplierInvoice.amount := 12000.00
+!billSupplierInvoice.category := 'Supplier Invoice'
+!billSupplierInvoice.date := Date('2023-12-29')
+!billSupplierInvoice.paymentMethod := #CREDIT_CARD
+!billSupplierInvoice.status := #VERIFIED
+
+!new Bill('billSoftwareRenewal')
+!billSoftwareRenewal.amount := 3000.00
+!billSoftwareRenewal.category := 'Software Subscription Renewal'
+!billSoftwareRenewal.date := Date('2023-12-31')
+!billSoftwareRenewal.paymentMethod := #CHECK
+!billSoftwareRenewal.status := #VALIDATED
+
+!new Bill('billBonusPayout')
+!billBonusPayout.amount := 2750.00
+!billBonusPayout.category := 'Year-End Bonus Payout'
+!billBonusPayout.date := Date('2024-01-02')
+!billBonusPayout.paymentMethod := #CASH
+!billBonusPayout.status := #PENDING
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyEuro')
+!currencyEuro.name := 'Euro'
+!currencyEuro.abbreviation := 'EUR'
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (billSupplierInvoice, currencyUSD) into BillCurrency
+!insert (billSoftwareRenewal, currencyEuro) into BillCurrency
+!insert (billBonusPayout, currencyGBP) into BillCurrency
+
+!insert (endOfYearMultiCurrencySurge, billSupplierInvoice) into ExpenseContainsBills
+!insert (endOfYearMultiCurrencySurge, billSoftwareRenewal) into ExpenseContainsBills
+!insert (endOfYearMultiCurrencySurge, billBonusPayout) into ExpenseContainsBills
+
+!new Comment('comment1')
+!comment1.text := 'All transactions were processed during the financial year rollover period, necessitating careful review for accurate fiscal reporting.'
+
+!new Comment('comment2')
+!comment2.text := 'Note delayed processing due to cross-border banking regulations affecting check clearance timelines for Bill 2.'
+
+!new Comment('comment3')
+!comment3.text := 'Cash handling for Bill 3 requires verification of funds received confirmation from regional office.'
+
+!insert (endOfYearMultiCurrencySurge, comment1) into ExpenseComment
+!insert (endOfYearMultiCurrencySurge, comment2) into ExpenseComment
+!insert (endOfYearMultiCurrencySurge, comment3) into ExpenseComment
+
+!new Expense('vacayTripExpense')
+!vacayTripExpense.amount := 1200.00
+!vacayTripExpense.startDate := Date('2024-04-15')
+!vacayTripExpense.endDate := Date('2024-04-30')
+
+!new Bill('moroccanSpicesBill')
+!moroccanSpicesBill.amount := 500.00
+!moroccanSpicesBill.category := 'Traditional Moroccan Spices Purchase'
+!moroccanSpicesBill.date := Date('2024-04-16')
+!moroccanSpicesBill.paymentMethod := #CASH
+!moroccanSpicesBill.status := #VALIDATED
+
+!new Bill('italianPastaBill')
+!italianPastaBill.amount := 700.00
+!italianPastaBill.category := 'Gourmet Italian Pasta'
+!italianPastaBill.date := Date('2024-04-27')
+!italianPastaBill.paymentMethod := #CREDIT_CARD
+!italianPastaBill.status := #PENDING
+
+!new Currency('currencyMAD')
+!currencyMAD.name := 'Moroccan Dirham'
+!currencyMAD.abbreviation := 'MAD'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (moroccanSpicesBill, currencyMAD) into BillCurrency
+!insert (italianPastaBill, currencyEUR) into BillCurrency
+
+!insert (vacayTripExpense, moroccanSpicesBill) into ExpenseContainsBills
+!insert (vacayTripExpense, italianPastaBill) into ExpenseContainsBills
+
+!new Comment('johnsReflection')
+!johnsReflection.text := 'The best spices I have ever bought! Can''t wait for the cooking sessions.'
+
+!new Comment('budgetTip')
+!budgetTip.text := 'Always keep an eye on exchange rates when traveling.'
+
+!insert (vacayTripExpense, johnsReflection) into ExpenseComment
+!insert (vacayTripExpense, budgetTip) into ExpenseComment
+

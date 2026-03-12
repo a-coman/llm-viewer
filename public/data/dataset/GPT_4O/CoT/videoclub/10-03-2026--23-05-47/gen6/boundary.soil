@@ -1,0 +1,39 @@
+!new Client('client38')
+!client38.clientId := 999
+!client38.isSuspended := true
+
+!new Rental('rental60')
+!rental60.date := Date('2024-07-01')
+
+!new Movie('movie50')
+!movie50.title := 'Zen Warriors'
+!movie50.availableCopies := 0
+!movie50.genre := #Action
+
+!new Movie('movie51')
+!movie51.title := 'Kansha: The Comedy'
+!movie51.availableCopies := 8
+!movie51.genre := #Comedy
+
+!new Series('series41')
+!series41.title := 'Legends of the Forest'
+!series41.availableCopies := 0
+!series41.episode := 40
+
+!new Actor('actor90')
+!actor90.name := 'Hiroshi Yamamoto'
+
+!new Actor('actor91')
+!actor91.name := 'Rina Kato'
+
+!insert (client38, rental60) into ClientRental
+
+!insert (rental60, movie50) into RentalCassette
+!insert (rental60, movie51) into RentalCassette
+!insert (rental60, series41) into RentalCassette
+
+!insert (movie50, actor90) into CassetteActor
+
+!insert (movie51, actor91) into CassetteActor
+
+!insert (series41, actor90) into CassetteActor

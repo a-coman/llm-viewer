@@ -1,0 +1,41 @@
+!new StateMachine('quietMachine')
+!quietMachine.name := 'quietMachine'
+
+!new State('startState')
+!startState.name := 'startState'
+
+!new State('intermediate')
+!intermediate.name := 'intermediate'
+
+!new State('lonely')
+!lonely.name := 'lonely'
+
+!new Transition('transitionOne')
+!transitionOne.name := 'transitionOne'
+
+!new Transition('loopBack')
+!loopBack.name := 'loopBack'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (quietMachine, startState) into StateMachineContainsStates
+!insert (quietMachine, intermediate) into StateMachineContainsStates
+!insert (quietMachine, lonely) into StateMachineContainsStates
+
+!insert (quietMachine, transitionOne) into StateMachineContainsTransitions
+!insert (quietMachine, loopBack) into StateMachineContainsTransitions
+
+!insert (transitionOne, timeEvent1) into TransitionContainsEvents
+!insert (loopBack, timeEvent2) into TransitionContainsEvents
+
+!insert (startState, transitionOne) into StateTransition
+!insert (transitionOne, lonely) into TransitionState
+
+!insert (lonely, loopBack) into StateTransition
+!insert (loopBack, lonely) into TransitionState
+
+!insert (quietMachine, lonely) into StateMachineStartsStates

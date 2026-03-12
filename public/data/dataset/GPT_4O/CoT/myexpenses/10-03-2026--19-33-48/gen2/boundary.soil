@@ -1,0 +1,24 @@
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 0.00
+!boundaryCaseExpense.startDate := Date('2023-01-01')
+!boundaryCaseExpense.endDate := Date('2023-01-31')
+
+!new Bill('cancelledSubscriptionBill')
+!cancelledSubscriptionBill.amount := 0.00
+!cancelledSubscriptionBill.category := 'Cancelled Subscription'
+!cancelledSubscriptionBill.date := Date('2023-01-15')
+!cancelledSubscriptionBill.paymentMethod := #CREDIT_CARD
+!cancelledSubscriptionBill.status := #REFUSED
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (cancelledSubscriptionBill, currencyJPY) into BillCurrency
+
+!insert (boundaryCaseExpense, cancelledSubscriptionBill) into ExpenseContainsBills
+
+!new Comment('cancellationComment')
+!cancellationComment.text := 'This expense was canceled and had no cost.'
+
+!insert (boundaryCaseExpense, cancellationComment) into ExpenseComment

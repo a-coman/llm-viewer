@@ -1,0 +1,59 @@
+!new RentalOffice('officeRemotePeaks')
+!officeRemotePeaks.name := 'Remote Peaks Rental'
+!officeRemotePeaks.number := 101
+!officeRemotePeaks.address := '123 Mountain Top Lane, Isolation, WY 82000'
+
+!new Truck('truck56789')
+!truck56789.id := 56789
+!truck56789.registrationState := #WY
+!truck56789.licensePlateNumber := 'WYO-123-EFG'
+!truck56789.vehicleTypeCode := #TRUCK
+!truck56789.registrationLastMaintenanceDate := Date('2022-12-31')
+!truck56789.expirationDate := Date('2023-12-31')
+!truck56789.odometerReading := 7
+!truck56789.gasTankCapacity := 0.5
+!truck56789.workingRadio := true
+!truck56789.mileage := 0
+
+!new Individual('individualErikMountainclimber')
+!individualErikMountainclimber.name := 'Erik Mountainclimber'
+!individualErikMountainclimber.address := '789 Cliffside Drive, Alpine, CO 80420'
+!individualErikMountainclimber.poorRisk := true
+!individualErikMountainclimber.homePhone := '+1-970-555-0123'
+!individualErikMountainclimber.driverLicenseState := #CO
+!individualErikMountainclimber.driverLicenseNumber := 98765432
+!individualErikMountainclimber.driverLicenseExpirationDate := Date('2024-06-30')
+
+!new Company('companyHighAltitudeVentures')
+!companyHighAltitudeVentures.name := 'High Altitude Ventures'
+!companyHighAltitudeVentures.address := '45 Boulder Front, Summit City, CO 80001'
+!companyHighAltitudeVentures.poorRisk := false
+!companyHighAltitudeVentures.idNumber := 123456789
+
+!new RentalAgreement('rentalAgreement1001')
+!rentalAgreement1001.number := 1001
+!rentalAgreement1001.rentalDate := Date('2025-01-15')
+!rentalAgreement1001.anticipatedDuration := 1
+!rentalAgreement1001.depositPaid := 0.0
+!rentalAgreement1001.quotedDailyRate := 300.0
+!rentalAgreement1001.quotedRatePerMile := 1.5
+
+!new RentalAgreement('rentalAgreement1002')
+!rentalAgreement1002.number := 1002
+!rentalAgreement1002.rentalDate := Date('2025-01-15')
+!rentalAgreement1002.anticipatedDuration := 30
+!rentalAgreement1002.depositPaid := 10000.0
+!rentalAgreement1002.quotedDailyRate := 250.0
+!rentalAgreement1002.quotedRatePerMile := 1.0
+
+!insert (officeRemotePeaks, truck56789) into RentalOfficeVehicle
+
+!insert (officeRemotePeaks, rentalAgreement1001) into RentalOfficeRentalAgreementOrigin
+!insert (officeRemotePeaks, rentalAgreement1001) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1001, truck56789) into RentalAgreementVehicle
+!insert (rentalAgreement1001, individualErikMountainclimber) into RentalAgreementCustomer
+
+!insert (officeRemotePeaks, rentalAgreement1002) into RentalOfficeRentalAgreementOrigin
+!insert (officeRemotePeaks, rentalAgreement1002) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1002, truck56789) into RentalAgreementVehicle
+!insert (rentalAgreement1002, companyHighAltitudeVentures) into RentalAgreementCustomer

@@ -1,0 +1,50 @@
+!new Bank('bank19')
+!bank19.country := 'Switzerland'
+!bank19.name := 'Credit Suisse'
+!bank19.bic := 'CRESCHZZ80A'
+
+!new Bank('bank20')
+!bank20.country := 'South Korea'
+!bank20.name := 'Kookmin Bank'
+!bank20.bic := 'CZNBKRSE'
+
+!new Account('account28')
+!account28.iban := 'CH5604835012345678009'
+!account28.balance := 7600
+
+!new Account('account29')
+!account29.iban := 'KR2300005112345678912345'
+!account29.balance := 4500
+
+!new Account('account30')
+!account30.iban := 'CH5604835012345678010'
+!account30.balance := 250
+
+!new Person('person28')
+!person28.firstName := 'Hans'
+!person28.lastName := 'Müller'
+!person28.age := 58
+
+!new Person('person29')
+!person29.firstName := 'Jun'
+!person29.lastName := 'Lee'
+!person29.age := 31
+
+!new Person('person30')
+!person30.firstName := 'Anna'
+!person30.lastName := 'Kim'
+!person30.age := 40
+
+!insert (person28, account28) into Ownership
+!insert (person29, account29) into Ownership
+!insert (person30, account30) into Ownership
+!insert (person29, account30) into Ownership
+
+!insert (person28, account28) into Use
+!insert (person29, account29) into Use
+!insert (person30, account28) into Use
+!insert (person30, account29) into Use
+
+!insert (bank19, account28) into AccountOfBanks
+!insert (bank20, account29) into AccountOfBanks
+!insert (bank19, account30) into AccountOfBanks

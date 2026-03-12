@@ -1,0 +1,67 @@
+!new StateMachine('stateMachine16')
+!stateMachine16.name := 'fitnessAppWorkflow'
+
+!new State('state48')
+!state48.name := 'notStarted'
+
+!new State('state49')
+!state49.name := 'warmup'
+
+!new State('state50')
+!state50.name := 'exercising'
+
+!new State('state51')
+!state51.name := 'cooldown'
+
+!new Transition('transition49')
+!transition49.name := 'beginWarmup'
+
+!new Transition('transition50')
+!transition50.name := 'startExercise'
+
+!new Transition('transition51')
+!transition51.name := 'startCooldown'
+
+!new Transition('transition52')
+!transition52.name := 'finishWorkout'
+
+!new TimeEvent('timeEvent49')
+!timeEvent49.time := 5
+
+!new TimeEvent('timeEvent50')
+!timeEvent50.time := 20
+
+!new TimeEvent('timeEvent51')
+!timeEvent51.time := 10
+
+!new TimeEvent('timeEvent52')
+!timeEvent52.time := 3
+
+!insert (stateMachine16, state48) into StateMachineContainsStates
+!insert (stateMachine16, state49) into StateMachineContainsStates
+!insert (stateMachine16, state50) into StateMachineContainsStates
+!insert (stateMachine16, state51) into StateMachineContainsStates
+
+!insert (stateMachine16, transition49) into StateMachineContainsTransitions
+!insert (stateMachine16, transition50) into StateMachineContainsTransitions
+!insert (stateMachine16, transition51) into StateMachineContainsTransitions
+!insert (stateMachine16, transition52) into StateMachineContainsTransitions
+
+!insert (transition49, timeEvent49) into TransitionContainsEvents
+!insert (transition50, timeEvent50) into TransitionContainsEvents
+!insert (transition51, timeEvent51) into TransitionContainsEvents
+!insert (transition52, timeEvent52) into TransitionContainsEvents
+
+!insert (state48, transition49) into StateTransition
+!insert (transition49, state49) into TransitionState
+
+!insert (state49, transition50) into StateTransition
+!insert (transition50, state50) into TransitionState
+
+!insert (state50, transition51) into StateTransition
+!insert (transition51, state51) into TransitionState
+
+!insert (state51, transition52) into StateTransition
+!insert (transition52, state48) into TransitionState
+
+!insert (stateMachine16, state48) into StateMachineStartsStates

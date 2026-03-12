@@ -1,0 +1,107 @@
+!new Restaurant('restaurant15')
+!restaurant15.name := 'Galactic Gourmet'
+
+!new Owner('owner30')
+!owner30.name := 'Cassiopeia Khan'
+!owner30.percentageShares := 70
+!insert (restaurant15, owner30) into RestaurantOwner
+
+!new Owner('owner31')
+!owner31.name := 'Phoenix Blaze'
+!owner31.percentageShares := 30
+!insert (restaurant15, owner31) into RestaurantOwner
+
+!new Table('table42')
+!table42.number := 42
+!table42.description := 'Planetary Patio'
+!table42.capacity := 8
+
+!new Table('table43')
+!table43.number := 43
+!table43.description := 'Asteroid Arena'
+!table43.capacity := 20
+
+!new Table('table44')
+!table44.number := 44
+!table44.description := 'Meteorite Mezzanine'
+!table44.capacity := 14
+
+!new RegularCustomer('customer16')
+!customer16.name := 'Altair Celeste'
+!customer16.prefferedLanguage := #Spanish
+
+!new Waiter('waiter17')
+!waiter17.name := 'Luna Orbit'
+!waiter17.dateOfBirth := Date('1990-11-11')
+!waiter17.phoneNumber := '555-1212'
+!waiter17.spokenLanguage := #Italian
+
+!new HeadWaiter('headwaiter15')
+!headwaiter15.name := 'Sirius Storm'
+!headwaiter15.dateOfBirth := Date('1982-08-21')
+!headwaiter15.phoneNumber := '555-3434'
+
+!insert (headwaiter15, waiter17) into HeadWaiterWaiter
+
+!new Individual('reservation27')
+!reservation27.time := Time('19:00')
+!reservation27.date := Date('2024-11-05')
+!reservation27.numberPeople := 3
+!reservation27.name := 'Altair Celeste'
+!reservation27.phoneNumber := '555-2244'
+!reservation27.number := 27
+!reservation27.seating := #Inside
+!reservation27.smoking := #NonSmoking
+!insert (restaurant15, reservation27) into RestaurantReservation
+!insert (reservation27, customer16) into ReservationCustomer
+!insert (reservation27, waiter17) into ReservationWaiter
+!insert (reservation27, table42) into ReservationTable
+
+!new Banquet('reservation28')
+!reservation28.time := Time('20:00')
+!reservation28.date := Date('2024-12-20')
+!reservation28.numberPeople := 40
+!reservation28.name := 'Orbiting Ovation'
+!reservation28.phoneNumber := '555-6767'
+!reservation28.number := 28
+!reservation28.groupName := 'Celestial Savants'
+!reservation28.paymentMethod := #Cash
+!reservation28.busService := false
+!insert (restaurant15, reservation28) into RestaurantReservation
+!insert (reservation28, table43) into ReservationTable
+!insert (reservation28, table44) into ReservationTable
+!insert (reservation28, waiter17) into ReservationWaiter
+
+!new ItemOrder('itemOrder15')
+!itemOrder15.time := Time('19:30')
+!insert (reservation27, itemOrder15) into ReservationItemOrdered
+
+!new MenuItem('menuItem15')
+!menuItem15.description := 'Stellar Soup'
+!menuItem15.prepTime := 15.0
+!menuItem15.classification := #Apetizer
+!insert (itemOrder15, menuItem15) into ItemOrderMenuItem
+
+!new FoodItem('foodItem15')
+!foodItem15.number := 115
+!foodItem15.description := 'Seasonal Vegetables'
+!foodItem15.purchaseFlag := true
+!foodItem15.unit := #Sheet
+!insert (menuItem15, foodItem15) into MenuItemFoodItem
+
+!new Allergen('allergen15')
+!allergen15.type := #Nuts
+!insert (foodItem15, allergen15) into FoodItemAllergen
+
+!new Cook('cook15')
+!cook15.name := 'Solar Flare'
+!cook15.dateOfBirth := Date('1991-03-21')
+!cook15.phoneNumber := '555-4545'
+!cook15.yearsOfExperience := 7
+
+!new Chef('chef15')
+!chef15.name := 'Neutron Nova'
+!chef15.dateOfBirth := Date('1985-02-18')
+!chef15.phoneNumber := '555-8989'
+!insert (menuItem15, chef15) into MenuItemChef
+!insert (chef15, cook15) into ChefCook

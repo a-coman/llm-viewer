@@ -1,0 +1,141 @@
+!new Club('club11')
+!club11.name := 'River Dolphins'
+!club11.homeGround := 'Dolphin Cove'
+!club11.chairman := 'Jacob Waters'
+
+!new Club('club12')
+!club12.name := 'Hill Panthers'
+!club12.homeGround := 'Panther Hill'
+!club12.chairman := 'Mia Hill'
+
+!new Team('team11')
+!team11.name := 'Dolphin Divers'
+!insert (club11, team11) into ClubTeam
+
+!new Team('team12')
+!team12.name := 'Panther Prowlers'
+!insert (club12, team12) into ClubTeam
+
+!new Competition('autumnLeague')
+!autumnLeague.name := 'Autumn League'
+!autumnLeague.type := 'League'
+
+!new Match('match6')
+!match6.date := '2024-09-20'
+!match6.homeAway := true
+!insert (autumnLeague, match6) into CompetitionMatch
+!insert (team11, match6) into LocalMatch
+!insert (team12, match6) into VisitorMatch
+
+!new MatchReport('report6')
+!report6.duration := 90
+!report6.scoreVisitor := 3
+!report6.scoreLocal := 2
+!insert (match6, report6) into MatchMatchReport
+
+!new Player('player11')
+!player11.name := 'James River'
+!player11.age := 24
+!player11.bestFoot := #LEFT
+!player11.phoneNumber := '9123456780'
+!insert (team11, player11) into TeamPlayer
+
+!new Player('player12')
+!player12.name := 'Olivia Panther'
+!player12.age := 25
+!player12.bestFoot := #RIGHT
+!player12.phoneNumber := '8234567891'
+!insert (team12, player12) into TeamPlayer
+
+!new Position('position11')
+!position11.positionName := #DEFENDER
+!insert (player11, position11) into PlayerPositions
+
+!new Position('position12')
+!position12.positionName := #FORWARD
+!insert (player12, position12) into PlayerPositions
+
+!new MatchPlayer('matchPlayer11')
+!matchPlayer11.booked := true
+!matchPlayer11.goals := 1
+!matchPlayer11.rating := 6
+!insert (player11, matchPlayer11) into PlayerMatch
+!insert (match6, matchPlayer11) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer12')
+!matchPlayer12.booked := false
+!matchPlayer12.goals := 2
+!matchPlayer12.rating := 9
+!insert (player12, matchPlayer12) into PlayerMatch
+!insert (match6, matchPlayer12) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition11')
+!matchPlayerPosition11.positionName := #DEFENDER
+!matchPlayerPosition11.number := 5
+!insert (matchPlayer11, matchPlayerPosition11) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition12')
+!matchPlayerPosition12.positionName := #FORWARD
+!matchPlayerPosition12.number := 9
+!insert (matchPlayer12, matchPlayerPosition12) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event19')
+!event19.eventType := #GOAL
+!event19.time := 33
+!insert (match6, event19) into MatchMatchEvent
+
+!new MatchEvent('event20')
+!event20.eventType := #GOAL
+!event20.time := 47
+!insert (match6, event20) into MatchMatchEvent
+
+!new MatchEvent('event21')
+!event21.eventType := #GOAL
+!event21.time := 60
+!insert (match6, event21) into MatchMatchEvent
+
+!new MatchEvent('event22')
+!event22.eventType := #GOAL
+!event22.time := 75
+!insert (match6, event22) into MatchMatchEvent
+
+!new MatchEvent('event23')
+!event23.eventType := #GOAL
+!event23.time := 82
+!insert (match6, event23) into MatchMatchEvent
+
+!new TrainingSession('training11')
+!training11.date := '2024-08-10'
+!training11.location := 'Dolphin Pond'
+!training11.purpose := 'Rescue Drills'
+!insert (team11, training11) into TeamTraining
+
+!new TrainingSession('training12')
+!training12.date := '2024-08-15'
+!training12.location := 'Panther Peak'
+!training12.purpose := 'Agility Training'
+!insert (team12, training12) into TeamTraining
+
+!new TrainingNotes('trainingNote11')
+!trainingNote11.note := 'Practice defensive formation'
+!trainingNote11.date := '2024-08-10'
+!insert (training11, trainingNote11) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote12')
+!trainingNote12.note := 'Sprint and flexibility exercises'
+!trainingNote12.date := '2024-08-15'
+!insert (training12, trainingNote12) into TrainingTrainingNotes
+
+!new TrainingObjective('objective11')
+!objective11.areaToImprove := 'Tackling'
+!objective11.startDate := '2024-06-01'
+!objective11.endDate := '2024-09-01'
+!objective11.success := false
+!insert (objective11, player11) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective12')
+!objective12.areaToImprove := 'Finishing'
+!objective12.startDate := '2024-06-05'
+!objective12.endDate := '2024-09-05'
+!objective12.success := true
+!insert (objective12, player12) into TrainingObjectivePlayer

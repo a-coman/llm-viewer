@@ -1,0 +1,69 @@
+!new Restaurant('restaurant10')
+!restaurant10.name := 'Cuisine Rendezvous'
+
+!new Owner('owner19')
+!owner19.name := 'Yuki Nishikawa'
+!owner19.percentageShares := 70
+
+!new Owner('owner20')
+!owner20.name := 'Markus Bauer'
+!owner20.percentageShares := 30
+
+!insert (restaurant10, owner19) into RestaurantOwner
+!insert (restaurant10, owner20) into RestaurantOwner
+
+!new Banquet('banquet8')
+!banquet8.date := Date('2023-10-20')
+!banquet8.time := Time('13:00')
+!banquet8.groupName := 'Global Tech Summit Organizers'
+!banquet8.numberPeople := 50
+!banquet8.paymentMethod := #CreditCard
+
+!insert (restaurant10, banquet8) into RestaurantReservation
+
+!new Table('table24')
+!table24.number := 301
+!table24.description := 'Deluxe conference table'
+!table24.capacity := 20
+
+!new Table('table25')
+!table25.number := 302
+!table25.description := 'Executive round table'
+!table25.capacity := 12
+
+!new Table('table26')
+!table26.number := 303
+!table26.description := 'High-top discussion table'
+!table26.capacity := 10
+
+!insert (banquet8, table24) into ReservationTable
+!insert (banquet8, table25) into ReservationTable
+!insert (banquet8, table26) into ReservationTable
+
+!new BusDriver('busdriver8')
+!busdriver8.name := 'Alma Johansson'
+
+!insert (banquet8, busdriver8) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter8')
+!headwaiter8.name := 'Santiago Gracia'
+!headwaiter8.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter8.phoneNumber := '4141414141'        -- Arbitrary phone number
+
+!new Waiter('waiter15')
+!waiter15.name := 'Rui Chen'
+!waiter15.dateOfBirth := Date('1993-01-01')     -- Arbitrary date of birth
+!waiter15.phoneNumber := '4242424242'           -- Arbitrary phone number
+!waiter15.spokenLanguage := #English
+
+!new Waiter('waiter16')
+!waiter16.name := 'Isabel Wilson'
+!waiter16.dateOfBirth := Date('1991-01-01')     -- Arbitrary date of birth
+!waiter16.phoneNumber := '4343434343'           -- Arbitrary phone number
+!waiter16.spokenLanguage := #English
+
+!insert (headwaiter8, waiter15) into HeadWaiterWaiter
+!insert (headwaiter8, waiter16) into HeadWaiterWaiter
+
+!insert (banquet8, waiter15) into ReservationWaiter
+!insert (banquet8, waiter16) into ReservationWaiter

@@ -1,0 +1,37 @@
+!new RentalOffice('officeBostonDowntown')
+!officeBostonDowntown.name := 'Boston Downtown Office'
+!officeBostonDowntown.number := 303
+!officeBostonDowntown.address := '456 Beacon St, Boston, MA'
+
+!new Truck('truck5003')
+!truck5003.id := 5003
+!truck5003.registrationState := #MA
+!truck5003.licensePlateNumber := 'MA8910EF'
+!truck5003.vehicleTypeCode := #TRUCK
+!truck5003.odometerReading := -10000
+!truck5003.gasTankCapacity := 15.0
+!truck5003.workingRadio := false
+!truck5003.mileage := 10
+!truck5003.registrationLastMaintenanceDate := Date('2023-07-01')
+!truck5003.expirationDate := Date('2024-07-31')
+
+!new Company('companyBostonCargoTransport')
+!companyBostonCargoTransport.name := 'Boston Cargo Transport'
+!companyBostonCargoTransport.address := '789 Financial District, Boston, MA'
+!companyBostonCargoTransport.poorRisk := false
+!companyBostonCargoTransport.idNumber := 34567890
+
+!new RentalAgreement('rentalAgreement7003')
+!rentalAgreement7003.number := 7003
+!rentalAgreement7003.rentalDate := Date('2023-09-10')
+!rentalAgreement7003.anticipatedDuration := 5
+!rentalAgreement7003.depositPaid := 300.0
+!rentalAgreement7003.quotedDailyRate := 80.0
+!rentalAgreement7003.quotedRatePerMile := 0.35
+
+!insert (officeBostonDowntown, truck5003) into RentalOfficeVehicle
+!insert (officeBostonDowntown, rentalAgreement7003) into RentalOfficeRentalAgreementOrigin
+!insert (officeBostonDowntown, rentalAgreement7003) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement7003, truck5003) into RentalAgreementVehicle
+!insert (rentalAgreement7003, companyBostonCargoTransport) into RentalAgreementCustomer
+

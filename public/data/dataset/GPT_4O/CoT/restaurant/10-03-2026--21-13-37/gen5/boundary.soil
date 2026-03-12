@@ -1,0 +1,97 @@
+!new Restaurant('restaurant24')
+!restaurant24.name := 'Taste of Traditions'
+
+!new Owner('owner50')
+!owner50.name := 'Malik Sadiq'
+!owner50.percentageShares := 33
+
+!new Owner('owner51')
+!owner51.name := 'Sofia Wang'
+!owner51.percentageShares := 67
+
+!insert (restaurant24, owner50) into RestaurantOwner
+!insert (restaurant24, owner51) into RestaurantOwner
+
+!new RegularCustomer('customer19')
+!customer19.name := 'Lena Müller'
+!customer19.prefferedLanguage := #German
+
+!new HeadWaiter('headwaiter19')
+!headwaiter19.name := 'Juan Carlos'
+!headwaiter19.dateOfBirth := Date('1985-01-01') -- Arbitrary date of birth
+!headwaiter19.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter45')
+!waiter45.name := 'Federica Rossi'
+!waiter45.dateOfBirth := Date('1992-01-01')     -- Arbitrary date of birth
+!waiter45.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter45.spokenLanguage := #English
+
+!insert (headwaiter19, waiter45) into HeadWaiterWaiter
+
+!new Chef('chef26')
+!chef26.name := 'Greta Nyman'
+!chef26.dateOfBirth := Date('1980-01-01')       -- Arbitrary date of birth
+!chef26.phoneNumber := '3456789012'             -- Arbitrary phone number
+
+!new Cook('cook31')
+!cook31.name := 'Vinod Sharma'
+!cook31.dateOfBirth := Date('1985-01-01')       -- Arbitrary date of birth
+!cook31.phoneNumber := '4567890123'             -- Arbitrary phone number
+!cook31.yearsOfExperience := 7
+
+!insert (chef26, cook31) into ChefCook
+
+!new BusDriver('busdriver20')
+!busdriver20.name := 'Joanne Lee'
+
+!new Table('table61')
+!table61.number := 15
+!table61.description := 'Cozy corner booth'
+!table61.capacity := 6
+
+!new Table('table62')
+!table62.number := 16
+!table62.description := 'Community table'
+!table62.capacity := 8
+
+!new MenuItem('menuitem35')
+!menuitem35.description := 'A rich and satisfying stew with seasonal vegetables.'
+!menuitem35.prepTime := 35.0
+!menuitem35.classification := #Main
+
+!insert (menuitem35, chef26) into MenuItemChef
+
+!new FoodItem('fooditem59')
+!fooditem59.number := 59
+!fooditem59.description := 'Beef Chunks'
+!fooditem59.purchaseFlag := true
+!fooditem59.unit := #Pound
+
+!new FoodItem('fooditem60')
+!fooditem60.number := 60
+!fooditem60.description := 'Carrot'
+!fooditem60.purchaseFlag := false
+!fooditem60.unit := #Gram
+
+!insert (menuitem35, fooditem59) into MenuItemFoodItem
+!insert (menuitem35, fooditem60) into MenuItemFoodItem
+
+!new Banquet('banquet20')
+!banquet20.date := Date('2023-11-25')
+!banquet20.time := Time('17:00')
+!banquet20.groupName := 'Cultural Dinner Exchange'
+!banquet20.numberPeople := 10
+!banquet20.paymentMethod := #CreditCard
+
+!insert (restaurant24, banquet20) into RestaurantReservation
+!insert (banquet20, table61) into ReservationTable
+!insert (banquet20, table62) into ReservationTable
+!insert (banquet20, waiter45) into ReservationWaiter
+!insert (banquet20, busdriver20) into BanquetBusDriver
+
+!new ItemOrder('itemorder5')
+!itemorder5.time := Time('17:20')
+
+!insert (banquet20, itemorder5) into ReservationItemOrdered
+!insert (itemorder5, menuitem35) into ItemOrderMenuItem

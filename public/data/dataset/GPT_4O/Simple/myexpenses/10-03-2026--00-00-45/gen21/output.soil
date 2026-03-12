@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency21')
+!currency21.name := 'Argentine Peso'
+!currency21.abbreviation := 'ARS'
+
+-- Creating instances of Bills
+!new Bill('bill51')
+!bill51.amount := 25000.00
+!bill51.category := 'Agricultural Supplies'
+!bill51.date := Date('2023-03-01')
+!bill51.paymentMethod := #CREDIT_CARD
+!bill51.status := #VALIDATED
+!insert (bill51, currency21) into BillCurrency
+
+!new Bill('bill52')
+!bill52.amount := 18000.00
+!bill52.category := 'Irrigation Systems'
+!bill52.date := Date('2023-03-05')
+!bill52.paymentMethod := #CASH
+!bill52.status := #REFUSED
+!insert (bill52, currency21) into BillCurrency
+
+!new Bill('bill53')
+!bill53.amount := 12000.00
+!bill53.category := 'Machinery Maintenance'
+!bill53.date := Date('2023-03-10')
+!bill53.paymentMethod := #CHECK
+!bill53.status := #DRAFT
+!insert (bill53, currency21) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment24')
+!comment24.text := 'Expenses for farm operations and management.'
+
+-- Creating instance of Expense
+!new Expense('expense21')
+!expense21.amount := 55000.00
+!expense21.startDate := Date('2023-03-01')
+!expense21.endDate := Date('2023-03-15')
+!insert (expense21, bill51) into ExpenseContainsBills
+!insert (expense21, bill52) into ExpenseContainsBills
+!insert (expense21, bill53) into ExpenseContainsBills
+!insert (expense21, comment24) into ExpenseComment

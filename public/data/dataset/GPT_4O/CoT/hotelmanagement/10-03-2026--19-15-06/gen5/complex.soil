@@ -1,0 +1,71 @@
+!new Customer('customer24')
+!customer24.firstName := 'Eva'
+!customer24.lastName := 'Schneider'
+
+!new Booking('booking23')
+!booking23.startDate := '2024-01-15'
+!booking23.endDate := '2024-01-22'
+!booking23.canceled := false
+!booking23.bookingId := 1041
+!booking23.confirmed := true
+
+!new Bill('bill46_1')
+!bill46_1.price := 925.00
+!bill46_1.billId := 3045
+
+!new Bill('bill46_2')
+!bill46_2.price := 925.00
+!bill46_2.billId := 3046
+
+!new RoomReservation('roomReservation23_1')
+!roomReservation23_1.checkInDate := '2024-01-15'
+!roomReservation23_1.checkOutDate := '2024-01-19'
+
+!new RoomReservation('roomReservation23_2')
+!roomReservation23_2.checkInDate := '2024-01-19'
+!roomReservation23_2.checkOutDate := '2024-01-22'
+
+!new Room('room23_12')
+!room23_12.numBeds := 1
+!room23_12.pricePerNight := 130.00
+!room23_12.occupied := true
+!room23_12.blocked := false
+!room23_12.roomNumber := 12
+
+!new Room('room23_14')
+!room23_14.numBeds := 2
+!room23_14.pricePerNight := 180.00
+!room23_14.occupied := true
+!room23_14.blocked := false
+!room23_14.roomNumber := 14
+
+!new RoomExtra('extra23_1')
+!extra23_1.price := 65.00
+!extra23_1.description := 'Ski Pass and Equipment Rental'
+
+!new RoomExtra('extra23_2')
+!extra23_2.price := 30.00
+!extra23_2.description := 'Guided Snowshoe Hike'
+
+!new FreeRoomTypesDTO('freeRoomType19')
+!freeRoomType19.roomTypeDescription := 'Romantic Chalet Room'
+!freeRoomType19.numBeds := 1
+!freeRoomType19.pricePerNight := 150.00
+!freeRoomType19.numFreeRooms := 5
+
+!insert (booking23, customer24) into BookingCustomer
+
+!insert (booking23, bill46_1) into BookingBill
+!insert (booking23, bill46_2) into BookingBill
+
+!insert (booking23, roomReservation23_1) into BookingRoomReservation
+!insert (booking23, roomReservation23_2) into BookingRoomReservation
+
+!insert (roomReservation23_1, room23_12) into RoomReservationRoom
+!insert (roomReservation23_1, extra23_1) into RoomReservationExtras
+
+!insert (roomReservation23_2, room23_14) into RoomReservationRoom
+!insert (roomReservation23_2, extra23_2) into RoomReservationExtras
+
+!insert (bill46_1, roomReservation23_1) into BillRoomReservation
+!insert (bill46_2, roomReservation23_2) into BillRoomReservation

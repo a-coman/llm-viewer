@@ -1,0 +1,216 @@
+!new Bank('naijaBank')
+!naijaBank.country := 'Nigeria'
+!naijaBank.name := 'NaijaBank'
+!naijaBank.bic := 'NAIJBANKNG01'
+
+!new Account('account1')
+!account1.iban := 'NG29NAMA0000001234567890'
+!account1.balance := 0
+
+!new Person('adebolaOlatunji')
+!adebolaOlatunji.firstName := 'Adebola'
+!adebolaOlatunji.lastName := 'Olatunji'
+!adebolaOlatunji.age := 25
+
+!new Person('chijiokeOkeke')
+!chijiokeOkeke.firstName := 'Chijioke'
+!chijiokeOkeke.lastName := 'Okeke'
+!chijiokeOkeke.age := 31
+
+!new Person('tundeAdelaja')
+!tundeAdelaja.firstName := 'Tunde'
+!tundeAdelaja.lastName := 'Adelaja'
+!tundeAdelaja.age := 35
+
+!insert (naijaBank, account1) into AccountOfBanks
+!insert (adebolaOlatunji, account1) into Ownership
+!insert (chijiokeOkeke, account1) into Ownership
+
+!insert (adebolaOlatunji, account1) into Use
+!insert (chijiokeOkeke, account1) into Use
+!insert (tundeAdelaja, account1) into Use
+
+!new Bank('creditNational')
+!creditNational.country := 'France'
+!creditNational.name := 'Crédit National'
+!creditNational.bic := 'CNFRFRPPXXX'
+
+!new Account('account2_1')
+!account2_1.iban := 'FR7630004000031234567890185'
+!account2_1.balance := 2500
+
+!new Account('account2_2')
+!account2_2.iban := 'FR7630004000039876543210284'
+!account2_2.balance := 3500
+
+!new Account('account2_3')
+!account2_3.iban := 'FR7630004000037654321090187'
+!account2_3.balance := 0
+
+!new Person('jeanDupont')
+!jeanDupont.firstName := 'Jean'
+!jeanDupont.lastName := 'Dupont'
+!jeanDupont.age := 32
+
+!new Person('marieCharpentier')
+!marieCharpentier.firstName := 'Marie'
+!marieCharpentier.lastName := 'Charpentier'
+!marieCharpentier.age := 28
+
+!new Person('lucMartin')
+!lucMartin.firstName := 'Luc'
+!lucMartin.lastName := 'Martin'
+!lucMartin.age := 45
+
+!insert (creditNational, account2_1) into AccountOfBanks
+!insert (creditNational, account2_2) into AccountOfBanks
+!insert (creditNational, account2_3) into AccountOfBanks
+
+!insert (jeanDupont, account2_1) into Ownership
+!insert (marieCharpentier, account2_1) into Ownership
+
+!insert (lucMartin, account2_2) into Ownership
+
+!insert (jeanDupont, account2_3) into Ownership
+!insert (lucMartin, account2_3) into Ownership
+
+!insert (jeanDupont, account2_1) into Use
+!insert (marieCharpentier, account2_1) into Use
+!insert (lucMartin, account2_1) into Use
+
+!insert (lucMartin, account2_2) into Use
+
+!insert (jeanDupont, account2_3) into Use
+
+!new Bank('globalBankUSA')
+!globalBankUSA.country := 'United States'
+!globalBankUSA.name := 'GlobalBank USA'
+!globalBankUSA.bic := 'GBUS12345'
+
+!new Bank('nihonBank')
+!nihonBank.country := 'Japan'
+!nihonBank.name := 'Nihon Bank'
+!nihonBank.bic := 'NBJP67890'
+
+!new Person('mariaGonzalez')
+!mariaGonzalez.firstName := 'Maria'
+!mariaGonzalez.lastName := 'Gonzalez'
+!mariaGonzalez.age := 34
+
+!new Person('akiraNakamura')
+!akiraNakamura.firstName := 'Akira'
+!akiraNakamura.lastName := 'Nakamura'
+!akiraNakamura.age := 47
+
+!new Person('johnSmith')
+!johnSmith.firstName := 'John'
+!johnSmith.lastName := 'Smith'
+!johnSmith.age := 51
+
+!new Person('emilyJohnson')
+!emilyJohnson.firstName := 'Emily'
+!emilyJohnson.lastName := 'Johnson'
+!emilyJohnson.age := 29
+
+!new Person('suryaPatel')
+!suryaPatel.firstName := 'Surya'
+!suryaPatel.lastName := 'Patel'
+!suryaPatel.age := 41
+
+!new Person('rioYamamoto')
+!rioYamamoto.firstName := 'Rio'
+!rioYamamoto.lastName := 'Yamamoto'
+!rioYamamoto.age := 38
+
+!new Account('account4_1')
+!account4_1.iban := 'US1234567890A'
+!account4_1.balance := 5000
+
+!new Account('account4_2')
+!account4_2.iban := 'JP0987654321B'
+!account4_2.balance := 0
+
+!new Account('account4_3')
+!account4_3.iban := 'US1122334455C'
+!account4_3.balance := 7500
+
+!new Account('account4_4')
+!account4_4.iban := 'JP2233445566D'
+!account4_4.balance := 1200
+
+!insert (globalBankUSA, account4_1) into AccountOfBanks
+!insert (nihonBank, account4_2) into AccountOfBanks
+!insert (globalBankUSA, account4_3) into AccountOfBanks
+!insert (nihonBank, account4_4) into AccountOfBanks
+
+!insert (mariaGonzalez, account4_1) into Ownership
+!insert (johnSmith, account4_1) into Ownership
+
+!insert (akiraNakamura, account4_2) into Ownership
+
+!insert (emilyJohnson, account4_3) into Ownership
+
+!insert (suryaPatel, account4_4) into Ownership
+!insert (rioYamamoto, account4_4) into Ownership
+
+!insert (mariaGonzalez, account4_1) into Use
+!insert (johnSmith, account4_1) into Use
+!insert (emilyJohnson, account4_1) into Use
+
+!insert (akiraNakamura, account4_2) into Use
+!insert (rioYamamoto, account4_2) into Use
+
+!insert (emilyJohnson, account4_3) into Use
+
+!insert (suryaPatel, account4_4) into Use
+!insert (rioYamamoto, account4_4) into Use
+!insert (akiraNakamura, account4_4) into Use
+
+!new Bank('alpineTrustBank')
+!alpineTrustBank.country := 'Switzerland'
+!alpineTrustBank.name := 'Alpine Trust Bank'
+!alpineTrustBank.bic := 'ALPCHZZTEST'
+
+!new Person('ottoMuller')
+!ottoMuller.firstName := 'Otto'
+!ottoMuller.lastName := 'Müller'
+!ottoMuller.age := 82
+
+!new Person('annaMuller')
+!annaMuller.firstName := 'Anna'
+!annaMuller.lastName := 'Müller'
+!annaMuller.age := 18
+
+!new Person('svenJohansson')
+!svenJohansson.firstName := 'Sven'
+!svenJohansson.lastName := 'Johansson'
+!svenJohansson.age := 40
+
+!new Person('luciaRossi')
+!luciaRossi.firstName := 'Lucia'
+!luciaRossi.lastName := 'Rossi'
+!luciaRossi.age := 55
+
+!new Account('account5_1')
+!account5_1.iban := 'CH93-0000-0000-1234'
+!account5_1.balance := 0
+
+!new Account('account5_2')
+!account5_2.iban := 'CH18-0000-0000-5678'
+!account5_2.balance := 10000000
+
+!insert (alpineTrustBank, account5_1) into AccountOfBanks
+!insert (alpineTrustBank, account5_2) into AccountOfBanks
+
+!insert (ottoMuller, account5_1) into Ownership
+!insert (annaMuller, account5_1) into Ownership
+
+!insert (svenJohansson, account5_2) into Ownership
+!insert (luciaRossi, account5_2) into Ownership
+
+!insert (ottoMuller, account5_1) into Use
+!insert (svenJohansson, account5_1) into Use
+
+!insert (luciaRossi, account5_2) into Use
+!insert (annaMuller, account5_2) into Use
+

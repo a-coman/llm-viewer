@@ -1,0 +1,59 @@
+!new AddressBook('addressBook5')
+
+!new Company('company5')
+!company5.name := 'Foodies Inc.'
+!company5.phone := '777-888-9999'
+!company5.website := 'www.foodiesinc.com'
+!company5.email := 'info@foodiesinc.com'
+!company5.industry := 'Food & Beverage'
+
+!new Person('person7')
+!person7.name := 'Oliver Green'
+!person7.phone := '555-666-7777'
+!person7.website := 'www.olivergreenchef.com'
+!person7.email := 'oliver.green@foodiesinc.com'
+!person7.title := 'Head Chef'
+
+!new Person('person8')
+!person8.name := 'Sophie Turner'
+!person8.phone := '222-111-3333'
+!person8.website := 'www.sophieturner.me'
+!person8.email := 'sophie.turner@foodhub.com'
+!person8.title := 'Culinary Artist'
+
+!new Note('note8')
+!note8.author := 'Sophie Turner'
+!note8.time := Date('2023-09-15')
+!note8.type := #CALL
+!note8.comment := 'Discussed the new menu changes.'
+
+!new Address('address7')
+!address7.city := 'Flavor Town'
+!address7.houseNr := '67D'
+!address7.street := 'Culinary Lane'
+
+!new Address('address8')
+!address8.city := 'Tasting City'
+!address8.houseNr := '145A'
+!address8.street := 'Gourmet Street'
+
+!new Relationship('relationship8')
+!relationship8.type := #COWORKER
+
+!new Relationship('relationship9')
+!relationship9.type := #BOSS
+
+!insert (addressBook5, company5) into AddressBookMadeOfContact
+!insert (addressBook5, person7) into AddressBookMadeOfContact
+!insert (addressBook5, person8) into AddressBookMadeOfContact
+
+!insert (person8, note8) into ContactContainsNote
+
+!insert (person7, relationship8) into ContactToRelationship
+!insert (relationship8, person8) into RelationshipToContact
+
+!insert (company5, relationship9) into ContactToRelationship
+!insert (relationship9, person7) into RelationshipToContact
+
+!insert (company5, address7) into ContactContainsAddress
+!insert (person8, address8) into ContactContainsAddress

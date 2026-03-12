@@ -1,0 +1,63 @@
+!new StateMachine('stateMachine19')
+!stateMachine19.name := 'musicPlayerState'
+
+!new State('state61')
+!state61.name := 'stopped'
+
+!new State('state62')
+!state62.name := 'playing'
+
+!new State('state63')
+!state63.name := 'paused'
+
+!new Transition('transition62')
+!transition62.name := 'play'
+
+!new Transition('transition63')
+!transition63.name := 'pause'
+
+!new Transition('transition64')
+!transition64.name := 'stop'
+
+!new Transition('transition65')
+!transition65.name := 'resume'
+
+!new TimeEvent('timeEvent62')
+!timeEvent62.time := 1
+
+!new TimeEvent('timeEvent63')
+!timeEvent63.time := 2
+
+!new TimeEvent('timeEvent64')
+!timeEvent64.time := 1
+
+!new TimeEvent('timeEvent65')
+!timeEvent65.time := 1
+
+!insert (stateMachine19, state61) into StateMachineContainsStates
+!insert (stateMachine19, state62) into StateMachineContainsStates
+!insert (stateMachine19, state63) into StateMachineContainsStates
+
+!insert (stateMachine19, transition62) into StateMachineContainsTransitions
+!insert (stateMachine19, transition63) into StateMachineContainsTransitions
+!insert (stateMachine19, transition64) into StateMachineContainsTransitions
+!insert (stateMachine19, transition65) into StateMachineContainsTransitions
+
+!insert (transition62, timeEvent62) into TransitionContainsEvents
+!insert (transition63, timeEvent63) into TransitionContainsEvents
+!insert (transition64, timeEvent64) into TransitionContainsEvents
+!insert (transition65, timeEvent65) into TransitionContainsEvents
+
+!insert (state61, transition62) into StateTransition
+!insert (transition62, state62) into TransitionState
+
+!insert (state62, transition63) into StateTransition
+!insert (transition63, state63) into TransitionState
+
+!insert (state63, transition65) into StateTransition
+!insert (transition65, state62) into TransitionState
+
+!insert (state62, transition64) into StateTransition
+!insert (transition64, state61) into TransitionState
+
+!insert (stateMachine19, state61) into StateMachineStartsStates

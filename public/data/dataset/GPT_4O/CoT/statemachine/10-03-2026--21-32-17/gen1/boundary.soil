@@ -1,0 +1,22 @@
+!new StateMachine('minimalMachine')
+!minimalMachine.name := 'minimalMachine'
+
+!new State('state1')
+!state1.name := 'state1'
+
+!new Transition('transition')
+!transition.name := 'transition'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!insert (minimalMachine, state1) into StateMachineContainsStates
+
+!insert (minimalMachine, transition) into StateMachineContainsTransitions
+
+!insert (transition, timeEvent1) into TransitionContainsEvents
+
+!insert (state1, transition) into StateTransition
+!insert (transition, state1) into TransitionState
+
+!insert (minimalMachine, state1) into StateMachineStartsStates

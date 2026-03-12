@@ -1,0 +1,106 @@
+!new AddressBook('TranscontinentalBusinessNetwork')
+
+!new Person('AnaSilva')
+!AnaSilva.name := 'Ana Silva'
+!AnaSilva.phone := '+55-21-98765-4321'
+!AnaSilva.website := 'www.anasilva.br'
+!AnaSilva.email := 'ana.silva@southamericatraders.br'
+!AnaSilva.title := 'International Trade Manager'
+
+!new Address('AnaSilvaAddress')
+!AnaSilvaAddress.city := 'Rio de Janeiro'
+!AnaSilvaAddress.houseNr := '50'
+!AnaSilvaAddress.street := 'Avenida Atlântica'
+!insert (AnaSilva, AnaSilvaAddress) into ContactContainsAddress
+
+!new Note('AnaSilvaNote')
+!AnaSilvaNote.author := 'Ana Silva'
+!AnaSilvaNote.time := Date('2023-01-18')
+!AnaSilvaNote.type := #CALL
+!AnaSilvaNote.comment := 'Confirm shipment details with European partners post-Brexit.'
+!insert (AnaSilva, AnaSilvaNote) into ContactContainsNote
+
+!new Company('PantherLogistics')
+!PantherLogistics.name := 'Panther Logistics'
+!PantherLogistics.phone := '+49-30-555-6666'
+!PantherLogistics.website := 'www.pantherlogistics.de'
+!PantherLogistics.email := 'contact@pantherlogistics.de'
+!PantherLogistics.industry := 'Logistics and Supply Chain'
+
+!new Address('PantherLogisticsAddress')
+!PantherLogisticsAddress.city := 'Berlin'
+!PantherLogisticsAddress.houseNr := '18'
+!PantherLogisticsAddress.street := 'Potsdamer Straße'
+!insert (PantherLogistics, PantherLogisticsAddress) into ContactContainsAddress
+
+!new Note('PantherLogisticsNote')
+!PantherLogisticsNote.author := 'Manfred Bauer'
+!PantherLogisticsNote.time := Date('2023-03-01')
+!PantherLogisticsNote.type := #MEETING
+!PantherLogisticsNote.comment := 'Discuss logistics optimization for the new cargo routes.'
+!insert (PantherLogistics, PantherLogisticsNote) into ContactContainsNote
+
+!new Person('MiguelSantana')
+!MiguelSantana.name := 'Miguel Santana'
+!MiguelSantana.phone := '+34-622-555-9933'
+!MiguelSantana.website := 'www.miguelsantana.es'
+!MiguelSantana.email := 'miguel.santana@esolutions.es'
+!MiguelSantana.title := 'Procurement Specialist'
+
+!new Address('MiguelSantanaAddress')
+!MiguelSantanaAddress.city := 'Madrid'
+!MiguelSantanaAddress.houseNr := '10'
+!MiguelSantanaAddress.street := 'Gran Vía'
+!insert (MiguelSantana, MiguelSantanaAddress) into ContactContainsAddress
+
+!new Note('MiguelSantanaNote')
+!MiguelSantanaNote.author := 'Miguel Santana'
+!MiguelSantanaNote.time := Date('2023-05-30')
+!MiguelSantanaNote.type := #EMAIL
+!MiguelSantanaNote.comment := 'Recommendations for sourcing sustainable materials from Asia.'
+!insert (MiguelSantana, MiguelSantanaNote) into ContactContainsNote
+
+!new Person('EmmaLi')
+!EmmaLi.name := 'Emma Li'
+!EmmaLi.phone := '+86-10-6655-2233'
+!EmmaLi.website := 'www.emmali.cn'
+!EmmaLi.email := 'emma.li@chinabusiness.cn'
+!EmmaLi.title := 'Regional Sales Director'
+
+!new Address('EmmaLiAddress')
+!EmmaLiAddress.city := 'Beijing'
+!EmmaLiAddress.houseNr := '47'
+!EmmaLiAddress.street := 'Dongcheng Street'
+!insert (EmmaLi, EmmaLiAddress) into ContactContainsAddress
+
+!new Note('EmmaLiNote')
+!EmmaLiNote.author := 'Emma Li'
+!EmmaLiNote.time := Date('2023-06-15')
+!EmmaLiNote.type := #EMAIL
+!EmmaLiNote.comment := 'Quarterly sales performance review with stakeholders.'
+!insert (EmmaLi, EmmaLiNote) into ContactContainsNote
+
+!new Relationship('AnaToMiguelBoss')
+!AnaToMiguelBoss.type := #BOSS
+!insert (AnaToMiguelBoss, MiguelSantana) into RelationshipToContact
+!insert (AnaSilva, AnaToMiguelBoss) into ContactToRelationship
+
+!new Relationship('MiguelToAnaEmployee')
+!MiguelToAnaEmployee.type := #EMPLOYEE
+!insert (MiguelToAnaEmployee, AnaSilva) into RelationshipToContact
+!insert (MiguelSantana, MiguelToAnaEmployee) into ContactToRelationship
+
+!new Relationship('AnaToEmmaCoworker')
+!AnaToEmmaCoworker.type := #COWORKER
+!insert (AnaToEmmaCoworker, EmmaLi) into RelationshipToContact
+!insert (AnaSilva, AnaToEmmaCoworker) into ContactToRelationship
+
+!new Relationship('EmmaToPantherSubdivision')
+!EmmaToPantherSubdivision.type := #SUBDIVISION
+!insert (EmmaToPantherSubdivision, PantherLogistics) into RelationshipToContact
+!insert (EmmaLi, EmmaToPantherSubdivision) into ContactToRelationship
+
+!insert (TranscontinentalBusinessNetwork, AnaSilva) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, PantherLogistics) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, MiguelSantana) into AddressBookMadeOfContact
+!insert (TranscontinentalBusinessNetwork, EmmaLi) into AddressBookMadeOfContact

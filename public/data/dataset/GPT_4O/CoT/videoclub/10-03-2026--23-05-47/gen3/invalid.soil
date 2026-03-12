@@ -1,0 +1,35 @@
+!new Client('client18')
+!client18.clientId := 150
+!client18.isSuspended := true
+
+!new Rental('rental29')
+!rental29.date := Date('2023-07-30')
+
+!new Movie('movie23')
+!movie23.title := 'Echoes of the Past'
+!movie23.availableCopies := 0
+!movie23.genre := #Action
+
+!new Movie('movie24')
+!movie24.title := 'Parisian Reflections'
+!movie24.availableCopies := 1
+!movie24.genre := #Comedy
+
+!new Series('series22')
+!series22.title := 'Historic Narratives'
+!series22.availableCopies := 5
+!series22.episode := 10
+
+!new Actor('actor42')
+!actor42.name := 'Jean Dupont'
+
+!new Actor('actor43')
+!actor43.name := 'Maria Loren'
+
+!insert (client18, rental29) into ClientRental
+
+!insert (rental29, movie23) into RentalCassette
+!insert (rental29, movie24) into RentalCassette
+!insert (rental29, series22) into RentalCassette
+
+!insert (series22, actor42) into CassetteActor

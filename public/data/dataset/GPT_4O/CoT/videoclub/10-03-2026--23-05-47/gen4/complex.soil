@@ -1,0 +1,84 @@
+!new Client('client20')
+!client20.clientId := 701
+!client20.isSuspended := false
+
+!new Client('client21')
+!client21.clientId := 802
+!client21.isSuspended := true
+
+!new Rental('rental31')
+!rental31.date := Date('2023-06-10')
+
+!new Rental('rental32')
+!rental32.date := Date('2023-07-08')
+
+!new Rental('rental33')
+!rental33.date := Date('2023-08-15')
+
+!new Rental('rental34')
+!rental34.date := Date('2023-09-30')
+
+!new Movie('movie26')
+!movie26.title := 'Raging Rapids'
+!movie26.availableCopies := 4
+!movie26.genre := #Action
+
+!new Movie('movie27')
+!movie27.title := 'Chuckle Island'
+!movie27.availableCopies := 0
+!movie27.genre := #Comedy
+
+!new Series('series25')
+!series25.title := 'Ancient Treasures'
+!series25.availableCopies := 5
+!series25.episode := 12
+
+!new Series('series26')
+!series26.title := 'Galactic Stories'
+!series26.availableCopies := 2
+!series26.episode := 7
+
+!new Actor('actor48')
+!actor48.name := 'Miguel Flores'
+
+!new Actor('actor49')
+!actor49.name := 'Sophie Dubois'
+
+!new Actor('actor50')
+!actor50.name := 'Chen Wei'
+
+!new Actor('actor51')
+!actor51.name := 'Fatima Al-Shamari'
+
+!new Actor('actor52')
+!actor52.name := 'Alexios Papadopoulos'
+
+!insert (client20, rental31) into ClientRental
+
+!insert (client21, rental32) into ClientRental
+!insert (client21, rental33) into ClientRental
+!insert (client21, rental34) into ClientRental
+
+!insert (rental31, movie26) into RentalCassette
+!insert (rental31, series25) into RentalCassette
+
+!insert (rental32, movie27) into RentalCassette
+
+!insert (rental33, series26) into RentalCassette
+
+!insert (rental34, series25) into RentalCassette
+!insert (rental34, movie26) into RentalCassette
+
+!insert (movie26, actor48) into CassetteActor
+!insert (movie26, actor51) into CassetteActor
+
+!insert (movie27, actor49) into CassetteActor
+!insert (movie27, actor52) into CassetteActor
+
+!insert (series25, actor48) into CassetteActor
+!insert (series25, actor50) into CassetteActor
+!insert (series25, actor51) into CassetteActor
+
+!insert (series26, actor49) into CassetteActor
+!insert (series26, actor52) into CassetteActor
+!insert (series26, actor50) into CassetteActor

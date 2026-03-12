@@ -1,0 +1,131 @@
+!new Club('club15')
+!club15.name := 'Thunder Eagles'
+!club15.homeGround := 'Eagle Mountain'
+!club15.chairman := 'Eric Thunder'
+
+!new Club('club16')
+!club16.name := 'Wind Tigers'
+!club16.homeGround := 'Tiger Forest'
+!club16.chairman := 'Natalie Breeze'
+
+!new Team('team15')
+!team15.name := 'Eagle Storm'
+!insert (club15, team15) into ClubTeam
+
+!new Team('team16')
+!team16.name := 'Tiger Claws'
+!insert (club16, team16) into ClubTeam
+
+!new Competition('autumnSeries')
+!autumnSeries.name := 'Autumn Series'
+!autumnSeries.type := 'League'
+
+!new Match('match8')
+!match8.date := '2024-10-10'
+!match8.homeAway := false
+!insert (autumnSeries, match8) into CompetitionMatch
+!insert (team15, match8) into LocalMatch
+!insert (team16, match8) into VisitorMatch
+
+!new MatchReport('report8')
+!report8.duration := 90
+!report8.scoreVisitor := 1
+!report8.scoreLocal := 2
+!insert (match8, report8) into MatchMatchReport
+
+!new Player('player15')
+!player15.name := 'Oliver Sky'
+!player15.age := 23
+!player15.bestFoot := #BOTH
+!player15.phoneNumber := '6543210987'
+!insert (team15, player15) into TeamPlayer
+
+!new Player('player16')
+!player16.name := 'Ava Wind'
+!player16.age := 27
+!player16.bestFoot := #LEFT
+!player16.phoneNumber := '7654321098'
+!insert (team16, player16) into TeamPlayer
+
+!new Position('position15')
+!position15.positionName := #MIDFIELDER
+!insert (player15, position15) into PlayerPositions
+
+!new Position('position16')
+!position16.positionName := #DEFENDER
+!insert (player16, position16) into PlayerPositions
+
+!new MatchPlayer('matchPlayer15')
+!matchPlayer15.booked := true
+!matchPlayer15.goals := 1
+!matchPlayer15.rating := 8
+!insert (player15, matchPlayer15) into PlayerMatch
+!insert (match8, matchPlayer15) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer16')
+!matchPlayer16.booked := false
+!matchPlayer16.goals := 0
+!matchPlayer16.rating := 7
+!insert (player16, matchPlayer16) into PlayerMatch
+!insert (match8, matchPlayer16) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition15')
+!matchPlayerPosition15.positionName := #MIDFIELDER
+!matchPlayerPosition15.number := 8
+!insert (matchPlayer15, matchPlayerPosition15) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition16')
+!matchPlayerPosition16.positionName := #DEFENDER
+!matchPlayerPosition16.number := 4
+!insert (matchPlayer16, matchPlayerPosition16) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event28')
+!event28.eventType := #GOAL
+!event28.time := 20
+!insert (match8, event28) into MatchMatchEvent
+
+!new MatchEvent('event29')
+!event29.eventType := #GOAL
+!event29.time := 55
+!insert (match8, event29) into MatchMatchEvent
+
+!new MatchEvent('event30')
+!event30.eventType := #GOAL
+!event30.time := 75
+!insert (match8, event30) into MatchMatchEvent
+
+!new TrainingSession('training15')
+!training15.date := '2024-09-01'
+!training15.location := 'Eagle Arena'
+!training15.purpose := 'Tactical Drills'
+!insert (team15, training15) into TeamTraining
+
+!new TrainingSession('training16')
+!training16.date := '2024-09-10'
+!training16.location := 'Tiger Field'
+!training16.purpose := 'Strength Building'
+!insert (team16, training16) into TeamTraining
+
+!new TrainingNotes('trainingNote15')
+!trainingNote15.note := 'Improved strategic movements'
+!trainingNote15.date := '2024-09-01'
+!insert (training15, trainingNote15) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote16')
+!trainingNote16.note := 'Focused on endurance enhancement'
+!trainingNote16.date := '2024-09-10'
+!insert (training16, trainingNote16) into TrainingTrainingNotes
+
+!new TrainingObjective('objective15')
+!objective15.areaToImprove := 'Passing Skill'
+!objective15.startDate := '2024-07-01'
+!objective15.endDate := '2024-10-01'
+!objective15.success := true
+!insert (objective15, player15) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective16')
+!objective16.areaToImprove := 'Physical Strength'
+!objective16.startDate := '2024-07-05'
+!objective16.endDate := '2024-10-05'
+!objective16.success := false
+!insert (objective16, player16) into TrainingObjectivePlayer

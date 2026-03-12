@@ -1,0 +1,66 @@
+!new AddressBook('addressBook13')
+
+!new Company('company13')
+!company13.name := 'EcoTravel Adventures'
+!company13.phone := '987-654-3210'
+!company13.website := 'www.ecotravel.com'
+!company13.email := 'info@ecotravel.com'
+!company13.industry := 'Travel & Tourism'
+
+!new Person('person22')
+!person22.name := 'Julia Martinez'
+!person22.phone := '888-555-1212'
+!person22.website := 'www.juliamartineztraveller.com'
+!person22.email := 'julia.martinez@ecotravel.com'
+!person22.title := 'Tour Manager'
+
+!new Person('person23')
+!person23.name := 'Leo King'
+!person23.phone := '777-444-2323'
+!person23.website := 'www.leokinytours.com'
+!person23.email := 'leo.king@freelancephotography.com'
+!person23.title := 'Freelance Travel Photographer'
+
+!new Note('note22')
+!note22.author := 'Julia Martinez'
+!note22.time := Date('2024-07-01')
+!note22.type := #MEETING
+!note22.comment := 'Meeting with partners for new eco tours.'
+
+!new Note('note23')
+!note23.author := 'Leo King'
+!note23.time := Date('2024-07-05')
+!note23.type := #CALL
+!note23.comment := 'Discussed photo opportunities for upcoming tours.'
+
+!new Address('address23')
+!address23.city := 'Adventure City'
+!address23.houseNr := '101'
+!address23.street := 'Explorer Lane'
+
+!new Address('address24')
+!address24.city := 'Photographer Town'
+!address24.houseNr := '45H'
+!address24.street := 'Picture Path'
+
+!new Relationship('relationship24')
+!relationship24.type := #COWORKER
+
+!new Relationship('relationship25')
+!relationship25.type := #SUBDIVISION
+
+!insert (addressBook13, company13) into AddressBookMadeOfContact
+!insert (addressBook13, person22) into AddressBookMadeOfContact
+!insert (addressBook13, person23) into AddressBookMadeOfContact
+
+!insert (person22, note22) into ContactContainsNote
+!insert (person23, note23) into ContactContainsNote
+
+!insert (company13, relationship25) into ContactToRelationship
+!insert (relationship25, person22) into RelationshipToContact
+
+!insert (person22, relationship24) into ContactToRelationship
+!insert (relationship24, person23) into RelationshipToContact
+
+!insert (company13, address23) into ContactContainsAddress
+!insert (person23, address24) into ContactContainsAddress

@@ -1,0 +1,362 @@
+!new StateMachine('redundantPaths')
+!redundantPaths.name := 'redundantPaths'
+
+!new State('main')
+!main.name := 'main'
+
+!new State('secondary')
+!secondary.name := 'secondary'
+
+!new State('tertiary')
+!tertiary.name := 'tertiary'
+
+!new Transition('mainToSecondary')
+!mainToSecondary.name := 'mainToSecondary'
+
+!new Transition('secondaryToTertiary')
+!secondaryToTertiary.name := 'secondaryToTertiary'
+
+!new Transition('tertiaryToMain')
+!tertiaryToMain.name := 'tertiaryToMain'
+
+!new Transition('redundantLoop')
+!redundantLoop.name := 'redundantLoop'
+
+!new TimeEvent('timeEvent12')
+!timeEvent12.time := 12
+
+!new TimeEvent('timeEvent18')
+!timeEvent18.time := 18
+
+!new TimeEvent('timeEvent25')
+!timeEvent25.time := 25
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (redundantPaths, main) into StateMachineContainsStates
+!insert (redundantPaths, secondary) into StateMachineContainsStates
+!insert (redundantPaths, tertiary) into StateMachineContainsStates
+
+!insert (redundantPaths, mainToSecondary) into StateMachineContainsTransitions
+!insert (redundantPaths, secondaryToTertiary) into StateMachineContainsTransitions
+!insert (redundantPaths, tertiaryToMain) into StateMachineContainsTransitions
+!insert (redundantPaths, redundantLoop) into StateMachineContainsTransitions
+
+!insert (mainToSecondary, timeEvent12) into TransitionContainsEvents
+!insert (secondaryToTertiary, timeEvent18) into TransitionContainsEvents
+!insert (tertiaryToMain, timeEvent25) into TransitionContainsEvents
+!insert (redundantLoop, timeEvent5) into TransitionContainsEvents
+
+!insert (main, mainToSecondary) into StateTransition
+!insert (mainToSecondary, secondary) into TransitionState
+
+!insert (secondary, secondaryToTertiary) into StateTransition
+!insert (secondaryToTertiary, tertiary) into TransitionState
+
+!insert (tertiary, tertiaryToMain) into StateTransition
+!insert (tertiaryToMain, main) into TransitionState
+
+!insert (secondary, redundantLoop) into StateTransition
+!insert (redundantLoop, main) into TransitionState
+
+!insert (redundantPaths, main) into StateMachineStartsStates
+
+!new StateMachine('documentWorkflowSystem')
+!documentWorkflowSystem.name := 'documentWorkflowSystem'
+
+!new State('draft')
+!draft.name := 'draft'
+
+!new State('review')
+!review.name := 'review'
+
+!new State('approved')
+!approved.name := 'approved'
+
+!new State('rejected')
+!rejected.name := 'rejected'
+
+!new State('archived')
+!archived.name := 'archived'
+
+!new Transition('draftToReview')
+!draftToReview.name := 'draftToReview'
+
+!new Transition('reviewToApproved')
+!reviewToApproved.name := 'reviewToApproved'
+
+!new Transition('reviewToRejected')
+!reviewToRejected.name := 'reviewToRejected'
+
+!new Transition('rejectedToDraft')
+!rejectedToDraft.name := 'rejectedToDraft'
+
+!new Transition('approvedToArchived')
+!approvedToArchived.name := 'approvedToArchived'
+
+!new Transition('draftToArchived')
+!draftToArchived.name := 'draftToArchived'
+
+!new Transition('reviewToDraft')
+!reviewToDraft.name := 'reviewToDraft'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent48_1')
+!timeEvent48_1.time := 48
+
+!new TimeEvent('timeEvent48_2')
+!timeEvent48_2.time := 48
+
+!new TimeEvent('timeEvent24_1')
+!timeEvent24_1.time := 24
+
+!new TimeEvent('timeEvent12')
+!timeEvent12.time := 12
+
+!new TimeEvent('timeEvent72')
+!timeEvent72.time := 72
+
+!new TimeEvent('timeEvent24_2')
+!timeEvent24_2.time := 24
+
+!insert (documentWorkflowSystem, draft) into StateMachineContainsStates
+!insert (documentWorkflowSystem, review) into StateMachineContainsStates
+!insert (documentWorkflowSystem, approved) into StateMachineContainsStates
+!insert (documentWorkflowSystem, rejected) into StateMachineContainsStates
+!insert (documentWorkflowSystem, archived) into StateMachineContainsStates
+
+!insert (documentWorkflowSystem, draftToReview) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToApproved) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToRejected) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, rejectedToDraft) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, approvedToArchived) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, draftToArchived) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToDraft) into StateMachineContainsTransitions
+
+!insert (draftToReview, timeEvent1) into TransitionContainsEvents
+!insert (reviewToApproved, timeEvent48_1) into TransitionContainsEvents
+!insert (reviewToRejected, timeEvent48_2) into TransitionContainsEvents
+!insert (rejectedToDraft, timeEvent24_1) into TransitionContainsEvents
+!insert (approvedToArchived, timeEvent12) into TransitionContainsEvents
+!insert (draftToArchived, timeEvent72) into TransitionContainsEvents
+!insert (reviewToDraft, timeEvent24_2) into TransitionContainsEvents
+
+!insert (draft, draftToReview) into StateTransition
+!insert (draftToReview, review) into TransitionState
+
+!insert (review, reviewToApproved) into StateTransition
+!insert (reviewToApproved, approved) into TransitionState
+
+!insert (review, reviewToRejected) into StateTransition
+!insert (reviewToRejected, rejected) into TransitionState
+
+!insert (rejected, rejectedToDraft) into StateTransition
+!insert (rejectedToDraft, draft) into TransitionState
+
+!insert (approved, approvedToArchived) into StateTransition
+!insert (approvedToArchived, archived) into TransitionState
+
+!insert (draft, draftToArchived) into StateTransition
+!insert (draftToArchived, archived) into TransitionState
+
+!insert (review, reviewToDraft) into StateTransition
+!insert (reviewToDraft, draft) into TransitionState
+
+!insert (documentWorkflowSystem, draft) into StateMachineStartsStates
+
+!new StateMachine('transientMachine')
+!transientMachine.name := 'transientMachine'
+
+!new State('entryPoint')
+!entryPoint.name := 'entryPoint'
+
+!new State('transientA')
+!transientA.name := 'transientA'
+
+!new State('transientB')
+!transientB.name := 'transientB'
+
+!new State('stableEnd')
+!stableEnd.name := 'stableEnd'
+
+!new Transition('entryToA')
+!entryToA.name := 'entryToA'
+
+!new Transition('aToB')
+!aToB.name := 'aToB'
+
+!new Transition('bToEnd')
+!bToEnd.name := 'bToEnd'
+
+!new TimeEvent('timeEvent1_1')
+!timeEvent1_1.time := 1
+
+!new TimeEvent('timeEvent1_2')
+!timeEvent1_2.time := 1
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (transientMachine, entryPoint) into StateMachineContainsStates
+!insert (transientMachine, transientA) into StateMachineContainsStates
+!insert (transientMachine, transientB) into StateMachineContainsStates
+!insert (transientMachine, stableEnd) into StateMachineContainsStates
+
+!insert (transientMachine, entryToA) into StateMachineContainsTransitions
+!insert (transientMachine, aToB) into StateMachineContainsTransitions
+!insert (transientMachine, bToEnd) into StateMachineContainsTransitions
+
+!insert (entryToA, timeEvent1_1) into TransitionContainsEvents
+!insert (aToB, timeEvent1_2) into TransitionContainsEvents
+!insert (bToEnd, timeEvent2) into TransitionContainsEvents
+
+!insert (entryPoint, entryToA) into StateTransition
+!insert (entryToA, transientA) into TransitionState
+
+!insert (transientA, aToB) into StateTransition
+!insert (aToB, transientB) into TransitionState
+
+!insert (transientB, bToEnd) into StateTransition
+!insert (bToEnd, stableEnd) into TransitionState
+
+!insert (transientMachine, entryPoint) into StateMachineStartsStates
+
+!new StateMachine('greenhouseEnvironmentManager')
+!greenhouseEnvironmentManager.name := 'greenhouseEnvironmentManager'
+
+!new State('monitoring')
+!monitoring.name := 'monitoring'
+
+!new State('heatingActive')
+!heatingActive.name := 'heatingActive'
+
+!new State('coolingActive')
+!coolingActive.name := 'coolingActive'
+
+!new State('humidifying')
+!humidifying.name := 'humidifying'
+
+!new State('lightAdjustment')
+!lightAdjustment.name := 'lightAdjustment'
+
+!new State('systemMaintenance')
+!systemMaintenance.name := 'systemMaintenance'
+
+!new Transition('monitorToHeating')
+!monitorToHeating.name := 'monitorToHeating'
+
+!new Transition('monitorToCooling')
+!monitorToCooling.name := 'monitorToCooling'
+
+!new Transition('monitorToHumidifying')
+!monitorToHumidifying.name := 'monitorToHumidifying'
+
+!new Transition('monitorToLighting')
+!monitorToLighting.name := 'monitorToLighting'
+
+!new Transition('heatingToMonitoring')
+!heatingToMonitoring.name := 'heatingToMonitoring'
+
+!new Transition('coolingToMonitoring')
+!coolingToMonitoring.name := 'coolingToMonitoring'
+
+!new Transition('humidifyingToMonitoring')
+!humidifyingToMonitoring.name := 'humidifyingToMonitoring'
+
+!new Transition('lightingToMonitoring')
+!lightingToMonitoring.name := 'lightingToMonitoring'
+
+!new Transition('monitorToMaintenance')
+!monitorToMaintenance.name := 'monitorToMaintenance'
+
+!new Transition('maintenanceToMonitoring')
+!maintenanceToMonitoring.name := 'maintenanceToMonitoring'
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent720')
+!timeEvent720.time := 720
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('defaultTimeEventA')
+!defaultTimeEventA.time := 1
+
+!new TimeEvent('defaultTimeEventB')
+!defaultTimeEventB.time := 1
+
+!new TimeEvent('defaultTimeEventC')
+!defaultTimeEventC.time := 1
+
+!new TimeEvent('defaultTimeEventD')
+!defaultTimeEventD.time := 1
+
+!insert (greenhouseEnvironmentManager, monitoring) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, heatingActive) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, coolingActive) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, humidifying) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, lightAdjustment) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, systemMaintenance) into StateMachineContainsStates
+
+!insert (greenhouseEnvironmentManager, monitorToHeating) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToCooling) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToHumidifying) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToLighting) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, heatingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, coolingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, humidifyingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, lightingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToMaintenance) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, maintenanceToMonitoring) into StateMachineContainsTransitions
+
+!insert (monitorToHeating, timeEvent3) into TransitionContainsEvents
+!insert (monitorToCooling, timeEvent4) into TransitionContainsEvents
+!insert (monitorToHumidifying, defaultTimeEventA) into TransitionContainsEvents
+!insert (monitorToLighting, defaultTimeEventB) into TransitionContainsEvents
+!insert (heatingToMonitoring, defaultTimeEventC) into TransitionContainsEvents
+!insert (coolingToMonitoring, defaultTimeEventD) into TransitionContainsEvents
+!insert (humidifyingToMonitoring, timeEvent5) into TransitionContainsEvents
+!insert (lightingToMonitoring, defaultTimeEventA) into TransitionContainsEvents
+!insert (monitorToMaintenance, timeEvent720) into TransitionContainsEvents
+!insert (maintenanceToMonitoring, defaultTimeEventB) into TransitionContainsEvents
+
+!insert (monitoring, monitorToHeating) into StateTransition
+!insert (monitorToHeating, heatingActive) into TransitionState
+
+!insert (monitoring, monitorToCooling) into StateTransition
+!insert (monitorToCooling, coolingActive) into TransitionState
+
+!insert (monitoring, monitorToHumidifying) into StateTransition
+!insert (monitorToHumidifying, humidifying) into TransitionState
+
+!insert (monitoring, monitorToLighting) into StateTransition
+!insert (monitorToLighting, lightAdjustment) into TransitionState
+
+!insert (heatingActive, heatingToMonitoring) into StateTransition
+!insert (heatingToMonitoring, monitoring) into TransitionState
+
+!insert (coolingActive, coolingToMonitoring) into StateTransition
+!insert (coolingToMonitoring, monitoring) into TransitionState
+
+!insert (humidifying, humidifyingToMonitoring) into StateTransition
+!insert (humidifyingToMonitoring, monitoring) into TransitionState
+
+!insert (lightAdjustment, lightingToMonitoring) into StateTransition
+!insert (lightingToMonitoring, monitoring) into TransitionState
+
+!insert (monitoring, monitorToMaintenance) into StateTransition
+!insert (monitorToMaintenance, systemMaintenance) into TransitionState
+
+!insert (systemMaintenance, maintenanceToMonitoring) into StateTransition
+!insert (maintenanceToMonitoring, monitoring) into TransitionState
+
+!insert (greenhouseEnvironmentManager, monitoring) into StateMachineStartsStates
+

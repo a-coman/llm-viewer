@@ -1,0 +1,56 @@
+!new StateMachine('transientMachine')
+!transientMachine.name := 'transientMachine'
+
+!new State('entryPoint')
+!entryPoint.name := 'entryPoint'
+
+!new State('transientA')
+!transientA.name := 'transientA'
+
+!new State('transientB')
+!transientB.name := 'transientB'
+
+!new State('stableEnd')
+!stableEnd.name := 'stableEnd'
+
+!new Transition('entryToA')
+!entryToA.name := 'entryToA'
+
+!new Transition('aToB')
+!aToB.name := 'aToB'
+
+!new Transition('bToEnd')
+!bToEnd.name := 'bToEnd'
+
+!new TimeEvent('timeEvent1_1')
+!timeEvent1_1.time := 1
+
+!new TimeEvent('timeEvent1_2')
+!timeEvent1_2.time := 1
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (transientMachine, entryPoint) into StateMachineContainsStates
+!insert (transientMachine, transientA) into StateMachineContainsStates
+!insert (transientMachine, transientB) into StateMachineContainsStates
+!insert (transientMachine, stableEnd) into StateMachineContainsStates
+
+!insert (transientMachine, entryToA) into StateMachineContainsTransitions
+!insert (transientMachine, aToB) into StateMachineContainsTransitions
+!insert (transientMachine, bToEnd) into StateMachineContainsTransitions
+
+!insert (entryToA, timeEvent1_1) into TransitionContainsEvents
+!insert (aToB, timeEvent1_2) into TransitionContainsEvents
+!insert (bToEnd, timeEvent2) into TransitionContainsEvents
+
+!insert (entryPoint, entryToA) into StateTransition
+!insert (entryToA, transientA) into TransitionState
+
+!insert (transientA, aToB) into StateTransition
+!insert (aToB, transientB) into TransitionState
+
+!insert (transientB, bToEnd) into StateTransition
+!insert (bToEnd, stableEnd) into TransitionState
+
+!insert (transientMachine, entryPoint) into StateMachineStartsStates

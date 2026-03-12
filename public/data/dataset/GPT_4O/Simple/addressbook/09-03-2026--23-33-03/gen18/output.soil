@@ -1,0 +1,66 @@
+!new AddressBook('addressBook18')
+
+!new Company('company18')
+!company18.name := 'BioLife Research'
+!company18.phone := '808-909-0101'
+!company18.website := 'www.bioliferesearch.com'
+!company18.email := 'contact@bioliferesearch.com'
+!company18.industry := 'Biotechnology'
+
+!new Person('person32')
+!person32.name := 'Nathan Kim'
+!person32.phone := '616-717-8282'
+!person32.website := 'www.nathankimbiotech.com'
+!person32.email := 'nathan.kim@bioliferesearch.com'
+!person32.title := 'Research Scientist'
+
+!new Person('person33')
+!person33.name := 'Ella Lim'
+!person33.phone := '505-606-7077'
+!person33.website := 'www.ellalimconsulting.com'
+!person33.email := 'ella.lim@consortiumhealth.com'
+!person33.title := 'Clinical Trials Coordinator'
+
+!new Note('note32')
+!note32.author := 'Nathan Kim'
+!note32.time := Date('2024-12-05')
+!note32.type := #MEETING
+!note32.comment := 'Discussed findings from recent experiments.'
+
+!new Note('note33')
+!note33.author := 'Ella Lim'
+!note33.time := Date('2024-12-07')
+!note33.type := #CALL
+!note33.comment := 'Coordinated with the lab for upcoming trials.'
+
+!new Address('address33')
+!address33.city := 'Research Ridge'
+!address33.houseNr := '201R'
+!address33.street := 'Discovery Drive'
+
+!new Address('address34')
+!address34.city := 'Trial Town'
+!address34.houseNr := '450P'
+!address34.street := 'Clinical Circle'
+
+!new Relationship('relationship34')
+!relationship34.type := #BOSS
+
+!new Relationship('relationship35')
+!relationship35.type := #COWORKER
+
+!insert (addressBook18, company18) into AddressBookMadeOfContact
+!insert (addressBook18, person32) into AddressBookMadeOfContact
+!insert (addressBook18, person33) into AddressBookMadeOfContact
+
+!insert (person32, note32) into ContactContainsNote
+!insert (person33, note33) into ContactContainsNote
+
+!insert (company18, relationship34) into ContactToRelationship
+!insert (relationship34, person32) into RelationshipToContact
+
+!insert (person32, relationship35) into ContactToRelationship
+!insert (relationship35, person33) into RelationshipToContact
+
+!insert (company18, address33) into ContactContainsAddress
+!insert (person33, address34) into ContactContainsAddress

@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine8')
+!stateMachine8.name := 'manufacturingProcess'
+
+!new State('state20')
+!state20.name := 'rawMaterials'
+
+!new State('state21')
+!state21.name := 'assembly'
+
+!new State('state22')
+!state22.name := 'qualityCheck'
+
+!new Transition('transition20')
+!transition20.name := 'startAssembly'
+
+!new Transition('transition21')
+!transition21.name := 'completeAssembly'
+
+!new Transition('transition22')
+!transition22.name := 'startQualityCheck'
+
+!new TimeEvent('timeEvent20')
+!timeEvent20.time := 15
+
+!new TimeEvent('timeEvent21')
+!timeEvent21.time := 10
+
+!new TimeEvent('timeEvent22')
+!timeEvent22.time := 5
+
+!insert (stateMachine8, state20) into StateMachineContainsStates
+!insert (stateMachine8, state21) into StateMachineContainsStates
+!insert (stateMachine8, state22) into StateMachineContainsStates
+
+!insert (stateMachine8, transition20) into StateMachineContainsTransitions
+!insert (stateMachine8, transition21) into StateMachineContainsTransitions
+!insert (stateMachine8, transition22) into StateMachineContainsTransitions
+
+!insert (transition20, timeEvent20) into TransitionContainsEvents
+!insert (transition21, timeEvent21) into TransitionContainsEvents
+!insert (transition22, timeEvent22) into TransitionContainsEvents
+
+!insert (state20, transition20) into StateTransition
+!insert (transition20, state21) into TransitionState
+
+!insert (state21, transition21) into StateTransition
+!insert (transition21, state22) into TransitionState
+
+!insert (state22, transition22) into StateTransition
+!insert (transition22, state20) into TransitionState
+
+!insert (stateMachine8, state20) into StateMachineStartsStates

@@ -1,0 +1,50 @@
+!new Bank('bank47')
+!bank47.country := 'Portugal'
+!bank47.name := 'Caixa Geral de Depósitos'
+!bank47.bic := 'CGDIPTPL'
+
+!new Bank('bank48')
+!bank48.country := 'Singapore'
+!bank48.name := 'Oversea-Chinese Banking Corporation'
+!bank48.bic := 'OCBCSGSG'
+
+!new Account('account70')
+!account70.iban := 'PT50000201231234567890154'
+!account70.balance := 7200
+
+!new Account('account71')
+!account71.iban := 'SG901234567800123456789'
+!account71.balance := 6800
+
+!new Account('account72')
+!account72.iban := 'PT50000201231234567890155'
+!account72.balance := 950
+
+!new Person('person70')
+!person70.firstName := 'Miguel'
+!person70.lastName := 'Silveira'
+!person70.age := 45
+
+!new Person('person71')
+!person71.firstName := 'Chen'
+!person71.lastName := 'Wei'
+!person71.age := 50
+
+!new Person('person72')
+!person72.firstName := 'Ana'
+!person72.lastName := 'Moreira'
+!person72.age := 33
+
+!insert (person70, account70) into Ownership
+!insert (person71, account71) into Ownership
+!insert (person72, account72) into Ownership
+!insert (person70, account72) into Ownership
+
+!insert (person70, account70) into Use
+!insert (person71, account71) into Use
+!insert (person72, account72) into Use
+!insert (person71, account70) into Use
+
+!insert (bank47, account70) into AccountOfBanks
+!insert (bank48, account71) into AccountOfBanks
+!insert (bank47, account72) into AccountOfBanks

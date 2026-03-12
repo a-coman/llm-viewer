@@ -1,0 +1,52 @@
+!new Client('client26')
+!client26.clientId := 6278
+!client26.isSuspended := false
+
+!new Rental('rental41')
+!rental41.date := Date('2023-02-28')
+
+!new Rental('rental42')
+!rental42.date := Date('2023-11-15')
+
+!new Movie('movie34')
+!movie34.title := 'Robots in the Wild'
+!movie34.availableCopies := 8
+!movie34.genre := #Comedy
+
+!new Movie('movie35')
+!movie35.title := 'Undercover Heroes'
+!movie35.availableCopies := 0
+!movie35.genre := #Action
+
+!new Series('series31')
+!series31.title := 'Beyond the Stars Season 2'
+!series31.availableCopies := 3
+!series31.episode := 2
+
+!new Actor('actor63')
+!actor63.name := 'Elena Petrova'
+
+!new Actor('actor64')
+!actor64.name := 'Carlos Diaz'
+
+!new Actor('actor65')
+!actor65.name := 'Yasmin Gutiérrez'
+
+!new Actor('actor66')
+!actor66.name := 'Hans Müller'
+
+!insert (client26, rental41) into ClientRental
+!insert (client26, rental42) into ClientRental
+
+!insert (rental41, movie34) into RentalCassette
+
+!insert (rental42, movie35) into RentalCassette
+!insert (rental42, series31) into RentalCassette
+
+!insert (movie34, actor63) into CassetteActor
+!insert (movie34, actor66) into CassetteActor
+
+!insert (movie35, actor64) into CassetteActor
+
+!insert (series31, actor65) into CassetteActor
+!insert (series31, actor64) into CassetteActor

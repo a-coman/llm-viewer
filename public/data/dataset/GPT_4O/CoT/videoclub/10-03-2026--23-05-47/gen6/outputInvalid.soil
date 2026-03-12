@@ -1,0 +1,31 @@
+!new Client('client36')
+!client36.clientId := 922
+!client36.isSuspended := false
+
+!new Rental('rental58')
+!rental58.date := Date('2023-06-15')
+
+!new Movie('movie48')
+!movie48.title := 'Silk Road Journeys'
+!movie48.availableCopies := 0
+!movie48.genre := #Action
+
+!new Series('series39')
+!series39.title := 'Desert Tales'
+!series39.availableCopies := 0
+!series39.episode := 12
+
+!new Actor('actor85')
+!actor85.name := 'Akira Tanaka'
+
+!new Actor('actor86')
+!actor86.name := 'Ntombi Zulu'
+
+!insert (client36, rental58) into ClientRental
+
+!insert (rental58, movie48) into RentalCassette
+!insert (rental58, series39) into RentalCassette
+
+!insert (movie48, actor85) into CassetteActor
+!insert (series39, actor86) into CassetteActor
+

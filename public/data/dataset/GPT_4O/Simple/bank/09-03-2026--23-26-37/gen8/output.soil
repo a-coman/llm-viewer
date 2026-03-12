@@ -1,0 +1,50 @@
+!new Bank('bank15')
+!bank15.country := 'Netherlands'
+!bank15.name := 'ING Bank'
+!bank15.bic := 'INGBNL2A'
+
+!new Bank('bank16')
+!bank16.country := 'Turkey'
+!bank16.name := 'Turkiye Is Bankasi'
+!bank16.bic := 'ISBKTRIS'
+
+!new Account('account22')
+!account22.iban := 'NL91ABNA0417164300'
+!account22.balance := 3000
+
+!new Account('account23')
+!account23.iban := 'TR320006100519786457841326'
+!account23.balance := 4900
+
+!new Account('account24')
+!account24.iban := 'NL91ABNA0417164301'
+!account24.balance := 1500
+
+!new Person('person22')
+!person22.firstName := 'Maarten'
+!person22.lastName := 'De Jong'
+!person22.age := 34
+
+!new Person('person23')
+!person23.firstName := 'Elif'
+!person23.lastName := 'Yildiz'
+!person23.age := 29
+
+!new Person('person24')
+!person24.firstName := 'Isabella'
+!person24.lastName := 'Visser'
+!person24.age := 37
+
+!insert (person22, account22) into Ownership
+!insert (person23, account23) into Ownership
+!insert (person24, account24) into Ownership
+!insert (person22, account24) into Ownership
+
+!insert (person22, account22) into Use
+!insert (person23, account23) into Use
+!insert (person24, account24) into Use
+!insert (person23, account22) into Use
+
+!insert (bank15, account22) into AccountOfBanks
+!insert (bank16, account23) into AccountOfBanks
+!insert (bank15, account24) into AccountOfBanks

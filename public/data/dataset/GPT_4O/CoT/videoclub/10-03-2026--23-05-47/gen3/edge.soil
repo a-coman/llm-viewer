@@ -1,0 +1,49 @@
+!new Client('client19')
+!client19.clientId := 8964
+!client19.isSuspended := false
+
+!new Rental('rental30')
+!rental30.date := Date('2023-11-01')
+
+!new Movie('movie25')
+!movie25.title := 'Mystery of the Highlands'
+!movie25.availableCopies := 3
+!movie25.genre := #Action
+
+!new Series('series23')
+!series23.title := 'Festival of Fun: Season 10'
+!series23.availableCopies := 0
+!series23.episode := 20
+
+!new Series('series24')
+!series24.title := 'Festival of Fun: Season 50'
+!series24.availableCopies := 1
+!series24.episode := 1050
+
+!new Actor('actor44')
+!actor44.name := 'Clara Thompson'
+
+!new Actor('actor45')
+!actor45.name := 'Ibrahim Aziz'
+
+!new Actor('actor46')
+!actor46.name := 'Rosa Delgado'
+
+!new Actor('actor47')
+!actor47.name := 'Akira Fujimoto'
+
+!insert (client19, rental30) into ClientRental
+
+!insert (rental30, movie25) into RentalCassette
+!insert (rental30, series23) into RentalCassette
+!insert (rental30, series24) into RentalCassette
+
+!insert (movie25, actor44) into CassetteActor
+!insert (movie25, actor45) into CassetteActor
+
+!insert (series23, actor46) into CassetteActor
+!insert (series23, actor47) into CassetteActor
+
+!insert (series24, actor46) into CassetteActor
+!insert (series24, actor47) into CassetteActor
+!insert (series24, actor44) into CassetteActor

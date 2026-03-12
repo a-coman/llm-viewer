@@ -1,0 +1,56 @@
+!new Bank('royalBankOfCanada')
+!royalBankOfCanada.country := 'Canada'
+!royalBankOfCanada.name := 'Royal Bank of Canada'
+!royalBankOfCanada.bic := 'ROYCCAT2XXX'
+
+!new Account('account20_1')
+!account20_1.iban := 'CA9112345678901234567890123'
+!account20_1.balance := 4200
+
+!new Account('account20_2')
+!account20_2.iban := 'CA9234567890123456789012345'
+!account20_2.balance := 9500
+
+!new Account('account20_3')
+!account20_3.iban := 'CA9345678901234567890123456'
+!account20_3.balance := 300
+
+!new Person('liamOConnor2')
+!liamOConnor2.firstName := 'Liam'
+!liamOConnor2.lastName := 'O\'Connor'
+!liamOConnor2.age := 38
+
+!new Person('emilyLi')
+!emilyLi.firstName := 'Emily'
+!emilyLi.lastName := 'Li'
+!emilyLi.age := 26
+
+!new Person('noahThompson')
+!noahThompson.firstName := 'Noah'
+!noahThompson.lastName := 'Thompson'
+!noahThompson.age := 44
+
+!new Person('sophiaPatel')
+!sophiaPatel.firstName := 'Sophia'
+!sophiaPatel.lastName := 'Patel'
+!sophiaPatel.age := 33
+
+!insert (royalBankOfCanada, account20_1) into AccountOfBanks
+!insert (royalBankOfCanada, account20_2) into AccountOfBanks
+!insert (royalBankOfCanada, account20_3) into AccountOfBanks
+
+!insert (liamOConnor2, account20_1) into Ownership
+
+!insert (emilyLi, account20_2) into Ownership
+!insert (sophiaPatel, account20_2) into Ownership
+
+!insert (noahThompson, account20_3) into Ownership
+
+!insert (liamOConnor2, account20_1) into Use
+!insert (sophiaPatel, account20_1) into Use
+
+!insert (emilyLi, account20_2) into Use
+!insert (noahThompson, account20_2) into Use
+
+!insert (noahThompson, account20_3) into Use
+!insert (liamOConnor2, account20_3) into Use

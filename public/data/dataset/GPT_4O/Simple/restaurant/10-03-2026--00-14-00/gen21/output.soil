@@ -1,0 +1,114 @@
+!new Restaurant('restaurant21')
+!restaurant21.name := 'Starlight Supper'
+
+!new Owner('owner42')
+!owner42.name := 'Galaxy Haze'
+!owner42.percentageShares := 55
+!insert (restaurant21, owner42) into RestaurantOwner
+
+!new Owner('owner43')
+!owner43.name := 'Nebula Beam'
+!owner43.percentageShares := 45
+!insert (restaurant21, owner43) into RestaurantOwner
+
+!new Table('table60')
+!table60.number := 60
+!table60.description := 'Comet Corner'
+!table60.capacity := 5
+
+!new Table('table61')
+!table61.number := 61
+!table61.description := 'Astro Atrium'
+!table61.capacity := 20
+
+!new RegularCustomer('customer22')
+!customer22.name := 'Sol Luna'
+!customer22.prefferedLanguage := #German
+
+!new Waiter('waiter23')
+!waiter23.name := 'Jupiter Rise'
+!waiter23.dateOfBirth := Date('1994-03-18')
+!waiter23.phoneNumber := '555-2233'
+!waiter23.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter21')
+!headwaiter21.name := 'Venus Orbit'
+!headwaiter21.dateOfBirth := Date('1978-08-01')
+!headwaiter21.phoneNumber := '555-4433'
+
+!insert (headwaiter21, waiter23) into HeadWaiterWaiter
+
+!new Individual('reservation39')
+!reservation39.time := Time('19:45')
+!reservation39.date := Date('2024-10-01')
+!reservation39.numberPeople := 2
+!reservation39.name := 'Sol Luna'
+!reservation39.phoneNumber := '555-1122'
+!reservation39.number := 39
+!reservation39.seating := #Inside
+!reservation39.smoking := #NonSmoking
+!insert (restaurant21, reservation39) into RestaurantReservation
+!insert (reservation39, customer22) into ReservationCustomer
+!insert (reservation39, waiter23) into ReservationWaiter
+!insert (reservation39, table60) into ReservationTable
+
+!new Banquet('reservation40')
+!reservation40.time := Time('18:00')
+!reservation40.date := Date('2024-11-20')
+!reservation40.numberPeople := 38
+!reservation40.name := 'Celestial Celebration'
+!reservation40.phoneNumber := '555-5666'
+!reservation40.number := 40
+!reservation40.groupName := 'Intergalactic Alliance'
+!reservation40.paymentMethod := #CreditCard
+!reservation40.busService := true
+!insert (restaurant21, reservation40) into RestaurantReservation
+!insert (reservation40, table61) into ReservationTable
+
+!new Table('tableExtra15')
+!tableExtra15.number := 62
+!tableExtra15.description := 'Sunset Suite'
+!tableExtra15.capacity := 20
+!insert (reservation40, tableExtra15) into ReservationTable
+!insert (reservation40, waiter23) into ReservationWaiter
+
+!new BusDriver('busdriver15')
+!busdriver15.name := 'Andromeda Chase'
+!busdriver15.dateOfBirth := Date('1969-07-05')
+!busdriver15.phoneNumber := '555-7878'
+!busdriver15.driverLicenseNr := 'DL334455'
+!insert (reservation40, busdriver15) into BanquetBusDriver
+
+!new ItemOrder('itemOrder21')
+!itemOrder21.time := Time('20:00')
+!insert (reservation39, itemOrder21) into ReservationItemOrdered
+
+!new MenuItem('menuItem21')
+!menuItem21.description := 'Nebula Nachos'
+!menuItem21.prepTime := 10.0
+!menuItem21.classification := #Apetizer
+!insert (itemOrder21, menuItem21) into ItemOrderMenuItem
+
+!new FoodItem('foodItem21')
+!foodItem21.number := 121
+!foodItem21.description := 'Corn Chips and Cheese'
+!foodItem21.purchaseFlag := true
+!foodItem21.unit := #Pound
+!insert (menuItem21, foodItem21) into MenuItemFoodItem
+
+!new Allergen('allergen21')
+!allergen21.type := #Lactose
+!insert (foodItem21, allergen21) into FoodItemAllergen
+
+!new Cook('cook21')
+!cook21.name := 'Astro Arc'
+!cook21.dateOfBirth := Date('1990-04-14')
+!cook21.phoneNumber := '555-3434'
+!cook21.yearsOfExperience := 6
+
+!new Chef('chef21')
+!chef21.name := 'Nova Sparks'
+!chef21.dateOfBirth := Date('1985-06-20')
+!chef21.phoneNumber := '555-5656'
+!insert (menuItem21, chef21) into MenuItemChef
+!insert (chef21, cook21) into ChefCook

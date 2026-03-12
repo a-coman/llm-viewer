@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency16')
+!currency16.name := 'Hong Kong Dollar'
+!currency16.abbreviation := 'HKD'
+
+-- Creating instances of Bills
+!new Bill('bill39')
+!bill39.amount := 1000.00
+!bill39.category := 'Office Renovation'
+!bill39.date := Date('2023-10-10')
+!bill39.paymentMethod := #CHECK
+!bill39.status := #VERIFIED
+!insert (bill39, currency16) into BillCurrency
+
+!new Bill('bill40')
+!bill40.amount := 500.00
+!bill40.category := 'Interior Designing'
+!bill40.date := Date('2023-10-12')
+!bill40.paymentMethod := #CREDIT_CARD
+!bill40.status := #PENDING
+!insert (bill40, currency16) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment19')
+!comment19.text := 'Expenses for the office renovation project.'
+
+-- Creating instance of Expense
+!new Expense('expense16')
+!expense16.amount := 1500.00
+!expense16.startDate := Date('2023-10-10')
+!expense16.endDate := Date('2023-10-20')
+!insert (expense16, bill39) into ExpenseContainsBills
+!insert (expense16, bill40) into ExpenseContainsBills
+!insert (expense16, comment19) into ExpenseComment

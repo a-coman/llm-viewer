@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine23')
+!stateMachine23.name := 'universityCourseEnrollment'
+
+!new State('state79')
+!state79.name := 'applicationSubmitted'
+
+!new State('state80')
+!state80.name := 'applicationReviewed'
+
+!new State('state81')
+!state81.name := 'accepted'
+
+!new State('state82')
+!state82.name := 'enrolled'
+
+!new State('state83')
+!state83.name := 'rejected'
+
+!new Transition('transition80')
+!transition80.name := 'reviewApplication'
+
+!new Transition('transition81')
+!transition81.name := 'acceptApplication'
+
+!new Transition('transition82')
+!transition82.name := 'enrollInCourse'
+
+!new Transition('transition83')
+!transition83.name := 'rejectApplication'
+
+!new Transition('transition84')
+!transition84.name := 'startOver'
+
+!new TimeEvent('timeEvent80')
+!timeEvent80.time := 7
+
+!new TimeEvent('timeEvent81')
+!timeEvent81.time := 2
+
+!new TimeEvent('timeEvent82')
+!timeEvent82.time := 1
+
+!new TimeEvent('timeEvent83')
+!timeEvent83.time := 1
+
+!new TimeEvent('timeEvent84')
+!timeEvent84.time := 3
+
+!insert (stateMachine23, state79) into StateMachineContainsStates
+!insert (stateMachine23, state80) into StateMachineContainsStates
+!insert (stateMachine23, state81) into StateMachineContainsStates
+!insert (stateMachine23, state82) into StateMachineContainsStates
+!insert (stateMachine23, state83) into StateMachineContainsStates
+
+!insert (stateMachine23, transition80) into StateMachineContainsTransitions
+!insert (stateMachine23, transition81) into StateMachineContainsTransitions
+!insert (stateMachine23, transition82) into StateMachineContainsTransitions
+!insert (stateMachine23, transition83) into StateMachineContainsTransitions
+!insert (stateMachine23, transition84) into StateMachineContainsTransitions
+
+!insert (transition80, timeEvent80) into TransitionContainsEvents
+!insert (transition81, timeEvent81) into TransitionContainsEvents
+!insert (transition82, timeEvent82) into TransitionContainsEvents
+!insert (transition83, timeEvent83) into TransitionContainsEvents
+!insert (transition84, timeEvent84) into TransitionContainsEvents
+
+!insert (state79, transition80) into StateTransition
+!insert (transition80, state80) into TransitionState
+
+!insert (state80, transition81) into StateTransition
+!insert (transition81, state81) into TransitionState
+
+!insert (state81, transition82) into StateTransition
+!insert (transition82, state82) into TransitionState
+
+!insert (state80, transition83) into StateTransition
+!insert (transition83, state83) into TransitionState
+
+!insert (state83, transition84) into StateTransition
+!insert (transition84, state79) into TransitionState
+
+!insert (stateMachine23, state79) into StateMachineStartsStates

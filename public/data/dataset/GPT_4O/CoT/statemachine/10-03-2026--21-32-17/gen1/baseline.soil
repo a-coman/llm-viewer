@@ -1,0 +1,67 @@
+!new StateMachine('trafficControlSystem')
+!trafficControlSystem.name := 'trafficControlSystem'
+
+!new State('greenLight')
+!greenLight.name := 'greenLight'
+
+!new State('yellowLight')
+!yellowLight.name := 'yellowLight'
+
+!new State('redLight')
+!redLight.name := 'redLight'
+
+!new State('allRed')
+!allRed.name := 'allRed'
+
+!new Transition('greenToYellow')
+!greenToYellow.name := 'greenToYellow'
+
+!new Transition('yellowToRed')
+!yellowToRed.name := 'yellowToRed'
+
+!new Transition('redToAllRed')
+!redToAllRed.name := 'redToAllRed'
+
+!new Transition('allRedToGreen')
+!allRedToGreen.name := 'allRedToGreen'
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent55')
+!timeEvent55.time := 55
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!insert (trafficControlSystem, greenLight) into StateMachineContainsStates
+!insert (trafficControlSystem, yellowLight) into StateMachineContainsStates
+!insert (trafficControlSystem, redLight) into StateMachineContainsStates
+!insert (trafficControlSystem, allRed) into StateMachineContainsStates
+
+!insert (trafficControlSystem, greenToYellow) into StateMachineContainsTransitions
+!insert (trafficControlSystem, yellowToRed) into StateMachineContainsTransitions
+!insert (trafficControlSystem, redToAllRed) into StateMachineContainsTransitions
+!insert (trafficControlSystem, allRedToGreen) into StateMachineContainsTransitions
+
+!insert (greenToYellow, timeEvent60) into TransitionContainsEvents
+!insert (yellowToRed, timeEvent5) into TransitionContainsEvents
+!insert (redToAllRed, timeEvent55) into TransitionContainsEvents
+!insert (allRedToGreen, timeEvent2) into TransitionContainsEvents
+
+!insert (greenLight, greenToYellow) into StateTransition
+!insert (greenToYellow, yellowLight) into TransitionState
+
+!insert (yellowLight, yellowToRed) into StateTransition
+!insert (yellowToRed, redLight) into TransitionState
+
+!insert (redLight, redToAllRed) into StateTransition
+!insert (redToAllRed, allRed) into TransitionState
+
+!insert (allRed, allRedToGreen) into StateTransition
+!insert (allRedToGreen, greenLight) into TransitionState
+
+!insert (trafficControlSystem, greenLight) into StateMachineStartsStates

@@ -1,0 +1,70 @@
+!new RentalOffice('office26')
+!office26.name := 'Lakeside Transportation'
+!office26.number := 2626
+!office26.address := '678 Harbor St, Chicago, IL'
+
+!new Truck('truck51')
+!truck51.id := 551
+!truck51.registrationState := #FL
+!truck51.licensePlateNumber := 'FL-TRK-1122'
+!truck51.vehicleTypeCode := #TRUCK10
+!truck51.registrationLastMaintenanceDate := Date('2023-04-05')
+!truck51.expirationDate := Date('2024-04-05')
+!truck51.odometerReading := 18000
+!truck51.gasTankCapacity := 32.0
+!truck51.workingRadio := true
+!truck51.mileage := 18
+
+!new Individual('individual26')
+!individual26.name := 'Lucas Davis'
+!individual26.address := '345 Ocean Ave, Fort Lauderdale, FL'
+!individual26.poorRisk := false
+!individual26.homePhone := '555-8085'
+!individual26.driverLicenseState := #FL
+!individual26.driverLicenseNumber := 12394958
+!individual26.driverLicenseExpirationDate := Date('2027-03-11')
+
+!new RentalAgreement('agreement51')
+!agreement51.number := 3051
+!agreement51.rentalDate := Date('2023-10-15')
+!agreement51.anticipatedDuration := 4
+!agreement51.depositPaid := 250.0
+!agreement51.quotedDailyRate := 66.00
+!agreement51.quotedRatePerMile := 0.59
+
+!new Truck('truck52')
+!truck52.id := 552
+!truck52.registrationState := #AZ
+!truck52.licensePlateNumber := 'AZ-TRK-3344'
+!truck52.vehicleTypeCode := #COVERED_TRAILER
+!truck52.registrationLastMaintenanceDate := Date('2023-09-10')
+!truck52.expirationDate := Date('2025-09-10')
+!truck52.odometerReading := 20500
+!truck52.gasTankCapacity := 35.0
+!truck52.workingRadio := false
+!truck52.mileage := 20
+
+!new Company('company26')
+!company26.name := 'Inland Freight Systems'
+!company26.address := '234 Industrial Park, Phoenix, AZ'
+!company26.poorRisk := true
+!company26.idNumber := 765234
+
+!new RentalAgreement('agreement52')
+!agreement52.number := 3052
+!agreement52.rentalDate := Date('2023-11-20')
+!agreement52.anticipatedDuration := 11
+!agreement52.depositPaid := 480.0
+!agreement52.quotedDailyRate := 79.00
+!agreement52.quotedRatePerMile := 0.66
+
+!insert (office26, truck51) into RentalOfficeVehicle
+!insert (office26, truck52) into RentalOfficeVehicle
+!insert (office26, agreement51) into RentalOfficeRentalAgreementOrigin
+!insert (office26, agreement51) into RentalOfficeRentalAgreementDrop
+!insert (office26, agreement52) into RentalOfficeRentalAgreementOrigin
+!insert (office26, agreement52) into RentalOfficeRentalAgreementDrop
+!insert (agreement51, truck51) into RentalAgreementVehicle
+!insert (agreement51, individual26) into RentalAgreementCustomer
+!insert (agreement52, truck52) into RentalAgreementVehicle
+!insert (agreement52, company26) into RentalAgreementCustomer

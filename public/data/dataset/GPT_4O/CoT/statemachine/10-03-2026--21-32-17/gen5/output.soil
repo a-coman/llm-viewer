@@ -1,0 +1,407 @@
+!new StateMachine('OnlineShoppingCart')
+!OnlineShoppingCart.name := 'OnlineShoppingCart'
+
+!new State('empty')
+!empty.name := 'empty'
+
+!new State('itemsAdded')
+!itemsAdded.name := 'itemsAdded'
+
+!new State('proceedToCheckout')
+!proceedToCheckout.name := 'proceedToCheckout'
+
+!new State('paymentSuccessful')
+!paymentSuccessful.name := 'paymentSuccessful'
+
+!new Transition('AddToCart')
+!AddToCart.name := 'Add to Cart'
+
+!new Transition('CartToCheckout')
+!CartToCheckout.name := 'Proceed to Checkout'
+
+!new Transition('CheckoutToPayment')
+!CheckoutToPayment.name := 'Checkout to Payment Success'
+
+!new TimeEvent('CartTimeout')
+!CartTimeout.time := 0
+
+!new TimeEvent('CheckoutTimeout')
+!CheckoutTimeout.time := 0
+
+!new TimeEvent('PaymentTimeout')
+!PaymentTimeout.time := 0
+
+!insert (OnlineShoppingCart, empty) into StateMachineContainsStates
+!insert (OnlineShoppingCart, itemsAdded) into StateMachineContainsStates
+!insert (OnlineShoppingCart, proceedToCheckout) into StateMachineContainsStates
+!insert (OnlineShoppingCart, paymentSuccessful) into StateMachineContainsStates
+
+!insert (OnlineShoppingCart, AddToCart) into StateMachineContainsTransitions
+!insert (OnlineShoppingCart, CartToCheckout) into StateMachineContainsTransitions
+!insert (OnlineShoppingCart, CheckoutToPayment) into StateMachineContainsTransitions
+
+!insert (AddToCart, CartTimeout) into TransitionContainsEvents
+!insert (CartToCheckout, CheckoutTimeout) into TransitionContainsEvents
+!insert (CheckoutToPayment, PaymentTimeout) into TransitionContainsEvents
+
+!insert (empty, AddToCart) into StateTransition
+!insert (AddToCart, itemsAdded) into TransitionState
+
+!insert (itemsAdded, CartToCheckout) into StateTransition
+!insert (CartToCheckout, proceedToCheckout) into TransitionState
+
+!insert (proceedToCheckout, CheckoutToPayment) into StateTransition
+!insert (CheckoutToPayment, paymentSuccessful) into TransitionState
+
+!insert (OnlineShoppingCart, empty) into StateMachineStartsStates
+
+!new StateMachine('interlinkedStates')
+!interlinkedStates.name := 'interlinkedStates'
+
+!new State('alpha')
+!alpha.name := 'alpha'
+
+!new State('beta')
+!beta.name := 'beta'
+
+!new State('gamma')
+!gamma.name := 'gamma'
+
+!new Transition('sharedTransition')
+!sharedTransition.name := 'sharedTransition'
+
+!new TimeEvent('timeEvent8')
+!timeEvent8.time := 8
+
+!insert (interlinkedStates, alpha) into StateMachineContainsStates
+!insert (interlinkedStates, beta) into StateMachineContainsStates
+!insert (interlinkedStates, gamma) into StateMachineContainsStates
+
+!insert (interlinkedStates, sharedTransition) into StateMachineContainsTransitions
+
+!insert (sharedTransition, timeEvent8) into TransitionContainsEvents
+
+!insert (alpha, sharedTransition) into StateTransition
+!insert (sharedTransition, beta) into TransitionState
+
+!insert (interlinkedStates, alpha) into StateMachineStartsStates
+
+!new StateMachine('gardenWateringSystem')
+!gardenWateringSystem.name := 'gardenWateringSystem'
+
+!new State('waiting')
+!waiting.name := 'waiting'
+
+!new State('watering')
+!watering.name := 'watering'
+
+!new State('evaluating')
+!evaluating.name := 'evaluating'
+
+!new State('error')
+!error.name := 'error'
+
+!new State('finished')
+!finished.name := 'finished'
+
+!new Transition('waitingToWatering')
+!waitingToWatering.name := 'waitingToWatering'
+
+!new Transition('wateringToEvaluating')
+!wateringToEvaluating.name := 'wateringToEvaluating'
+
+!new Transition('evaluatingToWaiting')
+!evaluatingToWaiting.name := 'evaluatingToWaiting'
+
+!new Transition('evaluatingToWatering')
+!evaluatingToWatering.name := 'evaluatingToWatering'
+
+!new Transition('wateringToError')
+!wateringToError.name := 'wateringToError'
+
+!new Transition('errorToWaiting')
+!errorToWaiting.name := 'errorToWaiting'
+
+!new Transition('wateringToFinished')
+!wateringToFinished.name := 'wateringToFinished'
+
+!new Transition('finishedToWaiting')
+!finishedToWaiting.name := 'finishedToWaiting'
+
+!new TimeEvent('timeEvent720')
+!timeEvent720.time := 720
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent45')
+!timeEvent45.time := 45
+
+!new TimeEvent('timeEvent1440')
+!timeEvent1440.time := 1440
+
+!insert (gardenWateringSystem, waiting) into StateMachineContainsStates
+!insert (gardenWateringSystem, watering) into StateMachineContainsStates
+!insert (gardenWateringSystem, evaluating) into StateMachineContainsStates
+!insert (gardenWateringSystem, error) into StateMachineContainsStates
+!insert (gardenWateringSystem, finished) into StateMachineContainsStates
+
+!insert (gardenWateringSystem, waitingToWatering) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToEvaluating) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, evaluatingToWaiting) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, evaluatingToWatering) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToError) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, errorToWaiting) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, wateringToFinished) into StateMachineContainsTransitions
+!insert (gardenWateringSystem, finishedToWaiting) into StateMachineContainsTransitions
+
+!insert (waitingToWatering, timeEvent720) into TransitionContainsEvents
+!insert (wateringToEvaluating, timeEvent30) into TransitionContainsEvents
+!insert (evaluatingToWaiting, timeEvent10) into TransitionContainsEvents
+!insert (evaluatingToWatering, timeEvent5) into TransitionContainsEvents
+!insert (wateringToError, timeEvent1) into TransitionContainsEvents
+!insert (errorToWaiting, timeEvent60) into TransitionContainsEvents
+!insert (wateringToFinished, timeEvent45) into TransitionContainsEvents
+!insert (finishedToWaiting, timeEvent1440) into TransitionContainsEvents
+
+!insert (waiting, waitingToWatering) into StateTransition
+!insert (waitingToWatering, watering) into TransitionState
+
+!insert (watering, wateringToEvaluating) into StateTransition
+!insert (wateringToEvaluating, evaluating) into TransitionState
+
+!insert (evaluating, evaluatingToWaiting) into StateTransition
+!insert (evaluatingToWaiting, waiting) into TransitionState
+
+!insert (evaluating, evaluatingToWatering) into StateTransition
+!insert (evaluatingToWatering, watering) into TransitionState
+
+!insert (watering, wateringToError) into StateTransition
+!insert (wateringToError, error) into TransitionState
+
+!insert (error, errorToWaiting) into StateTransition
+!insert (errorToWaiting, waiting) into TransitionState
+
+!insert (watering, wateringToFinished) into StateTransition
+!insert (wateringToFinished, finished) into TransitionState
+
+!insert (finished, finishedToWaiting) into StateTransition
+!insert (finishedToWaiting, waiting) into TransitionState
+
+!insert (gardenWateringSystem, waiting) into StateMachineStartsStates
+
+!new StateMachine('bifurcatedMachine')
+!bifurcatedMachine.name := 'bifurcatedMachine'
+
+!new State('entryNode')
+!entryNode.name := 'entryNode'
+
+!new State('altPath')
+!altPath.name := 'altPath'
+
+!new State('mainPath')
+!mainPath.name := 'mainPath'
+
+!new State('convergence')
+!convergence.name := 'convergence'
+
+!new State('resolution')
+!resolution.name := 'resolution'
+
+!new Transition('initToMain')
+!initToMain.name := 'initToMain'
+
+!new Transition('initToAlt')
+!initToAlt.name := 'initToAlt'
+
+!new Transition('altToConverge')
+!altToConverge.name := 'altToConverge'
+
+!new Transition('mainToConverge')
+!mainToConverge.name := 'mainToConverge'
+
+!new Transition('finishConverge')
+!finishConverge.name := 'finishConverge'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent1_1')
+!timeEvent1_1.time := 1
+
+!new TimeEvent('timeEvent1_2')
+!timeEvent1_2.time := 1
+
+!insert (bifurcatedMachine, entryNode) into StateMachineContainsStates
+!insert (bifurcatedMachine, altPath) into StateMachineContainsStates
+!insert (bifurcatedMachine, mainPath) into StateMachineContainsStates
+!insert (bifurcatedMachine, convergence) into StateMachineContainsStates
+!insert (bifurcatedMachine, resolution) into StateMachineContainsStates
+
+!insert (bifurcatedMachine, initToMain) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, initToAlt) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, altToConverge) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, mainToConverge) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, finishConverge) into StateMachineContainsTransitions
+
+!insert (initToMain, timeEvent2) into TransitionContainsEvents
+!insert (initToAlt, timeEvent3) into TransitionContainsEvents
+!insert (altToConverge, timeEvent4) into TransitionContainsEvents
+!insert (mainToConverge, timeEvent1_1) into TransitionContainsEvents
+!insert (finishConverge, timeEvent1_2) into TransitionContainsEvents
+
+!insert (entryNode, initToMain) into StateTransition
+!insert (initToMain, mainPath) into TransitionState
+
+!insert (entryNode, initToAlt) into StateTransition
+!insert (initToAlt, altPath) into TransitionState
+
+!insert (altPath, altToConverge) into StateTransition
+!insert (altToConverge, convergence) into TransitionState
+
+!insert (mainPath, mainToConverge) into StateTransition
+!insert (mainToConverge, convergence) into TransitionState
+
+!insert (convergence, finishConverge) into StateTransition
+!insert (finishConverge, resolution) into TransitionState
+
+!insert (bifurcatedMachine, entryNode) into StateMachineStartsStates
+
+!new StateMachine('trafficLightController')
+!trafficLightController.name := 'trafficLightController'
+
+!new State('red')
+!red.name := 'red'
+
+!new State('green')
+!green.name := 'green'
+
+!new State('yellow')
+!yellow.name := 'yellow'
+
+!new State('pedestrianCross')
+!pedestrianCross.name := 'pedestrianCross'
+
+!new State('nightMode')
+!nightMode.name := 'nightMode'
+
+!new State('emergencyOverride')
+!emergencyOverride.name := 'emergencyOverride'
+
+!new Transition('redToGreen')
+!redToGreen.name := 'redToGreen'
+
+!new Transition('greenToYellow')
+!greenToYellow.name := 'greenToYellow'
+
+!new Transition('yellowToRed')
+!yellowToRed.name := 'yellowToRed'
+
+!new Transition('redToPedestrian')
+!redToPedestrian.name := 'redToPedestrian'
+
+!new Transition('pedestrianToRed')
+!pedestrianToRed.name := 'pedestrianToRed'
+
+!new Transition('normalToNight')
+!normalToNight.name := 'normalToNight'
+
+!new Transition('emergencyToRed')
+!emergencyToRed.name := 'emergencyToRed'
+
+!new Transition('anyToEmergency')
+!anyToEmergency.name := 'anyToEmergency'
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent420')
+!timeEvent420.time := 420
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('defaultTimeEvent1')
+!defaultTimeEvent1.time := 1
+
+!new TimeEvent('defaultTimeEvent2')
+!defaultTimeEvent2.time := 1
+
+!new TimeEvent('defaultTimeEvent3')
+!defaultTimeEvent3.time := 1
+
+!new TimeEvent('defaultTimeEvent4')
+!defaultTimeEvent4.time := 1
+
+!insert (trafficLightController, red) into StateMachineContainsStates
+!insert (trafficLightController, green) into StateMachineContainsStates
+!insert (trafficLightController, yellow) into StateMachineContainsStates
+!insert (trafficLightController, pedestrianCross) into StateMachineContainsStates
+!insert (trafficLightController, nightMode) into StateMachineContainsStates
+!insert (trafficLightController, emergencyOverride) into StateMachineContainsStates
+
+!insert (trafficLightController, redToGreen) into StateMachineContainsTransitions
+!insert (trafficLightController, greenToYellow) into StateMachineContainsTransitions
+!insert (trafficLightController, yellowToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, redToPedestrian) into StateMachineContainsTransitions
+!insert (trafficLightController, pedestrianToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, normalToNight) into StateMachineContainsTransitions
+!insert (trafficLightController, emergencyToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, anyToEmergency) into StateMachineContainsTransitions
+
+!insert (redToGreen, timeEvent60) into TransitionContainsEvents
+!insert (greenToYellow, timeEvent10) into TransitionContainsEvents
+!insert (yellowToRed, defaultTimeEvent1) into TransitionContainsEvents
+!insert (redToPedestrian, defaultTimeEvent2) into TransitionContainsEvents
+!insert (pedestrianToRed, timeEvent30) into TransitionContainsEvents
+!insert (normalToNight, timeEvent420) into TransitionContainsEvents
+!insert (emergencyToRed, defaultTimeEvent3) into TransitionContainsEvents
+!insert (anyToEmergency, defaultTimeEvent4) into TransitionContainsEvents
+
+!insert (red, redToGreen) into StateTransition
+!insert (redToGreen, green) into TransitionState
+
+!insert (green, greenToYellow) into StateTransition
+!insert (greenToYellow, yellow) into TransitionState
+
+!insert (yellow, yellowToRed) into StateTransition
+!insert (yellowToRed, red) into TransitionState
+
+!insert (red, redToPedestrian) into StateTransition
+!insert (redToPedestrian, pedestrianCross) into TransitionState
+
+!insert (pedestrianCross, pedestrianToRed) into StateTransition
+!insert (pedestrianToRed, red) into TransitionState
+
+!insert (red, normalToNight) into StateTransition
+!insert (normalToNight, nightMode) into TransitionState
+
+!insert (emergencyOverride, emergencyToRed) into StateTransition
+!insert (emergencyToRed, red) into TransitionState
+
+!insert (red, anyToEmergency) into StateTransition
+!insert (anyToEmergency, emergencyOverride) into TransitionState
+
+!insert (trafficLightController, red) into StateMachineStartsStates
+

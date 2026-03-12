@@ -1,0 +1,66 @@
+!new AddressBook('addressBook23')
+
+!new Company('company23')
+!company23.name := 'Culinary Creations'
+!company23.phone := '936-456-7890'
+!company23.website := 'www.culinarycreations.com'
+!company23.email := 'contact@culinarycreations.com'
+!company23.industry := 'Catering Services'
+
+!new Person('person42')
+!person42.name := 'Sophia Johnson'
+!person42.phone := '444-555-6666'
+!person42.website := 'www.sophiajohnsoncatering.com'
+!person42.email := 'sophia.johnson@culinarycreations.com'
+!person42.title := 'Head Chef'
+
+!new Person('person43')
+!person43.name := 'Mason Brown'
+!person43.phone := '222-333-4444'
+!person43.website := 'www.masonbrownfooddesign.com'
+!person43.email := 'mason.brown@flavordynamics.com'
+!person43.title := 'Food Stylist'
+
+!new Note('note42')
+!note42.author := 'Sophia Johnson'
+!note42.time := Date('2025-05-05')
+!note42.type := #EMAIL
+!note42.comment := 'Confirmed menu selection with client.'
+
+!new Note('note43')
+!note43.author := 'Mason Brown'
+!note43.time := Date('2025-05-10')
+!note43.type := #MEETING
+!note43.comment := 'Collaborative session on visual food presentation ideas.'
+
+!new Address('address43')
+!address43.city := 'Gourmet Gateway'
+!address43.houseNr := '102B'
+!address43.street := 'Cuisine Court'
+
+!new Address('address44')
+!address44.city := 'Flavorville'
+!address44.houseNr := '88C'
+!address44.street := 'Taste Avenue'
+
+!new Relationship('relationship44')
+!relationship44.type := #EMPLOYEE
+
+!new Relationship('relationship45')
+!relationship45.type := #BOSS
+
+!insert (addressBook23, company23) into AddressBookMadeOfContact
+!insert (addressBook23, person42) into AddressBookMadeOfContact
+!insert (addressBook23, person43) into AddressBookMadeOfContact
+
+!insert (person42, note42) into ContactContainsNote
+!insert (person43, note43) into ContactContainsNote
+
+!insert (company23, relationship45) into ContactToRelationship
+!insert (relationship45, person42) into RelationshipToContact
+
+!insert (person42, relationship44) into ContactToRelationship
+!insert (relationship44, person43) into RelationshipToContact
+
+!insert (company23, address43) into ContactContainsAddress
+!insert (person43, address44) into ContactContainsAddress

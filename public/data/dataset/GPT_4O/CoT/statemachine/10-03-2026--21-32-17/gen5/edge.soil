@@ -1,0 +1,82 @@
+!new StateMachine('bifurcatedMachine')
+!bifurcatedMachine.name := 'bifurcatedMachine'
+
+!new State('entryNode')
+!entryNode.name := 'entryNode'
+
+!new State('altPath')
+!altPath.name := 'altPath'
+
+!new State('mainPath')
+!mainPath.name := 'mainPath'
+
+!new State('convergence')
+!convergence.name := 'convergence'
+
+!new State('resolution')
+!resolution.name := 'resolution'
+
+!new Transition('initToMain')
+!initToMain.name := 'initToMain'
+
+!new Transition('initToAlt')
+!initToAlt.name := 'initToAlt'
+
+!new Transition('altToConverge')
+!altToConverge.name := 'altToConverge'
+
+!new Transition('mainToConverge')
+!mainToConverge.name := 'mainToConverge'
+
+!new Transition('finishConverge')
+!finishConverge.name := 'finishConverge'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent1_1')
+!timeEvent1_1.time := 1
+
+!new TimeEvent('timeEvent1_2')
+!timeEvent1_2.time := 1
+
+!insert (bifurcatedMachine, entryNode) into StateMachineContainsStates
+!insert (bifurcatedMachine, altPath) into StateMachineContainsStates
+!insert (bifurcatedMachine, mainPath) into StateMachineContainsStates
+!insert (bifurcatedMachine, convergence) into StateMachineContainsStates
+!insert (bifurcatedMachine, resolution) into StateMachineContainsStates
+
+!insert (bifurcatedMachine, initToMain) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, initToAlt) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, altToConverge) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, mainToConverge) into StateMachineContainsTransitions
+!insert (bifurcatedMachine, finishConverge) into StateMachineContainsTransitions
+
+!insert (initToMain, timeEvent2) into TransitionContainsEvents
+!insert (initToAlt, timeEvent3) into TransitionContainsEvents
+!insert (altToConverge, timeEvent4) into TransitionContainsEvents
+!insert (mainToConverge, timeEvent1_1) into TransitionContainsEvents
+!insert (finishConverge, timeEvent1_2) into TransitionContainsEvents
+
+!insert (entryNode, initToMain) into StateTransition
+!insert (initToMain, mainPath) into TransitionState
+
+!insert (entryNode, initToAlt) into StateTransition
+!insert (initToAlt, altPath) into TransitionState
+
+!insert (altPath, altToConverge) into StateTransition
+!insert (altToConverge, convergence) into TransitionState
+
+!insert (mainPath, mainToConverge) into StateTransition
+!insert (mainToConverge, convergence) into TransitionState
+
+!insert (convergence, finishConverge) into StateTransition
+!insert (finishConverge, resolution) into TransitionState
+
+!insert (bifurcatedMachine, entryNode) into StateMachineStartsStates

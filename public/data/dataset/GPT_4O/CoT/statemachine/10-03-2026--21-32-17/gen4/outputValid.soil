@@ -1,0 +1,309 @@
+!new StateMachine('conveyorBeltSystem')
+!conveyorBeltSystem.name := 'conveyorBeltSystem'
+
+!new State('idle')
+!idle.name := 'idle'
+
+!new State('loading')
+!loading.name := 'loading'
+
+!new State('moving')
+!moving.name := 'moving'
+
+!new State('unloading')
+!unloading.name := 'unloading'
+
+!new Transition('idleToLoading')
+!idleToLoading.name := 'idleToLoading'
+
+!new Transition('loadingToMoving')
+!loadingToMoving.name := 'loadingToMoving'
+
+!new Transition('movingToUnloading')
+!movingToUnloading.name := 'movingToUnloading'
+
+!new Transition('unloadingToIdle')
+!unloadingToIdle.name := 'unloadingToIdle'
+
+!new Transition('movingToLoading')
+!movingToLoading.name := 'movingToLoading'
+
+!new TimeEvent('timeEvent10_1')
+!timeEvent10_1.time := 10
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('timeEvent20')
+!timeEvent20.time := 20
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent10_2')
+!timeEvent10_2.time := 10
+
+!insert (conveyorBeltSystem, idle) into StateMachineContainsStates
+!insert (conveyorBeltSystem, loading) into StateMachineContainsStates
+!insert (conveyorBeltSystem, moving) into StateMachineContainsStates
+!insert (conveyorBeltSystem, unloading) into StateMachineContainsStates
+
+!insert (conveyorBeltSystem, idleToLoading) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, loadingToMoving) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, movingToUnloading) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, unloadingToIdle) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, movingToLoading) into StateMachineContainsTransitions
+
+!insert (idleToLoading, timeEvent10_1) into TransitionContainsEvents
+!insert (loadingToMoving, timeEvent15) into TransitionContainsEvents
+!insert (movingToUnloading, timeEvent20) into TransitionContainsEvents
+!insert (unloadingToIdle, timeEvent5) into TransitionContainsEvents
+!insert (movingToLoading, timeEvent10_2) into TransitionContainsEvents
+
+!insert (idle, idleToLoading) into StateTransition
+!insert (idleToLoading, loading) into TransitionState
+
+!insert (loading, loadingToMoving) into StateTransition
+!insert (loadingToMoving, moving) into TransitionState
+
+!insert (moving, movingToUnloading) into StateTransition
+!insert (movingToUnloading, unloading) into TransitionState
+
+!insert (unloading, unloadingToIdle) into StateTransition
+!insert (unloadingToIdle, idle) into TransitionState
+
+!insert (moving, movingToLoading) into StateTransition
+!insert (movingToLoading, loading) into TransitionState
+
+!insert (conveyorBeltSystem, idle) into StateMachineStartsStates
+
+!new StateMachine('dynamicCircuit')
+!dynamicCircuit.name := 'dynamicCircuit'
+
+!new State('nodeA')
+!nodeA.name := 'nodeA'
+
+!new State('nodeB')
+!nodeB.name := 'nodeB'
+
+!new State('nodeC')
+!nodeC.name := 'nodeC'
+
+!new Transition('path1Transition')
+!path1Transition.name := 'path1Transition'
+
+!new Transition('path2Transition')
+!path2Transition.name := 'path2Transition'
+
+!new Transition('backTransition')
+!backTransition.name := 'backTransition'
+
+!new TimeEvent('timeEvent6')
+!timeEvent6.time := 6
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (dynamicCircuit, nodeA) into StateMachineContainsStates
+!insert (dynamicCircuit, nodeB) into StateMachineContainsStates
+!insert (dynamicCircuit, nodeC) into StateMachineContainsStates
+
+!insert (dynamicCircuit, path1Transition) into StateMachineContainsTransitions
+!insert (dynamicCircuit, path2Transition) into StateMachineContainsTransitions
+!insert (dynamicCircuit, backTransition) into StateMachineContainsTransitions
+
+!insert (path1Transition, timeEvent6) into TransitionContainsEvents
+!insert (path2Transition, timeEvent4) into TransitionContainsEvents
+!insert (backTransition, timeEvent5) into TransitionContainsEvents
+
+!insert (nodeA, path1Transition) into StateTransition
+!insert (path1Transition, nodeB) into TransitionState
+
+!insert (nodeA, path2Transition) into StateTransition
+!insert (path2Transition, nodeC) into TransitionState
+
+!insert (nodeC, backTransition) into StateTransition
+!insert (backTransition, nodeA) into TransitionState
+
+!insert (dynamicCircuit, nodeA) into StateMachineStartsStates
+
+!new StateMachine('interruptMachine')
+!interruptMachine.name := 'interruptMachine'
+
+!new State('openState')
+!openState.name := 'openState'
+
+!new State('busyLoop')
+!busyLoop.name := 'busyLoop'
+
+!new State('breakFree')
+!breakFree.name := 'breakFree'
+
+!new State('finalState')
+!finalState.name := 'finalState'
+
+!new Transition('startProcess')
+!startProcess.name := 'startProcess'
+
+!new Transition('loopInterruption')
+!loopInterruption.name := 'loopInterruption'
+
+!new Transition('backToLoop')
+!backToLoop.name := 'backToLoop'
+
+!new Transition('completeTask')
+!completeTask.name := 'completeTask'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!insert (interruptMachine, openState) into StateMachineContainsStates
+!insert (interruptMachine, busyLoop) into StateMachineContainsStates
+!insert (interruptMachine, breakFree) into StateMachineContainsStates
+!insert (interruptMachine, finalState) into StateMachineContainsStates
+
+!insert (interruptMachine, startProcess) into StateMachineContainsTransitions
+!insert (interruptMachine, loopInterruption) into StateMachineContainsTransitions
+!insert (interruptMachine, backToLoop) into StateMachineContainsTransitions
+!insert (interruptMachine, completeTask) into StateMachineContainsTransitions
+
+!insert (startProcess, timeEvent2) into TransitionContainsEvents
+!insert (loopInterruption, timeEvent4) into TransitionContainsEvents
+!insert (backToLoop, timeEvent3) into TransitionContainsEvents
+!insert (completeTask, timeEvent1) into TransitionContainsEvents
+
+!insert (openState, startProcess) into StateTransition
+!insert (startProcess, busyLoop) into TransitionState
+
+!insert (busyLoop, loopInterruption) into StateTransition
+!insert (loopInterruption, breakFree) into TransitionState
+
+!insert (breakFree, backToLoop) into StateTransition
+!insert (backToLoop, busyLoop) into TransitionState
+
+!insert (breakFree, completeTask) into StateTransition
+!insert (completeTask, finalState) into TransitionState
+
+!insert (interruptMachine, openState) into StateMachineStartsStates
+
+!new StateMachine('energyManagementSystem')
+!energyManagementSystem.name := 'energyManagementSystem'
+
+!new State('energyIdle')
+!energyIdle.name := 'energyIdle'
+
+!new State('normalOperation')
+!normalOperation.name := 'normalOperation'
+
+!new State('powerSavingMode')
+!powerSavingMode.name := 'powerSavingMode'
+
+!new State('emergencyOperation')
+!emergencyOperation.name := 'emergencyOperation'
+
+!new State('renewableIntegration')
+!renewableIntegration.name := 'renewableIntegration'
+
+!new State('systemShutdown')
+!systemShutdown.name := 'systemShutdown'
+
+!new Transition('idleToNormal')
+!idleToNormal.name := 'idleToNormal'
+
+!new Transition('normalToPowerSaving')
+!normalToPowerSaving.name := 'normalToPowerSaving'
+
+!new Transition('powerSavingToEmergency')
+!powerSavingToEmergency.name := 'powerSavingToEmergency'
+
+!new Transition('emergencyToRenewable')
+!emergencyToRenewable.name := 'emergencyToRenewable'
+
+!new Transition('renewableToNormal')
+!renewableToNormal.name := 'renewableToNormal'
+
+!new Transition('emergencyToShutdown')
+!emergencyToShutdown.name := 'emergencyToShutdown'
+
+!new Transition('shutdownToIdle')
+!shutdownToIdle.name := 'shutdownToIdle'
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('defaultTimeEvent1')
+!defaultTimeEvent1.time := 1
+
+!new TimeEvent('defaultTimeEvent2')
+!defaultTimeEvent2.time := 1
+
+!new TimeEvent('defaultTimeEvent3')
+!defaultTimeEvent3.time := 1
+
+!insert (energyManagementSystem, energyIdle) into StateMachineContainsStates
+!insert (energyManagementSystem, normalOperation) into StateMachineContainsStates
+!insert (energyManagementSystem, powerSavingMode) into StateMachineContainsStates
+!insert (energyManagementSystem, emergencyOperation) into StateMachineContainsStates
+!insert (energyManagementSystem, renewableIntegration) into StateMachineContainsStates
+!insert (energyManagementSystem, systemShutdown) into StateMachineContainsStates
+
+!insert (energyManagementSystem, idleToNormal) into StateMachineContainsTransitions
+!insert (energyManagementSystem, normalToPowerSaving) into StateMachineContainsTransitions
+!insert (energyManagementSystem, powerSavingToEmergency) into StateMachineContainsTransitions
+!insert (energyManagementSystem, emergencyToRenewable) into StateMachineContainsTransitions
+!insert (energyManagementSystem, renewableToNormal) into StateMachineContainsTransitions
+!insert (energyManagementSystem, emergencyToShutdown) into StateMachineContainsTransitions
+!insert (energyManagementSystem, shutdownToIdle) into StateMachineContainsTransitions
+
+!insert (idleToNormal, timeEvent5) into TransitionContainsEvents
+!insert (normalToPowerSaving, timeEvent10) into TransitionContainsEvents
+!insert (powerSavingToEmergency, defaultTimeEvent1) into TransitionContainsEvents
+!insert (emergencyToRenewable, timeEvent2) into TransitionContainsEvents
+!insert (renewableToNormal, defaultTimeEvent2) into TransitionContainsEvents
+!insert (emergencyToShutdown, timeEvent15) into TransitionContainsEvents
+!insert (shutdownToIdle, defaultTimeEvent3) into TransitionContainsEvents
+
+!insert (energyIdle, idleToNormal) into StateTransition
+!insert (idleToNormal, normalOperation) into TransitionState
+
+!insert (normalOperation, normalToPowerSaving) into StateTransition
+!insert (normalToPowerSaving, powerSavingMode) into TransitionState
+
+!insert (powerSavingMode, powerSavingToEmergency) into StateTransition
+!insert (powerSavingToEmergency, emergencyOperation) into TransitionState
+
+!insert (emergencyOperation, emergencyToRenewable) into StateTransition
+!insert (emergencyToRenewable, renewableIntegration) into TransitionState
+
+!insert (renewableIntegration, renewableToNormal) into StateTransition
+!insert (renewableToNormal, normalOperation) into TransitionState
+
+!insert (emergencyOperation, emergencyToShutdown) into StateTransition
+!insert (emergencyToShutdown, systemShutdown) into TransitionState
+
+!insert (systemShutdown, shutdownToIdle) into StateTransition
+!insert (shutdownToIdle, energyIdle) into TransitionState
+
+!insert (energyManagementSystem, energyIdle) into StateMachineStartsStates
+

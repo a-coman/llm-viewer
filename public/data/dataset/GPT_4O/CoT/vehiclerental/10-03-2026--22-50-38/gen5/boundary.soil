@@ -1,0 +1,39 @@
+!new RentalOffice('officeArcticVenturesRentals')
+!officeArcticVenturesRentals.name := 'Arctic Ventures Rentals'
+!officeArcticVenturesRentals.number := 2500
+!officeArcticVenturesRentals.address := '123 Frostbite Street, Fairbanks, AK'
+
+!new Truck('truck200')
+!truck200.id := 200
+!truck200.registrationState := #AK
+!truck200.licensePlateNumber := 'AK-COLD-200'
+!truck200.vehicleTypeCode := #COVERED_TRAILER
+!truck200.registrationLastMaintenanceDate := Date('2023-09-01')
+!truck200.expirationDate := Date('2024-09-01')
+!truck200.odometerReading := 50000
+!truck200.gasTankCapacity := 70.0
+!truck200.workingRadio := false
+!truck200.mileage := 45000
+
+!new RentalAgreement('rentalAgreement500')
+!rentalAgreement500.number := 500
+!rentalAgreement500.rentalDate := Date('2024-01-10')
+!rentalAgreement500.anticipatedDuration := 15
+!rentalAgreement500.depositPaid := 3000.0
+!rentalAgreement500.quotedDailyRate := 200.0
+!rentalAgreement500.quotedRatePerMile := 0.15
+
+!new Individual('individualPolarExplorer')
+!individualPolarExplorer.name := 'Polar Explorer'
+!individualPolarExplorer.address := '55 Expedition Drive, Nome, AK'
+!individualPolarExplorer.poorRisk := false
+!individualPolarExplorer.homePhone := '555-EXP-ROAD'
+!individualPolarExplorer.driverLicenseState := #AK
+!individualPolarExplorer.driverLicenseNumber := 56781234
+!individualPolarExplorer.driverLicenseExpirationDate := Date('2025-12-31')
+
+!insert (officeArcticVenturesRentals, truck200) into RentalOfficeVehicle
+!insert (officeArcticVenturesRentals, rentalAgreement500) into RentalOfficeRentalAgreementOrigin
+!insert (officeArcticVenturesRentals, rentalAgreement500) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement500, truck200) into RentalAgreementVehicle
+!insert (rentalAgreement500, individualPolarExplorer) into RentalAgreementCustomer

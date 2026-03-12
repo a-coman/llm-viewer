@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine25')
+!stateMachine25.name := 'customerServiceWorkflow'
+
+!new State('state90')
+!state90.name := 'newInquiry'
+
+!new State('state91')
+!state91.name := 'inProgress'
+
+!new State('state92')
+!state92.name := 'resolved'
+
+!new State('state93')
+!state93.name := 'closed'
+
+!new State('state94')
+!state94.name := 'escalated'
+
+!new Transition('transition91')
+!transition91.name := 'assignToAgent'
+
+!new Transition('transition92')
+!transition92.name := 'resolveIssue'
+
+!new Transition('transition93')
+!transition93.name := 'closeInquiry'
+
+!new Transition('transition94')
+!transition94.name := 'escalateIssue'
+
+!new Transition('transition95')
+!transition95.name := 'reopenInquiry'
+
+!new TimeEvent('timeEvent91')
+!timeEvent91.time := 1
+
+!new TimeEvent('timeEvent92')
+!timeEvent92.time := 3
+
+!new TimeEvent('timeEvent93')
+!timeEvent93.time := 2
+
+!new TimeEvent('timeEvent94')
+!timeEvent94.time := 5
+
+!new TimeEvent('timeEvent95')
+!timeEvent95.time := 2
+
+!insert (stateMachine25, state90) into StateMachineContainsStates
+!insert (stateMachine25, state91) into StateMachineContainsStates
+!insert (stateMachine25, state92) into StateMachineContainsStates
+!insert (stateMachine25, state93) into StateMachineContainsStates
+!insert (stateMachine25, state94) into StateMachineContainsStates
+
+!insert (stateMachine25, transition91) into StateMachineContainsTransitions
+!insert (stateMachine25, transition92) into StateMachineContainsTransitions
+!insert (stateMachine25, transition93) into StateMachineContainsTransitions
+!insert (stateMachine25, transition94) into StateMachineContainsTransitions
+!insert (stateMachine25, transition95) into StateMachineContainsTransitions
+
+!insert (transition91, timeEvent91) into TransitionContainsEvents
+!insert (transition92, timeEvent92) into TransitionContainsEvents
+!insert (transition93, timeEvent93) into TransitionContainsEvents
+!insert (transition94, timeEvent94) into TransitionContainsEvents
+!insert (transition95, timeEvent95) into TransitionContainsEvents
+
+!insert (state90, transition91) into StateTransition
+!insert (transition91, state91) into TransitionState
+
+!insert (state91, transition92) into StateTransition
+!insert (transition92, state92) into TransitionState
+
+!insert (state92, transition93) into StateTransition
+!insert (transition93, state93) into TransitionState
+
+!insert (state91, transition94) into StateTransition
+!insert (transition94, state94) into TransitionState
+
+!insert (state93, transition95) into StateTransition
+!insert (transition95, state90) into TransitionState
+
+!insert (stateMachine25, state90) into StateMachineStartsStates

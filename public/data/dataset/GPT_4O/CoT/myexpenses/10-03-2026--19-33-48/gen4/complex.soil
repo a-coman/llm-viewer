@@ -1,0 +1,64 @@
+!new Expense('renovationProjectExpense')
+!renovationProjectExpense.amount := 8500.00
+!renovationProjectExpense.startDate := Date('2023-06-01')
+!renovationProjectExpense.endDate := Date('2023-07-15')
+
+!new Bill('laborCostsBill')
+!laborCostsBill.amount := 3000.00
+!laborCostsBill.category := 'Labor Costs'
+!laborCostsBill.date := Date('2023-06-01')
+!laborCostsBill.paymentMethod := #CHECK
+!laborCostsBill.status := #VERIFIED
+
+!new Bill('materialsBill')
+!materialsBill.amount := 2500.00
+!materialsBill.category := 'Materials'
+!materialsBill.date := Date('2023-06-10')
+!materialsBill.paymentMethod := #CREDIT_CARD
+!materialsBill.status := #VERIFIED
+
+!new Bill('interiorDesignBill')
+!interiorDesignBill.amount := 1500.00
+!interiorDesignBill.category := 'Interior Design'
+!interiorDesignBill.date := Date('2023-06-20')
+!interiorDesignBill.paymentMethod := #CASH
+!interiorDesignBill.status := #VALIDATED
+
+!new Bill('permitsLegalFeesBill')
+!permitsLegalFeesBill.amount := 1000.00
+!permitsLegalFeesBill.category := 'Permits and Legal Fees'
+!permitsLegalFeesBill.date := Date('2023-06-15')
+!permitsLegalFeesBill.paymentMethod := #CREDIT_CARD
+!permitsLegalFeesBill.status := #PENDING
+
+!new Bill('miscellaneousExpensesBill')
+!miscellaneousExpensesBill.amount := 500.00
+!miscellaneousExpensesBill.category := 'Miscellaneous Expenses'
+!miscellaneousExpensesBill.date := Date('2023-07-01')
+!miscellaneousExpensesBill.paymentMethod := #CHECK
+!miscellaneousExpensesBill.status := #REFUNDED
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (laborCostsBill, currencyCAD) into BillCurrency
+!insert (materialsBill, currencyCAD) into BillCurrency
+!insert (interiorDesignBill, currencyCAD) into BillCurrency
+!insert (permitsLegalFeesBill, currencyCAD) into BillCurrency
+!insert (miscellaneousExpensesBill, currencyCAD) into BillCurrency
+
+!insert (renovationProjectExpense, laborCostsBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, materialsBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, interiorDesignBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, permitsLegalFeesBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, miscellaneousExpensesBill) into ExpenseContainsBills
+
+!new Comment('renovationComment1')
+!renovationComment1.text := 'Renovation of the downtown office building, including electrical rewiring and interior design updates.'
+
+!new Comment('renovationComment2')
+!renovationComment2.text := 'Project completed ahead of schedule despite initial delays due to supply chain disruptions.'
+
+!insert (renovationProjectExpense, renovationComment1) into ExpenseComment
+!insert (renovationProjectExpense, renovationComment2) into ExpenseComment

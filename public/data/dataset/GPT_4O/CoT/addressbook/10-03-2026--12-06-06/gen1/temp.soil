@@ -1,0 +1,124 @@
+!new AddressBook('GlobalConnectAddressBook')
+
+!new Person('MariaGonzalez')
+!MariaGonzalez.name := 'Maria Gonzalez'
+!MariaGonzalez.phone := '+34-608-123456'
+!MariaGonzalez.website := 'www.mariagonzalez.com'
+!MariaGonzalez.email := 'maria.gonzalez@example.com'
+!MariaGonzalez.title := 'Software Engineer'
+
+!new Address('MariaGonzalezAddress')
+!MariaGonzalezAddress.city := 'Barcelona'
+!MariaGonzalezAddress.street := 'Carrer de Balmes'
+!MariaGonzalezAddress.houseNr := '10B'
+!insert (MariaGonzalez, MariaGonzalezAddress) into ContactContainsAddress
+
+!new Note('MariaGonzalezNote1')
+!MariaGonzalezNote1.author := 'Maria Gonzalez'
+!MariaGonzalezNote1.time := Date('2023-03-15')
+!MariaGonzalezNote1.type := #MEETING
+!MariaGonzalezNote1.comment := 'Discuss project milestones with team A.'
+!insert (MariaGonzalez, MariaGonzalezNote1) into ContactContainsNote
+
+!new Note('MariaGonzalezNote2')
+!MariaGonzalezNote2.author := 'Maria Gonzalez'
+!MariaGonzalezNote2.time := Date('2023-06-05')
+!MariaGonzalezNote2.type := #CALL
+!MariaGonzalezNote2.comment := 'Client feedback on the recent software release.'
+!insert (MariaGonzalez, MariaGonzalezNote2) into ContactContainsNote
+
+!new Person('AliceChen')
+!AliceChen.name := 'Alice Chen'
+!AliceChen.phone := '+86-21-3338-7766'
+!AliceChen.website := 'www.alicechen.cn'
+!AliceChen.email := 'alice.chen@example.cn'
+!AliceChen.title := 'Product Manager'
+
+!new Address('AliceChenAddress')
+!AliceChenAddress.city := 'Shanghai'
+!AliceChenAddress.street := 'Nanjing Road'
+!AliceChenAddress.houseNr := '89'
+!insert (AliceChen, AliceChenAddress) into ContactContainsAddress
+
+!new Note('AliceChenNote1')
+!AliceChenNote1.author := 'Alice Chen'
+!AliceChenNote1.time := Date('2023-05-01')
+!AliceChenNote1.type := #CALL
+!AliceChenNote1.comment := 'Supplier negotiation update.'
+!insert (AliceChen, AliceChenNote1) into ContactContainsNote
+
+!new Relationship('MariaToAliceCoworker')
+!MariaToAliceCoworker.type := #COWORKER
+!insert (MariaToAliceCoworker, AliceChen) into RelationshipToContact
+!insert (MariaGonzalez, MariaToAliceCoworker) into ContactToRelationship
+
+!new Person('DavidEllis')
+!DavidEllis.name := 'David Ellis'
+!DavidEllis.phone := '+44-20-555-9876'
+!DavidEllis.website := 'www.davidellis.net'
+!DavidEllis.email := 'david.ellis@corporatemail.com'
+!DavidEllis.title := 'CEO'
+
+!new Address('DavidEllisAddress')
+!DavidEllisAddress.city := 'London'
+!DavidEllisAddress.street := 'Kensington High St'
+!DavidEllisAddress.houseNr := '245'
+!insert (DavidEllis, DavidEllisAddress) into ContactContainsAddress
+
+!new Note('DavidEllisNote1')
+!DavidEllisNote1.author := 'David Ellis'
+!DavidEllisNote1.time := Date('2023-11-14')
+!DavidEllisNote1.type := #MEETING
+!DavidEllisNote1.comment := 'Board meeting scheduled for next year\'s planning.'
+!insert (DavidEllis, DavidEllisNote1) into ContactContainsNote
+
+!new Relationship('MariaToDavidBoss')
+!MariaToDavidBoss.type := #BOSS
+!insert (MariaToDavidBoss, DavidEllis) into RelationshipToContact
+!insert (MariaGonzalez, MariaToDavidBoss) into ContactToRelationship
+
+!new Relationship('DavidToMariaEmployee')
+!DavidToMariaEmployee.type := #EMPLOYEE
+!insert (DavidToMariaEmployee, MariaGonzalez) into RelationshipToContact
+!insert (DavidEllis, DavidToMariaEmployee) into ContactToRelationship
+
+!new Relationship('DavidToAliceCoworker')
+!DavidToAliceCoworker.type := #COWORKER
+!insert (DavidToAliceCoworker, AliceChen) into RelationshipToContact
+!insert (DavidEllis, DavidToAliceCoworker) into ContactToRelationship
+
+!new Company('TechSolutionsLtd')
+!TechSolutionsLtd.name := 'Tech Solutions Ltd.'
+!TechSolutionsLtd.phone := '+1-213-555-0110'
+!TechSolutionsLtd.website := 'www.techsolutions.com'
+!TechSolutionsLtd.email := 'contact@techsolutions.com'
+!TechSolutionsLtd.industry := 'Information Technology'
+
+!new Address('TechSolutionsAddress1')
+!TechSolutionsAddress1.city := 'Los Angeles'
+!TechSolutionsAddress1.street := 'Sunset Blvd'
+!TechSolutionsAddress1.houseNr := '120'
+!insert (TechSolutionsLtd, TechSolutionsAddress1) into ContactContainsAddress
+
+!new Address('TechSolutionsAddress2')
+!TechSolutionsAddress2.city := 'New York'
+!TechSolutionsAddress2.street := 'Avenue of the Americas'
+!TechSolutionsAddress2.houseNr := '55'
+!insert (TechSolutionsLtd, TechSolutionsAddress2) into ContactContainsAddress
+
+!new Note('TechSolutionsNote1')
+!TechSolutionsNote1.author := 'John Doe'
+!TechSolutionsNote1.time := Date('2023-08-22')
+!TechSolutionsNote1.type := #EMAIL
+!TechSolutionsNote1.comment := 'Confirmation of the annual contract renewal.'
+!insert (TechSolutionsLtd, TechSolutionsNote1) into ContactContainsNote
+
+!new Relationship('AliceToTechSolutionsSubdivision')
+!AliceToTechSolutionsSubdivision.type := #SUBDIVISION
+!insert (AliceToTechSolutionsSubdivision, TechSolutionsLtd) into RelationshipToContact
+!insert (AliceChen, AliceToTechSolutionsSubdivision) into ContactToRelationship
+
+!insert (GlobalConnectAddressBook, MariaGonzalez) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, TechSolutionsLtd) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, DavidEllis) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, AliceChen) into AddressBookMadeOfContact

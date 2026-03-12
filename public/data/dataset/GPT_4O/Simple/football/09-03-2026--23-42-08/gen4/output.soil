@@ -1,0 +1,131 @@
+!new Club('club7')
+!club7.name := 'Ocean Sharks'
+!club7.homeGround := 'Shark Reef Stadium'
+!club7.chairman := 'Alice Waters'
+
+!new Club('club8')
+!club8.name := 'Mountain Lions'
+!club8.homeGround := 'Lions Den'
+!club8.chairman := 'Ethan Ridge'
+
+!new Team('team7')
+!team7.name := 'Shark Attack'
+!insert (club7, team7) into ClubTeam
+
+!new Team('team8')
+!team8.name := 'Lion Roar'
+!insert (club8, team8) into ClubTeam
+
+!new Competition('winterGames')
+!winterGames.name := 'Winter Games'
+!winterGames.type := 'Tournament'
+
+!new Match('match4')
+!match4.date := '2023-12-22'
+!match4.homeAway := true
+!insert (winterGames, match4) into CompetitionMatch
+!insert (team7, match4) into LocalMatch
+!insert (team8, match4) into VisitorMatch
+
+!new MatchReport('report4')
+!report4.duration := 90
+!report4.scoreVisitor := 1
+!report4.scoreLocal := 2
+!insert (match4, report4) into MatchMatchReport
+
+!new Player('player7')
+!player7.name := 'Nina Ocean'
+!player7.age := 23
+!player7.bestFoot := #BOTH
+!player7.phoneNumber := '6789012345'
+!insert (team7, player7) into TeamPlayer
+
+!new Player('player8')
+!player8.name := 'Oscar Ridge'
+!player8.age := 28
+!player8.bestFoot := #LEFT
+!player8.phoneNumber := '7890123456'
+!insert (team8, player8) into TeamPlayer
+
+!new Position('position7')
+!position7.positionName := #MIDFIELDER
+!insert (player7, position7) into PlayerPositions
+
+!new Position('position8')
+!position8.positionName := #FORWARD
+!insert (player8, position8) into PlayerPositions
+
+!new MatchPlayer('matchPlayer7')
+!matchPlayer7.booked := false
+!matchPlayer7.goals := 1
+!matchPlayer7.rating := 8
+!insert (player7, matchPlayer7) into PlayerMatch
+!insert (match4, matchPlayer7) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer8')
+!matchPlayer8.booked := true
+!matchPlayer8.goals := 1
+!matchPlayer8.rating := 7
+!insert (player8, matchPlayer8) into PlayerMatch
+!insert (match4, matchPlayer8) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition7')
+!matchPlayerPosition7.positionName := #MIDFIELDER
+!matchPlayerPosition7.number := 10
+!insert (matchPlayer7, matchPlayerPosition7) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition8')
+!matchPlayerPosition8.positionName := #FORWARD
+!matchPlayerPosition8.number := 7
+!insert (matchPlayer8, matchPlayerPosition8) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event15')
+!event15.eventType := #GOAL
+!event15.time := 20
+!insert (match4, event15) into MatchMatchEvent
+
+!new MatchEvent('event16')
+!event16.eventType := #GOAL
+!event16.time := 50
+!insert (match4, event16) into MatchMatchEvent
+
+!new MatchEvent('event17')
+!event17.eventType := #GOAL
+!event17.time := 75
+!insert (match4, event17) into MatchMatchEvent
+
+!new TrainingSession('training7')
+!training7.date := '2023-11-30'
+!training7.location := 'Shark Tank Arena'
+!training7.purpose := 'Defense Coordination'
+!insert (team7, training7) into TeamTraining
+
+!new TrainingSession('training8')
+!training8.date := '2023-12-10'
+!training8.location := 'Lion Camp'
+!training8.purpose := 'Offensive Strategies'
+!insert (team8, training8) into TeamTraining
+
+!new TrainingNotes('trainingNote7')
+!trainingNote7.note := 'Strong defensive drills practiced'
+!trainingNote7.date := '2023-11-30'
+!insert (training7, trainingNote7) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote8')
+!trainingNote8.note := 'Developed quick attacking plays'
+!trainingNote8.date := '2023-12-10'
+!insert (training8, trainingNote8) into TrainingTrainingNotes
+
+!new TrainingObjective('objective7')
+!objective7.areaToImprove := 'Team Defense'
+!objective7.startDate := '2023-09-10'
+!objective7.endDate := '2023-12-25'
+!objective7.success := true
+!insert (objective7, player7) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective8')
+!objective8.areaToImprove := 'Finishing Skills'
+!objective8.startDate := '2023-10-15'
+!objective8.endDate := '2023-12-20'
+!objective8.success := false
+!insert (objective8, player8) into TrainingObjectivePlayer

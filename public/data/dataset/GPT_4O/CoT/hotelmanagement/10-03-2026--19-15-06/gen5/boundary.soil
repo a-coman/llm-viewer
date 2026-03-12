@@ -1,0 +1,52 @@
+!new Customer('customer22')
+!customer22.firstName := 'Lila'
+!customer22.lastName := 'Chen'
+
+!new Booking('booking21')
+!booking21.startDate := '2025-11-01'
+!booking21.endDate := '2025-11-01'
+!booking21.canceled := false
+!booking21.bookingId := 505
+!booking21.confirmed := true
+
+!new Bill('bill43')
+!bill43.price := 0.0
+!bill43.billId := 901
+
+!new FreeRoomTypesDTO('freeRoomType18')
+!freeRoomType18.roomTypeDescription := 'Conference Room'
+!freeRoomType18.numBeds := 0
+!freeRoomType18.pricePerNight := 500.00
+!freeRoomType18.numFreeRooms := 3
+
+!new RoomReservation('roomReservation21')
+!roomReservation21.checkInDate := '2025-11-01'
+!roomReservation21.checkOutDate := '2025-11-01'
+
+!new RoomExtra('extra21_1')
+!extra21_1.price := 0.0
+!extra21_1.description := 'Projector Rental'
+
+!new RoomExtra('extra21_2')
+!extra21_2.price := 15.0
+!extra21_2.description := 'Coffee and Snacks Service'
+
+!new Room('room21_701')
+!room21_701.numBeds := 1
+!room21_701.pricePerNight := 0.0
+!room21_701.occupied := true
+!room21_701.blocked := false
+!room21_701.roomNumber := 701
+
+!insert (booking21, customer22) into BookingCustomer
+
+!insert (booking21, bill43) into BookingBill
+
+!insert (booking21, roomReservation21) into BookingRoomReservation
+
+!insert (roomReservation21, room21_701) into RoomReservationRoom
+
+!insert (roomReservation21, extra21_1) into RoomReservationExtras
+!insert (roomReservation21, extra21_2) into RoomReservationExtras
+
+!insert (bill43, roomReservation21) into BillRoomReservation

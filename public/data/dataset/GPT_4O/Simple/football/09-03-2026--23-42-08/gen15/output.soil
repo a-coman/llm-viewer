@@ -1,0 +1,136 @@
+!new Club('club29')
+!club29.name := 'Emerald Eagles'
+!club29.homeGround := 'Emerald Hills'
+!club29.chairman := 'Jade Forest'
+
+!new Club('club30')
+!club30.name := 'Silver Foxes'
+!club30.homeGround := 'Silver Den'
+!club30.chairman := 'Sterling Hunt'
+
+!new Team('team29')
+!team29.name := 'Eagle Wings'
+!insert (club29, team29) into ClubTeam
+
+!new Team('team30')
+!team30.name := 'Fox Flames'
+!insert (club30, team30) into ClubTeam
+
+!new Competition('diamondCup')
+!diamondCup.name := 'Diamond Cup'
+!diamondCup.type := 'Knockout'
+
+!new Match('match15')
+!match15.date := '2026-05-25'
+!match15.homeAway := true
+!insert (diamondCup, match15) into CompetitionMatch
+!insert (team29, match15) into LocalMatch
+!insert (team30, match15) into VisitorMatch
+
+!new MatchReport('report15')
+!report15.duration := 120
+!report15.scoreVisitor := 2
+!report15.scoreLocal := 2
+!insert (match15, report15) into MatchMatchReport
+
+!new Player('player29')
+!player29.name := 'Ava Feather'
+!player29.age := 26
+!player29.bestFoot := #RIGHT
+!player29.phoneNumber := '8745632109'
+!insert (team29, player29) into TeamPlayer
+
+!new Player('player30')
+!player30.name := 'Leo Quick'
+!player30.age := 28
+!player30.bestFoot := #LEFT
+!player30.phoneNumber := '9654321870'
+!insert (team30, player30) into TeamPlayer
+
+!new Position('position29')
+!position29.positionName := #MIDFIELDER
+!insert (player29, position29) into PlayerPositions
+
+!new Position('position30')
+!position30.positionName := #FORWARD
+!insert (player30, position30) into PlayerPositions
+
+!new MatchPlayer('matchPlayer29')
+!matchPlayer29.booked := true
+!matchPlayer29.goals := 1
+!matchPlayer29.rating := 8
+!insert (player29, matchPlayer29) into PlayerMatch
+!insert (match15, matchPlayer29) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer30')
+!matchPlayer30.booked := false
+!matchPlayer30.goals := 1
+!matchPlayer30.rating := 9
+!insert (player30, matchPlayer30) into PlayerMatch
+!insert (match15, matchPlayer30) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition29')
+!matchPlayerPosition29.positionName := #MIDFIELDER
+!matchPlayerPosition29.number := 7
+!insert (matchPlayer29, matchPlayerPosition29) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition30')
+!matchPlayerPosition30.positionName := #FORWARD
+!matchPlayerPosition30.number := 10
+!insert (matchPlayer30, matchPlayerPosition30) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event54')
+!event54.eventType := #GOAL
+!event54.time := 30
+!insert (match15, event54) into MatchMatchEvent
+
+!new MatchEvent('event55')
+!event55.eventType := #GOAL
+!event55.time := 52
+!insert (match15, event55) into MatchMatchEvent
+
+!new MatchEvent('event56')
+!event56.eventType := #GOAL
+!event56.time := 85
+!insert (match15, event56) into MatchMatchEvent
+
+!new MatchEvent('event57')
+!event57.eventType := #GOAL
+!event57.time := 110
+!insert (match15, event57) into MatchMatchEvent
+
+!new TrainingSession('training29')
+!training29.date := '2026-04-20'
+!training29.location := 'Eagle Summit'
+!training29.purpose := 'Speed and Agility Training'
+!insert (team29, training29) into TeamTraining
+
+!new TrainingSession('training30')
+!training30.date := '2026-04-18'
+!training30.location := 'Fox Woodlands'
+!training30.purpose := 'Precision Passing Drills'
+!insert (team30, training30) into TeamTraining
+
+!new TrainingNotes('trainingNote29')
+!trainingNote29.note := 'Improved pace in tight spaces'
+!trainingNote29.date := '2026-04-20'
+!insert (training29, trainingNote29) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote30')
+!trainingNote30.note := 'Enhanced accuracy and control in passes'
+!trainingNote30.date := '2026-04-18'
+!insert (training30, trainingNote30) into TrainingTrainingNotes
+
+!new TrainingObjective('objective29')
+!objective29.areaToImprove := 'Ball Control'
+!objective29.startDate := '2026-02-01'
+!objective29.endDate := '2026-05-01'
+!objective29.success := true
+!insert (objective29, player29) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective30')
+!objective30.areaToImprove := 'Finishing Touch'
+!objective30.startDate := '2026-02-15'
+!objective30.endDate := '2026-05-15'
+!objective30.success := false
+!insert (objective30, player30) into TrainingObjectivePlayer

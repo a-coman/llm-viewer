@@ -1,0 +1,82 @@
+!new AddressBook('PrimaryAddressBook')
+
+!new Company('MegaTechSolutionsInc')
+!MegaTechSolutionsInc.name := 'MegaTech Solutions Inc.'
+!MegaTechSolutionsInc.phone := '+1-800-555-0199'
+!MegaTechSolutionsInc.website := 'www.megatech.com'
+!MegaTechSolutionsInc.email := 'info@megatech.com'
+!MegaTechSolutionsInc.industry := 'Technology'
+
+!new Address('MegaTechAddress1')
+!MegaTechAddress1.city := 'San Francisco'
+!MegaTechAddress1.houseNr := '22'
+!MegaTechAddress1.street := 'Market Street'
+!insert (MegaTechSolutionsInc, MegaTechAddress1) into ContactContainsAddress
+
+!new Company('GreenWorldEnergy')
+!GreenWorldEnergy.name := 'GreenWorld Energy'
+!GreenWorldEnergy.phone := '+44-208-555-0123'
+!GreenWorldEnergy.website := 'www.greenworldenergy.co.uk'
+!GreenWorldEnergy.email := 'contact@greenworldenergy.co.uk'
+!GreenWorldEnergy.industry := 'Renewable Energy'
+
+!new Address('GreenWorldAddress1')
+!GreenWorldAddress1.city := 'London'
+!GreenWorldAddress1.houseNr := '110'
+!GreenWorldAddress1.street := 'Green Lane'
+!insert (GreenWorldEnergy, GreenWorldAddress1) into ContactContainsAddress
+
+!new Company('TechDistributorsLtd')
+!TechDistributorsLtd.name := 'TechDistributors Ltd.'
+!TechDistributorsLtd.phone := '+91-22-5550987'
+!TechDistributorsLtd.website := 'www.techdistributors.in'
+!TechDistributorsLtd.email := 'info@techdistributors.in'
+!TechDistributorsLtd.industry := 'Supply Chain Management'
+
+!new Address('TechDistributorsAddress1')
+!TechDistributorsAddress1.city := 'Mumbai'
+!TechDistributorsAddress1.houseNr := '305'
+!TechDistributorsAddress1.street := 'MG Road'
+!insert (TechDistributorsLtd, TechDistributorsAddress1) into ContactContainsAddress
+
+!new Relationship('MegaTechToGreenWorldPartner')
+!MegaTechToGreenWorldPartner.type := #COWORKER
+!insert (MegaTechToGreenWorldPartner, GreenWorldEnergy) into RelationshipToContact
+!insert (MegaTechSolutionsInc, MegaTechToGreenWorldPartner) into ContactToRelationship
+
+!new Relationship('MegaTechToTechDistributorsSupplier')
+!MegaTechToTechDistributorsSupplier.type := #EMPLOYEE
+!insert (MegaTechToTechDistributorsSupplier, TechDistributorsLtd) into RelationshipToContact
+!insert (MegaTechSolutionsInc, MegaTechToTechDistributorsSupplier) into ContactToRelationship
+
+!new Relationship('GreenWorldToMegaTechSubdivision')
+!GreenWorldToMegaTechSubdivision.type := #SUBDIVISION
+!insert (GreenWorldToMegaTechSubdivision, MegaTechSolutionsInc) into RelationshipToContact
+!insert (GreenWorldEnergy, GreenWorldToMegaTechSubdivision) into ContactToRelationship
+
+!new Relationship('GreenWorldToTechDistributorsPartner')
+!GreenWorldToTechDistributorsPartner.type := #COWORKER
+!insert (GreenWorldToTechDistributorsPartner, TechDistributorsLtd) into RelationshipToContact
+!insert (GreenWorldEnergy, GreenWorldToTechDistributorsPartner) into ContactToRelationship
+
+!new Relationship('TechDistributorsToMegaTechBoss')
+!TechDistributorsToMegaTechBoss.type := #BOSS
+!insert (TechDistributorsToMegaTechBoss, MegaTechSolutionsInc) into RelationshipToContact
+!insert (TechDistributorsLtd, TechDistributorsToMegaTechBoss) into ContactToRelationship
+
+!new Relationship('TechDistributorsToGreenWorldEmployee')
+!TechDistributorsToGreenWorldEmployee.type := #EMPLOYEE
+!insert (TechDistributorsToGreenWorldEmployee, GreenWorldEnergy) into RelationshipToContact
+!insert (TechDistributorsLtd, TechDistributorsToGreenWorldEmployee) into ContactToRelationship
+
+!new Note('MegaTechNote')
+!MegaTechNote.author := 'Emily C., CMO'
+!MegaTechNote.time := Date('2023-05-15')
+!MegaTechNote.type := #MEETING
+!MegaTechNote.comment := 'Discussed strategic partnerships.'
+!insert (MegaTechSolutionsInc, MegaTechNote) into ContactContainsNote
+
+!insert (PrimaryAddressBook, MegaTechSolutionsInc) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, GreenWorldEnergy) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, TechDistributorsLtd) into AddressBookMadeOfContact
+

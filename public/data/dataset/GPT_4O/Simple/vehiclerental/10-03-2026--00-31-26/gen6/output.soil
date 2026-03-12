@@ -1,0 +1,70 @@
+!new RentalOffice('office6')
+!office6.name := 'Seaside Rentals'
+!office6.number := 606
+!office6.address := '333 Beach Rd, Miami, FL'
+
+!new Truck('truck11')
+!truck11.id := 511
+!truck11.registrationState := #FL
+!truck11.licensePlateNumber := 'FL-TRK-7890'
+!truck11.vehicleTypeCode := #TRUCK24
+!truck11.registrationLastMaintenanceDate := Date('2023-01-15')
+!truck11.expirationDate := Date('2025-01-15')
+!truck11.odometerReading := 18000
+!truck11.gasTankCapacity := 34.0
+!truck11.workingRadio := false
+!truck11.mileage := 16
+
+!new Individual('individual6')
+!individual6.name := 'Michael King'
+!individual6.address := '765 Ocean Blvd, Sarasota, FL'
+!individual6.poorRisk := true
+!individual6.homePhone := '555-9999'
+!individual6.driverLicenseState := #FL
+!individual6.driverLicenseNumber := 60708090
+!individual6.driverLicenseExpirationDate := Date('2024-11-30')
+
+!new RentalAgreement('agreement11')
+!agreement11.number := 3011
+!agreement11.rentalDate := Date('2023-12-22')
+!agreement11.anticipatedDuration := 4
+!agreement11.depositPaid := 220.0
+!agreement11.quotedDailyRate := 50.00
+!agreement11.quotedRatePerMile := 0.60
+
+!new Truck('truck12')
+!truck12.id := 512
+!truck12.registrationState := #CT
+!truck12.licensePlateNumber := 'CT-TRK-5678'
+!truck12.vehicleTypeCode := #OPEN_TRAILER
+!truck12.registrationLastMaintenanceDate := Date('2023-04-10')
+!truck12.expirationDate := Date('2024-04-10')
+!truck12.odometerReading := 26000
+!truck12.gasTankCapacity := 24.0
+!truck12.workingRadio := true
+!truck12.mileage := 25
+
+!new Company('company6')
+!company6.name := 'Atlantic Logistics'
+!company6.address := '121 Marine Dr, New Haven, CT'
+!company6.poorRisk := true
+!company6.idNumber := 234567
+
+!new RentalAgreement('agreement12')
+!agreement12.number := 3012
+!agreement12.rentalDate := Date('2023-12-25')
+!agreement12.anticipatedDuration := 7
+!agreement12.depositPaid := 350.0
+!agreement12.quotedDailyRate := 70.00
+!agreement12.quotedRatePerMile := 0.70
+
+!insert (office6, truck11) into RentalOfficeVehicle
+!insert (office6, truck12) into RentalOfficeVehicle
+!insert (office6, agreement11) into RentalOfficeRentalAgreementOrigin
+!insert (office6, agreement11) into RentalOfficeRentalAgreementDrop
+!insert (office6, agreement12) into RentalOfficeRentalAgreementOrigin
+!insert (office6, agreement12) into RentalOfficeRentalAgreementDrop
+!insert (agreement11, truck11) into RentalAgreementVehicle
+!insert (agreement11, individual6) into RentalAgreementCustomer
+!insert (agreement12, truck12) into RentalAgreementVehicle
+!insert (agreement12, company6) into RentalAgreementCustomer

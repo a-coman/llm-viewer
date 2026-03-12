@@ -1,0 +1,147 @@
+!new Club('clubU')
+!clubU.name := 'Sahara Stars FC'
+!clubU.homeGround := 'Sand Dunes Arena'
+!clubU.chairman := 'Sheikh Ahmed Bin Tufan'
+
+!new Club('clubV')
+!clubV.name := 'Oasis Eagles'
+!clubV.homeGround := 'Mirage Field'
+!clubV.chairman := 'Lady Zara Al Hadi'
+
+!new Team('teamU')
+!teamU.name := 'Desert Flames'
+
+!new Team('teamV')
+!teamV.name := 'Oasis Falcons'
+
+!insert (clubU, teamU) into ClubTeam
+!insert (clubV, teamV) into ClubTeam
+
+!new Player('player23')
+!player23.name := 'Falcon Swift'
+!player23.age := 22
+!player23.bestFoot := #RIGHT
+!player23.phoneNumber := '+3216549870'
+
+!new Player('player24')
+!player24.name := 'Mirage Keeper'
+!player24.age := 28
+!player24.bestFoot := #LEFT
+!player24.phoneNumber := '+6655443322'
+
+!insert (teamU, player23) into TeamPlayer
+!insert (teamV, player24) into TeamPlayer
+
+!new Position('position57')
+!position57.positionName := #FORWARD
+
+!new Position('position59')
+!position59.positionName := #GOALKEEPER
+
+!insert (player23, position57) into PlayerPositions
+!insert (player24, position59) into PlayerPositions
+
+!new Competition('competition9')
+!competition9.name := 'Desert Showdown Series'
+!competition9.type := 'Tournament'
+
+!new Match('match11')
+!match11.date := '15/10/2023'
+!match11.homeAway := true
+
+!insert (teamU, match11) into LocalMatch
+!insert (teamV, match11) into VisitorMatch
+!insert (competition9, match11) into CompetitionMatch
+
+!new MatchReport('matchReport11')
+!matchReport11.duration := 60
+!matchReport11.scoreVisitor := 0
+!matchReport11.scoreLocal := 1
+
+!insert (match11, matchReport11) into MatchMatchReport
+
+!new MatchEvent('matchEvent33')
+!matchEvent33.eventType := #GOAL
+!matchEvent33.time := 25
+
+!insert (match11, matchEvent33) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer19')
+!matchPlayer19.booked := false
+!matchPlayer19.goals := 1
+!matchPlayer19.rating := 9
+
+!new MatchPlayer('matchPlayer20')
+!matchPlayer20.booked := true
+!matchPlayer20.goals := 0
+!matchPlayer20.rating := 8
+
+!insert (player23, matchPlayer19) into PlayerMatch
+!insert (player24, matchPlayer20) into PlayerMatch
+
+!insert (match11, matchPlayer19) into MatchMatchPlayer
+!insert (match11, matchPlayer20) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position60')
+!position60.positionName := #FORWARD
+!position60.number := 10
+
+!new MatchPlayerPosition('position61')
+!position61.positionName := #GOALKEEPER
+!position61.number := 1
+
+!insert (matchPlayer19, position60) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer20, position61) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession17')
+!trainingSession17.date := '13/10/2023'
+!trainingSession17.location := 'Mirage Field'
+!trainingSession17.purpose := 'Endurance and Heat Adaptation'
+
+!insert (teamU, trainingSession17) into TeamTraining
+
+!new TrainingSession('trainingSession18')
+!trainingSession18.date := '14/10/2023'
+!trainingSession18.location := 'Sand Dunes Arena'
+!trainingSession18.purpose := 'Goalkeeping Precision in Sand Conditions'
+
+!insert (teamV, trainingSession18) into TeamTraining
+
+!new TrainingNotes('trainingNote17')
+!trainingNote17.note := 'Players showed improvement in stamina but struggled with hydration.'
+!trainingNote17.date := '13/10/2023'
+
+!insert (trainingSession17, trainingNote17) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote18')
+!trainingNote18.note := 'Rapid adjustment to shifting sands enhanced goalkeeping techniques.'
+!trainingNote18.date := '14/10/2023'
+
+!insert (trainingSession18, trainingNote18) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective17')
+!trainingObjective17.areaToImprove := 'Stamina in High Temperatures'
+!trainingObjective17.startDate := '10/10/2023'
+!trainingObjective17.endDate := '14/10/2023'
+!trainingObjective17.success := true
+
+!new TrainingObjective('trainingObjective18')
+!trainingObjective18.areaToImprove := 'Agility in Desert Sands'
+!trainingObjective18.startDate := '10/10/2023'
+!trainingObjective18.endDate := '14/10/2023'
+!trainingObjective18.success := true
+
+!insert (trainingObjective17, player23) into TrainingObjectivePlayer
+!insert (trainingObjective18, player24) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote9')
+!playerNote9.note := 'Class-leading speed during close heat conditions.'
+!playerNote9.date := '14/10/2023'
+
+!insert (player23, playerNote9) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote10')
+!playerNote10.note := 'Outstanding reflexes, especially at dusk.'
+!playerNote10.date := '13/10/2023'
+
+!insert (player24, playerNote10) into PlayerPlayerNotes

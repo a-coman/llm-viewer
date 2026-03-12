@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine6')
+!stateMachine6.name := 'vendingMachineSystem'
+
+!new State('state14')
+!state14.name := 'idle'
+
+!new State('state15')
+!state15.name := 'selection'
+
+!new State('state16')
+!state16.name := 'payment'
+
+!new Transition('transition14')
+!transition14.name := 'makeSelection'
+
+!new Transition('transition15')
+!transition15.name := 'processPayment'
+
+!new Transition('transition16')
+!transition16.name := 'returnToIdle'
+
+!new TimeEvent('timeEvent14')
+!timeEvent14.time := 7
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 4
+
+!new TimeEvent('timeEvent16')
+!timeEvent16.time := 2
+
+!insert (stateMachine6, state14) into StateMachineContainsStates
+!insert (stateMachine6, state15) into StateMachineContainsStates
+!insert (stateMachine6, state16) into StateMachineContainsStates
+
+!insert (stateMachine6, transition14) into StateMachineContainsTransitions
+!insert (stateMachine6, transition15) into StateMachineContainsTransitions
+!insert (stateMachine6, transition16) into StateMachineContainsTransitions
+
+!insert (transition14, timeEvent14) into TransitionContainsEvents
+!insert (transition15, timeEvent15) into TransitionContainsEvents
+!insert (transition16, timeEvent16) into TransitionContainsEvents
+
+!insert (state14, transition14) into StateTransition
+!insert (transition14, state15) into TransitionState
+
+!insert (state15, transition15) into StateTransition
+!insert (transition15, state16) into TransitionState
+
+!insert (state16, transition16) into StateTransition
+!insert (transition16, state14) into TransitionState
+
+!insert (stateMachine6, state14) into StateMachineStartsStates

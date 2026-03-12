@@ -1,0 +1,70 @@
+!new RentalOffice('office13')
+!office13.name := 'Bay Rentals'
+!office13.number := 1313
+!office13.address := '900 Ocean View Blvd, San Diego, CA'
+
+!new Truck('truck25')
+!truck25.id := 525
+!truck25.registrationState := #CA
+!truck25.licensePlateNumber := 'CA-TRK-1122'
+!truck25.vehicleTypeCode := #TRUCK24
+!truck25.registrationLastMaintenanceDate := Date('2023-08-01')
+!truck25.expirationDate := Date('2024-08-01')
+!truck25.odometerReading := 18000
+!truck25.gasTankCapacity := 45.0
+!truck25.workingRadio := false
+!truck25.mileage := 20
+
+!new Individual('individual13')
+!individual13.name := 'Mia Gonzalez'
+!individual13.address := '123 Beach Dr, Santa Monica, CA'
+!individual13.poorRisk := false
+!individual13.homePhone := '555-3434'
+!individual13.driverLicenseState := #CA
+!individual13.driverLicenseNumber := 30314215
+!individual13.driverLicenseExpirationDate := Date('2027-04-04')
+
+!new RentalAgreement('agreement25')
+!agreement25.number := 3025
+!agreement25.rentalDate := Date('2023-12-30')
+!agreement25.anticipatedDuration := 6
+!agreement25.depositPaid := 320.0
+!agreement25.quotedDailyRate := 70.00
+!agreement25.quotedRatePerMile := 0.65
+
+!new Truck('truck26')
+!truck26.id := 526
+!truck26.registrationState := #CO
+!truck26.licensePlateNumber := 'CO-TRK-3344'
+!truck26.vehicleTypeCode := #TRUCK10
+!truck26.registrationLastMaintenanceDate := Date('2023-05-11')
+!truck26.expirationDate := Date('2025-05-11')
+!truck26.odometerReading := 22000
+!truck26.gasTankCapacity := 26.0
+!truck26.workingRadio := true
+!truck26.mileage := 22
+
+!new Company('company13')
+!company13.name := 'Mountain Logistics'
+!company13.address := '456 Canyon Rd, Denver, CO'
+!company13.poorRisk := false
+!company13.idNumber := 654321
+
+!new RentalAgreement('agreement26')
+!agreement26.number := 3026
+!agreement26.rentalDate := Date('2024-01-02')
+!agreement26.anticipatedDuration := 12
+!agreement26.depositPaid := 550.0
+!agreement26.quotedDailyRate := 85.00
+!agreement26.quotedRatePerMile := 0.70
+
+!insert (office13, truck25) into RentalOfficeVehicle
+!insert (office13, truck26) into RentalOfficeVehicle
+!insert (office13, agreement25) into RentalOfficeRentalAgreementOrigin
+!insert (office13, agreement25) into RentalOfficeRentalAgreementDrop
+!insert (office13, agreement26) into RentalOfficeRentalAgreementOrigin
+!insert (office13, agreement26) into RentalOfficeRentalAgreementDrop
+!insert (agreement25, truck25) into RentalAgreementVehicle
+!insert (agreement25, individual13) into RentalAgreementCustomer
+!insert (agreement26, truck26) into RentalAgreementVehicle
+!insert (agreement26, company13) into RentalAgreementCustomer

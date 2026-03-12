@@ -1,0 +1,114 @@
+!new Restaurant('restaurant26')
+!restaurant26.name := 'Lunar Luncheon'
+
+!new Owner('owner52')
+!owner52.name := 'Celestial Breeze'
+!owner52.percentageShares := 55
+!insert (restaurant26, owner52) into RestaurantOwner
+
+!new Owner('owner53')
+!owner53.name := 'Meteor Trail'
+!owner53.percentageShares := 45
+!insert (restaurant26, owner53) into RestaurantOwner
+
+!new Table('table75')
+!table75.number := 75
+!table75.description := 'Cosmos Corner'
+!table75.capacity := 8
+
+!new Table('table76')
+!table76.number := 76
+!table76.description := 'Astro Assembly'
+!table76.capacity := 18
+
+!new Table('table77')
+!table77.number := 77
+!table77.description := 'Galaxy Garden'
+!table77.capacity := 20
+
+!new RegularCustomer('customer27')
+!customer27.name := 'Nova Drift'
+!customer27.prefferedLanguage := #Italian
+
+!new Waiter('waiter28')
+!waiter28.name := 'Solar Flash'
+!waiter28.dateOfBirth := Date('1987-11-11')
+!waiter28.phoneNumber := '555-8080'
+!waiter28.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter26')
+!headwaiter26.name := 'Orion Gleam'
+!headwaiter26.dateOfBirth := Date('1980-08-08')
+!headwaiter26.phoneNumber := '555-9911'
+
+!insert (headwaiter26, waiter28) into HeadWaiterWaiter
+
+!new Individual('reservation49')
+!reservation49.time := Time('20:00')
+!reservation49.date := Date('2025-05-05')
+!reservation49.numberPeople := 4
+!reservation49.name := 'Nova Drift'
+!reservation49.phoneNumber := '555-7878'
+!reservation49.number := 49
+!reservation49.seating := #Patio
+!reservation49.smoking := #NonSmoking
+!insert (restaurant26, reservation49) into RestaurantReservation
+!insert (reservation49, customer27) into ReservationCustomer
+!insert (reservation49, waiter28) into ReservationWaiter
+!insert (reservation49, table75) into ReservationTable
+
+!new Banquet('reservation50')
+!reservation50.time := Time('21:30')
+!reservation50.date := Date('2025-06-15')
+!reservation50.numberPeople := 38
+!reservation50.name := 'Galactic Gala'
+!reservation50.phoneNumber := '555-6767'
+!reservation50.number := 50
+!reservation50.groupName := 'Astronomy Admirers'
+!reservation50.paymentMethod := #CreditCard
+!reservation50.busService := true
+!insert (restaurant26, reservation50) into RestaurantReservation
+!insert (reservation50, table76) into ReservationTable
+!insert (reservation50, table77) into ReservationTable
+!insert (reservation50, waiter28) into ReservationWaiter
+
+!new BusDriver('busdriver18')
+!busdriver18.name := 'Quasar Flyer'
+!busdriver18.dateOfBirth := Date('1978-04-19')
+!busdriver18.phoneNumber := '555-3223'
+!busdriver18.driverLicenseNr := 'DL567890'
+!insert (reservation50, busdriver18) into BanquetBusDriver
+
+!new ItemOrder('itemOrder26')
+!itemOrder26.time := Time('20:30')
+!insert (reservation49, itemOrder26) into ReservationItemOrdered
+
+!new MenuItem('menuItem26')
+!menuItem26.description := 'Supernova Salad'
+!menuItem26.prepTime := 15.0
+!menuItem26.classification := #Apetizer
+!insert (itemOrder26, menuItem26) into ItemOrderMenuItem
+
+!new FoodItem('foodItem26')
+!foodItem26.number := 126
+!foodItem26.description := 'Mixed Greens and Avocado'
+!foodItem26.purchaseFlag := true
+!foodItem26.unit := #Pound
+!insert (menuItem26, foodItem26) into MenuItemFoodItem
+
+!new Allergen('allergen26')
+!allergen26.type := #Nuts
+!insert (foodItem26, allergen26) into FoodItemAllergen
+
+!new Cook('cook26')
+!cook26.name := 'Astra Warp'
+!cook26.dateOfBirth := Date('1990-06-06')
+!cook26.phoneNumber := '555-2244'
+!cook26.yearsOfExperience := 8
+
+!new Chef('chef26')
+!chef26.name := 'Stella Orb'
+!chef26.dateOfBirth := Date('1984-01-25')
+!chef26.phoneNumber := '555-9090'
+!insert (menuItem26, chef26) into MenuItemChef
+!insert (chef26, cook26) into ChefCook

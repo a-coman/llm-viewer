@@ -1,0 +1,114 @@
+!new Restaurant('restaurant23')
+!restaurant23.name := 'Cosmic Cuisine'
+
+!new Owner('owner46')
+!owner46.name := 'Zara Nova'
+!owner46.percentageShares := 50
+!insert (restaurant23, owner46) into RestaurantOwner
+
+!new Owner('owner47')
+!owner47.name := 'Leo Eclipse'
+!owner47.percentageShares := 50
+!insert (restaurant23, owner47) into RestaurantOwner
+
+!new Table('table66')
+!table66.number := 66
+!table66.description := 'Asteroid Alcove'
+!table66.capacity := 10
+
+!new Table('table67')
+!table67.number := 67
+!table67.description := 'Galactic Garden'
+!table67.capacity := 20
+
+!new Table('table68')
+!table68.number := 68
+!table68.description := 'Comet Corner'
+!table68.capacity := 15
+
+!new RegularCustomer('customer24')
+!customer24.name := 'Lyra Comet'
+!customer24.prefferedLanguage := #English
+
+!new Waiter('waiter25')
+!waiter25.name := 'Cassiopeia Chase'
+!waiter25.dateOfBirth := Date('1992-06-22')
+!waiter25.phoneNumber := '555-3131'
+!waiter25.spokenLanguage := #Spanish
+
+!new HeadWaiter('headwaiter23')
+!headwaiter23.name := 'Phoenix Sky'
+!headwaiter23.dateOfBirth := Date('1983-09-09')
+!headwaiter23.phoneNumber := '555-1212'
+
+!insert (headwaiter23, waiter25) into HeadWaiterWaiter
+
+!new Individual('reservation43')
+!reservation43.time := Time('19:15')
+!reservation43.date := Date('2024-11-11')
+!reservation43.numberPeople := 5
+!reservation43.name := 'Lyra Comet'
+!reservation43.phoneNumber := '555-4433'
+!reservation43.number := 43
+!reservation43.seating := #Inside
+!reservation43.smoking := #NonSmoking
+!insert (restaurant23, reservation43) into RestaurantReservation
+!insert (reservation43, customer24) into ReservationCustomer
+!insert (reservation43, waiter25) into ReservationWaiter
+!insert (reservation43, table66) into ReservationTable
+
+!new Banquet('reservation44')
+!reservation44.time := Time('20:00')
+!reservation44.date := Date('2024-12-20')
+!reservation44.numberPeople := 36
+!reservation44.name := 'Milky Way Meetup'
+!reservation44.phoneNumber := '555-1122'
+!reservation44.number := 44
+!reservation44.groupName := 'Nebula Network'
+!reservation44.paymentMethod := #CreditCard
+!reservation44.busService := true
+!insert (restaurant23, reservation44) into RestaurantReservation
+!insert (reservation44, table67) into ReservationTable
+!insert (reservation44, table68) into ReservationTable
+!insert (reservation44, waiter25) into ReservationWaiter
+
+!new BusDriver('busdriver16')
+!busdriver16.name := 'Halley Orbit'
+!busdriver16.dateOfBirth := Date('1975-11-30')
+!busdriver16.phoneNumber := '555-9898'
+!busdriver16.driverLicenseNr := 'DL556677'
+!insert (reservation44, busdriver16) into BanquetBusDriver
+
+!new ItemOrder('itemOrder23')
+!itemOrder23.time := Time('19:45')
+!insert (reservation43, itemOrder23) into ReservationItemOrdered
+
+!new MenuItem('menuItem23')
+!menuItem23.description := 'Planetary Pizza'
+!menuItem23.prepTime := 25.0
+!menuItem23.classification := #Main
+!insert (itemOrder23, menuItem23) into ItemOrderMenuItem
+
+!new FoodItem('foodItem23')
+!foodItem23.number := 123
+!foodItem23.description := 'Mozzarella Cheese and Tomato Sauce'
+!foodItem23.purchaseFlag := true
+!foodItem23.unit := #Pound
+!insert (menuItem23, foodItem23) into MenuItemFoodItem
+
+!new Allergen('allergen23')
+!allergen23.type := #Gluten
+!insert (foodItem23, allergen23) into FoodItemAllergen
+
+!new Cook('cook23')
+!cook23.name := 'Stella Glow'
+!cook23.dateOfBirth := Date('1991-05-07')
+!cook23.phoneNumber := '555-6565'
+!cook23.yearsOfExperience := 4
+
+!new Chef('chef23')
+!chef23.name := 'Orion Blaze'
+!chef23.dateOfBirth := Date('1987-04-23')
+!chef23.phoneNumber := '555-7878'
+!insert (menuItem23, chef23) into MenuItemChef
+!insert (chef23, cook23) into ChefCook

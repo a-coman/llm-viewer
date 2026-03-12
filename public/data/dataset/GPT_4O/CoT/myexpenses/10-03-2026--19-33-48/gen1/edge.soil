@@ -1,0 +1,58 @@
+!new Expense('endOfYearMultiCurrencySurge')
+!endOfYearMultiCurrencySurge.amount := 17750.00
+!endOfYearMultiCurrencySurge.startDate := Date('2023-12-28')
+!endOfYearMultiCurrencySurge.endDate := Date('2024-01-03')
+
+!new Bill('billSupplierInvoice')
+!billSupplierInvoice.amount := 12000.00
+!billSupplierInvoice.category := 'Supplier Invoice'
+!billSupplierInvoice.date := Date('2023-12-29')
+!billSupplierInvoice.paymentMethod := #CREDIT_CARD
+!billSupplierInvoice.status := #VERIFIED
+
+!new Bill('billSoftwareRenewal')
+!billSoftwareRenewal.amount := 3000.00
+!billSoftwareRenewal.category := 'Software Subscription Renewal'
+!billSoftwareRenewal.date := Date('2023-12-31')
+!billSoftwareRenewal.paymentMethod := #CHECK
+!billSoftwareRenewal.status := #VALIDATED
+
+!new Bill('billBonusPayout')
+!billBonusPayout.amount := 2750.00
+!billBonusPayout.category := 'Year-End Bonus Payout'
+!billBonusPayout.date := Date('2024-01-02')
+!billBonusPayout.paymentMethod := #CASH
+!billBonusPayout.status := #PENDING
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyEuro')
+!currencyEuro.name := 'Euro'
+!currencyEuro.abbreviation := 'EUR'
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (billSupplierInvoice, currencyUSD) into BillCurrency
+!insert (billSoftwareRenewal, currencyEuro) into BillCurrency
+!insert (billBonusPayout, currencyGBP) into BillCurrency
+
+!insert (endOfYearMultiCurrencySurge, billSupplierInvoice) into ExpenseContainsBills
+!insert (endOfYearMultiCurrencySurge, billSoftwareRenewal) into ExpenseContainsBills
+!insert (endOfYearMultiCurrencySurge, billBonusPayout) into ExpenseContainsBills
+
+!new Comment('comment1')
+!comment1.text := 'All transactions were processed during the financial year rollover period, necessitating careful review for accurate fiscal reporting.'
+
+!new Comment('comment2')
+!comment2.text := 'Note delayed processing due to cross-border banking regulations affecting check clearance timelines for Bill 2.'
+
+!new Comment('comment3')
+!comment3.text := 'Cash handling for Bill 3 requires verification of funds received confirmation from regional office.'
+
+!insert (endOfYearMultiCurrencySurge, comment1) into ExpenseComment
+!insert (endOfYearMultiCurrencySurge, comment2) into ExpenseComment
+!insert (endOfYearMultiCurrencySurge, comment3) into ExpenseComment

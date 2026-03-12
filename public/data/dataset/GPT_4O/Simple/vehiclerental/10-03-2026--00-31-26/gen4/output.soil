@@ -1,0 +1,70 @@
+!new RentalOffice('office4')
+!office4.name := 'City Rentals'
+!office4.number := 404
+!office4.address := '222 Urban Ave, Atlanta, GA'
+
+!new Truck('truck7')
+!truck7.id := 507
+!truck7.registrationState := #FL
+!truck7.licensePlateNumber := 'FL-TRK-2345'
+!truck7.vehicleTypeCode := #TRUCK24
+!truck7.registrationLastMaintenanceDate := Date('2023-03-15')
+!truck7.expirationDate := Date('2024-03-15')
+!truck7.odometerReading := 8000
+!truck7.gasTankCapacity := 32.0
+!truck7.workingRadio := true
+!truck7.mileage := 20
+
+!new Individual('individual4')
+!individual4.name := 'Robert Brown'
+!individual4.address := '777 Peachtree Blvd, Savannah, GA'
+!individual4.poorRisk := false
+!individual4.homePhone := '555-3456'
+!individual4.driverLicenseState := #FL
+!individual4.driverLicenseNumber := 40506070
+!individual4.driverLicenseExpirationDate := Date('2026-08-10')
+
+!new RentalAgreement('agreement7')
+!agreement7.number := 3007
+!agreement7.rentalDate := Date('2023-12-15')
+!agreement7.anticipatedDuration := 6
+!agreement7.depositPaid := 250.0
+!agreement7.quotedDailyRate := 60.00
+!agreement7.quotedRatePerMile := 0.50
+
+!new Truck('truck8')
+!truck8.id := 508
+!truck8.registrationState := #AL
+!truck8.licensePlateNumber := 'AL-TRK-5678'
+!truck8.vehicleTypeCode := #TRUCK10
+!truck8.registrationLastMaintenanceDate := Date('2023-07-20')
+!truck8.expirationDate := Date('2025-07-20')
+!truck8.odometerReading := 20000
+!truck8.gasTankCapacity := 26.0
+!truck8.workingRadio := true
+!truck8.mileage := 15
+
+!new Company('company4')
+!company4.name := 'Eco Deliveries'
+!company4.address := '750 Green Rd, Birmingham, AL'
+!company4.poorRisk := true
+!company4.idNumber := 890123
+
+!new RentalAgreement('agreement8')
+!agreement8.number := 3008
+!agreement8.rentalDate := Date('2023-12-20')
+!agreement8.anticipatedDuration := 12
+!agreement8.depositPaid := 500.0
+!agreement8.quotedDailyRate := 80.00
+!agreement8.quotedRatePerMile := 0.65
+
+!insert (office4, truck7) into RentalOfficeVehicle
+!insert (office4, truck8) into RentalOfficeVehicle
+!insert (office4, agreement7) into RentalOfficeRentalAgreementOrigin
+!insert (office4, agreement7) into RentalOfficeRentalAgreementDrop
+!insert (office4, agreement8) into RentalOfficeRentalAgreementOrigin
+!insert (office4, agreement8) into RentalOfficeRentalAgreementDrop
+!insert (agreement7, truck7) into RentalAgreementVehicle
+!insert (agreement7, individual4) into RentalAgreementCustomer
+!insert (agreement8, truck8) into RentalAgreementVehicle
+!insert (agreement8, company4) into RentalAgreementCustomer

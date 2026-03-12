@@ -1,0 +1,305 @@
+!new RentalOffice('officeHoustonCentral')
+!officeHoustonCentral.name := 'Houston Central'
+!officeHoustonCentral.number := 606
+!officeHoustonCentral.address := '101 Space Center Blvd, Houston, TX 77058'
+
+!new Vehicle('coveredTrailer010')
+!coveredTrailer010.id := 310
+!coveredTrailer010.registrationState := #CA
+!coveredTrailer010.licensePlateNumber := 'TX3210CT'
+!coveredTrailer010.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer010.registrationLastMaintenanceDate := Date('2023-10-02')
+!coveredTrailer010.expirationDate := Date('2024-10-01')
+
+!new Truck('truck011')
+!truck011.id := 311
+!truck011.registrationState := #CA
+!truck011.licensePlateNumber := 'LA5432TR'
+!truck011.vehicleTypeCode := #TRUCK
+!truck011.registrationLastMaintenanceDate := Date('2023-09-15')
+!truck011.expirationDate := Date('2024-09-14')
+!truck011.odometerReading := 1000
+!truck011.gasTankCapacity := 20.0
+!truck011.workingRadio := true
+!truck011.mileage := 5000
+
+!new Company('companyRapidReliefServices')
+!companyRapidReliefServices.name := 'RapidRelief Services'
+!companyRapidReliefServices.address := '400 Emergency Ave, Baton Rouge, LA 70801'
+!companyRapidReliefServices.poorRisk := false
+!companyRapidReliefServices.idNumber := 903456
+
+!new RentalAgreement('rentalAgreement6006')
+!rentalAgreement6006.number := 6006
+!rentalAgreement6006.rentalDate := Date('2024-01-01')
+!rentalAgreement6006.anticipatedDuration := 5
+!rentalAgreement6006.depositPaid := 250.0
+!rentalAgreement6006.quotedDailyRate := 65.0
+!rentalAgreement6006.quotedRatePerMile := 0.2
+
+!insert (officeHoustonCentral, coveredTrailer010) into RentalOfficeVehicle
+!insert (officeHoustonCentral, truck011) into RentalOfficeVehicle
+
+!insert (officeHoustonCentral, rentalAgreement6006) into RentalOfficeRentalAgreementOrigin
+!insert (officeHoustonCentral, rentalAgreement6006) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement6006, coveredTrailer010) into RentalAgreementVehicle
+!insert (rentalAgreement6006, companyRapidReliefServices) into RentalAgreementCustomer
+
+!new RentalOffice('officeUrbanFleetRentals')
+!officeUrbanFleetRentals.name := 'Urban Fleet Rentals'
+!officeUrbanFleetRentals.number := 3001
+!officeUrbanFleetRentals.address := '3001 Metropolis Drive, Atlanta, GA'
+
+!new Truck('truck50')
+!truck50.id := 50
+!truck50.registrationState := #CA
+!truck50.licensePlateNumber := 'GA-MID-050'
+!truck50.vehicleTypeCode := #TRUCK
+!truck50.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck50.expirationDate := Date('2024-06-15')
+!truck50.odometerReading := 2000
+!truck50.gasTankCapacity := 65.0
+!truck50.workingRadio := true
+!truck50.mileage := 2000
+
+!new RentalAgreement('rentalAgreement250')
+!rentalAgreement250.number := 250
+!rentalAgreement250.rentalDate := Date('2023-12-25')
+!rentalAgreement250.anticipatedDuration := 3
+!rentalAgreement250.depositPaid := 100.0
+!rentalAgreement250.quotedDailyRate := 49.99
+!rentalAgreement250.quotedRatePerMile := 0.05
+
+!new Company('companyMetroMoversLLC')
+!companyMetroMoversLLC.name := 'Metro Movers LLC'
+!companyMetroMoversLLC.address := '71 Peachtree Plaza, Atlanta, GA'
+!companyMetroMoversLLC.poorRisk := true
+!companyMetroMoversLLC.idNumber := 123456789
+
+!insert (officeUrbanFleetRentals, truck50) into RentalOfficeVehicle
+!insert (officeUrbanFleetRentals, rentalAgreement250) into RentalOfficeRentalAgreementOrigin
+!insert (officeUrbanFleetRentals, rentalAgreement250) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement250, truck50) into RentalAgreementVehicle
+!insert (rentalAgreement250, companyMetroMoversLLC) into RentalAgreementCustomer
+
+!new RentalOffice('officeDenverMountainBase')
+!officeDenverMountainBase.name := 'Denver Mountain Base Office'
+!officeDenverMountainBase.number := 606
+!officeDenverMountainBase.address := '404 Colfax Ave, Denver, CO'
+
+!new Vehicle('coveredTrailer8006')
+!coveredTrailer8006.id := 8006
+!coveredTrailer8006.registrationState := #CO
+!coveredTrailer8006.licensePlateNumber := 'CO6677KL'
+!coveredTrailer8006.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer8006.registrationLastMaintenanceDate := Date('2023-02-14')
+!coveredTrailer8006.expirationDate := Date('2023-03-14')
+
+!new Company('companyRockyMountainLogistics')
+!companyRockyMountainLogistics.name := 'Rocky Mountain Logistics'
+!companyRockyMountainLogistics.address := '123 Tech Park Dr, Boulder, CO'
+!companyRockyMountainLogistics.poorRisk := false
+!companyRockyMountainLogistics.idNumber := 19283746
+
+!new RentalAgreement('rentalAgreement10007')
+!rentalAgreement10007.number := 10007
+!rentalAgreement10007.rentalDate := Date('2022-12-01')
+!rentalAgreement10007.anticipatedDuration := 365
+!rentalAgreement10007.depositPaid := 400.0
+!rentalAgreement10007.quotedDailyRate := 40.0
+!rentalAgreement10007.quotedRatePerMile := 0.15
+
+!insert (officeDenverMountainBase, coveredTrailer8006) into RentalOfficeVehicle
+
+!insert (officeDenverMountainBase, rentalAgreement10007) into RentalOfficeRentalAgreementOrigin
+!insert (officeDenverMountainBase, rentalAgreement10007) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement10007, coveredTrailer8006) into RentalAgreementVehicle
+!insert (rentalAgreement10007, companyRockyMountainLogistics) into RentalAgreementCustomer
+
+!new RentalOffice('officeLoneStarRentals')
+!officeLoneStarRentals.name := 'Lone Star Rentals'
+!officeLoneStarRentals.number := 675
+!officeLoneStarRentals.address := '3500 S Congress Ave, Austin, TX 78704'
+
+!new Truck('truck8005')
+!truck8005.id := 8005
+!truck8005.registrationState := #CA
+!truck8005.licensePlateNumber := 'TX7890'
+!truck8005.vehicleTypeCode := #TRUCK
+!truck8005.registrationLastMaintenanceDate := Date('2023-04-22')
+!truck8005.expirationDate := Date('2024-04-22')
+!truck8005.odometerReading := 80000
+!truck8005.gasTankCapacity := 23.0
+!truck8005.workingRadio := true
+!truck8005.mileage := 13
+
+!new Truck('truck8006')
+!truck8006.id := 8006
+!truck8006.registrationState := #CA
+!truck8006.licensePlateNumber := 'LA0021'
+!truck8006.vehicleTypeCode := #TRUCK
+!truck8006.registrationLastMaintenanceDate := Date('2023-05-30')
+!truck8006.expirationDate := Date('2024-05-30')
+!truck8006.odometerReading := 65000
+!truck8006.gasTankCapacity := 24.0
+!truck8006.workingRadio := true
+!truck8006.mileage := 14
+
+!new Vehicle('coveredTrailer9010')
+!coveredTrailer9010.id := 9010
+!coveredTrailer9010.registrationState := #CA
+!coveredTrailer9010.licensePlateNumber := 'TX4512'
+!coveredTrailer9010.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer9010.registrationLastMaintenanceDate := Date('2023-06-10')
+!coveredTrailer9010.expirationDate := Date('2024-06-10')
+
+!new Vehicle('coveredTrailer9011')
+!coveredTrailer9011.id := 9011
+!coveredTrailer9011.registrationState := #CA
+!coveredTrailer9011.licensePlateNumber := 'AR2233'
+!coveredTrailer9011.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer9011.registrationLastMaintenanceDate := Date('2023-07-20')
+!coveredTrailer9011.expirationDate := Date('2024-07-20')
+
+!new Individual('individualEmmaRobinson')
+!individualEmmaRobinson.name := 'Emma Robinson'
+!individualEmmaRobinson.address := '789 W 5th St, Austin, TX 78701'
+!individualEmmaRobinson.poorRisk := false
+!individualEmmaRobinson.homePhone := '512-555-0144'
+!individualEmmaRobinson.driverLicenseState := #CA
+!individualEmmaRobinson.driverLicenseNumber := 55669988
+!individualEmmaRobinson.driverLicenseExpirationDate := Date('2026-11-25')
+
+!new Company('companyLiveMusicTransport')
+!companyLiveMusicTransport.name := 'Live Music Transport'
+!companyLiveMusicTransport.address := '1236 Sound Avenue, Austin, TX 78705'
+!companyLiveMusicTransport.poorRisk := false
+!companyLiveMusicTransport.idNumber := 5050
+
+!new Company('companyTechConDistributors')
+!companyTechConDistributors.name := 'TechCon Distributors'
+!companyTechConDistributors.address := '114 Amplify Ct, Austin, TX 78744'
+!companyTechConDistributors.poorRisk := true
+!companyTechConDistributors.idNumber := 5051
+
+!new RentalAgreement('rentalAgreement16002')
+!rentalAgreement16002.number := 16002
+!rentalAgreement16002.rentalDate := Date('2024-01-10')
+!rentalAgreement16002.anticipatedDuration := 4
+!rentalAgreement16002.depositPaid := 100.0
+!rentalAgreement16002.quotedDailyRate := 55.0
+!rentalAgreement16002.quotedRatePerMile := 0.50
+
+!new RentalAgreement('rentalAgreement17003')
+!rentalAgreement17003.number := 17003
+!rentalAgreement17003.rentalDate := Date('2024-01-22')
+!rentalAgreement17003.anticipatedDuration := 6
+!rentalAgreement17003.depositPaid := 300.0
+!rentalAgreement17003.quotedDailyRate := 40.0
+!rentalAgreement17003.quotedRatePerMile := 0.35
+
+!new RentalAgreement('rentalAgreement18004')
+!rentalAgreement18004.number := 18004
+!rentalAgreement18004.rentalDate := Date('2024-02-15')
+!rentalAgreement18004.anticipatedDuration := 8
+!rentalAgreement18004.depositPaid := 250.0
+!rentalAgreement18004.quotedDailyRate := 50.0
+!rentalAgreement18004.quotedRatePerMile := 0.38
+
+!new RentalAgreement('rentalAgreement17004')
+!rentalAgreement17004.number := 17004
+!rentalAgreement17004.rentalDate := Date('2024-03-01')
+!rentalAgreement17004.anticipatedDuration := 5
+!rentalAgreement17004.depositPaid := 120.0
+!rentalAgreement17004.quotedDailyRate := 33.0
+!rentalAgreement17004.quotedRatePerMile := 0.30
+
+!insert (officeLoneStarRentals, truck8005) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, truck8006) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, coveredTrailer9010) into RentalOfficeVehicle
+!insert (officeLoneStarRentals, coveredTrailer9011) into RentalOfficeVehicle
+
+!insert (officeLoneStarRentals, rentalAgreement16002) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement17003) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement18004) into RentalOfficeRentalAgreementOrigin
+!insert (officeLoneStarRentals, rentalAgreement17004) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeLoneStarRentals, rentalAgreement16002) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement17003) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement18004) into RentalOfficeRentalAgreementDrop
+!insert (officeLoneStarRentals, rentalAgreement17004) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement16002, truck8005) into RentalAgreementVehicle
+!insert (rentalAgreement17003, coveredTrailer9010) into RentalAgreementVehicle
+!insert (rentalAgreement18004, truck8006) into RentalAgreementVehicle
+!insert (rentalAgreement17004, coveredTrailer9011) into RentalAgreementVehicle
+
+!insert (rentalAgreement16002, individualEmmaRobinson) into RentalAgreementCustomer
+!insert (rentalAgreement17003, companyLiveMusicTransport) into RentalAgreementCustomer
+!insert (rentalAgreement18004, companyTechConDistributors) into RentalAgreementCustomer
+!insert (rentalAgreement17004, companyLiveMusicTransport) into RentalAgreementCustomer
+
+!new RentalOffice('officeCoastalEmergencyRentals')
+!officeCoastalEmergencyRentals.name := 'Coastal Emergency Rentals'
+!officeCoastalEmergencyRentals.number := 606
+!officeCoastalEmergencyRentals.address := '120 Shoreline Dr, Harbor Town, FL 33001'
+
+!new Truck('truck12345')
+!truck12345.id := 12345
+!truck12345.registrationState := #FL
+!truck12345.licensePlateNumber := 'FL-987-ZYX'
+!truck12345.vehicleTypeCode := #TRUCK
+!truck12345.registrationLastMaintenanceDate := Date('2023-03-01')
+!truck12345.expirationDate := Date('2024-03-01')
+!truck12345.odometerReading := 120000
+!truck12345.gasTankCapacity := 100.0
+!truck12345.workingRadio := false
+!truck12345.mileage := 7
+
+!new Individual('individualSarahBeachcomber')
+!individualSarahBeachcomber.name := 'Sarah Beachcomber'
+!individualSarahBeachcomber.address := '781 Ocean View Ave, Seaside Bay, FL 33301'
+!individualSarahBeachcomber.poorRisk := false
+!individualSarahBeachcomber.homePhone := '+1-754-555-0458'
+!individualSarahBeachcomber.driverLicenseState := #FL
+!individualSarahBeachcomber.driverLicenseNumber := 789012345
+!individualSarahBeachcomber.driverLicenseExpirationDate := Date('2027-12-31')
+
+!new Company('companyCoastalReliefCorps')
+!companyCoastalReliefCorps.name := 'Coastal Relief Corps'
+!companyCoastalReliefCorps.address := '500 Relief Rd, Sunshine Plaza, FL 33401'
+!companyCoastalReliefCorps.poorRisk := false
+!companyCoastalReliefCorps.idNumber := 334455667
+
+!new RentalAgreement('rentalAgreement6011')
+!rentalAgreement6011.number := 6011
+!rentalAgreement6011.rentalDate := Date('2025-09-05')
+!rentalAgreement6011.anticipatedDuration := 14
+!rentalAgreement6011.depositPaid := 100.0
+!rentalAgreement6011.quotedDailyRate := 50.0
+!rentalAgreement6011.quotedRatePerMile := 1.0
+
+!new RentalAgreement('rentalAgreement6012')
+!rentalAgreement6012.number := 6012
+!rentalAgreement6012.rentalDate := Date('2025-11-10')
+!rentalAgreement6012.anticipatedDuration := 60
+!rentalAgreement6012.depositPaid := 0.0
+!rentalAgreement6012.quotedDailyRate := 30.0
+!rentalAgreement6012.quotedRatePerMile := 0.5
+
+!insert (officeCoastalEmergencyRentals, truck12345) into RentalOfficeVehicle
+
+!insert (officeCoastalEmergencyRentals, rentalAgreement6011) into RentalOfficeRentalAgreementOrigin
+!insert (officeCoastalEmergencyRentals, rentalAgreement6012) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeCoastalEmergencyRentals, rentalAgreement6011) into RentalOfficeRentalAgreementDrop
+!insert (officeCoastalEmergencyRentals, rentalAgreement6012) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement6011, truck12345) into RentalAgreementVehicle
+!insert (rentalAgreement6012, truck12345) into RentalAgreementVehicle
+
+!insert (rentalAgreement6011, individualSarahBeachcomber) into RentalAgreementCustomer
+!insert (rentalAgreement6012, companyCoastalReliefCorps) into RentalAgreementCustomer
+

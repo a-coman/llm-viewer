@@ -1,0 +1,27 @@
+!new Client('client4')
+!client4.clientId := 1
+!client4.isSuspended := false
+
+!new Rental('rental5')
+!rental5.date := Date('2023-12-01')
+
+!new Movie('movie4')
+!movie4.title := 'Silent Action'
+!movie4.availableCopies := 1
+!movie4.genre := #Action
+
+!new Series('series4')
+!series4.title := 'Fun Times'
+!series4.availableCopies := 0
+!series4.episode := 1
+
+!new Actor('actor7')
+!actor7.name := 'John Doe'
+
+!insert (client4, rental5) into ClientRental
+
+!insert (rental5, movie4) into RentalCassette
+!insert (rental5, series4) into RentalCassette
+
+!insert (movie4, actor7) into CassetteActor
+!insert (series4, actor7) into CassetteActor

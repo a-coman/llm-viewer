@@ -1,0 +1,67 @@
+!new StateMachine('stateMachine17')
+!stateMachine17.name := 'cookingProcess'
+
+!new State('state52')
+!state52.name := 'ingredientPreparation'
+
+!new State('state53')
+!state53.name := 'cooking'
+
+!new State('state54')
+!state54.name := 'plating'
+
+!new State('state55')
+!state55.name := 'cleaningUp'
+
+!new Transition('transition53')
+!transition53.name := 'startCooking'
+
+!new Transition('transition54')
+!transition54.name := 'finishCooking'
+
+!new Transition('transition55')
+!transition55.name := 'plateDish'
+
+!new Transition('transition56')
+!transition56.name := 'cleanDishes'
+
+!new TimeEvent('timeEvent53')
+!timeEvent53.time := 10
+
+!new TimeEvent('timeEvent54')
+!timeEvent54.time := 15
+
+!new TimeEvent('timeEvent55')
+!timeEvent55.time := 5
+
+!new TimeEvent('timeEvent56')
+!timeEvent56.time := 8
+
+!insert (stateMachine17, state52) into StateMachineContainsStates
+!insert (stateMachine17, state53) into StateMachineContainsStates
+!insert (stateMachine17, state54) into StateMachineContainsStates
+!insert (stateMachine17, state55) into StateMachineContainsStates
+
+!insert (stateMachine17, transition53) into StateMachineContainsTransitions
+!insert (stateMachine17, transition54) into StateMachineContainsTransitions
+!insert (stateMachine17, transition55) into StateMachineContainsTransitions
+!insert (stateMachine17, transition56) into StateMachineContainsTransitions
+
+!insert (transition53, timeEvent53) into TransitionContainsEvents
+!insert (transition54, timeEvent54) into TransitionContainsEvents
+!insert (transition55, timeEvent55) into TransitionContainsEvents
+!insert (transition56, timeEvent56) into TransitionContainsEvents
+
+!insert (state52, transition53) into StateTransition
+!insert (transition53, state53) into TransitionState
+
+!insert (state53, transition54) into StateTransition
+!insert (transition54, state54) into TransitionState
+
+!insert (state54, transition55) into StateTransition
+!insert (transition55, state55) into TransitionState
+
+!insert (state55, transition56) into StateTransition
+!insert (transition56, state52) into TransitionState
+
+!insert (stateMachine17, state52) into StateMachineStartsStates

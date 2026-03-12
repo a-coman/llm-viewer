@@ -1,0 +1,64 @@
+!new Driver('driver24')
+!driver24.id := 'D024'
+!driver24.name := 'Wade Wilson'
+
+!new Driver('driver25')
+!driver25.id := 'D025'
+!driver25.name := 'Peter Parker'
+
+!new Shipment('shipment27')
+!shipment27.id := 'SHP12371'
+!shipment27.status := #DELIVERED
+
+!new Shipment('shipment28')
+!shipment28.id := 'SHP12372'
+!shipment28.status := #ASSIGNED
+
+!new Address('address27')
+!address27.text := '2525 Chimichanga Blvd, Merc City'
+
+!new Address('address28')
+!address28.text := '2626 Web Sling Ln, Queens'
+
+!new GeoLocation('geoLocation27')
+!geoLocation27.latitude := 34.0522
+!geoLocation27.longitude := -118.2437
+
+!new GeoLocation('geoLocation28')
+!geoLocation28.latitude := 40.7128
+!geoLocation28.longitude := -74.0060
+
+!insert (address27, geoLocation27) into AddressContainsGeoLocation
+!insert (address28, geoLocation28) into AddressContainsGeoLocation
+
+!new Customer('customer27')
+!customer27.id := 'CUST027'
+!customer27.name := 'Eddie Brock'
+!customer27.twitterUserName := '@venom'
+
+!new Customer('customer28')
+!customer28.id := 'CUST028'
+!customer28.name := 'Gwen Stacy'
+!customer28.twitterUserName := '@ghostspider'
+
+!new Station('station14')
+
+!insert (station14, customer27) into StationContainsCustomer
+!insert (station14, customer28) into StationContainsCustomer
+
+!insert (station14, shipment27) into StationShipment
+!insert (station14, shipment28) into StationShipment
+
+!insert (station14, driver24) into StationContainsDriver
+!insert (station14, driver25) into StationContainsDriver
+
+!insert (shipment27, address27) into ShipmentContainsPickUpAddress
+!insert (shipment27, address28) into ShipmentContainsDeliveryAddress
+
+!insert (shipment28, address28) into ShipmentContainsPickUpAddress
+!insert (shipment28, address27) into ShipmentContainsDeliveryAddress
+
+!insert (customer27, shipment27) into CustomerConsistsOfShipment
+!insert (customer28, shipment28) into CustomerConsistsOfShipment
+
+!insert (driver25, shipment28) into DriverShipment

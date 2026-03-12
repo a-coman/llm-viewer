@@ -1,0 +1,104 @@
+!new StateMachine('documentWorkflowSystem')
+!documentWorkflowSystem.name := 'documentWorkflowSystem'
+
+!new State('draft')
+!draft.name := 'draft'
+
+!new State('review')
+!review.name := 'review'
+
+!new State('approved')
+!approved.name := 'approved'
+
+!new State('rejected')
+!rejected.name := 'rejected'
+
+!new State('archived')
+!archived.name := 'archived'
+
+!new Transition('draftToReview')
+!draftToReview.name := 'draftToReview'
+
+!new Transition('reviewToApproved')
+!reviewToApproved.name := 'reviewToApproved'
+
+!new Transition('reviewToRejected')
+!reviewToRejected.name := 'reviewToRejected'
+
+!new Transition('rejectedToDraft')
+!rejectedToDraft.name := 'rejectedToDraft'
+
+!new Transition('approvedToArchived')
+!approvedToArchived.name := 'approvedToArchived'
+
+!new Transition('draftToArchived')
+!draftToArchived.name := 'draftToArchived'
+
+!new Transition('reviewToDraft')
+!reviewToDraft.name := 'reviewToDraft'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent48_1')
+!timeEvent48_1.time := 48
+
+!new TimeEvent('timeEvent48_2')
+!timeEvent48_2.time := 48
+
+!new TimeEvent('timeEvent24_1')
+!timeEvent24_1.time := 24
+
+!new TimeEvent('timeEvent12')
+!timeEvent12.time := 12
+
+!new TimeEvent('timeEvent72')
+!timeEvent72.time := 72
+
+!new TimeEvent('timeEvent24_2')
+!timeEvent24_2.time := 24
+
+!insert (documentWorkflowSystem, draft) into StateMachineContainsStates
+!insert (documentWorkflowSystem, review) into StateMachineContainsStates
+!insert (documentWorkflowSystem, approved) into StateMachineContainsStates
+!insert (documentWorkflowSystem, rejected) into StateMachineContainsStates
+!insert (documentWorkflowSystem, archived) into StateMachineContainsStates
+
+!insert (documentWorkflowSystem, draftToReview) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToApproved) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToRejected) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, rejectedToDraft) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, approvedToArchived) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, draftToArchived) into StateMachineContainsTransitions
+!insert (documentWorkflowSystem, reviewToDraft) into StateMachineContainsTransitions
+
+!insert (draftToReview, timeEvent1) into TransitionContainsEvents
+!insert (reviewToApproved, timeEvent48_1) into TransitionContainsEvents
+!insert (reviewToRejected, timeEvent48_2) into TransitionContainsEvents
+!insert (rejectedToDraft, timeEvent24_1) into TransitionContainsEvents
+!insert (approvedToArchived, timeEvent12) into TransitionContainsEvents
+!insert (draftToArchived, timeEvent72) into TransitionContainsEvents
+!insert (reviewToDraft, timeEvent24_2) into TransitionContainsEvents
+
+!insert (draft, draftToReview) into StateTransition
+!insert (draftToReview, review) into TransitionState
+
+!insert (review, reviewToApproved) into StateTransition
+!insert (reviewToApproved, approved) into TransitionState
+
+!insert (review, reviewToRejected) into StateTransition
+!insert (reviewToRejected, rejected) into TransitionState
+
+!insert (rejected, rejectedToDraft) into StateTransition
+!insert (rejectedToDraft, draft) into TransitionState
+
+!insert (approved, approvedToArchived) into StateTransition
+!insert (approvedToArchived, archived) into TransitionState
+
+!insert (draft, draftToArchived) into StateTransition
+!insert (draftToArchived, archived) into TransitionState
+
+!insert (review, reviewToDraft) into StateTransition
+!insert (reviewToDraft, draft) into TransitionState
+
+!insert (documentWorkflowSystem, draft) into StateMachineStartsStates

@@ -1,0 +1,79 @@
+!new AddressBook('GlobalResearchCollaborationAddressBook')
+
+!new Company('InternationalSpaceResearchAgency')
+!InternationalSpaceResearchAgency.name := 'International Space Research Agency'
+!InternationalSpaceResearchAgency.phone := '+1-713-555-0190'
+!InternationalSpaceResearchAgency.website := 'www.spaceresearch.org'
+!InternationalSpaceResearchAgency.email := 'info@spaceresearch.org'
+!InternationalSpaceResearchAgency.industry := 'Aerospace & Research'
+
+!new Address('SpaceResearchAddress')
+!SpaceResearchAddress.city := 'Houston'
+!SpaceResearchAddress.houseNr := '400'
+!SpaceResearchAddress.street := 'Galileo Parkway'
+!insert (InternationalSpaceResearchAgency, SpaceResearchAddress) into ContactContainsAddress
+
+!new Person('ProfAikoTanaka')
+!ProfAikoTanaka.name := 'Prof. Aiko Tanaka'
+!ProfAikoTanaka.phone := '+81-3-5550-7432'
+!ProfAikoTanaka.website := 'www.aikotanaka.jp'
+!ProfAikoTanaka.email := 'aiko.tanaka@tokyouniversity.ac.jp'
+!ProfAikoTanaka.title := 'Astrophysicist'
+
+!new Address('AikoTanakaAddress')
+!AikoTanakaAddress.city := 'Tokyo'
+!AikoTanakaAddress.houseNr := '55'
+!AikoTanakaAddress.street := 'University Drive'
+!insert (ProfAikoTanaka, AikoTanakaAddress) into ContactContainsAddress
+
+!new Note('AikoTanakaNote1')
+!AikoTanakaNote1.author := 'International Space Research Agency'
+!AikoTanakaNote1.time := Date('2023-11-15')
+!AikoTanakaNote1.type := #MEETING
+!AikoTanakaNote1.comment := 'Held a virtual seminar on recent advancements in satellite technology.'
+!insert (ProfAikoTanaka, AikoTanakaNote1) into ContactContainsNote
+
+!new Company('AdvancedBiologyInstitute')
+!AdvancedBiologyInstitute.name := 'Advanced Biology Institute'
+!AdvancedBiologyInstitute.phone := '+49-89-555-0886'
+!AdvancedBiologyInstitute.website := 'www.advancedbiologi.de'
+!AdvancedBiologyInstitute.email := 'contact@advancedbiologi.de'
+!AdvancedBiologyInstitute.industry := 'Biotechnology'
+
+!new Person('DrCarlosMendes')
+!DrCarlosMendes.name := 'Dr. Carlos Mendes'
+!DrCarlosMendes.phone := '+55-21-555-6712'
+!DrCarlosMendes.email := 'carlos.mendes@pesquisador.br'
+!DrCarlosMendes.title := 'Marine Ecologist'
+
+!new Address('CarlosMendesAddress1')
+!CarlosMendesAddress1.city := 'Rio de Janeiro'
+!CarlosMendesAddress1.houseNr := '101'
+!CarlosMendesAddress1.street := 'Ocean Street'
+!insert (DrCarlosMendes, CarlosMendesAddress1) into ContactContainsAddress
+
+!new Address('CarlosMendesAddress2')
+!CarlosMendesAddress2.city := 'São Paulo'
+!CarlosMendesAddress2.houseNr := '202'
+!CarlosMendesAddress2.street := 'Ecosystem Lane'
+!insert (DrCarlosMendes, CarlosMendesAddress2) into ContactContainsAddress
+
+!new Relationship('SpaceToAikoCoworker')
+!SpaceToAikoCoworker.type := #COWORKER
+!insert (SpaceToAikoCoworker, ProfAikoTanaka) into RelationshipToContact
+!insert (InternationalSpaceResearchAgency, SpaceToAikoCoworker) into ContactToRelationship
+
+!new Relationship('BiologyToCarlosEmployee')
+!BiologyToCarlosEmployee.type := #EMPLOYEE
+!insert (BiologyToCarlosEmployee, DrCarlosMendes) into RelationshipToContact
+!insert (AdvancedBiologyInstitute, BiologyToCarlosEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToAikoSubdivision')
+!CarlosToAikoSubdivision.type := #SUBDIVISION
+!insert (CarlosToAikoSubdivision, ProfAikoTanaka) into RelationshipToContact
+!insert (DrCarlosMendes, CarlosToAikoSubdivision) into ContactToRelationship
+
+!insert (GlobalResearchCollaborationAddressBook, InternationalSpaceResearchAgency) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, ProfAikoTanaka) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, AdvancedBiologyInstitute) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, DrCarlosMendes) into AddressBookMadeOfContact

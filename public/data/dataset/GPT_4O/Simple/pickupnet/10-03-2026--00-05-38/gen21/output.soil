@@ -1,0 +1,64 @@
+!new Driver('driver38')
+!driver38.id := 'D038'
+!driver38.name := 'Nick Fury'
+
+!new Driver('driver39')
+!driver39.id := 'D039'
+!driver39.name := 'Maria Hill'
+
+!new Shipment('shipment41')
+!shipment41.id := 'SHP12385'
+!shipment41.status := #NEW
+
+!new Shipment('shipment42')
+!shipment42.id := 'SHP12386'
+!shipment42.status := #DELIVERED
+
+!new Address('address41')
+!address41.text := '3939 S.H.I.E.L.D. Tower, Manhattan'
+
+!new Address('address42')
+!address42.text := '4040 Helipad Cir, Strategic Base'
+
+!new GeoLocation('geoLocation41')
+!geoLocation41.latitude := 40.7580
+!geoLocation41.longitude := -73.9855
+
+!new GeoLocation('geoLocation42')
+!geoLocation42.latitude := 39.9526
+!geoLocation42.longitude := -75.1652
+
+!insert (address41, geoLocation41) into AddressContainsGeoLocation
+!insert (address42, geoLocation42) into AddressContainsGeoLocation
+
+!new Customer('customer41')
+!customer41.id := 'CUST041'
+!customer41.name := 'Melinda May'
+!customer41.twitterUserName := '@thecavalry'
+
+!new Customer('customer42')
+!customer42.id := 'CUST042'
+!customer42.name := 'Bobbi Morse'
+!customer42.twitterUserName := '@mockingbird'
+
+!new Station('station21')
+
+!insert (station21, customer41) into StationContainsCustomer
+!insert (station21, customer42) into StationContainsCustomer
+
+!insert (station21, shipment41) into StationShipment
+!insert (station21, shipment42) into StationShipment
+
+!insert (station21, driver38) into StationContainsDriver
+!insert (station21, driver39) into StationContainsDriver
+
+!insert (shipment41, address41) into ShipmentContainsPickUpAddress
+!insert (shipment41, address42) into ShipmentContainsDeliveryAddress
+
+!insert (shipment42, address42) into ShipmentContainsPickUpAddress
+!insert (shipment42, address41) into ShipmentContainsDeliveryAddress
+
+!insert (customer41, shipment41) into CustomerConsistsOfShipment
+!insert (customer42, shipment42) into CustomerConsistsOfShipment
+
+!insert (driver38, shipment41) into DriverShipment

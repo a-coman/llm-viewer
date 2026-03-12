@@ -1,0 +1,131 @@
+!new Club('club47')
+!club47.name := 'Mist Raptors'
+!club47.homeGround := 'Fog Valley Stadium'
+!club47.chairman := 'Gale Mist'
+
+!new Club('club48')
+!club48.name := 'Crimson Hawks'
+!club48.homeGround := 'Bloodmoon Arena'
+!club48.chairman := 'Scarlet Talon'
+
+!new Team('team47')
+!team47.name := 'Raptor Soar'
+!insert (club47, team47) into ClubTeam
+
+!new Team('team48')
+!team48.name := 'Hawk Strike'
+!insert (club48, team48) into ClubTeam
+
+!new Competition('stormLeague')
+!stormLeague.name := 'Storm League'
+!stormLeague.type := 'Round Robin'
+
+!new Match('match24')
+!match24.date := '2031-08-22'
+!match24.homeAway := true
+!insert (stormLeague, match24) into CompetitionMatch
+!insert (team47, match24) into LocalMatch
+!insert (team48, match24) into VisitorMatch
+
+!new MatchReport('report24')
+!report24.duration := 90
+!report24.scoreVisitor := 1
+!report24.scoreLocal := 2
+!insert (match24, report24) into MatchMatchReport
+
+!new Player('player47')
+!player47.name := 'Stormy Cloud'
+!player47.age := 24
+!player47.bestFoot := #RIGHT
+!player47.phoneNumber := '8901234567'
+!insert (team47, player47) into TeamPlayer
+
+!new Player('player48')
+!player48.name := 'Ash Blaze'
+!player48.age := 26
+!player48.bestFoot := #LEFT
+!player48.phoneNumber := '9801234567'
+!insert (team48, player48) into TeamPlayer
+
+!new Position('position47')
+!position47.positionName := #MIDFIELDER
+!insert (player47, position47) into PlayerPositions
+
+!new Position('position48')
+!position48.positionName := #FORWARD
+!insert (player48, position48) into PlayerPositions
+
+!new MatchPlayer('matchPlayer47')
+!matchPlayer47.booked := false
+!matchPlayer47.goals := 1
+!matchPlayer47.rating := 8
+!insert (player47, matchPlayer47) into PlayerMatch
+!insert (match24, matchPlayer47) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer48')
+!matchPlayer48.booked := true
+!matchPlayer48.goals := 1
+!matchPlayer48.rating := 7
+!insert (player48, matchPlayer48) into PlayerMatch
+!insert (match24, matchPlayer48) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition47')
+!matchPlayerPosition47.positionName := #MIDFIELDER
+!matchPlayerPosition47.number := 8
+!insert (matchPlayer47, matchPlayerPosition47) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition48')
+!matchPlayerPosition48.positionName := #FORWARD
+!matchPlayerPosition48.number := 9
+!insert (matchPlayer48, matchPlayerPosition48) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event90')
+!event90.eventType := #GOAL
+!event90.time := 25
+!insert (match24, event90) into MatchMatchEvent
+
+!new MatchEvent('event91')
+!event91.eventType := #GOAL
+!event91.time := 55
+!insert (match24, event91) into MatchMatchEvent
+
+!new MatchEvent('event92')
+!event92.eventType := #GOAL
+!event92.time := 75
+!insert (match24, event92) into MatchMatchEvent
+
+!new TrainingSession('training47')
+!training47.date := '2031-07-18'
+!training47.location := 'Raptor Nest'
+!training47.purpose := 'Agility Drills'
+!insert (team47, training47) into TeamTraining
+
+!new TrainingSession('training48')
+!training48.date := '2031-07-25'
+!training48.location := 'Hawk Perch'
+!training48.purpose := 'Finishing Techniques'
+!insert (team48, training48) into TeamTraining
+
+!new TrainingNotes('trainingNote47')
+!trainingNote47.note := 'Improved quick transitions and recovery'
+!trainingNote47.date := '2031-07-18'
+!insert (training47, trainingNote47) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote48')
+!trainingNote48.note := 'Focused on precise shooting under pressure'
+!trainingNote48.date := '2031-07-25'
+!insert (training48, trainingNote48) into TrainingTrainingNotes
+
+!new TrainingObjective('objective47')
+!objective47.areaToImprove := 'Ball Control'
+!objective47.startDate := '2031-06-01'
+!objective47.endDate := '2031-08-01'
+!objective47.success := true
+!insert (objective47, player47) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective48')
+!objective48.areaToImprove := 'Shot Accuracy'
+!objective48.startDate := '2031-06-05'
+!objective48.endDate := '2031-08-05'
+!objective48.success := false
+!insert (objective48, player48) into TrainingObjectivePlayer

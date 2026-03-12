@@ -1,0 +1,72 @@
+!new StateMachine('AirportOperations')
+!AirportOperations.name := 'AirportOperations'
+
+!new State('Landed')
+!Landed.name := 'Landed'
+
+!new State('docked')
+!docked.name := 'docked'
+
+!new State('boarding')
+!boarding.name := 'boarding'
+
+!new State('ReadyForTakeoff')
+!ReadyForTakeoff.name := 'ReadyForTakeoff'
+
+!new State('inFlight')
+!inFlight.name := 'inFlight'
+
+!new Transition('LandingToDocking')
+!LandingToDocking.name := 'Landing to Docking'
+
+!new Transition('DockingToBoarding')
+!DockingToBoarding.name := 'Docking to Boarding'
+
+!new Transition('BoardingToTakeoff')
+!BoardingToTakeoff.name := 'Boarding to ReadyForTakeoff'
+
+!new Transition('TakeoffToFlight')
+!TakeoffToFlight.name := 'ReadyForTakeoff to InFlight'
+
+!new TimeEvent('LandingTimeout')
+!LandingTimeout.time := 10
+
+!new TimeEvent('DockingTimeout')
+!DockingTimeout.time := 5
+
+!new TimeEvent('BoardingTimeout')
+!BoardingTimeout.time := 20
+
+!new TimeEvent('TakeoffTimeout')
+!TakeoffTimeout.time := 2
+
+!insert (AirportOperations, Landed) into StateMachineContainsStates
+!insert (AirportOperations, docked) into StateMachineContainsStates
+!insert (AirportOperations, boarding) into StateMachineContainsStates
+!insert (AirportOperations, ReadyForTakeoff) into StateMachineContainsStates
+!insert (AirportOperations, inFlight) into StateMachineContainsStates
+
+!insert (AirportOperations, LandingToDocking) into StateMachineContainsTransitions
+!insert (AirportOperations, DockingToBoarding) into StateMachineContainsTransitions
+!insert (AirportOperations, BoardingToTakeoff) into StateMachineContainsTransitions
+!insert (AirportOperations, TakeoffToFlight) into StateMachineContainsTransitions
+
+!insert (LandingToDocking, LandingTimeout) into TransitionContainsEvents
+!insert (DockingToBoarding, DockingTimeout) into TransitionContainsEvents
+!insert (BoardingToTakeoff, BoardingTimeout) into TransitionContainsEvents
+!insert (TakeoffToFlight, TakeoffTimeout) into TransitionContainsEvents
+
+!insert (Landed, LandingToDocking) into StateTransition
+!insert (LandingToDocking, docked) into TransitionState
+
+!insert (docked, DockingToBoarding) into StateTransition
+!insert (DockingToBoarding, boarding) into TransitionState
+
+!insert (boarding, BoardingToTakeoff) into StateTransition
+!insert (BoardingToTakeoff, ReadyForTakeoff) into TransitionState
+
+!insert (ReadyForTakeoff, TakeoffToFlight) into StateTransition
+!insert (TakeoffToFlight, inFlight) into TransitionState
+
+!insert (AirportOperations, Landed) into StateMachineStartsStates
+

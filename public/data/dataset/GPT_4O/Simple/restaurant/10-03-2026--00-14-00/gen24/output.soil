@@ -1,0 +1,114 @@
+!new Restaurant('restaurant24')
+!restaurant24.name := 'Stellar Bites'
+
+!new Owner('owner48')
+!owner48.name := 'Halley Shine'
+!owner48.percentageShares := 60
+!insert (restaurant24, owner48) into RestaurantOwner
+
+!new Owner('owner49')
+!owner49.name := 'Vega Flash'
+!owner49.percentageShares := 40
+!insert (restaurant24, owner49) into RestaurantOwner
+
+!new Table('table69')
+!table69.number := 69
+!table69.description := 'Twilight Terrace'
+!table69.capacity := 10
+
+!new Table('table70')
+!table70.number := 70
+!table70.description := 'Quantum Quarters'
+!table70.capacity := 16
+
+!new RegularCustomer('customer25')
+!customer25.name := 'Orion Ray'
+!customer25.prefferedLanguage := #Italian
+
+!new Waiter('waiter26')
+!waiter26.name := 'Sirius Swift'
+!waiter26.dateOfBirth := Date('1990-09-12')
+!waiter26.phoneNumber := '555-7777'
+!waiter26.spokenLanguage := #German
+
+!new HeadWaiter('headwaiter24')
+!headwaiter24.name := 'Celeste Gleam'
+!headwaiter24.dateOfBirth := Date('1984-05-17')
+!headwaiter24.phoneNumber := '555-9898'
+
+!insert (headwaiter24, waiter26) into HeadWaiterWaiter
+
+!new Individual('reservation45')
+!reservation45.time := Time('18:45')
+!reservation45.date := Date('2025-01-05')
+!reservation45.numberPeople := 4
+!reservation45.name := 'Orion Ray'
+!reservation45.phoneNumber := '555-2323'
+!reservation45.number := 45
+!reservation45.seating := #Inside
+!reservation45.smoking := #NonSmoking
+!insert (restaurant24, reservation45) into RestaurantReservation
+!insert (reservation45, customer25) into ReservationCustomer
+!insert (reservation45, waiter26) into ReservationWaiter
+!insert (reservation45, table69) into ReservationTable
+
+!new Banquet('reservation46')
+!reservation46.time := Time('19:30')
+!reservation46.date := Date('2025-02-15')
+!reservation46.numberPeople := 30
+!reservation46.name := 'Galactic Gathering'
+!reservation46.phoneNumber := '555-6565'
+!reservation46.number := 46
+!reservation46.groupName := 'Cosmic Collective'
+!reservation46.paymentMethod := #CreditCard
+!reservation46.busService := true
+!insert (restaurant24, reservation46) into RestaurantReservation
+!insert (reservation46, table70) into ReservationTable
+
+!new Table('tableExtra18')
+!tableExtra18.number := 71
+!tableExtra18.description := 'Nebula Nook'
+!tableExtra18.capacity := 18
+!insert (reservation46, tableExtra18) into ReservationTable
+!insert (reservation46, waiter26) into ReservationWaiter
+
+!new BusDriver('busdriver17')
+!busdriver17.name := 'Andromeda Cruz'
+!busdriver17.dateOfBirth := Date('1972-03-25')
+!busdriver17.phoneNumber := '555-4343'
+!busdriver17.driverLicenseNr := 'DL998877'
+!insert (reservation46, busdriver17) into BanquetBusDriver
+
+!new ItemOrder('itemOrder24')
+!itemOrder24.time := Time('19:00')
+!insert (reservation45, itemOrder24) into ReservationItemOrdered
+
+!new MenuItem('menuItem24')
+!menuItem24.description := 'Meteorite Meal'
+!menuItem24.prepTime := 30.0
+!menuItem24.classification := #Main
+!insert (itemOrder24, menuItem24) into ItemOrderMenuItem
+
+!new FoodItem('foodItem24')
+!foodItem24.number := 124
+!foodItem24.description := 'Grilled Vegetables and Fillet'
+!foodItem24.purchaseFlag := true
+!foodItem24.unit := #Pound
+!insert (menuItem24, foodItem24) into MenuItemFoodItem
+
+!new Allergen('allergen24')
+!allergen24.type := #Nuts
+!insert (foodItem24, allergen24) into FoodItemAllergen
+
+!new Cook('cook24')
+!cook24.name := 'Nebula Spark'
+!cook24.dateOfBirth := Date('1993-08-08')
+!cook24.phoneNumber := '555-5656'
+!cook24.yearsOfExperience := 5
+
+!new Chef('chef24')
+!chef24.name := 'Orion Blaze'
+!chef24.dateOfBirth := Date('1987-03-21')
+!chef24.phoneNumber := '555-2323'
+!insert (menuItem24, chef24) into MenuItemChef
+!insert (chef24, cook24) into ChefCook

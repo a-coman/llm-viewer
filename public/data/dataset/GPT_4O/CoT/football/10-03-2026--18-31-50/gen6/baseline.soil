@@ -1,0 +1,161 @@
+!new Club('clubBB')
+!clubBB.name := 'Buenos Aires Jaguars'
+!clubBB.homeGround := "Jaguar's Den Stadium"
+!clubBB.chairman := 'Fernando Gomez'
+
+!new Club('clubBC')
+!clubBC.name := 'Berlin Bears'
+!clubBC.homeGround := "Bear's Berlin Arena"
+!clubBC.chairman := 'Katrina Fischer'
+
+!new Team('teamBB')
+!teamBB.name := 'Buenos Aires Jaguars Pro'
+
+!new Team('teamBC')
+!teamBC.name := 'Berlin Bears Premier'
+
+!insert (clubBB, teamBB) into ClubTeam
+!insert (clubBC, teamBC) into ClubTeam
+
+!new Player('player61')
+!player61.name := 'Andrés Martinez'
+!player61.age := 31
+!player61.bestFoot := #LEFT
+!player61.phoneNumber := '+54-11-8765432'
+
+!new Player('player62')
+!player62.name := 'Tobias Keller'
+!player62.age := 23
+!player62.bestFoot := #RIGHT
+!player62.phoneNumber := '+49-30-54321987'
+
+!insert (teamBB, player61) into TeamPlayer
+!insert (teamBC, player62) into TeamPlayer
+
+!new Position('position116')
+!position116.positionName := #MIDFIELDER
+
+!new Position('position109')
+!position109.positionName := #FORWARD
+
+!insert (player61, position116) into PlayerPositions
+!insert (player62, position109) into PlayerPositions
+
+!new Competition('competition24')
+!competition24.name := 'Transatlantic League'
+!competition24.type := 'Continental League'
+
+!new Match('match31')
+!match31.date := '2023-11-25'
+!match31.homeAway := false
+
+!insert (teamBB, match31) into VisitorMatch
+!insert (teamBC, match31) into LocalMatch
+!insert (competition24, match31) into CompetitionMatch
+
+!new MatchReport('matchReport31')
+!matchReport31.duration := 90
+!matchReport31.scoreVisitor := 1
+!matchReport31.scoreLocal := 1
+
+!insert (match31, matchReport31) into MatchMatchReport
+
+!new MatchEvent('matchEvent89')
+!matchEvent89.eventType := #GOAL
+!matchEvent89.time := 10
+
+!new MatchEvent('matchEvent90')
+!matchEvent90.eventType := #GOAL
+!matchEvent90.time := 75
+
+!new MatchEvent('matchEvent91')
+!matchEvent91.eventType := #FOUL
+!matchEvent91.time := 50
+
+!insert (match31, matchEvent89) into MatchMatchEvent
+!insert (match31, matchEvent90) into MatchMatchEvent
+!insert (match31, matchEvent91) into MatchMatchEvent
+
+!new MatchNote('matchNote20')
+!matchNote20.note := 'A well-balanced game with impressive defensive setups.'
+!matchNote20.date := '2023-11-25'
+
+!insert (match31, matchNote20) into MatchMatchNote
+
+!new TrainingSession('trainingSession47')
+!trainingSession47.date := '2023-10-15'
+!trainingSession47.location := 'Jaguars Training Grounds'
+!trainingSession47.purpose := 'Developing Team Cohesion'
+
+!new TrainingSession('trainingSession48')
+!trainingSession48.date := '2023-10-17'
+!trainingSession48.location := 'Bears Training Facility'
+!trainingSession48.purpose := 'Improving Tactical Switching'
+
+!insert (teamBB, trainingSession47) into TeamTraining
+!insert (teamBC, trainingSession48) into TeamTraining
+
+!new TrainingNotes('trainingNote47')
+!trainingNote47.note := 'Conducted exercises on build-up play and positioning.'
+!trainingNote47.date := '2023-10-15'
+
+!new TrainingNotes('trainingNote48')
+!trainingNote48.note := 'Focused on adaptive strategies for opponent pressure.'
+!trainingNote48.date := '2023-10-17'
+
+!insert (trainingSession47, trainingNote47) into TrainingTrainingNotes
+!insert (trainingSession48, trainingNote48) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail20')
+!trainingFail20.reason := 'Personal Leave'
+
+!insert (trainingFail20, player62) into FailedPlayer
+!insert (trainingSession48, trainingFail20) into TrainingFailded
+
+!new TrainingObjective('trainingObjective46')
+!trainingObjective46.areaToImprove := 'Strength and Conditioning'
+!trainingObjective46.startDate := '2023-10-01'
+!trainingObjective46.endDate := '2023-11-01'
+!trainingObjective46.success := true
+
+!new TrainingObjective('trainingObjective47')
+!trainingObjective47.areaToImprove := 'Playmaking Strategy'
+!trainingObjective47.startDate := '2023-10-01'
+!trainingObjective47.endDate := '2023-11-01'
+!trainingObjective47.success := true
+
+!insert (trainingObjective46, player62) into TrainingObjectivePlayer
+!insert (trainingObjective47, player61) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote25')
+!playerNote25.note := 'Invaluable experience in orchestrating plays.'
+!playerNote25.date := '2023-09-12'
+
+!insert (player61, playerNote25) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer56')
+!matchPlayer56.booked := true
+!matchPlayer56.goals := 0
+!matchPlayer56.rating := 7
+
+!new MatchPlayer('matchPlayer57')
+!matchPlayer57.booked := false
+!matchPlayer57.goals := 1
+!matchPlayer57.rating := 8
+
+!insert (player61, matchPlayer56) into PlayerMatch
+!insert (player62, matchPlayer57) into PlayerMatch
+
+!insert (match31, matchPlayer56) into MatchMatchPlayer
+!insert (match31, matchPlayer57) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp56')
+!mpp56.positionName := #MIDFIELDER
+!mpp56.number := 5
+
+!new MatchPlayerPosition('mpp57')
+!mpp57.positionName := #FORWARD
+!mpp57.number := 9
+
+!insert (matchPlayer56, mpp56) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer57, mpp57) into MatchPlayerMatchPlayerPosition

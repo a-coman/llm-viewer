@@ -1,0 +1,36 @@
+!new Booking('booking10')
+!booking10.startDate := '2024-08-15'
+!booking10.endDate := '2024-08-20'
+!booking10.canceled := false
+!booking10.bookingId := 110
+!booking10.confirmed := true
+
+!new Bill('bill10')
+!bill10.price := 600.00
+!bill10.billId := 5010
+
+!new Customer('customer10')
+!customer10.firstName := 'Jack'
+!customer10.lastName := 'King'
+
+!new RoomReservation('reservation10')
+!reservation10.checkInDate := '2024-08-15'
+!reservation10.checkOutDate := '2024-08-20'
+
+!new Room('room701')
+!room701.numBeds := 2
+!room701.pricePerNight := 130.00
+!room701.occupied := true
+!room701.blocked := false
+!room701.roomNumber := 701
+
+!new RoomExtra('extra13')
+!extra13.price := 35.00
+!extra13.description := 'Dinner Voucher'
+
+!insert (booking10, bill10) into BookingBill
+!insert (booking10, customer10) into BookingCustomer
+!insert (booking10, reservation10) into BookingRoomReservation
+!insert (reservation10, extra13) into RoomReservationExtras
+!insert (reservation10, room701) into RoomReservationRoom
+!insert (bill10, reservation10) into BillRoomReservation

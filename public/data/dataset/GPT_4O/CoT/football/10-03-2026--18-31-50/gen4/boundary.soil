@@ -1,0 +1,187 @@
+!new Club('clubAL')
+!clubAL.name := 'Urban Rhinos FC'
+!clubAL.homeGround := 'Metropolitan Dome'
+!clubAL.chairman := 'Clara Torres'
+
+!new Club('clubAM')
+!clubAM.name := 'Desert Falcons'
+!clubAM.homeGround := 'Arid Plains Arena'
+!clubAM.chairman := 'Zubair Rashid'
+
+!new Team('teamAL')
+!teamAL.name := 'City Slickers'
+
+!new Team('teamAM')
+!teamAM.name := 'Oasis Strikers'
+
+!insert (clubAL, teamAL) into ClubTeam
+!insert (clubAM, teamAM) into ClubTeam
+
+!new Player('player42')
+!player42.name := 'Julian Vargas'
+!player42.age := 26
+!player42.bestFoot := #BOTH
+!player42.phoneNumber := '+441234567890'
+
+!new Player('player43')
+!player43.name := 'Aisha Nasir'
+!player43.age := 21
+!player43.bestFoot := #LEFT
+!player43.phoneNumber := '+971567890123'
+
+!insert (teamAL, player42) into TeamPlayer
+!insert (teamAM, player43) into TeamPlayer
+
+!new Position('position97')
+!position97.positionName := #DEFENDER
+
+!new Position('position94')
+!position94.positionName := #GOALKEEPER
+
+!insert (player42, position97) into PlayerPositions
+!insert (player43, position94) into PlayerPositions
+
+!new TrainingSession('trainingSession33')
+!trainingSession33.date := '2023-09-20'
+!trainingSession33.location := 'Downtown Sports Complex'
+!trainingSession33.purpose := 'Strategy Planning and Analysis'
+
+!new TrainingSession('trainingSession34')
+!trainingSession34.date := '2023-09-21'
+!trainingSession34.location := 'Arid Plains Arena'
+!trainingSession34.purpose := 'Extreme Weather Adaptation'
+
+!insert (teamAL, trainingSession33) into TeamTraining
+!insert (teamAM, trainingSession34) into TeamTraining
+
+!new TrainingNotes('trainingNote33')
+!trainingNote33.note := 'Emphasis on defensive formations and counter-attacks.'
+!trainingNote33.date := '2023-09-20'
+
+!new TrainingNotes('trainingNote34')
+!trainingNote34.note := 'Adaptation to high temperatures and tactical drills.'
+!trainingNote34.date := '2023-09-21'
+
+!insert (trainingSession33, trainingNote33) into TrainingTrainingNotes
+!insert (trainingSession34, trainingNote34) into TrainingTrainingNotes
+
+!new Competition('competition17')
+!competition17.name := 'Global City Cup'
+!competition17.type := 'League'
+
+!new Match('match20')
+!match20.date := '2023-09-25'
+!match20.homeAway := false
+
+!insert (teamAL, match20) into LocalMatch
+!insert (teamAM, match20) into VisitorMatch
+!insert (competition17, match20) into CompetitionMatch
+
+!new MatchEvent('matchEvent55')
+!matchEvent55.eventType := #GOAL
+!matchEvent55.time := 23
+
+!new MatchEvent('matchEvent56')
+!matchEvent56.eventType := #GOAL
+!matchEvent56.time := 45
+
+!new MatchEvent('matchEvent57')
+!matchEvent57.eventType := #GOAL
+!matchEvent57.time := 67
+
+!new MatchEvent('matchEvent58')
+!matchEvent58.eventType := #FOUL
+!matchEvent58.time := 58
+
+!insert (match20, matchEvent55) into MatchMatchEvent
+!insert (match20, matchEvent56) into MatchMatchEvent
+!insert (match20, matchEvent57) into MatchMatchEvent
+!insert (match20, matchEvent58) into MatchMatchEvent
+
+!new MatchReport('matchReport20')
+!matchReport20.duration := 90
+!matchReport20.scoreVisitor := 0
+!matchReport20.scoreLocal := 3
+
+!insert (match20, matchReport20) into MatchMatchReport
+
+!new MatchNote('matchNote13')
+!matchNote13.note := 'City Slickers maintained strong midfield control throughout the game.'
+!matchNote13.date := '2023-09-25'
+
+!insert (match20, matchNote13) into MatchMatchNote
+
+!new Match('match21')
+!match21.date := '2023-10-15'
+!match21.homeAway := true
+
+!insert (teamAM, match21) into LocalMatch
+!insert (teamAL, match21) into VisitorMatch
+!insert (competition17, match21) into CompetitionMatch
+
+!new MatchEvent('matchEvent59')
+!matchEvent59.eventType := #GOAL
+!matchEvent59.time := 77
+
+!insert (match21, matchEvent59) into MatchMatchEvent
+
+!new MatchReport('matchReport21')
+!matchReport21.duration := 90
+!matchReport21.scoreVisitor := 1
+!matchReport21.scoreLocal := 0
+
+!insert (match21, matchReport21) into MatchMatchReport
+
+!new MatchNote('matchNote14')
+!matchNote14.note := 'Oasis Strikers\' defense suffered due to unexpected heatwaves.'
+!matchNote14.date := '2023-10-15'
+
+!insert (match21, matchNote14) into MatchMatchNote
+
+!new PlayerNotes('playerNote18')
+!playerNote18.note := 'Needs to work on aerial duels.'
+!playerNote18.date := '2023-07-01'
+
+!insert (player42, playerNote18) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer37')
+!matchPlayer37.booked := true
+!matchPlayer37.goals := 0
+!matchPlayer37.rating := 7
+
+!new MatchPlayer('matchPlayer38')
+!matchPlayer38.booked := false
+!matchPlayer38.goals := 0
+!matchPlayer38.rating := 9
+
+!insert (player42, matchPlayer37) into PlayerMatch
+!insert (player43, matchPlayer38) into PlayerMatch
+
+!insert (match20, matchPlayer37) into MatchMatchPlayer
+!insert (match21, matchPlayer38) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position98')
+!position98.positionName := #DEFENDER
+!position98.number := 4
+
+!new MatchPlayerPosition('position99')
+!position99.positionName := #GOALKEEPER
+!position99.number := 1
+
+!insert (matchPlayer37, position98) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer38, position99) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective32')
+!trainingObjective32.areaToImprove := 'Improve Defensive Coordination'
+!trainingObjective32.startDate := '2023-08-01'
+!trainingObjective32.endDate := '2023-09-01'
+!trainingObjective32.success := true
+
+!new TrainingObjective('trainingObjective33')
+!trainingObjective33.areaToImprove := 'Enhance Goalkeeping Skills'
+!trainingObjective33.startDate := '2023-08-01'
+!trainingObjective33.endDate := '2023-09-01'
+!trainingObjective33.success := true
+
+!insert (trainingObjective32, player42) into TrainingObjectivePlayer
+!insert (trainingObjective33, player43) into TrainingObjectivePlayer

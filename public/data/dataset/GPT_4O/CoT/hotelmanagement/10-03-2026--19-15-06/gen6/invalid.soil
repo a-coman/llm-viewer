@@ -1,0 +1,108 @@
+!new Customer('customer30')
+!customer30.firstName := 'Ana'
+!customer30.lastName := 'Gómez'
+
+!new Booking('booking29')
+!booking29.startDate := '2024-09-10'
+!booking29.endDate := '2024-09-17'
+!booking29.canceled := false
+!booking29.bookingId := 6006
+!booking29.confirmed := true
+
+!new RoomReservation('roomReservation29_1')
+!roomReservation29_1.checkInDate := '2024-09-10'
+!roomReservation29_1.checkOutDate := '2024-09-17'
+
+!new RoomReservation('roomReservation29_2')
+!roomReservation29_2.checkInDate := '2024-09-10'
+!roomReservation29_2.checkOutDate := '2024-09-17'
+
+!new RoomReservation('roomReservation29_3')
+!roomReservation29_3.checkInDate := '2024-09-10'
+!roomReservation29_3.checkOutDate := '2024-09-17'
+
+!new Room('room29_6101')
+!room29_6101.numBeds := 2
+!room29_6101.pricePerNight := 150.0
+!room29_6101.occupied := true
+!room29_6101.blocked := false
+!room29_6101.roomNumber := 6101
+
+!new Room('room29_6102')
+!room29_6102.numBeds := 2
+!room29_6102.pricePerNight := 150.0
+!room29_6102.occupied := true
+!room29_6102.blocked := false
+!room29_6102.roomNumber := 6102
+
+!new Room('room29_6201')
+!room29_6201.numBeds := 2
+!room29_6201.pricePerNight := 180.0
+!room29_6201.occupied := true
+!room29_6201.blocked := false
+!room29_6201.roomNumber := 6201
+
+!new Room('room29_6202')
+!room29_6202.numBeds := 2
+!room29_6202.pricePerNight := 180.0
+!room29_6202.occupied := true
+!room29_6202.blocked := false
+!room29_6202.roomNumber := 6202
+
+!new Room('room29_6301')
+!room29_6301.numBeds := 4
+!room29_6301.pricePerNight := 50.0
+!room29_6301.occupied := true
+!room29_6301.blocked := false
+!room29_6301.roomNumber := 6301
+
+!new Bill('bill56')
+!bill56.price := 5400.0
+!bill56.billId := 1001
+
+!new Bill('bill57')
+!bill57.price := 6400.0
+!bill57.billId := 1002
+
+!new Bill('bill58')
+!bill58.price := 1500.0
+!bill58.billId := 1003
+
+!new RoomExtra('extra29_1')
+!extra29_1.price := 100.0
+!extra29_1.description := 'Biodegradable Amenities Kit'
+
+!new RoomExtra('extra29_2')
+!extra29_2.price := 75.0
+!extra29_2.description := 'Zero-Waste Meal Plan'
+
+!new FreeRoomTypesDTO('freeRoomType24')
+!freeRoomType24.roomTypeDescription := 'Eco Cabin'
+!freeRoomType24.numBeds := 2
+!freeRoomType24.pricePerNight := 150.0
+!freeRoomType24.numFreeRooms := 6
+
+!insert (booking29, customer30) into BookingCustomer
+
+!insert (booking29, roomReservation29_1) into BookingRoomReservation
+!insert (booking29, roomReservation29_2) into BookingRoomReservation
+!insert (booking29, roomReservation29_3) into BookingRoomReservation
+
+!insert (booking29, bill56) into BookingBill
+!insert (booking29, bill57) into BookingBill
+!insert (booking29, bill58) into BookingBill
+
+!insert (roomReservation29_1, room29_6101) into RoomReservationRoom
+!insert (roomReservation29_1, room29_6102) into RoomReservationRoom
+
+!insert (roomReservation29_2, room29_6201) into RoomReservationRoom
+!insert (roomReservation29_2, room29_6202) into RoomReservationRoom
+
+!insert (roomReservation29_3, room29_6301) into RoomReservationRoom
+
+!insert (roomReservation29_1, extra29_1) into RoomReservationExtras
+!insert (roomReservation29_2, extra29_2) into RoomReservationExtras
+
+!insert (bill56, roomReservation29_1) into BillRoomReservation
+!insert (bill57, roomReservation29_2) into BillRoomReservation
+!insert (bill58, roomReservation29_3) into BillRoomReservation

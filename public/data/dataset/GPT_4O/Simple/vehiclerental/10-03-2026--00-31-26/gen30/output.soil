@@ -1,0 +1,70 @@
+!new RentalOffice('office30')
+!office30.name := 'Eastern Rentals'
+!office30.number := 3030
+!office30.address := '200 Sunrise Ave, New York, NY'
+
+!new Truck('truck59')
+!truck59.id := 559
+!truck59.registrationState := #FL
+!truck59.licensePlateNumber := 'FL-TRK-2255'
+!truck59.vehicleTypeCode := #TRUCK10
+!truck59.registrationLastMaintenanceDate := Date('2023-05-07')
+!truck59.expirationDate := Date('2024-05-07')
+!truck59.odometerReading := 15500
+!truck59.gasTankCapacity := 27.5
+!truck59.workingRadio := true
+!truck59.mileage := 21
+
+!new Individual('individual30')
+!individual30.name := 'Grace Morgan'
+!individual30.address := '876 Broadway St, Brooklyn, NY'
+!individual30.poorRisk := false
+!individual30.homePhone := '555-4567'
+!individual30.driverLicenseState := #FL
+!individual30.driverLicenseNumber := 25366548
+!individual30.driverLicenseExpirationDate := Date('2026-03-15')
+
+!new RentalAgreement('agreement59')
+!agreement59.number := 3059
+!agreement59.rentalDate := Date('2023-12-12')
+!agreement59.anticipatedDuration := 5
+!agreement59.depositPaid := 230.0
+!agreement59.quotedDailyRate := 65.00
+!agreement59.quotedRatePerMile := 0.56
+
+!new Truck('truck60')
+!truck60.id := 560
+!truck60.registrationState := #AK
+!truck60.licensePlateNumber := 'AK-TRK-3345'
+!truck60.vehicleTypeCode := #TRUCK24
+!truck60.registrationLastMaintenanceDate := Date('2023-10-22')
+!truck60.expirationDate := Date('2025-10-22')
+!truck60.odometerReading := 17000
+!truck60.gasTankCapacity := 34.5
+!truck60.workingRadio := false
+!truck60.mileage := 23
+
+!new Company('company30')
+!company30.name := 'Swift Cargo'
+!company30.address := '543 Enterprise Blvd, Albany, NY'
+!company30.poorRisk := true
+!company30.idNumber := 982134
+
+!new RentalAgreement('agreement60')
+!agreement60.number := 3060
+!agreement60.rentalDate := Date('2023-12-30')
+!agreement60.anticipatedDuration := 12
+!agreement60.depositPaid := 520.0
+!agreement60.quotedDailyRate := 85.00
+!agreement60.quotedRatePerMile := 0.68
+
+!insert (office30, truck59) into RentalOfficeVehicle
+!insert (office30, truck60) into RentalOfficeVehicle
+!insert (office30, agreement59) into RentalOfficeRentalAgreementOrigin
+!insert (office30, agreement59) into RentalOfficeRentalAgreementDrop
+!insert (office30, agreement60) into RentalOfficeRentalAgreementOrigin
+!insert (office30, agreement60) into RentalOfficeRentalAgreementDrop
+!insert (agreement59, truck59) into RentalAgreementVehicle
+!insert (agreement59, individual30) into RentalAgreementCustomer
+!insert (agreement60, truck60) into RentalAgreementVehicle
+!insert (agreement60, company30) into RentalAgreementCustomer

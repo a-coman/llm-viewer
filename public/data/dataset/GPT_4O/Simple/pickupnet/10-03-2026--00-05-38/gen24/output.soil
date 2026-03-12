@@ -1,0 +1,64 @@
+!new Driver('driver44')
+!driver44.id := 'D044'
+!driver44.name := 'Carol Danvers'
+
+!new Driver('driver45')
+!driver45.id := 'D045'
+!driver45.name := 'Yon-Rogg'
+
+!new Shipment('shipment47')
+!shipment47.id := 'SHP12391'
+!shipment47.status := #NEW
+
+!new Shipment('shipment48')
+!shipment48.id := 'SHP12392'
+!shipment48.status := #UNDERWAY
+
+!new Address('address47')
+!address47.text := '4545 Alpha Flight Blvd, Space Station'
+
+!new Address('address48')
+!address48.text := '4646 Kree Command St, Hala Prime'
+
+!new GeoLocation('geoLocation47')
+!geoLocation47.latitude := 48.8566
+!geoLocation47.longitude := 2.3522
+
+!new GeoLocation('geoLocation48')
+!geoLocation48.latitude := 41.9028
+!geoLocation48.longitude := 12.4964
+
+!insert (address47, geoLocation47) into AddressContainsGeoLocation
+!insert (address48, geoLocation48) into AddressContainsGeoLocation
+
+!new Customer('customer47')
+!customer47.id := 'CUST047'
+!customer47.name := 'Talos'
+!customer47.twitterUserName := '@skrullspy'
+
+!new Customer('customer48')
+!customer48.id := 'CUST048'
+!customer48.name := 'Minn-Erva'
+!customer48.twitterUserName := '@kreeelite'
+
+!new Station('station24')
+
+!insert (station24, customer47) into StationContainsCustomer
+!insert (station24, customer48) into StationContainsCustomer
+
+!insert (station24, shipment47) into StationShipment
+!insert (station24, shipment48) into StationShipment
+
+!insert (station24, driver44) into StationContainsDriver
+!insert (station24, driver45) into StationContainsDriver
+
+!insert (shipment47, address47) into ShipmentContainsPickUpAddress
+!insert (shipment47, address48) into ShipmentContainsDeliveryAddress
+
+!insert (shipment48, address48) into ShipmentContainsPickUpAddress
+!insert (shipment48, address47) into ShipmentContainsDeliveryAddress
+
+!insert (customer47, shipment47) into CustomerConsistsOfShipment
+!insert (customer48, shipment48) into CustomerConsistsOfShipment
+
+!insert (driver44, shipment48) into DriverShipment

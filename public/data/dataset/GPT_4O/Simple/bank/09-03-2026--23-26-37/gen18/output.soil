@@ -1,0 +1,50 @@
+!new Bank('bank35')
+!bank35.country := 'Ireland'
+!bank35.name := 'Allied Irish Banks'
+!bank35.bic := 'AIBKIE2D'
+
+!new Bank('bank36')
+!bank36.country := 'China'
+!bank36.name := 'Industrial and Commercial Bank of China'
+!bank36.bic := 'ICBKCNBJ'
+
+!new Account('account52')
+!account52.iban := 'IE29AIBK93115212345678'
+!account52.balance := 7800
+
+!new Account('account53')
+!account53.iban := 'CN10223344556677889900'
+!account53.balance := 1500
+
+!new Account('account54')
+!account54.iban := 'IE29AIBK93115212345679'
+!account54.balance := 300
+
+!new Person('person52')
+!person52.firstName := 'Sean'
+!person52.lastName := 'Murphy'
+!person52.age := 38
+
+!new Person('person53')
+!person53.firstName := 'Lian'
+!person53.lastName := 'Zhang'
+!person53.age := 44
+
+!new Person('person54')
+!person54.firstName := 'Fiona'
+!person54.lastName := 'O\'Brien'
+!person54.age := 29
+
+!insert (person52, account52) into Ownership
+!insert (person53, account53) into Ownership
+!insert (person54, account54) into Ownership
+!insert (person52, account54) into Ownership
+
+!insert (person52, account52) into Use
+!insert (person53, account53) into Use
+!insert (person54, account54) into Use
+!insert (person53, account52) into Use
+
+!insert (bank35, account52) into AccountOfBanks
+!insert (bank36, account53) into AccountOfBanks
+!insert (bank35, account54) into AccountOfBanks

@@ -1,0 +1,133 @@
+!new AddressBook('GlobalLegalNetworkDirectory')
+
+!new Company('MeyerAndChang')
+!MeyerAndChang.name := 'Meyer & Chang Legal Advisors'
+!MeyerAndChang.phone := '+61-2-90348888'
+!MeyerAndChang.website := 'www.meyerchanglaw.au'
+!MeyerAndChang.email := 'contact@meyerchanglaw.au'
+!MeyerAndChang.industry := 'Legal Services'
+
+!new Address('MeyerAndChangAddress')
+!MeyerAndChangAddress.city := 'Sydney'
+!MeyerAndChangAddress.houseNr := '23'
+!MeyerAndChangAddress.street := 'Barrister Lane'
+!insert (MeyerAndChang, MeyerAndChangAddress) into ContactContainsAddress
+
+!new Note('MeyerAndChangNote1')
+!MeyerAndChangNote1.author := 'Justine Meyer'
+!MeyerAndChangNote1.time := Date('2023-07-02T09:00:00')
+!MeyerAndChangNote1.type := #MEETING
+!MeyerAndChangNote1.comment := 'Discussed merger with Lin & Partners.'
+!insert (MeyerAndChang, MeyerAndChangNote1) into ContactContainsNote
+
+!new Company('LinAndPartners')
+!LinAndPartners.name := 'Lin & Partners'
+!LinAndPartners.phone := '+852-25387890'
+!LinAndPartners.website := 'www.linpartners.hk'
+!LinAndPartners.email := 'contact@linpartners.hk'
+!LinAndPartners.industry := 'Corporate Advisory'
+
+!new Address('LinAndPartnersAddress')
+!LinAndPartnersAddress.city := 'Hong Kong'
+!LinAndPartnersAddress.houseNr := '88'
+!LinAndPartnersAddress.street := 'Financial Plaza'
+!insert (LinAndPartners, LinAndPartnersAddress) into ContactContainsAddress
+
+!new Note('LinAndPartnersNote1')
+!LinAndPartnersNote1.author := 'Zheng Lin'
+!LinAndPartnersNote1.time := Date('2023-08-12T10:30:00')
+!LinAndPartnersNote1.type := #EMAIL
+!LinAndPartnersNote1.comment := 'Strategic partnership proposal with Meyer & Chang.'
+!insert (LinAndPartners, LinAndPartnersNote1) into ContactContainsNote
+
+!new Person('ProfRaphaelTaylor')
+!ProfRaphaelTaylor.name := 'Prof. Raphael Taylor'
+!ProfRaphaelTaylor.phone := '+44-20-78594567'
+!ProfRaphaelTaylor.website := 'www.taylorlegalresearch.org'
+!ProfRaphaelTaylor.email := 'r.taylor@edu.ac.uk'
+!ProfRaphaelTaylor.title := 'Head of International Law Division'
+
+!new Address('RaphaelTaylorAddress')
+!RaphaelTaylorAddress.city := 'London'
+!RaphaelTaylorAddress.houseNr := '15'
+!RaphaelTaylorAddress.street := 'Legal Research Avenue'
+!insert (ProfRaphaelTaylor, RaphaelTaylorAddress) into ContactContainsAddress
+
+!new Note('RaphaelTaylorNote1')
+!RaphaelTaylorNote1.author := 'Prof. Raphael Taylor'
+!RaphaelTaylorNote1.time := Date('2023-06-20T14:00:00')
+!RaphaelTaylorNote1.type := #MEETING
+!RaphaelTaylorNote1.comment := 'Attended international law convention in Geneva.'
+!insert (ProfRaphaelTaylor, RaphaelTaylorNote1) into ContactContainsNote
+
+!new Note('RaphaelTaylorNote2')
+!RaphaelTaylorNote2.author := 'Prof. Raphael Taylor'
+!RaphaelTaylorNote2.time := Date('2023-05-19T11:45:00')
+!RaphaelTaylorNote2.type := #CALL
+!RaphaelTaylorNote2.comment := 'Conference call on regulatory compliance with EU partners.'
+!insert (ProfRaphaelTaylor, RaphaelTaylorNote2) into ContactContainsNote
+
+!new Person('AlexanderDavis')
+!AlexanderDavis.name := 'Alexander Davis'
+!AlexanderDavis.phone := '+1-212-5550987'
+!AlexanderDavis.website := 'www.davislegaladvisor.com'
+!AlexanderDavis.email := 'alex.davis@law.com'
+!AlexanderDavis.title := 'Senior Corporate Counsel'
+
+!new Address('AlexanderDavisAddress')
+!AlexanderDavisAddress.city := 'New York'
+!AlexanderDavisAddress.houseNr := '101'
+!AlexanderDavisAddress.street := 'Madison Avenue'
+!insert (AlexanderDavis, AlexanderDavisAddress) into ContactContainsAddress
+
+!new Note('AlexanderDavisNote1')
+!AlexanderDavisNote1.author := 'Alexander Davis'
+!AlexanderDavisNote1.time := Date('2023-07-15T16:30:00')
+!AlexanderDavisNote1.type := #MEETING
+!AlexanderDavisNote1.comment := 'New York office quarterly review.'
+!insert (AlexanderDavis, AlexanderDavisNote1) into ContactContainsNote
+
+!new Relationship('MeyerToLinCoworker')
+!MeyerToLinCoworker.type := #COWORKER
+!insert (MeyerToLinCoworker, LinAndPartners) into RelationshipToContact
+!insert (MeyerAndChang, MeyerToLinCoworker) into ContactToRelationship
+
+!new Relationship('MeyerToRaphaelSubdivision')
+!MeyerToRaphaelSubdivision.type := #SUBDIVISION
+!insert (MeyerToRaphaelSubdivision, ProfRaphaelTaylor) into RelationshipToContact
+!insert (MeyerAndChang, MeyerToRaphaelSubdivision) into ContactToRelationship
+
+!new Relationship('LinToMeyerCoworker')
+!LinToMeyerCoworker.type := #COWORKER
+!insert (LinToMeyerCoworker, MeyerAndChang) into RelationshipToContact
+!insert (LinAndPartners, LinToMeyerCoworker) into ContactToRelationship
+
+!new Relationship('LinToRaphaelBoss')
+!LinToRaphaelBoss.type := #BOSS
+!insert (LinToRaphaelBoss, ProfRaphaelTaylor) into RelationshipToContact
+!insert (LinAndPartners, LinToRaphaelBoss) into ContactToRelationship
+
+!new Relationship('RaphaelToMeyerSubdivision')
+!RaphaelToMeyerSubdivision.type := #SUBDIVISION
+!insert (RaphaelToMeyerSubdivision, MeyerAndChang) into RelationshipToContact
+!insert (ProfRaphaelTaylor, RaphaelToMeyerSubdivision) into ContactToRelationship
+
+!new Relationship('RaphaelToLinEmployee')
+!RaphaelToLinEmployee.type := #EMPLOYEE
+!insert (RaphaelToLinEmployee, LinAndPartners) into RelationshipToContact
+!insert (ProfRaphaelTaylor, RaphaelToLinEmployee) into ContactToRelationship
+
+!new Relationship('AlexToLinCoworker')
+!AlexToLinCoworker.type := #COWORKER
+!insert (AlexToLinCoworker, LinAndPartners) into RelationshipToContact
+!insert (AlexanderDavis, AlexToLinCoworker) into ContactToRelationship
+
+!new Relationship('AlexToRaphaelSubdivision')
+!AlexToRaphaelSubdivision.type := #SUBDIVISION
+!insert (AlexToRaphaelSubdivision, ProfRaphaelTaylor) into RelationshipToContact
+!insert (AlexanderDavis, AlexToRaphaelSubdivision) into ContactToRelationship
+
+!insert (GlobalLegalNetworkDirectory, MeyerAndChang) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, LinAndPartners) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, ProfRaphaelTaylor) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, AlexanderDavis) into AddressBookMadeOfContact

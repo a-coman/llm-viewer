@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency17')
+!currency17.name := 'Russian Ruble'
+!currency17.abbreviation := 'RUB'
+
+-- Creating instances of Bills
+!new Bill('bill41')
+!bill41.amount := 2000.00
+!bill41.category := 'Supply Chain Management'
+!bill41.date := Date('2023-08-20')
+!bill41.paymentMethod := #CASH
+!bill41.status := #DRAFT
+!insert (bill41, currency17) into BillCurrency
+
+!new Bill('bill42')
+!bill42.amount := 800.00
+!bill42.category := 'Logistics'
+!bill42.date := Date('2023-08-22')
+!bill42.paymentMethod := #CHECK
+!bill42.status := #VERIFIED
+!insert (bill42, currency17) into BillCurrency
+
+!new Bill('bill43')
+!bill43.amount := 700.00
+!bill43.category := 'Packaging'
+!bill43.date := Date('2023-08-25')
+!bill43.paymentMethod := #CREDIT_CARD
+!bill43.status := #REFUSED
+!insert (bill43, currency17) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment20')
+!comment20.text := 'Expenses associated with supply chain management and logistics.'
+
+-- Creating instance of Expense
+!new Expense('expense17')
+!expense17.amount := 3500.00
+!expense17.startDate := Date('2023-08-20')
+!expense17.endDate := Date('2023-08-30')
+!insert (expense17, bill41) into ExpenseContainsBills
+!insert (expense17, bill42) into ExpenseContainsBills
+!insert (expense17, bill43) into ExpenseContainsBills
+!insert (expense17, comment20) into ExpenseComment

@@ -1,0 +1,119 @@
+!new Driver('driver22')
+!driver22.id := 'DRV005'
+!driver22.name := 'Lucy Wang'
+
+!new Driver('driver23')
+!driver23.id := 'DRV006'
+!driver23.name := 'Amir Khan'
+
+!new Customer('customer18')
+!customer18.id := 'CUST006'
+!customer18.name := 'Nguyen Van'
+!customer18.twitterUserName := '@nguyen_van_vn'
+
+!new Customer('customer19')
+!customer19.id := 'CUST007'
+!customer19.name := 'Ethan Brown'
+!customer19.twitterUserName := '@ethan_b_aus'
+
+!new Customer('customer20')
+!customer20.id := 'CUST008'
+!customer20.name := 'Aiko Suzuki'
+!customer20.twitterUserName := '@aiko_jpn'
+
+!new Address('address47')
+!address47.text := '123 Collins St, Melbourne, Australia'
+
+!new GeoLocation('geoLocation47')
+!geoLocation47.latitude := -37.813629
+!geoLocation47.longitude := 144.963058
+
+!insert (address47, geoLocation47) into AddressContainsGeoLocation
+
+!new Address('address48')
+!address48.text := 'Yasaka Shrine, Higashiyama, Kyoto, Japan'
+
+!new GeoLocation('geoLocation48')
+!geoLocation48.latitude := 35.00340
+!geoLocation48.longitude := 135.77505
+
+!insert (address48, geoLocation48) into AddressContainsGeoLocation
+
+!new Address('address49')
+!address49.text := 'Nguyen Hue St, District 1, Ho Chi Minh City, Vietnam'
+
+!new GeoLocation('geoLocation49')
+!geoLocation49.latitude := 10.77584
+!geoLocation49.longitude := 106.700457
+
+!insert (address49, geoLocation49) into AddressContainsGeoLocation
+
+!new Address('address50')
+!address50.text := 'Kowloon Bay, Hong Kong'
+
+!new GeoLocation('geoLocation50')
+!geoLocation50.latitude := 22.3129
+!geoLocation50.longitude := 114.2258
+
+!insert (address50, geoLocation50) into AddressContainsGeoLocation
+
+!new Address('address51')
+!address51.text := 'Sapporo Station, Kita, Sapporo, Japan'
+
+!new GeoLocation('geoLocation51')
+!geoLocation51.latitude := 43.0679
+!geoLocation51.longitude := 141.3508
+
+!insert (address51, geoLocation51) into AddressContainsGeoLocation
+
+!new Address('address52')
+!address52.text := 'Sydney Opera House, Sydney, Australia'
+
+!new GeoLocation('geoLocation52')
+!geoLocation52.latitude := -33.8568
+!geoLocation52.longitude := 151.2153
+
+!insert (address52, geoLocation52) into AddressContainsGeoLocation
+
+!new Shipment('shipment25')
+!shipment25.id := 'SHIP006'
+!shipment25.status := #DELIVERED
+
+!insert (shipment25, address47) into ShipmentContainsPickUpAddress
+!insert (shipment25, address48) into ShipmentContainsDeliveryAddress
+
+!insert (customer19, shipment25) into CustomerConsistsOfShipment
+!insert (driver22, shipment25) into DriverShipment
+
+!new Shipment('shipment26')
+!shipment26.id := 'SHIP007'
+!shipment26.status := #NEW
+
+!insert (shipment26, address49) into ShipmentContainsPickUpAddress
+!insert (shipment26, address50) into ShipmentContainsDeliveryAddress
+
+!insert (customer18, shipment26) into CustomerConsistsOfShipment
+
+!new Shipment('shipment27')
+!shipment27.id := 'SHIP008'
+!shipment27.status := #ASSIGNED
+
+!insert (shipment27, address51) into ShipmentContainsPickUpAddress
+!insert (shipment27, address52) into ShipmentContainsDeliveryAddress
+
+!insert (customer20, shipment27) into CustomerConsistsOfShipment
+!insert (driver23, shipment27) into DriverShipment
+
+!new Station('station18')
+!insert (station18, customer19) into StationContainsCustomer
+!insert (station18, driver22) into StationContainsDriver
+!insert (station18, shipment25) into StationShipment
+
+!new Station('station19')
+!insert (station19, customer18) into StationContainsCustomer
+!insert (station19, shipment26) into StationShipment
+
+!new Station('station20')
+!insert (station20, customer20) into StationContainsCustomer
+!insert (station20, driver23) into StationContainsDriver
+!insert (station20, shipment27) into StationShipment

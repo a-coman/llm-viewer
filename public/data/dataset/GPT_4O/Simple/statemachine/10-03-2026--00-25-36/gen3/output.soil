@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine4')
+!stateMachine4.name := 'trafficControlSystem'
+
+!new State('state8')
+!state8.name := 'red'
+
+!new State('state9')
+!state9.name := 'green'
+
+!new State('state10')
+!state10.name := 'yellow'
+
+!new Transition('transition8')
+!transition8.name := 'switchToGreen'
+
+!new Transition('transition9')
+!transition9.name := 'switchToYellow'
+
+!new Transition('transition10')
+!transition10.name := 'switchToRed'
+
+!new TimeEvent('timeEvent8')
+!timeEvent8.time := 30
+
+!new TimeEvent('timeEvent9')
+!timeEvent9.time := 5
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 60
+
+!insert (stateMachine4, state8) into StateMachineContainsStates
+!insert (stateMachine4, state9) into StateMachineContainsStates
+!insert (stateMachine4, state10) into StateMachineContainsStates
+
+!insert (stateMachine4, transition8) into StateMachineContainsTransitions
+!insert (stateMachine4, transition9) into StateMachineContainsTransitions
+!insert (stateMachine4, transition10) into StateMachineContainsTransitions
+
+!insert (transition8, timeEvent8) into TransitionContainsEvents
+!insert (transition9, timeEvent9) into TransitionContainsEvents
+!insert (transition10, timeEvent10) into TransitionContainsEvents
+
+!insert (state8, transition8) into StateTransition
+!insert (transition8, state9) into TransitionState
+
+!insert (state9, transition9) into StateTransition
+!insert (transition9, state10) into TransitionState
+
+!insert (state10, transition10) into StateTransition
+!insert (transition10, state8) into TransitionState
+
+!insert (stateMachine4, state8) into StateMachineStartsStates

@@ -1,0 +1,176 @@
+!new Restaurant('restaurant27')
+!restaurant27.name := 'The Harmony Bistro'
+
+!new Owner('owner56')
+!owner56.name := 'Amelie Dubois'
+!owner56.percentageShares := 40
+
+!new Owner('owner57')
+!owner57.name := 'Rajesh Chandran'
+!owner57.percentageShares := 30
+
+!new Owner('owner58')
+!owner58.name := 'Hannah Müller'
+!owner58.percentageShares := 30
+
+!insert (restaurant27, owner56) into RestaurantOwner
+!insert (restaurant27, owner57) into RestaurantOwner
+!insert (restaurant27, owner58) into RestaurantOwner
+
+!new Chef('chef32')
+!chef32.name := 'Miguel Santiago'
+!chef32.dateOfBirth := Date('1972-01-01')        -- Arbitrary date of birth
+!chef32.phoneNumber := '9876543210'              -- Arbitrary phone number
+
+!new Cook('cook37')
+!cook37.name := 'Mei Lin'
+!cook37.dateOfBirth := Date('1990-01-01')        -- Arbitrary date of birth
+!cook37.phoneNumber := '2345678901'              -- Arbitrary phone number
+!cook37.yearsOfExperience := 5
+
+!new Cook('cook38')
+!cook38.name := 'Liam O\'Brien'
+!cook38.dateOfBirth := Date('1995-01-01')        -- Arbitrary date of birth
+!cook38.phoneNumber := '3456789012'              -- Arbitrary phone number
+!cook38.yearsOfExperience := 2
+
+!insert (chef32, cook37) into ChefCook
+!insert (chef32, cook38) into ChefCook
+
+!new Banquet('banquet23')
+!banquet23.date := Date('2023-11-25')
+!banquet23.time := Time('17:30')
+!banquet23.groupName := 'Autumn Festival Gala'
+!banquet23.numberPeople := 25
+!banquet23.paymentMethod := #CreditCard
+
+!insert (restaurant27, banquet23) into RestaurantReservation
+
+!new Table('table68')
+!table68.number := 5
+!table68.description := 'Under the skylight with seasonal decor'
+!table68.capacity := 18
+
+!new Table('table69')
+!table69.number := 6
+!table69.description := 'Adjacent to the live music area'
+!table69.capacity := 12
+
+!insert (banquet23, table68) into ReservationTable
+!insert (banquet23, table69) into ReservationTable
+
+!new BusDriver('busdriver23')
+!busdriver23.name := 'Bianca Rossi'
+
+!insert (banquet23, busdriver23) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter22')
+!headwaiter22.name := 'Enrique Gonzalez'
+!headwaiter22.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter22.phoneNumber := '4567890123'        -- Arbitrary phone number
+
+!new Waiter('waiter51')
+!waiter51.name := 'Claire Bennett'
+!waiter51.dateOfBirth := Date('1985-01-01')      -- Arbitrary date of birth
+!waiter51.phoneNumber := '5678901234'            -- Arbitrary phone number
+!waiter51.spokenLanguage := #English
+
+!new Waiter('waiter52')
+!waiter52.name := 'Dmitri Volkov'
+!waiter52.dateOfBirth := Date('1990-01-01')      -- Arbitrary date of birth
+!waiter52.phoneNumber := '6789012345'            -- Arbitrary phone number
+!waiter52.spokenLanguage := #English
+
+!insert (headwaiter22, waiter51) into HeadWaiterWaiter
+!insert (headwaiter22, waiter52) into HeadWaiterWaiter
+
+!insert (banquet23, waiter51) into ReservationWaiter
+!insert (banquet23, waiter52) into ReservationWaiter
+
+!new Individual('individualReservation14')
+!individualReservation14.date := Date('2023-11-25')
+!individualReservation14.time := Time('19:00')
+!individualReservation14.numberPeople := 1
+!individualReservation14.name := 'Sarah Khan'
+!individualReservation14.phoneNumber := '7890123456'  -- Arbitrary phone number
+!individualReservation14.seating := #Inside
+!individualReservation14.smoking := #NonSmoking
+!individualReservation14.number := 14
+
+!insert (restaurant27, individualReservation14) into RestaurantReservation
+
+!new Table('table70')
+!table70.number := 9
+!table70.description := 'Elegant setting near the art wall'
+!table70.capacity := 4
+
+!insert (individualReservation14, table70) into ReservationTable
+
+!new Waiter('waiter53')
+!waiter53.name := 'Lucas Carter'
+!waiter53.dateOfBirth := Date('1988-01-01')     -- Arbitrary date of birth
+!waiter53.phoneNumber := '8901234567'           -- Arbitrary phone number
+!waiter53.spokenLanguage := #English
+
+!insert (headwaiter22, waiter53) into HeadWaiterWaiter
+!insert (individualReservation14, waiter53) into ReservationWaiter
+
+!new MenuItem('menuitem42')
+!menuitem42.description := 'Traditional Thai curry with a coconut milk base'
+!menuitem42.prepTime := 30.0
+!menuitem42.classification := #Main
+
+!insert (menuitem42, chef32) into MenuItemChef
+
+!new FoodItem('fooditem67')
+!fooditem67.number := 67
+!fooditem67.description := 'Coconut Milk'
+!fooditem67.unit := #Ounce
+
+!new FoodItem('fooditem68')
+!fooditem68.number := 68
+!fooditem68.description := 'Chicken Breast'
+!fooditem68.unit := #Pound
+
+!new FoodItem('fooditem69')
+!fooditem69.number := 69
+!fooditem69.description := 'Thai Green Paste'
+!fooditem69.unit := #Gram
+
+!new Allergen('allergen26')
+!allergen26.type := #Seafood
+
+!insert (fooditem69, allergen26) into FoodItemAllergen
+
+!insert (menuitem42, fooditem67) into MenuItemFoodItem
+!insert (menuitem42, fooditem68) into MenuItemFoodItem
+!insert (menuitem42, fooditem69) into MenuItemFoodItem
+
+!new MenuItem('menuitem43')
+!menuitem43.description := 'Smooth and calming, crafted from premium matcha powder'
+!menuitem43.prepTime := 8.0
+!menuitem43.classification := #Beverage
+
+!insert (menuitem43, chef32) into MenuItemChef
+
+!new FoodItem('fooditem70')
+!fooditem70.number := 70
+!fooditem70.description := 'Matcha Powder'
+!fooditem70.unit := #Gram
+
+!new FoodItem('fooditem71')
+!fooditem71.number := 71
+!fooditem71.description := 'Almond Milk'
+!fooditem71.unit := #Ounce
+
+!new Allergen('allergen27')
+!allergen27.type := #Nuts
+
+!insert (fooditem71, allergen27) into FoodItemAllergen
+
+!insert (menuitem43, fooditem70) into MenuItemFoodItem
+!insert (menuitem43, fooditem71) into MenuItemFoodItem
+
+!new RegularCustomer('customer23')
+!customer23.name := 'Sarah Khan'
+!customer23.prefferedLanguage := #English

@@ -1,0 +1,50 @@
+!new Bank('bank51')
+!bank51.country := 'Turkey'
+!bank51.name := 'Ziraat Bank'
+!bank51.bic := 'TCZBTR2A'
+
+!new Bank('bank52')
+!bank52.country := 'Finland'
+!bank52.name := 'Nordea'
+!bank52.bic := 'NDEAFIHH'
+
+!new Account('account76')
+!account76.iban := 'TR750006200027006400029328'
+!account76.balance := 9400
+
+!new Account('account77')
+!account77.iban := 'FI2112345600000785'
+!account77.balance := 4800
+
+!new Account('account78')
+!account78.iban := 'TR750006200027006400029329'
+!account78.balance := 350
+
+!new Person('person76')
+!person76.firstName := 'Ahmet'
+!person76.lastName := 'Yildirim'
+!person76.age := 51
+
+!new Person('person77')
+!person77.firstName := 'Erik'
+!person77.lastName := 'Virtanen'
+!person77.age := 37
+
+!new Person('person78')
+!person78.firstName := 'Selin'
+!person78.lastName := 'Ozdemir'
+!person78.age := 28
+
+!insert (person76, account76) into Ownership
+!insert (person77, account77) into Ownership
+!insert (person78, account78) into Ownership
+!insert (person76, account78) into Ownership
+
+!insert (person76, account76) into Use
+!insert (person77, account77) into Use
+!insert (person78, account78) into Use
+!insert (person77, account76) into Use
+
+!insert (bank51, account76) into AccountOfBanks
+!insert (bank52, account77) into AccountOfBanks
+!insert (bank51, account78) into AccountOfBanks

@@ -1,0 +1,73 @@
+!new Customer('customer23')
+!customer23.firstName := 'Sarah'
+!customer23.lastName := 'Lee'
+
+!new Booking('booking22')
+!booking22.startDate := '01-03-2024'
+!booking22.endDate := '05-03-2024'
+!booking22.canceled := false
+!booking22.bookingId := 104
+!booking22.confirmed := true
+
+!new RoomReservation('roomReservation22_1')
+!roomReservation22_1.checkInDate := '01-03-2024'
+!roomReservation22_1.checkOutDate := '05-03-2024'
+
+!new RoomReservation('roomReservation22_2')
+!roomReservation22_2.checkInDate := '01-03-2024'
+!roomReservation22_2.checkOutDate := '05-03-2024'
+
+!new Room('room22_301')
+!room22_301.numBeds := 2
+!room22_301.pricePerNight := 200.00
+!room22_301.occupied := true
+!room22_301.blocked := false
+!room22_301.roomNumber := 501
+
+!new Room('room22_302')
+!room22_302.numBeds := 2
+!room22_302.pricePerNight := 200.00
+!room22_302.occupied := false
+!room22_302.blocked := true
+!room22_302.roomNumber := 502
+
+!new Room('room22_303')
+!room22_303.numBeds := 2
+!room22_303.pricePerNight := 200.00
+!room22_303.occupied := false
+!room22_303.blocked := true
+!room22_303.roomNumber := 503
+
+!new RoomExtra('extra22_1')
+!extra22_1.price := 20.00
+!extra22_1.description := 'Conference Call Setup'
+
+!new RoomExtra('extra22_2')
+!extra22_2.price := 50.00
+!extra22_2.description := 'Business Catering Package'
+
+!new Bill('bill44')
+!bill44.price := 1280.00
+!bill44.billId := 507
+
+!new Bill('bill45')
+!bill45.price := 800.00
+!bill45.billId := 508
+
+!insert (booking22, customer23) into BookingCustomer
+
+!insert (booking22, roomReservation22_1) into BookingRoomReservation
+!insert (booking22, roomReservation22_2) into BookingRoomReservation
+
+!insert (booking22, bill44) into BookingBill
+!insert (booking22, bill45) into BookingBill
+
+!insert (roomReservation22_1, room22_301) into RoomReservationRoom
+!insert (roomReservation22_2, room22_302) into RoomReservationRoom
+!insert (roomReservation22_2, room22_303) into RoomReservationRoom
+
+!insert (roomReservation22_1, extra22_1) into RoomReservationExtras
+!insert (roomReservation22_1, extra22_2) into RoomReservationExtras
+
+!insert (bill44, roomReservation22_1) into BillRoomReservation
+!insert (bill45, roomReservation22_2) into BillRoomReservation

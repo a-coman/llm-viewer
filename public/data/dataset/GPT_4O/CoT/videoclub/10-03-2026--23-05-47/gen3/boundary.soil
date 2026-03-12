@@ -1,0 +1,35 @@
+!new Client('client17')
+!client17.clientId := 10000
+!client17.isSuspended := false
+
+!new Rental('rental27')
+!rental27.date := Date('2024-03-05')
+
+!new Rental('rental28')
+!rental28.date := Date('2024-03-10')
+
+!new Movie('movie22')
+!movie22.title := 'Adventures in the City'
+!movie22.availableCopies := 10
+!movie22.genre := #Action
+
+!new Series('series21')
+!series21.title := 'Life in Symphony'
+!series21.availableCopies := 0
+!series21.episode := 3
+
+!new Actor('actor40')
+!actor40.name := 'Ming Zhao'
+
+!new Actor('actor41')
+!actor41.name := 'Ana Oliveira'
+
+!insert (client17, rental27) into ClientRental
+!insert (client17, rental28) into ClientRental
+
+!insert (rental27, movie22) into RentalCassette
+!insert (rental28, series21) into RentalCassette
+
+!insert (movie22, actor40) into CassetteActor
+
+!insert (series21, actor41) into CassetteActor

@@ -1,0 +1,70 @@
+!new RentalOffice('office20')
+!office20.name := 'Riverside Rentals'
+!office20.number := 2020
+!office20.address := '456 Riverside Dr, Jacksonville, FL'
+
+!new Truck('truck39')
+!truck39.id := 539
+!truck39.registrationState := #FL
+!truck39.licensePlateNumber := 'FL-TRK-8811'
+!truck39.vehicleTypeCode := #TRUCK
+!truck39.registrationLastMaintenanceDate := Date('2023-01-30')
+!truck39.expirationDate := Date('2024-01-30')
+!truck39.odometerReading := 19000
+!truck39.gasTankCapacity := 36.0
+!truck39.workingRadio := true
+!truck39.mileage := 22
+
+!new Individual('individual20')
+!individual20.name := 'Jack Mitchell'
+!individual20.address := '789 Dock Ln, Tampa, FL'
+!individual20.poorRisk := true
+!individual20.homePhone := '555-8899'
+!individual20.driverLicenseState := #FL
+!individual20.driverLicenseNumber := 23456789
+!individual20.driverLicenseExpirationDate := Date('2027-08-18')
+
+!new RentalAgreement('agreement39')
+!agreement39.number := 3039
+!agreement39.rentalDate := Date('2023-12-12')
+!agreement39.anticipatedDuration := 5
+!agreement39.depositPaid := 225.0
+!agreement39.quotedDailyRate := 63.00
+!agreement39.quotedRatePerMile := 0.57
+
+!new Truck('truck40')
+!truck40.id := 540
+!truck40.registrationState := #CO
+!truck40.licensePlateNumber := 'CO-TRK-7722'
+!truck40.vehicleTypeCode := #COVERED_TRAILER
+!truck40.registrationLastMaintenanceDate := Date('2023-08-05')
+!truck40.expirationDate := Date('2025-08-05')
+!truck40.odometerReading := 22000
+!truck40.gasTankCapacity := 35.0
+!truck40.workingRadio := false
+!truck40.mileage := 20
+
+!new Company('company20')
+!company20.name := 'Blue River Logistics'
+!company20.address := '321 Rapids Rd, Denver, CO'
+!company20.poorRisk := false
+!company20.idNumber := 290876
+
+!new RentalAgreement('agreement40')
+!agreement40.number := 3040
+!agreement40.rentalDate := Date('2023-12-20')
+!agreement40.anticipatedDuration := 9
+!agreement40.depositPaid := 375.0
+!agreement40.quotedDailyRate := 80.00
+!agreement40.quotedRatePerMile := 0.64
+
+!insert (office20, truck39) into RentalOfficeVehicle
+!insert (office20, truck40) into RentalOfficeVehicle
+!insert (office20, agreement39) into RentalOfficeRentalAgreementOrigin
+!insert (office20, agreement39) into RentalOfficeRentalAgreementDrop
+!insert (office20, agreement40) into RentalOfficeRentalAgreementOrigin
+!insert (office20, agreement40) into RentalOfficeRentalAgreementDrop
+!insert (agreement39, truck39) into RentalAgreementVehicle
+!insert (agreement39, individual20) into RentalAgreementCustomer
+!insert (agreement40, truck40) into RentalAgreementVehicle
+!insert (agreement40, company20) into RentalAgreementCustomer

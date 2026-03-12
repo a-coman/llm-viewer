@@ -1,0 +1,50 @@
+!new Bank('balticDigitalBank')
+!balticDigitalBank.country := 'Estonia'
+!balticDigitalBank.name := 'Baltic Digital Bank'
+!balticDigitalBank.bic := 'BALTETEE01'
+
+!new Account('account27_1')
+!account27_1.iban := 'EE98-7654-3212-0004'
+!account27_1.balance := 200000
+
+!new Account('account27_2')
+!account27_2.iban := 'EE12-3456-7890-5678'
+!account27_2.balance := 3500
+
+!new Account('account27_3')
+!account27_3.iban := 'EE34-5678-9012-7890'
+!account27_3.balance := 15000
+
+!new Person('erikSavisaar')
+!erikSavisaar.firstName := 'Erik'
+!erikSavisaar.lastName := 'Savisaar'
+!erikSavisaar.age := 38
+
+!new Person('katarinaPetrov')
+!katarinaPetrov.firstName := 'Katarina'
+!katarinaPetrov.lastName := 'Petrov'
+!katarinaPetrov.age := 29
+
+!new Person('miguelAlvarez')
+!miguelAlvarez.firstName := 'Miguel'
+!miguelAlvarez.lastName := 'Alvarez'
+!miguelAlvarez.age := 42
+
+!insert (balticDigitalBank, account27_1) into AccountOfBanks
+!insert (balticDigitalBank, account27_2) into AccountOfBanks
+!insert (balticDigitalBank, account27_3) into AccountOfBanks
+
+!insert (erikSavisaar, account27_1) into Ownership
+!insert (katarinaPetrov, account27_1) into Ownership
+
+!insert (katarinaPetrov, account27_2) into Ownership
+
+!insert (miguelAlvarez, account27_3) into Ownership
+
+!insert (erikSavisaar, account27_1) into Use
+!insert (katarinaPetrov, account27_1) into Use
+!insert (miguelAlvarez, account27_1) into Use
+
+!insert (erikSavisaar, account27_2) into Use
+
+!insert (katarinaPetrov, account27_3) into Use

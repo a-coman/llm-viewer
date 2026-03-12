@@ -1,0 +1,114 @@
+!new Restaurant('restaurant5')
+!restaurant5.name := 'Ocean Breeze'
+
+!new Owner('owner10')
+!owner10.name := 'Liam Cooper'
+!owner10.percentageShares := 40
+!insert (restaurant5, owner10) into RestaurantOwner
+
+!new Owner('owner11')
+!owner11.name := 'Sophia Turner'
+!owner11.percentageShares := 60
+!insert (restaurant5, owner11) into RestaurantOwner
+
+!new Table('table11')
+!table11.number := 11
+!table11.description := 'Sunset view table'
+!table11.capacity := 6
+
+!new Table('table12')
+!table12.number := 12
+!table12.description := 'Upper deck'
+!table12.capacity := 25
+
+!new Table('table13')
+!table13.number := 13
+!table13.description := 'Garden table'
+!table13.capacity := 10
+
+!new RegularCustomer('customer6')
+!customer6.name := 'Emma Watson'
+!customer6.prefferedLanguage := #English
+
+!new Waiter('waiter7')
+!waiter7.name := 'Lucas White'
+!waiter7.dateOfBirth := Date('1995-07-21')
+!waiter7.phoneNumber := '555-2241'
+!waiter7.spokenLanguage := #Spanish
+
+!new HeadWaiter('headwaiter5')
+!headwaiter5.name := 'Oliver Green'
+!headwaiter5.dateOfBirth := Date('1983-02-19')
+!headwaiter5.phoneNumber := '555-5561'
+
+!insert (headwaiter5, waiter7) into HeadWaiterWaiter
+
+!new Individual('reservation7')
+!reservation7.time := Time('17:00')
+!reservation7.date := Date('2023-11-14')
+!reservation7.numberPeople := 5
+!reservation7.name := 'Emma Watson'
+!reservation7.phoneNumber := '555-7845'
+!reservation7.number := 7
+!reservation7.seating := #Patio
+!reservation7.smoking := #NonSmoking
+!insert (restaurant5, reservation7) into RestaurantReservation
+!insert (reservation7, customer6) into ReservationCustomer
+!insert (reservation7, waiter7) into ReservationWaiter
+!insert (reservation7, table11) into ReservationTable
+
+!new Banquet('reservation8')
+!reservation8.time := Time('18:00')
+!reservation8.date := Date('2024-01-01')
+!reservation8.numberPeople := 35
+!reservation8.name := 'Corporate Gala'
+!reservation8.phoneNumber := '555-9054'
+!reservation8.number := 8
+!reservation8.groupName := 'Business Leaders'
+!reservation8.paymentMethod := #Cash
+!reservation8.busService := true
+!insert (restaurant5, reservation8) into RestaurantReservation
+!insert (reservation8, table12) into ReservationTable
+!insert (reservation8, table13) into ReservationTable
+!insert (reservation8, waiter7) into ReservationWaiter
+
+!new BusDriver('busdriver4')
+!busdriver4.name := 'Jack Taylor'
+!busdriver4.dateOfBirth := Date('1970-04-30')
+!busdriver4.phoneNumber := '555-3214'
+!busdriver4.driverLicenseNr := 'DL159753'
+!insert (reservation8, busdriver4) into BanquetBusDriver
+
+!new ItemOrder('itemOrder5')
+!itemOrder5.time := Time('17:30')
+!insert (reservation7, itemOrder5) into ReservationItemOrdered
+
+!new MenuItem('menuItem5')
+!menuItem5.description := 'Grilled Lobster'
+!menuItem5.prepTime := 35.0
+!menuItem5.classification := #Main
+!insert (itemOrder5, menuItem5) into ItemOrderMenuItem
+
+!new FoodItem('foodItem5')
+!foodItem5.number := 105
+!foodItem5.description := 'Fresh Lobster'
+!foodItem5.purchaseFlag := true
+!foodItem5.unit := #Pound
+!insert (menuItem5, foodItem5) into MenuItemFoodItem
+
+!new Allergen('allergen5')
+!allergen5.type := #Seafood
+!insert (foodItem5, allergen5) into FoodItemAllergen
+
+!new Cook('cook5')
+!cook5.name := 'Sophia Reed'
+!cook5.dateOfBirth := Date('1989-11-02')
+!cook5.phoneNumber := '555-8877'
+!cook5.yearsOfExperience := 8
+
+!new Chef('chef5')
+!chef5.name := 'Ethan King'
+!chef5.dateOfBirth := Date('1986-03-05')
+!chef5.phoneNumber := '555-6688'
+!insert (menuItem5, chef5) into MenuItemChef
+!insert (chef5, cook5) into ChefCook

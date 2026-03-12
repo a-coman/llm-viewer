@@ -1,0 +1,86 @@
+!new Driver('driver4')
+!driver4.id := 'DRV001'
+!driver4.name := 'Kaito Tanaka'
+
+!new Driver('driver5')
+!driver5.id := 'DRV002'
+!driver5.name := 'Alessandro Rossi'
+
+!new Customer('customer4')
+!customer4.id := 'CUST001'
+!customer4.name := 'Maria Garcia'
+!customer4.twitterUserName := '@mariag_spain'
+
+!new Customer('customer5')
+!customer5.id := 'CUST002'
+!customer5.name := 'Jamal Ibrahim'
+!customer5.twitterUserName := '@jamal_i_kg'
+
+!new Address('address7')
+!address7.text := 'Calle de Alcalá, 50, 28014 Madrid, Spain'
+
+!new GeoLocation('geoLocation7')
+!geoLocation7.latitude := 40.4167
+!geoLocation7.longitude := -3.70325
+
+!insert (address7, geoLocation7) into AddressContainsGeoLocation
+
+!new Address('address8')
+!address8.text := 'Avenida Paulista, 1578, São Paulo, Brazil'
+
+!new GeoLocation('geoLocation8')
+!geoLocation8.latitude := -23.563210
+!geoLocation8.longitude := -46.654250
+
+!insert (address8, geoLocation8) into AddressContainsGeoLocation
+
+!new Address('address9')
+!address9.text := '2nd Avenue, 43rd Street, New York, NY, USA'
+
+!new GeoLocation('geoLocation9')
+!geoLocation9.latitude := 40.750610
+!geoLocation9.longitude := -73.993520
+
+!insert (address9, geoLocation9) into AddressContainsGeoLocation
+
+!new Address('address10')
+!address10.text := 'P.O. Box 895, Shuwaikh, Kuwait'
+
+!new GeoLocation('geoLocation10')
+!geoLocation10.latitude := 29.36972
+!geoLocation10.longitude := 47.97833
+
+!insert (address10, geoLocation10) into AddressContainsGeoLocation
+
+!new Shipment('shipment4')
+!shipment4.id := 'SHIP001'
+!shipment4.status := #DELIVERED
+
+!new Shipment('shipment5')
+!shipment5.id := 'SHIP002'
+!shipment5.status := #UNDERWAY
+
+!new Station('station3')
+
+!new Station('station4')
+
+!insert (driver4, shipment4) into DriverShipment
+!insert (driver5, shipment5) into DriverShipment
+
+!insert (shipment4, address7) into ShipmentContainsPickUpAddress
+!insert (shipment4, address8) into ShipmentContainsDeliveryAddress
+
+!insert (shipment5, address9) into ShipmentContainsPickUpAddress
+!insert (shipment5, address10) into ShipmentContainsDeliveryAddress
+
+!insert (customer4, shipment4) into CustomerConsistsOfShipment
+!insert (customer5, shipment5) into CustomerConsistsOfShipment
+
+!insert (station3, customer4) into StationContainsCustomer
+!insert (station4, customer5) into StationContainsCustomer
+
+!insert (station3, driver4) into StationContainsDriver
+!insert (station4, driver5) into StationContainsDriver
+
+!insert (station3, shipment4) into StationShipment
+!insert (station4, shipment5) into StationShipment

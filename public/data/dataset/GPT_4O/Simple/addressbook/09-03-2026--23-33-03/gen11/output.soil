@@ -1,0 +1,66 @@
+!new AddressBook('addressBook11')
+
+!new Company('company11')
+!company11.name := 'UrbanEats'
+!company11.phone := '101-202-3033'
+!company11.website := 'www.urbaneats.com'
+!company11.email := 'contact@urbaneats.com'
+!company11.industry := 'Food & Service'
+
+!new Person('person18')
+!person18.name := 'Henry Clark'
+!person18.phone := '212-121-4343'
+!person18.website := 'www.henryclarkculinary.com'
+!person18.email := 'henry.clark@urbaneats.com'
+!person18.title := 'Executive Chef'
+
+!new Person('person19')
+!person19.name := 'Alice Moore'
+!person19.phone := '414-515-6161'
+!person19.website := 'www.alicemooremarketing.com'
+!person19.email := 'alice.moore@urbaneats.com'
+!person19.title := 'Marketing Specialist'
+
+!new Note('note18')
+!note18.author := 'Alice Moore'
+!note18.time := Date('2024-05-05')
+!note18.type := #MEETING
+!note18.comment := 'Brainstorming for the new seasonal menu launch.'
+
+!new Note('note19')
+!note19.author := 'Henry Clark'
+!note19.time := Date('2024-05-10')
+!note19.type := #EMAIL
+!note19.comment := 'Reviewed partnership proposal with local farms.'
+
+!new Address('address19')
+!address19.city := 'Flavor Town'
+!address19.houseNr := '567'
+!address19.street := 'Culinary Crescent'
+
+!new Address('address20')
+!address20.city := 'Marketing Metropolis'
+!address20.houseNr := '98B'
+!address20.street := 'Branding Boulevard'
+
+!new Relationship('relationship20')
+!relationship20.type := #BOSS
+
+!new Relationship('relationship21')
+!relationship21.type := #COWORKER
+
+!insert (addressBook11, company11) into AddressBookMadeOfContact
+!insert (addressBook11, person18) into AddressBookMadeOfContact
+!insert (addressBook11, person19) into AddressBookMadeOfContact
+
+!insert (person19, note18) into ContactContainsNote
+!insert (person18, note19) into ContactContainsNote
+
+!insert (company11, relationship20) into ContactToRelationship
+!insert (relationship20, person18) into RelationshipToContact
+
+!insert (person18, relationship21) into ContactToRelationship
+!insert (relationship21, person19) into RelationshipToContact
+
+!insert (company11, address19) into ContactContainsAddress
+!insert (person19, address20) into ContactContainsAddress

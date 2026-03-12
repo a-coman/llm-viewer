@@ -1,0 +1,110 @@
+!new Customer('customer18')
+!customer18.firstName := 'Emily'
+!customer18.lastName := 'Carter'
+
+!new Booking('booking17')
+!booking17.startDate := '2024-03-20'
+!booking17.endDate := '2024-03-25'
+!booking17.canceled := false
+!booking17.bookingId := 4004
+!booking17.confirmed := true
+
+!new RoomReservation('roomReservation17_1')
+!roomReservation17_1.checkInDate := '2024-03-20'
+!roomReservation17_1.checkOutDate := '2024-03-25'
+
+!new RoomReservation('roomReservation17_2')
+!roomReservation17_2.checkInDate := '2024-03-20'
+!roomReservation17_2.checkOutDate := '2024-03-25'
+
+!new RoomReservation('roomReservation17_3')
+!roomReservation17_3.checkInDate := '2024-03-20'
+!roomReservation17_3.checkOutDate := '2024-03-25'
+
+!new RoomReservation('roomReservation17_4')
+!roomReservation17_4.checkInDate := '2024-03-20'
+!roomReservation17_4.checkOutDate := '2024-03-25'
+
+!new Room('room17_1101')
+!room17_1101.numBeds := 1
+!room17_1101.pricePerNight := 250.0
+!room17_1101.occupied := true
+!room17_1101.blocked := false
+!room17_1101.roomNumber := 1101
+
+!new Room('room17_1102')
+!room17_1102.numBeds := 1
+!room17_1102.pricePerNight := 250.0
+!room17_1102.occupied := true
+!room17_1102.blocked := false
+!room17_1102.roomNumber := 1102
+
+!new Room('room17_1103')
+!room17_1103.numBeds := 1
+!room17_1103.pricePerNight := 250.0
+!room17_1103.occupied := true
+!room17_1103.blocked := false
+!room17_1103.roomNumber := 1103
+
+!new Room('room17_1104')
+!room17_1104.numBeds := 1
+!room17_1104.pricePerNight := 250.0
+!room17_1104.occupied := true
+!room17_1104.blocked := false
+!room17_1104.roomNumber := 1104
+
+!new Bill('bill33')
+!bill33.price := 1250.0
+!bill33.billId := 801
+
+!new Bill('bill34')
+!bill34.price := 1300.0
+!bill34.billId := 802
+
+!new Bill('bill35')
+!bill35.price := 1200.0
+!bill35.billId := 803
+
+!new Bill('bill36')
+!bill36.price := 1350.0
+!bill36.billId := 804
+
+!new RoomExtra('extra17_1')
+!extra17_1.price := 40.0
+!extra17_1.description := 'Conference Kit'
+
+!new RoomExtra('extra17_2')
+!extra17_2.price := 20.0
+!extra17_2.description := 'Daily Newspaper Delivery'
+
+!new FreeRoomTypesDTO('freeRoomType14')
+!freeRoomType14.roomTypeDescription := 'Conference Single Room'
+!freeRoomType14.numBeds := 1
+!freeRoomType14.pricePerNight := 250.0
+!freeRoomType14.numFreeRooms := 10
+
+!insert (booking17, customer18) into BookingCustomer
+
+!insert (booking17, roomReservation17_1) into BookingRoomReservation
+!insert (booking17, roomReservation17_2) into BookingRoomReservation
+!insert (booking17, roomReservation17_3) into BookingRoomReservation
+!insert (booking17, roomReservation17_4) into BookingRoomReservation
+
+!insert (booking17, bill33) into BookingBill
+!insert (booking17, bill34) into BookingBill
+!insert (booking17, bill35) into BookingBill
+!insert (booking17, bill36) into BookingBill
+
+!insert (roomReservation17_1, room17_1101) into RoomReservationRoom
+!insert (roomReservation17_2, room17_1102) into RoomReservationRoom
+!insert (roomReservation17_3, room17_1103) into RoomReservationRoom
+!insert (roomReservation17_4, room17_1104) into RoomReservationRoom
+
+!insert (roomReservation17_1, extra17_1) into RoomReservationExtras
+!insert (roomReservation17_2, extra17_2) into RoomReservationExtras
+
+!insert (bill33, roomReservation17_1) into BillRoomReservation
+!insert (bill34, roomReservation17_2) into BillRoomReservation
+!insert (bill35, roomReservation17_3) into BillRoomReservation
+!insert (bill36, roomReservation17_4) into BillRoomReservation
+

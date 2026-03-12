@@ -1,0 +1,131 @@
+!new Club('club1')
+!club1.name := 'City Warriors'
+!club1.homeGround := 'Victory Stadium'
+!club1.chairman := 'John Doe'
+
+!new Club('club2')
+!club2.name := 'River Hawks'
+!club2.homeGround := 'Sky Arena'
+!club2.chairman := 'Jane Smith'
+
+!new Team('team1')
+!team1.name := 'Warrior Aces'
+!insert (club1, team1) into ClubTeam
+
+!new Team('team2')
+!team2.name := 'Hawk Invincibles'
+!insert (club2, team2) into ClubTeam
+
+!new Competition('championship')
+!championship.name := 'National League'
+!championship.type := 'League'
+
+!new Match('match1')
+!match1.date := '2023-10-21'
+!match1.homeAway := true
+!insert (championship, match1) into CompetitionMatch
+!insert (team1, match1) into LocalMatch
+!insert (team2, match1) into VisitorMatch
+
+!new MatchReport('report1')
+!report1.duration := 90
+!report1.scoreVisitor := 2
+!report1.scoreLocal := 1
+!insert (match1, report1) into MatchMatchReport
+
+!new Player('player1')
+!player1.name := 'Alex Turner'
+!player1.age := 25
+!player1.bestFoot := #RIGHT
+!player1.phoneNumber := '1234567890'
+!insert (team1, player1) into TeamPlayer
+
+!new Player('player2')
+!player2.name := 'Brian O\'Connor'
+!player2.age := 29
+!player2.bestFoot := #LEFT
+!player2.phoneNumber := '0987654321'
+!insert (team2, player2) into TeamPlayer
+
+!new Position('position1')
+!position1.positionName := #FORWARD
+!insert (player1, position1) into PlayerPositions
+
+!new Position('position2')
+!position2.positionName := #DEFENDER
+!insert (player2, position2) into PlayerPositions
+
+!new MatchPlayer('matchPlayer1')
+!matchPlayer1.booked := false
+!matchPlayer1.goals := 1
+!matchPlayer1.rating := 8
+!insert (player1, matchPlayer1) into PlayerMatch
+!insert (match1, matchPlayer1) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer2')
+!matchPlayer2.booked := true
+!matchPlayer2.goals := 0
+!matchPlayer2.rating := 6
+!insert (player2, matchPlayer2) into PlayerMatch
+!insert (match1, matchPlayer2) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition1')
+!matchPlayerPosition1.positionName := #FORWARD
+!matchPlayerPosition1.number := 9
+!insert (matchPlayer1, matchPlayerPosition1) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition2')
+!matchPlayerPosition2.positionName := #DEFENDER
+!matchPlayerPosition2.number := 4
+!insert (matchPlayer2, matchPlayerPosition2) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event1')
+!event1.eventType := #GOAL
+!event1.time := 30
+!insert (match1, event1) into MatchMatchEvent
+
+!new MatchEvent('event2')
+!event2.eventType := #GOAL
+!event2.time := 45
+!insert (match1, event2) into MatchMatchEvent
+
+!new MatchEvent('event3')
+!event3.eventType := #GOAL
+!event3.time := 75
+!insert (match1, event3) into MatchMatchEvent
+
+!new TrainingSession('training1')
+!training1.date := '2023-10-18'
+!training1.location := 'Main Field'
+!training1.purpose := 'Tactical Analysis'
+!insert (team1, training1) into TeamTraining
+
+!new TrainingSession('training2')
+!training2.date := '2023-11-01'
+!training2.location := 'Secondary Field'
+!training2.purpose := 'Stamina Building'
+!insert (team2, training2) into TeamTraining
+
+!new TrainingNotes('trainingNote1')
+!trainingNote1.note := 'Improved on set pieces'
+!trainingNote1.date := '2023-10-18'
+!insert (training1, trainingNote1) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote2')
+!trainingNote2.note := 'Focus on endurance'
+!trainingNote2.date := '2023-11-01'
+!insert (training2, trainingNote2) into TrainingTrainingNotes
+
+!new TrainingObjective('objective1')
+!objective1.areaToImprove := 'Defense'
+!objective1.startDate := '2023-09-01'
+!objective1.endDate := '2023-12-01'
+!objective1.success := false
+!insert (objective1, player1) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective2')
+!objective2.areaToImprove := 'Shooting Accuracy'
+!objective2.startDate := '2023-09-10'
+!objective2.endDate := '2023-11-10'
+!objective2.success := true
+!insert (objective2, player2) into TrainingObjectivePlayer

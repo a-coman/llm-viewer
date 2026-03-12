@@ -1,0 +1,66 @@
+!new AddressBook('addressBook1')
+
+!new Company('company1')
+!company1.name := 'TechCorp'
+!company1.phone := '123-456-7890'
+!company1.website := 'www.techcorp.com'
+!company1.email := 'info@techcorp.com'
+!company1.industry := 'Technology'
+
+!new Person('person1')
+!person1.name := 'John Doe'
+!person1.phone := '987-654-3210'
+!person1.website := 'www.johndoeconsulting.com'
+!person1.email := 'john.doe@example.com'
+!person1.title := 'CEO'
+
+!new Person('person2')
+!person2.name := 'Jane Smith'
+!person2.phone := '123-321-1234'
+!person2.website := 'www.janesmith.me'
+!person2.email := 'jane.smith@example.com'
+!person2.title := 'Developer'
+
+!new Note('note1')
+!note1.author := 'John Doe'
+!note1.time := Date('2023-10-05')
+!note1.type := #MEETING
+!note1.comment := 'Discuss project update.'
+
+!new Note('note2')
+!note2.author := 'Jane Smith'
+!note2.time := Date('2023-10-06')
+!note2.type := #CALL
+!note2.comment := 'Follow up on action items.'
+
+!new Address('address1')
+!address1.city := 'TechCity'
+!address1.houseNr := '1234'
+!address1.street := 'Innovation Lane'
+
+!new Address('address2')
+!address2.city := 'Smithtown'
+!address2.houseNr := '5678'
+!address2.street := 'Development Drive'
+
+!new Relationship('relationship1')
+!relationship1.type := #BOSS
+
+!new Relationship('relationship2')
+!relationship2.type := #EMPLOYEE
+
+!insert (addressBook1, company1) into AddressBookMadeOfContact
+!insert (addressBook1, person1) into AddressBookMadeOfContact
+!insert (addressBook1, person2) into AddressBookMadeOfContact
+
+!insert (company1, note1) into ContactContainsNote
+!insert (person2, note2) into ContactContainsNote
+
+!insert (company1, relationship1) into ContactToRelationship
+!insert (relationship1, person1) into RelationshipToContact
+
+!insert (person1, relationship2) into ContactToRelationship
+!insert (relationship2, person2) into RelationshipToContact
+
+!insert (company1, address1) into ContactContainsAddress
+!insert (person2, address2) into ContactContainsAddress

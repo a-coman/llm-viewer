@@ -1,0 +1,141 @@
+!new Club('club45')
+!club45.name := 'Sunlit Tigers'
+!club45.homeGround := 'Radiant Field'
+!club45.chairman := 'Aria Solar'
+
+!new Club('club46')
+!club46.name := 'Lunar Bears'
+!club46.homeGround := 'Moonlit Park'
+!club46.chairman := 'Caden Moon'
+
+!new Team('team45')
+!team45.name := 'Tiger Roar'
+!insert (club45, team45) into ClubTeam
+
+!new Team('team46')
+!team46.name := 'Bear Claws'
+!insert (club46, team46) into ClubTeam
+
+!new Competition('celestialCup')
+!celestialCup.name := 'Celestial Cup'
+!celestialCup.type := 'Cup'
+
+!new Match('match23')
+!match23.date := '2030-05-14'
+!match23.homeAway := false
+!insert (celestialCup, match23) into CompetitionMatch
+!insert (team45, match23) into LocalMatch
+!insert (team46, match23) into VisitorMatch
+
+!new MatchReport('report23')
+!report23.duration := 120
+!report23.scoreVisitor := 2
+!report23.scoreLocal := 3
+!insert (match23, report23) into MatchMatchReport
+
+!new Player('player45')
+!player45.name := 'Leo Sun'
+!player45.age := 29
+!player45.bestFoot := #RIGHT
+!player45.phoneNumber := '9120485763'
+!insert (team45, player45) into TeamPlayer
+
+!new Player('player46')
+!player46.name := 'Luna Shadow'
+!player46.age := 31
+!player46.bestFoot := #BOTH
+!player46.phoneNumber := '8796325140'
+!insert (team46, player46) into TeamPlayer
+
+!new Position('position45')
+!position45.positionName := #FORWARD
+!insert (player45, position45) into PlayerPositions
+
+!new Position('position46')
+!position46.positionName := #DEFENDER
+!insert (player46, position46) into PlayerPositions
+
+!new MatchPlayer('matchPlayer45')
+!matchPlayer45.booked := false
+!matchPlayer45.goals := 2
+!matchPlayer45.rating := 9
+!insert (player45, matchPlayer45) into PlayerMatch
+!insert (match23, matchPlayer45) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer46')
+!matchPlayer46.booked := true
+!matchPlayer46.goals := 0
+!matchPlayer46.rating := 7
+!insert (player46, matchPlayer46) into PlayerMatch
+!insert (match23, matchPlayer46) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition45')
+!matchPlayerPosition45.positionName := #FORWARD
+!matchPlayerPosition45.number := 10
+!insert (matchPlayer45, matchPlayerPosition45) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition46')
+!matchPlayerPosition46.positionName := #DEFENDER
+!matchPlayerPosition46.number := 3
+!insert (matchPlayer46, matchPlayerPosition46) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event85')
+!event85.eventType := #GOAL
+!event85.time := 20
+!insert (match23, event85) into MatchMatchEvent
+
+!new MatchEvent('event86')
+!event86.eventType := #GOAL
+!event86.time := 45
+!insert (match23, event86) into MatchMatchEvent
+
+!new MatchEvent('event87')
+!event87.eventType := #GOAL
+!event87.time := 70
+!insert (match23, event87) into MatchMatchEvent
+
+!new MatchEvent('event88')
+!event88.eventType := #GOAL
+!event88.time := 100
+!insert (match23, event88) into MatchMatchEvent
+
+!new MatchEvent('event89')
+!event89.eventType := #GOAL
+!event89.time := 115
+!insert (match23, event89) into MatchMatchEvent
+
+!new TrainingSession('training45')
+!training45.date := '2030-04-10'
+!training45.location := 'Solar Training Field'
+!training45.purpose := 'Offensive Tactics'
+!insert (team45, training45) into TeamTraining
+
+!new TrainingSession('training46')
+!training46.date := '2030-04-20'
+!training46.location := 'Lunar Training Grounds'
+!training46.purpose := 'Defensive Formations'
+!insert (team46, training46) into TeamTraining
+
+!new TrainingNotes('trainingNote45')
+!trainingNote45.note := 'Improved on quick counterattacks'
+!trainingNote45.date := '2030-04-10'
+!insert (training45, trainingNote45) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote46')
+!trainingNote46.note := 'Strengthened defensive resilience'
+!trainingNote46.date := '2030-04-20'
+!insert (training46, trainingNote46) into TrainingTrainingNotes
+
+!new TrainingObjective('objective45')
+!objective45.areaToImprove := 'Accuracy in Shooting'
+!objective45.startDate := '2030-02-01'
+!objective45.endDate := '2030-05-01'
+!objective45.success := true
+!insert (objective45, player45) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective46')
+!objective46.areaToImprove := 'Defensive Organization'
+!objective46.startDate := '2030-02-15'
+!objective46.endDate := '2030-05-15'
+!objective46.success := false
+!insert (objective46, player46) into TrainingObjectivePlayer

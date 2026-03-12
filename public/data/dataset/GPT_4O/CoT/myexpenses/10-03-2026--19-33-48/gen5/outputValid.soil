@@ -1,0 +1,252 @@
+!new Expense('internationalResearchProjectExpense')
+!internationalResearchProjectExpense.amount := 5485.00
+!internationalResearchProjectExpense.startDate := Date('2023-05-01')
+!internationalResearchProjectExpense.endDate := Date('2023-05-31')
+
+!new Bill('laboratoryEquipmentBill')
+!laboratoryEquipmentBill.amount := 2500.00
+!laboratoryEquipmentBill.category := 'Laboratory Equipment Purchase'
+!laboratoryEquipmentBill.date := Date('2023-05-02')
+!laboratoryEquipmentBill.paymentMethod := #CREDIT_CARD
+!laboratoryEquipmentBill.status := #VERIFIED
+
+!new Bill('airfareBill')
+!airfareBill.amount := 1200.00
+!airfareBill.category := 'Airfare for Research Team'
+!airfareBill.date := Date('2023-04-28')
+!airfareBill.paymentMethod := #CREDIT_CARD
+!airfareBill.status := #VALIDATED
+
+!new Bill('hotelAccommodationBill')
+!hotelAccommodationBill.amount := 785.00
+!hotelAccommodationBill.category := 'Hotel Accommodation'
+!hotelAccommodationBill.date := Date('2023-05-03')
+!hotelAccommodationBill.paymentMethod := #CASH
+!hotelAccommodationBill.status := #VERIFIED
+
+!new Bill('fieldResearchTransportationBill')
+!fieldResearchTransportationBill.amount := 500.00
+!fieldResearchTransportationBill.category := 'Field Research Transportation'
+!fieldResearchTransportationBill.date := Date('2023-05-10')
+!fieldResearchTransportationBill.paymentMethod := #CHECK
+!fieldResearchTransportationBill.status := #PENDING
+
+!new Bill('conferenceFeeBill')
+!conferenceFeeBill.amount := 500.00
+!conferenceFeeBill.category := 'Conference Fee for Presentation of Findings'
+!conferenceFeeBill.date := Date('2023-05-15')
+!conferenceFeeBill.paymentMethod := #CREDIT_CARD
+!conferenceFeeBill.status := #REFUSED
+
+!new Currency('currencyCHF')
+!currencyCHF.name := 'Swiss Franc'
+!currencyCHF.abbreviation := 'CHF'
+
+!insert (laboratoryEquipmentBill, currencyCHF) into BillCurrency
+!insert (airfareBill, currencyCHF) into BillCurrency
+!insert (hotelAccommodationBill, currencyCHF) into BillCurrency
+!insert (fieldResearchTransportationBill, currencyCHF) into BillCurrency
+!insert (conferenceFeeBill, currencyCHF) into BillCurrency
+
+!insert (internationalResearchProjectExpense, laboratoryEquipmentBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, airfareBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, hotelAccommodationBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, fieldResearchTransportationBill) into ExpenseContainsBills
+!insert (internationalResearchProjectExpense, conferenceFeeBill) into ExpenseContainsBills
+
+!new Comment('equipmentComment')
+!equipmentComment.text := 'Equipment purchased was essential and within budget expectations.'
+
+!new Comment('flightComment')
+!flightComment.text := 'The research team''s flight was comfortable, with smooth booking procedure.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Accommodation was satisfactory, though a bit far from the research site.'
+
+!new Comment('transportationComment')
+!transportationComment.text := 'Transportation for fieldwork was a challenge but manageable.'
+
+!insert (internationalResearchProjectExpense, equipmentComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, flightComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, accommodationComment) into ExpenseComment
+!insert (internationalResearchProjectExpense, transportationComment) into ExpenseComment
+
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 250.00
+!boundaryCaseExpense.startDate := Date('2023-07-01')
+!boundaryCaseExpense.endDate := Date('2023-07-31')
+
+!new Bill('groceryShoppingBill')
+!groceryShoppingBill.amount := 100.00
+!groceryShoppingBill.category := 'Grocery Shopping'
+!groceryShoppingBill.date := Date('2023-07-05')
+!groceryShoppingBill.paymentMethod := #CASH
+!groceryShoppingBill.status := #VERIFIED
+
+!new Bill('internetSubscriptionBill')
+!internetSubscriptionBill.amount := 150.00
+!internetSubscriptionBill.category := 'Internet Subscription'
+!internetSubscriptionBill.date := Date('2023-07-15')
+!internetSubscriptionBill.paymentMethod := #CREDIT_CARD
+!internetSubscriptionBill.status := #REFUNDED
+
+!new Currency('currencyMXN')
+!currencyMXN.name := 'Mexican Peso'
+!currencyMXN.abbreviation := 'MXN'
+
+!insert (groceryShoppingBill, currencyMXN) into BillCurrency
+!insert (internetSubscriptionBill, currencyMXN) into BillCurrency
+
+!insert (boundaryCaseExpense, groceryShoppingBill) into ExpenseContainsBills
+!insert (boundaryCaseExpense, internetSubscriptionBill) into ExpenseContainsBills
+
+!new Comment('groceryComment')
+!groceryComment.text := 'Grocery bill verified promptly upon purchase.'
+
+!new Comment('subscriptionComment')
+!subscriptionComment.text := 'Subscription fee was refunded due to service outage, resolved swiftly.'
+
+!insert (boundaryCaseExpense, groceryComment) into ExpenseComment
+!insert (boundaryCaseExpense, subscriptionComment) into ExpenseComment
+
+!new Expense('academicResearchGrantExpense')
+!academicResearchGrantExpense.amount := 10500.00
+!academicResearchGrantExpense.startDate := Date('2023-05-01')
+!academicResearchGrantExpense.endDate := Date('2023-08-31')
+
+!new Bill('personnelAndSalariesBill')
+!personnelAndSalariesBill.amount := 4000.00
+!personnelAndSalariesBill.category := 'Personnel and Salaries'
+!personnelAndSalariesBill.date := Date('2023-05-01')
+!personnelAndSalariesBill.paymentMethod := #CREDIT_CARD
+!personnelAndSalariesBill.status := #VALIDATED
+
+!new Bill('equipmentAndMaterialsBill')
+!equipmentAndMaterialsBill.amount := 2500.00
+!equipmentAndMaterialsBill.category := 'Equipment and Materials'
+!equipmentAndMaterialsBill.date := Date('2023-05-15')
+!equipmentAndMaterialsBill.paymentMethod := #CHECK
+!equipmentAndMaterialsBill.status := #VERIFIED
+
+!new Bill('travelAndAccommodationBill')
+!travelAndAccommodationBill.amount := 1500.00
+!travelAndAccommodationBill.category := 'Travel and Accommodation'
+!travelAndAccommodationBill.date := Date('2023-06-05')
+!travelAndAccommodationBill.paymentMethod := #CASH
+!travelAndAccommodationBill.status := #REFUNDED
+
+!new Bill('conferencesAndSeminarsBill')
+!conferencesAndSeminarsBill.amount := 1000.00
+!conferencesAndSeminarsBill.category := 'Conferences and Seminars'
+!conferencesAndSeminarsBill.date := Date('2023-07-10')
+!conferencesAndSeminarsBill.paymentMethod := #CREDIT_CARD
+!conferencesAndSeminarsBill.status := #PENDING
+
+!new Bill('publicationAndCommunicationBill')
+!publicationAndCommunicationBill.amount := 1500.00
+!publicationAndCommunicationBill.category := 'Publication and Communication'
+!publicationAndCommunicationBill.date := Date('2023-08-20')
+!publicationAndCommunicationBill.paymentMethod := #CHECK
+!publicationAndCommunicationBill.status := #DRAFT
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (personnelAndSalariesBill, currencyUSD) into BillCurrency
+!insert (equipmentAndMaterialsBill, currencyUSD) into BillCurrency
+!insert (travelAndAccommodationBill, currencyUSD) into BillCurrency
+!insert (conferencesAndSeminarsBill, currencyUSD) into BillCurrency
+!insert (publicationAndCommunicationBill, currencyUSD) into BillCurrency
+
+!insert (academicResearchGrantExpense, personnelAndSalariesBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, equipmentAndMaterialsBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, travelAndAccommodationBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, conferencesAndSeminarsBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, publicationAndCommunicationBill) into ExpenseContainsBills
+
+!new Comment('fundingAllocationComment')
+!fundingAllocationComment.text := 'Funding allocation for a multidisciplinary research project focusing on renewable energy solutions.'
+
+!new Comment('projectCollaborationComment')
+!projectCollaborationComment.text := 'The project involves collaborative efforts between universities, with extensive data collection and analysis.'
+
+!insert (academicResearchGrantExpense, fundingAllocationComment) into ExpenseComment
+!insert (academicResearchGrantExpense, projectCollaborationComment) into ExpenseComment
+
+!new Expense('festivalOperationsFundDisbursement')
+!festivalOperationsFundDisbursement.amount := 48200.00
+!festivalOperationsFundDisbursement.startDate := Date('2023-09-10')
+!festivalOperationsFundDisbursement.endDate := Date('2023-09-17')
+
+!new Bill('stageSetupBill')
+!stageSetupBill.amount := 15000.00
+!stageSetupBill.category := 'Stage Setup'
+!stageSetupBill.date := Date('2023-09-11')
+!stageSetupBill.paymentMethod := #CHECK
+!stageSetupBill.status := #VALIDATED
+
+!new Bill('lightingAndSoundBill')
+!lightingAndSoundBill.amount := 12000.00
+!lightingAndSoundBill.category := 'Lighting and Sound'
+!lightingAndSoundBill.date := Date('2023-09-12')
+!lightingAndSoundBill.paymentMethod := #CREDIT_CARD
+!lightingAndSoundBill.status := #PENDING
+
+!new Bill('securityServicesBill')
+!securityServicesBill.amount := 10000.00
+!securityServicesBill.category := 'Security Services'
+!securityServicesBill.date := Date('2023-09-13')
+!securityServicesBill.paymentMethod := #CASH
+!securityServicesBill.status := #VERIFIED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 11200.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-09-14')
+!cateringServicesBill.paymentMethod := #CHECK
+!cateringServicesBill.status := #REFUSED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!new Currency('currencyAUD')
+!currencyAUD.name := 'Australian Dollar'
+!currencyAUD.abbreviation := 'AUD'
+
+!insert (stageSetupBill, currencyEUR) into BillCurrency
+!insert (lightingAndSoundBill, currencyUSD) into BillCurrency
+!insert (securityServicesBill, currencyCAD) into BillCurrency
+!insert (cateringServicesBill, currencyAUD) into BillCurrency
+
+!insert (festivalOperationsFundDisbursement, stageSetupBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, lightingAndSoundBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, securityServicesBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, cateringServicesBill) into ExpenseContainsBills
+
+!new Comment('stageSetupComment')
+!stageSetupComment.text := 'Stage setup contracted to local providers familiar with festival needs, ensuring cultural authenticity.'
+
+!new Comment('lightingIssueComment')
+!lightingIssueComment.text := 'Pending issue with lighting invoice due to supplier''s delayed equipment delivery.'
+
+!new Comment('securityComment')
+!securityComment.text := 'Security verification completed, operations confirmed compliant with safety regulations.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering bill refused pending renegotiation of menu options to include local delicacies.'
+
+!insert (festivalOperationsFundDisbursement, stageSetupComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, lightingIssueComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, securityComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, cateringComment) into ExpenseComment
+

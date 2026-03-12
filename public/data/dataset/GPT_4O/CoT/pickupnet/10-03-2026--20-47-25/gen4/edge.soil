@@ -1,0 +1,76 @@
+!new Driver('driver30')
+!driver30.id := 'DRV303202'
+!driver30.name := 'Charlie Fastlane'
+
+!new Driver('driver31')
+!driver31.id := 'DRV303203'
+!driver31.name := 'Riley Quickdash'
+
+!new Shipment('shipment37')
+!shipment37.id := 'SHP202103'
+!shipment37.status := #NEW
+
+!new Shipment('shipment38')
+!shipment38.id := 'SHP202104'
+!shipment38.status := #NEW
+
+!new Shipment('shipment39')
+!shipment39.id := 'SHP202105'
+!shipment39.status := #NEW
+
+!new Address('address70')
+!address70.text := 'Central Hospital, 10 Medical Ave, Gotham City'
+
+!new GeoLocation('geoLocation70')
+!geoLocation70.latitude := 40.730610
+!geoLocation70.longitude := -73.935242
+
+!insert (address70, geoLocation70) into AddressContainsGeoLocation
+
+!new Address('address71')
+!address71.text := 'Northview Clinic, 22 Wellness Street, Metropolis'
+
+!new GeoLocation('geoLocation71')
+!geoLocation71.latitude := 34.052235
+!geoLocation71.longitude := -118.243683
+
+!insert (address71, geoLocation71) into AddressContainsGeoLocation
+
+!new Address('address72')
+!address72.text := 'Eastside Emergency Room, 88 Health Blvd, Star City'
+
+!new GeoLocation('geoLocation72')
+!geoLocation72.latitude := 39.971778
+!geoLocation72.longitude := -105.217499
+
+!insert (address72, geoLocation72) into AddressContainsGeoLocation
+
+!new Customer('customer27')
+!customer27.id := 'CUS111222'
+!customer27.name := 'Medical Express LLC'
+!customer27.twitterUserName := '@MediExLLC'
+
+!new Station('station25')
+
+!insert (driver30, shipment37) into DriverShipment
+!insert (driver31, shipment38) into DriverShipment
+!insert (driver31, shipment39) into DriverShipment
+
+!insert (shipment37, address70) into ShipmentContainsPickUpAddress
+!insert (shipment38, address70) into ShipmentContainsPickUpAddress
+!insert (shipment39, address70) into ShipmentContainsPickUpAddress
+
+!insert (shipment37, address71) into ShipmentContainsDeliveryAddress
+!insert (shipment38, address72) into ShipmentContainsDeliveryAddress
+!insert (shipment39, address72) into ShipmentContainsDeliveryAddress
+
+!insert (customer27, shipment37) into CustomerConsistsOfShipment
+!insert (customer27, shipment38) into CustomerConsistsOfShipment
+!insert (customer27, shipment39) into CustomerConsistsOfShipment
+
+!insert (station25, driver30) into StationContainsDriver
+!insert (station25, driver31) into StationContainsDriver
+!insert (station25, shipment37) into StationShipment
+!insert (station25, shipment38) into StationShipment
+!insert (station25, shipment39) into StationShipment
+!insert (station25, customer27) into StationContainsCustomer

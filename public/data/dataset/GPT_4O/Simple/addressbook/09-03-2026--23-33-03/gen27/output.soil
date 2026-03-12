@@ -1,0 +1,66 @@
+!new AddressBook('addressBook27')
+
+!new Company('company27')
+!company27.name := 'Urban Fitness'
+!company27.phone := '212-123-4567'
+!company27.website := 'www.urbanfitness.com'
+!company27.email := 'contact@urbanfitness.com'
+!company27.industry := 'Health & Wellness'
+
+!new Person('person50')
+!person50.name := 'Anna Mason'
+!person50.phone := '444-888-7777'
+!person50.website := 'www.annamasonfit.com'
+!person50.email := 'anna.mason@urbanfitness.com'
+!person50.title := 'Wellness Coach'
+
+!new Person('person51')
+!person51.name := 'Eli Taylor'
+!person51.phone := '313-313-3131'
+!person51.website := 'www.elitaylortraining.com'
+!person51.email := 'eli.taylor@personaltraining.org'
+!person51.title := 'Personal Trainer'
+
+!new Note('note50')
+!note50.author := 'Anna Mason'
+!note50.time := Date('2025-09-05')
+!note50.type := #EMAIL
+!note50.comment := 'Shared the new group class schedule with clients.'
+
+!new Note('note51')
+!note51.author := 'Eli Taylor'
+!note51.time := Date('2025-09-07')
+!note51.type := #CALL
+!note51.comment := 'Consultation with clients to set fitness goals.'
+
+!new Address('address51')
+!address51.city := 'Exercise City'
+!address51.houseNr := '123F'
+!address51.street := 'Workout Way'
+
+!new Address('address52')
+!address52.city := 'Training Town'
+!address52.houseNr := '99X'
+!address52.street := 'Strength Lane'
+
+!new Relationship('relationship52')
+!relationship52.type := #BOSS
+
+!new Relationship('relationship53')
+!relationship53.type := #COWORKER
+
+!insert (addressBook27, company27) into AddressBookMadeOfContact
+!insert (addressBook27, person50) into AddressBookMadeOfContact
+!insert (addressBook27, person51) into AddressBookMadeOfContact
+
+!insert (person50, note50) into ContactContainsNote
+!insert (person51, note51) into ContactContainsNote
+
+!insert (company27, relationship52) into ContactToRelationship
+!insert (relationship52, person50) into RelationshipToContact
+
+!insert (person50, relationship53) into ContactToRelationship
+!insert (relationship53, person51) into RelationshipToContact
+
+!insert (company27, address51) into ContactContainsAddress
+!insert (person51, address52) into ContactContainsAddress

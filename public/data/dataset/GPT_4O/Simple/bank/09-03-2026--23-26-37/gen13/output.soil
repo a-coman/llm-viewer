@@ -1,0 +1,50 @@
+!new Bank('bank25')
+!bank25.country := 'United Kingdom'
+!bank25.name := 'Barclays'
+!bank25.bic := 'BARCGB22'
+
+!new Bank('bank26')
+!bank26.country := 'Vietnam'
+!bank26.name := 'Vietcombank'
+!bank26.bic := 'BFTVVNVX'
+
+!new Account('account37')
+!account37.iban := 'GB12BARC20201555555555'
+!account37.balance := 5400
+
+!new Account('account38')
+!account38.iban := 'VN02123456789123456789'
+!account38.balance := 4700
+
+!new Account('account39')
+!account39.iban := 'GB12BARC20201555555556'
+!account39.balance := 2950
+
+!new Person('person37')
+!person37.firstName := 'James'
+!person37.lastName := 'Smith'
+!person37.age := 61
+
+!new Person('person38')
+!person38.firstName := 'Minh'
+!person38.lastName := 'Tran'
+!person38.age := 47
+
+!new Person('person39')
+!person39.firstName := 'Sophie'
+!person39.lastName := 'Brown'
+!person39.age := 25
+
+!insert (person37, account37) into Ownership
+!insert (person38, account38) into Ownership
+!insert (person39, account39) into Ownership
+!insert (person39, account37) into Ownership
+
+!insert (person37, account37) into Use
+!insert (person38, account38) into Use
+!insert (person39, account39) into Use
+!insert (person38, account37) into Use
+
+!insert (bank25, account37) into AccountOfBanks
+!insert (bank26, account38) into AccountOfBanks
+!insert (bank25, account39) into AccountOfBanks

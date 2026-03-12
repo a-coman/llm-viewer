@@ -1,0 +1,66 @@
+!new AddressBook('addressBook16')
+
+!new Company('company16')
+!company16.name := 'SolarTech Solutions'
+!company16.phone := '612-345-6789'
+!company16.website := 'www.solartechsolutions.com'
+!company16.email := 'info@solartechsolutions.com'
+!company16.industry := 'Renewable Energy'
+
+!new Person('person28')
+!person28.name := 'George Benson'
+!person28.phone := '876-548-2323'
+!person28.website := 'www.georgebensonsolar.com'
+!person28.email := 'george.benson@solartechsolutions.com'
+!person28.title := 'Solar Energy Consultant'
+
+!new Person('person29')
+!person29.name := 'Emily Watson'
+!person29.phone := '743-829-9191'
+!person29.website := 'www.emilywatsonconsulting.com'
+!person29.email := 'emily.watson@renewableconsulting.org'
+!person29.title := 'Environmental Specialist'
+
+!new Note('note28')
+!note28.author := 'George Benson'
+!note28.time := Date('2024-10-01')
+!note28.type := #EMAIL
+!note28.comment := 'Drafted a proposal for new solar installations.'
+
+!new Note('note29')
+!note29.author := 'Emily Watson'
+!note29.time := Date('2024-10-02')
+!note29.type := #MEETING
+!note29.comment := 'Discussion on environmental impact assessments.'
+
+!new Address('address29')
+!address29.city := 'Eco Village'
+!address29.houseNr := '321C'
+!address29.street := 'Green Lane'
+
+!new Address('address30')
+!address30.city := 'Nature Town'
+!address30.houseNr := '57K'
+!address30.street := 'Eco Avenue'
+
+!new Relationship('relationship30')
+!relationship30.type := #COWORKER
+
+!new Relationship('relationship31')
+!relationship31.type := #BOSS
+
+!insert (addressBook16, company16) into AddressBookMadeOfContact
+!insert (addressBook16, person28) into AddressBookMadeOfContact
+!insert (addressBook16, person29) into AddressBookMadeOfContact
+
+!insert (person28, note28) into ContactContainsNote
+!insert (person29, note29) into ContactContainsNote
+
+!insert (company16, relationship31) into ContactToRelationship
+!insert (relationship31, person28) into RelationshipToContact
+
+!insert (person28, relationship30) into ContactToRelationship
+!insert (relationship30, person29) into RelationshipToContact
+
+!insert (company16, address29) into ContactContainsAddress
+!insert (person29, address30) into ContactContainsAddress

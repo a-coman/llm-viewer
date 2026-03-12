@@ -1,0 +1,63 @@
+!new StateMachine('stateMachine9')
+!stateMachine9.name := 'smartHomeSystem'
+
+!new State('state23')
+!state23.name := 'awake'
+
+!new State('state24')
+!state24.name := 'sleeping'
+
+!new State('state25')
+!state25.name := 'away'
+
+!new Transition('transition23')
+!transition23.name := 'goToSleep'
+
+!new Transition('transition24')
+!transition24.name := 'wakeUp'
+
+!new Transition('transition25')
+!transition25.name := 'leaveHome'
+
+!new Transition('transition26')
+!transition26.name := 'returnHome'
+
+!new TimeEvent('timeEvent23')
+!timeEvent23.time := 2
+
+!new TimeEvent('timeEvent24')
+!timeEvent24.time := 3
+
+!new TimeEvent('timeEvent25')
+!timeEvent25.time := 5
+
+!new TimeEvent('timeEvent26')
+!timeEvent26.time := 4
+
+!insert (stateMachine9, state23) into StateMachineContainsStates
+!insert (stateMachine9, state24) into StateMachineContainsStates
+!insert (stateMachine9, state25) into StateMachineContainsStates
+
+!insert (stateMachine9, transition23) into StateMachineContainsTransitions
+!insert (stateMachine9, transition24) into StateMachineContainsTransitions
+!insert (stateMachine9, transition25) into StateMachineContainsTransitions
+!insert (stateMachine9, transition26) into StateMachineContainsTransitions
+
+!insert (transition23, timeEvent23) into TransitionContainsEvents
+!insert (transition24, timeEvent24) into TransitionContainsEvents
+!insert (transition25, timeEvent25) into TransitionContainsEvents
+!insert (transition26, timeEvent26) into TransitionContainsEvents
+
+!insert (state23, transition23) into StateTransition
+!insert (transition23, state24) into TransitionState
+
+!insert (state24, transition24) into StateTransition
+!insert (transition24, state23) into TransitionState
+
+!insert (state23, transition25) into StateTransition
+!insert (transition25, state25) into TransitionState
+
+!insert (state25, transition26) into StateTransition
+!insert (transition26, state23) into TransitionState
+
+!insert (stateMachine9, state23) into StateMachineStartsStates

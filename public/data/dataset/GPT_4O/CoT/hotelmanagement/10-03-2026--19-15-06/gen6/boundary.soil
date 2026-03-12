@@ -1,0 +1,65 @@
+!new Customer('customer27')
+!customer27.firstName := 'Omar'
+!customer27.lastName := 'Al-Farsi'
+
+!new Booking('booking26')
+!booking26.startDate := '2025-03-10'
+!booking26.endDate := '2025-03-14'
+!booking26.canceled := false
+!booking26.bookingId := 606
+!booking26.confirmed := true
+
+!new Bill('bill52')
+!bill52.price := 2500.0
+!bill52.billId := 1001
+
+!new FreeRoomTypesDTO('freeRoomType22')
+!freeRoomType22.roomTypeDescription := 'Executive Suite'
+!freeRoomType22.numBeds := 1
+!freeRoomType22.pricePerNight := 250.00
+!freeRoomType22.numFreeRooms := 0
+
+!new RoomReservation('roomReservation26')
+!roomReservation26.checkInDate := '2025-03-10'
+!roomReservation26.checkOutDate := '2025-03-14'
+
+!new RoomExtra('extra26_1')
+!extra26_1.price := 300.0
+!extra26_1.description := 'Conference Package with AV Support'
+
+!new RoomExtra('extra26_2')
+!extra26_2.price := 50.0
+!extra26_2.description := 'Daily Breakfast Buffet'
+
+!new RoomExtra('extra26_3')
+!extra26_3.price := 200.0
+!extra26_3.description := 'Gala Dinner'
+
+!new Room('room26_801')
+!room26_801.numBeds := 1
+!room26_801.pricePerNight := 250.0
+!room26_801.occupied := true
+!room26_801.blocked := false
+!room26_801.roomNumber := 801
+
+!new Room('room26_802')
+!room26_802.numBeds := 1
+!room26_802.pricePerNight := 700.0
+!room26_802.occupied := true
+!room26_802.blocked := false
+!room26_802.roomNumber := 802
+
+!insert (booking26, customer27) into BookingCustomer
+
+!insert (booking26, bill52) into BookingBill
+
+!insert (booking26, roomReservation26) into BookingRoomReservation
+
+!insert (roomReservation26, room26_801) into RoomReservationRoom
+!insert (roomReservation26, room26_802) into RoomReservationRoom
+
+!insert (roomReservation26, extra26_1) into RoomReservationExtras
+!insert (roomReservation26, extra26_2) into RoomReservationExtras
+!insert (roomReservation26, extra26_3) into RoomReservationExtras
+
+!insert (bill52, roomReservation26) into BillRoomReservation

@@ -1,0 +1,50 @@
+!new RentalOffice('officeSaltLakeCityDepot')
+!officeSaltLakeCityDepot.name := 'Salt Lake City Depot'
+!officeSaltLakeCityDepot.number := 505
+!officeSaltLakeCityDepot.address := '789 Mountain View Rd, Salt Lake City, UT 84103'
+
+!new Vehicle('coveredTrailer008')
+!coveredTrailer008.id := 308
+!coveredTrailer008.registrationState := #CO
+!coveredTrailer008.licensePlateNumber := 'UT2468CT'
+!coveredTrailer008.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer008.registrationLastMaintenanceDate := Date('2023-03-29')
+!coveredTrailer008.expirationDate := Date('2024-03-28')
+
+!new Truck('truck009')
+!truck009.id := 309
+!truck009.registrationState := #CO
+!truck009.licensePlateNumber := 'WY1234TR'
+!truck009.vehicleTypeCode := #TRUCK
+!truck009.registrationLastMaintenanceDate := Date('2023-02-10')
+!truck009.expirationDate := Date('2024-02-09')
+!truck009.odometerReading := 25000
+!truck009.gasTankCapacity := 21.5
+!truck009.workingRadio := false
+!truck009.mileage := 40000
+
+!new Individual('individualEmmaJohnson')
+!individualEmmaJohnson.name := 'Emma Johnson'
+!individualEmmaJohnson.address := '81 Cowboy Way, Jackson, WY 83001'
+!individualEmmaJohnson.poorRisk := false
+!individualEmmaJohnson.homePhone := '307-555-7856'
+!individualEmmaJohnson.driverLicenseState := #CO
+!individualEmmaJohnson.driverLicenseNumber := 876543210
+!individualEmmaJohnson.driverLicenseExpirationDate := Date('2026-01-21')
+
+!new RentalAgreement('rentalAgreement5005')
+!rentalAgreement5005.number := 5005
+!rentalAgreement5005.rentalDate := Date('2024-03-03')
+!rentalAgreement5005.anticipatedDuration := 10
+!rentalAgreement5005.depositPaid := 300.0
+!rentalAgreement5005.quotedDailyRate := 55.0
+!rentalAgreement5005.quotedRatePerMile := 0.35
+
+!insert (officeSaltLakeCityDepot, coveredTrailer008) into RentalOfficeVehicle
+!insert (officeSaltLakeCityDepot, truck009) into RentalOfficeVehicle
+
+!insert (officeSaltLakeCityDepot, rentalAgreement5005) into RentalOfficeRentalAgreementOrigin
+!insert (officeSaltLakeCityDepot, rentalAgreement5005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5005, truck009) into RentalAgreementVehicle
+!insert (rentalAgreement5005, individualEmmaJohnson) into RentalAgreementCustomer

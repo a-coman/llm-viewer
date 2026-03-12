@@ -1,0 +1,51 @@
+!new AddressBook('addressBook7')
+
+!new Company('company7')
+!company7.name := 'ArtiDesign'
+!company7.phone := '123-789-4560'
+!company7.website := 'www.artidesign.com'
+!company7.email := 'contact@artidesign.com'
+!company7.industry := 'Interior Design'
+
+!new Person('person11')
+!person11.name := 'Liam Wilson'
+!person11.phone := '888-444-6666'
+!person11.website := 'www.liamwilsondesigns.com'
+!person11.email := 'liam.wilson@artidesign.com'
+!person11.title := 'Creative Director'
+
+!new Note('note11')
+!note11.author := 'Liam Wilson'
+!note11.time := Date('2023-06-25')
+!note11.type := #EMAIL
+!note11.comment := 'Feedback on new client proposal.'
+
+!new Address('address11')
+!address11.city := 'Artistry City'
+!address11.houseNr := '232'
+!address11.street := 'Palette St'
+
+!new Address('address12')
+!address12.city := 'Designer Town'
+!address12.houseNr := '789-Z'
+!address12.street := 'Canvas Way'
+
+!new Relationship('relationship12')
+!relationship12.type := #COWORKER
+
+!new Relationship('relationship13')
+!relationship13.type := #BOSS
+
+!insert (addressBook7, company7) into AddressBookMadeOfContact
+!insert (addressBook7, person11) into AddressBookMadeOfContact
+
+!insert (person11, note11) into ContactContainsNote
+
+!insert (company7, relationship13) into ContactToRelationship
+!insert (relationship13, person11) into RelationshipToContact
+
+!insert (person11, relationship12) into ContactToRelationship
+!insert (relationship12, company7) into RelationshipToContact
+
+!insert (company7, address11) into ContactContainsAddress
+!insert (person11, address12) into ContactContainsAddress

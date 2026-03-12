@@ -1,0 +1,52 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client55')
+!client55.clientId := 55
+!client55.isSuspended := false
+
+-- Creating another client with a unique suspension status
+!new Client('client56')
+!client56.clientId := 56
+!client56.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental52')
+!rental52.date := Date('2023-12-03')
+
+-- Adding a second distinct rental
+!new Rental('rental53')
+!rental53.date := Date('2023-12-04')
+
+-- Creating Cassettes and Movies
+!new Movie('movie33')
+!movie33.title := 'Eternal Sunshine'
+!movie33.availableCopies := 6
+!movie33.genre := #Comedy
+
+-- Introducing a series for structural variety
+!new Series('series24')
+!series24.title := 'Hidden Wonders'
+!series24.availableCopies := 5
+!series24.episode := 7
+
+-- Creating Actors
+!new Actor('actor54')
+!actor54.name := 'Lillian Moore'
+
+-- Adding another actor to enhance diversity
+!new Actor('actor55')
+!actor55.name := 'Henry Blackwell'
+
+-- Creating associations between Clients and Rentals
+!insert (client55, rental52) into ClientRental
+!insert (client56, rental53) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental52, movie33) into RentalCassette
+!insert (rental53, series24) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie33, actor54) into CassetteActor
+!insert (series24, actor55) into CassetteActor
+!insert (series24, actor54) into CassetteActor

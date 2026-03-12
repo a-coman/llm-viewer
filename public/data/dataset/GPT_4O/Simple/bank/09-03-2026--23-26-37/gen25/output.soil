@@ -1,0 +1,50 @@
+!new Bank('bank49')
+!bank49.country := 'Greece'
+!bank49.name := 'National Bank of Greece'
+!bank49.bic := 'ETHNGRAA'
+
+!new Bank('bank50')
+!bank50.country := 'New Zealand'
+!bank50.name := 'Kiwibank'
+!bank50.bic := 'KIWINZ22'
+
+!new Account('account73')
+!account73.iban := 'GR1601101250000000012300695'
+!account73.balance := 8200
+
+!new Account('account74')
+!account74.iban := 'NZ9300000123456789012'
+!account74.balance := 5700
+
+!new Account('account75')
+!account75.iban := 'GR1601101250000000012300696'
+!account75.balance := 1200
+
+!new Person('person73')
+!person73.firstName := 'Nikos'
+!person73.lastName := 'Papadopoulos'
+!person73.age := 60
+
+!new Person('person74')
+!person74.firstName := 'Mia'
+!person74.lastName := 'Johnson'
+!person74.age := 46
+
+!new Person('person75')
+!person75.firstName := 'Eleni'
+!person75.lastName := 'Katsaros'
+!person75.age := 34
+
+!insert (person73, account73) into Ownership
+!insert (person74, account74) into Ownership
+!insert (person75, account75) into Ownership
+!insert (person73, account75) into Ownership
+
+!insert (person73, account73) into Use
+!insert (person74, account74) into Use
+!insert (person75, account75) into Use
+!insert (person74, account73) into Use
+
+!insert (bank49, account73) into AccountOfBanks
+!insert (bank50, account74) into AccountOfBanks
+!insert (bank49, account75) into AccountOfBanks

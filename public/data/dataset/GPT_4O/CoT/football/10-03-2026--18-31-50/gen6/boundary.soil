@@ -1,0 +1,193 @@
+!new Club('clubBF')
+!clubBF.name := 'Savannah Lions'
+!clubBF.homeGround := "Lions' Pride Stadium"
+!clubBF.chairman := 'Kwame Mensah'
+
+!new Club('clubBG')
+!clubBG.name := 'Polar Owls'
+!clubBG.homeGround := 'Icicle Arena'
+!clubBG.chairman := 'Elena Ivanova'
+
+!new Team('teamBF')
+!teamBF.name := 'Grassland Warriors'
+
+!new Team('teamBG')
+!teamBG.name := 'Frosty Flyers'
+
+!insert (clubBF, teamBF) into ClubTeam
+!insert (clubBG, teamBG) into ClubTeam
+
+!new Player('player65')
+!player65.name := 'Abena Afolabi'
+!player65.age := 23
+!player65.bestFoot := #RIGHT
+!player65.phoneNumber := '+233201234567'
+
+!new Player('player66')
+!player66.name := 'Viktor Bogdan'
+!player66.age := 31
+!player66.bestFoot := #BOTH
+!player66.phoneNumber := '+74991234567'
+
+!insert (teamBF, player65) into TeamPlayer
+!insert (teamBG, player66) into TeamPlayer
+
+!new Position('position117')
+!position117.positionName := #MIDFIELDER
+
+!new Position('position118')
+!position118.positionName := #DEFENDER
+
+!insert (player65, position117) into PlayerPositions
+!insert (player66, position118) into PlayerPositions
+!insert (player66, position117) into PlayerPositions
+
+!new TrainingSession('trainingSession50')
+!trainingSession50.date := '2023-08-01'
+!trainingSession50.location := 'Pride Practice Grounds'
+!trainingSession50.purpose := 'High-Temperature Conditioning'
+
+!new TrainingSession('trainingSession51')
+!trainingSession51.date := '2023-07-31'
+!trainingSession51.location := 'Icicle Arena Practice Field'
+!trainingSession51.purpose := 'Cold Weather Endurance'
+
+!insert (teamBF, trainingSession50) into TeamTraining
+!insert (teamBG, trainingSession51) into TeamTraining
+
+!new TrainingNotes('trainingNote50')
+!trainingNote50.note := 'Focus on hydration strategies and maintaining performance in extreme heat.'
+!trainingNote50.date := '2023-08-01'
+
+!new TrainingNotes('trainingNote51')
+!trainingNote51.note := 'Exercises to maintain stamina in cold conditions.'
+!trainingNote51.date := '2023-07-31'
+
+!insert (trainingSession50, trainingNote50) into TrainingTrainingNotes
+!insert (trainingSession51, trainingNote51) into TrainingTrainingNotes
+
+!new Competition('competition26')
+!competition26.name := 'Equator Cup'
+!competition26.type := 'Invitational'
+
+!new Match('match33')
+!match33.date := '2023-08-10'
+!match33.homeAway := false
+
+!insert (teamBF, match33) into LocalMatch
+!insert (teamBG, match33) into VisitorMatch
+!insert (competition26, match33) into CompetitionMatch
+
+!new MatchEvent('matchEvent94')
+!matchEvent94.eventType := #GOAL
+!matchEvent94.time := 22
+
+!new MatchEvent('matchEvent95')
+!matchEvent95.eventType := #FOUL
+!matchEvent95.time := 45
+
+!new MatchEvent('matchEvent96')
+!matchEvent96.eventType := #GOAL
+!matchEvent96.time := 78
+
+!insert (match33, matchEvent94) into MatchMatchEvent
+!insert (match33, matchEvent95) into MatchMatchEvent
+!insert (match33, matchEvent96) into MatchMatchEvent
+
+!new MatchReport('matchReport33')
+!matchReport33.duration := 90
+!matchReport33.scoreVisitor := 0
+!matchReport33.scoreLocal := 2
+
+!insert (match33, matchReport33) into MatchMatchReport
+
+!new MatchNote('matchNote22')
+!matchNote22.note := 'The Grassland Warriors executed successful heat adaptation strategies.'
+!matchNote22.date := '2023-08-10'
+
+!insert (match33, matchNote22) into MatchMatchNote
+
+!new Match('match34')
+!match34.date := '2023-08-20'
+!match34.homeAway := true
+
+!insert (teamBG, match34) into LocalMatch
+!insert (teamBF, match34) into VisitorMatch
+!insert (competition26, match34) into CompetitionMatch
+
+!new MatchEvent('matchEvent97')
+!matchEvent97.eventType := #GOAL
+!matchEvent97.time := 60
+
+!new MatchEvent('matchEvent98')
+!matchEvent98.eventType := #FOUL
+!matchEvent98.time := 80
+
+!new MatchEvent('matchEvent99')
+!matchEvent99.eventType := #GOAL
+!matchEvent99.time := 85
+
+!insert (match34, matchEvent97) into MatchMatchEvent
+!insert (match34, matchEvent98) into MatchMatchEvent
+!insert (match34, matchEvent99) into MatchMatchEvent
+
+!new MatchReport('matchReport34')
+!matchReport34.duration := 90
+!matchReport34.scoreVisitor := 1
+!matchReport34.scoreLocal := 1
+
+!insert (match34, matchReport34) into MatchMatchReport
+
+!new MatchNote('matchNote23')
+!matchNote23.note := 'The game extended to penalties, highlighting defensive strengths.'
+!matchNote23.date := '2023-08-20'
+
+!insert (match34, matchNote23) into MatchMatchNote
+
+!new PlayerNotes('playerNote26')
+!playerNote26.note := 'Displays exemplary leadership in high-pressure situations.'
+!playerNote26.date := '2023-07-15'
+
+!insert (player65, playerNote26) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer60')
+!matchPlayer60.booked := false
+!matchPlayer60.goals := 1
+!matchPlayer60.rating := 9
+
+!new MatchPlayer('matchPlayer61')
+!matchPlayer61.booked := true
+!matchPlayer61.goals := 0
+!matchPlayer61.rating := 8
+
+!insert (player65, matchPlayer60) into PlayerMatch
+!insert (player66, matchPlayer61) into PlayerMatch
+
+!insert (match33, matchPlayer60) into MatchMatchPlayer
+!insert (match34, matchPlayer61) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp60')
+!mpp60.positionName := #MIDFIELDER
+!mpp60.number := 7
+
+!new MatchPlayerPosition('mpp61')
+!mpp61.positionName := #DEFENDER
+!mpp61.number := 5
+
+!insert (matchPlayer60, mpp60) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer61, mpp61) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective48')
+!trainingObjective48.areaToImprove := 'Improve Ball Control Under Pressure'
+!trainingObjective48.startDate := '2023-06-01'
+!trainingObjective48.endDate := '2023-07-01'
+!trainingObjective48.success := true
+
+!new TrainingObjective('trainingObjective49')
+!trainingObjective49.areaToImprove := 'Defensive Techniques'
+!trainingObjective49.startDate := '2023-06-01'
+!trainingObjective49.endDate := '2023-07-01'
+!trainingObjective49.success := true
+
+!insert (trainingObjective48, player66) into TrainingObjectivePlayer
+!insert (trainingObjective49, player65) into TrainingObjectivePlayer

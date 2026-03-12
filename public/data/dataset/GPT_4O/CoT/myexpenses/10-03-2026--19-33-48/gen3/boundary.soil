@@ -1,0 +1,37 @@
+!new Expense('complexExpense')
+!complexExpense.amount := 5000.00
+!complexExpense.startDate := Date('2023-11-01')
+!complexExpense.endDate := Date('2023-11-30')
+
+!new Bill('conferenceRegistrationBill')
+!conferenceRegistrationBill.amount := 3000.00
+!conferenceRegistrationBill.category := 'International Conference Registration'
+!conferenceRegistrationBill.date := Date('2023-11-05')
+!conferenceRegistrationBill.paymentMethod := #CREDIT_CARD
+!conferenceRegistrationBill.status := #VALIDATED
+
+!new Bill('flightTicketsBill')
+!flightTicketsBill.amount := 2000.00
+!flightTicketsBill.category := 'Flight Tickets'
+!flightTicketsBill.date := Date('2023-11-10')
+!flightTicketsBill.paymentMethod := #CASH
+!flightTicketsBill.status := #VERIFIED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (conferenceRegistrationBill, currencyEUR) into BillCurrency
+!insert (flightTicketsBill, currencyEUR) into BillCurrency
+
+!insert (complexExpense, conferenceRegistrationBill) into ExpenseContainsBills
+!insert (complexExpense, flightTicketsBill) into ExpenseContainsBills
+
+!new Comment('conferenceComment')
+!conferenceComment.text := 'Attending the annual international tech conference.'
+
+!new Comment('flightArrangementComment')
+!flightArrangementComment.text := 'Flight arrangements were verified and secured in cash.'
+
+!insert (complexExpense, conferenceComment) into ExpenseComment
+!insert (complexExpense, flightArrangementComment) into ExpenseComment

@@ -1,0 +1,50 @@
+!new Bank('bank33')
+!bank33.country := 'Canada'
+!bank33.name := 'Scotiabank'
+!bank33.bic := 'NOSCCATTC'
+
+!new Bank('bank34')
+!bank34.country := 'Israel'
+!bank34.name := 'Bank Hapoalim'
+!bank34.bic := 'POALILIT'
+
+!new Account('account49')
+!account49.iban := 'CA891234567890123456789'
+!account49.balance := 9400
+
+!new Account('account50')
+!account50.iban := 'IL620307600000123456789'
+!account50.balance := 3600
+
+!new Account('account51')
+!account51.iban := 'CA891234567890123456788'
+!account51.balance := 500
+
+!new Person('person49')
+!person49.firstName := 'Lucas'
+!person49.lastName := 'Thompson'
+!person49.age := 40
+
+!new Person('person50')
+!person50.firstName := 'Leah'
+!person50.lastName := 'Cohen'
+!person50.age := 46
+
+!new Person('person51')
+!person51.firstName := 'Sara'
+!person51.lastName := 'Davies'
+!person51.age := 31
+
+!insert (person49, account49) into Ownership
+!insert (person50, account50) into Ownership
+!insert (person51, account51) into Ownership
+!insert (person49, account51) into Ownership
+
+!insert (person49, account49) into Use
+!insert (person50, account50) into Use
+!insert (person51, account51) into Use
+!insert (person50, account49) into Use
+
+!insert (bank33, account49) into AccountOfBanks
+!insert (bank34, account50) into AccountOfBanks
+!insert (bank33, account51) into AccountOfBanks

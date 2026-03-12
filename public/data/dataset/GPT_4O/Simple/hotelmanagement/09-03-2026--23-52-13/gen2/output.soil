@@ -1,0 +1,44 @@
+!new Booking('booking3')
+!booking3.startDate := '2024-01-05'
+!booking3.endDate := '2024-01-12'
+!booking3.canceled := true
+!booking3.bookingId := 103
+!booking3.confirmed := false
+
+!new Bill('bill3')
+!bill3.price := 0.00
+!bill3.billId := 5003
+
+!new Customer('customer3')
+!customer3.firstName := 'Charlie'
+!customer3.lastName := 'Davis'
+
+!new RoomReservation('reservation3')
+!reservation3.checkInDate := '2024-01-05'
+!reservation3.checkOutDate := '2024-01-12'
+
+!new Room('room103')
+!room103.numBeds := 1
+!room103.pricePerNight := 80.00
+!room103.occupied := false
+!room103.blocked := true
+!room103.roomNumber := 103
+
+!new Room('room104')
+!room104.numBeds := 1
+!room104.pricePerNight := 85.00
+!room104.occupied := false
+!room104.blocked := false
+!room104.roomNumber := 104
+
+!new RoomExtra('extra3')
+!extra3.price := 30.00
+!extra3.description := 'Late Checkout'
+
+!insert (booking3, bill3) into BookingBill
+!insert (booking3, customer3) into BookingCustomer
+!insert (booking3, reservation3) into BookingRoomReservation
+!insert (reservation3, extra3) into RoomReservationExtras
+!insert (reservation3, room103) into RoomReservationRoom
+!insert (reservation3, room104) into RoomReservationRoom
+!insert (bill3, reservation3) into BillRoomReservation

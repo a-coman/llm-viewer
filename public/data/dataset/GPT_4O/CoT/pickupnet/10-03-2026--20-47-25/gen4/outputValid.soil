@@ -1,0 +1,418 @@
+!new Driver('driver30')
+!driver30.id := 'DRV303202'
+!driver30.name := 'Charlie Fastlane'
+
+!new Driver('driver31')
+!driver31.id := 'DRV303203'
+!driver31.name := 'Riley Quickdash'
+
+!new Shipment('shipment37')
+!shipment37.id := 'SHP202103'
+!shipment37.status := #NEW
+
+!new Shipment('shipment38')
+!shipment38.id := 'SHP202104'
+!shipment38.status := #NEW
+
+!new Shipment('shipment39')
+!shipment39.id := 'SHP202105'
+!shipment39.status := #NEW
+
+!new Address('address70')
+!address70.text := 'Central Hospital, 10 Medical Ave, Gotham City'
+
+!new GeoLocation('geoLocation70')
+!geoLocation70.latitude := 40.730610
+!geoLocation70.longitude := -73.935242
+
+!insert (address70, geoLocation70) into AddressContainsGeoLocation
+
+!new Address('address71')
+!address71.text := 'Northview Clinic, 22 Wellness Street, Metropolis'
+
+!new GeoLocation('geoLocation71')
+!geoLocation71.latitude := 34.052235
+!geoLocation71.longitude := -118.243683
+
+!insert (address71, geoLocation71) into AddressContainsGeoLocation
+
+!new Address('address72')
+!address72.text := 'Eastside Emergency Room, 88 Health Blvd, Star City'
+
+!new GeoLocation('geoLocation72')
+!geoLocation72.latitude := 39.971778
+!geoLocation72.longitude := -105.217499
+
+!insert (address72, geoLocation72) into AddressContainsGeoLocation
+
+!new Customer('customer27')
+!customer27.id := 'CUS111222'
+!customer27.name := 'Medical Express LLC'
+!customer27.twitterUserName := '@MediExLLC'
+
+!new Station('station25')
+
+!insert (driver30, shipment37) into DriverShipment
+!insert (driver31, shipment38) into DriverShipment
+!insert (driver31, shipment39) into DriverShipment
+
+!insert (shipment37, address70) into ShipmentContainsPickUpAddress
+!insert (shipment38, address70) into ShipmentContainsPickUpAddress
+!insert (shipment39, address70) into ShipmentContainsPickUpAddress
+
+!insert (shipment37, address71) into ShipmentContainsDeliveryAddress
+!insert (shipment38, address72) into ShipmentContainsDeliveryAddress
+!insert (shipment39, address72) into ShipmentContainsDeliveryAddress
+
+!insert (customer27, shipment37) into CustomerConsistsOfShipment
+!insert (customer27, shipment38) into CustomerConsistsOfShipment
+!insert (customer27, shipment39) into CustomerConsistsOfShipment
+
+!insert (station25, driver30) into StationContainsDriver
+!insert (station25, driver31) into StationContainsDriver
+!insert (station25, shipment37) into StationShipment
+!insert (station25, shipment38) into StationShipment
+!insert (station25, shipment39) into StationShipment
+!insert (station25, customer27) into StationContainsCustomer
+
+!new Driver('driver32')
+!driver32.id := 'DRV007'
+!driver32.name := 'Kwame Mensah'
+
+!new Driver('driver33')
+!driver33.id := 'DRV008'
+!driver33.name := 'Emily Johnson'
+
+!new Customer('customer28')
+!customer28.id := 'CUST009'
+!customer28.name := 'Fatima El-Shabazz'
+!customer28.twitterUserName := '@fatima_egypt'
+
+!new Customer('customer29')
+!customer29.id := 'CUST010'
+!customer29.name := 'Carlos Ramirez'
+!customer29.twitterUserName := '@carlos_r_mex'
+
+!new Customer('customer30')
+!customer30.id := 'CUST011'
+!customer30.name := 'Liam O\'Connor'
+!customer30.twitterUserName := '@liam_oc_usa'
+
+!new Address('address73')
+!address73.text := '5th Avenue, New York, NY, USA'
+
+!new GeoLocation('geoLocation73')
+!geoLocation73.latitude := 40.758896
+!geoLocation73.longitude := -73.985130
+
+!insert (address73, geoLocation73) into AddressContainsGeoLocation
+
+!new Address('address74')
+!address74.text := 'Rue Royale, Dakar, Senegal'
+
+!new GeoLocation('geoLocation74')
+!geoLocation74.latitude := 14.692778
+!geoLocation74.longitude := -17.446667
+
+!insert (address74, geoLocation74) into AddressContainsGeoLocation
+
+!new Address('address75')
+!address75.text := 'Polanco, Mexico City, Mexico'
+
+!new GeoLocation('geoLocation75')
+!geoLocation75.latitude := 19.43306
+!geoLocation75.longitude := -99.13323
+
+!insert (address75, geoLocation75) into AddressContainsGeoLocation
+
+!new Address('address76')
+!address76.text := 'King\'s Cross, London, UK'
+
+!new GeoLocation('geoLocation76')
+!geoLocation76.latitude := 51.5308
+!geoLocation76.longitude := -0.1207
+
+!insert (address76, geoLocation76) into AddressContainsGeoLocation
+
+!new Address('address77')
+!address77.text := 'Cairo International Airport, Cairo, Egypt'
+
+!new GeoLocation('geoLocation77')
+!geoLocation77.latitude := 30.121941
+!geoLocation77.longitude := 31.405471
+
+!insert (address77, geoLocation77) into AddressContainsGeoLocation
+
+!new Address('address78')
+!address78.text := 'Lagos Mainland, Lagos, Nigeria'
+
+!new GeoLocation('geoLocation78')
+!geoLocation78.latitude := 6.524379
+!geoLocation78.longitude := 3.379206
+
+!insert (address78, geoLocation78) into AddressContainsGeoLocation
+
+!new Shipment('shipment40')
+!shipment40.id := 'SHIP009'
+!shipment40.status := #UNDERWAY
+
+!new Shipment('shipment41')
+!shipment41.id := 'SHIP010'
+!shipment41.status := #NEW
+
+!new Shipment('shipment42')
+!shipment42.id := 'SHIP011'
+!shipment42.status := #DELIVERED
+
+!insert (shipment40, address73) into ShipmentContainsPickUpAddress
+!insert (shipment40, address74) into ShipmentContainsDeliveryAddress
+
+!insert (shipment41, address75) into ShipmentContainsPickUpAddress
+!insert (shipment41, address76) into ShipmentContainsDeliveryAddress
+
+!insert (shipment42, address77) into ShipmentContainsPickUpAddress
+!insert (shipment42, address78) into ShipmentContainsDeliveryAddress
+
+!insert (customer28, shipment42) into CustomerConsistsOfShipment
+!insert (customer29, shipment41) into CustomerConsistsOfShipment
+!insert (customer30, shipment40) into CustomerConsistsOfShipment
+
+!insert (driver32, shipment42) into DriverShipment
+!insert (driver33, shipment40) into DriverShipment
+
+!new Station('station26')
+
+!new Station('station27')
+
+!new Station('station28')
+
+!insert (station26, customer30) into StationContainsCustomer
+!insert (station26, driver33) into StationContainsDriver
+!insert (station26, shipment40) into StationShipment
+
+!insert (station27, customer29) into StationContainsCustomer
+!insert (station27, shipment41) into StationShipment
+
+!insert (station28, customer28) into StationContainsCustomer
+!insert (station28, driver32) into StationContainsDriver
+!insert (station28, shipment42) into StationShipment
+
+!new Driver('driver35')
+!driver35.id := 'DR-401'
+!driver35.name := 'Giovanna Carvalho'
+
+!new Driver('driver36')
+!driver36.id := 'DR-402'
+!driver36.name := 'Mateus Silva'
+
+!new Shipment('shipment44')
+!shipment44.id := 'SH-801'
+!shipment44.status := #DELIVERED
+
+!new Shipment('shipment45')
+!shipment45.id := 'SH-802'
+!shipment45.status := #ASSIGNED
+
+!new Shipment('shipment46')
+!shipment46.id := 'SH-803'
+!shipment46.status := #UNDERWAY
+
+!new Shipment('shipment47')
+!shipment47.id := 'SH-804'
+!shipment47.status := #NEW
+
+!new Address('address80')
+!address80.text := 'Rua Augusta, 1500, Consolação, São Paulo, SP'
+
+!new GeoLocation('geoLocation80')
+!geoLocation80.latitude := -23.5558
+!geoLocation80.longitude := -46.6619
+
+!insert (address80, geoLocation80) into AddressContainsGeoLocation
+
+!new Address('address81')
+!address81.text := 'Av. Paulista, 900, Bela Vista, São Paulo, SP'
+
+!new GeoLocation('geoLocation81')
+!geoLocation81.latitude := -23.5631
+!geoLocation81.longitude := -46.6543
+
+!insert (address81, geoLocation81) into AddressContainsGeoLocation
+
+!new Address('address82')
+!address82.text := 'Rua Oscar Freire, 350, Jardins, São Paulo, SP'
+
+!new GeoLocation('geoLocation82')
+!geoLocation82.latitude := -23.5636
+!geoLocation82.longitude := -46.6674
+
+!insert (address82, geoLocation82) into AddressContainsGeoLocation
+
+!new Address('address83')
+!address83.text := 'Av. Ibirapuera, 4000, Moema, São Paulo, SP'
+
+!new GeoLocation('geoLocation83')
+!geoLocation83.latitude := -23.6102
+!geoLocation83.longitude := -46.6618
+
+!insert (address83, geoLocation83) into AddressContainsGeoLocation
+
+!new Address('address84')
+!address84.text := 'Rua 25 de Março, 100, Centro, São Paulo, SP'
+
+!new GeoLocation('geoLocation84')
+!geoLocation84.latitude := -23.5433
+!geoLocation84.longitude := -46.6283
+
+!insert (address84, geoLocation84) into AddressContainsGeoLocation
+
+!new Address('address85')
+!address85.text := 'Rua da Consolação, 2000, Centro, São Paulo, SP'
+
+!new GeoLocation('geoLocation85')
+!geoLocation85.latitude := -23.5518
+!geoLocation85.longitude := -46.6412
+
+!insert (address85, geoLocation85) into AddressContainsGeoLocation
+
+!new Station('station30')
+
+!new Station('station31')
+
+!new Customer('customer32')
+!customer32.id := 'CUST-601'
+!customer32.name := 'Carlos Mendes'
+!customer32.twitterUserName := '@carlos_msp'
+
+!new Customer('customer33')
+!customer33.id := 'CUST-602'
+!customer33.name := 'Juliana Oliveira'
+!customer33.twitterUserName := '@juliana_oliv'
+
+!new Customer('customer34')
+!customer34.id := 'CUST-603'
+!customer34.name := 'Lucas Pereira'
+!customer34.twitterUserName := '@lucas_p_sampa'
+
+!insert (driver35, shipment44) into DriverShipment
+!insert (driver35, shipment45) into DriverShipment
+!insert (driver36, shipment46) into DriverShipment
+
+!insert (shipment44, address80) into ShipmentContainsPickUpAddress
+!insert (shipment45, address82) into ShipmentContainsPickUpAddress
+!insert (shipment46, address84) into ShipmentContainsPickUpAddress
+!insert (shipment47, address82) into ShipmentContainsPickUpAddress
+
+!insert (shipment44, address81) into ShipmentContainsDeliveryAddress
+!insert (shipment45, address83) into ShipmentContainsDeliveryAddress
+!insert (shipment46, address85) into ShipmentContainsDeliveryAddress
+!insert (shipment47, address81) into ShipmentContainsDeliveryAddress
+
+!insert (customer32, shipment44) into CustomerConsistsOfShipment
+!insert (customer33, shipment45) into CustomerConsistsOfShipment
+!insert (customer34, shipment46) into CustomerConsistsOfShipment
+!insert (customer34, shipment47) into CustomerConsistsOfShipment
+
+!insert (station30, customer32) into StationContainsCustomer
+!insert (station30, customer33) into StationContainsCustomer
+!insert (station30, customer34) into StationContainsCustomer
+
+!insert (station30, shipment44) into StationShipment
+!insert (station30, shipment46) into StationShipment
+!insert (station30, shipment47) into StationShipment
+!insert (station31, shipment45) into StationShipment
+
+!insert (station30, driver35) into StationContainsDriver
+!insert (station30, driver36) into StationContainsDriver
+
+!new Driver('driver37')
+!driver37.id := 'DR4321'
+!driver37.name := 'Juan López'
+
+!new Customer('customer35')
+!customer35.id := 'CU3000'
+!customer35.name := 'Zhen Yao'
+!customer35.twitterUserName := '@ZhenYaoChina'
+
+!new Shipment('shipment48')
+!shipment48.id := 'SH1001'
+!shipment48.status := #NEW
+
+!new Shipment('shipment49')
+!shipment49.id := 'SH1002'
+!shipment49.status := #ASSIGNED
+
+!new Shipment('shipment50')
+!shipment50.id := 'SH1003'
+!shipment50.status := #DELIVERED
+
+!new Address('address86')
+!address86.text := '65 Kyoto Street, Tokyo, Japan'
+
+!new GeoLocation('geoLocation86')
+!geoLocation86.latitude := 35.689487
+!geoLocation86.longitude := 139.691711
+
+!insert (address86, geoLocation86) into AddressContainsGeoLocation
+
+!new Address('address87')
+!address87.text := '123 Seoul Drive, Seoul, South Korea'
+
+!new GeoLocation('geoLocation87')
+!geoLocation87.latitude := 37.566536
+!geoLocation87.longitude := 126.977966
+
+!insert (address87, geoLocation87) into AddressContainsGeoLocation
+
+!new Address('address88')
+!address88.text := '456 Ganges Road, Mumbai, India'
+
+!new GeoLocation('geoLocation88')
+!geoLocation88.latitude := 19.076090
+!geoLocation88.longitude := 72.877426
+
+!insert (address88, geoLocation88) into AddressContainsGeoLocation
+
+!new Address('address89')
+!address89.text := '789 Great Wall Avenue, Beijing, China'
+
+!new GeoLocation('geoLocation89')
+!geoLocation89.latitude := 39.904202
+!geoLocation89.longitude := 116.407394
+
+!insert (address89, geoLocation89) into AddressContainsGeoLocation
+
+!new Address('address90')
+!address90.text := '234 Huangpu River Avenue, Shanghai, China'
+
+!new GeoLocation('geoLocation90')
+!geoLocation90.latitude := 31.230391
+!geoLocation90.longitude := 121.473701
+
+!insert (address90, geoLocation90) into AddressContainsGeoLocation
+
+!new Station('station32')
+
+!insert (driver37, shipment49) into DriverShipment
+
+!insert (shipment48, address86) into ShipmentContainsPickUpAddress
+!insert (shipment48, address87) into ShipmentContainsDeliveryAddress
+
+!insert (shipment49, address86) into ShipmentContainsPickUpAddress
+!insert (shipment49, address88) into ShipmentContainsDeliveryAddress
+
+!insert (shipment50, address89) into ShipmentContainsPickUpAddress
+!insert (shipment50, address90) into ShipmentContainsDeliveryAddress
+
+!insert (customer35, shipment48) into CustomerConsistsOfShipment
+!insert (customer35, shipment49) into CustomerConsistsOfShipment
+!insert (customer35, shipment50) into CustomerConsistsOfShipment
+
+!insert (station32, customer35) into StationContainsCustomer
+
+!insert (station32, shipment48) into StationShipment
+!insert (station32, shipment49) into StationShipment
+!insert (station32, shipment50) into StationShipment
+
+!insert (station32, driver37) into StationContainsDriver
+

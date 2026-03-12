@@ -1,0 +1,53 @@
+!new Client('client16')
+!client16.clientId := 4589
+!client16.isSuspended := true
+
+!new Rental('rental24')
+!rental24.date := Date('2023-03-05')
+
+!new Rental('rental25')
+!rental25.date := Date('2023-03-05')
+
+!new Rental('rental26')
+!rental26.date := Date('2023-10-01')
+
+!new Movie('movie20')
+!movie20.title := 'Historical Heist'
+!movie20.availableCopies := 6
+!movie20.genre := #Action
+
+!new Movie('movie21')
+!movie21.title := 'Laughing Stock'
+!movie21.availableCopies := 4
+!movie21.genre := #Comedy
+
+!new Series('series20')
+!series20.title := 'Mystery Unveiled Season 4'
+!series20.availableCopies := 1
+!series20.episode := 7
+
+!new Actor('actor37')
+!actor37.name := 'Isabella Nguyen'
+
+!new Actor('actor38')
+!actor38.name := 'Samuel Ling'
+
+!new Actor('actor39')
+!actor39.name := 'Fatima Al-Hassan'
+
+!insert (client16, rental24) into ClientRental
+!insert (client16, rental25) into ClientRental
+!insert (client16, rental26) into ClientRental
+
+!insert (rental24, movie20) into RentalCassette
+!insert (rental25, movie21) into RentalCassette
+!insert (rental26, series20) into RentalCassette
+
+!insert (movie20, actor37) into CassetteActor
+!insert (movie20, actor38) into CassetteActor
+
+!insert (movie21, actor38) into CassetteActor
+!insert (movie21, actor39) into CassetteActor
+
+!insert (series20, actor39) into CassetteActor
+!insert (series20, actor37) into CassetteActor

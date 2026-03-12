@@ -1,0 +1,59 @@
+!new Customer('customer28')
+!customer28.firstName := 'Emergency'
+!customer28.lastName := 'Coordinator'
+
+!new Booking('booking27')
+!booking27.startDate := '10-02-2024'
+!booking27.endDate := '15-02-2024'
+!booking27.canceled := false
+!booking27.bookingId := 105
+!booking27.confirmed := true
+
+!new RoomReservation('roomReservation27')
+!roomReservation27.checkInDate := '10-02-2024'
+!roomReservation27.checkOutDate := '15-02-2024'
+
+!new Room('room27_401')
+!room27_401.numBeds := 4
+!room27_401.pricePerNight := 0.00
+!room27_401.occupied := true
+!room27_401.blocked := false
+!room27_401.roomNumber := 601
+
+!new Room('room27_402')
+!room27_402.numBeds := 4
+!room27_402.pricePerNight := 0.00
+!room27_402.occupied := true
+!room27_402.blocked := false
+!room27_402.roomNumber := 602
+
+!new RoomExtra('extra27_1')
+!extra27_1.price := 0.00
+!extra27_1.description := 'Rapid Medical Assistance'
+
+!new RoomExtra('extra27_2')
+!extra27_2.price := 0.00
+!extra27_2.description := 'Round-the-Clock Meal Service'
+
+!new RoomExtra('extra27_3')
+!extra27_3.price := 0.00
+!extra27_3.description := 'Temporary Clothing Supply'
+
+!new Bill('bill53')
+!bill53.price := 0.00
+!bill53.billId := 509
+
+!insert (booking27, customer28) into BookingCustomer
+
+!insert (booking27, roomReservation27) into BookingRoomReservation
+
+!insert (booking27, bill53) into BookingBill
+
+!insert (roomReservation27, room27_401) into RoomReservationRoom
+!insert (roomReservation27, room27_402) into RoomReservationRoom
+
+!insert (roomReservation27, extra27_1) into RoomReservationExtras
+!insert (roomReservation27, extra27_2) into RoomReservationExtras
+!insert (roomReservation27, extra27_3) into RoomReservationExtras
+
+!insert (bill53, roomReservation27) into BillRoomReservation

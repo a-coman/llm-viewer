@@ -1,0 +1,88 @@
+!new Restaurant('restaurant3')
+!restaurant3.name := 'World Flavors'
+
+!new Owner('owner6')
+!owner6.name := 'Rachel Adams'
+!owner6.percentageShares := 70
+!insert (restaurant3, owner6) into RestaurantOwner
+
+!new Owner('owner7')
+!owner7.name := 'Mark Johnson'
+!owner7.percentageShares := 30
+!insert (restaurant3, owner7) into RestaurantOwner
+
+!new Table('table6')
+!table6.number := 6
+!table6.description := 'Alcove table'
+!table6.capacity := 10
+
+!new Table('table7')
+!table7.number := 7
+!table7.description := 'High-top table'
+!table7.capacity := 3
+
+!new RegularCustomer('customer4')
+!customer4.name := 'Maxwell Carter'
+!customer4.prefferedLanguage := #German
+
+!new Waiter('waiter5')
+!waiter5.name := 'Sophia Clark'
+!waiter5.dateOfBirth := Date('1994-12-01')
+!waiter5.phoneNumber := '555-1122'
+!waiter5.spokenLanguage := #Italian
+
+!new HeadWaiter('headwaiter3')
+!headwaiter3.name := 'Victor Hugo'
+!headwaiter3.dateOfBirth := Date('1979-03-15')
+!headwaiter3.phoneNumber := '555-2244'
+
+!insert (headwaiter3, waiter5) into HeadWaiterWaiter
+
+!new Individual('reservation4')
+!reservation4.time := Time('13:00')
+!reservation4.date := Date('2023-12-05')
+!reservation4.numberPeople := 3
+!reservation4.name := 'Maxwell Carter'
+!reservation4.phoneNumber := '555-3321'
+!reservation4.number := 4
+!reservation4.seating := #Inside
+!reservation4.smoking := #NonSmoking
+!insert (restaurant3, reservation4) into RestaurantReservation
+!insert (reservation4, customer4) into ReservationCustomer
+!insert (reservation4, waiter5) into ReservationWaiter
+!insert (reservation4, table6) into ReservationTable
+!insert (reservation4, table7) into ReservationTable
+
+!new ItemOrder('itemOrder3')
+!itemOrder3.time := Time('13:15')
+!insert (reservation4, itemOrder3) into ReservationItemOrdered
+
+!new MenuItem('menuItem3')
+!menuItem3.description := 'Vegan Burger'
+!menuItem3.prepTime := 15.0
+!menuItem3.classification := #Main
+!insert (itemOrder3, menuItem3) into ItemOrderMenuItem
+
+!new FoodItem('foodItem3')
+!foodItem3.number := 103
+!foodItem3.description := 'Plant-Based Patty'
+!foodItem3.purchaseFlag := true
+!foodItem3.unit := #Pound
+!insert (menuItem3, foodItem3) into MenuItemFoodItem
+
+!new Allergen('allergen3')
+!allergen3.type := #Nuts
+!insert (foodItem3, allergen3) into FoodItemAllergen
+
+!new Cook('cook3')
+!cook3.name := 'Lucy Brown'
+!cook3.dateOfBirth := Date('1990-05-25')
+!cook3.phoneNumber := '555-7788'
+!cook3.yearsOfExperience := 4
+
+!new Chef('chef3')
+!chef3.name := 'Ian Wright'
+!chef3.dateOfBirth := Date('1983-11-30')
+!chef3.phoneNumber := '555-6677'
+!insert (menuItem3, chef3) into MenuItemChef
+!insert (chef3, cook3) into ChefCook

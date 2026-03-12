@@ -1,0 +1,53 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client45')
+!client45.clientId := 45
+!client45.isSuspended := false
+
+-- Adding another client for diversity
+!new Client('client46')
+!client46.clientId := 46
+!client46.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental42')
+!rental42.date := Date('2023-11-23')
+
+-- Structurally distinct with a single rental for another client
+!new Rental('rental43')
+!rental43.date := Date('2023-11-24')
+
+-- Creating Cassettes and Movies
+!new Movie('movie27')
+!movie27.title := 'The Last Stand'
+!movie27.availableCopies := 2
+!movie27.genre := #Action
+
+-- Creating Series
+!new Series('series20')
+!series20.title := 'Forgotten Realms'
+!series20.availableCopies := 3
+!series20.episode := 5
+
+-- Creating Actors
+!new Actor('actor44')
+!actor44.name := 'Amelia Fern'
+
+-- Adding another actor for increased diversity
+!new Actor('actor45')
+!actor45.name := 'Leo Fitz'
+
+-- Creating associations between Clients and Rentals
+!insert (client45, rental42) into ClientRental
+!insert (client46, rental43) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental42, movie27) into RentalCassette
+!insert (rental42, series20) into RentalCassette
+!insert (rental43, series20) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie27, actor44) into CassetteActor
+!insert (series20, actor45) into CassetteActor
+!insert (series20, actor44) into CassetteActor

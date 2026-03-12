@@ -1,0 +1,50 @@
+!new RentalOffice('officeNewYorkUptown')
+!officeNewYorkUptown.name := 'New York Uptown'
+!officeNewYorkUptown.number := 303
+!officeNewYorkUptown.address := '321 Broadway, New York, NY 10007'
+
+!new Vehicle('coveredTrailer004')
+!coveredTrailer004.id := 304
+!coveredTrailer004.registrationState := #NY
+!coveredTrailer004.licensePlateNumber := 'NY1345CT'
+!coveredTrailer004.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer004.registrationLastMaintenanceDate := Date('2023-09-12')
+!coveredTrailer004.expirationDate := Date('2024-09-11')
+
+!new Truck('truck005')
+!truck005.id := 305
+!truck005.registrationState := #TX
+!truck005.licensePlateNumber := 'TX9807TR'
+!truck005.vehicleTypeCode := #TRUCK
+!truck005.registrationLastMaintenanceDate := Date('2023-05-04')
+!truck005.expirationDate := Date('2024-05-03')
+!truck005.odometerReading := 3000
+!truck005.gasTankCapacity := 18.0
+!truck005.workingRadio := true
+!truck005.mileage := 10000
+
+!new Individual('individualAkiraTanaka')
+!individualAkiraTanaka.name := 'Akira Tanaka'
+!individualAkiraTanaka.address := '25 Lexington Ave, Brooklyn, NY 11224'
+!individualAkiraTanaka.poorRisk := true
+!individualAkiraTanaka.homePhone := '718-555-6789'
+!individualAkiraTanaka.driverLicenseState := #NY
+!individualAkiraTanaka.driverLicenseNumber := 132457690
+!individualAkiraTanaka.driverLicenseExpirationDate := Date('2025-03-15')
+
+!new RentalAgreement('rentalAgreement3003')
+!rentalAgreement3003.number := 3003
+!rentalAgreement3003.rentalDate := Date('2023-11-10')
+!rentalAgreement3003.anticipatedDuration := 3
+!rentalAgreement3003.depositPaid := 150.0
+!rentalAgreement3003.quotedDailyRate := 60.0
+!rentalAgreement3003.quotedRatePerMile := 0.4
+
+!insert (officeNewYorkUptown, coveredTrailer004) into RentalOfficeVehicle
+!insert (officeNewYorkUptown, truck005) into RentalOfficeVehicle
+
+!insert (officeNewYorkUptown, rentalAgreement3003) into RentalOfficeRentalAgreementOrigin
+!insert (officeNewYorkUptown, rentalAgreement3003) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement3003, truck005) into RentalAgreementVehicle
+!insert (rentalAgreement3003, individualAkiraTanaka) into RentalAgreementCustomer

@@ -1,0 +1,131 @@
+!new Club('club33')
+!club33.name := 'Blizzard Bears'
+!club33.homeGround := 'Ice Palace'
+!club33.chairman := 'Nora Glacier'
+
+!new Club('club34')
+!club34.name := 'Savanna Lions'
+!club34.homeGround := 'Golden Plains'
+!club34.chairman := 'Leo Pride'
+
+!new Team('team33')
+!team33.name := 'Polar Paws'
+!insert (club33, team33) into ClubTeam
+
+!new Team('team34')
+!team34.name := 'Lion Hearts'
+!insert (club34, team34) into ClubTeam
+
+!new Competition('frostbiteSeries')
+!frostbiteSeries.name := 'Frostbite Series'
+!frostbiteSeries.type := 'Round Robin'
+
+!new Match('match17')
+!match17.date := '2027-01-14'
+!match17.homeAway := true
+!insert (frostbiteSeries, match17) into CompetitionMatch
+!insert (team33, match17) into LocalMatch
+!insert (team34, match17) into VisitorMatch
+
+!new MatchReport('report17')
+!report17.duration := 90
+!report17.scoreVisitor := 1
+!report17.scoreLocal := 2
+!insert (match17, report17) into MatchMatchReport
+
+!new Player('player33')
+!player33.name := 'Elsa Chill'
+!player33.age := 25
+!player33.bestFoot := #LEFT
+!player33.phoneNumber := '9654312870'
+!insert (team33, player33) into TeamPlayer
+
+!new Player('player34')
+!player34.name := 'Kian Roar'
+!player34.age := 29
+!player34.bestFoot := #RIGHT
+!player34.phoneNumber := '8765423190'
+!insert (team34, player34) into TeamPlayer
+
+!new Position('position33')
+!position33.positionName := #GOALKEEPER
+!insert (player33, position33) into PlayerPositions
+
+!new Position('position34')
+!position34.positionName := #FORWARD
+!insert (player34, position34) into PlayerPositions
+
+!new MatchPlayer('matchPlayer33')
+!matchPlayer33.booked := true
+!matchPlayer33.goals := 0
+!matchPlayer33.rating := 7
+!insert (player33, matchPlayer33) into PlayerMatch
+!insert (match17, matchPlayer33) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer34')
+!matchPlayer34.booked := false
+!matchPlayer34.goals := 1
+!matchPlayer34.rating := 9
+!insert (player34, matchPlayer34) into PlayerMatch
+!insert (match17, matchPlayer34) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition33')
+!matchPlayerPosition33.positionName := #GOALKEEPER
+!matchPlayerPosition33.number := 1
+!insert (matchPlayer33, matchPlayerPosition33) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition34')
+!matchPlayerPosition34.positionName := #FORWARD
+!matchPlayerPosition34.number := 11
+!insert (matchPlayer34, matchPlayerPosition34) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event61')
+!event61.eventType := #GOAL
+!event61.time := 15
+!insert (match17, event61) into MatchMatchEvent
+
+!new MatchEvent('event62')
+!event62.eventType := #GOAL
+!event62.time := 45
+!insert (match17, event62) into MatchMatchEvent
+
+!new MatchEvent('event63')
+!event63.eventType := #GOAL
+!event63.time := 60
+!insert (match17, event63) into MatchMatchEvent
+
+!new TrainingSession('training33')
+!training33.date := '2026-12-10'
+!training33.location := 'Arctic Dome'
+!training33.purpose := 'Goalkeeping Techniques'
+!insert (team33, training33) into TeamTraining
+
+!new TrainingSession('training34')
+!training34.date := '2026-12-15'
+!training34.location := 'Savanna Fields'
+!training34.purpose := 'Offensive Drills'
+!insert (team34, training34) into TeamTraining
+
+!new TrainingNotes('trainingNote33')
+!trainingNote33.note := 'Enhanced reflexes and catches'
+!trainingNote33.date := '2026-12-10'
+!insert (training33, trainingNote33) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote34')
+!trainingNote34.note := 'Developed attacking plays'
+!trainingNote34.date := '2026-12-15'
+!insert (training34, trainingNote34) into TrainingTrainingNotes
+
+!new TrainingObjective('objective33')
+!objective33.areaToImprove := 'Defense Against Shots'
+!objective33.startDate := '2026-10-01'
+!objective33.endDate := '2027-01-01'
+!objective33.success := true
+!insert (objective33, player33) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective34')
+!objective34.areaToImprove := 'Scoring Opportunities'
+!objective34.startDate := '2026-10-15'
+!objective34.endDate := '2027-01-15'
+!objective34.success := false
+!insert (objective34, player34) into TrainingObjectivePlayer

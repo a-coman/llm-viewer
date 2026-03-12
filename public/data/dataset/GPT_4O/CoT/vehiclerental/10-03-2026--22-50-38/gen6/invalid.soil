@@ -1,0 +1,34 @@
+!new RentalOffice('officeDenverMountainBase')
+!officeDenverMountainBase.name := 'Denver Mountain Base Office'
+!officeDenverMountainBase.number := 606
+!officeDenverMountainBase.address := '404 Colfax Ave, Denver, CO'
+
+!new Vehicle('coveredTrailer8006')
+!coveredTrailer8006.id := 8006
+!coveredTrailer8006.registrationState := #CO
+!coveredTrailer8006.licensePlateNumber := 'CO6677KL'
+!coveredTrailer8006.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer8006.registrationLastMaintenanceDate := Date('2023-02-14')
+!coveredTrailer8006.expirationDate := Date('2023-03-14')
+
+!new Company('companyRockyMountainLogistics')
+!companyRockyMountainLogistics.name := 'Rocky Mountain Logistics'
+!companyRockyMountainLogistics.address := '123 Tech Park Dr, Boulder, CO'
+!companyRockyMountainLogistics.poorRisk := false
+!companyRockyMountainLogistics.idNumber := 19283746
+
+!new RentalAgreement('rentalAgreement10007')
+!rentalAgreement10007.number := 10007
+!rentalAgreement10007.rentalDate := Date('2022-12-01')
+!rentalAgreement10007.anticipatedDuration := 365
+!rentalAgreement10007.depositPaid := 400.0
+!rentalAgreement10007.quotedDailyRate := 40.0
+!rentalAgreement10007.quotedRatePerMile := 0.15
+
+!insert (officeDenverMountainBase, coveredTrailer8006) into RentalOfficeVehicle
+
+!insert (officeDenverMountainBase, rentalAgreement10007) into RentalOfficeRentalAgreementOrigin
+!insert (officeDenverMountainBase, rentalAgreement10007) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement10007, coveredTrailer8006) into RentalAgreementVehicle
+!insert (rentalAgreement10007, companyRockyMountainLogistics) into RentalAgreementCustomer

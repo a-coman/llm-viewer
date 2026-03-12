@@ -1,0 +1,70 @@
+!new RentalOffice('office5')
+!office5.name := 'Highland Rentals'
+!office5.number := 505
+!office5.address := '456 Highland Ave, Anchorage, AK'
+
+!new Truck('truck9')
+!truck9.id := 509
+!truck9.registrationState := #AK
+!truck9.licensePlateNumber := 'AK-TRK-9012'
+!truck9.vehicleTypeCode := #TRUCK
+!truck9.registrationLastMaintenanceDate := Date('2023-02-05')
+!truck9.expirationDate := Date('2024-02-05')
+!truck9.odometerReading := 25000
+!truck9.gasTankCapacity := 29.5
+!truck9.workingRadio := true
+!truck9.mileage := 19
+
+!new Individual('individual5')
+!individual5.name := 'Samantha Green'
+!individual5.address := '101 Maple St, Fairbanks, AK'
+!individual5.poorRisk := false
+!individual5.homePhone := '555-5678'
+!individual5.driverLicenseState := #AK
+!individual5.driverLicenseNumber := 50607080
+!individual5.driverLicenseExpirationDate := Date('2025-06-20')
+
+!new RentalAgreement('agreement9')
+!agreement9.number := 3009
+!agreement9.rentalDate := Date('2023-10-22')
+!agreement9.anticipatedDuration := 5
+!agreement9.depositPaid := 175.0
+!agreement9.quotedDailyRate := 65.00
+!agreement9.quotedRatePerMile := 0.55
+
+!new Truck('truck10')
+!truck10.id := 510
+!truck10.registrationState := #AZ
+!truck10.licensePlateNumber := 'AZ-TRK-3456'
+!truck10.vehicleTypeCode := #COVERED_TRAILER
+!truck10.registrationLastMaintenanceDate := Date('2023-03-12')
+!truck10.expirationDate := Date('2025-03-12')
+!truck10.odometerReading := 30000
+!truck10.gasTankCapacity := 32.0
+!truck10.workingRadio := false
+!truck10.mileage := 17
+
+!new Company('company5')
+!company5.name := 'Heavy Haulers'
+!company5.address := '909 Transport Rd, Tucson, AZ'
+!company5.poorRisk := false
+!company5.idNumber := 901234
+
+!new RentalAgreement('agreement10')
+!agreement10.number := 3010
+!agreement10.rentalDate := Date('2023-11-01')
+!agreement10.anticipatedDuration := 15
+!agreement10.depositPaid := 600.0
+!agreement10.quotedDailyRate := 85.00
+!agreement10.quotedRatePerMile := 0.75
+
+!insert (office5, truck9) into RentalOfficeVehicle
+!insert (office5, truck10) into RentalOfficeVehicle
+!insert (office5, agreement9) into RentalOfficeRentalAgreementOrigin
+!insert (office5, agreement9) into RentalOfficeRentalAgreementDrop
+!insert (office5, agreement10) into RentalOfficeRentalAgreementOrigin
+!insert (office5, agreement10) into RentalOfficeRentalAgreementDrop
+!insert (agreement9, truck9) into RentalAgreementVehicle
+!insert (agreement9, individual5) into RentalAgreementCustomer
+!insert (agreement10, truck10) into RentalAgreementVehicle
+!insert (agreement10, company5) into RentalAgreementCustomer

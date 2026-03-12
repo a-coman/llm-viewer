@@ -1,0 +1,158 @@
+!new Club('clubS')
+!clubS.name := 'Northern Lights FC'
+!clubS.homeGround := 'Aurora Borealis Field'
+!clubS.chairman := 'Jorma Aalto'
+
+!new Club('clubT')
+!clubT.name := 'Coastal Hurricanes'
+!clubT.homeGround := 'Pacific Breeze Stadium'
+!clubT.chairman := 'Hana Nakamura'
+
+!new Team('teamS')
+!teamS.name := 'Aurora Stars'
+
+!new Team('teamT')
+!teamT.name := 'Ocean Waves'
+
+!insert (clubS, teamS) into ClubTeam
+!insert (clubT, teamT) into ClubTeam
+
+!new Player('player21')
+!player21.name := 'Helmi Korhonen'
+!player21.age := 28
+!player21.bestFoot := #RIGHT
+!player21.phoneNumber := '+358456789012'
+
+!new Player('player22')
+!player22.name := 'Keiko Tanaka'
+!player22.age := 24
+!player22.bestFoot := #BOTH
+!player22.phoneNumber := '+819012345678'
+
+!insert (teamS, player21) into TeamPlayer
+!insert (teamT, player22) into TeamPlayer
+
+!new Position('position54')
+!position54.positionName := #DEFENDER
+
+!new Position('position47')
+!position47.positionName := #FORWARD
+
+!insert (player21, position54) into PlayerPositions
+!insert (player22, position47) into PlayerPositions
+
+!new TrainingSession('trainingSession15')
+!trainingSession15.date := '2023-10-15'
+!trainingSession15.location := 'Frozen Fjords Arena'
+!trainingSession15.purpose := 'Adaptation to Arctic Conditions'
+
+!insert (teamS, trainingSession15) into TeamTraining
+
+!new TrainingSession('trainingSession16')
+!trainingSession16.date := '2023-10-14'
+!trainingSession16.location := 'Coastal Grounds'
+!trainingSession16.purpose := 'Wind Resistance Training'
+
+!insert (teamT, trainingSession16) into TeamTraining
+
+!new TrainingNotes('trainingNote15')
+!trainingNote15.note := 'Player agility in extreme cold needs improvement.'
+!trainingNote15.date := '2023-10-15'
+
+!insert (trainingSession15, trainingNote15) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote16')
+!trainingNote16.note := 'Players adapted well to windy conditions.'
+!trainingNote16.date := '2023-10-14'
+
+!insert (trainingSession16, trainingNote16) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail7')
+!trainingFail7.reason := 'Family emergency'
+
+!insert (trainingFail7, player22) into FailedPlayer
+!insert (trainingSession15, trainingFail7) into TrainingFailded
+
+!new Competition('competition8')
+!competition8.name := 'World Ends Meet Cup'
+!competition8.type := 'Tournament'
+
+!new Match('match10')
+!match10.date := '2023-10-20'
+!match10.homeAway := false
+
+!insert (teamS, match10) into LocalMatch
+!insert (teamT, match10) into VisitorMatch
+!insert (competition8, match10) into CompetitionMatch
+
+!new MatchReport('matchReport10')
+!matchReport10.duration := 120
+!matchReport10.scoreVisitor := 1
+!matchReport10.scoreLocal := 1
+
+!insert (match10, matchReport10) into MatchMatchReport
+
+!new MatchEvent('matchEvent31')
+!matchEvent31.eventType := #GOAL
+!matchEvent31.time := 10
+
+!new MatchEvent('matchEvent32')
+!matchEvent32.eventType := #GOAL
+!matchEvent32.time := 85
+
+!insert (match10, matchEvent31) into MatchMatchEvent
+!insert (match10, matchEvent32) into MatchMatchEvent
+
+!new MatchNote('matchNote8')
+!matchNote8.note := 'Match extended to extra time due to tied score.'
+!matchNote8.date := '2023-10-20'
+
+!insert (match10, matchNote8) into MatchMatchNote
+
+!new MatchPlayer('matchPlayer17')
+!matchPlayer17.booked := true
+!matchPlayer17.goals := 0
+!matchPlayer17.rating := 6
+
+!new MatchPlayer('matchPlayer18')
+!matchPlayer18.booked := true
+!matchPlayer18.goals := 1
+!matchPlayer18.rating := 7
+
+!insert (player21, matchPlayer17) into PlayerMatch
+!insert (player22, matchPlayer18) into PlayerMatch
+
+!insert (match10, matchPlayer17) into MatchMatchPlayer
+!insert (match10, matchPlayer18) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position55')
+!position55.positionName := #DEFENDER
+!position55.number := 3
+
+!new MatchPlayerPosition('position56')
+!position56.positionName := #FORWARD
+!position56.number := 10
+
+!insert (matchPlayer17, position55) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer18, position56) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective15')
+!trainingObjective15.areaToImprove := 'Improve Endurance'
+!trainingObjective15.startDate := '2023-09-01'
+!trainingObjective15.endDate := '2023-10-01'
+!trainingObjective15.success := true
+
+!new TrainingObjective('trainingObjective16')
+!trainingObjective16.areaToImprove := 'Defensive Skills'
+!trainingObjective16.startDate := '2023-09-01'
+!trainingObjective16.endDate := '2023-10-01'
+!trainingObjective16.success := false
+
+!insert (trainingObjective15, player21) into TrainingObjectivePlayer
+!insert (trainingObjective16, player22) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote8')
+!playerNote8.note := 'Requires attention to defensive skills.'
+!playerNote8.date := '2023-09-01'
+
+!insert (player22, playerNote8) into PlayerPlayerNotes

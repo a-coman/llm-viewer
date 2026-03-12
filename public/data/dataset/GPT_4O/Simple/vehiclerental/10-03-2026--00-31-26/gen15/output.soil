@@ -1,0 +1,70 @@
+!new RentalOffice('office15')
+!office15.name := 'Valley Rentals'
+!office15.number := 1515
+!office15.address := '210 Valley Ridge Rd, Phoenix, AZ'
+
+!new Truck('truck29')
+!truck29.id := 529
+!truck29.registrationState := #AZ
+!truck29.licensePlateNumber := 'AZ-TRK-9900'
+!truck29.vehicleTypeCode := #TRUCK
+!truck29.registrationLastMaintenanceDate := Date('2023-03-10')
+!truck29.expirationDate := Date('2024-03-10')
+!truck29.odometerReading := 24000
+!truck29.gasTankCapacity := 31.0
+!truck29.workingRadio := true
+!truck29.mileage := 19
+
+!new Individual('individual15')
+!individual15.name := 'Liam Turner'
+!individual15.address := '456 Desert Ave, Tucson, AZ'
+!individual15.poorRisk := false
+!individual15.homePhone := '555-9090'
+!individual15.driverLicenseState := #AZ
+!individual15.driverLicenseNumber := 91234567
+!individual15.driverLicenseExpirationDate := Date('2026-10-01')
+
+!new RentalAgreement('agreement29')
+!agreement29.number := 3029
+!agreement29.rentalDate := Date('2023-12-03')
+!agreement29.anticipatedDuration := 5
+!agreement29.depositPaid := 200.0
+!agreement29.quotedDailyRate := 62.00
+!agreement29.quotedRatePerMile := 0.55
+
+!new Truck('truck30')
+!truck30.id := 530
+!truck30.registrationState := #CA
+!truck30.licensePlateNumber := 'CA-TRK-1123'
+!truck30.vehicleTypeCode := #TRUCK10
+!truck30.registrationLastMaintenanceDate := Date('2023-11-07')
+!truck30.expirationDate := Date('2024-11-07')
+!truck30.odometerReading := 11000
+!truck30.gasTankCapacity := 28.5
+!truck30.workingRadio := false
+!truck30.mileage := 18
+
+!new Company('company15')
+!company15.name := 'Desert Transport Co.'
+!company15.address := '789 Oasis Blvd, Los Angeles, CA'
+!company15.poorRisk := true
+!company15.idNumber := 890123
+
+!new RentalAgreement('agreement30')
+!agreement30.number := 3030
+!agreement30.rentalDate := Date('2024-01-15')
+!agreement30.anticipatedDuration := 7
+!agreement30.depositPaid := 350.0
+!agreement30.quotedDailyRate := 78.00
+!agreement30.quotedRatePerMile := 0.60
+
+!insert (office15, truck29) into RentalOfficeVehicle
+!insert (office15, truck30) into RentalOfficeVehicle
+!insert (office15, agreement29) into RentalOfficeRentalAgreementOrigin
+!insert (office15, agreement29) into RentalOfficeRentalAgreementDrop
+!insert (office15, agreement30) into RentalOfficeRentalAgreementOrigin
+!insert (office15, agreement30) into RentalOfficeRentalAgreementDrop
+!insert (agreement29, truck29) into RentalAgreementVehicle
+!insert (agreement29, individual15) into RentalAgreementCustomer
+!insert (agreement30, truck30) into RentalAgreementVehicle
+!insert (agreement30, company15) into RentalAgreementCustomer

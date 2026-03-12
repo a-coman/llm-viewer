@@ -1,0 +1,34 @@
+!new Shipment('shipment43')
+!shipment43.id := 'S5001'
+!shipment43.status := #NEW
+
+!new Address('address79')
+!address79.text := '10 Downing Street, London, UK'
+
+!new GeoLocation('geoLocation79')
+!geoLocation79.latitude := 51.503363
+!geoLocation79.longitude := -0.127625
+
+!insert (address79, geoLocation79) into AddressContainsGeoLocation
+
+!insert (shipment43, address79) into ShipmentContainsPickUpAddress
+!insert (shipment43, address79) into ShipmentContainsDeliveryAddress
+
+!new Customer('customer31')
+!customer31.id := 'C011'
+!customer31.name := 'Harold Smythe'
+!customer31.twitterUserName := '@harold_smith'
+
+!insert (customer31, shipment43) into CustomerConsistsOfShipment
+
+!new Driver('driver34')
+!driver34.id := 'D015'
+!driver34.name := 'Pietro Rossi'
+
+!insert (driver34, shipment43) into DriverShipment
+
+!new Station('station29')
+
+!insert (station29, driver34) into StationContainsDriver
+!insert (station29, shipment43) into StationShipment
+

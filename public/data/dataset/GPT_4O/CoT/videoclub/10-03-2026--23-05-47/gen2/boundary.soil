@@ -1,0 +1,38 @@
+!new Client('client10')
+!client10.clientId := 2147483647
+!client10.isSuspended := true
+
+!new Rental('rental13')
+!rental13.date := Date('2024-01-15')
+
+!new Rental('rental14')
+!rental14.date := Date('2024-02-01')
+
+!new Movie('movie12')
+!movie12.title := 'Epic Laughs'
+!movie12.availableCopies := 0
+!movie12.genre := #Comedy
+
+!new Series('series12')
+!series12.title := 'Daring Escapades'
+!series12.availableCopies := 5
+!series12.episode := 50
+
+!new Actor('actor23')
+!actor23.name := 'Sofia Martín'
+
+!new Actor('actor24')
+!actor24.name := 'Luis Rivera'
+
+!insert (client10, rental13) into ClientRental
+!insert (client10, rental14) into ClientRental
+
+!insert (rental13, movie12) into RentalCassette
+!insert (rental13, series12) into RentalCassette
+
+!insert (rental14, series12) into RentalCassette
+
+!insert (movie12, actor23) into CassetteActor
+!insert (movie12, actor24) into CassetteActor
+
+!insert (series12, actor24) into CassetteActor

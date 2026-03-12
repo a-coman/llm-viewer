@@ -1,0 +1,36 @@
+!new Booking('booking28')
+!booking28.startDate := '2026-02-05'
+!booking28.endDate := '2026-02-09'
+!booking28.canceled := true
+!booking28.bookingId := 128
+!booking28.confirmed := false
+
+!new Bill('bill28')
+!bill28.price := 0.00
+!bill28.billId := 5028
+
+!new Customer('customer28')
+!customer28.firstName := 'Charlie'
+!customer28.lastName := 'Davies'
+
+!new RoomReservation('reservation28')
+!reservation28.checkInDate := '2026-02-05'
+!reservation28.checkOutDate := '2026-02-09'
+
+!new Room('room2501')
+!room2501.numBeds := 1
+!room2501.pricePerNight := 80.00
+!room2501.occupied := false
+!room2501.blocked := true
+!room2501.roomNumber := 2501
+
+!new RoomExtra('extra37')
+!extra37.price := 5.00
+!extra37.description := 'Daily Fresh Fruit Basket'
+
+!insert (booking28, bill28) into BookingBill
+!insert (booking28, customer28) into BookingCustomer
+!insert (booking28, reservation28) into BookingRoomReservation
+!insert (reservation28, extra37) into RoomReservationExtras
+!insert (reservation28, room2501) into RoomReservationRoom
+!insert (bill28, reservation28) into BillRoomReservation

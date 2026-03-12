@@ -1,0 +1,123 @@
+!new Restaurant('restaurant9')
+!restaurant9.name := 'Culinary Fusions'
+
+!new Owner('owner17')
+!owner17.name := 'Li Wei'
+!owner17.percentageShares := 50
+
+!new Owner('owner18')
+!owner18.name := 'Marco Verdi'
+!owner18.percentageShares := 50
+
+!insert (restaurant9, owner17) into RestaurantOwner
+!insert (restaurant9, owner18) into RestaurantOwner
+
+!new Individual('individualReservation4')
+!individualReservation4.date := Date('2023-12-24')
+!individualReservation4.time := Time('20:00')
+!individualReservation4.numberPeople := 2
+!individualReservation4.name := 'Sara Montgomery'
+!individualReservation4.phoneNumber := '9999999999'  -- Arbitrary phone number
+!individualReservation4.seating := #Patio
+!individualReservation4.smoking := #NonSmoking
+!individualReservation4.number := 4
+
+!insert (restaurant9, individualReservation4) into RestaurantReservation
+
+!new Table('table23')
+!table23.number := 23
+!table23.description := 'Ocean Breeze'
+!table23.capacity := 2
+
+!insert (individualReservation4, table23) into ReservationTable
+
+!new Waiter('waiter14')
+!waiter14.name := 'Chiara Rossi'
+!waiter14.dateOfBirth := Date('1995-01-01')     -- Arbitrary date of birth
+!waiter14.phoneNumber := '1111222233'           -- Arbitrary phone number
+!waiter14.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter7')
+!headwaiter7.name := 'Sven Leaf'
+!headwaiter7.dateOfBirth := Date('1990-01-01')  -- Arbitrary date of birth
+!headwaiter7.phoneNumber := '2222333344'        -- Arbitrary phone number
+
+!insert (headwaiter7, waiter14) into HeadWaiterWaiter
+!insert (individualReservation4, waiter14) into ReservationWaiter
+
+!new Manager('manager2')
+!manager2.name := 'Alejandra Gomez'
+!manager2.dateOfBirth := Date('1980-01-01')     -- Arbitrary date of birth
+!manager2.phoneNumber := '3333444455'           -- Arbitrary phone number
+
+!new Chef('chef9')
+!chef9.name := 'Luciana Santos'
+!chef9.dateOfBirth := Date('1978-01-01')        -- Arbitrary date of birth
+!chef9.phoneNumber := '4444555566'              -- Arbitrary phone number
+
+!new Cook('cook11')
+!cook11.name := 'Isabelle Lee'
+!cook11.dateOfBirth := Date('1992-01-01')       -- Arbitrary date of birth
+!cook11.phoneNumber := '5555666677'             -- Arbitrary phone number
+!cook11.yearsOfExperience := 2
+
+!insert (chef9, cook11) into ChefCook
+
+!new MenuItem('menuitem12')
+!menuitem12.description := 'Mediterranean Hummus Plate'
+!menuitem12.prepTime := 15.0
+!menuitem12.classification := #Apetizer
+
+!insert (menuitem12, chef9) into MenuItemChef
+
+!new Chef('chef10')
+!chef10.name := 'Aran Singh'
+!chef10.dateOfBirth := Date('1985-01-01')       -- Arbitrary date of birth
+!chef10.phoneNumber := '6666777788'             -- Arbitrary phone number
+
+!new Cook('cook12')
+!cook12.name := 'Haruto Imamura'
+!cook12.dateOfBirth := Date('1993-01-01')       -- Arbitrary date of birth
+!cook12.phoneNumber := '7777888899'             -- Arbitrary phone number
+!cook12.yearsOfExperience := 3
+
+!insert (chef10, cook12) into ChefCook
+
+!new MenuItem('menuitem13')
+!menuitem13.description := 'Thai Green Curry'
+!menuitem13.prepTime := 20.0
+!menuitem13.classification := #Main
+
+!insert (menuitem13, chef10) into MenuItemChef
+
+!new FoodItem('fooditem24')
+!fooditem24.number := 20
+!fooditem24.description := 'Ingredient for Thai Green Curry'
+!fooditem24.unit := #Pound
+
+!insert (menuitem13, fooditem24) into MenuItemFoodItem
+
+!new Allergen('allergen8')
+!allergen8.type := #Nuts
+
+!insert (fooditem24, allergen8) into FoodItemAllergen
+
+!new Chef('chef11')
+!chef11.name := 'Mia Johansson'
+!chef11.dateOfBirth := Date('1987-01-01')       -- Arbitrary date of birth
+!chef11.phoneNumber := '8888999900'             -- Arbitrary phone number
+
+!new Cook('cook13')
+!cook13.name := 'Khaled Youssef'
+!cook13.dateOfBirth := Date('1994-01-01')       -- Arbitrary date of birth
+!cook13.phoneNumber := '9999000011'             -- Arbitrary phone number
+!cook13.yearsOfExperience := 4
+
+!insert (chef11, cook13) into ChefCook
+
+!new MenuItem('menuitem14')
+!menuitem14.description := 'Fruit Sorbet Trio'
+!menuitem14.prepTime := 10.0
+!menuitem14.classification := #Dessert
+
+!insert (menuitem14, chef11) into MenuItemChef

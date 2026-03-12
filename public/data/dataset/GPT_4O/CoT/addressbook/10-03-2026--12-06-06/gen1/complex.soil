@@ -1,0 +1,118 @@
+!new AddressBook('GlobalConnections')
+
+!new Person('EmmaThompson')
+!EmmaThompson.name := 'Emma Thompson'
+!EmmaThompson.phone := '+44 207 432 1234'
+!EmmaThompson.website := 'www.emmathompson-photography.com'
+!EmmaThompson.email := 'emma.t@photography.com'
+!EmmaThompson.title := 'Freelance Photographer'
+
+!new Address('EmmaThompsonAddress')
+!EmmaThompsonAddress.city := 'London'
+!EmmaThompsonAddress.street := 'Queen\'s Road'
+!EmmaThompsonAddress.houseNr := '42'
+!insert (EmmaThompson, EmmaThompsonAddress) into ContactContainsAddress
+
+!new Note('EmmaThompsonNote1')
+!EmmaThompsonNote1.author := 'Emma Thompson'
+!EmmaThompsonNote1.time := Date('2023-02-15')
+!EmmaThompsonNote1.type := #MEETING
+!EmmaThompsonNote1.comment := 'Discussed new project opportunities at the Arts Council event.'
+!insert (EmmaThompson, EmmaThompsonNote1) into ContactContainsNote
+
+!new Note('EmmaThompsonNote2')
+!EmmaThompsonNote2.author := 'Emma Thompson'
+!EmmaThompsonNote2.time := Date('2023-02-20')
+!EmmaThompsonNote2.type := #CALL
+!EmmaThompsonNote2.comment := 'Contacted to confirm booking for next photo session at the National Gallery.'
+!insert (EmmaThompson, EmmaThompsonNote2) into ContactContainsNote
+
+!new Person('MaxHarmon')
+!MaxHarmon.name := 'Max Harmon'
+!MaxHarmon.phone := '+1 212 555 7890'
+!MaxHarmon.website := 'www.productionsbeyond.com'
+!MaxHarmon.email := 'max@productionsbeyond.com'
+!MaxHarmon.title := 'CEO'
+
+!new Address('MaxHarmonAddress')
+!MaxHarmonAddress.city := 'New York'
+!MaxHarmonAddress.street := 'Broadway'
+!MaxHarmonAddress.houseNr := '16A'
+!insert (MaxHarmon, MaxHarmonAddress) into ContactContainsAddress
+
+!new Note('MaxHarmonNote1')
+!MaxHarmonNote1.author := 'Max Harmon'
+!MaxHarmonNote1.time := Date('2023-03-05')
+!MaxHarmonNote1.type := #EMAIL
+!MaxHarmonNote1.comment := 'Finalized contract details for upcoming film project.'
+!insert (MaxHarmon, MaxHarmonNote1) into ContactContainsNote
+
+!new Relationship('EmmaToMaxCoworker')
+!EmmaToMaxCoworker.type := #COWORKER
+!insert (EmmaToMaxCoworker, MaxHarmon) into RelationshipToContact
+!insert (EmmaThompson, EmmaToMaxCoworker) into ContactToRelationship
+
+!new Relationship('MaxToEmmaCoworker')
+!MaxToEmmaCoworker.type := #COWORKER
+!insert (MaxToEmmaCoworker, EmmaThompson) into RelationshipToContact
+!insert (MaxHarmon, MaxToEmmaCoworker) into ContactToRelationship
+
+!new Company('CreativeCorp')
+!CreativeCorp.name := 'Creative Corp'
+!CreativeCorp.phone := '+61 3 9654 2830'
+!CreativeCorp.website := 'www.creativecorp.com'
+!CreativeCorp.email := 'contact@creativecorp.com'
+!CreativeCorp.industry := 'Media Production'
+
+!new Address('CreativeCorpAddress')
+!CreativeCorpAddress.city := 'Melbourne'
+!CreativeCorpAddress.street := 'Collins Street'
+!CreativeCorpAddress.houseNr := '88'
+!insert (CreativeCorp, CreativeCorpAddress) into ContactContainsAddress
+
+!new Note('CreativeCorpNote1')
+!CreativeCorpNote1.author := 'Creative Corp'
+!CreativeCorpNote1.time := Date('2023-04-10')
+!CreativeCorpNote1.type := #MEETING
+!CreativeCorpNote1.comment := 'Annual board meeting discussing future projects and expansions.'
+!insert (CreativeCorp, CreativeCorpNote1) into ContactContainsNote
+
+!new Relationship('MaxToCreativeCorpBoss')
+!MaxToCreativeCorpBoss.type := #BOSS
+!insert (MaxToCreativeCorpBoss, CreativeCorp) into RelationshipToContact
+!insert (MaxHarmon, MaxToCreativeCorpBoss) into ContactToRelationship
+
+!new Company('BoltDigitalStudios')
+!BoltDigitalStudios.name := 'Bolt Digital Studios'
+!BoltDigitalStudios.phone := '+91 22 1234 5678'
+!BoltDigitalStudios.website := 'www.boltdigital.in'
+!BoltDigitalStudios.email := 'info@boltdigital.in'
+!BoltDigitalStudios.industry := 'Film and Animation'
+
+!new Address('BoltDigitalAddress')
+!BoltDigitalAddress.city := 'Mumbai'
+!BoltDigitalAddress.street := 'Film City Road'
+!BoltDigitalAddress.houseNr := '301'
+!insert (BoltDigitalStudios, BoltDigitalAddress) into ContactContainsAddress
+
+!new Note('BoltDigitalNote1')
+!BoltDigitalNote1.author := 'Bolt Digital Studios'
+!BoltDigitalNote1.time := Date('2023-05-08')
+!BoltDigitalNote1.type := #EMAIL
+!BoltDigitalNote1.comment := 'Email exchange regarding collaborative animation project proposals.'
+!insert (BoltDigitalStudios, BoltDigitalNote1) into ContactContainsNote
+
+!new Relationship('CreativeCorpToBoltDigitalSubdivision')
+!CreativeCorpToBoltDigitalSubdivision.type := #SUBDIVISION
+!insert (CreativeCorpToBoltDigitalSubdivision, BoltDigitalStudios) into RelationshipToContact
+!insert (CreativeCorp, CreativeCorpToBoltDigitalSubdivision) into ContactToRelationship
+
+!new Relationship('BoltDigitalToCreativeCorpSubdivision')
+!BoltDigitalToCreativeCorpSubdivision.type := #SUBDIVISION
+!insert (BoltDigitalToCreativeCorpSubdivision, CreativeCorp) into RelationshipToContact
+!insert (BoltDigitalStudios, BoltDigitalToCreativeCorpSubdivision) into ContactToRelationship
+
+!insert (GlobalConnections, EmmaThompson) into AddressBookMadeOfContact
+!insert (GlobalConnections, MaxHarmon) into AddressBookMadeOfContact
+!insert (GlobalConnections, CreativeCorp) into AddressBookMadeOfContact
+!insert (GlobalConnections, BoltDigitalStudios) into AddressBookMadeOfContact

@@ -1,0 +1,64 @@
+!new Driver('driver56')
+!driver56.id := 'D056'
+!driver56.name := 'Scott Lang'
+
+!new Driver('driver57')
+!driver57.id := 'D057'
+!driver57.name := 'Hope van Dyne'
+
+!new Shipment('shipment59')
+!shipment59.id := 'SHP12403'
+!shipment59.status := #ASSIGNED
+
+!new Shipment('shipment60')
+!shipment60.id := 'SHP12404'
+!shipment60.status := #UNDERWAY
+
+!new Address('address59')
+!address59.text := '5757 Quantum Realm Ln, San Francisco'
+
+!new Address('address60')
+!address60.text := '5858 Pym Tech Dr, San Francisco'
+
+!new GeoLocation('geoLocation59')
+!geoLocation59.latitude := 37.7749
+!geoLocation59.longitude := -122.4194
+
+!new GeoLocation('geoLocation60')
+!geoLocation60.latitude := 37.7840
+!geoLocation60.longitude := -122.4080
+
+!insert (address59, geoLocation59) into AddressContainsGeoLocation
+!insert (address60, geoLocation60) into AddressContainsGeoLocation
+
+!new Customer('customer59')
+!customer59.id := 'CUST059'
+!customer59.name := 'Hank Pym'
+!customer59.twitterUserName := '@originalantman'
+
+!new Customer('customer60')
+!customer60.id := 'CUST060'
+!customer60.name := 'Janet van Dyne'
+!customer60.twitterUserName := '@waspqueen'
+
+!new Station('station30')
+
+!insert (station30, customer59) into StationContainsCustomer
+!insert (station30, customer60) into StationContainsCustomer
+
+!insert (station30, shipment59) into StationShipment
+!insert (station30, shipment60) into StationShipment
+
+!insert (station30, driver56) into StationContainsDriver
+!insert (station30, driver57) into StationContainsDriver
+
+!insert (shipment59, address59) into ShipmentContainsPickUpAddress
+!insert (shipment59, address60) into ShipmentContainsDeliveryAddress
+
+!insert (shipment60, address60) into ShipmentContainsPickUpAddress
+!insert (shipment60, address59) into ShipmentContainsDeliveryAddress
+
+!insert (customer59, shipment59) into CustomerConsistsOfShipment
+!insert (customer60, shipment60) into CustomerConsistsOfShipment
+
+!insert (driver57, shipment59) into DriverShipment

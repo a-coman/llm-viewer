@@ -1,0 +1,167 @@
+!new Club('clubAC')
+!clubAC.name := 'Skyline Strikers FC'
+!clubAC.homeGround := 'Skyline Roof Stadium'
+!clubAC.chairman := 'Mr. Arjun Patel'
+
+!new Club('clubAD')
+!clubAD.name := 'Tower Titans'
+!clubAD.homeGround := 'Heights Hub Arena'
+!clubAD.chairman := 'Ms. Sophie Laurent'
+
+!new Team('teamAC')
+!teamAC.name := 'Sky High Flyers'
+
+!new Team('teamAD')
+!teamAD.name := 'Altitude Athletes'
+
+!insert (clubAC, teamAC) into ClubTeam
+!insert (clubAD, teamAD) into ClubTeam
+
+!new Player('player33')
+!player33.name := 'Gale Gust'
+!player33.age := 25
+!player33.bestFoot := #LEFT
+!player33.phoneNumber := '+4876543210'
+
+!new Player('player34')
+!player34.name := 'Cloud Dodger'
+!player34.age := 27
+!player34.bestFoot := #RIGHT
+!player34.phoneNumber := '+9876543210'
+
+!insert (teamAC, player33) into TeamPlayer
+!insert (teamAD, player34) into TeamPlayer
+
+!new Position('position77')
+!position77.positionName := #MIDFIELDER
+
+!new Position('position78')
+!position78.positionName := #DEFENDER
+
+!new Position('position83')
+!position83.positionName := #FORWARD
+
+!insert (player33, position77) into PlayerPositions
+!insert (player33, position78) into PlayerPositions
+!insert (player34, position83) into PlayerPositions
+
+!new Competition('competition13')
+!competition13.name := 'Urban Sky Series'
+!competition13.type := 'League'
+
+!new Match('match15')
+!match15.date := '05/11/2023'
+!match15.homeAway := true
+
+!insert (teamAC, match15) into LocalMatch
+!insert (teamAD, match15) into VisitorMatch
+!insert (competition13, match15) into CompetitionMatch
+
+!new MatchReport('matchReport15')
+!matchReport15.duration := 75
+!matchReport15.scoreVisitor := 1
+!matchReport15.scoreLocal := 2
+
+!insert (match15, matchReport15) into MatchMatchReport
+
+!new MatchEvent('matchEvent42')
+!matchEvent42.eventType := #GOAL
+!matchEvent42.time := 20
+
+!new MatchEvent('matchEvent43')
+!matchEvent43.eventType := #GOAL
+!matchEvent43.time := 50
+
+!new MatchEvent('matchEvent44')
+!matchEvent44.eventType := #GOAL
+!matchEvent44.time := 70
+
+!insert (match15, matchEvent42) into MatchMatchEvent
+!insert (match15, matchEvent43) into MatchMatchEvent
+!insert (match15, matchEvent44) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer28')
+!matchPlayer28.booked := true
+!matchPlayer28.goals := 1
+!matchPlayer28.rating := 9
+
+!new MatchPlayer('matchPlayer29')
+!matchPlayer29.booked := false
+!matchPlayer29.goals := 1
+!matchPlayer29.rating := 7
+
+!insert (player33, matchPlayer28) into PlayerMatch
+!insert (player34, matchPlayer29) into PlayerMatch
+
+!insert (match15, matchPlayer28) into MatchMatchPlayer
+!insert (match15, matchPlayer29) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position81')
+!position81.positionName := #MIDFIELDER
+!position81.number := 8
+
+!new MatchPlayerPosition('position82')
+!position82.positionName := #FORWARD
+!position82.number := 11
+
+!insert (matchPlayer28, position81) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer29, position82) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession24')
+!trainingSession24.date := '03/11/2023'
+!trainingSession24.location := 'Heights Hub Arena'
+!trainingSession24.purpose := 'Handling Limited Space and High Winds'
+
+!insert (teamAD, trainingSession24) into TeamTraining
+
+!new TrainingSession('trainingSession25')
+!trainingSession25.date := '02/11/2023'
+!trainingSession25.location := 'Skyline Roof Stadium'
+!trainingSession25.purpose := 'Ball Control in Tight Spaces'
+
+!insert (teamAC, trainingSession25) into TeamTraining
+
+!new TrainingNotes('trainingNote24')
+!trainingNote24.note := 'Players improved in handling ball control amidst cross winds.'
+!trainingNote24.date := '03/11/2023'
+
+!insert (trainingSession24, trainingNote24) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote25')
+!trainingNote25.note := 'Effective drills for maintaining possession under pressure.'
+!trainingNote25.date := '02/11/2023'
+
+!insert (trainingSession25, trainingNote25) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail10')
+!trainingFail10.reason := 'Family emergency'
+
+!insert (trainingFail10, player33) into FailedPlayer
+!insert (trainingSession24, trainingFail10) into TrainingFailded
+
+!new TrainingObjective('trainingObjective23')
+!trainingObjective23.areaToImprove := 'Tactical Passing in Squeezed Spaces'
+!trainingObjective23.startDate := '01/11/2023'
+!trainingObjective23.endDate := '04/11/2023'
+!trainingObjective23.success := false
+
+!new TrainingObjective('trainingObjective24')
+!trainingObjective24.areaToImprove := 'Endurance in Urban Conditions'
+!trainingObjective24.startDate := '01/11/2023'
+!trainingObjective24.endDate := '04/11/2023'
+!trainingObjective24.success := true
+
+!insert (trainingObjective23, player34) into TrainingObjectivePlayer
+!insert (trainingObjective24, player33) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote13')
+!playerNote13.note := 'Strong awareness in spatially restricted games.'
+!playerNote13.date := '04/11/2023'
+
+!insert (player33, playerNote13) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote14')
+!playerNote14.note := 'Exceptional at leveraging open sky tactics.'
+!playerNote14.date := '02/11/2023'
+
+!insert (player34, playerNote14) into PlayerPlayerNotes

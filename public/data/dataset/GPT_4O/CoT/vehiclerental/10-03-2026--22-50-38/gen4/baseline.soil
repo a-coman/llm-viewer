@@ -1,0 +1,47 @@
+!new RentalOffice('officeMiamiBeach')
+!officeMiamiBeach.name := 'Miami Beach'
+!officeMiamiBeach.number := 404
+!officeMiamiBeach.address := '456 Ocean Dr, Miami, FL 33139'
+
+!new Vehicle('coveredTrailer006')
+!coveredTrailer006.id := 306
+!coveredTrailer006.registrationState := #FL
+!coveredTrailer006.licensePlateNumber := 'FL4523CT'
+!coveredTrailer006.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer006.registrationLastMaintenanceDate := Date('2023-04-18')
+!coveredTrailer006.expirationDate := Date('2024-04-17')
+
+!new Truck('truck007')
+!truck007.id := 307
+!truck007.registrationState := #FL
+!truck007.licensePlateNumber := 'GA9901TR'
+!truck007.vehicleTypeCode := #TRUCK
+!truck007.registrationLastMaintenanceDate := Date('2023-01-20')
+!truck007.expirationDate := Date('2024-01-19')
+!truck007.odometerReading := 5000
+!truck007.gasTankCapacity := 16.8
+!truck007.workingRadio := true
+!truck007.mileage := 12000
+
+!new Company('companyGlobalEventCoordinators')
+!companyGlobalEventCoordinators.name := 'GlobalEvent Coordinators'
+!companyGlobalEventCoordinators.address := '1500 Biscayne Blvd, Miami, FL 33132'
+!companyGlobalEventCoordinators.poorRisk := false
+!companyGlobalEventCoordinators.idNumber := 802345
+
+!new RentalAgreement('rentalAgreement4004')
+!rentalAgreement4004.number := 4004
+!rentalAgreement4004.rentalDate := Date('2024-02-12')
+!rentalAgreement4004.anticipatedDuration := 30
+!rentalAgreement4004.depositPaid := 600.0
+!rentalAgreement4004.quotedDailyRate := 80.0
+!rentalAgreement4004.quotedRatePerMile := 0.25
+
+!insert (officeMiamiBeach, coveredTrailer006) into RentalOfficeVehicle
+!insert (officeMiamiBeach, truck007) into RentalOfficeVehicle
+
+!insert (officeMiamiBeach, rentalAgreement4004) into RentalOfficeRentalAgreementOrigin
+!insert (officeMiamiBeach, rentalAgreement4004) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement4004, coveredTrailer006) into RentalAgreementVehicle
+!insert (rentalAgreement4004, companyGlobalEventCoordinators) into RentalAgreementCustomer

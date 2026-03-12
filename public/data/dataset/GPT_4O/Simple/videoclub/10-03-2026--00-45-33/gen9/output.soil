@@ -1,0 +1,47 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client17')
+!client17.clientId := 17
+!client17.isSuspended := false
+
+-- Adding another client for diversity
+!new Client('client18')
+!client18.clientId := 18
+!client18.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental14')
+!rental14.date := Date('2023-10-28')
+
+-- Creating Cassettes and Movies
+!new Movie('movie11')
+!movie11.title := 'Silent Scream'
+!movie11.availableCopies := 7
+!movie11.genre := #Action
+
+-- Creating Series
+!new Series('series9')
+!series9.title := 'Nature Wonders'
+!series9.availableCopies := 4
+!series9.episode := 13
+
+-- Creating Actors
+!new Actor('actor16')
+!actor16.name := 'David Silver'
+
+-- Adding a unique actor for more structural diversity
+!new Actor('actor17')
+!actor17.name := 'Lucy Gold'
+
+-- Creating associations between Client and Rentals
+!insert (client17, rental14) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental14, movie11) into RentalCassette
+!insert (rental14, series9) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie11, actor16) into CassetteActor
+!insert (series9, actor17) into CassetteActor
+!insert (series9, actor16) into CassetteActor

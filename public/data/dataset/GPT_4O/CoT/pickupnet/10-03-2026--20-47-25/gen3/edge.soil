@@ -1,0 +1,71 @@
+!new Driver('driver19')
+!driver19.id := 'DRV999888'
+!driver19.name := 'Alex Crossroads'
+
+!new Shipment('shipment20')
+!shipment20.id := 'SHP000111'
+!shipment20.status := #UNDERWAY
+
+!new Shipment('shipment21')
+!shipment21.id := 'SHP000112'
+!shipment21.status := #UNDERWAY
+
+!new Shipment('shipment22')
+!shipment22.id := 'SHP000113'
+!shipment22.status := #UNDERWAY
+
+!new Address('address41')
+!address41.text := 'LogistiX Hub, Hamburg, Germany'
+
+!new GeoLocation('geoLocation41')
+!geoLocation41.latitude := 53.551086
+!geoLocation41.longitude := 9.993682
+
+!insert (address41, geoLocation41) into AddressContainsGeoLocation
+
+!new Address('address42')
+!address42.text := 'Depot France, Paris, France'
+
+!new GeoLocation('geoLocation42')
+!geoLocation42.latitude := 48.856613
+!geoLocation42.longitude := 2.352222
+
+!insert (address42, geoLocation42) into AddressContainsGeoLocation
+
+!new Address('address43')
+!address43.text := 'Barcelona Warehouse, Barcelona, Spain'
+
+!new GeoLocation('geoLocation43')
+!geoLocation43.latitude := 41.387917
+!geoLocation43.longitude := 2.169919
+
+!insert (address43, geoLocation43) into AddressContainsGeoLocation
+
+!new Customer('customer16')
+!customer16.id := 'CUS555666'
+!customer16.name := 'Global Exporter Inc.'
+!customer16.twitterUserName := '@GlobalExport'
+
+!new Station('station15')
+
+!insert (driver19, shipment20) into DriverShipment
+!insert (driver19, shipment21) into DriverShipment
+!insert (driver19, shipment22) into DriverShipment
+
+!insert (shipment20, address41) into ShipmentContainsPickUpAddress
+!insert (shipment21, address41) into ShipmentContainsPickUpAddress
+!insert (shipment22, address41) into ShipmentContainsPickUpAddress
+
+!insert (shipment20, address42) into ShipmentContainsDeliveryAddress
+!insert (shipment21, address43) into ShipmentContainsDeliveryAddress
+!insert (shipment22, address43) into ShipmentContainsDeliveryAddress
+
+!insert (customer16, shipment20) into CustomerConsistsOfShipment
+!insert (customer16, shipment21) into CustomerConsistsOfShipment
+!insert (customer16, shipment22) into CustomerConsistsOfShipment
+
+!insert (station15, driver19) into StationContainsDriver
+!insert (station15, shipment20) into StationShipment
+!insert (station15, shipment21) into StationShipment
+!insert (station15, shipment22) into StationShipment
+!insert (station15, customer16) into StationContainsCustomer

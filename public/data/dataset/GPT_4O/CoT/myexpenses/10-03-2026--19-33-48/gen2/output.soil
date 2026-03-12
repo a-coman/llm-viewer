@@ -1,0 +1,256 @@
+!new Expense('businessConferenceExpense')
+!businessConferenceExpense.amount := 2400.00
+!businessConferenceExpense.startDate := Date('2023-09-05')
+!businessConferenceExpense.endDate := Date('2023-09-10')
+
+!new Bill('billFlightTicket')
+!billFlightTicket.amount := 1500.00
+!billFlightTicket.category := 'Flight Ticket'
+!billFlightTicket.date := Date('2023-09-01')
+!billFlightTicket.paymentMethod := #CREDIT_CARD
+!billFlightTicket.status := #VALIDATED
+
+!new Bill('billHotelStay')
+!billHotelStay.amount := 500.00
+!billHotelStay.category := 'Hotel Stay'
+!billHotelStay.date := Date('2023-09-05')
+!billHotelStay.paymentMethod := #CREDIT_CARD
+!billHotelStay.status := #VERIFIED
+
+!new Bill('billConferenceFee')
+!billConferenceFee.amount := 300.00
+!billConferenceFee.category := 'Conference Fee'
+!billConferenceFee.date := Date('2023-09-05')
+!billConferenceFee.paymentMethod := #CASH
+!billConferenceFee.status := #REFUNDED
+
+!new Bill('billLocalTransport')
+!billLocalTransport.amount := 100.00
+!billLocalTransport.category := 'Local Transport'
+!billLocalTransport.date := Date('2023-09-09')
+!billLocalTransport.paymentMethod := #CHECK
+!billLocalTransport.status := #PENDING
+
+!new Currency('currencyEuro')
+!currencyEuro.name := 'Euro'
+!currencyEuro.abbreviation := 'EUR'
+
+!insert (billFlightTicket, currencyEuro) into BillCurrency
+!insert (billHotelStay, currencyEuro) into BillCurrency
+!insert (billConferenceFee, currencyEuro) into BillCurrency
+!insert (billLocalTransport, currencyEuro) into BillCurrency
+
+!insert (businessConferenceExpense, billFlightTicket) into ExpenseContainsBills
+!insert (businessConferenceExpense, billHotelStay) into ExpenseContainsBills
+!insert (businessConferenceExpense, billConferenceFee) into ExpenseContainsBills
+!insert (businessConferenceExpense, billLocalTransport) into ExpenseContainsBills
+
+!new Comment('commentFlight')
+!commentFlight.text := 'Flight was on time and comfortable.'
+
+!new Comment('commentHotel')
+!commentHotel.text := 'Hotel amenities were excellent, highly recommended.'
+
+!insert (businessConferenceExpense, commentFlight) into ExpenseComment
+!insert (businessConferenceExpense, commentHotel) into ExpenseComment
+
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 0.00
+!boundaryCaseExpense.startDate := Date('2023-01-01')
+!boundaryCaseExpense.endDate := Date('2023-01-31')
+
+!new Bill('cancelledSubscriptionBill')
+!cancelledSubscriptionBill.amount := 0.00
+!cancelledSubscriptionBill.category := 'Cancelled Subscription'
+!cancelledSubscriptionBill.date := Date('2023-01-15')
+!cancelledSubscriptionBill.paymentMethod := #CREDIT_CARD
+!cancelledSubscriptionBill.status := #REFUSED
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (cancelledSubscriptionBill, currencyJPY) into BillCurrency
+
+!insert (boundaryCaseExpense, cancelledSubscriptionBill) into ExpenseContainsBills
+
+!new Comment('cancellationComment')
+!cancellationComment.text := 'This expense was canceled and had no cost.'
+
+!insert (boundaryCaseExpense, cancellationComment) into ExpenseComment
+
+!new Expense('familyVacationExpense')
+!familyVacationExpense.amount := 3850.00
+!familyVacationExpense.startDate := Date('2023-11-01')
+!familyVacationExpense.endDate := Date('2023-11-15')
+
+!new Bill('airfareBill')
+!airfareBill.amount := 2000.00
+!airfareBill.category := 'Airfare'
+!airfareBill.date := Date('2023-10-20')
+!airfareBill.paymentMethod := #CREDIT_CARD
+!airfareBill.status := #REFUNDED
+
+!new Bill('hotelAccommodationBill')
+!hotelAccommodationBill.amount := 600.00
+!hotelAccommodationBill.category := 'Hotel Accommodation'
+!hotelAccommodationBill.date := Date('2023-11-01')
+!hotelAccommodationBill.paymentMethod := #CASH
+!hotelAccommodationBill.status := #VERIFIED
+
+!new Bill('toursActivitiesBill')
+!toursActivitiesBill.amount := 450.00
+!toursActivitiesBill.category := 'Tours and Activities'
+!toursActivitiesBill.date := Date('2023-11-05')
+!toursActivitiesBill.paymentMethod := #CREDIT_CARD
+!toursActivitiesBill.status := #VALIDATED
+
+!new Bill('diningBill')
+!diningBill.amount := 300.00
+!diningBill.category := 'Dining'
+!diningBill.date := Date('2023-11-10')
+!diningBill.paymentMethod := #CHECK
+!diningBill.status := #VERIFIED
+
+!new Bill('giftsSouvenirsBill')
+!giftsSouvenirsBill.amount := 500.00
+!giftsSouvenirsBill.category := 'Gifts and Souvenirs'
+!giftsSouvenirsBill.date := Date('2023-11-12')
+!giftsSouvenirsBill.paymentMethod := #CREDIT_CARD
+!giftsSouvenirsBill.status := #PENDING
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (airfareBill, currencyJPY) into BillCurrency
+!insert (hotelAccommodationBill, currencyJPY) into BillCurrency
+!insert (toursActivitiesBill, currencyJPY) into BillCurrency
+!insert (diningBill, currencyJPY) into BillCurrency
+!insert (giftsSouvenirsBill, currencyJPY) into BillCurrency
+
+!insert (familyVacationExpense, airfareBill) into ExpenseContainsBills
+!insert (familyVacationExpense, hotelAccommodationBill) into ExpenseContainsBills
+!insert (familyVacationExpense, toursActivitiesBill) into ExpenseContainsBills
+!insert (familyVacationExpense, diningBill) into ExpenseContainsBills
+!insert (familyVacationExpense, giftsSouvenirsBill) into ExpenseContainsBills
+
+!new Comment('familyVacationComment1')
+!familyVacationComment1.text := 'Annual family vacation to Japan, including cultural tours and leisure activities.'
+
+!new Comment('familyVacationComment2')
+!familyVacationComment2.text := 'Activities included visiting historical sites and tasting local cuisine. A memorable and enriching experience for all.'
+
+!insert (familyVacationExpense, familyVacationComment1) into ExpenseComment
+!insert (familyVacationExpense, familyVacationComment2) into ExpenseComment
+
+!new Expense('techConferenceExpense')
+!techConferenceExpense.amount := 2500.00
+!techConferenceExpense.startDate := Date('2024-08-10')
+!techConferenceExpense.endDate := Date('2024-08-15')
+
+!new Bill('flightTicketBill')
+!flightTicketBill.amount := 900.00
+!flightTicketBill.category := 'Round Trip Flight Ticket'
+!flightTicketBill.date := Date('2024-08-05')
+!flightTicketBill.paymentMethod := #CREDIT_CARD
+!flightTicketBill.status := #VERIFIED
+
+!new Bill('hotelStayBill')
+!hotelStayBill.amount := 500.00
+!hotelStayBill.category := 'Hotel Accommodation'
+!hotelStayBill.date := Date('2024-08-12')
+!hotelStayBill.paymentMethod := #CHECK
+!hotelStayBill.status := #PENDING
+
+!new Bill('conferenceFeeBill')
+!conferenceFeeBill.amount := 1100.00
+!conferenceFeeBill.category := 'Conference Registration Fee'
+!conferenceFeeBill.date := Date('2024-07-15')
+!conferenceFeeBill.paymentMethod := #CASH
+!conferenceFeeBill.status := #VALIDATED
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (flightTicketBill, currencyUSD) into BillCurrency
+!insert (hotelStayBill, currencyJPY) into BillCurrency
+!insert (conferenceFeeBill, currencyJPY) into BillCurrency
+
+!insert (techConferenceExpense, flightTicketBill) into ExpenseContainsBills
+!insert (techConferenceExpense, hotelStayBill) into ExpenseContainsBills
+!insert (techConferenceExpense, conferenceFeeBill) into ExpenseContainsBills
+
+!new Comment('networkingAdvice')
+!networkingAdvice.text := 'Remember to exchange business cards after each session.'
+
+!new Comment('budgetNote')
+!budgetNote.text := 'Collaborate with fellow attendees to split accommodation costs.'
+
+!insert (techConferenceExpense, networkingAdvice) into ExpenseComment
+!insert (techConferenceExpense, budgetNote) into ExpenseComment
+
+!new Expense('emergencyReliefFund')
+!emergencyReliefFund.amount := 50500.00
+!emergencyReliefFund.startDate := Date('2023-11-01')
+!emergencyReliefFund.endDate := Date('2023-11-03')
+
+!new Bill('medicalSuppliesBill')
+!medicalSuppliesBill.amount := 15000.00
+!medicalSuppliesBill.category := 'Medical Supplies'
+!medicalSuppliesBill.date := Date('2023-11-01')
+!medicalSuppliesBill.paymentMethod := #CASH
+!medicalSuppliesBill.status := #VALIDATED
+
+!new Bill('temporarySheltersBill')
+!temporarySheltersBill.amount := 17000.00
+!temporarySheltersBill.category := 'Temporary Shelters'
+!temporarySheltersBill.date := Date('2023-11-02')
+!temporarySheltersBill.paymentMethod := #CHECK
+!temporarySheltersBill.status := #REFUSED
+
+!new Bill('foodDistributionBill')
+!foodDistributionBill.amount := 18500.00
+!foodDistributionBill.category := 'Food Distribution'
+!foodDistributionBill.date := Date('2023-11-03')
+!foodDistributionBill.paymentMethod := #CREDIT_CARD
+!foodDistributionBill.status := #VERIFIED
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!new Currency('currencyINR')
+!currencyINR.name := 'Indian Rupee'
+!currencyINR.abbreviation := 'INR'
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (medicalSuppliesBill, currencyJPY) into BillCurrency
+!insert (temporarySheltersBill, currencyINR) into BillCurrency
+!insert (foodDistributionBill, currencyCAD) into BillCurrency
+
+!insert (emergencyReliefFund, medicalSuppliesBill) into ExpenseContainsBills
+!insert (emergencyReliefFund, temporarySheltersBill) into ExpenseContainsBills
+!insert (emergencyReliefFund, foodDistributionBill) into ExpenseContainsBills
+
+!new Comment('emergencyComment1')
+!emergencyComment1.text := 'Immediate allocation for medical supplies ensured prompt delivery amidst crisis.'
+
+!new Comment('emergencyComment2')
+!emergencyComment2.text := 'Shelter invoices require further verification due to discrepancies in the provided infrastructure.'
+
+!new Comment('emergencyComment3')
+!emergencyComment3.text := 'Implemented rapid credit transactions to facilitate expedited food distribution to affected areas.'
+
+!insert (emergencyReliefFund, emergencyComment1) into ExpenseComment
+!insert (emergencyReliefFund, emergencyComment2) into ExpenseComment
+!insert (emergencyReliefFund, emergencyComment3) into ExpenseComment
+

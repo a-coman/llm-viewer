@@ -1,0 +1,24 @@
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 0.00
+!boundaryCaseExpense.startDate := Date('2023-12-01')
+!boundaryCaseExpense.endDate := Date('2023-12-31')
+
+!new Bill('returnedMerchandiseBill')
+!returnedMerchandiseBill.amount := 0.00
+!returnedMerchandiseBill.category := 'Returned Merchandise'
+!returnedMerchandiseBill.date := Date('2023-12-10')
+!returnedMerchandiseBill.paymentMethod := #CASH
+!returnedMerchandiseBill.status := #REFUNDED
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (returnedMerchandiseBill, currencyCAD) into BillCurrency
+
+!insert (boundaryCaseExpense, returnedMerchandiseBill) into ExpenseContainsBills
+
+!new Comment('returnComment')
+!returnComment.text := 'All items from the purchase were returned; hence no expense incurred.'
+
+!insert (boundaryCaseExpense, returnComment) into ExpenseComment

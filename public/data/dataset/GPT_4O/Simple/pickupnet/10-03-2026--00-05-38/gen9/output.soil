@@ -1,0 +1,64 @@
+!new Driver('driver15')
+!driver15.id := 'D015'
+!driver15.name := 'Clark Kent'
+
+!new Driver('driver16')
+!driver16.id := 'D016'
+!driver16.name := 'Lois Lane'
+
+!new Shipment('shipment17')
+!shipment17.id := 'SHP12361'
+!shipment17.status := #NEW
+
+!new Shipment('shipment18')
+!shipment18.id := 'SHP12362'
+!shipment18.status := #DELIVERED
+
+!new Address('address17')
+!address17.text := '1414 Krypton Way, Smallville'
+
+!new Address('address18')
+!address18.text := '1515 Daily Planet Ave, Metropolis'
+
+!new GeoLocation('geoLocation17')
+!geoLocation17.latitude := 40.7306
+!geoLocation17.longitude := -73.9352
+
+!new GeoLocation('geoLocation18')
+!geoLocation18.latitude := 40.7488
+!geoLocation18.longitude := -73.9680
+
+!insert (address17, geoLocation17) into AddressContainsGeoLocation
+!insert (address18, geoLocation18) into AddressContainsGeoLocation
+
+!new Customer('customer17')
+!customer17.id := 'CUST017'
+!customer17.name := 'Lex Luthor'
+!customer17.twitterUserName := '@lexcorp'
+
+!new Customer('customer18')
+!customer18.id := 'CUST018'
+!customer18.name := 'Diana Prince'
+!customer18.twitterUserName := '@wonderwoman'
+
+!new Station('station9')
+
+!insert (station9, customer17) into StationContainsCustomer
+!insert (station9, customer18) into StationContainsCustomer
+
+!insert (station9, shipment17) into StationShipment
+!insert (station9, shipment18) into StationShipment
+
+!insert (station9, driver15) into StationContainsDriver
+!insert (station9, driver16) into StationContainsDriver
+
+!insert (shipment17, address17) into ShipmentContainsPickUpAddress
+!insert (shipment17, address18) into ShipmentContainsDeliveryAddress
+
+!insert (shipment18, address18) into ShipmentContainsPickUpAddress
+!insert (shipment18, address17) into ShipmentContainsDeliveryAddress
+
+!insert (customer17, shipment17) into CustomerConsistsOfShipment
+!insert (customer18, shipment18) into CustomerConsistsOfShipment
+
+!insert (driver16, shipment18) into DriverShipment

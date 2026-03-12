@@ -1,0 +1,112 @@
+!new AddressBook('ContinentalNetworkAddressBook')
+
+!new Person('HiroshiTanaka')
+!HiroshiTanaka.name := 'Hiroshi Tanaka'
+!HiroshiTanaka.phone := '+81-90-5555-1234'
+!HiroshiTanaka.website := 'www.hiroshitanaka.com'
+!HiroshiTanaka.email := 'hiroshi.tanaka@businessmail.jp'
+!HiroshiTanaka.title := 'Marketing Director'
+
+!new Address('HiroshiTanakaAddress')
+!HiroshiTanakaAddress.city := 'Tokyo'
+!HiroshiTanakaAddress.street := 'Ginza District'
+!HiroshiTanakaAddress.houseNr := '88-03'
+!insert (HiroshiTanaka, HiroshiTanakaAddress) into ContactContainsAddress
+
+!new Note('HiroshiTanakaNote1')
+!HiroshiTanakaNote1.author := 'Hiroshi Tanaka'
+!HiroshiTanakaNote1.time := Date('2023-02-20')
+!HiroshiTanakaNote1.type := #EMAIL
+!HiroshiTanakaNote1.comment := 'Exchange ideas for the upcoming Tokyo Expo campaign.'
+!insert (HiroshiTanaka, HiroshiTanakaNote1) into ContactContainsNote
+
+!new Person('KeikoYamada')
+!KeikoYamada.name := 'Keiko Yamada'
+!KeikoYamada.phone := '+81-70-6655-9988'
+!KeikoYamada.website := 'www.keikoyamada.net'
+!KeikoYamada.email := 'keiko.yamada@creativeagency.jp'
+!KeikoYamada.title := 'Junior Graphic Designer'
+
+!new Address('KeikoYamadaAddress')
+!KeikoYamadaAddress.city := 'Osaka'
+!KeikoYamadaAddress.street := 'Ebisubashi'
+!KeikoYamadaAddress.houseNr := '1204'
+!insert (KeikoYamada, KeikoYamadaAddress) into ContactContainsAddress
+
+!new Note('KeikoYamadaNote1')
+!KeikoYamadaNote1.author := 'Keiko Yamada'
+!KeikoYamadaNote1.time := Date('2023-04-12')
+!KeikoYamadaNote1.type := #MEETING
+!KeikoYamadaNote1.comment := 'Brainstorming session for new ad visual concepts.'
+!insert (KeikoYamada, KeikoYamadaNote1) into ContactContainsNote
+
+!new Relationship('HiroshiToKeikoBoss')
+!HiroshiToKeikoBoss.type := #BOSS
+!insert (HiroshiToKeikoBoss, KeikoYamada) into RelationshipToContact
+!insert (HiroshiTanaka, HiroshiToKeikoBoss) into ContactToRelationship
+
+!new Company('NordicHardwareInc')
+!NordicHardwareInc.name := 'Nordic Hardware Inc.'
+!NordicHardwareInc.phone := '+46-31-555-4432'
+!NordicHardwareInc.website := 'www.nordichardware.se'
+!NordicHardwareInc.email := 'contact@nordichardware.se'
+!NordicHardwareInc.industry := 'Manufacturing'
+
+!new Address('NordicHardwareAddress1')
+!NordicHardwareAddress1.city := 'Gothenburg'
+!NordicHardwareAddress1.street := 'Haga Nygata'
+!NordicHardwareAddress1.houseNr := '110A'
+!insert (NordicHardwareInc, NordicHardwareAddress1) into ContactContainsAddress
+
+!new Address('NordicHardwareAddress2')
+!NordicHardwareAddress2.city := 'Stockholm'
+!NordicHardwareAddress2.street := 'Drottninggatan'
+!NordicHardwareAddress2.houseNr := '42'
+!insert (NordicHardwareInc, NordicHardwareAddress2) into ContactContainsAddress
+
+!new Note('NordicHardwareNote1')
+!NordicHardwareNote1.author := 'Erik Jonsson'
+!NordicHardwareNote1.time := Date('2023-07-15')
+!NordicHardwareNote1.type := #CALL
+!NordicHardwareNote1.comment := 'Discuss logistics for new product lines across Europe.'
+!insert (NordicHardwareInc, NordicHardwareNote1) into ContactContainsNote
+
+!new Person('ErikJonsson')
+!ErikJonsson.name := 'Erik Jonsson'
+!ErikJonsson.phone := '+46-08-5556-7890'
+!ErikJonsson.website := 'www.erikjonssonconsulting.se'
+!ErikJonsson.email := 'erik.jonsson@consult.se'
+!ErikJonsson.title := 'Supply Chain Manager'
+
+!new Address('ErikJonssonAddress')
+!ErikJonssonAddress.city := 'Malmö'
+!ErikJonssonAddress.street := 'Lilla Fiskaregatan'
+!ErikJonssonAddress.houseNr := '74B'
+!insert (ErikJonsson, ErikJonssonAddress) into ContactContainsAddress
+
+!new Note('ErikJonssonNote1')
+!ErikJonssonNote1.author := 'Erik Jonsson'
+!ErikJonssonNote1.time := Date('2023-10-23')
+!ErikJonssonNote1.type := #CALL
+!ErikJonssonNote1.comment := 'Monthly call with international suppliers review.'
+!insert (ErikJonsson, ErikJonssonNote1) into ContactContainsNote
+
+!new Relationship('KeikoToHiroshiEmployee')
+!KeikoToHiroshiEmployee.type := #EMPLOYEE
+!insert (KeikoToHiroshiEmployee, HiroshiTanaka) into RelationshipToContact
+!insert (KeikoYamada, KeikoToHiroshiEmployee) into ContactToRelationship
+
+!new Relationship('ErikToNordicSubdivision')
+!ErikToNordicSubdivision.type := #SUBDIVISION
+!insert (ErikToNordicSubdivision, NordicHardwareInc) into RelationshipToContact
+!insert (ErikJonsson, ErikToNordicSubdivision) into ContactToRelationship
+
+!new Relationship('ErikToHiroshiCoworker')
+!ErikToHiroshiCoworker.type := #COWORKER
+!insert (ErikToHiroshiCoworker, HiroshiTanaka) into RelationshipToContact
+!insert (ErikJonsson, ErikToHiroshiCoworker) into ContactToRelationship
+
+!insert (ContinentalNetworkAddressBook, HiroshiTanaka) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, NordicHardwareInc) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, KeikoYamada) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, ErikJonsson) into AddressBookMadeOfContact

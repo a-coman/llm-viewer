@@ -1,0 +1,121 @@
+!new Driver('driver47')
+!driver47.id := 'DRV011'
+!driver47.name := 'Ravi Kumar'
+
+!new Driver('driver48')
+!driver48.id := 'DRV012'
+!driver48.name := 'Sophia Chen'
+
+!new Customer('customer47')
+!customer47.id := 'CUST015'
+!customer47.name := 'Michael Johnson'
+!customer47.twitterUserName := '@mjohnson_usa'
+
+!new Customer('customer48')
+!customer48.id := 'CUST016'
+!customer48.name := 'Yuki Nakamura'
+!customer48.twitterUserName := '@yukin_japan'
+
+!new Customer('customer49')
+!customer49.id := 'CUST017'
+!customer49.name := 'Chen Wei'
+!customer49.twitterUserName := '@chen_w_beijing'
+
+!new Address('address107')
+!address107.text := 'Wall Street, New York, USA'
+
+!new GeoLocation('geoLocation107')
+!geoLocation107.latitude := 40.7074
+!geoLocation107.longitude := -74.0113
+
+!insert (address107, geoLocation107) into AddressContainsGeoLocation
+
+!new Address('address108')
+!address108.text := 'Nanjing Road, Shanghai, China'
+
+!new GeoLocation('geoLocation108')
+!geoLocation108.latitude := 31.2304
+!geoLocation108.longitude := 121.4737
+
+!insert (address108, geoLocation108) into AddressContainsGeoLocation
+
+!new Address('address109')
+!address109.text := 'Ginza, Tokyo, Japan'
+
+!new GeoLocation('geoLocation109')
+!geoLocation109.latitude := 35.6716
+!geoLocation109.longitude := 139.765
+
+!insert (address109, geoLocation109) into AddressContainsGeoLocation
+
+!new Address('address110')
+!address110.text := 'The Bund, Shanghai, China'
+
+!new GeoLocation('geoLocation110')
+!geoLocation110.latitude := 31.2385
+!geoLocation110.longitude := 121.4903
+
+!insert (address110, geoLocation110) into AddressContainsGeoLocation
+
+!new Address('address111')
+!address111.text := 'Silicon Valley, CA, USA'
+
+!new GeoLocation('geoLocation111')
+!geoLocation111.latitude := 37.3875
+!geoLocation111.longitude := -122.0575
+
+!insert (address111, geoLocation111) into AddressContainsGeoLocation
+
+!new Address('address112')
+!address112.text := 'Indira Gandhi International Airport, Delhi, India'
+
+!new GeoLocation('geoLocation112')
+!geoLocation112.latitude := 28.5562
+!geoLocation112.longitude := 77.1000
+
+!insert (address112, geoLocation112) into AddressContainsGeoLocation
+
+!new Shipment('shipment61')
+!shipment61.id := 'SHIP015'
+!shipment61.status := #UNDERWAY
+
+!new Shipment('shipment62')
+!shipment62.id := 'SHIP016'
+!shipment62.status := #NEW
+
+!new Shipment('shipment63')
+!shipment63.id := 'SHIP017'
+!shipment63.status := #DELIVERED
+
+!insert (shipment61, address107) into ShipmentContainsPickUpAddress
+!insert (shipment61, address108) into ShipmentContainsDeliveryAddress
+
+!insert (shipment62, address109) into ShipmentContainsPickUpAddress
+!insert (shipment62, address110) into ShipmentContainsDeliveryAddress
+
+!insert (shipment63, address111) into ShipmentContainsPickUpAddress
+!insert (shipment63, address112) into ShipmentContainsDeliveryAddress
+
+!insert (customer47, shipment61) into CustomerConsistsOfShipment
+!insert (customer48, shipment62) into CustomerConsistsOfShipment
+!insert (customer49, shipment63) into CustomerConsistsOfShipment
+
+!insert (driver48, shipment61) into DriverShipment
+!insert (driver47, shipment63) into DriverShipment
+
+!new Station('station41')
+
+!new Station('station42')
+
+!new Station('station43')
+
+!insert (station41, customer47) into StationContainsCustomer
+!insert (station41, driver48) into StationContainsDriver
+!insert (station41, shipment61) into StationShipment
+
+!insert (station42, customer48) into StationContainsCustomer
+!insert (station42, shipment62) into StationShipment
+
+!insert (station43, customer49) into StationContainsCustomer
+!insert (station43, driver47) into StationContainsDriver
+!insert (station43, shipment63) into StationShipment

@@ -1,0 +1,50 @@
+!new Bank('bank9')
+!bank9.country := 'Italy'
+!bank9.name := 'UniCredit'
+!bank9.bic := 'UNCRITMM'
+
+!new Bank('bank10')
+!bank10.country := 'South Africa'
+!bank10.name := 'First National Bank'
+!bank10.bic := 'FIRNZAJJ'
+
+!new Account('account13')
+!account13.iban := 'IT6010203030405050678989898'
+!account13.balance := 4000
+
+!new Account('account14')
+!account14.iban := 'ZA4200005001234567890123'
+!account14.balance := 0
+
+!new Account('account15')
+!account15.iban := 'IT6010203030405060780878797'
+!account15.balance := 2800
+
+!new Person('person13')
+!person13.firstName := 'Marco'
+!person13.lastName := 'Rossi'
+!person13.age := 27
+
+!new Person('person14')
+!person14.firstName := 'Thandi'
+!person14.lastName := 'Naidoo'
+!person14.age := 33
+
+!new Person('person15')
+!person15.firstName := 'Elena'
+!person15.lastName := 'Bianchi'
+!person15.age := 29
+
+!insert (person13, account13) into Ownership
+!insert (person14, account14) into Ownership
+!insert (person15, account15) into Ownership
+!insert (person13, account15) into Ownership
+
+!insert (person13, account13) into Use
+!insert (person14, account14) into Use
+!insert (person15, account15) into Use
+!insert (person15, account13) into Use
+
+!insert (bank9, account13) into AccountOfBanks
+!insert (bank10, account14) into AccountOfBanks
+!insert (bank9, account15) into AccountOfBanks

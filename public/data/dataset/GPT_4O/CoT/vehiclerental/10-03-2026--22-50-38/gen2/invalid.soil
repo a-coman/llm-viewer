@@ -1,0 +1,35 @@
+!new RentalOffice('officeSeattlePioneerSquare')
+!officeSeattlePioneerSquare.name := 'Seattle Pioneer Square Office'
+!officeSeattlePioneerSquare.number := 202
+!officeSeattlePioneerSquare.address := '789 Occidental Ave S, Seattle, WA'
+
+!new Vehicle('coveredTrailer4002')
+!coveredTrailer4002.id := 4002
+!coveredTrailer4002.registrationState := #WA
+!coveredTrailer4002.licensePlateNumber := 'WA5678CD'
+!coveredTrailer4002.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer4002.registrationLastMaintenanceDate := Date('2023-05-20')
+!coveredTrailer4002.expirationDate := Date('2023-11-20')
+
+!new Individual('individualEmilyZhang')
+!individualEmilyZhang.name := 'Emily Zhang'
+!individualEmilyZhang.address := '321 Capitol Hill, Seattle, WA'
+!individualEmilyZhang.poorRisk := false
+!individualEmilyZhang.homePhone := '(206) 555-1345'
+!individualEmilyZhang.driverLicenseState := #CA
+!individualEmilyZhang.driverLicenseNumber := 11223344
+!individualEmilyZhang.driverLicenseExpirationDate := Date('2025-02-28')
+
+!new RentalAgreement('rentalAgreement6002')
+!rentalAgreement6002.number := 6002
+!rentalAgreement6002.rentalDate := Date('2023-11-25')
+!rentalAgreement6002.anticipatedDuration := 7
+!rentalAgreement6002.depositPaid := 0.0
+!rentalAgreement6002.quotedDailyRate := 60.0
+!rentalAgreement6002.quotedRatePerMile := 0.25
+
+!insert (officeSeattlePioneerSquare, coveredTrailer4002) into RentalOfficeVehicle
+!insert (officeSeattlePioneerSquare, rentalAgreement6002) into RentalOfficeRentalAgreementOrigin
+!insert (officeSeattlePioneerSquare, rentalAgreement6002) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement6002, coveredTrailer4002) into RentalAgreementVehicle
+!insert (rentalAgreement6002, individualEmilyZhang) into RentalAgreementCustomer

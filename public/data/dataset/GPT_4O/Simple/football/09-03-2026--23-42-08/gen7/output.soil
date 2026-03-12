@@ -1,0 +1,136 @@
+!new Club('club13')
+!club13.name := 'Desert Hawks'
+!club13.homeGround := 'Hawk Nest'
+!club13.chairman := 'George Blake'
+
+!new Club('club14')
+!club14.name := 'Glacier Bears'
+!club14.homeGround := 'Bear Den'
+!club14.chairman := 'Hannah Frost'
+
+!new Team('team13')
+!team13.name := 'Hawk Talons'
+!insert (club13, team13) into ClubTeam
+
+!new Team('team14')
+!team14.name := 'Bear Claws'
+!insert (club14, team14) into ClubTeam
+
+!new Competition('summerTournament')
+!summerTournament.name := 'Summer Tournament'
+!summerTournament.type := 'Round Robin'
+
+!new Match('match7')
+!match7.date := '2024-07-30'
+!match7.homeAway := true
+!insert (summerTournament, match7) into CompetitionMatch
+!insert (team13, match7) into LocalMatch
+!insert (team14, match7) into VisitorMatch
+
+!new MatchReport('report7')
+!report7.duration := 90
+!report7.scoreVisitor := 1
+!report7.scoreLocal := 3
+!insert (match7, report7) into MatchMatchReport
+
+!new Player('player13')
+!player13.name := 'Sam Desert'
+!player13.age := 28
+!player13.bestFoot := #RIGHT
+!player13.phoneNumber := '7345678901'
+!insert (team13, player13) into TeamPlayer
+
+!new Player('player14')
+!player14.name := 'Lara Glacier'
+!player14.age := 30
+!player14.bestFoot := #LEFT
+!player14.phoneNumber := '8456789012'
+!insert (team14, player14) into TeamPlayer
+
+!new Position('position13')
+!position13.positionName := #FORWARD
+!insert (player13, position13) into PlayerPositions
+
+!new Position('position14')
+!position14.positionName := #GOALKEEPER
+!insert (player14, position14) into PlayerPositions
+
+!new MatchPlayer('matchPlayer13')
+!matchPlayer13.booked := false
+!matchPlayer13.goals := 2
+!matchPlayer13.rating := 8
+!insert (player13, matchPlayer13) into PlayerMatch
+!insert (match7, matchPlayer13) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer14')
+!matchPlayer14.booked := true
+!matchPlayer14.goals := 0
+!matchPlayer14.rating := 6
+!insert (player14, matchPlayer14) into PlayerMatch
+!insert (match7, matchPlayer14) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition13')
+!matchPlayerPosition13.positionName := #FORWARD
+!matchPlayerPosition13.number := 11
+!insert (matchPlayer13, matchPlayerPosition13) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition14')
+!matchPlayerPosition14.positionName := #GOALKEEPER
+!matchPlayerPosition14.number := 1
+!insert (matchPlayer14, matchPlayerPosition14) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event24')
+!event24.eventType := #GOAL
+!event24.time := 10
+!insert (match7, event24) into MatchMatchEvent
+
+!new MatchEvent('event25')
+!event25.eventType := #GOAL
+!event25.time := 40
+!insert (match7, event25) into MatchMatchEvent
+
+!new MatchEvent('event26')
+!event26.eventType := #GOAL
+!event26.time := 70
+!insert (match7, event26) into MatchMatchEvent
+
+!new MatchEvent('event27')
+!event27.eventType := #GOAL
+!event27.time := 80
+!insert (match7, event27) into MatchMatchEvent
+
+!new TrainingSession('training13')
+!training13.date := '2024-06-15'
+!training13.location := 'Desert Outpost'
+!training13.purpose := 'Offensive Tactics'
+!insert (team13, training13) into TeamTraining
+
+!new TrainingSession('training14')
+!training14.date := '2024-06-25'
+!training14.location := 'Glacier Rink'
+!training14.purpose := 'Defensive Strategies'
+!insert (team14, training14) into TeamTraining
+
+!new TrainingNotes('trainingNote13')
+!trainingNote13.note := 'Worked on quick transitions'
+!trainingNote13.date := '2024-06-15'
+!insert (training13, trainingNote13) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote14')
+!trainingNote14.note := 'Focused on blocking and positioning'
+!trainingNote14.date := '2024-06-25'
+!insert (training14, trainingNote14) into TrainingTrainingNotes
+
+!new TrainingObjective('objective13')
+!objective13.areaToImprove := 'Attack Coordination'
+!objective13.startDate := '2024-04-01'
+!objective13.endDate := '2024-07-01'
+!objective13.success := true
+!insert (objective13, player13) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective14')
+!objective14.areaToImprove := 'Goalkeeping Reflexes'
+!objective14.startDate := '2024-04-10'
+!objective14.endDate := '2024-07-10'
+!objective14.success := false
+!insert (objective14, player14) into TrainingObjectivePlayer

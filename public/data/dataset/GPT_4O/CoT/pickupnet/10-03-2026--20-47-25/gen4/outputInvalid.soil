@@ -1,0 +1,79 @@
+!new Customer('customer25')
+!customer25.id := 'C010'
+!customer25.name := 'Alejandro Lopez'
+!customer25.twitterUserName := '@alejo'
+
+!new Customer('customer26')
+-- Intentional duplicate ID to simulate an error
+!customer26.id := 'C010'
+!customer26.name := 'Camila Perez'
+!customer26.twitterUserName := '@cami_perez'
+
+!new Shipment('shipment35')
+!shipment35.id := 'S4001'
+!shipment35.status := #NEW
+
+!new Address('address66')
+!address66.text := '123 Avenida Paulista, São Paulo, Brazil'
+
+!new GeoLocation('geoLocation66')
+!geoLocation66.latitude := -23.56168
+!geoLocation66.longitude := -46.655881
+
+!insert (address66, geoLocation66) into AddressContainsGeoLocation
+
+!new Address('address67')
+!address67.text := '789 Calle Florida, Buenos Aires, Argentina'
+
+!new GeoLocation('geoLocation67')
+!geoLocation67.latitude := -34.6037
+!geoLocation67.longitude := -58.3816
+
+!insert (address67, geoLocation67) into AddressContainsGeoLocation
+
+!insert (shipment35, address66) into ShipmentContainsPickUpAddress
+!insert (shipment35, address67) into ShipmentContainsDeliveryAddress
+
+!new Shipment('shipment36')
+!shipment36.id := 'S4002'
+!shipment36.status := #DELIVERED
+
+!new Address('address68')
+!address68.text := '2000 Main St, Cape Town, South Africa'
+
+!new GeoLocation('geoLocation68')
+!geoLocation68.latitude := -33.924868
+!geoLocation68.longitude := 18.424055
+
+!insert (address68, geoLocation68) into AddressContainsGeoLocation
+
+!new Address('address69')
+!address69.text := '950 Kent St, Sydney, Australia'
+
+!new GeoLocation('geoLocation69')
+!geoLocation69.latitude := -33.8688
+!geoLocation69.longitude := 151.2093
+
+!insert (address69, geoLocation69) into AddressContainsGeoLocation
+
+!insert (shipment36, address68) into ShipmentContainsPickUpAddress
+!insert (shipment36, address69) into ShipmentContainsDeliveryAddress
+
+!new Driver('driver28')
+!driver28.id := 'D013'
+!driver28.name := 'Samantha Lee'
+
+!new Driver('driver29')
+!driver29.id := 'D014'
+!driver29.name := 'Haruto Nakamura'
+
+!insert (driver28, shipment35) into DriverShipment
+!insert (driver29, shipment36) into DriverShipment
+
+!new Station('station24')
+
+!insert (station24, driver28) into StationContainsDriver
+!insert (station24, driver29) into StationContainsDriver
+!insert (station24, shipment35) into StationShipment
+!insert (station24, shipment36) into StationShipment
+

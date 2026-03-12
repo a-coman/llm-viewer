@@ -1,0 +1,118 @@
+!new AddressBook('GlobalNetworksReferenceBook')
+
+!new Company('QuantumInnovationsLtd')
+!QuantumInnovationsLtd.name := 'Quantum Innovations Ltd.'
+!QuantumInnovationsLtd.phone := '+44-20-79301000'
+!QuantumInnovationsLtd.website := 'www.quantuminnovations.co.uk'
+!QuantumInnovationsLtd.email := 'contact@quantuminnovations.co.uk'
+!QuantumInnovationsLtd.industry := 'Advanced Electronics'
+
+!new Address('QuantumInnovationsAddress')
+!QuantumInnovationsAddress.city := 'London'
+!QuantumInnovationsAddress.street := 'Tech Park Avenue'
+!QuantumInnovationsAddress.houseNr := '50'
+!insert (QuantumInnovationsLtd, QuantumInnovationsAddress) into ContactContainsAddress
+
+!new Note('QuantumInnovationsNote1')
+!QuantumInnovationsNote1.author := 'Helena Fox'
+!QuantumInnovationsNote1.time := Date('2023-06-18T10:00:00')
+!QuantumInnovationsNote1.type := #CALL
+!QuantumInnovationsNote1.comment := 'Discussed collaboration on the Higgs-Boson project.'
+!insert (QuantumInnovationsLtd, QuantumInnovationsNote1) into ContactContainsNote
+
+!new Person('ProfEmilyZhang')
+!ProfEmilyZhang.name := 'Prof. Emily Zhang'
+!ProfEmilyZhang.phone := '+86-10-22334455'
+!ProfEmilyZhang.website := 'profzhangeducation.cn'
+!ProfEmilyZhang.email := 'emily.zhang@edu.cn'
+!ProfEmilyZhang.title := 'Director of International Studies'
+
+!new Address('EmilyZhangAddress')
+!EmilyZhangAddress.city := 'Beijing'
+!EmilyZhangAddress.street := 'Knowledge Hub Road'
+!EmilyZhangAddress.houseNr := '88'
+!insert (ProfEmilyZhang, EmilyZhangAddress) into ContactContainsAddress
+
+!new Note('EmilyZhangNote1')
+!EmilyZhangNote1.author := 'Prof. Emily Zhang'
+!EmilyZhangNote1.time := Date('2023-09-12T12:30:00')
+!EmilyZhangNote1.type := #EMAIL
+!EmilyZhangNote1.comment := 'Follow-up on the educational exchange program.'
+!insert (ProfEmilyZhang, EmilyZhangNote1) into ContactContainsNote
+
+!new Note('EmilyZhangNote2')
+!EmilyZhangNote2.author := 'Prof. Emily Zhang'
+!EmilyZhangNote2.time := Date('2023-08-28T16:15:00')
+!EmilyZhangNote2.type := #MEETING
+!EmilyZhangNote2.comment := 'Quarterly academic council meeting in Beijing.'
+!insert (ProfEmilyZhang, EmilyZhangNote2) into ContactContainsNote
+
+!new Person('DrMarcusJames')
+!DrMarcusJames.name := 'Dr. Marcus James'
+!DrMarcusJames.phone := '+1-617-5557890'
+!DrMarcusJames.website := 'www.marcusjamesconsulting.com'
+!DrMarcusJames.email := 'marcus.james@consulting.com'
+!DrMarcusJames.title := 'Senior Consultant'
+
+!new Address('MarcusJamesAddress')
+!MarcusJamesAddress.city := 'Boston'
+!MarcusJamesAddress.street := 'Innovation Row'
+!MarcusJamesAddress.houseNr := '101'
+!insert (DrMarcusJames, MarcusJamesAddress) into ContactContainsAddress
+
+!new Note('MarcusJamesNote1')
+!MarcusJamesNote1.author := 'Dr. Marcus James'
+!MarcusJamesNote1.time := Date('2023-05-05T10:45:00')
+!MarcusJamesNote1.type := #CALL
+!MarcusJamesNote1.comment := 'Consulting session on green technology.'
+!insert (DrMarcusJames, MarcusJamesNote1) into ContactContainsNote
+
+!new Person('ProfAntonIvanovich')
+!ProfAntonIvanovich.name := 'Prof. Anton Ivanovich'
+!ProfAntonIvanovich.phone := '+7-495-8889990'
+!ProfAntonIvanovich.website := 'anton-ivanovich-research.ru'
+!ProfAntonIvanovich.email := 'anton.ivanovich@research.gov.ru'
+!ProfAntonIvanovich.title := 'Head of Research'
+
+!new Address('AntonIvanovichAddress')
+!AntonIvanovichAddress.city := 'Moscow'
+!AntonIvanovichAddress.street := 'Science Boulevard'
+!AntonIvanovichAddress.houseNr := '77'
+!insert (ProfAntonIvanovich, AntonIvanovichAddress) into ContactContainsAddress
+
+!new Note('AntonIvanovichNote1')
+!AntonIvanovichNote1.author := 'Prof. Anton Ivanovich'
+!AntonIvanovichNote1.time := Date('2023-04-22T09:30:00')
+!AntonIvanovichNote1.type := #MEETING
+!AntonIvanovichNote1.comment := 'Innovation leaders summit in Moscow.'
+!insert (ProfAntonIvanovich, AntonIvanovichNote1) into ContactContainsNote
+
+!new Relationship('QuantumToEmilySubdivision')
+!QuantumToEmilySubdivision.type := #SUBDIVISION
+!insert (QuantumToEmilySubdivision, ProfEmilyZhang) into RelationshipToContact
+!insert (QuantumInnovationsLtd, QuantumToEmilySubdivision) into ContactToRelationship
+
+!new Relationship('QuantumToAntonBoss')
+!QuantumToAntonBoss.type := #BOSS
+!insert (QuantumToAntonBoss, ProfAntonIvanovich) into RelationshipToContact
+!insert (QuantumInnovationsLtd, QuantumToAntonBoss) into ContactToRelationship
+
+!new Relationship('EmilyToMarcusCoworker')
+!EmilyToMarcusCoworker.type := #COWORKER
+!insert (EmilyToMarcusCoworker, DrMarcusJames) into RelationshipToContact
+!insert (ProfEmilyZhang, EmilyToMarcusCoworker) into ContactToRelationship
+
+!new Relationship('MarcusToEmilyCoworker')
+!MarcusToEmilyCoworker.type := #COWORKER
+!insert (MarcusToEmilyCoworker, ProfEmilyZhang) into RelationshipToContact
+!insert (DrMarcusJames, MarcusToEmilyCoworker) into ContactToRelationship
+
+!new Relationship('MarcusToQuantumEmployee')
+!MarcusToQuantumEmployee.type := #EMPLOYEE
+!insert (MarcusToQuantumEmployee, QuantumInnovationsLtd) into RelationshipToContact
+!insert (DrMarcusJames, MarcusToQuantumEmployee) into ContactToRelationship
+
+!insert (GlobalNetworksReferenceBook, QuantumInnovationsLtd) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, ProfEmilyZhang) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, DrMarcusJames) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, ProfAntonIvanovich) into AddressBookMadeOfContact

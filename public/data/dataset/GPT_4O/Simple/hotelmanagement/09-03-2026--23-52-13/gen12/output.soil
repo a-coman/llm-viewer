@@ -1,0 +1,36 @@
+!new Booking('booking13')
+!booking13.startDate := '2024-11-12'
+!booking13.endDate := '2024-11-15'
+!booking13.canceled := false
+!booking13.bookingId := 113
+!booking13.confirmed := true
+
+!new Bill('bill13')
+!bill13.price := 275.00
+!bill13.billId := 5013
+
+!new Customer('customer13')
+!customer13.firstName := 'Mia'
+!customer13.lastName := 'Nguyen'
+
+!new RoomReservation('reservation13')
+!reservation13.checkInDate := '2024-11-12'
+!reservation13.checkOutDate := '2024-11-15'
+
+!new Room('room1001')
+!room1001.numBeds := 2
+!room1001.pricePerNight := 115.00
+!room1001.occupied := true
+!room1001.blocked := false
+!room1001.roomNumber := 1001
+
+!new RoomExtra('extra16')
+!extra16.price := 30.00
+!extra16.description := 'Room Decoration'
+
+!insert (booking13, bill13) into BookingBill
+!insert (booking13, customer13) into BookingCustomer
+!insert (booking13, reservation13) into BookingRoomReservation
+!insert (reservation13, extra16) into RoomReservationExtras
+!insert (reservation13, room1001) into RoomReservationRoom
+!insert (bill13, reservation13) into BillRoomReservation

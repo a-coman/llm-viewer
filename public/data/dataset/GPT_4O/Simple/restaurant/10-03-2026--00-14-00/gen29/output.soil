@@ -1,0 +1,114 @@
+!new Restaurant('restaurant29')
+!restaurant29.name := 'Planetary Plates'
+
+!new Owner('owner58')
+!owner58.name := 'Galileo Moon'
+!owner58.percentageShares := 60
+!insert (restaurant29, owner58) into RestaurantOwner
+
+!new Owner('owner59')
+!owner59.name := 'Stella Orbit'
+!owner59.percentageShares := 40
+!insert (restaurant29, owner59) into RestaurantOwner
+
+!new Table('table84')
+!table84.number := 84
+!table84.description := 'Venus View'
+!table84.capacity := 8
+
+!new Table('table85')
+!table85.number := 85
+!table85.description := 'Jupiter Junction'
+!table85.capacity := 22
+
+!new Table('table86')
+!table86.number := 86
+!table86.description := 'Neptune Nook'
+!table86.capacity := 20
+
+!new RegularCustomer('customer30')
+!customer30.name := 'Aurora Luna'
+!customer30.prefferedLanguage := #German
+
+!new Waiter('waiter31')
+!waiter31.name := 'Zenith Star'
+!waiter31.dateOfBirth := Date('1991-02-10')
+!waiter31.phoneNumber := '555-4545'
+!waiter31.spokenLanguage := #Spanish
+
+!new HeadWaiter('headwaiter29')
+!headwaiter29.name := 'Lunar Ray'
+!headwaiter29.dateOfBirth := Date('1983-05-19')
+!headwaiter29.phoneNumber := '555-6767'
+
+!insert (headwaiter29, waiter31) into HeadWaiterWaiter
+
+!new Individual('reservation55')
+!reservation55.time := Time('19:00')
+!reservation55.date := Date('2025-11-12')
+!reservation55.numberPeople := 4
+!reservation55.name := 'Aurora Luna'
+!reservation55.phoneNumber := '555-3434'
+!reservation55.number := 55
+!reservation55.seating := #Inside
+!reservation55.smoking := #NonSmoking
+!insert (restaurant29, reservation55) into RestaurantReservation
+!insert (reservation55, customer30) into ReservationCustomer
+!insert (reservation55, waiter31) into ReservationWaiter
+!insert (reservation55, table84) into ReservationTable
+
+!new Banquet('reservation56')
+!reservation56.time := Time('21:00')
+!reservation56.date := Date('2025-12-18')
+!reservation56.numberPeople := 40
+!reservation56.name := 'Solar Symposium'
+!reservation56.phoneNumber := '555-9090'
+!reservation56.number := 56
+!reservation56.groupName := 'Galactic Gathering'
+!reservation56.paymentMethod := #CreditCard
+!reservation56.busService := true
+!insert (restaurant29, reservation56) into RestaurantReservation
+!insert (reservation56, table85) into ReservationTable
+!insert (reservation56, table86) into ReservationTable
+!insert (reservation56, waiter31) into ReservationWaiter
+
+!new BusDriver('busdriver21')
+!busdriver21.name := 'Astro Trek'
+!busdriver21.dateOfBirth := Date('1976-09-30')
+!busdriver21.phoneNumber := '555-2121'
+!busdriver21.driverLicenseNr := 'DL667788'
+!insert (reservation56, busdriver21) into BanquetBusDriver
+
+!new ItemOrder('itemOrder29')
+!itemOrder29.time := Time('19:30')
+!insert (reservation55, itemOrder29) into ReservationItemOrdered
+
+!new MenuItem('menuItem29')
+!menuItem29.description := 'Martian Meatballs'
+!menuItem29.prepTime := 20.0
+!menuItem29.classification := #Main
+!insert (itemOrder29, menuItem29) into ItemOrderMenuItem
+
+!new FoodItem('foodItem29')
+!foodItem29.number := 129
+!foodItem29.description := 'Ground Beef and Herbs'
+!foodItem29.purchaseFlag := true
+!foodItem29.unit := #Pound
+!insert (menuItem29, foodItem29) into MenuItemFoodItem
+
+!new Allergen('allergen29')
+!allergen29.type := #Nuts
+!insert (foodItem29, allergen29) into FoodItemAllergen
+
+!new Cook('cook29')
+!cook29.name := 'Cassiopeia Glint'
+!cook29.dateOfBirth := Date('1989-07-07')
+!cook29.phoneNumber := '555-1313'
+!cook29.yearsOfExperience := 5
+
+!new Chef('chef29')
+!chef29.name := 'Meteor Blaze'
+!chef29.dateOfBirth := Date('1985-03-23')
+!chef29.phoneNumber := '555-5656'
+!insert (menuItem29, chef29) into MenuItemChef
+!insert (chef29, cook29) into ChefCook

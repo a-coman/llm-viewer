@@ -1,0 +1,261 @@
+!new RentalOffice('officeBostonDowntown')
+!officeBostonDowntown.name := 'Boston Downtown'
+!officeBostonDowntown.number := 101
+!officeBostonDowntown.address := '123 Main St, Boston, MA 02101'
+
+!new Truck('truck001')
+!truck001.id := 301
+!truck001.registrationState := #MA
+!truck001.licensePlateNumber := 'MA1234TR'
+!truck001.vehicleTypeCode := #TRUCK
+!truck001.registrationLastMaintenanceDate := Date('2023-08-15')
+!truck001.expirationDate := Date('2024-08-14')
+!truck001.odometerReading := 12000
+!truck001.gasTankCapacity := 15.5
+!truck001.workingRadio := true
+!truck001.mileage := 25000
+
+!new Individual('individualJohnDoe')
+!individualJohnDoe.name := 'John Doe'
+!individualJohnDoe.address := '456 Elm St, Boston, MA 02110'
+!individualJohnDoe.poorRisk := false
+!individualJohnDoe.homePhone := '617-555-2323'
+!individualJohnDoe.driverLicenseState := #MA
+!individualJohnDoe.driverLicenseNumber := 987654321
+!individualJohnDoe.driverLicenseExpirationDate := Date('2025-05-10')
+
+!new RentalAgreement('rentalAgreement1001')
+!rentalAgreement1001.number := 1001
+!rentalAgreement1001.rentalDate := Date('2023-09-01')
+!rentalAgreement1001.anticipatedDuration := 7
+!rentalAgreement1001.depositPaid := 200.0
+!rentalAgreement1001.quotedDailyRate := 50.0
+!rentalAgreement1001.quotedRatePerMile := 0.5
+
+!insert (officeBostonDowntown, truck001) into RentalOfficeVehicle
+!insert (officeBostonDowntown, rentalAgreement1001) into RentalOfficeRentalAgreementOrigin
+!insert (officeBostonDowntown, rentalAgreement1001) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1001, truck001) into RentalAgreementVehicle
+!insert (rentalAgreement1001, individualJohnDoe) into RentalAgreementCustomer
+
+!new RentalOffice('officeBoundaryStateRentals')
+!officeBoundaryStateRentals.name := 'Boundary State Rentals'
+!officeBoundaryStateRentals.number := 1
+!officeBoundaryStateRentals.address := '123 Lone Star Road, Austin, TX'
+
+!new Truck('truckBoundaryCase')
+!truckBoundaryCase.id := 1
+!truckBoundaryCase.registrationState := #TX
+!truckBoundaryCase.licensePlateNumber := 'TX-0001-EDGE'
+!truckBoundaryCase.vehicleTypeCode := #TRUCK
+!truckBoundaryCase.registrationLastMaintenanceDate := Date('2024-01-01')
+!truckBoundaryCase.expirationDate := Date('2025-01-01')
+!truckBoundaryCase.odometerReading := 0
+!truckBoundaryCase.gasTankCapacity := 0.0
+!truckBoundaryCase.workingRadio := false
+!truckBoundaryCase.mileage := 0
+
+!new Individual('individualJohnNull')
+!individualJohnNull.name := 'John Null'
+!individualJohnNull.address := '456 Empty Lane, Nowhere, NY'
+!individualJohnNull.poorRisk := true
+!individualJohnNull.homePhone := '000-000-0000'
+!individualJohnNull.driverLicenseState := #NY
+!individualJohnNull.driverLicenseNumber := 1000000000
+!individualJohnNull.driverLicenseExpirationDate := Date('2023-10-01')
+
+!new RentalAgreement('rentalAgreementBoundaryCase')
+!rentalAgreementBoundaryCase.number := 1
+!rentalAgreementBoundaryCase.rentalDate := Date('2024-12-31')
+!rentalAgreementBoundaryCase.anticipatedDuration := 0
+!rentalAgreementBoundaryCase.depositPaid := 0.0
+!rentalAgreementBoundaryCase.quotedDailyRate := 0.0
+!rentalAgreementBoundaryCase.quotedRatePerMile := 0.0
+
+!insert (officeBoundaryStateRentals, truckBoundaryCase) into RentalOfficeVehicle
+!insert (officeBoundaryStateRentals, rentalAgreementBoundaryCase) into RentalOfficeRentalAgreementOrigin
+!insert (officeBoundaryStateRentals, rentalAgreementBoundaryCase) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementBoundaryCase, truckBoundaryCase) into RentalAgreementVehicle
+!insert (rentalAgreementBoundaryCase, individualJohnNull) into RentalAgreementCustomer
+
+!new RentalOffice('officeQuickNGoRentals')
+!officeQuickNGoRentals.name := 'QuickNGo Rentals'
+!officeQuickNGoRentals.number := 101
+!officeQuickNGoRentals.address := '456 Market St, San Francisco, CA 94111'
+
+!new Truck('truck2021')
+!truck2021.id := 2021
+!truck2021.registrationState := #CA
+!truck2021.licensePlateNumber := 'CAL1234'
+!truck2021.vehicleTypeCode := #TRUCK
+!truck2021.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck2021.expirationDate := Date('2024-07-15')
+!truck2021.odometerReading := 30000
+!truck2021.gasTankCapacity := 26.5
+!truck2021.workingRadio := true
+!truck2021.mileage := 15
+
+!new Vehicle('trailer3019')
+!trailer3019.id := 3019
+!trailer3019.registrationState := #CA
+!trailer3019.licensePlateNumber := 'CAL5678'
+!trailer3019.vehicleTypeCode := #COVERED_TRAILER
+!trailer3019.registrationLastMaintenanceDate := Date('2023-08-10')
+!trailer3019.expirationDate := Date('2024-09-10')
+
+!new Individual('individualJohnDoe')
+!individualJohnDoe.name := 'John Doe'
+!individualJohnDoe.address := '789 Pine St, San Francisco, CA 94108'
+!individualJohnDoe.poorRisk := false
+!individualJohnDoe.homePhone := '415-555-0101'
+!individualJohnDoe.driverLicenseState := #CA
+!individualJohnDoe.driverLicenseNumber := 98765432
+!individualJohnDoe.driverLicenseExpirationDate := Date('2025-03-23')
+
+!new Company('companyTechInnovators')
+!companyTechInnovators.name := 'Tech Innovators Inc.'
+!companyTechInnovators.address := '123 Silicon Valley Blvd, Palo Alto, CA 94301'
+!companyTechInnovators.poorRisk := false
+!companyTechInnovators.idNumber := 9001
+
+!new RentalAgreement('rentalAgreement5001')
+!rentalAgreement5001.number := 5001
+!rentalAgreement5001.rentalDate := Date('2023-09-01')
+!rentalAgreement5001.anticipatedDuration := 7
+!rentalAgreement5001.depositPaid := 200.0
+!rentalAgreement5001.quotedDailyRate := 45.0
+!rentalAgreement5001.quotedRatePerMile := 0.5
+
+!new RentalAgreement('rentalAgreement6003')
+!rentalAgreement6003.number := 6003
+!rentalAgreement6003.rentalDate := Date('2023-09-10')
+!rentalAgreement6003.anticipatedDuration := 14
+!rentalAgreement6003.depositPaid := 500.0
+!rentalAgreement6003.quotedDailyRate := 35.0
+!rentalAgreement6003.quotedRatePerMile := 0.3
+
+!insert (officeQuickNGoRentals, truck2021) into RentalOfficeVehicle
+!insert (officeQuickNGoRentals, trailer3019) into RentalOfficeVehicle
+
+!insert (officeQuickNGoRentals, rentalAgreement5001) into RentalOfficeRentalAgreementOrigin
+!insert (officeQuickNGoRentals, rentalAgreement6003) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeQuickNGoRentals, rentalAgreement5001) into RentalOfficeRentalAgreementDrop
+!insert (officeQuickNGoRentals, rentalAgreement6003) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5001, truck2021) into RentalAgreementVehicle
+!insert (rentalAgreement6003, trailer3019) into RentalAgreementVehicle
+
+!insert (rentalAgreement5001, individualJohnDoe) into RentalAgreementCustomer
+!insert (rentalAgreement6003, companyTechInnovators) into RentalAgreementCustomer
+
+!new RentalOffice('officeMiamiDowntown')
+!officeMiamiDowntown.name := 'Miami Downtown Branch'
+!officeMiamiDowntown.number := 101
+!officeMiamiDowntown.address := '123 Biscayne Blvd, Miami, FL'
+
+!new Truck('truck3001')
+!truck3001.id := 3001
+!truck3001.registrationState := #FL
+!truck3001.licensePlateNumber := 'FL1234AB'
+!truck3001.vehicleTypeCode := #TRUCK
+!truck3001.odometerReading := 100000
+!truck3001.gasTankCapacity := 0.0
+!truck3001.workingRadio := true
+!truck3001.mileage := 15
+!truck3001.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck3001.expirationDate := Date('2024-06-14')
+
+!new Individual('individualJuanPerez')
+!individualJuanPerez.name := 'Juan Pérez'
+!individualJuanPerez.address := '456 Little Havana, Miami, FL'
+!individualJuanPerez.poorRisk := false
+!individualJuanPerez.homePhone := '(305) 555-7890'
+!individualJuanPerez.driverLicenseState := #FL
+!individualJuanPerez.driverLicenseNumber := 987654321
+!individualJuanPerez.driverLicenseExpirationDate := Date('2023-12-31')
+
+!new Company('companySunshineCorp')
+!companySunshineCorp.name := 'Sunshine Corp Logistics'
+!companySunshineCorp.address := '789 Brickell Ave, Miami, FL'
+!companySunshineCorp.poorRisk := true
+!companySunshineCorp.idNumber := 87654321
+
+!new RentalAgreement('rentalAgreement5001')
+!rentalAgreement5001.number := 5001
+!rentalAgreement5001.rentalDate := Date('2023-10-01')
+!rentalAgreement5001.anticipatedDuration := 15
+!rentalAgreement5001.depositPaid := 200.0
+!rentalAgreement5001.quotedDailyRate := 150.0
+!rentalAgreement5001.quotedRatePerMile := 0.0
+
+!insert (officeMiamiDowntown, truck3001) into RentalOfficeVehicle
+
+!insert (officeMiamiDowntown, rentalAgreement5001) into RentalOfficeRentalAgreementOrigin
+!insert (officeMiamiDowntown, rentalAgreement5001) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5001, truck3001) into RentalAgreementVehicle
+
+!insert (rentalAgreement5001, individualJuanPerez) into RentalAgreementCustomer
+!insert (rentalAgreement5001, companySunshineCorp) into RentalAgreementCustomer
+
+!new RentalOffice('officeRemotePeaks')
+!officeRemotePeaks.name := 'Remote Peaks Rental'
+!officeRemotePeaks.number := 101
+!officeRemotePeaks.address := '123 Mountain Top Lane, Isolation, WY 82000'
+
+!new Truck('truck56789')
+!truck56789.id := 56789
+!truck56789.registrationState := #WY
+!truck56789.licensePlateNumber := 'WYO-123-EFG'
+!truck56789.vehicleTypeCode := #TRUCK
+!truck56789.registrationLastMaintenanceDate := Date('2022-12-31')
+!truck56789.expirationDate := Date('2023-12-31')
+!truck56789.odometerReading := 7
+!truck56789.gasTankCapacity := 0.5
+!truck56789.workingRadio := true
+!truck56789.mileage := 0
+
+!new Individual('individualErikMountainclimber')
+!individualErikMountainclimber.name := 'Erik Mountainclimber'
+!individualErikMountainclimber.address := '789 Cliffside Drive, Alpine, CO 80420'
+!individualErikMountainclimber.poorRisk := true
+!individualErikMountainclimber.homePhone := '+1-970-555-0123'
+!individualErikMountainclimber.driverLicenseState := #CO
+!individualErikMountainclimber.driverLicenseNumber := 98765432
+!individualErikMountainclimber.driverLicenseExpirationDate := Date('2024-06-30')
+
+!new Company('companyHighAltitudeVentures')
+!companyHighAltitudeVentures.name := 'High Altitude Ventures'
+!companyHighAltitudeVentures.address := '45 Boulder Front, Summit City, CO 80001'
+!companyHighAltitudeVentures.poorRisk := false
+!companyHighAltitudeVentures.idNumber := 123456789
+
+!new RentalAgreement('rentalAgreement1001')
+!rentalAgreement1001.number := 1001
+!rentalAgreement1001.rentalDate := Date('2025-01-15')
+!rentalAgreement1001.anticipatedDuration := 1
+!rentalAgreement1001.depositPaid := 0.0
+!rentalAgreement1001.quotedDailyRate := 300.0
+!rentalAgreement1001.quotedRatePerMile := 1.5
+
+!new RentalAgreement('rentalAgreement1002')
+!rentalAgreement1002.number := 1002
+!rentalAgreement1002.rentalDate := Date('2025-01-15')
+!rentalAgreement1002.anticipatedDuration := 30
+!rentalAgreement1002.depositPaid := 10000.0
+!rentalAgreement1002.quotedDailyRate := 250.0
+!rentalAgreement1002.quotedRatePerMile := 1.0
+
+!insert (officeRemotePeaks, truck56789) into RentalOfficeVehicle
+
+!insert (officeRemotePeaks, rentalAgreement1001) into RentalOfficeRentalAgreementOrigin
+!insert (officeRemotePeaks, rentalAgreement1001) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1001, truck56789) into RentalAgreementVehicle
+!insert (rentalAgreement1001, individualErikMountainclimber) into RentalAgreementCustomer
+
+!insert (officeRemotePeaks, rentalAgreement1002) into RentalOfficeRentalAgreementOrigin
+!insert (officeRemotePeaks, rentalAgreement1002) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1002, truck56789) into RentalAgreementVehicle
+!insert (rentalAgreement1002, companyHighAltitudeVentures) into RentalAgreementCustomer
+

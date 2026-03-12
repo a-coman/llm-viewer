@@ -1,0 +1,71 @@
+!new Customer('customer9')
+!customer9.firstName := 'Liam'
+!customer9.lastName := 'MacGregor'
+
+!new Booking('booking9')
+!booking9.startDate := '2023-12-05'
+!booking9.endDate := '2023-12-12'
+!booking9.canceled := false
+!booking9.bookingId := 1015
+!booking9.confirmed := true
+
+!new Bill('bill18')
+!bill18.price := 850.00
+!bill18.billId := 3015
+
+!new Bill('bill19')
+!bill19.price := 860.00
+!bill19.billId := 3016
+
+!new RoomReservation('roomReservation9_1')
+!roomReservation9_1.checkInDate := '2023-12-05'
+!roomReservation9_1.checkOutDate := '2023-12-09'
+
+!new RoomReservation('roomReservation9_2')
+!roomReservation9_2.checkInDate := '2023-12-09'
+!roomReservation9_2.checkOutDate := '2023-12-12'
+
+!new Room('room9_203')
+!room9_203.numBeds := 1
+!room9_203.pricePerNight := 120.00
+!room9_203.occupied := true
+!room9_203.blocked := false
+!room9_203.roomNumber := 203
+
+!new Room('room9_208')
+!room9_208.numBeds := 2
+!room9_208.pricePerNight := 180.00
+!room9_208.occupied := true
+!room9_208.blocked := false
+!room9_208.roomNumber := 208
+
+!new RoomExtra('extra9_1')
+!extra9_1.price := 40.00
+!extra9_1.description := 'Traditional Scottish Breakfast'
+
+!new RoomExtra('extra9_2')
+!extra9_2.price := 60.00
+!extra9_2.description := 'Guided Highland Tour with Lunch'
+
+!new FreeRoomTypesDTO('freeRoomType8')
+!freeRoomType8.roomTypeDescription := 'Family Room with Mountain View'
+!freeRoomType8.numBeds := 3
+!freeRoomType8.pricePerNight := 210.00
+!freeRoomType8.numFreeRooms := 2
+
+!insert (booking9, customer9) into BookingCustomer
+
+!insert (booking9, bill18) into BookingBill
+!insert (booking9, bill19) into BookingBill
+
+!insert (booking9, roomReservation9_1) into BookingRoomReservation
+!insert (booking9, roomReservation9_2) into BookingRoomReservation
+
+!insert (roomReservation9_1, room9_203) into RoomReservationRoom
+!insert (roomReservation9_1, extra9_1) into RoomReservationExtras
+
+!insert (roomReservation9_2, room9_208) into RoomReservationRoom
+!insert (roomReservation9_2, extra9_2) into RoomReservationExtras
+
+!insert (bill18, roomReservation9_1) into BillRoomReservation
+!insert (bill19, roomReservation9_2) into BillRoomReservation

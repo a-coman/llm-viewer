@@ -1,0 +1,444 @@
+!new AddressBook('HealthcareProfessionalsAddressBook')
+
+!new Company('WellnessPharmaceuticals')
+!WellnessPharmaceuticals.name := 'Wellness Pharmaceuticals'
+!WellnessPharmaceuticals.phone := '+1-800-987-6543'
+!WellnessPharmaceuticals.website := 'www.wellnesspharma.com'
+!WellnessPharmaceuticals.email := 'contact@wellnesspharma.com'
+!WellnessPharmaceuticals.industry := 'Pharmaceuticals'
+
+!new Address('WellnessPharmaAddress')
+!WellnessPharmaAddress.city := 'Boston'
+!WellnessPharmaAddress.houseNr := '525'
+!WellnessPharmaAddress.street := 'Cambridge Street'
+!insert (WellnessPharmaceuticals, WellnessPharmaAddress) into ContactContainsAddress
+
+!new Note('WellnessPharmaNote1')
+!WellnessPharmaNote1.author := 'Dr. Emily Chen'
+!WellnessPharmaNote1.time := Date('2023-08-10')
+!WellnessPharmaNote1.type := #CALL
+!WellnessPharmaNote1.comment := 'Discussed the side effects of the new medication batch.'
+!insert (WellnessPharmaceuticals, WellnessPharmaNote1) into ContactContainsNote
+
+!new Person('DrEmilyChen')
+!DrEmilyChen.name := 'Dr. Emily Chen'
+!DrEmilyChen.phone := '+44-20-555-0194'
+!DrEmilyChen.email := 'emily.chen@healthclinic.com'
+!DrEmilyChen.title := 'Cardiologist'
+
+!new Address('EmilyChenAddress1')
+!EmilyChenAddress1.city := 'London'
+!EmilyChenAddress1.houseNr := '78'
+!EmilyChenAddress1.street := 'Harley Street'
+!insert (DrEmilyChen, EmilyChenAddress1) into ContactContainsAddress
+
+!new Address('EmilyChenAddress2')
+!EmilyChenAddress2.city := 'Manchester'
+!EmilyChenAddress2.houseNr := '14'
+!EmilyChenAddress2.street := 'Health Avenue'
+!insert (DrEmilyChen, EmilyChenAddress2) into ContactContainsAddress
+
+!new Note('EmilyChenNote1')
+!EmilyChenNote1.author := 'Wellness Pharmaceuticals'
+!EmilyChenNote1.time := Date('2023-09-12')
+!EmilyChenNote1.type := #EMAIL
+!EmilyChenNote1.comment := 'Sent detailed report on drug interactions.'
+!insert (DrEmilyChen, EmilyChenNote1) into ContactContainsNote
+
+!new Company('SunshineDentalClinic')
+!SunshineDentalClinic.name := 'Sunshine Dental Clinic'
+!SunshineDentalClinic.phone := '+61-2-5550-1789'
+!SunshineDentalClinic.website := 'www.sunshinedental.au'
+!SunshineDentalClinic.email := 'info@sunshinedental.au'
+!SunshineDentalClinic.industry := 'Healthcare'
+
+!new Address('SunshineDentalAddress1')
+!SunshineDentalAddress1.city := 'Sydney'
+!SunshineDentalAddress1.houseNr := '34'
+!SunshineDentalAddress1.street := 'Oral Care Drive'
+!insert (SunshineDentalClinic, SunshineDentalAddress1) into ContactContainsAddress
+
+!new Relationship('WellnessToEmilyBoss')
+!WellnessToEmilyBoss.type := #BOSS
+!insert (WellnessToEmilyBoss, DrEmilyChen) into RelationshipToContact
+!insert (WellnessPharmaceuticals, WellnessToEmilyBoss) into ContactToRelationship
+
+!new Relationship('SunshineToWellnessSubdivision')
+!SunshineToWellnessSubdivision.type := #SUBDIVISION
+!insert (SunshineToWellnessSubdivision, WellnessPharmaceuticals) into RelationshipToContact
+!insert (SunshineDentalClinic, SunshineToWellnessSubdivision) into ContactToRelationship
+
+!new Relationship('EmilyToSunshineEmployee')
+!EmilyToSunshineEmployee.type := #EMPLOYEE
+!insert (EmilyToSunshineEmployee, SunshineDentalClinic) into RelationshipToContact
+!insert (DrEmilyChen, EmilyToSunshineEmployee) into ContactToRelationship
+
+!insert (HealthcareProfessionalsAddressBook, WellnessPharmaceuticals) into AddressBookMadeOfContact
+!insert (HealthcareProfessionalsAddressBook, DrEmilyChen) into AddressBookMadeOfContact
+!insert (HealthcareProfessionalsAddressBook, SunshineDentalClinic) into AddressBookMadeOfContact
+
+!new AddressBook('InternationalProfessionalNetwork')
+
+!new Person('CarlosMendesIPN')
+!CarlosMendesIPN.name := 'Carlos Mendes'
+!CarlosMendesIPN.phone := '+351-21-998-7654'
+!CarlosMendesIPN.website := 'www.carlosmendes.pt'
+!CarlosMendesIPN.email := 'carlos.mendes@marketingportugal.pt'
+!CarlosMendesIPN.title := 'Chief Marketing Officer'
+
+!new Address('CarlosMendesAddressIPN')
+!CarlosMendesAddressIPN.city := 'Lisbon'
+!CarlosMendesAddressIPN.street := 'Rua Augusta'
+!CarlosMendesAddressIPN.houseNr := '45'
+!insert (CarlosMendesIPN, CarlosMendesAddressIPN) into ContactContainsAddress
+
+!new Note('CarlosMendesNoteIPN')
+!CarlosMendesNoteIPN.author := 'Carlos Mendes'
+!CarlosMendesNoteIPN.time := Date('2023-02-10')
+!CarlosMendesNoteIPN.type := #EMAIL
+!CarlosMendesNoteIPN.comment := 'Overview of strategic marketing initiatives for Q2.'
+!insert (CarlosMendesIPN, CarlosMendesNoteIPN) into ContactContainsNote
+
+!new Company('EcoEnergySystems')
+!EcoEnergySystems.name := 'Eco Energy Systems'
+!EcoEnergySystems.phone := '+49-89-1234-5678'
+!EcoEnergySystems.website := 'www.ecoenergysystems.de'
+!EcoEnergySystems.email := 'info@ecoenergysystems.de'
+!EcoEnergySystems.industry := 'Renewable Energy'
+
+!new Address('EcoEnergySystemsAddress')
+!EcoEnergySystemsAddress.city := 'Munich'
+!EcoEnergySystemsAddress.street := 'Sonnenstraße'
+!EcoEnergySystemsAddress.houseNr := '30'
+!insert (EcoEnergySystems, EcoEnergySystemsAddress) into ContactContainsAddress
+
+!new Note('EcoEnergySystemsNoteIPN')
+!EcoEnergySystemsNoteIPN.author := 'Hans Müller'
+!EcoEnergySystemsNoteIPN.time := Date('2023-05-25')
+!EcoEnergySystemsNoteIPN.type := #MEETING
+!EcoEnergySystemsNoteIPN.comment := 'Discussion about expanding solar energy projects in Southern Europe.'
+!insert (EcoEnergySystems, EcoEnergySystemsNoteIPN) into ContactContainsNote
+
+!new Person('PaoloConti')
+!PaoloConti.name := 'Paolo Conti'
+!PaoloConti.phone := '+39-06-4444-5555'
+!PaoloConti.website := 'www.paoloconticonsulting.it'
+!PaoloConti.email := 'paolo.conti@innovationitalia.it'
+!PaoloConti.title := 'Innovation Consultant'
+
+!new Address('PaoloContiAddress')
+!PaoloContiAddress.city := 'Rome'
+!PaoloContiAddress.street := 'Via Condotti'
+!PaoloContiAddress.houseNr := '22'
+!insert (PaoloConti, PaoloContiAddress) into ContactContainsAddress
+
+!new Note('PaoloContiNoteIPN')
+!PaoloContiNoteIPN.author := 'Paolo Conti'
+!PaoloContiNoteIPN.time := Date('2023-04-18')
+!PaoloContiNoteIPN.type := #CALL
+!PaoloContiNoteIPN.comment := 'Insights on integrating AI into customer service.'
+!insert (PaoloConti, PaoloContiNoteIPN) into ContactContainsNote
+
+!new Person('JeanBaptiste')
+!JeanBaptiste.name := 'Jean Baptiste'
+!JeanBaptiste.phone := '+33-1-7543-2109'
+!JeanBaptiste.website := 'www.jeanbaptiste.fr'
+!JeanBaptiste.email := 'jean.baptiste@entrepreneurfrance.fr'
+!JeanBaptiste.title := 'Entrepreneur'
+
+!new Address('JeanBaptisteAddress')
+!JeanBaptisteAddress.city := 'Paris'
+!JeanBaptisteAddress.street := 'Champs-Élysées'
+!JeanBaptisteAddress.houseNr := '12'
+!insert (JeanBaptiste, JeanBaptisteAddress) into ContactContainsAddress
+
+!new Note('JeanBaptisteNoteIPN')
+!JeanBaptisteNoteIPN.author := 'Jean Baptiste'
+!JeanBaptisteNoteIPN.time := Date('2023-03-30')
+!JeanBaptisteNoteIPN.type := #EMAIL
+!JeanBaptisteNoteIPN.comment := 'Proposal for joint ventures in sustainable agriculture.'
+!insert (JeanBaptiste, JeanBaptisteNoteIPN) into ContactContainsNote
+
+!new Relationship('CarlosToPaoloBoss')
+!CarlosToPaoloBoss.type := #BOSS
+!insert (CarlosToPaoloBoss, PaoloConti) into RelationshipToContact
+!insert (CarlosMendesIPN, CarlosToPaoloBoss) into ContactToRelationship
+
+!new Relationship('PaoloToCarlosEmployee')
+!PaoloToCarlosEmployee.type := #EMPLOYEE
+!insert (PaoloToCarlosEmployee, CarlosMendesIPN) into RelationshipToContact
+!insert (PaoloConti, PaoloToCarlosEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToJeanCoworker')
+!CarlosToJeanCoworker.type := #COWORKER
+!insert (CarlosToJeanCoworker, JeanBaptiste) into RelationshipToContact
+!insert (CarlosMendesIPN, CarlosToJeanCoworker) into ContactToRelationship
+
+!new Relationship('JeanToCarlosCoworker')
+!JeanToCarlosCoworker.type := #COWORKER
+!insert (JeanToCarlosCoworker, CarlosMendesIPN) into RelationshipToContact
+!insert (JeanBaptiste, JeanToCarlosCoworker) into ContactToRelationship
+
+!new Relationship('JeanToEcoSubdivision')
+!JeanToEcoSubdivision.type := #SUBDIVISION
+!insert (JeanToEcoSubdivision, EcoEnergySystems) into RelationshipToContact
+!insert (JeanBaptiste, JeanToEcoSubdivision) into ContactToRelationship
+
+!insert (InternationalProfessionalNetwork, CarlosMendesIPN) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, EcoEnergySystems) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, PaoloConti) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, JeanBaptiste) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalResearchConsortiumDirectory')
+
+!new Company('GreenEarthInitiative')
+!GreenEarthInitiative.name := 'GreenEarth Initiative'
+!GreenEarthInitiative.phone := '+27-11-2345678'
+!GreenEarthInitiative.website := 'www.greenearth.org.za'
+!GreenEarthInitiative.email := 'contact@greenearth.org.za'
+!GreenEarthInitiative.industry := 'Environmental Advocacy'
+
+!new Address('GreenEarthAddress')
+!GreenEarthAddress.city := 'Johannesburg'
+!GreenEarthAddress.houseNr := '50'
+!GreenEarthAddress.street := 'Green Lane'
+!insert (GreenEarthInitiative, GreenEarthAddress) into ContactContainsAddress
+
+!new Note('GreenEarthNote1')
+!GreenEarthNote1.author := 'Jonathan Ndlovu'
+!GreenEarthNote1.time := Date('2023-09-05T12:00:00')
+!GreenEarthNote1.type := #EMAIL
+!GreenEarthNote1.comment := 'Submission for environmental policy reform proposal.'
+!insert (GreenEarthInitiative, GreenEarthNote1) into ContactContainsNote
+
+!new Company('ForFutureGenerations')
+!ForFutureGenerations.name := 'For Future Generations'
+!ForFutureGenerations.phone := '+91-22-5556789'
+!ForFutureGenerations.website := 'www.futuregenerations.in'
+!ForFutureGenerations.email := 'info@futuregenerations.in'
+!ForFutureGenerations.industry := 'Education and Research'
+
+!new Address('ForFutureGenerationsAddress')
+!ForFutureGenerationsAddress.city := 'Mumbai'
+!ForFutureGenerationsAddress.houseNr := '101'
+!ForFutureGenerationsAddress.street := 'Millennial Way'
+!insert (ForFutureGenerations, ForFutureGenerationsAddress) into ContactContainsAddress
+
+!new Note('ForFutureGenerationsNote1')
+!ForFutureGenerationsNote1.author := 'Sneha Kapoor'
+!ForFutureGenerationsNote1.time := Date('2023-07-18T14:30:00')
+!ForFutureGenerationsNote1.type := #MEETING
+!ForFutureGenerationsNote1.comment := 'Regional conference on sustainable development goals.'
+!insert (ForFutureGenerations, ForFutureGenerationsNote1) into ContactContainsNote
+
+!new Person('DrAnikaRajan')
+!DrAnikaRajan.name := 'Dr. Anika Rajan'
+!DrAnikaRajan.phone := '+49-30-7779955'
+!DrAnikaRajan.website := 'www.anikarajan.org'
+!DrAnikaRajan.email := 'anika.rajan@researcher.de'
+!DrAnikaRajan.title := 'Sustainability Scientist'
+
+!new Address('AnikaRajanAddress')
+!AnikaRajanAddress.city := 'Berlin'
+!AnikaRajanAddress.houseNr := '5'
+!AnikaRajanAddress.street := 'Innovation Allee'
+!insert (DrAnikaRajan, AnikaRajanAddress) into ContactContainsAddress
+
+!new Note('AnikaRajanNote1')
+!AnikaRajanNote1.author := 'Dr. Anika Rajan'
+!AnikaRajanNote1.time := Date('2023-08-25T09:00:00')
+!AnikaRajanNote1.type := #CALL
+!AnikaRajanNote1.comment := 'Discussed collaboration on climate change models.'
+!insert (DrAnikaRajan, AnikaRajanNote1) into ContactContainsNote
+
+!new Note('AnikaRajanNote2')
+!AnikaRajanNote2.author := 'Dr. Anika Rajan'
+!AnikaRajanNote2.time := Date('2023-06-10T10:15:00')
+!AnikaRajanNote2.type := #EMAIL
+!AnikaRajanNote2.comment := 'Sent project updates and next steps overview.'
+!insert (DrAnikaRajan, AnikaRajanNote2) into ContactContainsNote
+
+!new Company('OceanSaverCoalition')
+!OceanSaverCoalition.name := 'OceanSaver Coalition'
+!OceanSaverCoalition.phone := '+81-3-4567890'
+!OceanSaverCoalition.website := 'www.oceansaver.jp'
+!OceanSaverCoalition.email := 'admin@oceansaver.jp'
+!OceanSaverCoalition.industry := 'Marine Conservation'
+
+!new Address('OceanSaverAddress')
+!OceanSaverAddress.city := 'Tokyo'
+!OceanSaverAddress.houseNr := '7'
+!OceanSaverAddress.street := 'Ocean Drive'
+!insert (OceanSaverCoalition, OceanSaverAddress) into ContactContainsAddress
+
+!new Note('OceanSaverNote1')
+!OceanSaverNote1.author := 'Yukiko Tanaka'
+!OceanSaverNote1.time := Date('2023-05-29T15:00:00')
+!OceanSaverNote1.type := #MEETING
+!OceanSaverNote1.comment := 'Broader outreach for Pacific marine life preservation.'
+!insert (OceanSaverCoalition, OceanSaverNote1) into ContactContainsNote
+
+!new Relationship('GreenEarthToAnikaCoworker')
+!GreenEarthToAnikaCoworker.type := #COWORKER
+!insert (GreenEarthToAnikaCoworker, DrAnikaRajan) into RelationshipToContact
+!insert (GreenEarthInitiative, GreenEarthToAnikaCoworker) into ContactToRelationship
+
+!new Relationship('GreenEarthToFutureSubdivision')
+!GreenEarthToFutureSubdivision.type := #SUBDIVISION
+!insert (GreenEarthToFutureSubdivision, ForFutureGenerations) into RelationshipToContact
+!insert (GreenEarthInitiative, GreenEarthToFutureSubdivision) into ContactToRelationship
+
+!new Relationship('FutureToGreenEarthBoss')
+!FutureToGreenEarthBoss.type := #BOSS
+!insert (FutureToGreenEarthBoss, GreenEarthInitiative) into RelationshipToContact
+!insert (ForFutureGenerations, FutureToGreenEarthBoss) into ContactToRelationship
+
+!new Relationship('FutureToAnikaBoss')
+!FutureToAnikaBoss.type := #BOSS
+!insert (FutureToAnikaBoss, DrAnikaRajan) into RelationshipToContact
+!insert (ForFutureGenerations, FutureToAnikaBoss) into ContactToRelationship
+
+!new Relationship('AnikaToGreenEarthCoworker')
+!AnikaToGreenEarthCoworker.type := #COWORKER
+!insert (AnikaToGreenEarthCoworker, GreenEarthInitiative) into RelationshipToContact
+!insert (DrAnikaRajan, AnikaToGreenEarthCoworker) into ContactToRelationship
+
+!new Relationship('AnikaToFutureEmployee')
+!AnikaToFutureEmployee.type := #EMPLOYEE
+!insert (AnikaToFutureEmployee, ForFutureGenerations) into RelationshipToContact
+!insert (DrAnikaRajan, AnikaToFutureEmployee) into ContactToRelationship
+
+!new Relationship('OceanSaverToAnikaSubdivision')
+!OceanSaverToAnikaSubdivision.type := #SUBDIVISION
+!insert (OceanSaverToAnikaSubdivision, DrAnikaRajan) into RelationshipToContact
+!insert (OceanSaverCoalition, OceanSaverToAnikaSubdivision) into ContactToRelationship
+
+!insert (GlobalResearchConsortiumDirectory, GreenEarthInitiative) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, ForFutureGenerations) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, DrAnikaRajan) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, OceanSaverCoalition) into AddressBookMadeOfContact
+
+!new AddressBook('TechInnovatorsCircle')
+
+!new Person('DrAnitaDesai')
+!DrAnitaDesai.name := 'Dr. Anita Desai'
+!DrAnitaDesai.phone := '+91 80 2233 4455'
+!DrAnitaDesai.website := 'www.anitadesai.tech'
+!DrAnitaDesai.email := 'adesai@techresearch.in'
+!DrAnitaDesai.title := 'Chief Technology Officer'
+
+!new Address('AnitaDesaiAddress')
+!AnitaDesaiAddress.city := 'Bangalore'
+!AnitaDesaiAddress.street := 'Innovation Street'
+!AnitaDesaiAddress.houseNr := '147'
+!insert (DrAnitaDesai, AnitaDesaiAddress) into ContactContainsAddress
+
+!new Note('AnitaDesaiNote1')
+!AnitaDesaiNote1.author := 'Dr. Anita Desai'
+!AnitaDesaiNote1.time := Date('2023-07-25')
+!AnitaDesaiNote1.type := #CALL
+!AnitaDesaiNote1.comment := 'Discussed potential AI research opportunities with international collaborators.'
+!insert (DrAnitaDesai, AnitaDesaiNote1) into ContactContainsNote
+
+!new Note('AnitaDesaiNote2')
+!AnitaDesaiNote2.author := 'Dr. Anita Desai'
+!AnitaDesaiNote2.time := Date('2023-08-03')
+!AnitaDesaiNote2.type := #MEETING
+!AnitaDesaiNote2.comment := 'Presented findings on quantum computing advancements at the Tech Symposium.'
+!insert (DrAnitaDesai, AnitaDesaiNote2) into ContactContainsNote
+
+!new Person('MiguelSantos')
+!MiguelSantos.name := 'Miguel Santos'
+!MiguelSantos.phone := '+55 21 5555 6677'
+!MiguelSantos.website := 'www.miguelsantos.dev'
+!MiguelSantos.email := 'miguel.s@developbr.org'
+!MiguelSantos.title := 'Lead Developer'
+
+!new Address('MiguelSantosAddress')
+!MiguelSantosAddress.city := 'Rio de Janeiro'
+!MiguelSantosAddress.street := 'Tech Valley'
+!MiguelSantosAddress.houseNr := '33'
+!insert (MiguelSantos, MiguelSantosAddress) into ContactContainsAddress
+
+!new Note('MiguelSantosNote')
+!MiguelSantosNote.author := 'Miguel Santos'
+!MiguelSantosNote.time := Date('2023-08-10')
+!MiguelSantosNote.type := #EMAIL
+!MiguelSantosNote.comment := 'Followed up on collaborative development project with European partners.'
+!insert (MiguelSantos, MiguelSantosNote) into ContactContainsNote
+
+!new Company('FutureTechLabs')
+!FutureTechLabs.name := 'FutureTech Labs'
+!FutureTechLabs.phone := '+1 415 998 7654'
+!FutureTechLabs.website := 'www.futuretechlabs.com'
+!FutureTechLabs.email := 'info@futuretechlabs.com'
+!FutureTechLabs.industry := 'Software Development'
+
+!new Address('FutureTechAddress')
+!FutureTechAddress.city := 'San Francisco'
+!FutureTechAddress.street := 'Tomorrow Blvd'
+!FutureTechAddress.houseNr := '98F'
+!insert (FutureTechLabs, FutureTechAddress) into ContactContainsAddress
+
+!new Note('FutureTechNote')
+!FutureTechNote.author := 'FutureTech Labs'
+!FutureTechNote.time := Date('2023-09-01')
+!FutureTechNote.type := #MEETING
+!FutureTechNote.comment := 'Hosted workshop on pioneering digital security solutions.'
+!insert (FutureTechLabs, FutureTechNote) into ContactContainsNote
+
+!new Company('InnovateGlobal')
+!InnovateGlobal.name := 'Innovate Global'
+!InnovateGlobal.phone := '+49 221 444 7788'
+!InnovateGlobal.website := 'www.innovateglobal.com'
+!InnovateGlobal.email := 'contact@innovateglobal.de'
+!InnovateGlobal.industry := 'Technology Consulting'
+
+!new Address('InnovateGlobalAddress')
+!InnovateGlobalAddress.city := 'Cologne'
+!InnovateGlobalAddress.street := 'Innovation Park'
+!InnovateGlobalAddress.houseNr := '502'
+!insert (InnovateGlobal, InnovateGlobalAddress) into ContactContainsAddress
+
+!new Note('InnovateGlobalNote')
+!InnovateGlobalNote.author := 'Innovate Global'
+!InnovateGlobalNote.time := Date('2023-09-15')
+!InnovateGlobalNote.type := #CALL
+!InnovateGlobalNote.comment := 'Coordinated efforts for a major tech conference partnership.'
+!insert (InnovateGlobal, InnovateGlobalNote) into ContactContainsNote
+
+!new Relationship('AnitaToMiguelCoworker')
+!AnitaToMiguelCoworker.type := #COWORKER
+!insert (AnitaToMiguelCoworker, MiguelSantos) into RelationshipToContact
+!insert (DrAnitaDesai, AnitaToMiguelCoworker) into ContactToRelationship
+
+!new Relationship('MiguelToAnitaCoworker')
+!MiguelToAnitaCoworker.type := #COWORKER
+!insert (MiguelToAnitaCoworker, DrAnitaDesai) into RelationshipToContact
+!insert (MiguelSantos, MiguelToAnitaCoworker) into ContactToRelationship
+
+!new Relationship('MiguelToInnovateBoss')
+!MiguelToInnovateBoss.type := #BOSS
+!insert (MiguelToInnovateBoss, InnovateGlobal) into RelationshipToContact
+!insert (MiguelSantos, MiguelToInnovateBoss) into ContactToRelationship
+
+!new Relationship('FutureTechToInnovateSubdivision')
+!FutureTechToInnovateSubdivision.type := #SUBDIVISION
+!insert (FutureTechToInnovateSubdivision, InnovateGlobal) into RelationshipToContact
+!insert (FutureTechLabs, FutureTechToInnovateSubdivision) into ContactToRelationship
+
+!new Relationship('InnovateToFutureTechBoss')
+!InnovateToFutureTechBoss.type := #BOSS
+!insert (InnovateToFutureTechBoss, FutureTechLabs) into RelationshipToContact
+!insert (InnovateGlobal, InnovateToFutureTechBoss) into ContactToRelationship
+
+!new Relationship('InnovateToMiguelEmployee')
+!InnovateToMiguelEmployee.type := #EMPLOYEE
+!insert (InnovateToMiguelEmployee, MiguelSantos) into RelationshipToContact
+!insert (InnovateGlobal, InnovateToMiguelEmployee) into ContactToRelationship
+
+!insert (TechInnovatorsCircle, DrAnitaDesai) into AddressBookMadeOfContact
+!insert (TechInnovatorsCircle, MiguelSantos) into AddressBookMadeOfContact
+!insert (TechInnovatorsCircle, FutureTechLabs) into AddressBookMadeOfContact
+!insert (TechInnovatorsCircle, InnovateGlobal) into AddressBookMadeOfContact
+

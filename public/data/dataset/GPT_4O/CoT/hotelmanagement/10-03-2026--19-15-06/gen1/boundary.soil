@@ -1,0 +1,67 @@
+!new Customer('customer3')
+!customer3.firstName := 'Anika'
+!customer3.lastName := 'Sng'
+
+!new Booking('booking3')
+!booking3.startDate := '2023-12-30'
+!booking3.endDate := '2024-01-02'
+!booking3.canceled := false
+!booking3.bookingId := 101
+!booking3.confirmed := true
+
+!new Bill('bill6')
+!bill6.price := 0.0
+!bill6.billId := 501
+
+!new Bill('bill7')
+!bill7.price := 9999.99
+!bill7.billId := 502
+
+!new FreeRoomTypesDTO('freeRoomType3')
+!freeRoomType3.roomTypeDescription := 'Suite'
+!freeRoomType3.numBeds := 6
+!freeRoomType3.pricePerNight := 1500.00
+!freeRoomType3.numFreeRooms := 0
+
+!new RoomReservation('roomReservation3')
+!roomReservation3.checkInDate := '2023-12-30'
+!roomReservation3.checkOutDate := '2024-01-02'
+
+!new RoomExtra('roomExtra5')
+!roomExtra5.price := 0.0
+!roomExtra5.description := 'Free WiFi'
+
+!new RoomExtra('roomExtra6')
+!roomExtra6.price := 250.0
+!roomExtra6.description := 'Buffet Breakfast for two'
+
+!new Room('room3_301')
+!room3_301.numBeds := 6
+!room3_301.pricePerNight := 1000.0
+!room3_301.occupied := true
+!room3_301.blocked := false
+!room3_301.roomNumber := 301
+
+!new Room('room3_302')
+!room3_302.numBeds := 1
+!room3_302.pricePerNight := 80.0
+!room3_302.occupied := false
+!room3_302.blocked := true
+!room3_302.roomNumber := 302
+
+!insert (booking3, customer3) into BookingCustomer
+
+!insert (booking3, bill6) into BookingBill
+!insert (booking3, bill7) into BookingBill
+
+!insert (booking3, roomReservation3) into BookingRoomReservation
+
+!insert (roomReservation3, roomExtra5) into RoomReservationExtras
+!insert (roomReservation3, roomExtra6) into RoomReservationExtras
+
+!insert (roomReservation3, room3_301) into RoomReservationRoom
+!insert (roomReservation3, room3_302) into RoomReservationRoom
+
+!insert (bill6, roomReservation3) into BillRoomReservation
+
+!insert (bill7, roomReservation3) into BillRoomReservation

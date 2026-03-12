@@ -1,0 +1,59 @@
+!new AddressBook('addressBook3')
+
+!new Company('company3')
+!company3.name := 'AquaServices'
+!company3.phone := '111-222-3333'
+!company3.website := 'www.aquaservices.net'
+!company3.email := 'info@aquaservices.net'
+!company3.industry := 'Water Treatment'
+
+!new Person('person4')
+!person4.name := 'Michael Brown'
+!person4.phone := '888-999-0000'
+!person4.website := 'www.michaelbrown.com'
+!person4.email := 'michael.brown@domain.com'
+!person4.title := 'Head of Operations'
+
+!new Person('person5')
+!person5.name := 'Lucy Adams'
+!person5.phone := '111-111-2222'
+!person5.website := 'www.lucyadams.org'
+!person5.email := 'lucy.adams@domain.com'
+!person5.title := 'Water Resource Specialist'
+
+!new Note('note5')
+!note5.author := 'Michael Brown'
+!note5.time := Date('2023-12-01')
+!note5.type := #CALL
+!note5.comment := 'Discussed potential partnership.'
+
+!new Address('address4')
+!address4.city := 'RiverTown'
+!address4.houseNr := '456B'
+!address4.street := 'Water Way'
+
+!new Address('address5')
+!address5.city := 'BlueCity'
+!address5.houseNr := '789C'
+!address5.street := 'Aqua Ave'
+
+!new Relationship('relationship5')
+!relationship5.type := #COWORKER
+
+!new Relationship('relationship6')
+!relationship6.type := #EMPLOYEE
+
+!insert (addressBook3, company3) into AddressBookMadeOfContact
+!insert (addressBook3, person4) into AddressBookMadeOfContact
+!insert (addressBook3, person5) into AddressBookMadeOfContact
+
+!insert (person4, note5) into ContactContainsNote
+
+!insert (company3, relationship6) into ContactToRelationship
+!insert (relationship6, person5) into RelationshipToContact
+
+!insert (person5, relationship5) into ContactToRelationship
+!insert (relationship5, person4) into RelationshipToContact
+
+!insert (company3, address4) into ContactContainsAddress
+!insert (person4, address5) into ContactContainsAddress

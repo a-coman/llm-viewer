@@ -1,0 +1,128 @@
+!new AddressBook('GlobalResearchConsortiumDirectory')
+
+!new Company('GreenEarthInitiative')
+!GreenEarthInitiative.name := 'GreenEarth Initiative'
+!GreenEarthInitiative.phone := '+27-11-2345678'
+!GreenEarthInitiative.website := 'www.greenearth.org.za'
+!GreenEarthInitiative.email := 'contact@greenearth.org.za'
+!GreenEarthInitiative.industry := 'Environmental Advocacy'
+
+!new Address('GreenEarthAddress')
+!GreenEarthAddress.city := 'Johannesburg'
+!GreenEarthAddress.houseNr := '50'
+!GreenEarthAddress.street := 'Green Lane'
+!insert (GreenEarthInitiative, GreenEarthAddress) into ContactContainsAddress
+
+!new Note('GreenEarthNote1')
+!GreenEarthNote1.author := 'Jonathan Ndlovu'
+!GreenEarthNote1.time := Date('2023-09-05T12:00:00')
+!GreenEarthNote1.type := #EMAIL
+!GreenEarthNote1.comment := 'Submission for environmental policy reform proposal.'
+!insert (GreenEarthInitiative, GreenEarthNote1) into ContactContainsNote
+
+!new Company('ForFutureGenerations')
+!ForFutureGenerations.name := 'For Future Generations'
+!ForFutureGenerations.phone := '+91-22-5556789'
+!ForFutureGenerations.website := 'www.futuregenerations.in'
+!ForFutureGenerations.email := 'info@futuregenerations.in'
+!ForFutureGenerations.industry := 'Education and Research'
+
+!new Address('ForFutureGenerationsAddress')
+!ForFutureGenerationsAddress.city := 'Mumbai'
+!ForFutureGenerationsAddress.houseNr := '101'
+!ForFutureGenerationsAddress.street := 'Millennial Way'
+!insert (ForFutureGenerations, ForFutureGenerationsAddress) into ContactContainsAddress
+
+!new Note('ForFutureGenerationsNote1')
+!ForFutureGenerationsNote1.author := 'Sneha Kapoor'
+!ForFutureGenerationsNote1.time := Date('2023-07-18T14:30:00')
+!ForFutureGenerationsNote1.type := #MEETING
+!ForFutureGenerationsNote1.comment := 'Regional conference on sustainable development goals.'
+!insert (ForFutureGenerations, ForFutureGenerationsNote1) into ContactContainsNote
+
+!new Person('DrAnikaRajan')
+!DrAnikaRajan.name := 'Dr. Anika Rajan'
+!DrAnikaRajan.phone := '+49-30-7779955'
+!DrAnikaRajan.website := 'www.anikarajan.org'
+!DrAnikaRajan.email := 'anika.rajan@researcher.de'
+!DrAnikaRajan.title := 'Sustainability Scientist'
+
+!new Address('AnikaRajanAddress')
+!AnikaRajanAddress.city := 'Berlin'
+!AnikaRajanAddress.houseNr := '5'
+!AnikaRajanAddress.street := 'Innovation Allee'
+!insert (DrAnikaRajan, AnikaRajanAddress) into ContactContainsAddress
+
+!new Note('AnikaRajanNote1')
+!AnikaRajanNote1.author := 'Dr. Anika Rajan'
+!AnikaRajanNote1.time := Date('2023-08-25T09:00:00')
+!AnikaRajanNote1.type := #CALL
+!AnikaRajanNote1.comment := 'Discussed collaboration on climate change models.'
+!insert (DrAnikaRajan, AnikaRajanNote1) into ContactContainsNote
+
+!new Note('AnikaRajanNote2')
+!AnikaRajanNote2.author := 'Dr. Anika Rajan'
+!AnikaRajanNote2.time := Date('2023-06-10T10:15:00')
+!AnikaRajanNote2.type := #EMAIL
+!AnikaRajanNote2.comment := 'Sent project updates and next steps overview.'
+!insert (DrAnikaRajan, AnikaRajanNote2) into ContactContainsNote
+
+!new Company('OceanSaverCoalition')
+!OceanSaverCoalition.name := 'OceanSaver Coalition'
+!OceanSaverCoalition.phone := '+81-3-4567890'
+!OceanSaverCoalition.website := 'www.oceansaver.jp'
+!OceanSaverCoalition.email := 'admin@oceansaver.jp'
+!OceanSaverCoalition.industry := 'Marine Conservation'
+
+!new Address('OceanSaverAddress')
+!OceanSaverAddress.city := 'Tokyo'
+!OceanSaverAddress.houseNr := '7'
+!OceanSaverAddress.street := 'Ocean Drive'
+!insert (OceanSaverCoalition, OceanSaverAddress) into ContactContainsAddress
+
+!new Note('OceanSaverNote1')
+!OceanSaverNote1.author := 'Yukiko Tanaka'
+!OceanSaverNote1.time := Date('2023-05-29T15:00:00')
+!OceanSaverNote1.type := #MEETING
+!OceanSaverNote1.comment := 'Broader outreach for Pacific marine life preservation.'
+!insert (OceanSaverCoalition, OceanSaverNote1) into ContactContainsNote
+
+!new Relationship('GreenEarthToAnikaCoworker')
+!GreenEarthToAnikaCoworker.type := #COWORKER
+!insert (GreenEarthToAnikaCoworker, DrAnikaRajan) into RelationshipToContact
+!insert (GreenEarthInitiative, GreenEarthToAnikaCoworker) into ContactToRelationship
+
+!new Relationship('GreenEarthToFutureSubdivision')
+!GreenEarthToFutureSubdivision.type := #SUBDIVISION
+!insert (GreenEarthToFutureSubdivision, ForFutureGenerations) into RelationshipToContact
+!insert (GreenEarthInitiative, GreenEarthToFutureSubdivision) into ContactToRelationship
+
+!new Relationship('FutureToGreenEarthBoss')
+!FutureToGreenEarthBoss.type := #BOSS
+!insert (FutureToGreenEarthBoss, GreenEarthInitiative) into RelationshipToContact
+!insert (ForFutureGenerations, FutureToGreenEarthBoss) into ContactToRelationship
+
+!new Relationship('FutureToAnikaBoss')
+!FutureToAnikaBoss.type := #BOSS
+!insert (FutureToAnikaBoss, DrAnikaRajan) into RelationshipToContact
+!insert (ForFutureGenerations, FutureToAnikaBoss) into ContactToRelationship
+
+!new Relationship('AnikaToGreenEarthCoworker')
+!AnikaToGreenEarthCoworker.type := #COWORKER
+!insert (AnikaToGreenEarthCoworker, GreenEarthInitiative) into RelationshipToContact
+!insert (DrAnikaRajan, AnikaToGreenEarthCoworker) into ContactToRelationship
+
+!new Relationship('AnikaToFutureEmployee')
+!AnikaToFutureEmployee.type := #EMPLOYEE
+!insert (AnikaToFutureEmployee, ForFutureGenerations) into RelationshipToContact
+!insert (DrAnikaRajan, AnikaToFutureEmployee) into ContactToRelationship
+
+!new Relationship('OceanSaverToAnikaSubdivision')
+!OceanSaverToAnikaSubdivision.type := #SUBDIVISION
+!insert (OceanSaverToAnikaSubdivision, DrAnikaRajan) into RelationshipToContact
+!insert (OceanSaverCoalition, OceanSaverToAnikaSubdivision) into ContactToRelationship
+
+!insert (GlobalResearchConsortiumDirectory, GreenEarthInitiative) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, ForFutureGenerations) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, DrAnikaRajan) into AddressBookMadeOfContact
+!insert (GlobalResearchConsortiumDirectory, OceanSaverCoalition) into AddressBookMadeOfContact

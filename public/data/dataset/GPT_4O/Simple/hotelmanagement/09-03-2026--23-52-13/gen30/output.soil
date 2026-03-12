@@ -1,0 +1,41 @@
+!new Booking('booking31')
+!booking31.startDate := '2026-05-01'
+!booking31.endDate := '2026-05-06'
+!booking31.canceled := false
+!booking31.bookingId := 131
+!booking31.confirmed := true
+
+!new Bill('bill31')
+!bill31.price := 500.00
+!bill31.billId := 5031
+
+!new Customer('customer31')
+!customer31.firstName := 'Fiona'
+!customer31.lastName := 'Garcia'
+
+!new RoomReservation('reservation31')
+!reservation31.checkInDate := '2026-05-01'
+!reservation31.checkOutDate := '2026-05-06'
+
+!new Room('room2801')
+!room2801.numBeds := 1
+!room2801.pricePerNight := 85.00
+!room2801.occupied := true
+!room2801.blocked := false
+!room2801.roomNumber := 2801
+
+!new RoomExtra('extra41')
+!extra41.price := 20.00
+!extra41.description := 'Cooking Class'
+
+!new RoomExtra('extra42')
+!extra42.price := 30.00
+!extra42.description := 'Scuba Diving Session'
+
+!insert (booking31, bill31) into BookingBill
+!insert (booking31, customer31) into BookingCustomer
+!insert (booking31, reservation31) into BookingRoomReservation
+!insert (reservation31, extra41) into RoomReservationExtras
+!insert (reservation31, extra42) into RoomReservationExtras
+!insert (reservation31, room2801) into RoomReservationRoom
+!insert (bill31, reservation31) into BillRoomReservation

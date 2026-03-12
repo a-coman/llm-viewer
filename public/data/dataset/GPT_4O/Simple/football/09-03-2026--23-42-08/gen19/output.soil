@@ -1,0 +1,146 @@
+!new Club('club37')
+!club37.name := 'Forest Eagles'
+!club37.homeGround := 'Greenwood Stadium'
+!club37.chairman := 'Oliver Bark'
+
+!new Club('club38')
+!club38.name := 'Sand Vipers'
+!club38.homeGround := 'Dune Field'
+!club38.chairman := 'Vera Sands'
+
+!new Team('team37')
+!team37.name := 'Eagle Gliders'
+!insert (club37, team37) into ClubTeam
+
+!new Team('team38')
+!team38.name := 'Viper Strike'
+!insert (club38, team38) into ClubTeam
+
+!new Competition('desertDuel')
+!desertDuel.name := 'Desert Duel'
+!desertDuel.type := 'Cup'
+
+!new Match('match19')
+!match19.date := '2027-11-22'
+!match19.homeAway := true
+!insert (desertDuel, match19) into CompetitionMatch
+!insert (team37, match19) into LocalMatch
+!insert (team38, match19) into VisitorMatch
+
+!new MatchReport('report19')
+!report19.duration := 120
+!report19.scoreVisitor := 2
+!report19.scoreLocal := 4
+!insert (match19, report19) into MatchMatchReport
+
+!new Player('player37')
+!player37.name := 'Riley Leaf'
+!player37.age := 26
+!player37.bestFoot := #RIGHT
+!player37.phoneNumber := '9876543281'
+!insert (team37, player37) into TeamPlayer
+
+!new Player('player38')
+!player38.name := 'Alex Sandstorm'
+!player38.age := 30
+!player38.bestFoot := #LEFT
+!player38.phoneNumber := '8765432190'
+!insert (team38, player38) into TeamPlayer
+
+!new Position('position37')
+!position37.positionName := #FORWARD
+!insert (player37, position37) into PlayerPositions
+
+!new Position('position38')
+!position38.positionName := #MIDFIELDER
+!insert (player38, position38) into PlayerPositions
+
+!new MatchPlayer('matchPlayer37')
+!matchPlayer37.booked := false
+!matchPlayer37.goals := 2
+!matchPlayer37.rating := 9
+!insert (player37, matchPlayer37) into PlayerMatch
+!insert (match19, matchPlayer37) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer38')
+!matchPlayer38.booked := true
+!matchPlayer38.goals := 1
+!matchPlayer38.rating := 8
+!insert (player38, matchPlayer38) into PlayerMatch
+!insert (match19, matchPlayer38) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition37')
+!matchPlayerPosition37.positionName := #FORWARD
+!matchPlayerPosition37.number := 9
+!insert (matchPlayer37, matchPlayerPosition37) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition38')
+!matchPlayerPosition38.positionName := #MIDFIELDER
+!matchPlayerPosition38.number := 8
+!insert (matchPlayer38, matchPlayerPosition38) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event67')
+!event67.eventType := #GOAL
+!event67.time := 15
+!insert (match19, event67) into MatchMatchEvent
+
+!new MatchEvent('event68')
+!event68.eventType := #GOAL
+!event68.time := 40
+!insert (match19, event68) into MatchMatchEvent
+
+!new MatchEvent('event69')
+!event69.eventType := #GOAL
+!event69.time := 70
+!insert (match19, event69) into MatchMatchEvent
+
+!new MatchEvent('event70')
+!event70.eventType := #GOAL
+!event70.time := 85
+!insert (match19, event70) into MatchMatchEvent
+
+!new MatchEvent('event71')
+!event71.eventType := #GOAL
+!event71.time := 110
+!insert (match19, event71) into MatchMatchEvent
+
+!new MatchEvent('event72')
+!event72.eventType := #GOAL
+!event72.time := 115
+!insert (match19, event72) into MatchMatchEvent
+
+!new TrainingSession('training37')
+!training37.date := '2027-10-01'
+!training37.location := 'Eagle Training Park'
+!training37.purpose := 'Offensive Strategies'
+!insert (team37, training37) into TeamTraining
+
+!new TrainingSession('training38')
+!training38.date := '2027-10-12'
+!training38.location := 'Desert Training Facility'
+!training38.purpose := 'Midfield Control'
+!insert (team38, training38) into TeamTraining
+
+!new TrainingNotes('trainingNote37')
+!trainingNote37.note := 'Focused on quick breakaway attacks'
+!trainingNote37.date := '2027-10-01'
+!insert (training37, trainingNote37) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote38')
+!trainingNote38.note := 'Improved possession and passing accuracy'
+!trainingNote38.date := '2027-10-12'
+!insert (training38, trainingNote38) into TrainingTrainingNotes
+
+!new TrainingObjective('objective37')
+!objective37.areaToImprove := 'Finishing in the Box'
+!objective37.startDate := '2027-08-01'
+!objective37.endDate := '2027-11-01'
+!objective37.success := true
+!insert (objective37, player37) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective38')
+!objective38.areaToImprove := 'Press and Cover Tactics'
+!objective38.startDate := '2027-08-15'
+!objective38.endDate := '2027-11-15'
+!objective38.success := false
+!insert (objective38, player38) into TrainingObjectivePlayer

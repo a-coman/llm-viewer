@@ -1,0 +1,70 @@
+!new RentalOffice('office10')
+!office10.name := 'Urban Trucks'
+!office10.number := 1010
+!office10.address := '234 Market St, San Francisco, CA'
+
+!new Truck('truck19')
+!truck19.id := 519
+!truck19.registrationState := #CA
+!truck19.licensePlateNumber := 'CA-TRK-9021'
+!truck19.vehicleTypeCode := #COVERED_TRAILER
+!truck19.registrationLastMaintenanceDate := Date('2023-07-12')
+!truck19.expirationDate := Date('2024-07-12')
+!truck19.odometerReading := 20000
+!truck19.gasTankCapacity := 40.0
+!truck19.workingRadio := true
+!truck19.mileage := 21
+
+!new Individual('individual10')
+!individual10.name := 'Ethan Walker'
+!individual10.address := '678 Sunset Blvd, Los Angeles, CA'
+!individual10.poorRisk := false
+!individual10.homePhone := '555-8765'
+!individual10.driverLicenseState := #CA
+!individual10.driverLicenseNumber := 20191020
+!individual10.driverLicenseExpirationDate := Date('2025-03-21')
+
+!new RentalAgreement('agreement19')
+!agreement19.number := 3019
+!agreement19.rentalDate := Date('2023-12-15')
+!agreement19.anticipatedDuration := 7
+!agreement19.depositPaid := 350.0
+!agreement19.quotedDailyRate := 72.00
+!agreement19.quotedRatePerMile := 0.55
+
+!new Truck('truck20')
+!truck20.id := 520
+!truck20.registrationState := #FL
+!truck20.licensePlateNumber := 'FL-TRK-6789'
+!truck20.vehicleTypeCode := #OPEN_TRAILER
+!truck20.registrationLastMaintenanceDate := Date('2023-05-10')
+!truck20.expirationDate := Date('2025-05-10')
+!truck20.odometerReading := 12000
+!truck20.gasTankCapacity := 32.5
+!truck20.workingRadio := true
+!truck20.mileage := 18
+
+!new Company('company10')
+!company10.name := 'Sunset Movers'
+!company10.address := '321 Sunrise Ave, Miami, FL'
+!company10.poorRisk := true
+!company10.idNumber := 782345
+
+!new RentalAgreement('agreement20')
+!agreement20.number := 3020
+!agreement20.rentalDate := Date('2023-12-22')
+!agreement20.anticipatedDuration := 10
+!agreement20.depositPaid := 420.0
+!agreement20.quotedDailyRate := 80.00
+!agreement20.quotedRatePerMile := 0.60
+
+!insert (office10, truck19) into RentalOfficeVehicle
+!insert (office10, truck20) into RentalOfficeVehicle
+!insert (office10, agreement19) into RentalOfficeRentalAgreementOrigin
+!insert (office10, agreement19) into RentalOfficeRentalAgreementDrop
+!insert (office10, agreement20) into RentalOfficeRentalAgreementOrigin
+!insert (office10, agreement20) into RentalOfficeRentalAgreementDrop
+!insert (agreement19, truck19) into RentalAgreementVehicle
+!insert (agreement19, individual10) into RentalAgreementCustomer
+!insert (agreement20, truck20) into RentalAgreementVehicle
+!insert (agreement20, company10) into RentalAgreementCustomer

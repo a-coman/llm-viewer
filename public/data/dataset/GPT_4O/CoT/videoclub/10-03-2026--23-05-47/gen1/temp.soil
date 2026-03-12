@@ -1,0 +1,50 @@
+!new Client('client6')
+!client6.clientId := 2147483647
+!client6.isSuspended := false
+
+!new Rental('rental7')
+!rental7.date := Date('2023-10-15')
+
+!new Movie('movie7')
+!movie7.title := 'Zorros of the Sahara'
+!movie7.availableCopies := 0
+!movie7.genre := #Action
+
+!new Movie('movie8')
+!movie8.title := 'Laugh Like a Local'
+!movie8.availableCopies := 999999999
+!movie8.genre := #Comedy
+
+!new Series('series6')
+!series6.title := 'Tommy\'s Tournament'
+!series6.availableCopies := 1
+!series6.episode := 32768
+
+!new Actor('actor11')
+!actor11.name := 'Pedro Lopez'
+
+!new Actor('actor12')
+!actor12.name := 'Ayesha Rai'
+
+!new Actor('actor13')
+!actor13.name := 'Aiden O\'Connell'
+
+!new Actor('actor14')
+!actor14.name := 'Sasha Kimura'
+
+!new Actor('actor15')
+!actor15.name := 'Lee Min-ho'
+
+!insert (client6, rental7) into ClientRental
+
+!insert (rental7, movie7) into RentalCassette
+!insert (rental7, movie8) into RentalCassette
+!insert (rental7, series6) into RentalCassette
+
+!insert (movie7, actor11) into CassetteActor
+!insert (movie7, actor12) into CassetteActor
+
+!insert (movie8, actor13) into CassetteActor
+
+!insert (series6, actor14) into CassetteActor
+!insert (series6, actor15) into CassetteActor

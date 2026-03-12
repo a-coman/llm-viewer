@@ -1,0 +1,77 @@
+!new Bank('bancoDoBrasil')
+!bancoDoBrasil.country := 'Brazil'
+!bancoDoBrasil.name := 'Banco do Brasil'
+!bancoDoBrasil.bic := 'BBRA00012'
+
+!new Bank('bharatBank')
+!bharatBank.country := 'India'
+!bharatBank.name := 'Bharat Bank'
+!bharatBank.bic := 'BHIN67234'
+
+!new Person('carlosOliveira')
+!carlosOliveira.firstName := 'Carlos'
+!carlosOliveira.lastName := 'Oliveira'
+!carlosOliveira.age := 23
+
+!new Person('priyaSharma')
+!priyaSharma.firstName := 'Priya'
+!priyaSharma.lastName := 'Sharma'
+!priyaSharma.age := 36
+
+!new Person('viniciusFernandez')
+!viniciusFernandez.firstName := 'Vinicius'
+!viniciusFernandez.lastName := 'Fernandez'
+!viniciusFernandez.age := 40
+
+!new Person('aditiGupta')
+!aditiGupta.firstName := 'Aditi'
+!aditiGupta.lastName := 'Gupta'
+!aditiGupta.age := 29
+
+!new Person('anilKapoor')
+!anilKapoor.firstName := 'Anil'
+!anilKapoor.lastName := 'Kapoor'
+!anilKapoor.age := 48
+
+!new Account('account17_1')
+!account17_1.iban := 'BR0011223344I'
+!account17_1.balance := 800
+
+!new Account('account17_2')
+!account17_2.iban := 'IN8765432109J'
+!account17_2.balance := 2500
+
+!new Account('account17_3')
+!account17_3.iban := 'BR5566778899K'
+!account17_3.balance := 5000
+
+!new Account('account17_4')
+!account17_4.iban := 'IN1098765432L'
+!account17_4.balance := 3000
+
+!insert (bancoDoBrasil, account17_1) into AccountOfBanks
+!insert (bharatBank, account17_2) into AccountOfBanks
+!insert (bancoDoBrasil, account17_3) into AccountOfBanks
+!insert (bharatBank, account17_4) into AccountOfBanks
+
+!insert (carlosOliveira, account17_1) into Ownership
+
+!insert (priyaSharma, account17_2) into Ownership
+
+!insert (viniciusFernandez, account17_3) into Ownership
+
+!insert (aditiGupta, account17_4) into Ownership
+!insert (anilKapoor, account17_4) into Ownership
+
+!insert (carlosOliveira, account17_1) into Use
+!insert (viniciusFernandez, account17_1) into Use
+
+!insert (priyaSharma, account17_2) into Use
+!insert (anilKapoor, account17_2) into Use
+
+!insert (viniciusFernandez, account17_3) into Use
+!insert (carlosOliveira, account17_3) into Use
+!insert (aditiGupta, account17_3) into Use
+
+!insert (aditiGupta, account17_4) into Use
+!insert (priyaSharma, account17_4) into Use

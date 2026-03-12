@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine7')
+!stateMachine7.name := 'authenticationSystem'
+
+!new State('state17')
+!state17.name := 'loginScreen'
+
+!new State('state18')
+!state18.name := 'verifying'
+
+!new State('state19')
+!state19.name := 'loggedIn'
+
+!new Transition('transition17')
+!transition17.name := 'submitCredentials'
+
+!new Transition('transition18')
+!transition18.name := 'verifyCredentials'
+
+!new Transition('transition19')
+!transition19.name := 'logout'
+
+!new TimeEvent('timeEvent17')
+!timeEvent17.time := 3
+
+!new TimeEvent('timeEvent18')
+!timeEvent18.time := 1
+
+!new TimeEvent('timeEvent19')
+!timeEvent19.time := 2
+
+!insert (stateMachine7, state17) into StateMachineContainsStates
+!insert (stateMachine7, state18) into StateMachineContainsStates
+!insert (stateMachine7, state19) into StateMachineContainsStates
+
+!insert (stateMachine7, transition17) into StateMachineContainsTransitions
+!insert (stateMachine7, transition18) into StateMachineContainsTransitions
+!insert (stateMachine7, transition19) into StateMachineContainsTransitions
+
+!insert (transition17, timeEvent17) into TransitionContainsEvents
+!insert (transition18, timeEvent18) into TransitionContainsEvents
+!insert (transition19, timeEvent19) into TransitionContainsEvents
+
+!insert (state17, transition17) into StateTransition
+!insert (transition17, state18) into TransitionState
+
+!insert (state18, transition18) into StateTransition
+!insert (transition18, state19) into TransitionState
+
+!insert (state19, transition19) into StateTransition
+!insert (transition19, state17) into TransitionState
+
+!insert (stateMachine7, state17) into StateMachineStartsStates

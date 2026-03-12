@@ -1,0 +1,66 @@
+!new AddressBook('addressBook14')
+
+!new Company('company14')
+!company14.name := 'Artisanal Crafts Co.'
+!company14.phone := '123-456-7890'
+!company14.website := 'www.artisancrafts.com'
+!company14.email := 'contact@artisancrafts.com'
+!company14.industry := 'Handmade Goods'
+
+!new Person('person24')
+!person24.name := 'Lucas Brown'
+!person24.phone := '555-666-7771'
+!person24.website := 'www.lucasbrowndesigns.com'
+!person24.email := 'lucas.brown@artisancrafts.com'
+!person24.title := 'Head Artisan'
+
+!new Person('person25')
+!person25.name := 'Olivia Jones'
+!person25.phone := '333-222-1111'
+!person25.website := 'www.oliviajonesartisan.com'
+!person25.email := 'olivia.jones@creativehandmade.net'
+!person25.title := 'Freelance Craft Designer'
+
+!new Note('note24')
+!note24.author := 'Lucas Brown'
+!note24.time := Date('2024-08-20')
+!note24.type := #EMAIL
+!note24.comment := 'Sent design specifications to the team.'
+
+!new Note('note25')
+!note25.author := 'Olivia Jones'
+!note25.time := Date('2024-08-22')
+!note25.type := #MEETING
+!note25.comment := 'Workshop to discuss collaborative projects.'
+
+!new Address('address25')
+!address25.city := 'Craft City'
+!address25.houseNr := '456X'
+!address25.street := 'Artisan Alley'
+
+!new Address('address26')
+!address26.city := 'Design District'
+!address26.houseNr := '78B'
+!address26.street := 'Creator Court'
+
+!new Relationship('relationship26')
+!relationship26.type := #COWORKER
+
+!new Relationship('relationship27')
+!relationship27.type := #BOSS
+
+!insert (addressBook14, company14) into AddressBookMadeOfContact
+!insert (addressBook14, person24) into AddressBookMadeOfContact
+!insert (addressBook14, person25) into AddressBookMadeOfContact
+
+!insert (person24, note24) into ContactContainsNote
+!insert (person25, note25) into ContactContainsNote
+
+!insert (company14, relationship27) into ContactToRelationship
+!insert (relationship27, person24) into RelationshipToContact
+
+!insert (person24, relationship26) into ContactToRelationship
+!insert (relationship26, person25) into RelationshipToContact
+
+!insert (company14, address25) into ContactContainsAddress
+!insert (person25, address26) into ContactContainsAddress

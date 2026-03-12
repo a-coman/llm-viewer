@@ -1,0 +1,64 @@
+!new Driver('driver30')
+!driver30.id := 'D030'
+!driver30.name := 'Frank Castle'
+
+!new Driver('driver31')
+!driver31.id := 'D031'
+!driver31.name := 'Karen Page'
+
+!new Shipment('shipment33')
+!shipment33.id := 'SHP12377'
+!shipment33.status := #NEW
+
+!new Shipment('shipment34')
+!shipment34.id := 'SHP12378'
+!shipment34.status := #UNDERWAY
+
+!new Address('address33')
+!address33.text := '3131 Punisher Rd, Grit City'
+
+!new Address('address34')
+!address34.text := '3232 Justice St, Grit City'
+
+!new GeoLocation('geoLocation33')
+!geoLocation33.latitude := 36.7783
+!geoLocation33.longitude := -119.4179
+
+!new GeoLocation('geoLocation34')
+!geoLocation34.latitude := 36.7788
+!geoLocation34.longitude := -119.4175
+
+!insert (address33, geoLocation33) into AddressContainsGeoLocation
+!insert (address34, geoLocation34) into AddressContainsGeoLocation
+
+!new Customer('customer33')
+!customer33.id := 'CUST033'
+!customer33.name := 'Wilson Fisk'
+!customer33.twitterUserName := '@kingpin'
+
+!new Customer('customer34')
+!customer34.id := 'CUST034'
+!customer34.name := 'Claire Temple'
+!customer34.twitterUserName := '@nightnurse'
+
+!new Station('station17')
+
+!insert (station17, customer33) into StationContainsCustomer
+!insert (station17, customer34) into StationContainsCustomer
+
+!insert (station17, shipment33) into StationShipment
+!insert (station17, shipment34) into StationShipment
+
+!insert (station17, driver30) into StationContainsDriver
+!insert (station17, driver31) into StationContainsDriver
+
+!insert (shipment33, address33) into ShipmentContainsPickUpAddress
+!insert (shipment33, address34) into ShipmentContainsDeliveryAddress
+
+!insert (shipment34, address34) into ShipmentContainsPickUpAddress
+!insert (shipment34, address33) into ShipmentContainsDeliveryAddress
+
+!insert (customer33, shipment33) into CustomerConsistsOfShipment
+!insert (customer34, shipment34) into CustomerConsistsOfShipment
+
+!insert (driver31, shipment34) into DriverShipment

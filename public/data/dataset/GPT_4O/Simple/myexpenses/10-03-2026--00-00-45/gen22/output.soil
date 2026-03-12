@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency22')
+!currency22.name := 'Turkish Lira'
+!currency22.abbreviation := 'TRY'
+
+-- Creating instances of Bills
+!new Bill('bill54')
+!bill54.amount := 3500.00
+!bill54.category := 'Office Furniture'
+!bill54.date := Date('2023-04-05')
+!bill54.paymentMethod := #CHECK
+!bill54.status := #PENDING
+!insert (bill54, currency22) into BillCurrency
+
+!new Bill('bill55')
+!bill55.amount := 2700.00
+!bill55.category := 'Decorations'
+!bill55.date := Date('2023-04-08')
+!bill55.paymentMethod := #CREDIT_CARD
+!bill55.status := #VERIFIED
+!insert (bill55, currency22) into BillCurrency
+
+!new Bill('bill56')
+!bill56.amount := 1300.00
+!bill56.category := 'Installation Services'
+!bill56.date := Date('2023-04-12')
+!bill56.paymentMethod := #CASH
+!bill56.status := #VALIDATED
+!insert (bill56, currency22) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment25')
+!comment25.text := 'Office refurbishment expenses for the new branch.'
+
+-- Creating instance of Expense
+!new Expense('expense22')
+!expense22.amount := 7500.00
+!expense22.startDate := Date('2023-04-01')
+!expense22.endDate := Date('2023-04-15')
+!insert (expense22, bill54) into ExpenseContainsBills
+!insert (expense22, bill55) into ExpenseContainsBills
+!insert (expense22, bill56) into ExpenseContainsBills
+!insert (expense22, comment25) into ExpenseComment

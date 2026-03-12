@@ -1,0 +1,52 @@
+!new Restaurant('restaurant1')
+!restaurant1.name := 'The Global Table'
+
+!new Owner('owner1')
+!owner1.name := 'Maria Gonzales'
+!owner1.percentageShares := 60
+
+!new Owner('owner2')
+!owner2.name := 'John Smith'
+!owner2.percentageShares := 40
+
+!insert (restaurant1, owner1) into RestaurantOwner
+!insert (restaurant1, owner2) into RestaurantOwner
+
+!new Banquet('banquet1')
+!banquet1.date := Date('2023-12-15')
+!banquet1.time := Time('18:00')
+!banquet1.groupName := 'International Business Forum'
+!banquet1.numberPeople := 120
+!banquet1.paymentMethod := #CreditCard
+
+!insert (restaurant1, banquet1) into RestaurantReservation
+
+!new Table('table1')
+!table1.number := 1
+!table1.description := 'Large rectangle table'
+!table1.capacity := 12
+
+!new Table('table2')
+!table2.number := 2
+!table2.description := 'Standard round table'
+!table2.capacity := 8
+
+!new Table('table3')
+!table3.number := 3
+!table3.description := 'Square table'
+!table3.capacity := 4
+
+!new Table('table4')
+!table4.number := 4
+!table4.description := 'Oval table'
+!table4.capacity := 10
+
+!insert (banquet1, table1) into ReservationTable
+!insert (banquet1, table2) into ReservationTable
+!insert (banquet1, table3) into ReservationTable
+!insert (banquet1, table4) into ReservationTable
+
+!new BusDriver('busdriver1')
+!busdriver1.name := 'Alexei Petrov'
+
+!insert (banquet1, busdriver1) into BanquetBusDriver

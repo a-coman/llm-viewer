@@ -1,0 +1,169 @@
+!new Club('clubQ')
+!clubQ.name := 'Tokyo Hawks'
+!clubQ.homeGround := 'Saitama Super Arena'
+!clubQ.chairman := 'Akira Tanaka'
+
+!new Club('clubR')
+!clubR.name := 'Toronto Maple Leaf FC'
+!clubR.homeGround := 'Leaf Stadium'
+!clubR.chairman := 'Michael Johnston'
+
+!new Team('teamQ')
+!teamQ.name := 'Tokyo Hawks A-Team'
+
+!new Team('teamR')
+!teamR.name := 'Toronto Maple Leaf FC Main Squad'
+
+!insert (clubQ, teamQ) into ClubTeam
+!insert (clubR, teamR) into ClubTeam
+
+!new Player('player18')
+!player18.name := 'Hiroshi Yamamoto'
+!player18.age := 23
+!player18.bestFoot := #RIGHT
+!player18.phoneNumber := '+818012345678'
+
+!new Player('player19')
+!player19.name := 'Ethan Park'
+!player19.age := 26
+!player19.bestFoot := #LEFT
+!player19.phoneNumber := '+14379876543'
+
+!new Player('player20')
+!player20.name := 'Yukio Sato'
+!player20.age := 29
+!player20.bestFoot := #RIGHT
+!player20.phoneNumber := '+819876543210'
+
+!insert (teamQ, player18) into TeamPlayer
+!insert (teamR, player19) into TeamPlayer
+!insert (teamQ, player20) into TeamPlayer
+
+!new Position('position46')
+!position46.positionName := #DEFENDER
+
+!new Position('position47')
+!position47.positionName := #FORWARD
+
+!new Position('position50')
+!position50.positionName := #GOALKEEPER
+
+!insert (player18, position46) into PlayerPositions
+!insert (player19, position47) into PlayerPositions
+!insert (player20, position50) into PlayerPositions
+
+!new Competition('competition7')
+!competition7.name := 'International Friendly Cup'
+!competition7.type := 'Friendly Match'
+
+!new Match('match9')
+!match9.date := '22-07-2023'
+!match9.homeAway := false
+
+!insert (teamR, match9) into LocalMatch
+!insert (teamQ, match9) into VisitorMatch
+!insert (competition7, match9) into CompetitionMatch
+
+!new MatchReport('matchReport9')
+!matchReport9.duration := 90
+!matchReport9.scoreVisitor := 1
+!matchReport9.scoreLocal := 1
+
+!insert (match9, matchReport9) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer14')
+!matchPlayer14.booked := false
+!matchPlayer14.goals := 0
+!matchPlayer14.rating := 7
+
+!new MatchPlayer('matchPlayer15')
+!matchPlayer15.booked := true
+!matchPlayer15.goals := 1
+!matchPlayer15.rating := 8
+
+!new MatchPlayer('matchPlayer16')
+!matchPlayer16.booked := false
+!matchPlayer16.goals := 1
+!matchPlayer16.rating := 7
+
+!insert (player18, matchPlayer14) into PlayerMatch
+!insert (player19, matchPlayer15) into PlayerMatch
+!insert (player20, matchPlayer16) into PlayerMatch
+
+!insert (match9, matchPlayer14) into MatchMatchPlayer
+!insert (match9, matchPlayer15) into MatchMatchPlayer
+!insert (match9, matchPlayer16) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position51')
+!position51.positionName := #DEFENDER
+!position51.number := 5
+
+!new MatchPlayerPosition('position52')
+!position52.positionName := #FORWARD
+!position52.number := 9
+
+!new MatchPlayerPosition('position53')
+!position53.positionName := #FORWARD
+!position53.number := 11
+
+!insert (matchPlayer14, position51) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer15, position52) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer16, position53) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent29')
+!matchEvent29.eventType := #GOAL
+!matchEvent29.time := 34
+
+!new MatchEvent('matchEvent30')
+!matchEvent30.eventType := #GOAL
+!matchEvent30.time := 77
+
+!insert (match9, matchEvent29) into MatchMatchEvent
+!insert (match9, matchEvent30) into MatchMatchEvent
+
+!new MatchNote('matchNote7')
+!matchNote7.note := 'The match was balanced with strong defense and rare scoring opportunities.'
+!matchNote7.date := '22-07-2023'
+
+!insert (match9, matchNote7) into MatchMatchNote
+
+!new TrainingSession('trainingSession13')
+!trainingSession13.date := '19-07-2023'
+!trainingSession13.location := 'Saitama Super Arena Training Grounds'
+!trainingSession13.purpose := 'Enhance the team’s defensive tactics in anticipation of high-pressure matches.'
+
+!insert (teamQ, trainingSession13) into TeamTraining
+
+!new TrainingSession('trainingSession14')
+!trainingSession14.date := '20-07-2023'
+!trainingSession14.location := 'Leaf Stadium Training Facilities'
+!trainingSession14.purpose := 'Offensive strategy and precision practice.'
+
+!insert (teamR, trainingSession14) into TeamTraining
+
+!new TrainingNotes('trainingNote13')
+!trainingNote13.note := 'Significant improvement in players’ spatial awareness and coordination.'
+!trainingNote13.date := '19-07-2023'
+
+!insert (trainingSession13, trainingNote13) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote14')
+!trainingNote14.note := 'Offensive drills emphasized quick decision-making and shot accuracy.'
+!trainingNote14.date := '20-07-2023'
+
+!insert (trainingSession14, trainingNote14) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective13')
+!trainingObjective13.areaToImprove := 'Defense Coordination'
+!trainingObjective13.startDate := '10-07-2023'
+!trainingObjective13.endDate := '20-07-2023'
+!trainingObjective13.success := true
+
+!new TrainingObjective('trainingObjective14')
+!trainingObjective14.areaToImprove := 'Offensive Strategy'
+!trainingObjective14.startDate := '10-07-2023'
+!trainingObjective14.endDate := '20-07-2023'
+!trainingObjective14.success := true
+
+!insert (trainingObjective13, player18) into TrainingObjectivePlayer
+!insert (trainingObjective14, player19) into TrainingObjectivePlayer

@@ -1,0 +1,66 @@
+!new AddressBook('addressBook21')
+
+!new Company('company21')
+!company21.name := 'PetCare Co.'
+!company21.phone := '213-456-7890'
+!company21.website := 'www.petcareco.com'
+!company21.email := 'support@petcareco.com'
+!company21.industry := 'Pet Services'
+
+!new Person('person38')
+!person38.name := 'Carla Torres'
+!person38.phone := '323-111-2222'
+!person38.website := 'www.carlatorrespets.com'
+!person38.email := 'carla.torres@petcareco.com'
+!person38.title := 'Veterinary Specialist'
+
+!new Person('person39')
+!person39.name := 'Ryan Cooper'
+!person39.phone := '626-888-9999'
+!person39.website := 'www.ryancooperconsulting.com'
+!person39.email := 'ryan.cooper@furandfriends.org'
+!person39.title := 'Veterinary Consultant'
+
+!new Note('note38')
+!note38.author := 'Carla Torres'
+!note38.time := Date('2025-03-10')
+!note38.type := #CALL
+!note38.comment := 'Phone consultation with pet owners about health plans.'
+
+!new Note('note39')
+!note39.author := 'Ryan Cooper'
+!note39.time := Date('2025-03-12')
+!note39.type := #EMAIL
+!note39.comment := 'Sent monthly newsletter on pet health tips.'
+
+!new Address('address39')
+!address39.city := 'Pet Town'
+!address39.houseNr := '550D'
+!address39.street := 'Pet Paw Lane'
+
+!new Address('address40')
+!address40.city := 'Animal City'
+!address40.houseNr := '80C'
+!address40.street := 'Vet Street'
+
+!new Relationship('relationship40')
+!relationship40.type := #EMPLOYEE
+
+!new Relationship('relationship41')
+!relationship41.type := #SUBDIVISION
+
+!insert (addressBook21, company21) into AddressBookMadeOfContact
+!insert (addressBook21, person38) into AddressBookMadeOfContact
+!insert (addressBook21, person39) into AddressBookMadeOfContact
+
+!insert (person38, note38) into ContactContainsNote
+!insert (person39, note39) into ContactContainsNote
+
+!insert (company21, relationship41) into ContactToRelationship
+!insert (relationship41, person38) into RelationshipToContact
+
+!insert (person38, relationship40) into ContactToRelationship
+!insert (relationship40, person39) into RelationshipToContact
+
+!insert (company21, address39) into ContactContainsAddress
+!insert (person39, address40) into ContactContainsAddress

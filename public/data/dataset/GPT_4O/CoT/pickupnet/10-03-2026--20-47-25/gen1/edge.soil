@@ -1,0 +1,41 @@
+!new Driver('driver3')
+!driver3.id := 'DRV123456'
+!driver3.name := 'Isabella NoRoute'
+
+!new Shipment('shipment3')
+!shipment3.id := 'SHP665544'
+!shipment3.status := #NEW
+
+!new Address('address5')
+!address5.text := 'Top of Mount Roraima, Venezuela'
+
+!new GeoLocation('geoLocation5')
+!geoLocation5.latitude := 5.141743
+!geoLocation5.longitude := -60.763992
+
+!insert (address5, geoLocation5) into AddressContainsGeoLocation
+
+!new Address('address6')
+!address6.text := 'Phugtal Monastery, India'
+
+!new GeoLocation('geoLocation6')
+!geoLocation6.latitude := 33.309199
+!geoLocation6.longitude := 77.028687
+
+!insert (address6, geoLocation6) into AddressContainsGeoLocation
+
+!new Customer('customer3')
+!customer3.id := 'CUS987654'
+!customer3.name := 'Remote Explorer'
+!customer3.twitterUserName := '@ExplorerRemote'
+
+!new Station('station2')
+
+!insert (shipment3, address5) into ShipmentContainsPickUpAddress
+!insert (shipment3, address6) into ShipmentContainsDeliveryAddress
+
+!insert (customer3, shipment3) into CustomerConsistsOfShipment
+
+!insert (station2, customer3) into StationContainsCustomer
+!insert (station2, driver3) into StationContainsDriver
+!insert (station2, shipment3) into StationShipment

@@ -1,0 +1,135 @@
+!new Club('clubAX')
+!clubAX.name := 'Desert Falcons FC'
+!clubAX.homeGround := 'Falcon Arena, Riyadh'
+!clubAX.chairman := 'Faisal Al-Harbi'
+
+!new Club('clubAY')
+!clubAY.name := 'Oasis Knights FC'
+!clubAY.homeGround := "Knight's Coliseum, Dubai"
+!clubAY.chairman := 'Ayesha Khalid'
+
+!new Team('teamAX')
+!teamAX.name := 'Falcons Rising'
+
+!new Team('teamAY')
+!teamAY.name := "Knight's Apprentices"
+
+!insert (clubAX, teamAX) into ClubTeam
+!insert (clubAY, teamAY) into ClubTeam
+
+!new Player('player56')
+!player56.name := 'Ahmad Jaber'
+!player56.age := 26
+!player56.bestFoot := #RIGHT
+!player56.phoneNumber := '+966 505 123 456'
+
+!new Player('player57')
+!player57.name := 'Layla Safar'
+!player57.age := 24
+!player57.bestFoot := #LEFT
+!player57.phoneNumber := '+971 555 678 910'
+
+!insert (teamAX, player56) into TeamPlayer
+!insert (teamAY, player57) into TeamPlayer
+
+!new Position('position116')
+!position116.positionName := #FORWARD
+
+!new Position('position100')
+!position100.positionName := #MIDFIELDER
+
+!new Position('position106')
+!position106.positionName := #DEFENDER
+
+!insert (player56, position116) into PlayerPositions
+!insert (player56, position100) into PlayerPositions
+!insert (player57, position100) into PlayerPositions
+!insert (player57, position106) into PlayerPositions
+
+!new Competition('competition22')
+!competition22.name := 'Golden Desert Youth Cup'
+!competition22.type := 'Tournament'
+
+!new Match('match29')
+!match29.date := '30th March 2024'
+!match29.homeAway := true
+
+!insert (teamAX, match29) into LocalMatch
+!insert (teamAY, match29) into VisitorMatch
+!insert (competition22, match29) into CompetitionMatch
+
+!new MatchReport('matchReport29')
+!matchReport29.duration := 90
+!matchReport29.scoreVisitor := 2
+!matchReport29.scoreLocal := 2
+
+!insert (match29, matchReport29) into MatchMatchReport
+
+!new MatchEvent('matchEvent82')
+!matchEvent82.eventType := #GOAL
+!matchEvent82.time := 22
+
+!new MatchEvent('matchEvent83')
+!matchEvent83.eventType := #FOUL
+!matchEvent83.time := 45
+
+!new MatchEvent('matchEvent84')
+!matchEvent84.eventType := #GOAL
+!matchEvent84.time := 78
+
+!insert (match29, matchEvent82) into MatchMatchEvent
+!insert (match29, matchEvent83) into MatchMatchEvent
+!insert (match29, matchEvent84) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer51')
+!matchPlayer51.booked := false
+!matchPlayer51.goals := 1
+!matchPlayer51.rating := 8
+
+!new MatchPlayer('matchPlayer52')
+!matchPlayer52.booked := true
+!matchPlayer52.goals := 1
+!matchPlayer52.rating := 7
+
+!insert (player56, matchPlayer51) into PlayerMatch
+!insert (player57, matchPlayer52) into PlayerMatch
+
+!insert (match29, matchPlayer51) into MatchMatchPlayer
+!insert (match29, matchPlayer52) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp51')
+!mpp51.positionName := #FORWARD
+!mpp51.number := 9
+
+!new MatchPlayerPosition('mpp52')
+!mpp52.positionName := #DEFENDER
+!mpp52.number := 4
+
+!insert (matchPlayer51, mpp51) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer52, mpp52) into MatchPlayerMatchPlayerPosition
+
+!new MatchNote('matchNote19')
+!matchNote19.note := 'The match saw resilient performances despite errors in venue designation during the festive Neom Spring Festival.'
+!matchNote19.date := '31st March 2024'
+
+!insert (match29, matchNote19) into MatchMatchNote
+
+!new TrainingSession('trainingSession44')
+!trainingSession44.date := '1st April 2024'
+!trainingSession44.location := 'Falcon Arena Training Grounds'
+!trainingSession44.purpose := 'Drills focused on resilience and adaptation to unorthodox competition circumstances.'
+
+!insert (teamAX, trainingSession44) into TeamTraining
+
+!new TrainingFailedToAttend('trainingFail18')
+!trainingFail18.reason := 'Celebratory festivities caused decreased attendance rates due to public holiday observances.'
+
+!insert (trainingFail18, player57) into FailedPlayer
+!insert (trainingSession44, trainingFail18) into TrainingFailded
+
+!new TrainingNotes('trainingNote44')
+!trainingNote44.note := 'Attendance impacted by festival commitments, causing a shift in planned session objectives to incorporate informal skill-building.'
+!trainingNote44.date := '2nd April 2024'
+
+!insert (trainingSession44, trainingNote44) into TrainingTrainingNotes
+

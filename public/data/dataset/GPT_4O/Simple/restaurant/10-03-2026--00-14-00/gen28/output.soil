@@ -1,0 +1,114 @@
+!new Restaurant('restaurant28')
+!restaurant28.name := 'Stardust Eats'
+
+!new Owner('owner56')
+!owner56.name := 'Jupiter Nova'
+!owner56.percentageShares := 70
+!insert (restaurant28, owner56) into RestaurantOwner
+
+!new Owner('owner57')
+!owner57.name := 'Luna Solar'
+!owner57.percentageShares := 30
+!insert (restaurant28, owner57) into RestaurantOwner
+
+!new Table('table81')
+!table81.number := 81
+!table81.description := 'Cosmic Cloud'
+!table81.capacity := 10
+
+!new Table('table82')
+!table82.number := 82
+!table82.description := 'Astral Amphitheater'
+!table82.capacity := 20
+
+!new Table('table83')
+!table83.number := 83
+!table83.description := 'Meteor Mour'
+!table83.capacity := 25
+
+!new RegularCustomer('customer29')
+!customer29.name := 'Celeste Twilight'
+!customer29.prefferedLanguage := #Italian
+
+!new Waiter('waiter30')
+!waiter30.name := 'Quasar Light'
+!waiter30.dateOfBirth := Date('1995-01-15')
+!waiter30.phoneNumber := '555-1212'
+!waiter30.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter28')
+!headwaiter28.name := 'Orion Dawn'
+!headwaiter28.dateOfBirth := Date('1987-06-23')
+!headwaiter28.phoneNumber := '555-3434'
+
+!insert (headwaiter28, waiter30) into HeadWaiterWaiter
+
+!new Individual('reservation53')
+!reservation53.time := Time('19:45')
+!reservation53.date := Date('2025-09-25')
+!reservation53.numberPeople := 5
+!reservation53.name := 'Celeste Twilight'
+!reservation53.phoneNumber := '555-9090'
+!reservation53.number := 53
+!reservation53.seating := #Inside
+!reservation53.smoking := #NonSmoking
+!insert (restaurant28, reservation53) into RestaurantReservation
+!insert (reservation53, customer29) into ReservationCustomer
+!insert (reservation53, waiter30) into ReservationWaiter
+!insert (reservation53, table81) into ReservationTable
+
+!new Banquet('reservation54')
+!reservation54.time := Time('20:30')
+!reservation54.date := Date('2025-10-10')
+!reservation54.numberPeople := 42
+!reservation54.name := 'Lunar Festival'
+!reservation54.phoneNumber := '555-8888'
+!reservation54.number := 54
+!reservation54.groupName := 'Celestial Ceremonies'
+!reservation54.paymentMethod := #Cash
+!reservation54.busService := true
+!insert (restaurant28, reservation54) into RestaurantReservation
+!insert (reservation54, table82) into ReservationTable
+!insert (reservation54, table83) into ReservationTable
+!insert (reservation54, waiter30) into ReservationWaiter
+
+!new BusDriver('busdriver20')
+!busdriver20.name := 'Astral Path'
+!busdriver20.dateOfBirth := Date('1970-11-12')
+!busdriver20.phoneNumber := '555-6565'
+!busdriver20.driverLicenseNr := 'DL334455'
+!insert (reservation54, busdriver20) into BanquetBusDriver
+
+!new ItemOrder('itemOrder28')
+!itemOrder28.time := Time('20:00')
+!insert (reservation53, itemOrder28) into ReservationItemOrdered
+
+!new MenuItem('menuItem28')
+!menuItem28.description := 'Galaxy Gourmet Platter'
+!menuItem28.prepTime := 25.0
+!menuItem28.classification := #Main
+!insert (itemOrder28, menuItem28) into ItemOrderMenuItem
+
+!new FoodItem('foodItem28')
+!foodItem28.number := 128
+!foodItem28.description := 'Cheese Selection'
+!foodItem28.purchaseFlag := true
+!foodItem28.unit := #Pound
+!insert (menuItem28, foodItem28) into MenuItemFoodItem
+
+!new Allergen('allergen28')
+!allergen28.type := #Lactose
+!insert (foodItem28, allergen28) into FoodItemAllergen
+
+!new Cook('cook28')
+!cook28.name := 'Nebula Glow'
+!cook28.dateOfBirth := Date('1992-03-14')
+!cook28.phoneNumber := '555-7676'
+!cook28.yearsOfExperience := 8
+
+!new Chef('chef28')
+!chef28.name := 'Solar Glint'
+!chef28.dateOfBirth := Date('1986-12-01')
+!chef28.phoneNumber := '555-2323'
+!insert (menuItem28, chef28) into MenuItemChef
+!insert (chef28, cook28) into ChefCook

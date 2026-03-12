@@ -1,0 +1,58 @@
+!new StateMachine('UniversityEnrollment')
+!UniversityEnrollment.name := 'UniversityEnrollment'
+
+!new State('applicationSubmitted')
+!applicationSubmitted.name := 'applicationSubmitted'
+
+!new State('documentsVerified')
+!documentsVerified.name := 'documentsVerified'
+
+!new State('admitted')
+!admitted.name := 'admitted'
+
+!new State('enrolled')
+!enrolled.name := 'enrolled'
+
+!new Transition('SubmitToVerify')
+!SubmitToVerify.name := 'Submit to Verify'
+
+!new Transition('VerifyToAdmit')
+!VerifyToAdmit.name := 'Verify to Admit'
+
+!new Transition('AdmitToEnroll')
+!AdmitToEnroll.name := 'Admit to Enroll'
+
+!new TimeEvent('SubmissionTimeout')
+!SubmissionTimeout.time := 7
+
+!new TimeEvent('VerificationTimeout')
+!VerificationTimeout.time := 14
+
+!new TimeEvent('AdmissionTimeout')
+!AdmissionTimeout.time := 3
+
+!insert (UniversityEnrollment, applicationSubmitted) into StateMachineContainsStates
+!insert (UniversityEnrollment, documentsVerified) into StateMachineContainsStates
+!insert (UniversityEnrollment, admitted) into StateMachineContainsStates
+!insert (UniversityEnrollment, enrolled) into StateMachineContainsStates
+
+!insert (UniversityEnrollment, SubmitToVerify) into StateMachineContainsTransitions
+!insert (UniversityEnrollment, VerifyToAdmit) into StateMachineContainsTransitions
+!insert (UniversityEnrollment, AdmitToEnroll) into StateMachineContainsTransitions
+
+!insert (SubmitToVerify, SubmissionTimeout) into TransitionContainsEvents
+!insert (VerifyToAdmit, VerificationTimeout) into TransitionContainsEvents
+!insert (AdmitToEnroll, AdmissionTimeout) into TransitionContainsEvents
+
+!insert (applicationSubmitted, SubmitToVerify) into StateTransition
+!insert (SubmitToVerify, documentsVerified) into TransitionState
+
+!insert (documentsVerified, VerifyToAdmit) into StateTransition
+!insert (VerifyToAdmit, admitted) into TransitionState
+
+!insert (admitted, AdmitToEnroll) into StateTransition
+!insert (AdmitToEnroll, enrolled) into TransitionState
+
+!insert (UniversityEnrollment, applicationSubmitted) into StateMachineStartsStates
+!insert (UniversityEnrollment, documentsVerified) into StateMachineStartsStates
+

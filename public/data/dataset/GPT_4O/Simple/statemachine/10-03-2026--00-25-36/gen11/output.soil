@@ -1,0 +1,67 @@
+!new StateMachine('stateMachine12')
+!stateMachine12.name := 'elevatorControlSystem'
+
+!new State('state32')
+!state32.name := 'groundFloor'
+
+!new State('state33')
+!state33.name := 'movingUp'
+
+!new State('state34')
+!state34.name := 'firstFloor'
+
+!new State('state35')
+!state35.name := 'movingDown'
+
+!new Transition('transition33')
+!transition33.name := 'goUp'
+
+!new Transition('transition34')
+!transition34.name := 'arriveFirstFloor'
+
+!new Transition('transition35')
+!transition35.name := 'goDown'
+
+!new Transition('transition36')
+!transition36.name := 'arriveGroundFloor'
+
+!new TimeEvent('timeEvent33')
+!timeEvent33.time := 5
+
+!new TimeEvent('timeEvent34')
+!timeEvent34.time := 1
+
+!new TimeEvent('timeEvent35')
+!timeEvent35.time := 4
+
+!new TimeEvent('timeEvent36')
+!timeEvent36.time := 1
+
+!insert (stateMachine12, state32) into StateMachineContainsStates
+!insert (stateMachine12, state33) into StateMachineContainsStates
+!insert (stateMachine12, state34) into StateMachineContainsStates
+!insert (stateMachine12, state35) into StateMachineContainsStates
+
+!insert (stateMachine12, transition33) into StateMachineContainsTransitions
+!insert (stateMachine12, transition34) into StateMachineContainsTransitions
+!insert (stateMachine12, transition35) into StateMachineContainsTransitions
+!insert (stateMachine12, transition36) into StateMachineContainsTransitions
+
+!insert (transition33, timeEvent33) into TransitionContainsEvents
+!insert (transition34, timeEvent34) into TransitionContainsEvents
+!insert (transition35, timeEvent35) into TransitionContainsEvents
+!insert (transition36, timeEvent36) into TransitionContainsEvents
+
+!insert (state32, transition33) into StateTransition
+!insert (transition33, state33) into TransitionState
+
+!insert (state33, transition34) into StateTransition
+!insert (transition34, state34) into TransitionState
+
+!insert (state34, transition35) into StateTransition
+!insert (transition35, state35) into TransitionState
+
+!insert (state35, transition36) into StateTransition
+!insert (transition36, state32) into TransitionState
+
+!insert (stateMachine12, state32) into StateMachineStartsStates

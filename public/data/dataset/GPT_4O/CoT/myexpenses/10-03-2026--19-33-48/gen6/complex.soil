@@ -1,0 +1,64 @@
+!new Expense('weddingPlanningExpense')
+!weddingPlanningExpense.amount := 17300.00
+!weddingPlanningExpense.startDate := Date('2024-03-01')
+!weddingPlanningExpense.endDate := Date('2024-04-30')
+
+!new Bill('venueAndCateringBill')
+!venueAndCateringBill.amount := 9000.00
+!venueAndCateringBill.category := 'Venue and Catering'
+!venueAndCateringBill.date := Date('2024-03-15')
+!venueAndCateringBill.paymentMethod := #CHECK
+!venueAndCateringBill.status := #VERIFIED
+
+!new Bill('photographyAndVideographyBill')
+!photographyAndVideographyBill.amount := 3000.00
+!photographyAndVideographyBill.category := 'Photography and Videography'
+!photographyAndVideographyBill.date := Date('2024-03-20')
+!photographyAndVideographyBill.paymentMethod := #CREDIT_CARD
+!photographyAndVideographyBill.status := #VERIFIED
+
+!new Bill('weddingAttireBill')
+!weddingAttireBill.amount := 2500.00
+!weddingAttireBill.category := 'Wedding Attire'
+!weddingAttireBill.date := Date('2024-03-25')
+!weddingAttireBill.paymentMethod := #CASH
+!weddingAttireBill.status := #DRAFT
+
+!new Bill('decorationAndFloralsBill')
+!decorationAndFloralsBill.amount := 1500.00
+!decorationAndFloralsBill.category := 'Decoration and Florals'
+!decorationAndFloralsBill.date := Date('2024-04-05')
+!decorationAndFloralsBill.paymentMethod := #CREDIT_CARD
+!decorationAndFloralsBill.status := #PENDING
+
+!new Bill('entertainmentAndMusicBill')
+!entertainmentAndMusicBill.amount := 1300.00
+!entertainmentAndMusicBill.category := 'Entertainment and Music'
+!entertainmentAndMusicBill.date := Date('2024-04-10')
+!entertainmentAndMusicBill.paymentMethod := #CHECK
+!entertainmentAndMusicBill.status := #REFUSED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (venueAndCateringBill, currencyEUR) into BillCurrency
+!insert (photographyAndVideographyBill, currencyEUR) into BillCurrency
+!insert (weddingAttireBill, currencyEUR) into BillCurrency
+!insert (decorationAndFloralsBill, currencyEUR) into BillCurrency
+!insert (entertainmentAndMusicBill, currencyEUR) into BillCurrency
+
+!insert (weddingPlanningExpense, venueAndCateringBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, photographyAndVideographyBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, weddingAttireBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, decorationAndFloralsBill) into ExpenseContainsBills
+!insert (weddingPlanningExpense, entertainmentAndMusicBill) into ExpenseContainsBills
+
+!new Comment('weddingComment1')
+!weddingComment1.text := 'Expenses for hosting our wedding ceremony and reception at Lakeview Resort, including all related services and arrangements.'
+
+!new Comment('weddingComment2')
+!weddingComment2.text := 'Everything from decoration to catering was exceptional, making it a day to remember for us and our guests.'
+
+!insert (weddingPlanningExpense, weddingComment1) into ExpenseComment
+!insert (weddingPlanningExpense, weddingComment2) into ExpenseComment

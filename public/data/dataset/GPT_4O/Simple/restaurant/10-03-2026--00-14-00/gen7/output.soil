@@ -1,0 +1,114 @@
+!new Restaurant('restaurant7')
+!restaurant7.name := 'Sunset Grill'
+
+!new Owner('owner14')
+!owner14.name := 'Alice Johnson'
+!owner14.percentageShares := 55
+!insert (restaurant7, owner14) into RestaurantOwner
+
+!new Owner('owner15')
+!owner15.name := 'Bob Williams'
+!owner15.percentageShares := 45
+!insert (restaurant7, owner15) into RestaurantOwner
+
+!new Table('table18')
+!table18.number := 18
+!table18.description := 'Terrace table'
+!table18.capacity := 8
+
+!new Table('table19')
+!table19.number := 19
+!table19.description := 'Cozy corner'
+!table19.capacity := 4
+
+!new Table('table20')
+!table20.number := 20
+!table20.description := 'Dining hall'
+!table20.capacity := 12
+
+!new RegularCustomer('customer8')
+!customer8.name := 'Oliver Martinez'
+!customer8.prefferedLanguage := #Spanish
+
+!new Waiter('waiter9')
+!waiter9.name := 'Samantha Blake'
+!waiter9.dateOfBirth := Date('1990-12-12')
+!waiter9.phoneNumber := '555-3434'
+!waiter9.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter7')
+!headwaiter7.name := 'Liam Nelson'
+!headwaiter7.dateOfBirth := Date('1985-07-07')
+!headwaiter7.phoneNumber := '555-4545'
+
+!insert (headwaiter7, waiter9) into HeadWaiterWaiter
+
+!new Individual('reservation11')
+!reservation11.time := Time('19:30')
+!reservation11.date := Date('2023-12-05')
+!reservation11.numberPeople := 4
+!reservation11.name := 'Oliver Martinez'
+!reservation11.phoneNumber := '555-6767'
+!reservation11.number := 11
+!reservation11.seating := #Patio
+!reservation11.smoking := #NonSmoking
+!insert (restaurant7, reservation11) into RestaurantReservation
+!insert (reservation11, customer8) into ReservationCustomer
+!insert (reservation11, waiter9) into ReservationWaiter
+!insert (reservation11, table19) into ReservationTable
+
+!new Banquet('reservation12')
+!reservation12.time := Time('17:00')
+!reservation12.date := Date('2024-03-25')
+!reservation12.numberPeople := 20
+!reservation12.name := 'Spring Bling'
+!reservation12.phoneNumber := '555-8080'
+!reservation12.number := 12
+!reservation12.groupName := 'Festival Friends'
+!reservation12.paymentMethod := #CreditCard
+!reservation12.busService := true
+!insert (restaurant7, reservation12) into RestaurantReservation
+!insert (reservation12, table18) into ReservationTable
+!insert (reservation12, table20) into ReservationTable
+!insert (reservation12, waiter9) into ReservationWaiter
+
+!new BusDriver('busdriver5')
+!busdriver5.name := 'Daniel Craig'
+!busdriver5.dateOfBirth := Date('1960-11-11')
+!busdriver5.phoneNumber := '555-1212'
+!busdriver5.driverLicenseNr := 'DL112233'
+!insert (reservation12, busdriver5) into BanquetBusDriver
+
+!new ItemOrder('itemOrder7')
+!itemOrder7.time := Time('20:00')
+!insert (reservation11, itemOrder7) into ReservationItemOrdered
+
+!new MenuItem('menuItem7')
+!menuItem7.description := 'Exotic Fruit Salad'
+!menuItem7.prepTime := 15.0
+!menuItem7.classification := #Dessert
+!insert (itemOrder7, menuItem7) into ItemOrderMenuItem
+
+!new FoodItem('foodItem7')
+!foodItem7.number := 107
+!foodItem7.description := 'Tropical Fruits'
+!foodItem7.purchaseFlag := false
+!foodItem7.unit := #Pound
+!insert (menuItem7, foodItem7) into MenuItemFoodItem
+
+!new Allergen('allergen7')
+!allergen7.type := #Nuts
+!insert (foodItem7, allergen7) into FoodItemAllergen
+
+!new Cook('cook7')
+!cook7.name := 'Natalie Cook'
+!cook7.dateOfBirth := Date('1993-04-02')
+!cook7.phoneNumber := '555-2323'
+!cook7.yearsOfExperience := 5
+
+!new Chef('chef7')
+!chef7.name := 'Robert Downey'
+!chef7.dateOfBirth := Date('1987-09-25')
+!chef7.phoneNumber := '555-3435'
+!insert (menuItem7, chef7) into MenuItemChef
+!insert (chef7, cook7) into ChefCook

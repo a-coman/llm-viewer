@@ -1,0 +1,47 @@
+!new Bank('alpineTrustBank')
+!alpineTrustBank.country := 'Switzerland'
+!alpineTrustBank.name := 'Alpine Trust Bank'
+!alpineTrustBank.bic := 'ALPCHZZTEST'
+
+!new Person('ottoMuller')
+!ottoMuller.firstName := 'Otto'
+!ottoMuller.lastName := 'Müller'
+!ottoMuller.age := 82
+
+!new Person('annaMuller')
+!annaMuller.firstName := 'Anna'
+!annaMuller.lastName := 'Müller'
+!annaMuller.age := 18
+
+!new Person('svenJohansson')
+!svenJohansson.firstName := 'Sven'
+!svenJohansson.lastName := 'Johansson'
+!svenJohansson.age := 40
+
+!new Person('luciaRossi')
+!luciaRossi.firstName := 'Lucia'
+!luciaRossi.lastName := 'Rossi'
+!luciaRossi.age := 55
+
+!new Account('account5_1')
+!account5_1.iban := 'CH93-0000-0000-1234'
+!account5_1.balance := 0
+
+!new Account('account5_2')
+!account5_2.iban := 'CH18-0000-0000-5678'
+!account5_2.balance := 10000000
+
+!insert (alpineTrustBank, account5_1) into AccountOfBanks
+!insert (alpineTrustBank, account5_2) into AccountOfBanks
+
+!insert (ottoMuller, account5_1) into Ownership
+!insert (annaMuller, account5_1) into Ownership
+
+!insert (svenJohansson, account5_2) into Ownership
+!insert (luciaRossi, account5_2) into Ownership
+
+!insert (ottoMuller, account5_1) into Use
+!insert (svenJohansson, account5_1) into Use
+
+!insert (luciaRossi, account5_2) into Use
+!insert (annaMuller, account5_2) into Use

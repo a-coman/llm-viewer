@@ -1,0 +1,78 @@
+!new StateMachine('conveyorBeltSystem')
+!conveyorBeltSystem.name := 'conveyorBeltSystem'
+
+!new State('idle')
+!idle.name := 'idle'
+
+!new State('loading')
+!loading.name := 'loading'
+
+!new State('moving')
+!moving.name := 'moving'
+
+!new State('unloading')
+!unloading.name := 'unloading'
+
+!new Transition('idleToLoading')
+!idleToLoading.name := 'idleToLoading'
+
+!new Transition('loadingToMoving')
+!loadingToMoving.name := 'loadingToMoving'
+
+!new Transition('movingToUnloading')
+!movingToUnloading.name := 'movingToUnloading'
+
+!new Transition('unloadingToIdle')
+!unloadingToIdle.name := 'unloadingToIdle'
+
+!new Transition('movingToLoading')
+!movingToLoading.name := 'movingToLoading'
+
+!new TimeEvent('timeEvent10_1')
+!timeEvent10_1.time := 10
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('timeEvent20')
+!timeEvent20.time := 20
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent10_2')
+!timeEvent10_2.time := 10
+
+!insert (conveyorBeltSystem, idle) into StateMachineContainsStates
+!insert (conveyorBeltSystem, loading) into StateMachineContainsStates
+!insert (conveyorBeltSystem, moving) into StateMachineContainsStates
+!insert (conveyorBeltSystem, unloading) into StateMachineContainsStates
+
+!insert (conveyorBeltSystem, idleToLoading) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, loadingToMoving) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, movingToUnloading) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, unloadingToIdle) into StateMachineContainsTransitions
+!insert (conveyorBeltSystem, movingToLoading) into StateMachineContainsTransitions
+
+!insert (idleToLoading, timeEvent10_1) into TransitionContainsEvents
+!insert (loadingToMoving, timeEvent15) into TransitionContainsEvents
+!insert (movingToUnloading, timeEvent20) into TransitionContainsEvents
+!insert (unloadingToIdle, timeEvent5) into TransitionContainsEvents
+!insert (movingToLoading, timeEvent10_2) into TransitionContainsEvents
+
+!insert (idle, idleToLoading) into StateTransition
+!insert (idleToLoading, loading) into TransitionState
+
+!insert (loading, loadingToMoving) into StateTransition
+!insert (loadingToMoving, moving) into TransitionState
+
+!insert (moving, movingToUnloading) into StateTransition
+!insert (movingToUnloading, unloading) into TransitionState
+
+!insert (unloading, unloadingToIdle) into StateTransition
+!insert (unloadingToIdle, idle) into TransitionState
+
+!insert (moving, movingToLoading) into StateTransition
+!insert (movingToLoading, loading) into TransitionState
+
+!insert (conveyorBeltSystem, idle) into StateMachineStartsStates

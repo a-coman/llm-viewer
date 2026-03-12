@@ -1,0 +1,73 @@
+!new Booking('booking1')
+!booking1.startDate := '2023-11-01'
+!booking1.endDate := '2023-11-10'
+!booking1.canceled := false
+!booking1.bookingId := 101
+!booking1.confirmed := true
+
+!new Bill('bill1')
+!bill1.price := 950.00
+!bill1.billId := 5001
+
+!new Customer('customer1')
+!customer1.firstName := 'Alice'
+!customer1.lastName := 'Smith'
+
+!new RoomReservation('reservation1')
+!reservation1.checkInDate := '2023-11-01'
+!reservation1.checkOutDate := '2023-11-10'
+
+!new Room('room101')
+!room101.numBeds := 2
+!room101.pricePerNight := 100.00
+!room101.occupied := true
+!room101.blocked := false
+!room101.roomNumber := 101
+
+!new RoomExtra('extra1')
+!extra1.price := 50.00
+!extra1.description := 'Breakfast Inclusion'
+
+!insert (booking1, bill1) into BookingBill
+!insert (booking1, customer1) into BookingCustomer
+!insert (booking1, reservation1) into BookingRoomReservation
+!insert (reservation1, extra1) into RoomReservationExtras
+!insert (reservation1, room101) into RoomReservationRoom
+!insert (bill1, reservation1) into BillRoomReservation
+
+!new Booking('booking2')
+!booking2.startDate := '2023-12-15'
+!booking2.endDate := '2023-12-20'
+!booking2.canceled := false
+!booking2.bookingId := 102
+!booking2.confirmed := false
+
+!new Bill('bill2')
+!bill2.price := 1200.00
+!bill2.billId := 5002
+
+!new Customer('customer2')
+!customer2.firstName := 'Bob'
+!customer2.lastName := 'Brown'
+
+!new RoomReservation('reservation2')
+!reservation2.checkInDate := '2023-12-15'
+!reservation2.checkOutDate := '2023-12-20'
+
+!new Room('room102')
+!room102.numBeds := 3
+!room102.pricePerNight := 150.00
+!room102.occupied := true
+!room102.blocked := false
+!room102.roomNumber := 102
+
+!new RoomExtra('extra2')
+!extra2.price := 75.00
+!extra2.description := 'Spa Package'
+
+!insert (booking2, bill2) into BookingBill
+!insert (booking2, customer2) into BookingCustomer
+!insert (booking2, reservation2) into BookingRoomReservation
+!insert (reservation2, extra2) into RoomReservationExtras
+!insert (reservation2, room102) into RoomReservationRoom
+!insert (bill2, reservation2) into BillRoomReservation

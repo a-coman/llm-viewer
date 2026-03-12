@@ -1,0 +1,36 @@
+!new Booking('booking8')
+!booking8.startDate := '2024-06-10'
+!booking8.endDate := '2024-06-15'
+!booking8.canceled := true
+!booking8.bookingId := 108
+!booking8.confirmed := false
+
+!new Bill('bill8')
+!bill8.price := 0.00
+!bill8.billId := 5008
+
+!new Customer('customer8')
+!customer8.firstName := 'Helen'
+!customer8.lastName := 'Ivy'
+
+!new RoomReservation('reservation8')
+!reservation8.checkInDate := '2024-06-10'
+!reservation8.checkOutDate := '2024-06-15'
+
+!new Room('room501')
+!room501.numBeds := 1
+!room501.pricePerNight := 85.00
+!room501.occupied := false
+!room501.blocked := true
+!room501.roomNumber := 501
+
+!new RoomExtra('extra10')
+!extra10.price := 15.00
+!extra10.description := 'Parking Pass'
+
+!insert (booking8, bill8) into BookingBill
+!insert (booking8, customer8) into BookingCustomer
+!insert (booking8, reservation8) into BookingRoomReservation
+!insert (reservation8, extra10) into RoomReservationExtras
+!insert (reservation8, room501) into RoomReservationRoom
+!insert (bill8, reservation8) into BillRoomReservation

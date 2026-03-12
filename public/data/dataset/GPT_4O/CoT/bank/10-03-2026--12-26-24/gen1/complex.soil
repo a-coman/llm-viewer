@@ -1,0 +1,83 @@
+!new Bank('globalBankUSA')
+!globalBankUSA.country := 'United States'
+!globalBankUSA.name := 'GlobalBank USA'
+!globalBankUSA.bic := 'GBUS12345'
+
+!new Bank('nihonBank')
+!nihonBank.country := 'Japan'
+!nihonBank.name := 'Nihon Bank'
+!nihonBank.bic := 'NBJP67890'
+
+!new Person('mariaGonzalez')
+!mariaGonzalez.firstName := 'Maria'
+!mariaGonzalez.lastName := 'Gonzalez'
+!mariaGonzalez.age := 34
+
+!new Person('akiraNakamura')
+!akiraNakamura.firstName := 'Akira'
+!akiraNakamura.lastName := 'Nakamura'
+!akiraNakamura.age := 47
+
+!new Person('johnSmith')
+!johnSmith.firstName := 'John'
+!johnSmith.lastName := 'Smith'
+!johnSmith.age := 51
+
+!new Person('emilyJohnson')
+!emilyJohnson.firstName := 'Emily'
+!emilyJohnson.lastName := 'Johnson'
+!emilyJohnson.age := 29
+
+!new Person('suryaPatel')
+!suryaPatel.firstName := 'Surya'
+!suryaPatel.lastName := 'Patel'
+!suryaPatel.age := 41
+
+!new Person('rioYamamoto')
+!rioYamamoto.firstName := 'Rio'
+!rioYamamoto.lastName := 'Yamamoto'
+!rioYamamoto.age := 38
+
+!new Account('account4_1')
+!account4_1.iban := 'US1234567890A'
+!account4_1.balance := 5000
+
+!new Account('account4_2')
+!account4_2.iban := 'JP0987654321B'
+!account4_2.balance := 0
+
+!new Account('account4_3')
+!account4_3.iban := 'US1122334455C'
+!account4_3.balance := 7500
+
+!new Account('account4_4')
+!account4_4.iban := 'JP2233445566D'
+!account4_4.balance := 1200
+
+!insert (globalBankUSA, account4_1) into AccountOfBanks
+!insert (nihonBank, account4_2) into AccountOfBanks
+!insert (globalBankUSA, account4_3) into AccountOfBanks
+!insert (nihonBank, account4_4) into AccountOfBanks
+
+!insert (mariaGonzalez, account4_1) into Ownership
+!insert (johnSmith, account4_1) into Ownership
+
+!insert (akiraNakamura, account4_2) into Ownership
+
+!insert (emilyJohnson, account4_3) into Ownership
+
+!insert (suryaPatel, account4_4) into Ownership
+!insert (rioYamamoto, account4_4) into Ownership
+
+!insert (mariaGonzalez, account4_1) into Use
+!insert (johnSmith, account4_1) into Use
+!insert (emilyJohnson, account4_1) into Use
+
+!insert (akiraNakamura, account4_2) into Use
+!insert (rioYamamoto, account4_2) into Use
+
+!insert (emilyJohnson, account4_3) into Use
+
+!insert (suryaPatel, account4_4) into Use
+!insert (rioYamamoto, account4_4) into Use
+!insert (akiraNakamura, account4_4) into Use

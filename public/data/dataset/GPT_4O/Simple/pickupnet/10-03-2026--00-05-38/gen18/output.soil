@@ -1,0 +1,64 @@
+!new Driver('driver32')
+!driver32.id := 'D032'
+!driver32.name := 'T\'Challa'
+
+!new Driver('driver33')
+!driver33.id := 'D033'
+!driver33.name := 'Shuri'
+
+!new Shipment('shipment35')
+!shipment35.id := 'SHP12379'
+!shipment35.status := #ASSIGNED
+
+!new Shipment('shipment36')
+!shipment36.id := 'SHP12380'
+!shipment36.status := #DELIVERED
+
+!new Address('address35')
+!address35.text := '3333 Panther Way, Wakanda'
+
+!new Address('address36')
+!address36.text := '3434 Vibranium Ave, Wakanda'
+
+!new GeoLocation('geoLocation35')
+!geoLocation35.latitude := -1.2921
+!geoLocation35.longitude := 36.8219
+
+!new GeoLocation('geoLocation36')
+!geoLocation36.latitude := -1.2925
+!geoLocation36.longitude := 36.8225
+
+!insert (address35, geoLocation35) into AddressContainsGeoLocation
+!insert (address36, geoLocation36) into AddressContainsGeoLocation
+
+!new Customer('customer35')
+!customer35.id := 'CUST035'
+!customer35.name := 'Nakia'
+!customer35.twitterUserName := '@warrior'
+
+!new Customer('customer36')
+!customer36.id := 'CUST036'
+!customer36.name := 'Okoye'
+!customer36.twitterUserName := '@general'
+
+!new Station('station18')
+
+!insert (station18, customer35) into StationContainsCustomer
+!insert (station18, customer36) into StationContainsCustomer
+
+!insert (station18, shipment35) into StationShipment
+!insert (station18, shipment36) into StationShipment
+
+!insert (station18, driver32) into StationContainsDriver
+!insert (station18, driver33) into StationContainsDriver
+
+!insert (shipment35, address35) into ShipmentContainsPickUpAddress
+!insert (shipment35, address36) into ShipmentContainsDeliveryAddress
+
+!insert (shipment36, address36) into ShipmentContainsPickUpAddress
+!insert (shipment36, address35) into ShipmentContainsDeliveryAddress
+
+!insert (customer35, shipment35) into CustomerConsistsOfShipment
+!insert (customer36, shipment36) into CustomerConsistsOfShipment
+
+!insert (driver32, shipment35) into DriverShipment

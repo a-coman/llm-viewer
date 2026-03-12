@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency18')
+!currency18.name := 'Norwegian Krone'
+!currency18.abbreviation := 'NOK'
+
+-- Creating instances of Bills
+!new Bill('bill44')
+!bill44.amount := 1200.00
+!bill44.category := 'Energy Consumption'
+!bill44.date := Date('2023-07-05')
+!bill44.paymentMethod := #CREDIT_CARD
+!bill44.status := #PENDING
+!insert (bill44, currency18) into BillCurrency
+
+!new Bill('bill45')
+!bill45.amount := 900.00
+!bill45.category := 'Utilities'
+!bill45.date := Date('2023-07-10')
+!bill45.paymentMethod := #CASH
+!bill45.status := #VALIDATED
+!insert (bill45, currency18) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment21')
+!comment21.text := 'Monthly energy and utility expenses for the headquarters.'
+
+-- Creating instance of Expense
+!new Expense('expense18')
+!expense18.amount := 2100.00
+!expense18.startDate := Date('2023-07-01')
+!expense18.endDate := Date('2023-07-31')
+!insert (expense18, bill44) into ExpenseContainsBills
+!insert (expense18, bill45) into ExpenseContainsBills
+!insert (expense18, comment21) into ExpenseComment

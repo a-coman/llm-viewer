@@ -1,0 +1,70 @@
+!new RentalOffice('officeMetroShuttleRentals')
+!officeMetroShuttleRentals.name := 'Metropolitan Shuttle Rentals'
+!officeMetroShuttleRentals.number := 505
+!officeMetroShuttleRentals.address := '1100 Urban Center Blvd, Metroville, NY 10001'
+
+!new Vehicle('coveredTrailer90123')
+!coveredTrailer90123.id := 90123
+!coveredTrailer90123.registrationState := #CA
+!coveredTrailer90123.licensePlateNumber := 'NY-567-UVW'
+!coveredTrailer90123.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer90123.registrationLastMaintenanceDate := Date('2023-09-10')
+!coveredTrailer90123.expirationDate := Date('2024-09-10')
+
+!new Truck('truck90124')
+!truck90124.id := 90124
+!truck90124.registrationState := #CA
+!truck90124.licensePlateNumber := 'NY-678-XYZ'
+!truck90124.vehicleTypeCode := #TRUCK
+!truck90124.registrationLastMaintenanceDate := Date('2023-10-15')
+!truck90124.expirationDate := Date('2024-10-15')
+!truck90124.odometerReading := 75000
+!truck90124.gasTankCapacity := 70.0
+!truck90124.workingRadio := true
+!truck90124.mileage := 8
+
+!new Individual('individualUrbanJohnson')
+!individualUrbanJohnson.name := 'Urban Johnson'
+!individualUrbanJohnson.address := '450 Cityscape Rd, Newtown, NJ 07601'
+!individualUrbanJohnson.poorRisk := true
+!individualUrbanJohnson.homePhone := '+1-201-555-0123'
+!individualUrbanJohnson.driverLicenseState := #CA
+!individualUrbanJohnson.driverLicenseNumber := 1456789012
+!individualUrbanJohnson.driverLicenseExpirationDate := Date('2024-11-01')
+
+!new Company('companyCityLogisticsPartners')
+!companyCityLogisticsPartners.name := 'City Logistics Partners'
+!companyCityLogisticsPartners.address := '902 Business Park, Suburbia, NJ 07083'
+!companyCityLogisticsPartners.poorRisk := false
+!companyCityLogisticsPartners.idNumber := 1122334455
+
+!new RentalAgreement('rentalAgreement5009')
+!rentalAgreement5009.number := 5009
+!rentalAgreement5009.rentalDate := Date('2025-03-15')
+!rentalAgreement5009.anticipatedDuration := 7
+!rentalAgreement5009.depositPaid := 200.0
+!rentalAgreement5009.quotedDailyRate := 90.0
+!rentalAgreement5009.quotedRatePerMile := 2.2
+
+!new RentalAgreement('rentalAgreement5010')
+!rentalAgreement5010.number := 5010
+!rentalAgreement5010.rentalDate := Date('2025-10-01')
+!rentalAgreement5010.anticipatedDuration := 15
+!rentalAgreement5010.depositPaid := 1200.0
+!rentalAgreement5010.quotedDailyRate := 85.0
+!rentalAgreement5010.quotedRatePerMile := 1.5
+
+!insert (officeMetroShuttleRentals, coveredTrailer90123) into RentalOfficeVehicle
+!insert (officeMetroShuttleRentals, truck90124) into RentalOfficeVehicle
+
+!insert (officeMetroShuttleRentals, rentalAgreement5009) into RentalOfficeRentalAgreementOrigin
+!insert (officeMetroShuttleRentals, rentalAgreement5010) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeMetroShuttleRentals, rentalAgreement5009) into RentalOfficeRentalAgreementDrop
+!insert (officeMetroShuttleRentals, rentalAgreement5010) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5009, coveredTrailer90123) into RentalAgreementVehicle
+!insert (rentalAgreement5010, truck90124) into RentalAgreementVehicle
+
+!insert (rentalAgreement5009, individualUrbanJohnson) into RentalAgreementCustomer
+!insert (rentalAgreement5010, companyCityLogisticsPartners) into RentalAgreementCustomer

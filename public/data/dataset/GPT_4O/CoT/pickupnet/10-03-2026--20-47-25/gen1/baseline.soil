@@ -1,0 +1,84 @@
+!new Driver('driver1')
+!driver1.id := 'DR-101'
+!driver1.name := 'Luis Gonzalez'
+
+!new Driver('driver2')
+!driver2.id := 'DR-102'
+!driver2.name := 'Sarah Tan'
+
+!new Shipment('shipment1')
+!shipment1.id := 'SH-501'
+!shipment1.status := #UNDERWAY
+
+!new Shipment('shipment2')
+!shipment2.id := 'SH-502'
+!shipment2.status := #DELIVERED
+
+!new Address('address1')
+!address1.text := '123 Elm Street, Brooklyn, NY'
+
+!new GeoLocation('geoLocation1')
+!geoLocation1.latitude := 40.6782
+!geoLocation1.longitude := -73.9442
+
+!insert (address1, geoLocation1) into AddressContainsGeoLocation
+
+!new Address('address2')
+!address2.text := '456 Maple Avenue, Manhattan, NY'
+
+!new GeoLocation('geoLocation2')
+!geoLocation2.latitude := 40.7831
+!geoLocation2.longitude := -73.9712
+
+!insert (address2, geoLocation2) into AddressContainsGeoLocation
+
+!new Address('address3')
+!address3.text := '789 Broadway, Queens, NY'
+
+!new GeoLocation('geoLocation3')
+!geoLocation3.latitude := 40.7282
+!geoLocation3.longitude := -73.7949
+
+!insert (address3, geoLocation3) into AddressContainsGeoLocation
+
+!new Address('address4')
+!address4.text := '160 Central Park West, NY'
+
+!new GeoLocation('geoLocation4')
+!geoLocation4.latitude := 40.7825
+!geoLocation4.longitude := -73.9654
+
+!insert (address4, geoLocation4) into AddressContainsGeoLocation
+
+!new Station('station1')
+
+!new Customer('customer1')
+!customer1.id := 'CUST-301'
+!customer1.name := 'Alex Johnson'
+!customer1.twitterUserName := '@alexJ_Trader'
+
+!new Customer('customer2')
+!customer2.id := 'CUST-302'
+!customer2.name := 'Nina Patel'
+!customer2.twitterUserName := '@nina_world'
+
+!insert (driver1, shipment1) into DriverShipment
+!insert (driver2, shipment2) into DriverShipment
+
+!insert (shipment1, address1) into ShipmentContainsPickUpAddress
+!insert (shipment2, address3) into ShipmentContainsPickUpAddress
+
+!insert (shipment1, address2) into ShipmentContainsDeliveryAddress
+!insert (shipment2, address4) into ShipmentContainsDeliveryAddress
+
+!insert (customer1, shipment1) into CustomerConsistsOfShipment
+!insert (customer2, shipment2) into CustomerConsistsOfShipment
+
+!insert (station1, customer1) into StationContainsCustomer
+!insert (station1, customer2) into StationContainsCustomer
+
+!insert (station1, shipment1) into StationShipment
+!insert (station1, shipment2) into StationShipment
+
+!insert (station1, driver1) into StationContainsDriver
+!insert (station1, driver2) into StationContainsDriver

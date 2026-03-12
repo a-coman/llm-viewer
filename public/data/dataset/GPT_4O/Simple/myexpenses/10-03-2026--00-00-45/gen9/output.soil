@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency9')
+!currency9.name := 'South African Rand'
+!currency9.abbreviation := 'ZAR'
+
+-- Creating instances of Bills
+!new Bill('bill21')
+!bill21.amount := 800.00
+!bill21.category := 'Event Management'
+!bill21.date := Date('2023-12-01')
+!bill21.paymentMethod := #CREDIT_CARD
+!bill21.status := #PENDING
+!insert (bill21, currency9) into BillCurrency
+
+!new Bill('bill22')
+!bill22.amount := 400.00
+!bill22.category := 'Catering'
+!bill22.date := Date('2023-12-03')
+!bill22.paymentMethod := #CHECK
+!bill22.status := #REFUNDED
+!insert (bill22, currency9) into BillCurrency
+
+!new Bill('bill23')
+!bill23.amount := 300.00
+!bill23.category := 'Venue Rental'
+!bill23.date := Date('2023-12-05')
+!bill23.paymentMethod := #CASH
+!bill23.status := #VALIDATED
+!insert (bill23, currency9) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment12')
+!comment12.text := 'Annual company event expenses.'
+
+-- Creating instance of Expense
+!new Expense('expense9')
+!expense9.amount := 1500.00
+!expense9.startDate := Date('2023-12-01')
+!expense9.endDate := Date('2023-12-10')
+!insert (expense9, bill21) into ExpenseContainsBills
+!insert (expense9, bill22) into ExpenseContainsBills
+!insert (expense9, bill23) into ExpenseContainsBills
+!insert (expense9, comment12) into ExpenseComment

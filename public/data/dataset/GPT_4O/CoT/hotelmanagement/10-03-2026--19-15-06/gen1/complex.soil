@@ -1,0 +1,67 @@
+!new Customer('customer4')
+!customer4.firstName := 'Sophia'
+!customer4.lastName := 'Martinez'
+
+!new Booking('booking4')
+!booking4.startDate := '2023-11-20'
+!booking4.endDate := '2023-11-27'
+!booking4.canceled := false
+!booking4.bookingId := 1007
+!booking4.confirmed := true
+
+!new Bill('bill8')
+!bill8.price := 1325.00
+!bill8.billId := 3002
+
+!new RoomReservation('roomReservation4_1')
+!roomReservation4_1.checkInDate := '2023-11-20'
+!roomReservation4_1.checkOutDate := '2023-11-24'
+
+!new RoomReservation('roomReservation4_2')
+!roomReservation4_2.checkInDate := '2023-11-24'
+!roomReservation4_2.checkOutDate := '2023-11-27'
+
+!new Room('room4_101')
+!room4_101.numBeds := 2
+!room4_101.pricePerNight := 150.00
+!room4_101.occupied := true
+!room4_101.blocked := false
+!room4_101.roomNumber := 101
+
+!new Room('room4_105')
+!room4_105.numBeds := 3
+!room4_105.pricePerNight := 200.00
+!room4_105.occupied := true
+!room4_105.blocked := false
+!room4_105.roomNumber := 105
+
+!new RoomExtra('roomExtra7')
+!roomExtra7.price := 30.00
+!roomExtra7.description := 'Daily Breakfast Buffet'
+
+!new RoomExtra('roomExtra9')
+!roomExtra9.price := 45.00
+!roomExtra9.description := 'Sunset Wine Tasting Event'
+
+!new FreeRoomTypesDTO('freeRoomType4')
+!freeRoomType4.roomTypeDescription := 'Suite with Sea View'
+!freeRoomType4.numBeds := 2
+!freeRoomType4.pricePerNight := 220.00
+!freeRoomType4.numFreeRooms := 1
+
+!insert (booking4, customer4) into BookingCustomer
+
+!insert (booking4, bill8) into BookingBill
+
+!insert (booking4, roomReservation4_1) into BookingRoomReservation
+!insert (booking4, roomReservation4_2) into BookingRoomReservation
+
+!insert (roomReservation4_1, room4_101) into RoomReservationRoom
+!insert (roomReservation4_1, roomExtra7) into RoomReservationExtras
+!insert (roomReservation4_1, roomExtra9) into RoomReservationExtras
+
+!insert (roomReservation4_2, room4_105) into RoomReservationRoom
+!insert (roomReservation4_2, roomExtra7) into RoomReservationExtras
+
+!insert (bill8, roomReservation4_1) into BillRoomReservation
+!insert (bill8, roomReservation4_2) into BillRoomReservation

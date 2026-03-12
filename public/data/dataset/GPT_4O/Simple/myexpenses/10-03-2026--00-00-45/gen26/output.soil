@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency26')
+!currency26.name := 'Pakistani Rupee'
+!currency26.abbreviation := 'PKR'
+
+-- Creating instances of Bills
+!new Bill('bill65')
+!bill65.amount := 9000.00
+!bill65.category := 'Event Sponsorship'
+!bill65.date := Date('2023-06-05')
+!bill65.paymentMethod := #CASH
+!bill65.status := #VALIDATED
+!insert (bill65, currency26) into BillCurrency
+
+!new Bill('bill66')
+!bill66.amount := 7000.00
+!bill66.category := 'Advertising Spaces'
+!bill66.date := Date('2023-06-10')
+!bill66.paymentMethod := #CREDIT_CARD
+!bill66.status := #REFUNDED
+!insert (bill66, currency26) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment29')
+!comment29.text := 'Expenses related to the marketing and sponsorship of the annual festival.'
+
+-- Creating instance of Expense
+!new Expense('expense26')
+!expense26.amount := 16000.00
+!expense26.startDate := Date('2023-06-01')
+!expense26.endDate := Date('2023-06-15')
+!insert (expense26, bill65) into ExpenseContainsBills
+!insert (expense26, bill66) into ExpenseContainsBills
+!insert (expense26, comment29) into ExpenseComment

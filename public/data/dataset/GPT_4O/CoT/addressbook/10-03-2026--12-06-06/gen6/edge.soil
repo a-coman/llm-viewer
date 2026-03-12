@@ -1,0 +1,118 @@
+!new AddressBook('MediaAndEntertainmentNetwork')
+
+!new Company('LunaProductions')
+!LunaProductions.name := 'Luna Productions'
+!LunaProductions.phone := '+1-310-7771234'
+!LunaProductions.website := 'www.lunaproductions.us'
+!LunaProductions.email := 'contact@lunaproductions.us'
+!LunaProductions.industry := 'Film Production'
+
+!new Address('LunaProductionsAddress')
+!LunaProductionsAddress.city := 'Los Angeles'
+!LunaProductionsAddress.houseNr := '500'
+!LunaProductionsAddress.street := 'Hollywood Boulevard'
+!insert (LunaProductions, LunaProductionsAddress) into ContactContainsAddress
+
+!new Note('LunaProductionsNote1')
+!LunaProductionsNote1.author := 'Evelyn Hart'
+!LunaProductionsNote1.time := Date('2023-09-15T10:00:00')
+!LunaProductionsNote1.type := #MEETING
+!LunaProductionsNote1.comment := 'Annual planning session held in Los Angeles.'
+!insert (LunaProductions, LunaProductionsNote1) into ContactContainsNote
+
+!new Company('BrighterDaysPublishing')
+!BrighterDaysPublishing.name := 'Brighter Days Publishing'
+!BrighterDaysPublishing.phone := '+44-20-76191122'
+!BrighterDaysPublishing.website := 'www.brighterdayspub.co.uk'
+!BrighterDaysPublishing.email := 'editor@brighterdayspub.co.uk'
+!BrighterDaysPublishing.industry := 'Publishing'
+
+!new Address('BrighterDaysAddress')
+!BrighterDaysAddress.city := 'London'
+!BrighterDaysAddress.houseNr := '120'
+!BrighterDaysAddress.street := 'Print Press Way'
+!insert (BrighterDaysPublishing, BrighterDaysAddress) into ContactContainsAddress
+
+!new Note('BrighterDaysNote1')
+!BrighterDaysNote1.author := 'Jonathan Price'
+!BrighterDaysNote1.time := Date('2023-06-22T08:30:00')
+!BrighterDaysNote1.type := #EMAIL
+!BrighterDaysNote1.comment := 'Draft collaboration agreement with Luna Productions.'
+!insert (BrighterDaysPublishing, BrighterDaysNote1) into ContactContainsNote
+
+!new Person('MaxwellChen')
+!MaxwellChen.name := 'Maxwell Chen'
+!MaxwellChen.phone := '+86-10-88765432'
+!MaxwellChen.website := 'www.maxwellchenmedia.cn'
+!MaxwellChen.email := 'm.chen@media.cn'
+!MaxwellChen.title := 'Media Strategist'
+
+!new Address('MaxwellChenAddress')
+!MaxwellChenAddress.city := 'Beijing'
+!MaxwellChenAddress.houseNr := '18'
+!MaxwellChenAddress.street := 'Media Hub Road'
+!insert (MaxwellChen, MaxwellChenAddress) into ContactContainsAddress
+
+!new Note('MaxwellChenNote1')
+!MaxwellChenNote1.author := 'Maxwell Chen'
+!MaxwellChenNote1.time := Date('2023-08-30T18:00:00')
+!MaxwellChenNote1.type := #CALL
+!MaxwellChenNote1.comment := 'Discussed expanding media research in Asian markets.'
+!insert (MaxwellChen, MaxwellChenNote1) into ContactContainsNote
+
+!new Note('MaxwellChenNote2')
+!MaxwellChenNote2.author := 'Maxwell Chen'
+!MaxwellChenNote2.time := Date('2023-07-04T14:00:00')
+!MaxwellChenNote2.type := #MEETING
+!MaxwellChenNote2.comment := 'Strategy meeting with multiple divisions in Beijing.'
+!insert (MaxwellChen, MaxwellChenNote2) into ContactContainsNote
+
+!new Company('StarSoundStudios')
+!StarSoundStudios.name := 'StarSound Studios'
+!StarSoundStudios.phone := '+91-80-66554433'
+!StarSoundStudios.website := 'www.starsoundstudios.in'
+!StarSoundStudios.email := 'info@starsoundstudios.in'
+!StarSoundStudios.industry := 'Music Production'
+
+!new Address('StarSoundAddress')
+!StarSoundAddress.city := 'Bangalore'
+!StarSoundAddress.houseNr := '33'
+!StarSoundAddress.street := 'Melody Lane'
+!insert (StarSoundStudios, StarSoundAddress) into ContactContainsAddress
+
+!new Note('StarSoundNote1')
+!StarSoundNote1.author := 'Priya Menon'
+!StarSoundNote1.time := Date('2023-05-10T11:30:00')
+!StarSoundNote1.type := #CALL
+!StarSoundNote1.comment := 'Meeting with investors on the upcoming music festival.'
+!insert (StarSoundStudios, StarSoundNote1) into ContactContainsNote
+
+!new Relationship('LunaToMaxwellCoworker')
+!LunaToMaxwellCoworker.type := #COWORKER
+!insert (LunaToMaxwellCoworker, MaxwellChen) into RelationshipToContact
+!insert (LunaProductions, LunaToMaxwellCoworker) into ContactToRelationship
+
+!new Relationship('LunaToBrighterDaysSubdivision')
+!LunaToBrighterDaysSubdivision.type := #SUBDIVISION
+!insert (LunaToBrighterDaysSubdivision, BrighterDaysPublishing) into RelationshipToContact
+!insert (LunaProductions, LunaToBrighterDaysSubdivision) into ContactToRelationship
+
+!new Relationship('BrighterDaysToLunaBoss')
+!BrighterDaysToLunaBoss.type := #BOSS
+!insert (BrighterDaysToLunaBoss, LunaProductions) into RelationshipToContact
+!insert (BrighterDaysPublishing, BrighterDaysToLunaBoss) into ContactToRelationship
+
+!new Relationship('BrighterDaysToMaxwellEmployee')
+!BrighterDaysToMaxwellEmployee.type := #EMPLOYEE
+!insert (BrighterDaysToMaxwellEmployee, MaxwellChen) into RelationshipToContact
+!insert (BrighterDaysPublishing, BrighterDaysToMaxwellEmployee) into ContactToRelationship
+
+!new Relationship('StarSoundToMaxwellCoworker')
+!StarSoundToMaxwellCoworker.type := #COWORKER
+!insert (StarSoundToMaxwellCoworker, MaxwellChen) into RelationshipToContact
+!insert (StarSoundStudios, StarSoundToMaxwellCoworker) into ContactToRelationship
+
+!insert (MediaAndEntertainmentNetwork, LunaProductions) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, BrighterDaysPublishing) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, MaxwellChen) into AddressBookMadeOfContact
+!insert (MediaAndEntertainmentNetwork, StarSoundStudios) into AddressBookMadeOfContact

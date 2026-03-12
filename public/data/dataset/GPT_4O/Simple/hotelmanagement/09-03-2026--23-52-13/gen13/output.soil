@@ -1,0 +1,44 @@
+!new Booking('booking14')
+!booking14.startDate := '2024-12-20'
+!booking14.endDate := '2024-12-25'
+!booking14.canceled := false
+!booking14.bookingId := 114
+!booking14.confirmed := true
+
+!new Bill('bill14')
+!bill14.price := 850.00
+!bill14.billId := 5014
+
+!new Customer('customer14')
+!customer14.firstName := 'Nina'
+!customer14.lastName := 'Olsen'
+
+!new RoomReservation('reservation14')
+!reservation14.checkInDate := '2024-12-20'
+!reservation14.checkOutDate := '2024-12-25'
+
+!new Room('room1101')
+!room1101.numBeds := 3
+!room1101.pricePerNight := 150.00
+!room1101.occupied := true
+!room1101.blocked := false
+!room1101.roomNumber := 1101
+
+!new Room('room1102')
+!room1102.numBeds := 1
+!room1102.pricePerNight := 80.00
+!room1102.occupied := true
+!room1102.blocked := false
+!room1102.roomNumber := 1102
+
+!new RoomExtra('extra17')
+!extra17.price := 40.00
+!extra17.description := 'New Year Celebration Package'
+
+!insert (booking14, bill14) into BookingBill
+!insert (booking14, customer14) into BookingCustomer
+!insert (booking14, reservation14) into BookingRoomReservation
+!insert (reservation14, extra17) into RoomReservationExtras
+!insert (reservation14, room1101) into RoomReservationRoom
+!insert (reservation14, room1102) into RoomReservationRoom
+!insert (bill14, reservation14) into BillRoomReservation

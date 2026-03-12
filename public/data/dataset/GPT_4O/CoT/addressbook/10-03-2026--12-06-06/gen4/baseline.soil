@@ -1,0 +1,111 @@
+!new AddressBook('InternationalProfessionalNetwork')
+
+!new Person('CarlosMendesIPN')
+!CarlosMendesIPN.name := 'Carlos Mendes'
+!CarlosMendesIPN.phone := '+351-21-998-7654'
+!CarlosMendesIPN.website := 'www.carlosmendes.pt'
+!CarlosMendesIPN.email := 'carlos.mendes@marketingportugal.pt'
+!CarlosMendesIPN.title := 'Chief Marketing Officer'
+
+!new Address('CarlosMendesAddressIPN')
+!CarlosMendesAddressIPN.city := 'Lisbon'
+!CarlosMendesAddressIPN.street := 'Rua Augusta'
+!CarlosMendesAddressIPN.houseNr := '45'
+!insert (CarlosMendesIPN, CarlosMendesAddressIPN) into ContactContainsAddress
+
+!new Note('CarlosMendesNoteIPN')
+!CarlosMendesNoteIPN.author := 'Carlos Mendes'
+!CarlosMendesNoteIPN.time := Date('2023-02-10')
+!CarlosMendesNoteIPN.type := #EMAIL
+!CarlosMendesNoteIPN.comment := 'Overview of strategic marketing initiatives for Q2.'
+!insert (CarlosMendesIPN, CarlosMendesNoteIPN) into ContactContainsNote
+
+!new Company('EcoEnergySystems')
+!EcoEnergySystems.name := 'Eco Energy Systems'
+!EcoEnergySystems.phone := '+49-89-1234-5678'
+!EcoEnergySystems.website := 'www.ecoenergysystems.de'
+!EcoEnergySystems.email := 'info@ecoenergysystems.de'
+!EcoEnergySystems.industry := 'Renewable Energy'
+
+!new Address('EcoEnergySystemsAddress')
+!EcoEnergySystemsAddress.city := 'Munich'
+!EcoEnergySystemsAddress.street := 'Sonnenstraße'
+!EcoEnergySystemsAddress.houseNr := '30'
+!insert (EcoEnergySystems, EcoEnergySystemsAddress) into ContactContainsAddress
+
+!new Note('EcoEnergySystemsNoteIPN')
+!EcoEnergySystemsNoteIPN.author := 'Hans Müller'
+!EcoEnergySystemsNoteIPN.time := Date('2023-05-25')
+!EcoEnergySystemsNoteIPN.type := #MEETING
+!EcoEnergySystemsNoteIPN.comment := 'Discussion about expanding solar energy projects in Southern Europe.'
+!insert (EcoEnergySystems, EcoEnergySystemsNoteIPN) into ContactContainsNote
+
+!new Person('PaoloConti')
+!PaoloConti.name := 'Paolo Conti'
+!PaoloConti.phone := '+39-06-4444-5555'
+!PaoloConti.website := 'www.paoloconticonsulting.it'
+!PaoloConti.email := 'paolo.conti@innovationitalia.it'
+!PaoloConti.title := 'Innovation Consultant'
+
+!new Address('PaoloContiAddress')
+!PaoloContiAddress.city := 'Rome'
+!PaoloContiAddress.street := 'Via Condotti'
+!PaoloContiAddress.houseNr := '22'
+!insert (PaoloConti, PaoloContiAddress) into ContactContainsAddress
+
+!new Note('PaoloContiNoteIPN')
+!PaoloContiNoteIPN.author := 'Paolo Conti'
+!PaoloContiNoteIPN.time := Date('2023-04-18')
+!PaoloContiNoteIPN.type := #CALL
+!PaoloContiNoteIPN.comment := 'Insights on integrating AI into customer service.'
+!insert (PaoloConti, PaoloContiNoteIPN) into ContactContainsNote
+
+!new Person('JeanBaptiste')
+!JeanBaptiste.name := 'Jean Baptiste'
+!JeanBaptiste.phone := '+33-1-7543-2109'
+!JeanBaptiste.website := 'www.jeanbaptiste.fr'
+!JeanBaptiste.email := 'jean.baptiste@entrepreneurfrance.fr'
+!JeanBaptiste.title := 'Entrepreneur'
+
+!new Address('JeanBaptisteAddress')
+!JeanBaptisteAddress.city := 'Paris'
+!JeanBaptisteAddress.street := 'Champs-Élysées'
+!JeanBaptisteAddress.houseNr := '12'
+!insert (JeanBaptiste, JeanBaptisteAddress) into ContactContainsAddress
+
+!new Note('JeanBaptisteNoteIPN')
+!JeanBaptisteNoteIPN.author := 'Jean Baptiste'
+!JeanBaptisteNoteIPN.time := Date('2023-03-30')
+!JeanBaptisteNoteIPN.type := #EMAIL
+!JeanBaptisteNoteIPN.comment := 'Proposal for joint ventures in sustainable agriculture.'
+!insert (JeanBaptiste, JeanBaptisteNoteIPN) into ContactContainsNote
+
+!new Relationship('CarlosToPaoloBoss')
+!CarlosToPaoloBoss.type := #BOSS
+!insert (CarlosToPaoloBoss, PaoloConti) into RelationshipToContact
+!insert (CarlosMendesIPN, CarlosToPaoloBoss) into ContactToRelationship
+
+!new Relationship('PaoloToCarlosEmployee')
+!PaoloToCarlosEmployee.type := #EMPLOYEE
+!insert (PaoloToCarlosEmployee, CarlosMendesIPN) into RelationshipToContact
+!insert (PaoloConti, PaoloToCarlosEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToJeanCoworker')
+!CarlosToJeanCoworker.type := #COWORKER
+!insert (CarlosToJeanCoworker, JeanBaptiste) into RelationshipToContact
+!insert (CarlosMendesIPN, CarlosToJeanCoworker) into ContactToRelationship
+
+!new Relationship('JeanToCarlosCoworker')
+!JeanToCarlosCoworker.type := #COWORKER
+!insert (JeanToCarlosCoworker, CarlosMendesIPN) into RelationshipToContact
+!insert (JeanBaptiste, JeanToCarlosCoworker) into ContactToRelationship
+
+!new Relationship('JeanToEcoSubdivision')
+!JeanToEcoSubdivision.type := #SUBDIVISION
+!insert (JeanToEcoSubdivision, EcoEnergySystems) into RelationshipToContact
+!insert (JeanBaptiste, JeanToEcoSubdivision) into ContactToRelationship
+
+!insert (InternationalProfessionalNetwork, CarlosMendesIPN) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, EcoEnergySystems) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, PaoloConti) into AddressBookMadeOfContact
+!insert (InternationalProfessionalNetwork, JeanBaptiste) into AddressBookMadeOfContact

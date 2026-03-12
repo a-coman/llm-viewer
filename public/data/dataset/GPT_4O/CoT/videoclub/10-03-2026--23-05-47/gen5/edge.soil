@@ -1,0 +1,45 @@
+!new Client('client31')
+!client31.clientId := 350
+!client31.isSuspended := true
+
+!new Rental('rental49')
+!rental49.date := Date('2023-12-15')
+
+!new Movie('movie40')
+!movie40.title := 'Warriors\' Dawn'
+!movie40.availableCopies := 5
+!movie40.genre := #Action
+
+!new Movie('movie41')
+!movie41.title := 'Warriors\' Awakening'
+!movie41.availableCopies := 8
+!movie41.genre := #Action
+
+!new Movie('movie42')
+!movie42.title := 'Warriors\' Resolve'
+!movie42.availableCopies := 0
+!movie42.genre := #Action
+
+!new Actor('actor74')
+!actor74.name := 'Nikolai Ivanov'
+
+!new Actor('actor75')
+!actor75.name := 'Fiona Gallagher'
+
+!new Actor('actor76')
+!actor76.name := 'Ahmed Khan'
+
+!insert (client31, rental49) into ClientRental
+
+!insert (rental49, movie40) into RentalCassette
+!insert (rental49, movie41) into RentalCassette
+!insert (rental49, movie42) into RentalCassette
+
+!insert (movie40, actor74) into CassetteActor
+
+!insert (movie41, actor74) into CassetteActor
+!insert (movie41, actor75) into CassetteActor
+
+!insert (movie42, actor74) into CassetteActor
+!insert (movie42, actor75) into CassetteActor
+!insert (movie42, actor76) into CassetteActor

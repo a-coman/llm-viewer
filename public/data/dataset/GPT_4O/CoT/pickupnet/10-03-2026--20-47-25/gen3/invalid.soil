@@ -1,0 +1,66 @@
+!new Shipment('shipment23')
+!shipment23.id := 'S3001'
+!shipment23.status := #ASSIGNED
+
+!new Address('address44')
+!address44.text := '250 Via San Francesco, Milan, Italy'
+
+!new GeoLocation('geoLocation44')
+!geoLocation44.latitude := 45.464664
+!geoLocation44.longitude := 9.188540
+
+!insert (address44, geoLocation44) into AddressContainsGeoLocation
+
+!new Address('address45')
+!address45.text := '500 Boulevard St. Germain, Paris, France'
+
+!new GeoLocation('geoLocation45')
+!geoLocation45.latitude := 48.858844
+!geoLocation45.longitude := 2.294351
+
+!insert (address45, geoLocation45) into AddressContainsGeoLocation
+
+!insert (shipment23, address44) into ShipmentContainsPickUpAddress
+!insert (shipment23, address45) into ShipmentContainsDeliveryAddress
+
+!new Shipment('shipment24')
+!shipment24.id := 'S3002'
+!shipment24.status := #NEW
+
+!new Address('address46')
+!address46.text := '100 Piazza Navona, Rome, Italy'
+
+!new GeoLocation('geoLocation46')
+!geoLocation46.latitude := 41.902782
+!geoLocation46.longitude := 12.496366
+
+!insert (address46, geoLocation46) into AddressContainsGeoLocation
+
+!insert (shipment24, address46) into ShipmentContainsPickUpAddress
+!insert (shipment24, address45) into ShipmentContainsDeliveryAddress
+
+!new Customer('customer17')
+!customer17.id := 'C009'
+!customer17.name := 'Ingrid Jansen'
+!customer17.twitterUserName := '@ingrid_jan'
+
+!insert (customer17, shipment23) into CustomerConsistsOfShipment
+!insert (customer17, shipment24) into CustomerConsistsOfShipment
+
+!new Driver('driver20')
+!driver20.id := 'D011'
+!driver20.name := 'Tomislav Kovac'
+
+!insert (driver20, shipment23) into DriverShipment
+
+!new Station('station16')
+!insert (station16, shipment23) into StationShipment
+!insert (station16, shipment24) into StationShipment
+!insert (station16, driver20) into StationContainsDriver
+
+!new Driver('driver21')
+!driver21.id := 'D012'
+!driver21.name := 'Maria Andrade'
+
+!new Station('station17')
+!insert (station17, driver21) into StationContainsDriver

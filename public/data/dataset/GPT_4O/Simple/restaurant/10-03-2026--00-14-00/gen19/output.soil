@@ -1,0 +1,114 @@
+!new Restaurant('restaurant19')
+!restaurant19.name := 'Nebula Nosh'
+
+!new Owner('owner38')
+!owner38.name := 'Orion Star'
+!owner38.percentageShares := 60
+!insert (restaurant19, owner38) into RestaurantOwner
+
+!new Owner('owner39')
+!owner39.name := 'Luna Eclipse'
+!owner39.percentageShares := 40
+!insert (restaurant19, owner39) into RestaurantOwner
+
+!new Table('table54')
+!table54.number := 54
+!table54.description := 'Celestial Stand'
+!table54.capacity := 4
+
+!new Table('table55')
+!table55.number := 55
+!table55.description := 'Comets Belt'
+!table55.capacity := 25
+
+!new RegularCustomer('customer20')
+!customer20.name := 'Stella Moonbeam'
+!customer20.prefferedLanguage := #German
+
+!new Waiter('waiter21')
+!waiter21.name := 'Galaxy Swift'
+!waiter21.dateOfBirth := Date('1989-05-05')
+!waiter21.phoneNumber := '555-3421'
+!waiter21.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter19')
+!headwaiter19.name := 'Sol Celestia'
+!headwaiter19.dateOfBirth := Date('1984-11-15')
+!headwaiter19.phoneNumber := '555-6789'
+
+!insert (headwaiter19, waiter21) into HeadWaiterWaiter
+
+!new Individual('reservation35')
+!reservation35.time := Time('20:15')
+!reservation35.date := Date('2024-10-25')
+!reservation35.numberPeople := 2
+!reservation35.name := 'Stella Moonbeam'
+!reservation35.phoneNumber := '555-9876'
+!reservation35.number := 35
+!reservation35.seating := #Inside
+!reservation35.smoking := #NonSmoking
+!insert (restaurant19, reservation35) into RestaurantReservation
+!insert (reservation35, customer20) into ReservationCustomer
+!insert (reservation35, waiter21) into ReservationWaiter
+!insert (reservation35, table54) into ReservationTable
+
+!new Banquet('reservation36')
+!reservation36.time := Time('21:00')
+!reservation36.date := Date('2023-12-31')
+!reservation36.numberPeople := 50
+!reservation36.name := 'Ecliptic Celebration'
+!reservation36.phoneNumber := '555-5656'
+!reservation36.number := 36
+!reservation36.groupName := 'Lunar League'
+!reservation36.paymentMethod := #Cash
+!reservation36.busService := true
+!insert (restaurant19, reservation36) into RestaurantReservation
+!insert (reservation36, table55) into ReservationTable
+
+!new Table('tableExtra13')
+!tableExtra13.number := 56
+!tableExtra13.description := 'Starlight Stage'
+!tableExtra13.capacity := 30
+!insert (reservation36, tableExtra13) into ReservationTable
+!insert (reservation36, waiter21) into ReservationWaiter
+
+!new BusDriver('busdriver13')
+!busdriver13.name := 'Haley Nebula'
+!busdriver13.dateOfBirth := Date('1965-09-09')
+!busdriver13.phoneNumber := '555-4545'
+!busdriver13.driverLicenseNr := 'DL789012'
+!insert (reservation36, busdriver13) into BanquetBusDriver
+
+!new ItemOrder('itemOrder19')
+!itemOrder19.time := Time('20:45')
+!insert (reservation35, itemOrder19) into ReservationItemOrdered
+
+!new MenuItem('menuItem19')
+!menuItem19.description := 'Cosmic Crepes'
+!menuItem19.prepTime := 20.0
+!menuItem19.classification := #Dessert
+!insert (itemOrder19, menuItem19) into ItemOrderMenuItem
+
+!new FoodItem('foodItem19')
+!foodItem19.number := 119
+!foodItem19.description := 'French Crepes'
+!foodItem19.purchaseFlag := true
+!foodItem19.unit := #Sheet
+!insert (menuItem19, foodItem19) into MenuItemFoodItem
+
+!new Allergen('allergen19')
+!allergen19.type := #Gluten
+!insert (foodItem19, allergen19) into FoodItemAllergen
+
+!new Cook('cook19')
+!cook19.name := 'Aurora Bright'
+!cook19.dateOfBirth := Date('1993-03-03')
+!cook19.phoneNumber := '555-1212'
+!cook19.yearsOfExperience := 6
+
+!new Chef('chef19')
+!chef19.name := 'Meteor Flash'
+!chef19.dateOfBirth := Date('1986-07-30')
+!chef19.phoneNumber := '555-3434'
+!insert (menuItem19, chef19) into MenuItemChef
+!insert (chef19, cook19) into ChefCook

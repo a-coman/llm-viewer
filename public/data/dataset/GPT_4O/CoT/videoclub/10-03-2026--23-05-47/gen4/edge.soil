@@ -1,0 +1,32 @@
+!new Client('client25')
+!client25.clientId := 999
+!client25.isSuspended := false
+
+!new Rental('rental40')
+!rental40.date := Date('2023-12-05')
+
+!new Movie('movie32')
+!movie32.title := 'Echoes of the Ancients'
+!movie32.availableCopies := 2
+!movie32.genre := #Action
+
+!new Movie('movie33')
+!movie33.title := 'Last Laugh Chronicles'
+!movie33.availableCopies := 10
+!movie33.genre := #Comedy
+
+!new Actor('actor61')
+!actor61.name := 'Amir Khan'
+
+!new Actor('actor62')
+!actor62.name := 'Sofia Lopez'
+
+!insert (client25, rental40) into ClientRental
+
+!insert (rental40, movie32) into RentalCassette
+!insert (rental40, movie33) into RentalCassette
+
+!insert (movie32, actor61) into CassetteActor
+
+!insert (movie33, actor61) into CassetteActor
+!insert (movie33, actor62) into CassetteActor

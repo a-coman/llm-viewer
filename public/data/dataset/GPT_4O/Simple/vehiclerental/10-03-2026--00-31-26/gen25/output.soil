@@ -1,0 +1,70 @@
+!new RentalOffice('office25')
+!office25.name := 'Midtown Rentals'
+!office25.number := 2525
+!office25.address := '300 Midtown Ave, Atlanta, GA'
+
+!new Truck('truck49')
+!truck49.id := 549
+!truck49.registrationState := #FL
+!truck49.licensePlateNumber := 'FL-TRK-4590'
+!truck49.vehicleTypeCode := #COVERED_TRAILER
+!truck49.registrationLastMaintenanceDate := Date('2023-02-25')
+!truck49.expirationDate := Date('2024-02-25')
+!truck49.odometerReading := 14500
+!truck49.gasTankCapacity := 30.5
+!truck49.workingRadio := true
+!truck49.mileage := 21
+
+!new Individual('individual25')
+!individual25.name := 'Ava Green'
+!individual25.address := '567 Park Blvd, Savannah, GA'
+!individual25.poorRisk := false
+!individual25.homePhone := '555-2929'
+!individual25.driverLicenseState := #FL
+!individual25.driverLicenseNumber := 30495847
+!individual25.driverLicenseExpirationDate := Date('2026-09-15')
+
+!new RentalAgreement('agreement49')
+!agreement49.number := 3049
+!agreement49.rentalDate := Date('2023-12-20')
+!agreement49.anticipatedDuration := 7
+!agreement49.depositPaid := 280.0
+!agreement49.quotedDailyRate := 70.00
+!agreement49.quotedRatePerMile := 0.55
+
+!new Truck('truck50')
+!truck50.id := 550
+!truck50.registrationState := #DE
+!truck50.licensePlateNumber := 'DE-TRK-7143'
+!truck50.vehicleTypeCode := #TRUCK24
+!truck50.registrationLastMaintenanceDate := Date('2023-11-02')
+!truck50.expirationDate := Date('2025-11-02')
+!truck50.odometerReading := 19000
+!truck50.gasTankCapacity := 29.0
+!truck50.workingRadio := false
+!truck50.mileage := 20
+
+!new Company('company25')
+!company25.name := 'Peach State Haulers'
+!company25.address := '123 Peach St, Augusta, GA'
+!company25.poorRisk := true
+!company25.idNumber := 543210
+
+!new RentalAgreement('agreement50')
+!agreement50.number := 3050
+!agreement50.rentalDate := Date('2024-01-07')
+!agreement50.anticipatedDuration := 9
+!agreement50.depositPaid := 400.0
+!agreement50.quotedDailyRate := 85.00
+!agreement50.quotedRatePerMile := 0.62
+
+!insert (office25, truck49) into RentalOfficeVehicle
+!insert (office25, truck50) into RentalOfficeVehicle
+!insert (office25, agreement49) into RentalOfficeRentalAgreementOrigin
+!insert (office25, agreement49) into RentalOfficeRentalAgreementDrop
+!insert (office25, agreement50) into RentalOfficeRentalAgreementOrigin
+!insert (office25, agreement50) into RentalOfficeRentalAgreementDrop
+!insert (agreement49, truck49) into RentalAgreementVehicle
+!insert (agreement49, individual25) into RentalAgreementCustomer
+!insert (agreement50, truck50) into RentalAgreementVehicle
+!insert (agreement50, company25) into RentalAgreementCustomer

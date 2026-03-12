@@ -1,0 +1,69 @@
+!new Restaurant('restaurant17')
+!restaurant17.name := 'World Flavors'
+
+!new Owner('owner35')
+!owner35.name := 'Chiara Rossi'
+!owner35.percentageShares := 55
+
+!new Owner('owner36')
+!owner36.name := 'Akio Tanaka'
+!owner36.percentageShares := 45
+
+!insert (restaurant17, owner35) into RestaurantOwner
+!insert (restaurant17, owner36) into RestaurantOwner
+
+!new Banquet('banquet14')
+!banquet14.date := Date('2023-09-15')
+!banquet14.time := Time('12:00')
+!banquet14.groupName := 'International Language Club'
+!banquet14.numberPeople := 40
+!banquet14.paymentMethod := #Cash
+
+!insert (restaurant17, banquet14) into RestaurantReservation
+
+!new Table('table44')
+!table44.number := 501
+!table44.description := 'Elegant long table'
+!table44.capacity := 18
+
+!new Table('table45')
+!table45.number := 502
+!table45.description := 'Charming café table'
+!table45.capacity := 8
+
+!new Table('table46')
+!table46.number := 503
+!table46.description := 'Cozy corner table'
+!table46.capacity := 6
+
+!insert (banquet14, table44) into ReservationTable
+!insert (banquet14, table45) into ReservationTable
+!insert (banquet14, table46) into ReservationTable
+
+!new BusDriver('busdriver14')
+!busdriver14.name := 'Leila Abadi'
+
+!insert (banquet14, busdriver14) into BanquetBusDriver
+
+!new Waiter('waiter29')
+!waiter29.name := 'Elena Garcia'
+!waiter29.dateOfBirth := Date('1985-01-01')     -- Arbitrary date of birth
+!waiter29.phoneNumber := '1234567890'           -- Arbitrary phone number
+!waiter29.spokenLanguage := #English
+
+!new Waiter('waiter30')
+!waiter30.name := 'Sanjay Patel'
+!waiter30.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter30.phoneNumber := '0987654321'           -- Arbitrary phone number
+!waiter30.spokenLanguage := #English
+
+!new Waiter('waiter31')
+!waiter31.name := 'Amelie Dupont'
+!waiter31.dateOfBirth := Date('1997-01-01')     -- Arbitrary date of birth
+!waiter31.phoneNumber := '1122334455'           -- Arbitrary phone number
+!waiter31.spokenLanguage := #English
+
+!insert (banquet14, waiter29) into ReservationWaiter
+!insert (banquet14, waiter30) into ReservationWaiter
+!insert (banquet14, waiter31) into ReservationWaiter
+

@@ -1,0 +1,86 @@
+!new AddressBook('GlobalBusinessNetworkAddressBook')
+
+!new Company('WorldCorp')
+!WorldCorp.name := 'World Corp'
+!WorldCorp.phone := '+1-800-555-0198'
+!WorldCorp.website := 'www.worldcorp.com'
+!WorldCorp.email := 'contact@worldcorp.com'
+!WorldCorp.industry := 'Technology'
+
+!new Address('WorldCorpAddress1')
+!WorldCorpAddress1.city := 'New York'
+!WorldCorpAddress1.houseNr := '789'
+!WorldCorpAddress1.street := 'Broad Street'
+!insert (WorldCorp, WorldCorpAddress1) into ContactContainsAddress
+
+!new Note('WorldCorpNote1')
+!WorldCorpNote1.author := 'John Smith'
+!WorldCorpNote1.time := Date('2023-03-15')
+!WorldCorpNote1.type := #MEETING
+!WorldCorpNote1.comment := 'Initial meeting to discuss potential partnership.'
+!insert (WorldCorp, WorldCorpNote1) into ContactContainsNote
+
+!new Note('WorldCorpNote2')
+!WorldCorpNote2.author := 'Jane Doe'
+!WorldCorpNote2.time := Date('2023-04-01')
+!WorldCorpNote2.type := #CALL
+!WorldCorpNote2.comment := 'Follow-up call regarding merger details.'
+!insert (WorldCorp, WorldCorpNote2) into ContactContainsNote
+
+!new Note('WorldCorpNote3')
+!WorldCorpNote3.author := 'Michael Chan'
+!WorldCorpNote3.time := Date('2023-05-10')
+!WorldCorpNote3.type := #EMAIL
+!WorldCorpNote3.comment := 'Email correspondence about project timelines.'
+!insert (WorldCorp, WorldCorpNote3) into ContactContainsNote
+
+!new Person('JaneDoe')
+!JaneDoe.name := 'Jane Doe'
+!JaneDoe.phone := '+44-20-7946-0958'
+!JaneDoe.email := 'jane.doe@globalnetwork.com'
+!JaneDoe.title := 'Senior Project Manager'
+
+!new Address('JaneDoeAddress1')
+!JaneDoeAddress1.city := 'London'
+!JaneDoeAddress1.houseNr := '12'
+!JaneDoeAddress1.street := 'Fleet Street'
+!insert (JaneDoe, JaneDoeAddress1) into ContactContainsAddress
+
+!new Company('InnovateLtd')
+!InnovateLtd.name := 'Innovate Ltd'
+!InnovateLtd.phone := '+49-89-123456'
+!InnovateLtd.website := 'www.innovateltd.de'
+!InnovateLtd.email := 'info@innovateltd.de'
+!InnovateLtd.industry := 'Engineering'
+
+!new Address('InnovateLtdAddress1')
+!InnovateLtdAddress1.city := 'Munich'
+!InnovateLtdAddress1.houseNr := '101'
+!InnovateLtdAddress1.street := 'Beethovenstrasse'
+!insert (InnovateLtd, InnovateLtdAddress1) into ContactContainsAddress
+
+!new Note('InnovateLtdNote1')
+!InnovateLtdNote1.author := 'Linda Bernard'
+!InnovateLtdNote1.time := Date('2023-02-28')
+!InnovateLtdNote1.type := #MEETING
+!InnovateLtdNote1.comment := 'Reviewed technical specifications for joint venture.'
+!insert (InnovateLtd, InnovateLtdNote1) into ContactContainsNote
+
+!new Relationship('WorldCorpInnovateLtdSubdivision')
+!WorldCorpInnovateLtdSubdivision.type := #SUBDIVISION
+!insert (WorldCorpInnovateLtdSubdivision, InnovateLtd) into RelationshipToContact
+!insert (WorldCorp, WorldCorpInnovateLtdSubdivision) into ContactToRelationship
+
+!new Relationship('JaneDoeWorldCorpCoworker')
+!JaneDoeWorldCorpCoworker.type := #COWORKER
+!insert (JaneDoeWorldCorpCoworker, WorldCorp) into RelationshipToContact
+!insert (JaneDoe, JaneDoeWorldCorpCoworker) into ContactToRelationship
+
+!new Relationship('WorldCorpJaneDoeBoss')
+!WorldCorpJaneDoeBoss.type := #BOSS
+!insert (WorldCorpJaneDoeBoss, JaneDoe) into RelationshipToContact
+!insert (WorldCorp, WorldCorpJaneDoeBoss) into ContactToRelationship
+
+!insert (GlobalBusinessNetworkAddressBook, WorldCorp) into AddressBookMadeOfContact
+!insert (GlobalBusinessNetworkAddressBook, JaneDoe) into AddressBookMadeOfContact
+!insert (GlobalBusinessNetworkAddressBook, InnovateLtd) into AddressBookMadeOfContact

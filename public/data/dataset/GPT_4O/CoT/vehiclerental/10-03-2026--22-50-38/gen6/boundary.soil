@@ -1,0 +1,36 @@
+!new RentalOffice('officeUrbanFleetRentals')
+!officeUrbanFleetRentals.name := 'Urban Fleet Rentals'
+!officeUrbanFleetRentals.number := 3001
+!officeUrbanFleetRentals.address := '3001 Metropolis Drive, Atlanta, GA'
+
+!new Truck('truck50')
+!truck50.id := 50
+!truck50.registrationState := #CA
+!truck50.licensePlateNumber := 'GA-MID-050'
+!truck50.vehicleTypeCode := #TRUCK
+!truck50.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck50.expirationDate := Date('2024-06-15')
+!truck50.odometerReading := 2000
+!truck50.gasTankCapacity := 65.0
+!truck50.workingRadio := true
+!truck50.mileage := 2000
+
+!new RentalAgreement('rentalAgreement250')
+!rentalAgreement250.number := 250
+!rentalAgreement250.rentalDate := Date('2023-12-25')
+!rentalAgreement250.anticipatedDuration := 3
+!rentalAgreement250.depositPaid := 100.0
+!rentalAgreement250.quotedDailyRate := 49.99
+!rentalAgreement250.quotedRatePerMile := 0.05
+
+!new Company('companyMetroMoversLLC')
+!companyMetroMoversLLC.name := 'Metro Movers LLC'
+!companyMetroMoversLLC.address := '71 Peachtree Plaza, Atlanta, GA'
+!companyMetroMoversLLC.poorRisk := true
+!companyMetroMoversLLC.idNumber := 123456789
+
+!insert (officeUrbanFleetRentals, truck50) into RentalOfficeVehicle
+!insert (officeUrbanFleetRentals, rentalAgreement250) into RentalOfficeRentalAgreementOrigin
+!insert (officeUrbanFleetRentals, rentalAgreement250) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement250, truck50) into RentalAgreementVehicle
+!insert (rentalAgreement250, companyMetroMoversLLC) into RentalAgreementCustomer

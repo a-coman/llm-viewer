@@ -1,0 +1,279 @@
+!new Bank('sumitomoMitsuiBankingCorp')
+!sumitomoMitsuiBankingCorp.country := 'Japan'
+!sumitomoMitsuiBankingCorp.name := 'Sumitomo Mitsui Banking Corporation'
+!sumitomoMitsuiBankingCorp.bic := 'SMBCJPJTXXX'
+
+!new Account('account6_1')
+!account6_1.iban := 'JP668123455678987654321'
+!account6_1.balance := 12000
+
+!new Account('account6_2')
+!account6_2.iban := 'JP668123455678123456789'
+!account6_2.balance := 55000
+
+!new Account('account6_3')
+!account6_3.iban := 'JP668123455678234567891'
+!account6_3.balance := 0
+
+!new Account('account6_4')
+!account6_4.iban := 'JP668123455678345678912'
+!account6_4.balance := 20000
+
+!new Person('harutoTanaka')
+!harutoTanaka.firstName := 'Haruto'
+!harutoTanaka.lastName := 'Tanaka'
+!harutoTanaka.age := 39
+
+!new Person('sakuraYamada')
+!sakuraYamada.firstName := 'Sakura'
+!sakuraYamada.lastName := 'Yamada'
+!sakuraYamada.age := 27
+
+!new Person('kenjiSaito')
+!kenjiSaito.firstName := 'Kenji'
+!kenjiSaito.lastName := 'Saito'
+!kenjiSaito.age := 51
+
+!new Person('aikoFujimoto')
+!aikoFujimoto.firstName := 'Aiko'
+!aikoFujimoto.lastName := 'Fujimoto'
+!aikoFujimoto.age := 30
+
+!insert (sumitomoMitsuiBankingCorp, account6_1) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_2) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_3) into AccountOfBanks
+!insert (sumitomoMitsuiBankingCorp, account6_4) into AccountOfBanks
+
+!insert (harutoTanaka, account6_1) into Ownership
+
+!insert (sakuraYamada, account6_2) into Ownership
+!insert (kenjiSaito, account6_2) into Ownership
+
+!insert (aikoFujimoto, account6_3) into Ownership
+!insert (harutoTanaka, account6_3) into Ownership
+
+!insert (kenjiSaito, account6_4) into Ownership
+
+!insert (harutoTanaka, account6_1) into Use
+!insert (sakuraYamada, account6_1) into Use
+
+!insert (kenjiSaito, account6_2) into Use
+
+!insert (aikoFujimoto, account6_3) into Use
+!insert (harutoTanaka, account6_3) into Use
+!insert (kenjiSaito, account6_3) into Use
+
+!insert (kenjiSaito, account6_4) into Use
+!insert (sakuraYamada, account6_4) into Use
+
+!new Bank('sakuraBank')
+!sakuraBank.country := 'Japan'
+!sakuraBank.name := 'Sakura Bank'
+!sakuraBank.bic := 'SAKRBANKJP01'
+
+!new Account('account7')
+!account7.iban := 'JP32SAKR0000009876543210'
+!account7.balance := 10000000
+
+!new Person('takashiYamada')
+!takashiYamada.firstName := 'Takashi'
+!takashiYamada.lastName := 'Yamada'
+!takashiYamada.age := 45
+
+!new Person('ayumiTanaka')
+!ayumiTanaka.firstName := 'Ayumi'
+!ayumiTanaka.lastName := 'Tanaka'
+!ayumiTanaka.age := 20
+
+!new Person('kenjiHayashi')
+!kenjiHayashi.firstName := 'Kenji'
+!kenjiHayashi.lastName := 'Hayashi'
+!kenjiHayashi.age := 30
+
+!insert (sakuraBank, account7) into AccountOfBanks
+
+!insert (takashiYamada, account7) into Ownership
+
+!insert (takashiYamada, account7) into Use
+!insert (ayumiTanaka, account7) into Use
+!insert (kenjiHayashi, account7) into Use
+
+!new Bank('bankHorizon')
+!bankHorizon.country := 'Australia'
+!bankHorizon.name := 'Horizon National Bank'
+!bankHorizon.bic := 'HNBAU33'
+
+!new Person('emmaTakahashi')
+!emmaTakahashi.firstName := 'Emma'
+!emmaTakahashi.lastName := 'Takahashi'
+!emmaTakahashi.age := 70
+
+!new Person('akiraTakahashi')
+!akiraTakahashi.firstName := 'Akira'
+!akiraTakahashi.lastName := 'Takahashi'
+!akiraTakahashi.age := 48
+
+!new Person('keikoTakahashi')
+!keikoTakahashi.firstName := 'Keiko'
+!keikoTakahashi.lastName := 'Takahashi'
+!keikoTakahashi.age := 25
+
+!new Account('account8_3')
+!account8_3.iban := 'AU62 1234 5678 9012'
+!account8_3.balance := 25000
+
+!new Account('account8_4')
+!account8_4.iban := 'AU56 8765 4321 2345'
+!account8_4.balance := 0
+
+!insert (bankHorizon, account8_3) into AccountOfBanks
+!insert (bankHorizon, account8_4) into AccountOfBanks
+
+!insert (emmaTakahashi, account8_3) into Ownership
+!insert (akiraTakahashi, account8_3) into Ownership
+
+!insert (akiraTakahashi, account8_4) into Ownership
+!insert (keikoTakahashi, account8_4) into Ownership
+
+!insert (emmaTakahashi, account8_3) into Use
+!insert (akiraTakahashi, account8_3) into Use
+!insert (keikoTakahashi, account8_3) into Use
+
+!insert (akiraTakahashi, account8_4) into Use
+
+!new Bank('bancoDoSol')
+!bancoDoSol.country := 'Brazil'
+!bancoDoSol.name := 'Banco do Sol'
+!bancoDoSol.bic := 'BDOLSBRIX'
+
+!new Bank('orientFinanceHub')
+!orientFinanceHub.country := 'Singapore'
+!orientFinanceHub.name := 'Orient Finance Hub'
+!orientFinanceHub.bic := 'ORFSINXX'
+
+!new Person('carlosSouza')
+!carlosSouza.firstName := 'Carlos'
+!carlosSouza.lastName := 'Souza'
+!carlosSouza.age := 30
+
+!new Person('meiWong')
+!meiWong.firstName := 'Mei'
+!meiWong.lastName := 'Wong'
+!meiWong.age := 45
+
+!new Person('hiroTanaka')
+!hiroTanaka.firstName := 'Hiro'
+!hiroTanaka.lastName := 'Tanaka'
+!hiroTanaka.age := 22
+
+!new Account('account10_1')
+!account10_1.iban := 'BR12-3456-7890-0001'
+!account10_1.balance := 100
+
+!new Account('account10_2')
+!account10_2.iban := 'SG45-6789-0123-0045'
+!account10_2.balance := 5000
+
+!new Account('account10_3')
+!account10_3.iban := 'SG78-9012-3456-0789'
+!account10_3.balance := 50000
+
+!insert (bancoDoSol, account10_1) into AccountOfBanks
+!insert (orientFinanceHub, account10_2) into AccountOfBanks
+!insert (orientFinanceHub, account10_3) into AccountOfBanks
+
+!insert (carlosSouza, account10_1) into Ownership
+!insert (hiroTanaka, account10_1) into Ownership
+
+!insert (meiWong, account10_2) into Ownership
+
+!insert (meiWong, account10_3) into Ownership
+!insert (carlosSouza, account10_3) into Ownership
+
+!insert (hiroTanaka, account10_1) into Use
+!insert (meiWong, account10_1) into Use
+
+!insert (carlosSouza, account10_2) into Use
+
+!insert (meiWong, account10_3) into Use
+!insert (carlosSouza, account10_3) into Use
+
+!new Bank('deutscheFinanzbank')
+!deutscheFinanzbank.country := 'Germany'
+!deutscheFinanzbank.name := 'Deutsche Finanzbank'
+!deutscheFinanzbank.bic := 'DFGM54321'
+
+!new Bank('ubuntuBank')
+!ubuntuBank.country := 'South Africa'
+!ubuntuBank.name := 'Ubuntu Bank'
+!ubuntuBank.bic := 'UBTZA99082'
+
+!new Person('hannahMuller')
+!hannahMuller.firstName := 'Hannah'
+!hannahMuller.lastName := 'Müller'
+!hannahMuller.age := 45
+
+!new Person('davidOsei')
+!davidOsei.firstName := 'David'
+!davidOsei.lastName := 'Osei'
+!davidOsei.age := 28
+
+!new Person('ayeshaKhan')
+!ayeshaKhan.firstName := 'Ayesha'
+!ayeshaKhan.lastName := 'Khan'
+!ayeshaKhan.age := 39
+
+!new Person('jurgenSchmidt')
+!jurgenSchmidt.firstName := 'Jürgen'
+!jurgenSchmidt.lastName := 'Schmidt'
+!jurgenSchmidt.age := 52
+
+!new Person('zaneleMbeki')
+!zaneleMbeki.firstName := 'Zanele'
+!zaneleMbeki.lastName := 'Mbeki'
+!zaneleMbeki.age := 33
+
+!new Account('account11_1')
+!account11_1.iban := 'DE4455667788E'
+!account11_1.balance := 15000
+
+!new Account('account11_2')
+!account11_2.iban := 'ZA1239876543F'
+!account11_2.balance := 2300
+
+!new Account('account11_3')
+!account11_3.iban := 'DE9988776655G'
+!account11_3.balance := 10500
+
+!new Account('account11_4')
+!account11_4.iban := 'ZA8765432190H'
+!account11_4.balance := 500
+
+!insert (deutscheFinanzbank, account11_1) into AccountOfBanks
+!insert (ubuntuBank, account11_2) into AccountOfBanks
+!insert (deutscheFinanzbank, account11_3) into AccountOfBanks
+!insert (ubuntuBank, account11_4) into AccountOfBanks
+
+!insert (hannahMuller, account11_1) into Ownership
+
+!insert (davidOsei, account11_2) into Ownership
+!insert (zaneleMbeki, account11_2) into Ownership
+
+!insert (jurgenSchmidt, account11_3) into Ownership
+!insert (ayeshaKhan, account11_3) into Ownership
+
+!insert (zaneleMbeki, account11_4) into Ownership
+
+!insert (hannahMuller, account11_1) into Use
+!insert (jurgenSchmidt, account11_1) into Use
+
+!insert (davidOsei, account11_2) into Use
+!insert (ayeshaKhan, account11_2) into Use
+
+!insert (jurgenSchmidt, account11_3) into Use
+!insert (hannahMuller, account11_3) into Use
+!insert (ayeshaKhan, account11_3) into Use
+
+!insert (zaneleMbeki, account11_4) into Use
+!insert (davidOsei, account11_4) into Use
+

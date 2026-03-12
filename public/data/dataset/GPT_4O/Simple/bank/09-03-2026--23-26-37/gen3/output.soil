@@ -1,0 +1,50 @@
+!new Bank('bank5')
+!bank5.country := 'Australia'
+!bank5.name := 'Commonwealth Bank'
+!bank5.bic := 'CTBAAU2S'
+
+!new Bank('bank6')
+!bank6.country := 'India'
+!bank6.name := 'State Bank of India'
+!bank6.bic := 'SBININBB'
+
+!new Account('account7')
+!account7.iban := 'AU12345678901234567890'
+!account7.balance := 9000
+
+!new Account('account8')
+!account8.iban := 'IN09876543210987654321'
+!account8.balance := 3500
+
+!new Account('account9')
+!account9.iban := 'AU09876543211234567890'
+!account9.balance := 800
+
+!new Person('person8')
+!person8.firstName := 'Olivia'
+!person8.lastName := 'Taylor'
+!person8.age := 37
+
+!new Person('person9')
+!person9.firstName := 'Raj'
+!person9.lastName := 'Kapoor'
+!person9.age := 50
+
+!new Person('person10')
+!person10.firstName := 'Sophia'
+!person10.lastName := 'Green'
+!person10.age := 23
+
+!insert (person8, account7) into Ownership
+!insert (person9, account8) into Ownership
+!insert (person9, account9) into Ownership
+!insert (person10, account9) into Ownership
+
+!insert (person8, account7) into Use
+!insert (person8, account8) into Use
+!insert (person9, account8) into Use
+!insert (person10, account7) into Use
+
+!insert (bank5, account7) into AccountOfBanks
+!insert (bank6, account8) into AccountOfBanks
+!insert (bank5, account9) into AccountOfBanks

@@ -1,0 +1,37 @@
+!new Expense('boundaryCaseExpense')
+!boundaryCaseExpense.amount := 250.00
+!boundaryCaseExpense.startDate := Date('2023-07-01')
+!boundaryCaseExpense.endDate := Date('2023-07-31')
+
+!new Bill('groceryShoppingBill')
+!groceryShoppingBill.amount := 100.00
+!groceryShoppingBill.category := 'Grocery Shopping'
+!groceryShoppingBill.date := Date('2023-07-05')
+!groceryShoppingBill.paymentMethod := #CASH
+!groceryShoppingBill.status := #VERIFIED
+
+!new Bill('internetSubscriptionBill')
+!internetSubscriptionBill.amount := 150.00
+!internetSubscriptionBill.category := 'Internet Subscription'
+!internetSubscriptionBill.date := Date('2023-07-15')
+!internetSubscriptionBill.paymentMethod := #CREDIT_CARD
+!internetSubscriptionBill.status := #REFUNDED
+
+!new Currency('currencyMXN')
+!currencyMXN.name := 'Mexican Peso'
+!currencyMXN.abbreviation := 'MXN'
+
+!insert (groceryShoppingBill, currencyMXN) into BillCurrency
+!insert (internetSubscriptionBill, currencyMXN) into BillCurrency
+
+!insert (boundaryCaseExpense, groceryShoppingBill) into ExpenseContainsBills
+!insert (boundaryCaseExpense, internetSubscriptionBill) into ExpenseContainsBills
+
+!new Comment('groceryComment')
+!groceryComment.text := 'Grocery bill verified promptly upon purchase.'
+
+!new Comment('subscriptionComment')
+!subscriptionComment.text := 'Subscription fee was refunded due to service outage, resolved swiftly.'
+
+!insert (boundaryCaseExpense, groceryComment) into ExpenseComment
+!insert (boundaryCaseExpense, subscriptionComment) into ExpenseComment

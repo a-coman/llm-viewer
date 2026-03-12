@@ -1,0 +1,64 @@
+!new Driver('driver42')
+!driver42.id := 'D042'
+!driver42.name := 'Stephen Strange'
+
+!new Driver('driver43')
+!driver43.id := 'D043'
+!driver43.name := 'Wong'
+
+!new Shipment('shipment45')
+!shipment45.id := 'SHP12389'
+!shipment45.status := #DELIVERED
+
+!new Shipment('shipment46')
+!shipment46.id := 'SHP12390'
+!shipment46.status := #ASSIGNED
+
+!new Address('address45')
+!address45.text := '4343 Mystic Arts Ln, Kamar-Taj'
+
+!new Address('address46')
+!address46.text := '4444 Sanctum Sanctorum, Bleecker St'
+
+!new GeoLocation('geoLocation45')
+!geoLocation45.latitude := 27.7172
+!geoLocation45.longitude := 85.3240
+
+!new GeoLocation('geoLocation46')
+!geoLocation46.latitude := 40.7282
+!geoLocation46.longitude := -73.9985
+
+!insert (address45, geoLocation45) into AddressContainsGeoLocation
+!insert (address46, geoLocation46) into AddressContainsGeoLocation
+
+!new Customer('customer45')
+!customer45.id := 'CUST045'
+!customer45.name := 'Mordo'
+!customer45.twitterUserName := '@mastermordo'
+
+!new Customer('customer46')
+!customer46.id := 'CUST046'
+!customer46.name := 'Christine Palmer'
+!customer46.twitterUserName := '@palmercare'
+
+!new Station('station23')
+
+!insert (station23, customer45) into StationContainsCustomer
+!insert (station23, customer46) into StationContainsCustomer
+
+!insert (station23, shipment45) into StationShipment
+!insert (station23, shipment46) into StationShipment
+
+!insert (station23, driver42) into StationContainsDriver
+!insert (station23, driver43) into StationContainsDriver
+
+!insert (shipment45, address45) into ShipmentContainsPickUpAddress
+!insert (shipment45, address46) into ShipmentContainsDeliveryAddress
+
+!insert (shipment46, address46) into ShipmentContainsPickUpAddress
+!insert (shipment46, address45) into ShipmentContainsDeliveryAddress
+
+!insert (customer45, shipment45) into CustomerConsistsOfShipment
+!insert (customer46, shipment46) into CustomerConsistsOfShipment
+
+!insert (driver42, shipment46) into DriverShipment

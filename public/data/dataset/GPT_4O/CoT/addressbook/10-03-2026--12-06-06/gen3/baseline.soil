@@ -1,0 +1,117 @@
+!new AddressBook('IntercontinentalContactsDirectory')
+
+!new Person('PriyaNair')
+!PriyaNair.name := 'Priya Nair'
+!PriyaNair.phone := '+91-98123-45678'
+!PriyaNair.website := 'www.priyanair.in'
+!PriyaNair.email := 'priya.nair@consultant.in'
+!PriyaNair.title := 'Business Analyst'
+
+!new Address('PriyaNairAddress')
+!PriyaNairAddress.city := 'Mumbai'
+!PriyaNairAddress.houseNr := '23D'
+!PriyaNairAddress.street := 'Laxmi Nagar'
+!insert (PriyaNair, PriyaNairAddress) into ContactContainsAddress
+
+!new Note('PriyaNairNote1')
+!PriyaNairNote1.author := 'Priya Nair'
+!PriyaNairNote1.time := Date('2023-01-05')
+!PriyaNairNote1.type := #CALL
+!PriyaNairNote1.comment := 'Initial client requirement gathering for project "Asha".'
+!insert (PriyaNair, PriyaNairNote1) into ContactContainsNote
+
+!new Company('PacificMineralExploration')
+!PacificMineralExploration.name := 'Pacific Mineral Exploration'
+!PacificMineralExploration.phone := '+61-2-9999-5555'
+!PacificMineralExploration.website := 'www.pacificminerals.com.au'
+!PacificMineralExploration.email := 'info@pacificminerals.com.au'
+!PacificMineralExploration.industry := 'Mining'
+
+!new Address('PacificMineralAddress1')
+!PacificMineralAddress1.city := 'Sydney'
+!PacificMineralAddress1.houseNr := '5'
+!PacificMineralAddress1.street := 'George Street'
+!insert (PacificMineralExploration, PacificMineralAddress1) into ContactContainsAddress
+
+!new Address('PacificMineralAddress2')
+!PacificMineralAddress2.city := 'Perth'
+!PacificMineralAddress2.houseNr := '101'
+!PacificMineralAddress2.street := 'St Georges Terrace'
+!insert (PacificMineralExploration, PacificMineralAddress2) into ContactContainsAddress
+
+!new Note('PacificMineralNote1')
+!PacificMineralNote1.author := 'Li Wei'
+!PacificMineralNote1.time := Date('2023-03-15')
+!PacificMineralNote1.type := #MEETING
+!PacificMineralNote1.comment := 'Annual environmental compliance review meeting.'
+!insert (PacificMineralExploration, PacificMineralNote1) into ContactContainsNote
+
+!new Person('JohanFredriksson')
+!JohanFredriksson.name := 'Johan Fredriksson'
+!JohanFredriksson.phone := '+46-73-400-1112'
+!JohanFredriksson.website := 'www.fredriksolconsulting.se'
+!JohanFredriksson.email := 'johan.fredriksson@intermediate.com'
+!JohanFredriksson.title := 'Financial Advisor'
+
+!new Address('JohanFredrikssonAddress')
+!JohanFredrikssonAddress.city := 'Stockholm'
+!JohanFredrikssonAddress.houseNr := '67'
+!JohanFredrikssonAddress.street := 'Östermalmstorg'
+!insert (JohanFredriksson, JohanFredrikssonAddress) into ContactContainsAddress
+
+!new Note('JohanFredrikssonNote1')
+!JohanFredrikssonNote1.author := 'Johan Fredriksson'
+!JohanFredrikssonNote1.time := Date('2023-09-05')
+!JohanFredrikssonNote1.type := #EMAIL
+!JohanFredrikssonNote1.comment := 'Recommendations for optimizing investment strategies for the next fiscal year.'
+!insert (JohanFredriksson, JohanFredrikssonNote1) into ContactContainsNote
+
+!new Person('MeiLing')
+!MeiLing.name := 'Mei Ling'
+!MeiLing.phone := '+86-10-6655-4422'
+!MeiLing.website := 'www.meilingart.com.cn'
+!MeiLing.email := 'mei.ling@artisticvision.cn'
+!MeiLing.title := 'Creative Director'
+
+!new Address('MeiLingAddress')
+!MeiLingAddress.city := 'Beijing'
+!MeiLingAddress.houseNr := '3-5'
+!MeiLingAddress.street := 'Wangfujing'
+!insert (MeiLing, MeiLingAddress) into ContactContainsAddress
+
+!new Note('MeiLingNote1')
+!MeiLingNote1.author := 'Mei Ling'
+!MeiLingNote1.time := Date('2023-06-20')
+!MeiLingNote1.type := #MEETING
+!MeiLingNote1.comment := 'Brainstorming session for the upcoming digital art exhibition.'
+!insert (MeiLing, MeiLingNote1) into ContactContainsNote
+
+!new Relationship('PriyaToJohanCoworker')
+!PriyaToJohanCoworker.type := #COWORKER
+!insert (PriyaToJohanCoworker, JohanFredriksson) into RelationshipToContact
+!insert (PriyaNair, PriyaToJohanCoworker) into ContactToRelationship
+
+!new Relationship('PriyaToMeiBoss')
+!PriyaToMeiBoss.type := #BOSS
+!insert (PriyaToMeiBoss, MeiLing) into RelationshipToContact
+!insert (PriyaNair, PriyaToMeiBoss) into ContactToRelationship
+
+!new Relationship('JohanToPriyaCoworker')
+!JohanToPriyaCoworker.type := #COWORKER
+!insert (JohanToPriyaCoworker, PriyaNair) into RelationshipToContact
+!insert (JohanFredriksson, JohanToPriyaCoworker) into ContactToRelationship
+
+!new Relationship('JohanToPacificSubdivision')
+!JohanToPacificSubdivision.type := #SUBDIVISION
+!insert (JohanToPacificSubdivision, PacificMineralExploration) into RelationshipToContact
+!insert (JohanFredriksson, JohanToPacificSubdivision) into ContactToRelationship
+
+!new Relationship('MeiToPriyaEmployee')
+!MeiToPriyaEmployee.type := #EMPLOYEE
+!insert (MeiToPriyaEmployee, PriyaNair) into RelationshipToContact
+!insert (MeiLing, MeiToPriyaEmployee) into ContactToRelationship
+
+!insert (IntercontinentalContactsDirectory, PriyaNair) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, PacificMineralExploration) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, JohanFredriksson) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, MeiLing) into AddressBookMadeOfContact

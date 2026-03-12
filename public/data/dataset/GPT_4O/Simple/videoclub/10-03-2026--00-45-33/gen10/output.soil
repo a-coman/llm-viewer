@@ -1,0 +1,47 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client19')
+!client19.clientId := 19
+!client19.isSuspended := false
+
+-- Adding another client with a different suspension status
+!new Client('client20')
+!client20.clientId := 20
+!client20.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental15')
+!rental15.date := Date('2023-10-29')
+
+-- Creating Cassettes and Movies
+!new Movie('movie12')
+!movie12.title := 'Adventure Awaits'
+!movie12.availableCopies := 8
+!movie12.genre := #Action
+
+-- Creating Series
+!new Series('series10')
+!series10.title := 'Historic Legends'
+!series10.availableCopies := 5
+!series10.episode := 10
+
+-- Creating Actors
+!new Actor('actor18')
+!actor18.name := 'Peter Blake'
+
+-- Adding another unique actor
+!new Actor('actor19')
+!actor19.name := 'Anna Grace'
+
+-- Creating associations between Client and Rentals
+!insert (client19, rental15) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental15, movie12) into RentalCassette
+!insert (rental15, series10) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie12, actor18) into CassetteActor
+!insert (series10, actor19) into CassetteActor
+!insert (series10, actor18) into CassetteActor

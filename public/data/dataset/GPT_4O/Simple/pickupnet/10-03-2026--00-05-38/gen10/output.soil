@@ -1,0 +1,59 @@
+!new Driver('driver17')
+!driver17.id := 'D017'
+!driver17.name := 'Oliver Queen'
+
+!new Shipment('shipment19')
+!shipment19.id := 'SHP12363'
+!shipment19.status := #ASSIGNED
+
+!new Shipment('shipment20')
+!shipment20.id := 'SHP12364'
+!shipment20.status := #UNDERWAY
+
+!new Address('address19')
+!address19.text := '1616 Arrow St, Star City'
+
+!new Address('address20')
+!address20.text := '1717 Quiver Rd, Star City'
+
+!new GeoLocation('geoLocation19')
+!geoLocation19.latitude := 38.8951
+!geoLocation19.longitude := -77.0364
+
+!new GeoLocation('geoLocation20')
+!geoLocation20.latitude := 38.8893
+!geoLocation20.longitude := -77.0500
+
+!insert (address19, geoLocation19) into AddressContainsGeoLocation
+!insert (address20, geoLocation20) into AddressContainsGeoLocation
+
+!new Customer('customer19')
+!customer19.id := 'CUST019'
+!customer19.name := 'John Diggle'
+!customer19.twitterUserName := '@johnspartan'
+
+!new Customer('customer20')
+!customer20.id := 'CUST020'
+!customer20.name := 'Felicity Smoak'
+!customer20.twitterUserName := '@overwatch'
+
+!new Station('station10')
+
+!insert (station10, customer19) into StationContainsCustomer
+!insert (station10, customer20) into StationContainsCustomer
+
+!insert (station10, shipment19) into StationShipment
+!insert (station10, shipment20) into StationShipment
+
+!insert (station10, driver17) into StationContainsDriver
+
+!insert (shipment19, address19) into ShipmentContainsPickUpAddress
+!insert (shipment19, address20) into ShipmentContainsDeliveryAddress
+
+!insert (shipment20, address20) into ShipmentContainsPickUpAddress
+!insert (shipment20, address19) into ShipmentContainsDeliveryAddress
+
+!insert (customer19, shipment19) into CustomerConsistsOfShipment
+!insert (customer20, shipment20) into CustomerConsistsOfShipment
+
+!insert (driver17, shipment19) into DriverShipment

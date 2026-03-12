@@ -1,0 +1,128 @@
+!new Club('clubBD')
+!clubBD.name := 'Savannah Lions FC'
+!clubBD.homeGround := "Lion's Roar Stadium, Accra"
+!clubBD.chairman := 'Kwame Mensah'
+
+!new Club('clubBE')
+!clubBE.name := 'Riverine Sharks FC'
+!clubBE.homeGround := 'Shark Tank Arena, Lagos'
+!clubBE.chairman := 'Funmi Adebayo'
+
+!new Team('teamBD')
+!teamBD.name := 'Lion Cubs'
+
+!new Team('teamBE')
+!teamBE.name := 'Sharklings'
+
+!insert (clubBD, teamBD) into ClubTeam
+!insert (clubBE, teamBE) into ClubTeam
+
+!new Player('player63')
+!player63.name := 'Kofi Aidoo'
+!player63.age := 20
+!player63.bestFoot := #LEFT
+!player63.phoneNumber := '+233 201 123 456'
+
+!new Player('player64')
+!player64.name := 'Chika Okeke'
+!player64.age := 23
+!player64.bestFoot := #RIGHT
+!player64.phoneNumber := '+234 701 678 910'
+
+!insert (teamBD, player63) into TeamPlayer
+!insert (teamBE, player64) into TeamPlayer
+
+!new Position('position100')
+!position100.positionName := #MIDFIELDER
+
+!new Position('position109')
+!position109.positionName := #FORWARD
+
+!new Position('position106')
+!position106.positionName := #DEFENDER
+
+!insert (player63, position100) into PlayerPositions
+!insert (player63, position109) into PlayerPositions
+!insert (player64, position106) into PlayerPositions
+
+!new Competition('competition25')
+!competition25.name := 'West African Amateur League Cup'
+!competition25.type := 'League'
+
+!new Match('match32')
+!match32.date := '12th February 2024'
+!match32.homeAway := false
+
+!insert (teamBD, match32) into VisitorMatch
+!insert (teamBE, match32) into VisitorMatch
+!insert (competition25, match32) into CompetitionMatch
+
+!new MatchReport('matchReport32')
+!matchReport32.duration := 90
+!matchReport32.scoreVisitor := 1
+!matchReport32.scoreLocal := 1
+
+!insert (match32, matchReport32) into MatchMatchReport
+
+!new MatchEvent('matchEvent92')
+!matchEvent92.eventType := #GOAL
+!matchEvent92.time := 30
+
+!new MatchEvent('matchEvent93')
+!matchEvent93.eventType := #FOUL
+!matchEvent93.time := 60
+
+!insert (match32, matchEvent92) into MatchMatchEvent
+!insert (match32, matchEvent93) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer58')
+!matchPlayer58.booked := false
+!matchPlayer58.goals := 1
+!matchPlayer58.rating := 8
+
+!new MatchPlayer('matchPlayer59')
+!matchPlayer59.booked := true
+!matchPlayer59.goals := 0
+!matchPlayer59.rating := 6
+
+!insert (player63, matchPlayer58) into PlayerMatch
+!insert (player64, matchPlayer59) into PlayerMatch
+
+!insert (match32, matchPlayer58) into MatchMatchPlayer
+!insert (match32, matchPlayer59) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp58')
+!mpp58.positionName := #FORWARD
+!mpp58.number := 10
+
+!new MatchPlayerPosition('mpp59')
+!mpp59.positionName := #DEFENDER
+!mpp59.number := 5
+
+!insert (matchPlayer58, mpp58) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer59, mpp59) into MatchPlayerMatchPlayerPosition
+
+!new MatchNote('matchNote21')
+!matchNote21.note := 'Heightened confusion ensued as both squads acted under the notion of away game protocols, impacting tactics.'
+!matchNote21.date := '13th February 2024'
+
+!insert (match32, matchNote21) into MatchMatchNote
+
+!new TrainingSession('trainingSession49')
+!trainingSession49.date := '16th February 2024'
+!trainingSession49.location := "Lion's Roar Practice Field"
+!trainingSession49.purpose := 'Re-alignment of team strategies and communication protocols post-confusion.'
+
+!insert (teamBD, trainingSession49) into TeamTraining
+
+!new TrainingFailedToAttend('trainingFail21')
+!trainingFail21.reason := 'Inconsistent fixture postings and misinformation led to absenteeism among key players.'
+
+!insert (trainingFail21, player64) into FailedPlayer
+!insert (trainingSession49, trainingFail21) into TrainingFailded
+
+!new TrainingNotes('trainingNote49')
+!trainingNote49.note := 'Attendance mismatches led to adaptive training focused on improving team communication and scheduling acumen.'
+!trainingNote49.date := '17th February 2024'
+
+!insert (trainingSession49, trainingNote49) into TrainingTrainingNotes

@@ -1,0 +1,90 @@
+!new Driver('driver27')
+!driver27.id := 'DR1234'
+!driver27.name := 'Liam O\'Reilly'
+
+!new Customer('customer24')
+!customer24.id := 'CU2001'
+!customer24.name := 'Fatima Al-Hassan'
+!customer24.twitterUserName := '@fatimaMiddleEast'
+
+!new Shipment('shipment32')
+!shipment32.id := 'SH001'
+!shipment32.status := #ASSIGNED
+
+!new Shipment('shipment33')
+!shipment33.id := 'SH002'
+!shipment33.status := #UNDERWAY
+
+!new Shipment('shipment34')
+!shipment34.id := 'SH003'
+!shipment34.status := #DELIVERED
+
+!new Address('address61')
+!address61.text := '1 Sahara Street, Casablanca, Morocco'
+
+!new GeoLocation('geoLocation61')
+!geoLocation61.latitude := 33.573110
+!geoLocation61.longitude := -7.589843
+
+!insert (address61, geoLocation61) into AddressContainsGeoLocation
+
+!new Address('address62')
+!address62.text := '5 Nile Crescent, Cairo, Egypt'
+
+!new GeoLocation('geoLocation62')
+!geoLocation62.latitude := 30.044420
+!geoLocation62.longitude := 31.235712
+
+!insert (address62, geoLocation62) into AddressContainsGeoLocation
+
+!new Address('address63')
+!address63.text := '3 Sunset Boulevard, Johannesburg, South Africa'
+
+!new GeoLocation('geoLocation63')
+!geoLocation63.latitude := -26.204103
+!geoLocation63.longitude := 28.047305
+
+!insert (address63, geoLocation63) into AddressContainsGeoLocation
+
+!new Address('address64')
+!address64.text := '100 Broadway, Sydney, Australia'
+
+!new GeoLocation('geoLocation64')
+!geoLocation64.latitude := -33.868820
+!geoLocation64.longitude := 151.209296
+
+!insert (address64, geoLocation64) into AddressContainsGeoLocation
+
+!new Address('address65')
+!address65.text := '350 Curry Street, Wellington, New Zealand'
+
+!new GeoLocation('geoLocation65')
+!geoLocation65.latitude := -41.286460
+!geoLocation65.longitude := 174.776236
+
+!insert (address65, geoLocation65) into AddressContainsGeoLocation
+
+!new Station('station23')
+
+!insert (driver27, shipment33) into DriverShipment
+
+!insert (shipment32, address61) into ShipmentContainsPickUpAddress
+!insert (shipment32, address62) into ShipmentContainsDeliveryAddress
+
+!insert (shipment33, address61) into ShipmentContainsPickUpAddress
+!insert (shipment33, address63) into ShipmentContainsDeliveryAddress
+
+!insert (shipment34, address64) into ShipmentContainsPickUpAddress
+!insert (shipment34, address65) into ShipmentContainsDeliveryAddress
+
+!insert (customer24, shipment32) into CustomerConsistsOfShipment
+!insert (customer24, shipment33) into CustomerConsistsOfShipment
+!insert (customer24, shipment34) into CustomerConsistsOfShipment
+
+!insert (station23, customer24) into StationContainsCustomer
+
+!insert (station23, shipment32) into StationShipment
+!insert (station23, shipment33) into StationShipment
+!insert (station23, shipment34) into StationShipment
+
+!insert (station23, driver27) into StationContainsDriver

@@ -1,0 +1,66 @@
+!new AddressBook('addressBook24')
+
+!new Company('company24')
+!company24.name := 'TechTrail Solutions'
+!company24.phone := '555-777-8888'
+!company24.website := 'www.techtrailsolutions.com'
+!company24.email := 'hello@techtrailsolutions.com'
+!company24.industry := 'IT Consulting'
+
+!new Person('person44')
+!person44.name := 'David Greene'
+!person44.phone := '999-111-2222'
+!person44.website := 'www.davidgreeneit.com'
+!person44.email := 'david.greene@techtrailsolutions.com'
+!person44.title := 'Lead IT Consultant'
+
+!new Person('person45')
+!person45.name := 'Isabella Ford'
+!person45.phone := '333-444-5555'
+!person45.website := 'www.isabellafordtechsupport.com'
+!person45.email := 'isabella.ford@techsupportworld.com'
+!person45.title := 'Network Specialist'
+
+!new Note('note44')
+!note44.author := 'David Greene'
+!note44.time := Date('2025-06-10')
+!note44.type := #CALL
+!note44.comment := 'Client call to assess network infrastructure needs.'
+
+!new Note('note45')
+!note45.author := 'Isabella Ford'
+!note45.time := Date('2025-06-12')
+!note45.type := #EMAIL
+!note45.comment := 'Sent follow-up email with technical recommendations.'
+
+!new Address('address45')
+!address45.city := 'Digital City'
+!address45.houseNr := '501N'
+!address45.street := 'Circuit Lane'
+
+!new Address('address46')
+!address46.city := 'Net Town'
+!address46.houseNr := '73Q'
+!address46.street := 'Server Street'
+
+!new Relationship('relationship46')
+!relationship46.type := #COWORKER
+
+!new Relationship('relationship47')
+!relationship47.type := #BOSS
+
+!insert (addressBook24, company24) into AddressBookMadeOfContact
+!insert (addressBook24, person44) into AddressBookMadeOfContact
+!insert (addressBook24, person45) into AddressBookMadeOfContact
+
+!insert (person44, note44) into ContactContainsNote
+!insert (person45, note45) into ContactContainsNote
+
+!insert (company24, relationship47) into ContactToRelationship
+!insert (relationship47, person44) into RelationshipToContact
+
+!insert (person44, relationship46) into ContactToRelationship
+!insert (relationship46, person45) into RelationshipToContact
+
+!insert (company24, address45) into ContactContainsAddress
+!insert (person45, address46) into ContactContainsAddress

@@ -1,0 +1,47 @@
+-- Creating instances of Currency
+!new Currency('currency3')
+!currency3.name := 'British Pound'
+!currency3.abbreviation := 'GBP'
+
+-- Creating instances of Bills
+!new Bill('bill6')
+!bill6.amount := 75.00
+!bill6.category := 'Dining'
+!bill6.date := Date('2023-08-15')
+!bill6.paymentMethod := #CHECK
+!bill6.status := #REFUSED
+!insert (bill6, currency3) into BillCurrency
+
+!new Bill('bill7')
+!bill7.amount := 125.00
+!bill7.category := 'Transportation'
+!bill7.date := Date('2023-08-15')
+!bill7.paymentMethod := #CREDIT_CARD
+!bill7.status := #DRAFT
+!insert (bill7, currency3) into BillCurrency
+
+!new Bill('bill8')
+!bill8.amount := 50.00
+!bill8.category := 'Accommodation'
+!bill8.date := Date('2023-08-16')
+!bill8.paymentMethod := #CASH
+!bill8.status := #VALIDATED
+!insert (bill8, currency3) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment4')
+!comment4.text := 'Expenses for client meeting.'
+
+!new Comment('comment5')
+!comment5.text := 'Need verification for dining bill.'
+
+-- Creating instance of Expense
+!new Expense('expense3')
+!expense3.amount := 250.00
+!expense3.startDate := Date('2023-08-15')
+!expense3.endDate := Date('2023-08-17')
+!insert (expense3, bill6) into ExpenseContainsBills
+!insert (expense3, bill7) into ExpenseContainsBills
+!insert (expense3, bill8) into ExpenseContainsBills
+!insert (expense3, comment4) into ExpenseComment
+!insert (expense3, comment5) into ExpenseComment

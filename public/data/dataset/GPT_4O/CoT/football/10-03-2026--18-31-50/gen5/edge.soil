@@ -1,0 +1,166 @@
+!new Club('clubAJ')
+!clubAJ.name := 'Polar Predators FC'
+!clubAJ.homeGround := 'Iceberg Park Arena'
+!clubAJ.chairman := 'Mr. Olaf Sigurdsson'
+
+!new Club('clubAK')
+!clubAK.name := 'Tundra Trekkers'
+!clubAK.homeGround := 'Snowcap Grounds'
+!clubAK.chairman := 'Ms. Annika Frost'
+
+!new Team('teamAJ')
+!teamAJ.name := 'Frostbite Fighters'
+
+!new Team('teamAK')
+!teamAK.name := 'Glacier Guardians'
+
+!insert (clubAJ, teamAJ) into ClubTeam
+!insert (clubAK, teamAK) into ClubTeam
+
+!new Player('player40')
+!player40.name := 'Blizzard Breeze'
+!player40.age := 30
+!player40.bestFoot := #RIGHT
+!player40.phoneNumber := '+1123456789'
+
+!new Player('player41')
+!player41.name := 'Ice Shield'
+!player41.age := 29
+!player41.bestFoot := #LEFT
+!player41.phoneNumber := '+9876541230'
+
+!insert (teamAJ, player40) into TeamPlayer
+!insert (teamAK, player41) into TeamPlayer
+
+!new Position('position92')
+!position92.positionName := #DEFENDER
+
+!new Position('position93')
+!position93.positionName := #MIDFIELDER
+
+!new Position('position94')
+!position94.positionName := #GOALKEEPER
+
+!insert (player40, position92) into PlayerPositions
+!insert (player40, position93) into PlayerPositions
+!insert (player41, position94) into PlayerPositions
+
+!new Competition('competition16')
+!competition16.name := 'Arctic Cup Series'
+!competition16.type := 'Tournament'
+
+!new Match('match19')
+!match19.date := '12/12/2023'
+!match19.homeAway := false
+
+!insert (teamAK, match19) into LocalMatch
+!insert (teamAJ, match19) into VisitorMatch
+!insert (competition16, match19) into CompetitionMatch
+
+!new MatchReport('matchReport19')
+!matchReport19.duration := 90
+!matchReport19.scoreVisitor := 0
+!matchReport19.scoreLocal := 0
+
+!insert (match19, matchReport19) into MatchMatchReport
+
+!new MatchEvent('matchEvent52')
+!matchEvent52.eventType := #FOUL
+!matchEvent52.time := 32
+
+!new MatchEvent('matchEvent53')
+!matchEvent53.eventType := #FOUL
+!matchEvent53.time := 65
+
+!new MatchEvent('matchEvent54')
+!matchEvent54.eventType := #FOUL
+!matchEvent54.time := 75
+
+!insert (match19, matchEvent52) into MatchMatchEvent
+!insert (match19, matchEvent53) into MatchMatchEvent
+!insert (match19, matchEvent54) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer35')
+!matchPlayer35.booked := true
+!matchPlayer35.goals := 0
+!matchPlayer35.rating := 6
+
+!new MatchPlayer('matchPlayer36')
+!matchPlayer36.booked := false
+!matchPlayer36.goals := 0
+!matchPlayer36.rating := 8
+
+!insert (player40, matchPlayer35) into PlayerMatch
+!insert (player41, matchPlayer36) into PlayerMatch
+
+!insert (match19, matchPlayer35) into MatchMatchPlayer
+!insert (match19, matchPlayer36) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position95')
+!position95.positionName := #DEFENDER
+!position95.number := 5
+
+!new MatchPlayerPosition('position96')
+!position96.positionName := #GOALKEEPER
+!position96.number := 1
+
+!insert (matchPlayer35, position95) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer36, position96) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession31')
+!trainingSession31.date := '10/12/2023'
+!trainingSession31.location := 'Iceberg Park Arena'
+!trainingSession31.purpose := 'Cold Weather Endurance and Team Coordination'
+
+!insert (teamAJ, trainingSession31) into TeamTraining
+
+!new TrainingSession('trainingSession32')
+!trainingSession32.date := '09/12/2023'
+!trainingSession32.location := 'Snowcap Grounds'
+!trainingSession32.purpose := 'Goalkeeping Agility Improvement'
+
+!insert (teamAK, trainingSession32) into TeamTraining
+
+!new TrainingNotes('trainingNote31')
+!trainingNote31.note := 'Improvement observed in players\' coordination while enduring freezing temperatures.'
+!trainingNote31.date := '10/12/2023'
+
+!new TrainingNotes('trainingNote32')
+!trainingNote32.note := 'Enhanced agility and quick reflexes developed during the session.'
+!trainingNote32.date := '09/12/2023'
+
+!insert (trainingSession31, trainingNote31) into TrainingTrainingNotes
+!insert (trainingSession32, trainingNote32) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail12')
+!trainingFail12.reason := 'Frostbite recovery'
+
+!insert (trainingFail12, player41) into FailedPlayer
+!insert (trainingSession31, trainingFail12) into TrainingFailded
+
+!new TrainingObjective('trainingObjective30')
+!trainingObjective30.areaToImprove := 'Defensive Formations amid Cold Weather'
+!trainingObjective30.startDate := '08/12/2023'
+!trainingObjective30.endDate := '11/12/2023'
+!trainingObjective30.success := true
+
+!new TrainingObjective('trainingObjective31')
+!trainingObjective31.areaToImprove := 'Goalkeeping in Cold Conditions'
+!trainingObjective31.startDate := '08/12/2023'
+!trainingObjective31.endDate := '11/12/2023'
+!trainingObjective31.success := false
+
+!insert (trainingObjective30, player40) into TrainingObjectivePlayer
+!insert (trainingObjective31, player41) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote16')
+!playerNote16.note := 'Challenges in maintaining focus under snow glare conditions.'
+!playerNote16.date := '11/12/2023'
+
+!insert (player40, playerNote16) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote17')
+!playerNote17.note := 'Exhibits exceptional reflexes against close-range shots.'
+!playerNote17.date := '09/12/2023'
+
+!insert (player41, playerNote17) into PlayerPlayerNotes

@@ -1,0 +1,58 @@
+!new RentalOffice('officeSanFranciscoBayAreaHub')
+!officeSanFranciscoBayAreaHub.name := 'San Francisco Bay Area Hub'
+!officeSanFranciscoBayAreaHub.number := 404
+!officeSanFranciscoBayAreaHub.address := '101 Market St, San Francisco, CA'
+
+!new Vehicle('coveredTrailer6004')
+!coveredTrailer6004.id := 6004
+!coveredTrailer6004.registrationState := #CA
+!coveredTrailer6004.licensePlateNumber := 'CA1122GH'
+!coveredTrailer6004.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer6004.registrationLastMaintenanceDate := Date('2023-09-05')
+!coveredTrailer6004.expirationDate := Date('2024-09-04')
+
+!new Individual('individualAishaKhan')
+!individualAishaKhan.name := 'Aisha Khan'
+!individualAishaKhan.address := '202 Lombard St, San Francisco, CA'
+!individualAishaKhan.poorRisk := true
+!individualAishaKhan.homePhone := '(415) 555-9988'
+!individualAishaKhan.driverLicenseState := #CA
+!individualAishaKhan.driverLicenseNumber := 55667788
+!individualAishaKhan.driverLicenseExpirationDate := Date('2025-08-15')
+
+!new Company('companyUrbanMoversInc')
+!companyUrbanMoversInc.name := 'Urban Movers Inc.'
+!companyUrbanMoversInc.address := '303 Silicon Valley Blvd, San Jose, CA'
+!companyUrbanMoversInc.poorRisk := false
+!companyUrbanMoversInc.idNumber := 10293847
+
+!new RentalAgreement('rentalAgreement8004')
+!rentalAgreement8004.number := 8004
+!rentalAgreement8004.rentalDate := Date('2023-11-01')
+!rentalAgreement8004.anticipatedDuration := 3
+!rentalAgreement8004.depositPaid := 100.0
+!rentalAgreement8004.quotedDailyRate := 50.0
+!rentalAgreement8004.quotedRatePerMile := 0.30
+
+!new RentalAgreement('rentalAgreement8005')
+!rentalAgreement8005.number := 8005
+!rentalAgreement8005.rentalDate := Date('2023-11-02')
+!rentalAgreement8005.anticipatedDuration := 5
+!rentalAgreement8005.depositPaid := 150.0
+!rentalAgreement8005.quotedDailyRate := 60.0
+!rentalAgreement8005.quotedRatePerMile := 0.35
+
+!insert (officeSanFranciscoBayAreaHub, coveredTrailer6004) into RentalOfficeVehicle
+
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8004) into RentalOfficeRentalAgreementOrigin
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8005) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8004) into RentalOfficeRentalAgreementDrop
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement8004, coveredTrailer6004) into RentalAgreementVehicle
+!insert (rentalAgreement8005, coveredTrailer6004) into RentalAgreementVehicle
+
+!insert (rentalAgreement8004, individualAishaKhan) into RentalAgreementCustomer
+!insert (rentalAgreement8005, companyUrbanMoversInc) into RentalAgreementCustomer
+

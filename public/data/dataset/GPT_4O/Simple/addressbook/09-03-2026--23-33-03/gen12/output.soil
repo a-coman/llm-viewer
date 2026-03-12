@@ -1,0 +1,66 @@
+!new AddressBook('addressBook12')
+
+!new Company('company12')
+!company12.name := 'CyberSecure Solutions'
+!company12.phone := '303-404-5055'
+!company12.website := 'www.cybersecuresolutions.com'
+!company12.email := 'support@cybersecure.com'
+!company12.industry := 'Cybersecurity'
+
+!new Person('person20')
+!person20.name := 'Daniel Tran'
+!person20.phone := '707-808-9090'
+!person20.website := 'www.dantransecurity.com'
+!person20.email := 'daniel.tran@cybersecure.com'
+!person20.title := 'Chief Security Officer'
+
+!new Person('person21')
+!person21.name := 'Ella Griffin'
+!person21.phone := '505-606-7077'
+!person21.website := 'www.ellagriffintech.com'
+!person21.email := 'ella.griffin@itconsult.com'
+!person21.title := 'IT Consultant'
+
+!new Note('note20')
+!note20.author := 'Daniel Tran'
+!note20.time := Date('2024-06-20')
+!note20.type := #CALL
+!note20.comment := 'Client meeting to discuss security audit results.'
+
+!new Note('note21')
+!note21.author := 'Ella Griffin'
+!note21.time := Date('2024-06-25')
+!note21.type := #EMAIL
+!note21.comment := 'Sent technical report on network vulnerabilities.'
+
+!new Address('address21')
+!address21.city := 'Tech Valley'
+!address21.houseNr := '224'
+!address21.street := 'Security Street'
+
+!new Address('address22')
+!address22.city := 'Innovation Central'
+!address22.houseNr := '34F'
+!address22.street := 'Solution Avenue'
+
+!new Relationship('relationship22')
+!relationship22.type := #EMPLOYEE
+
+!new Relationship('relationship23')
+!relationship23.type := #SUBDIVISION
+
+!insert (addressBook12, company12) into AddressBookMadeOfContact
+!insert (addressBook12, person20) into AddressBookMadeOfContact
+!insert (addressBook12, person21) into AddressBookMadeOfContact
+
+!insert (person20, note20) into ContactContainsNote
+!insert (person21, note21) into ContactContainsNote
+
+!insert (company12, relationship23) into ContactToRelationship
+!insert (relationship23, person20) into RelationshipToContact
+
+!insert (person20, relationship22) into ContactToRelationship
+!insert (relationship22, person21) into RelationshipToContact
+
+!insert (company12, address21) into ContactContainsAddress
+!insert (person21, address22) into ContactContainsAddress

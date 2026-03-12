@@ -1,0 +1,156 @@
+!new Restaurant('restaurant4')
+!restaurant4.name := 'Global Feast'
+
+!new Owner('owner7')
+!owner7.name := 'Edward Snow'
+!owner7.percentageShares := 49
+
+!new Owner('owner8')
+!owner8.name := 'Olivia Miles'
+!owner8.percentageShares := 51
+
+!insert (restaurant4, owner7) into RestaurantOwner
+!insert (restaurant4, owner8) into RestaurantOwner
+
+!new Banquet('banquet3')
+!banquet3.date := Date('2024-02-29')
+!banquet3.time := Time('18:00')
+!banquet3.groupName := 'MegaCorp Annual Gala'
+!banquet3.numberPeople := 300
+!banquet3.paymentMethod := #CreditCard
+
+!insert (restaurant4, banquet3) into RestaurantReservation
+
+!new Table('table9')
+!table9.number := 1
+!table9.description := 'Royal Oak'
+!table9.capacity := 150
+
+!new Table('table10')
+!table10.number := 2
+!table10.description := 'Imperial Silk'
+!table10.capacity := 150
+
+!insert (banquet3, table9) into ReservationTable
+!insert (banquet3, table10) into ReservationTable
+
+!new BusDriver('busdriver3')
+!busdriver3.name := 'Joshua Kim'
+
+!insert (banquet3, busdriver3) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter3')
+!headwaiter3.name := 'Annabella Taylor'
+!headwaiter3.dateOfBirth := Date('1985-01-01')  -- Arbitrary date of birth
+!headwaiter3.phoneNumber := '9090909090'        -- Arbitrary phone number
+
+!new Waiter('waiter5')
+!waiter5.name := 'Ahmed Ali'
+!waiter5.dateOfBirth := Date('1990-01-01')      -- Arbitrary date of birth
+!waiter5.phoneNumber := '1111111111'            -- Arbitrary phone number
+
+!new Waiter('waiter6')
+!waiter6.name := 'Carlos Mendes'
+!waiter6.dateOfBirth := Date('1992-01-01')      -- Arbitrary date of birth
+!waiter6.phoneNumber := '2222222222'            -- Arbitrary phone number
+
+!insert (headwaiter3, waiter5) into HeadWaiterWaiter
+!insert (headwaiter3, waiter6) into HeadWaiterWaiter
+
+!insert (banquet3, waiter5) into ReservationWaiter
+!insert (banquet3, waiter6) into ReservationWaiter
+
+!new Manager('manager1')
+!manager1.name := 'Yan Zhang'
+!manager1.dateOfBirth := Date('1978-01-01')     -- Arbitrary date of birth
+!manager1.phoneNumber := '3333333333'           -- Arbitrary phone number
+
+!new Chef('chef3')
+!chef3.name := 'Hana Park'
+!chef3.dateOfBirth := Date('1980-01-01')        -- Arbitrary date of birth
+!chef3.phoneNumber := '4444444444'              -- Arbitrary phone number
+
+!new Cook('cook4')
+!cook4.name := 'Yuki Tanaka'
+!cook4.dateOfBirth := Date('1991-01-01')        -- Arbitrary date of birth
+!cook4.phoneNumber := '5555555555'              -- Arbitrary phone number
+!cook4.yearsOfExperience := 1                   -- Ensure positive experience
+
+!insert (chef3, cook4) into ChefCook
+
+!new MenuItem('menuitem4')
+!menuitem4.description := 'Spicy Korean Pancakes'
+!menuitem4.prepTime := 10.0
+!menuitem4.classification := #Apetizer
+
+!insert (menuitem4, chef3) into MenuItemChef
+
+!new FoodItem('fooditem8')
+!fooditem8.number := 7
+!fooditem8.description := 'Ingredient for Spicy Korean Pancakes'
+!fooditem8.unit := #Pound
+
+!insert (menuitem4, fooditem8) into MenuItemFoodItem
+
+!new Allergen('allergen4')
+!allergen4.type := #Gluten
+
+!insert (fooditem8, allergen4) into FoodItemAllergen
+
+!new Chef('chef4')
+!chef4.name := 'Amir Khalil'
+!chef4.dateOfBirth := Date('1982-01-01')        -- Arbitrary date of birth
+!chef4.phoneNumber := '6666666666'              -- Arbitrary phone number
+
+!new Cook('cook5')
+!cook5.name := 'Nadia Aziz'
+!cook5.dateOfBirth := Date('1990-01-01')        -- Arbitrary date of birth
+!cook5.phoneNumber := '7777777777'              -- Arbitrary phone number
+!cook5.yearsOfExperience := 1                   -- Ensure positive experience
+
+!insert (chef4, cook5) into ChefCook
+
+!new MenuItem('menuitem5')
+!menuitem5.description := 'Egyptian Lamb Tagine'
+!menuitem5.prepTime := 30.0
+!menuitem5.classification := #Main
+
+!insert (menuitem5, chef4) into MenuItemChef
+
+!new FoodItem('fooditem9')
+!fooditem9.number := 8
+!fooditem9.description := 'Ingredient for Egyptian Lamb Tagine'
+!fooditem9.unit := #Pound
+
+!insert (menuitem5, fooditem9) into MenuItemFoodItem
+
+!new Allergen('allergen5')
+!allergen5.type := #Nuts
+
+!insert (fooditem9, allergen5) into FoodItemAllergen
+
+!new Chef('chef5')
+!chef5.name := 'Julia Stein'
+!chef5.dateOfBirth := Date('1985-01-01')        -- Arbitrary date of birth
+!chef5.phoneNumber := '8888888888'              -- Arbitrary phone number
+
+!new Cook('cook6')
+!cook6.name := 'Pedro Gonzales'
+!cook6.dateOfBirth := Date('1989-01-01')        -- Arbitrary date of birth
+!cook6.phoneNumber := '9999999999'              -- Arbitrary phone number
+!cook6.yearsOfExperience := 1                   -- Ensure positive experience
+
+!insert (chef5, cook6) into ChefCook
+
+!new MenuItem('menuitem6')
+!menuitem6.description := 'Vegan Chocolate Mousse'
+!menuitem6.prepTime := 15.0
+!menuitem6.classification := #Dessert
+
+!insert (menuitem6, chef5) into MenuItemChef
+
+!new FoodItem('fooditem10')
+!fooditem10.number := 9
+!fooditem10.description := 'Ingredient for Vegan Chocolate Mousse'
+
+!insert (menuitem6, fooditem10) into MenuItemFoodItem

@@ -1,0 +1,135 @@
+!new Club('clubI')
+!clubI.name := 'FC Polar Bears'
+!clubI.homeGround := 'Arctic Stadium'
+!clubI.chairman := 'Sven Nordstrom'
+
+!new Club('clubJ')
+!clubJ.name := 'Desert Wanderers'
+!clubJ.homeGround := 'Sahara Dunes Arena'
+!clubJ.chairman := 'Ahmed Al-Sadr'
+
+!new Team('teamI')
+!teamI.name := 'Arctic Avengers'
+
+!new Team('teamJ')
+!teamJ.name := 'Desert Nomads'
+
+!insert (clubI, teamI) into ClubTeam
+!insert (clubJ, teamJ) into ClubTeam
+
+!new Player('player9')
+!player9.name := 'Lars Coldfoot'
+!player9.age := 30
+!player9.bestFoot := #LEFT
+!player9.phoneNumber := '+46123456789'
+
+!new Player('player10')
+!player10.name := 'Tariq Sandstride'
+!player10.age := 25
+!player10.bestFoot := #RIGHT
+!player10.phoneNumber := '+20123567890'
+
+!insert (teamI, player9) into TeamPlayer
+!insert (teamJ, player10) into TeamPlayer
+
+!new Position('position21')
+!position21.positionName := #GOALKEEPER
+
+!new Position('position22')
+!position22.positionName := #DEFENDER
+
+!insert (player9, position21) into PlayerPositions
+!insert (player9, position22) into PlayerPositions
+
+!new Position('position23')
+!position23.positionName := #FORWARD
+
+!new Position('position24')
+!position24.positionName := #MIDFIELDER
+
+!new Position('position29')
+!position29.positionName := #RIGHT_WING
+
+!insert (player10, position23) into PlayerPositions
+!insert (player10, position24) into PlayerPositions
+!insert (player10, position29) into PlayerPositions
+
+!new TrainingSession('trainingSession7')
+!trainingSession7.date := '2023-12-01'
+!trainingSession7.location := 'Arctic Ice Rink'
+!trainingSession7.purpose := 'Endurance on Ice'
+
+!insert (teamI, trainingSession7) into TeamTraining
+
+!new TrainingNotes('trainingNote7')
+!trainingNote7.note := 'Focus on cold-weather stamina.'
+!trainingNote7.date := '2023-12-01'
+
+!insert (trainingSession7, trainingNote7) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail4')
+!trainingFail4.reason := 'Illness'
+
+!insert (trainingFail4, player9) into FailedPlayer
+!insert (trainingSession7, trainingFail4) into TrainingFailded
+
+!new Competition('competition4')
+!competition4.name := 'International Climatic League'
+!competition4.type := 'League'
+
+!new Match('match5')
+!match5.date := '2023-12-05'
+!match5.homeAway := true
+
+!insert (teamJ, match5) into LocalMatch
+!insert (teamI, match5) into VisitorMatch
+!insert (competition4, match5) into CompetitionMatch
+
+!new MatchEvent('matchEvent16')
+!matchEvent16.eventType := #FOUL
+!matchEvent16.time := 44
+
+!insert (match5, matchEvent16) into MatchMatchEvent
+
+!new MatchReport('matchReport5')
+!matchReport5.duration := 90
+!matchReport5.scoreVisitor := 0
+!matchReport5.scoreLocal := 0
+
+!insert (match5, matchReport5) into MatchMatchReport
+
+!new MatchNote('matchNote4')
+!matchNote4.note := 'High wind made accurate passing difficult.'
+!matchNote4.date := '2023-12-05'
+
+!insert (match5, matchNote4) into MatchMatchNote
+
+!new MatchPlayer('matchPlayer9')
+!matchPlayer9.booked := false
+!matchPlayer9.goals := 0
+!matchPlayer9.rating := 4
+
+!insert (player10, matchPlayer9) into PlayerMatch
+
+!insert (match5, matchPlayer9) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position28')
+!position28.positionName := #FORWARD
+!position28.number := 9
+
+!insert (matchPlayer9, position28) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective7')
+!trainingObjective7.areaToImprove := 'Upper Body Strength'
+!trainingObjective7.startDate := '2023-11-01'
+!trainingObjective7.endDate := '2023-12-01'
+!trainingObjective7.success := false
+
+!insert (trainingObjective7, player10) into TrainingObjectivePlayer
+!new TrainingObjective('trainingObjective8')
+!trainingObjective8.areaToImprove := 'Defensive Skills'
+!trainingObjective8.startDate := '2023-11-01'
+!trainingObjective8.endDate := '2023-12-01'
+!trainingObjective8.success := false
+
+!insert (trainingObjective8, player9) into TrainingObjectivePlayer

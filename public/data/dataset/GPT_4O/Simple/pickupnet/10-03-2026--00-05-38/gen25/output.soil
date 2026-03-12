@@ -1,0 +1,64 @@
+!new Driver('driver46')
+!driver46.id := 'D046'
+!driver46.name := 'Bruce Banner'
+
+!new Driver('driver47')
+!driver47.id := 'D047'
+!driver47.name := 'Betty Ross'
+
+!new Shipment('shipment49')
+!shipment49.id := 'SHP12393'
+!shipment49.status := #ASSIGNED
+
+!new Shipment('shipment50')
+!shipment50.id := 'SHP12394'
+!shipment50.status := #DELIVERED
+
+!new Address('address49')
+!address49.text := '4747 Gamma Lab Blvd, Desert Base'
+
+!new Address('address50')
+!address50.text := '4848 Quantum Dr, Culver University'
+
+!new GeoLocation('geoLocation49')
+!geoLocation49.latitude := 36.1699
+!geoLocation49.longitude := -115.1398
+
+!new GeoLocation('geoLocation50')
+!geoLocation50.latitude := 34.0522
+!geoLocation50.longitude := -118.2437
+
+!insert (address49, geoLocation49) into AddressContainsGeoLocation
+!insert (address50, geoLocation50) into AddressContainsGeoLocation
+
+!new Customer('customer49')
+!customer49.id := 'CUST049'
+!customer49.name := 'General Ross'
+!customer49.twitterUserName := '@thunderbolt'
+
+!new Customer('customer50')
+!customer50.id := 'CUST050'
+!customer50.name := 'Samuel Sterns'
+!customer50.twitterUserName := '@leader'
+
+!new Station('station25')
+
+!insert (station25, customer49) into StationContainsCustomer
+!insert (station25, customer50) into StationContainsCustomer
+
+!insert (station25, shipment49) into StationShipment
+!insert (station25, shipment50) into StationShipment
+
+!insert (station25, driver46) into StationContainsDriver
+!insert (station25, driver47) into StationContainsDriver
+
+!insert (shipment49, address49) into ShipmentContainsPickUpAddress
+!insert (shipment49, address50) into ShipmentContainsDeliveryAddress
+
+!insert (shipment50, address50) into ShipmentContainsPickUpAddress
+!insert (shipment50, address49) into ShipmentContainsDeliveryAddress
+
+!insert (customer49, shipment49) into CustomerConsistsOfShipment
+!insert (customer50, shipment50) into CustomerConsistsOfShipment
+
+!insert (driver47, shipment49) into DriverShipment

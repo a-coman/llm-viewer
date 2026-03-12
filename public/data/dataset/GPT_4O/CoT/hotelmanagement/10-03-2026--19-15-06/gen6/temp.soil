@@ -1,0 +1,67 @@
+!new Customer('customer31')
+!customer31.firstName := 'Alexis'
+!customer31.lastName := 'Devereaux'
+
+!new Booking('booking30')
+!booking30.startDate := '10-04-2024'
+!booking30.endDate := '15-04-2024'
+!booking30.canceled := false
+!booking30.bookingId := 106
+!booking30.confirmed := true
+
+!new RoomReservation('roomReservation30_1')
+!roomReservation30_1.checkInDate := '10-04-2024'
+!roomReservation30_1.checkOutDate := '15-04-2024'
+
+!new RoomReservation('roomReservation30_2')
+!roomReservation30_2.checkInDate := '10-04-2024'
+!roomReservation30_2.checkOutDate := '15-04-2024'
+
+!new Room('room30_701')
+!room30_701.numBeds := 1
+!room30_701.pricePerNight := 1000.00
+!room30_701.occupied := true
+!room30_701.blocked := false
+!room30_701.roomNumber := 701
+
+!new RoomExtra('extra30_1')
+!extra30_1.price := 200.00
+!extra30_1.description := 'Private Chef Service'
+
+!new RoomExtra('extra30_2')
+!extra30_2.price := 150.00
+!extra30_2.description := 'Personalized Chauffeur on Standby'
+
+!new RoomExtra('extra30_3')
+!extra30_3.price := 100.00
+!extra30_3.description := '24/7 Butler and Concierge'
+
+!new RoomExtra('extra30_4')
+!extra30_4.price := 500.00
+!extra30_4.description := 'Exclusive Art Collection Exhibit'
+
+!new Bill('bill59')
+!bill59.price := 6000.00
+!bill59.billId := 510
+
+!new Bill('bill60')
+!bill60.price := 950.00
+!bill60.billId := 511
+
+!insert (booking30, customer31) into BookingCustomer
+
+!insert (booking30, roomReservation30_1) into BookingRoomReservation
+!insert (booking30, roomReservation30_2) into BookingRoomReservation
+
+!insert (booking30, bill59) into BookingBill
+!insert (booking30, bill60) into BookingBill
+
+!insert (roomReservation30_1, room30_701) into RoomReservationRoom
+
+!insert (roomReservation30_1, extra30_1) into RoomReservationExtras
+!insert (roomReservation30_1, extra30_2) into RoomReservationExtras
+!insert (roomReservation30_2, extra30_3) into RoomReservationExtras
+!insert (roomReservation30_2, extra30_4) into RoomReservationExtras
+
+!insert (bill59, roomReservation30_1) into BillRoomReservation
+!insert (bill60, roomReservation30_2) into BillRoomReservation

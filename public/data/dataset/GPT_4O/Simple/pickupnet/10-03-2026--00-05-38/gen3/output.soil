@@ -1,0 +1,59 @@
+!new Driver('driver5')
+!driver5.id := 'D005'
+!driver5.name := 'Irene King'
+
+!new Shipment('shipment5')
+!shipment5.id := 'SHP12349'
+!shipment5.status := #NEW
+
+!new Shipment('shipment6')
+!shipment6.id := 'SHP12350'
+!shipment6.status := #ASSIGNED
+
+!new Address('address5')
+!address5.text := '202 Cedar St, Bamboo City'
+
+!new Address('address6')
+!address6.text := '303 Willow Ave, Bamboo City'
+
+!new GeoLocation('geoLocation5')
+!geoLocation5.latitude := 35.7796
+!geoLocation5.longitude := -78.6382
+
+!new GeoLocation('geoLocation6')
+!geoLocation6.latitude := 35.7805
+!geoLocation6.longitude := -78.6500
+
+!insert (address5, geoLocation5) into AddressContainsGeoLocation
+!insert (address6, geoLocation6) into AddressContainsGeoLocation
+
+!new Customer('customer5')
+!customer5.id := 'CUST005'
+!customer5.name := 'Jackie Chan'
+!customer5.twitterUserName := '@jackie'
+
+!new Customer('customer6')
+!customer6.id := 'CUST006'
+!customer6.name := 'Karen Carpenter'
+!customer6.twitterUserName := '@karen'
+
+!new Station('station3')
+
+!insert (station3, customer5) into StationContainsCustomer
+!insert (station3, customer6) into StationContainsCustomer
+
+!insert (station3, shipment5) into StationShipment
+!insert (station3, shipment6) into StationShipment
+
+!insert (station3, driver5) into StationContainsDriver
+
+!insert (shipment5, address5) into ShipmentContainsPickUpAddress
+!insert (shipment5, address6) into ShipmentContainsDeliveryAddress
+
+!insert (shipment6, address6) into ShipmentContainsPickUpAddress
+!insert (shipment6, address5) into ShipmentContainsDeliveryAddress
+
+!insert (customer5, shipment5) into CustomerConsistsOfShipment
+!insert (customer6, shipment6) into CustomerConsistsOfShipment
+
+!insert (driver5, shipment6) into DriverShipment

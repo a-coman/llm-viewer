@@ -1,0 +1,51 @@
+!new Customer('customer16')
+!customer16.firstName := 'Thabo'
+!customer16.lastName := 'Dlamini'
+
+!new Booking('booking15')
+!booking15.startDate := '15-01-2024'
+!booking15.endDate := '22-01-2024'
+!booking15.canceled := false
+!booking15.bookingId := 103
+!booking15.confirmed := true
+
+!new RoomReservation('roomReservation15')
+!roomReservation15.checkInDate := '15-01-2024'
+!roomReservation15.checkOutDate := '22-01-2024'
+
+!new Room('room15_101')
+!room15_101.numBeds := 1
+!room15_101.pricePerNight := 50.00
+!room15_101.occupied := true
+!room15_101.blocked := false
+!room15_101.roomNumber := 101
+
+!new RoomExtra('extra15_1')
+!extra15_1.price := 5.00
+!extra15_1.description := 'Daily Newspaper'
+
+!new RoomExtra('extra15_2')
+!extra15_2.price := 10.00
+!extra15_2.description := 'One-Time Gym Access'
+
+!new RoomExtra('extra15_3')
+!extra15_3.price := 8.00
+!extra15_3.description := 'Evening Snack Combo'
+
+!new Bill('bill30')
+!bill30.price := 453.00
+!bill30.billId := 506
+
+!insert (booking15, customer16) into BookingCustomer
+
+!insert (booking15, roomReservation15) into BookingRoomReservation
+
+!insert (booking15, bill30) into BookingBill
+
+!insert (roomReservation15, room15_101) into RoomReservationRoom
+
+!insert (roomReservation15, extra15_1) into RoomReservationExtras
+!insert (roomReservation15, extra15_2) into RoomReservationExtras
+!insert (roomReservation15, extra15_3) into RoomReservationExtras
+
+!insert (bill30, roomReservation15) into BillRoomReservation

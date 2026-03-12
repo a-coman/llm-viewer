@@ -1,0 +1,161 @@
+!new Restaurant('restaurant29')
+!restaurant29.name := 'Spice Symphony'
+
+!new Owner('owner62')
+!owner62.name := 'Rajesh Kapoor'
+!owner62.percentageShares := 55
+
+!new Owner('owner63')
+!owner63.name := 'Anjali Mehta'
+!owner63.percentageShares := 45
+
+!insert (restaurant29, owner62) into RestaurantOwner
+!insert (restaurant29, owner63) into RestaurantOwner
+
+!new Table('table74')
+!table74.number := 1
+!table74.description := 'Cozy corner booth.'
+!table74.capacity := 4
+
+!new Table('table75')
+!table75.number := 15
+!table75.description := 'Banquette seating in the main dining area.'
+!table75.capacity := 6
+
+!new Table('table76')
+!table76.number := 22
+!table76.description := 'Long communal table.'
+!table76.capacity := 10
+
+!new RegularCustomer('customer25')
+!customer25.name := 'Vikram Patel'
+!customer25.prefferedLanguage := #English
+
+!new RegularCustomer('customer26')
+!customer26.name := 'Emily Brown'
+!customer26.prefferedLanguage := #English
+
+!new Individual('individualReservation16')
+!individualReservation16.date := Date('2024-03-10')
+!individualReservation16.time := Time('18:30')
+!individualReservation16.numberPeople := 1
+!individualReservation16.name := 'Vikram Patel'
+!individualReservation16.phoneNumber := '1112223334'  -- Arbitrary phone number
+!individualReservation16.seating := #Inside
+!individualReservation16.smoking := #NonSmoking
+!individualReservation16.number := 16
+
+!insert (restaurant29, individualReservation16) into RestaurantReservation
+!insert (individualReservation16, customer25) into ReservationCustomer
+!insert (individualReservation16, table74) into ReservationTable
+
+!new Banquet('banquet25')
+!banquet25.date := Date('2024-03-10')
+!banquet25.time := Time('21:00')
+!banquet25.groupName := 'Emily Brown\'s Reunion'
+!banquet25.numberPeople := 16
+!banquet25.paymentMethod := #Cash
+
+!insert (restaurant29, banquet25) into RestaurantReservation
+!insert (banquet25, customer26) into ReservationCustomer
+!insert (banquet25, table76) into ReservationTable
+!insert (banquet25, table75) into ReservationTable
+
+!new Waiter('waiter56')
+!waiter56.name := 'Priya Iyer'
+!waiter56.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter56.phoneNumber := '2223334445'           -- Arbitrary phone number
+!waiter56.spokenLanguage := #English
+
+!new Waiter('waiter57')
+!waiter57.name := 'Rahul Desai'
+!waiter57.dateOfBirth := Date('1992-01-01')     -- Arbitrary date of birth
+!waiter57.phoneNumber := '3334445556'           -- Arbitrary phone number
+!waiter57.spokenLanguage := #English
+
+!insert (individualReservation16, waiter56) into ReservationWaiter
+!insert (banquet25, waiter56) into ReservationWaiter
+!insert (banquet25, waiter57) into ReservationWaiter
+
+!new HeadWaiter('headwaiter24')
+!headwaiter24.name := 'Aarti Verma'
+!headwaiter24.dateOfBirth := Date('1985-01-01')  -- Arbitrary date of birth
+!headwaiter24.phoneNumber := '4445556667'        -- Arbitrary phone number
+
+!insert (headwaiter24, waiter56) into HeadWaiterWaiter
+!insert (headwaiter24, waiter57) into HeadWaiterWaiter
+
+!new BusDriver('busdriver24')
+!busdriver24.name := 'Arjun Khanna'
+
+!insert (banquet25, busdriver24) into BanquetBusDriver
+
+!new Chef('chef34')
+!chef34.name := 'Suresh Bhatia'
+!chef34.dateOfBirth := Date('1965-01-01')       -- Arbitrary date of birth
+!chef34.phoneNumber := '5556667778'             -- Arbitrary phone number
+
+!new Cook('cook40')
+!cook40.name := 'Meena Sharma'
+!cook40.dateOfBirth := Date('1990-01-01')       -- Arbitrary date of birth
+!cook40.phoneNumber := '6667778889'             -- Arbitrary phone number
+!cook40.yearsOfExperience := 5
+
+!insert (chef34, cook40) into ChefCook
+
+!new MenuItem('menuitem45')
+!menuitem45.description := 'Creamy tomato-based chicken curry.'
+!menuitem45.prepTime := 45.0
+!menuitem45.classification := #Main
+
+!insert (menuitem45, chef34) into MenuItemChef
+
+!new FoodItem('fooditem73')
+!fooditem73.number := 73
+!fooditem73.description := 'Chicken'
+!fooditem73.purchaseFlag := true
+!fooditem73.unit := #Pound
+
+!new FoodItem('fooditem74')
+!fooditem74.number := 74
+!fooditem74.description := 'Butter'
+!fooditem74.purchaseFlag := true
+!fooditem74.unit := #Gram
+
+!new FoodItem('fooditem75')
+!fooditem75.number := 75
+!fooditem75.description := 'Tomato Puree'
+!fooditem75.purchaseFlag := true
+!fooditem75.unit := #Gram
+
+!insert (menuitem45, fooditem73) into MenuItemFoodItem
+!insert (menuitem45, fooditem74) into MenuItemFoodItem
+!insert (menuitem45, fooditem75) into MenuItemFoodItem
+
+!new MenuItem('menuitem46')
+!menuitem46.description := 'Sweet milk-solid-based dessert.'
+!menuitem46.prepTime := 20.0
+!menuitem46.classification := #Dessert
+
+!insert (menuitem46, chef34) into MenuItemChef
+
+!new FoodItem('fooditem76')
+!fooditem76.number := 76
+!fooditem76.description := 'Milk Solids'
+!fooditem76.purchaseFlag := true
+!fooditem76.unit := #Sheet
+
+!new FoodItem('fooditem77')
+!fooditem77.number := 77
+!fooditem77.description := 'Sugar Syrup'
+!fooditem77.purchaseFlag := true
+!fooditem77.unit := #Gram
+
+!insert (menuitem46, fooditem76) into MenuItemFoodItem
+!insert (menuitem46, fooditem77) into MenuItemFoodItem
+
+!new Allergen('allergen29')
+!allergen29.type := #Lactose
+
+!insert (fooditem74, allergen29) into FoodItemAllergen
+!insert (fooditem76, allergen29) into FoodItemAllergen

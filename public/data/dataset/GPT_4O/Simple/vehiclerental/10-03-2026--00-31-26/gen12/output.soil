@@ -1,0 +1,70 @@
+!new RentalOffice('office12')
+!office12.name := 'Capital Rentals'
+!office12.number := 1212
+!office12.address := '420 Capitol Ave, Hartford, CT'
+
+!new Truck('truck23')
+!truck23.id := 523
+!truck23.registrationState := #CT
+!truck23.licensePlateNumber := 'CT-TRK-9876'
+!truck23.vehicleTypeCode := #COVERED_TRAILER
+!truck23.registrationLastMaintenanceDate := Date('2023-09-15')
+!truck23.expirationDate := Date('2025-09-15')
+!truck23.odometerReading := 14000
+!truck23.gasTankCapacity := 33.0
+!truck23.workingRadio := true
+!truck23.mileage := 19
+
+!new Individual('individual12')
+!individual12.name := 'William Clark'
+!individual12.address := '789 Elm St, Bridgeport, CT'
+!individual12.poorRisk := false
+!individual12.homePhone := '555-2022'
+!individual12.driverLicenseState := #CT
+!individual12.driverLicenseNumber := 23456789
+!individual12.driverLicenseExpirationDate := Date('2026-12-05')
+
+!new RentalAgreement('agreement23')
+!agreement23.number := 3023
+!agreement23.rentalDate := Date('2023-09-01')
+!agreement23.anticipatedDuration := 8
+!agreement23.depositPaid := 280.0
+!agreement23.quotedDailyRate := 65.00
+!agreement23.quotedRatePerMile := 0.50
+
+!new Truck('truck24')
+!truck24.id := 524
+!truck24.registrationState := #DE
+!truck24.licensePlateNumber := 'DE-TRK-1234'
+!truck24.vehicleTypeCode := #OPEN_TRAILER
+!truck24.registrationLastMaintenanceDate := Date('2023-07-30')
+!truck24.expirationDate := Date('2025-07-30')
+!truck24.odometerReading := 21000
+!truck24.gasTankCapacity := 30.5
+!truck24.workingRadio := false
+!truck24.mileage := 17
+
+!new Company('company12')
+!company12.name := 'Eastern Freight'
+!company12.address := '333 Commerce St, Dover, DE'
+!company12.poorRisk := true
+!company12.idNumber := 987654
+
+!new RentalAgreement('agreement24')
+!agreement24.number := 3024
+!agreement24.rentalDate := Date('2023-12-13')
+!agreement24.anticipatedDuration := 10
+!agreement24.depositPaid := 450.0
+!agreement24.quotedDailyRate := 75.00
+!agreement24.quotedRatePerMile := 0.60
+
+!insert (office12, truck23) into RentalOfficeVehicle
+!insert (office12, truck24) into RentalOfficeVehicle
+!insert (office12, agreement23) into RentalOfficeRentalAgreementOrigin
+!insert (office12, agreement23) into RentalOfficeRentalAgreementDrop
+!insert (office12, agreement24) into RentalOfficeRentalAgreementOrigin
+!insert (office12, agreement24) into RentalOfficeRentalAgreementDrop
+!insert (agreement23, truck23) into RentalAgreementVehicle
+!insert (agreement23, individual12) into RentalAgreementCustomer
+!insert (agreement24, truck24) into RentalAgreementVehicle
+!insert (agreement24, company12) into RentalAgreementCustomer

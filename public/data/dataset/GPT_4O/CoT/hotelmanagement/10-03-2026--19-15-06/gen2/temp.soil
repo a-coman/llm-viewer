@@ -1,0 +1,69 @@
+!new Customer('customer10')
+!customer10.firstName := 'Juan'
+!customer10.lastName := 'Rodriguez'
+
+!new Customer('customer11')
+!customer11.firstName := 'Anna'
+!customer11.lastName := 'Kowalski'
+
+!new Booking('booking10')
+!booking10.startDate := '05-12-2023'
+!booking10.endDate := '12-12-2023'
+!booking10.canceled := false
+!booking10.bookingId := 102
+!booking10.confirmed := true
+
+!new RoomReservation('roomReservation10_1')
+!roomReservation10_1.checkInDate := '05-12-2023'
+!roomReservation10_1.checkOutDate := '12-12-2023'
+
+!new RoomReservation('roomReservation10_2')
+!roomReservation10_2.checkInDate := '05-12-2023'
+!roomReservation10_2.checkOutDate := '12-12-2023'
+
+!new Room('room10_201')
+!room10_201.numBeds := 2
+!room10_201.pricePerNight := 100.00
+!room10_201.occupied := true
+!room10_201.blocked := false
+!room10_201.roomNumber := 204
+
+!new Room('room10_202')
+!room10_202.numBeds := 3
+!room10_202.pricePerNight := 150.00
+!room10_202.occupied := true
+!room10_202.blocked := false
+!room10_202.roomNumber := 205
+
+!new RoomExtra('extra10_1')
+!extra10_1.price := 100.00
+!extra10_1.description := 'Shared Family Dinner'
+
+!new RoomExtra('extra10_2')
+!extra10_2.price := 75.00
+!extra10_2.description := 'Shared Private Tour'
+
+!new Bill('bill20')
+!bill20.price := 1200.00
+!bill20.billId := 504
+
+!new Bill('bill21')
+!bill21.price := 1225.00
+!bill21.billId := 505
+
+!insert (booking10, customer10) into BookingCustomer
+
+!insert (booking10, roomReservation10_1) into BookingRoomReservation
+!insert (booking10, roomReservation10_2) into BookingRoomReservation
+
+!insert (booking10, bill20) into BookingBill
+!insert (booking10, bill21) into BookingBill
+
+!insert (roomReservation10_1, room10_201) into RoomReservationRoom
+!insert (roomReservation10_2, room10_202) into RoomReservationRoom
+
+!insert (roomReservation10_1, extra10_1) into RoomReservationExtras
+!insert (roomReservation10_2, extra10_2) into RoomReservationExtras
+
+!insert (bill20, roomReservation10_1) into BillRoomReservation
+!insert (bill21, roomReservation10_2) into BillRoomReservation

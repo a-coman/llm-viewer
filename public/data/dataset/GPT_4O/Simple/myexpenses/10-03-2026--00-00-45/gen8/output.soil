@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency8')
+!currency8.name := 'Indian Rupee'
+!currency8.abbreviation := 'INR'
+
+-- Creating instances of Bills
+!new Bill('bill19')
+!bill19.amount := 5000.00
+!bill19.category := 'Marketing'
+!bill19.date := Date('2023-04-01')
+!bill19.paymentMethod := #CREDIT_CARD
+!bill19.status := #DRAFT
+!insert (bill19, currency8) into BillCurrency
+
+!new Bill('bill20')
+!bill20.amount := 3000.00
+!bill20.category := 'Advertising'
+!bill20.date := Date('2023-04-05')
+!bill20.paymentMethod := #CASH
+!bill20.status := #VERIFIED
+!insert (bill20, currency8) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment11')
+!comment11.text := 'Expenses for the new product launch campaign.'
+
+-- Creating instance of Expense
+!new Expense('expense8')
+!expense8.amount := 8000.00
+!expense8.startDate := Date('2023-04-01')
+!expense8.endDate := Date('2023-04-10')
+!insert (expense8, bill19) into ExpenseContainsBills
+!insert (expense8, bill20) into ExpenseContainsBills
+!insert (expense8, comment11) into ExpenseComment

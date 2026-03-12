@@ -1,0 +1,213 @@
+!new Expense('familySummerVacationExpense')
+!familySummerVacationExpense.amount := 1000.00
+!familySummerVacationExpense.startDate := Date('2023-07-20')
+!familySummerVacationExpense.endDate := Date('2023-07-30')
+
+!new Bill('airbnbRentalBill')
+!airbnbRentalBill.amount := 300.00
+!airbnbRentalBill.category := 'Airbnb Rental'
+!airbnbRentalBill.date := Date('2023-07-20')
+!airbnbRentalBill.paymentMethod := #CREDIT_CARD
+!airbnbRentalBill.status := #DRAFT
+
+!new Bill('groceryShoppingBill')
+!groceryShoppingBill.amount := 200.00
+!groceryShoppingBill.category := 'Grocery Shopping'
+!groceryShoppingBill.date := Date('2023-07-21')
+!groceryShoppingBill.paymentMethod := #CREDIT_CARD
+!groceryShoppingBill.status := #VERIFIED
+
+!new Bill('restaurantDiningBill')
+!restaurantDiningBill.amount := 250.00
+!restaurantDiningBill.category := 'Restaurant Dining'
+!restaurantDiningBill.date := Date('2023-07-25')
+!restaurantDiningBill.paymentMethod := #CHECK
+!restaurantDiningBill.status := #REFUNDED
+
+!new Bill('amusementParkTicketsBill')
+!amusementParkTicketsBill.amount := 250.00
+!amusementParkTicketsBill.category := 'Amusement Park Tickets'
+!amusementParkTicketsBill.date := Date('2023-07-28')
+!amusementParkTicketsBill.paymentMethod := #CASH
+!amusementParkTicketsBill.status := #VALIDATED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (airbnbRentalBill, currencyGBP) into BillCurrency
+!insert (groceryShoppingBill, currencyGBP) into BillCurrency
+!insert (restaurantDiningBill, currencyGBP) into BillCurrency
+!insert (amusementParkTicketsBill, currencyGBP) into BillCurrency
+
+!insert (familySummerVacationExpense, airbnbRentalBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, groceryShoppingBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, restaurantDiningBill) into ExpenseContainsBills
+!insert (familySummerVacationExpense, amusementParkTicketsBill) into ExpenseContainsBills
+
+!new Comment('commentAirbnb')
+!commentAirbnb.text := 'Loved the Airbnb, perfect for a family of five.'
+
+!new Comment('commentGroceryPrices')
+!commentGroceryPrices.text := 'Grocery prices were higher than expected, but great quality.'
+
+!new Comment('commentAmusementPark')
+!commentAmusementPark.text := 'The amusement park was a highlight; kids had a fantastic time!'
+
+!insert (familySummerVacationExpense, commentAirbnb) into ExpenseComment
+!insert (familySummerVacationExpense, commentGroceryPrices) into ExpenseComment
+!insert (familySummerVacationExpense, commentAmusementPark) into ExpenseComment
+
+!new Expense('complexExpense')
+!complexExpense.amount := 5000.00
+!complexExpense.startDate := Date('2023-11-01')
+!complexExpense.endDate := Date('2023-11-30')
+
+!new Bill('conferenceRegistrationBill')
+!conferenceRegistrationBill.amount := 3000.00
+!conferenceRegistrationBill.category := 'International Conference Registration'
+!conferenceRegistrationBill.date := Date('2023-11-05')
+!conferenceRegistrationBill.paymentMethod := #CREDIT_CARD
+!conferenceRegistrationBill.status := #VALIDATED
+
+!new Bill('flightTicketsBill')
+!flightTicketsBill.amount := 2000.00
+!flightTicketsBill.category := 'Flight Tickets'
+!flightTicketsBill.date := Date('2023-11-10')
+!flightTicketsBill.paymentMethod := #CASH
+!flightTicketsBill.status := #VERIFIED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (conferenceRegistrationBill, currencyEUR) into BillCurrency
+!insert (flightTicketsBill, currencyEUR) into BillCurrency
+
+!insert (complexExpense, conferenceRegistrationBill) into ExpenseContainsBills
+!insert (complexExpense, flightTicketsBill) into ExpenseContainsBills
+
+!new Comment('conferenceComment')
+!conferenceComment.text := 'Attending the annual international tech conference.'
+
+!new Comment('flightArrangementComment')
+!flightArrangementComment.text := 'Flight arrangements were verified and secured in cash.'
+
+!insert (complexExpense, conferenceComment) into ExpenseComment
+!insert (complexExpense, flightArrangementComment) into ExpenseComment
+
+!new Expense('localCharityEventExpense')
+!localCharityEventExpense.amount := 1750.00
+!localCharityEventExpense.startDate := Date('2023-12-05')
+!localCharityEventExpense.endDate := Date('2023-12-07')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 500.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2023-12-01')
+!venueRentalBill.paymentMethod := #CHECK
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 750.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-12-05')
+!cateringServicesBill.paymentMethod := #CREDIT_CARD
+!cateringServicesBill.status := #VERIFIED
+
+!new Bill('decorationsBill')
+!decorationsBill.amount := 300.00
+!decorationsBill.category := 'Decorations'
+!decorationsBill.date := Date('2023-12-04')
+!decorationsBill.paymentMethod := #CASH
+!decorationsBill.status := #PENDING
+
+!new Bill('miscellaneousSuppliesBill')
+!miscellaneousSuppliesBill.amount := 200.00
+!miscellaneousSuppliesBill.category := 'Miscellaneous Supplies'
+!miscellaneousSuppliesBill.date := Date('2023-12-03')
+!miscellaneousSuppliesBill.paymentMethod := #CHECK
+!miscellaneousSuppliesBill.status := #DRAFT
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (venueRentalBill, currencyGBP) into BillCurrency
+!insert (cateringServicesBill, currencyGBP) into BillCurrency
+!insert (decorationsBill, currencyGBP) into BillCurrency
+!insert (miscellaneousSuppliesBill, currencyGBP) into BillCurrency
+
+!insert (localCharityEventExpense, venueRentalBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, cateringServicesBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, decorationsBill) into ExpenseContainsBills
+!insert (localCharityEventExpense, miscellaneousSuppliesBill) into ExpenseContainsBills
+
+!new Comment('charityEventComment1')
+!charityEventComment1.text := 'Expenses for the annual charity gala, supporting the local animal shelter.'
+
+!new Comment('charityEventComment2')
+!charityEventComment2.text := 'Items included venue booking, catering services, and decoration. Event was a success, raising significant funds.'
+
+!insert (localCharityEventExpense, charityEventComment1) into ExpenseComment
+!insert (localCharityEventExpense, charityEventComment2) into ExpenseComment
+
+!new Expense('internationalConferenceBudgetShortfall')
+!internationalConferenceBudgetShortfall.amount := 27300.00
+!internationalConferenceBudgetShortfall.startDate := Date('2024-06-15')
+!internationalConferenceBudgetShortfall.endDate := Date('2024-06-20')
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 12500.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2024-06-15')
+!venueRentalBill.paymentMethod := #CREDIT_CARD
+!venueRentalBill.status := #VALIDATED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 9800.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2024-06-16')
+!cateringServicesBill.paymentMethod := #CASH
+!cateringServicesBill.status := #REFUNDED
+
+!new Bill('speakerHonorariumsBill')
+!speakerHonorariumsBill.amount := 5000.00
+!speakerHonorariumsBill.category := 'Speaker Honorariums'
+!speakerHonorariumsBill.date := Date('2024-06-17')
+!speakerHonorariumsBill.paymentMethod := #CHECK
+!speakerHonorariumsBill.status := #REFUSED
+
+!new Currency('currencyCHF')
+!currencyCHF.name := 'Swiss Franc'
+!currencyCHF.abbreviation := 'CHF'
+
+!new Currency('currencyAUD')
+!currencyAUD.name := 'Australian Dollar'
+!currencyAUD.abbreviation := 'AUD'
+
+!new Currency('currencySGD')
+!currencySGD.name := 'Singapore Dollar'
+!currencySGD.abbreviation := 'SGD'
+
+!insert (venueRentalBill, currencyCHF) into BillCurrency
+!insert (cateringServicesBill, currencyAUD) into BillCurrency
+!insert (speakerHonorariumsBill, currencySGD) into BillCurrency
+
+!insert (internationalConferenceBudgetShortfall, venueRentalBill) into ExpenseContainsBills
+!insert (internationalConferenceBudgetShortfall, cateringServicesBill) into ExpenseContainsBills
+!insert (internationalConferenceBudgetShortfall, speakerHonorariumsBill) into ExpenseContainsBills
+
+!new Comment('venueComment')
+!venueComment.text := 'Venue rental finalized successfully, strategic location improved attendee engagement.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering refund processed after service quality issues reported by several delegates.'
+
+!new Comment('honorariumComment')
+!honorariumComment.text := 'Honorarium payment delayed due to incomplete documentation from international speakers.'
+
+!insert (internationalConferenceBudgetShortfall, venueComment) into ExpenseComment
+!insert (internationalConferenceBudgetShortfall, cateringComment) into ExpenseComment
+!insert (internationalConferenceBudgetShortfall, honorariumComment) into ExpenseComment
+

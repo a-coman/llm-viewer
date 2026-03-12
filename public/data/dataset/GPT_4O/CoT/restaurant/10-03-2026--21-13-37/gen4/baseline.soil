@@ -1,0 +1,161 @@
+!new Restaurant('restaurant20')
+!restaurant20.name := 'Alpen Gourmet'
+
+!new Owner('owner42')
+!owner42.name := 'Hans Müller'
+!owner42.percentageShares := 60
+
+!new Owner('owner43')
+!owner43.name := 'Emma Schneider'
+!owner43.percentageShares := 40
+
+!insert (restaurant20, owner42) into RestaurantOwner
+!insert (restaurant20, owner43) into RestaurantOwner
+
+!new Table('table51')
+!table51.number := 1
+!table51.description := 'Elegant round table with a view of the Alps.'
+!table51.capacity := 4
+
+!new Table('table52')
+!table52.number := 2
+!table52.description := 'Private booth with a vintage wine rack.'
+!table52.capacity := 2
+
+!new Table('table53')
+!table53.number := 3
+!table53.description := 'Luxurious long table in the main dining hall.'
+!table53.capacity := 8
+
+!new RegularCustomer('customer15')
+!customer15.name := 'Franziska Haas'
+!customer15.prefferedLanguage := #German
+
+!new RegularCustomer('customer16')
+!customer16.name := 'John Doe'
+!customer16.prefferedLanguage := #English
+
+!new Individual('individualReservation10')
+!individualReservation10.date := Date('2024-01-18')
+!individualReservation10.time := Time('18:45')
+!individualReservation10.numberPeople := 1
+!individualReservation10.name := 'Franziska Haas'
+!individualReservation10.phoneNumber := '5555555555'  -- Arbitrary phone number
+!individualReservation10.seating := #Inside
+!individualReservation10.smoking := #NonSmoking
+!individualReservation10.number := 10
+
+!insert (restaurant20, individualReservation10) into RestaurantReservation
+!insert (individualReservation10, customer15) into ReservationCustomer
+!insert (individualReservation10, table52) into ReservationTable
+
+!new Banquet('banquet17')
+!banquet17.date := Date('2024-01-18')
+!banquet17.time := Time('20:00')
+!banquet17.groupName := 'John Doe\'s Business Meeting'
+!banquet17.numberPeople := 10
+!banquet17.paymentMethod := #CreditCard
+
+!insert (restaurant20, banquet17) into RestaurantReservation
+!insert (banquet17, customer16) into ReservationCustomer
+!insert (banquet17, table53) into ReservationTable
+!insert (banquet17, table51) into ReservationTable
+
+!new Waiter('waiter36')
+!waiter36.name := 'Clara Vogt'
+!waiter36.dateOfBirth := Date('1985-01-01')     -- Arbitrary date of birth
+!waiter36.phoneNumber := '6666666666'           -- Arbitrary phone number
+!waiter36.spokenLanguage := #German
+
+!new Waiter('waiter37')
+!waiter37.name := 'Karl Weber'
+!waiter37.dateOfBirth := Date('1991-01-01')     -- Arbitrary date of birth
+!waiter37.phoneNumber := '7777777777'           -- Arbitrary phone number
+!waiter37.spokenLanguage := #German
+
+!insert (individualReservation10, waiter36) into ReservationWaiter
+!insert (banquet17, waiter36) into ReservationWaiter
+!insert (banquet17, waiter37) into ReservationWaiter
+
+!new HeadWaiter('headwaiter15')
+!headwaiter15.name := 'Anja Fischer'
+!headwaiter15.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter15.phoneNumber := '8888888888'        -- Arbitrary phone number
+
+!insert (headwaiter15, waiter36) into HeadWaiterWaiter
+!insert (headwaiter15, waiter37) into HeadWaiterWaiter
+
+!new BusDriver('busdriver17')
+!busdriver17.name := 'Lukas Meier'
+
+!insert (banquet17, busdriver17) into BanquetBusDriver
+
+!new Chef('chef21')
+!chef21.name := 'Dietrich Jaeger'
+!chef21.dateOfBirth := Date('1960-01-01')       -- Arbitrary date of birth
+!chef21.phoneNumber := '9999999999'             -- Arbitrary phone number
+
+!new Cook('cook25')
+!cook25.name := 'Gustav Zimmermann'
+!cook25.dateOfBirth := Date('1983-01-01')       -- Arbitrary date of birth
+!cook25.phoneNumber := '1010101010'             -- Arbitrary phone number
+!cook25.yearsOfExperience := 5
+
+!insert (chef21, cook25) into ChefCook
+
+!new MenuItem('menuitem28')
+!menuitem28.description := 'Traditional Swiss dish with veal, mushrooms, and cream sauce.'
+!menuitem28.prepTime := 60.0
+!menuitem28.classification := #Main
+
+!insert (menuitem28, chef21) into MenuItemChef
+
+!new FoodItem('fooditem46')
+!fooditem46.number := 46
+!fooditem46.description := 'Veal'
+!fooditem46.purchaseFlag := true
+!fooditem46.unit := #Pound
+
+!new FoodItem('fooditem47')
+!fooditem47.number := 47
+!fooditem47.description := 'Mushrooms'
+!fooditem47.purchaseFlag := true
+!fooditem47.unit := #Pound
+
+!new FoodItem('fooditem48')
+!fooditem48.number := 48
+!fooditem48.description := 'Cream'
+!fooditem48.purchaseFlag := true
+!fooditem48.unit := #Ounce
+
+!insert (menuitem28, fooditem46) into MenuItemFoodItem
+!insert (menuitem28, fooditem47) into MenuItemFoodItem
+!insert (menuitem28, fooditem48) into MenuItemFoodItem
+
+!new MenuItem('menuitem29')
+!menuitem29.description := 'Light meringue with fresh raspberries and cream.'
+!menuitem29.prepTime := 30.0
+!menuitem29.classification := #Dessert
+
+!insert (menuitem29, chef21) into MenuItemChef
+
+!new FoodItem('fooditem49')
+!fooditem49.number := 49
+!fooditem49.description := 'Meringue'
+!fooditem49.purchaseFlag := true
+!fooditem49.unit := #Gram
+
+!new FoodItem('fooditem50')
+!fooditem50.number := 50
+!fooditem50.description := 'Raspberries'
+!fooditem50.purchaseFlag := true
+!fooditem50.unit := #Gram
+
+!insert (menuitem29, fooditem49) into MenuItemFoodItem
+!insert (menuitem29, fooditem50) into MenuItemFoodItem
+!insert (menuitem29, fooditem48) into MenuItemFoodItem
+
+!new Allergen('allergen17')
+!allergen17.type := #Lactose
+
+!insert (fooditem48, allergen17) into FoodItemAllergen

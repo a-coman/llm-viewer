@@ -1,0 +1,42 @@
+!new Bank('ubuntuGreenBank')
+!ubuntuGreenBank.country := 'South Africa'
+!ubuntuGreenBank.name := 'Ubuntu Green Bank'
+!ubuntuGreenBank.bic := 'UGBZAZAJ'
+
+!new Account('account29_1')
+!account29_1.iban := 'ZA20-4567-8912-3410'
+!account29_1.balance := 500000
+
+!new Account('account29_2')
+!account29_2.iban := 'ZA11-7890-1234-5678'
+!account29_2.balance := 2000
+
+!new Person('thaboNkosi')
+!thaboNkosi.firstName := 'Thabo'
+!thaboNkosi.lastName := 'Nkosi'
+!thaboNkosi.age := 50
+
+!new Person('mayaKhanna')
+!mayaKhanna.firstName := 'Maya'
+!mayaKhanna.lastName := 'Khanna'
+!mayaKhanna.age := 47
+
+!new Person('sofiaGarcia')
+!sofiaGarcia.firstName := 'Sofia'
+!sofiaGarcia.lastName := 'Garcia'
+!sofiaGarcia.age := 52
+
+!insert (ubuntuGreenBank, account29_1) into AccountOfBanks
+!insert (ubuntuGreenBank, account29_2) into AccountOfBanks
+
+!insert (thaboNkosi, account29_1) into Ownership
+!insert (mayaKhanna, account29_1) into Ownership
+
+!insert (thaboNkosi, account29_2) into Ownership
+!insert (mayaKhanna, account29_2) into Ownership
+
+!insert (thaboNkosi, account29_1) into Use
+!insert (mayaKhanna, account29_1) into Use
+!insert (sofiaGarcia, account29_1) into Use
+
+!insert (sofiaGarcia, account29_2) into Use

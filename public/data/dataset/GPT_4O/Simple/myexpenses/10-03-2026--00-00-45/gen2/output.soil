@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency2')
+!currency2.name := 'Euro'
+!currency2.abbreviation := 'EUR'
+
+-- Creating instances of Bills
+!new Bill('bill4')
+!bill4.amount := 150.00
+!bill4.category := 'Travel'
+!bill4.date := Date('2023-10-05')
+!bill4.paymentMethod := #CREDIT_CARD
+!bill4.status := #VALIDATED
+!insert (bill4, currency2) into BillCurrency
+
+!new Bill('bill5')
+!bill5.amount := 50.00
+!bill5.category := 'Hotel'
+!bill5.date := Date('2023-10-06')
+!bill5.paymentMethod := #CASH
+!bill5.status := #REFUNDED
+!insert (bill5, currency2) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment3')
+!comment3.text := 'Travel expenses for business trip.'
+
+-- Creating instance of Expense
+!new Expense('expense2')
+!expense2.amount := 200.00
+!expense2.startDate := Date('2023-10-05')
+!expense2.endDate := Date('2023-10-10')
+!insert (expense2, bill4) into ExpenseContainsBills
+!insert (expense2, bill5) into ExpenseContainsBills
+!insert (expense2, comment3) into ExpenseComment

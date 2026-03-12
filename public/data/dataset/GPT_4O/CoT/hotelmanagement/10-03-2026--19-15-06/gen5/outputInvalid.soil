@@ -1,0 +1,109 @@
+!new Customer('customer25')
+!customer25.firstName := 'Jane'
+!customer25.lastName := 'Dupont'
+
+!new Booking('booking24')
+!booking24.startDate := '2024-06-15'
+!booking24.endDate := '2024-06-22'
+!booking24.canceled := false
+!booking24.bookingId := 5005
+!booking24.confirmed := true
+
+!new RoomReservation('roomReservation24_1')
+!roomReservation24_1.checkInDate := '2024-06-15'
+!roomReservation24_1.checkOutDate := '2024-06-22'
+
+!new RoomReservation('roomReservation24_2')
+!roomReservation24_2.checkInDate := '2024-06-15'
+!roomReservation24_2.checkOutDate := '2024-06-22'
+
+!new RoomReservation('roomReservation24_3')
+!roomReservation24_3.checkInDate := '2024-06-15'
+!roomReservation24_3.checkOutDate := '2024-06-22'
+
+!new Room('room24_2101')
+!room24_2101.numBeds := 1
+!room24_2101.pricePerNight := 1250.0
+!room24_2101.occupied := true
+!room24_2101.blocked := false
+!room24_2101.roomNumber := 2101
+
+!new Room('room24_2102')
+!room24_2102.numBeds := 1
+!room24_2102.pricePerNight := 1250.0
+!room24_2102.occupied := true
+!room24_2102.blocked := false
+!room24_2102.roomNumber := 2102
+
+!new Room('room24_3101')
+!room24_3101.numBeds := 1
+!room24_3101.pricePerNight := 950.0
+!room24_3101.occupied := true
+!room24_3101.blocked := false
+!room24_3101.roomNumber := 3101
+
+!new Room('room24_3102')
+!room24_3102.numBeds := 1
+!room24_3102.pricePerNight := 950.0
+!room24_3102.occupied := true
+!room24_3102.blocked := false
+!room24_3102.roomNumber := 3102
+
+!new Room('room24_4101')
+!room24_4101.numBeds := 1
+!room24_4101.pricePerNight := 1500.0
+!room24_4101.occupied := true
+!room24_4101.blocked := false
+!room24_4101.roomNumber := 4101
+
+!new Bill('bill47')
+!bill47.price := 8800.0
+!bill47.billId := 901
+
+!new Bill('bill48')
+!bill48.price := 7600.0
+!bill48.billId := 902
+
+!new Bill('bill49')
+!bill49.price := 12000.0
+!bill49.billId := 903
+
+!new RoomExtra('extra24_1')
+!extra24_1.price := 300.0
+!extra24_1.description := 'Wedding Arch Decoration'
+
+!new RoomExtra('extra24_2')
+!extra24_2.price := 200.0
+!extra24_2.description := 'Private Dinner Setup on Beach'
+
+!new FreeRoomTypesDTO('freeRoomType20')
+!freeRoomType20.roomTypeDescription := 'Beachfront Suite'
+!freeRoomType20.numBeds := 1
+!freeRoomType20.pricePerNight := 1250.0
+!freeRoomType20.numFreeRooms := 4
+
+!insert (booking24, customer25) into BookingCustomer
+
+!insert (booking24, roomReservation24_1) into BookingRoomReservation
+!insert (booking24, roomReservation24_2) into BookingRoomReservation
+!insert (booking24, roomReservation24_3) into BookingRoomReservation
+
+!insert (booking24, bill47) into BookingBill
+!insert (booking24, bill48) into BookingBill
+!insert (booking24, bill49) into BookingBill
+
+!insert (roomReservation24_1, room24_2101) into RoomReservationRoom
+!insert (roomReservation24_1, room24_2102) into RoomReservationRoom
+
+!insert (roomReservation24_2, room24_3101) into RoomReservationRoom
+!insert (roomReservation24_2, room24_3102) into RoomReservationRoom
+
+!insert (roomReservation24_3, room24_4101) into RoomReservationRoom
+
+!insert (roomReservation24_1, extra24_1) into RoomReservationExtras
+!insert (roomReservation24_2, extra24_2) into RoomReservationExtras
+
+!insert (bill47, roomReservation24_1) into BillRoomReservation
+!insert (bill48, roomReservation24_2) into BillRoomReservation
+!insert (bill49, roomReservation24_3) into BillRoomReservation
+

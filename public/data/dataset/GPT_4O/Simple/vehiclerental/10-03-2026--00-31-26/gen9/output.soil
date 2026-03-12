@@ -1,0 +1,70 @@
+!new RentalOffice('office9')
+!office9.name := 'Lakeside Rentals'
+!office9.number := 909
+!office9.address := '1020 Lakefront Blvd, Minneapolis, MN'
+
+!new Truck('truck17')
+!truck17.id := 517
+!truck17.registrationState := #MN
+!truck17.licensePlateNumber := 'MN-TRK-3456'
+!truck17.vehicleTypeCode := #TRUCK
+!truck17.registrationLastMaintenanceDate := Date('2023-04-05')
+!truck17.expirationDate := Date('2024-04-05')
+!truck17.odometerReading := 23000
+!truck17.gasTankCapacity := 37.0
+!truck17.workingRadio := true
+!truck17.mileage := 22
+
+!new Individual('individual9')
+!individual9.name := 'Leo Anderson'
+!individual9.address := '222 Forest Ln, St. Paul, MN'
+!individual9.poorRisk := false
+!individual9.homePhone := '555-1234'
+!individual9.driverLicenseState := #MN
+!individual9.driverLicenseNumber := 91011213
+!individual9.driverLicenseExpirationDate := Date('2026-05-15')
+
+!new RentalAgreement('agreement17')
+!agreement17.number := 3017
+!agreement17.rentalDate := Date('2023-11-30')
+!agreement17.anticipatedDuration := 5
+!agreement17.depositPaid := 250.0
+!agreement17.quotedDailyRate := 60.00
+!agreement17.quotedRatePerMile := 0.50
+
+!new Truck('truck18')
+!truck18.id := 518
+!truck18.registrationState := #FL
+!truck18.licensePlateNumber := 'FL-TRK-8765'
+!truck18.vehicleTypeCode := #TRUCK24
+!truck18.registrationLastMaintenanceDate := Date('2023-06-18')
+!truck18.expirationDate := Date('2025-06-18')
+!truck18.odometerReading := 15000
+!truck18.gasTankCapacity := 30.0
+!truck18.workingRadio := false
+!truck18.mileage := 18
+
+!new Company('company9')
+!company9.name := 'Northern Haulers'
+!company9.address := '567 Cargo Blvd, Duluth, MN'
+!company9.poorRisk := true
+!company9.idNumber := 678901
+
+!new RentalAgreement('agreement18')
+!agreement18.number := 3018
+!agreement18.rentalDate := Date('2023-12-05')
+!agreement18.anticipatedDuration := 12
+!agreement18.depositPaid := 500.0
+!agreement18.quotedDailyRate := 85.00
+!agreement18.quotedRatePerMile := 0.70
+
+!insert (office9, truck17) into RentalOfficeVehicle
+!insert (office9, truck18) into RentalOfficeVehicle
+!insert (office9, agreement17) into RentalOfficeRentalAgreementOrigin
+!insert (office9, agreement17) into RentalOfficeRentalAgreementDrop
+!insert (office9, agreement18) into RentalOfficeRentalAgreementOrigin
+!insert (office9, agreement18) into RentalOfficeRentalAgreementDrop
+!insert (agreement17, truck17) into RentalAgreementVehicle
+!insert (agreement17, individual9) into RentalAgreementCustomer
+!insert (agreement18, truck18) into RentalAgreementVehicle
+!insert (agreement18, company9) into RentalAgreementCustomer

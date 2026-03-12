@@ -1,0 +1,123 @@
+!new AddressBook('CulturalExchangeHub')
+
+!new Person('SarahLiu')
+!SarahLiu.name := 'Sarah Liu'
+!SarahLiu.phone := '+86 10 6677 8899'
+!SarahLiu.website := 'www.sarahliuart.com'
+!SarahLiu.email := 'sarah.liu@artspaces.cn'
+!SarahLiu.title := 'Curator'
+
+!new Address('SarahLiuAddress')
+!SarahLiuAddress.city := 'Beijing'
+!SarahLiuAddress.street := 'Art District'
+!SarahLiuAddress.houseNr := '72'
+!insert (SarahLiu, SarahLiuAddress) into ContactContainsAddress
+
+!new Note('SarahLiuNote1')
+!SarahLiuNote1.author := 'Sarah Liu'
+!SarahLiuNote1.time := Date('2023-09-12')
+!SarahLiuNote1.type := #MEETING
+!SarahLiuNote1.comment := 'Visited the European Art & Cultural Expo to explore potential collaborations.'
+!insert (SarahLiu, SarahLiuNote1) into ContactContainsNote
+
+!new Note('SarahLiuNote2')
+!SarahLiuNote2.author := 'Sarah Liu'
+!SarahLiuNote2.time := Date('2023-09-20')
+!SarahLiuNote2.type := #EMAIL
+!SarahLiuNote2.comment := 'Discussed arrangements for the contemporary art exhibit with international partners.'
+!insert (SarahLiu, SarahLiuNote2) into ContactContainsNote
+
+!new Person('CarlosRovira')
+!CarlosRovira.name := 'Carlos Rovira'
+!CarlosRovira.phone := '+54 11 4966 7722'
+!CarlosRovira.website := 'www.carlosrovira.com'
+!CarlosRovira.email := 'carlosrovira@aol.com'
+!CarlosRovira.title := 'Cultural Attaché'
+
+!new Address('CarlosRoviraAddress')
+!CarlosRoviraAddress.city := 'Buenos Aires'
+!CarlosRoviraAddress.street := 'Libertador Avenue'
+!CarlosRoviraAddress.houseNr := '999'
+!insert (CarlosRovira, CarlosRoviraAddress) into ContactContainsAddress
+
+!new Note('CarlosRoviraNote1')
+!CarlosRoviraNote1.author := 'Carlos Rovira'
+!CarlosRoviraNote1.time := Date('2023-10-05')
+!CarlosRoviraNote1.type := #CALL
+!CarlosRoviraNote1.comment := 'Phone call with local artists about the upcoming cultural exchange program.'
+!insert (CarlosRovira, CarlosRoviraNote1) into ContactContainsNote
+
+!new Company('GlobalArtExchange')
+!GlobalArtExchange.name := 'Global Art Exchange'
+!GlobalArtExchange.phone := '+44 20 3004 5678'
+!GlobalArtExchange.website := 'www.globalartexchange.org'
+!GlobalArtExchange.email := 'admin@globalartexchange.org'
+!GlobalArtExchange.industry := 'Arts and Culture'
+
+!new Address('GlobalArtExchangeAddress')
+!GlobalArtExchangeAddress.city := 'London'
+!GlobalArtExchangeAddress.street := 'Culture Lane'
+!GlobalArtExchangeAddress.houseNr := '85'
+!insert (GlobalArtExchange, GlobalArtExchangeAddress) into ContactContainsAddress
+
+!new Note('GlobalArtExchangeNote1')
+!GlobalArtExchangeNote1.author := 'Global Art Exchange'
+!GlobalArtExchangeNote1.time := Date('2023-10-12')
+!GlobalArtExchangeNote1.type := #MEETING
+!GlobalArtExchangeNote1.comment := 'Strategic planning meeting for next year\'s international cultural festival.'
+!insert (GlobalArtExchange, GlobalArtExchangeNote1) into ContactContainsNote
+
+!new Company('CulturalHorizons')
+!CulturalHorizons.name := 'Cultural Horizons'
+!CulturalHorizons.phone := '+81 3 1234 7890'
+!CulturalHorizons.website := 'www.culturalhorizons.jp'
+!CulturalHorizons.email := 'info@culturalhorizons.jp'
+!CulturalHorizons.industry := 'Art and Heritage'
+
+!new Address('CulturalHorizonsAddress')
+!CulturalHorizonsAddress.city := 'Tokyo'
+!CulturalHorizonsAddress.street := 'Artisans Lane'
+!CulturalHorizonsAddress.houseNr := '58'
+!insert (CulturalHorizons, CulturalHorizonsAddress) into ContactContainsAddress
+
+!new Note('CulturalHorizonsNote1')
+!CulturalHorizonsNote1.author := 'Cultural Horizons'
+!CulturalHorizonsNote1.time := Date('2023-10-20')
+!CulturalHorizonsNote1.type := #EMAIL
+!CulturalHorizonsNote1.comment := 'Coordinated the preparation of exhibits for the Global Art Exchange partnership.'
+!insert (CulturalHorizons, CulturalHorizonsNote1) into ContactContainsNote
+
+!new Relationship('SarahToGlobalArtEmployee')
+!SarahToGlobalArtEmployee.type := #EMPLOYEE
+!insert (SarahToGlobalArtEmployee, GlobalArtExchange) into RelationshipToContact
+!insert (SarahLiu, SarahToGlobalArtEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToGlobalArtCoworker')
+!CarlosToGlobalArtCoworker.type := #COWORKER
+!insert (CarlosToGlobalArtCoworker, GlobalArtExchange) into RelationshipToContact
+!insert (CarlosRovira, CarlosToGlobalArtCoworker) into ContactToRelationship
+
+!new Relationship('GlobalArtToCulturalSubdivision')
+!GlobalArtToCulturalSubdivision.type := #SUBDIVISION
+!insert (GlobalArtToCulturalSubdivision, CulturalHorizons) into RelationshipToContact
+!insert (GlobalArtExchange, GlobalArtToCulturalSubdivision) into ContactToRelationship
+
+!new Relationship('GlobalArtToSarahBoss')
+!GlobalArtToSarahBoss.type := #BOSS
+!insert (GlobalArtToSarahBoss, SarahLiu) into RelationshipToContact
+!insert (GlobalArtExchange, GlobalArtToSarahBoss) into ContactToRelationship
+
+!new Relationship('CulturalToGlobalArtSubdivision')
+!CulturalToGlobalArtSubdivision.type := #SUBDIVISION
+!insert (CulturalToGlobalArtSubdivision, GlobalArtExchange) into RelationshipToContact
+!insert (CulturalHorizons, CulturalToGlobalArtSubdivision) into ContactToRelationship
+
+!new Relationship('CulturalToCarlosBoss')
+!CulturalToCarlosBoss.type := #BOSS
+!insert (CulturalToCarlosBoss, CarlosRovira) into RelationshipToContact
+!insert (CulturalHorizons, CulturalToCarlosBoss) into ContactToRelationship
+
+!insert (CulturalExchangeHub, SarahLiu) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, CarlosRovira) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, GlobalArtExchange) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, CulturalHorizons) into AddressBookMadeOfContact

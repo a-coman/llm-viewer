@@ -1,0 +1,57 @@
+!new StateMachine('CafeOrderProcessing')
+!CafeOrderProcessing.name := 'CafeOrderProcessing'
+
+!new State('received')
+!received.name := 'received'
+
+!new State('prepared')
+!prepared.name := 'prepared'
+
+!new State('served')
+!served.name := 'served'
+
+!new State('paid')
+!paid.name := 'paid'
+
+!new Transition('ReceiveToPrepare')
+!ReceiveToPrepare.name := 'Receive to Prepare'
+
+!new Transition('PrepareToServe')
+!PrepareToServe.name := 'Prepare to Serve'
+
+!new Transition('ServeToPay')
+!ServeToPay.name := 'Serve to Pay'
+
+!new TimeEvent('ReceiveTimeout')
+!ReceiveTimeout.time := 5
+
+!new TimeEvent('PrepareTimeout')
+!PrepareTimeout.time := 10
+
+!new TimeEvent('ServeTimeout')
+!ServeTimeout.time := 15
+
+!insert (CafeOrderProcessing, received) into StateMachineContainsStates
+!insert (CafeOrderProcessing, prepared) into StateMachineContainsStates
+!insert (CafeOrderProcessing, served) into StateMachineContainsStates
+!insert (CafeOrderProcessing, paid) into StateMachineContainsStates
+
+!insert (CafeOrderProcessing, ReceiveToPrepare) into StateMachineContainsTransitions
+!insert (CafeOrderProcessing, PrepareToServe) into StateMachineContainsTransitions
+!insert (CafeOrderProcessing, ServeToPay) into StateMachineContainsTransitions
+
+!insert (ReceiveToPrepare, ReceiveTimeout) into TransitionContainsEvents
+!insert (PrepareToServe, PrepareTimeout) into TransitionContainsEvents
+!insert (ServeToPay, ServeTimeout) into TransitionContainsEvents
+
+!insert (received, ReceiveToPrepare) into StateTransition
+!insert (ReceiveToPrepare, prepared) into TransitionState
+
+!insert (prepared, PrepareToServe) into StateTransition
+!insert (PrepareToServe, served) into TransitionState
+
+!insert (served, ServeToPay) into StateTransition
+!insert (ServeToPay, paid) into TransitionState
+
+!insert (CafeOrderProcessing, received) into StateMachineStartsStates
+!insert (CafeOrderProcessing, prepared) into StateMachineStartsStates

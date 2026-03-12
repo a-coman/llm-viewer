@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency11')
+!currency11.name := 'Mexican Peso'
+!currency11.abbreviation := 'MXN'
+
+-- Creating instances of Bills
+!new Bill('bill27')
+!bill27.amount := 400.00
+!bill27.category := 'Training and Development'
+!bill27.date := Date('2023-02-15')
+!bill27.paymentMethod := #CREDIT_CARD
+!bill27.status := #VALIDATED
+!insert (bill27, currency11) into BillCurrency
+
+!new Bill('bill28')
+!bill28.amount := 200.00
+!bill28.category := 'Online Courses'
+!bill28.date := Date('2023-02-16')
+!bill28.paymentMethod := #CASH
+!bill28.status := #PENDING
+!insert (bill28, currency11) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment14')
+!comment14.text := 'Investment in employee skill development.'
+
+-- Creating instance of Expense
+!new Expense('expense11')
+!expense11.amount := 600.00
+!expense11.startDate := Date('2023-02-15')
+!expense11.endDate := Date('2023-02-28')
+!insert (expense11, bill27) into ExpenseContainsBills
+!insert (expense11, bill28) into ExpenseContainsBills
+!insert (expense11, comment14) into ExpenseComment

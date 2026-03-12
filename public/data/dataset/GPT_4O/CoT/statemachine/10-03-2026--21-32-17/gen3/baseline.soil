@@ -1,0 +1,89 @@
+!new StateMachine('elevatorSystem')
+!elevatorSystem.name := 'elevatorSystem'
+
+!new State('stationary')
+!stationary.name := 'stationary'
+
+!new State('movingUp')
+!movingUp.name := 'movingUp'
+
+!new State('movingDown')
+!movingDown.name := 'movingDown'
+
+!new State('maintenance')
+!maintenance.name := 'maintenance'
+
+!new Transition('stationaryToMovingUp')
+!stationaryToMovingUp.name := 'stationaryToMovingUp'
+
+!new Transition('movingUpToStationary')
+!movingUpToStationary.name := 'movingUpToStationary'
+
+!new Transition('stationaryToMovingDown')
+!stationaryToMovingDown.name := 'stationaryToMovingDown'
+
+!new Transition('movingDownToStationary')
+!movingDownToStationary.name := 'movingDownToStationary'
+
+!new Transition('stationaryToMaintenance')
+!stationaryToMaintenance.name := 'stationaryToMaintenance'
+
+!new Transition('maintenanceToStationary')
+!maintenanceToStationary.name := 'maintenanceToStationary'
+
+!new TimeEvent('timeEvent5_1')
+!timeEvent5_1.time := 5
+
+!new TimeEvent('timeEvent30_1')
+!timeEvent30_1.time := 30
+
+!new TimeEvent('timeEvent5_2')
+!timeEvent5_2.time := 5
+
+!new TimeEvent('timeEvent30_2')
+!timeEvent30_2.time := 30
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent120')
+!timeEvent120.time := 120
+
+!insert (elevatorSystem, stationary) into StateMachineContainsStates
+!insert (elevatorSystem, movingUp) into StateMachineContainsStates
+!insert (elevatorSystem, movingDown) into StateMachineContainsStates
+!insert (elevatorSystem, maintenance) into StateMachineContainsStates
+
+!insert (elevatorSystem, stationaryToMovingUp) into StateMachineContainsTransitions
+!insert (elevatorSystem, movingUpToStationary) into StateMachineContainsTransitions
+!insert (elevatorSystem, stationaryToMovingDown) into StateMachineContainsTransitions
+!insert (elevatorSystem, movingDownToStationary) into StateMachineContainsTransitions
+!insert (elevatorSystem, stationaryToMaintenance) into StateMachineContainsTransitions
+!insert (elevatorSystem, maintenanceToStationary) into StateMachineContainsTransitions
+
+!insert (stationaryToMovingUp, timeEvent5_1) into TransitionContainsEvents
+!insert (movingUpToStationary, timeEvent30_1) into TransitionContainsEvents
+!insert (stationaryToMovingDown, timeEvent5_2) into TransitionContainsEvents
+!insert (movingDownToStationary, timeEvent30_2) into TransitionContainsEvents
+!insert (stationaryToMaintenance, timeEvent60) into TransitionContainsEvents
+!insert (maintenanceToStationary, timeEvent120) into TransitionContainsEvents
+
+!insert (stationary, stationaryToMovingUp) into StateTransition
+!insert (stationaryToMovingUp, movingUp) into TransitionState
+
+!insert (movingUp, movingUpToStationary) into StateTransition
+!insert (movingUpToStationary, stationary) into TransitionState
+
+!insert (stationary, stationaryToMovingDown) into StateTransition
+!insert (stationaryToMovingDown, movingDown) into TransitionState
+
+!insert (movingDown, movingDownToStationary) into StateTransition
+!insert (movingDownToStationary, stationary) into TransitionState
+
+!insert (stationary, stationaryToMaintenance) into StateTransition
+!insert (stationaryToMaintenance, maintenance) into TransitionState
+
+!insert (maintenance, maintenanceToStationary) into StateTransition
+!insert (maintenanceToStationary, stationary) into TransitionState
+
+!insert (elevatorSystem, stationary) into StateMachineStartsStates

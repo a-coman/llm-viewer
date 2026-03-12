@@ -1,0 +1,49 @@
+!new Client('client12')
+!client12.clientId := 3051
+!client12.isSuspended := false
+
+!new Rental('rental16')
+!rental16.date := Date('2023-06-20')
+
+!new Rental('rental17')
+!rental17.date := Date('2023-08-25')
+
+!new Movie('movie15')
+!movie15.title := 'Ocean Adventures'
+!movie15.availableCopies := 10
+!movie15.genre := #Comedy
+
+!new Movie('movie16')
+!movie16.title := 'Space Intruders'
+!movie16.availableCopies := 0
+!movie16.genre := #Action  -- Assuming Action as no genre provided
+
+!new Series('series14')
+!series14.title := 'The Great Expedition Season 3'
+!series14.availableCopies := 4
+!series14.episode := 5
+
+!new Actor('actor26')
+!actor26.name := 'Emma Rodriguez'
+
+!new Actor('actor27')
+!actor27.name := 'Raj Patel'
+
+!new Actor('actor28')
+!actor28.name := 'Clara N’Dour'
+
+!insert (client12, rental16) into ClientRental
+!insert (client12, rental17) into ClientRental
+
+!insert (rental16, movie15) into RentalCassette
+!insert (rental16, series14) into RentalCassette
+
+!insert (rental17, movie16) into RentalCassette
+
+!insert (movie15, actor26) into CassetteActor
+
+!insert (movie16, actor27) into CassetteActor
+!insert (movie16, actor28) into CassetteActor
+
+!insert (series14, actor28) into CassetteActor
+!insert (series14, actor26) into CassetteActor

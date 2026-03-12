@@ -1,0 +1,128 @@
+!new Restaurant('restaurant30')
+!restaurant30.name := 'Family Hearth'
+
+!new Owner('owner64')
+!owner64.name := 'Giovanni Ricci'
+!owner64.percentageShares := 70
+
+!new Owner('owner65')
+!owner65.name := 'Meredith Lee'
+!owner65.percentageShares := 30
+
+!insert (restaurant30, owner64) into RestaurantOwner
+!insert (restaurant30, owner65) into RestaurantOwner
+
+!new Individual('individualReservation17')
+!individualReservation17.date := Date('2024-04-15')
+!individualReservation17.time := Time('17:00')
+!individualReservation17.numberPeople := 10
+!individualReservation17.name := 'Emily Johnson'
+!individualReservation17.phoneNumber := '1234567890'  -- Arbitrary phone number
+!individualReservation17.seating := #Inside
+!individualReservation17.smoking := #NonSmoking
+!individualReservation17.number := 17
+
+!insert (restaurant30, individualReservation17) into RestaurantReservation
+
+!new Table('table77')
+!table77.number := 1
+!table77.description := 'Family Table'
+!table77.capacity := 12
+
+!insert (individualReservation17, table77) into ReservationTable
+
+!new Waiter('waiter58')
+!waiter58.name := 'Tomas Li'
+!waiter58.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter58.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter58.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter25')
+!headwaiter25.name := 'Elena Kostas'
+!headwaiter25.dateOfBirth := Date('1985-01-01') -- Arbitrary date of birth
+!headwaiter25.phoneNumber := '3456789012'       -- Arbitrary phone number
+
+!insert (headwaiter25, waiter58) into HeadWaiterWaiter
+!insert (individualReservation17, waiter58) into ReservationWaiter
+
+!new Manager('manager6')
+!manager6.name := 'Fiona Malcolm'
+!manager6.dateOfBirth := Date('1975-01-01')     -- Arbitrary date of birth
+!manager6.phoneNumber := '4567890123'           -- Arbitrary phone number
+
+!new Chef('chef35')
+!chef35.name := 'Mario Cavalli'
+!chef35.dateOfBirth := Date('1960-01-01')       -- Arbitrary date of birth
+!chef35.phoneNumber := '5678901234'             -- Arbitrary phone number
+
+!new Cook('cook41')
+!cook41.name := 'Luca Bartoli'
+!cook41.dateOfBirth := Date('1983-01-01')       -- Arbitrary date of birth
+!cook41.phoneNumber := '6789012345'             -- Arbitrary phone number
+!cook41.yearsOfExperience := 6
+
+!insert (chef35, cook41) into ChefCook
+
+!new MenuItem('menuitem47')
+!menuitem47.description := 'Caprese Salad'
+!menuitem47.prepTime := 15.0
+!menuitem47.classification := #Apetizer
+
+!insert (menuitem47, chef35) into MenuItemChef
+
+!new FoodItem('fooditem78')
+!fooditem78.number := 78
+!fooditem78.description := 'Mozzarella'
+!fooditem78.unit := #Gram
+!fooditem78.purchaseFlag := true
+
+!insert (menuitem47, fooditem78) into MenuItemFoodItem
+
+!new Allergen('allergen30')
+!allergen30.type := #Lactose
+
+!insert (fooditem78, allergen30) into FoodItemAllergen
+
+!new Chef('chef36')
+!chef36.name := 'Nia Kapoor'
+!chef36.dateOfBirth := Date('1978-01-01')       -- Arbitrary date of birth
+!chef36.phoneNumber := '7890123456'             -- Arbitrary phone number
+
+!new Cook('cook42')
+!cook42.name := 'Amrita Singh'
+!cook42.dateOfBirth := Date('1990-01-01')       -- Arbitrary date of birth
+!cook42.phoneNumber := '8901234567'             -- Arbitrary phone number
+!cook42.yearsOfExperience := 5
+
+!insert (chef36, cook42) into ChefCook
+
+!new MenuItem('menuitem48')
+!menuitem48.description := 'Lemon Herb Grilled Chicken'
+!menuitem48.prepTime := 25.0
+!menuitem48.classification := #Main
+
+!insert (menuitem48, chef36) into MenuItemChef
+
+!new Chef('chef37')
+!chef37.name := 'Amahle Nkosi'
+!chef37.dateOfBirth := Date('1982-01-01')       -- Arbitrary date of birth
+!chef37.phoneNumber := '9012345678'             -- Arbitrary phone number
+
+!new Cook('cook43')
+!cook43.name := 'Thandiwe Biko'
+!cook43.dateOfBirth := Date('1995-01-01')       -- Arbitrary date of birth
+!cook43.phoneNumber := '0123456789'             -- Arbitrary phone number
+!cook43.yearsOfExperience := 3
+
+!insert (chef37, cook43) into ChefCook
+
+!new MenuItem('menuitem49')
+!menuitem49.description := 'Fresh Fruit Bowl'
+!menuitem49.prepTime := 10.0
+!menuitem49.classification := #Dessert
+
+!insert (menuitem49, chef37) into MenuItemChef
+
+!new RegularCustomer('customer27')
+!customer27.name := 'Ethan Johnson'
+!customer27.prefferedLanguage := #English

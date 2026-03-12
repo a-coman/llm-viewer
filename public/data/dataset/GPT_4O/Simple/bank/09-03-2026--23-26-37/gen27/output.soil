@@ -1,0 +1,50 @@
+!new Bank('bank53')
+!bank53.country := 'Austria'
+!bank53.name := 'Raiffeisen Bank'
+!bank53.bic := 'RZBAATWW'
+
+!new Bank('bank54')
+!bank54.country := 'Thailand'
+!bank54.name := 'Kasikornbank'
+!bank54.bic := 'KASITHBK'
+
+!new Account('account79')
+!account79.iban := 'AT611904300234573201'
+!account79.balance := 5100
+
+!new Account('account80')
+!account80.iban := 'TH320000000012345678901'
+!account80.balance := 4200
+
+!new Account('account81')
+!account81.iban := 'AT611904300234573202'
+!account81.balance := 100
+
+!new Person('person79')
+!person79.firstName := 'Ulrich'
+!person79.lastName := 'Baumgartner'
+!person79.age := 45
+
+!new Person('person80')
+!person80.firstName := 'Narong'
+!person80.lastName := 'Sukcharoen'
+!person80.age := 54
+
+!new Person('person81')
+!person81.firstName := 'Sophia'
+!person81.lastName := 'Müller'
+!person81.age := 32
+
+!insert (person79, account79) into Ownership
+!insert (person80, account80) into Ownership
+!insert (person81, account81) into Ownership
+!insert (person79, account81) into Ownership
+
+!insert (person79, account79) into Use
+!insert (person80, account80) into Use
+!insert (person81, account81) into Use
+!insert (person80, account79) into Use
+
+!insert (bank53, account79) into AccountOfBanks
+!insert (bank54, account80) into AccountOfBanks
+!insert (bank53, account81) into AccountOfBanks

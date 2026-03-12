@@ -1,0 +1,42 @@
+!new Bank('bankHorizon')
+!bankHorizon.country := 'Australia'
+!bankHorizon.name := 'Horizon National Bank'
+!bankHorizon.bic := 'HNBAU33'
+
+!new Person('emmaTakahashi')
+!emmaTakahashi.firstName := 'Emma'
+!emmaTakahashi.lastName := 'Takahashi'
+!emmaTakahashi.age := 70
+
+!new Person('akiraTakahashi')
+!akiraTakahashi.firstName := 'Akira'
+!akiraTakahashi.lastName := 'Takahashi'
+!akiraTakahashi.age := 48
+
+!new Person('keikoTakahashi')
+!keikoTakahashi.firstName := 'Keiko'
+!keikoTakahashi.lastName := 'Takahashi'
+!keikoTakahashi.age := 25
+
+!new Account('account8_3')
+!account8_3.iban := 'AU62 1234 5678 9012'
+!account8_3.balance := 25000
+
+!new Account('account8_4')
+!account8_4.iban := 'AU56 8765 4321 2345'
+!account8_4.balance := 0
+
+!insert (bankHorizon, account8_3) into AccountOfBanks
+!insert (bankHorizon, account8_4) into AccountOfBanks
+
+!insert (emmaTakahashi, account8_3) into Ownership
+!insert (akiraTakahashi, account8_3) into Ownership
+
+!insert (akiraTakahashi, account8_4) into Ownership
+!insert (keikoTakahashi, account8_4) into Ownership
+
+!insert (emmaTakahashi, account8_3) into Use
+!insert (akiraTakahashi, account8_3) into Use
+!insert (keikoTakahashi, account8_3) into Use
+
+!insert (akiraTakahashi, account8_4) into Use

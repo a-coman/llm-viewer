@@ -1,0 +1,141 @@
+!new Club('club53')
+!club53.name := 'Gale Falcons'
+!club53.homeGround := 'Windy Heights Stadium'
+!club53.chairman := 'Finn Breeze'
+
+!new Club('club54')
+!club54.name := 'Amber Wolves'
+!club54.homeGround := 'Wolfs Den'
+!club54.chairman := 'Amber Fang'
+
+!new Team('team53')
+!team53.name := 'Falcon Flare'
+!insert (club53, team53) into ClubTeam
+
+!new Team('team54')
+!team54.name := 'Wolf Howlers'
+!insert (club54, team54) into ClubTeam
+
+!new Competition('autumnCup')
+!autumnCup.name := 'Autumn Cup'
+!autumnCup.type := 'Knockout'
+
+!new Match('match27')
+!match27.date := '2033-09-18'
+!match27.homeAway := true
+!insert (autumnCup, match27) into CompetitionMatch
+!insert (team53, match27) into LocalMatch
+!insert (team54, match27) into VisitorMatch
+
+!new MatchReport('report27')
+!report27.duration := 90
+!report27.scoreVisitor := 1
+!report27.scoreLocal := 4
+!insert (match27, report27) into MatchMatchReport
+
+!new Player('player53')
+!player53.name := 'Zara Wind'
+!player53.age := 26
+!player53.bestFoot := #LEFT
+!player53.phoneNumber := '9234567801'
+!insert (team53, player53) into TeamPlayer
+
+!new Player('player54')
+!player54.name := 'Ethan Ember'
+!player54.age := 29
+!player54.bestFoot := #RIGHT
+!player54.phoneNumber := '8123456790'
+!insert (team54, player54) into TeamPlayer
+
+!new Position('position53')
+!position53.positionName := #MIDFIELDER
+!insert (player53, position53) into PlayerPositions
+
+!new Position('position54')
+!position54.positionName := #FORWARD
+!insert (player54, position54) into PlayerPositions
+
+!new MatchPlayer('matchPlayer53')
+!matchPlayer53.booked := false
+!matchPlayer53.goals := 2
+!matchPlayer53.rating := 9
+!insert (player53, matchPlayer53) into PlayerMatch
+!insert (match27, matchPlayer53) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer54')
+!matchPlayer54.booked := true
+!matchPlayer54.goals := 0
+!matchPlayer54.rating := 7
+!insert (player54, matchPlayer54) into PlayerMatch
+!insert (match27, matchPlayer54) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition53')
+!matchPlayerPosition53.positionName := #MIDFIELDER
+!matchPlayerPosition53.number := 10
+!insert (matchPlayer53, matchPlayerPosition53) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition54')
+!matchPlayerPosition54.positionName := #FORWARD
+!matchPlayerPosition54.number := 9
+!insert (matchPlayer54, matchPlayerPosition54) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event104')
+!event104.eventType := #GOAL
+!event104.time := 25
+!insert (match27, event104) into MatchMatchEvent
+
+!new MatchEvent('event105')
+!event105.eventType := #GOAL
+!event105.time := 55
+!insert (match27, event105) into MatchMatchEvent
+
+!new MatchEvent('event106')
+!event106.eventType := #GOAL
+!event106.time := 70
+!insert (match27, event106) into MatchMatchEvent
+
+!new MatchEvent('event107')
+!event107.eventType := #GOAL
+!event107.time := 80
+!insert (match27, event107) into MatchMatchEvent
+
+!new MatchEvent('event108')
+!event108.eventType := #GOAL
+!event108.time := 89
+!insert (match27, event108) into MatchMatchEvent
+
+!new TrainingSession('training53')
+!training53.date := '2033-08-05'
+!training53.location := 'Falcon Training Grounds'
+!training53.purpose := 'Wind Resistance Drills'
+!insert (team53, training53) into TeamTraining
+
+!new TrainingSession('training54')
+!training54.date := '2033-08-15'
+!training54.location := 'Amber Lair'
+!training54.purpose := 'Precision Shooting'
+!insert (team54, training54) into TeamTraining
+
+!new TrainingNotes('trainingNote53')
+!trainingNote53.note := 'Improved ball control against strong winds'
+!trainingNote53.date := '2033-08-05'
+!insert (training53, trainingNote53) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote54')
+!trainingNote54.note := 'Focused on scoring from tight angles'
+!trainingNote54.date := '2033-08-15'
+!insert (training54, trainingNote54) into TrainingTrainingNotes
+
+!new TrainingObjective('objective53')
+!objective53.areaToImprove := 'Stamina in Adverse Conditions'
+!objective53.startDate := '2033-06-01'
+!objective53.endDate := '2033-09-01'
+!objective53.success := true
+!insert (objective53, player53) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective54')
+!objective54.areaToImprove := 'Accuracy from Distance'
+!objective54.startDate := '2033-06-15'
+!objective54.endDate := '2033-09-15'
+!objective54.success := false
+!insert (objective54, player54) into TrainingObjectivePlayer

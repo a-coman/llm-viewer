@@ -1,0 +1,424 @@
+!new AddressBook('StartupCommunityAddressBook')
+
+!new Company('TechHub')
+!TechHub.name := 'Tech Hub'
+!TechHub.phone := '+1-303-123-4567'
+!TechHub.website := 'www.techhub.startup'
+!TechHub.email := 'info@techhub.startup'
+!TechHub.industry := 'Information Technology'
+
+!new Person('BarbaraGreen')
+!BarbaraGreen.name := 'Barbara Green'
+!BarbaraGreen.phone := '+1-415-555-0111'
+!BarbaraGreen.email := 'barbara.green@innovators.com'
+!BarbaraGreen.title := 'Founder'
+
+!new Address('BarbaraGreenAddress1')
+!BarbaraGreenAddress1.city := 'San Francisco'
+!BarbaraGreenAddress1.houseNr := '23'
+!BarbaraGreenAddress1.street := 'Silicon Alley'
+!insert (BarbaraGreen, BarbaraGreenAddress1) into ContactContainsAddress
+
+!new Address('BarbaraGreenAddress2')
+!BarbaraGreenAddress2.city := 'Palo Alto'
+!BarbaraGreenAddress2.houseNr := '456'
+!BarbaraGreenAddress2.street := 'Innovation Drive'
+!insert (BarbaraGreen, BarbaraGreenAddress2) into ContactContainsAddress
+
+!new Note('BarbaraGreenNote1')
+!BarbaraGreenNote1.author := 'Matthew Clark'
+!BarbaraGreenNote1.time := Date('2023-07-22')
+!BarbaraGreenNote1.type := #EMAIL
+!BarbaraGreenNote1.comment := 'Discussed opportunities for co-working space collaboration.'
+!insert (BarbaraGreen, BarbaraGreenNote1) into ContactContainsNote
+
+!new Company('EcoVentures')
+!EcoVentures.name := 'Eco Ventures'
+!EcoVentures.phone := '+44-141-555-0199'
+!EcoVentures.website := 'www.ecoventures.co.uk'
+!EcoVentures.email := 'hello@ecoventures.co.uk'
+!EcoVentures.industry := 'Environmental Services'
+
+!new Address('EcoVenturesAddress1')
+!EcoVenturesAddress1.city := 'Glasgow'
+!EcoVenturesAddress1.houseNr := '9'
+!EcoVenturesAddress1.street := 'Greenway Boulevard'
+!insert (EcoVentures, EcoVenturesAddress1) into ContactContainsAddress
+
+!new Note('EcoVenturesNote1')
+!EcoVenturesNote1.author := 'Anna Davis'
+!EcoVenturesNote1.time := Date('2023-09-05')
+!EcoVenturesNote1.type := #CALL
+!EcoVenturesNote1.comment := 'Phone call to plan tree planting initiative.'
+!insert (EcoVentures, EcoVenturesNote1) into ContactContainsNote
+
+!new Relationship('TechHubToBarbaraEmployee')
+!TechHubToBarbaraEmployee.type := #EMPLOYEE
+!insert (TechHubToBarbaraEmployee, BarbaraGreen) into RelationshipToContact
+!insert (TechHub, TechHubToBarbaraEmployee) into ContactToRelationship
+
+!new Relationship('BarbaraToEcoCoworker')
+!BarbaraToEcoCoworker.type := #COWORKER
+!insert (BarbaraToEcoCoworker, EcoVentures) into RelationshipToContact
+!insert (BarbaraGreen, BarbaraToEcoCoworker) into ContactToRelationship
+
+!insert (StartupCommunityAddressBook, TechHub) into AddressBookMadeOfContact
+!insert (StartupCommunityAddressBook, BarbaraGreen) into AddressBookMadeOfContact
+!insert (StartupCommunityAddressBook, EcoVentures) into AddressBookMadeOfContact
+
+!new AddressBook('ContinentalNetworkAddressBook')
+
+!new Person('HiroshiTanaka')
+!HiroshiTanaka.name := 'Hiroshi Tanaka'
+!HiroshiTanaka.phone := '+81-90-5555-1234'
+!HiroshiTanaka.website := 'www.hiroshitanaka.com'
+!HiroshiTanaka.email := 'hiroshi.tanaka@businessmail.jp'
+!HiroshiTanaka.title := 'Marketing Director'
+
+!new Address('HiroshiTanakaAddress')
+!HiroshiTanakaAddress.city := 'Tokyo'
+!HiroshiTanakaAddress.street := 'Ginza District'
+!HiroshiTanakaAddress.houseNr := '88-03'
+!insert (HiroshiTanaka, HiroshiTanakaAddress) into ContactContainsAddress
+
+!new Note('HiroshiTanakaNote1')
+!HiroshiTanakaNote1.author := 'Hiroshi Tanaka'
+!HiroshiTanakaNote1.time := Date('2023-02-20')
+!HiroshiTanakaNote1.type := #EMAIL
+!HiroshiTanakaNote1.comment := 'Exchange ideas for the upcoming Tokyo Expo campaign.'
+!insert (HiroshiTanaka, HiroshiTanakaNote1) into ContactContainsNote
+
+!new Person('KeikoYamada')
+!KeikoYamada.name := 'Keiko Yamada'
+!KeikoYamada.phone := '+81-70-6655-9988'
+!KeikoYamada.website := 'www.keikoyamada.net'
+!KeikoYamada.email := 'keiko.yamada@creativeagency.jp'
+!KeikoYamada.title := 'Junior Graphic Designer'
+
+!new Address('KeikoYamadaAddress')
+!KeikoYamadaAddress.city := 'Osaka'
+!KeikoYamadaAddress.street := 'Ebisubashi'
+!KeikoYamadaAddress.houseNr := '1204'
+!insert (KeikoYamada, KeikoYamadaAddress) into ContactContainsAddress
+
+!new Note('KeikoYamadaNote1')
+!KeikoYamadaNote1.author := 'Keiko Yamada'
+!KeikoYamadaNote1.time := Date('2023-04-12')
+!KeikoYamadaNote1.type := #MEETING
+!KeikoYamadaNote1.comment := 'Brainstorming session for new ad visual concepts.'
+!insert (KeikoYamada, KeikoYamadaNote1) into ContactContainsNote
+
+!new Relationship('HiroshiToKeikoBoss')
+!HiroshiToKeikoBoss.type := #BOSS
+!insert (HiroshiToKeikoBoss, KeikoYamada) into RelationshipToContact
+!insert (HiroshiTanaka, HiroshiToKeikoBoss) into ContactToRelationship
+
+!new Company('NordicHardwareInc')
+!NordicHardwareInc.name := 'Nordic Hardware Inc.'
+!NordicHardwareInc.phone := '+46-31-555-4432'
+!NordicHardwareInc.website := 'www.nordichardware.se'
+!NordicHardwareInc.email := 'contact@nordichardware.se'
+!NordicHardwareInc.industry := 'Manufacturing'
+
+!new Address('NordicHardwareAddress1')
+!NordicHardwareAddress1.city := 'Gothenburg'
+!NordicHardwareAddress1.street := 'Haga Nygata'
+!NordicHardwareAddress1.houseNr := '110A'
+!insert (NordicHardwareInc, NordicHardwareAddress1) into ContactContainsAddress
+
+!new Address('NordicHardwareAddress2')
+!NordicHardwareAddress2.city := 'Stockholm'
+!NordicHardwareAddress2.street := 'Drottninggatan'
+!NordicHardwareAddress2.houseNr := '42'
+!insert (NordicHardwareInc, NordicHardwareAddress2) into ContactContainsAddress
+
+!new Note('NordicHardwareNote1')
+!NordicHardwareNote1.author := 'Erik Jonsson'
+!NordicHardwareNote1.time := Date('2023-07-15')
+!NordicHardwareNote1.type := #CALL
+!NordicHardwareNote1.comment := 'Discuss logistics for new product lines across Europe.'
+!insert (NordicHardwareInc, NordicHardwareNote1) into ContactContainsNote
+
+!new Person('ErikJonsson')
+!ErikJonsson.name := 'Erik Jonsson'
+!ErikJonsson.phone := '+46-08-5556-7890'
+!ErikJonsson.website := 'www.erikjonssonconsulting.se'
+!ErikJonsson.email := 'erik.jonsson@consult.se'
+!ErikJonsson.title := 'Supply Chain Manager'
+
+!new Address('ErikJonssonAddress')
+!ErikJonssonAddress.city := 'Malmö'
+!ErikJonssonAddress.street := 'Lilla Fiskaregatan'
+!ErikJonssonAddress.houseNr := '74B'
+!insert (ErikJonsson, ErikJonssonAddress) into ContactContainsAddress
+
+!new Note('ErikJonssonNote1')
+!ErikJonssonNote1.author := 'Erik Jonsson'
+!ErikJonssonNote1.time := Date('2023-10-23')
+!ErikJonssonNote1.type := #CALL
+!ErikJonssonNote1.comment := 'Monthly call with international suppliers review.'
+!insert (ErikJonsson, ErikJonssonNote1) into ContactContainsNote
+
+!new Relationship('KeikoToHiroshiEmployee')
+!KeikoToHiroshiEmployee.type := #EMPLOYEE
+!insert (KeikoToHiroshiEmployee, HiroshiTanaka) into RelationshipToContact
+!insert (KeikoYamada, KeikoToHiroshiEmployee) into ContactToRelationship
+
+!new Relationship('ErikToNordicSubdivision')
+!ErikToNordicSubdivision.type := #SUBDIVISION
+!insert (ErikToNordicSubdivision, NordicHardwareInc) into RelationshipToContact
+!insert (ErikJonsson, ErikToNordicSubdivision) into ContactToRelationship
+
+!new Relationship('ErikToHiroshiCoworker')
+!ErikToHiroshiCoworker.type := #COWORKER
+!insert (ErikToHiroshiCoworker, HiroshiTanaka) into RelationshipToContact
+!insert (ErikJonsson, ErikToHiroshiCoworker) into ContactToRelationship
+
+!insert (ContinentalNetworkAddressBook, HiroshiTanaka) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, NordicHardwareInc) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, KeikoYamada) into AddressBookMadeOfContact
+!insert (ContinentalNetworkAddressBook, ErikJonsson) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalNetworksReferenceBook')
+
+!new Company('QuantumInnovationsLtd')
+!QuantumInnovationsLtd.name := 'Quantum Innovations Ltd.'
+!QuantumInnovationsLtd.phone := '+44-20-79301000'
+!QuantumInnovationsLtd.website := 'www.quantuminnovations.co.uk'
+!QuantumInnovationsLtd.email := 'contact@quantuminnovations.co.uk'
+!QuantumInnovationsLtd.industry := 'Advanced Electronics'
+
+!new Address('QuantumInnovationsAddress')
+!QuantumInnovationsAddress.city := 'London'
+!QuantumInnovationsAddress.street := 'Tech Park Avenue'
+!QuantumInnovationsAddress.houseNr := '50'
+!insert (QuantumInnovationsLtd, QuantumInnovationsAddress) into ContactContainsAddress
+
+!new Note('QuantumInnovationsNote1')
+!QuantumInnovationsNote1.author := 'Helena Fox'
+!QuantumInnovationsNote1.time := Date('2023-06-18T10:00:00')
+!QuantumInnovationsNote1.type := #CALL
+!QuantumInnovationsNote1.comment := 'Discussed collaboration on the Higgs-Boson project.'
+!insert (QuantumInnovationsLtd, QuantumInnovationsNote1) into ContactContainsNote
+
+!new Person('ProfEmilyZhang')
+!ProfEmilyZhang.name := 'Prof. Emily Zhang'
+!ProfEmilyZhang.phone := '+86-10-22334455'
+!ProfEmilyZhang.website := 'profzhangeducation.cn'
+!ProfEmilyZhang.email := 'emily.zhang@edu.cn'
+!ProfEmilyZhang.title := 'Director of International Studies'
+
+!new Address('EmilyZhangAddress')
+!EmilyZhangAddress.city := 'Beijing'
+!EmilyZhangAddress.street := 'Knowledge Hub Road'
+!EmilyZhangAddress.houseNr := '88'
+!insert (ProfEmilyZhang, EmilyZhangAddress) into ContactContainsAddress
+
+!new Note('EmilyZhangNote1')
+!EmilyZhangNote1.author := 'Prof. Emily Zhang'
+!EmilyZhangNote1.time := Date('2023-09-12T12:30:00')
+!EmilyZhangNote1.type := #EMAIL
+!EmilyZhangNote1.comment := 'Follow-up on the educational exchange program.'
+!insert (ProfEmilyZhang, EmilyZhangNote1) into ContactContainsNote
+
+!new Note('EmilyZhangNote2')
+!EmilyZhangNote2.author := 'Prof. Emily Zhang'
+!EmilyZhangNote2.time := Date('2023-08-28T16:15:00')
+!EmilyZhangNote2.type := #MEETING
+!EmilyZhangNote2.comment := 'Quarterly academic council meeting in Beijing.'
+!insert (ProfEmilyZhang, EmilyZhangNote2) into ContactContainsNote
+
+!new Person('DrMarcusJames')
+!DrMarcusJames.name := 'Dr. Marcus James'
+!DrMarcusJames.phone := '+1-617-5557890'
+!DrMarcusJames.website := 'www.marcusjamesconsulting.com'
+!DrMarcusJames.email := 'marcus.james@consulting.com'
+!DrMarcusJames.title := 'Senior Consultant'
+
+!new Address('MarcusJamesAddress')
+!MarcusJamesAddress.city := 'Boston'
+!MarcusJamesAddress.street := 'Innovation Row'
+!MarcusJamesAddress.houseNr := '101'
+!insert (DrMarcusJames, MarcusJamesAddress) into ContactContainsAddress
+
+!new Note('MarcusJamesNote1')
+!MarcusJamesNote1.author := 'Dr. Marcus James'
+!MarcusJamesNote1.time := Date('2023-05-05T10:45:00')
+!MarcusJamesNote1.type := #CALL
+!MarcusJamesNote1.comment := 'Consulting session on green technology.'
+!insert (DrMarcusJames, MarcusJamesNote1) into ContactContainsNote
+
+!new Person('ProfAntonIvanovich')
+!ProfAntonIvanovich.name := 'Prof. Anton Ivanovich'
+!ProfAntonIvanovich.phone := '+7-495-8889990'
+!ProfAntonIvanovich.website := 'anton-ivanovich-research.ru'
+!ProfAntonIvanovich.email := 'anton.ivanovich@research.gov.ru'
+!ProfAntonIvanovich.title := 'Head of Research'
+
+!new Address('AntonIvanovichAddress')
+!AntonIvanovichAddress.city := 'Moscow'
+!AntonIvanovichAddress.street := 'Science Boulevard'
+!AntonIvanovichAddress.houseNr := '77'
+!insert (ProfAntonIvanovich, AntonIvanovichAddress) into ContactContainsAddress
+
+!new Note('AntonIvanovichNote1')
+!AntonIvanovichNote1.author := 'Prof. Anton Ivanovich'
+!AntonIvanovichNote1.time := Date('2023-04-22T09:30:00')
+!AntonIvanovichNote1.type := #MEETING
+!AntonIvanovichNote1.comment := 'Innovation leaders summit in Moscow.'
+!insert (ProfAntonIvanovich, AntonIvanovichNote1) into ContactContainsNote
+
+!new Relationship('QuantumToEmilySubdivision')
+!QuantumToEmilySubdivision.type := #SUBDIVISION
+!insert (QuantumToEmilySubdivision, ProfEmilyZhang) into RelationshipToContact
+!insert (QuantumInnovationsLtd, QuantumToEmilySubdivision) into ContactToRelationship
+
+!new Relationship('QuantumToAntonBoss')
+!QuantumToAntonBoss.type := #BOSS
+!insert (QuantumToAntonBoss, ProfAntonIvanovich) into RelationshipToContact
+!insert (QuantumInnovationsLtd, QuantumToAntonBoss) into ContactToRelationship
+
+!new Relationship('EmilyToMarcusCoworker')
+!EmilyToMarcusCoworker.type := #COWORKER
+!insert (EmilyToMarcusCoworker, DrMarcusJames) into RelationshipToContact
+!insert (ProfEmilyZhang, EmilyToMarcusCoworker) into ContactToRelationship
+
+!new Relationship('MarcusToEmilyCoworker')
+!MarcusToEmilyCoworker.type := #COWORKER
+!insert (MarcusToEmilyCoworker, ProfEmilyZhang) into RelationshipToContact
+!insert (DrMarcusJames, MarcusToEmilyCoworker) into ContactToRelationship
+
+!new Relationship('MarcusToQuantumEmployee')
+!MarcusToQuantumEmployee.type := #EMPLOYEE
+!insert (MarcusToQuantumEmployee, QuantumInnovationsLtd) into RelationshipToContact
+!insert (DrMarcusJames, MarcusToQuantumEmployee) into ContactToRelationship
+
+!insert (GlobalNetworksReferenceBook, QuantumInnovationsLtd) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, ProfEmilyZhang) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, DrMarcusJames) into AddressBookMadeOfContact
+!insert (GlobalNetworksReferenceBook, ProfAntonIvanovich) into AddressBookMadeOfContact
+
+!new AddressBook('ContinentalNetwork')
+
+!new Person('DrAyeshaKhan')
+!DrAyeshaKhan.name := 'Dr. Ayesha Khan'
+!DrAyeshaKhan.phone := '+92 21 987 6543'
+!DrAyeshaKhan.website := 'www.ayeshakresearch.org'
+!DrAyeshaKhan.email := 'khan.ayesha@uni.edu'
+!DrAyeshaKhan.title := 'Professor of Environmental Science'
+
+!new Address('AyeshaKhanAddress')
+!AyeshaKhanAddress.city := 'Karachi'
+!AyeshaKhanAddress.street := 'University Avenue'
+!AyeshaKhanAddress.houseNr := '12'
+!insert (DrAyeshaKhan, AyeshaKhanAddress) into ContactContainsAddress
+
+!new Note('AyeshaKhanNote1')
+!AyeshaKhanNote1.author := 'Dr. Ayesha Khan'
+!AyeshaKhanNote1.time := Date('2023-06-01')
+!AyeshaKhanNote1.type := #EMAIL
+!AyeshaKhanNote1.comment := 'Follow-up email about the environmental research collaboration with EU partners.'
+!insert (DrAyeshaKhan, AyeshaKhanNote1) into ContactContainsNote
+
+!new Note('AyeshaKhanNote2')
+!AyeshaKhanNote2.author := 'Dr. Ayesha Khan'
+!AyeshaKhanNote2.time := Date('2023-06-10')
+!AyeshaKhanNote2.type := #MEETING
+!AyeshaKhanNote2.comment := 'Attended the Global Climate Change Conference.'
+!insert (DrAyeshaKhan, AyeshaKhanNote2) into ContactContainsNote
+
+!new Person('ProfJohnMartinez')
+!ProfJohnMartinez.name := 'Prof. John Martinez'
+!ProfJohnMartinez.phone := '+34 91 555 6644'
+!ProfJohnMartinez.website := 'www.innovateenergy.com'
+!ProfJohnMartinez.email := 'martinez.j@energy-research.org'
+!ProfJohnMartinez.title := 'Head of Research Department'
+
+!new Address('JohnMartinezAddress')
+!JohnMartinezAddress.city := 'Madrid'
+!JohnMartinezAddress.street := 'Ciencia Street'
+!JohnMartinezAddress.houseNr := '101'
+!insert (ProfJohnMartinez, JohnMartinezAddress) into ContactContainsAddress
+
+!new Note('JohnMartinezNote1')
+!JohnMartinezNote1.author := 'Prof. John Martinez'
+!JohnMartinezNote1.time := Date('2023-06-15')
+!JohnMartinezNote1.type := #CALL
+!JohnMartinezNote1.comment := 'Discussed joint paper publication with Dr. Ayesha Khan.'
+!insert (ProfJohnMartinez, JohnMartinezNote1) into ContactContainsNote
+
+!new Company('EcoResearchInstitute')
+!EcoResearchInstitute.name := 'Eco Research Institute'
+!EcoResearchInstitute.phone := '+61 7 3221 2345'
+!EcoResearchInstitute.website := 'www.ecoresearch.org.au'
+!EcoResearchInstitute.email := 'info@ecoresearch.org.au'
+!EcoResearchInstitute.industry := 'Environmental Research'
+
+!new Address('EcoResearchAddress')
+!EcoResearchAddress.city := 'Brisbane'
+!EcoResearchAddress.street := 'Green Street'
+!EcoResearchAddress.houseNr := '55B'
+!insert (EcoResearchInstitute, EcoResearchAddress) into ContactContainsAddress
+
+!new Note('EcoResearchNote1')
+!EcoResearchNote1.author := 'Eco Research Institute'
+!EcoResearchNote1.time := Date('2023-07-01')
+!EcoResearchNote1.type := #MEETING
+!EcoResearchNote1.comment := 'Organized meeting for the annual environmental awareness workshop.'
+!insert (EcoResearchInstitute, EcoResearchNote1) into ContactContainsNote
+
+!new Company('EnerTechSolutionsLtd')
+!EnerTechSolutionsLtd.name := 'EnerTech Solutions Ltd.'
+!EnerTechSolutionsLtd.phone := '+49 30 1234 567'
+!EnerTechSolutionsLtd.website := 'www.enertechsol.de'
+!EnerTechSolutionsLtd.email := 'contact@enertechsol.de'
+!EnerTechSolutionsLtd.industry := 'Renewable Energy'
+
+!new Address('EnerTechSolutionsAddress')
+!EnerTechSolutionsAddress.city := 'Berlin'
+!EnerTechSolutionsAddress.street := 'Solar Parkway'
+!EnerTechSolutionsAddress.houseNr := '200'
+!insert (EnerTechSolutionsLtd, EnerTechSolutionsAddress) into ContactContainsAddress
+
+!new Note('EnerTechSolutionsNote1')
+!EnerTechSolutionsNote1.author := 'EnerTech Solutions Ltd.'
+!EnerTechSolutionsNote1.time := Date('2023-08-10')
+!EnerTechSolutionsNote1.type := #EMAIL
+!EnerTechSolutionsNote1.comment := 'Sent an email confirming availability for upcoming renewable energy summit.'
+!insert (EnerTechSolutionsLtd, EnerTechSolutionsNote1) into ContactContainsNote
+
+!new Relationship('AyeshaToJohnCoworker')
+!AyeshaToJohnCoworker.type := #COWORKER
+!insert (AyeshaToJohnCoworker, ProfJohnMartinez) into RelationshipToContact
+!insert (DrAyeshaKhan, AyeshaToJohnCoworker) into ContactToRelationship
+
+!new Relationship('AyeshaToEcoEmployee')
+!AyeshaToEcoEmployee.type := #EMPLOYEE
+!insert (AyeshaToEcoEmployee, EcoResearchInstitute) into RelationshipToContact
+!insert (DrAyeshaKhan, AyeshaToEcoEmployee) into ContactToRelationship
+
+!new Relationship('JohnToAyeshaCoworker')
+!JohnToAyeshaCoworker.type := #COWORKER
+!insert (JohnToAyeshaCoworker, DrAyeshaKhan) into RelationshipToContact
+!insert (ProfJohnMartinez, JohnToAyeshaCoworker) into ContactToRelationship
+
+!new Relationship('JohnToEnerTechBoss')
+!JohnToEnerTechBoss.type := #BOSS
+!insert (JohnToEnerTechBoss, EnerTechSolutionsLtd) into RelationshipToContact
+!insert (ProfJohnMartinez, JohnToEnerTechBoss) into ContactToRelationship
+
+!new Relationship('EcoToAyeshaBoss')
+!EcoToAyeshaBoss.type := #BOSS
+!insert (EcoToAyeshaBoss, DrAyeshaKhan) into RelationshipToContact
+!insert (EcoResearchInstitute, EcoToAyeshaBoss) into ContactToRelationship
+
+!new Relationship('EnerTechToJohnEmployee')
+!EnerTechToJohnEmployee.type := #EMPLOYEE
+!insert (EnerTechToJohnEmployee, ProfJohnMartinez) into RelationshipToContact
+!insert (EnerTechSolutionsLtd, EnerTechToJohnEmployee) into ContactToRelationship
+
+!insert (ContinentalNetwork, DrAyeshaKhan) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, ProfJohnMartinez) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, EcoResearchInstitute) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, EnerTechSolutionsLtd) into AddressBookMadeOfContact
+

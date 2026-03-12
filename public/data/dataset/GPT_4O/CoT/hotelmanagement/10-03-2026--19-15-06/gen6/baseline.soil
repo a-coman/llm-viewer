@@ -1,0 +1,76 @@
+!new Customer('customer26')
+!customer26.firstName := 'Oliver'
+!customer26.lastName := 'Edwards'
+
+!new Booking('booking25')
+!booking25.startDate := '2024-07-10'
+!booking25.endDate := '2024-07-17'
+!booking25.canceled := false
+!booking25.bookingId := 106
+!booking25.confirmed := true
+
+!new Bill('bill50')
+!bill50.price := 5000.0
+!bill50.billId := 701
+
+!new Bill('bill51')
+!bill51.price := 1500.0
+!bill51.billId := 702
+
+!new FreeRoomTypesDTO('freeRoomType21')
+!freeRoomType21.roomTypeDescription := 'Adventure Suite'
+!freeRoomType21.numBeds := 3
+!freeRoomType21.pricePerNight := 300.0
+!freeRoomType21.numFreeRooms := 2
+
+!new RoomReservation('roomReservation25_1')
+!roomReservation25_1.checkInDate := '2024-07-10'
+!roomReservation25_1.checkOutDate := '2024-07-17'
+
+!new RoomReservation('roomReservation25_2')
+!roomReservation25_2.checkInDate := '2024-07-10'
+!roomReservation25_2.checkOutDate := '2024-07-17'
+
+!new RoomExtra('extra25_1')
+!extra25_1.price := 300.0
+!extra25_1.description := 'Hiking and Rafting Gear Rental'
+
+!new RoomExtra('extra25_2')
+!extra25_2.price := 800.0
+!extra25_2.description := 'Guided Mountain and River Tours'
+
+!new RoomExtra('extra25_3')
+!extra25_3.price := 400.0
+!extra25_3.description := 'Professional Photography Session'
+
+!new Room('room25_801')
+!room25_801.numBeds := 3
+!room25_801.pricePerNight := 300.0
+!room25_801.occupied := true
+!room25_801.blocked := false
+!room25_801.roomNumber := 801
+
+!new Room('room25_802')
+!room25_802.numBeds := 3
+!room25_802.pricePerNight := 300.0
+!room25_802.occupied := true
+!room25_802.blocked := false
+!room25_802.roomNumber := 802
+
+!insert (booking25, customer26) into BookingCustomer
+
+!insert (booking25, bill50) into BookingBill
+!insert (booking25, bill51) into BookingBill
+
+!insert (booking25, roomReservation25_1) into BookingRoomReservation
+!insert (booking25, roomReservation25_2) into BookingRoomReservation
+
+!insert (roomReservation25_1, room25_801) into RoomReservationRoom
+!insert (roomReservation25_2, room25_802) into RoomReservationRoom
+
+!insert (roomReservation25_1, extra25_1) into RoomReservationExtras
+!insert (roomReservation25_1, extra25_2) into RoomReservationExtras
+!insert (roomReservation25_2, extra25_3) into RoomReservationExtras
+
+!insert (bill50, roomReservation25_1) into BillRoomReservation
+!insert (bill51, roomReservation25_2) into BillRoomReservation

@@ -1,0 +1,136 @@
+!new Club('club39')
+!club39.name := 'Star Penguins'
+!club39.homeGround := 'Frozen Rink'
+!club39.chairman := 'Gemma Frost'
+
+!new Club('club40')
+!club40.name := 'Blaze Dragons'
+!club40.homeGround := 'Inferno Field'
+!club40.chairman := 'Flame Drakkar'
+
+!new Team('team39')
+!team39.name := 'Penguin Icicles'
+!insert (club39, team39) into ClubTeam
+
+!new Team('team40')
+!team40.name := 'Dragon Fire'
+!insert (club40, team40) into ClubTeam
+
+!new Competition('fireAndIceCup')
+!fireAndIceCup.name := 'Fire and Ice Cup'
+!fireAndIceCup.type := 'Single Elimination'
+
+!new Match('match20')
+!match20.date := '2028-02-18'
+!match20.homeAway := true
+!insert (fireAndIceCup, match20) into CompetitionMatch
+!insert (team39, match20) into LocalMatch
+!insert (team40, match20) into VisitorMatch
+
+!new MatchReport('report20')
+!report20.duration := 90
+!report20.scoreVisitor := 1
+!report20.scoreLocal := 3
+!insert (match20, report20) into MatchMatchReport
+
+!new Player('player39')
+!player39.name := 'Aurora Glacier'
+!player39.age := 24
+!player39.bestFoot := #BOTH
+!player39.phoneNumber := '7981236540'
+!insert (team39, player39) into TeamPlayer
+
+!new Player('player40')
+!player40.name := 'Ignis Blaze'
+!player40.age := 27
+!player40.bestFoot := #RIGHT
+!player40.phoneNumber := '6874123059'
+!insert (team40, player40) into TeamPlayer
+
+!new Position('position39')
+!position39.positionName := #DEFENDER
+!insert (player39, position39) into PlayerPositions
+
+!new Position('position40')
+!position40.positionName := #FORWARD
+!insert (player40, position40) into PlayerPositions
+
+!new MatchPlayer('matchPlayer39')
+!matchPlayer39.booked := false
+!matchPlayer39.goals := 0
+!matchPlayer39.rating := 8
+!insert (player39, matchPlayer39) into PlayerMatch
+!insert (match20, matchPlayer39) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer40')
+!matchPlayer40.booked := true
+!matchPlayer40.goals := 1
+!matchPlayer40.rating := 7
+!insert (player40, matchPlayer40) into PlayerMatch
+!insert (match20, matchPlayer40) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition39')
+!matchPlayerPosition39.positionName := #DEFENDER
+!matchPlayerPosition39.number := 3
+!insert (matchPlayer39, matchPlayerPosition39) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition40')
+!matchPlayerPosition40.positionName := #FORWARD
+!matchPlayerPosition40.number := 11
+!insert (matchPlayer40, matchPlayerPosition40) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event73')
+!event73.eventType := #GOAL
+!event73.time := 10
+!insert (match20, event73) into MatchMatchEvent
+
+!new MatchEvent('event74')
+!event74.eventType := #GOAL
+!event74.time := 22
+!insert (match20, event74) into MatchMatchEvent
+
+!new MatchEvent('event75')
+!event75.eventType := #GOAL
+!event75.time := 55
+!insert (match20, event75) into MatchMatchEvent
+
+!new MatchEvent('event76')
+!event76.eventType := #GOAL
+!event76.time := 68
+!insert (match20, event76) into MatchMatchEvent
+
+!new TrainingSession('training39')
+!training39.date := '2028-01-05'
+!training39.location := 'Arctic Pavilion'
+!training39.purpose := 'Defense Fortress Drills'
+!insert (team39, training39) into TeamTraining
+
+!new TrainingSession('training40')
+!training40.date := '2028-01-12'
+!training40.location := 'Volcano Base'
+!training40.purpose := 'Scoring Maximization'
+!insert (team40, training40) into TeamTraining
+
+!new TrainingNotes('trainingNote39')
+!trainingNote39.note := 'Trained for tempo adjustment in cold conditions'
+!trainingNote39.date := '2028-01-05'
+!insert (training39, trainingNote39) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote40')
+!trainingNote40.note := 'Focused on effective shot conversion under pressure'
+!trainingNote40.date := '2028-01-12'
+!insert (training40, trainingNote40) into TrainingTrainingNotes
+
+!new TrainingObjective('objective39')
+!objective39.areaToImprove := 'Defensive Wall Formation'
+!objective39.startDate := '2027-11-01'
+!objective39.endDate := '2028-02-01'
+!objective39.success := true
+!insert (objective39, player39) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective40')
+!objective40.areaToImprove := 'Goal Scoring Prowess'
+!objective40.startDate := '2027-11-15'
+!objective40.endDate := '2028-02-15'
+!objective40.success := false
+!insert (objective40, player40) into TrainingObjectivePlayer

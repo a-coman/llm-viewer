@@ -1,0 +1,70 @@
+!new RentalOffice('office2')
+!office2.name := 'Airport Rental'
+!office2.number := 202
+!office2.address := '555 Aviation Blvd, Miami, FL'
+
+!new Truck('truck3')
+!truck3.id := 503
+!truck3.registrationState := #FL
+!truck3.licensePlateNumber := 'FL-TRK-3456'
+!truck3.vehicleTypeCode := #TRUCK
+!truck3.registrationLastMaintenanceDate := Date('2023-06-10')
+!truck3.expirationDate := Date('2025-06-10')
+!truck3.odometerReading := 5000
+!truck3.gasTankCapacity := 40.0
+!truck3.workingRadio := true
+!truck3.mileage := 18
+
+!new Individual('individual2')
+!individual2.name := 'John Smith'
+!individual2.address := '789 Pine St, Orlando, FL'
+!individual2.poorRisk := false
+!individual2.homePhone := '555-6789'
+!individual2.driverLicenseState := #FL
+!individual2.driverLicenseNumber := 20304050
+!individual2.driverLicenseExpirationDate := Date('2026-11-20')
+
+!new RentalAgreement('agreement3')
+!agreement3.number := 3003
+!agreement3.rentalDate := Date('2023-11-05')
+!agreement3.anticipatedDuration := 3
+!agreement3.depositPaid := 120.0
+!agreement3.quotedDailyRate := 55.00
+!agreement3.quotedRatePerMile := 0.5
+
+!new Truck('truck4')
+!truck4.id := 504
+!truck4.registrationState := #AZ
+!truck4.licensePlateNumber := 'AZ-TRK-5678'
+!truck4.vehicleTypeCode := #TRUCK10
+!truck4.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck4.expirationDate := Date('2025-07-15')
+!truck4.odometerReading := 8000
+!truck4.gasTankCapacity := 35.0
+!truck4.workingRadio := false
+!truck4.mileage := 20
+
+!new Company('company2')
+!company2.name := 'ConstructionPros Inc.'
+!company2.address := '321 Build Rd, Phoenix, AZ'
+!company2.poorRisk := false
+!company2.idNumber := 678901
+
+!new RentalAgreement('agreement4')
+!agreement4.number := 3004
+!agreement4.rentalDate := Date('2023-11-10')
+!agreement4.anticipatedDuration := 10
+!agreement4.depositPaid := 300.0
+!agreement4.quotedDailyRate := 65.00
+!agreement4.quotedRatePerMile := 0.6
+
+!insert (office2, truck3) into RentalOfficeVehicle
+!insert (office2, truck4) into RentalOfficeVehicle
+!insert (office2, agreement3) into RentalOfficeRentalAgreementOrigin
+!insert (office2, agreement3) into RentalOfficeRentalAgreementDrop
+!insert (office2, agreement4) into RentalOfficeRentalAgreementOrigin
+!insert (office2, agreement4) into RentalOfficeRentalAgreementDrop
+!insert (agreement3, truck3) into RentalAgreementVehicle
+!insert (agreement3, individual2) into RentalAgreementCustomer
+!insert (agreement4, truck4) into RentalAgreementVehicle
+!insert (agreement4, company2) into RentalAgreementCustomer

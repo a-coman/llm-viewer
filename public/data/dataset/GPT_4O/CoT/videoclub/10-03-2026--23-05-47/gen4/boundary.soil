@@ -1,0 +1,44 @@
+!new Client('client24')
+!client24.clientId := 500
+!client24.isSuspended := false
+
+!new Rental('rental38')
+!rental38.date := Date('2024-04-15')
+
+!new Rental('rental39')
+!rental39.date := Date('2024-04-25')
+
+!new Movie('movie30')
+!movie30.title := 'Desert Chronicles'
+!movie30.availableCopies := 2
+!movie30.genre := #Action
+
+!new Movie('movie31')
+!movie31.title := 'Comedy of Errors'
+!movie31.availableCopies := 15
+!movie31.genre := #Comedy
+
+!new Series('series30')
+!series30.title := 'Journey through Africa'
+!series30.availableCopies := 0
+!series30.episode := 10
+
+!new Actor('actor59')
+!actor59.name := 'Kofi Agyeman'
+
+!new Actor('actor60')
+!actor60.name := 'Fatima Hassan'
+
+!insert (client24, rental38) into ClientRental
+!insert (client24, rental39) into ClientRental
+
+!insert (rental38, movie30) into RentalCassette
+!insert (rental38, movie31) into RentalCassette
+
+!insert (rental39, series30) into RentalCassette
+
+!insert (movie30, actor59) into CassetteActor
+
+!insert (movie31, actor60) into CassetteActor
+
+!insert (series30, actor59) into CassetteActor

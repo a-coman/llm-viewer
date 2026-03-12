@@ -1,0 +1,123 @@
+!new AddressBook('ContinentalNetwork')
+
+!new Person('DrAyeshaKhan')
+!DrAyeshaKhan.name := 'Dr. Ayesha Khan'
+!DrAyeshaKhan.phone := '+92 21 987 6543'
+!DrAyeshaKhan.website := 'www.ayeshakresearch.org'
+!DrAyeshaKhan.email := 'khan.ayesha@uni.edu'
+!DrAyeshaKhan.title := 'Professor of Environmental Science'
+
+!new Address('AyeshaKhanAddress')
+!AyeshaKhanAddress.city := 'Karachi'
+!AyeshaKhanAddress.street := 'University Avenue'
+!AyeshaKhanAddress.houseNr := '12'
+!insert (DrAyeshaKhan, AyeshaKhanAddress) into ContactContainsAddress
+
+!new Note('AyeshaKhanNote1')
+!AyeshaKhanNote1.author := 'Dr. Ayesha Khan'
+!AyeshaKhanNote1.time := Date('2023-06-01')
+!AyeshaKhanNote1.type := #EMAIL
+!AyeshaKhanNote1.comment := 'Follow-up email about the environmental research collaboration with EU partners.'
+!insert (DrAyeshaKhan, AyeshaKhanNote1) into ContactContainsNote
+
+!new Note('AyeshaKhanNote2')
+!AyeshaKhanNote2.author := 'Dr. Ayesha Khan'
+!AyeshaKhanNote2.time := Date('2023-06-10')
+!AyeshaKhanNote2.type := #MEETING
+!AyeshaKhanNote2.comment := 'Attended the Global Climate Change Conference.'
+!insert (DrAyeshaKhan, AyeshaKhanNote2) into ContactContainsNote
+
+!new Person('ProfJohnMartinez')
+!ProfJohnMartinez.name := 'Prof. John Martinez'
+!ProfJohnMartinez.phone := '+34 91 555 6644'
+!ProfJohnMartinez.website := 'www.innovateenergy.com'
+!ProfJohnMartinez.email := 'martinez.j@energy-research.org'
+!ProfJohnMartinez.title := 'Head of Research Department'
+
+!new Address('JohnMartinezAddress')
+!JohnMartinezAddress.city := 'Madrid'
+!JohnMartinezAddress.street := 'Ciencia Street'
+!JohnMartinezAddress.houseNr := '101'
+!insert (ProfJohnMartinez, JohnMartinezAddress) into ContactContainsAddress
+
+!new Note('JohnMartinezNote1')
+!JohnMartinezNote1.author := 'Prof. John Martinez'
+!JohnMartinezNote1.time := Date('2023-06-15')
+!JohnMartinezNote1.type := #CALL
+!JohnMartinezNote1.comment := 'Discussed joint paper publication with Dr. Ayesha Khan.'
+!insert (ProfJohnMartinez, JohnMartinezNote1) into ContactContainsNote
+
+!new Company('EcoResearchInstitute')
+!EcoResearchInstitute.name := 'Eco Research Institute'
+!EcoResearchInstitute.phone := '+61 7 3221 2345'
+!EcoResearchInstitute.website := 'www.ecoresearch.org.au'
+!EcoResearchInstitute.email := 'info@ecoresearch.org.au'
+!EcoResearchInstitute.industry := 'Environmental Research'
+
+!new Address('EcoResearchAddress')
+!EcoResearchAddress.city := 'Brisbane'
+!EcoResearchAddress.street := 'Green Street'
+!EcoResearchAddress.houseNr := '55B'
+!insert (EcoResearchInstitute, EcoResearchAddress) into ContactContainsAddress
+
+!new Note('EcoResearchNote1')
+!EcoResearchNote1.author := 'Eco Research Institute'
+!EcoResearchNote1.time := Date('2023-07-01')
+!EcoResearchNote1.type := #MEETING
+!EcoResearchNote1.comment := 'Organized meeting for the annual environmental awareness workshop.'
+!insert (EcoResearchInstitute, EcoResearchNote1) into ContactContainsNote
+
+!new Company('EnerTechSolutionsLtd')
+!EnerTechSolutionsLtd.name := 'EnerTech Solutions Ltd.'
+!EnerTechSolutionsLtd.phone := '+49 30 1234 567'
+!EnerTechSolutionsLtd.website := 'www.enertechsol.de'
+!EnerTechSolutionsLtd.email := 'contact@enertechsol.de'
+!EnerTechSolutionsLtd.industry := 'Renewable Energy'
+
+!new Address('EnerTechSolutionsAddress')
+!EnerTechSolutionsAddress.city := 'Berlin'
+!EnerTechSolutionsAddress.street := 'Solar Parkway'
+!EnerTechSolutionsAddress.houseNr := '200'
+!insert (EnerTechSolutionsLtd, EnerTechSolutionsAddress) into ContactContainsAddress
+
+!new Note('EnerTechSolutionsNote1')
+!EnerTechSolutionsNote1.author := 'EnerTech Solutions Ltd.'
+!EnerTechSolutionsNote1.time := Date('2023-08-10')
+!EnerTechSolutionsNote1.type := #EMAIL
+!EnerTechSolutionsNote1.comment := 'Sent an email confirming availability for upcoming renewable energy summit.'
+!insert (EnerTechSolutionsLtd, EnerTechSolutionsNote1) into ContactContainsNote
+
+!new Relationship('AyeshaToJohnCoworker')
+!AyeshaToJohnCoworker.type := #COWORKER
+!insert (AyeshaToJohnCoworker, ProfJohnMartinez) into RelationshipToContact
+!insert (DrAyeshaKhan, AyeshaToJohnCoworker) into ContactToRelationship
+
+!new Relationship('AyeshaToEcoEmployee')
+!AyeshaToEcoEmployee.type := #EMPLOYEE
+!insert (AyeshaToEcoEmployee, EcoResearchInstitute) into RelationshipToContact
+!insert (DrAyeshaKhan, AyeshaToEcoEmployee) into ContactToRelationship
+
+!new Relationship('JohnToAyeshaCoworker')
+!JohnToAyeshaCoworker.type := #COWORKER
+!insert (JohnToAyeshaCoworker, DrAyeshaKhan) into RelationshipToContact
+!insert (ProfJohnMartinez, JohnToAyeshaCoworker) into ContactToRelationship
+
+!new Relationship('JohnToEnerTechBoss')
+!JohnToEnerTechBoss.type := #BOSS
+!insert (JohnToEnerTechBoss, EnerTechSolutionsLtd) into RelationshipToContact
+!insert (ProfJohnMartinez, JohnToEnerTechBoss) into ContactToRelationship
+
+!new Relationship('EcoToAyeshaBoss')
+!EcoToAyeshaBoss.type := #BOSS
+!insert (EcoToAyeshaBoss, DrAyeshaKhan) into RelationshipToContact
+!insert (EcoResearchInstitute, EcoToAyeshaBoss) into ContactToRelationship
+
+!new Relationship('EnerTechToJohnEmployee')
+!EnerTechToJohnEmployee.type := #EMPLOYEE
+!insert (EnerTechToJohnEmployee, ProfJohnMartinez) into RelationshipToContact
+!insert (EnerTechSolutionsLtd, EnerTechToJohnEmployee) into ContactToRelationship
+
+!insert (ContinentalNetwork, DrAyeshaKhan) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, ProfJohnMartinez) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, EcoResearchInstitute) into AddressBookMadeOfContact
+!insert (ContinentalNetwork, EnerTechSolutionsLtd) into AddressBookMadeOfContact

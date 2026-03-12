@@ -1,0 +1,64 @@
+!new Expense('europeanRoadtripExpense')
+!europeanRoadtripExpense.amount := 1800.00
+!europeanRoadtripExpense.startDate := Date('2024-06-01')
+!europeanRoadtripExpense.endDate := Date('2024-06-21')
+
+!new Bill('carRentalBill')
+!carRentalBill.amount := 450.00
+!carRentalBill.category := 'Car Rental'
+!carRentalBill.date := Date('2024-05-30')
+!carRentalBill.paymentMethod := #CREDIT_CARD
+!carRentalBill.status := #VERIFIED
+
+!new Bill('diningAndFoodBill')
+!diningAndFoodBill.amount := 350.00
+!diningAndFoodBill.category := 'Dining and Local Cuisine'
+!diningAndFoodBill.date := Date('2024-06-11')
+!diningAndFoodBill.paymentMethod := #CASH
+!diningAndFoodBill.status := #VALIDATED
+
+!new Bill('souvenirsAndShoppingBill')
+!souvenirsAndShoppingBill.amount := 250.00
+!souvenirsAndShoppingBill.category := 'Souvenirs and Shopping'
+!souvenirsAndShoppingBill.date := Date('2024-06-15')
+!souvenirsAndShoppingBill.paymentMethod := #CASH
+!souvenirsAndShoppingBill.status := #PENDING
+
+!new Bill('accommodationBill')
+!accommodationBill.amount := 750.00
+!accommodationBill.category := 'Hotel Accommodation'
+!accommodationBill.date := Date('2024-06-05')
+!accommodationBill.paymentMethod := #CHECK
+!accommodationBill.status := #REFUSED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyCHF')
+!currencyCHF.name := 'Swiss Franc'
+!currencyCHF.abbreviation := 'CHF'
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (carRentalBill, currencyEUR) into BillCurrency
+!insert (diningAndFoodBill, currencyCHF) into BillCurrency
+!insert (souvenirsAndShoppingBill, currencyGBP) into BillCurrency
+!insert (accommodationBill, currencyEUR) into BillCurrency
+
+!insert (europeanRoadtripExpense, carRentalBill) into ExpenseContainsBills
+!insert (europeanRoadtripExpense, diningAndFoodBill) into ExpenseContainsBills
+!insert (europeanRoadtripExpense, souvenirsAndShoppingBill) into ExpenseContainsBills
+!insert (europeanRoadtripExpense, accommodationBill) into ExpenseContainsBills
+
+!new Comment('travelTip')
+!travelTip.text := 'Purchase travel insurance for peace of mind during the trip.'
+
+!new Comment('itinerarySuggestion')
+!itinerarySuggestion.text := 'Allocate a day for each major city to fully explore local attractions.'
+
+!insert (europeanRoadtripExpense, travelTip) into ExpenseComment
+!insert (europeanRoadtripExpense, itinerarySuggestion) into ExpenseComment
+

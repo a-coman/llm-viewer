@@ -1,0 +1,107 @@
+!new Restaurant('restaurant17')
+!restaurant17.name := 'Eclipse Eatery'
+
+!new Owner('owner34')
+!owner34.name := 'Solara Blaze'
+!owner34.percentageShares := 80
+!insert (restaurant17, owner34) into RestaurantOwner
+
+!new Owner('owner35')
+!owner35.name := 'Triton Wave'
+!owner35.percentageShares := 20
+!insert (restaurant17, owner35) into RestaurantOwner
+
+!new Table('table48')
+!table48.number := 48
+!table48.description := 'Lunar Landing'
+!table48.capacity := 4
+
+!new Table('table49')
+!table49.number := 49
+!table49.description := 'Stellar Stage'
+!table49.capacity := 30
+
+!new Table('table50')
+!table50.number := 50
+!table50.description := 'Galactic Gala'
+!table50.capacity := 20
+
+!new RegularCustomer('customer18')
+!customer18.name := 'Nova Comet'
+!customer18.prefferedLanguage := #Italian
+
+!new Waiter('waiter19')
+!waiter19.name := 'Galex Bright'
+!waiter19.dateOfBirth := Date('1991-12-11')
+!waiter19.phoneNumber := '555-9988'
+!waiter19.spokenLanguage := #German
+
+!new HeadWaiter('headwaiter17')
+!headwaiter17.name := 'Orla Celestial'
+!headwaiter17.dateOfBirth := Date('1983-11-07')
+!headwaiter17.phoneNumber := '555-5656'
+
+!insert (headwaiter17, waiter19) into HeadWaiterWaiter
+
+!new Individual('reservation31')
+!reservation31.time := Time('19:30')
+!reservation31.date := Date('2025-01-15')
+!reservation31.numberPeople := 2
+!reservation31.name := 'Nova Comet'
+!reservation31.phoneNumber := '555-9898'
+!reservation31.number := 31
+!reservation31.seating := #Inside
+!reservation31.smoking := #NonSmoking
+!insert (restaurant17, reservation31) into RestaurantReservation
+!insert (reservation31, customer18) into ReservationCustomer
+!insert (reservation31, waiter19) into ReservationWaiter
+!insert (reservation31, table48) into ReservationTable
+
+!new Banquet('reservation32')
+!reservation32.time := Time('18:00')
+!reservation32.date := Date('2025-02-21')
+!reservation32.numberPeople := 45
+!reservation32.name := 'Solar Soiree'
+!reservation32.phoneNumber := '555-7788'
+!reservation32.number := 32
+!reservation32.groupName := 'Stellar Society'
+!reservation32.paymentMethod := #CreditCard
+!reservation32.busService := false
+!insert (restaurant17, reservation32) into RestaurantReservation
+!insert (reservation32, table49) into ReservationTable
+!insert (reservation32, table50) into ReservationTable
+!insert (reservation32, waiter19) into ReservationWaiter
+
+!new ItemOrder('itemOrder17')
+!itemOrder17.time := Time('19:45')
+!insert (reservation31, itemOrder17) into ReservationItemOrdered
+
+!new MenuItem('menuItem17')
+!menuItem17.description := 'Interstellar Ice Cream'
+!menuItem17.prepTime := 10.0
+!menuItem17.classification := #Dessert
+!insert (itemOrder17, menuItem17) into ItemOrderMenuItem
+
+!new FoodItem('foodItem17')
+!foodItem17.number := 117
+!foodItem17.description := 'Vanilla Bean'
+!foodItem17.purchaseFlag := true
+!foodItem17.unit := #Gram
+!insert (menuItem17, foodItem17) into MenuItemFoodItem
+
+!new Allergen('allergen17')
+!allergen17.type := #Lactose
+!insert (foodItem17, allergen17) into FoodItemAllergen
+
+!new Cook('cook17')
+!cook17.name := 'Orion Nebula'
+!cook17.dateOfBirth := Date('1988-05-22')
+!cook17.phoneNumber := '555-6767'
+!cook17.yearsOfExperience := 5
+
+!new Chef('chef17')
+!chef17.name := 'Lyra Stardust'
+!chef17.dateOfBirth := Date('1984-03-13')
+!chef17.phoneNumber := '555-4545'
+!insert (menuItem17, chef17) into MenuItemChef
+!insert (chef17, cook17) into ChefCook

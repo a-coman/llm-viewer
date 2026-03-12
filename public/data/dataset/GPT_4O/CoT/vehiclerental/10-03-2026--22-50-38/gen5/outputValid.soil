@@ -1,0 +1,285 @@
+!new RentalOffice('officeSaltLakeCityDepot')
+!officeSaltLakeCityDepot.name := 'Salt Lake City Depot'
+!officeSaltLakeCityDepot.number := 505
+!officeSaltLakeCityDepot.address := '789 Mountain View Rd, Salt Lake City, UT 84103'
+
+!new Vehicle('coveredTrailer008')
+!coveredTrailer008.id := 308
+!coveredTrailer008.registrationState := #CO
+!coveredTrailer008.licensePlateNumber := 'UT2468CT'
+!coveredTrailer008.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer008.registrationLastMaintenanceDate := Date('2023-03-29')
+!coveredTrailer008.expirationDate := Date('2024-03-28')
+
+!new Truck('truck009')
+!truck009.id := 309
+!truck009.registrationState := #CO
+!truck009.licensePlateNumber := 'WY1234TR'
+!truck009.vehicleTypeCode := #TRUCK
+!truck009.registrationLastMaintenanceDate := Date('2023-02-10')
+!truck009.expirationDate := Date('2024-02-09')
+!truck009.odometerReading := 25000
+!truck009.gasTankCapacity := 21.5
+!truck009.workingRadio := false
+!truck009.mileage := 40000
+
+!new Individual('individualEmmaJohnson')
+!individualEmmaJohnson.name := 'Emma Johnson'
+!individualEmmaJohnson.address := '81 Cowboy Way, Jackson, WY 83001'
+!individualEmmaJohnson.poorRisk := false
+!individualEmmaJohnson.homePhone := '307-555-7856'
+!individualEmmaJohnson.driverLicenseState := #CO
+!individualEmmaJohnson.driverLicenseNumber := 876543210
+!individualEmmaJohnson.driverLicenseExpirationDate := Date('2026-01-21')
+
+!new RentalAgreement('rentalAgreement5005')
+!rentalAgreement5005.number := 5005
+!rentalAgreement5005.rentalDate := Date('2024-03-03')
+!rentalAgreement5005.anticipatedDuration := 10
+!rentalAgreement5005.depositPaid := 300.0
+!rentalAgreement5005.quotedDailyRate := 55.0
+!rentalAgreement5005.quotedRatePerMile := 0.35
+
+!insert (officeSaltLakeCityDepot, coveredTrailer008) into RentalOfficeVehicle
+!insert (officeSaltLakeCityDepot, truck009) into RentalOfficeVehicle
+
+!insert (officeSaltLakeCityDepot, rentalAgreement5005) into RentalOfficeRentalAgreementOrigin
+!insert (officeSaltLakeCityDepot, rentalAgreement5005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5005, truck009) into RentalAgreementVehicle
+!insert (rentalAgreement5005, individualEmmaJohnson) into RentalAgreementCustomer
+
+!new RentalOffice('officeArcticVenturesRentals')
+!officeArcticVenturesRentals.name := 'Arctic Ventures Rentals'
+!officeArcticVenturesRentals.number := 2500
+!officeArcticVenturesRentals.address := '123 Frostbite Street, Fairbanks, AK'
+
+!new Truck('truck200')
+!truck200.id := 200
+!truck200.registrationState := #AK
+!truck200.licensePlateNumber := 'AK-COLD-200'
+!truck200.vehicleTypeCode := #COVERED_TRAILER
+!truck200.registrationLastMaintenanceDate := Date('2023-09-01')
+!truck200.expirationDate := Date('2024-09-01')
+!truck200.odometerReading := 50000
+!truck200.gasTankCapacity := 70.0
+!truck200.workingRadio := false
+!truck200.mileage := 45000
+
+!new RentalAgreement('rentalAgreement500')
+!rentalAgreement500.number := 500
+!rentalAgreement500.rentalDate := Date('2024-01-10')
+!rentalAgreement500.anticipatedDuration := 15
+!rentalAgreement500.depositPaid := 3000.0
+!rentalAgreement500.quotedDailyRate := 200.0
+!rentalAgreement500.quotedRatePerMile := 0.15
+
+!new Individual('individualPolarExplorer')
+!individualPolarExplorer.name := 'Polar Explorer'
+!individualPolarExplorer.address := '55 Expedition Drive, Nome, AK'
+!individualPolarExplorer.poorRisk := false
+!individualPolarExplorer.homePhone := '555-EXP-ROAD'
+!individualPolarExplorer.driverLicenseState := #AK
+!individualPolarExplorer.driverLicenseNumber := 56781234
+!individualPolarExplorer.driverLicenseExpirationDate := Date('2025-12-31')
+
+!insert (officeArcticVenturesRentals, truck200) into RentalOfficeVehicle
+!insert (officeArcticVenturesRentals, rentalAgreement500) into RentalOfficeRentalAgreementOrigin
+!insert (officeArcticVenturesRentals, rentalAgreement500) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement500, truck200) into RentalAgreementVehicle
+!insert (rentalAgreement500, individualPolarExplorer) into RentalAgreementCustomer
+
+!new RentalOffice('officeCascadiaRentals')
+!officeCascadiaRentals.name := 'Cascadia Rentals'
+!officeCascadiaRentals.number := 560
+!officeCascadiaRentals.address := '749 NW Portland St, Portland, OR 97209'
+
+!new Truck('truck6090')
+!truck6090.id := 6090
+!truck6090.registrationState := #CA
+!truck6090.licensePlateNumber := 'OR3344'
+!truck6090.vehicleTypeCode := #TRUCK
+!truck6090.registrationLastMaintenanceDate := Date('2023-11-01')
+!truck6090.expirationDate := Date('2024-11-01')
+!truck6090.odometerReading := 35000
+!truck6090.gasTankCapacity := 21.0
+!truck6090.workingRadio := true
+!truck6090.mileage := 16
+
+!new Truck('truck6091')
+!truck6091.id := 6091
+!truck6091.registrationState := #CA
+!truck6091.licensePlateNumber := 'CA5588'
+!truck6091.vehicleTypeCode := #TRUCK
+!truck6091.registrationLastMaintenanceDate := Date('2023-09-10')
+!truck6091.expirationDate := Date('2024-09-10')
+!truck6091.odometerReading := 55000
+!truck6091.gasTankCapacity := 27.5
+!truck6091.workingRadio := false
+!truck6091.mileage := 14
+
+!new Vehicle('coveredTrailer7102')
+!coveredTrailer7102.id := 7102
+!coveredTrailer7102.registrationState := #CA
+!coveredTrailer7102.licensePlateNumber := 'WA8923'
+!coveredTrailer7102.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer7102.registrationLastMaintenanceDate := Date('2023-08-22')
+!coveredTrailer7102.expirationDate := Date('2024-08-22')
+
+!new Vehicle('coveredTrailer7110')
+!coveredTrailer7110.id := 7110
+!coveredTrailer7110.registrationState := #CA
+!coveredTrailer7110.licensePlateNumber := 'ID1234'
+!coveredTrailer7110.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer7110.registrationLastMaintenanceDate := Date('2023-07-15')
+!coveredTrailer7110.expirationDate := Date('2024-07-15')
+
+!new Individual('individualLiamAnderson')
+!individualLiamAnderson.name := 'Liam Anderson'
+!individualLiamAnderson.address := '345 Elm St, Portland, OR 97210'
+!individualLiamAnderson.poorRisk := true
+!individualLiamAnderson.homePhone := '503-555-0377'
+!individualLiamAnderson.driverLicenseState := #CA
+!individualLiamAnderson.driverLicenseNumber := 78904567
+!individualLiamAnderson.driverLicenseExpirationDate := Date('2026-09-19')
+
+!new Company('companyEvergreenAdventures')
+!companyEvergreenAdventures.name := 'Evergreen Adventures'
+!companyEvergreenAdventures.address := '112 Spruce Ave, Bend, OR 97702'
+!companyEvergreenAdventures.poorRisk := false
+!companyEvergreenAdventures.idNumber := 1015
+
+!new Company('companySustainableSolutionsLLC')
+!companySustainableSolutionsLLC.name := 'Sustainable Solutions LLC'
+!companySustainableSolutionsLLC.address := '678 Greenway Dr, Eugene, OR 97401'
+!companySustainableSolutionsLLC.poorRisk := true
+!companySustainableSolutionsLLC.idNumber := 3030
+
+!new RentalAgreement('rentalAgreement13004')
+!rentalAgreement13004.number := 13004
+!rentalAgreement13004.rentalDate := Date('2024-03-14')
+!rentalAgreement13004.anticipatedDuration := 3
+!rentalAgreement13004.depositPaid := 90.0
+!rentalAgreement13004.quotedDailyRate := 45.0
+!rentalAgreement13004.quotedRatePerMile := 0.50
+
+!new RentalAgreement('rentalAgreement14007')
+!rentalAgreement14007.number := 14007
+!rentalAgreement14007.rentalDate := Date('2024-02-15')
+!rentalAgreement14007.anticipatedDuration := 10
+!rentalAgreement14007.depositPaid := 200.0
+!rentalAgreement14007.quotedDailyRate := 32.0
+!rentalAgreement14007.quotedRatePerMile := 0.25
+
+!new RentalAgreement('rentalAgreement15008')
+!rentalAgreement15008.number := 15008
+!rentalAgreement15008.rentalDate := Date('2024-04-05')
+!rentalAgreement15008.anticipatedDuration := 7
+!rentalAgreement15008.depositPaid := 150.0
+!rentalAgreement15008.quotedDailyRate := 28.0
+!rentalAgreement15008.quotedRatePerMile := 0.30
+
+!new RentalAgreement('rentalAgreement14009')
+!rentalAgreement14009.number := 14009
+!rentalAgreement14009.rentalDate := Date('2024-02-18')
+!rentalAgreement14009.anticipatedDuration := 14
+!rentalAgreement14009.depositPaid := 350.0
+!rentalAgreement14009.quotedDailyRate := 30.0
+!rentalAgreement14009.quotedRatePerMile := 0.40
+
+!insert (officeCascadiaRentals, truck6090) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, truck6091) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, coveredTrailer7102) into RentalOfficeVehicle
+!insert (officeCascadiaRentals, coveredTrailer7110) into RentalOfficeVehicle
+
+!insert (officeCascadiaRentals, rentalAgreement13004) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement14007) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement15008) into RentalOfficeRentalAgreementOrigin
+!insert (officeCascadiaRentals, rentalAgreement14009) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeCascadiaRentals, rentalAgreement13004) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement14007) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement15008) into RentalOfficeRentalAgreementDrop
+!insert (officeCascadiaRentals, rentalAgreement14009) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement13004, truck6090) into RentalAgreementVehicle
+!insert (rentalAgreement14007, coveredTrailer7102) into RentalAgreementVehicle
+!insert (rentalAgreement15008, coveredTrailer7110) into RentalAgreementVehicle
+!insert (rentalAgreement14009, truck6091) into RentalAgreementVehicle
+
+!insert (rentalAgreement13004, individualLiamAnderson) into RentalAgreementCustomer
+!insert (rentalAgreement14007, companyEvergreenAdventures) into RentalAgreementCustomer
+!insert (rentalAgreement15008, companySustainableSolutionsLLC) into RentalAgreementCustomer
+!insert (rentalAgreement14009, companyEvergreenAdventures) into RentalAgreementCustomer
+
+!new RentalOffice('officeMetroShuttleRentals')
+!officeMetroShuttleRentals.name := 'Metropolitan Shuttle Rentals'
+!officeMetroShuttleRentals.number := 505
+!officeMetroShuttleRentals.address := '1100 Urban Center Blvd, Metroville, NY 10001'
+
+!new Vehicle('coveredTrailer90123')
+!coveredTrailer90123.id := 90123
+!coveredTrailer90123.registrationState := #CA
+!coveredTrailer90123.licensePlateNumber := 'NY-567-UVW'
+!coveredTrailer90123.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer90123.registrationLastMaintenanceDate := Date('2023-09-10')
+!coveredTrailer90123.expirationDate := Date('2024-09-10')
+
+!new Truck('truck90124')
+!truck90124.id := 90124
+!truck90124.registrationState := #CA
+!truck90124.licensePlateNumber := 'NY-678-XYZ'
+!truck90124.vehicleTypeCode := #TRUCK
+!truck90124.registrationLastMaintenanceDate := Date('2023-10-15')
+!truck90124.expirationDate := Date('2024-10-15')
+!truck90124.odometerReading := 75000
+!truck90124.gasTankCapacity := 70.0
+!truck90124.workingRadio := true
+!truck90124.mileage := 8
+
+!new Individual('individualUrbanJohnson')
+!individualUrbanJohnson.name := 'Urban Johnson'
+!individualUrbanJohnson.address := '450 Cityscape Rd, Newtown, NJ 07601'
+!individualUrbanJohnson.poorRisk := true
+!individualUrbanJohnson.homePhone := '+1-201-555-0123'
+!individualUrbanJohnson.driverLicenseState := #CA
+!individualUrbanJohnson.driverLicenseNumber := 1456789012
+!individualUrbanJohnson.driverLicenseExpirationDate := Date('2024-11-01')
+
+!new Company('companyCityLogisticsPartners')
+!companyCityLogisticsPartners.name := 'City Logistics Partners'
+!companyCityLogisticsPartners.address := '902 Business Park, Suburbia, NJ 07083'
+!companyCityLogisticsPartners.poorRisk := false
+!companyCityLogisticsPartners.idNumber := 1122334455
+
+!new RentalAgreement('rentalAgreement5009')
+!rentalAgreement5009.number := 5009
+!rentalAgreement5009.rentalDate := Date('2025-03-15')
+!rentalAgreement5009.anticipatedDuration := 7
+!rentalAgreement5009.depositPaid := 200.0
+!rentalAgreement5009.quotedDailyRate := 90.0
+!rentalAgreement5009.quotedRatePerMile := 2.2
+
+!new RentalAgreement('rentalAgreement5010')
+!rentalAgreement5010.number := 5010
+!rentalAgreement5010.rentalDate := Date('2025-10-01')
+!rentalAgreement5010.anticipatedDuration := 15
+!rentalAgreement5010.depositPaid := 1200.0
+!rentalAgreement5010.quotedDailyRate := 85.0
+!rentalAgreement5010.quotedRatePerMile := 1.5
+
+!insert (officeMetroShuttleRentals, coveredTrailer90123) into RentalOfficeVehicle
+!insert (officeMetroShuttleRentals, truck90124) into RentalOfficeVehicle
+
+!insert (officeMetroShuttleRentals, rentalAgreement5009) into RentalOfficeRentalAgreementOrigin
+!insert (officeMetroShuttleRentals, rentalAgreement5010) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeMetroShuttleRentals, rentalAgreement5009) into RentalOfficeRentalAgreementDrop
+!insert (officeMetroShuttleRentals, rentalAgreement5010) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5009, coveredTrailer90123) into RentalAgreementVehicle
+!insert (rentalAgreement5010, truck90124) into RentalAgreementVehicle
+
+!insert (rentalAgreement5009, individualUrbanJohnson) into RentalAgreementCustomer
+!insert (rentalAgreement5010, companyCityLogisticsPartners) into RentalAgreementCustomer
+

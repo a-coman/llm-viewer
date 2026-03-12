@@ -1,0 +1,52 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client49')
+!client49.clientId := 49
+!client49.isSuspended := true
+
+-- Adding another client with different suspension status
+!new Client('client50')
+!client50.clientId := 50
+!client50.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental46')
+!rental46.date := Date('2023-11-27')
+
+-- Adding another unique rental to ensure structural diversity
+!new Rental('rental47')
+!rental47.date := Date('2023-11-28')
+
+-- Creating Cassettes and Movies
+!new Movie('movie29')
+!movie29.title := 'Adventure Awaits'
+!movie29.availableCopies := 10
+!movie29.genre := #Action
+
+-- Creating Series
+!new Series('series22')
+!series22.title := 'The Journey Home'
+!series22.availableCopies := 2
+!series22.episode := 12
+
+-- Creating Actors
+!new Actor('actor48')
+!actor48.name := 'Mila Summers'
+
+-- Another actor for variety
+!new Actor('actor49')
+!actor49.name := 'Ethan Blake'
+
+-- Creating associations between Clients and Rentals
+!insert (client49, rental46) into ClientRental
+!insert (client50, rental47) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental46, movie29) into RentalCassette
+!insert (rental47, series22) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie29, actor48) into CassetteActor
+!insert (series22, actor49) into CassetteActor
+!insert (series22, actor48) into CassetteActor

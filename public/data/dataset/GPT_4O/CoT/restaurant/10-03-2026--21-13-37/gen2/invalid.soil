@@ -1,0 +1,67 @@
+!new Restaurant('restaurant6')
+!restaurant6.name := 'The Sunset Vista'
+
+!new Owner('owner11')
+!owner11.name := 'Linh Tran'
+!owner11.percentageShares := 50
+
+!new Owner('owner12')
+!owner12.name := 'David O\'Connor'
+!owner12.percentageShares := 50
+
+!insert (restaurant6, owner11) into RestaurantOwner
+!insert (restaurant6, owner12) into RestaurantOwner
+
+!new Individual('individualReservation2')
+!individualReservation2.date := Date('2023-11-26')
+!individualReservation2.time := Time('12:30')
+!individualReservation2.numberPeople := 2  -- Assume 2 people for individual reservation
+!individualReservation2.name := 'Stephanie Liu'
+!individualReservation2.phoneNumber := '3030303030'  -- Arbitrary phone number
+!individualReservation2.seating := #Inside
+!individualReservation2.smoking := #NonSmoking
+!individualReservation2.number := 2
+
+!insert (restaurant6, individualReservation2) into RestaurantReservation
+
+!new Banquet('banquet5')
+!banquet5.date := Date('2023-11-26')
+!banquet5.time := Time('18:00')
+!banquet5.groupName := 'Liu-Mendes Wedding Party'
+!banquet5.numberPeople := 30
+!banquet5.paymentMethod := #Cash
+
+!insert (restaurant6, banquet5) into RestaurantReservation
+
+!new Table('table15')
+!table15.number := 101
+!table15.description := 'Corner booth table'
+!table15.capacity := 4
+
+!insert (individualReservation2, table15) into ReservationTable
+
+!new Table('table16')
+!table16.number := 201
+!table16.description := 'Large rectangular family table'
+!table16.capacity := 12
+
+!new Table('table17')
+!table17.number := 202
+!table17.description := 'Medium round table'
+!table17.capacity := 6
+
+!insert (banquet5, table16) into ReservationTable
+!insert (banquet5, table17) into ReservationTable
+
+!new BusDriver('busdriver5')
+!busdriver5.name := 'Miguel Lopez'
+
+!insert (banquet5, busdriver5) into BanquetBusDriver
+
+!new Waiter('waiter9')
+!waiter9.name := 'Omar El-Amin'
+!waiter9.dateOfBirth := Date('1989-01-01')  -- Arbitrary date of birth
+!waiter9.phoneNumber := '4040404040'        -- Arbitrary phone number
+!waiter9.spokenLanguage := #English
+
+!insert (banquet5, waiter9) into ReservationWaiter

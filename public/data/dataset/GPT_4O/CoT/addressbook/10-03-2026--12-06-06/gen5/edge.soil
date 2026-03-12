@@ -1,0 +1,128 @@
+!new AddressBook('ArtisticCollectiveNetwork')
+
+!new Company('GlobalArtMovement')
+!GlobalArtMovement.name := 'Global Art Movement'
+!GlobalArtMovement.phone := '+33-1-23456789'
+!GlobalArtMovement.website := 'www.globalartmovement.fr'
+!GlobalArtMovement.email := 'connect@globalartmovement.fr'
+!GlobalArtMovement.industry := 'Art and Culture'
+
+!new Address('GlobalArtMovementAddress')
+!GlobalArtMovementAddress.city := 'Paris'
+!GlobalArtMovementAddress.houseNr := '220'
+!GlobalArtMovementAddress.street := 'Rue de l\'Artiste'
+!insert (GlobalArtMovement, GlobalArtMovementAddress) into ContactContainsAddress
+
+!new Note('GlobalArtMovementNote1')
+!GlobalArtMovementNote1.author := 'Amélie Dubois'
+!GlobalArtMovementNote1.time := Date('2023-04-15T11:00:00')
+!GlobalArtMovementNote1.type := #MEETING
+!GlobalArtMovementNote1.comment := 'Paris symposium on cross-cultural artistic exchange.'
+!insert (GlobalArtMovement, GlobalArtMovementNote1) into ContactContainsNote
+
+!new Company('ArtHavenAcademy')
+!ArtHavenAcademy.name := 'Art Haven Academy'
+!ArtHavenAcademy.phone := '+61-3-87654321'
+!ArtHavenAcademy.website := 'www.arthaven.edu.au'
+!ArtHavenAcademy.email := 'admissions@arthaven.edu.au'
+!ArtHavenAcademy.industry := 'Education and Culture'
+
+!new Address('ArtHavenAcademyAddress')
+!ArtHavenAcademyAddress.city := 'Melbourne'
+!ArtHavenAcademyAddress.houseNr := '88'
+!ArtHavenAcademyAddress.street := 'Artistic Avenue'
+!insert (ArtHavenAcademy, ArtHavenAcademyAddress) into ContactContainsAddress
+
+!new Note('ArtHavenNote1')
+!ArtHavenNote1.author := 'Oliver Nguyen'
+!ArtHavenNote1.time := Date('2023-03-22T14:20:00')
+!ArtHavenNote1.type := #EMAIL
+!ArtHavenNote1.comment := 'Webinar on "The Future of Art Education."'
+!insert (ArtHavenAcademy, ArtHavenNote1) into ContactContainsNote
+
+!new Person('SantiagoReyes')
+!SantiagoReyes.name := 'Santiago Reyes'
+!SantiagoReyes.phone := '+34-91-6543210'
+!SantiagoReyes.website := 'www.santiagoreyes.com'
+!SantiagoReyes.email := 's.reyes@artistry.com'
+!SantiagoReyes.title := 'Curator'
+
+!new Address('SantiagoReyesAddress')
+!SantiagoReyesAddress.city := 'Madrid'
+!SantiagoReyesAddress.houseNr := '15'
+!SantiagoReyesAddress.street := 'Paseo del Arte'
+!insert (SantiagoReyes, SantiagoReyesAddress) into ContactContainsAddress
+
+!new Note('SantiagoReyesNote1')
+!SantiagoReyesNote1.author := 'Santiago Reyes'
+!SantiagoReyesNote1.time := Date('2023-11-02T16:00:00')
+!SantiagoReyesNote1.type := #CALL
+!SantiagoReyesNote1.comment := 'Discussion on an upcoming exhibition in Tokyo.'
+!insert (SantiagoReyes, SantiagoReyesNote1) into ContactContainsNote
+
+!new Note('SantiagoReyesNote2')
+!SantiagoReyesNote2.author := 'Santiago Reyes'
+!SantiagoReyesNote2.time := Date('2023-07-10T10:30:00')
+!SantiagoReyesNote2.type := #MEETING
+!SantiagoReyesNote2.comment := 'Artist collaboration workshop in Madrid.'
+!insert (SantiagoReyes, SantiagoReyesNote2) into ContactContainsNote
+
+!new Person('FionaChen')
+!FionaChen.name := 'Fiona Chen'
+!FionaChen.phone := '+86-21-9876543'
+!FionaChen.website := 'www.fionachenstudio.cn'
+!FionaChen.email := 'fiona.chen@art.cn'
+!FionaChen.title := 'Visual Artist'
+
+!new Address('FionaChenAddress')
+!FionaChenAddress.city := 'Shanghai'
+!FionaChenAddress.houseNr := '202'
+!FionaChenAddress.street := 'Culture Street'
+!insert (FionaChen, FionaChenAddress) into ContactContainsAddress
+
+!new Note('FionaChenNote1')
+!FionaChenNote1.author := 'Fiona Chen'
+!FionaChenNote1.time := Date('2023-05-12T08:45:00')
+!FionaChenNote1.type := #EMAIL
+!FionaChenNote1.comment := 'Submitted portfolio for Global Art Residency.'
+!insert (FionaChen, FionaChenNote1) into ContactContainsNote
+
+!new Relationship('GlobalArtToSantiagoSubdivision')
+!GlobalArtToSantiagoSubdivision.type := #SUBDIVISION
+!insert (GlobalArtToSantiagoSubdivision, SantiagoReyes) into RelationshipToContact
+!insert (GlobalArtMovement, GlobalArtToSantiagoSubdivision) into ContactToRelationship
+
+!new Relationship('GlobalArtToArtHavenCoworker')
+!GlobalArtToArtHavenCoworker.type := #COWORKER
+!insert (GlobalArtToArtHavenCoworker, ArtHavenAcademy) into RelationshipToContact
+!insert (GlobalArtMovement, GlobalArtToArtHavenCoworker) into ContactToRelationship
+
+!new Relationship('ArtHavenToGlobalArtCoworker')
+!ArtHavenToGlobalArtCoworker.type := #COWORKER
+!insert (ArtHavenToGlobalArtCoworker, GlobalArtMovement) into RelationshipToContact
+!insert (ArtHavenAcademy, ArtHavenToGlobalArtCoworker) into ContactToRelationship
+
+!new Relationship('ArtHavenToSantiagoEmployee')
+!ArtHavenToSantiagoEmployee.type := #EMPLOYEE
+!insert (ArtHavenToSantiagoEmployee, SantiagoReyes) into RelationshipToContact
+!insert (ArtHavenAcademy, ArtHavenToSantiagoEmployee) into ContactToRelationship
+
+!new Relationship('SantiagoToGlobalArtSubdivision')
+!SantiagoToGlobalArtSubdivision.type := #SUBDIVISION
+!insert (SantiagoToGlobalArtSubdivision, GlobalArtMovement) into RelationshipToContact
+!insert (SantiagoReyes, SantiagoToGlobalArtSubdivision) into ContactToRelationship
+
+!new Relationship('SantiagoToArtHavenEmployee')
+!SantiagoToArtHavenEmployee.type := #EMPLOYEE
+!insert (SantiagoToArtHavenEmployee, ArtHavenAcademy) into RelationshipToContact
+!insert (SantiagoReyes, SantiagoToArtHavenEmployee) into ContactToRelationship
+
+!new Relationship('FionaToSantiagoCoworker')
+!FionaToSantiagoCoworker.type := #COWORKER
+!insert (FionaToSantiagoCoworker, SantiagoReyes) into RelationshipToContact
+!insert (FionaChen, FionaToSantiagoCoworker) into ContactToRelationship
+
+!insert (ArtisticCollectiveNetwork, GlobalArtMovement) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, ArtHavenAcademy) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, SantiagoReyes) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, FionaChen) into AddressBookMadeOfContact

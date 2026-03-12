@@ -1,0 +1,49 @@
+!new Booking('booking9')
+!booking9.startDate := '2024-07-20'
+!booking9.endDate := '2024-07-25'
+!booking9.canceled := false
+!booking9.bookingId := 109
+!booking9.confirmed := true
+
+!new Bill('bill9')
+!bill9.price := 450.00
+!bill9.billId := 5009
+
+!new Customer('customer9')
+!customer9.firstName := 'Irene'
+!customer9.lastName := 'Johnson'
+
+!new RoomReservation('reservation9')
+!reservation9.checkInDate := '2024-07-20'
+!reservation9.checkOutDate := '2024-07-25'
+
+!new Room('room601')
+!room601.numBeds := 1
+!room601.pricePerNight := 95.00
+!room601.occupied := true
+!room601.blocked := false
+!room601.roomNumber := 601
+
+!new Room('room602')
+!room602.numBeds := 1
+!room602.pricePerNight := 95.00
+!room602.occupied := true
+!room602.blocked := false
+!room602.roomNumber := 602
+
+!new RoomExtra('extra11')
+!extra11.price := 20.00
+!extra11.description := 'Event Tickets'
+
+!new RoomExtra('extra12')
+!extra12.price := 10.00
+!extra12.description := 'Bicycle Rental'
+
+!insert (booking9, bill9) into BookingBill
+!insert (booking9, customer9) into BookingCustomer
+!insert (booking9, reservation9) into BookingRoomReservation
+!insert (reservation9, extra11) into RoomReservationExtras
+!insert (reservation9, extra12) into RoomReservationExtras
+!insert (reservation9, room601) into RoomReservationRoom
+!insert (reservation9, room602) into RoomReservationRoom
+!insert (bill9, reservation9) into BillRoomReservation

@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency12')
+!currency12.name := 'Singapore Dollar'
+!currency12.abbreviation := 'SGD'
+
+-- Creating instances of Bills
+!new Bill('bill29')
+!bill29.amount := 700.00
+!bill29.category := 'Software Development'
+!bill29.date := Date('2023-01-10')
+!bill29.paymentMethod := #CREDIT_CARD
+!bill29.status := #VERIFIED
+!insert (bill29, currency12) into BillCurrency
+
+!new Bill('bill30')
+!bill30.amount := 300.00
+!bill30.category := 'Cloud Services'
+!bill30.date := Date('2023-01-15')
+!bill30.paymentMethod := #CHECK
+!bill30.status := #DRAFT
+!insert (bill30, currency12) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment15')
+!comment15.text := 'Infrastructure investment for the new project.'
+
+-- Creating instance of Expense
+!new Expense('expense12')
+!expense12.amount := 1000.00
+!expense12.startDate := Date('2023-01-10')
+!expense12.endDate := Date('2023-01-20')
+!insert (expense12, bill29) into ExpenseContainsBills
+!insert (expense12, bill30) into ExpenseContainsBills
+!insert (expense12, comment15) into ExpenseComment

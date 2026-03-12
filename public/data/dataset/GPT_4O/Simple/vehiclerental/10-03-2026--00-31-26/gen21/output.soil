@@ -1,0 +1,70 @@
+!new RentalOffice('office21')
+!office21.name := 'Mountain Express'
+!office21.number := 2121
+!office21.address := '789 Alpine Way, Salt Lake City, UT'
+
+!new Truck('truck41')
+!truck41.id := 541
+!truck41.registrationState := #CO
+!truck41.licensePlateNumber := 'CO-TRK-5566'
+!truck41.vehicleTypeCode := #TRUCK10
+!truck41.registrationLastMaintenanceDate := Date('2023-05-14')
+!truck41.expirationDate := Date('2024-05-14')
+!truck41.odometerReading := 14500
+!truck41.gasTankCapacity := 32.0
+!truck41.workingRadio := true
+!truck41.mileage := 18
+
+!new Individual('individual21')
+!individual21.name := 'Lily Johnson'
+!individual21.address := '345 Mountain Dr, Park City, UT'
+!individual21.poorRisk := false
+!individual21.homePhone := '555-5567'
+!individual21.driverLicenseState := #CO
+!individual21.driverLicenseNumber := 56789012
+!individual21.driverLicenseExpirationDate := Date('2026-11-22')
+
+!new RentalAgreement('agreement41')
+!agreement41.number := 3041
+!agreement41.rentalDate := Date('2023-12-25')
+!agreement41.anticipatedDuration := 7
+!agreement41.depositPaid := 290.0
+!agreement41.quotedDailyRate := 72.00
+!agreement41.quotedRatePerMile := 0.53
+
+!new Truck('truck42')
+!truck42.id := 542
+!truck42.registrationState := #AZ
+!truck42.licensePlateNumber := 'AZ-TRK-9988'
+!truck42.vehicleTypeCode := #TRUCK24
+!truck42.registrationLastMaintenanceDate := Date('2023-06-10')
+!truck42.expirationDate := Date('2025-06-10')
+!truck42.odometerReading := 18000
+!truck42.gasTankCapacity := 30.0
+!truck42.workingRadio := false
+!truck42.mileage := 22
+
+!new Company('company21')
+!company21.name := 'Summit Rentals'
+!company21.address := '234 Summit Blvd, Flagstaff, AZ'
+!company21.poorRisk := true
+!company21.idNumber := 589032
+
+!new RentalAgreement('agreement42')
+!agreement42.number := 3042
+!agreement42.rentalDate := Date('2024-01-05')
+!agreement42.anticipatedDuration := 10
+!agreement42.depositPaid := 425.0
+!agreement42.quotedDailyRate := 85.00
+!agreement42.quotedRatePerMile := 0.60
+
+!insert (office21, truck41) into RentalOfficeVehicle
+!insert (office21, truck42) into RentalOfficeVehicle
+!insert (office21, agreement41) into RentalOfficeRentalAgreementOrigin
+!insert (office21, agreement41) into RentalOfficeRentalAgreementDrop
+!insert (office21, agreement42) into RentalOfficeRentalAgreementOrigin
+!insert (office21, agreement42) into RentalOfficeRentalAgreementDrop
+!insert (agreement41, truck41) into RentalAgreementVehicle
+!insert (agreement41, individual21) into RentalAgreementCustomer
+!insert (agreement42, truck42) into RentalAgreementVehicle
+!insert (agreement42, company21) into RentalAgreementCustomer

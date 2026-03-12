@@ -1,0 +1,54 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client33')
+!client33.clientId := 33
+!client33.isSuspended := true
+
+-- Introducing a new client with varied characteristics
+!new Client('client34')
+!client34.clientId := 34
+!client34.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental28')
+!rental28.date := Date('2023-11-11')
+
+-- Diversifying structure with a single rental for each client
+!new Rental('rental30')
+!rental30.date := Date('2023-11-12')
+
+-- Creating Cassettes and Movies
+!new Movie('movie19')
+!movie19.title := 'Space Invasion'
+!movie19.availableCopies := 6
+!movie19.genre := #Action
+
+!new Movie('movie20')
+!movie20.title := 'The Great Laugh'
+!movie20.availableCopies := 4
+!movie20.genre := #Comedy
+
+-- Omitting series to achieve structural diversity
+
+-- Creating Actors
+!new Actor('actor32')
+!actor32.name := 'Sophia Lopez'
+
+-- Adding another unique actor
+!new Actor('actor33')
+!actor33.name := 'Alexander Brown'
+
+-- Creating associations between Client and Rentals
+!insert (client33, rental28) into ClientRental
+!insert (client34, rental30) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental28, movie19) into RentalCassette
+!insert (rental30, movie20) into RentalCassette
+!insert (rental30, movie19) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie19, actor32) into CassetteActor
+!insert (movie20, actor33) into CassetteActor
+!insert (movie19, actor33) into CassetteActor

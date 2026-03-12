@@ -1,0 +1,64 @@
+!new Bank('bancoDoBrasil')
+!bancoDoBrasil.country := 'Brazil'
+!bancoDoBrasil.name := 'Banco do Brasil'
+!bancoDoBrasil.bic := 'BRASBRRJXXX'
+
+!new Account('account9_1')
+!account9_1.iban := 'BR1500000000001110000123456C1'
+!account9_1.balance := 7500
+
+!new Account('account9_2')
+!account9_2.iban := 'BR1500000000002220000234567C2'
+!account9_2.balance := 18000
+
+!new Account('account9_3')
+!account9_3.iban := 'BR1500000000003330000345678C3'
+!account9_3.balance := 2500
+
+!new Person('thiagoAlmeida')
+!thiagoAlmeida.firstName := 'Thiago'
+!thiagoAlmeida.lastName := 'Almeida'
+!thiagoAlmeida.age := 45
+
+!new Person('marinaCosta')
+!marinaCosta.firstName := 'Marina'
+!marinaCosta.lastName := 'Costa'
+!marinaCosta.age := 24
+
+!new Person('carlosSilva')
+!carlosSilva.firstName := 'Carlos'
+!carlosSilva.lastName := 'Silva'
+!carlosSilva.age := 50
+
+!new Person('larissaMendes')
+!larissaMendes.firstName := 'Larissa'
+!larissaMendes.lastName := 'Mendes'
+!larissaMendes.age := 33
+
+!new Person('julianaSantos')
+!julianaSantos.firstName := 'Juliana'
+!julianaSantos.lastName := 'Santos'
+!julianaSantos.age := 27
+
+!insert (bancoDoBrasil, account9_1) into AccountOfBanks
+!insert (bancoDoBrasil, account9_2) into AccountOfBanks
+!insert (bancoDoBrasil, account9_3) into AccountOfBanks
+
+!insert (thiagoAlmeida, account9_1) into Ownership
+!insert (larissaMendes, account9_1) into Ownership
+
+!insert (carlosSilva, account9_2) into Ownership
+!insert (marinaCosta, account9_2) into Ownership
+
+!insert (julianaSantos, account9_3) into Ownership
+
+!insert (thiagoAlmeida, account9_1) into Use
+!insert (larissaMendes, account9_1) into Use
+!insert (marinaCosta, account9_1) into Use
+
+!insert (carlosSilva, account9_2) into Use
+!insert (thiagoAlmeida, account9_2) into Use
+
+!insert (julianaSantos, account9_3) into Use
+!insert (larissaMendes, account9_3) into Use
+!insert (carlosSilva, account9_3) into Use

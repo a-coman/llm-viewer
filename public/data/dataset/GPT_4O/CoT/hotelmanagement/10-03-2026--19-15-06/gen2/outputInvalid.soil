@@ -1,0 +1,109 @@
+!new Customer('customer7')
+!customer7.firstName := 'Hiroshi'
+!customer7.lastName := 'Yamamoto'
+
+!new Booking('booking7')
+!booking7.startDate := '2023-11-10'
+!booking7.endDate := '2023-11-14'
+!booking7.canceled := false
+!booking7.bookingId := 2002
+!booking7.confirmed := true
+
+!new RoomReservation('roomReservation7_1')
+!roomReservation7_1.checkInDate := '2023-11-10'
+!roomReservation7_1.checkOutDate := '2023-11-14'
+
+!new RoomReservation('roomReservation7_2')
+!roomReservation7_2.checkInDate := '2023-11-10'
+!roomReservation7_2.checkOutDate := '2023-11-14'
+
+!new RoomReservation('roomReservation7_3')
+!roomReservation7_3.checkInDate := '2023-11-10'
+!roomReservation7_3.checkOutDate := '2023-11-14'
+
+!new Room('room701')
+!room701.numBeds := 1
+!room701.pricePerNight := 400.0
+!room701.occupied := true
+!room701.blocked := false
+!room701.roomNumber := 701
+
+!new Room('room7_401')
+!room7_401.numBeds := 1
+!room7_401.pricePerNight := 300.0
+!room7_401.occupied := true
+!room7_401.blocked := false
+!room7_401.roomNumber := 401
+
+!new Room('room7_402')
+!room7_402.numBeds := 1
+!room7_402.pricePerNight := 300.0
+!room7_402.occupied := true
+!room7_402.blocked := false
+!room7_402.roomNumber := 402
+
+!new Room('room7_501')
+!room7_501.numBeds := 1
+!room7_501.pricePerNight := 200.0
+!room7_501.occupied := true
+!room7_501.blocked := false
+!room7_501.roomNumber := 501
+
+!new Room('room7_502')
+!room7_502.numBeds := 1
+!room7_502.pricePerNight := 200.0
+!room7_502.occupied := true
+!room7_502.blocked := false
+!room7_502.roomNumber := 502
+
+!new Bill('bill13')
+!bill13.price := 3600.0
+!bill13.billId := 601
+
+!new Bill('bill14')
+!bill14.price := 2800.0
+!bill14.billId := 602
+
+!new Bill('bill15')
+!bill15.price := 4000.0
+!bill15.billId := 603
+
+!new RoomExtra('extra7_1')
+!extra7_1.price := 100.0
+!extra7_1.description := 'Airport Shuttle Service'
+
+!new RoomExtra('extra7_2')
+!extra7_2.price := 75.0
+!extra7_2.description := 'Tokyo City Tour'
+
+!new FreeRoomTypesDTO('freeRoomType6')
+!freeRoomType6.roomTypeDescription := 'Executive Suite'
+!freeRoomType6.numBeds := 1
+!freeRoomType6.pricePerNight := 400.0
+!freeRoomType6.numFreeRooms := 1
+
+!insert (booking7, customer7) into BookingCustomer
+
+!insert (booking7, roomReservation7_1) into BookingRoomReservation
+!insert (booking7, roomReservation7_2) into BookingRoomReservation
+!insert (booking7, roomReservation7_3) into BookingRoomReservation
+
+!insert (booking7, bill13) into BookingBill
+!insert (booking7, bill14) into BookingBill
+!insert (booking7, bill15) into BookingBill
+
+!insert (roomReservation7_1, room7_401) into RoomReservationRoom
+!insert (roomReservation7_1, room7_402) into RoomReservationRoom
+
+!insert (roomReservation7_2, room7_501) into RoomReservationRoom
+!insert (roomReservation7_2, room7_502) into RoomReservationRoom
+
+!insert (roomReservation7_3, room701) into RoomReservationRoom
+
+!insert (roomReservation7_1, extra7_1) into RoomReservationExtras
+!insert (roomReservation7_2, extra7_2) into RoomReservationExtras
+
+!insert (bill13, roomReservation7_1) into BillRoomReservation
+!insert (bill14, roomReservation7_2) into BillRoomReservation
+!insert (bill15, roomReservation7_3) into BillRoomReservation
+

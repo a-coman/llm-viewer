@@ -1,0 +1,279 @@
+!new Bank('bancoDoBrasil')
+!bancoDoBrasil.country := 'Brazil'
+!bancoDoBrasil.name := 'Banco do Brasil'
+!bancoDoBrasil.bic := 'BRASBRRJXXX'
+
+!new Account('account9_1')
+!account9_1.iban := 'BR1500000000001110000123456C1'
+!account9_1.balance := 7500
+
+!new Account('account9_2')
+!account9_2.iban := 'BR1500000000002220000234567C2'
+!account9_2.balance := 18000
+
+!new Account('account9_3')
+!account9_3.iban := 'BR1500000000003330000345678C3'
+!account9_3.balance := 2500
+
+!new Person('thiagoAlmeida')
+!thiagoAlmeida.firstName := 'Thiago'
+!thiagoAlmeida.lastName := 'Almeida'
+!thiagoAlmeida.age := 45
+
+!new Person('marinaCosta')
+!marinaCosta.firstName := 'Marina'
+!marinaCosta.lastName := 'Costa'
+!marinaCosta.age := 24
+
+!new Person('carlosSilva')
+!carlosSilva.firstName := 'Carlos'
+!carlosSilva.lastName := 'Silva'
+!carlosSilva.age := 50
+
+!new Person('larissaMendes')
+!larissaMendes.firstName := 'Larissa'
+!larissaMendes.lastName := 'Mendes'
+!larissaMendes.age := 33
+
+!new Person('julianaSantos')
+!julianaSantos.firstName := 'Juliana'
+!julianaSantos.lastName := 'Santos'
+!julianaSantos.age := 27
+
+!insert (bancoDoBrasil, account9_1) into AccountOfBanks
+!insert (bancoDoBrasil, account9_2) into AccountOfBanks
+!insert (bancoDoBrasil, account9_3) into AccountOfBanks
+
+!insert (thiagoAlmeida, account9_1) into Ownership
+!insert (larissaMendes, account9_1) into Ownership
+
+!insert (carlosSilva, account9_2) into Ownership
+!insert (marinaCosta, account9_2) into Ownership
+
+!insert (julianaSantos, account9_3) into Ownership
+
+!insert (thiagoAlmeida, account9_1) into Use
+!insert (larissaMendes, account9_1) into Use
+!insert (marinaCosta, account9_1) into Use
+
+!insert (carlosSilva, account9_2) into Use
+!insert (thiagoAlmeida, account9_2) into Use
+
+!insert (julianaSantos, account9_3) into Use
+!insert (larissaMendes, account9_3) into Use
+!insert (carlosSilva, account9_3) into Use
+
+!new Bank('globalTrustBank')
+!globalTrustBank.country := 'India'
+!globalTrustBank.name := 'GlobalTrust Bank'
+!globalTrustBank.bic := 'GLTRINBB001'
+
+!new Account('account12')
+!account12.iban := 'IN75TEST0000012345678901'
+!account12.balance := 1
+
+!new Person('nehaSharma')
+!nehaSharma.firstName := 'Neha'
+!nehaSharma.lastName := 'Sharma'
+!nehaSharma.age := 28
+
+!new Person('arvindKumar')
+!arvindKumar.firstName := 'Arvind'
+!arvindKumar.lastName := 'Kumar'
+!arvindKumar.age := 32
+
+!new Person('rohitSharma')
+!rohitSharma.firstName := 'Rohit'
+!rohitSharma.lastName := 'Sharma'
+!rohitSharma.age := 19
+
+!new Person('priyaKumar')
+!priyaKumar.firstName := 'Priya'
+!priyaKumar.lastName := 'Kumar'
+!priyaKumar.age := 22
+
+!insert (globalTrustBank, account12) into AccountOfBanks
+
+!insert (nehaSharma, account12) into Ownership
+!insert (arvindKumar, account12) into Ownership
+
+!insert (nehaSharma, account12) into Use
+!insert (arvindKumar, account12) into Use
+!insert (rohitSharma, account12) into Use
+!insert (priyaKumar, account12) into Use
+
+!new Bank('bankUnity')
+!bankUnity.country := 'Canada'
+!bankUnity.name := 'Northern Trust Bank'
+!bankUnity.bic := 'NTBCA22'
+
+!new Bank('bankContinental')
+!bankContinental.country := 'Italy'
+!bankContinental.name := 'Mediterranean Commerce Bank'
+!bankContinental.bic := 'MCBIT33'
+
+!new Person('giovanniRossi')
+!giovanniRossi.firstName := 'Giovanni'
+!giovanniRossi.lastName := 'Rossi'
+!giovanniRossi.age := 45
+
+!new Person('marcoBertoli')
+!marcoBertoli.firstName := 'Marco'
+!marcoBertoli.lastName := 'Bertoli'
+!marcoBertoli.age := 38
+
+!new Person('aliciaJohnson')
+!aliciaJohnson.firstName := 'Alicia'
+!aliciaJohnson.lastName := 'Johnson'
+!aliciaJohnson.age := 28
+
+!new Person('samanthaLee')
+!samanthaLee.firstName := 'Samantha'
+!samanthaLee.lastName := 'Lee'
+!samanthaLee.age := 26
+
+!new Account('account13_5')
+!account13_5.iban := 'CA91 1000 3000 0002'
+!account13_5.balance := 15000
+
+!new Account('account13_6')
+!account13_6.iban := 'IT20 X054 2811 1010'
+!account13_6.balance := 8000
+
+!insert (bankUnity, account13_5) into AccountOfBanks
+!insert (bankContinental, account13_6) into AccountOfBanks
+
+!insert (giovanniRossi, account13_5) into Ownership
+!insert (marcoBertoli, account13_5) into Ownership
+
+!insert (aliciaJohnson, account13_6) into Ownership
+!insert (samanthaLee, account13_6) into Ownership
+
+!insert (giovanniRossi, account13_5) into Use
+!insert (marcoBertoli, account13_5) into Use
+!insert (aliciaJohnson, account13_5) into Use
+!insert (samanthaLee, account13_5) into Use
+
+!insert (aliciaJohnson, account13_6) into Use
+!insert (samanthaLee, account13_6) into Use
+!insert (marcoBertoli, account13_6) into Use
+
+!new Bank('umojaTrustBank')
+!umojaTrustBank.country := 'Kenya'
+!umojaTrustBank.name := 'Umoja Trust Bank'
+!umojaTrustBank.bic := 'UMLKKE22'
+
+!new Person('aminaNjeri')
+!aminaNjeri.firstName := 'Amina'
+!aminaNjeri.lastName := 'Njeri'
+!aminaNjeri.age := 28
+
+!new Person('priyaSethi')
+!priyaSethi.firstName := 'Priya'
+!priyaSethi.lastName := 'Sethi'
+!priyaSethi.age := 36
+
+!new Person('leoSchmidt')
+!leoSchmidt.firstName := 'Leo'
+!leoSchmidt.lastName := 'Schmidt'
+!leoSchmidt.age := 33
+
+!new Account('account15_1')
+!account15_1.iban := 'KE29-7654-3210-0002'
+!account15_1.balance := 250000
+
+!new Account('account15_2')
+!account15_2.iban := 'KE34-8765-4321-0003'
+!account15_2.balance := 50
+
+!insert (umojaTrustBank, account15_1) into AccountOfBanks
+!insert (umojaTrustBank, account15_2) into AccountOfBanks
+
+!insert (aminaNjeri, account15_1) into Ownership
+!insert (priyaSethi, account15_1) into Ownership
+
+!insert (priyaSethi, account15_2) into Ownership
+
+!insert (aminaNjeri, account15_1) into Use
+!insert (leoSchmidt, account15_1) into Use
+
+!insert (aminaNjeri, account15_2) into Use
+
+!new Bank('bancoDoBrasil')
+!bancoDoBrasil.country := 'Brazil'
+!bancoDoBrasil.name := 'Banco do Brasil'
+!bancoDoBrasil.bic := 'BBRA00012'
+
+!new Bank('bharatBank')
+!bharatBank.country := 'India'
+!bharatBank.name := 'Bharat Bank'
+!bharatBank.bic := 'BHIN67234'
+
+!new Person('carlosOliveira')
+!carlosOliveira.firstName := 'Carlos'
+!carlosOliveira.lastName := 'Oliveira'
+!carlosOliveira.age := 23
+
+!new Person('priyaSharma')
+!priyaSharma.firstName := 'Priya'
+!priyaSharma.lastName := 'Sharma'
+!priyaSharma.age := 36
+
+!new Person('viniciusFernandez')
+!viniciusFernandez.firstName := 'Vinicius'
+!viniciusFernandez.lastName := 'Fernandez'
+!viniciusFernandez.age := 40
+
+!new Person('aditiGupta')
+!aditiGupta.firstName := 'Aditi'
+!aditiGupta.lastName := 'Gupta'
+!aditiGupta.age := 29
+
+!new Person('anilKapoor')
+!anilKapoor.firstName := 'Anil'
+!anilKapoor.lastName := 'Kapoor'
+!anilKapoor.age := 48
+
+!new Account('account17_1')
+!account17_1.iban := 'BR0011223344I'
+!account17_1.balance := 800
+
+!new Account('account17_2')
+!account17_2.iban := 'IN8765432109J'
+!account17_2.balance := 2500
+
+!new Account('account17_3')
+!account17_3.iban := 'BR5566778899K'
+!account17_3.balance := 5000
+
+!new Account('account17_4')
+!account17_4.iban := 'IN1098765432L'
+!account17_4.balance := 3000
+
+!insert (bancoDoBrasil, account17_1) into AccountOfBanks
+!insert (bharatBank, account17_2) into AccountOfBanks
+!insert (bancoDoBrasil, account17_3) into AccountOfBanks
+!insert (bharatBank, account17_4) into AccountOfBanks
+
+!insert (carlosOliveira, account17_1) into Ownership
+
+!insert (priyaSharma, account17_2) into Ownership
+
+!insert (viniciusFernandez, account17_3) into Ownership
+
+!insert (aditiGupta, account17_4) into Ownership
+!insert (anilKapoor, account17_4) into Ownership
+
+!insert (carlosOliveira, account17_1) into Use
+!insert (viniciusFernandez, account17_1) into Use
+
+!insert (priyaSharma, account17_2) into Use
+!insert (anilKapoor, account17_2) into Use
+
+!insert (viniciusFernandez, account17_3) into Use
+!insert (carlosOliveira, account17_3) into Use
+!insert (aditiGupta, account17_3) into Use
+
+!insert (aditiGupta, account17_4) into Use
+!insert (priyaSharma, account17_4) into Use
+

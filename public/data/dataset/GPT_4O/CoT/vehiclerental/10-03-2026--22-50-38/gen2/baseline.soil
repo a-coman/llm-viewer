@@ -1,0 +1,47 @@
+!new RentalOffice('officeLosAngelesCenter')
+!officeLosAngelesCenter.name := 'Los Angeles Center'
+!officeLosAngelesCenter.number := 202
+!officeLosAngelesCenter.address := '789 Sunset Blvd, Los Angeles, CA 90028'
+
+!new Vehicle('coveredTrailer002')
+!coveredTrailer002.id := 302
+!coveredTrailer002.registrationState := #CA
+!coveredTrailer002.licensePlateNumber := 'CA5678CT'
+!coveredTrailer002.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer002.registrationLastMaintenanceDate := Date('2023-06-20')
+!coveredTrailer002.expirationDate := Date('2024-06-19')
+
+!new Truck('truck003')
+!truck003.id := 303
+!truck003.registrationState := #CA
+!truck003.licensePlateNumber := 'NV4683TR'
+!truck003.vehicleTypeCode := #TRUCK
+!truck003.registrationLastMaintenanceDate := Date('2023-07-10')
+!truck003.expirationDate := Date('2024-07-09')
+!truck003.odometerReading := 8000
+!truck003.gasTankCapacity := 13.2
+!truck003.workingRadio := false
+!truck003.mileage := 15000
+
+!new Company('companySunTechLogistics')
+!companySunTechLogistics.name := 'SunTech Logistics'
+!companySunTechLogistics.address := '100 Corporate Park, Los Angeles, CA 90001'
+!companySunTechLogistics.poorRisk := false
+!companySunTechLogistics.idNumber := 759001
+
+!new RentalAgreement('rentalAgreement2002')
+!rentalAgreement2002.number := 2002
+!rentalAgreement2002.rentalDate := Date('2023-10-05')
+!rentalAgreement2002.anticipatedDuration := 14
+!rentalAgreement2002.depositPaid := 400.0
+!rentalAgreement2002.quotedDailyRate := 70.0
+!rentalAgreement2002.quotedRatePerMile := 0.3
+
+!insert (officeLosAngelesCenter, coveredTrailer002) into RentalOfficeVehicle
+!insert (officeLosAngelesCenter, truck003) into RentalOfficeVehicle
+
+!insert (officeLosAngelesCenter, rentalAgreement2002) into RentalOfficeRentalAgreementOrigin
+!insert (officeLosAngelesCenter, rentalAgreement2002) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement2002, truck003) into RentalAgreementVehicle
+!insert (rentalAgreement2002, companySunTechLogistics) into RentalAgreementCustomer

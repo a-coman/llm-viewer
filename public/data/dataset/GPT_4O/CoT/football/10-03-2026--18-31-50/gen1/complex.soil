@@ -1,0 +1,168 @@
+!new Club('clubG')
+!clubG.name := 'Barcelona United'
+!clubG.homeGround := 'Camp Barca'
+!clubG.chairman := 'Maria Sanchez'
+
+!new Club('clubH')
+!clubH.name := 'Manchester Lions'
+!clubH.homeGround := 'Lions Den Stadium'
+!clubH.chairman := 'Edward Bowman'
+
+!new Team('teamG')
+!teamG.name := 'Barcelona United First Team'
+
+!new Team('teamH')
+!teamH.name := 'Manchester Lions First Team'
+
+!insert (clubG, teamG) into ClubTeam
+!insert (clubH, teamH) into ClubTeam
+
+!new Player('player7')
+!player7.name := 'Lionel Ruiz'
+!player7.age := 28
+!player7.bestFoot := #RIGHT
+!player7.phoneNumber := '+34912345678'
+
+!new Player('player8')
+!player8.name := 'Gareth Nolan'
+!player8.age := 31
+!player8.bestFoot := #LEFT
+!player8.phoneNumber := '+441234567890'
+
+!insert (teamG, player7) into TeamPlayer
+!insert (teamH, player8) into TeamPlayer
+
+!new Position('position16')
+!position16.positionName := #FORWARD
+
+!new Position('position17')
+!position17.positionName := #MIDFIELDER
+
+!insert (player7, position16) into PlayerPositions
+!insert (player8, position17) into PlayerPositions
+
+!new Competition('competition3')
+!competition3.name := 'European Champions League'
+!competition3.type := 'Tournament'
+
+!new Match('match4')
+!match4.date := '15-06-2023'
+!match4.homeAway := true
+
+!insert (teamG, match4) into LocalMatch
+!insert (teamH, match4) into VisitorMatch
+!insert (competition3, match4) into CompetitionMatch
+
+!new MatchReport('matchReport4')
+!matchReport4.duration := 90
+!matchReport4.scoreVisitor := 2
+!matchReport4.scoreLocal := 3
+
+!insert (match4, matchReport4) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer7')
+!matchPlayer7.booked := true
+!matchPlayer7.goals := 2
+!matchPlayer7.rating := 9
+
+!new MatchPlayer('matchPlayer8')
+!matchPlayer8.booked := false
+!matchPlayer8.goals := 1
+!matchPlayer8.rating := 8
+
+!insert (player7, matchPlayer7) into PlayerMatch
+!insert (player8, matchPlayer8) into PlayerMatch
+
+!insert (match4, matchPlayer7) into MatchMatchPlayer
+!insert (match4, matchPlayer8) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position19')
+!position19.positionName := #FORWARD
+!position19.number := 10
+
+!new MatchPlayerPosition('position20')
+!position20.positionName := #MIDFIELDER
+!position20.number := 8
+
+!insert (matchPlayer7, position19) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer8, position20) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent11')
+!matchEvent11.eventType := #GOAL
+!matchEvent11.time := 23
+
+!new MatchEvent('matchEvent12')
+!matchEvent12.eventType := #GOAL
+!matchEvent12.time := 68
+
+!new MatchEvent('matchEvent13')
+!matchEvent13.eventType := #GOAL
+!matchEvent13.time := 72
+
+!new MatchEvent('matchEvent14')
+!matchEvent14.eventType := #GOAL
+!matchEvent14.time := 45
+
+!insert (match4, matchEvent11) into MatchMatchEvent
+!insert (match4, matchEvent12) into MatchMatchEvent
+!insert (match4, matchEvent13) into MatchMatchEvent
+!insert (match4, matchEvent14) into MatchMatchEvent
+
+!new MatchEvent('matchEvent15')
+!matchEvent15.eventType := #FOUL
+!matchEvent15.time := 56
+
+!insert (match4, matchEvent15) into MatchMatchEvent
+
+!new MatchNote('matchNote3')
+!matchNote3.note := 'Both teams showed excellent tactics with agile defensive maneuvers.'
+!matchNote3.date := '15-06-2023'
+
+!insert (match4, matchNote3) into MatchMatchNote
+
+!new TrainingSession('trainingSession5')
+!trainingSession5.date := '10-06-2023'
+!trainingSession5.location := 'Camp Barca'
+!trainingSession5.purpose := 'Strategic passing practices for the final match.'
+
+!insert (teamG, trainingSession5) into TeamTraining
+
+!new TrainingSession('trainingSession6')
+!trainingSession6.date := '09-06-2023'
+!trainingSession6.location := 'Lions Den Training Ground'
+!trainingSession6.purpose := 'Defensive drills for the final match.'
+
+!insert (teamH, trainingSession6) into TeamTraining
+
+!new TrainingNotes('trainingNote5')
+!trainingNote5.note := 'Players showcased remarkable improvements in passing under pressure.'
+!trainingNote5.date := '10-06-2023'
+
+!insert (trainingSession5, trainingNote5) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote6')
+!trainingNote6.note := 'Focused on strengthening defensive formations.'
+!trainingNote6.date := '09-06-2023'
+
+!insert (trainingSession6, trainingNote6) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail3')
+!trainingFail3.reason := 'Family emergency'
+
+!insert (trainingSession5, trainingFail3) into TrainingFailded
+!insert (trainingFail3, player7) into FailedPlayer
+
+!new TrainingObjective('trainingObjective5')
+!trainingObjective5.areaToImprove := 'Finishing Accuracy'
+!trainingObjective5.startDate := '01-06-2023'
+!trainingObjective5.endDate := '15-06-2023'
+!trainingObjective5.success := true
+
+!new TrainingObjective('trainingObjective6')
+!trainingObjective6.areaToImprove := 'Defensive Positioning'
+!trainingObjective6.startDate := '01-06-2023'
+!trainingObjective6.endDate := '15-06-2023'
+!trainingObjective6.success := true
+
+!insert (trainingObjective5, player7) into TrainingObjectivePlayer
+!insert (trainingObjective6, player8) into TrainingObjectivePlayer

@@ -1,0 +1,184 @@
+!new Club('clubAZ')
+!clubAZ.name := 'Rio de Janeiro Royals'
+!clubAZ.homeGround := 'Maracanã Stadium'
+!clubAZ.chairman := 'Ricardo Souza'
+
+!new Club('clubBA')
+!clubBA.name := 'Milan Knights'
+!clubBA.homeGround := 'San Siro'
+!clubBA.chairman := 'Giulia Rossi'
+
+!new Team('teamAZ')
+!teamAZ.name := 'Rio Royals Senior Squad'
+
+!new Team('teamBA')
+!teamBA.name := 'Milan Knights Legends Team'
+
+!insert (clubAZ, teamAZ) into ClubTeam
+!insert (clubBA, teamBA) into ClubTeam
+
+!new Player('player58')
+!player58.name := 'Diego Ferreira'
+!player58.age := 35
+!player58.bestFoot := #LEFT
+!player58.phoneNumber := '+5521122334455'
+
+!new Player('player59')
+!player59.name := 'Alessandro Conti'
+!player59.age := 36
+!player59.bestFoot := #RIGHT
+!player59.phoneNumber := '+390224567890'
+
+!new Player('player60')
+!player60.name := 'Felipe Silva'
+!player60.age := 34
+!player60.bestFoot := #RIGHT
+!player60.phoneNumber := '+5521987654321'
+
+!insert (teamAZ, player58) into TeamPlayer
+!insert (teamBA, player59) into TeamPlayer
+!insert (teamAZ, player60) into TeamPlayer
+
+!new Position('position109')
+!position109.positionName := #FORWARD
+
+!new Position('position106')
+!position106.positionName := #DEFENDER
+
+!new Position('position100')
+!position100.positionName := #MIDFIELDER
+
+!insert (player58, position109) into PlayerPositions
+!insert (player59, position100) into PlayerPositions
+!insert (player60, position106) into PlayerPositions
+
+!new Competition('competition23')
+!competition23.name := 'World Classics Cup'
+!competition23.type := 'Exhibition Tournament'
+
+!new Match('match30')
+!match30.date := '10-10-2023'
+!match30.homeAway := true
+
+!insert (teamAZ, match30) into LocalMatch
+!insert (teamBA, match30) into VisitorMatch
+!insert (competition23, match30) into CompetitionMatch
+
+!new MatchReport('matchReport30')
+!matchReport30.duration := 90
+!matchReport30.scoreVisitor := 2
+!matchReport30.scoreLocal := 2
+
+!insert (match30, matchReport30) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer53')
+!matchPlayer53.booked := false
+!matchPlayer53.goals := 2
+!matchPlayer53.rating := 9
+
+!new MatchPlayer('matchPlayer54')
+!matchPlayer54.booked := true
+!matchPlayer54.goals := 1
+!matchPlayer54.rating := 8
+
+!new MatchPlayer('matchPlayer55')
+!matchPlayer55.booked := false
+!matchPlayer55.goals := 0
+!matchPlayer55.rating := 7
+
+!insert (player58, matchPlayer53) into PlayerMatch
+!insert (player59, matchPlayer54) into PlayerMatch
+!insert (player60, matchPlayer55) into PlayerMatch
+
+!insert (match30, matchPlayer53) into MatchMatchPlayer
+!insert (match30, matchPlayer54) into MatchMatchPlayer
+!insert (match30, matchPlayer55) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp53')
+!mpp53.positionName := #FORWARD
+!mpp53.number := 10
+
+!new MatchPlayerPosition('mpp54')
+!mpp54.positionName := #MIDFIELDER
+!mpp54.number := 8
+
+!new MatchPlayerPosition('mpp55')
+!mpp55.positionName := #DEFENDER
+!mpp55.number := 5
+
+!insert (matchPlayer53, mpp53) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer54, mpp54) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer55, mpp55) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent85')
+!matchEvent85.eventType := #GOAL
+!matchEvent85.time := 19
+
+!new MatchEvent('matchEvent86')
+!matchEvent86.eventType := #GOAL
+!matchEvent86.time := 85
+
+!new MatchEvent('matchEvent87')
+!matchEvent87.eventType := #GOAL
+!matchEvent87.time := 42
+
+!new MatchEvent('matchEvent88')
+!matchEvent88.eventType := #FOUL
+!matchEvent88.time := 67
+
+!insert (match30, matchEvent85) into MatchMatchEvent
+!insert (match30, matchEvent86) into MatchMatchEvent
+!insert (match30, matchEvent87) into MatchMatchEvent
+!insert (match30, matchEvent88) into MatchMatchEvent
+
+!new TrainingSession('trainingSession45')
+!trainingSession45.date := '05-10-2023'
+!trainingSession45.location := 'Maracanã Practice Field'
+!trainingSession45.purpose := 'Tactics and strategy for historic match scenarios.'
+
+!new TrainingSession('trainingSession46')
+!trainingSession46.date := '06-10-2023'
+!trainingSession46.location := 'San Siro Training Grounds'
+!trainingSession46.purpose := 'Defensive and Offensive Coordination'
+
+!insert (teamAZ, trainingSession45) into TeamTraining
+!insert (teamBA, trainingSession46) into TeamTraining
+
+!new TrainingNotes('trainingNote45')
+!trainingNote45.note := 'Players comprehended advanced formations used in historical rivalries.'
+!trainingNote45.date := '05-10-2023'
+
+!new TrainingNotes('trainingNote46')
+!trainingNote46.note := 'Focused on synchronization between defense and attack.'
+!trainingNote46.date := '06-10-2023'
+
+!insert (trainingSession45, trainingNote45) into TrainingTrainingNotes
+!insert (trainingSession46, trainingNote46) into TrainingTrainingNotes
+
+!new TrainingObjective('trainingObjective43')
+!trainingObjective43.areaToImprove := 'Tactical Intelligence'
+!trainingObjective43.startDate := '01-10-2023'
+!trainingObjective43.endDate := '08-10-2023'
+!trainingObjective43.success := true
+
+!new TrainingObjective('trainingObjective44')
+!trainingObjective44.areaToImprove := 'Defensive Strategy'
+!trainingObjective44.startDate := '01-10-2023'
+!trainingObjective44.endDate := '08-10-2023'
+!trainingObjective44.success := true
+
+!new TrainingObjective('trainingObjective45')
+!trainingObjective45.areaToImprove := 'Offensive Strategy'
+!trainingObjective45.startDate := '01-10-2023'
+!trainingObjective45.endDate := '08-10-2023'
+!trainingObjective45.success := true
+
+!insert (trainingObjective43, player58) into TrainingObjectivePlayer
+!insert (trainingObjective44, player59) into TrainingObjectivePlayer
+!insert (trainingObjective45, player60) into TrainingObjectivePlayer
+
+!new TrainingFailedToAttend('trainingFail19')
+!trainingFail19.reason := 'Personal Commitments'
+
+!insert (trainingFail19, player60) into FailedPlayer
+!insert (trainingSession45, trainingFail19) into TrainingFailded

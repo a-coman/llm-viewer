@@ -1,0 +1,37 @@
+!new Client('client37')
+!client37.clientId := 1234
+!client37.isSuspended := false
+
+!new Rental('rental59')
+!rental59.date := Date('2023-12-30')
+
+!new Movie('movie49')
+!movie49.title := 'Galactic Laughter'
+!movie49.availableCopies := 7
+!movie49.genre := #Comedy
+
+!new Series('series40')
+!series40.title := 'Cosmic Warriors Return'
+!series40.availableCopies := 3
+!series40.episode := 999
+
+!new Actor('actor87')
+!actor87.name := 'Hiro Tanaka'
+
+!new Actor('actor88')
+!actor88.name := 'Lucia Varela'
+
+!new Actor('actor89')
+!actor89.name := 'Marco Silva'
+
+!insert (client37, rental59) into ClientRental
+
+!insert (rental59, movie49) into RentalCassette
+!insert (rental59, series40) into RentalCassette
+
+!insert (movie49, actor87) into CassetteActor
+!insert (movie49, actor88) into CassetteActor
+
+!insert (series40, actor87) into CassetteActor
+!insert (series40, actor88) into CassetteActor
+!insert (series40, actor89) into CassetteActor

@@ -1,0 +1,39 @@
+!new RentalOffice('officeBostonDowntown')
+!officeBostonDowntown.name := 'Boston Downtown'
+!officeBostonDowntown.number := 101
+!officeBostonDowntown.address := '123 Main St, Boston, MA 02101'
+
+!new Truck('truck001')
+!truck001.id := 301
+!truck001.registrationState := #MA
+!truck001.licensePlateNumber := 'MA1234TR'
+!truck001.vehicleTypeCode := #TRUCK
+!truck001.registrationLastMaintenanceDate := Date('2023-08-15')
+!truck001.expirationDate := Date('2024-08-14')
+!truck001.odometerReading := 12000
+!truck001.gasTankCapacity := 15.5
+!truck001.workingRadio := true
+!truck001.mileage := 25000
+
+!new Individual('individualJohnDoe')
+!individualJohnDoe.name := 'John Doe'
+!individualJohnDoe.address := '456 Elm St, Boston, MA 02110'
+!individualJohnDoe.poorRisk := false
+!individualJohnDoe.homePhone := '617-555-2323'
+!individualJohnDoe.driverLicenseState := #MA
+!individualJohnDoe.driverLicenseNumber := 987654321
+!individualJohnDoe.driverLicenseExpirationDate := Date('2025-05-10')
+
+!new RentalAgreement('rentalAgreement1001')
+!rentalAgreement1001.number := 1001
+!rentalAgreement1001.rentalDate := Date('2023-09-01')
+!rentalAgreement1001.anticipatedDuration := 7
+!rentalAgreement1001.depositPaid := 200.0
+!rentalAgreement1001.quotedDailyRate := 50.0
+!rentalAgreement1001.quotedRatePerMile := 0.5
+
+!insert (officeBostonDowntown, truck001) into RentalOfficeVehicle
+!insert (officeBostonDowntown, rentalAgreement1001) into RentalOfficeRentalAgreementOrigin
+!insert (officeBostonDowntown, rentalAgreement1001) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement1001, truck001) into RentalAgreementVehicle
+!insert (rentalAgreement1001, individualJohnDoe) into RentalAgreementCustomer

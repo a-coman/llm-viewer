@@ -1,0 +1,71 @@
+!new Customer('customer8')
+!customer8.firstName := 'Akira'
+!customer8.lastName := 'Nakamura'
+
+!new Booking('booking8')
+!booking8.startDate := '2023-12-01'
+!booking8.endDate := '2023-12-10'
+!booking8.canceled := false
+!booking8.bookingId := 102
+!booking8.confirmed := true
+
+!new Bill('bill16')
+!bill16.price := 1800.0
+!bill16.billId := 301
+
+!new Bill('bill17')
+!bill17.price := 300.0
+!bill17.billId := 302
+
+!new FreeRoomTypesDTO('freeRoomType7')
+!freeRoomType7.roomTypeDescription := 'Family Suite'
+!freeRoomType7.numBeds := 4
+!freeRoomType7.pricePerNight := 200.0
+!freeRoomType7.numFreeRooms := 1
+
+!new RoomReservation('roomReservation8_1')
+!roomReservation8_1.checkInDate := '2023-12-01'
+!roomReservation8_1.checkOutDate := '2023-12-10'
+
+!new RoomReservation('roomReservation8_2')
+!roomReservation8_2.checkInDate := '2023-12-01'
+!roomReservation8_2.checkOutDate := '2023-12-10'
+
+!new RoomExtra('extra8_1')
+!extra8_1.price := 80.0
+!extra8_1.description := 'Daily Room Service'
+
+!new RoomExtra('extra8_2')
+!extra8_2.price := 220.0
+!extra8_2.description := 'City Tour Package'
+
+!new Room('room8_401')
+!room8_401.numBeds := 2
+!room8_401.pricePerNight := 200.0
+!room8_401.occupied := true
+!room8_401.blocked := false
+!room8_401.roomNumber := 401
+
+!new Room('room8_402')
+!room8_402.numBeds := 2
+!room8_402.pricePerNight := 200.0
+!room8_402.occupied := true
+!room8_402.blocked := false
+!room8_402.roomNumber := 402
+
+!insert (booking8, customer8) into BookingCustomer
+
+!insert (booking8, bill16) into BookingBill
+!insert (booking8, bill17) into BookingBill
+
+!insert (booking8, roomReservation8_1) into BookingRoomReservation
+!insert (booking8, roomReservation8_2) into BookingRoomReservation
+
+!insert (roomReservation8_1, room8_401) into RoomReservationRoom
+!insert (roomReservation8_2, room8_402) into RoomReservationRoom
+
+!insert (roomReservation8_1, extra8_1) into RoomReservationExtras
+!insert (roomReservation8_2, extra8_2) into RoomReservationExtras
+
+!insert (bill16, roomReservation8_1) into BillRoomReservation
+!insert (bill17, roomReservation8_2) into BillRoomReservation

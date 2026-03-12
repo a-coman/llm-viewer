@@ -1,0 +1,64 @@
+!new Driver('driver52')
+!driver52.id := 'D052'
+!driver52.name := 'Vision'
+
+!new Driver('driver53')
+!driver53.id := 'D053'
+!driver53.name := 'Wanda Maximoff'
+
+!new Shipment('shipment55')
+!shipment55.id := 'SHP12399'
+!shipment55.status := #ASSIGNED
+
+!new Shipment('shipment56')
+!shipment56.id := 'SHP12400'
+!shipment56.status := #UNDERWAY
+
+!new Address('address55')
+!address55.text := '5353 Vibranium Ln, Westview'
+
+!new Address('address56')
+!address56.text := '5454 Hex Blvd, Westview'
+
+!new GeoLocation('geoLocation55')
+!geoLocation55.latitude := 51.5074
+!geoLocation55.longitude := 0.1278
+
+!new GeoLocation('geoLocation56')
+!geoLocation56.latitude := 51.5007
+!geoLocation56.longitude := 0.1246
+
+!insert (address55, geoLocation55) into AddressContainsGeoLocation
+!insert (address56, geoLocation56) into AddressContainsGeoLocation
+
+!new Customer('customer55')
+!customer55.id := 'CUST055'
+!customer55.name := 'Pietro Maximoff'
+!customer55.twitterUserName := '@quicksilver'
+
+!new Customer('customer56')
+!customer56.id := 'CUST056'
+!customer56.name := 'Agatha Harkness'
+!customer56.twitterUserName := '@witchagatha'
+
+!new Station('station28')
+
+!insert (station28, customer55) into StationContainsCustomer
+!insert (station28, customer56) into StationContainsCustomer
+
+!insert (station28, shipment55) into StationShipment
+!insert (station28, shipment56) into StationShipment
+
+!insert (station28, driver52) into StationContainsDriver
+!insert (station28, driver53) into StationContainsDriver
+
+!insert (shipment55, address55) into ShipmentContainsPickUpAddress
+!insert (shipment55, address56) into ShipmentContainsDeliveryAddress
+
+!insert (shipment56, address56) into ShipmentContainsPickUpAddress
+!insert (shipment56, address55) into ShipmentContainsDeliveryAddress
+
+!insert (customer55, shipment55) into CustomerConsistsOfShipment
+!insert (customer56, shipment56) into CustomerConsistsOfShipment
+
+!insert (driver52, shipment55) into DriverShipment

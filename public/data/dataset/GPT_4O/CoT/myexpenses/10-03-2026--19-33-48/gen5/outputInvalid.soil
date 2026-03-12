@@ -1,0 +1,47 @@
+!new Expense('familyReunionExpense')
+!familyReunionExpense.amount := 2000.00
+!familyReunionExpense.startDate := Date('2024-05-01')
+!familyReunionExpense.endDate := Date('2024-05-04')
+
+!new Bill('cateringServiceBill')
+!cateringServiceBill.amount := 800.00
+!cateringServiceBill.category := 'Catering Services'
+!cateringServiceBill.date := Date('2024-05-01')
+!cateringServiceBill.paymentMethod := #CHECK
+!cateringServiceBill.status := #VALIDATED
+
+!new Bill('venueRentalBill')
+!venueRentalBill.amount := 900.00
+!venueRentalBill.category := 'Venue Rental'
+!venueRentalBill.date := Date('2024-04-20')
+!venueRentalBill.paymentMethod := #CHECK
+!venueRentalBill.status := #PENDING
+
+!new Bill('decorationBill')
+!decorationBill.amount := 300.00
+!decorationBill.category := 'Decoration and Setup'
+!decorationBill.date := Date('2024-04-29')
+!decorationBill.paymentMethod := #CASH
+!decorationBill.status := #VERIFIED
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (cateringServiceBill, currencyUSD) into BillCurrency
+!insert (venueRentalBill, currencyUSD) into BillCurrency
+!insert (decorationBill, currencyUSD) into BillCurrency
+
+!insert (familyReunionExpense, cateringServiceBill) into ExpenseContainsBills
+!insert (familyReunionExpense, venueRentalBill) into ExpenseContainsBills
+!insert (familyReunionExpense, decorationBill) into ExpenseContainsBills
+
+!new Comment('organizationTip')
+!organizationTip.text := 'Plan ahead for better family coordination and reduced last-minute expenses.'
+
+!new Comment('expenseReview')
+!expenseReview.text := 'Revisit the budget post-event for any tweaks needed.'
+
+!insert (familyReunionExpense, organizationTip) into ExpenseComment
+!insert (familyReunionExpense, expenseReview) into ExpenseComment
+

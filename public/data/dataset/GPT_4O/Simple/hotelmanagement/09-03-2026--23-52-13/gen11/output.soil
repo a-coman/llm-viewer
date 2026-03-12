@@ -1,0 +1,36 @@
+!new Booking('booking12')
+!booking12.startDate := '2024-10-05'
+!booking12.endDate := '2024-10-08'
+!booking12.canceled := false
+!booking12.bookingId := 112
+!booking12.confirmed := true
+
+!new Bill('bill12')
+!bill12.price := 400.00
+!bill12.billId := 5012
+
+!new Customer('customer12')
+!customer12.firstName := 'Leo'
+!customer12.lastName := 'Martinez'
+
+!new RoomReservation('reservation12')
+!reservation12.checkInDate := '2024-10-05'
+!reservation12.checkOutDate := '2024-10-08'
+
+!new Room('room901')
+!room901.numBeds := 1
+!room901.pricePerNight := 100.00
+!room901.occupied := true
+!room901.blocked := false
+!room901.roomNumber := 901
+
+!new RoomExtra('extra15')
+!extra15.price := 12.00
+!extra15.description := 'Pet Friendly Package'
+
+!insert (booking12, bill12) into BookingBill
+!insert (booking12, customer12) into BookingCustomer
+!insert (booking12, reservation12) into BookingRoomReservation
+!insert (reservation12, extra15) into RoomReservationExtras
+!insert (reservation12, room901) into RoomReservationRoom
+!insert (bill12, reservation12) into BillRoomReservation

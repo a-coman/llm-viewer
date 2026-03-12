@@ -1,0 +1,57 @@
+!new StateMachine('EmergencyResponse')
+!EmergencyResponse.name := 'EmergencyResponse'
+
+!new State('idle')
+!idle.name := 'idle'
+
+!new State('alerted')
+!alerted.name := 'alerted'
+
+!new State('responding')
+!responding.name := 'responding'
+
+!new State('resolved')
+!resolved.name := 'resolved'
+
+!new Transition('IdleToAlert')
+!IdleToAlert.name := 'Idle to Alert'
+
+!new Transition('AlertToRespond')
+!AlertToRespond.name := 'Alert to Respond'
+
+!new Transition('RespondToResolved')
+!RespondToResolved.name := 'Respond to Resolved'
+
+!new TimeEvent('IdleTimeout')
+!IdleTimeout.time := 0
+
+!new TimeEvent('AlertTimeout')
+!AlertTimeout.time := 60
+
+!new TimeEvent('RespondTimeout')
+!RespondTimeout.time := 120
+
+!insert (EmergencyResponse, idle) into StateMachineContainsStates
+!insert (EmergencyResponse, alerted) into StateMachineContainsStates
+!insert (EmergencyResponse, responding) into StateMachineContainsStates
+!insert (EmergencyResponse, resolved) into StateMachineContainsStates
+
+!insert (EmergencyResponse, IdleToAlert) into StateMachineContainsTransitions
+!insert (EmergencyResponse, AlertToRespond) into StateMachineContainsTransitions
+!insert (EmergencyResponse, RespondToResolved) into StateMachineContainsTransitions
+
+!insert (IdleToAlert, IdleTimeout) into TransitionContainsEvents
+!insert (AlertToRespond, AlertTimeout) into TransitionContainsEvents
+!insert (RespondToResolved, RespondTimeout) into TransitionContainsEvents
+
+!insert (idle, IdleToAlert) into StateTransition
+!insert (IdleToAlert, alerted) into TransitionState
+
+!insert (alerted, AlertToRespond) into StateTransition
+!insert (AlertToRespond, responding) into TransitionState
+
+!insert (responding, RespondToResolved) into StateTransition
+!insert (RespondToResolved, resolved) into TransitionState
+
+!insert (EmergencyResponse, idle) into StateMachineStartsStates
+

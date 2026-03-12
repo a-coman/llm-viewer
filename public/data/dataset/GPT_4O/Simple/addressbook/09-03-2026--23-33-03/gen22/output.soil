@@ -1,0 +1,66 @@
+!new AddressBook('addressBook22')
+
+!new Company('company22')
+!company22.name := 'GreenScapes Landscaping'
+!company22.phone := '707-123-4567'
+!company22.website := 'www.greenscapes.com'
+!company22.email := 'info@greenscapes.com'
+!company22.industry := 'Landscaping Services'
+
+!new Person('person40')
+!person40.name := 'Ella Peterson'
+!person40.phone := '818-999-0000'
+!person40.website := 'www.ellapetersondesigns.com'
+!person40.email := 'ella.peterson@greenscapes.com'
+!person40.title := 'Landscape Architect'
+
+!new Person('person41')
+!person41.name := 'Liam Murphy'
+!person41.phone := '626-111-2222'
+!person41.website := 'www.liamurphylawncare.com'
+!person41.email := 'liam.murphy@environmentaldesign.org'
+!person41.title := 'Horticultural Consultant'
+
+!new Note('note40')
+!note40.author := 'Ella Peterson'
+!note40.time := Date('2025-04-15')
+!note40.type := #MEETING
+!note40.comment := 'Met with clients to discuss garden design options.'
+
+!new Note('note41')
+!note41.author := 'Liam Murphy'
+!note41.time := Date('2025-04-18')
+!note41.type := #CALL
+!note41.comment := 'Provided expert advice on plant selections.'
+
+!new Address('address41')
+!address41.city := 'Gardenville'
+!address41.houseNr := '777A'
+!address41.street := 'Plant Path'
+
+!new Address('address42')
+!address42.city := 'Botanic Borough'
+!address42.houseNr := '66Y'
+!address42.street := 'Green Avenue'
+
+!new Relationship('relationship42')
+!relationship42.type := #BOSS
+
+!new Relationship('relationship43')
+!relationship43.type := #COWORKER
+
+!insert (addressBook22, company22) into AddressBookMadeOfContact
+!insert (addressBook22, person40) into AddressBookMadeOfContact
+!insert (addressBook22, person41) into AddressBookMadeOfContact
+
+!insert (person40, note40) into ContactContainsNote
+!insert (person41, note41) into ContactContainsNote
+
+!insert (company22, relationship42) into ContactToRelationship
+!insert (relationship42, person40) into RelationshipToContact
+
+!insert (person40, relationship43) into ContactToRelationship
+!insert (relationship43, person41) into RelationshipToContact
+
+!insert (company22, address41) into ContactContainsAddress
+!insert (person41, address42) into ContactContainsAddress

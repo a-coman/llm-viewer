@@ -1,0 +1,75 @@
+!new Expense('festivalOperationsFundDisbursement')
+!festivalOperationsFundDisbursement.amount := 48200.00
+!festivalOperationsFundDisbursement.startDate := Date('2023-09-10')
+!festivalOperationsFundDisbursement.endDate := Date('2023-09-17')
+
+!new Bill('stageSetupBill')
+!stageSetupBill.amount := 15000.00
+!stageSetupBill.category := 'Stage Setup'
+!stageSetupBill.date := Date('2023-09-11')
+!stageSetupBill.paymentMethod := #CHECK
+!stageSetupBill.status := #VALIDATED
+
+!new Bill('lightingAndSoundBill')
+!lightingAndSoundBill.amount := 12000.00
+!lightingAndSoundBill.category := 'Lighting and Sound'
+!lightingAndSoundBill.date := Date('2023-09-12')
+!lightingAndSoundBill.paymentMethod := #CREDIT_CARD
+!lightingAndSoundBill.status := #PENDING
+
+!new Bill('securityServicesBill')
+!securityServicesBill.amount := 10000.00
+!securityServicesBill.category := 'Security Services'
+!securityServicesBill.date := Date('2023-09-13')
+!securityServicesBill.paymentMethod := #CASH
+!securityServicesBill.status := #VERIFIED
+
+!new Bill('cateringServicesBill')
+!cateringServicesBill.amount := 11200.00
+!cateringServicesBill.category := 'Catering Services'
+!cateringServicesBill.date := Date('2023-09-14')
+!cateringServicesBill.paymentMethod := #CHECK
+!cateringServicesBill.status := #REFUSED
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!new Currency('currencyAUD')
+!currencyAUD.name := 'Australian Dollar'
+!currencyAUD.abbreviation := 'AUD'
+
+!insert (stageSetupBill, currencyEUR) into BillCurrency
+!insert (lightingAndSoundBill, currencyUSD) into BillCurrency
+!insert (securityServicesBill, currencyCAD) into BillCurrency
+!insert (cateringServicesBill, currencyAUD) into BillCurrency
+
+!insert (festivalOperationsFundDisbursement, stageSetupBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, lightingAndSoundBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, securityServicesBill) into ExpenseContainsBills
+!insert (festivalOperationsFundDisbursement, cateringServicesBill) into ExpenseContainsBills
+
+!new Comment('stageSetupComment')
+!stageSetupComment.text := 'Stage setup contracted to local providers familiar with festival needs, ensuring cultural authenticity.'
+
+!new Comment('lightingIssueComment')
+!lightingIssueComment.text := 'Pending issue with lighting invoice due to supplier''s delayed equipment delivery.'
+
+!new Comment('securityComment')
+!securityComment.text := 'Security verification completed, operations confirmed compliant with safety regulations.'
+
+!new Comment('cateringComment')
+!cateringComment.text := 'Catering bill refused pending renegotiation of menu options to include local delicacies.'
+
+!insert (festivalOperationsFundDisbursement, stageSetupComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, lightingIssueComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, securityComment) into ExpenseComment
+!insert (festivalOperationsFundDisbursement, cateringComment) into ExpenseComment

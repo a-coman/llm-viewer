@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency27')
+!currency27.name := 'Saudi Riyal'
+!currency27.abbreviation := 'SAR'
+
+-- Creating instances of Bills
+!new Bill('bill67')
+!bill67.amount := 15000.00
+!bill67.category := 'Research Grants'
+!bill67.date := Date('2023-07-10')
+!bill67.paymentMethod := #CHECK
+!bill67.status := #PENDING
+!insert (bill67, currency27) into BillCurrency
+
+!new Bill('bill68')
+!bill68.amount := 10000.00
+!bill68.category := 'Conference Registration'
+!bill68.date := Date('2023-07-12')
+!bill68.paymentMethod := #CASH
+!bill68.status := #VERIFIED
+!insert (bill68, currency27) into BillCurrency
+
+!new Bill('bill69')
+!bill69.amount := 5000.00
+!bill69.category := 'Publication Fees'
+!bill69.date := Date('2023-07-15')
+!bill69.paymentMethod := #CREDIT_CARD
+!bill69.status := #DRAFT
+!insert (bill69, currency27) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment30')
+!comment30.text := 'Budget allocations for academic research and conference activities.'
+
+-- Creating instance of Expense
+!new Expense('expense27')
+!expense27.amount := 30000.00
+!expense27.startDate := Date('2023-07-01')
+!expense27.endDate := Date('2023-07-20')
+!insert (expense27, bill67) into ExpenseContainsBills
+!insert (expense27, bill68) into ExpenseContainsBills
+!insert (expense27, bill69) into ExpenseContainsBills
+!insert (expense27, comment30) into ExpenseComment

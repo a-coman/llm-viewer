@@ -1,0 +1,107 @@
+!new Restaurant('restaurant8')
+!restaurant8.name := 'Aurora Borealis'
+
+!new Owner('owner16')
+!owner16.name := 'Clara Bennett'
+!owner16.percentageShares := 40
+!insert (restaurant8, owner16) into RestaurantOwner
+
+!new Owner('owner17')
+!owner17.name := 'Robert Davis'
+!owner17.percentageShares := 60
+!insert (restaurant8, owner17) into RestaurantOwner
+
+!new Table('table21')
+!table21.number := 21
+!table21.description := 'Sky view booth'
+!table21.capacity := 3
+
+!new Table('table22')
+!table22.number := 22
+!table22.description := 'Ocean view terrace'
+!table22.capacity := 15
+
+!new RegularCustomer('customer9')
+!customer9.name := 'Melanie Cruz'
+!customer9.prefferedLanguage := #German
+
+!new Waiter('waiter10')
+!waiter10.name := 'Nathan Chase'
+!waiter10.dateOfBirth := Date('1988-05-18')
+!waiter10.phoneNumber := '555-6543'
+!waiter10.spokenLanguage := #Italian
+
+!new HeadWaiter('headwaiter8')
+!headwaiter8.name := 'Ella Fitzgerald'
+!headwaiter8.dateOfBirth := Date('1979-03-02')
+!headwaiter8.phoneNumber := '555-7890'
+
+!insert (headwaiter8, waiter10) into HeadWaiterWaiter
+
+!new Individual('reservation13')
+!reservation13.time := Time('18:30')
+!reservation13.date := Date('2023-12-20')
+!reservation13.numberPeople := 2
+!reservation13.name := 'Melanie Cruz'
+!reservation13.phoneNumber := '555-3212'
+!reservation13.number := 13
+!reservation13.seating := #Inside
+!reservation13.smoking := #NonSmoking
+!insert (restaurant8, reservation13) into RestaurantReservation
+!insert (reservation13, customer9) into ReservationCustomer
+!insert (reservation13, waiter10) into ReservationWaiter
+!insert (reservation13, table21) into ReservationTable
+
+!new Banquet('reservation14')
+!reservation14.time := Time('20:00')
+!reservation14.date := Date('2024-01-30')
+!reservation14.numberPeople := 25
+!reservation14.name := 'Polar Night Celebration'
+!reservation14.phoneNumber := '555-8888'
+!reservation14.number := 14
+!reservation14.groupName := 'Polar Party Association'
+!reservation14.paymentMethod := #Cash
+!reservation14.busService := false
+!insert (restaurant8, reservation14) into RestaurantReservation
+!insert (reservation14, table22) into ReservationTable
+!insert (reservation14, waiter10) into ReservationWaiter
+
+!new Table('tableExtra2')
+!tableExtra2.number := 23
+!tableExtra2.description := 'Indoor Hall'
+!tableExtra2.capacity := 12
+!insert (reservation14, tableExtra2) into ReservationTable
+
+!new ItemOrder('itemOrder8')
+!itemOrder8.time := Time('19:00')
+!insert (reservation13, itemOrder8) into ReservationItemOrdered
+
+!new MenuItem('menuItem8')
+!menuItem8.description := 'Arctic Char'
+!menuItem8.prepTime := 25.0
+!menuItem8.classification := #Main
+!insert (itemOrder8, menuItem8) into ItemOrderMenuItem
+
+!new FoodItem('foodItem8')
+!foodItem8.number := 108
+!foodItem8.description := 'Wild-caught Arctic Char'
+!foodItem8.purchaseFlag := true
+!foodItem8.unit := #Pound
+!insert (menuItem8, foodItem8) into MenuItemFoodItem
+
+!new Allergen('allergen8')
+!allergen8.type := #Seafood
+!insert (foodItem8, allergen8) into FoodItemAllergen
+
+!new Cook('cook8')
+!cook8.name := 'Julia Child'
+!cook8.dateOfBirth := Date('1992-08-15')
+!cook8.phoneNumber := '555-4545'
+!cook8.yearsOfExperience := 6
+
+!new Chef('chef8')
+!chef8.name := 'Gordon Ramsay'
+!chef8.dateOfBirth := Date('1985-01-12')
+!chef8.phoneNumber := '555-3434'
+!insert (menuItem8, chef8) into MenuItemChef
+!insert (chef8, cook8) into ChefCook

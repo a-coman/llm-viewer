@@ -1,0 +1,40 @@
+!new Bank('umojaTrustBank')
+!umojaTrustBank.country := 'Kenya'
+!umojaTrustBank.name := 'Umoja Trust Bank'
+!umojaTrustBank.bic := 'UMLKKE22'
+
+!new Person('aminaNjeri')
+!aminaNjeri.firstName := 'Amina'
+!aminaNjeri.lastName := 'Njeri'
+!aminaNjeri.age := 28
+
+!new Person('priyaSethi')
+!priyaSethi.firstName := 'Priya'
+!priyaSethi.lastName := 'Sethi'
+!priyaSethi.age := 36
+
+!new Person('leoSchmidt')
+!leoSchmidt.firstName := 'Leo'
+!leoSchmidt.lastName := 'Schmidt'
+!leoSchmidt.age := 33
+
+!new Account('account15_1')
+!account15_1.iban := 'KE29-7654-3210-0002'
+!account15_1.balance := 250000
+
+!new Account('account15_2')
+!account15_2.iban := 'KE34-8765-4321-0003'
+!account15_2.balance := 50
+
+!insert (umojaTrustBank, account15_1) into AccountOfBanks
+!insert (umojaTrustBank, account15_2) into AccountOfBanks
+
+!insert (aminaNjeri, account15_1) into Ownership
+!insert (priyaSethi, account15_1) into Ownership
+
+!insert (priyaSethi, account15_2) into Ownership
+
+!insert (aminaNjeri, account15_1) into Use
+!insert (leoSchmidt, account15_1) into Use
+
+!insert (aminaNjeri, account15_2) into Use

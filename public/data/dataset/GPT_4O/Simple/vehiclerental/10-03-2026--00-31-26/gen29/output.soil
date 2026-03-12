@@ -1,0 +1,70 @@
+!new RentalOffice('office29')
+!office29.name := 'Highway Rentals'
+!office29.number := 2929
+!office29.address := '123 Freeway Ln, Houston, TX'
+
+!new Truck('truck57')
+!truck57.id := 557
+!truck57.registrationState := #FL
+!truck57.licensePlateNumber := 'FL-TRK-4455'
+!truck57.vehicleTypeCode := #OPEN_TRAILER
+!truck57.registrationLastMaintenanceDate := Date('2023-08-11')
+!truck57.expirationDate := Date('2024-08-11')
+!truck57.odometerReading := 19000
+!truck57.gasTankCapacity := 30.0
+!truck57.workingRadio := true
+!truck57.mileage := 18
+
+!new Individual('individual29')
+!individual29.name := 'Emma Collins'
+!individual29.address := '890 Lake St, Austin, TX'
+!individual29.poorRisk := false
+!individual29.homePhone := '555-3345'
+!individual29.driverLicenseState := #FL
+!individual29.driverLicenseNumber := 14785236
+!individual29.driverLicenseExpirationDate := Date('2025-11-30')
+
+!new RentalAgreement('agreement57')
+!agreement57.number := 3057
+!agreement57.rentalDate := Date('2023-12-10')
+!agreement57.anticipatedDuration := 4
+!agreement57.depositPaid := 210.0
+!agreement57.quotedDailyRate := 73.00
+!agreement57.quotedRatePerMile := 0.50
+
+!new Truck('truck58')
+!truck58.id := 558
+!truck58.registrationState := #CA
+!truck58.licensePlateNumber := 'CA-TRK-1124'
+!truck58.vehicleTypeCode := #COVERED_TRAILER
+!truck58.registrationLastMaintenanceDate := Date('2023-03-10')
+!truck58.expirationDate := Date('2025-03-10')
+!truck58.odometerReading := 24000
+!truck58.gasTankCapacity := 28.5
+!truck58.workingRadio := false
+!truck58.mileage := 24
+
+!new Company('company29')
+!company29.name := 'Express Line Freight'
+!company29.address := '432 Industrial Blvd, Dallas, TX'
+!company29.poorRisk := true
+!company29.idNumber := 657483
+
+!new RentalAgreement('agreement58')
+!agreement58.number := 3058
+!agreement58.rentalDate := Date('2023-12-20')
+!agreement58.anticipatedDuration := 9
+!agreement58.depositPaid := 450.0
+!agreement58.quotedDailyRate := 88.00
+!agreement58.quotedRatePerMile := 0.65
+
+!insert (office29, truck57) into RentalOfficeVehicle
+!insert (office29, truck58) into RentalOfficeVehicle
+!insert (office29, agreement57) into RentalOfficeRentalAgreementOrigin
+!insert (office29, agreement57) into RentalOfficeRentalAgreementDrop
+!insert (office29, agreement58) into RentalOfficeRentalAgreementOrigin
+!insert (office29, agreement58) into RentalOfficeRentalAgreementDrop
+!insert (agreement57, truck57) into RentalAgreementVehicle
+!insert (agreement57, individual29) into RentalAgreementCustomer
+!insert (agreement58, truck58) into RentalAgreementVehicle
+!insert (agreement58, company29) into RentalAgreementCustomer

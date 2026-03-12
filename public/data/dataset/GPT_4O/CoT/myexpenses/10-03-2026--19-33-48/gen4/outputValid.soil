@@ -1,0 +1,239 @@
+!new Expense('educationalSeminarExpense')
+!educationalSeminarExpense.amount := 1280.00
+!educationalSeminarExpense.startDate := Date('2023-11-10')
+!educationalSeminarExpense.endDate := Date('2023-11-12')
+
+!new Bill('seminarRegistrationBill')
+!seminarRegistrationBill.amount := 800.00
+!seminarRegistrationBill.category := 'Seminar Registration'
+!seminarRegistrationBill.date := Date('2023-10-15')
+!seminarRegistrationBill.paymentMethod := #CREDIT_CARD
+!seminarRegistrationBill.status := #VERIFIED
+
+!new Bill('accommodationBill')
+!accommodationBill.amount := 180.00
+!accommodationBill.category := 'Accommodation'
+!accommodationBill.date := Date('2023-11-09')
+!accommodationBill.paymentMethod := #CREDIT_CARD
+!accommodationBill.status := #VALIDATED
+
+!new Bill('dailyMealsBill')
+!dailyMealsBill.amount := 150.00
+!dailyMealsBill.category := 'Daily Meals'
+!dailyMealsBill.date := Date('2023-11-10')
+!dailyMealsBill.paymentMethod := #CASH
+!dailyMealsBill.status := #VERIFIED
+
+!new Bill('localTransportationBill')
+!localTransportationBill.amount := 150.00
+!localTransportationBill.category := 'Local Transportation'
+!localTransportationBill.date := Date('2023-11-11')
+!localTransportationBill.paymentMethod := #CASH
+!localTransportationBill.status := #PENDING
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (seminarRegistrationBill, currencyJPY) into BillCurrency
+!insert (accommodationBill, currencyJPY) into BillCurrency
+!insert (dailyMealsBill, currencyJPY) into BillCurrency
+!insert (localTransportationBill, currencyJPY) into BillCurrency
+
+!insert (educationalSeminarExpense, seminarRegistrationBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, accommodationBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, dailyMealsBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, localTransportationBill) into ExpenseContainsBills
+
+!new Comment('seminarRegistrationComment')
+!seminarRegistrationComment.text := 'Registration process was smooth, looking forward to gaining new insights.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Accommodation was comfortable and conveniently located near the seminar venue.'
+
+!new Comment('localTransportationComment')
+!localTransportationComment.text := 'Local transportation made it easy to explore the city between sessions.'
+
+!insert (educationalSeminarExpense, seminarRegistrationComment) into ExpenseComment
+!insert (educationalSeminarExpense, accommodationComment) into ExpenseComment
+!insert (educationalSeminarExpense, localTransportationComment) into ExpenseComment
+
+!new Expense('boundaryExpense')
+!boundaryExpense.amount := 800.00
+!boundaryExpense.startDate := Date('2023-05-01')
+!boundaryExpense.endDate := Date('2023-05-31')
+
+!new Bill('summerUtilitiesBill')
+!summerUtilitiesBill.amount := 500.00
+!summerUtilitiesBill.category := 'Summer Utilities'
+!summerUtilitiesBill.date := Date('2023-05-10')
+!summerUtilitiesBill.paymentMethod := #CHECK
+!summerUtilitiesBill.status := #PENDING
+
+!new Bill('emergencyPlumbingBill')
+!emergencyPlumbingBill.amount := 300.00
+!emergencyPlumbingBill.category := 'Emergency Plumbing'
+!emergencyPlumbingBill.date := Date('2023-05-24')
+!emergencyPlumbingBill.paymentMethod := #CASH
+!emergencyPlumbingBill.status := #REFUNDED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (summerUtilitiesBill, currencyGBP) into BillCurrency
+!insert (emergencyPlumbingBill, currencyGBP) into BillCurrency
+
+!insert (boundaryExpense, summerUtilitiesBill) into ExpenseContainsBills
+!insert (boundaryExpense, emergencyPlumbingBill) into ExpenseContainsBills
+
+!new Comment('utilitiesComment')
+!utilitiesComment.text := 'Payment for utility bills, awaiting clearance.'
+
+!new Comment('refundComment')
+!refundComment.text := 'Refund processed for emergency expense due to incorrect service billing.'
+
+!insert (boundaryExpense, utilitiesComment) into ExpenseComment
+!insert (boundaryExpense, refundComment) into ExpenseComment
+
+!new Expense('renovationProjectExpense')
+!renovationProjectExpense.amount := 8500.00
+!renovationProjectExpense.startDate := Date('2023-06-01')
+!renovationProjectExpense.endDate := Date('2023-07-15')
+
+!new Bill('laborCostsBill')
+!laborCostsBill.amount := 3000.00
+!laborCostsBill.category := 'Labor Costs'
+!laborCostsBill.date := Date('2023-06-01')
+!laborCostsBill.paymentMethod := #CHECK
+!laborCostsBill.status := #VERIFIED
+
+!new Bill('materialsBill')
+!materialsBill.amount := 2500.00
+!materialsBill.category := 'Materials'
+!materialsBill.date := Date('2023-06-10')
+!materialsBill.paymentMethod := #CREDIT_CARD
+!materialsBill.status := #VERIFIED
+
+!new Bill('interiorDesignBill')
+!interiorDesignBill.amount := 1500.00
+!interiorDesignBill.category := 'Interior Design'
+!interiorDesignBill.date := Date('2023-06-20')
+!interiorDesignBill.paymentMethod := #CASH
+!interiorDesignBill.status := #VALIDATED
+
+!new Bill('permitsLegalFeesBill')
+!permitsLegalFeesBill.amount := 1000.00
+!permitsLegalFeesBill.category := 'Permits and Legal Fees'
+!permitsLegalFeesBill.date := Date('2023-06-15')
+!permitsLegalFeesBill.paymentMethod := #CREDIT_CARD
+!permitsLegalFeesBill.status := #PENDING
+
+!new Bill('miscellaneousExpensesBill')
+!miscellaneousExpensesBill.amount := 500.00
+!miscellaneousExpensesBill.category := 'Miscellaneous Expenses'
+!miscellaneousExpensesBill.date := Date('2023-07-01')
+!miscellaneousExpensesBill.paymentMethod := #CHECK
+!miscellaneousExpensesBill.status := #REFUNDED
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (laborCostsBill, currencyCAD) into BillCurrency
+!insert (materialsBill, currencyCAD) into BillCurrency
+!insert (interiorDesignBill, currencyCAD) into BillCurrency
+!insert (permitsLegalFeesBill, currencyCAD) into BillCurrency
+!insert (miscellaneousExpensesBill, currencyCAD) into BillCurrency
+
+!insert (renovationProjectExpense, laborCostsBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, materialsBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, interiorDesignBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, permitsLegalFeesBill) into ExpenseContainsBills
+!insert (renovationProjectExpense, miscellaneousExpensesBill) into ExpenseContainsBills
+
+!new Comment('renovationComment1')
+!renovationComment1.text := 'Renovation of the downtown office building, including electrical rewiring and interior design updates.'
+
+!new Comment('renovationComment2')
+!renovationComment2.text := 'Project completed ahead of schedule despite initial delays due to supply chain disruptions.'
+
+!insert (renovationProjectExpense, renovationComment1) into ExpenseComment
+!insert (renovationProjectExpense, renovationComment2) into ExpenseComment
+
+!new Expense('postDisasterInfrastructureRebuild')
+!postDisasterInfrastructureRebuild.amount := 86500.00
+!postDisasterInfrastructureRebuild.startDate := Date('2023-05-01')
+!postDisasterInfrastructureRebuild.endDate := Date('2023-05-05')
+
+!new Bill('constructionMaterialsBill')
+!constructionMaterialsBill.amount := 35000.00
+!constructionMaterialsBill.category := 'Construction Materials'
+!constructionMaterialsBill.date := Date('2023-05-01')
+!constructionMaterialsBill.paymentMethod := #CASH
+!constructionMaterialsBill.status := #PENDING
+
+!new Bill('laborCostsBill')
+!laborCostsBill.amount := 25000.00
+!laborCostsBill.category := 'Labor Costs'
+!laborCostsBill.date := Date('2023-05-03')
+!laborCostsBill.paymentMethod := #CREDIT_CARD
+!laborCostsBill.status := #VERIFIED
+
+!new Bill('machineryLeasingBill')
+!machineryLeasingBill.amount := 15000.00
+!machineryLeasingBill.category := 'Machinery Leasing'
+!machineryLeasingBill.date := Date('2023-05-04')
+!machineryLeasingBill.paymentMethod := #CHECK
+!machineryLeasingBill.status := #VALIDATED
+
+!new Bill('siteSecurityBill')
+!siteSecurityBill.amount := 11500.00
+!siteSecurityBill.category := 'Site Security'
+!siteSecurityBill.date := Date('2023-05-05')
+!siteSecurityBill.paymentMethod := #CREDIT_CARD
+!siteSecurityBill.status := #DRAFT
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound Sterling'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (constructionMaterialsBill, currencyUSD) into BillCurrency
+!insert (laborCostsBill, currencyEUR) into BillCurrency
+!insert (machineryLeasingBill, currencyJPY) into BillCurrency
+!insert (siteSecurityBill, currencyGBP) into BillCurrency
+
+!insert (postDisasterInfrastructureRebuild, constructionMaterialsBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, laborCostsBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, machineryLeasingBill) into ExpenseContainsBills
+!insert (postDisasterInfrastructureRebuild, siteSecurityBill) into ExpenseContainsBills
+
+!new Comment('materialsComment')
+!materialsComment.text := 'Urgent need for construction materials to prevent delays due to administrative hold-ups.'
+
+!new Comment('laborCostsComment')
+!laborCostsComment.text := 'Labor costs negotiated successfully, ensuring skillful workforce attendance.'
+
+!new Comment('machineryComment')
+!machineryComment.text := 'Machinery efficiency maximized within agreed leasing periods, confirming arrangements are effective.'
+
+!new Comment('securityComment')
+!securityComment.text := 'Pending security protocols for site need expedited draft approval, crucial for safety standards compliance.'
+
+!insert (postDisasterInfrastructureRebuild, materialsComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, laborCostsComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, machineryComment) into ExpenseComment
+!insert (postDisasterInfrastructureRebuild, securityComment) into ExpenseComment
+

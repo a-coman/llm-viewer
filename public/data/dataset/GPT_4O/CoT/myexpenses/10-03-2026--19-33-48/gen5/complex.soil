@@ -1,0 +1,64 @@
+!new Expense('academicResearchGrantExpense')
+!academicResearchGrantExpense.amount := 10500.00
+!academicResearchGrantExpense.startDate := Date('2023-05-01')
+!academicResearchGrantExpense.endDate := Date('2023-08-31')
+
+!new Bill('personnelAndSalariesBill')
+!personnelAndSalariesBill.amount := 4000.00
+!personnelAndSalariesBill.category := 'Personnel and Salaries'
+!personnelAndSalariesBill.date := Date('2023-05-01')
+!personnelAndSalariesBill.paymentMethod := #CREDIT_CARD
+!personnelAndSalariesBill.status := #VALIDATED
+
+!new Bill('equipmentAndMaterialsBill')
+!equipmentAndMaterialsBill.amount := 2500.00
+!equipmentAndMaterialsBill.category := 'Equipment and Materials'
+!equipmentAndMaterialsBill.date := Date('2023-05-15')
+!equipmentAndMaterialsBill.paymentMethod := #CHECK
+!equipmentAndMaterialsBill.status := #VERIFIED
+
+!new Bill('travelAndAccommodationBill')
+!travelAndAccommodationBill.amount := 1500.00
+!travelAndAccommodationBill.category := 'Travel and Accommodation'
+!travelAndAccommodationBill.date := Date('2023-06-05')
+!travelAndAccommodationBill.paymentMethod := #CASH
+!travelAndAccommodationBill.status := #REFUNDED
+
+!new Bill('conferencesAndSeminarsBill')
+!conferencesAndSeminarsBill.amount := 1000.00
+!conferencesAndSeminarsBill.category := 'Conferences and Seminars'
+!conferencesAndSeminarsBill.date := Date('2023-07-10')
+!conferencesAndSeminarsBill.paymentMethod := #CREDIT_CARD
+!conferencesAndSeminarsBill.status := #PENDING
+
+!new Bill('publicationAndCommunicationBill')
+!publicationAndCommunicationBill.amount := 1500.00
+!publicationAndCommunicationBill.category := 'Publication and Communication'
+!publicationAndCommunicationBill.date := Date('2023-08-20')
+!publicationAndCommunicationBill.paymentMethod := #CHECK
+!publicationAndCommunicationBill.status := #DRAFT
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'US Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (personnelAndSalariesBill, currencyUSD) into BillCurrency
+!insert (equipmentAndMaterialsBill, currencyUSD) into BillCurrency
+!insert (travelAndAccommodationBill, currencyUSD) into BillCurrency
+!insert (conferencesAndSeminarsBill, currencyUSD) into BillCurrency
+!insert (publicationAndCommunicationBill, currencyUSD) into BillCurrency
+
+!insert (academicResearchGrantExpense, personnelAndSalariesBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, equipmentAndMaterialsBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, travelAndAccommodationBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, conferencesAndSeminarsBill) into ExpenseContainsBills
+!insert (academicResearchGrantExpense, publicationAndCommunicationBill) into ExpenseContainsBills
+
+!new Comment('fundingAllocationComment')
+!fundingAllocationComment.text := 'Funding allocation for a multidisciplinary research project focusing on renewable energy solutions.'
+
+!new Comment('projectCollaborationComment')
+!projectCollaborationComment.text := 'The project involves collaborative efforts between universities, with extensive data collection and analysis.'
+
+!insert (academicResearchGrantExpense, fundingAllocationComment) into ExpenseComment
+!insert (academicResearchGrantExpense, projectCollaborationComment) into ExpenseComment

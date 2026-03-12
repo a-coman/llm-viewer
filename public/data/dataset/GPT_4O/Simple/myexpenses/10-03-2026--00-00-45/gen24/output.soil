@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency24')
+!currency24.name := 'Egyptian Pound'
+!currency24.abbreviation := 'EGP'
+
+-- Creating instances of Bills
+!new Bill('bill60')
+!bill60.amount := 2000.00
+!bill60.category := 'Media Production'
+!bill60.date := Date('2023-04-22')
+!bill60.paymentMethod := #CREDIT_CARD
+!bill60.status := #VERIFIED
+!insert (bill60, currency24) into BillCurrency
+
+!new Bill('bill61')
+!bill61.amount := 1500.00
+!bill61.category := 'Actor Contracts'
+!bill61.date := Date('2023-04-25')
+!bill61.paymentMethod := #CHECK
+!bill61.status := #VALIDATED
+!insert (bill61, currency24) into BillCurrency
+
+!new Bill('bill62')
+!bill62.amount := 1000.00
+!bill62.category := 'Set Design'
+!bill62.date := Date('2023-04-28')
+!bill62.paymentMethod := #CASH
+!bill62.status := #PENDING
+!insert (bill62, currency24) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment27')
+!comment27.text := 'Film production expenses for the new documentary project.'
+
+-- Creating instance of Expense
+!new Expense('expense24')
+!expense24.amount := 4500.00
+!expense24.startDate := Date('2023-04-20')
+!expense24.endDate := Date('2023-04-30')
+!insert (expense24, bill60) into ExpenseContainsBills
+!insert (expense24, bill61) into ExpenseContainsBills
+!insert (expense24, bill62) into ExpenseContainsBills
+!insert (expense24, comment27) into ExpenseComment

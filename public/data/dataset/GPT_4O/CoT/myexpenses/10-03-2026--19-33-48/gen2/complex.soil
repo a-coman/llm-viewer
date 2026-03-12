@@ -1,0 +1,64 @@
+!new Expense('familyVacationExpense')
+!familyVacationExpense.amount := 3850.00
+!familyVacationExpense.startDate := Date('2023-11-01')
+!familyVacationExpense.endDate := Date('2023-11-15')
+
+!new Bill('airfareBill')
+!airfareBill.amount := 2000.00
+!airfareBill.category := 'Airfare'
+!airfareBill.date := Date('2023-10-20')
+!airfareBill.paymentMethod := #CREDIT_CARD
+!airfareBill.status := #REFUNDED
+
+!new Bill('hotelAccommodationBill')
+!hotelAccommodationBill.amount := 600.00
+!hotelAccommodationBill.category := 'Hotel Accommodation'
+!hotelAccommodationBill.date := Date('2023-11-01')
+!hotelAccommodationBill.paymentMethod := #CASH
+!hotelAccommodationBill.status := #VERIFIED
+
+!new Bill('toursActivitiesBill')
+!toursActivitiesBill.amount := 450.00
+!toursActivitiesBill.category := 'Tours and Activities'
+!toursActivitiesBill.date := Date('2023-11-05')
+!toursActivitiesBill.paymentMethod := #CREDIT_CARD
+!toursActivitiesBill.status := #VALIDATED
+
+!new Bill('diningBill')
+!diningBill.amount := 300.00
+!diningBill.category := 'Dining'
+!diningBill.date := Date('2023-11-10')
+!diningBill.paymentMethod := #CHECK
+!diningBill.status := #VERIFIED
+
+!new Bill('giftsSouvenirsBill')
+!giftsSouvenirsBill.amount := 500.00
+!giftsSouvenirsBill.category := 'Gifts and Souvenirs'
+!giftsSouvenirsBill.date := Date('2023-11-12')
+!giftsSouvenirsBill.paymentMethod := #CREDIT_CARD
+!giftsSouvenirsBill.status := #PENDING
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (airfareBill, currencyJPY) into BillCurrency
+!insert (hotelAccommodationBill, currencyJPY) into BillCurrency
+!insert (toursActivitiesBill, currencyJPY) into BillCurrency
+!insert (diningBill, currencyJPY) into BillCurrency
+!insert (giftsSouvenirsBill, currencyJPY) into BillCurrency
+
+!insert (familyVacationExpense, airfareBill) into ExpenseContainsBills
+!insert (familyVacationExpense, hotelAccommodationBill) into ExpenseContainsBills
+!insert (familyVacationExpense, toursActivitiesBill) into ExpenseContainsBills
+!insert (familyVacationExpense, diningBill) into ExpenseContainsBills
+!insert (familyVacationExpense, giftsSouvenirsBill) into ExpenseContainsBills
+
+!new Comment('familyVacationComment1')
+!familyVacationComment1.text := 'Annual family vacation to Japan, including cultural tours and leisure activities.'
+
+!new Comment('familyVacationComment2')
+!familyVacationComment2.text := 'Activities included visiting historical sites and tasting local cuisine. A memorable and enriching experience for all.'
+
+!insert (familyVacationExpense, familyVacationComment1) into ExpenseComment
+!insert (familyVacationExpense, familyVacationComment2) into ExpenseComment

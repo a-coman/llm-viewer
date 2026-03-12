@@ -1,0 +1,56 @@
+!new StateMachine('complexPath')
+!complexPath.name := 'complexPath'
+
+!new State('aInitial')
+!aInitial.name := 'aInitial'
+
+!new State('bFork')
+!bFork.name := 'bFork'
+
+!new State('endState')
+!endState.name := 'endState'
+
+!new State('cLone')
+!cLone.name := 'cLone'
+
+!new Transition('startToFork')
+!startToFork.name := 'startToFork'
+
+!new Transition('forkToEnd')
+!forkToEnd.name := 'forkToEnd'
+
+!new Transition('forkToLone')
+!forkToLone.name := 'forkToLone'
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!insert (complexPath, aInitial) into StateMachineContainsStates
+!insert (complexPath, bFork) into StateMachineContainsStates
+!insert (complexPath, endState) into StateMachineContainsStates
+!insert (complexPath, cLone) into StateMachineContainsStates
+
+!insert (complexPath, startToFork) into StateMachineContainsTransitions
+!insert (complexPath, forkToEnd) into StateMachineContainsTransitions
+!insert (complexPath, forkToLone) into StateMachineContainsTransitions
+
+!insert (startToFork, timeEvent3) into TransitionContainsEvents
+!insert (forkToEnd, timeEvent5) into TransitionContainsEvents
+!insert (forkToLone, timeEvent1) into TransitionContainsEvents
+
+!insert (aInitial, startToFork) into StateTransition
+!insert (startToFork, bFork) into TransitionState
+
+!insert (bFork, forkToEnd) into StateTransition
+!insert (forkToEnd, endState) into TransitionState
+
+!insert (bFork, forkToLone) into StateTransition
+!insert (forkToLone, cLone) into TransitionState
+
+!insert (complexPath, aInitial) into StateMachineStartsStates

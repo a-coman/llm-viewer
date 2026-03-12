@@ -1,0 +1,43 @@
+!new Client('client5')
+!client5.clientId := 42
+!client5.isSuspended := false
+
+!new Rental('rental6')
+!rental6.date := Date('2023-09-22')
+
+!new Movie('movie5')
+!movie5.title := 'The Balkans\' Beat'
+!movie5.availableCopies := 5
+!movie5.genre := #Action
+
+!new Movie('movie6')
+!movie6.title := 'Sarajevo Romance'
+!movie6.availableCopies := 1
+!movie6.genre := #Comedy
+
+!new Series('series5')
+!series5.title := 'Old Balkans Tales'
+!series5.availableCopies := 10
+!series5.episode := 3
+
+!new Actor('actor8')
+!actor8.name := 'Nikola Petrovic'
+
+!new Actor('actor9')
+!actor9.name := 'Ana Jovanović'
+
+!new Actor('actor10')
+!actor10.name := 'Ibrahim Sinanović'
+
+!insert (client5, rental6) into ClientRental
+
+!insert (rental6, movie5) into RentalCassette
+!insert (rental6, movie6) into RentalCassette
+!insert (rental6, series5) into RentalCassette
+
+!insert (movie5, actor8) into CassetteActor
+!insert (movie5, actor9) into CassetteActor
+!insert (movie6, actor9) into CassetteActor
+!insert (series5, actor10) into CassetteActor
+!insert (series5, actor8) into CassetteActor
+

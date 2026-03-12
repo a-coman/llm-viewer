@@ -1,0 +1,161 @@
+!new Club('clubW')
+!clubW.name := 'Rome Gladiators'
+!clubW.homeGround := 'Colosseum Arena'
+!clubW.chairman := 'Giovanni Rossi'
+
+!new Club('clubX')
+!clubX.name := 'Tokyo Samurais'
+!clubX.homeGround := 'Tokyo Dome'
+!clubX.chairman := 'Aiko Okada'
+
+!new Team('teamW')
+!teamW.name := 'Rome Gladiators United'
+
+!new Team('teamX')
+!teamX.name := 'Tokyo Samurais FC'
+
+!insert (clubW, teamW) into ClubTeam
+!insert (clubX, teamX) into ClubTeam
+
+!new Competition('competition10')
+!competition10.name := 'Intercontinental Derby'
+!competition10.type := 'Cup'
+
+!new TrainingSession('trainingSession19')
+!trainingSession19.date := '2023-09-30'
+!trainingSession19.location := 'Rome Training Ground'
+!trainingSession19.purpose := 'Polish Set-Piece Execution'
+
+!new TrainingSession('trainingSession20')
+!trainingSession20.date := '2023-09-28'
+!trainingSession20.location := 'Samurai Training Facility'
+!trainingSession20.purpose := 'Enhance Speed and Agility'
+
+!insert (teamW, trainingSession19) into TeamTraining
+!insert (teamX, trainingSession20) into TeamTraining
+
+!new TrainingNotes('trainingNote19')
+!trainingNote19.note := 'Practiced corner kicks and free-kick scenarios.'
+!trainingNote19.date := '2023-09-30'
+
+!new TrainingNotes('trainingNote20')
+!trainingNote20.note := 'Timed sprints and reaction drills.'
+!trainingNote20.date := '2023-09-28'
+
+!insert (trainingSession19, trainingNote19) into TrainingTrainingNotes
+!insert (trainingSession20, trainingNote20) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail8')
+!trainingFail8.reason := 'Travel Delays'
+
+!new Player('player25')
+!player25.name := 'Marco Ventura'
+!player25.age := 30
+!player25.bestFoot := #LEFT
+!player25.phoneNumber := '+39-06-0987654'
+
+!new Player('player26')
+!player26.name := 'Kenji Tanaka'
+!player26.age := 24
+!player26.bestFoot := #RIGHT
+!player26.phoneNumber := '+81-3-23456789'
+
+!insert (teamW, player25) into TeamPlayer
+!insert (teamX, player26) into TeamPlayer
+
+!insert (trainingSession20, trainingFail8) into TrainingFailded
+!insert (trainingFail8, player26) into FailedPlayer
+
+!new Match('match12')
+!match12.date := '2023-10-10'
+!match12.homeAway := true
+
+!insert (teamW, match12) into LocalMatch
+!insert (teamX, match12) into VisitorMatch
+!insert (competition10, match12) into CompetitionMatch
+
+!new MatchReport('matchReport12')
+!matchReport12.duration := 90
+!matchReport12.scoreVisitor := 1
+!matchReport12.scoreLocal := 1
+
+!insert (match12, matchReport12) into MatchMatchReport
+
+!new MatchEvent('matchEvent34')
+!matchEvent34.eventType := #GOAL
+!matchEvent34.time := 12
+
+!new MatchEvent('matchEvent35')
+!matchEvent35.eventType := #GOAL
+!matchEvent35.time := 64
+
+!new MatchEvent('matchEvent36')
+!matchEvent36.eventType := #FOUL
+!matchEvent36.time := 55
+
+!insert (match12, matchEvent34) into MatchMatchEvent
+!insert (match12, matchEvent35) into MatchMatchEvent
+!insert (match12, matchEvent36) into MatchMatchEvent
+
+!new MatchNote('matchNote9')
+!matchNote9.note := 'A thrilling showdown with equal dominance.'
+!matchNote9.date := '2023-10-10'
+
+!insert (match12, matchNote9) into MatchMatchNote
+
+!new PlayerNotes('playerNote11')
+!playerNote11.note := 'Shows promising potential in quick attacking transitions.'
+!playerNote11.date := '2023-09-21'
+
+!insert (player26, playerNote11) into PlayerPlayerNotes
+
+!new TrainingObjective('trainingObjective19')
+!trainingObjective19.areaToImprove := 'Positional Awareness'
+!trainingObjective19.startDate := '2023-09-15'
+!trainingObjective19.endDate := '2023-10-15'
+!trainingObjective19.success := true
+
+!new TrainingObjective('trainingObjective20')
+!trainingObjective20.areaToImprove := 'Speed and Agility'
+!trainingObjective20.startDate := '2023-09-15'
+!trainingObjective20.endDate := '2023-10-15'
+!trainingObjective20.success := false
+
+!insert (trainingObjective19, player25) into TrainingObjectivePlayer
+!insert (trainingObjective20, player26) into TrainingObjectivePlayer
+
+!new MatchPlayer('matchPlayer21')
+!matchPlayer21.booked := true
+!matchPlayer21.goals := 0
+!matchPlayer21.rating := 7
+
+!new MatchPlayer('matchPlayer22')
+!matchPlayer22.booked := false
+!matchPlayer22.goals := 1
+!matchPlayer22.rating := 10
+
+!insert (player25, matchPlayer21) into PlayerMatch
+!insert (player26, matchPlayer22) into PlayerMatch
+
+!insert (match12, matchPlayer21) into MatchMatchPlayer
+!insert (match12, matchPlayer22) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position62')
+!position62.positionName := #MIDFIELDER
+!position62.number := 8
+
+!new MatchPlayerPosition('position63')
+!position63.positionName := #FORWARD
+!position63.number := 10
+
+!insert (matchPlayer21, position62) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer22, position63) into MatchPlayerMatchPlayerPosition
+
+!new Position('position64')
+!position64.positionName := #MIDFIELDER
+
+!new Position('position65')
+!position65.positionName := #FORWARD
+
+!insert (player25, position64) into PlayerPositions
+!insert (player26, position65) into PlayerPositions

@@ -1,0 +1,76 @@
+!new Customer('customer20')
+!customer20.firstName := 'Carlos'
+!customer20.lastName := 'Fernández'
+
+!new Booking('booking19')
+!booking19.startDate := '2023-07-10'
+!booking19.endDate := '2023-07-17'
+!booking19.canceled := false
+!booking19.bookingId := 1034
+!booking19.confirmed := true
+
+!new Bill('bill39_1')
+!bill39_1.price := 1075.00
+!bill39_1.billId := 3038
+
+!new Bill('bill39_2')
+!bill39_2.price := 1075.00
+!bill39_2.billId := 3039
+
+!new RoomReservation('roomReservation19_1')
+!roomReservation19_1.checkInDate := '2023-07-10'
+!roomReservation19_1.checkOutDate := '2023-07-13'
+
+!new RoomReservation('roomReservation19_2')
+!roomReservation19_2.checkInDate := '2023-07-13'
+!roomReservation19_2.checkOutDate := '2023-07-17'
+
+!new Room('room19_27')
+!room19_27.numBeds := 2
+!room19_27.pricePerNight := 220.00
+!room19_27.occupied := true
+!room19_27.blocked := false
+!room19_27.roomNumber := 27
+
+!new Room('room19_31')
+!room19_31.numBeds := 1
+!room19_31.pricePerNight := 200.00
+!room19_31.occupied := true
+!room19_31.blocked := false
+!room19_31.roomNumber := 31
+
+!new RoomExtra('extra19_1')
+!extra19_1.price := 75.00
+!extra19_1.description := 'Jungle Night Tour'
+
+!new RoomExtra('extra19_2')
+!extra19_2.price := 50.00
+!extra19_2.description := 'Traditional Costa Rican Dinner'
+
+!new RoomExtra('extra19_3')
+!extra19_3.price := 40.00
+!extra19_3.description := 'Yoga and Meditation Session'
+
+!new FreeRoomTypesDTO('freeRoomType16')
+!freeRoomType16.roomTypeDescription := 'Eco-Suite with River View'
+!freeRoomType16.numBeds := 2
+!freeRoomType16.pricePerNight := 260.00
+!freeRoomType16.numFreeRooms := 3
+
+!insert (booking19, customer20) into BookingCustomer
+
+!insert (booking19, bill39_1) into BookingBill
+!insert (booking19, bill39_2) into BookingBill
+
+!insert (booking19, roomReservation19_1) into BookingRoomReservation
+!insert (booking19, roomReservation19_2) into BookingRoomReservation
+
+!insert (roomReservation19_1, room19_27) into RoomReservationRoom
+!insert (roomReservation19_1, extra19_1) into RoomReservationExtras
+!insert (roomReservation19_1, extra19_2) into RoomReservationExtras
+
+!insert (roomReservation19_2, room19_31) into RoomReservationRoom
+!insert (roomReservation19_2, extra19_3) into RoomReservationExtras
+
+!insert (bill39_1, roomReservation19_1) into BillRoomReservation
+!insert (bill39_2, roomReservation19_2) into BillRoomReservation

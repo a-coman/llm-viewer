@@ -1,0 +1,55 @@
+!new Bank('bankUnity')
+!bankUnity.country := 'Canada'
+!bankUnity.name := 'Northern Trust Bank'
+!bankUnity.bic := 'NTBCA22'
+
+!new Bank('bankContinental')
+!bankContinental.country := 'Italy'
+!bankContinental.name := 'Mediterranean Commerce Bank'
+!bankContinental.bic := 'MCBIT33'
+
+!new Person('giovanniRossi')
+!giovanniRossi.firstName := 'Giovanni'
+!giovanniRossi.lastName := 'Rossi'
+!giovanniRossi.age := 45
+
+!new Person('marcoBertoli')
+!marcoBertoli.firstName := 'Marco'
+!marcoBertoli.lastName := 'Bertoli'
+!marcoBertoli.age := 38
+
+!new Person('aliciaJohnson')
+!aliciaJohnson.firstName := 'Alicia'
+!aliciaJohnson.lastName := 'Johnson'
+!aliciaJohnson.age := 28
+
+!new Person('samanthaLee')
+!samanthaLee.firstName := 'Samantha'
+!samanthaLee.lastName := 'Lee'
+!samanthaLee.age := 26
+
+!new Account('account13_5')
+!account13_5.iban := 'CA91 1000 3000 0002'
+!account13_5.balance := 15000
+
+!new Account('account13_6')
+!account13_6.iban := 'IT20 X054 2811 1010'
+!account13_6.balance := 8000
+
+!insert (bankUnity, account13_5) into AccountOfBanks
+!insert (bankContinental, account13_6) into AccountOfBanks
+
+!insert (giovanniRossi, account13_5) into Ownership
+!insert (marcoBertoli, account13_5) into Ownership
+
+!insert (aliciaJohnson, account13_6) into Ownership
+!insert (samanthaLee, account13_6) into Ownership
+
+!insert (giovanniRossi, account13_5) into Use
+!insert (marcoBertoli, account13_5) into Use
+!insert (aliciaJohnson, account13_5) into Use
+!insert (samanthaLee, account13_5) into Use
+
+!insert (aliciaJohnson, account13_6) into Use
+!insert (samanthaLee, account13_6) into Use
+!insert (marcoBertoli, account13_6) into Use

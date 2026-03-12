@@ -1,0 +1,602 @@
+!new Restaurant('restaurant23')
+!restaurant23.name := 'Fusion Flavors'
+
+!new Owner('owner48')
+!owner48.name := 'Maria dos Santos'
+!owner48.percentageShares := 60
+
+!new Owner('owner49')
+!owner49.name := 'Li Wei'
+!owner49.percentageShares := 40
+
+!insert (restaurant23, owner48) into RestaurantOwner
+!insert (restaurant23, owner49) into RestaurantOwner
+
+!new Chef('chef25')
+!chef25.name := 'Pierre Laurent'
+!chef25.dateOfBirth := Date('1975-01-01')       -- Arbitrary date of birth
+!chef25.phoneNumber := '1012345678'             -- Arbitrary phone number
+
+!new Cook('cook29')
+!cook29.name := 'Haruto Tanaka'
+!cook29.dateOfBirth := Date('1983-01-01')       -- Arbitrary date of birth
+!cook29.phoneNumber := '2012345678'             -- Arbitrary phone number
+!cook29.yearsOfExperience := 10
+
+!new Cook('cook30')
+!cook30.name := 'Fatima Zahra'
+!cook30.dateOfBirth := Date('1990-01-01')       -- Arbitrary date of birth
+!cook30.phoneNumber := '3012345678'             -- Arbitrary phone number
+!cook30.yearsOfExperience := 3
+
+!insert (chef25, cook29) into ChefCook
+!insert (chef25, cook30) into ChefCook
+
+!new Banquet('banquet19')
+!banquet19.date := Date('2023-07-15')
+!banquet19.time := Time('19:00')
+!banquet19.groupName := 'Corporate Networking Gala'
+!banquet19.numberPeople := 38
+!banquet19.paymentMethod := #Cash
+
+!insert (restaurant23, banquet19) into RestaurantReservation
+
+!new Table('table59')
+!table59.number := 30
+!table59.description := 'Main hall with extensive projection facilities'
+!table59.capacity := 40
+
+!insert (banquet19, table59) into ReservationTable
+
+!new BusDriver('busdriver19')
+!busdriver19.name := 'Luca Fortunato'
+
+!insert (banquet19, busdriver19) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter18')
+!headwaiter18.name := 'Olivia Kim'
+!headwaiter18.dateOfBirth := Date('1980-01-01') -- Arbitrary date of birth
+!headwaiter18.phoneNumber := '4012345678'       -- Arbitrary phone number
+
+!new Waiter('waiter42')
+!waiter42.name := 'Carlos Mendes'
+!waiter42.dateOfBirth := Date('1985-01-01')     -- Arbitrary date of birth
+!waiter42.phoneNumber := '5012345678'           -- Arbitrary phone number
+!waiter42.spokenLanguage := #English
+
+!new Waiter('waiter43')
+!waiter43.name := 'Sofia Ivanova'
+!waiter43.dateOfBirth := Date('1987-01-01')     -- Arbitrary date of birth
+!waiter43.phoneNumber := '6012345678'           -- Arbitrary phone number
+!waiter43.spokenLanguage := #English
+
+!insert (headwaiter18, waiter42) into HeadWaiterWaiter
+!insert (headwaiter18, waiter43) into HeadWaiterWaiter
+
+!insert (banquet19, waiter42) into ReservationWaiter
+!insert (banquet19, waiter43) into ReservationWaiter
+
+!new Individual('individualReservation12')
+!individualReservation12.date := Date('2023-07-15')
+!individualReservation12.time := Time('20:00')
+!individualReservation12.numberPeople := 1
+!individualReservation12.name := 'Ahmed Karim'
+!individualReservation12.phoneNumber := '7001234567'  -- Arbitrary phone number
+!individualReservation12.seating := #Patio
+!individualReservation12.smoking := #Smoking
+!individualReservation12.number := 12
+
+!insert (restaurant23, individualReservation12) into RestaurantReservation
+
+!new Table('table60')
+!table60.number := 18
+!table60.description := 'Outdoor setting with garden lights'
+!table60.capacity := 4
+
+!insert (individualReservation12, table60) into ReservationTable
+
+!new Waiter('waiter44')
+!waiter44.name := 'John Doe'
+!waiter44.dateOfBirth := Date('1978-01-01')     -- Arbitrary date of birth
+!waiter44.phoneNumber := '8001234567'           -- Arbitrary phone number
+!waiter44.spokenLanguage := #English
+
+!insert (headwaiter18, waiter44) into HeadWaiterWaiter
+!insert (individualReservation12, waiter44) into ReservationWaiter
+
+!new MenuItem('menuitem33')
+!menuitem33.description := 'Fusion dish combining sushi elements with a taco twist'
+!menuitem33.prepTime := 25.0
+!menuitem33.classification := #Apetizer
+
+!insert (menuitem33, chef25) into MenuItemChef
+
+!new FoodItem('fooditem54')
+!fooditem54.number := 54
+!fooditem54.description := 'Seaweed Wrap'
+!fooditem54.unit := #Sheet
+
+!new FoodItem('fooditem55')
+!fooditem55.number := 55
+!fooditem55.description := 'Assorted Fish'
+!fooditem55.unit := #Gram
+
+!new Allergen('allergen20')
+!allergen20.type := #Seafood
+
+!insert (fooditem55, allergen20) into FoodItemAllergen
+
+!new FoodItem('fooditem56')
+!fooditem56.number := 56
+!fooditem56.description := 'Avocado'
+!fooditem56.unit := #Gram
+
+!insert (menuitem33, fooditem54) into MenuItemFoodItem
+!insert (menuitem33, fooditem55) into MenuItemFoodItem
+!insert (menuitem33, fooditem56) into MenuItemFoodItem
+
+!new MenuItem('menuitem34')
+!menuitem34.description := 'Crispy churros served with rich chocolate sauce'
+!menuitem34.prepTime := 20.0
+!menuitem34.classification := #Dessert
+
+!insert (menuitem34, chef25) into MenuItemChef
+
+!new FoodItem('fooditem57')
+!fooditem57.number := 57
+!fooditem57.description := 'Churro Dough'
+!fooditem57.unit := #Pound
+
+!new FoodItem('fooditem58')
+!fooditem58.number := 58
+!fooditem58.description := 'Dark Chocolate'
+!fooditem58.unit := #Gram
+
+!insert (menuitem34, fooditem57) into MenuItemFoodItem
+!insert (menuitem34, fooditem58) into MenuItemFoodItem
+
+!new Allergen('allergen21')
+!allergen21.type := #Lactose
+
+!insert (fooditem58, allergen21) into FoodItemAllergen
+
+!new RegularCustomer('customer18')
+!customer18.name := 'Ahmed Karim'
+!customer18.prefferedLanguage := #English
+
+!new Restaurant('restaurant24')
+!restaurant24.name := 'Taste of Traditions'
+
+!new Owner('owner50')
+!owner50.name := 'Malik Sadiq'
+!owner50.percentageShares := 33
+
+!new Owner('owner51')
+!owner51.name := 'Sofia Wang'
+!owner51.percentageShares := 67
+
+!insert (restaurant24, owner50) into RestaurantOwner
+!insert (restaurant24, owner51) into RestaurantOwner
+
+!new RegularCustomer('customer19')
+!customer19.name := 'Lena Müller'
+!customer19.prefferedLanguage := #German
+
+!new HeadWaiter('headwaiter19')
+!headwaiter19.name := 'Juan Carlos'
+!headwaiter19.dateOfBirth := Date('1985-01-01') -- Arbitrary date of birth
+!headwaiter19.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter45')
+!waiter45.name := 'Federica Rossi'
+!waiter45.dateOfBirth := Date('1992-01-01')     -- Arbitrary date of birth
+!waiter45.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter45.spokenLanguage := #English
+
+!insert (headwaiter19, waiter45) into HeadWaiterWaiter
+
+!new Chef('chef26')
+!chef26.name := 'Greta Nyman'
+!chef26.dateOfBirth := Date('1980-01-01')       -- Arbitrary date of birth
+!chef26.phoneNumber := '3456789012'             -- Arbitrary phone number
+
+!new Cook('cook31')
+!cook31.name := 'Vinod Sharma'
+!cook31.dateOfBirth := Date('1985-01-01')       -- Arbitrary date of birth
+!cook31.phoneNumber := '4567890123'             -- Arbitrary phone number
+!cook31.yearsOfExperience := 7
+
+!insert (chef26, cook31) into ChefCook
+
+!new BusDriver('busdriver20')
+!busdriver20.name := 'Joanne Lee'
+
+!new Table('table61')
+!table61.number := 15
+!table61.description := 'Cozy corner booth'
+!table61.capacity := 6
+
+!new Table('table62')
+!table62.number := 16
+!table62.description := 'Community table'
+!table62.capacity := 8
+
+!new MenuItem('menuitem35')
+!menuitem35.description := 'A rich and satisfying stew with seasonal vegetables.'
+!menuitem35.prepTime := 35.0
+!menuitem35.classification := #Main
+
+!insert (menuitem35, chef26) into MenuItemChef
+
+!new FoodItem('fooditem59')
+!fooditem59.number := 59
+!fooditem59.description := 'Beef Chunks'
+!fooditem59.purchaseFlag := true
+!fooditem59.unit := #Pound
+
+!new FoodItem('fooditem60')
+!fooditem60.number := 60
+!fooditem60.description := 'Carrot'
+!fooditem60.purchaseFlag := false
+!fooditem60.unit := #Gram
+
+!insert (menuitem35, fooditem59) into MenuItemFoodItem
+!insert (menuitem35, fooditem60) into MenuItemFoodItem
+
+!new Banquet('banquet20')
+!banquet20.date := Date('2023-11-25')
+!banquet20.time := Time('17:00')
+!banquet20.groupName := 'Cultural Dinner Exchange'
+!banquet20.numberPeople := 10
+!banquet20.paymentMethod := #CreditCard
+
+!insert (restaurant24, banquet20) into RestaurantReservation
+!insert (banquet20, table61) into ReservationTable
+!insert (banquet20, table62) into ReservationTable
+!insert (banquet20, waiter45) into ReservationWaiter
+!insert (banquet20, busdriver20) into BanquetBusDriver
+
+!new ItemOrder('itemorder5')
+!itemorder5.time := Time('17:20')
+
+!insert (banquet20, itemorder5) into ReservationItemOrdered
+!insert (itemorder5, menuitem35) into ItemOrderMenuItem
+
+!new Restaurant('restaurant25')
+!restaurant25.name := 'Lotus Blossom'
+
+!new Owner('owner52')
+!owner52.name := 'Somchai Chaiyaratana'
+!owner52.percentageShares := 50
+
+!new Owner('owner53')
+!owner53.name := 'Naree Wong'
+!owner53.percentageShares := 50
+
+!insert (restaurant25, owner52) into RestaurantOwner
+!insert (restaurant25, owner53) into RestaurantOwner
+
+!new Table('table63')
+!table63.number := 1
+!table63.description := 'Intimate table overlooking the koi fish pond.'
+!table63.capacity := 3
+
+!new Table('table64')
+!table64.number := 2
+!table64.description := 'Traditional Thai seating with floor cushions.'
+!table64.capacity := 4
+
+!new Table('table65')
+!table65.number := 3
+!table65.description := 'Large family table in the central dining area.'
+!table65.capacity := 12
+
+!new RegularCustomer('customer20')
+!customer20.name := 'Chompoo Kaew'
+!customer20.prefferedLanguage := #English
+
+!new RegularCustomer('customer21')
+!customer21.name := 'David Johnson'
+!customer21.prefferedLanguage := #English
+
+!new Individual('individualReservation13')
+!individualReservation13.date := Date('2024-02-14')
+!individualReservation13.time := Time('17:45')
+!individualReservation13.numberPeople := 1
+!individualReservation13.name := 'Chompoo Kaew'
+!individualReservation13.phoneNumber := '1234567890'  -- Arbitrary phone number
+!individualReservation13.seating := #Inside
+!individualReservation13.smoking := #NonSmoking
+!individualReservation13.number := 13
+
+!insert (restaurant25, individualReservation13) into RestaurantReservation
+!insert (individualReservation13, customer20) into ReservationCustomer
+!insert (individualReservation13, table63) into ReservationTable
+
+!new Banquet('banquet21')
+!banquet21.date := Date('2024-02-14')
+!banquet21.time := Time('20:30')
+!banquet21.groupName := 'David Johnson\'s Team Dinner'
+!banquet21.numberPeople := 14
+!banquet21.paymentMethod := #CreditCard
+
+!insert (restaurant25, banquet21) into RestaurantReservation
+!insert (banquet21, customer21) into ReservationCustomer
+!insert (banquet21, table65) into ReservationTable
+!insert (banquet21, table64) into ReservationTable
+
+!new Waiter('waiter46')
+!waiter46.name := 'Pimchai Prajun'
+!waiter46.dateOfBirth := Date('1985-01-01')     -- Arbitrary date of birth
+!waiter46.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter46.spokenLanguage := #English
+
+!new Waiter('waiter47')
+!waiter47.name := 'Somchai Rattanakosin'
+!waiter47.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter47.phoneNumber := '3456789012'           -- Arbitrary phone number
+!waiter47.spokenLanguage := #English
+
+!insert (individualReservation13, waiter46) into ReservationWaiter
+!insert (banquet21, waiter46) into ReservationWaiter
+!insert (banquet21, waiter47) into ReservationWaiter
+
+!new HeadWaiter('headwaiter20')
+!headwaiter20.name := 'Jintana Preecha'
+!headwaiter20.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter20.phoneNumber := '4567890123'        -- Arbitrary phone number
+
+!insert (headwaiter20, waiter46) into HeadWaiterWaiter
+!insert (headwaiter20, waiter47) into HeadWaiterWaiter
+
+!new BusDriver('busdriver21')
+!busdriver21.name := 'Ananda Saetang'
+
+!insert (banquet21, busdriver21) into BanquetBusDriver
+
+!new Chef('chef27')
+!chef27.name := 'Noi Srisuphan'
+!chef27.dateOfBirth := Date('1965-01-01')        -- Arbitrary date of birth
+!chef27.phoneNumber := '5678901234'              -- Arbitrary phone number
+
+!new Cook('cook32')
+!cook32.name := 'Kanchana Sutham'
+!cook32.dateOfBirth := Date('1995-01-01')        -- Arbitrary date of birth
+!cook32.phoneNumber := '6789012345'              -- Arbitrary phone number
+!cook32.yearsOfExperience := 4
+
+!insert (chef27, cook32) into ChefCook
+
+!new MenuItem('menuitem36')
+!menuitem36.description := 'Spicy and sour Thai soup with shrimp.'
+!menuitem36.prepTime := 40.0
+!menuitem36.classification := #Apetizer
+
+!insert (menuitem36, chef27) into MenuItemChef
+
+!new FoodItem('fooditem61')
+!fooditem61.number := 61
+!fooditem61.description := 'Shrimp'
+!fooditem61.purchaseFlag := true
+!fooditem61.unit := #Pound
+
+!new FoodItem('fooditem62')
+!fooditem62.number := 62
+!fooditem62.description := 'Lemongrass'
+!fooditem62.purchaseFlag := true
+!fooditem62.unit := #Gram
+
+!new FoodItem('fooditem63')
+!fooditem63.number := 63
+!fooditem63.description := 'Chili'
+!fooditem63.purchaseFlag := true
+!fooditem63.unit := #Gram
+
+!insert (menuitem36, fooditem61) into MenuItemFoodItem
+!insert (menuitem36, fooditem62) into MenuItemFoodItem
+!insert (menuitem36, fooditem63) into MenuItemFoodItem
+
+!new Allergen('allergen22')
+!allergen22.type := #Seafood
+
+!insert (fooditem61, allergen22) into FoodItemAllergen
+
+!new MenuItem('menuitem37')
+!menuitem37.description := 'Sweet sticky rice served with ripe mango slices.'
+!menuitem37.prepTime := 20.0
+!menuitem37.classification := #Dessert
+
+!insert (menuitem37, chef27) into MenuItemChef
+
+!new FoodItem('fooditem64')
+!fooditem64.number := 64
+!fooditem64.description := 'Glutinous Rice'
+!fooditem64.purchaseFlag := true
+!fooditem64.unit := #Gram
+
+!new FoodItem('fooditem65')
+!fooditem65.number := 65
+!fooditem65.description := 'Mango'
+!fooditem65.purchaseFlag := true
+!fooditem65.unit := #Gram
+
+!new FoodItem('fooditem66')
+!fooditem66.number := 66
+!fooditem66.description := 'Coconut Milk'
+!fooditem66.purchaseFlag := true
+!fooditem66.unit := #Ounce
+
+!insert (menuitem37, fooditem64) into MenuItemFoodItem
+!insert (menuitem37, fooditem65) into MenuItemFoodItem
+!insert (menuitem37, fooditem66) into MenuItemFoodItem
+
+!new Restaurant('restaurant26')
+!restaurant26.name := 'Global Tastes Bistro'
+
+!new Owner('owner54')
+!owner54.name := 'Penelope Smith'
+!owner54.percentageShares := 55
+
+!new Owner('owner55')
+!owner55.name := 'Yuko Yamada'
+!owner55.percentageShares := 45
+
+!insert (restaurant26, owner54) into RestaurantOwner
+!insert (restaurant26, owner55) into RestaurantOwner
+
+!new Banquet('banquet22')
+!banquet22.date := Date('2024-11-23')
+!banquet22.time := Time('18:30')
+!banquet22.groupName := 'International Cultural Exchange Club'
+!banquet22.numberPeople := 80
+!banquet22.paymentMethod := #CreditCard
+
+!insert (restaurant26, banquet22) into RestaurantReservation
+
+!new Table('table66')
+!table66.number := 1
+!table66.description := 'Lotus Blossom'
+!table66.capacity := 40
+
+!new Table('table67')
+!table67.number := 2
+!table67.description := 'Amber Horizon'
+!table67.capacity := 40
+
+!insert (banquet22, table66) into ReservationTable
+!insert (banquet22, table67) into ReservationTable
+
+!new BusDriver('busdriver22')
+!busdriver22.name := 'Tamara Kuznetsova'
+
+!insert (banquet22, busdriver22) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter21')
+!headwaiter21.name := 'Ilaria Bianchi'
+!headwaiter21.dateOfBirth := Date('1982-01-01')  -- Arbitrary date of birth
+!headwaiter21.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter48')
+!waiter48.name := 'Jana Novak'
+!waiter48.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter48.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter48.spokenLanguage := #English
+
+!new Waiter('waiter49')
+!waiter49.name := 'Miguel Diaz'
+!waiter49.dateOfBirth := Date('1989-01-01')     -- Arbitrary date of birth
+!waiter49.phoneNumber := '3456789012'           -- Arbitrary phone number
+!waiter49.spokenLanguage := #English
+
+!new Waiter('waiter50')
+!waiter50.name := 'Soren Jensen'
+!waiter50.dateOfBirth := Date('1992-01-01')     -- Arbitrary date of birth
+!waiter50.phoneNumber := '4567890123'           -- Arbitrary phone number
+!waiter50.spokenLanguage := #English
+
+!insert (headwaiter21, waiter48) into HeadWaiterWaiter
+!insert (headwaiter21, waiter49) into HeadWaiterWaiter
+!insert (headwaiter21, waiter50) into HeadWaiterWaiter
+
+!insert (banquet22, waiter48) into ReservationWaiter
+!insert (banquet22, waiter49) into ReservationWaiter
+!insert (banquet22, waiter50) into ReservationWaiter
+
+!new Manager('manager5')
+!manager5.name := 'Oliver Wang'
+!manager5.dateOfBirth := Date('1975-01-01')     -- Arbitrary date of birth
+!manager5.phoneNumber := '5678901234'           -- Arbitrary phone number
+
+!new Chef('chef28')
+!chef28.name := 'Nikolas Christos'
+!chef28.dateOfBirth := Date('1965-01-01')        -- Arbitrary date of birth
+!chef28.phoneNumber := '6789012345'              -- Arbitrary phone number
+
+!new Cook('cook33')
+!cook33.name := 'Eleni Papadopoulos'
+!cook33.dateOfBirth := Date('1990-01-01')        -- Arbitrary date of birth
+!cook33.phoneNumber := '7890123456'              -- Arbitrary phone number
+!cook33.yearsOfExperience := 5
+
+!insert (chef28, cook33) into ChefCook
+
+!new MenuItem('menuitem38')
+!menuitem38.description := 'Greek Spanakopita'
+!menuitem38.prepTime := 25.0
+!menuitem38.classification := #Apetizer
+
+!insert (menuitem38, chef28) into MenuItemChef
+
+!new Allergen('allergen23')
+!allergen23.type := #Gluten
+
+!new Allergen('allergen24')
+!allergen24.type := #Lactose
+
+!new Chef('chef29')
+!chef29.name := 'Priya Shah'
+!chef29.dateOfBirth := Date('1970-01-01')       -- Arbitrary date of birth
+!chef29.phoneNumber := '8901234567'             -- Arbitrary phone number
+
+!new Cook('cook34')
+!cook34.name := 'Aakash Gupta'
+!cook34.dateOfBirth := Date('1985-01-01')       -- Arbitrary date of birth
+!cook34.phoneNumber := '9012345678'             -- Arbitrary phone number
+!cook34.yearsOfExperience := 7
+
+!insert (chef29, cook34) into ChefCook
+
+!new MenuItem('menuitem39')
+!menuitem39.description := 'Tandoori Lamb Chops'
+!menuitem39.prepTime := 30.0
+!menuitem39.classification := #Main
+
+!insert (menuitem39, chef29) into MenuItemChef
+
+!new Chef('chef30')
+!chef30.name := 'Satoshi Hayashi'
+!chef30.dateOfBirth := Date('1980-01-01')       -- Arbitrary date of birth
+!chef30.phoneNumber := '1234567891'             -- Arbitrary phone number
+
+!new Cook('cook35')
+!cook35.name := 'Hinata Kojima'
+!cook35.dateOfBirth := Date('1995-01-01')       -- Arbitrary date of birth
+!cook35.phoneNumber := '2345678902'             -- Arbitrary phone number
+!cook35.yearsOfExperience := 2
+
+!insert (chef30, cook35) into ChefCook
+
+!new MenuItem('menuitem40')
+!menuitem40.description := 'Teriyaki Tofu Stir-Fry'
+!menuitem40.prepTime := 20.0
+!menuitem40.classification := #Main
+
+!insert (menuitem40, chef30) into MenuItemChef
+
+!new Cook('cook36')
+!cook36.name := 'Fatima Hadi'
+!cook36.dateOfBirth := Date('1983-01-01')       -- Arbitrary date of birth
+!cook36.phoneNumber := '3456789013'             -- Arbitrary phone number
+!cook36.yearsOfExperience := 6
+
+!new Chef('chef31')
+!chef31.name := 'Leila Fadila'
+!chef31.dateOfBirth := Date('1978-01-01')       -- Arbitrary date of birth
+!chef31.phoneNumber := '4567890124'             -- Arbitrary phone number
+
+!insert (chef31, cook36) into ChefCook
+
+!new MenuItem('menuitem41')
+!menuitem41.description := 'Baklava with Honey'
+!menuitem41.prepTime := 15.0
+!menuitem41.classification := #Dessert
+
+!insert (menuitem41, chef31) into MenuItemChef
+
+!new Allergen('allergen25')
+!allergen25.type := #Nuts
+
+!new RegularCustomer('customer22')
+!customer22.name := 'Lucas Hermann'
+!customer22.prefferedLanguage := #German
+

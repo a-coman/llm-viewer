@@ -1,0 +1,114 @@
+!new Restaurant('restaurant18')
+!restaurant18.name := 'Solar Flare Bistro'
+
+!new Owner('owner36')
+!owner36.name := 'Aurora Light'
+!owner36.percentageShares := 50
+!insert (restaurant18, owner36) into RestaurantOwner
+
+!new Owner('owner37')
+!owner37.name := 'Cosmo Ray'
+!owner37.percentageShares := 50
+!insert (restaurant18, owner37) into RestaurantOwner
+
+!new Table('table51')
+!table51.number := 51
+!table51.description := 'Planetary Perch'
+!table51.capacity := 5
+
+!new Table('table52')
+!table52.number := 52
+!table52.description := 'Orbit Lounge'
+!table52.capacity := 20
+
+!new RegularCustomer('customer19')
+!customer19.name := 'Eclipse Dark'
+!customer19.prefferedLanguage := #English
+
+!new Waiter('waiter20')
+!waiter20.name := 'Luna Crescent'
+!waiter20.dateOfBirth := Date('1990-07-07')
+!waiter20.phoneNumber := '555-1234'
+!waiter20.spokenLanguage := #Italian
+
+!new HeadWaiter('headwaiter18')
+!headwaiter18.name := 'Quasar Bright'
+!headwaiter18.dateOfBirth := Date('1985-06-20')
+!headwaiter18.phoneNumber := '555-4321'
+
+!insert (headwaiter18, waiter20) into HeadWaiterWaiter
+
+!new Individual('reservation33')
+!reservation33.time := Time('19:00')
+!reservation33.date := Date('2024-11-20')
+!reservation33.numberPeople := 3
+!reservation33.name := 'Eclipse Dark'
+!reservation33.phoneNumber := '555-3456'
+!reservation33.number := 33
+!reservation33.seating := #Patio
+!reservation33.smoking := #NonSmoking
+!insert (restaurant18, reservation33) into RestaurantReservation
+!insert (reservation33, customer19) into ReservationCustomer
+!insert (reservation33, waiter20) into ReservationWaiter
+!insert (reservation33, table51) into ReservationTable
+
+!new Banquet('reservation34')
+!reservation34.time := Time('17:30')
+!reservation34.date := Date('2023-12-10')
+!reservation34.numberPeople := 35
+!reservation34.name := 'Comet Convention'
+!reservation34.phoneNumber := '555-6789'
+!reservation34.number := 34
+!reservation34.groupName := 'Nebula Network'
+!reservation34.paymentMethod := #CreditCard
+!reservation34.busService := true
+!insert (restaurant18, reservation34) into RestaurantReservation
+!insert (reservation34, table52) into ReservationTable
+
+!new Table('tableExtra12')
+!tableExtra12.number := 53
+!tableExtra12.description := 'Galaxy Hall'
+!tableExtra12.capacity := 16
+!insert (reservation34, tableExtra12) into ReservationTable
+!insert (reservation34, waiter20) into ReservationWaiter
+
+!new BusDriver('busdriver12')
+!busdriver12.name := 'Haley Star'
+!busdriver12.dateOfBirth := Date('1970-04-30')
+!busdriver12.phoneNumber := '555-9988'
+!busdriver12.driverLicenseNr := 'DL112233'
+!insert (reservation34, busdriver12) into BanquetBusDriver
+
+!new ItemOrder('itemOrder18')
+!itemOrder18.time := Time('19:30')
+!insert (reservation33, itemOrder18) into ReservationItemOrdered
+
+!new MenuItem('menuItem18')
+!menuItem18.description := 'Supernova Spaghetti'
+!menuItem18.prepTime := 25.0
+!menuItem18.classification := #Main
+!insert (itemOrder18, menuItem18) into ItemOrderMenuItem
+
+!new FoodItem('foodItem18')
+!foodItem18.number := 118
+!foodItem18.description := 'Organic Wheat Pasta'
+!foodItem18.purchaseFlag := true
+!foodItem18.unit := #Pound
+!insert (menuItem18, foodItem18) into MenuItemFoodItem
+
+!new Allergen('allergen18')
+!allergen18.type := #Gluten
+!insert (foodItem18, allergen18) into FoodItemAllergen
+
+!new Cook('cook18')
+!cook18.name := 'Stellar Nova'
+!cook18.dateOfBirth := Date('1993-01-01')
+!cook18.phoneNumber := '555-5656'
+!cook18.yearsOfExperience := 6
+
+!new Chef('chef18')
+!chef18.name := 'Comet Sky'
+!chef18.dateOfBirth := Date('1988-08-08')
+!chef18.phoneNumber := '555-7878'
+!insert (menuItem18, chef18) into MenuItemChef
+!insert (chef18, cook18) into ChefCook

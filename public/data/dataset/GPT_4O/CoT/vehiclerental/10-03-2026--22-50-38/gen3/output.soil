@@ -1,0 +1,286 @@
+!new RentalOffice('officeNewYorkUptown')
+!officeNewYorkUptown.name := 'New York Uptown'
+!officeNewYorkUptown.number := 303
+!officeNewYorkUptown.address := '321 Broadway, New York, NY 10007'
+
+!new Vehicle('coveredTrailer004')
+!coveredTrailer004.id := 304
+!coveredTrailer004.registrationState := #NY
+!coveredTrailer004.licensePlateNumber := 'NY1345CT'
+!coveredTrailer004.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer004.registrationLastMaintenanceDate := Date('2023-09-12')
+!coveredTrailer004.expirationDate := Date('2024-09-11')
+
+!new Truck('truck005')
+!truck005.id := 305
+!truck005.registrationState := #TX
+!truck005.licensePlateNumber := 'TX9807TR'
+!truck005.vehicleTypeCode := #TRUCK
+!truck005.registrationLastMaintenanceDate := Date('2023-05-04')
+!truck005.expirationDate := Date('2024-05-03')
+!truck005.odometerReading := 3000
+!truck005.gasTankCapacity := 18.0
+!truck005.workingRadio := true
+!truck005.mileage := 10000
+
+!new Individual('individualAkiraTanaka')
+!individualAkiraTanaka.name := 'Akira Tanaka'
+!individualAkiraTanaka.address := '25 Lexington Ave, Brooklyn, NY 11224'
+!individualAkiraTanaka.poorRisk := true
+!individualAkiraTanaka.homePhone := '718-555-6789'
+!individualAkiraTanaka.driverLicenseState := #NY
+!individualAkiraTanaka.driverLicenseNumber := 132457690
+!individualAkiraTanaka.driverLicenseExpirationDate := Date('2025-03-15')
+
+!new RentalAgreement('rentalAgreement3003')
+!rentalAgreement3003.number := 3003
+!rentalAgreement3003.rentalDate := Date('2023-11-10')
+!rentalAgreement3003.anticipatedDuration := 3
+!rentalAgreement3003.depositPaid := 150.0
+!rentalAgreement3003.quotedDailyRate := 60.0
+!rentalAgreement3003.quotedRatePerMile := 0.4
+
+!insert (officeNewYorkUptown, coveredTrailer004) into RentalOfficeVehicle
+!insert (officeNewYorkUptown, truck005) into RentalOfficeVehicle
+
+!insert (officeNewYorkUptown, rentalAgreement3003) into RentalOfficeRentalAgreementOrigin
+!insert (officeNewYorkUptown, rentalAgreement3003) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement3003, truck005) into RentalAgreementVehicle
+!insert (rentalAgreement3003, individualAkiraTanaka) into RentalAgreementCustomer
+
+!new RentalOffice('officeOceanicRentalsHub')
+!officeOceanicRentalsHub.name := 'Oceanic Rentals Hub'
+!officeOceanicRentalsHub.number := 50000
+!officeOceanicRentalsHub.address := '500 Coastal Drive, Miami, FL'
+
+!new Truck('truckZeroId')
+!truckZeroId.id := 0
+!truckZeroId.registrationState := #FL
+!truckZeroId.licensePlateNumber := 'FL-ZERO-PLATE'
+!truckZeroId.vehicleTypeCode := #COVERED_TRAILER
+!truckZeroId.registrationLastMaintenanceDate := Date('2022-05-05')
+!truckZeroId.expirationDate := Date('2023-05-05')
+!truckZeroId.odometerReading := 10
+!truckZeroId.gasTankCapacity := 1.0
+!truckZeroId.workingRadio := false
+!truckZeroId.mileage := 1
+
+!new RentalAgreement('rentalAgreementZeroId')
+!rentalAgreementZeroId.number := 0
+!rentalAgreementZeroId.rentalDate := Date('2023-01-01')
+!rentalAgreementZeroId.anticipatedDuration := 1
+!rentalAgreementZeroId.depositPaid := 0.01
+!rentalAgreementZeroId.quotedDailyRate := 0.01
+!rentalAgreementZeroId.quotedRatePerMile := 0.01
+
+!new Individual('individualMinimalMax')
+!individualMinimalMax.name := 'Minimal Max'
+!individualMinimalMax.address := '1 Bay Avenue, Key West, FL'
+!individualMinimalMax.poorRisk := false
+!individualMinimalMax.homePhone := '111-111-1111'
+!individualMinimalMax.driverLicenseState := #FL
+!individualMinimalMax.driverLicenseNumber := 1
+!individualMinimalMax.driverLicenseExpirationDate := Date('2024-12-31')
+
+!insert (officeOceanicRentalsHub, truckZeroId) into RentalOfficeVehicle
+!insert (officeOceanicRentalsHub, rentalAgreementZeroId) into RentalOfficeRentalAgreementOrigin
+!insert (officeOceanicRentalsHub, rentalAgreementZeroId) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreementZeroId, truckZeroId) into RentalAgreementVehicle
+!insert (rentalAgreementZeroId, individualMinimalMax) into RentalAgreementCustomer
+
+!new RentalOffice('officeBostonDowntown')
+!officeBostonDowntown.name := 'Boston Downtown Office'
+!officeBostonDowntown.number := 303
+!officeBostonDowntown.address := '456 Beacon St, Boston, MA'
+
+!new Truck('truck5003')
+!truck5003.id := 5003
+!truck5003.registrationState := #MA
+!truck5003.licensePlateNumber := 'MA8910EF'
+!truck5003.vehicleTypeCode := #TRUCK
+!truck5003.odometerReading := -10000
+!truck5003.gasTankCapacity := 15.0
+!truck5003.workingRadio := false
+!truck5003.mileage := 10
+!truck5003.registrationLastMaintenanceDate := Date('2023-07-01')
+!truck5003.expirationDate := Date('2024-07-31')
+
+!new Company('companyBostonCargoTransport')
+!companyBostonCargoTransport.name := 'Boston Cargo Transport'
+!companyBostonCargoTransport.address := '789 Financial District, Boston, MA'
+!companyBostonCargoTransport.poorRisk := false
+!companyBostonCargoTransport.idNumber := 34567890
+
+!new RentalAgreement('rentalAgreement7003')
+!rentalAgreement7003.number := 7003
+!rentalAgreement7003.rentalDate := Date('2023-09-10')
+!rentalAgreement7003.anticipatedDuration := 5
+!rentalAgreement7003.depositPaid := 300.0
+!rentalAgreement7003.quotedDailyRate := 80.0
+!rentalAgreement7003.quotedRatePerMile := 0.35
+
+!insert (officeBostonDowntown, truck5003) into RentalOfficeVehicle
+!insert (officeBostonDowntown, rentalAgreement7003) into RentalOfficeRentalAgreementOrigin
+!insert (officeBostonDowntown, rentalAgreement7003) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement7003, truck5003) into RentalAgreementVehicle
+!insert (rentalAgreement7003, companyBostonCargoTransport) into RentalAgreementCustomer
+
+!new RentalOffice('officeBeachsideRentals')
+!officeBeachsideRentals.name := 'Beachside Rentals'
+!officeBeachsideRentals.number := 310
+!officeBeachsideRentals.address := '1500 Ocean Dr, Miami Beach, FL 33139'
+
+!new Truck('truck4020')
+!truck4020.id := 4020
+!truck4020.registrationState := #FL
+!truck4020.licensePlateNumber := 'FL1122'
+!truck4020.vehicleTypeCode := #TRUCK
+!truck4020.registrationLastMaintenanceDate := Date('2023-09-01')
+!truck4020.expirationDate := Date('2024-09-01')
+!truck4020.odometerReading := 25000
+!truck4020.gasTankCapacity := 22.0
+!truck4020.workingRadio := true
+!truck4020.mileage := 14
+
+!new Truck('truck4021')
+!truck4021.id := 4021
+!truck4021.registrationState := #FL
+!truck4021.licensePlateNumber := 'GA3344'
+!truck4021.vehicleTypeCode := #TRUCK
+!truck4021.registrationLastMaintenanceDate := Date('2023-03-15')
+!truck4021.expirationDate := Date('2024-03-15')
+!truck4021.odometerReading := 40000
+!truck4021.gasTankCapacity := 24.5
+!truck4021.workingRadio := false
+!truck4021.mileage := 13
+
+!new Vehicle('coveredTrailer5031')
+!coveredTrailer5031.id := 5031
+!coveredTrailer5031.registrationState := #FL
+!coveredTrailer5031.licensePlateNumber := 'FL4455'
+!coveredTrailer5031.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer5031.registrationLastMaintenanceDate := Date('2023-10-05')
+!coveredTrailer5031.expirationDate := Date('2024-10-05')
+
+!new Individual('individualCarlosMendez')
+!individualCarlosMendez.name := 'Carlos Mendez'
+!individualCarlosMendez.address := '123 Bayshore Dr, Miami, FL 33131'
+!individualCarlosMendez.poorRisk := false
+!individualCarlosMendez.homePhone := '305-555-0199'
+!individualCarlosMendez.driverLicenseState := #FL
+!individualCarlosMendez.driverLicenseNumber := 55667788
+!individualCarlosMendez.driverLicenseExpirationDate := Date('2025-07-01')
+
+!new Company('companySeasideToursLLC')
+!companySeasideToursLLC.name := 'Seaside Tours LLC'
+!companySeasideToursLLC.address := '987 Ocean Front, Miami Beach, FL 33140'
+!companySeasideToursLLC.poorRisk := true
+!companySeasideToursLLC.idNumber := 7890
+
+!new RentalAgreement('rentalAgreement10010')
+!rentalAgreement10010.number := 10010
+!rentalAgreement10010.rentalDate := Date('2023-12-15')
+!rentalAgreement10010.anticipatedDuration := 2
+!rentalAgreement10010.depositPaid := 50.0
+!rentalAgreement10010.quotedDailyRate := 60.0
+!rentalAgreement10010.quotedRatePerMile := 0.55
+
+!new RentalAgreement('rentalAgreement10011')
+!rentalAgreement10011.number := 10011
+!rentalAgreement10011.rentalDate := Date('2024-01-05')
+!rentalAgreement10011.anticipatedDuration := 14
+!rentalAgreement10011.depositPaid := 300.0
+!rentalAgreement10011.quotedDailyRate := 38.0
+!rentalAgreement10011.quotedRatePerMile := 0.45
+
+!new RentalAgreement('rentalAgreement10012')
+!rentalAgreement10012.number := 10012
+!rentalAgreement10012.rentalDate := Date('2024-02-01')
+!rentalAgreement10012.anticipatedDuration := 7
+!rentalAgreement10012.depositPaid := 150.0
+!rentalAgreement10012.quotedDailyRate := 40.0
+!rentalAgreement10012.quotedRatePerMile := 0.50
+
+!insert (officeBeachsideRentals, truck4020) into RentalOfficeVehicle
+!insert (officeBeachsideRentals, truck4021) into RentalOfficeVehicle
+!insert (officeBeachsideRentals, coveredTrailer5031) into RentalOfficeVehicle
+
+!insert (officeBeachsideRentals, rentalAgreement10010) into RentalOfficeRentalAgreementOrigin
+!insert (officeBeachsideRentals, rentalAgreement10011) into RentalOfficeRentalAgreementOrigin
+!insert (officeBeachsideRentals, rentalAgreement10012) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeBeachsideRentals, rentalAgreement10010) into RentalOfficeRentalAgreementDrop
+!insert (officeBeachsideRentals, rentalAgreement10011) into RentalOfficeRentalAgreementDrop
+!insert (officeBeachsideRentals, rentalAgreement10012) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement10010, truck4020) into RentalAgreementVehicle
+!insert (rentalAgreement10011, truck4021) into RentalAgreementVehicle
+!insert (rentalAgreement10012, coveredTrailer5031) into RentalAgreementVehicle
+
+!insert (rentalAgreement10010, individualCarlosMendez) into RentalAgreementCustomer
+!insert (rentalAgreement10011, companySeasideToursLLC) into RentalAgreementCustomer
+!insert (rentalAgreement10012, companySeasideToursLLC) into RentalAgreementCustomer
+
+!new RentalOffice('officeDesertMirageRentals')
+!officeDesertMirageRentals.name := 'Desert Mirage Rentals'
+!officeDesertMirageRentals.number := 303
+!officeDesertMirageRentals.address := '477 Oasis Dr, Mirage City, NV 89001'
+
+!new Truck('truck78901')
+!truck78901.id := 78901
+!truck78901.registrationState := #NV
+!truck78901.licensePlateNumber := 'NV-654-OPQ'
+!truck78901.vehicleTypeCode := #TRUCK
+!truck78901.registrationLastMaintenanceDate := Date('2023-08-01')
+!truck78901.expirationDate := Date('2024-08-01')
+!truck78901.odometerReading := 15000
+!truck78901.gasTankCapacity := 150.0
+!truck78901.workingRadio := true
+!truck78901.mileage := 12
+
+!new Individual('individualSandyDunes')
+!individualSandyDunes.name := 'Sandy Dunes'
+!individualSandyDunes.address := '900 Windy Path, Sun Valley, AZ 85001'
+!individualSandyDunes.poorRisk := false
+!individualSandyDunes.homePhone := '+1-602-555-0789'
+!individualSandyDunes.driverLicenseState := #AZ
+!individualSandyDunes.driverLicenseNumber := 1239876543
+!individualSandyDunes.driverLicenseExpirationDate := Date('2023-05-01')
+
+!new Company('companyRenewableExplorationsCorp')
+!companyRenewableExplorationsCorp.name := 'Renewable Explorations Corp.'
+!companyRenewableExplorationsCorp.address := '101 Solar Field, Desert Outpost, CA 93501'
+!companyRenewableExplorationsCorp.poorRisk := false
+!companyRenewableExplorationsCorp.idNumber := 556677889
+
+!new RentalAgreement('rentalAgreement3005')
+!rentalAgreement3005.number := 3005
+!rentalAgreement3005.rentalDate := Date('2025-02-01')
+!rentalAgreement3005.anticipatedDuration := 10
+!rentalAgreement3005.depositPaid := 500.0
+!rentalAgreement3005.quotedDailyRate := 110.0
+!rentalAgreement3005.quotedRatePerMile := 3.0
+
+!new RentalAgreement('rentalAgreement3006')
+!rentalAgreement3006.number := 3006
+!rentalAgreement3006.rentalDate := Date('2025-07-01')
+!rentalAgreement3006.anticipatedDuration := 30
+!rentalAgreement3006.depositPaid := 1500.0
+!rentalAgreement3006.quotedDailyRate := 70.0
+!rentalAgreement3006.quotedRatePerMile := 0.8
+
+!insert (officeDesertMirageRentals, truck78901) into RentalOfficeVehicle
+
+!insert (officeDesertMirageRentals, rentalAgreement3005) into RentalOfficeRentalAgreementOrigin
+!insert (officeDesertMirageRentals, rentalAgreement3006) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeDesertMirageRentals, rentalAgreement3005) into RentalOfficeRentalAgreementDrop
+!insert (officeDesertMirageRentals, rentalAgreement3006) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement3005, truck78901) into RentalAgreementVehicle
+!insert (rentalAgreement3006, truck78901) into RentalAgreementVehicle
+
+!insert (rentalAgreement3005, individualSandyDunes) into RentalAgreementCustomer
+!insert (rentalAgreement3006, companyRenewableExplorationsCorp) into RentalAgreementCustomer
+

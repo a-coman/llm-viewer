@@ -1,0 +1,34 @@
+-- Creating instances of Currency
+!new Currency('currency14')
+!currency14.name := 'New Zealand Dollar'
+!currency14.abbreviation := 'NZD'
+
+-- Creating instances of Bills
+!new Bill('bill34')
+!bill34.amount := 900.00
+!bill34.category := 'Consulting Services'
+!bill34.date := Date('2023-09-12')
+!bill34.paymentMethod := #CHECK
+!bill34.status := #REFUSED
+!insert (bill34, currency14) into BillCurrency
+
+!new Bill('bill35')
+!bill35.amount := 600.00
+!bill35.category := 'Data Analysis'
+!bill35.date := Date('2023-09-14')
+!bill35.paymentMethod := #CASH
+!bill35.status := #VERIFIED
+!insert (bill35, currency14) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment17')
+!comment17.text := 'Consulting and data analysis expenses for Q3 report.'
+
+-- Creating instance of Expense
+!new Expense('expense14')
+!expense14.amount := 1500.00
+!expense14.startDate := Date('2023-09-12')
+!expense14.endDate := Date('2023-09-20')
+!insert (expense14, bill34) into ExpenseContainsBills
+!insert (expense14, bill35) into ExpenseContainsBills
+!insert (expense14, comment17) into ExpenseComment

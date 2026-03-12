@@ -1,0 +1,141 @@
+!new Club('club3')
+!club3.name := 'Mountain Eagles'
+!club3.homeGround := 'Eagle Nest Stadium'
+!club3.chairman := 'Michael Green'
+
+!new Club('club4')
+!club4.name := 'Valley Tigers'
+!club4.homeGround := 'Tiger Den Arena'
+!club4.chairman := 'Laura White'
+
+!new Team('team3')
+!team3.name := 'Eagle Flyers'
+!insert (club3, team3) into ClubTeam
+
+!new Team('team4')
+!team4.name := 'Tiger Strikers'
+!insert (club4, team4) into ClubTeam
+
+!new Competition('friendlyCup')
+!friendlyCup.name := 'Friendly Cup'
+!friendlyCup.type := 'Exhibition'
+
+!new Match('match2')
+!match2.date := '2023-11-25'
+!match2.homeAway := false
+!insert (friendlyCup, match2) into CompetitionMatch
+!insert (team3, match2) into LocalMatch
+!insert (team4, match2) into VisitorMatch
+
+!new MatchReport('report2')
+!report2.duration := 90
+!report2.scoreVisitor := 3
+!report2.scoreLocal := 2
+!insert (match2, report2) into MatchMatchReport
+
+!new Player('player3')
+!player3.name := 'Charlie Hudson'
+!player3.age := 22
+!player3.bestFoot := #BOTH
+!player3.phoneNumber := '2345678901'
+!insert (team3, player3) into TeamPlayer
+
+!new Player('player4')
+!player4.name := 'Dylan Brown'
+!player4.age := 27
+!player4.bestFoot := #RIGHT
+!player4.phoneNumber := '3456789012'
+!insert (team4, player4) into TeamPlayer
+
+!new Position('position3')
+!position3.positionName := #MIDFIELDER
+!insert (player3, position3) into PlayerPositions
+
+!new Position('position4')
+!position4.positionName := #GOALKEEPER
+!insert (player4, position4) into PlayerPositions
+
+!new MatchPlayer('matchPlayer3')
+!matchPlayer3.booked := true
+!matchPlayer3.goals := 2
+!matchPlayer3.rating := 9
+!insert (player3, matchPlayer3) into PlayerMatch
+!insert (match2, matchPlayer3) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer4')
+!matchPlayer4.booked := false
+!matchPlayer4.goals := 1
+!matchPlayer4.rating := 7
+!insert (player4, matchPlayer4) into PlayerMatch
+!insert (match2, matchPlayer4) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition3')
+!matchPlayerPosition3.positionName := #MIDFIELDER
+!matchPlayerPosition3.number := 8
+!insert (matchPlayer3, matchPlayerPosition3) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition4')
+!matchPlayerPosition4.positionName := #GOALKEEPER
+!matchPlayerPosition4.number := 1
+!insert (matchPlayer4, matchPlayerPosition4) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event4')
+!event4.eventType := #GOAL
+!event4.time := 15
+!insert (match2, event4) into MatchMatchEvent
+
+!new MatchEvent('event5')
+!event5.eventType := #GOAL
+!event5.time := 42
+!insert (match2, event5) into MatchMatchEvent
+
+!new MatchEvent('event6')
+!event6.eventType := #GOAL
+!event6.time := 67
+!insert (match2, event6) into MatchMatchEvent
+
+!new MatchEvent('event7')
+!event7.eventType := #GOAL
+!event7.time := 70
+!insert (match2, event7) into MatchMatchEvent
+
+!new MatchEvent('event8')
+!event8.eventType := #GOAL
+!event8.time := 85
+!insert (match2, event8) into MatchMatchEvent
+
+!new TrainingSession('training3')
+!training3.date := '2023-10-05'
+!training3.location := 'Eagle Park'
+!training3.purpose := 'Formation Drills'
+!insert (team3, training3) into TeamTraining
+
+!new TrainingSession('training4')
+!training4.date := '2023-10-20'
+!training4.location := 'Tiger Camp'
+!training4.purpose := 'Goalkeeping Practice'
+!insert (team4, training4) into TeamTraining
+
+!new TrainingNotes('trainingNote3')
+!trainingNote3.note := 'Midfield agility exercises'
+!trainingNote3.date := '2023-10-05'
+!insert (training3, trainingNote3) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote4')
+!trainingNote4.note := 'Improvement in response time'
+!trainingNote4.date := '2023-10-20'
+!insert (training4, trainingNote4) into TrainingTrainingNotes
+
+!new TrainingObjective('objective3')
+!objective3.areaToImprove := 'Ball Control'
+!objective3.startDate := '2023-09-01'
+!objective3.endDate := '2023-12-01'
+!objective3.success := false
+!insert (objective3, player3) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective4')
+!objective4.areaToImprove := 'Shot Blocking'
+!objective4.startDate := '2023-09-15'
+!objective4.endDate := '2023-11-15'
+!objective4.success := true
+!insert (objective4, player4) into TrainingObjectivePlayer

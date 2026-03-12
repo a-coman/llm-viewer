@@ -1,0 +1,440 @@
+!new AddressBook('GlobalResearchCollaborationAddressBook')
+
+!new Company('InternationalSpaceResearchAgency')
+!InternationalSpaceResearchAgency.name := 'International Space Research Agency'
+!InternationalSpaceResearchAgency.phone := '+1-713-555-0190'
+!InternationalSpaceResearchAgency.website := 'www.spaceresearch.org'
+!InternationalSpaceResearchAgency.email := 'info@spaceresearch.org'
+!InternationalSpaceResearchAgency.industry := 'Aerospace & Research'
+
+!new Address('SpaceResearchAddress')
+!SpaceResearchAddress.city := 'Houston'
+!SpaceResearchAddress.houseNr := '400'
+!SpaceResearchAddress.street := 'Galileo Parkway'
+!insert (InternationalSpaceResearchAgency, SpaceResearchAddress) into ContactContainsAddress
+
+!new Person('ProfAikoTanaka')
+!ProfAikoTanaka.name := 'Prof. Aiko Tanaka'
+!ProfAikoTanaka.phone := '+81-3-5550-7432'
+!ProfAikoTanaka.website := 'www.aikotanaka.jp'
+!ProfAikoTanaka.email := 'aiko.tanaka@tokyouniversity.ac.jp'
+!ProfAikoTanaka.title := 'Astrophysicist'
+
+!new Address('AikoTanakaAddress')
+!AikoTanakaAddress.city := 'Tokyo'
+!AikoTanakaAddress.houseNr := '55'
+!AikoTanakaAddress.street := 'University Drive'
+!insert (ProfAikoTanaka, AikoTanakaAddress) into ContactContainsAddress
+
+!new Note('AikoTanakaNote1')
+!AikoTanakaNote1.author := 'International Space Research Agency'
+!AikoTanakaNote1.time := Date('2023-11-15')
+!AikoTanakaNote1.type := #MEETING
+!AikoTanakaNote1.comment := 'Held a virtual seminar on recent advancements in satellite technology.'
+!insert (ProfAikoTanaka, AikoTanakaNote1) into ContactContainsNote
+
+!new Company('AdvancedBiologyInstitute')
+!AdvancedBiologyInstitute.name := 'Advanced Biology Institute'
+!AdvancedBiologyInstitute.phone := '+49-89-555-0886'
+!AdvancedBiologyInstitute.website := 'www.advancedbiologi.de'
+!AdvancedBiologyInstitute.email := 'contact@advancedbiologi.de'
+!AdvancedBiologyInstitute.industry := 'Biotechnology'
+
+!new Person('DrCarlosMendes')
+!DrCarlosMendes.name := 'Dr. Carlos Mendes'
+!DrCarlosMendes.phone := '+55-21-555-6712'
+!DrCarlosMendes.email := 'carlos.mendes@pesquisador.br'
+!DrCarlosMendes.title := 'Marine Ecologist'
+
+!new Address('CarlosMendesAddress1')
+!CarlosMendesAddress1.city := 'Rio de Janeiro'
+!CarlosMendesAddress1.houseNr := '101'
+!CarlosMendesAddress1.street := 'Ocean Street'
+!insert (DrCarlosMendes, CarlosMendesAddress1) into ContactContainsAddress
+
+!new Address('CarlosMendesAddress2')
+!CarlosMendesAddress2.city := 'São Paulo'
+!CarlosMendesAddress2.houseNr := '202'
+!CarlosMendesAddress2.street := 'Ecosystem Lane'
+!insert (DrCarlosMendes, CarlosMendesAddress2) into ContactContainsAddress
+
+!new Relationship('SpaceToAikoCoworker')
+!SpaceToAikoCoworker.type := #COWORKER
+!insert (SpaceToAikoCoworker, ProfAikoTanaka) into RelationshipToContact
+!insert (InternationalSpaceResearchAgency, SpaceToAikoCoworker) into ContactToRelationship
+
+!new Relationship('BiologyToCarlosEmployee')
+!BiologyToCarlosEmployee.type := #EMPLOYEE
+!insert (BiologyToCarlosEmployee, DrCarlosMendes) into RelationshipToContact
+!insert (AdvancedBiologyInstitute, BiologyToCarlosEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToAikoSubdivision')
+!CarlosToAikoSubdivision.type := #SUBDIVISION
+!insert (CarlosToAikoSubdivision, ProfAikoTanaka) into RelationshipToContact
+!insert (DrCarlosMendes, CarlosToAikoSubdivision) into ContactToRelationship
+
+!insert (GlobalResearchCollaborationAddressBook, InternationalSpaceResearchAgency) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, ProfAikoTanaka) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, AdvancedBiologyInstitute) into AddressBookMadeOfContact
+!insert (GlobalResearchCollaborationAddressBook, DrCarlosMendes) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalEnterpriseConnections')
+
+!new Person('NnekaOkafor')
+!NnekaOkafor.name := 'Nneka Okafor'
+!NnekaOkafor.phone := '+234-703-555-1234'
+!NnekaOkafor.website := 'www.nnekaokafor.ng'
+!NnekaOkafor.email := 'nneka.okafor@africatechnology.ng'
+!NnekaOkafor.title := 'Chief Technology Officer'
+
+!new Address('NnekaOkaforAddress')
+!NnekaOkaforAddress.city := 'Lagos'
+!NnekaOkaforAddress.houseNr := '118'
+!NnekaOkaforAddress.street := 'Victoria Island'
+!insert (NnekaOkafor, NnekaOkaforAddress) into ContactContainsAddress
+
+!new Note('NnekaOkaforNote1')
+!NnekaOkaforNote1.author := 'Nneka Okafor'
+!NnekaOkaforNote1.time := Date('2023-05-10')
+!NnekaOkaforNote1.type := #CALL
+!NnekaOkaforNote1.comment := 'Follow-up with partners on the integration of blockchain technologies.'
+!insert (NnekaOkafor, NnekaOkaforNote1) into ContactContainsNote
+
+!new Company('DigitalInnovationsConsortium')
+!DigitalInnovationsConsortium.name := 'Digital Innovations Consortium'
+!DigitalInnovationsConsortium.phone := '+1-415-999-8888'
+!DigitalInnovationsConsortium.website := 'www.digitalinnovations.com'
+!DigitalInnovationsConsortium.email := 'info@digitalinnovations.com'
+!DigitalInnovationsConsortium.industry := 'Technology'
+
+!new Address('DigitalInnovationsAddress')
+!DigitalInnovationsAddress.city := 'San Francisco'
+!DigitalInnovationsAddress.houseNr := '200'
+!DigitalInnovationsAddress.street := 'Market Street'
+!insert (DigitalInnovationsConsortium, DigitalInnovationsAddress) into ContactContainsAddress
+
+!new Note('DigitalInnovationsNote1')
+!DigitalInnovationsNote1.author := 'Laura Johnson'
+!DigitalInnovationsNote1.time := Date('2023-07-29')
+!DigitalInnovationsNote1.type := #MEETING
+!DigitalInnovationsNote1.comment := 'Strategic planning session for expansion in African markets.'
+!insert (DigitalInnovationsConsortium, DigitalInnovationsNote1) into ContactContainsNote
+
+!new Person('SamuelMensah')
+!SamuelMensah.name := 'Samuel Mensah'
+!SamuelMensah.phone := '+233-24-888-5555'
+!SamuelMensah.website := 'www.samuelmensah.edu.gh'
+!SamuelMensah.email := 'samuel.mensah@ghanatech.com'
+!SamuelMensah.title := 'Data Scientist'
+
+!new Address('SamuelMensahAddress')
+!SamuelMensahAddress.city := 'Accra'
+!SamuelMensahAddress.houseNr := '9'
+!SamuelMensahAddress.street := 'Kwame Nkrumah Avenue'
+!insert (SamuelMensah, SamuelMensahAddress) into ContactContainsAddress
+
+!new Note('SamuelMensahNote1')
+!SamuelMensahNote1.author := 'Samuel Mensah'
+!SamuelMensahNote1.time := Date('2023-04-22')
+!SamuelMensahNote1.type := #EMAIL
+!SamuelMensahNote1.comment := 'Preliminary report on data analytics for market trends.'
+!insert (SamuelMensah, SamuelMensahNote1) into ContactContainsNote
+
+!new Person('LauraJohnson')
+!LauraJohnson.name := 'Laura Johnson'
+!LauraJohnson.phone := '+44-20-1234-6789'
+!LauraJohnson.website := 'www.laurajohnsonconsulting.co.uk'
+!LauraJohnson.email := 'laura.johnson@businessstrategy.co.uk'
+!LauraJohnson.title := 'Strategic Development Manager'
+
+!new Address('LauraJohnsonAddress')
+!LauraJohnsonAddress.city := 'London'
+!LauraJohnsonAddress.houseNr := '80'
+!LauraJohnsonAddress.street := 'Piccadilly'
+!insert (LauraJohnson, LauraJohnsonAddress) into ContactContainsAddress
+
+!new Note('LauraJohnsonNote1')
+!LauraJohnsonNote1.author := 'Laura Johnson'
+!LauraJohnsonNote1.time := Date('2023-08-12')
+!LauraJohnsonNote1.type := #EMAIL
+!LauraJohnsonNote1.comment := 'Update on the partnership proposal for green tech initiatives.'
+!insert (LauraJohnson, LauraJohnsonNote1) into ContactContainsNote
+
+!new Relationship('NnekaToSamuelBoss')
+!NnekaToSamuelBoss.type := #BOSS
+!insert (NnekaToSamuelBoss, SamuelMensah) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToSamuelBoss) into ContactToRelationship
+
+!new Relationship('SamuelToNnekaEmployee')
+!SamuelToNnekaEmployee.type := #EMPLOYEE
+!insert (SamuelToNnekaEmployee, NnekaOkafor) into RelationshipToContact
+!insert (SamuelMensah, SamuelToNnekaEmployee) into ContactToRelationship
+
+!new Relationship('NnekaToDigitalInnovationsSubdivision')
+!NnekaToDigitalInnovationsSubdivision.type := #SUBDIVISION
+!insert (NnekaToDigitalInnovationsSubdivision, DigitalInnovationsConsortium) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToDigitalInnovationsSubdivision) into ContactToRelationship
+
+!new Relationship('NnekaToLauraCoworker')
+!NnekaToLauraCoworker.type := #COWORKER
+!insert (NnekaToLauraCoworker, LauraJohnson) into RelationshipToContact
+!insert (NnekaOkafor, NnekaToLauraCoworker) into ContactToRelationship
+
+!insert (GlobalEnterpriseConnections, NnekaOkafor) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, DigitalInnovationsConsortium) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, SamuelMensah) into AddressBookMadeOfContact
+!insert (GlobalEnterpriseConnections, LauraJohnson) into AddressBookMadeOfContact
+
+!new AddressBook('HealthcareNetwork')
+
+!new Person('DrLisaChen')
+!DrLisaChen.name := 'Dr. Lisa Chen'
+!DrLisaChen.phone := '+65 6221 1122'
+!DrLisaChen.website := 'www.drlisachenmedical.com'
+!DrLisaChen.email := 'lisa.chen@wellhealth.sg'
+!DrLisaChen.title := 'Oncology Specialist'
+
+!new Address('LisaChenAddress')
+!LisaChenAddress.city := 'Singapore'
+!LisaChenAddress.street := 'Health Avenue'
+!LisaChenAddress.houseNr := '88'
+!insert (DrLisaChen, LisaChenAddress) into ContactContainsAddress
+
+!new Note('LisaChenNote1')
+!LisaChenNote1.author := 'Dr. Lisa Chen'
+!LisaChenNote1.time := Date('2023-07-05')
+!LisaChenNote1.type := #MEETING
+!LisaChenNote1.comment := 'Discussed new treatment protocols in regional cancer summit.'
+!insert (DrLisaChen, LisaChenNote1) into ContactContainsNote
+
+!new Note('LisaChenNote2')
+!LisaChenNote2.author := 'Dr. Lisa Chen'
+!LisaChenNote2.time := Date('2023-07-12')
+!LisaChenNote2.type := #CALL
+!LisaChenNote2.comment := 'Phone consultation with European experts on rare cancer cases.'
+!insert (DrLisaChen, LisaChenNote2) into ContactContainsNote
+
+!new Person('ProfMahmoudElNahas')
+!ProfMahmoudElNahas.name := 'Prof. Mahmoud El-Nahas'
+!ProfMahmoudElNahas.phone := '+20 2 3546 8799'
+!ProfMahmoudElNahas.website := 'www.mahmoudelnresearch.com'
+!ProfMahmoudElNahas.email := 'mahmoud.el@medresearch.edu.eg'
+!ProfMahmoudElNahas.title := 'Medical Research Director'
+
+!new Address('MahmoudElNahasAddress')
+!MahmoudElNahasAddress.city := 'Cairo'
+!MahmoudElNahasAddress.street := 'University Road'
+!MahmoudElNahasAddress.houseNr := '5'
+!insert (ProfMahmoudElNahas, MahmoudElNahasAddress) into ContactContainsAddress
+
+!new Note('MahmoudElNahasNote')
+!MahmoudElNahasNote.author := 'Prof. Mahmoud El-Nahas'
+!MahmoudElNahasNote.time := Date('2023-08-20')
+!MahmoudElNahasNote.type := #EMAIL
+!MahmoudElNahasNote.comment := 'Shared latest findings on genetic disorders with the global research community.'
+!insert (ProfMahmoudElNahas, MahmoudElNahasNote) into ContactContainsNote
+
+!new Company('MedLifePharmaceuticals')
+!MedLifePharmaceuticals.name := 'MedLife Pharmaceuticals'
+!MedLifePharmaceuticals.phone := '+1 312 555 6789'
+!MedLifePharmaceuticals.website := 'www.medlifepharma.com'
+!MedLifePharmaceuticals.email := 'contactus@medlife.com'
+!MedLifePharmaceuticals.industry := 'Pharmaceutical'
+
+!new Address('MedLifeAddress')
+!MedLifeAddress.city := 'Chicago'
+!MedLifeAddress.street := 'Medicine Drive'
+!MedLifeAddress.houseNr := '100A'
+!insert (MedLifePharmaceuticals, MedLifeAddress) into ContactContainsAddress
+
+!new Note('MedLifeNote')
+!MedLifeNote.author := 'MedLife Pharmaceuticals'
+!MedLifeNote.time := Date('2023-08-01')
+!MedLifeNote.type := #MEETING
+!MedLifeNote.comment := 'Annual review of research partnerships with international hospitals.'
+!insert (MedLifePharmaceuticals, MedLifeNote) into ContactContainsNote
+
+!new Company('GlobalHealthPartners')
+!GlobalHealthPartners.name := 'Global Health Partners'
+!GlobalHealthPartners.phone := '+61 2 8765 4321'
+!GlobalHealthPartners.website := 'www.globalhealthpartners.org'
+!GlobalHealthPartners.email := 'admin@globalhealth.org'
+!GlobalHealthPartners.industry := 'Healthcare Consulting'
+
+!new Address('GlobalHealthAddress')
+!GlobalHealthAddress.city := 'Sydney'
+!GlobalHealthAddress.street := 'Healthcare Boulevard'
+!GlobalHealthAddress.houseNr := '222'
+!insert (GlobalHealthPartners, GlobalHealthAddress) into ContactContainsAddress
+
+!new Note('GlobalHealthNote')
+!GlobalHealthNote.author := 'Global Health Partners'
+!GlobalHealthNote.time := Date('2023-08-15')
+!GlobalHealthNote.type := #EMAIL
+!GlobalHealthNote.comment := 'Coordinated a global conference on emergent health technologies.'
+!insert (GlobalHealthPartners, GlobalHealthNote) into ContactContainsNote
+
+!new Relationship('LisaToMedLifeCoworker')
+!LisaToMedLifeCoworker.type := #COWORKER
+!insert (LisaToMedLifeCoworker, MedLifePharmaceuticals) into RelationshipToContact
+!insert (DrLisaChen, LisaToMedLifeCoworker) into ContactToRelationship
+
+!new Relationship('MahmoudToHealthPartnersEmployee')
+!MahmoudToHealthPartnersEmployee.type := #EMPLOYEE
+!insert (MahmoudToHealthPartnersEmployee, GlobalHealthPartners) into RelationshipToContact
+!insert (ProfMahmoudElNahas, MahmoudToHealthPartnersEmployee) into ContactToRelationship
+
+!new Relationship('MedLifeToLisaBoss')
+!MedLifeToLisaBoss.type := #BOSS
+!insert (MedLifeToLisaBoss, DrLisaChen) into RelationshipToContact
+!insert (MedLifePharmaceuticals, MedLifeToLisaBoss) into ContactToRelationship
+
+!new Relationship('MedLifeToGlobalHealthSubdivision')
+!MedLifeToGlobalHealthSubdivision.type := #SUBDIVISION
+!insert (MedLifeToGlobalHealthSubdivision, GlobalHealthPartners) into RelationshipToContact
+!insert (MedLifePharmaceuticals, MedLifeToGlobalHealthSubdivision) into ContactToRelationship
+
+!new Relationship('HealthPartnersToMahmoudBoss')
+!HealthPartnersToMahmoudBoss.type := #BOSS
+!insert (HealthPartnersToMahmoudBoss, ProfMahmoudElNahas) into RelationshipToContact
+!insert (GlobalHealthPartners, HealthPartnersToMahmoudBoss) into ContactToRelationship
+
+!new Relationship('HealthPartnersToMedLifeSubdivision')
+!HealthPartnersToMedLifeSubdivision.type := #SUBDIVISION
+!insert (HealthPartnersToMedLifeSubdivision, MedLifePharmaceuticals) into RelationshipToContact
+!insert (GlobalHealthPartners, HealthPartnersToMedLifeSubdivision) into ContactToRelationship
+
+!insert (HealthcareNetwork, DrLisaChen) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, ProfMahmoudElNahas) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, MedLifePharmaceuticals) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, GlobalHealthPartners) into AddressBookMadeOfContact
+
+!new AddressBook('ArtisticCollectiveNetwork')
+
+!new Company('GlobalArtMovement')
+!GlobalArtMovement.name := 'Global Art Movement'
+!GlobalArtMovement.phone := '+33-1-23456789'
+!GlobalArtMovement.website := 'www.globalartmovement.fr'
+!GlobalArtMovement.email := 'connect@globalartmovement.fr'
+!GlobalArtMovement.industry := 'Art and Culture'
+
+!new Address('GlobalArtMovementAddress')
+!GlobalArtMovementAddress.city := 'Paris'
+!GlobalArtMovementAddress.houseNr := '220'
+!GlobalArtMovementAddress.street := 'Rue de l\'Artiste'
+!insert (GlobalArtMovement, GlobalArtMovementAddress) into ContactContainsAddress
+
+!new Note('GlobalArtMovementNote1')
+!GlobalArtMovementNote1.author := 'Amélie Dubois'
+!GlobalArtMovementNote1.time := Date('2023-04-15T11:00:00')
+!GlobalArtMovementNote1.type := #MEETING
+!GlobalArtMovementNote1.comment := 'Paris symposium on cross-cultural artistic exchange.'
+!insert (GlobalArtMovement, GlobalArtMovementNote1) into ContactContainsNote
+
+!new Company('ArtHavenAcademy')
+!ArtHavenAcademy.name := 'Art Haven Academy'
+!ArtHavenAcademy.phone := '+61-3-87654321'
+!ArtHavenAcademy.website := 'www.arthaven.edu.au'
+!ArtHavenAcademy.email := 'admissions@arthaven.edu.au'
+!ArtHavenAcademy.industry := 'Education and Culture'
+
+!new Address('ArtHavenAcademyAddress')
+!ArtHavenAcademyAddress.city := 'Melbourne'
+!ArtHavenAcademyAddress.houseNr := '88'
+!ArtHavenAcademyAddress.street := 'Artistic Avenue'
+!insert (ArtHavenAcademy, ArtHavenAcademyAddress) into ContactContainsAddress
+
+!new Note('ArtHavenNote1')
+!ArtHavenNote1.author := 'Oliver Nguyen'
+!ArtHavenNote1.time := Date('2023-03-22T14:20:00')
+!ArtHavenNote1.type := #EMAIL
+!ArtHavenNote1.comment := 'Webinar on "The Future of Art Education."'
+!insert (ArtHavenAcademy, ArtHavenNote1) into ContactContainsNote
+
+!new Person('SantiagoReyes')
+!SantiagoReyes.name := 'Santiago Reyes'
+!SantiagoReyes.phone := '+34-91-6543210'
+!SantiagoReyes.website := 'www.santiagoreyes.com'
+!SantiagoReyes.email := 's.reyes@artistry.com'
+!SantiagoReyes.title := 'Curator'
+
+!new Address('SantiagoReyesAddress')
+!SantiagoReyesAddress.city := 'Madrid'
+!SantiagoReyesAddress.houseNr := '15'
+!SantiagoReyesAddress.street := 'Paseo del Arte'
+!insert (SantiagoReyes, SantiagoReyesAddress) into ContactContainsAddress
+
+!new Note('SantiagoReyesNote1')
+!SantiagoReyesNote1.author := 'Santiago Reyes'
+!SantiagoReyesNote1.time := Date('2023-11-02T16:00:00')
+!SantiagoReyesNote1.type := #CALL
+!SantiagoReyesNote1.comment := 'Discussion on an upcoming exhibition in Tokyo.'
+!insert (SantiagoReyes, SantiagoReyesNote1) into ContactContainsNote
+
+!new Note('SantiagoReyesNote2')
+!SantiagoReyesNote2.author := 'Santiago Reyes'
+!SantiagoReyesNote2.time := Date('2023-07-10T10:30:00')
+!SantiagoReyesNote2.type := #MEETING
+!SantiagoReyesNote2.comment := 'Artist collaboration workshop in Madrid.'
+!insert (SantiagoReyes, SantiagoReyesNote2) into ContactContainsNote
+
+!new Person('FionaChen')
+!FionaChen.name := 'Fiona Chen'
+!FionaChen.phone := '+86-21-9876543'
+!FionaChen.website := 'www.fionachenstudio.cn'
+!FionaChen.email := 'fiona.chen@art.cn'
+!FionaChen.title := 'Visual Artist'
+
+!new Address('FionaChenAddress')
+!FionaChenAddress.city := 'Shanghai'
+!FionaChenAddress.houseNr := '202'
+!FionaChenAddress.street := 'Culture Street'
+!insert (FionaChen, FionaChenAddress) into ContactContainsAddress
+
+!new Note('FionaChenNote1')
+!FionaChenNote1.author := 'Fiona Chen'
+!FionaChenNote1.time := Date('2023-05-12T08:45:00')
+!FionaChenNote1.type := #EMAIL
+!FionaChenNote1.comment := 'Submitted portfolio for Global Art Residency.'
+!insert (FionaChen, FionaChenNote1) into ContactContainsNote
+
+!new Relationship('GlobalArtToSantiagoSubdivision')
+!GlobalArtToSantiagoSubdivision.type := #SUBDIVISION
+!insert (GlobalArtToSantiagoSubdivision, SantiagoReyes) into RelationshipToContact
+!insert (GlobalArtMovement, GlobalArtToSantiagoSubdivision) into ContactToRelationship
+
+!new Relationship('GlobalArtToArtHavenCoworker')
+!GlobalArtToArtHavenCoworker.type := #COWORKER
+!insert (GlobalArtToArtHavenCoworker, ArtHavenAcademy) into RelationshipToContact
+!insert (GlobalArtMovement, GlobalArtToArtHavenCoworker) into ContactToRelationship
+
+!new Relationship('ArtHavenToGlobalArtCoworker')
+!ArtHavenToGlobalArtCoworker.type := #COWORKER
+!insert (ArtHavenToGlobalArtCoworker, GlobalArtMovement) into RelationshipToContact
+!insert (ArtHavenAcademy, ArtHavenToGlobalArtCoworker) into ContactToRelationship
+
+!new Relationship('ArtHavenToSantiagoEmployee')
+!ArtHavenToSantiagoEmployee.type := #EMPLOYEE
+!insert (ArtHavenToSantiagoEmployee, SantiagoReyes) into RelationshipToContact
+!insert (ArtHavenAcademy, ArtHavenToSantiagoEmployee) into ContactToRelationship
+
+!new Relationship('SantiagoToGlobalArtSubdivision')
+!SantiagoToGlobalArtSubdivision.type := #SUBDIVISION
+!insert (SantiagoToGlobalArtSubdivision, GlobalArtMovement) into RelationshipToContact
+!insert (SantiagoReyes, SantiagoToGlobalArtSubdivision) into ContactToRelationship
+
+!new Relationship('SantiagoToArtHavenEmployee')
+!SantiagoToArtHavenEmployee.type := #EMPLOYEE
+!insert (SantiagoToArtHavenEmployee, ArtHavenAcademy) into RelationshipToContact
+!insert (SantiagoReyes, SantiagoToArtHavenEmployee) into ContactToRelationship
+
+!new Relationship('FionaToSantiagoCoworker')
+!FionaToSantiagoCoworker.type := #COWORKER
+!insert (FionaToSantiagoCoworker, SantiagoReyes) into RelationshipToContact
+!insert (FionaChen, FionaToSantiagoCoworker) into ContactToRelationship
+
+!insert (ArtisticCollectiveNetwork, GlobalArtMovement) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, ArtHavenAcademy) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, SantiagoReyes) into AddressBookMadeOfContact
+!insert (ArtisticCollectiveNetwork, FionaChen) into AddressBookMadeOfContact
+

@@ -1,0 +1,70 @@
+!new RentalOffice('office8')
+!office8.name := 'Desert Rentals'
+!office8.number := 808
+!office8.address := '777 Sand Dune Dr, Phoenix, AZ'
+
+!new Truck('truck15')
+!truck15.id := 515
+!truck15.registrationState := #AZ
+!truck15.licensePlateNumber := 'AZ-TRK-1234'
+!truck15.vehicleTypeCode := #TRUCK24
+!truck15.registrationLastMaintenanceDate := Date('2023-05-22')
+!truck15.expirationDate := Date('2024-05-22')
+!truck15.odometerReading := 15000
+!truck15.gasTankCapacity := 35.0
+!truck15.workingRadio := false
+!truck15.mileage := 19
+
+!new Individual('individual8')
+!individual8.name := 'Carlos Sanchez'
+!individual8.address := '1111 Cactus Rd, Tucson, AZ'
+!individual8.poorRisk := true
+!individual8.homePhone := '555-6789'
+!individual8.driverLicenseState := #AZ
+!individual8.driverLicenseNumber := 78901234
+!individual8.driverLicenseExpirationDate := Date('2025-03-19')
+
+!new RentalAgreement('agreement15')
+!agreement15.number := 3015
+!agreement15.rentalDate := Date('2023-12-18')
+!agreement15.anticipatedDuration := 10
+!agreement15.depositPaid := 300.0
+!agreement15.quotedDailyRate := 66.00
+!agreement15.quotedRatePerMile := 0.45
+
+!new Truck('truck16')
+!truck16.id := 516
+!truck16.registrationState := #CA
+!truck16.licensePlateNumber := 'CA-TRK-5678'
+!truck16.vehicleTypeCode := #OPEN_TRAILER
+!truck16.registrationLastMaintenanceDate := Date('2023-09-10')
+!truck16.expirationDate := Date('2025-09-10')
+!truck16.odometerReading := 10000
+!truck16.gasTankCapacity := 29.0
+!truck16.workingRadio := true
+!truck16.mileage := 20
+
+!new Company('company8')
+!company8.name := 'West Freight Services'
+!company8.address := '888 Cargo St, Los Angeles, CA'
+!company8.poorRisk := false
+!company8.idNumber := 567890
+
+!new RentalAgreement('agreement16')
+!agreement16.number := 3016
+!agreement16.rentalDate := Date('2023-11-23')
+!agreement16.anticipatedDuration := 8
+!agreement16.depositPaid := 380.0
+!agreement16.quotedDailyRate := 78.00
+!agreement16.quotedRatePerMile := 0.60
+
+!insert (office8, truck15) into RentalOfficeVehicle
+!insert (office8, truck16) into RentalOfficeVehicle
+!insert (office8, agreement15) into RentalOfficeRentalAgreementOrigin
+!insert (office8, agreement15) into RentalOfficeRentalAgreementDrop
+!insert (office8, agreement16) into RentalOfficeRentalAgreementOrigin
+!insert (office8, agreement16) into RentalOfficeRentalAgreementDrop
+!insert (agreement15, truck15) into RentalAgreementVehicle
+!insert (agreement15, individual8) into RentalAgreementCustomer
+!insert (agreement16, truck16) into RentalAgreementVehicle
+!insert (agreement16, company8) into RentalAgreementCustomer

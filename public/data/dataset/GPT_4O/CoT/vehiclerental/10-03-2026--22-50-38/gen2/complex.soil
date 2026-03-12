@@ -1,0 +1,95 @@
+!new RentalOffice('officeMileHighRentals')
+!officeMileHighRentals.name := 'Mile High Rentals'
+!officeMileHighRentals.number := 205
+!officeMileHighRentals.address := '1234 Colorado Blvd, Denver, CO 80206'
+
+!new Truck('truck1045')
+!truck1045.id := 1045
+!truck1045.registrationState := #CO
+!truck1045.licensePlateNumber := 'CO3456'
+!truck1045.vehicleTypeCode := #TRUCK
+!truck1045.registrationLastMaintenanceDate := Date('2023-06-20')
+!truck1045.expirationDate := Date('2024-06-20')
+!truck1045.odometerReading := 50000
+!truck1045.gasTankCapacity := 30.0
+!truck1045.workingRadio := false
+!truck1045.mileage := 12
+
+!new Vehicle('coveredTrailer2078')
+!coveredTrailer2078.id := 2078
+!coveredTrailer2078.registrationState := #CO
+!coveredTrailer2078.licensePlateNumber := 'CO7890'
+!coveredTrailer2078.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer2078.registrationLastMaintenanceDate := Date('2023-07-12')
+!coveredTrailer2078.expirationDate := Date('2024-07-12')
+
+!new Truck('truck1050')
+!truck1050.id := 1050
+!truck1050.registrationState := #TX
+!truck1050.licensePlateNumber := 'TX0987'
+!truck1050.vehicleTypeCode := #TRUCK
+!truck1050.registrationLastMaintenanceDate := Date('2023-05-18')
+!truck1050.expirationDate := Date('2024-05-18')
+!truck1050.odometerReading := 70000
+!truck1050.gasTankCapacity := 28.0
+!truck1050.workingRadio := true
+!truck1050.mileage := 10
+
+!new Individual('individualEmilyChen')
+!individualEmilyChen.name := 'Emily Chen'
+!individualEmilyChen.address := '456 Aspen Lane, Boulder, CO 80302'
+!individualEmilyChen.poorRisk := true
+!individualEmilyChen.homePhone := '303-555-0234'
+!individualEmilyChen.driverLicenseState := #CO
+!individualEmilyChen.driverLicenseNumber := 33221144
+!individualEmilyChen.driverLicenseExpirationDate := Date('2026-01-16')
+
+!new Company('companyRockyMountainAdventures')
+!companyRockyMountainAdventures.name := 'Rocky Mountain Adventures'
+!companyRockyMountainAdventures.address := '789 Peak Dr, Denver, CO 80202'
+!companyRockyMountainAdventures.poorRisk := false
+!companyRockyMountainAdventures.idNumber := 4568
+
+!new RentalAgreement('rentalAgreement7002')
+!rentalAgreement7002.number := 7002
+!rentalAgreement7002.rentalDate := Date('2023-10-05')
+!rentalAgreement7002.anticipatedDuration := 3
+!rentalAgreement7002.depositPaid := 100.0
+!rentalAgreement7002.quotedDailyRate := 50.0
+!rentalAgreement7002.quotedRatePerMile := 0.6
+
+!new RentalAgreement('rentalAgreement8004')
+!rentalAgreement8004.number := 8004
+!rentalAgreement8004.rentalDate := Date('2023-09-25')
+!rentalAgreement8004.anticipatedDuration := 10
+!rentalAgreement8004.depositPaid := 400.0
+!rentalAgreement8004.quotedDailyRate := 40.0
+!rentalAgreement8004.quotedRatePerMile := 0.4
+
+!new RentalAgreement('rentalAgreement9005')
+!rentalAgreement9005.number := 9005
+!rentalAgreement9005.rentalDate := Date('2023-10-10')
+!rentalAgreement9005.anticipatedDuration := 5
+!rentalAgreement9005.depositPaid := 250.0
+!rentalAgreement9005.quotedDailyRate := 55.0
+!rentalAgreement9005.quotedRatePerMile := 0.45
+
+!insert (officeMileHighRentals, truck1045) into RentalOfficeVehicle
+!insert (officeMileHighRentals, coveredTrailer2078) into RentalOfficeVehicle
+!insert (officeMileHighRentals, truck1050) into RentalOfficeVehicle
+
+!insert (officeMileHighRentals, rentalAgreement7002) into RentalOfficeRentalAgreementOrigin
+!insert (officeMileHighRentals, rentalAgreement8004) into RentalOfficeRentalAgreementOrigin
+!insert (officeMileHighRentals, rentalAgreement9005) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeMileHighRentals, rentalAgreement7002) into RentalOfficeRentalAgreementDrop
+!insert (officeMileHighRentals, rentalAgreement8004) into RentalOfficeRentalAgreementDrop
+!insert (officeMileHighRentals, rentalAgreement9005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement7002, truck1045) into RentalAgreementVehicle
+!insert (rentalAgreement8004, coveredTrailer2078) into RentalAgreementVehicle
+!insert (rentalAgreement9005, truck1050) into RentalAgreementVehicle
+
+!insert (rentalAgreement7002, individualEmilyChen) into RentalAgreementCustomer
+!insert (rentalAgreement8004, companyRockyMountainAdventures) into RentalAgreementCustomer
+!insert (rentalAgreement9005, companyRockyMountainAdventures) into RentalAgreementCustomer

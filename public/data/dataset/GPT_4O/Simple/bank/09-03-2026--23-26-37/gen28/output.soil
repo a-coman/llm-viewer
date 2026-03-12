@@ -1,0 +1,50 @@
+!new Bank('bank55')
+!bank55.country := 'Belgium'
+!bank55.name := 'KBC Bank'
+!bank55.bic := 'KREDBEBB'
+
+!new Bank('bank56')
+!bank56.country := 'South Africa'
+!bank56.name := 'Standard Bank'
+!bank56.bic := 'SBZAZAJJ'
+
+!new Account('account82')
+!account82.iban := 'BE68539007547034'
+!account82.balance := 13000
+
+!new Account('account83')
+!account83.iban := 'ZA65432109871234567890'
+!account83.balance := 6700
+
+!new Account('account84')
+!account84.iban := 'BE68539007547035'
+!account84.balance := 210
+
+!new Person('person82')
+!person82.firstName := 'Luc'
+!person82.lastName := 'Dupont'
+!person82.age := 53
+
+!new Person('person83')
+!person83.firstName := 'Thabo'
+!person83.lastName := 'Mbanjwa'
+!person83.age := 43
+
+!new Person('person84')
+!person84.firstName := 'Nathalie'
+!person84.lastName := 'Vermeulen'
+!person84.age := 30
+
+!insert (person82, account82) into Ownership
+!insert (person83, account83) into Ownership
+!insert (person84, account84) into Ownership
+!insert (person82, account84) into Ownership
+
+!insert (person82, account82) into Use
+!insert (person83, account83) into Use
+!insert (person84, account84) into Use
+!insert (person83, account82) into Use
+
+!insert (bank55, account82) into AccountOfBanks
+!insert (bank56, account83) into AccountOfBanks
+!insert (bank55, account84) into AccountOfBanks

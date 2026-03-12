@@ -1,0 +1,113 @@
+!new Restaurant('restaurant6')
+!restaurant6.name := 'Lunar Dining'
+
+!new Owner('owner12')
+!owner12.name := 'Eve Adams'
+!owner12.percentageShares := 70
+!insert (restaurant6, owner12) into RestaurantOwner
+
+!new Owner('owner13')
+!owner13.name := 'John Smith'
+!owner13.percentageShares := 30
+!insert (restaurant6, owner13) into RestaurantOwner
+
+!new Table('table14')
+!table14.number := 14
+!table14.description := 'Moonlight seating'
+!table14.capacity := 8
+
+!new Table('table15')
+!table15.number := 15
+!table15.description := 'VIP Lounge'
+!table15.capacity := 15
+
+!new Table('table16')
+!table16.number := 16
+!table16.description := 'Celestial corner'
+!table16.capacity := 10
+
+!new RegularCustomer('customer7')
+!customer7.name := 'Sophia Li'
+!customer7.prefferedLanguage := #Italian
+
+!new Waiter('waiter8')
+!waiter8.name := 'Mike Johnson'
+!waiter8.dateOfBirth := Date('1992-03-15')
+!waiter8.phoneNumber := '555-2211'
+!waiter8.spokenLanguage := #German
+
+!new HeadWaiter('headwaiter6')
+!headwaiter6.name := 'Chloe Black'
+!headwaiter6.dateOfBirth := Date('1980-09-09')
+!headwaiter6.phoneNumber := '555-3322'
+
+!insert (headwaiter6, waiter8) into HeadWaiterWaiter
+
+!new Individual('reservation9')
+!reservation9.time := Time('21:00')
+!reservation9.date := Date('2023-11-25')
+!reservation9.numberPeople := 3
+!reservation9.name := 'Sophia Li'
+!reservation9.phoneNumber := '555-9989'
+!reservation9.number := 9
+!reservation9.seating := #Inside
+!reservation9.smoking := #NonSmoking
+!insert (restaurant6, reservation9) into RestaurantReservation
+!insert (reservation9, customer7) into ReservationCustomer
+!insert (reservation9, waiter8) into ReservationWaiter
+!insert (reservation9, table14) into ReservationTable
+
+!new Banquet('reservation10')
+!reservation10.time := Time('20:00')
+!reservation10.date := Date('2024-02-14')
+!reservation10.numberPeople := 35
+!reservation10.name := 'Valentine Gala'
+!reservation10.phoneNumber := '555-6054'
+!reservation10.number := 10
+!reservation10.groupName := 'Romantic Celebrations'
+!reservation10.paymentMethod := #CreditCard
+!reservation10.busService := false
+!insert (restaurant6, reservation10) into RestaurantReservation
+!insert (reservation10, table15) into ReservationTable
+!insert (reservation10, table16) into ReservationTable
+!insert (reservation10, waiter8) into ReservationWaiter
+
+!new Table('tableExtra')
+!tableExtra.number := 17
+!tableExtra.description := 'Additional seating'
+!tableExtra.capacity := 10
+!insert (reservation10, tableExtra) into ReservationTable
+
+!new ItemOrder('itemOrder6')
+!itemOrder6.time := Time('21:20')
+!insert (reservation9, itemOrder6) into ReservationItemOrdered
+
+!new MenuItem('menuItem6')
+!menuItem6.description := 'Stellar Steak'
+!menuItem6.prepTime := 40.0
+!menuItem6.classification := #Main
+!insert (itemOrder6, menuItem6) into ItemOrderMenuItem
+
+!new FoodItem('foodItem6')
+!foodItem6.number := 106
+!foodItem6.description := 'Prime Beef'
+!foodItem6.purchaseFlag := true
+!foodItem6.unit := #Pound
+!insert (menuItem6, foodItem6) into MenuItemFoodItem
+
+!new Allergen('allergen6')
+!allergen6.type := #Lactose
+!insert (foodItem6, allergen6) into FoodItemAllergen
+
+!new Cook('cook6')
+!cook6.name := 'Henry Ford'
+!cook6.dateOfBirth := Date('1991-10-01')
+!cook6.phoneNumber := '555-9988'
+!cook6.yearsOfExperience := 7
+
+!new Chef('chef6')
+!chef6.name := 'Isabella Newton'
+!chef6.dateOfBirth := Date('1987-06-20')
+!chef6.phoneNumber := '555-7766'
+!insert (menuItem6, chef6) into MenuItemChef
+!insert (chef6, cook6) into ChefCook

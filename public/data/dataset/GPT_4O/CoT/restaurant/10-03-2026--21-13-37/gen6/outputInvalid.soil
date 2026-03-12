@@ -1,0 +1,84 @@
+!new Restaurant('restaurant22')
+!restaurant22.name := 'Gourmet Echo'
+
+!new Owner('owner46')
+!owner46.name := 'Ahmed El-Badry'
+!owner46.percentageShares := 80
+
+!new Owner('owner47')
+!owner47.name := 'Sofia Petrenko'
+!owner47.percentageShares := 20
+
+!insert (restaurant22, owner46) into RestaurantOwner
+!insert (restaurant22, owner47) into RestaurantOwner
+
+!new Banquet('banquet18')
+!banquet18.date := Date('2023-12-01')
+!banquet18.time := Time('19:30')
+!banquet18.groupName := 'Save the Children Fundraiser'
+!banquet18.numberPeople := 100
+!banquet18.paymentMethod := #CreditCard
+
+!insert (restaurant22, banquet18) into RestaurantReservation
+
+!new Table('table55')
+!table55.number := 601
+!table55.description := 'Ornate reception table'
+!table55.capacity := 20
+
+!new Table('table56')
+!table56.number := 602
+!table56.description := 'Classic banquet table'
+!table56.capacity := 25
+
+!new Table('table57')
+!table57.number := 603
+!table57.description := 'Traditional long table'
+!table57.capacity := 30
+
+!new Table('table58')
+!table58.number := 604
+!table58.description := 'Elegant high-top table'
+!table58.capacity := 15
+
+!insert (banquet18, table55) into ReservationTable
+!insert (banquet18, table56) into ReservationTable
+!insert (banquet18, table57) into ReservationTable
+!insert (banquet18, table58) into ReservationTable
+
+!new BusDriver('busdriver18')
+!busdriver18.name := 'Olga Kravchuk'
+
+!insert (banquet18, busdriver18) into BanquetBusDriver
+
+!new HeadWaiter('headwaiter17')
+!headwaiter17.name := 'Jean-Luc Moreau'
+!headwaiter17.dateOfBirth := Date('1973-01-01') -- Arbitrary date of birth
+!headwaiter17.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter39')
+!waiter39.name := 'Norah Ali'
+!waiter39.dateOfBirth := Date('1983-01-01')     -- Arbitrary date of birth
+!waiter39.phoneNumber := '1112223333'           -- Arbitrary phone number
+!waiter39.spokenLanguage := #English
+
+!new Waiter('waiter40')
+!waiter40.name := 'Bao Nguyen'
+!waiter40.dateOfBirth := Date('1986-01-01')     -- Arbitrary date of birth
+!waiter40.phoneNumber := '4445556667'           -- Arbitrary phone number
+!waiter40.spokenLanguage := #English
+
+!new Waiter('waiter41')
+!waiter41.name := 'Priya Kapoor'
+!waiter41.dateOfBirth := Date('1991-01-01')     -- Arbitrary date of birth
+!waiter41.phoneNumber := '8889990001'           -- Arbitrary phone number
+!waiter41.spokenLanguage := #English
+
+!insert (headwaiter17, waiter39) into HeadWaiterWaiter
+!insert (headwaiter17, waiter40) into HeadWaiterWaiter
+!insert (headwaiter17, waiter41) into HeadWaiterWaiter
+
+!insert (banquet18, waiter39) into ReservationWaiter
+!insert (banquet18, waiter40) into ReservationWaiter
+!insert (banquet18, waiter41) into ReservationWaiter
+

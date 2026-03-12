@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency15')
+!currency15.name := 'Swedish Krona'
+!currency15.abbreviation := 'SEK'
+
+-- Creating instances of Bills
+!new Bill('bill36')
+!bill36.amount := 700.00
+!bill36.category := 'Conference Fees'
+!bill36.date := Date('2023-11-03')
+!bill36.paymentMethod := #CASH
+!bill36.status := #VALIDATED
+!insert (bill36, currency15) into BillCurrency
+
+!new Bill('bill37')
+!bill37.amount := 450.00
+!bill37.category := 'Travel Expenses'
+!bill37.date := Date('2023-11-05')
+!bill37.paymentMethod := #CREDIT_CARD
+!bill37.status := #PENDING
+!insert (bill37, currency15) into BillCurrency
+
+!new Bill('bill38')
+!bill38.amount := 350.00
+!bill38.category := 'Accommodation'
+!bill38.date := Date('2023-11-07')
+!bill38.paymentMethod := #CHECK
+!bill38.status := #DRAFT
+!insert (bill38, currency15) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment18')
+!comment18.text := 'Expenses for attending the international conference in Stockholm.'
+
+-- Creating instance of Expense
+!new Expense('expense15')
+!expense15.amount := 1500.00
+!expense15.startDate := Date('2023-11-01')
+!expense15.endDate := Date('2023-11-10')
+!insert (expense15, bill36) into ExpenseContainsBills
+!insert (expense15, bill37) into ExpenseContainsBills
+!insert (expense15, bill38) into ExpenseContainsBills
+!insert (expense15, comment18) into ExpenseComment

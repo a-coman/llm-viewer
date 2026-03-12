@@ -1,0 +1,97 @@
+!new StateMachine('stateMachine24')
+!stateMachine24.name := 'productDevelopmentCycle'
+
+!new State('state84')
+!state84.name := 'conceptPhase'
+
+!new State('state85')
+!state85.name := 'designPhase'
+
+!new State('state86')
+!state86.name := 'prototypePhase'
+
+!new State('state87')
+!state87.name := 'testingPhase'
+
+!new State('state88')
+!state88.name := 'launchPhase'
+
+!new State('state89')
+!state89.name := 'postLaunchMaintenance'
+
+!new Transition('transition85')
+!transition85.name := 'completeConcept'
+
+!new Transition('transition86')
+!transition86.name := 'designComplete'
+
+!new Transition('transition87')
+!transition87.name := 'prototypingComplete'
+
+!new Transition('transition88')
+!transition88.name := 'testingComplete'
+
+!new Transition('transition89')
+!transition89.name := 'launchProduct'
+
+!new Transition('transition90')
+!transition90.name := 'enterMaintenance'
+
+!new TimeEvent('timeEvent85')
+!timeEvent85.time := 15
+
+!new TimeEvent('timeEvent86')
+!timeEvent86.time := 25
+
+!new TimeEvent('timeEvent87')
+!timeEvent87.time := 20
+
+!new TimeEvent('timeEvent88')
+!timeEvent88.time := 30
+
+!new TimeEvent('timeEvent89')
+!timeEvent89.time := 5
+
+!new TimeEvent('timeEvent90')
+!timeEvent90.time := 10
+
+!insert (stateMachine24, state84) into StateMachineContainsStates
+!insert (stateMachine24, state85) into StateMachineContainsStates
+!insert (stateMachine24, state86) into StateMachineContainsStates
+!insert (stateMachine24, state87) into StateMachineContainsStates
+!insert (stateMachine24, state88) into StateMachineContainsStates
+!insert (stateMachine24, state89) into StateMachineContainsStates
+
+!insert (stateMachine24, transition85) into StateMachineContainsTransitions
+!insert (stateMachine24, transition86) into StateMachineContainsTransitions
+!insert (stateMachine24, transition87) into StateMachineContainsTransitions
+!insert (stateMachine24, transition88) into StateMachineContainsTransitions
+!insert (stateMachine24, transition89) into StateMachineContainsTransitions
+!insert (stateMachine24, transition90) into StateMachineContainsTransitions
+
+!insert (transition85, timeEvent85) into TransitionContainsEvents
+!insert (transition86, timeEvent86) into TransitionContainsEvents
+!insert (transition87, timeEvent87) into TransitionContainsEvents
+!insert (transition88, timeEvent88) into TransitionContainsEvents
+!insert (transition89, timeEvent89) into TransitionContainsEvents
+!insert (transition90, timeEvent90) into TransitionContainsEvents
+
+!insert (state84, transition85) into StateTransition
+!insert (transition85, state85) into TransitionState
+
+!insert (state85, transition86) into StateTransition
+!insert (transition86, state86) into TransitionState
+
+!insert (state86, transition87) into StateTransition
+!insert (transition87, state87) into TransitionState
+
+!insert (state87, transition88) into StateTransition
+!insert (transition88, state88) into TransitionState
+
+!insert (state88, transition89) into StateTransition
+!insert (transition89, state89) into TransitionState
+
+!insert (state89, transition90) into StateTransition
+!insert (transition90, state84) into TransitionState
+
+!insert (stateMachine24, state84) into StateMachineStartsStates

@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine5')
+!stateMachine5.name := 'orderProcessingSystem'
+
+!new State('state11')
+!state11.name := 'received'
+
+!new State('state12')
+!state12.name := 'processed'
+
+!new State('state13')
+!state13.name := 'shipped'
+
+!new Transition('transition11')
+!transition11.name := 'processOrder'
+
+!new Transition('transition12')
+!transition12.name := 'shipOrder'
+
+!new Transition('transition13')
+!transition13.name := 'returnOrder'
+
+!new TimeEvent('timeEvent11')
+!timeEvent11.time := 2
+
+!new TimeEvent('timeEvent12')
+!timeEvent12.time := 1
+
+!new TimeEvent('timeEvent13')
+!timeEvent13.time := 3
+
+!insert (stateMachine5, state11) into StateMachineContainsStates
+!insert (stateMachine5, state12) into StateMachineContainsStates
+!insert (stateMachine5, state13) into StateMachineContainsStates
+
+!insert (stateMachine5, transition11) into StateMachineContainsTransitions
+!insert (stateMachine5, transition12) into StateMachineContainsTransitions
+!insert (stateMachine5, transition13) into StateMachineContainsTransitions
+
+!insert (transition11, timeEvent11) into TransitionContainsEvents
+!insert (transition12, timeEvent12) into TransitionContainsEvents
+!insert (transition13, timeEvent13) into TransitionContainsEvents
+
+!insert (state11, transition11) into StateTransition
+!insert (transition11, state12) into TransitionState
+
+!insert (state12, transition12) into StateTransition
+!insert (transition12, state13) into TransitionState
+
+!insert (state13, transition13) into StateTransition
+!insert (transition13, state11) into TransitionState
+
+!insert (stateMachine5, state11) into StateMachineStartsStates

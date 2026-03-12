@@ -1,0 +1,36 @@
+!new Booking('booking30')
+!booking30.startDate := '2026-04-10'
+!booking30.endDate := '2026-04-15'
+!booking30.canceled := true
+!booking30.bookingId := 130
+!booking30.confirmed := false
+
+!new Bill('bill30')
+!bill30.price := 0.00
+!bill30.billId := 5030
+
+!new Customer('customer30')
+!customer30.firstName := 'Eli'
+!customer30.lastName := 'Foster'
+
+!new RoomReservation('reservation30')
+!reservation30.checkInDate := '2026-04-10'
+!reservation30.checkOutDate := '2026-04-15'
+
+!new Room('room2701')
+!room2701.numBeds := 2
+!room2701.pricePerNight := 120.00
+!room2701.occupied := false
+!room2701.blocked := true
+!room2701.roomNumber := 2701
+
+!new RoomExtra('extra40')
+!extra40.price := 10.00
+!extra40.description := 'Local Brewery Tour'
+
+!insert (booking30, bill30) into BookingBill
+!insert (booking30, customer30) into BookingCustomer
+!insert (booking30, reservation30) into BookingRoomReservation
+!insert (reservation30, extra40) into RoomReservationExtras
+!insert (reservation30, room2701) into RoomReservationRoom
+!insert (bill30, reservation30) into BillRoomReservation

@@ -1,0 +1,57 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client7')
+!client7.clientId := 7
+!client7.isSuspended := false
+
+!new Client('client8')
+!client8.clientId := 8
+!client8.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental6')
+!rental6.date := Date('2023-10-20')
+
+!new Rental('rental7')
+!rental7.date := Date('2023-10-21')
+
+-- Creating Cassettes and Movies
+!new Movie('movie6')
+!movie6.title := 'Comedy Night'
+!movie6.availableCopies := 3
+!movie6.genre := #Comedy
+
+-- Creating Series
+!new Series('series4')
+!series4.title := 'Detective Tales'
+!series4.availableCopies := 4
+!series4.episode := 15
+
+!new Series('series5')
+!series5.title := 'Fantasy Quest'
+!series5.availableCopies := 6
+!series5.episode := 7
+
+-- Creating Actors
+!new Actor('actor6')
+!actor6.name := 'Emily Park'
+
+!new Actor('actor7')
+!actor7.name := 'David Lee'
+
+-- Creating associations between Client and Rentals
+!insert (client7, rental6) into ClientRental
+!insert (client8, rental7) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental6, movie6) into RentalCassette
+!insert (rental6, series4) into RentalCassette
+!insert (rental7, series5) into RentalCassette
+!insert (rental7, movie6) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie6, actor6) into CassetteActor
+!insert (series4, actor7) into CassetteActor
+!insert (series5, actor6) into CassetteActor
+!insert (series5, actor7) into CassetteActor

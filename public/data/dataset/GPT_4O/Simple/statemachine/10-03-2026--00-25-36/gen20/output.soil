@@ -1,0 +1,86 @@
+!new StateMachine('stateMachine21')
+!stateMachine21.name := 'waterPurificationProcess'
+
+!new State('state69')
+!state69.name := 'rawWaterIntake'
+
+!new State('state70')
+!state70.name := 'coagulation'
+
+!new State('state71')
+!state71.name := 'sedimentation'
+
+!new State('state72')
+!state72.name := 'filtration'
+
+!new State('state73')
+!state73.name := 'disinfection'
+
+!new State('state74')
+!state74.name := 'purifiedWaterStorage'
+
+!new Transition('transition71')
+!transition71.name := 'addCoagulants'
+
+!new Transition('transition72')
+!transition72.name := 'settleParticles'
+
+!new Transition('transition73')
+!transition73.name := 'filterWater'
+
+!new Transition('transition74')
+!transition74.name := 'disinfectWater'
+
+!new Transition('transition75')
+!transition75.name := 'storePurifiedWater'
+
+!new TimeEvent('timeEvent71')
+!timeEvent71.time := 4
+
+!new TimeEvent('timeEvent72')
+!timeEvent72.time := 6
+
+!new TimeEvent('timeEvent73')
+!timeEvent73.time := 3
+
+!new TimeEvent('timeEvent74')
+!timeEvent74.time := 2
+
+!new TimeEvent('timeEvent75')
+!timeEvent75.time := 5
+
+!insert (stateMachine21, state69) into StateMachineContainsStates
+!insert (stateMachine21, state70) into StateMachineContainsStates
+!insert (stateMachine21, state71) into StateMachineContainsStates
+!insert (stateMachine21, state72) into StateMachineContainsStates
+!insert (stateMachine21, state73) into StateMachineContainsStates
+!insert (stateMachine21, state74) into StateMachineContainsStates
+
+!insert (stateMachine21, transition71) into StateMachineContainsTransitions
+!insert (stateMachine21, transition72) into StateMachineContainsTransitions
+!insert (stateMachine21, transition73) into StateMachineContainsTransitions
+!insert (stateMachine21, transition74) into StateMachineContainsTransitions
+!insert (stateMachine21, transition75) into StateMachineContainsTransitions
+
+!insert (transition71, timeEvent71) into TransitionContainsEvents
+!insert (transition72, timeEvent72) into TransitionContainsEvents
+!insert (transition73, timeEvent73) into TransitionContainsEvents
+!insert (transition74, timeEvent74) into TransitionContainsEvents
+!insert (transition75, timeEvent75) into TransitionContainsEvents
+
+!insert (state69, transition71) into StateTransition
+!insert (transition71, state70) into TransitionState
+
+!insert (state70, transition72) into StateTransition
+!insert (transition72, state71) into TransitionState
+
+!insert (state71, transition73) into StateTransition
+!insert (transition73, state72) into TransitionState
+
+!insert (state72, transition74) into StateTransition
+!insert (transition74, state73) into TransitionState
+
+!insert (state73, transition75) into StateTransition
+!insert (transition75, state74) into TransitionState
+
+!insert (stateMachine21, state69) into StateMachineStartsStates

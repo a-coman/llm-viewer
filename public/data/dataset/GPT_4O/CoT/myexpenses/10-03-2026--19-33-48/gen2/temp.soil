@@ -1,0 +1,58 @@
+!new Expense('emergencyReliefFund')
+!emergencyReliefFund.amount := 50500.00
+!emergencyReliefFund.startDate := Date('2023-11-01')
+!emergencyReliefFund.endDate := Date('2023-11-03')
+
+!new Bill('medicalSuppliesBill')
+!medicalSuppliesBill.amount := 15000.00
+!medicalSuppliesBill.category := 'Medical Supplies'
+!medicalSuppliesBill.date := Date('2023-11-01')
+!medicalSuppliesBill.paymentMethod := #CASH
+!medicalSuppliesBill.status := #VALIDATED
+
+!new Bill('temporarySheltersBill')
+!temporarySheltersBill.amount := 17000.00
+!temporarySheltersBill.category := 'Temporary Shelters'
+!temporarySheltersBill.date := Date('2023-11-02')
+!temporarySheltersBill.paymentMethod := #CHECK
+!temporarySheltersBill.status := #REFUSED
+
+!new Bill('foodDistributionBill')
+!foodDistributionBill.amount := 18500.00
+!foodDistributionBill.category := 'Food Distribution'
+!foodDistributionBill.date := Date('2023-11-03')
+!foodDistributionBill.paymentMethod := #CREDIT_CARD
+!foodDistributionBill.status := #VERIFIED
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!new Currency('currencyINR')
+!currencyINR.name := 'Indian Rupee'
+!currencyINR.abbreviation := 'INR'
+
+!new Currency('currencyCAD')
+!currencyCAD.name := 'Canadian Dollar'
+!currencyCAD.abbreviation := 'CAD'
+
+!insert (medicalSuppliesBill, currencyJPY) into BillCurrency
+!insert (temporarySheltersBill, currencyINR) into BillCurrency
+!insert (foodDistributionBill, currencyCAD) into BillCurrency
+
+!insert (emergencyReliefFund, medicalSuppliesBill) into ExpenseContainsBills
+!insert (emergencyReliefFund, temporarySheltersBill) into ExpenseContainsBills
+!insert (emergencyReliefFund, foodDistributionBill) into ExpenseContainsBills
+
+!new Comment('emergencyComment1')
+!emergencyComment1.text := 'Immediate allocation for medical supplies ensured prompt delivery amidst crisis.'
+
+!new Comment('emergencyComment2')
+!emergencyComment2.text := 'Shelter invoices require further verification due to discrepancies in the provided infrastructure.'
+
+!new Comment('emergencyComment3')
+!emergencyComment3.text := 'Implemented rapid credit transactions to facilitate expedited food distribution to affected areas.'
+
+!insert (emergencyReliefFund, emergencyComment1) into ExpenseComment
+!insert (emergencyReliefFund, emergencyComment2) into ExpenseComment
+!insert (emergencyReliefFund, emergencyComment3) into ExpenseComment

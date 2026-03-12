@@ -1,0 +1,146 @@
+!new Club('club5')
+!club5.name := 'Forest Wolves'
+!club5.homeGround := 'Forest Grounds'
+!club5.chairman := 'Oliver Stone'
+
+!new Club('club6')
+!club6.name := 'Desert Foxes'
+!club6.homeGround := 'Desert Arena'
+!club6.chairman := 'Emma Carter'
+
+!new Team('team5')
+!team5.name := 'Wolf Pack'
+!insert (club5, team5) into ClubTeam
+
+!new Team('team6')
+!team6.name := 'Fox Squad'
+!insert (club6, team6) into ClubTeam
+
+!new Competition('cupChampionship')
+!cupChampionship.name := 'Cup Championship'
+!cupChampionship.type := 'Knockout'
+
+!new Match('match3')
+!match3.date := '2023-12-05'
+!match3.homeAway := true
+!insert (cupChampionship, match3) into CompetitionMatch
+!insert (team5, match3) into LocalMatch
+!insert (team6, match3) into VisitorMatch
+
+!new MatchReport('report3')
+!report3.duration := 120
+!report3.scoreVisitor := 2
+!report3.scoreLocal := 4
+!insert (match3, report3) into MatchMatchReport
+
+!new Player('player5')
+!player5.name := 'Lucas Hunt'
+!player5.age := 24
+!player5.bestFoot := #LEFT
+!player5.phoneNumber := '4567890123'
+!insert (team5, player5) into TeamPlayer
+
+!new Player('player6')
+!player6.name := 'Sophie Turner'
+!player6.age := 21
+!player6.bestFoot := #RIGHT
+!player6.phoneNumber := '5678901234'
+!insert (team6, player6) into TeamPlayer
+
+!new Position('position5')
+!position5.positionName := #FORWARD
+!insert (player5, position5) into PlayerPositions
+
+!new Position('position6')
+!position6.positionName := #DEFENDER
+!insert (player6, position6) into PlayerPositions
+
+!new MatchPlayer('matchPlayer5')
+!matchPlayer5.booked := false
+!matchPlayer5.goals := 2
+!matchPlayer5.rating := 9
+!insert (player5, matchPlayer5) into PlayerMatch
+!insert (match3, matchPlayer5) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer6')
+!matchPlayer6.booked := true
+!matchPlayer6.goals := 1
+!matchPlayer6.rating := 7
+!insert (player6, matchPlayer6) into PlayerMatch
+!insert (match3, matchPlayer6) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition5')
+!matchPlayerPosition5.positionName := #FORWARD
+!matchPlayerPosition5.number := 11
+!insert (matchPlayer5, matchPlayerPosition5) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition6')
+!matchPlayerPosition6.positionName := #DEFENDER
+!matchPlayerPosition6.number := 3
+!insert (matchPlayer6, matchPlayerPosition6) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event9')
+!event9.eventType := #GOAL
+!event9.time := 18
+!insert (match3, event9) into MatchMatchEvent
+
+!new MatchEvent('event10')
+!event10.eventType := #GOAL
+!event10.time := 36
+!insert (match3, event10) into MatchMatchEvent
+
+!new MatchEvent('event11')
+!event11.eventType := #GOAL
+!event11.time := 58
+!insert (match3, event11) into MatchMatchEvent
+
+!new MatchEvent('event12')
+!event12.eventType := #GOAL
+!event12.time := 77
+!insert (match3, event12) into MatchMatchEvent
+
+!new MatchEvent('event13')
+!event13.eventType := #GOAL
+!event13.time := 101
+!insert (match3, event13) into MatchMatchEvent
+
+!new MatchEvent('event14')
+!event14.eventType := #GOAL
+!event14.time := 115
+!insert (match3, event14) into MatchMatchEvent
+
+!new TrainingSession('training5')
+!training5.date := '2023-11-15'
+!training5.location := 'Wolf Camp'
+!training5.purpose := 'Endurance Training'
+!insert (team5, training5) into TeamTraining
+
+!new TrainingSession('training6')
+!training6.date := '2023-11-20'
+!training6.location := 'Fox Ground'
+!training6.purpose := 'Speed Drills'
+!insert (team6, training6) into TeamTraining
+
+!new TrainingNotes('trainingNote5')
+!trainingNote5.note := 'Improved stamina levels'
+!trainingNote5.date := '2023-11-15'
+!insert (training5, trainingNote5) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote6')
+!trainingNote6.note := 'Increased agility on the pitch'
+!trainingNote6.date := '2023-11-20'
+!insert (training6, trainingNote6) into TrainingTrainingNotes
+
+!new TrainingObjective('objective5')
+!objective5.areaToImprove := 'Team Coordination'
+!objective5.startDate := '2023-10-01'
+!objective5.endDate := '2023-12-15'
+!objective5.success := true
+!insert (objective5, player5) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective6')
+!objective6.areaToImprove := 'Agility Improvement'
+!objective6.startDate := '2023-10-10'
+!objective6.endDate := '2023-12-20'
+!objective6.success := false
+!insert (objective6, player6) into TrainingObjectivePlayer

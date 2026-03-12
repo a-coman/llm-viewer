@@ -1,0 +1,107 @@
+!new Restaurant('restaurant25')
+!restaurant25.name := 'Astral Appetite'
+
+!new Owner('owner50')
+!owner50.name := 'Nova Strider'
+!owner50.percentageShares := 65
+!insert (restaurant25, owner50) into RestaurantOwner
+
+!new Owner('owner51')
+!owner51.name := 'Stardust Weaver'
+!owner51.percentageShares := 35
+!insert (restaurant25, owner51) into RestaurantOwner
+
+!new Table('table72')
+!table72.number := 72
+!table72.description := 'Galaxy Gazebo'
+!table72.capacity := 10
+
+!new Table('table73')
+!table73.number := 73
+!table73.description := 'Black Hole Banquet'
+!table73.capacity := 22
+
+!new Table('table74')
+!table74.number := 74
+!table74.description := 'Nebula Niche'
+!table74.capacity := 18
+
+!new RegularCustomer('customer26')
+!customer26.name := 'Aurora Beam'
+!customer26.prefferedLanguage := #English
+
+!new Waiter('waiter27')
+!waiter27.name := 'Halley Glide'
+!waiter27.dateOfBirth := Date('1994-10-10')
+!waiter27.phoneNumber := '555-9876'
+!waiter27.spokenLanguage := #German
+
+!new HeadWaiter('headwaiter25')
+!headwaiter25.name := 'Cosmo Drift'
+!headwaiter25.dateOfBirth := Date('1980-12-19')
+!headwaiter25.phoneNumber := '555-2222'
+
+!insert (headwaiter25, waiter27) into HeadWaiterWaiter
+
+!new Individual('reservation47')
+!reservation47.time := Time('18:30')
+!reservation47.date := Date('2025-03-10')
+!reservation47.numberPeople := 4
+!reservation47.name := 'Aurora Beam'
+!reservation47.phoneNumber := '555-4545'
+!reservation47.number := 47
+!reservation47.seating := #Inside
+!reservation47.smoking := #NonSmoking
+!insert (restaurant25, reservation47) into RestaurantReservation
+!insert (reservation47, customer26) into ReservationCustomer
+!insert (reservation47, waiter27) into ReservationWaiter
+!insert (reservation47, table72) into ReservationTable
+
+!new Banquet('reservation48')
+!reservation48.time := Time('18:00')
+!reservation48.date := Date('2025-04-29')
+!reservation48.numberPeople := 36
+!reservation48.name := 'Constellation Conference'
+!reservation48.phoneNumber := '555-6767'
+!reservation48.number := 48
+!reservation48.groupName := 'Star Struck Society'
+!reservation48.paymentMethod := #CreditCard
+!reservation48.busService := false
+!insert (restaurant25, reservation48) into RestaurantReservation
+!insert (reservation48, table73) into ReservationTable
+!insert (reservation48, table74) into ReservationTable
+!insert (reservation48, waiter27) into ReservationWaiter
+
+!new ItemOrder('itemOrder25')
+!itemOrder25.time := Time('19:00')
+!insert (reservation47, itemOrder25) into ReservationItemOrdered
+
+!new MenuItem('menuItem25')
+!menuItem25.description := 'Stellar Steak'
+!menuItem25.prepTime := 30.0
+!menuItem25.classification := #Main
+!insert (itemOrder25, menuItem25) into ItemOrderMenuItem
+
+!new FoodItem('foodItem25')
+!foodItem25.number := 125
+!foodItem25.description := 'Prime Ribeye'
+!foodItem25.purchaseFlag := true
+!foodItem25.unit := #Pound
+!insert (menuItem25, foodItem25) into MenuItemFoodItem
+
+!new Allergen('allergen25')
+!allergen25.type := #Nuts
+!insert (foodItem25, allergen25) into FoodItemAllergen
+
+!new Cook('cook25')
+!cook25.name := 'Meteor Glare'
+!cook25.dateOfBirth := Date('1989-02-02')
+!cook25.phoneNumber := '555-7878'
+!cook25.yearsOfExperience := 6
+
+!new Chef('chef25')
+!chef25.name := 'Quasar Glow'
+!chef25.dateOfBirth := Date('1985-07-07')
+!chef25.phoneNumber := '555-2121'
+!insert (menuItem25, chef25) into MenuItemChef
+!insert (chef25, cook25) into ChefCook

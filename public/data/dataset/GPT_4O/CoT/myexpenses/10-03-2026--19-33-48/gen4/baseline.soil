@@ -1,0 +1,59 @@
+!new Expense('educationalSeminarExpense')
+!educationalSeminarExpense.amount := 1280.00
+!educationalSeminarExpense.startDate := Date('2023-11-10')
+!educationalSeminarExpense.endDate := Date('2023-11-12')
+
+!new Bill('seminarRegistrationBill')
+!seminarRegistrationBill.amount := 800.00
+!seminarRegistrationBill.category := 'Seminar Registration'
+!seminarRegistrationBill.date := Date('2023-10-15')
+!seminarRegistrationBill.paymentMethod := #CREDIT_CARD
+!seminarRegistrationBill.status := #VERIFIED
+
+!new Bill('accommodationBill')
+!accommodationBill.amount := 180.00
+!accommodationBill.category := 'Accommodation'
+!accommodationBill.date := Date('2023-11-09')
+!accommodationBill.paymentMethod := #CREDIT_CARD
+!accommodationBill.status := #VALIDATED
+
+!new Bill('dailyMealsBill')
+!dailyMealsBill.amount := 150.00
+!dailyMealsBill.category := 'Daily Meals'
+!dailyMealsBill.date := Date('2023-11-10')
+!dailyMealsBill.paymentMethod := #CASH
+!dailyMealsBill.status := #VERIFIED
+
+!new Bill('localTransportationBill')
+!localTransportationBill.amount := 150.00
+!localTransportationBill.category := 'Local Transportation'
+!localTransportationBill.date := Date('2023-11-11')
+!localTransportationBill.paymentMethod := #CASH
+!localTransportationBill.status := #PENDING
+
+!new Currency('currencyJPY')
+!currencyJPY.name := 'Japanese Yen'
+!currencyJPY.abbreviation := 'JPY'
+
+!insert (seminarRegistrationBill, currencyJPY) into BillCurrency
+!insert (accommodationBill, currencyJPY) into BillCurrency
+!insert (dailyMealsBill, currencyJPY) into BillCurrency
+!insert (localTransportationBill, currencyJPY) into BillCurrency
+
+!insert (educationalSeminarExpense, seminarRegistrationBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, accommodationBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, dailyMealsBill) into ExpenseContainsBills
+!insert (educationalSeminarExpense, localTransportationBill) into ExpenseContainsBills
+
+!new Comment('seminarRegistrationComment')
+!seminarRegistrationComment.text := 'Registration process was smooth, looking forward to gaining new insights.'
+
+!new Comment('accommodationComment')
+!accommodationComment.text := 'Accommodation was comfortable and conveniently located near the seminar venue.'
+
+!new Comment('localTransportationComment')
+!localTransportationComment.text := 'Local transportation made it easy to explore the city between sessions.'
+
+!insert (educationalSeminarExpense, seminarRegistrationComment) into ExpenseComment
+!insert (educationalSeminarExpense, accommodationComment) into ExpenseComment
+!insert (educationalSeminarExpense, localTransportationComment) into ExpenseComment

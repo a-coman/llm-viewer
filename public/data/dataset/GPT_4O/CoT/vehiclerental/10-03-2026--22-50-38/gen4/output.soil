@@ -1,0 +1,301 @@
+!new RentalOffice('officeMiamiBeach')
+!officeMiamiBeach.name := 'Miami Beach'
+!officeMiamiBeach.number := 404
+!officeMiamiBeach.address := '456 Ocean Dr, Miami, FL 33139'
+
+!new Vehicle('coveredTrailer006')
+!coveredTrailer006.id := 306
+!coveredTrailer006.registrationState := #FL
+!coveredTrailer006.licensePlateNumber := 'FL4523CT'
+!coveredTrailer006.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer006.registrationLastMaintenanceDate := Date('2023-04-18')
+!coveredTrailer006.expirationDate := Date('2024-04-17')
+
+!new Truck('truck007')
+!truck007.id := 307
+!truck007.registrationState := #FL
+!truck007.licensePlateNumber := 'GA9901TR'
+!truck007.vehicleTypeCode := #TRUCK
+!truck007.registrationLastMaintenanceDate := Date('2023-01-20')
+!truck007.expirationDate := Date('2024-01-19')
+!truck007.odometerReading := 5000
+!truck007.gasTankCapacity := 16.8
+!truck007.workingRadio := true
+!truck007.mileage := 12000
+
+!new Company('companyGlobalEventCoordinators')
+!companyGlobalEventCoordinators.name := 'GlobalEvent Coordinators'
+!companyGlobalEventCoordinators.address := '1500 Biscayne Blvd, Miami, FL 33132'
+!companyGlobalEventCoordinators.poorRisk := false
+!companyGlobalEventCoordinators.idNumber := 802345
+
+!new RentalAgreement('rentalAgreement4004')
+!rentalAgreement4004.number := 4004
+!rentalAgreement4004.rentalDate := Date('2024-02-12')
+!rentalAgreement4004.anticipatedDuration := 30
+!rentalAgreement4004.depositPaid := 600.0
+!rentalAgreement4004.quotedDailyRate := 80.0
+!rentalAgreement4004.quotedRatePerMile := 0.25
+
+!insert (officeMiamiBeach, coveredTrailer006) into RentalOfficeVehicle
+!insert (officeMiamiBeach, truck007) into RentalOfficeVehicle
+
+!insert (officeMiamiBeach, rentalAgreement4004) into RentalOfficeRentalAgreementOrigin
+!insert (officeMiamiBeach, rentalAgreement4004) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement4004, coveredTrailer006) into RentalAgreementVehicle
+!insert (rentalAgreement4004, companyGlobalEventCoordinators) into RentalAgreementCustomer
+
+!new RentalOffice('officeDesertShoresRentals')
+!officeDesertShoresRentals.name := 'Desert Shores Rentals'
+!officeDesertShoresRentals.number := 1000
+!officeDesertShoresRentals.address := '1000 Arid Lane, Phoenix, AZ'
+
+!new Truck('truck999')
+!truck999.id := 999
+!truck999.registrationState := #AZ
+!truck999.licensePlateNumber := 'AZ999DESERT'
+!truck999.vehicleTypeCode := #TRUCK
+!truck999.registrationLastMaintenanceDate := Date('2023-10-15')
+!truck999.expirationDate := Date('2024-10-15')
+!truck999.odometerReading := 150000
+!truck999.gasTankCapacity := 80.0
+!truck999.workingRadio := true
+!truck999.mileage := 120000
+
+!new RentalAgreement('rentalAgreement10000')
+!rentalAgreement10000.number := 10000
+!rentalAgreement10000.rentalDate := Date('2023-11-20')
+!rentalAgreement10000.anticipatedDuration := 7
+!rentalAgreement10000.depositPaid := 1500.0
+!rentalAgreement10000.quotedDailyRate := 150.0
+!rentalAgreement10000.quotedRatePerMile := 0.2
+
+!new Company('companyCactusLogisticsInc')
+!companyCactusLogisticsInc.name := 'Cactus Logistics Inc.'
+!companyCactusLogisticsInc.address := '900 Commerce Blvd, Tucson, AZ'
+!companyCactusLogisticsInc.poorRisk := true
+!companyCactusLogisticsInc.idNumber := 888888888
+
+!insert (officeDesertShoresRentals, truck999) into RentalOfficeVehicle
+!insert (officeDesertShoresRentals, rentalAgreement10000) into RentalOfficeRentalAgreementOrigin
+!insert (officeDesertShoresRentals, rentalAgreement10000) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement10000, truck999) into RentalAgreementVehicle
+!insert (rentalAgreement10000, companyCactusLogisticsInc) into RentalAgreementCustomer
+
+!new RentalOffice('officeSanFranciscoBayAreaHub')
+!officeSanFranciscoBayAreaHub.name := 'San Francisco Bay Area Hub'
+!officeSanFranciscoBayAreaHub.number := 404
+!officeSanFranciscoBayAreaHub.address := '101 Market St, San Francisco, CA'
+
+!new Vehicle('coveredTrailer6004')
+!coveredTrailer6004.id := 6004
+!coveredTrailer6004.registrationState := #CA
+!coveredTrailer6004.licensePlateNumber := 'CA1122GH'
+!coveredTrailer6004.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer6004.registrationLastMaintenanceDate := Date('2023-09-05')
+!coveredTrailer6004.expirationDate := Date('2024-09-04')
+
+!new Individual('individualAishaKhan')
+!individualAishaKhan.name := 'Aisha Khan'
+!individualAishaKhan.address := '202 Lombard St, San Francisco, CA'
+!individualAishaKhan.poorRisk := true
+!individualAishaKhan.homePhone := '(415) 555-9988'
+!individualAishaKhan.driverLicenseState := #CA
+!individualAishaKhan.driverLicenseNumber := 55667788
+!individualAishaKhan.driverLicenseExpirationDate := Date('2025-08-15')
+
+!new Company('companyUrbanMoversInc')
+!companyUrbanMoversInc.name := 'Urban Movers Inc.'
+!companyUrbanMoversInc.address := '303 Silicon Valley Blvd, San Jose, CA'
+!companyUrbanMoversInc.poorRisk := false
+!companyUrbanMoversInc.idNumber := 10293847
+
+!new RentalAgreement('rentalAgreement8004')
+!rentalAgreement8004.number := 8004
+!rentalAgreement8004.rentalDate := Date('2023-11-01')
+!rentalAgreement8004.anticipatedDuration := 3
+!rentalAgreement8004.depositPaid := 100.0
+!rentalAgreement8004.quotedDailyRate := 50.0
+!rentalAgreement8004.quotedRatePerMile := 0.30
+
+!new RentalAgreement('rentalAgreement8005')
+!rentalAgreement8005.number := 8005
+!rentalAgreement8005.rentalDate := Date('2023-11-02')
+!rentalAgreement8005.anticipatedDuration := 5
+!rentalAgreement8005.depositPaid := 150.0
+!rentalAgreement8005.quotedDailyRate := 60.0
+!rentalAgreement8005.quotedRatePerMile := 0.35
+
+!insert (officeSanFranciscoBayAreaHub, coveredTrailer6004) into RentalOfficeVehicle
+
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8004) into RentalOfficeRentalAgreementOrigin
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8005) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8004) into RentalOfficeRentalAgreementDrop
+!insert (officeSanFranciscoBayAreaHub, rentalAgreement8005) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement8004, coveredTrailer6004) into RentalAgreementVehicle
+!insert (rentalAgreement8005, coveredTrailer6004) into RentalAgreementVehicle
+
+!insert (rentalAgreement8004, individualAishaKhan) into RentalAgreementCustomer
+!insert (rentalAgreement8005, companyUrbanMoversInc) into RentalAgreementCustomer
+
+!new RentalOffice('officeHarborViewRentals')
+!officeHarborViewRentals.name := 'Harbor View Rentals'
+!officeHarborViewRentals.number := 450
+!officeHarborViewRentals.address := '200 Seaport Blvd, Boston, MA 02210'
+
+!new Truck('truck5070')
+!truck5070.id := 5070
+!truck5070.registrationState := #CA
+!truck5070.licensePlateNumber := 'MA9987'
+!truck5070.vehicleTypeCode := #TRUCK
+!truck5070.registrationLastMaintenanceDate := Date('2023-08-12')
+!truck5070.expirationDate := Date('2024-08-12')
+!truck5070.odometerReading := 60000
+!truck5070.gasTankCapacity := 25.5
+!truck5070.workingRadio := true
+!truck5070.mileage := 11
+
+!new Truck('truck5071')
+!truck5071.id := 5071
+!truck5071.registrationState := #CA
+!truck5071.licensePlateNumber := 'NY2244'
+!truck5071.vehicleTypeCode := #TRUCK
+!truck5071.registrationLastMaintenanceDate := Date('2023-10-05')
+!truck5071.expirationDate := Date('2024-10-05')
+!truck5071.odometerReading := 45000
+!truck5071.gasTankCapacity := 29.0
+!truck5071.workingRadio := true
+!truck5071.mileage := 12
+
+!new Vehicle('coveredTrailer6085')
+!coveredTrailer6085.id := 6085
+!coveredTrailer6085.registrationState := #CA
+!coveredTrailer6085.licensePlateNumber := 'CT6789'
+!coveredTrailer6085.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer6085.registrationLastMaintenanceDate := Date('2023-09-15')
+!coveredTrailer6085.expirationDate := Date('2024-09-15')
+
+!new Individual('individualSophiaMartinez')
+!individualSophiaMartinez.name := 'Sophia Martinez'
+!individualSophiaMartinez.address := '987 Beacon St, Boston, MA 02115'
+!individualSophiaMartinez.poorRisk := false
+!individualSophiaMartinez.homePhone := '617-555-0214'
+!individualSophiaMartinez.driverLicenseState := #CA
+!individualSophiaMartinez.driverLicenseNumber := 11223344
+!individualSophiaMartinez.driverLicenseExpirationDate := Date('2027-02-14')
+
+!new Company('companyGreenTechLogistics')
+!companyGreenTechLogistics.name := 'GreenTech Logistics'
+!companyGreenTechLogistics.address := '345 Innovation Way, Cambridge, MA 02139'
+!companyGreenTechLogistics.poorRisk := true
+!companyGreenTechLogistics.idNumber := 3029
+
+!new RentalAgreement('rentalAgreement11001')
+!rentalAgreement11001.number := 11001
+!rentalAgreement11001.rentalDate := Date('2024-04-10')
+!rentalAgreement11001.anticipatedDuration := 5
+!rentalAgreement11001.depositPaid := 120.0
+!rentalAgreement11001.quotedDailyRate := 58.0
+!rentalAgreement11001.quotedRatePerMile := 0.60
+
+!new RentalAgreement('rentalAgreement12009')
+!rentalAgreement12009.number := 12009
+!rentalAgreement12009.rentalDate := Date('2024-05-20')
+!rentalAgreement12009.anticipatedDuration := 20
+!rentalAgreement12009.depositPaid := 700.0
+!rentalAgreement12009.quotedDailyRate := 30.0
+!rentalAgreement12009.quotedRatePerMile := 0.35
+
+!new RentalAgreement('rentalAgreement12010')
+!rentalAgreement12010.number := 12010
+!rentalAgreement12010.rentalDate := Date('2024-06-01')
+!rentalAgreement12010.anticipatedDuration := 15
+!rentalAgreement12010.depositPaid := 450.0
+!rentalAgreement12010.quotedDailyRate := 25.0
+!rentalAgreement12010.quotedRatePerMile := 0.20
+
+!insert (officeHarborViewRentals, truck5070) into RentalOfficeVehicle
+!insert (officeHarborViewRentals, truck5071) into RentalOfficeVehicle
+!insert (officeHarborViewRentals, coveredTrailer6085) into RentalOfficeVehicle
+
+!insert (officeHarborViewRentals, rentalAgreement11001) into RentalOfficeRentalAgreementOrigin
+!insert (officeHarborViewRentals, rentalAgreement12009) into RentalOfficeRentalAgreementOrigin
+!insert (officeHarborViewRentals, rentalAgreement12010) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeHarborViewRentals, rentalAgreement11001) into RentalOfficeRentalAgreementDrop
+!insert (officeHarborViewRentals, rentalAgreement12009) into RentalOfficeRentalAgreementDrop
+!insert (officeHarborViewRentals, rentalAgreement12010) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement11001, truck5070) into RentalAgreementVehicle
+!insert (rentalAgreement12009, truck5071) into RentalAgreementVehicle
+!insert (rentalAgreement12010, coveredTrailer6085) into RentalAgreementVehicle
+
+!insert (rentalAgreement11001, individualSophiaMartinez) into RentalAgreementCustomer
+!insert (rentalAgreement12009, companyGreenTechLogistics) into RentalAgreementCustomer
+!insert (rentalAgreement12010, companyGreenTechLogistics) into RentalAgreementCustomer
+
+!new RentalOffice('officeHighPlainsStation')
+!officeHighPlainsStation.name := 'High Plains Station'
+!officeHighPlainsStation.number := 404
+!officeHighPlainsStation.address := '525 Summit Way, Climbton, CO 80439'
+
+!new Truck('truck89012')
+!truck89012.id := 89012
+!truck89012.registrationState := #CO
+!truck89012.licensePlateNumber := 'CO-321-RST'
+!truck89012.vehicleTypeCode := #TRUCK
+!truck89012.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck89012.expirationDate := Date('2024-07-15')
+!truck89012.odometerReading := 20000
+!truck89012.gasTankCapacity := 80.0
+!truck89012.workingRadio := true
+!truck89012.mileage := 10
+
+!new Individual('individualAlpineSlider')
+!individualAlpineSlider.name := 'Alpine Slider'
+!individualAlpineSlider.address := '123 Glacier Turn, River Valley, CO 80401'
+!individualAlpineSlider.poorRisk := true
+!individualAlpineSlider.homePhone := '+1-303-555-0987'
+!individualAlpineSlider.driverLicenseState := #CO
+!individualAlpineSlider.driverLicenseNumber := 456789012
+!individualAlpineSlider.driverLicenseExpirationDate := Date('2026-03-15')
+
+!new Company('companyPeakExpeditionsCo')
+!companyPeakExpeditionsCo.name := 'Peak Expeditions Co.'
+!companyPeakExpeditionsCo.address := '789 Winter Dr, Snowcap Loop, UT 84049'
+!companyPeakExpeditionsCo.poorRisk := true
+!companyPeakExpeditionsCo.idNumber := 667788990
+
+!new RentalAgreement('rentalAgreement4007')
+!rentalAgreement4007.number := 4007
+!rentalAgreement4007.rentalDate := Date('2025-12-20')
+!rentalAgreement4007.anticipatedDuration := 5
+!rentalAgreement4007.depositPaid := 400.0
+!rentalAgreement4007.quotedDailyRate := 150.0
+!rentalAgreement4007.quotedRatePerMile := 3.5
+
+!new RentalAgreement('rentalAgreement4008')
+!rentalAgreement4008.number := 4008
+!rentalAgreement4008.rentalDate := Date('2025-07-01')
+!rentalAgreement4008.anticipatedDuration := 90
+!rentalAgreement4008.depositPaid := 10000.0
+!rentalAgreement4008.quotedDailyRate := 60.0
+!rentalAgreement4008.quotedRatePerMile := 2.0
+
+!insert (officeHighPlainsStation, truck89012) into RentalOfficeVehicle
+
+!insert (officeHighPlainsStation, rentalAgreement4007) into RentalOfficeRentalAgreementOrigin
+!insert (officeHighPlainsStation, rentalAgreement4008) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeHighPlainsStation, rentalAgreement4007) into RentalOfficeRentalAgreementDrop
+!insert (officeHighPlainsStation, rentalAgreement4008) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement4007, truck89012) into RentalAgreementVehicle
+!insert (rentalAgreement4008, truck89012) into RentalAgreementVehicle
+
+!insert (rentalAgreement4007, individualAlpineSlider) into RentalAgreementCustomer
+!insert (rentalAgreement4008, companyPeakExpeditionsCo) into RentalAgreementCustomer
+

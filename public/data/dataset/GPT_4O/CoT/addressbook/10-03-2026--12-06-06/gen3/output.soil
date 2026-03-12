@@ -1,0 +1,553 @@
+!new AddressBook('ArtisticNetworkAddressBook')
+
+!new Company('SculptorsGuild')
+!SculptorsGuild.name := 'Sculptors Guild'
+!SculptorsGuild.phone := '+1-212-555-0234'
+!SculptorsGuild.website := 'www.sculptorsguild.org'
+!SculptorsGuild.email := 'contact@sculptorsguild.org'
+!SculptorsGuild.industry := 'Arts and Crafts'
+
+!new Person('MartaRivera')
+!MartaRivera.name := 'Marta Rivera'
+!MartaRivera.phone := '+34-91-123-4567'
+!MartaRivera.website := 'www.martarivera.art'
+!MartaRivera.email := 'marta@rivera.art'
+!MartaRivera.title := 'Renowned Painter'
+
+!new Address('MartaRiveraAddress')
+!MartaRiveraAddress.city := 'Madrid'
+!MartaRiveraAddress.houseNr := '88'
+!MartaRiveraAddress.street := 'Calle de Alcalá'
+!insert (MartaRivera, MartaRiveraAddress) into ContactContainsAddress
+
+!new Company('EastEndGallery')
+!EastEndGallery.name := 'EastEnd Gallery'
+!EastEndGallery.phone := '+49-30-555-0170'
+!EastEndGallery.website := 'www.eastendgallery.de'
+!EastEndGallery.email := 'info@eastendgallery.de'
+!EastEndGallery.industry := 'Art Gallery'
+
+!new Address('EastEndGalleryAddress1')
+!EastEndGalleryAddress1.city := 'Berlin'
+!EastEndGalleryAddress1.houseNr := '44'
+!EastEndGalleryAddress1.street := 'Kurfürstendamm'
+!insert (EastEndGallery, EastEndGalleryAddress1) into ContactContainsAddress
+
+!new Address('EastEndGalleryAddress2')
+!EastEndGalleryAddress2.city := 'Hamburg'
+!EastEndGalleryAddress2.houseNr := '10'
+!EastEndGalleryAddress2.street := 'Kunstallee'
+!insert (EastEndGallery, EastEndGalleryAddress2) into ContactContainsAddress
+
+!new Person('JulienMonet')
+!JulienMonet.name := 'Julien Monet'
+!JulienMonet.phone := '+33-1-555-0130'
+!JulienMonet.website := 'www.julienmonet.eu'
+!JulienMonet.email := 'julien@monetstudio.fr'
+!JulienMonet.title := 'Art Critic'
+
+!new Note('JulienMonetNote1')
+!JulienMonetNote1.author := 'Julien Monet'
+!JulienMonetNote1.time := Date('2023-06-12')
+!JulienMonetNote1.type := #EMAIL
+!JulienMonetNote1.comment := 'Offered critique and insights on the new exhibit.'
+!insert (JulienMonet, JulienMonetNote1) into ContactContainsNote
+
+!new Relationship('EastEndGalleryToMartaSubdivision')
+!EastEndGalleryToMartaSubdivision.type := #SUBDIVISION
+!insert (EastEndGalleryToMartaSubdivision, MartaRivera) into RelationshipToContact
+!insert (EastEndGallery, EastEndGalleryToMartaSubdivision) into ContactToRelationship
+
+!new Relationship('JulienToEastEndCoworker')
+!JulienToEastEndCoworker.type := #COWORKER
+!insert (JulienToEastEndCoworker, EastEndGallery) into RelationshipToContact
+!insert (JulienMonet, JulienToEastEndCoworker) into ContactToRelationship
+
+!new Relationship('SculptorsToJulienEmployee')
+!SculptorsToJulienEmployee.type := #EMPLOYEE
+!insert (SculptorsToJulienEmployee, JulienMonet) into RelationshipToContact
+!insert (SculptorsGuild, SculptorsToJulienEmployee) into ContactToRelationship
+
+!insert (ArtisticNetworkAddressBook, SculptorsGuild) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, MartaRivera) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, EastEndGallery) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, JulienMonet) into AddressBookMadeOfContact
+
+!new AddressBook('ResearchCollaborationAddressBook')
+
+!new Company('GlobalTechUniversity')
+!GlobalTechUniversity.name := 'GlobalTech University'
+!GlobalTechUniversity.phone := '+1-617-555-6789'
+!GlobalTechUniversity.website := 'www.globaltech.edu'
+!GlobalTechUniversity.email := 'info@globaltech.edu'
+!GlobalTechUniversity.industry := 'Education'
+
+!new Address('GlobalTechAddress1')
+!GlobalTechAddress1.city := 'Boston'
+!GlobalTechAddress1.houseNr := '50'
+!GlobalTechAddress1.street := 'College Road'
+!insert (GlobalTechUniversity, GlobalTechAddress1) into ContactContainsAddress
+
+!new Address('GlobalTechAddress2')
+!GlobalTechAddress2.city := 'New York'
+!GlobalTechAddress2.houseNr := '130'
+!GlobalTechAddress2.street := 'Empire Ave'
+!insert (GlobalTechUniversity, GlobalTechAddress2) into ContactContainsAddress
+
+!new Company('EuroScienceInstitute')
+!EuroScienceInstitute.name := 'EuroScience Institute'
+!EuroScienceInstitute.phone := '+33-144-555555'
+!EuroScienceInstitute.website := 'www.euroscience.edu'
+!EuroScienceInstitute.email := 'office@euroscience.edu'
+!EuroScienceInstitute.industry := 'Education'
+
+!new Address('EuroScienceAddress')
+!EuroScienceAddress.city := 'Paris'
+!EuroScienceAddress.houseNr := '77'
+!EuroScienceAddress.street := 'Science Boulevard'
+!insert (EuroScienceInstitute, EuroScienceAddress) into ContactContainsAddress
+
+!new Person('DrJuliaKim')
+!DrJuliaKim.name := 'Dr. Julia Kim'
+!DrJuliaKim.phone := '+1-212-555-0147'
+!DrJuliaKim.email := 'julia.kim@globaltech.edu'
+!DrJuliaKim.title := 'Professor'
+
+!new Address('JuliaKimAddress')
+!JuliaKimAddress.city := 'New York'
+!JuliaKimAddress.houseNr := '100'
+!JuliaKimAddress.street := 'Academic Way'
+!insert (DrJuliaKim, JuliaKimAddress) into ContactContainsAddress
+
+!new Person('DrAhmedElSaid')
+!DrAhmedElSaid.name := 'Dr. Ahmed El Said'
+!DrAhmedElSaid.phone := '+20-2-5555781'
+!DrAhmedElSaid.email := 'ahmed.elsaid@euroscience.edu'
+!DrAhmedElSaid.title := 'Research Fellow'
+
+!new Address('AhmedElSaidAddress')
+!AhmedElSaidAddress.city := 'Cairo'
+!AhmedElSaidAddress.houseNr := '200'
+!AhmedElSaidAddress.street := 'Nile Street'
+!insert (DrAhmedElSaid, AhmedElSaidAddress) into ContactContainsAddress
+
+!new Note('UniversityANote1')
+!UniversityANote1.author := 'Dean Richard G.'
+!UniversityANote1.time := Date('2023-09-15')
+!UniversityANote1.type := #MEETING
+!UniversityANote1.comment := 'Annual collaboration review meeting scheduled.'
+!insert (GlobalTechUniversity, UniversityANote1) into ContactContainsNote
+
+!new Note('ResearcherCNote1')
+!ResearcherCNote1.author := 'Prof. Lisa Wong'
+!ResearcherCNote1.time := Date('2023-08-20')
+!ResearcherCNote1.type := #EMAIL
+!ResearcherCNote1.comment := 'Follow-up on the joint paper submission highlights.'
+!insert (DrJuliaKim, ResearcherCNote1) into ContactContainsNote
+
+!new Relationship('GlobalTechToEuroScienceCoworker')
+!GlobalTechToEuroScienceCoworker.type := #COWORKER
+!insert (GlobalTechToEuroScienceCoworker, EuroScienceInstitute) into RelationshipToContact
+!insert (GlobalTechUniversity, GlobalTechToEuroScienceCoworker) into ContactToRelationship
+
+!new Relationship('GlobalTechToJuliaEmployee')
+!GlobalTechToJuliaEmployee.type := #EMPLOYEE
+!insert (GlobalTechToJuliaEmployee, DrJuliaKim) into RelationshipToContact
+!insert (GlobalTechUniversity, GlobalTechToJuliaEmployee) into ContactToRelationship
+
+!new Relationship('EuroScienceToAhmedBoss')
+!EuroScienceToAhmedBoss.type := #BOSS
+!insert (EuroScienceToAhmedBoss, DrAhmedElSaid) into RelationshipToContact
+!insert (EuroScienceInstitute, EuroScienceToAhmedBoss) into ContactToRelationship
+
+!new Relationship('JuliaToGlobalTechEmployee')
+!JuliaToGlobalTechEmployee.type := #EMPLOYEE
+!insert (JuliaToGlobalTechEmployee, GlobalTechUniversity) into RelationshipToContact
+!insert (DrJuliaKim, JuliaToGlobalTechEmployee) into ContactToRelationship
+
+!new Relationship('JuliaToEuroScienceCoworker')
+!JuliaToEuroScienceCoworker.type := #COWORKER
+!insert (JuliaToEuroScienceCoworker, EuroScienceInstitute) into RelationshipToContact
+!insert (DrJuliaKim, JuliaToEuroScienceCoworker) into ContactToRelationship
+
+!insert (ResearchCollaborationAddressBook, GlobalTechUniversity) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, EuroScienceInstitute) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, DrJuliaKim) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, DrAhmedElSaid) into AddressBookMadeOfContact
+
+!new AddressBook('IntercontinentalContactsDirectory')
+
+!new Person('PriyaNair')
+!PriyaNair.name := 'Priya Nair'
+!PriyaNair.phone := '+91-98123-45678'
+!PriyaNair.website := 'www.priyanair.in'
+!PriyaNair.email := 'priya.nair@consultant.in'
+!PriyaNair.title := 'Business Analyst'
+
+!new Address('PriyaNairAddress')
+!PriyaNairAddress.city := 'Mumbai'
+!PriyaNairAddress.houseNr := '23D'
+!PriyaNairAddress.street := 'Laxmi Nagar'
+!insert (PriyaNair, PriyaNairAddress) into ContactContainsAddress
+
+!new Note('PriyaNairNote1')
+!PriyaNairNote1.author := 'Priya Nair'
+!PriyaNairNote1.time := Date('2023-01-05')
+!PriyaNairNote1.type := #CALL
+!PriyaNairNote1.comment := 'Initial client requirement gathering for project "Asha".'
+!insert (PriyaNair, PriyaNairNote1) into ContactContainsNote
+
+!new Company('PacificMineralExploration')
+!PacificMineralExploration.name := 'Pacific Mineral Exploration'
+!PacificMineralExploration.phone := '+61-2-9999-5555'
+!PacificMineralExploration.website := 'www.pacificminerals.com.au'
+!PacificMineralExploration.email := 'info@pacificminerals.com.au'
+!PacificMineralExploration.industry := 'Mining'
+
+!new Address('PacificMineralAddress1')
+!PacificMineralAddress1.city := 'Sydney'
+!PacificMineralAddress1.houseNr := '5'
+!PacificMineralAddress1.street := 'George Street'
+!insert (PacificMineralExploration, PacificMineralAddress1) into ContactContainsAddress
+
+!new Address('PacificMineralAddress2')
+!PacificMineralAddress2.city := 'Perth'
+!PacificMineralAddress2.houseNr := '101'
+!PacificMineralAddress2.street := 'St Georges Terrace'
+!insert (PacificMineralExploration, PacificMineralAddress2) into ContactContainsAddress
+
+!new Note('PacificMineralNote1')
+!PacificMineralNote1.author := 'Li Wei'
+!PacificMineralNote1.time := Date('2023-03-15')
+!PacificMineralNote1.type := #MEETING
+!PacificMineralNote1.comment := 'Annual environmental compliance review meeting.'
+!insert (PacificMineralExploration, PacificMineralNote1) into ContactContainsNote
+
+!new Person('JohanFredriksson')
+!JohanFredriksson.name := 'Johan Fredriksson'
+!JohanFredriksson.phone := '+46-73-400-1112'
+!JohanFredriksson.website := 'www.fredriksolconsulting.se'
+!JohanFredriksson.email := 'johan.fredriksson@intermediate.com'
+!JohanFredriksson.title := 'Financial Advisor'
+
+!new Address('JohanFredrikssonAddress')
+!JohanFredrikssonAddress.city := 'Stockholm'
+!JohanFredrikssonAddress.houseNr := '67'
+!JohanFredrikssonAddress.street := 'Östermalmstorg'
+!insert (JohanFredriksson, JohanFredrikssonAddress) into ContactContainsAddress
+
+!new Note('JohanFredrikssonNote1')
+!JohanFredrikssonNote1.author := 'Johan Fredriksson'
+!JohanFredrikssonNote1.time := Date('2023-09-05')
+!JohanFredrikssonNote1.type := #EMAIL
+!JohanFredrikssonNote1.comment := 'Recommendations for optimizing investment strategies for the next fiscal year.'
+!insert (JohanFredriksson, JohanFredrikssonNote1) into ContactContainsNote
+
+!new Person('MeiLing')
+!MeiLing.name := 'Mei Ling'
+!MeiLing.phone := '+86-10-6655-4422'
+!MeiLing.website := 'www.meilingart.com.cn'
+!MeiLing.email := 'mei.ling@artisticvision.cn'
+!MeiLing.title := 'Creative Director'
+
+!new Address('MeiLingAddress')
+!MeiLingAddress.city := 'Beijing'
+!MeiLingAddress.houseNr := '3-5'
+!MeiLingAddress.street := 'Wangfujing'
+!insert (MeiLing, MeiLingAddress) into ContactContainsAddress
+
+!new Note('MeiLingNote1')
+!MeiLingNote1.author := 'Mei Ling'
+!MeiLingNote1.time := Date('2023-06-20')
+!MeiLingNote1.type := #MEETING
+!MeiLingNote1.comment := 'Brainstorming session for the upcoming digital art exhibition.'
+!insert (MeiLing, MeiLingNote1) into ContactContainsNote
+
+!new Relationship('PriyaToJohanCoworker')
+!PriyaToJohanCoworker.type := #COWORKER
+!insert (PriyaToJohanCoworker, JohanFredriksson) into RelationshipToContact
+!insert (PriyaNair, PriyaToJohanCoworker) into ContactToRelationship
+
+!new Relationship('PriyaToMeiBoss')
+!PriyaToMeiBoss.type := #BOSS
+!insert (PriyaToMeiBoss, MeiLing) into RelationshipToContact
+!insert (PriyaNair, PriyaToMeiBoss) into ContactToRelationship
+
+!new Relationship('JohanToPriyaCoworker')
+!JohanToPriyaCoworker.type := #COWORKER
+!insert (JohanToPriyaCoworker, PriyaNair) into RelationshipToContact
+!insert (JohanFredriksson, JohanToPriyaCoworker) into ContactToRelationship
+
+!new Relationship('JohanToPacificSubdivision')
+!JohanToPacificSubdivision.type := #SUBDIVISION
+!insert (JohanToPacificSubdivision, PacificMineralExploration) into RelationshipToContact
+!insert (JohanFredriksson, JohanToPacificSubdivision) into ContactToRelationship
+
+!new Relationship('MeiToPriyaEmployee')
+!MeiToPriyaEmployee.type := #EMPLOYEE
+!insert (MeiToPriyaEmployee, PriyaNair) into RelationshipToContact
+!insert (MeiLing, MeiToPriyaEmployee) into ContactToRelationship
+
+!insert (IntercontinentalContactsDirectory, PriyaNair) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, PacificMineralExploration) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, JohanFredriksson) into AddressBookMadeOfContact
+!insert (IntercontinentalContactsDirectory, MeiLing) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalLegalNetworkDirectory')
+
+!new Company('MeyerAndChang')
+!MeyerAndChang.name := 'Meyer & Chang Legal Advisors'
+!MeyerAndChang.phone := '+61-2-90348888'
+!MeyerAndChang.website := 'www.meyerchanglaw.au'
+!MeyerAndChang.email := 'contact@meyerchanglaw.au'
+!MeyerAndChang.industry := 'Legal Services'
+
+!new Address('MeyerAndChangAddress')
+!MeyerAndChangAddress.city := 'Sydney'
+!MeyerAndChangAddress.houseNr := '23'
+!MeyerAndChangAddress.street := 'Barrister Lane'
+!insert (MeyerAndChang, MeyerAndChangAddress) into ContactContainsAddress
+
+!new Note('MeyerAndChangNote1')
+!MeyerAndChangNote1.author := 'Justine Meyer'
+!MeyerAndChangNote1.time := Date('2023-07-02T09:00:00')
+!MeyerAndChangNote1.type := #MEETING
+!MeyerAndChangNote1.comment := 'Discussed merger with Lin & Partners.'
+!insert (MeyerAndChang, MeyerAndChangNote1) into ContactContainsNote
+
+!new Company('LinAndPartners')
+!LinAndPartners.name := 'Lin & Partners'
+!LinAndPartners.phone := '+852-25387890'
+!LinAndPartners.website := 'www.linpartners.hk'
+!LinAndPartners.email := 'contact@linpartners.hk'
+!LinAndPartners.industry := 'Corporate Advisory'
+
+!new Address('LinAndPartnersAddress')
+!LinAndPartnersAddress.city := 'Hong Kong'
+!LinAndPartnersAddress.houseNr := '88'
+!LinAndPartnersAddress.street := 'Financial Plaza'
+!insert (LinAndPartners, LinAndPartnersAddress) into ContactContainsAddress
+
+!new Note('LinAndPartnersNote1')
+!LinAndPartnersNote1.author := 'Zheng Lin'
+!LinAndPartnersNote1.time := Date('2023-08-12T10:30:00')
+!LinAndPartnersNote1.type := #EMAIL
+!LinAndPartnersNote1.comment := 'Strategic partnership proposal with Meyer & Chang.'
+!insert (LinAndPartners, LinAndPartnersNote1) into ContactContainsNote
+
+!new Person('ProfRaphaelTaylor')
+!ProfRaphaelTaylor.name := 'Prof. Raphael Taylor'
+!ProfRaphaelTaylor.phone := '+44-20-78594567'
+!ProfRaphaelTaylor.website := 'www.taylorlegalresearch.org'
+!ProfRaphaelTaylor.email := 'r.taylor@edu.ac.uk'
+!ProfRaphaelTaylor.title := 'Head of International Law Division'
+
+!new Address('RaphaelTaylorAddress')
+!RaphaelTaylorAddress.city := 'London'
+!RaphaelTaylorAddress.houseNr := '15'
+!RaphaelTaylorAddress.street := 'Legal Research Avenue'
+!insert (ProfRaphaelTaylor, RaphaelTaylorAddress) into ContactContainsAddress
+
+!new Note('RaphaelTaylorNote1')
+!RaphaelTaylorNote1.author := 'Prof. Raphael Taylor'
+!RaphaelTaylorNote1.time := Date('2023-06-20T14:00:00')
+!RaphaelTaylorNote1.type := #MEETING
+!RaphaelTaylorNote1.comment := 'Attended international law convention in Geneva.'
+!insert (ProfRaphaelTaylor, RaphaelTaylorNote1) into ContactContainsNote
+
+!new Note('RaphaelTaylorNote2')
+!RaphaelTaylorNote2.author := 'Prof. Raphael Taylor'
+!RaphaelTaylorNote2.time := Date('2023-05-19T11:45:00')
+!RaphaelTaylorNote2.type := #CALL
+!RaphaelTaylorNote2.comment := 'Conference call on regulatory compliance with EU partners.'
+!insert (ProfRaphaelTaylor, RaphaelTaylorNote2) into ContactContainsNote
+
+!new Person('AlexanderDavis')
+!AlexanderDavis.name := 'Alexander Davis'
+!AlexanderDavis.phone := '+1-212-5550987'
+!AlexanderDavis.website := 'www.davislegaladvisor.com'
+!AlexanderDavis.email := 'alex.davis@law.com'
+!AlexanderDavis.title := 'Senior Corporate Counsel'
+
+!new Address('AlexanderDavisAddress')
+!AlexanderDavisAddress.city := 'New York'
+!AlexanderDavisAddress.houseNr := '101'
+!AlexanderDavisAddress.street := 'Madison Avenue'
+!insert (AlexanderDavis, AlexanderDavisAddress) into ContactContainsAddress
+
+!new Note('AlexanderDavisNote1')
+!AlexanderDavisNote1.author := 'Alexander Davis'
+!AlexanderDavisNote1.time := Date('2023-07-15T16:30:00')
+!AlexanderDavisNote1.type := #MEETING
+!AlexanderDavisNote1.comment := 'New York office quarterly review.'
+!insert (AlexanderDavis, AlexanderDavisNote1) into ContactContainsNote
+
+!new Relationship('MeyerToLinCoworker')
+!MeyerToLinCoworker.type := #COWORKER
+!insert (MeyerToLinCoworker, LinAndPartners) into RelationshipToContact
+!insert (MeyerAndChang, MeyerToLinCoworker) into ContactToRelationship
+
+!new Relationship('MeyerToRaphaelSubdivision')
+!MeyerToRaphaelSubdivision.type := #SUBDIVISION
+!insert (MeyerToRaphaelSubdivision, ProfRaphaelTaylor) into RelationshipToContact
+!insert (MeyerAndChang, MeyerToRaphaelSubdivision) into ContactToRelationship
+
+!new Relationship('LinToMeyerCoworker')
+!LinToMeyerCoworker.type := #COWORKER
+!insert (LinToMeyerCoworker, MeyerAndChang) into RelationshipToContact
+!insert (LinAndPartners, LinToMeyerCoworker) into ContactToRelationship
+
+!new Relationship('LinToRaphaelBoss')
+!LinToRaphaelBoss.type := #BOSS
+!insert (LinToRaphaelBoss, ProfRaphaelTaylor) into RelationshipToContact
+!insert (LinAndPartners, LinToRaphaelBoss) into ContactToRelationship
+
+!new Relationship('RaphaelToMeyerSubdivision')
+!RaphaelToMeyerSubdivision.type := #SUBDIVISION
+!insert (RaphaelToMeyerSubdivision, MeyerAndChang) into RelationshipToContact
+!insert (ProfRaphaelTaylor, RaphaelToMeyerSubdivision) into ContactToRelationship
+
+!new Relationship('RaphaelToLinEmployee')
+!RaphaelToLinEmployee.type := #EMPLOYEE
+!insert (RaphaelToLinEmployee, LinAndPartners) into RelationshipToContact
+!insert (ProfRaphaelTaylor, RaphaelToLinEmployee) into ContactToRelationship
+
+!new Relationship('AlexToLinCoworker')
+!AlexToLinCoworker.type := #COWORKER
+!insert (AlexToLinCoworker, LinAndPartners) into RelationshipToContact
+!insert (AlexanderDavis, AlexToLinCoworker) into ContactToRelationship
+
+!new Relationship('AlexToRaphaelSubdivision')
+!AlexToRaphaelSubdivision.type := #SUBDIVISION
+!insert (AlexToRaphaelSubdivision, ProfRaphaelTaylor) into RelationshipToContact
+!insert (AlexanderDavis, AlexToRaphaelSubdivision) into ContactToRelationship
+
+!insert (GlobalLegalNetworkDirectory, MeyerAndChang) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, LinAndPartners) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, ProfRaphaelTaylor) into AddressBookMadeOfContact
+!insert (GlobalLegalNetworkDirectory, AlexanderDavis) into AddressBookMadeOfContact
+
+!new AddressBook('CulturalExchangeHub')
+
+!new Person('SarahLiu')
+!SarahLiu.name := 'Sarah Liu'
+!SarahLiu.phone := '+86 10 6677 8899'
+!SarahLiu.website := 'www.sarahliuart.com'
+!SarahLiu.email := 'sarah.liu@artspaces.cn'
+!SarahLiu.title := 'Curator'
+
+!new Address('SarahLiuAddress')
+!SarahLiuAddress.city := 'Beijing'
+!SarahLiuAddress.street := 'Art District'
+!SarahLiuAddress.houseNr := '72'
+!insert (SarahLiu, SarahLiuAddress) into ContactContainsAddress
+
+!new Note('SarahLiuNote1')
+!SarahLiuNote1.author := 'Sarah Liu'
+!SarahLiuNote1.time := Date('2023-09-12')
+!SarahLiuNote1.type := #MEETING
+!SarahLiuNote1.comment := 'Visited the European Art & Cultural Expo to explore potential collaborations.'
+!insert (SarahLiu, SarahLiuNote1) into ContactContainsNote
+
+!new Note('SarahLiuNote2')
+!SarahLiuNote2.author := 'Sarah Liu'
+!SarahLiuNote2.time := Date('2023-09-20')
+!SarahLiuNote2.type := #EMAIL
+!SarahLiuNote2.comment := 'Discussed arrangements for the contemporary art exhibit with international partners.'
+!insert (SarahLiu, SarahLiuNote2) into ContactContainsNote
+
+!new Person('CarlosRovira')
+!CarlosRovira.name := 'Carlos Rovira'
+!CarlosRovira.phone := '+54 11 4966 7722'
+!CarlosRovira.website := 'www.carlosrovira.com'
+!CarlosRovira.email := 'carlosrovira@aol.com'
+!CarlosRovira.title := 'Cultural Attaché'
+
+!new Address('CarlosRoviraAddress')
+!CarlosRoviraAddress.city := 'Buenos Aires'
+!CarlosRoviraAddress.street := 'Libertador Avenue'
+!CarlosRoviraAddress.houseNr := '999'
+!insert (CarlosRovira, CarlosRoviraAddress) into ContactContainsAddress
+
+!new Note('CarlosRoviraNote1')
+!CarlosRoviraNote1.author := 'Carlos Rovira'
+!CarlosRoviraNote1.time := Date('2023-10-05')
+!CarlosRoviraNote1.type := #CALL
+!CarlosRoviraNote1.comment := 'Phone call with local artists about the upcoming cultural exchange program.'
+!insert (CarlosRovira, CarlosRoviraNote1) into ContactContainsNote
+
+!new Company('GlobalArtExchange')
+!GlobalArtExchange.name := 'Global Art Exchange'
+!GlobalArtExchange.phone := '+44 20 3004 5678'
+!GlobalArtExchange.website := 'www.globalartexchange.org'
+!GlobalArtExchange.email := 'admin@globalartexchange.org'
+!GlobalArtExchange.industry := 'Arts and Culture'
+
+!new Address('GlobalArtExchangeAddress')
+!GlobalArtExchangeAddress.city := 'London'
+!GlobalArtExchangeAddress.street := 'Culture Lane'
+!GlobalArtExchangeAddress.houseNr := '85'
+!insert (GlobalArtExchange, GlobalArtExchangeAddress) into ContactContainsAddress
+
+!new Note('GlobalArtExchangeNote1')
+!GlobalArtExchangeNote1.author := 'Global Art Exchange'
+!GlobalArtExchangeNote1.time := Date('2023-10-12')
+!GlobalArtExchangeNote1.type := #MEETING
+!GlobalArtExchangeNote1.comment := 'Strategic planning meeting for next year\'s international cultural festival.'
+!insert (GlobalArtExchange, GlobalArtExchangeNote1) into ContactContainsNote
+
+!new Company('CulturalHorizons')
+!CulturalHorizons.name := 'Cultural Horizons'
+!CulturalHorizons.phone := '+81 3 1234 7890'
+!CulturalHorizons.website := 'www.culturalhorizons.jp'
+!CulturalHorizons.email := 'info@culturalhorizons.jp'
+!CulturalHorizons.industry := 'Art and Heritage'
+
+!new Address('CulturalHorizonsAddress')
+!CulturalHorizonsAddress.city := 'Tokyo'
+!CulturalHorizonsAddress.street := 'Artisans Lane'
+!CulturalHorizonsAddress.houseNr := '58'
+!insert (CulturalHorizons, CulturalHorizonsAddress) into ContactContainsAddress
+
+!new Note('CulturalHorizonsNote1')
+!CulturalHorizonsNote1.author := 'Cultural Horizons'
+!CulturalHorizonsNote1.time := Date('2023-10-20')
+!CulturalHorizonsNote1.type := #EMAIL
+!CulturalHorizonsNote1.comment := 'Coordinated the preparation of exhibits for the Global Art Exchange partnership.'
+!insert (CulturalHorizons, CulturalHorizonsNote1) into ContactContainsNote
+
+!new Relationship('SarahToGlobalArtEmployee')
+!SarahToGlobalArtEmployee.type := #EMPLOYEE
+!insert (SarahToGlobalArtEmployee, GlobalArtExchange) into RelationshipToContact
+!insert (SarahLiu, SarahToGlobalArtEmployee) into ContactToRelationship
+
+!new Relationship('CarlosToGlobalArtCoworker')
+!CarlosToGlobalArtCoworker.type := #COWORKER
+!insert (CarlosToGlobalArtCoworker, GlobalArtExchange) into RelationshipToContact
+!insert (CarlosRovira, CarlosToGlobalArtCoworker) into ContactToRelationship
+
+!new Relationship('GlobalArtToCulturalSubdivision')
+!GlobalArtToCulturalSubdivision.type := #SUBDIVISION
+!insert (GlobalArtToCulturalSubdivision, CulturalHorizons) into RelationshipToContact
+!insert (GlobalArtExchange, GlobalArtToCulturalSubdivision) into ContactToRelationship
+
+!new Relationship('GlobalArtToSarahBoss')
+!GlobalArtToSarahBoss.type := #BOSS
+!insert (GlobalArtToSarahBoss, SarahLiu) into RelationshipToContact
+!insert (GlobalArtExchange, GlobalArtToSarahBoss) into ContactToRelationship
+
+!new Relationship('CulturalToGlobalArtSubdivision')
+!CulturalToGlobalArtSubdivision.type := #SUBDIVISION
+!insert (CulturalToGlobalArtSubdivision, GlobalArtExchange) into RelationshipToContact
+!insert (CulturalHorizons, CulturalToGlobalArtSubdivision) into ContactToRelationship
+
+!new Relationship('CulturalToCarlosBoss')
+!CulturalToCarlosBoss.type := #BOSS
+!insert (CulturalToCarlosBoss, CarlosRovira) into RelationshipToContact
+!insert (CulturalHorizons, CulturalToCarlosBoss) into ContactToRelationship
+
+!insert (CulturalExchangeHub, SarahLiu) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, CarlosRovira) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, GlobalArtExchange) into AddressBookMadeOfContact
+!insert (CulturalExchangeHub, CulturalHorizons) into AddressBookMadeOfContact
+

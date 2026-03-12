@@ -1,0 +1,138 @@
+!new Club('clubY')
+!clubY.name := 'Andes Rangers FC'
+!clubY.homeGround := 'Summit Park, Medellín'
+!clubY.chairman := 'Camilo Lopez'
+
+!new Club('clubZ')
+!clubZ.name := 'Pampas Comets FC'
+!clubZ.homeGround := 'Cosmic Field, Buenos Aires'
+!clubZ.chairman := 'Lucia Mendoza'
+
+!new Team('teamY')
+!teamY.name := 'Andes Junior Rangers'
+
+!new Team('teamZ')
+!teamZ.name := 'Pampas Starlets'
+
+!insert (clubY, teamY) into ClubTeam
+!insert (clubZ, teamZ) into ClubTeam
+
+!new Player('player27')
+!player27.name := 'Roberto Gomez'
+!player27.age := 20
+!player27.bestFoot := #LEFT
+!player27.phoneNumber := '+57 312 345 9876'
+
+!new Position('position66')
+!position66.positionName := #DEFENDER
+
+!new Position('position67')
+!position67.positionName := #FORWARD
+
+!insert (player27, position66) into PlayerPositions
+!insert (player27, position67) into PlayerPositions
+
+!new Player('player28')
+!player28.name := 'Ana Villanueva'
+!player28.age := 23
+!player28.bestFoot := #RIGHT
+!player28.phoneNumber := '+54 123 456 7890'
+
+!new Position('position68')
+!position68.positionName := #GOALKEEPER
+
+!insert (player28, position68) into PlayerPositions
+
+!new Player('player29')
+!player29.name := 'Isabel Marquez'
+!player29.age := 18
+!player29.bestFoot := #BOTH
+!player29.phoneNumber := '+57 321 654 0987'
+
+!new Position('position69')
+!position69.positionName := #MIDFIELDER
+
+!insert (player29, position69) into PlayerPositions
+
+!insert (teamY, player27) into TeamPlayer
+!insert (teamZ, player28) into TeamPlayer
+!insert (teamY, player29) into TeamPlayer
+
+!new Match('match13')
+!match13.date := '5th December 2023'
+!match13.homeAway := false
+
+!insert (teamY, match13) into VisitorMatch
+!insert (teamZ, match13) into LocalMatch
+
+!new Competition('competition11')
+!competition11.name := 'Annual Summit Tournament'
+!competition11.type := 'Tournament'
+
+!insert (competition11, match13) into CompetitionMatch
+
+!new MatchReport('matchReport13')
+!matchReport13.duration := 120
+!matchReport13.scoreVisitor := 1
+!matchReport13.scoreLocal := 2
+
+!insert (match13, matchReport13) into MatchMatchReport
+
+!new MatchEvent('matchEvent37')
+!matchEvent37.eventType := #FOUL
+!matchEvent37.time := 43
+
+!new MatchEvent('matchEvent38')
+!matchEvent38.eventType := #GOAL
+!matchEvent38.time := 77
+
+!new MatchEvent('matchEvent39')
+!matchEvent39.eventType := #GOAL
+!matchEvent39.time := 115
+
+!insert (match13, matchEvent37) into MatchMatchEvent
+!insert (match13, matchEvent38) into MatchMatchEvent
+!insert (match13, matchEvent39) into MatchMatchEvent
+
+!new MatchNote('matchNote10')
+!matchNote10.note := 'A high-altitude showdown with logistical errors overshadowing young talent exhibition, reflecting the need for refined competition criteria.'
+!matchNote10.date := '6th December 2023'
+
+!insert (match13, matchNote10) into MatchMatchNote
+
+!new TrainingSession('trainingSession21')
+!trainingSession21.date := '7th December 2023'
+!trainingSession21.location := 'Summit Park Training Ground'
+!trainingSession21.purpose := 'Recovery session focused on stamina improvement after extended match exertion.'
+
+!insert (teamY, trainingSession21) into TeamTraining
+
+!new TrainingNotes('trainingNote21')
+!trainingNote21.note := 'Notably fewer absences compared to usual, suggesting improved player management post-event.'
+!trainingNote21.date := '7th December 2023'
+
+!insert (trainingSession21, trainingNote21) into TrainingTrainingNotes
+
+!new MatchPlayer('matchPlayer23')
+!matchPlayer23.booked := true
+!matchPlayer23.goals := 1
+!matchPlayer23.rating := 7
+
+!new MatchPlayer('matchPlayer24')
+!matchPlayer24.booked := false
+!matchPlayer24.goals := 0
+!matchPlayer24.rating := 8
+
+!new MatchPlayer('matchPlayer25')
+!matchPlayer25.booked := false
+!matchPlayer25.goals := 1
+!matchPlayer25.rating := 9
+
+!insert (player27, matchPlayer23) into PlayerMatch
+!insert (player28, matchPlayer24) into PlayerMatch
+!insert (player29, matchPlayer25) into PlayerMatch
+
+!insert (match13, matchPlayer23) into MatchMatchPlayer
+!insert (match13, matchPlayer24) into MatchMatchPlayer
+!insert (match13, matchPlayer25) into MatchMatchPlayer
+

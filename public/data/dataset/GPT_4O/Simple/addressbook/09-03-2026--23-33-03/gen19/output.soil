@@ -1,0 +1,66 @@
+!new AddressBook('addressBook19')
+
+!new Company('company19')
+!company19.name := 'FinTech Innovations'
+!company19.phone := '707-404-2020'
+!company19.website := 'www.fintechinnovations.com'
+!company19.email := 'info@fintechinnovations.com'
+!company19.industry := 'Financial Technology'
+
+!new Person('person34')
+!person34.name := 'Olivia Patel'
+!person34.phone := '313-212-3434'
+!person34.website := 'www.oliviapatelconsulting.com'
+!person34.email := 'olivia.patel@fintechinnovations.com'
+!person34.title := 'Senior Financial Analyst'
+
+!new Person('person35')
+!person35.name := 'Raj Mehta'
+!person35.phone := '424-525-6262'
+!person35.website := 'www.rajmehtafinance.com'
+!person35.email := 'raj.mehta@financeexperts.org'
+!person35.title := 'Treasury Consultant'
+
+!new Note('note34')
+!note34.author := 'Olivia Patel'
+!note34.time := Date('2025-01-15')
+!note34.type := #EMAIL
+!note34.comment := 'Prepared the quarterly financial report.'
+
+!new Note('note35')
+!note35.author := 'Raj Mehta'
+!note35.time := Date('2025-01-18')
+!note35.type := #CALL
+!note35.comment := 'Scheduled a call to discuss investment strategies.'
+
+!new Address('address35')
+!address35.city := 'Finance City'
+!address35.houseNr := '789B'
+!address35.street := 'Wealth Street'
+
+!new Address('address36')
+!address36.city := 'Banking Borough'
+!address36.houseNr := '64H'
+!address36.street := 'Capital Boulevard'
+
+!new Relationship('relationship36')
+!relationship36.type := #EMPLOYEE
+
+!new Relationship('relationship37')
+!relationship37.type := #SUBDIVISION
+
+!insert (addressBook19, company19) into AddressBookMadeOfContact
+!insert (addressBook19, person34) into AddressBookMadeOfContact
+!insert (addressBook19, person35) into AddressBookMadeOfContact
+
+!insert (person34, note34) into ContactContainsNote
+!insert (person35, note35) into ContactContainsNote
+
+!insert (company19, relationship37) into ContactToRelationship
+!insert (relationship37, person34) into RelationshipToContact
+
+!insert (person34, relationship36) into ContactToRelationship
+!insert (relationship36, person35) into RelationshipToContact
+
+!insert (company19, address35) into ContactContainsAddress
+!insert (person35, address36) into ContactContainsAddress

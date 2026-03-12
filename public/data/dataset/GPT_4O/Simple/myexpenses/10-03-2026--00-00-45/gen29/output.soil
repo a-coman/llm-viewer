@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency29')
+!currency29.name := 'Swiss Franc'
+!currency29.abbreviation := 'CHF'
+
+-- Creating instances of Bills
+!new Bill('bill73')
+!bill73.amount := 1500.00
+!bill73.category := 'Healthcare Plans'
+!bill73.date := Date('2023-09-05')
+!bill73.paymentMethod := #CREDIT_CARD
+!bill73.status := #VERIFIED
+!insert (bill73, currency29) into BillCurrency
+
+!new Bill('bill74')
+!bill74.amount := 1200.00
+!bill74.category := 'Fitness Programs'
+!bill74.date := Date('2023-09-07')
+!bill74.paymentMethod := #CASH
+!bill74.status := #REFUNDED
+!insert (bill74, currency29) into BillCurrency
+
+!new Bill('bill75')
+!bill75.amount := 800.00
+!bill75.category := 'Nutrition Workshops'
+!bill75.date := Date('2023-09-10')
+!bill75.paymentMethod := #CHECK
+!bill75.status := #VALIDATED
+!insert (bill75, currency29) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment32')
+!comment32.text := 'Corporate wellness and employee health initiatives expenses.'
+
+-- Creating instance of Expense
+!new Expense('expense29')
+!expense29.amount := 3500.00
+!expense29.startDate := Date('2023-09-01')
+!expense29.endDate := Date('2023-09-15')
+!insert (expense29, bill73) into ExpenseContainsBills
+!insert (expense29, bill74) into ExpenseContainsBills
+!insert (expense29, bill75) into ExpenseContainsBills
+!insert (expense29, comment32) into ExpenseComment

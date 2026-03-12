@@ -1,0 +1,67 @@
+!new AddressBook('StartupCommunityAddressBook')
+
+!new Company('TechHub')
+!TechHub.name := 'Tech Hub'
+!TechHub.phone := '+1-303-123-4567'
+!TechHub.website := 'www.techhub.startup'
+!TechHub.email := 'info@techhub.startup'
+!TechHub.industry := 'Information Technology'
+
+!new Person('BarbaraGreen')
+!BarbaraGreen.name := 'Barbara Green'
+!BarbaraGreen.phone := '+1-415-555-0111'
+!BarbaraGreen.email := 'barbara.green@innovators.com'
+!BarbaraGreen.title := 'Founder'
+
+!new Address('BarbaraGreenAddress1')
+!BarbaraGreenAddress1.city := 'San Francisco'
+!BarbaraGreenAddress1.houseNr := '23'
+!BarbaraGreenAddress1.street := 'Silicon Alley'
+!insert (BarbaraGreen, BarbaraGreenAddress1) into ContactContainsAddress
+
+!new Address('BarbaraGreenAddress2')
+!BarbaraGreenAddress2.city := 'Palo Alto'
+!BarbaraGreenAddress2.houseNr := '456'
+!BarbaraGreenAddress2.street := 'Innovation Drive'
+!insert (BarbaraGreen, BarbaraGreenAddress2) into ContactContainsAddress
+
+!new Note('BarbaraGreenNote1')
+!BarbaraGreenNote1.author := 'Matthew Clark'
+!BarbaraGreenNote1.time := Date('2023-07-22')
+!BarbaraGreenNote1.type := #EMAIL
+!BarbaraGreenNote1.comment := 'Discussed opportunities for co-working space collaboration.'
+!insert (BarbaraGreen, BarbaraGreenNote1) into ContactContainsNote
+
+!new Company('EcoVentures')
+!EcoVentures.name := 'Eco Ventures'
+!EcoVentures.phone := '+44-141-555-0199'
+!EcoVentures.website := 'www.ecoventures.co.uk'
+!EcoVentures.email := 'hello@ecoventures.co.uk'
+!EcoVentures.industry := 'Environmental Services'
+
+!new Address('EcoVenturesAddress1')
+!EcoVenturesAddress1.city := 'Glasgow'
+!EcoVenturesAddress1.houseNr := '9'
+!EcoVenturesAddress1.street := 'Greenway Boulevard'
+!insert (EcoVentures, EcoVenturesAddress1) into ContactContainsAddress
+
+!new Note('EcoVenturesNote1')
+!EcoVenturesNote1.author := 'Anna Davis'
+!EcoVenturesNote1.time := Date('2023-09-05')
+!EcoVenturesNote1.type := #CALL
+!EcoVenturesNote1.comment := 'Phone call to plan tree planting initiative.'
+!insert (EcoVentures, EcoVenturesNote1) into ContactContainsNote
+
+!new Relationship('TechHubToBarbaraEmployee')
+!TechHubToBarbaraEmployee.type := #EMPLOYEE
+!insert (TechHubToBarbaraEmployee, BarbaraGreen) into RelationshipToContact
+!insert (TechHub, TechHubToBarbaraEmployee) into ContactToRelationship
+
+!new Relationship('BarbaraToEcoCoworker')
+!BarbaraToEcoCoworker.type := #COWORKER
+!insert (BarbaraToEcoCoworker, EcoVentures) into RelationshipToContact
+!insert (BarbaraGreen, BarbaraToEcoCoworker) into ContactToRelationship
+
+!insert (StartupCommunityAddressBook, TechHub) into AddressBookMadeOfContact
+!insert (StartupCommunityAddressBook, BarbaraGreen) into AddressBookMadeOfContact
+!insert (StartupCommunityAddressBook, EcoVentures) into AddressBookMadeOfContact

@@ -1,0 +1,107 @@
+!new AddressBook('EmergencyResponseAddressBook')
+
+!new Company('NationalDisasterManagementAuthority')
+!NationalDisasterManagementAuthority.name := 'National Disaster Management Authority'
+!NationalDisasterManagementAuthority.phone := '+1-555-0100'
+!NationalDisasterManagementAuthority.website := 'www.ndma.gov'
+!NationalDisasterManagementAuthority.email := 'admin@ndma.gov'
+!NationalDisasterManagementAuthority.industry := 'Government Agency'
+
+!new Address('NDMAAddress')
+!NDMAAddress.city := 'Washington, D.C.'
+!NDMAAddress.houseNr := '400'
+!NDMAAddress.street := 'Capital Blvd'
+!insert (NationalDisasterManagementAuthority, NDMAAddress) into ContactContainsAddress
+
+!new Note('NDMANote1')
+!NDMANote1.author := 'Director Operations'
+!NDMANote1.time := Date('2023-07-20')
+!NDMANote1.type := #MEETING
+!NDMANote1.comment := 'Coordinate cross-border relief logistics.'
+!insert (NationalDisasterManagementAuthority, NDMANote1) into ContactContainsNote
+
+!new Company('GlobalReliefNetwork')
+!GlobalReliefNetwork.name := 'Global Relief Network'
+!GlobalReliefNetwork.phone := '+44-203-555667'
+!GlobalReliefNetwork.website := 'www.globalrelief.org'
+!GlobalReliefNetwork.email := 'partner@globalrelief.org'
+!GlobalReliefNetwork.industry := 'Non-Governmental Organization'
+
+!new Address('GlobalReliefAddress1')
+!GlobalReliefAddress1.city := 'London'
+!GlobalReliefAddress1.houseNr := '120'
+!GlobalReliefAddress1.street := 'Aid Avenue'
+!insert (GlobalReliefNetwork, GlobalReliefAddress1) into ContactContainsAddress
+
+!new Address('GlobalReliefAddress2')
+!GlobalReliefAddress2.city := 'Nairobi'
+!GlobalReliefAddress2.houseNr := '17'
+!GlobalReliefAddress2.street := 'Hope Street'
+!insert (GlobalReliefNetwork, GlobalReliefAddress2) into ContactContainsAddress
+
+!new Note('GlobalReliefNote1')
+!GlobalReliefNote1.author := 'Logistics Coordinator'
+!GlobalReliefNote1.time := Date('2023-07-22')
+!GlobalReliefNote1.type := #EMAIL
+!GlobalReliefNote1.comment := 'Status update on resource allocation.'
+!insert (GlobalReliefNetwork, GlobalReliefNote1) into ContactContainsNote
+
+!new Person('JordanNguyen')
+!JordanNguyen.name := 'Jordan Nguyen'
+!JordanNguyen.phone := '+61-2-5551123'
+!JordanNguyen.email := 'j.nguyen@emergencyresponse.org'
+!JordanNguyen.title := 'Chief Coordinator'
+
+!new Address('JordanNguyenAddress')
+!JordanNguyenAddress.city := 'Sydney'
+!JordanNguyenAddress.houseNr := '500'
+!JordanNguyenAddress.street := 'Response Lane'
+!insert (JordanNguyen, JordanNguyenAddress) into ContactContainsAddress
+
+!new Company('RapidTransportCo')
+!RapidTransportCo.name := 'Rapid Transport Co.'
+!RapidTransportCo.phone := '+91-80-5559990'
+!RapidTransportCo.website := 'www.rapidtransport.in'
+!RapidTransportCo.email := 'logistics@rapidtransport.in'
+!RapidTransportCo.industry := 'Logistics'
+
+!new Address('RapidTransportAddress')
+!RapidTransportAddress.city := 'Bangalore'
+!RapidTransportAddress.houseNr := '45'
+!RapidTransportAddress.street := 'Cargo Street'
+!insert (RapidTransportCo, RapidTransportAddress) into ContactContainsAddress
+
+!new Relationship('NDMAToGlobalReliefBoss')
+!NDMAToGlobalReliefBoss.type := #BOSS
+!insert (NDMAToGlobalReliefBoss, GlobalReliefNetwork) into RelationshipToContact
+!insert (NationalDisasterManagementAuthority, NDMAToGlobalReliefBoss) into ContactToRelationship
+
+!new Relationship('NDMAToJordanCoworker')
+!NDMAToJordanCoworker.type := #COWORKER
+!insert (NDMAToJordanCoworker, JordanNguyen) into RelationshipToContact
+!insert (NationalDisasterManagementAuthority, NDMAToJordanCoworker) into ContactToRelationship
+
+!new Relationship('NDMAToRapidTransportCoworker')
+!NDMAToRapidTransportCoworker.type := #COWORKER
+!insert (NDMAToRapidTransportCoworker, RapidTransportCo) into RelationshipToContact
+!insert (NationalDisasterManagementAuthority, NDMAToRapidTransportCoworker) into ContactToRelationship
+
+!new Relationship('GlobalReliefToNDMAEmployee')
+!GlobalReliefToNDMAEmployee.type := #EMPLOYEE
+!insert (GlobalReliefToNDMAEmployee, NationalDisasterManagementAuthority) into RelationshipToContact
+!insert (GlobalReliefNetwork, GlobalReliefToNDMAEmployee) into ContactToRelationship
+
+!new Relationship('GlobalReliefToJordanEmployee')
+!GlobalReliefToJordanEmployee.type := #EMPLOYEE
+!insert (GlobalReliefToJordanEmployee, JordanNguyen) into RelationshipToContact
+!insert (GlobalReliefNetwork, GlobalReliefToJordanEmployee) into ContactToRelationship
+
+!new Relationship('JordanToRapidTransportBoss')
+!JordanToRapidTransportBoss.type := #BOSS
+!insert (JordanToRapidTransportBoss, RapidTransportCo) into RelationshipToContact
+!insert (JordanNguyen, JordanToRapidTransportBoss) into ContactToRelationship
+
+!insert (EmergencyResponseAddressBook, NationalDisasterManagementAuthority) into AddressBookMadeOfContact
+!insert (EmergencyResponseAddressBook, GlobalReliefNetwork) into AddressBookMadeOfContact
+!insert (EmergencyResponseAddressBook, JordanNguyen) into AddressBookMadeOfContact
+!insert (EmergencyResponseAddressBook, RapidTransportCo) into AddressBookMadeOfContact

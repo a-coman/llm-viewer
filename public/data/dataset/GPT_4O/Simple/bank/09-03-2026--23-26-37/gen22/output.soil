@@ -1,0 +1,50 @@
+!new Bank('bank43')
+!bank43.country := 'France'
+!bank43.name := 'Société Générale'
+!bank43.bic := 'SOGEFRPP'
+
+!new Bank('bank44')
+!bank44.country := 'India'
+!bank44.name := 'HDFC Bank'
+!bank44.bic := 'HDFCINBB'
+
+!new Account('account64')
+!account64.iban := 'FR7612548029989876543210893'
+!account64.balance := 8300
+
+!new Account('account65')
+!account65.iban := 'IN30123456789012345678'
+!account65.balance := 5400
+
+!new Account('account66')
+!account66.iban := 'FR7612548029989876543210894'
+!account66.balance := 600
+
+!new Person('person64')
+!person64.firstName := 'Julien'
+!person64.lastName := 'Dubois'
+!person64.age := 48
+
+!new Person('person65')
+!person65.firstName := 'Ananya'
+!person65.lastName := 'Sharma'
+!person65.age := 27
+
+!new Person('person66')
+!person66.firstName := 'Marie'
+!person66.lastName := 'Leroux'
+!person66.age := 36
+
+!insert (person64, account64) into Ownership
+!insert (person65, account65) into Ownership
+!insert (person66, account66) into Ownership
+!insert (person64, account66) into Ownership
+
+!insert (person64, account64) into Use
+!insert (person65, account65) into Use
+!insert (person66, account66) into Use
+!insert (person65, account64) into Use
+
+!insert (bank43, account64) into AccountOfBanks
+!insert (bank44, account65) into AccountOfBanks
+!insert (bank43, account66) into AccountOfBanks

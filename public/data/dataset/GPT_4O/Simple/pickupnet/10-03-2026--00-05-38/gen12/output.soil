@@ -1,0 +1,64 @@
+!new Driver('driver20')
+!driver20.id := 'D020'
+!driver20.name := 'Jean Grey'
+
+!new Driver('driver21')
+!driver21.id := 'D021'
+!driver21.name := 'Scott Summers'
+
+!new Shipment('shipment23')
+!shipment23.id := 'SHP12367'
+!shipment23.status := #UNDERWAY
+
+!new Shipment('shipment24')
+!shipment24.id := 'SHP12368'
+!shipment24.status := #DELIVERED
+
+!new Address('address23')
+!address23.text := '2020 Cerebro Ln, X-Mansion'
+
+!new Address('address24')
+!address24.text := '2121 X-Jet Rd, X-Mansion'
+
+!new GeoLocation('geoLocation23')
+!geoLocation23.latitude := 42.3601
+!geoLocation23.longitude := -71.0589
+
+!new GeoLocation('geoLocation24')
+!geoLocation24.latitude := 42.3625
+!geoLocation24.longitude := -71.0690
+
+!insert (address23, geoLocation23) into AddressContainsGeoLocation
+!insert (address24, geoLocation24) into AddressContainsGeoLocation
+
+!new Customer('customer23')
+!customer23.id := 'CUST023'
+!customer23.name := 'Erik Lehnsherr'
+!customer23.twitterUserName := '@magneto'
+
+!new Customer('customer24')
+!customer24.id := 'CUST024'
+!customer24.name := 'Charles Xavier'
+!customer24.twitterUserName := '@professorX'
+
+!new Station('station12')
+
+!insert (station12, customer23) into StationContainsCustomer
+!insert (station12, customer24) into StationContainsCustomer
+
+!insert (station12, shipment23) into StationShipment
+!insert (station12, shipment24) into StationShipment
+
+!insert (station12, driver20) into StationContainsDriver
+!insert (station12, driver21) into StationContainsDriver
+
+!insert (shipment23, address23) into ShipmentContainsPickUpAddress
+!insert (shipment23, address24) into ShipmentContainsDeliveryAddress
+
+!insert (shipment24, address24) into ShipmentContainsPickUpAddress
+!insert (shipment24, address23) into ShipmentContainsDeliveryAddress
+
+!insert (customer23, shipment23) into CustomerConsistsOfShipment
+!insert (customer24, shipment24) into CustomerConsistsOfShipment
+
+!insert (driver21, shipment23) into DriverShipment

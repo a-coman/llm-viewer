@@ -1,0 +1,70 @@
+!new RentalOffice('office3')
+!office3.name := 'Suburban Wheels'
+!office3.number := 303
+!office3.address := '1010 Suburb Dr, Hartford, CT'
+
+!new Truck('truck5')
+!truck5.id := 505
+!truck5.registrationState := #CT
+!truck5.licensePlateNumber := 'CT-TRK-6789'
+!truck5.vehicleTypeCode := #OPEN_TRAILER
+!truck5.registrationLastMaintenanceDate := Date('2023-08-18')
+!truck5.expirationDate := Date('2024-08-18')
+!truck5.odometerReading := 12000
+!truck5.gasTankCapacity := 28.0
+!truck5.workingRadio := true
+!truck5.mileage := 24
+
+!new Individual('individual3')
+!individual3.name := 'Emma White'
+!individual3.address := '500 Maple Dr, Stamford, CT'
+!individual3.poorRisk := true
+!individual3.homePhone := '555-8901'
+!individual3.driverLicenseState := #CT
+!individual3.driverLicenseNumber := 30405060
+!individual3.driverLicenseExpirationDate := Date('2025-02-28')
+
+!new RentalAgreement('agreement5')
+!agreement5.number := 3005
+!agreement5.rentalDate := Date('2023-12-01')
+!agreement5.anticipatedDuration := 2
+!agreement5.depositPaid := 100.0
+!agreement5.quotedDailyRate := 70.00
+!agreement5.quotedRatePerMile := 0.45
+
+!new Truck('truck6')
+!truck6.id := 506
+!truck6.registrationState := #DE
+!truck6.licensePlateNumber := 'DE-TRK-7890'
+!truck6.vehicleTypeCode := #COVERED_TRAILER
+!truck6.registrationLastMaintenanceDate := Date('2023-09-01')
+!truck6.expirationDate := Date('2025-09-01')
+!truck6.odometerReading := 15000
+!truck6.gasTankCapacity := 25.0
+!truck6.workingRadio := false
+!truck6.mileage := 16
+
+!new Company('company3')
+!company3.name := 'TransLogistics'
+!company3.address := '987 Transport Lane, Dover, DE'
+!company3.poorRisk := false
+!company3.idNumber := 789012
+
+!new RentalAgreement('agreement6')
+!agreement6.number := 3006
+!agreement6.rentalDate := Date('2023-12-05')
+!agreement6.anticipatedDuration := 8
+!agreement6.depositPaid := 350.0
+!agreement6.quotedDailyRate := 75.00
+!agreement6.quotedRatePerMile := 0.55
+
+!insert (office3, truck5) into RentalOfficeVehicle
+!insert (office3, truck6) into RentalOfficeVehicle
+!insert (office3, agreement5) into RentalOfficeRentalAgreementOrigin
+!insert (office3, agreement5) into RentalOfficeRentalAgreementDrop
+!insert (office3, agreement6) into RentalOfficeRentalAgreementOrigin
+!insert (office3, agreement6) into RentalOfficeRentalAgreementDrop
+!insert (agreement5, truck5) into RentalAgreementVehicle
+!insert (agreement5, individual3) into RentalAgreementCustomer
+!insert (agreement6, truck6) into RentalAgreementVehicle
+!insert (agreement6, company3) into RentalAgreementCustomer

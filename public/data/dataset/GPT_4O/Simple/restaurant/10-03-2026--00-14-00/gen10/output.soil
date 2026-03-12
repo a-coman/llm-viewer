@@ -1,0 +1,114 @@
+!new Restaurant('restaurant10')
+!restaurant10.name := 'Culinary Cosmos'
+
+!new Owner('owner20')
+!owner20.name := 'Alice West'
+!owner20.percentageShares := 60
+!insert (restaurant10, owner20) into RestaurantOwner
+
+!new Owner('owner21')
+!owner21.name := 'Thomas East'
+!owner21.percentageShares := 40
+!insert (restaurant10, owner21) into RestaurantOwner
+
+!new Table('table27')
+!table27.number := 27
+!table27.description := 'Lunar Ledge'
+!table27.capacity := 5
+
+!new Table('table28')
+!table28.number := 28
+!table28.description := 'Solar Suite'
+!table28.capacity := 20
+
+!new RegularCustomer('customer11')
+!customer11.name := 'Amelia Pond'
+!customer11.prefferedLanguage := #Italian
+
+!new Waiter('waiter12')
+!waiter12.name := 'Rory Williams'
+!waiter12.dateOfBirth := Date('1993-05-12')
+!waiter12.phoneNumber := '555-2424'
+!waiter12.spokenLanguage := #German
+
+!new HeadWaiter('headwaiter10')
+!headwaiter10.name := 'River Song'
+!headwaiter10.dateOfBirth := Date('1982-07-07')
+!headwaiter10.phoneNumber := '555-6767'
+
+!insert (headwaiter10, waiter12) into HeadWaiterWaiter
+
+!new Individual('reservation17')
+!reservation17.time := Time('19:45')
+!reservation17.date := Date('2024-04-01')
+!reservation17.numberPeople := 4
+!reservation17.name := 'Amelia Pond'
+!reservation17.phoneNumber := '555-4545'
+!reservation17.number := 17
+!reservation17.seating := #Inside
+!reservation17.smoking := #NonSmoking
+!insert (restaurant10, reservation17) into RestaurantReservation
+!insert (reservation17, customer11) into ReservationCustomer
+!insert (reservation17, waiter12) into ReservationWaiter
+!insert (reservation17, table27) into ReservationTable
+
+!new Banquet('reservation18')
+!reservation18.time := Time('19:00')
+!reservation18.date := Date('2024-05-20')
+!reservation18.numberPeople := 35
+!reservation18.name := 'Galactic Gathering'
+!reservation18.phoneNumber := '555-8383'
+!reservation18.number := 18
+!reservation18.groupName := 'Astronomy Enthusiasts'
+!reservation18.paymentMethod := #Cash
+!reservation18.busService := true
+!insert (restaurant10, reservation18) into RestaurantReservation
+!insert (reservation18, table28) into ReservationTable
+!insert (reservation18, waiter12) into ReservationWaiter
+
+!new Table('tableExtra4')
+!tableExtra4.number := 29
+!tableExtra4.description := 'Stellar Hall'
+!tableExtra4.capacity := 15
+!insert (reservation18, tableExtra4) into ReservationTable
+
+!new BusDriver('busdriver7')
+!busdriver7.name := 'Jack Harkness'
+!busdriver7.dateOfBirth := Date('1975-06-10')
+!busdriver7.phoneNumber := '555-9955'
+!busdriver7.driverLicenseNr := 'DL789101'
+!insert (reservation18, busdriver7) into BanquetBusDriver
+
+!new ItemOrder('itemOrder10')
+!itemOrder10.time := Time('20:00')
+!insert (reservation17, itemOrder10) into ReservationItemOrdered
+
+!new MenuItem('menuItem10')
+!menuItem10.description := 'Cosmic Quiche'
+!menuItem10.prepTime := 22.0
+!menuItem10.classification := #Apetizer
+!insert (itemOrder10, menuItem10) into ItemOrderMenuItem
+
+!new FoodItem('foodItem10')
+!foodItem10.number := 110
+!foodItem10.description := 'Assorted Vegetables'
+!foodItem10.purchaseFlag := true
+!foodItem10.unit := #Sheet
+!insert (menuItem10, foodItem10) into MenuItemFoodItem
+
+!new Allergen('allergen10')
+!allergen10.type := #Lactose
+!insert (foodItem10, allergen10) into FoodItemAllergen
+
+!new Cook('cook10')
+!cook10.name := 'Clara Oswald'
+!cook10.dateOfBirth := Date('1990-11-11')
+!cook10.phoneNumber := '555-3434'
+!cook10.yearsOfExperience := 4
+
+!new Chef('chef10')
+!chef10.name := 'Martha Jones'
+!chef10.dateOfBirth := Date('1985-10-29')
+!chef10.phoneNumber := '555-1234'
+!insert (menuItem10, chef10) into MenuItemChef
+!insert (chef10, cook10) into ChefCook

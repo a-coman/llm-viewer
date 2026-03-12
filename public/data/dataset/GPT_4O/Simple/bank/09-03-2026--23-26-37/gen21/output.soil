@@ -1,0 +1,50 @@
+!new Bank('bank41')
+!bank41.country := 'Brazil'
+!bank41.name := 'Itaú Unibanco'
+!bank41.bic := 'ITAUBRSP'
+
+!new Bank('bank42')
+!bank42.country := 'Australia'
+!bank42.name := 'Westpac'
+!bank42.bic := 'WPACAU2F'
+
+!new Account('account61')
+!account61.iban := 'BR1500000000000010932840814P1'
+!account61.balance := 9900
+
+!new Account('account62')
+!account62.iban := 'AU320000021098765432100'
+!account62.balance := 6200
+
+!new Account('account63')
+!account63.iban := 'BR1500000000000010932840815P1'
+!account63.balance := 400
+
+!new Person('person61')
+!person61.firstName := 'Bruno'
+!person61.lastName := 'Silva'
+!person61.age := 46
+
+!new Person('person62')
+!person62.firstName := 'Samantha'
+!person62.lastName := 'Taylor'
+!person62.age := 29
+
+!new Person('person63')
+!person63.firstName := 'Lucas'
+!person63.lastName := 'Costa'
+!person63.age := 34
+
+!insert (person61, account61) into Ownership
+!insert (person62, account62) into Ownership
+!insert (person63, account63) into Ownership
+!insert (person61, account63) into Ownership
+
+!insert (person61, account61) into Use
+!insert (person62, account62) into Use
+!insert (person63, account63) into Use
+!insert (person62, account61) into Use
+
+!insert (bank41, account61) into AccountOfBanks
+!insert (bank42, account62) into AccountOfBanks
+!insert (bank41, account63) into AccountOfBanks

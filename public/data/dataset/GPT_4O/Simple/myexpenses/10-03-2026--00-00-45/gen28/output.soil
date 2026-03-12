@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency28')
+!currency28.name := 'Vietnamese Dong'
+!currency28.abbreviation := 'VND'
+
+-- Creating instances of Bills
+!new Bill('bill70')
+!bill70.amount := 5000000.00
+!bill70.category := 'Community Outreach'
+!bill70.date := Date('2023-08-15')
+!bill70.paymentMethod := #CASH
+!bill70.status := #VERIFIED
+!insert (bill70, currency28) into BillCurrency
+
+!new Bill('bill71')
+!bill71.amount := 3000000.00
+!bill71.category := 'Publicity Events'
+!bill71.date := Date('2023-08-20')
+!bill71.paymentMethod := #CHECK
+!bill71.status := #DRAFT
+!insert (bill71, currency28) into BillCurrency
+
+!new Bill('bill72')
+!bill72.amount := 2000000.00
+!bill72.category := 'Volunteer Programs'
+!bill72.date := Date('2023-08-25')
+!bill72.paymentMethod := #CREDIT_CARD
+!bill72.status := #PENDING
+!insert (bill72, currency28) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment31')
+!comment31.text := 'Funding for community initiatives and public engagement efforts.'
+
+-- Creating instance of Expense
+!new Expense('expense28')
+!expense28.amount := 10000000.00
+!expense28.startDate := Date('2023-08-10')
+!expense28.endDate := Date('2023-08-30')
+!insert (expense28, bill70) into ExpenseContainsBills
+!insert (expense28, bill71) into ExpenseContainsBills
+!insert (expense28, bill72) into ExpenseContainsBills
+!insert (expense28, comment31) into ExpenseComment

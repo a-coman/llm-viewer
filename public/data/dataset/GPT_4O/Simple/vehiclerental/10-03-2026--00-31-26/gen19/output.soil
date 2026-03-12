@@ -1,0 +1,70 @@
+!new RentalOffice('office19')
+!office19.name := 'Desert Drive Rentals'
+!office19.number := 1919
+!office19.address := '800 Sun Desert Blvd, Phoenix, AZ'
+
+!new Truck('truck37')
+!truck37.id := 537
+!truck37.registrationState := #AZ
+!truck37.licensePlateNumber := 'AZ-TRK-9991'
+!truck37.vehicleTypeCode := #OPEN_TRAILER
+!truck37.registrationLastMaintenanceDate := Date('2023-03-15')
+!truck37.expirationDate := Date('2024-03-15')
+!truck37.odometerReading := 13500
+!truck37.gasTankCapacity := 33.0
+!truck37.workingRadio := false
+!truck37.mileage := 20
+
+!new Individual('individual19')
+!individual19.name := 'Grace Harris'
+!individual19.address := '321 Oasis Ln, Mesa, AZ'
+!individual19.poorRisk := false
+!individual19.homePhone := '555-7788'
+!individual19.driverLicenseState := #AZ
+!individual19.driverLicenseNumber := 12349876
+!individual19.driverLicenseExpirationDate := Date('2026-05-05')
+
+!new RentalAgreement('agreement37')
+!agreement37.number := 3037
+!agreement37.rentalDate := Date('2023-11-10')
+!agreement37.anticipatedDuration := 6
+!agreement37.depositPaid := 250.0
+!agreement37.quotedDailyRate := 64.00
+!agreement37.quotedRatePerMile := 0.55
+
+!new Truck('truck38')
+!truck38.id := 538
+!truck38.registrationState := #CA
+!truck38.licensePlateNumber := 'CA-TRK-2211'
+!truck38.vehicleTypeCode := #TRUCK24
+!truck38.registrationLastMaintenanceDate := Date('2023-05-22')
+!truck38.expirationDate := Date('2025-05-22')
+!truck38.odometerReading := 21000
+!truck38.gasTankCapacity := 29.5
+!truck38.workingRadio := true
+!truck38.mileage := 24
+
+!new Company('company19')
+!company19.name := 'Sunset Freightways'
+!company19.address := '654 West Coast Dr, San Diego, CA'
+!company19.poorRisk := true
+!company19.idNumber := 876290
+
+!new RentalAgreement('agreement38')
+!agreement38.number := 3038
+!agreement38.rentalDate := Date('2023-12-01')
+!agreement38.anticipatedDuration := 14
+!agreement38.depositPaid := 580.0
+!agreement38.quotedDailyRate := 88.00
+!agreement38.quotedRatePerMile := 0.68
+
+!insert (office19, truck37) into RentalOfficeVehicle
+!insert (office19, truck38) into RentalOfficeVehicle
+!insert (office19, agreement37) into RentalOfficeRentalAgreementOrigin
+!insert (office19, agreement37) into RentalOfficeRentalAgreementDrop
+!insert (office19, agreement38) into RentalOfficeRentalAgreementOrigin
+!insert (office19, agreement38) into RentalOfficeRentalAgreementDrop
+!insert (agreement37, truck37) into RentalAgreementVehicle
+!insert (agreement37, individual19) into RentalAgreementCustomer
+!insert (agreement38, truck38) into RentalAgreementVehicle
+!insert (agreement38, company19) into RentalAgreementCustomer

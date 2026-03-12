@@ -1,0 +1,52 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client27')
+!client27.clientId := 27
+!client27.isSuspended := true
+
+-- Adding another client with different attributes
+!new Client('client28')
+!client28.clientId := 28
+!client28.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental22')
+!rental22.date := Date('2023-11-05')
+
+-- Introducing another unique rental for diversity
+!new Rental('rental23')
+!rental23.date := Date('2023-11-06')
+
+-- Creating Cassettes and Movies
+!new Movie('movie16')
+!movie16.title := 'Desert Escape'
+!movie16.availableCopies := 2
+!movie16.genre := #Action
+
+-- Creating Series
+!new Series('series14')
+!series14.title := 'Galactic Adventures'
+!series14.availableCopies := 9
+!series14.episode := 11
+
+-- Creating Actors
+!new Actor('actor26')
+!actor26.name := 'Jack Sparrow'
+
+-- Adding a distinctive actor for variety
+!new Actor('actor27')
+!actor27.name := 'Alice Wonderland'
+
+-- Creating associations between Client and Rentals
+!insert (client27, rental22) into ClientRental
+!insert (client28, rental23) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental22, movie16) into RentalCassette
+!insert (rental23, series14) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie16, actor26) into CassetteActor
+!insert (series14, actor27) into CassetteActor
+!insert (series14, actor26) into CassetteActor

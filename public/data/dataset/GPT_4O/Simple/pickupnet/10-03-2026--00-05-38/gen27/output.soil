@@ -1,0 +1,64 @@
+!new Driver('driver50')
+!driver50.id := 'D050'
+!driver50.name := 'Thor Odinson'
+
+!new Driver('driver51')
+!driver51.id := 'D051'
+!driver51.name := 'Loki Laufeyson'
+
+!new Shipment('shipment53')
+!shipment53.id := 'SHP12397'
+!shipment53.status := #DELIVERED
+
+!new Shipment('shipment54')
+!shipment54.id := 'SHP12398'
+!shipment54.status := #NEW
+
+!new Address('address53')
+!address53.text := '5151 Bifrost Rd, Asgard'
+
+!new Address('address54')
+!address54.text := '5252 Valhalla Ave, Asgard'
+
+!new GeoLocation('geoLocation53')
+!geoLocation53.latitude := 65.0104
+!geoLocation53.longitude := -18.9980
+
+!new GeoLocation('geoLocation54')
+!geoLocation54.latitude := 64.9631
+!geoLocation54.longitude := -19.0208
+
+!insert (address53, geoLocation53) into AddressContainsGeoLocation
+!insert (address54, geoLocation54) into AddressContainsGeoLocation
+
+!new Customer('customer53')
+!customer53.id := 'CUST053'
+!customer53.name := 'Heimdall'
+!customer53.twitterUserName := '@guardianofbifrost'
+
+!new Customer('customer54')
+!customer54.id := 'CUST054'
+!customer54.name := 'Frigga'
+!customer54.twitterUserName := '@queenofasgard'
+
+!new Station('station27')
+
+!insert (station27, customer53) into StationContainsCustomer
+!insert (station27, customer54) into StationContainsCustomer
+
+!insert (station27, shipment53) into StationShipment
+!insert (station27, shipment54) into StationShipment
+
+!insert (station27, driver50) into StationContainsDriver
+!insert (station27, driver51) into StationContainsDriver
+
+!insert (shipment53, address53) into ShipmentContainsPickUpAddress
+!insert (shipment53, address54) into ShipmentContainsDeliveryAddress
+
+!insert (shipment54, address54) into ShipmentContainsPickUpAddress
+!insert (shipment54, address53) into ShipmentContainsDeliveryAddress
+
+!insert (customer53, shipment53) into CustomerConsistsOfShipment
+!insert (customer54, shipment54) into CustomerConsistsOfShipment
+
+!insert (driver51, shipment54) into DriverShipment

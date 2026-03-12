@@ -1,0 +1,121 @@
+!new Club('club9')
+!club9.name := 'Sky Falcons'
+!club9.homeGround := 'Falcon Field'
+!club9.chairman := 'Sophia Carter'
+
+!new Club('club10')
+!club10.name := 'Sun Dragons'
+!club10.homeGround := 'Dragon Arena'
+!club10.chairman := 'Liam Edwards'
+
+!new Team('team9')
+!team9.name := 'Falcon Flyers'
+!insert (club9, team9) into ClubTeam
+
+!new Team('team10')
+!team10.name := 'Dragon Warriors'
+!insert (club10, team10) into ClubTeam
+
+!new Competition('springCup')
+!springCup.name := 'Spring Cup'
+!springCup.type := 'Knockout'
+
+!new Match('match5')
+!match5.date := '2024-03-15'
+!match5.homeAway := false
+!insert (springCup, match5) into CompetitionMatch
+!insert (team9, match5) into LocalMatch
+!insert (team10, match5) into VisitorMatch
+
+!new MatchReport('report5')
+!report5.duration := 90
+!report5.scoreVisitor := 0
+!report5.scoreLocal := 1
+!insert (match5, report5) into MatchMatchReport
+
+!new Player('player9')
+!player9.name := 'Elliot Sky'
+!player9.age := 26
+!player9.bestFoot := #RIGHT
+!player9.phoneNumber := '8901234567'
+!insert (team9, player9) into TeamPlayer
+
+!new Player('player10')
+!player10.name := 'Isabella Dawn'
+!player10.age := 22
+!player10.bestFoot := #LEFT
+!player10.phoneNumber := '9012345678'
+!insert (team10, player10) into TeamPlayer
+
+!new Position('position9')
+!position9.positionName := #GOALKEEPER
+!insert (player9, position9) into PlayerPositions
+
+!new Position('position10')
+!position10.positionName := #MIDFIELDER
+!insert (player10, position10) into PlayerPositions
+
+!new MatchPlayer('matchPlayer9')
+!matchPlayer9.booked := false
+!matchPlayer9.goals := 0
+!matchPlayer9.rating := 8
+!insert (player9, matchPlayer9) into PlayerMatch
+!insert (match5, matchPlayer9) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer10')
+!matchPlayer10.booked := true
+!matchPlayer10.goals := 0
+!matchPlayer10.rating := 6
+!insert (player10, matchPlayer10) into PlayerMatch
+!insert (match5, matchPlayer10) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition9')
+!matchPlayerPosition9.positionName := #GOALKEEPER
+!matchPlayerPosition9.number := 1
+!insert (matchPlayer9, matchPlayerPosition9) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition10')
+!matchPlayerPosition10.positionName := #MIDFIELDER
+!matchPlayerPosition10.number := 8
+!insert (matchPlayer10, matchPlayerPosition10) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event18')
+!event18.eventType := #GOAL
+!event18.time := 60
+!insert (match5, event18) into MatchMatchEvent
+
+!new TrainingSession('training9')
+!training9.date := '2024-02-05'
+!training9.location := 'Falcon Nest'
+!training9.purpose := 'Tactical Training'
+!insert (team9, training9) into TeamTraining
+
+!new TrainingSession('training10')
+!training10.date := '2024-02-15'
+!training10.location := 'Dragon Lair'
+!training10.purpose := 'Team Building'
+!insert (team10, training10) into TeamTraining
+
+!new TrainingNotes('trainingNote9')
+!trainingNote9.note := 'Enhanced ball control skills'
+!trainingNote9.date := '2024-02-05'
+!insert (training9, trainingNote9) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote10')
+!trainingNote10.note := 'Improved team communication'
+!trainingNote10.date := '2024-02-15'
+!insert (training10, trainingNote10) into TrainingTrainingNotes
+
+!new TrainingObjective('objective9')
+!objective9.areaToImprove := 'Passing Accuracy'
+!objective9.startDate := '2023-12-01'
+!objective9.endDate := '2024-03-01'
+!objective9.success := true
+!insert (objective9, player9) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective10')
+!objective10.areaToImprove := 'Stamina'
+!objective10.startDate := '2023-12-10'
+!objective10.endDate := '2024-03-10'
+!objective10.success := true
+!insert (objective10, player10) into TrainingObjectivePlayer

@@ -1,0 +1,89 @@
+!new Restaurant('restaurant2')
+!restaurant2.name := 'Limit Delights'
+
+!new Owner('owner3')
+!owner3.name := 'Emma Smith'
+!owner3.percentageShares := 1
+
+!new Owner('owner4')
+!owner4.name := 'Julian Tan'
+!owner4.percentageShares := 99
+
+!insert (restaurant2, owner3) into RestaurantOwner
+!insert (restaurant2, owner4) into RestaurantOwner
+
+!new RegularCustomer('customer1')
+!customer1.name := 'Carlos Lopez'
+!customer1.prefferedLanguage := #Spanish
+
+!new HeadWaiter('headwaiter1')
+!headwaiter1.name := 'Greta Müller'
+!headwaiter1.dateOfBirth := Date('1985-01-01')  -- Arbitrary date of birth
+!headwaiter1.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter1')
+!waiter1.name := 'Luis Fernandez'
+!waiter1.dateOfBirth := Date('1990-01-01')       -- Arbitrary date of birth
+!waiter1.phoneNumber := '0987654321'             -- Arbitrary phone number
+!waiter1.spokenLanguage := #English
+
+!insert (headwaiter1, waiter1) into HeadWaiterWaiter
+
+!new Chef('chef1')
+!chef1.name := 'Marco Ricci'
+!chef1.dateOfBirth := Date('1980-01-01')         -- Arbitrary date of birth
+!chef1.phoneNumber := '1122334455'               -- Arbitrary phone number
+
+!new Cook('cook1')
+!cook1.name := 'Anita Bose'
+!cook1.dateOfBirth := Date('1995-01-01')         -- Arbitrary date of birth
+!cook1.phoneNumber := '5566778899'               -- Arbitrary phone number
+!cook1.yearsOfExperience := 0
+
+!insert (chef1, cook1) into ChefCook
+
+!new Table('table5')
+!table5.number := 1
+!table5.description := 'Corner table near the window'
+!table5.capacity := 1
+
+!new MenuItem('menuitem1')
+!menuitem1.description := 'A fresh tomato and mozzarella salad.'
+!menuitem1.prepTime := 10.0
+!menuitem1.classification := #Apetizer
+
+!insert (menuitem1, chef1) into MenuItemChef
+
+!new FoodItem('fooditem1')
+!fooditem1.number := 1
+!fooditem1.description := 'Mozzarella Cheese'
+!fooditem1.purchaseFlag := true
+!fooditem1.unit := #Pound
+
+!insert (menuitem1, fooditem1) into MenuItemFoodItem
+
+!new Allergen('allergen1')
+!allergen1.type := #Lactose
+
+!insert (fooditem1, allergen1) into FoodItemAllergen
+
+!new Individual('reservation1')
+!reservation1.time := Time('18:00')
+!reservation1.date := Date('2023-11-01')
+!reservation1.numberPeople := 1
+!reservation1.name := 'Carlos Lopez'
+!reservation1.phoneNumber := '3344556677'         -- Arbitrary phone number
+!reservation1.number := 1
+!reservation1.seating := #Inside
+!reservation1.smoking := #NonSmoking
+
+!insert (restaurant2, reservation1) into RestaurantReservation
+!insert (reservation1, customer1) into ReservationCustomer
+!insert (reservation1, waiter1) into ReservationWaiter
+!insert (reservation1, table5) into ReservationTable
+
+!new ItemOrder('itemorder1')
+!itemorder1.time := Time('18:10')
+
+!insert (reservation1, itemorder1) into ReservationItemOrdered
+!insert (itemorder1, menuitem1) into ItemOrderMenuItem

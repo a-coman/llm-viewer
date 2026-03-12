@@ -1,0 +1,52 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client21')
+!client21.clientId := 21
+!client21.isSuspended := false
+
+-- Adding another client with distinct attributes
+!new Client('client22')
+!client22.clientId := 22
+!client22.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental16')
+!rental16.date := Date('2023-10-30')
+
+!new Rental('rental17')
+!rental17.date := Date('2023-10-31')
+
+-- Creating Cassettes and Movies
+!new Movie('movie13')
+!movie13.title := 'Comic Relief'
+!movie13.availableCopies := 3
+!movie13.genre := #Comedy
+
+-- Creating Series
+!new Series('series11')
+!series11.title := 'Cosmic Odyssey'
+!series11.availableCopies := 6
+!series11.episode := 12
+
+-- Creating Actors
+!new Actor('actor20')
+!actor20.name := 'Lucas Grey'
+
+-- Adding yet another distinct actor
+!new Actor('actor21')
+!actor21.name := 'Mia Bright'
+
+-- Creating associations between Client and Rentals
+!insert (client21, rental16) into ClientRental
+!insert (client22, rental17) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental16, movie13) into RentalCassette
+!insert (rental16, series11) into RentalCassette
+!insert (rental17, movie13) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie13, actor20) into CassetteActor
+!insert (series11, actor21) into CassetteActor
+!insert (series11, actor20) into CassetteActor

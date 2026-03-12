@@ -1,0 +1,169 @@
+!new Club('clubAA')
+!clubAA.name := 'Jungle Leopards FC'
+!clubAA.homeGround := 'Equatorial Arena'
+!clubAA.chairman := 'Paolo Mendes'
+
+!new Club('clubAB')
+!clubAB.name := 'Highland Warriors'
+!clubAB.homeGround := 'Alpine Fortress'
+!clubAB.chairman := 'Greta Brandt'
+
+!new Team('teamAA')
+!teamAA.name := 'Rainforest Pumas'
+
+!new Team('teamAB')
+!teamAB.name := 'Mountain Eagles'
+
+!insert (clubAA, teamAA) into ClubTeam
+!insert (clubAB, teamAB) into ClubTeam
+
+!new Player('player30')
+!player30.name := 'Carlos Mendes'
+!player30.age := 32
+!player30.bestFoot := #LEFT
+!player30.phoneNumber := '+557199876543'
+
+!new Player('player31')
+!player31.name := 'Natalia Moreno'
+!player31.age := 20
+!player31.bestFoot := #RIGHT
+!player31.phoneNumber := '+557598765432'
+
+!new Player('player32')
+!player32.name := 'Elias Novak'
+!player32.age := 28
+!player32.bestFoot := #LEFT
+!player32.phoneNumber := '+558812345678'
+
+!insert (teamAA, player30) into TeamPlayer
+!insert (teamAA, player31) into TeamPlayer
+!insert (teamAB, player32) into TeamPlayer
+
+!new Position('position70')
+!position70.positionName := #MIDFIELDER
+
+!new Position('position74')
+!position74.positionName := #FORWARD
+
+!new Position('position76')
+!position76.positionName := #DEFENDER
+
+!insert (player30, position70) into PlayerPositions
+!insert (player31, position74) into PlayerPositions
+!insert (player32, position76) into PlayerPositions
+
+!new TrainingSession('trainingSession22')
+!trainingSession22.date := '2023-11-10'
+!trainingSession22.location := 'Canopy Training Center'
+!trainingSession22.purpose := 'Tree Canopy Agility Drills'
+
+!insert (teamAA, trainingSession22) into TeamTraining
+
+!new TrainingSession('trainingSession23')
+!trainingSession23.date := '2023-11-09'
+!trainingSession23.location := 'Alpine Fortress Training Ground'
+!trainingSession23.purpose := 'Altitude Adaptation Drills'
+
+!insert (teamAB, trainingSession23) into TeamTraining
+
+!new TrainingNotes('trainingNote22')
+!trainingNote22.note := 'Focus on quick turns and elevated jumps.'
+!trainingNote22.date := '2023-11-10'
+
+!insert (trainingSession22, trainingNote22) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote23')
+!trainingNote23.note := 'Players focused on cardiovascular endurance in high altitude.'
+!trainingNote23.date := '2023-11-09'
+
+!insert (trainingSession23, trainingNote23) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail9')
+!trainingFail9.reason := 'Travel delays'
+
+!insert (trainingFail9, player31) into FailedPlayer
+!insert (trainingSession22, trainingFail9) into TrainingFailded
+
+!new Competition('competition12')
+!competition12.name := 'Summit Clash Cup'
+!competition12.type := 'Knockout'
+
+!new Match('match14')
+!match14.date := '2023-11-12'
+!match14.homeAway := true
+
+!insert (teamAB, match14) into LocalMatch
+!insert (teamAA, match14) into VisitorMatch
+!insert (competition12, match14) into CompetitionMatch
+
+!new MatchReport('matchReport14')
+!matchReport14.duration := 90
+!matchReport14.scoreVisitor := 1
+!matchReport14.scoreLocal := 0
+
+!insert (match14, matchReport14) into MatchMatchReport
+
+!new MatchEvent('matchEvent40')
+!matchEvent40.eventType := #GOAL
+!matchEvent40.time := 15
+
+!new MatchEvent('matchEvent41')
+!matchEvent41.eventType := #FOUL
+!matchEvent41.time := 70
+
+!insert (match14, matchEvent40) into MatchMatchEvent
+!insert (match14, matchEvent41) into MatchMatchEvent
+
+!new MatchNote('matchNote11')
+!matchNote11.note := 'Rainforest Pumas dominated possession early on.'
+!matchNote11.date := '2023-11-12'
+
+!insert (match14, matchNote11) into MatchMatchNote
+
+!new PlayerNotes('playerNote12')
+!playerNote12.note := 'Needs to improve long passes.'
+!playerNote12.date := '2023-08-15'
+
+!insert (player30, playerNote12) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer26')
+!matchPlayer26.booked := false
+!matchPlayer26.goals := 1
+!matchPlayer26.rating := 8
+
+!new MatchPlayer('matchPlayer27')
+!matchPlayer27.booked := false
+!matchPlayer27.goals := 0
+!matchPlayer27.rating := 5
+
+!insert (player30, matchPlayer26) into PlayerMatch
+!insert (player31, matchPlayer27) into PlayerMatch
+
+!insert (match14, matchPlayer26) into MatchMatchPlayer
+!insert (match14, matchPlayer27) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position72')
+!position72.positionName := #MIDFIELDER
+!position72.number := 8
+
+!new MatchPlayerPosition('position75')
+!position75.positionName := #FORWARD
+!position75.number := 11
+
+!insert (matchPlayer26, position72) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer27, position75) into MatchPlayerMatchPlayerPosition
+
+!new TrainingObjective('trainingObjective21')
+!trainingObjective21.areaToImprove := 'Enhance Vertical Leap'
+!trainingObjective21.startDate := '2023-10-01'
+!trainingObjective21.endDate := '2023-11-01'
+!trainingObjective21.success := false
+
+!new TrainingObjective('trainingObjective22')
+!trainingObjective22.areaToImprove := 'Improve Passing Accuracy'
+!trainingObjective22.startDate := '2023-10-01'
+!trainingObjective22.endDate := '2023-11-01'
+!trainingObjective22.success := true
+
+!insert (trainingObjective21, player31) into TrainingObjectivePlayer
+!insert (trainingObjective22, player30) into TrainingObjectivePlayer

@@ -1,0 +1,37 @@
+!new Expense('boundaryExpense')
+!boundaryExpense.amount := 800.00
+!boundaryExpense.startDate := Date('2023-05-01')
+!boundaryExpense.endDate := Date('2023-05-31')
+
+!new Bill('summerUtilitiesBill')
+!summerUtilitiesBill.amount := 500.00
+!summerUtilitiesBill.category := 'Summer Utilities'
+!summerUtilitiesBill.date := Date('2023-05-10')
+!summerUtilitiesBill.paymentMethod := #CHECK
+!summerUtilitiesBill.status := #PENDING
+
+!new Bill('emergencyPlumbingBill')
+!emergencyPlumbingBill.amount := 300.00
+!emergencyPlumbingBill.category := 'Emergency Plumbing'
+!emergencyPlumbingBill.date := Date('2023-05-24')
+!emergencyPlumbingBill.paymentMethod := #CASH
+!emergencyPlumbingBill.status := #REFUNDED
+
+!new Currency('currencyGBP')
+!currencyGBP.name := 'British Pound'
+!currencyGBP.abbreviation := 'GBP'
+
+!insert (summerUtilitiesBill, currencyGBP) into BillCurrency
+!insert (emergencyPlumbingBill, currencyGBP) into BillCurrency
+
+!insert (boundaryExpense, summerUtilitiesBill) into ExpenseContainsBills
+!insert (boundaryExpense, emergencyPlumbingBill) into ExpenseContainsBills
+
+!new Comment('utilitiesComment')
+!utilitiesComment.text := 'Payment for utility bills, awaiting clearance.'
+
+!new Comment('refundComment')
+!refundComment.text := 'Refund processed for emergency expense due to incorrect service billing.'
+
+!insert (boundaryExpense, utilitiesComment) into ExpenseComment
+!insert (boundaryExpense, refundComment) into ExpenseComment

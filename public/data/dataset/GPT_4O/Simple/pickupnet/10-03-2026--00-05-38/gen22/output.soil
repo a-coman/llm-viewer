@@ -1,0 +1,64 @@
+!new Driver('driver40')
+!driver40.id := 'D040'
+!driver40.name := 'Carol Danvers'
+
+!new Driver('driver41')
+!driver41.id := 'D041'
+!driver41.name := 'Monica Rambeau'
+
+!new Shipment('shipment43')
+!shipment43.id := 'SHP12387'
+!shipment43.status := #ASSIGNED
+
+!new Shipment('shipment44')
+!shipment44.id := 'SHP12388'
+!shipment44.status := #UNDERWAY
+
+!new Address('address43')
+!address43.text := '4141 Photon Blvd, Hala Street'
+
+!new Address('address44')
+!address44.text := '4242 Binary Ln, Kree Empire'
+
+!new GeoLocation('geoLocation43')
+!geoLocation43.latitude := 29.7604
+!geoLocation43.longitude := -95.3698
+
+!new GeoLocation('geoLocation44')
+!geoLocation44.latitude := 29.7499
+!geoLocation44.longitude := -95.3584
+
+!insert (address43, geoLocation43) into AddressContainsGeoLocation
+!insert (address44, geoLocation44) into AddressContainsGeoLocation
+
+!new Customer('customer43')
+!customer43.id := 'CUST043'
+!customer43.name := 'Talos'
+!customer43.twitterUserName := '@shapeshifter'
+
+!new Customer('customer44')
+!customer44.id := 'CUST044'
+!customer44.name := 'Maria Rambeau'
+!customer44.twitterUserName := '@photonmom'
+
+!new Station('station22')
+
+!insert (station22, customer43) into StationContainsCustomer
+!insert (station22, customer44) into StationContainsCustomer
+
+!insert (station22, shipment43) into StationShipment
+!insert (station22, shipment44) into StationShipment
+
+!insert (station22, driver40) into StationContainsDriver
+!insert (station22, driver41) into StationContainsDriver
+
+!insert (shipment43, address43) into ShipmentContainsPickUpAddress
+!insert (shipment43, address44) into ShipmentContainsDeliveryAddress
+
+!insert (shipment44, address44) into ShipmentContainsPickUpAddress
+!insert (shipment44, address43) into ShipmentContainsDeliveryAddress
+
+!insert (customer43, shipment43) into CustomerConsistsOfShipment
+!insert (customer44, shipment44) into CustomerConsistsOfShipment
+
+!insert (driver41, shipment44) into DriverShipment

@@ -1,0 +1,153 @@
+!new Restaurant('restaurant15')
+!restaurant15.name := 'El Buen Sabor'
+
+!new Owner('owner30')
+!owner30.name := 'Carlos Hernandez'
+!owner30.percentageShares := 70
+
+!new Owner('owner31')
+!owner31.name := 'Lucia Ramirez'
+!owner31.percentageShares := 30
+
+!insert (restaurant15, owner30) into RestaurantOwner
+!insert (restaurant15, owner31) into RestaurantOwner
+
+!new Table('table39')
+!table39.number := 101
+!table39.description := 'Booth near the mariachi stage.'
+!table39.capacity := 6
+
+!new Table('table40')
+!table40.number := 202
+!table40.description := 'Intimate table for two by the window.'
+!table40.capacity := 2
+
+!new Table('table41')
+!table41.number := 305
+!table41.description := 'Large communal table.'
+!table41.capacity := 10
+
+!new RegularCustomer('customer10')
+!customer10.name := 'Maria Lopez'
+!customer10.prefferedLanguage := #Spanish
+
+!new RegularCustomer('customer11')
+!customer11.name := 'Oliver White'
+!customer11.prefferedLanguage := #English
+
+!new Individual('individualReservation8')
+!individualReservation8.date := Date('2023-12-01')
+!individualReservation8.time := Time('20:00')
+!individualReservation8.numberPeople := 1
+!individualReservation8.name := 'Maria Lopez'
+!individualReservation8.phoneNumber := '9876543210'  -- Arbitrary phone number
+!individualReservation8.seating := #Inside
+!individualReservation8.smoking := #NonSmoking
+!individualReservation8.number := 8
+
+!insert (restaurant15, individualReservation8) into RestaurantReservation
+!insert (individualReservation8, customer10) into ReservationCustomer
+!insert (individualReservation8, table40) into ReservationTable
+
+!new Banquet('banquet12')
+!banquet12.date := Date('2023-12-01')
+!banquet12.time := Time('19:00')
+!banquet12.groupName := 'Oliver\'s Anniversary Celebration'
+!banquet12.numberPeople := 12
+!banquet12.paymentMethod := #CreditCard
+
+!insert (restaurant15, banquet12) into RestaurantReservation
+!insert (banquet12, customer11) into ReservationCustomer
+!insert (banquet12, table41) into ReservationTable
+!insert (banquet12, table39) into ReservationTable
+
+!new Waiter('waiter25')
+!waiter25.name := 'Sofia Cruz'
+!waiter25.dateOfBirth := Date('1995-01-01')     -- Arbitrary date of birth
+!waiter25.phoneNumber := '1111111111'           -- Arbitrary phone number
+!waiter25.spokenLanguage := #Spanish
+
+!new Waiter('waiter26')
+!waiter26.name := 'Juan Garcia'
+!waiter26.dateOfBirth := Date('1993-01-01')     -- Arbitrary date of birth
+!waiter26.phoneNumber := '2222222222'           -- Arbitrary phone number
+!waiter26.spokenLanguage := #Spanish
+
+!insert (individualReservation8, waiter25) into ReservationWaiter
+!insert (banquet12, waiter25) into ReservationWaiter
+!insert (banquet12, waiter26) into ReservationWaiter
+
+!new HeadWaiter('headwaiter11')
+!headwaiter11.name := 'Teresa Montes'
+!headwaiter11.dateOfBirth := Date('1981-01-01')  -- Arbitrary date of birth
+!headwaiter11.phoneNumber := '3333333333'        -- Arbitrary phone number
+
+!insert (headwaiter11, waiter25) into HeadWaiterWaiter
+!insert (headwaiter11, waiter26) into HeadWaiterWaiter
+
+!new BusDriver('busdriver12')
+!busdriver12.name := 'Diego Morales'
+
+!insert (banquet12, busdriver12) into BanquetBusDriver
+
+!new Chef('chef15')
+!chef15.name := 'Rosa Castillo'
+!chef15.dateOfBirth := Date('1970-01-01')       -- Arbitrary date of birth
+!chef15.phoneNumber := '4444444444'             -- Arbitrary phone number
+
+!new Cook('cook18')
+!cook18.name := 'Pedro Fernandez'
+!cook18.dateOfBirth := Date('1988-01-01')       -- Arbitrary date of birth
+!cook18.phoneNumber := '5555555555'             -- Arbitrary phone number
+!cook18.yearsOfExperience := 5
+
+!insert (chef15, cook18) into ChefCook
+
+!new MenuItem('menuitem20')
+!menuitem20.description := 'Slow-roasted pork marinated in citrus juice and annatto.'
+!menuitem20.prepTime := 50.0
+!menuitem20.classification := #Main
+
+!insert (menuitem20, chef15) into MenuItemChef
+
+!new FoodItem('fooditem32')
+!fooditem32.number := 32
+!fooditem32.description := 'Pork'
+!fooditem32.purchaseFlag := true
+!fooditem32.unit := #Pound
+
+!new FoodItem('fooditem33')
+!fooditem33.number := 33
+!fooditem33.description := 'Tortilla'
+!fooditem33.purchaseFlag := true
+!fooditem33.unit := #Dozen
+
+!insert (menuitem20, fooditem32) into MenuItemFoodItem
+!insert (menuitem20, fooditem33) into MenuItemFoodItem
+
+!new MenuItem('menuitem21')
+!menuitem21.description := 'Crispy fried dough pastries dusted with cinnamon sugar served with chocolate dipping sauce.'
+!menuitem21.prepTime := 25.0
+!menuitem21.classification := #Dessert
+
+!insert (menuitem21, chef15) into MenuItemChef
+
+!new FoodItem('fooditem34')
+!fooditem34.number := 34
+!fooditem34.description := 'Dough'
+!fooditem34.purchaseFlag := true
+!fooditem34.unit := #Pound
+
+!new FoodItem('fooditem35')
+!fooditem35.number := 35
+!fooditem35.description := 'Chocolate'
+!fooditem35.purchaseFlag := true
+!fooditem35.unit := #Ounce
+
+!insert (menuitem21, fooditem34) into MenuItemFoodItem
+!insert (menuitem21, fooditem35) into MenuItemFoodItem
+
+!new Allergen('allergen13')
+!allergen13.type := #Gluten
+
+!insert (fooditem33, allergen13) into FoodItemAllergen

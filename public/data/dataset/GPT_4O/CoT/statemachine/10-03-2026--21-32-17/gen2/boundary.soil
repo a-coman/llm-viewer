@@ -1,0 +1,52 @@
+!new StateMachine('complexFlow')
+!complexFlow.name := 'complexFlow'
+
+!new State('startState')
+!startState.name := 'startState'
+
+!new State('processingState')
+!processingState.name := 'processingState'
+
+!new State('finalState')
+!finalState.name := 'finalState'
+
+!new Transition('initiateTransition')
+!initiateTransition.name := 'initiateTransition'
+
+!new Transition('processingTransition')
+!processingTransition.name := 'processingTransition'
+
+!new Transition('completionTransition')
+!completionTransition.name := 'completionTransition'
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!insert (complexFlow, startState) into StateMachineContainsStates
+!insert (complexFlow, processingState) into StateMachineContainsStates
+!insert (complexFlow, finalState) into StateMachineContainsStates
+
+!insert (complexFlow, initiateTransition) into StateMachineContainsTransitions
+!insert (complexFlow, processingTransition) into StateMachineContainsTransitions
+!insert (complexFlow, completionTransition) into StateMachineContainsTransitions
+
+!insert (initiateTransition, timeEvent5) into TransitionContainsEvents
+!insert (processingTransition, timeEvent10) into TransitionContainsEvents
+!insert (completionTransition, timeEvent15) into TransitionContainsEvents
+
+!insert (startState, initiateTransition) into StateTransition
+!insert (initiateTransition, processingState) into TransitionState
+
+!insert (processingState, processingTransition) into StateTransition
+!insert (processingTransition, finalState) into TransitionState
+
+!insert (finalState, completionTransition) into StateTransition
+!insert (completionTransition, finalState) into TransitionState
+
+!insert (complexFlow, startState) into StateMachineStartsStates

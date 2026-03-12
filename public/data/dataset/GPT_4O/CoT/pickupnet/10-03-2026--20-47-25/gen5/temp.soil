@@ -1,0 +1,42 @@
+!new Driver('driver46')
+!driver46.id := 'DR9999'
+!driver46.name := 'Anisha Patel'
+
+!new Customer('customer46')
+!customer46.id := 'CU4001'
+!customer46.name := 'Olaf Jørgensen'
+!customer46.twitterUserName := '@olafNordic'
+
+!new Shipment('shipment60')
+!shipment60.id := 'SH2001'
+!shipment60.status := #NEW
+
+!new Address('address105')
+!address105.text := '10 Fjord Street, Oslo, Norway'
+
+!new GeoLocation('geoLocation105')
+!geoLocation105.latitude := 59.913868
+!geoLocation105.longitude := 10.752245
+
+!insert (address105, geoLocation105) into AddressContainsGeoLocation
+
+!new Address('address106')
+!address106.text := '250 Viking Road, Copenhagen, Denmark'
+
+!new GeoLocation('geoLocation106')
+!geoLocation106.latitude := 55.676098
+!geoLocation106.longitude := 12.568337
+
+!insert (address106, geoLocation106) into AddressContainsGeoLocation
+
+!new Station('station40')
+
+!insert (shipment60, address105) into ShipmentContainsPickUpAddress
+!insert (shipment60, address106) into ShipmentContainsDeliveryAddress
+
+!insert (customer46, shipment60) into CustomerConsistsOfShipment
+
+!insert (station40, customer46) into StationContainsCustomer
+
+!insert (station40, shipment60) into StationShipment
+!insert (station40, driver46) into StationContainsDriver

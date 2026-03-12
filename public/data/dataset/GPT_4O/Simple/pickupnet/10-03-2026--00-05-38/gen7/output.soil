@@ -1,0 +1,64 @@
+!new Driver('driver11')
+!driver11.id := 'D011'
+!driver11.name := 'Arthur Curry'
+
+!new Driver('driver12')
+!driver12.id := 'D012'
+!driver12.name := 'Barry Allen'
+
+!new Shipment('shipment13')
+!shipment13.id := 'SHP12357'
+!shipment13.status := #NEW
+
+!new Shipment('shipment14')
+!shipment14.id := 'SHP12358'
+!shipment14.status := #ASSIGNED
+
+!new Address('address13')
+!address13.text := '1010 Aquaman Ave, Atlantis'
+
+!new Address('address14')
+!address14.text := '1111 Flash Blvd, Central City'
+
+!new GeoLocation('geoLocation13')
+!geoLocation13.latitude := 25.7617
+!geoLocation13.longitude := -80.1918
+
+!new GeoLocation('geoLocation14')
+!geoLocation14.latitude := 40.7128
+!geoLocation14.longitude := -74.0060
+
+!insert (address13, geoLocation13) into AddressContainsGeoLocation
+!insert (address14, geoLocation14) into AddressContainsGeoLocation
+
+!new Customer('customer13')
+!customer13.id := 'CUST013'
+!customer13.name := 'Victor Stone'
+!customer13.twitterUserName := '@cyborg'
+
+!new Customer('customer14')
+!customer14.id := 'CUST014'
+!customer14.name := 'Hal Jordan'
+!customer14.twitterUserName := '@greenlantern'
+
+!new Station('station7')
+
+!insert (station7, customer13) into StationContainsCustomer
+!insert (station7, customer14) into StationContainsCustomer
+
+!insert (station7, shipment13) into StationShipment
+!insert (station7, shipment14) into StationShipment
+
+!insert (station7, driver11) into StationContainsDriver
+!insert (station7, driver12) into StationContainsDriver
+
+!insert (shipment13, address13) into ShipmentContainsPickUpAddress
+!insert (shipment13, address14) into ShipmentContainsDeliveryAddress
+
+!insert (shipment14, address14) into ShipmentContainsPickUpAddress
+!insert (shipment14, address13) into ShipmentContainsDeliveryAddress
+
+!insert (customer13, shipment13) into CustomerConsistsOfShipment
+!insert (customer14, shipment14) into CustomerConsistsOfShipment
+
+!insert (driver12, shipment14) into DriverShipment

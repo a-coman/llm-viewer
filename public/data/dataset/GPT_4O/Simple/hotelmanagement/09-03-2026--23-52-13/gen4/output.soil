@@ -1,0 +1,44 @@
+!new Booking('booking5')
+!booking5.startDate := '2024-03-15'
+!booking5.endDate := '2024-03-18'
+!booking5.canceled := false
+!booking5.bookingId := 105
+!booking5.confirmed := true
+
+!new Bill('bill5')
+!bill5.price := 200.00
+!bill5.billId := 5005
+
+!new Customer('customer5')
+!customer5.firstName := 'Emily'
+!customer5.lastName := 'Foster'
+
+!new RoomReservation('reservation5')
+!reservation5.checkInDate := '2024-03-15'
+!reservation5.checkOutDate := '2024-03-18'
+
+!new Room('room201')
+!room201.numBeds := 1
+!room201.pricePerNight := 90.00
+!room201.occupied := true
+!room201.blocked := false
+!room201.roomNumber := 201
+
+!new Room('room202')
+!room202.numBeds := 1
+!room202.pricePerNight := 75.00
+!room202.occupied := true
+!room202.blocked := false
+!room202.roomNumber := 202
+
+!new RoomExtra('extra6')
+!extra6.price := 10.00
+!extra6.description := 'WiFi Access'
+
+!insert (booking5, bill5) into BookingBill
+!insert (booking5, customer5) into BookingCustomer
+!insert (booking5, reservation5) into BookingRoomReservation
+!insert (reservation5, extra6) into RoomReservationExtras
+!insert (reservation5, room201) into RoomReservationRoom
+!insert (reservation5, room202) into RoomReservationRoom
+!insert (bill5, reservation5) into BillRoomReservation

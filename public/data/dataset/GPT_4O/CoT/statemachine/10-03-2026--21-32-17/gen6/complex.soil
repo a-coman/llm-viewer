@@ -1,0 +1,135 @@
+!new StateMachine('greenhouseEnvironmentManager')
+!greenhouseEnvironmentManager.name := 'greenhouseEnvironmentManager'
+
+!new State('monitoring')
+!monitoring.name := 'monitoring'
+
+!new State('heatingActive')
+!heatingActive.name := 'heatingActive'
+
+!new State('coolingActive')
+!coolingActive.name := 'coolingActive'
+
+!new State('humidifying')
+!humidifying.name := 'humidifying'
+
+!new State('lightAdjustment')
+!lightAdjustment.name := 'lightAdjustment'
+
+!new State('systemMaintenance')
+!systemMaintenance.name := 'systemMaintenance'
+
+!new Transition('monitorToHeating')
+!monitorToHeating.name := 'monitorToHeating'
+
+!new Transition('monitorToCooling')
+!monitorToCooling.name := 'monitorToCooling'
+
+!new Transition('monitorToHumidifying')
+!monitorToHumidifying.name := 'monitorToHumidifying'
+
+!new Transition('monitorToLighting')
+!monitorToLighting.name := 'monitorToLighting'
+
+!new Transition('heatingToMonitoring')
+!heatingToMonitoring.name := 'heatingToMonitoring'
+
+!new Transition('coolingToMonitoring')
+!coolingToMonitoring.name := 'coolingToMonitoring'
+
+!new Transition('humidifyingToMonitoring')
+!humidifyingToMonitoring.name := 'humidifyingToMonitoring'
+
+!new Transition('lightingToMonitoring')
+!lightingToMonitoring.name := 'lightingToMonitoring'
+
+!new Transition('monitorToMaintenance')
+!monitorToMaintenance.name := 'monitorToMaintenance'
+
+!new Transition('maintenanceToMonitoring')
+!maintenanceToMonitoring.name := 'maintenanceToMonitoring'
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent720')
+!timeEvent720.time := 720
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!new TimeEvent('defaultTimeEventA')
+!defaultTimeEventA.time := 1
+
+!new TimeEvent('defaultTimeEventB')
+!defaultTimeEventB.time := 1
+
+!new TimeEvent('defaultTimeEventC')
+!defaultTimeEventC.time := 1
+
+!new TimeEvent('defaultTimeEventD')
+!defaultTimeEventD.time := 1
+
+!insert (greenhouseEnvironmentManager, monitoring) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, heatingActive) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, coolingActive) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, humidifying) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, lightAdjustment) into StateMachineContainsStates
+!insert (greenhouseEnvironmentManager, systemMaintenance) into StateMachineContainsStates
+
+!insert (greenhouseEnvironmentManager, monitorToHeating) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToCooling) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToHumidifying) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToLighting) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, heatingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, coolingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, humidifyingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, lightingToMonitoring) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, monitorToMaintenance) into StateMachineContainsTransitions
+!insert (greenhouseEnvironmentManager, maintenanceToMonitoring) into StateMachineContainsTransitions
+
+!insert (monitorToHeating, timeEvent3) into TransitionContainsEvents
+!insert (monitorToCooling, timeEvent4) into TransitionContainsEvents
+!insert (monitorToHumidifying, defaultTimeEventA) into TransitionContainsEvents
+!insert (monitorToLighting, defaultTimeEventB) into TransitionContainsEvents
+!insert (heatingToMonitoring, defaultTimeEventC) into TransitionContainsEvents
+!insert (coolingToMonitoring, defaultTimeEventD) into TransitionContainsEvents
+!insert (humidifyingToMonitoring, timeEvent5) into TransitionContainsEvents
+!insert (lightingToMonitoring, defaultTimeEventA) into TransitionContainsEvents
+!insert (monitorToMaintenance, timeEvent720) into TransitionContainsEvents
+!insert (maintenanceToMonitoring, defaultTimeEventB) into TransitionContainsEvents
+
+!insert (monitoring, monitorToHeating) into StateTransition
+!insert (monitorToHeating, heatingActive) into TransitionState
+
+!insert (monitoring, monitorToCooling) into StateTransition
+!insert (monitorToCooling, coolingActive) into TransitionState
+
+!insert (monitoring, monitorToHumidifying) into StateTransition
+!insert (monitorToHumidifying, humidifying) into TransitionState
+
+!insert (monitoring, monitorToLighting) into StateTransition
+!insert (monitorToLighting, lightAdjustment) into TransitionState
+
+!insert (heatingActive, heatingToMonitoring) into StateTransition
+!insert (heatingToMonitoring, monitoring) into TransitionState
+
+!insert (coolingActive, coolingToMonitoring) into StateTransition
+!insert (coolingToMonitoring, monitoring) into TransitionState
+
+!insert (humidifying, humidifyingToMonitoring) into StateTransition
+!insert (humidifyingToMonitoring, monitoring) into TransitionState
+
+!insert (lightAdjustment, lightingToMonitoring) into StateTransition
+!insert (lightingToMonitoring, monitoring) into TransitionState
+
+!insert (monitoring, monitorToMaintenance) into StateTransition
+!insert (monitorToMaintenance, systemMaintenance) into TransitionState
+
+!insert (systemMaintenance, maintenanceToMonitoring) into StateTransition
+!insert (maintenanceToMonitoring, monitoring) into TransitionState
+
+!insert (greenhouseEnvironmentManager, monitoring) into StateMachineStartsStates

@@ -1,0 +1,52 @@
+!new AddressBook('addressBook2')
+
+!new Company('company2')
+!company2.name := 'GreenEnergy'
+!company2.phone := '555-123-4567'
+!company2.website := 'www.greenenergy.com'
+!company2.email := 'contact@greenenergy.com'
+!company2.industry := 'Renewable Energy'
+
+!new Person('person3')
+!person3.name := 'Sarah Lee'
+!person3.phone := '444-555-6666'
+!person3.website := 'www.sarah-lee.com'
+!person3.email := 'sarah.lee@example.com'
+!person3.title := 'Project Manager'
+
+!new Note('note3')
+!note3.author := 'Sarah Lee'
+!note3.time := Date('2023-11-10')
+!note3.type := #EMAIL
+!note3.comment := 'Sent project proposal.'
+
+!new Note('note4')
+!note4.author := 'Sarah Lee'
+!note4.time := Date('2023-11-15')
+!note4.type := #MEETING
+!note4.comment := 'Scheduled a team meeting.'
+
+!new Address('address3')
+!address3.city := 'EcoCity'
+!address3.houseNr := '12A'
+!address3.street := 'Renewable Road'
+
+!new Relationship('relationship3')
+!relationship3.type := #SUBDIVISION
+
+!new Relationship('relationship4')
+!relationship4.type := #COWORKER
+
+!insert (addressBook2, company2) into AddressBookMadeOfContact
+!insert (addressBook2, person3) into AddressBookMadeOfContact
+
+!insert (person3, note3) into ContactContainsNote
+!insert (person3, note4) into ContactContainsNote
+
+!insert (company2, relationship3) into ContactToRelationship
+!insert (relationship3, person3) into RelationshipToContact
+
+!insert (person3, relationship4) into ContactToRelationship
+!insert (relationship4, company2) into RelationshipToContact
+
+!insert (company2, address3) into ContactContainsAddress

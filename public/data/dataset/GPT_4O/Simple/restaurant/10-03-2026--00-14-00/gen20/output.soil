@@ -1,0 +1,114 @@
+!new Restaurant('restaurant20')
+!restaurant20.name := 'Astro Diner'
+
+!new Owner('owner40')
+!owner40.name := 'Celeste Ray'
+!owner40.percentageShares := 50
+!insert (restaurant20, owner40) into RestaurantOwner
+
+!new Owner('owner41')
+!owner41.name := 'Lunar Sky'
+!owner41.percentageShares := 50
+!insert (restaurant20, owner41) into RestaurantOwner
+
+!new Table('table57')
+!table57.number := 57
+!table57.description := 'Skyview Table'
+!table57.capacity := 8
+
+!new Table('table58')
+!table58.number := 58
+!table58.description := 'Cosmic Chamber'
+!table58.capacity := 22
+
+!new RegularCustomer('customer21')
+!customer21.name := 'Orion Vega'
+!customer21.prefferedLanguage := #Italian
+
+!new Waiter('waiter22')
+!waiter22.name := 'Star Whisper'
+!waiter22.dateOfBirth := Date('1993-02-11')
+!waiter22.phoneNumber := '555-1234'
+!waiter22.spokenLanguage := #Spanish
+
+!new HeadWaiter('headwaiter20')
+!headwaiter20.name := 'Astrid Glow'
+!headwaiter20.dateOfBirth := Date('1984-04-04')
+!headwaiter20.phoneNumber := '555-5678'
+
+!insert (headwaiter20, waiter22) into HeadWaiterWaiter
+
+!new Individual('reservation37')
+!reservation37.time := Time('18:00')
+!reservation37.date := Date('2024-11-18')
+!reservation37.numberPeople := 3
+!reservation37.name := 'Orion Vega'
+!reservation37.phoneNumber := '555-4321'
+!reservation37.number := 37
+!reservation37.seating := #Inside
+!reservation37.smoking := #NonSmoking
+!insert (restaurant20, reservation37) into RestaurantReservation
+!insert (reservation37, customer21) into ReservationCustomer
+!insert (reservation37, waiter22) into ReservationWaiter
+!insert (reservation37, table57) into ReservationTable
+
+!new Banquet('reservation38')
+!reservation38.time := Time('19:30')
+!reservation38.date := Date('2024-12-12')
+!reservation38.numberPeople := 40
+!reservation38.name := 'Galactic Gala'
+!reservation38.phoneNumber := '555-8989'
+!reservation38.number := 38
+!reservation38.groupName := 'Star Seekers Club'
+!reservation38.paymentMethod := #CreditCard
+!reservation38.busService := true
+!insert (restaurant20, reservation38) into RestaurantReservation
+!insert (reservation38, table58) into ReservationTable
+
+!new Table('tableExtra14')
+!tableExtra14.number := 59
+!tableExtra14.description := 'Lunar Lounge'
+!tableExtra14.capacity := 20
+!insert (reservation38, tableExtra14) into ReservationTable
+!insert (reservation38, waiter22) into ReservationWaiter
+
+!new BusDriver('busdriver14')
+!busdriver14.name := 'Nova Trail'
+!busdriver14.dateOfBirth := Date('1971-02-25')
+!busdriver14.phoneNumber := '555-6767'
+!busdriver14.driverLicenseNr := 'DL223344'
+!insert (reservation38, busdriver14) into BanquetBusDriver
+
+!new ItemOrder('itemOrder20')
+!itemOrder20.time := Time('18:30')
+!insert (reservation37, itemOrder20) into ReservationItemOrdered
+
+!new MenuItem('menuItem20')
+!menuItem20.description := 'Orbit Omelette'
+!menuItem20.prepTime := 15.0
+!menuItem20.classification := #Main
+!insert (itemOrder20, menuItem20) into ItemOrderMenuItem
+
+!new FoodItem('foodItem20')
+!foodItem20.number := 120
+!foodItem20.description := 'Organic Eggs'
+!foodItem20.purchaseFlag := true
+!foodItem20.unit := #Dozen
+!insert (menuItem20, foodItem20) into MenuItemFoodItem
+
+!new Allergen('allergen20')
+!allergen20.type := #Lactose
+!insert (foodItem20, allergen20) into FoodItemAllergen
+
+!new Cook('cook20')
+!cook20.name := 'Meteor Chef'
+!cook20.dateOfBirth := Date('1992-05-21')
+!cook20.phoneNumber := '555-5656'
+!cook20.yearsOfExperience := 5
+
+!new Chef('chef20')
+!chef20.name := 'Blaze Sun'
+!chef20.dateOfBirth := Date('1987-08-16')
+!chef20.phoneNumber := '555-3434'
+!insert (menuItem20, chef20) into MenuItemChef
+!insert (chef20, cook20) into ChefCook

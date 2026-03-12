@@ -1,0 +1,161 @@
+!new Club('clubAT')
+!clubAT.name := 'Milan Masters'
+!clubAT.homeGround := 'San Siro'
+!clubAT.chairman := 'Antonio Bianchi'
+
+!new Club('clubAU')
+!clubAU.name := 'New York Knights'
+!clubAU.homeGround := 'Liberty Stadium'
+!clubAU.chairman := 'Jessica Carter'
+
+!new Team('teamAT')
+!teamAT.name := 'Milan Masters Legends'
+
+!new Team('teamAU')
+!teamAU.name := 'New York Knights Elite'
+
+!insert (clubAT, teamAT) into ClubTeam
+!insert (clubAU, teamAU) into ClubTeam
+
+!new Player('player52')
+!player52.name := 'Marco Bellini'
+!player52.age := 29
+!player52.bestFoot := #RIGHT
+!player52.phoneNumber := '+39-347-1234567'
+
+!new Player('player53')
+!player53.name := 'Alex Baker'
+!player53.age := 26
+!player53.bestFoot := #LEFT
+!player53.phoneNumber := '+1-212-3456789'
+
+!insert (teamAT, player52) into TeamPlayer
+!insert (teamAU, player53) into TeamPlayer
+
+!new Position('position109')
+!position109.positionName := #FORWARD
+
+!new Position('position110')
+!position110.positionName := #DEFENDER
+
+!insert (player52, position109) into PlayerPositions
+!insert (player53, position110) into PlayerPositions
+
+!new Competition('competition20')
+!competition20.name := 'Global Soccer Super Cup'
+!competition20.type := 'International Tournament'
+
+!new Match('match26')
+!match26.date := '2023-10-20'
+!match26.homeAway := false
+
+!insert (teamAT, match26) into VisitorMatch
+!insert (teamAU, match26) into LocalMatch
+!insert (competition20, match26) into CompetitionMatch
+
+!new MatchReport('matchReport26')
+!matchReport26.duration := 90
+!matchReport26.scoreVisitor := 1
+!matchReport26.scoreLocal := 1
+
+!insert (match26, matchReport26) into MatchMatchReport
+
+!new MatchEvent('matchEvent72')
+!matchEvent72.eventType := #GOAL
+!matchEvent72.time := 47
+
+!new MatchEvent('matchEvent73')
+!matchEvent73.eventType := #FOUL
+!matchEvent73.time := 30
+
+!new MatchEvent('matchEvent74')
+!matchEvent74.eventType := #GOAL
+!matchEvent74.time := 90
+
+!insert (match26, matchEvent72) into MatchMatchEvent
+!insert (match26, matchEvent73) into MatchMatchEvent
+!insert (match26, matchEvent74) into MatchMatchEvent
+
+!new MatchNote('matchNote16')
+!matchNote16.note := 'The game ended in a stalemate, with both teams showing strong defensive skills.'
+!matchNote16.date := '2023-10-20'
+
+!insert (match26, matchNote16) into MatchMatchNote
+
+!new TrainingSession('trainingSession40')
+!trainingSession40.date := '2023-11-02'
+!trainingSession40.location := 'Milan Training Complex'
+!trainingSession40.purpose := 'Improving Ball Retention'
+
+!new TrainingSession('trainingSession41')
+!trainingSession41.date := '2023-11-03'
+!trainingSession41.location := 'Knights Training Facility'
+!trainingSession41.purpose := 'Concentration on Defense Breakout'
+
+!insert (teamAT, trainingSession40) into TeamTraining
+!insert (teamAU, trainingSession41) into TeamTraining
+
+!new TrainingNotes('trainingNote40')
+!trainingNote40.note := 'Emphasis on short passing and maintaining possession under pressure.'
+!trainingNote40.date := '2023-11-02'
+
+!new TrainingNotes('trainingNote41')
+!trainingNote41.note := 'Drills focused on defensive organization and quick transition to attack.'
+!trainingNote41.date := '2023-11-03'
+
+!insert (trainingSession40, trainingNote40) into TrainingTrainingNotes
+!insert (trainingSession41, trainingNote41) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail16')
+!trainingFail16.reason := 'Visa Issues'
+
+!insert (trainingFail16, player53) into FailedPlayer
+!insert (trainingSession41, trainingFail16) into TrainingFailded
+
+!new TrainingObjective('trainingObjective39')
+!trainingObjective39.areaToImprove := 'Crossing Accuracy'
+!trainingObjective39.startDate := '2023-10-01'
+!trainingObjective39.endDate := '2023-11-29'
+!trainingObjective39.success := true
+
+!new TrainingObjective('trainingObjective40')
+!trainingObjective40.areaToImprove := 'Defensive Tactics'
+!trainingObjective40.startDate := '2023-10-01'
+!trainingObjective40.endDate := '2023-11-29'
+!trainingObjective40.success := true
+
+!insert (trainingObjective39, player52) into TrainingObjectivePlayer
+!insert (trainingObjective40, player53) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote22')
+!playerNote22.note := 'Consistently delivers pinpoint crosses.'
+!playerNote22.date := '2023-09-15'
+
+!insert (player52, playerNote22) into PlayerPlayerNotes
+
+!new MatchPlayer('matchPlayer47')
+!matchPlayer47.booked := false
+!matchPlayer47.goals := 1
+!matchPlayer47.rating := 8
+
+!new MatchPlayer('matchPlayer48')
+!matchPlayer48.booked := false
+!matchPlayer48.goals := 0
+!matchPlayer48.rating := 7
+
+!insert (player52, matchPlayer47) into PlayerMatch
+!insert (player53, matchPlayer48) into PlayerMatch
+
+!insert (match26, matchPlayer47) into MatchMatchPlayer
+!insert (match26, matchPlayer48) into MatchMatchPlayer
+
+!new MatchPlayerPosition('mpp47')
+!mpp47.positionName := #FORWARD
+!mpp47.number := 11
+
+!new MatchPlayerPosition('mpp48')
+!mpp48.positionName := #DEFENDER
+!mpp48.number := 3
+
+!insert (matchPlayer47, mpp47) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer48, mpp48) into MatchPlayerMatchPlayerPosition

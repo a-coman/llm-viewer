@@ -1,0 +1,66 @@
+!new AddressBook('addressBook8')
+
+!new Company('company8')
+!company8.name := 'GreenThumb Landscaping'
+!company8.phone := '404-505-6060'
+!company8.website := 'www.greenthumb.com'
+!company8.email := 'info@greenthumb.com'
+!company8.industry := 'Landscaping Services'
+
+!new Person('person12')
+!person12.name := 'Chloe Martinez'
+!person12.phone := '202-303-9090'
+!person12.website := 'www.chloemartinezlandscapes.com'
+!person12.email := 'chloe.martinez@greenthumb.com'
+!person12.title := 'Senior Landscape Architect'
+
+!new Person('person13')
+!person13.name := 'Noah Davis'
+!person13.phone := '707-808-1010'
+!person13.website := 'www.noahdavisgardens.com'
+!person13.email := 'noah.davis@gardenhub.com'
+!person13.title := 'Botanical Consultant'
+
+!new Note('note12')
+!note12.author := 'Chloe Martinez'
+!note12.time := Date('2023-08-10')
+!note12.type := #CALL
+!note12.comment := 'Discussed new project designs with team.'
+
+!new Note('note13')
+!note13.author := 'Noah Davis'
+!note13.time := Date('2023-08-15')
+!note13.type := #EMAIL
+!note13.comment := 'Review of plant species selection.'
+
+!new Address('address13')
+!address13.city := 'Garden City'
+!address13.houseNr := '12F'
+!address13.street := 'Leafy Lane'
+
+!new Address('address14')
+!address14.city := 'Herbal Town'
+!address14.houseNr := '56H'
+!address14.street := 'Nature Blvd'
+
+!new Relationship('relationship14')
+!relationship14.type := #EMPLOYEE
+
+!new Relationship('relationship15')
+!relationship15.type := #SUBDIVISION
+
+!insert (addressBook8, company8) into AddressBookMadeOfContact
+!insert (addressBook8, person12) into AddressBookMadeOfContact
+!insert (addressBook8, person13) into AddressBookMadeOfContact
+
+!insert (person12, note12) into ContactContainsNote
+!insert (person13, note13) into ContactContainsNote
+
+!insert (company8, relationship15) into ContactToRelationship
+!insert (relationship15, person12) into RelationshipToContact
+
+!insert (person12, relationship14) into ContactToRelationship
+!insert (relationship14, person13) into RelationshipToContact
+
+!insert (company8, address13) into ContactContainsAddress
+!insert (person13, address14) into ContactContainsAddress

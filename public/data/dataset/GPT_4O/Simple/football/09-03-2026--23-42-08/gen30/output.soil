@@ -1,0 +1,141 @@
+!new Club('club59')
+!club59.name := 'Golden Griffins'
+!club59.homeGround := 'Griffin Lair'
+!club59.chairman := 'Gordon Gold'
+
+!new Club('club60')
+!club60.name := 'Sapphire Serpents'
+!club60.homeGround := 'Hydra Dome'
+!club60.chairman := 'Serena Blue'
+
+!new Team('team59')
+!team59.name := 'Griffin Gliders'
+!insert (club59, team59) into ClubTeam
+
+!new Team('team60')
+!team60.name := 'Serpent Slayers'
+!insert (club60, team60) into ClubTeam
+
+!new Competition('mythicBattle')
+!mythicBattle.name := 'Mythic Battle'
+!mythicBattle.type := 'League'
+
+!new Match('match30')
+!match30.date := '2035-04-15'
+!match30.homeAway := true
+!insert (mythicBattle, match30) into CompetitionMatch
+!insert (team59, match30) into LocalMatch
+!insert (team60, match30) into VisitorMatch
+
+!new MatchReport('report30')
+!report30.duration := 90
+!report30.scoreVisitor := 2
+!report30.scoreLocal := 3
+!insert (match30, report30) into MatchMatchReport
+
+!new Player('player59')
+!player59.name := 'Aria Gold'
+!player59.age := 28
+!player59.bestFoot := #RIGHT
+!player59.phoneNumber := '8675432109'
+!insert (team59, player59) into TeamPlayer
+
+!new Player('player60')
+!player60.name := 'Navin Blue'
+!player60.age := 27
+!player60.bestFoot := #LEFT
+!player60.phoneNumber := '9765432108'
+!insert (team60, player60) into TeamPlayer
+
+!new Position('position59')
+!position59.positionName := #FORWARD
+!insert (player59, position59) into PlayerPositions
+
+!new Position('position60')
+!position60.positionName := #MIDFIELDER
+!insert (player60, position60) into PlayerPositions
+
+!new MatchPlayer('matchPlayer59')
+!matchPlayer59.booked := false
+!matchPlayer59.goals := 2
+!matchPlayer59.rating := 9
+!insert (player59, matchPlayer59) into PlayerMatch
+!insert (match30, matchPlayer59) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer60')
+!matchPlayer60.booked := true
+!matchPlayer60.goals := 1
+!matchPlayer60.rating := 8
+!insert (player60, matchPlayer60) into PlayerMatch
+!insert (match30, matchPlayer60) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition59')
+!matchPlayerPosition59.positionName := #FORWARD
+!matchPlayerPosition59.number := 10
+!insert (matchPlayer59, matchPlayerPosition59) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition60')
+!matchPlayerPosition60.positionName := #MIDFIELDER
+!matchPlayerPosition60.number := 6
+!insert (matchPlayer60, matchPlayerPosition60) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event120')
+!event120.eventType := #GOAL
+!event120.time := 16
+!insert (match30, event120) into MatchMatchEvent
+
+!new MatchEvent('event121')
+!event121.eventType := #GOAL
+!event121.time := 40
+!insert (match30, event121) into MatchMatchEvent
+
+!new MatchEvent('event122')
+!event122.eventType := #GOAL
+!event122.time := 67
+!insert (match30, event122) into MatchMatchEvent
+
+!new MatchEvent('event123')
+!event123.eventType := #GOAL
+!event123.time := 74
+!insert (match30, event123) into MatchMatchEvent
+
+!new MatchEvent('event124')
+!event124.eventType := #GOAL
+!event124.time := 89
+!insert (match30, event124) into MatchMatchEvent
+
+!new TrainingSession('training59')
+!training59.date := '2035-03-01'
+!training59.location := 'Golden Grounds'
+!training59.purpose := 'Offensive Strategies'
+!insert (team59, training59) into TeamTraining
+
+!new TrainingSession('training60')
+!training60.date := '2035-03-10'
+!training60.location := 'Serpent Nest'
+!training60.purpose := 'Defensive Coordination'
+!insert (team60, training60) into TeamTraining
+
+!new TrainingNotes('trainingNote59')
+!trainingNote59.note := 'Focused on high-pressure attack formations'
+!trainingNote59.date := '2035-03-01'
+!insert (training59, trainingNote59) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote60')
+!trainingNote60.note := 'Strengthened defensive partnerships and transitions'
+!trainingNote60.date := '2035-03-10'
+!insert (training60, trainingNote60) into TrainingTrainingNotes
+
+!new TrainingObjective('objective59')
+!objective59.areaToImprove := 'High Tempo Control'
+!objective59.startDate := '2035-01-01'
+!objective59.endDate := '2035-04-01'
+!objective59.success := true
+!insert (objective59, player59) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective60')
+!objective60.areaToImprove := 'Ball Interception'
+!objective60.startDate := '2035-01-15'
+!objective60.endDate := '2035-04-15'
+!objective60.success := false
+!insert (objective60, player60) into TrainingObjectivePlayer

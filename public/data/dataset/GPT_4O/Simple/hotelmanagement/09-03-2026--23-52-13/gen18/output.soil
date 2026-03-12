@@ -1,0 +1,41 @@
+!new Booking('booking19')
+!booking19.startDate := '2025-05-10'
+!booking19.endDate := '2025-05-15'
+!booking19.canceled := false
+!booking19.bookingId := 119
+!booking19.confirmed := true
+
+!new Bill('bill19')
+!bill19.price := 720.00
+!bill19.billId := 5019
+
+!new Customer('customer19')
+!customer19.firstName := 'Sam'
+!customer19.lastName := 'Thompson'
+
+!new RoomReservation('reservation19')
+!reservation19.checkInDate := '2025-05-10'
+!reservation19.checkOutDate := '2025-05-15'
+
+!new Room('room1601')
+!room1601.numBeds := 2
+!room1601.pricePerNight := 140.00
+!room1601.occupied := true
+!room1601.blocked := false
+!room1601.roomNumber := 1601
+
+!new RoomExtra('extra23')
+!extra23.price := 25.00
+!extra23.description := 'Fitness Center Access'
+
+!new RoomExtra('extra24')
+!extra24.price := 40.00
+!extra24.description := 'Dinner Buffet'
+
+!insert (booking19, bill19) into BookingBill
+!insert (booking19, customer19) into BookingCustomer
+!insert (booking19, reservation19) into BookingRoomReservation
+!insert (reservation19, extra23) into RoomReservationExtras
+!insert (reservation19, extra24) into RoomReservationExtras
+!insert (reservation19, room1601) into RoomReservationRoom
+!insert (bill19, reservation19) into BillRoomReservation

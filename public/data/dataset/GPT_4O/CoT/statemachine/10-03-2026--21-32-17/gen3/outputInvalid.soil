@@ -1,0 +1,72 @@
+!new StateMachine('ManufacturingProcess')
+!ManufacturingProcess.name := 'ManufacturingProcess'
+
+!new State('rawMaterial')
+!rawMaterial.name := 'rawMaterial'
+
+!new State('inProduction')
+!inProduction.name := 'inProduction'
+
+!new State('qualityCheck')
+!qualityCheck.name := 'qualityCheck'
+
+!new State('packaged')
+!packaged.name := 'packaged'
+
+!new State('discarded')
+!discarded.name := 'discarded'
+
+!new Transition('MaterialToProduction')
+!MaterialToProduction.name := 'Material to Production'
+
+!new Transition('ProductionToQuality')
+!ProductionToQuality.name := 'Production to Quality'
+
+!new Transition('QualityToPackaging')
+!QualityToPackaging.name := 'Quality to Packaging'
+
+!new Transition('QualityToDiscard')
+!QualityToDiscard.name := 'Quality to Discard'
+
+!new TimeEvent('MaterialTimeout')
+!MaterialTimeout.time := 5
+
+!new TimeEvent('ProductionTimeout')
+!ProductionTimeout.time := 15
+
+!new TimeEvent('QualityTimeout')
+!QualityTimeout.time := 10
+
+!new TimeEvent('DiscardTimeout')
+!DiscardTimeout.time := 3
+
+!insert (ManufacturingProcess, rawMaterial) into StateMachineContainsStates
+!insert (ManufacturingProcess, inProduction) into StateMachineContainsStates
+!insert (ManufacturingProcess, qualityCheck) into StateMachineContainsStates
+!insert (ManufacturingProcess, packaged) into StateMachineContainsStates
+!insert (ManufacturingProcess, discarded) into StateMachineContainsStates
+
+!insert (ManufacturingProcess, MaterialToProduction) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, ProductionToQuality) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, QualityToPackaging) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, QualityToDiscard) into StateMachineContainsTransitions
+
+!insert (MaterialToProduction, MaterialTimeout) into TransitionContainsEvents
+!insert (ProductionToQuality, ProductionTimeout) into TransitionContainsEvents
+!insert (QualityToPackaging, QualityTimeout) into TransitionContainsEvents
+!insert (QualityToDiscard, DiscardTimeout) into TransitionContainsEvents
+
+!insert (rawMaterial, MaterialToProduction) into StateTransition
+!insert (MaterialToProduction, inProduction) into TransitionState
+
+!insert (inProduction, ProductionToQuality) into StateTransition
+!insert (ProductionToQuality, qualityCheck) into TransitionState
+
+!insert (qualityCheck, QualityToPackaging) into StateTransition
+!insert (QualityToPackaging, packaged) into TransitionState
+
+!insert (qualityCheck, QualityToDiscard) into StateTransition
+!insert (QualityToDiscard, discarded) into TransitionState
+
+!insert (ManufacturingProcess, rawMaterial) into StateMachineStartsStates
+

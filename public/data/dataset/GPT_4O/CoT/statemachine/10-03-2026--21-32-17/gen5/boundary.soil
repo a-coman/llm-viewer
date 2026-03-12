@@ -1,0 +1,30 @@
+!new StateMachine('interlinkedStates')
+!interlinkedStates.name := 'interlinkedStates'
+
+!new State('alpha')
+!alpha.name := 'alpha'
+
+!new State('beta')
+!beta.name := 'beta'
+
+!new State('gamma')
+!gamma.name := 'gamma'
+
+!new Transition('sharedTransition')
+!sharedTransition.name := 'sharedTransition'
+
+!new TimeEvent('timeEvent8')
+!timeEvent8.time := 8
+
+!insert (interlinkedStates, alpha) into StateMachineContainsStates
+!insert (interlinkedStates, beta) into StateMachineContainsStates
+!insert (interlinkedStates, gamma) into StateMachineContainsStates
+
+!insert (interlinkedStates, sharedTransition) into StateMachineContainsTransitions
+
+!insert (sharedTransition, timeEvent8) into TransitionContainsEvents
+
+!insert (alpha, sharedTransition) into StateTransition
+!insert (sharedTransition, beta) into TransitionState
+
+!insert (interlinkedStates, alpha) into StateMachineStartsStates

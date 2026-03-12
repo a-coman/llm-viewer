@@ -1,0 +1,117 @@
+!new Client('client33')
+!client33.clientId := 1201
+!client33.isSuspended := false
+
+!new Client('client34')
+!client34.clientId := 1302
+!client34.isSuspended := true
+
+!new Client('client35')
+!client35.clientId := 1403
+!client35.isSuspended := false
+
+!new Rental('rental52')
+!rental52.date := Date('2023-04-10')
+
+!new Rental('rental53')
+!rental53.date := Date('2023-05-25')
+
+!new Rental('rental54')
+!rental54.date := Date('2023-06-30')
+
+!new Rental('rental55')
+!rental55.date := Date('2023-08-12')
+
+!new Rental('rental56')
+!rental56.date := Date('2023-09-19')
+
+!new Rental('rental57')
+!rental57.date := Date('2023-10-05')
+
+!new Movie('movie45')
+!movie45.title := 'Thunder Road'
+!movie45.availableCopies := 3
+!movie45.genre := #Action
+
+!new Movie('movie46')
+!movie46.title := 'Sunny Side Up'
+!movie46.availableCopies := 7
+!movie46.genre := #Comedy
+
+!new Series('series36')
+!series36.title := 'Harbor Mysteries'
+!series36.availableCopies := 4
+!series36.episode := 5
+
+!new Series('series37')
+!series37.title := 'Space Frontier'
+!series37.availableCopies := 6
+!series37.episode := 11
+
+!new Series('series38')
+!series38.title := 'Jungle Odyssey'
+!series38.availableCopies := 2
+!series38.episode := 3
+
+!new Movie('movie47')
+!movie47.title := 'Crystal Dreams'
+!movie47.availableCopies := 1
+!movie47.genre := #Comedy
+
+!new Actor('actor79')
+!actor79.name := 'Aiden Carter'
+
+!new Actor('actor80')
+!actor80.name := 'Lara Kim'
+
+!new Actor('actor81')
+!actor81.name := 'Santiago Moreno'
+
+!new Actor('actor82')
+!actor82.name := 'Emma Wang'
+
+!new Actor('actor83')
+!actor83.name := 'Fatima Noor'
+
+!new Actor('actor84')
+!actor84.name := 'Viktor Ivanov'
+
+!insert (client33, rental52) into ClientRental
+!insert (client34, rental53) into ClientRental
+!insert (client35, rental54) into ClientRental
+!insert (client35, rental55) into ClientRental
+!insert (client33, rental56) into ClientRental
+!insert (client34, rental57) into ClientRental
+
+!insert (rental52, movie45) into RentalCassette
+!insert (rental52, series36) into RentalCassette
+
+!insert (rental53, movie46) into RentalCassette
+!insert (rental53, series38) into RentalCassette
+
+!insert (rental54, series37) into RentalCassette
+!insert (rental54, movie47) into RentalCassette
+
+!insert (rental55, movie45) into RentalCassette
+
+!insert (rental56, series38) into RentalCassette
+
+!insert (rental57, series36) into RentalCassette
+
+!insert (movie45, actor79) into CassetteActor
+!insert (movie45, actor83) into CassetteActor
+
+!insert (movie46, actor80) into CassetteActor
+!insert (movie46, actor81) into CassetteActor
+
+!insert (series36, actor82) into CassetteActor
+!insert (series36, actor84) into CassetteActor
+
+!insert (series37, actor81) into CassetteActor
+!insert (series37, actor80) into CassetteActor
+
+!insert (series38, actor79) into CassetteActor
+!insert (series38, actor82) into CassetteActor
+
+!insert (movie47, actor84) into CassetteActor
+!insert (movie47, actor83) into CassetteActor

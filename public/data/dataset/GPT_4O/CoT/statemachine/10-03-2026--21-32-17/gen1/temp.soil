@@ -1,0 +1,108 @@
+!new StateMachine('trainControlSystem')
+!trainControlSystem.name := 'trainControlSystem'
+
+!new State('idle')
+!idle.name := 'idle'
+
+!new State('prepareForDeparture')
+!prepareForDeparture.name := 'prepareForDeparture'
+
+!new State('inMotion')
+!inMotion.name := 'inMotion'
+
+!new State('awaitingSignal')
+!awaitingSignal.name := 'awaitingSignal'
+
+!new State('atStation')
+!atStation.name := 'atStation'
+
+!new State('shutdown')
+!shutdown.name := 'shutdown'
+
+!new Transition('idleToPrepare')
+!idleToPrepare.name := 'idleToPrepare'
+
+!new Transition('prepareToInMotion')
+!prepareToInMotion.name := 'prepareToInMotion'
+
+!new Transition('inMotionToAwait')
+!inMotionToAwait.name := 'inMotionToAwait'
+
+!new Transition('awaitToInMotion')
+!awaitToInMotion.name := 'awaitToInMotion'
+
+!new Transition('inMotionToAtStation')
+!inMotionToAtStation.name := 'inMotionToAtStation'
+
+!new Transition('atStationToInMotion')
+!atStationToInMotion.name := 'atStationToInMotion'
+
+!new Transition('atStationToShutdown')
+!atStationToShutdown.name := 'atStationToShutdown'
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 5
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 10
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 15
+
+!new TimeEvent('defaultTimeEvent1')
+!defaultTimeEvent1.time := 1
+
+!new TimeEvent('defaultTimeEvent2')
+!defaultTimeEvent2.time := 1
+
+!new TimeEvent('defaultTimeEvent3')
+!defaultTimeEvent3.time := 1
+
+!insert (trainControlSystem, idle) into StateMachineContainsStates
+!insert (trainControlSystem, prepareForDeparture) into StateMachineContainsStates
+!insert (trainControlSystem, inMotion) into StateMachineContainsStates
+!insert (trainControlSystem, awaitingSignal) into StateMachineContainsStates
+!insert (trainControlSystem, atStation) into StateMachineContainsStates
+!insert (trainControlSystem, shutdown) into StateMachineContainsStates
+
+!insert (trainControlSystem, idleToPrepare) into StateMachineContainsTransitions
+!insert (trainControlSystem, prepareToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, inMotionToAwait) into StateMachineContainsTransitions
+!insert (trainControlSystem, awaitToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, inMotionToAtStation) into StateMachineContainsTransitions
+!insert (trainControlSystem, atStationToInMotion) into StateMachineContainsTransitions
+!insert (trainControlSystem, atStationToShutdown) into StateMachineContainsTransitions
+
+!insert (idleToPrepare, timeEvent1) into TransitionContainsEvents
+!insert (prepareToInMotion, timeEvent2) into TransitionContainsEvents
+!insert (inMotionToAwait, defaultTimeEvent1) into TransitionContainsEvents
+!insert (awaitToInMotion, defaultTimeEvent2) into TransitionContainsEvents
+!insert (inMotionToAtStation, timeEvent3) into TransitionContainsEvents
+!insert (atStationToInMotion, defaultTimeEvent3) into TransitionContainsEvents
+!insert (atStationToShutdown, timeEvent4) into TransitionContainsEvents
+
+!insert (idle, idleToPrepare) into StateTransition
+!insert (idleToPrepare, prepareForDeparture) into TransitionState
+
+!insert (prepareForDeparture, prepareToInMotion) into StateTransition
+!insert (prepareToInMotion, inMotion) into TransitionState
+
+!insert (inMotion, inMotionToAwait) into StateTransition
+!insert (inMotionToAwait, awaitingSignal) into TransitionState
+
+!insert (awaitingSignal, awaitToInMotion) into StateTransition
+!insert (awaitToInMotion, inMotion) into TransitionState
+
+!insert (inMotion, inMotionToAtStation) into StateTransition
+!insert (inMotionToAtStation, atStation) into TransitionState
+
+!insert (atStation, atStationToInMotion) into StateTransition
+!insert (atStationToInMotion, inMotion) into TransitionState
+
+!insert (atStation, atStationToShutdown) into StateTransition
+!insert (atStationToShutdown, shutdown) into TransitionState
+
+!insert (trainControlSystem, idle) into StateMachineStartsStates

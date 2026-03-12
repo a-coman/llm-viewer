@@ -1,0 +1,70 @@
+!new RentalOffice('officeQuickNGoRentals')
+!officeQuickNGoRentals.name := 'QuickNGo Rentals'
+!officeQuickNGoRentals.number := 101
+!officeQuickNGoRentals.address := '456 Market St, San Francisco, CA 94111'
+
+!new Truck('truck2021')
+!truck2021.id := 2021
+!truck2021.registrationState := #CA
+!truck2021.licensePlateNumber := 'CAL1234'
+!truck2021.vehicleTypeCode := #TRUCK
+!truck2021.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck2021.expirationDate := Date('2024-07-15')
+!truck2021.odometerReading := 30000
+!truck2021.gasTankCapacity := 26.5
+!truck2021.workingRadio := true
+!truck2021.mileage := 15
+
+!new Vehicle('trailer3019')
+!trailer3019.id := 3019
+!trailer3019.registrationState := #CA
+!trailer3019.licensePlateNumber := 'CAL5678'
+!trailer3019.vehicleTypeCode := #COVERED_TRAILER
+!trailer3019.registrationLastMaintenanceDate := Date('2023-08-10')
+!trailer3019.expirationDate := Date('2024-09-10')
+
+!new Individual('individualJohnDoe')
+!individualJohnDoe.name := 'John Doe'
+!individualJohnDoe.address := '789 Pine St, San Francisco, CA 94108'
+!individualJohnDoe.poorRisk := false
+!individualJohnDoe.homePhone := '415-555-0101'
+!individualJohnDoe.driverLicenseState := #CA
+!individualJohnDoe.driverLicenseNumber := 98765432
+!individualJohnDoe.driverLicenseExpirationDate := Date('2025-03-23')
+
+!new Company('companyTechInnovators')
+!companyTechInnovators.name := 'Tech Innovators Inc.'
+!companyTechInnovators.address := '123 Silicon Valley Blvd, Palo Alto, CA 94301'
+!companyTechInnovators.poorRisk := false
+!companyTechInnovators.idNumber := 9001
+
+!new RentalAgreement('rentalAgreement5001')
+!rentalAgreement5001.number := 5001
+!rentalAgreement5001.rentalDate := Date('2023-09-01')
+!rentalAgreement5001.anticipatedDuration := 7
+!rentalAgreement5001.depositPaid := 200.0
+!rentalAgreement5001.quotedDailyRate := 45.0
+!rentalAgreement5001.quotedRatePerMile := 0.5
+
+!new RentalAgreement('rentalAgreement6003')
+!rentalAgreement6003.number := 6003
+!rentalAgreement6003.rentalDate := Date('2023-09-10')
+!rentalAgreement6003.anticipatedDuration := 14
+!rentalAgreement6003.depositPaid := 500.0
+!rentalAgreement6003.quotedDailyRate := 35.0
+!rentalAgreement6003.quotedRatePerMile := 0.3
+
+!insert (officeQuickNGoRentals, truck2021) into RentalOfficeVehicle
+!insert (officeQuickNGoRentals, trailer3019) into RentalOfficeVehicle
+
+!insert (officeQuickNGoRentals, rentalAgreement5001) into RentalOfficeRentalAgreementOrigin
+!insert (officeQuickNGoRentals, rentalAgreement6003) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeQuickNGoRentals, rentalAgreement5001) into RentalOfficeRentalAgreementDrop
+!insert (officeQuickNGoRentals, rentalAgreement6003) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5001, truck2021) into RentalAgreementVehicle
+!insert (rentalAgreement6003, trailer3019) into RentalAgreementVehicle
+
+!insert (rentalAgreement5001, individualJohnDoe) into RentalAgreementCustomer
+!insert (rentalAgreement6003, companyTechInnovators) into RentalAgreementCustomer

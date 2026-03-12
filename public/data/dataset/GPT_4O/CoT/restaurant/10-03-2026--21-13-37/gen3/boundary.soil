@@ -1,0 +1,108 @@
+!new Restaurant('restaurant12')
+!restaurant12.name := 'Global Gourmets'
+
+!new Owner('owner23')
+!owner23.name := 'Hiro Tanaka'
+!owner23.percentageShares := 60
+
+!new Owner('owner24')
+!owner24.name := 'Linda Chen'
+!owner24.percentageShares := 40
+
+!insert (restaurant12, owner23) into RestaurantOwner
+!insert (restaurant12, owner24) into RestaurantOwner
+
+!new RegularCustomer('customer8')
+!customer8.name := 'Fatimah Noor'
+!customer8.prefferedLanguage := #English
+
+!new HeadWaiter('headwaiter10')
+!headwaiter10.name := 'Ivan Petrov'
+!headwaiter10.dateOfBirth := Date('1987-01-01')  -- Arbitrary date of birth
+!headwaiter10.phoneNumber := '1234567890'        -- Arbitrary phone number
+
+!new Waiter('waiter19')
+!waiter19.name := 'Jasmine Oladele'
+!waiter19.dateOfBirth := Date('1990-01-01')      -- Arbitrary date of birth
+!waiter19.phoneNumber := '0987654321'            -- Arbitrary phone number
+!waiter19.spokenLanguage := #English
+
+!insert (headwaiter10, waiter19) into HeadWaiterWaiter
+
+!new Chef('chef13')
+!chef13.name := 'Ewan McGregor'
+!chef13.dateOfBirth := Date('1980-01-01')        -- Arbitrary date of birth
+!chef13.phoneNumber := '1029384756'              -- Arbitrary phone number
+
+!new Cook('cook15')
+!cook15.name := 'Kofi Mensah'
+!cook15.dateOfBirth := Date('1995-01-01')        -- Arbitrary date of birth
+!cook15.phoneNumber := '5647382910'              -- Arbitrary phone number
+!cook15.yearsOfExperience := 5
+
+!insert (chef13, cook15) into ChefCook
+
+!new Table('table31')
+!table31.number := 21
+!table31.description := 'Rooftop terrace seating'
+!table31.capacity := 2
+
+!new Table('table32')
+!table32.number := 22
+!table32.description := 'Private booth'
+!table32.capacity := 2
+
+!new Table('table33')
+!table33.number := 23
+!table33.description := 'Compact family table'
+!table33.capacity := 3
+
+!new MenuItem('menuitem17')
+!menuitem17.description := 'A blend of Asian spices with a Western twist.'
+!menuitem17.prepTime := 25.0
+!menuitem17.classification := #Main
+
+!insert (menuitem17, chef13) into MenuItemChef
+
+!new FoodItem('fooditem26')
+!fooditem26.number := 26
+!fooditem26.description := 'Wasabi'
+!fooditem26.purchaseFlag := true
+!fooditem26.unit := #Gram
+
+!new FoodItem('fooditem27')
+!fooditem27.number := 27
+!fooditem27.description := 'Rice Paper'
+!fooditem27.purchaseFlag := false
+!fooditem27.unit := #Sheet
+
+!insert (menuitem17, fooditem26) into MenuItemFoodItem
+!insert (menuitem17, fooditem27) into MenuItemFoodItem
+
+!new Allergen('allergen11')
+!allergen11.type := #Seafood
+
+!insert (fooditem26, allergen11) into FoodItemAllergen
+
+!new Individual('individualReservation6')
+!individualReservation6.date := Date('2023-11-15')
+!individualReservation6.time := Time('19:00')
+!individualReservation6.numberPeople := 2
+!individualReservation6.name := 'Fatimah Noor'
+!individualReservation6.phoneNumber := '5555555555'  -- Arbitrary phone number
+!individualReservation6.seating := #Patio
+!individualReservation6.smoking := #NonSmoking
+!individualReservation6.number := 6
+
+!insert (restaurant12, individualReservation6) into RestaurantReservation
+!insert (individualReservation6, customer8) into ReservationCustomer
+!insert (individualReservation6, waiter19) into ReservationWaiter
+!insert (individualReservation6, table31) into ReservationTable
+!insert (individualReservation6, table32) into ReservationTable
+!insert (individualReservation6, table33) into ReservationTable  -- Ensure all tables meet the constraint
+
+!new ItemOrder('itemorder3')
+!itemorder3.time := Time('19:10')
+
+!insert (individualReservation6, itemorder3) into ReservationItemOrdered
+!insert (itemorder3, menuitem17) into ItemOrderMenuItem

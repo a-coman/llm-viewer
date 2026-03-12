@@ -1,0 +1,66 @@
+!new AddressBook('addressBook30')
+
+!new Company('company30')
+!company30.name := 'EcoHome Solutions'
+!company30.phone := '321-654-9870'
+!company30.website := 'www.ecohomesolutions.com'
+!company30.email := 'contact@ecohomesolutions.com'
+!company30.industry := 'Sustainable Housing'
+
+!new Person('person56')
+!person56.name := 'Sophia Grant'
+!person56.phone := '212-333-4444'
+!person56.website := 'www.sophiagrantdesigns.com'
+!person56.email := 'sophia.grant@ecohomesolutions.com'
+!person56.title := 'Architect'
+
+!new Person('person57')
+!person57.name := 'Max Thompson'
+!person57.phone := '555-666-7777'
+!person57.website := 'www.maxthompsonconstruction.com'
+!person57.email := 'max.thompson@sustainablebuilds.org'
+!person57.title := 'Construction Manager'
+
+!new Note('note56')
+!note56.author := 'Sophia Grant'
+!note56.time := Date('2025-12-01')
+!note56.type := #EMAIL
+!note56.comment := 'Sent drafts of the new eco-house designs.'
+
+!new Note('note57')
+!note57.author := 'Max Thompson'
+!note57.time := Date('2025-12-03')
+!note57.type := #MEETING
+!note57.comment := 'Project meeting to discuss building materials.'
+
+!new Address('address57')
+!address57.city := 'Green Town'
+!address57.houseNr := '430G'
+!address57.street := 'Eco Street'
+
+!new Address('address58')
+!address58.city := 'Buildsville'
+!address58.houseNr := '67H'
+!address58.street := 'Foundation Road'
+
+!new Relationship('relationship58')
+!relationship58.type := #SUBDIVISION
+
+!new Relationship('relationship59')
+!relationship59.type := #COWORKER
+
+!insert (addressBook30, company30) into AddressBookMadeOfContact
+!insert (addressBook30, person56) into AddressBookMadeOfContact
+!insert (addressBook30, person57) into AddressBookMadeOfContact
+
+!insert (person56, note56) into ContactContainsNote
+!insert (person57, note57) into ContactContainsNote
+
+!insert (company30, relationship58) into ContactToRelationship
+!insert (relationship58, person56) into RelationshipToContact
+
+!insert (person56, relationship59) into ContactToRelationship
+!insert (relationship59, person57) into RelationshipToContact
+
+!insert (company30, address57) into ContactContainsAddress
+!insert (person57, address58) into ContactContainsAddress

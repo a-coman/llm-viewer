@@ -1,0 +1,123 @@
+!new Restaurant('restaurant1')
+!restaurant1.name := 'The Gourmet Haven'
+
+!new Owner('owner1')
+!owner1.name := 'Sara Wilson'
+!owner1.percentageShares := 60
+!insert (restaurant1, owner1) into RestaurantOwner
+
+!new Owner('owner2')
+!owner2.name := 'Tom Brown'
+!owner2.percentageShares := 40
+!insert (restaurant1, owner2) into RestaurantOwner
+
+!new Table('table1')
+!table1.number := 1
+!table1.description := 'Corner table'
+!table1.capacity := 2
+
+!new Table('table2')
+!table2.number := 2
+!table2.description := 'Window table'
+!table2.capacity := 4
+
+!new Table('table3')
+!table3.number := 3
+!table3.description := 'Patio table'
+!table3.capacity := 6
+
+!new RegularCustomer('customer1')
+!customer1.name := 'Alice Green'
+!customer1.prefferedLanguage := #English
+
+!new Waiter('waiter1')
+!waiter1.name := 'John Doe'
+!waiter1.dateOfBirth := Date('1990-05-15')
+!waiter1.phoneNumber := '555-2368'
+!waiter1.spokenLanguage := #Spanish
+
+!new Waiter('waiter2')
+!waiter2.name := 'Emily Smith'
+!waiter2.dateOfBirth := Date('1988-03-22')
+!waiter2.phoneNumber := '555-9876'
+!waiter2.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter1')
+!headwaiter1.name := 'Michael Black'
+!headwaiter1.dateOfBirth := Date('1980-07-12')
+!headwaiter1.phoneNumber := '555-1234'
+
+!insert (headwaiter1, waiter1) into HeadWaiterWaiter
+!insert (headwaiter1, waiter2) into HeadWaiterWaiter
+
+!new Individual('reservation1')
+!reservation1.time := Time('19:00')
+!reservation1.date := Date('2023-10-14')
+!reservation1.numberPeople := 4
+!reservation1.name := 'Alice Green'
+!reservation1.phoneNumber := '555-5678'
+!reservation1.number := 1
+!reservation1.seating := #Patio
+!reservation1.smoking := #NonSmoking
+!insert (restaurant1, reservation1) into RestaurantReservation
+!insert (reservation1, customer1) into ReservationCustomer
+!insert (reservation1, waiter1) into ReservationWaiter
+!insert (reservation1, table2) into ReservationTable
+
+!new ItemOrder('itemOrder1')
+!itemOrder1.time := Time('19:30')
+!insert (reservation1, itemOrder1) into ReservationItemOrdered
+
+!new MenuItem('menuItem1')
+!menuItem1.description := 'Caesar Salad'
+!menuItem1.prepTime := 10.0
+!menuItem1.classification := #Apetizer
+!insert (itemOrder1, menuItem1) into ItemOrderMenuItem
+
+!new FoodItem('foodItem1')
+!foodItem1.number := 101
+!foodItem1.description := 'Romaine Lettuce'
+!foodItem1.purchaseFlag := true
+!foodItem1.unit := #Pound
+!insert (menuItem1, foodItem1) into MenuItemFoodItem
+
+!new Allergen('allergen1')
+!allergen1.type := #Gluten
+!insert (foodItem1, allergen1) into FoodItemAllergen
+
+!new Cook('cook1')
+!cook1.name := 'Gordon Blue'
+!cook1.dateOfBirth := Date('1985-02-28')
+!cook1.phoneNumber := '555-3333'
+!cook1.yearsOfExperience := 5
+
+!new Chef('chef1')
+!chef1.name := 'Thomas White'
+!chef1.dateOfBirth := Date('1976-11-05')
+!chef1.phoneNumber := '555-4444'
+!insert (menuItem1, chef1) into MenuItemChef
+!insert (chef1, cook1) into ChefCook
+
+!new Banquet('reservation2')
+!reservation2.time := Time('20:00')
+!reservation2.date := Date('2023-10-20')
+!reservation2.numberPeople := 8
+!reservation2.name := 'Corporate Dinner'
+!reservation2.phoneNumber := '555-9876'
+!reservation2.number := 2
+!reservation2.groupName := 'Tech Conference'
+!reservation2.paymentMethod := #CreditCard
+!reservation2.busService := true
+!insert (restaurant1, reservation2) into RestaurantReservation
+!insert (reservation2, waiter2) into ReservationWaiter
+!insert (reservation2, table1) into ReservationTable
+!insert (reservation2, table3) into ReservationTable
+
+!new BusDriver('busdriver1')
+!busdriver1.name := 'Paul Johnson'
+!busdriver1.dateOfBirth := Date('1965-10-10')
+!busdriver1.phoneNumber := '555-2222'
+!busdriver1.driverLicenseNr := 'DL123456'
+!insert (reservation2, busdriver1) into BanquetBusDriver
+
+!insert (reservation2, busdriver1) into BanquetBusDriver

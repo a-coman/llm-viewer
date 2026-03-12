@@ -1,0 +1,47 @@
+!new Expense('festivalWeekendExpense')
+!festivalWeekendExpense.amount := 850.00
+!festivalWeekendExpense.startDate := Date('2024-11-05')
+!festivalWeekendExpense.endDate := Date('2024-11-07')
+
+!new Bill('festivalTicketBill')
+!festivalTicketBill.amount := 300.00
+!festivalTicketBill.category := 'Music Festival Ticket'
+!festivalTicketBill.date := Date('2024-10-15')
+!festivalTicketBill.paymentMethod := #CREDIT_CARD
+!festivalTicketBill.status := #REFUNDED
+
+!new Bill('hotelAccommodationBill')
+!hotelAccommodationBill.amount := 350.00
+!hotelAccommodationBill.category := 'Hotel Stay'
+!hotelAccommodationBill.date := Date('2024-11-04')
+!hotelAccommodationBill.paymentMethod := #CREDIT_CARD
+!hotelAccommodationBill.status := #VALIDATED
+
+!new Bill('souvenirShoppingBill')
+!souvenirShoppingBill.amount := 200.00
+!souvenirShoppingBill.category := 'Shopping for Souvenirs'
+!souvenirShoppingBill.date := Date('2024-11-06')
+!souvenirShoppingBill.paymentMethod := #CASH
+!souvenirShoppingBill.status := #VERIFIED
+
+!new Currency('currencyINR')
+!currencyINR.name := 'Indian Rupee'
+!currencyINR.abbreviation := 'INR'
+
+!insert (festivalTicketBill, currencyINR) into BillCurrency
+!insert (hotelAccommodationBill, currencyINR) into BillCurrency
+!insert (souvenirShoppingBill, currencyINR) into BillCurrency
+
+!insert (festivalWeekendExpense, festivalTicketBill) into ExpenseContainsBills
+!insert (festivalWeekendExpense, hotelAccommodationBill) into ExpenseContainsBills
+!insert (festivalWeekendExpense, souvenirShoppingBill) into ExpenseContainsBills
+
+!new Comment('festivalExperience')
+!festivalExperience.text := 'An unforgettable music experience; must return next year!'
+
+!new Comment('refundIssue')
+!refundIssue.text := 'Contact customer service to resolve ticket refund discrepancies.'
+
+!insert (festivalWeekendExpense, festivalExperience) into ExpenseComment
+!insert (festivalWeekendExpense, refundIssue) into ExpenseComment
+

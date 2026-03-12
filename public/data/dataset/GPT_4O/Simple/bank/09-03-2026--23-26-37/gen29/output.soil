@@ -1,0 +1,50 @@
+!new Bank('bank57')
+!bank57.country := 'Sweden'
+!bank57.name := 'Swedbank'
+!bank57.bic := 'SWEDSESS'
+
+!new Bank('bank58')
+!bank58.country := 'India'
+!bank58.name := 'Axis Bank'
+!bank58.bic := 'UTIBINBB'
+
+!new Account('account85')
+!account85.iban := 'SE3550000000054910000003'
+!account85.balance := 7400
+
+!new Account('account86')
+!account86.iban := 'IN09123456789012345678'
+!account86.balance := 5400
+
+!new Account('account87')
+!account87.iban := 'SE3550000000054910000004'
+!account87.balance := 300
+
+!new Person('person85')
+!person85.firstName := 'Axel'
+!person85.lastName := 'Lundin'
+!person85.age := 59
+
+!new Person('person86')
+!person86.firstName := 'Priya'
+!person86.lastName := 'Kumar'
+!person86.age := 49
+
+!new Person('person87')
+!person87.firstName := 'Erika'
+!person87.lastName := 'Svensson'
+!person87.age := 35
+
+!insert (person85, account85) into Ownership
+!insert (person86, account86) into Ownership
+!insert (person87, account87) into Ownership
+!insert (person85, account87) into Ownership
+
+!insert (person85, account85) into Use
+!insert (person86, account86) into Use
+!insert (person87, account87) into Use
+!insert (person86, account85) into Use
+
+!insert (bank57, account85) into AccountOfBanks
+!insert (bank58, account86) into AccountOfBanks
+!insert (bank57, account87) into AccountOfBanks

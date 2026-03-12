@@ -1,0 +1,43 @@
+!new Driver('driver9')
+!driver9.id := 'DRV654321'
+!driver9.name := 'Sam Flexroute'
+
+!new Shipment('shipment12')
+!shipment12.id := 'SHP112233'
+!shipment12.status := #ASSIGNED
+
+!new Address('address23')
+!address23.text := '123 Old Street, Central City'
+
+!new GeoLocation('geoLocation23')
+!geoLocation23.latitude := 21.025288
+!geoLocation23.longitude := 105.827149
+
+!insert (address23, geoLocation23) into AddressContainsGeoLocation
+
+!new Address('address24')
+!address24.text := '150 New Avenue, Central City'
+
+!new GeoLocation('geoLocation24')
+!geoLocation24.latitude := 21.030484
+!geoLocation24.longitude := 105.842695
+
+!insert (address24, geoLocation24) into AddressContainsGeoLocation
+
+!new Customer('customer10')
+!customer10.id := 'CUS100100'
+!customer10.name := 'Metro Buyer'
+!customer10.twitterUserName := '@HappyUrban'
+
+!new Station('station9')
+
+!insert (driver9, shipment12) into DriverShipment
+
+!insert (shipment12, address23) into ShipmentContainsPickUpAddress
+!insert (shipment12, address24) into ShipmentContainsDeliveryAddress
+
+!insert (customer10, shipment12) into CustomerConsistsOfShipment
+
+!insert (station9, driver9) into StationContainsDriver
+!insert (station9, shipment12) into StationShipment
+!insert (station9, customer10) into StationContainsCustomer

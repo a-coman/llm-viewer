@@ -1,0 +1,64 @@
+!new Driver('driver48')
+!driver48.id := 'D048'
+!driver48.name := 'Peter Quill'
+
+!new Driver('driver49')
+!driver49.id := 'D049'
+!driver49.name := 'Gamora'
+
+!new Shipment('shipment51')
+!shipment51.id := 'SHP12395'
+!shipment51.status := #NEW
+
+!new Shipment('shipment52')
+!shipment52.id := 'SHP12396'
+!shipment52.status := #UNDERWAY
+
+!new Address('address51')
+!address51.text := '4949 Milano St, Spaceport Alpha'
+
+!new Address('address52')
+!address52.text := '5050 Nova Base Rd, Xandar'
+
+!new GeoLocation('geoLocation51')
+!geoLocation51.latitude := 19.0760
+!geoLocation51.longitude := 72.8777
+
+!new GeoLocation('geoLocation52')
+!geoLocation52.latitude := 4.4444
+!geoLocation52.longitude := 114.5625
+
+!insert (address51, geoLocation51) into AddressContainsGeoLocation
+!insert (address52, geoLocation52) into AddressContainsGeoLocation
+
+!new Customer('customer51')
+!customer51.id := 'CUST051'
+!customer51.name := 'Drax'
+!customer51.twitterUserName := '@destroyer'
+
+!new Customer('customer52')
+!customer52.id := 'CUST052'
+!customer52.name := 'Rocket'
+!customer52.twitterUserName := '@raccoon'
+
+!new Station('station26')
+
+!insert (station26, customer51) into StationContainsCustomer
+!insert (station26, customer52) into StationContainsCustomer
+
+!insert (station26, shipment51) into StationShipment
+!insert (station26, shipment52) into StationShipment
+
+!insert (station26, driver48) into StationContainsDriver
+!insert (station26, driver49) into StationContainsDriver
+
+!insert (shipment51, address51) into ShipmentContainsPickUpAddress
+!insert (shipment51, address52) into ShipmentContainsDeliveryAddress
+
+!insert (shipment52, address52) into ShipmentContainsPickUpAddress
+!insert (shipment52, address51) into ShipmentContainsDeliveryAddress
+
+!insert (customer51, shipment51) into CustomerConsistsOfShipment
+!insert (customer52, shipment52) into CustomerConsistsOfShipment
+
+!insert (driver48, shipment52) into DriverShipment

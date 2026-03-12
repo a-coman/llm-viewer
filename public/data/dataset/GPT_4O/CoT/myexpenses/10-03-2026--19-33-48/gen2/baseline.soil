@@ -1,0 +1,55 @@
+!new Expense('businessConferenceExpense')
+!businessConferenceExpense.amount := 2400.00
+!businessConferenceExpense.startDate := Date('2023-09-05')
+!businessConferenceExpense.endDate := Date('2023-09-10')
+
+!new Bill('billFlightTicket')
+!billFlightTicket.amount := 1500.00
+!billFlightTicket.category := 'Flight Ticket'
+!billFlightTicket.date := Date('2023-09-01')
+!billFlightTicket.paymentMethod := #CREDIT_CARD
+!billFlightTicket.status := #VALIDATED
+
+!new Bill('billHotelStay')
+!billHotelStay.amount := 500.00
+!billHotelStay.category := 'Hotel Stay'
+!billHotelStay.date := Date('2023-09-05')
+!billHotelStay.paymentMethod := #CREDIT_CARD
+!billHotelStay.status := #VERIFIED
+
+!new Bill('billConferenceFee')
+!billConferenceFee.amount := 300.00
+!billConferenceFee.category := 'Conference Fee'
+!billConferenceFee.date := Date('2023-09-05')
+!billConferenceFee.paymentMethod := #CASH
+!billConferenceFee.status := #REFUNDED
+
+!new Bill('billLocalTransport')
+!billLocalTransport.amount := 100.00
+!billLocalTransport.category := 'Local Transport'
+!billLocalTransport.date := Date('2023-09-09')
+!billLocalTransport.paymentMethod := #CHECK
+!billLocalTransport.status := #PENDING
+
+!new Currency('currencyEuro')
+!currencyEuro.name := 'Euro'
+!currencyEuro.abbreviation := 'EUR'
+
+!insert (billFlightTicket, currencyEuro) into BillCurrency
+!insert (billHotelStay, currencyEuro) into BillCurrency
+!insert (billConferenceFee, currencyEuro) into BillCurrency
+!insert (billLocalTransport, currencyEuro) into BillCurrency
+
+!insert (businessConferenceExpense, billFlightTicket) into ExpenseContainsBills
+!insert (businessConferenceExpense, billHotelStay) into ExpenseContainsBills
+!insert (businessConferenceExpense, billConferenceFee) into ExpenseContainsBills
+!insert (businessConferenceExpense, billLocalTransport) into ExpenseContainsBills
+
+!new Comment('commentFlight')
+!commentFlight.text := 'Flight was on time and comfortable.'
+
+!new Comment('commentHotel')
+!commentHotel.text := 'Hotel amenities were excellent, highly recommended.'
+
+!insert (businessConferenceExpense, commentFlight) into ExpenseComment
+!insert (businessConferenceExpense, commentHotel) into ExpenseComment

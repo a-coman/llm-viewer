@@ -1,0 +1,64 @@
+!new Driver('driver34')
+!driver34.id := 'D034'
+!driver34.name := 'Natasha Romanoff'
+
+!new Driver('driver35')
+!driver35.id := 'D035'
+!driver35.name := 'Clint Barton'
+
+!new Shipment('shipment37')
+!shipment37.id := 'SHP12381'
+!shipment37.status := #NEW
+
+!new Shipment('shipment38')
+!shipment38.id := 'SHP12382'
+!shipment38.status := #UNDERWAY
+
+!new Address('address37')
+!address37.text := '3535 Widow Blvd, Red Room'
+
+!new Address('address38')
+!address38.text := '3636 Hawk Ave, Farmstead'
+
+!new GeoLocation('geoLocation37')
+!geoLocation37.latitude := 55.7558
+!geoLocation37.longitude := 37.6173
+
+!new GeoLocation('geoLocation38')
+!geoLocation38.latitude := 41.8781
+!geoLocation38.longitude := -87.6298
+
+!insert (address37, geoLocation37) into AddressContainsGeoLocation
+!insert (address38, geoLocation38) into AddressContainsGeoLocation
+
+!new Customer('customer37')
+!customer37.id := 'CUST037'
+!customer37.name := 'Yelena Belova'
+!customer37.twitterUserName := '@whitewidow'
+
+!new Customer('customer38')
+!customer38.id := 'CUST038'
+!customer38.name := 'Kate Bishop'
+!customer38.twitterUserName := '@hawkeye'
+
+!new Station('station19')
+
+!insert (station19, customer37) into StationContainsCustomer
+!insert (station19, customer38) into StationContainsCustomer
+
+!insert (station19, shipment37) into StationShipment
+!insert (station19, shipment38) into StationShipment
+
+!insert (station19, driver34) into StationContainsDriver
+!insert (station19, driver35) into StationContainsDriver
+
+!insert (shipment37, address37) into ShipmentContainsPickUpAddress
+!insert (shipment37, address38) into ShipmentContainsDeliveryAddress
+
+!insert (shipment38, address38) into ShipmentContainsPickUpAddress
+!insert (shipment38, address37) into ShipmentContainsDeliveryAddress
+
+!insert (customer37, shipment37) into CustomerConsistsOfShipment
+!insert (customer38, shipment38) into CustomerConsistsOfShipment
+
+!insert (driver35, shipment38) into DriverShipment

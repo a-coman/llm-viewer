@@ -1,0 +1,66 @@
+!new AddressBook('addressBook17')
+
+!new Company('company17')
+!company17.name := 'NextGen Robotics'
+!company17.phone := '435-678-2345'
+!company17.website := 'www.nextgenrobotics.com'
+!company17.email := 'contact@nextgenrobotics.com'
+!company17.industry := 'Robotics and Automation'
+
+!new Person('person30')
+!person30.name := 'Sarah Young'
+!person30.phone := '234-567-8901'
+!person30.website := 'www.sarahyoungrobotics.com'
+!person30.email := 'sarah.young@nextgenrobotics.com'
+!person30.title := 'Lead Robotics Engineer'
+
+!new Person('person31')
+!person31.name := 'Tom Rivera'
+!person31.phone := '212-555-4040'
+!person31.website := 'www.tomriveratech.com'
+!person31.email := 'tom.rivera@technomagic.org'
+!person31.title := 'AI Developer'
+
+!new Note('note30')
+!note30.author := 'Sarah Young'
+!note30.time := Date('2024-11-15')
+!note30.type := #CALL
+!note30.comment := 'Project update call with the research team.'
+
+!new Note('note31')
+!note31.author := 'Tom Rivera'
+!note31.time := Date('2024-11-17')
+!note31.type := #EMAIL
+!note31.comment := 'Discussed AI integration strategies.'
+
+!new Address('address31')
+!address31.city := 'Tech Haven'
+!address31.houseNr := '987Z'
+!address31.street := 'Innovation Drive'
+
+!new Address('address32')
+!address32.city := 'Future City'
+!address32.houseNr := '78M'
+!address32.street := 'Automation Alley'
+
+!new Relationship('relationship32')
+!relationship32.type := #EMPLOYEE
+
+!new Relationship('relationship33')
+!relationship33.type := #SUBDIVISION
+
+!insert (addressBook17, company17) into AddressBookMadeOfContact
+!insert (addressBook17, person30) into AddressBookMadeOfContact
+!insert (addressBook17, person31) into AddressBookMadeOfContact
+
+!insert (person30, note30) into ContactContainsNote
+!insert (person31, note31) into ContactContainsNote
+
+!insert (company17, relationship33) into ContactToRelationship
+!insert (relationship33, person30) into RelationshipToContact
+
+!insert (person30, relationship32) into ContactToRelationship
+!insert (relationship32, person31) into RelationshipToContact
+
+!insert (company17, address31) into ContactContainsAddress
+!insert (person31, address32) into ContactContainsAddress

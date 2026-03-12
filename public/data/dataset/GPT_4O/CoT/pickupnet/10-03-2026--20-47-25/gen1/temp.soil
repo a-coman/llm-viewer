@@ -1,0 +1,43 @@
+!new Driver('driver7')
+!driver7.id := 'DR001'
+!driver7.name := 'Kai Zhang'
+
+!new Customer('customer7')
+!customer7.id := 'CU100'
+!customer7.name := 'Mario Garcia'
+!customer7.twitterUserName := '@marioGarciaMX'
+
+!new Shipment('shipment8')
+!shipment8.id := 'SH600'
+!shipment8.status := #NEW
+
+!new Address('address15')
+!address15.text := '123 Elm Street, Springfield, USA'
+
+!new GeoLocation('geoLocation15')
+!geoLocation15.latitude := 39.7837304
+!geoLocation15.longitude := -100.4458825
+
+!insert (address15, geoLocation15) into AddressContainsGeoLocation
+
+!new Address('address16')
+!address16.text := '789 Oak Avenue, Metropolis, USA'
+
+!new GeoLocation('geoLocation16')
+!geoLocation16.latitude := 38.627003
+!geoLocation16.longitude := -90.199404
+
+!insert (address16, geoLocation16) into AddressContainsGeoLocation
+
+!new Station('station6')
+
+!insert (driver7, shipment8) into DriverShipment
+
+!insert (shipment8, address15) into ShipmentContainsPickUpAddress
+!insert (shipment8, address16) into ShipmentContainsDeliveryAddress
+
+!insert (customer7, shipment8) into CustomerConsistsOfShipment
+
+!insert (station6, shipment8) into StationShipment
+!insert (station6, driver7) into StationContainsDriver
+!insert (station6, customer7) into StationContainsCustomer

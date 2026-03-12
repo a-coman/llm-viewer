@@ -1,0 +1,46 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client9')
+!client9.clientId := 9
+!client9.isSuspended := false
+
+-- Only one client in this instance to ensure diversity
+!new Client('client10')
+!client10.clientId := 10
+!client10.isSuspended := false
+
+-- Creating Rentals
+!new Rental('rental8')
+!rental8.date := Date('2023-10-22')
+
+-- Creating Cassettes and Movies
+!new Movie('movie7')
+!movie7.title := 'Thrilling Heights'
+!movie7.availableCopies := 8
+!movie7.genre := #Action
+
+-- Creating Series
+!new Series('series6')
+!series6.title := 'Adventures Beyond'
+!series6.availableCopies := 2
+!series6.episode := 5
+
+-- Creating Actors
+!new Actor('actor8')
+!actor8.name := 'Olivia Stone'
+
+!new Actor('actor9')
+!actor9.name := 'Liam Hart'
+
+-- Creating associations between Client and Rentals
+!insert (client9, rental8) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental8, movie7) into RentalCassette
+!insert (rental8, series6) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie7, actor8) into CassetteActor
+!insert (series6, actor9) into CassetteActor
+!insert (series6, actor8) into CassetteActor

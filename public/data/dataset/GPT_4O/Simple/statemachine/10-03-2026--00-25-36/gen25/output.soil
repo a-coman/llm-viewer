@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine26')
+!stateMachine26.name := 'videoStreamingService'
+
+!new State('state95')
+!state95.name := 'idle'
+
+!new State('state96')
+!state96.name := 'loading'
+
+!new State('state97')
+!state97.name := 'playing'
+
+!new State('state98')
+!state98.name := 'buffering'
+
+!new State('state99')
+!state99.name := 'paused'
+
+!new Transition('transition96')
+!transition96.name := 'startLoading'
+
+!new Transition('transition97')
+!transition97.name := 'startPlayback'
+
+!new Transition('transition98')
+!transition98.name := 'buffer'
+
+!new Transition('transition99')
+!transition99.name := 'pausePlayback'
+
+!new Transition('transition100')
+!transition100.name := 'resumePlayback'
+
+!new TimeEvent('timeEvent96')
+!timeEvent96.time := 3
+
+!new TimeEvent('timeEvent97')
+!timeEvent97.time := 5
+
+!new TimeEvent('timeEvent98')
+!timeEvent98.time := 4
+
+!new TimeEvent('timeEvent99')
+!timeEvent99.time := 2
+
+!new TimeEvent('timeEvent100')
+!timeEvent100.time := 1
+
+!insert (stateMachine26, state95) into StateMachineContainsStates
+!insert (stateMachine26, state96) into StateMachineContainsStates
+!insert (stateMachine26, state97) into StateMachineContainsStates
+!insert (stateMachine26, state98) into StateMachineContainsStates
+!insert (stateMachine26, state99) into StateMachineContainsStates
+
+!insert (stateMachine26, transition96) into StateMachineContainsTransitions
+!insert (stateMachine26, transition97) into StateMachineContainsTransitions
+!insert (stateMachine26, transition98) into StateMachineContainsTransitions
+!insert (stateMachine26, transition99) into StateMachineContainsTransitions
+!insert (stateMachine26, transition100) into StateMachineContainsTransitions
+
+!insert (transition96, timeEvent96) into TransitionContainsEvents
+!insert (transition97, timeEvent97) into TransitionContainsEvents
+!insert (transition98, timeEvent98) into TransitionContainsEvents
+!insert (transition99, timeEvent99) into TransitionContainsEvents
+!insert (transition100, timeEvent100) into TransitionContainsEvents
+
+!insert (state95, transition96) into StateTransition
+!insert (transition96, state96) into TransitionState
+
+!insert (state96, transition97) into StateTransition
+!insert (transition97, state97) into TransitionState
+
+!insert (state97, transition98) into StateTransition
+!insert (transition98, state98) into TransitionState
+
+!insert (state97, transition99) into StateTransition
+!insert (transition99, state99) into TransitionState
+
+!insert (state99, transition100) into StateTransition
+!insert (transition100, state97) into TransitionState
+
+!insert (stateMachine26, state95) into StateMachineStartsStates

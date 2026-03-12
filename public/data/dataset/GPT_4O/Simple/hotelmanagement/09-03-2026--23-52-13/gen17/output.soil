@@ -1,0 +1,36 @@
+!new Booking('booking18')
+!booking18.startDate := '2025-04-25'
+!booking18.endDate := '2025-04-29'
+!booking18.canceled := true
+!booking18.bookingId := 118
+!booking18.confirmed := false
+
+!new Bill('bill18')
+!bill18.price := 0.00
+!bill18.billId := 5018
+
+!new Customer('customer18')
+!customer18.firstName := 'Rachel'
+!customer18.lastName := 'Stewart'
+
+!new RoomReservation('reservation18')
+!reservation18.checkInDate := '2025-04-25'
+!reservation18.checkOutDate := '2025-04-29'
+
+!new Room('room1501')
+!room1501.numBeds := 1
+!room1501.pricePerNight := 80.00
+!room1501.occupied := false
+!room1501.blocked := true
+!room1501.roomNumber := 1501
+
+!new RoomExtra('extra22')
+!extra22.price := 5.00
+!extra22.description := 'Daily Newspaper'
+
+!insert (booking18, bill18) into BookingBill
+!insert (booking18, customer18) into BookingCustomer
+!insert (booking18, reservation18) into BookingRoomReservation
+!insert (reservation18, extra22) into RoomReservationExtras
+!insert (reservation18, room1501) into RoomReservationRoom
+!insert (bill18, reservation18) into BillRoomReservation

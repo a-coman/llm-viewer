@@ -1,0 +1,141 @@
+!new Club('club25')
+!club25.name := 'Fire Phoenix'
+!club25.homeGround := 'Phoenix Nest'
+!club25.chairman := 'Raven Ash'
+
+!new Club('club26')
+!club26.name := 'Crystal Swans'
+!club26.homeGround := 'Swan Lake Stadium'
+!club26.chairman := 'Lily Pond'
+
+!new Team('team25')
+!team25.name := 'Phoenix Blaze'
+!insert (club25, team25) into ClubTeam
+
+!new Team('team26')
+!team26.name := 'Swan Harmony'
+!insert (club26, team26) into ClubTeam
+
+!new Competition('gloryCup')
+!gloryCup.name := 'Glory Cup'
+!gloryCup.type := 'Single Elimination'
+
+!new Match('match13')
+!match13.date := '2025-08-22'
+!match13.homeAway := false
+!insert (gloryCup, match13) into CompetitionMatch
+!insert (team25, match13) into LocalMatch
+!insert (team26, match13) into VisitorMatch
+
+!new MatchReport('report13')
+!report13.duration := 90
+!report13.scoreVisitor := 4
+!report13.scoreLocal := 1
+!insert (match13, report13) into MatchMatchReport
+
+!new Player('player25')
+!player25.name := 'Blaze Ember'
+!player25.age := 21
+!player25.bestFoot := #RIGHT
+!player25.phoneNumber := '7896541230'
+!insert (team25, player25) into TeamPlayer
+
+!new Player('player26')
+!player26.name := 'Crystal Dew'
+!player26.age := 24
+!player26.bestFoot := #LEFT
+!player26.phoneNumber := '8907654321'
+!insert (team26, player26) into TeamPlayer
+
+!new Position('position25')
+!position25.positionName := #MIDFIELDER
+!insert (player25, position25) into PlayerPositions
+
+!new Position('position26')
+!position26.positionName := #GOALKEEPER
+!insert (player26, position26) into PlayerPositions
+
+!new MatchPlayer('matchPlayer25')
+!matchPlayer25.booked := false
+!matchPlayer25.goals := 1
+!matchPlayer25.rating := 7
+!insert (player25, matchPlayer25) into PlayerMatch
+!insert (match13, matchPlayer25) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer26')
+!matchPlayer26.booked := true
+!matchPlayer26.goals := 0
+!matchPlayer26.rating := 9
+!insert (player26, matchPlayer26) into PlayerMatch
+!insert (match13, matchPlayer26) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition25')
+!matchPlayerPosition25.positionName := #MIDFIELDER
+!matchPlayerPosition25.number := 6
+!insert (matchPlayer25, matchPlayerPosition25) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition26')
+!matchPlayerPosition26.positionName := #GOALKEEPER
+!matchPlayerPosition26.number := 1
+!insert (matchPlayer26, matchPlayerPosition26) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event45')
+!event45.eventType := #GOAL
+!event45.time := 5
+!insert (match13, event45) into MatchMatchEvent
+
+!new MatchEvent('event46')
+!event46.eventType := #GOAL
+!event46.time := 22
+!insert (match13, event46) into MatchMatchEvent
+
+!new MatchEvent('event47')
+!event47.eventType := #GOAL
+!event47.time := 33
+!insert (match13, event47) into MatchMatchEvent
+
+!new MatchEvent('event48')
+!event48.eventType := #GOAL
+!event48.time := 65
+!insert (match13, event48) into MatchMatchEvent
+
+!new MatchEvent('event49')
+!event49.eventType := #GOAL
+!event49.time := 80
+!insert (match13, event49) into MatchMatchEvent
+
+!new TrainingSession('training25')
+!training25.date := '2025-07-10'
+!training25.location := 'Phoenix Firehouse'
+!training25.purpose := 'Attack Formation Building'
+!insert (team25, training25) into TeamTraining
+
+!new TrainingSession('training26')
+!training26.date := '2025-07-15'
+!training26.location := 'Swan Sanctuary'
+!training26.purpose := 'Defensive Stable Stance'
+!insert (team26, training26) into TeamTraining
+
+!new TrainingNotes('trainingNote25')
+!trainingNote25.note := 'Enhanced offensive coordination'
+!trainingNote25.date := '2025-07-10'
+!insert (training25, trainingNote25) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote26')
+!trainingNote26.note := 'Prevented breaches in defensive lines'
+!trainingNote26.date := '2025-07-15'
+!insert (training26, trainingNote26) into TrainingTrainingNotes
+
+!new TrainingObjective('objective25')
+!objective25.areaToImprove := 'Agility in Transition Play'
+!objective25.startDate := '2025-05-01'
+!objective25.endDate := '2025-08-01'
+!objective25.success := true
+!insert (objective25, player25) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective26')
+!objective26.areaToImprove := 'Defensive Reflexes'
+!objective26.startDate := '2025-05-15'
+!objective26.endDate := '2025-08-15'
+!objective26.success := false
+!insert (objective26, player26) into TrainingObjectivePlayer

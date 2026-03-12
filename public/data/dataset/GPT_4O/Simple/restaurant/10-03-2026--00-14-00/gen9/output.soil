@@ -1,0 +1,114 @@
+!new Restaurant('restaurant9')
+!restaurant9.name := 'Galactic Bistro'
+
+!new Owner('owner18')
+!owner18.name := 'Scott Moon'
+!owner18.percentageShares := 50
+!insert (restaurant9, owner18) into RestaurantOwner
+
+!new Owner('owner19')
+!owner19.name := 'Linda Star'
+!owner19.percentageShares := 50
+!insert (restaurant9, owner19) into RestaurantOwner
+
+!new Table('table24')
+!table24.number := 24
+!table24.description := 'Stargazer seat'
+!table24.capacity := 2
+
+!new Table('table25')
+!table25.number := 25
+!table25.description := 'Nebula room'
+!table25.capacity := 18
+
+!new RegularCustomer('customer10')
+!customer10.name := 'Victor Vega'
+!customer10.prefferedLanguage := #Spanish
+
+!new Waiter('waiter11')
+!waiter11.name := 'Chris Hudson'
+!waiter11.dateOfBirth := Date('1991-11-12')
+!waiter11.phoneNumber := '555-1234'
+!waiter11.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter9')
+!headwaiter9.name := 'Fiona Brooks'
+!headwaiter9.dateOfBirth := Date('1980-04-30')
+!headwaiter9.phoneNumber := '555-5678'
+
+!insert (headwaiter9, waiter11) into HeadWaiterWaiter
+
+!new Individual('reservation15')
+!reservation15.time := Time('22:00')
+!reservation15.date := Date('2023-11-10')
+!reservation15.numberPeople := 2
+!reservation15.name := 'Victor Vega'
+!reservation15.phoneNumber := '555-4321'
+!reservation15.number := 15
+!reservation15.seating := #Inside
+!reservation15.smoking := #NonSmoking
+!insert (restaurant9, reservation15) into RestaurantReservation
+!insert (reservation15, customer10) into ReservationCustomer
+!insert (reservation15, waiter11) into ReservationWaiter
+!insert (reservation15, table24) into ReservationTable
+
+!new Banquet('reservation16')
+!reservation16.time := Time('21:00')
+!reservation16.date := Date('2024-03-15')
+!reservation16.numberPeople := 30
+!reservation16.name := 'Cosmic Gala'
+!reservation16.phoneNumber := '555-6543'
+!reservation16.number := 16
+!reservation16.groupName := 'Space Explorers Club'
+!reservation16.paymentMethod := #CreditCard
+!reservation16.busService := true
+!insert (restaurant9, reservation16) into RestaurantReservation
+!insert (reservation16, table25) into ReservationTable
+!insert (reservation16, waiter11) into ReservationWaiter
+
+!new Table('tableExtra3')
+!tableExtra3.number := 26
+!tableExtra3.description := 'Galaxy Lounge'
+!tableExtra3.capacity := 14
+!insert (reservation16, tableExtra3) into ReservationTable
+
+!new BusDriver('busdriver6')
+!busdriver6.name := 'Alex Parker'
+!busdriver6.dateOfBirth := Date('1965-09-22')
+!busdriver6.phoneNumber := '555-9988'
+!busdriver6.driverLicenseNr := 'DL345678'
+!insert (reservation16, busdriver6) into BanquetBusDriver
+
+!new ItemOrder('itemOrder9')
+!itemOrder9.time := Time('22:15')
+!insert (reservation15, itemOrder9) into ReservationItemOrdered
+
+!new MenuItem('menuItem9')
+!menuItem9.description := 'Meteorite Medley'
+!menuItem9.prepTime := 20.0
+!menuItem9.classification := #Apetizer
+!insert (itemOrder9, menuItem9) into ItemOrderMenuItem
+
+!new FoodItem('foodItem9')
+!foodItem9.number := 109
+!foodItem9.description := 'Assorted Berries'
+!foodItem9.purchaseFlag := true
+!foodItem9.unit := #Gram
+!insert (menuItem9, foodItem9) into MenuItemFoodItem
+
+!new Allergen('allergen9')
+!allergen9.type := #Nuts
+!insert (foodItem9, allergen9) into FoodItemAllergen
+
+!new Cook('cook9')
+!cook9.name := 'Benjamin Wright'
+!cook9.dateOfBirth := Date('1990-07-21')
+!cook9.phoneNumber := '555-2121'
+!cook9.yearsOfExperience := 5
+
+!new Chef('chef9')
+!chef9.name := 'Emily Carter'
+!chef9.dateOfBirth := Date('1986-02-28')
+!chef9.phoneNumber := '555-3434'
+!insert (menuItem9, chef9) into MenuItemChef
+!insert (chef9, cook9) into ChefCook

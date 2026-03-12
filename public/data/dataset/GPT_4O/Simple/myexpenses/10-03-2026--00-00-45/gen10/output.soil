@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency10')
+!currency10.name := 'Brazilian Real'
+!currency10.abbreviation := 'BRL'
+
+-- Creating instances of Bills
+!new Bill('bill24')
+!bill24.amount := 250.00
+!bill24.category := 'Research Materials'
+!bill24.date := Date('2023-03-01')
+!bill24.paymentMethod := #CASH
+!bill24.status := #VERIFIED
+!insert (bill24, currency10) into BillCurrency
+
+!new Bill('bill25')
+!bill25.amount := 350.00
+!bill25.category := 'Laboratory Equipment'
+!bill25.date := Date('2023-03-02')
+!bill25.paymentMethod := #CREDIT_CARD
+!bill25.status := #DRAFT
+!insert (bill25, currency10) into BillCurrency
+
+!new Bill('bill26')
+!bill26.amount := 150.00
+!bill26.category := 'IT Support'
+!bill26.date := Date('2023-03-03')
+!bill26.paymentMethod := #CHECK
+!bill26.status := #REFUSED
+!insert (bill26, currency10) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment13')
+!comment13.text := 'Expenses for new research project kickoff.'
+
+-- Creating instance of Expense
+!new Expense('expense10')
+!expense10.amount := 750.00
+!expense10.startDate := Date('2023-03-01')
+!expense10.endDate := Date('2023-03-15')
+!insert (expense10, bill24) into ExpenseContainsBills
+!insert (expense10, bill25) into ExpenseContainsBills
+!insert (expense10, bill26) into ExpenseContainsBills
+!insert (expense10, comment13) into ExpenseComment

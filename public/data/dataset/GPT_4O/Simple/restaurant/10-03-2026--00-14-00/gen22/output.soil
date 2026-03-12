@@ -1,0 +1,107 @@
+!new Restaurant('restaurant22')
+!restaurant22.name := 'Galactic Grub'
+
+!new Owner('owner44')
+!owner44.name := 'Leo Star'
+!owner44.percentageShares := 70
+!insert (restaurant22, owner44) into RestaurantOwner
+
+!new Owner('owner45')
+!owner45.name := 'Luna Beam'
+!owner45.percentageShares := 30
+!insert (restaurant22, owner45) into RestaurantOwner
+
+!new Table('table63')
+!table63.number := 63
+!table63.description := 'Skyline Seat'
+!table63.capacity := 4
+
+!new Table('table64')
+!table64.number := 64
+!table64.description := 'Lunar Lounge'
+!table64.capacity := 28
+
+!new Table('table65')
+!table65.number := 65
+!table65.description := 'Comet Chamber'
+!table65.capacity := 20
+
+!new RegularCustomer('customer23')
+!customer23.name := 'Aurora Glimmer'
+!customer23.prefferedLanguage := #Spanish
+
+!new Waiter('waiter24')
+!waiter24.name := 'Mercury Swift'
+!waiter24.dateOfBirth := Date('1991-11-11')
+!waiter24.phoneNumber := '555-2323'
+!waiter24.spokenLanguage := #Italian
+
+!new HeadWaiter('headwaiter22')
+!headwaiter22.name := 'Stella Orbit'
+!headwaiter22.dateOfBirth := Date('1982-02-28')
+!headwaiter22.phoneNumber := '555-3232'
+
+!insert (headwaiter22, waiter24) into HeadWaiterWaiter
+
+!new Individual('reservation41')
+!reservation41.time := Time('18:30')
+!reservation41.date := Date('2024-09-15')
+!reservation41.numberPeople := 3
+!reservation41.name := 'Aurora Glimmer'
+!reservation41.phoneNumber := '555-1122'
+!reservation41.number := 41
+!reservation41.seating := #Inside
+!reservation41.smoking := #NonSmoking
+!insert (restaurant22, reservation41) into RestaurantReservation
+!insert (reservation41, customer23) into ReservationCustomer
+!insert (reservation41, waiter24) into ReservationWaiter
+!insert (reservation41, table63) into ReservationTable
+
+!new Banquet('reservation42')
+!reservation42.time := Time('19:00')
+!reservation42.date := Date('2024-10-21')
+!reservation42.numberPeople := 45
+!reservation42.name := 'Starry Night Fest'
+!reservation42.phoneNumber := '555-4545'
+!reservation42.number := 42
+!reservation42.groupName := 'Universal Unity'
+!reservation42.paymentMethod := #Cash
+!reservation42.busService := false
+!insert (restaurant22, reservation42) into RestaurantReservation
+!insert (reservation42, table64) into ReservationTable
+!insert (reservation42, table65) into ReservationTable
+!insert (reservation42, waiter24) into ReservationWaiter
+
+!new ItemOrder('itemOrder22')
+!itemOrder22.time := Time('19:00')
+!insert (reservation41, itemOrder22) into ReservationItemOrdered
+
+!new MenuItem('menuItem22')
+!menuItem22.description := 'Galactic Gazpacho'
+!menuItem22.prepTime := 20.0
+!menuItem22.classification := #Apetizer
+!insert (itemOrder22, menuItem22) into ItemOrderMenuItem
+
+!new FoodItem('foodItem22')
+!foodItem22.number := 122
+!foodItem22.description := 'Fresh Vegetables'
+!foodItem22.purchaseFlag := true
+!foodItem22.unit := #Pound
+!insert (menuItem22, foodItem22) into MenuItemFoodItem
+
+!new Allergen('allergen22')
+!allergen22.type := #Gluten
+!insert (foodItem22, allergen22) into FoodItemAllergen
+
+!new Cook('cook22')
+!cook22.name := 'Nebula Nova'
+!cook22.dateOfBirth := Date('1993-03-22')
+!cook22.phoneNumber := '555-6767'
+!cook22.yearsOfExperience := 7
+
+!new Chef('chef22')
+!chef22.name := 'Saturn Ring'
+!chef22.dateOfBirth := Date('1988-04-09')
+!chef22.phoneNumber := '555-5454'
+!insert (menuItem22, chef22) into MenuItemChef
+!insert (chef22, cook22) into ChefCook

@@ -1,0 +1,101 @@
+!new AddressBook('ResearchCollaborationAddressBook')
+
+!new Company('GlobalTechUniversity')
+!GlobalTechUniversity.name := 'GlobalTech University'
+!GlobalTechUniversity.phone := '+1-617-555-6789'
+!GlobalTechUniversity.website := 'www.globaltech.edu'
+!GlobalTechUniversity.email := 'info@globaltech.edu'
+!GlobalTechUniversity.industry := 'Education'
+
+!new Address('GlobalTechAddress1')
+!GlobalTechAddress1.city := 'Boston'
+!GlobalTechAddress1.houseNr := '50'
+!GlobalTechAddress1.street := 'College Road'
+!insert (GlobalTechUniversity, GlobalTechAddress1) into ContactContainsAddress
+
+!new Address('GlobalTechAddress2')
+!GlobalTechAddress2.city := 'New York'
+!GlobalTechAddress2.houseNr := '130'
+!GlobalTechAddress2.street := 'Empire Ave'
+!insert (GlobalTechUniversity, GlobalTechAddress2) into ContactContainsAddress
+
+!new Company('EuroScienceInstitute')
+!EuroScienceInstitute.name := 'EuroScience Institute'
+!EuroScienceInstitute.phone := '+33-144-555555'
+!EuroScienceInstitute.website := 'www.euroscience.edu'
+!EuroScienceInstitute.email := 'office@euroscience.edu'
+!EuroScienceInstitute.industry := 'Education'
+
+!new Address('EuroScienceAddress')
+!EuroScienceAddress.city := 'Paris'
+!EuroScienceAddress.houseNr := '77'
+!EuroScienceAddress.street := 'Science Boulevard'
+!insert (EuroScienceInstitute, EuroScienceAddress) into ContactContainsAddress
+
+!new Person('DrJuliaKim')
+!DrJuliaKim.name := 'Dr. Julia Kim'
+!DrJuliaKim.phone := '+1-212-555-0147'
+!DrJuliaKim.email := 'julia.kim@globaltech.edu'
+!DrJuliaKim.title := 'Professor'
+
+!new Address('JuliaKimAddress')
+!JuliaKimAddress.city := 'New York'
+!JuliaKimAddress.houseNr := '100'
+!JuliaKimAddress.street := 'Academic Way'
+!insert (DrJuliaKim, JuliaKimAddress) into ContactContainsAddress
+
+!new Person('DrAhmedElSaid')
+!DrAhmedElSaid.name := 'Dr. Ahmed El Said'
+!DrAhmedElSaid.phone := '+20-2-5555781'
+!DrAhmedElSaid.email := 'ahmed.elsaid@euroscience.edu'
+!DrAhmedElSaid.title := 'Research Fellow'
+
+!new Address('AhmedElSaidAddress')
+!AhmedElSaidAddress.city := 'Cairo'
+!AhmedElSaidAddress.houseNr := '200'
+!AhmedElSaidAddress.street := 'Nile Street'
+!insert (DrAhmedElSaid, AhmedElSaidAddress) into ContactContainsAddress
+
+!new Note('UniversityANote1')
+!UniversityANote1.author := 'Dean Richard G.'
+!UniversityANote1.time := Date('2023-09-15')
+!UniversityANote1.type := #MEETING
+!UniversityANote1.comment := 'Annual collaboration review meeting scheduled.'
+!insert (GlobalTechUniversity, UniversityANote1) into ContactContainsNote
+
+!new Note('ResearcherCNote1')
+!ResearcherCNote1.author := 'Prof. Lisa Wong'
+!ResearcherCNote1.time := Date('2023-08-20')
+!ResearcherCNote1.type := #EMAIL
+!ResearcherCNote1.comment := 'Follow-up on the joint paper submission highlights.'
+!insert (DrJuliaKim, ResearcherCNote1) into ContactContainsNote
+
+!new Relationship('GlobalTechToEuroScienceCoworker')
+!GlobalTechToEuroScienceCoworker.type := #COWORKER
+!insert (GlobalTechToEuroScienceCoworker, EuroScienceInstitute) into RelationshipToContact
+!insert (GlobalTechUniversity, GlobalTechToEuroScienceCoworker) into ContactToRelationship
+
+!new Relationship('GlobalTechToJuliaEmployee')
+!GlobalTechToJuliaEmployee.type := #EMPLOYEE
+!insert (GlobalTechToJuliaEmployee, DrJuliaKim) into RelationshipToContact
+!insert (GlobalTechUniversity, GlobalTechToJuliaEmployee) into ContactToRelationship
+
+!new Relationship('EuroScienceToAhmedBoss')
+!EuroScienceToAhmedBoss.type := #BOSS
+!insert (EuroScienceToAhmedBoss, DrAhmedElSaid) into RelationshipToContact
+!insert (EuroScienceInstitute, EuroScienceToAhmedBoss) into ContactToRelationship
+
+!new Relationship('JuliaToGlobalTechEmployee')
+!JuliaToGlobalTechEmployee.type := #EMPLOYEE
+!insert (JuliaToGlobalTechEmployee, GlobalTechUniversity) into RelationshipToContact
+!insert (DrJuliaKim, JuliaToGlobalTechEmployee) into ContactToRelationship
+
+!new Relationship('JuliaToEuroScienceCoworker')
+!JuliaToEuroScienceCoworker.type := #COWORKER
+!insert (JuliaToEuroScienceCoworker, EuroScienceInstitute) into RelationshipToContact
+!insert (DrJuliaKim, JuliaToEuroScienceCoworker) into ContactToRelationship
+
+!insert (ResearchCollaborationAddressBook, GlobalTechUniversity) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, EuroScienceInstitute) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, DrJuliaKim) into AddressBookMadeOfContact
+!insert (ResearchCollaborationAddressBook, DrAhmedElSaid) into AddressBookMadeOfContact

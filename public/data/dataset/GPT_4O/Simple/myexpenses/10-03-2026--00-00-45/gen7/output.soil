@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency7')
+!currency7.name := 'Swiss Franc'
+!currency7.abbreviation := 'CHF'
+
+-- Creating instances of Bills
+!new Bill('bill16')
+!bill16.amount := 450.00
+!bill16.category := 'Consulting Services'
+!bill16.date := Date('2023-05-05')
+!bill16.paymentMethod := #CREDIT_CARD
+!bill16.status := #REFUSED
+!insert (bill16, currency7) into BillCurrency
+
+!new Bill('bill17')
+!bill17.amount := 200.00
+!bill17.category := 'Software Licenses'
+!bill17.date := Date('2023-05-10')
+!bill17.paymentMethod := #CASH
+!bill17.status := #VERIFIED
+!insert (bill17, currency7) into BillCurrency
+
+!new Bill('bill18')
+!bill18.amount := 150.00
+!bill18.category := 'Office Furniture'
+!bill18.date := Date('2023-05-15')
+!bill18.paymentMethod := #CHECK
+!bill18.status := #VALIDATED
+!insert (bill18, currency7) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment10')
+!comment10.text := 'Office upgrades and consulting costs.'
+
+-- Creating instance of Expense
+!new Expense('expense7')
+!expense7.amount := 800.00
+!expense7.startDate := Date('2023-05-05')
+!expense7.endDate := Date('2023-05-20')
+!insert (expense7, bill16) into ExpenseContainsBills
+!insert (expense7, bill17) into ExpenseContainsBills
+!insert (expense7, bill18) into ExpenseContainsBills
+!insert (expense7, comment10) into ExpenseComment

@@ -1,0 +1,167 @@
+!new Restaurant('restaurant25')
+!restaurant25.name := 'Lotus Blossom'
+
+!new Owner('owner52')
+!owner52.name := 'Somchai Chaiyaratana'
+!owner52.percentageShares := 50
+
+!new Owner('owner53')
+!owner53.name := 'Naree Wong'
+!owner53.percentageShares := 50
+
+!insert (restaurant25, owner52) into RestaurantOwner
+!insert (restaurant25, owner53) into RestaurantOwner
+
+!new Table('table63')
+!table63.number := 1
+!table63.description := 'Intimate table overlooking the koi fish pond.'
+!table63.capacity := 3
+
+!new Table('table64')
+!table64.number := 2
+!table64.description := 'Traditional Thai seating with floor cushions.'
+!table64.capacity := 4
+
+!new Table('table65')
+!table65.number := 3
+!table65.description := 'Large family table in the central dining area.'
+!table65.capacity := 12
+
+!new RegularCustomer('customer20')
+!customer20.name := 'Chompoo Kaew'
+!customer20.prefferedLanguage := #English
+
+!new RegularCustomer('customer21')
+!customer21.name := 'David Johnson'
+!customer21.prefferedLanguage := #English
+
+!new Individual('individualReservation13')
+!individualReservation13.date := Date('2024-02-14')
+!individualReservation13.time := Time('17:45')
+!individualReservation13.numberPeople := 1
+!individualReservation13.name := 'Chompoo Kaew'
+!individualReservation13.phoneNumber := '1234567890'  -- Arbitrary phone number
+!individualReservation13.seating := #Inside
+!individualReservation13.smoking := #NonSmoking
+!individualReservation13.number := 13
+
+!insert (restaurant25, individualReservation13) into RestaurantReservation
+!insert (individualReservation13, customer20) into ReservationCustomer
+!insert (individualReservation13, table63) into ReservationTable
+
+!new Banquet('banquet21')
+!banquet21.date := Date('2024-02-14')
+!banquet21.time := Time('20:30')
+!banquet21.groupName := 'David Johnson\'s Team Dinner'
+!banquet21.numberPeople := 14
+!banquet21.paymentMethod := #CreditCard
+
+!insert (restaurant25, banquet21) into RestaurantReservation
+!insert (banquet21, customer21) into ReservationCustomer
+!insert (banquet21, table65) into ReservationTable
+!insert (banquet21, table64) into ReservationTable
+
+!new Waiter('waiter46')
+!waiter46.name := 'Pimchai Prajun'
+!waiter46.dateOfBirth := Date('1985-01-01')     -- Arbitrary date of birth
+!waiter46.phoneNumber := '2345678901'           -- Arbitrary phone number
+!waiter46.spokenLanguage := #English
+
+!new Waiter('waiter47')
+!waiter47.name := 'Somchai Rattanakosin'
+!waiter47.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter47.phoneNumber := '3456789012'           -- Arbitrary phone number
+!waiter47.spokenLanguage := #English
+
+!insert (individualReservation13, waiter46) into ReservationWaiter
+!insert (banquet21, waiter46) into ReservationWaiter
+!insert (banquet21, waiter47) into ReservationWaiter
+
+!new HeadWaiter('headwaiter20')
+!headwaiter20.name := 'Jintana Preecha'
+!headwaiter20.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter20.phoneNumber := '4567890123'        -- Arbitrary phone number
+
+!insert (headwaiter20, waiter46) into HeadWaiterWaiter
+!insert (headwaiter20, waiter47) into HeadWaiterWaiter
+
+!new BusDriver('busdriver21')
+!busdriver21.name := 'Ananda Saetang'
+
+!insert (banquet21, busdriver21) into BanquetBusDriver
+
+!new Chef('chef27')
+!chef27.name := 'Noi Srisuphan'
+!chef27.dateOfBirth := Date('1965-01-01')        -- Arbitrary date of birth
+!chef27.phoneNumber := '5678901234'              -- Arbitrary phone number
+
+!new Cook('cook32')
+!cook32.name := 'Kanchana Sutham'
+!cook32.dateOfBirth := Date('1995-01-01')        -- Arbitrary date of birth
+!cook32.phoneNumber := '6789012345'              -- Arbitrary phone number
+!cook32.yearsOfExperience := 4
+
+!insert (chef27, cook32) into ChefCook
+
+!new MenuItem('menuitem36')
+!menuitem36.description := 'Spicy and sour Thai soup with shrimp.'
+!menuitem36.prepTime := 40.0
+!menuitem36.classification := #Apetizer
+
+!insert (menuitem36, chef27) into MenuItemChef
+
+!new FoodItem('fooditem61')
+!fooditem61.number := 61
+!fooditem61.description := 'Shrimp'
+!fooditem61.purchaseFlag := true
+!fooditem61.unit := #Pound
+
+!new FoodItem('fooditem62')
+!fooditem62.number := 62
+!fooditem62.description := 'Lemongrass'
+!fooditem62.purchaseFlag := true
+!fooditem62.unit := #Gram
+
+!new FoodItem('fooditem63')
+!fooditem63.number := 63
+!fooditem63.description := 'Chili'
+!fooditem63.purchaseFlag := true
+!fooditem63.unit := #Gram
+
+!insert (menuitem36, fooditem61) into MenuItemFoodItem
+!insert (menuitem36, fooditem62) into MenuItemFoodItem
+!insert (menuitem36, fooditem63) into MenuItemFoodItem
+
+!new Allergen('allergen22')
+!allergen22.type := #Seafood
+
+!insert (fooditem61, allergen22) into FoodItemAllergen
+
+!new MenuItem('menuitem37')
+!menuitem37.description := 'Sweet sticky rice served with ripe mango slices.'
+!menuitem37.prepTime := 20.0
+!menuitem37.classification := #Dessert
+
+!insert (menuitem37, chef27) into MenuItemChef
+
+!new FoodItem('fooditem64')
+!fooditem64.number := 64
+!fooditem64.description := 'Glutinous Rice'
+!fooditem64.purchaseFlag := true
+!fooditem64.unit := #Gram
+
+!new FoodItem('fooditem65')
+!fooditem65.number := 65
+!fooditem65.description := 'Mango'
+!fooditem65.purchaseFlag := true
+!fooditem65.unit := #Gram
+
+!new FoodItem('fooditem66')
+!fooditem66.number := 66
+!fooditem66.description := 'Coconut Milk'
+!fooditem66.purchaseFlag := true
+!fooditem66.unit := #Ounce
+
+!insert (menuitem37, fooditem64) into MenuItemFoodItem
+!insert (menuitem37, fooditem65) into MenuItemFoodItem
+!insert (menuitem37, fooditem66) into MenuItemFoodItem

@@ -1,0 +1,107 @@
+!new Restaurant('restaurant13')
+!restaurant13.name := 'Lunar Delights'
+
+!new Owner('owner26')
+!owner26.name := 'Jasper Moon'
+!owner26.percentageShares := 55
+!insert (restaurant13, owner26) into RestaurantOwner
+
+!new Owner('owner27')
+!owner27.name := 'Celeste Star'
+!owner27.percentageShares := 45
+!insert (restaurant13, owner27) into RestaurantOwner
+
+!new Table('table36')
+!table36.number := 36
+!table36.description := 'Astro Alcove'
+!table36.capacity := 12
+
+!new Table('table37')
+!table37.number := 37
+!table37.description := 'Comet’s Cradle'
+!table37.capacity := 10
+
+!new Table('table38')
+!table38.number := 38
+!table38.description := 'Stardust Setting'
+!table38.capacity := 16
+
+!new RegularCustomer('customer14')
+!customer14.name := 'Aria Luna'
+!customer14.prefferedLanguage := #Italian
+
+!new Waiter('waiter15')
+!waiter15.name := 'Janus Night'
+!waiter15.dateOfBirth := Date('1994-04-01')
+!waiter15.phoneNumber := '555-7878'
+!waiter15.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter13')
+!headwaiter13.name := 'Orion Zenith'
+!headwaiter13.dateOfBirth := Date('1985-05-05')
+!headwaiter13.phoneNumber := '555-1212'
+
+!insert (headwaiter13, waiter15) into HeadWaiterWaiter
+
+!new Individual('reservation23')
+!reservation23.time := Time('20:30')
+!reservation23.date := Date('2024-07-10')
+!reservation23.numberPeople := 6
+!reservation23.name := 'Aria Luna'
+!reservation23.phoneNumber := '555-8989'
+!reservation23.number := 23
+!reservation23.seating := #Inside
+!reservation23.smoking := #NonSmoking
+!insert (restaurant13, reservation23) into RestaurantReservation
+!insert (reservation23, customer14) into ReservationCustomer
+!insert (reservation23, waiter15) into ReservationWaiter
+!insert (reservation23, table37) into ReservationTable
+
+!new Banquet('reservation24')
+!reservation24.time := Time('19:00')
+!reservation24.date := Date('2024-09-15')
+!reservation24.numberPeople := 26
+!reservation24.name := 'Equinox Extravaganza'
+!reservation24.phoneNumber := '555-6767'
+!reservation24.number := 24
+!reservation24.groupName := 'Celestial Club'
+!reservation24.paymentMethod := #Cash
+!reservation24.busService := false
+!insert (restaurant13, reservation24) into RestaurantReservation
+!insert (reservation24, table36) into ReservationTable
+!insert (reservation24, table38) into ReservationTable
+!insert (reservation24, waiter15) into ReservationWaiter
+
+!new ItemOrder('itemOrder13')
+!itemOrder13.time := Time('21:00')
+!insert (reservation23, itemOrder13) into ReservationItemOrdered
+
+!new MenuItem('menuItem13')
+!menuItem13.description := 'Lunar Lasagna'
+!menuItem13.prepTime := 35.0
+!menuItem13.classification := #Main
+!insert (itemOrder13, menuItem13) into ItemOrderMenuItem
+
+!new FoodItem('foodItem13')
+!foodItem13.number := 113
+!foodItem13.description := 'Pasta and Cheese Delight'
+!foodItem13.purchaseFlag := true
+!foodItem13.unit := #Pound
+!insert (menuItem13, foodItem13) into MenuItemFoodItem
+
+!new Allergen('allergen13')
+!allergen13.type := #Gluten
+!insert (foodItem13, allergen13) into FoodItemAllergen
+
+!new Cook('cook13')
+!cook13.name := 'Nova Eclipse'
+!cook13.dateOfBirth := Date('1995-06-06')
+!cook13.phoneNumber := '555-4343'
+!cook13.yearsOfExperience := 4
+
+!new Chef('chef13')
+!chef13.name := 'Galileo Star'
+!chef13.dateOfBirth := Date('1987-09-29')
+!chef13.phoneNumber := '555-5656'
+!insert (menuItem13, chef13) into MenuItemChef
+!insert (chef13, cook13) into ChefCook

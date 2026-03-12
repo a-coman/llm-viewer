@@ -1,0 +1,78 @@
+!new AddressBook('HealthcareProfessionalsAddressBook')
+
+!new Company('WellnessPharmaceuticals')
+!WellnessPharmaceuticals.name := 'Wellness Pharmaceuticals'
+!WellnessPharmaceuticals.phone := '+1-800-987-6543'
+!WellnessPharmaceuticals.website := 'www.wellnesspharma.com'
+!WellnessPharmaceuticals.email := 'contact@wellnesspharma.com'
+!WellnessPharmaceuticals.industry := 'Pharmaceuticals'
+
+!new Address('WellnessPharmaAddress')
+!WellnessPharmaAddress.city := 'Boston'
+!WellnessPharmaAddress.houseNr := '525'
+!WellnessPharmaAddress.street := 'Cambridge Street'
+!insert (WellnessPharmaceuticals, WellnessPharmaAddress) into ContactContainsAddress
+
+!new Note('WellnessPharmaNote1')
+!WellnessPharmaNote1.author := 'Dr. Emily Chen'
+!WellnessPharmaNote1.time := Date('2023-08-10')
+!WellnessPharmaNote1.type := #CALL
+!WellnessPharmaNote1.comment := 'Discussed the side effects of the new medication batch.'
+!insert (WellnessPharmaceuticals, WellnessPharmaNote1) into ContactContainsNote
+
+!new Person('DrEmilyChen')
+!DrEmilyChen.name := 'Dr. Emily Chen'
+!DrEmilyChen.phone := '+44-20-555-0194'
+!DrEmilyChen.email := 'emily.chen@healthclinic.com'
+!DrEmilyChen.title := 'Cardiologist'
+
+!new Address('EmilyChenAddress1')
+!EmilyChenAddress1.city := 'London'
+!EmilyChenAddress1.houseNr := '78'
+!EmilyChenAddress1.street := 'Harley Street'
+!insert (DrEmilyChen, EmilyChenAddress1) into ContactContainsAddress
+
+!new Address('EmilyChenAddress2')
+!EmilyChenAddress2.city := 'Manchester'
+!EmilyChenAddress2.houseNr := '14'
+!EmilyChenAddress2.street := 'Health Avenue'
+!insert (DrEmilyChen, EmilyChenAddress2) into ContactContainsAddress
+
+!new Note('EmilyChenNote1')
+!EmilyChenNote1.author := 'Wellness Pharmaceuticals'
+!EmilyChenNote1.time := Date('2023-09-12')
+!EmilyChenNote1.type := #EMAIL
+!EmilyChenNote1.comment := 'Sent detailed report on drug interactions.'
+!insert (DrEmilyChen, EmilyChenNote1) into ContactContainsNote
+
+!new Company('SunshineDentalClinic')
+!SunshineDentalClinic.name := 'Sunshine Dental Clinic'
+!SunshineDentalClinic.phone := '+61-2-5550-1789'
+!SunshineDentalClinic.website := 'www.sunshinedental.au'
+!SunshineDentalClinic.email := 'info@sunshinedental.au'
+!SunshineDentalClinic.industry := 'Healthcare'
+
+!new Address('SunshineDentalAddress1')
+!SunshineDentalAddress1.city := 'Sydney'
+!SunshineDentalAddress1.houseNr := '34'
+!SunshineDentalAddress1.street := 'Oral Care Drive'
+!insert (SunshineDentalClinic, SunshineDentalAddress1) into ContactContainsAddress
+
+!new Relationship('WellnessToEmilyBoss')
+!WellnessToEmilyBoss.type := #BOSS
+!insert (WellnessToEmilyBoss, DrEmilyChen) into RelationshipToContact
+!insert (WellnessPharmaceuticals, WellnessToEmilyBoss) into ContactToRelationship
+
+!new Relationship('SunshineToWellnessSubdivision')
+!SunshineToWellnessSubdivision.type := #SUBDIVISION
+!insert (SunshineToWellnessSubdivision, WellnessPharmaceuticals) into RelationshipToContact
+!insert (SunshineDentalClinic, SunshineToWellnessSubdivision) into ContactToRelationship
+
+!new Relationship('EmilyToSunshineEmployee')
+!EmilyToSunshineEmployee.type := #EMPLOYEE
+!insert (EmilyToSunshineEmployee, SunshineDentalClinic) into RelationshipToContact
+!insert (DrEmilyChen, EmilyToSunshineEmployee) into ContactToRelationship
+
+!insert (HealthcareProfessionalsAddressBook, WellnessPharmaceuticals) into AddressBookMadeOfContact
+!insert (HealthcareProfessionalsAddressBook, DrEmilyChen) into AddressBookMadeOfContact
+!insert (HealthcareProfessionalsAddressBook, SunshineDentalClinic) into AddressBookMadeOfContact

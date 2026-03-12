@@ -1,0 +1,78 @@
+!new Bank('deutscheFinanzbank')
+!deutscheFinanzbank.country := 'Germany'
+!deutscheFinanzbank.name := 'Deutsche Finanzbank'
+!deutscheFinanzbank.bic := 'DFGM54321'
+
+!new Bank('ubuntuBank')
+!ubuntuBank.country := 'South Africa'
+!ubuntuBank.name := 'Ubuntu Bank'
+!ubuntuBank.bic := 'UBTZA99082'
+
+!new Person('hannahMuller')
+!hannahMuller.firstName := 'Hannah'
+!hannahMuller.lastName := 'Müller'
+!hannahMuller.age := 45
+
+!new Person('davidOsei')
+!davidOsei.firstName := 'David'
+!davidOsei.lastName := 'Osei'
+!davidOsei.age := 28
+
+!new Person('ayeshaKhan')
+!ayeshaKhan.firstName := 'Ayesha'
+!ayeshaKhan.lastName := 'Khan'
+!ayeshaKhan.age := 39
+
+!new Person('jurgenSchmidt')
+!jurgenSchmidt.firstName := 'Jürgen'
+!jurgenSchmidt.lastName := 'Schmidt'
+!jurgenSchmidt.age := 52
+
+!new Person('zaneleMbeki')
+!zaneleMbeki.firstName := 'Zanele'
+!zaneleMbeki.lastName := 'Mbeki'
+!zaneleMbeki.age := 33
+
+!new Account('account11_1')
+!account11_1.iban := 'DE4455667788E'
+!account11_1.balance := 15000
+
+!new Account('account11_2')
+!account11_2.iban := 'ZA1239876543F'
+!account11_2.balance := 2300
+
+!new Account('account11_3')
+!account11_3.iban := 'DE9988776655G'
+!account11_3.balance := 10500
+
+!new Account('account11_4')
+!account11_4.iban := 'ZA8765432190H'
+!account11_4.balance := 500
+
+!insert (deutscheFinanzbank, account11_1) into AccountOfBanks
+!insert (ubuntuBank, account11_2) into AccountOfBanks
+!insert (deutscheFinanzbank, account11_3) into AccountOfBanks
+!insert (ubuntuBank, account11_4) into AccountOfBanks
+
+!insert (hannahMuller, account11_1) into Ownership
+
+!insert (davidOsei, account11_2) into Ownership
+!insert (zaneleMbeki, account11_2) into Ownership
+
+!insert (jurgenSchmidt, account11_3) into Ownership
+!insert (ayeshaKhan, account11_3) into Ownership
+
+!insert (zaneleMbeki, account11_4) into Ownership
+
+!insert (hannahMuller, account11_1) into Use
+!insert (jurgenSchmidt, account11_1) into Use
+
+!insert (davidOsei, account11_2) into Use
+!insert (ayeshaKhan, account11_2) into Use
+
+!insert (jurgenSchmidt, account11_3) into Use
+!insert (hannahMuller, account11_3) into Use
+!insert (ayeshaKhan, account11_3) into Use
+
+!insert (zaneleMbeki, account11_4) into Use
+!insert (davidOsei, account11_4) into Use

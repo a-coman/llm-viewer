@@ -1,0 +1,50 @@
+!new RentalOffice('officeMiamiDowntown')
+!officeMiamiDowntown.name := 'Miami Downtown Branch'
+!officeMiamiDowntown.number := 101
+!officeMiamiDowntown.address := '123 Biscayne Blvd, Miami, FL'
+
+!new Truck('truck3001')
+!truck3001.id := 3001
+!truck3001.registrationState := #FL
+!truck3001.licensePlateNumber := 'FL1234AB'
+!truck3001.vehicleTypeCode := #TRUCK
+!truck3001.odometerReading := 100000
+!truck3001.gasTankCapacity := 0.0
+!truck3001.workingRadio := true
+!truck3001.mileage := 15
+!truck3001.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck3001.expirationDate := Date('2024-06-14')
+
+!new Individual('individualJuanPerez')
+!individualJuanPerez.name := 'Juan Pérez'
+!individualJuanPerez.address := '456 Little Havana, Miami, FL'
+!individualJuanPerez.poorRisk := false
+!individualJuanPerez.homePhone := '(305) 555-7890'
+!individualJuanPerez.driverLicenseState := #FL
+!individualJuanPerez.driverLicenseNumber := 987654321
+!individualJuanPerez.driverLicenseExpirationDate := Date('2023-12-31')
+
+!new Company('companySunshineCorp')
+!companySunshineCorp.name := 'Sunshine Corp Logistics'
+!companySunshineCorp.address := '789 Brickell Ave, Miami, FL'
+!companySunshineCorp.poorRisk := true
+!companySunshineCorp.idNumber := 87654321
+
+!new RentalAgreement('rentalAgreement5001')
+!rentalAgreement5001.number := 5001
+!rentalAgreement5001.rentalDate := Date('2023-10-01')
+!rentalAgreement5001.anticipatedDuration := 15
+!rentalAgreement5001.depositPaid := 200.0
+!rentalAgreement5001.quotedDailyRate := 150.0
+!rentalAgreement5001.quotedRatePerMile := 0.0
+
+!insert (officeMiamiDowntown, truck3001) into RentalOfficeVehicle
+
+!insert (officeMiamiDowntown, rentalAgreement5001) into RentalOfficeRentalAgreementOrigin
+!insert (officeMiamiDowntown, rentalAgreement5001) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement5001, truck3001) into RentalAgreementVehicle
+
+!insert (rentalAgreement5001, individualJuanPerez) into RentalAgreementCustomer
+!insert (rentalAgreement5001, companySunshineCorp) into RentalAgreementCustomer
+

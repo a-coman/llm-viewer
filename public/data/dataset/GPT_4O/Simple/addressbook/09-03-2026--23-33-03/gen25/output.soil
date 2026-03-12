@@ -1,0 +1,66 @@
+!new AddressBook('addressBook25')
+
+!new Company('company25')
+!company25.name := 'AquaMarine Adventures'
+!company25.phone := '547-890-1234'
+!company25.website := 'www.aquamarineadventures.com'
+!company25.email := 'info@aquamarineadventures.com'
+!company25.industry := 'Tourism and Travel'
+
+!new Person('person46')
+!person46.name := 'Grace Hughes'
+!person46.phone := '202-303-4040'
+!person46.website := 'www.gracehughesmarine.com'
+!person46.email := 'grace.hughes@aquamarineadventures.com'
+!person46.title := 'Marine Tour Coordinator'
+
+!new Person('person47')
+!person47.name := 'Ethan Harris'
+!person47.phone := '626-727-8282'
+!person47.website := 'www.ethanharristravel.com'
+!person47.email := 'ethan.harris@outdoorexplore.com'
+!person47.title := 'Diving Instructor'
+
+!new Note('note46')
+!note46.author := 'Grace Hughes'
+!note46.time := Date('2025-07-15')
+!note46.type := #EMAIL
+!note46.comment := 'Confirmed boat reservation for upcoming ocean tour.'
+
+!new Note('note47')
+!note47.author := 'Ethan Harris'
+!note47.time := Date('2025-07-17')
+!note47.type := #CALL
+!note47.comment := 'Coordinated with clients for diving gear preferences.'
+
+!new Address('address47')
+!address47.city := 'Ocean City'
+!address47.houseNr := '412D'
+!address47.street := 'Wave Street'
+
+!new Address('address48')
+!address48.city := 'Reef Town'
+!address48.houseNr := '92F'
+!address48.street := 'Coral Drive'
+
+!new Relationship('relationship48')
+!relationship48.type := #BOSS
+
+!new Relationship('relationship49')
+!relationship49.type := #EMPLOYEE
+
+!insert (addressBook25, company25) into AddressBookMadeOfContact
+!insert (addressBook25, person46) into AddressBookMadeOfContact
+!insert (addressBook25, person47) into AddressBookMadeOfContact
+
+!insert (person46, note46) into ContactContainsNote
+!insert (person47, note47) into ContactContainsNote
+
+!insert (company25, relationship48) into ContactToRelationship
+!insert (relationship48, person46) into RelationshipToContact
+
+!insert (person46, relationship49) into ContactToRelationship
+!insert (relationship49, person47) into RelationshipToContact
+
+!insert (company25, address47) into ContactContainsAddress
+!insert (person47, address48) into ContactContainsAddress

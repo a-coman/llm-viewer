@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine28')
+!stateMachine28.name := 'hotelBookingSystem'
+
+!new State('state105')
+!state105.name := 'searchingHotels'
+
+!new State('state106')
+!state106.name := 'selectedHotel'
+
+!new State('state107')
+!state107.name := 'bookingDetails'
+
+!new State('state108')
+!state108.name := 'paymentVerification'
+
+!new State('state109')
+!state109.name := 'bookingConfirmed'
+
+!new Transition('transition106')
+!transition106.name := 'selectHotel'
+
+!new Transition('transition107')
+!transition107.name := 'enterBookingDetails'
+
+!new Transition('transition108')
+!transition108.name := 'verifyPayment'
+
+!new Transition('transition109')
+!transition109.name := 'confirmBooking'
+
+!new Transition('transition110')
+!transition110.name := 'exitToSearch'
+
+!new TimeEvent('timeEvent106')
+!timeEvent106.time := 2
+
+!new TimeEvent('timeEvent107')
+!timeEvent107.time := 4
+
+!new TimeEvent('timeEvent108')
+!timeEvent108.time := 3
+
+!new TimeEvent('timeEvent109')
+!timeEvent109.time := 1
+
+!new TimeEvent('timeEvent110')
+!timeEvent110.time := 2
+
+!insert (stateMachine28, state105) into StateMachineContainsStates
+!insert (stateMachine28, state106) into StateMachineContainsStates
+!insert (stateMachine28, state107) into StateMachineContainsStates
+!insert (stateMachine28, state108) into StateMachineContainsStates
+!insert (stateMachine28, state109) into StateMachineContainsStates
+
+!insert (stateMachine28, transition106) into StateMachineContainsTransitions
+!insert (stateMachine28, transition107) into StateMachineContainsTransitions
+!insert (stateMachine28, transition108) into StateMachineContainsTransitions
+!insert (stateMachine28, transition109) into StateMachineContainsTransitions
+!insert (stateMachine28, transition110) into StateMachineContainsTransitions
+
+!insert (transition106, timeEvent106) into TransitionContainsEvents
+!insert (transition107, timeEvent107) into TransitionContainsEvents
+!insert (transition108, timeEvent108) into TransitionContainsEvents
+!insert (transition109, timeEvent109) into TransitionContainsEvents
+!insert (transition110, timeEvent110) into TransitionContainsEvents
+
+!insert (state105, transition106) into StateTransition
+!insert (transition106, state106) into TransitionState
+
+!insert (state106, transition107) into StateTransition
+!insert (transition107, state107) into TransitionState
+
+!insert (state107, transition108) into StateTransition
+!insert (transition108, state108) into TransitionState
+
+!insert (state108, transition109) into StateTransition
+!insert (transition109, state109) into TransitionState
+
+!insert (state109, transition110) into StateTransition
+!insert (transition110, state105) into TransitionState
+
+!insert (stateMachine28, state105) into StateMachineStartsStates

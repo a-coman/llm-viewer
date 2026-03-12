@@ -1,0 +1,47 @@
+-- Creating instances of Currency
+!new Currency('currency1')
+!currency1.name := 'United States Dollar'
+!currency1.abbreviation := 'USD'
+
+-- Creating instances of Bills
+!new Bill('bill1')
+!bill1.amount := 50.00
+!bill1.category := 'Utilities'
+!bill1.date := Date('2023-09-01')
+!bill1.paymentMethod := #CREDIT_CARD
+!bill1.status := #VERIFIED
+!insert (bill1, currency1) into BillCurrency
+
+!new Bill('bill2')
+!bill2.amount := 30.00
+!bill2.category := 'Groceries'
+!bill2.date := Date('2023-09-01')
+!bill2.paymentMethod := #CASH
+!bill2.status := #PENDING
+!insert (bill2, currency1) into BillCurrency
+
+!new Bill('bill3')
+!bill3.amount := 20.00
+!bill3.category := 'Entertainment'
+!bill3.date := Date('2023-09-01')
+!bill3.paymentMethod := #CHECK
+!bill3.status := #VALIDATED
+!insert (bill3, currency1) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment1')
+!comment1.text := 'This expense is for monthly needs.'
+
+!new Comment('comment2')
+!comment2.text := 'Check payment needs confirmation.'
+
+-- Creating instance of Expense
+!new Expense('expense1')
+!expense1.amount := 100.00
+!expense1.startDate := Date('2023-09-01')
+!expense1.endDate := Date('2023-09-30')
+!insert (expense1, bill1) into ExpenseContainsBills
+!insert (expense1, bill2) into ExpenseContainsBills
+!insert (expense1, bill3) into ExpenseContainsBills
+!insert (expense1, comment1) into ExpenseComment
+!insert (expense1, comment2) into ExpenseComment

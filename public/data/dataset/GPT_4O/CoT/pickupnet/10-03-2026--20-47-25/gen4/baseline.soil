@@ -1,0 +1,127 @@
+!new Driver('driver35')
+!driver35.id := 'DR-401'
+!driver35.name := 'Giovanna Carvalho'
+
+!new Driver('driver36')
+!driver36.id := 'DR-402'
+!driver36.name := 'Mateus Silva'
+
+!new Shipment('shipment44')
+!shipment44.id := 'SH-801'
+!shipment44.status := #DELIVERED
+
+!new Shipment('shipment45')
+!shipment45.id := 'SH-802'
+!shipment45.status := #ASSIGNED
+
+!new Shipment('shipment46')
+!shipment46.id := 'SH-803'
+!shipment46.status := #UNDERWAY
+
+!new Shipment('shipment47')
+!shipment47.id := 'SH-804'
+!shipment47.status := #NEW
+
+!new Address('address80')
+!address80.text := 'Rua Augusta, 1500, Consolação, São Paulo, SP'
+
+!new GeoLocation('geoLocation80')
+!geoLocation80.latitude := -23.5558
+!geoLocation80.longitude := -46.6619
+
+!insert (address80, geoLocation80) into AddressContainsGeoLocation
+
+!new Address('address81')
+!address81.text := 'Av. Paulista, 900, Bela Vista, São Paulo, SP'
+
+!new GeoLocation('geoLocation81')
+!geoLocation81.latitude := -23.5631
+!geoLocation81.longitude := -46.6543
+
+!insert (address81, geoLocation81) into AddressContainsGeoLocation
+
+!new Address('address82')
+!address82.text := 'Rua Oscar Freire, 350, Jardins, São Paulo, SP'
+
+!new GeoLocation('geoLocation82')
+!geoLocation82.latitude := -23.5636
+!geoLocation82.longitude := -46.6674
+
+!insert (address82, geoLocation82) into AddressContainsGeoLocation
+
+!new Address('address83')
+!address83.text := 'Av. Ibirapuera, 4000, Moema, São Paulo, SP'
+
+!new GeoLocation('geoLocation83')
+!geoLocation83.latitude := -23.6102
+!geoLocation83.longitude := -46.6618
+
+!insert (address83, geoLocation83) into AddressContainsGeoLocation
+
+!new Address('address84')
+!address84.text := 'Rua 25 de Março, 100, Centro, São Paulo, SP'
+
+!new GeoLocation('geoLocation84')
+!geoLocation84.latitude := -23.5433
+!geoLocation84.longitude := -46.6283
+
+!insert (address84, geoLocation84) into AddressContainsGeoLocation
+
+!new Address('address85')
+!address85.text := 'Rua da Consolação, 2000, Centro, São Paulo, SP'
+
+!new GeoLocation('geoLocation85')
+!geoLocation85.latitude := -23.5518
+!geoLocation85.longitude := -46.6412
+
+!insert (address85, geoLocation85) into AddressContainsGeoLocation
+
+!new Station('station30')
+
+!new Station('station31')
+
+!new Customer('customer32')
+!customer32.id := 'CUST-601'
+!customer32.name := 'Carlos Mendes'
+!customer32.twitterUserName := '@carlos_msp'
+
+!new Customer('customer33')
+!customer33.id := 'CUST-602'
+!customer33.name := 'Juliana Oliveira'
+!customer33.twitterUserName := '@juliana_oliv'
+
+!new Customer('customer34')
+!customer34.id := 'CUST-603'
+!customer34.name := 'Lucas Pereira'
+!customer34.twitterUserName := '@lucas_p_sampa'
+
+!insert (driver35, shipment44) into DriverShipment
+!insert (driver35, shipment45) into DriverShipment
+!insert (driver36, shipment46) into DriverShipment
+
+!insert (shipment44, address80) into ShipmentContainsPickUpAddress
+!insert (shipment45, address82) into ShipmentContainsPickUpAddress
+!insert (shipment46, address84) into ShipmentContainsPickUpAddress
+!insert (shipment47, address82) into ShipmentContainsPickUpAddress
+
+!insert (shipment44, address81) into ShipmentContainsDeliveryAddress
+!insert (shipment45, address83) into ShipmentContainsDeliveryAddress
+!insert (shipment46, address85) into ShipmentContainsDeliveryAddress
+!insert (shipment47, address81) into ShipmentContainsDeliveryAddress
+
+!insert (customer32, shipment44) into CustomerConsistsOfShipment
+!insert (customer33, shipment45) into CustomerConsistsOfShipment
+!insert (customer34, shipment46) into CustomerConsistsOfShipment
+!insert (customer34, shipment47) into CustomerConsistsOfShipment
+
+!insert (station30, customer32) into StationContainsCustomer
+!insert (station30, customer33) into StationContainsCustomer
+!insert (station30, customer34) into StationContainsCustomer
+
+!insert (station30, shipment44) into StationShipment
+!insert (station30, shipment46) into StationShipment
+!insert (station30, shipment47) into StationShipment
+!insert (station31, shipment45) into StationShipment
+
+!insert (station30, driver35) into StationContainsDriver
+!insert (station30, driver36) into StationContainsDriver

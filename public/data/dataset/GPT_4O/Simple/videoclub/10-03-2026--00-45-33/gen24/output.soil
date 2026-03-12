@@ -1,0 +1,52 @@
+-- Creating instances for VideoClub model
+
+-- Creating Clients
+!new Client('client47')
+!client47.clientId := 47
+!client47.isSuspended := false
+
+-- Adding an additional client with a distinct suspension status
+!new Client('client48')
+!client48.clientId := 48
+!client48.isSuspended := true
+
+-- Creating Rentals
+!new Rental('rental44')
+!rental44.date := Date('2023-11-25')
+
+-- Adding a single rental for a unique structural setup
+!new Rental('rental45')
+!rental45.date := Date('2023-11-26')
+
+-- Creating Cassettes and Movies
+!new Movie('movie28')
+!movie28.title := 'Breaking Boundaries'
+!movie28.availableCopies := 6
+!movie28.genre := #Comedy
+
+-- Creating Series
+!new Series('series21')
+!series21.title := 'Chronicles of Time'
+!series21.availableCopies := 4
+!series21.episode := 8
+
+-- Creating Actors
+!new Actor('actor46')
+!actor46.name := 'Dylan Reed'
+
+-- Introducing another actor for diversity
+!new Actor('actor47')
+!actor47.name := 'Olivia Quinn'
+
+-- Creating associations between Clients and Rentals
+!insert (client47, rental44) into ClientRental
+!insert (client48, rental45) into ClientRental
+
+-- Creating associations between Rentals and Cassettes
+!insert (rental44, movie28) into RentalCassette
+!insert (rental45, series21) into RentalCassette
+
+-- Creating associations between Cassettes and Actors
+!insert (movie28, actor46) into CassetteActor
+!insert (series21, actor47) into CassetteActor
+!insert (series21, actor46) into CassetteActor

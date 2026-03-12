@@ -1,0 +1,161 @@
+!new Club('clubE')
+!clubE.name := 'Bavaria Lions'
+!clubE.homeGround := 'Munich Stadium'
+!clubE.chairman := 'Hans Mueller'
+
+!new Club('clubF')
+!clubF.name := 'Paris Stallions'
+!clubF.homeGround := 'Stade de Paris'
+!clubF.chairman := 'Luc Leclerc'
+
+!new Team('teamE')
+!teamE.name := 'Bavaria Lions First Team'
+
+!new Team('teamF')
+!teamF.name := 'Paris Stallions Elite'
+
+!insert (clubE, teamE) into ClubTeam
+!insert (clubF, teamF) into ClubTeam
+
+!new Competition('competition2')
+!competition2.name := 'Champions League'
+!competition2.type := 'Tournament'
+
+!new TrainingSession('trainingSession3')
+!trainingSession3.date := '2023-09-15'
+!trainingSession3.location := 'Bavaria Training Ground'
+!trainingSession3.purpose := 'Improve Defensive Tactics'
+
+!new TrainingSession('trainingSession4')
+!trainingSession4.date := '2023-09-16'
+!trainingSession4.location := 'Stallions Training Field'
+!trainingSession4.purpose := 'Enhance Attacking Strategies'
+
+!insert (teamE, trainingSession3) into TeamTraining
+!insert (teamF, trainingSession4) into TeamTraining
+
+!new TrainingNotes('trainingNote3')
+!trainingNote3.note := 'Focused on pressing and man-marking drills.'
+!trainingNote3.date := '2023-09-15'
+
+!new TrainingNotes('trainingNote4')
+!trainingNote4.note := 'Worked on quick transition plays and finishing.'
+!trainingNote4.date := '2023-09-16'
+
+!insert (trainingSession3, trainingNote3) into TrainingTrainingNotes
+!insert (trainingSession4, trainingNote4) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail2')
+!trainingFail2.reason := 'Injury'
+
+!new Player('player5')
+!player5.name := 'Franz Dietrich'
+!player5.age := 28
+!player5.bestFoot := #RIGHT
+!player5.phoneNumber := '+49-170-1234567'
+
+!new Player('player6')
+!player6.name := 'Pierre Dubois'
+!player6.age := 23
+!player6.bestFoot := #LEFT
+!player6.phoneNumber := '+33-1-78904567'
+
+!insert (teamE, player5) into TeamPlayer
+!insert (teamF, player6) into TeamPlayer
+
+!insert (trainingSession3, trainingFail2) into TrainingFailded
+!insert (trainingFail2, player5) into FailedPlayer
+
+!new Match('match3')
+!match3.date := '2023-10-01'
+!match3.homeAway := true
+
+!insert (teamE, match3) into LocalMatch
+!insert (teamF, match3) into VisitorMatch
+!insert (competition2, match3) into CompetitionMatch
+
+!new MatchReport('matchReport3')
+!matchReport3.duration := 90
+!matchReport3.scoreVisitor := 1
+!matchReport3.scoreLocal := 1
+
+!insert (match3, matchReport3) into MatchMatchReport
+
+!new MatchEvent('matchEvent8')
+!matchEvent8.eventType := #GOAL
+!matchEvent8.time := 34
+
+!new MatchEvent('matchEvent9')
+!matchEvent9.eventType := #GOAL
+!matchEvent9.time := 77
+
+!new MatchEvent('matchEvent10')
+!matchEvent10.eventType := #FOUL
+!matchEvent10.time := 65
+
+!insert (match3, matchEvent8) into MatchMatchEvent
+!insert (match3, matchEvent9) into MatchMatchEvent
+!insert (match3, matchEvent10) into MatchMatchEvent
+
+!new MatchNote('matchNote2')
+!matchNote2.note := 'Intense match with tactical brilliance from both sides.'
+!matchNote2.date := '2023-10-01'
+
+!insert (match3, matchNote2) into MatchMatchNote
+
+!new PlayerNotes('playerNote3')
+!playerNote3.note := 'Shows exceptional leadership on the field.'
+!playerNote3.date := '2023-08-10'
+
+!insert (player5, playerNote3) into PlayerPlayerNotes
+
+!new TrainingObjective('trainingObjective3')
+!trainingObjective3.areaToImprove := 'Ball Control'
+!trainingObjective3.startDate := '2023-09-01'
+!trainingObjective3.endDate := '2023-10-01'
+!trainingObjective3.success := false
+
+!new TrainingObjective('trainingObjective4')
+!trainingObjective4.areaToImprove := 'Tactical Awareness'
+!trainingObjective4.startDate := '2023-09-05'
+!trainingObjective4.endDate := '2023-10-05'
+!trainingObjective4.success := true
+
+!insert (trainingObjective3, player5) into TrainingObjectivePlayer
+!insert (trainingObjective4, player6) into TrainingObjectivePlayer
+
+!new MatchPlayer('matchPlayer5')
+!matchPlayer5.booked := false
+!matchPlayer5.goals := 1
+!matchPlayer5.rating := 8
+
+!new MatchPlayer('matchPlayer6')
+!matchPlayer6.booked := true
+!matchPlayer6.goals := 0
+!matchPlayer6.rating := 7
+
+!insert (player5, matchPlayer5) into PlayerMatch
+!insert (player6, matchPlayer6) into PlayerMatch
+
+!insert (match3, matchPlayer5) into MatchMatchPlayer
+!insert (match3, matchPlayer6) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position12')
+!position12.positionName := #FORWARD
+!position12.number := 9
+
+!new MatchPlayerPosition('position13')
+!position13.positionName := #MIDFIELDER
+!position13.number := 8
+
+!insert (matchPlayer5, position12) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer6, position13) into MatchPlayerMatchPlayerPosition
+
+!new Position('position14')
+!position14.positionName := #FORWARD
+
+!new Position('position15')
+!position15.positionName := #MIDFIELDER
+
+!insert (player5, position14) into PlayerPositions
+!insert (player6, position15) into PlayerPositions

@@ -1,0 +1,70 @@
+!new RentalOffice('office16')
+!office16.name := 'Coastal Rentals'
+!office16.number := 1616
+!office16.address := '500 Shoreline Dr, Miami, FL'
+
+!new Truck('truck31')
+!truck31.id := 531
+!truck31.registrationState := #FL
+!truck31.licensePlateNumber := 'FL-TRK-3345'
+!truck31.vehicleTypeCode := #TRUCK24
+!truck31.registrationLastMaintenanceDate := Date('2023-09-10')
+!truck31.expirationDate := Date('2024-09-10')
+!truck31.odometerReading := 15000
+!truck31.gasTankCapacity := 34.0
+!truck31.workingRadio := true
+!truck31.mileage := 23
+
+!new Individual('individual16')
+!individual16.name := 'Sophia Ramirez'
+!individual16.address := '162 Palm St, Miami Beach, FL'
+!individual16.poorRisk := false
+!individual16.homePhone := '555-1122'
+!individual16.driverLicenseState := #FL
+!individual16.driverLicenseNumber := 34567222
+!individual16.driverLicenseExpirationDate := Date('2025-06-15')
+
+!new RentalAgreement('agreement31')
+!agreement31.number := 3031
+!agreement31.rentalDate := Date('2023-12-08')
+!agreement31.anticipatedDuration := 3
+!agreement31.depositPaid := 180.0
+!agreement31.quotedDailyRate := 59.00
+!agreement31.quotedRatePerMile := 0.50
+
+!new Truck('truck32')
+!truck32.id := 532
+!truck32.registrationState := #AL
+!truck32.licensePlateNumber := 'AL-TRK-5567'
+!truck32.vehicleTypeCode := #COVERED_TRAILER
+!truck32.registrationLastMaintenanceDate := Date('2023-10-01')
+!truck32.expirationDate := Date('2025-10-01')
+!truck32.odometerReading := 26000
+!truck32.gasTankCapacity := 30.0
+!truck32.workingRadio := false
+!truck32.mileage := 20
+
+!new Company('company16')
+!company16.name := 'Seaside Logistics'
+!company16.address := '987 Ocean Ave, Mobile, AL'
+!company16.poorRisk := false
+!company16.idNumber := 432156
+
+!new RentalAgreement('agreement32')
+!agreement32.number := 3032
+!agreement32.rentalDate := Date('2024-01-09')
+!agreement32.anticipatedDuration := 6
+!agreement32.depositPaid := 320.0
+!agreement32.quotedDailyRate := 74.00
+!agreement32.quotedRatePerMile := 0.55
+
+!insert (office16, truck31) into RentalOfficeVehicle
+!insert (office16, truck32) into RentalOfficeVehicle
+!insert (office16, agreement31) into RentalOfficeRentalAgreementOrigin
+!insert (office16, agreement31) into RentalOfficeRentalAgreementDrop
+!insert (office16, agreement32) into RentalOfficeRentalAgreementOrigin
+!insert (office16, agreement32) into RentalOfficeRentalAgreementDrop
+!insert (agreement31, truck31) into RentalAgreementVehicle
+!insert (agreement31, individual16) into RentalAgreementCustomer
+!insert (agreement32, truck32) into RentalAgreementVehicle
+!insert (agreement32, company16) into RentalAgreementCustomer

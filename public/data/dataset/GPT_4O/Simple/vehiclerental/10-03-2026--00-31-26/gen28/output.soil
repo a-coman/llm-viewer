@@ -1,0 +1,70 @@
+!new RentalOffice('office28')
+!office28.name := 'Mountain Top Rentals'
+!office28.number := 2828
+!office28.address := '299 Summit Rd, Asheville, NC'
+
+!new Truck('truck55')
+!truck55.id := 555
+!truck55.registrationState := #CO
+!truck55.licensePlateNumber := 'CO-TRK-6678'
+!truck55.vehicleTypeCode := #TRUCK
+!truck55.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck55.expirationDate := Date('2024-07-15')
+!truck55.odometerReading := 16000
+!truck55.gasTankCapacity := 32.5
+!truck55.workingRadio := true
+!truck55.mileage := 20
+
+!new Individual('individual28')
+!individual28.name := 'Michael Turner'
+!individual28.address := '678 Highland Rd, Charlotte, NC'
+!individual28.poorRisk := false
+!individual28.homePhone := '555-2211'
+!individual28.driverLicenseState := #CO
+!individual28.driverLicenseNumber := 98765321
+!individual28.driverLicenseExpirationDate := Date('2026-02-12')
+
+!new RentalAgreement('agreement55')
+!agreement55.number := 3055
+!agreement55.rentalDate := Date('2023-11-25')
+!agreement55.anticipatedDuration := 6
+!agreement55.depositPaid := 240.0
+!agreement55.quotedDailyRate := 67.00
+!agreement55.quotedRatePerMile := 0.56
+
+!new Truck('truck56')
+!truck56.id := 556
+!truck56.registrationState := #CA
+!truck56.licensePlateNumber := 'CA-TRK-9987'
+!truck56.vehicleTypeCode := #TRUCK24
+!truck56.registrationLastMaintenanceDate := Date('2023-09-05')
+!truck56.expirationDate := Date('2025-09-05')
+!truck56.odometerReading := 23000
+!truck56.gasTankCapacity := 34.0
+!truck56.workingRadio := false
+!truck56.mileage := 19
+
+!new Company('company28')
+!company28.name := 'Peak Performance Logistics'
+!company28.address := '345 Cliffside Dr, Raleigh, NC'
+!company28.poorRisk := true
+!company28.idNumber := 321987
+
+!new RentalAgreement('agreement56')
+!agreement56.number := 3056
+!agreement56.rentalDate := Date('2023-12-15')
+!agreement56.anticipatedDuration := 10
+!agreement56.depositPaid := 450.0
+!agreement56.quotedDailyRate := 79.00
+!agreement56.quotedRatePerMile := 0.64
+
+!insert (office28, truck55) into RentalOfficeVehicle
+!insert (office28, truck56) into RentalOfficeVehicle
+!insert (office28, agreement55) into RentalOfficeRentalAgreementOrigin
+!insert (office28, agreement55) into RentalOfficeRentalAgreementDrop
+!insert (office28, agreement56) into RentalOfficeRentalAgreementOrigin
+!insert (office28, agreement56) into RentalOfficeRentalAgreementDrop
+!insert (agreement55, truck55) into RentalAgreementVehicle
+!insert (agreement55, individual28) into RentalAgreementCustomer
+!insert (agreement56, truck56) into RentalAgreementVehicle
+!insert (agreement56, company28) into RentalAgreementCustomer

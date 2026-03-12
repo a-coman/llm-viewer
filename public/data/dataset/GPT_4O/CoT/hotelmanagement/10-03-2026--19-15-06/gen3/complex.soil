@@ -1,0 +1,71 @@
+!new Customer('customer15')
+!customer15.firstName := 'Ayesha'
+!customer15.lastName := 'Al-Mansoori'
+
+!new Booking('booking14')
+!booking14.startDate := '2023-10-15'
+!booking14.endDate := '2023-10-22'
+!booking14.canceled := false
+!booking14.bookingId := 1023
+!booking14.confirmed := true
+
+!new Bill('bill29_1')
+!bill29_1.price := 1225.00
+!bill29_1.billId := 3027
+
+!new Bill('bill29_2')
+!bill29_2.price := 1225.00
+!bill29_2.billId := 3028
+
+!new RoomReservation('roomReservation14_1')
+!roomReservation14_1.checkInDate := '2023-10-15'
+!roomReservation14_1.checkOutDate := '2023-10-18'
+
+!new RoomReservation('roomReservation14_2')
+!roomReservation14_2.checkInDate := '2023-10-18'
+!roomReservation14_2.checkOutDate := '2023-10-22'
+
+!new Room('room14_310')
+!room14_310.numBeds := 2
+!room14_310.pricePerNight := 300.00
+!room14_310.occupied := true
+!room14_310.blocked := false
+!room14_310.roomNumber := 310
+
+!new Room('room14_312')
+!room14_312.numBeds := 1
+!room14_312.pricePerNight := 250.00
+!room14_312.occupied := true
+!room14_312.blocked := false
+!room14_312.roomNumber := 312
+
+!new RoomExtra('extra14_1')
+!extra14_1.price := 50.00
+!extra14_1.description := 'Desert Safari Adventure'
+
+!new RoomExtra('extra14_2')
+!extra14_2.price := 20.00
+!extra14_2.description := 'Arabic Coffee and Pastry Service'
+
+!new FreeRoomTypesDTO('freeRoomType12')
+!freeRoomType12.roomTypeDescription := 'Luxury King Suite with Balcony'
+!freeRoomType12.numBeds := 1
+!freeRoomType12.pricePerNight := 380.00
+!freeRoomType12.numFreeRooms := 0
+
+!insert (booking14, customer15) into BookingCustomer
+
+!insert (booking14, bill29_1) into BookingBill
+!insert (booking14, bill29_2) into BookingBill
+
+!insert (booking14, roomReservation14_1) into BookingRoomReservation
+!insert (booking14, roomReservation14_2) into BookingRoomReservation
+
+!insert (roomReservation14_1, room14_310) into RoomReservationRoom
+!insert (roomReservation14_1, extra14_1) into RoomReservationExtras
+
+!insert (roomReservation14_2, room14_312) into RoomReservationRoom
+!insert (roomReservation14_2, extra14_2) into RoomReservationExtras
+
+!insert (bill29_1, roomReservation14_1) into BillRoomReservation
+!insert (bill29_2, roomReservation14_2) into BillRoomReservation

@@ -1,0 +1,95 @@
+!new RentalOffice('officeBeachsideRentals')
+!officeBeachsideRentals.name := 'Beachside Rentals'
+!officeBeachsideRentals.number := 310
+!officeBeachsideRentals.address := '1500 Ocean Dr, Miami Beach, FL 33139'
+
+!new Truck('truck4020')
+!truck4020.id := 4020
+!truck4020.registrationState := #FL
+!truck4020.licensePlateNumber := 'FL1122'
+!truck4020.vehicleTypeCode := #TRUCK
+!truck4020.registrationLastMaintenanceDate := Date('2023-09-01')
+!truck4020.expirationDate := Date('2024-09-01')
+!truck4020.odometerReading := 25000
+!truck4020.gasTankCapacity := 22.0
+!truck4020.workingRadio := true
+!truck4020.mileage := 14
+
+!new Truck('truck4021')
+!truck4021.id := 4021
+!truck4021.registrationState := #FL
+!truck4021.licensePlateNumber := 'GA3344'
+!truck4021.vehicleTypeCode := #TRUCK
+!truck4021.registrationLastMaintenanceDate := Date('2023-03-15')
+!truck4021.expirationDate := Date('2024-03-15')
+!truck4021.odometerReading := 40000
+!truck4021.gasTankCapacity := 24.5
+!truck4021.workingRadio := false
+!truck4021.mileage := 13
+
+!new Vehicle('coveredTrailer5031')
+!coveredTrailer5031.id := 5031
+!coveredTrailer5031.registrationState := #FL
+!coveredTrailer5031.licensePlateNumber := 'FL4455'
+!coveredTrailer5031.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer5031.registrationLastMaintenanceDate := Date('2023-10-05')
+!coveredTrailer5031.expirationDate := Date('2024-10-05')
+
+!new Individual('individualCarlosMendez')
+!individualCarlosMendez.name := 'Carlos Mendez'
+!individualCarlosMendez.address := '123 Bayshore Dr, Miami, FL 33131'
+!individualCarlosMendez.poorRisk := false
+!individualCarlosMendez.homePhone := '305-555-0199'
+!individualCarlosMendez.driverLicenseState := #FL
+!individualCarlosMendez.driverLicenseNumber := 55667788
+!individualCarlosMendez.driverLicenseExpirationDate := Date('2025-07-01')
+
+!new Company('companySeasideToursLLC')
+!companySeasideToursLLC.name := 'Seaside Tours LLC'
+!companySeasideToursLLC.address := '987 Ocean Front, Miami Beach, FL 33140'
+!companySeasideToursLLC.poorRisk := true
+!companySeasideToursLLC.idNumber := 7890
+
+!new RentalAgreement('rentalAgreement10010')
+!rentalAgreement10010.number := 10010
+!rentalAgreement10010.rentalDate := Date('2023-12-15')
+!rentalAgreement10010.anticipatedDuration := 2
+!rentalAgreement10010.depositPaid := 50.0
+!rentalAgreement10010.quotedDailyRate := 60.0
+!rentalAgreement10010.quotedRatePerMile := 0.55
+
+!new RentalAgreement('rentalAgreement10011')
+!rentalAgreement10011.number := 10011
+!rentalAgreement10011.rentalDate := Date('2024-01-05')
+!rentalAgreement10011.anticipatedDuration := 14
+!rentalAgreement10011.depositPaid := 300.0
+!rentalAgreement10011.quotedDailyRate := 38.0
+!rentalAgreement10011.quotedRatePerMile := 0.45
+
+!new RentalAgreement('rentalAgreement10012')
+!rentalAgreement10012.number := 10012
+!rentalAgreement10012.rentalDate := Date('2024-02-01')
+!rentalAgreement10012.anticipatedDuration := 7
+!rentalAgreement10012.depositPaid := 150.0
+!rentalAgreement10012.quotedDailyRate := 40.0
+!rentalAgreement10012.quotedRatePerMile := 0.50
+
+!insert (officeBeachsideRentals, truck4020) into RentalOfficeVehicle
+!insert (officeBeachsideRentals, truck4021) into RentalOfficeVehicle
+!insert (officeBeachsideRentals, coveredTrailer5031) into RentalOfficeVehicle
+
+!insert (officeBeachsideRentals, rentalAgreement10010) into RentalOfficeRentalAgreementOrigin
+!insert (officeBeachsideRentals, rentalAgreement10011) into RentalOfficeRentalAgreementOrigin
+!insert (officeBeachsideRentals, rentalAgreement10012) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeBeachsideRentals, rentalAgreement10010) into RentalOfficeRentalAgreementDrop
+!insert (officeBeachsideRentals, rentalAgreement10011) into RentalOfficeRentalAgreementDrop
+!insert (officeBeachsideRentals, rentalAgreement10012) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement10010, truck4020) into RentalAgreementVehicle
+!insert (rentalAgreement10011, truck4021) into RentalAgreementVehicle
+!insert (rentalAgreement10012, coveredTrailer5031) into RentalAgreementVehicle
+
+!insert (rentalAgreement10010, individualCarlosMendez) into RentalAgreementCustomer
+!insert (rentalAgreement10011, companySeasideToursLLC) into RentalAgreementCustomer
+!insert (rentalAgreement10012, companySeasideToursLLC) into RentalAgreementCustomer

@@ -1,0 +1,70 @@
+!new RentalOffice('office17')
+!office17.name := 'Urban Movers'
+!office17.number := 1717
+!office17.address := '555 City Center St, Austin, TX'
+
+!new Truck('truck33')
+!truck33.id := 533
+!truck33.registrationState := #FL
+!truck33.licensePlateNumber := 'FL-TRK-1248'
+!truck33.vehicleTypeCode := #TRUCK
+!truck33.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck33.expirationDate := Date('2024-06-15')
+!truck33.odometerReading := 17000
+!truck33.gasTankCapacity := 27.0
+!truck33.workingRadio := true
+!truck33.mileage := 21
+
+!new Individual('individual17')
+!individual17.name := 'Ella Brooks'
+!individual17.address := '789 Lakeview Dr, Dallas, TX'
+!individual17.poorRisk := true
+!individual17.homePhone := '555-3344'
+!individual17.driverLicenseState := #FL
+!individual17.driverLicenseNumber := 45672189
+!individual17.driverLicenseExpirationDate := Date('2025-12-12')
+
+!new RentalAgreement('agreement33')
+!agreement33.number := 3033
+!agreement33.rentalDate := Date('2023-11-20')
+!agreement33.anticipatedDuration := 4
+!agreement33.depositPaid := 200.0
+!agreement33.quotedDailyRate := 61.00
+!agreement33.quotedRatePerMile := 0.52
+
+!new Truck('truck34')
+!truck34.id := 534
+!truck34.registrationState := #CA
+!truck34.licensePlateNumber := 'CA-TRK-3457'
+!truck34.vehicleTypeCode := #OPEN_TRAILER
+!truck34.registrationLastMaintenanceDate := Date('2023-08-03')
+!truck34.expirationDate := Date('2025-08-03')
+!truck34.odometerReading := 25000
+!truck34.gasTankCapacity := 33.5
+!truck34.workingRadio := false
+!truck34.mileage := 17
+
+!new Company('company17')
+!company17.name := 'Roadway Freight'
+!company17.address := '123 Highway Ln, San Antonio, TX'
+!company17.poorRisk := true
+!company17.idNumber := 876543
+
+!new RentalAgreement('agreement34')
+!agreement34.number := 3034
+!agreement34.rentalDate := Date('2023-12-18')
+!agreement34.anticipatedDuration := 8
+!agreement34.depositPaid := 480.0
+!agreement34.quotedDailyRate := 82.00
+!agreement34.quotedRatePerMile := 0.62
+
+!insert (office17, truck33) into RentalOfficeVehicle
+!insert (office17, truck34) into RentalOfficeVehicle
+!insert (office17, agreement33) into RentalOfficeRentalAgreementOrigin
+!insert (office17, agreement33) into RentalOfficeRentalAgreementDrop
+!insert (office17, agreement34) into RentalOfficeRentalAgreementOrigin
+!insert (office17, agreement34) into RentalOfficeRentalAgreementDrop
+!insert (agreement33, truck33) into RentalAgreementVehicle
+!insert (agreement33, individual17) into RentalAgreementCustomer
+!insert (agreement34, truck34) into RentalAgreementVehicle
+!insert (agreement34, company17) into RentalAgreementCustomer

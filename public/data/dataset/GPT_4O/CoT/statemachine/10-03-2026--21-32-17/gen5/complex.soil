@@ -1,0 +1,119 @@
+!new StateMachine('trafficLightController')
+!trafficLightController.name := 'trafficLightController'
+
+!new State('red')
+!red.name := 'red'
+
+!new State('green')
+!green.name := 'green'
+
+!new State('yellow')
+!yellow.name := 'yellow'
+
+!new State('pedestrianCross')
+!pedestrianCross.name := 'pedestrianCross'
+
+!new State('nightMode')
+!nightMode.name := 'nightMode'
+
+!new State('emergencyOverride')
+!emergencyOverride.name := 'emergencyOverride'
+
+!new Transition('redToGreen')
+!redToGreen.name := 'redToGreen'
+
+!new Transition('greenToYellow')
+!greenToYellow.name := 'greenToYellow'
+
+!new Transition('yellowToRed')
+!yellowToRed.name := 'yellowToRed'
+
+!new Transition('redToPedestrian')
+!redToPedestrian.name := 'redToPedestrian'
+
+!new Transition('pedestrianToRed')
+!pedestrianToRed.name := 'pedestrianToRed'
+
+!new Transition('normalToNight')
+!normalToNight.name := 'normalToNight'
+
+!new Transition('emergencyToRed')
+!emergencyToRed.name := 'emergencyToRed'
+
+!new Transition('anyToEmergency')
+!anyToEmergency.name := 'anyToEmergency'
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent420')
+!timeEvent420.time := 420
+
+!new TimeEvent('timeEvent30')
+!timeEvent30.time := 30
+
+!new TimeEvent('defaultTimeEvent1')
+!defaultTimeEvent1.time := 1
+
+!new TimeEvent('defaultTimeEvent2')
+!defaultTimeEvent2.time := 1
+
+!new TimeEvent('defaultTimeEvent3')
+!defaultTimeEvent3.time := 1
+
+!new TimeEvent('defaultTimeEvent4')
+!defaultTimeEvent4.time := 1
+
+!insert (trafficLightController, red) into StateMachineContainsStates
+!insert (trafficLightController, green) into StateMachineContainsStates
+!insert (trafficLightController, yellow) into StateMachineContainsStates
+!insert (trafficLightController, pedestrianCross) into StateMachineContainsStates
+!insert (trafficLightController, nightMode) into StateMachineContainsStates
+!insert (trafficLightController, emergencyOverride) into StateMachineContainsStates
+
+!insert (trafficLightController, redToGreen) into StateMachineContainsTransitions
+!insert (trafficLightController, greenToYellow) into StateMachineContainsTransitions
+!insert (trafficLightController, yellowToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, redToPedestrian) into StateMachineContainsTransitions
+!insert (trafficLightController, pedestrianToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, normalToNight) into StateMachineContainsTransitions
+!insert (trafficLightController, emergencyToRed) into StateMachineContainsTransitions
+!insert (trafficLightController, anyToEmergency) into StateMachineContainsTransitions
+
+!insert (redToGreen, timeEvent60) into TransitionContainsEvents
+!insert (greenToYellow, timeEvent10) into TransitionContainsEvents
+!insert (yellowToRed, defaultTimeEvent1) into TransitionContainsEvents
+!insert (redToPedestrian, defaultTimeEvent2) into TransitionContainsEvents
+!insert (pedestrianToRed, timeEvent30) into TransitionContainsEvents
+!insert (normalToNight, timeEvent420) into TransitionContainsEvents
+!insert (emergencyToRed, defaultTimeEvent3) into TransitionContainsEvents
+!insert (anyToEmergency, defaultTimeEvent4) into TransitionContainsEvents
+
+!insert (red, redToGreen) into StateTransition
+!insert (redToGreen, green) into TransitionState
+
+!insert (green, greenToYellow) into StateTransition
+!insert (greenToYellow, yellow) into TransitionState
+
+!insert (yellow, yellowToRed) into StateTransition
+!insert (yellowToRed, red) into TransitionState
+
+!insert (red, redToPedestrian) into StateTransition
+!insert (redToPedestrian, pedestrianCross) into TransitionState
+
+!insert (pedestrianCross, pedestrianToRed) into StateTransition
+!insert (pedestrianToRed, red) into TransitionState
+
+!insert (red, normalToNight) into StateTransition
+!insert (normalToNight, nightMode) into TransitionState
+
+!insert (emergencyOverride, emergencyToRed) into StateTransition
+!insert (emergencyToRed, red) into TransitionState
+
+!insert (red, anyToEmergency) into StateTransition
+!insert (anyToEmergency, emergencyOverride) into TransitionState
+
+!insert (trafficLightController, red) into StateMachineStartsStates

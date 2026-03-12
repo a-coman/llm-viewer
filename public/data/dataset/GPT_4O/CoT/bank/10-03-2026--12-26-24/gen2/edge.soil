@@ -1,0 +1,56 @@
+!new Bank('bancoDoSol')
+!bancoDoSol.country := 'Brazil'
+!bancoDoSol.name := 'Banco do Sol'
+!bancoDoSol.bic := 'BDOLSBRIX'
+
+!new Bank('orientFinanceHub')
+!orientFinanceHub.country := 'Singapore'
+!orientFinanceHub.name := 'Orient Finance Hub'
+!orientFinanceHub.bic := 'ORFSINXX'
+
+!new Person('carlosSouza')
+!carlosSouza.firstName := 'Carlos'
+!carlosSouza.lastName := 'Souza'
+!carlosSouza.age := 30
+
+!new Person('meiWong')
+!meiWong.firstName := 'Mei'
+!meiWong.lastName := 'Wong'
+!meiWong.age := 45
+
+!new Person('hiroTanaka')
+!hiroTanaka.firstName := 'Hiro'
+!hiroTanaka.lastName := 'Tanaka'
+!hiroTanaka.age := 22
+
+!new Account('account10_1')
+!account10_1.iban := 'BR12-3456-7890-0001'
+!account10_1.balance := 100
+
+!new Account('account10_2')
+!account10_2.iban := 'SG45-6789-0123-0045'
+!account10_2.balance := 5000
+
+!new Account('account10_3')
+!account10_3.iban := 'SG78-9012-3456-0789'
+!account10_3.balance := 50000
+
+!insert (bancoDoSol, account10_1) into AccountOfBanks
+!insert (orientFinanceHub, account10_2) into AccountOfBanks
+!insert (orientFinanceHub, account10_3) into AccountOfBanks
+
+!insert (carlosSouza, account10_1) into Ownership
+!insert (hiroTanaka, account10_1) into Ownership
+
+!insert (meiWong, account10_2) into Ownership
+
+!insert (meiWong, account10_3) into Ownership
+!insert (carlosSouza, account10_3) into Ownership
+
+!insert (hiroTanaka, account10_1) into Use
+!insert (meiWong, account10_1) into Use
+
+!insert (carlosSouza, account10_2) into Use
+
+!insert (meiWong, account10_3) into Use
+!insert (carlosSouza, account10_3) into Use

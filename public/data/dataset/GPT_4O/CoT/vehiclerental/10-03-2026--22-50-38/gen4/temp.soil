@@ -1,0 +1,61 @@
+!new RentalOffice('officeHighPlainsStation')
+!officeHighPlainsStation.name := 'High Plains Station'
+!officeHighPlainsStation.number := 404
+!officeHighPlainsStation.address := '525 Summit Way, Climbton, CO 80439'
+
+!new Truck('truck89012')
+!truck89012.id := 89012
+!truck89012.registrationState := #CO
+!truck89012.licensePlateNumber := 'CO-321-RST'
+!truck89012.vehicleTypeCode := #TRUCK
+!truck89012.registrationLastMaintenanceDate := Date('2023-07-15')
+!truck89012.expirationDate := Date('2024-07-15')
+!truck89012.odometerReading := 20000
+!truck89012.gasTankCapacity := 80.0
+!truck89012.workingRadio := true
+!truck89012.mileage := 10
+
+!new Individual('individualAlpineSlider')
+!individualAlpineSlider.name := 'Alpine Slider'
+!individualAlpineSlider.address := '123 Glacier Turn, River Valley, CO 80401'
+!individualAlpineSlider.poorRisk := true
+!individualAlpineSlider.homePhone := '+1-303-555-0987'
+!individualAlpineSlider.driverLicenseState := #CO
+!individualAlpineSlider.driverLicenseNumber := 456789012
+!individualAlpineSlider.driverLicenseExpirationDate := Date('2026-03-15')
+
+!new Company('companyPeakExpeditionsCo')
+!companyPeakExpeditionsCo.name := 'Peak Expeditions Co.'
+!companyPeakExpeditionsCo.address := '789 Winter Dr, Snowcap Loop, UT 84049'
+!companyPeakExpeditionsCo.poorRisk := true
+!companyPeakExpeditionsCo.idNumber := 667788990
+
+!new RentalAgreement('rentalAgreement4007')
+!rentalAgreement4007.number := 4007
+!rentalAgreement4007.rentalDate := Date('2025-12-20')
+!rentalAgreement4007.anticipatedDuration := 5
+!rentalAgreement4007.depositPaid := 400.0
+!rentalAgreement4007.quotedDailyRate := 150.0
+!rentalAgreement4007.quotedRatePerMile := 3.5
+
+!new RentalAgreement('rentalAgreement4008')
+!rentalAgreement4008.number := 4008
+!rentalAgreement4008.rentalDate := Date('2025-07-01')
+!rentalAgreement4008.anticipatedDuration := 90
+!rentalAgreement4008.depositPaid := 10000.0
+!rentalAgreement4008.quotedDailyRate := 60.0
+!rentalAgreement4008.quotedRatePerMile := 2.0
+
+!insert (officeHighPlainsStation, truck89012) into RentalOfficeVehicle
+
+!insert (officeHighPlainsStation, rentalAgreement4007) into RentalOfficeRentalAgreementOrigin
+!insert (officeHighPlainsStation, rentalAgreement4008) into RentalOfficeRentalAgreementOrigin
+
+!insert (officeHighPlainsStation, rentalAgreement4007) into RentalOfficeRentalAgreementDrop
+!insert (officeHighPlainsStation, rentalAgreement4008) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement4007, truck89012) into RentalAgreementVehicle
+!insert (rentalAgreement4008, truck89012) into RentalAgreementVehicle
+
+!insert (rentalAgreement4007, individualAlpineSlider) into RentalAgreementCustomer
+!insert (rentalAgreement4008, companyPeakExpeditionsCo) into RentalAgreementCustomer

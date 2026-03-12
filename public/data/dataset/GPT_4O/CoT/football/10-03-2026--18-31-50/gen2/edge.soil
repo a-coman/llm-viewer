@@ -1,0 +1,188 @@
+!new Club('clubK')
+!clubK.name := 'Lunar Legends FC'
+!clubK.homeGround := 'Lunar Surface Stadium'
+!clubK.chairman := 'Dr. Neil Armstrong'
+
+!new Club('clubL')
+!clubL.name := 'Moonlight Warriors'
+!clubL.homeGround := 'Crater Field Arena'
+!clubL.chairman := 'Ms. Valentina Tereshkova'
+
+!new Team('teamK')
+!teamK.name := 'Lunar Pioneers'
+
+!new Team('teamL')
+!teamL.name := 'Moonbeam Raiders'
+
+!insert (clubK, teamK) into ClubTeam
+!insert (clubL, teamL) into ClubTeam
+
+!new Player('player11')
+!player11.name := 'Stardust Walker'
+!player11.age := 26
+!player11.bestFoot := #RIGHT
+!player11.phoneNumber := '+19876543210'
+
+!new Player('player12')
+!player12.name := 'Gravity Glide'
+!player12.age := 30
+!player12.bestFoot := #LEFT
+!player12.phoneNumber := '+1029384756'
+
+!insert (teamK, player11) into TeamPlayer
+!insert (teamL, player12) into TeamPlayer
+
+!new Position('position30')
+!position30.positionName := #FORWARD
+
+!new Position('position31')
+!position31.positionName := #GOALKEEPER
+
+!insert (player11, position30) into PlayerPositions
+!insert (player11, position31) into PlayerPositions
+
+!new Position('position32')
+!position32.positionName := #DEFENDER
+
+!new Position('position33')
+!position33.positionName := #MIDFIELDER
+
+!insert (player12, position32) into PlayerPositions
+!insert (player12, position33) into PlayerPositions
+
+!new Competition('competition5')
+!competition5.name := 'Intergalactic Tournament'
+!competition5.type := 'League'
+
+!new Match('match6')
+!match6.date := '31/08/2023'
+!match6.homeAway := false
+
+!insert (teamL, match6) into LocalMatch
+!insert (teamK, match6) into VisitorMatch
+!insert (competition5, match6) into CompetitionMatch
+
+!new MatchReport('matchReport6')
+!matchReport6.duration := 120
+!matchReport6.scoreVisitor := 3
+!matchReport6.scoreLocal := 3
+
+!insert (match6, matchReport6) into MatchMatchReport
+
+!new MatchEvent('matchEvent17')
+!matchEvent17.eventType := #GOAL
+!matchEvent17.time := 15
+
+!new MatchEvent('matchEvent18')
+!matchEvent18.eventType := #GOAL
+!matchEvent18.time := 45
+
+!new MatchEvent('matchEvent19')
+!matchEvent19.eventType := #GOAL
+!matchEvent19.time := 70
+
+!new MatchEvent('matchEvent20')
+!matchEvent20.eventType := #GOAL
+!matchEvent20.time := 85
+
+!new MatchEvent('matchEvent21')
+!matchEvent21.eventType := #GOAL
+!matchEvent21.time := 105
+
+!new MatchEvent('matchEvent22')
+!matchEvent22.eventType := #GOAL
+!matchEvent22.time := 110
+
+!insert (match6, matchEvent17) into MatchMatchEvent
+!insert (match6, matchEvent18) into MatchMatchEvent
+!insert (match6, matchEvent19) into MatchMatchEvent
+!insert (match6, matchEvent20) into MatchMatchEvent
+!insert (match6, matchEvent21) into MatchMatchEvent
+!insert (match6, matchEvent22) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer10')
+!matchPlayer10.booked := false
+!matchPlayer10.goals := 2
+!matchPlayer10.rating := 9
+
+!new MatchPlayer('matchPlayer11')
+!matchPlayer11.booked := true
+!matchPlayer11.goals := 1
+!matchPlayer11.rating := 6
+
+!insert (player11, matchPlayer10) into PlayerMatch
+!insert (player12, matchPlayer11) into PlayerMatch
+
+!insert (match6, matchPlayer10) into MatchMatchPlayer
+!insert (match6, matchPlayer11) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position34')
+!position34.positionName := #FORWARD
+!position34.number := 7
+
+!new MatchPlayerPosition('position35')
+!position35.positionName := #DEFENDER
+!position35.number := 4
+
+!insert (matchPlayer10, position34) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer11, position35) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession8')
+!trainingSession8.date := '28/08/2023'
+!trainingSession8.location := 'Crater Field Arena'
+!trainingSession8.purpose := 'High-Gravity Adaptation'
+
+!insert (teamL, trainingSession8) into TeamTraining
+
+!new TrainingSession('trainingSession9')
+!trainingSession9.date := '29/08/2023'
+!trainingSession9.location := 'Lunar Surface Stadium'
+!trainingSession9.purpose := 'Low Light Dribbling Practice'
+
+!insert (teamK, trainingSession9) into TeamTraining
+
+!new TrainingNotes('trainingNote8')
+!trainingNote8.note := 'Players adjusted well to slower ball speed on lunar surface.'
+!trainingNote8.date := '28/08/2023'
+
+!insert (trainingSession8, trainingNote8) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote9')
+!trainingNote9.note := 'Practiced dribbling under low light conditions.'
+!trainingNote9.date := '29/08/2023'
+
+!insert (trainingSession9, trainingNote9) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail5')
+!trainingFail5.reason := 'Meteor shower delayed transportation'
+
+!insert (trainingFail5, player12) into FailedPlayer
+!insert (trainingSession8, trainingFail5) into TrainingFailded
+
+!new TrainingObjective('trainingObjective9')
+!trainingObjective9.areaToImprove := 'Ball Control under High Gravity'
+!trainingObjective9.startDate := '25/08/2023'
+!trainingObjective9.endDate := '30/08/2023'
+!trainingObjective9.success := false
+
+!insert (trainingObjective9, player11) into TrainingObjectivePlayer
+
+!new TrainingObjective('trainingObjective10')
+!trainingObjective10.areaToImprove := 'Low Light Awareness'
+!trainingObjective10.startDate := '25/08/2023'
+!trainingObjective10.endDate := '30/08/2023'
+!trainingObjective10.success := true
+
+!insert (trainingObjective10, player12) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote4')
+!playerNote4.note := 'Excellent agility when moving through uneven terrain.'
+!playerNote4.date := '29/08/2023'
+
+!insert (player11, playerNote4) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote5')
+!playerNote5.note := 'Effective in blocking under low light conditions.'
+!playerNote5.date := '30/08/2023'
+
+!insert (player12, playerNote5) into PlayerPlayerNotes

@@ -1,0 +1,64 @@
+!new Driver('driver36')
+!driver36.id := 'D036'
+!driver36.name := 'Daisy Johnson'
+
+!new Driver('driver37')
+!driver37.id := 'D037'
+!driver37.name := 'Phil Coulson'
+
+!new Shipment('shipment39')
+!shipment39.id := 'SHP12383'
+!shipment39.status := #DELIVERED
+
+!new Shipment('shipment40')
+!shipment40.id := 'SHP12384'
+!shipment40.status := #ASSIGNED
+
+!new Address('address39')
+!address39.text := '3737 Tremor Ln, Quake City'
+
+!new Address('address40')
+!address40.text := '3838 S.H.I.E.L.D. Blvd, Helicarrier'
+
+!new GeoLocation('geoLocation39')
+!geoLocation39.latitude := 34.0522
+!geoLocation39.longitude := -118.2437
+
+!new GeoLocation('geoLocation40')
+!geoLocation40.latitude := 40.7306
+!geoLocation40.longitude := -73.9352
+
+!insert (address39, geoLocation39) into AddressContainsGeoLocation
+!insert (address40, geoLocation40) into AddressContainsGeoLocation
+
+!new Customer('customer39')
+!customer39.id := 'CUST039'
+!customer39.name := 'Jemma Simmons'
+!customer39.twitterUserName := '@biogenious'
+
+!new Customer('customer40')
+!customer40.id := 'CUST040'
+!customer40.name := 'Leo Fitz'
+!customer40.twitterUserName := '@engineerfitz'
+
+!new Station('station20')
+
+!insert (station20, customer39) into StationContainsCustomer
+!insert (station20, customer40) into StationContainsCustomer
+
+!insert (station20, shipment39) into StationShipment
+!insert (station20, shipment40) into StationShipment
+
+!insert (station20, driver36) into StationContainsDriver
+!insert (station20, driver37) into StationContainsDriver
+
+!insert (shipment39, address39) into ShipmentContainsPickUpAddress
+!insert (shipment39, address40) into ShipmentContainsDeliveryAddress
+
+!insert (shipment40, address40) into ShipmentContainsPickUpAddress
+!insert (shipment40, address39) into ShipmentContainsDeliveryAddress
+
+!insert (customer39, shipment39) into CustomerConsistsOfShipment
+!insert (customer40, shipment40) into CustomerConsistsOfShipment
+
+!insert (driver37, shipment40) into DriverShipment

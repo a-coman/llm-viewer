@@ -1,0 +1,131 @@
+!new Club('club21')
+!club21.name := 'Oceanic Sharks'
+!club21.homeGround := 'Shark Arena'
+!club21.chairman := 'Linda Blue'
+
+!new Club('club22')
+!club22.name := 'Mountain Wolves'
+!club22.homeGround := 'Wolf Peak Stadium'
+!club22.chairman := 'John Snow'
+
+!new Team('team21')
+!team21.name := 'Shark Surge'
+!insert (club21, team21) into ClubTeam
+
+!new Team('team22')
+!team22.name := 'Wolf Howl'
+!insert (club22, team22) into ClubTeam
+
+!new Competition('fallChampionship')
+!fallChampionship.name := 'Fall Championship'
+!fallChampionship.type := 'League'
+
+!new Match('match11')
+!match11.date := '2025-11-15'
+!match11.homeAway := true
+!insert (fallChampionship, match11) into CompetitionMatch
+!insert (team21, match11) into LocalMatch
+!insert (team22, match11) into VisitorMatch
+
+!new MatchReport('report11')
+!report11.duration := 90
+!report11.scoreVisitor := 0
+!report11.scoreLocal := 3
+!insert (match11, report11) into MatchMatchReport
+
+!new Player('player21')
+!player21.name := 'Cora Sea'
+!player21.age := 28
+!player21.bestFoot := #LEFT
+!player21.phoneNumber := '5678901234'
+!insert (team21, player21) into TeamPlayer
+
+!new Player('player22')
+!player22.name := 'Ethan Mountain'
+!player22.age := 30
+!player22.bestFoot := #RIGHT
+!player22.phoneNumber := '6789012345'
+!insert (team22, player22) into TeamPlayer
+
+!new Position('position21')
+!position21.positionName := #GOALKEEPER
+!insert (player21, position21) into PlayerPositions
+
+!new Position('position22')
+!position22.positionName := #MIDFIELDER
+!insert (player22, position22) into PlayerPositions
+
+!new MatchPlayer('matchPlayer21')
+!matchPlayer21.booked := false
+!matchPlayer21.goals := 0
+!matchPlayer21.rating := 8
+!insert (player21, matchPlayer21) into PlayerMatch
+!insert (match11, matchPlayer21) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer22')
+!matchPlayer22.booked := true
+!matchPlayer22.goals := 0
+!matchPlayer22.rating := 7
+!insert (player22, matchPlayer22) into PlayerMatch
+!insert (match11, matchPlayer22) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition21')
+!matchPlayerPosition21.positionName := #GOALKEEPER
+!matchPlayerPosition21.number := 1
+!insert (matchPlayer21, matchPlayerPosition21) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition22')
+!matchPlayerPosition22.positionName := #MIDFIELDER
+!matchPlayerPosition22.number := 8
+!insert (matchPlayer22, matchPlayerPosition22) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event37')
+!event37.eventType := #GOAL
+!event37.time := 22
+!insert (match11, event37) into MatchMatchEvent
+
+!new MatchEvent('event38')
+!event38.eventType := #GOAL
+!event38.time := 48
+!insert (match11, event38) into MatchMatchEvent
+
+!new MatchEvent('event39')
+!event39.eventType := #GOAL
+!event39.time := 70
+!insert (match11, event39) into MatchMatchEvent
+
+!new TrainingSession('training21')
+!training21.date := '2025-10-05'
+!training21.location := 'Shark Training Complex'
+!training21.purpose := 'Set Pieces'
+!insert (team21, training21) into TeamTraining
+
+!new TrainingSession('training22')
+!training22.date := '2025-10-10'
+!training22.location := 'Wolf Training Ground'
+!training22.purpose := 'Endurance Training'
+!insert (team22, training22) into TeamTraining
+
+!new TrainingNotes('trainingNote21')
+!trainingNote21.note := 'Worked on corner kicks and free kicks'
+!trainingNote21.date := '2025-10-05'
+!insert (training21, trainingNote21) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote22')
+!trainingNote22.note := 'Improved stamina through long distance runs'
+!trainingNote22.date := '2025-10-10'
+!insert (training22, trainingNote22) into TrainingTrainingNotes
+
+!new TrainingObjective('objective21')
+!objective21.areaToImprove := 'Aerial Duels'
+!objective21.startDate := '2025-08-01'
+!objective21.endDate := '2025-11-01'
+!objective21.success := true
+!insert (objective21, player21) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective22')
+!objective22.areaToImprove := 'Ball Distribution'
+!objective22.startDate := '2025-08-15'
+!objective22.endDate := '2025-11-15'
+!objective22.success := false
+!insert (objective22, player22) into TrainingObjectivePlayer

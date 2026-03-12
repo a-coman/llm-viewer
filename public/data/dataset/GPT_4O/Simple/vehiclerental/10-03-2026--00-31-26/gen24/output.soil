@@ -1,0 +1,70 @@
+!new RentalOffice('office24')
+!office24.name := 'Sunset Rentals'
+!office24.number := 2424
+!office24.address := '500 Sunset Blvd, Los Angeles, CA'
+
+!new Truck('truck47')
+!truck47.id := 547
+!truck47.registrationState := #CA
+!truck47.licensePlateNumber := 'CA-TRK-3049'
+!truck47.vehicleTypeCode := #OPEN_TRAILER
+!truck47.registrationLastMaintenanceDate := Date('2023-03-12')
+!truck47.expirationDate := Date('2024-03-12')
+!truck47.odometerReading := 18500
+!truck47.gasTankCapacity := 29.0
+!truck47.workingRadio := false
+!truck47.mileage := 20
+
+!new Individual('individual24')
+!individual24.name := 'Emily Torres'
+!individual24.address := '901 Ocean Dr, Santa Monica, CA'
+!individual24.poorRisk := true
+!individual24.homePhone := '555-6677'
+!individual24.driverLicenseState := #CA
+!individual24.driverLicenseNumber := 87654321
+!individual24.driverLicenseExpirationDate := Date('2026-12-01')
+
+!new RentalAgreement('agreement47')
+!agreement47.number := 3047
+!agreement47.rentalDate := Date('2023-12-29')
+!agreement47.anticipatedDuration := 4
+!agreement47.depositPaid := 190.0
+!agreement47.quotedDailyRate := 67.00
+!agreement47.quotedRatePerMile := 0.58
+
+!new Truck('truck48')
+!truck48.id := 548
+!truck48.registrationState := #FL
+!truck48.licensePlateNumber := 'FL-TRK-6054'
+!truck48.vehicleTypeCode := #TRUCK
+!truck48.registrationLastMaintenanceDate := Date('2023-07-13')
+!truck48.expirationDate := Date('2024-07-13')
+!truck48.odometerReading := 21500
+!truck48.gasTankCapacity := 33.0
+!truck48.workingRadio := true
+!truck48.mileage := 22
+
+!new Company('company24')
+!company24.name := 'Palm Tree Logistics'
+!company24.address := '234 Palm St, Miami, FL'
+!company24.poorRisk := false
+!company24.idNumber := 675432
+
+!new RentalAgreement('agreement48')
+!agreement48.number := 3048
+!agreement48.rentalDate := Date('2024-01-03')
+!agreement48.anticipatedDuration := 10
+!agreement48.depositPaid := 500.0
+!agreement48.quotedDailyRate := 77.00
+!agreement48.quotedRatePerMile := 0.65
+
+!insert (office24, truck47) into RentalOfficeVehicle
+!insert (office24, truck48) into RentalOfficeVehicle
+!insert (office24, agreement47) into RentalOfficeRentalAgreementOrigin
+!insert (office24, agreement47) into RentalOfficeRentalAgreementDrop
+!insert (office24, agreement48) into RentalOfficeRentalAgreementOrigin
+!insert (office24, agreement48) into RentalOfficeRentalAgreementDrop
+!insert (agreement47, truck47) into RentalAgreementVehicle
+!insert (agreement47, individual24) into RentalAgreementCustomer
+!insert (agreement48, truck48) into RentalAgreementVehicle
+!insert (agreement48, company24) into RentalAgreementCustomer

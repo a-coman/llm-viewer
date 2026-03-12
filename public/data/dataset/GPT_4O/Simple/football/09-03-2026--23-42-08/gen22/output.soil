@@ -1,0 +1,136 @@
+!new Club('club43')
+!club43.name := 'Glacial Eagles'
+!club43.homeGround := 'Icecap Arena'
+!club43.chairman := 'Freya Chill'
+
+!new Club('club44')
+!club44.name := 'Canyon Lynxes'
+!club44.homeGround := 'Rocky Hollow'
+!club44.chairman := 'Felix Stone'
+
+!new Team('team43')
+!team43.name := 'Eagle Soar'
+!insert (club43, team43) into ClubTeam
+
+!new Team('team44')
+!team44.name := 'Lynx Leap'
+!insert (club44, team44) into ClubTeam
+
+!new Competition('summitSeries')
+!summitSeries.name := 'Summit Series'
+!summitSeries.type := 'League'
+
+!new Match('match22')
+!match22.date := '2029-07-18'
+!match22.homeAway := true
+!insert (summitSeries, match22) into CompetitionMatch
+!insert (team43, match22) into LocalMatch
+!insert (team44, match22) into VisitorMatch
+
+!new MatchReport('report22')
+!report22.duration := 90
+!report22.scoreVisitor := 2
+!report22.scoreLocal := 2
+!insert (match22, report22) into MatchMatchReport
+
+!new Player('player43')
+!player43.name := 'Aiden Frost'
+!player43.age := 27
+!player43.bestFoot := #RIGHT
+!player43.phoneNumber := '9182736450'
+!insert (team43, player43) into TeamPlayer
+
+!new Player('player44')
+!player44.name := 'Lila Canyon'
+!player44.age := 26
+!player44.bestFoot := #LEFT
+!player44.phoneNumber := '9827345610'
+!insert (team44, player44) into TeamPlayer
+
+!new Position('position43')
+!position43.positionName := #GOALKEEPER
+!insert (player43, position43) into PlayerPositions
+
+!new Position('position44')
+!position44.positionName := #MIDFIELDER
+!insert (player44, position44) into PlayerPositions
+
+!new MatchPlayer('matchPlayer43')
+!matchPlayer43.booked := false
+!matchPlayer43.goals := 0
+!matchPlayer43.rating := 8
+!insert (player43, matchPlayer43) into PlayerMatch
+!insert (match22, matchPlayer43) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer44')
+!matchPlayer44.booked := true
+!matchPlayer44.goals := 1
+!matchPlayer44.rating := 9
+!insert (player44, matchPlayer44) into PlayerMatch
+!insert (match22, matchPlayer44) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition43')
+!matchPlayerPosition43.positionName := #GOALKEEPER
+!matchPlayerPosition43.number := 1
+!insert (matchPlayer43, matchPlayerPosition43) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition44')
+!matchPlayerPosition44.positionName := #MIDFIELDER
+!matchPlayerPosition44.number := 8
+!insert (matchPlayer44, matchPlayerPosition44) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event81')
+!event81.eventType := #GOAL
+!event81.time := 30
+!insert (match22, event81) into MatchMatchEvent
+
+!new MatchEvent('event82')
+!event82.eventType := #GOAL
+!event82.time := 48
+!insert (match22, event82) into MatchMatchEvent
+
+!new MatchEvent('event83')
+!event83.eventType := #GOAL
+!event83.time := 75
+!insert (match22, event83) into MatchMatchEvent
+
+!new MatchEvent('event84')
+!event84.eventType := #GOAL
+!event84.time := 88
+!insert (match22, event84) into MatchMatchEvent
+
+!new TrainingSession('training43')
+!training43.date := '2029-06-10'
+!training43.location := 'Eagle Peak Zone'
+!training43.purpose := 'Goalkeeping Focus'
+!insert (team43, training43) into TeamTraining
+
+!new TrainingSession('training44')
+!training44.date := '2029-06-20'
+!training44.location := 'Lynx Ledge'
+!training44.purpose := 'Midfield Mastery'
+!insert (team44, training44) into TeamTraining
+
+!new TrainingNotes('trainingNote43')
+!trainingNote43.note := 'Enhanced reflex training under pressure'
+!trainingNote43.date := '2029-06-10'
+!insert (training43, trainingNote43) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote44')
+!trainingNote44.note := 'Focused on strategic positioning and passing lanes'
+!trainingNote44.date := '2029-06-20'
+!insert (training44, trainingNote44) into TrainingTrainingNotes
+
+!new TrainingObjective('objective43')
+!objective43.areaToImprove := 'Shot Stopping'
+!objective43.startDate := '2029-04-01'
+!objective43.endDate := '2029-07-01'
+!objective43.success := true
+!insert (objective43, player43) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective44')
+!objective44.areaToImprove := 'Playmaking Skills'
+!objective44.startDate := '2029-04-15'
+!objective44.endDate := '2029-07-15'
+!objective44.success := false
+!insert (objective44, player44) into TrainingObjectivePlayer

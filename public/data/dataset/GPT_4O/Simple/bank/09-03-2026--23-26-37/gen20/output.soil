@@ -1,0 +1,50 @@
+!new Bank('bank39')
+!bank39.country := 'United States'
+!bank39.name := 'JP Morgan Chase'
+!bank39.bic := 'CHASUS33'
+
+!new Bank('bank40')
+!bank40.country := 'South Korea'
+!bank40.name := 'Shinhan Bank'
+!bank40.bic := 'SHBKKRSE'
+
+!new Account('account58')
+!account58.iban := 'US102000123456789876543210'
+!account58.balance := 11500
+
+!new Account('account59')
+!account59.iban := 'KR9300001112345678901234'
+!account59.balance := 7650
+
+!new Account('account60')
+!account60.iban := 'US102000123456789876543211'
+!account60.balance := 800
+
+!new Person('person58')
+!person58.firstName := 'Emily'
+!person58.lastName := 'Johnson'
+!person58.age := 42
+
+!new Person('person59')
+!person59.firstName := 'Hyun'
+!person59.lastName := 'Choi'
+!person59.age := 39
+
+!new Person('person60')
+!person60.firstName := 'Michael'
+!person60.lastName := 'Williams'
+!person60.age := 35
+
+!insert (person58, account58) into Ownership
+!insert (person59, account59) into Ownership
+!insert (person60, account60) into Ownership
+!insert (person58, account60) into Ownership
+
+!insert (person58, account58) into Use
+!insert (person59, account59) into Use
+!insert (person60, account60) into Use
+!insert (person59, account58) into Use
+
+!insert (bank39, account58) into AccountOfBanks
+!insert (bank40, account59) into AccountOfBanks
+!insert (bank39, account60) into AccountOfBanks

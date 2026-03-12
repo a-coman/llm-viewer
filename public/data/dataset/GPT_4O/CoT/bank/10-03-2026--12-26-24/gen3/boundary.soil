@@ -1,0 +1,38 @@
+!new Bank('globalTrustBank')
+!globalTrustBank.country := 'India'
+!globalTrustBank.name := 'GlobalTrust Bank'
+!globalTrustBank.bic := 'GLTRINBB001'
+
+!new Account('account12')
+!account12.iban := 'IN75TEST0000012345678901'
+!account12.balance := 1
+
+!new Person('nehaSharma')
+!nehaSharma.firstName := 'Neha'
+!nehaSharma.lastName := 'Sharma'
+!nehaSharma.age := 28
+
+!new Person('arvindKumar')
+!arvindKumar.firstName := 'Arvind'
+!arvindKumar.lastName := 'Kumar'
+!arvindKumar.age := 32
+
+!new Person('rohitSharma')
+!rohitSharma.firstName := 'Rohit'
+!rohitSharma.lastName := 'Sharma'
+!rohitSharma.age := 19
+
+!new Person('priyaKumar')
+!priyaKumar.firstName := 'Priya'
+!priyaKumar.lastName := 'Kumar'
+!priyaKumar.age := 22
+
+!insert (globalTrustBank, account12) into AccountOfBanks
+
+!insert (nehaSharma, account12) into Ownership
+!insert (arvindKumar, account12) into Ownership
+
+!insert (nehaSharma, account12) into Use
+!insert (arvindKumar, account12) into Use
+!insert (rohitSharma, account12) into Use
+!insert (priyaKumar, account12) into Use

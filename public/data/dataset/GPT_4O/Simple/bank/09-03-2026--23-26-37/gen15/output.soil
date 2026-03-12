@@ -1,0 +1,50 @@
+!new Bank('bank29')
+!bank29.country := 'Chile'
+!bank29.name := 'Banco de Chile'
+!bank29.bic := 'BCHICLRM'
+
+!new Bank('bank30')
+!bank30.country := 'Egypt'
+!bank30.name := 'CIB Bank'
+!bank30.bic := 'CIBEEGCX'
+
+!new Account('account43')
+!account43.iban := 'CL1234567890123456789012'
+!account43.balance := 8900
+
+!new Account('account44')
+!account44.iban := 'EG8000020001567890123456'
+!account44.balance := 4150
+
+!new Account('account45')
+!account45.iban := 'CL1234567890123456789013'
+!account45.balance := 675
+
+!new Person('person43')
+!person43.firstName := 'Carlos'
+!person43.lastName := 'Diaz'
+!person43.age := 32
+
+!new Person('person44')
+!person44.firstName := 'Amina'
+!person44.lastName := 'Hassan'
+!person44.age := 45
+
+!new Person('person45')
+!person45.firstName := 'Gabriela'
+!person45.lastName := 'Rojas'
+!person45.age := 27
+
+!insert (person43, account43) into Ownership
+!insert (person44, account44) into Ownership
+!insert (person45, account45) into Ownership
+!insert (person43, account44) into Ownership
+
+!insert (person43, account43) into Use
+!insert (person44, account44) into Use
+!insert (person45, account45) into Use
+!insert (person44, account45) into Use
+
+!insert (bank29, account43) into AccountOfBanks
+!insert (bank30, account44) into AccountOfBanks
+!insert (bank29, account45) into AccountOfBanks

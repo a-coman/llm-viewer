@@ -1,0 +1,131 @@
+!new Club('club35')
+!club35.name := 'Thunder Falcons'
+!club35.homeGround := 'Stormy Sky Dome'
+!club35.chairman := 'Sara Thunder'
+
+!new Club('club36')
+!club36.name := 'Mystic Owls'
+!club36.homeGround := 'Mystic Hollow'
+!club36.chairman := 'Ellen Shadow'
+
+!new Team('team35')
+!team35.name := 'Falcon Flight'
+!insert (club35, team35) into ClubTeam
+
+!new Team('team36')
+!team36.name := 'Owl Watchers'
+!insert (club36, team36) into ClubTeam
+
+!new Competition('windChallenge')
+!windChallenge.name := 'Wind Challenge'
+!windChallenge.type := 'League'
+
+!new Match('match18')
+!match18.date := '2027-07-21'
+!match18.homeAway := true
+!insert (windChallenge, match18) into CompetitionMatch
+!insert (team35, match18) into LocalMatch
+!insert (team36, match18) into VisitorMatch
+
+!new MatchReport('report18')
+!report18.duration := 90
+!report18.scoreVisitor := 2
+!report18.scoreLocal := 1
+!insert (match18, report18) into MatchMatchReport
+
+!new Player('player35')
+!player35.name := 'Zephyr Storm'
+!player35.age := 23
+!player35.bestFoot := #RIGHT
+!player35.phoneNumber := '9345678123'
+!insert (team35, player35) into TeamPlayer
+
+!new Player('player36')
+!player36.name := 'Serena Moon'
+!player36.age := 28
+!player36.bestFoot := #LEFT
+!player36.phoneNumber := '9123456784'
+!insert (team36, player36) into TeamPlayer
+
+!new Position('position35')
+!position35.positionName := #MIDFIELDER
+!insert (player35, position35) into PlayerPositions
+
+!new Position('position36')
+!position36.positionName := #DEFENDER
+!insert (player36, position36) into PlayerPositions
+
+!new MatchPlayer('matchPlayer35')
+!matchPlayer35.booked := true
+!matchPlayer35.goals := 1
+!matchPlayer35.rating := 8
+!insert (player35, matchPlayer35) into PlayerMatch
+!insert (match18, matchPlayer35) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer36')
+!matchPlayer36.booked := false
+!matchPlayer36.goals := 0
+!matchPlayer36.rating := 7
+!insert (player36, matchPlayer36) into PlayerMatch
+!insert (match18, matchPlayer36) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition35')
+!matchPlayerPosition35.positionName := #MIDFIELDER
+!matchPlayerPosition35.number := 6
+!insert (matchPlayer35, matchPlayerPosition35) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition36')
+!matchPlayerPosition36.positionName := #DEFENDER
+!matchPlayerPosition36.number := 5
+!insert (matchPlayer36, matchPlayerPosition36) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event64')
+!event64.eventType := #GOAL
+!event64.time := 22
+!insert (match18, event64) into MatchMatchEvent
+
+!new MatchEvent('event65')
+!event65.eventType := #GOAL
+!event65.time := 50
+!insert (match18, event65) into MatchMatchEvent
+
+!new MatchEvent('event66')
+!event66.eventType := #GOAL
+!event66.time := 80
+!insert (match18, event66) into MatchMatchEvent
+
+!new TrainingSession('training35')
+!training35.date := '2027-06-10'
+!training35.location := 'Falcon Nest Training Ground'
+!training35.purpose := 'Tactical Maneuvers'
+!insert (team35, training35) into TeamTraining
+
+!new TrainingSession('training36')
+!training36.date := '2027-06-15'
+!training36.location := 'Owl Perch Center'
+!training36.purpose := 'Defensive Techniques'
+!insert (team36, training36) into TeamTraining
+
+!new TrainingNotes('trainingNote35')
+!trainingNote35.note := 'Enhanced tactical plays in windy conditions'
+!trainingNote35.date := '2027-06-10'
+!insert (training35, trainingNote35) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote36')
+!trainingNote36.note := 'Improved defensive positioning against fast plays'
+!trainingNote36.date := '2027-06-15'
+!insert (training36, trainingNote36) into TrainingTrainingNotes
+
+!new TrainingObjective('objective35')
+!objective35.areaToImprove := 'Ball Retention'
+!objective35.startDate := '2027-04-01'
+!objective35.endDate := '2027-07-01'
+!objective35.success := true
+!insert (objective35, player35) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective36')
+!objective36.areaToImprove := 'Interception Skills'
+!objective36.startDate := '2027-04-15'
+!objective36.endDate := '2027-07-15'
+!objective36.success := false
+!insert (objective36, player36) into TrainingObjectivePlayer

@@ -1,0 +1,49 @@
+!new Bank('techInnovatorsBank')
+!techInnovatorsBank.country := 'Germany'
+!techInnovatorsBank.name := 'Tech Innovators Bank'
+!techInnovatorsBank.bic := 'TIBDE4F'
+
+!new Account('account26_11')
+!account26_11.iban := 'DE89 3704 0044 0532'
+!account26_11.balance := 100000
+
+!new Account('account26_12')
+!account26_12.iban := 'DE44 5001 0517 5400'
+!account26_12.balance := 150000
+
+!new Person('svenSchneider')
+!svenSchneider.firstName := 'Sven'
+!svenSchneider.lastName := 'Schneider'
+!svenSchneider.age := 36
+
+!new Person('luisaGarcia')
+!luisaGarcia.firstName := 'Luisa'
+!luisaGarcia.lastName := 'Garcia'
+!luisaGarcia.age := 42
+
+!new Person('jamalOwens')
+!jamalOwens.firstName := 'Jamal'
+!jamalOwens.lastName := 'Owens'
+!jamalOwens.age := 28
+
+!new Person('fatimaHassan')
+!fatimaHassan.firstName := 'Fatima'
+!fatimaHassan.lastName := 'Hassan'
+!fatimaHassan.age := 33
+
+!insert (techInnovatorsBank, account26_11) into AccountOfBanks
+!insert (techInnovatorsBank, account26_12) into AccountOfBanks
+
+!insert (svenSchneider, account26_11) into Ownership
+!insert (luisaGarcia, account26_11) into Ownership
+
+!insert (svenSchneider, account26_12) into Ownership
+!insert (fatimaHassan, account26_12) into Ownership
+
+!insert (svenSchneider, account26_11) into Use
+!insert (luisaGarcia, account26_11) into Use
+!insert (jamalOwens, account26_11) into Use
+!insert (fatimaHassan, account26_11) into Use
+
+!insert (svenSchneider, account26_12) into Use
+!insert (jamalOwens, account26_12) into Use

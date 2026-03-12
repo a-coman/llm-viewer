@@ -1,0 +1,107 @@
+!new Restaurant('restaurant30')
+!restaurant30.name := 'Galaxy Gourmet'
+
+!new Owner('owner60')
+!owner60.name := 'Nebula Galaxy'
+!owner60.percentageShares := 70
+!insert (restaurant30, owner60) into RestaurantOwner
+
+!new Owner('owner61')
+!owner61.name := 'Solar Flare'
+!owner61.percentageShares := 30
+!insert (restaurant30, owner61) into RestaurantOwner
+
+!new Table('table87')
+!table87.number := 87
+!table87.description := 'Saturn Seats'
+!table87.capacity := 12
+
+!new Table('table88')
+!table88.number := 88
+!table88.description := 'Milky Way View'
+!table88.capacity := 18
+
+!new RegularCustomer('customer31')
+!customer31.name := 'Nova Shine'
+!customer31.prefferedLanguage := #Italian
+
+!new Waiter('waiter32')
+!waiter32.name := 'Aurora Rise'
+!waiter32.dateOfBirth := Date('1992-05-12')
+!waiter32.phoneNumber := '555-2323'
+!waiter32.spokenLanguage := #English
+
+!new HeadWaiter('headwaiter30')
+!headwaiter30.name := 'Orion Skye'
+!headwaiter30.dateOfBirth := Date('1984-01-05')
+!headwaiter30.phoneNumber := '555-3232'
+
+!insert (headwaiter30, waiter32) into HeadWaiterWaiter
+
+!new Individual('reservation57')
+!reservation57.time := Time('20:00')
+!reservation57.date := Date('2025-11-25')
+!reservation57.numberPeople := 6
+!reservation57.name := 'Nova Shine'
+!reservation57.phoneNumber := '555-7878'
+!reservation57.number := 57
+!reservation57.seating := #Inside
+!reservation57.smoking := #NonSmoking
+!insert (restaurant30, reservation57) into RestaurantReservation
+!insert (reservation57, customer31) into ReservationCustomer
+!insert (reservation57, waiter32) into ReservationWaiter
+!insert (reservation57, table87) into ReservationTable
+
+!new Banquet('reservation58')
+!reservation58.time := Time('21:30')
+!reservation58.date := Date('2025-12-31')
+!reservation58.numberPeople := 38
+!reservation58.name := 'Starry Night Soirée'
+!reservation58.phoneNumber := '555-6767'
+!reservation58.number := 58
+!reservation58.groupName := 'Celestial Club'
+!reservation58.paymentMethod := #CreditCard
+!reservation58.busService := false
+!insert (restaurant30, reservation58) into RestaurantReservation
+!insert (reservation58, table88) into ReservationTable
+
+!new Table('tableExtra22')
+!tableExtra22.number := 89
+!tableExtra22.description := 'Jupiter Junction'
+!tableExtra22.capacity := 20
+!insert (reservation58, tableExtra22) into ReservationTable
+!insert (reservation58, waiter32) into ReservationWaiter
+
+!new ItemOrder('itemOrder30')
+!itemOrder30.time := Time('20:30')
+!insert (reservation57, itemOrder30) into ReservationItemOrdered
+
+!new MenuItem('menuItem30')
+!menuItem30.description := 'Galactic Goulash'
+!menuItem30.prepTime := 30.0
+!menuItem30.classification := #Main
+!insert (itemOrder30, menuItem30) into ItemOrderMenuItem
+
+!new FoodItem('foodItem30')
+!foodItem30.number := 130
+!foodItem30.description := 'Beef and Vegetables'
+!foodItem30.purchaseFlag := true
+!foodItem30.unit := #Pound
+!insert (menuItem30, foodItem30) into MenuItemFoodItem
+
+!new Allergen('allergen30')
+!allergen30.type := #Gluten
+!insert (foodItem30, allergen30) into FoodItemAllergen
+
+!new Cook('cook30')
+!cook30.name := 'Cassiopeia Blaze'
+!cook30.dateOfBirth := Date('1989-09-09')
+!cook30.phoneNumber := '555-4545'
+!cook30.yearsOfExperience := 7
+
+!new Chef('chef30')
+!chef30.name := 'Vega Light'
+!chef30.dateOfBirth := Date('1985-07-21')
+!chef30.phoneNumber := '555-3434'
+!insert (menuItem30, chef30) into MenuItemChef
+!insert (chef30, cook30) into ChefCook

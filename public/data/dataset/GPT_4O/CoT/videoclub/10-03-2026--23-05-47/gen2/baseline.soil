@@ -1,0 +1,45 @@
+!new Client('client7')
+!client7.clientId := 2047
+!client7.isSuspended := true
+
+!new Rental('rental8')
+!rental8.date := Date('2023-09-10')
+
+!new Movie('movie9')
+!movie9.title := 'Galactic Warriors'
+!movie9.availableCopies := 7
+!movie9.genre := #Action
+
+!new Series('series7')
+!series7.title := 'Detective Chronicles Season 1'
+!series7.availableCopies := 2
+!series7.episode := 1
+
+!new Series('series8')
+!series8.title := 'Detective Chronicles Season 1'
+!series8.availableCopies := 2
+!series8.episode := 2
+
+!new Actor('actor16')
+!actor16.name := 'Miguel Sanchez'
+
+!new Actor('actor17')
+!actor17.name := 'Yuki Nakamura'
+
+!new Actor('actor18')
+!actor18.name := 'Ethan Thompson'
+
+!insert (client7, rental8) into ClientRental
+
+!insert (rental8, movie9) into RentalCassette
+!insert (rental8, series7) into RentalCassette
+!insert (rental8, series8) into RentalCassette
+
+!insert (movie9, actor16) into CassetteActor
+!insert (movie9, actor17) into CassetteActor
+
+!insert (series7, actor18) into CassetteActor
+!insert (series7, actor17) into CassetteActor
+
+!insert (series8, actor18) into CassetteActor
+!insert (series8, actor17) into CassetteActor

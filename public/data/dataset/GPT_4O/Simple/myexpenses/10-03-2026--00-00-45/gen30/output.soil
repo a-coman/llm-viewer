@@ -1,0 +1,43 @@
+-- Creating instances of Currency
+!new Currency('currency30')
+!currency30.name := 'Moroccan Dirham'
+!currency30.abbreviation := 'MAD'
+
+-- Creating instances of Bills
+!new Bill('bill76')
+!bill76.amount := 4000.00
+!bill76.category := 'Cultural Exchange Programs'
+!bill76.date := Date('2023-10-10')
+!bill76.paymentMethod := #CHECK
+!bill76.status := #PENDING
+!insert (bill76, currency30) into BillCurrency
+
+!new Bill('bill77')
+!bill77.amount := 3000.00
+!bill77.category := 'Language Courses'
+!bill77.date := Date('2023-10-12')
+!bill77.paymentMethod := #CREDIT_CARD
+!bill77.status := #VALIDATED
+!insert (bill77, currency30) into BillCurrency
+
+!new Bill('bill78')
+!bill78.amount := 2000.00
+!bill78.category := 'Accommodation Stipends'
+!bill78.date := Date('2023-10-15')
+!bill78.paymentMethod := #CASH
+!bill78.status := #DRAFT
+!insert (bill78, currency30) into BillCurrency
+
+-- Creating instances of Comment
+!new Comment('comment33')
+!comment33.text := 'Funding for international cultural exchange and education programs.'
+
+-- Creating instance of Expense
+!new Expense('expense30')
+!expense30.amount := 9000.00
+!expense30.startDate := Date('2023-10-05')
+!expense30.endDate := Date('2023-10-20')
+!insert (expense30, bill76) into ExpenseContainsBills
+!insert (expense30, bill77) into ExpenseContainsBills
+!insert (expense30, bill78) into ExpenseContainsBills
+!insert (expense30, comment33) into ExpenseComment

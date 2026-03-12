@@ -1,0 +1,44 @@
+!new Booking('booking26')
+!booking26.startDate := '2025-12-10'
+!booking26.endDate := '2025-12-15'
+!booking26.canceled := false
+!booking26.bookingId := 126
+!booking26.confirmed := true
+
+!new Bill('bill26')
+!bill26.price := 620.00
+!bill26.billId := 5026
+
+!new Customer('customer26')
+!customer26.firstName := 'Alan'
+!customer26.lastName := 'Bennett'
+
+!new RoomReservation('reservation26')
+!reservation26.checkInDate := '2025-12-10'
+!reservation26.checkOutDate := '2025-12-15'
+
+!new Room('room2301')
+!room2301.numBeds := 3
+!room2301.pricePerNight := 140.00
+!room2301.occupied := true
+!room2301.blocked := false
+!room2301.roomNumber := 2301
+
+!new Room('room2302')
+!room2302.numBeds := 1
+!room2302.pricePerNight := 80.00
+!room2302.occupied := true
+!room2302.blocked := false
+!room2302.roomNumber := 2302
+
+!new RoomExtra('extra34')
+!extra34.price := 35.00
+!extra34.description := 'Evening River Cruise'
+
+!insert (booking26, bill26) into BookingBill
+!insert (booking26, customer26) into BookingCustomer
+!insert (booking26, reservation26) into BookingRoomReservation
+!insert (reservation26, extra34) into RoomReservationExtras
+!insert (reservation26, room2301) into RoomReservationRoom
+!insert (reservation26, room2302) into RoomReservationRoom
+!insert (bill26, reservation26) into BillRoomReservation

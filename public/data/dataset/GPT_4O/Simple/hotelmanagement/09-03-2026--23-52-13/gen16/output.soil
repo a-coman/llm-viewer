@@ -1,0 +1,41 @@
+!new Booking('booking17')
+!booking17.startDate := '2025-03-08'
+!booking17.endDate := '2025-03-12'
+!booking17.canceled := false
+!booking17.bookingId := 117
+!booking17.confirmed := true
+
+!new Bill('bill17')
+!bill17.price := 600.00
+!bill17.billId := 5017
+
+!new Customer('customer17')
+!customer17.firstName := 'Quincy'
+!customer17.lastName := 'Roberts'
+
+!new RoomReservation('reservation17')
+!reservation17.checkInDate := '2025-03-08'
+!reservation17.checkOutDate := '2025-03-12'
+
+!new Room('room1401')
+!room1401.numBeds := 2
+!room1401.pricePerNight := 150.00
+!room1401.occupied := true
+!room1401.blocked := false
+!room1401.roomNumber := 1401
+
+!new RoomExtra('extra20')
+!extra20.price := 35.00
+!extra20.description := 'Gourmet Meal Package'
+
+!new RoomExtra('extra21')
+!extra21.price := 20.00
+!extra21.description := 'Private Pool Access'
+
+!insert (booking17, bill17) into BookingBill
+!insert (booking17, customer17) into BookingCustomer
+!insert (booking17, reservation17) into BookingRoomReservation
+!insert (reservation17, extra20) into RoomReservationExtras
+!insert (reservation17, extra21) into RoomReservationExtras
+!insert (reservation17, room1401) into RoomReservationRoom
+!insert (bill17, reservation17) into BillRoomReservation

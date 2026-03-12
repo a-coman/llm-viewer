@@ -1,0 +1,67 @@
+!new StateMachine('interruptMachine')
+!interruptMachine.name := 'interruptMachine'
+
+!new State('openState')
+!openState.name := 'openState'
+
+!new State('busyLoop')
+!busyLoop.name := 'busyLoop'
+
+!new State('breakFree')
+!breakFree.name := 'breakFree'
+
+!new State('finalState')
+!finalState.name := 'finalState'
+
+!new Transition('startProcess')
+!startProcess.name := 'startProcess'
+
+!new Transition('loopInterruption')
+!loopInterruption.name := 'loopInterruption'
+
+!new Transition('backToLoop')
+!backToLoop.name := 'backToLoop'
+
+!new Transition('completeTask')
+!completeTask.name := 'completeTask'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!insert (interruptMachine, openState) into StateMachineContainsStates
+!insert (interruptMachine, busyLoop) into StateMachineContainsStates
+!insert (interruptMachine, breakFree) into StateMachineContainsStates
+!insert (interruptMachine, finalState) into StateMachineContainsStates
+
+!insert (interruptMachine, startProcess) into StateMachineContainsTransitions
+!insert (interruptMachine, loopInterruption) into StateMachineContainsTransitions
+!insert (interruptMachine, backToLoop) into StateMachineContainsTransitions
+!insert (interruptMachine, completeTask) into StateMachineContainsTransitions
+
+!insert (startProcess, timeEvent2) into TransitionContainsEvents
+!insert (loopInterruption, timeEvent4) into TransitionContainsEvents
+!insert (backToLoop, timeEvent3) into TransitionContainsEvents
+!insert (completeTask, timeEvent1) into TransitionContainsEvents
+
+!insert (openState, startProcess) into StateTransition
+!insert (startProcess, busyLoop) into TransitionState
+
+!insert (busyLoop, loopInterruption) into StateTransition
+!insert (loopInterruption, breakFree) into TransitionState
+
+!insert (breakFree, backToLoop) into StateTransition
+!insert (backToLoop, busyLoop) into TransitionState
+
+!insert (breakFree, completeTask) into StateTransition
+!insert (completeTask, finalState) into TransitionState
+
+!insert (interruptMachine, openState) into StateMachineStartsStates

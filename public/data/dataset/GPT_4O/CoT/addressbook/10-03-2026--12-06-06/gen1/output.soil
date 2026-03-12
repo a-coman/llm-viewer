@@ -1,0 +1,516 @@
+!new AddressBook('GlobalBusinessNetworkAddressBook')
+
+!new Company('WorldCorp')
+!WorldCorp.name := 'World Corp'
+!WorldCorp.phone := '+1-800-555-0198'
+!WorldCorp.website := 'www.worldcorp.com'
+!WorldCorp.email := 'contact@worldcorp.com'
+!WorldCorp.industry := 'Technology'
+
+!new Address('WorldCorpAddress1')
+!WorldCorpAddress1.city := 'New York'
+!WorldCorpAddress1.houseNr := '789'
+!WorldCorpAddress1.street := 'Broad Street'
+!insert (WorldCorp, WorldCorpAddress1) into ContactContainsAddress
+
+!new Note('WorldCorpNote1')
+!WorldCorpNote1.author := 'John Smith'
+!WorldCorpNote1.time := Date('2023-03-15')
+!WorldCorpNote1.type := #MEETING
+!WorldCorpNote1.comment := 'Initial meeting to discuss potential partnership.'
+!insert (WorldCorp, WorldCorpNote1) into ContactContainsNote
+
+!new Note('WorldCorpNote2')
+!WorldCorpNote2.author := 'Jane Doe'
+!WorldCorpNote2.time := Date('2023-04-01')
+!WorldCorpNote2.type := #CALL
+!WorldCorpNote2.comment := 'Follow-up call regarding merger details.'
+!insert (WorldCorp, WorldCorpNote2) into ContactContainsNote
+
+!new Note('WorldCorpNote3')
+!WorldCorpNote3.author := 'Michael Chan'
+!WorldCorpNote3.time := Date('2023-05-10')
+!WorldCorpNote3.type := #EMAIL
+!WorldCorpNote3.comment := 'Email correspondence about project timelines.'
+!insert (WorldCorp, WorldCorpNote3) into ContactContainsNote
+
+!new Person('JaneDoe')
+!JaneDoe.name := 'Jane Doe'
+!JaneDoe.phone := '+44-20-7946-0958'
+!JaneDoe.email := 'jane.doe@globalnetwork.com'
+!JaneDoe.title := 'Senior Project Manager'
+
+!new Address('JaneDoeAddress1')
+!JaneDoeAddress1.city := 'London'
+!JaneDoeAddress1.houseNr := '12'
+!JaneDoeAddress1.street := 'Fleet Street'
+!insert (JaneDoe, JaneDoeAddress1) into ContactContainsAddress
+
+!new Company('InnovateLtd')
+!InnovateLtd.name := 'Innovate Ltd'
+!InnovateLtd.phone := '+49-89-123456'
+!InnovateLtd.website := 'www.innovateltd.de'
+!InnovateLtd.email := 'info@innovateltd.de'
+!InnovateLtd.industry := 'Engineering'
+
+!new Address('InnovateLtdAddress1')
+!InnovateLtdAddress1.city := 'Munich'
+!InnovateLtdAddress1.houseNr := '101'
+!InnovateLtdAddress1.street := 'Beethovenstrasse'
+!insert (InnovateLtd, InnovateLtdAddress1) into ContactContainsAddress
+
+!new Note('InnovateLtdNote1')
+!InnovateLtdNote1.author := 'Linda Bernard'
+!InnovateLtdNote1.time := Date('2023-02-28')
+!InnovateLtdNote1.type := #MEETING
+!InnovateLtdNote1.comment := 'Reviewed technical specifications for joint venture.'
+!insert (InnovateLtd, InnovateLtdNote1) into ContactContainsNote
+
+!new Relationship('WorldCorpInnovateLtdSubdivision')
+!WorldCorpInnovateLtdSubdivision.type := #SUBDIVISION
+!insert (WorldCorpInnovateLtdSubdivision, InnovateLtd) into RelationshipToContact
+!insert (WorldCorp, WorldCorpInnovateLtdSubdivision) into ContactToRelationship
+
+!new Relationship('JaneDoeWorldCorpCoworker')
+!JaneDoeWorldCorpCoworker.type := #COWORKER
+!insert (JaneDoeWorldCorpCoworker, WorldCorp) into RelationshipToContact
+!insert (JaneDoe, JaneDoeWorldCorpCoworker) into ContactToRelationship
+
+!new Relationship('WorldCorpJaneDoeBoss')
+!WorldCorpJaneDoeBoss.type := #BOSS
+!insert (WorldCorpJaneDoeBoss, JaneDoe) into RelationshipToContact
+!insert (WorldCorp, WorldCorpJaneDoeBoss) into ContactToRelationship
+
+!insert (GlobalBusinessNetworkAddressBook, WorldCorp) into AddressBookMadeOfContact
+!insert (GlobalBusinessNetworkAddressBook, JaneDoe) into AddressBookMadeOfContact
+!insert (GlobalBusinessNetworkAddressBook, InnovateLtd) into AddressBookMadeOfContact
+
+!new AddressBook('PrimaryAddressBook')
+
+!new Company('MegaTechSolutionsInc')
+!MegaTechSolutionsInc.name := 'MegaTech Solutions Inc.'
+!MegaTechSolutionsInc.phone := '+1-800-555-0199'
+!MegaTechSolutionsInc.website := 'www.megatech.com'
+!MegaTechSolutionsInc.email := 'info@megatech.com'
+!MegaTechSolutionsInc.industry := 'Technology'
+
+!new Address('MegaTechAddress1')
+!MegaTechAddress1.city := 'San Francisco'
+!MegaTechAddress1.houseNr := '22'
+!MegaTechAddress1.street := 'Market Street'
+!insert (MegaTechSolutionsInc, MegaTechAddress1) into ContactContainsAddress
+
+!new Company('GreenWorldEnergy')
+!GreenWorldEnergy.name := 'GreenWorld Energy'
+!GreenWorldEnergy.phone := '+44-208-555-0123'
+!GreenWorldEnergy.website := 'www.greenworldenergy.co.uk'
+!GreenWorldEnergy.email := 'contact@greenworldenergy.co.uk'
+!GreenWorldEnergy.industry := 'Renewable Energy'
+
+!new Address('GreenWorldAddress1')
+!GreenWorldAddress1.city := 'London'
+!GreenWorldAddress1.houseNr := '110'
+!GreenWorldAddress1.street := 'Green Lane'
+!insert (GreenWorldEnergy, GreenWorldAddress1) into ContactContainsAddress
+
+!new Company('TechDistributorsLtd')
+!TechDistributorsLtd.name := 'TechDistributors Ltd.'
+!TechDistributorsLtd.phone := '+91-22-5550987'
+!TechDistributorsLtd.website := 'www.techdistributors.in'
+!TechDistributorsLtd.email := 'info@techdistributors.in'
+!TechDistributorsLtd.industry := 'Supply Chain Management'
+
+!new Address('TechDistributorsAddress1')
+!TechDistributorsAddress1.city := 'Mumbai'
+!TechDistributorsAddress1.houseNr := '305'
+!TechDistributorsAddress1.street := 'MG Road'
+!insert (TechDistributorsLtd, TechDistributorsAddress1) into ContactContainsAddress
+
+!new Relationship('MegaTechToGreenWorldPartner')
+!MegaTechToGreenWorldPartner.type := #COWORKER
+!insert (MegaTechToGreenWorldPartner, GreenWorldEnergy) into RelationshipToContact
+!insert (MegaTechSolutionsInc, MegaTechToGreenWorldPartner) into ContactToRelationship
+
+!new Relationship('MegaTechToTechDistributorsSupplier')
+!MegaTechToTechDistributorsSupplier.type := #EMPLOYEE
+!insert (MegaTechToTechDistributorsSupplier, TechDistributorsLtd) into RelationshipToContact
+!insert (MegaTechSolutionsInc, MegaTechToTechDistributorsSupplier) into ContactToRelationship
+
+!new Relationship('GreenWorldToMegaTechSubdivision')
+!GreenWorldToMegaTechSubdivision.type := #SUBDIVISION
+!insert (GreenWorldToMegaTechSubdivision, MegaTechSolutionsInc) into RelationshipToContact
+!insert (GreenWorldEnergy, GreenWorldToMegaTechSubdivision) into ContactToRelationship
+
+!new Relationship('GreenWorldToTechDistributorsPartner')
+!GreenWorldToTechDistributorsPartner.type := #COWORKER
+!insert (GreenWorldToTechDistributorsPartner, TechDistributorsLtd) into RelationshipToContact
+!insert (GreenWorldEnergy, GreenWorldToTechDistributorsPartner) into ContactToRelationship
+
+!new Relationship('TechDistributorsToMegaTechBoss')
+!TechDistributorsToMegaTechBoss.type := #BOSS
+!insert (TechDistributorsToMegaTechBoss, MegaTechSolutionsInc) into RelationshipToContact
+!insert (TechDistributorsLtd, TechDistributorsToMegaTechBoss) into ContactToRelationship
+
+!new Relationship('TechDistributorsToGreenWorldEmployee')
+!TechDistributorsToGreenWorldEmployee.type := #EMPLOYEE
+!insert (TechDistributorsToGreenWorldEmployee, GreenWorldEnergy) into RelationshipToContact
+!insert (TechDistributorsLtd, TechDistributorsToGreenWorldEmployee) into ContactToRelationship
+
+!new Note('MegaTechNote')
+!MegaTechNote.author := 'Emily C., CMO'
+!MegaTechNote.time := Date('2023-05-15')
+!MegaTechNote.type := #MEETING
+!MegaTechNote.comment := 'Discussed strategic partnerships.'
+!insert (MegaTechSolutionsInc, MegaTechNote) into ContactContainsNote
+
+!insert (PrimaryAddressBook, MegaTechSolutionsInc) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, GreenWorldEnergy) into AddressBookMadeOfContact
+!insert (PrimaryAddressBook, TechDistributorsLtd) into AddressBookMadeOfContact
+
+!new AddressBook('CorwinEnterprisesContactBook')
+
+!new Person('DrSabineMueller')
+!DrSabineMueller.name := 'Dr. Sabine Müller'
+!DrSabineMueller.phone := '+49-171-5551234'
+!DrSabineMueller.website := 'www.sabinemueller.de'
+!DrSabineMueller.email := 'sabine.mueller@example.com'
+!DrSabineMueller.title := 'Lead Scientist'
+
+!new Address('SabineMuellerAddress')
+!SabineMuellerAddress.city := 'Berlin'
+!SabineMuellerAddress.houseNr := '123'
+!SabineMuellerAddress.street := 'Wissenschaftsstraße'
+!insert (DrSabineMueller, SabineMuellerAddress) into ContactContainsAddress
+
+!new Note('SabineMuellerNote1')
+!SabineMuellerNote1.author := 'Dr. Sabine Müller'
+!SabineMuellerNote1.time := Date('2023-10-01T09:00:00')
+!SabineMuellerNote1.type := #MEETING
+!SabineMuellerNote1.comment := 'Preliminary research discussion in Berlin.'
+!insert (DrSabineMueller, SabineMuellerNote1) into ContactContainsNote
+
+!new Note('SabineMuellerNote2')
+!SabineMuellerNote2.author := 'Dr. Sabine Müller'
+!SabineMuellerNote2.time := Date('2023-09-23T15:30:00')
+!SabineMuellerNote2.type := #CALL
+!SabineMuellerNote2.comment := 'Conference call with Asian partners.'
+!insert (DrSabineMueller, SabineMuellerNote2) into ContactContainsNote
+
+!new Company('AlpinTechGmbH')
+!AlpinTechGmbH.name := 'AlpinTech GmbH'
+!AlpinTechGmbH.phone := '+43-1-12345678'
+!AlpinTechGmbH.website := 'www.alpintech.at'
+!AlpinTechGmbH.email := 'info@alpintech.at'
+!AlpinTechGmbH.industry := 'Biotechnology'
+
+!new Address('AlpinTechAddress')
+!AlpinTechAddress.city := 'Vienna'
+!AlpinTechAddress.houseNr := '45'
+!AlpinTechAddress.street := 'Hauptplatz 12'
+!insert (AlpinTechGmbH, AlpinTechAddress) into ContactContainsAddress
+
+!new Note('AlpinTechNote1')
+!AlpinTechNote1.author := 'Gerda Silberschneider'
+!AlpinTechNote1.time := Date('2023-08-15T11:00:00')
+!AlpinTechNote1.type := #EMAIL
+!AlpinTechNote1.comment := 'Strategic partnership proposal with Corwin Enterprises.'
+!insert (AlpinTechGmbH, AlpinTechNote1) into ContactContainsNote
+
+!new Person('ProfDavidLiu')
+!ProfDavidLiu.name := 'Prof. David Liu'
+!ProfDavidLiu.phone := '+1-310-9876543'
+!ProfDavidLiu.website := 'www.davidliuresearch.org'
+!ProfDavidLiu.email := 'dliu@research.org'
+!ProfDavidLiu.title := 'Chief Research Officer'
+
+!new Address('DavidLiuAddress')
+!DavidLiuAddress.city := 'Los Angeles'
+!DavidLiuAddress.houseNr := '72'
+!DavidLiuAddress.street := 'Sunset Boulevard'
+!insert (ProfDavidLiu, DavidLiuAddress) into ContactContainsAddress
+
+!new Note('DavidLiuNote1')
+!DavidLiuNote1.author := 'Prof. David Liu'
+!DavidLiuNote1.time := Date('2023-07-10T14:45:00')
+!DavidLiuNote1.type := #MEETING
+!DavidLiuNote1.comment := 'Cross-continental R&D summit.'
+!insert (ProfDavidLiu, DavidLiuNote1) into ContactContainsNote
+
+!new Relationship('SabineToDavidCoworker')
+!SabineToDavidCoworker.type := #COWORKER
+!insert (SabineToDavidCoworker, ProfDavidLiu) into RelationshipToContact
+!insert (DrSabineMueller, SabineToDavidCoworker) into ContactToRelationship
+
+!new Relationship('SabineToAlpinTechBoss')
+!SabineToAlpinTechBoss.type := #BOSS
+!insert (SabineToAlpinTechBoss, AlpinTechGmbH) into RelationshipToContact
+!insert (DrSabineMueller, SabineToAlpinTechBoss) into ContactToRelationship
+
+!new Relationship('AlpinTechToSabineEmployee')
+!AlpinTechToSabineEmployee.type := #EMPLOYEE
+!insert (AlpinTechToSabineEmployee, DrSabineMueller) into RelationshipToContact
+!insert (AlpinTechGmbH, AlpinTechToSabineEmployee) into ContactToRelationship
+
+!new Relationship('AlpinTechToDavidSubdivision')
+!AlpinTechToDavidSubdivision.type := #SUBDIVISION
+!insert (AlpinTechToDavidSubdivision, ProfDavidLiu) into RelationshipToContact
+!insert (AlpinTechGmbH, AlpinTechToDavidSubdivision) into ContactToRelationship
+
+!new Relationship('DavidToSabineCoworker')
+!DavidToSabineCoworker.type := #COWORKER
+!insert (DavidToSabineCoworker, DrSabineMueller) into RelationshipToContact
+!insert (ProfDavidLiu, DavidToSabineCoworker) into ContactToRelationship
+
+!new Relationship('DavidToAlpinTechSubdivision')
+!DavidToAlpinTechSubdivision.type := #SUBDIVISION
+!insert (DavidToAlpinTechSubdivision, AlpinTechGmbH) into RelationshipToContact
+!insert (ProfDavidLiu, DavidToAlpinTechSubdivision) into ContactToRelationship
+
+!insert (CorwinEnterprisesContactBook, DrSabineMueller) into AddressBookMadeOfContact
+!insert (CorwinEnterprisesContactBook, AlpinTechGmbH) into AddressBookMadeOfContact
+!insert (CorwinEnterprisesContactBook, ProfDavidLiu) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalConnections')
+
+!new Person('EmmaThompson')
+!EmmaThompson.name := 'Emma Thompson'
+!EmmaThompson.phone := '+44 207 432 1234'
+!EmmaThompson.website := 'www.emmathompson-photography.com'
+!EmmaThompson.email := 'emma.t@photography.com'
+!EmmaThompson.title := 'Freelance Photographer'
+
+!new Address('EmmaThompsonAddress')
+!EmmaThompsonAddress.city := 'London'
+!EmmaThompsonAddress.street := 'Queen\'s Road'
+!EmmaThompsonAddress.houseNr := '42'
+!insert (EmmaThompson, EmmaThompsonAddress) into ContactContainsAddress
+
+!new Note('EmmaThompsonNote1')
+!EmmaThompsonNote1.author := 'Emma Thompson'
+!EmmaThompsonNote1.time := Date('2023-02-15')
+!EmmaThompsonNote1.type := #MEETING
+!EmmaThompsonNote1.comment := 'Discussed new project opportunities at the Arts Council event.'
+!insert (EmmaThompson, EmmaThompsonNote1) into ContactContainsNote
+
+!new Note('EmmaThompsonNote2')
+!EmmaThompsonNote2.author := 'Emma Thompson'
+!EmmaThompsonNote2.time := Date('2023-02-20')
+!EmmaThompsonNote2.type := #CALL
+!EmmaThompsonNote2.comment := 'Contacted to confirm booking for next photo session at the National Gallery.'
+!insert (EmmaThompson, EmmaThompsonNote2) into ContactContainsNote
+
+!new Person('MaxHarmon')
+!MaxHarmon.name := 'Max Harmon'
+!MaxHarmon.phone := '+1 212 555 7890'
+!MaxHarmon.website := 'www.productionsbeyond.com'
+!MaxHarmon.email := 'max@productionsbeyond.com'
+!MaxHarmon.title := 'CEO'
+
+!new Address('MaxHarmonAddress')
+!MaxHarmonAddress.city := 'New York'
+!MaxHarmonAddress.street := 'Broadway'
+!MaxHarmonAddress.houseNr := '16A'
+!insert (MaxHarmon, MaxHarmonAddress) into ContactContainsAddress
+
+!new Note('MaxHarmonNote1')
+!MaxHarmonNote1.author := 'Max Harmon'
+!MaxHarmonNote1.time := Date('2023-03-05')
+!MaxHarmonNote1.type := #EMAIL
+!MaxHarmonNote1.comment := 'Finalized contract details for upcoming film project.'
+!insert (MaxHarmon, MaxHarmonNote1) into ContactContainsNote
+
+!new Relationship('EmmaToMaxCoworker')
+!EmmaToMaxCoworker.type := #COWORKER
+!insert (EmmaToMaxCoworker, MaxHarmon) into RelationshipToContact
+!insert (EmmaThompson, EmmaToMaxCoworker) into ContactToRelationship
+
+!new Relationship('MaxToEmmaCoworker')
+!MaxToEmmaCoworker.type := #COWORKER
+!insert (MaxToEmmaCoworker, EmmaThompson) into RelationshipToContact
+!insert (MaxHarmon, MaxToEmmaCoworker) into ContactToRelationship
+
+!new Company('CreativeCorp')
+!CreativeCorp.name := 'Creative Corp'
+!CreativeCorp.phone := '+61 3 9654 2830'
+!CreativeCorp.website := 'www.creativecorp.com'
+!CreativeCorp.email := 'contact@creativecorp.com'
+!CreativeCorp.industry := 'Media Production'
+
+!new Address('CreativeCorpAddress')
+!CreativeCorpAddress.city := 'Melbourne'
+!CreativeCorpAddress.street := 'Collins Street'
+!CreativeCorpAddress.houseNr := '88'
+!insert (CreativeCorp, CreativeCorpAddress) into ContactContainsAddress
+
+!new Note('CreativeCorpNote1')
+!CreativeCorpNote1.author := 'Creative Corp'
+!CreativeCorpNote1.time := Date('2023-04-10')
+!CreativeCorpNote1.type := #MEETING
+!CreativeCorpNote1.comment := 'Annual board meeting discussing future projects and expansions.'
+!insert (CreativeCorp, CreativeCorpNote1) into ContactContainsNote
+
+!new Relationship('MaxToCreativeCorpBoss')
+!MaxToCreativeCorpBoss.type := #BOSS
+!insert (MaxToCreativeCorpBoss, CreativeCorp) into RelationshipToContact
+!insert (MaxHarmon, MaxToCreativeCorpBoss) into ContactToRelationship
+
+!new Company('BoltDigitalStudios')
+!BoltDigitalStudios.name := 'Bolt Digital Studios'
+!BoltDigitalStudios.phone := '+91 22 1234 5678'
+!BoltDigitalStudios.website := 'www.boltdigital.in'
+!BoltDigitalStudios.email := 'info@boltdigital.in'
+!BoltDigitalStudios.industry := 'Film and Animation'
+
+!new Address('BoltDigitalAddress')
+!BoltDigitalAddress.city := 'Mumbai'
+!BoltDigitalAddress.street := 'Film City Road'
+!BoltDigitalAddress.houseNr := '301'
+!insert (BoltDigitalStudios, BoltDigitalAddress) into ContactContainsAddress
+
+!new Note('BoltDigitalNote1')
+!BoltDigitalNote1.author := 'Bolt Digital Studios'
+!BoltDigitalNote1.time := Date('2023-05-08')
+!BoltDigitalNote1.type := #EMAIL
+!BoltDigitalNote1.comment := 'Email exchange regarding collaborative animation project proposals.'
+!insert (BoltDigitalStudios, BoltDigitalNote1) into ContactContainsNote
+
+!new Relationship('CreativeCorpToBoltDigitalSubdivision')
+!CreativeCorpToBoltDigitalSubdivision.type := #SUBDIVISION
+!insert (CreativeCorpToBoltDigitalSubdivision, BoltDigitalStudios) into RelationshipToContact
+!insert (CreativeCorp, CreativeCorpToBoltDigitalSubdivision) into ContactToRelationship
+
+!new Relationship('BoltDigitalToCreativeCorpSubdivision')
+!BoltDigitalToCreativeCorpSubdivision.type := #SUBDIVISION
+!insert (BoltDigitalToCreativeCorpSubdivision, CreativeCorp) into RelationshipToContact
+!insert (BoltDigitalStudios, BoltDigitalToCreativeCorpSubdivision) into ContactToRelationship
+
+!insert (GlobalConnections, EmmaThompson) into AddressBookMadeOfContact
+!insert (GlobalConnections, MaxHarmon) into AddressBookMadeOfContact
+!insert (GlobalConnections, CreativeCorp) into AddressBookMadeOfContact
+!insert (GlobalConnections, BoltDigitalStudios) into AddressBookMadeOfContact
+
+!new AddressBook('GlobalConnectAddressBook')
+
+!new Person('MariaGonzalez')
+!MariaGonzalez.name := 'Maria Gonzalez'
+!MariaGonzalez.phone := '+34-608-123456'
+!MariaGonzalez.website := 'www.mariagonzalez.com'
+!MariaGonzalez.email := 'maria.gonzalez@example.com'
+!MariaGonzalez.title := 'Software Engineer'
+
+!new Address('MariaGonzalezAddress')
+!MariaGonzalezAddress.city := 'Barcelona'
+!MariaGonzalezAddress.street := 'Carrer de Balmes'
+!MariaGonzalezAddress.houseNr := '10B'
+!insert (MariaGonzalez, MariaGonzalezAddress) into ContactContainsAddress
+
+!new Note('MariaGonzalezNote1')
+!MariaGonzalezNote1.author := 'Maria Gonzalez'
+!MariaGonzalezNote1.time := Date('2023-03-15')
+!MariaGonzalezNote1.type := #MEETING
+!MariaGonzalezNote1.comment := 'Discuss project milestones with team A.'
+!insert (MariaGonzalez, MariaGonzalezNote1) into ContactContainsNote
+
+!new Note('MariaGonzalezNote2')
+!MariaGonzalezNote2.author := 'Maria Gonzalez'
+!MariaGonzalezNote2.time := Date('2023-06-05')
+!MariaGonzalezNote2.type := #CALL
+!MariaGonzalezNote2.comment := 'Client feedback on the recent software release.'
+!insert (MariaGonzalez, MariaGonzalezNote2) into ContactContainsNote
+
+!new Person('AliceChen')
+!AliceChen.name := 'Alice Chen'
+!AliceChen.phone := '+86-21-3338-7766'
+!AliceChen.website := 'www.alicechen.cn'
+!AliceChen.email := 'alice.chen@example.cn'
+!AliceChen.title := 'Product Manager'
+
+!new Address('AliceChenAddress')
+!AliceChenAddress.city := 'Shanghai'
+!AliceChenAddress.street := 'Nanjing Road'
+!AliceChenAddress.houseNr := '89'
+!insert (AliceChen, AliceChenAddress) into ContactContainsAddress
+
+!new Note('AliceChenNote1')
+!AliceChenNote1.author := 'Alice Chen'
+!AliceChenNote1.time := Date('2023-05-01')
+!AliceChenNote1.type := #CALL
+!AliceChenNote1.comment := 'Supplier negotiation update.'
+!insert (AliceChen, AliceChenNote1) into ContactContainsNote
+
+!new Relationship('MariaToAliceCoworker')
+!MariaToAliceCoworker.type := #COWORKER
+!insert (MariaToAliceCoworker, AliceChen) into RelationshipToContact
+!insert (MariaGonzalez, MariaToAliceCoworker) into ContactToRelationship
+
+!new Person('DavidEllis')
+!DavidEllis.name := 'David Ellis'
+!DavidEllis.phone := '+44-20-555-9876'
+!DavidEllis.website := 'www.davidellis.net'
+!DavidEllis.email := 'david.ellis@corporatemail.com'
+!DavidEllis.title := 'CEO'
+
+!new Address('DavidEllisAddress')
+!DavidEllisAddress.city := 'London'
+!DavidEllisAddress.street := 'Kensington High St'
+!DavidEllisAddress.houseNr := '245'
+!insert (DavidEllis, DavidEllisAddress) into ContactContainsAddress
+
+!new Note('DavidEllisNote1')
+!DavidEllisNote1.author := 'David Ellis'
+!DavidEllisNote1.time := Date('2023-11-14')
+!DavidEllisNote1.type := #MEETING
+!DavidEllisNote1.comment := 'Board meeting scheduled for next year\'s planning.'
+!insert (DavidEllis, DavidEllisNote1) into ContactContainsNote
+
+!new Relationship('MariaToDavidBoss')
+!MariaToDavidBoss.type := #BOSS
+!insert (MariaToDavidBoss, DavidEllis) into RelationshipToContact
+!insert (MariaGonzalez, MariaToDavidBoss) into ContactToRelationship
+
+!new Relationship('DavidToMariaEmployee')
+!DavidToMariaEmployee.type := #EMPLOYEE
+!insert (DavidToMariaEmployee, MariaGonzalez) into RelationshipToContact
+!insert (DavidEllis, DavidToMariaEmployee) into ContactToRelationship
+
+!new Relationship('DavidToAliceCoworker')
+!DavidToAliceCoworker.type := #COWORKER
+!insert (DavidToAliceCoworker, AliceChen) into RelationshipToContact
+!insert (DavidEllis, DavidToAliceCoworker) into ContactToRelationship
+
+!new Company('TechSolutionsLtd')
+!TechSolutionsLtd.name := 'Tech Solutions Ltd.'
+!TechSolutionsLtd.phone := '+1-213-555-0110'
+!TechSolutionsLtd.website := 'www.techsolutions.com'
+!TechSolutionsLtd.email := 'contact@techsolutions.com'
+!TechSolutionsLtd.industry := 'Information Technology'
+
+!new Address('TechSolutionsAddress1')
+!TechSolutionsAddress1.city := 'Los Angeles'
+!TechSolutionsAddress1.street := 'Sunset Blvd'
+!TechSolutionsAddress1.houseNr := '120'
+!insert (TechSolutionsLtd, TechSolutionsAddress1) into ContactContainsAddress
+
+!new Address('TechSolutionsAddress2')
+!TechSolutionsAddress2.city := 'New York'
+!TechSolutionsAddress2.street := 'Avenue of the Americas'
+!TechSolutionsAddress2.houseNr := '55'
+!insert (TechSolutionsLtd, TechSolutionsAddress2) into ContactContainsAddress
+
+!new Note('TechSolutionsNote1')
+!TechSolutionsNote1.author := 'John Doe'
+!TechSolutionsNote1.time := Date('2023-08-22')
+!TechSolutionsNote1.type := #EMAIL
+!TechSolutionsNote1.comment := 'Confirmation of the annual contract renewal.'
+!insert (TechSolutionsLtd, TechSolutionsNote1) into ContactContainsNote
+
+!new Relationship('AliceToTechSolutionsSubdivision')
+!AliceToTechSolutionsSubdivision.type := #SUBDIVISION
+!insert (AliceToTechSolutionsSubdivision, TechSolutionsLtd) into RelationshipToContact
+!insert (AliceChen, AliceToTechSolutionsSubdivision) into ContactToRelationship
+
+!insert (GlobalConnectAddressBook, MariaGonzalez) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, TechSolutionsLtd) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, DavidEllis) into AddressBookMadeOfContact
+!insert (GlobalConnectAddressBook, AliceChen) into AddressBookMadeOfContact
+

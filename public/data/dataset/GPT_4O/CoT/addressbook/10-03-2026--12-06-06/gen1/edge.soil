@@ -1,0 +1,102 @@
+!new AddressBook('CorwinEnterprisesContactBook')
+
+!new Person('DrSabineMueller')
+!DrSabineMueller.name := 'Dr. Sabine Müller'
+!DrSabineMueller.phone := '+49-171-5551234'
+!DrSabineMueller.website := 'www.sabinemueller.de'
+!DrSabineMueller.email := 'sabine.mueller@example.com'
+!DrSabineMueller.title := 'Lead Scientist'
+
+!new Address('SabineMuellerAddress')
+!SabineMuellerAddress.city := 'Berlin'
+!SabineMuellerAddress.houseNr := '123'
+!SabineMuellerAddress.street := 'Wissenschaftsstraße'
+!insert (DrSabineMueller, SabineMuellerAddress) into ContactContainsAddress
+
+!new Note('SabineMuellerNote1')
+!SabineMuellerNote1.author := 'Dr. Sabine Müller'
+!SabineMuellerNote1.time := Date('2023-10-01T09:00:00')
+!SabineMuellerNote1.type := #MEETING
+!SabineMuellerNote1.comment := 'Preliminary research discussion in Berlin.'
+!insert (DrSabineMueller, SabineMuellerNote1) into ContactContainsNote
+
+!new Note('SabineMuellerNote2')
+!SabineMuellerNote2.author := 'Dr. Sabine Müller'
+!SabineMuellerNote2.time := Date('2023-09-23T15:30:00')
+!SabineMuellerNote2.type := #CALL
+!SabineMuellerNote2.comment := 'Conference call with Asian partners.'
+!insert (DrSabineMueller, SabineMuellerNote2) into ContactContainsNote
+
+!new Company('AlpinTechGmbH')
+!AlpinTechGmbH.name := 'AlpinTech GmbH'
+!AlpinTechGmbH.phone := '+43-1-12345678'
+!AlpinTechGmbH.website := 'www.alpintech.at'
+!AlpinTechGmbH.email := 'info@alpintech.at'
+!AlpinTechGmbH.industry := 'Biotechnology'
+
+!new Address('AlpinTechAddress')
+!AlpinTechAddress.city := 'Vienna'
+!AlpinTechAddress.houseNr := '45'
+!AlpinTechAddress.street := 'Hauptplatz 12'
+!insert (AlpinTechGmbH, AlpinTechAddress) into ContactContainsAddress
+
+!new Note('AlpinTechNote1')
+!AlpinTechNote1.author := 'Gerda Silberschneider'
+!AlpinTechNote1.time := Date('2023-08-15T11:00:00')
+!AlpinTechNote1.type := #EMAIL
+!AlpinTechNote1.comment := 'Strategic partnership proposal with Corwin Enterprises.'
+!insert (AlpinTechGmbH, AlpinTechNote1) into ContactContainsNote
+
+!new Person('ProfDavidLiu')
+!ProfDavidLiu.name := 'Prof. David Liu'
+!ProfDavidLiu.phone := '+1-310-9876543'
+!ProfDavidLiu.website := 'www.davidliuresearch.org'
+!ProfDavidLiu.email := 'dliu@research.org'
+!ProfDavidLiu.title := 'Chief Research Officer'
+
+!new Address('DavidLiuAddress')
+!DavidLiuAddress.city := 'Los Angeles'
+!DavidLiuAddress.houseNr := '72'
+!DavidLiuAddress.street := 'Sunset Boulevard'
+!insert (ProfDavidLiu, DavidLiuAddress) into ContactContainsAddress
+
+!new Note('DavidLiuNote1')
+!DavidLiuNote1.author := 'Prof. David Liu'
+!DavidLiuNote1.time := Date('2023-07-10T14:45:00')
+!DavidLiuNote1.type := #MEETING
+!DavidLiuNote1.comment := 'Cross-continental R&D summit.'
+!insert (ProfDavidLiu, DavidLiuNote1) into ContactContainsNote
+
+!new Relationship('SabineToDavidCoworker')
+!SabineToDavidCoworker.type := #COWORKER
+!insert (SabineToDavidCoworker, ProfDavidLiu) into RelationshipToContact
+!insert (DrSabineMueller, SabineToDavidCoworker) into ContactToRelationship
+
+!new Relationship('SabineToAlpinTechBoss')
+!SabineToAlpinTechBoss.type := #BOSS
+!insert (SabineToAlpinTechBoss, AlpinTechGmbH) into RelationshipToContact
+!insert (DrSabineMueller, SabineToAlpinTechBoss) into ContactToRelationship
+
+!new Relationship('AlpinTechToSabineEmployee')
+!AlpinTechToSabineEmployee.type := #EMPLOYEE
+!insert (AlpinTechToSabineEmployee, DrSabineMueller) into RelationshipToContact
+!insert (AlpinTechGmbH, AlpinTechToSabineEmployee) into ContactToRelationship
+
+!new Relationship('AlpinTechToDavidSubdivision')
+!AlpinTechToDavidSubdivision.type := #SUBDIVISION
+!insert (AlpinTechToDavidSubdivision, ProfDavidLiu) into RelationshipToContact
+!insert (AlpinTechGmbH, AlpinTechToDavidSubdivision) into ContactToRelationship
+
+!new Relationship('DavidToSabineCoworker')
+!DavidToSabineCoworker.type := #COWORKER
+!insert (DavidToSabineCoworker, DrSabineMueller) into RelationshipToContact
+!insert (ProfDavidLiu, DavidToSabineCoworker) into ContactToRelationship
+
+!new Relationship('DavidToAlpinTechSubdivision')
+!DavidToAlpinTechSubdivision.type := #SUBDIVISION
+!insert (DavidToAlpinTechSubdivision, AlpinTechGmbH) into RelationshipToContact
+!insert (ProfDavidLiu, DavidToAlpinTechSubdivision) into ContactToRelationship
+
+!insert (CorwinEnterprisesContactBook, DrSabineMueller) into AddressBookMadeOfContact
+!insert (CorwinEnterprisesContactBook, AlpinTechGmbH) into AddressBookMadeOfContact
+!insert (CorwinEnterprisesContactBook, ProfDavidLiu) into AddressBookMadeOfContact

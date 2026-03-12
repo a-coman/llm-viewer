@@ -1,0 +1,74 @@
+!new AddressBook('ArtisticNetworkAddressBook')
+
+!new Company('SculptorsGuild')
+!SculptorsGuild.name := 'Sculptors Guild'
+!SculptorsGuild.phone := '+1-212-555-0234'
+!SculptorsGuild.website := 'www.sculptorsguild.org'
+!SculptorsGuild.email := 'contact@sculptorsguild.org'
+!SculptorsGuild.industry := 'Arts and Crafts'
+
+!new Person('MartaRivera')
+!MartaRivera.name := 'Marta Rivera'
+!MartaRivera.phone := '+34-91-123-4567'
+!MartaRivera.website := 'www.martarivera.art'
+!MartaRivera.email := 'marta@rivera.art'
+!MartaRivera.title := 'Renowned Painter'
+
+!new Address('MartaRiveraAddress')
+!MartaRiveraAddress.city := 'Madrid'
+!MartaRiveraAddress.houseNr := '88'
+!MartaRiveraAddress.street := 'Calle de Alcalá'
+!insert (MartaRivera, MartaRiveraAddress) into ContactContainsAddress
+
+!new Company('EastEndGallery')
+!EastEndGallery.name := 'EastEnd Gallery'
+!EastEndGallery.phone := '+49-30-555-0170'
+!EastEndGallery.website := 'www.eastendgallery.de'
+!EastEndGallery.email := 'info@eastendgallery.de'
+!EastEndGallery.industry := 'Art Gallery'
+
+!new Address('EastEndGalleryAddress1')
+!EastEndGalleryAddress1.city := 'Berlin'
+!EastEndGalleryAddress1.houseNr := '44'
+!EastEndGalleryAddress1.street := 'Kurfürstendamm'
+!insert (EastEndGallery, EastEndGalleryAddress1) into ContactContainsAddress
+
+!new Address('EastEndGalleryAddress2')
+!EastEndGalleryAddress2.city := 'Hamburg'
+!EastEndGalleryAddress2.houseNr := '10'
+!EastEndGalleryAddress2.street := 'Kunstallee'
+!insert (EastEndGallery, EastEndGalleryAddress2) into ContactContainsAddress
+
+!new Person('JulienMonet')
+!JulienMonet.name := 'Julien Monet'
+!JulienMonet.phone := '+33-1-555-0130'
+!JulienMonet.website := 'www.julienmonet.eu'
+!JulienMonet.email := 'julien@monetstudio.fr'
+!JulienMonet.title := 'Art Critic'
+
+!new Note('JulienMonetNote1')
+!JulienMonetNote1.author := 'Julien Monet'
+!JulienMonetNote1.time := Date('2023-06-12')
+!JulienMonetNote1.type := #EMAIL
+!JulienMonetNote1.comment := 'Offered critique and insights on the new exhibit.'
+!insert (JulienMonet, JulienMonetNote1) into ContactContainsNote
+
+!new Relationship('EastEndGalleryToMartaSubdivision')
+!EastEndGalleryToMartaSubdivision.type := #SUBDIVISION
+!insert (EastEndGalleryToMartaSubdivision, MartaRivera) into RelationshipToContact
+!insert (EastEndGallery, EastEndGalleryToMartaSubdivision) into ContactToRelationship
+
+!new Relationship('JulienToEastEndCoworker')
+!JulienToEastEndCoworker.type := #COWORKER
+!insert (JulienToEastEndCoworker, EastEndGallery) into RelationshipToContact
+!insert (JulienMonet, JulienToEastEndCoworker) into ContactToRelationship
+
+!new Relationship('SculptorsToJulienEmployee')
+!SculptorsToJulienEmployee.type := #EMPLOYEE
+!insert (SculptorsToJulienEmployee, JulienMonet) into RelationshipToContact
+!insert (SculptorsGuild, SculptorsToJulienEmployee) into ContactToRelationship
+
+!insert (ArtisticNetworkAddressBook, SculptorsGuild) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, MartaRivera) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, EastEndGallery) into AddressBookMadeOfContact
+!insert (ArtisticNetworkAddressBook, JulienMonet) into AddressBookMadeOfContact

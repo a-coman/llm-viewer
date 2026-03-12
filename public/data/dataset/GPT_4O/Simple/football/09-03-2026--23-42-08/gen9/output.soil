@@ -1,0 +1,136 @@
+!new Club('club17')
+!club17.name := 'Coastal Whales'
+!club17.homeGround := 'Whale Bay Stadium'
+!club17.chairman := 'Tom Coastal'
+
+!new Club('club18')
+!club18.name := 'Forest Owls'
+!club18.homeGround := 'Owl Wood Arena'
+!club18.chairman := 'Sophie Green'
+
+!new Team('team17')
+!team17.name := 'Whale Riders'
+!insert (club17, team17) into ClubTeam
+
+!new Team('team18')
+!team18.name := 'Owl Wings'
+!insert (club18, team18) into ClubTeam
+
+!new Competition('winterClassic')
+!winterClassic.name := 'Winter Classic'
+!winterClassic.type := 'Tournament'
+
+!new Match('match9')
+!match9.date := '2025-01-12'
+!match9.homeAway := true
+!insert (winterClassic, match9) into CompetitionMatch
+!insert (team17, match9) into LocalMatch
+!insert (team18, match9) into VisitorMatch
+
+!new MatchReport('report9')
+!report9.duration := 90
+!report9.scoreVisitor := 2
+!report9.scoreLocal := 2
+!insert (match9, report9) into MatchMatchReport
+
+!new Player('player17')
+!player17.name := 'Martin Wave'
+!player17.age := 26
+!player17.bestFoot := #RIGHT
+!player17.phoneNumber := '9876543210'
+!insert (team17, player17) into TeamPlayer
+
+!new Player('player18')
+!player18.name := 'Emily Branch'
+!player18.age := 24
+!player18.bestFoot := #BOTH
+!player18.phoneNumber := '8765432109'
+!insert (team18, player18) into TeamPlayer
+
+!new Position('position17')
+!position17.positionName := #FORWARD
+!insert (player17, position17) into PlayerPositions
+
+!new Position('position18')
+!position18.positionName := #MIDFIELDER
+!insert (player18, position18) into PlayerPositions
+
+!new MatchPlayer('matchPlayer17')
+!matchPlayer17.booked := false
+!matchPlayer17.goals := 1
+!matchPlayer17.rating := 7
+!insert (player17, matchPlayer17) into PlayerMatch
+!insert (match9, matchPlayer17) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer18')
+!matchPlayer18.booked := false
+!matchPlayer18.goals := 1
+!matchPlayer18.rating := 8
+!insert (player18, matchPlayer18) into PlayerMatch
+!insert (match9, matchPlayer18) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition17')
+!matchPlayerPosition17.positionName := #FORWARD
+!matchPlayerPosition17.number := 9
+!insert (matchPlayer17, matchPlayerPosition17) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition18')
+!matchPlayerPosition18.positionName := #MIDFIELDER
+!matchPlayerPosition18.number := 6
+!insert (matchPlayer18, matchPlayerPosition18) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event31')
+!event31.eventType := #GOAL
+!event31.time := 15
+!insert (match9, event31) into MatchMatchEvent
+
+!new MatchEvent('event32')
+!event32.eventType := #GOAL
+!event32.time := 45
+!insert (match9, event32) into MatchMatchEvent
+
+!new MatchEvent('event33')
+!event33.eventType := #GOAL
+!event33.time := 60
+!insert (match9, event33) into MatchMatchEvent
+
+!new MatchEvent('event34')
+!event34.eventType := #GOAL
+!event34.time := 85
+!insert (match9, event34) into MatchMatchEvent
+
+!new TrainingSession('training17')
+!training17.date := '2024-12-20'
+!training17.location := 'Whale Cove'
+!training17.purpose := 'Ball Control Techniques'
+!insert (team17, training17) into TeamTraining
+
+!new TrainingSession('training18')
+!training18.date := '2024-12-22'
+!training18.location := 'Owl Perch'
+!training18.purpose := 'Stamina Boosters'
+!insert (team18, training18) into TeamTraining
+
+!new TrainingNotes('trainingNote17')
+!trainingNote17.note := 'Practiced dribbling and close control'
+!trainingNote17.date := '2024-12-20'
+!insert (training17, trainingNote17) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote18')
+!trainingNote18.note := 'Endurance training focused on long runs'
+!trainingNote18.date := '2024-12-22'
+!insert (training18, trainingNote18) into TrainingTrainingNotes
+
+!new TrainingObjective('objective17')
+!objective17.areaToImprove := 'Precision Passing'
+!objective17.startDate := '2024-10-01'
+!objective17.endDate := '2024-12-31'
+!objective17.success := true
+!insert (objective17, player17) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective18')
+!objective18.areaToImprove := 'Speed and Agility'
+!objective18.startDate := '2024-10-10'
+!objective18.endDate := '2025-01-10'
+!objective18.success := false
+!insert (objective18, player18) into TrainingObjectivePlayer

@@ -1,0 +1,47 @@
+!new Customer('customer12')
+!customer12.firstName := 'Fatima'
+!customer12.lastName := 'Ali'
+
+!new Booking('booking11')
+!booking11.startDate := '2023-01-01'
+!booking11.endDate := '2023-01-02'
+!booking11.canceled := false
+!booking11.bookingId := 303
+!booking11.confirmed := true
+
+!new Bill('bill22')
+!bill22.price := 150.0
+!bill22.billId := 701
+
+!new FreeRoomTypesDTO('freeRoomType9')
+!freeRoomType9.roomTypeDescription := 'Deluxe Room'
+!freeRoomType9.numBeds := 2
+!freeRoomType9.pricePerNight := 150.00
+!freeRoomType9.numFreeRooms := 10
+
+!new RoomReservation('roomReservation11')
+!roomReservation11.checkInDate := '2023-01-01'
+!roomReservation11.checkOutDate := '2023-01-02'
+
+!new RoomExtra('extra11_1')
+!extra11_1.price := 20.0
+!extra11_1.description := 'Room Service'
+
+!new Room('room11_501')
+!room11_501.numBeds := 2
+!room11_501.pricePerNight := 150.0
+!room11_501.occupied := true
+!room11_501.blocked := false
+!room11_501.roomNumber := 501
+
+!insert (booking11, customer12) into BookingCustomer
+
+!insert (booking11, bill22) into BookingBill
+
+!insert (booking11, roomReservation11) into BookingRoomReservation
+
+!insert (roomReservation11, room11_501) into RoomReservationRoom
+
+!insert (roomReservation11, extra11_1) into RoomReservationExtras
+
+!insert (bill22, roomReservation11) into BillRoomReservation

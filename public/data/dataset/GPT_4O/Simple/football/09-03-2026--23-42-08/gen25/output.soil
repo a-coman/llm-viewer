@@ -1,0 +1,146 @@
+!new Club('club49')
+!club49.name := 'Frost Falcons'
+!club49.homeGround := 'Ice Wing Stadium'
+!club49.chairman := 'Nina Frost'
+
+!new Club('club50')
+!club50.name := 'Blaze Lions'
+!club50.homeGround := 'Sunfire Field'
+!club50.chairman := 'Leo Blaze'
+
+!new Team('team49')
+!team49.name := 'Falcon Frostbite'
+!insert (club49, team49) into ClubTeam
+
+!new Team('team50')
+!team50.name := 'Lion Heatwave'
+!insert (club50, team50) into ClubTeam
+
+!new Competition('winterChampionship')
+!winterChampionship.name := 'Winter Championship'
+!winterChampionship.type := 'League'
+
+!new Match('match25')
+!match25.date := '2032-02-10'
+!match25.homeAway := false
+!insert (winterChampionship, match25) into CompetitionMatch
+!insert (team49, match25) into LocalMatch
+!insert (team50, match25) into VisitorMatch
+
+!new MatchReport('report25')
+!report25.duration := 90
+!report25.scoreVisitor := 3
+!report25.scoreLocal := 3
+!insert (match25, report25) into MatchMatchReport
+
+!new Player('player49')
+!player49.name := 'Ivy Glacier'
+!player49.age := 30
+!player49.bestFoot := #LEFT
+!player49.phoneNumber := '8765012349'
+!insert (team49, player49) into TeamPlayer
+
+!new Player('player50')
+!player50.name := 'Rex Solar'
+!player50.age := 28
+!player50.bestFoot := #BOTH
+!player50.phoneNumber := '9123456890'
+!insert (team50, player50) into TeamPlayer
+
+!new Position('position49')
+!position49.positionName := #DEFENDER
+!insert (player49, position49) into PlayerPositions
+
+!new Position('position50')
+!position50.positionName := #FORWARD
+!insert (player50, position50) into PlayerPositions
+
+!new MatchPlayer('matchPlayer49')
+!matchPlayer49.booked := false
+!matchPlayer49.goals := 0
+!matchPlayer49.rating := 7
+!insert (player49, matchPlayer49) into PlayerMatch
+!insert (match25, matchPlayer49) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer50')
+!matchPlayer50.booked := true
+!matchPlayer50.goals := 2
+!matchPlayer50.rating := 9
+!insert (player50, matchPlayer50) into PlayerMatch
+!insert (match25, matchPlayer50) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition49')
+!matchPlayerPosition49.positionName := #DEFENDER
+!matchPlayerPosition49.number := 4
+!insert (matchPlayer49, matchPlayerPosition49) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition50')
+!matchPlayerPosition50.positionName := #FORWARD
+!matchPlayerPosition50.number := 11
+!insert (matchPlayer50, matchPlayerPosition50) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event93')
+!event93.eventType := #GOAL
+!event93.time := 15
+!insert (match25, event93) into MatchMatchEvent
+
+!new MatchEvent('event94')
+!event94.eventType := #GOAL
+!event94.time := 35
+!insert (match25, event94) into MatchMatchEvent
+
+!new MatchEvent('event95')
+!event95.eventType := #GOAL
+!event95.time := 50
+!insert (match25, event95) into MatchMatchEvent
+
+!new MatchEvent('event96')
+!event96.eventType := #GOAL
+!event96.time := 70
+!insert (match25, event96) into MatchMatchEvent
+
+!new MatchEvent('event97')
+!event97.eventType := #GOAL
+!event97.time := 80
+!insert (match25, event97) into MatchMatchEvent
+
+!new MatchEvent('event98')
+!event98.eventType := #GOAL
+!event98.time := 88
+!insert (match25, event98) into MatchMatchEvent
+
+!new TrainingSession('training49')
+!training49.date := '2032-01-15'
+!training49.location := 'Snowbound Arena'
+!training49.purpose := 'Defensive Drills in Snow'
+!insert (team49, training49) into TeamTraining
+
+!new TrainingSession('training50')
+!training50.date := '2032-01-20'
+!training50.location := 'Heated Pitch'
+!training50.purpose := 'Attack Precision'
+!insert (team50, training50) into TeamTraining
+
+!new TrainingNotes('trainingNote49')
+!trainingNote49.note := 'Enhanced blocking and perimeter control'
+!trainingNote49.date := '2032-01-15'
+!insert (training49, trainingNote49) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote50')
+!trainingNote50.note := 'Focused on fast-paced finishing drills'
+!trainingNote50.date := '2032-01-20'
+!insert (training50, trainingNote50) into TrainingTrainingNotes
+
+!new TrainingObjective('objective49')
+!objective49.areaToImprove := 'Snowfield Adaptation'
+!objective49.startDate := '2031-11-01'
+!objective49.endDate := '2032-02-01'
+!objective49.success := false
+!insert (objective49, player49) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective50')
+!objective50.areaToImprove := 'Goal Scoring Efficiency'
+!objective50.startDate := '2031-11-15'
+!objective50.endDate := '2032-02-15'
+!objective50.success := true
+!insert (objective50, player50) into TrainingObjectivePlayer

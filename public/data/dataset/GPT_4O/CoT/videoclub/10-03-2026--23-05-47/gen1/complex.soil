@@ -1,0 +1,66 @@
+!new Client('client2')
+!client2.clientId := 102
+!client2.isSuspended := false
+
+!new Client('client3')
+!client3.clientId := 205
+!client3.isSuspended := true
+
+!new Rental('rental2')
+!rental2.date := Date('2023-09-05')
+
+!new Rental('rental3')
+!rental3.date := Date('2023-10-15')
+
+!new Rental('rental4')
+!rental4.date := Date('2023-11-01')
+
+!new Movie('movie2')
+!movie2.title := 'The Great Escape'
+!movie2.availableCopies := 5
+!movie2.genre := #Action
+
+!new Movie('movie3')
+!movie3.title := 'Laugh Out Loud'
+!movie3.availableCopies := 2
+!movie3.genre := #Comedy
+
+!new Series('series2')
+!series2.title := 'Mystery of the East'
+!series2.availableCopies := 4
+!series2.episode := 3
+
+!new Series('series3')
+!series3.title := 'Urban Legends'
+!series3.availableCopies := 6
+!series3.episode := 7
+
+!new Actor('actor3')
+!actor3.name := 'Tom Hardy'
+
+!new Actor('actor4')
+!actor4.name := 'Maya Lopez'
+
+!new Actor('actor5')
+!actor5.name := 'John Smith'
+
+!new Actor('actor6')
+!actor6.name := 'Priya Patel'
+
+!insert (client2, rental2) into ClientRental
+!insert (client2, rental3) into ClientRental
+!insert (client3, rental4) into ClientRental
+
+!insert (rental2, movie2) into RentalCassette
+!insert (rental2, series2) into RentalCassette
+!insert (rental3, movie3) into RentalCassette
+!insert (rental4, series3) into RentalCassette
+
+!insert (movie2, actor3) into CassetteActor
+!insert (movie2, actor4) into CassetteActor
+!insert (movie3, actor4) into CassetteActor
+!insert (movie3, actor5) into CassetteActor
+!insert (series2, actor6) into CassetteActor
+!insert (series2, actor5) into CassetteActor
+!insert (series3, actor6) into CassetteActor
+!insert (series3, actor3) into CassetteActor

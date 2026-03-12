@@ -1,0 +1,84 @@
+!new Client('client8')
+!client8.clientId := 301
+!client8.isSuspended := false
+
+!new Client('client9')
+!client9.clientId := 402
+!client9.isSuspended := false
+
+!new Rental('rental9')
+!rental9.date := Date('2023-08-20')
+
+!new Rental('rental10')
+!rental10.date := Date('2023-08-25')
+
+!new Rental('rental11')
+!rental11.date := Date('2023-09-12')
+
+!new Rental('rental12')
+!rental12.date := Date('2023-10-02')
+
+!new Movie('movie10')
+!movie10.title := 'Distant Thunder'
+!movie10.availableCopies := 10
+!movie10.genre := #Action
+
+!new Movie('movie11')
+!movie11.title := 'Joyful Jingles'
+!movie11.availableCopies := 5
+!movie11.genre := #Comedy
+
+!new Series('series9')
+!series9.title := 'Tales from the North'
+!series9.availableCopies := 8
+!series9.episode := 1
+
+!new Series('series10')
+!series10.title := 'Safari Adventure'
+!series10.availableCopies := 3
+!series10.episode := 5
+
+!new Series('series11')
+!series11.title := 'London Mysteries'
+!series11.availableCopies := 6
+!series11.episode := 2
+
+!new Actor('actor19')
+!actor19.name := 'Anna Kendrick'
+
+!new Actor('actor20')
+!actor20.name := 'Robert Liu'
+
+!new Actor('actor21')
+!actor21.name := 'Eliott Gomez'
+
+!new Actor('actor22')
+!actor22.name := 'Jasmine Khan'
+
+!insert (client8, rental9) into ClientRental
+!insert (client8, rental11) into ClientRental
+
+!insert (client9, rental10) into ClientRental
+!insert (client9, rental12) into ClientRental
+
+!insert (rental9, movie10) into RentalCassette
+!insert (rental10, movie11) into RentalCassette
+!insert (rental10, series10) into RentalCassette
+!insert (rental11, series9) into RentalCassette
+!insert (rental11, series10) into RentalCassette
+!insert (rental12, series11) into RentalCassette
+
+!insert (movie10, actor19) into CassetteActor
+!insert (movie10, actor20) into CassetteActor
+
+!insert (movie11, actor22) into CassetteActor
+!insert (movie11, actor21) into CassetteActor
+
+!insert (series9, actor19) into CassetteActor
+!insert (series9, actor22) into CassetteActor
+
+!insert (series10, actor20) into CassetteActor
+!insert (series10, actor21) into CassetteActor
+
+!insert (series11, actor22) into CassetteActor
+!insert (series11, actor19) into CassetteActor

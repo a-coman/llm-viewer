@@ -1,0 +1,39 @@
+!new RentalOffice('officeNYCUptownDepot')
+!officeNYCUptownDepot.name := 'New York City Uptown Depot'
+!officeNYCUptownDepot.number := 505
+!officeNYCUptownDepot.address := '252 Broadway, New York, NY'
+
+!new Truck('truck7005')
+!truck7005.id := 7005
+!truck7005.registrationState := #CA
+!truck7005.licensePlateNumber := 'NY4455IJ'
+!truck7005.vehicleTypeCode := #TRUCK
+!truck7005.odometerReading := 50456
+!truck7005.gasTankCapacity := 20.5
+!truck7005.workingRadio := true
+!truck7005.mileage := 12
+!truck7005.registrationLastMaintenanceDate := Date('2024-01-05')
+!truck7005.expirationDate := Date('2023-12-31')
+
+!new Individual('individualDerekColeman')
+!individualDerekColeman.name := 'Derek Coleman'
+!individualDerekColeman.address := '123 Harlem Ave, New York, NY'
+!individualDerekColeman.poorRisk := true
+!individualDerekColeman.homePhone := '(212) 555-7890'
+!individualDerekColeman.driverLicenseState := #CA
+!individualDerekColeman.driverLicenseNumber := 76543210
+!individualDerekColeman.driverLicenseExpirationDate := Date('2023-11-30')
+
+!new RentalAgreement('rentalAgreement9006')
+!rentalAgreement9006.number := 9006
+!rentalAgreement9006.rentalDate := Date('2023-11-25')
+!rentalAgreement9006.anticipatedDuration := 10
+!rentalAgreement9006.depositPaid := 50.0
+!rentalAgreement9006.quotedDailyRate := 100.0
+!rentalAgreement9006.quotedRatePerMile := 0.40
+
+!insert (officeNYCUptownDepot, truck7005) into RentalOfficeVehicle
+!insert (officeNYCUptownDepot, rentalAgreement9006) into RentalOfficeRentalAgreementOrigin
+!insert (officeNYCUptownDepot, rentalAgreement9006) into RentalOfficeRentalAgreementDrop
+!insert (rentalAgreement9006, truck7005) into RentalAgreementVehicle
+!insert (rentalAgreement9006, individualDerekColeman) into RentalAgreementCustomer

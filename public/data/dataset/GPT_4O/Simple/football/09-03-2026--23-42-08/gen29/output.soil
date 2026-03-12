@@ -1,0 +1,151 @@
+!new Club('club57')
+!club57.name := 'Azure Dolphins'
+!club57.homeGround := 'Bluewave Bay'
+!club57.chairman := 'Dylan Ocean'
+
+!new Club('club58')
+!club58.name := 'Granite Rhinos'
+!club58.homeGround := 'Rock Fortress'
+!club58.chairman := 'Rina Stone'
+
+!new Team('team57')
+!team57.name := 'Dolphin Splash'
+!insert (club57, team57) into ClubTeam
+
+!new Team('team58')
+!team58.name := 'Rhino Rampage'
+!insert (club58, team58) into ClubTeam
+
+!new Competition('tidalChallenge')
+!tidalChallenge.name := 'Tidal Challenge'
+!tidalChallenge.type := 'Cup'
+
+!new Match('match29')
+!match29.date := '2034-10-12'
+!match29.homeAway := false
+!insert (tidalChallenge, match29) into CompetitionMatch
+!insert (team57, match29) into LocalMatch
+!insert (team58, match29) into VisitorMatch
+
+!new MatchReport('report29')
+!report29.duration := 90
+!report29.scoreVisitor := 2
+!report29.scoreLocal := 5
+!insert (match29, report29) into MatchMatchReport
+
+!new Player('player57')
+!player57.name := 'Finn Tide'
+!player57.age := 23
+!player57.bestFoot := #LEFT
+!player57.phoneNumber := '9345678120'
+!insert (team57, player57) into TeamPlayer
+
+!new Player('player58')
+!player58.name := 'Granite Boulder'
+!player58.age := 29
+!player58.bestFoot := #RIGHT
+!player58.phoneNumber := '8123456790'
+!insert (team58, player58) into TeamPlayer
+
+!new Position('position57')
+!position57.positionName := #GOALKEEPER
+!insert (player57, position57) into PlayerPositions
+
+!new Position('position58')
+!position58.positionName := #DEFENDER
+!insert (player58, position58) into PlayerPositions
+
+!new MatchPlayer('matchPlayer57')
+!matchPlayer57.booked := false
+!matchPlayer57.goals := 0
+!matchPlayer57.rating := 8
+!insert (player57, matchPlayer57) into PlayerMatch
+!insert (match29, matchPlayer57) into MatchMatchPlayer
+
+!new MatchPlayer('matchPlayer58')
+!matchPlayer58.booked := true
+!matchPlayer58.goals := 1
+!matchPlayer58.rating := 7
+!insert (player58, matchPlayer58) into PlayerMatch
+!insert (match29, matchPlayer58) into MatchMatchPlayer
+
+!new MatchPlayerPosition('matchPlayerPosition57')
+!matchPlayerPosition57.positionName := #GOALKEEPER
+!matchPlayerPosition57.number := 1
+!insert (matchPlayer57, matchPlayerPosition57) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('matchPlayerPosition58')
+!matchPlayerPosition58.positionName := #DEFENDER
+!matchPlayerPosition58.number := 6
+!insert (matchPlayer58, matchPlayerPosition58) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('event113')
+!event113.eventType := #GOAL
+!event113.time := 12
+!insert (match29, event113) into MatchMatchEvent
+
+!new MatchEvent('event114')
+!event114.eventType := #GOAL
+!event114.time := 29
+!insert (match29, event114) into MatchMatchEvent
+
+!new MatchEvent('event115')
+!event115.eventType := #GOAL
+!event115.time := 42
+!insert (match29, event115) into MatchMatchEvent
+
+!new MatchEvent('event116')
+!event116.eventType := #GOAL
+!event116.time := 67
+!insert (match29, event116) into MatchMatchEvent
+
+!new MatchEvent('event117')
+!event117.eventType := #GOAL
+!event117.time := 75
+!insert (match29, event117) into MatchMatchEvent
+
+!new MatchEvent('event118')
+!event118.eventType := #GOAL
+!event118.time := 85
+!insert (match29, event118) into MatchMatchEvent
+
+!new MatchEvent('event119')
+!event119.eventType := #GOAL
+!event119.time := 89
+!insert (match29, event119) into MatchMatchEvent
+
+!new TrainingSession('training57')
+!training57.date := '2034-09-01'
+!training57.location := 'Ocean Pavilion'
+!training57.purpose := 'Goalkeeper Reflexes'
+!insert (team57, training57) into TeamTraining
+
+!new TrainingSession('training58')
+!training58.date := '2034-09-10'
+!training58.location := 'Rocky Training Field'
+!training58.purpose := 'Defensive Block Techniques'
+!insert (team58, training58) into TeamTraining
+
+!new TrainingNotes('trainingNote57')
+!trainingNote57.note := 'Improved reaction time and agility'
+!trainingNote57.date := '2034-09-01'
+!insert (training57, trainingNote57) into TrainingTrainingNotes
+
+!new TrainingNotes('trainingNote58')
+!trainingNote58.note := 'Focused on structural wall defenses'
+!trainingNote58.date := '2034-09-10'
+!insert (training58, trainingNote58) into TrainingTrainingNotes
+
+!new TrainingObjective('objective57')
+!objective57.areaToImprove := 'Aerial Saves'
+!objective57.startDate := '2034-07-01'
+!objective57.endDate := '2034-10-01'
+!objective57.success := true
+!insert (objective57, player57) into TrainingObjectivePlayer
+
+!new TrainingObjective('objective58')
+!objective58.areaToImprove := 'Tackle Timing'
+!objective58.startDate := '2034-07-15'
+!objective58.endDate := '2034-10-15'
+!objective58.success := false
+!insert (objective58, player58) into TrainingObjectivePlayer

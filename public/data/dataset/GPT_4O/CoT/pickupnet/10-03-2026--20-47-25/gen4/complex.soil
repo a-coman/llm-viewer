@@ -1,0 +1,121 @@
+!new Driver('driver32')
+!driver32.id := 'DRV007'
+!driver32.name := 'Kwame Mensah'
+
+!new Driver('driver33')
+!driver33.id := 'DRV008'
+!driver33.name := 'Emily Johnson'
+
+!new Customer('customer28')
+!customer28.id := 'CUST009'
+!customer28.name := 'Fatima El-Shabazz'
+!customer28.twitterUserName := '@fatima_egypt'
+
+!new Customer('customer29')
+!customer29.id := 'CUST010'
+!customer29.name := 'Carlos Ramirez'
+!customer29.twitterUserName := '@carlos_r_mex'
+
+!new Customer('customer30')
+!customer30.id := 'CUST011'
+!customer30.name := 'Liam O\'Connor'
+!customer30.twitterUserName := '@liam_oc_usa'
+
+!new Address('address73')
+!address73.text := '5th Avenue, New York, NY, USA'
+
+!new GeoLocation('geoLocation73')
+!geoLocation73.latitude := 40.758896
+!geoLocation73.longitude := -73.985130
+
+!insert (address73, geoLocation73) into AddressContainsGeoLocation
+
+!new Address('address74')
+!address74.text := 'Rue Royale, Dakar, Senegal'
+
+!new GeoLocation('geoLocation74')
+!geoLocation74.latitude := 14.692778
+!geoLocation74.longitude := -17.446667
+
+!insert (address74, geoLocation74) into AddressContainsGeoLocation
+
+!new Address('address75')
+!address75.text := 'Polanco, Mexico City, Mexico'
+
+!new GeoLocation('geoLocation75')
+!geoLocation75.latitude := 19.43306
+!geoLocation75.longitude := -99.13323
+
+!insert (address75, geoLocation75) into AddressContainsGeoLocation
+
+!new Address('address76')
+!address76.text := 'King\'s Cross, London, UK'
+
+!new GeoLocation('geoLocation76')
+!geoLocation76.latitude := 51.5308
+!geoLocation76.longitude := -0.1207
+
+!insert (address76, geoLocation76) into AddressContainsGeoLocation
+
+!new Address('address77')
+!address77.text := 'Cairo International Airport, Cairo, Egypt'
+
+!new GeoLocation('geoLocation77')
+!geoLocation77.latitude := 30.121941
+!geoLocation77.longitude := 31.405471
+
+!insert (address77, geoLocation77) into AddressContainsGeoLocation
+
+!new Address('address78')
+!address78.text := 'Lagos Mainland, Lagos, Nigeria'
+
+!new GeoLocation('geoLocation78')
+!geoLocation78.latitude := 6.524379
+!geoLocation78.longitude := 3.379206
+
+!insert (address78, geoLocation78) into AddressContainsGeoLocation
+
+!new Shipment('shipment40')
+!shipment40.id := 'SHIP009'
+!shipment40.status := #UNDERWAY
+
+!new Shipment('shipment41')
+!shipment41.id := 'SHIP010'
+!shipment41.status := #NEW
+
+!new Shipment('shipment42')
+!shipment42.id := 'SHIP011'
+!shipment42.status := #DELIVERED
+
+!insert (shipment40, address73) into ShipmentContainsPickUpAddress
+!insert (shipment40, address74) into ShipmentContainsDeliveryAddress
+
+!insert (shipment41, address75) into ShipmentContainsPickUpAddress
+!insert (shipment41, address76) into ShipmentContainsDeliveryAddress
+
+!insert (shipment42, address77) into ShipmentContainsPickUpAddress
+!insert (shipment42, address78) into ShipmentContainsDeliveryAddress
+
+!insert (customer28, shipment42) into CustomerConsistsOfShipment
+!insert (customer29, shipment41) into CustomerConsistsOfShipment
+!insert (customer30, shipment40) into CustomerConsistsOfShipment
+
+!insert (driver32, shipment42) into DriverShipment
+!insert (driver33, shipment40) into DriverShipment
+
+!new Station('station26')
+
+!new Station('station27')
+
+!new Station('station28')
+
+!insert (station26, customer30) into StationContainsCustomer
+!insert (station26, driver33) into StationContainsDriver
+!insert (station26, shipment40) into StationShipment
+
+!insert (station27, customer29) into StationContainsCustomer
+!insert (station27, shipment41) into StationShipment
+
+!insert (station28, customer28) into StationContainsCustomer
+!insert (station28, driver32) into StationContainsDriver
+!insert (station28, shipment42) into StationShipment

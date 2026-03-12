@@ -1,0 +1,53 @@
+!new Client('client22')
+!client22.clientId := 5123
+!client22.isSuspended := false
+
+!new Rental('rental35')
+!rental35.date := Date('2023-05-14')
+
+!new Rental('rental36')
+!rental36.date := Date('2023-12-01')
+
+!new Movie('movie28')
+!movie28.title := 'The Last Stand'
+!movie28.availableCopies := 0
+!movie28.genre := #Action
+
+!new Series('series27')
+!series27.title := 'Culinary Journeys Season 5'
+!series27.availableCopies := 6
+!series27.episode := 3
+
+!new Series('series28')
+!series28.title := 'Culinary Journeys Season 5'
+!series28.availableCopies := 6
+!series28.episode := 4
+
+!new Actor('actor53')
+!actor53.name := 'Aisha Khan'
+
+!new Actor('actor54')
+!actor54.name := 'Jean-Pierre Renault'
+
+!new Actor('actor55')
+!actor55.name := 'Zara Muhammad'
+
+!new Actor('actor56')
+!actor56.name := 'Luca Rossi'
+
+!insert (client22, rental35) into ClientRental
+!insert (client22, rental36) into ClientRental
+
+!insert (rental35, movie28) into RentalCassette
+!insert (rental35, series27) into RentalCassette
+
+!insert (rental36, series28) into RentalCassette
+
+!insert (movie28, actor53) into CassetteActor
+!insert (movie28, actor54) into CassetteActor
+
+!insert (series27, actor55) into CassetteActor
+!insert (series27, actor56) into CassetteActor
+
+!insert (series28, actor55) into CassetteActor
+!insert (series28, actor53) into CassetteActor

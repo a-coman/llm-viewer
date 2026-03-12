@@ -1,0 +1,125 @@
+!new Restaurant('restaurant28')
+!restaurant28.name := 'Fusion Feast Hub'
+
+!new Owner('owner59')
+!owner59.name := 'Ana Duarte'
+!owner59.percentageShares := 25
+
+!new Owner('owner60')
+!owner60.name := 'Lee Chang'
+!owner60.percentageShares := 25
+
+!new Owner('owner61')
+!owner61.name := 'Youssef Ali'
+!owner61.percentageShares := 50
+
+!insert (restaurant28, owner59) into RestaurantOwner
+!insert (restaurant28, owner60) into RestaurantOwner
+!insert (restaurant28, owner61) into RestaurantOwner
+
+!new RegularCustomer('customer24')
+!customer24.name := 'Katarzyna Nowak'
+!customer24.prefferedLanguage := #English
+
+!new HeadWaiter('headwaiter23')
+!headwaiter23.name := 'Samuel Brown'
+!headwaiter23.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter23.phoneNumber := '1112223334'        -- Arbitrary phone number
+
+!new Waiter('waiter54')
+!waiter54.name := 'Mei Lin'
+!waiter54.dateOfBirth := Date('2000-01-01')      -- Arbitrary date of birth
+!waiter54.phoneNumber := '2223334445'            -- Arbitrary phone number
+!waiter54.spokenLanguage := #English
+
+!new Waiter('waiter55')
+!waiter55.name := 'Alex Cooper'
+!waiter55.dateOfBirth := Date('1992-01-01')      -- Arbitrary date of birth
+!waiter55.phoneNumber := '3335556666'            -- Arbitrary phone number
+!waiter55.spokenLanguage := #English
+
+!insert (headwaiter23, waiter54) into HeadWaiterWaiter
+
+!new Chef('chef33')
+!chef33.name := 'Rashid Khan'
+!chef33.dateOfBirth := Date('1975-01-01')        -- Arbitrary date of birth
+!chef33.phoneNumber := '3334445556'              -- Arbitrary phone number
+
+!new Cook('cook39')
+!cook39.name := 'Eleni Papadopoulos'
+!cook39.dateOfBirth := Date('1983-01-01')        -- Arbitrary date of birth
+!cook39.phoneNumber := '4445556667'              -- Arbitrary phone number
+!cook39.yearsOfExperience := 6
+
+!insert (chef33, cook39) into ChefCook
+
+!new Table('table71')
+!table71.number := 9
+!table71.description := 'High-top seating for a quick bite'
+!table71.capacity := 1
+
+!new Table('table72')
+!table72.number := 10
+!table72.description := 'Family style dining table'
+!table72.capacity := 5
+
+!new Table('table73')
+!table73.number := 11
+!table73.description := 'Shared patio table'
+!table73.capacity := 7
+
+!new MenuItem('menuitem44')
+!menuitem44.description := 'A hearty dish combining seafood flavors with a touch of chili.'
+!menuitem44.prepTime := 30.0
+!menuitem44.classification := #Main
+
+!insert (menuitem44, chef33) into MenuItemChef
+
+!new FoodItem('fooditem72')
+!fooditem72.number := 72
+!fooditem72.description := 'Prawns'
+!fooditem72.purchaseFlag := true
+!fooditem72.unit := #Gram
+
+!insert (menuitem44, fooditem72) into MenuItemFoodItem
+
+!new Allergen('allergen28')
+!allergen28.type := #Seafood
+
+!insert (fooditem72, allergen28) into FoodItemAllergen
+
+!new Individual('individualReservation15')
+!individualReservation15.date := Date('2023-11-05')
+!individualReservation15.time := Time('14:00')
+!individualReservation15.numberPeople := 1
+!individualReservation15.name := 'Katarzyna Nowak'
+!individualReservation15.phoneNumber := '5556667778'  -- Arbitrary phone number
+!individualReservation15.seating := #Inside
+!individualReservation15.smoking := #NonSmoking
+!individualReservation15.number := 15
+
+!insert (restaurant28, individualReservation15) into RestaurantReservation
+!insert (individualReservation15, customer24) into ReservationCustomer
+!insert (individualReservation15, waiter54) into ReservationWaiter
+!insert (individualReservation15, table71) into ReservationTable
+
+!new Banquet('banquet24')
+!banquet24.date := Date('2023-11-05')
+!banquet24.time := Time('19:00')
+!banquet24.groupName := 'Evening Gathering'
+!banquet24.numberPeople := 12
+!banquet24.paymentMethod := #CreditCard
+
+!insert (restaurant28, banquet24) into RestaurantReservation
+
+!insert (banquet24, table72) into ReservationTable
+!insert (banquet24, table73) into ReservationTable
+
+!insert (banquet24, waiter54) into ReservationWaiter
+!insert (banquet24, waiter55) into ReservationWaiter
+
+!new ItemOrder('itemorder6')
+!itemorder6.time := Time('14:10')
+
+!insert (individualReservation15, itemorder6) into ReservationItemOrdered
+!insert (itemorder6, menuitem44) into ItemOrderMenuItem

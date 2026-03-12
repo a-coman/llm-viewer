@@ -1,0 +1,36 @@
+!new Booking('booking15')
+!booking15.startDate := '2025-01-10'
+!booking15.endDate := '2025-01-15'
+!booking15.canceled := true
+!booking15.bookingId := 115
+!booking15.confirmed := false
+
+!new Bill('bill15')
+!bill15.price := 0.00
+!bill15.billId := 5015
+
+!new Customer('customer15')
+!customer15.firstName := 'Oliver'
+!customer15.lastName := 'Parker'
+
+!new RoomReservation('reservation15')
+!reservation15.checkInDate := '2025-01-10'
+!reservation15.checkOutDate := '2025-01-15'
+
+!new Room('room1201')
+!room1201.numBeds := 2
+!room1201.pricePerNight := 140.00
+!room1201.occupied := false
+!room1201.blocked := true
+!room1201.roomNumber := 1201
+
+!new RoomExtra('extra18')
+!extra18.price := 25.00
+!extra18.description := 'Laundry Service'
+
+!insert (booking15, bill15) into BookingBill
+!insert (booking15, customer15) into BookingCustomer
+!insert (booking15, reservation15) into BookingRoomReservation
+!insert (reservation15, extra18) into RoomReservationExtras
+!insert (reservation15, room1201) into RoomReservationRoom
+!insert (bill15, reservation15) into BillRoomReservation

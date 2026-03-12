@@ -1,0 +1,72 @@
+!new Driver('driver53')
+!driver53.id := 'DR0001'
+!driver53.name := 'Soumaya El-Amin'
+
+!new Customer('customer53')
+!customer53.id := 'CU5001'
+!customer53.name := 'Javier Morales'
+!customer53.twitterUserName := '@javierLatAm'
+
+!new Shipment('shipment70')
+!shipment70.id := 'SH3001'
+!shipment70.status := #NEW
+
+!new Shipment('shipment71')
+!shipment71.id := 'SH3002'
+!shipment71.status := #UNDERWAY
+
+!new Address('address121')
+!address121.text := 'Av. Río Amazonas, Quito, Ecuador'
+
+!new GeoLocation('geoLocation121')
+!geoLocation121.latitude := -0.22985
+!geoLocation121.longitude := -78.52495
+
+!insert (address121, geoLocation121) into AddressContainsGeoLocation
+
+!new Address('address122')
+!address122.text := 'Calle Ocho, Miami, USA'
+
+!new GeoLocation('geoLocation122')
+!geoLocation122.latitude := 25.76168
+!geoLocation122.longitude := -80.19179
+
+!insert (address122, geoLocation122) into AddressContainsGeoLocation
+
+!new Address('address123')
+!address123.text := 'Plaza Mayor, Madrid, Spain'
+
+!new GeoLocation('geoLocation123')
+!geoLocation123.latitude := 40.416775
+!geoLocation123.longitude := -3.703790
+
+!insert (address123, geoLocation123) into AddressContainsGeoLocation
+
+!new Address('address124')
+!address124.text := 'Champs-Élysées, Paris, France'
+
+!new GeoLocation('geoLocation124')
+!geoLocation124.latitude := 48.856613
+!geoLocation124.longitude := 2.352222
+
+!insert (address124, geoLocation124) into AddressContainsGeoLocation
+
+!new Station('station46')
+
+!insert (driver53, shipment71) into DriverShipment
+
+!insert (shipment70, address121) into ShipmentContainsPickUpAddress
+!insert (shipment70, address122) into ShipmentContainsDeliveryAddress
+
+!insert (shipment71, address123) into ShipmentContainsPickUpAddress
+!insert (shipment71, address124) into ShipmentContainsDeliveryAddress
+
+!insert (customer53, shipment70) into CustomerConsistsOfShipment
+!insert (customer53, shipment71) into CustomerConsistsOfShipment
+
+!insert (station46, customer53) into StationContainsCustomer
+
+!insert (station46, shipment70) into StationShipment
+!insert (station46, shipment71) into StationShipment
+
+!insert (station46, driver53) into StationContainsDriver

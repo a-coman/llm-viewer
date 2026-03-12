@@ -1,0 +1,70 @@
+!new Customer('customer21')
+!customer21.firstName := 'Carlos'
+!customer21.lastName := 'Hernández'
+
+!new Booking('booking20')
+!booking20.startDate := '2024-02-01'
+!booking20.endDate := '2024-04-01'
+!booking20.canceled := false
+!booking20.bookingId := 105
+!booking20.confirmed := true
+
+!new Bill('bill40')
+!bill40.price := 3000.0
+!bill40.billId := 601
+
+!new Bill('bill41')
+!bill41.price := 2900.0
+!bill41.billId := 602
+
+!new Bill('bill42')
+!bill42.price := 100.0
+!bill42.billId := 603
+
+!new FreeRoomTypesDTO('freeRoomType17')
+!freeRoomType17.roomTypeDescription := 'Business Apartment'
+!freeRoomType17.numBeds := 1
+!freeRoomType17.pricePerNight := 100.0
+!freeRoomType17.numFreeRooms := 4
+
+!new RoomReservation('roomReservation20_1')
+!roomReservation20_1.checkInDate := '2024-02-01'
+!roomReservation20_1.checkOutDate := '2024-03-01'
+
+!new RoomReservation('roomReservation20_2')
+!roomReservation20_2.checkInDate := '2024-03-01'
+!roomReservation20_2.checkOutDate := '2024-04-01'
+
+!new RoomExtra('extra20_1')
+!extra20_1.price := 50.0
+!extra20_1.description := 'Printer Rental'
+
+!new RoomExtra('extra20_2')
+!extra20_2.price := 50.0
+!extra20_2.description := 'Extended Pantry Kitchen Set'
+
+!new Room('room20_701')
+!room20_701.numBeds := 1
+!room20_701.pricePerNight := 100.0
+!room20_701.occupied := true
+!room20_701.blocked := false
+!room20_701.roomNumber := 701
+
+!insert (booking20, customer21) into BookingCustomer
+
+!insert (booking20, bill40) into BookingBill
+!insert (booking20, bill41) into BookingBill
+!insert (booking20, bill42) into BookingBill
+
+!insert (booking20, roomReservation20_1) into BookingRoomReservation
+!insert (booking20, roomReservation20_2) into BookingRoomReservation
+
+!insert (roomReservation20_1, room20_701) into RoomReservationRoom
+!insert (roomReservation20_2, room20_701) into RoomReservationRoom
+
+!insert (roomReservation20_1, extra20_1) into RoomReservationExtras
+!insert (roomReservation20_2, extra20_2) into RoomReservationExtras
+
+!insert (bill40, roomReservation20_1) into BillRoomReservation
+!insert (bill41, roomReservation20_2) into BillRoomReservation
+!insert (bill42, roomReservation20_2) into BillRoomReservation

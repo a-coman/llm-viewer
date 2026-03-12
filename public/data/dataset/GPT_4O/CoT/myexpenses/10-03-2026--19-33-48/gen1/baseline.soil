@@ -1,0 +1,42 @@
+!new Expense('weekendGetawayExpense')
+!weekendGetawayExpense.amount := 550.00
+!weekendGetawayExpense.startDate := Date('2023-01-15')
+!weekendGetawayExpense.endDate := Date('2023-01-17')
+
+!new Bill('bill1')
+!bill1.amount := 350.00
+!bill1.category := 'Hotel Accommodation'
+!bill1.date := Date('2023-01-15')
+!bill1.paymentMethod := #CREDIT_CARD
+!bill1.status := #VERIFIED
+
+!new Bill('bill2')
+!bill2.amount := 100.00
+!bill2.category := 'Meals'
+!bill2.date := Date('2023-01-16')
+!bill2.paymentMethod := #CASH
+!bill2.status := #VALIDATED
+
+!new Bill('bill3')
+!bill3.amount := 100.00
+!bill3.category := 'Gasoline'
+!bill3.date := Date('2023-01-17')
+!bill3.paymentMethod := #CHECK
+!bill3.status := #PENDING
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (bill1, currencyUSD) into BillCurrency
+!insert (bill2, currencyUSD) into BillCurrency
+!insert (bill3, currencyUSD) into BillCurrency
+
+!insert (weekendGetawayExpense, bill1) into ExpenseContainsBills
+!insert (weekendGetawayExpense, bill2) into ExpenseContainsBills
+!insert (weekendGetawayExpense, bill3) into ExpenseContainsBills
+
+!new Comment('comment1')
+!comment1.text := 'Nice and cozy hotel, worth the price!'
+
+!insert (weekendGetawayExpense, comment1) into ExpenseComment

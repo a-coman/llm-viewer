@@ -1,0 +1,111 @@
+!new Restaurant('restaurant2')
+!restaurant2.name := 'Culinary Delights'
+
+!new Owner('owner3')
+!owner3.name := 'Linda Scott'
+!owner3.percentageShares := 50
+!insert (restaurant2, owner3) into RestaurantOwner
+
+!new Owner('owner4')
+!owner4.name := 'David Parker'
+!owner4.percentageShares := 30
+!insert (restaurant2, owner4) into RestaurantOwner
+
+!new Owner('owner5')
+!owner5.name := 'Bruce Lee'
+!owner5.percentageShares := 20
+!insert (restaurant2, owner5) into RestaurantOwner
+
+!new Table('table4')
+!table4.number := 4
+!table4.description := 'Round table'
+!table4.capacity := 8
+
+!new Table('table5')
+!table5.number := 5
+!table5.description := 'Private dining room'
+!table5.capacity := 12
+
+!new RegularCustomer('customer2')
+!customer2.name := 'James Turner'
+!customer2.prefferedLanguage := #Italian
+
+!new RegularCustomer('customer3')
+!customer3.name := 'Maria Lopez'
+!customer3.prefferedLanguage := #Spanish
+
+!new HeadWaiter('headwaiter2')
+!headwaiter2.name := 'Anna Gray'
+!headwaiter2.dateOfBirth := Date('1982-04-08')
+!headwaiter2.phoneNumber := '555-4567'
+
+!new Waiter('waiter3')
+!waiter3.name := 'Chris Redfield'
+!waiter3.dateOfBirth := Date('1991-08-16')
+!waiter3.phoneNumber := '555-8765'
+!waiter3.spokenLanguage := #German
+
+!new Waiter('waiter4')
+!waiter4.name := 'Jessica White'
+!waiter4.dateOfBirth := Date('1989-06-19')
+!waiter4.phoneNumber := '555-3456'
+!waiter4.spokenLanguage := #English
+
+!insert (headwaiter2, waiter3) into HeadWaiterWaiter
+!insert (headwaiter2, waiter4) into HeadWaiterWaiter
+
+!new Banquet('reservation3')
+!reservation3.time := Time('18:00')
+!reservation3.date := Date('2023-11-01')
+!reservation3.numberPeople := 15
+!reservation3.name := 'Wedding Reception'
+!reservation3.phoneNumber := '555-1425'
+!reservation3.number := 3
+!reservation3.groupName := 'Family and Friends'
+!reservation3.paymentMethod := #Cash
+!reservation3.busService := true
+!insert (restaurant2, reservation3) into RestaurantReservation
+!insert (reservation3, table4) into ReservationTable
+!insert (reservation3, table5) into ReservationTable
+!insert (reservation3, waiter3) into ReservationWaiter
+
+!new BusDriver('busdriver2')
+!busdriver2.name := 'Daniel Craig'
+!busdriver2.dateOfBirth := Date('1970-07-07')
+!busdriver2.phoneNumber := '555-5432'
+!busdriver2.driverLicenseNr := 'DL654321'
+!insert (reservation3, busdriver2) into BanquetBusDriver
+
+!new ItemOrder('itemOrder2')
+!itemOrder2.time := Time('18:30')
+!insert (reservation3, itemOrder2) into ReservationItemOrdered
+
+!new MenuItem('menuItem2')
+!menuItem2.description := 'Grilled Salmon'
+!menuItem2.prepTime := 25.0
+!menuItem2.classification := #Main
+!insert (itemOrder2, menuItem2) into ItemOrderMenuItem
+
+!new FoodItem('foodItem2')
+!foodItem2.number := 102
+!foodItem2.description := 'Fresh Salmon'
+!foodItem2.purchaseFlag := false
+!foodItem2.unit := #Gram
+!insert (menuItem2, foodItem2) into MenuItemFoodItem
+
+!new Allergen('allergen2')
+!allergen2.type := #Seafood
+!insert (foodItem2, allergen2) into FoodItemAllergen
+
+!new Cook('cook2')
+!cook2.name := 'Nigel Cook'
+!cook2.dateOfBirth := Date('1992-09-12')
+!cook2.phoneNumber := '555-6543'
+!cook2.yearsOfExperience := 3
+
+!new Chef('chef2')
+!chef2.name := 'Sandra Williams'
+!chef2.dateOfBirth := Date('1985-01-25')
+!chef2.phoneNumber := '555-7890'
+!insert (menuItem2, chef2) into MenuItemChef
+!insert (chef2, cook2) into ChefCook

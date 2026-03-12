@@ -1,0 +1,62 @@
+!new Restaurant('restaurant14')
+!restaurant14.name := 'The Artistic Plate'
+
+!new Owner('owner28')
+!owner28.name := 'Fatima El-Hassan'
+!owner28.percentageShares := 50
+
+!new Owner('owner29')
+!owner29.name := 'Rafael Cortez'
+!owner29.percentageShares := 50
+
+!insert (restaurant14, owner28) into RestaurantOwner
+!insert (restaurant14, owner29) into RestaurantOwner
+
+!new Banquet('banquet11')
+!banquet11.date := Date('2023-11-05')
+!banquet11.time := Time('19:00')
+!banquet11.groupName := 'Local Artists Collective'
+!banquet11.numberPeople := 80
+!banquet11.paymentMethod := #CreditCard
+
+!insert (restaurant14, banquet11) into RestaurantReservation
+
+!new Table('table36')
+!table36.number := 401
+!table36.description := 'Long exhibition table'
+!table36.capacity := 20
+
+!new Table('table37')
+!table37.number := 402
+!table37.description := 'Artistic round table'
+!table37.capacity := 15
+
+!new Table('table38')
+!table38.number := 403
+!table38.description := 'Square gallery table'
+!table38.capacity := 10
+
+!insert (banquet11, table36) into ReservationTable
+!insert (banquet11, table37) into ReservationTable
+!insert (banquet11, table38) into ReservationTable
+
+!new BusDriver('busdriver11')
+!busdriver11.name := 'Manoj Nair'
+
+!insert (banquet11, busdriver11) into BanquetBusDriver
+
+!new Waiter('waiter23')
+!waiter23.name := 'Clara Fischer'
+!waiter23.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter23.phoneNumber := '1231231234'           -- Arbitrary phone number
+!waiter23.spokenLanguage := #English
+
+!new Waiter('waiter24')
+!waiter24.name := 'Luis Alvarez'
+!waiter24.dateOfBirth := Date('1987-01-01')     -- Arbitrary date of birth
+!waiter24.phoneNumber := '2342342345'           -- Arbitrary phone number
+!waiter24.spokenLanguage := #English
+
+!insert (banquet11, waiter23) into ReservationWaiter
+!insert (banquet11, waiter24) into ReservationWaiter
+

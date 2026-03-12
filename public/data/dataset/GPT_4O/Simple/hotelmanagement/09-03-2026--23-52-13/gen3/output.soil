@@ -1,0 +1,41 @@
+!new Booking('booking4')
+!booking4.startDate := '2024-02-20'
+!booking4.endDate := '2024-02-25'
+!booking4.canceled := false
+!booking4.bookingId := 104
+!booking4.confirmed := true
+
+!new Bill('bill4')
+!bill4.price := 560.00
+!bill4.billId := 5004
+
+!new Customer('customer4')
+!customer4.firstName := 'Dave'
+!customer4.lastName := 'Evans'
+
+!new RoomReservation('reservation4')
+!reservation4.checkInDate := '2024-02-20'
+!reservation4.checkOutDate := '2024-02-25'
+
+!new Room('room105')
+!room105.numBeds := 2
+!room105.pricePerNight := 120.00
+!room105.occupied := true
+!room105.blocked := false
+!room105.roomNumber := 105
+
+!new RoomExtra('extra4')
+!extra4.price := 25.00
+!extra4.description := 'Gym Access'
+
+!new RoomExtra('extra5')
+!extra5.price := 15.00
+!extra5.description := 'Welcome Drink'
+
+!insert (booking4, bill4) into BookingBill
+!insert (booking4, customer4) into BookingCustomer
+!insert (booking4, reservation4) into BookingRoomReservation
+!insert (reservation4, extra4) into RoomReservationExtras
+!insert (reservation4, extra5) into RoomReservationExtras
+!insert (reservation4, room105) into RoomReservationRoom
+!insert (bill4, reservation4) into BillRoomReservation

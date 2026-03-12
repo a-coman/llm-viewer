@@ -1,0 +1,181 @@
+!new Restaurant('restaurant3')
+!restaurant3.name := 'Global Bites'
+
+!new Owner('owner5')
+!owner5.name := 'Anna Leong'
+!owner5.percentageShares := 60
+
+!new Owner('owner6')
+!owner6.name := 'Luis Gonzalez'
+!owner6.percentageShares := 40
+
+!insert (restaurant3, owner5) into RestaurantOwner
+!insert (restaurant3, owner6) into RestaurantOwner
+
+!new Chef('chef2')
+!chef2.name := 'Giovanni Rossi'
+!chef2.dateOfBirth := Date('1978-01-01')  -- Arbitrary date of birth
+!chef2.phoneNumber := '1010101010'        -- Arbitrary phone number
+
+!new Cook('cook2')
+!cook2.name := 'Maria Elizondo'
+!cook2.dateOfBirth := Date('1988-01-01')  -- Arbitrary date of birth
+!cook2.phoneNumber := '2020202020'        -- Arbitrary phone number
+!cook2.yearsOfExperience := 4
+
+!new Cook('cook3')
+!cook3.name := 'Chul Min'
+!cook3.dateOfBirth := Date('1990-01-01')  -- Arbitrary date of birth
+!cook3.phoneNumber := '3030303030'        -- Arbitrary phone number
+!cook3.yearsOfExperience := 3
+
+!insert (chef2, cook2) into ChefCook
+!insert (chef2, cook3) into ChefCook
+
+!new Banquet('banquet2')
+!banquet2.date := Date('2023-10-15')
+!banquet2.time := Time('19:30')
+!banquet2.groupName := 'Tech Innovators - Annual Gala'
+!banquet2.numberPeople := 18
+!banquet2.paymentMethod := #CreditCard
+
+!insert (restaurant3, banquet2) into RestaurantReservation
+
+!new BusDriver('busdriver2')
+!busdriver2.name := 'Gerhard Dietrich'
+
+!insert (banquet2, busdriver2) into BanquetBusDriver
+
+!new Table('table6')
+!table6.number := 7
+!table6.description := 'Near the stage'
+!table6.capacity := 10
+
+!new Table('table7')
+!table7.number := 8
+!table7.description := 'Next to bar'
+!table7.capacity := 8
+
+!insert (banquet2, table6) into ReservationTable
+!insert (banquet2, table7) into ReservationTable
+
+!new HeadWaiter('headwaiter2')
+!headwaiter2.name := 'Aisha Karim'
+!headwaiter2.dateOfBirth := Date('1980-01-01')  -- Arbitrary date of birth
+!headwaiter2.phoneNumber := '4040404040'        -- Arbitrary phone number
+
+!new Waiter('waiter2')
+!waiter2.name := 'Mike Tan'
+!waiter2.dateOfBirth := Date('1990-01-01')      -- Arbitrary date of birth
+!waiter2.phoneNumber := '5050505050'            -- Arbitrary phone number
+
+!new Waiter('waiter3')
+!waiter3.name := 'Sofya Petrova'
+!waiter3.dateOfBirth := Date('1992-01-01')      -- Arbitrary date of birth
+!waiter3.phoneNumber := '6060606060'            -- Arbitrary phone number
+
+!insert (headwaiter2, waiter2) into HeadWaiterWaiter
+!insert (headwaiter2, waiter3) into HeadWaiterWaiter
+
+!insert (banquet2, waiter2) into ReservationWaiter
+!insert (banquet2, waiter3) into ReservationWaiter
+
+!new Individual('reservation2')
+!reservation2.date := Date('2023-10-15')
+!reservation2.time := Time('20:00')
+!reservation2.name := 'Sophie Müller'
+!reservation2.phoneNumber := '7070707070'        -- Arbitrary phone number
+!reservation2.number := 2
+!reservation2.numberPeople := 2
+!reservation2.seating := #Inside
+!reservation2.smoking := #NonSmoking
+
+!insert (restaurant3, reservation2) into RestaurantReservation
+
+!new Table('table8')
+!table8.number := 10
+!table8.description := 'Window view'
+!table8.capacity := 2
+
+!insert (reservation2, table8) into ReservationTable
+
+!new Waiter('waiter4')
+!waiter4.name := 'Jinan Xu'
+!waiter4.dateOfBirth := Date('1991-01-01')      -- Arbitrary date of birth
+!waiter4.phoneNumber := '8080808080'            -- Arbitrary phone number
+
+!insert (headwaiter2, waiter4) into HeadWaiterWaiter
+!insert (reservation2, waiter4) into ReservationWaiter
+
+!new MenuItem('menuitem2')
+!menuitem2.description := 'Classic Italian coffee-flavored dessert'
+!menuitem2.prepTime := 15.0
+!menuitem2.classification := #Dessert
+
+!insert (menuitem2, chef2) into MenuItemChef
+
+!new FoodItem('fooditem2')
+!fooditem2.number := 1
+!fooditem2.description := 'Espresso'
+!fooditem2.purchaseFlag := true
+!fooditem2.unit := #Ounce
+
+!new FoodItem('fooditem3')
+!fooditem3.number := 2
+!fooditem3.description := 'Mascarpone Cheese'
+!fooditem3.unit := #Gram
+
+!insert (menuitem2, fooditem2) into MenuItemFoodItem
+!insert (menuitem2, fooditem3) into MenuItemFoodItem
+
+!new Allergen('allergen2')
+!allergen2.type := #Lactose
+
+!insert (fooditem3, allergen2) into FoodItemAllergen
+
+!new MenuItem('menuitem3')
+!menuitem3.description := 'Spiced rice with chicken and vegetables'
+!menuitem3.prepTime := 30.0
+!menuitem3.classification := #Main
+
+!insert (menuitem3, chef2) into MenuItemChef
+
+!new FoodItem('fooditem4')
+!fooditem4.number := 3
+!fooditem4.description := 'Basmati Rice'
+!fooditem4.unit := #Pound
+
+!new FoodItem('fooditem5')
+!fooditem5.number := 4
+!fooditem5.description := 'Chicken'
+!fooditem5.unit := #Pound
+
+!new FoodItem('fooditem6')
+!fooditem6.number := 5
+!fooditem6.description := 'Mixed Vegetables'
+!fooditem6.unit := #Pound
+
+!insert (menuitem3, fooditem4) into MenuItemFoodItem
+!insert (menuitem3, fooditem5) into MenuItemFoodItem
+!insert (menuitem3, fooditem6) into MenuItemFoodItem
+
+!new DietaryRequirement('diet1')
+!diet1.diet := #Vegetarian
+
+!insert (fooditem6, diet1) into MenuItemFoodItem
+
+!new FoodItem('fooditem7')
+!fooditem7.number := 6
+!fooditem7.description := 'Nuts'
+!fooditem7.unit := #Ounce
+
+!new Allergen('allergen3')
+!allergen3.type := #Nuts
+
+!insert (fooditem7, allergen3) into FoodItemAllergen
+
+!new RegularCustomer('customer2')
+!customer2.name := 'Sophie Müller'
+!customer2.prefferedLanguage := #German
+
+!insert (reservation2, customer2) into ReservationCustomer

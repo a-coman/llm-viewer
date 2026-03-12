@@ -1,0 +1,56 @@
+!new StateMachine('OnlineShoppingCart')
+!OnlineShoppingCart.name := 'OnlineShoppingCart'
+
+!new State('empty')
+!empty.name := 'empty'
+
+!new State('itemsAdded')
+!itemsAdded.name := 'itemsAdded'
+
+!new State('proceedToCheckout')
+!proceedToCheckout.name := 'proceedToCheckout'
+
+!new State('paymentSuccessful')
+!paymentSuccessful.name := 'paymentSuccessful'
+
+!new Transition('AddToCart')
+!AddToCart.name := 'Add to Cart'
+
+!new Transition('CartToCheckout')
+!CartToCheckout.name := 'Proceed to Checkout'
+
+!new Transition('CheckoutToPayment')
+!CheckoutToPayment.name := 'Checkout to Payment Success'
+
+!new TimeEvent('CartTimeout')
+!CartTimeout.time := 0
+
+!new TimeEvent('CheckoutTimeout')
+!CheckoutTimeout.time := 0
+
+!new TimeEvent('PaymentTimeout')
+!PaymentTimeout.time := 0
+
+!insert (OnlineShoppingCart, empty) into StateMachineContainsStates
+!insert (OnlineShoppingCart, itemsAdded) into StateMachineContainsStates
+!insert (OnlineShoppingCart, proceedToCheckout) into StateMachineContainsStates
+!insert (OnlineShoppingCart, paymentSuccessful) into StateMachineContainsStates
+
+!insert (OnlineShoppingCart, AddToCart) into StateMachineContainsTransitions
+!insert (OnlineShoppingCart, CartToCheckout) into StateMachineContainsTransitions
+!insert (OnlineShoppingCart, CheckoutToPayment) into StateMachineContainsTransitions
+
+!insert (AddToCart, CartTimeout) into TransitionContainsEvents
+!insert (CartToCheckout, CheckoutTimeout) into TransitionContainsEvents
+!insert (CheckoutToPayment, PaymentTimeout) into TransitionContainsEvents
+
+!insert (empty, AddToCart) into StateTransition
+!insert (AddToCart, itemsAdded) into TransitionState
+
+!insert (itemsAdded, CartToCheckout) into StateTransition
+!insert (CartToCheckout, proceedToCheckout) into TransitionState
+
+!insert (proceedToCheckout, CheckoutToPayment) into StateTransition
+!insert (CheckoutToPayment, paymentSuccessful) into TransitionState
+
+!insert (OnlineShoppingCart, empty) into StateMachineStartsStates

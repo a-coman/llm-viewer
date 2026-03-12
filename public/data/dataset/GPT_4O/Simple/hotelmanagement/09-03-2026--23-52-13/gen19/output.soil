@@ -1,0 +1,41 @@
+!new Booking('booking20')
+!booking20.startDate := '2025-06-01'
+!booking20.endDate := '2025-06-06'
+!booking20.canceled := true
+!booking20.bookingId := 120
+!booking20.confirmed := false
+
+!new Bill('bill20')
+!bill20.price := 0.00
+!bill20.billId := 5020
+
+!new Customer('customer20')
+!customer20.firstName := 'Tina'
+!customer20.lastName := 'Underwood'
+
+!new RoomReservation('reservation20')
+!reservation20.checkInDate := '2025-06-01'
+!reservation20.checkOutDate := '2025-06-06'
+
+!new Room('room1701')
+!room1701.numBeds := 1
+!room1701.pricePerNight := 90.00
+!room1701.occupied := false
+!room1701.blocked := true
+!room1701.roomNumber := 1701
+
+!new RoomExtra('extra25')
+!extra25.price := 15.00
+!extra25.description := 'Complimentary Tea Set'
+
+!new RoomExtra('extra26')
+!extra26.price := 10.00
+!extra26.description := 'Car Rental Discount'
+
+!insert (booking20, bill20) into BookingBill
+!insert (booking20, customer20) into BookingCustomer
+!insert (booking20, reservation20) into BookingRoomReservation
+!insert (reservation20, extra25) into RoomReservationExtras
+!insert (reservation20, extra26) into RoomReservationExtras
+!insert (reservation20, room1701) into RoomReservationRoom
+!insert (bill20, reservation20) into BillRoomReservation

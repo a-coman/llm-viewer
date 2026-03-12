@@ -1,0 +1,79 @@
+!new AddressBook('WorldCulinaryNetworkAddressBook')
+
+!new Company('GourmetGroupInc')
+!GourmetGroupInc.name := 'Gourmet Group Inc.'
+!GourmetGroupInc.phone := '+1-212-555-1020'
+!GourmetGroupInc.website := 'www.gourmetgroup.com'
+!GourmetGroupInc.email := 'inquiries@gourmetgroup.com'
+!GourmetGroupInc.industry := 'Hospitality & Food'
+
+!new Address('GourmetGroupAddress')
+!GourmetGroupAddress.city := 'New York'
+!GourmetGroupAddress.houseNr := '750'
+!GourmetGroupAddress.street := 'Culinary Plaza'
+!insert (GourmetGroupInc, GourmetGroupAddress) into ContactContainsAddress
+
+!new Person('ChefPierreDubois')
+!ChefPierreDubois.name := 'Chef Pierre Dubois'
+!ChefPierreDubois.phone := '+33-1-555-0654'
+!ChefPierreDubois.email := 'pierre.dubois@frenchflavor.fr'
+!ChefPierreDubois.title := 'Executive Chef'
+
+!new Address('PierreDuboisAddress')
+!PierreDuboisAddress.city := 'Paris'
+!PierreDuboisAddress.houseNr := '66'
+!PierreDuboisAddress.street := 'Rue de la Cuisine'
+!insert (ChefPierreDubois, PierreDuboisAddress) into ContactContainsAddress
+
+!new Note('PierreDuboisNote1')
+!PierreDuboisNote1.author := 'Gourmet Group Inc.'
+!PierreDuboisNote1.time := Date('2023-10-07')
+!PierreDuboisNote1.type := #EMAIL
+!PierreDuboisNote1.comment := 'Sent invitation to Global Culinary Summit.'
+!insert (ChefPierreDubois, PierreDuboisNote1) into ContactContainsNote
+
+!new Company('AsianCulinaryAcademy')
+!AsianCulinaryAcademy.name := 'Asian Culinary Academy'
+!AsianCulinaryAcademy.phone := '+81-3-5550-2208'
+!AsianCulinaryAcademy.website := 'www.asianculinary.ac.jp'
+!AsianCulinaryAcademy.email := 'info@asianculinary.ac.jp'
+!AsianCulinaryAcademy.industry := 'Education'
+
+!new Person('ChefMariaLopez')
+!ChefMariaLopez.name := 'Chef Maria Lopez'
+!ChefMariaLopez.phone := '+34-91-555-0423'
+!ChefMariaLopez.website := 'www.chefmaria.es'
+!ChefMariaLopez.email := 'maria.lopez@innovocuisine.es'
+!ChefMariaLopez.title := 'Pastry Chef'
+
+!new Address('MariaLopezAddress1')
+!MariaLopezAddress1.city := 'Madrid'
+!MariaLopezAddress1.houseNr := '99'
+!MariaLopezAddress1.street := 'Dulce Street'
+!insert (ChefMariaLopez, MariaLopezAddress1) into ContactContainsAddress
+
+!new Address('MariaLopezAddress2')
+!MariaLopezAddress2.city := 'Barcelona'
+!MariaLopezAddress2.houseNr := '88'
+!MariaLopezAddress2.street := 'Pastelería Avenue'
+!insert (ChefMariaLopez, MariaLopezAddress2) into ContactContainsAddress
+
+!new Relationship('GourmetToPierreBoss')
+!GourmetToPierreBoss.type := #BOSS
+!insert (GourmetToPierreBoss, ChefPierreDubois) into RelationshipToContact
+!insert (GourmetGroupInc, GourmetToPierreBoss) into ContactToRelationship
+
+!new Relationship('MariaToAsianCulinaryEmployee')
+!MariaToAsianCulinaryEmployee.type := #EMPLOYEE
+!insert (MariaToAsianCulinaryEmployee, AsianCulinaryAcademy) into RelationshipToContact
+!insert (ChefMariaLopez, MariaToAsianCulinaryEmployee) into ContactToRelationship
+
+!new Relationship('PierreToMariaCoworker')
+!PierreToMariaCoworker.type := #COWORKER
+!insert (PierreToMariaCoworker, ChefMariaLopez) into RelationshipToContact
+!insert (ChefPierreDubois, PierreToMariaCoworker) into ContactToRelationship
+
+!insert (WorldCulinaryNetworkAddressBook, GourmetGroupInc) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, ChefPierreDubois) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, AsianCulinaryAcademy) into AddressBookMadeOfContact
+!insert (WorldCulinaryNetworkAddressBook, ChefMariaLopez) into AddressBookMadeOfContact

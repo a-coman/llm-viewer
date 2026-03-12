@@ -1,0 +1,82 @@
+!new StateMachine('stateMachine20')
+!stateMachine20.name := 'parcelDeliverySystem'
+
+!new State('state64')
+!state64.name := 'orderReceived'
+
+!new State('state65')
+!state65.name := 'inTransit'
+
+!new State('state66')
+!state66.name := 'outForDelivery'
+
+!new State('state67')
+!state67.name := 'delivered'
+
+!new State('state68')
+!state68.name := 'returned'
+
+!new Transition('transition66')
+!transition66.name := 'processOrder'
+
+!new Transition('transition67')
+!transition67.name := 'dispatchParcel'
+
+!new Transition('transition68')
+!transition68.name := 'attemptDelivery'
+
+!new Transition('transition69')
+!transition69.name := 'confirmDelivery'
+
+!new Transition('transition70')
+!transition70.name := 'returnParcel'
+
+!new TimeEvent('timeEvent66')
+!timeEvent66.time := 1
+
+!new TimeEvent('timeEvent67')
+!timeEvent67.time := 5
+
+!new TimeEvent('timeEvent68')
+!timeEvent68.time := 2
+
+!new TimeEvent('timeEvent69')
+!timeEvent69.time := 1
+
+!new TimeEvent('timeEvent70')
+!timeEvent70.time := 3
+
+!insert (stateMachine20, state64) into StateMachineContainsStates
+!insert (stateMachine20, state65) into StateMachineContainsStates
+!insert (stateMachine20, state66) into StateMachineContainsStates
+!insert (stateMachine20, state67) into StateMachineContainsStates
+!insert (stateMachine20, state68) into StateMachineContainsStates
+
+!insert (stateMachine20, transition66) into StateMachineContainsTransitions
+!insert (stateMachine20, transition67) into StateMachineContainsTransitions
+!insert (stateMachine20, transition68) into StateMachineContainsTransitions
+!insert (stateMachine20, transition69) into StateMachineContainsTransitions
+!insert (stateMachine20, transition70) into StateMachineContainsTransitions
+
+!insert (transition66, timeEvent66) into TransitionContainsEvents
+!insert (transition67, timeEvent67) into TransitionContainsEvents
+!insert (transition68, timeEvent68) into TransitionContainsEvents
+!insert (transition69, timeEvent69) into TransitionContainsEvents
+!insert (transition70, timeEvent70) into TransitionContainsEvents
+
+!insert (state64, transition66) into StateTransition
+!insert (transition66, state65) into TransitionState
+
+!insert (state65, transition67) into StateTransition
+!insert (transition67, state66) into TransitionState
+
+!insert (state66, transition68) into StateTransition
+!insert (transition68, state67) into TransitionState
+
+!insert (state67, transition70) into StateTransition
+!insert (transition70, state68) into TransitionState
+
+!insert (state67, transition69) into StateTransition
+!insert (transition69, state64) into TransitionState
+
+!insert (stateMachine20, state64) into StateMachineStartsStates

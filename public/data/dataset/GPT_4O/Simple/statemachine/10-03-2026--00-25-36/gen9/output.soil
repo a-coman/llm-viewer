@@ -1,0 +1,52 @@
+!new StateMachine('stateMachine10')
+!stateMachine10.name := 'weatherMonitoringSystem'
+
+!new State('state26')
+!state26.name := 'sunny'
+
+!new State('state27')
+!state27.name := 'cloudy'
+
+!new State('state28')
+!state28.name := 'rainy'
+
+!new Transition('transition27')
+!transition27.name := 'cloudFormation'
+
+!new Transition('transition28')
+!transition28.name := 'startRain'
+
+!new Transition('transition29')
+!transition29.name := 'clearSky'
+
+!new TimeEvent('timeEvent27')
+!timeEvent27.time := 12
+
+!new TimeEvent('timeEvent28')
+!timeEvent28.time := 8
+
+!new TimeEvent('timeEvent29')
+!timeEvent29.time := 10
+
+!insert (stateMachine10, state26) into StateMachineContainsStates
+!insert (stateMachine10, state27) into StateMachineContainsStates
+!insert (stateMachine10, state28) into StateMachineContainsStates
+
+!insert (stateMachine10, transition27) into StateMachineContainsTransitions
+!insert (stateMachine10, transition28) into StateMachineContainsTransitions
+!insert (stateMachine10, transition29) into StateMachineContainsTransitions
+
+!insert (transition27, timeEvent27) into TransitionContainsEvents
+!insert (transition28, timeEvent28) into TransitionContainsEvents
+!insert (transition29, timeEvent29) into TransitionContainsEvents
+
+!insert (state26, transition27) into StateTransition
+!insert (transition27, state27) into TransitionState
+
+!insert (state27, transition28) into StateTransition
+!insert (transition28, state28) into TransitionState
+
+!insert (state28, transition29) into StateTransition
+!insert (transition29, state26) into TransitionState
+
+!insert (stateMachine10, state26) into StateMachineStartsStates

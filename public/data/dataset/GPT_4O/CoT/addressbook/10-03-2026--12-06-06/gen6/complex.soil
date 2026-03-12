@@ -1,0 +1,118 @@
+!new AddressBook('GlobalEducationNetwork')
+
+!new Person('ProfElenaMartinez')
+!ProfElenaMartinez.name := 'Prof. Elena Martinez'
+!ProfElenaMartinez.phone := '+34 91 3344 9988'
+!ProfElenaMartinez.website := 'www.elenamartinez.academia.es'
+!ProfElenaMartinez.email := 'elena.martinez@univ.es'
+!ProfElenaMartinez.title := 'Dean of Social Sciences'
+
+!new Address('ElenaMartinezAddress')
+!ElenaMartinezAddress.city := 'Madrid'
+!ElenaMartinezAddress.street := 'Knowledge Lane'
+!ElenaMartinezAddress.houseNr := '101'
+!insert (ProfElenaMartinez, ElenaMartinezAddress) into ContactContainsAddress
+
+!new Note('ElenaMartinezNote1')
+!ElenaMartinezNote1.author := 'Prof. Elena Martinez'
+!ElenaMartinezNote1.time := Date('2023-05-12')
+!ElenaMartinezNote1.type := #MEETING
+!ElenaMartinezNote1.comment := 'Led panel on the impacts of globalization on education systems worldwide.'
+!insert (ProfElenaMartinez, ElenaMartinezNote1) into ContactContainsNote
+
+!new Note('ElenaMartinezNote2')
+!ElenaMartinezNote2.author := 'Prof. Elena Martinez'
+!ElenaMartinezNote2.time := Date('2023-05-20')
+!ElenaMartinezNote2.type := #EMAIL
+!ElenaMartinezNote2.comment := 'Sent a strategic proposal for a new international student exchange program.'
+!insert (ProfElenaMartinez, ElenaMartinezNote2) into ContactContainsNote
+
+!new Person('DrNiaHadjari')
+!DrNiaHadjari.name := 'Dr. Nia Hadjari'
+!DrNiaHadjari.phone := '+231 445 8876'
+!DrNiaHadjari.website := 'www.niahadjari.org'
+!DrNiaHadjari.email := 'nhadjari@minedu.gov.lr'
+!DrNiaHadjari.title := 'Educational Policy Advisor'
+
+!new Address('NiaHadjariAddress')
+!NiaHadjariAddress.city := 'Monrovia'
+!NiaHadjariAddress.street := 'Policy Drive'
+!NiaHadjariAddress.houseNr := '12'
+!insert (DrNiaHadjari, NiaHadjariAddress) into ContactContainsAddress
+
+!new Note('NiaHadjariNote')
+!NiaHadjariNote.author := 'Dr. Nia Hadjari'
+!NiaHadjariNote.time := Date('2023-06-07')
+!NiaHadjariNote.type := #CALL
+!NiaHadjariNote.comment := 'Phone call with EU representatives regarding educational initiatives.'
+!insert (DrNiaHadjari, NiaHadjariNote) into ContactContainsNote
+
+!new Company('EducationForAllFoundation')
+!EducationForAllFoundation.name := 'Education for All Foundation'
+!EducationForAllFoundation.phone := '+44 20 4455 6677'
+!EducationForAllFoundation.website := 'www.educationforall.org'
+!EducationForAllFoundation.email := 'info@educationforall.org'
+!EducationForAllFoundation.industry := 'Non-Profit Education'
+
+!new Address('EducationForAllAddress')
+!EducationForAllAddress.city := 'London'
+!EducationForAllAddress.street := 'Equity Street'
+!EducationForAllAddress.houseNr := '50'
+!insert (EducationForAllFoundation, EducationForAllAddress) into ContactContainsAddress
+
+!new Note('EducationForAllNote')
+!EducationForAllNote.author := 'Education for All Foundation'
+!EducationForAllNote.time := Date('2023-07-10')
+!EducationForAllNote.type := #MEETING
+!EducationForAllNote.comment := 'Hosted annual summit on educational access and equity.'
+!insert (EducationForAllFoundation, EducationForAllNote) into ContactContainsNote
+
+!new Company('GlobalLearningInitiative')
+!GlobalLearningInitiative.name := 'Global Learning Initiative'
+!GlobalLearningInitiative.phone := '+1 212 567 8901'
+!GlobalLearningInitiative.website := 'www.globallearninginitiative.org'
+!GlobalLearningInitiative.email := 'admin@globallearning.org'
+!GlobalLearningInitiative.industry := 'Educational Consulting'
+
+!new Address('GlobalLearningAddress')
+!GlobalLearningAddress.city := 'New York'
+!GlobalLearningAddress.street := 'Learning Avenue'
+!GlobalLearningAddress.houseNr := '88'
+!insert (GlobalLearningInitiative, GlobalLearningAddress) into ContactContainsAddress
+
+!new Note('GlobalLearningNote')
+!GlobalLearningNote.author := 'Global Learning Initiative'
+!GlobalLearningNote.time := Date('2023-07-25')
+!GlobalLearningNote.type := #EMAIL
+!GlobalLearningNote.comment := 'Announced new funding opportunities for collaborative educational projects.'
+!insert (GlobalLearningInitiative, GlobalLearningNote) into ContactContainsNote
+
+!new Relationship('ElenaToEducationForAllEmployee')
+!ElenaToEducationForAllEmployee.type := #EMPLOYEE
+!insert (ElenaToEducationForAllEmployee, EducationForAllFoundation) into RelationshipToContact
+!insert (ProfElenaMartinez, ElenaToEducationForAllEmployee) into ContactToRelationship
+
+!new Relationship('NiaToGlobalLearningEmployee')
+!NiaToGlobalLearningEmployee.type := #EMPLOYEE
+!insert (NiaToGlobalLearningEmployee, GlobalLearningInitiative) into RelationshipToContact
+!insert (DrNiaHadjari, NiaToGlobalLearningEmployee) into ContactToRelationship
+
+!new Relationship('EducationForAllToElenaBoss')
+!EducationForAllToElenaBoss.type := #BOSS
+!insert (EducationForAllToElenaBoss, ProfElenaMartinez) into RelationshipToContact
+!insert (EducationForAllFoundation, EducationForAllToElenaBoss) into ContactToRelationship
+
+!new Relationship('GlobalLearningToNiaBoss')
+!GlobalLearningToNiaBoss.type := #BOSS
+!insert (GlobalLearningToNiaBoss, DrNiaHadjari) into RelationshipToContact
+!insert (GlobalLearningInitiative, GlobalLearningToNiaBoss) into ContactToRelationship
+
+!new Relationship('GlobalLearningToEducationForAllSubdivision')
+!GlobalLearningToEducationForAllSubdivision.type := #SUBDIVISION
+!insert (GlobalLearningToEducationForAllSubdivision, EducationForAllFoundation) into RelationshipToContact
+!insert (GlobalLearningInitiative, GlobalLearningToEducationForAllSubdivision) into ContactToRelationship
+
+!insert (GlobalEducationNetwork, ProfElenaMartinez) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, DrNiaHadjari) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, EducationForAllFoundation) into AddressBookMadeOfContact
+!insert (GlobalEducationNetwork, GlobalLearningInitiative) into AddressBookMadeOfContact

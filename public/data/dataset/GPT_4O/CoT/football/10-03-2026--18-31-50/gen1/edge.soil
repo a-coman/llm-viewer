@@ -1,0 +1,160 @@
+!new Club('clubC')
+!clubC.name := 'Abyssal FC'
+!clubC.homeGround := 'Underwater Stadium Prix'
+!clubC.chairman := 'Captain Nemo'
+
+!new Club('clubD')
+!clubD.name := 'Submarine United'
+!clubD.homeGround := 'Nautilus Arena'
+!clubD.chairman := 'Commander Jacques Cousteau'
+
+!new Team('teamC')
+!teamC.name := 'Abyssal Rovers'
+
+!new Team('teamD')
+!teamD.name := 'Submersible Strikers'
+
+!insert (clubC, teamC) into ClubTeam
+!insert (clubD, teamD) into ClubTeam
+
+!new Competition('competition1')
+!competition1.name := 'Underwater World League'
+!competition1.type := 'Tournament'
+
+!new Match('match2')
+!match2.date := '20/07/2023'
+!match2.homeAway := true
+
+!insert (teamC, match2) into LocalMatch
+!insert (teamD, match2) into VisitorMatch
+!insert (competition1, match2) into CompetitionMatch
+
+!new MatchReport('matchReport2')
+!matchReport2.duration := 90
+!matchReport2.scoreVisitor := 2
+!matchReport2.scoreLocal := 2
+
+!insert (match2, matchReport2) into MatchMatchReport
+
+!new MatchEvent('matchEvent4')
+!matchEvent4.eventType := #GOAL
+!matchEvent4.time := 10
+
+!new MatchEvent('matchEvent5')
+!matchEvent5.eventType := #GOAL
+!matchEvent5.time := 25
+
+!new MatchEvent('matchEvent6')
+!matchEvent6.eventType := #GOAL
+!matchEvent6.time := 60
+
+!new MatchEvent('matchEvent7')
+!matchEvent7.eventType := #GOAL
+!matchEvent7.time := 85
+
+!insert (match2, matchEvent4) into MatchMatchEvent
+!insert (match2, matchEvent5) into MatchMatchEvent
+!insert (match2, matchEvent6) into MatchMatchEvent
+!insert (match2, matchEvent7) into MatchMatchEvent
+
+!new Player('player3')
+!player3.name := 'Poseidon Deep'
+!player3.age := 28
+!player3.bestFoot := #LEFT
+!player3.phoneNumber := '+1234567890'
+
+!new Player('player4')
+!player4.name := 'Coral Reef'
+!player4.age := 24
+!player4.bestFoot := #RIGHT
+!player4.phoneNumber := '+1098765432'
+
+!insert (teamC, player3) into TeamPlayer
+!insert (teamD, player4) into TeamPlayer
+
+!new Position('position6')
+!position6.positionName := #FORWARD
+
+!new Position('position8')
+!position8.positionName := #DEFENDER
+
+!new Position('position11')
+!position11.positionName := #MIDFIELDER
+
+!insert (player3, position6) into PlayerPositions
+!insert (player3, position8) into PlayerPositions
+!insert (player4, position11) into PlayerPositions
+
+!new MatchPlayer('matchPlayer3')
+!matchPlayer3.booked := true
+!matchPlayer3.goals := 1
+!matchPlayer3.rating := 8
+
+!new MatchPlayer('matchPlayer4')
+!matchPlayer4.booked := false
+!matchPlayer4.goals := 1
+!matchPlayer4.rating := 7
+
+!insert (player3, matchPlayer3) into PlayerMatch
+!insert (player4, matchPlayer4) into PlayerMatch
+
+!insert (match2, matchPlayer3) into MatchMatchPlayer
+!insert (match2, matchPlayer4) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position9')
+!position9.positionName := #FORWARD
+!position9.number := 9
+
+!new MatchPlayerPosition('position10')
+!position10.positionName := #MIDFIELDER
+!position10.number := 10
+
+!insert (matchPlayer3, position9) into MatchPlayerMatchPlayerPosition
+!insert (matchPlayer4, position10) into MatchPlayerMatchPlayerPosition
+
+!new TrainingSession('trainingSession2')
+!trainingSession2.date := '18/07/2023'
+!trainingSession2.location := 'Underwater Stadium Prix'
+!trainingSession2.purpose := 'Breathing Technique Improvement'
+
+!insert (teamC, trainingSession2) into TeamTraining
+
+!new TrainingNotes('trainingNote2')
+!trainingNote2.note := 'Successful adaptation to increased water pressure noted.'
+!trainingNote2.date := '18/07/2023'
+
+!insert (trainingSession2, trainingNote2) into TrainingTrainingNotes
+
+!new TrainingFailedToAttend('trainingFail1')
+!trainingFail1.reason := 'Had to maintain buoyancy levels'
+
+!insert (trainingSession2, trainingFail1) into TrainingFailded
+!insert (trainingFail1, player4) into FailedPlayer
+
+!new TrainingObjective('trainingObjective1')
+!trainingObjective1.areaToImprove := 'Positional Play Underwater'
+!trainingObjective1.startDate := '15/07/2023'
+!trainingObjective1.endDate := '19/07/2023'
+!trainingObjective1.success := true
+
+!insert (trainingObjective1, player3) into TrainingObjectivePlayer
+
+!new TrainingObjective('trainingObjective2')
+!trainingObjective2.areaToImprove := 'Positional Play Underwater'
+!trainingObjective2.startDate := '15/07/2023'
+!trainingObjective2.endDate := '19/07/2023'
+!trainingObjective2.success := true
+
+!insert (trainingObjective2, player4) into TrainingObjectivePlayer
+
+!new PlayerNotes('playerNote1')
+!playerNote1.note := 'Excels in rapid water movements.'
+!playerNote1.date := '19/07/2023'
+
+!insert (player3, playerNote1) into PlayerPlayerNotes
+
+!new PlayerNotes('playerNote2')
+!playerNote2.note := 'Needs improvement in maintaining balance during dribbles.'
+!playerNote2.date := '18/07/2023'
+
+!insert (player4, playerNote2) into PlayerPlayerNotes

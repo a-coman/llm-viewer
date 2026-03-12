@@ -1,0 +1,371 @@
+!new StateMachine('ManufacturingProcess')
+!ManufacturingProcess.name := 'ManufacturingProcess'
+
+!new State('rawMaterial')
+!rawMaterial.name := 'rawMaterial'
+
+!new State('inProduction')
+!inProduction.name := 'inProduction'
+
+!new State('qualityCheck')
+!qualityCheck.name := 'qualityCheck'
+
+!new State('packaged')
+!packaged.name := 'packaged'
+
+!new State('discarded')
+!discarded.name := 'discarded'
+
+!new Transition('MaterialToProduction')
+!MaterialToProduction.name := 'Material to Production'
+
+!new Transition('ProductionToQuality')
+!ProductionToQuality.name := 'Production to Quality'
+
+!new Transition('QualityToPackaging')
+!QualityToPackaging.name := 'Quality to Packaging'
+
+!new Transition('QualityToDiscard')
+!QualityToDiscard.name := 'Quality to Discard'
+
+!new TimeEvent('MaterialTimeout')
+!MaterialTimeout.time := 5
+
+!new TimeEvent('ProductionTimeout')
+!ProductionTimeout.time := 15
+
+!new TimeEvent('QualityTimeout')
+!QualityTimeout.time := 10
+
+!new TimeEvent('DiscardTimeout')
+!DiscardTimeout.time := 3
+
+!insert (ManufacturingProcess, rawMaterial) into StateMachineContainsStates
+!insert (ManufacturingProcess, inProduction) into StateMachineContainsStates
+!insert (ManufacturingProcess, qualityCheck) into StateMachineContainsStates
+!insert (ManufacturingProcess, packaged) into StateMachineContainsStates
+!insert (ManufacturingProcess, discarded) into StateMachineContainsStates
+
+!insert (ManufacturingProcess, MaterialToProduction) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, ProductionToQuality) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, QualityToPackaging) into StateMachineContainsTransitions
+!insert (ManufacturingProcess, QualityToDiscard) into StateMachineContainsTransitions
+
+!insert (MaterialToProduction, MaterialTimeout) into TransitionContainsEvents
+!insert (ProductionToQuality, ProductionTimeout) into TransitionContainsEvents
+!insert (QualityToPackaging, QualityTimeout) into TransitionContainsEvents
+!insert (QualityToDiscard, DiscardTimeout) into TransitionContainsEvents
+
+!insert (rawMaterial, MaterialToProduction) into StateTransition
+!insert (MaterialToProduction, inProduction) into TransitionState
+
+!insert (inProduction, ProductionToQuality) into StateTransition
+!insert (ProductionToQuality, qualityCheck) into TransitionState
+
+!insert (qualityCheck, QualityToPackaging) into StateTransition
+!insert (QualityToPackaging, packaged) into TransitionState
+
+!insert (qualityCheck, QualityToDiscard) into StateTransition
+!insert (QualityToDiscard, discarded) into TransitionState
+
+!insert (ManufacturingProcess, rawMaterial) into StateMachineStartsStates
+
+!new StateMachine('elevatorSystem')
+!elevatorSystem.name := 'elevatorSystem'
+
+!new State('stationary')
+!stationary.name := 'stationary'
+
+!new State('movingUp')
+!movingUp.name := 'movingUp'
+
+!new State('movingDown')
+!movingDown.name := 'movingDown'
+
+!new State('maintenance')
+!maintenance.name := 'maintenance'
+
+!new Transition('stationaryToMovingUp')
+!stationaryToMovingUp.name := 'stationaryToMovingUp'
+
+!new Transition('movingUpToStationary')
+!movingUpToStationary.name := 'movingUpToStationary'
+
+!new Transition('stationaryToMovingDown')
+!stationaryToMovingDown.name := 'stationaryToMovingDown'
+
+!new Transition('movingDownToStationary')
+!movingDownToStationary.name := 'movingDownToStationary'
+
+!new Transition('stationaryToMaintenance')
+!stationaryToMaintenance.name := 'stationaryToMaintenance'
+
+!new Transition('maintenanceToStationary')
+!maintenanceToStationary.name := 'maintenanceToStationary'
+
+!new TimeEvent('timeEvent5_1')
+!timeEvent5_1.time := 5
+
+!new TimeEvent('timeEvent30_1')
+!timeEvent30_1.time := 30
+
+!new TimeEvent('timeEvent5_2')
+!timeEvent5_2.time := 5
+
+!new TimeEvent('timeEvent30_2')
+!timeEvent30_2.time := 30
+
+!new TimeEvent('timeEvent60')
+!timeEvent60.time := 60
+
+!new TimeEvent('timeEvent120')
+!timeEvent120.time := 120
+
+!insert (elevatorSystem, stationary) into StateMachineContainsStates
+!insert (elevatorSystem, movingUp) into StateMachineContainsStates
+!insert (elevatorSystem, movingDown) into StateMachineContainsStates
+!insert (elevatorSystem, maintenance) into StateMachineContainsStates
+
+!insert (elevatorSystem, stationaryToMovingUp) into StateMachineContainsTransitions
+!insert (elevatorSystem, movingUpToStationary) into StateMachineContainsTransitions
+!insert (elevatorSystem, stationaryToMovingDown) into StateMachineContainsTransitions
+!insert (elevatorSystem, movingDownToStationary) into StateMachineContainsTransitions
+!insert (elevatorSystem, stationaryToMaintenance) into StateMachineContainsTransitions
+!insert (elevatorSystem, maintenanceToStationary) into StateMachineContainsTransitions
+
+!insert (stationaryToMovingUp, timeEvent5_1) into TransitionContainsEvents
+!insert (movingUpToStationary, timeEvent30_1) into TransitionContainsEvents
+!insert (stationaryToMovingDown, timeEvent5_2) into TransitionContainsEvents
+!insert (movingDownToStationary, timeEvent30_2) into TransitionContainsEvents
+!insert (stationaryToMaintenance, timeEvent60) into TransitionContainsEvents
+!insert (maintenanceToStationary, timeEvent120) into TransitionContainsEvents
+
+!insert (stationary, stationaryToMovingUp) into StateTransition
+!insert (stationaryToMovingUp, movingUp) into TransitionState
+
+!insert (movingUp, movingUpToStationary) into StateTransition
+!insert (movingUpToStationary, stationary) into TransitionState
+
+!insert (stationary, stationaryToMovingDown) into StateTransition
+!insert (stationaryToMovingDown, movingDown) into TransitionState
+
+!insert (movingDown, movingDownToStationary) into StateTransition
+!insert (movingDownToStationary, stationary) into TransitionState
+
+!insert (stationary, stationaryToMaintenance) into StateTransition
+!insert (stationaryToMaintenance, maintenance) into TransitionState
+
+!insert (maintenance, maintenanceToStationary) into StateTransition
+!insert (maintenanceToStationary, stationary) into TransitionState
+
+!insert (elevatorSystem, stationary) into StateMachineStartsStates
+
+!new StateMachine('isolatedMachine')
+!isolatedMachine.name := 'isolatedMachine'
+
+!new State('entryState')
+!entryState.name := 'entryState'
+
+!new State('connectedState')
+!connectedState.name := 'connectedState'
+
+!new State('disconnectedState')
+!disconnectedState.name := 'disconnectedState'
+
+!new Transition('connectTransition')
+!connectTransition.name := 'connectTransition'
+
+!new Transition('loopTransition')
+!loopTransition.name := 'loopTransition'
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent7')
+!timeEvent7.time := 7
+
+!insert (isolatedMachine, entryState) into StateMachineContainsStates
+!insert (isolatedMachine, connectedState) into StateMachineContainsStates
+!insert (isolatedMachine, disconnectedState) into StateMachineContainsStates
+
+!insert (isolatedMachine, connectTransition) into StateMachineContainsTransitions
+!insert (isolatedMachine, loopTransition) into StateMachineContainsTransitions
+
+!insert (connectTransition, timeEvent3) into TransitionContainsEvents
+!insert (loopTransition, timeEvent7) into TransitionContainsEvents
+
+!insert (entryState, connectTransition) into StateTransition
+!insert (connectTransition, connectedState) into TransitionState
+
+!insert (connectedState, loopTransition) into StateTransition
+!insert (loopTransition, connectedState) into TransitionState
+
+!insert (isolatedMachine, entryState) into StateMachineStartsStates
+
+!new StateMachine('cycleMachine')
+!cycleMachine.name := 'cycleMachine'
+
+!new State('entryState')
+!entryState.name := 'entryState'
+
+!new State('loopA')
+!loopA.name := 'loopA'
+
+!new State('loopB')
+!loopB.name := 'loopB'
+
+!new State('endNode')
+!endNode.name := 'endNode'
+
+!new Transition('initToA')
+!initToA.name := 'initToA'
+
+!new Transition('aToB')
+!aToB.name := 'aToB'
+
+!new Transition('bToA')
+!bToA.name := 'bToA'
+
+!new Transition('enterEnd')
+!enterEnd.name := 'enterEnd'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent4')
+!timeEvent4.time := 4
+
+!insert (cycleMachine, entryState) into StateMachineContainsStates
+!insert (cycleMachine, loopA) into StateMachineContainsStates
+!insert (cycleMachine, loopB) into StateMachineContainsStates
+!insert (cycleMachine, endNode) into StateMachineContainsStates
+
+!insert (cycleMachine, initToA) into StateMachineContainsTransitions
+!insert (cycleMachine, aToB) into StateMachineContainsTransitions
+!insert (cycleMachine, bToA) into StateMachineContainsTransitions
+!insert (cycleMachine, enterEnd) into StateMachineContainsTransitions
+
+!insert (initToA, timeEvent2) into TransitionContainsEvents
+!insert (aToB, timeEvent1) into TransitionContainsEvents
+!insert (bToA, timeEvent3) into TransitionContainsEvents
+!insert (enterEnd, timeEvent4) into TransitionContainsEvents
+
+!insert (entryState, initToA) into StateTransition
+!insert (initToA, loopA) into TransitionState
+
+!insert (loopA, aToB) into StateTransition
+!insert (aToB, loopB) into TransitionState
+
+!insert (loopB, bToA) into StateTransition
+!insert (bToA, loopA) into TransitionState
+
+!insert (entryState, enterEnd) into StateTransition
+!insert (enterEnd, endNode) into TransitionState
+
+!insert (cycleMachine, entryState) into StateMachineStartsStates
+
+!new StateMachine('parkingSystemManager')
+!parkingSystemManager.name := 'parkingSystemManager'
+
+!new State('entry')
+!entry.name := 'entry'
+
+!new State('vehicleIdentification')
+!vehicleIdentification.name := 'vehicleIdentification'
+
+!new State('awaitingParkingSlot')
+!awaitingParkingSlot.name := 'awaitingParkingSlot'
+
+!new State('parking')
+!parking.name := 'parking'
+
+!new State('parked')
+!parked.name := 'parked'
+
+!new State('exitPreparation')
+!exitPreparation.name := 'exitPreparation'
+
+!new Transition('entryToVehicleIdentification')
+!entryToVehicleIdentification.name := 'entryToVehicleIdentification'
+
+!new Transition('identificationToAwaitingSlot')
+!identificationToAwaitingSlot.name := 'identificationToAwaitingSlot'
+
+!new Transition('awaitingSlotToParking')
+!awaitingSlotToParking.name := 'awaitingSlotToParking'
+
+!new Transition('parkingToParked')
+!parkingToParked.name := 'parkingToParked'
+
+!new Transition('parkedToExitPreparation')
+!parkedToExitPreparation.name := 'parkedToExitPreparation'
+
+!new Transition('exitPreparationToEntry')
+!exitPreparationToEntry.name := 'exitPreparationToEntry'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (parkingSystemManager, entry) into StateMachineContainsStates
+!insert (parkingSystemManager, vehicleIdentification) into StateMachineContainsStates
+!insert (parkingSystemManager, awaitingParkingSlot) into StateMachineContainsStates
+!insert (parkingSystemManager, parking) into StateMachineContainsStates
+!insert (parkingSystemManager, parked) into StateMachineContainsStates
+!insert (parkingSystemManager, exitPreparation) into StateMachineContainsStates
+
+!insert (parkingSystemManager, entryToVehicleIdentification) into StateMachineContainsTransitions
+!insert (parkingSystemManager, identificationToAwaitingSlot) into StateMachineContainsTransitions
+!insert (parkingSystemManager, awaitingSlotToParking) into StateMachineContainsTransitions
+!insert (parkingSystemManager, parkingToParked) into StateMachineContainsTransitions
+!insert (parkingSystemManager, parkedToExitPreparation) into StateMachineContainsTransitions
+!insert (parkingSystemManager, exitPreparationToEntry) into StateMachineContainsTransitions
+
+!insert (entryToVehicleIdentification, timeEvent2) into TransitionContainsEvents
+!insert (identificationToAwaitingSlot, timeEvent1) into TransitionContainsEvents
+!insert (parkedToExitPreparation, timeEvent3) into TransitionContainsEvents
+
+!insert (awaitingSlotToParking, timeEvent5) into TransitionContainsEvents
+!insert (parkingToParked, timeEvent10) into TransitionContainsEvents
+!insert (exitPreparationToEntry, timeEvent15) into TransitionContainsEvents
+
+!insert (entry, entryToVehicleIdentification) into StateTransition
+!insert (entryToVehicleIdentification, vehicleIdentification) into TransitionState
+
+!insert (vehicleIdentification, identificationToAwaitingSlot) into StateTransition
+!insert (identificationToAwaitingSlot, awaitingParkingSlot) into TransitionState
+
+!insert (awaitingParkingSlot, awaitingSlotToParking) into StateTransition
+!insert (awaitingSlotToParking, parking) into TransitionState
+
+!insert (parking, parkingToParked) into StateTransition
+!insert (parkingToParked, parked) into TransitionState
+
+!insert (parked, parkedToExitPreparation) into StateTransition
+!insert (parkedToExitPreparation, exitPreparation) into TransitionState
+
+!insert (exitPreparation, exitPreparationToEntry) into StateTransition
+!insert (exitPreparationToEntry, entry) into TransitionState
+
+!insert (parkingSystemManager, entry) into StateMachineStartsStates
+

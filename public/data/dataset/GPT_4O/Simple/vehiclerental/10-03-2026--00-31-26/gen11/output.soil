@@ -1,0 +1,70 @@
+!new RentalOffice('office11')
+!office11.name := 'Countryside Haulers'
+!office11.number := 1111
+!office11.address := '135 Prairie Rd, Omaha, NE'
+
+!new Truck('truck21')
+!truck21.id := 521
+!truck21.registrationState := #CO
+!truck21.licensePlateNumber := 'CO-TRK-2345'
+!truck21.vehicleTypeCode := #TRUCK
+!truck21.registrationLastMaintenanceDate := Date('2023-08-20')
+!truck21.expirationDate := Date('2024-08-20')
+!truck21.odometerReading := 9500
+!truck21.gasTankCapacity := 28.0
+!truck21.workingRadio := true
+!truck21.mileage := 20
+
+!new Individual('individual11')
+!individual11.name := 'Olivia Martinez'
+!individual11.address := '456 Pioneer Ln, Lincoln, NE'
+!individual11.poorRisk := true
+!individual11.homePhone := '555-3210'
+!individual11.driverLicenseState := #CO
+!individual11.driverLicenseNumber := 13243546
+!individual11.driverLicenseExpirationDate := Date('2027-01-10')
+
+!new RentalAgreement('agreement21')
+!agreement21.number := 3021
+!agreement21.rentalDate := Date('2023-12-10')
+!agreement21.anticipatedDuration := 4
+!agreement21.depositPaid := 150.0
+!agreement21.quotedDailyRate := 58.00
+!agreement21.quotedRatePerMile := 0.48
+
+!new Truck('truck22')
+!truck22.id := 522
+!truck22.registrationState := #CT
+!truck22.licensePlateNumber := 'CT-TRK-6789'
+!truck22.vehicleTypeCode := #TRUCK10
+!truck22.registrationLastMaintenanceDate := Date('2023-06-15')
+!truck22.expirationDate := Date('2025-06-15')
+!truck22.odometerReading := 17000
+!truck22.gasTankCapacity := 36.0
+!truck22.workingRadio := false
+!truck22.mileage := 24
+
+!new Company('company11')
+!company11.name := 'Harvest Transports'
+!company11.address := '999 Field Rd, Hartford, CT'
+!company11.poorRisk := false
+!company11.idNumber := 435678
+
+!new RentalAgreement('agreement22')
+!agreement22.number := 3022
+!agreement22.rentalDate := Date('2023-12-25')
+!agreement22.anticipatedDuration := 15
+!agreement22.depositPaid := 500.0
+!agreement22.quotedDailyRate := 90.00
+!agreement22.quotedRatePerMile := 0.68
+
+!insert (office11, truck21) into RentalOfficeVehicle
+!insert (office11, truck22) into RentalOfficeVehicle
+!insert (office11, agreement21) into RentalOfficeRentalAgreementOrigin
+!insert (office11, agreement21) into RentalOfficeRentalAgreementDrop
+!insert (office11, agreement22) into RentalOfficeRentalAgreementOrigin
+!insert (office11, agreement22) into RentalOfficeRentalAgreementDrop
+!insert (agreement21, truck21) into RentalAgreementVehicle
+!insert (agreement21, individual11) into RentalAgreementCustomer
+!insert (agreement22, truck22) into RentalAgreementVehicle
+!insert (agreement22, company11) into RentalAgreementCustomer

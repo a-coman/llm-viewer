@@ -1,0 +1,70 @@
+!new RentalOffice('office27')
+!office27.name := 'Pacific Rentals'
+!office27.number := 2727
+!office27.address := '123 Coastline Rd, San Francisco, CA'
+
+!new Truck('truck53')
+!truck53.id := 553
+!truck53.registrationState := #CA
+!truck53.licensePlateNumber := 'CA-TRK-5567'
+!truck53.vehicleTypeCode := #TRUCK24
+!truck53.registrationLastMaintenanceDate := Date('2023-10-03')
+!truck53.expirationDate := Date('2024-10-03')
+!truck53.odometerReading := 17000
+!truck53.gasTankCapacity := 31.5
+!truck53.workingRadio := true
+!truck53.mileage := 19
+
+!new Individual('individual27')
+!individual27.name := 'Sophia Martinez'
+!individual27.address := '456 Bay St, San Jose, CA'
+!individual27.poorRisk := false
+!individual27.homePhone := '555-9099'
+!individual27.driverLicenseState := #CA
+!individual27.driverLicenseNumber := 13579246
+!individual27.driverLicenseExpirationDate := Date('2025-08-09')
+
+!new RentalAgreement('agreement53')
+!agreement53.number := 3053
+!agreement53.rentalDate := Date('2023-11-11')
+!agreement53.anticipatedDuration := 3
+!agreement53.depositPaid := 210.0
+!agreement53.quotedDailyRate := 69.00
+!agreement53.quotedRatePerMile := 0.57
+
+!new Truck('truck54')
+!truck54.id := 554
+!truck54.registrationState := #CT
+!truck54.licensePlateNumber := 'CT-TRK-8890'
+!truck54.vehicleTypeCode := #OPEN_TRAILER
+!truck54.registrationLastMaintenanceDate := Date('2023-06-17')
+!truck54.expirationDate := Date('2025-06-17')
+!truck54.odometerReading := 19000
+!truck54.gasTankCapacity := 30.0
+!truck54.workingRadio := false
+!truck54.mileage := 21
+
+!new Company('company27')
+!company27.name := 'Golden Gate Transports'
+!company27.address := '789 Pier Ave, Oakland, CA'
+!company27.poorRisk := true
+!company27.idNumber := 123098
+
+!new RentalAgreement('agreement54')
+!agreement54.number := 3054
+!agreement54.rentalDate := Date('2023-12-01')
+!agreement54.anticipatedDuration := 8
+!agreement54.depositPaid := 360.0
+!agreement54.quotedDailyRate := 82.00
+!agreement54.quotedRatePerMile := 0.65
+
+!insert (office27, truck53) into RentalOfficeVehicle
+!insert (office27, truck54) into RentalOfficeVehicle
+!insert (office27, agreement53) into RentalOfficeRentalAgreementOrigin
+!insert (office27, agreement53) into RentalOfficeRentalAgreementDrop
+!insert (office27, agreement54) into RentalOfficeRentalAgreementOrigin
+!insert (office27, agreement54) into RentalOfficeRentalAgreementDrop
+!insert (agreement53, truck53) into RentalAgreementVehicle
+!insert (agreement53, individual27) into RentalAgreementCustomer
+!insert (agreement54, truck54) into RentalAgreementVehicle
+!insert (agreement54, company27) into RentalAgreementCustomer

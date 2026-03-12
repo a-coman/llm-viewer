@@ -1,0 +1,46 @@
+!new AddressBook('addressBook4')
+
+!new Company('company4')
+!company4.name := 'EduSmart'
+!company4.phone := '222-333-4444'
+!company4.website := 'www.edusmart.edu'
+!company4.email := 'contact@edusmart.edu'
+!company4.industry := 'Education'
+
+!new Person('person6')
+!person6.name := 'Emma Johnson'
+!person6.phone := '333-444-5555'
+!person6.website := 'www.emmajohnson.com'
+!person6.email := 'emma.johnson@learnmore.com'
+!person6.title := 'Academic Coordinator'
+
+!new Note('note6')
+!note6.author := 'Emma Johnson'
+!note6.time := Date('2024-01-12')
+!note6.type := #EMAIL
+!note6.comment := 'Sent out invites for the seminar.'
+
+!new Note('note7')
+!note7.author := 'Emma Johnson'
+!note7.time := Date('2024-01-20')
+!note7.type := #MEETING
+!note7.comment := 'Organized teamwork brainstorming session.'
+
+!new Address('address6')
+!address6.city := 'LearnCity'
+!address6.houseNr := '1010'
+!address6.street := 'Knowledge Blvd'
+
+!new Relationship('relationship7')
+!relationship7.type := #BOSS
+
+!insert (addressBook4, company4) into AddressBookMadeOfContact
+!insert (addressBook4, person6) into AddressBookMadeOfContact
+
+!insert (person6, note6) into ContactContainsNote
+!insert (person6, note7) into ContactContainsNote
+
+!insert (company4, relationship7) into ContactToRelationship
+!insert (relationship7, person6) into RelationshipToContact
+
+!insert (company4, address6) into ContactContainsAddress

@@ -1,0 +1,41 @@
+!new Booking('booking29')
+!booking29.startDate := '2026-03-20'
+!booking29.endDate := '2026-03-25'
+!booking29.canceled := false
+!booking29.bookingId := 129
+!booking29.confirmed := true
+
+!new Bill('bill29')
+!bill29.price := 700.00
+!bill29.billId := 5029
+
+!new Customer('customer29')
+!customer29.firstName := 'Diana'
+!customer29.lastName := 'Evans'
+
+!new RoomReservation('reservation29')
+!reservation29.checkInDate := '2026-03-20'
+!reservation29.checkOutDate := '2026-03-25'
+
+!new Room('room2601')
+!room2601.numBeds := 3
+!room2601.pricePerNight := 150.00
+!room2601.occupied := true
+!room2601.blocked := false
+!room2601.roomNumber := 2601
+
+!new RoomExtra('extra38')
+!extra38.price := 45.00
+!extra38.description := 'VIP Theater Tickets'
+
+!new RoomExtra('extra39')
+!extra39.price := 30.00
+!extra39.description := 'Private Chauffeur Service'
+
+!insert (booking29, bill29) into BookingBill
+!insert (booking29, customer29) into BookingCustomer
+!insert (booking29, reservation29) into BookingRoomReservation
+!insert (reservation29, extra38) into RoomReservationExtras
+!insert (reservation29, extra39) into RoomReservationExtras
+!insert (reservation29, room2601) into RoomReservationRoom
+!insert (bill29, reservation29) into BillRoomReservation

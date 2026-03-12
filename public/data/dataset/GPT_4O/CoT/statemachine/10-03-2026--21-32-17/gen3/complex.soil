@@ -1,0 +1,98 @@
+!new StateMachine('parkingSystemManager')
+!parkingSystemManager.name := 'parkingSystemManager'
+
+!new State('entry')
+!entry.name := 'entry'
+
+!new State('vehicleIdentification')
+!vehicleIdentification.name := 'vehicleIdentification'
+
+!new State('awaitingParkingSlot')
+!awaitingParkingSlot.name := 'awaitingParkingSlot'
+
+!new State('parking')
+!parking.name := 'parking'
+
+!new State('parked')
+!parked.name := 'parked'
+
+!new State('exitPreparation')
+!exitPreparation.name := 'exitPreparation'
+
+!new Transition('entryToVehicleIdentification')
+!entryToVehicleIdentification.name := 'entryToVehicleIdentification'
+
+!new Transition('identificationToAwaitingSlot')
+!identificationToAwaitingSlot.name := 'identificationToAwaitingSlot'
+
+!new Transition('awaitingSlotToParking')
+!awaitingSlotToParking.name := 'awaitingSlotToParking'
+
+!new Transition('parkingToParked')
+!parkingToParked.name := 'parkingToParked'
+
+!new Transition('parkedToExitPreparation')
+!parkedToExitPreparation.name := 'parkedToExitPreparation'
+
+!new Transition('exitPreparationToEntry')
+!exitPreparationToEntry.name := 'exitPreparationToEntry'
+
+!new TimeEvent('timeEvent2')
+!timeEvent2.time := 2
+
+!new TimeEvent('timeEvent1')
+!timeEvent1.time := 1
+
+!new TimeEvent('timeEvent3')
+!timeEvent3.time := 3
+
+!new TimeEvent('timeEvent15')
+!timeEvent15.time := 15
+
+!new TimeEvent('timeEvent10')
+!timeEvent10.time := 10
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (parkingSystemManager, entry) into StateMachineContainsStates
+!insert (parkingSystemManager, vehicleIdentification) into StateMachineContainsStates
+!insert (parkingSystemManager, awaitingParkingSlot) into StateMachineContainsStates
+!insert (parkingSystemManager, parking) into StateMachineContainsStates
+!insert (parkingSystemManager, parked) into StateMachineContainsStates
+!insert (parkingSystemManager, exitPreparation) into StateMachineContainsStates
+
+!insert (parkingSystemManager, entryToVehicleIdentification) into StateMachineContainsTransitions
+!insert (parkingSystemManager, identificationToAwaitingSlot) into StateMachineContainsTransitions
+!insert (parkingSystemManager, awaitingSlotToParking) into StateMachineContainsTransitions
+!insert (parkingSystemManager, parkingToParked) into StateMachineContainsTransitions
+!insert (parkingSystemManager, parkedToExitPreparation) into StateMachineContainsTransitions
+!insert (parkingSystemManager, exitPreparationToEntry) into StateMachineContainsTransitions
+
+!insert (entryToVehicleIdentification, timeEvent2) into TransitionContainsEvents
+!insert (identificationToAwaitingSlot, timeEvent1) into TransitionContainsEvents
+!insert (parkedToExitPreparation, timeEvent3) into TransitionContainsEvents
+
+!insert (awaitingSlotToParking, timeEvent5) into TransitionContainsEvents
+!insert (parkingToParked, timeEvent10) into TransitionContainsEvents
+!insert (exitPreparationToEntry, timeEvent15) into TransitionContainsEvents
+
+!insert (entry, entryToVehicleIdentification) into StateTransition
+!insert (entryToVehicleIdentification, vehicleIdentification) into TransitionState
+
+!insert (vehicleIdentification, identificationToAwaitingSlot) into StateTransition
+!insert (identificationToAwaitingSlot, awaitingParkingSlot) into TransitionState
+
+!insert (awaitingParkingSlot, awaitingSlotToParking) into StateTransition
+!insert (awaitingSlotToParking, parking) into TransitionState
+
+!insert (parking, parkingToParked) into StateTransition
+!insert (parkingToParked, parked) into TransitionState
+
+!insert (parked, parkedToExitPreparation) into StateTransition
+!insert (parkedToExitPreparation, exitPreparation) into TransitionState
+
+!insert (exitPreparation, exitPreparationToEntry) into StateTransition
+!insert (exitPreparationToEntry, entry) into TransitionState
+
+!insert (parkingSystemManager, entry) into StateMachineStartsStates

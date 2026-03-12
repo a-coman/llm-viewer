@@ -1,0 +1,119 @@
+!new Customer('customer2')
+!customer2.firstName := 'Lucia'
+!customer2.lastName := 'Fernández'
+
+!new Booking('booking2')
+!booking2.startDate := '2023-07-15'
+!booking2.endDate := '2023-07-21'
+!booking2.canceled := false
+!booking2.bookingId := 1001
+!booking2.confirmed := true
+
+!new RoomReservation('roomReservation2_1')
+!roomReservation2_1.checkInDate := '2023-07-15'
+!roomReservation2_1.checkOutDate := '2023-07-21'
+
+!new RoomReservation('roomReservation2_2')
+!roomReservation2_2.checkInDate := '2023-07-15'
+!roomReservation2_2.checkOutDate := '2023-07-21'
+
+!new RoomReservation('roomReservation2_3')
+!roomReservation2_3.checkInDate := '2023-07-15'
+!roomReservation2_3.checkOutDate := '2023-07-21'
+
+!new Bill('bill3')
+!bill3.price := 2400.0
+!bill3.billId := 501
+
+!new Bill('bill4')
+!bill4.price := 2300.0
+!bill4.billId := 502
+
+!new Bill('bill5')
+!bill5.price := 2500.0
+!bill5.billId := 503
+
+!new FreeRoomTypesDTO('freeRoomType2')
+!freeRoomType2.roomTypeDescription := 'Family Suite'
+!freeRoomType2.numBeds := 3
+!freeRoomType2.pricePerNight := 200.0
+!freeRoomType2.numFreeRooms := 2
+
+!new Room('room2_101')
+!room2_101.numBeds := 2
+!room2_101.pricePerNight := 150.0
+!room2_101.occupied := true
+!room2_101.blocked := false
+!room2_101.roomNumber := 101
+
+!new Room('room2_102')
+!room2_102.numBeds := 2
+!room2_102.pricePerNight := 150.0
+!room2_102.occupied := true
+!room2_102.blocked := false
+!room2_102.roomNumber := 102
+
+!new Room('room2_201')
+!room2_201.numBeds := 2
+!room2_201.pricePerNight := 150.0
+!room2_201.occupied := true
+!room2_201.blocked := false
+!room2_201.roomNumber := 201
+
+!new Room('room2_202')
+!room2_202.numBeds := 2
+!room2_202.pricePerNight := 150.0
+!room2_202.occupied := true
+!room2_202.blocked := false
+!room2_202.roomNumber := 202
+
+!new Room('room2_301')
+!room2_301.numBeds := 2
+!room2_301.pricePerNight := 150.0
+!room2_301.occupied := true
+!room2_301.blocked := false
+!room2_301.roomNumber := 301
+
+!new Room('room2_302')
+!room2_302.numBeds := 2
+!room2_302.pricePerNight := 150.0
+!room2_302.occupied := true
+!room2_302.blocked := false
+!room2_302.roomNumber := 302
+
+!new RoomExtra('roomExtra3')
+!roomExtra3.price := 50.0
+!roomExtra3.description := 'Breakfast Buffet'
+
+!new RoomExtra('roomExtra4')
+!roomExtra4.price := 30.0
+!roomExtra4.description := 'Parking Facility'
+
+!insert (booking2, customer2) into BookingCustomer
+
+!insert (booking2, roomReservation2_1) into BookingRoomReservation
+!insert (booking2, roomReservation2_2) into BookingRoomReservation
+!insert (booking2, roomReservation2_3) into BookingRoomReservation
+
+!insert (roomReservation2_1, room2_101) into RoomReservationRoom
+!insert (roomReservation2_1, room2_102) into RoomReservationRoom
+
+!insert (roomReservation2_2, room2_201) into RoomReservationRoom
+!insert (roomReservation2_2, room2_202) into RoomReservationRoom
+
+!insert (roomReservation2_3, room2_301) into RoomReservationRoom
+!insert (roomReservation2_3, room2_302) into RoomReservationRoom
+
+!insert (roomReservation2_1, roomExtra3) into RoomReservationExtras
+!insert (roomReservation2_1, roomExtra4) into RoomReservationExtras
+
+!insert (roomReservation2_2, roomExtra3) into RoomReservationExtras
+!insert (roomReservation2_2, roomExtra4) into RoomReservationExtras
+
+!insert (roomReservation2_3, roomExtra3) into RoomReservationExtras
+!insert (roomReservation2_3, roomExtra4) into RoomReservationExtras
+
+!insert (bill3, roomReservation2_1) into BillRoomReservation
+!insert (bill4, roomReservation2_2) into BillRoomReservation
+!insert (bill5, roomReservation2_3) into BillRoomReservation
+

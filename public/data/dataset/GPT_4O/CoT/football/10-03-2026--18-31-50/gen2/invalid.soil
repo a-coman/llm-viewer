@@ -1,0 +1,137 @@
+!new Club('clubO')
+!clubO.name := 'Bangkok Warriors FC'
+!clubO.homeGround := 'Warrior Stadium, Bangkok'
+!clubO.chairman := 'Somchai Thanakorn'
+
+!new Club('clubP')
+!clubP.name := 'Kuala Lumpur Panthers FC'
+!clubP.homeGround := 'Panther Den, Kuala Lumpur'
+!clubP.chairman := 'Fatimah Razak'
+
+!new Team('teamO')
+!teamO.name := 'Bangkok Warriors Juniors'
+
+!new Team('teamP')
+!teamP.name := 'KL Panther Cubs'
+
+!insert (clubO, teamO) into ClubTeam
+!insert (clubP, teamP) into ClubTeam
+
+!new Player('player15')
+!player15.name := 'Aran Kanchana'
+!player15.age := 19
+!player15.bestFoot := #RIGHT
+!player15.phoneNumber := '+66 812 345 678'
+
+!new Position('position40')
+!position40.positionName := #MIDFIELDER
+
+!new Position('position41')
+!position41.positionName := #FORWARD
+
+!new Position('position42')
+!position42.positionName := #GOALKEEPER
+
+!insert (player15, position40) into PlayerPositions
+!insert (player15, position41) into PlayerPositions
+!insert (player15, position42) into PlayerPositions
+
+!new Player('player16')
+!player16.name := 'Hana Abdullah'
+!player16.age := 22
+!player16.bestFoot := #LEFT
+!player16.phoneNumber := '+60 176 543 210'
+
+!new Position('position43')
+!position43.positionName := #MIDFIELDER
+
+!insert (player16, position43) into PlayerPositions
+
+!new Player('player17')
+!player17.name := 'Wanchai Siripong'
+!player17.age := 18
+!player17.bestFoot := #BOTH
+!player17.phoneNumber := '+66 911 223 334'
+
+!new Position('position44')
+!position44.positionName := #DEFENDER
+
+!insert (player17, position40) into PlayerPositions
+!insert (player17, position41) into PlayerPositions
+!insert (player17, position44) into PlayerPositions
+
+!insert (teamO, player15) into TeamPlayer
+!insert (teamP, player16) into TeamPlayer
+!insert (teamO, player17) into TeamPlayer
+
+!new Match('match8')
+!match8.date := '20th November 2023'
+!match8.homeAway := true
+
+!insert (teamO, match8) into LocalMatch
+!insert (teamP, match8) into VisitorMatch
+
+!new MatchReport('matchReport8')
+!matchReport8.duration := 90
+!matchReport8.scoreVisitor := 3
+!matchReport8.scoreLocal := 3
+
+!insert (match8, matchReport8) into MatchMatchReport
+
+!new MatchEvent('matchEvent26')
+!matchEvent26.eventType := #GOAL
+!matchEvent26.time := 15
+
+!new MatchEvent('matchEvent27')
+!matchEvent27.eventType := #GOAL
+!matchEvent27.time := 60
+
+!new MatchEvent('matchEvent28')
+!matchEvent28.eventType := #GOAL
+!matchEvent28.time := 89
+
+!insert (match8, matchEvent26) into MatchMatchEvent
+!insert (match8, matchEvent27) into MatchMatchEvent
+!insert (match8, matchEvent28) into MatchMatchEvent
+
+!new MatchPlayer('matchPlayer14')
+!matchPlayer14.booked := false
+!matchPlayer14.goals := 0
+!matchPlayer14.rating := 9
+
+!new MatchPlayer('matchPlayer15')
+!matchPlayer15.booked := true
+!matchPlayer15.goals := 1
+!matchPlayer15.rating := 7
+
+!new MatchPlayer('matchPlayer16')
+!matchPlayer16.booked := false
+!matchPlayer16.goals := 2
+!matchPlayer16.rating := 8
+
+!insert (player15, matchPlayer14) into PlayerMatch
+!insert (player16, matchPlayer15) into PlayerMatch
+!insert (player17, matchPlayer16) into PlayerMatch
+
+!insert (match8, matchPlayer14) into MatchMatchPlayer
+!insert (match8, matchPlayer15) into MatchMatchPlayer
+!insert (match8, matchPlayer16) into MatchMatchPlayer
+
+!new MatchNote('matchNote6')
+!matchNote6.note := 'The match was characterized by repeated defensive and offensive exchanges, each team giving their best under strategic constraints.'
+!matchNote6.date := '21st November 2023'
+
+!insert (match8, matchNote6) into MatchMatchNote
+
+!new TrainingSession('trainingSession12')
+!trainingSession12.date := '22nd November 2023'
+!trainingSession12.location := 'Panther Den Practice Field'
+!trainingSession12.purpose := 'Strategic alignment and team cohesion exercises'
+
+!insert (teamP, trainingSession12) into TeamTraining
+
+!new TrainingNotes('trainingNote12')
+!trainingNote12.note := 'Discrepancies in player assignments due to fixture clashes resulted in training downtime.'
+!trainingNote12.date := '22nd November 2023'
+
+!insert (trainingSession12, trainingNote12) into TrainingTrainingNotes

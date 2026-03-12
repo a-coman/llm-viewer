@@ -1,0 +1,63 @@
+!new StateMachine('redundantPaths')
+!redundantPaths.name := 'redundantPaths'
+
+!new State('main')
+!main.name := 'main'
+
+!new State('secondary')
+!secondary.name := 'secondary'
+
+!new State('tertiary')
+!tertiary.name := 'tertiary'
+
+!new Transition('mainToSecondary')
+!mainToSecondary.name := 'mainToSecondary'
+
+!new Transition('secondaryToTertiary')
+!secondaryToTertiary.name := 'secondaryToTertiary'
+
+!new Transition('tertiaryToMain')
+!tertiaryToMain.name := 'tertiaryToMain'
+
+!new Transition('redundantLoop')
+!redundantLoop.name := 'redundantLoop'
+
+!new TimeEvent('timeEvent12')
+!timeEvent12.time := 12
+
+!new TimeEvent('timeEvent18')
+!timeEvent18.time := 18
+
+!new TimeEvent('timeEvent25')
+!timeEvent25.time := 25
+
+!new TimeEvent('timeEvent5')
+!timeEvent5.time := 5
+
+!insert (redundantPaths, main) into StateMachineContainsStates
+!insert (redundantPaths, secondary) into StateMachineContainsStates
+!insert (redundantPaths, tertiary) into StateMachineContainsStates
+
+!insert (redundantPaths, mainToSecondary) into StateMachineContainsTransitions
+!insert (redundantPaths, secondaryToTertiary) into StateMachineContainsTransitions
+!insert (redundantPaths, tertiaryToMain) into StateMachineContainsTransitions
+!insert (redundantPaths, redundantLoop) into StateMachineContainsTransitions
+
+!insert (mainToSecondary, timeEvent12) into TransitionContainsEvents
+!insert (secondaryToTertiary, timeEvent18) into TransitionContainsEvents
+!insert (tertiaryToMain, timeEvent25) into TransitionContainsEvents
+!insert (redundantLoop, timeEvent5) into TransitionContainsEvents
+
+!insert (main, mainToSecondary) into StateTransition
+!insert (mainToSecondary, secondary) into TransitionState
+
+!insert (secondary, secondaryToTertiary) into StateTransition
+!insert (secondaryToTertiary, tertiary) into TransitionState
+
+!insert (tertiary, tertiaryToMain) into StateTransition
+!insert (tertiaryToMain, main) into TransitionState
+
+!insert (secondary, redundantLoop) into StateTransition
+!insert (redundantLoop, main) into TransitionState
+
+!insert (redundantPaths, main) into StateMachineStartsStates

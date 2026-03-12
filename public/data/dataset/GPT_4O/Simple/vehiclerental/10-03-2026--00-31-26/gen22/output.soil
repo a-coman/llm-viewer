@@ -1,0 +1,70 @@
+!new RentalOffice('office22')
+!office22.name := 'Gateway Rentals'
+!office22.number := 2222
+!office22.address := '123 Gateway Blvd, St. Louis, MO'
+
+!new Truck('truck43')
+!truck43.id := 543
+!truck43.registrationState := #CO
+!truck43.licensePlateNumber := 'CO-TRK-2233'
+!truck43.vehicleTypeCode := #TRUCK24
+!truck43.registrationLastMaintenanceDate := Date('2023-07-18')
+!truck43.expirationDate := Date('2024-07-18')
+!truck43.odometerReading := 15500
+!truck43.gasTankCapacity := 33.0
+!truck43.workingRadio := true
+!truck43.mileage := 19
+
+!new Individual('individual22')
+!individual22.name := 'Olivia Thompson'
+!individual22.address := '789 Woodrow St, Columbia, MO'
+!individual22.poorRisk := true
+!individual22.homePhone := '555-9988'
+!individual22.driverLicenseState := #CO
+!individual22.driverLicenseNumber := 78451236
+!individual22.driverLicenseExpirationDate := Date('2027-04-10')
+
+!new RentalAgreement('agreement43')
+!agreement43.number := 3043
+!agreement43.rentalDate := Date('2023-11-28')
+!agreement43.anticipatedDuration := 8
+!agreement43.depositPaid := 310.0
+!agreement43.quotedDailyRate := 68.00
+!agreement43.quotedRatePerMile := 0.54
+
+!new Truck('truck44')
+!truck44.id := 544
+!truck44.registrationState := #FL
+!truck44.licensePlateNumber := 'FL-TRK-6789'
+!truck44.vehicleTypeCode := #COVERED_TRAILER
+!truck44.registrationLastMaintenanceDate := Date('2023-09-20')
+!truck44.expirationDate := Date('2025-09-20')
+!truck44.odometerReading := 20000
+!truck44.gasTankCapacity := 28.0
+!truck44.workingRadio := false
+!truck44.mileage := 21
+
+!new Company('company22')
+!company22.name := 'Midwest Movers'
+!company22.address := '145 Delivery Rd, Kansas City, MO'
+!company22.poorRisk := false
+!company22.idNumber := 902376
+
+!new RentalAgreement('agreement44')
+!agreement44.number := 3044
+!agreement44.rentalDate := Date('2024-02-12')
+!agreement44.anticipatedDuration := 12
+!agreement44.depositPaid := 600.0
+!agreement44.quotedDailyRate := 78.00
+!agreement44.quotedRatePerMile := 0.63
+
+!insert (office22, truck43) into RentalOfficeVehicle
+!insert (office22, truck44) into RentalOfficeVehicle
+!insert (office22, agreement43) into RentalOfficeRentalAgreementOrigin
+!insert (office22, agreement43) into RentalOfficeRentalAgreementDrop
+!insert (office22, agreement44) into RentalOfficeRentalAgreementOrigin
+!insert (office22, agreement44) into RentalOfficeRentalAgreementDrop
+!insert (agreement43, truck43) into RentalAgreementVehicle
+!insert (agreement43, individual22) into RentalAgreementCustomer
+!insert (agreement44, truck44) into RentalAgreementVehicle
+!insert (agreement44, company22) into RentalAgreementCustomer

@@ -1,0 +1,66 @@
+!new AddressBook('addressBook20')
+
+!new Company('company20')
+!company20.name := 'EcoBrew Coffee'
+!company20.phone := '789-012-3456'
+!company20.website := 'www.ecobrewcoffee.com'
+!company20.email := 'hello@ecobrewcoffee.com'
+!company20.industry := 'Food & Beverage'
+
+!new Person('person36')
+!person36.name := 'James Wong'
+!person36.phone := '818-909-6767'
+!person36.website := 'www.jameswongchef.com'
+!person36.email := 'james.wong@ecobrewcoffee.com'
+!person36.title := 'Head Barista'
+
+!new Person('person37')
+!person37.name := 'Zara Lee'
+!person37.phone := '626-737-8484'
+!person37.website := 'www.zaraleeconsulting.com'
+!person37.email := 'zara.lee@cafemarketing.com'
+!person37.title := 'Marketing Consultant'
+
+!new Note('note36')
+!note36.author := 'James Wong'
+!note36.time := Date('2025-02-20')
+!note36.type := #MEETING
+!note36.comment := 'Planning session for new coffee blends.'
+
+!new Note('note37')
+!note37.author := 'Zara Lee'
+!note37.time := Date('2025-02-25')
+!note37.type := #EMAIL
+!note37.comment := 'Updated social media campaign strategy.'
+
+!new Address('address37')
+!address37.city := 'Coffee Corner'
+!address37.houseNr := '303L'
+!address37.street := 'Brewery Lane'
+
+!new Address('address38')
+!address38.city := 'Cafe District'
+!address38.houseNr := '102A'
+!address38.street := 'Espresso Way'
+
+!new Relationship('relationship38')
+!relationship38.type := #BOSS
+
+!new Relationship('relationship39')
+!relationship39.type := #COWORKER
+
+!insert (addressBook20, company20) into AddressBookMadeOfContact
+!insert (addressBook20, person36) into AddressBookMadeOfContact
+!insert (addressBook20, person37) into AddressBookMadeOfContact
+
+!insert (person36, note36) into ContactContainsNote
+!insert (person37, note37) into ContactContainsNote
+
+!insert (company20, relationship38) into ContactToRelationship
+!insert (relationship38, person36) into RelationshipToContact
+
+!insert (person36, relationship39) into ContactToRelationship
+!insert (relationship39, person37) into RelationshipToContact
+
+!insert (company20, address37) into ContactContainsAddress
+!insert (person37, address38) into ContactContainsAddress

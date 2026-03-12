@@ -1,0 +1,48 @@
+!new Client('client13')
+!client13.clientId := 1
+!client13.isSuspended := true
+
+!new Rental('rental18')
+!rental18.date := Date('2023-10-20')
+
+!new Movie('movie17')
+!movie17.title := 'The Everlasting Gag'
+!movie17.availableCopies := 10
+!movie17.genre := #Comedy
+
+!new Series('series15')
+!series15.title := 'Epic Sword Chronicles'
+!series15.availableCopies := 50
+!series15.episode := 1
+
+!new Series('series16')
+!series16.title := 'Epic Sword Chronicles: The Saga Continues'
+!series16.availableCopies := 2
+!series16.episode := 65535
+
+!new Actor('actor29')
+!actor29.name := 'Farah El Bastawy'
+
+!new Actor('actor30')
+!actor30.name := 'John McEdge'
+
+!new Actor('actor31')
+!actor31.name := 'Mei Lin'
+
+!new Actor('actor32')
+!actor32.name := 'Rajiv Banerjee'
+
+!insert (client13, rental18) into ClientRental
+
+!insert (rental18, movie17) into RentalCassette
+!insert (rental18, series15) into RentalCassette
+!insert (rental18, series16) into RentalCassette
+
+!insert (movie17, actor29) into CassetteActor
+!insert (movie17, actor30) into CassetteActor
+
+!insert (series15, actor31) into CassetteActor
+!insert (series15, actor32) into CassetteActor
+
+!insert (series16, actor31) into CassetteActor
+!insert (series16, actor32) into CassetteActor

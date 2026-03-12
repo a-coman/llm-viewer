@@ -1,0 +1,30 @@
+!new Client('client30')
+!client30.clientId := 755
+!client30.isSuspended := false
+
+!new Rental('rental48')
+!rental48.date := Date('2023-07-01')
+
+!new Movie('movie39')
+!movie39.title := 'Vienna Strings'
+!movie39.availableCopies := 0
+!movie39.genre := #Comedy
+
+!new Series('series34')
+!series34.title := 'European Vignettes'
+!series34.availableCopies := 0
+!series34.episode := 8
+
+!new Actor('actor72')
+!actor72.name := 'Karl Meyer'
+
+!new Actor('actor73')
+!actor73.name := 'Elena Novak'
+
+!insert (client30, rental48) into ClientRental
+
+!insert (rental48, movie39) into RentalCassette
+!insert (rental48, series34) into RentalCassette
+
+!insert (movie39, actor72) into CassetteActor
+!insert (series34, actor72) into CassetteActor

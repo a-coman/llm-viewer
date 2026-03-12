@@ -1,0 +1,114 @@
+!new Restaurant('restaurant12')
+!restaurant12.name := 'Starry Night Cafe'
+
+!new Owner('owner24')
+!owner24.name := 'Vincent Galaxy'
+!owner24.percentageShares := 40
+!insert (restaurant12, owner24) into RestaurantOwner
+
+!new Owner('owner25')
+!owner25.name := 'Aurora Skye'
+!owner25.percentageShares := 60
+!insert (restaurant12, owner25) into RestaurantOwner
+
+!new Table('table33')
+!table33.number := 33
+!table33.description := 'Meteor View Table'
+!table33.capacity := 6
+
+!new Table('table34')
+!table34.number := 34
+!table34.description := 'Aurora Dining Area'
+!table34.capacity := 25
+
+!new RegularCustomer('customer13')
+!customer13.name := 'Nova Bright'
+!customer13.prefferedLanguage := #German
+
+!new Waiter('waiter14')
+!waiter14.name := 'Sky Silver'
+!waiter14.dateOfBirth := Date('1991-12-30')
+!waiter14.phoneNumber := '555-4545'
+!waiter14.spokenLanguage := #Spanish
+
+!new HeadWaiter('headwaiter12')
+!headwaiter12.name := 'Orion Blue'
+!headwaiter12.dateOfBirth := Date('1979-02-25')
+!headwaiter12.phoneNumber := '555-1212'
+
+!insert (headwaiter12, waiter14) into HeadWaiterWaiter
+
+!new Individual('reservation21')
+!reservation21.time := Time('20:00')
+!reservation21.date := Date('2023-11-15')
+!reservation21.numberPeople := 4
+!reservation21.name := 'Nova Bright'
+!reservation21.phoneNumber := '555-7878'
+!reservation21.number := 21
+!reservation21.seating := #Inside
+!reservation21.smoking := #NonSmoking
+!insert (restaurant12, reservation21) into RestaurantReservation
+!insert (reservation21, customer13) into ReservationCustomer
+!insert (reservation21, waiter14) into ReservationWaiter
+!insert (reservation21, table33) into ReservationTable
+
+!new Banquet('reservation22')
+!reservation22.time := Time('19:00')
+!reservation22.date := Date('2024-08-25')
+!reservation22.numberPeople := 38
+!reservation22.name := 'Galactic Conference'
+!reservation22.phoneNumber := '555-8989'
+!reservation22.number := 22
+!reservation22.groupName := 'Astro Geeks Society'
+!reservation22.paymentMethod := #CreditCard
+!reservation22.busService := true
+!insert (restaurant12, reservation22) into RestaurantReservation
+!insert (reservation22, table34) into ReservationTable
+
+!new Table('tableExtra6')
+!tableExtra6.number := 35
+!tableExtra6.description := 'Satellite Circle'
+!tableExtra6.capacity := 15
+!insert (reservation22, tableExtra6) into ReservationTable
+!insert (reservation22, waiter14) into ReservationWaiter
+
+!new BusDriver('busdriver9')
+!busdriver9.name := 'Haley Comet'
+!busdriver9.dateOfBirth := Date('1968-06-30')
+!busdriver9.phoneNumber := '555-2323'
+!busdriver9.driverLicenseNr := 'DL567890'
+!insert (reservation22, busdriver9) into BanquetBusDriver
+
+!new ItemOrder('itemOrder12')
+!itemOrder12.time := Time('20:30')
+!insert (reservation21, itemOrder12) into ReservationItemOrdered
+
+!new MenuItem('menuItem12')
+!menuItem12.description := 'Cosmic Curry'
+!menuItem12.prepTime := 30.0
+!menuItem12.classification := #Main
+!insert (itemOrder12, menuItem12) into ItemOrderMenuItem
+
+!new FoodItem('foodItem12')
+!foodItem12.number := 112
+!foodItem12.description := 'Spices and Veggies'
+!foodItem12.purchaseFlag := true
+!foodItem12.unit := #Gram
+!insert (menuItem12, foodItem12) into MenuItemFoodItem
+
+!new Allergen('allergen12')
+!allergen12.type := #Nuts
+!insert (foodItem12, allergen12) into FoodItemAllergen
+
+!new Cook('cook12')
+!cook12.name := 'Stella Nova'
+!cook12.dateOfBirth := Date('1993-04-14')
+!cook12.phoneNumber := '555-6767'
+!cook12.yearsOfExperience := 7
+
+!new Chef('chef12')
+!chef12.name := 'Andromeda Jones'
+!chef12.dateOfBirth := Date('1988-01-22')
+!chef12.phoneNumber := '555-3434'
+!insert (menuItem12, chef12) into MenuItemChef
+!insert (chef12, cook12) into ChefCook

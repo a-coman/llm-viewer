@@ -1,0 +1,42 @@
+!new Expense('vacayTripExpense')
+!vacayTripExpense.amount := 1200.00
+!vacayTripExpense.startDate := Date('2024-04-15')
+!vacayTripExpense.endDate := Date('2024-04-30')
+
+!new Bill('moroccanSpicesBill')
+!moroccanSpicesBill.amount := 500.00
+!moroccanSpicesBill.category := 'Traditional Moroccan Spices Purchase'
+!moroccanSpicesBill.date := Date('2024-04-16')
+!moroccanSpicesBill.paymentMethod := #CASH
+!moroccanSpicesBill.status := #VALIDATED
+
+!new Bill('italianPastaBill')
+!italianPastaBill.amount := 700.00
+!italianPastaBill.category := 'Gourmet Italian Pasta'
+!italianPastaBill.date := Date('2024-04-27')
+!italianPastaBill.paymentMethod := #CREDIT_CARD
+!italianPastaBill.status := #PENDING
+
+!new Currency('currencyMAD')
+!currencyMAD.name := 'Moroccan Dirham'
+!currencyMAD.abbreviation := 'MAD'
+
+!new Currency('currencyEUR')
+!currencyEUR.name := 'Euro'
+!currencyEUR.abbreviation := 'EUR'
+
+!insert (moroccanSpicesBill, currencyMAD) into BillCurrency
+!insert (italianPastaBill, currencyEUR) into BillCurrency
+
+!insert (vacayTripExpense, moroccanSpicesBill) into ExpenseContainsBills
+!insert (vacayTripExpense, italianPastaBill) into ExpenseContainsBills
+
+!new Comment('johnsReflection')
+!johnsReflection.text := 'The best spices I have ever bought! Can''t wait for the cooking sessions.'
+
+!new Comment('budgetTip')
+!budgetTip.text := 'Always keep an eye on exchange rates when traveling.'
+
+!insert (vacayTripExpense, johnsReflection) into ExpenseComment
+!insert (vacayTripExpense, budgetTip) into ExpenseComment
+

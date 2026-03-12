@@ -1,0 +1,46 @@
+!new Bank('mapleLeafBankingGroup')
+!mapleLeafBankingGroup.country := 'Canada'
+!mapleLeafBankingGroup.name := 'Maple Leaf Banking Group'
+!mapleLeafBankingGroup.bic := 'MLBGCAXR12'
+
+!new Account('account22_1')
+!account22_1.iban := 'CA89-1234-5678-9101'
+!account22_1.balance := 750000
+
+!new Account('account22_2')
+!account22_2.iban := 'CA91-1122-3344-5566'
+!account22_2.balance := 0
+
+!new Person('emmaThompson')
+!emmaThompson.firstName := 'Emma'
+!emmaThompson.lastName := 'Thompson'
+!emmaThompson.age := 67
+
+!new Person('liamThompson')
+!liamThompson.firstName := 'Liam'
+!liamThompson.lastName := 'Thompson'
+!liamThompson.age := 45
+
+!new Person('sophieThompson')
+!sophieThompson.firstName := 'Sophie'
+!sophieThompson.lastName := 'Thompson'
+!sophieThompson.age := 20
+
+!new Person('jackChen')
+!jackChen.firstName := 'Jack'
+!jackChen.lastName := 'Chen'
+!jackChen.age := 55
+
+!insert (mapleLeafBankingGroup, account22_1) into AccountOfBanks
+!insert (mapleLeafBankingGroup, account22_2) into AccountOfBanks
+
+!insert (emmaThompson, account22_1) into Ownership
+!insert (liamThompson, account22_1) into Ownership
+
+!insert (sophieThompson, account22_2) into Ownership
+
+!insert (emmaThompson, account22_1) into Use
+!insert (sophieThompson, account22_1) into Use
+
+!insert (liamThompson, account22_2) into Use
+!insert (sophieThompson, account22_2) into Use

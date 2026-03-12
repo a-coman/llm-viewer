@@ -1,0 +1,123 @@
+!new AddressBook('HealthcareNetwork')
+
+!new Person('DrLisaChen')
+!DrLisaChen.name := 'Dr. Lisa Chen'
+!DrLisaChen.phone := '+65 6221 1122'
+!DrLisaChen.website := 'www.drlisachenmedical.com'
+!DrLisaChen.email := 'lisa.chen@wellhealth.sg'
+!DrLisaChen.title := 'Oncology Specialist'
+
+!new Address('LisaChenAddress')
+!LisaChenAddress.city := 'Singapore'
+!LisaChenAddress.street := 'Health Avenue'
+!LisaChenAddress.houseNr := '88'
+!insert (DrLisaChen, LisaChenAddress) into ContactContainsAddress
+
+!new Note('LisaChenNote1')
+!LisaChenNote1.author := 'Dr. Lisa Chen'
+!LisaChenNote1.time := Date('2023-07-05')
+!LisaChenNote1.type := #MEETING
+!LisaChenNote1.comment := 'Discussed new treatment protocols in regional cancer summit.'
+!insert (DrLisaChen, LisaChenNote1) into ContactContainsNote
+
+!new Note('LisaChenNote2')
+!LisaChenNote2.author := 'Dr. Lisa Chen'
+!LisaChenNote2.time := Date('2023-07-12')
+!LisaChenNote2.type := #CALL
+!LisaChenNote2.comment := 'Phone consultation with European experts on rare cancer cases.'
+!insert (DrLisaChen, LisaChenNote2) into ContactContainsNote
+
+!new Person('ProfMahmoudElNahas')
+!ProfMahmoudElNahas.name := 'Prof. Mahmoud El-Nahas'
+!ProfMahmoudElNahas.phone := '+20 2 3546 8799'
+!ProfMahmoudElNahas.website := 'www.mahmoudelnresearch.com'
+!ProfMahmoudElNahas.email := 'mahmoud.el@medresearch.edu.eg'
+!ProfMahmoudElNahas.title := 'Medical Research Director'
+
+!new Address('MahmoudElNahasAddress')
+!MahmoudElNahasAddress.city := 'Cairo'
+!MahmoudElNahasAddress.street := 'University Road'
+!MahmoudElNahasAddress.houseNr := '5'
+!insert (ProfMahmoudElNahas, MahmoudElNahasAddress) into ContactContainsAddress
+
+!new Note('MahmoudElNahasNote')
+!MahmoudElNahasNote.author := 'Prof. Mahmoud El-Nahas'
+!MahmoudElNahasNote.time := Date('2023-08-20')
+!MahmoudElNahasNote.type := #EMAIL
+!MahmoudElNahasNote.comment := 'Shared latest findings on genetic disorders with the global research community.'
+!insert (ProfMahmoudElNahas, MahmoudElNahasNote) into ContactContainsNote
+
+!new Company('MedLifePharmaceuticals')
+!MedLifePharmaceuticals.name := 'MedLife Pharmaceuticals'
+!MedLifePharmaceuticals.phone := '+1 312 555 6789'
+!MedLifePharmaceuticals.website := 'www.medlifepharma.com'
+!MedLifePharmaceuticals.email := 'contactus@medlife.com'
+!MedLifePharmaceuticals.industry := 'Pharmaceutical'
+
+!new Address('MedLifeAddress')
+!MedLifeAddress.city := 'Chicago'
+!MedLifeAddress.street := 'Medicine Drive'
+!MedLifeAddress.houseNr := '100A'
+!insert (MedLifePharmaceuticals, MedLifeAddress) into ContactContainsAddress
+
+!new Note('MedLifeNote')
+!MedLifeNote.author := 'MedLife Pharmaceuticals'
+!MedLifeNote.time := Date('2023-08-01')
+!MedLifeNote.type := #MEETING
+!MedLifeNote.comment := 'Annual review of research partnerships with international hospitals.'
+!insert (MedLifePharmaceuticals, MedLifeNote) into ContactContainsNote
+
+!new Company('GlobalHealthPartners')
+!GlobalHealthPartners.name := 'Global Health Partners'
+!GlobalHealthPartners.phone := '+61 2 8765 4321'
+!GlobalHealthPartners.website := 'www.globalhealthpartners.org'
+!GlobalHealthPartners.email := 'admin@globalhealth.org'
+!GlobalHealthPartners.industry := 'Healthcare Consulting'
+
+!new Address('GlobalHealthAddress')
+!GlobalHealthAddress.city := 'Sydney'
+!GlobalHealthAddress.street := 'Healthcare Boulevard'
+!GlobalHealthAddress.houseNr := '222'
+!insert (GlobalHealthPartners, GlobalHealthAddress) into ContactContainsAddress
+
+!new Note('GlobalHealthNote')
+!GlobalHealthNote.author := 'Global Health Partners'
+!GlobalHealthNote.time := Date('2023-08-15')
+!GlobalHealthNote.type := #EMAIL
+!GlobalHealthNote.comment := 'Coordinated a global conference on emergent health technologies.'
+!insert (GlobalHealthPartners, GlobalHealthNote) into ContactContainsNote
+
+!new Relationship('LisaToMedLifeCoworker')
+!LisaToMedLifeCoworker.type := #COWORKER
+!insert (LisaToMedLifeCoworker, MedLifePharmaceuticals) into RelationshipToContact
+!insert (DrLisaChen, LisaToMedLifeCoworker) into ContactToRelationship
+
+!new Relationship('MahmoudToHealthPartnersEmployee')
+!MahmoudToHealthPartnersEmployee.type := #EMPLOYEE
+!insert (MahmoudToHealthPartnersEmployee, GlobalHealthPartners) into RelationshipToContact
+!insert (ProfMahmoudElNahas, MahmoudToHealthPartnersEmployee) into ContactToRelationship
+
+!new Relationship('MedLifeToLisaBoss')
+!MedLifeToLisaBoss.type := #BOSS
+!insert (MedLifeToLisaBoss, DrLisaChen) into RelationshipToContact
+!insert (MedLifePharmaceuticals, MedLifeToLisaBoss) into ContactToRelationship
+
+!new Relationship('MedLifeToGlobalHealthSubdivision')
+!MedLifeToGlobalHealthSubdivision.type := #SUBDIVISION
+!insert (MedLifeToGlobalHealthSubdivision, GlobalHealthPartners) into RelationshipToContact
+!insert (MedLifePharmaceuticals, MedLifeToGlobalHealthSubdivision) into ContactToRelationship
+
+!new Relationship('HealthPartnersToMahmoudBoss')
+!HealthPartnersToMahmoudBoss.type := #BOSS
+!insert (HealthPartnersToMahmoudBoss, ProfMahmoudElNahas) into RelationshipToContact
+!insert (GlobalHealthPartners, HealthPartnersToMahmoudBoss) into ContactToRelationship
+
+!new Relationship('HealthPartnersToMedLifeSubdivision')
+!HealthPartnersToMedLifeSubdivision.type := #SUBDIVISION
+!insert (HealthPartnersToMedLifeSubdivision, MedLifePharmaceuticals) into RelationshipToContact
+!insert (GlobalHealthPartners, HealthPartnersToMedLifeSubdivision) into ContactToRelationship
+
+!insert (HealthcareNetwork, DrLisaChen) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, ProfMahmoudElNahas) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, MedLifePharmaceuticals) into AddressBookMadeOfContact
+!insert (HealthcareNetwork, GlobalHealthPartners) into AddressBookMadeOfContact

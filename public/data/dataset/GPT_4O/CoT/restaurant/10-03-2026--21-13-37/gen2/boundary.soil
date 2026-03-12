@@ -1,0 +1,89 @@
+!new Restaurant('restaurant7')
+!restaurant7.name := 'Cultural Feast'
+
+!new Owner('owner13')
+!owner13.name := 'Aisha Khan'
+!owner13.percentageShares := 50
+
+!new Owner('owner14')
+!owner14.name := 'Wei Zhang'
+!owner14.percentageShares := 50
+
+!insert (restaurant7, owner13) into RestaurantOwner
+!insert (restaurant7, owner14) into RestaurantOwner
+
+!new HeadWaiter('headwaiter5')
+!headwaiter5.name := 'Paolo Rossi'
+!headwaiter5.dateOfBirth := Date('1982-01-01')  -- Arbitrary date of birth
+!headwaiter5.phoneNumber := '5555555555'        -- Arbitrary phone number
+
+!new Waiter('waiter10')
+!waiter10.name := 'Sara Jovanovich'
+!waiter10.dateOfBirth := Date('1990-01-01')     -- Arbitrary date of birth
+!waiter10.phoneNumber := '6666666666'           -- Arbitrary phone number
+!waiter10.spokenLanguage := #English
+
+!insert (headwaiter5, waiter10) into HeadWaiterWaiter
+
+!new Chef('chef7')
+!chef7.name := 'Ahmed Al-Salem'
+!chef7.dateOfBirth := Date('1975-01-01')        -- Arbitrary date of birth
+!chef7.phoneNumber := '7777777777'              -- Arbitrary phone number
+
+!new Cook('cook8')
+!cook8.name := 'Lucia Fernández'
+!cook8.dateOfBirth := Date('1995-01-01')        -- Arbitrary date of birth
+!cook8.phoneNumber := '8888888888'              -- Arbitrary phone number
+!cook8.yearsOfExperience := 0
+
+!insert (chef7, cook8) into ChefCook
+
+!new Table('table18')
+!table18.number := 10
+!table18.description := 'Large banquet table in the main hall'
+!table18.capacity := 20
+
+!new Table('table19')
+!table19.number := 11
+!table19.description := 'Private dining room table'
+!table19.capacity := 10
+
+!new MenuItem('menuitem9')
+!menuitem9.description := 'A selection of seasonal vegetables and grains.'
+!menuitem9.prepTime := 15.0
+!menuitem9.classification := #Main
+
+!insert (menuitem9, chef7) into MenuItemChef
+
+!new FoodItem('fooditem15')
+!fooditem15.number := 14
+!fooditem15.description := 'Chickpea'
+!fooditem15.purchaseFlag := false
+!fooditem15.unit := #Pound
+
+!insert (menuitem9, fooditem15) into MenuItemFoodItem
+
+!new Banquet('banquet6')
+!banquet6.date := Date('2023-12-31')
+!banquet6.time := Time('20:00')
+!banquet6.groupName := 'New Year\'s Gala'
+!banquet6.numberPeople := 25
+!banquet6.paymentMethod := #CreditCard
+
+!insert (restaurant7, banquet6) into RestaurantReservation
+
+!insert (banquet6, table18) into ReservationTable
+!insert (banquet6, table19) into ReservationTable
+
+!insert (banquet6, waiter10) into ReservationWaiter
+
+!new BusDriver('busdriver6')
+!busdriver6.name := 'Ravi Patel'
+
+!insert (banquet6, busdriver6) into BanquetBusDriver
+
+!new ItemOrder('itemorder2')
+!itemorder2.time := Time('20:15')
+
+!insert (banquet6, itemorder2) into ReservationItemOrdered
+!insert (itemorder2, menuitem9) into ItemOrderMenuItem

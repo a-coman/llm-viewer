@@ -1,0 +1,77 @@
+!new Customer('customer14')
+!customer14.firstName := 'Priya'
+!customer14.lastName := 'Singh'
+
+!new Booking('booking13')
+!booking13.startDate := '2024-03-05'
+!booking13.endDate := '2024-03-10'
+!booking13.canceled := false
+!booking13.bookingId := 103
+!booking13.confirmed := true
+
+!new Bill('bill26')
+!bill26.price := 1000.0
+!bill26.billId := 401
+
+!new Bill('bill27')
+!bill27.price := 500.0
+!bill27.billId := 402
+
+!new Bill('bill28')
+!bill28.price := 400.0
+!bill28.billId := 403
+
+!new FreeRoomTypesDTO('freeRoomType11')
+!freeRoomType11.roomTypeDescription := 'Executive Suite'
+!freeRoomType11.numBeds := 1
+!freeRoomType11.pricePerNight := 200.0
+!freeRoomType11.numFreeRooms := 5
+
+!new RoomReservation('roomReservation13_1')
+!roomReservation13_1.checkInDate := '2024-03-05'
+!roomReservation13_1.checkOutDate := '2024-03-10'
+
+!new RoomReservation('roomReservation13_2')
+!roomReservation13_2.checkInDate := '2024-03-06'
+!roomReservation13_2.checkOutDate := '2024-03-09'
+
+!new RoomExtra('extra13_1')
+!extra13_1.price := 100.0
+!extra13_1.description := 'High-Speed Wi-Fi Access'
+
+!new RoomExtra('extra13_2')
+!extra13_2.price := 200.0
+!extra13_2.description := 'Audio-Visual Equipment Rental'
+
+!new Room('room13_501')
+!room13_501.numBeds := 1
+!room13_501.pricePerNight := 200.0
+!room13_501.occupied := true
+!room13_501.blocked := false
+!room13_501.roomNumber := 501
+
+!new Room('room13_101')
+!room13_101.numBeds := 1
+!room13_101.pricePerNight := 0.0
+!room13_101.occupied := true
+!room13_101.blocked := true
+!room13_101.roomNumber := 101
+
+!insert (booking13, customer14) into BookingCustomer
+
+!insert (booking13, bill26) into BookingBill
+!insert (booking13, bill27) into BookingBill
+!insert (booking13, bill28) into BookingBill
+
+!insert (booking13, roomReservation13_1) into BookingRoomReservation
+!insert (booking13, roomReservation13_2) into BookingRoomReservation
+
+!insert (roomReservation13_1, room13_501) into RoomReservationRoom
+!insert (roomReservation13_2, room13_101) into RoomReservationRoom
+
+!insert (roomReservation13_1, extra13_1) into RoomReservationExtras
+!insert (roomReservation13_2, extra13_2) into RoomReservationExtras
+
+!insert (bill26, roomReservation13_1) into BillRoomReservation
+!insert (bill27, roomReservation13_2) into BillRoomReservation
+!insert (bill28, roomReservation13_2) into BillRoomReservation

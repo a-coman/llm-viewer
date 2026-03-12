@@ -1,0 +1,101 @@
+!new Client('client27')
+!client27.clientId := 901
+!client27.isSuspended := false
+
+!new Client('client28')
+!client28.clientId := 1002
+!client28.isSuspended := true
+
+!new Client('client29')
+!client29.clientId := 1103
+!client29.isSuspended := false
+
+!new Rental('rental43')
+!rental43.date := Date('2023-05-17')
+
+!new Rental('rental44')
+!rental44.date := Date('2023-06-21')
+
+!new Rental('rental45')
+!rental45.date := Date('2023-07-14')
+
+!new Rental('rental46')
+!rental46.date := Date('2023-10-23')
+
+!new Rental('rental47')
+!rental47.date := Date('2023-11-07')
+
+!new Movie('movie36')
+!movie36.title := 'Mountain Warriors'
+!movie36.availableCopies := 3
+!movie36.genre := #Action
+
+!new Movie('movie37')
+!movie37.title := 'Parisian Laughter'
+!movie37.availableCopies := 6
+!movie37.genre := #Comedy
+
+!new Series('series32')
+!series32.title := 'Savannah Chronicles'
+!series32.availableCopies := 8
+!series32.episode := 14
+
+!new Series('series33')
+!series33.title := 'Cosmos Revelations'
+!series33.availableCopies := 5
+!series33.episode := 9
+
+!new Movie('movie38')
+!movie38.title := 'Venetian Riddles'
+!movie38.availableCopies := 2
+!movie38.genre := #Action
+
+!new Actor('actor67')
+!actor67.name := 'Hiroshi Tanaka'
+
+!new Actor('actor68')
+!actor68.name := 'Elena Rodriguez'
+
+!new Actor('actor69')
+!actor69.name := 'Isaac Warren'
+
+!new Actor('actor70')
+!actor70.name := 'Aisha Ndlovu'
+
+!new Actor('actor71')
+!actor71.name := 'Nina Petrov'
+
+!insert (client27, rental43) into ClientRental
+!insert (client28, rental45) into ClientRental
+!insert (client29, rental44) into ClientRental
+!insert (client29, rental46) into ClientRental
+!insert (client29, rental47) into ClientRental
+
+!insert (rental43, movie36) into RentalCassette
+!insert (rental43, series32) into RentalCassette
+
+!insert (rental45, movie37) into RentalCassette
+!insert (rental45, series33) into RentalCassette
+
+!insert (rental44, movie38) into RentalCassette
+
+!insert (rental46, movie36) into RentalCassette
+!insert (rental46, movie37) into RentalCassette
+
+!insert (rental47, series32) into RentalCassette
+
+!insert (movie36, actor67) into CassetteActor
+!insert (movie36, actor70) into CassetteActor
+
+!insert (movie37, actor68) into CassetteActor
+!insert (movie37, actor71) into CassetteActor
+
+!insert (series32, actor69) into CassetteActor
+!insert (series32, actor67) into CassetteActor
+
+!insert (series33, actor70) into CassetteActor
+!insert (series33, actor68) into CassetteActor
+!insert (series33, actor69) into CassetteActor
+
+!insert (movie38, actor71) into CassetteActor
+!insert (movie38, actor67) into CassetteActor

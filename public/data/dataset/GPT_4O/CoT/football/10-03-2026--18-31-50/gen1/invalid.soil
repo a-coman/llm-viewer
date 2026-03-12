@@ -1,0 +1,122 @@
+!new Club('clubA')
+!clubA.name := 'Global Stars FC'
+!clubA.homeGround := 'Star Arena, Madrid'
+!clubA.chairman := 'Luis Martinez'
+
+!new Club('clubB')
+!clubB.name := 'Oceanic Titans FC'
+!clubB.homeGround := 'Titan Field, Lisbon'
+!clubB.chairman := 'Andrea Almeida'
+
+!new Team('teamA')
+!teamA.name := 'Global Stars Elite'
+
+!new Team('teamB')
+!teamB.name := 'Titan Warriors'
+
+!insert (clubA, teamA) into ClubTeam
+!insert (clubB, teamB) into ClubTeam
+
+!new Player('player1')
+!player1.name := 'Pedro Rodriguez'
+!player1.age := 28
+!player1.bestFoot := #RIGHT
+!player1.phoneNumber := '+34 600 123 456'
+
+!new Player('player2')
+!player2.name := 'Joana Sousa'
+!player2.age := 24
+!player2.bestFoot := #LEFT
+!player2.phoneNumber := '+351 921 334 567'
+
+!insert (teamA, player1) into TeamPlayer
+!insert (teamB, player2) into TeamPlayer
+
+!new Position('position1')
+!position1.positionName := #FORWARD
+
+!new Position('position2')
+!position2.positionName := #MIDFIELDER
+
+!insert (player1, position1) into PlayerPositions
+!insert (player1, position2) into PlayerPositions
+
+!new Position('position3')
+!position3.positionName := #DEFENDER
+
+!insert (player2, position3) into PlayerPositions
+
+!new Match('match1')
+!match1.date := '10th October 2023'
+!match1.homeAway := true
+
+!insert (teamA, match1) into LocalMatch
+!insert (teamB, match1) into VisitorMatch
+
+!new MatchReport('matchReport1')
+!matchReport1.duration := 90
+!matchReport1.scoreVisitor := 2
+!matchReport1.scoreLocal := 2
+
+!insert (match1, matchReport1) into MatchMatchReport
+
+!new MatchPlayer('matchPlayer1')
+!matchPlayer1.booked := true
+!matchPlayer1.goals := 1
+!matchPlayer1.rating := 8
+
+!insert (player1, matchPlayer1) into PlayerMatch
+
+!new MatchPlayer('matchPlayer2')
+!matchPlayer2.booked := false
+!matchPlayer2.goals := 1
+!matchPlayer2.rating := 7
+
+!insert (player2, matchPlayer2) into PlayerMatch
+
+!insert (match1, matchPlayer1) into MatchMatchPlayer
+!insert (match1, matchPlayer2) into MatchMatchPlayer
+
+!new MatchPlayerPosition('position4')
+!position4.positionName := #FORWARD
+!position4.number := 10
+
+!insert (matchPlayer1, position4) into MatchPlayerMatchPlayerPosition
+
+!new MatchPlayerPosition('position5')
+!position5.positionName := #DEFENDER
+!position5.number := 4
+
+!insert (matchPlayer2, position5) into MatchPlayerMatchPlayerPosition
+
+!new MatchEvent('matchEvent1')
+!matchEvent1.eventType := #GOAL
+!matchEvent1.time := 23
+
+!new MatchEvent('matchEvent2')
+!matchEvent2.eventType := #FOUL
+!matchEvent2.time := 45
+
+!new MatchEvent('matchEvent3')
+!matchEvent3.eventType := #GOAL
+!matchEvent3.time := 75
+
+!insert (match1, matchEvent1) into MatchMatchEvent
+!insert (match1, matchEvent2) into MatchMatchEvent
+!insert (match1, matchEvent3) into MatchMatchEvent
+
+!new MatchNote('matchNote1')
+!matchNote1.note := 'It was a highly competitive match despite the internal mix-up of roles. Lessons learned for handling system constraints.'
+!matchNote1.date := '11th October 2023'
+
+!insert (match1, matchNote1) into MatchMatchNote
+
+!new TrainingSession('trainingSession1')
+!trainingSession1.date := '12th October 2023'
+!trainingSession1.location := 'Star Arena Training Complex'
+!trainingSession1.purpose := 'Defensive drills and strategic planning'
+
+!new TrainingNotes('trainingNote1')
+!trainingNote1.note := 'No-shows reported due to mismatch in scheduling.'
+
+!insert (trainingSession1, trainingNote1) into TrainingTrainingNotes

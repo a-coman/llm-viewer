@@ -1,0 +1,64 @@
+!new Driver('driver13')
+!driver13.id := 'D013'
+!driver13.name := 'Selina Kyle'
+
+!new Driver('driver14')
+!driver14.id := 'D014'
+!driver14.name := 'James Gordon'
+
+!new Shipment('shipment15')
+!shipment15.id := 'SHP12359'
+!shipment15.status := #DELIVERED
+
+!new Shipment('shipment16')
+!shipment16.id := 'SHP12360'
+!shipment16.status := #UNDERWAY
+
+!new Address('address15')
+!address15.text := '1212 Cat St, Gotham Heights'
+
+!new Address('address16')
+!address16.text := '1313 Bat Ln, Gotham Heights'
+
+!new GeoLocation('geoLocation15')
+!geoLocation15.latitude := 37.7749
+!geoLocation15.longitude := -122.4194
+
+!new GeoLocation('geoLocation16')
+!geoLocation16.latitude := 37.8000
+!geoLocation16.longitude := -122.4500
+
+!insert (address15, geoLocation15) into AddressContainsGeoLocation
+!insert (address16, geoLocation16) into AddressContainsGeoLocation
+
+!new Customer('customer15')
+!customer15.id := 'CUST015'
+!customer15.name := 'Harvey Dent'
+!customer15.twitterUserName := '@twiceface'
+
+!new Customer('customer16')
+!customer16.id := 'CUST016'
+!customer16.name := 'Pamela Isley'
+!customer16.twitterUserName := '@poisonivy'
+
+!new Station('station8')
+
+!insert (station8, customer15) into StationContainsCustomer
+!insert (station8, customer16) into StationContainsCustomer
+
+!insert (station8, shipment15) into StationShipment
+!insert (station8, shipment16) into StationShipment
+
+!insert (station8, driver13) into StationContainsDriver
+!insert (station8, driver14) into StationContainsDriver
+
+!insert (shipment15, address15) into ShipmentContainsPickUpAddress
+!insert (shipment15, address16) into ShipmentContainsDeliveryAddress
+
+!insert (shipment16, address16) into ShipmentContainsPickUpAddress
+!insert (shipment16, address15) into ShipmentContainsDeliveryAddress
+
+!insert (customer15, shipment15) into CustomerConsistsOfShipment
+!insert (customer16, shipment16) into CustomerConsistsOfShipment
+
+!insert (driver14, shipment16) into DriverShipment

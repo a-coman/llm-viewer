@@ -1,0 +1,47 @@
+!new Bank('unityCooperativeBank')
+!unityCooperativeBank.country := 'Kenya'
+!unityCooperativeBank.name := 'Unity Cooperative Bank'
+!unityCooperativeBank.bic := 'UCBKE44'
+
+!new Account('account23_9')
+!account23_9.iban := 'KE74 5678 1234 0001'
+!account23_9.balance := 5000
+
+!new Account('account23_10')
+!account23_10.iban := 'KE55 2345 6789 0012'
+!account23_10.balance := 7500
+
+!new Person('aminaKareem')
+!aminaKareem.firstName := 'Amina'
+!aminaKareem.lastName := 'Kareem'
+!aminaKareem.age := 52
+
+!new Person('victorMwangi')
+!victorMwangi.firstName := 'Victor'
+!victorMwangi.lastName := 'Mwangi'
+!victorMwangi.age := 47
+
+!new Person('graceAchola')
+!graceAchola.firstName := 'Grace'
+!graceAchola.lastName := 'Achola'
+!graceAchola.age := 30
+
+!new Person('elijahWanjiku')
+!elijahWanjiku.firstName := 'Elijah'
+!elijahWanjiku.lastName := 'Wanjiku'
+!elijahWanjiku.age := 32
+
+!insert (unityCooperativeBank, account23_9) into AccountOfBanks
+!insert (unityCooperativeBank, account23_10) into AccountOfBanks
+
+!insert (aminaKareem, account23_9) into Ownership
+!insert (victorMwangi, account23_9) into Ownership
+
+!insert (aminaKareem, account23_10) into Ownership
+
+!insert (aminaKareem, account23_9) into Use
+!insert (victorMwangi, account23_9) into Use
+!insert (graceAchola, account23_9) into Use
+!insert (elijahWanjiku, account23_9) into Use
+
+!insert (aminaKareem, account23_10) into Use

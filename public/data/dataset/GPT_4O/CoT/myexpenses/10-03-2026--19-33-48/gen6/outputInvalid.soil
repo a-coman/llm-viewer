@@ -1,0 +1,60 @@
+!new Expense('outdoorAdventureExpense')
+!outdoorAdventureExpense.amount := 1500.00
+!outdoorAdventureExpense.startDate := Date('2024-02-10')
+!outdoorAdventureExpense.endDate := Date('2024-02-20')
+
+!new Bill('guidedHikingBill')
+!guidedHikingBill.amount := 600.00
+!guidedHikingBill.category := 'Guided Hiking Services'
+!guidedHikingBill.date := Date('2024-02-12')
+!guidedHikingBill.paymentMethod := #CASH
+!guidedHikingBill.status := #VALIDATED
+
+!new Bill('campingEquipmentBill')
+!campingEquipmentBill.amount := 300.00
+!campingEquipmentBill.category := 'Camping Equipment Rental'
+!campingEquipmentBill.date := Date('2024-02-11')
+!campingEquipmentBill.paymentMethod := #CHECK
+!campingEquipmentBill.status := #VERIFIED
+
+!new Bill('travelInsuranceBill')
+!travelInsuranceBill.amount := 200.00
+!travelInsuranceBill.category := 'Travel Insurance'
+!travelInsuranceBill.date := Date('2024-01-30')
+!travelInsuranceBill.paymentMethod := #CREDIT_CARD
+!travelInsuranceBill.status := #VERIFIED
+
+!new Bill('unforeseenExpensesBill')
+!unforeseenExpensesBill.amount := 400.00
+!unforeseenExpensesBill.category := 'Miscellaneous Unforeseen Expenses'
+!unforeseenExpensesBill.date := Date('2024-02-18')
+!unforeseenExpensesBill.paymentMethod := #CASH
+!unforeseenExpensesBill.status := #PENDING
+
+!new Currency('currencyARS')
+!currencyARS.name := 'Argentine Peso'
+!currencyARS.abbreviation := 'ARS'
+
+!new Currency('currencyUSD')
+!currencyUSD.name := 'United States Dollar'
+!currencyUSD.abbreviation := 'USD'
+
+!insert (guidedHikingBill, currencyARS) into BillCurrency
+!insert (campingEquipmentBill, currencyARS) into BillCurrency
+!insert (travelInsuranceBill, currencyUSD) into BillCurrency
+!insert (unforeseenExpensesBill, currencyARS) into BillCurrency
+
+!insert (outdoorAdventureExpense, guidedHikingBill) into ExpenseContainsBills
+!insert (outdoorAdventureExpense, campingEquipmentBill) into ExpenseContainsBills
+!insert (outdoorAdventureExpense, travelInsuranceBill) into ExpenseContainsBills
+!insert (outdoorAdventureExpense, unforeseenExpensesBill) into ExpenseContainsBills
+
+!new Comment('safetyAdvice')
+!safetyAdvice.text := 'Ensure you have comprehensive travel insurance for adventure trips.'
+
+!new Comment('equipmentTip')
+!equipmentTip.text := 'Rent rather than buy equipment to save on costs.'
+
+!insert (outdoorAdventureExpense, safetyAdvice) into ExpenseComment
+!insert (outdoorAdventureExpense, equipmentTip) into ExpenseComment
+

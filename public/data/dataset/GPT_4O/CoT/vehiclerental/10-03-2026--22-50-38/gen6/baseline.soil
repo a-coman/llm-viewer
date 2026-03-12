@@ -1,0 +1,47 @@
+!new RentalOffice('officeHoustonCentral')
+!officeHoustonCentral.name := 'Houston Central'
+!officeHoustonCentral.number := 606
+!officeHoustonCentral.address := '101 Space Center Blvd, Houston, TX 77058'
+
+!new Vehicle('coveredTrailer010')
+!coveredTrailer010.id := 310
+!coveredTrailer010.registrationState := #CA
+!coveredTrailer010.licensePlateNumber := 'TX3210CT'
+!coveredTrailer010.vehicleTypeCode := #COVERED_TRAILER
+!coveredTrailer010.registrationLastMaintenanceDate := Date('2023-10-02')
+!coveredTrailer010.expirationDate := Date('2024-10-01')
+
+!new Truck('truck011')
+!truck011.id := 311
+!truck011.registrationState := #CA
+!truck011.licensePlateNumber := 'LA5432TR'
+!truck011.vehicleTypeCode := #TRUCK
+!truck011.registrationLastMaintenanceDate := Date('2023-09-15')
+!truck011.expirationDate := Date('2024-09-14')
+!truck011.odometerReading := 1000
+!truck011.gasTankCapacity := 20.0
+!truck011.workingRadio := true
+!truck011.mileage := 5000
+
+!new Company('companyRapidReliefServices')
+!companyRapidReliefServices.name := 'RapidRelief Services'
+!companyRapidReliefServices.address := '400 Emergency Ave, Baton Rouge, LA 70801'
+!companyRapidReliefServices.poorRisk := false
+!companyRapidReliefServices.idNumber := 903456
+
+!new RentalAgreement('rentalAgreement6006')
+!rentalAgreement6006.number := 6006
+!rentalAgreement6006.rentalDate := Date('2024-01-01')
+!rentalAgreement6006.anticipatedDuration := 5
+!rentalAgreement6006.depositPaid := 250.0
+!rentalAgreement6006.quotedDailyRate := 65.0
+!rentalAgreement6006.quotedRatePerMile := 0.2
+
+!insert (officeHoustonCentral, coveredTrailer010) into RentalOfficeVehicle
+!insert (officeHoustonCentral, truck011) into RentalOfficeVehicle
+
+!insert (officeHoustonCentral, rentalAgreement6006) into RentalOfficeRentalAgreementOrigin
+!insert (officeHoustonCentral, rentalAgreement6006) into RentalOfficeRentalAgreementDrop
+
+!insert (rentalAgreement6006, coveredTrailer010) into RentalAgreementVehicle
+!insert (rentalAgreement6006, companyRapidReliefServices) into RentalAgreementCustomer

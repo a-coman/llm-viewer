@@ -1,0 +1,70 @@
+!new RentalOffice('office14')
+!office14.name := 'Metro Rentals'
+!office14.number := 1414
+!office14.address := '600 City Plaza, Boston, MA'
+
+!new Truck('truck27')
+!truck27.id := 527
+!truck27.registrationState := #CT
+!truck27.licensePlateNumber := 'CT-TRK-5566'
+!truck27.vehicleTypeCode := #OPEN_TRAILER
+!truck27.registrationLastMaintenanceDate := Date('2023-07-20')
+!truck27.expirationDate := Date('2024-07-20')
+!truck27.odometerReading := 8000
+!truck27.gasTankCapacity := 32.0
+!truck27.workingRadio := true
+!truck27.mileage := 25
+
+!new Individual('individual14')
+!individual14.name := 'Noah Wright'
+!individual14.address := '89 Maple Rd, Springfield, MA'
+!individual14.poorRisk := true
+!individual14.homePhone := '555-8080'
+!individual14.driverLicenseState := #CT
+!individual14.driverLicenseNumber := 67898765
+!individual14.driverLicenseExpirationDate := Date('2025-09-14')
+
+!new RentalAgreement('agreement27')
+!agreement27.number := 3027
+!agreement27.rentalDate := Date('2023-12-01')
+!agreement27.anticipatedDuration := 9
+!agreement27.depositPaid := 270.0
+!agreement27.quotedDailyRate := 68.00
+!agreement27.quotedRatePerMile := 0.50
+
+!new Truck('truck28')
+!truck28.id := 528
+!truck28.registrationState := #CT
+!truck28.licensePlateNumber := 'CT-TRK-7788'
+!truck28.vehicleTypeCode := #COVERED_TRAILER
+!truck28.registrationLastMaintenanceDate := Date('2023-02-17')
+!truck28.expirationDate := Date('2024-02-17')
+!truck28.odometerReading := 16000
+!truck28.gasTankCapacity := 29.0
+!truck28.workingRadio := false
+!truck28.mileage := 21
+
+!new Company('company14')
+!company14.name := 'City Transport Services'
+!company14.address := '123 Industrial Ln, Worcester, MA'
+!company14.poorRisk := true
+!company14.idNumber := 765432
+
+!new RentalAgreement('agreement28')
+!agreement28.number := 3028
+!agreement28.rentalDate := Date('2024-01-10')
+!agreement28.anticipatedDuration := 14
+!agreement28.depositPaid := 600.0
+!agreement28.quotedDailyRate := 88.00
+!agreement28.quotedRatePerMile := 0.65
+
+!insert (office14, truck27) into RentalOfficeVehicle
+!insert (office14, truck28) into RentalOfficeVehicle
+!insert (office14, agreement27) into RentalOfficeRentalAgreementOrigin
+!insert (office14, agreement27) into RentalOfficeRentalAgreementDrop
+!insert (office14, agreement28) into RentalOfficeRentalAgreementOrigin
+!insert (office14, agreement28) into RentalOfficeRentalAgreementDrop
+!insert (agreement27, truck27) into RentalAgreementVehicle
+!insert (agreement27, individual14) into RentalAgreementCustomer
+!insert (agreement28, truck28) into RentalAgreementVehicle
+!insert (agreement28, company14) into RentalAgreementCustomer
