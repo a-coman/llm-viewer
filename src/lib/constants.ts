@@ -54,6 +54,10 @@ export const SIMPLE_GEN_COUNT = 30;
 export const COT_GEN_COUNT = 6;
 
 export const prices = {
+  GPT_4O_OLD: {
+    input: 2.5,
+    output: 10,
+  },
   GPT_4O: {
     input: 2.5,
     output: 10,
