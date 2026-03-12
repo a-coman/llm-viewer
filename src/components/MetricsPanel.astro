@@ -7,6 +7,7 @@ import {
 } from "../lib/utils";
 import { COLOR_RANGES, INFINITY_SYMBOL } from "../lib/constants";
 import Tooltip from "./Tooltip.astro";
+import { undefined } from "astro:schema";
 
 interface MetricStat {
   errors: number;
@@ -187,9 +188,11 @@ const inst = metrics?.coverage?.instantiation || metrics?.instantiation;
 const div = metrics?.diversity;
 const judge = metrics?.judge || { successRate: metrics?.realism };
 const price = metrics?.price;
-const elapsedSeconds = metrics?.elapsedSeconds ?? metrics?.time_seconds;
+//const elapsedSeconds = metrics?.elapsedSeconds ?? metrics?.time_seconds;
+const elapsedSeconds = undefined; // Temporarily hide elapsed time
 const judgePrice = judge?.price;
-const judgeElapsedSeconds = judge?.elapsedSeconds ?? judge?.time_seconds;
+//const judgeElapsedSeconds = judge?.elapsedSeconds ?? judge?.time_seconds;
+const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
 ---
 
 <div class="metrics-panel">
