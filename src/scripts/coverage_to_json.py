@@ -253,6 +253,13 @@ def main():
     project_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
     dataset_root = os.path.join(project_root, "public", "data", "dataset")
 
+    dataset_dirs = {}
+    if os.path.isdir(dataset_root):
+        for entry in os.listdir(dataset_root):
+            entry_path = os.path.join(dataset_root, entry)
+            if os.path.isdir(entry_path):
+                dataset_dirs[entry.lower()] = entry_path
+
     # Load logs.json
     with open(
         os.path.join(project_root, "public", "logs.json"), "r", encoding="utf-8"
@@ -295,19 +302,18 @@ def main():
     final_output = {"experiments": []}
 
     for model_id in sorted(experiments_map.keys()):
-        simple_cov_path = os.path.join(
-            dataset_root, model_id.upper(), "Simple", "simpleCoverage.md"
-        )
-        if not os.path.exists(simple_cov_path):
-            simple_cov_path = os.path.join(
-                dataset_root, model_id, "simple", "simplecoverage.md"
-            )
+        model_dataset_dir = dataset_dirs.get(model_id)
 
-        cot_cov_path = os.path.join(
-            dataset_root, model_id.upper(), "CoT", "cotCoverage.md"
+        simple_cov_path = (
+            os.path.join(model_dataset_dir, "Simple", "simpleCoverage.md")
+            if model_dataset_dir
+            else ""
         )
-        if not os.path.exists(cot_cov_path):
-            cot_cov_path = os.path.join(dataset_root, model_id, "cot", "cotcoverage.md")
+        cot_cov_path = (
+            os.path.join(model_dataset_dir, "CoT", "cotCoverage.md")
+            if model_dataset_dir
+            else ""
+        )
 
         simple_domains, simple_global_cov, simple_global_inst = parse_coverage_markdown(
             simple_cov_path
