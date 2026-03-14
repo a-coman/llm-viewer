@@ -32,7 +32,7 @@ function getCellColor(val: number, i: number, j: number): string {
     <table class="matrix">
       <colgroup>
         <col class="row-label-col" />
-        {labels.map(() => <col />)}
+        {labels.map(() => <col class="data-col" />)}
       </colgroup>
       <thead>
         <tr>
@@ -58,7 +58,8 @@ function getCellColor(val: number, i: number, j: number): string {
                   data-value={val.toFixed(3)}
                 >
                   <span class="tooltip">
-                    {labels[i]} ↔ {labels[j]}: {val.toFixed(3)}
+                    <span class="tooltip-comparison">{labels[i]} ↔ {labels[j]}</span>
+                    <span class="tooltip-value">{val.toFixed(3)}</span>
                   </span>
                 </td>
               ))}
@@ -73,23 +74,23 @@ function getCellColor(val: number, i: number, j: number): string {
 <style>
   .heatmap-container {
     width: 100%;
+    min-width: 757px;
     display: flex;
     flex-direction: column;
     overflow: visible; /* Allow tooltips to float outside */
   }
 
   .matrix-wrapper {
-    width: 100%;
     overflow: visible; /* Prevent clipping tooltips */
-    background: var(--color-background);
-    padding: 0;
+    background: var(--color-surface);
+    padding: 0 0 1.25rem 0; /* Added padding to give it some breathing room */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Center the matrix within its constrained wrapper */
   }
 
   .matrix {
-    width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     border-style: hidden;
@@ -97,6 +98,10 @@ function getCellColor(val: number, i: number, j: number): string {
 
   .row-label-col {
     width: 65px;
+  }
+
+  .data-col {
+    width: 22px;
   }
 
   .corner-header {
@@ -141,27 +146,40 @@ function getCellColor(val: number, i: number, j: number): string {
     position: relative;
     cursor: pointer;
     padding: 0;
+    height: 22px;
   }
 
   .tooltip {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
     position: absolute;
     bottom: 125%; /* Raised a bit more to clear rotated headers better */
     left: 50%;
     transform: translateX(-50%);
     background: var(--color-accent);
     color: white;
-    padding: 0.4rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
     white-space: nowrap;
     z-index: 10000; /* Extremely high to stay on top of other sections */
     pointer-events: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
 
+  .tooltip-comparison {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  .tooltip-value {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
   .cell:hover .tooltip {
-    display: block;
+    display: flex;
   }
 
   .cell:hover {
