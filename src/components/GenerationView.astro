@@ -76,242 +76,244 @@ const maxPromptAttempts = isCoT
     <div class="diagram-section" style="border: none;">
       <div class="diagram-header sober-label" style="border-top: none;">
         <div class="view-selectors" data-selectors-id={uniqueId}>
-        {/* Instance group */}
-        <div class="selector-group active" data-group="instance">
-          <button
-            type="button"
-            class="group-btn active"
-            data-group-btn="instance">Instance</button
-          >
-          <select class="group-select" data-select="instance">
-            <option value="instance-diagram">Diagram</option>
-            <option value="instance-code">Code</option>
-          </select>
-        </div>
+          {/* Instance group */}
+          <div class="selector-group active" data-group="instance">
+            <button
+              type="button"
+              class="group-btn active"
+              data-group-btn="instance">Instance</button
+            >
+            <select class="group-select" data-select="instance">
+              <option value="instance-diagram">Diagram</option>
+              <option value="instance-code">Code</option>
+            </select>
+          </div>
 
-        {/* Model group */}
-        <div class="selector-group" data-group="model">
-          <button type="button" class="group-btn" data-group-btn="model"
-            >Model</button
-          >
-          <select class="group-select" data-select="model">
-            <option value="model-diagram">Diagram</option>
-            <option value="model-code">Code</option>
-          </select>
-        </div>
+          {/* Model group */}
+          <div class="selector-group" data-group="model">
+            <button type="button" class="group-btn" data-group-btn="model"
+              >Model</button
+            >
+            <select class="group-select" data-select="model">
+              <option value="model-diagram">Diagram</option>
+              <option value="model-code">Code</option>
+            </select>
+          </div>
 
-        {/* Prompt group (includes Agent for CoT) */}
-        <div class="selector-group" data-group="prompt">
-          <button type="button" class="group-btn" data-group-btn="prompt"
-            >Prompt</button
-          >
-          <select class="group-select" data-select="prompt">
-            <option value="system-prompt">System</option>
-            <option value="user-prompt">User</option>
-          </select>
-          {
-            isCoT && (
-              <select class="group-select" data-select="agent">
-                <option value={QUERY_AGENTS.modelAnalyzer}>
-                  {QUERY_AGENTS.modelAnalyzer}
-                </option>
-                <option value={QUERY_AGENTS.listCreator}>
-                  {QUERY_AGENTS.listCreator}
-                </option>
-                <option value={QUERY_AGENTS.listInstantiator}>
-                  {QUERY_AGENTS.listInstantiator}
-                </option>
-              </select>
-            )
-          }
-          <select class="group-select" data-select="attempt">
+          {/* Prompt group (includes Agent for CoT) */}
+          <div class="selector-group" data-group="prompt">
+            <button type="button" class="group-btn" data-group-btn="prompt"
+              >Prompt</button
+            >
+            <select class="group-select" data-select="prompt">
+              <option value="system-prompt">System</option>
+              <option value="user-prompt">User</option>
+            </select>
             {
-              Array.from(
-                { length: Math.max(1, maxPromptAttempts) },
-                (_, idx) => {
-                  const attempt = idx + 1;
-                  return <option value={`${attempt}`}>{` ${attempt}`}</option>;
-                },
+              isCoT && (
+                <select class="group-select" data-select="agent">
+                  <option value={QUERY_AGENTS.modelAnalyzer}>
+                    {QUERY_AGENTS.modelAnalyzer}
+                  </option>
+                  <option value={QUERY_AGENTS.listCreator}>
+                    {QUERY_AGENTS.listCreator}
+                  </option>
+                  <option value={QUERY_AGENTS.listInstantiator}>
+                    {QUERY_AGENTS.listInstantiator}
+                  </option>
+                </select>
               )
             }
-          </select>
+            <select class="group-select" data-select="attempt">
+              {
+                Array.from(
+                  { length: Math.max(1, maxPromptAttempts) },
+                  (_, idx) => {
+                    const attempt = idx + 1;
+                    return (
+                      <option value={`${attempt}`}>{` ${attempt}`}</option>
+                    );
+                  },
+                )
+              }
+            </select>
+          </div>
+
+          <div class="selector-group" data-group="shannon">
+            <button type="button" class="group-btn" data-group-btn="shannon">
+              Shannon
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram-views" data-views-id={uniqueId}>
+        {/* Instance views */}
+        <div class="diagram-view active" data-view-content="instance-diagram">
+          <PdfEmbed
+            src={getUrl(pdfUrl)}
+            title="Instance Diagram"
+            available={pdfAvailable}
+          />
         </div>
 
-        <div class="selector-group" data-group="shannon">
-          <button type="button" class="group-btn" data-group-btn="shannon">
-            Shannon
-          </button>
+        <div class="diagram-view" data-view-content="instance-code">
+          {
+            code ? (
+              <CodeViewer code={code} language="soil" />
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">No code available</div>
+                <div class="sober-empty-hint">{label && `for ${label}`}</div>
+              </div>
+            )
+          }
         </div>
-      </div>
-    </div>
 
-    <div class="diagram-views" data-views-id={uniqueId}>
-      {/* Instance views */}
-      <div class="diagram-view active" data-view-content="instance-diagram">
-        <PdfEmbed
-          src={getUrl(pdfUrl)}
-          title="Instance Diagram"
-          available={pdfAvailable}
-        />
-      </div>
+        {/* Model views */}
+        <div class="diagram-view" data-view-content="model-diagram">
+          <PdfEmbed
+            src={getUrl(classDiagramPdf || "")}
+            title="Model Diagram"
+            available={!!classDiagramPdf}
+          />
+        </div>
 
-      <div class="diagram-view" data-view-content="instance-code">
-        {
-          code ? (
-            <CodeViewer code={code} language="soil" />
-          ) : (
-            <div class="sober-empty-state">
-              <div class="sober-empty-text">No code available</div>
-              <div class="sober-empty-hint">{label && `for ${label}`}</div>
-            </div>
-          )
-        }
-      </div>
+        <div class="diagram-view" data-view-content="model-code">
+          {
+            classDiagramUseCode ? (
+              <CodeViewer code={classDiagramUseCode} language="use" />
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">No model code available</div>
+              </div>
+            )
+          }
+        </div>
 
-      {/* Model views */}
-      <div class="diagram-view" data-view-content="model-diagram">
-        <PdfEmbed
-          src={getUrl(classDiagramPdf || "")}
-          title="Model Diagram"
-          available={!!classDiagramPdf}
-        />
-      </div>
-
-      <div class="diagram-view" data-view-content="model-code">
-        {
-          classDiagramUseCode ? (
-            <CodeViewer code={classDiagramUseCode} language="use" />
-          ) : (
-            <div class="sober-empty-state">
-              <div class="sober-empty-text">No model code available</div>
-            </div>
-          )
-        }
-      </div>
-
-      {/* Prompt views */}
-      <div class="diagram-view" data-view-content="system-prompt">
-        {
-          isCoT ? (
-            <div
-              class="prompt-container"
-              data-prompt-type="system"
-              data-unique-id={uniqueId}
-            >
-              {viewerAgents.map((agent) => (
-                <div
-                  class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
-                  data-prompt-type="system"
-                  data-agent-content={agent}
-                >
-                  {cotPrompts?.[agent]?.systemPrompt ? (
-                    <CodeViewer
-                      code={cotPrompts[agent].systemPrompt}
-                      language="markdown"
-                    />
-                  ) : (
-                    <div class="sober-empty-state">
-                      <div class="sober-empty-text">
-                        No system prompt available
-                      </div>
-                      <div class="sober-empty-hint">for {agent}</div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : systemPrompt ? (
-            <CodeViewer code={systemPrompt} language="markdown" />
-          ) : (
-            <div class="sober-empty-state">
-              <div class="sober-empty-text">No system prompt available</div>
-            </div>
-          )
-        }
-      </div>
-
-      <div class="diagram-view" data-view-content="user-prompt">
-        {
-          isCoT ? (
-            <div
-              class="prompt-container"
-              data-prompt-type="user"
-              data-unique-id={uniqueId}
-            >
-              {viewerAgents.map((agent) => {
-                const prompts = cotUserPromptAttempts[agent] || [];
-                if (!prompts.length) {
-                  return (
-                    <div
-                      class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
-                      data-prompt-type="user"
-                      data-agent-content={agent}
-                      data-attempt-content="1"
-                    >
+        {/* Prompt views */}
+        <div class="diagram-view" data-view-content="system-prompt">
+          {
+            isCoT ? (
+              <div
+                class="prompt-container"
+                data-prompt-type="system"
+                data-unique-id={uniqueId}
+              >
+                {viewerAgents.map((agent) => (
+                  <div
+                    class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
+                    data-prompt-type="system"
+                    data-agent-content={agent}
+                  >
+                    {cotPrompts?.[agent]?.systemPrompt ? (
+                      <CodeViewer
+                        code={cotPrompts[agent].systemPrompt}
+                        language="markdown"
+                      />
+                    ) : (
                       <div class="sober-empty-state">
                         <div class="sober-empty-text">
-                          No user prompt available
+                          No system prompt available
                         </div>
                         <div class="sober-empty-hint">for {agent}</div>
                       </div>
-                    </div>
-                  );
-                }
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : systemPrompt ? (
+              <CodeViewer code={systemPrompt} language="markdown" />
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">No system prompt available</div>
+              </div>
+            )
+          }
+        </div>
 
-                return prompts.map((prompt, index) => (
+        <div class="diagram-view" data-view-content="user-prompt">
+          {
+            isCoT ? (
+              <div
+                class="prompt-container"
+                data-prompt-type="user"
+                data-unique-id={uniqueId}
+              >
+                {viewerAgents.map((agent) => {
+                  const prompts = cotUserPromptAttempts[agent] || [];
+                  if (!prompts.length) {
+                    return (
+                      <div
+                        class={`prompt-content ${agent === defaultAgent ? "active" : ""}`}
+                        data-prompt-type="user"
+                        data-agent-content={agent}
+                        data-attempt-content="1"
+                      >
+                        <div class="sober-empty-state">
+                          <div class="sober-empty-text">
+                            No user prompt available
+                          </div>
+                          <div class="sober-empty-hint">for {agent}</div>
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  return prompts.map((prompt, index) => (
+                    <div
+                      class={`prompt-content ${agent === defaultAgent && index === 0 ? "active" : ""}`}
+                      data-prompt-type="user"
+                      data-agent-content={agent}
+                      data-attempt-content={`${index + 1}`}
+                    >
+                      <CodeViewer code={prompt} language="markdown" />
+                    </div>
+                  ));
+                })}
+              </div>
+            ) : simpleUserPromptAttempts.length ? (
+              <div
+                class="prompt-container"
+                data-prompt-type="user"
+                data-unique-id={uniqueId}
+              >
+                {simpleUserPromptAttempts.map((prompt, index) => (
                   <div
-                    class={`prompt-content ${agent === defaultAgent && index === 0 ? "active" : ""}`}
+                    class={`prompt-content ${index === 0 ? "active" : ""}`}
                     data-prompt-type="user"
-                    data-agent-content={agent}
                     data-attempt-content={`${index + 1}`}
                   >
                     <CodeViewer code={prompt} language="markdown" />
                   </div>
-                ));
-              })}
-            </div>
-          ) : simpleUserPromptAttempts.length ? (
-            <div
-              class="prompt-container"
-              data-prompt-type="user"
-              data-unique-id={uniqueId}
-            >
-              {simpleUserPromptAttempts.map((prompt, index) => (
-                <div
-                  class={`prompt-content ${index === 0 ? "active" : ""}`}
-                  data-prompt-type="user"
-                  data-attempt-content={`${index + 1}`}
-                >
-                  <CodeViewer code={prompt} language="markdown" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div class="sober-empty-state">
-              <div class="sober-empty-text">No user prompt available</div>
-            </div>
-          )
-        }
-      </div>
+                ))}
+              </div>
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">No user prompt available</div>
+              </div>
+            )
+          }
+        </div>
 
-      <div class="diagram-view" data-view-content="shannon-graph">
-        {
-          shannonData?.length ? (
-            <ShannonBars data={shannonData} />
-          ) : (
-            <div class="sober-empty-state">
-              <span class="sober-empty-text">
-                No Shannon Data for this model
-              </span>
-              <span class="sober-empty-hint">
-                Available: AddressBook, Football, MyExpenses, PickupNet,
-                Restaurant, VehicleRental, VideoClub
-              </span>
-            </div>
-          )
-        }
+        <div class="diagram-view" data-view-content="shannon-graph">
+          {
+            shannonData?.length ? (
+              <ShannonBars data={shannonData} />
+            ) : (
+              <div class="sober-empty-state">
+                <span class="sober-empty-text">
+                  No Shannon Data for this model
+                </span>
+                <span class="sober-empty-hint">
+                  Available: AddressBook, Football, MyExpenses, PickupNet,
+                  Restaurant, VehicleRental, VideoClub
+                </span>
+              </div>
+            )
+          }
+        </div>
       </div>
-    </div>
     </div>
   </details>
 

@@ -35,6 +35,8 @@
 
   /* Links */
   --color-link: #0066cc;
+  /* Column widths */
+  --column-min-width: 760px;
 }
 
 html {
@@ -105,6 +107,7 @@ summary.sober-header {
   padding-right: 2rem; /* Make room for custom arrow */
   border: 1px solid transparent;
   border-bottom-color: var(--color-border);
+  width: 100%;
 }
 
 summary.sober-label::-webkit-details-marker,
@@ -199,6 +202,20 @@ details.closing > *:not(summary) {
 
 .content-grid > * {
   min-width: 0;
+}
+
+.content-grid > .section {
+  min-width: calc(var(--column-min-width) + 2px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: clip; /* clip content that bleeds during animation */
+}
+
+@media (max-width: 1024px) {
+  .content-grid > .section {
+    min-width: 0;
+  }
 }
 
 /* Tables */
@@ -451,7 +468,8 @@ details.closing > *:not(summary) {
 .viz-panel {
   display: none;
   padding: 0;
-  min-width: 757px;
+  min-width: var(--column-min-width);
+  box-sizing: border-box;
 }
 
 .viz-panel.active {
@@ -464,7 +482,8 @@ details.closing > *:not(summary) {
   flex-direction: column;
   gap: 0.75rem;
   min-height: 320px;
-  min-width: 757px;
+  min-width: var(--column-min-width);
+  box-sizing: border-box;
 }
 
 .shannon-list {

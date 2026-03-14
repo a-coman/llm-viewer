@@ -75,7 +75,14 @@ import { QUERY_KEYS, QUERY_MODES, QUERY_VIEWS } from "../lib/constants";
 
         // Make sure it doesn't affect standard boxes
         var wasBoxSizing = details.style.boxSizing;
-        details.style.boxSizing = "border-box";
+        var wasWidth = details.style.width;
+        var startWidth = details.getBoundingClientRect().width;
+        
+        // Only set if not already border-box to avoid 1px layout flicker
+        if (getComputedStyle(details).boxSizing !== "border-box") {
+           details.style.boxSizing = "border-box";
+        }
+        details.style.width = startWidth + "px";
 
         if (details.open) {
           // Collapse
@@ -97,6 +104,7 @@ import { QUERY_KEYS, QUERY_MODES, QUERY_VIEWS } from "../lib/constants";
           setTimeout(function() {
             details.removeAttribute("open");
             details.style.height = "";
+            details.style.width = wasWidth;
             details.style.transition = "";
             details.style.overflow = "";
             details.style.boxSizing = wasBoxSizing;
@@ -119,6 +127,7 @@ import { QUERY_KEYS, QUERY_MODES, QUERY_VIEWS } from "../lib/constants";
           
           setTimeout(function() {
             details.style.height = "";
+            details.style.width = wasWidth;
             details.style.transition = "";
             details.style.overflow = "";
             details.style.boxSizing = wasBoxSizing;
