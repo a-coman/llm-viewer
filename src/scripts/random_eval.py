@@ -19,10 +19,48 @@ from urllib.parse import urlencode
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
 TARGET_REALISMS = ("realistic", "unrealistic")
-DEFAULT_PER_BUCKET = 15
+DEFAULT_PER_BUCKET = 18
 DEFAULT_BASE_URL = "https://a-coman.github.io/llm-viewer"
 DEFAULT_REVIEWERS = ("Lola", "Dominik", "Manuel")
 PAGE_COUNT = 3
+OUTPUT_FILE_COUNT = 2
+WORKSHEET_GUIDE_RICH_LINES = (
+    (("Assessing Instances Realism", True),),
+    (
+        ("0. ", True),
+        (
+            "Review the JudgeSystem and JudgeUser prompts to understand the criteria "
+            "used during realism evaluation.",
+            False,
+        ),
+    ),
+    (
+        ("1. ", True),
+        ("Open and review the instance from the hyperlink in the first column.", False),
+    ),
+    (
+        ("2. ", True),
+        ("In your corresponding reviewer column, write ", False),
+        ("'R'", True),
+        (" (realistic), ", False),
+        ("'U'", True),
+        (" (unrealistic), or ", False),
+        ("'D'", True),
+        (" (doubtful).", False),
+    ),
+    (
+        ("3. ", True),
+        ("Add a short explanation only for U or D, for example: ", False),
+        ("'U: It is implausible to make an omelet without eggs.'", True),
+    ),
+    (
+        ("Another valid example: ", False),
+        (
+            "'D: The component name is too generic for this context.'",
+            True,
+        ),
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -75,10 +113,13 @@ def parse_args() -> argparse.Namespace:
         help="Path to judge.json",
     )
     parser.add_argument(
-        "--output",
+        "--output-prefix",
         type=Path,
-        default=script_dir / "random_eval.xlsx",
-        help="Output XLSX file path",
+        default=script_dir / "random_eval",
+        help=(
+            "Output XLSX prefix path. Generates _1.xlsx and _2.xlsx files. "
+            "Default writes random_eval_1.xlsx and random_eval_2.xlsx"
+        ),
     )
     parser.add_argument(
         "--seed",
@@ -92,7 +133,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_PER_BUCKET,
         help=(
             "Number of instances to sample for each model/mode/realism bucket. "
-            "Default 15 creates 120 rows total."
+            "Default 18 creates 144 rows total (12%), split into two 72-row files (6% each)."
         ),
     )
     parser.add_argument(
@@ -377,7 +418,8 @@ def sample_candidates(
                         f"{model_id} / {mode} / {realism}: required {per_bucket}, available {len(pool)}"
                     )
                     continue
-                selected.extend(randomizer.sample(pool, per_bucket))
+                sampled = randomizer.sample(pool, per_bucket)
+                selected.extend(sort_candidates(sampled))
 
     if missing:
         details = "\n".join(missing)
@@ -385,8 +427,69 @@ def sample_candidates(
             f"Not enough candidates to satisfy requested sample:\n{details}"
         )
 
-    randomizer.shuffle(selected)
-    return selected, availability
+    randomized = sort_candidates(selected)
+    randomizer.shuffle(randomized)
+    return randomized, availability
+
+
+def build_output_paths(prefix: Path, file_count: int) -> list[Path]:
+    base_name = prefix.stem if prefix.suffix else prefix.name
+    return [
+        prefix.parent / f"{base_name}_{index}.xlsx"
+        for index in range(1, file_count + 1)
+    ]
+
+
+def split_candidates_into_files(
+    candidates: list[Candidate], seed: int, file_count: int
+) -> list[list[Candidate]]:
+    if file_count <= 0:
+        raise ValueError("File count must be greater than zero.")
+
+    bucket_map: dict[tuple[str, str, str], list[Candidate]] = {}
+    for candidate in sort_candidates(candidates):
+        bucket_map.setdefault(candidate.bucket, []).append(candidate)
+
+    if not bucket_map:
+        raise ValueError("No candidates selected for file splitting.")
+
+    per_bucket = len(next(iter(bucket_map.values())))
+    if per_bucket % file_count != 0:
+        raise ValueError(
+            f"Per-bucket selected count {per_bucket} is not divisible by file count {file_count}."
+        )
+
+    per_file_per_bucket = per_bucket // file_count
+    files: list[list[Candidate]] = [[] for _ in range(file_count)]
+
+    for model_id in TARGET_MODELS:
+        for mode in TARGET_MODES:
+            for realism in TARGET_REALISMS:
+                bucket = (model_id, mode, realism)
+                pool = bucket_map.get(bucket, [])
+                if len(pool) != per_bucket:
+                    raise ValueError(
+                        f"Bucket {model_id} / {mode} / {realism} has {len(pool)} items, expected {per_bucket}."
+                    )
+
+                # Derive a stable per-bucket shuffle from the main seed.
+                bucket_seed = f"{seed}:{model_id}:{mode}:{realism}"
+                bucket_randomizer = random.Random(bucket_seed)
+                bucket_items = list(pool)
+                bucket_randomizer.shuffle(bucket_items)
+
+                for file_index in range(file_count):
+                    start = file_index * per_file_per_bucket
+                    end = start + per_file_per_bucket
+                    files[file_index].extend(bucket_items[start:end])
+
+    for file_index, file_candidates in enumerate(files, start=1):
+        file_randomizer = random.Random(seed + file_index)
+        ordered = sort_candidates(file_candidates)
+        file_randomizer.shuffle(ordered)
+        files[file_index - 1] = ordered
+
+    return files
 
 
 def get_reviewer_orders(reviewers: tuple[str, str, str]) -> list[tuple[str, str, str]]:
@@ -418,19 +521,49 @@ def populate_sheet(
     candidates: list[Candidate],
     reviewers: tuple[str, str, str],
     font_factory: Any,
+    alignment_factory: Any,
+    cell_rich_text_factory: Any,
+    text_block_factory: Any,
+    inline_font_factory: Any,
 ) -> None:
     reviewer_a, reviewer_b, reviewer_c = reviewers
-    sheet.freeze_panes = "A2"
+
+    def build_rich_text(line_parts: tuple[tuple[str, bool], ...]) -> Any:
+        parts: list[Any] = []
+        for text, is_bold in line_parts:
+            if is_bold:
+                parts.append(text_block_factory(inline_font_factory(b=True), text))
+            else:
+                parts.append(text)
+        return cell_rich_text_factory(*parts)
+
+    guide_row = 1
+    for line_parts in WORKSHEET_GUIDE_RICH_LINES:
+        sheet.append(["", "", "", ""])
+        sheet.merge_cells(
+            start_row=guide_row,
+            start_column=1,
+            end_row=guide_row,
+            end_column=4,
+        )
+        guide_cell = sheet[f"A{guide_row}"]
+        guide_cell.value = build_rich_text(line_parts)
+        guide_cell.alignment = alignment_factory(wrap_text=True, vertical="top")
+        guide_row += 1
+
+    sheet.append(["", "", "", ""])
+    header_row = guide_row + 1
+    sheet.freeze_panes = f"A{header_row + 1}"
 
     headers = ("Instance Id", reviewer_a, reviewer_b, reviewer_c)
     sheet.append(headers)
-    for cell in sheet[1]:
+    for cell in sheet[header_row]:
         cell.font = font_factory(bold=True)
 
     for candidate in candidates:
         sheet.append([candidate.instance_id, "", "", ""])
 
-    for row_index, candidate in enumerate(candidates, start=2):
+    for row_index, candidate in enumerate(candidates, start=header_row + 1):
         cell = sheet[f"A{row_index}"]
         cell.hyperlink = candidate.url
         cell.style = "Hyperlink"
@@ -448,8 +581,14 @@ def write_xlsx(
 ) -> None:
     workbook_module = importlib.import_module("openpyxl")
     styles_module = importlib.import_module("openpyxl.styles")
+    rich_text_module = importlib.import_module("openpyxl.cell.rich_text")
+    cell_text_module = importlib.import_module("openpyxl.cell.text")
     workbook = workbook_module.Workbook()
     font_factory = styles_module.Font
+    alignment_factory = styles_module.Alignment
+    cell_rich_text_factory = rich_text_module.CellRichText
+    text_block_factory = rich_text_module.TextBlock
+    inline_font_factory = cell_text_module.InlineFont
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     reviewer_orders = get_reviewer_orders(reviewers)
@@ -467,7 +606,16 @@ def write_xlsx(
             sheet = workbook.create_sheet()
 
         sheet.title = f"Page {index}"
-        populate_sheet(sheet, page_candidates, reviewer_order, font_factory)
+        populate_sheet(
+            sheet,
+            page_candidates,
+            reviewer_order,
+            font_factory,
+            alignment_factory,
+            cell_rich_text_factory,
+            text_block_factory,
+            inline_font_factory,
+        )
 
     workbook.save(output_path)
 
@@ -488,12 +636,12 @@ def count_by_bucket(candidates: list[Candidate]) -> dict[tuple[str, str, str], i
 
 
 def print_page_breakdown(
-    selected: list[Candidate], reviewers: tuple[str, str, str]
+    selected: list[Candidate], reviewers: tuple[str, str, str], label: str
 ) -> None:
     reviewer_orders = get_reviewer_orders(reviewers)
     paged_candidates = split_candidates_into_pages(selected, len(reviewer_orders))
 
-    print("Output breakdown:")
+    print(f"{label} breakdown:")
     print(f"- Total rows in XLSX: {len(selected)}")
     print(f"- Pages: {len(paged_candidates)}")
     print(f"- Rows per page: {len(paged_candidates[0]) if paged_candidates else 0}")
@@ -521,6 +669,28 @@ def print_page_breakdown(
         print(f"  models: {model_counts}")
         print(f"  modes: {mode_counts}")
         print(f"  realism: {realism_counts}")
+
+
+def print_file_breakdown(
+    output_paths: list[Path],
+    file_candidates: list[list[Candidate]],
+    reviewers: tuple[str, str, str],
+) -> None:
+    print("File split summary:")
+    for index, (path, candidates) in enumerate(
+        zip(output_paths, file_candidates, strict=True), start=1
+    ):
+        print(f"- File {index}: {path}")
+        print(f"  rows: {len(candidates)}")
+        bucket_counts = count_by_bucket(candidates)
+        for model_id in TARGET_MODELS:
+            for mode in TARGET_MODES:
+                for realism in TARGET_REALISMS:
+                    bucket = (model_id, mode, realism)
+                    print(
+                        f"  {model_id} / {mode} / {realism}: {bucket_counts.get(bucket, 0)}"
+                    )
+        print_page_breakdown(candidates, reviewers, label=f"File {index}")
 
 
 def print_summary(
@@ -556,10 +726,20 @@ def main() -> int:
         seed=args.seed,
         per_bucket=args.per_bucket,
     )
-    write_xlsx(args.output, selected, cast(tuple[str, str, str], reviewers))
+    split_files = split_candidates_into_files(
+        selected, seed=args.seed, file_count=OUTPUT_FILE_COUNT
+    )
+    output_paths = build_output_paths(args.output_prefix, OUTPUT_FILE_COUNT)
+    for path, file_candidates in zip(output_paths, split_files, strict=True):
+        write_xlsx(path, file_candidates, cast(tuple[str, str, str], reviewers))
+
     print_summary(selected, availability, args.per_bucket)
-    print_page_breakdown(selected, cast(tuple[str, str, str], reviewers))
-    print(f"Wrote spreadsheet to: {args.output}")
+    print_file_breakdown(
+        output_paths, split_files, cast(tuple[str, str, str], reviewers)
+    )
+    print("Wrote spreadsheets to:")
+    for path in output_paths:
+        print(f"- {path}")
     return 0
 
 
