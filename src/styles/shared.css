@@ -36,7 +36,7 @@
   /* Links */
   --color-link: #0066cc;
   /* Column widths */
-  --column-min-width: 760px;
+  --column-min-width: 780px;
 }
 
 html {
@@ -96,7 +96,6 @@ html {
   box-sizing: border-box;
   flex-shrink: 0;
 }
-
 
 summary.sober-label,
 summary.sober-header {
@@ -193,7 +192,7 @@ details.closing > *:not(summary) {
 /* Content Grid */
 .content-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: calc(var(--column-min-width) + 2px) minmax(0, 1fr);
   gap: 1.5rem;
   margin-bottom: 2rem;
   align-items: start;
