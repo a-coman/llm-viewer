@@ -70,6 +70,7 @@ interface Props {
   };
   isInvalidCategory?: boolean;
   priceRange?: { green: number; red: number };
+  defaultExpanded?: boolean;
 }
 
 const {
@@ -85,6 +86,7 @@ const {
   },
   isInvalidCategory = false,
   priceRange = COLOR_RANGES.price.summary,
+  defaultExpanded = true,
 } = Astro.props;
 
 function getDisplayValue(
@@ -195,19 +197,19 @@ const judgePrice = judge?.price;
 const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
 ---
 
-<div class="metrics-panel">
-  {title && <h2 class="sober-header">{title}</h2>}
+<details class="metrics-panel" open={defaultExpanded}>
+  {title && <summary class="sober-header panel-header">{title}</summary>}
 
   {
     showSections.cost &&
       (price !== undefined ||
         metrics?.cost !== undefined ||
         elapsedSeconds !== undefined) && (
-        <div class="metric-section">
-          <h3 class="sober-label">
+        <details class="metric-section metric-panel-details" open={defaultExpanded}>
+          <summary class="sober-label">
             Stats
             <Tooltip metricType="cost" />
-          </h3>
+          </summary>
 
           <table class="metrics-table">
             <tbody>
@@ -232,17 +234,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
               )}
             </tbody>
           </table>
-        </div>
+        </details>
       )
   }
 
   {
     showSections.validation && (
-      <div class="metric-section">
-        <h3 class="sober-label">
+      <details class="metric-section metric-panel-details" open={defaultExpanded}>
+        <summary class="sober-label">
           Validation
           <Tooltip metricType="validation" />
-        </h3>
+        </summary>
 
         <table class="metrics-table">
           <tbody>
@@ -260,17 +262,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             })}
           </tbody>
         </table>
-      </div>
+      </details>
     )
   }
 
   {
     showSections.diversity && div && (
-      <div class="metric-section">
-        <h3 class="sober-label">
+      <details class="metric-section metric-panel-details" open={defaultExpanded}>
+        <summary class="sober-label">
           Diversity
           <Tooltip metricType="diversity" />
-        </h3>
+        </summary>
 
         <table class="metrics-table">
           <tbody>
@@ -330,17 +332,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             )}
           </tbody>
         </table>
-      </div>
+      </details>
     )
   }
 
   {
     showSections.coverage && cov && (
-      <div class="metric-section">
-        <h3 class="sober-label">
+      <details class="metric-section metric-panel-details" open={defaultExpanded}>
+        <summary class="sober-label">
           Coverage
           <Tooltip metricType="coverage" />
-        </h3>
+        </summary>
 
         <table class="metrics-table">
           <tbody>
@@ -356,17 +358,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             })}
           </tbody>
         </table>
-      </div>
+      </details>
     )
   }
 
   {
     showSections.instantiation && inst && (
-      <div class="metric-section">
-        <h3 class="sober-label">
+      <details class="metric-section metric-panel-details" open={defaultExpanded}>
+        <summary class="sober-label">
           Instantiation
           <Tooltip metricType="instantiation" />
-        </h3>
+        </summary>
 
         <table class="metrics-table">
           <tbody>
@@ -385,17 +387,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             })}
           </tbody>
         </table>
-      </div>
+      </details>
     )
   }
 
   {
     showSections.quality && judge && (
-      <div class="metric-section">
-        <h3 class="sober-label">
+      <details class="metric-section metric-panel-details" open={defaultExpanded}>
+        <summary class="sober-label">
           Quality
           <Tooltip metricType="realism" />
-        </h3>
+        </summary>
 
         <table class="metrics-table">
           <tbody>
@@ -421,10 +423,10 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             )}
           </tbody>
         </table>
-      </div>
+      </details>
     )
   }
-</div>
+</details>
 
 <style>
   .metrics-panel {

@@ -63,8 +63,7 @@ html {
 }
 
 /* Standard Headers and Labels */
-.sober-header,
-.section h2 {
+.sober-header {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-primary);
@@ -80,8 +79,7 @@ html {
   box-sizing: border-box;
 }
 
-.sober-label,
-.section h3 {
+.sober-label {
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--color-secondary);
@@ -94,8 +92,46 @@ html {
   box-sizing: border-box;
 }
 
-.section h3:first-of-type {
-  border-top: none;
+
+summary.sober-label,
+summary.sober-header {
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Hide default arrow */
+  position: relative;
+  padding-right: 2rem; /* Make room for custom arrow */
+  border: 1px solid transparent;
+  border-bottom-color: var(--color-border);
+}
+
+summary.sober-label::-webkit-details-marker,
+summary.sober-header::-webkit-details-marker {
+  display: none;
+}
+
+summary.sober-label::after,
+summary.sober-header::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.55rem;
+  color: var(--color-secondary);
+}
+
+details[open] > summary.sober-label::after,
+details[open] > summary.sober-header::after {
+  content: "▲";
+  transform: translateY(-50%);
+}
+
+summary.sober-label:hover,
+summary.sober-header:hover {
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent) !important;
+  color: var(--color-primary);
+  z-index: 10;
 }
 
 /* Error State */

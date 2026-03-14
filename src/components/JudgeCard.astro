@@ -2,9 +2,10 @@
 interface Props {
   response?: "Realistic" | "Unrealistic" | "Unknown" | "Doubtful" | string;
   why?: string;
+  defaultExpanded?: boolean;
 }
 
-const { response = "Unknown", why } = Astro.props;
+const { response = "Unknown", why, defaultExpanded = false } = Astro.props;
 
 // Normalize response casing for comparison (handles lowercase from JSON)
 const normalizedResponse = response?.toLowerCase() || "unknown";
@@ -22,20 +23,24 @@ const displayResponse = response
   : "Unknown";
 ---
 
-<div class="judge-card">
-  <div class="sober-header">
+<details class="judge-card" open={defaultExpanded}>
+  <summary class="sober-header judge-summary">
     <span class="title">LLM as a Judge</span>
-    <span class={`badge ${badgeClass}`}>{displayResponse}</span>
-  </div>
+  </summary>
 
-  {
-    why && (
-      <div class="why">
-        <p class="why-text">{why}</p>
-      </div>
-    )
-  }
-</div>
+  <div class="judge-content">
+    <div class="badge-wrapper">
+      <span class={`badge ${badgeClass}`}>{displayResponse}</span>
+    </div>
+    {
+      why && (
+        <div class="why">
+          <p class="why-text">{why}</p>
+        </div>
+      )
+    }
+  </div>
+</details>
 
 <style>
   .judge-card {
@@ -45,8 +50,23 @@ const displayResponse = response
     flex-direction: column;
   }
 
-  .sober-header {
+  .judge-summary {
+    cursor: pointer;
+    user-select: none;
     justify-content: space-between;
+  }
+
+  .judge-summary:hover {
+    background: var(--color-surface);
+  }
+
+  .judge-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-wrapper {
+    padding: 0.75rem 1rem 0 1rem;
   }
 
   .badge {
