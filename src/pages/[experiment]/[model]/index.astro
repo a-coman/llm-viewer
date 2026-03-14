@@ -57,8 +57,9 @@ const modelPanelSections = {
       <>
         <div class="tab-content active" data-content="simple">
           <div class="content-grid">
-            <section class="section">
-              <div class="diagram-header sober-header">
+            <details class="section" open>
+              <summary class="sober-header">GED / Shannon</summary>
+              <div class="diagram-header sober-label">
                 <div class="viz-switch" data-viz-switch>
                   <button
                     class="viz-btn active"
@@ -102,7 +103,7 @@ const modelPanelSections = {
                   </div>
                 )}
               </div>
-            </section>
+            </details>
 
             <div class="metrics-column">
               <MetricsPanel
@@ -131,8 +132,9 @@ const modelPanelSections = {
 
         <div class="tab-content" data-content="cot">
           <div class="content-grid">
-            <section class="section">
-              <div class="diagram-header sober-header">
+            <details class="section" open>
+              <summary class="sober-header">GED / Shannon</summary>
+              <div class="diagram-header sober-label">
                 <div class="viz-switch" data-viz-switch>
                   <button
                     class="viz-btn active"
@@ -176,7 +178,7 @@ const modelPanelSections = {
                   </div>
                 )}
               </div>
-            </section>
+            </details>
 
             <div class="metrics-column">
               <MetricsPanel
@@ -249,7 +251,7 @@ const modelPanelSections = {
     );
 
     document.querySelectorAll("[data-viz-switch]").forEach((switchRoot) => {
-      const root = switchRoot.closest("section");
+      const root = switchRoot.closest(".section");
       if (!root) return;
 
       const buttons = switchRoot.querySelectorAll("[data-viz-target]");
@@ -303,6 +305,9 @@ const modelPanelSections = {
     .content-grid {
       grid-template-columns: 1fr;
     }
+    .content-grid > .section {
+      min-width: 0;
+    }
   }
 
   .content-grid > .section {
@@ -311,6 +316,7 @@ const modelPanelSections = {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    min-width: 757px;
   }
 
   .content-grid > * {

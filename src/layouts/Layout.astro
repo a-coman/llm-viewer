@@ -58,6 +58,75 @@ import { QUERY_KEYS, QUERY_MODES, QUERY_VIEWS } from "../lib/constants";
         return false;
       };
     </script>
+    <script is:inline>
+      document.addEventListener("click", function(e) {
+        var summary = e.target.closest("summary");
+        if (!summary) return;
+        var details = summary.parentElement;
+        if (!details || details.tagName !== "DETAILS") return;
+
+        e.preventDefault();
+
+        // Prevent overlapping clicks while animating
+        if (details.classList.contains("is-animating")) return;
+        details.classList.add("is-animating");
+
+        var DURATION = 100; // ms
+
+        // Make sure it doesn't affect standard boxes
+        var wasBoxSizing = details.style.boxSizing;
+        details.style.boxSizing = "border-box";
+
+        if (details.open) {
+          // Collapse
+          details.style.overflow = "hidden";
+          var startHeight = details.offsetHeight;
+
+          details.removeAttribute("open");
+          var endHeight = details.offsetHeight;
+          details.setAttribute("open", "");
+
+          details.classList.add("closing"); // Trigger CSS fade out
+
+          details.style.height = startHeight + "px";
+          details.offsetHeight; // force reflow
+
+          details.style.transition = "height " + DURATION + "ms ease-out";
+          details.style.height = endHeight + "px";
+
+          setTimeout(function() {
+            details.removeAttribute("open");
+            details.style.height = "";
+            details.style.transition = "";
+            details.style.overflow = "";
+            details.style.boxSizing = wasBoxSizing;
+            details.classList.remove("closing");
+            details.classList.remove("is-animating");
+          }, DURATION);
+        } else {
+          // Expand
+          var startHeight = details.offsetHeight;
+
+          details.setAttribute("open", "");
+          var endHeight = details.offsetHeight;
+          
+          details.style.overflow = "hidden";
+          details.style.height = startHeight + "px";
+          details.offsetHeight; // force reflow
+          
+          details.style.transition = "height " + DURATION + "ms ease-out";
+          details.style.height = endHeight + "px";
+          
+          setTimeout(function() {
+            details.style.height = "";
+            details.style.transition = "";
+            details.style.overflow = "";
+            details.style.boxSizing = wasBoxSizing;
+            details.classList.remove("is-animating");
+          }, DURATION);
+        }
+      });
+    </script>
     <slot />
   </body>
 </html>
