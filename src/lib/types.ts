@@ -295,6 +295,12 @@ export interface CoverageItem {
   relationships: number;
 }
 
+export interface CoverageUncovered {
+  classes: string[];
+  attributes: string[];
+  relationships: string[];
+}
+
 export interface InstantiationValueItem {
   value: number;
   total: number | null;
@@ -309,6 +315,7 @@ export interface InstantiationItem {
 export interface CoverageMetrics {
   coverage: CoverageItem;
   instantiation: InstantiationItem;
+  uncovered: CoverageUncovered;
 }
 
 export interface ModelMetrics {

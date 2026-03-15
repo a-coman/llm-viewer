@@ -326,9 +326,16 @@ const EMPTY_INSTANTIATION: InstantiationItem = {
   relationships: { ...EMPTY_INSTANTIATION_VALUE },
 };
 
+const EMPTY_COVERAGE_UNCOVERED = {
+  classes: [] as string[],
+  attributes: [] as string[],
+  relationships: [] as string[],
+};
+
 const EMPTY_COVERAGE_METRICS: CoverageMetrics = {
   coverage: { ...EMPTY_COVERAGE },
   instantiation: { ...EMPTY_INSTANTIATION },
+  uncovered: { ...EMPTY_COVERAGE_UNCOVERED },
 };
 
 // Helper functions to transform raw coverage data to display format
@@ -380,6 +387,14 @@ function rawInstantiationToDisplay(
   };
 }
 
+function rawCoverageUncoveredToDisplay(raw?: Partial<RawCoverageData> | null) {
+  return {
+    classes: raw?.classes?.uncovered || [],
+    attributes: raw?.attributes?.uncovered || [],
+    relationships: raw?.relationships?.uncovered || [],
+  };
+}
+
 function getCoverageMetrics(
   raw:
     | {
@@ -395,6 +410,7 @@ function getCoverageMetrics(
   return {
     coverage: rawCoverageToDisplay(raw.coverage),
     instantiation: rawInstantiationToDisplay(raw.instantiation),
+    uncovered: rawCoverageUncoveredToDisplay(raw.coverage),
   };
 }
 
