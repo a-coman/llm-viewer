@@ -109,6 +109,7 @@ def parse_judge_logs(logs_path, exp_type):
         content = f.read()
 
     result = {}
+    all_entries = []
     system_prompt = None  # System prompt is the same for all generations
 
     def get_next_section_end(matches, index, content):
@@ -163,6 +164,17 @@ def parse_judge_logs(logs_path, exp_type):
             model_match = re.search(r"Model: ([^\n]+)", block)
             model_name = model_match.group(1).strip() if model_match else "unknown"
 
+            all_entries.append(
+                {
+                    "exp_type": "cot",
+                    "domain_name": domain_name,
+                    "gen_id": gen_id,
+                    "category": category,
+                    "user_prompt": user_prompt,
+                    "model": model_name,
+                }
+            )
+
             if domain_name is None:
                 if gen_id not in result:
                     result[gen_id] = {}
@@ -211,9 +223,126 @@ def parse_judge_logs(logs_path, exp_type):
             model_match = re.search(r"Model: ([^\n]+)", block)
             model_name = model_match.group(1).strip() if model_match else "unknown"
 
+            all_entries.append(
+                {
+                    "exp_type": "simple",
+                    "domain_name": None,
+                    "gen_id": gen_id,
+                    "category": None,
+                    "user_prompt": user_prompt,
+                    "model": model_name,
+                }
+            )
+
             result[gen_id] = {"user_prompt": user_prompt, "model": model_name}
 
+    result["__all_entries__"] = all_entries
     return result, system_prompt
+
+
+def extract_object_model_block(text):
+    """Extract the raw object model body from a full judge prompt."""
+    if not text:
+        return ""
+
+    match = re.search(r"<object_model>\s*(.*?)\s*</object_model>", text, re.DOTALL)
+    if not match:
+        return ""
+
+    return match.group(1).strip()
+
+
+def normalize_text_for_match(text):
+    """Normalize text for robust matching across minor formatting differences."""
+    if not text:
+        return ""
+
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n").strip()
+    return re.sub(r"\s+", " ", normalized).strip().lower()
+
+
+def get_simple_generation_last_response(generations_data, gen_id):
+    """Get the last attempt response for a Simple generation."""
+    for generation in generations_data:
+        if str(generation.get("id")) != str(gen_id):
+            continue
+
+        attempts = generation.get("attempts", [])
+        if not attempts:
+            return ""
+
+        return (attempts[-1].get("response") or "").strip()
+
+    return ""
+
+
+def get_cot_generation_last_response(generations_data, gen_id, category):
+    """Get the last attempt response for a CoT generation/category."""
+    for generation in generations_data:
+        if str(generation.get("id")) != str(gen_id):
+            continue
+
+        for cat in generation.get("categories", []):
+            if (cat.get("name") or "").lower() != (category or "").lower():
+                continue
+
+            attempts = cat.get("IListInstantiator", {}).get("attempts", [])
+            if not attempts:
+                return ""
+
+            return (attempts[-1].get("response") or "").strip()
+
+    return ""
+
+
+def find_prompt_by_object_model(
+    logs_data,
+    exp_type,
+    gen_id,
+    expected_object_model,
+    category=None,
+    domain_name=None,
+):
+    """
+    Resolve the correct judge input prompt by matching its <object_model> body
+    against the generation's last attempt response from logs.json.
+    """
+    all_entries = logs_data.get("__all_entries__", [])
+    if not all_entries or not expected_object_model:
+        return ""
+
+    expected_norm = normalize_text_for_match(expected_object_model)
+    matches = []
+
+    for entry in all_entries:
+        if entry.get("exp_type") != exp_type:
+            continue
+        if str(entry.get("gen_id")) != str(gen_id):
+            continue
+
+        if exp_type == "cot":
+            if (entry.get("category") or "").lower() != (category or "").lower():
+                continue
+
+            # If domain is provided in header, keep it as additional guard.
+            if (
+                domain_name
+                and entry.get("domain_name")
+                and (entry.get("domain_name") or "").lower() != domain_name.lower()
+            ):
+                continue
+
+        prompt_object_model = extract_object_model_block(entry.get("user_prompt", ""))
+        if not prompt_object_model:
+            continue
+
+        if normalize_text_for_match(prompt_object_model) == expected_norm:
+            matches.append(entry)
+
+    if len(matches) == 1:
+        return matches[0].get("user_prompt", "")
+
+    return ""
 
 
 def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
@@ -704,10 +833,25 @@ def build_judge_json(
                 reasoning = cat_data.get("why", "")
 
                 # Get judge prompt from logs if available
-                judge_prompt = ""
-                log_entry = get_cot_log_entry(logs_data, domain_name, gen_id, cat_name)
-                if log_entry:
-                    judge_prompt = log_entry.get("user_prompt", "")
+                expected_object_model = get_cot_generation_last_response(
+                    generations_data, gen_id, cat_name
+                )
+                judge_prompt = find_prompt_by_object_model(
+                    logs_data,
+                    exp_type="cot",
+                    gen_id=gen_id,
+                    expected_object_model=expected_object_model,
+                    category=cat_name,
+                    domain_name=domain_name,
+                )
+
+                if not judge_prompt:
+                    # Fallback for legacy/partial bundles where matching is unavailable.
+                    log_entry = get_cot_log_entry(
+                        logs_data, domain_name, gen_id, cat_name
+                    )
+                    if log_entry:
+                        judge_prompt = log_entry.get("user_prompt", "")
 
                 attempt_id = get_attempt_id_for_generation(
                     generations_data, gen_id, cat_name
@@ -775,8 +919,18 @@ def build_judge_json(
             reasoning = gen_data.get("why", "")
 
             # Get judge prompt from logs if available
-            judge_prompt = ""
-            if gen_id in logs_data:
+            expected_object_model = get_simple_generation_last_response(
+                generations_data, gen_id
+            )
+            judge_prompt = find_prompt_by_object_model(
+                logs_data,
+                exp_type="simple",
+                gen_id=gen_id,
+                expected_object_model=expected_object_model,
+            )
+
+            if not judge_prompt and gen_id in logs_data:
+                # Fallback for legacy/partial bundles where matching is unavailable.
                 judge_prompt = logs_data[gen_id].get("user_prompt", "")
 
             attempt_id = get_attempt_id_for_generation(generations_data, gen_id)
