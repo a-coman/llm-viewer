@@ -94,6 +94,10 @@ const {
   defaultExpanded = true,
 } = Astro.props;
 
+function shouldInvertInvalidMetric(metricKey: string): boolean {
+  return metricKey === "multiplicities" || metricKey === "invariants";
+}
+
 function getDisplayValue(
   val: any,
   type: "percent" | "count" | "currency" = "percent",
@@ -111,9 +115,10 @@ function getDisplayValue(
 
   if (typeof val === "object" && "errors" in val) {
     const hasErrors = val.errors > 0;
-    // For "invalid" category: only multiplicities and invariants are inverted
-    // (errors expected = green), syntax stays normal (no errors = green)
-    const shouldInvert = isInvalidCategory && metricKey !== "syntax";
+    // For "invalid" category: only multiplicities/invariants are inverted
+    // (errors expected = green), all other metrics stay normal.
+    const shouldInvert =
+      isInvalidCategory && shouldInvertInvalidMetric(metricKey);
     const isGood = shouldInvert ? hasErrors : !hasErrors;
     return {
       text: `${val.errors}/${val.total}`,
@@ -124,9 +129,10 @@ function getDisplayValue(
   if (typeof val === "number") {
     if (type === "count")
       return { text: Math.round(val).toString(), style: "" };
-    // For percentages: use gradient (green = 100%, red = 0%)
-    // For invalid category multiplicities/invariants: inverted
-    const shouldInvert = isInvalidCategory && metricKey !== "syntax";
+    // For percentages: use gradient (green = 100%, red = 0%).
+    // In invalid category, invert only multiplicities/invariants.
+    const shouldInvert =
+      isInvalidCategory && shouldInvertInvalidMetric(metricKey);
     const colorVal = shouldInvert ? 1 - val : val;
     return {
       text: formatPercent(val),
