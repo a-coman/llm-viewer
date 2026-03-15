@@ -90,6 +90,8 @@ const hasCotData = genNum <= SIMPLE_GEN_COUNT && !!cotData;
             classDiagramUseCode={classDiagramUseCode}
             systemPrompt={simpleData?.systemPrompt}
             userPrompts={simpleData?.userPrompts}
+            judgeSystemPrompt={simpleData?.judgeSystemPrompt}
+            judgeUserPrompts={simpleData?.judgeUserPrompts}
           />
         </div>
 
@@ -120,7 +122,7 @@ const hasCotData = genNum <= SIMPLE_GEN_COUNT && !!cotData;
 </PageLayout>
 
 <script>
-  import { QUERY_MODES } from "../../../lib/constants";
+  import { QUERY_MODES, QUERY_AGENTS } from "../../../lib/constants";
   import { getViewerState, applyViewerQueryToUrl } from "../../../lib/query";
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -138,6 +140,47 @@ const hasCotData = genNum <= SIMPLE_GEN_COUNT && !!cotData;
     const initialCategory = initialState.category;
 
     function setTab(tabName: string) {
+      const previousState = getViewerState(window.location.search);
+      const overrides: {
+        mode: (typeof QUERY_MODES)[keyof typeof QUERY_MODES];
+        view?: string;
+        agent?: string;
+      } = {
+        mode: tabName as (typeof QUERY_MODES)[keyof typeof QUERY_MODES],
+      };
+
+      // Preserve judge prompt context across mode switches:
+      // Simple Judge_System/User_Judge <-> CoT System/User + agent=Judge
+      if (
+        previousState.mode === QUERY_MODES.simple &&
+        tabName === QUERY_MODES.cot
+      ) {
+        if (previousState.view === "system-judge-prompt") {
+          overrides.view = "system-prompt";
+          overrides.agent = QUERY_AGENTS.judge;
+        } else if (previousState.view === "user-judge-prompt") {
+          overrides.view = "user-prompt";
+          overrides.agent = QUERY_AGENTS.judge;
+        }
+      }
+
+      if (
+        previousState.mode === QUERY_MODES.cot &&
+        tabName === QUERY_MODES.simple
+      ) {
+        if (
+          previousState.agent === QUERY_AGENTS.judge &&
+          previousState.view === "system-prompt"
+        ) {
+          overrides.view = "system-judge-prompt";
+        } else if (
+          previousState.agent === QUERY_AGENTS.judge &&
+          previousState.view === "user-prompt"
+        ) {
+          overrides.view = "user-judge-prompt";
+        }
+      }
+
       document.documentElement.setAttribute("data-mode", tabName);
       modeBtns.forEach((btn) =>
         btn.classList.toggle(
@@ -159,9 +202,7 @@ const hasCotData = genNum <= SIMPLE_GEN_COUNT && !!cotData;
       );
 
       const url = new URL(window.location.href);
-      applyViewerQueryToUrl(url, {
-        mode: tabName as (typeof QUERY_MODES)[keyof typeof QUERY_MODES],
-      });
+      applyViewerQueryToUrl(url, overrides);
       window.history.replaceState({}, "", url.toString());
       window.dispatchEvent(new CustomEvent("sync-gen-view"));
     }

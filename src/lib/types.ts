@@ -459,6 +459,14 @@ export interface SimpleJudgeGeneration {
 export interface CoTJudgeCategory {
   name: "baseline" | "boundary" | "complex" | "edge" | "invalid";
   attempt_id: string;
+  judge_prompt?: string;
+  judge_response?: string;
+  stats?: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+    time_seconds: number;
+  };
   realism: RealismCounts | JudgeGenerationRealism;
 }
 
@@ -548,6 +556,8 @@ export interface SimpleGeneration {
   };
   systemPrompt: string;
   userPrompts: string[];
+  judgeSystemPrompt?: string;
+  judgeUserPrompts?: string[];
 }
 
 export interface CoTGeneration {
@@ -574,6 +584,7 @@ export interface CotPromptsData {
   IModelAnalyzer: AgentPrompts;
   IListCreator: AgentPrompts;
   IListInstantiator: AgentPrompts;
+  Judge: AgentPrompts;
 }
 
 export interface ModelData {

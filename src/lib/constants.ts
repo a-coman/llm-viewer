@@ -34,6 +34,7 @@ export const QUERY_AGENTS = {
   modelAnalyzer: "IModelAnalyzer",
   listCreator: "IListCreator",
   listInstantiator: "IListInstantiator",
+  judge: "Judge",
 } as const;
 
 export const QUERY_VIEWS = {

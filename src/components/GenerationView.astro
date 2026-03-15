@@ -22,6 +22,8 @@ interface Props {
   classDiagramUseCode?: string;
   systemPrompt?: string;
   userPrompts?: string[];
+  judgeSystemPrompt?: string;
+  judgeUserPrompts?: string[];
   cotPrompts?: CotPromptsData;
 }
 
@@ -33,6 +35,8 @@ const {
   classDiagramUseCode = "",
   systemPrompt = "",
   userPrompts = [],
+  judgeSystemPrompt = "",
+  judgeUserPrompts = [],
   cotPrompts,
 } = Astro.props;
 const uniqueId = Math.random().toString(36).substring(2, 9);
@@ -48,6 +52,9 @@ const viewerAgents = Object.values(QUERY_AGENTS);
 // Determine if we're in CoT mode
 const isCoT = !!label && !!cotPrompts;
 const simpleUserPromptAttempts = userPrompts
+  .map((prompt) => (prompt || "").trim())
+  .filter((prompt) => prompt.length > 0);
+const simpleJudgeUserPromptAttempts = judgeUserPrompts
   .map((prompt) => (prompt || "").trim())
   .filter((prompt) => prompt.length > 0);
 const cotUserPromptAttempts = viewerAgents.reduce(
@@ -67,7 +74,10 @@ const maxPromptAttempts = isCoT
       0,
       ...viewerAgents.map((agent) => cotUserPromptAttempts[agent]?.length || 0),
     )
-  : simpleUserPromptAttempts.length;
+  : Math.max(
+      simpleUserPromptAttempts.length,
+      simpleJudgeUserPromptAttempts.length,
+    );
 ---
 
 <div class="content-grid">
@@ -106,8 +116,21 @@ const maxPromptAttempts = isCoT
               >Prompt</button
             >
             <select class="group-select" data-select="prompt">
-              <option value="system-prompt">System</option>
-              <option value="user-prompt">User</option>
+              {
+                isCoT ? (
+                  <>
+                    <option value="system-prompt">System</option>
+                    <option value="user-prompt">User</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="system-prompt">System</option>
+                    <option value="user-prompt">User</option>
+                    <option value="system-judge-prompt">System_Judge</option>
+                    <option value="user-judge-prompt">User_Judge</option>
+                  </>
+                )
+              }
             </select>
             {
               isCoT && (
@@ -120,6 +143,9 @@ const maxPromptAttempts = isCoT
                   </option>
                   <option value={QUERY_AGENTS.listInstantiator}>
                     {QUERY_AGENTS.listInstantiator}
+                  </option>
+                  <option value={QUERY_AGENTS.judge}>
+                    {QUERY_AGENTS.judge}
                   </option>
                 </select>
               )
@@ -296,6 +322,48 @@ const maxPromptAttempts = isCoT
           }
         </div>
 
+        <div class="diagram-view" data-view-content="system-judge-prompt">
+          {
+            judgeSystemPrompt ? (
+              <CodeViewer code={judgeSystemPrompt} language="markdown" />
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">
+                  No judge system prompt available
+                </div>
+              </div>
+            )
+          }
+        </div>
+
+        <div class="diagram-view" data-view-content="user-judge-prompt">
+          {
+            simpleJudgeUserPromptAttempts.length ? (
+              <div
+                class="prompt-container"
+                data-prompt-type="user-judge"
+                data-unique-id={uniqueId}
+              >
+                {simpleJudgeUserPromptAttempts.map((prompt, index) => (
+                  <div
+                    class={`prompt-content ${index === 0 ? "active" : ""}`}
+                    data-prompt-type="user-judge"
+                    data-attempt-content={`${index + 1}`}
+                  >
+                    <CodeViewer code={prompt} language="markdown" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div class="sober-empty-state">
+                <div class="sober-empty-text">
+                  No judge user prompt available
+                </div>
+              </div>
+            )
+          }
+        </div>
+
         <div class="diagram-view" data-view-content="shannon-graph">
           {
             shannonData?.length ? (
@@ -356,10 +424,28 @@ const maxPromptAttempts = isCoT
       return "instance";
     }
 
-    function getAttemptsForAgent(agentName: string): string[] {
+    function getPromptTypeForView(viewName: string): "user" | "user-judge" {
+      return viewName === "user-judge-prompt" ? "user-judge" : "user";
+    }
+
+    function getAttemptsForAgent(
+      agentName: string,
+      promptType: "user" | "user-judge",
+    ): string[] {
       const activeTab = document.querySelector(".tab-content.active");
       const activeCategory = activeTab?.querySelector(".cat-content.active");
       const scopeRoot = activeCategory || activeTab || document;
+
+      if (promptType === "user-judge") {
+        return Array.from(
+          scopeRoot.querySelectorAll(
+            ".prompt-content[data-prompt-type='user-judge']",
+          ),
+        )
+          .map((el) => el.getAttribute("data-attempt-content") || "1")
+          .filter((attempt, idx, all) => all.indexOf(attempt) === idx)
+          .sort((a, b) => Number(a) - Number(b));
+      }
 
       const cotAttempts = Array.from(
         scopeRoot.querySelectorAll(
@@ -383,14 +469,15 @@ const maxPromptAttempts = isCoT
     }
 
     function syncAttemptSelector() {
-      const availableAttempts = getAttemptsForAgent(currentAgent);
+      const promptType = getPromptTypeForView(currentView);
+      const availableAttempts = getAttemptsForAgent(currentAgent, promptType);
       const attemptSelectors = document.querySelectorAll(
         "[data-select='attempt']",
       ) as NodeListOf<HTMLSelectElement>;
       if (!attemptSelectors.length) return;
 
       const options =
-        currentView === "user-prompt"
+        currentView === "user-prompt" || currentView === "user-judge-prompt"
           ? availableAttempts.length
             ? availableAttempts
             : ["1"]
@@ -398,7 +485,7 @@ const maxPromptAttempts = isCoT
 
       if (!options.includes(currentAttempt)) {
         currentAttempt =
-          currentView === "user-prompt"
+          currentView === "user-prompt" || currentView === "user-judge-prompt"
             ? options[options.length - 1] || "1"
             : "1";
       }
@@ -416,7 +503,7 @@ const maxPromptAttempts = isCoT
         const promptType = content.getAttribute("data-prompt-type");
         const contentAgent = content.getAttribute("data-agent-content");
 
-        if (promptType === "user") {
+        if (promptType === "user" || promptType === "user-judge") {
           const attempt = content.getAttribute("data-attempt-content") || "1";
           const matchesAgent = contentAgent
             ? contentAgent === currentAgent
@@ -439,7 +526,10 @@ const maxPromptAttempts = isCoT
       const previousView = currentView;
       currentView = viewName;
 
-      if (viewName === "user-prompt" && previousView !== "user-prompt") {
+      if (
+        (viewName === "user-prompt" || viewName === "user-judge-prompt") &&
+        previousView !== viewName
+      ) {
         currentAttempt = "";
       }
 
@@ -550,6 +640,9 @@ const maxPromptAttempts = isCoT
 
     // When outer navigation changes (mode/category), re-default to latest attempt
     window.addEventListener("sync-gen-view", () => {
+      const nextState = getViewerState(window.location.search);
+      setView(nextState.view, false);
+      setAgent(nextState.agent, false);
       currentAttempt = "";
       syncAttemptSelector();
       updatePromptContent();
@@ -594,16 +687,30 @@ const maxPromptAttempts = isCoT
             ? initialAttemptSelect.value
             : "";
 
-        if (view === "user-prompt") {
+        if (view === "user-prompt" || view === "user-judge-prompt") {
           attempt = "";
         }
 
-        const getAttemptsForAgent = (agentName) => {
+        const getPromptTypeForView = (viewName) =>
+          viewName === "user-judge-prompt" ? "user-judge" : "user";
+
+        const getAttemptsForAgent = (agentName, promptType) => {
           const activeTab = document.querySelector(".tab-content.active");
           const activeCategory = activeTab?.querySelector(
             ".cat-content.active",
           );
           const scopeRoot = activeCategory || activeTab || document;
+
+          if (promptType === "user-judge") {
+            return Array.from(
+              scopeRoot.querySelectorAll(
+                ".prompt-content[data-prompt-type='user-judge']",
+              ),
+            )
+              .map((el) => el.getAttribute("data-attempt-content") || "1")
+              .filter((value, idx, arr) => arr.indexOf(value) === idx)
+              .sort((a, b) => Number(a) - Number(b));
+          }
 
           const cotAttempts = Array.from(
             scopeRoot.querySelectorAll(
@@ -663,9 +770,10 @@ const maxPromptAttempts = isCoT
           if (type === "agent") select.value = agent;
         });
 
-        const availableAttempts = getAttemptsForAgent(agent);
+        const promptType = getPromptTypeForView(view);
+        const availableAttempts = getAttemptsForAgent(agent, promptType);
         const options =
-          view === "user-prompt"
+          view === "user-prompt" || view === "user-judge-prompt"
             ? availableAttempts.length
               ? availableAttempts
               : ["1"]
@@ -673,7 +781,9 @@ const maxPromptAttempts = isCoT
 
         if (!options.includes(attempt)) {
           attempt =
-            view === "user-prompt" ? options[options.length - 1] || "1" : "1";
+            view === "user-prompt" || view === "user-judge-prompt"
+              ? options[options.length - 1] || "1"
+              : "1";
         }
 
         document
@@ -691,7 +801,7 @@ const maxPromptAttempts = isCoT
           const promptType = content.getAttribute("data-prompt-type");
           const contentAgent = content.getAttribute("data-agent-content");
 
-          if (promptType === "user") {
+          if (promptType === "user" || promptType === "user-judge") {
             const contentAttempt =
               content.getAttribute("data-attempt-content") || "1";
             const matchesAgent = contentAgent ? contentAgent === agent : true;

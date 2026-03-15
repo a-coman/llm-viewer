@@ -398,7 +398,7 @@ const showGens = currentModel || currentPage === "dashboard";
 </style>
 
 <script>
-  import { QUERY_MODES } from "../lib/constants";
+  import { QUERY_MODES, QUERY_AGENTS } from "../lib/constants";
   import {
     getViewerState,
     toViewerQuery,
@@ -595,8 +595,41 @@ const showGens = currentModel || currentPage === "dashboard";
 
         // Update URL param without reload (for non-dashboard pages)
         if (!isDashboard) {
+          const currentState = getViewerState(window.location.search);
+          const overrides: {
+            mode: ViewerMode;
+            view?: string;
+            agent?: string;
+          } = { mode: mode as ViewerMode };
+
+          // Preserve judge prompt intent across mode switches.
+          if (
+            currentState.mode === QUERY_MODES.simple &&
+            mode === QUERY_MODES.cot
+          ) {
+            if (currentState.view === "system-judge-prompt") {
+              overrides.view = "system-prompt";
+              overrides.agent = QUERY_AGENTS.judge;
+            } else if (currentState.view === "user-judge-prompt") {
+              overrides.view = "user-prompt";
+              overrides.agent = QUERY_AGENTS.judge;
+            }
+          }
+
+          if (
+            currentState.mode === QUERY_MODES.cot &&
+            mode === QUERY_MODES.simple &&
+            currentState.agent === QUERY_AGENTS.judge
+          ) {
+            if (currentState.view === "system-prompt") {
+              overrides.view = "system-judge-prompt";
+            } else if (currentState.view === "user-prompt") {
+              overrides.view = "user-judge-prompt";
+            }
+          }
+
           const url = new URL(window.location.href);
-          applyViewerQueryToUrl(url, { mode: mode as ViewerMode });
+          applyViewerQueryToUrl(url, overrides);
 
           window.history.replaceState({}, "", url.toString());
           window.dispatchEvent(new CustomEvent("sync-gen-view"));

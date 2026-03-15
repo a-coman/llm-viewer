@@ -41,7 +41,8 @@ import type {
   ShannonSpecificEntry,
   JudgeFileRoot,
   JudgeModeData,
-  CoTJudgeCategory,
+  SimpleJudgeGeneration,
+  CoTJudgeGeneration,
   RealismCounts,
   CoTCategoryLog,
 } from "./types";
@@ -597,9 +598,13 @@ function hasShannonCategories(
   return Array.isArray((value as { categories?: unknown })?.categories);
 }
 
-function hasJudgeCategories(
+function isSimpleJudgeGeneration(
   value: unknown,
-): value is { categories: CoTJudgeCategory[] } {
+): value is SimpleJudgeGeneration {
+  return !Array.isArray((value as { categories?: unknown })?.categories);
+}
+
+function isCoTJudgeGeneration(value: unknown): value is CoTJudgeGeneration {
   return Array.isArray((value as { categories?: unknown })?.categories);
 }
 
@@ -745,6 +750,9 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
       );
       const shannonGen = findByGenerationId(shannonExp?.generations, gen.id);
       const judgeGen = findByGenerationId(judgeExp?.generations, gen.id);
+      const judgeGenSimple = isSimpleJudgeGeneration(judgeGen)
+        ? judgeGen
+        : undefined;
 
       const commonStats = {
         tokens: sumTokens(gen.attempts),
@@ -754,6 +762,11 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
 
       const lastAttempt = gen.attempts?.[gen.attempts.length - 1];
       const promptAttempts = getAttemptPrompts(gen.attempts);
+      const judgePromptAttempts =
+        typeof judgeGenSimple?.judge_prompt === "string" &&
+        judgeGenSimple.judge_prompt.trim().length > 0
+          ? [judgeGenSimple.judge_prompt]
+          : [];
       const mGenMetrics = mGen?.metrics || buildMetricsFallback();
 
       let judgeResponse: SimpleGeneration["judge"] = gen.judge
@@ -762,10 +775,10 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
             why: gen.judge.why,
           }
         : undefined;
-      if (isJudgeResponseRealism(judgeGen?.realism)) {
+      if (isJudgeResponseRealism(judgeGenSimple?.realism)) {
         judgeResponse = {
-          response: toJudgeLabel(judgeGen.realism.response_type),
-          why: judgeGen.realism.reasoning,
+          response: toJudgeLabel(judgeGenSimple.realism.response_type),
+          why: judgeGenSimple.realism.reasoning,
         };
       }
 
@@ -800,6 +813,8 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
         judge: judgeResponse,
         systemPrompt: logExp.system_prompt,
         userPrompts: promptAttempts,
+        judgeSystemPrompt: modeJudge?.judge_system_prompt || "",
+        judgeUserPrompts: judgePromptAttempts,
       };
     },
   );
@@ -890,6 +905,7 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
     );
     const shannonGen = findByGenerationId(shannonExp?.generations, gen.id);
     const judgeGen = findByGenerationId(judgeExp?.generations, gen.id);
+    const judgeGenCoT = isCoTJudgeGeneration(judgeGen) ? judgeGen : undefined;
 
     const commonStats = {
       shannonSummary: getShannonMeanFromSpecific(shannonGen?.specific),
@@ -897,8 +913,8 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
 
     const categories = (gen.categories || []).map((catLog: CoTCategoryLog) => {
       const catMetric = findByName(mGen?.categories, catLog.name);
-      const judgeCat = hasJudgeCategories(judgeGen)
-        ? findByName(judgeGen.categories, catLog.name)
+      const judgeCat = judgeGenCoT
+        ? findByName(judgeGenCoT.categories, catLog.name)
         : undefined;
       const covCat = hasCoverageCategories(covGen)
         ? findByName(covGen.categories, catLog.name)
@@ -976,6 +992,14 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
             systemPrompt: catLog.IListInstantiator?.system_prompt || "",
             userPrompts: instantiatorPromptAttempts,
           },
+          Judge: {
+            systemPrompt: modeJudge?.judge_system_prompt || "",
+            userPrompts:
+              typeof judgeCat?.judge_prompt === "string" &&
+              judgeCat.judge_prompt.trim().length > 0
+                ? [judgeCat.judge_prompt]
+                : [],
+          },
         },
         judge: categoryJudge,
         realism: isRealismCounts(judgeCatRealism) ? judgeCatRealism : undefined,
@@ -988,16 +1012,11 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
           why: gen.judge.why,
         }
       : undefined;
-    if (isRealismCounts(judgeGen?.realism)) {
-      const { realistic, unrealistic, doubtful } = judgeGen.realism;
+    if (isRealismCounts(judgeGenCoT?.realism)) {
+      const { realistic, unrealistic, doubtful } = judgeGenCoT.realism;
       judgeResponse = {
-        response: getMajorityRealismResponse(judgeGen.realism),
+        response: getMajorityRealismResponse(judgeGenCoT.realism),
         why: `${realistic} realistic, ${unrealistic} unrealistic, ${doubtful} doubtful`,
-      };
-    } else if (isJudgeResponseRealism(judgeGen?.realism)) {
-      judgeResponse = {
-        response: toJudgeLabel(judgeGen.realism.response_type),
-        why: judgeGen.realism.reasoning,
       };
     }
 
@@ -1019,8 +1038,8 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
         },
       },
       judge: judgeResponse,
-      realism: isRealismCounts(judgeGen?.realism)
-        ? judgeGen?.realism
+      realism: isRealismCounts(judgeGenCoT?.realism)
+        ? judgeGenCoT?.realism
         : undefined,
     };
   });
