@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { MODELS_VALUES } from "./constants";
+import { MODELS_VALUES, DATASETS } from "./constants";
 import { getModelName, calculateRate, calculatePrice } from "./utils";
 import type {
   ModelData,
@@ -264,7 +264,7 @@ function loadData() {
 // Get list of all experiment IDs
 export function getExperimentIds(): string[] {
   loadData();
-  return Array.from(cachedFiles.logs.keys());
+  return Array.from(cachedFiles.logs.keys()).filter(id => DATASETS.has(id));
 }
 
 // Get experiment data by ID (or first if not specified)

@@ -1,4 +1,9 @@
 // Shared constants
+export const DATASETS = new Set<string>([
+  "gpt_4o",
+  "gpt_5_2",
+]);
+
 export const MODELS = {
   bank: "Bank",
   restaurant: "Restaurant",
