@@ -29,10 +29,15 @@ WORKSHEET_GUIDE_RICH_LINES = (
     (
         ("0. ", True),
         (
-            "Review the JudgeSystem and JudgeUser prompts to understand the criteria "
-            "used during realism evaluation.",
-            False,
+            "Review the following prompts to understand the criteria used during realism evaluation.", 
+            False
         ),
+    ),
+    (
+        ("System Judge: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=system-judge-prompt", False),
+    ),
+    (
+        ("User Judge: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=user-judge-prompt", False),
     ),
     (
         ("1. ", True),
@@ -547,7 +552,19 @@ def populate_sheet(
             end_column=4,
         )
         guide_cell = sheet[f"A{guide_row}"]
+
+        url = None
+        for text, _ in line_parts:
+            if "http" in text:
+                url_start = text.find("http")
+                url = text[url_start:].split()[0]
+                break
+
         guide_cell.value = build_rich_text(line_parts)
+        if url:
+            guide_cell.hyperlink = url
+            guide_cell.style = "Hyperlink"
+
         guide_cell.alignment = alignment_factory(wrap_text=True, vertical="top")
         guide_row += 1
 
