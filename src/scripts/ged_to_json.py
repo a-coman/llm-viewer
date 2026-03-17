@@ -448,7 +448,11 @@ if __name__ == "__main__":
                 exp_entry = {
                     "experiment_id": eid,
                     "generations": result["generations"],
-                    "ged": result["ged"],
+                    "ged": {
+                        **result["ged"],
+                        "mean": result["ged_stats"]["mean"],
+                        "std": result["ged_stats"]["std"],
+                    },
                 }
 
                 output_by_model[model_id][group_name]["experiments"].append(exp_entry)

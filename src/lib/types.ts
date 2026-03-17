@@ -347,6 +347,8 @@ export interface GedExperimentMatrix {
   rowLabels: string[];
   columnLabels: string[];
   values: number[][];
+  mean?: number;
+  std?: number;
 }
 
 export interface GedGenerationData {

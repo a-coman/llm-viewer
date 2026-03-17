@@ -857,7 +857,9 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
     elapsedSeconds: logExp.time_seconds,
     diversity: {
       ...rawDifferenceToDisplay(diffExp?.difference),
-      ged: modeGed?.ged,
+      ged: gedExpData?.ged?.mean != null
+        ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
+        : modeGed?.ged,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
@@ -1082,7 +1084,9 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
     elapsedSeconds: logExp.time_seconds,
     diversity: {
       ...rawDifferenceToDisplay(diffExp?.difference),
-      ged: modeGed?.ged,
+      ged: gedExpData?.ged?.mean != null
+        ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
+        : modeGed?.ged,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
