@@ -21,6 +21,10 @@ const badgeClass =
 const displayResponse = response
   ? response.charAt(0).toUpperCase() + response.slice(1).toLowerCase()
   : "Unknown";
+
+// TODO: Remove "Unknown" status and replace with "Doubtful" in future
+// Show "Doubtful" in UI for both "Unknown" and "Doubtful" responses 
+const finalResponse = displayResponse.toLowerCase() == "unknown" || displayResponse.toLowerCase() == "doubtful" ? "Doubtful" : displayResponse;
 ---
 
 <details class="judge-card" open={defaultExpanded}>
@@ -30,7 +34,7 @@ const displayResponse = response
 
   <div class="judge-content">
     <div class="badge-wrapper">
-      <span class={`badge ${badgeClass}`}>{displayResponse}</span>
+      <span class={`badge ${badgeClass}`}>{finalResponse}</span>
     </div>
     {
       why && (
