@@ -16,10 +16,19 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import urlencode
 
+DEFAULT_SEED = 5764515283675  # chosen with current system.nanotime()
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
 TARGET_REALISMS = ("realistic", "unrealistic")
 DEFAULT_PER_BUCKET = 18
+# A bucket is a unique combination of 3 things:
+# Model: gpt_4o or gpt_5_2 (2 options)
+# Mode: simple or cot (2 options)
+# Realism: realistic or unrealistic (2 options)
+# This is a total of 8 different buckets (2 x 2 x 2 = 8).
+# The script randomly selects exactly DEFAULT_PER_BUCKET instances for each of the 8 buckets.
+# This is a total of 8 * DEFAULT_PER_BUCKET instances.
+# eg. 18 * 8 = 144 instances (12% of 1200) separated in two files
 DEFAULT_BASE_URL = "https://a-coman.github.io/llm-viewer"
 DEFAULT_REVIEWERS = ("Lola", "Dominik", "Manuel")
 PAGE_COUNT = 3
@@ -41,11 +50,11 @@ WORKSHEET_GUIDE_RICH_LINES = (
     ),
     (
         ("1. ", True),
-        ("Open and review the instance from the hyperlink in the first column.", False),
+        ("Understand the model (diagram/code) and review the instance (diagram/code) from the hyperlink in the first column.", False),
     ),
     (
         ("2. ", True),
-        ("In your corresponding reviewer column, write ", False),
+        ("In your corresponding reviewer excel, page and column, write ", False),
         ("'R'", True),
         (" (realistic), ", False),
         ("'U'", True),
@@ -129,7 +138,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--seed",
         type=int,
-        default=5764515283675,  # chosen by system.nanotime
+        default=DEFAULT_SEED,
         help="Random seed for reproducible sampling",
     )
     parser.add_argument(
