@@ -121,12 +121,19 @@ export const METRIC_EXPLANATIONS = {
   },
   diversity: {
     title: "Diversity",
-    description:
-      "Measures the variability of the generated attribute values. It identifies how much the LLM repeats specific values versus generating unique data points across instances (100%: Diverse, 0%: Repetitive). We group all generated attributes into bags (numeric and string) and then perform pairwise comparisons between every element to obtain:",
+    description: [
+      "Measures the variability of the generated instances. ",
+      "Attributes (NumericEquals, StringEquals, StringLv): It identifies how much the LLM repeats specific values versus generating unique data points across instances (100%: Diverse, 0%: Repetitive). We group all generated attributes into bags (numeric and string) and then perform pairwise comparisons between every element to obtain. ",
+      "Structure (GED): Measures the Graph Edit Distance (GED) similarity between instances. ",
+      "Distribution (Shannon): Measures the entropy and evenness (balanced distribution) of the generated enum values."
+    ],
     examples: [
       "NumericEquals = Total number of numeric attribute pairs with different values / Total number of possible pairs (n * (n - 1) / 2)",
       "StringEquals = Total number of string attribute pairs that are NOT exactly identical / Total number of possible pairs (n * (n - 1) / 2)",
       "StringLv = Sum of (Levenshtein Distance(a, b) / max(length(a), length(b))) for all string pairs / Total number of possible pairs (n * (n - 1) / 2)",
+      "GED = Similarity = 1 - (GED / (0.5 * (GED_to_empty_A + GED_to_empty_B))). 1 = red = identical graphs, <=0.5 = green = different graphs. We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
+      "Shannon (Active) = Entropy / log2(Number of unique groups actually generated). Measures how evenly the generated values are distributed, considering only the categories the LLM actually used.",
+      "Shannon (All) = Entropy / log2(Total number of valid groups defined in the model). Measures how evenly the generated values are distributed against the full spectrum of all possible valid options defined in the .use file.",
     ],
   },
   coverage: {
@@ -152,9 +159,10 @@ export const METRIC_EXPLANATIONS = {
   realism: {
     title: "Quality",
     description:
-      "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3.1 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtfull) the realism of each instance and explain its decision.",
+      "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3.1 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtful) the realism of each instance and explain its decision.",
     examples: [
       'Realism = Total Number of "realistic" instances / Total Number of instances',
+      "Judge Cost = (input tokens * input price) + (output tokens * output price)",
     ],
   },
 
