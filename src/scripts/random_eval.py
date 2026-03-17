@@ -19,7 +19,7 @@ from urllib.parse import urlencode
 DEFAULT_SEED = 5764515283675  # chosen with current system.nanotime()
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
-TARGET_REALISMS = ("realistic", "unrealistic")
+TARGET_REALISMS = ("realistic", "unrealistic") # There's no "doubtful" realism in the current judge.json
 DEFAULT_PER_BUCKET = 18
 # A bucket is a unique combination of 3 things:
 # Model: gpt_4o or gpt_5_2 (2 options)
@@ -38,15 +38,15 @@ WORKSHEET_GUIDE_RICH_LINES = (
     (
         ("0. ", True),
         (
-            "Review the following prompts to understand the criteria used during realism evaluation.", 
+            "Review the judge prompts to understand the criteria used during realism evaluation.", 
             False
         ),
     ),
     (
-        ("System Judge: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=system-judge-prompt", False),
+        ("Judge System Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=system-judge-prompt", False),
     ),
     (
-        ("User Judge: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=user-judge-prompt", False),
+        ("Judge User Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=user-judge-prompt", False),
     ),
     (
         ("1. ", True),
