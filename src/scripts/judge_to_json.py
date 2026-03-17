@@ -102,8 +102,19 @@ def extract_model_from_judge_file(file_path):
 def parse_judge_logs(logs_path, exp_type):
     """
     Parse judge-logs.md to extract system prompts and user prompts.
-    Returns dict: {gen_id: {"system_prompt": ..., "user_prompt": ..., "model": ...}}
-    For CoT: {gen_id: {category: {"system_prompt": ..., "user_prompt": ..., "model": ...}}}
+
+    Supports two header generations:
+
+    NEW (preferred) — domain is explicit in the header:
+      Simple:  # Input IJudge : <domain> : genX
+      CoT:     # Input IJudge : <domain> : genX : <category>
+
+    OLD (backward-compat) — domain must be inferred later:
+      Simple:  # Input IJudge : genX
+      CoT:     # Input IJudge : <category> : genX
+               # Input IJudge : <domain> : genX : <category>  (already 3-part)
+
+    Returns dict: see __all_entries__ for per-entry lookup.
     """
     with open(logs_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -116,9 +127,11 @@ def parse_judge_logs(logs_path, exp_type):
         return matches[index + 1].start() if index + 1 < len(matches) else len(content)
 
     if exp_type == "cot":
-        # Supported CoT formats:
-        #   # Input IJudge : category : genX
-        #   # Input IJudge : domain : genX : category
+        # Unified pattern — captures everything after the prefix.
+        # Supported header shapes (parts = split on ' : '):
+        #   NEW  3-part: domain : genX : category
+        #   OLD  2-part: category : genX
+        #   OLD  3-part: domain : genX : category  (already same as NEW)
         pattern = r"^# Input IJudge : (.+)$"
         matches = list(re.finditer(pattern, content, re.MULTILINE))
 
@@ -130,9 +143,12 @@ def parse_judge_logs(logs_path, exp_type):
             gen_id = None
 
             if len(header_parts) == 2 and re.fullmatch(r"gen\d+", header_parts[1]):
+                # OLD CoT: category : genX
                 category = header_parts[0].lower()
                 gen_id = header_parts[1][3:]
             elif len(header_parts) == 3 and re.fullmatch(r"gen\d+", header_parts[1]):
+                # NEW CoT: domain : genX : category
+                # (also OLD format that already had 3 parts)
                 domain_name = header_parts[0].lower()
                 gen_id = header_parts[1][3:]
                 category = header_parts[2].lower()
@@ -176,6 +192,7 @@ def parse_judge_logs(logs_path, exp_type):
             )
 
             if domain_name is None:
+                # OLD format: keyed only by gen_id
                 if gen_id not in result:
                     result[gen_id] = {}
                 result[gen_id][category] = {
@@ -183,6 +200,7 @@ def parse_judge_logs(logs_path, exp_type):
                     "model": model_name,
                 }
             else:
+                # NEW format: also keyed by domain_name for direct lookup
                 if domain_name not in result:
                     result[domain_name] = {}
                 if gen_id not in result[domain_name]:
@@ -192,49 +210,108 @@ def parse_judge_logs(logs_path, exp_type):
                     "model": model_name,
                 }
     else:
-        # Simple format: # Input IJudge : genX
-        pattern = r"^# Input IJudge : gen(\d+)"
-        matches = list(re.finditer(pattern, content, re.MULTILINE))
+        # ----------------------------------------------------------------
+        # Simple format
+        # NEW: # Input IJudge : <domain> : genX
+        # OLD: # Input IJudge : genX
+        # ----------------------------------------------------------------
 
-        for i, match in enumerate(matches):
-            gen_id = match.group(1)
+        # Try new format first (domain : genX)
+        new_pattern = r"^# Input IJudge : (\S+) : gen(\d+)\s*$"
+        new_matches = list(re.finditer(new_pattern, content, re.MULTILINE))
 
-            start_pos = match.end()
-            end_pos = matches[i + 1].start() if i + 1 < len(matches) else len(content)
-            block = content[start_pos:end_pos]
+        if new_matches:
+            # NEW format — domain is known from the header
+            matches = new_matches
+            for i, match in enumerate(matches):
+                domain_name = match.group(1).lower()
+                gen_id = match.group(2)
 
-            # Extract system message (get first one if not set)
-            if system_prompt is None:
-                sys_match = re.search(
-                    r'SystemMessage \{ text = "(.*?)" \}', block, re.DOTALL
+                start_pos = match.end()
+                end_pos = matches[i + 1].start() if i + 1 < len(matches) else len(content)
+                block = content[start_pos:end_pos]
+
+                # Extract system message (get first one if not set)
+                if system_prompt is None:
+                    sys_match = re.search(
+                        r'SystemMessage \{ text = "(.*?)" \}', block, re.DOTALL
+                    )
+                    if sys_match:
+                        system_prompt = sys_match.group(1).strip()
+
+                # Extract user message
+                user_match = re.search(
+                    r'UserMessage \{.*?contents = \[TextContent \{ text = "(.*?)" \}\]',
+                    block,
+                    re.DOTALL,
                 )
-                if sys_match:
-                    system_prompt = sys_match.group(1).strip()
+                user_prompt = user_match.group(1).strip() if user_match else ""
 
-            # Extract user message
-            user_match = re.search(
-                r'UserMessage \{.*?contents = \[TextContent \{ text = "(.*?)" \}\]',
-                block,
-                re.DOTALL,
-            )
-            user_prompt = user_match.group(1).strip() if user_match else ""
+                # Extract model info
+                model_match = re.search(r"Model: ([^\n]+)", block)
+                model_name = model_match.group(1).strip() if model_match else "unknown"
 
-            # Extract model info
-            model_match = re.search(r"Model: ([^\n]+)", block)
-            model_name = model_match.group(1).strip() if model_match else "unknown"
+                all_entries.append(
+                    {
+                        "exp_type": "simple",
+                        "domain_name": domain_name,
+                        "gen_id": gen_id,
+                        "category": None,
+                        "user_prompt": user_prompt,
+                        "model": model_name,
+                    }
+                )
 
-            all_entries.append(
-                {
-                    "exp_type": "simple",
-                    "domain_name": None,
-                    "gen_id": gen_id,
-                    "category": None,
-                    "user_prompt": user_prompt,
-                    "model": model_name,
-                }
-            )
+                # Also index by domain for direct lookup
+                if domain_name not in result:
+                    result[domain_name] = {}
+                result[domain_name][gen_id] = {"user_prompt": user_prompt, "model": model_name}
+                # Legacy key for backward compat with find_prompt_by_object_model
+                result[gen_id] = {"user_prompt": user_prompt, "model": model_name}
+        else:
+            # OLD format — no domain in header
+            old_pattern = r"^# Input IJudge : gen(\d+)"
+            matches = list(re.finditer(old_pattern, content, re.MULTILINE))
 
-            result[gen_id] = {"user_prompt": user_prompt, "model": model_name}
+            for i, match in enumerate(matches):
+                gen_id = match.group(1)
+
+                start_pos = match.end()
+                end_pos = matches[i + 1].start() if i + 1 < len(matches) else len(content)
+                block = content[start_pos:end_pos]
+
+                # Extract system message (get first one if not set)
+                if system_prompt is None:
+                    sys_match = re.search(
+                        r'SystemMessage \{ text = "(.*?)" \}', block, re.DOTALL
+                    )
+                    if sys_match:
+                        system_prompt = sys_match.group(1).strip()
+
+                # Extract user message
+                user_match = re.search(
+                    r'UserMessage \{.*?contents = \[TextContent \{ text = "(.*?)" \}\]',
+                    block,
+                    re.DOTALL,
+                )
+                user_prompt = user_match.group(1).strip() if user_match else ""
+
+                # Extract model info
+                model_match = re.search(r"Model: ([^\n]+)", block)
+                model_name = model_match.group(1).strip() if model_match else "unknown"
+
+                all_entries.append(
+                    {
+                        "exp_type": "simple",
+                        "domain_name": None,
+                        "gen_id": gen_id,
+                        "category": None,
+                        "user_prompt": user_prompt,
+                        "model": model_name,
+                    }
+                )
+
+                result[gen_id] = {"user_prompt": user_prompt, "model": model_name}
 
     result["__all_entries__"] = all_entries
     return result, system_prompt
@@ -471,9 +548,10 @@ def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
 
     # Parse per-generation stats
     if exp_type == "cot":
-        # Supported CoT formats:
-        #   # Output IJudge : category : genX
-        #   # Output IJudge : domain : genX : category
+        # Unified CoT pattern — captures everything after prefix.
+        # Supported header shapes:
+        #   NEW 3-part: domain : genX : category
+        #   OLD 2-part: category : genX
         pattern = r"^# Output IJudge : (.+)$"
         matches = list(re.finditer(pattern, content, re.MULTILINE))
 
@@ -485,9 +563,11 @@ def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
             gen_id = None
 
             if len(header_parts) == 2 and re.fullmatch(r"gen\d+", header_parts[1]):
+                # OLD CoT: category : genX
                 category = header_parts[0].lower()
                 gen_id = header_parts[1][3:]
             elif len(header_parts) == 3 and re.fullmatch(r"gen\d+", header_parts[1]):
+                # NEW CoT: domain : genX : category
                 domain_name = header_parts[0].lower()
                 gen_id = header_parts[1][3:]
                 category = header_parts[2].lower()
@@ -520,21 +600,25 @@ def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
                 "time_seconds": float(time_match.group(1)) if time_match else 0,
             }
 
-            response_text, why_text = extract_response_and_why(block)
-
-            matched_domain_name = get_cot_domain_by_response(
-                gen_id,
-                category,
-                response_text,
-                why_text,
-                responses_data,
-                preferred_domain=domain_name,
-            )
+            if domain_name is not None:
+                # NEW format — domain is known directly from header; skip heuristic matching.
+                matched_domain_name = domain_name
+            else:
+                # OLD format — must infer domain by matching response/why text.
+                response_text, why_text = extract_response_and_why(block)
+                matched_domain_name = get_cot_domain_by_response(
+                    gen_id,
+                    category,
+                    response_text,
+                    why_text,
+                    responses_data,
+                    preferred_domain=None,
+                )
 
             if matched_domain_name is None:
                 print(
                     "  Error: Could not uniquely match CoT output "
-                    f"for gen{gen_id}/{category if domain_name is None else domain_name} in {logs_path}",
+                    f"for gen{gen_id}/{category} in {logs_path}",
                     file=sys.stderr,
                 )
                 continue
@@ -546,54 +630,93 @@ def parse_judge_output_stats(logs_path, exp_type, responses_data=None):
 
             per_domain_stats[matched_domain_name][gen_id][category] = stats
     else:
-        # Simple format: # Output IJudge : genX
-        pattern = r"^# Output IJudge : gen(\d+)"
-        matches = list(re.finditer(pattern, content, re.MULTILINE))
+        # Simple format
+        # NEW: # Output IJudge : <domain> : genX
+        # OLD: # Output IJudge : genX
 
-        for i, match in enumerate(matches):
-            gen_id = match.group(1)
+        new_pattern = r"^# Output IJudge : (\S+) : gen(\d+)\s*$"
+        new_matches = list(re.finditer(new_pattern, content, re.MULTILINE))
 
-            start_pos = match.end()
-            end_pos = len(content)
-            for j in range(i + 1, len(matches)):
-                end_pos = matches[j].start()
-                break
-            summary_pos = content.find("# Summary for all generations", start_pos)
-            if summary_pos != -1 and summary_pos < end_pos:
-                end_pos = summary_pos
+        if new_matches:
+            # NEW format — domain known from header; no heuristic needed.
+            matches = new_matches
+            for i, match in enumerate(matches):
+                domain_name = match.group(1).lower()
+                gen_id = match.group(2)
 
-            block = content[start_pos:end_pos]
+                start_pos = match.end()
+                end_pos = len(content)
+                for j in range(i + 1, len(matches)):
+                    end_pos = matches[j].start()
+                    break
+                summary_pos = content.find("# Summary for all generations", start_pos)
+                if summary_pos != -1 and summary_pos < end_pos:
+                    end_pos = summary_pos
 
-            # Extract stats from |Response| table
-            input_match = re.search(r"Input Tokens: (\d+)", block)
-            output_match = re.search(r"Output Tokens: (\d+)", block)
-            total_match = re.search(r"Total Tokens: (\d+)", block)
-            time_match = re.search(r"Generation Time: ([\d.]+) seconds", block)
+                block = content[start_pos:end_pos]
 
-            stats = {
-                "input_tokens": int(input_match.group(1)) if input_match else 0,
-                "output_tokens": int(output_match.group(1)) if output_match else 0,
-                "total_tokens": int(total_match.group(1)) if total_match else 0,
-                "time_seconds": float(time_match.group(1)) if time_match else 0,
-            }
+                input_match = re.search(r"Input Tokens: (\d+)", block)
+                output_match = re.search(r"Output Tokens: (\d+)", block)
+                total_match = re.search(r"Total Tokens: (\d+)", block)
+                time_match = re.search(r"Generation Time: ([\d.]+) seconds", block)
 
-            response_text, why_text = extract_response_and_why(block)
+                stats = {
+                    "input_tokens": int(input_match.group(1)) if input_match else 0,
+                    "output_tokens": int(output_match.group(1)) if output_match else 0,
+                    "total_tokens": int(total_match.group(1)) if total_match else 0,
+                    "time_seconds": float(time_match.group(1)) if time_match else 0,
+                }
 
-            domain_name = get_simple_domain_by_response(
-                gen_id, response_text, why_text, responses_data
-            )
+                if domain_name not in per_domain_stats:
+                    per_domain_stats[domain_name] = {}
+                per_domain_stats[domain_name][gen_id] = stats
+        else:
+            # OLD format — must infer domain by matching response/why text.
+            old_pattern = r"^# Output IJudge : gen(\d+)"
+            matches = list(re.finditer(old_pattern, content, re.MULTILINE))
 
-            if domain_name is None:
-                print(
-                    "  Error: Could not uniquely match Simple output "
-                    f"for gen{gen_id} in {logs_path}",
-                    file=sys.stderr,
+            for i, match in enumerate(matches):
+                gen_id = match.group(1)
+
+                start_pos = match.end()
+                end_pos = len(content)
+                for j in range(i + 1, len(matches)):
+                    end_pos = matches[j].start()
+                    break
+                summary_pos = content.find("# Summary for all generations", start_pos)
+                if summary_pos != -1 and summary_pos < end_pos:
+                    end_pos = summary_pos
+
+                block = content[start_pos:end_pos]
+
+                input_match = re.search(r"Input Tokens: (\d+)", block)
+                output_match = re.search(r"Output Tokens: (\d+)", block)
+                total_match = re.search(r"Total Tokens: (\d+)", block)
+                time_match = re.search(r"Generation Time: ([\d.]+) seconds", block)
+
+                stats = {
+                    "input_tokens": int(input_match.group(1)) if input_match else 0,
+                    "output_tokens": int(output_match.group(1)) if output_match else 0,
+                    "total_tokens": int(total_match.group(1)) if total_match else 0,
+                    "time_seconds": float(time_match.group(1)) if time_match else 0,
+                }
+
+                response_text, why_text = extract_response_and_why(block)
+                domain_name = get_simple_domain_by_response(
+                    gen_id, response_text, why_text, responses_data
                 )
-                continue
 
-            if domain_name not in per_domain_stats:
-                per_domain_stats[domain_name] = {}
-            per_domain_stats[domain_name][gen_id] = stats
+                if domain_name is None:
+                    print(
+                        "  Error: Could not uniquely match Simple output "
+                        f"for gen{gen_id} in {logs_path}",
+                        file=sys.stderr,
+                    )
+                    continue
+
+                if domain_name not in per_domain_stats:
+                    per_domain_stats[domain_name] = {}
+                per_domain_stats[domain_name][gen_id] = stats
 
     return per_domain_stats, summary_stats
 
@@ -832,26 +955,34 @@ def build_judge_json(
                 response_type = normalize_response(cat_data.get("response", "Unknown"))
                 reasoning = cat_data.get("why", "")
 
-                # Get judge prompt from logs if available
-                expected_object_model = get_cot_generation_last_response(
-                    generations_data, gen_id, cat_name
-                )
-                judge_prompt = find_prompt_by_object_model(
-                    logs_data,
-                    exp_type="cot",
-                    gen_id=gen_id,
-                    expected_object_model=expected_object_model,
-                    category=cat_name,
-                    domain_name=domain_name,
-                )
+                # Get judge prompt from logs if available.
+                # NEW format: domain is keyed directly in logs_data as
+                #   {domain_name: {gen_id: {cat_name: {user_prompt, model}}}}
+                # Check direct domain lookup first, then fall back to
+                # object_model matching for old-format data.
+                direct_log = get_cot_log_entry(logs_data, domain_name, gen_id, cat_name)
 
-                if not judge_prompt:
-                    # Fallback for legacy/partial bundles where matching is unavailable.
-                    log_entry = get_cot_log_entry(
-                        logs_data, domain_name, gen_id, cat_name
+                if direct_log and direct_log.get("user_prompt"):
+                    # New format — exact entry found via domain header.
+                    judge_prompt = direct_log.get("user_prompt", "")
+                else:
+                    # Old format — match by object_model content.
+                    expected_object_model = get_cot_generation_last_response(
+                        generations_data, gen_id, cat_name
                     )
-                    if log_entry:
-                        judge_prompt = log_entry.get("user_prompt", "")
+                    judge_prompt = find_prompt_by_object_model(
+                        logs_data,
+                        exp_type="cot",
+                        gen_id=gen_id,
+                        expected_object_model=expected_object_model,
+                        category=cat_name,
+                        domain_name=domain_name,
+                    )
+
+                    if not judge_prompt:
+                        # Last-resort fallback for legacy/partial bundles.
+                        if direct_log:
+                            judge_prompt = direct_log.get("user_prompt", "")
 
                 attempt_id = get_attempt_id_for_generation(
                     generations_data, gen_id, cat_name
@@ -918,20 +1049,32 @@ def build_judge_json(
             response_type = normalize_response(gen_data.get("response", "Unknown"))
             reasoning = gen_data.get("why", "")
 
-            # Get judge prompt from logs if available
-            expected_object_model = get_simple_generation_last_response(
-                generations_data, gen_id
-            )
-            judge_prompt = find_prompt_by_object_model(
-                logs_data,
-                exp_type="simple",
-                gen_id=gen_id,
-                expected_object_model=expected_object_model,
-            )
+            # Get judge prompt from logs if available.
+            # NEW format: domain keyed directly in logs_data.
+            # First check direct domain lookup (new header format), then
+            # fall back to object_model matching, then legacy gen_id key.
+            direct_log = None
+            if isinstance(logs_data.get(domain_name), dict):
+                direct_log = logs_data[domain_name].get(gen_id)
 
-            if not judge_prompt and gen_id in logs_data:
-                # Fallback for legacy/partial bundles where matching is unavailable.
-                judge_prompt = logs_data[gen_id].get("user_prompt", "")
+            if direct_log is not None:
+                # New format — domain header gives us the exact entry.
+                judge_prompt = direct_log.get("user_prompt", "")
+            else:
+                # Old format — match by object_model content.
+                expected_object_model = get_simple_generation_last_response(
+                    generations_data, gen_id
+                )
+                judge_prompt = find_prompt_by_object_model(
+                    logs_data,
+                    exp_type="simple",
+                    gen_id=gen_id,
+                    expected_object_model=expected_object_model,
+                )
+
+                if not judge_prompt and gen_id in logs_data:
+                    # Last-resort fallback for legacy/partial bundles.
+                    judge_prompt = logs_data[gen_id].get("user_prompt", "")
 
             attempt_id = get_attempt_id_for_generation(generations_data, gen_id)
 
