@@ -1045,9 +1045,9 @@ if __name__ == "__main__":
     def init_group():
         return {
             "model": {
-                "name": "gemini_3_pro",
+                "name": "gemini_3_1_pro",
                 "provider": "openrouter/google",
-                "version": "gemini-3-pro-preview",
+                "version": "gemini-3.1-pro-preview",
             },
             "stats": {
                 "input_tokens": 0,

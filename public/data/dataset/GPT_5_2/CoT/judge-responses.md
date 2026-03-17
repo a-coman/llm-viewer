@@ -1,1757 +1,1549 @@
-# CoT / GPT_5_2 / GEMINI_3_PRO
+# CoT / GPT_5_2 / GEMINI_3_1_PRO
 
 # addressbook
 
 ## gen1 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The relationship `Rel_RiverstoneLtd_to_Kenji_Boss_1` contains a semantic contradiction. Specifically, it assigns a `BOSS` relationship type between `C_Riverstone_Ltd` (identified in notes as an external "Vendor") and `P_Kenji_Tanaka` (an employee of the main organization). A vendor company is not the "Boss" of a client employee, nor is a legal entity typically modeled as the direct "Boss" of a person (a role usually reserved for a supervisor).
+**Why**: The relationship `Rel_RiverstoneLtd_to_Kenji_Boss_1` defines the company `C_Riverstone_Ltd` as the `#BOSS` of `P_Kenji_Tanaka`. A company cannot be a "boss" (which represents a human managerial role), and this contradicts the notes that establish Riverstone as an external vendor and `P_Amina_ElSayed` as Kenji's actual boss.
 
 ## gen1 / boundary
 
-**Response**: Unrealistic
-**Why**: The Person object 'P1' is assigned the name 'Å', which is a single character and not a plausible full name for a real human being. Additionally, all other contact attributes (phone, email, website) are empty strings, rendering the object a "data fragment" or test case rather than a valid real-world contact entry.
+**Response**: Realistic
+**Why**: It is common in real-world contact management applications to create incomplete entries with only a minimal name or initial (like 'Å') while leaving other contact details (phone, email, website, title) blank.
 
 ## gen1 / complex
 
-**Response**: Unrealistic
-**Why**: The object model creates semantically invalid relationships for a business domain. 'P_GV_Ravi_1' (employed by 'Sahara Logistics') is defined as an `EMPLOYEE` of 'P_GV_Sofia_1' (employed by 'Nordic BioAnalytics'), complicating a client-vendor relationship with a direct employment hierarchy. Furthermore, the `COWORKER` relationship type is applied between Company objects (e.g., 'Nordic BioAnalytics A/S' and 'Andes Cloud SpA'), which anthropomorphizes organizations; companies are partners or affiliates, not coworkers.
+**Response**: Realistic
+**Why**: The object model is highly consistent and semantically sound. The geographic data (cities, phone country codes, and domains) match precisely, the hierarchical and peer relationships (Boss, Employee, Coworker) are correctly implemented with bidirectional logic, and the timestamps and notes contextually align perfectly with a plausible B2B environment.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'Note_C4_N1' is assigned the date '2026-02-29'. The year 2026 is not a leap year, making this date non-existent and impossible for a meeting. Additionally, the object 'Addr_C4_A2' has a house number ('houseNr') of '-1', which is not a plausible identifier for a physical location.
+**Why**: The object 'Note_C4_N1' specifies a date of '2026-02-29', which is logically impossible because 2026 is not a leap year. Furthermore, the object 'Addr_C4_A2' has a house number of '-1', which is not a possible physical address value.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-**Why**: The relationship object 'Rel_Amina_to_Sakura_Coworker_2' establishes a 'COWORKER' relationship where the source is a Person ('P_Amina_AB1_2') and the target is a Company ('C_SakuraRobotics_2'). Semantically, a "Coworker" relationship exists between peers (people); a person relates to a company as an employee or affiliate, not a coworker.
+**Why**: The relationship `Rel_Amina_to_Sakura_Coworker_2` defines a `COWORKER` connection between `P_Amina_AB1_2` (a Person) and `C_SakuraRobotics_2` (a Company). In the real world, a person can be an employee of a company, but cannot be a "coworker" with an entire corporate entity, as coworkers are individual people who work together.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model depicts a coherent and plausible scenario of an international healthcare and logistics project. The attribute values are geographically accurate (e.g., correct phone country codes and valid street names for San Francisco, Dubai, and Gdańsk), and the relationships between entities (reciprocal Boss/Employee links between Persons and Companies) are logically consistent.
+**Why**: The object model represents a plausible and highly consistent CRM or Address Book scenario. The contact details, international phone codes, and addresses align logically with the individuals and companies. The use of the relationship enums (e.g., using BOSS/EMPLOYEE for the company-to-person employment link, and SUBDIVISION for the clinic hierarchy) is semantically appropriate given the domain's constraints.
 
 ## gen2 / boundary
 
 **Response**: Realistic
-**Why**: It is semantically plausible to instantiate an empty AddressBook. The object name 'AB_0Contacts_TehranTrip' aligns logically with the current state of the model, which contains no Contact objects.
+**Why**: Creating a new, empty Address Book is a standard and necessary initial state before adding any contacts. Naming it for a specific upcoming event or purpose, such as a trip to Tehran, is perfectly plausible in a real-world scenario.
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model represents a plausible management system for an international film festival (Harborlight 2026). The specific attribute values (correct international phone formatting for Japan, Mexico, NZ, etc., distinct addresses, future-dated project notes) are coherent. The complex relationship network correctly models a matrix organization (remote staff, subdivisions, and vendors) using the available relationship types, maintaining internal consistency in role directionality.
+**Why**: The object model represents a highly coherent and robust CRM or Address Book scenario. The instances possess geographically consistent attributes (matching country codes, top-level domains, and cities), plausible relationships that correctly model bidirectional hierarchy (Boss/Employee) and corporate structure (Subdivision), and realistic notes tracking inter-person communications.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'Note_Cher_1' is assigned the date '1900-02-29', which is a historical impossibility as the year 1900 was not a leap year. Additionally, the Company object 'C_MizuhoTemp_1' is defined as an '#EMPLOYEE' of 'C_PopupHub_1', which is semantically invalid; companies act as vendors or subsidiaries, not employees.
+**Why**: 
+- The object `Note_Cher_1` uses the date '1900-02-29', which is an invalid calendar date because 1900 was not a leap year.
+- `Note_SahelEnergy_1` logs a meeting for a modern "Community solar" company (`C_SahelEnergy_1`) in the year 1582, which is highly anachronistic.
+- The `Company` object `C_MizuhoTemp_1` has an `#EMPLOYEE` relationship to another company (`C_PopupHub_1`). A corporate entity cannot be an employee. 
+- Persons (`P_Cher_1`, `P_OlegPetrov_1`) have `#COWORKER` relationships directed at a `Company`. A person can be a coworker to another person, but not to an entire corporate entity.
 
 ## gen2 / invalid
 
 **Response**: Realistic
-**Why**: The object model uses valid regional data for Montreal (area codes, street names, demographics). The content of the notes (translation coordination) is consistent with the attributes of the people involved. The relationship structure, including the partial data for the Ministry entity used as a hierarchy parent, is logical for an organizational directory.
+**Why**: The object model portrays a plausible real-world scenario of a community healthcare address book. The attributes contain valid and contextually consistent data (names, addresses, phone numbers, and coherent note comments about medical volunteering). The structural relationships, including the bilateral 'COWORKER' links between individuals and the organizational link between the health cooperative and the Ministry, are logically sound and respect domain constraints.
 
 ## gen3 / baseline
 
 **Response**: Unrealistic
-**Why**: The relationship object `Rel_Arctic_Hotel_to_Cargo_Boss_1` establishes that 'Hotel Kalaallit' (a hospitality provider) is the #BOSS of 'PolarAir Cargo Division' (an aviation logistics company). This is semantically implausible as these are distinct entities in different industries with no logical employment or ownership hierarchy joining them.
+**Why**: The relationships between the company objects 'C_Arctic_PolarAirCargo_1' (an air cargo division) and 'C_Arctic_HotelKalaallit_1' (a hotel) are nonsensical. In the real world, a hotel cannot be the 'BOSS' or 'COWORKER' of an aviation cargo company.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object `Note_High_LH_1` contains a date attribute set to `0001-01-01` for a "Kick-off meeting". It is physically impossible for the Author `P_High_LH_1` (who has modern attributes like email and website) to have attended a meeting in the year 1 AD.
+**Why**: The object model contains chronologically impossible dates for notes, such as a kick-off meeting dated in the year 0001 ('Note_High_LH_1') and a past-tense comment ("Confirmed...") for a call dated in the future (2026 in 'Note_High_MJR_2'). Additionally, 'Note_High_NB_8' explicitly breaks real-world logic with a placeholder date of 9999 and a meta-comment referencing the software model itself.
 
 ## gen3 / complex
 
 **Response**: Realistic
-**Why**: The object model depicts a highly coherent and detailed scenario of a multinational disaster relief operation. The attribute data is contextually accurate, correlating specific cities with correct real-world street names (e.g., 'Gedimino prospektas' in Vilnius, 'Narva maantee' in Tallinn) and valid international phone prefixes. The specific content of the 'Notes' aligns logically with the roles and industries of the entities (e.g., a satellite company employee discussing ground-station maintenance, a drone company discussing flight corridors).
+**Why**: The object model represents a highly plausible and internally consistent disaster relief scenario. The attribute values (names, correct international phone codes, logical email/website domains, and addresses) accurately match real-world physical locations and entities. The relationships between objects (such as employees to companies, subdivisions of companies, and colleague cross-collaborations) follow logical business rules and appropriately utilize the domain's constraints and enumerations without contradictions.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object model contains multiple semantic errors involving the `Date` type and attribute formats:
-1. 'Note_Solitary_2' has a time of '25:61:61', which is temporally impossible.
-2. 'Note_Solitary_6' has a date of '2024-13-40' (Month 13, Day 40), which is impossible.
-3. 'Note_Solitary_8' specifies '2026-02-29', but 2026 is not a leap year.
-4. 'P_Solitary_MariaLuz_1' has an invalid email format ('maria.delaluz@' lacks a domain).
+**Why**: The object model contains multiple impossible values. The email for 'P_Solitary_MariaLuz_1' ('maria.delaluz@') is incomplete and missing a domain. Several notes have impossible timestamps: 'Note_Solitary_2' specifies hour 25 and minute/second 61, 'Note_Solitary_6' has a 13th month and 40th day, and 'Note_Solitary_8' specifies February 29th in 2026, which is not a leap year. Additionally, 'Addr_Solitary_9' has a physically impossible house number of '∞' (infinity).
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model violates the explicit domain constraint `DifferentSourceTarget`. The relationship 'Rel_AB4_R30_1' connects 'P_AB4_HanaRangi_1' to themselves (implies being their own BOSS), which is strictly forbidden by the invariant requiring that a relationship's target must not be the same as its source.
+**Why**: The person 'P_AB4_HanaRangi_1' creates a relationship ('Rel_AB4_R30_1') pointing to themselves, which is semantically nonsensical and violates the 'DifferentSourceTarget' OCL constraint. Additionally, 'P_AB4_HanaRangi_1' is defined as a 'COWORKER' to 'C_AB4_KauriKayaks_1' (a company), which breaks real-world logic since a company cannot be a coworker.
 
 ## gen4 / baseline
 
 **Response**: Unrealistic
-**Why**: The object model defines a Company ('C_Saffron_HanRiver_1') as an `#EMPLOYEE` of another Company ('C_Saffron_PostUnit_1') via the relationship `Rel_Saffron_HanRiver_to_Post_Employee_1`. Semantically, a company cannot be an employee; it acts as a vendor, contractor, or subdivision. The `SUBDIVISION` type exists but was not used, and legal entities do not hold employment status.
+**Why**: The object model assigns 'EMPLOYEE' and 'COWORKER' relationship types between two 'Company' objects ('C_Saffron_HanRiver_1' and 'C_Saffron_PostUnit_1'). In the real world, a separate legal entity (an equipment rental company) cannot be an employee or coworker of another company; those terms exclusively apply to individuals (Persons).
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-**Why**: The model contains obvious placeholder and uninitialized data rather than plausible real-world information. The phone numbers (e.g., `+86 10 0000 0000`) use invalid zero-sequences, the Note is dated to the Unix epoch (`1970-01-01`) with empty content, and the Address object defines a location composed entirely of empty strings.
+**Why**: The object model uses blatant placeholder values that do not represent a real-world scenario. The phone numbers consist of zeros (e.g., '+86 10 0000 0000'), the Note has a Unix epoch timestamp ('1970-01-01') with no author or comment, and the Address contains completely empty strings for city, street, and house number.
 
 ## gen4 / complex
 
 **Response**: Realistic
-
-**Why**: The object model portrays a coherent, highly detailed scenario involving an international artifact loan (logistics, insurance, conservation). The attribute values are semantically valid (correct international phone formats, plausible addresses and URLs). The complex web of relationships and the domain-specific content in the creation of 'Note' objects demonstrates high internal consistency.
+**Why**: The object model represents a highly cohesive and logically consistent professional CRM scenario (coordinating an international museum loan). Attribute values like phone country codes, locations, and names perfectly align geographically. Notes portray a realistic chronological timeline with appropriate domain-specific terminology (art logistics, conservation, customs), and the structured relationships (BOSS, EMPLOYEE, COWORKER) correctly map the organizational hierarchy. All constraints are respected without contradiction.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-**Why**: The model creates a logical paradox by assigning mutually exclusive relationship types simultaneously between the same two contacts. Specifically, the Company (`C_MinPair_Bureau_1`) and the Person (`P_MinPair_Lampros_1`) are defined as being the 'Boss', 'Employee', 'Coworker', and 'Subdivision' of each other all at once. Additionally, a Person is biologically not a 'Subdivision', and the attribute values (e.g., 'Regulatory fiction', 'lampros@[127.0.0.1]') are evidently fictional or technical placeholders.
+**Why**: The object model contains nonsensical attribute values (e.g., website 'about:blank', email 'lampros@[127.0.0.1]', phone '000') and logically impossible relationships. The company 'C_MinPair_Bureau_1' and the person 'P_MinPair_Lampros_1' are simultaneously defined as Boss, Employee, Coworker, and Subdivision to each other, which is entirely contradictory. Furthermore, a 'Person' cannot physically be a 'SUBDIVISION' of a company.
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model is structurally invalid regarding multiplicities. The script attempts to link the single relationship object `Rel_AB5_R50_1` to two different target contacts (`P_AB5_Aarav_1` and `P_AB5_Zainab_1`). The domain model defines the `RelationshipToContact` association with `Contact[1]`, meaning a relationship instance can target exactly one contact. Furthermore, it is semantically incorrect to model a 'Person' (`P_AB5_Wanjiku_1`) as a `COWORKER` of a 'Company' (`C_AB5_SavannaPost_1`); distinct entities do not "cowork".
+**Why**: The object model violates the domain's multiplicity constraints and real-world logic. First, `Rel_AB5_R50_1` is assigned two target contacts (`P_AB5_Aarav_1` and `P_AB5_Zainab_1`), breaking the strict `Contact[1]` multiplicity of the `RelationshipToContact` association. Second, `Rel_AB5_R51_1` assigns a `#COWORKER` relationship between a `Person` (`P_AB5_Wanjiku_1`) and a `Company` (`C_AB5_SavannaPost_1`), which is semantically nonsensical as a company cannot be a coworker.
 
 ## gen5 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The object model contains nonsensical semantic relationships regarding the `Company` class. Specifically, the relationship `Rel_Stad_Maint_to_CanalView_Employee_1` defines a Company (`C_Stad_MaintUnit_1`) as an `#EMPLOYEE` of another company; companies are legal entities and cannot be employees (human personnel). Additionally, `Rel_Stad_Zuzanna_to_CanalView_Coworker_1` defines a Person as a `#COWORKER` of a Company entity (`C_Stad_CanalView_1`), which is logically impossible (coworkers are people).
+**Why**: The model misuses human-specific relationship types for organizations. Specifically, a `Company` (`C_Stad_MaintUnit_1`) is assigned an `EMPLOYEE` relationship to another `Company` (`C_Stad_CanalView_1`), and `C_Stad_CanalView_1` acts as a `BOSS` to it. Furthermore, a `Person` (`P_Stad_Zuzanna_1`) is defined as a `COWORKER` to an entire `Company` (`C_Stad_CanalView_1`). These relationships are semantically nonsensical in the real world.
 
 ## gen5 / boundary
 
 **Response**: Realistic
-**Why**: The object model represents a valid employment scenario between a 'Person' and a 'Company'. The attribute values are consistent with the South African context (names, "+27" phone codes, ".za" domains). The bi-directional relationship is logically sound: the person identifies as an 'Employee' of the company, and the company identifies as the 'Boss' (Employer) of the person.
+**Why**: The object model uses highly consistent and real-world plausible attributes for a South African context, including correct country area phone codes (+27), valid company suffixes ((Pty) Ltd.), and `.za` email domains. The dual relationships correctly mirror an employment scenario between a Person and a Company using the available relationship types.
 
 ## gen5 / complex
 
 **Response**: Realistic
-
-**Why**: The object model depicts a coherent, highly detailed multinational microgrid project with internally consistent data. Relationships properly reflect professional hierarchies (e.g., subdivisions, employee-employer links). Geographical details—such as matching phone country codes/area codes with specific cities (e.g., +1 418 for Quebec City, +221 for Senegal, +63 for Philippines) and locally accurate street names—are semantically correct. The chronology of the 'Notes' and the technical engineering terminology used (e.g., "anti-islanding," "black-start simulation") are plausible for this industry context.
+**Why**: The object model represents a highly consistent and detailed real-world scenario of an international microgrid project. The names, phone country codes, cities, and context of the notes are geographically and semantically accurate. The bidirectional relationships (e.g., Kojo as BOSS to Malou, and Malou as EMPLOYEE to Kojo) are logically sound, and the use of the limited relationship enums is applied plausibly across individuals and organizations.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: The model contains semantically nonsensical relationships. A 'Person' (`P_Archivist_1`) is linked to a 'Company' (`C_Paperless_1`) with the relationship type `SUBDIVISION`, but a person cannot correspond to an organizational subdivision. Additionally, `P_Archivist_1` is defined simultaneously as `BOSS` and `EMPLOYEE` of `P_Haakon_1`, creating a logical contradiction in the hierarchy.
+**Why**: The object model contains severe logical contradictions and category errors in its relationships. For example, `P_Archivist_1` is simultaneously modeled as a BOSS and an EMPLOYEE of `P_Haakon_1`. Furthermore, `P_Archivist_1` (a Person) is related to `C_MicroEtats_1` and `C_Paperless_1` (Companies) via a SUBDIVISION relationship, which makes no sense in the real world as a person cannot be a structural subdivision of a company. The notes in the objects even explicitly admit it is a contradictory test dataset.
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model leaves objects 'Addr_AB6_AD62_1' (Address) and 'Note_AB6_N62_1' (Note) as orphans; the domain model uses composition with multiplicity `Contact[1]`, meaning these objects cannot exist without being linked to a Contact. Additionally, the relationship 'Rel_AB6_R61_1' defines 'P_AB6_Imran_1' (Person) as a 'COWORKER' of 'C_AB6_ShubhamHall_1' (Company), which is semantically nonsensical; a person works *for* a company (EMPLOYEE) or *with* another person, not as a peer coworker to a legal entity.
+**Why**: A 'COWORKER' relationship is established between 'P_AB6_Imran_1' (a Person) and 'C_AB6_ShubhamHall_1' (a wedding venue Company), which is semantically nonsensical. Additionally, 'Addr_AB6_AD62_1' and 'Note_AB6_N62_1' are created but left floating and never linked to any Contact, which violates the strict 1-to-many composition constraints.
 
 ## gen6 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The object model contains semantic category errors regarding relationships. Specifically, `C_Kibo_Coastline_1` (a Company) is assigned the relationship `#EMPLOYEE` towards `C_Kibo_EOC_FieldBeira_1`; in reality, a company acts as a vendor or contractor, illegal entities cannot be "employees". Furthermore, `P_Kibo_Agnes_1` (a Person) is defined as a `#COWORKER` of `C_Kibo_AquaPure_1` (a Company), but typically one is a coworker of another person, not of an organization itself.
+**Why**: The object model contains semantic category mistakes in its relationships. For instance, the company 'C_Kibo_Coastline_1' is modeled as an EMPLOYEE of another company ('C_Kibo_EOC_FieldBeira_1'), which is impossible as companies cannot be employees. Additionally, persons like 'P_Kibo_Agnes_1' and 'P_Kibo_Tomas_1' are defined as COWORKERs of companies, but a person can only be a coworker of another person, not of an entire organization.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model creates a relationship `Rel_Aurora_R5_1` between two `Company` objects (`C_Aurora_1` and `C_Himalaya_1`) with the type `#COWORKER`. Semantically, "Coworker" applies to individuals (Persons) working together. Corporate entities cannot be coworkers; they would be partners, subdivisions, or unrelated.
+**Why**: The relationship 'Rel_Aurora_R5_1' designates the company 'C_Himalaya_1' as a '#COWORKER' to the company 'C_Aurora_1'. The concept of a coworker strictly applies to individual persons working together, not to corporate entities. Therefore, two companies being coworkers is semantically nonsensical.
 
 ## gen6 / complex
 
-**Response**: Unrealistic
-**Why**: The relationship `Rel_KoruHealth_to_SupportDesk_Subdivision_1` is semantically inverted. The model uses the pattern where the Source object plays the Role defined by the relationship type (e.g., `Thandiwe` is `EMPLOYEE` of `KoruHealth`). Following this logic, the object model incorrectly asserts that the main company `C_Koru_Health_1` is a `SUBDIVISION` of its own operational department `C_Koru_SupportDesk_1` ("Internal Unit"), which is hierarchically impossible.
+**Response**: Realistic
+**Why**: The object model is highly consistent and logically mirrors a real-world CRM system. The relationships (reciprocal boss/employee mappings, company subdivisions), attributes (matching country codes, phone numbers, and regional addresses like +971 for UAE/Dubai), and contextual note contents accurately reflect plausible business operations and domain constraints.
 
 ## gen6 / edge
 
 **Response**: Realistic
-**Why**: The object model represents an empty 'AddressBook' with no contacts. This is a plausible initial state for a system (e.g., a newly created address book before any entries have been added).
+**Why**: The object model represents a newly created, empty AddressBook. This is perfectly realistic, as an address book contains zero contacts when it is first initialized or purchased.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model assigns the `RelationshipType` `#COWORKER` to relationships between a Person (`P_AB7_H1_1`) and two Companies (`C_AB7_C70_1`, `C_AB7_C71_1`). Semantically, a 'Coworker' relationship implies a peer connection between individuals; a legal entity (Company) cannot be a coworker to a human, particularly when the companies act as an incubator and a wholesaler/supplier respectively.
+**Why**: The object model defines a person ('P_AB7_H1_1', Sipho Dlamini) as having a 'COWORKER' relationship with two corporate entities ('C_AB7_C70_1', a business incubator, and 'C_AB7_C71_1', a parts wholesale company). In reality, a person can be a coworker to another individual, but not to an entire company. Additionally, Sipho is a customer of the wholesale company, which is semantically incompatible with being its coworker.
 
 # bank
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The data is semantically consistent: Bank details and IBANs match the country code (Germany). Ownership follows the age constraint (owners are adults), while the scenario of a minor ('p3', age 17) being an authorized user of an account owned by a relative ('p1') is a common real-world banking practice.
+**Why**: The object model perfectly aligns with real-world banking logic. The accounts have valid German IBAN formats and positive balances. The ownership adheres to adult rules (owners 'p1' and 'p2' are over 18), while the minor 'p3' (age 17, likely a family member given the shared last name) is realistically modeled merely as a user of her mother's account.
 
 ## gen1 / boundary
 
 **Response**: Realistic
-**Why**: The object model is consistent with the domain logic. Bank locations match the IBAN prefixes of their accounts (e.g., Norway bank `b4` holds account `a5` with 'NO' prefix). The OCL constraint requiring owners to be adults is satisfied (owners `p8`, `p9`, `p10` are 18+), while the minor `p11` (age 17) is correctly modeled related to the account via the `Use` association rather than ownership.
+**Why**: All banks have valid BIC formats and country associations. Accounts correspond properly to their regional banks with correctly formulated IBAN prefixes (NO for Norway, BR for Brazil). All account owners are adults (>= 18), aligning with the domain constraints and real-world legal norms, while minors are allowed to be assigned merely as account users. Balances are non-negative, and personal details reflect plausible diversity and age brackets.
 
 ## gen1 / complex
 
 **Response**: Realistic
-**Why**: The model is semantically consistent and logical. Bank countries match the IBAN prefixes of their accounts (e.g., German bank 'b9' holds 'DE' accounts). Attributes are plausible (valid ages, positive balances), and relationships respect the constraints (the minor 'p27', age 17, is correctly modeled as a 'user' rather than an 'owner' to satisfy the `AdultOwners` invariant).
+**Why**: The object model represents a highly plausible real-world scenario. The attributes (ages, account balances) are well within normal ranges. The structural constraints (like 1 to 2 owners per account) are respected, and there is a strong semantic consistency between the bank countries (Germany, Spain, Morocco) and their corresponding IBAN prefixes (DE, ES, MA). Minors (like 'p27', age 17) use accounts but do not own them, properly satisfying the adult owner constraints while remaining practically realistic.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-**Why**: The Bank object 'b2' is located in 'Monaco', yet it is associated via composition with Account 'a3', which has a German IBAN ('DE...'). In the real world, a bank entity in a specific country issues IBANs corresponding to that country's code (or a specific monetary agreement code like 'MC' for Monaco), not foreign country codes like Germany.
+**Why**: The bank 'b2' is definitively located in 'Monaco', but its associated account 'a3' has a German IBAN (starting with 'DE') and account 'a4' has a French IBAN (starting with 'FR'). In the real world, the first two letters of an IBAN correspond to the country of the issuing bank, which should match the bank's operational country.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates explicit constraints and multiplicities defined in the domain model. Account 'a8' has a negative balance (-350) violating `positiveBalance`, and has 3 owners (`p14`, `p15`, `p16`) which exceeds the maximum allowed multiplicity of 2. Furthermore, Person 'p19' is an owner of account 'a9' despite being 16 years old, violating the `AdultOwners` constraint.
+**Why**: Account 'a8' is assigned three owners (p14, p15, and p16) in the 'Ownership' association, which directly contradicts the domain model's structural cardinality constraint limiting an account to a maximum of two owners [1..2]. Additionally, the model violates the defined OCL constraints: account 'a8' has a negative balance (-350), and owner 'p19' violates the minimum age requirement (16 instead of 18).
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model reflects a plausible banking scenario. The IBAN prefixes (MA, FI) correctly correspond to the countries of the associated banks (Morocco, Finland). The relationship logic is sound: `p32` (age 16) is correctly restricted to being a 'user' rather than an 'owner' (respecting the adult age constraint), while valid joint ownerships and authorized usage between adults are established.
+**Why**: The object model accurately reflects a real-world banking scenario. The banks and IBAN prefixes correctly align with their respective countries (MA for Morocco, FI for Finland). The balances are non-negative, and all account owners meet the adult age requirement (>18). It's also highly plausible for a 16-year-old ('Inès', 'p32') to have usage rights on an account owned by an adult relative ('Fatima', 'p28', who shares the same last name).
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: The account 'a28' has a balance of 2,147,483,647. This value corresponds exactly to the maximum value of a signed 32-bit integer ($2^{31}-1$). It is statistically impossible for a real-world bank account balance to naturally hit this exact computational boundary, indicating a synthetic test for integer overflow or a default maximum rather than a realistic financial value.
+**Why**: Account 'a28' has a balance of exactly 2,147,483,647, which is the maximum limit of a 32-bit signed integer. It is practically impossible for a real-world personal bank account to have this exact artificial software limit as a balance, especially when owned by everyday individuals like an 18-year-old ('p50') and a 28-year-old ('p49').
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model respects all constraints (all account owners are adults, all balances are positive). The data is semantically consistent: names align culturally with the bank locations (e.g., Japanese names for the Japanese bank, Brazilian names for the Brazilian bank). The relationships depicting usage rights (like family members accessing accounts or cross-border access) are plausible real-world scenarios.
+**Why**: The object model aligns perfectly with the domain model and real-world logic. Demographics (names and locations) match the bank countries appropriately, all account balances are non-negative, and the constraint that all account owners must be adults (age >= 18) is respected, while minors (e.g., Ahmed, 16) are correctly allowed to just 'use' accounts.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'p43' has an age of 5 but is defined as a 'user' of account 'a24', which is implausible as a 5-year-old cannot legally or practically operate a bank account. Additionally, 'p40' has an age of 122, which is an extreme statistical outlier representing the maximum recorded human lifespan.
+**Why**: Person 'p43' has an age of 5 but is assigned as a 'user' of account 'a24', which is legally and practically implausible since a 5-year-old toddler cannot operate a bank account autonomously. Additionally, Person 'p40' has an age of 122, which pushes the absolute historical limit of the human lifespan and is highly improbable for an active bank account owner.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'p66' is 17 years old but is assigned as the owner of account 'a41', which violates the domain constraint 'AdultOwners' (age >= 18). Furthermore, the account 'a40' has no owner associated with it, violating the required multiplicity (1..2) for the 'Ownership' association.
+**Why**: The person 'p66' (age 17) is assigned as the owner of account 'a41', which directly violates the explicit `AdultOwners` domain constraint requiring owners to be at least 18. Additionally, the account 'a40' has no owner assigned, which violates the `1..2` multiplicity requirement for the owner role in the `Ownership` association.
 
 ## gen3 / baseline
 
 **Response**: Realistic
-**Why**: The object model is logically consistent and semantically sound. Bank objects are associated with accounts that have IBANs corresponding to the bank's country (e.g., 'b14' in Portugal holds accounts with 'PT' prefixes). Person names are culturally consistent with the regions, and cross-border ownerships (e.g., a Turkish citizen co-owning a Portuguese account) are plausible real-world scenarios. Multiplicities and age constraints are respected.
+**Why**: The object model represents a plausible scenario. The ages of all persons are realistic and meet the adult constraint. Account balances are positive integers. The IBAN country codes correctly match the BIC country codes of their associated banks (e.g., 'PT' for Portugal, 'TR' for Türkiye), and the names of the persons align culturally with the regions of their accounts. Ownership falls within the 1-2 person limit.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object 'p90' (Zoltán Farkas) is defined as a 'user' on five different accounts (`a49`, `a51`, `a52`, `a53`, `a54`) located in three different countries (Kenya, Canada, India) and owned by distinct, unrelated people. It is highly implausible in a personal banking context for a single individual to have authorized signatory access to such a diverse set of unrelated international accounts. Additionally, account 'a52' has 1 owner and 5 additional users, which is an unusually high number of authorized signatories for a standard personal account.
+**Why**: The person 'p90' is listed as a user on personal accounts across three different countries (Kenya, Canada, India) belonging to completely unrelated owners, which is highly illogical for real-world retail banking. Furthermore, account 'a51' at a local "Community Bank" has an astronomically high and implausible balance (999,999,999) for an individual, and the Canadian account 'a52' has 5 unrelated international users despite a zero balance.
 
 ## gen3 / complex
 
-**Response**: Unrealistic
-**Why**: The object 'a64', associated with a French bank, is assigned an IBAN ('FR763000700011000997654321098') containing 29 characters. In reality, French IBANs have a standard fixed length of 27 characters.
+**Response**: Realistic
+**Why**: The object model exhibits strong real-world consistency. IBAN and BIC prefixes correctly match the banks' respective countries (FR for France, AE for the UAE, IT for Italy). The associations depict highly plausible family and banking structures (e.g., married couples jointly owning accounts, and minors like the 17-year-old Léa Moreau being authorized users but not owners of their parents' accounts). All logical constraints, such as non-negative balances and adult ownership, are strictly respected.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'p79' has an age of 2, yet it is associated with account 'a45' as a 'user'. It is not plausible for a toddler to actively operate or use a bank account. Additionally, account 'a46' has a balance of exactly 2,147,483,647 (maximum 32-bit integer), which strongly suggests synthetic data rather than a real-world financial value.
+**Why**: Account 'a46' has a balance of exactly 2,147,483,647 (the maximum value for a 32-bit signed integer), which is an artificial boundary-test value rather than a naturally occurring real-world bank balance. Furthermore, person 'p79' is 2 years old but is assigned as a "user" of account 'a45', which is practically impossible as an infant cannot independently operate a bank account.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates multiple constraints defined in the domain model. First, account 'a59' has a balance of -1250, which violates the explicit `positiveBalance` invariant (balance >= 0). Second, account 'a60' is assigned four owners ('p100', 'p101', 'p102', 'p103') in the `Ownership` association, exceeding the maximum allowed multiplicity of 2 owners per account.
+**Why**: Account 'a60' is assigned four owners ('p100', 'p101', 'p102', 'p103'), which violates the 1..2 upper bound multiplicity constraint of the 'Ownership' association. Additionally, account 'a59' has a balance of -1250, directly violating the 'positiveBalance' constraint defined in the domain model.
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The model demonstrates high semantic consistency: names align culturally with the bank countries and IBAN prefixes (e.g., Arabic names with Saudi IBAN 'SA', Spanish names with Spanish IBAN 'ES'). The relationships (joint ownership, cross-usage of accounts suggesting family ties) and attribute values (ages, positive balances) are logical and plausible.
+**Why**: The object model represents a plausible real-world scenario. The attributes have realistic values (e.g., ages are between 22 and 46, balances are positive), the names and IBAN country codes correctly match the geographical locations of their respective banks (SA for Saudi Arabia, ES for Spain), and the relationships respect the constraints, such as accounts having a maximum of two adult owners.
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'p125' of class 'Person' has an assigned age of 121, which exceeds the typically accepted upper limit for human lifespan (commonly modeled as 120) and represents a statistical anomaly that is not representative of a realistic demographic.
+**Why**: The object 'p125' of class 'Person' has an age of 121, which exceeds the plausible realistic maximum human lifespan (typically bounded at 120).
 
 ## gen4 / complex
 
-**Response**: Unrealistic
-**Why**: The 'Use' associations contain semantically nonsensical relationships for a personal banking context. For example, 'p137' (Saskia de Boer, Dutch) and 'p139' (Cem Kaya, Turkish) are designated users of account 'a95', which is held at a Tunisian bank and owned by unrelated Tunisian residents ('p143', 'p144'). Similarly, a Dutch minor 'p146' (17 years old) is a user of a Turkish account 'a91' owned by 'p138' (Elif Yılmaz). These random cross-border account permissions between unrelated individuals are not plausible.
+**Response**: Realistic
+**Why**: The object model perfectly aligns with reality. Account balances are positive, IBANs match the country context representing each bank, all owners are adults (satisfying the age constraint), and minors simply have "Use" access to older relatives' accounts (e.g., 17-year-old Daan using 56-year-old Jeroen's account), which models real-world family banking.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'p119' of class 'Person' has an age of 130, which exceeds the maximum verified human lifespan and is biologically implausible.
+**Why**: The object 'p119' of class 'Person' has an age of 130, which exceeds the biologically plausible maximum human lifespan. Additionally, the object 'p122' has an age of 0 (an infant) but is assigned to a 'Use' relationship with bank account 'a71', which is practically impossible.
 
 ## gen4 / invalid
 
 **Response**: Realistic
-**Why**: The object model contains plausible real-world data, including meaningful names, valid ages, and positive balances. The banking identifiers (IBANs, BICs) follow the correct structure for the specified countries (Spain, Argentina). The multiplicities are respected (e.g., 'a99' is a joint account with two owners). The assignment of an account with a legacy Bankia bank code (2038) to CaixaBank is consistent with the real-world absorption of Bankia by CaixaBank.
+**Why**: The generated objects represent valid real-world entities, such as legitimate banks with accurate BIC codes. The personal details (ages 34-63), account balances, and standardized Spanish IBAN formats are completely plausible. Furthermore, the relationship semantics—like joint ownership ('p154' and 'p155' owning 'a99') and delegated account access ('p153' using 'a98' owned by 'p152')—accurately reflect real-world banking practices.
 
 ## gen5 / baseline
 
 **Response**: Realistic
-**Why**: The model presents a coherent banking scenario. The names of the persons align culturally with the countries of the banks (Greek names with the Greek bank, Norwegian names with the Norwegian bank). The technical formats used for attributes are plausible: IBAN lengths are correct for the respective countries (27 alphanumeric for Greece, 15 for Norway) and BIC codes follow the standard 11-character structure. Relationships such as joint ownership and non-owner access (users) are logical.
+**Why**: The object model is highly consistent and semantically plausible. The bank details (BICs, countries), IBAN formats, and person names accurately correspond to real-world Greek and Norwegian data. Account balances are positive, all owners are adults, and the ownership multiplicities (1 to 2 owners per account) are strictly respected. Users who are not owners (e.g., accountants or partners) accurately reflect real-world delegated access.
 
 ## gen5 / boundary
 
-**Response**: Realistic
-**Why**: The object model represents a plausible snapshot of a banking system. The relationships adhere to the constraints (all account owners are adults, while a minor appears only as a user). Use of regional data (Swiss Bank 'Helvetia' containing accounts with 'CH' IBANs) demonstrates semantic consistency. While the balance of account 'a103' is exactly the maximum 32-bit integer (`2,147,483,647`), this amount (~2 billion or 21 million depending on currency subunits) is economically plausible for a joint account held by older adults in a Swiss Private Bank.
+**Response**: Unrealistic
+**Why**: The account 'a103' has a balance of exactly 2147483647, which represents the maximum value of a 32-bit signed integer. While syntactically valid, this is a recognizable software testing artifact rather than a naturally occurring, plausible real-world bank account balance.
 
 ## gen5 / complex
 
 **Response**: Unrealistic
-**Why**: The object 'p194' (Ewa Nowak) is associated via the 'Use' relationship to 12 different accounts across 5 different countries (Switzerland, Poland, Portugal, Saudi Arabia, Ireland). It is implausible for a single private individual to have authorized access (signatory power) to personal bank accounts owned by multiple unrelated families and individuals globally.
+**Why**: The person 'p194' (Ewa Nowak) is assigned as a user (`Use` association) for every single account in the system (12 accounts across 5 different countries and banks), yet she owns none of them. In the real world, a single private individual does not arbitrarily have access or usage rights to completely unrelated strangers' personal bank accounts globally.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: The account 'a107' has a balance of 2,147,483,647, which is exactly the maximum limit of a 32-bit signed integer. It is statistically impossible for a real-world financial balance to naturally equal this specific computational boundary value; this indicates a synthetic software boundary test rather than a realistic banking snapshot.
+**Why**: The account 'a107' has a balance of exactly 2147483647, which is the maximum 32-bit signed integer value, indicating synthetic or test generation data rather than a real-world amount. Furthermore, it is highly implausible that an 8-year-old child ('p168') is granted usage rights to 5 different bank accounts owned by unrelated adults ('p163', 'p164').
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the cardinality constraint defined in the domain model. The `Ownership` association restricts the number of owners per account to a maximum of 2 (`Person [1..2]`), but account 'a122' is assigned 4 distinct owners ('p185', 'p186', 'p187', 'p188').
+**Why**: The object model violates the domain model's multiplicity constraints. Account 'a122' is assigned 4 owners ('p185', 'p186', 'p187', 'p188') in the 'Ownership' association, but the domain model explicitly limits the number of owners per account to a maximum of 2 (`Person [1..2]`).
 
 ## gen6 / baseline
 
 **Response**: Realistic
-**Why**: The object model uses culturally appropriate names and correct IBAN formats/lengths for the specific countries defined (Croatia and Ireland). Relationships are logical (e.g., family members 'Ivana Kovač' and minor 'Luka Kovač' sharing access to an account, with the minor correctly restricted to the 'User' role rather than 'Owner').
+**Why**: The objects have culturally consistent names, plausible ages, and realistic banking details. The IBANs correctly match their respective bank countries (HR for Croatia, IE for Ireland), balances are positive, and all account owners are adults (>= 18). Authorizing a 15-year-old ('Luka') to use an account owned by an adult ('Ivana') perfectly reflects real-world family banking practices.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model displays clear signs of synthetic test data rather than a realistic scenario. 
-1. The balance of account 'a119' is `2147483646` (exactly `2^31 - 2`), which is a specific computer science boundary value (MAX_INT) rather than a plausible real-world financial balance.
-2. The Person 'p176' (an 18-year-old) is a co-owner of three separate accounts in three disparate regions (New Zealand, Finland, Chile), sharing them with locals of those countries. This geographic spread violates common residency and financial logic.
+**Why**: The balance of account 'a119' is 2,147,483,646, which is suspiciously close to the 32-bit signed integer limit, making it an artificial test boundary value rather than a plausible real-world financial balance. Furthermore, it is factually nonsensical for an 18-year-old ('p176') to simultaneously co-own joint accounts across three disconnected continents (New Zealand, Finland, Chile) with completely unrelated local individuals.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The model demonstrates high semantic consistency. Person names match the countries of their associated banks (e.g., Lithuanian names for the Lithuanian bank), and technical attributes like IBANs and BICs follow correct real-world formats and lengths for the respective countries (Norway, Lithuania, Jordan, UK). Logical constraints, such as minors (Sara, 17) being users but not owners of accounts, are strictly observed.
+**Why**: The object model demonstrates exceptional consistency with real-world banking and demographic logic. The IBAN formats perfectly match the distinct standards of their respective countries (e.g., the UK and Jordan IBANs correctly include their bank's alphabetic code, whereas Norway and Lithuania use numeric formats). Additionally, the names match the local demographics of the banks, and the relationships portray a highly plausible family scenario (a 17-year-old minor 'Sara' acts merely as a user, not an owner, on her likely parents' accounts, correctly satisfying the adult-owner constraints).
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-
-**Why**: Account 'a114' has a balance of exactly 2,147,483,647, which is the maximum limit of a 32-bit signed integer (`INT_MAX`); this suggests a software artifact rather than a realistic financial balance. Furthermore, Person 'p174' is 3 years old but is linked as a 'user' of account 'a113', which is implausible as a toddler cannot actively operate a bank account.
+**Why**: The account 'a114' has a balance of 2147483647 (the maximum 32-bit integer value), which is a clear technical artifact rather than a plausible real-world bank balance. Additionally, person 'p174' is 3 years old but is assigned as an active 'user' of account 'a113', which is impossible in reality.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The account 'a136' is associated with three different owners ('p203', 'p204', 'p205') in the 'Ownership' association, violating the domain model's multiplicity constraint which limits ownership to a maximum of 2 persons.
+**Why**: The object model violates the cardinality constraints defined in the domain model. The account 'a136' is assigned three owners ('p203', 'p204', and 'p205') in the Ownership association, but the domain model strictly limits the number of owners per account to a maximum of 2 (Person [1..2]).
 
 # football
 
 ## gen1 / baseline
 
-**Response**: Unrealistic
-**Why**: The model poses a logistical impossibility for an amateur 'Community 5-a-side League'. Team 'T9' is based in Ireland (Phone prefix +353, 'Docklands') and Team 'T10' is based in Mexico (Phone prefix +52, 'Estadio La Cumbre'), yet they play a casual weekday match (M6). Additionally, the match implies the use of 'boards' (MN6), but records an 'OFFSIDE' event (ME20), a rule that does not exist in 5-a-side football with boards.
+**Response**: Realistic
+**Why**: The object model perfectly represents a 5-a-side football match scenario. The match events, player goals, and final report scores all consistently account for exactly 3 goals. Furthermore, the match events (up to 39 minutes) fit within the 40-minute match duration, and having 5 players per team aligns with the "Community 5-a-side League" competition type. Attributes like ages, phone numbers, and notes are completely plausible.
 
 ## gen1 / boundary
 
-**Response**: Unrealistic
-**Why**: Player 'P1' is assigned the positions Goalkeeper, Defender, and Midfielder simultaneously. In professional football (implied by the 'Club' and 'Intercontinental Cup' context), the Goalkeeper role is highly specialized and is not held concurrently with outfield positions like Midfielder. Furthermore, match ratings of 0 and 1 for players completing 90 minutes are inconsistent with standard sport rating scales.
+**Response**: Realistic
+**Why**: The object model is logically consistent and mathematically valid without breaking the domain constraints. A 0-0 match score correctly corresponds to zero goal events. The player missing a training session for a transport delay is a plausible real-world scenario, and player ages, associations, and dates track normally. Registering a versatile young player (P1) for three positions is explicitly permitted by the 1..3 cardinality.
 
 ## gen1 / complex
 
-**Response**: Unrealistic
-
-**Why**: The object model depicts a professional/organized competitive environment (90-minute matches, Match Reports, distinct Clubs), yet it features matches between single-gender male teams (T19) and mixed-gender teams (T20, T18). For instance, in Match 'M12', T19 (all male players) competes against T20 (containing female player 'P60'), which violates standard regulations for competitive football. Additionally, the participation of a Swedish club ('C17') in a 'Pacific-Rim' tournament is geographically inconsistent.
+**Response**: Realistic
+**Why**: The object model perfectly aligns with real-world football logic. Attributes are highly consistent: player ages match U21 team constraints, phone numbers match club countries (Chile, Japan, Sweden), and jersey numbers match classic positional roles (e.g., GK wearing 1, Forwards wearing 9 or 11). Furthermore, match events, scores, and goal distributions exactly match the described scenarios in match notes (e.g., a "scoreless" match with a saved penalty, and a 3-2 match where the visitor equalizes twice). The OCL constraints are thoroughly respected.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-**Why**: The object model depicts a professional 'Match' ('M2') being played with only one player per team ('P3' and 'P4'), hindering the minimum requirement of 7 players per side for association football. Additionally, the match statistics are contradictory: the match ended 0-0 after 120 minutes, yet the forward 'MP4' received a perfect rating (10) despite not scoring in a 1-on-1, and the goalkeeper 'MP3' received a 0 rating despite keeping a clean sheet.
+**Why**: A football match (M2) in an organized competition cannot consist of only one player per team (MP3 and MP4 are the only MatchPlayers). Standard football rules require a minimum number of players to constitute a match. Additionally, a 120-minute international 1v1 match between a 44-year-old goalkeeper and a 15-year-old youth player is entirely implausible in reality.
 
 ## gen1 / invalid
 
 **Response**: Realistic
-**Why**: The object model represents a plausible set of football data including clubs, players, training sessions, and matches. The data is logically consistent: players play in positions they are trained for (e.g., P7 serves as a Defender in Match M3), and match dates allow for realistic rest periods. Furthermore, the model strictly adheres to the domain constraints, specifically ensuring that the sum of `scoreLocal` and `scoreVisitor` in a `MatchReport` equals the exact count of linked `MatchEvent` objects defined as `GOAL`.
+**Why**: The object model perfectly aligns with the domain constraints and real-world logic. The teams, clubs, and home grounds correspond to actual Nordic football clubs, and their international phone number codes match their respective countries. The dates, match events, players' ages, and positional logic are all consistent and plausible. Furthermore, the number of 'GOAL' events perfectly matches the sum of the match report scores, adhering strictly to the defined OCL constraints.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The model depicts a semantically consistent scenario of a pre-season friendly match between a Japanese team and a Moroccan team. The temporal sequence is logical (training sessions occur days before the match), and the travel implied is possible. The domain constraint `SumOfScoresEqualsGoals` is respected: the match score is 0-0, and there are no `GOAL` events recorded (the presence of a `PENALTY` event without a `GOAL` event correctly implies a missed penalty). Player ages and attributes are within valid real-world ranges.
+**Why**: The object model represents a highly coherent and well-structured scenario. Player ages (18-28), ratings (5-8), match duration (90), and event timings (all under 90 mins) strictly follow real-world football logic. The final score of 0-0 perfectly aligns with the fact that no individual players are assigned goals and no `GOAL` match events are registered. The training remarks and absences are also conceptually solid.
 
 ## gen2 / boundary
 
 **Response**: Realistic
-
-**Why**: The object model represents a coherent and internally consistent scenario of an international football series between Chilean and Swedish clubs.
-1. **Mathematical Consistency**: The sum of individual player goals exactly matches the match scores, which in turn matches the count of goal events (satisfying the domain constraints).
-2. **Geographical & Temporal Logic**: Player names, phone codes (+56 for Chile, +46 for Sweden), and stadium names match the club origins. Timelines for training, injuries (e.g., P70 missing training due to injury but playing 5 days later), and matches are chronological and plausible.
-3. **Detail Accuracy**: Attributes follow common sense (e.g., an older player P64 is a Goalkeeper; a defender listed as booked received a lower rating). The statistical flow of the 120-minute match (M13) is correctly modeled with goals occurring in extra time.
+**Why**: The object model is highly coherent and aligns perfectly with real-world football logic. Attributes such as match durations (90 and 120 minutes), match event times, player ratings, and reasons for missing training are all plausible. Furthermore, the number of 'GOAL' events perfectly matches both the match reports' final scores and the sum of goals attributed to individual players in each match. Furthermore, the player phone numbers' country codes correctly align with the clubs' distinct geographic locations (Chile and Sweden).
 
 ## gen2 / complex
 
 **Response**: Realistic
-
-**Why**: The object model represents a coherent and highly detailed football scenario that satisfies all domain constraints and real-world logic.
-1. **Constraint Satisfaction**: The strict `SumOfScoresEqualsGoals` constraint is met in both matches. Match `M20` has 3 GOAL events corresponding to a 1-2 scoreline. Match `M21` has 0 GOAL events corresponding to a 0-0 scoreline.
-2. **Semantic Consistency**: Geographic details are accurate (e.g., Raja Casablanca players have Moroccan +212 numbers, Helsinki players have Finnish +358 numbers).
-3. **Plausible Narrative**: Interaction between classes is logical. For example, Match `M21` includes a `PENALTY` event but no `GOAL` event; this is semantically explained by an associated `MatchNote` stating the penalty was saved.
-4. **Valid Data**: Player attributes (ages 19-29), training failure reasons (e.g., exams, injury), and position assignments (Goalkeepers playing in goal) are all realistic.
+**Why**: The object model is highly coherent and aligns perfectly with real-world football logic. Attributes such as match scores exactly match the number of 'GOAL' events, player phone numbers correctly correspond to their club's country codes (e.g., +212 for Morocco, +358 for Finland), and qualitative data like player/training notes make accurate tactical sense for their specific assigned positions (e.g., cross-claiming notes for Goalkeepers). Date ranges and match durations (90 and 93 minutes) are physically plausible.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-
-**Why**: The objects 'MP27' and 'MP28' (class `MatchPlayer`) have `rating` values of 999 and -1, respectively. In the context of football, player performance ratings are typically measured on defined scales (e.g., 1-10 or 1-100). A negative rating is semantically impossible, and 999 represents an outlier or error value that does not reflect a realistic performance assessment.
+**Why**: The object model assigns impossible values for a player's match performance rating. Specifically, the object 'MP27' has a rating of 999, and 'MP28' has a rating of -1, which fall far outside any standard real-world scale for evaluating player performance (typically 0-10 or 0-100).
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain constraint `TeamsFromDifferentClubs`. Use of the teams 'T15' (Chivas Primera) and 'T16' (Chivas Sub-23) in Match 'M9' causes a contradiction because both teams belong to the same Club ('C14'), which the strict domain logic expressly forbids.
+**Why**: The object model violates the domain's explicit OCL constraint `TeamsFromDifferentClubs`. Match 'M9' is played between the local team 'T15' and the visitor team 'T16', but both of these teams belong to the exact same club ('C14'), which contradicts the constraints.
 
 ## gen3 / baseline
 
 **Response**: Realistic
-
-**Why**: The object model is logically consistent and plausible within the context of the defined "Charity mini-tournament".
-1. **Mathematical Consistency**: The `SumOfScoresEqualsGoals` constraint is satisfied for both matches (e.g., Match M22 has a 3-2 score, 5 'GOAL' events, and the sum of individual player goals is also 5).
-2. **Positional Consistency**: Players are assigned to match positions (e.g., P129 as Goalkeeper) that match their defined competent positions in the `PlayerPositions` association.
-3. **Contextual Logic**: While a 70-minute match (M22) and mixed-gender rosters (e.g., T39) might seem unusual, they are fully explained by the `Competition` type "Charity mini-tournament". The training notes contain specific, realistic football coaching terminology.
+**Why**: The object model is highly consistent and semantically plausible. The phone number country codes match the geographical locations of the clubs (Norway, Nigeria, India), the event timings fall logically within the match durations, and the sum of player goals perfectly matches the scores and the number of 'GOAL' events recorded in the match reports. The scenario describes a charity mini-tournament, making the mixed rosters and smaller team sizes (5v5/4v4) contextually appropriate.
 
 ## gen3 / boundary
 
 **Response**: Realistic
-**Why**: The model presents a coherent scenario involving two specific football clubs (one Icelandic, one Nepalese) with consistent geographical details (names, phone codes, locations). The match scores strictly correspond to the goal events in the `MatchEvent` history as required by the domain constraints. Player ages, positions, and training data are logically sound (e.g., attending school exams for a 16-year-old).
+**Why**: The object model is semantically sound and closely follows real-world football logic. All domain constraints are respected, including strict logic like matching the number of `GOAL` match events with the sum of Local and Visitor match scores. Attributes such as player ages, kit numbers, goals credited to positions, and dates are highly plausible, and the textual notes accurately reflect common football situations.
 
 ## gen3 / complex
 
 **Response**: Realistic
-
-**Why**: The object model demonstrates high semantic consistency and attention to detail. 
-1. **Mathematical Consistency**: The `MatchReport` scores perfectly match both the count of `GOAL` events in `MatchEvent` and the sum of individual goals assigned to `MatchPlayer` instances (e.g., in Match M35, the 3-1 score aligns with the 4 goal events and the specific goal scorers).
-2. **Demographics**: Player names and phone numbers correctly correspond to the geographical regions of their clubs (Korea, Spain, Nigeria, Canada).
-3. **Age Validation**: The "U19" team (T60) consists exclusively of players aged 17-18, adhering to age-group logic.
-4. **Schedule Logic**: While the clubs are on different continents, the competition is explicitly defined as an "Intercontinental Spring Four" invitation mini-league, occurring over 8 days in April. This justifies the rapid succession of matches between disparate teams (tournament format) rather than impossible travel schedules.
-5. **Constraint Adherence**: All constraints regarding positive scores and score-event summation are satisfied.
+**Why**: The object model is highly consistent and logically sound. Player attributes (like area codes matching team locations), training sessions matching their clubs' facilities, match events fitting within reported durations, and individual player goals summing perfectly to match scores all demonstrate a thoroughly plausible football scenario.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'ME94' has a negative timestamp (-1), which is impossible. The player 'MP95' has a rating of 2,147,483,647 (maximum 32-bit integer), which is not a realistic performance score. Additionally, the match duration is recorded as 1 minute ('MR17'), but a goal event ('ME98') is recorded at minute 121, creating a temporal contradiction.
+**Why**: The object model contains multiple impossible values and contradictions: 
+1. `MatchEvent` 'ME94' occurs at `time := -1`, which is physically impossible. 
+2. `MatchPlayer` 'MP95' has a `rating` of 2147483647 (the maximum 32-bit integer), which is not a valid performance rating. 
+3. `MatchEvent` 'ME98' occurs at `time := 121`, far exceeding the match `duration` of 1 recorded in `MatchReport` 'MR17'.
+4. `MatchPlayerPosition` 'MPP96' uses shirt `number := 0`, which is invalid in standard football.
 
 ## gen3 / invalid
 
-**Response**: Unrealistic
-**Why**: The object model violates the cardinality constraint defined in the domain. The player 'P84' is inserted into the `TeamPlayer` association with 'T27' and later with 'T28', effectively assigning them to two teams simultaneously. The domain model restricts a `Player` to exactly one `Team` (`Team [1]`). Additionally, 'TO96' is marked as successful despite its end date (March 15) being in the future relative to the latest logged activities (February 23).
+**Response**: Realistic
+**Why**: The object model portrays a highly plausible real-world football scenario. The relationships between clubs, teams, players, and match events are logically consistent. The attributes (such as player ages, event times between 0 and 90, and match scores) fall perfectly within real-world boundaries. The constraint requiring the sum of goals to match the final score (4 goals total) is correctly respected, and players participating in the match correctly belong to the competing teams. Minor structural deviations (like a 17-year-old playing for both the First Team and Reserves) are explicitly justified in the notes and reflect common real-life football practices.
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The object model portrays a coherent, mathematically consistent, and contextually detailed football scenario. The match statistics are perfectly synchronized: the match report scores (4-3) equal the sum of individual player goals and match the total count of 'GOAL' events (7). Player ages properly correspond to their team categories (U19 players are teenagers, First Team players are adults), and international details (phone codes +27/+90, geographic locations) are logically aligned with the clubs.
+**Why**: The object model is highly detailed and logically consistent. Player names, ages, and phone number country codes correctly match internal team logic (South African and Turkish teams). The constraints are respected, and the sum of player goals exactly matches the match report's score and the number of goal events. Constraints such as matching players to exact team age categories (U19 vs First Team) are correctly modeled.
 
 ## gen4 / boundary
 
-**Response**: Unrealistic
-**Why**: The object model contains two contradictions with reality:
-1. Match `M26` has a duration of 0 (abandoned at kickoff), yet has official `MatchEvent` instances linked to it (Penalty, Offside). In the football domain, actions occurring during warmups (as attempted to be explained in note `MN34`) are never recorded as official match events.
-2. Team `T48` participated in a training session in India (`TS64`) on May 5th, making it logistically impossible to play a match in Toronto (`M26`) on May 6th.
+**Response**: Realistic
+**Why**: The object model is highly consistent and logically sound. It correctly links players to teams, training sessions, and match lineups. Furthermore, it realistically models an edge case of an abandoned match due to weather conditions, which is corroborated by plausible match notes, a match duration of 0, and match events with a time of 0. Constraints such as matching goals to scores are fully respected.
 
 ## gen4 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is semantically consistent and logically sound. Constraints are satisfied: match scores match the count of goal events (e.g., Match M43 has a 4-2 score and exactly 6 'GOAL' events), and players playing for specific teams account for the correct number of goals. Attribute values (ages, dates, match durations) are plausible, and the tactical details in notes (e.g., specific injuries, training drills) reflect high domain semantic quality.
+**Why**: The object model is highly consistent and semantically rich. The player names and phone country codes correctly align with their club's physical locations (Qatar, New Zealand, Poland), and the Academy team appropriately contains younger players (16-17). Match events, individual player goals, and math scores sum up perfectly according to the domain constraints, and timestamps are within match durations. Real-world training objectives and reasons for absence (e.g., school exams for a youth player, traffic delays) are also highly plausible.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-**Why**: Player 'P148' appears twice in the same match ('M25') simultaneously as two different entities ('MP145' and 'MP146') with different positions. Additionally, 'MP146' has an attribute `goals` set to 12, which contradicts the `MatchReport` 'MR25' (total score 1-0). 'MP149' also has a nonsensical negative rating (-50).
+**Why**: The object model contains several contradictions and impossible values. Player P148 (via MP146) is recorded as scoring 12 goals in the match, yet the MatchReport (MR25) indicates a final score of 1-0. Additionally, the match duration is 0, Player P148 has two separate MatchPlayer instances with different shirt numbers (1 and 10) for the same match, and MatchPlayer MP149 has an impossible negative rating (-50).
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: There is a data inconsistency that violates the domain constraint `SumOfScoresEqualsGoals`. The `MatchReport` (MR24) for match `M24` records a score of 5-4 (Total: 9 goals). However, only 2 `MatchEvent` objects of type `GOAL` (ME134 and ME138) are associated with the match, and the specific player stats (`MatchPlayer` objects) also only account for 2 goals (1 by MP141, 1 by MP144).
+**Why**: The match report 'MR24' has a local score of 5 and visitor score of 4 (totaling 9 goals), but the match 'M24' only has 2 'MatchEvent' objects associated with the 'GOAL' event type. This directly violates the 'SumOfScoresEqualsGoals' constraint.
 
 ## gen5 / baseline
 
-**Response**: Unrealistic
-
-**Why**: The object model describes matches (`M41`, `M42`) within a competition `COMP25` explicitly defined as an "International **futsal** friendly", involving clubs with "Futsal" in their names. However, the model includes `MatchEvent` objects (`ME234`, `ME243`) with the `eventType` of `OFFSIDE`. The real-world rules of Futsal do not include the offside rule, making these events semantically impossible in this context.
+**Response**: Realistic
+**Why**: The object model is highly consistent and semantically plausible. The player ages correctly correspond to their team categories (e.g., 16-17 for U17). Futsal match durations are correctly set to 40 minutes, and all match events occur within this timeframe. Furthermore, the total scores in the MatchReports perfectly match both the number of Goal events in the matches and the sum of individual goals credited to the MatchPlayers.
 
 ## gen5 / boundary
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and adheres to all domain constraints. The match score in `MatchReport` (1-0) correctly matches the number of `MatchEvent` objects of type `GOAL` (1 event) and aligns with the individual player statistics (Player P215 scored 1 goal). Additionally, the context details (player names, phone codes +234/+82, and club locations) are logically consistent with the defined teams.
+**Why**: The object model perfectly aligns with the domain constraints and real-world logic. The ages, geographical locations (Lagos/Nigeria and Jeju/South Korea), and phone number formats are authentic. Furthermore, the match score (1-0) accurately corresponds to the single registered `GOAL` match event, and the total goal count is correctly attributed to the match player.
 
 ## gen5 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is semantically consistent and rich in plausible detail. 
-1. **Demographics**: Player names, phone number formats (+55, +49, +233), and ages align correctly with their specific clubs (Brazilian, German, Ghanaian) and squad levels (Senior vs U23).
-2. **Logic & Constraints**: The match data perfectly satisfies the OCL constraint `SumOfScoresEqualsGoals`: 6 GOAL events match the 3-3 scoreline, and the sum of goals attributed to individual players (3 for locals, 3 for visitors) balances correctly.
-3. **Domain Accuracy**: Player positions in the match align with their best positions. Narrative elements (training notes on tactical triggers, failure reasons like "port shift" or "train cancellation") demonstrate high real-world semantic quality.
+**Why**: The object model perfectly represents a valid football domain scenario. Player ages and attributes are plausible, relationships (like clubs owning teams and teams having players) are correctly established, and the match logic is perfectly consistent (the 6 'GOAL' match events match the 3-3 final score in the match report, and exactly 6 goals are distributed among the players of the participating teams).
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: In match `M29`, the object `MP165` (representing player `P162`) has the attribute `goals` set to 9. However, the associated match report `MR28` shows a `scoreVisitor` of 0. It is logically impossible for a player to be credited with 9 goals when their team's total score is zero.
+**Why**: MatchPlayer 'MP165' (Player 'P162') is recorded as having scored 9 goals in Match 'M29', but the match report ('MR28') indicates a total score of 1-0, making this mathematically impossible. Additionally, TrainingObjective 'TO179' has a start date (2026-03-10) that occurs after its end date (2026-03-01).
 
 ## gen5 / invalid
 
-**Response**: Unrealistic
-**Why**: The Domain Model enforces a mandatory one-to-one relationship (cardinality `[1]`) between `Match` and `MatchReport`. The Object Model creates Match `M27` but fails to create and link a corresponding `MatchReport`. While the "abandoned match" scenario is plausible, the model definition requires a report instance to exist (likely with 0-0 scores) to be considered a valid system state.
+**Response**: Realistic
+**Why**: The object model represents a highly cohesive and plausible scenario. The attribute values, relationships, dates, and training notes logically align with real-world football. The positional assignments match traditional squad numbers (e.g., both Goalkeepers wear number 1), and the notable absence of a MatchReport is cleverly and explicitly justified by a MatchNote stating the match was abandoned at 29 minutes due to extreme weather.
 
 ## gen6 / baseline
 
 **Response**: Realistic
-**Why**: The object model consistently represents an indoor 5-a-side (Futsal) tournament, supported by the specific squad sizes (5 players per match), venue names ("Indoor Arena"), and match duration (60 minutes). Player nationalities, names, and phone codes match their club locations (Canada, Korea, Egypt). Statistical logic holds across all levels: individual player goal counts match the match scores, which in turn match the aggregated `MatchEvent` logs.
+**Why**: The object model is highly consistent and semantically plausible. Attributes such as match scores directly match individual player goals and MatchEvent goal records. The sequence of dates, age ranges, match durations (60 mins for an indoor cup), round-robin format, and diverse geographical profiles of clubs and their players are all logically sound and align perfectly with real-world scenarios.
 
 ## gen6 / boundary
 
 **Response**: Realistic
-**Why**: The object model coherently represents an international friendly tournament ("Tri-Continent Cup") with logical dates, teams, and match events. Critical constraints are satisfied behaviorally, such as match scores matching the exact count of 'GOAL' events defined in the specific matches (e.g., Match M9 has a 3-3 score and exactly 6 GOAL events). Player attributes (ages, positions, specific phone number formats for Argentina, Kenya, and Czech Republic) correspond accurately to their respective clubs.
+**Why**: The object model is highly detailed and semantically consistent. Features such as player ages, positional assignments, footballing jersey numbers (1, 9, 10), logical event times within match durations, and phone numbers matching the respective club's country are all plausible. Moreover, match scores accurately reflect both the logical sum of goal events and OCL constraints.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and adheres to all defined constraints.
-1. **Constraint Satisfaction**: The score/goal consistency constraint is satisfied for both matches (M49 has 1 goal event and a 1-0 score; M50 has 0 goal events and a 0-0 score).
-2. **Semantic Coherence**: Player details match their clubs' geographical locations (e.g., Icelandic names/phones for the Reykjavik cliub, Kenyan names/phones for the Nairobi club).
-3. **Plausible Context**: Reasons for missing training are contextually appropriate (e.g., an Icelandic player missing due to a "fishing shift", a 16-year-old youth player missing due to "school detention").
-4. **Dates and Logistics**: Timelines for training and matches are sequential and physically possible.
+**Why**: The object model is syntactically sound, completely adheres to domain constraints, and features exceptionally coherent real-world semantics. Details like geographical context (e.g., Icelandic players training in cold weather or missing sessions for "fishing shifts", Oaxaca players training at high altitude), logical consistency between match events and match notes (e.g., a "Penalty" event matching a note about a saved penalty and a 0-0 scoreline), and proper alignment of goals to a player from the correct team all showcase a high degree of realism and plausibility.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**:
-The object model contains physically impossible scenarios and logical contradictions regarding team affiliations:
-1.  **Wrong Team Participation**: Player 'P230' (belonging to Team 'T69') plays in Match 'M37', explicitly defined as a match between 'T67' and 'T68'.
-2.  **Impossible Travel**: Player 'P230' participates in three full matches on consecutive days (April 5, 6, and 7) hosted by teams in Kolkata, Montreal, and Girona respectively. Intercontinental travel and recovery in that timeframe is impossible.
-3.  ** illogical Training Association**: Player 'P232' (Team 'T70') is recorded as failing to attend a training session for a different team ('T67'), implying they were expected to attend a rival club's practice.
+**Why**: Player 'P230' belongs to team 'T69', but is assigned as a participating player ('MP214') in match 'M37', which is a game played between teams 'T67' and 'T68'. A player cannot participate in a match if their team is not playing.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'P193' is associated with four distinct objects of class 'Position' (Goalkeeper, Defender, Midfielder, Forward). This violates the domain model's cardinality constraint for the `PlayerPositions` association (defined as `[1..3]`). Additionally, it is semantically implausible for a single player to specialize in every outfield position and goalkeeping simultaneously.
+**Why**: The player 'P193' is assigned 4 distinct positions ('POS296', 'POS297', 'POS298', 'POS299'). This violates the domain model's maximum multiplicity of 3 positions per player. Furthermore, it is highly unrealistic in real-world football for a single player to be officially specialized in every possible role on the pitch (Goalkeeper, Defender, Midfielder, and Forward) simultaneously.
 
 # hotelmanagement
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The model correctly depicts a plausible "split stay" scenario where a customer changes rooms partway through the booking (from R212 to R305). The reservation dates (April 10-13 and 13-14) align perfectly with the total booking window. Furthermore, the bill amounts are mathematically exact based on the room rates, reservation durations, and selected extras (e.g., Bill 7001 corresponds to exactly 3 nights at 120.00 plus 70.00 in extras).
+**Why**: The object model represents a highly plausible scenario where a customer changes rooms during their stay (from room 212 to 305). The dates of the room reservations seamlessly align with the overall booking dates. Furthermore, the bill amounts flawlessly match the real-world math: Bill 'BL7001' ($430) exactly covers 3 nights in room 212 ($360) plus the two extras ($70), and Bill 'BL7002' exactly covers 1 night in room 305 ($95).
 
 ## gen1 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model contains economically and logically implausible values for a hotel domain. Specifically, the `Room` 'RM1' and `FreeRoomTypesDTO` 'D7' have a `pricePerNight` of 0.0, implying the hotel generates no revenue from bookings. Furthermore, the `RoomReservation` 'R1_B1' creates a logical contradiction as it is associated with a `Bill` but is not linked to any `Room`.
+**Why**: The base `pricePerNight` for both the room type 'D7' and the room 'RM1' is 0.0, which contradicts the economic reality of a commercial hotel catalog. Additionally, bookings 'B1' and 'B2' along with their room reservations have identical check-in and check-out dates, implying a 0-night stay.
 
 ## gen1 / complex
 
 **Response**: Realistic
-
-**Why**: The object model represents a mathematically consistent and logical hotel booking scenario. The bill amounts exactly match the calculated costs: room rates multiplied by duration (nights) plus the specific extras linked to each reservation. The dates of the sub-reservations fall within the master booking dates, and multiple rooms reserved simultaneously (e.g., RR78021_1 and RR78021_3 overlap) involve distinct room numbers, avoiding physical conflicts.
+**Why**: The object model is logically consistent with real-world hotel operations. The dates align correctly within the main booking, and the room attributes, extras (e.g., free baby crib), and prices are completely plausible. Notably, the simulated `Bill` prices meticulously match the exact mathematical calculation of the nightly room rates multiplied by the duration of the reservations, plus the costs of the associated room extras.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'B999999' of class 'Booking' has an 'endDate' ('2026-03-05') that occurs before its 'startDate' ('2026-03-10'), which is logically impossible for a time duration. Additionally, having both 'confirmed' and 'canceled' set to true simultaneously is contradictory.
+**Why**: The object 'B999999' of class 'Booking' has an 'endDate' ('2026-03-05') that chronologically occurs before its 'startDate' ('2026-03-10'), which is impossible. Additionally, the booking is simultaneously marked as both confirmed and canceled, and Room 'R13' has an implausible 'pricePerNight' of 0.01.
 
 ## gen1 / invalid
 
 **Response**: Realistic
-**Why**: The object model is logically consistent and mathematically accurate. The non-overlapping dates allow the same room ('RM402') to be reserved twice. The bill totals correctly correspond to the sum of room nights and extras (e.g., Bill 'BL9001' equals 4 nights at 129.00 plus 97.00 in extras).
+**Why**: The object model represents a highly plausible scenario where a customer makes two separate, non-overlapping bookings for the same room. The dates, durations, and room extras align perfectly with realistic hotel stays (e.g., 4 days of breakfast for a 4-night stay). Furthermore, the bill prices are logically consistent and perfectly calculate the total of the room's nightly rate multiplied by the duration, plus the cost of the extras.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and detailed. The reservation dates (Dec 31 - Jan 3) perfectly match the specific description of the content ("New Year’s menu"). The operational logic holds: the booking is marked 'canceled', and consequently, the assigned rooms are 'occupied := false'. The reservation of multiple rooms (R508, R510) under one ID is permitted by the domain multiplicity.
+**Why**: The object model represents a plausible hotel scenario. The attributes and prices are realistic, the dates match the New Year's context for the specific 'New Year's menu' extra, and the relationships appropriately associate a customer, a canceled booking, and its generated bill. Having multiple rooms under a single room reservation is permitted by the domain model and common for families or groups.
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model marks rooms from sequential, non-overlapping reservations (`R3_HV` to `R6_HV`) as simultaneously `occupied := true`. A customer cannot physically occupy rooms scheduled for Week 1 (e.g., `RM101`) and Week 4 (e.g., `RM110`) at the same moment. Additionally, reservation `R5_HV` is linked to a single room with 1 bed (`RM108`), yet includes extras for a 'Baby crib' and a 'Personal interpreter', implying an occupant count that exceeds the physical sleeping capacity of the room.
+**Why**: The object 'D16' of class 'FreeRoomTypesDTO' indicates there are 250 free "Presidential family suite" rooms with 12 beds each. A "Presidential suite" is by definition the most exclusive and limited accommodation in a hotel, typically restricted to one or a very small handful per property. Having 250 of them available is physically and economically nonsensical for a real-world hotel scenario.
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent. The bill amounts exactly match the calculated costs: Bill 'BL880110' (4970.00) equals the sum of 4 rooms (total 670/night * 7 nights = 4690) plus extras (280); Bill 'BL880111' (1750.00) equals 1 room (350/night * 5 nights). Dates and room assignments are logical.
+**Why**: The objects represent a highly coherent hotel scenario with plausible values for dates, room types, and extras (such as parking and laundry). Furthermore, the prices assigned to the 'Bill' objects mathematically calculate exactly to the logical sum of the room's nightly rates multiplied by the number of nights, plus the cost of the associated room extras.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object model contains physically impossible values and invalid temporal data:
-1. Objects `BKG_MAXINT` and `RR_ZERO_NIGHT` use the date '2026-02-29'; 2026 is not a leap year, so this date does not exist.
-2. Object `D14` (FreeRoomTypesDTO) lists `numFreeRooms` as 1,000,000, which far exceeds the capacity of any real-world hotel entity.
-3. Object `BKG_NEG_1` has empty strings for start and end dates, which renders the booking semantically void.
+**Why**: The dates '2026-02-29' assigned to 'BKG_MAXINT' and 'RR_ZERO_NIGHT' are invalid because 2026 is not a leap year. Additionally, the object 'D14' indicates 1,000,000 free rooms, which vastly exceeds the capacity of any real-world hotel. 'BKG_NEG_1' also uses a negative system ID (-1) and empty date strings.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain model's explicit constraint `uniqueBillId`. Both `BL_QC_42` and `BL_KOCHI_42` are assigned the `billId` value of 42. In a realistic single-system snapshot, unique identifiers are mandatory to differentiate records.
+**Why**: The objects 'BL_QC_42' and 'BL_KOCHI_42' of class 'Bill' both have the 'billId' assigned to 42. In a real-world system, and according to the domain constraints, bill identifiers must be strictly unique to avoid accounting contradictions.
 
 ## gen3 / baseline
 
 **Response**: Realistic
-**Why**: The object model depicts a plausible scenario where a customer changes rooms twice during a continuous 7-night booking. The dates differ but are contiguous (June 5-7, 7-10, 10-12), and the bill calculations are mathematically exact based on room rates multiplied by duration plus specific extras (e.g., Bill 'BL9102' for 3 nights at 100.00 plus 110.00 in extras equals exactly 410.00).
+**Why**: The object model represents a highly plausible scenario. The dates for the `RoomReservation` instances perfectly and sequentially cover the overall `Booking` period. Furthermore, the `Bill` prices exactly match the mathematical sums of the respective room prices multiplied by the number of nights, plus the prices of any associated `RoomExtra` services. All names, rates, and descriptions reflect common real-world hotel data.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model represents software testing boundary values rather than a real-world scenario. Specifically, the Room 'RM214_MAX' has a `roomNumber` of 2,147,483,647 (maximum 32-bit integer), which is impossible for a physical building. Furthermore, multiple objects ('D30', 'RM214_MAX') have a `pricePerNight` of 0.01, which is not a plausible commercial value for hotel accommodation.
+**Why**: The 'Room' object 'RM214_MAX' has a 'roomNumber' of 2147483647, which is a software boundary testing value (maximum 32-bit integer) and physically impossible for a real-world hotel. Additionally, assigning a 'pricePerNight' of 0.01 to rooms ('D30', 'RM214_MAX') is economically implausible.
 
 ## gen3 / complex
 
-**Response**: Unrealistic
-**Why**: The object model presents a logical state contradiction: the Booking 'B64018' is marked as valid but unconfirmed (`confirmed := false`), yet one of its associated rooms ('R1507') is flagged as currently `occupied`. In a realistic hotel workflow, a room cannot be occupied for a booking that has not yet been confirmed. Additionally, `RoomReservation` 'RR_Y' (inferred as a meeting due to projector extras) is not associated with any `Room` object, semantically representing a "room reservation" of nothing.
+**Response**: Realistic
+**Why**: The object model is highly consistent and semantically rich. The dates, room capabilities, and extra services vividly depict a Japanese business trip or small meeting event. Furthermore, the prices for the bills are perfectly calculated (e.g., Bill BL770900 exactly matches the sum of 3 nights for two rooms at 470/night plus 235 in extras). Generating a reservation for meeting extras without assigning a sleeping room (RR_Y) is also logically sound for day-use services, respecting the `[*]` multiplicity.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-
-**Why**: 
-1. The object 'B0' has a `startDate` of '2026-11-01T25:61'; no clock has 25 hours or 61 minutes, effectively rendering the timestamp impossible.
-2. The `endDate` for 'B0' is before its `startDate`, and the booking groups reservations ('RR0_B', 'RR0_C') spanning 128 years (1900 to 2028), which is nonsensical.
-3. The object 'D31' (FreeRoomTypesDTO) has a negative `pricePerNight` (-10.0), implying the hotel pays the customer to stay.
-4. Rooms 'RNEG101' and 'RNEG7' use negative integers for `roomNumber`, which violates standard physical addressing conventions.
+**Why**: The object model contains several illogical and impossible values: Booking 'B0' has a start date with an invalid time ('25:61') and is chronologically after its end date. Rooms 'RNEG101' and 'RNEG7' have negative room numbers. The DTO 'D31' has an impossible negative price per night (-10.0). Room 'R1000' has an implausible number of beds (50). Furthermore, Booking 'B0' links room reservations spanning over a century apart (1900 to 2028).
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the multiplicity constraint defined in the domain model for the `BillRoomReservation` association. The domain model specifies a one-to-one relationship (`RoomReservation [1]`), meaning a `Bill` can only be linked to a single `RoomReservation`. However, the object model links the single Bill `BL1200` to two different RoomReservations (`R7701` and `R7702`), which creates a structural contradiction.
+**Why**: The object model violates the structural multiplicity constraints of the domain model. The 'BillRoomReservation' association specifies a strict 1-to-1 relationship between 'Bill' and 'RoomReservation', but the script attempts to link a single bill ('BL1200') to two distinct room reservations ('R7701' and 'R7702').
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The model depicts a plausible hotel booking scenario with accurate financial calculations: Bill 'BL12005' correctly sums the room cost (2 nights at 160.00) and the extra service (20.00) to 340.00. The inclusion of a secondary "reservation" ('RR8') with no assigned room but specific extras (Co-working pass, Luggage storage) realistically models non-accommodation services or day-use facilities attached to the main booking. Diverse naming conventions and descriptions (Vietnamese customer, Portuguese/Russian room types) reflect a realistic international context.
+**Why**: The object model is highly coherent and logically consistent. The mathematically calculated prices on the `Bill` objects perfectly match the duration of stays, `pricePerNight` of rooms, and `RoomExtra` prices (e.g., RR7: 2 nights at $160 + $20 extra = $340; RR8: day pass $15 = $15). Additionally, the zero-night `RoomReservation` (`RR8`) without an allocated room plausibly represents a day-guest utilizing hotel facilities like the co-working lounge. Dates and descriptive attributes are perfectly plausible.
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model contains incoherent and improbable values that suggest boundary testing rather than a real scenario:
-1. **Economic Inconsistency**: Room prices range from `0.01` to `999,999.99` within the same booking. If the currency allows millions, a value of 0.01 is physically practically impossible; if the currency is standard (e.g., USD), 1 million per night is absurd.
-2. **Physical Implausibility**: Room `RM201_B6` has 100 beds, which is unrealistic for a hotel room. Rooms `RM204_B6` to `RM206_B6` have negative room numbers (`-1`, `-2`).
-3. **Logical Gaps**: Reservation `R10_B6` is active and billed but is not linked to any `Room` object.
+**Why**: The rooms 'RM201_B6' and 'RM202_B6' contain an impossibly high number of beds for a single hotel room (100 and 50 beds, respectively). Furthermore, the objects 'RM204_B6', 'RM205_B6', and 'RM206_B6' have negative room numbers (-1, -2, -3), which violates standard real-world room numbering logic.
 
 ## gen4 / complex
 
-**Response**: Realistic
-**Why**: The object model is mathematically consistent and semantically coherent.
-1. **Financial consistency**: Bill amounts align perfectly with room rates, duration, and extras. For `RR_M1`, (92.50 * 2 nights) + 18.00 + 12.50 = 215.50, which matches `BL660201`.
-2. **Logical State**: The booking scenario (flags `confirmed` and `canceled` both true, with one room having a 0.00 price and a "Force-majeure waiver" description while the room is `blocked`) represents a plausible specific real-world workflow (e.g., partial cancellation or service failure).
-3. **Cultural Context**: The customer name, specific amenities (South Indian breakfast), and DTO descriptions using local scripts (Hindi/Devanagari, Tamil) are consistent with an Indian hotel context.
+**Response**: Unrealistic
+**Why**: The booking 'B50233' is simultaneously marked as both `confirmed = true` and `canceled = true`, which represent mutually exclusive states for a single reservation at any given time.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-
-**Why**: The model contains physically impossible values and logical contradictions:
-1.  Object 'D44' (FreeRoomTypesDTO) has `numFreeRooms := -3`; physical inventory available cannot be negative.
-2.  Object 'R2147483000' has a `roomNumber` of ~2.14 billion, which is physically impossible for a hotel and indicates an integer limit test rather than reality.
-3.  Object 'RR77_5' (RoomReservation) has empty strings for dates (`''`) and Object 'RR77_2' is a reservation not associated with any Room instance.
+**Why**: Room 'R2147483000' has a room number of 2,147,483,000, representing an impossibly large and physically nonexistent hotel. Furthermore, RoomReservation 'RR77_5' has empty strings for check-in and check-out dates, invalidating the concept of a scheduled booking, and FreeRoomTypesDTO 'D44' lists a negative number of free rooms (-3).
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'BL5555' of class 'Bill' has a price of -100.00. This is unrealistic because a "Bill" typically represents a charge (a positive value), and specifically based on the provided domain model with the constraint `positiveBill`, the price is strictly required to be greater than or equal to 0.
+**Why**: The bill object 'BL5555' has a negative price (-100.00), which contradicts common sense for a standard hotel room charge and directly violates the domain model constraint requiring positive bill prices.
 
 ## gen5 / baseline
 
-**Response**: Unrealistic
-
-**Why**: The object model exhibits inconsistent business logic regarding billing. `BL15002` and `BL15003` correctly calculate their prices based on the sum of the associated Room (nights × price) and Extras. However, `BL15001` has a price of `0.00` despite being linked to Reservation `RR9`, which reserves Room `R1201` (price 110.00) for 2 nights (Feb 10-12); it should logically be 220.00. Additionally, the dataset inexplicably mixes German (`D38`), Swahili (`D39`), and English text within valid descriptions.
+**Response**: Realistic
+**Why**: The model demonstrates exceptionally consistent temporal and computational logic. Assuming a current date of 2026-02-11, 'RR9' (Feb 10-12) has its linked room 'R1201' correctly marked as occupied, while future reservation 'RR10' (Feb 12-13) has 'R1202' marked as unoccupied. The bill totals for 'RR10' ($165) and 'RR11' ($200) mathematically match the duration and extras perfectly. While 'RR9' has a $0.00 bill, this is semantically plausible in the real world for reward stays, complimentary rooms, or fully prepaid bookings that incurred no incidentals. 'RR11' represents a same-day 2-hour meeting room rental, functionally mapped without a hotel bedroom, which is entirely practical.
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'RM302_B8' of class 'Room' has 'numBeds' set to 2,147,483,647 (the maximum 32-bit integer). It is physically impossible for a single hotel room to contain over 2 billion beds. Additionally, 'B7' has a negative 'bookingId' (-99), which is not a standard business identifier.
+**Why**: The object 'RM302_B8' of class 'Room' has its 'numBeds' attribute set to 2,147,483,647. It is physically impossible for a real-world hotel room to contain over two billion beds. Additionally, 'B7' has an invalid, negative 'bookingId' of -99 and empty dates.
 
 ## gen5 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is semantically consistent and mathematically accurate. The calculation of every 'Bill' matches the sum of the associated 'Room' prices multiplied by the number of nights (derived from check-in/out dates), plus the cost of 'RoomExtra' items. Additionally, the attribute data (e.g., festive items for December dates) and multilingual descriptions add plausible real-world context.
+**Why**: The object model is highly coherent and semantically sound. The check-in and check-out dates of all room reservations correctly fit within the main booking's timeframe. Furthermore, the billed prices match the exact calculation of the number of nights multiplied by the room rates, plus the prices of any respective room extras. The overlapping dates for some room reservations are also plausible for a single customer booking multiple rooms for a group.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'RR_MULTIROOM_123456' uses relative natural language strings ('next Friday after Maghrib', 'yesterday') for dates instead of concrete values, creating a logical contradiction where the checkout occurs before the check-in. Additionally, 'RM100000_123456' has a room number (100000) exceeding the physical capacity of any real-world hotel, and the price of 0.02 for 'RM1201_123456' is economically implausible.
+**Why**: The object 'RR_MULTIROOM_123456' has a check-out date ('yesterday') that occurs before its check-in date ('next Friday after Maghrib'), which is temporally impossible. Furthermore, room prices like 0.02 and 1.9999, room number 100000, and 99999 free rooms are completely unrealistic for a real-world hotel.
 
 ## gen5 / invalid
 
 **Response**: Realistic
-**Why**: The object model represents a coherent hotel booking scenario. The mathematical calculations for the bills are exact: Bill 'BL6001' (305.00) equals the sum of the PricePerNight for the two linked rooms (210.00 + 95.00) for a one-night stay, and Bill 'BL6002' (32.50) equals the sum of the linked extras (18.00 + 14.50). The separation of room charges and incidentals into distinct bills is a standard real-world practice.
+**Why**: The scenario presents perfectly consistent real-world logic. The booking's dates align exactly with the room reservation's dates, and the financial charges are accurately split into two logical bills: one for the combined nightly price of the two rooms (210.00 + 95.00 = 305.00) and another for the combined room extras (18.00 + 14.50 = 32.50).
 
 ## gen6 / baseline
 
-**Response**: Unrealistic
-
-**Why**: There is a logical contradiction regarding the state of the booking and the rooms.
-1. Room `R150` has `occupied := true`, implying a guest is currently physically present. However, the associated Booking `B7120` has `confirmed := false`. A hotel would not permit room occupancy for an unconfirmed booking.
-2. There is an inconsistency within the booking `B7120`: while part of it (`RR13`/`R150`) is active and occupied, the other concurrent reservation part (`RR12` for rooms `R601`, `R602`, `R603`) is marked `occupied := false`, despite covering the same dates.
-3. The bill `BL16010` (845.00) implies a calculation that does not match the standard sum of the room rates and extras for `RR12` (approx. 1010.00), with no context for such a discrepancy.
+**Response**: Realistic
+**Why**: The object model represents a highly consistent hotel booking snapshot. The room types and prices defined in the DTOs perfectly match the actual assigned room instances. Dates for sub-reservations are logically constrained within the main booking dates, and complimentary extras are appropriately priced at 0.00. All constraints and real-world hotel logic are respected.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'RM_MIN_R16' has a `roomNumber` of -2147483647 (near integer minimum), which is not a valid physical room identifier. Additionally, object 'D65' specifies 1,000,000 free rooms, which exceeds the physical capacity of any real-world hotel, and the price per night of 0.01 is economically implausible.
+**Why**: The object 'RM_MIN_R16' has a negative room number (-2147483647), representing an integer underflow or artificial boundary value test. Additionally, the 'D65' object claims to have 1,000,000 free rooms, which exceeds the physical capacity of any real-world hotel, and a price of 0.01 per night is implausibly low.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and mathematically accurate. The bill amounts correspond perfectly to the duration of stays, room rates, and extra services (e.g., Customer 'C35' pays exactly for 3 rooms over 3 nights). Furthermore, the complex scenario for Customer 'C36' (a mid-stay cancellation with one bill charged and a subsequent bill waived/zeroed) represents a plausible real-world edge case found in hotel management.
+**Why**: The object model is logically consistent and mathematically accurate. Dates for room reservations strictly align with their parent booking schedules. Real-world logic is applied perfectly to billing: the calculated price of 1395.00 for `BL1200450` strictly matches 3 rooms at 155.00/night for 3 nights, and `BL1200451` perfectly matches 1 room at 98.00/night for 3 nights plus 75.00 in extras. The $0 waived bill for a canceled room handles real-world service disruptions appropriately.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains several logical and physical impossibilities:
-1. The `Booking` object 'B1_DUP' has a `startDate` ('2026-12-31') that occurs after its `endDate` ('2026-01-01').
-2. The `FreeRoomTypesDTO` object 'D60' has a negative value for `numFreeRooms` (-1), which is physically impossible.
-3. Two different `Room` objects ('R101A_DUP' and 'R101B_DUP') share the same `roomNumber` (101), violating the real-world requirement that room identifiers within a hotel must be unique.
+**Why**: The object model contains multiple logical impossibilities: the 'B1_DUP' Booking has a start date (2026-12-31) that is after its end date (2026-01-01). Additionally, two distinct Room objects ('R101A_DUP' and 'R101B_DUP') share the same physical room number (101), and a FreeRoomTypesDTO ('D60') has a negative amount of free rooms (-1), which is physically impossible. Furthermore, check-in and check-out dates are populated with 'N/A'.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'RM990' of class 'Room' has 'numBeds' set to 0. This violates the explicit domain constraint `positiveNumBeds` (`self.numBeds > 0`), which renders the object state invalid within the defined domain rules, despite the scenario (campsite pitch) and bill calculation being logically consistent.
+**Why**: The object 'RM990' of class 'Room' has its 'numBeds' attribute set to 0. This explicitly violates the domain model's logical constraint 'positiveNumBeds' (self.numBeds > 0), creating a contradiction within the given domain model.
 
 # myexpenses
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a mathematically consistent and semantically plausible business expense report. The sum of the bill amounts (240.00 + 35.50 + 48.20 = 323.70) matches the total expense amount. The dates of the bills fall within the defined start and end dates of the expense, and the bill categories (Lodging, Transport, Meals) correspond to typical travel costs with realistic values in Euros.
+**Why**: The object model accurately reflects a standard expense report. Bill categories, payment methods, and amounts are highly plausible (e.g., 240 EUR for lodging, 48.20 EUR for meals). Furthermore, the total expense amount (323.70) perfectly matches the sum of the constituent bills, and all bill dates fall logically within the start and end dates of the expense report.
 
 ## gen1 / boundary
 
 **Response**: Realistic
-**Why**: The object 'expenseEMin' represents an initialized expense report with an amount of 0.0. This allows for a valid state where the expense report has been created but no bills (receipts) have been added yet, satisfying the sum constraint (sum of empty list is 0).
+**Why**: The object model represents a newly created or empty expense report for a single day. An amount of 0.0 is consistent with having no bills attached yet, making it a perfectly plausible real-world initial state for an expense claim.
 
 ## gen1 / complex
 
 **Response**: Realistic
-**Why**: The object model accurately depicts corporate expense scenarios with correct currency-region associations (JPY/Tokyo, EUR/Madrid, MAD/Casablanca) and plausible pricing. It adheres to the domain constraints (summing all bills to the total amount) and realistically uses comments to explain accounting edge cases like refunds and rejected expenses.
+**Why**: The object model strictly adheres to the domain model's multiplicities and constraints, including the exact summation of bill amounts for each expense. The dates are logically ordered, and the expense amounts are highly accurate and plausible relative to their real-world currencies (e.g., 3200 JPY for the Narita Express, 189 EUR for a Madrid hotel, 900 MAD for a Casablanca riad). The statuses and comments closely match the real-world accounting contexts described.
 
 ## gen1 / edge
 
-**Response**: Realistic
-
-**Why**: The object model represents a plausible accounting scenario involving a transaction and its subsequent refund (indicated by the valid use of positive and negative amounts for JPY, where 125,000 JPY is a realistic real-world value). The specific categories ('Rounding adjustment', 'Refund') and comments explain the logic for the edge-case values (0.00, 0.01), making the data semantically consistent.
+**Response**: Unrealistic
+**Why**: The object model represents an artificial software test case rather than a real-world expense report. The object 'commentEDGE002' explicitly states the expense was created 'to test rounding and sum-of-bills invariant', which is not a plausible comment from a real employee. Furthermore, calculating an expense total by directly summing raw amounts from different currencies (EUR, JPY, and CHF in 'expenseEXPEDGE001') without applying exchange rates is financially nonsensical.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain model's invariant `expenseSumOfBills`. The expense amount (`142.00`) does not equal the sum of the bill amounts (`100.00 + 50.00 = 150.00`). While the comments describe a logical currency conversion (100 USD converted to 92 EUR), the domain model's constraint performs a raw summation of amounts across different currencies (USD and EUR), resulting in a mathematical contradiction and an invalid system state.
+**Why**: Although the real-world scenario of currency conversion makes practical sense and is explained in the comments, the object model violates the domain model's explicit OCL constraint `expenseSumOfBills`. The constraint strictly requires the expense amount (142.00) to equal the direct sum of the bill amounts (100.00 + 50.00 = 150.00), creating a logical contradiction within the defined domain.
 
 ## gen2 / baseline
 
-**Response**: Unrealistic
-**Why**: The object model performs an arithmetic sum of monetary values with different currencies without conversion. The expense 'expenseEXP2026014' calculates its total (1211.80) by adding 'billBILL106' (15.00 USD) directly to other bills denominated in BRL (e.g., 610.00 BRL). Treating 1 USD and 1 BRL as equivalent 1:1 units for a total financial value is economically impossible.
+**Response**: Realistic
+**Why**: The object model portrays a highly plausible scenario of a business trip expense report. The attribute values, dates, and categories are logically sound. Furthermore, the provided comments perfectly cross-reference and semantically align with the specific statuses, payment methods, and categories of the bills (e.g., the "E-SIM" comment aligns with the refunded telecom bill, and the "check vendor requirement" comment accurately describes the conference fee payment method).
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'billEHighB1' represents a single business class flight ticket with an amount of approximately 1 billion (999,999,999.99). This cost is practically impossible for a travel expense, as it exceeds the purchase price of most commercial aircraft. Additionally, the model sums amounts from bills with different currencies (USD, JPY, INR) directly (999... USD + 0.01 INR) to calculate the total expense, which is semantically incorrect without exchange rates.
+**Why**: The amount of 999,999,999.99 USD for a business class flight ticket ('billEHighB1') is wildly exaggerated and physically impossible for a commercial airline ticket. Additionally, an expense of 0.01 INR for tea ('billEHighB3') is extraordinarily low and not a realistic real-world price.
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and adheres to strict calculation constraints. Currencies match their geographic contexts (e.g., INR for Bengaluru, BRL for São Paulo), prices are economically plausible, and the `expenseSumOfBills` OCL constraint is mathematically satisfied for every expense (e.g., `expenseHomeOfficeUpgradeManchester2` sum: 249.99 + 79.50 + 18.00 + 12.95 = 360.44).
+**Why**: The object model perfectly respects the OCL constraints, as the sum of all bill amounts precisely matches the overarching expense amount for each trip. Furthermore, the semantic context is highly plausible: prices accurately reflect their assigned currencies (e.g., thousands of INR, typical USD/GBP amounts) and the categories, dates, and business-trip justifications align completely with real-world scenarios.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object `expenseEXPEDGE002` defines a `startDate` ('2025-12-31') that is chronically later than its `endDate` ('2025-01-01'), which is physically impossible for a time duration. Additionally, `currencyCURB` defines a fictional currency sharing the standard ISO code 'USD' with `currencyCURA` ('US Dollar'), which creates a semantic collision not found in real-world financial systems.
+**Why**: The object 'expenseEXPEDGE002' has a 'startDate' ('2025-12-31') that occurs after its 'endDate' ('2025-01-01'), creating a chronologically impossible negative timeframe. Additionally, the multiple 0.00 amounts and comments explicitly describing the data as an "edge-case" to "stress-test" the system demonstrate that this is synthetic testing data, not a plausible real-world expense report.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'expenseAdvanceSettlementGuadalajara' serves as a container for bills totaling 1,400.00, yet its own 'amount' attribute is set to -300.00. This violates the semantic consistency required where an Expense represents the aggregation of its parts. Although comments describe a "balance after advance" scenario, the model structure lacks the attributes (e.g., 'advanceAmount') to support a negative net calculation, resulting in a mathematical contradiction within the object graph.
+**Why**: The object 'expenseAdvanceSettlementGuadalajara' has an amount of -300.00, which explicitly violates the domain constraint requiring expenses to have a positive amount. It also logically contradicts the sum of its associated bills (850.00 + 420.00 + 130.00 = 1400.00).
 
 ## gen3 / baseline
 
 **Response**: Realistic
-**Why**: The object model is mathematically consistent (the sum of all bill amounts is exactly 1850.00, matching the expense total). The dates, currency (MAD), and specific bill details (including multilingual comments explaining 'Refused' and 'Draft' statuses) form a coherent and plausible business trip scenario.
+**Why**: The object model accurately represents an expense report with a set of categorised bills. The bills' dates fall perfectly within the expense start and end dates. The sum of all bill amounts exactly matches the total expense amount (1850.00), satisfying the OCL constraint. The categories, payment methods, bill statuses, and comments are logically consistent.
 
 ## gen3 / boundary
 
 **Response**: Realistic
-**Why**: The model correctly depicts edge cases in expense management, such as zero-value bills for cancelled, voided, or corrective transactions (e.g., 'Parking session cancelled') and micro-amounts for fees/adjustments. The use of multiple currencies (MAD, CHF) and corresponding languages (Arabic comment with MAD bill) is logically consistent.
+**Why**: The object model represents plausible real-world scenarios, including realistically contextualized zero-amount transactions (cancelled sessions, voided merchant tests) and micro-transactions (rounding adjustments). The comments explicitly state that the micro-amounts are for multi-currency testing, which is a standard real-world business practice. Dates, currency codes (CHF, MAD), and constraints are fully consistent.
 
 ## gen3 / complex
 
 **Response**: Realistic
-**Why**: The object model is mathematically consistent with the OCL constraints (the expense amounts equal the sum of bill amounts). The scenarios are semantically plausible: prices reflect real-world costs for the specific regions (e.g., higher costs in Zurich, lower in Mexico), and dates and currencies align correctly. Comments clarify non-standard states like 'Refunded' or 'Refused' bills sensibly.
+**Why**: The object model accurately represents real-world business expenses. The currencies, amounts, and categories (e.g., CHF 480 for 3 nights in a hotel, AUD 315 for a domestic flight) are plausible. All bill dates fall correctly within the start and end dates of their respective expenses, and the expense amounts exactly match the sums of their bills, satisfying the specified constraints. Finally, the comments provide logical, real-world context for bill statuses like REFUSED or REFUNDED.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-
 **Why**: 
-1. **Semantic Nonsense (Mixed Currencies)**: In `expenseEXPEDGE005_2`, the total amount (40201.00) is derived by summing amounts from bills in different currencies (Moroccan Dirham and Icelandic Króna) 1-to-1 without conversion. Financially, 1 MAD is not equal to 1 ISK, rendering the total meaningless.
-2. **Historical Anachronism**: `expenseEXPEDGE006_2` contains bills dated in the year 1582 associated with 'Bitcoin' and 'Icelandic Króna', neither of which existed at that time.
-3. **Time Logic**: `expenseEXPEDGE006_2` has a `startDate` (Oct 15, 1582) that occurs chronologicaly after its `endDate` (Oct 4, 1582).
+- The object `expenseEXPEDGE006_2` has an `endDate` (1582-10-04) that is chronologically before its `startDate` (1582-10-15).
+- The dates used across the model are absurd for a real-world expense system, including dates in the distant future (year 9999) and the distant past (years 1582 and 1800) paid using modern methods like Credit Cards. 
+- `expenseEXPEDGE005_2` financially aggregates bills blindly using a 1:1 ratio across completely different currencies (Moroccan Dirham and Icelandic Króna), which is financially nonsensical. (The internal comments explicitly confess these are deliberate edge cases).
 
 ## gen3 / invalid
 
 **Response**: Realistic
-**Why**: The model correctly adheres to the domain constraint `expenseSumOfBills` (e.g., 'expenseProjectBeaconCasablancaSplit2' total 1650.00 matches the sum of its three bills: 1200+350+100). The scenario describes a plausible corporate accounting practice (splitting a hotel cost between two projects, 'Atlas' and 'Beacon', in Casablanca) with realistic pricing values for the specified currency (MAD).
+**Why**: The objects, attributes, and relationships perfectly represent a realistic business expense scenario. The amounts are computationally consistent (the expense totals exactly match the sums of their associated bills), the dates align logically, and the comments provide plausible real-world context for splitting a shared hotel invoice across two project expenses in Moroccan Dirham.
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The object model is mathematically consistent (expense total matches sum of bills: 389.99 + 74.50 = 464.49), the bill dates fall within the expense period, and the comment text logically aligns with the data (citing a policy limit of 500 CAD while the actual total is 464.49 CAD).
+**Why**: The amounts of the bills (389.99 and 74.50) correctly sum up to the total expense amount (464.49). The dates of the bills fall logically within the start and end dates of the expense report. Furthermore, the comment perfectly matches the context, referencing a home office policy for amounts under 500 CAD, which aligns with the actual expense total and bill categories.
 
 ## gen4 / boundary
 
 **Response**: Realistic
-**Why**: The object model explicitly represents a technical test case or audit fixture (evidenced by the category 'Reissued receipt' and comments like 'regression fixture'). The values (0.00 amount, 1970-01-01 date) and the high volume of technical comments are internally consistent with a scenario designed to test system boundaries and edge cases, rather than a standard user transaction.
+**Why**: The object model represents a valid zero-amount expense created as an audit or regression test fixture within the system. The values used, such as the 0.00 amount and the Unix epoch date (1970-01-01), along with the explanatory comments, are highly plausible and standard practices for system test data in real-world software applications.
 
 ## gen4 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is logically and mathematically consistent with the domain model. The `Expense` amounts correctly equal the sum of the `Bill` amounts as required by the OCL constraint. The data values are contextually accurate: specific currencies match the locations (e.g., NOK for Oslo, PLN for Krakow), dates are sequential and valid, and the prices for items like train tickets and hotels are economically plausible for the indicated years (2025-2026). While bills with `REFUSED` or `REFUNDED` status are included in the total sum, this realistically represents a "Total Claimed" or "Gross Receipt Value" state of an expense report prior to final auditing or reimbursement calculation.
+**Why**: The model correctly satisfies all expected constraints and exhibits strong real-world logic. The geographic locations implied by the expense names and bills perfectly match the assigned currencies (e.g., Vancouver and CAD, Oslo and NOK, Krakow and PLN). Furthermore, the dates on the bills fall logically within the respective expense start and end periods, and the sum of bill amounts matches the total expense amounts precisely.
 
 ## gen4 / edge
 
-**Response**: Realistic
-**Why**: The object model represents a valid set of "Test Data" or "QA Edge Cases" rather than standard production data. The comments explicitly state the objects are created to verify aggregation logic and boundary conditions (e.g., zero-summing mixed currencies, huge values). Although summing different currencies (BTN, XPF, KES) into a single scalar amount is normally incorrect, the provided values net to zero *per currency*, making the total sum of 0.00 mathematically consistent and a plausible system test state. Constraints are constrained and satisfied.
+**Response**: Unrealistic
+**Why**: The object model represents a synthetic software test case rather than a legitimate real-world scenario, as explicitly evidenced by categories like 'Test micro-charge' and comments stating the expense was 'created to verify aggregation logic'. Furthermore, `expenseEXPEDGE007` directly sums the raw numeric amounts of bills in completely different currencies (Bhutanese Ngultrum, CFP Franc, Kenyan Shilling) without any exchange rate conversion, which violates basic financial and accounting principles.
 
 ## gen4 / invalid
 
-**Response**: Unrealistic
-
-**Why**: The object model violates the mandatory multiplicity constraints defined in the domain model. Both `Bill` and `Comment` require exactly one associated `Expense` (multiplicity `[1]`), but `billUnassignedUK1` and `commentUnassignedFREE1` are left as orphans without being linked to any `Expense`. Additionally, the variable name `currencyGBPKerala` is illogical for an object representing British Pounds (GBP).
+**Response**: Realistic
+**Why**: The assigned attributes and values are highly plausible and demonstrate strong domain coherence. The currencies match their respective locations (INR for Kerala, GBP for London-Cambridge), and the amounts are realistic for lodging and rail tickets. The future dates are logically consistent, with bill dates falling correctly within the expense report's timeframe. Furthermore, the unlinked "draft" bill and its associated comment perfectly realistically depict a real-world scenario of a receipt pending supervisor confirmation before being attached to a specific expense report.
 
 ## gen5 / baseline
 
 **Response**: Unrealistic
-**Why**: The object 'expenseEXP2026073' has a total 'amount' of 5328.90, which is the direct mathematical sum of its bills. However, strict addition was applied to bills of different currencies: 'billEXP2026073_BILL405' is in Singapore Dollars (SGD) while the others are in Philippine Pesos (PHP). Summing mixed currencies without applying an exchange rate is not valid in a real-world financial context.
+**Why**: The total amount for 'expenseEXP2026073' (5328.90) is calculated by directly summing the raw numerical amounts of its bills, despite them being in different currencies (PHP and SGD). Mathematically adding 18.40 SGD to PHP amounts without applying an exchange rate produces a meaningless real-world financial total.
 
 ## gen5 / boundary
 
-**Response**: Realistic
-
-**Why**: The object model demonstrates specific and accurate real-world domain knowledge.
-1. **Currency Precision**: It correctly models the Bahraini Dinar (BHD) with 3 decimal places (e.g., `12.345`), reflecting that 1 Dinar = 1000 Fils, whereas most models incorrectly force 2 decimal places.
-2. **Cultural Consistency**: The categories match the currencies—"Manama" (capital of Bahrain) is linked to BHD, and "Koha" (a Māori term for contribution) is linked to NZD.
-3. **Valid Testing Data**: The `expenseECommentOnly` object represents a standard "boundary value" test case commonly found in software engineering (using the sentinel date `9999-12-31` and multilingual comments).
-4. **Constraint Logic**: The sum of the bills (12.345 + 0.655 + 0.01) equals exactly the total expense amount (13.01), satisfying the OCL constraint.
+**Response**: Unrealistic
+**Why**: The model directly sums amounts of different currencies (Bahraini Dinar and New Zealand Dollar) in `expenseEPrecise` to compute its total amount (13.01), which is financially nonsensical without applying currency exchange rates. Additionally, `expenseECommentOnly` acts as a software test artifact using unrealistic dates ('9999-12-31'), and paying 0.01 NZD in cash (`billEPrecise_BP3`) is physically impossible as New Zealand demonetized 1-cent coins decades ago.
 
 ## gen5 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is semantically consistent and syntactically correct according to the domain constraints. The specific values are plausible: currencies match the geographic locations (e.g., THB for Bangkok, SEK for Stockholm), bill amounts are reasonable for the described categories, and the `Expense` amounts correctly equal the sum of their `Bill` amounts as required by the `expenseSumOfBills` OCL constraint (including bills with statuses like 'REFUSED' or 'REFUNDED', implying the attribute tracks the total submitted value).
+**Why**: The object model perfectly respects the OCL constraints, including the exact summation of bill amounts per expense. The instantiated objects feature semantically consistent data (e.g., SEK currency for Stockholm, THB for Bangkok, KRW amount matching a realistic software plugin cost in South Korean Won) and the comments logically align with the statuses of the specific bills.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: Expense 'expenseEXPEDGE010' aggregates bills with different currencies (XOF, TOP, WST, CLF) into a single total (0.02) by simple addition without exchange rates, which is financially nonsensical. Furthermore, 'billEXPEDGE010_BILL1001' records a transaction using the 'West African CFA franc' in the year '0001-01-01', which is a historical impossibility.
+**Why**: The object 'expenseEXPEDGE010' and its associated bills use extreme boundary dates ('0001-01-01' and '9999-12-31') which do not represent physically plausible real-world accounting events. Furthermore, the expense directly sums the raw 'amount' values of bills that belong to completely different currencies (XOF, TOP, WST, CLF) without applying exchange rates, which is nonsensical in financial accounting.
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model contradicts the domain model's structural constraints. The domain defines the association `BillCurrency` with multiplicity `Currency [1]`, meaning a `Bill` must be associated with exactly one `Currency`. The object `billSingaporeSG1` is linked to both `currencySGD_DCC` and `currencyUSD_DCC`. Additionally, this creates semantic ambiguity regarding the unit of the `amount` attribute (1280.00), as it cannot be both SGD and USD simultaneously.
+**Why**: The object 'billSingaporeSG1' is associated with two currencies ('currencySGD_DCC' and 'currencyUSD_DCC'). This violates the relationships cardinality set in the domain model, which strictly dictates that a single Bill can be associated with exactly one Currency (`Currency [1]`).
 
 ## gen6 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The object model calculates the total `Expense` amount (2006.25) by summing the raw face values of bills denominated in different currencies (GBP, NOK, and SEK) without applying exchange rates (e.g., adding 180 GBP directly to 1250 NOK). In reality, financial totals cannot be derived by adding mixed currency units 1:1. Additionally, a bill with status 'REFUNDED' (billEXP2026091_BILL504) is included in the total sum, implying the user is claiming reimbursement for a cost that was returned to them.
+**Why**: The 'amount' of the Expense 'expenseEXP2026091' (2006.25) is calculated by directly summing the raw amounts of its bills. However, these bills are associated with different currencies (GBP, NOK, and SEK). In the real world, summing un-converted financial amounts from different currencies produces a semantically meaningless total; exchange rates must be applied before summing.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model contains significant historical anachronisms. The bills are dated `1900-02-28`, yet `billEStatusesSmall_BS2` uses `CREDIT_CARD` (invented in the 1950s) and all bills use the currency `ZAR` (South African Rand, introduced in 1961). Furthermore, the category "Photocopy" used in `billEStatusesSmall_BS1` refers to technology not available in 1900.
+**Why**: The dates for the expense and bills are set to '1900-02-28', but the bills use 'CREDIT_CARD' payment methods and the 'South African Rand' (ZAR) currency. Credit cards did not exist in 1900, and the South African Rand was not introduced until 1961, making the scenario anachronistic and historically impossible.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The object model is mathematically consistent with the domain constraints (the sum of bill amounts equals the expense amount). The specific attribute values (currencies matching locations like CNY for Shanghai, ARS for Buenos Aires), dates, and descriptions represent a coherent and plausible business travel scenario.
+**Why**: The object model is perfectly consistent with the domain model. All OCL constraints are satisfied (the sum of the bills equals the total expense amounts). The dates of the bills fall within the start and end dates of their respective expenses. The semantic content—such as currencies, real-world prices, business travel categories, and justification comments that match the statuses—is highly logical and plausible.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'expenseEXPEDGE012_3' defines a time period where the 'startDate' (2026-03-11) occurs after the 'endDate' (2026-03-10), which is logically impossible.
+**Why**: The object model contains several illogical scenarios. First, `expenseEXPEDGE012_3` has a `startDate` ('2026-03-11') that is chronologically after its `endDate` ('2026-03-10'). Second, `expenseEXPEDGE011_3` calculates its total amount by directly summing bills that belong to completely different currencies (South African Rand and Réunion franc) without any exchange rate conversion, which is financially nonsensical.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain logic defined in the constraint `expenseSumOfBills`. The object `expensePerDiemOnlyDakar` has an amount of 120.00, but there are no linked `Bill` objects. The domain model requires the Expense amount to equal the sum of its bills (120 != 0), creating a mathematical contradiction, even if the "Per Diem" scenario is conceptually valid.
+**Why**: The model contains a logical contradiction within the given domain. The expense 'expensePerDiemOnlyDakar' is assigned an amount of 120.00 but has no associated bills. This directly violates the domain constraint 'expenseSumOfBills', which requires the expense amount to equal the sum of its bills' amounts (which would be 0.0 here).
 
 # pickupnet
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The object model depicts a consistent logistics scenario in Berlin, Germany. The addresses provided correlate accurately with the specific geolocation coordinates (latitude/longitude) for those real-world locations. The shipment statuses are logically consistent with the associations: Shipment 'SH3001' is '#ASSIGNED' and is linked to a driver ('D1001'), while Shipment 'SH3002' is '#NEW' and has no driver linked.
+**Why**: The object model represents a highly plausible intra-city delivery scenario. The addresses reflect valid real-world locations in Berlin, and their corresponding GeoLocation coordinates accurately match these locations (approx 52.5°N, 13.4°E). Furthermore, the logical state of the shipments is consistent: 'SH3001' is correctly linked to a driver given its 'ASSIGNED' status, whereas 'SH3002' has no driver and remains in the 'NEW' status.
 
 ## gen1 / boundary
 
 **Response**: Unrealistic
-**Why**: The shipment 'SHP0001' describes a route from the South Pole (Latitude -90.0) to the North Pole (Latitude 90.0). It is physically impossible for a single 'Driver' (associated with the Shipment via the 0..1 multiplicity) to perform a direct delivery between the Earth's antipodes, as this route requires global multimodal logistics (air, sea, land) and cannot be executed as a single assignment.
+**Why**: The shipment is scheduled from the geographic South Pole (latitude -90.0) to the geographic North Pole (latitude 90.0). It is highly absurd and physically impractical for a local local delivery hub ('Station' S1) to manage a standard driver network shipment spanning the exact geographic extremes of the Earth (~20,000 km).
 
 ## gen1 / complex
 
 **Response**: Realistic
-**Why**: The object model represents a plausible logistics scenario in Barcelona. The addresses and geolocation coordinates correspond to real locations, IDs follow a consistent schema, and the relationships between `ShipmentStatus` and `Driver` are logical (e.g., 'NEW' shipments have no driver, while 'ASSIGNED'/'UNDERWAY' do).
+**Why**: The object model portrays a highly plausible delivery network scenario in Barcelona. The attributes and statuses logically align with their relationships (e.g., 'NEW' shipments like SHPBCN20260001 have no assigned drivers, whereas 'ASSIGNED', 'UNDERWAY', and 'DELIVERED' shipments are correctly linked to a driver). Additionally, coordinates properly match their real-world addresses, fulfilling all real-world semantic expectations.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object model presents multiple semantic inconsistencies regarding the `ShipmentStatus` and physical logistics:
-1.  **Status contradictions**: `EDGE_SHP5` is `UNDERWAY` (implies active transport) and `EDGE_SHP2` is `ASSIGNED`, yet neither has a `Driver` linked. Conversely, `EDGE_SHP3` is `NEW` (implies waiting for assignment) but is already linked to driver `EDGE_D2`.
-2.  **Impossible Logistics**: Driver `EDGE_D2` is simultaneously assigned to a local shipment in Japan (`EDGE_SHP3`) and a shipment traveling from Svalbard, Norway to Antarctica (`EDGE_SHP4`).
-3.  **Implausible Route**: A single shipment (`EDGE_SHP4`) traversing directly from the North Pole region to the South Pole is unrealistic for a single-driver assignment.
+**Why**: Driver 'EDGE_D2' is assigned to both 'EDGE_SHP3' (located in Japan) and 'EDGE_SHP4' (which is 'UNDERWAY' from Svalbard, Norway to Antarctica). A single driver handling local Japanese routes while simultaneously driving a trans-global route from the Arctic to the Antarctic is physically impossible. Furthermore, 'EDGE_SHP3' has a status of 'NEW' despite already being assigned to a driver.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model violates multiple explicit OCL constraints defined in the domain model.
-1. **Duplicate IDs**: Two `Customer` objects share the ID 'C-JP-104' (violating `uniqueCustomerId`) and two `Shipment` objects share the ID 'SHP-OSK-0007' (violating `uniqueShipmentId`).
-2. **Invalid Routing**: The shipments 'SHPOSK0007_L1' and 'SHPOSK0007_L2' use the exact same address object ('AOSKGFO_2') for both pickup and delivery, which violates the constraint `differentPickupAndDeliveryAddress`.
+**Why**: The object model violates multiple constraints and real-world logic. Customers 'CJP104_OSK' and 'CJP104_KYO' share the exact same ID ('C-JP-104'), as do shipments 'SHPOSK0007_L1' and 'SHPOSK0007_L2' ('SHP-OSK-0007'), breaking uniqueness constraints. Additionally, shipments 'SHPOSK0007_L1' and 'SHPOSK0007_L2' have the same address ('AOSKGFO_2') assigned for both pickup and delivery, which violates the `differentPickupAndDeliveryAddress` constraint and defies standard shipping logic.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model depicts a coherent logistics scenario centered in Bengaluru, India. The address texts (e.g., Hosur Road, Indiranagar, Manyata Tech Park) accurately correspond to the specific latitude and longitude coordinates provided. Furthermore, the shipment lifecycle logic is sound: the shipment marked `NEW` has no driver assigned, while `UNDERWAY` and `DELIVERED` shipments are correctly associated with a driver.
+**Why**: The geographic coordinates precisely match the given real-world addresses in Bengaluru, India. Additionally, the shipment statuses align logically with the driver assignments (e.g., 'NEW' has no driver assigned, while 'UNDERWAY' and 'DELIVERED' shipments are correctly assigned to a driver), and pickup/delivery addresses correctly adhere to real-world logistics.
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: Shipment 'SHP2002' has the status `#UNDERWAY` but is not linked to any `Driver` instance, which is implausible as a shipment currently in transit requires a transporter. Additionally, the pickup address 'APU2001' is located at coordinates (0.0, 0.0) ("Null Island") in the Gulf of Guinea; this is a location in the ocean typically associated with data errors, not a realistic physical address for a customer pickup.
+**Why**: The shipment 'SHP2001' has a pickup address at 'Null Island' (latitude 0.0, longitude 0.0). In the real world, this is a weather buoy in the middle of the Atlantic Ocean used as a default or error placeholder in GIS systems, making it an impossible origin for a physical package pickup.
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model portrays a coherent logistics scenario involving two distinct geographic regions (Osaka, Japan and Reykjavik, Iceland). The names of drivers and customers are culturally appropriate for their locations, the geo-coordinates correspond accurately to the text addresses provided, and the operational logic is sound (e.g., shipments marked 'NEW' do not have drivers, while 'ASSIGNED'/'UNDERWAY' ones do; shipments are handled by drivers within the same regional station).
+**Why**: The object model represents a highly plausible scenario with two geographically separated logistical hubs (Osaka and Reykjavík). The geolocations (lat/lon) accurately match their real-world respective addresses, culturally appropriate names are used for drivers and customers per region, cross-regional assignments do not occur, and driver assignment logic aligns perfectly with the shipment statuses (e.g., 'NEW' shipments correctly have no driver assigned, while 'ASSIGNED', 'UNDERWAY', and 'DELIVERED' shipments do).
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-**Why**: The object model violates semantic integrity regarding shipment handling. Shipments `SHPEDGE1001` and `SHPEDGE1002` are in statuses `#ASSIGNED` and `#UNDERWAY`, which semantically implies the existence of a carrier, yet no `Driver` instances exist in the model. Additionally, Shipment `SHPEDGE1002` represents a trip from the North Pole to the South Pole, which is logistically implausible for a standard pickup network.
+**Why**: The addresses and geolocations provided are classic software testing edge cases (e.g., North Pole at 90.0 latitude, South Pole at -90.0, and "Null Island" at 0.0, 0.0 which represents a geocoding error). Orchestrating a physical shipment (SHPEDGE1002) from the North Pole (A100) to the South Pole (A101), or delivering to fictitious buoys, is completely absurd for a real-world commercial logistics network.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the `uniqueShipmentId` constraint defined in the domain model. Two distinct shipment objects (`SHPNG4450_A2` and `SHPNG4450_B2`), belonging to different customers and operating in different cities, are assigned the identical ID string `'SHP-NG-4450'`, which is impossible in a realistic tracking system.
+**Why**: The object model violates the `uniqueShipmentId` constraint. Two distinct `Shipment` objects, `SHPNG4450_A2` and `SHPNG4450_B2`, are assigned the exact same ID value (`'SHP-NG-4450'`), creating a logical contradiction within the system's tracking logic.
 
 ## gen3 / baseline
 
 **Response**: Realistic
-**Why**: The geographical coordinates accurately map to the provided text addresses in Nairobi, Kenya. The names assigned to drivers and customers are culturally consistent with the simulated regions (Nairobi and Reykjavik). Furthermore, the shipment statuses align logically with the model structure (e.g., the 'NEW' shipment has no connected driver, while 'UNDERWAY' does).
+**Why**: The object model accurately represents a real-world logistics system. The geographic coordinates correctly match the provided textual addresses in Nairobi, Kenya. Contextually appropriate names are used for the respective regions (Nairobi and Reykjavik). Furthermore, the shipment statuses align logically with the relationships: 'NEW' shipments lack a driver, whereas 'UNDERWAY' and 'DELIVERED' shipments have an assigned driver. The constraint requiring different pickup and delivery addresses is properly respected.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model assigns a single driver ('DRV500') to seven different shipments destined for extremely dispersed global locations (Greenland, Tahiti, Russia, American Samoa, etc.) originating from the Netherlands. It is physically impossible for one human driver to be simultaneously 'UNDERWAY' to Tahiti and American Samoa, while also managing deliveries to the Arctic, as these locations are thousands of kilometers apart and require distinct concurrent travel.
+**Why**: A single human driver ('DRV500') is assigned to deliver shipments originating in Rotterdam to extremely remote global islands across different oceans (Tahiti, Greenland, American Samoa, Easter Island). A ground vehicle driver cannot physically drive across oceans, and it is impossible for one person to be simultaneously "UNDERWAY" with shipments to Tahiti ('SHP5002') and American Samoa ('SHP5005').
 
 ## gen3 / complex
 
 **Response**: Realistic
-**Why**: The object model is semantically consistent and logically sound.
-1. **Geographic Validity**: Address descriptions (e.g., São Paulo, Marrakech) match the provided Latitude/Longitude coordinates accurately.
-2. **Operational Logic**: Shipments with status `NEW` correctly lack driver assignments, while those marked `ASSIGNED`, `UNDERWAY`, or `DELIVERED` are properly linked to specific drivers.
-3. **Internal Consistency**: Drivers and Shipments are grouped into Stations appropriate for their geographic location, and IDs follow a consistent naming convention.
+**Why**: The object model represents a highly plausible and logically consistent logistics network. The geographic coordinates accurately correspond to the assigned real-world locations (São Paulo and Marrakech), the stations maintain clean boundaries without geographically impossible assignments, and the shipment statuses (`NEW`, `ASSIGNED`, `UNDERWAY`, `DELIVERED`) strictly correlate with proper driver assignments. Furthermore, business entities and physical addresses align realistically (e.g., "Instituto Butantã" dispatching from a distribution center to a hospital).
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: 
-1. The objects 'GL203' and 'GL204' contain physically impossible values for valid geographic coordinates (Latitude must be between -90 and 90; Longitude between -180 and 180). 'GL203' has a latitude of 91.5, and 'GL204' has a latitude of -91.0.
-2. Shipment 'SHPEDGE2003' has the status '#UNDERWAY' but is not associated with any 'Driver', which is logically inconsistent for a physical delivery execution.
+**Why**: The GeoLocation objects 'GL203' and 'GL204' have latitude values (91.5 and -91.0) and longitude values (181.2 and -181.0) that fall outside the valid, real-world geographical bounds of [-90, 90] for latitude and [-180, 180] for longitude.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-
-**Why**: While the attribute values (names, addresses, and coordinates representing Santiago, Chile) are highly realistic, the object graph violates the physical and structural logic defined in the Domain Model.
-1. The address 'ASCLPICK02' is assigned two distinct GeoLocations ('GLSCLMERCADOF' and 'GLSCLMERCADOL'), which violates the composition multiplicity of `GeoLocation [1]`.
-2. The shipment 'SHPCL9002' is assigned two different delivery addresses ('ASCLDEL01' and 'ASCLDEL02'), violating the association multiplicity of `Address [1]`.
+**Why**: The shipment 'SHPCL9002' is incorrectly assigned two different delivery addresses ('ASCLDEL01' and 'ASCLDEL02'). Additionally, the address 'ASCLPICK02' is assigned two separate geographic locations ('GLSCLMERCADOF' and 'GLSCLMERCADOL'). Both cases violate real-world logic and the strict multiplicity of [1] defined in the domain model.
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The object model accurately represents a logistics scenario in São Paulo, Brazil. The text addresses (e.g., Av. Paulista, Osasco) align physically with the provided latitude/longitude coordinates (approx -23.5, -46.6). Shipment statuses and driver assignments are logically consistent with real-world operations.
+**Why**: The object model represents a highly plausible logistics scenario. The attributes use realistic Brazilian names, recognizable Twitter handles, and valid real-world addresses in São Paulo with accurately corresponding latitude (-23.5) and longitude (-46.6 to -46.7) coordinates. The relationships between customers, drivers, and shipments are logical, and no constraints (such as distinct pickup and delivery addresses) are violated.
 
 ## gen4 / boundary
 
 **Response**: Realistic
-**Why**: The object model represents a plausible initialization of master data. The attribute values for names (Icelandic and Maori origins), IDs, and social media handles are formatted correctly and represent valid real-world data types.
+**Why**: The object model uses plausible values for customer and driver names, realistic IDs, and standard formatted Twitter handles. The relationships correctly assign the driver and customer to a station, which logically reflects a real-world transport or delivery network snapshot.
 
 ## gen4 / complex
 
 **Response**: Realistic
-**Why**: The object model depicts a plausible logistics scenario in the Delhi NCR region with accurate geographic coordinates matching the address descriptions. The logic between `ShipmentStatus` and `Driver` assignment is consistent (e.g., `NEW` shipments have no driver), and drivers with multiple `UNDERWAY` shipments (e.g., `DRVDEL502` handling `SHPDEL3003` and `SHPDEL3011`) share the same pickup location (`DELA2`), representing a realistic multi-drip delivery route.
+**Why**: The object model is syntactically correct and semantically logical. The geographic coordinates accurately map to the Delhi-NCR region, the addresses match real-world locations, and the assignment of drivers corresponds correctly to the shipment statuses (i.e., 'NEW' shipments lack a driver, while other statuses have one). All constraints, including unique IDs and distinct pickup/delivery addresses, are satisfied.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-**Why**:
-1. Shipment `EDGE4_SHP3004` has the status `#ASSIGNED` but represents a logical contradiction as it is not linked to any `Driver` object.
-2. Shipment `EDGE4_SHP3003` is marked as `#DELIVERED` to Address `EDGE4_A303`, which contains unrealistic data (empty text string `''` and coordinates `0.0, 0.0` located in the Atlantic Ocean).
+**Why**: The object model contains logical contradictions regarding shipment statuses: 'EDGE4_SHP3004' is 'ASSIGNED' but lacks a driver, whereas 'EDGE4_SHP3001' and 'EDGE4_SHP3006' are 'NEW' despite already having drivers assigned. Additionally, 'EDGE4_SHP3003' is marked 'DELIVERED' to 'EDGE4_A303', which is unrealistic as the address has an empty text string and coordinates at (0.0, 0.0) in the middle of the ocean (Null Island).
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model contains a direct violation of the `uniqueDriverId` constraint. Two different driver objects ('DCA100A' and 'DCA100B') are assigned the same identifier 'D-CA-100', which creates a data consistency conflict. Additionally, shipment 'SHPCA6009' is assigned two different pickup addresses sequentially, which creates ambiguity regarding the actual pickup location.
+**Why**: Drivers 'DCA100A' and 'DCA100B' are assigned the exact same ID ('D-CA-100'), which violates the domain's unique driver ID constraint and real-world logic. Additionally, shipment 'SHPCA6009' is assigned two distinct pickup addresses ('AYVRPICK01' and 'AYVRPICK02'), contradicting the domain model's cardinality that strictly limits a shipment to exactly one pickup address.
 
 ## gen5 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a coherent logistics scenario located in Auckland, New Zealand. The addresses (e.g., Auckland City Hospital, University of Auckland) are real locations, and the geocoordinates provided correspond accurately to these physical locations. The names are culturally appropriate for the region, and the logic between shipment status and driver assignment is sound (e.g., the 'NEW' shipment has no driver, while 'ASSIGNED'/'UNDERWAY' ones do).
+**Why**: The object model represents a mathematically and logically sound scenario. The geographical coordinates accurately represent real-world locations in Auckland, New Zealand. The assigned statuses logically align with the associations (e.g., the 'NEW' shipment has no assigned driver, while the 'ASSIGNED', 'UNDERWAY', and 'DELIVERED' shipments appropriately have drivers). Customer, driver, and address data are highly plausible.
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-**Why**: The address 'ABLANK600' has an empty text string and coordinates located in the middle of the Pacific Ocean (0.0, -179.9999), yet it is used for active shipments ('SHP6001', 'SHP6002'). A driver cannot service a shipment with no address description in the ocean. Additionally, 'SHP6003' depicts a standard delivery from the North Pole to the South Pole, which is logically implausible.
+**Why**: Shipment 'SHP6003' involves a pickup at the North Pole and a delivery at the South Pole, handled by a single driver, which is physically impossible for a typical delivery network. Additionally, address 'ABLANK600' has an empty text string and is located in the middle of the Pacific Ocean (0.0, -179.9999), making it invalid as a pickup/delivery location for shipments 'SHP6001' and 'SHP6002'.
 
 ## gen5 / complex
 
 **Response**: Realistic
-**Why**: The object model is highly consistent and logically sound. 
-1. **Geographic Accuracy**: Variable values for latitude/longitude in Auckland and Seoul correctly match the descriptive text of the addresses (e.g., coordinates for Incheon Airport or Wynyard Quarter are accurate). 
-2. **Contextual consistency**: Names, IDs, and Twitter handles match the regions (Korean names/Hangul for Seoul objects, English/Māori for Auckland). 
-3. **Workflow Logic**: Shipments with status 'NEW' correctly have no driver assigned, whereas 'ASSIGNED' or 'UNDERWAY' shipments are linked to drivers. 
-4. **Constraints**: Pickup and delivery addresses differ, adhering to the domain rules.
+**Why**: The object model is logically consistent with the domain model and represents a highly plausible real-world scenario. The geolocations accurately match their respective cities (Auckland and Seoul), shipments are correctly contained within their local stations without geographical crossover, delivery statuses align organically with driver assignments (e.g., 'NEW' shipments correctly have no drivers, whereas 'ASSIGNED'/'UNDERWAY' do), and every shipment has distinct pickup and delivery addresses as required.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object model assigns Driver 'EDGE5_D60' to two different shipments ('EDGE5_SHP4002' and 'EDGE5_SHP4006') that are both marked as '#UNDERWAY' simultaneously. Geographically, 'EDGE5_SHP4002' is located at the International Date Line (Pacific Ocean), while 'EDGE5_SHP4006' is in Haiti. It is physically impossible for a single driver to be actively driving two shipments in such vastly different locations at the same time.
+**Why**: Driver 'EDGE5_D60' is handling shipments that are geographically impossible for one person to manage at the same time: 'EDGE5_SHP4002' (marker buoy in the open Pacific Ocean) and 'EDGE5_SHP4006' (Haiti) are both #UNDERWAY simultaneously. Additionally, logical contradictions exist in the shipment statuses: 'EDGE5_SHP4003' has a driver linked despite being #NEW, 'EDGE5_SHP4005' is #ASSIGNED but has no linked driver, and address 'EDGE5_A405' is completely blank ('   ').
 
 ## gen5 / invalid
 
-**Response**: Unrealistic
-**Why**: The object model violates mandatory structural compositions defined in the domain. The address 'ABIH_DEL02' is created without a corresponding 'GeoLocation' object, which is explicitly required (multiplicity [1]) by the domain. It is semantically impossible for the system (which relies on GeoLocation) to process the active shipment 'SHPIN12001' to a destination that possesses descriptive text but lacks geospatial coordinates.
+**Response**: Realistic
+**Why**: The object model represents a highly plausible logistics scenario in India. Geographic coordinates accurately match their real-world Delhi locations (Lajpat Nagar, Connaught Place, AIIMS), the shipment statuses logically align with driver assignments (a 'NEW' shipment has no driver, while an 'ASSIGNED' one does), and the use of descriptive landmarks for the Bihar rural address reflects realistic addressing conventions in such regions.
 
 ## gen6 / baseline
 
 **Response**: Realistic
-**Why**: The object model uses culturally appropriate names and accurate geographical coordinates for the specific regions defined (Dubai, UAE and Cusco, Peru). The logic of the shipment lifecycle is consistent (e.g., shipments with status 'NEW' have no driver, while 'ASSIGNED'/'UNDERWAY' ones do), and attribute values such as Twitter handles adhere to standard formats.
+**Why**: The object model represents a highly plausible scenario. The geographic coordinates match their respective real-world locations (Dubai and Cusco), the customer names align with those regions, and the shipment business logic is sound (e.g., shipments with the status 'NEW' do not yet have drivers assigned, while 'ASSIGNED', 'UNDERWAY', and 'DELIVERED' shipments accurately have assigned drivers). All domain constraints and multiplicities are respected.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-
-**Why**: 
-1. The object `ADLCOMMON700` represents an address in **Seville, Spain**, but its `geoLocation` longitude is set to `-0.0`. Seville is located approximately at longitude `-6.0`.
-2. The attribute `twitterUserName` for customer `CUST7004_S7` is `'@ahmed_الطلبات_السريعة_2026'`. Twitter usernames only support Roman alphanumeric characters and underscores; they cannot contain Arabic script.
-3. It is logistically impossible for a single `Driver` (e.g., `DRVLONG7000000001`) to perform a pickup in the middle of the Pacific Ocean (Lat 10.0, Long 180.0 for `SHP7004`) or the remote Kerguelen Islands (`SHP7003`) and deliver to Spain.
+**Why**: A single local station ('S7') and its individual drivers (like 'DRVLONG7000000001') are assigned to pick up shipments from extreme, intercontinental, or impossible locations (e.g., the middle of the Pacific Ocean at 10.0, 180.0; Kerguelen Islands; and Nunavut, Canada) to deliver to a locker in Spain, which defies the physical capabilities of a standard delivery driver. Additionally, the Twitter username '@ahmed_الطلبات_السريعة_2026' contains Arabic characters and exceeds length limits, which is invalid for a real Twitter handle.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The object model correctly segregates two distinct operational regions (Dubai and Kigali) with geographically accurate coordinates and addresses. The logic between `ShipmentStatus` and `Driver` assignment is consistent (e.g., 'NEW' shipments `SHPDXB6101` and `SHPDXB6106` have no drivers, while 'ASSIGNED'/'UNDERWAY' shipments do), and there are no missing mandatory relationships.
+**Why**: The object model is syntactically correct and semantically logical. Drivers, customers, and shipments are properly grouped by their respective geographical stations (Dubai and Kigali). The given geolocations correspond accurately to real-world coordinates for those cities. Furthermore, logistics logic is preserved: shipments with the "NEW" status have no driver assigned, while those in progress or delivered have corresponding drivers, and pickup and delivery addresses are distinct.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains semantic contradictions regarding the lifecycle states of shipments. Specifially, shipment 'EDGE6_SHP5005' has the status '#ASSIGNED' but is not associated with any 'Driver'. Conversely, shipment 'EDGE6_SHP5003' has the status '#NEW' yet is already associated with driver 'EDGE6_D81'.
+**Why**: There is a logical contradiction between the shipment statuses and their driver assignments. The shipment 'EDGE6_SHP5003' has a status of 'NEW' but is assigned to driver 'EDGE6_D81', whereas 'NEW' shipments typically lack assignment. Conversely, 'EDGE6_SHP5005' has a status of 'ASSIGNED' but is not linked to any driver in the `DriverShipment` association, violating the semantic meaning of the state.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates specific domain references and physical logic. Shipment 'SHPFR2602_2' is assigned two different pick-up addresses ('APARPUDO01_2' and 'APARPUDO02_2'), which contradicts the domain multiplicity of 1 and the real-world logic that a specific shipment originates from a single location. Additionally, Shipment 'SHPFR2601_2' completely lacks a delivery address.
+**Why**: The shipment 'SHPFR2602_2' is associated with two distinct pick-up addresses ('APARPUDO01_2' and 'APARPUDO02_2'), which logically contradicts the concept of a single discrete shipment and violates the strict `[1]` cardinality of the `pickUpAddress` role. Additionally, 'SHPFR2601_2' lacks a delivery address entirely, violating the `[1]` cardinality for `shipToAddress`.
 
 # restaurant
 
 ## gen1 / baseline
 
-**Response**: Unrealistic
-
-**Why**: The object model contains a semantic contradiction regarding food composition. The `MenuItem` 'MI1' is described as "Crispy Calamari" (which implies squid), but it is associated via `MenuItemFoodItem` to the `FoodItem` 'F103' described as "Shrimp (peeled)". These are biologically distinct, making the dish composition semantically incorrect. Additionally, objects 'DR1' (DietaryRequirement) and 'RA1' (ReportedAllergy) are created but can never be associated with any customer due to missing associations in the domain model, resulting in unrealistic orphaned data.
+**Response**: Realistic
+**Why**: The object model perfectly aligns with the constraints defined in the domain model. Cardinalities, attributes, and relationships are syntactically valid and semantically sensible. For instance, owner shares total 100%, table capacities exceed reservation sizes, chronological sequencing of reservations and orders is logical, and employee ages/experiences align with typical real-world expectations.
 
 ## gen1 / boundary
 
-**Response**: Unrealistic
-**Why**: 
-1. The object 'MI4' (Menu Item) has a `prepTime` of 0.0, which is physically impossible; all tasks require a positive amount of time.
-2. The object 'K3' (Cook) has 0 years of experience but is placed in a supervisory role over 'CH3' (Chef) defined by the domain model's association `ChefCook`. A novice supervising a Chef contradicts real-world professional hierarchy.
+**Response**: Realistic
+**Why**: The object model is logically consistent and adheres to the domain model's constraints. The attributes reflect plausible real-world values (e.g., table capacities match the number of people in the reservations, employee ages and roles are perfectly valid), and all necessary multiplicity constraints are satisfied for a snapshot in time. Using a placeholder phone number and a 0.0 prep time for a "zero-prep demo" item are both common, valid scenarios in a real system.
 
 ## gen1 / complex
 
 **Response**: Realistic
-
-**Why**: The object model is syntactically correct and semantically consistent with the domain.
-1.  **Constraint Satisfaction**: Owner shares sum to exactly 100 for both restaurants, and table capacities assigned to reservations meet or exceed the number of people (e.g., Banquet `BR4` has 26 people and total table capacity of 26).
-2.  **Contextual Logic**: The data is culturally coherent. Restaurant `R4` (Spanish name) employs staff with Hispanic names and serves Spanish dishes (`Pan con tomate`), while `R5` (German name) serves German dishes (`Käsespätzle`).
-3.  **Process Logic**: Timestamps for `ItemOrder` objects occur shortly after the `Reservation` times, representing a realistic dining flow. Ingredients linked to menu items are culinarily accurate.
+**Why**: The object model portrays a highly detailed and plausible scenario of two distinct restaurants (one Spanish, one German). The names, languages, and phone number prefixes match logically. The food items are correctly mapped to their real-world allergens (e.g., milk contains lactose, wheat flour contains gluten). The reservations have assigned tables whose combined capacities correctly accommodate the exact number of people, and the item order timestamps follow a realistic chronological progression after the reservation time. Ownership shares validly sum to 100% for each restaurant.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-
-**Why**: 
-1. The object 'BR5' (Banquet) is assigned the date '2026-02-29', but 2026 is not a leap year, making this date physically impossible.
-2. The Banquet 'BR5' has the attribute `busService` set to `false`, yet it is explicitly associated with a BusDriver object ('BD5'), creating a logical contradiction.
-3. Assigning a Banquet of 20 people to 20 separate tables of capacity 1 (e.g., 'T01_NTL' through 'T20_NTL') is logistically nonsensical for a group event.
+**Why**: The banquet 'BR5' is scheduled for an impossible date ('2026-02-29', as 2026 is not a leap year). Additionally, a bus driver ('BD5') is assigned to this banquet despite its 'busService' boolean being set to false, which is contradictory.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain model's cardinality constraints for the `ChefCook` association. The Cook 'K4' is linked to two different Chefs ('CH4' and 'CH5'), but the multiplicity `Chef [1]` dictates that a Cook can only be associated with exactly one Chef. Additionally, the relationship implies Cooks supervise Chefs (via roles), which contradicts the standard real-world kitchen hierarchy.
+**Why**: The cook 'K4' is assigned to be supervised by two different chefs ('CH4' and 'CH5'), which violates the strictly defined `1` multiplicity for the Chef in the `ChefCook` association. Additionally, seating a single 18-person banquet ('BR3') across physically disjointed and separate areas of the restaurant (an outside patio table 'T8', an inside window table 'T5', and an inside communal table 'T9') is logically nonsensical for a group meetup.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-
-**Why**: The object model portrays a coherent restaurant scenario that adheres to the domain constraints and real-world logic. Specific details support this:
-1.  **Capacity Logic**: Assigned tables (e.g., T30, T31) provide sufficient capacity (6 seats) for the reservation party size (5 people), satisfying the `TablesCapacityGreaterThanPeople` constraint.
-2.  **Semantic Consistency**: Food ingredients map correctly to allergens (e.g., Pistachios to Nuts, Salmon to Seafood) and units of measure (e.g., Salmon in Pounds).
-3.  **Staffing Plausibility**: Staff ages and experience levels are logical (e.g., a 36-year-old Chef supervising a Cook), and supervision hierarchies are properly instantiated.
-4.  **Temporal Logic**: Order timestamps (e.g., 18:45) occur logically after the reservation time (18:30).
+**Why**: The object model represents a highly plausible restaurant scenario. The owner shares correctly sum to 100%, the tables assigned to each reservation have enough combined capacity to seat all guests, and the event times, prep times, and order sequences perfectly align with real-world restaurant operations. The menu items also use logically accurate ingredients, allergens, and units of measurement.
 
 ## gen2 / boundary
 
-**Response**: Unrealistic
-
-**Why**: The object model presents a geographically and behaviorally impossible scenario for a single physical restaurant:
-1.  **Geographic Inconsistency**: The staff working at the same location hold active primary phone numbers and licenses from disparate continents (e.g., BusDriver `BD12` has a Swedish license/number, while `BD11` has a Florida license, and other staff use UAE, Mexican, and Austrian numbers). It is legally and logistically implausible for a local restaurant (likely in the US or Mexico based on the Manager/Head Waiter) to employ drivers operating commercial vehicles with foreign licenses.
-2.  **Implausible Banquet Logic**: The Banquet `BR10` has 25 attendees, yet only 4 menu items (including water) are ordered over a 35-minute window (20:45–21:20), which is nonsensical for a group dinner event.
+**Response**: Realistic
+**Why**: All object attributes have plausible real-world values. The assigned table capacities correctly sum up to accommodate exactly the number of people for each reservation, owner shares sum precisely to 100%, and food items have logically mapped ingredients and allergens. Worker ages and years of experience also align perfectly with normal career timelines.
 
 ## gen2 / complex
 
 **Response**: Unrealistic
-
-**Why**: The object model contains duplicate worker entities: objects 'K20' and 'K22' (class 'Cook') share identical personally identifiable information (Name 'Rami Khalil', Date of Birth '1978-05-11', and Phone Number '+1 416 555 0200'). It is unrealistic to have two distinct employees with indistinguishable identities, or for the same person to be instantiated twice. Additionally, Banquet 'BR12' has 40 people but only orders 5 single menu items, which is implausible consumption.
+**Why**: The object model contains two distinct instances of the class 'Cook' ('K20' and 'K22') with exactly identical attributes (name 'Rami Khalil', date of birth '1978-05-11', phone number '+1 416 555 0200', and 15 years of experience). This is an unrealistic and illogical duplication of a single physical human being into multiple distinct system objects.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-
-**Why**: 
-1. **Identity Duplication**: Two distinct 'Cook' objects (`K23`, `K24`) exist with identical Name, Date of Birth, and Phone Number, which is physically impossible (two separate bodies cannot be the same person).
-2. **Resource Allocation**: Banquet `BR15` (60 people) is served by only 1 waiter (`W32`) and has ordered only 6 items, whereas the single-person banquet `BR14` is served by 3 waiters, representing a nonsensical distribution of service and food.
+**Why**: The object model contains duplicate employee records: Cooks 'K23' and 'K24' share the exact same name, date of birth, and personal phone number, which is physically unrealistic for two distinct people. Additionally, the Banquet 'BR14' is registered for 1 person but requests a bus service, which contradicts the concept of both a banquet and bus transportation.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model violates the cardinality defined in the domain model. The Cook 'K12' is assigned to be supervised by two different Chefs ('CH13' and 'CH14'), whereas the `ChefCook` association specifies `Chef [1]`, meaning a Cook can only work under one Chef. Additionally, it is logistically illogical to split the Banquet 'BR7' (a wedding) between a private room and a disconnected outdoor terrace ('T11') when the private room's round table ('T14') was available and would have kept the party together.
+**Why**: The object model violates the syntactic cardinality constraints by assigning the Cook 'K12' to two different Chefs ('CH13' and 'CH14'), even though the association `ChefCook` strictly dictates a multiplicity of `[1]` for the Chef role. Additionally, it is semantically implausible to seat a single 20-person wedding banquet ('BR7') completely split between an indoor private room ('T12_TDF', 'T13_TDF') and an outdoor terrace ('T11_TDF').
 
 ## gen3 / baseline
 
-**Response**: Unrealistic
-
-**Why**: The reservation 'IR15' is configured as `Inside` and `Smoking` at table 'T50_NLC', which has the description "Small indoor round table by bookcase". Smoking indoors poses a severe fire hazard next to a bookcase, and is illegal in the implied context (the restaurant is named "Nordic Lantern" and kitchen staff have +47 Norwegian phone numbers, where indoor smoking is prohibited). Additionally, 'F904' (Smoked Salmon) is a raw ingredient with `purchaseFlag := false`, creating a logical impossibility in the supply chain (cannot be bought, yet appears from nowhere).
+**Response**: Realistic
+**Why**: The object model perfectly aligns with the domain model and represents a highly plausible real-world restaurant scenario. The reservation timings match the chronologically ordered meal courses, ingredient allergens correctly map to the food items (e.g., lactose in cream, gluten in crispbread), owner shares sum to exactly 100%, and table capacities logically accommodate the number of guests for each reservation.
 
 ## gen3 / boundary
 
-**Response**: Unrealistic
-**Why**: 
-1. **Geographic Inconsistency**: The objects represent physical staff (Waiters, Bus Drivers) working at a single location, yet they possess active phone numbers and driver licenses from widely disparate regions (USA, Japan, Senegal, Bulgaria, Vietnam, etc.). Specifically, the Bus Drivers (e.g., `BD18`) hold foreign licenses valid in different continents, which is legally and logistically impossible for a local bus service.
-2. **Chronological/Semantic Contradiction**: The Banquet `BR17` is named "New Year’s Eve Community Iftar" on `2026-12-31`. In 2026, Ramadan falls in February/March; thus, an Iftar (Ramadan break-fast) cannot occur in December.
-3. **Logistical Implausibility**: The banquet is for 200 people (`numberPeople`), but only 12 individual menu items (`ItemOrder`) are associated with it, implying a severe shortage of food.
+**Response**: Realistic
+**Why**: The object model represents a highly plausible real-world scenario of a large banquet. The numbers align perfectly: exactly 20 tables of 10 capacity for a 200-person reservation, and 5 bus drivers assigned to transport them (~40 passengers per bus). Owner shares correctly sum to 100% per restaurant, and the staff's ages, experience levels, and preparation times for dishes are all completely logical.
 
 ## gen3 / complex
 
-**Response**: Realistic
-**Why**: The object model represents a plausible scenario. All attribute values (staff ages, prep times, table capacities) are physically possible and consistent (e.g., smokers are assigned 'Patio' tables, non-smokers 'Inside' tables). Reservation sizes fit within the assigned table capacities (e.g., 55 people for 55 seats), and ingredient compositions for menu items are logically sound. The duplication of person objects (e.g., `K35` and `K36`) reflects realistic data entry issues rather than semantic impossibility.
+**Response**: Unrealistic
+**Why**: The object model contains two distinct `Cook` instances ('K35' and 'K36') that share the exact same name ('Salma Idrissi'), date of birth ('1980-04-05'), and personal phone number. It is highly implausible for two separate employees to have completely identical personal identifying information, indicating an unrealistic data duplication.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains several semantic inconsistencies:
-1. Reservation `IR32` has `numberPeople` set to 0, which contradicts the concept of a reservation (reserving space for people).
-2. Table `T300_E3c` is described as a "two-top" (industry standard for a table of two) but has its `capacity` constrained to 1.
-3. Two distinct Cook objects, `K47` and `K48`, possess identical personal details (Name, Date of Birth, Phone Number), representing an unrealistic duplication of a single human identity.
+**Why**: There are several logical inconsistencies: K47 and K48 are distinct `Cook` objects but represent the exact same person with identical names, dates of birth, and phone numbers. Additionally, the `Owner` object 'O69' has 0% shares, which contradicts the real-world definition of an owner, and the reservation 'IR32' is for 0 people, which defies the purpose of a restaurant reservation.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model violates specific constraints defined in the domain:
-1. The reservation object 'IR14' is created but not linked to any 'Table'. This violates the mandatory association `ReservationTable` (which requires a Reservation to have at least one Table) and subsequently violates the OCL constraint `TablesCapacityGreaterThanPeople` (the calculated capacity of 0 is less than the required 2 people).
-2. The objects 'DR9' (DietaryRequirement) and 'RA8' (ReportedAllergy) are created but cannot be linked to any Person or Customer because the domain model fails to define associations for these classes, rendering the objects semantically useless.
+**Why**: The reservation 'IR14' is missing mandatory associations to a Table and a Waiter. This violates the domain's multiplicities and causes the 'TablesCapacityGreaterThanPeople' constraint to fail, as its total table capacity evaluates to 0 (which is not >= 2 people). Furthermore, the 'DR9' (DietaryRequirement) and 'RA8' (ReportedAllergy) objects are completely isolated without links to any customer or reservation, making them semantically orphaned.
 
 ## gen4 / baseline
 
 **Response**: Unrealistic
-**Why**: The object model defines three distinct `Cook` objects (`K30`, `K31`, `K32`) that have identical personal attribute values: Name 'Farid Benali', Date of Birth '1986-01-17', Phone Number '+212-5-555-7788', and Experience '6'. It is semantically invalid to have three distinct employees with the exact same identity data; this indicates a data entry or copy-paste error rather than a realistic scenario.
+**Why**: The objects `K30`, `K31`, and `K32` of class `Cook` are created as separate entities but contain identical personal information (name: 'Farid Benali', date of birth, and phone number). In the real world, a single human employee must be represented as a single object identity within the system, rather than creating duplicate instances to assign them to different chefs.
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model defines three distinct `Cook` objects (`K39`, `K40`, `K41`) that share the exact same Name ('Boris Ivanov'), Date of Birth ('1987-12-01'), and Phone Number ('+81 3 5555 0200'). It is semantically impossible for three different employees to share the exact same identity and contact details; this indicates unrealistic data duplication rather than three distinct real-world workers.
+**Why**: The objects 'K39', 'K40', and 'K41' of class 'Cook' represent distinct employees but have the exact same name ('Boris Ivanov'), date of birth ('1987-12-01'), and unique phone number ('+81 3 5555 0200'). It is highly unrealistic for three different people to share exactly the same personal details and phone line.
 
 ## gen4 / complex
 
 **Response**: Unrealistic
-
-**Why**: 
-1. **Physical Impossibility (Cloning)**: The model creates three distinct `Cook` objects (`K58`, `K59`, `K60`) with identical personal data (Name 'Farah Haddad', same DOB, same unique phone number). This implies a single human is split into three separate object instances to work under three different Chefs simultaneously, which is logically impossible.
-2. **Semantic Contradiction**: The restaurant `R36` is named 'Kiez Koshery' and hosts a 'Shabbat Dinner' (`BR28`), yet implies the serving of Shrimp (`MI95`), which is physically derived from `F1706` (Shrimp). Serving shellfish is a fundamental violation of Kosher dietary laws implied by the restaurant's name and event.
+**Why**: The object model creates three distinct `Cook` instances (K58, K59, K60) with the exact same personal details (name 'Farah Haddad', date of birth '1979-05-09', and phone number). Cloning a single human being into multiple distinct employee objects to bypass domain model multiplicity constraints is logically impossible in the real world.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-
-**Why**: The object model contains semantic contradictions and data integrity issues:
-1. Banquet 'BR31' explicitly sets `busService` to `false`, yet is associated with five distinct `BusDriver` objects ('BD38'–'BD42'), logically contradicting the service configuration.
-2. There are multiple sets of duplicate `Cook` objects (e.g., 'K65'/'K66'/'K67' and 'K68'/'K69') that share identical personal data (Name, DOB, Phone Number), implying the same physical person is instantiated multiple times as distinct objects.
+**Why**: The banquet 'BR31' has `busService` set to `false`, yet it has five bus drivers assigned to it, which is a logical contradiction. Additionally, there are exact duplicate objects representing the exact same human beings with identical names, dates of birth, and phone numbers (Cooks 'K65', 'K66', 'K67' and 'K68', 'K69'), and Table 'T501_E4' has a negative table number (-7) which is not plausible in a real-world restaurant.
 
 ## gen4 / invalid
 
-**Response**: Unrealistic
-**Why**: The object model violates the domain model's mandatory multiplicity constraints. The domain explicitly requires every 'Cook' to be associated with a 'Chef' (multiplicity [1] in `ChefCook`), but the object model creates Cook 'K26' and Chef 'CH29' without establishing this required relationship. Additionally, MenuItem 'MI49' is described as "Lamb flatbread" but is only linked to flatbread and pistachio ingredients, semantically missing the main protein component.
+**Response**: Realistic
+**Why**: The object model represents a highly consistent and plausible scenario. The attribute values (such as ages, 15 years of experience for a 46-year-old cook, and owner shares totaling 100%) are completely logical. Furthermore, the relationships strongly reflect real-world logic: a Spanish-speaking waiter is assigned to a Spanish-preferring customer, the non-smoking patio seating preference is mapped specifically to a smoke-free patio table, and order times sequentially follow their respective reservation times. Food item allergen mappings also correctly match their English descriptions (e.g., wheat/gluten, pistachio/nuts).
 
 ## gen5 / baseline
 
-**Response**: Realistic
-
-**Why**: The object model represents a plausible scenario for a restaurant group. All attributes (ages, capacities, prep times) are within valid physical ranges. All OCL constraints (ownership shares summing to 100%, table capacity sufficiency) are satisfied. The mix of international phone numbers and names is consistent with a cosmopolitan setting or international franchise, and no impossible relationships (e.g., temporal paradoxes or circular dependencies) exist.
+**Response**: Unrealistic
+**Why**: The object model contains two distinct `Cook` instances ('K50' and 'K51') that have identical values for name ('Jae-min Park'), date of birth ('1985-06-05'), phone number, and years of experience. In the real world, two different employees would not share the exact same identity, birth date, and personal phone number.
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model contains duplicate distinct objects representing the same person, which is semantically impossible or represents a data error. Specifically, 'K55' and 'K56' (both Cooks) share the exact same Name ('Pavel Novák'), Date of Birth ('1993-03-03'), and Phone Number ('+420 2 700 2001'). Additionally, the resource allocation is illogical: Reservation 'IR37' (2 people) is assigned 4 waiters, while Reservation 'IR38' (15 people) is assigned only 2.
+**Why**: The objects 'K55' and 'K56' of class 'Cook' are instantiated as two distinct objects but share the exact same name ('Pavel Novák'), date of birth ('1993-03-03'), and personal phone number ('+420 2 700 2001'). In reality, this implies the exact same physical human being has been duplicated into two separate entities within the model, which violates object identity principles.
 
 ## gen5 / complex
 
 **Response**: Unrealistic
-**Why**: The object model defines three distinct 'Cook' objects ('K73', 'K74', 'K75') with identical identity attributes (Name 'Markus Frei', Date of Birth, Phone Number). It is physically impossible for the same specific human being to exist as three separate employee instances within the same system. Furthermore, Banquet 'BR34' has 44 attendees but only two single-serving items ordered (one coffee, one cake).
+**Why**: The object model contains three distinct `Cook` objects ('K73', 'K74', 'K75') that are exact clones of each other, sharing the identical name ('Markus Frei'), date of birth ('1976-06-16'), phone number, and years of experience. This is a logical fallacy representing an unrealistic duplication of a person's identity in the real world.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**:
-1. The objects 'K76' and 'K77' (Cooks) are distinct instances but possess identical personal identity data (Name 'Bashir Adeyemi', Date of Birth '1992-01-23', and Phone Number '+234-803-555-0108'). In a realistic scenario, two different employees would not share the exact same identity/phone number; this represents a duplicate person.
-2. Banquet 'BR35' has the attribute `busService` set to `false`, yet it is explicitly associated with a `BusDriver` ('BD46'), which is a logical contradiction.
+**Why**: Banquet 'BR35' has its `busService` flag set to `false`, yet it explicitly assigns a BusDriver ('BD46') via the `BanquetBusDriver` association, which is a logical contradiction. Additionally, two distinct Cook objects ('K76' and 'K77') are completely identical clones sharing the exact same name, date of birth, and, impossibly, the same personal phone number.
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'W47' of class 'Waiter' is associated with two different 'HeadWaiter' objects ('HW20' and 'HW21'), which violates the domain model's multiplicity constraint allowing a Waiter to be responsible to only one HeadWaiter ([1]). Additionally, objects 'K33' and 'K34' (Cooks) contain identical personal data (Name, DOB, Phone), creating a duplicate representation of the same physical person.
+**Why**: The object model contains two distinct instances of `Cook` ('K33' and 'K34') that have the exact same name ('Noah Wilson'), date of birth ('1985-05-05'), and personal phone number ('+1 505 555 0200'). It is not plausible for two different employees to share a unique personal phone number alongside identical personal details, indicating a duplication or copy-paste error in the system state. Additionally, the waiter 'W47' is assigned to two different head waiters ('HW20' and 'HW21'), which violates standard 1-to-many organizational structures.
 
 ## gen6 / baseline
 
-**Response**: Realistic
-**Why**: The object model represents a coherent and physically plausible state of a restaurant system. All domain constraints are satisfied (e.g., owner shares sum to 100%, table capacities exceed reservation sizes). The data is semantically rich and consistent with a South African context (names, phone codes, menu specifics), and the relationships (e.g., Banquets assigned with BusDrivers, Reservations linked to valid tables) follow logical real-world rules.
+**Response**: Unrealistic
+**Why**: The objects 'K62' and 'K63' of class 'Cook' are exact duplicates of the same person (both are named 'Ritika Sharma', with the exact same date of birth, phone number, and years of experience) but are modeled as distinct employee instances supervised by two different chefs. This violates real-world uniqueness of human employees.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-**Why**: The Banquet object 'BR32' has the attribute `busService` set to `false`, but it is simultaneously associated with a BusDriver ('BD43'), creating a logical contradiction. Additionally, two distinct Cook objects ('K70', 'K71') share identical personal information (name, date of birth, and phone number), which indicates unrealistic data duplication.
+**Why**: The banquet reservation 'BR32' explicitly has its `busService` attribute set to `false`, but a `BusDriver` ('BD43') is still assigned to it via the `BanquetBusDriver` association, creating a logical contradiction. Furthermore, the objects 'K70' and 'K71' represent two separate `Cook` instances with identically matching names, birth dates, and phone numbers, which indicates an unrealistic duplicate employee record.
 
 ## gen6 / complex
 
 **Response**: Unrealistic
-**Why**: The object model instantiates multiple distinct objects for the exact same physical people, implying human cloning. Specifically, Cooks 'K84', 'K85', and 'K86' are created as separate entities despite having identical personal details and unique phone numbers ('Renzo Bassi'), as are 'K82' and 'K83' ('Noor Al-Farsi').
+**Why**: The object model creates exact clones of human workers. Cooks 'K82' and 'K83' represent the exact same person (Noor Al-Farsi, with identical date of birth, phone number, and experience), as do 'K84', 'K85', and 'K86' (Renzo Bassi). In reality, an employee is a single physical entity. Cloning person objects to artificially satisfy the 1-to-many `ChefCook` supervision multiplicity is logically impossible and breaks object identity.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The objects 'K79' and 'K80' (class `Cook`) possess `yearsOfExperience := 99`, yet they have a `dateOfBirth` of '1955-01-20'. Given the context of the reservations (set in 2026), these individuals would be approximately 71 years old. It is logically impossible for work experience to exceed biological age.
+**Why**: The objects 'K79' and 'K80' of class 'Cook' each have a 'yearsOfExperience' value of 99, but their 'dateOfBirth' is set to '1955-01-20'. Even considering the future reservation year of 2026, they would only be 71 years old, making 99 years of experience biologically and chronologically impossible.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'MI88' (MenuItem) is associated with two distinct Chef objects ('CH57' and 'CH58'), which violates the domain model's multiplicity constraint on the 'MenuItemChef' association (defined as `Chef [1]`). Additionally, the objects 'K53' and 'K54' (Cooks) represent the exact same person (same name, date of birth, and phone number), which is a logical duplicate error.
+**Why**: The object model violates the strict `[1]` multiplicity constraint for the `Chef` in the `MenuItemChef` association, because the menu item 'MI88' is incorrectly assigned to two different chefs ('CH57' and 'CH58'). Furthermore, the cooks 'K53' and 'K54' are implausible identical duplicates, sharing the exact same name, date of birth, phone number, and years of experience.
 
 # statemachine
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The object model describes a coherent and logical lifecycle for a metro ticket kiosk (Idle -> Selecting -> Paying -> Printing -> Idle). The state names conform to domain constraints (lowercase start), the transition flow creates a valid cycle, and the time values for the events are plausible integers representing processing duration or simulation delays.
+**Why**: The object model represents a highly logical and typical state machine for a metro ticket kiosk. The states form a coherent, real-world business process loop ('idle' -> 'selectingTicket' -> 'paying' -> 'printingReceipt' -> 'idle') and the time intervals for the transition events are positive, realistic durations for UI delays or timeouts in such a kiosk system.
 
 ## gen1 / boundary
 
 **Response**: Realistic
-**Why**: The object model represents a structuraly valid state machine with a single state ('départ') having a reflexive transition ('boucleAttente'), commonly found in polling or waiting logic. The attribute values adhere to the domain constraints (lowercase state names, positive time), and the semantic context (Paris Metro timer) is consistent.
+**Why**: The object model describes a semantically plausible state machine for a 'Paris metro timer'. A self-transition ('boucleAttente') on the 'départ' state triggered by a positive time event correctly represents a typical waiting loop behavior in control logic. The naming conventions also correctly obey the constraints.
 
 ## gen1 / complex
 
-**Response**: Realistic
-**Why**: The object model represents a plausible state machine for an escalator control system, covering standard operational modes (Idle, Accelerating, Steady, Cooling) and safety/maintenance cycles (Emergency Stop -> Maintenance -> Idle). The sequence of states is logical for industrial equipment, and the attribute values (time) are positive integers representing reasonable durations (e.g., 5s acceleration, 30s cooldown, 10-minute lockout). The non-deterministic branching for direction (Up/Down) with identical time events is a valid modeling abstraction for external sensor inputs.
+**Response**: Unrealistic
+**Why**: The state machine relies exclusively on time-based events for transitions without guards. Shorter timeouts will always preempt longer ones, meaning the 1-time-unit emergency transitions out of states like 'acceleratingUp' (which has a normal transition of 5 units) and 'steadyUp' (180 units) guarantee the escalator will always crash into 'emergencyStop' instead of running. Furthermore, 'sensingLoad' has three outgoing transitions that all trigger exactly at 1 time unit, causing an unresolvable non-deterministic conflict.
 
 ## gen1 / edge
 
 **Response**: Realistic
-**Why**: The object model reflects a technically sound scenario, likely for testing timer boundary conditions. The attribute values align perfectly with the object names: 'tickFast' has a minimal time duration (1), and 'tickForever' uses 2,147,483,647 (the maximum 32-bit signed integer), a common programming idiom for representing infinite duration. The state name 'único' (unique) accurately describes the single-state topology.
+**Why**: The object model represents a valid single-state machine with two self-looping transitions acting as timers. The values assigned to the time events perfectly match their transition names ('tickFast' with a minimal time of 1, and 'tickForever' with the maximum 32-bit integer value 2147483647), which is a common and highly plausible pattern in software design.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model contains structural and logical contradictions. First, two different start states ('Idle' and 'Alarm') are assigned to the single state machine, which violates the domain multiplicity (only one start state allowed). Second, transitions named 'tBootToAlarm' and 'tSelfTestToIdle' originate from the 'Open' state; semantically, initialization sequences (boot/self-test) should occur before the system reaches operational states like 'Open', not start from them.
+**Why**: The state machine 'sm_metroGateController' is assigned two distinct start states ('st_mgc_Idle' and 'st_mgc_Alarm'), which violates fundamental state machine logic and the `[1]` multiplicity of the `start` role in the domain model. Additionally, there are stark semantic contradictions in the transitions: 'tr_mgc_tSelfTestToIdle' and 'tr_mgc_tBootToAlarm' originate from the 'Open' state rather than "SelfTest" or "Boot" states. Finally, the capitalized state names (e.g., 'Idle', 'Open') directly violate the `FirstCharLowerCase` OCL constraint.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model describes a coherent state machine for a 'solarMicrogridController'. The states (e.g., 'monitoring', 'sheddingLoads', 'rrunningOnBattery') and transitions formulate a logical degradation and recovery cycle typical for embedded power systems. All timer values are valid positive integers.
+**Why**: The object model represents a highly plausible timed state machine for a solar microgrid controller. The states and transitions logically reflect the failure progression and recovery phases of an industrial power system (e.g., monitoring -> warning -> shedding loads -> running on battery -> restoring grid). Expected timer behaviors, such as timeout-driven fault escalations or button-hold delays for maintenance mode, are realistically modeled with strictly positive time values, correctly satisfying all structural and OCL constraints.
 
 ## gen2 / boundary
 
 **Response**: Realistic
-**Why**: The object model depicts a plausible initial configuration for a state machine representing a structured real-world process ("Kyoto Tea Ceremony"). The state name "preparing" is semantically appropriate as a start state, and the naming conventions adhere to the specified constraints.
+**Why**: The object model represents a valid and logical state machine for a process ('kyotoTeaCeremony'). The start state 'preparing' is semantically plausible as the initial phase of a ceremony, and its naming convention adheres to the lowercase constraint.
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model defines a coherent and logical Finite State Machine for an industrial floodgate controller. It covers standard operational cycles (Standby -> Sampling -> Opening -> Closing) and safety mechanisms (Alarm, Manual Override) with plausible transition logic and valid positive time values.
+**Why**: The object model represents a perfectly logical and well-structured state machine for a floodgate controller. The transitions flow cohesively through normal operations (standby, sampling, opening, holding, closing) and error handling (alarms, manual overrides). All time events have plausible positive values logically matching the durations one would expect for those specific actions, and all domain constraints are respected.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-**Why**: The state machine contains an incoherent mix of linguistic scripts (Latin, Greek, Arabic, Hiragana) for state identifiers ('alpha', 'βeta', 'مرحلة', 'あいだ') within a single system, which violates realistic naming consistency. Additionally, a state machine with zero transitions models no behavior, defeating the core semantic purpose of the class, even if labeled 'disconnected'.
+**Why**: The state names ('alpha', 'βeta', 'café', 'estadoÑ', 'مرحلة', 'あいだ') are a disjointed mix of international characters and writing systems that do not represent a plausible real-world lifecycle for a system named 'disconnectedArchive'. This model acts as an artificial Unicode test case for the lowercase invariant constraint rather than simulating a valid semantic scenario.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The model violates the semantic encapsulation of State Machines implied by the composition `StateMachineContainsStates`. The object `st_shared_welcome_fix` is uniquely owned by `sm_intakeWorkflowTZ_fix`, yet `sm_consentWorkflowTZ_fix` incorrectly references it as its `start` state. Furthermore, `sm_consentWorkflowTZ_fix` owns a transition (`tr_consent_tWelcomeToConsent_fix`) that originates from this external state, effectively creating a transition that crosses the boundaries of two distinct, independent state machines.
+**Why**: The model breaks the core encapsulation logic of State Machines. The state 'st_shared_welcome_fix' is strictly composed inside the state machine 'sm_intakeWorkflowTZ_fix', but it is simultaneously assigned as the start state of an entirely different state machine, 'sm_consentWorkflowTZ_fix'. Additionally, 'tr_consent_tWelcomeToConsent_fix' creates a transition that originates in a foreign state machine's state, which is semantically implausible as state machines are meant to be isolated directed graphs.
 
 ## gen3 / baseline
 
-**Response**: Unrealistic
-
-**Why**: The model defines that every Transition must have exactly one `TimeEvent`, implying all state changes are triggered automatically by timers. In the state `registrandoDatos`, there are two outgoing transitions: `omitirSeguro` (time: 20) and `datosListos` (time: 50). Since 20 < 50, the system will always auto-skip insurance, making the `verificandoSeguro` path unreachable. A clinic system that makes insurance verification impossible due to a shorter timeout on the "skip" option is logically flawed.
+**Response**: Realistic
+**Why**: The object model represents a highly plausible workflow for a clinic appointment state machine. The states (waiting, registering data, checking insurance, in consultation, billing) and their sequential transitions follow a logical real-world medical process. The assigned time event values (e.g., 1800 for 30 min inactivity cancellation, 1200 for 20 min consultation) are realistic assuming the base unit is seconds or a similar metric.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model uses software "magic numbers" which are physically impossible in the context of the domain. Based on `te_ata_t_storageFlush` being 86400 (correlating to 24 hours in seconds), the time unit is seconds. The event `te_ata_t_maintenanceDone` is set to `2147483647` (Integer.MAX_VALUE), implying a maintenance step lasts ~68 years. Similarly, `te_ata_t_intakeStall` is set to `999999999` (~31 years), which are nonsensical durations for a water treatment plant operation.
+**Why**: The object model uses extreme magic numbers for time events (`te_ata_t_maintenanceDone` with 2147483647, which is INT_MAX, and `te_ata_t_intakeStall` with 999999999). Considering another timer (`te_ata_t_storageFlush`) is set to 86400 (exactly one day in seconds), it implies a scale in seconds. A timer of 31 to 68 years for an intake stall or a maintenance task is physically implausible for a real-world water treatment control system.
 
 ## gen3 / complex
 
 **Response**: Realistic
-**Why**: The object model accurately depicts a standard industrial brewing process (specifically for Munich-style lagers). The state sequence follows the correct chronological order of brewing operations (mashing -> boiling -> cooling -> fermentation -> diacetyl rest -> cold crash -> packaging -> CIP). The logical flow includes appropriate loops (monitor pulses) and exception handling (faults leading to cleaning), and the attribute values for time events typically correspond to realistic durations in minutes (e.g., 60 for mash, 75 for boil, 4320 for primary fermentation).
+**Why**: The object model perfectly mirrors a real-world commercial brewing process. The state sequence (mashing, lautering, boiling, fermenting, cold crashing, packaging) is accurate, and the transition times (measured in minutes) align with standard brewing durations (e.g., 75-minute boil, 3-day primary fermentation, 24-hour diacetyl rest). The modeling strictly adheres to the domain constraints.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-
-**Why**: The state machine is structurally flawed. The defined start state 'inicio' has no outgoing transitions, causing the system to immediately deadlock upon initialization. Consequently, the other states ('rabota', 'défaillance', 'hakuna') and their transitions form an unreachable "dead code" island, rendering the machine functionally useless.
+**Why**: The start state 'st_ssbe_inicio' has no outgoing transitions, rendering the rest of the state machine's states ('работа', 'hakuna', 'défaillance') completely unreachable. Additionally, using a random mix of Spanish, Cyrillic Russian, Swahili, and French for state names in a single component defies real-world software engineering practices.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain constraint `TimeIsPositive` (`self.time > 0`). Several `TimeEvent` objects (e.g., `te_mag_tBootToLanguage`, `te_mag_tLanguageToReady`) are assigned a `time` value of `0`, which is explicitly forbidden by the defined constraints.
+**Why**: The TimeEvent objects 'te_mag_tBootToLanguage', 'te_mag_tLanguageToReady', and 'te_mag_tSleepToReady' have a time value of 0. This contradicts the physical logic of a time delay event and explicitly violates the domain's 'TimeIsPositive' requirement (time > 0).
 
 ## gen4 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The state logic contains contradictions that prevent the webinar from progressing or terminating. Specifically, the state `st_web_broadcasting` has a self-transition `tr_web_periodicHeartbeat` set to 60 time units. Typical state machine semantics reset the implementation timer on state re-entry; thus, the 60-second loop will constantly reset the specific state timer, preventing the longer transitions required to move forward (e.g., `tr_web_openQnA` at 900 units or `tr_web_endSession` at 3600 units) from ever firing. The session is stuck in an infinite loop.
+**Why**: The state machine contains logically unreachable transitions. Without guard conditions, time-based transitions are deterministic. In the 'st_web_lobby' state, 'autoPreflight' (300) will always trigger and exit the state before 'abortNoHost' (1800) can ever occur. Similarly, in 'st_web_broadcasting', the 'periodicHeartbeat' self-transition (60) will repeatedly execute and reset the state's timers, making it impossible to ever reach the longer timeouts (900, 2700, 3600) needed to open QnA, start intermission, or end the session.
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model defines a non-deterministic and logically impossible flow for the `sm_saoPauloCarnaval` state machine. From the source state `st_carn_concentracao`, there are five distinct outgoing transitions (leading to `setorA`, `setorB`, `setorC`, and `apuracao`) that are all triggered by identical time events (`time := 1`). A single state machine cannot simultaneously transition to multiple contradictory target states.
+**Why**: The state 'st_carn_concentracao' has five different outgoing transitions (towards 'setorA', 'setorB', 'setorC', and 'apuracao'), and all of them are triggered by a `TimeEvent` with the exact same time (`time := 1`). In a state machine, this creates unresolvable non-determinism, as the system would attempt to transition to five mutually exclusive states at the exact same moment. Additionally, the state 'st_carn_vipLounge' is completely isolated with no incoming or outgoing transitions.
 
 ## gen4 / complex
 
 **Response**: Realistic
-
-**Why**: The object model represents a logically sound and detailed state machine for an autonomous drone mission in an arctic environment (`sm_tromsoArcticDroneMissionSM`). The transition flow covers a complete operational lifecycle—including conditional branches for environmental factors (e.g., `tr_tromso_extremeColdDeiceRequest` leading to `st_tromso_deice`), standard operations (survey, offload, charging), and safety abort mechanisms (faults during takeoff or survey). The `TimeEvent` values are physically plausible, distinguishing between process durations (e.g., 5400s for partial battery charging) and instantaneous triggers (e.g., 1s for `linkLostAbort`).
+**Why**: The object model perfectly maps to a valid domain of a state machine representing an Arctic drone mission. The states uniquely describe a real-world drone flow (e.g., de-icing, surveying, charging), all state strings correctly start with lowercase, temporal values are strictly positive, and event durations (like 5400s or 90 mins for battery charge, or 1s for aborts) directly mimic real-world physical and system constraints.
 
 ## gen4 / edge
 
 **Response**: Realistic
-**Why**: The object model represents a valid internationalized state machine structure where multiple states (named using real words in Turkish, Spanish, German, and Japanese Kanji) transition to a common 'silence' state after positive time intervals. The usage of Unicode characters in state names is plausible for modern software systems.
+**Why**: The object model represents a valid state machine with an internally consistent "funnel" topology, where multiple specific states logically transition into a single 'silence' sink state. The use of international characters for state names and positive delay values for time events are perfectly plausible in software engineering contexts.
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: The transition `tr_gh_tStartWatering` is associated with two distinct `TimeEvent` objects (`morning` and `evening`), violating the `[1]` multiplicity constraint defined in the `TransitionContainsEvents` composition. Additionally, triggering a 'RainHold' state via a fixed `TimeEvent` (timer) rather than a sensor input is semantically illogical for an irrigation system.
+**Why**: The transition object 'tr_gh_tStartWatering' is associated with two distinct TimeEvent objects ('te_gh_startWatering_morning' and 'te_gh_startWatering_evening'). This violates the exactly-one [1] multiplicity constraint defined by the 'TransitionContainsEvents' composition in the domain model.
 
 ## gen5 / baseline
 
 **Response**: Realistic
-**Why**: The object model describes a coherent state machine for an automated irrigation system (specifically referencing Balinese "Subak" management). The operational cycle (Sensing -> Calculating -> Opening Gates -> Irrigating -> Flushing) follows standard process control logic, and the transition timings (e.g., 3600 units for an irrigation cycle vs. 15 units for gate actuation) are proportional and physically plausible.
+**Why**: The state machine logically represents a real-world automated irrigation controller. The sequence of states (sensing -> calculating -> opening gates -> irrigating -> flushing) forms a coherent control loop, complete with fault handling. Furthermore, the time values assigned to the transition events are highly plausible when interpreted as seconds (e.g., 3600 seconds/1 hour for an irrigation cycle, 600 seconds/10 minutes for auto-recovery).
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-
-**Why**: The object model defines a transition named 'tr_iva_manualSwitchToAlert', implying a human-triggered action, but associates it with a 'TimeEvent' of 2147483646 (near the maximum 32-bit integer). Modeling a manual switch as a timer that waits for ~68 years (assuming seconds) or ~25 days (assuming milliseconds) is semantically contradictory and represents a technical hack (simulating infinity) rather than a realistic real-world system behavior.
+**Why**: The transition 'tr_iva_manualSwitchToAlert' is modeled as a TimeEvent with an arbitrarily massive time value (2147483646, near maximum 32-bit integer). This is a semantic contradiction: a manual action or external sensor spike ("sensorSpikeToAlert") is driven by external triggers, not by an expiring timer. Using a massive timer to fake an infinite delay or a manual event is an artificial software hack, not a realistic representation of the domain.
 
 ## gen5 / complex
 
 **Response**: Realistic
-**Why**: The object model accurately depicts a standard hospital MRI workflow, including specific medical stages (screening, T1/T2 scans, contrast injection) and logical exception handling (metal implant safety check, motion artifact rescan, panic events). The state transitions form a coherent cycle that includes room disinfection before returning to the start state.
+**Why**: The object model accurately represents a real-world clinical MRI workflow. The states logically progress through the procedural phases (e.g., registration, screening, preparation, sequencing of scans, contrast injection, and disinfection). Alternate paths handling real-life exceptions, such as metal implant issues, motion artifacts, or allergic reactions, are logically routed. The time events mapped to each transition represent highly plausible durations (in minutes) for these medical tasks. All UML constraints are satisfied.
 
 ## gen5 / edge
 
-**Response**: Unrealistic
-**Why**: The state machine is functionally defective and lacks semantic coherence. The designated start state ('st_issl_startpunkt') is isolated with no outgoing transitions, which immediately deadlocks the machine and renders the other existing transition (between 'réseau' and 'końcówka') unreachable. Additionally, naming states using a mix of four different languages (German, French, Polish, Japanese) within a single system is illogical for a real-world domain model.
+**Response**: Realistic
+**Why**: The object model represents a valid structural configuration of a state machine, explicitly designed as a test case (indicated by the name 'isolatedStartSingleLink'). The topology perfectly matches this description by modeling an isolated start state, an intentionally isolated state (named '孤立' / 'isolated'), and a single transition connecting two other states. The properties and relationships are logically consistent for software testing models.
 
 ## gen5 / invalid
 
 **Response**: Realistic
-**Why**: The object model depicts a plausible control logic for a baggage carousel system. The states (Stopped, Starting, Running, Jammed) represent standard operational modes for such machinery, and the transitions follow a logical physical sequence (e.g., transitioning through 'Starting' before reaching 'Running'). The time values assigned to events are valid positive integers, consistent with domain constraints.
+**Why**: The model correctly instantiates a real-world state machine for a baggage carousel. The states (stopped, starting, running, stopping, jammed) and their transitions form a coherent, logical sequence for machinery operation. The assigned time event values (e.g., 5 seconds for startup/stopping phases) are positive and physically plausible.
 
 ## gen6 / baseline
 
 **Response**: Unrealistic
-**Why**: The state machine logic is flawed and functionally contradictory for a delivery drone.
-1. **Deterministic Failure**: The domain model relies solely on `TimeEvent` for transitions (no guard conditions). In `preflight`, the abort transition (time 45) is shorter than `takeoff` (time 60), and in `enroute`, `criticalFaultLanding` (time 5) is shorter than `arriveAtDropZone` (time 900). This configuration means the drone will always abort or crash immediately and never complete a delivery.
-2. **Physical Impossibility**: The transition `tr_add_landAndReport` moves the drone directly from `emergencyLanding` (likely a remote location) to `charging` (a docking station), missing a necessary retrieval or transport state.
+**Why**: The transition 'tr_add_landAndReport' moves the drone from the 'emergencyLanding' state directly into the 'charging' state after a 180-second timer. A drone that performs an emergency landing in an arbitrary location would not have access to a dock and cannot autonomously transition to a charging state simply by waiting.
 
 ## gen6 / boundary
 
 **Response**: Realistic
-**Why**: The object model represents a plausible workflow for a specific fast-food business context ("hanoiPhoStallSchedule"). The defined states (e.g., 'ordering', 'eating', 'rainDelay', 'spicyChallenge') serve real-world operational scenarios relevant to the domain, and the initial transition from 'closed' to 'waiting' follows a logical business sequence.
+**Why**: The object model correctly instantiates a state machine representing a logical lifecycle for a food stall (e.g., closed, waiting, ordering, eating). The initial state is logically set to 'closed', the transitions make sequential sense, and the time event has a valid positive integer value as required by the domain constraints. All state names rightfully begin with a lowercase letter.
 
 ## gen6 / complex
 
-**Response**: Realistic
-**Why**: The object model represents a comprehensive and logically sound traffic signal controller. It includes standard traffic phases (Green, Yellow, Pedestrian Walk/Clear, All-Red buffers) with plausible time durations (e.g., 45s for Green, 3s for Yellow). The state machine correctly handles complex real-world scenarios such as startup sequences, emergency preemption, maintenance locks, and night-mode flashing.
+**Response**: Unrealistic
+**Why**: Because all transitions are driven purely by `TimeEvent` timers, states with multiple outgoing transitions will always deterministically take the path with the shortest time. For example, `st_ljt_allRedStart` will always transition to `st_ljt_nightFlash` (1s) instead of `st_ljt_nsGreen` (2s), and `st_ljt_nsGreen` would always transition to `st_ljt_emergencyPreempt` (1s) rather than `st_ljt_nsYellow` (45s). This creates an infinite loop between red and night flash states, rendering normal traffic light operation entirely impossible.
 
 ## gen6 / edge
 
-**Response**: Realistic
-**Why**: The model represents a plausible internationalization (i18n) test case for a state machine. The state names use diverse scripts (Latin, Greek, Cyrillic, Arabic), and their transition names logically correspond to their translations (e.g., 'razvorot' means U-turn in Russian and connects to the 'uTurn' transition; 'marhaba' means Hello in Arabic and connects to 'greetAndReturn'). The time constraints are valid positive integers.
+**Response**: Unrealistic
+**Why**: The state machine contains multiple states ('st_rhor_exito', 'st_rhor_kentro', 'st_rhor_razvorot', 'st_rhor_marhaba') that are not the start state and have no incoming transitions from reachable states. This makes them completely unreachable during operation, rendering their existence and their outgoing transitions logically nonsensical in the context of a functional state machine.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The state machine logic implies a race condition that renders the thermostat useless. In the 'standby' state, the transition to 'off' triggers after 10 time units, while 'heating' and 'cooling' trigger after 30; this ensures the system always turns off before it can ever operate. Additionally, the 'fault' state is unreachable (no incoming transitions), and the mandatory start state (`StateMachineStartsStates`) is missing.
+**Why**: A thermostat is a reactive system that should transition based on temperature measurements, not exclusively on fixed timers. Furthermore, the 'standby' state has multiple time-driven outgoing transitions. The shortest timer ('tStandbyToOff' with a time of 10) will deterministically trigger first, permanently preventing the thermostat from ever reaching the 'heating' (30) or 'cooling' (30) states. Additionally, the 'fault' state has no incoming transitions, rendering it unreachable.
 
 # vehiclerental
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The scenario describes a coherent future state (2026) with internal consistency regarding dates (maintenance occurs before rental). Geographic assignments match logical rental patterns (e.g., a Miami-based customer rents a FL-registered truck from a Miami office). Financial and physical attributes (deposit, gas capacity, odometer) act within plausible real-world ranges.
+**Why**: The object model is semantically consistent and highly detailed. Attributes like addresses, states, and vehicle types align perfectly (e.g., a Florida office managing a Florida-registered truck). The relationships describe logical real-world rental scenarios, such as a 4-day one-way truck rental from Miami to Denver, and a local 2-day flat-rate trailer rental (with a $0.00 rate per mile, which is accurate for trailers since they lack odometers). Values for truck gas tank capacity (26.5), mileage/MPG (17), and daily rates are standard and plausible.
 
 ## gen1 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'T_0' (Truck) has a `gasTankCapacity` of 0.0, which creates a physical impossibility for a functional vehicle. Additionally, the model contains numerous nonsensical placeholder values, such as 'I_0' having a phone number '000-0000', 'T_0' having license plate '0', and 'RA_0' having a cost and duration of 0.
+**Why**: The object model relies entirely on dummy or "zero" values that break real-world logic. Physical and business properties are impossible or nonsensical, such as the Truck 'T_0' having a `gasTankCapacity` of 0.0, and the RentalAgreement 'RA_0' having an `anticipatedDuration` of 0, `quotedDailyRate` of 0.0, and `quotedRatePerMile` of 0.0. Identifiers like a license plate of '0' or phone number of '000-0000' also confirm this is simply a zero-filled placeholder state, not a realistic snapshot.
 
 ## gen1 / complex
 
 **Response**: Unrealistic
-**Why**: Rental Agreement `RA_90007` specifies a one-way trip from Hartford, CT to Phoenix, AZ (~2,500 miles) with an `anticipatedDuration` of 2 days, which is physically impossible. Additionally, the assigned vehicle (`T_5002_PHX`) is based in Phoenix and conveys no history of being moved to Hartford prior to this agreement, effectively "teleporting" to the pickup location.
+**Why**: The `anticipatedDuration` for several one-way rental agreements is physically implausible given the geographic distances between the origin and drop-off rental offices. For example, `RA_90007` dictates a trip from Hartford, CT (`RO_303_HFD`) to Phoenix, AZ (`RO_101_PHX`)—a distance of roughly 2,500 miles—with an anticipated duration of just 2 days. Similarly, `RA_90004` dictates a trip from Miami, FL to Hartford, CT (~1,300 miles) with a duration of 1 day. A moving truck cannot realistically maintain the continuous driving speeds required to complete these cross-country trips in that timeframe.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-**Why**: Mentions of physically impossible or logically invalid values:
-1. Object 'V_edge1' (Truck) has a `gasTankCapacity` of 0.0, which effectively makes the vehicle non-functional.
-2. Customer 'C_edge1' enters a rental agreement ('RA_1000000') dated 2026 using a driver's license that expired in the year 2000.
-3. The vehicle 'V_edge1' is being rented in 2026 despite its registration expiration date being '2025-01-01'.
+**Why**: The object model contains multiple real-world contradictions and nonsensical business logic: 
+1. The truck `V_edge1` has a `gasTankCapacity` of 0.0.
+2. The customer `C_edge1` is renting a vehicle with a driver's license that expired in 2000 (`driverLicenseExpirationDate := Date('2000-01-01')`).
+3. Both rental agreements (`RA_1000000`, `RA_1000001`) have an `anticipatedDuration` of 0 and all financial metrics (deposit, daily rate, cost per mile) set to 0.0, which defies the commercial purpose of a rental business. 
+4. The same vehicle (`V_edge1`) is rented simultaneously on the exact same day ('2026-02-22') under two different agreements to two different customers.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model violates specific domain cardinality constraints that dictate the logic of a valid transaction. Specifically:
-1. The rental agreement 'RA_202601990' is associated with two different customers ('C_CasaNova' and 'I_Gomez'), while the domain model restricts an agreement to exactly one Customer (`Customer [1]`).
-2. The agreement lacks a mandatory association to a drop-off `RentalOffice` (defined as `[1]` in `RentalOfficeRentalAgreementDrop`), rendering the contract incomplete.
+**Why**: The object 'RA_202601990' of class 'RentalAgreement' is incorrectly associated with two different customers ('C_CasaNova' and 'I_Gomez'). This violates the [1] multiplicity constraint on the 'Customer' role in the 'RentalAgreementCustomer' association, which strictly requires an agreement to belong to exactly one customer.
 
 ## gen2 / baseline
 
 **Response**: Unrealistic
 
-**Why**: The object 'V_6101' (of class 'Truck') has a 'gasTankCapacity' of 0.0. It is semantically impossible for a functioning internal combustion vehicle to have zero fuel capacity, yet this truck is assigned to an active rental agreement ('RA_30011') intended to be driven.
+**Why**: The object model contains physically impossible scenarios. The `RentalAgreement` 'RA_30013' specifies an `anticipatedDuration` of only 2 days for a drop-off journey from Tempe, AZ (RO_77) to Anchorage, AK (RO_12). This represents a driving distance of roughly 3,800 miles, which is impossible to complete in 48 hours. Additionally, the `Truck` object 'V_6101' has a `gasTankCapacity` of 0.0 and a `mileage` of 0, which is unrealistic for an operational rental truck with an odometer reading of 1200.
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: The model contains physical and logical impossibilities. Truck `T_2147483647` has an odometer reading (2 billion) and rental costs (1 million daily rate) that are physically and economically absurd. Truck `T_999` has a non-functional gas tank capacity of 1.0. Additionally, `RA_900` rents `T_2147483647` for 10 years, yet `RA_901` rents the same vehicle starting the very next day, creating an impossible physical conflict.
+**Why**: The object model contains physically impossible real-world attributes, such as the Truck 'T_2147483647' having an odometer reading of 2 billion and a gas tank capacity of 9,999.99, while Truck 'T_999' has an implausibly small gas tank capacity of 1.0. Additionally, the financial values are nonsensical; RentalAgreement 'RA_900' charges a deposit of 1 billion, a daily rate of 1 million, and $12,345 per mile.
 
 ## gen2 / complex
 
 **Response**: Unrealistic
-**Why**:
-1. The object 'T_7102' of class 'Truck' has a `gasTankCapacity` of 0.0 and `mileage` of 0, rendering it physically non-functional, yet it is rented out in agreement 'RA_96008'.
-2. Vehicle 'V_7401' teleports geographically: it is dropped off at RentalOffice 'RO_440' (Birmingham, AL) in agreement 'RA_96005', but its very next rental ('RA_96007') originates from 'RO_420' (Denver, CO) without a transfer event.
-3. Customer 'CUST_I_13' is identified as `poorRisk := true` but is inconsistently granted rental 'RA_96005' with a `depositPaid` of 0.0.
+**Why**: The object 'T_7102' of class 'Truck' has impossible physical values assigned, specifically a `gasTankCapacity` of 0.0 and `mileage` of 0, which makes it non-functional. Additionally, vehicle 'V_7401' is dropped off in Alabama (RO_440) in rental 'RA_96005', but its next rental 'RA_96007' inexplicably originates in Colorado (RO_420) without any intermediate transit or rental.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-
-**Why**: The model contains physically impossible and nonsensical business data:
-1. Truck 'V103' has a `gasTankCapacity` of 0.0, which implies the vehicle cannot store fuel to operate.
-2. Truck 'V102' has a `gasTankCapacity` of 9999.99, which is physically too large (approx. 2,600+ gallons) for a standard rental truck.
-3. RentalAgreement 'RA201' defines an absurdity: a duration of nearly 1 billion units and a deposit of 1 billion.
-4. Temporal inconsistency: 'RA200' has a rental date in 1900, while vehicles have 'LastMaintenanceDate' in the future (2026).
+**Why**: The object model contains multiple nonsensical and extreme values. For example, rental agreement 'RA200' has a historically impossible rental date of '1900-01-01', and 'RA201' has an anticipated duration of 999,999,999 days with a $1 billion deposit. Additionally, 'RO10' and 'V102' use negative identifiers, and truck 'V102' has a physically impossible gas tank capacity of 9999.99.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates strict multiplicity constraints defined in the domain model. First, the vehicle 'V_88040_2' is assigned to two different home offices ('RO_77_PHX2' and 'RO_12_WHL2'), violating the `RentalOffice [1]` constraint. Second, the rental agreement 'RA_5500123_2' is associated with two vehicles ('T_71005_2' and 'V_88040_2'), violating the `Vehicle [1]` constraint. Additionally, 'V_88040_2' is registered in 'CA' (California) but holds a 'NY' (New York) license plate, which is logically inconsistent.
+**Why**: The object model violates multiple cardinality constraints defined in the domain model. The vehicle `V_88040_2` is assigned to two different home rental offices (`RO_77_PHX2` and `RO_12_WHL2`), violating the `RentalOffice [1]` multiplicity in `RentalOfficeVehicle`. Additionally, the rental agreement `RA_5500123_2` is associated with two different vehicles (`T_71005_2` and `V_88040_2`), violating the `Vehicle [1]` multiplicity in `RentalAgreementVehicle`. Furthermore, `V_88040_2` has a California registration state (#CA) but an implausible New York license plate number ('NY-TL-98352').
 
 ## gen3 / baseline
 
-**Response**: Unrealistic
-**Why**: The object model contains business and logical contradictions regarding agreement 'RA_88002'. First, it applies a positive 'quotedRatePerMile' (0.2) to vehicle 'V_8804' (a Trailer); this is semantically impossible as trailers in this domain model (instances of 'Vehicle') lack an odometer to track distance (only 'Truck' has 'odometerReading'). Second, the associated customer 'CUST_C_775' is identified as 'poorRisk' yet is not required to pay a deposit ('depositPaid' is 0.0), which defies realistic risk management logic.
+**Response**: Realistic
+**Why**: The objects, attributes, and relationships are logically consistent with real-world vehicle rental operations. The attribute values (e.g., dates, truck fuel capacities, mpg bounds, and financial figures) fall within physically possible and commercially plausible ranges. The associations correctly link customers, vehicles, and rental offices without contradictions.
 
 ## gen3 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model contains physically and chronologically impossible values. Specifically:
-1. Truck 'T_1_B' has a `gasTankCapacity` of 0.0 (cannot function) and a `mileage`/`odometerReading` of ~2.1 billion (exceeds any vehicle's lifespan and equals `Integer.MAX_VALUE`).
-2. Truck 'T_2_B' has a maintenance date of '2026-02-29', which is an invalid calendar date (2026 is not a leap year).
-3. Customer 'I_11_B' has a driver's license expiration date of '1900-01-01', implying the license expired over a century ago.
+**Why**: The truck 'T_1_B' has impossible real-world values: an odometer reading and mileage of over 2.1 billion miles, a gas tank capacity of 0.0, and placeholder dates from 1900 to 9999. Additionally, individual 'I_11_B' has a driver's license expiration date of 1900, which is historically and biologically impossible for an active customer.
 
 ## gen3 / complex
 
 **Response**: Unrealistic
-
-**Why**: The sequence of rental agreements for truck 'T_8101' is physically impossible. Agreement 'RA_97518' is a one-way trip from Los Angeles ('RO_510') to Fairbanks ('RO_540') ending around May 4th (3200+ miles in 3 days is also implausible). The subsequent agreement 'RA_97519' for the same truck originates back in Los Angeles on May 5th. The truck cannot physically return from Alaska to California in less than 24 hours.
+**Why**: Rental agreements 'RA_97518' and 'RA_97519' for truck 'T_8101' create a geographic and temporal impossibility. 'RA_97518' originates in Los Angeles (RO_510) on 2026-05-01 for 3 days, dropping off in Fairbanks, AK (RO_540). The very next day, 'RA_97519' shows the same truck originating a new rental back in Los Angeles (RO_510), which is physically impossible without teleporting over 3,400 miles. Additionally, anticipating a 3-day drive for a 3,400-mile trip is highly unrealistic.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: The model contains physically impossible values and logical contradictions. Truck 'V200' has a `gasTankCapacity` of 0.0, rendering it non-functional. RentalAgreement 'RA303' specifies absurd financial figures (100 million deposit, 5000 per mile), and 'RA301' has an implausible duration of 999,999. Furthermore, identifiers for 'I20' and 'C20' are negative, and Vehicle 'V200' is booked for multiple agreements starting on the same date.
+**Why**: The object model contains several logically impossible and practically absurd administrative values:
+- `Individual` 'I20' and `Company` 'C20' have negative identification numbers (`driverLicenseNumber` = -12345 and `idNumber` = -999).
+- `RentalAgreement` 'RA301' has an impossible `anticipatedDuration` of 999999, which equates to thousands of years.
+- `RentalAgreement` 'RA303' demands an exorbitant `depositPaid` of 100,000,000.0 (100 million) for a simple truck rental.
+- The single truck 'V200' is simultaneously attached to three overlapping rental agreements ('RA300', 'RA301', 'RA304') starting on the exact same date.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'RA_90077_OC3' has a `depositPaid` value of -150.0, which is logically impossible for a monetary deposit and explicitly violates the domain constraint `positiveDepositPaid`. Additionally, this same agreement is linked to two different originating rental offices ('RO_501_OC3' and 'RO_502_OC3'), which violates the cardinality of [1] defined in the `RentalOfficeRentalAgreementOrigin` association.
+**Why**: The rental agreement 'RA_90077_OC3' has a negative 'depositPaid' (-150.0), which defies financial logic for a paid deposit and breaks the 'positiveDepositPaid' constraint. Additionally, it is linked to two different originating rental offices ('RO_501_OC3' and 'RO_502_OC3'), which is physically impossible and violates the exact-one [1] multiplicity rule for originating offices.
 
 ## gen4 / baseline
 
 **Response**: Unrealistic
-
-**Why**: The model contains significant business logic and logistical contradictions involving Customer 'CUST_I_156'. Despite being flagged as 'poorRisk', this customer is charged a 0.0 deposit for a high-risk, one-way rental from Delaware to Florida ('RA_41003'). Furthermore, the same Vehicle ('V_3001') is dropped in Florida on roughly May 16 and inexplicably reappears in Connecticut on May 25 ('RA_41005') to be rented by the *same* customer, representing a highly implausible logistical coincidence or continuity error.
+**Why**: Customer 'CUST_I_156' rents vehicle 'V_3001' for a one-way trip from Delaware to Florida (RA_41003), but just 9 days later, the exact same customer rents the exact same vehicle in Connecticut (RA_41005). It is geographically and practically absurd for both the vehicle and the customer to independently travel 1,300+ miles back up the coast and randomly match again without a documented intervening return rental. Additionally, 'CUST_I_156' is marked as a high risk (`poorRisk := true`), yet pays a deposit of 0.0 for a long-distance rental, which breaks common-sense business logic.
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'T_50' (Truck) has a `gasTankCapacity` of 0.0, which renders the vehicle physically non-functional as it cannot hold fuel. Additionally, Rental Agreement 'RA_5000' allows Customer 'I_50', who is flagged as `poorRisk`, to rent a vehicle with 0.0 deposit and 0.0 daily rate, which contradicts standard business logic for risk management.
+**Why**: The truck 'T_50' has a physically impossible `gasTankCapacity` of 0.0. Additionally, the rental agreement 'RA_5000' represents a commercial rental with 0 duration and $0 for all rates/deposits, which is nonsensical. Finally, 'I_50' enters into rental agreement 'RA_5001_B' on '2026-02-02', despite their driver's license having expired the day before ('2026-02-01').
 
 ## gen4 / complex
 
 **Response**: Unrealistic
-
-**Why**: 
-1. **Physical Impossibility**: Rental Agreement `RA_98808_CX4` defines a one-way trip from Tempe, AZ (`RO_630`) to Dover, DE (`RO_620`) with an `anticipatedDuration` of 2 days. The distance is approximately 2,300 miles, which is impossible to drive safely or legally in that timeframe (requires averaging ~48 mph for 48 hours straight).
-2. **Teleportation**: Vehicle `V_9401_CX4` is initialized at the Tempe office (`RO_630`), but its very first rental agreement (`RA_98809_CX4`) originates in Jacksonville, FL (`RO_640`) with no prior history or transfer record to explain how it moved ~2,000 miles.
+**Why**: RentalAgreement 'RA_98808_CX4' specifies an anticipated duration of 2 days for a one-way trip from the Tempe, AZ office ('RO_630') to the Dover, DE office ('RO_620'). This represents a distance of over 2,300 miles, which is physically impossible and highly unsafe to drive in a commercial moving truck within a 48-hour window.
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-
-**Why**: The model contains multiple factual and physical impossibilities.
-1.  **Impossible Dates**: Object 'V300_B2' and 'V305_B2' use the date '2026-02-30', which does not exist on the Gregorian calendar.
-2.  **Physical Violations**: Truck 'V300_B2' has a negative odometer reading (-10). Truck 'V301_B2' has a gas tank capacity of 999,999.0, which is physically impossible for a vehicle.
-3.  **Logical Inconsistencies**: Vehicle 'V304_B2' has a maintenance date in 2099 but an expiration date in 1970. Creating a vehicle without a license plate ('V305_B2') is legally impossible for a rental fleet.
+**Why**: The object model contains physically impossible and illogical values. For example, truck 'V300_B2' has a negative odometer reading (-10) and an invalid maintenance date ('2026-02-30' since February 30th does not exist). Truck 'V301_B2' has a completely implausible gas tank capacity of 999,999.0. Additionally, 'I31_B2' (Individual) and 'C30_B2' (Company) both have negative identification numbers, which is not realistic for official paperwork.
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: The `RentalAgreement` object 'RA_6100088' is actively associated with two different trucks ('T_45001' and 'T_45044') simultaneously. This violates the domain model cardinality, which restricts a Rental Agreement to exactly one Vehicle (`Vehicle [1]`), and implies the physically impossible scenario of a single individual customer driving two vehicles at once under one contract.
+**Why**: The single rental agreement 'RA_6100088' is associated with two different trucks ('T_45001' and 'T_45044'). This violates the domain model's 'Vehicle [1]' multiplicity constraint in the 'RentalAgreementVehicle' association, which restricts an agreement to exactly one vehicle. Furthermore, it is practically impossible for a single individual to drive two moving trucks simultaneously on a one-way interstate trip.
 
 ## gen5 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a plausible rental scenario. Attribute values for vehicles (e.g., MPG represented as 'mileage', tank capacity) and agreements (rates, deposits) are physically sensible. Use of dates reflects a consistent timeline in 2026 without overlapping rentals for the same vehicle. Usage chains, such as `V_12001` being rented from Orlando to Phoenix and then rented again in Orlando 7 days later, allow sufficient time for logical fleet transfer (approx. 2,100 miles in 7 days).
+
+**Why**: The object model uses plausible, real-world formats for prices, miles, standard US addresses, and dates. It properly respects inheritance (only assigning attributes like gas tank capacity and odometer to `Truck` objects, not general `Vehicles` like trailers). Relationships are logically consistent: there are no conflicting/overlapping rental dates for the same vehicle, and the time gaps between rentals across different states (e.g., from Arizona to Florida) allow enough physical time for the vehicles to have been relocated. Individuals and Companies also behave reasonably within standard business practices (e.g., a company simultaneously renting multiple assets in different states).
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-**Why**: The truck 'T_701_LONG' has a mileage and odometer reading of 2 billion (1,999,999,999), which is physically impossible for a road vehicle. Additionally, truck 'T_700_YD' has a 'gasTankCapacity' of 0.0, and the rental agreement 'RA_7001' spans nearly 27 years (9999 days), conflicting with 'RA_7003' for the same vehicle.
+**Why**: The Truck 'T_701_LONG' has an `odometerReading` of 1,999,999,999 and `mileage` of 2,000,000,000, which are physically impossible for a vehicle (amounting to thousands of years of non-stop driving). Additionally, Truck 'T_700_YD' has a `gasTankCapacity` of 0.0, and RentalAgreement 'RA_7001' has an absurdly long `anticipatedDuration` of 9999.
 
 ## gen5 / complex
 
 **Response**: Unrealistic
-
-**Why**: The object model contains a temporal paradox regarding vehicle `T_10006_CX5`.
-1. Rental Agreement `RA_99009_CX5` rents this truck starting `2026-06-21` with an anticipated duration of **10 days** (until roughly July 1st).
-2. Rental Agreement `RA_99011_CX5` rents the *same* truck starting `2026-06-28`.
-This results in an overlapping schedule where the same physical vehicle is rented to two different customers (`CUST_C_42_CX5` and `CUST_C_43_CX5`) at the same time.
+**Why**: The truck 'T_10006_CX5' is concurrently assigned to multiple overlapping rental agreements. 'RA_99009_CX5' starts on 2026-06-21 for 10 days, while 'RA_99011_CX5' starts on 2026-06-28, which makes predicting the same truck being in two different places or rented to two different customers at the same time a physical impossibility.
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'V403' (Truck) has an odometer reading of 2,147,483,647 (Integer.MAX_VALUE) and a gas tank capacity of 0.000001, which are physically impossible values. Additionally, RentalAgreement 'RA4001' specifies an absurdly high rate per mile (99999.9999), and several dates refer to the year 0000.
+**Why**: 
+- The truck 'V403' has an odometer reading of 2,147,483,647 miles, which is physically impossible, as well as an implausibly tiny gas tank capacity (0.000001) and a historically invalid maintenance date of year 0000.
+- The object 'V401' represents an open trailer but is instantiated as a `Truck`, which incorrectly gives it engine-related attributes (gas tank capacity, odometer). 
+- Rental agreement 'RA4001' quotes a rate of $99,999.99 per mile, which is an absurd commercial value.
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-
-**Why**: The object model is semantically incomplete in a way that creates an impossible scenario. The `RentalAgreement` 'RA_770045_OC5' is created but never linked to a `Vehicle`; a real-world rental contract cannot exist without a specific vehicle being rented. Additionally, the `Truck` 'T_99001_OC5' is instantiated without being assigned to a `RentalOffice` (via the `RentalOfficeVehicle` association), which implies a fleet vehicle existing without an owner/location.
+**Why**: The model lacks logical consistency because the `RentalAgreement` 'RA_770045_OC5' is not associated with any `Vehicle`. Conceptually, a vehicle rental agreement that does not actually specify a vehicle to be rented is nonsensical and violates the mandatory `Vehicle [1]` multiplicity defined in the domain model. Furthermore, the truck 'T_99001_OC5' is left floating without a mandatory assigned home `RentalOffice`.
 
 ## gen6 / baseline
 
-**Response**: Unrealistic
-**Why**: The object model violates standard business logic and physical plausibility in the domain:
-1.  **Business Logic**: Customer 'CUST_C_241' is flagged as `poorRisk := true`, yet effectively initiates a new rental agreement ('RA_50100'). Realistic systems prevent high-risk customers from renting vehicles.
-2.  **Geography**: Rental agreement 'RA_50100' originates in Connecticut ('RO_502_BP'), while both the renting customer ('CUST_C_241') and the vehicle's home office ('RO_501_FC') are located in Colorado. Determining that a local customer would travel 1,800 miles to rent a local fleet vehicle is illogical.
-3.  **Physical Attributes**: Truck 'V_20010' (a 24-foot truck) has a `gasTankCapacity` of 29.8, which is physically too small for this vehicle class (typically 50-60 gallons).
+**Response**: Realistic
+**Why**: The object model is semantically consistent and highly plausible. The attribute values (such as distances, gas tank capacity, and pricing) are common-sense and appropriate for a vehicle rental system. The scenario logically models a standard rental use case, including a realistic one-way 6-day truck rental from Connecticut to Colorado, which realistically returns the vehicle to its home office.
 
 ## gen6 / boundary
 
 **Response**: Unrealistic
-**Why**: Truck 'T_804' has a 'gasTankCapacity' of 0.0, rendering it physically non-functional. RentalAgreement 'RA_8001' defines an 'anticipatedDuration' of 2,147,483,647 (the maximum 32-bit integer value), representing an impossibly long rental period (millions of years).
+**Why**: The object model contains several values that defy real-world logic: the rental agreement 'RA_8001' has an anticipated duration of 2,147,483,647 (over 5 million years) and an absurdly high rate per mile of 9999.99. Additionally, 'T_804' is a truck with a gas tank capacity of 0.0, which is physically impossible, and 'RA_8000' represents a free rental with 0 duration and 0 costs.
 
 ## gen6 / complex
 
 **Response**: Realistic
-**Why**: The object model portrays a coherent rental scenario. Temporal logic is sound (rentals follow maintenance dates; licenses expire after rentals). Financial logic is consistent: trailers have a `quotedRatePerMile` of 0.0 (as they lack engines), while trucks have positive mileage rates. Truck fuel efficiency values (8-14) are plausible for heavy vehicles. Relationships (Office, Customer, Vehicle) are fully populated without orphans or temporal overlaps (double bookings).
+**Why**: The object model represents a highly plausible vehicle rental scenario. The attribute values are realistic (e.g., truck gas capacities between 28-44 gallons, truck fuel efficiency 'mileage' between 8-14 MPG, and daily rates/deposits align linearly). Geographically, the ZIP codes (06320, 06340) and area code (860) accurately match the Connecticut locations. Furthermore, there are no temporal overlaps in the rental agreements for any specific vehicle, meaning no vehicle is rented to two customers at the same time.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains physically and logically impossible values. The Truck 'V500_EC6' has a `gasTankCapacity` of 0.0, rendering it non-functional. The RentalAgreement 'RA500_EC6' has a negative `anticipatedDuration` (-1), which is a logical contradiction. Furthermore, RentalAgreement 'RA501_EC6' uses absurd financial values (a deposit of approx. 10 billion and a rate per mile of approx. 123 million), indicating synthetic or erroneous data rather than a real-world scenario.
+**Why**: The object model contains several illogical and physically impossible values. The truck `V500_EC6` has a `gasTankCapacity` of 0.0 and an unrealistically long license plate number. Furthermore, the rental agreement `RA500_EC6` has a negative `anticipatedDuration` (-1) and `number` (-500), while `RA501_EC6` has an absurdly high `quotedRatePerMile` of over 123 million and an astronomical `depositPaid`.
 
 ## gen6 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the cardinality defined in the domain model for the `RentalAgreementCustomer` association. The domain specifies that a `RentalAgreement` is associated with exactly one (`[1]`) `Customer`, but the object model links the agreement `RA_88001_OC6` to two different customers simultaneously (`I_LuisHernandez_OC6` and `C_SolySombra_OC6`).
+**Why**: The rental agreement object 'RA_88001_OC6' is associated with two different customers ('I_LuisHernandez_OC6' and 'C_SolySombra_OC6'). This violates the cardinality constraint of the 'RentalAgreementCustomer' association defined in the domain model, which strictly restricts each rental agreement to exactly one customer.
 
 # videoclub
 
 ## gen1 / baseline
 
 **Response**: Realistic
-**Why**: The object model describes a plausible scenario within the defined domain. The attribute values are semantically consistent (e.g., 'Metro Pursuit' is an Action movie). Logic is respected: the suspended client ('clientC2') has no associated rentals, whereas the active client ('clientC1') does. The inventory count of 0 for 'seriesS1' is consistent with a snapshot where items have been rented out.
+**Why**: The object model represents a plausible scenario with valid real-world attributes (human names, reasonable dates, realistic titles, and correct quantities). The relationships correctly assign un-suspended clients to rentals, and the multiplicities accurately reflect a functioning video club system.
 
 ## gen1 / boundary
 
-**Response**: Unrealistic
-**Why**: The object model describes a logical impossibility regarding inventory: the object 'movieB1' is initialized with `availableCopies := 0`, but it is subsequently associated with two different rentals ('rentalB1', 'rentalB2'). A video club cannot rent out a cassette that has zero copies available. Additionally, the rental dates (1970) are anachronistic, as commercial video cassette rental services did not exist at that time.
+**Response**: Realistic
+**Why**: The object model represents a perfectly plausible state of a video club management system. Attribute values (like zero available copies for popular rentals) and relationships logically follow real-world behaviors. The presence of suspended clients with no rentals and international character sets for international names/titles further adds to the realism.
 
 ## gen1 / complex
 
 **Response**: Realistic
-**Why**: The object model represents a plausible snapshot of a video club system. Constraints are satisfied (all positive IDs, every cassette has at least one actor, every rental has a client). The state is logically consistent: `movieX2` having 0 `availableCopies` is consistent with it being currently associated with a rental (`rentalX2`), and a suspended client (`clientX2`) having rental history is a valid real-world business scenario.
+**Why**: The client attributes, movie/series titles, genres, and actor names are distinct and mimic real-world video club entities perfectly. The relationship mapping respects all domain constraints, such as having positive IDs, non-negative available copies, and valid 1-to-many associations between clients and rentals. Having a suspended client and a movie with zero available copies are naturally expected edge cases in a rental management system.
 
 ## gen1 / edge
 
 **Response**: Unrealistic
-
-**Why**: The model contains historically and physically impossible values for a Video Club system. Specifically, 'rentalE1' has a date of '0001-01-01', which predates the invention of video recording technology by nearly 2000 years. Furthermore, 'seriesE2' has an episode number of 2,147,483,647 (max integer), which is impossible for a television series production.
+**Why**: The object model contains highly implausible values. For instance, the dates for 'rentalE1' (0001-01-01) and 'rentalE2' (2999-12-31) represent impossible timeframes for renting video cassettes. Additionally, 'seriesE2' has an episode number of 2,147,483,647, which far exceeds the episode count of any real-world television series, and 'movieE2' has an unusually massive amount of available physical copies (9999) for a traditional video club.
 
 ## gen1 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'seriesD1' has an `episode` value of 0, which violates the explicit domain constraint `positiveEpisode` (which requires `self.episode > 0`). Additionally, 'cassetteD1' violates the mandatory multiplicity of the `CassetteActor` association (requires 1..* actors) as no actors are assigned to it in the object model.
+**Why**: The object model breaks multiple structural rules and real-world logic: 'seriesD1' has an episode number of 0, violating the positive episode constraint; 'rentalD2' represents a rental transaction with no cassettes attached; and 'cassetteD1' has no actors linked to it, directly contradicting the 1..* minimum multiplicity for actors per cassette.
 
 ## gen2 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a plausible scenario for a video rental store database. The attribute values (titles, actor names, genres) are semantically valid. The rental transactions respect physical logic: although 'movieM10' has only 1 available copy, it is rented by different clients on distinct dates (November vs December), implying a return and subsequent rental. The distinction between Series episodes (Ep 1 vs Ep 12) with differing cast lists adds to the semantic quality.
+**Why**: The client, rental, movie, series, and actor objects all have plausible, real-world attribute values. The relationships correctly map clients to rentals on specific dates, and those rentals map to logical media items. The fact that 'movieM10' is included in two different rentals is also realistic given that the rental dates are over a month apart, allowing the single copy to be returned and rented again.
 
 ## gen2 / boundary
 
 **Response**: Unrealistic
-**Why**: The object model uses extreme integer values that are physically impossible for a Video Club domain. For example, `movieVL12` has 2,147,483,647 `availableCopies` (MaxInt), and `seriesVL11` lists `episode` number 2,147,483,647. Additionally, `rentalVL10` has a date of '9999-12-31', which is a sentinel value rather than a realistic rental transaction date.
+**Why**: The object model contains physically impossible values for a video club. Movies and series have hundreds of millions to billions of `availableCopies` (e.g., 2,147,483,647 for 'movieVL12'), series have impossible `episode` numbers (e.g., 2,147,483,647 for 'seriesVL11'), and rentals occur in the far future (e.g., year 9999 for 'rentalVL10' and 2100 for 'rentalVL11').
 
 ## gen2 / complex
 
 **Response**: Realistic
-**Why**: The object model represents a plausible state of a Video Club. The existence of a 'suspended' client (`clientCompC11`) with a rental (`rentalCompR13`) is logically consistent with a real-world scenario where a client is suspended *because* of an outstanding rental. The available copies being 0 for the rented item (`movieCompM12`) further supports this (the item is currently out). Dates, names, and cardinalities are all within reasonable bounds.
+**Why**: The object model represents a plausible snapshot of a video club. All attributes (such as positive client IDs, valid episodes, and realistic quantities of available copies) reflect logical real-world values. The relationships correctly assign multiple actors to respective visual media, and perfectly valid rental operations are mapped to clients without violating any cardinality or physical constraints.
 
 ## gen2 / edge
 
 **Response**: Unrealistic
-**Why**: The object 'seriesEdge2S10' has an empty string ('') as a title, which is nonsensical for a commercial media product. Additionally, multiple rentals ('rentalEdge2R10' to 'rentalEdge2R13') are dated '1970-01-01', which predates the existence of consumer video cassette rental businesses. Finally, a single client renting the same cassette 4 times on the same day is logically inconsistent.
+**Why**: The object 'seriesEdge2S10' has an empty string for its title, which is unrealistic for a commercial video club product. Additionally, 'clientEdge2C10' makes four separate rental transactions ('rentalEdge2R10' to 'rentalEdge2R13') on the exact same date ('1970-01-01') for the exact same series ('seriesEdge2S10'), which defies logical real-world rental behavior.
 
 ## gen2 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model violates the domain's structural constraints and logical consistency constraints:
-1. The rental object `rentalCoopR10` is associated with two different clients (`clientCoopC10` and `clientCoopC11`), but the `ClientRental` association restricts a rental to exactly one assigned client (`Client [1]`).
-2. The movie `movieCoopM10` has no actors linked to it, violating the `CassetteActor` lower multiplicity bound of 1 (`Actor [1..*]`).
+**Why**: The object 'rentalCoopR10' is associated with two different clients ('clientCoopC10' and 'clientCoopC11') in the ClientRental association. This contradicts the domain model's cardinality (a Rental must have exactly one Client) and is semantically nonsensical, as a single rental transaction cannot belong to two distinct members simultaneously.
 
 ## gen3 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a plausible snapshot of a video club database.
-1.  **Valid Semantics**: Attribute values (dates, specific episode numbers like 24, genres) and relationships reflect real-world usage (e.g., a client renting multiple episodes of a series and a movie at once).
-2.  **State Consistency**: The `Movie` 'Midnight Tuk-Tuk' having `availableCopies := 0` is consistent with it being currently associated with an active rental (`rentalR20`), implying it is out of stock.
-3.  **Client Status**: While `clientC22` is suspended and has a rental, this represents a valid historical state (e.g., suspended due to that rental or after it).
+**Why**: The object model portrays a plausible snapshot of a video club system. The values for episodes, available copies, genres, and dates conform to real-world logic. The relationships are consistent: clients can rent multiple cassettes (movies or series episodes), multiple copies of a movie can be rented across different rentals, and it is perfectly reasonable for a suspended client to have a registered rental (which is likely the cause of their suspension). Episode-specific actor casts are also plausible for anthologies or guest-star tracking.
 
 ## gen3 / boundary
 
-**Response**: Unrealistic
-**Why**: The object model enables a logical contradiction where 'clientReuseC22' is explicitly marked as suspended (`isSuspended := true`) yet serves as the assigned client for two new rental transactions ('rentalReuseR24', 'rentalReuseR25'). Semantically, a suspended client should be restricted from borrowing new items.
+**Response**: Realistic
+**Why**: The object model is semantically consistent and plausible. The attributes (names, genres, episodes) have logical real-world values. It is perfectly realistic for a 'Cassette' (representing a title) to have multiple associated rentals across different dates and clients, and to currently have 0 available copies if all are rented out. A suspended client having associated rentals is also logical, as past unreturned rentals might be the cause of the suspension.
 
 ## gen3 / complex
 
-**Response**: Unrealistic
-**Why**: The object 'clientTC22' is explicitly marked as suspended (`isSuspended := true`), yet is associated with multiple new rental transactions (`rentalTC23`, `rentalTC26`), which contradicts standard business logic where suspended clients are blocked from renting. Additionally, 'movieTC20' is included in 4 different rentals despite having `availableCopies := 0`, implying the rental of out-of-stock items.
+**Response**: Realistic
+**Why**: The object model conforms to all multiplicities and OCL constraints (positive IDs, valid episode numbers, non-negative available copies). The semantic data is highly plausible: movie/series titles match their assigned genres, actor names are realistic, and it is perfectly logical for a suspended client to have a history of past rentals. The number of cassettes per rental and actor assignments are also entirely representative of a real-world video club system.
 
 ## gen3 / edge
 
 **Response**: Unrealistic
-**Why**: 
-1. The object `rentalEdge3R20` has the date '2024-02-30', which does not exist (February 2024 ends on the 29th).
-2. The object `rentalEdge3R21` has the date 'Fri, 13th Month 2025', which is logically invalid.
-3. The object `seriesEdge3S24` has an episode number of 2,147,483,647 (maximum 32-bit integer), which is an impossible quantity for real-world TV series episodes.
-4. The object `movieEdge3M20` has a title consisting only of whitespace, which is implausible for a commercial product.
+**Why**: The object model contains invalid and impossible values. Specifically, `rentalEdge3R20` has an invalid calendar date ('2024-02-30', as February only has up to 29 days), and `rentalEdge3R21` has a completely fabricated date format ('Fri, 13th Month 2025'). Furthermore, `seriesEdge3S24` has an episode number of 2,147,483,647, which is a programmatic maximum integer limit rather than a realistic television episode number, and `movieEdge3M20` has an empty space string for a title.
 
 ## gen3 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'movieKioskM20' has a negative inventory value ('availableCopies' := -1), which is physically impossible. Additionally, 'clientKioskC20' has a 'clientId' of 0, violating the domain constraint that requires strictly positive IDs.
+**Why**: The object 'movieKioskM20' has an 'availableCopies' value of -1, which is a physical impossibility for a physical cassette or inventory count. Additionally, the object 'clientKioskC20' has a 'clientId' of 0, which violates the domain rule that client IDs must be strictly positive.
 
 ## gen4 / baseline
 
 **Response**: Realistic
-**Why**: The object model contains valid attribute values (positive IDs, reasonable copy counts, valid dates) and coherent relationships. The logic of the series 'Harbor Radio' is consistent, where episodes 8 and 9 share a common actor ('Keiko Nakamura'), reflecting plausible casting in a TV series.
+**Why**: The object model represents a highly plausible scenario for a video club. Attribute values such as client IDs, available copies, and episode numbers are all positive and internally consistent. The movie and series titles align logically with their genres, and associations reflect realistic behavior (e.g., identical series titles having sequenced episodes and sharing an actor, clients renting multiple cassettes concurrently under one rental).
 
 ## gen4 / boundary
 
 **Response**: Unrealistic
-**Why**: The rental 'rentalHubR30' has the date '0001-01-01', which is historically impossible for a video club context as the technology did not exist. Additionally, the client 'clientHubC30' is flagged as suspended (`isSuspended := true`), yet they are successfully associated with a rental transaction.
+**Why**: The object 'rentalHubR30' of class 'Rental' has its date set to '0001-01-01', which historically precedes the invention of cassettes and video clubs by almost two millennia.
 
 ## gen4 / complex
 
 **Response**: Unrealistic
-
-**Why**: 
-1. The object model creates client `clientComplex4C30` as `isSuspended := true` and creates rental transactions (`rentalComplex4R33`, `rentalComplex4R36`) for them. In a realistic business scenario (Video Club), a suspended client is prevented from renting new items.
-2. The actor `actorComplex4A30` ('Priya Deshpande') is associated with every single Movie and Series instance defined (`M30` to `S35`). Given the titles suggest vastly different production regions (Taipei, Baltic, Kraków, Andes, Mombasa), it is implausible for one actor to appear in all of them.
+**Why**: The actor 'actorComplex4A30' ('Priya Deshpande') acts in every single cassette across the entire object model. It is completely implausible for a single actor to star in 100% of a diverse catalog spanning entirely unrelated global and regional productions (e.g., Taiwanese action, Polish detectives, Andes airlift, Mombasa sessions).
 
 ## gen4 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains physically and logically impossible values. The movie 'movieEdge4M31' has 2,147,483,647 available copies, which is physically impossible for a video store. Additionally, 'rentalEdge4R33' uses the date '31-04-2020' (April has only 30 days) and 'rentalEdge4R31' uses the date '1900-01-01' (predating the invention of video cassettes).
+
+**Why**: 
+1. The object `movieEdge4M31` has 2,147,483,647 `availableCopies`, which is physically impossible for a video club to hold. 
+2. The dates used in the rentals are nonsensical for physical cassettes: `rentalEdge4R31` and `rentalEdge4R32` occur in 1900 (predating the invention of video tapes), `rentalEdge4R35` is in the far future (9999), and `rentalEdge4R33` occurs on April 31st, a date that does not exist.
 
 ## gen4 / invalid
 
 **Response**: Unrealistic
-**Why**: The object 'rentalFestR30' creates a rental transaction containing tapes, but it is never assigned to a 'Client'. A rental record cannot exist effectively in a vacuum without a customer, violating both the domain logical multiplicity and basic business rules.
+**Why**: The object 'rentalFestR30' represents a valid rental transaction that borrows cassettes, but it is never associated with any 'Client'. In a real-world video club, a rental cannot exist without a client to rent it (which violates the [1] multiplicity for the Client role).
 
 ## gen5 / baseline
 
 **Response**: Realistic
-**Why**: The object model represents a plausible video rental store scenario. The system correctly models inventory by treating specific episodes of a series as distinct rental items, and the inventory levels are logical (e.g., Episode 1 of 'Orbital Classroom' has more copies than subsequent episodes). The naming conventions show meaningful semantic consistencies (e.g., Maori names for a movie titled 'Whānau Warriors', Finnish names for a 'Sauna' movie), and client statuses (suspended clients have no active rentals) adhere to business logic.
+**Why**: The object model perfectly aligns with the domain. Client attributes have valid positive values. Cassette types (Movies and Series) have coherent genres, positive copy counts, valid episode numbers, and plausible titles. Rental dates follow a logical chronological sequence. Borrowing multiple cassettes (including disjointed series episodes) in one rental is a semantically sound real-world scenario.
 
 ## gen5 / boundary
 
 **Response**: Unrealistic
-**Why**: The object 'rentalMinR40' has a date of '1582-10-15', which is historically impossible for a Video Club rental scenario, as video cassettes were not invented until the 20th century.
+**Why**: The rental object 'rentalMinR40' has a date of '1582-10-15'. Video clubs and video cassettes did not exist in the 16th century, making this rental date historically impossible.
 
 ## gen5 / complex
 
 **Response**: Realistic
-**Why**: The object model represents a plausible snapshot of a Video Club. The values for attributes (titles, names, genres) are semantically consistent. The scenario involving a suspended client (`clientComplex5C43`) having a rental record (`rentalComplex5R44`) is realistic, as the suspension likely occurred after the rental transaction (dated Oct 2025) relative to the current system state (Feb 2026). Additionally, items with 0 `availableCopies` (e.g., `movieComplex5M44`) correlate with items involved in the most recent rentals, physically consistent with stock being "out".
+**Why**: The object model is logically consistent with the domain model and represents a plausible real-world scenario for a video club. Client IDs, rental dates, and episode numbers are valid. Multiplicities and constraints are fully respected. Attributes like available copies and overlapping actors in different episodes correctly mirror real-world behaviors. The presence of a suspended client with a past rental is also a valid business scenario (e.g., suspended due to unreturned items).
 
 ## gen5 / edge
 
 **Response**: Unrealistic
-**Why**: The model assigns logically impossible values to the `date` attribute of `Rental` objects. Specifically, `rentalLoopR44` uses 'Feb 30' (a non-existent date), `rentalLoopR45` uses '25:61' (invalid time exceeding 24h/60m), and `rentalLoopR46` uses '∞', which is not a valid timestamp.
+**Why**: Several `Rental` objects have impossible real-world date/time values assigned to them. Specifically, `rentalLoopR44` has a date of 'Feb 30' (which does not exist), `rentalLoopR45` has an impossible time of '25:61', and `rentalLoopR46` uses '∞' (infinity) as a date.
 
 ## gen5 / invalid
 
 **Response**: Unrealistic
-**Why**: The object model associates the single rental instance `rentalRioR40` with two different clients (`clientRioC40` and `clientRioC41`). This violates the domain model's cardinality (`Client [1]`) and real-world logic, where a single specific rental transaction belongs to only one customer account.
+**Why**: The rental object 'rentalRioR40' is simultaneously associated with two different clients ('clientRioC40' and 'clientRioC41') in the 'ClientRental' association. This contradicts the domain model's cardinality constraint, which strictly dictates that a rental must be assigned to exactly one client (`Client [1]`).
 
 ## gen6 / baseline
 
 **Response**: Realistic
-**Why**: The object model adheres to all domain constraints (positive IDs, positive copies/episodes). The attribute values (dates, strings, counts) are plausible. The scenario of a 'suspended' client having a rental history is logically consistent with real-world scenarios (e.g., suspension due to past activity). The actors and genres assigned match the structure defined.
+**Why**: The object model represents a highly plausible scenario for a video club. The entities have realistic attributes (recognized names, sensible dates from Oct 2022 to Jan 2023, valid IDs, and logical quantities). The relationships correctly map clients to rentals containing realistic amounts of movies/series episodes, and actors are logically assigned to their respective media. Furthermore, all domain constraints (positive IDs, episodes, and non-negative copies) are respected.
 
 ## gen6 / boundary
 
 **Response**: Realistic
-**Why**: The object model portrays a coherent scenario. The movie titles and actor names show consistent cultural matching (e.g., a Korean actor for a Korean movie title '웃음의 법칙'), which adds semantic depth. Assigning 5 movies to a single rental transaction is physically possible, and the attribute `availableCopies` being 0 for these movies is consistent with the state of them currently being rented out.
+**Why**: The object model represents a standard scenario for a video club, especially appropriate for the date '1999-12-31' during the peak of physical video rentals. A single client renting 5 movies for a holiday weekend is highly plausible, the movie titles and actor names are culturally diverse and realistic, and having 0 "availableCopies" aligns perfectly with the fact that these cassettes are currently rented out.
 
 ## gen6 / complex
 
-**Response**: Unrealistic
-
-**Why**: The object `movieComplex6M61` has the attribute `availableCopies` set to 0, which implies the video club possesses zero inventory of this title (or zero copies valid for rent). Despite this, the object is included in multiple rental transactions (e.g., `rentalComplex6R62`, `rentalComplex6R64`). It is physically impossible to rent a specific cassette title if the store has no copies of it. Similarly, `seriesComplex6S63` has 0 copies but is being rented.
+**Response**: Realistic
+**Why**: The object model perfectly aligns with the domain constraints and multiplicities. The attribute values (such as positive copies, valid episode numbers, and dates) and relationships reflect a plausible real-world video club scenario, accommodating realistic behaviors such as clients borrowing multiple physical cassettes, suspended accounts, and diverse international movie/series titles with appropriate cast associations.
 
 ## gen6 / edge
 
 **Response**: Unrealistic
-**Why**: The object model contains physically impossible dates and values. specifically:
-1. Object 'rentalSeriesOnly2R51' has the date '13/13/2013', but a 13th month does not exist.
-2. Object 'rentalSeriesOnly2R50' has the date '0000-00-00', which is not a valid calendar date.
-3. Object 'seriesSeriesOnly2S42' has an episode number of 999,999,999, which is implausible for a TV series instance in a video club.
+**Why**: The object 'seriesSeriesOnly2S42' has an assigned episode number of 999,999,999, which is far beyond the realistic bounds for any television series. Additionally, several Rentals contain impossible or invalid dates (such as '0000-00-00', '13/13/2013' with a non-existent 13th month, and a whitespace string '   ').
 
 ## gen6 / invalid
 
 **Response**: Realistic
-**Why**: The object model portrays a coherent video club scenario. The values for attributes (e.g., small numbers of available copies, sequential rental dates, plausible fictional titles) and the network of relationships (clients renting multiple items, valid inventory management where 2 copies allow for concurrent rentals) are logically sound.
+**Why**: The assigned values for client IDs, rental dates, movie titles, and actors are plausible. The relationships logically represent typical video club operations, where clients rent multiple available movies and series, and each cassette is associated with real-world counts of actors and available copies. No constraints or real-world logic are violated.
 

@@ -76,6 +76,10 @@ export const prices = {
     input: 1.4,
     output: 12.0,
   },
+  GEMINI_3_1_PRO: {
+    input: 2.0,
+    output: 12.0,
+  },
 } as const;
 
 // Color ranges for getColor(value, green, red)
@@ -148,7 +152,7 @@ export const METRIC_EXPLANATIONS = {
   realism: {
     title: "Quality",
     description:
-      "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtfull) the realism of each instance and explain its decision.",
+      "Measures the realism of the generated instances. It identifies how much the LLM respects real-world logic. Using Gemini 3.1 Pro as an LLM as a Judge we ask it to rate (realistic, unrealistic, doubtfull) the realism of each instance and explain its decision.",
     examples: [
       'Realism = Total Number of "realistic" instances / Total Number of instances',
     ],
