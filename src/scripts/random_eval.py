@@ -124,7 +124,7 @@ WORKSHEET_GUIDE_RICH_LINES = (
     ),
     (
         ("3. ", True),
-        ("Add a short explanation only for U or D, for example: ", False),
+        ("Add a short explanation, for example: ", False),
         ("'R: We are no verifying real IBANs/BICs.'", True),
     ),
     (
