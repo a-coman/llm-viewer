@@ -5,12 +5,70 @@
 # ]
 # ///
 
+# # Globalmente (si combinaramos ambos archivos):
+# Seleccionamos 120 instancias de 1200.
+# Fijamos 120/8 = 15 instancias para cada model / strategy / realism.
+# - gpt_4o / simple / realistic: selected 15
+# - gpt_4o / simple / unrealistic: selected 15
+# - gpt_4o / cot / realistic: selected 15
+# - gpt_4o / cot / unrealistic: selected 15
+# - gpt_5_2 / simple / realistic: selected 15
+# - gpt_5_2 / simple / unrealistic: selected 15
+# - gpt_5_2 / cot / realistic: selected 15
+# - gpt_5_2 / cot / unrealistic: selected 15
+# Como hay 10 dominios (addressbook, bank, ...), eso da 120/10 = 12 instancias por dominio en total.
+# Luego, para el dominio bank, el total global debe ser 12.
+# Esas 12 de bank se reparten como 12/4 = 3 para cada model / strategy:
+# gpt_4o / simple / bank = 3
+# gpt_4o / cot / bank = 3
+# gpt_5_2 / simple / bank = 3
+# gpt_5_2 / cot / bank = 3
+
+# Dentro de cada model / strategy / domain:
+# No forzamos realistic y unrealistic exactos por dominio.
+# Los repartimos lo más equilibradamente posible según lo que exista en los datos.
+
+# Si gpt_5_2 / simple / bank = 3, usamos la combinación factible más equilibrada posible, intentamos algo como 2 realistic + 1 unrealistic o 1 realistic + 2 unrealistic.
+
+# Por tanto, globalmente:
+# - Siempre habra 15 realistic y 15 unrealistic por model y strategy
+# - Siempre habra 3 instancias por cada model strategy y dominio
+# - Es posible que algunos dominios tengan mas o menos realistics/unrealistics dependiendo de la disponibilidad de datos
+
+# # Por archivo (random_eval_1 / random_eval_2):
+# Cada archivo tiene 60 instancias.
+# Y por tanto 60/10 = 6 instancias por dominio.
+# (60/8 = 7.5) por tanto los buckets por archivo quedan así:
+# Archivo 1: gpt_4o/* = 8 por bucket, gpt_5_2/* = 7 por bucket
+# Archivo 2: gpt_4o/* = 7 por bucket, gpt_5_2/* = 8 por bucket
+
+# Por ejemplo:
+# Para bank, en cada archivo hay 6 instancias totales.
+# Esas 6 se reparten entre los 4 grupos model / strategy lo más uniforme posible.
+# Como 6 / 4 = 1.5, el reparto factible es una mezcla de 2 y 1.
+
+# Archivo 1 para bank:
+# gpt_4o / simple / bank = 2
+# gpt_4o / cot / bank = 2
+# gpt_5_2 / simple / bank = 1
+# gpt_5_2 / cot / bank = 1
+
+# Archivo 2 usa el complemento:
+# 1, 1, 2, 2
+
+# Por tanto, por archivo:
+# - Siempre habra 7/8 realistics y 7/8 unrealistics por model y strategy
+# - Siempre habra 1/2 instancias por cada model strategy y dominio
+# - Es posible que algunos dominios tengan mas o menos realistics/unrealistics dependiendo de la disponibilidad de datos
+
+
 from __future__ import annotations
 
 import argparse
 import importlib
 import json
 import random
+from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
@@ -19,8 +77,11 @@ from urllib.parse import urlencode
 DEFAULT_SEED = 5764515283675  # chosen with current system.nanotime()
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
-TARGET_REALISMS = ("realistic", "unrealistic") # There's no "doubtful" realism in the current judge.json
-DEFAULT_PER_BUCKET = 18
+TARGET_REALISMS = (
+    "realistic",
+    "unrealistic",
+)  # There's no "doubtful" realism in the current judge.json
+DEFAULT_PER_BUCKET = 15
 # A bucket is a unique combination of 3 things:
 # Model: gpt_4o or gpt_5_2 (2 options)
 # Mode: simple or cot (2 options)
@@ -28,9 +89,10 @@ DEFAULT_PER_BUCKET = 18
 # This is a total of 8 different buckets (2 x 2 x 2 = 8).
 # The script randomly selects exactly DEFAULT_PER_BUCKET instances for each of the 8 buckets.
 # This is a total of 8 * DEFAULT_PER_BUCKET instances.
-# eg. 18 * 8 = 144 instances (12% of 1200) separated in two files
+# eg. 15 * 8 = 120 instances (10% of 1200) separated in two files
 DEFAULT_BASE_URL = "https://a-coman.github.io/llm-viewer"
 DEFAULT_REVIEWERS = ("Lola", "Dominik", "Manuel")
+DEFAULT_DOMAIN_BUCKET_CAP = 3
 PAGE_COUNT = 3
 OUTPUT_FILE_COUNT = 2
 WORKSHEET_GUIDE_RICH_LINES = (
@@ -38,19 +100,28 @@ WORKSHEET_GUIDE_RICH_LINES = (
     (
         ("0. ", True),
         (
-            "Review the judge prompts to understand the criteria used during realism evaluation.", 
-            False
+            "Review the judge prompts to understand the criteria used during realism evaluation.",
+            False,
         ),
     ),
     (
-        ("Judge System Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=system-judge-prompt", False),
+        (
+            "Judge System Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=system-judge-prompt",
+            False,
+        ),
     ),
     (
-        ("Judge User Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=user-judge-prompt", False),
+        (
+            "Judge User Prompt: https://a-coman.github.io/llm-viewer/gpt_4o/bank/gen1/?view=user-judge-prompt",
+            False,
+        ),
     ),
     (
         ("1. ", True),
-        ("Understand the model (diagram/code) and review the instance (diagram/code) from the hyperlink in the first column.", False),
+        (
+            "Understand the model (diagram/code) and review the instance (diagram/code) from the hyperlink in the first column.",
+            False,
+        ),
     ),
     (
         ("2. ", True),
@@ -65,7 +136,14 @@ WORKSHEET_GUIDE_RICH_LINES = (
     (
         ("3. ", True),
         ("Add a short explanation only for U or D, for example: ", False),
-        ("'U: It is implausible to make an omelet without eggs.'", True),
+        ("'R: We are no verifying real IBANs/BICs.'", True),
+    ),
+    (
+        ("Another valid example: ", False),
+        (
+            "'U: It is implausible to make an omelet without eggs.'",
+            True,
+        ),
     ),
     (
         ("Another valid example: ", False),
@@ -147,7 +225,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_PER_BUCKET,
         help=(
             "Number of instances to sample for each model/mode/realism bucket. "
-            "Default 18 creates 144 rows total (12%), split into two 72-row files (6% each)."
+            "Default 15 creates 120 rows total (10%), split into two 60-row files (5% each)."
         ),
     )
     parser.add_argument(
@@ -163,6 +241,15 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Reviewer names used for the three worksheet permutations. "
             "Default: Lola Dominik Manuel"
+        ),
+    )
+    parser.add_argument(
+        "--domain-bucket-cap",
+        type=int,
+        default=DEFAULT_DOMAIN_BUCKET_CAP,
+        help=(
+            "Hard cap for how many times a single domain can appear in one bucket "
+            "(model/mode/realism). Default 3."
         ),
     )
     return parser.parse_args()
@@ -410,40 +497,465 @@ def sort_candidates(candidates: list[Candidate]) -> list[Candidate]:
     )
 
 
+@dataclass
+class _FlowEdge:
+    to: int
+    rev: int
+    cap: int
+    cost: int
+
+
+def _add_flow_edge(
+    graph: list[list[_FlowEdge]], fr: int, to: int, cap: int, cost: int
+) -> int:
+    forward_index = len(graph[fr])
+    graph[fr].append(_FlowEdge(to=to, rev=len(graph[to]), cap=cap, cost=cost))
+    graph[to].append(_FlowEdge(to=fr, rev=forward_index, cap=0, cost=-cost))
+    return forward_index
+
+
+def compute_min_cost_max_flow(
+    graph: list[list[_FlowEdge]], source: int, sink: int, required_flow: int
+) -> tuple[int, int]:
+    node_count = len(graph)
+    flow = 0
+    total_cost = 0
+
+    while flow < required_flow:
+        inf = 10**18
+        dist = [inf] * node_count
+        in_queue = [False] * node_count
+        prev_node = [-1] * node_count
+        prev_edge = [-1] * node_count
+
+        dist[source] = 0
+        queue: deque[int] = deque([source])
+        in_queue[source] = True
+
+        while queue:
+            current = queue.popleft()
+            in_queue[current] = False
+
+            for edge_index, edge in enumerate(graph[current]):
+                if edge.cap <= 0:
+                    continue
+                next_node = edge.to
+                next_cost = dist[current] + edge.cost
+                if next_cost >= dist[next_node]:
+                    continue
+
+                dist[next_node] = next_cost
+                prev_node[next_node] = current
+                prev_edge[next_node] = edge_index
+
+                if not in_queue[next_node]:
+                    queue.append(next_node)
+                    in_queue[next_node] = True
+
+        if dist[sink] == inf:
+            break
+
+        add_flow = required_flow - flow
+        node = sink
+        while node != source:
+            previous = prev_node[node]
+            edge_index = prev_edge[node]
+            if previous < 0 or edge_index < 0:
+                add_flow = 0
+                break
+            add_flow = min(add_flow, graph[previous][edge_index].cap)
+            node = previous
+
+        if add_flow <= 0:
+            break
+
+        node = sink
+        while node != source:
+            previous = prev_node[node]
+            edge_index = prev_edge[node]
+            edge = graph[previous][edge_index]
+            edge.cap -= add_flow
+            reverse_edge = graph[node][edge.rev]
+            reverse_edge.cap += add_flow
+            node = previous
+
+        flow += add_flow
+        total_cost += add_flow * dist[sink]
+
+    return flow, total_cost
+
+
+def compute_max_flow(
+    graph: list[list[_FlowEdge]], source: int, sink: int, required_flow: int
+) -> int:
+    flow, _ = compute_min_cost_max_flow(graph, source, sink, required_flow)
+    return flow
+
+
+def solve_binary_matrix(
+    row_targets: dict[str, int],
+    column_targets: dict[str, int],
+    allowed_edges: dict[str, set[str]],
+) -> dict[tuple[str, str], int]:
+    node_ids: dict[str, int] = {}
+
+    def get_node_id(name: str) -> int:
+        if name not in node_ids:
+            node_ids[name] = len(node_ids)
+        return node_ids[name]
+
+    source_id = get_node_id("source")
+    sink_id = get_node_id("sink")
+
+    row_node_ids = {
+        row_key: get_node_id(f"row::{row_key}") for row_key in sorted(row_targets)
+    }
+    column_node_ids = {
+        column_key: get_node_id(f"column::{column_key}")
+        for column_key in sorted(column_targets)
+    }
+
+    graph: list[list[_FlowEdge]] = [[] for _ in range(len(node_ids))]
+    edge_refs: dict[tuple[str, str], tuple[int, int]] = {}
+
+    for row_key, target in row_targets.items():
+        _add_flow_edge(graph, source_id, row_node_ids[row_key], target, 0)
+
+    for column_key, target in column_targets.items():
+        _add_flow_edge(graph, column_node_ids[column_key], sink_id, target, 0)
+
+    for row_key, columns in allowed_edges.items():
+        row_node_id = row_node_ids[row_key]
+        for column_key in sorted(columns):
+            edge_index = _add_flow_edge(
+                graph,
+                row_node_id,
+                column_node_ids[column_key],
+                1,
+                0,
+            )
+            edge_refs[(row_key, column_key)] = (row_node_id, edge_index)
+
+    required_flow = sum(row_targets.values())
+    if required_flow != sum(column_targets.values()):
+        raise ValueError(
+            "Matrix allocation targets are inconsistent: "
+            f"rows sum to {required_flow}, columns sum to {sum(column_targets.values())}."
+        )
+
+    flow_value = compute_max_flow(graph, source_id, sink_id, required_flow)
+    if flow_value != required_flow:
+        raise ValueError(
+            "Unable to satisfy the requested balanced matrix allocation with current data."
+        )
+
+    allocation: dict[tuple[str, str], int] = {}
+    for key, (row_node_id, edge_index) in edge_refs.items():
+        allocation[key] = 1 if graph[row_node_id][edge_index].cap == 0 else 0
+    return allocation
+
+
+def solve_weighted_sum(
+    options_by_key: dict[str, list[tuple[int, int]]], target_sum: int
+) -> dict[str, int]:
+    ordered_keys = sorted(options_by_key)
+    dp: list[dict[int, tuple[int, int | None, int | None]]] = [{0: (0, None, None)}]
+
+    for key in ordered_keys:
+        next_layer: dict[int, tuple[int, int | None, int | None]] = {}
+        for current_sum, (current_cost, _, _) in dp[-1].items():
+            for value, extra_cost in options_by_key[key]:
+                next_sum = current_sum + value
+                next_cost = current_cost + extra_cost
+                previous = next_layer.get(next_sum)
+                if previous is None or next_cost < previous[0]:
+                    next_layer[next_sum] = (next_cost, current_sum, value)
+        dp.append(next_layer)
+
+    if target_sum not in dp[-1]:
+        raise ValueError(f"Unable to reach weighted target sum {target_sum}.")
+
+    result: dict[str, int] = {}
+    remaining = target_sum
+    for index in range(len(ordered_keys), 0, -1):
+        _, previous_sum, chosen_value = dp[index][remaining]
+        assert previous_sum is not None
+        assert chosen_value is not None
+        result[ordered_keys[index - 1]] = chosen_value
+        remaining = previous_sum
+
+    return result
+
+
+def get_group_order() -> list[tuple[str, str]]:
+    return [
+        (model_id, mode)
+        for model_id in TARGET_MODELS
+        for mode in TARGET_MODES
+    ]
+
+
+def allocate_global_counts_by_group_domain(
+    bucket_domain_pool: dict[tuple[str, str, str], dict[str, list[Candidate]]],
+    domains: list[str],
+    per_bucket: int,
+) -> dict[tuple[str, str, str], dict[str, int]]:
+    if per_bucket * len(TARGET_REALISMS) != len(domains) * 3:
+        raise ValueError(
+            "This allocation strategy expects each model/mode group to distribute "
+            f"{per_bucket * len(TARGET_REALISMS)} rows across {len(domains)} domains as 3 each."
+        )
+
+    allocation: dict[tuple[str, str, str], dict[str, int]] = {
+        (model_id, mode, realism): {domain: 0 for domain in domains}
+        for model_id, mode in get_group_order()
+        for realism in TARGET_REALISMS
+    }
+
+    for model_id, mode in get_group_order():
+        options_by_domain: dict[str, list[tuple[int, int]]] = {}
+        for domain in domains:
+            realistic_available = len(
+                bucket_domain_pool[(model_id, mode, "realistic")][domain]
+            )
+            unrealistic_available = len(
+                bucket_domain_pool[(model_id, mode, "unrealistic")][domain]
+            )
+            if realistic_available + unrealistic_available < 3:
+                raise ValueError(
+                    "Not enough total candidates to allocate 3 instances for "
+                    f"{model_id} / {mode} / {domain}: available "
+                    f"{realistic_available + unrealistic_available}."
+                )
+
+            low = max(0, 3 - unrealistic_available)
+            high = min(3, realistic_available)
+            if low > high:
+                raise ValueError(
+                    "No feasible realistic/unrealistic split for "
+                    f"{model_id} / {mode} / {domain}."
+                )
+
+            domain_options: list[tuple[int, int]] = []
+            for realistic_count in range(low, high + 1):
+                # Prefer 1/2 or 2/1 splits over 0/3 or 3/0 when availability allows it.
+                imbalance_cost = abs((2 * realistic_count) - 3)
+                domain_options.append((realistic_count, imbalance_cost))
+            options_by_domain[domain] = domain_options
+
+        realistic_counts = solve_weighted_sum(options_by_domain, target_sum=per_bucket)
+        for domain, realistic_count in realistic_counts.items():
+            allocation[(model_id, mode, "realistic")][domain] = realistic_count
+            allocation[(model_id, mode, "unrealistic")][domain] = 3 - realistic_count
+
+    return allocation
+
+
+def allocate_file1_group_domain_extras(
+    domains: list[str], file_bucket_targets: list[dict[tuple[str, str, str], int]]
+) -> dict[tuple[str, str], dict[str, int]]:
+    file1_group_totals: dict[tuple[str, str], int] = {}
+    for model_id, mode in get_group_order():
+        file1_group_totals[(model_id, mode)] = sum(
+            file_bucket_targets[0][(model_id, mode, realism)]
+            for realism in TARGET_REALISMS
+        )
+
+    base_per_cell = 1
+    row_targets = {
+        f"{model_id}::{mode}": total - (len(domains) * base_per_cell)
+        for (model_id, mode), total in file1_group_totals.items()
+    }
+    column_targets = {domain: 2 for domain in domains}
+    allowed_edges = {
+        f"{model_id}::{mode}": set(domains) for model_id, mode in get_group_order()
+    }
+    extras = solve_binary_matrix(row_targets, column_targets, allowed_edges)
+
+    allocation: dict[tuple[str, str], dict[str, int]] = {
+        (model_id, mode): {domain: 1 for domain in domains}
+        for model_id, mode in get_group_order()
+    }
+    for model_id, mode in get_group_order():
+        key = f"{model_id}::{mode}"
+        for domain in domains:
+            allocation[(model_id, mode)][domain] += extras.get((key, domain), 0)
+    return allocation
+
+
+def allocate_file1_realistic_counts(
+    selected_pool: dict[tuple[str, str, str], dict[str, list[Candidate]]],
+    domains: list[str],
+    file_bucket_targets: list[dict[tuple[str, str, str], int]],
+    file1_group_domain_totals: dict[tuple[str, str], dict[str, int]],
+) -> dict[tuple[str, str, str], dict[str, int]]:
+    allocation: dict[tuple[str, str, str], dict[str, int]] = {
+        (model_id, mode, realism): {domain: 0 for domain in domains}
+        for model_id, mode in get_group_order()
+        for realism in TARGET_REALISMS
+    }
+
+    for model_id, mode in get_group_order():
+        realistic_target = file_bucket_targets[0][(model_id, mode, "realistic")]
+        options_by_domain: dict[str, list[tuple[int, int]]] = {}
+
+        for domain in domains:
+            total_for_file1 = file1_group_domain_totals[(model_id, mode)][domain]
+            realistic_total = len(selected_pool[(model_id, mode, "realistic")][domain])
+            unrealistic_total = len(
+                selected_pool[(model_id, mode, "unrealistic")][domain]
+            )
+
+            low = max(0, total_for_file1 - unrealistic_total)
+            high = min(total_for_file1, realistic_total)
+            if low > high:
+                raise ValueError(
+                    "No feasible per-file realistic split for "
+                    f"{model_id} / {mode} / {domain}."
+                )
+
+            domain_options: list[tuple[int, int]] = []
+            for realistic_count in range(low, high + 1):
+                # Prefer preserving the global realism ratio within the file split.
+                proportional_cost = abs((3 * realistic_count) - (realistic_total * total_for_file1))
+                domain_options.append((realistic_count, proportional_cost))
+            options_by_domain[domain] = domain_options
+
+        realistic_counts = solve_weighted_sum(options_by_domain, realistic_target)
+        for domain, realistic_count in realistic_counts.items():
+            total_for_file1 = file1_group_domain_totals[(model_id, mode)][domain]
+            allocation[(model_id, mode, "realistic")][domain] = realistic_count
+            allocation[(model_id, mode, "unrealistic")][domain] = (
+                total_for_file1 - realistic_count
+            )
+
+    return allocation
+
+
 def sample_candidates(
-    candidates: list[Candidate], seed: int, per_bucket: int
+    candidates: list[Candidate], seed: int, per_bucket: int, domain_bucket_cap: int
 ) -> tuple[list[Candidate], dict[tuple[str, str, str], int]]:
-    randomizer = random.Random(seed)
+    if domain_bucket_cap <= 0:
+        raise ValueError("Domain bucket cap must be greater than zero.")
+
     bucket_map: dict[tuple[str, str, str], list[Candidate]] = {}
     for candidate in sort_candidates(candidates):
         bucket_map.setdefault(candidate.bucket, []).append(candidate)
 
     availability = {bucket: len(items) for bucket, items in bucket_map.items()}
-    selected: list[Candidate] = []
-    missing: list[str] = []
+    missing_buckets: list[str] = []
 
-    for model_id in TARGET_MODELS:
-        for mode in TARGET_MODES:
-            for realism in TARGET_REALISMS:
-                bucket = (model_id, mode, realism)
-                pool = bucket_map.get(bucket, [])
-                if len(pool) < per_bucket:
-                    missing.append(
-                        f"{model_id} / {mode} / {realism}: required {per_bucket}, available {len(pool)}"
-                    )
-                    continue
-                sampled = randomizer.sample(pool, per_bucket)
-                selected.extend(sort_candidates(sampled))
+    bucket_order = [
+        (model_id, mode, realism)
+        for model_id in TARGET_MODELS
+        for mode in TARGET_MODES
+        for realism in TARGET_REALISMS
+    ]
 
-    if missing:
-        details = "\n".join(missing)
+    for model_id, mode, realism in bucket_order:
+        bucket = (model_id, mode, realism)
+        pool = bucket_map.get(bucket, [])
+        if len(pool) < per_bucket:
+            missing_buckets.append(
+                f"{model_id} / {mode} / {realism}: required {per_bucket}, available {len(pool)}"
+            )
+
+    if missing_buckets:
+        details = "\n".join(missing_buckets)
         raise ValueError(
             f"Not enough candidates to satisfy requested sample:\n{details}"
         )
 
+    domains = sorted({candidate.domain for candidate in candidates})
+    if not domains:
+        raise ValueError("No domains found while sampling candidates.")
+
+    total_selected = len(bucket_order) * per_bucket
+    if total_selected % len(domains) != 0:
+        raise ValueError(
+            "Cannot balance domains globally: "
+            f"selected total {total_selected} is not divisible by domain count {len(domains)}."
+        )
+    per_domain_target = total_selected // len(domains)
+
+    domain_availability: dict[str, int] = {domain: 0 for domain in domains}
+    bucket_domain_pool: dict[tuple[str, str, str], dict[str, list[Candidate]]] = {}
+    for bucket in bucket_order:
+        by_domain: dict[str, list[Candidate]] = {domain: [] for domain in domains}
+        for candidate in bucket_map.get(bucket, []):
+            by_domain[candidate.domain].append(candidate)
+            domain_availability[candidate.domain] += 1
+        bucket_domain_pool[bucket] = by_domain
+
+    missing_domains = [
+        f"{domain}: required {per_domain_target}, available {domain_availability.get(domain, 0)}"
+        for domain in domains
+        if domain_availability.get(domain, 0) < per_domain_target
+    ]
+    if missing_domains:
+        details = "\n".join(missing_domains)
+        raise ValueError(
+            f"Not enough candidates to satisfy global domain balancing:\n{details}"
+        )
+
+    allocation = allocate_global_counts_by_group_domain(
+        bucket_domain_pool=bucket_domain_pool,
+        domains=domains,
+        per_bucket=per_bucket,
+    )
+
+    selected: list[Candidate] = []
+    randomizer = random.Random(seed)
+    for bucket in bucket_order:
+        for domain in domains:
+            allocated = allocation[bucket][domain]
+            if allocated <= 0:
+                continue
+
+            pool = sort_candidates(bucket_domain_pool[bucket][domain])
+            if allocated > len(pool):
+                model_id, mode, realism = bucket
+                raise ValueError(
+                    "Internal allocation exceeded pool size for "
+                    f"{model_id} / {mode} / {realism} / {domain}: "
+                    f"allocated {allocated}, available {len(pool)}."
+                )
+            if allocated > domain_bucket_cap:
+                model_id, mode, realism = bucket
+                raise ValueError(
+                    "Balanced bucket/domain allocation exceeded the configured cap for "
+                    f"{model_id} / {mode} / {realism} / {domain}: "
+                    f"allocated {allocated}, cap {domain_bucket_cap}."
+                )
+
+            sampled = randomizer.sample(pool, allocated)
+            selected.extend(sort_candidates(sampled))
+
     randomized = sort_candidates(selected)
     randomizer.shuffle(randomized)
     return randomized, availability
+
+
+def build_file_bucket_targets(
+    per_bucket: int, file_count: int
+) -> list[dict[tuple[str, str, str], int]]:
+    if file_count != OUTPUT_FILE_COUNT:
+        raise ValueError(f"Expected {OUTPUT_FILE_COUNT} output files, got {file_count}.")
+
+    base = per_bucket // file_count
+    remainder = per_bucket % file_count
+    targets: list[dict[tuple[str, str, str], int]] = [{} for _ in range(file_count)]
+
+    for model_index, model_id in enumerate(TARGET_MODELS):
+        extra_file_index = model_index % file_count
+        for mode in TARGET_MODES:
+            for realism in TARGET_REALISMS:
+                bucket = (model_id, mode, realism)
+                for file_index in range(file_count):
+                    extra = 1 if file_index == extra_file_index and remainder > 0 else 0
+                    targets[file_index][bucket] = base + extra
+
+    return targets
 
 
 def build_output_paths(prefix: Path, file_count: int) -> list[Path]:
@@ -455,55 +967,120 @@ def build_output_paths(prefix: Path, file_count: int) -> list[Path]:
 
 
 def split_candidates_into_files(
-    candidates: list[Candidate], seed: int, file_count: int
+    candidates: list[Candidate], seed: int, file_count: int, per_bucket: int
 ) -> list[list[Candidate]]:
     if file_count <= 0:
         raise ValueError("File count must be greater than zero.")
 
-    bucket_map: dict[tuple[str, str, str], list[Candidate]] = {}
-    for candidate in sort_candidates(candidates):
-        bucket_map.setdefault(candidate.bucket, []).append(candidate)
-
-    if not bucket_map:
+    if not candidates:
         raise ValueError("No candidates selected for file splitting.")
 
-    per_bucket = len(next(iter(bucket_map.values())))
-    if per_bucket % file_count != 0:
+    total_rows = len(candidates)
+    if total_rows % file_count != 0:
         raise ValueError(
-            f"Per-bucket selected count {per_bucket} is not divisible by file count {file_count}."
+            f"Total selected rows {total_rows} is not divisible by file count {file_count}."
         )
 
-    per_file_per_bucket = per_bucket // file_count
-    files: list[list[Candidate]] = [[] for _ in range(file_count)]
+    domains = sorted({candidate.domain for candidate in candidates})
+    if not domains:
+        raise ValueError("No domains found while splitting files.")
 
-    for model_id in TARGET_MODELS:
-        for mode in TARGET_MODES:
-            for realism in TARGET_REALISMS:
-                bucket = (model_id, mode, realism)
-                pool = bucket_map.get(bucket, [])
-                if len(pool) != per_bucket:
-                    raise ValueError(
-                        f"Bucket {model_id} / {mode} / {realism} has {len(pool)} items, expected {per_bucket}."
-                    )
+    per_file_rows = total_rows // file_count
+    if per_file_rows % PAGE_COUNT != 0:
+        raise ValueError(
+            f"Rows per file {per_file_rows} must be divisible by page count {PAGE_COUNT}."
+        )
 
-                # Derive a stable per-bucket shuffle from the main seed.
-                bucket_seed = f"{seed}:{model_id}:{mode}:{realism}"
-                bucket_randomizer = random.Random(bucket_seed)
-                bucket_items = list(pool)
-                bucket_randomizer.shuffle(bucket_items)
+    if per_file_rows % len(domains) != 0:
+        raise ValueError(
+            f"Rows per file {per_file_rows} must be divisible by domain count {len(domains)}."
+        )
 
-                for file_index in range(file_count):
-                    start = file_index * per_file_per_bucket
-                    end = start + per_file_per_bucket
-                    files[file_index].extend(bucket_items[start:end])
+    file_bucket_targets = build_file_bucket_targets(per_bucket, file_count)
+    per_file_domain_target = per_file_rows // len(domains)
+    candidate_pool: dict[tuple[tuple[str, str, str], str], list[Candidate]] = {
+        (bucket, domain): []
+        for bucket in [
+            (model_id, mode, realism)
+            for model_id in TARGET_MODELS
+            for mode in TARGET_MODES
+            for realism in TARGET_REALISMS
+        ]
+        for domain in domains
+    }
+    for candidate in sort_candidates(candidates):
+        candidate_pool[(candidate.bucket, candidate.domain)].append(candidate)
 
-    for file_index, file_candidates in enumerate(files, start=1):
-        file_randomizer = random.Random(seed + file_index)
-        ordered = sort_candidates(file_candidates)
-        file_randomizer.shuffle(ordered)
-        files[file_index - 1] = ordered
+    selected_pool: dict[tuple[str, str, str], dict[str, list[Candidate]]] = {
+        bucket: {domain: [] for domain in domains}
+        for bucket in [
+            (model_id, mode, realism)
+            for model_id in TARGET_MODELS
+            for mode in TARGET_MODES
+            for realism in TARGET_REALISMS
+        ]
+    }
+    for (bucket, domain), pool in candidate_pool.items():
+        selected_pool[bucket][domain] = pool
 
-    return files
+    file1_group_domain_totals = allocate_file1_group_domain_extras(
+        domains=domains,
+        file_bucket_targets=file_bucket_targets,
+    )
+    file1_bucket_domain_counts = allocate_file1_realistic_counts(
+        selected_pool=selected_pool,
+        domains=domains,
+        file_bucket_targets=file_bucket_targets,
+        file1_group_domain_totals=file1_group_domain_totals,
+    )
+
+    file_candidates: list[list[Candidate]] = [[] for _ in range(file_count)]
+    randomizer = random.Random(seed + 97)
+
+    for key, pool in candidate_pool.items():
+        bucket, domain = key
+        primary_count = file1_bucket_domain_counts[bucket][domain]
+        if primary_count > len(pool):
+            raise ValueError(
+                "Internal file split exceeded pool size for "
+                f"{bucket[0]} / {bucket[1]} / {bucket[2]} / {domain}: "
+                f"allocated {primary_count}, available {len(pool)}."
+            )
+
+        sampled_pool = list(pool)
+        randomizer.shuffle(sampled_pool)
+        file_candidates[0].extend(sort_candidates(sampled_pool[:primary_count]))
+        file_candidates[1].extend(sort_candidates(sampled_pool[primary_count:]))
+
+    for file_index, expected_targets in enumerate(file_bucket_targets):
+        actual_rows = len(file_candidates[file_index])
+        if actual_rows != per_file_rows:
+            raise ValueError(
+                f"File {file_index + 1} expected {per_file_rows} rows, got {actual_rows}."
+            )
+
+        actual_bucket_counts = count_by_bucket(file_candidates[file_index])
+        for bucket, expected in expected_targets.items():
+            actual = actual_bucket_counts.get(bucket, 0)
+            if actual != expected:
+                raise ValueError(
+                    "File split did not preserve bucket target for "
+                    f"file {file_index + 1}, {bucket[0]} / {bucket[1]} / {bucket[2]}: "
+                    f"expected {expected}, got {actual}."
+                )
+
+        actual_domain_counts = count_by_domain(file_candidates[file_index])
+        for domain in domains:
+            actual = actual_domain_counts.get(domain, 0)
+            if actual != per_file_domain_target:
+                raise ValueError(
+                    f"File {file_index + 1} domain {domain} expected "
+                    f"{per_file_domain_target}, got {actual}."
+                )
+
+        randomizer.shuffle(file_candidates[file_index])
+
+    return file_candidates
 
 
 def get_reviewer_orders(reviewers: tuple[str, str, str]) -> list[tuple[str, str, str]]:
@@ -661,6 +1238,40 @@ def count_by_bucket(candidates: list[Candidate]) -> dict[tuple[str, str, str], i
     return counts
 
 
+def count_by_domain(candidates: list[Candidate]) -> dict[str, int]:
+    return count_by_key(candidates, "domain")
+
+
+def print_bucket_domain_table(candidates: list[Candidate], label: str) -> None:
+    domains = sorted({candidate.domain for candidate in candidates})
+    if not domains:
+        print(f"{label} bucket x domain counts: <no data>")
+        return
+
+    bucket_domain_counts: dict[tuple[str, str, str], dict[str, int]] = {}
+    for candidate in candidates:
+        bucket_domain_counts.setdefault(candidate.bucket, {}).setdefault(
+            candidate.domain, 0
+        )
+        bucket_domain_counts[candidate.bucket][candidate.domain] += 1
+
+    header = "bucket".ljust(33) + " | " + " | ".join(domains)
+    print(f"{label} bucket x domain counts:")
+    print(header)
+    print("-" * len(header))
+
+    for model_id in TARGET_MODELS:
+        for mode in TARGET_MODES:
+            for realism in TARGET_REALISMS:
+                bucket = (model_id, mode, realism)
+                row_label = f"{model_id}/{mode}/{realism}".ljust(33)
+                domain_values = [
+                    str(bucket_domain_counts.get(bucket, {}).get(domain, 0))
+                    for domain in domains
+                ]
+                print(f"{row_label} | " + " | ".join(domain_values))
+
+
 def print_page_breakdown(
     selected: list[Candidate], reviewers: tuple[str, str, str], label: str
 ) -> None:
@@ -716,6 +1327,8 @@ def print_file_breakdown(
                     print(
                         f"  {model_id} / {mode} / {realism}: {bucket_counts.get(bucket, 0)}"
                     )
+        print(f"  domains: {count_by_domain(candidates)}")
+        print_bucket_domain_table(candidates, label=f"File {index}")
         print_page_breakdown(candidates, reviewers, label=f"File {index}")
 
 
@@ -736,6 +1349,8 @@ def print_summary(
                     f"- {model_id} / {mode} / {realism}: "
                     f"selected {selected_count}, available {available_count}"
                 )
+    print(f"- Domain counts (global): {count_by_domain(selected)}")
+    print_bucket_domain_table(selected, label="Global")
 
 
 def main() -> int:
@@ -751,9 +1366,13 @@ def main() -> int:
         candidates=candidates,
         seed=args.seed,
         per_bucket=args.per_bucket,
+        domain_bucket_cap=args.domain_bucket_cap,
     )
     split_files = split_candidates_into_files(
-        selected, seed=args.seed, file_count=OUTPUT_FILE_COUNT
+        selected,
+        seed=args.seed,
+        file_count=OUTPUT_FILE_COUNT,
+        per_bucket=args.per_bucket,
     )
     output_paths = build_output_paths(args.output_prefix, OUTPUT_FILE_COUNT)
     for path, file_candidates in zip(output_paths, split_files, strict=True):
