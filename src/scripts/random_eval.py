@@ -77,19 +77,8 @@ from urllib.parse import urlencode
 DEFAULT_SEED = 5764515283675  # chosen with current system.nanotime()
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
-TARGET_REALISMS = (
-    "realistic",
-    "unrealistic",
-)  # There's no "doubtful" realism in the current judge.json
+TARGET_REALISMS = ("realistic", "unrealistic") # There's no "doubtful" realism in the current judge.json
 DEFAULT_PER_BUCKET = 15
-# A bucket is a unique combination of 3 things:
-# Model: gpt_4o or gpt_5_2 (2 options)
-# Mode: simple or cot (2 options)
-# Realism: realistic or unrealistic (2 options)
-# This is a total of 8 different buckets (2 x 2 x 2 = 8).
-# The script randomly selects exactly DEFAULT_PER_BUCKET instances for each of the 8 buckets.
-# This is a total of 8 * DEFAULT_PER_BUCKET instances.
-# eg. 15 * 8 = 120 instances (10% of 1200) separated in two files
 DEFAULT_BASE_URL = "https://a-coman.github.io/llm-viewer"
 DEFAULT_REVIEWERS = ("Lola", "Dominik", "Manuel")
 DEFAULT_DOMAIN_BUCKET_CAP = 3
