@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import DataTable from "../../components/DataTable.astro";
+import DashboardRadar from "../../components/DashboardRadar.astro";
 import MetricsPanel from "../../components/MetricsPanel.astro";
 import { getDashboardData, getExperimentIds } from "../../lib/data";
 
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
 
 const { experiment } = Astro.params;
 const dashboardData = getDashboardData(experiment);
-const { totals, models } = dashboardData || {};
+const { totals, models, radarComparison } = dashboardData || {};
 
 const experimentIds = getExperimentIds();
 
@@ -56,6 +57,13 @@ const summarySections = {
         </details>
 
         <details class="section" open>
+          <summary class="sober-header">Simple vs CoT Radar</summary>
+          <div class="radar-section">
+            <DashboardRadar data={radarComparison} />
+          </div>
+        </details>
+
+        <details class="section" open>
           <summary class="sober-header">Simple - Model Comparison</summary>
           <DataTable
             data={models}
@@ -91,5 +99,9 @@ const summarySections = {
     gap: 1.5rem;
     padding: 0.25rem;
     align-items: start;
+  }
+
+  .radar-section {
+    padding: 0.25rem;
   }
 </style>

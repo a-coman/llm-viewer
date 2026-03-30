@@ -640,6 +640,7 @@ export interface DashboardData {
     simple: DashboardModeTotals;
     cot: DashboardModeTotals;
   };
+  radarComparison: DashboardRadarComparison;
   models: {
     name: string;
     simple: {
@@ -677,6 +678,29 @@ export interface DashboardModeTotals {
     price?: PriceInfo;
     elapsedSeconds?: number;
   };
+}
+
+export interface DashboardRadarAxis {
+  key:
+    | "cost"
+    | "realism"
+    | "validity"
+    | "coverageDistribution"
+    | "structuralDiversity"
+    | "attributeDiversity";
+  label: string;
+  description: string;
+  max: number;
+}
+
+export interface DashboardRadarSeries {
+  name: string;
+  values: number[];
+}
+
+export interface DashboardRadarComparison {
+  axes: DashboardRadarAxis[];
+  series: DashboardRadarSeries[];
 }
 
 export type ModelName = (typeof MODELS)[keyof typeof MODELS];

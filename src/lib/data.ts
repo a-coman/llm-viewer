@@ -12,6 +12,7 @@ import type {
   SimpleGeneration,
   CoTGeneration,
   DashboardData,
+  DashboardModeTotals,
   Attempt,
   LogsFileRoot,
   LogsModeData,
@@ -264,7 +265,7 @@ function loadData() {
 // Get list of all experiment IDs
 export function getExperimentIds(): string[] {
   loadData();
-  return Array.from(cachedFiles.logs.keys()).filter(id => DATASETS.has(id));
+  return Array.from(cachedFiles.logs.keys()).filter((id) => DATASETS.has(id));
 }
 
 // Get experiment data by ID (or first if not specified)
@@ -412,6 +413,24 @@ function getCoverageMetrics(
     instantiation: rawInstantiationToDisplay(raw.instantiation),
     uncovered: rawCoverageUncoveredToDisplay(raw.coverage),
   };
+}
+
+function clampScore(value: number | undefined | null): number {
+  if (value === undefined || value === null || Number.isNaN(value)) {
+    return 0;
+  }
+  return Math.max(0, Math.min(100, value));
+}
+
+function average(values: Array<number | undefined | null>): number {
+  const valid = values.filter(
+    (value): value is number =>
+      typeof value === "number" && Number.isFinite(value),
+  );
+  if (valid.length === 0) {
+    return 0;
+  }
+  return valid.reduce((sum, value) => sum + value, 0) / valid.length;
 }
 
 const EMPTY_DIVERSITY: DiversityMetrics = {
@@ -857,9 +876,10 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
     elapsedSeconds: logExp.time_seconds,
     diversity: {
       ...rawDifferenceToDisplay(diffExp?.difference),
-      ged: gedExpData?.ged?.mean != null
-        ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
-        : modeGed?.ged,
+      ged:
+        gedExpData?.ged?.mean != null
+          ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
+          : modeGed?.ged,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
@@ -1084,9 +1104,10 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
     elapsedSeconds: logExp.time_seconds,
     diversity: {
       ...rawDifferenceToDisplay(diffExp?.difference),
-      ged: gedExpData?.ged?.mean != null
-        ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
-        : modeGed?.ged,
+      ged:
+        gedExpData?.ged?.mean != null
+          ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
+          : modeGed?.ged,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
@@ -1263,10 +1284,107 @@ export function getDashboardData(experimentId?: string): DashboardData {
     };
   };
 
+  const simpleTotals = getModeTotals("simple");
+  const cotTotals = getModeTotals("cot");
+  const positiveCosts = [
+    simpleTotals.price.price,
+    cotTotals.price.price,
+  ].filter((value) => value > 0);
+  const minPositiveCost =
+    positiveCosts.length > 0 ? Math.min(...positiveCosts) : 0;
+
+  const buildRadarValues = (totals: DashboardModeTotals) => {
+    const totalCost = totals.price.price;
+    const costScore =
+      totalCost > 0 && minPositiveCost > 0
+        ? (minPositiveCost / totalCost) * 100
+        : 100;
+    const validityScore =
+      average([
+        totals.metrics.syntax,
+        totals.metrics.multiplicities,
+        totals.metrics.invariants,
+      ]) * 100;
+    const coverageScore =
+      average([
+        totals.coverage.coverage.classes,
+        totals.coverage.coverage.attributes,
+        totals.coverage.coverage.relationships,
+      ]) * 100;
+    const shannonScore = (totals.diversity.shannonAll ?? 0) * 100;
+    const structuralDiversityScore =
+      (1 - (totals.diversity.ged?.mean ?? 1)) * 100;
+    const attributeDiversityScore =
+      average([
+        totals.diversity.numeric,
+        totals.diversity.stringLv,
+        totals.diversity.stringEquals,
+      ]) * 100;
+
+    return [
+      clampScore(costScore),
+      clampScore(totals.judge.successRate * 100),
+      clampScore(validityScore),
+      clampScore(average([coverageScore, shannonScore])),
+      clampScore(structuralDiversityScore),
+      clampScore(attributeDiversityScore),
+    ];
+  };
+
   return {
     totals: {
-      simple: getModeTotals("simple"),
-      cot: getModeTotals("cot"),
+      simple: simpleTotals,
+      cot: cotTotals,
+    },
+    radarComparison: {
+      axes: [
+        {
+          key: "cost",
+          label: "Cost",
+          description: "min(cost) / cost * 100",
+          max: 100,
+        },
+        {
+          key: "realism",
+          label: "Realism",
+          description: "LLM-as-judge",
+          max: 100,
+        },
+        {
+          key: "validity",
+          label: "Validity",
+          description: "syntax + mult. + inv.",
+          max: 100,
+        },
+        {
+          key: "coverageDistribution",
+          label: "Coverage + Shannon",
+          description: "classes + attrs + rels + shannon (all)",
+          max: 100,
+        },
+        {
+          key: "structuralDiversity",
+          label: "Structural Diversity",
+          description: "1 - GED",
+          max: 100,
+        },
+        {
+          key: "attributeDiversity",
+          label: "Attribute Diversity",
+          description: "numeric + lv + eq",
+          max: 100,
+        },
+      ],
+      series: [
+        {
+          name: "Simple",
+          values: buildRadarValues(simpleTotals),
+        },
+        {
+          name: "CoT",
+          values: buildRadarValues(cotTotals),
+        },
+      ],
     },
     models: modelsList,
   };
