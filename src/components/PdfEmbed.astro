@@ -29,33 +29,17 @@ const {
   )
 }
 
-<script>
-  import * as pdfjsLib from "pdfjs-dist";
+<script type="module" is:inline>
+  import * as pdfjsLib from "/llm-viewer/vendor/pdf.min.mjs";
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "/llm-viewer/vendor/pdf.worker.min.mjs";
 
   class PdfViewer {
-    container: HTMLElement;
-    world: HTMLElement;
-    canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
-    url: string;
-    scale: number;
-    contentScale: number;
-    posX: number;
-    posY: number;
-    isDragging: boolean;
-    startX: number;
-    startY: number;
-    _hasFit: boolean;
-    _fitRetryTimer: number | null;
-    _resizeObserver: ResizeObserver | null;
-
-    constructor(container: HTMLElement) {
+    constructor(container) {
       this.container = container;
-      this.world = container.querySelector(".pdf-world")!;
-      this.canvas = container.querySelector(".pdf-canvas")!;
-      this.ctx = this.canvas.getContext("2d")!;
+      this.world = container.querySelector(".pdf-world");
+      this.canvas = container.querySelector(".pdf-canvas");
+      this.ctx = this.canvas.getContext("2d");
       this.url = container.dataset.src || "";
 
       this.scale = 1;
@@ -68,8 +52,6 @@ const {
 
       this._hasFit = false;
       this._fitRetryTimer = null;
-      this._resizeObserver = null;
-
       this._resizeObserver = null;
 
       this.setupObserver();
@@ -155,7 +137,7 @@ const {
         this._resizeObserver.observe(this.container);
 
         this.addEventListeners();
-      } catch (error: any) {
+      } catch (error) {
         console.error("Error loading PDF:", error);
         this.container.innerHTML = `
           <div class="sober-empty-state error">
@@ -167,7 +149,7 @@ const {
     }
 
     addEventListeners() {
-      const getEventPos = (e: MouseEvent) => {
+      const getEventPos = (e) => {
         const rect = this.container.getBoundingClientRect();
         return {
           x: e.clientX - rect.left,
@@ -234,8 +216,8 @@ const {
   }
 
   document.querySelectorAll(".pdf-container").forEach((el) => {
-    if ((el as any)._pdfViewer) return;
-    (el as any)._pdfViewer = new PdfViewer(el as HTMLElement);
+    if (el._pdfViewer) return;
+    el._pdfViewer = new PdfViewer(el);
   });
 </script>
 
