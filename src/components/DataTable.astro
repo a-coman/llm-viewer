@@ -29,9 +29,9 @@ const columns = [
   { key: "diversity.numeric", label: "Num.Eq" },
   { key: "diversity.stringEquals", label: "Str.Eq" },
   { key: "diversity.stringLv", label: "Str.LV" },
-  { key: "coverage.coverage.classes", label: "Cov.Cls" },
-  { key: "coverage.coverage.attributes", label: "Cov.Attr" },
-  { key: "coverage.coverage.relationships", label: "Cov.Rel" },
+  { key: "coverage.coverage.classes", label: "Cov.Cls", isCoverage: true },
+  { key: "coverage.coverage.attributes", label: "Cov.Attr", isCoverage: true },
+  { key: "coverage.coverage.relationships", label: "Cov.Rel", isCoverage: true },
   {
     key: "coverage.instantiation.classes",
     label: "Inst.Cls",
@@ -68,53 +68,72 @@ function getDataSource(item: any): any {
   return item;
 }
 
+interface DisplayValue {
+  isToggleable: boolean;
+  text: string;
+  rawText?: string;
+}
+
 function formatValue(
   value: any,
   col: any,
   isGeneration: boolean,
   source: any,
   item?: any,
-): string {
+): DisplayValue {
+  const asPlain = (text: string): DisplayValue => ({ isToggleable: false, text });
+
   if (col.isRealism) {
     if (isGeneration) {
       if (item?.realism) {
         const { realistic, unrealistic, doubtful } = item.realism;
         const total = realistic + unrealistic + doubtful;
-        if (total > 0) return formatPercent(realistic / total);
+        if (total > 0) {
+          return { isToggleable: true, text: formatPercent(realistic / total), rawText: `${realistic}/${total}` };
+        }
       }
-      return item?.judge?.response || "—";
+      return asPlain(item?.judge?.response || "—");
     }
-    if (value === null || value === undefined) return "—";
-    return formatPercent(value);
+    if (value === null || value === undefined) return asPlain("—");
+    
+    // Check if the value is a { realistic, unrealistic, unknown/doubtful, successRate } struct
+    if (typeof value === "object" && typeof value.realistic === "number") {
+       const total = value.realistic + value.unrealistic + (value.unknown || value.doubtful || 0);
+       if (total > 0) return { isToggleable: true, text: formatPercent(value.realistic/total), rawText: `${value.realistic}/${total}` };
+       return asPlain(formatPercent(value.successRate));
+    }
+    return asPlain(formatPercent(value));
   }
 
-  if (value === null || value === undefined) return "—";
+  if (value === null || value === undefined) return asPlain("—");
 
-  // Handle InstantiationValueItem format { value, total }
-  if (col.isInstantiation) {
+  // Handle InstantiationValueItem format { value, total } and Coverage { value, total }
+  if (col.isInstantiation || col.isCoverage) {
     if (typeof value === "object" && "value" in value) {
       const v = Math.round(value.value);
       if (value.total === null) {
-        return `${v}/${INFINITY_SYMBOL}`;
+        return asPlain(`${v}/${INFINITY_SYMBOL}`);
       }
       const t = Math.round(value.total);
-      return `${v}/${t}`;
+      const ratio = t > 0 ? v / t : 1;
+      return { isToggleable: true, text: formatPercent(ratio), rawText: `${v}/${t}` };
     }
     // Fallback for old format (plain number)
-    return typeof value === "number"
+    return asPlain(typeof value === "number"
       ? isGeneration
         ? Math.round(value).toString()
         : value.toFixed(1)
-      : String(value);
+      : String(value));
   }
 
   // Handle MetricStat objects {errors, total} for validation columns
   if (typeof value === "object" && "errors" in value && "total" in value) {
-    const rate = value.total > 0 ? 1 - value.errors / value.total : 1;
-    return formatPercent(rate);
+    const success = value.total - value.errors;
+    const rate = value.total > 0 ? success / value.total : 1;
+    return { isToggleable: true, text: formatPercent(rate), rawText: `${success}/${value.total}` };
   }
 
-  return formatPercent(value);
+  return asPlain(formatPercent(value));
 }
 
 function getCellStyle(
@@ -146,7 +165,6 @@ function getCellStyle(
       return "";
     }
     if (value === null || value === undefined) return "";
-    // For models, color based on percentage value
     if (typeof value === "number") {
       return getColor(
         value,
@@ -154,13 +172,25 @@ function getCellStyle(
         COLOR_RANGES.validation.percent.red,
       );
     }
+    
+    // Check if the value is a { realistic, unrealistic, unknown/doubtful, successRate } struct
+    if (typeof value === "object" && typeof value.realistic === "number") {
+       const total = value.realistic + value.unrealistic + (value.unknown || value.doubtful || 0);
+       const rate = total > 0 ? value.realistic / total : 0;
+       return getColor(
+         rate,
+         COLOR_RANGES.validation.percent.green,
+         COLOR_RANGES.validation.percent.red,
+       );
+    }
+
     return "";
   }
 
   if (value === null || value === undefined) return "";
 
-  // Handle InstantiationValueItem format { value, total }
-  if (col.isInstantiation) {
+  // Handle InstantiationValueItem format { value, total } and Coverage types
+  if (col.isInstantiation || col.isCoverage) {
     if (typeof value === "object" && "value" in value) {
       if (value.total === null) {
         // Infinity denominator - always green
@@ -233,7 +263,7 @@ const isGeneration = type === "generations";
                   source,
                   item,
                 );
-                const displayValue = formatValue(
+                const display = formatValue(
                   value,
                   col,
                   isGeneration,
@@ -243,7 +273,14 @@ const isGeneration = type === "generations";
 
                 return (
                   <td style={style || undefined} data-label={col.label}>
-                    {displayValue}
+                    {display.isToggleable ? (
+                      <span class="value-toggle" title="Click to toggle display format">
+                        <span class="view-default">{display.text}</span>
+                        <span class="view-raw" style="display: none;">{display.rawText}</span>
+                      </span>
+                    ) : (
+                      display.text
+                    )}
                   </td>
                 );
               })}
@@ -397,4 +434,49 @@ const isGeneration = type === "generations";
       background: transparent;
     }
   }
+
+  /* Value Toggle Indicator */
+  .value-toggle {
+    cursor: pointer;
+    text-decoration: underline dashed;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-border);
+  }
+  .value-toggle:hover {
+    text-decoration-color: var(--color-secondary);
+  }
 </style>
+
+<script>
+  function setupToggles() {
+    const toggles = document.querySelectorAll('.value-toggle');
+    toggles.forEach(toggle => {
+      // Clean up old listeners by replacing node
+      const parent = toggle.parentNode;
+      if (parent) {
+        const clone = toggle.cloneNode(true);
+        parent.replaceChild(clone, toggle);
+      }
+    });
+
+    document.querySelectorAll('.value-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        const el = e.currentTarget as HTMLElement;
+        const defaultView = el.querySelector('.view-default') as HTMLElement;
+        const rawView = el.querySelector('.view-raw') as HTMLElement;
+        if (defaultView && rawView) {
+          if (defaultView.style.display === 'none') {
+            defaultView.style.display = 'inline';
+            rawView.style.display = 'none';
+          } else {
+            defaultView.style.display = 'none';
+            rawView.style.display = 'inline';
+          }
+        }
+      });
+    });
+  }
+
+  setupToggles();
+  document.addEventListener('astro:page-load', setupToggles);
+</script>

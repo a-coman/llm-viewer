@@ -98,11 +98,18 @@ function shouldInvertInvalidMetric(metricKey: string): boolean {
   return metricKey === "multiplicities" || metricKey === "invariants";
 }
 
+interface DisplayValue {
+  text: string;
+  style: string;
+  isToggleable?: boolean;
+  rawText?: string;
+}
+
 function getDisplayValue(
   val: any,
   type: "percent" | "count" | "currency" = "percent",
   metricKey: string = "",
-): { text: string; style: string } {
+): DisplayValue {
   if (val === undefined || val === null) return { text: "—", style: "" };
 
   if (type === "currency") {
@@ -113,17 +120,66 @@ function getDisplayValue(
     };
   }
 
-  if (typeof val === "object" && "errors" in val) {
-    const hasErrors = val.errors > 0;
-    // For "invalid" category: only multiplicities/invariants are inverted
-    // (errors expected = green), all other metrics stay normal.
-    const shouldInvert =
-      isInvalidCategory && shouldInvertInvalidMetric(metricKey);
-    const isGood = shouldInvert ? hasErrors : !hasErrors;
-    return {
-      text: `${val.errors}/${val.total}`,
-      style: getBinaryColor(isGood),
-    };
+  if (typeof val === "object") {
+    if ("errors" in val) {
+      // For "invalid" category: only multiplicities/invariants are inverted
+      // (errors expected = green), all other metrics stay normal.
+      const shouldInvert =
+        isInvalidCategory && shouldInvertInvalidMetric(metricKey);
+      
+      // Compute success fraction
+      const success = val.total - val.errors;
+      const rate = val.total > 0 ? success / val.total : 1;
+      
+      const colorVal = shouldInvert ? 1 - rate : rate;
+
+      return {
+        text: formatPercent(rate),
+        rawText: `${success}/${val.total}`,
+        style: getColor(
+          colorVal,
+          COLOR_RANGES.validation.percent.green,
+          COLOR_RANGES.validation.percent.red
+        ),
+        isToggleable: true
+      };
+    }
+
+    if ("realistic" in val && typeof val.realistic === "number") {
+      const total = val.realistic + val.unrealistic + (val.unknown || val.doubtful || 0);
+      const rate = total > 0 ? val.realistic / total : 0;
+      return {
+        text: formatPercent(rate),
+        rawText: `${val.realistic}/${total}`,
+        style: getColor(rate, COLOR_RANGES.validation.percent.green, COLOR_RANGES.validation.percent.red),
+        isToggleable: true
+      };
+    }
+
+    if ("value" in val) {
+      const v = Math.round(val.value);
+      if (val.total === null) {
+        return {
+          text: `${v}/${INFINITY_SYMBOL}`,
+          style: getBinaryColor(true),
+        };
+      }
+      const t = Math.round(val.total);
+      const ratio = t > 0 ? v / t : 1;
+      return {
+        text: formatPercent(ratio),
+        rawText: `${v}/${t}`,
+        style: getColor(ratio, COLOR_RANGES.validation.percent.green, COLOR_RANGES.validation.percent.red),
+        isToggleable: true
+      };
+    }
+
+    if ("successRate" in val && typeof val.successRate === "number") {
+      return {
+        text: formatPercent(val.successRate),
+        style: getColor(val.successRate, COLOR_RANGES.validation.percent.green, COLOR_RANGES.validation.percent.red),
+      };
+    }
   }
 
   if (typeof val === "number") {
@@ -151,7 +207,7 @@ function getDisplayValue(
 function getInstantiationDisplay(
   item: InstantiationValueItem | undefined,
   key: string,
-): { text: string; style: string } {
+): DisplayValue {
   if (!item || item.value === undefined) return { text: "—", style: "" };
 
   const value = Math.round(item.value);
@@ -169,12 +225,14 @@ function getInstantiationDisplay(
   const totalRound = Math.round(total);
   const ratio = totalRound > 0 ? value / totalRound : 1;
   return {
-    text: `${value}/${totalRound}`,
+    text: formatPercent(ratio),
+    rawText: `${value}/${totalRound}`,
     style: getColor(
       ratio,
       COLOR_RANGES.validation.percent.green,
       COLOR_RANGES.validation.percent.red,
     ),
+    isToggleable: true
   };
 }
 
@@ -283,12 +341,21 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             {["syntax", "multiplicities", "invariants"].map((key) => {
               // Check both root level and nested metrics.metrics level
               const val = metrics?.[key] ?? metrics?.metrics?.[key];
-              const { text, style } = getDisplayValue(val, "percent", key);
+              const { text, style, isToggleable, rawText } = getDisplayValue(val, "percent", key);
               const label = key.charAt(0).toUpperCase() + key.slice(1);
               return (
                 <tr>
                   <td>{label}</td>
-                  <td style={style}>{text}</td>
+                  <td style={style}>
+                    {isToggleable ? (
+                      <span class="value-toggle" title="Click to toggle display format">
+                        <span class="view-default">{text}</span>
+                        <span class="view-raw" style="display: none;">{rawText}</span>
+                      </span>
+                    ) : (
+                      text
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -385,12 +452,21 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
         <table class="metrics-table">
           <tbody>
             {Object.entries(cov).map(([key, val]) => {
-              const { text, style } = getDisplayValue(val);
+              const { text, style, isToggleable, rawText } = getDisplayValue(val);
               const label = key.charAt(0).toUpperCase() + key.slice(1);
               return (
                 <tr>
                   <td>{label}</td>
-                  <td style={style}>{text}</td>
+                  <td style={style}>
+                    {isToggleable ? (
+                      <span class="value-toggle" title="Click to toggle display format">
+                        <span class="view-default">{text}</span>
+                        <span class="view-raw" style="display: none;">{rawText}</span>
+                      </span>
+                    ) : (
+                      text
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -464,7 +540,7 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
         <table class="metrics-table">
           <tbody>
             {Object.entries(inst).map(([key, val]) => {
-              const { text, style } = getInstantiationDisplay(
+              const { text, style, isToggleable, rawText } = getInstantiationDisplay(
                 val as InstantiationValueItem,
                 key,
               );
@@ -472,7 +548,16 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
               return (
                 <tr>
                   <td>{label}</td>
-                  <td style={style}>{text}</td>
+                  <td style={style}>
+                    {isToggleable ? (
+                      <span class="value-toggle" title="Click to toggle display format">
+                        <span class="view-default">{text}</span>
+                        <span class="view-raw" style="display: none;">{rawText}</span>
+                      </span>
+                    ) : (
+                      text
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -497,8 +582,15 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
           <tbody>
             <tr>
               <td>Realism</td>
-              <td style={getDisplayValue(judge.successRate).style}>
-                {getDisplayValue(judge.successRate).text}
+              <td style={getDisplayValue(judge).style}>
+                {getDisplayValue(judge).isToggleable ? (
+                  <span class="value-toggle" title="Click to toggle display format">
+                    <span class="view-default">{getDisplayValue(judge).text}</span>
+                    <span class="view-raw" style="display: none;">{getDisplayValue(judge).rawText}</span>
+                  </span>
+                ) : (
+                  getDisplayValue(judge).text
+                )}
               </td>
             </tr>
             {judgePrice !== undefined && (
@@ -629,4 +721,49 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
   .coverage-uncovered-chips.all {
     margin-top: 0.35rem;
   }
+
+  /* Value Toggle Indicator */
+  .value-toggle {
+    cursor: pointer;
+    text-decoration: underline dashed;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-border);
+  }
+  .value-toggle:hover {
+    text-decoration-color: var(--color-secondary);
+  }
 </style>
+
+<script>
+  function setupToggles() {
+    const toggles = document.querySelectorAll('.metrics-panel .value-toggle');
+    toggles.forEach(toggle => {
+      // Clean up old listeners by replacing node
+      const parent = toggle.parentNode;
+      if (parent) {
+        const clone = toggle.cloneNode(true);
+        parent.replaceChild(clone, toggle);
+      }
+    });
+
+    document.querySelectorAll('.metrics-panel .value-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        const el = e.currentTarget as HTMLElement;
+        const defaultView = el.querySelector('.view-default') as HTMLElement;
+        const rawView = el.querySelector('.view-raw') as HTMLElement;
+        if (defaultView && rawView) {
+          if (defaultView.style.display === 'none') {
+            defaultView.style.display = 'inline';
+            rawView.style.display = 'none';
+          } else {
+            defaultView.style.display = 'none';
+            rawView.style.display = 'inline';
+          }
+        }
+      });
+    });
+  }
+
+  setupToggles();
+  document.addEventListener('astro:page-load', setupToggles);
+</script>

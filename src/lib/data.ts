@@ -310,15 +310,15 @@ function getExperimentData(experimentId?: string): ExperimentData {
   };
 }
 
-const EMPTY_COVERAGE: CoverageItem = {
-  classes: 0,
-  attributes: 0,
-  relationships: 0,
-};
-
 const EMPTY_INSTANTIATION_VALUE: InstantiationValueItem = {
   value: 0,
   total: null,
+};
+
+const EMPTY_COVERAGE: CoverageItem = {
+  classes: { ...EMPTY_INSTANTIATION_VALUE },
+  attributes: { ...EMPTY_INSTANTIATION_VALUE },
+  relationships: { ...EMPTY_INSTANTIATION_VALUE },
 };
 
 const EMPTY_INSTANTIATION: InstantiationItem = {
@@ -351,13 +351,9 @@ function rawCoverageToDisplay(
   const relationshipsInstantiated = raw?.relationships?.instantiated ?? 0;
 
   return {
-    classes: classesDefined > 0 ? classesInstantiated / classesDefined : 1,
-    attributes:
-      attributesDefined > 0 ? attributesInstantiated / attributesDefined : 1,
-    relationships:
-      relationshipsDefined > 0
-        ? relationshipsInstantiated / relationshipsDefined
-        : 1,
+    classes: { value: classesInstantiated, total: classesDefined === 0 ? null : classesDefined },
+    attributes: { value: attributesInstantiated, total: attributesDefined === 0 ? null : attributesDefined },
+    relationships: { value: relationshipsInstantiated, total: relationshipsDefined === 0 ? null : relationshipsDefined },
   };
 }
 
@@ -858,9 +854,9 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
 
   return {
     metrics: {
-      syntax: calculateRate(mExp?.metrics?.syntax),
-      multiplicities: calculateRate(mExp?.metrics?.multiplicities),
-      invariants: calculateRate(mExp?.metrics?.invariants),
+      syntax: mExp?.metrics?.syntax || createEmptyMetricStat(),
+      multiplicities: mExp?.metrics?.multiplicities || createEmptyMetricStat(),
+      invariants: mExp?.metrics?.invariants || createEmptyMetricStat(),
     },
     coverage: getCoverageMetrics(covExp),
     generations,
@@ -1086,9 +1082,9 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
 
   return {
     metrics: {
-      syntax: calculateRate(mExp?.metrics?.syntax),
-      multiplicities: calculateRate(mExp?.metrics?.multiplicities),
-      invariants: calculateRate(mExp?.metrics?.invariants),
+      syntax: mExp?.metrics?.syntax || createEmptyMetricStat(),
+      multiplicities: mExp?.metrics?.multiplicities || createEmptyMetricStat(),
+      invariants: mExp?.metrics?.invariants || createEmptyMetricStat(),
     },
     coverage: getCoverageMetrics(covExp),
     generations,
@@ -1165,7 +1161,7 @@ export function getModelData(
   }
 
   const defaultSimpleStats: ModelData["simple"] = {
-    metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
+    metrics: { syntax: createEmptyMetricStat(), multiplicities: createEmptyMetricStat(), invariants: createEmptyMetricStat() },
     coverage: { ...EMPTY_COVERAGE_METRICS },
     generations: [],
     diversity: { ...EMPTY_DIVERSITY },
@@ -1176,7 +1172,7 @@ export function getModelData(
   };
 
   const defaultCotStats: ModelData["cot"] = {
-    metrics: { syntax: 0, multiplicities: 0, invariants: 0 },
+    metrics: { syntax: createEmptyMetricStat(), multiplicities: createEmptyMetricStat(), invariants: createEmptyMetricStat() },
     coverage: { ...EMPTY_COVERAGE_METRICS },
     generations: [],
     diversity: { ...EMPTY_DIVERSITY },
@@ -1214,21 +1210,21 @@ export function getDashboardData(experimentId?: string): DashboardData {
       name: modelName as string,
       simple: {
         price: data.simple.price.price,
-        syntax: data.simple.metrics.syntax as number,
-        multiplicities: data.simple.metrics.multiplicities as number,
-        invariants: data.simple.metrics.invariants as number,
+        syntax: data.simple.metrics.syntax,
+        multiplicities: data.simple.metrics.multiplicities,
+        invariants: data.simple.metrics.invariants,
         coverage: data.simple.coverage,
         diversity: data.simple.diversity,
-        realism: data.simple.judge.successRate,
+        realism: data.simple.judge,
       },
       cot: {
         price: data.cot.price.price,
-        syntax: data.cot.metrics.syntax as number,
-        multiplicities: data.cot.metrics.multiplicities as number,
-        invariants: data.cot.metrics.invariants as number,
+        syntax: data.cot.metrics.syntax,
+        multiplicities: data.cot.metrics.multiplicities,
+        invariants: data.cot.metrics.invariants,
         coverage: data.cot.coverage,
         diversity: data.cot.diversity,
-        realism: data.cot.judge.successRate,
+        realism: data.cot.judge,
       },
     };
   }).filter((m): m is NonNullable<typeof m> => m !== null);
@@ -1263,9 +1259,9 @@ export function getDashboardData(experimentId?: string): DashboardData {
       },
       elapsedSeconds: logs?.time_seconds || 0,
       metrics: {
-        syntax: calculateRate(metrics?.syntax),
-        multiplicities: calculateRate(metrics?.multiplicities),
-        invariants: calculateRate(metrics?.invariants),
+        syntax: metrics?.syntax || createEmptyMetricStat(),
+        multiplicities: metrics?.multiplicities || createEmptyMetricStat(),
+        invariants: metrics?.invariants || createEmptyMetricStat(),
       },
       coverage: getCoverageMetrics(coverageData),
       diversity: {
@@ -1299,17 +1295,18 @@ export function getDashboardData(experimentId?: string): DashboardData {
       totalCost > 0 && minPositiveCost > 0
         ? (minPositiveCost / totalCost) * 100
         : 100;
+    const calcRate = (item: { value: number; total: number | null }) => item.total ? item.value / item.total : 1;
     const validityScore =
       average([
-        totals.metrics.syntax,
-        totals.metrics.multiplicities,
-        totals.metrics.invariants,
+        calculateRate(totals.metrics.syntax),
+        calculateRate(totals.metrics.multiplicities),
+        calculateRate(totals.metrics.invariants),
       ]) * 100;
     const coverageScore =
       average([
-        totals.coverage.coverage.classes,
-        totals.coverage.coverage.attributes,
-        totals.coverage.coverage.relationships,
+        calcRate(totals.coverage.coverage.classes),
+        calcRate(totals.coverage.coverage.attributes),
+        calcRate(totals.coverage.coverage.relationships),
       ]) * 100;
     const shannonScore = (totals.diversity.shannonAll ?? 0) * 100;
     const structuralDiversityScore =

@@ -290,9 +290,9 @@ export type DifferenceFileRoot = MetricFileRoot<
 // --- Application Domain Types (Derived/Processed) ---
 
 export interface CoverageItem {
-  classes: number;
-  attributes: number;
-  relationships: number;
+  classes: InstantiationValueItem;
+  attributes: InstantiationValueItem;
+  relationships: InstantiationValueItem;
 }
 
 export interface CoverageUncovered {
@@ -319,9 +319,9 @@ export interface CoverageMetrics {
 }
 
 export interface ModelMetrics {
-  syntax: number;
-  multiplicities: number;
-  invariants: number;
+  syntax: MetricStat;
+  multiplicities: MetricStat;
+  invariants: MetricStat;
 }
 
 export interface DiversityMetrics {
@@ -645,21 +645,21 @@ export interface DashboardData {
     name: string;
     simple: {
       price: number;
-      syntax: number;
-      multiplicities: number;
-      invariants: number;
+      syntax: MetricStat;
+      multiplicities: MetricStat;
+      invariants: MetricStat;
       coverage: CoverageMetrics;
       diversity: DiversityMetrics;
-      realism: number;
+      realism: { realistic: number; unrealistic: number; unknown: number; successRate: number };
     };
     cot: {
       price: number;
-      syntax: number;
-      multiplicities: number;
-      invariants: number;
+      syntax: MetricStat;
+      multiplicities: MetricStat;
+      invariants: MetricStat;
       coverage: CoverageMetrics;
       diversity: DiversityMetrics;
-      realism: number;
+      realism: { realistic: number; unrealistic: number; unknown: number; successRate: number };
     };
   }[];
 }
