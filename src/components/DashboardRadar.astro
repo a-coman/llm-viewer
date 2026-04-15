@@ -7,6 +7,7 @@ interface Props {
 
 const { data } = Astro.props;
 const chartId = `dashboard-radar-${Math.random().toString(36).slice(2, 10)}`;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <div class="dashboard-radar-card">
@@ -26,7 +27,7 @@ const chartId = `dashboard-radar-${Math.random().toString(36).slice(2, 10)}`;
   </div>
 </div>
 
-<script src="/llm-viewer/vendor/echarts.min.js" is:inline></script>
+<script src={baseUrl + "vendor/echarts.min.js"} is:inline></script>
 <script
   is:inline
   define:vars={{
