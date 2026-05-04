@@ -77,7 +77,10 @@ from urllib.parse import urlencode
 DEFAULT_SEED = 5764515283675  # chosen with current system.nanotime()
 TARGET_MODELS = ("gpt_4o", "gpt_5_2")
 TARGET_MODES = ("simple", "cot")
-TARGET_REALISMS = ("realistic", "unrealistic") # There's no "doubtful" realism in the current judge.json
+TARGET_REALISMS = (
+    "realistic",
+    "unrealistic",
+)  # There's no "doubtful" realism in the current judge.json
 DEFAULT_PER_BUCKET = 15
 DEFAULT_BASE_URL = "https://a-coman.github.io/llm-viewer"
 DEFAULT_REVIEWERS = ("Lola", "Dominik", "Manuel")
@@ -151,6 +154,7 @@ class Candidate:
     domain: str
     generation_id: str
     realism: str
+    judge_response: str
     url: str
     attempt_id: str | None = None
     category: str | None = None
@@ -306,6 +310,48 @@ def normalize_realism(realism: Any) -> str | None:
     return None
 
 
+def format_judge_response(judge_entry: dict[str, Any]) -> str:
+    realism = cast(dict[str, Any], judge_entry.get("realism") or {})
+    response_type = realism.get("response_type")
+    reasoning = realism.get("reasoning")
+    judge_response = judge_entry.get("judge_response")
+
+    prefix_map = {
+        "realistic": "R",
+        "unrealistic": "U",
+        "doubtful": "D",
+    }
+    prefix = prefix_map.get(str(response_type).lower())
+    reasoning_text = str(reasoning).strip() if isinstance(reasoning, str) else ""
+
+    if prefix and reasoning_text:
+        return f"{prefix}: {reasoning_text}"
+
+    if isinstance(judge_response, str):
+        response_label: str | None = None
+        why_text: str | None = None
+        for line in judge_response.splitlines():
+            line = line.strip()
+            if line.startswith("**Response**:"):
+                response_label = line.removeprefix("**Response**:").strip()
+            elif line.startswith("**Why**:"):
+                why_text = line.removeprefix("**Why**:").strip()
+
+        if response_label:
+            prefix = prefix_map.get(response_label.lower())
+            if prefix and why_text:
+                return f"{prefix}: {why_text}"
+            if prefix:
+                return prefix
+
+        cleaned = " ".join(
+            part.strip() for part in judge_response.splitlines() if part.strip()
+        )
+        return cleaned
+
+    return ""
+
+
 def build_simple_url(
     base_url: str, model_id: str, domain: str, generation_id: str
 ) -> str:
@@ -377,6 +423,7 @@ def collect_simple_candidates(
                         domain=str(domain),
                         generation_id=generation_id,
                         realism=realism,
+                        judge_response=format_judge_response(judge_generation),
                         attempt_id=attempt_id,
                         url=build_simple_url(
                             base_url, model_id, str(domain), generation_id
@@ -457,6 +504,7 @@ def collect_cot_candidates(
                             generation_id=generation_id,
                             category=str(category_name),
                             realism=realism,
+                            judge_response=format_judge_response(judge_category),
                             attempt_id=attempt_id,
                             url=build_cot_url(
                                 base_url,
@@ -677,11 +725,7 @@ def solve_weighted_sum(
 
 
 def get_group_order() -> list[tuple[str, str]]:
-    return [
-        (model_id, mode)
-        for model_id in TARGET_MODELS
-        for mode in TARGET_MODES
-    ]
+    return [(model_id, mode) for model_id in TARGET_MODELS for mode in TARGET_MODES]
 
 
 def allocate_global_counts_by_group_domain(
@@ -806,7 +850,9 @@ def allocate_file1_realistic_counts(
             domain_options: list[tuple[int, int]] = []
             for realistic_count in range(low, high + 1):
                 # Prefer preserving the global realism ratio within the file split.
-                proportional_cost = abs((3 * realistic_count) - (realistic_total * total_for_file1))
+                proportional_cost = abs(
+                    (3 * realistic_count) - (realistic_total * total_for_file1)
+                )
                 domain_options.append((realistic_count, proportional_cost))
             options_by_domain[domain] = domain_options
 
@@ -929,7 +975,9 @@ def build_file_bucket_targets(
     per_bucket: int, file_count: int
 ) -> list[dict[tuple[str, str, str], int]]:
     if file_count != OUTPUT_FILE_COUNT:
-        raise ValueError(f"Expected {OUTPUT_FILE_COUNT} output files, got {file_count}.")
+        raise ValueError(
+            f"Expected {OUTPUT_FILE_COUNT} output files, got {file_count}."
+        )
 
     base = per_bucket // file_count
     remainder = per_bucket % file_count
@@ -1107,6 +1155,7 @@ def populate_sheet(
     inline_font_factory: Any,
 ) -> None:
     reviewer_a, reviewer_b, reviewer_c = reviewers
+    column_count = 5
 
     def build_rich_text(line_parts: tuple[tuple[str, bool], ...]) -> Any:
         parts: list[Any] = []
@@ -1119,12 +1168,12 @@ def populate_sheet(
 
     guide_row = 1
     for line_parts in WORKSHEET_GUIDE_RICH_LINES:
-        sheet.append(["", "", "", ""])
+        sheet.append([""] * column_count)
         sheet.merge_cells(
             start_row=guide_row,
             start_column=1,
             end_row=guide_row,
-            end_column=4,
+            end_column=column_count,
         )
         guide_cell = sheet[f"A{guide_row}"]
 
@@ -1143,17 +1192,23 @@ def populate_sheet(
         guide_cell.alignment = alignment_factory(wrap_text=True, vertical="top")
         guide_row += 1
 
-    sheet.append(["", "", "", ""])
+    sheet.append([""] * column_count)
     header_row = guide_row + 1
     sheet.freeze_panes = f"A{header_row + 1}"
 
-    headers = ("Instance Id", reviewer_a, reviewer_b, reviewer_c)
+    headers = (
+        "Instance Id",
+        reviewer_a,
+        reviewer_b,
+        reviewer_c,
+        "Gemini 3.1 Pro",
+    )
     sheet.append(headers)
     for cell in sheet[header_row]:
         cell.font = font_factory(bold=True)
 
     for candidate in candidates:
-        sheet.append([candidate.instance_id, "", "", ""])
+        sheet.append([candidate.instance_id, "", "", "", candidate.judge_response])
 
     for row_index, candidate in enumerate(candidates, start=header_row + 1):
         cell = sheet[f"A{row_index}"]
@@ -1164,6 +1219,7 @@ def populate_sheet(
     sheet.column_dimensions["B"].width = 16
     sheet.column_dimensions["C"].width = 16
     sheet.column_dimensions["D"].width = 16
+    sheet.column_dimensions["E"].width = 64
 
 
 def write_xlsx(
