@@ -36,6 +36,8 @@ import type {
   DiversityMetrics,
   GedFileRoot,
   GedModeData,
+  GrakelFileRoot,
+  GrakelModeData,
   ShannonFileRoot,
   ShannonModeData,
   ShannonCoTCategoryEntry,
@@ -54,6 +56,7 @@ const LOGS_FILE = path.join(DATA_DIR, "logs.json");
 const COVERAGE_FILE = path.join(DATA_DIR, "coverage.json");
 const DIFFERENCE_FILE = path.join(DATA_DIR, "difference.json");
 const GED_FILE = path.join(DATA_DIR, "ged.json");
+const GRAKEL_FILE = path.join(DATA_DIR, "grakel.json");
 const SHANNON_FILE = path.join(DATA_DIR, "shannon.json");
 const JUDGE_FILE = path.join(DATA_DIR, "judge.json");
 const DATASET_DIR = path.join(DATA_DIR, "data", "dataset");
@@ -63,6 +66,7 @@ type MetricsExperimentRoot = MetricsFileRoot["experiments"][number];
 type CoverageExperimentRoot = CoverageFileRoot["experiments"][number];
 type DifferenceExperimentRoot = DifferenceFileRoot["experiments"][number];
 type GedExperimentRoot = GedFileRoot["experiments"][number];
+type GrakelExperimentRoot = GrakelFileRoot["experiments"][number];
 type ShannonExperimentRoot = ShannonFileRoot["experiments"][number];
 type JudgeExperimentRoot = JudgeFileRoot["experiments"][number];
 
@@ -72,6 +76,7 @@ type CachedFiles = {
   coverage: Map<string, CoverageExperimentRoot>;
   difference: Map<string, DifferenceExperimentRoot>;
   ged: Map<string, GedExperimentRoot>;
+  grakel: Map<string, GrakelExperimentRoot>;
   shannon: Map<string, ShannonExperimentRoot>;
   judge: Map<string, JudgeExperimentRoot>;
 };
@@ -85,6 +90,7 @@ type ExperimentData = {
   coverage: ExperimentModes<CoverageModeData> | null;
   difference: ExperimentModes<DifferenceModeData> | null;
   ged: ExperimentModes<GedModeData> | null;
+  grakel: ExperimentModes<GrakelModeData> | null;
   shannon: ExperimentModes<ShannonModeData> | null;
   judge: ExperimentModes<JudgeModeData> | null;
 };
@@ -96,6 +102,7 @@ const cachedFiles: CachedFiles = {
   coverage: new Map<string, CoverageExperimentRoot>(),
   difference: new Map<string, DifferenceExperimentRoot>(),
   ged: new Map<string, GedExperimentRoot>(),
+  grakel: new Map<string, GrakelExperimentRoot>(),
   shannon: new Map<string, ShannonExperimentRoot>(),
   judge: new Map<string, JudgeExperimentRoot>(),
 };
@@ -231,6 +238,7 @@ function loadData() {
     { path: COVERAGE_FILE, key: "coverage" },
     { path: DIFFERENCE_FILE, key: "difference" },
     { path: GED_FILE, key: "ged" },
+    { path: GRAKEL_FILE, key: "grakel" },
     { path: JUDGE_FILE, key: "judge" },
     { path: SHANNON_FILE, key: "shannon" },
   ] as const;
@@ -278,6 +286,7 @@ function getExperimentData(experimentId?: string): ExperimentData {
   const coverageRecord = cachedFiles.coverage.get(id);
   const differenceRecord = cachedFiles.difference.get(id);
   const gedRecord = cachedFiles.ged.get(id);
+  const grakelRecord = cachedFiles.grakel.get(id);
   const shannonRecord = cachedFiles.shannon.get(id);
   const judgeRecord = cachedFiles.judge.get(id);
 
@@ -301,6 +310,9 @@ function getExperimentData(experimentId?: string): ExperimentData {
       ? { simple: differenceRecord.simple, cot: differenceRecord.cot }
       : null,
     ged: gedRecord ? { simple: gedRecord.simple, cot: gedRecord.cot } : null,
+    grakel: grakelRecord
+      ? { simple: grakelRecord.simple, cot: grakelRecord.cot }
+      : null,
     shannon: shannonRecord
       ? { simple: shannonRecord.simple, cot: shannonRecord.cot }
       : null,
@@ -720,6 +732,7 @@ type ProcessCtx = {
   coverage: ExperimentData["coverage"];
   difference: ExperimentData["difference"];
   ged: ExperimentData["ged"];
+  grakel: ExperimentData["grakel"];
   shannon: ExperimentData["shannon"];
   judge: ExperimentData["judge"];
   domainLower: string;
@@ -739,6 +752,7 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
     coverage,
     difference,
     ged,
+    grakel,
     shannon,
     judge: judgeData,
     domainLower,
@@ -750,6 +764,7 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
   const modeCoverage = coverage?.simple;
   const modeDifference = difference?.simple;
   const modeGed = ged?.simple;
+  const modeGrakel = grakel?.simple;
   const modeShannon = shannon?.simple;
   const modeJudge = judgeData?.simple;
 
@@ -762,6 +777,10 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
   const covExp = findByExperimentId(modeCoverage?.experiments, logExp.id);
   const diffExp = findByExperimentId(modeDifference?.experiments, logExp.id);
   const gedExpData = findByExperimentId(modeGed?.experiments, logExp.id);
+  const grakelExpData = findByExperimentId(
+    modeGrakel?.experiments,
+    logExp.id,
+  );
   const shannonExp = findShannonExperiment(modeShannon?.experiments, logExp.id);
   const judgeExp = findByExperimentId(modeJudge?.experiments, logExp.id);
 
@@ -876,6 +895,13 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
         gedExpData?.ged?.mean != null
           ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
           : modeGed?.ged,
+      grakel:
+        grakelExpData?.grakel?.mean != null
+          ? {
+              mean: grakelExpData.grakel.mean,
+              std: grakelExpData.grakel.std ?? 0,
+            }
+          : modeGrakel?.grakel,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
@@ -888,6 +914,7 @@ function processSimpleMode(ctx: ProcessCtx): ModelData["simple"] | null {
     ),
     shannon: shannonExp?.specific || [],
     gedHeatmap: gedExpData?.ged,
+    grakelHeatmap: grakelExpData?.grakel,
   };
 }
 
@@ -898,6 +925,7 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
     coverage,
     difference,
     ged,
+    grakel,
     shannon,
     judge: judgeData,
     domainLower,
@@ -909,6 +937,7 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
   const modeCoverage = coverage?.cot;
   const modeDifference = difference?.cot;
   const modeGed = ged?.cot;
+  const modeGrakel = grakel?.cot;
   const modeShannon = shannon?.cot;
   const modeJudge = judgeData?.cot;
 
@@ -921,6 +950,10 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
   const covExp = findByExperimentId(modeCoverage?.experiments, logExp.id);
   const diffExp = findByExperimentId(modeDifference?.experiments, logExp.id);
   const gedExpData = findByExperimentId(modeGed?.experiments, logExp.id);
+  const grakelExpData = findByExperimentId(
+    modeGrakel?.experiments,
+    logExp.id,
+  );
   const shannonExp = findShannonExperiment(modeShannon?.experiments, logExp.id);
   const judgeExp = findByExperimentId(modeJudge?.experiments, logExp.id);
 
@@ -1104,6 +1137,13 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
         gedExpData?.ged?.mean != null
           ? { mean: gedExpData.ged.mean, std: gedExpData.ged.std ?? 0 }
           : modeGed?.ged,
+      grakel:
+        grakelExpData?.grakel?.mean != null
+          ? {
+              mean: grakelExpData.grakel.mean,
+              std: grakelExpData.grakel.std ?? 0,
+            }
+          : modeGrakel?.grakel,
       shannonActive: shannonSummary.active,
       shannonAll: shannonSummary.all,
       shannonActiveStd: shannonSummary.activeStd,
@@ -1116,6 +1156,7 @@ function processCotMode(ctx: ProcessCtx): ModelData["cot"] | null {
     ),
     shannon: shannonExp?.specific || [],
     gedHeatmap: gedExpData?.ged,
+    grakelHeatmap: grakelExpData?.grakel,
   };
 }
 
@@ -1199,6 +1240,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     coverage: cachedCoverage,
     difference: cachedDifference,
     ged: cachedGed,
+    grakel: cachedGrakel,
     shannon: cachedShannon,
     judge: cachedJudge,
   } = getExperimentData(experimentId);
@@ -1235,6 +1277,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
     const coverageData = cachedCoverage?.[mode];
     const differenceData = cachedDifference?.[mode];
     const gedData = cachedGed?.[mode]?.ged;
+    const grakelData = cachedGrakel?.[mode]?.grakel;
     const shannonData = cachedShannon?.[mode]?.shannon;
     const shannonActiveSummary = shannonData?.eveness_active_groups;
     const shannonAllSummary = shannonData?.eveness_all_groups;
@@ -1267,6 +1310,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
       diversity: {
         ...rawDifferenceToDisplay(differenceData?.difference),
         ged: gedData,
+        grakel: grakelData,
         shannonActive: shannonActiveSummary?.mean,
         shannonAll: shannonAllSummary?.mean,
         shannonActiveStd: shannonActiveSummary?.std,
@@ -1310,7 +1354,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
       ]) * 100;
     const shannonScore = (totals.diversity.shannonAll ?? 0) * 100;
     const structuralDiversityScore =
-      (1 - (totals.diversity.ged?.mean ?? 1)) * 100;
+      (totals.diversity.ged?.mean ?? 0) * 100;
     const attributeDiversityScore =
       average([
         totals.diversity.numeric,
@@ -1362,7 +1406,7 @@ export function getDashboardData(experimentId?: string): DashboardData {
         {
           key: "structuralDiversity",
           label: "Structural Diversity",
-          description: "1 - GED",
+          description: "normalized GED dissimilarity",
           max: 100,
         },
         {

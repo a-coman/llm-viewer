@@ -329,6 +329,7 @@ export interface DiversityMetrics {
   stringEquals: number;
   stringLv: number;
   ged?: GedSummary;
+  grakel?: GedSummary;
   shannon?: GedSummary;
   shannonActive?: number;
   shannonAll?: number;
@@ -346,7 +347,7 @@ export interface GedSummary {
 export interface GedExperimentMatrix {
   rowLabels: string[];
   columnLabels: string[];
-  values: number[][];
+  values: (number | null)[][];
   mean?: number;
   std?: number;
 }
@@ -389,6 +390,24 @@ export interface GedModeData {
 }
 
 export type GedFileRoot = MetricFileRoot<ExperimentModes<GedModeData>>;
+
+// --- GraKeL normalized dissimilarity Types ---
+
+export interface GrakelExperimentEntry {
+  experiment_id: string;
+  generations: unknown[];
+  grakel: GedExperimentMatrix;
+}
+
+export interface GrakelModeData {
+  grakel: GedSummary;
+  number_experiments: number;
+  experiments: GrakelExperimentEntry[];
+}
+
+export type GrakelFileRoot = MetricFileRoot<
+  ExperimentModes<GrakelModeData>
+>;
 
 // --- Shannon Types ---
 
@@ -616,6 +635,7 @@ export interface ModelData {
     elapsedSeconds: number;
     shannon: ShannonSpecificEntry[];
     gedHeatmap?: GedExperimentMatrix;
+    grakelHeatmap?: GedExperimentMatrix;
   };
   cot: {
     metrics: ModelMetrics;
@@ -632,6 +652,7 @@ export interface ModelData {
     elapsedSeconds: number;
     shannon: ShannonSpecificEntry[];
     gedHeatmap?: GedExperimentMatrix;
+    grakelHeatmap?: GedExperimentMatrix;
   };
 }
 

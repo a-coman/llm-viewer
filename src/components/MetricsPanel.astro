@@ -43,6 +43,7 @@ interface Metrics {
     stringEquals: number;
     stringLv: number;
     ged?: { mean: number; std: number };
+    grakel?: { mean: number; std: number };
     shannon?: { mean: number; std: number };
     shannonActive?: number;
     shannonAll?: number;
@@ -398,9 +399,17 @@ const judgeElapsedSeconds = undefined; // Temporarily hide elapsed time
             </tr>
             {div.ged && (
               <tr>
-                <td>GED</td>
-                <td style={getColor(div.ged.mean, 0.5, 0.9)}>
+                <td>GED Dissimilarity</td>
+                <td style={getColor(div.ged.mean, 1, 0)}>
                   {div.ged.mean.toFixed(3)} ± {div.ged.std.toFixed(3)}
+                </td>
+              </tr>
+            )}
+            {div.grakel && (
+              <tr>
+                <td>GraKeL Dissimilarity</td>
+                <td style={getColor(div.grakel.mean, 1, 0)}>
+                  {div.grakel.mean.toFixed(3)} ± {div.grakel.std.toFixed(3)}
                 </td>
               </tr>
             )}

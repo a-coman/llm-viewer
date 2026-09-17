@@ -58,7 +58,7 @@ const modelPanelSections = {
         <div class="tab-content active" data-content="simple">
           <div class="content-grid">
             <details class="section" open>
-              <summary class="sober-header">GED / Shannon</summary>
+              <summary class="sober-header">Structural Diversity / Shannon</summary>
               <div class="diagram-header sober-label">
                 <div class="viz-switch" data-viz-switch>
                   <button
@@ -67,6 +67,13 @@ const modelPanelSections = {
                     type="button"
                   >
                     GED
+                  </button>
+                  <button
+                    class="viz-btn"
+                    data-viz-target="grakel"
+                    type="button"
+                  >
+                    GraKeL
                   </button>
                   <button
                     class="viz-btn"
@@ -84,6 +91,19 @@ const modelPanelSections = {
                 ) : (
                   <div class="sober-empty-state">
                     <span class="sober-empty-text">No GED Data</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="viz-panel" data-viz-content="grakel">
+                {simpleData?.grakelHeatmap ? (
+                  <GedHeatmap
+                    data={simpleData.grakelHeatmap}
+                    metric="grakel"
+                  />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">No GraKeL Data</span>
                   </div>
                 )}
               </div>
@@ -133,7 +153,7 @@ const modelPanelSections = {
         <div class="tab-content" data-content="cot">
           <div class="content-grid">
             <details class="section" open>
-              <summary class="sober-header">GED / Shannon</summary>
+              <summary class="sober-header">Structural Diversity / Shannon</summary>
               <div class="diagram-header sober-label">
                 <div class="viz-switch" data-viz-switch>
                   <button
@@ -142,6 +162,13 @@ const modelPanelSections = {
                     type="button"
                   >
                     GED
+                  </button>
+                  <button
+                    class="viz-btn"
+                    data-viz-target="grakel"
+                    type="button"
+                  >
+                    GraKeL
                   </button>
                   <button
                     class="viz-btn"
@@ -159,6 +186,16 @@ const modelPanelSections = {
                 ) : (
                   <div class="sober-empty-state">
                     <span class="sober-empty-text">No GED Data</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="viz-panel" data-viz-content="grakel">
+                {cotData?.grakelHeatmap ? (
+                  <GedHeatmap data={cotData.grakelHeatmap} metric="grakel" />
+                ) : (
+                  <div class="sober-empty-state">
+                    <span class="sober-empty-text">No GraKeL Data</span>
                   </div>
                 )}
               </div>
@@ -220,7 +257,11 @@ const modelPanelSections = {
     const initialState = getViewerState(window.location.search);
     const initialTab = initialState.mode;
     const initialViz =
-      initialState.view === QUERY_VIEWS.shannonGraph ? "shannon" : "ged";
+      initialState.view === QUERY_VIEWS.grakelGraph
+        ? "grakel"
+        : initialState.view === QUERY_VIEWS.shannonGraph
+          ? "shannon"
+          : "ged";
 
     function setTab(tabName: string) {
       document.documentElement.setAttribute("data-mode", tabName);
@@ -277,9 +318,11 @@ const modelPanelSections = {
           const url = new URL(window.location.href);
           applyViewerQueryToUrl(url, {
             view:
-              target === "shannon"
-                ? QUERY_VIEWS.shannonGraph
-                : QUERY_VIEWS.instanceDiagram,
+              target === "grakel"
+                ? QUERY_VIEWS.grakelGraph
+                : target === "shannon"
+                  ? QUERY_VIEWS.shannonGraph
+                  : QUERY_VIEWS.instanceDiagram,
           });
           window.history.replaceState({}, "", url.toString());
         }

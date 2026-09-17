@@ -44,6 +44,7 @@ export const QUERY_AGENTS = {
 
 export const QUERY_VIEWS = {
   instanceDiagram: "instance-diagram",
+  grakelGraph: "grakel-graph",
   shannonGraph: "shannon-graph",
 } as const;
 
@@ -124,14 +125,16 @@ export const METRIC_EXPLANATIONS = {
     description: [
       "Measures the variability of the generated instances. ",
       "Attributes (NumericEquals, StringEquals, StringLv): It identifies how much the LLM repeats specific values versus generating unique data points across instances (100%: Diverse, 0%: Repetitive). We group all generated attributes into bags (numeric and string) and then perform pairwise comparisons between every element to obtain. ",
-      "Structure (GED): Measures the Graph Edit Distance (GED) similarity between instances. ",
+      "Structure (GED): Measures normalized Graph Edit Distance dissimilarity between instances. ",
+      "Structure (GraKeL): Measures graph-kernel dissimilarity between instances. ",
       "Distribution (Shannon): Measures the entropy and evenness (balanced distribution) of the generated enum values."
     ],
     examples: [
       "NumericEquals = Total number of numeric attribute pairs with different values / Total number of possible pairs (n * (n - 1) / 2)",
       "StringEquals = Total number of string attribute pairs that are NOT exactly identical / Total number of possible pairs (n * (n - 1) / 2)",
       "StringLv = Sum of (Levenshtein Distance(a, b) / max(length(a), length(b))) for all string pairs / Total number of possible pairs (n * (n - 1) / 2)",
-      "GED = Similarity = 1 - (GED / (0.5 * (GED_to_empty_A + GED_to_empty_B))). 1 = red = identical graphs, <=0.5 = green = different graphs. We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
+      "GED = Normalized dissimilarity = GED / (0.5 * (GED_to_empty_A + GED_to_empty_B)). 0 = red = identical graphs; 1 = green = maximally different under this normalization. We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
+      "GraKeL = Normalized dissimilarity = sqrt(max(0, 1 - normalized kernel similarity)). 0 = red = structurally identical according to the kernel; values closer to 1 = green = more structurally different. Undefined comparisons remain N/A: they are not replaced by 0 or 1 and are excluded from mean and standard deviation.",
       "Shannon (Active) = Entropy / log2(Number of unique groups actually generated). Measures how evenly the generated values are distributed, considering only the categories the LLM actually used.",
       "Shannon (All) = Entropy / log2(Total number of valid groups defined in the model). Measures how evenly the generated values are distributed against the full spectrum of all possible valid options defined in the .use file.",
     ],
@@ -167,13 +170,13 @@ export const METRIC_EXPLANATIONS = {
   },
 
   ged: {
-    title: "GED Similarity",
+    title: "GED Dissimilarity",
     description:
-      "Measures the Graph Edit Distance (GED) similarity between instances",
+      "Measures normalized Graph Edit Distance (GED) dissimilarity between instances",
     examples: [
-      "Similarity = 1 - (GED / (0.5 * (GED_to_empty_A + GED_to_empty_B)))",
-      "1 = red = identical graphs",
-      "<=0.5 = green = different graphs",
+      "Dissimilarity = GED / (0.5 * (GED_to_empty_A + GED_to_empty_B))",
+      "0 = red = identical graphs",
+      "1 = green = maximally different under this normalization",
       "We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
     ],
   },

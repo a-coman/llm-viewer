@@ -5,23 +5,27 @@ import type { GedExperimentMatrix } from "../lib/types";
 interface Props {
   data: GedExperimentMatrix;
   title?: string;
+  metric?: "ged" | "grakel";
 }
 
-const { data, title } = Astro.props;
+const { data, title, metric = "ged" } = Astro.props;
+const metricLabel =
+  metric === "grakel" ? "GraKeL dissimilarity" : "GED dissimilarity";
 
-// GED is symmetric, so we use rowLabels for axes
+// Both graph-distance matrices are symmetric, so we use rowLabels for axes.
 const labels = data.rowLabels;
 const matrix = data.values;
 
-function getCellColor(val: number, i: number, j: number): string {
+function getCellColor(val: number | null, i: number, j: number): string {
   // Lower triangle (i > j) + Diagonal (i === j) -> White (Clean skip)
   if (i >= j) {
     return "background-color: #ffffff;";
   }
-  // Upper triangle -> Color scale
-  // Green at 0.5 or lower, Red at 1.0
-  // getColor(val, greenPos, redPos)
-  return getColor(val, 0.5, 1);
+  if (val === null) {
+    return "background: repeating-linear-gradient(135deg, #f3f4f6, #f3f4f6 3px, #e5e7eb 3px, #e5e7eb 6px);";
+  }
+  // Both metrics are dissimilarities: red at 0, green at 1.
+  return getColor(val, 1, 0);
 }
 ---
 
@@ -55,17 +59,23 @@ function getCellColor(val: number, i: number, j: number): string {
                 <td
                   class:list={[
                     "cell",
+                    i >= j && "cell-skipped",
+                    i < j && val === null && "cell-missing",
                     j === 0 && "cell-left-edge",
                     j === labels.length - 1 && "cell-right-edge",
                   ]}
                   style={getCellColor(val, i, j)}
-                  data-value={val.toFixed(3)}
+                  data-value={val === null ? "N/A" : val.toFixed(3)}
+                  aria-label={`${metricLabel}: ${labels[i]} versus ${labels[j]} = ${val === null ? "not available" : val.toFixed(3)}`}
                 >
                   <span class="tooltip">
                     <span class="tooltip-comparison">
                       {labels[i]} ↔ {labels[j]}
                     </span>
-                    <span class="tooltip-value">{val.toFixed(3)}</span>
+                    <span class="tooltip-metric">{metricLabel}</span>
+                    <span class="tooltip-value">
+                      {val === null ? "N/A" : val.toFixed(3)}
+                    </span>
                   </span>
                 </td>
               ))}
@@ -161,6 +171,18 @@ function getCellColor(val: number, i: number, j: number): string {
     height: 21px;
   }
 
+  .cell-skipped {
+    cursor: default;
+  }
+
+  .cell-skipped .tooltip {
+    display: none !important;
+  }
+
+  .cell-missing {
+    cursor: help;
+  }
+
   .tooltip {
     display: none;
     flex-direction: column;
@@ -183,6 +205,11 @@ function getCellColor(val: number, i: number, j: number): string {
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
+  }
+
+  .tooltip-metric {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.68);
   }
 
   .tooltip-value {
