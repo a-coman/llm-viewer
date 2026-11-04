@@ -1,13 +1,15 @@
-import re
 import json
-import os
 import math
-from typing import Dict, List, Tuple, Optional, Any
+import os
+import re
+from typing import Any
+
+Matrix = list[list[float | None]]
 
 
 def get_experiment_info(
-    loaded_data: Dict, experiment_id: str
-) -> Tuple[Optional[str], List]:
+    loaded_data: dict, experiment_id: str
+) -> tuple[str | None, list]:
     """
     Finds the experiment by ID in the already loaded JSON data.
     Returns (experiment_type, generations_data)
@@ -39,199 +41,208 @@ def get_experiment_info(
     return None, []
 
 
-def normalize_category_name(name: str) -> str:
-    """Remove trailing digits from category name: baseline1 -> baseline"""
-    return re.sub(r"\d+$", "", name)
+def normalize_table_label(label: str) -> str:
+    """Convert report labels to the compact heatmap labels (output1, invalid2)."""
+    normalized = label.strip().strip("*").lower()
+    normalized = normalized.removesuffix(".soil")
+    match = re.fullmatch(r"gen(\d+)/([^/]+)", normalized)
+    if match:
+        generation_id, output_name = match.groups()
+        return f"{output_name}{generation_id}"
+    return normalized
 
 
-def parse_adj_edge_label_section(text: str, exp_type: str) -> Dict[str, Dict]:
-    """
-    Parse the # Adj, edge, label section.
-    Returns a dict mapping output label to {adjacency, labels, edges}
-
-    For Simple: output1, output2, ...
-    For CoT: invalid1, edge2, boundary3, baseline4, complex5, ...
-    """
-    result = {}
-
-    # Find the section between # Adj, edge, label and the next # header
-    adj_section_match = re.search(
-        r"# Adj, edge, label\s*\n```\n(.*?)```", text, re.DOTALL
+def extract_experiment_metadata(report_path: str) -> tuple[str, str, str]:
+    path_parts = report_path.split(os.sep)
+    dataset_index = path_parts.index("dataset")
+    model_id = path_parts[dataset_index + 1].lower()
+    experiment_type = path_parts[dataset_index + 2].lower()
+    domain_name = path_parts[dataset_index + 3].lower()
+    timestamp = next(
+        (
+            part
+            for part in path_parts[dataset_index + 4 :]
+            if re.fullmatch(r"\d{2}-\d{2}-\d{4}--\d{2}-\d{2}-\d{2}", part)
+        ),
+        "unknown",
     )
-    if not adj_section_match:
-        return result
+    return model_id, experiment_type, f"{experiment_type}-{domain_name}-{timestamp}"
 
-    section_content = adj_section_match.group(1)
 
-    # Pattern to match: Adj1-output.soil: [[...]]
-    # or: Adj1-invalid.soil: [[...]]
-    adj_pattern = re.compile(
-        r"^Adj(\d+)-([a-zA-Z]+)\.soil:\s*(\[\[.*?\]\])", re.MULTILINE
+def parse_graph_data(text: str, labels: list[str]) -> dict[str, dict[str, str]]:
+    """Parse adjacency, labels, and edges from v2 and legacy GED reports."""
+    section_match = re.search(
+        r"# Adj(?:acency)?, edges?, and labels?\s*\n```(?:text)?\n(.*?)```",
+        text,
+        re.DOTALL | re.IGNORECASE,
     )
-    labels_pattern = re.compile(
-        r"^Labels(\d+)-([a-zA-Z]+)\.soil:\s*(\{.*?\})", re.MULTILINE
-    )
-    edges_pattern = re.compile(
-        r"^Edges(\d+)-([a-zA-Z]+)\.soil:\s*(\[.*?\])", re.MULTILINE
-    )
+    if not section_match:
+        return {}
 
-    # Extract all adjacency matrices
-    adj_matches = adj_pattern.findall(section_content)
-    labels_matches = labels_pattern.findall(section_content)
-    edges_matches = edges_pattern.findall(section_content)
+    section = section_match.group(1)
+    v2_patterns = {
+        "adjacency": re.compile(
+            r"^Adj-gen(\d+)/([a-zA-Z]+)\.soil:\s*(\[\[.*?\]\])", re.MULTILINE
+        ),
+        "labels": re.compile(
+            r"^Labels-gen(\d+)/([a-zA-Z]+)\.soil:\s*(\{.*?\})", re.MULTILINE
+        ),
+        "edges": re.compile(
+            r"^Edges-gen(\d+)/([a-zA-Z]+)\.soil:\s*(\[.*?\])", re.MULTILINE
+        ),
+    }
+    legacy_patterns = {
+        "adjacency": re.compile(
+            r"^Adj(\d+)(?:-([a-zA-Z]+)\.soil)?:\s*(\[\[.*?\]\])", re.MULTILINE
+        ),
+        "labels": re.compile(
+            r"^Labels(\d+)(?:-([a-zA-Z]+)\.soil)?:\s*(\{.*?\})", re.MULTILINE
+        ),
+        "edges": re.compile(
+            r"^Edges(\d+)(?:-([a-zA-Z]+)\.soil)?:\s*(\[.*?\])", re.MULTILINE
+        ),
+    }
 
-    # Build dict indexed by (number, category)
-    data_by_key = {}
+    result: dict[str, dict[str, str]] = {}
 
-    for num, category, adj_str in adj_matches:
-        category = category.lower()
-        key = (num, category)
-        if key not in data_by_key:
-            data_by_key[key] = {}
-        data_by_key[key]["adjacency"] = adj_str
+    def add_entry(key: str, field: str, value: str) -> None:
+        result.setdefault(key, {})[field] = value
 
-    for num, category, labels_str in labels_matches:
-        category = category.lower()
-        key = (num, category)
-        if key not in data_by_key:
-            data_by_key[key] = {}
-        data_by_key[key]["labels"] = labels_str
+    for field, pattern in v2_patterns.items():
+        for generation_id, category, value in pattern.findall(section):
+            add_entry(f"{category.lower()}{generation_id}", field, value)
 
-    for num, category, edges_str in edges_matches:
-        category = category.lower()
-        key = (num, category)
-        if key not in data_by_key:
-            data_by_key[key] = {}
-        data_by_key[key]["edges"] = edges_str
-
-    # Convert to output format
-    for (num, category), data in data_by_key.items():
-        # Create label like "output1" or "invalid1"
-        label = f"{category}{num}".lower()
-        result[label] = {
-            "adjacency": data.get("adjacency", ""),
-            "labels": data.get("labels", ""),
-            "edges": data.get("edges", ""),
-        }
+    for field, pattern in legacy_patterns.items():
+        for number, category, value in pattern.findall(section):
+            if category:
+                key = f"{category.lower()}{number}"
+            else:
+                ordinal = int(number) - 1
+                key = (
+                    labels[ordinal] if 0 <= ordinal < len(labels) else f"output{number}"
+                )
+            add_entry(key, field, value)
 
     return result
 
 
-def parse_normalized_ged_table(text: str) -> Tuple[List[str], List[List[float]]]:
-    """
-    Parse the # Normalized GED 2D table markdown table.
-    Returns (labels, symmetric_matrix as 2D list)
-    """
-    # Find the normalized GED table section
+def parse_markdown_matrix(
+    text: str, heading: str
+) -> tuple[list[str], list[str], Matrix]:
+    """Parse an upper-triangular markdown matrix and make it symmetric."""
     table_match = re.search(
-        r"# Normalized GED 2D table:\s*\n(.*?)(?=\n#|\Z)", text, re.DOTALL
+        rf"^# {re.escape(heading)}:\s*\n(.*?)(?=\n#|\Z)",
+        text,
+        re.DOTALL | re.MULTILINE,
     )
     if not table_match:
-        return [], []
+        return [], [], []
 
-    table_text = table_match.group(1).strip()
-    lines = table_text.split("\n")
-
+    lines = [line for line in table_match.group(1).splitlines() if line.strip()]
     if len(lines) < 3:
-        return [], []
+        return [], [], []
 
-    # First line is header with column labels
-    header_line = lines[0]
-    # Split by | and clean
-    header_parts = [p.strip() for p in header_line.split("|") if p.strip()]
-    # The first column in header is empty/whitespace ("|       |"), so it is filtered out by if p.strip()
-    # Thus header_parts contains only the labels.
-    labels = [h.lower() for h in header_parts]
+    header_parts = [part.strip() for part in lines[0].strip().strip("|").split("|")]
+    raw_labels = header_parts[1:]
+    labels = [normalize_table_label(label) for label in raw_labels]
+    size = len(labels)
+    matrix: Matrix = [[None for _ in range(size)] for _ in range(size)]
 
-    n = len(labels)
-    matrix = [
-        [1.0 for _ in range(n)] for _ in range(n)
-    ]  # Initialize with 1s (diagonal)
+    row_index = 0
+    for line in lines[2:]:
+        if not line.lstrip().startswith("|") or row_index >= size:
+            continue
 
-    # Parse data rows (skip header and separator)
-    data_lines = [line for line in lines[2:] if line.strip() and "---" not in line]
+        parts = [part.strip() for part in line.strip().strip("|").split("|")]
+        if len(parts) < 2:
+            continue
 
-    for row_idx, line in enumerate(data_lines):
-        if row_idx >= n:
-            break
+        cells = parts[1:]
+        if len(cells) < size:
+            cells.extend([""] * (size - len(cells)))
 
-        parts = [p.strip() for p in line.split("|")]
-        # Filter out empty parts and row label (first non-empty)
-        values = []
-        for p in parts:
-            if not p or p.startswith("**"):
+        for column_index, cell in enumerate(cells[:size]):
+            if not cell or cell.lower() == "nan":
                 continue
-            # Try to parse as float
             try:
-                values.append(float(p))
+                value = float(cell)
             except ValueError:
-                values.append(None)  # Empty cell
+                continue
+            if not math.isfinite(value):
+                continue
+            matrix[row_index][column_index] = value
+            matrix[column_index][row_index] = value
 
-        # The upper triangle values start at column row_idx
-        # In the table, row i has values from column i onwards
-        col_idx = row_idx
-        for val in values:
-            if col_idx < n and val is not None:
-                matrix[row_idx][col_idx] = val
-                matrix[col_idx][row_idx] = val  # Symmetric
-            col_idx += 1
+        row_index += 1
 
-    return labels, matrix
+    return raw_labels, labels, matrix
 
 
-def compute_mean_std_from_matrix(matrix: List[List[float]]) -> Dict[str, float]:
-    """
-    Compute mean and std from upper triangle of symmetric matrix (excluding diagonal).
-    """
-    if not matrix:
+def similarity_to_dissimilarity_matrix(similarity_matrix: Matrix) -> Matrix:
+    """Convert legacy normalized GED similarity to diversity (0=same, 1=different)."""
+    return [
+        [round(1.0 - value, 6) if value is not None else None for value in row]
+        for row in similarity_matrix
+    ]
+
+
+def round_matrix(matrix: Matrix) -> Matrix:
+    return [
+        [round(value, 6) if value is not None else None for value in row]
+        for row in matrix
+    ]
+
+
+def matrix_from_json(raw_matrix: Any) -> Matrix:
+    if not isinstance(raw_matrix, list) or not raw_matrix:
+        return []
+
+    size = len(raw_matrix)
+    matrix: Matrix = [[None for _ in range(size)] for _ in range(size)]
+    for row_index, row in enumerate(raw_matrix):
+        if not isinstance(row, list):
+            continue
+        for column_index, cell in enumerate(row[:size]):
+            if cell is None:
+                continue
+            try:
+                value = float(cell)
+            except (TypeError, ValueError):
+                continue
+            if not math.isfinite(value):
+                continue
+            matrix[row_index][column_index] = value
+    return round_matrix(matrix)
+
+
+def compute_mean_std_from_matrix(matrix: Matrix) -> dict[str, float]:
+    """Compute population mean/std from finite upper-triangle values."""
+    pairwise_values = [
+        value
+        for row_index, row in enumerate(matrix)
+        for column_index, value in enumerate(row)
+        if column_index > row_index and value is not None
+    ]
+    if not pairwise_values:
         return {"mean": 0.0, "std": 0.0}
 
-    n = len(matrix)
-    if n < 2:
-        return {"mean": 0.0, "std": 0.0}
-
-    # Get upper triangle values (excluding diagonal)
-    upper_triangle = []
-    for i in range(n):
-        for j in range(i + 1, n):
-            upper_triangle.append(matrix[i][j])
-
-    if len(upper_triangle) == 0:
-        return {"mean": 0.0, "std": 0.0}
-
-    # Compute mean
-    mean = sum(upper_triangle) / len(upper_triangle)
-
-    # Compute standard deviation
-    variance = sum((x - mean) ** 2 for x in upper_triangle) / len(upper_triangle)
-    std = math.sqrt(variance)
-
-    return {"mean": round(mean, 6), "std": round(std, 6)}
+    mean = sum(pairwise_values) / len(pairwise_values)
+    variance = sum((value - mean) ** 2 for value in pairwise_values) / len(
+        pairwise_values
+    )
+    return {"mean": round(mean, 6), "std": round(math.sqrt(variance), 6)}
 
 
-def extract_ged_table_values(
-    matrix: List[List[float]], labels: List[str]
-) -> Dict[str, Any]:
-    """
-    Extract values for the GED table in the output format.
-    Returns rowLabels, columnLabels, and values (2D matrix)
-    """
-    n = len(labels)
-
-    # Create the 2D matrix with rounded values
-    values = []
-    for i in range(n):
-        row = []
-        for j in range(n):
-            val = matrix[i][j]
-            row.append(round(val, 6) if val is not None else None)
-        values.append(row)
-
-    return {"rowLabels": labels, "columnLabels": labels, "values": values}
+def extract_ged_table_values(matrix: Matrix, labels: list[str]) -> dict[str, Any]:
+    return {
+        "rowLabels": labels,
+        "columnLabels": labels,
+        "values": round_matrix(matrix),
+    }
 
 
 def get_attempt_id(
-    generations_data: List, gen_id: str, category_name: Optional[str] = None
+    generations_data: list, gen_id: str, category_name: str | None = None
 ) -> str:
     """
     Find the successful attempt ID from logs.json generations data.
@@ -262,249 +273,250 @@ def get_attempt_id(
     return "1"
 
 
-def parse_ged_markdown(ged_path: str, loaded_experiments_data: Dict) -> Dict:
-    """
-    Main parsing function for GED markdown files.
-    """
-    with open(ged_path, "r", encoding="utf-8") as f:
-        content = f.read()
+def parse_label_identity(
+    raw_label: str, normalized_label: str, position: int, experiment_type: str
+) -> tuple[str, str | None]:
+    path_match = re.fullmatch(r"gen(\d+)/([^/]+)", raw_label.lower())
+    if path_match:
+        generation_id, category = path_match.groups()
+        return generation_id, None if category == "output" else category
 
-    # Extract experiment metadata from path
-    path_parts = ged_path.split(os.sep)
-    try:
-        dataset_idx = path_parts.index("dataset")
-        type_name = path_parts[dataset_idx + 2].lower()
-        domain_name = path_parts[dataset_idx + 3].lower()
+    if experiment_type == "cot":
+        category_match = re.match(r"([a-zA-Z]+)", normalized_label)
+        category = category_match.group(1).lower() if category_match else "unknown"
+        return str(position // 5 + 1), category
 
-        timestamp_dir = "unknown"
-        for part in path_parts[dataset_idx + 4 :]:
-            if re.match(r"^\d{2}-\d{2}-\d{4}--\d{2}-\d{2}-\d{2}$", part):
-                timestamp_dir = part
-                break
+    generation_match = re.search(r"(\d+)$", normalized_label)
+    generation_id = generation_match.group(1) if generation_match else str(position + 1)
+    return generation_id, None
 
-        experiment_id = f"{type_name}-{domain_name}-{timestamp_dir}".lower()
-    except Exception:
-        experiment_id = "unknown"
 
-    # Get structure from logs.json
-    exp_type, generations_data = get_experiment_info(
-        loaded_experiments_data, experiment_id
-    )
+def build_generations(
+    raw_labels: list[str],
+    labels: list[str],
+    graph_data: dict[str, dict[str, str]],
+    experiment_type: str,
+    generations_data: list,
+) -> list[dict[str, Any]]:
+    by_generation: dict[str, dict[str, Any]] = {}
 
-    if exp_type is None:
-        exp_type = "simple" if "/simple/" in ged_path.lower() else "cot"
+    for position, (raw_label, label) in enumerate(zip(raw_labels, labels)):
+        generation_id, category = parse_label_identity(
+            raw_label, label, position, experiment_type
+        )
+        graph = graph_data.get(label, {})
+        graph_payload = {
+            "adjacency": graph.get("adjacency", ""),
+            "labels": graph.get("labels", ""),
+            "edges": graph.get("edges", ""),
+        }
 
-    # Parse adj/edge/label section
-    ged_data = parse_adj_edge_label_section(content, exp_type)
-
-    # Parse normalized GED table
-    labels, matrix = parse_normalized_ged_table(content)
-
-    # Compute mean/std
-    ged_stats = compute_mean_std_from_matrix(matrix)
-
-    # Build generations structure
-    result_generations = []
-
-    if exp_type == "cot":
-        # CoT: 6 generations, 5 categories each
-        # Labels are: invalid1, edge2, boundary3, baseline4, complex5, invalid6, ...
-        category_order = ["invalid", "edge", "boundary", "baseline", "complex"]
-
-        # Determine number of generations from labels
-        num_categories = len(category_order)
-        num_generations = len(labels) // num_categories if labels else 6
-
-        for gen_idx in range(num_generations):
-            gen_id = str(gen_idx + 1)
-            categories_list = []
-
-            for cat_idx, cat_name in enumerate(category_order):
-                # Label index in the full list
-                label_idx = gen_idx * num_categories + cat_idx
-                if label_idx < len(labels):
-                    output_label = labels[label_idx].lower()
-                else:
-                    output_label = f"{cat_name}{gen_idx + 1}"
-
-                # Get GED data for this output
-                ged_info = ged_data.get(
-                    output_label, {"adjacency": "", "labels": "", "edges": ""}
-                )
-                # Get attempt ID
-                attempt_id = get_attempt_id(generations_data, gen_id, cat_name)
-
-                categories_list.append(
-                    {
-                        "name": cat_name,
-                        "attempt_id": attempt_id,
-                        "ged": {
-                            "adjacency": ged_info.get("adjacency", ""),
-                            "labels": ged_info.get("labels", ""),
-                            "edges": ged_info.get("edges", ""),
-                        },
-                    }
-                )
-
-            result_generations.append(
-                {"generation_id": gen_id, "categories": categories_list}
+        if experiment_type == "cot" and category:
+            generation = by_generation.setdefault(
+                generation_id,
+                {"generation_id": generation_id, "categories": []},
             )
-
-    else:
-        # Simple: 30 generations, each is "outputN"
-        for gen_idx, label in enumerate(labels):
-            gen_id = str(gen_idx + 1)
-
-            # Get GED data
-            ged_info = ged_data.get(
-                label.lower(), {"adjacency": "", "labels": "", "edges": ""}
-            )
-
-            # Get attempt ID
-            attempt_id = get_attempt_id(generations_data, gen_id)
-
-            result_generations.append(
+            generation["categories"].append(
                 {
-                    "generation_id": gen_id,
-                    "attempt_id": attempt_id,
-                    "ged": {
-                        "adjacency": ged_info.get("adjacency", ""),
-                        "labels": ged_info.get("labels", ""),
-                        "edges": ged_info.get("edges", ""),
-                    },
+                    "name": category,
+                    "attempt_id": get_attempt_id(
+                        generations_data, generation_id, category
+                    ),
+                    "ged": graph_payload,
                 }
             )
+        else:
+            by_generation[generation_id] = {
+                "generation_id": generation_id,
+                "attempt_id": get_attempt_id(generations_data, generation_id),
+                "ged": graph_payload,
+            }
 
-    # Build experiment-level GED table values
-    ged_table = (
-        extract_ged_table_values(matrix, labels)
-        if len(labels) > 0
-        else {"rowLabels": [], "columnLabels": [], "values": []}
+    return list(by_generation.values())
+
+
+def labels_from_items(items: list[Any]) -> tuple[list[str], list[str]]:
+    raw_labels = []
+    labels = []
+    for item in items:
+        raw = str(item)
+        if raw.lower().endswith(".soil"):
+            raw = raw[: -len(".soil")]
+        raw_labels.append(raw)
+        labels.append(normalize_table_label(raw))
+    return raw_labels, labels
+
+
+def parse_ged_v2(json_path: str, loaded_experiments_data: dict) -> dict[str, Any]:
+    with open(json_path, encoding="utf-8") as file:
+        payload = json.load(file)
+
+    markdown_path = os.path.join(os.path.dirname(json_path), "ged_v2.md")
+    markdown = ""
+    if os.path.exists(markdown_path):
+        with open(markdown_path, encoding="utf-8") as file:
+            markdown = file.read()
+
+    model_id, path_experiment_type, experiment_id = extract_experiment_metadata(
+        json_path
     )
+    experiment_type, generations_data = get_experiment_info(
+        loaded_experiments_data, experiment_id
+    )
+    experiment_type = experiment_type or path_experiment_type
+
+    raw_labels, labels = labels_from_items(payload.get("items", []))
+    matrix = matrix_from_json(payload.get("diversity"))
+    if not matrix and markdown:
+        raw_labels, labels, matrix = parse_markdown_matrix(
+            markdown, "Normalized GED diversity table"
+        )
+
+    graph_data = parse_graph_data(markdown, labels)
+    stats = compute_mean_std_from_matrix(matrix)
 
     return {
+        "model_id": model_id,
         "experiment_id": experiment_id,
-        "generations": result_generations,
-        "ged": ged_table,
-        "ged_stats": ged_stats,
+        "experiment_type": experiment_type,
+        "generations": build_generations(
+            raw_labels,
+            labels,
+            graph_data,
+            experiment_type,
+            generations_data,
+        ),
+        "ged": extract_ged_table_values(matrix, labels),
+        "ged_stats": stats,
     }
 
 
-if __name__ == "__main__":
+def parse_ged_legacy(md_path: str, loaded_experiments_data: dict) -> dict[str, Any]:
+    with open(md_path, encoding="utf-8") as file:
+        content = file.read()
+
+    model_id, path_experiment_type, experiment_id = extract_experiment_metadata(md_path)
+    experiment_type, generations_data = get_experiment_info(
+        loaded_experiments_data, experiment_id
+    )
+    experiment_type = experiment_type or path_experiment_type
+
+    raw_labels, labels, similarity_matrix = parse_markdown_matrix(
+        content, "Normalized GED 2D table"
+    )
+    matrix = similarity_to_dissimilarity_matrix(similarity_matrix)
+    graph_data = parse_graph_data(content, labels)
+    stats = compute_mean_std_from_matrix(matrix)
+
+    return {
+        "model_id": model_id,
+        "experiment_id": experiment_id,
+        "experiment_type": experiment_type,
+        "generations": build_generations(
+            raw_labels,
+            labels,
+            graph_data,
+            experiment_type,
+            generations_data,
+        ),
+        "ged": extract_ged_table_values(matrix, labels),
+        "ged_stats": stats,
+    }
+
+
+def discover_ged_reports(dataset_root: str) -> list[tuple[str, str]]:
+    reports: list[tuple[str, str]] = []
+    if not os.path.isdir(dataset_root):
+        return reports
+
+    for root, _, filenames in os.walk(dataset_root):
+        if "ged_v2.json" in filenames:
+            reports.append(("v2", os.path.join(root, "ged_v2.json")))
+        elif "ged_wl.md" in filenames:
+            reports.append(("legacy", os.path.join(root, "ged_wl.md")))
+    reports.sort(key=lambda item: item[1])
+    return reports
+
+
+def aggregate_model_stats(model_data: dict[str, Any], mode: str) -> None:
+    means = model_data[f"{mode}_means"]
+    if not means:
+        return
+
+    mean = sum(means) / len(means)
+    variance = sum((value - mean) ** 2 for value in means) / len(means)
+    model_data[mode]["ged"] = {
+        "mean": round(mean, 6),
+        "std": round(math.sqrt(variance), 6),
+    }
+
+
+def main() -> None:
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
-    target_json_source = os.path.join(project_root, "public", "logs.json")
 
+    logs_path = os.path.join(project_root, "public", "logs.json")
     loaded_data = {}
-    if os.path.exists(target_json_source):
-        with open(target_json_source, "r", encoding="utf-8") as f:
-            loaded_data = json.load(f)
+    if os.path.exists(logs_path):
+        with open(logs_path, encoding="utf-8") as file:
+            loaded_data = json.load(file)
 
     dataset_root = os.path.join(project_root, "public", "data", "dataset")
-    files = []
-    if os.path.isdir(dataset_root):
-        for root, _, filenames in os.walk(dataset_root):
-            if "ged_wl.md" in filenames:
-                files.append(os.path.join(root, "ged_wl.md"))
+    output_by_model: dict[str, dict[str, Any]] = {}
 
-    files.sort()
+    for source, report_path in discover_ged_reports(dataset_root):
+        try:
+            if source == "v2":
+                result = parse_ged_v2(report_path, loaded_data)
+            else:
+                result = parse_ged_legacy(report_path, loaded_data)
+        except (OSError, ValueError, IndexError, KeyError, TypeError) as error:
+            print(f"Error processing GED {report_path}: {error}")
+            continue
 
-    output_by_model = {}
+        mode = "cot" if result["experiment_type"] == "cot" else "simple"
+        model_id = result["model_id"] or "unknown"
+        model_data = output_by_model.setdefault(
+            model_id,
+            {
+                "simple": {
+                    "ged": {"mean": 0.0, "std": 0.0},
+                    "number_experiments": 0,
+                    "experiments": [],
+                },
+                "cot": {
+                    "ged": {"mean": 0.0, "std": 0.0},
+                    "number_experiments": 0,
+                    "experiments": [],
+                },
+                "simple_means": [],
+                "cot_means": [],
+            },
+        )
 
-    for ged_path in files:
-        if os.path.exists(ged_path):
-            try:
-                result = parse_ged_markdown(ged_path, loaded_data)
-                eid = result["experiment_id"]
-                group_name = "cot" if eid.lower().startswith("cot") else "simple"
+        stats = result["ged_stats"]
+        experiment_entry = {
+            "experiment_id": result["experiment_id"],
+            "generations": result["generations"],
+            "ged": {
+                **result["ged"],
+                "mean": stats["mean"],
+                "std": stats["std"],
+            },
+        }
+        model_data[mode]["experiments"].append(experiment_entry)
+        model_data[mode]["number_experiments"] += 1
+        model_data[f"{mode}_means"].append(stats["mean"])
+        print(
+            f"Processed GED {source} for {result['experiment_id']}: "
+            f"{stats['mean']:.6f} ± {stats['std']:.6f}"
+        )
 
-                path_parts = ged_path.split(os.sep)
-                try:
-                    dataset_idx = path_parts.index("dataset")
-                    model_id = path_parts[dataset_idx + 1].lower()
-                except Exception:
-                    model_id = "unknown"
-
-                if not model_id:
-                    model_id = "unknown"
-
-                if model_id not in output_by_model:
-                    output_by_model[model_id] = {
-                        "simple": {
-                            "ged": {"mean": 0.0, "std": 0.0},
-                            "number_experiments": 0,
-                            "experiments": [],
-                        },
-                        "cot": {
-                            "ged": {"mean": 0.0, "std": 0.0},
-                            "number_experiments": 0,
-                            "experiments": [],
-                        },
-                        "simple_means": [],
-                        "cot_means": [],
-                    }
-
-                # Build experiment entry
-                exp_entry = {
-                    "experiment_id": eid,
-                    "generations": result["generations"],
-                    "ged": {
-                        **result["ged"],
-                        "mean": result["ged_stats"]["mean"],
-                        "std": result["ged_stats"]["std"],
-                    },
-                }
-
-                output_by_model[model_id][group_name]["experiments"].append(exp_entry)
-                output_by_model[model_id][group_name]["number_experiments"] += 1
-
-                # Track for global aggregation
-                if group_name == "simple":
-                    output_by_model[model_id]["simple_means"].append(
-                        result["ged_stats"]["mean"]
-                    )
-                else:
-                    output_by_model[model_id]["cot_means"].append(
-                        result["ged_stats"]["mean"]
-                    )
-
-                print(f"Processed GED for: {ged_path}")
-                print(f"  - Experiment: {eid}")
-                print(
-                    f"  - Mean: {result['ged_stats']['mean']:.6f}, Std: {result['ged_stats']['std']:.6f}"
-                )
-
-            except Exception as e:
-                print(f"Error processing GED {ged_path}: {e}")
-                import traceback
-
-                traceback.print_exc()
-        else:
-            print(f"GED file not found: {ged_path}")
-
-    # Compute global mean/std per model
     experiments_output = []
-    for model_id in sorted(output_by_model.keys()):
+    for model_id in sorted(output_by_model):
         model_data = output_by_model[model_id]
-
-        if model_data["simple_means"]:
-            simple_mean = sum(model_data["simple_means"]) / len(
-                model_data["simple_means"]
-            )
-            simple_variance = sum(
-                (x - simple_mean) ** 2 for x in model_data["simple_means"]
-            ) / len(model_data["simple_means"])
-            model_data["simple"]["ged"]["mean"] = round(simple_mean, 6)
-            model_data["simple"]["ged"]["std"] = round(math.sqrt(simple_variance), 6)
-
-        if model_data["cot_means"]:
-            cot_mean = sum(model_data["cot_means"]) / len(model_data["cot_means"])
-            cot_variance = sum(
-                (x - cot_mean) ** 2 for x in model_data["cot_means"]
-            ) / len(model_data["cot_means"])
-            model_data["cot"]["ged"]["mean"] = round(cot_mean, 6)
-            model_data["cot"]["ged"]["std"] = round(math.sqrt(cot_variance), 6)
-
+        aggregate_model_stats(model_data, "simple")
+        aggregate_model_stats(model_data, "cot")
         experiments_output.append(
             {
                 "id": model_id,
@@ -513,24 +525,20 @@ if __name__ == "__main__":
             }
         )
 
-    final_output = {"experiments": experiments_output}
-
     output_path = os.path.join(project_root, "public", "ged.json")
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(final_output, f, indent=2)
+    with open(output_path, "w", encoding="utf-8") as file:
+        json.dump({"experiments": experiments_output}, file, indent=2)
 
     print(f"\nOutput written to: {output_path}")
-    for model_id in sorted(output_by_model.keys()):
-        print(f"Model {model_id}")
-        print(
-            f"  Simple experiments: {output_by_model[model_id]['simple']['number_experiments']}"
-        )
-        print(
-            f"    Global Mean: {output_by_model[model_id]['simple']['ged']['mean']:.6f}, Std: {output_by_model[model_id]['simple']['ged']['std']:.6f}"
-        )
-        print(
-            f"  CoT experiments: {output_by_model[model_id]['cot']['number_experiments']}"
-        )
-        print(
-            f"    Global Mean: {output_by_model[model_id]['cot']['ged']['mean']:.6f}, Std: {output_by_model[model_id]['cot']['ged']['std']:.6f}"
-        )
+    for model in experiments_output:
+        print(f"Model {model['id']}")
+        for mode in ("simple", "cot"):
+            stats = model[mode]["ged"]
+            print(
+                f"  {mode.title()}: {model[mode]['number_experiments']} experiments, "
+                f"{stats['mean']:.6f} ± {stats['std']:.6f}"
+            )
+
+
+if __name__ == "__main__":
+    main()

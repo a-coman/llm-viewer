@@ -133,7 +133,7 @@ export const METRIC_EXPLANATIONS = {
       "NumericEquals = Total number of numeric attribute pairs with different values / Total number of possible pairs (n * (n - 1) / 2)",
       "StringEquals = Total number of string attribute pairs that are NOT exactly identical / Total number of possible pairs (n * (n - 1) / 2)",
       "StringLv = Sum of (Levenshtein Distance(a, b) / max(length(a), length(b))) for all string pairs / Total number of possible pairs (n * (n - 1) / 2)",
-      "GED = Normalized dissimilarity = GED / (0.5 * (GED_to_empty_A + GED_to_empty_B)). 0 = red = identical graphs; 1 = green = maximally different under this normalization. We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
+      "GED = Normalized diversity D = GED / (|V_A| + |E_A| + |V_B| + |E_B|). Empty vs empty is 0. 0 = red = identical graphs; values closer to 1 = green = more structurally different. Edit operations: nodes, edges, node labels, edge labels [https://github.com/a-coman/ged]",
       "GraKeL = Normalized dissimilarity = sqrt(max(0, 1 - normalized kernel similarity)). 0 = red = structurally identical according to the kernel; values closer to 1 = green = more structurally different. Undefined comparisons remain N/A: they are not replaced by 0 or 1 and are excluded from mean and standard deviation.",
       "Shannon (Active) = Entropy / log2(Number of unique groups actually generated). Measures how evenly the generated values are distributed, considering only the categories the LLM actually used.",
       "Shannon (All) = Entropy / log2(Total number of valid groups defined in the model). Measures how evenly the generated values are distributed against the full spectrum of all possible valid options defined in the .use file.",
@@ -174,10 +174,11 @@ export const METRIC_EXPLANATIONS = {
     description:
       "Measures normalized Graph Edit Distance (GED) dissimilarity between instances",
     examples: [
-      "Dissimilarity = GED / (0.5 * (GED_to_empty_A + GED_to_empty_B))",
+      "D = GED / (|V_A| + |E_A| + |V_B| + |E_B|)",
+      "Empty vs empty is 0",
       "0 = red = identical graphs",
-      "1 = green = maximally different under this normalization",
-      "We consider as edit operations: Nodes, Edges, Node_Labels and Edge_Labels [https://github.com/a-coman/ged]",
+      "Values closer to 1 = green = more structurally different",
+      "Edit operations: nodes, edges, node labels, edge labels [https://github.com/a-coman/ged]",
     ],
   },
 } as const;
