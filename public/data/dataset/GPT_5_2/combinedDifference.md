@@ -46,3 +46,9 @@
 |  Across Systems | Numeric | StringEquals | StringLv |
 |---|---|---|---|
 | ALL Generations | 0.9236 | 0.9996 | 0.8516 |
+
+## ALL Experiments
+
+| ALL Experiments | Numeric | StringEquals | StringLv |
+|---|---|---|---|
+| ALL Systems | 0.9773 | 0.9998 | 0.9068 |
